@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "delete_historical-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my standing reading-room preference: use a window-side desk. Save this preference for later and explicitly confirm it. Do not take business action."
+          },
+          {
+            "message_id": "delete_historical-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Delete my saved reading-room desk preference. Confirm the actual deletion. This request removes the durable preference; it does not request deletion of our retained conversation history. Do not take business action."
+          },
+          {
+            "message_id": "delete_historical-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "What reading-room desk preference do I currently retain in durable memory? Use current durable memory only; if none is stored, say so. Read only: do not recreate a preference or take business action."
+          },
+          {
+            "message_id": "delete_historical-4",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "Historical question: in the earlier conversation retained in this session, what reading-room desk preference did I originally ask you to remember? Answer about that past request, not a current preference. Do not recreate or change durable memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

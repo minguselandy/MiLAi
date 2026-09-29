@@ -1,0 +1,152 @@
+{
+  "kind": "MILAI_V6_S3B_REGRESSION_ORDER",
+  "status": "PROTOCOL_FIXED_RUNTIME_FREEZE_PENDING_NOT_EXECUTED",
+  "model_view": "compact_v6",
+  "steps": [
+    {
+      "case_id": "complete_plan",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/complete_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "case_id": "partial_plan",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/partial_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/one_reply_format-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "independent_update",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/independent_update-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "quoted_rule",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/quoted_rule-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "read_only_note",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/read_only_note-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/explicit_delete-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "assistant_conflict",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/assistant_conflict-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/dynamic_world-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "moderate_bank",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/moderate_bank-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "reversed_count",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-authority-confirmation-r2/reversed_count-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "revised_location",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v6-compact/config.json",
+      "inputs": "data/diagnostics/next-development-v5-authority-confirmation-r2/revised_location-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    }
+  ],
+  "serial": true,
+  "one_attempt_per_job": true
+}

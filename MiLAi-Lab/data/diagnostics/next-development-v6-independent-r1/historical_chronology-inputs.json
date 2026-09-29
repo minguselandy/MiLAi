@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "historical_chronology-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my ongoing archive-visit arrangement: visits are on Monday morning because the reading room is quiet then. Save the day, time of day and reason for future sessions. Confirm the arrangement and do not schedule anything."
+          },
+          {
+            "message_id": "historical_chronology-2",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 1,
+            "text": "Update my ongoing archive visits to Friday afternoon because the archivist can now assist then. This replaces the Monday-morning arrangement. Save the new day, time of day and reason; confirm the change without scheduling anything."
+          },
+          {
+            "message_id": "historical_chronology-3",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 2,
+            "text": "From our retained conversation and my current saved arrangement, explain the chronology: the original visit day and time, the original reason, the current day and time, and the reason for the change. Clearly distinguish past from current. Read only: do not alter memory or schedule anything."
+          }
+        ]
+      }
+    ]
+  }
+}

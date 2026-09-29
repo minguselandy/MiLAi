@@ -1,0 +1,162 @@
+{
+  "kind": "MILAI_V6_INDEPENDENT_EXECUTION_ORDER",
+  "status": "PROTOCOL_FIXED_RUNTIME_FREEZE_PENDING_NOT_EXECUTED",
+  "serial": true,
+  "one_attempt_per_job": true,
+  "steps": [
+    {
+      "case_id": "stable_preference",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/stable_preference-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "scoped_preference",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/scoped_preference-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "independent_matters",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/independent_matters-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "historical_chronology",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/historical_chronology-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "temporary_override",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/temporary_override-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "stored_quoted_imperative",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/stored_quoted_imperative-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "assistant_interpretation",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/assistant_interpretation-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "formation",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "tool_result_plan",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/tool_result_plan-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "partial_tool_failure",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/partial_tool_failure-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "delete_historical",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/delete_historical-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "multi_owner",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/multi_owner-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    },
+    {
+      "case_id": "mixed_language",
+      "arm": "B0",
+      "inputs": "data/diagnostics/next-development-v6-independent-r1/mixed_language-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ],
+      "config": "data/diagnostics/next-development-v6-compact/config.json"
+    }
+  ],
+  "runtime_must_not_read": [
+    "obligations.json",
+    "rubric-guide.json"
+  ],
+  "method": "pending accepted S1/S2 and S3; ordinary B0, explicit current_request",
+  "model_view": "compact_v6"
+}

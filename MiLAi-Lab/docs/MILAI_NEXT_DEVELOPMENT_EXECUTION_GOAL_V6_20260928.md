@@ -1,5 +1,5 @@
 ---
-status: ACTIVE
+status: EXECUTION_STOP_PIVOT_PUBLICATION_PENDING
 scope: MiLAi-Lab / RESEARCH_PROTOTYPE
 plan_sha256: 446e8b401eb558edd76c98dfcda0c0bc9daf1408c7d0d18ba583ce5cb2ea34ee
 baseline_main: 05601148c1c060d09c6cd64927a88ad7106aa537
@@ -28,16 +28,16 @@ v5 head 两次 Fast `36393968381`、`36397917433` 均 success，Full `3639396833
 | 要求 | 必须取得的证据 | 当前状态 |
 | --- | --- | --- |
 | S0 / §7 | 旧 system/candidate、当前/历史、world/DELETE/临时/只读/多事项及费用原样保留，旧分归旧提交 | COMPLETE；159 源文件、14 公开证据、28 个 terminal jobs、131 个生成 ID、86 消息核平 |
-| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | IN_PROGRESS_DESIGN；只读定位实际集成点，尚未修改 runtime |
-| S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | NOT_STARTED；先完成 S1 门槛，再离线选择；10%–20% 为目标而非强行删数据的门槛 |
-| S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | NOT_RUN；不得在 S1 完成前调用模型 |
-| S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | CONDITIONAL_NOT_RUN |
-| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | NOT_RUN；这是主要效果验证，不能用旧 current/history 变体或 S3 回归替代 |
+| S1 / §8、18、19、23.1–2 | 显式结构化请求对象/renderer/router；无序列化块搬运；old/new wire bytes、capacity/token、audit、原 graph 完全等价；独立源码发布 | COMPLETE；4ffd176/PR70独立发布、远端核对、Fast success；131请求/86审计/22条件26阶段/27窄测通过 |
+| S2 / §9、21、23.3 | 明确 Model/Audit 边界、冻结请求组件计量、每项删除依据与 trace 可恢复性，保留语义/ID/scope/业务正文 | ENGINEERING_ACCEPTED_S3B_PASS；30窄测、131full/compact回放和86审计通过；唯一候选移出wrapper/空容器/模型hash，固定输入-3.80%、记忆组件-9.54%；不硬凑目标 |
+| S3a / §10 | S1 机械等价后 2–4 个真实 smoke，所有成本计入 | PASS；4已暴露scripts/13消息/54任务全过；20生成27484tokens、5embedding115tokens已归账 |
+| S3b / §10 | 若 S2 改 Model View，完整 12-script/156-obligation 暴露回归；任何退化先定位被删信息，不加 prompt 修分 | PASS；85f45b3/12scripts35消息/156任务；显式89/89、持久67/67；3诊断缺项单列 |
+| S4 / §11–12、17、23.4–5 | 12–16 个独立结构脚本、约 35–50 公开消息；十二任务族、quoted imperative/carrier 边界；显式≥98%、所需持久100%、无跨owner/重复业务/假保存/隐藏rubric失败 | COMPLETE_R1_FAILED；12scripts/40消息，10/12scripts，166/193任务，显式102/121、持久64/72；两次虚假保存；诊断不支持选出修复 |
 | S5 / §13 | 仅 S4 通过后，不改方法/prompt，另一模型家族 6–8 脚本覆盖六类边界 | CONDITIONAL_NOT_RUN；不同量化不算另一家族，开发 subagent 不算实验 Host |
 | S6 / §14 | S4 稳定后、最好已有 S5 确认，20–30 sessions 自然积累10–20独立事项，先正常 all，无人为压预算 | CONDITIONAL_NOT_RUN |
 | S7 / §15 | 实际阈值/容量触发后 all（可行时）对 ordinary query，命中、质量、全成本核对 | CONDITIONAL_NOT_TRIGGERED |
 | S8 / §16 | 实际 query 不足/超容量/可见 scope 错误后，固定共同条件比较 ordinary/working-query/lazy attention | CONDITIONAL_NOT_TRIGGERED；不新增 durable fact copy 或独立 U |
-| S9 / §22–25 | 逐项完成审计、真实失败分类/两解释/反思、全成本、复现、Go/Pivot/Stop、Luna 发布与远端核对 | PENDING |
+| S9 / §22–25 | 逐项完成审计、真实失败分类/两解释/反思、全成本、复现、Go/Pivot/Stop、Luna 发布与远端核对 | REPORT_COMPLETE_PUBLICATION_PENDING；按§22 Stop/Pivot，§23最低稳定性NOT_ACHIEVED |
 
 这张表保留完整任务，不把工程整理、最容易通过的几例或最低标准摘录当作整个 Goal。
 触发条件按实际证据判定；S4 通过后推进 S5 与 S6，不以“条件项”逃避已经成立的前置条件。
@@ -82,8 +82,23 @@ router 从该结构渲染每个候选并检查最终完整请求，原消息/che
 `BOUNDARY_PROTOCOL` 可拆职责但 S1 字节必须原样；system 库默认不变，v6 recipe 显式 current_request。
 
 等价证据覆盖 empty/all/query/attention-prepared、工具续接、UPDATE、DELETE、scope 和 C 历史兼容边界。
-Root 持有所有 131 条冻结 HTTP、实际 usage 和操作审计；Sol 的窄测须补真实 adapter/graph 接线，
-不以几个 mock 字符串断言替代整个组装路径。S1 通过并独立发布前不做 S2 精简或真实 smoke。
+详见 [S1工程结果](MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md)：
+Root核平131条实际payload重放、86次操作审计、原checkpoint不变；Sol另补22组/26阶段路由差分及27窄测。
+原trace只有有序payload，所称HTTP字节等价是同一锁定HTTPX编码结果，不是未保存的原socket捕获。
+BOUNDARY_PROTOCOL四职责常量拼接值保持1232 bytes。S1独立发布前不做S2精简或真实smoke。
+
+用户另行要求GitHub合并后，Luna已将S0 PR69合入main，merge=`07cc364f96d484ad9ff8497adcf2a6f1b486bdb2`，
+tree等于S0 `c6dcd1d7`，Fast36400064797 success；Root核对远端SHA、parents/tree、原七份草稿与连续账本。
+这次合并只有S0，正在验收的S1另行发布，不把源码工作树混入S0。旧PR51仍未验收、不合入。
+
+S1现已由Luna独立发布`4ffd17664ce9d8a6497e57b199b3a6d764adae86`，draft PR70、Fast36403127754 success。
+Root核对精确9文件、远端head/base和S4草稿排除状态。随后完成S2离线profiling与S1-source真实S3a，见
+[阶段结果](MILAI_NEXT_DEVELOPMENT_V6_S2_PROFILE_S3A_RESULTS_20260928.md)。
+S3a四个完整脚本均terminal且54/54，累计账本更新为3145calls/3998838generation tokens/22336embedding tokens，
+SHA`db0b1e4ea95b2c68155e742627cfbbc9fb4c4f9c68d56d5f01aca4f5ea64aa6b`；无语义或基础设施重试。
+这不是完整S3b或新S4证据。S2实现放行于S3a全部终止之后，仍由Sol唯一写入相关源码/测试/新config。
+S2的Model/Audit字段边界、默认full、未知额外字段保留、tool metadata结构化及compact实际容量均须验证；
+不通过删除更多语义去达到10%–20%的工程目标。
 
 ## 职责、冻结和验收纪律
 
@@ -107,3 +122,41 @@ fixed-request 输入差与真实轨迹总费用分开，开发代理 tokens 与�
 既有 vLLM 设置不改；优先复用公开 LangGraph/LangMem API、现有 runner 和薄适配。
 Lab-only，Product NO_GO；不自动恢复旧 M1/ODR/第二份 State facts 或过期 v27 方案。
 原 plans/protocols/failures/锁不重写，新阶段各自记录真实身份。
+
+S2源码现已由Sol完成、Root核平并验收，详见[实现回执](../data/manifests/next-development-v6-s2-implementation-checks-20260928.json)。
+30窄测、131full默认等价与131compact预测匹配、86审计及原checkpoint保持；未做新的真实调用。
+库默认system/full不变；S3b尚未运行，不能宣布compact语义通过。下一步Luna发布已验收源码与阶段结果，
+然后Root在确切发布SHA上prepare/freeze并串行回归；S4草稿仍不发布、不执行。
+
+## S3b完成与S4放行条件
+
+S2发布85f45b367ee1c90d1c378e4a8a5c699c03889ee9（Fast36406544195 success），
+Root完整回归12/12、156/156，详见[S3b结果](MILAI_NEXT_DEVELOPMENT_V6_S3B_REGRESSION_RESULTS_20260928.md)。
+新增54generation/74019tokens、23embedding/448tokens；连续3199calls/4072857generation/22784embedding tokens。
+全部调用串行，12jobs terminal，无模型重试；历史tool receipt time的离线断言错误及scope字段修正保留，未改runtime。
+至此v6新增74generation/101503tokens、28embedding/563tokens。S3b通过只放行S4，不代替S4/S5/S6/S9。
+Root已复核预先草拟的12独立脚本与193义务，只有order加入已验收config/完整路径；inputs、合同与guide不改。
+[独立任务协议](MILAI_NEXT_DEVELOPMENT_V6_INDEPENDENT_TASK_PROTOCOL_20260928.md)待Luna发布并绑定实际执行freeze；S4尚未调用。
+
+## S4完整失败与S9收敛
+
+以上S0–S3段落是各次发布时点记录，NOT_RUN/放行描述不覆盖本节。
+S4在515ec714真实冻结后完整执行12脚本40消息，10/12、166/193，显式102/121（84.30%）、持久64/72。
+详见[S4结果](MILAI_NEXT_DEVELOPMENT_V6_S4_INDEPENDENT_RESULTS_20260928.md)及[总体报告](MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md)。
+两次Host直接确认保存而无CREATE，另有key改写/遗漏业务lookup。部分失败前置未形成，NOT_ACTIVATED。
+原第8项快照和16失败/69未知保留；Root追加明确continuation amendment完成原9–12各一次，没有源码/输入/门槛变更。
+原I guide预设预约成功，三项状态答复按真实not_found缺席分支纠正；原guide、前序11失败和分母保持。
+四次冻结proposal-only诊断full2/2、compact1/2，未满足预定选型条件；不执行工具，不计持久成功，不增加重复试到一致。
+
+S9逐项审计全部要求：结构/等价/ModelAudit/独立覆盖/成本/后续判断已落实，§23第5项整体消费稳定未达到。
+按§22 Stop/Pivot结束当前候选评估，不以最低标准未通过伪装成功，也不以条件阶段未触发称为通过。
+没有证据支持允许范围内的新源码修复；未选新候选，不继续措辞或controller路线。
+S5/S6因S4失败不触发，S7/S8没有实际query压力。最终发布核验后关闭“执行v6计划”任务，
+其含义为允许的否定Stop结案；方法/最低稳定性/长期研究仍NOT_ACHIEVED，Product NO_GO。
+不是主动暂停Goal；后续新的研究方案须新的明确任务，旧ACTIVE文本不构成授权。
+
+v6合计138generation/184393tokens、47embedding/1055tokens。
+最终连续3263calls/4155747generation/23276embeddingtokens，SHA
+`2df7547a9d038cb53105afbf5daa97bbd8225bb204c19af40b7c68eee264ade2`；history/limits保持，known=charged，unknown0。
+全部真实作业已终止，无实验/下载后台任务；既有Host/embedding服务保持。
+Root只做文档/JSON/链接/哈希/diff核查，Luna high提交和推送PR70，不自动合并。

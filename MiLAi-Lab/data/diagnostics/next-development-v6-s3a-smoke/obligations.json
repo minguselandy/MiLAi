@@ -1,0 +1,842 @@
+{
+  "schema_version": 1,
+  "runtime_must_not_read": true,
+  "cases": [
+    {
+      "case_id": "revised_location",
+      "messages": [
+        {
+          "message_id": "revised_location-1",
+          "text": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+        },
+        {
+          "message_id": "revised_location-2",
+          "text": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+        },
+        {
+          "message_id": "revised_location-3",
+          "text": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+        },
+        {
+          "message_id": "revised_location-4",
+          "text": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_old",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested initial standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_old",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm the requested original saved value, supported by real persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "update_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "persistent_obligations",
+          "description": "Update same ongoing record to new value with no duplicate superseded standing value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "current_explicit_obligations",
+          "description": "Explicitly confirm current saved value, supported by actual same-record update",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_current",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "later_use_obligations",
+          "description": "Answer the current saved value from delivered durable note",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "current_format",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "current_explicit_obligations",
+          "description": "Exactly two lines: LOCATION, then the current saved location; no other text",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "use_history",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "later_use_obligations",
+          "description": "Answer original confirmed historical value rather than current Store value",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-1",
+              "quote": "Keep an ongoing storage note: the spectroscope cover is stored in locker L-2. Save this location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-2",
+              "quote": "Update the saved storage location of the spectroscope cover from locker L-2 to cupboard D-9. Save cupboard D-9 as the current location and explicitly confirm it. Take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_4",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-3",
+              "quote": "Where is the spectroscope cover currently recorded as stored? Use the current durable note, even if an earlier reply gives a different location. Answer with exactly two lines: the first line is LOCATION and the second line is the current saved location. Do not add other text, change memory or take a business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_4",
+          "case_id": "revised_location",
+          "target_message_id": "revised_location-4",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "revised_location-4",
+              "quote": "What location for the spectroscope cover did you originally confirm earlier in this conversation, before the update? State that historical location rather than the current saved location; the previous two-line format does not apply to this reply. Do not change memory or take any business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "messages": [
+        {
+          "message_id": "dynamic_world-1",
+          "text": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+        },
+        {
+          "message_id": "dynamic_world-2",
+          "text": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+        },
+        {
+          "message_id": "dynamic_world-3",
+          "text": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+        },
+        {
+          "message_id": "dynamic_world-4",
+          "text": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_item",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_quantity",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_destination",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_packing",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "save_1_booking_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        },
+        {
+          "id": "booking_item",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument item",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_quantity",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument quantity",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_destination",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument destination",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_packing",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Actual booking tool argument packing",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "booking_once",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Exactly one successful reservation and label, no duplicate attempts",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "report_receipt",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "current_explicit_obligations",
+          "description": "Report actual reservation/label result, no invented ID",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-2",
+              "quote": "Reserve and label the exact item reference Copper relay cases now: exactly 3 units to cabinet N-4 in numbered cloth bags. Perform this booking once and report the actual tool result. Do not create, update or delete durable memory during this action; leave the saved plan as the earlier planning snapshot."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "no_write_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "live_lookup",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "current_explicit_obligations",
+          "description": "Actually query business tool for exact item before status answer",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_3_reservation_exists",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit reservation_exists",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_3_label_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit label_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-3",
+              "quote": "Check the actual current business status of Copper relay cases with the business lookup tool. State whether a reservation exists and whether its label has been created. Treat the saved note as an earlier plan, not live status. Read only: do not reserve or label again and do not change memory."
+            }
+          ]
+        },
+        {
+          "id": "use_4_earlier_plan_booking_status",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit earlier_plan_booking_status",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_lookup_4",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-4",
+          "layer": "current_explicit_obligations",
+          "description": "No business-tool call in saved-snapshot-only question",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-4",
+              "quote": "What booking status is recorded in my earlier saved planning snapshot for Copper relay cases? State that stored status; it may be outdated. Do not call business tools, change memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_plan",
+          "case_id": "dynamic_world",
+          "target_message_id": "dynamic_world-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm the saved planning snapshot without claiming a reservation",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "dynamic_world-1",
+              "quote": "Save my ongoing shipment plan for the exact item reference Copper relay cases: 3 units, destination cabinet N-4, packing numbered cloth bags. Record its current booking status as not booked. Confirm the saved plan without reserving anything."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "messages": [
+        {
+          "message_id": "explicit_delete-1",
+          "text": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+        },
+        {
+          "message_id": "explicit_delete-2",
+          "text": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+        },
+        {
+          "message_id": "explicit_delete-3",
+          "text": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "save_1_textile_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested textile_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "save_1_ceramics_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Persist requested ceramics_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "independent_notes",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "persistent_obligations",
+          "description": "Textile and ceramics separately deletable ordinary records as requested",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "actual_delete",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "persistent_obligations",
+          "description": "Actual DELETE of textile note; no current textile prefix remains",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "preserve_ceramics",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "persistent_obligations",
+          "description": "Ceramics note unchanged with same surviving identity/content",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "delete_confirmation",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "current_explicit_obligations",
+          "description": "Deletion confirmation is supported by actual DELETE",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "use_3_ceramics_prefix",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "later_use_obligations",
+          "description": "Answer explicit ceramics_prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "textile_absent",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "later_use_obligations",
+          "description": "Say textile note is no longer stored; do not invent retained textile prefix",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_1",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_2",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-2",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-2",
+              "quote": "Delete only my saved textile-catalog note. Keep the ceramics-catalog note unchanged. Confirm the deletion and take no business action."
+            }
+          ]
+        },
+        {
+          "id": "no_business_3",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "current_explicit_obligations",
+          "description": "No business mutation or scheduled action",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "no_write_3",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-3",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-3",
+              "quote": "What ceramics accession prefix is still saved, and do you still retain a textile-catalog prefix? Use saved memory only; say if the textile note is no longer stored. Do not write memory or take business action."
+            }
+          ]
+        },
+        {
+          "id": "confirm_both_saves",
+          "case_id": "explicit_delete",
+          "target_message_id": "explicit_delete-1",
+          "layer": "current_explicit_obligations",
+          "description": "Confirm both requested saves, supported by actual persistence",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "explicit_delete-1",
+              "quote": "Save two separate ongoing notes. My textile catalog uses catalogue IDs with prefix TX. My ceramics catalog uses accession IDs with prefix CR. Keep these as independently deletable notes, so deleting either note does not change the other. Confirm both saves and take no business action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "messages": [
+        {
+          "message_id": "one_reply_format-1",
+          "text": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+        },
+        {
+          "message_id": "one_reply_format-2",
+          "text": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+        }
+      ],
+      "obligations": [
+        {
+          "id": "prefix",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "current_explicit_obligations",
+          "description": "Begin current reply with LOCAL:",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "one_sentence_explanation",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "current_explicit_obligations",
+          "description": "One sentence correctly distinguishes deadline and duration",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "no_write_1",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-1",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-1",
+              "quote": "For this reply only, begin with LOCAL: and explain how a deadline differs from a duration in one sentence. Do not save this format or make it a rule for later replies."
+            }
+          ]
+        },
+        {
+          "id": "no_write_2",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-2",
+          "layer": "persistent_obligations",
+          "description": "No create/update/delete attempts or persistent content change",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-2",
+              "quote": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+            }
+          ]
+        },
+        {
+          "id": "later_checklist",
+          "case_id": "one_reply_format",
+          "target_message_id": "one_reply_format-2",
+          "layer": "later_use_obligations",
+          "description": "One ordinary sentence explains checklist without carried LOCAL: format",
+          "task_failing": true,
+          "basis": [
+            {
+              "message_id": "one_reply_format-2",
+              "quote": "Explain what a checklist is in one ordinary sentence. Do not carry over any previous one-reply format, and do not save a formatting preference."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

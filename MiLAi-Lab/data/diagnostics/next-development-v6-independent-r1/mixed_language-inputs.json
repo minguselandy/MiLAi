@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "mixed_language-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "请长期记住我的会议纪要格式，后续会话也适用：正文摘要用中文，随后保留英文标题 Action items，标题下每项行动都写负责人和截止日。请保存并确认，不要执行任何业务操作。"
+          },
+          {
+            "message_id": "mixed_language-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Please draft meeting notes using my saved format. The team agreed to inspect the tripod; Mei owns the inspection and the deadline is October 12. State that agreement in the summary and include the action with its owner and deadline. This is drafting only: do not change memory or take business action."
+          },
+          {
+            "message_id": "mixed_language-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "请按已保存的格式写另一份会议纪要：团队决定核对传感器清单，由 Arun 负责，截止日为 10 月 15 日。摘要说明决定，行动项注明负责人和截止日。这里只写纪要，不修改记忆，不执行业务操作。"
+          }
+        ]
+      }
+    ]
+  }
+}

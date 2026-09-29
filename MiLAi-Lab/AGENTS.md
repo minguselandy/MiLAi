@@ -4,6 +4,36 @@
 
 The current actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v6 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md).
 Follow the [v6 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V6_20260928.md).
+S0 PR69 is now merged at07cc364f by separate explicit user instruction. S1's explicit RequestContext,
+renderer, structural route and unchanged protocol components passed131 actual-payload replays,
+86 operation audits,22 prepared route conditions/26 stages and27 narrow tests; see the
+[S1 engineering report](docs/MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md).
+S1 source4ffd176 is published on draft PR70, Fast36403127754 success. S3a at that full-view source
+passed4 exposed scripts/13 messages/54 task obligations; its20 generation/27484 tokens and5
+embedding/115 tokens are reconciled to the continuous ledger. See the
+[S2 profile and S3a report](docs/MILAI_NEXT_DEVELOPMENT_V6_S2_PROFILE_S3A_RESULTS_20260928.md).
+S2's sole compact_v6 proposal removes only ordinary value wrappers, empty working containers and
+model-facing tool-body hashes; Audit retains everything. Default full and system remain. Extra
+record fields and nonempty refs are preserved; no protocol wording, actual tool body or ID is removed.
+S2 source85f45b3 is published with Fast36406544195 success. Complete S3b at that source passed
+12scripts/35messages/156task obligations (current55/later34/persistent67);3 optional diagnostic omissions
+remain. Root reconciled54generation/74019tokens and23embedding/448tokens. See the S3b report.
+Only an offline historical-receipt timestamp assertion was refined; runtime and frozen inputs were unchanged.
+S4 now completed all12scripts/40messages: 10/12scripts,166/193task,102/121explicit,64/72persistent.
+Two unsupported saved claims and world-action failures reject the compact candidate. Partial failure
+was NOT_ACTIVATED. Original R1 inputs/freeze, initial8-script snapshot, all27 failures and costs remain.
+A documented actual-world scoring correction passes three truthful absent-object answers, without
+removing failed formation/booking or changing193 denominator; original guide remains.
+Four frozen first-response diagnostic calls returned full2/2 and compact1/2 legal proposals;
+no tools executed, no persistence success claimed, no reliable fallback candidate selected.
+Follow the [overall report](docs/MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md):
+Stop/Pivot after full applicable evaluation, not method success. Section23 consumption stability
+and broader research remain NOT_ACHIEVED; Product NO_GO. S5/S6 not triggered; S7/S8 no pressure.
+Root finishes report/remote verification, Luna high publishes draft PR70. Do not merge PR70 from
+the completed S0-only action. No further experiments, wording variants, downloads or deployments
+follow from historical ACTIVE text. Actual execution Goal closes only after publication verification;
+closure means the plan-permitted negative Stop decision, never that minimum stability passed.
+Final continuous ledger3263generation/4155747tokens/23276embeddingtokens; preserve all history.
 Root read all 1,497 original plan lines; keep original DRAFT/NOT_STARTED bytes and correct stale
 PR68 metadata only in new records. Main05601148 now contains PR52–68; its tree equals v5 report1abf5c4.
 S0 preserves v5 evidence and costs. S1 must replace string movement with explicit structured

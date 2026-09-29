@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "independent_matters-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember three independent standing arrangements for my observatory project: design notes use numbered headings; instrument delivery uses the south entrance; planning meetings are Thursday at 10:40. Keep the three arrangements separately maintainable for future sessions. Confirm the save and take no business action."
+          },
+          {
+            "message_id": "independent_matters-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Change only the observatory project delivery entrance to the east entrance. Save that update; preserve the design-note format and meeting schedule unchanged. Confirm the change and take no business action."
+          },
+          {
+            "message_id": "independent_matters-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Using my saved observatory arrangements, state the current design-note format, delivery entrance, and meeting day and time. Read only: no memory changes or business actions."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "rowan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "stable_preference-1",
+            "user_id": "rowan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my standing packing preference for future sessions: use reusable fabric wraps and avoid disposable foam. This applies to my equipment shipments. Confirm that you saved this preference, without booking anything."
+          },
+          {
+            "message_id": "stable_preference-2",
+            "user_id": "rowan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Suggest packing for my measuring cables using my standing equipment-shipment preference. Name the wrapping material and say what material to avoid. This is advice only: do not change memory or make a booking."
+          },
+          {
+            "message_id": "stable_preference-3",
+            "user_id": "rowan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "Suggest packing for my ceramic reference tiles using my standing equipment-shipment preference. State the wrapping material, the material to avoid, and one way to protect fragile corners. This is advice only: do not change memory or make a booking."
+          }
+        ]
+      }
+    ]
+  }
+}

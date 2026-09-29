@@ -1,0 +1,1444 @@
+{
+  "kind": "MILAI_V6_S3B_REGRESSION_RESULTS",
+  "status": "PASS_EXPOSED_COMPACT_REGRESSION",
+  "source_commit": "85f45b367ee1c90d1c378e4a8a5c699c03889ee9",
+  "execution_freeze_sha256": "aba430e9c39213f856d956036c9451c5c651fa2d75b862fdc275d53afb4a99d3",
+  "protocol_sha256": "d898c246aff4bca308a70bd9b64226fca80892dd2b1af1eff8ac8e057832227f",
+  "input_sha256": {
+    "data/diagnostics/next-development-v5-authority-confirmation-r2/reversed_count-inputs.json": "996b25fa9dd8abefe52907304c227376d0122f10870d8baca237935949c76fe7",
+    "data/diagnostics/next-development-v5-authority-confirmation-r2/revised_location-inputs.json": "cfea30313cd31bdf5ee88db4f4bdf6321e7a8298a9741b8cc3e07f0536912c48",
+    "data/diagnostics/next-development-v5-prospective-r1/assistant_conflict-inputs.json": "5b0419ad169117d5d29f641feee0a82d8c700671309a50ec8426bdbf217ae953",
+    "data/diagnostics/next-development-v5-prospective-r1/complete_plan-inputs.json": "e5884121d0cf861bdb33f44085c05c9dee10806be1ce25f4229726b235b0b46c",
+    "data/diagnostics/next-development-v5-prospective-r1/dynamic_world-inputs.json": "04056f7d845c79969f68537394d0df39713c8c0948e99d0b4f072393f7b01257",
+    "data/diagnostics/next-development-v5-prospective-r1/explicit_delete-inputs.json": "1e55414b044ebdca243e9e9301d14f7618aad273f7c862be062568d4794980ae",
+    "data/diagnostics/next-development-v5-prospective-r1/independent_update-inputs.json": "c924da9d38fa6668ce320799c6cf74c628bb8455651a626622a8182059b20657",
+    "data/diagnostics/next-development-v5-prospective-r1/moderate_bank-inputs.json": "411b788845007bf845c7be7d0d03cd5efa9cfa589c4b82c0135693becfd75599",
+    "data/diagnostics/next-development-v5-prospective-r1/one_reply_format-inputs.json": "0909250b5946c4865b273b9cd4ef32a353f012a400f4942077295c6232c77a2b",
+    "data/diagnostics/next-development-v5-prospective-r1/partial_plan-inputs.json": "fff42e443404eb831926c5836fc040f1ba6b9f587335fb3775924c9bde18b2bd",
+    "data/diagnostics/next-development-v5-prospective-r1/quoted_rule-inputs.json": "79e89275366570c6977cff70339d8334ecf0818bc51dec1fd53407f178d85586",
+    "data/diagnostics/next-development-v5-prospective-r1/read_only_note-inputs.json": "f256304670176eb5e78d7cbe717f5cd38126bda1e5bcfab80905b7d3a28fa5ad",
+    "data/diagnostics/next-development-v6-compact/config.json": "d33130e51ce1bfeff1e2f0d6da36c9690312bddba7db2b25eae79eb77e4fcd6f",
+    "data/diagnostics/next-development-v6-s3b-regression/execution-order.json": "c6b8b2245abc1ac845f15640d9880f2dae3f3550640c770320c422534153b4f8",
+    "data/diagnostics/next-development-v6-s3b-regression/obligations.json": "680d0d1662018dac3632b41b812c3ca299e639277657fe18f45e28252649ba5d",
+    "data/diagnostics/next-development-v6-s3b-regression/rubric-guide.json": "5d06fbda69aa4802f93d25beb152f424a381236180f4f324e96ea6c56181903b",
+    "docs/MILAI_NEXT_DEVELOPMENT_V6_S3B_REGRESSION_PROTOCOL_20260928.md": "d898c246aff4bca308a70bd9b64226fca80892dd2b1af1eff8ac8e057832227f"
+  },
+  "scorer": "Root manual unchanged complete v5 obligations; no Judge",
+  "completed_jobs": 12,
+  "public_messages": 35,
+  "counts": {
+    "total": 156,
+    "pass": 156,
+    "fail": 0,
+    "unknown": 0,
+    "not_applicable": 0,
+    "missing": 0
+  },
+  "diagnostic": {
+    "total": 3,
+    "pass": 0,
+    "fail": 3,
+    "unknown": 0,
+    "not_applicable": 0,
+    "missing": 0
+  },
+  "explicit": {
+    "total": 89,
+    "pass": 89,
+    "fail": 0,
+    "unknown": 0,
+    "not_applicable": 0,
+    "missing": 0
+  },
+  "layer_counts": {
+    "current_explicit_obligations": {
+      "total": 55,
+      "pass": 55,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "persistent_obligations": {
+      "total": 67,
+      "pass": 67,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "later_use_obligations": {
+      "total": 34,
+      "pass": 34,
+      "fail": 0,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    },
+    "diagnostic_completeness": {
+      "total": 3,
+      "pass": 0,
+      "fail": 3,
+      "unknown": 0,
+      "not_applicable": 0,
+      "missing": 0
+    }
+  },
+  "jobs": [
+    {
+      "case_id": "complete_plan",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 14,
+        "pass": 14,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3777,
+        "generation_completion_tokens": 150,
+        "generation_tokens": 3927,
+        "embedding_calls": 1,
+        "embedding_tokens": 51,
+        "http_wall_seconds": 2.1489045708440244,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "c9c5f9a6b743eca01ffc95a222941f28a68f90f61cde9bca21d97779ca7e653a",
+      "result_sha256": "55c23eeb0c11e5a07d8fe90f827331ebca020258348ee02b25b2cb252a23ef21",
+      "manifest_sha256": "b5a3b3c8bc62be827e6c206d0aebd2527f6e43d274e561747e88ab46104964a9",
+      "answers": [
+        {
+          "message_id": "complete_plan-1",
+          "answer": "The ongoing exhibit-transfer plan for Cobalt prism mounts (Quantity: 7, Destination: alcove T-6, Packing: individual foam pouches, Booking status: not booked) has been saved for future sessions. No reservation was made.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "complete_plan-2",
+          "answer": "Item: Cobalt prism mounts, Quantity: 7, Destination: alcove T-6, Packing: individual foam pouches, Booking status: not booked.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "partial_plan",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 11,
+        "pass": 11,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 3,
+          "pass": 0,
+          "fail": 3,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3747,
+        "generation_completion_tokens": 119,
+        "generation_tokens": 3866,
+        "embedding_calls": 1,
+        "embedding_tokens": 40,
+        "http_wall_seconds": 1.3906998583115637,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "e5eab0e24aba228214683f057674d4c718d798ee0e421499fe81adf8f6f63c9b",
+      "result_sha256": "2013c9be6893ff6117dbe3dac17edea5185700e189ea3b9fdb786aebd2c57e67",
+      "manifest_sha256": "2e03ce7fa86ff2b8914fb2afda516f5585b1da548bd3a4b742a9844e95e18a11",
+      "answers": [
+        {
+          "message_id": "partial_plan-1",
+          "answer": "I have saved your ongoing instrument-transfer plan for Indigo sensor rails (5 units to shelf M-8, wrapped in antistatic cloth, booking status not booked) for later reference.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "partial_plan-2",
+          "answer": "The instrument-transfer plan specifies a quantity of 5 units and packing of antistatic cloth.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "one_reply_format",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 5,
+        "pass": 5,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 2,
+        "generation_prompt_tokens": 2153,
+        "generation_completion_tokens": 76,
+        "generation_tokens": 2229,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.8647738783620298,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "3d6aff3b963156d8a71861776a1c8088f274b992dcd24c56c5fcaf9317815146",
+      "result_sha256": "2e24f3eb2151308cf56e1cf8f6736beb7464c494c269588787dfa8d136138438",
+      "manifest_sha256": "c41dc34aaae52278acd52192d2585aa1cece46eec23d4b893abd50eba47fdaf0",
+      "answers": [
+        {
+          "message_id": "one_reply_format-1",
+          "answer": "LOCAL: A deadline is a specific point in time by which something must be completed, whereas a duration is the length of time it takes to complete the task.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "one_reply_format-2",
+          "answer": "A checklist is a tool used to ensure that a series of tasks or steps are completed in order by providing a list of items to be checked off as they are finished.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "independent_update",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 20,
+        "pass": 20,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 4,
+          "pass": 4,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 12,
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 4,
+          "pass": 4,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6888,
+        "generation_completion_tokens": 273,
+        "generation_tokens": 7161,
+        "embedding_calls": 3,
+        "embedding_tokens": 52,
+        "http_wall_seconds": 2.8724683937616646,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "2ebce85f6bf2104519896a0e66e35e633557b82c584a32644e8e7907621d4fe3",
+      "result_sha256": "232fd0e97cc9f3f2b18d6e494d35e20b4408ca4e355c143405c79edfdd41adc7",
+      "manifest_sha256": "7d867c693fa79a7ea8278956965e292c80c9c6ca04aecbd56601b66fd8dd357b",
+      "answers": [
+        {
+          "message_id": "independent_update-1",
+          "answer": "I have saved both notes for you:\n\n1. Equipment reviews are every Tuesday at 14:10 in gallery room G-2.\n2. The spare key for the herbarium cabinet is in box S-8.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "independent_update-2",
+          "answer": "The equipment review time has been updated to 16:25 on Tuesdays in gallery room G-2. The herbarium key note remains unchanged.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "independent_update-3",
+          "answer": "The current review day is Tuesday at 16:25 in gallery room G-2. The herbarium spare key is in box S-8.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "quoted_rule",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 4,
+        "pass": 4,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3417,
+        "generation_completion_tokens": 58,
+        "generation_tokens": 3475,
+        "embedding_calls": 1,
+        "embedding_tokens": 8,
+        "http_wall_seconds": 0.9734651832841337,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "89cbfcead93815d9625181bcb8f9e62a02e7aa170f83e4963c3772027d24aff6",
+      "result_sha256": "dccdc847b29d07914e49315cf7e0fa2a5dd5ae9a58c648c9279235ebd98243a7",
+      "manifest_sha256": "a603cb650065df3b43e01696bcbff0bc002955d1ed2280c59bdf341ac7a20878",
+      "answers": [
+        {
+          "message_id": "quoted_rule-1",
+          "answer": "The courier requests that all route notes be recorded using green ink from that point forward.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "quoted_rule-2",
+          "answer": "No ink-colour rule for route notes is known.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "read_only_note",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4838,
+        "generation_completion_tokens": 123,
+        "generation_tokens": 4961,
+        "embedding_calls": 1,
+        "embedding_tokens": 37,
+        "http_wall_seconds": 1.580280292313546,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "477c537dfe04ea4e66071466b8319bf906802943ca704f1bd6d113e49f30ee75",
+      "result_sha256": "0fa4fa0ff134b8b57c7673b04b5c2d0ac995cad986243399ef9386b31d377d7e",
+      "manifest_sha256": "f8b084b5e3cb69468939caec3124e0ea009d68d5267d099908c7fc757327e8b2",
+      "answers": [
+        {
+          "message_id": "read_only_note-1",
+          "answer": "I have saved your standing workshop-kit note for later reference.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "read_only_note-2",
+          "answer": "The protective insert specified is corrugated sleeves, and the accompanying document is a calibration card.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "read_only_note-3",
+          "answer": "Based on the stored note, the workshop-kit details are: loading point door V-3, protective insert corrugated sleeves, and accompanying document a calibration card.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "explicit_delete",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6515,
+        "generation_completion_tokens": 266,
+        "generation_tokens": 6781,
+        "embedding_calls": 2,
+        "embedding_tokens": 32,
+        "http_wall_seconds": 2.7285497286356986,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "ab57c55f3d4419f210f8f33c0835a631bfd19aa4c8061910d6c12fe91680fbb8",
+      "result_sha256": "8167a1880778d9cc5093fce307b88945fa75065c47744497b5d9e96be5e3e2ad",
+      "manifest_sha256": "390b19d160a6d463d3261bfe1b5ce06954212150531e3cccc49a02b69ec718ac",
+      "answers": [
+        {
+          "message_id": "explicit_delete-1",
+          "answer": "Both notes have been saved successfully:\n1. Textile catalog catalogue IDs prefix: TX (ID: 43441097-7a1e-46cc-b61a-12cb391eb7c5)\n2. Ceramics catalog accession IDs prefix: CR (ID: a7983993-ba87-4c08-bb8b-86042ab6ac80)\n\nThese are independently deletable notes.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "explicit_delete-2",
+          "answer": "The textile-catalog note has been successfully deleted. The ceramics-catalog note remains unchanged.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "explicit_delete-3",
+          "answer": "The ceramics catalog prefix is CR. The textile-catalog prefix is no longer stored.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "assistant_conflict",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 9,
+        "pass": 9,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 5,
+          "pass": 5,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 1,
+          "pass": 1,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6488,
+        "generation_completion_tokens": 153,
+        "generation_tokens": 6641,
+        "embedding_calls": 2,
+        "embedding_tokens": 26,
+        "http_wall_seconds": 2.0126968245022,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "f0d715271080b5ebedec2d2f0b2dd77118d19fd689cf85ddd0da0fd63443cf59",
+      "result_sha256": "1cf71175be5d88ff82eb6fbbc5786fa1c7449b51d6c6bbbe68029df5c3c72f68",
+      "manifest_sha256": "c12ca7e9b73c113d6065759808f9a2e7de3cb72af3cad022b80bb9cdcb4b1d7e",
+      "answers": [
+        {
+          "message_id": "assistant_conflict-1",
+          "answer": "The default sample count for the optics table is 6 has been saved.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "assistant_conflict-2",
+          "answer": "The default sample count for the optics table has been updated to 9.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "assistant_conflict-3",
+          "answer": "The current saved default sample count for the optics table is 9.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "dynamic_world",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 23,
+        "pass": 23,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 12,
+          "pass": 12,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 8,
+          "pass": 8,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 7,
+        "generation_prompt_tokens": 8975,
+        "generation_completion_tokens": 287,
+        "generation_tokens": 9262,
+        "embedding_calls": 1,
+        "embedding_tokens": 49,
+        "http_wall_seconds": 3.1614090516231954,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "bb4977665409810fa9cdd18feafe7eeccc5cea110f9d73c12e9bd3885c228e4e",
+      "result_sha256": "92296949d85301cdf9390d266ba0872c0a949c87a502c181204a296db8bfa5a3",
+      "manifest_sha256": "e9f4e02073a6f1b3b552a4c4a85b8f51666a9fb479796bd892a0a090cbe4aa25",
+      "answers": [
+        {
+          "message_id": "dynamic_world-1",
+          "answer": "Your ongoing shipment plan for 'Copper relay cases' (3 units, destination cabinet N-4, packing numbered cloth bags) has been saved with a status of 'not booked'. No reservation was made.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-2",
+          "answer": "Successfully reserved and labeled 3 units of 'Copper relay cases' for cabinet N-4 in numbered cloth bags. Reservation ID: RSV-c7153677-99c5-437d-a1bd-e7910c525c90. Label status: created.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-3",
+          "answer": "A reservation exists for 'Copper relay cases' (3 units to cabinet N-4 in numbered cloth bags), and its label has been created.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "dynamic_world-4",
+          "answer": "The stored status for Copper relay cases is: not booked.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 1,
+      "business_attempts": 1
+    },
+    {
+      "case_id": "moderate_bank",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 18,
+        "pass": 18,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 3,
+          "pass": 3,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 9,
+          "pass": 9,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 6,
+          "pass": 6,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 7056,
+        "generation_completion_tokens": 381,
+        "generation_tokens": 7437,
+        "embedding_calls": 6,
+        "embedding_tokens": 81,
+        "http_wall_seconds": 3.57846955768764,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "df61af1b6eeb0f8b07b787e605dc0a45c2f01996a357025450fbb0e62e45e69d",
+      "result_sha256": "c193bd2a638c4c97b6fd1c1b9a589a652697321ccbb3fe07761e8448a63d4901",
+      "manifest_sha256": "38c8258728448397a8bde1bdbf034738ebbe4e2c11b9d23c17bc6294e9868d65",
+      "answers": [
+        {
+          "message_id": "moderate_bank-1",
+          "answer": "I have saved six separate location notes for the items as requested:\n\n1. The spectrometer lead is in drawer A-4.\n2. The jade reference tile is in bin B-7.\n3. The quartz cuvette is in cabinet C-2.\n4. The brass calibration ring is in locker D-6.\n5. The violet filter is in case E-9.\n6. The sample logbook is on shelf F-3.\n\nEach item has its own individual note for future reference.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "moderate_bank-2",
+          "answer": "Based on your saved notes:\n- The spectrometer lead is in drawer A-4.\n- The quartz cuvette is in cabinet C-2.\n- The violet filter is in case E-9.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "moderate_bank-3",
+          "answer": "Based on your saved notes:\n- The jade reference tile is in bin B-7.\n- The brass calibration ring is in locker D-6.\n- The sample logbook is on shelf F-3.",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "reversed_count",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 4,
+          "pass": 4,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 7,
+        "generation_prompt_tokens": 9850,
+        "generation_completion_tokens": 240,
+        "generation_tokens": 10090,
+        "embedding_calls": 3,
+        "embedding_tokens": 40,
+        "http_wall_seconds": 3.066939632408321,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "251ae3bb2c3709519f08243b7a94eac6bcc94507096ad21d5d5a09ba97604850",
+      "result_sha256": "79181c245c5ee8a85e88d6c9856a7519b499aee9701ddc27491a9547c513250e",
+      "manifest_sha256": "4e8591915574901bf22114b9b64bd6846f69287e98a0189e25ea32bf66200cf7",
+      "answers": [
+        {
+          "message_id": "reversed_count-1",
+          "answer": "The standard tray count for the acoustics stand is 12. This information has been saved to the demonstration note.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "reversed_count-2",
+          "answer": "The standard tray count for the acoustics stand has been updated to 4.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "reversed_count-3",
+          "answer": "COUNT: 4",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "reversed_count-4",
+          "answer": "The earlier confirmed tray count for the acoustics stand was 12.",
+          "observed_write": false,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    },
+    {
+      "case_id": "revised_location",
+      "mechanical_checks": "PASS",
+      "counts": {
+        "total": 13,
+        "pass": 13,
+        "fail": 0,
+        "unknown": 0,
+        "not_applicable": 0,
+        "missing": 0
+      },
+      "layer_counts": {
+        "current_explicit_obligations": {
+          "total": 7,
+          "pass": 7,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "persistent_obligations": {
+          "total": 4,
+          "pass": 4,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "later_use_obligations": {
+          "total": 2,
+          "pass": 2,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "diagnostic_completeness": {
+          "total": 0,
+          "pass": 0,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        }
+      },
+      "cost": {
+        "generation_calls": 6,
+        "generation_prompt_tokens": 8019,
+        "generation_completion_tokens": 170,
+        "generation_tokens": 8189,
+        "embedding_calls": 2,
+        "embedding_tokens": 32,
+        "http_wall_seconds": 2.3584832535125315,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_sha256": "47137d5a23408e5f0f19c1d49c991eacd9e7feaaf596d9c1c3de46c4e8f790d9",
+      "result_sha256": "a16c0fd73c0885a152a21acd2269e9ab8d6066449e40e0e6b4f2d868a3d8e0c0",
+      "manifest_sha256": "c48a10f7a5ea98682a482231fd2f591aaee2452271a000c96a8ed300d73105ca",
+      "answers": [
+        {
+          "message_id": "revised_location-1",
+          "answer": "The storage note has been saved: the spectroscope cover is stored in locker L-2.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-2",
+          "answer": "The storage location for the spectroscope cover has been updated to cupboard D-9.",
+          "observed_write": true,
+          "actual_generation_requests": 2,
+          "routes": [
+            "all",
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-3",
+          "answer": "LOCATION\ncupboard D-9",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        },
+        {
+          "message_id": "revised_location-4",
+          "answer": "L-2",
+          "observed_write": false,
+          "actual_generation_requests": 1,
+          "routes": [
+            "all"
+          ]
+        }
+      ],
+      "business_reservations": 0,
+      "business_attempts": 0
+    }
+  ],
+  "cost": {
+    "generation_calls": 54,
+    "generation_prompt_tokens": 71723,
+    "generation_completion_tokens": 2296,
+    "generation_tokens": 74019,
+    "embedding_calls": 23,
+    "embedding_tokens": 448,
+    "http_wall_seconds": 26.73714022524655,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "by_lifecycle": {
+    "formation": {
+      "generation_calls": 20,
+      "generation_prompt_tokens": 27954,
+      "generation_completion_tokens": 1108,
+      "generation_tokens": 29062,
+      "embedding_calls": 17,
+      "embedding_tokens": 368,
+      "http_wall_seconds": 12.735838791821152,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "use": {
+      "generation_calls": 24,
+      "generation_prompt_tokens": 30618,
+      "generation_completion_tokens": 740,
+      "generation_tokens": 31358,
+      "embedding_calls": 2,
+      "embedding_tokens": 18,
+      "http_wall_seconds": 9.208035344723612,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "maintenance": {
+      "generation_calls": 10,
+      "generation_prompt_tokens": 13151,
+      "generation_completion_tokens": 448,
+      "generation_tokens": 13599,
+      "embedding_calls": 4,
+      "embedding_tokens": 62,
+      "http_wall_seconds": 4.793266088701785,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    }
+  },
+  "observations": {
+    "lsa_writer_memory_read": {
+      "calls": 101,
+      "logical_bytes": 15605,
+      "cpu_ns": 89305172,
+      "wall_ns": 166164105
+    },
+    "shared_namespace_guard": {
+      "calls": 36,
+      "logical_bytes": 144,
+      "cpu_ns": 13449957,
+      "wall_ns": 45012553
+    },
+    "route_inclusive": {
+      "cpu_ns": 1461786644,
+      "wall_ns": 1390304034
+    },
+    "persistent_memory_checkpoint_read": {
+      "calls": 35,
+      "logical_bytes": 69819,
+      "cpu_ns": 19884398,
+      "wall_ns": 19865559
+    },
+    "operation_audit": {
+      "cpu_ns": 3417786,
+      "wall_ns": 3554238,
+      "logical_bytes": 57331,
+      "additional_checkpoint_reads": 0,
+      "calls": 35
+    }
+  },
+  "actual_memory_tools": {
+    "create": 17,
+    "update": 4,
+    "search_memory": 2,
+    "delete": 1
+  },
+  "memory_tool_argument_logical_bytes": 2371,
+  "business_tools": {
+    "reserve_and_label": 1,
+    "get_reservation": 1
+  },
+  "routes": {
+    "all": 54
+  },
+  "max_records": 6,
+  "max_candidate_tokens": 329,
+  "max_generation_calls_per_public_message": 2,
+  "process": {
+    "wall_seconds": 75.90790485637262,
+    "child_user_cpu_seconds": 67.861981,
+    "child_system_cpu_seconds": 4.995926
+  },
+  "all_actual_prompt_counts_match_local_template": true,
+  "unique_generation_provider_ids": 54,
+  "controller_selector_correction_calls": 0,
+  "semantic_retries": 0,
+  "infrastructure_retries": 0,
+  "unknown_costs": [
+    "physical Store I/O",
+    "ordinary memory write CPU",
+    "GPU time",
+    "currency cost",
+    "prepare and Root offline analysis time not instrumented"
+  ],
+  "budget": {
+    "before_sha256": "db0b1e4ea95b2c68155e742627cfbbc9fb4c4f9c68d56d5f01aca4f5ea64aa6b",
+    "after_sha256": "21391244c78c87deb85efa144a6c91c36e98ed82977d341731dfb0c3c988b9a1",
+    "history_and_limits_unchanged": true,
+    "before": {
+      "generation_requests": 3145,
+      "generation": {
+        "charged_tokens": 3998838,
+        "known_tokens": 3998838,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22336,
+        "known_tokens": 22336,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3199,
+      "generation": {
+        "charged_tokens": 4072857,
+        "known_tokens": 4072857,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22784,
+        "known_tokens": 22784,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "local_evidence": {
+    "manual-observations.json": "77de421a4f155d7f7b967bcf3d74185463142171608659b30cf3eacef9134bf0",
+    "obligation-results.json": "dcb0ed35733f3aa8eabac9c03464656b2288b96a4e89cbfff0c3b2866d99721c",
+    "root-cost-audit.json": "38a46fc03a6b924467a76f50e6163ce694104f0e6b576854113fe1ca26f4553f",
+    "root-chain-audit.json": "1dae5a68eee728677f6509fba153c4ed3325e91ee64d7b5e3427461ea0476925",
+    "root-chain-refinement.json": "2fdd5420584fe5210a8dce1c02a7f3cfd7a0430f960f53c958b57afd7621b387"
+  },
+  "root_helpers": {
+    "run_s3b.py": "cedf67fa599711037f1704309e9ad24394af869b9ce7a573c1d35bfc49b3024f",
+    "cost_s3b.py": "1519e4f51e84db8d6d48eb6bd7514f73e142fb1674551e3ad3502a949b18ca8a",
+    "chain_s3b_r3.py": "e4ef267123a83cf53c0af0aaa42d31651f0d1ed8d4ac146e5a2a4119d32cd1ca",
+    "aggregate_s3b.py": "d903eafaedba0c282718b2c14c7259e07009513a9239a0aead91910f4227158f",
+    "chain_s3b.py": "c8b05e4dfcf6409ccdab0cbd27a5ca1c8fb227b07c84c5164df2df4e419663fa",
+    "chain_s3b_r2.py": "3f5daa1f90b5562403bc366cc93225eba191ec1c43d6629185cb9dd264392a70",
+    "score_s3b.py": "07297fa41c5e16595c09a5e6fb5ee5e8b913227242edfdc523a7b1b8d4e04a01",
+    "mark_s3b.py": "4ba87e52b3c353d6bda8c5d2bec7886f828a8222490234bed830e76e11cc46bf",
+    "view_s3b.py": "3bc7adce0ce1ed96b61a36b9e03cd19234a0992bdef3dc1963bc3f496e4c9d8f"
+  },
+  "format_interpretation": "Use original visible contracts: COUNT: numeral may be an elliptical sentence as accepted historically; do not add unrequested wording or punctuation requirements. Partial-plan unrequested fields remain three diagnostic-only omissions. Historical L-2 uniquely identifies original locker in retained context; no hidden requirement to repeat locker.",
+  "limits": [
+    "twelve exposed scripts, one family, compact_v6 Model View",
+    "complete required S3b regression, not new S4 evidence",
+    "actual newly formed UUIDs/wording can change trajectories; cost difference is not compression",
+    "this small exposed regression does not establish independent-task or second-family stability"
+  ],
+  "actual_fresh_run_comparison": {
+    "old_source": "ec682a3a8b1ac58b41733b882ed0bad367347fed",
+    "old_manifest_sha256": "139518908625754772d71de78d00dd5f4fd663850af9778603e409d221c283f5",
+    "old_selected_jobs": [
+      "candidate-complete_plan/B0",
+      "candidate-partial_plan/B0",
+      "candidate-one_reply_format/B0",
+      "candidate-independent_update/B0",
+      "candidate-quoted_rule/B0",
+      "candidate-read_only_note/B0",
+      "candidate-explicit_delete/B0",
+      "candidate-assistant_conflict/B0",
+      "candidate-dynamic_world/B0",
+      "candidate-moderate_bank/B0",
+      "current_request-reversed_count/B0",
+      "current_request-revised_location/B0"
+    ],
+    "old_actual_cost": {
+      "generation_calls": 53,
+      "generation_prompt_tokens": 72573,
+      "generation_completion_tokens": 2239,
+      "generation_tokens": 74812,
+      "embedding_calls": 22,
+      "embedding_tokens": 438,
+      "http_wall_seconds": 25.88778830645606,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "new_actual_cost": {
+      "generation_calls": 54,
+      "generation_prompt_tokens": 71723,
+      "generation_completion_tokens": 2296,
+      "generation_tokens": 74019,
+      "embedding_calls": 23,
+      "embedding_tokens": 448,
+      "http_wall_seconds": 26.73714022524655,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "generation_token_delta": -793,
+    "interpretation": "Different real UUIDs, response wording and one extra historical search in this run; actual total delta is not identified as compression. Fixed-input S2 profile is the separate compression evidence."
+  },
+  "offline_helper_refinement": {
+    "kind": "ROOT_OFFLINE_CHAIN_HELPER_REFINEMENT",
+    "observed": "S3b step8 historical retained ToolMessage observation_received_at is null; original offline helper incorrectly asserted all times truthy",
+    "expected": "Original runtime returns receipt time only for matching current run/arm/owner/message scope; old history remains null",
+    "competing_explanations": [
+      "compact renderer dropped real current receipt metadata",
+      "offline helper wrongly required current-turn receipt metadata on historical ToolMessage"
+    ],
+    "evidence": "Unchanged _receipt_time()/prepare scope reset and 18 null historical observations in frozen full replay; actual same-turn receipts have timestamps, historical call has different message_key",
+    "first_breakpoint": "Root offline chain assertion, not runtime/Host/Store or task answer",
+    "old_helper_sha256": "c8b05e4dfcf6409ccdab0cbd27a5ca1c8fb227b07c84c5164df2df4e419663fa",
+    "new_helper_sha256": "e4ef267123a83cf53c0af0aaa42d31651f0d1ed8d4ac146e5a2a4119d32cd1ca",
+    "change": "Verify actual body hash and exact scoped expected timestamp, including required null for history; retain all other checks",
+    "runtime_source_or_inputs_changed": false,
+    "model_retries": 0,
+    "v6_plan_gate_changed": false,
+    "intermediate_r2_failure": "KeyError run_id: persistent_memory_view lacks full scope; use actual memory_boundary_route scope, whose fields were inspected",
+    "intermediate_r2_sha256": "3f5daa1f90b5562403bc366cc93225eba191ec1c43d6629185cb9dd264392a70"
+  },
+  "s2_source_fast_ci": {
+    "run": 36406544195,
+    "status": "completed",
+    "conclusion": "success",
+    "full_run": 36406544104,
+    "full_conclusion": "skipped"
+  }
+}

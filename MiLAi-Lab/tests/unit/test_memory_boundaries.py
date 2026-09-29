@@ -3,6 +3,7 @@
 import copy
 import hashlib
 import json
+from dataclasses import replace
 from types import SimpleNamespace
 
 import pytest
@@ -15,6 +16,12 @@ from milai_lab.methods.memory_boundaries import (
     operation_audit,
     record_material,
     working_state,
+)
+from milai_lab.methods.request_context import (
+    MemoryPlacement,
+    ModelView,
+    RequestContext,
+    render_request,
 )
 
 SCOPE = {"run_id": "r", "arm_id": "B0", "user_id": "u", "message_key": "t:0"}
@@ -108,32 +115,39 @@ class _Capacity:
 
 
 def _view(records: list, capacity: _Capacity, query_records: list, *, attention: bool = False,
-          selector=None):
+          selector=None, model_view: str = "full"):
     calls = []
     events = []
     def retrieve(query, limit):
         calls.append((query, limit))
         return query_records
     view = MemoryBoundaryView(policy=boundary_policy({"enabled": True,
-        "attention_enabled": attention}), capacity=capacity, capacity_error=_CapacityError,
+        "attention_enabled": attention, "model_view": model_view}),
+        capacity=capacity, capacity_error=_CapacityError,
         retrieve=retrieve, select=selector, emit=events.append)
-    view.prepare(SCOPE, "t", records)
+    view.prepare(SCOPE, "t", records, base_system="original catalog", boundary_protocol=None)
     view.query = "Complete original query\nexact entity anchors preserved."
-    messages = [{"role": "system", "content": "original catalog\n" + record_material(records)},
-                {"role": "user", "content": view.query}]
+    view.request_context = replace(_context(view),
+        messages=({"role": "user", "content": view.query},), current_user_index=0)
+    messages = render_request(_context(view), MemoryPlacement.SYSTEM)
     return view, messages, calls, events
+
+
+def _context(view: MemoryBoundaryView) -> RequestContext:
+    assert view.request_context is not None
+    return view.request_context
 
 
 def test_all_is_complete_and_query_threshold_is_not_a_second_hard_budget() -> None:
     rows = [{"id": str(i), "value": {"content": "body"}} for i in range(33)]
     capacity = _Capacity()
     view, messages, calls, events = _view(rows[:32], capacity, rows[:10])
-    assert view.fit_final_request(messages) == messages and calls == []
+    assert view.fit_final_request(_context(view)) == messages and calls == []
     assert capacity.checks == 1  # No redundant pre-send count of the identical all request.
     assert events[-1]["route"] == "all"
     large = [{"id": "actual", "value": {"content": "x" * 6001}}]
     view, messages, calls, events = _view(rows, _Capacity(), large)
-    result = view.fit_final_request(messages)
+    result = view.fit_final_request(_context(view))
     assert calls == [(view.query, 10)]
     assert large[0]["value"]["content"] in result[0]["content"]
     assert result[1] == messages[1]
@@ -150,33 +164,33 @@ def test_attention_only_when_query_exceeds_capacity_and_base_can_fit() -> None:
     def select(key, query, candidates):
         selection.append((key, query, candidates))
         return [candidates[0]["id"]]
-    view, messages, _, events = _view(rows, _Capacity(1), rows[:10], attention=True,
+    view, _messages, _, events = _view(rows, _Capacity(1), rows[:10], attention=True,
                                       selector=select)
-    result = view.fit_final_request(messages)
+    result = view.fit_final_request(_context(view))
     assert len(selection) == 1 and events[-1]["route"] == "attention"
     assert json.loads(result[0]["content"].split("[DURABLE MEMORY]\n", 1)[1].split(
         "\n[/DURABLE MEMORY]", 1)[0]) == rows[:1]
     for enabled, base_fails in [(False, False), (True, True)]:
         selection.clear()
-        view, messages, _, events = _view(rows, _Capacity(1, base_fails), rows[:10],
+        view, _messages, _, events = _view(rows, _Capacity(1, base_fails), rows[:10],
                                           attention=enabled, selector=select)
         with pytest.raises(_CapacityError):
-            view.fit_final_request(messages)
+            view.fit_final_request(_context(view))
         assert selection == [] and not any(row["event"] == "memory_boundary_delivery"
                                            for row in events)
 
 
 def test_retrieval_error_and_invalid_selected_identity_are_not_soft_success() -> None:
     rows = [{"id": str(i), "value": {"content": "body"}} for i in range(33)]
-    view, messages, _, _ = _view(rows, _Capacity(1), rows[:10], attention=True,
+    view, _messages, _, _ = _view(rows, _Capacity(1), rows[:10], attention=True,
                                  selector=lambda *_args: ["other-owner-id"])
     with pytest.raises(ValueError, match="MEMORY_BOUNDARY_ATTENTION_INVALID_IDS"):
-        view.fit_final_request(messages)
+        view.fit_final_request(_context(view))
     def broken(_query, _limit):
         raise RuntimeError("synthetic real Store failure")
     view.retrieve = broken
     with pytest.raises(RuntimeError, match="synthetic real Store failure"):
-        view.fit_final_request(messages)
+        view.fit_final_request(_context(view))
 
 
 def _graph(messages: list) -> list:
@@ -193,6 +207,100 @@ def test_memory_placement_is_explicitly_validated_even_when_disabled() -> None:
         for enabled in (True, False):
             with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
                 boundary_policy({"enabled": enabled, "memory_placement": placement})
+
+
+def test_model_view_is_explicitly_validated_even_when_disabled() -> None:
+    assert boundary_policy({"enabled": True})["model_view"] == "full"
+    assert boundary_policy({"enabled": True, "model_view": "compact_v6"})[
+        "model_view"] == "compact_v6"
+    for model_view in (None, [], True, "compact"):
+        for enabled in (True, False):
+            with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
+                boundary_policy({"enabled": enabled, "model_view": model_view})
+
+
+@pytest.mark.parametrize("placement", list(MemoryPlacement))
+def test_compact_renderer_preserves_unknown_fields_and_full_audit_material(placement) -> None:
+    records = [{"id": "simple", "value": {"content": "原正文"}},
+               {"id": "extra-value", "value": {"content": "other body", "condition": "keep"}},
+               {"id": "extra-row", "value": {"content": "third body"}, "origin": "keep"}]
+    state = {"goal": {"current_user_ref": "message:user"}, "turn_constraints": {
+        "current_user_ref": "message:user", "semantic_extraction": False},
+        "active_refs": [{"record_id": "simple", "access_receipt_ref": "tool:receipt"}],
+        "open_questions": []}
+    observation = {"tool_call_id": "call", "tool_name": "read_memory",
+                   "content_sha256": "actual hash", "observation_received_at": "actual time"}
+    body = '{"content_sha256":"this actual tool body must stay intact"}'
+    context = RequestContext(base_system="base", durable_records=tuple(records),
+        working_state=state, messages=({"role": "user", "content": "current query"},
+            {"role": "tool", "content": body, "tool_call_id": "call"}), current_user_index=0,
+        tool_observations={1: observation})
+    before = copy.deepcopy(context)
+    compact = context.with_model_view(ModelView.COMPACT_V6)
+    result = render_request(compact, placement)
+    material = record_material([{"id": "simple", "content": "原正文"}, *records[1:]])
+    assert material in result[0 if placement is MemoryPlacement.SYSTEM else 1]["content"]
+    assert result[2]["content"] == (
+        '[TOOL OBSERVATION] {"tool_call_id": "call", "tool_name": "read_memory", '
+        '"observation_received_at": "actual time"}\n' + body)
+    assert '"active_refs": [{"record_id": "simple", "access_receipt_ref": "tool:receipt"}]' in (
+        result[0]["content"])
+    assert "open_questions" not in result[0]["content"]
+    nonempty = replace(compact, working_state={**state, "open_questions": ["unresolved"]})
+    assert '"open_questions": ["unresolved"]' in render_request(nonempty, placement)[0]["content"]
+    empty = replace(compact, working_state={**state, "active_refs": []})
+    assert "active_refs" not in render_request(empty, placement)[0]["content"]
+    assert context == before and context.working_state == state
+    assert "actual hash" in render_request(context, placement)[2]["content"]
+    view, _, _, _ = _view(records, _Capacity(), [], model_view="compact_v6")
+    assert record_material(records) in view.prepared_system()
+
+
+@pytest.mark.parametrize("route", ["query", "attention"])
+def test_compact_routes_count_model_material_but_selector_keeps_full_candidates(route) -> None:
+    records = [{"id": str(i), "value": {"content": "body"}} for i in range(33)]
+    selected = []
+    def select(_key, _query, candidates):
+        selected.append(copy.deepcopy(candidates))
+        return [candidates[0]["id"]]
+    capacity = _Capacity(10 if route == "query" else 1)
+    view, _, _, events = _view(records, capacity, records[:10], attention=route == "attention",
+                              selector=select, model_view="compact_v6")
+    result = view.fit_final_request(_context(view))
+    expected = records[:10] if route == "query" else records[:1]
+    material = record_material(expected, ModelView.COMPACT_V6)
+    assert material in result[0]["content"]
+    assert events[-1]["selected_material_tokens"] == capacity.text_tokens(material)
+    assert events[-1]["final_capacity"]["prompt_tokens"] == len(json.dumps(result))
+    assert events[-1]["model_view"] == "compact_v6"
+    assert selected == ([] if route == "query" else [records[:10]])
+    view.record_delivery({"id": "actual-generation"})
+    assert events[-1]["delivered_record_ids"] == [row["id"] for row in expected]
+
+
+@pytest.mark.parametrize("placement", list(MemoryPlacement))
+def test_renderer_keeps_explicit_parts_and_current_user_anchor_after_tools(placement) -> None:
+    records = [{"id": "record", "value": {"content": "当前正文"}}]
+    messages = ({"role": "user", "content": "[USER HISTORY]\nhistory"},
+                {"role": "user", "content": "[CURRENT USER REQUEST]\n[CURRENT TASK]\nquestion"},
+                {"role": "tool", "content": "actual receipt", "tool_call_id": "call"})
+    context = RequestContext(base_system="base", boundary_protocol="boundary",
+        system_tail="\nexact tail", durable_records=tuple(records),
+        working_state={"active_refs": []}, messages=messages, current_user_index=1,
+        action_protocol="catalog")
+    original = copy.deepcopy(context)
+    for rows in (records, []):
+        result = render_request(context.with_records(rows), placement)
+        material = record_material(rows)
+        assert result[0]["content"] == (
+            "catalog\nbase\nboundary\n"
+            + (material if placement is MemoryPlacement.SYSTEM else "")
+            + '\nexact tail\n[WORKING HYPOTHESIS - current task references]\n{"active_refs": []}')
+        assert result[2]["content"] == (
+            (material + "\n" if placement is MemoryPlacement.CURRENT_REQUEST else "")
+            + messages[1]["content"])
+        assert result[1] == messages[0] and result[3] == messages[2]
+    assert context == original
 
 
 def test_default_projection_bytes_and_candidate_only_move_one_existing_block() -> None:
@@ -216,7 +324,7 @@ def test_default_projection_bytes_and_candidate_only_move_one_existing_block() -
                 {"role": "user", "content":
                  "[CURRENT USER REQUEST]\n[CURRENT TASK]\n" + messages[-1]["content"]}]
     assert projected == expected and returned is graph
-    assert view.fit_final_request(projected) == expected
+    assert view.fit_final_request(_context(view)) == expected
     view.policy["memory_placement"] = "system"
     assert view.project(messages, graph, SCOPE["message_key"], 1)[0] == expected
     view.policy["memory_placement"] = "current_request"
@@ -226,7 +334,7 @@ def test_default_projection_bytes_and_candidate_only_move_one_existing_block() -
     assert candidate[-1]["content"] == material + "\n" + expected[-1]["content"]
     assert candidate[1:-1] == expected[1:-1]
     assert sum(row["content"].count(material) for row in candidate) == 1
-    assert view.fit_final_request(candidate) == candidate
+    assert view.fit_final_request(_context(view)) == candidate
     assert returned is graph and messages == before
     assert [row.model_dump() for row in graph] == originals
 
@@ -246,10 +354,10 @@ def test_candidate_replacement_and_every_capacity_check_use_final_user_layout(ro
     before = copy.deepcopy(projected)
     if route == "rejected":
         with pytest.raises(_CapacityError):
-            view.fit_final_request(projected)
+            view.fit_final_request(_context(view))
         assert view.delivery is None and selected == []
     else:
-        result = view.fit_final_request(projected)
+        result = view.fit_final_request(_context(view))
         expected = rows[:1] if route == "attention" else rows[:10]
         assert result[-1]["content"] == record_material(expected) + "\n" + (
             "[CURRENT USER REQUEST]\n[CURRENT TASK]\n" + view.query)

@@ -1,0 +1,58 @@
+{
+  "kind": "MILAI_V6_S3A_SMOKE_ORDER",
+  "status": "SELECTED_BEFORE_CALLS",
+  "source_commit": "4ffd17664ce9d8a6497e57b199b3a6d764adae86",
+  "serial": true,
+  "one_attempt_per_job": true,
+  "steps": [
+    {
+      "case_id": "revised_location",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v5-authority-r2/config.json",
+      "inputs": "data/diagnostics/next-development-v5-authority-confirmation-r2/revised_location-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "dynamic_world",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v5-authority-r2/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/dynamic_world-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "case_id": "explicit_delete",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v5-authority-r2/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/explicit_delete-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "case_id": "one_reply_format",
+      "arm": "B0",
+      "config": "data/diagnostics/next-development-v5-authority-r2/config.json",
+      "inputs": "data/diagnostics/next-development-v5-prospective-r1/one_reply_format-inputs.json",
+      "phase": 0,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    }
+  ]
+}

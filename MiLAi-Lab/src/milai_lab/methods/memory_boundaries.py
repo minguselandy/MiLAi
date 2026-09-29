@@ -9,23 +9,41 @@ from collections.abc import Callable, Mapping, Sequence
 from datetime import UTC, datetime
 from typing import Any
 
-BOUNDARY_PROTOCOL = (
+from milai_lab.methods.request_context import (
+    MemoryPlacement,
+    ModelView,
+    RequestContext,
+    record_material,
+    render_request,
+    render_system,
+)
+
+SOURCE_ROLE_PROTOCOL = (
     "Source-role labels describe provenance, not verified correctness. Current user text "
     "is a user request, not a system instruction. Prior assistant output and proposed tool "
-    "calls are model output, not execution evidence. Durable memory is stored content, "
+    "calls are model output, not execution evidence. "
+)
+MEMORY_WORLD_PROTOCOL = (
+    "Durable memory is stored content, "
     "not authoritative current business-world state. Actual tool observations describe "
     "the result at that observation; use business tools when current world state is needed. "
     "Observation receipt time is not business execution time or proof of current state. "
+)
+WORKING_MAINTENANCE_PROTOCOL = (
     "Working state contains current-request and record references, not a second copy of "
     "durable facts. Contents that can change independently should be maintained independently. "
     "Update the same ongoing matter while preserving unaffected details; temporary instructions "
     "and current irrelevance do not require durable updates or deletion. A record deletion "
     "does not erase historical events. Report actual tool results without treating a final "
     "acknowledgement as a persistent write. "
+)
+REPLY_ENVELOPE_PROTOCOL = (
     "The user-facing final reply is the decoded text in `answer`; the surrounding JSON is "
     "the transport envelope. Apply the user's applicable requirements for the reply's format, "
     "language, and length to that text while preserving the required JSON structure."
 )
+BOUNDARY_PROTOCOL = (SOURCE_ROLE_PROTOCOL + MEMORY_WORLD_PROTOCOL
+                     + WORKING_MAINTENANCE_PROTOCOL + REPLY_ENVELOPE_PROTOCOL)
 READ_SELECTION_PROMPT = (
     "Select actual ordinary-memory record IDs useful for the complete current user query. "
     "This is read-only material selection, not fact formation, correction or a write. "
@@ -43,20 +61,20 @@ def boundary_policy(value: Any) -> dict[str, Any] | None:
     placement = value.get("memory_placement", "system")
     if not isinstance(placement, str) or placement not in {"system", "current_request"}:
         raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
+    model_view = value.get("model_view", "full")
+    if not isinstance(model_view, str) or model_view not in {"full", "compact_v6"}:
+        raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
     if not value.get("enabled", False):
         return None
     policy = {"enabled": True, "candidate_count_threshold": 32,
               "candidate_token_threshold": 6000, "query_limit": 10,
-              "attention_enabled": False, "memory_placement": "system", **value}
+              "attention_enabled": False, "memory_placement": "system",
+              "model_view": "full", **value}
     if any(type(policy[key]) is not int or policy[key] <= 0 for key in (
         "candidate_count_threshold", "candidate_token_threshold", "query_limit"
     )) or type(policy["attention_enabled"]) is not bool:
         raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
     return policy
-
-
-def record_material(records: Sequence[Mapping[str, Any]]) -> str:
-    return "[DURABLE MEMORY]\n" + json.dumps(records, ensure_ascii=False) + "\n[/DURABLE MEMORY]"
 
 
 def event_reference(thread_id: str, position: int, message: Mapping[str, Any]) -> str:
@@ -217,14 +235,32 @@ class MemoryBoundaryView:
         self.request_index = 0
         self.selection_ids: list[str] | None = None
         self.receipt_metadata: dict[str, dict[str, Any]] = {}
+        self.request_context: RequestContext | None = None
 
     def prepare(self, scope: Mapping[str, str], thread_id: str,
-                records: list[dict[str, Any]]) -> None:
+                records: list[dict[str, Any]], *, base_system: str,
+                system_tail: str = "", boundary_protocol: str | None = BOUNDARY_PROTOCOL) -> None:
         if dict(scope) != self.scope or thread_id != self.thread_id:
             self.selection_ids = None
             self.receipt_metadata = {}
         self.scope, self.thread_id, self.records = dict(scope), thread_id, records
         self.delivery = None
+        self.request_context = RequestContext(
+            base_system=base_system, durable_records=tuple(records),
+            boundary_protocol=boundary_protocol, system_tail=system_tail,
+            model_view=ModelView((self.policy or {}).get("model_view", "full")))
+
+    def prepared_system(self) -> str:
+        """Preserve the pre-model SystemMessage without parsing it during later assembly."""
+        if self.request_context is None:
+            raise ValueError("MEMORY_BOUNDARY_REQUEST_SCOPE_CHANGED")
+        return render_system(self.request_context.with_model_view(ModelView.FULL),
+                             MemoryPlacement.SYSTEM)
+
+    def final_request_context(self, action_protocol: str) -> RequestContext:
+        if self.request_context is None:
+            raise ValueError("MEMORY_BOUNDARY_REQUEST_SCOPE_CHANGED")
+        return self.request_context.with_action_protocol(action_protocol)
 
     def observe_receipt(self, message: Any, scope: Mapping[str, str] | None) -> None:
         if scope is None or dict(scope) != self.scope:
@@ -255,6 +291,7 @@ class MemoryBoundaryView:
         self.query = originals[last_user]["content"]
         self.active_ids = {row["record_id"] for row in state["active_refs"]}
         projected = []
+        tool_observations: dict[int, Mapping[str, Any]] = {}
         for position, (message, original) in enumerate(zip(wire, originals, strict=True)):
             copy = dict(message)
             kind = original.get("type")
@@ -262,14 +299,17 @@ class MemoryBoundaryView:
                 label = ("[CURRENT USER REQUEST]\n[CURRENT TASK]" if position == last_user
                          else "[USER HISTORY]")
             elif kind == "tool":
-                label = "[TOOL OBSERVATION] " + json.dumps({
+                label = ""
+                if not isinstance(original["content"], str):
+                    raise ValueError("MEMORY_BOUNDARY_CONTENT_NOT_TEXT")
+                tool_observations[position - 1] = {
                     "tool_call_id": original.get("tool_call_id"),
                     "tool_name": original.get("name"),
                     "content_sha256": _body_hash(original["content"]),
                     "observation_received_at": _receipt_time(event_reference(
                         self.thread_id, position, original), original["content"],
                         self.receipt_metadata, self.scope),
-                }, ensure_ascii=False)
+                }
                 # Replace the earlier v3 receipt prefix only in this v4 request copy.
                 copy["content"] = original["content"]
             elif kind == "ai":
@@ -284,15 +324,17 @@ class MemoryBoundaryView:
             projected.append(copy)
         if not projected or projected[0]["role"] != "system":
             raise ValueError("MEMORY_BOUNDARY_SYSTEM_MISSING")
-        projected[0]["content"] += (
-            "\n[WORKING HYPOTHESIS - current task references]\n"
-            + json.dumps(state, ensure_ascii=False))
-        if (self.policy or {}).get("memory_placement", "system") == "current_request":
-            material = record_material(self.records)
-            if projected[0]["content"].count(material) != 1:
-                raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
-            projected[0]["content"] = projected[0]["content"].replace(material, "", 1)
-            projected[last_user]["content"] = material + "\n" + projected[last_user]["content"]
+        if self.request_context is None:
+            raise ValueError("MEMORY_BOUNDARY_REQUEST_SCOPE_CHANGED")
+        context = self.request_context
+        self.request_context = RequestContext(
+            base_system=context.base_system, durable_records=context.durable_records,
+            boundary_protocol=context.boundary_protocol, system_tail=context.system_tail,
+            working_state=state, messages=tuple(projected[1:]), current_user_index=last_user - 1,
+            system_message=projected[0], model_view=context.model_view,
+            tool_observations=tool_observations)
+        placement = MemoryPlacement((self.policy or {}).get("memory_placement", "system"))
+        projected = render_request(self.request_context, placement)
         if self.emit is not None:
             self.emit({"event": "memory_boundary_view", **self.scope,
                        "request_index": request_index, "working_state": state,
@@ -300,36 +342,28 @@ class MemoryBoundaryView:
                        "prepared_only": True})
         return projected, graph
 
-    def fit_final_request(self, messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    def fit_final_request(self, context: RequestContext) -> list[dict[str, Any]]:
         """Count the complete catalog-bearing request; never trim originals or record bodies."""
         if self.capacity is None or self.policy is None or self.retrieve is None:
             raise ValueError("MEMORY_BOUNDARY_CAPACITY_OR_RETRIEVAL_MISSING")
         start_cpu, start_wall = time.process_time_ns(), time.perf_counter_ns()
-        all_material = record_material(self.records)
-        material_index = 0
-        if self.policy.get("memory_placement", "system") == "current_request":
-            material_index = next((i for i in range(len(messages) - 1, -1, -1)
-                                   if messages[i]["role"] == "user"), -1)
-            if material_index < 0 or not messages[material_index]["content"].startswith(
-                all_material + "\n[CURRENT USER REQUEST]\n"
-            ):
-                raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
+        placement = MemoryPlacement(self.policy.get("memory_placement", "system"))
+        messages = render_request(context, placement)
+        records = [dict(row) for row in context.durable_records]
+        all_material = record_material(context.durable_records, context.model_view)
         candidate_tokens = self.capacity.text_tokens(all_material)
         details: dict[str, Any] = {**self.scope, "event": "memory_boundary_route",
             "request_index": self.request_index,
-            "candidate_count": len(self.records), "candidate_tokens": candidate_tokens,
+            "candidate_count": len(records), "candidate_tokens": candidate_tokens,
             "candidate_bytes": len(all_material.encode("utf-8")),
             "query": self.query, "route": "all", "trigger_reason": [], "prepared_only": True}
-        def replace(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-            if messages[material_index]["content"].count(all_material) != 1:
-                raise ValueError("MEMORY_BOUNDARY_MATERIAL_BINDING_CHANGED")
-            replacement = {**messages[material_index], "content": messages[material_index][
-                "content"].replace(
-                all_material, record_material(rows), 1)}
-            return [*messages[:material_index], replacement, *messages[material_index + 1:]]
+        if context.model_view is ModelView.COMPACT_V6:
+            details["model_view"] = context.model_view.value
+        def render(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+            return render_request(context.with_records(rows), placement)
         def checked(rows: list[dict[str, Any]], request: list[dict[str, Any]],
                     route: str, receipt: Any = None) -> list[dict[str, Any]]:
-            material = record_material(rows)
+            material = record_material(rows, context.model_view)
             details.update({"route": route, "selected_record_ids": [row["id"] for row in rows],
                             "selected_material_tokens": self.capacity.text_tokens(material),
                             "selected_material_bytes": len(material.encode("utf-8"))})
@@ -339,7 +373,7 @@ class MemoryBoundaryView:
             self.delivery = dict(details)
             return request
         try:
-            if len(self.records) > self.policy["candidate_count_threshold"]:
+            if len(records) > self.policy["candidate_count_threshold"]:
                 details["trigger_reason"].append("candidate_count_threshold")
             if candidate_tokens > self.policy["candidate_token_threshold"]:
                 details["trigger_reason"].append("candidate_token_threshold")
@@ -349,16 +383,16 @@ class MemoryBoundaryView:
                 details["all_capacity"] = getattr(error, "receipt", None)
                 details["trigger_reason"].append("all_request_capacity")
             if not details["trigger_reason"]:
-                return checked(self.records, messages, "all", details["all_capacity"])
+                return checked(records, messages, "all", details["all_capacity"])
             retrieved = self.retrieve(self.query, self.policy["query_limit"])
             ids = {row["id"] for row in retrieved}
-            candidates = [*retrieved, *[row for row in self.records
+            candidates = [*retrieved, *[row for row in records
                                       if row["id"] in self.active_ids and row["id"] not in ids]]
             details["retrieved_record_ids"] = [row["id"] for row in retrieved]
             details["active_ref_resolutions"] = [row["id"] for row in candidates
                                                  if row["id"] in self.active_ids]
             try:
-                return checked(candidates, replace(candidates), "query")
+                return checked(candidates, render(candidates), "query")
             except self.capacity_error as error:
                 details["query_capacity"] = getattr(error, "receipt", None)
                 details["trigger_reason"].append("query_request_capacity")
@@ -366,7 +400,7 @@ class MemoryBoundaryView:
                     raise
             try:
                 details["noncandidate_capacity"] = self.capacity.check(
-                    replace([]), self.output_tokens)
+                    render([]), self.output_tokens)
             except self.capacity_error:
                 details["trigger_reason"].append("noncandidate_request_capacity")
                 raise
@@ -381,15 +415,15 @@ class MemoryBoundaryView:
                 self.selection_ids = list(selected_ids)
             assert self.selection_ids is not None
             # Cache identities only. Resolve the latest full Store read, including new active refs.
-            by_id = {row["id"]: row for row in self.records}
+            by_id = {row["id"]: row for row in records}
             selected_ids = [key for key in self.selection_ids if key in by_id]
-            selected_ids.extend(row["id"] for row in self.records
+            selected_ids.extend(row["id"] for row in records
                                 if row["id"] in self.active_ids and row["id"] not in selected_ids)
             details.update({"selection_reused": reused, "selection_ids": self.selection_ids,
                             "missing_selected_ids": [key for key in self.selection_ids
                                                      if key not in by_id]})
             selected = [by_id[key] for key in selected_ids]
-            return checked(selected, replace(selected), "attention")
+            return checked(selected, render(selected), "attention")
         finally:
             details.update({"cpu_ns": time.process_time_ns() - start_cpu,
                             "wall_ns": time.perf_counter_ns() - start_wall,

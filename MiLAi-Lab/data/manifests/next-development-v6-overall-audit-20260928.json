@@ -1,0 +1,195 @@
+{
+  "kind": "MILAI_V6_OVERALL_EXECUTION_AUDIT",
+  "status": "STOP_PIVOT_PUBLICATION_PENDING",
+  "execution_resolution": "Plan section22 negative Stop after all applicable evaluation and bounded diagnosis; not method or minimum-stability success",
+  "requirements": {
+    "S0": "COMPLETE_PRESERVED",
+    "S1": "ENGINEERING_ACCEPTED",
+    "S2": "ENGINEERING_ACCEPTED_COMPACT_NOT_PROMOTED",
+    "S3a": "PASS_EXPOSED_54_OF_54",
+    "S3b": "PASS_EXPOSED_156_OF_156",
+    "S4": "COMPLETE_R1_FAIL_166_OF_193_10_OF_12_SCRIPTS",
+    "S4_diagnostic": "INCONCLUSIVE_NO_NEW_CANDIDATE",
+    "S5": "NOT_TRIGGERED_S4_FAIL",
+    "S6": "NOT_TRIGGERED_S4_NOT_STABLE",
+    "S7": "NOT_TRIGGERED_NO_QUERY_PRESSURE",
+    "S8": "NOT_TRIGGERED_NO_QUERY_FAILURE",
+    "S9": "REPORT_COMPLETE_PUBLICATION_PENDING"
+  },
+  "section23_minimum": [
+    {
+      "number": 1,
+      "status": "EVIDENCED"
+    },
+    {
+      "number": 2,
+      "status": "EVIDENCED"
+    },
+    {
+      "number": 3,
+      "status": "EVIDENCED"
+    },
+    {
+      "number": 4,
+      "status": "EVIDENCED"
+    },
+    {
+      "number": 5,
+      "status": "NOT_ACHIEVED"
+    },
+    {
+      "number": 6,
+      "status": "EVIDENCED"
+    },
+    {
+      "number": 7,
+      "status": "EVIDENCED"
+    }
+  ],
+  "minimum_standard": "NOT_ACHIEVED",
+  "method_goal": "NOT_ACHIEVED",
+  "research_goal": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "second_family": "NOT_RUN",
+  "conditional_gate_reason": "S4 explicit102/121 below98%, persistent64/72 below100%, two false saved claims; partial-world NOT_ACTIVATED; no query pressure",
+  "source": {
+    "S1": "4ffd17664ce9d8a6497e57b199b3a6d764adae86",
+    "S2": "85f45b367ee1c90d1c378e4a8a5c699c03889ee9",
+    "S4": "515ec7145ac1c1a66bafd080f472eb3e57c54037",
+    "runtime_source_unchanged_after_S2": true,
+    "all_frozen_source_and_input_hashes_verified": true
+  },
+  "stages": {
+    "S3a": {
+      "manifest": "data/manifests/next-development-v6-s3a-smoke-results-20260928.json",
+      "sha256": "b902473f725f708a6f3719850e8ecbc2f64d2bf6c5681678472fecd529946f69",
+      "cost": {
+        "generation_calls": 20,
+        "generation_prompt_tokens": 26629,
+        "generation_completion_tokens": 855,
+        "generation_tokens": 27484,
+        "embedding_calls": 5,
+        "embedding_tokens": 115,
+        "http_wall_seconds": 10.35907504754141,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "S3b": {
+      "manifest": "data/manifests/next-development-v6-s3b-regression-results-20260928.json",
+      "sha256": "37d67e26ac83a3cde123b73df73b3e566ac8eb1f05622cf1ee21570b66bec589",
+      "cost": {
+        "generation_calls": 54,
+        "generation_prompt_tokens": 71723,
+        "generation_completion_tokens": 2296,
+        "generation_tokens": 74019,
+        "embedding_calls": 23,
+        "embedding_tokens": 448,
+        "http_wall_seconds": 26.73714022524655,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "S4_R1": {
+      "manifest": "data/manifests/next-development-v6-s4-complete-results-20260928.json",
+      "sha256": "83cd20ae846effd2f191bd60aa84b17f0b7b723cc40817a3e106573d64328865",
+      "cost": {
+        "generation_calls": 60,
+        "generation_prompt_tokens": 75864,
+        "generation_completion_tokens": 2519,
+        "generation_tokens": 78383,
+        "embedding_calls": 19,
+        "embedding_tokens": 492,
+        "http_wall_seconds": 28.33106006588787,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      }
+    },
+    "S4_diagnostic": {
+      "manifest": "data/manifests/next-development-v6-s4-proposal-diagnostic-20260928.json",
+      "sha256": "3a5316b0669aec9239fffb3d98e7d15a29187c79f4d257f326f1a846c97e27c0",
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4338,
+        "generation_completion_tokens": 169,
+        "generation_tokens": 4507,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 1.844881197437644,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "retries": 0
+      }
+    }
+  },
+  "v6_cost": {
+    "generation_calls": 138,
+    "generation_prompt_tokens": 178554,
+    "generation_completion_tokens": 5839,
+    "generation_tokens": 184393,
+    "embedding_calls": 47,
+    "embedding_tokens": 1055,
+    "http_errors": 0,
+    "unknown_usage": 0
+  },
+  "unique_generation_provider_ids": 138,
+  "budget": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before_sha256": "98b02945ab195ad94e37061f97c5ba5eb8068ecd87ff47caef9f76f9e51fdd15",
+    "after_sha256": "2df7547a9d038cb53105afbf5daa97bbd8225bb204c19af40b7c68eee264ade2",
+    "before": {
+      "generation_requests": 3125,
+      "generation": {
+        "charged_tokens": 3971354,
+        "known_tokens": 3971354,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 22221,
+        "known_tokens": 22221,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3263,
+      "generation": {
+        "charged_tokens": 4155747,
+        "known_tokens": 4155747,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 23276,
+        "known_tokens": 23276,
+        "unknown_usage": 0
+      }
+    },
+    "history_and_limits_unchanged": true
+  },
+  "initial_snapshot": {
+    "manifest_sha256": "ea677dc7a9199761da4f8f55ff249c9036e5273d6a01e460bbd8f440d35a89a3",
+    "aggregate_relocated_path": "artifacts/next-development-v6/s4-independent-r1/initial-snapshot",
+    "all_five_original_aggregate_hashes_match": true
+  },
+  "s4_continuation_amendment_sha256": "f299ff1bab71b0af7a6d5c79b76150e41630e6c309c8216caa32f299e6905df6",
+  "evaluation_correction_sha256": "f7a7b291d4f566a518355987d4d408c67338b0c356f64e92a275a3953b749bf0",
+  "frozen_plan_sha256": "446e8b401eb558edd76c98dfcda0c0bc9daf1408c7d0d18ba583ce5cb2ea34ee",
+  "git": {
+    "accepted_S0_merge_main": "07cc364f96d484ad9ff8497adcf2a6f1b486bdb2",
+    "pr": 70,
+    "publication_policy": "Luna high exact allowlist commit/push, PR70 remains draft/open; no automatic merge"
+  },
+  "no_downloads_deployments_or_service_change": true,
+  "no_new_source_or_prompt_fix_selected": true,
+  "limitations": [
+    "single family, authored synthetic tasks",
+    "no statistically independent unseen claim",
+    "proposal-only diagnostic never evaluates persisted success",
+    "fixed-input cost benefit distinct from actual trajectory totals",
+    "raw private artifacts, credentials, databases and model assets excluded",
+    "physical I/O, GPU and currency costs unknown"
+  ],
+  "report_path": "docs/MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md"
+}

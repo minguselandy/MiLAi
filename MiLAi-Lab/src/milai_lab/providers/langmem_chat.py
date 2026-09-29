@@ -17,6 +17,7 @@ from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
+from milai_lab.methods.memory_boundaries import MemoryBoundaryView
 from milai_lab.methods.memory_result import (
     CORRECTION_TOOLS,
     RESULT_PROTOCOL,
@@ -219,7 +220,10 @@ class VLLMChatModel(BaseChatModel):
                 if (self.projection.stage != "v21" or projected.items
                         or projected.derived_rebases):
                     protocol += "\n" + SOURCE_AUTHORITY
-            if wire_messages and wire_messages[0]["role"] == "system":
+            if isinstance(self.request_view, MemoryBoundaryView):
+                action_messages = self.request_view.fit_final_request(
+                    self.request_view.final_request_context(protocol))
+            elif wire_messages and wire_messages[0]["role"] == "system":
                 first = dict(wire_messages[0])
                 if not isinstance(first.get("content"), str):
                     raise ValueError("JSON_ACTION_SYSTEM_CONTENT_NOT_TEXT")
@@ -227,8 +231,6 @@ class VLLMChatModel(BaseChatModel):
                 action_messages = [first, *wire_messages[1:]]
             else:
                 action_messages = [{"role": "system", "content": protocol}, *wire_messages]
-            if self.request_view is not None and hasattr(self.request_view, "fit_final_request"):
-                action_messages = self.request_view.fit_final_request(action_messages)
             self._reserve_request()
             scope = (self.observer.request_scope(
                 self.active_message_key, self.calls_in_message,
