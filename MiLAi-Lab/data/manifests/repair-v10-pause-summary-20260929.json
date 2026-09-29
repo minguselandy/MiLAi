@@ -1,0 +1,135 @@
+{
+  "kind": "MILAI_REPAIR_V10_PAUSE_SUMMARY",
+  "at_utc": "2026-09-29T05:45:18.723233+00:00",
+  "actual_goal_status": "paused",
+  "latest_authorization": "Report, state reconciliation and Luna Git publication only; no development or real experiments.",
+  "plan": "docs/MILAI_REPAIR_DEVELOPMENT_EXPERIMENT_PLAN_20260929_v10.0.md",
+  "overall_report": "docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md",
+  "r2_results": "data/manifests/repair-v10-r2-pause-results.json",
+  "requirement_status": [
+    {
+      "requirement": "R0",
+      "status": "COMPLETE",
+      "evidence_or_limit": "Historical evidence, source/service/ledger and exposure reconciled; reused old replay."
+    },
+    {
+      "requirement": "R1",
+      "status": "LOCAL_DIAGNOSTIC_COMPLETE_NOT_GLOBAL_ACCEPTANCE",
+      "evidence_or_limit": "L1 24 first responses, L2 eight full attempts; labels178→0, ancillary writes4perarm, contaminated L1 failure retained."
+    },
+    {
+      "requirement": "R2",
+      "status": "ENGINEERING_READY_REAL_FAILED_AND_INCOMPLETE",
+      "evidence_or_limit": "15 narrow checks;2/13processes,2/12messages,0/4completecases;world empty, fabricated business ID persisted through real CREATE and same-ID UPDATE."
+    },
+    {
+      "requirement": "R3",
+      "status": "OFFLINE_AUDIT_COMPLETE_CANDIDATE_NOT_RUN",
+      "evidence_or_limit": "All20scope/73records audited;F-only26row25group draft not executed; no P branch."
+    },
+    {
+      "requirement": "R4",
+      "status": "CONTRACT_AUDIT_COMPLETE_CONDITIONAL_WRITER_NOT_TRIGGERED",
+      "evidence_or_limit": "Distinguish autonomous versus backend-boundary maintenance; R2 false-content writes do not justify more writing."
+    },
+    {
+      "requirement": "R5",
+      "status": "DIAGNOSIS_COMPLETE_EFFECT_REPAIR_NOT_VALIDATED",
+      "evidence_or_limit": "Native key discovery reachable, temporal anchoring gap and pinned SDK constraint, exact wording/policy separate; no adapted baseline run."
+    },
+    {
+      "requirement": "R6",
+      "status": "NOT_RUN",
+      "evidence_or_limit": "Original SimpleMem budget failure retained; new reflection-only comparison not implemented/run;138not authorized."
+    },
+    {
+      "requirement": "R7",
+      "status": "NOT_RUN",
+      "evidence_or_limit": "No independent confirmation or new State–Attention ablation; second family NOT_RUN."
+    }
+  ],
+  "costs": {
+    "pre_v10": {
+      "generation_requests": 5992,
+      "generation_tokens": 10921341,
+      "embedding_tokens": 416802
+    },
+    "r1_l1": {
+      "generation_requests": 24,
+      "generation_tokens": 106780,
+      "embedding_requests": 0,
+      "embedding_tokens": 0
+    },
+    "r1_l2": {
+      "generation_requests": 122,
+      "generation_tokens": 368191,
+      "embedding_requests": 4,
+      "embedding_tokens": 36
+    },
+    "r2_partial_before_pause": {
+      "generation_requests": 7,
+      "generation_tokens": 10774,
+      "embedding_requests": 3,
+      "embedding_tokens": 92
+    },
+    "v10_increment": {
+      "generation_requests": 153,
+      "generation_tokens": 485745,
+      "embedding_requests": 7,
+      "embedding_tokens": 128,
+      "judge_requests": 0,
+      "inference_http_total": 160
+    },
+    "continuous": {
+      "generation_requests": 6145,
+      "generation_tokens": 11407086,
+      "embedding_tokens": 416930,
+      "unknown_generation_usage": 0,
+      "unknown_embedding_usage": 0,
+      "ledger_sha256": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43"
+    },
+    "money_gpu_hours_io": "NOT_MEASURED",
+    "developer_agent_tokens": "EXCLUDED_FROM_EXPERIMENT_LEDGER"
+  },
+  "r2_complete_denominators": {
+    "planned_cases": 4,
+    "cases_started": 1,
+    "cases_completed": 0,
+    "planned_processes": 13,
+    "processes_attempted": 2,
+    "processes_not_run": 11,
+    "planned_public_messages": 12,
+    "public_messages_attempted": 2,
+    "public_messages_not_run": 10
+  },
+  "r2_acceptance": "NOT_ACCEPTED; technical completion is not factual correctness. Planned recovery mechanisms not activated or not run.",
+  "artifacts_retained": [
+    "All old failures and budgets",
+    "R1 L1/L2 frozen attempts",
+    "R2 failed world/checkpoint and actual erroneous Store record",
+    "R2/R3 drafts",
+    "Original untracked v27 draft",
+    "Historical service/source/input locks"
+  ],
+  "services": "Existing7860/7861/7862 unchanged; no new deployment/download",
+  "process_status": "No active owned experiment or development worker at pause; job01 already exited before stop handling.",
+  "publication": {
+    "branch": "feat/lab-repair-v10-20260929",
+    "pr": 73,
+    "pr_url": "https://github.com/minguselandy/MiLAi/pull/73",
+    "required_state": "draft/open/unmerged",
+    "prior_published_execution_head": "42c82c2b3f689f846d51708b005123f2956db428",
+    "report_commit": "Resolved by Git history and ignored publication receipt; not self-referential."
+  },
+  "source_ci_at_review": {
+    "commit": "503b943d88f89e60fc4d5f90b761eead46545707",
+    "fast_run": 36526686324,
+    "fast_status": "in_progress",
+    "full_run": 36526686248,
+    "full_status": "skipped",
+    "no_remote_pass_claim": true
+  },
+  "future_resume": "Requires explicit new instruction; reevaluate R2 key visibility and unsupported factual persistence before continuing affected trials. Do not automatically execute remaining ordinal2–12.",
+  "full_research_status": "NOT_ACHIEVED",
+  "product_status": "NO_GO"
+}

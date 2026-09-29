@@ -1,5 +1,29 @@
 # MiLAi Lab agent instructions
 
+## Latest explicit pause and report-only authorization: 2026-09-29
+
+User said “暂停当前开发”, then authorized summary/report and GitHub publication.
+Actual Goal is **paused**. This overrides historical ACTIVE/resume paragraphs below.
+Read [the v10 overall pause report](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)
+and [requirement/cost summary](data/manifests/repair-v10-pause-summary-20260929.json).
+Only Root report/read-only reconciliation and Luna Git publication are authorized now.
+No new source work, experiments, downloads, deployment or automatic remaining R2 execution.
+
+R1 L1/L2 are complete local diagnostics: L2 both20/20, labels178→0, ancillary writes4each;
+no general action reliability/unseen claim. R2 method503b943d/execution42c82c2b has15 narrow
+checks passed, but only2/13processes and2/12messages ran; no complete recovery case.
+Target singular/plural mismatch blocked reserve; next message invented a business ID,
+actually CREATED then UPDATED the same durable memory despite an empty world.
+Read [R2 pause results](docs/MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md).
+Do not repair/delete this evidence or blindly resume the remaining11invocations.
+
+Continuous ledger6145generation/11407086generationtokens/416930embeddingtokens;
+v10 increment153generation/485745tokens/128embeddingtokens,0Judge. No owned worker remains
+running; existing services unchanged. R3 only offlineaudit/drafts; R4/R5 diagnosticcontracts;
+R6/R7/secondfamily NOT_RUN. Full research NOT_ACHIEVED, Product NO_GO.
+PR73 remains draft/open/unmerged; no main/oldPR merge. Preserve all drafts and old locks.
+
+
 ## Current v10 authorization: 2026-09-29
 
 The actual user Goal explicitly authorizes reading and executing the full

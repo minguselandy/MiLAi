@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_REPAIR_V10_EXPOSURE_REGISTRY",
-  "status": "UPDATED_THROUGH_R1_L2",
+  "status": "PAUSED_AFTER_R2_TWO_PUBLIC_MESSAGES",
   "prior_registry": {
     "path": "data/manifests/unified-v8-v9-exposure-20260928.json",
     "sha256": "0c070c564f0598ec80555fdbb2909d1e4228a299e65b409f76a3ce7740a27910",
@@ -1115,7 +1115,7 @@
       "mso_hard_000037"
     ],
     "new_source_groups_opened": 0,
-    "real_calls": 150,
+    "real_calls": 160,
     "completed_diagnostics": {
       "r1_l1": {
         "result": "data/manifests/repair-v10-r1-l1-results.json",
@@ -1135,15 +1135,26 @@
       }
     },
     "planned_only": {
-      "r2": "Four Root synthetic fixtures; NOT_RUN real calls, engineering fixtures exposed",
       "r3": "All20 exposed scope + first3 each exposed valid/personal controls;26rows25sourcegroups; no new outcomes",
       "r7": "NOT_FROZEN_NOT_RUN; confirmation selection metadata read only, no question/answer content used for repair"
     },
     "real_call_breakdown": {
-      "generation": 146,
-      "embedding": 4,
+      "generation": 153,
+      "embedding": 7,
       "judge": 0,
-      "definition": "Actual inference HTTP calls during v10 through L2, excludes /models readiness and developer-agent calls."
+      "definition": "Actual inference HTTP during v10 through R2 pause; excludes readiness, report-only SQL and developer agents."
+    },
+    "incomplete_diagnostics": {
+      "r2": {
+        "result": "data/manifests/repair-v10-r2-pause-results.json",
+        "case_started": "partial",
+        "public_messages_attempted": 2,
+        "process_attempts": 2,
+        "status": "PAUSED_REAL_FAILED_AND_INCOMPLETE",
+        "synthetic_development_exposure": true,
+        "not_unseen_benchmark": true,
+        "other_three_cases": "Synthetic inputs prepared, no real model outputs"
+      }
     }
   },
   "unseen_confirmation_frozen": false
