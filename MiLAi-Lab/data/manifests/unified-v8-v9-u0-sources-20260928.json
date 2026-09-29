@@ -1,0 +1,268 @@
+{
+  "kind": "UNIFIED_V8_V9_U0_SOURCE_RESOURCE_IDENTITY",
+  "status": "RESOURCE_IDENTITIES_COMPLETE_METHOD_FREEZE_PENDING",
+  "recorded_utc": "2026-09-28T15:11:34.088685+00:00",
+  "source_base_commit": "77dfc2f43f2307bb649cdbee9d62a97e5863fac0",
+  "source_branch": "feat/lab-unified-benchmarks-v8-v9-20260928",
+  "plans": {
+    "MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md": "b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c",
+    "MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v8.0.md": "f5d5dcdbfbb25ee3f16ba4ebe3c8bf1aad61b1d047e6aa22b86b8c26eda34f32",
+    "MILAI_BENCHMARK_FUNCTIONAL_COMPARISON_PLAN_20260928_v9.0.md": "dbaf2a2835af161af627beb5b0e0f183da71b11553ee427f6cddaf867930dbfa"
+  },
+  "benchmark_sources": [
+    {
+      "name": "MERIT",
+      "official_url": "https://github.com/smshweta/merit-bench",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+      "local_head": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "official_remote_head": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+      "remote_matches_local": true,
+      "repo_size_human": "584K",
+      "code_license": "MIT",
+      "license_file": "LICENSE",
+      "license_sha256": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+      "readme_sha256": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+      "fixed_benchmark_data": "No fixed task JSONL identified; repository provides generator, SQLite worlds, tools/checkers and starter baselines. Existing exposure/result metadata remains in project manifests and ignored artifacts.",
+      "dependency_metadata": "No top-level requirements.txt found; no dependencies installed. Review its setup before any run.",
+      "resource_status": "source present/current; no download needed"
+    },
+    {
+      "name": "MemSyco-Bench",
+      "official_url": "https://github.com/XMUDeepLIT/MemSyco-Bench",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemSyco-Bench",
+      "local_head": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+      "official_remote_head": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+      "remote_matches_local": true,
+      "repo_size_human": "18M",
+      "repo_license": "MIT",
+      "license_sha256": "f607254fa7fd8fd9e0ab9c2199ee568c44232053f5affa5130a5330b7bbf148a",
+      "data_card_sha256": "faa1f1275662a1698c2c8bc615c0901e78f6a524ef0e9fecde24bbd307805b5f",
+      "data_manifest_sha256": "1e996e2677f57d07884365a1d69d1528ddb9859efd25d0210c14bed0608b4505",
+      "schema_sha256": "8c54d9a53c9a44478f49dbcb003b6251e09d894fb63b687671f9796c13c11b6c",
+      "data_license_status": "Top-level repo LICENSE is MIT; data card and manifest do not state a separate dataset license. Confirm scope before redistribution; local evaluation source/data are already present.",
+      "datasets": [
+        {
+          "path": "reference-sources/contextual-v3/MemSyco-Bench/data/contextual_scope_control.jsonl",
+          "bytes": 2157719,
+          "sha256": "a233ee49a17434255fd372a95284f57bfa3bbbbcbb5cf9be2d0c6c793865d748",
+          "rows_by_newlines": 300,
+          "read_policy": "metadata/hash only; no task rows parsed"
+        },
+        {
+          "path": "reference-sources/contextual-v3/MemSyco-Bench/data/memory_evidence_conflict.jsonl",
+          "bytes": 2679554,
+          "sha256": "adf9a924bae5bf4d554c0f7bf69c8c867037caf13c9839afa93605cb39442823",
+          "rows_by_newlines": 300,
+          "read_policy": "metadata/hash only; no task rows parsed"
+        },
+        {
+          "path": "reference-sources/contextual-v3/MemSyco-Bench/data/objective_fact_judgment.jsonl",
+          "bytes": 1962669,
+          "sha256": "cd34eb4136dc9a5e2b4eff742a43de25d50bd1044455160a4b4eea0f082b81bc",
+          "rows_by_newlines": 300,
+          "read_policy": "metadata/hash only; no task rows parsed"
+        },
+        {
+          "path": "reference-sources/contextual-v3/MemSyco-Bench/data/personalized_memory_use.jsonl",
+          "bytes": 1777976,
+          "sha256": "7e4384008478265e338c8571a0f6d8e7a8720439f97dff8e735c1c858f613e17",
+          "rows_by_newlines": 300,
+          "read_policy": "metadata/hash only; no task rows parsed"
+        },
+        {
+          "path": "reference-sources/contextual-v3/MemSyco-Bench/data/valid_memory_selection.jsonl",
+          "bytes": 3952822,
+          "sha256": "7db0f062306a925f7cea9ea9cfb32cb94bbe2bb17999eff3e4a764aeabc4d498",
+          "rows_by_newlines": 350,
+          "read_policy": "metadata/hash only; no task rows parsed"
+        }
+      ],
+      "dataset_bytes_total": 12530740,
+      "previous_selection_manifest": {
+        "path": "MiLAi-Lab/data/manifests/contextual-memory-v3-memsyco-small.json",
+        "sha256": "d8b0b568caa94d8fb6a61a53d3fd359079642f4184b865308245ae83272c7c01",
+        "status": "SELECTED_NOT_RUN_ADAPTER_PENDING",
+        "selection_ids_copied": false,
+        "exposure_action": "Treat prior candidate IDs as exposed/excluded under Root U0 inventory; Root reports 13 IDs with actual use/result associations and conservatively excludes the full previous 24-ID list from any future slice."
+      },
+      "dependency_metadata": {
+        "core_requirements_path": "requirements.txt",
+        "sha256": "0433ed2bd0b3f83137de54a7686b1beae5f92674a14c277ad29543c7665c7f92",
+        "summary": "6 minimal unpinned core packages; optional requirements-memory-baselines.txt is a broader pinned environment (SHA 0b494afcb884c951e279c9a00e6c9424f44c7ecbe79c21331f6daaf1a887883c). Neither installed."
+      },
+      "resource_status": "full source and all five official JSONL files present/current; no download needed"
+    }
+  ],
+  "external_baselines": [
+    {
+      "name": "Mem0 OSS",
+      "official_url": "https://github.com/mem0ai/mem0",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v2.3/mem0-f8082a7345da",
+      "local_head": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "official_remote_head": "94c3fe9f238f3dbf29c9ce98643bd71eb13077cd",
+      "remote_matches_local": false,
+      "local_license": "Apache-2.0",
+      "license_sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+      "local_size_human": "57M",
+      "reusable_prior_pin": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "prior_project_record": "MiLAi-Lab/docs/MILAI_EXTERNAL_MEMORY_V26_REPRODUCTION_20260927.md; prior locked env/cache remain in original checkout and are not copied or modified",
+      "project_environment_receipt_sha256": "8ceb0360a33ca40f4200bc0a1eb4173915419b8710b4a6db54959a1d063993d6",
+      "status": "existing pinned Mem0 v26 resources are reusable as historical baseline; local source is not current upstream HEAD (remote has advanced), so any claim must pin the old commit or fetch a separately pinned newer commit later; no download/install performed"
+    },
+    {
+      "name": "A-MEM",
+      "official_url": "https://github.com/agiresearch/A-mem",
+      "official_remote_head": "ceffb860f0712bbae97b184d440df62bc910ca8d",
+      "standalone_local_checkout": false,
+      "available_related_source": "MemSyco-Bench@fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221 includes baselines/amem.py and A-MEM config",
+      "standalone_license": "not locally verified",
+      "status": "no separate source download needed for inventory; if selected as independent upstream baseline, pin/review its source/license before execution"
+    },
+    {
+      "name": "SimpleMem text",
+      "official_url": "https://github.com/aiming-lab/SimpleMem",
+      "local_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem",
+      "local_head": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+      "official_remote_head": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+      "remote_matches_local": true,
+      "license": "MIT",
+      "license_sha256": "276dc8cc9eb5a8c59d1edca3283163815d2caa512b17bd0bf053050304b4cd3e",
+      "local_size_human": "81M",
+      "status": "full source present/current; text implementation available; do not conflate Omni/Evolve variants. Broad requirements not installed."
+    }
+  ],
+  "resource_inventory_sha256": "e8ae2b35882f11aa0ce4791a58b260faf0e80d6dde56b939dc3764df174449dd",
+  "local_evaluation_licensing_note": "MERIT generator/source MIT. MemSyco repository MIT, no separate dataset license statement found in data card/manifest. Existing official data used locally; publish IDs/hashes/acquisition reference, not bundled corpora. This does not assert separately verified dataset redistribution permission.",
+  "project_files_at_u0": {
+    "pyproject.toml": "3667e8475e7ecde11f33bcf2dd986249d881d28ea3bcc1a8faa02b4251e125b0",
+    "uv.lock": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/datasets/memsyco.py": "1547cf025cff2d3980a57afcdb710372ea8a42b4094918518fb9ac1b2a8b9110",
+    "src/milai_lab/datasets/merit.py": "1959ebfa1c035520751a2ab7ec397444bbb545e72709b1aca91751d7a495a0e7"
+  },
+  "foundation_environment": {
+    "python": "3.11.13",
+    "mcp": "2.1.1",
+    "langchain-core": "1.6.5",
+    "langgraph": "1.1.10",
+    "langmem": "0.0.30",
+    "openai": "3.19.2",
+    "httpx": "0.28.1",
+    "uvicorn": "0.52.4",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "tqdm": "4.70.0",
+    "litellm": "NOT_INSTALLED",
+    "rank-bm25": "NOT_INSTALLED"
+  },
+  "historical_failure_chain": {
+    "path": "data/diagnostics/development-experiment-v7-p0/failure_chain.json",
+    "sha256": "092aa5d5f76626c2056d4fb1a23d0764ba8f8a5ada7c31565a79426f1b5b10e6",
+    "first_breakpoints": [
+      "explicit_save_zero_create",
+      "exact_business_key_changed",
+      "business_query_replaced_by_memory",
+      "partial_not_activated"
+    ],
+    "status": "Old observations/competing explanations preserved; no rerun and no new success erases them."
+  },
+  "selection": {
+    "memsyco": {
+      "path": "data/manifests/unified-v8-v9-memsyco-subsets-20260928.json",
+      "sha256": "a15ea0c6d4088844687c1bc0ce451150311585d743e2ab7acec3784547e7aabe",
+      "case_counts": {
+        "smoke": 6,
+        "development": 60,
+        "confirmation": 75
+      },
+      "confirmation_reduction": "valid track has45 source/history groups,8 prior-exposed;2smoke+20dev leave15confirmation; other tracks30each"
+    },
+    "merit": {
+      "path": "data/manifests/unified-v8-v9-merit-selection-policy-20260928.json",
+      "sha256": "aa829ce2265800ad7fdb3e59ea6c41f215e04959d888e7bf77c8a6126c7856e9",
+      "arc_counts": {
+        "smoke": 6,
+        "development": 18,
+        "confirmation": 36
+      },
+      "generated": 0
+    }
+  },
+  "host_configuration_receipts": [
+    "data/manifests/unified-v8-v9-host-service-20260928.json",
+    "data/manifests/unified-v8-v9-host-service-r2-20260928.json",
+    "data/manifests/unified-v8-v9-host-service-r2-ready-20260928.json"
+  ],
+  "remaining_freeze": [
+    "completed MCP and benchmark adapter source commit/check receipt",
+    "real native Host-Agent/MCP capability (HTTP readiness already verified)",
+    "full generated MERIT input/world hashes",
+    "per-group method/config/scorer/order/isolation/cache/expected cost envelope before real calls"
+  ],
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "research_goal": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "offline_checks": {
+    "memsyco-rubric-identity.json": {
+      "receipt_sha256": "f2c1049cba57aff5b97e9993b1d582741febab79e21a31fb1220fd3d39c300bb",
+      "project_scorer_sha256": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+      "rubrics": {
+        "contextual_scope_control": {
+          "exact_prompt_match": true,
+          "upstream_constant": "JUDGE_PROMPT",
+          "prompt_sha256": "0cb216cb0c81d28ecdee2717eeae56fabad9d6fc8d80bb7dff9e3da67160c2c4",
+          "upstream_module_sha256": "2f454b04548dd69b4aefdf4c36efd1de891fe4c93a7ea908daca9fce9648038a"
+        },
+        "valid_memory_selection": {
+          "exact_prompt_match": true,
+          "upstream_constant": "JUDGE_PREFRENCE_CHANGE_PROMPT",
+          "prompt_sha256": "bf91cbd065d0c26dc1de7d302cecfb069c3ba56a74e84881ee4cc54d3fc37f52",
+          "upstream_module_sha256": "2ef2dd63bc7762e4ff6441042e50a915cafa6ae753475bc26a7789142de64a29"
+        },
+        "personalized_memory_use": {
+          "exact_prompt_match": true,
+          "upstream_constant": "JUDGE_RECOMMEND_PROMPT",
+          "prompt_sha256": "e78bf298ff39a7d826b8e1d4ea523498a70819dec405b564673ef0071a1989af",
+          "upstream_module_sha256": "7237b454f102943270e8efc242c21eb3989f4b36c863dcb59f137c668edbf8da"
+        }
+      }
+    },
+    "memsyco-raw-dialogue-capacity.json": {
+      "receipt_sha256": "b2d0a662a83f0c772d5998eaa15e2f55d567f743c159d8d0ca49f198b7b2ef98",
+      "selection_sha256": "a15ea0c6d4088844687c1bc0ce451150311585d743e2ab7acec3784547e7aabe",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "current_date": "2025-06-01",
+      "context_tokens": 65536,
+      "output_reserve_tokens": 4096,
+      "safety_tokens": 512,
+      "summary": {
+        "smoke": {
+          "cases": 6,
+          "min_prompt_tokens": 285,
+          "max_prompt_tokens": 1763,
+          "median_prompt_tokens": 978.0,
+          "total_prompt_tokens": 5984,
+          "all_fit_full_history": true
+        },
+        "development": {
+          "cases": 60,
+          "min_prompt_tokens": 291,
+          "max_prompt_tokens": 2002,
+          "median_prompt_tokens": 972.0,
+          "total_prompt_tokens": 67269,
+          "all_fit_full_history": true
+        }
+      },
+      "confirmation_read": false
+    }
+  },
+  "base_ci_verified": {
+    "commit": "77dfc2f43f2307bb649cdbee9d62a97e5863fac0",
+    "fast_run": 36426398229,
+    "fast_conclusion": "success",
+    "full_run": 36426398326,
+    "full_conclusion": "skipped",
+    "source": "GitHub workflow API, read-only; no old test rerun"
+  }
+}

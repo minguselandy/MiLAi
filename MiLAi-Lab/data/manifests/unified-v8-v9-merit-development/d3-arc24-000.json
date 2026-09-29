@@ -1,0 +1,50 @@
+{
+  "dataset": "MERIT",
+  "purpose": "development",
+  "domain": "d3",
+  "difficulty": "easy",
+  "arc_id": "d3-arc24-000",
+  "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=24",
+  "source_url": "https://github.com/smshweta/merit-bench",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+  "source_sha256": {
+    "merit/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/d2.py": "15f469f1e4075e51e95287cc43702711e4c2a553cafae615f300eb121644d2bc",
+    "merit/d3.py": "57f88b2f9c40cf6a9bd95214666cbbeca8191753dd1cc2f33778e1147a06f9db",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "merit/memory.py": "2d4b331b80b54484c137c35d7dc3ecae047d660afa076d8ee06946ad2d939f2a",
+    "merit/memory_llm.py": "cc29d65589cdc48fe1ec874e0f31ea0a8d2840a19792e2f0c0b5e128aedf678d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/mockmodel.py": "05d669fffbef73862e5d5977ba9b652fb0050e8ff2d0b7ab75cd112be5c6aa03",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608"
+  },
+  "generator": "merit.domains.DOMAINS.generate_suite",
+  "generator_arguments": {
+    "n_arcs": 1,
+    "episodes_per_arc": 5,
+    "dep_ratio": 0.5,
+    "base_seed": 24,
+    "difficulty": "easy"
+  },
+  "adapter_source_commit": "795725a297fb1ef5f9d7bb712b3500d5b72546c0",
+  "selection_policy_sha256": "aa829ce2265800ad7fdb3e59ea6c41f215e04959d888e7bf77c8a6126c7856e9",
+  "episode_count": 5,
+  "dependent_episode_count": 2,
+  "user_message_count": 5,
+  "private_artifacts": {
+    "arc": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-inputs/d3-arc24-000/arc.json",
+    "arc_sha256": "e9b025af1015e3848d1a5fa79925ff22a4b789074582c3aefb9c165784e693d3",
+    "initial_world": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-inputs/d3-arc24-000/initial-world.json",
+    "initial_world_sha256": "188c2355b89347e106b9114212e097996b64bfaa3e4d4ff0b5621294842092da"
+  },
+  "official_generation_leak_check": "PASSED_INSIDE_UNMODIFIED_GENERATOR",
+  "full_arc_preserved": true,
+  "execution_status": "NOT_RUN",
+  "gold_boundary": "Generated scoring fields stay in ignored artifact and evaluator; model receives only current legal user messages and original tools/world."
+}

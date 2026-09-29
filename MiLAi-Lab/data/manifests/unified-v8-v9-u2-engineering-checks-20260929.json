@@ -1,0 +1,955 @@
+{
+  "base_git_sha": "74330412c938e7b8df152e472354554bccbb7c09",
+  "allowlist": [
+    {
+      "path": "MiLAi-Lab/src/milai_lab/baselines/benchmark_memories.py",
+      "sha256": "868e5ec18e08b7ff4298cf95b3794e14998dc6f5aa835f70497a80aef1e982d7",
+      "bytes": 12833
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/baselines/langmem_agent.py",
+      "sha256": "57a9e20895b18a3b40699802838aa4812d56ee208fc7633375dd619a90164717",
+      "bytes": 26734
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/baselines/langmem_benchmark.py",
+      "sha256": "9946020c275d724f1a39be6c86e733cd379dca3db61537156d8dea99a9b8a70e",
+      "bytes": 24149
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/contextual_memory/retrieval.py",
+      "sha256": "ce59cb2e50e414feba45ef374ef7344fcf8f974ab292e3458f7decd6f6c15bb4",
+      "bytes": 11732
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/methods/local_state_attention/summary.py",
+      "sha256": "cbbd1be804e70e73f93ff60847937cb43871e88bcd237ad2f1c15179bc10a08a",
+      "bytes": 9424
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/langmem_application_runtime.py",
+      "sha256": "d0669880c89ff1c8ac83e2b39a5b04d4fb4a99e557ca59d9e3b34fd5a3190b25",
+      "bytes": 4288
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/mem0_native.py",
+      "sha256": "fb2aa93ac151b25d264cad666a127d3905115761401a6453db4b87b8dcaf94dd",
+      "bytes": 15610
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/memsyco_native.py",
+      "sha256": "3a133307be966a467e6bad6d77f9bdba1f16815ec6da6439c651838f2afdf77d",
+      "bytes": 31745
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/merit_native.py",
+      "sha256": "09896f033ee5fac684177b9862c3e3f16fd5a50cfb7e43f0d708e7ac0222ce05",
+      "bytes": 20957
+    },
+    {
+      "path": "MiLAi-Lab/tests/unit/test_benchmark_memories.py",
+      "sha256": "b543a409cf7999067691f92e68353fcfa603ccb4b9bc8383989a9a9465372785",
+      "bytes": 17717
+    },
+    {
+      "path": "MiLAi-Lab/tests/unit/test_external_memory_v26.py",
+      "sha256": "49aa9ddd5fa101c06f26efc93dae124d79f9a64707ef6001d3074b8df8885dd0",
+      "bytes": 20036
+    },
+    {
+      "path": "MiLAi-Lab/tools/run_unified_benchmarks.py",
+      "sha256": "bf29d862f1dcb269b67747fe728391fd918aaa368ad9ec1be1fc766ea86f4f0d",
+      "bytes": 2367
+    },
+    {
+      "path": "MiLAi-Lab/configs/lab-verification-matrix.json",
+      "sha256": "f833e53e6daa63727cdce3ff6470af84b1f00fa196e4b01d0a929937188c87b1",
+      "bytes": 5031
+    },
+    {
+      "path": ".github/workflows/fast.yml",
+      "sha256": "8fc90a1756a344f6d9b389fb297e177adeb07ccad05d00a7f0b30741a9f3dd5d",
+      "bytes": 18104
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "760bc69fd5063c3f5bf68f771e1b68786996d7fd9809073ffefcc16b894d13a4",
+      "bytes": 21468
+    }
+  ],
+  "environments": {
+    "core": {
+      "python_executable": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "pytest": "8.4.2"
+    },
+    "foundation": {
+      "python_executable": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "pytest": "8.4.2"
+    },
+    "external": {
+      "python_executable": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python",
+      "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+      "pytest": "8.4.2"
+    }
+  },
+  "test_summary": {
+    "unique_targets": 26,
+    "unique_passed": 26,
+    "skipped": 0,
+    "target_nodeids": [
+      "tests/unit/test_benchmark_memories.py::test_real_rolling_archive_prior_summary_whole_batches_and_degraded_fallback",
+      "tests/unit/test_benchmark_memories.py::test_archive_role_boundaries_preserve_tool_results_and_unclosed_data",
+      "tests/unit/test_benchmark_memories.py::test_hybrid_real_bm25_dense_stable_ties_whole_chunks_and_incremental_embeddings",
+      "tests/unit/test_benchmark_memories.py::test_public_graph_current_query_no_lookahead_read_history_tool_chain_and_summary_cap[full_history]",
+      "tests/unit/test_benchmark_memories.py::test_public_graph_current_query_no_lookahead_read_history_tool_chain_and_summary_cap[rolling_summary]",
+      "tests/unit/test_benchmark_memories.py::test_public_graph_current_query_no_lookahead_read_history_tool_chain_and_summary_cap[strong_raw_rag]",
+      "tests/unit/test_benchmark_memories.py::test_exact_archive_key_excludes_questions_but_never_merges_source_or_owner",
+      "tests/unit/test_benchmark_memories.py::test_application_runtime_default_and_same_embedding_budget_reference",
+      "tests/unit/test_benchmark_memories.py::test_u2_configuration_is_explicit_and_does_not_accept_old_capacity_expansion",
+      "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[raw_dialogue]",
+      "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[rolling_summary]",
+      "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[strong_raw_rag]",
+      "tests/unit/test_benchmark_memories.py::test_memsyco_u2_frozen_history_build_fresh_query_gold_free_and_once_guards[ordinary_milai]",
+      "tests/unit/test_external_memory_v26.py::test_u2_actual_mem0_archived_tool_data_scope_admission_and_read_only_reopen",
+      "tests/unit/test_external_memory_v26.py::test_u2_live_mem0_shares_twelve_host_generations_and_keeps_completed_business",
+      "tests/unit/test_local_state_attention.py::test_window_summary_matches_full_history_before_eviction",
+      "tests/unit/test_local_state_attention.py::test_window_summary_commits_only_evicted_complete_turns_and_reuses_on_reopen",
+      "tests/unit/test_local_state_attention.py::test_window_summary_fallback_keeps_raw_history_and_does_not_retry[answer0]",
+      "tests/unit/test_local_state_attention.py::test_window_summary_fallback_keeps_raw_history_and_does_not_retry[answer1]",
+      "tests/unit/test_local_state_attention.py::test_window_summary_store_failure_and_tombstone_scope",
+      "tests/unit/test_local_state_attention.py::test_window_summary_control_capacity_falls_back_without_call",
+      "tests/unit/test_local_state_attention.py::test_window_summary_keeps_incomplete_prior_prefix_as_labeled_data",
+      "tests/unit/test_unified_benchmarks.py::test_formation_actual_agent_mcp_then_read_only_query_no_ownership_leak",
+      "tests/unit/test_unified_benchmarks.py::test_prepare_sanitizes_gold_and_run_reads_only_frozen_runtime_tasks[raw_dialogue]",
+      "tests/unit/test_unified_benchmarks.py::test_prepare_sanitizes_gold_and_run_reads_only_frozen_runtime_tasks[milai]",
+      "tests/unit/test_unified_benchmarks.py::test_merit_actual_graph_archive_final_and_current_prefix_once"
+    ],
+    "new_targets": 15,
+    "existing_adjacent_targets": 11,
+    "counts_deduplicated_across_repeated_target_runs": true
+  },
+  "config": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/data/diagnostics/unified-v8-v9-u2/native-common-config.json",
+    "sha256": "34ea3a1411c7ad94ade7bf1994cb3edd5beda9a194fa4240cae2b3f6ad5b7e22",
+    "benchmark_memory": {
+      "summary": {
+        "window_completed_turns": 2,
+        "content_max_chars": 16000,
+        "max_tokens": 2048
+      },
+      "raw_rag": {
+        "chunk_chars": 2048,
+        "chunk_step": 1792,
+        "bm25_k1": 1.2,
+        "bm25_b": 0.75,
+        "rrf_k": 60,
+        "top_k": 10,
+        "material_max_chars": 16000
+      },
+      "mem0": {
+        "infer": true,
+        "top_k": 20,
+        "threshold": 0.1,
+        "rerank": false
+      }
+    },
+    "history": "enabled=true/history_mode=archive_access; no unused control block"
+  },
+  "actual_mem0": {
+    "distribution": "mem0ai",
+    "version": "2.1.0",
+    "source_commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+    "source_file_count": 149,
+    "source_hashes_reference": "/tmp/milai-u2-final-20260929-memsyco-mem0_native/run_manifest.json#identity.mem0_dependency.source_sha256",
+    "test_transport": "actual SDK; MockTransport provider; local Qdrant/SQLite",
+    "contract": "infer=True ADD-only; exact native search top20/threshold.1/rerankFalse"
+  },
+  "memory_tools": {
+    "merit": {
+      "full_history": [
+        "read_history"
+      ],
+      "rolling_summary": [
+        "read_history"
+      ],
+      "strong_raw_rag": [
+        "read_history"
+      ],
+      "ordinary_milai": [
+        "manage_memory",
+        "search_memory",
+        "read_memory",
+        "read_history"
+      ],
+      "mem0_native": [
+        "search_memory",
+        "read_history"
+      ]
+    },
+    "memsyco": "official common reader has no Agent tools; ordinary question-free build uses strict MCP CRUD; other builds use their declared backend",
+    "default_u1": "unchanged; old actual formation/prepare/MERIT graph targets passed"
+  },
+  "final_tool_contract_refinement": {
+    "observed": "Three simple MERIT projections also advertised search/read of an unused empty ordinary Store.",
+    "competing_explanations": [
+      "Common catalog controls catalog tokens.",
+      "Empty endpoint misrepresents actual projected backend retrievability and can waste Host capacity."
+    ],
+    "choice": "Actual MCP read_history only; same original business tools. Ordinary and Mem0 retain actual backend tool contracts.",
+    "verification": "Three public-graph targets and all five final MERIT prepare catalogs."
+  },
+  "cli": {
+    "entrypoint": "tools/run_unified_benchmarks.py",
+    "prepare": "existing --benchmark --arm --selection --group --config --run --runtime-root prepare --output",
+    "archive": "MemSyco only: same options run-history --history <prepared build_history_id> --prepared --output",
+    "query": "same options run-job --job <prepared job_id> --prepared --output",
+    "run_history_example_not_executed": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm mem0_native --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-mem0_native --runtime-root /tmp/milai-u2-final-20260929-memsyco-mem0_native run-history --history 17c39c018526224bab879bfdf8fc706a3322b8ab8642be87b53d5357c7f4bb70 --prepared /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-mem0_native.json --output /tmp/u2-archive-result.json",
+    "run_job_example_not_executed": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm mem0_native --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-mem0_native --runtime-root /tmp/milai-u2-final-20260929-memsyco-mem0_native run-job --job mso_hard_000072 --prepared /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-mem0_native.json --output /tmp/u2-query-result.json"
+  },
+  "capacity_and_cost": {
+    "live": "12 shared Host + summary + every internal Mem0 LLM request",
+    "archive": "summary one attempt per maximal complete-turn batch; ordinary 12; each Mem0 ADD 12",
+    "summary": "last2 COMPLETED turns/current full prefix; actual prior summary and newly covered turns;2048 output;16000chars",
+    "raw": "BM25+dense/RRF60;2048chars/1792step;top10 whole chunks/16000chars;no reranker",
+    "ledger_owner": "same actual runtime RunBudget/Host client/embedding client; no duplicate charge",
+    "observations": "actual checkpoint/SDK/cache/MCP logical bytes, calls, CPU/wall; inclusive times overlap; physical I/O unknown"
+  },
+  "retained_non_test_failures": [
+    "one large apply_patch failed to match a source hunk before edits applied; split patch used",
+    "read-only log-summary command used unavailable generic python; exit127; rerun with locked core Python; no source/test/model action"
+  ],
+  "services": {
+    "real_host_calls": 0,
+    "real_embedding_calls": 0,
+    "real_judge_calls": 0,
+    "shared_postgres_calls": 0,
+    "downloads": 0,
+    "installations": 0,
+    "git_mutations": 0,
+    "loopback_mcp_http_used": true,
+    "actual_local_sqlite_and_qdrant_used": true,
+    "test_providers": "httpx.MockTransport; local synthetic business world"
+  },
+  "build": {
+    "executed": false,
+    "reason": "No new packaging/entrypoint file/dependency declaration; existing CLI gains one subcommand. Required package build not triggered."
+  },
+  "not_run": [
+    "real pilot/model/embedding/Judge/shared Postgres",
+    "U2 development/confirmation matrix",
+    "full test suite/full CI",
+    "second external system",
+    "new package build"
+  ],
+  "limitations": [
+    "Engineering evidence only; no benchmark effect claim or unseen confirmation.",
+    "Mem0 SDK admission may leave partial actual writes; adapter retains them and marks maintenance incomplete; no transaction or semantic exactly-once.",
+    "Exact-history cache never merges merely connected source groups; actual development reuse is not inferred from group count.",
+    "Raw history escape is an explicit actual MCP tool; automatic backend projection and raw read use are recorded separately.",
+    "Known summary model failure uses explicitly labelled full lawful history fallback; Store/permission failures propagate.",
+    "FullHistory does not persist injected memory shown; U1 native FullReplay tail60000 contract remains separate and unchanged.",
+    "Observed logical bytes/CPU/wall are not physical storage I/O or disjoint net CPU.",
+    "Source identities are prepublication whole-source identities; Root must freeze at published commit before real run."
+  ],
+  "check_artifacts": {
+    "artifacts/unified-v8-v9/u2-checks/01-benchmark-tests.log": {
+      "sha256": "43e3bc4bbd6adf3bfbc50867b2c5e1576b2798308a506edeb320501a0b84fabb",
+      "bytes": 15226
+    },
+    "artifacts/unified-v8-v9/u2-checks/02-benchmark-tests.log": {
+      "sha256": "286ba6fc28c7c0251215e32deb2ff550e11bf085d81ef50ca22d29c457ddaae2",
+      "bytes": 26299
+    },
+    "artifacts/unified-v8-v9/u2-checks/03-actual-mem0-archive.log": {
+      "sha256": "7d7ae52f02090258b975ad2fc021536d0a96340a363cace9258e638456529f24",
+      "bytes": 16141
+    },
+    "artifacts/unified-v8-v9/u2-checks/04-public-graph.log": {
+      "sha256": "9b896922cce1f568889f29fa3efeba939b569cc1a947909a85f1b1052374866f",
+      "bytes": 2189
+    },
+    "artifacts/unified-v8-v9/u2-checks/05-actual-mem0-archive.log": {
+      "sha256": "c91c61831e2826725e5807d635e793f71caa69eb4db94de066215370b098459a",
+      "bytes": 1839
+    },
+    "artifacts/unified-v8-v9/u2-checks/06-ruff-initial.log": {
+      "sha256": "f6a45a0e902ef0ba7fbc8d65410d250c42e4f704bf7bcfd353147a695b4c4aae",
+      "bytes": 8088
+    },
+    "artifacts/unified-v8-v9/u2-checks/07-mypy-initial.log": {
+      "sha256": "121ae479b52fddc021f10139b6b93e8bfd2e475c24dd60bdc130127cfa7822cb",
+      "bytes": 550
+    },
+    "artifacts/unified-v8-v9/u2-checks/08-mem0-live-cap.log": {
+      "sha256": "ba155c1811e2119c749b22ab2b0e3038123cf51ccc580d9033c1483b7334bb51",
+      "bytes": 2325
+    },
+    "artifacts/unified-v8-v9/u2-checks/09-cache-query-integration.log": {
+      "sha256": "352f4908f6d7258fa3ef5bd229bb3cc431edeec4e18085b6c019fb67b0b92a04",
+      "bytes": 1900
+    },
+    "artifacts/unified-v8-v9/u2-checks/10-ruff-final-precheck.log": {
+      "sha256": "2e9377cc982d40556e1321151a289624a58d4f4e812ef179d979d6a26b34b692",
+      "bytes": 655
+    },
+    "artifacts/unified-v8-v9/u2-checks/11-mypy-foundation-final.log": {
+      "sha256": "157a09cfcdfdfb5977479c5a1c08345149263a3e990a2ec976ef28aaeec9cae6",
+      "bytes": 43
+    },
+    "artifacts/unified-v8-v9/u2-checks/12-mypy-external.log": {
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "artifacts/unified-v8-v9/u2-checks/13-adjacent.log": {
+      "sha256": "1ef595ddaddfacd36e152d87f056a6a13588c9230ee8c5cda33153f4147c84cf",
+      "bytes": 1417
+    },
+    "artifacts/unified-v8-v9/u2-checks/14-benchmark-final.log": {
+      "sha256": "66a6c5f0318fef9d9328790b7588aac339bee37fca541aeacfbb2e39d216c750",
+      "bytes": 2306
+    },
+    "artifacts/unified-v8-v9/u2-checks/15-legacy-entry-adjacent.log": {
+      "sha256": "8b5b10e34d0cf962fae6e93cd965f658eaa73264d78572f1fbc9fff0cf2666b5",
+      "bytes": 2104
+    },
+    "artifacts/unified-v8-v9/u2-checks/16-mem0-store-failure-final.log": {
+      "sha256": "1462c0ab2597557e02116dfebb5d15c8f66b09e089ad7de276d1c1edadcfc992",
+      "bytes": 1839
+    },
+    "artifacts/unified-v8-v9/u2-checks/17-ruff-final.log": {
+      "sha256": "904de393e8dd2fa4f814bc01f21143ec378847b51d84e08a91c5c7a2494bd59b",
+      "bytes": 658
+    },
+    "artifacts/unified-v8-v9/u2-checks/18-mypy-final.log": {
+      "sha256": "d6726f5e81e29c068f682c421f3bb5f297c8c1a5489af59857f2eb36f96025bb",
+      "bytes": 206
+    },
+    "artifacts/unified-v8-v9/u2-checks/19-matrix-final.log": {
+      "sha256": "25f28a54ab42f87700292904be8de9c5e058d0aea318be01af56d807b9843bd3",
+      "bytes": 261
+    },
+    "artifacts/unified-v8-v9/u2-checks/20-source-boundary.log": {
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    "artifacts/unified-v8-v9/u2-checks/21-tools-boundary.log": {
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    },
+    "artifacts/unified-v8-v9/u2-checks/22-ruff-final-module.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "artifacts/unified-v8-v9/u2-checks/23-legacy-merit-default.log": {
+      "sha256": "24fb331d6f4f1d62d4c91216c64b88a469f0d0792a9699e70436be2be373dd0a",
+      "bytes": 1857
+    },
+    "artifacts/unified-v8-v9/u2-checks/24-mypy-final-module.log": {
+      "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "bytes": 42
+    },
+    "artifacts/unified-v8-v9/u2-checks/25-prepare-ms-raw.log": {
+      "sha256": "4de63f1b5021834250c675ecdb5477fa37166a2864d2022f7575760be25d59d3",
+      "bytes": 821
+    },
+    "artifacts/unified-v8-v9/u2-checks/26-prepare-ms-mem0.log": {
+      "sha256": "05ecbe7c61717cb9e7c3a7311aa843f60e4666799da6d09ff9a4c2fb1768a113",
+      "bytes": 820
+    },
+    "artifacts/unified-v8-v9/u2-checks/27-history-only-public-graph.log": {
+      "sha256": "fb1e00794a490b339c80698f8a073257939104a379544fd8d76fdfd9e615e79d",
+      "bytes": 2190
+    },
+    "artifacts/unified-v8-v9/u2-checks/28-history-only-ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "artifacts/unified-v8-v9/u2-checks/29-history-only-mypy.log": {
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "bytes": 43
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-final-prepare-driver.log": {
+      "sha256": "116fea7917c31b3468b82ce433d0aaf948ffef355eca5c324377f00a23296413",
+      "bytes": 1895
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-mem0_native.log": {
+      "sha256": "0d3c4cacb45d2c0f777c2b923bcbf826ee4a911b70965a8ea9be0784fca1c7c9",
+      "bytes": 831
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-ordinary_milai.log": {
+      "sha256": "77eba238e0519783d13863639bfa10b29434b3a9fc3206e2e2b24ef595a88434",
+      "bytes": 836
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-raw_dialogue.log": {
+      "sha256": "8e7845c21e808fbef52cf036ae312149ec26d1469e9cb0aca583e05d4f8328f8",
+      "bytes": 834
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-rolling_summary.log": {
+      "sha256": "7ede8f6dbb3a4a5959bb1c149adff75b2c0dcc2cbf60a0068dc9f679a703e512",
+      "bytes": 837
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-strong_raw_rag.log": {
+      "sha256": "62deb3f07dfcf0e384f46ed6da19408a7f7033cf1448f9960971625acbc7fb8a",
+      "bytes": 836
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-merit-full_history.log": {
+      "sha256": "4ca78c03afa60b82184d6cba8ad7d5752b8c92213aa84951758b22d03a80cbf2",
+      "bytes": 832
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-merit-mem0_native.log": {
+      "sha256": "2a7442dcbffa670dc6aaa29def9b46b846abfebc24bf8b8489344468c4d64368",
+      "bytes": 829
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-merit-ordinary_milai.log": {
+      "sha256": "9fae545924ef20d1d7f7687bb945e671d2e4bf5a324820b8a5accf61f5889f00",
+      "bytes": 834
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-merit-rolling_summary.log": {
+      "sha256": "0f371fdea3d94f33e94fbe156b99fc7cce2f59f47820f9c6d47702f9ad29ee03",
+      "bytes": 835
+    },
+    "artifacts/unified-v8-v9/u2-checks/30-prepare-merit-strong_raw_rag.log": {
+      "sha256": "9706f7004fded5c36ca9043d6720eef79d4b16c5dad99ed4eeb83eb06170100f",
+      "bytes": 834
+    },
+    "artifacts/unified-v8-v9/u2-checks/31-ruff-dependency-final.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    "artifacts/unified-v8-v9/u2-checks/32-diff-check.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "artifacts/unified-v8-v9/u2-checks/33-new-file-whitespace.log": {
+      "sha256": "923f97d2854050c34b6457a591f82440d9e2f60ec77531002aab7bc6ba86f91e",
+      "bytes": 176
+    },
+    "artifacts/unified-v8-v9/u2-checks/final-prepare-checks.json": {
+      "sha256": "0a2e1a69e13cd9ff15ea39672e05b5fc6f566f43685030ad255d7eb13a1c395a",
+      "bytes": 18682
+    },
+    "artifacts/unified-v8-v9/u2-checks/mem0-dependency-observation.json": {
+      "sha256": "515c9255295f032648b7816f01baee7b2ab9289b452fb7958575f3d0ef382192",
+      "bytes": 14889
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/memsyco-mem0_native.json": {
+      "sha256": "c6a9ac084d01484e7356239df63aeee92100170255956eed06c8f28f3b3367e9",
+      "bytes": 612
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/memsyco-ordinary_milai.json": {
+      "sha256": "0a1a57de699abdec992f8f492e36ebe2f4908699c850acfbc2bda04dcd0f965d",
+      "bytes": 615
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/memsyco-raw_dialogue.json": {
+      "sha256": "bce46e52c50ba69221570b94be74afd26513bf64c6bb54251cf4c50a759b30ec",
+      "bytes": 613
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/memsyco-rolling_summary.json": {
+      "sha256": "6f9a829be28553f973908a8e1b5a7544bb6a1a642ff296263c12b18be42de7a7",
+      "bytes": 616
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/memsyco-strong_raw_rag.json": {
+      "sha256": "81e668e15d749855b8c508e6d14d2ee472d5d7e4759540504d2cf11dbc5c4e17",
+      "bytes": 615
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/merit-full_history.json": {
+      "sha256": "51183d0350a231ed637e366d2cd0c7aa0b51e9cd367a489efc3ef70ec2664d20",
+      "bytes": 647
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/merit-mem0_native.json": {
+      "sha256": "fb7ff8f36e1becbee6ecf0668db2e3bc93bcc6ab79ad645f0dd01aa189078050",
+      "bytes": 646
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/merit-ordinary_milai.json": {
+      "sha256": "9fbf7d964c6b6ea100a8dec31b2143f1457536faa6cbd660af587525bc40d5ab",
+      "bytes": 649
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/merit-rolling_summary.json": {
+      "sha256": "6b5bdf510a713b1b1a7de5af17acb54155486c40e85c3cd1e26d9fb564f49a64",
+      "bytes": 650
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare/merit-strong_raw_rag.json": {
+      "sha256": "612bde6cac20904aa78c33c0349603a2dc2a77befd03ed3807b4b3fb8ea8e191",
+      "bytes": 649
+    },
+    "artifacts/unified-v8-v9/u2-checks/prepare_final.py": {
+      "sha256": "10754a5c07cc6246c3d8096b2c3f37a6b421c8e57779f894bbbe1a7509c2547d",
+      "bytes": 5281
+    },
+    "artifacts/unified-v8-v9/u2-checks/write_receipt.py": {
+      "sha256": "0684001424fa34cb2f8b1e9f0dd41803fdb38e293acafd8001e5f3fb2e03541f",
+      "bytes": 19196
+    }
+  },
+  "kind": "UNIFIED_U2_ENGINEERING_CHECKS",
+  "status": "CHECKS_PASSED_NOT_MODEL_ACCEPTANCE",
+  "source_receipt": {
+    "path": "artifacts/unified-v8-v9/u2-checks/checks-receipt.json",
+    "sha256": "14b3e2b7721cfd05d323e9aa9839d8e5e0db3c500d927d2828d5a95230486432"
+  },
+  "root_verification": {
+    "at_utc": "2026-09-28T19:17:20.634550+00:00",
+    "engineering_files": 15,
+    "check_artifacts": 57,
+    "prepared_source_identities": 10,
+    "all_sha256_match": true,
+    "tests_repeated": false,
+    "real_model_calls": 0
+  },
+  "checks": [
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py",
+      "exit_code": 1,
+      "result": "5 passed / 4 failed",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/01-benchmark-tests.log",
+      "log_sha256": "43e3bc4bbd6adf3bfbc50867b2c5e1576b2798308a506edeb320501a0b84fabb",
+      "failed_stage": "initial synthetic harness: zero embedding and missing run manifest"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py",
+      "exit_code": 1,
+      "result": "6 passed / 3 failed",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/02-benchmark-tests.log",
+      "log_sha256": "286ba6fc28c7c0251215e32deb2ff550e11bf085d81ef50ca22d29c457ddaae2",
+      "failed_stage": "actual graph: hook cfg parameter was not RunnableConfig-injected"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 FASTEMBED_CACHE_PATH=/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest -q tests/unit/test_external_memory_v26.py::test_u2_actual_mem0_archived_tool_data_scope_admission_and_read_only_reopen",
+      "exit_code": 1,
+      "result": "1 failed",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/03-actual-mem0-archive.log",
+      "log_sha256": "7d7ae52f02090258b975ad2fc021536d0a96340a363cace9258e638456529f24",
+      "failed_stage": "pinned SDK wrapped admission ValueError in LLMError; adapter did not classify incomplete maintenance"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py -k public_graph",
+      "exit_code": 0,
+      "result": "3 passed / 6 deselected; before the final history-only catalog refinement",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/04-public-graph.log",
+      "log_sha256": "9b896922cce1f568889f29fa3efeba939b569cc1a947909a85f1b1052374866f"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 FASTEMBED_CACHE_PATH=/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest -q tests/unit/test_external_memory_v26.py::test_u2_actual_mem0_archived_tool_data_scope_admission_and_read_only_reopen",
+      "exit_code": 0,
+      "result": "1 passed / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/05-actual-mem0-archive.log",
+      "log_sha256": "c91c61831e2826725e5807d635e793f71caa69eb4db94de066215370b098459a"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/mem0_native.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tests/unit/test_benchmark_memories.py tests/unit/test_external_memory_v26.py tools/run_unified_benchmarks.py",
+      "exit_code": 1,
+      "result": "10 lint errors; import/format/unused findings retained",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/06-ruff-initial.log",
+      "log_sha256": "f6a45a0e902ef0ba7fbc8d65410d250c42e4f704bf7bcfd353147a695b4c4aae"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py",
+      "exit_code": 1,
+      "result": "3 errors / 2 files: missing updates annotation and list/dict local-name collision",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/07-mypy-initial.log",
+      "log_sha256": "121ae479b52fddc021f10139b6b93e8bfd2e475c24dd60bdc130127cfa7822cb"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 FASTEMBED_CACHE_PATH=/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest -q tests/unit/test_external_memory_v26.py -k u2_",
+      "exit_code": 0,
+      "result": "2 passed / 4 deselected / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/08-mem0-live-cap.log",
+      "log_sha256": "ba155c1811e2119c749b22ab2b0e3038123cf51ccc580d9033c1483b7334bb51"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py -k \"hybrid or memsyco_u2\"",
+      "exit_code": 0,
+      "result": "5 passed / 8 deselected / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/09-cache-query-integration.log",
+      "log_sha256": "352f4908f6d7258fa3ef5bd229bb3cc431edeec4e18085b6c019fb67b0b92a04"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/mem0_native.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tests/unit/test_benchmark_memories.py tests/unit/test_external_memory_v26.py tools/run_unified_benchmarks.py",
+      "exit_code": 1,
+      "result": "1 remaining test E501 finding",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/10-ruff-final-precheck.log",
+      "log_sha256": "2e9377cc982d40556e1321151a289624a58d4f4e812ef179d979d6a26b34b692"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py",
+      "exit_code": 0,
+      "result": "8 files passed; before adding pinned SDK dependency identity",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/11-mypy-foundation-final.log",
+      "log_sha256": "157a09cfcdfdfb5977479c5a1c08345149263a3e990a2ec976ef28aaeec9cae6"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m mypy src/milai_lab/runners/mem0_native.py",
+      "exit_code": 0,
+      "result": "1 file passed; unchanged source thereafter",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/12-mypy-external.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_unified_benchmarks.py -k \"formation_actual_agent or merit_adapter_public_factory or prepare_sanitizes\" tests/unit/test_local_state_attention.py -k \"window_summary and not cli\"",
+      "exit_code": 0,
+      "result": "7 passed / 84 deselected / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/13-adjacent.log",
+      "log_sha256": "1ef595ddaddfacd36e152d87f056a6a13588c9230ee8c5cda33153f4147c84cf",
+      "selection_caveat": "last -k overrides the earlier -k; this run covers only the seven summary targets"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py",
+      "exit_code": 0,
+      "result": "13 passed / 0 skipped; final three catalog targets superseded by log27",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/14-benchmark-final.log",
+      "log_sha256": "66a6c5f0318fef9d9328790b7588aac339bee37fca541aeacfbb2e39d216c750"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_unified_benchmarks.py -k \"formation_actual_agent or merit_adapter_public_factory or prepare_sanitizes\"",
+      "exit_code": 0,
+      "result": "3 passed / 9 deselected / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/15-legacy-entry-adjacent.log",
+      "log_sha256": "8b5b10e34d0cf962fae6e93cd965f658eaa73264d78572f1fbc9fff0cf2666b5",
+      "selection_caveat": "merit_adapter_public_factory matched no current target; actual MERIT target ran separately in log23"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 FASTEMBED_CACHE_PATH=/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest -q tests/unit/test_external_memory_v26.py::test_u2_actual_mem0_archived_tool_data_scope_admission_and_read_only_reopen",
+      "exit_code": 0,
+      "result": "1 passed / 0 skipped; includes permission-error propagation assertion",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/16-mem0-store-failure-final.log",
+      "log_sha256": "1462c0ab2597557e02116dfebb5d15c8f66b09e089ad7de276d1c1edadcfc992"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/mem0_native.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tests/unit/test_benchmark_memories.py tests/unit/test_external_memory_v26.py tools/run_unified_benchmarks.py",
+      "exit_code": 1,
+      "result": "1 new dependency-identity E501; all other selected paths clean",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/17-ruff-final.log",
+      "log_sha256": "904de393e8dd2fa4f814bc01f21143ec378847b51d84e08a91c5c7a2494bd59b"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/benchmark_memories.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py",
+      "exit_code": 1,
+      "result": "1 dependency identity SimplePath-to-Path typing finding / 8 checked files",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/18-mypy-final.log",
+      "log_sha256": "d6726f5e81e29c068f682c421f3bb5f297c8c1a5489af59857f2eb36f96025bb"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+      "exit_code": 0,
+      "result": "actual workflows and declared matrix agree; 164 active sources",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/19-matrix-final.log",
+      "log_sha256": "25f28a54ab42f87700292904be8de9c5e058d0aea318be01af56d807b9843bd3"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/20-source-boundary.log",
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/21-tools-boundary.log",
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/benchmark_memories.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/22-ruff-final-module.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_unified_benchmarks.py::test_merit_actual_graph_archive_final_and_current_prefix_once",
+      "exit_code": 0,
+      "result": "1 passed / 0 skipped",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/23-legacy-merit-default.log",
+      "log_sha256": "24fb331d6f4f1d62d4c91216c64b88a469f0d0792a9699e70436be2be373dd0a"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/benchmark_memories.py",
+      "exit_code": 0,
+      "result": "1 file passed after Path(str(...)) typing fix",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/24-mypy-final-module.log",
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_benchmark_memories.py -k public_graph",
+      "exit_code": 0,
+      "result": "3 passed / 10 deselected / 0 skipped; final catalog only MCP read_history",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/27-history-only-public-graph.log",
+      "log_sha256": "fb1e00794a490b339c80698f8a073257939104a379544fd8d76fdfd9e615e79d"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/runners/merit_native.py tests/unit/test_benchmark_memories.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/28-history-only-ruff.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/runners/merit_native.py",
+      "exit_code": 0,
+      "result": "2 files passed",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/29-history-only-mypy.log",
+      "log_sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/baselines/benchmark_memories.py",
+      "exit_code": 0,
+      "result": "PASS final bytes",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/31-ruff-dependency-final.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": "git diff --check -- src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/methods/contextual_memory/retrieval.py src/milai_lab/methods/local_state_attention/summary.py src/milai_lab/runners/langmem_application_runtime.py src/milai_lab/runners/mem0_native.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tests/unit/test_external_memory_v26.py tools/run_unified_benchmarks.py configs/lab-verification-matrix.json ../.github/workflows/fast.yml ../.github/workflows/ci.yml",
+      "exit_code": 0,
+      "result": "PASS tracked allowlist; no Git mutation",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/32-diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python - <<'PY'\nfrom pathlib import Path\nfor name in ('src/milai_lab/baselines/benchmark_memories.py', 'tests/unit/test_benchmark_memories.py'):\n    raw=Path(name).read_bytes()\n    assert raw.endswith(b'\\n') and not raw.endswith(b'\\n\\n'), name\n    assert all(line == line.rstrip() for line in raw.splitlines()), name\n    print(name, 'PASS final newline and no trailing whitespace')\nPY",
+      "exit_code": 0,
+      "result": "PASS new files",
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/33-new-file-whitespace.log",
+      "log_sha256": "923f97d2854050c34b6457a591f82440d9e2f60ec77531002aab7bc6ba86f91e"
+    }
+  ],
+  "final_prepare_checks": {
+    "status": "10/10 PREPARED_ZERO_MODEL",
+    "source_scope": "164 package .py files plus existing CLI and pyproject = 166 identities",
+    "full_history_cache_units": "pilot each MemSyco arm 1 distinct archive, 0 reuse",
+    "prepublication": true,
+    "publication_requires_new_git-bound_identity": true,
+    "driver": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare_final.py",
+    "driver_sha256": "10754a5c07cc6246c3d8096b2c3f37a6b421c8e57779f894bbbe1a7509c2547d",
+    "driver_log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-final-prepare-driver.log",
+    "driver_log_sha256": "116fea7917c31b3468b82ce433d0aaf948ffef355eca5c324377f00a23296413",
+    "observations": [
+      {
+        "benchmark": "memsyco",
+        "arm": "raw_dialogue",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm raw_dialogue --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-raw_dialogue --runtime-root /tmp/milai-u2-final-20260929-memsyco-raw_dialogue prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-raw_dialogue.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-raw_dialogue.log",
+        "log_sha256": "8e7845c21e808fbef52cf036ae312149ec26d1469e9cb0aca583e05d4f8328f8",
+        "identity_sha256": "52a62d1f05ca838d507e604e6806d9366b463a4c5f2bf132ced9b04fc62c2012",
+        "manifest_path": "/tmp/milai-u2-final-20260929-memsyco-raw_dialogue/run_manifest.json",
+        "manifest_sha256": "bc6c552f32e6ff1d51a021e50672db4a6ac1a052d1a502739faa6064c574767d",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-raw_dialogue.json",
+        "receipt_sha256": "bce46e52c50ba69221570b94be74afd26513bf64c6bb54251cf4c50a759b30ec",
+        "memory_tools": [],
+        "status": "PREPARED_ZERO_MODEL",
+        "exact_history_units": 1,
+        "reuse_opportunities": 0,
+        "runtime_histories_path": "/tmp/milai-u2-final-20260929-memsyco-raw_dialogue/runtime-histories.json",
+        "runtime_histories_sha256": "a4679d2527c50cf42710af35b75d8a8e789243ed1f805780e6bbcf501ceeca5a",
+        "runtime_tasks_sha256": "e12c13491815623765fd624853635e2a3969fb769bba4da39df66aeda30929ee"
+      },
+      {
+        "benchmark": "memsyco",
+        "arm": "rolling_summary",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm rolling_summary --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-rolling_summary --runtime-root /tmp/milai-u2-final-20260929-memsyco-rolling_summary prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-rolling_summary.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-rolling_summary.log",
+        "log_sha256": "7ede8f6dbb3a4a5959bb1c149adff75b2c0dcc2cbf60a0068dc9f679a703e512",
+        "identity_sha256": "7de1ba9f78dee39c19cd94511779bf24318b94b7f561715ac38486c243ecf7fc",
+        "manifest_path": "/tmp/milai-u2-final-20260929-memsyco-rolling_summary/run_manifest.json",
+        "manifest_sha256": "322c4d81cebb75f0c8517252048df4341b230bf7ba33eb0107f64957c412a1db",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-rolling_summary.json",
+        "receipt_sha256": "6f9a829be28553f973908a8e1b5a7544bb6a1a642ff296263c12b18be42de7a7",
+        "memory_tools": [],
+        "status": "PREPARED_ZERO_MODEL",
+        "exact_history_units": 1,
+        "reuse_opportunities": 0,
+        "runtime_histories_path": "/tmp/milai-u2-final-20260929-memsyco-rolling_summary/runtime-histories.json",
+        "runtime_histories_sha256": "f934f62cb7497b8bb90888a1eca1b7434232f5f225a4bf020101de4cc03a099c",
+        "runtime_tasks_sha256": "e12c13491815623765fd624853635e2a3969fb769bba4da39df66aeda30929ee"
+      },
+      {
+        "benchmark": "memsyco",
+        "arm": "strong_raw_rag",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm strong_raw_rag --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-strong_raw_rag --runtime-root /tmp/milai-u2-final-20260929-memsyco-strong_raw_rag prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-strong_raw_rag.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-strong_raw_rag.log",
+        "log_sha256": "62deb3f07dfcf0e384f46ed6da19408a7f7033cf1448f9960971625acbc7fb8a",
+        "identity_sha256": "55a32f4896a9bcbf1946bff58f3030ce953ead6bd7857da29e5f532ea27dcea7",
+        "manifest_path": "/tmp/milai-u2-final-20260929-memsyco-strong_raw_rag/run_manifest.json",
+        "manifest_sha256": "b493f83f92c8b7814ebbc5547a1906c3b74a20579a7263713a7e00671c0e4225",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-strong_raw_rag.json",
+        "receipt_sha256": "81e668e15d749855b8c508e6d14d2ee472d5d7e4759540504d2cf11dbc5c4e17",
+        "memory_tools": [],
+        "status": "PREPARED_ZERO_MODEL",
+        "exact_history_units": 1,
+        "reuse_opportunities": 0,
+        "runtime_histories_path": "/tmp/milai-u2-final-20260929-memsyco-strong_raw_rag/runtime-histories.json",
+        "runtime_histories_sha256": "35ebb25961bb922de218e7d5d995782adfd0d898262ea480392301401702c420",
+        "runtime_tasks_sha256": "e12c13491815623765fd624853635e2a3969fb769bba4da39df66aeda30929ee"
+      },
+      {
+        "benchmark": "memsyco",
+        "arm": "ordinary_milai",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm ordinary_milai --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-ordinary_milai --runtime-root /tmp/milai-u2-final-20260929-memsyco-ordinary_milai prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-ordinary_milai.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-ordinary_milai.log",
+        "log_sha256": "77eba238e0519783d13863639bfa10b29434b3a9fc3206e2e2b24ef595a88434",
+        "identity_sha256": "7e15e5fcd90ded68e1a518d3c96a7d98a9ba9111db4889a9cee092608c8873f2",
+        "manifest_path": "/tmp/milai-u2-final-20260929-memsyco-ordinary_milai/run_manifest.json",
+        "manifest_sha256": "86821dc7cd4309a19c8368d5e3ff3eb35b1ee661206c0557d1bc08f7318d9d2a",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-ordinary_milai.json",
+        "receipt_sha256": "0a1a57de699abdec992f8f492e36ebe2f4908699c850acfbc2bda04dcd0f965d",
+        "memory_tools": [
+          "manage_memory",
+          "search_memory",
+          "read_memory"
+        ],
+        "status": "PREPARED_ZERO_MODEL",
+        "exact_history_units": 1,
+        "reuse_opportunities": 0,
+        "runtime_histories_path": "/tmp/milai-u2-final-20260929-memsyco-ordinary_milai/runtime-histories.json",
+        "runtime_histories_sha256": "e43e8c17c94d855cafaaeafb148bebf995c7b01a9df16b97dc1530ee643c2022",
+        "runtime_tasks_sha256": "e12c13491815623765fd624853635e2a3969fb769bba4da39df66aeda30929ee"
+      },
+      {
+        "benchmark": "memsyco",
+        "arm": "mem0_native",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python tools/run_unified_benchmarks.py --benchmark memsyco --arm mem0_native --selection data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-memsyco-mem0_native --runtime-root /tmp/milai-u2-final-20260929-memsyco-mem0_native prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-mem0_native.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-memsyco-mem0_native.log",
+        "log_sha256": "0d3c4cacb45d2c0f777c2b923bcbf826ee4a911b70965a8ea9be0784fca1c7c9",
+        "identity_sha256": "8225b32344148dcb4812ed0579762e6b6a4d228b3f7b1ac8ac3e7c958e7f9b30",
+        "manifest_path": "/tmp/milai-u2-final-20260929-memsyco-mem0_native/run_manifest.json",
+        "manifest_sha256": "56fcfc29ce090c055ef511445c43ce490f8d8f57e11f208a2f59bfb194cd9004",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/memsyco-mem0_native.json",
+        "receipt_sha256": "c6a9ac084d01484e7356239df63aeee92100170255956eed06c8f28f3b3367e9",
+        "memory_tools": [],
+        "status": "PREPARED_ZERO_MODEL",
+        "exact_history_units": 1,
+        "reuse_opportunities": 0,
+        "runtime_histories_path": "/tmp/milai-u2-final-20260929-memsyco-mem0_native/runtime-histories.json",
+        "runtime_histories_sha256": "d56e76f64efe24f8f6802880b549f5fad93007f3cb64f206b31b8a38639bf5b8",
+        "runtime_tasks_sha256": "e12c13491815623765fd624853635e2a3969fb769bba4da39df66aeda30929ee"
+      },
+      {
+        "benchmark": "merit",
+        "arm": "full_history",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark merit --arm full_history --selection data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-merit-full_history --runtime-root /tmp/milai-u2-final-20260929-merit-full_history prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-full_history.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-merit-full_history.log",
+        "log_sha256": "4ca78c03afa60b82184d6cba8ad7d5752b8c92213aa84951758b22d03a80cbf2",
+        "identity_sha256": "9f05c17b60ac9263977ee61398fe2ecb9c51ed02fc7ec9cbea5bd341cd887032",
+        "manifest_path": "/tmp/milai-u2-final-20260929-merit-full_history/run_manifest.json",
+        "manifest_sha256": "d6293d83edd189ef47aeb3c27773dd5c52d03c45f17e7dbebf83625c64bf8337",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-full_history.json",
+        "receipt_sha256": "51183d0350a231ed637e366d2cd0c7aa0b51e9cd367a489efc3ef70ec2664d20",
+        "memory_tools": [
+          "read_history"
+        ],
+        "status": "PREPARED_ZERO_MODEL"
+      },
+      {
+        "benchmark": "merit",
+        "arm": "rolling_summary",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark merit --arm rolling_summary --selection data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-merit-rolling_summary --runtime-root /tmp/milai-u2-final-20260929-merit-rolling_summary prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-rolling_summary.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-merit-rolling_summary.log",
+        "log_sha256": "0f371fdea3d94f33e94fbe156b99fc7cce2f59f47820f9c6d47702f9ad29ee03",
+        "identity_sha256": "b832a267dfbb98e7fcf0429982c4e91fd621c8428cafbcabe4882704913b7bb9",
+        "manifest_path": "/tmp/milai-u2-final-20260929-merit-rolling_summary/run_manifest.json",
+        "manifest_sha256": "b421ee731fbb2b542348fe6b9eb8a0497326af040a6cfc7762ae9426bf3ef353",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-rolling_summary.json",
+        "receipt_sha256": "6b5bdf510a713b1b1a7de5af17acb54155486c40e85c3cd1e26d9fb564f49a64",
+        "memory_tools": [
+          "read_history"
+        ],
+        "status": "PREPARED_ZERO_MODEL"
+      },
+      {
+        "benchmark": "merit",
+        "arm": "strong_raw_rag",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark merit --arm strong_raw_rag --selection data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-merit-strong_raw_rag --runtime-root /tmp/milai-u2-final-20260929-merit-strong_raw_rag prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-strong_raw_rag.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-merit-strong_raw_rag.log",
+        "log_sha256": "9706f7004fded5c36ca9043d6720eef79d4b16c5dad99ed4eeb83eb06170100f",
+        "identity_sha256": "b2f69cbf63d86afc31fd5d2485d2852f2085e8a9a2afbb7f3b23f8d944bf3db2",
+        "manifest_path": "/tmp/milai-u2-final-20260929-merit-strong_raw_rag/run_manifest.json",
+        "manifest_sha256": "1d6d12f8496373eb89b5e3faa72a30b83e4f562b71a4d76912c40c1987085a18",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-strong_raw_rag.json",
+        "receipt_sha256": "612bde6cac20904aa78c33c0349603a2dc2a77befd03ed3807b4b3fb8ea8e191",
+        "memory_tools": [
+          "read_history"
+        ],
+        "status": "PREPARED_ZERO_MODEL"
+      },
+      {
+        "benchmark": "merit",
+        "arm": "ordinary_milai",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python tools/run_unified_benchmarks.py --benchmark merit --arm ordinary_milai --selection data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-merit-ordinary_milai --runtime-root /tmp/milai-u2-final-20260929-merit-ordinary_milai prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-ordinary_milai.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-merit-ordinary_milai.log",
+        "log_sha256": "9fae545924ef20d1d7f7687bb945e671d2e4bf5a324820b8a5accf61f5889f00",
+        "identity_sha256": "6c4022e009c16a51ca486dd0f471af709508afc28bc648789bf0ca6d3a74450e",
+        "manifest_path": "/tmp/milai-u2-final-20260929-merit-ordinary_milai/run_manifest.json",
+        "manifest_sha256": "220d704429fcc8ef8d5a0a9acfad69692f8f64fae358d4306661e5e58377e8a0",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-ordinary_milai.json",
+        "receipt_sha256": "9fbf7d964c6b6ea100a8dec31b2143f1457536faa6cbd660af587525bc40d5ab",
+        "memory_tools": [
+          "manage_memory",
+          "search_memory",
+          "read_memory",
+          "read_history"
+        ],
+        "status": "PREPARED_ZERO_MODEL"
+      },
+      {
+        "benchmark": "merit",
+        "arm": "mem0_native",
+        "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python tools/run_unified_benchmarks.py --benchmark merit --arm mem0_native --selection data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json --group smoke --config data/diagnostics/unified-v8-v9-u2/native-common-config.json --run u2-check-merit-mem0_native --runtime-root /tmp/milai-u2-final-20260929-merit-mem0_native prepare --output /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-mem0_native.json",
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/30-prepare-merit-mem0_native.log",
+        "log_sha256": "2a7442dcbffa670dc6aaa29def9b46b846abfebc24bf8b8489344468c4d64368",
+        "identity_sha256": "c51b16324c6864061b04a6d927f188d8b34f3d5a8230cf334c745f0056397356",
+        "manifest_path": "/tmp/milai-u2-final-20260929-merit-mem0_native/run_manifest.json",
+        "manifest_sha256": "eeeea4a4dc93aa27ad7f5bb50ef612bcaf3b61189d752e02bc7773622f9a9472",
+        "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/u2-checks/prepare/merit-mem0_native.json",
+        "receipt_sha256": "fb7ff8f36e1becbee6ecf0668db2e3bc93bcc6ab79ad645f0dd01aa189078050",
+        "memory_tools": [
+          "search_memory",
+          "read_history"
+        ],
+        "status": "PREPARED_ZERO_MODEL"
+      }
+    ]
+  },
+  "engineering_failure_analysis": [
+    {
+      "observed": "LangGraph hook invocation missed cfg",
+      "expected": "RunnableConfig injection supplies current owner/thread",
+      "first_break": "Hook argument injection before model request",
+      "competing_explanations": [
+        "Unsupported hook interface",
+        "Parameter name cfg did not match config injection convention"
+      ],
+      "repair": "Use the existing config argument contract",
+      "evidence": "Actual public graph/MCP continuation passes; final catalog tests pass",
+      "decision": "Continue exposed pilot; no semantic outcome inferred"
+    },
+    {
+      "observed": "Native Mem0 raised wrapped LLMError when its generation admission was refused",
+      "expected": "Preserve completed business and mark memory maintenance incomplete",
+      "first_break": "SDK exception wrapping at maintenance boundary",
+      "competing_explanations": [
+        "Generation cap was miscounted",
+        "Known admission refusal was wrapped by the SDK"
+      ],
+      "repair": "Require an actual recorded refusal and the specific known capacity cause before classifying incomplete; propagate unrelated Store/provider errors",
+      "evidence": "12 MockHost generations, subsequent refused ADD, preserved business and explicit Store failure tests pass",
+      "decision": "Continue exposed pilot; no retry or cross-store transaction claim"
+    }
+  ],
+  "continuous_experiment_ledger_unchanged": {
+    "generation_requests": 3627,
+    "generation_tokens": 4825845,
+    "embedding_tokens": 24962
+  }
+}

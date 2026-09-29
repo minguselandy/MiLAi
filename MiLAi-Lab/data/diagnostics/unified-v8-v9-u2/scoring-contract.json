@@ -1,0 +1,130 @@
+{
+  "kind": "UNIFIED_U2_SCORING_CONTRACT",
+  "status": "PREDECLARED_BEFORE_U2_MAIN_RESULTS",
+  "benchmark": "memsyco",
+  "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+  "judge": {
+    "base_url": "http://127.0.0.1:7862/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 1024,
+    "timeout": 180,
+    "tool_mode": "native",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "judge_attempts": 1,
+  "automatic_retry": false,
+  "concurrency": 1,
+  "answer_freeze": "Freeze all attempted U2 main-comparison answers and incomplete statuses with SHA256 before the first Judge request; score_case verifies exact answer-batch membership.",
+  "score_function": "milai_lab.runners.contextual_scoring.score_case",
+  "messages_function": "milai_lab.scorers.memsyco.judge_messages",
+  "response_format_function": "milai_lab.scorers.memsyco.judge_response_format",
+  "parse_function": "milai_lab.scorers.memsyco.parse_judge",
+  "aggregate_function": "milai_lab.scorers.memsyco.aggregate_track",
+  "source_sha256": {
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12"
+  },
+  "score_order": {
+    "arms": [
+      "raw_dialogue",
+      "strong_raw_rag",
+      "rolling_summary",
+      "ordinary_milai",
+      "mem0_native"
+    ],
+    "cases": "Exact development manifest order within each arm"
+  },
+  "failure_policy": {
+    "host_incomplete": "HOST_INCOMPLETE; success unknown; keep planned denominator; no fabricated answer or Judge call",
+    "judge_incomplete": "JUDGE_UNRESOLVED; success unknown; keep planned denominator; no repeat or prompt repair",
+    "normal_wrong_answer": "Retain original answer and native labels without changing inputs, rubric, method or order"
+  },
+  "runtime_gold_boundary": "EvaluationCase/gold/rubric exist only in the offline Root scoring process, after all method answers are frozen.",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 1024,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": false
+  },
+  "limits": [
+    "Local same-family Qwen Judge; model-specific self-evaluation bias remains.",
+    "Judge JSON-schema transport is the existing pinned Lab adaptation; native rubric and parser are preserved.",
+    "U2 development slice from fixed existing public sources; no independent-family or production claim."
+  ],
+  "comparison_statistics": {
+    "baseline": "FullHistory/RawDialogue",
+    "paired_methods": [
+      "strong_raw_rag",
+      "rolling_summary",
+      "ordinary_milai",
+      "mem0_native"
+    ],
+    "memsyco_primary": "Native per-track pass indicator; 20 planned cases in each of 3 tracks, reported separately",
+    "merit_primary": [
+      "Native episode success with all90 planned episodes",
+      "Native dependent success with all36 planned dependent episodes",
+      "Full arc success with all18 planned arcs"
+    ],
+    "unit": {
+      "memsyco": "source_group_id from frozen selection, within each track",
+      "merit": "complete arc"
+    },
+    "method": "Paired cluster percentile bootstrap; sample groups with replacement, preserve all member cases and both method outcomes; compute difference of case-weighted rates within resampled clusters",
+    "replicates": 10000,
+    "seed": 20260929,
+    "confidence_level": 0.95,
+    "interval_quantiles": [
+      0.025,
+      0.975
+    ],
+    "quantile_definition": "Sorted replicates, linear interpolation at (n-1)*p",
+    "missing": "Keep original planned denominators and report unresolved/missing counts with success-rate lower/upper bounds. If either paired arm has any unscored unit for an endpoint, do not emit its bootstrap CI; do not silently discard unresolved cases.",
+    "inference_limit": "Descriptive uncertainty for this chosen source/generator slice; not a population power guarantee, family generalization, multiple-comparison-corrected discovery, or causally isolated module effect.",
+    "implementation": {
+      "owner": "Root offline analysis only",
+      "path": "artifacts/unified-v8-v9/u2-preparation/paired-cluster-analysis.py",
+      "sha256": "059e293044b3f213a0aceedc5b19d529bdc50da1a0c886fd3a334de8f3555bca",
+      "rng": "Python stdlib random.Random(seed).choices over sorted source-group/arc IDs; reset same seed for each endpoint/method comparison",
+      "checks": "Zero-effect, uniform effect, preservation of unresolved denominator, two correlated clusters and linear-quantile arithmetic checked offline; zero model calls"
+    }
+  },
+  "descriptive_subgroups": {
+    "memsyco": [
+      "native track and declared subtype where available",
+      "full input history_utf8_bytes bands <=4096,4097..8192,>8192; no model-output-based length selection"
+    ],
+    "merit": [
+      "native domain",
+      "native difficulty",
+      "dependent vs independent",
+      "per-arc original public-message count and input byte length alongside results"
+    ],
+    "length_band_counts_before_answers": {
+      "contextual_scope_control": {
+        "4097..8192": 20
+      },
+      "valid_memory_selection": {
+        ">8192": 20
+      },
+      "personalized_memory_use": {
+        "<=4096": 14,
+        "4097..8192": 6
+      }
+    },
+    "policy": "Descriptive denominators and outcomes; do not create subgroup significance claims from sparse groups or select favorable bins after results."
+  }
+}

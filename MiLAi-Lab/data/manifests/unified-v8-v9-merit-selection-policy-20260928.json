@@ -1,0 +1,1081 @@
+{
+  "kind": "UNIFIED_V8_V9_MERIT_PROSPECTIVE_SELECTION_POLICY",
+  "status": "RULE_AND_IDENTITIES_FIXED_BEFORE_GENERATION",
+  "source_url": "https://github.com/smshweta/merit-bench",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "source_files": {
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/d2.py": "15f469f1e4075e51e95287cc43702711e4c2a553cafae615f300eb121644d2bc",
+    "merit/d3.py": "57f88b2f9c40cf6a9bd95214666cbbeca8191753dd1cc2f33778e1147a06f9db",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/memory.py": "2d4b331b80b54484c137c35d7dc3ecae047d660afa076d8ee06946ad2d939f2a",
+    "merit/memory_llm.py": "cc29d65589cdc48fe1ec874e0f31ea0a8d2840a19792e2f0c0b5e128aedf678d",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608"
+  },
+  "source_domain_registry": "merit.domains.DOMAINS; each Domain supplies generate_suite, tool_funcs, tool_schemas, system_prompt",
+  "known_exposed_base_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "prior_exposure_manifest": "data/manifests/local-state-attention-merit-exposure.json",
+  "prior_exposure_sha256": "b2acb978c68cbc4d58d94b51e73b79d3f66cf7310cfb3b9bf667bb9402899418",
+  "selection_rule": "Smallest globally unused nonnegative base_seed, starting5 after recorded exposure0..4. Fixed iteration stage smoke/development/confirmation; domain d1/d2/d3; difficulty easy/hard (confirmation easy/medium/hard); then replicate. Every call native Domain.generate_suite(n_arcs=1,episodes_per_arc=5,dep_ratio=.5,base_seed,difficulty). No answer/outcome filtering; no replacement after model failures. Generate and freeze full arc+world hashes after adapter/method freeze and before first model call. If identical whole world/arc collides with historical hashes, record before models and investigate; do not silently skip.",
+  "groups": {
+    "smoke": {
+      "purpose": "smoke",
+      "arc_count": 6,
+      "planned_episode_count": 30,
+      "cases": [
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 5,
+          "arc_id": "arc5-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=5",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 5,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 6,
+          "arc_id": "arc6-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=6",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 6,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 7,
+          "arc_id": "d2-arc7-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=7",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 7,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 8,
+          "arc_id": "d2-arc8-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=8",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 8,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 9,
+          "arc_id": "d3-arc9-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=9",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 9,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 10,
+          "arc_id": "d3-arc10-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=10",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 10,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        }
+      ]
+    },
+    "development": {
+      "purpose": "development",
+      "arc_count": 18,
+      "planned_episode_count": 90,
+      "cases": [
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 11,
+          "arc_id": "arc11-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=11",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 11,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 12,
+          "arc_id": "arc12-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=12",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 12,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 13,
+          "arc_id": "arc13-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=13",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 13,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 14,
+          "arc_id": "arc14-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=14",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 14,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 15,
+          "arc_id": "arc15-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=15",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 15,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 16,
+          "arc_id": "arc16-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=16",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 16,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 17,
+          "arc_id": "d2-arc17-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=17",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 17,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 18,
+          "arc_id": "d2-arc18-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=18",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 18,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 19,
+          "arc_id": "d2-arc19-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=19",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 19,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 20,
+          "arc_id": "d2-arc20-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=20",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 20,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 21,
+          "arc_id": "d2-arc21-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=21",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 21,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 22,
+          "arc_id": "d2-arc22-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=22",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 22,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 23,
+          "arc_id": "d3-arc23-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=23",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 23,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 24,
+          "arc_id": "d3-arc24-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=24",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 24,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 25,
+          "arc_id": "d3-arc25-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=25",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 25,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 26,
+          "arc_id": "d3-arc26-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=26",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 26,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 27,
+          "arc_id": "d3-arc27-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=27",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 27,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 28,
+          "arc_id": "d3-arc28-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=28",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 28,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        }
+      ]
+    },
+    "confirmation": {
+      "purpose": "confirmation",
+      "arc_count": 36,
+      "planned_episode_count": 180,
+      "cases": [
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 29,
+          "arc_id": "arc29-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=29",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 29,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 30,
+          "arc_id": "arc30-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=30",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 30,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 31,
+          "arc_id": "arc31-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=31",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 31,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "base_seed": 32,
+          "arc_id": "arc32-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=32",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 32,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "medium",
+          "base_seed": 33,
+          "arc_id": "arc33-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=33",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 33,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "medium",
+          "base_seed": 34,
+          "arc_id": "arc34-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=34",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 34,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "medium",
+          "base_seed": 35,
+          "arc_id": "arc35-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=35",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 35,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "medium",
+          "base_seed": 36,
+          "arc_id": "arc36-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=36",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 36,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 37,
+          "arc_id": "arc37-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=37",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 37,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 38,
+          "arc_id": "arc38-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=38",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 38,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 39,
+          "arc_id": "arc39-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=39",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 39,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d1",
+          "difficulty": "hard",
+          "base_seed": 40,
+          "arc_id": "arc40-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=40",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 40,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 41,
+          "arc_id": "d2-arc41-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=41",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 41,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 42,
+          "arc_id": "d2-arc42-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=42",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 42,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 43,
+          "arc_id": "d2-arc43-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=43",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 43,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "base_seed": 44,
+          "arc_id": "d2-arc44-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=44",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 44,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "medium",
+          "base_seed": 45,
+          "arc_id": "d2-arc45-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=45",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 45,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "medium",
+          "base_seed": 46,
+          "arc_id": "d2-arc46-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=46",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 46,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "medium",
+          "base_seed": 47,
+          "arc_id": "d2-arc47-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=47",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 47,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "medium",
+          "base_seed": 48,
+          "arc_id": "d2-arc48-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=48",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 48,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 49,
+          "arc_id": "d2-arc49-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=49",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 49,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 50,
+          "arc_id": "d2-arc50-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=50",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 50,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 51,
+          "arc_id": "d2-arc51-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=51",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 51,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "base_seed": 52,
+          "arc_id": "d2-arc52-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=52",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 52,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 53,
+          "arc_id": "d3-arc53-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=53",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 53,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 54,
+          "arc_id": "d3-arc54-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=54",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 54,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 55,
+          "arc_id": "d3-arc55-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=55",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 55,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "easy",
+          "base_seed": 56,
+          "arc_id": "d3-arc56-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=56",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 56,
+            "difficulty": "easy"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "medium",
+          "base_seed": 57,
+          "arc_id": "d3-arc57-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=57",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 57,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "medium",
+          "base_seed": 58,
+          "arc_id": "d3-arc58-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=58",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 58,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "medium",
+          "base_seed": 59,
+          "arc_id": "d3-arc59-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=59",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 59,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "medium",
+          "base_seed": 60,
+          "arc_id": "d3-arc60-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=60",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 60,
+            "difficulty": "medium"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 61,
+          "arc_id": "d3-arc61-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=61",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 61,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 62,
+          "arc_id": "d3-arc62-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=62",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 62,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 63,
+          "arc_id": "d3-arc63-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=63",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 63,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        },
+        {
+          "domain": "d3",
+          "difficulty": "hard",
+          "base_seed": 64,
+          "arc_id": "d3-arc64-000",
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=64",
+          "generator_arguments": {
+            "n_arcs": 1,
+            "episodes_per_arc": 5,
+            "dep_ratio": 0.5,
+            "base_seed": 64,
+            "difficulty": "hard"
+          },
+          "full_arc_preserved": true,
+          "input_generation_status": "NOT_GENERATED",
+          "execution_status": "NOT_RUN"
+        }
+      ]
+    }
+  },
+  "no_memory_check": "Official generation leak_check plus actual NoMemory frozen smoke trajectory; disclose inherited template/world/tool priors and pre_satisfied separately. No assumption that no-memory success is zero.",
+  "input_gold_boundary": "Full generated arc contains offline checker_args/golds. Adapter must derive runtime-only user messages and actual tool/world schema, never pass scoring metadata to Host/MCP. Full arc and SQLite world remain ignored artifacts; public manifest provides IDs/arguments/hashes.",
+  "limits": [
+    "Internal prospective source groups, not official split.",
+    "Distinct seeds are new instances from the same published generator/templates; not independent task families.",
+    "All original five episodes/messages and checker semantics retained including upstream merge behavior.",
+    "No new native arc generated or model called while fixing this rule."
+  ]
+}

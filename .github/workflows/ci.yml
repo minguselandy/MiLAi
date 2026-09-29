@@ -206,6 +206,10 @@ jobs:
           --ignore=tests/unit/test_persistent_memory.py \
           --ignore=tests/unit/test_langmem_application.py \
           --ignore=tests/unit/test_external_memory_v26.py \
+          --ignore=tests/unit/test_unified_benchmarks.py \
+          --ignore=tests/unit/test_benchmark_memories.py \
+          --ignore=tests/unit/test_merit_native.py \
+          --ignore=tests/unit/test_simplemem_native.py \
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
       - name: Upload Lab pytest evidence
         if: always()
@@ -247,8 +251,10 @@ jobs:
           uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
           uv run --no-sync mypy tools/run_persistent_memory.py
+          uv run --no-sync mypy src/milai_lab/providers/merit_metered.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tools/run_unified_benchmarks.py
+          uv run --no-sync pytest -q tests/unit/test_unified_benchmarks.py tests/unit/test_merit_native.py tests/unit/test_benchmark_memories.py
           uv run --no-sync mypy src/milai_lab
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/baselines/benchmark_memories.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_local_state_attention.py tests/unit/test_langmem_application.py tests/unit/test_local_state_attention_read_probe.py tests/unit/test_frozen_action_continuation.py tests/unit/test_writer_policy.py tests/unit/test_state_update_probe.py tests/unit/test_fixed_state_read.py tests/unit/test_fixed_state_update.py tests/unit/test_shared_record_use.py tests/unit/test_persistent_memory.py tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external:
@@ -269,8 +275,10 @@ jobs:
           uv pip install --python .venv/bin/python --no-deps https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl
           HF_HUB_DISABLE_TELEMETRY=1 uv run --no-sync python tools/prepare_external_memory_v26_assets.py --prepare
           uv run --no-sync python -c 'import langmem, mem0, spacy'
-          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py
-          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py
+          uv pip install --python .venv/bin/python -r data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt
+          uv run --no-sync python tools/prepare_simplemem_text_source.py --prepare
+          uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/simplemem_native.py
+          uv run --no-sync pytest -q tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py
 
   lab-langmem-provenance:
     name: Lab LangMem provenance B1

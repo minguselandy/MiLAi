@@ -9,6 +9,7 @@ import json
 import sys
 from dataclasses import asdict
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 from milai_lab.harness.contextual_artifacts import read_json
@@ -35,11 +36,23 @@ def load_exposed_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, An
 
 def load_frozen_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, Any, Any]:
     """Regenerate one declared arc and bind it to its frozen bytes and world."""
+    return _load_arc(selection_path)
+
+
+def load_native_domain_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, Any, Any]:
+    """Opt-in official DOMAINS loader; the historical d1 loader is unchanged."""
+    return _load_arc(selection_path, domain_registry=True)
+
+
+def _load_arc(selection_path: Path, *, domain_registry: bool = False,
+              ) -> tuple[dict[str, Any], Any, Any, Any, Any]:
     selection = read_json(selection_path)
     arguments = selection["generator_arguments"]
     if (selection["dataset"] != "MERIT"
             or selection["source_commit"] != "293933d96b1d1849e1f20d1bb324def5de9ed33f"
-            or selection["generator"] != "merit.arcs.generate_suite"
+            or selection["generator"] != ("merit.domains.DOMAINS.generate_suite"
+                                           if domain_registry else "merit.arcs.generate_suite")
+            or (domain_registry and selection.get("domain") not in {"d1", "d2", "d3"})
             or not isinstance(arguments, dict)
             or set(arguments) != {"n_arcs", "episodes_per_arc", "dep_ratio",
                                   "base_seed", "difficulty"}
@@ -63,7 +76,8 @@ def load_frozen_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, Any
         package = importlib.util.module_from_spec(spec)
         sys.modules[package_name] = package
         spec.loader.exec_module(package)
-    parts = ("arcs", "tools", "metrics", "runner")
+    parts = (("domains", "memory", "metrics", "runner") if domain_registry else
+             ("arcs", "tools", "metrics", "runner"))
     modules = [importlib.import_module(f"{package_name}.{part}") for part in parts]
     if (
         package.__file__ is None
@@ -76,8 +90,22 @@ def load_frozen_arc(selection_path: Path) -> tuple[dict[str, Any], Any, Any, Any
         ) for name, module in sys.modules.items() if name.startswith(package_name + "."))
     ):
         raise ValueError("MERIT_IMPORT_OUTSIDE_PINNED_ROOT")
+    arcs: Any
+    tools: Any
+    metrics: Any
+    native_runner: Any
     arcs, tools, metrics, native_runner = modules
-    (arc,) = arcs.generate_suite(**selection["generator_arguments"])
+    if domain_registry:
+        domain = arcs.DOMAINS[selection["domain"]]
+        memory_module = tools
+        tools = SimpleNamespace(TOOL_SCHEMAS=domain.tool_schemas, TOOL_FUNCS=domain.tool_funcs)
+        native_runner = SimpleNamespace(SYSTEM_PROMPT=domain.system_prompt,
+            run_episode=native_runner.run_episode, MAX_TURNS=native_runner.MAX_TURNS,
+            memory_module=memory_module)
+        generate = domain.generate_suite
+    else:
+        generate = arcs.generate_suite
+    (arc,) = generate(**selection["generator_arguments"])
     payload = json.dumps(asdict(arc), ensure_ascii=False, sort_keys=True,
                          separators=(",", ":")).encode()
     pinned = selection["private_artifacts"]

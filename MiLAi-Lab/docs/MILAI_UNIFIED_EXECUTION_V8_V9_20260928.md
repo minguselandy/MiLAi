@@ -1,0 +1,332 @@
+---
+
+> **2026-09-29 当前状态：PAUSED_BY_USER。** 用户要求暂停实验并生成报告，实际Goal已paused。
+> [总体暂停报告](MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md)及[机器状态](../data/manifests/unified-v8-v9-pause-summary-20260929.json)优先于下文历史ACTIVE／Continue。
+> 仅整理报告与已授权Git发布；未有新的明确恢复指令，不启动实验、开发、下载或部署。完整Goal尚未完成。
+
+status: ACTIVE_U2_FIRST_TABLE_COMPLETE_NEXT_STAGE_PENDING
+scope: MiLAi-Lab / RESEARCH_PROTOTYPE
+plan_sha256: b496818cc94dc5a3eee83f7795f8afb7f145cc16aa628f31c52d7e33251a948c
+base_commit: 77dfc2f43f2307bb649cdbee9d62a97e5863fac0
+research_goal: NOT_ACHIEVED
+product: NO_GO
+---
+
+# V8/V9 统一计划执行记录
+
+实际 Goal 明确授权详细阅读并执行[统一计划](MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md)。
+最新用户补充：可以设置 vLLM、更改模型配置；vLLM 模拟 Host 的推理，Host 仍以 Agent 模式通过 MCP 工具调用 MiLAi。
+此明确授权优先于旧阶段禁止调整 vLLM 的限制。旧 v7 结案、旧实验失败及原计划字节保留。
+Root 已完整阅读统一计划 1266 行、v9 609 行和 v8 1185 行；三份原文件 SHA 保存在 U0 来源清单，原字节不改。
+
+本 Goal 覆盖 U0—U6 的适用工作，不能在 U0/U1 smoke 通过后缩成更小目标。
+最低交付包含 MERIT、MemSyco 的原生适配和独立比较切片、至少三个强简单对照与一个真实外部系统。
+正常模型低分不阻止比较；U3/U4/U5 按实际证据和依赖门槛进入，未触发必须说明，不能冒充完成能力。
+
+## 初始现场与职责
+
+Luna high 从 `77dfc2f` 建立隔离树 `/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9`，
+分支 `feat/lab-unified-benchmarks-v8-v9-20260928`。原本地 main 为 `9515017`，远端 main 为 `07cc364f`；
+PR70/71 仍 draft/open、未合并，分别为 `c6f335fe`、`77dfc2f`。没有 pull/reset/merge 原树。
+原树十二份未跟踪计划/复盘及 v27 草稿保留。刚才两次 Goal 切换只产生只读核对，无后台实验或下载任务。
+
+Root 负责文档、原生选择/曝光清单、冻结、全部真实 Host/embedding/Judge 调用、评分、账本与验收。
+复用 Sol xhigh 作为唯一源码/config/runner/CI 负责人；Luna high 负责必要公开资源和 Git 发布。
+Astra xhigh 仅在具体难题存在时启用，当前未另派常驻审计。
+
+## 新增 MCP 验收边界
+
+目标链为原生合法输入 → Host Agent/vLLM 实际模型请求 → Agent 工具选择 → MCP 请求 →
+同一 MiLAi strict CRUD/Store → MCP 实际回执 → Host 续接与后续 session 使用。
+不能把函数直调、模拟 MCP 或打印工具名当成该链成立。MCP 只暴露已有逻辑入口，不增加第二套长期事实库。
+Lab 原型边界保留，不借此迁移 Product 或导入 Product 私有实现。
+
+后端历史摄入仍遵守 benchmark 原生 boundary，不把历史对话变成新实时命令。
+自主 Agent、原生 episode-end writer、后端共同 reader 是不同方法合同，分别记录。
+本轮要在真实 MCP 链成立后再开展正式模型比较；scorer/gold 保持离线。
+
+## 第一个实际断点与竞争解释
+
+现有 `langmem_merit.py` 直接使用 LangGraph/strict tools，尚未证明 Agent→MCP→MiLAi 的实际传输链。
+现有 MemSyco loader/scorer 存在，但其旧 `screen/confirmation` 清单及旧 recipe 不能自动代表本轮原生接通。
+
+解释一：已有研究路径只缺 MCP 薄传输和原生接口映射，可保留 Store/CRUD/Agent/计账。
+解释二：已有 Product MCP 路径与研究 MemoryService 不是同一合同；直接替换可能引入额外能力或改变比较，
+需明确服务身份与调用边界，不能因为名称相同就复用为已完成能力。
+Sol 已实现最小 MCP 切片：同一 runtime 内启动 loopback HTTP MCP，复用原 Store、embedding client 和单一 RunBudget。
+Agent 的 manage/search/read 以及程序发起的 records/search/exact 取材均走实际 MCP；调用来源分开记录。
+后者不算 Agent 自主工具选择，服务端观测审计不回流模型。旧 direct 配方保留以复现历史。
+Root 同时核对原生资源、曝光、服务和评分，不先运行大矩阵。
+
+[MCP工程检查](../data/manifests/unified-v8-v9-mcp-engineering-checks-20260928.json)已通过20个去重窄测，
+覆盖真实HTTP CRUD／拒绝／分页／owner／重开、JSON与native Graph、单一预算与真实Provenance上下文、旧默认邻接。
+Ruff、3文件Mypy、验证矩阵、两项边界及diff检查通过；两份实际配置完成临时目录零模型prepare。
+Root核对5个实现／测试文件及27个检查制品的SHA一致，未重复运行已通过检查。
+底层Store异常按RPC失败暴露，不自动重试；UUID参数拒绝使用MCP invalid_arguments格式，合法回执内容保持原样。
+HTTP和SDK超时共同取现有Host／embedding超时最大值；没有独立账本。
+初期参数拒绝接线问题及测试断言／静态检查失败均已留存。检查使用MockHost/embedding、内存Store及本地SQLite，
+没有真实Host、embedding、Judge或共享Postgres调用，不代表语义效果。
+源码已由 Luna 发布为 `196fa0136effc442b33a346df4bd17631807542d`，Root 核对远端 SHA 一致。
+
+## 原生资源、曝光和事前选样
+
+[U0 来源清单](../data/manifests/unified-v8-v9-u0-sources-20260928.json)记录 Luna 的资源回执、源码／许可、
+环境和历史四个首断点。MERIT 固定 `293933d96b1d1849e1f20d1bb324def5de9ed33f`，MemSyco 固定
+`fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221`，均与核对时官方 HEAD 一致；已有源码和数据可复用，0下载／安装。
+Mem0 使用现有 v26 精确 pin 时须明确不是最新上游；SimpleMem 源码已在本地，第二系统待首表完成后选择接入。
+MemSyco 顶层为 MIT，但数据卡未单独声明数据许可；本地评估使用已有官方数据，公开只提供 IDs/hash 和获取说明，
+不把代码许可写成已单独核实的数据再分发许可。
+
+[曝光清单](../data/manifests/unified-v8-v9-exposure-20260928.json)保守排除旧 MemSyco 24 个已声明 ID
+所在的全部 20 个来源／历史连通组（327 行），其中 13 个 ID 有实际运行／结果关联。
+以完全相同 source_id 或完整 dialogue hash 连成组，再按固定 SHA 排序，禁止组跨 smoke/dev/confirmation。
+同阶段不同 task 的共享组仍按相关单位报告。实际[选择清单](../data/manifests/unified-v8-v9-memsyco-subsets-20260928.json)
+为 smoke **6题/6组**、development **60题/54组**、预留 confirmation **75题/74组**。
+valid-selection 的 350 行只有 45 个连通组，排除历史 8 组后，2 smoke＋20 dev 只剩 15 confirmation；
+因此确认集改为 scope30＋valid15＋personalized30，不能重复来源凑90题。两次零模型准备失败及调整已记录；未按答案或分数选样。
+
+MERIT 官方 `DOMAINS` 提供 d1/d2/d3 三个独立入口及其 tools/world/system prompt；每个原生五 episode 完整保留。
+补充扫描7172份JSON/Markdown元数据（约253MB），只发现已知arc0—4，未发现 d2/d3 运行身份。
+[前瞻规则](../data/manifests/unified-v8-v9-merit-selection-policy-20260928.json)固定按阶段、域、难度依次取未用 seed：
+smoke6 arcs（5—10）、dev18（11—28）、confirmation36（29—64）。尚未生成新 arc；源码冻结后生成原字节并核对 hash。
+新 seed 仍共用官方模板，不能称为独立任务家族。官方 leak check 与实际 NoMemory 轨迹、pre_satisfied 分别记录。
+
+原生基线核查：MERIT starter RollingSummary 只是截取，升级版 LLMSummary 对单集作摘要后继承追加逻辑，
+不能冒充联合旧摘要重写的强基线；真正 rolling summary 必须另名、计入生成费用。
+MemSyco 的 gold memory/evaluation 仅供离线 scorer，原生 question 不进建库，历史不按实时命令重放。
+原生 reader 使用 temperature0.2；本轮拟统一为本地 temperature0/max4096/thinking=false，
+此为明确的本地模型配置差异，不称官方模型榜单复现。正式请求仍待方法／协议冻结。
+Root 已离线核对三类 Judge prompt 与固定上游常量逐字一致。使用固定本地 tokenizer、原生 reader system/date 和完整对话格式，
+smoke6题输入为285—1763 tokens，dev60题为291—2002 tokens；包含4096输出预留和512安全量后均可完整容纳。
+没有按长度筛题、裁剪历史或降低容量制造选择压力；confirmation 内容未用于这项容量检查。
+
+### MemSyco 原生 reader 与 Agent 接口裁决
+
+原生 `run_one` 先 `build_baseline_context(history, question)`，再以普通 reader 回答；最新用户要求实际 Agent→MCP。
+Root 将此具体接口冲突交给复用 Astra xhigh 一次分析，未设常驻审计。两种解释／可检验目标分别为：
+共同 reader 可以识别后端形成／取材的差异；加入 Agent 循环则同时改变查询规划、额外计算、工具目录和呈现。
+采用以下最小合同，交 Sol 收敛实现：
+
+- 主表：harness 在原生 boundary 提交完整归档历史，MiLAi Host Agent 自主决定 CRUD，经真实 MCP 和同一 Store 执行；
+  不含目标 question/gold，不把归档发言当实时命令。称“边界触发、Agent决定操作”，不宣称自主发现维护时机。
+- 主表查询：adapter 通过同一 MCP 的 program search 取得材料，使用官方 reader prompt/context label/question 和 scorer。
+  明确 origin=material；共同 reader 后端系统比较不证明 Host 自主选择检索。
+- Agent 扩展：只复用 smoke 三任务各2题及其合法形成快照，运行实际不同的 MiLAi／ordinary 一臂，允许自然零调用；
+  原问题与 scorer 保留，回答改为 Agent 工具循环，单列身份、效果和成本，不按 gold 强制 search。
+- RawDialogue、摘要、RAG、外部系统不扩成第二张 Agent 大矩阵。U2 60题／18完整arcs仍须完成；
+  这6题扩展及前述3消息接线诊断都不能替代全 Goal。MERIT 持续承担真实业务工具／world 的 Agent 行动比较。
+
+正式运行前还需固定形成时机／工具权限、reader模型参数、query来源/top-k/材料预算、来源身份及合法缓存键。
+问题／生成答案不得污染历史形成快照；复用只计一次实际构建，并同时报告冷启动成本与合法查询机会摊销值。
+形成、检索、Agent续接、embedding、MCP、Judge、失败和缓存全部计账；主表与扩展不合并为纯记忆组件收益。
+
+## 服务与连续成本起点
+
+只读 GET 已核实 Host7860：vLLM0.27.1、Qwen3.6-35B-A3B-FP8、容量65536。
+容器 `25f0a0dee927`（pid2160380）以同一 `/cra/qwen36-35B` 资产运行，TP2、gpu_memory_utilization0.9、
+reasoning_parser=qwen3、default enable_thinking=false，无 auto-tool-choice/tool-call-parser。
+Embedding7861：vLLM0.9.1、bge-m3；已有 reranker7961，是否纳入强基线待接口和费用核对。
+U0 未发任何 generation/embedding/Judge 请求。配置修改先记录原/新命令、资产、parser 和回退，不混用旧运行身份。
+
+在用户允许 vLLM 配置变更后，Root 记录[首次准备](../data/manifests/unified-v8-v9-host-service-20260928.json)，
+以原镜像／权重、TP2、65536、non-thinking，在GPU2/3和loopback7862启动独立 native 服务，
+启用 auto tool choice＋qwen3_coder。旧7860、embedding和reranker未改。
+首次启动因 CUDA 初始化后每卡 free35.37GiB 小于0.9要求的35.54GiB而失败，未产生模型调用。
+保留退出容器、完整日志、两种解释与首断点；[R2准备](../data/manifests/unified-v8-v9-host-service-r2-20260928.json)
+只把新服务 gpu_memory_utilization 改为0.88，其他模型／生成参数不变。
+[R2启动验收](../data/manifests/unified-v8-v9-host-service-r2-ready-20260928.json)已确认7862返回预期模型／65536、
+generation和prompt计数为0；旧7860／7861／7961均可访问。此为HTTP就绪，不是原生工具语义验收。
+回退是停止新容器，保留日志和原服务。权重仅复用本地资产；小配置／tokenizer文件已hash，完整权重revision仍unknown。
+初始化和编译消耗了GPU资源；0实验调用不表示0运维成本，GPU小时和货币费用未独立计量。
+
+接线验收采用[独立最小协议](../data/diagnostics/unified-v8-v9-mcp-smoke/protocol.json)：
+原样复用已曝光 v7 save_plan 两消息与 read_only 一消息，以 native＋实际 MCP 运行；先发布源码、输入和协议，
+随后在同一源码提交下冻结准备身份，再发送真实请求。
+它验证实际保存、fresh-session材料交付和合法no-write，不计入原生benchmark或协议效果结论。Root独自执行、离线评分；
+Sol 的真实loopback HTTP检查使用MockHost，不计为真实Host语义成功。
+
+权威账本仍在原树 `artifacts/ser-v20/budget.json`，SHA
+`f9efa35e1a83f4c4300f03f28394a584868f8955b320e960dc3f8bb7a4ce1592`。
+起点 **3301 generation calls / 4,205,203 generation tokens / 23,570 embedding tokens**；unknown usage=0。
+所有新调用继续追加，真实模型 HTTP 并发1；开发代理成本分开。私密 DSN 仅按需注入，不输出。
+
+## 首轮实际 MCP 接线失败与最小修复
+
+[R1 失败记录](../data/manifests/unified-v8-v9-mcp-r1-failure-20260928.json)保留冻结身份、实际调用与持久化证据。
+Root 在上述源码提交下先冻结完整两脚本，再开始运行。首个 save_plan 消息的 native HTTP200 返回合法
+`manage_memory` CREATE；实际 Host-origin MCP HTTP200、embedding 和 strict Store 写入成功，程序经 MCP
+重新读取到了同一个真实 record ID。没有业务动作。但是第二次生成前，本地容量模板对
+OpenAI `function.arguments` JSON 字符串调用 `items`，抛出 TypeError；续接 HTTP 尚未发出。
+该 turn 为 INTERRUPTED_UNKNOWN，phase FAILED，没有最终回答，第二个 session 和 read_only 均未运行。
+实际 CREATE 保留，不能以它替代完整任务成功，也不将 R1 与后续成功片段拼接。
+
+两个竞争解释是：合法 OpenAI 字符串参数缺少本地 HF 模板所需的对象适配；或请求 renderer 重复编码参数。
+Sol 已用实际失败 checkpoint 零模型复现第一种不匹配，并排除重复编码：一次 JSON 解码与原参数完全相等。
+首请求的已记录请求对象一致，且本地1391 tokens等于实际服务usage；JSON邻接路径正常。部署中vLLM源码也明确执行这项转换。
+最小通用候选只修改 tokenizer 计数副本，保留原 checkpoint、实际工具 JSON、模型参数、输入和评分。
+窄测与源码发布后，按[事前 R2 协议](../data/diagnostics/unified-v8-v9-mcp-smoke/protocol-r2.json)
+在全新身份／namespace 重跑同一完整两脚本；不是修改失败样本或自动重试。决策为 Continue 最小工程修复。
+已曝光合成输入、单模型及工程中断均限制结论；此诊断不替代 U1/U2 原生比较。
+
+[修复窄测回执](../data/manifests/unified-v8-v9-capacity-repair-checks-20260928.json)已确认6个独立目标通过、0 skip，
+Ruff／目标Mypy／矩阵／diff检查通过。实际checkpoint离线重放的native计数为1391／1788，JSON仍为1092／1476；
+原checkpoint、请求对象和audit保持不变。空串／缺省／JSON null同服务规则转换，非法JSON仍报错。
+Root只核对3个源码／测试文件及全部检查制品哈希，没有重跑测试；第二请求的实际服务计数仍待R2验证。
+
+R1 新增 **1 generation / 1,455 generation tokens / 1 embedding / 31 embedding tokens**，unknown usage=0。
+连续账本为 **3302 generation / 4,206,658 generation tokens / 23,601 embedding tokens**，SHA
+`f4ff524f60fd237a1624e2048dcc968c17871d836d9c3f4a7e8ee040d5086571`。
+失败消耗与实际持久化全部保留；没有清零或撤销费用。
+
+## 修复后的真实接线验收
+
+容量修复已由 Luna 发布为 `3f1715aaf8de961fc9aadc8e9abe8e8338157831`，Root 独立核对远端一致。
+同一提交下冻结 R2，完整两脚本／三消息通过9项任务义务，另有3项非失败诊断。
+实际 CREATE、MCP回执、Host续接及新session材料交付已关联；只读题没有写入或业务动作。
+四次实际请求的本地计数与服务usage完全相等。详见[接线结果报告](MILAI_UNIFIED_MCP_FUNCTIONAL_RESULTS_20260928.md)
+及[R2逐项证据](../data/manifests/unified-v8-v9-mcp-r2-results-20260928.json)。
+R1费用／副作用／未运行项保留，R2全新namespace，不拼接轨迹。MCP程序取材不冒充Host自主检索。
+截至R2，本Goal含失败新增5 generation／7613 tokens、2 embedding／62 tokens；连续账本3306／4212816／23632。
+仅工程接线目标通过；完整原生U1、独立U2及适用U3—U6仍未完成，当前继续原生adapter开发。
+[U1协议草稿](MILAI_UNIFIED_U1_PROTOCOL_20260928.md)已记录原题范围、原生参考、归档形成权限、共同reader与单臂Agent扩展、
+模型／scorer／成本合同。Sol已完成两个薄runner及共享MCP backend；Luna已在[独立环境](../data/manifests/unified-v8-v9-native-reference-env-20260928.json)
+安装72个带哈希锁定包并通过依赖／真实模块导入检查，保留历史foundation和主锁。
+原生reference使用Python3.12.11／LiteLLM1.100.1／OpenAI2.54.0，MiLAi保持原环境；差异明确进入identity。
+现已完成[U1工程窄检查](../data/manifests/unified-v8-v9-u1-engineering-checks-20260928.json)：29个唯一目标、0skip；
+实际SDK六路径dry-run、六CLI零模型prepare、必要单次离线构建通过。源码已停笔等待发布；Root核对15工程文件及46项制品哈希。
+完整MERIT输入或具体运行身份仍待冻结，当前没有开始原生benchmark模型调用。
+
+U1适配器及协议已由Luna发布为`aa7a25ed203cc9b3a93801d7ac00ae7bfa255c83`，Root核对远端一致。
+随后按原规则生成[六个完整MERIT inputs](../data/manifests/unified-v8-v9-merit-smoke-inputs-20260929.json)：
+三域easy/hard、seeds5—10，共30 episodes、12 dependent、38公开消息；官方leak check通过，arc/world历史及批内哈希无碰撞。
+原始arc和world留在ignored artifacts，公开仅身份／生成参数／哈希，0模型或embedding调用。
+输入和运行顺序将在发布后于同一HEAD正式prepare；再冻结全部身份、scorer、namespace和连续账本，才开始U1。
+
+## U1 原生切片完成
+
+输入由Luna发布为`94d3b18ef6b8c1dfd6019703df8e84163628c360`，Root核对远端一致；Fast36458779219 success。
+同一HEAD六份正式prepare和完整执行freeze后，Root依固定顺序完成36 Host jobs，再冻结18份MemSyco答案并完成单次Judge。
+详见[U1结果及首断点报告](MILAI_UNIFIED_U1_NATIVE_RESULTS_20260929.md)与[逐项机器证据](../data/manifests/unified-v8-v9-u1-native-results-20260929.json)。
+MERIT NoMemory16/30、原生FullReplay28/30、ordinary/MiLAi26/30，dependent分别0/12、12/12、10/12；
+全部pre_satisfied为false。MiLAi六arc零普通记忆写入，能访问完整合法历史，不能声称持久维护或SER效果。
+额外D2失败来自实际工具参数丢失版本前缀；共同D3邮件失败来自原生大小写敏感检查。原分数/世界/失败保留。
+MemSyco共同reader按scope/valid/personalized为RawDialogue1/2、1/2、2/2，MiLAi1/2、2/2、2/2；
+只读Agent扩展0/2、2/2、0/2，四题没有检索就要求补背景。Judge局限和两种竞争解释均已记录。
+U1新增321 generation/613029tokens/1330embeddingtokens，与真实HTTP及连续账本逐项核平；
+连续累计3627/4825845/24962，当前unknown usage0，历史嵌套账本保留。本Goal含先前MCP失败和验收新增326/620642/1392。
+G0/G1在本切片范围通过；当前进入独立U2实现，不能以smoke关闭完整Goal。
+
+## U2 实现与试跑准备
+
+[U2协议](MILAI_UNIFIED_U2_PROTOCOL_20260929.md)固定五方法：完整历史、真实滚动摘要、BM25+dense原文RAG、ordinary/MiLAi合并和原生Mem0。
+Sol已完成同一MERIT公开graph、合法当前query、共享12次generation容量、MemSyco独立归档build与只读共同reader。
+相同source group不能冒充相同历史：development为60份不同dialogue，预期0跨题exact-history复用。
+简单三臂只暴露原生业务工具及MCP read_history；ordinary保留strict CRUD/search/exact/history，Mem0提供实际native search/history。
+后端自动取材与Host自主调用分别记录，Mem0固定SDK自动ADD-only能力不扩大为同ID维护。
+
+首次窄检暴露LangGraph hook参数注入名和Mem0包装容量拒绝两个接线问题，已最小修复，失败日志保留；
+mock零向量/缺run_manifest及静态检查问题也保留。真实SDK使用本地Qdrant/SQLite和MockHTTP，
+已验证业务完成后维护容量拒绝保留实际结果、真实Store异常继续抛出。没有真实模型、embedding、Judge或共享Postgres调用。
+最终两benchmark×五臂共10份零模型prepare成功，源码已停笔等待发布和Root执行freeze。
+[工程回执](../data/manifests/unified-v8-v9-u2-engineering-checks-20260929.json)记录26个去重目标通过、0skip及首次失败；
+Root核对15工程文件、57检查制品和10份prepare源码身份全部哈希一致，没有重跑测试。
+[现external环境身份](../data/manifests/unified-v8-v9-u2-external-environment-20260929.json)已核对149个固定Mem0源码文件及既有BM25/spaCy资产，0下载/安装。
+Root先用已曝光U1首题与首arc做10-job小pilot；具体冻结前不运行。独立MERIT18 arcs输入仍未生成，完整development矩阵NOT_RUN。
+账本仍为3627 generation/4,825,845tokens/24,962embeddingtokens。第二外部与适用U3—U6仍待完成；Goal保持active。
+
+## 全范围需求与当前状态
+
+| 要求 | 证明完成所需证据 | 当前 |
+| --- | --- | --- |
+| U0 身份/资源/许可/曝光 | 源码、模型、数据、scorer 哈希；历史曝光和无模型账本 | COMPLETE_FOR_U1；U2固定Mem0环境身份已核对，具体执行另冻 |
+| Host Agent 真实 MCP | 实际模型提案、MCP 请求/回执、同一 Store 和后续回答 | R2 PASSED 2脚本/3消息/9任务义务；R1失败保留 |
+| U1 MemSyco | 三类各2原题、原生参考及MiLAi、完整历史、原生评分和成本 | COMPLETE；18/18答案单次评分，非满分 |
+| U1 MERIT | 三域easy/hard各1完整arc、原生tools/world/checker、两路径、leak check | COMPLETE；18/18 arc运行、90 episodes |
+| U2 独立比较 | 60题/18arcs建议规模，正式ID另冻；强原文RAG、真实摘要、完整历史、ordinary/候选和Mem0 | ENGINEERING_READY；pilot与正式模型NOT_RUN |
+| 第二外部系统 | A-MEM/SimpleMem择一，在首表可用后接入，原生能力和成本可追溯 | NOT_RUN |
+| U3-P 协议 | 需要时独立冻结J/N和thinking；自动选择而非强制调用 | CONDITION_OPEN |
+| U3-O 对象 | 原生真实key失败触发；原工具主表和ref扩展分开 | OBSERVED_PARAMETER_PREFIX_LOSS；待U2决定独立诊断 |
+| U3-W 写入 | 实际漏维护触发；同服务、可信触发、正负例与全成本 | CONDITION_OPEN |
+| U3-R 恢复 | 相关行动需求触发；partial/unknown、进程重开、实际ID及无重复副作用 | CONDITION_OPEN |
+| U4 机制 | 真信号/瓶颈；MAB6k/32k及必要固定bank/State/writer/预算对照 | CONDITION_OPEN |
+| U5 确认 | 冻结后新来源组、MemoryArena完整group；必要模型/长程，缺资源明确登记 | CONDITION_OPEN |
+| U6 总结 | 全部适用需求逐项证据、失败两解释、成本、统计、复现、发布SHA | NOT_STARTED |
+
+数量先按计划建议组织；若实际数据/资源要求调整，必须在模型运行前说明理由、保持完整实例并冻结。
+研究优势不预设；最终必须说明形成、取材、呈现、动作或额外计算的证据边界。
+当前Goal保持active；R2接线与完整U1功能切片已完成，独立U2及适用U3—U6仍待完成。
+
+## U2 小规模工程试跑完成与开发输入
+
+源码795725a297fb1ef5f9d7bb712b3500d5b72546c0已发布且远端一致；Fast36471409915 success、Full skipped。
+Root在同一源码冻结后完成15个单元、10个任务；详见[试跑结果](MILAI_UNIFIED_U2_PILOT_RESULTS_20260929.md)
+与[机器证据](../data/manifests/unified-v8-v9-u2-pilot-results-20260929.json)。
+MemSyco五方法形成/共同reader接通，依合同不做pilot Judge；MERIT五方法在同一已曝光arc均5/5、dependent2/2，ordinary零记录。
+本次新增86 generation/235143 tokens/13007 embedding tokens，无重试；连续账本3713/5060988/37969，旧历史保留。
+全86请求本地prompt计数等于实际usage；共享12次容量及真实维护/持久化/后续交付核对通过。
+没有根据pilot调参或修改方法；该小样本不能证明质量收益。
+Root随后按既定规则生成[18条开发arcs](../data/manifests/unified-v8-v9-merit-development-inputs-20260929.json)，
+90episodes/36dependent/111公开消息，官方leak check通过且哈希无碰撞，无新增模型调用。
+[开发合同](../data/diagnostics/unified-v8-v9-u2/development-contract.json)先随报告/输入发布，再正式prepare并冻结全部身份。
+独立U2主表尚NOT_RUN；整个Goal保持ACTIVE，U3—U6仍按完整计划推进。
+
+## U2 首张主表完成：负面结果、费用及后续边界
+
+在已发布输入/执行B `e6df2f5d914c3ea2f08ce34f0887749e6f0c30dc`、不变方法A `795725a2`，Root冻结496份文件后串行执行全部690单元。
+686完成、4异常退出；RawDialogue一题输出循环截断，ordinary三条MERIT arc输出标记循环中断。没有重试/替换/方法修改。
+随后冻结300个MemSyco回答/状态，再单次评分：299个SCORED、1个HOST_INCOMPLETE，无Judge解析失败或重评。
+详见[主表报告](MILAI_UNIFIED_U2_MAIN_RESULTS_20260929.md)、[复现说明](MILAI_UNIFIED_U2_MAIN_REPRODUCTION_20260929.md)、
+[机器结果](../data/manifests/unified-v8-v9-u2-main-results-20260929.json)及[失败表](../data/manifests/unified-v8-v9-u2-main-failure-map-20260929.json)。
+
+MemSyco范围/新旧/个性化各20计划题：原文17/13+1unknown/17，RAG19/15/18，摘要17/15/19，ordinary6/13/16，Mem016/12/16。
+ordinary范围相对原文−55个百分点，预注册来源组bootstrap95%区间[−80,−30]；此为单族本地Judge/当前开发切片，非跨家族结论。
+MERIT每方法90 episodes：Full89、RAG90、摘要89、ordinary75成功+8失败+7未评分、Mem086；dependent分别36/36、36/36、36/36、32成功+4未知/36、35/36。
+完整arc分别17、18、17、10成功+3未知、14/18。所有未知保留分母，不计算相应完整配对CI。
+
+ordinary实际7次MCP search和7次read_history，无CRUD，完成episode快照均0条记录；不能推导形成能力通过。
+MemSyco普通201条、Mem0291条记录均实际交付且查询前后不变；范围退化不能直接归于漏检索。
+MERIT摘要57次更新全部committed，Mem0111次维护完成/最终186条记录；计入维护后摘要362960 tokens略高于Full361588，Mem01684029约为Full4.66倍。
+原生千位逗号/大小写、coffee key、政策/checker冲突及Mem0绝对日期形成失败都保留原分，Root诊断不替官方结果。
+ordinary额外deploy先于末端重复：不能用取消标记必能修动作循环作承诺。Sol只读41请求重放证明原checkpoint/wire未被渲染污染，真实模型输出中的标记通过历史回流；候选尚未实施。
+
+本主表新增2228 generation /5803724 generation tokens /376823 embedding tokens；连续账本5941/10864712/414792。
+本Goal含U0失败、U1和pilot累计2640 generation /6659509 generation tokens /391222 embedding tokens。旧嵌套历史字段不变，费用不清零。
+1929 Host/形成/维护生成与299 Judge生成的prompt计数均精确匹配实际usage，新unknown usage0。
+Root离线汇总的摘要attempt标志误加、ordinary/backend字段误用，以及Sol离线helper初次系统前缀假设错误均保留并修正；未改实验/评分/统计，未重复模型调用。
+
+本阶段决定 Continue/Pivot：第一张公平对照表完成，当前ordinary/Mem0无稳定净优势；强简单方法继续作为参照。
+第二外部系统还未运行，Luna只读盘点确认SimpleMem固定源码存在、依赖和默认encoder资产缺失，未安装/下载；下一步需选择真实兼容路径并由Sol完成薄接入。
+U3-P/O/W/R、U4、U5和U6仍须根据上述真实首断点分别处理，不将已实现模块自动全部启用，也不以首表结案缩小总Goal。
+Root发布结果/文档，Luna执行精确allowlist commit/push并核对远端；没有main/旧PR合并。实际Goal仍ACTIVE，研究NOT_ACHIEVED，ProductNO_GO。
+
+
+## U2 第二外部系统工程完成，实际运行待冻结
+
+SimpleMem text 使用官方 core `db80b6a7c591e0ea730a058e9f5fc4eb06572299`，保留原生 writer／多渠道 retrieval／reflection，
+在公共构造器注入同一计账 Qwen、bge-m3，再连接共同 reader／原生业务 Agent；不是完整 native ask() 复现。
+见[协议](MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md)、[工程证据](../data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json)
+与[独立环境身份](../data/manifests/unified-v8-v9-u2-simplemem-environment-20260929.json)。
+14个去重目标最终通过、0skip，覆盖实际本地LanceDB/Tantivy、原生重试/空提取/拒绝、共享12、跨owner/重开及真实图工具边界。
+初次7pass/2fail发现缺pylance；资源调查错误先装0.25.1后在索引测试前纠正为上游精确0.39.0；旧回执全保留。
+其他harness、类型/矩阵、禁止sys.path修改的loader问题已最小修复，失败不删除。最终search工具只返回query/status/results，内部审计不回流Host。
+静态、边界、矩阵、必要构建通过；两份旧prepare和首构建归属过滤前源码，不冒充最终冻结。Root核对已有哈希，不重复检查。
+依赖为独立环境CPU包，无新模型资产/部署/服务改变；本阶段真实generation/embedding/Judge/MCP为0，账本仍5941/10864712/414792。
+发布后Root重新正式prepare和freeze，再运行已曝光首题及完整arc5（3 invocation，0 Judge）；正常低分保留，不调原生方法。
+可运行后只补SimpleMem相同已曝光development的138单元和最多60次固定Judge，不重跑旧五臂。U3–U6尚未完成，实际Goal仍ACTIVE。
+
+
+## 用户暂停：SimpleMem pilot 已结束，development 未启动
+
+源码及pilot实际提交 `9200de0146da03ac09c78dab820feb1c9d09a708` 已发布，Root核远端及21文件allowlist一致。
+在390文件冻结后完成3次外层尝试：MemSyco形成与查询成功，MERIT原生容量中断；没有重试或方法改变。
+详见[SimpleMem试跑结果](MILAI_UNIFIED_U2_SIMPLEMEM_PILOT_RESULTS_20260929.md)。
+MemSyco33条原生记录、29条取回/交付、0省略、查询前后快照不变；按pilot合同0Judge，不报语义通过。
+MERIT前3/5 episodes成功，第4个中断、第5个未运行；dependent1成功＋1未知/2。4个已关闭turn维护完成，保留11条记录。
+中断消息7次原生检索生成＋5次Host工具查询达到共享12。5个已启动公开消息各检索一次，ReAct复用相同材料；45次MERIT生成与额度/费用一一对应，不支持适配器重复执行解释。
+全部实际world/journal/checkpoint/bank保留，不加额度、不缩减原生反思、不续接业务。计划138单元开发及最多60Judge没有正式prepare、冻结或执行。
+
+用户随后明确“暂停当前实验，生成实验报告”。实际Goal为paused，当前无实验/模型资产下载进程；既有推理和数据库服务未停改。
+本pilot新增51generation/56629tokens/2010embeddingtokens，连续5992/10921341/416802；本Goal累计新增2691/6716138/393232。
+旧账本、失败、曝光、协议和结果全部保留。原Continue/Pivot只保留历史意义，不是恢复授权。
+Root完成总体报告和状态核对，Luna只发布精确文档/结果allowlist至draft PR72；不合并main/旧PR、不运行模型/整套测试/build。
+U3–U5及完整U6未完成；本次暂停报告不能标Goal complete，研究NOT_ACHIEVED，ProductNO_GO。

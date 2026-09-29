@@ -46,6 +46,115 @@ from milai_lab.runners.langmem_foundation import (
 )
 
 
+def test_mcp_actual_http_strict_crud_scope_and_restart() -> None:
+    from mcp.shared.exceptions import MCPError
+
+    from milai_lab.baselines.langmem_mcp import MemoryMCP
+
+    store = InMemoryStore()
+    scope = FoundationScope("mcp-test", "arm", "owner", "first")
+    namespace = ("langmem", scope.run_id, scope.arm_id, scope.user_id)
+    events: list[dict[str, Any]] = []
+    with MemoryMCP(store, scope.run_id, scope.arm_id, scope.user_id, emit=events.append) as peer:
+        def call(action: str, **args: Any) -> ToolMessage:
+            return peer.call("manage_memory", {"action": action, **args}, action,
+                             origin="host", config=scope.config())
+
+        created = call("create", content="Exact synthetic note")
+        key = json.loads(str(created.content))["id"]
+        assert store.get(namespace, key).value == {"content": "Exact synthetic note"}
+        assert json.loads(str(call("update", id=key, content="Exact synthetic note").content))[
+            "status"] == "no_change"
+        assert call("update", id=key).status == "error"
+        assert call("create", content=None).status == "error"
+        assert call("update", id=str(uuid.uuid4()), content="absent").status == "error"
+        assert store.get(namespace, key).value["content"] == "Exact synthetic note"
+        assert peer.records(scope.config()) == [
+            {"id": key, "value": {"content": "Exact synthetic note"}}]
+        assert peer.retrieve("synthetic", 10, scope.config())[0]["id"] == key
+        assert json.loads(str(peer.call("read_memory", {"id": key}, "read",
+            origin="host", config=scope.config()).content))["status"] == "found"
+        wrong = FoundationScope(scope.run_id, scope.arm_id, "another-owner", "first")
+        with pytest.raises(ValueError, match="MCP_MEMORY_SCOPE_CHANGED"):
+            peer.records(wrong.config())
+        with pytest.raises(MCPError):
+            peer.portal.call(lambda: peer.client.call_tool("manage_memory",
+                {"content": "must not write"}, meta={"milai_scope": {}}))
+        assert len(store.search(namespace)) == 1
+        assert call("update", id=key, content="Updated exact note").status == "success"
+    with MemoryMCP(store, scope.run_id, scope.arm_id, scope.user_id, emit=events.append) as peer:
+        assert peer.records(scope.config())[0]["value"]["content"] == "Updated exact note"
+        assert peer.call("manage_memory", {"action": "delete", "id": key}, "delete",
+                         origin="host", config=scope.config()).status == "success"
+        assert peer.records(scope.config()) == []
+        assert peer.call("read_memory", {"id": key}, "read-after-delete",
+                         origin="material", config=scope.config()).status == "error"
+    assert store.search(namespace) == []
+    wires = [json.loads(row["request_body"]) for row in events if row.get("kind") == "http"
+             and row["request_body"]]
+    assert any(row["method"] == "resources/read" for row in wires)
+    assert {row["params"]["name"] for row in wires if row["method"] == "tools/call"} == {
+        "manage_memory", "search_memory", "read_memory"}
+    assert any(row.get("origin") == "material" for row in events)
+
+
+@pytest.mark.parametrize("action", ["create", "update", "delete"])
+def test_mcp_store_exception_is_protocol_failure_not_success_or_retry(action: str) -> None:
+    from langgraph.store.base import PutOp
+    from mcp.shared.exceptions import MCPError
+
+    from milai_lab.baselines.langmem_mcp import MemoryMCP
+
+    class BrokenStore(InMemoryStore):
+        broken = False
+        attempts = 0
+
+        def batch(self, ops: Any) -> Any:
+            ops = list(ops)
+            if self.broken and any(isinstance(op, PutOp) for op in ops):
+                self.attempts += 1
+                raise ValueError("synthetic Store failure")
+            return super().batch(ops)
+
+    store = BrokenStore()
+    scope = FoundationScope("mcp-errors", "arm", "owner", "first")
+    namespace = ("langmem", scope.run_id, scope.arm_id, scope.user_id)
+    key = str(uuid.uuid4())
+    store.put(namespace, key, {"content": "preserved"})
+    store.broken = True
+    args = {"action": action, **({"id": key} if action != "create" else {}),
+            **({"content": "changed"} if action != "delete" else {})}
+    events: list[dict[str, Any]] = []
+    with MemoryMCP(store, scope.run_id, scope.arm_id, scope.user_id, emit=events.append) as peer:
+        with pytest.raises(MCPError):
+            peer.call("manage_memory", args, "one-attempt", origin="host", config=scope.config())
+        assert store.attempts == 1
+        assert store.get(namespace, key).value == {"content": "preserved"}
+    assert not any(row.get("kind") == "tool_result" for row in events)
+
+
+def test_mcp_material_full_pagination_and_async_read_are_owner_bound() -> None:
+    from milai_lab.baselines.langmem_mcp import MemoryMCP
+
+    store = InMemoryStore()
+    scope = FoundationScope("mcp-pages", "arm", "owner", "first")
+    namespace = ("langmem", scope.run_id, scope.arm_id, scope.user_id)
+    keys = [str(uuid.uuid4()) for _ in range(65)]
+    for index, key in enumerate(keys):
+        store.put(namespace, key, {"content": f"synthetic-{index}", "extra": "preserved"})
+    store.put((*namespace[:3], "foreign"), str(uuid.uuid4()), {"content": "FOREIGN"})
+    events: list[dict[str, Any]] = []
+    with MemoryMCP(store, scope.run_id, scope.arm_id, scope.user_id, emit=events.append) as peer:
+        assert [row["id"] for row in peer.records(scope.config())] == sorted(keys)
+        assert all(row["value"]["extra"] == "preserved" for row in peer.records(scope.config()))
+        result = asyncio.run(peer.tools[2].ainvoke({"type": "tool_call", "name": "read_memory",
+            "id": "async-read", "args": {"id": keys[0]}}, scope.config()))
+        assert result.tool_call_id == "async-read" and result.status == "success"
+    totals = [row for row in events if row["event"] == "lsa_writer_memory_read"]
+    assert [row["calls"] for row in totals] == [2, 2]
+    assert [row["records"] for row in totals] == [65, 65]
+
+
 def _receipt(action: dict[str, Any], request_id: str) -> dict[str, Any]:
     return {
         "id": request_id, "model": "mock",
@@ -789,6 +898,8 @@ def test_strict_store_failures_propagate(asynchronous: bool) -> None:
 
 
 def test_strict_conflicts_with_external_memory_tools(tmp_path: Path) -> None:
+    from milai_lab.baselines.langmem_mcp import MemoryMCP
+
     @tool
     def manage_memory(action: str) -> str:
         """An external memory tool."""
@@ -800,3 +911,10 @@ def test_strict_conflicts_with_external_memory_tools(tmp_path: Path) -> None:
             with pytest.raises(ValueError, match="LANGMEM_STRICT_CUSTOM_MEMORY_TOOLS_CONFLICT"):
                 build_agent(model, InMemoryStore(), saver, memory_tools=[manage_memory],
                             memory_contract="strict")
+            store = InMemoryStore()
+            peer = MemoryMCP(store, "run", "arm", "owner")
+            with pytest.raises(ValueError, match="LANGMEM_MCP_TOOLSET_CONFLICT"):
+                build_agent(model, store, saver, memory_contract="native", memory_mcp=peer)
+            with pytest.raises(ValueError, match="LANGMEM_MCP_TOOLSET_CONFLICT"):
+                build_agent(model, InMemoryStore(), saver, memory_contract="strict",
+                            memory_mcp=peer)

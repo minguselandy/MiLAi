@@ -1,0 +1,80 @@
+{
+  "kind": "UNIFIED_V8_V9_REAL_MCP_FUNCTIONAL_SMOKE_R2_PROTOCOL",
+  "status": "R2_PROTOCOL_FIXED_REPAIR_SOURCE_AND_EXECUTION_FREEZE_PENDING",
+  "purpose": "Verify actual Host native action -> real MCP HTTP -> same strict Store -> receipt -> fresh-session answer; no effectiveness/benchmark/new-task claim.",
+  "input_origin": "Existing v7 exposed synthetic inputs copied byte-for-byte, not new independent data.",
+  "source_input_hashes": {
+    "save_plan": "24aa85c70621e412fa873dd6941c2b26ddcc6b72b9671f6518216c5118b098c0",
+    "read_only": "ba946f58ae289bee066d772c22f265bc23a6fb85b22c580510896bf313555cf2"
+  },
+  "config_sha256": "5d1b0bb7cbdf1375e1ae65816f63f979fdce51163323747d54a3b0725a091118",
+  "execution_order": [
+    {
+      "script": "save_plan",
+      "run_id": "unified-mcp-native-save-r2",
+      "arm": "B0",
+      "messages": 2,
+      "sessions": 2
+    },
+    {
+      "script": "read_only",
+      "run_id": "unified-mcp-native-readonly-r2",
+      "arm": "B0",
+      "messages": 1,
+      "sessions": 1
+    }
+  ],
+  "isolation": "New run_id/runtime-root, empty owner Store/checkpoint/world for each script; no copied memories/operator_memory; same continuous ledger.",
+  "allowed_calls": {
+    "root_only": true,
+    "real_model_http_concurrency": 1,
+    "per_public_message_max_generation": 12,
+    "host": "Qwen3.6-35B-A3B-FP8",
+    "host_endpoint": "http://127.0.0.1:7862/v1/",
+    "embedding": "bge-m3@7861",
+    "generation_temperature": 0,
+    "generation_max_tokens": 4096,
+    "thinking": false,
+    "judge_model_calls": 0
+  },
+  "checks": [
+    "save_plan-1: actual successful CREATE with complete item,total quantity,destination,packing; final truthful save; no business action",
+    "save_plan-2: fresh session receives actual retained memory via MCP; answers all four original planning fields; no mutation/business",
+    "read_only-1: answer exactly45, no memory write or business call",
+    "actual vLLM proposal/tool IDs align MCP request/response and strict write receipt; program-origin material reads separately labeled",
+    "MCP same store/namespace and one budget owner; artifacts sufficient for actual HTTP/tools/persistence/continuation trace",
+    "per-stage usage reconciles continuous ledger; all failures/unknown retained"
+  ],
+  "cost_estimate": {
+    "generation_calls_range": [
+      4,
+      12
+    ],
+    "generation_tokens_range": [
+      4000,
+      25000
+    ],
+    "embedding_calls_range": [
+      1,
+      4
+    ],
+    "basis": "3 exposed messages; one expected create needs continuation. This is a planning estimate, no new global ledger cap; failures remain charged."
+  },
+  "failure_rule": "Engineering/infrastructure failures stop dependent diagnostic until root-cause record and minimal repair; semantic errors remain, no sample replacement or automatic retry/prompt variants. Native JSON protocol comparison is separate conditional U3-P, not inferred here.",
+  "publication": "Luna publishes implementation/inputs/protocol before actual model calls; final execution identity records exact source and prepared hashes.",
+  "offline_obligations": {
+    "path": "data/diagnostics/unified-v8-v9-mcp-smoke/obligations.json",
+    "sha256": "ad74f5a1cbf4fd7f23a260ec8b1f21af6fefda104a5f44c1013c5889fde04b5a",
+    "runtime_must_not_read": true,
+    "original_v7_obligations_unchanged": true,
+    "task_obligations": 9,
+    "non_failing_diagnostics": 3
+  },
+  "prior_attempt": {
+    "source_commit": "196fa0136effc442b33a346df4bd17631807542d",
+    "failure_record": "data/manifests/unified-v8-v9-mcp-r1-failure-20260928.json",
+    "failure_record_sha256": "616d6fa4ed4d9ee40ec195c8ffb6ff3168f74c5b6ce6e93f54a1ab6797b173c4",
+    "all_failed_costs_and_side_effects_preserved": true
+  },
+  "change": "Local capacity adapter repair only; same exposed input/scorer/config/service. Entire two-script rerun with new run identities, not a continuation or best-trajectory splice."
+}

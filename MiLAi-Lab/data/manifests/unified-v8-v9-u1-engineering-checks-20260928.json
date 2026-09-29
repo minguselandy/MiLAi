@@ -1,0 +1,564 @@
+{
+  "engineering_files": [
+    {
+      "path": "MiLAi-Lab/src/milai_lab/baselines/langmem_mcp.py",
+      "sha256": "c1c09d7525021af3e986d25402a203bba89903f6a80caff422b3521a23032f13",
+      "bytes": 17514,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/baselines/langmem_benchmark.py",
+      "sha256": "d7f1020611fa6d392064de1e77192a1eb1541c24df48e1725feed915b7f9097f",
+      "bytes": 12253,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/datasets/memsyco.py",
+      "sha256": "e6381c336625e86cb74237c59173cfefe9d90338d8dcf75b62f89495baa52326",
+      "bytes": 6085,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/datasets/merit.py",
+      "sha256": "827cca3c0ee30e506330d2bddd62c91335f5b4f95d16d7822f58d9e6e58c08e2",
+      "bytes": 5933,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/providers/merit_metered.py",
+      "sha256": "489cb0430905f6425b932772142fdc0fd01cca7ad6e4e65b0c46382bf095bdcd",
+      "bytes": 3910,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/langmem_merit.py",
+      "sha256": "7f21d0dd2bb52656adeb6e98dade60eeb9d6fa66f4010d6ad2b75a74736e7060",
+      "bytes": 13652,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/memsyco_native.py",
+      "sha256": "fcdf74bbc5a6e9f7b76d1b4c6f916ded72800717f20740928f3cdb5488c0e40e",
+      "bytes": 16182,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/src/milai_lab/runners/merit_native.py",
+      "sha256": "9dbb56d0368ab46ff1242da734f4e552c349165c1c73f65486e21e7dc39494b7",
+      "bytes": 18031,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/tools/run_unified_benchmarks.py",
+      "sha256": "b252cca41b6e596ea75dfe13e780997a357ce178b49b158a5b4e81954928af5f",
+      "bytes": 1905,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/tests/unit/test_unified_benchmarks.py",
+      "sha256": "131df787417ce9712b17fc83e9d0efbdf1a45fccaab9c77e0e63e3b8841fa9f8",
+      "bytes": 18173,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/tests/unit/test_merit_native.py",
+      "sha256": "8bee195ee8d3e3a5c82a51132f52ef1d09de012fa9ce688db22992565c47ff81",
+      "bytes": 7980,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/configs/lab-verification-matrix.json",
+      "sha256": "9aea0ac16d0cd80b6b2bab670af29506e1f93c16771e5d6a1cbe69b5c8e0f3e7",
+      "bytes": 4888,
+      "whitespace_check": true
+    },
+    {
+      "path": "MiLAi-Lab/pyproject.toml",
+      "sha256": "082b04625e227086d2bdced575d9997fd731768a4a5bec3803ae87812e2ce19d",
+      "bytes": 3930,
+      "whitespace_check": true
+    },
+    {
+      "path": ".github/workflows/fast.yml",
+      "sha256": "3c94fc2089208a9e7ae9b270e89e455bbb071a395aff8264925c4c5efa5596be",
+      "bytes": 17959,
+      "whitespace_check": true
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "9e69460aa621aa1ddacd847573b450f90440a5c1c850c9c883ca1c47e9c133c1",
+      "bytes": 21325,
+      "whitespace_check": true
+    }
+  ],
+  "checks": [
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_unified_benchmarks.py tests/unit/test_merit_native.py::test_metered_sdk_public_bridge_one_attempt_actual_receipt_and_finally_restore",
+      "exit_code": 0,
+      "passed": 13,
+      "skipped": 0,
+      "elapsed_seconds": 4.97,
+      "log": "new-targets-final.log"
+    },
+    {
+      "reproduction_invocation": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_unified_benchmarks.py::test_merit_actual_graph_archive_final_and_current_prefix_once tests/unit/test_merit_native.py",
+      "exit_code": 0,
+      "passed": 9,
+      "skipped": 0,
+      "elapsed_seconds": 3.49,
+      "log": "pytest-second.log",
+      "stage": "before final SDK Any annotation/exception-finally test tightening and role summaries; other seven MERIT targets unaffected"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_memsyco.py::test_fixed_screen_input_excludes_gold_and_preserves_dialogue",
+      "exit_code": 0,
+      "passed": 3,
+      "skipped": 0,
+      "elapsed_seconds": 0.07,
+      "log": "adjacent-core.log"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_mcp_actual_http_strict_crud_scope_and_restart tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+      "exit_code": 0,
+      "passed": 6,
+      "skipped": 0,
+      "elapsed_seconds": 6.62,
+      "log": "adjacent-foundation.log"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python -m mypy src/milai_lab/baselines/langmem_mcp.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/datasets/memsyco.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tools/run_unified_benchmarks.py",
+      "exit_code": 0,
+      "source_files": 9,
+      "log": "mypy-final.log",
+      "subsequent_changes": "only E501 line wrap and pyproject sdist include"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/ruff check src/milai_lab/baselines/langmem_mcp.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/datasets/memsyco.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tools/run_unified_benchmarks.py tests/unit/test_unified_benchmarks.py tests/unit/test_merit_native.py",
+      "exit_code": 1,
+      "log": "ruff-final.log",
+      "followup_command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/ruff check src/milai_lab/runners/merit_native.py",
+      "followup_exit_code": 0,
+      "followup_log": "ruff-final-repair.log"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python tools/check_verification_matrix.py",
+      "exit_code": 0,
+      "observation": {
+        "active_sources": 163,
+        "core_direct": 25,
+        "excluded_recovered": 35,
+        "external_direct": 2,
+        "foundation_discovery": 128,
+        "foundation_explicit": 51,
+        "integration_tests": 0,
+        "optional_tests_owned": 18,
+        "private_asset_tests": 12,
+        "protocol_contract_present": true
+      },
+      "capture": "direct tool output; workflow pytest targets and exact core ignore sets checked"
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+      "exit_code": 0,
+      "log": "matrix-boundary.log"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+      "exit_code": 0,
+      "log": "tools-boundary.log"
+    },
+    {
+      "command": "LITELLM_LOCAL_MODEL_COST_MAP=True PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/native-transport/venv/bin/python artifacts/unified-v8-v9/u1-checks/native_dryrun.py",
+      "exit_code": 0,
+      "log": "native-dryrun.log",
+      "actual_sdk": {
+        "python": "3.12.11",
+        "litellm": "1.100.1",
+        "openai": "2.54.0"
+      },
+      "scope": "official three-domain runner/tools/world with five synthetic read-only episodes per reference, no selected tasks/gold",
+      "paths": 6,
+      "synthetic_episodes": 30,
+      "mock_generations": 60,
+      "module_restoration": true
+    },
+    {
+      "command": "PYTHONPATH=src HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python artifacts/unified-v8-v9/u1-checks/prepare_check.py",
+      "exit_code": 0,
+      "log": "prepare-check-final.log",
+      "cli_prepares": 6,
+      "observations": "prepare-observations.json"
+    },
+    {
+      "command": "uv build --offline --out-dir artifacts/unified-v8-v9/u1-checks/dist",
+      "exit_code": 0,
+      "log": "build.log",
+      "build_count": 1
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python artifacts/unified-v8-v9/u1-checks/final_artifacts.py",
+      "exit_code": 0,
+      "log": "final-artifacts-repair.log",
+      "coverage": "all 15 tracked/untracked engineering files whitespace checked; wheel 8 source members, sdist source/test/CLI/matrix/config/lock present; private assets excluded"
+    }
+  ],
+  "test_coverage": {
+    "new_unique_targets": 20,
+    "adjacent_unique_targets": 9,
+    "unique_passed_targets": 29,
+    "final_skips": 0,
+    "new_collection": "12 unified benchmark targets + 8 MERIT targets; files explicitly assigned to actual Fast/Full foundation pytest, exact core excludes checked"
+  },
+  "retained_failures": [
+    {
+      "log": "pytest-initial.log",
+      "result": "9 passed / 1 failed; actual MERIT graph harness omitted required Capacity adapter; added mechanical local adapter, no runtime-policy change",
+      "exit_code": 1
+    },
+    {
+      "log": "mypy-initial.log",
+      "result": "18 errors / 6 files: precise protocol/typing of namespaces, AST statements, RunnableConfig and TaskInput entry fixed without ignores",
+      "exit_code": 1
+    },
+    {
+      "log": "mypy-second.log",
+      "result": "2 errors: optional usage and PackageMetadata access tightened",
+      "exit_code": 1
+    },
+    {
+      "log": "mypy-third.log",
+      "result": "2 attribute errors after Ruff literal setattr rewrite; public runtime SDK binding annotated Any",
+      "exit_code": 1
+    },
+    {
+      "logs": [
+        "ruff-initial.log",
+        "ruff-fix.log",
+        "ruff-second.log",
+        "ruff-third.log"
+      ],
+      "result": "unused imports/variables, import order and line lengths; targeted edits only",
+      "exit_codes": "nonzero (original raw logs retained)"
+    },
+    {
+      "log": "ruff-final.log",
+      "result": "one E501 after cost/lock identity addition; line wrapped; ruff-final-repair passes",
+      "exit_code": 1
+    },
+    {
+      "capture": "tool receipt",
+      "result": "shell command python absent (127), immediately used explicit locked interpreter; no file changed by failed command",
+      "exit_code": 127
+    },
+    {
+      "logs": [
+        "prepare-check.log",
+        "prepare-check-repair.log"
+      ],
+      "result": "offline helper whitelist omitted existing DTO default fields, then session_id; CLI itself succeeded. Existing successful Raw prepare reused, no model retry or source repair",
+      "exit_code": 1
+    },
+    {
+      "capture": "tool receipt",
+      "result": "helper incorrectly expected git diff --no-index --check exit0 for differing files; accept exit1 only with empty stdout/stderr; source unchanged",
+      "exit_code": 1
+    },
+    {
+      "log": "final-artifacts.log",
+      "result": "sdist/current Root env manifest differs only in later root_verification wording; corrected observation scope to build-time documentation snapshot, not source repair/rebuild",
+      "exit_code": 1
+    }
+  ],
+  "environment": {
+    "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+    "native_python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/native-transport/venv/bin/python",
+    "native_install_receipt": "artifacts/unified-v8-v9/envs/native-transport/install-receipt.json",
+    "native_requirements_sha256": "27da7871dcb01959083cf911209d12295252f3f04945a1cd81eb4580e247d9ab",
+    "project_uv_lock_unchanged": true,
+    "dependency_groups_unchanged": true
+  },
+  "execution_boundary": {
+    "real_host_calls": 0,
+    "real_embedding_calls": 0,
+    "real_judge_calls": 0,
+    "shared_postgres_calls": 0,
+    "tests": "MockTransport + InMemoryStore + actual loopback MCP HTTP + real local SQLite checkpoints/synthetic worlds",
+    "continuous_ledger_used_by_development": false,
+    "mock_budget_owner": "one isolated runtime RunBudget; inclusive timing not summed; physical IO unknown"
+  },
+  "unrun_limits": [
+    "No actual benchmark model/embedding/Judge run; no semantic score claimed.",
+    "Official U1 six MERIT arcs are not generated: Root generates/freezes after publication; CLI MERIT prepare used labelled synthetic fixtures.",
+    "Native references use Python3.12/LiteLLM1.100.1/OpenAI2.54.0; MiLAi keeps locked Python3.11/OpenAI3.19.2.",
+    "Native FullReplay is real tail60000 including memory shown, not strong full-history. Native episode-end write differs from MiLAi Host-direct CRUD.",
+    "Native official memory.read sees all episode user_messages; U1 references ignore query. Query-based U2 controls need a separately frozen legal query time.",
+    "U1 histories are independently formed; cross-case shared-history cache reuse remains U2 work.",
+    "Run reads frozen sanitized MemSyco runtime artifact, hashes original source files without parsing gold; prepare is offline sanitization. Formation receives ArchiveInput without current question.",
+    "One STARTED/attempt guard prevents automatic replay; no general semantic memory exactly-once or two-store transaction guarantee.",
+    "Six CLI prepares precede the final one-line sdist include; only pyproject identity delta, runtime/config/source unchanged. Root accepted no redundant prepare.",
+    "sdist contains Root metadata as observed at build; later root_verification wording differs, no runtime drift or rebuild.",
+    "No full suite, old 131 replay or repeat MCP smoke; CI actual results recorded after publication."
+  ],
+  "kind": "UNIFIED_U1_ENGINEERING_CHECKS",
+  "status": "SOURCE_FREEZE_READY_NATIVE_BENCHMARK_NOT_RUN",
+  "private_receipt": {
+    "path": "artifacts/unified-v8-v9/u1-checks/checks-receipt.json",
+    "sha256": "52abc0014951798644faa5017e2c9654129f852ea2054409ca63cffef53b2700"
+  },
+  "root_verification": {
+    "engineering_files_checked": 15,
+    "artifacts_and_packages_checked": 46,
+    "hash_mismatches": 0,
+    "tests_or_build_repeated_by_root": false
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/adjacent-core.log",
+      "sha256": "f21802e5e24571b06b077e416af1539fdce6ad55b407e03af6af45b03968cb3b",
+      "bytes": 98
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/adjacent-foundation.log",
+      "sha256": "92b8a10e7112be1c705e862b073fb77b0feb017fe00eb526737209dfc84cc740",
+      "bytes": 1810
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/build.log",
+      "sha256": "0e3f891f5a28945f39f767e82cf5ce38b94767d0eda86576f2d0d9b8afa04573",
+      "bytes": 247
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d1-native_full_replay_tail60000-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d1-no_memory-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d2-native_full_replay_tail60000-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d2-no_memory-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d3-native_full_replay_tail60000-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/d3-no_memory-budget.json",
+      "sha256": "a6098feeb3e5844bf804cf878c3c326799f82419450c6fe703943e9cc1e73c75",
+      "bytes": 369
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/final-artifacts-repair.log",
+      "sha256": "4143d34661a6cde79d6669b1a8c8cb98cc59f52a2949c1a1500cbe045320c3a5",
+      "bytes": 492
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/final-artifacts.log",
+      "sha256": "9db30e9934bc771aca567bb1ca43070d22bc9b46d351c831f083bd9fa6896a55",
+      "bytes": 367
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/final-observations.json",
+      "sha256": "4e4807959385e5c5cafe2f89c3d6caeeac58df8b38006ffd34cc4ee50f981e06",
+      "bytes": 15700
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/final_artifacts.py",
+      "sha256": "6eeb2d5a918834875a09dd0348ca4172cfa02f97fd73d292409bd3928b723993",
+      "bytes": 4976
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/matrix-boundary.log",
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/mypy-final.log",
+      "sha256": "46984ca20bf69f7b14ec1fd9bd82101d56a4e109e68f016fd2a04f22481b09b3",
+      "bytes": 43
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/mypy-initial.log",
+      "sha256": "cb6a28e8f62f68bee128d377b11be266e55b19634f3334b1021a7bab63563368",
+      "bytes": 3121
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/mypy-second.log",
+      "sha256": "7e2adac5afeaf2f08f989df2bb489c03ee3f46705c34a7539c5935c9e9574f40",
+      "bytes": 293
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/mypy-third.log",
+      "sha256": "32051f16f486508df3a554ce527d713ef0dd03f636da7c1716e5bcbbfc3fe6ae",
+      "bytes": 264
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/native-dryrun-observations.json",
+      "sha256": "a868aea71504cfdfab4d40a6decaa8399e266c6f12cba1782fb3351329ed6a06",
+      "bytes": 74022
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/native-dryrun.log",
+      "sha256": "be5cc9faba42e40c8103f3f490d28ef40338f8a057c32a8fbeaf0d3050bf25d3",
+      "bytes": 256
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/native_dryrun.py",
+      "sha256": "5910372f8b35197369e406c92dd6057db447d9f866b40a6742a790fe70f26dbc",
+      "bytes": 5381
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/new-targets-final.log",
+      "sha256": "6e6c1703d21d3dc21a331545fbed236d2ab9f1a04d9efa743e921b766a8fb556",
+      "bytes": 2298
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-check-final.log",
+      "sha256": "e98b736d0289f1312698f517d709e5a3062ae0291a2144c827ebafb9eebf5cd0",
+      "bytes": 246
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-check-repair.log",
+      "sha256": "c0f2fdf40386a0c35340979c8346813a353b81d9f1679952d28188b456d1c37f",
+      "bytes": 531
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-check.log",
+      "sha256": "ab95ef7d8645336f48ed249c4793e2c349e16af054d777357622baec0997d0c5",
+      "bytes": 557
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-memsyco-milai.log",
+      "sha256": "635f454271a6654f247bac1fccadd831680bc17e6fe96d81df6c9072ba491d04",
+      "bytes": 902
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-memsyco-milai_agent.log",
+      "sha256": "c37005d97ef0ec99f138828b1991ee6b7d8e09f6fd3176d5dd82b8d014c89bf3",
+      "bytes": 908
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-memsyco-raw_dialogue.log",
+      "sha256": "a9e43a18bdd6705a99d50a6a36bfa18a1e2c15d6a217c3157b5656ae4db27c1c",
+      "bytes": 909
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-merit-milai.log",
+      "sha256": "48ab8fa9d44d6ca43e15430821432de2aa7051ebfe5c34cf21928d701b868eb2",
+      "bytes": 900
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-merit-native_full_replay_tail60000.log",
+      "sha256": "2bc092c55a4154683e33b384a1457c0ed96b4aea45c68908dbb6ba56a3db9cf3",
+      "bytes": 457
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-merit-no_memory.log",
+      "sha256": "6401b4ca734bcdd55c4e6d8935ad4695fb7a535efe312babc6bca2f474bf394c",
+      "bytes": 438
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare-observations.json",
+      "sha256": "003d06ddd0e3192d028bfe764f7c055b0df32b800d2f67da4017f8ac500fefe3",
+      "bytes": 23445
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/prepare_check.py",
+      "sha256": "724616c44a45a5ef4680ded3b0f338cd675f0777d7cb793ba69a404d1c3767d5",
+      "bytes": 6049
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/pytest-initial.log",
+      "sha256": "8ea7d82cd5809762f3e41c66c9cbb9e835c2e3d82a3a33e2a35a766b6c5ab918",
+      "bytes": 8609
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/pytest-runtime-input.log",
+      "sha256": "781510f89d455a33af1f2d96341ce6e0cf7a554492221eae876beb0f46654ddd",
+      "bytes": 2090
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/pytest-second.log",
+      "sha256": "cd7812f773f9dccf76296e12525715eac4a0a9c7235a0c4abf7bc0c9bbca579a",
+      "bytes": 1857
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-final-repair.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-final.log",
+      "sha256": "568b18e06d99ae8a30318a386d6ae4949065f038f677bd8fc9c87fd7df27b6d3",
+      "bytes": 664
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-fix.log",
+      "sha256": "8cd5422cee81c34d2f7da056d21f8639683e45d6cb0c5db75dc5f03d0b294934",
+      "bytes": 1399
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-fourth.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-initial.log",
+      "sha256": "c8252182e51beced276574fc048e5e50989a1288cabf9b512daa6a28bc4d6bfd",
+      "bytes": 3381
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-second.log",
+      "sha256": "071a9f6d466ab364aed2de5b016c23216abe51429619fec0b4b3be1d63111239",
+      "bytes": 495
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/ruff-third.log",
+      "sha256": "25b17efa2897e385dcc127419365adfc09eae26d438258b33641d3b1fba114dc",
+      "bytes": 1895
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/tools-boundary.log",
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    }
+  ],
+  "packages": [
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/dist/milai_lab-0.1.0-py3-none-any.whl",
+      "sha256": "8574036ef6d94fb60211bf11c897ec29680ed80c1e3b674fe16a1bc1c040618c",
+      "bytes": 602624,
+      "ignored_or_private_assets_absent": true
+    },
+    {
+      "path": "artifacts/unified-v8-v9/u1-checks/dist/milai_lab-0.1.0.tar.gz",
+      "sha256": "af5cd31f8157bc326f2777afddf7b40f44074a1be7ac4ba9d131ba09eda342f4",
+      "bytes": 6206894,
+      "ignored_or_private_assets_absent": true
+    }
+  ],
+  "prepare_identity_delta": {
+    "affected_prepares": 6,
+    "files": [
+      "pyproject.toml"
+    ],
+    "description": "A single sdist include added after zero-model prepare. Runtime/CLI/config bytes unchanged; actual Root prepares will bind the published final identity."
+  },
+  "build_documentation_snapshot": {
+    "path": "data/manifests/unified-v8-v9-native-reference-env-20260928.json",
+    "built_sha256": "3a689f68acdefaf39b316f90948c02c65adeccdaaa7d1f73036c0b010d3f90e6",
+    "current_sha256": "88d7c4145fbb62773fa8c145c5b7bfcc1078fa49f6839bfaa718035fa9b75588",
+    "difference": "Root verification wording clarified after build; no source/config/lock change or rebuild."
+  }
+}

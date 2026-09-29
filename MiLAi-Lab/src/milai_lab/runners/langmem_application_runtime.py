@@ -30,6 +30,7 @@ class ApplicationRuntime:
     store: BaseStore
     checkpointer: BaseCheckpointSaver[str]
     observer: ProvenanceObserver
+    embedding_client: VLLMClient | None = None
 
 
 def projection_for_arm(observer: ProvenanceObserver, emit: Any, store: ObservedStore,
@@ -86,6 +87,6 @@ def open_application_runtime(config: dict[str, Any], run_id: str, arm_id: str,
                     model = VLLMChatModel(
                         client=host, capacity_path=root / "message-capacity.json",
                         observer=observer, projection=projection)
-                    yield ApplicationRuntime(model, store, saver, observer)
+                    yield ApplicationRuntime(model, store, saver, observer, embed)
     finally:
         sidecar.close()

@@ -1,0 +1,35 @@
+{
+  "kind": "UNIFIED_U2_EXPOSED_PILOT_MERIT_SELECTION",
+  "status": "EXPOSED_INPUT_SELECTION_NOT_EXECUTED",
+  "parent_selection": "data/manifests/unified-v8-v9-merit-smoke-inputs-20260929.json",
+  "parent_sha256": "0c1d95e5407d6b7f4697a5da0137b8c47348116b41ac88e571c25e264e95430d",
+  "selection_rule": "First original U1 ordered arc, selected for engineering integration; no outcome filtering",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "groups": {
+    "smoke": {
+      "purpose": "exposed_engineering_pilot",
+      "arcs": [
+        {
+          "domain": "d1",
+          "difficulty": "easy",
+          "arc_id": "arc5-000",
+          "base_seed": 5,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=5",
+          "selection_path": "unified-v8-v9-merit-smoke/arc5-000.json",
+          "selection_sha256": "106a7666f91096416b3ff4acb8f49569a7de54132de606792618c93fe6d6bcbe",
+          "arc_sha256": "dd11b2704f7b811a7a8be34f1a70b7399c7e2d8d459e829305be57c16fa87416",
+          "initial_world_sha256": "f975486ed2fc5e3b2506ee6d1f7d5856ee725653b159e96c3b2cc61ee83f3db8",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 6
+        }
+      ],
+      "arc_count": 1,
+      "episode_count": 5,
+      "public_message_count": 6
+    }
+  },
+  "original_input_bytes_changed": false,
+  "real_generation_calls": 0,
+  "real_embedding_calls": 0
+}

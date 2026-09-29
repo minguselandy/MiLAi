@@ -1,6 +1,146 @@
 # MiLAi Lab agent instructions
 
+## Latest user stop: 2026-09-29
+
+The user explicitly requested: “暂停当前实验，生成实验报告”. Actual Goal is **paused**.
+Follow [the pause report](docs/MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md) and
+[requirement/cost record](data/manifests/unified-v8-v9-pause-summary-20260929.json).
+This instruction overrides every historical ACTIVE, Continue and preparation paragraph below.
+Only report/state reconciliation and already-authorized Luna Git publication continue. Do not
+run experiments, source development, model/dependency downloads or deployments without a new
+explicit user resume. Do not mark the full original Goal complete merely because this report is done.
+
+U2 first five-method table is preserved at method795725a2/executione6df2f5d/report81f2cf4.
+SimpleMem core text engineering and exposed pilot ran at9200de0146da03ac09c78dab820feb1c9d09a708:
+MemSyco formation33records/query29delivered with equal snapshots; no pilot Judge. MERIT3pass/2unknown
+of5, dependent1pass/1unknown of2; native7 retrieval generations plus5 Host tool generations exhausted
+shared12 on the fourth episode. No duplicate retrieval/debit found, no rerun/limit increase/repair.
+Pilot added51 generation/56629tokens/2010embeddingtokens; continuous ledger5992/10921341/416802.
+SimpleMem planned138-unit development and60Judge remain NOT_RUN, no formal prepare/freeze exists.
+U3–U5 and full U6 remain unfinished; research NOT_ACHIEVED, Product NO_GO. No running experiment
+or model-asset download was found at pause. Preserve existing services, banks, all raw failures,
+private traces, old checkouts, original drafts and ledgers. PR72 remains draft/open/unmerged; main
+and PR70/71 remain unchanged. Prior frozen protocols retain their historical pre-run bytes.
+
+
 ## Current scope and authority
+
+The actual user Goal now authorizes the full [unified V8/V9 plan](docs/MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md).
+Follow [its execution record](docs/MILAI_UNIFIED_EXECUTION_V8_V9_20260928.md). This replaces the v7
+stop only for the new scope. Root has read the full 1266-line unified plan; original design-only
+metadata is preserved and is not execution authority. U0/U1 smoke alone cannot complete this Goal:
+U2 requires an independent comparison slice, three strong simple controls and a real external system.
+U3/U4/U5 remain evidence-gated; every gate and unrun branch needs an explicit disposition at U6.
+
+The user's latest explicit instruction permits vLLM model configuration changes and requires the
+Host to remain an Agent that calls MiLAi through MCP tools. This overrides historical no-vLLM-change
+rules for this task. vLLM is the inference backend, not itself the Agent or MCP executor. Acceptance
+must trace real Agent choice -> MCP transport -> strict memory/Store operation -> MCP receipt ->
+Host continuation. Direct in-process calls, mocked MCP or logged tool names do not establish this.
+Keep the Lab research boundary: a thin MCP exposure of the same existing memory service is allowed;
+no Product migration or private Product imports. Reuse the same logical memory entry and real IDs.
+Benchmark-native ingestion cadence is distinct from autonomous Host writing; do not replay archived
+user utterances as newly authorized live commands. Keep native tools/world/scorers unchanged.
+
+Record old/new service commands, assets, parser, budget and rollback before any permitted service
+change; give new runs/configs explicit identities and never mix them with old v7 results. Actual
+Host/embedding/Judge calls remain Root-only, serial 1 and continuously charged. No model-weight
+download or independent second-family deployment is inferred from permission to configure vLLM.
+Public benchmark data/source/dependency acquisition needed by the plan belongs to Luna high.
+Root owns docs, fixtures, selection/rubrics, freeze, real calls, scoring and cost; one reused Sol
+xhigh owns all source/config/CI changes and narrow checks. Luna high owns Git worktree/commit/push.
+Do not repeat passed tests for publication or use model quality as an engineering gate.
+
+Base is report 77dfc2f in the separate unified-v8-v9 worktree. Actual remote main07cc364f, local
+original main9515017, and draft PR70/71 are preserved; do not pull/reset/merge them. Original main
+has twelve untracked plans/reviews including v27; preserve all originals and historical ledgers.
+The full objective remains active until requirement-by-requirement evidence, costs, reports and
+remote publication are verified. Product remains NO_GO; no automatic claim of unseen benefit.
+
+U1 native smoke is now complete at execution B94d3b18; see
+[the U1 report](docs/MILAI_UNIFIED_U1_NATIVE_RESULTS_20260929.md). All36 Host jobs and18 single-attempt
+Judge calls finished. MERIT NoMemory16/30, native FullReplay28/30, ordinary/MiLAi26/30;
+dependent0/12,12/12,10/12. MiLAi had no ordinary writes in any arc and could access complete legal
+history, so this is not persistent-maintenance evidence. MemSyco per-track outcomes and exact costs
+are in the report; the readonly Agent's four no-search failures remain. Preserve the exact native
+version-prefix and email-case failures, source/input/scoring freezes and all trajectories.
+U1 added321 generation/613029tokens/1330embeddingtokens; continuous ledger3627/4825845/24962.
+G0/G1 pass only for this functional slice. Continue the authorized independent U2 implementation:
+60 MemSyco tasks/54 source groups and18 complete MERIT arcs; true FullHistory, actual rolling LLM
+summary, BM25+dense RawRAG, ordinary/current identical candidate merged, and real pinned Mem0.
+Question-free formation cache must preserve exact source/owner/history permissions; query baselines
+must not see future within-episode messages. Keep original tools/world/checkers and common reader.
+Second external follows the first table; U3–U5 remain evidence-gated, U6 still required.
+Root owns reporting/selection/real calls; Sol is the only source writer; Luna owns Git publication.
+
+U2 implementation and narrow checks are now ready; follow
+[the U2 protocol](docs/MILAI_UNIFIED_U2_PROTOCOL_20260929.md). Ten zero-model pilot prepares passed,
+with actual pinned Mem0/MockHTTP and shared-capacity checks. No U2 real call has occurred yet.
+Publish source, then Root freezes and serially runs the exposed first U1 MemSyco case and complete
+arc5 across five methods before the independent development matrix. Preserve every initial check
+failure; do not repeat passed checks for publication. Simple MERIT controls expose business tools
+and actual MCP read_history only; ordinary retains strict CRUD/search/exact and Mem0 its native search.
+Archive formation and query are separate, with exact owner/source/history cache keys and no gold.
+No new model download, service change or main/old-PR merge is part of this publication.
+
+U2 pilot has completed at source795725a2 with no engineering interruption or tuning; see
+[the pilot report](docs/MILAI_UNIFIED_U2_PILOT_RESULTS_20260929.md). All15 invocation units completed.
+Five methods repeated one exposed MERIT arc: each5/5 episodes,2/2 dependent; ordinary0records.
+MemSyco five build/query paths completed, no Judge planned in this engineering pilot.
+Pilot added86 generation/235143tokens/13007embeddingtokens; ledger3713/5060988/37969.
+Source Fast36471409915 success; Full skipped. Eighteen prospective development arcs are now
+created at unchanged method source, seeds11–28,90episodes/36dependent/111public messages,
+with official leak checks and no historical/batch hash collision. Publish docs/input metadata,
+then formal prepare and freeze the690-unit independent matrix at that published HEAD.
+No first-table quality results exist yet. Preserve frozen protocol/config/pilot bytes and costs.
+The full Goal remains active through the independent comparison and applicable U3–U6 work.
+
+U2 first five-method development table is now complete at execution B e6df2f5d / method A795725a2;
+the earlier U2 preparation paragraphs above are historical snapshots. Follow
+[the main result report](docs/MILAI_UNIFIED_U2_MAIN_RESULTS_20260929.md) and
+[reproduction instructions](docs/MILAI_UNIFIED_U2_MAIN_REPRODUCTION_20260929.md).
+All690 invocation units were attempted once:686 completed,4 interrupted. MemSyco299 single-attempt
+Judge calls parsed;1 Host-incomplete slot remains. Scope/valid/personalized passes respectively:
+Raw17/13+1unknown/17, RAG19/15/18, summary17/15/19, ordinary6/13/16, Mem016/12/16, each planned20.
+MERIT episode successes Full89/90,RAG90/90,summary89/90,ordinary75/90+7unknown,Mem086/90;
+dependent36/36,36/36,36/36,32/36+4unknown,35/36. No retries, replacements or method tuning.
+Ordinary has no actual CRUD; its completed snapshots remain empty despite legal full-history access.
+Three ordinary arcs suffer real label-output loops; one first performs seven unrequested deploy(latest).
+41 frozen request replays show request-copy rendering preserves checkpoint content: repeated labels
+are actual model output, not established in-place renderer corruption. Causality remains unisolated.
+Exact-key, native formatting, policy/checker conflict and Mem0 temporal formation failures remain.
+New main cost2228 generation/5803724 tokens/376823 embedding tokens; continuous5941/10864712/414792.
+Do not change or rerun this first table. Source freeze can end only for a separately identified next
+method after report publication; historical results reproduce at A/B, not a later report commit.
+Root owns full reporting/real calls; Sol owns next minimal source work; Luna owns publication.
+Second external-system integration and applicable U3–U5/U6 remain unfinished. Resource inventory
+found pinned SimpleMem source but missing optional dependencies/default encoder assets; it did not
+download/install anything and is not execution evidence. Choose a concrete compatible text path,
+then complete needed development and small checks before new real evaluation. No inferred second
+Host-family weights/deployment. All conditional branches need actual gate dispositions; no automatic
+selector, State platform, native score normalization, main merge or Product migration. Full Goal
+remains ACTIVE, research NOT_ACHIEVED, Product NO_GO. Respect any new explicit stop.
+
+U2 second external SimpleMem core text integration is ENGINEERING_READY; real pilot NOT_RUN.
+Follow [its protocol](docs/MILAI_UNIFIED_U2_SIMPLEMEM_PROTOCOL_20260929.md) and
+[engineering receipt](data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json).
+Actual pinned core MemoryBuilder/VectorStore/HybridRetriever use metered existing Qwen/BGE via
+public constructor injection; common reader/Agent remains, so this is not full native ask() reproduction.
+Fourteen unique narrow targets pass with real temporary LanceDB/Tantivy and MockHTTP, no skips;
+initial missing pylance and wrong resource pin investigation are preserved, final upstream pin0.39.0.
+No real model/embedding/MCP/Postgres call occurred in engineering. Final tool results exclude internal
+audit, genuine StateGraph/ToolNode verifies this; private observations remain. Necessary final build passed.
+Publish source then Root formally prepares/freezes the same exposed one-case/one-arc pilot (3 units,
+0 Judge). Normal wrong answers do not gate engineering or trigger tuning. After functional pilot,
+only this new arm uses the existing now-exposed 60 questions/18 arcs, 138 units, then answer freeze
+and single Judge attempts. Old five-arm table remains unchanged. Retain native finite retries,
+all costs and shared12 generation capacity; independent queries may read verified actual partial banks,
+with formation/retrieval status separate. No outer invocation or business retry. Current ledger unchanged
+at5941/10864712/414792. Root owns real calls; Sol source stopped; Luna publishes draft PR72 only.
+U3–U6 still require explicit evidence-gated disposition; research NOT_ACHIEVED, Product NO_GO.
+
+The following v7 closure is historical:
+
 
 The v7 first slice is now executed and closed as **INCONCLUSIVE** with native **BLOCKED_ENVIRONMENT**.
 Follow the [v7 overall report](docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md),

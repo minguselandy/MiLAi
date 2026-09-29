@@ -1,0 +1,312 @@
+{
+  "kind": "UNIFIED_U2_SIMPLEMEM_TEXT_ENVIRONMENT",
+  "status": "R3_DEPENDENCIES_READY_FOR_REAL_SDK_NARROW_CHECKS_NOT_MODEL_EVIDENCE",
+  "root_verified_at_utc": "2026-09-28T22:50:48.176746+00:00",
+  "source": {
+    "official_remote": "https://github.com/aiming-lab/SimpleMem.git",
+    "revision": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+    "requirements_txt_sha256": "cc62dbb8cf954b1c58928723153136af3e0759df77746de09fc2c2bb58fb9783",
+    "requirements_txt_line_89": "pylance==0.39.0",
+    "license": "MIT License",
+    "license_sha256": "276dc8cc9eb5a8c59d1edca3283163815d2caa512b17bd0bf053050304b4cd3e",
+    "setup_py_sha256": "1597a4f403f0794ebcedf7eac5bd26bd106e48a4b504a7d03a1669a795253a12",
+    "correction": "R1/R2 investigation incorrectly stated the upstream requirements did not pin pylance. The full git-show file contains pylance==0.39.0 at line 89; the earlier filtered excerpt had omitted it. This R3 uses the upstream pin."
+  },
+  "environment_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation",
+  "python_executable": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+  "python": "3.11.13",
+  "uv": "0.8.3",
+  "foundation": {
+    "command": "UV_PROJECT_ENVIRONMENT=/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation uv sync --project MiLAi-Lab --frozen --dev --group baseline-langmem --python 3.11.13",
+    "project_uv_lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+    "same_as_preexisting_next_improvement_foundation_lock": true,
+    "preexisting_packages_constrained_and_unchanged": 95,
+    "initial_command_failure": "First sync ran from repo root and exited before creating the environment because uv could not discover MiLAi-Lab/pyproject.toml; corrected command above uses --project MiLAi-Lab. Log retained as 01-foundation-sync.log.",
+    "no_existing_environment_modified": true
+  },
+  "actual_extra_dependencies": {
+    "lancedb": "0.25.3",
+    "pyarrow": "22.0.0",
+    "dateparser": "1.2.2",
+    "tantivy": "0.26.2",
+    "deprecation": "2.1.0",
+    "lance-namespace": "0.13.0",
+    "lance-namespace-urllib3-client": "0.13.0",
+    "overrides": "7.7.0",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.4",
+    "six": "1.17.0",
+    "tzlocal": "5.4.4",
+    "pylance": "0.39.0"
+  },
+  "public_dependency_additions": "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt",
+  "public_dependency_additions_sha256": "c4de4f0a77a4561a60528fb3b059b2aa4a5c2d2ae491ea84015f52bffb5fa48f",
+  "current_environment_receipt": {
+    "file": "artifacts/unified-v8-v9/u2-simplemem-environment/receipt-r3.json",
+    "sha256": "642a01e772796cc78a6626604a0ddae83048bfa60166b19bc4d6914f0cf0eda6",
+    "content": {
+      "schema": "u2-simplemem-environment-r3-receipt-v1",
+      "status": "READY_FOR_SOL_NARROW_FTS_CHECK",
+      "environment_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation",
+      "python": "3.11.13",
+      "uv": "0.8.3",
+      "preserved_history": {
+        "r1_receipt_sha256": "24580a6c0ae684fdb3f56e63effc497ad6451404bcf845f4529f1fa6baae6a7b",
+        "r2_receipt_sha256": "85cb9b73143ca9474ceda7fb529cc0b6c37e4bf3d6d6ea6a6b190e2b6f98eee6",
+        "r1_and_r2_receipts_logs_freezes_preserved": true,
+        "previous_pylance_0251_install_retained_as_investigation_history": true
+      },
+      "simplemem_source": {
+        "official_remote": "https://github.com/aiming-lab/SimpleMem.git",
+        "revision": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+        "requirements_txt_sha256": "cc62dbb8cf954b1c58928723153136af3e0759df77746de09fc2c2bb58fb9783",
+        "requirements_txt_line_89": "pylance==0.39.0",
+        "license": "MIT License",
+        "license_sha256": "276dc8cc9eb5a8c59d1edca3283163815d2caa512b17bd0bf053050304b4cd3e",
+        "setup_py_sha256": "1597a4f403f0794ebcedf7eac5bd26bd106e48a4b504a7d03a1669a795253a12",
+        "correction": "R1/R2 investigation incorrectly stated the upstream requirements did not pin pylance. The full git-show file contains pylance==0.39.0 at line 89; the earlier filtered excerpt had omitted it. This R3 uses the upstream pin."
+      },
+      "lancedb_pylance_compatibility": {
+        "lancedb": "0.25.3",
+        "lancedb_metadata_sha256": "7dab63e139e55218f3c1b2b39c88bcf53a90892b4f112af671fc53c7a40d57ba",
+        "lancedb_declared_extra": "pylance>=0.25 ; extra == pylance",
+        "resolved_pylance": "0.39.0",
+        "pylance_metadata_sha256": "871f257eb6562f5d90b23f21b901bfe550dd2e8852ddc820a358252417a12b64",
+        "pylance_license_sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+        "pypi_release_url": "https://pypi.org/project/pylance/0.39.0/",
+        "pypi_json_url": "https://pypi.org/pypi/pylance/0.39.0/json",
+        "official_linux_x86_64_abi3_wheel": {
+          "filename": "pylance-0.39.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+          "bytes": 48656564,
+          "sha256": "fc28f23ea894ded1e343c1b16bac0c78d87a7484cc1837c56035532b34d9fd2b"
+        },
+        "official_requirements": [
+          "pyarrow>=14",
+          "numpy>=1.22",
+          "lance-namespace>=0.0.20",
+          "Python>=3.9"
+        ],
+        "installed_satisfies_requirements": {
+          "pyarrow": "22.0.0",
+          "numpy": "2.4.6",
+          "lance-namespace": "0.13.0",
+          "all_satisfied": true
+        },
+        "selection_basis": "Use exact upstream SimpleMem requirements pin 0.39.0. Official PyPI metadata constraints are satisfied by existing environment versions."
+      },
+      "install": {
+        "command": "uv pip install --python MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python --constraints MiLAi-Lab/artifacts/unified-v8-v9/u2-simplemem-environment/r3.constraints.txt pylance==0.39.0",
+        "dry_run_result": "Would replace pylance 0.25.1 with 0.39.0; no other packages selected for install/uninstall.",
+        "before_pylance": "0.25.1",
+        "after_pylance": "0.39.0",
+        "other_108_package_versions_changed": 0,
+        "postinstall_distribution_count": 109
+      },
+      "final_freeze": {
+        "path": "requirements-r3.txt",
+        "sha256": "e02c84cf625028798463744172dc10ff18d918db7b9d9b36ee519064c5e5dc22",
+        "bytes": 2161
+      },
+      "import_check": {
+        "result": "PASSED",
+        "imports": [
+          "lance",
+          "simplemem.core",
+          "simplemem.core.database.VectorStore",
+          "lancedb",
+          "pyarrow",
+          "dateparser",
+          "tantivy",
+          "milai_lab"
+        ],
+        "constructors_or_database_or_fts_called": false
+      },
+      "fts_verification": "NOT_PERFORMED; import lance is not evidence that LanceDB FTS construction works. Sol owns narrow FTS verification.",
+      "service_model_and_benchmark_calls": {
+        "host": 0,
+        "database": 0,
+        "embedding": 0,
+        "model_generation": 0,
+        "benchmark": 0
+      },
+      "network": "Downloaded the pinned PyPI package wheel only; no model or service request.",
+      "logs": {
+        "01-foundation-sync.log": {
+          "sha256": "7c99413a9c40ed7daf55756ee53616d1c2e4bc787584c4958814d26d34a83845",
+          "bytes": 78
+        },
+        "02-foundation-sync.log": {
+          "sha256": "0242e43ca037fb3a3075e0fb48b35235f77051edbb09b8e93e3f8da93f5dc667",
+          "bytes": 2924
+        },
+        "03-simplemem-core-deps-install.log": {
+          "sha256": "6f400b7f2778d96bc1839f2d2fe281724781f8d13ba0b09a6d8b37573d129767",
+          "bytes": 941
+        },
+        "04-import-smoke.log": {
+          "sha256": "9ac87611868fc162788e401ccbd89878f960a765f5ea268b81c35332a193e370",
+          "bytes": 223
+        },
+        "05-pylance-0251-install.log": {
+          "sha256": "53b5c9ea2ecb2945c52ab754d90c6e3f697687d85acdccf8a44216cf30f9a12d",
+          "bytes": 585
+        },
+        "06-pylance-import-check.log": {
+          "sha256": "eaaa5b99340d9e02f2d0207664024c9456a708a03f39793342fc53a08e3b5982",
+          "bytes": 75
+        },
+        "07-pylance-0390-install.log": {
+          "sha256": "224b46eeaeaa8c32a02c7e6d0a0d67b3327d236e27934528d50ba02695e1d67b",
+          "bytes": 634
+        },
+        "08-pylance-0390-import.log": {
+          "sha256": "e0a6e7c4ba23ac2878015cbb83974fb000df6ec29566da2f24af0da9ead758ba",
+          "bytes": 205
+        }
+      },
+      "changes": {
+        "tracked_files": 0,
+        "public_lock_files": 0,
+        "existing_foundation_or_external_envs": 0,
+        "git_commits": 0
+      }
+    }
+  },
+  "current_full_environment": {
+    "requirements_file": "artifacts/unified-v8-v9/u2-simplemem-environment/requirements-r3.txt",
+    "requirements_sha256": "e02c84cf625028798463744172dc10ff18d918db7b9d9b36ee519064c5e5dc22",
+    "distribution_count": 109,
+    "requirements_excluding_editable_lab": [
+      "aiosqlite==0.22.1",
+      "annotated-types==0.8.0",
+      "anthropic==1.8.0",
+      "anyio==4.14.2",
+      "attrs==26.1.0",
+      "build==1.6.0",
+      "certifi==2026.7.22",
+      "cffi==2.1.1",
+      "charset-normalizer==3.5.1",
+      "click==8.5.0",
+      "cryptography==50.0.1",
+      "dateparser==1.2.2",
+      "deprecation==2.1.0",
+      "distro==1.9.0",
+      "docstring-parser==0.18.0",
+      "dydantic==0.0.8",
+      "filelock==3.32.5",
+      "fsspec==2026.7.0",
+      "h11==0.16.0",
+      "hf-xet==1.6.0",
+      "httpcore==1.0.9",
+      "httpcore2==2.12.0",
+      "httpx==0.28.1",
+      "httpx2==2.12.0",
+      "huggingface-hub==0.36.2",
+      "idna==3.19",
+      "iniconfig==2.3.0",
+      "jinja2==3.1.6",
+      "jiter==0.17.0",
+      "jsonpatch==1.33",
+      "jsonpointer==3.1.1",
+      "jsonschema==4.26.0",
+      "jsonschema-specifications==2025.9.1",
+      "lance-namespace==0.13.0",
+      "lance-namespace-urllib3-client==0.13.0",
+      "lancedb==0.25.3",
+      "langchain==1.2.18",
+      "langchain-anthropic==1.7.4",
+      "langchain-core==1.6.5",
+      "langchain-openai==1.6.6",
+      "langchain-protocol==0.0.19",
+      "langgraph==1.1.10",
+      "langgraph-checkpoint==2.1.2",
+      "langgraph-checkpoint-postgres==2.0.25",
+      "langgraph-checkpoint-sqlite==2.0.11",
+      "langgraph-prebuilt==1.0.13",
+      "langgraph-sdk==0.3.15",
+      "langmem @ git+https://github.com/langchain-ai/langmem.git@9d033b47d9ce53e37e92c92241b0496c0278932e",
+      "langsmith==0.14.1",
+      "librt==0.15.0",
+      "markupsafe==3.0.3",
+      "mcp==2.1.1",
+      "mcp-types==2.1.1",
+      "mypy==1.20.2",
+      "mypy-extensions==1.1.0",
+      "numpy==2.4.6",
+      "openai==3.19.2",
+      "opentelemetry-api==1.44.0",
+      "orjson==3.12.0",
+      "ormsgpack==1.12.2",
+      "overrides==7.7.0",
+      "packaging==26.3",
+      "pathspec==1.1.1",
+      "pluggy==1.6.0",
+      "psycopg==3.3.6",
+      "psycopg-pool==3.3.3",
+      "pyarrow==22.0.0",
+      "pycparser==3.0",
+      "pydantic==2.13.5",
+      "pydantic-core==2.46.5",
+      "pygments==2.21.0",
+      "pyjwt==2.13.0",
+      "pylance==0.39.0",
+      "pyproject-hooks==1.2.0",
+      "pytest==8.4.2",
+      "python-dateutil==2.9.0.post0",
+      "python-multipart==0.0.32",
+      "pytz==2026.4",
+      "pyyaml==6.0.3",
+      "referencing==0.37.0",
+      "regex==2026.9.3",
+      "requests==2.34.2",
+      "requests-toolbelt==1.0.0",
+      "rpds-py==2026.6.3",
+      "ruff==0.16.5",
+      "safetensors==0.8.0",
+      "six==1.17.0",
+      "sniffio==1.3.1",
+      "sqlite-vec==0.1.9",
+      "sse-starlette==3.4.8",
+      "starlette==1.6.0",
+      "tantivy==0.26.2",
+      "tenacity==9.1.4",
+      "tiktoken==0.14.0",
+      "tokenizers==0.22.2",
+      "tqdm==4.70.0",
+      "transformers==4.57.6",
+      "trustcall==0.0.39",
+      "truststore==0.10.4",
+      "typing-extensions==4.16.0",
+      "typing-inspection==0.4.4",
+      "tzlocal==5.4.4",
+      "urllib3==2.7.0",
+      "uuid-utils==0.17.1",
+      "uvicorn==0.52.4",
+      "websockets==17.1",
+      "xxhash==4.0.1",
+      "zstandard==0.25.0"
+    ],
+    "editable_lab": "Bound by subsequent published source/execution freeze; not a portable local file URL."
+  },
+  "history": {
+    "r1": {
+      "receipt_sha256": "24580a6c0ae684fdb3f56e63effc497ad6451404bcf845f4529f1fa6baae6a7b",
+      "requirements_sha256": "fccfd9488a3db20e5ef857bfe4ab4a6d52b9f26d4455c8ed5e4d56f07196080b",
+      "status": "PURE_IMPORT_PASSED_BUT_NATIVE_FTS_LATER_FOUND_PYLANCE_MISSING",
+      "native_sdk_first_check": "7 passed / 2 failed; no real model calls"
+    },
+    "r2": {
+      "receipt_sha256": "85cb9b73143ca9474ceda7fb529cc0b6c37e4bf3d6d6ea6a6b190e2b6f98eee6",
+      "requirements_sha256": "03ae9f33e2da186a963cb718bc7bcd5234caa812c174f35e765fb659cb7c060b",
+      "status": "SUPERSEDED_UPSTREAM_PIN_WAS_MISSED",
+      "installed": "pylance==0.25.1",
+      "pure_import": "PASSED",
+      "native_fts": "NOT_RUN",
+      "correction": "Initial filtered search incorrectly claimed upstream had no pylance pin. Full pinned file line89 has pylance==0.39.0. R3 corrects the single package before SDK retry, preserving original receipt and logs."
+    }
+  },
+  "model_assets_downloaded": false,
+  "real_model_calls": 0,
+  "existing_environments_modified": false,
+  "root_receipt_verification_note": "First R1 log read assumed receipt-root paths and raised FileNotFoundError; actual logs/ paths subsequently verified. No install/import/test/model repeated by Root."
+}

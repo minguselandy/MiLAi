@@ -1,0 +1,108 @@
+{
+  "kind": "UNIFIED_V8_V9_NATIVE_REFERENCE_ENVIRONMENT",
+  "status": "DEPENDENCIES_READY_NATIVE_BENCHMARK_NOT_RUN",
+  "purpose": "Real LiteLLM module required by official MERIT run_episode; actual completions go through the shared metered VLLMClient bridge.",
+  "head_at_environment_creation": "56c02d8764b298a693ff79b73658257855c9add1",
+  "adapter_source_status_at_import": "WIP_NOT_A_FROZEN_METHOD_COMMIT",
+  "python": "3.12.11",
+  "native_python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/native-transport/venv/bin/python",
+  "direct_pins": [
+    "litellm==1.100.1",
+    "openai==2.54.0"
+  ],
+  "resolved_packages": 72,
+  "public_lock_path": "data/locks/unified-v8-v9-native-transport-20260928.requirements.txt",
+  "lock_sha256": "27da7871dcb01959083cf911209d12295252f3f04945a1cd81eb4580e247d9ab",
+  "lock_install": "uv venv --python 3.12.11 <isolated-env>; uv pip sync --python <isolated-env>/bin/python --require-hashes data/locks/unified-v8-v9-native-transport-20260928.requirements.txt",
+  "dependency_check": "uv pip check --python <venv>/bin/python: all 72 installed packages compatible",
+  "packages": {
+    "httpx": {
+      "version": "0.28.1",
+      "license_expression": null,
+      "license": "BSD-3-Clause",
+      "license_file_sha256": {
+        "httpx-0.28.1.dist-info/licenses/LICENSE.md": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d"
+      }
+    },
+    "jsonschema": {
+      "version": "4.26.0",
+      "license_expression": "MIT",
+      "license": null,
+      "license_file_sha256": {}
+    },
+    "litellm": {
+      "version": "1.100.1",
+      "license_expression": "MIT",
+      "license": null,
+      "license_file_sha256": {
+        "litellm-1.100.1.dist-info/licenses/LICENSE": "b170d6bf8e8835dd357e011681db028f4d51e2fb0ea892058f56e01fb39b8273"
+      }
+    },
+    "mcp": {
+      "version": "2.1.1",
+      "license_expression": null,
+      "license": "MIT",
+      "license_file_sha256": {
+        "mcp-2.1.1.dist-info/licenses/LICENSE": "5e13dbbc1d120fc2a03cecde7c91424ae2d7de11b63d58ded2f4431e261ee50d"
+      }
+    },
+    "openai": {
+      "version": "2.54.0",
+      "license_expression": null,
+      "license": "Apache-2.0",
+      "license_file_sha256": {
+        "openai-2.54.0.dist-info/licenses/LICENSE": "636eb7d79da9bb6d515a4b3fd417aa26679eb3cf16396ddab4bc55fa74e616e4"
+      }
+    },
+    "pydantic": {
+      "version": "2.13.5",
+      "license_expression": "MIT",
+      "license": null,
+      "license_file_sha256": {
+        "pydantic-2.13.5.dist-info/licenses/LICENSE": "a9e186f3ca16b5eef84318e7a701721351a00cb7b8ae3a4394b67b49e3529ef3"
+      }
+    },
+    "tokenizers": {
+      "version": "0.22.2",
+      "license_expression": null,
+      "license": null,
+      "license_file_sha256": {}
+    },
+    "transformers": {
+      "version": "4.57.6",
+      "license_expression": null,
+      "license": "Apache 2.0 License",
+      "license_file_sha256": {
+        "transformers-4.57.6.dist-info/licenses/LICENSE": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049"
+      }
+    }
+  },
+  "public_api_validation": {
+    "completion_callable": true,
+    "drop_params_present": true,
+    "litellm_import": true,
+    "milai_merit_bridge_imported": true,
+    "num_retries_present": true,
+    "openai_chatcompletion_model_validate_callable": true,
+    "register_model_callable": true,
+    "request_timeout_present": true
+  },
+  "recorded_difference": {
+    "foundation": "Python3.11.13 / OpenAI3.19.2; unchanged",
+    "native_reference": "Python3.12.11 / LiteLLM1.100.1 / OpenAI2.54.0",
+    "reason": "LiteLLM requires openai>=2.20,<3.0; separate environment respects that contract. This changes the SDK environment, not the Host model.",
+    "common_contract": "Same actual Host/embedding endpoints and generation parameters, serialized model HTTP and continuous ledger; freeze each method environment explicitly."
+  },
+  "network_note": "Dependency distributions were actually downloaded. No model weights or inference requests were made by this installation. No global zero-HTTP claim.",
+  "historical_environment_or_tracked_lock_modified": false,
+  "private_receipt": {
+    "path": "artifacts/unified-v8-v9/envs/native-transport/install-receipt.json",
+    "sha256": "d9b50ff17c351cbe765396877ce6f11e41ceda1098bb32a0fea76c0c3cd9a727",
+    "original_receipt_sha256": "97ae3167e097907c43c8b2c7d001057078bbd6fa8bfc98f0a22974c6a9e2fa59"
+  },
+  "root_verification": "At environment creation: receipt, dependency lock and then-current project metadata hashes matched; no repeat of passed imports/pip check. Later adapter packaging changes are frozen in the actual U1 source identity.",
+  "limitations": [
+    "Import compatibility is not native model or benchmark efficacy.",
+    "Official domain/source and complete harness behavior still require Sol narrow checks and Root frozen real U1 slice."
+  ]
+}

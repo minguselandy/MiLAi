@@ -1,0 +1,713 @@
+{
+  "kind": "UNIFIED_U2_EXPOSED_PILOT_RESULTS",
+  "observed_at_utc": "2026-09-28T19:32:33.486653+00:00",
+  "source_commit": "795725a297fb1ef5f9d7bb712b3500d5b72546c0",
+  "execution_freeze_sha256": "b8922944014af67fbb0eca6b20cc91d22431167744929e4db68f63c530b23103",
+  "rows": [
+    {
+      "ordinal": 1,
+      "method": "raw_dialogue",
+      "benchmark": "memsyco",
+      "phase": "run-history",
+      "result_sha256": "810941d0d4f3ee627715c130e328d38aa94a8191eac9c271e169d29d5d62fb22",
+      "trace_sha256": "4b13322b7379afdc1d039157f4d985c51ca05326e483d367e6cf59635f80ffb6",
+      "costs": {},
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {},
+      "record_count": 0,
+      "summary_updates": 0,
+      "summary_degraded": null,
+      "raw_chunks": 0
+    },
+    {
+      "ordinal": 2,
+      "method": "raw_dialogue",
+      "benchmark": "memsyco",
+      "phase": "run-job",
+      "result_sha256": "1e75b16c90c964488e4dbce92978dd556da9c374cf0b986b1b4242162e6daed9",
+      "trace_sha256": "8b7da2ff84fb4872f5179c5d31e8bd924ec1ff898ca1bfd86840c83eceb0d4dc",
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1421
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "reader": {
+          "requests": 1,
+          "known_tokens": 1421,
+          "unknown_usage": 0
+        }
+      },
+      "answer_sha256": "610a2118ed7f9314e4588c46292e616264e8959bb2bdcef3f389f7e318112590",
+      "build_receipt_sha256": "810941d0d4f3ee627715c130e328d38aa94a8191eac9c271e169d29d5d62fb22"
+    },
+    {
+      "ordinal": 3,
+      "method": "strong_raw_rag",
+      "benchmark": "memsyco",
+      "phase": "run-history",
+      "result_sha256": "8d059bbe0ad739ff254f7add7a0f4de62183d369705ed16967b8dd9528e6f292",
+      "trace_sha256": "3d31ca271f6b67e565ac25daf37c7113d6db07467e045d35eecef60f7cd96242",
+      "costs": {
+        "embedding_calls": 1,
+        "embedding_tokens": 1519
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:raw_index_build": {
+          "requests": 1,
+          "known_tokens": 1519,
+          "unknown_usage": 0
+        }
+      },
+      "record_count": 0,
+      "summary_updates": 0,
+      "summary_degraded": null,
+      "raw_chunks": 10
+    },
+    {
+      "ordinal": 4,
+      "method": "strong_raw_rag",
+      "benchmark": "memsyco",
+      "phase": "run-job",
+      "result_sha256": "201d1cfd8ad4f26148013a20dd9e00562eb90e63978530f886be2212c372d7b0",
+      "trace_sha256": "258eadb2d7032c7bd9f8723e844c3f5c1464be35fe072a03991e6b3f3894ffdc",
+      "costs": {
+        "embedding_calls": 1,
+        "embedding_tokens": 16,
+        "generation_calls": 1,
+        "generation_tokens": 3241
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:retrieval": {
+          "requests": 1,
+          "known_tokens": 16,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "requests": 1,
+          "known_tokens": 3241,
+          "unknown_usage": 0
+        }
+      },
+      "answer_sha256": "09fd0a36c18e397fb20c355999b1d4e4cba86cac98bcf1adeae5b0a001b04c95",
+      "build_receipt_sha256": "8d059bbe0ad739ff254f7add7a0f4de62183d369705ed16967b8dd9528e6f292"
+    },
+    {
+      "ordinal": 5,
+      "method": "rolling_summary",
+      "benchmark": "memsyco",
+      "phase": "run-history",
+      "result_sha256": "e739af68cc12794602cdd4ab26eba15b5c83dd350071f0916cfe0b4b081fe7dd",
+      "trace_sha256": "1f4c2ce5dffcd9013984993ba0717a0bb72a41d76a360ee88f049b518866ba73",
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1458
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "summary_build": {
+          "requests": 1,
+          "known_tokens": 1458,
+          "unknown_usage": 0
+        }
+      },
+      "record_count": 0,
+      "summary_updates": 1,
+      "summary_degraded": false,
+      "raw_chunks": 0
+    },
+    {
+      "ordinal": 6,
+      "method": "rolling_summary",
+      "benchmark": "memsyco",
+      "phase": "run-job",
+      "result_sha256": "35ef0e921f3f28d80c734cd143e3c964041bf0c0fd165cd5cfd69b75e8808474",
+      "trace_sha256": "d64fd8e64c6a47ffd0487ef8af35ae3691496713b679caa6a3b5c7628d445f02",
+      "costs": {
+        "generation_calls": 1,
+        "generation_tokens": 1808
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "reader": {
+          "requests": 1,
+          "known_tokens": 1808,
+          "unknown_usage": 0
+        }
+      },
+      "answer_sha256": "13d783e964b07008d092293e82dca9f85d4c90c8e35f0fb972bb8c0c801421c2",
+      "build_receipt_sha256": "e739af68cc12794602cdd4ab26eba15b5c83dd350071f0916cfe0b4b081fe7dd"
+    },
+    {
+      "ordinal": 7,
+      "method": "ordinary_milai",
+      "benchmark": "memsyco",
+      "phase": "run-history",
+      "result_sha256": "2c05ea04acffc5dd9292bcd79d5d50bec58c656591c3ea6a54d94364f8b66dcf",
+      "trace_sha256": "bfe859b18cac5fb0e2794dd3b3a43f52e051dd705c5d04ee76056422aee2e76f",
+      "costs": {
+        "generation_calls": 2,
+        "generation_tokens": 5393,
+        "embedding_calls": 4,
+        "embedding_tokens": 335
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "formation": {
+          "requests": 2,
+          "known_tokens": 5393,
+          "unknown_usage": 0
+        },
+        "embedding:formation": {
+          "requests": 4,
+          "known_tokens": 335,
+          "unknown_usage": 0
+        }
+      },
+      "record_count": 4,
+      "summary_updates": 0,
+      "summary_degraded": null,
+      "raw_chunks": 0
+    },
+    {
+      "ordinal": 8,
+      "method": "ordinary_milai",
+      "benchmark": "memsyco",
+      "phase": "run-job",
+      "result_sha256": "58c1474109c4ac9154fc59a0c7980d9626501af5490d1e4f02d50ef1a3cd18d6",
+      "trace_sha256": "3c9c3c38d1328e03e67da725ac32eb2d7ebc8211cd2985f1f663302e85d944b2",
+      "costs": {
+        "embedding_calls": 1,
+        "embedding_tokens": 16,
+        "generation_calls": 1,
+        "generation_tokens": 1287
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:retrieval": {
+          "requests": 1,
+          "known_tokens": 16,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "requests": 1,
+          "known_tokens": 1287,
+          "unknown_usage": 0
+        }
+      },
+      "answer_sha256": "32de647786c90ffb80d83dd7f22d8554b92df379081d0f5232d0be6aebb92c9b",
+      "readonly_snapshot_equal": true,
+      "build_receipt_sha256": "2c05ea04acffc5dd9292bcd79d5d50bec58c656591c3ea6a54d94364f8b66dcf"
+    },
+    {
+      "ordinal": 9,
+      "method": "mem0_native",
+      "benchmark": "memsyco",
+      "phase": "run-history",
+      "result_sha256": "e77cdbd642b37b34172e8839b1f46aadffde177dcb70421f5b3e3908532d07f9",
+      "trace_sha256": "d4ce5724c373dfacb17bb72001d3d837b285d67e8080d9d45b18e640e9101d96",
+      "costs": {
+        "embedding_calls": 3,
+        "embedding_tokens": 1810,
+        "generation_calls": 1,
+        "generation_tokens": 9967
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:formation": {
+          "requests": 3,
+          "known_tokens": 1810,
+          "unknown_usage": 0
+        },
+        "formation": {
+          "requests": 1,
+          "known_tokens": 9967,
+          "unknown_usage": 0
+        }
+      },
+      "record_count": 5,
+      "summary_updates": 0,
+      "summary_degraded": null,
+      "raw_chunks": 0
+    },
+    {
+      "ordinal": 10,
+      "method": "mem0_native",
+      "benchmark": "memsyco",
+      "phase": "run-job",
+      "result_sha256": "2d3133187ee5b4f646677d27c6cf4a5da7c413249610d0f80a5583faf9c5ea99",
+      "trace_sha256": "7c87451a64f3fb0b734babedcb296e2bb414ef98d41503b95355f18ad415a2ac",
+      "costs": {
+        "embedding_calls": 1,
+        "embedding_tokens": 16,
+        "generation_calls": 1,
+        "generation_tokens": 1023
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:retrieval": {
+          "requests": 1,
+          "known_tokens": 16,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "requests": 1,
+          "known_tokens": 1023,
+          "unknown_usage": 0
+        }
+      },
+      "answer_sha256": "97ed9ead728d50761490e4ba94cf47aa07a01a6d3ecea3f05d03e1f3b383a772",
+      "readonly_snapshot_equal": true,
+      "build_receipt_sha256": "e77cdbd642b37b34172e8839b1f46aadffde177dcb70421f5b3e3908532d07f9"
+    },
+    {
+      "ordinal": 11,
+      "method": "full_history",
+      "benchmark": "merit",
+      "phase": "run-job",
+      "result_sha256": "4908a4fea645a208a2459c76591191b39c074f478b36d693017e2923e6e2051a",
+      "trace_sha256": "bf47257e1a5b5cb849c988dae218b5ea4d404ee266ba7a4c28693e93eaba19c8",
+      "costs": {
+        "generation_calls": 13,
+        "generation_tokens": 19412
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "task_host": {
+          "requests": 13,
+          "known_tokens": 19412,
+          "unknown_usage": 0
+        }
+      },
+      "native_successes": 5,
+      "dependent_successes": 2,
+      "host_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "public_turns": 6,
+      "generation_counts_per_public_turn": [
+        2,
+        2,
+        2,
+        2,
+        3,
+        2
+      ],
+      "raw_history_escape_requests": [],
+      "summary_updates": [],
+      "maintenance_statuses": [],
+      "final_memory_record_count": 0,
+      "legal_current_queries_verified": 6,
+      "summary_actual_max_tokens": []
+    },
+    {
+      "ordinal": 12,
+      "method": "strong_raw_rag",
+      "benchmark": "merit",
+      "phase": "run-job",
+      "result_sha256": "2460f4edd816f2fc50cc987d9e1587ffa57f02fbeeb9b8fafabc8cbe82916fcc",
+      "trace_sha256": "df4205fe5faa9e7ce983face489fe93d6a91cf0734246498626295f9d7b9acd6",
+      "costs": {
+        "generation_calls": 13,
+        "generation_tokens": 33065,
+        "embedding_calls": 10,
+        "embedding_tokens": 2719
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "task_host": {
+          "requests": 13,
+          "known_tokens": 33065,
+          "unknown_usage": 0
+        },
+        "embedding:raw_index_update": {
+          "requests": 5,
+          "known_tokens": 2559,
+          "unknown_usage": 0
+        },
+        "embedding:raw_retrieval": {
+          "requests": 5,
+          "known_tokens": 160,
+          "unknown_usage": 0
+        }
+      },
+      "native_successes": 5,
+      "dependent_successes": 2,
+      "host_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "public_turns": 6,
+      "generation_counts_per_public_turn": [
+        2,
+        2,
+        2,
+        2,
+        3,
+        2
+      ],
+      "raw_history_escape_requests": [],
+      "summary_updates": [],
+      "maintenance_statuses": [],
+      "final_memory_record_count": 0,
+      "legal_current_queries_verified": 6,
+      "summary_actual_max_tokens": []
+    },
+    {
+      "ordinal": 13,
+      "method": "rolling_summary",
+      "benchmark": "merit",
+      "phase": "run-job",
+      "result_sha256": "85e8820784a53ef5bb61a3f66c136fef30894dc0280901c6a48dac0dae1bf4ae",
+      "trace_sha256": "cd5867d1e9e4a375ec99f77ecfecb6a07238f15e2ef9fe0910b3bba4c911a3ba",
+      "costs": {
+        "generation_calls": 16,
+        "generation_tokens": 19553
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "task_host": {
+          "requests": 13,
+          "known_tokens": 17099,
+          "unknown_usage": 0
+        },
+        "summary_update": {
+          "requests": 3,
+          "known_tokens": 2454,
+          "unknown_usage": 0
+        }
+      },
+      "native_successes": 5,
+      "dependent_successes": 2,
+      "host_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "public_turns": 6,
+      "generation_counts_per_public_turn": [
+        2,
+        2,
+        2,
+        3,
+        4,
+        3
+      ],
+      "raw_history_escape_requests": [],
+      "summary_updates": [
+        {
+          "status": "committed",
+          "previous_covered_ordinal": -1,
+          "target_covered_ordinal": 0,
+          "reason": null
+        },
+        {
+          "status": "committed",
+          "previous_covered_ordinal": 0,
+          "target_covered_ordinal": 1,
+          "reason": null
+        },
+        {
+          "status": "committed",
+          "previous_covered_ordinal": 1,
+          "target_covered_ordinal": 2,
+          "reason": null
+        }
+      ],
+      "maintenance_statuses": [],
+      "final_memory_record_count": 0,
+      "legal_current_queries_verified": 6,
+      "summary_actual_max_tokens": [
+        2048,
+        2048,
+        2048
+      ]
+    },
+    {
+      "ordinal": 14,
+      "method": "ordinary_milai",
+      "benchmark": "merit",
+      "phase": "run-job",
+      "result_sha256": "5530169e8979cceefdc371de7d9cdd243475c215d252092a8ae3cec129462a65",
+      "trace_sha256": "1fbe3392bf7c947936bcfae3a8b07dbc78380541477e3ec0d28c72dc8d3e43fa",
+      "costs": {
+        "generation_calls": 15,
+        "generation_tokens": 39566,
+        "embedding_calls": 1,
+        "embedding_tokens": 7
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "task_host": {
+          "requests": 15,
+          "known_tokens": 39566,
+          "unknown_usage": 0
+        },
+        "embedding:task_host": {
+          "requests": 1,
+          "known_tokens": 7,
+          "unknown_usage": 0
+        }
+      },
+      "native_successes": 5,
+      "dependent_successes": 2,
+      "host_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "public_turns": 6,
+      "generation_counts_per_public_turn": [
+        2,
+        2,
+        2,
+        2,
+        3,
+        4
+      ],
+      "raw_history_escape_requests": [],
+      "summary_updates": [],
+      "maintenance_statuses": [],
+      "final_memory_record_count": 0,
+      "legal_current_queries_verified": null,
+      "summary_actual_max_tokens": []
+    },
+    {
+      "ordinal": 15,
+      "method": "mem0_native",
+      "benchmark": "merit",
+      "phase": "run-job",
+      "result_sha256": "6d8dcb27789267801f4b8bcee5d192971f5ea5256ae7b0b72ca7033054a09362",
+      "trace_sha256": "2a4bffd4793a18d25901908dc05adf9c64261e6c7929cf3b3272a4846a21a301",
+      "costs": {
+        "embedding_calls": 32,
+        "embedding_tokens": 6569,
+        "generation_calls": 20,
+        "generation_tokens": 97949
+      },
+      "usage_matches_ledger": true,
+      "status": "COMPLETED",
+      "phases": {
+        "embedding:mem0_retrieval": {
+          "requests": 12,
+          "known_tokens": 372,
+          "unknown_usage": 0
+        },
+        "task_host": {
+          "requests": 14,
+          "known_tokens": 39205,
+          "unknown_usage": 0
+        },
+        "embedding:mem0_update": {
+          "requests": 18,
+          "known_tokens": 6177,
+          "unknown_usage": 0
+        },
+        "mem0_update": {
+          "requests": 6,
+          "known_tokens": 58744,
+          "unknown_usage": 0
+        },
+        "embedding:task_host": {
+          "requests": 2,
+          "known_tokens": 20,
+          "unknown_usage": 0
+        }
+      },
+      "native_successes": 5,
+      "dependent_successes": 2,
+      "host_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "public_turns": 6,
+      "generation_counts_per_public_turn": [
+        3,
+        3,
+        3,
+        3,
+        4,
+        4
+      ],
+      "raw_history_escape_requests": [],
+      "summary_updates": [],
+      "maintenance_statuses": [
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "final_memory_record_count": 10,
+      "legal_current_queries_verified": 6,
+      "summary_actual_max_tokens": []
+    }
+  ],
+  "totals": {
+    "generation_calls": 86,
+    "generation_tokens": 235143,
+    "embedding_calls": 54,
+    "embedding_tokens": 13007
+  },
+  "capacity_prompt_error_values": [
+    0
+  ],
+  "generation_http_concurrency_contract": 1,
+  "ledger_after": {
+    "generation_requests": 3713,
+    "generation_tokens": 5060988,
+    "embedding_tokens": 37969
+  },
+  "judge_calls": 0,
+  "limitations": [
+    "One exposed MemSyco case and one exposed complete MERIT arc per method; not independent efficacy evidence",
+    "MemSyco native quality was intentionally not Judge-scored in this engineering pilot",
+    "System contracts differ; no pure compression or SER causal claim"
+  ],
+  "status": "ENGINEERING_PILOT_COMPLETED_MAIN_NOT_RUN",
+  "input_units": {
+    "memsyco_case": "mso_hard_000072",
+    "merit_arc": "arc5-000",
+    "unique_memsyco_cases": 1,
+    "unique_merit_arcs": 1,
+    "methods_per_benchmark": 5,
+    "merit_episode_opportunities_per_method": 5,
+    "merit_dependent_opportunities_per_method": 2,
+    "judge_quality_status": "NOT_PLANNED_FOR_PILOT"
+  },
+  "ledger_before": {
+    "generation_requests": 3627,
+    "generation_tokens": 4825845,
+    "embedding_tokens": 24962
+  },
+  "evidence_hashes": {
+    "chain-observations.json": "80f72f747ae633ce5f5ff6a3f87fbfa73d2511a4cca2c6275790643c5f273b2f",
+    "execution-freeze.json": "b8922944014af67fbb0eca6b20cc91d22431167744929e4db68f63c530b23103",
+    "run-order.json": "3943f5572fed3e30d1318a5041aa3f55851bb39742fbe896d8d25e5e78fc0020",
+    "budget-before.json": "adc5cca681cd3a7367135cbdd8dd753e1f0bb7d61d3e69e679519cb31d3e7ee2",
+    "budget-after.json": "afe4da8157d952f95b514a5e714a59ae352cf08b8ba728b73c9500c182da8cb4",
+    "readiness.json": "a43b60440804627f02571c234e4f08751943887bba038f42c999e3a2a575aa2d"
+  },
+  "invocation_receipts": [
+    {
+      "ordinal": 1,
+      "sha256": "5791107c380c4b1983b1e4ebc03f25eee523596d6ee77b1ac08b87c30ac063bb",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 2,
+      "sha256": "7b767b04a808da6d4f83fceb08bb0f9d945e7aa91eef0c0ec7f42495f4932ef0",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 3,
+      "sha256": "5b094208bf20f1c721fbc8b13b917197ed103898a19895275167f473e2e4b5c9",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 4,
+      "sha256": "0d24b4eadc3c8828a50d243f15ef1ed1ed5e57a369a5b12dd6fef6864f5b61ba",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 5,
+      "sha256": "4c77736dbd9ce77716ae61fef170cb722112ed1e283d5f2a422c4785803f298d",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 6,
+      "sha256": "f776a3d22ad0a6686f89ca4055e5ca22021a9a29f97315c10c899922e86c6bde",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 7,
+      "sha256": "e9a290816f31b91cd02097740b3236254e343b5c8e5bba5416a0ee5bedb1f8e1",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 8,
+      "sha256": "a808b3747bc564eec6f84170834b3b394c910a94e561b22d4379bdb8385cef64",
+      "log_sha256": "6263349b075d1922d14915b211208be268333f32f90a61e58ee41cd470eb636a"
+    },
+    {
+      "ordinal": 9,
+      "sha256": "5b2f269d015b6a8cc16f12c0b9de109b9b2442adad305f997f9aae91e7258767",
+      "log_sha256": "940760546a347319ff62fbf63baf6c8196004d8be40bc3738644f87a8c241b99"
+    },
+    {
+      "ordinal": 10,
+      "sha256": "58d48785298b332958c6f7d2f0680f7580fbead590d6f9944052cb63d0da32ae",
+      "log_sha256": "abb807c19e8c1b257ec7f56f839bd2bd47e9c21445a2aa9b5a57fcc1cbe4a11f"
+    },
+    {
+      "ordinal": 11,
+      "sha256": "818a85c20887314dcf3cd559bdba2f856929ae157973de11f553a5829b0cf4f5",
+      "log_sha256": "ee61b4a394c265cf7f48d7b5c9eca65e3ed8d7baa7bf9904c70dfb3ccf36995d"
+    },
+    {
+      "ordinal": 12,
+      "sha256": "6fa29878e55bdaa9281a169490fea68c4df5f3e198ea4d758cb74c23e4f35989",
+      "log_sha256": "ee61b4a394c265cf7f48d7b5c9eca65e3ed8d7baa7bf9904c70dfb3ccf36995d"
+    },
+    {
+      "ordinal": 13,
+      "sha256": "1e01ae7e584a34d38a8cc0dd1880e4f0bb9d7dbc718fc57c0f27eae9eeb7450a",
+      "log_sha256": "ee61b4a394c265cf7f48d7b5c9eca65e3ed8d7baa7bf9904c70dfb3ccf36995d"
+    },
+    {
+      "ordinal": 14,
+      "sha256": "0f3a4df96b02e7af507f74a78769c167e3332b19cafad7495ec21390df7951bf",
+      "log_sha256": "ee61b4a394c265cf7f48d7b5c9eca65e3ed8d7baa7bf9904c70dfb3ccf36995d"
+    },
+    {
+      "ordinal": 15,
+      "sha256": "b58e7f699e389c03d67a76d5e2568bfbb0e103f053798fba3ad42c16fb0475d2",
+      "log_sha256": "c35dad956a66aa902b16d0f3996162693386d9023ff05006b2a8c99b9dc227c3"
+    }
+  ],
+  "ci": {
+    "source_commit": "795725a297fb1ef5f9d7bb712b3500d5b72546c0",
+    "fast": {
+      "run_id": 36471409915,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "full": {
+      "run_id": 36471409881,
+      "status": "completed",
+      "conclusion": "skipped"
+    }
+  },
+  "decision": "Continue unchanged method into predeclared independent development comparison; no pilot tuning."
+}

@@ -1,0 +1,2568 @@
+{
+  "kind": "UNIFIED_V8_V9_USER_PAUSE_EXPERIMENT_SUMMARY",
+  "status": "PAUSED_BY_USER",
+  "report_date": "2026-09-29 Asia/Shanghai",
+  "goal_complete": false,
+  "research": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "user_request": "暂停当前实验，生成实验报告",
+  "pause_verification": {
+    "kind": "USER_REQUESTED_EXPERIMENT_PAUSE",
+    "observed_at_utc": "2026-09-28T23:24:40.554546+00:00",
+    "actual_goal_status": "paused",
+    "experiment_processes": [],
+    "model_asset_download_processes": [],
+    "pilot_invocations": [
+      {
+        "ordinal": 1,
+        "status": "COMPLETED"
+      },
+      {
+        "ordinal": 2,
+        "status": "COMPLETED"
+      },
+      {
+        "ordinal": 3,
+        "status": "FAILED"
+      }
+    ],
+    "simplemem_development_runtime_exists": false,
+    "ledger_after": {
+      "generation_requests": 5992,
+      "generation_tokens": 10921341,
+      "embedding_tokens": 416802
+    },
+    "ledger_sha256": "2ef3e45b0150cb6c5cc2c47dc0f0493497157e84dae0a9e991d71b1181113e3c",
+    "model_calls_for_closeout": 0,
+    "existing_services": "Preserved; no shared inference/database service stopped or reconfigured.",
+    "next_authority": "New explicit user resume required; prior ACTIVE/CONTINUE and draft contracts do not authorize execution."
+  },
+  "source_identities": {
+    "u2_method_A": "795725a297fb1ef5f9d7bb712b3500d5b72546c0",
+    "u2_execution_B": "e6df2f5d914c3ea2f08ce34f0887749e6f0c30dc",
+    "u2_report_C": "81f2cf469f0a64f53256838c7884592c8d88ab7e",
+    "simplemem_method_and_pilot": "9200de0146da03ac09c78dab820feb1c9d09a708"
+  },
+  "u2_memsyco": {
+    "raw_dialogue": {
+      "contextual_scope_control": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 17,
+          "unresolved": 0,
+          "lower_bound": 0.85,
+          "upper_bound": 0.85
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 17,
+          "accuracy_avg": 0.85,
+          "incorrectly_used_preference_sum": 3,
+          "incorrectly_used_preference_avg": 0.15,
+          "scope_pass_sum": 17,
+          "scope_pass_avg": 0.85,
+          "acc": 0.85,
+          "syco_rate": 0.15
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          }
+        }
+      },
+      "personalized_memory_use": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 17,
+          "unresolved": 0,
+          "lower_bound": 0.85,
+          "upper_bound": 0.85
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 17,
+          "answer_accuracy_avg": 0.85,
+          "preference_used_sum": 20,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 17,
+          "memory_use_pass_avg": 0.85,
+          "acc": 0.85,
+          "correct_pref_use": 1.0
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 6,
+            "successes": 4,
+            "unresolved": 0,
+            "lower_bound": 0.6666666666666666,
+            "upper_bound": 0.6666666666666666
+          },
+          "<=4096": {
+            "planned": 14,
+            "successes": 13,
+            "unresolved": 0,
+            "lower_bound": 0.9285714285714286,
+            "upper_bound": 0.9285714285714286
+          }
+        }
+      },
+      "valid_memory_selection": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 13,
+          "unresolved": 1,
+          "lower_bound": 0.65,
+          "upper_bound": 0.7
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 19,
+          "n_unjudged": 1,
+          "judge_parse_failed": 1,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 13,
+          "uses_latest_preference_avg": 0.6842105263157895,
+          "outdated_preference_contamination_sum": 5,
+          "outdated_preference_contamination_avg": 0.2631578947368421,
+          "valid_selection_pass_sum": 13,
+          "valid_selection_pass_avg": 0.6842105263157895,
+          "acc": 0.6842105263157895,
+          "outdated_pref": 0.2631578947368421
+        },
+        "host_statuses": {
+          "COMPLETED": 19,
+          "FAILED": 1
+        },
+        "score_statuses": {
+          "SCORED": 19,
+          "HOST_INCOMPLETE": 1
+        },
+        "length_bands": {
+          ">8192": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 1,
+            "lower_bound": 0.65,
+            "upper_bound": 0.7
+          }
+        }
+      }
+    },
+    "strong_raw_rag": {
+      "contextual_scope_control": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 19,
+          "unresolved": 0,
+          "lower_bound": 0.95,
+          "upper_bound": 0.95
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 19,
+          "accuracy_avg": 0.95,
+          "incorrectly_used_preference_sum": 1,
+          "incorrectly_used_preference_avg": 0.05,
+          "scope_pass_sum": 19,
+          "scope_pass_avg": 0.95,
+          "acc": 0.95,
+          "syco_rate": 0.05
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 20,
+            "successes": 19,
+            "unresolved": 0,
+            "lower_bound": 0.95,
+            "upper_bound": 0.95
+          }
+        }
+      },
+      "personalized_memory_use": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 18,
+          "unresolved": 0,
+          "lower_bound": 0.9,
+          "upper_bound": 0.9
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 18,
+          "answer_accuracy_avg": 0.9,
+          "preference_used_sum": 20,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 18,
+          "memory_use_pass_avg": 0.9,
+          "acc": 0.9,
+          "correct_pref_use": 1.0
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 6,
+            "successes": 6,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "<=4096": {
+            "planned": 14,
+            "successes": 12,
+            "unresolved": 0,
+            "lower_bound": 0.8571428571428571,
+            "upper_bound": 0.8571428571428571
+          }
+        }
+      },
+      "valid_memory_selection": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 0.75,
+          "upper_bound": 0.75
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 15,
+          "uses_latest_preference_avg": 0.75,
+          "outdated_preference_contamination_sum": 5,
+          "outdated_preference_contamination_avg": 0.25,
+          "valid_selection_pass_sum": 15,
+          "valid_selection_pass_avg": 0.75,
+          "acc": 0.75,
+          "outdated_pref": 0.25
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          ">8192": {
+            "planned": 20,
+            "successes": 15,
+            "unresolved": 0,
+            "lower_bound": 0.75,
+            "upper_bound": 0.75
+          }
+        }
+      }
+    },
+    "rolling_summary": {
+      "contextual_scope_control": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 17,
+          "unresolved": 0,
+          "lower_bound": 0.85,
+          "upper_bound": 0.85
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 17,
+          "accuracy_avg": 0.85,
+          "incorrectly_used_preference_sum": 3,
+          "incorrectly_used_preference_avg": 0.15,
+          "scope_pass_sum": 17,
+          "scope_pass_avg": 0.85,
+          "acc": 0.85,
+          "syco_rate": 0.15
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          }
+        }
+      },
+      "personalized_memory_use": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 19,
+          "unresolved": 0,
+          "lower_bound": 0.95,
+          "upper_bound": 0.95
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 19,
+          "answer_accuracy_avg": 0.95,
+          "preference_used_sum": 20,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 19,
+          "memory_use_pass_avg": 0.95,
+          "acc": 0.95,
+          "correct_pref_use": 1.0
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 6,
+            "successes": 6,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "<=4096": {
+            "planned": 14,
+            "successes": 13,
+            "unresolved": 0,
+            "lower_bound": 0.9285714285714286,
+            "upper_bound": 0.9285714285714286
+          }
+        }
+      },
+      "valid_memory_selection": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 0.75,
+          "upper_bound": 0.75
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 15,
+          "uses_latest_preference_avg": 0.75,
+          "outdated_preference_contamination_sum": 4,
+          "outdated_preference_contamination_avg": 0.2,
+          "valid_selection_pass_sum": 15,
+          "valid_selection_pass_avg": 0.75,
+          "acc": 0.75,
+          "outdated_pref": 0.2
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          ">8192": {
+            "planned": 20,
+            "successes": 15,
+            "unresolved": 0,
+            "lower_bound": 0.75,
+            "upper_bound": 0.75
+          }
+        }
+      }
+    },
+    "ordinary_milai": {
+      "contextual_scope_control": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 6,
+          "unresolved": 0,
+          "lower_bound": 0.3,
+          "upper_bound": 0.3
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 6,
+          "accuracy_avg": 0.3,
+          "incorrectly_used_preference_sum": 14,
+          "incorrectly_used_preference_avg": 0.7,
+          "scope_pass_sum": 6,
+          "scope_pass_avg": 0.3,
+          "acc": 0.3,
+          "syco_rate": 0.7
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 20,
+            "successes": 6,
+            "unresolved": 0,
+            "lower_bound": 0.3,
+            "upper_bound": 0.3
+          }
+        }
+      },
+      "personalized_memory_use": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 16,
+          "unresolved": 0,
+          "lower_bound": 0.8,
+          "upper_bound": 0.8
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 16,
+          "answer_accuracy_avg": 0.8,
+          "preference_used_sum": 20,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 16,
+          "memory_use_pass_avg": 0.8,
+          "acc": 0.8,
+          "correct_pref_use": 1.0
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 6,
+            "successes": 5,
+            "unresolved": 0,
+            "lower_bound": 0.8333333333333334,
+            "upper_bound": 0.8333333333333334
+          },
+          "<=4096": {
+            "planned": 14,
+            "successes": 11,
+            "unresolved": 0,
+            "lower_bound": 0.7857142857142857,
+            "upper_bound": 0.7857142857142857
+          }
+        }
+      },
+      "valid_memory_selection": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 13,
+          "unresolved": 0,
+          "lower_bound": 0.65,
+          "upper_bound": 0.65
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 14,
+          "uses_latest_preference_avg": 0.7,
+          "outdated_preference_contamination_sum": 6,
+          "outdated_preference_contamination_avg": 0.3,
+          "valid_selection_pass_sum": 13,
+          "valid_selection_pass_avg": 0.65,
+          "acc": 0.7,
+          "outdated_pref": 0.3
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          ">8192": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 0,
+            "lower_bound": 0.65,
+            "upper_bound": 0.65
+          }
+        }
+      }
+    },
+    "mem0_native": {
+      "contextual_scope_control": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 16,
+          "unresolved": 0,
+          "lower_bound": 0.8,
+          "upper_bound": 0.8
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 16,
+          "accuracy_avg": 0.8,
+          "incorrectly_used_preference_sum": 4,
+          "incorrectly_used_preference_avg": 0.2,
+          "scope_pass_sum": 16,
+          "scope_pass_avg": 0.8,
+          "acc": 0.8,
+          "syco_rate": 0.2
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 20,
+            "successes": 16,
+            "unresolved": 0,
+            "lower_bound": 0.8,
+            "upper_bound": 0.8
+          }
+        }
+      },
+      "personalized_memory_use": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 16,
+          "unresolved": 0,
+          "lower_bound": 0.8,
+          "upper_bound": 0.8
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 16,
+          "answer_accuracy_avg": 0.8,
+          "preference_used_sum": 19,
+          "preference_used_avg": 0.95,
+          "memory_use_pass_sum": 16,
+          "memory_use_pass_avg": 0.8,
+          "acc": 0.8,
+          "correct_pref_use": 0.95
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          "4097..8192": {
+            "planned": 6,
+            "successes": 3,
+            "unresolved": 0,
+            "lower_bound": 0.5,
+            "upper_bound": 0.5
+          },
+          "<=4096": {
+            "planned": 14,
+            "successes": 13,
+            "unresolved": 0,
+            "lower_bound": 0.9285714285714286,
+            "upper_bound": 0.9285714285714286
+          }
+        }
+      },
+      "valid_memory_selection": {
+        "planned_pass_rate": {
+          "planned": 20,
+          "successes": 12,
+          "unresolved": 0,
+          "lower_bound": 0.6,
+          "upper_bound": 0.6
+        },
+        "native_aggregate": {
+          "n_total": 20,
+          "n_judged": 20,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 12,
+          "uses_latest_preference_avg": 0.6,
+          "outdated_preference_contamination_sum": 8,
+          "outdated_preference_contamination_avg": 0.4,
+          "valid_selection_pass_sum": 12,
+          "valid_selection_pass_avg": 0.6,
+          "acc": 0.6,
+          "outdated_pref": 0.4
+        },
+        "host_statuses": {
+          "COMPLETED": 20
+        },
+        "score_statuses": {
+          "SCORED": 20
+        },
+        "length_bands": {
+          ">8192": {
+            "planned": 20,
+            "successes": 12,
+            "unresolved": 0,
+            "lower_bound": 0.6,
+            "upper_bound": 0.6
+          }
+        }
+      }
+    }
+  },
+  "u2_merit": {
+    "full_history": {
+      "episode": {
+        "planned": 90,
+        "successes": 89,
+        "unresolved": 0,
+        "lower_bound": 0.9888888888888889,
+        "upper_bound": 0.9888888888888889
+      },
+      "dependent": {
+        "planned": 36,
+        "successes": 36,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "independent": {
+        "planned": 54,
+        "successes": 53,
+        "unresolved": 0,
+        "lower_bound": 0.9814814814814815,
+        "upper_bound": 0.9814814814814815
+      },
+      "arc": {
+        "planned": 18,
+        "successes": 17,
+        "unresolved": 0,
+        "lower_bound": 0.9444444444444444,
+        "upper_bound": 0.9444444444444444
+      },
+      "pre_satisfied": 0,
+      "host_statuses": {
+        "COMPLETED": 90
+      },
+      "domain_difficulty": {
+        "d1/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d1/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d3/easy": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        },
+        "d3/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        }
+      }
+    },
+    "strong_raw_rag": {
+      "episode": {
+        "planned": 90,
+        "successes": 90,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "dependent": {
+        "planned": 36,
+        "successes": 36,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "independent": {
+        "planned": 54,
+        "successes": 54,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "arc": {
+        "planned": 18,
+        "successes": 18,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "pre_satisfied": 0,
+      "host_statuses": {
+        "COMPLETED": 90
+      },
+      "domain_difficulty": {
+        "d1/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d1/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d3/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d3/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        }
+      }
+    },
+    "rolling_summary": {
+      "episode": {
+        "planned": 90,
+        "successes": 89,
+        "unresolved": 0,
+        "lower_bound": 0.9888888888888889,
+        "upper_bound": 0.9888888888888889
+      },
+      "dependent": {
+        "planned": 36,
+        "successes": 36,
+        "unresolved": 0,
+        "lower_bound": 1.0,
+        "upper_bound": 1.0
+      },
+      "independent": {
+        "planned": 54,
+        "successes": 53,
+        "unresolved": 0,
+        "lower_bound": 0.9814814814814815,
+        "upper_bound": 0.9814814814814815
+      },
+      "arc": {
+        "planned": 18,
+        "successes": 17,
+        "unresolved": 0,
+        "lower_bound": 0.9444444444444444,
+        "upper_bound": 0.9444444444444444
+      },
+      "pre_satisfied": 0,
+      "host_statuses": {
+        "COMPLETED": 90
+      },
+      "domain_difficulty": {
+        "d1/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d1/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d3/easy": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        },
+        "d3/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        }
+      }
+    },
+    "ordinary_milai": {
+      "episode": {
+        "planned": 90,
+        "successes": 75,
+        "unresolved": 7,
+        "lower_bound": 0.8333333333333334,
+        "upper_bound": 0.9111111111111111
+      },
+      "dependent": {
+        "planned": 36,
+        "successes": 32,
+        "unresolved": 4,
+        "lower_bound": 0.8888888888888888,
+        "upper_bound": 1.0
+      },
+      "independent": {
+        "planned": 54,
+        "successes": 43,
+        "unresolved": 3,
+        "lower_bound": 0.7962962962962963,
+        "upper_bound": 0.8518518518518519
+      },
+      "arc": {
+        "planned": 18,
+        "successes": 10,
+        "unresolved": 3,
+        "lower_bound": 0.5555555555555556,
+        "upper_bound": 0.7222222222222222
+      },
+      "pre_satisfied": 0,
+      "host_statuses": {
+        "COMPLETED": 83,
+        "INTERRUPTED_UNSCORED": 3,
+        "NOT_RUN": 4
+      },
+      "domain_difficulty": {
+        "d1/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d1/hard": {
+          "planned": 15,
+          "successes": 11,
+          "unresolved": 0,
+          "lower_bound": 0.7333333333333333,
+          "upper_bound": 0.7333333333333333
+        },
+        "d2/easy": {
+          "planned": 15,
+          "successes": 11,
+          "unresolved": 4,
+          "lower_bound": 0.7333333333333333,
+          "upper_bound": 1.0
+        },
+        "d2/hard": {
+          "planned": 15,
+          "successes": 12,
+          "unresolved": 3,
+          "lower_bound": 0.8,
+          "upper_bound": 1.0
+        },
+        "d3/easy": {
+          "planned": 15,
+          "successes": 11,
+          "unresolved": 0,
+          "lower_bound": 0.7333333333333333,
+          "upper_bound": 0.7333333333333333
+        },
+        "d3/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        }
+      }
+    },
+    "mem0_native": {
+      "episode": {
+        "planned": 90,
+        "successes": 86,
+        "unresolved": 0,
+        "lower_bound": 0.9555555555555556,
+        "upper_bound": 0.9555555555555556
+      },
+      "dependent": {
+        "planned": 36,
+        "successes": 35,
+        "unresolved": 0,
+        "lower_bound": 0.9722222222222222,
+        "upper_bound": 0.9722222222222222
+      },
+      "independent": {
+        "planned": 54,
+        "successes": 51,
+        "unresolved": 0,
+        "lower_bound": 0.9444444444444444,
+        "upper_bound": 0.9444444444444444
+      },
+      "arc": {
+        "planned": 18,
+        "successes": 14,
+        "unresolved": 0,
+        "lower_bound": 0.7777777777777778,
+        "upper_bound": 0.7777777777777778
+      },
+      "pre_satisfied": 0,
+      "host_statuses": {
+        "COMPLETED": 90
+      },
+      "domain_difficulty": {
+        "d1/easy": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        },
+        "d1/hard": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        },
+        "d2/easy": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d2/hard": {
+          "planned": 15,
+          "successes": 15,
+          "unresolved": 0,
+          "lower_bound": 1.0,
+          "upper_bound": 1.0
+        },
+        "d3/easy": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        },
+        "d3/hard": {
+          "planned": 15,
+          "successes": 14,
+          "unresolved": 0,
+          "lower_bound": 0.9333333333333333,
+          "upper_bound": 0.9333333333333333
+        }
+      }
+    }
+  },
+  "u2_comparison_statistics": {
+    "memsyco": {
+      "strong_raw_rag": {
+        "contextual_scope_control": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 19,
+            "unresolved": 0,
+            "lower_bound": 0.95,
+            "upper_bound": 0.95
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0ab63353c2392de7e9eccc4c": 1,
+            "memsyco-source-0ffec5a4d91d844302e277ce": 1,
+            "memsyco-source-384a31e2c7996eef8d024908": 1,
+            "memsyco-source-40181068d091b642803df762": 1,
+            "memsyco-source-43d04f8dceebe7a2fb4d907e": 1,
+            "memsyco-source-47aa8b0f78a0dc94ff34538c": 1,
+            "memsyco-source-4aa6b078f2655b8c73fd0bdf": 1,
+            "memsyco-source-4e11a65bfb7aa806dbe0e850": 1,
+            "memsyco-source-50d9e9ccb2718e28048a67d5": 1,
+            "memsyco-source-6ffcc93511b1c9794b7875e1": 1,
+            "memsyco-source-8c1cc981bae9ca5399aa7781": 1,
+            "memsyco-source-8c6408e40bd53877e175cbe6": 1,
+            "memsyco-source-92348f202f9e0cdaad056833": 1,
+            "memsyco-source-a46202ff65fb65762114cfba": 1,
+            "memsyco-source-c9f6985bec208ffaa141224f": 1,
+            "memsyco-source-cb4decd8382c70d985f75233": 1,
+            "memsyco-source-d9dadebac3abf2e6ebcd02df": 1,
+            "memsyco-source-dd08b4957f2aeef9f4e117fd": 1,
+            "memsyco-source-e7d11f6a33164e81a103cdc0": 1,
+            "memsyco-source-fdad3218243f87f29d010910": 1
+          },
+          "difference": 0.09999999999999998,
+          "confidence_interval": [
+            0.0,
+            0.25
+          ]
+        },
+        "personalized_memory_use": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 18,
+            "unresolved": 0,
+            "lower_bound": 0.9,
+            "upper_bound": 0.9
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0766599c522b23c9e8d6fbae": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-4bc3cc764b241c96a3af69e5": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-529c67ef5a9813602b7f6a58": 1,
+            "memsyco-source-5ae2d7900019902b0e86c59e": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-6dc70eb1b2283fbdce69c8d7": 1,
+            "memsyco-source-6eaaf3b08e55c55d08223120": 1,
+            "memsyco-source-86b9287b9cd8faf0a1fedbdf": 1,
+            "memsyco-source-8fd8855a1956153401fc0805": 1,
+            "memsyco-source-9cbe67332d764fb91749efcb": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-b545fde42062315e92fa8e4b": 1,
+            "memsyco-source-c65c39d5d02e4db8e6e2cb90": 1,
+            "memsyco-source-f560bb7e791ce9d2c6f228b1": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1,
+            "memsyco-source-f8138680743667cf8b599f60": 1,
+            "memsyco-source-ff775348f627efe69160c14d": 1
+          },
+          "difference": 0.050000000000000044,
+          "confidence_interval": [
+            -0.15,
+            0.25
+          ]
+        },
+        "valid_memory_selection": {
+          "baseline": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 1,
+            "lower_bound": 0.65,
+            "upper_bound": 0.7
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 15,
+            "unresolved": 0,
+            "lower_bound": 0.75,
+            "upper_bound": 0.75
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-14dca35e860862716d26e7b7": 1,
+            "memsyco-source-15a1d551a28d4cfa1e5fa8a1": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-1c51ea16132dd22ef1ee6be7": 1,
+            "memsyco-source-2667d3c60fa1498b25f2a8ef": 1,
+            "memsyco-source-274aefd0d61191729ed6e385": 1,
+            "memsyco-source-365d77354e9006031d8fdfb7": 1,
+            "memsyco-source-3d0b1290434c89ff63fe4f76": 1,
+            "memsyco-source-4ec73480f0c02b4d1ccf8af1": 1,
+            "memsyco-source-52685c3a8526c10ff025ca2c": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-a36827f12d2691b971456a45": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-ad15635a550a2f0ab144c26a": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-c7c638d4db63f5ad3c852193": 1,
+            "memsyco-source-e0fb723775a336bcb989bd56": 1,
+            "memsyco-source-e707f00fd5aa05e214dbd14e": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        }
+      },
+      "rolling_summary": {
+        "contextual_scope_control": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0ab63353c2392de7e9eccc4c": 1,
+            "memsyco-source-0ffec5a4d91d844302e277ce": 1,
+            "memsyco-source-384a31e2c7996eef8d024908": 1,
+            "memsyco-source-40181068d091b642803df762": 1,
+            "memsyco-source-43d04f8dceebe7a2fb4d907e": 1,
+            "memsyco-source-47aa8b0f78a0dc94ff34538c": 1,
+            "memsyco-source-4aa6b078f2655b8c73fd0bdf": 1,
+            "memsyco-source-4e11a65bfb7aa806dbe0e850": 1,
+            "memsyco-source-50d9e9ccb2718e28048a67d5": 1,
+            "memsyco-source-6ffcc93511b1c9794b7875e1": 1,
+            "memsyco-source-8c1cc981bae9ca5399aa7781": 1,
+            "memsyco-source-8c6408e40bd53877e175cbe6": 1,
+            "memsyco-source-92348f202f9e0cdaad056833": 1,
+            "memsyco-source-a46202ff65fb65762114cfba": 1,
+            "memsyco-source-c9f6985bec208ffaa141224f": 1,
+            "memsyco-source-cb4decd8382c70d985f75233": 1,
+            "memsyco-source-d9dadebac3abf2e6ebcd02df": 1,
+            "memsyco-source-dd08b4957f2aeef9f4e117fd": 1,
+            "memsyco-source-e7d11f6a33164e81a103cdc0": 1,
+            "memsyco-source-fdad3218243f87f29d010910": 1
+          },
+          "difference": 0.0,
+          "confidence_interval": [
+            -0.2,
+            0.2
+          ]
+        },
+        "personalized_memory_use": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 19,
+            "unresolved": 0,
+            "lower_bound": 0.95,
+            "upper_bound": 0.95
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0766599c522b23c9e8d6fbae": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-4bc3cc764b241c96a3af69e5": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-529c67ef5a9813602b7f6a58": 1,
+            "memsyco-source-5ae2d7900019902b0e86c59e": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-6dc70eb1b2283fbdce69c8d7": 1,
+            "memsyco-source-6eaaf3b08e55c55d08223120": 1,
+            "memsyco-source-86b9287b9cd8faf0a1fedbdf": 1,
+            "memsyco-source-8fd8855a1956153401fc0805": 1,
+            "memsyco-source-9cbe67332d764fb91749efcb": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-b545fde42062315e92fa8e4b": 1,
+            "memsyco-source-c65c39d5d02e4db8e6e2cb90": 1,
+            "memsyco-source-f560bb7e791ce9d2c6f228b1": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1,
+            "memsyco-source-f8138680743667cf8b599f60": 1,
+            "memsyco-source-ff775348f627efe69160c14d": 1
+          },
+          "difference": 0.09999999999999998,
+          "confidence_interval": [
+            -0.1,
+            0.3
+          ]
+        },
+        "valid_memory_selection": {
+          "baseline": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 1,
+            "lower_bound": 0.65,
+            "upper_bound": 0.7
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 15,
+            "unresolved": 0,
+            "lower_bound": 0.75,
+            "upper_bound": 0.75
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-14dca35e860862716d26e7b7": 1,
+            "memsyco-source-15a1d551a28d4cfa1e5fa8a1": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-1c51ea16132dd22ef1ee6be7": 1,
+            "memsyco-source-2667d3c60fa1498b25f2a8ef": 1,
+            "memsyco-source-274aefd0d61191729ed6e385": 1,
+            "memsyco-source-365d77354e9006031d8fdfb7": 1,
+            "memsyco-source-3d0b1290434c89ff63fe4f76": 1,
+            "memsyco-source-4ec73480f0c02b4d1ccf8af1": 1,
+            "memsyco-source-52685c3a8526c10ff025ca2c": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-a36827f12d2691b971456a45": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-ad15635a550a2f0ab144c26a": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-c7c638d4db63f5ad3c852193": 1,
+            "memsyco-source-e0fb723775a336bcb989bd56": 1,
+            "memsyco-source-e707f00fd5aa05e214dbd14e": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        }
+      },
+      "ordinary_milai": {
+        "contextual_scope_control": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 6,
+            "unresolved": 0,
+            "lower_bound": 0.3,
+            "upper_bound": 0.3
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0ab63353c2392de7e9eccc4c": 1,
+            "memsyco-source-0ffec5a4d91d844302e277ce": 1,
+            "memsyco-source-384a31e2c7996eef8d024908": 1,
+            "memsyco-source-40181068d091b642803df762": 1,
+            "memsyco-source-43d04f8dceebe7a2fb4d907e": 1,
+            "memsyco-source-47aa8b0f78a0dc94ff34538c": 1,
+            "memsyco-source-4aa6b078f2655b8c73fd0bdf": 1,
+            "memsyco-source-4e11a65bfb7aa806dbe0e850": 1,
+            "memsyco-source-50d9e9ccb2718e28048a67d5": 1,
+            "memsyco-source-6ffcc93511b1c9794b7875e1": 1,
+            "memsyco-source-8c1cc981bae9ca5399aa7781": 1,
+            "memsyco-source-8c6408e40bd53877e175cbe6": 1,
+            "memsyco-source-92348f202f9e0cdaad056833": 1,
+            "memsyco-source-a46202ff65fb65762114cfba": 1,
+            "memsyco-source-c9f6985bec208ffaa141224f": 1,
+            "memsyco-source-cb4decd8382c70d985f75233": 1,
+            "memsyco-source-d9dadebac3abf2e6ebcd02df": 1,
+            "memsyco-source-dd08b4957f2aeef9f4e117fd": 1,
+            "memsyco-source-e7d11f6a33164e81a103cdc0": 1,
+            "memsyco-source-fdad3218243f87f29d010910": 1
+          },
+          "difference": -0.55,
+          "confidence_interval": [
+            -0.8,
+            -0.3
+          ]
+        },
+        "personalized_memory_use": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 16,
+            "unresolved": 0,
+            "lower_bound": 0.8,
+            "upper_bound": 0.8
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0766599c522b23c9e8d6fbae": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-4bc3cc764b241c96a3af69e5": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-529c67ef5a9813602b7f6a58": 1,
+            "memsyco-source-5ae2d7900019902b0e86c59e": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-6dc70eb1b2283fbdce69c8d7": 1,
+            "memsyco-source-6eaaf3b08e55c55d08223120": 1,
+            "memsyco-source-86b9287b9cd8faf0a1fedbdf": 1,
+            "memsyco-source-8fd8855a1956153401fc0805": 1,
+            "memsyco-source-9cbe67332d764fb91749efcb": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-b545fde42062315e92fa8e4b": 1,
+            "memsyco-source-c65c39d5d02e4db8e6e2cb90": 1,
+            "memsyco-source-f560bb7e791ce9d2c6f228b1": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1,
+            "memsyco-source-f8138680743667cf8b599f60": 1,
+            "memsyco-source-ff775348f627efe69160c14d": 1
+          },
+          "difference": -0.04999999999999993,
+          "confidence_interval": [
+            -0.3,
+            0.2
+          ]
+        },
+        "valid_memory_selection": {
+          "baseline": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 1,
+            "lower_bound": 0.65,
+            "upper_bound": 0.7
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 0,
+            "lower_bound": 0.65,
+            "upper_bound": 0.65
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-14dca35e860862716d26e7b7": 1,
+            "memsyco-source-15a1d551a28d4cfa1e5fa8a1": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-1c51ea16132dd22ef1ee6be7": 1,
+            "memsyco-source-2667d3c60fa1498b25f2a8ef": 1,
+            "memsyco-source-274aefd0d61191729ed6e385": 1,
+            "memsyco-source-365d77354e9006031d8fdfb7": 1,
+            "memsyco-source-3d0b1290434c89ff63fe4f76": 1,
+            "memsyco-source-4ec73480f0c02b4d1ccf8af1": 1,
+            "memsyco-source-52685c3a8526c10ff025ca2c": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-a36827f12d2691b971456a45": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-ad15635a550a2f0ab144c26a": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-c7c638d4db63f5ad3c852193": 1,
+            "memsyco-source-e0fb723775a336bcb989bd56": 1,
+            "memsyco-source-e707f00fd5aa05e214dbd14e": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        }
+      },
+      "mem0_native": {
+        "contextual_scope_control": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 16,
+            "unresolved": 0,
+            "lower_bound": 0.8,
+            "upper_bound": 0.8
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0ab63353c2392de7e9eccc4c": 1,
+            "memsyco-source-0ffec5a4d91d844302e277ce": 1,
+            "memsyco-source-384a31e2c7996eef8d024908": 1,
+            "memsyco-source-40181068d091b642803df762": 1,
+            "memsyco-source-43d04f8dceebe7a2fb4d907e": 1,
+            "memsyco-source-47aa8b0f78a0dc94ff34538c": 1,
+            "memsyco-source-4aa6b078f2655b8c73fd0bdf": 1,
+            "memsyco-source-4e11a65bfb7aa806dbe0e850": 1,
+            "memsyco-source-50d9e9ccb2718e28048a67d5": 1,
+            "memsyco-source-6ffcc93511b1c9794b7875e1": 1,
+            "memsyco-source-8c1cc981bae9ca5399aa7781": 1,
+            "memsyco-source-8c6408e40bd53877e175cbe6": 1,
+            "memsyco-source-92348f202f9e0cdaad056833": 1,
+            "memsyco-source-a46202ff65fb65762114cfba": 1,
+            "memsyco-source-c9f6985bec208ffaa141224f": 1,
+            "memsyco-source-cb4decd8382c70d985f75233": 1,
+            "memsyco-source-d9dadebac3abf2e6ebcd02df": 1,
+            "memsyco-source-dd08b4957f2aeef9f4e117fd": 1,
+            "memsyco-source-e7d11f6a33164e81a103cdc0": 1,
+            "memsyco-source-fdad3218243f87f29d010910": 1
+          },
+          "difference": -0.04999999999999993,
+          "confidence_interval": [
+            -0.25,
+            0.15
+          ]
+        },
+        "personalized_memory_use": {
+          "baseline": {
+            "planned": 20,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.85,
+            "upper_bound": 0.85
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 16,
+            "unresolved": 0,
+            "lower_bound": 0.8,
+            "upper_bound": 0.8
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-0766599c522b23c9e8d6fbae": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-4bc3cc764b241c96a3af69e5": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-529c67ef5a9813602b7f6a58": 1,
+            "memsyco-source-5ae2d7900019902b0e86c59e": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-6dc70eb1b2283fbdce69c8d7": 1,
+            "memsyco-source-6eaaf3b08e55c55d08223120": 1,
+            "memsyco-source-86b9287b9cd8faf0a1fedbdf": 1,
+            "memsyco-source-8fd8855a1956153401fc0805": 1,
+            "memsyco-source-9cbe67332d764fb91749efcb": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-b545fde42062315e92fa8e4b": 1,
+            "memsyco-source-c65c39d5d02e4db8e6e2cb90": 1,
+            "memsyco-source-f560bb7e791ce9d2c6f228b1": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1,
+            "memsyco-source-f8138680743667cf8b599f60": 1,
+            "memsyco-source-ff775348f627efe69160c14d": 1
+          },
+          "difference": -0.04999999999999993,
+          "confidence_interval": [
+            -0.2,
+            0.1
+          ]
+        },
+        "valid_memory_selection": {
+          "baseline": {
+            "planned": 20,
+            "successes": 13,
+            "unresolved": 1,
+            "lower_bound": 0.65,
+            "upper_bound": 0.7
+          },
+          "candidate": {
+            "planned": 20,
+            "successes": 12,
+            "unresolved": 0,
+            "lower_bound": 0.6,
+            "upper_bound": 0.6
+          },
+          "paired_units": 20,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 20,
+          "cluster_sizes": {
+            "memsyco-source-14dca35e860862716d26e7b7": 1,
+            "memsyco-source-15a1d551a28d4cfa1e5fa8a1": 1,
+            "memsyco-source-190caca2001c506afd365198": 1,
+            "memsyco-source-1c51ea16132dd22ef1ee6be7": 1,
+            "memsyco-source-2667d3c60fa1498b25f2a8ef": 1,
+            "memsyco-source-274aefd0d61191729ed6e385": 1,
+            "memsyco-source-365d77354e9006031d8fdfb7": 1,
+            "memsyco-source-3d0b1290434c89ff63fe4f76": 1,
+            "memsyco-source-4ec73480f0c02b4d1ccf8af1": 1,
+            "memsyco-source-52685c3a8526c10ff025ca2c": 1,
+            "memsyco-source-52697258b1183ae20d7954e3": 1,
+            "memsyco-source-64328d93481b0bfabb68d3cb": 1,
+            "memsyco-source-a36827f12d2691b971456a45": 1,
+            "memsyco-source-aa9abf729a149417ef1aeaca": 1,
+            "memsyco-source-ad15635a550a2f0ab144c26a": 1,
+            "memsyco-source-b1200e9a3652dc9b42d228fc": 1,
+            "memsyco-source-c7c638d4db63f5ad3c852193": 1,
+            "memsyco-source-e0fb723775a336bcb989bd56": 1,
+            "memsyco-source-e707f00fd5aa05e214dbd14e": 1,
+            "memsyco-source-f68d634666ba80614d79aa90": 1
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        }
+      }
+    },
+    "merit": {
+      "strong_raw_rag": {
+        "episode": {
+          "baseline": {
+            "planned": 90,
+            "successes": 89,
+            "unresolved": 0,
+            "lower_bound": 0.9888888888888889,
+            "upper_bound": 0.9888888888888889
+          },
+          "candidate": {
+            "planned": 90,
+            "successes": 90,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "paired_units": 90,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 5,
+            "arc12-000": 5,
+            "arc13-000": 5,
+            "arc14-000": 5,
+            "arc15-000": 5,
+            "arc16-000": 5,
+            "d2-arc17-000": 5,
+            "d2-arc18-000": 5,
+            "d2-arc19-000": 5,
+            "d2-arc20-000": 5,
+            "d2-arc21-000": 5,
+            "d2-arc22-000": 5,
+            "d3-arc23-000": 5,
+            "d3-arc24-000": 5,
+            "d3-arc25-000": 5,
+            "d3-arc26-000": 5,
+            "d3-arc27-000": 5,
+            "d3-arc28-000": 5
+          },
+          "difference": 0.011111111111111072,
+          "confidence_interval": [
+            0.0,
+            0.03333333333333333
+          ]
+        },
+        "dependent": {
+          "baseline": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "candidate": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "paired_units": 36,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 2,
+            "arc12-000": 2,
+            "arc13-000": 2,
+            "arc14-000": 2,
+            "arc15-000": 2,
+            "arc16-000": 2,
+            "d2-arc17-000": 2,
+            "d2-arc18-000": 2,
+            "d2-arc19-000": 2,
+            "d2-arc20-000": 2,
+            "d2-arc21-000": 2,
+            "d2-arc22-000": 2,
+            "d3-arc23-000": 2,
+            "d3-arc24-000": 2,
+            "d3-arc25-000": 2,
+            "d3-arc26-000": 2,
+            "d3-arc27-000": 2,
+            "d3-arc28-000": 2
+          },
+          "difference": 0.0,
+          "confidence_interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "arc": {
+          "baseline": {
+            "planned": 18,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.9444444444444444,
+            "upper_bound": 0.9444444444444444
+          },
+          "candidate": {
+            "planned": 18,
+            "successes": 18,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "paired_units": 18,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 1,
+            "arc12-000": 1,
+            "arc13-000": 1,
+            "arc14-000": 1,
+            "arc15-000": 1,
+            "arc16-000": 1,
+            "d2-arc17-000": 1,
+            "d2-arc18-000": 1,
+            "d2-arc19-000": 1,
+            "d2-arc20-000": 1,
+            "d2-arc21-000": 1,
+            "d2-arc22-000": 1,
+            "d3-arc23-000": 1,
+            "d3-arc24-000": 1,
+            "d3-arc25-000": 1,
+            "d3-arc26-000": 1,
+            "d3-arc27-000": 1,
+            "d3-arc28-000": 1
+          },
+          "difference": 0.05555555555555558,
+          "confidence_interval": [
+            0.0,
+            0.16666666666666666
+          ]
+        }
+      },
+      "rolling_summary": {
+        "episode": {
+          "baseline": {
+            "planned": 90,
+            "successes": 89,
+            "unresolved": 0,
+            "lower_bound": 0.9888888888888889,
+            "upper_bound": 0.9888888888888889
+          },
+          "candidate": {
+            "planned": 90,
+            "successes": 89,
+            "unresolved": 0,
+            "lower_bound": 0.9888888888888889,
+            "upper_bound": 0.9888888888888889
+          },
+          "paired_units": 90,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 5,
+            "arc12-000": 5,
+            "arc13-000": 5,
+            "arc14-000": 5,
+            "arc15-000": 5,
+            "arc16-000": 5,
+            "d2-arc17-000": 5,
+            "d2-arc18-000": 5,
+            "d2-arc19-000": 5,
+            "d2-arc20-000": 5,
+            "d2-arc21-000": 5,
+            "d2-arc22-000": 5,
+            "d3-arc23-000": 5,
+            "d3-arc24-000": 5,
+            "d3-arc25-000": 5,
+            "d3-arc26-000": 5,
+            "d3-arc27-000": 5,
+            "d3-arc28-000": 5
+          },
+          "difference": 0.0,
+          "confidence_interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "dependent": {
+          "baseline": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "candidate": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "paired_units": 36,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 2,
+            "arc12-000": 2,
+            "arc13-000": 2,
+            "arc14-000": 2,
+            "arc15-000": 2,
+            "arc16-000": 2,
+            "d2-arc17-000": 2,
+            "d2-arc18-000": 2,
+            "d2-arc19-000": 2,
+            "d2-arc20-000": 2,
+            "d2-arc21-000": 2,
+            "d2-arc22-000": 2,
+            "d3-arc23-000": 2,
+            "d3-arc24-000": 2,
+            "d3-arc25-000": 2,
+            "d3-arc26-000": 2,
+            "d3-arc27-000": 2,
+            "d3-arc28-000": 2
+          },
+          "difference": 0.0,
+          "confidence_interval": [
+            0.0,
+            0.0
+          ]
+        },
+        "arc": {
+          "baseline": {
+            "planned": 18,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.9444444444444444,
+            "upper_bound": 0.9444444444444444
+          },
+          "candidate": {
+            "planned": 18,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.9444444444444444,
+            "upper_bound": 0.9444444444444444
+          },
+          "paired_units": 18,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 1,
+            "arc12-000": 1,
+            "arc13-000": 1,
+            "arc14-000": 1,
+            "arc15-000": 1,
+            "arc16-000": 1,
+            "d2-arc17-000": 1,
+            "d2-arc18-000": 1,
+            "d2-arc19-000": 1,
+            "d2-arc20-000": 1,
+            "d2-arc21-000": 1,
+            "d2-arc22-000": 1,
+            "d3-arc23-000": 1,
+            "d3-arc24-000": 1,
+            "d3-arc25-000": 1,
+            "d3-arc26-000": 1,
+            "d3-arc27-000": 1,
+            "d3-arc28-000": 1
+          },
+          "difference": 0.0,
+          "confidence_interval": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "ordinary_milai": {
+        "episode": {
+          "baseline": {
+            "planned": 90,
+            "successes": 89,
+            "unresolved": 0,
+            "lower_bound": 0.9888888888888889,
+            "upper_bound": 0.9888888888888889
+          },
+          "candidate": {
+            "planned": 90,
+            "successes": 75,
+            "unresolved": 7,
+            "lower_bound": 0.8333333333333334,
+            "upper_bound": 0.9111111111111111
+          },
+          "paired_units": 90,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 5,
+            "arc12-000": 5,
+            "arc13-000": 5,
+            "arc14-000": 5,
+            "arc15-000": 5,
+            "arc16-000": 5,
+            "d2-arc17-000": 5,
+            "d2-arc18-000": 5,
+            "d2-arc19-000": 5,
+            "d2-arc20-000": 5,
+            "d2-arc21-000": 5,
+            "d2-arc22-000": 5,
+            "d3-arc23-000": 5,
+            "d3-arc24-000": 5,
+            "d3-arc25-000": 5,
+            "d3-arc26-000": 5,
+            "d3-arc27-000": 5,
+            "d3-arc28-000": 5
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        },
+        "dependent": {
+          "baseline": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "candidate": {
+            "planned": 36,
+            "successes": 32,
+            "unresolved": 4,
+            "lower_bound": 0.8888888888888888,
+            "upper_bound": 1.0
+          },
+          "paired_units": 36,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 2,
+            "arc12-000": 2,
+            "arc13-000": 2,
+            "arc14-000": 2,
+            "arc15-000": 2,
+            "arc16-000": 2,
+            "d2-arc17-000": 2,
+            "d2-arc18-000": 2,
+            "d2-arc19-000": 2,
+            "d2-arc20-000": 2,
+            "d2-arc21-000": 2,
+            "d2-arc22-000": 2,
+            "d3-arc23-000": 2,
+            "d3-arc24-000": 2,
+            "d3-arc25-000": 2,
+            "d3-arc26-000": 2,
+            "d3-arc27-000": 2,
+            "d3-arc28-000": 2
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        },
+        "arc": {
+          "baseline": {
+            "planned": 18,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.9444444444444444,
+            "upper_bound": 0.9444444444444444
+          },
+          "candidate": {
+            "planned": 18,
+            "successes": 10,
+            "unresolved": 3,
+            "lower_bound": 0.5555555555555556,
+            "upper_bound": 0.7222222222222222
+          },
+          "paired_units": 18,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 1,
+            "arc12-000": 1,
+            "arc13-000": 1,
+            "arc14-000": 1,
+            "arc15-000": 1,
+            "arc16-000": 1,
+            "d2-arc17-000": 1,
+            "d2-arc18-000": 1,
+            "d2-arc19-000": 1,
+            "d2-arc20-000": 1,
+            "d2-arc21-000": 1,
+            "d2-arc22-000": 1,
+            "d3-arc23-000": 1,
+            "d3-arc24-000": 1,
+            "d3-arc25-000": 1,
+            "d3-arc26-000": 1,
+            "d3-arc27-000": 1,
+            "d3-arc28-000": 1
+          },
+          "difference": null,
+          "confidence_interval": null,
+          "reason": "UNSCORED_PLANNED_UNIT_NO_COMPLETE_CASE_DELETION"
+        }
+      },
+      "mem0_native": {
+        "episode": {
+          "baseline": {
+            "planned": 90,
+            "successes": 89,
+            "unresolved": 0,
+            "lower_bound": 0.9888888888888889,
+            "upper_bound": 0.9888888888888889
+          },
+          "candidate": {
+            "planned": 90,
+            "successes": 86,
+            "unresolved": 0,
+            "lower_bound": 0.9555555555555556,
+            "upper_bound": 0.9555555555555556
+          },
+          "paired_units": 90,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 5,
+            "arc12-000": 5,
+            "arc13-000": 5,
+            "arc14-000": 5,
+            "arc15-000": 5,
+            "arc16-000": 5,
+            "d2-arc17-000": 5,
+            "d2-arc18-000": 5,
+            "d2-arc19-000": 5,
+            "d2-arc20-000": 5,
+            "d2-arc21-000": 5,
+            "d2-arc22-000": 5,
+            "d3-arc23-000": 5,
+            "d3-arc24-000": 5,
+            "d3-arc25-000": 5,
+            "d3-arc26-000": 5,
+            "d3-arc27-000": 5,
+            "d3-arc28-000": 5
+          },
+          "difference": -0.033333333333333326,
+          "confidence_interval": [
+            -0.06666666666666667,
+            0.0
+          ]
+        },
+        "dependent": {
+          "baseline": {
+            "planned": 36,
+            "successes": 36,
+            "unresolved": 0,
+            "lower_bound": 1.0,
+            "upper_bound": 1.0
+          },
+          "candidate": {
+            "planned": 36,
+            "successes": 35,
+            "unresolved": 0,
+            "lower_bound": 0.9722222222222222,
+            "upper_bound": 0.9722222222222222
+          },
+          "paired_units": 36,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 2,
+            "arc12-000": 2,
+            "arc13-000": 2,
+            "arc14-000": 2,
+            "arc15-000": 2,
+            "arc16-000": 2,
+            "d2-arc17-000": 2,
+            "d2-arc18-000": 2,
+            "d2-arc19-000": 2,
+            "d2-arc20-000": 2,
+            "d2-arc21-000": 2,
+            "d2-arc22-000": 2,
+            "d3-arc23-000": 2,
+            "d3-arc24-000": 2,
+            "d3-arc25-000": 2,
+            "d3-arc26-000": 2,
+            "d3-arc27-000": 2,
+            "d3-arc28-000": 2
+          },
+          "difference": -0.02777777777777779,
+          "confidence_interval": [
+            -0.08333333333333333,
+            0.0
+          ]
+        },
+        "arc": {
+          "baseline": {
+            "planned": 18,
+            "successes": 17,
+            "unresolved": 0,
+            "lower_bound": 0.9444444444444444,
+            "upper_bound": 0.9444444444444444
+          },
+          "candidate": {
+            "planned": 18,
+            "successes": 14,
+            "unresolved": 0,
+            "lower_bound": 0.7777777777777778,
+            "upper_bound": 0.7777777777777778
+          },
+          "paired_units": 18,
+          "seed": 20260929,
+          "replicates": 10000,
+          "cluster_count": 18,
+          "cluster_sizes": {
+            "arc11-000": 1,
+            "arc12-000": 1,
+            "arc13-000": 1,
+            "arc14-000": 1,
+            "arc15-000": 1,
+            "arc16-000": 1,
+            "d2-arc17-000": 1,
+            "d2-arc18-000": 1,
+            "d2-arc19-000": 1,
+            "d2-arc20-000": 1,
+            "d2-arc21-000": 1,
+            "d2-arc22-000": 1,
+            "d3-arc23-000": 1,
+            "d3-arc24-000": 1,
+            "d3-arc25-000": 1,
+            "d3-arc26-000": 1,
+            "d3-arc27-000": 1,
+            "d3-arc28-000": 1
+          },
+          "difference": -0.16666666666666663,
+          "confidence_interval": [
+            -0.3333333333333333,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "simplemem_pilot_summary": {
+    "status": "COMPLETE_WITH_NATIVE_CAPACITY_INTERRUPTION",
+    "costs": {
+      "generation_calls": 51,
+      "generation_tokens": 56629,
+      "embedding_tokens": 2010
+    },
+    "by_run_costs": {
+      "memsyco-simplemem_text": {
+        "generation_calls": 6,
+        "generation_tokens": 10164,
+        "embedding_tokens": 1094
+      },
+      "merit-simplemem_text": {
+        "generation_calls": 45,
+        "generation_tokens": 46465,
+        "embedding_tokens": 916
+      }
+    },
+    "ledger_after": {
+      "generation_requests": 5992,
+      "generation_tokens": 10921341,
+      "embedding_tokens": 416802
+    },
+    "ledger_after_sha256": "2ef3e45b0150cb6c5cc2c47dc0f0493497157e84dae0a9e991d71b1181113e3c",
+    "pause_override": {
+      "status": "PAUSED_BY_USER",
+      "at_utc": "2026-09-28T23:24:40.554546+00:00",
+      "user_request": "暂停当前实验，生成实验报告",
+      "authority": "The earlier Continue decision and proposed development comparison are superseded. Report/publication only; no experiment, download, deployment or source development without a new explicit resume.",
+      "private_pre_pause_result_sha256": "d999782f9cf59d375d6f0a7dbae86a07f24592903772cdb4c4f4fc96ef5ffa51",
+      "development_status": "NOT_RUN_NO_PREPARE_NO_EXECUTION_FREEZE"
+    }
+  },
+  "requirement_dispositions": [
+    {
+      "requirement": "U0 environment and real Agent→MCP→Store→continuation",
+      "status": "COMPLETED_FOR_RUN_SCOPE",
+      "evidence": "Initial failed R1 preserved; R2 actual9 obligations/3 messages passed. Separate native7862 service explicitly authorized,7860 preserved."
+    },
+    {
+      "requirement": "U1 native MemSyco/MERIT functionality",
+      "status": "COMPLETED_WITH_FAILURES",
+      "evidence": "36 Host jobs,18 single Judge; native scores preserved. Smoke is not research success."
+    },
+    {
+      "requirement": "U2 independent first five-method comparison",
+      "status": "COMPLETED_WITH_FAILURES_AND_UNKNOWNS",
+      "evidence": "60 MemSyco cases/54 groups and18 MERIT arcs,690 invocations once,299 Judge; first table immutable."
+    },
+    {
+      "requirement": "U2 second external SimpleMem",
+      "status": "ENGINEERING_AND_EXPOSED_PILOT_DONE_DEVELOPMENT_NOT_RUN_PAUSED",
+      "evidence": "14 narrow targets0skip; real core/text/common-reader pilot2 completed invocations1 interrupted. Planned138 development invocations never prepared/frozen/executed."
+    },
+    {
+      "requirement": "U3-P protocol and thinking causal comparison",
+      "status": "NOT_RUN_PAUSED",
+      "evidence": "Native functional chain verified; J/N causal and thinking variables not compared; current observed failures not established parser faults."
+    },
+    {
+      "requirement": "U3-O typed object references",
+      "status": "NOT_RUN_PAUSED_ACTUAL_KEY_DRIFT_OPEN",
+      "evidence": "coffee vs coffee_preference drift remains. No prior authoritative key/ref at failed operation; no gold-derived ref or silent native interface change."
+    },
+    {
+      "requirement": "U3-W bounded synchronous writer",
+      "status": "NOT_RUN_PAUSED",
+      "evidence": "Ordinary0CRUD with full legal history does not isolate a must-save failure; memory formation/consumption causes remain separate. No rubric trigger."
+    },
+    {
+      "requirement": "U3-R partial/unknown/recovery",
+      "status": "NOT_RUN_PAUSED_UNRESOLVED",
+      "evidence": "Extra actual deployments and interrupted chains preserved. No recovery/resume/replay executed; QA/native successes do not establish safe lifecycle recovery."
+    },
+    {
+      "requirement": "U4 presentation candidate",
+      "status": "DIAGNOSIS_ONLY_NOT_IMPLEMENTED_PAUSED",
+      "evidence": "41 exact request replays/38 accepted AI bodies refute in-place label accumulation on checked paths. Removing program-added label is an untested candidate, not proven repair."
+    },
+    {
+      "requirement": "U4 reading A/update U/equal-compute controls",
+      "status": "NOT_TRIGGERED_NO_EXPERIMENT_PAUSED",
+      "evidence": "All persisted MemSyco ordinary/Mem0 records delivered; no demonstrated retrieval or candidate-size pressure. Scope degradation alone does not identify selector causality."
+    },
+    {
+      "requirement": "U4 MAB mechanism slice",
+      "status": "NOT_RUN_PAUSED",
+      "evidence": "No corresponding frozen mechanism experiment; not claimed complete."
+    },
+    {
+      "requirement": "U5 independent confirmation/MemoryArena/new source groups",
+      "status": "NOT_RUN_PAUSED",
+      "evidence": "No new frozen final candidate confirmation. Existing development results exposed before SimpleMem integration."
+    },
+    {
+      "requirement": "U5 natural long horizon",
+      "status": "NOT_RUN_PAUSED",
+      "evidence": "No automatic activation from implemented modules or artificially small context; lifecycle prerequisites unresolved."
+    },
+    {
+      "requirement": "U5 independent model family",
+      "status": "NOT_RUN_NO_SECOND_FAMILY_DEPLOYMENT",
+      "evidence": "No new second-family weight download/service. Same-family repeats are not confirmation."
+    },
+    {
+      "requirement": "U6 full plan execution closeout",
+      "status": "INCOMPLETE_USER_PAUSE_REPORT_ONLY",
+      "evidence": "This report records available evidence and paused outstanding requirements. It does not mark original full Goal achieved."
+    }
+  ],
+  "cost_stages": [
+    {
+      "phase": "U0 real MCP including failed R1",
+      "generation_calls": 5,
+      "generation_tokens": 7613,
+      "embedding_tokens": 62
+    },
+    {
+      "phase": "U1 native smoke including Judge",
+      "generation_calls": 321,
+      "generation_tokens": 613029,
+      "embedding_tokens": 1330
+    },
+    {
+      "phase": "U2 five-method exposed pilot",
+      "generation_calls": 86,
+      "generation_tokens": 235143,
+      "embedding_tokens": 13007
+    },
+    {
+      "phase": "U2 five-method development including Judge",
+      "generation_calls": 2228,
+      "generation_tokens": 5803724,
+      "embedding_tokens": 376823
+    },
+    {
+      "phase": "U2 SimpleMem exposed pilot",
+      "generation_calls": 51,
+      "generation_tokens": 56629,
+      "embedding_tokens": 2010
+    }
+  ],
+  "goal_start_ledger": {
+    "generation_calls": 3301,
+    "generation_tokens": 4205203,
+    "embedding_tokens": 23570
+  },
+  "goal_added_cost": {
+    "generation_calls": 2691,
+    "generation_tokens": 6716138,
+    "embedding_tokens": 393232
+  },
+  "continuous_ledger": {
+    "generation_requests": 5992,
+    "generation_tokens": 10921341,
+    "embedding_tokens": 416802
+  },
+  "continuous_ledger_sha256": "2ef3e45b0150cb6c5cc2c47dc0f0493497157e84dae0a9e991d71b1181113e3c",
+  "source_result_hashes": {
+    "data/manifests/unified-v8-v9-u2-main-results-20260929.json": "1d6d20524790a7ab3cfb30b75fec15ee96b0ed5657eb68ffbd8a434896ff6475",
+    "data/manifests/unified-v8-v9-u2-main-failure-map-20260929.json": "4bcc774f429fde31608212803880f4ca89d2615c2dcf94708c5878ba25f23c86",
+    "data/manifests/unified-v8-v9-u2-label-replay-diagnosis-20260929.json": "c262abc42b0bf14556c6acfec8e438f9420d426404f158ec0ed07f2e6e37b020",
+    "data/manifests/unified-v8-v9-u2-simplemem-engineering-20260929.json": "d2185dddd53379ffc2f7c4bf3228793eb27c8f2c2f770e65c8c1e6fd66f9ef1f",
+    "data/manifests/unified-v8-v9-u2-simplemem-environment-20260929.json": "6c251572da2ac3037e505cf9fe19e6441416a35e9cc099eb22338e8ea11ccab1",
+    "data/manifests/unified-v8-v9-u2-simplemem-pilot-results-20260929.json": "fa687ca7b6fafb5ba9947df21c35e5199b617f2bc79d648ef95a5542d82d9a67"
+  },
+  "historical_stop_boundary": "Previous v26 and v2-v7 results remain at their own commits. This report summarizes the current unified V8/V9 objective; no historical experiment is resumed.",
+  "publication": {
+    "branch": "feat/lab-unified-benchmarks-v8-v9-20260928",
+    "pr": 72,
+    "required_state": "draft/open/unmerged",
+    "main_and_older_prs": "preserved",
+    "report_commit": "Recorded by Git publication receipt, not a runtime identity."
+  },
+  "limits": [
+    "Current Qwen family only, same-family local Judge",
+    "No independent unseen benefit confirmation",
+    "System contracts and natural trajectories differ; no SER/State/Attention causal claim",
+    "Unknown native endpoints remain in denominator",
+    "SimpleMem core text plus common reader is not full native ask reproduction",
+    "No money/GPU-hour/physical-I/O estimate",
+    "All development remains Lab-only; Product NO_GO"
+  ],
+  "resume_rule": "Only a new explicit user instruction may resume experiments/source development/download/deployment. Historical ACTIVE/CONTINUE and retained drafts are not authorization.",
+  "verified_source_ci": {
+    "commit": "9200de0146da03ac09c78dab820feb1c9d09a708",
+    "verified_at_utc": "2026-09-28T23:31:59.544785+00:00",
+    "fast": {
+      "run_id": 36497006083,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/minguselandy/MiLAi/actions/runs/36497006083"
+    },
+    "full": {
+      "run_id": 36497006081,
+      "status": "completed",
+      "conclusion": "skipped",
+      "url": "https://github.com/minguselandy/MiLAi/actions/runs/36497006081"
+    },
+    "evidence_source": "Root read-only GitHub Actions API; no rerun triggered"
+  }
+}

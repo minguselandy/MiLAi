@@ -16,6 +16,7 @@
   "foundation_discovery": "src/milai_lab",
   "foundation_explicit_globs": [
     "src/milai_lab/baselines/langmem_*.py",
+    "src/milai_lab/baselines/benchmark_memories.py",
     "src/milai_lab/methods/local_state_attention/*.py",
     "src/milai_lab/methods/milai_m1/*.py",
     "src/milai_lab/methods/on_demand_reconstruction/*.py",
@@ -28,7 +29,10 @@
     "src/milai_lab/runners/fixed_state_update.py",
     "src/milai_lab/runners/shared_record_use.py",
     "src/milai_lab/runners/persistent_memory.py",
-    "src/milai_lab/datasets/merit.py"
+    "src/milai_lab/datasets/merit.py",
+    "src/milai_lab/providers/merit_metered.py",
+    "src/milai_lab/runners/memsyco_native.py",
+    "src/milai_lab/runners/merit_native.py"
   ],
   "foundation_tests": [
     "tests/unit/test_langmem_foundation.py",
@@ -45,7 +49,10 @@
     "tests/unit/test_fixed_state_update.py",
     "tests/unit/test_shared_record_use.py",
     "tests/unit/test_persistent_memory.py",
-    "tests/unit/test_langmem_application.py"
+    "tests/unit/test_langmem_application.py",
+    "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_benchmark_memories.py",
+    "tests/unit/test_merit_native.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -63,13 +70,21 @@
     "tests/unit/test_shared_record_use.py",
     "tests/unit/test_persistent_memory.py",
     "tests/unit/test_langmem_application.py",
-    "tests/unit/test_external_memory_v26.py"
+    "tests/unit/test_external_memory_v26.py",
+    "tests/unit/test_unified_benchmarks.py",
+    "tests/unit/test_benchmark_memories.py",
+    "tests/unit/test_merit_native.py",
+    "tests/unit/test_simplemem_native.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
-    "src/milai_lab/runners/mem0_identity.py"
+    "src/milai_lab/runners/mem0_identity.py",
+    "src/milai_lab/runners/simplemem_native.py"
   ],
-  "external_tests": ["tests/unit/test_external_memory_v26.py"],
+  "external_tests": [
+    "tests/unit/test_external_memory_v26.py",
+    "tests/unit/test_simplemem_native.py"
+  ],
   "local_artifact_tests": [
     "tests/unit/test_contextual_merit_adapter.py::test_v8_selection_requires_declared_config_and_matching_freeze",
     "tests/unit/test_contextual_merit_adapter.py::test_pinned_prepare_preserves_native_tools_and_visible_memory_gate",
@@ -85,5 +100,7 @@
   ],
   "local_artifact_collected_nodes": 12,
   "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets",
-  "integration_tests": []
+  "integration_tests": [],
+  "simplemem_source_prepare": "tools/prepare_simplemem_text_source.py --prepare",
+  "simplemem_dependencies": "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt"
 }

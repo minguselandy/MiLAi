@@ -125,6 +125,9 @@ def _script(inputs: dict[str, Any]) -> dict[str, Any]:
 
 
 def _validate(config: dict[str, Any], arm: str) -> None:
+    transport = config.get("memory_transport", "direct")
+    if type(transport) is not str or transport not in {"direct", "mcp_http"}:
+        raise ValueError("PERSISTENT_MEMORY_TRANSPORT_INVALID")
     policy = boundary_policy(config.get("memory_boundaries", {}))
     enabled = policy is not None
     correction_entries = config.get("memory_result", {}).get(
@@ -264,6 +267,19 @@ def _identity(
             "tool_execution": "synchronous ToolNode executor.map; max_concurrency=1",
             "final_reply": "native natural text" if native else "decoded JSON answer",
             "native_service_verified_by_runner": False})
+    if config.get("memory_transport", "direct") == "mcp_http":
+        from milai_lab.baselines.langmem_mcp import MCP_PROTOCOL, RECORDS_RESOURCE
+
+        identity.update({"method": "persistent-memory-mcp-v8-v9",
+            "memory_transport": "mcp_http", "mcp_protocol": MCP_PROTOCOL,
+            "mcp_sdk": importlib.metadata.version("mcp"),
+            "mcp_endpoint": "scope-bound loopback HTTP; ephemeral authenticated endpoint",
+            "mcp_material": {"records_resource": RECORDS_RESOURCE,
+                "search": "program-origin search_memory over MCP",
+                "active_refs": "resolve against current resource response; no body cache"},
+            "mcp_accounting": "same runtime Store, embedding client and RunBudget instance"})
+        identity["mcp_timeout"] = max(config["host"].get("timeout", 120),
+                                      config["embedding"].get("timeout", 180))
     return identity
 
 
@@ -304,6 +320,7 @@ def _adapters(
     arm: str,
     config: dict[str, Any],
     *, selector_client: VLLMClient | None = None,
+    mcp_stack: ExitStack | None = None,
 ) -> tuple[Callable[..., Any], Callable[..., None]]:
     # Only reuse the existing ordinary-record reader; these State tools are never exposed.
     record_reader = create_writer_tools(bank, MEMORY_NAMESPACE)
@@ -369,12 +386,23 @@ def _adapters(
             if config["history_mode"] == "archive"
             else None
         )
+        peer = None
+        if config.get("memory_transport", "direct") == "mcp_http":
+            from milai_lab.baselines.langmem_mcp import MemoryMCP
+
+            if mcp_stack is None:
+                raise ValueError("PERSISTENT_MEMORY_MCP_LIFECYCLE_MISSING")
+            peer = mcp_stack.enter_context(MemoryMCP(store, run_id, arm, user_id,
+                emit=model.client.emit,
+                timeout=max(model.client.config.timeout, config["embedding"].get("timeout", 180)),
+                history_tool=create_history_read_tool(history) if history is not None else None))
 
         def records(current: Any) -> list[dict[str, Any]]:
             cfg = current["configurable"]
             if (cfg["foundation_run_id"], cfg["arm_id"], cfg["user_id"]) != (run_id, arm, user_id):
                 raise ValueError("PERSISTENT_MEMORY_RECORD_OWNER_CHANGED")
-            return scoped_memory_records(record_reader, scope, emit=model.client.emit)
+            return (peer.records(current) if peer is not None else
+                    scoped_memory_records(record_reader, scope, emit=model.client.emit))
 
         def retrieve(query: str, limit: int) -> list[dict[str, Any]]:
             namespace = ("langmem", run_id, arm, user_id)
@@ -382,12 +410,17 @@ def _adapters(
             event: dict[str, Any] = {"event": "memory_boundary_retrieval", "user_id": user_id,
                 "calls": 1, "query": query, "limit": limit, "logical_bytes": None}
             try:
-                page = store.search(namespace, query=query, limit=limit)
-                if any(tuple(item.namespace) != namespace for item in page):
-                    raise ValueError("MEMORY_BOUNDARY_RETRIEVAL_SCOPE_CHANGED")
-                rows = [{"id": item.key, "value": item.value} for item in page]
+                if peer is not None:
+                    rows = peer.retrieve(query, limit, {"configurable": peer.scope})
+                    scores = None
+                else:
+                    page = store.search(namespace, query=query, limit=limit)
+                    if any(tuple(item.namespace) != namespace for item in page):
+                        raise ValueError("MEMORY_BOUNDARY_RETRIEVAL_SCOPE_CHANGED")
+                    rows = [{"id": item.key, "value": item.value} for item in page]
+                    scores = [item.score for item in page]
                 event.update({"status": "completed", "returned_ids": [row["id"] for row in rows],
-                    "scores": [item.score for item in page],
+                    "scores": scores,
                     "logical_bytes": len(json.dumps(rows, ensure_ascii=False).encode("utf-8"))})
                 return rows
             except Exception as error:
@@ -421,6 +454,7 @@ def _adapters(
             history_access=history,
             full_history=history is not None,
             memory_boundaries=view,
+            memory_mcp=peer,
         )
         return graph["agent"]
 
@@ -510,9 +544,23 @@ def _accounting(root: Path, budget: Path) -> dict[str, Any]:
     trace = root / "trace.jsonl"
     boundary_costs: dict[str, Any] = {}
     routes, deliveries = [], []
+    mcp_costs: dict[str, Any] = {}
     for line in trace.read_text().splitlines() if trace.exists() else []:
         event = json.loads(line)
         name = event.get("event")
+        if name == "langmem_mcp" and event.get("kind") in {"http", "resource_result"}:
+            category = event["kind"]
+            measured = mcp_costs.setdefault(category, {"calls": 0, "cpu_ns": 0, "wall_ns": 0})
+            measured["calls"] += 1
+            for key in ("cpu_ns", "wall_ns"):
+                measured[key] += event[key]
+            if category == "http":
+                for key in ("request", "response"):
+                    size = len(event[key + "_body"].encode("utf-8"))
+                    measured[key + "_bytes"] = measured.get(key + "_bytes", 0) + size
+            else:
+                measured["logical_bytes"] = measured.get("logical_bytes", 0) + event[
+                    "logical_bytes"]
         if name == "persistent_memory_checkpoint_read":
             for key in costs[name]:
                 costs[name][key] += event[key]
@@ -539,6 +587,11 @@ def _accounting(root: Path, budget: Path) -> dict[str, Any]:
         elif name == "memory_boundary_delivery":
             deliveries.append(event)
     output = {**result, "v3_checkpoint_costs": costs}
+    if mcp_costs:
+        output["mcp_observation_costs"] = {"measurements": mcp_costs,
+            "timing_scope": "inclusive transport/service; overlaps existing material/Store timing",
+            "model_or_embedding_charge": "same RunBudget; never added again here",
+            "physical_io": None}
     if boundary_costs or routes or deliveries:
         output.update({"boundary_observation_costs": boundary_costs,
             "boundary_routes": routes, "boundary_deliveries": deliveries,
@@ -597,7 +650,7 @@ def run(args: Any, *, lab_root: Path) -> dict[str, Any]:
                         budget=runtime.model.client.budget, capacity=runtime.model.client.capacity))
                         if policy is not None and policy["attention_enabled"] else None)
                     factory, callback = _adapters(runtime, bank, root, args.run, args.arm, config,
-                                                   selector_client=control)
+                                                   selector_client=control, mcp_stack=controls)
                     result = run_phase(
                     script,
                     root,
