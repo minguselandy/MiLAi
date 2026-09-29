@@ -1,0 +1,38 @@
+{
+  "kind": "MILAI_REPAIR_V10_ACTION_AUDIT",
+  "status": "FIRST_EXTRA_ACTION_CHAIN_VERIFIED",
+  "case_id": "d2-arc18-000",
+  "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+  "journal_sha256": "d005b96d9a97cf09f8bd57720ebc5b92f57cb2dcb91e46c6476662b04e401b2e",
+  "first_extra_request_trace_line": 62,
+  "first_extra_generation_id": "chatcmpl-87c1085a1aacd34d",
+  "prior_completed_effects": [
+    {
+      "name": "set_config",
+      "call_id": "chatcmpl-tool-b5b60aefcc55245d",
+      "journal_status": "complete",
+      "exact_native_result_in_next_http": true,
+      "proposal_args_preserved": true,
+      "result_content_sha256": "e1a9bfc128ead293c413fe75074555745af1843f3489044ec47e011e0cc197f5"
+    },
+    {
+      "name": "update_ticket",
+      "call_id": "chatcmpl-tool-b984c162e298ff86",
+      "journal_status": "complete",
+      "exact_native_result_in_next_http": true,
+      "proposal_args_preserved": true,
+      "result_content_sha256": "6bc0da1f42f96fc37b8bd7ed20ba57606d2a0da5cda2b135c7854fbdc985b8a3"
+    }
+  ],
+  "distinct_deploy_generations": 7,
+  "distinct_deploy_call_ids": 7,
+  "model_already_acknowledged_completed_effects": true,
+  "missing_receipt_hypothesis": "NOT_SUPPORTED: both completed effects, IDs and exact native return bytes occur in the next actual HTTP; no pending list claims those actions remain incomplete.",
+  "behavioral_hypothesis": "SUPPORTED_AS_LOCALIZATION_NOT_CAUSAL_PROOF: same output acknowledges completion and newly proposes deploy; task stopping/authorization selection fails despite evidence.",
+  "label_amplification_hypothesis": "POSSIBLE_CONFOUNDER: first extra output imitates provenance label; independently test R1, do not infer R2 correction.",
+  "completion_summary_patch": "NOT_JUSTIFIED_BY_THIS_TRACE; adding another summary is an untested variable, not recovery of missing receipts.",
+  "native_authorization_mapping": "AUTHORIZATION_UNDETERMINED at generic executor: no trusted workflow allowlist from user request; must not infer from checker or keywords.",
+  "journal_capability": "Existing identity [thread_id,generation_id,call_id] caches complete response and halts pending same identity. It does not establish task-level duplicate protection or exactly-once world+receipt atomicity.",
+  "next_required": "Independent trusted application-contract protection and four partial/unknown recovery cases; preserve native benchmark interface.",
+  "new_model_calls": 0
+}

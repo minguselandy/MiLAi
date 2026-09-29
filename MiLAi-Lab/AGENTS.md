@@ -1,5 +1,22 @@
 # MiLAi Lab agent instructions
 
+## Current v10 authorization: 2026-09-29
+
+The actual user Goal explicitly authorizes reading and executing the full
+[repair v10 plan](docs/MILAI_REPAIR_DEVELOPMENT_EXPERIMENT_PLAN_20260929_v10.0.md).
+This new instruction resumes R0–R7 within their evidence gates; the pause below and
+the plan's design-time NOT_GRANTED metadata are historical. Preserve the original scope.
+Work only in this separate repair-v10 worktree based on 983669dd. Root owns plans,
+protocols, evidence analysis, freezes and all real model/embedding/Judge calls (serial 1).
+One Sol xhigh owns source/config/CI and narrow checks; Luna high owns Git publication
+and authorized resources. Reuse matching live agents when available. No main or old PR
+merge, service reconfiguration, second-family download/deployment, automatic SimpleMem
+138-unit run or five-method rerun is authorized by this repair execution.
+Keep the continuous ledger and all old failures untouched. R1, R2, R3 and R6 remain
+separate experimental variables; freeze each real diagnostic before calling services.
+Research remains NOT_ACHIEVED and Product NO_GO. Historical records follow.
+
+
 ## Latest user stop: 2026-09-29
 
 The user explicitly requested: “暂停当前实验，生成实验报告”. Actual Goal is **paused**.
