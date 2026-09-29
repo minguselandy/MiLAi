@@ -1,0 +1,20 @@
+{
+  "kind": "MILAI_REPAIR_V10_R4_R5_CONTRACT_AUDIT",
+  "status": "DIAGNOSIS_AND_CONTRACT_ONLY_NO_EFFECT_CLAIM",
+  "source_and_evidence_sha256": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/repair-v10/MiLAi-Lab/src/milai_lab/baselines/langmem_benchmark.py": "f23026803662aa64b52739c2e77b9d7483625233cd36b553c13a7e7f51795765",
+    "/cra/memory/mx_memory/MiLAi-worktrees/repair-v10/MiLAi-Lab/src/milai_lab/runners/mem0_native.py": "fb2aa93ac151b25d264cad666a127d3905115761401a6453db4b87b8dcaf94dd",
+    "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT/merit/d3.py": "57f88b2f9c40cf6a9bd95214666cbbeca8191753dd1cc2f33778e1147a06f9db",
+    "/cra/memory/mx_memory/reference-sources/contextual-v2.3/mem0-f8082a7345da/mem0/memory/main.py": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+    "/cra/memory/mx_memory/reference-sources/contextual-v2.3/mem0-f8082a7345da/mem0/configs/prompts.py": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c",
+    "/cra/memory/mx_memory/MiLAi-worktrees/repair-v10/MiLAi-Lab/artifacts/repair-v10/r5/native-discovery.json": "082df21a52ea33a3088aa588da6865a935e73324ff19248bb0d6986b06cc68de",
+    "/cra/memory/mx_memory/MiLAi-worktrees/repair-v10/MiLAi-Lab/artifacts/repair-v10/r5/format-private-audit.json": "b90bb461ea61166697915676ef8c04950317568efe5fcf54dd34e375a4117e76"
+  },
+  "r4_boundary_writer": "NOT_TRIGGERED_BY_ZERO_CRUD; explicit maintenance obligation is independently tested in R2, still pending",
+  "r5_object_discovery": "Native missing-key get_preference returns actual available keys; zero-model interface path verified, Host repair not claimed",
+  "r5_temporal": "Unsupported absolute-date inference originates at first ADD; actual persisted/delivered/action chain verified; OSS add timestamp rejects nonNone; no temporal adapted run",
+  "r5_format": "Four failed native episodes/six amount-message sends and three email episodes retain original scores; content/format/policy separate",
+  "real_generation_embedding_judge_calls": 0,
+  "old_results_changed": false,
+  "new_tool_platform": false
+}
