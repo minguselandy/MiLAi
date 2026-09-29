@@ -1,0 +1,189 @@
+{
+  "status": "R1_ENGINEERING_READY_ZERO_MODEL",
+  "base_git_sha": "983669dd2d0bfbf26f212b6adf2c51d7de535552",
+  "changed_files": [
+    "src/milai_lab/methods/memory_boundaries.py",
+    "tests/unit/test_memory_boundaries.py",
+    "tests/unit/test_persistent_memory.py"
+  ],
+  "unchanged_renderer": "src/milai_lab/methods/request_context.py",
+  "source_sha256": {
+    "src/milai_lab/methods/memory_boundaries.py": "b85b49f0bb1e0f74710893a3a0d8653f56edbc29d563f3bdaa67cd334dc0d556",
+    "tests/unit/test_memory_boundaries.py": "e3c956c46c6c418e1e9db12472e1ac40e59a255a4c5f56be234da7b0137e4053",
+    "tests/unit/test_persistent_memory.py": "ba9874e324a7bb0bd4adbbbf9bfc2e3386000475096cb0ea52317ea31ddcf6e9",
+    "src/milai_lab/methods/request_context.py": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b"
+  },
+  "implementation": "boundary_policy validates/defaults assistant_role_labels; project gates only per-assistant prefixes and assistant_call_labels. No renderer or decoder changes.",
+  "method_identity": "Existing normalized policy and raw config/config_sha256 paths include the option; existing identity test passed.",
+  "pytest_results": {
+    "01-core-boundary": {
+      "tests": 69,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "05-foundation-r1": {
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "06-local-capacity": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "pytest_passed": 87,
+  "legacy_equivalence": {
+    "base_git_sha": "983669dd2d0bfbf26f212b6adf2c51d7de535552",
+    "baseline_source_matches_git": true,
+    "baseline_source_sha256": "c84a44be07a3578b3a1b5f00a0a091ed8840b43c303d14acfa2340a8bd664924",
+    "request_context_unchanged": true,
+    "unique_cases": 48,
+    "legacy_request_byte_comparisons": 96,
+    "candidate_exact_diffs": 48,
+    "http_calls": 0,
+    "model_calls": 0
+  },
+  "actual_capacity": {
+    "first_request_with_tools": 1073,
+    "first_request_without_tools": 426,
+    "native_roles_only_continuation": 1377,
+    "legacy_continuation": 1386
+  },
+  "failures_preserved": [
+    "initial-inspection-failures.txt",
+    "02-ruff.json",
+    "02-ruff.log"
+  ],
+  "failure_resolution": "Only two test lines exceeded100characters; formatting corrected. Original lint attempt is untouched; no model or task failures occurred.",
+  "warnings": "Existing LangGraph/Trustcall deprecation warnings preserved in test logs.",
+  "zero_model_contract": {
+    "real_http_calls": 0,
+    "real_embedding_calls": 0,
+    "real_mcp_calls": 0,
+    "postgres_calls": 0,
+    "downloads": 0,
+    "git_writes": 0,
+    "mock_http_only": true
+  },
+  "not_run": [
+    "Broad suite/build (no packaging/dependency change)",
+    "Original41-request replay (reused historical evidence)",
+    "Real L1/L2 models, business, embedding, Judge and MCP"
+  ],
+  "limitations": [
+    "Engineering does not establish label-loop prevention or semantic/casual efficacy.",
+    "Literal/model-generated tags are retained; existing JSON-action history encoding still omits assistant call narrative as before.",
+    "System working-state labels/protocol, permissions, current/historical selection, all/query/attention policy and capacity/budgets are unchanged.",
+    "R2/R3/R6 were not implemented; no R1 acceptance of first-extra-action behavior."
+  ],
+  "private_receipt_sha256": "9db0f1eba931fac5832e1b98c0404dd6e3c9d4aeeed103bb45d28040d3de2aa4",
+  "check_receipts": {
+    "01-core-boundary": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_memory_boundaries.py",
+        "--junitxml=artifacts/repair-v10/r1-engineering/01-core-boundary.xml"
+      ],
+      "log_sha256": "228660600de5e46e3ec9557f48c96fd4d65f895b344e445a0f8779062d90a437"
+    },
+    "02-ruff": {
+      "returncode": 1,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "tests/unit/test_memory_boundaries.py",
+        "tests/unit/test_persistent_memory.py"
+      ],
+      "log_sha256": "8fdd05b6ec2613ea6c766006dacfa9680e6e08840a1908589c1011974025fbf4"
+    },
+    "02b-ruff": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "tests/unit/test_memory_boundaries.py",
+        "tests/unit/test_persistent_memory.py"
+      ],
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "03-mypy": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/methods/memory_boundaries.py"
+      ],
+      "log_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+    },
+    "04-matrix": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "tools/check_verification_matrix.py"
+      ],
+      "log_sha256": "3d3b6b44f7c6e1502766e96d5f6d0af1bfa2702a66fa9da151b7f08b62f39574"
+    },
+    "05-foundation-r1": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset",
+        "tests/unit/test_persistent_memory.py::test_boundary_config_defaults_zero_correction_and_preserves_legacy_c",
+        "--junitxml=artifacts/repair-v10/r1-engineering/05-foundation-r1.xml"
+      ],
+      "log_sha256": "eb1526b1204b4a8433245ca4680063519b1a93263e361edbd8bb834e371e1296"
+    },
+    "06-local-capacity": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+        "--junitxml=artifacts/repair-v10/r1-engineering/06-local-capacity.xml"
+      ],
+      "log_sha256": "3f57c57595f7e82bca17a25747afbb7bc48e038cbf8fd9468c9106a3e83d5c94"
+    },
+    "07-historical-legacy": {
+      "returncode": 0,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "artifacts/repair-v10/r1-engineering/compare_historical_legacy.py"
+      ],
+      "log_sha256": "8287164333b12aa1e72407520a7c222bb4de0cdb085f2d5f5059fc875a45b39d"
+    },
+    "08-diff-check": {
+      "returncode": 0,
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "--",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "tests/unit/test_memory_boundaries.py",
+        "tests/unit/test_persistent_memory.py"
+      ],
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "method_source_commit": "c0bec6a7f8f29c4774da941bc5c129969d48381c"
+}
