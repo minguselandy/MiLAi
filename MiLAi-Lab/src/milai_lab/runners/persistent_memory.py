@@ -22,17 +22,22 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.prebuilt.tool_node import ToolCallWrapper
 from langgraph.store.base import BaseStore
 
+from milai_lab.application.tools import _business_tools
+from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     SYSTEM_PROMPT,
-    FoundationScope,
     build_agent,
     create_history_read_tool,
-    create_memory_read_tool,
 )
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.memory.read_tools import create_memory_read_tool
+from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
+from milai_lab.methods.langmem_recipe import _recipe_action_prompt as _action_prompt
+from milai_lab.methods.langmem_recipe import _recipe_action_schema as _action_schema
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
     ControlResponseError,
@@ -54,9 +59,8 @@ from milai_lab.methods.memory_boundaries import (
 from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT, turn_receipts
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient
-from milai_lab.providers.langmem_chat import VLLMChatModel, _action_prompt, _action_schema
 from milai_lab.runners.frozen_action_continuation import _sha
-from milai_lab.runners.langmem_application import ApplicationWorld, _business_tools, run_phase
+from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import (
     ApplicationRuntime,
     open_application_runtime,
@@ -268,7 +272,7 @@ def _identity(
             "final_reply": "native natural text" if native else "decoded JSON answer",
             "native_service_verified_by_runner": False})
     if config.get("memory_transport", "direct") == "mcp_http":
-        from milai_lab.baselines.langmem_mcp import MCP_PROTOCOL, RECORDS_RESOURCE
+        from milai_lab.memory.mcp import MCP_PROTOCOL, RECORDS_RESOURCE
 
         identity.update({"method": "persistent-memory-mcp-v8-v9",
             "memory_transport": "mcp_http", "mcp_protocol": MCP_PROTOCOL,
@@ -388,7 +392,7 @@ def _adapters(
         )
         peer = None
         if config.get("memory_transport", "direct") == "mcp_http":
-            from milai_lab.baselines.langmem_mcp import MemoryMCP
+            from milai_lab.memory.mcp import MemoryMCP
 
             if mcp_stack is None:
                 raise ValueError("PERSISTENT_MEMORY_MCP_LIFECYCLE_MISSING")

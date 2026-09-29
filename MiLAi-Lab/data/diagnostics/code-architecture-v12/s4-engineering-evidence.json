@@ -1,0 +1,427 @@
+{
+  "phase": "S4",
+  "baseline_source_commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
+  "changed_file_count": 13,
+  "changed_files_sha256": {
+    "src/milai_lab/runners/memsyco_native.py": "d2670bcaad26aa25b08fc14f776b84346739df01a8ca847952575605d53708c0",
+    "src/milai_lab/runners/merit_native.py": "b35682df6e51f8a520576c7409357a6eba9996440fe40dd48068a9f518afae6c",
+    "src/milai_lab/contracts/benchmark.py": "306c0f9212c43e440d68b837e409e4f702dde5dda28229eaed4de79273aad5d5",
+    "src/milai_lab/harness/source_identity.py": "d75c953a523a097c0acef9b37b6c786bda360edf0c995a0525a73075cb2e8440",
+    "src/milai_lab/harness/benchmark_execution.py": "b645ad4e431c060cba9a6626e251d081443471c85a51d5530e306cd04208a229",
+    "tests/architecture/test_request_source_identity.py": "37af02e806bbdbda51c31d90fdce29401a17ed7645c925fd74dea9999ed69e81",
+    "tests/architecture/test_benchmark_execution_architecture.py": "f63d65dae7314e9c51d78ce62f0e98db546c51ff680519f8c9f8f10239f8e6ba",
+    "tests/contracts/test_benchmark_execution.py": "a85dbc7f7e91feaa5835397c19a7098ed6d25da72e86c4c35378376e80b7f175",
+    "tests/contracts/benchmark_execution_probe.py": "1308c92f05bd679419b290c88e45d684e343034b6c3c03ace31cbf51f9055497",
+    "tests/integrations/test_simplemem_contracts.py": "1fb8247118806eb7f5c8f644f60417a32421761e624bd00444e5f89e77c37088",
+    "configs/lab-verification-matrix.json": "e51bbca76fa9dbdaab56f8748d7e8a86697fc364596973f4986930b47a49867f",
+    "../.github/workflows/ci.yml": "e920569382ac250ae84c980d415d4f6cbc9e846d2a4b95c4fcc0b278eab0bb30",
+    "../.github/workflows/fast.yml": "a2784729b37d3de9b65007c19d9c88cff03d6bc92aad5c9dcafd0131a9e44456"
+  },
+  "changed_file_manifest_sha256": "a0b64382f29c262131f88634537928fc2a7852085cc432d373466588e6caa552",
+  "canonical_owner": "src/milai_lab/harness/benchmark_execution.py",
+  "shared_functions": [
+    "sha",
+    "trace_costs",
+    "validate_config",
+    "source_identity",
+    "prepare_manifest",
+    "start_job",
+    "finish_job"
+  ],
+  "shared_function_count": 7,
+  "legacy_compatibility": "MERIT explicit same-object aliases; MemSyco imports canonical common owner directly",
+  "common_internal_dependencies": [
+    "milai_lab.contracts.benchmark",
+    "milai_lab.harness.artifact_io"
+  ],
+  "native_data_world_tools_scorer_task_conversion": "remain in original benchmark owners; all 15 remaining runner function executable ASTs unchanged",
+  "benchmark_execution_types": {
+    "definition": "src/milai_lab/contracts/benchmark.py",
+    "dto_count": 5,
+    "protocol_count": 3,
+    "production_mapping": {
+      "BenchmarkJob": {
+        "fields": [
+          "job_id",
+          "selection_path?",
+          "selection_sha256?",
+          "domain?",
+          "arc_sha256?",
+          "public_messages?",
+          "track?",
+          "owner?",
+          "history_id?",
+          "history_sha256?",
+          "build_history_id?"
+        ],
+        "producer": [
+          "merit_native.selection_jobs",
+          "memsyco_native.prepare",
+          "memsyco_native._history_inputs"
+        ],
+        "consumer": [
+          "prepare_manifest",
+          "start_job",
+          "BenchmarkManifest.jobs"
+        ]
+      },
+      "BenchmarkAttempt": {
+        "fields": [
+          "status",
+          "output?",
+          "error_type?"
+        ],
+        "producer": [
+          "start_job STARTED",
+          "finish_job terminal record"
+        ],
+        "consumer": [
+          "BenchmarkManifest.attempts",
+          "start_job predecessor order check"
+        ]
+      },
+      "BenchmarkManifest": {
+        "fields": [
+          "identity",
+          "jobs",
+          "attempts",
+          "status",
+          "history_attempts?"
+        ],
+        "producer": [
+          "prepare_manifest",
+          "start_job read_json",
+          "memsyco_native._prepared_u2 read_json"
+        ],
+        "consumer": [
+          "start_job",
+          "finish_job",
+          "memsyco_native._run_u2_query",
+          "memsyco_native.run_history"
+        ],
+        "opaque_extensions": "identity metadata and existing optional history_attempts are retained as dictionaries; common helper adds no history behavior"
+      },
+      "BenchmarkPreparationReceipt": {
+        "fields": [
+          "status",
+          "jobs",
+          "manifest_path",
+          "identity_sha256"
+        ],
+        "producer": [
+          "prepare_manifest"
+        ],
+        "consumer": [
+          "merit_native.prepare return",
+          "memsyco_native.prepare return"
+        ]
+      },
+      "BenchmarkSourceIdentity": {
+        "fields": [
+          "source_sha256",
+          "dependency_lock_sha256",
+          "native_transport_requirements_sha256",
+          "dependencies",
+          "python",
+          "environment_packages",
+          "git_sha"
+        ],
+        "producer": [
+          "source_identity"
+        ],
+        "consumer": [
+          "MERIT prepare identity",
+          "MemSyco prepare/recovery identity"
+        ]
+      },
+      "BenchmarkPrepareArguments": {
+        "required_attributes": [
+          "runtime_root: Path",
+          "output: Path"
+        ],
+        "consumer": [
+          "prepare_manifest"
+        ]
+      },
+      "BenchmarkStartArguments": {
+        "required_attributes": [
+          "runtime_root: Path",
+          "prepared: Path",
+          "job: str"
+        ],
+        "consumer": [
+          "start_job"
+        ]
+      },
+      "BenchmarkFinishArguments": {
+        "required_attributes": [
+          "runtime_root: Path",
+          "job: str"
+        ],
+        "consumer": [
+          "finish_job"
+        ]
+      }
+    },
+    "strict_core_owner": true,
+    "unused_dtos": [],
+    "enum_or_status_validation_added": false,
+    "unknown_runtime_keys_preserved": true,
+    "required_runtime_keys_or_serialization_changed": false,
+    "typing_cast": "start_job retains its original empty dict lookup default; cast only supplies dict[str, Any] to strict mypy"
+  },
+  "behavior_contract": {
+    "before_file": "artifacts/code-architecture-v12/s4-execution-golden-before.json",
+    "after_file": "artifacts/code-architecture-v12/s4-execution-golden-after.json",
+    "bytes": 65267,
+    "sha256": "f5dd86e7ec77e56109671883b10c5ba9f4ce13f05e1ea967a7c0a9c41844e1b7",
+    "entire_file_bytes_equal": true,
+    "components": [
+      "lifecycle",
+      "costs",
+      "config",
+      "source_identity"
+    ],
+    "preserved_cases": [
+      "ordered once-only attempt lifecycle",
+      "failed versus partial/terminal completion",
+      "STARTED/RUNNING manifest written before dirty-root error",
+      "identity/jobs/prepared digest mismatch",
+      "unknown manifest/job/identity fields",
+      "arbitrary finish status",
+      "known/unknown usage",
+      "inclusive MCP cost and observation categories",
+      "invalid/missing trace event errors",
+      "config defaults/errors",
+      "source map ordering/schema/dependency fallback/optional lock"
+    ],
+    "test_inputs": "synthetic manifests and JSONL events, temporary files, test-only source/dependency/git fixtures",
+    "runtime_clock_patch": false
+  },
+  "actual_source_identity": {
+    "before_file": "artifacts/code-architecture-v12/s4-actual-source-identity-before.json",
+    "after_initial_file": "artifacts/code-architecture-v12/s4-actual-source-identity-after.json",
+    "final_file": "artifacts/code-architecture-v12/s4-actual-source-identity-final.json",
+    "final_sha256": "676d7a181a2f0177d73d6bb24336db8e490afb899c17567fdddd441a974219c2",
+    "final_source_map_count": 190,
+    "added": [
+      "src/milai_lab/contracts/benchmark.py",
+      "src/milai_lab/harness/benchmark_execution.py"
+    ],
+    "changed": [
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/runners/memsyco_native.py",
+      "src/milai_lab/runners/merit_native.py"
+    ],
+    "all_final_file_hashes_verified": true,
+    "source_map_order_preserved": true,
+    "git_sha": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
+    "old_source_digests_forced_equal": false
+  },
+  "ast_evidence": {
+    "file": "artifacts/code-architecture-v12/s4-definition-equivalence.json",
+    "sha256": "7da292c0acc14dd9f55dbb0cf1c8ecb3370a6a432c843f67db62503373b6a135",
+    "shared_executable_functions_equal": 7,
+    "remaining_native_functions_equal": 15,
+    "s3_style_repair_original_ast_equal": true
+  },
+  "package_scope_note": "All six relevant canonical/runner sources and new tests/fixture are byte-verified. The final S3-only adjacent string formatting adjustment happened after the sdist build; its original AST is unchanged and it is outside the S4 runtime/package probe byte list.",
+  "first_failures_preserved": [
+    {
+      "logs": [
+        "s4-ruff-initial.log"
+      ],
+      "reason": "expected extraction import/unused/layout findings plus carried S3 101-character fixture-path line"
+    },
+    {
+      "logs": [
+        "s4-tests-ruff-initial.log"
+      ],
+      "reason": "new copied capture helper line wrapping and immediate loop lambdas needing explicit fixture bindings; fixed without changing contract output"
+    },
+    {
+      "logs": [
+        "s4-core-mypy-initial.log"
+      ],
+      "reason": "TypedDict attempt lookup default empty dict inferred as dict[Never,Never]; explicit type-only cast preserves the default"
+    },
+    {
+      "logs": [
+        "s4-foundation-mypy-initial.log"
+      ],
+      "reason": "four changed DTO return/parameter flow declarations in existing producers/consumers; annotations corrected"
+    },
+    {
+      "logs": [
+        "s4-workflow-edit-initial.log"
+      ],
+      "reason": "edit helper expected nonexistent -m suffix on Fast command; no workflow written by failed step, fixed actual command anchor"
+    },
+    {
+      "logs": [
+        "s4-ast-proof-initial.log"
+      ],
+      "reason": "formatting initially split Path join operators; adjacent string literals restore original entire AST"
+    }
+  ],
+  "s3_ruff_coverage_correction": "S3 full Ruff success preceded the final deterministic fixture filename edit; final focused check covered only external_contract_probe.py. S4 full Ruff found the missed E501, now fixed with original AST retained. Do not claim S3 full Ruff covered final S3 bytes.",
+  "preservation": {
+    "docs_or_public_fixtures_written_by_source_agent": [],
+    "lockfiles_or_sdk_source_modified": [],
+    "git_write_operations": [],
+    "real_host_embedding_judge_pg_services_benchmarks": [],
+    "downloads": []
+  },
+  "validation": {
+    "core_contract_tests": 3,
+    "foundation_relevant_tests": 49,
+    "total_tests": 52,
+    "strict_mypy_core_source_count": 35,
+    "strict_mypy_changed_foundation_runner_count": 2,
+    "ruff": "whole src/tests/tools passed; final unchanged-AST S3 literal split also passed focused Ruff",
+    "boundary": "active/tools passed",
+    "matrix": {
+      "active_sources": 188,
+      "core_direct": 35,
+      "foundation_discovery": 150,
+      "external_direct": 5,
+      "optional_tests_owned": 28,
+      "private_asset_tests": 14
+    },
+    "ci": "new stdlib contract replay is Core; compatibility architecture is Foundation, explicitly owned and excluded from Core"
+  },
+  "checks": [
+    {
+      "label": "s4-before-capture",
+      "returncode": 0,
+      "seconds": 3.032
+    },
+    {
+      "label": "s4-after-capture",
+      "returncode": 0,
+      "seconds": 0.292
+    },
+    {
+      "label": "s4-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.321
+    },
+    {
+      "label": "s4-core-mypy-initial",
+      "returncode": 1,
+      "seconds": 0.712
+    },
+    {
+      "label": "s4-foundation-mypy-initial",
+      "returncode": 1,
+      "seconds": 4.119
+    },
+    {
+      "label": "s4-tests-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.071
+    },
+    {
+      "label": "s4-final-ruff",
+      "returncode": 0,
+      "seconds": 0.086
+    },
+    {
+      "label": "s4-final-core-mypy",
+      "returncode": 0,
+      "seconds": 0.337
+    },
+    {
+      "label": "s4-matrix",
+      "returncode": 0,
+      "seconds": 0.783
+    },
+    {
+      "label": "s4-active-boundary",
+      "returncode": 0,
+      "seconds": 0.843
+    },
+    {
+      "label": "s4-core-contract-tests",
+      "returncode": 0,
+      "seconds": 1.03
+    },
+    {
+      "label": "s4-tools-boundary",
+      "returncode": 0,
+      "seconds": 1.739
+    },
+    {
+      "label": "s4-final-foundation-mypy",
+      "returncode": 0,
+      "seconds": 4.439
+    },
+    {
+      "label": "s4-foundation-behavior-tests",
+      "returncode": 0,
+      "seconds": 9.738
+    },
+    {
+      "label": "s4-build-sdist",
+      "returncode": 0,
+      "seconds": 5.031
+    },
+    {
+      "label": "s4-build-wheel-from-sdist",
+      "returncode": 0,
+      "seconds": 0.493
+    },
+    {
+      "label": "s4-create-isolated-env",
+      "returncode": 0,
+      "seconds": 0.013
+    },
+    {
+      "label": "s4-install-isolated-wheel",
+      "returncode": 0,
+      "seconds": 0.109
+    },
+    {
+      "label": "s4-isolated-installed-core",
+      "returncode": 0,
+      "seconds": 0.138
+    },
+    {
+      "label": "s4-isolated-installed-foundation",
+      "returncode": 0,
+      "seconds": 3.235
+    },
+    {
+      "label": "s4-final-s3-style-ruff",
+      "returncode": 0,
+      "seconds": 0.073
+    }
+  ],
+  "offline_package": {
+    "sdist_sha256": "c77d0b60f4da71c57c6fcc4f3acbc97f0fa5dba8d7185c55b49fc0e4195b3f11",
+    "wheel_from_sdist_sha256": "8ac15b8bd2b926eec51b26db08bc392d01c98a330a741ce3315d9027314efcfd",
+    "source_bytes_verified": [
+      "src/milai_lab/contracts/benchmark.py",
+      "src/milai_lab/harness/benchmark_execution.py",
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/harness/artifact_io.py",
+      "src/milai_lab/runners/merit_native.py",
+      "src/milai_lab/runners/memsyco_native.py"
+    ],
+    "sdist_tests_and_fixture_verified": [
+      "tests/contracts/benchmark_execution_probe.py",
+      "tests/contracts/test_benchmark_execution.py",
+      "tests/architecture/test_benchmark_execution_architecture.py",
+      "data/diagnostics/code-architecture-v12/benchmark-execution-golden.json"
+    ],
+    "offline": true,
+    "downloads": [],
+    "installed_dependencies": [],
+    "isolated_package_origin_assertion": "every loaded milai_lab module lives under the fresh installation",
+    "core_optional_sdk_loaded": false,
+    "same_object_shared_runner_symbols": 7,
+    "full_synthetic_contract_equal_in_fresh_core_and_foundation_probes": true
+  },
+  "local_receipt_sha256": "81f65ea802d0897d1f5aa318bad29d868a1a5a612cddfba01a05681bac26aaca",
+  "status": "LOCAL_PASS_REMOTE_CI_PENDING"
+}

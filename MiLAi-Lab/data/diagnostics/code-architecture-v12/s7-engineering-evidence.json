@@ -1,0 +1,234 @@
+{
+  "kind": "MILAI_V12_S7_PUBLIC_ENGINEERING_EVIDENCE",
+  "baseline_source_commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b",
+  "source_writes_stopped": true,
+  "independent_policy_followup": "sole test change; fixed 90 prohibited directions and11 positive controls independent of production allowed table; assertions use public policy and scanner",
+  "pre_followup_evidence_preserved": [
+    "s7-engineering-receipt-pre-independent-policy.json",
+    "s7-changed-files-sha256-pre-independent-policy.json",
+    "s7-package-receipt-pre-independent-policy.json",
+    "s7-AST-whitespace-evidence-pre-independent-policy.json"
+  ],
+  "changed_files_manifest": "s7-changed-files-sha256.json",
+  "changed_files_manifest_sha256": "7b10fe669814752315715e84c6aa88a72eacb58ee498baeafb98d63d1325aca8",
+  "changed_source_test_config_CI_paths": 13,
+  "changed_runtime": 5,
+  "checks_index": "s7-checks.jsonl",
+  "first_failed_attempts": [
+    {
+      "label": "s7-boundary-initial",
+      "returncode": 1,
+      "seconds": 3.853
+    },
+    {
+      "label": "s7-negatives-initial",
+      "returncode": null,
+      "error": "<local-only path or diagnostic; retained in ignored source evidence>",
+      "process_started": false
+    },
+    {
+      "label": "s7-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.282
+    },
+    {
+      "label": "s7-negatives-v2",
+      "returncode": 1,
+      "seconds": 1.521
+    },
+    {
+      "label": "s7-core-mypy-initial",
+      "returncode": 1,
+      "seconds": 1.114
+    },
+    {
+      "label": "s7-new-gates-v4",
+      "returncode": 1,
+      "seconds": 8.511
+    },
+    {
+      "label": "s7-new-gates-v5",
+      "returncode": 1,
+      "seconds": 9.412
+    },
+    {
+      "label": "s7-ruff-v2",
+      "returncode": 1,
+      "seconds": 0.067
+    }
+  ],
+  "successful_check_labels": [
+    "s7-gates-v2",
+    "s7-matrix-initial",
+    "s7-negatives-v3",
+    "s7-core-mypy-v2",
+    "s7-foundation-identity-recovery",
+    "s7-foundation-discovery-mypy",
+    "s7-checker-mypy",
+    "s7-gates-final",
+    "s7-foundation-explicit-mypy",
+    "s7-ruff-final",
+    "s7-matrix-final",
+    "s7-sdist",
+    "s7-wheel-from-sdist",
+    "s7-create-isolated-env",
+    "s7-install-wheel",
+    "s7-installed-core",
+    "s7-installed-foundation",
+    "s7-AST-whitespace",
+    "s7-installed-foundation-specific-validation",
+    "s7-independent-policy-tests",
+    "s7-independent-policy-ruff",
+    "s7-independent-policy-sdist",
+    "s7-independent-policy-wheel-from-sdist",
+    "s7-independent-policy-AST-whitespace"
+  ],
+  "necessary_behavior_and_architecture_tests": {
+    "Core_initial_combined_scope": 204,
+    "Core_latest_affected_import_boundary_file": 199,
+    "latest_fixed_prohibited_directions": 90,
+    "latest_fixed_allowed_controls": 11,
+    "initial_and_latest_scopes_overlap_do_not_add": true,
+    "Foundation_registered_source_omission_tamper_and_recovery": 55,
+    "not_independent_semantic_experiments": true
+  },
+  "strict_typing": {
+    "Core": 40,
+    "Foundation_discovery": 159,
+    "Foundation_explicit": 67,
+    "latest_scope_import_reader_and_checkers": 4,
+    "External_interfaces": {
+      "direct_files": 5,
+      "S3_unchanged_source_validation_reused": true,
+      "not_rerun_in_S7": true
+    },
+    "SDK_assets": "S3 existing local SDK contract replay evidence retained; no false Core/External skip, no asset downloads"
+  },
+  "matrix": {
+    "owned_sources": 194,
+    "canonical_packages": 6,
+    "strict_required_groups": 10,
+    "Core_ignores_equal_Foundation_External_tests": true,
+    "local_asset_collected_nodes": 14,
+    "source_ownership_map": "s7-gate-policy-evidence.json"
+  },
+  "typing_revision": "journal/tools/recovery already had explicit strict coverage; discovery exclusions removed, world added to direct Core; no strict override/ignore_errors added",
+  "AST_and_whitespace": {
+    "baseline_source_commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b",
+    "recovery_function_AST_identical": true,
+    "recovery_body_SHA256": "0d746ccbddb54164a4e2b9f31f026f1070f89bee2ab0275f93a53e76d992a3cc",
+    "recovery_runtime_imports_identical_except_stdlib_Callable_type_import": true,
+    "no_new_runtime_validation_or_keys": true,
+    "whitespace_checked_all_changed_and_new_paths": [
+      "src/milai_lab/application/recovery.py",
+      "src/milai_lab/boundary.py",
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/import_graph.py",
+      "src/milai_lab/tools_boundary.py",
+      "tests/architecture/test_import_boundaries.py",
+      "tests/architecture/test_request_source_identity.py",
+      "tests/architecture/test_source_ownership.py",
+      "tools/check_verification_matrix.py",
+      "configs/lab-verification-matrix.json",
+      "pyproject.toml",
+      "../.github/workflows/ci.yml",
+      "../.github/workflows/fast.yml"
+    ],
+    "whitespace_findings": [],
+    "ignored_local_workflow_sha256": {},
+    "strict_discovery_note": "application journal/tools/recovery were already explicitly strict before S7; S7 removes their redundant discovery excludes",
+    "source_registration_scope": "six actual canonical packages equal explicit source registration; all current request identity gates consume REQUEST_SOURCE_FILES",
+    "dynamic_analysis_scope": "finite literal/concatenation/loop targets and importlib/builtins aliases, relative imports, from-import layer targets and named file loader calls; unknown paths fail; no claim to solve arbitrary generated Python execution",
+    "historical_tool_loaders": "four fixed executed-source/v0218_checker.py loaders, one fixed /usr/local/bin/milai-read reader, and the two explicit Supersede reviewed_module call targets; no other unknown loader permitted",
+    "prior_heavy_replays_reused_without_rerun": [
+      "S3 raw+deterministic SDK contracts",
+      "S5 manual/real/edges complete goldens",
+      "S6 writer/accounting deterministic-v2"
+    ],
+    "remaining_runner_ownership_review": "s6-runner-ownership-review.json unchanged recipes/orchestration; no source/runner helper move in S7"
+  },
+  "package_receipt": "s7-package-receipt.json",
+  "package_receipt_sha256": "a9809f1ee141175d0596464fce8528897aef9e47e62def56cc75fdd7058931bc",
+  "package_runtime_bytes": 194,
+  "fresh_install_origins": "Core/Foundation both -I, installed prefix for every loaded milai module; no worktree import",
+  "complete_facade_same_objects": 8,
+  "generic_method_kwargs_boundary": "specific memory_protocol extra_forbidden with valid MockHTTP client, no HTTP operation",
+  "current_identity_current_sources": 50,
+  "historical_locks": "not modified; Root final preservation audit owns comprehensive hashes",
+  "remaining_ownership_audit": "s6-runner-ownership-review.json retained lawful public phase/runtime/frozen-input/native arc and recipe composition; no runner/scorer backedge admitted in lower layers",
+  "dynamic_limits": "finite static/relative/nested/TYPE_CHECKING imports, importlib and builtins aliases, finite strings/loops, unknown names/file loads fail, two exact pinned SDK loaders and six explicit offline tool loaders; arbitrary generated Python execution is outside this AST gate",
+  "Root_public_fixtures": "no S7 behavior fixture needed; recovery function AST identical and actual focused recovery checks pass; prior S1-S6 goldens remain frozen",
+  "no_unauthorized_activity": {
+    "downloads": [],
+    "real_Host_embed_Judge_PG": [],
+    "services": [],
+    "SDK_source_edits": [],
+    "Git_write_operations": []
+  },
+  "source_file_hashes": {
+    "src/milai_lab/application/recovery.py": "dd1aff6da6e8f860181f620dca9d030faa73d2487fa2d1e294f62216ea5628c7",
+    "src/milai_lab/boundary.py": "bd356238373ae9c9be2b5459d9d3115fc95e25cd9f1820e26e668f8d3163a480",
+    "src/milai_lab/harness/source_identity.py": "7433d9fa12b67ae9060f925d82e898ed1d572b473c96e6d609bdbeb5c69d9df7",
+    "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+    "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+    "tests/architecture/test_import_boundaries.py": "92c7979e9e03c67224998e15ede3eddead15bf221409104091f72233b1c2ba8c",
+    "tests/architecture/test_request_source_identity.py": "1410c3a1600f18a412817e19503edb26608ffd412b4658fdc8b67c36df953316",
+    "tests/architecture/test_source_ownership.py": "c8830d22447eebf3b369859cc374058e47fc9a17b8737ff0a179ec4e3cde2017",
+    "tools/check_verification_matrix.py": "6fade61142c105e1262dad1153bb6e6b373c40989120f9222cad0c90829f6178",
+    "configs/lab-verification-matrix.json": "9836916be407b173cf89c18b5e0d1111e7ff3a595d634a924309ccde9fa88dc6",
+    "pyproject.toml": "c33b82aab39e460cbd0a4fbf80c1d5733bed49db4171da08f407f1c873c9704d",
+    "../.github/workflows/ci.yml": "f9f8d00a26dc1aa8c5b24908018f994c2d6a71ad2d8cfe15ba3e92e7b452bba9",
+    "../.github/workflows/fast.yml": "5cc6f987079c925497b4e2f5c8277dc663fe8351f0ed36044787e41dd7d218ca"
+  },
+  "source_receipt_sha256": "dd0a7f3046adffbd40c595d361f12568cf6279d0ab2082e8d23cc6a02dd86073",
+  "package": {
+    "kind": "MILAI_V12_S7_OFFLINE_PACKAGE_RECEIPT",
+    "baseline_source_commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b",
+    "sdist": {
+      "path": "<local-only path or diagnostic; retained in ignored source evidence>",
+      "sha256": "452bd48ae6a8d605c4f0ba71c70cfd0d34adbe599dd97341921b4b140614aed0"
+    },
+    "wheel_built_from_sdist": {
+      "path": "<local-only path or diagnostic; retained in ignored source evidence>",
+      "sha256": "921b2b811ad0ff7dea42e82dc9b8cbc0b5b53cd864ddcbbf81bd3053d127e112"
+    },
+    "changed_runtime_sha256": {
+      "src/milai_lab/application/recovery.py": "dd1aff6da6e8f860181f620dca9d030faa73d2487fa2d1e294f62216ea5628c7",
+      "src/milai_lab/boundary.py": "bd356238373ae9c9be2b5459d9d3115fc95e25cd9f1820e26e668f8d3163a480",
+      "src/milai_lab/harness/source_identity.py": "7433d9fa12b67ae9060f925d82e898ed1d572b473c96e6d609bdbeb5c69d9df7",
+      "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+      "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e"
+    },
+    "all_runtime_bytes_match_worktree_sdist_wheel": true,
+    "runtime_files_verified": 194,
+    "new_source_test_checker_config_in_sdist": true,
+    "isolated_import_flags": "-I; every loaded milai module asserted under fresh install",
+    "Core_optional_SDK_modules_loaded": false,
+    "complete_facades_same_object": 8,
+    "S5_generic_constructor_rejection_preserved": true,
+    "heavy_SDK_or_golden_replays_repeated": false,
+    "downloads": [],
+    "services": [],
+    "git_write_operations": [],
+    "S5_constructor_specific_validation_probe": "s7-installed-foundation-specific-validation.log",
+    "installed_probe_sha256": "86ad8fd0237a671cd88851579d7f9040a91a513bf490046c587b7ac5eeebc40a",
+    "updated_test_in_sdist": "tests/architecture/test_import_boundaries.py",
+    "updated_test_sha256": "92c7979e9e03c67224998e15ede3eddead15bf221409104091f72233b1c2ba8c",
+    "all_194_runtime_bytes_identical_to_prior_installed_wheel": true,
+    "original_installed_evidence_reused": {
+      "receipt": "s7-package-receipt-pre-independent-policy.json",
+      "wheel_sha256": "921b2b811ad0ff7dea42e82dc9b8cbc0b5b53cd864ddcbbf81bd3053d127e112",
+      "env": "<local-only path or diagnostic; retained in ignored source evidence>",
+      "Core_Foundation_import_flags": "-I",
+      "reason": "sole follow-up change is independent test data plus positive controls; all194 runtime bytes identical; no reinstallation/replay claimed"
+    },
+    "final_package_check_scope": "offline sdist -> wheel rebuild, current test bytes present in sdist; all194 runtime bytes equal worktree and prior installed wheel; original -I installed imports reused, not rerun"
+  },
+  "current_import_map": "data/manifests/code-architecture-v12-current-import-map.json",
+  "preservation_evidence": "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
+  "root_source_hash_review": {
+    "all_13_match": true,
+    "note": "Root first reader expected S6 wrapped schema; S7 is a direct file map. KeyError occurred before writes; corrected to actual schema."
+  },
+  "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING"
+}

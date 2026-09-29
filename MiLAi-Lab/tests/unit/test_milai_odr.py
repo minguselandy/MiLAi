@@ -26,11 +26,12 @@ from milai_lab.baselines.langmem_agent import (
 )
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.on_demand_reconstruction.controller import ODRController
 from milai_lab.methods.on_demand_reconstruction.freshness import freshness_block, inspect_freshness
 from milai_lab.methods.on_demand_reconstruction.schema import odr_action_schema
+from milai_lab.providers.chat_bridge import IncompleteChatResponse, _action_schema
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel, _action_schema
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_m1_mechanism import _fixture_memory_effect
 

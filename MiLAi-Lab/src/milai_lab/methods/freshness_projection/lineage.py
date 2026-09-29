@@ -8,7 +8,7 @@ from typing import Any
 
 from langchain_core.messages import AIMessage, BaseMessage
 
-from milai_lab.baselines.langmem_revision_store import RevisionSidecar, content_identity
+from milai_lab.memory.revision_store import RevisionSidecar, content_identity
 
 DERIVED_WITHHELD = (
     "[Historical assistant response withheld: its generating request contained "

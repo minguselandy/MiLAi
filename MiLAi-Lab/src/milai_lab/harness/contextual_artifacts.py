@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from threading import Lock
 from typing import Any
+
+from milai_lab.harness.artifact_io import digest as digest
+from milai_lab.harness.artifact_io import read_json as read_json
+from milai_lab.harness.artifact_io import write_json as write_json
 
 
 class BudgetExceeded(RuntimeError):
@@ -101,21 +104,10 @@ class RunBudget:
             write_json(self.path, self.state)
 
 
-def digest(value: Any) -> str:
-    return hashlib.sha256(
-        json.dumps(value, sort_keys=True, ensure_ascii=False).encode()
-    ).hexdigest()
 
 
-def read_json(path: Path) -> Any:
-    return json.loads(path.read_text())
 
 
-def write_json(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n")
-    temporary.replace(path)
 
 
 class Trace:

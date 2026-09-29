@@ -29,6 +29,7 @@ from milai_lab.baselines.langmem_agent import (
     invoke_public_message,
 )
 from milai_lab.harness.contextual_artifacts import Trace, write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
     CONTROL_STAGE,
@@ -52,7 +53,6 @@ from milai_lab.methods.local_state_attention.writers import (
 )
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application_runtime as app_runtime
 from milai_lab.runners.langmem_application import _collect_turn_tail, run_phase
 

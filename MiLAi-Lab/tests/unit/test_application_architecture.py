@@ -74,6 +74,7 @@ def test_explicit_identities_bind_all_canonical_application_sources(
 ) -> None:
     from milai_lab.application import APPLICATION_SOURCE_FILES
     from milai_lab.baselines import langmem_b1_identity, langmem_identity
+    from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
     from milai_lab.methods.freshness_projection import identity
 
     required = set(APPLICATION_SOURCE_FILES)
@@ -99,7 +100,8 @@ def test_explicit_identities_bind_all_canonical_application_sources(
 
     # A fresh synthetic lock cannot omit implementation hashes or accept tampered bytes.
     monkeypatch.setattr(langmem_identity, "LAB", tmp_path)
-    for relative in ("uv.lock", "pyproject.toml", "upstream.json", *APPLICATION_SOURCE_FILES):
+    for relative in ("uv.lock", "pyproject.toml", "upstream.json", *APPLICATION_SOURCE_FILES,
+                     *REQUEST_SOURCE_FILES):
         path = tmp_path / relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("synthetic identity input\n")
@@ -120,7 +122,7 @@ def test_explicit_identities_bind_all_canonical_application_sources(
     with pytest.raises(ValueError, match="FOUNDATION_APPLICATION_SOURCE_MAP_MISSING"):
         langmem_identity.verify_foundation_lock(lock_path, config)
     lock["source_sha256"] = {relative: sha(tmp_path / relative)
-                             for relative in APPLICATION_SOURCE_FILES}
+                             for relative in (*APPLICATION_SOURCE_FILES, *REQUEST_SOURCE_FILES)}
     lock_path.write_text(json.dumps(lock))
     (tmp_path / APPLICATION_SOURCE_FILES[-1]).write_text("changed implementation\n")
     with pytest.raises(ValueError, match=r"FOUNDATION_SOURCE_CHANGED:.*application/recovery"):

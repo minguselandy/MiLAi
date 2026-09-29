@@ -1,0 +1,439 @@
+{
+  "phase": "S3",
+  "baseline_source_commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9",
+  "changed_file_count": 25,
+  "changed_files_sha256": {
+    "src/milai_lab/baselines/langmem_benchmark.py": "e37ac9239d5dc2523cf984dbf0fa1ead2dbd9142be4b0b5e10d30ea4fc158429",
+    "src/milai_lab/baselines/benchmark_memories.py": "749a86c5b0b221a63767aa5d3f68665c16c5d2a7fa50f3f611dc1b1447a01fe0",
+    "src/milai_lab/runners/memsyco_native.py": "fd3859c40a0c489343b09d42982b0b5bd339ac80884577bd12516b876c0c4358",
+    "src/milai_lab/runners/merit_native.py": "7e823056563979a45bde70b7180cfb74bd59e8cc086ba56223ac9bbe2055a82b",
+    "src/milai_lab/runners/mem0_native.py": "65bff6e580d7ce7c2e23c80e1356d0c10ae25768537f64bd8770b1605e26212e",
+    "src/milai_lab/runners/simplemem_native.py": "ba044c13433593e806e1046c08fbd4ee409ded025cc0926b6ac4924a4b9ee8f0",
+    "src/milai_lab/runners/mem0_identity.py": "5bebd9d4b0976539abb588ad3e6ecdfbea88dc70716597459688f8199b03a485",
+    "src/milai_lab/integrations/__init__.py": "37d70aa814d51bea77c67a6085325fa92f39009dded2e9060c3af04a4cfd03e8",
+    "src/milai_lab/integrations/memory/__init__.py": "71a93c9a41aa8f04aab0586783d1763f1232d37566e4e433a9234d5bb30beb77",
+    "src/milai_lab/integrations/memory/mem0.py": "8597b0a84aecb3800a1388494672c70fec770b4ad9ee1c7481afe21a8494df4f",
+    "src/milai_lab/integrations/memory/simplemem.py": "ce283d2f18a5a03516b5e4e99e647c76bb85398a65f8c7a1d7403f3a0b27213e",
+    "src/milai_lab/harness/source_identity.py": "5cbb567eb29140671e4ce93e4010958bbecc4e8b7d23b8c2818f45636ffa0871",
+    "src/milai_lab/harness/artifact_io.py": "8f580877172d7ac876bedf0821dd43ed8c5c96c414ad0ef3e72511b115cda903",
+    "src/milai_lab/harness/contextual_artifacts.py": "b8c864b483656eb29fb3967a01bd1d1c18db8e47f1955030f7fb2e6a887ad22d",
+    "tests/architecture/test_request_source_identity.py": "346999465ea9890f45c5285a7ab643047688c7ab0759d735dd86af26b80e7e8e",
+    "tests/integrations/test_external_interfaces.py": "b8e258fb18e954e6be95b57970500104c097f28bd86a6277c1eab91d4445e0fd",
+    "tests/integrations/external_contract_probe.py": "23fa6499d4ff53d6cbd76bf4cea5ed691c6f1fbdd542072c475371608b348882",
+    "tests/integrations/test_simplemem_contracts.py": "391d6c0bb755a0cd9e8a4a7452934123a6cbafadf9d810f26099307585ff0438",
+    "tests/integrations/test_mem0_contracts.py": "9966a73fd4535dda721f32d34abe3bbe1a2736db85585b0cbf6fc037286ab227",
+    "tools/check_verification_matrix.py": "7eb1f5ae37d74eb3c5d9b8e261a1cc60899849837a1ed719e4882fadf92cb897",
+    "tools/run_milai_external_memory_v26.py": "15612e64119b97b6fb6f8353ac4dd659188e7b24fd39a9f9feebc2cafecf6257",
+    "tools/prepare_simplemem_text_source.py": "d3cd23f78bc2b1ef87443baac5f28787145171fb6d231abff8d3a2f610e9bed1",
+    "configs/lab-verification-matrix.json": "70634ede1ee8caa17710c559dadd02b42ee7e0ef13389dd637e69a96e0edb7de",
+    "../.github/workflows/ci.yml": "72587df8fcb16cd9c55169d2243879743c328b41444a20b375ca1d3e6b84bc94",
+    "../.github/workflows/fast.yml": "d16bd19f3296a3603f23da65788aa2912af24d738ee77dd9e7aa8338898550e5"
+  },
+  "ownership": {
+    "canonical_native_backends": [
+      "integrations/memory/mem0.py",
+      "integrations/memory/simplemem.py"
+    ],
+    "old_runner_modules": "pure same-object aliases; public and original private globals retained",
+    "mem0_pin_and_dependency_identity": "canonical integration; unchanged aliases from baseline and runner identity",
+    "artifact_io": "exact stdlib leaf functions in harness/artifact_io.py; contextual_artifacts aliases same objects",
+    "integration_internal_dependencies": "contracts, memory, providers, integrations; precise stdlib harness.artifact_io leaf exception",
+    "shared_baseline_dependency_on_native_runner": "removed; current consumers import canonical integrations"
+  },
+  "mechanical_equivalence": {
+    "moved_definitions_ast_equal": 12,
+    "consumer_modules_import_only_equivalent": 7,
+    "other_contextual_artifacts_definitions_unchanged": 4,
+    "proof_file": "artifacts/code-architecture-v12/s3-definition-equivalence.json",
+    "proof_sha256": "3b87c79ae0f530fe2051c35030d77c46c19fb50b2ef75b006df24319b401eab5",
+    "sdk_source_edits": [],
+    "semantic_policy_or_native_parameter_edits": [],
+    "sdk_source_pins": {
+      "mem0": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "simplemem": "db80b6a7c591e0ea730a058e9f5fc4eb06572299"
+    }
+  },
+  "contract_captures": {
+    "mem0_raw_before": {
+      "file": "artifacts/code-architecture-v12/s3-mem0-golden-before.json",
+      "bytes": 621310,
+      "sha256": "b042b559f8cd73620e530bf1168ff591cebe38a7a763d507a1d9a97d8db69518"
+    },
+    "mem0_raw_after": {
+      "file": "artifacts/code-architecture-v12/s3-mem0-golden-after.json",
+      "bytes": 621310,
+      "sha256": "431488e5d230578dc18cee2558b4228da8a7cd2dcf257040c7b3e8c2c21e44f9"
+    },
+    "mem0_deterministic_v2_before": {
+      "file": "artifacts/code-architecture-v12/s3-mem0-golden-deterministic-before-v2.json",
+      "bytes": 621150,
+      "sha256": "faacff1e0c5741522d5cc80b85374f7e6e87b4de6ce68ec849d76b8d78b8869d"
+    },
+    "mem0_deterministic_v2_after": {
+      "file": "artifacts/code-architecture-v12/s3-mem0-golden-deterministic-after-v2.json",
+      "bytes": 621150,
+      "sha256": "faacff1e0c5741522d5cc80b85374f7e6e87b4de6ce68ec849d76b8d78b8869d"
+    },
+    "mem0_comparison": {
+      "raw_entire_contract_equal": false,
+      "raw_differences": 12,
+      "raw_difference_fields": [
+        "events[*].wall_seconds"
+      ],
+      "all_other_raw_fields_types_and_list_lengths_equal": true,
+      "deterministic_v1_entire_contract_equal": false,
+      "deterministic_v1_reason": "perf_counter fixture did not control the actual time.monotonic HTTP event clock",
+      "deterministic_v2_entire_file_bytes_equal": true,
+      "supplemental_test_clocks": {
+        "perf_counter": 1000.0,
+        "monotonic": 1000.0
+      },
+      "runtime_clock_or_budget_edits": false,
+      "baseline_source_owner_count": 38,
+      "baseline_source_owner_proof": "artifacts/code-architecture-v12/s3-mem0-deterministic-before-v2-loaded-sources.json",
+      "baseline_tests_source": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/artifacts/code-architecture-v12/s3-originals/tests",
+      "source_hashes_verified": "s3-before-file-hashes.json"
+    },
+    "simplemem_raw_before": {
+      "file": "artifacts/code-architecture-v12/s3-simplemem-golden-before.json",
+      "bytes": 650215,
+      "sha256": "755e77811bb1d7089970da283498b79630c2e951847983df3d326509e72cef43"
+    },
+    "simplemem_raw_after": {
+      "file": "artifacts/code-architecture-v12/s3-simplemem-golden-after.json",
+      "bytes": 650219,
+      "sha256": "fb5771fbeed629a0477ec3a56817d7804d7414cedc4a2be45d150a51606ee086"
+    },
+    "simplemem_deterministic_v2_before": {
+      "file": "artifacts/code-architecture-v12/s3-simplemem-golden-deterministic-before-v2.json",
+      "bytes": 649609,
+      "sha256": "e6ebdeccd5c0334ff60ffd0c5cffb769b45e8d1e153d5cd57e22e47091705338"
+    },
+    "simplemem_deterministic_v2_after": {
+      "file": "artifacts/code-architecture-v12/s3-simplemem-golden-deterministic-after-v2.json",
+      "bytes": 649609,
+      "sha256": "e6ebdeccd5c0334ff60ffd0c5cffb769b45e8d1e153d5cd57e22e47091705338"
+    },
+    "simplemem_comparison": {
+      "raw_entire_contract_equal": false,
+      "raw_differences": 36,
+      "raw_difference_fields": [
+        "events[*].wall_seconds"
+      ],
+      "all_other_raw_fields_types_and_list_lengths_equal": true,
+      "deterministic_v1_entire_contract_equal": false,
+      "deterministic_v1_reason": "perf_counter fixture did not control the actual time.monotonic HTTP event clock",
+      "deterministic_v2_entire_file_bytes_equal": true,
+      "supplemental_test_clocks": {
+        "perf_counter": 1000.0,
+        "monotonic": 1000.0
+      },
+      "runtime_clock_or_budget_edits": false,
+      "baseline_source_owner_count": 77,
+      "baseline_source_owner_proof": "artifacts/code-architecture-v12/s3-simplemem-deterministic-before-v2-loaded-sources.json",
+      "baseline_tests_source": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/artifacts/code-architecture-v12/s3-originals/tests",
+      "source_hashes_verified": "s3-before-file-hashes.json"
+    }
+  },
+  "first_failures_preserved": [
+    {
+      "logs": [
+        "s3-after-ruff-initial.log",
+        "s3-after-ruff.log"
+      ],
+      "reason": "mechanical import order/unused imports/__all__ sorting, then three new test helper style findings; locally fixed"
+    },
+    {
+      "logs": [
+        "s3-after-mem0-capture.log",
+        "s3-after-simplemem-capture.log"
+      ],
+      "reason": "raw HTTP elapsed time nondeterminism; exactly 12/36 wall_seconds values, other entire values equal"
+    },
+    {
+      "logs": [
+        "s3-deterministic-after-mem0.log",
+        "s3-deterministic-after-simplemem.log"
+      ],
+      "reason": "first supplemental fixed the wrong floating clock; actual provider uses monotonic; failed files retained"
+    },
+    {
+      "logs": [
+        "s3-workflow-edit-initial.log"
+      ],
+      "reason": "edit helper relative path lacked resolved parent; workflow files unchanged by failure, helper corrected"
+    },
+    {
+      "logs": [
+        "s3-definition-comparator-initial.log"
+      ],
+      "reason": "proof helper initially omitted explicitly authorized unchanged pin constant-to-alias normalization"
+    },
+    {
+      "logs": [
+        "s3-v2-launch-initial.log"
+      ],
+      "reason": "orchestration used nonexistent entrypoint globals; no capture launched, corrected environment dictionary keys"
+    }
+  ],
+  "preservation": {
+    "public_fixtures_and_docs_written_by_source_agent": [],
+    "sdk_source_or_lockfiles_modified": [],
+    "git_write_operations": [],
+    "real_host_embedding_judge_pg_services_benchmarks": [],
+    "downloads": [],
+    "original_raw_and_failed_supplemental_captures_retained": true
+  },
+  "remaining_limits": [
+    "Full native replay binds the pre-existing local dependency cohorts, SDK checkout and fastembed cache; the two local_artifacts nodes are not ordinary CI claims.",
+    "Raw capture equality excludes no field: it failed only on elapsed time; v2 full byte equality is a separately labeled supplemental test fixture.",
+    "S4-S7 architecture work remains outside this completed S3 receipt."
+  ],
+  "status": "LOCAL_S3_PASS_REMOTE_CI_PENDING",
+  "validation": {
+    "after_tests": {
+      "mem0_native_and_contract": 7,
+      "simplemem_native_and_contract": 13,
+      "portable_external_interfaces": 8,
+      "architecture_source_identity": 17
+    },
+    "after_test_total": 45,
+    "mypy_core_sources": 33,
+    "mypy_foundation_discovery_sources": 148,
+    "mypy_external_direct_sources": 5,
+    "ruff": "whole src/tests/tools plus final test-fixture edit passed",
+    "boundary": "active and tools passed",
+    "matrix": {
+      "active_sources": 186,
+      "optional_tests_owned": 27,
+      "private_asset_nodes": 14
+    },
+    "read_only_git_diff_check": "passed",
+    "ci_ownership": {
+      "external_portable": "8 new interface/import/facade/policy-pin/stdlib IO checks execute in ordinary External",
+      "native_sdk_full_golden": "2 explicit local_artifacts nodes require the existing local SDK cohorts/assets; ordinary CI deselects them via -m not local_artifacts",
+      "existing_external_sdk_tests": "existing ownership preserved; separate local after runs passed in their actual dependency envs",
+      "missing_dependency_skip_added": false
+    }
+  },
+  "checks": [
+    {
+      "label": "s3-before-simplemem-capture",
+      "returncode": 0,
+      "seconds": 8.365
+    },
+    {
+      "label": "s3-before-mem0-capture",
+      "returncode": 0,
+      "seconds": 9.029
+    },
+    {
+      "label": "s3-before-simplemem-tests",
+      "returncode": 0,
+      "seconds": 8.397
+    },
+    {
+      "label": "s3-before-mem0-tests",
+      "returncode": 0,
+      "seconds": 11.389
+    },
+    {
+      "label": "s3-after-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.05
+    },
+    {
+      "label": "s3-after-ruff",
+      "returncode": 1,
+      "seconds": 0.173
+    },
+    {
+      "label": "s3-after-simplemem-capture",
+      "returncode": 1,
+      "seconds": 6.766
+    },
+    {
+      "label": "s3-after-mem0-capture",
+      "returncode": 1,
+      "seconds": 7.363
+    },
+    {
+      "label": "s3-after-external-mypy",
+      "returncode": 0,
+      "seconds": 39.484
+    },
+    {
+      "label": "s3-after-ruff",
+      "returncode": 0,
+      "seconds": 0.057
+    },
+    {
+      "label": "s3-after-core-mypy",
+      "returncode": 0,
+      "seconds": 0.791
+    },
+    {
+      "label": "s3-after-source-identity",
+      "returncode": 0,
+      "seconds": 2.815
+    },
+    {
+      "label": "s3-deterministic-before-simplemem",
+      "returncode": 0,
+      "seconds": 6.458
+    },
+    {
+      "label": "s3-deterministic-before-mem0",
+      "returncode": 0,
+      "seconds": 6.892
+    },
+    {
+      "label": "s3-after-foundation-discovery-mypy",
+      "returncode": 0,
+      "seconds": 35.585
+    },
+    {
+      "label": "s3-after-matrix",
+      "returncode": 0,
+      "seconds": 0.742
+    },
+    {
+      "label": "s3-after-active-boundary",
+      "returncode": 0,
+      "seconds": 0.776
+    },
+    {
+      "label": "s3-after-tools-boundary",
+      "returncode": 0,
+      "seconds": 1.675
+    },
+    {
+      "label": "s3-deterministic-after-simplemem",
+      "returncode": 1,
+      "seconds": 6.232
+    },
+    {
+      "label": "s3-deterministic-after-mem0",
+      "returncode": 1,
+      "seconds": 6.447
+    },
+    {
+      "label": "s3-external-portable-tests",
+      "returncode": 0,
+      "seconds": 4.97
+    },
+    {
+      "label": "s3-deterministic-v2-before-simplemem",
+      "returncode": 0,
+      "seconds": 6.545
+    },
+    {
+      "label": "s3-deterministic-v2-before-mem0",
+      "returncode": 0,
+      "seconds": 7.0
+    },
+    {
+      "label": "s3-deterministic-v2-after-simplemem",
+      "returncode": 0,
+      "seconds": 6.107
+    },
+    {
+      "label": "s3-deterministic-v2-after-mem0",
+      "returncode": 0,
+      "seconds": 6.883
+    },
+    {
+      "label": "s3-after-simplemem-tests",
+      "returncode": 0,
+      "seconds": 9.106
+    },
+    {
+      "label": "s3-after-mem0-tests",
+      "returncode": 0,
+      "seconds": 16.489
+    },
+    {
+      "label": "s3-build-sdist",
+      "returncode": 0,
+      "seconds": 5.312
+    },
+    {
+      "label": "s3-build-wheel-from-sdist",
+      "returncode": 0,
+      "seconds": 0.517
+    },
+    {
+      "label": "s3-create-isolated-mem0-env",
+      "returncode": 0,
+      "seconds": 0.021
+    },
+    {
+      "label": "s3-install-isolated-mem0-wheel",
+      "returncode": 0,
+      "seconds": 0.178
+    },
+    {
+      "label": "s3-isolated-installed-core",
+      "returncode": 0,
+      "seconds": 0.074
+    },
+    {
+      "label": "s3-isolated-installed-mem0",
+      "returncode": 0,
+      "seconds": 7.082
+    },
+    {
+      "label": "s3-create-isolated-simplemem-env",
+      "returncode": 0,
+      "seconds": 0.015
+    },
+    {
+      "label": "s3-install-isolated-simplemem-wheel",
+      "returncode": 0,
+      "seconds": 0.078
+    },
+    {
+      "label": "s3-isolated-installed-simplemem",
+      "returncode": 0,
+      "seconds": 6.635
+    },
+    {
+      "label": "s3-final-fixture-ruff",
+      "returncode": 0,
+      "seconds": 0.092
+    }
+  ],
+  "offline_package": {
+    "sdist_sha256": "59574e986fb1b05b25370d0dcc2a73529ebe58008a5d0676a088db4f4f029217",
+    "wheel_from_sdist_sha256": "f34212dfe752d3dc50d691694f82caa363ab79c8d99877f8ceeb70750fdae535",
+    "source_bytes_verified": [
+      "src/milai_lab/integrations/__init__.py",
+      "src/milai_lab/integrations/memory/__init__.py",
+      "src/milai_lab/integrations/memory/mem0.py",
+      "src/milai_lab/integrations/memory/simplemem.py",
+      "src/milai_lab/runners/mem0_native.py",
+      "src/milai_lab/runners/simplemem_native.py",
+      "src/milai_lab/harness/artifact_io.py",
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/harness/contextual_artifacts.py",
+      "src/milai_lab/baselines/benchmark_memories.py",
+      "src/milai_lab/runners/mem0_identity.py"
+    ],
+    "sdist_tests_and_fixtures_verified": [
+      "tests/integrations/external_contract_probe.py",
+      "tests/integrations/test_external_interfaces.py",
+      "tests/integrations/test_mem0_contracts.py",
+      "tests/integrations/test_simplemem_contracts.py",
+      "data/diagnostics/code-architecture-v12/mem0-contract-deterministic-golden.json",
+      "data/diagnostics/code-architecture-v12/simplemem-contract-deterministic-golden.json"
+    ],
+    "offline": true,
+    "downloaded_dependencies": [],
+    "fresh_env_installed_dependencies": [],
+    "installed_sdk_contracts": [
+      "mem0",
+      "simplemem"
+    ],
+    "isolated_package_origin_assertion": "every loaded milai_lab module lives under its fresh installation"
+  }
+}

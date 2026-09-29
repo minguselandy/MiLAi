@@ -36,8 +36,8 @@ from milai_lab.baselines.langmem_revision_store import (
     content_identity,
 )
 from milai_lab.harness.contextual_artifacts import Trace
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, UnknownBusinessAction
 
 

@@ -14,7 +14,7 @@ from typing import Any, TypeVar
 from langchain_core.messages import AIMessage, ToolMessage
 from langgraph.prebuilt.tool_node import ToolCallRequest
 
-from milai_lab.baselines.langmem_revision_store import RevisionSidecar, canonical_json
+from milai_lab.memory.revision_store import RevisionSidecar, canonical_json
 
 T = TypeVar("T")
 

@@ -3,24 +3,39 @@
 from __future__ import annotations
 
 import copy
-import hashlib
-import importlib.metadata
-import json
-import shutil
 import sqlite3
-import subprocess
-import sys
 from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+from milai_lab.contracts.benchmark import BenchmarkJob, BenchmarkPreparationReceipt
 from milai_lab.datasets.merit import load_native_domain_arc
+from milai_lab.harness.benchmark_execution import (
+    finish_job as finish_job,
+)
+from milai_lab.harness.benchmark_execution import (
+    prepare_manifest as prepare_manifest,
+)
+from milai_lab.harness.benchmark_execution import (
+    sha as sha,
+)
+from milai_lab.harness.benchmark_execution import (
+    source_identity as source_identity,
+)
+from milai_lab.harness.benchmark_execution import (
+    start_job as start_job,
+)
+from milai_lab.harness.benchmark_execution import (
+    trace_costs as trace_costs,
+)
+from milai_lab.harness.benchmark_execution import (
+    validate_config as validate_config,
+)
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,
     Trace,
-    digest,
     read_json,
     write_json,
 )
@@ -33,116 +48,11 @@ U2_ARMS = {"full_history", "strong_raw_rag", "rolling_summary", "ordinary_milai"
            "simplemem_text"}
 
 
-def sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def trace_costs(root: Path) -> dict[str, Any]:
-    """Disjoint request/usage categories; inclusive MCP timing is not added to model wall time."""
-    roles: dict[str, Any] = {}
-    mcp: dict[str, Any] = {}
-    observations: dict[str, Any] = {}
-    phase = "task_host"
-    path = root / "trace.jsonl"
-    for line in path.read_text().splitlines() if path.exists() else []:
-        event = json.loads(line)
-        if event.get("event") == "benchmark_phase":
-            phase = event["phase"]
-        if event.get("event") in {"vllm_response", "vllm_error"}:
-            role = "embedding:" + phase if event.get("path") == "embeddings" else phase
-            row = roles.setdefault(role, {"requests": 0, "known_tokens": 0, "unknown_usage": 0})
-            row["requests"] += 1
-            usage = event.get("usage")
-            tokens = usage.get("total_tokens") if isinstance(usage, dict) else None
-            if type(tokens) is int:
-                row["known_tokens"] += tokens
-            else:
-                row["unknown_usage"] += 1
-        if event.get("event") == "langmem_mcp" and event.get("kind") in {"http", "resource_result"}:
-            row = mcp.setdefault(event["kind"], {"calls": 0, "cpu_ns": 0, "wall_ns": 0,
-                                                "logical_bytes": 0})
-            row["calls"] += 1
-            for key in ("cpu_ns", "wall_ns"):
-                row[key] += event[key]
-            row["logical_bytes"] += (len(event["request_body"].encode()) +
-                len(event["response_body"].encode()) if event["kind"] == "http" else
-                event["logical_bytes"])
-        if event.get("event") in {"benchmark_backend_artifact_io", "mem0_native_runtime",
-            "mem0_benchmark_archive_add", "mem0_benchmark_search", "mem0_benchmark_snapshot",
-            "persistent_memory_checkpoint_read", "lsa_history_checkpoint_read",
-            "lsa_history_summary_result", "benchmark_summary_update",
-            "benchmark_raw_index", "benchmark_raw_retrieval", "simplemem_observation"}:
-            row = observations.setdefault(event["event"], {"observations": 0})
-            row["observations"] += 1
-            for key in ("calls", "logical_bytes", "cpu_ns", "wall_ns"):
-                if key in event:
-                    row[key] = row.get(key, 0) + event[key]
-    return {"roles": roles, "mcp_inclusive_observation_costs": mcp,
-            **({"backend_observation_costs": observations} if observations else {}),
-            "physical_io": None, "store_net_cpu_ns": None,
-            "timing_scope": "transport/service/material timings overlap; not additive",
-            "ledger_owner": "single runtime RunBudget; no second charge here"}
-
-
-def validate_config(config: dict[str, Any]) -> None:
-    host = config["host"]
-    if (host["tool_mode"] != "native" or host["max_tokens"] != 4096
-            or host["max_calls"] != 12 or host["temperature"] != 0
-            or host["enable_thinking"] is not False
-            or config["capacity"]["enable_thinking"] is not False
-            or not Path(config["budget_path"]).is_absolute()
-            or config["memory_contract"] != "strict"
-            or config.get("memory_transport") != "mcp_http"):
-        raise ValueError("UNIFIED_BENCHMARK_CONFIG_INVALID")
-
-
-def source_identity(lab_root: Path) -> dict[str, Any]:
-    paths = [*sorted((lab_root / "src/milai_lab").rglob("*.py")),
-             lab_root / "tools/run_unified_benchmarks.py", lab_root / "pyproject.toml"]
-    dependencies: dict[str, str | None] = {}
-    native_lock = lab_root / "data/locks/unified-v8-v9-native-transport-20260928.requirements.txt"
-    for name in ("openai", "litellm", "langchain-core", "langgraph", "langmem", "mcp",
-                 "httpx", "transformers", "tokenizers", "psycopg", "jsonschema"):
-        try:
-            dependencies[name] = importlib.metadata.version(name)
-        except importlib.metadata.PackageNotFoundError:
-            dependencies[name] = None
-    return {"source_sha256": {str(path.relative_to(lab_root)): sha(path) for path in paths},
-            "dependency_lock_sha256": sha(lab_root / "uv.lock"),
-            "native_transport_requirements_sha256": (
-                sha(native_lock) if native_lock.exists() else None),
-            "dependencies": dependencies, "python": sys.version,
-            "environment_packages": dict(sorted((dist.metadata["Name"], dist.version)
-                for dist in importlib.metadata.distributions() if "Name" in dist.metadata)),
-            "git_sha": subprocess.check_output(  # noqa: S603 - fixed read-only command
-                [shutil.which("git") or "/usr/bin/git", "rev-parse", "HEAD"],
-                cwd=lab_root, text=True).strip()}
-
-
-def prepare_manifest(args: Any, identity: dict[str, Any], jobs: list[dict[str, Any]],
-                     ) -> dict[str, Any]:
-    path = args.runtime_root / "run_manifest.json"
-    value = {"identity": identity, "jobs": jobs, "attempts": {},
-             "status": "PREPARED_ZERO_MODEL"}
-    if path.exists():
-        old = read_json(path)
-        if old["identity"] != identity or old["jobs"] != jobs:
-            raise ValueError("UNIFIED_BENCHMARK_IDENTITY_CHANGED")
-    else:
-        if args.runtime_root.exists() and any(args.runtime_root.iterdir()):
-            raise ValueError("UNIFIED_BENCHMARK_RUNTIME_DIRTY")
-        write_json(path, value)
-    receipt = {"status": "PREPARED_ZERO_MODEL", "jobs": jobs,
-               "manifest_path": str(path.resolve()), "identity_sha256": digest(identity)}
-    write_json(args.output, receipt)
-    return receipt
-
-
-def selection_jobs(path: Path, group: str) -> list[dict[str, Any]]:
+def selection_jobs(path: Path, group: str) -> list[BenchmarkJob]:
     manifest = read_json(path)
     if group not in {"smoke", "development", "confirmation"}:
         raise ValueError("MERIT_GROUP_UNDECLARED")
-    result = []
+    result: list[BenchmarkJob] = []
     for row in manifest["groups"][group]["arcs"]:
         selection_path = Path(row["selection_path"])
         if not selection_path.is_absolute():
@@ -157,7 +67,7 @@ def selection_jobs(path: Path, group: str) -> list[dict[str, Any]]:
     return result
 
 
-def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
+def prepare(args: Any, *, lab_root: Path) -> BenchmarkPreparationReceipt:
     config = read_json(args.config)
     validate_config(config)
     if args.arm not in ARMS | U2_ARMS:
@@ -183,10 +93,8 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         "scorer": "official native checker; pre_satisfied distinct from success",
         "rubric_read_by_runner": False}
     if args.arm in U2_ARMS:
-        from milai_lab.baselines.benchmark_memories import (
-            backend_identity,
-            mem0_dependency_identity,
-        )
+        from milai_lab.baselines.benchmark_memories import backend_identity
+        from milai_lab.integrations.memory.mem0 import mem0_dependency_identity
 
         identity.update({"backend": backend_identity(args.arm),
             "transport": "common public LangGraph/v1/native ToolNode; same native business schemas",
@@ -199,7 +107,7 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         if args.arm == "mem0_native":
             identity["mem0_dependency"] = mem0_dependency_identity()
     if args.arm == "simplemem_text":
-        from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+        from milai_lab.integrations.memory.simplemem import dependency_identity, validate_simplemem
 
         identity["simplemem_dependency"] = dependency_identity(validate_simplemem(config))
         identity["memory_cadence"] = (
@@ -220,7 +128,7 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         from langgraph.store.memory import InMemoryStore
 
         from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, create_history_read_tool
-        from milai_lab.baselines.langmem_mcp import MemoryMCP
+        from milai_lab.memory.mcp import MemoryMCP
 
         peer = MemoryMCP(InMemoryStore(), args.run, args.arm, "schema-only",
                          history_tool=create_history_read_tool(None),
@@ -230,14 +138,17 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             identity["memory_tools"] = [tool for tool in peer.catalog
                                         if tool["function"]["name"] == "read_history"]
         if args.arm == "mem0_native":
-            from milai_lab.runners.mem0_native import MEM0_SEARCH_DESCRIPTION, MEM0_SEARCH_SCHEMA
+            from milai_lab.integrations.memory.mem0 import (
+                MEM0_SEARCH_DESCRIPTION,
+                MEM0_SEARCH_SCHEMA,
+            )
 
             identity["memory_tools"] = [{"type": "function", "function": {
                 "name": "search_memory", "description": MEM0_SEARCH_DESCRIPTION,
                 "parameters": MEM0_SEARCH_SCHEMA}},
                 convert_to_openai_tool(create_history_read_tool(None))]
         if args.arm == "simplemem_text":
-            from milai_lab.runners.simplemem_native import SEARCH_DESCRIPTION, SEARCH_SCHEMA
+            from milai_lab.integrations.memory.simplemem import SEARCH_DESCRIPTION, SEARCH_SCHEMA
 
             identity["memory_tools"] = [{"type": "function", "function": {
                 "name": "search_memory", "description": SEARCH_DESCRIPTION,
@@ -246,43 +157,6 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         identity["namespace_template"] = list(MEMORY_NAMESPACE)
         identity["history_read_tool"] = convert_to_openai_tool(create_history_read_tool(None))
     return prepare_manifest(args, identity, jobs)
-
-
-def start_job(args: Any, *, identity: dict[str, Any], jobs: list[dict[str, Any]],
-              ) -> tuple[dict[str, Any], dict[str, Any], Path]:
-    manifest_path = args.runtime_root / "run_manifest.json"
-    manifest = read_json(manifest_path)
-    if (manifest["identity"] != identity or manifest["jobs"] != jobs
-            or read_json(args.prepared)["identity_sha256"] != digest(identity)):
-        raise ValueError("UNIFIED_BENCHMARK_IDENTITY_CHANGED")
-    matches = [job for job in jobs if job["job_id"] == args.job]
-    if len(matches) != 1:
-        raise ValueError("UNIFIED_BENCHMARK_JOB_UNKNOWN")
-    index = jobs.index(matches[0])
-    if args.job in manifest["attempts"]:
-        raise ValueError("UNIFIED_BENCHMARK_JOB_ALREADY_ATTEMPTED")
-    if any(manifest["attempts"].get(job["job_id"], {}).get("status") not in {"COMPLETED", "FAILED"}
-           for job in jobs[:index]):
-        raise ValueError("UNIFIED_BENCHMARK_JOB_ORDER")
-    manifest["attempts"][args.job] = {"status": "STARTED"}
-    manifest["status"] = "RUNNING"
-    write_json(manifest_path, manifest)
-    root = args.runtime_root / "jobs" / args.job
-    if root.exists():
-        raise ValueError("UNIFIED_BENCHMARK_JOB_RUNTIME_DIRTY")
-    root.mkdir(parents=True)
-    return manifest, matches[0], root
-
-
-def finish_job(args: Any, manifest: dict[str, Any], status: str,
-               output: Path | None = None, error: BaseException | None = None) -> None:
-    manifest["attempts"][args.job] = {"status": status, "output": str(output) if output else None,
-                                     "error_type": type(error).__name__ if error else None}
-    manifest["status"] = (("COMPLETED" if all(row["status"] == "COMPLETED"
-        for row in manifest["attempts"].values()) else "COMPLETED_WITH_FAILURES")
-        if len(manifest["attempts"]) == len(manifest["jobs"]) else
-        "FAILED" if status == "FAILED" else "PARTIALLY_COMPLETED")
-    write_json(args.runtime_root / "run_manifest.json", manifest)
 
 
 def run_native_arc(selection_path: Path, root: Path, arm: str, client: VLLMClient,

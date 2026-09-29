@@ -15,12 +15,16 @@ from langchain_core.embeddings import Embeddings
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.postgres import PostgresStore
 
-from milai_lab.baselines.langmem_agent import FoundationScope, build_agent, invoke_public_message
+from milai_lab.baselines.langmem_agent import (
+    build_agent,
+    invoke_public_message,
+)
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import write_json
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 
 
 class FixedEmbeddings(Embeddings):

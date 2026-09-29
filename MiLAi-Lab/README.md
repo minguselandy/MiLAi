@@ -9,11 +9,14 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 - [当前状态](docs/LAB_CURRENT_STATUS.md)：授权范围、暂停状态与未完成项。
 - [代码架构](docs/LAB_ARCHITECTURE.md)：职责、依赖方向及兼容入口。
 - [项目地图](docs/PROJECT_MAP.md)：从任务定位源码、配置、测试和证据。
+- [v12 总体整理报告](docs/CODE_ARCHITECTURE_V12_RESULTS.md)：维护位置、兼容范围和工程证据。
+- [v12 整理进度](docs/CODE_ARCHITECTURE_V12_EXECUTION.md)：阶段提交、工程验收和剩余迁移。
+- [代码职责](docs/CODE_OWNERSHIP.md)、[依赖规则](docs/DEPENDENCY_RULES.md)、[历史入口](docs/HISTORICAL_CODE_INDEX.md)。
 - [最新实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-当前用户授权项目梳理和架构优化，实验 Goal 保持 **paused**。
+当前代码组织 Goal 正在执行 v12；阶段完成情况以执行记录为准。实验 Goal 保持 **paused**。
 R1 仅有标签输出的局部改善；R2 的实际错误事实持久化仍未解决。
 本次结构整理不改变实验结论、模型设置或工具行为，Product 仍为 **NO_GO**。
 

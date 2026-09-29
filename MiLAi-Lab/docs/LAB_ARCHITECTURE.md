@@ -1,7 +1,8 @@
 # MiLAi Lab 代码架构
 
 更新日期：2026-09-29。Lab 是研究、实验与评测的唯一实现目录。
-当前代码整理在固定报告提交 `091dcbd` 上进行，实验仍暂停；研究状态和效果见
+当前 v12 代码整理以 `cca2fd9` 为基线，阶段实施和验证见
+[执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)。实验仍暂停；研究状态和效果见
 [当前状态](LAB_CURRENT_STATUS.md)，而非从模块名称推导。
 
 ## 目录边界
@@ -14,11 +15,13 @@ Lab 内部按职责组织：
 
 | 模块 | 负责 | 不应承担 |
 |---|---|---|
-| `contracts/` | arm 权限、输入/结果等数据合同 | 模型调用、业务执行 |
+| `contracts/` | arm 权限、请求、记忆、操作、scope 等数据合同 | 模型调用、业务执行 |
 | `datasets/` | benchmark 来源、合法输入和固定实例 | 使用 scorer 答案补输入 |
 | `harness/` | 结果制品、trace、容量/费用等共享设施 | 改写任务以取得通过 |
-| `providers/` | 实际 HTTP、模型协议和容量边界 | 判断业务事实正确性 |
-| `baselines/` | Agent、MCP/Store 接口及参考方法集成 | 自动授予业务权限 |
+| `providers/` | 实际 HTTP、模型协议、容量边界及通用 request/delivery/response hooks | 具体研究方法分支、判断业务事实正确性 |
+| `baselines/` | Agent 配方、实际 baseline 与兼容入口 | 自动授予业务权限、成为通用能力的唯一 owner |
+| `memory/` | 通用 MCP/Store、严格操作、版本和材料呈现 | Agent 配方、业务世界、scorer |
+| `integrations/memory/` | Mem0/SimpleMem 原生 SDK、数据库与调用适配 | 任务顺序、scorer、方法策略 |
 | `methods/` | 显式 recipe 的记忆/工作视图候选 | 持有第二套业务世界 |
 | `application/` | 可复用业务 world、journal、工具与恢复能力 | CLI、实验分组、scorer、服务创建 |
 | `runners/` | 组合方法、运行阶段、资源生命周期和结果交接 | 作为通用业务能力的唯一实现位置 |
@@ -27,17 +30,34 @@ Lab 内部按职责组织：
 
 这是维护职责图，不宣称所有历史模块已经完成同样的分层。按阶段保留的方法、旧入口和
 冻结文件仍存在；新工作应从[项目地图](PROJECT_MAP.md)定位当前链路。
+详细维护规则见[代码职责](CODE_OWNERSHIP.md)和[依赖边界](DEPENDENCY_RULES.md)。
+外部集成使用底层 `harness/artifact_io.py` 处理共享 JSON 制品；该模块只有标准库依赖，
+不把研究编排带入集成层。原 harness 入口继续导出相同 IO 函数。
+
+MERIT 与 MemSyco 共用的 manifest、prepare/start/finish、源码身份和费用聚合位于
+`harness/benchmark_execution.py`，其现有字典结构由 `contracts/benchmark.py` 描述。
+MemSyco 不再为这些流程导入 MERIT runner；原生数据、业务世界与 scorer 仍由各自 runner 处理。
+合同比较与工程验证见 [S4记录](CODE_ARCHITECTURE_V12_S4_RESULTS.md)。
+
+通用聊天实现位于 `providers/chat_bridge.py`，三个 hook 合同位于
+`providers/request_pipeline.py`。具体 C/M1/ODR/projection 等策略由
+`methods/langmem_recipe.py` 显式组装；它继承通用生成、容量与计账流程，只持有方法状态并注入
+hooks。旧 `providers/langmem_chat.py` 导出通用类的同一对象，当前方法调用者使用新的配方入口。
+构造兼容范围及冻结字节对照见 [S5记录](CODE_ARCHITECTURE_V12_S5_RESULTS.md)。
 
 ## 应用能力与实验编排
 
-本次从 `runners/langmem_foundation.py` 和 `runners/langmem_application.py` 提取复用能力。
+前次 PR #74 从 `runners/langmem_foundation.py` 和 `runners/langmem_application.py` 提取复用能力。
 此前 `methods/memory_lifecycle.py` 为使用 journal 反向依赖 runner；只需 world 或工具 schema
 的调用者也会加载 LangMem/LSA 阶段编排。拆分针对这些实际依赖，而非按文件行数划分。
 
 ```mermaid
 flowchart TD
     CLI[tools / 受控实验入口] --> RUN[runners: run_phase / writer cadence / runtime]
-    RUN --> HOST[baselines + providers: Agent / MCP / HTTP]
+    RUN --> HOST[baselines: Agent 配方]
+    HOST --> RECIPE[methods.langmem_recipe]
+    RECIPE --> PROVIDER[providers: 通用协议 / HTTP]
+    HOST --> MEMORY[memory: MCP / Store]
     RUN --> REC[application.recovery]
     RUN --> TOOLS[application.tools]
     REC --> TOOLS
@@ -47,7 +67,8 @@ flowchart TD
     JOURNAL --> ART[harness: journal 文件读写]
 ```
 
-`recovery` 还使用已有 Agent scope/observer 和 LangGraph ToolNode；它不是无依赖纯函数。
+`recovery` 使用共享 scope、实际调用所需的 `RecoveryObserver` 结构接口和 LangGraph ToolNode；
+它不再为了类型反向导入 baseline observer，也不是无依赖纯函数。
 相反，`world` 只需要标准库，包入口保持轻量。`application` 不依赖 runner，避免形成
 “可复用能力 → 编排器 → 可复用能力”的循环。源代码测试约束这一方向。
 
@@ -57,12 +78,19 @@ flowchart TD
 | `application/world.py` | 本地 SQLite 合成业务世界、真实 owner 对象、业务状态提交 |
 | `application/tools.py` | schema、原生工具适配和 owner 工具绑定 |
 | `application/recovery.py` | 先查询真实状态，再交付明确 UNKNOWN 恢复观察 |
-| `runners/langmem_application.py` | public message/phase 顺序、writer cadence、历史和运行结果编排 |
+| `runners/langmem_application.py` | public message/phase 顺序、历史和运行结果交接 |
+| `runners/writer_policy.py` | writer 策略、触发时机与受控研究编排 |
 | `runners/langmem_application_runtime.py` | Host、Store、checkpoint、observer 的资源构造与关闭 |
 
 旧 runner 路径保留显式 re-export，转向相同类、函数和常量对象。没有复制第二份实现，也没有
 新增持久状态库、业务计划器、Reviewer 或对象平台。旧编排函数保留在原模块，避免无关的
 调用入口及已有测试 patch 位置漂移。
+
+S6 的 `WriterPolicy`、`WRITER_POLICY_INSTRUCTIONS`、`run_writer_policy_turn`
+由既有 `runners/writer_policy.py` 单独拥有。通用 trace 汇总位于
+`analysis/trace_accounting.py`，保留原 `_accounting` 的分类、公式和输出；它不是 S4 benchmark
+`trace_costs` 的替代实现。旧路径保持同一对象导出，phase/runtime 的合法组合继续保留。
+完整合同及剩余 runner 依赖理由见 [S6记录](CODE_ARCHITECTURE_V12_S6_RESULTS.md)。
 
 ## 行为与持久化兼容
 
@@ -85,6 +113,12 @@ R2 的错误正文持久化仍作为失败证据保留。
 无副作用重试、后续新任务，以及真实子进程打开持久资源的 MockHTTP 链路。
 静态检查约束依赖方向和验证矩阵；模块移动还需构建并核对安装后的 canonical/兼容导入。
 这些检查不启动真实模型、embedding、PostgreSQL 或实验，也不改变连续成本账本。
+
+S7 在原 boundary/tools-boundary 上加入包内依赖和纯 facade 检查；限制涵盖嵌套、相对、
+TYPE_CHECKING 与有限动态导入，已审查的外部加载按精确规则处理。源码身份要求完整 canonical
+包的登记与文件集相等，漏项和篡改以负例验证。
+当前文件归属见[源码清单](../data/manifests/code-architecture-v12-current-import-map.json)，
+工程证据与静态分析范围见[S7记录](CODE_ARCHITECTURE_V12_S7_RESULTS.md)。
 
 检查归属见[验证矩阵](../configs/lab-verification-matrix.json)，本次实际命令和结果见
 [架构整理记录](ARCHITECTURE_REFACTOR_20260929.md)。不得把“测试通过”升级成记忆效果或

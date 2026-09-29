@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -15,15 +16,29 @@ from milai_lab.application.tools import _business_tools
 from milai_lab.application.world import ApplicationWorld
 
 if TYPE_CHECKING:
-    from milai_lab.baselines.langmem_agent import FoundationScope
-    from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+    from langgraph.prebuilt.tool_node import ToolCallRequest
+
+    from milai_lab.contracts.scope import FoundationScope
+
+
+class RecoveryObserver(Protocol):
+    """Only the two observer operations consumed by the recovery query."""
+
+    def begin_public_message(
+        self, scope: FoundationScope, public_index: int, content: str,
+    ) -> None: ...
+
+    def run_tool(
+        self, request: ToolCallRequest, execute: Callable[[ToolCallRequest], Any],
+        business_journal: Any = None,
+    ) -> Any: ...
 
 
 class ApplicationRuntime(Protocol):
     """Only the observer view needed by recovery; the runtime factory stays in runners."""
 
     @property
-    def observer(self) -> ProvenanceObserver: ...
+    def observer(self) -> RecoveryObserver: ...
 
 
 def recover_pending_application_call(

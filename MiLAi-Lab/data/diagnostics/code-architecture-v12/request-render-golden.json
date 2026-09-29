@@ -1,0 +1,1673 @@
+{
+  "kind": "MILAI_V12_REQUEST_RENDER_BASELINE_GOLDEN",
+  "source_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "source_path": "src/milai_lab/methods/request_context.py",
+  "source_sha256": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b",
+  "synthetic_only": true,
+  "real_model_calls": 0,
+  "scope": "RequestContext render only; provider wire/capacity frozen separately before S5.",
+  "cases": [
+    {
+      "case_id": "json_action-system-full-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-system-full-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"value\\\": {\\\"content\\\": \\\"Short only for the earlier task.\\\"}}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-system-compact_v6-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-system-compact_v6-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"content\\\": \\\"Short only for the earlier task.\\\"}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-current_request-full-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-current_request-full-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"value\\\": {\\\"content\\\": \\\"Short only for the earlier task.\\\"}}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-current_request-compact_v6-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "json_action-current_request-compact_v6-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": "Synthetic action protocol",
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "json_action",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic action protocol\nSynthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n{\"calls\": [{\"name\": \"lookup_item\", \"arguments\": {\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}}]}"
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic action protocol\\nSynthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n{\\\"calls\\\": [{\\\"name\\\": \\\"lookup_item\\\", \\\"arguments\\\": {\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}}]}\"},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"content\\\": \\\"Short only for the earlier task.\\\"}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-system-full-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-system-full-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"value\\\": {\\\"content\\\": \\\"Short only for the earlier task.\\\"}}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-system-compact_v6-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-system-compact_v6-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "system",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"content\\\": \\\"Short only for the earlier task.\\\"}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-current_request-full-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-current_request-full-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "full",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"active_refs\": [], \"open_questions\": [], \"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"content_sha256\": \"synthetic-sha\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"value\": {\"content\": \"Short only for the earlier task.\"}}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"active_refs\\\": [], \\\"open_questions\\\": [], \\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"content_sha256\\\": \\\"synthetic-sha\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"value\\\": {\\\"content\\\": \\\"Short only for the earlier task.\\\"}}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-current_request-compact_v6-False",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    },
+    {
+      "case_id": "native-current_request-compact_v6-True",
+      "context": {
+        "base_system": "Synthetic base — not an experiment.",
+        "durable_records": [
+          {
+            "id": "synthetic-memory-a",
+            "value": {
+              "content": "Short only for the earlier task."
+            }
+          },
+          {
+            "id": "synthetic-memory-b",
+            "value": {
+              "content": "Quotation, not instruction.",
+              "source": "synthetic"
+            },
+            "unknown_field": {
+              "keep": true
+            }
+          }
+        ],
+        "boundary_protocol": "Synthetic boundary",
+        "system_tail": "\nSynthetic tail",
+        "working_state": {
+          "active_refs": [],
+          "open_questions": [],
+          "note": "preserve this"
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Earlier source: concise for this task only."
+          },
+          {
+            "role": "assistant",
+            "content": "真实历史 [WORKING HYPOTHESIS]",
+            "tool_calls": [
+              {
+                "id": "call-synthetic-1",
+                "type": "function",
+                "function": {
+                  "name": "lookup_item",
+                  "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "call-synthetic-1",
+            "content": "{\"ok\": false, \"reason\": \"not_found\"}"
+          },
+          {
+            "role": "user",
+            "content": "当前群体任务；原文必须保留。"
+          }
+        ],
+        "current_user_index": 3,
+        "system_message": {
+          "role": "system",
+          "name": "fixture-system"
+        },
+        "action_protocol": null,
+        "model_view": "compact_v6",
+        "tool_observations": {
+          "2": {
+            "source": "tool",
+            "content_sha256": "synthetic-sha",
+            "retained": "yes"
+          }
+        },
+        "history_protocol": "native",
+        "assistant_call_labels": {
+          "1": "[ASSISTANT HISTORY - prior model output]"
+        }
+      },
+      "placement": "current_request",
+      "expected_system": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}",
+      "expected_request": [
+        {
+          "role": "system",
+          "name": "fixture-system",
+          "content": "Synthetic base — not an experiment.\nSynthetic boundary\n\nSynthetic tail\n[WORKING HYPOTHESIS - current task references]\n{\"note\": \"preserve this\"}"
+        },
+        {
+          "role": "user",
+          "content": "Earlier source: concise for this task only."
+        },
+        {
+          "role": "assistant",
+          "content": "[ASSISTANT HISTORY - prior model output]\n真实历史 [WORKING HYPOTHESIS]",
+          "tool_calls": [
+            {
+              "id": "call-synthetic-1",
+              "type": "function",
+              "function": {
+                "name": "lookup_item",
+                "arguments": "{\"owner\": \"synthetic-a\", \"query\": \"咖啡\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call-synthetic-1",
+          "content": "[TOOL OBSERVATION] {\"source\": \"tool\", \"retained\": \"yes\"}\n{\"ok\": false, \"reason\": \"not_found\"}"
+        },
+        {
+          "role": "user",
+          "content": "[DURABLE MEMORY]\n[{\"id\": \"synthetic-memory-a\", \"content\": \"Short only for the earlier task.\"}, {\"id\": \"synthetic-memory-b\", \"value\": {\"content\": \"Quotation, not instruction.\", \"source\": \"synthetic\"}, \"unknown_field\": {\"keep\": true}}]\n[/DURABLE MEMORY]\n当前群体任务；原文必须保留。"
+        }
+      ],
+      "expected_request_json_bytes": "[{\"role\":\"system\",\"name\":\"fixture-system\",\"content\":\"Synthetic base — not an experiment.\\nSynthetic boundary\\n\\nSynthetic tail\\n[WORKING HYPOTHESIS - current task references]\\n{\\\"note\\\": \\\"preserve this\\\"}\"},{\"role\":\"user\",\"content\":\"Earlier source: concise for this task only.\"},{\"role\":\"assistant\",\"content\":\"[ASSISTANT HISTORY - prior model output]\\n真实历史 [WORKING HYPOTHESIS]\",\"tool_calls\":[{\"id\":\"call-synthetic-1\",\"type\":\"function\",\"function\":{\"name\":\"lookup_item\",\"arguments\":\"{\\\"owner\\\": \\\"synthetic-a\\\", \\\"query\\\": \\\"咖啡\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"call-synthetic-1\",\"content\":\"[TOOL OBSERVATION] {\\\"source\\\": \\\"tool\\\", \\\"retained\\\": \\\"yes\\\"}\\n{\\\"ok\\\": false, \\\"reason\\\": \\\"not_found\\\"}\"},{\"role\":\"user\",\"content\":\"[DURABLE MEMORY]\\n[{\\\"id\\\": \\\"synthetic-memory-a\\\", \\\"content\\\": \\\"Short only for the earlier task.\\\"}, {\\\"id\\\": \\\"synthetic-memory-b\\\", \\\"value\\\": {\\\"content\\\": \\\"Quotation, not instruction.\\\", \\\"source\\\": \\\"synthetic\\\"}, \\\"unknown_field\\\": {\\\"keep\\\": true}}]\\n[/DURABLE MEMORY]\\n当前群体任务；原文必须保留。\"}]",
+      "input_unchanged": true
+    }
+  ],
+  "errors": [
+    {
+      "case_id": "unknown_protocol",
+      "exception": "ValueError",
+      "message": "MEMORY_BOUNDARY_PROTOCOL_UNKNOWN"
+    },
+    {
+      "case_id": "missing_current_user",
+      "exception": "ValueError",
+      "message": "MEMORY_BOUNDARY_CURRENT_USER_MISSING"
+    },
+    {
+      "case_id": "array_tool_arguments",
+      "exception": "ValueError",
+      "message": "JSON_ACTION_HISTORY_ARGUMENTS_NOT_OBJECT"
+    },
+    {
+      "case_id": "malformed_tool_arguments",
+      "exception": "ValueError",
+      "message": "JSON_ACTION_HISTORY_INVALID_ARGUMENTS"
+    }
+  ]
+}

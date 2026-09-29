@@ -33,16 +33,13 @@ from milai_lab.baselines.langmem_revision_store import (
     canonical_json,
 )
 from milai_lab.harness.contextual_artifacts import write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.milai_m1.controller import M1Controller, m1_action_schema
 from milai_lab.methods.milai_m1.decision_basis import DecisionDeltaError, validate_delta
 from milai_lab.methods.milai_m1.recheck import completion_proof, refresh_rechecks
 from milai_lab.methods.milai_m1.state_store import DecisionBasisStore
+from milai_lab.providers.chat_bridge import IncompleteChatResponse, _action_schema
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import (
-    IncompleteChatResponse,
-    VLLMChatModel,
-    _action_schema,
-)
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_m1_mechanism import _fixture_memory_effect, run_mechanism
 

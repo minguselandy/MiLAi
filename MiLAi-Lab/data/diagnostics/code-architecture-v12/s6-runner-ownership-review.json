@@ -1,0 +1,491 @@
+{
+  "scope": "actual remaining runner imports after S6; lifecycle orchestration retained, no universal runner ban",
+  "extracted_public_capabilities": {
+    "trace_only_accounting": "analysis.trace_accounting._accounting",
+    "writer_turn_and_instructions": "runners.writer_policy",
+    "business_world_tools_journal": "application canonical owners",
+    "unified_common_lifecycle": "harness.benchmark_execution (S4)"
+  },
+  "retained_owner_reasons": {
+    "langmem_application.run_phase": "the public-message/session progression, reopen and handoff orchestrator explicitly retained by plan 17; specialized runners compose this phase",
+    "langmem_application_runtime.ApplicationRuntime/open_application_runtime": "resource assembly and lifetime for current recipes, owned by the runtime runner; no lower layer imports it",
+    "frozen_action_continuation._history": "validates the lawful frozen prefix recipe (including current-user boundary) and constructs graph messages for these controlled-run preparations",
+    "frozen_action_continuation._memory_snapshot": "snapshot of the scoped ordinary records for the frozen-prefix/control-run preparation contract",
+    "frozen_action_continuation._sha": "small file-byte hash used by these frozen-input preparation/identity guards; no status, attempt, resource or execution lifecycle; not a lower-layer dependency",
+    "writer_policy._seed": "prepares one controlled study case, checks namespace vacancy and seeds its explicitly frozen sources/states/memories; experimental assembly, not a general memory service",
+    "shared_record_use._observations/_empty_namespace": "the shared-record and persistent recipes compose their specific exposed-arc/transcript preparation and namespace precondition",
+    "langmem_merit._run_merit_arc/_world_for_run/_save_world/_task_message": "the existing native MERIT arc/world/task execution reused by specialized recipe runners; benchmark-specific composition, not the public prepare/start/finish/status/cost lifecycle",
+    "contextual_v9 and related contextual runners": "explicit sequential recipe/config and native arc composition remains outside this S6 migration; inventory below retains every concrete edge rather than claiming zero runner edges"
+  },
+  "edges": [
+    {
+      "consumer": "src/milai_lab/runners/contextual.py",
+      "line": 46,
+      "owner": "milai_lab.runners.contextual_host",
+      "symbols": [
+        "ContextualHost"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual.py",
+      "line": 47,
+      "owner": "milai_lab.runners.contextual_ingestion",
+      "symbols": [
+        "INGESTION_PROMPT",
+        "PROTOCOL_VERSION",
+        "ingest_chunk",
+        "prepare_ingestion"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual.py",
+      "line": 53,
+      "owner": "milai_lab.runners.contextual_profiles",
+      "symbols": [
+        "resolve_profile",
+        "validate_history_owners"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual.py",
+      "line": 54,
+      "owner": "milai_lab.runners.contextual_scoring",
+      "symbols": [
+        "score_case",
+        "score_stale_group"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 16,
+      "owner": "milai_lab.runners.contextual_session",
+      "symbols": [
+        "HostSession"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 19,
+      "owner": "milai_lab.runners.contextual_host",
+      "symbols": [
+        "ContextualHost",
+        "HostResult"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 103,
+      "owner": "milai_lab.runners.contextual_maintenance",
+      "symbols": [
+        "observe"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 135,
+      "owner": "milai_lab.runners.contextual_host",
+      "symbols": [
+        "HostResult"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 240,
+      "owner": "milai_lab.runners.contextual",
+      "symbols": [
+        "COMMON_PROMPT",
+        "CONTEXT_PROMPT",
+        "CachedEmbedding",
+        "memory_tools"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 246,
+      "owner": "milai_lab.runners.contextual_host",
+      "symbols": [
+        "ContextualHost"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_agent_tasks.py",
+      "line": 247,
+      "owner": "milai_lab.runners.contextual_runtime_store",
+      "symbols": [
+        "RuntimeIdentity",
+        "RuntimeStore"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 38,
+      "owner": "milai_lab.runners.contextual_agent_tasks",
+      "symbols": [
+        "BusinessTool",
+        "BusinessToolResult",
+        "Retention",
+        "accept_observation",
+        "dispatch_action"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 45,
+      "owner": "milai_lab.runners.contextual_maintenance",
+      "symbols": [
+        "FINAL_SCHEMA",
+        "FINISH_TOOL",
+        "FRONTIER_FINAL_SCHEMA",
+        "FRONTIER_FINISH_TOOL",
+        "FRONTIER_MAINTENANCE_PROTOCOL",
+        "MAINTENANCE_PROTOCOL",
+        "REPAIR_FINAL_SCHEMA",
+        "REPAIR_FINISH_TOOL",
+        "REPAIR_MAINTENANCE_PROTOCOL",
+        "SEMANTIC_FINAL_SCHEMA",
+        "SEMANTIC_FINISH_TOOL",
+        "SEMANTIC_MAINTENANCE_PROTOCOL",
+        "committed",
+        "failed_write",
+        "finish_tool",
+        "pending_materials",
+        "repaired_write",
+        "semantic_finish",
+        "semantic_finish_tool",
+        "semantic_frontier"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 67,
+      "owner": "milai_lab.runners.contextual_maintenance",
+      "symbols": [
+        "finish"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 70,
+      "owner": "milai_lab.runners.contextual_session",
+      "symbols": [
+        "HostSession"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 73,
+      "owner": "milai_lab.runners.contextual_runtime_store",
+      "symbols": [
+        "RuntimeStore"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_host.py",
+      "line": 942,
+      "owner": "milai_lab.runners.contextual_runtime_store",
+      "symbols": [
+        "_payload"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_maintenance.py",
+      "line": 9,
+      "owner": "milai_lab.runners.contextual_session",
+      "symbols": [
+        "HostSession"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_runtime_store.py",
+      "line": 27,
+      "owner": "milai_lab.runners.contextual_host",
+      "symbols": [
+        "ACTION_PROTOCOL"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_runtime_store.py",
+      "line": 28,
+      "owner": "milai_lab.runners.contextual_session",
+      "symbols": [
+        "HostSession"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/contextual_session.py",
+      "line": 12,
+      "owner": "milai_lab.runners.contextual_delivery",
+      "symbols": [
+        "DeliveryLedger"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_read.py",
+      "line": 38,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_history",
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_read.py",
+      "line": 39,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime",
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_read.py",
+      "line": 43,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "_seed"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_update.py",
+      "line": 40,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_update.py",
+      "line": 41,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/fixed_state_update.py",
+      "line": 42,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "_seed"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/frozen_action_continuation.py",
+      "line": 48,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime",
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_application.py",
+      "line": 46,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_application.py",
+      "line": 47,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "WRITER_POLICY_INSTRUCTIONS"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_application.py",
+      "line": 50,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "WriterPolicy"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_application.py",
+      "line": 53,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "run_writer_policy_turn"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_odr_mechanism.py",
+      "line": 3,
+      "owner": "milai_lab.runners.langmem_m1_mechanism",
+      "symbols": [
+        "run_mechanism"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/langmem_projection_mechanism.py",
+      "line": 3,
+      "owner": "milai_lab.runners.langmem_m1_mechanism",
+      "symbols": [
+        "run_mechanism"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/local_state_attention.py",
+      "line": 25,
+      "owner": "milai_lab.runners.langmem_application",
+      "symbols": [
+        "run_phase"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/local_state_attention.py",
+      "line": 26,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/memsyco_native.py",
+      "line": 70,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/merit_native.py",
+      "line": 239,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/merit_native.py",
+      "line": 240,
+      "owner": "milai_lab.runners.langmem_merit",
+      "symbols": [
+        "_run_merit_arc"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/persistent_memory.py",
+      "line": 62,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/persistent_memory.py",
+      "line": 63,
+      "owner": "milai_lab.runners.langmem_application",
+      "symbols": [
+        "run_phase"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/persistent_memory.py",
+      "line": 64,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime",
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/persistent_memory.py",
+      "line": 68,
+      "owner": "milai_lab.runners.shared_record_use",
+      "symbols": [
+        "_empty_namespace",
+        "_observations"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/shared_record_use.py",
+      "line": 45,
+      "owner": "milai_lab.runners",
+      "symbols": [
+        "langmem_merit"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/shared_record_use.py",
+      "line": 46,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/shared_record_use.py",
+      "line": 47,
+      "owner": "milai_lab.runners.langmem_application",
+      "symbols": [
+        "run_phase"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/shared_record_use.py",
+      "line": 48,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime",
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/shared_record_use.py",
+      "line": 52,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "WRITER_POLICY_INSTRUCTIONS"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/state_update_probe.py",
+      "line": 34,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_history",
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/state_update_probe.py",
+      "line": 35,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "open_application_runtime"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/state_update_probe.py",
+      "line": 36,
+      "owner": "milai_lab.runners.writer_policy",
+      "symbols": [
+        "_seed"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/writer_policy.py",
+      "line": 47,
+      "owner": "milai_lab.runners.frozen_action_continuation",
+      "symbols": [
+        "_history",
+        "_memory_snapshot",
+        "_sha"
+      ]
+    },
+    {
+      "consumer": "src/milai_lab/runners/writer_policy.py",
+      "line": 48,
+      "owner": "milai_lab.runners.langmem_application_runtime",
+      "symbols": [
+        "ApplicationRuntime",
+        "open_application_runtime"
+      ]
+    }
+  ],
+  "remaining_public_prepare_start_finish_cost_borrowing": [],
+  "not_started": "S7 enforcement is a separate Root-authorized next phase after group F"
+}

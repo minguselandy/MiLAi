@@ -16,12 +16,12 @@ from langgraph.store.base import BaseStore
 
 from milai_lab.baselines.langmem_agent import VLLMEmbeddings, open_persistent_state
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.controller import ProjectionController
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 
 
 @dataclass

@@ -221,7 +221,7 @@ def test_u2_live_mem0_shares_twelve_host_generations_and_keeps_completed_busines
     from milai_lab.baselines.langmem_agent import invoke_public_message
     from milai_lab.baselines.langmem_benchmark import merit_adapters
     from milai_lab.harness.contextual_artifacts import write_json
-    from milai_lab.providers.langmem_chat import VLLMChatModel
+    from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 
     cache = Path(os.environ.get("FASTEMBED_CACHE_PATH",
                                 "artifacts/external-memory-v26/cache/fastembed")).resolve()

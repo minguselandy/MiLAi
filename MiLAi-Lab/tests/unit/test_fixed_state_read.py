@@ -14,6 +14,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.memory import InMemoryStore
 
 from milai_lab.harness.contextual_artifacts import Trace, read_json, write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.protocol import (
     READ_SELECTOR_PROMPT,
     read_selector_payload,
@@ -24,7 +25,6 @@ from milai_lab.methods.local_state_attention.read_probe import (
     select_directory_a,
 )
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import fixed_state_read as runner
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 

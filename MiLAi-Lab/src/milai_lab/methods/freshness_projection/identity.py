@@ -9,6 +9,7 @@ from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import RECIPE_ID as B1_RECIPE_ID
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
+from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
 from milai_lab.methods.freshness_projection.controller import (
     RECIPE_ID,
     SER_RECIPE_ID,
@@ -34,7 +35,7 @@ B1_CONFIG = LAB / "configs/langmem-b1-v16.json"
 SER_REFERENCE = LAB / "data/manifests/milai-ser-v20-reference.json"
 MASTER_PLAN = LAB / "docs/MILAI_LONG_HORIZON_MASTER_DEVELOPMENT_PLAN_20260926.md"
 SER_V23_PRE_REGISTRATION = LAB / "data/manifests/milai-ser-v23-pre-registration.json"
-REQUIRED_RUNTIME = set(APPLICATION_SOURCE_FILES) | {
+REQUIRED_RUNTIME = set(APPLICATION_SOURCE_FILES) | set(REQUEST_SOURCE_FILES) | {
     "src/milai_lab/methods/freshness_projection/__init__.py",
     "src/milai_lab/methods/freshness_projection/projection.py",
     "src/milai_lab/methods/freshness_projection/controller.py",

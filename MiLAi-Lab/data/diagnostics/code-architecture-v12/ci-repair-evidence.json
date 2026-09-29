@@ -1,0 +1,67 @@
+{
+  "kind": "MILAI_V12_PR76_CI_REPAIR_RECEIPT",
+  "baseline_source_commit": "2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba",
+  "CI_run": 36595782771,
+  "CI_failed_job": 109500372695,
+  "changed_source_paths": {
+    "tools/run_unified_benchmarks.py": "38c80360e2e7c55c33c2d34518e2bf8e6cfc795770e35a8380b7fc0b70777da4"
+  },
+  "changed_files_manifest": "ci-repair-changed-files-sha256.json",
+  "before_snapshot": "ci-repair-run_unified_benchmarks-before.py",
+  "first_failure": "ci-repair-before-mypy.log",
+  "checks": [
+    {
+      "label": "ci-repair-before-mypy",
+      "returncode": 1,
+      "seconds": 4.092,
+      "log": "ci-repair-before-mypy.log"
+    },
+    {
+      "label": "ci-repair-after-mypy",
+      "returncode": 0,
+      "seconds": 2.863,
+      "log": "ci-repair-after-mypy.log"
+    },
+    {
+      "label": "ci-repair-ruff",
+      "returncode": 0,
+      "seconds": 0.237,
+      "log": "ci-repair-ruff.log"
+    },
+    {
+      "label": "ci-repair-parity",
+      "returncode": 0,
+      "seconds": 0.151,
+      "log": "ci-repair-parity.log"
+    },
+    {
+      "label": "ci-repair-actual-workflow-mypy",
+      "returncode": 0,
+      "seconds": 3.051,
+      "log": "ci-repair-actual-workflow-mypy.log"
+    }
+  ],
+  "hypotheses": {
+    "TypedDict_dynamic_indexing": "confirmed with local exact CI target argv: S4 prepare has BenchmarkPreparationReceipt type and CLI dynamic string key indexing requires literal TypedDict keys",
+    "CI_mypy_environment_difference": "not needed to explain failure; same line/error reproduced locally using mypy1.20.2"
+  },
+  "fix": "annotate existing result as read-only Mapping[str, object], a common supertype of the unchanged TypedDict/dict returned by actions; no conversion, new schema, validation or producer changes",
+  "runtime_projection_expression_unchanged": true,
+  "AST_output_exception_proof": "ci-repair-parity.json",
+  "CLI_synthetic_before_after_cases": 36,
+  "all_stdout_stderr_calls_and_exception_messages_equal": true,
+  "AST_change_erased_local_type_annotation_only_plus_stdlib_import": true,
+  "new_tests_added": false,
+  "actual_workflow_command_passed": "uv run --no-sync mypy src/milai_lab/providers/merit_metered.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tools/run_unified_benchmarks.py",
+  "local_workflow_environment": "UV_PROJECT_ENVIRONMENT set to existing cached Foundation .venv; UV_OFFLINE=1 and UV_PYTHON_DOWNLOADS=never; PYTHONPATH points to this worktree src; no sync or download",
+  "local_validation_gap": "S4/S7 strict source discovery and explicit targets covered src; local relevant checker run covered check_verification_matrix.py; CLI run_unified_benchmarks.py was not included. The matrix verifies source coverage and workflow source targets/pytest ownership, not execution of every pre-existing CLI mypy command. The actual Foundation CLI command already existed in both ci.yml and fast.yml; this repair executed it.",
+  "whitespace_new_EOF_and_trailing_checked": true,
+  "runtime_package_modules_changed": false,
+  "other_CI_groups": "Root reports original Lab fast/External/Core/conformance succeeded; no unrelated expansion or replay",
+  "source_writes_stopped": true,
+  "Git_write_operations": [],
+  "models_downloads_services_benchmarks": [],
+  "source_receipt_sha256": "cd04d67a7e48277701eed74635577afbf857d9deb936ca6eb3f858d27a17f5b3",
+  "CI_run_url": "https://github.com/minguselandy/MiLAi/actions/runs/36595782771",
+  "status": "LOCAL_REPAIRED_REMOTE_RECHECK_PENDING"
+}

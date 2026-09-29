@@ -22,7 +22,6 @@ from milai_lab.baselines.langmem_agent import (
 )
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,
@@ -30,6 +29,7 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.controller import ARMS, ProjectionController
 from milai_lab.methods.freshness_projection.identity import (
     LAB,
@@ -41,10 +41,11 @@ from milai_lab.methods.freshness_projection.identity import (
     verify_ser_v21_prepared,
 )
 from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.on_demand_reconstruction.controller import ODRController
+from milai_lab.providers.chat_bridge import _action_prompt, _action_schema
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel, _action_prompt, _action_schema
 from milai_lab.runners.langmem_projection_mechanism import run_mechanism
 from run_langmem_provenance import _trace_emit
 

@@ -1,0 +1,230 @@
+{
+  "kind": "MILAI_V12_S5_ENGINEERING_RECEIPT",
+  "baseline_commit": "2bc50583d02b86dd70ceb25f42eed43b9082f413",
+  "changed_files_sha256": {
+    "../.github/workflows/ci.yml": "a7cbc06c32e95d11bdf349a91a85e9f2ebfe6419f6b399b5f6a7c373d1cd8384",
+    "../.github/workflows/fast.yml": "2757aad3b72ab63f47285325d0ecbd59b2b8bf92c5314ef333eaac54a85b40c5",
+    ".github/workflows/ci.yml": "eb99bab5a5cf3313261a5d09213e1ae9529438912994ffc9e3a71d9380096fc0",
+    "configs/lab-verification-matrix.json": "64a1a351375ed37c8eb69f95467372fcf0b07aee16c93b5a83be55b49cacc0e3",
+    "src/milai_lab/baselines/langmem_agent.py": "fe309d7cb7083b4fbf9be534d9e2fee0712ca513afd60a0bd5b1df507d76f9e1",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "4515c07ca6eadfa4b924dbc641882409b114e52deb1dd3873a5897beb1f61df1",
+    "src/milai_lab/baselines/langmem_identity.py": "c887491eddd552045ee45e8509e47726b46e29e3db722f0e514d4e6294a2d005",
+    "src/milai_lab/harness/source_identity.py": "6b9271b96c6a9729e25e6229dc7c4220f5e2bd84dd53f8fc46ae935cf151553b",
+    "src/milai_lab/memory/embeddings.py": "21592ca157bd2f96f904677ba6299f0a9b441bc9ca46cd8609b6a9bb89ffb28b",
+    "src/milai_lab/methods/langmem_recipe.py": "48d22650433fc8e2618783194f4a22894ed306a4a5956ae3be9de415a8d7273d",
+    "src/milai_lab/methods/reasoning_bank.py": "bd3fd7b5ad6cd660194a9b77f57d2a09d5d8c708a2ea9c578db1ca1af4999c17",
+    "src/milai_lab/providers/chat_bridge.py": "992674f2341285ea3456324cb7cd2a0b2568f1fbf9917f73282ef3caff535ddd",
+    "src/milai_lab/providers/contextual_embeddings.py": "647504d100263c6c973f62d323a2fea3614928de34a3d5d218e70cf796dd09ea",
+    "src/milai_lab/providers/langmem_chat.py": "e151377d54118cfaab9d15bf559b2603b4212b5657dcbfd0d363727d0f891cfb",
+    "src/milai_lab/providers/request_pipeline.py": "d4dba709336aa1f17bb7896c7b7ae8c6bf88785616a72b5daf114939366c3de5",
+    "src/milai_lab/runners/frozen_action_continuation.py": "9261a6afbe02f6bc75a6f7e3bb696c9f4e3f52a8973b5198137d7739495cbb2a",
+    "src/milai_lab/runners/langmem_application_runtime.py": "fce7cadc731b03b5c28732d321d6354d8daafa0cd7ec492b0381b8ea1a9c5459",
+    "src/milai_lab/runners/langmem_diagnostic.py": "38effa6d730cab1dfc48dd194a3a5ac8a5e90c6f458ba0985c00cc7fee4b5ca2",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "1569e77a189921c30b09b2d4fb9c20d2628566d741b6b346ec2b20f21016526f",
+    "src/milai_lab/runners/langmem_merit.py": "3e65861d0dd7da2b81ff2d838d3d22edfe0e47f9c903c6082d217382e8f07c09",
+    "src/milai_lab/runners/persistent_memory.py": "ce81335ad7099b5d6dd38ad5c189dc8a4d58fcf1cd4f1c6e557bb0ed489da12b",
+    "src/milai_lab/runners/shared_record_use.py": "298f1cb47a76e5aa50f4c8d722820a68f524086ebfbfe5cb2cfa09284ba77628",
+    "tests/architecture/provider_contract_probe.py": "9d336a0ffa048430b5cd41cf465f66ea31f1cbc9b45b45c2988764d6e439b51a",
+    "tests/architecture/test_provider_architecture.py": "b463315198ae8811ecb0d4fab4875c444051a4631737851bc3c4417f84fd8bb6",
+    "tests/architecture/test_provider_pipeline_core.py": "616411ab8c07edc0ec5173aeefb8a0f9f6ebc562dec0dd55d8cc734727777ac8",
+    "tests/architecture/test_request_source_identity.py": "98a0e1345cb920116f58be9a93c1cdf5ee1917f9a4dd4746ef08d41dc70377ff",
+    "tests/unit/test_external_memory_v26.py": "b3a15c607b33bc32e224ee9fcfd13ca5e12b69b1e3dc654e076aaeb4e146fe38",
+    "tests/unit/test_fixed_state_read.py": "76b82e67778ec313f5b2e303c48ae7f52cf5354a667a9e6899e1f3de024e5044",
+    "tests/unit/test_freshness_projection.py": "636c583b4e55fc333dcaeb72c02f375fa0adb65c8c3afde54fa237b2d650d80c",
+    "tests/unit/test_frozen_action_continuation.py": "6767947722e9edca2f8409bc710eb11dfc4c24d816e9eea29abf63f183d151ab",
+    "tests/unit/test_langmem_application.py": "4627ff61f2205f703d4b68176d25ee631c95e7bee227c33b7109a80fa1d504fd",
+    "tests/unit/test_langmem_foundation.py": "20faad74bdebccfd12869c2ba7deae01298724445fd909bddfb022676dab40e1",
+    "tests/unit/test_langmem_provenance.py": "b5aa87eb4ae709e316e9229aead925e9ec25d1bceb476382834b5d9c1887913d",
+    "tests/unit/test_local_state_attention.py": "b663bea097c087aca8970d8ad4b544f04568cd54a9537392c501036bf1460b57",
+    "tests/unit/test_milai_m1_v18.py": "23ffc3f6d95ccff20296f0ab36fe0ef05c904e3c64ef64abdfbf9a82a88c9a87",
+    "tests/unit/test_milai_odr.py": "a1879d2ec237c67a1747b8da83b9d99d766a9b6f15f56a133a84c1a0f186bcac",
+    "tests/unit/test_persistent_memory.py": "66e985b5f4cb1245a246f4dc22b1d72e0d16d9b77274c4f04a148f440521de4c",
+    "tests/unit/test_shared_record_use.py": "472409f6118163d5c2fceb16580e57d2b71d8ab81bbeb3e483cac7c88e50fe67",
+    "tests/unit/test_unified_benchmarks.py": "0eb28b506d12b4701e9cd15a0827487fb557bb2909f3d60617e5b789504136aa",
+    "tests/unit/test_writer_policy.py": "5e9d4e7048bd8347cfa2c1dcb5f9feaa5a00b7cdc4d17a83ee41e6048b5d8f30",
+    "tools/check_langmem_provenance_store.py": "59addc9e2c000cb4a9d0b5cd6725df642984c04f1a65ade5815a655c3812621d",
+    "tools/replay_langmem_provenance_v15.py": "12f92f5eb0301e2a42391898aa14b5fe6526037855681d5499dbf03fbc79b223",
+    "tools/run_langmem_foundation.py": "54f5b02db2d07c4c4be0387e9d103ae144c688082ef3f9e9e2c6aae3832dc39b",
+    "tools/run_langmem_provenance.py": "41d1c04965b1937d7353e7475b8de1a962fc8e59e7577a12b2e02d955f8fe805",
+    "tools/run_milai_external_memory_v26.py": "dd8ea3850c183a18549f2b83b2c9e26d45fbdc4700c5d3794940beb1135dc37a",
+    "tools/run_milai_freshness_projection.py": "38902ee9622a09217278c893a94502f00fbb552be8957a00141370d75c70d3df",
+    "tools/run_milai_m1.py": "5226f3fb09de99427921e6f0dfa70c3dd4b6ab0e851cea2737804472b8eb6d25",
+    "tools/run_milai_odr.py": "7fe4af234eb6af2fbf1efc303a170ff165abf34722de17f1e2afd90c2905ef4c",
+    "tools/run_milai_ser_v22.py": "71d38b890c2c64c0f60d8da9cd9fa334c60f18d90e330e63d1c6aaa986693cd7",
+    "tools/run_milai_ser_v23.py": "1b1c435dc6481c4e39af697da87b08483f3159604d795852046d21cb2405373b"
+  },
+  "changed_file_count": 50,
+  "canonical_owners": {
+    "generic_generation_and_decode": "src/milai_lab/providers/chat_bridge.py",
+    "three_strict_hooks_and_per_request_data": "src/milai_lab/providers/request_pipeline.py",
+    "explicit_live_recipe_and_method_hooks": "src/milai_lab/methods/langmem_recipe.py",
+    "generic_vector_normalization": "src/milai_lab/memory/embeddings.py"
+  },
+  "intentional_interface_change": "old provider facade is the same canonical generic class; method constructor kwargs explicitly fail with extra_forbidden; current recipe callers choose LangMemRecipeChatModel",
+  "generation_owner": "recipe inherits _generate, _reserve_request, begin_public_message, bind_tools and _llm_type without overrides",
+  "new_runtime_serialization_rules": [],
+  "golden_evidence": [
+    {
+      "public": "provider-manual-golden.json",
+      "before": "s5-provider-manual-before.json",
+      "after": "s5-provider-manual-after-v2.json",
+      "cases": 27,
+      "whole_bytes_equal": true,
+      "before_loaded_sources": "s5-provider-manual-before-loaded-sources.json",
+      "baseline_modules": 39
+    },
+    {
+      "public": "provider-real-golden.json",
+      "before": "s5-provider-real-before-v3.json",
+      "after": "s5-provider-real-after-v2.json",
+      "cases": 44,
+      "whole_bytes_equal": true,
+      "before_loaded_sources": "s5-provider-real-before-v3-loaded-sources.json",
+      "baseline_modules": 78
+    },
+    {
+      "public": "provider-edges-golden.json",
+      "before": "s5-provider-edges-before.json",
+      "after": "s5-provider-edges-after.json",
+      "cases": 35,
+      "whole_bytes_equal": true,
+      "before_loaded_sources": "s5-provider-edges-before-loaded-sources.json",
+      "baseline_modules": 46
+    }
+  ],
+  "baseline_failure_preserved": "json_zero_tools sends exactly one wire then raises SchemaError for the empty oneOf; golden parity does not claim a successful user task",
+  "clock_uuid_test_fixtures": "declared in each immutable public fixture; runtime timing and UUID behavior unchanged",
+  "existing_test_assertions": "14 changed unit files, only imports changed; source-owned public replays now compare complete contracts after final protocol helper reuse",
+  "checks": {
+    "strict": {
+      "core_files": 37,
+      "foundation_discovery_files": 154,
+      "foundation_explicit_files": 67,
+      "canonical_files": 4,
+      "final_primitive_import_files": 3
+    },
+    "affected_foundation": "307 passed, 2 pre-existing local_artifacts deselected; includes final canonical/manual/edges/real public golden replay",
+    "initial_identity_and_new_architecture": "36 passed",
+    "final_identity_and_facade_after_last_imports": "22 passed",
+    "affected_existing_mem0_recipe": "1 passed using the existing external environment/cache, MockHTTP and temporary DB; no SDK source/policy changes",
+    "final_ruff": "s5-final-full-ruff.log",
+    "matrix": "s5-matrix.log",
+    "active_boundary": "s5-active-boundary.log",
+    "tools_boundary": "s5-tools-boundary.log",
+    "ci": "new source-owned synthetic tests assigned Foundation; pipeline/normalization contracts assigned Core; no new skip or local asset dependency"
+  },
+  "failure_explanations": {
+    "real_before_and_v2": "capture-only asdict traversed executor/runtime locks; recorder narrowed to actual call/state and journal thread_id; successful v3 reused all frozen source/tests and kept both failed captures",
+    "first_manual_and_real_after": "mechanical replacement accidentally renamed m1_action_schema and odr_action_schema; restored exact imports/names",
+    "ruff": "initial import layout, probe loops/unused setup/line formatting and noqa positions; final late primitive import required sorting; all original logs retained",
+    "receipt_ast": "first engineering AST comparison removed only top-level imports, so an existing test with a changed local import failed the reporter; recursive import removal correctly verifies unchanged bodies; manifest kept byte-identical"
+  },
+  "package_scope": "final 18 changed runtime modules are byte-identical in working tree, sdist and wheel; all three public fixtures and probe are present in sdist; fresh no-deps venv -I Core and Foundation imports originate entirely in the new install; Foundation replays complete manual27 and edges35 from extracted sdist helper",
+  "initial_package_kept": "s5-package-receipt.json (15 modules before final three canonical primitive imports); intermediate s5-final-dist kept; final artifact names use s5-complete-*",
+  "prohibited_actions": {
+    "git_writes_or_publication": [],
+    "downloads": [],
+    "real_host_embedding_judge_pg": [],
+    "experiments_or_benchmarks": [],
+    "public_fixture_doc_lock_edits_by_source_writer": []
+  },
+  "mechanical_services": "existing ephemeral MCP HTTP loopback tests only; synthetic MockHTTP elsewhere",
+  "ast_evidence": "s5-ast-evidence.json",
+  "private_generic_helper_interface": "_action_schema/_action_prompt in the generic owner do not accept the method-specific memory_result flag; current C catalog construction explicitly imports _recipe_action_schema/_recipe_action_prompt from the method owner; unchanged wire/schema bytes are proved separately",
+  "first_failures_preserved": [
+    {
+      "label": "s5-provider-real-before",
+      "returncode": 1,
+      "seconds": 17.491
+    },
+    {
+      "label": "s5-provider-real-before-v2",
+      "returncode": 1,
+      "seconds": 17.108
+    },
+    {
+      "label": "s5-manual-after",
+      "returncode": 1,
+      "seconds": 2.053
+    },
+    {
+      "label": "s5-real-after",
+      "returncode": 1,
+      "seconds": 17.12
+    },
+    {
+      "label": "s5-first-ruff",
+      "returncode": 1,
+      "seconds": 0.366
+    },
+    {
+      "label": "s5-ruff-fix-imports",
+      "returncode": 1,
+      "seconds": 0.085
+    },
+    {
+      "label": "s5-final-ruff",
+      "returncode": 1,
+      "seconds": 0.086
+    },
+    {
+      "label": "s5-final-primitive-import-ruff",
+      "returncode": 1,
+      "seconds": 0.128
+    },
+    {
+      "label": "s5-receipt-ast-first",
+      "returncode": 1,
+      "seconds": 0.181
+    }
+  ],
+  "package": {
+    "sdist": {
+      "file": "milai_lab-0.1.0.tar.gz",
+      "sha256": "149642290f11f37bdd3a71e22fe692bab1ef7e76cdb48240ab2549dc7f8d169b"
+    },
+    "wheel_from_sdist": {
+      "file": "milai_lab-0.1.0-py3-none-any.whl",
+      "sha256": "20ea607109d6152b53ddbe03ad2ab2c94c1a51115465031bd804b5be72fa3b22"
+    },
+    "changed_runtime_bytes_verified": {
+      "src/milai_lab/baselines/langmem_identity.py": "c887491eddd552045ee45e8509e47726b46e29e3db722f0e514d4e6294a2d005",
+      "src/milai_lab/baselines/langmem_b1_identity.py": "4515c07ca6eadfa4b924dbc641882409b114e52deb1dd3873a5897beb1f61df1",
+      "src/milai_lab/baselines/langmem_agent.py": "fe309d7cb7083b4fbf9be534d9e2fee0712ca513afd60a0bd5b1df507d76f9e1",
+      "src/milai_lab/runners/persistent_memory.py": "ce81335ad7099b5d6dd38ad5c189dc8a4d58fcf1cd4f1c6e557bb0ed489da12b",
+      "src/milai_lab/runners/langmem_application_runtime.py": "fce7cadc731b03b5c28732d321d6354d8daafa0cd7ec492b0381b8ea1a9c5459",
+      "src/milai_lab/runners/frozen_action_continuation.py": "9261a6afbe02f6bc75a6f7e3bb696c9f4e3f52a8973b5198137d7739495cbb2a",
+      "src/milai_lab/runners/langmem_m1_mechanism.py": "1569e77a189921c30b09b2d4fb9c20d2628566d741b6b346ec2b20f21016526f",
+      "src/milai_lab/runners/langmem_merit.py": "3e65861d0dd7da2b81ff2d838d3d22edfe0e47f9c903c6082d217382e8f07c09",
+      "src/milai_lab/runners/shared_record_use.py": "298f1cb47a76e5aa50f4c8d722820a68f524086ebfbfe5cb2cfa09284ba77628",
+      "src/milai_lab/runners/langmem_diagnostic.py": "38effa6d730cab1dfc48dd194a3a5ac8a5e90c6f458ba0985c00cc7fee4b5ca2",
+      "src/milai_lab/providers/contextual_embeddings.py": "647504d100263c6c973f62d323a2fea3614928de34a3d5d218e70cf796dd09ea",
+      "src/milai_lab/providers/chat_bridge.py": "992674f2341285ea3456324cb7cd2a0b2568f1fbf9917f73282ef3caff535ddd",
+      "src/milai_lab/providers/langmem_chat.py": "e151377d54118cfaab9d15bf559b2603b4212b5657dcbfd0d363727d0f891cfb",
+      "src/milai_lab/providers/request_pipeline.py": "d4dba709336aa1f17bb7896c7b7ae8c6bf88785616a72b5daf114939366c3de5",
+      "src/milai_lab/methods/reasoning_bank.py": "bd3fd7b5ad6cd660194a9b77f57d2a09d5d8c708a2ea9c578db1ca1af4999c17",
+      "src/milai_lab/methods/langmem_recipe.py": "48d22650433fc8e2618783194f4a22894ed306a4a5956ae3be9de415a8d7273d",
+      "src/milai_lab/memory/embeddings.py": "21592ca157bd2f96f904677ba6299f0a9b441bc9ca46cd8609b6a9bb89ffb28b",
+      "src/milai_lab/harness/source_identity.py": "6b9271b96c6a9729e25e6229dc7c4220f5e2bd84dd53f8fc46ae935cf151553b"
+    },
+    "test_helper_and_all_public_provider_fixtures_present": true,
+    "isolated_no_dependency_install": true,
+    "optional_foundation_dependencies": "existing site directory; .pth not processed",
+    "downloads": [],
+    "git_writes": [],
+    "publishing": []
+  },
+  "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+  "local_receipt_sha256": "868b3a7040d74125c8d0f8cc113ef806a391238773836f2c170d970db01f1f73",
+  "root_review": {
+    "three_before_after_public_files_byte_equal": true,
+    "original_module_hash_counts": [
+      39,
+      78,
+      46
+    ],
+    "provider_modules_scanned": 9,
+    "forbidden_static_upper_imports": 0,
+    "existing_unit_nonimport_ast_equal": 14
+  }
+}

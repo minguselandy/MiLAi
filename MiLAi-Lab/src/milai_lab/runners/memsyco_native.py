@@ -18,7 +18,6 @@ from milai_lab.baselines.benchmark_memories import (
     GenerationAdmission,
     backend_artifact,
     backend_identity,
-    mem0_dependency_identity,
     phase,
     raw_index,
     raw_retrieve,
@@ -27,7 +26,6 @@ from milai_lab.baselines.benchmark_memories import (
     trace_raw,
     validate_u2,
 )
-from milai_lab.baselines.langmem_agent import FoundationScope
 from milai_lab.baselines.langmem_benchmark import (
     FORMATION_INSTRUCTION,
     ArchiveInput,
@@ -40,21 +38,15 @@ from milai_lab.baselines.langmem_benchmark import (
     retrieved_material,
     scope_config,
 )
-from milai_lab.baselines.langmem_mcp import MemoryMCP
+from milai_lab.contracts.benchmark import (
+    BenchmarkJob,
+    BenchmarkManifest,
+    BenchmarkPreparationReceipt,
+)
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.contextual import HistoryMessage, TaskInput
 from milai_lab.datasets.memsyco import MemSycoTask, load_memsyco_tasks
-from milai_lab.harness.contextual_artifacts import (
-    RunBudget,
-    RunLimits,
-    Trace,
-    digest,
-    read_json,
-    write_json,
-)
-from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.runners.langmem_application_runtime import open_application_runtime
-from milai_lab.runners.merit_native import (
+from milai_lab.harness.benchmark_execution import (
     finish_job,
     prepare_manifest,
     sha,
@@ -63,6 +55,19 @@ from milai_lab.runners.merit_native import (
     trace_costs,
     validate_config,
 )
+from milai_lab.harness.contextual_artifacts import (
+    RunBudget,
+    RunLimits,
+    Trace,
+    digest,
+    read_json,
+    write_json,
+)
+from milai_lab.integrations.memory.mem0 import mem0_dependency_identity
+from milai_lab.memory.mcp import MemoryMCP
+from milai_lab.providers.contextual_capacity import HostCapacity
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.runners.langmem_application_runtime import open_application_runtime
 
 ARMS = {"raw_dialogue", "milai", "milai_agent"}
 U2_ARMS = {"raw_dialogue", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native",
@@ -106,7 +111,7 @@ def _config(config: dict[str, Any]) -> None:
         raise ValueError("MEMSYCO_NATIVE_CONFIG_INVALID")
 
 
-def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
+def prepare(args: Any, *, lab_root: Path) -> BenchmarkPreparationReceipt:
     config, selection = read_json(args.config), read_json(args.selection)
     _config(config)
     u2 = "benchmark_memory" in config
@@ -120,7 +125,8 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
     for source in selection["source_files"]:
         if sha(root / source["relative_path"]) != source["sha256"]:
             raise ValueError("MEMSYCO_SOURCE_CHANGED")
-    jobs = [{"job_id": row.case_id, "track": row.track, "owner": row.task.user_id,
+    jobs: list[BenchmarkJob] = [{"job_id": row.case_id, "track": row.track,
+             "owner": row.task.user_id,
              "history_id": row.task.history_id, "history_sha256": digest([
                  asdict(item) for item in row.task.history])} for row in tasks]
     runtime_tasks = {"kind": "MILAI_MEMSYCO_RUNTIME_TASKS", "tasks": [asdict(row) for row in tasks]}
@@ -160,7 +166,10 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         if args.arm == "mem0_native":
             identity["mem0_dependency"] = mem0_dependency_identity()
         if args.arm == "simplemem_text":
-            from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+            from milai_lab.integrations.memory.simplemem import (
+                dependency_identity,
+                validate_simplemem,
+            )
 
             identity["simplemem_dependency"] = dependency_identity(validate_simplemem(config))
             identity["memory_tool_catalog"] = []
@@ -225,7 +234,7 @@ def _method(identity: dict[str, Any], catalog: list[dict[str, Any]]) -> dict[str
 
 
 def _history_inputs(tasks: list[MemSycoTask], identity: dict[str, Any],
-                    jobs: list[dict[str, Any]]) -> dict[str, Any]:
+                    jobs: list[BenchmarkJob]) -> dict[str, Any]:
     method = {**_method(identity, identity["memory_tool_catalog"]),
               "backend": backend_identity(identity["arm_id"]),
               "config_sha256": identity["config_sha256"],
@@ -243,8 +252,8 @@ def _history_inputs(tasks: list[MemSycoTask], identity: dict[str, Any],
     return {"kind": "MILAI_MEMSYCO_RUNTIME_HISTORIES", "histories": list(units.values())}
 
 
-def _prepared_u2(args: Any, lab_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
-    manifest = read_json(args.runtime_root / "run_manifest.json")
+def _prepared_u2(args: Any, lab_root: Path) -> tuple[BenchmarkManifest, dict[str, Any]]:
+    manifest: BenchmarkManifest = read_json(args.runtime_root / "run_manifest.json")
     identity = manifest["identity"]
     if ("backend" not in identity or args.arm not in U2_ARMS
             or any(identity.get(key) != value for key, value in source_identity(lab_root).items())
@@ -260,7 +269,7 @@ def _prepared_u2(args: Any, lab_root: Path) -> tuple[dict[str, Any], dict[str, A
     if args.arm == "mem0_native" and identity["mem0_dependency"] != mem0_dependency_identity():
         raise ValueError("BENCHMARK_MEM0_SOURCE_CHANGED")
     if args.arm == "simplemem_text":
-        from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+        from milai_lab.integrations.memory.simplemem import dependency_identity, validate_simplemem
 
         if identity["simplemem_dependency"] != dependency_identity(
                 validate_simplemem(identity["config"])):
@@ -280,7 +289,7 @@ def _prepared_u2(args: Any, lab_root: Path) -> tuple[dict[str, Any], dict[str, A
 @contextmanager
 def _mem0(runtime: Any, path: Path, run_id: str, arm: str,
           admission: Any = None) -> Iterator[Any]:
-    from milai_lab.runners.mem0_native import Mem0NativeRuntime
+    from milai_lab.integrations.memory.mem0 import Mem0NativeRuntime
 
     native = Mem0NativeRuntime(path, run_id, arm, runtime.model.client,
                               runtime.embedding_client, admit_generation=admission)
@@ -341,7 +350,7 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
                         result["built"] = form(runtime, peer, archive, run_id, args.arm,
                                                config["formation_instruction"])
             elif args.arm == "simplemem_text":
-                from milai_lab.runners.simplemem_native import (
+                from milai_lab.integrations.memory.simplemem import (
                     SimpleMemTextRuntime,
                     validate_simplemem,
                 )
@@ -391,7 +400,7 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
 
 
 def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
-                  manifest: dict[str, Any], root: Path) -> dict[str, Any]:
+                  manifest: BenchmarkManifest, root: Path) -> dict[str, Any]:
     job = next(value for value in manifest["jobs"] if value["job_id"] == args.job)
     key = job["build_history_id"]
     attempt = manifest.get("history_attempts", {}).get(key, {})
@@ -454,7 +463,7 @@ def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
                 if after != prior:
                     raise ValueError("BENCHMARK_READ_ONLY_SNAPSHOT_CHANGED")
         elif arm == "simplemem_text":
-            from milai_lab.runners.simplemem_native import (
+            from milai_lab.integrations.memory.simplemem import (
                 SimpleMemTextRuntime,
                 material_rows,
                 validate_simplemem,

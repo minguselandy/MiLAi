@@ -6,7 +6,7 @@ import hashlib
 from typing import TYPE_CHECKING, Any
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import canonical_json
+from milai_lab.memory.revision_store import canonical_json
 from milai_lab.methods.milai_m1.decision_basis import (
     DecisionDeltaError,
     generation_delta_schema,
@@ -20,7 +20,7 @@ M1_RECIPE_ID = "milai-m1-proposition-recheck-json-action-v18"
 M1_TRANSPORT_VARIANT = "json_action_proposition_completion_v18"
 
 if TYPE_CHECKING:
-    from milai_lab.baselines.langmem_agent import FoundationScope
+    from milai_lab.contracts.scope import FoundationScope
 
 
 def m1_action_schema(base: dict[str, Any]) -> dict[str, Any]:

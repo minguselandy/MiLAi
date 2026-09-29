@@ -1,0 +1,366 @@
+{
+  "kind": "MILAI_CODE_ARCHITECTURE_V12_ACCEPTANCE",
+  "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
+  "base_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "plan_sha256": "bf9e748685fcdd7e449a57b50e83d226bce70da5caecff69854642e4c2301db4",
+  "criteria": [
+    {
+      "id": "C01",
+      "requirement": "application 无 runner import",
+      "phase": "S7",
+      "required_evidence": "AST imports including relative/nested/TYPE_CHECKING; boundary negative tests",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json"
+      ]
+    },
+    {
+      "id": "C02",
+      "requirement": "provider 无具体 method import",
+      "phase": "S5",
+      "required_evidence": "Generic pipeline source plus all-provider import graph; method-specific hook injection outside providers; wire/capacity equivalence",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s5-engineering-evidence.json",
+        "tests/architecture/test_provider_pipeline_core.py",
+        "tests/architecture/test_provider_architecture.py"
+      ]
+    },
+    {
+      "id": "C03",
+      "requirement": "shared baseline code 无 runner import",
+      "phase": "S3/S7",
+      "required_evidence": "All baseline source import graph and canonical integration consumers",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json"
+      ]
+    },
+    {
+      "id": "C04",
+      "requirement": "Mem0/SimpleMem canonical owner 不在 runner",
+      "phase": "S3",
+      "required_evidence": "Canonical implementations; pure old facades; pinned SDK/config/snapshot/call parity",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json"
+      ]
+    },
+    {
+      "id": "C05",
+      "requirement": "runner 不借其他 runner 公共 lifecycle",
+      "phase": "S4/S6",
+      "required_evidence": "Lifecycle helper definitions/consumers; remaining runner-edge ownership audit",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s6-runner-ownership-review.json"
+      ]
+    },
+    {
+      "id": "C06",
+      "requirement": "Request/Memory shared DTO canonical contracts",
+      "phase": "S1",
+      "required_evidence": "Actual canonical RequestContext/MemoryPlacement/ModelView, five Memory DTO/Protocols, Operation data contracts; same-object/render/type checks",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+        "tests/contracts/test_request_contracts.py",
+        "tests/architecture/test_request_architecture.py",
+        "tests/architecture/test_request_source_identity.py"
+      ]
+    },
+    {
+      "id": "C07",
+      "requirement": "Memory service canonical path",
+      "phase": "S2",
+      "required_evidence": "mcp/strict_tools/revision_store canonical implementations; same schema/JSON/namespace/UUID/Store/exception/revisions",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json"
+      ]
+    },
+    {
+      "id": "C08",
+      "requirement": "old moved paths pure facade",
+      "phase": "S1-S7",
+      "required_evidence": "AST facade allowlist grammar plus negative tests; old/new object identity",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "tests/architecture/test_import_boundaries.py"
+      ]
+    },
+    {
+      "id": "C09",
+      "requirement": "canonical sources covered by identity",
+      "phase": "S1-S7",
+      "required_evidence": "Required source maps include real implementation; package registration equality; omission/tamper rejection; historical locks unchanged",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "tests/architecture/test_request_source_identity.py",
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json"
+      ]
+    },
+    {
+      "id": "C10",
+      "requirement": "package dependency DAG enforced in CI",
+      "phase": "S7",
+      "required_evidence": "Runtime/import/TYPE_CHECKING edges; negative fixtures; actual CI wiring; no hidden method reverse policy",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json",
+        "../.github/workflows/fast.yml"
+      ]
+    },
+    {
+      "id": "C11",
+      "requirement": "active canonical type coverage improves",
+      "phase": "S1-S7",
+      "required_evidence": "Strict contract/world/memory interfaces/integration interfaces/benchmark DTO checks; group ownership per active source prefix",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json",
+        "configs/lab-verification-matrix.json"
+      ]
+    },
+    {
+      "id": "C12",
+      "requirement": "request/tool/store/on-disk contracts unchanged",
+      "phase": "S1-S7",
+      "required_evidence": "Frozen schemas/ToolMessages/business receipts/journal JSON/SQLite/render/JSON+native wire/capacity/benchmark manifests/source identity before-after",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md"
+      ]
+    },
+    {
+      "id": "C13",
+      "requirement": "affected Fast CI passes",
+      "phase": "S7",
+      "required_evidence": "Successful workflow on exact published implementation head; no skipped required groups",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C14",
+      "requirement": "zero semantic experiment calls",
+      "phase": "all",
+      "required_evidence": "No Host/embed/Judge calls, no downloads or services changes; ledger/process evidence",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json"
+      ]
+    },
+    {
+      "id": "C15",
+      "requirement": "v10/R2 failure and continuous cost unchanged",
+      "phase": "all",
+      "required_evidence": "Frozen reports/locks/ledger SHA preserved, no state repair or repeat experiment",
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
+        "docs/CODE_ARCHITECTURE_V12_RESULTS.md"
+      ]
+    }
+  ],
+  "stages": {
+    "S0": "COMPLETE_INVENTORY_WITH_PHASE_GOLDENS_REQUIRED",
+    "S1": "COMPLETE_LOCAL_CHECKS",
+    "S2": "COMPLETE_LOCAL_CHECKS",
+    "S3": "COMPLETE_LOCAL_CHECKS",
+    "S4": "COMPLETE_LOCAL_CHECKS",
+    "S5": "COMPLETE_LOCAL_CHECKS",
+    "S6": "COMPLETE_LOCAL_CHECKS",
+    "S7": "LOCAL_COMPLETE_REMOTE_CI_PENDING"
+  },
+  "explicit_deliverables": {
+    "S0": [
+      "docs/CODE_ARCHITECTURE_V12_BASELINE.md",
+      "data/manifests/code-architecture-v12-import-map.json"
+    ],
+    "contracts": [
+      "contracts/request.py",
+      "contracts/memory.py",
+      "contracts/operations.py"
+    ],
+    "memory": [
+      "memory/presentation.py",
+      "memory/mcp.py",
+      "memory/strict_tools.py",
+      "memory/revision_store.py"
+    ],
+    "integrations": [
+      "integrations/memory/mem0.py",
+      "integrations/memory/simplemem.py"
+    ],
+    "benchmarks": [
+      "harness/benchmark_execution.py OR benchmarks/execution.py"
+    ],
+    "provider": [
+      "generic RequestTransform",
+      "generic DeliveryObserver",
+      "generic ResponseHook",
+      "runner/recipe injected concrete hooks"
+    ],
+    "runner": [
+      "WriterPolicy/WRITER_POLICY_INSTRUCTIONS/run_writer_policy_turn ownership in runners/writer_policy.py"
+    ],
+    "docs": [
+      "LAB_ARCHITECTURE.md",
+      "PROJECT_MAP.md",
+      "LAB_CURRENT_STATUS.md",
+      "README.md",
+      "CODE_OWNERSHIP.md",
+      "DEPENDENCY_RULES.md",
+      "HISTORICAL_CODE_INDEX.md"
+    ]
+  },
+  "future_only_items": {
+    "sections_26_29": "Do not create another semantic formation algorithm or business truth platform; reserve clear ownership, preserve actual source contracts.",
+    "target_tree": "Illustrative ownership map, not a mandate to create unused files or migrate all historic tests.",
+    "historical_m1_odr_lsa": "No behavior rewrite; generic pipeline must preserve existing behavior while moving method-specific policy out of providers."
+  },
+  "goldens_required": [
+    "Memory MCP schemas",
+    "strict CRUD ToolMessages",
+    "business schemas",
+    "business receipts",
+    "journal JSON",
+    "SQLite schema",
+    "RequestContext render",
+    "JSON/native wire",
+    "capacity counts",
+    "benchmark manifest shape",
+    "source identity"
+  ],
+  "semantic_calls": {
+    "Host": 0,
+    "embedding": 0,
+    "Judge": 0
+  },
+  "ledger_sha256_before": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+  "phase_evidence": {
+    "S0": {
+      "inventory": "data/manifests/code-architecture-v12-import-map.json",
+      "baseline": "docs/CODE_ARCHITECTURE_V12_BASELINE.md",
+      "request_golden": "data/diagnostics/code-architecture-v12/request-render-golden.json",
+      "request_golden_cases": 16,
+      "request_golden_errors": 4,
+      "note": "Other phase-specific golden contracts must be frozen before their respective source changes; S0 completion is not completion of C12."
+    },
+    "S1": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+      "request_cases": 16,
+      "request_errors": 4,
+      "focused_tests_passed": 102,
+      "definition_ast_equal": 7,
+      "isolated_installed_render_cases": 16,
+      "note": "Local stage checks only; final CI and later phase contracts remain pending.",
+      "commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929"
+    },
+    "S2": {
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929",
+      "golden": "data/diagnostics/code-architecture-v12/memory-contract-golden.json",
+      "golden_sha256": "76f543e29026f8d9c62fa402b09ed24a942f89ef21952e443b7aba8e09517aae",
+      "mcp_capture_transport": "in-process direct binding; real loopback tests separately required",
+      "note": "Before/after/installed synthetic contracts match; final CI and later phase contracts remain pending.",
+      "report": "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json",
+      "commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9"
+    },
+    "S3": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9",
+      "tests_passed": 45,
+      "note": "Full native replay uses local pinned assets; portable External CI cohort is separately wired. Original timing mismatches and failed clock supplements retained.",
+      "commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405"
+    },
+    "S4": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s4-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
+      "tests_passed": 52,
+      "golden_sha256": "f5dd86e7ec77e56109671883b10c5ba9f4ce13f05e1ea967a7c0a9c41844e1b7",
+      "note": "Shared lifecycle equivalence proved; C05 remains pending S6 remaining runner-edge ownership audit.",
+      "commit": "2bc50583d02b86dd70ceb25f42eed43b9082f413"
+    },
+    "S5": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s5-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "2bc50583d02b86dd70ceb25f42eed43b9082f413",
+      "foundation_tests_passed": 307,
+      "existing_local_asset_tests_deselected": 2,
+      "affected_mem0_tests_passed": 1,
+      "final_identity_facade_tests_passed": 22,
+      "golden_groups": [
+        27,
+        44,
+        35
+      ],
+      "note": "Complete source capture parity; installed probes replay manual27/edges35. Generic constructor intentionally rejects method kwargs; current recipe callers migrated.",
+      "commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3"
+    },
+    "S6": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s6-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3",
+      "architecture_identity_tests_passed": 27,
+      "affected_behavior_tests_passed": 41,
+      "golden_writer_cases": 13,
+      "golden_accounting_cases": 14,
+      "deterministic_golden_sha256": "55971b7e1ada6166b5ade302c65dabc99a841ef004b1d8258f9273e57fabbee2",
+      "note": "Original nondeterministic comparison retained; fixed fixture whole bytes equal, installed replay equal. Formal S7 DAG and final CI pending.",
+      "commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b"
+    },
+    "S7": {
+      "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
+      "report": "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+      "current_import_map": "data/manifests/code-architecture-v12-current-import-map.json",
+      "preservation": "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
+      "note": "Final independent fixed-policy test file: 199 passed; earlier Core204 overlaps. Foundation55, strict typing, offline packaging and isolated install evidence recorded. C13 awaits published-head Fast CI.",
+      "commit": "2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba"
+    }
+  },
+  "local_review": {
+    "date": "2026-09-30",
+    "passed_criteria": 14,
+    "pending": [
+      "C13"
+    ],
+    "scope": "Engineering structure and preserved synthetic contracts only; no semantic effectiveness claim. Remote publication and merge remain required."
+  },
+  "publication": {
+    "PR": "https://github.com/minguselandy/MiLAi/pull/76",
+    "first_run": "https://github.com/minguselandy/MiLAi/actions/runs/36595782771",
+    "first_run_conclusion": "failure",
+    "repair_evidence": "data/diagnostics/code-architecture-v12/ci-repair-evidence.json",
+    "status": "REPAIR_LOCAL_PASS_NEW_HEAD_CI_PENDING"
+  }
+}

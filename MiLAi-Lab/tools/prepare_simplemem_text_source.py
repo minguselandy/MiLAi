@@ -8,7 +8,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
-from milai_lab.runners.simplemem_native import POLICY, SOURCE_COMMIT, dependency_identity
+from milai_lab.integrations.memory.simplemem import POLICY, SOURCE_COMMIT, dependency_identity
 
 
 def main() -> None:

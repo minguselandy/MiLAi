@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
-import importlib.metadata
 import json
 import time
 from collections.abc import Callable, Iterator, Sequence
@@ -15,6 +13,8 @@ from typing import Any
 import httpx
 
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
+from milai_lab.integrations.memory.mem0 import MEM0_SOURCE_COMMIT as MEM0_SOURCE_COMMIT
+from milai_lab.integrations.memory.mem0 import mem0_dependency_identity as mem0_dependency_identity
 from milai_lab.methods.contextual_memory.retrieval import IndexEntry, hybrid_order
 from milai_lab.methods.local_state_attention.controller import ControlResponseError
 from milai_lab.methods.local_state_attention.summary import parse_summary, summary_request
@@ -27,7 +27,6 @@ RAG_POLICY = {"chunk_chars": 2048, "chunk_step": 1792, "bm25_k1": 1.2,
               "bm25_b": 0.75, "rrf_k": 60, "top_k": 10, "material_max_chars": 16000}
 MEM0_POLICY = {"infer": True, "top_k": 20, "threshold": 0.1, "rerank": False}
 SUMMARY_CAPACITY_CONTRACT = "one attempt per complete archive batch or public turn; shared live 12"
-MEM0_SOURCE_COMMIT = "f8082a7345dadd9e042ebbc40b57b1498c8f6d63"
 
 
 def validate_u2(config: dict[str, Any]) -> None:
@@ -43,7 +42,7 @@ def backend_identity(arm: str) -> dict[str, Any]:
     if arm not in U2_ARMS | {"raw_dialogue"}:
         raise ValueError("BENCHMARK_U2_ARM_INVALID")
     if arm == "simplemem_text":
-        from milai_lab.runners.simplemem_native import POLICY
+        from milai_lab.integrations.memory.simplemem import POLICY
 
         return {"profile": "unified_u2_second_external", "backend": arm, "policy": POLICY,
                 "query_policy": "current Human; native planning/reflection; shared12 with reader",
@@ -60,17 +59,6 @@ def backend_identity(arm: str) -> dict[str, Any]:
             "raw_history_escape": "same lawful owner read_history; actual escapes traced"}
 
 
-def mem0_dependency_identity() -> dict[str, Any]:
-    distribution = importlib.metadata.distribution("mem0ai")
-    direct = json.loads(distribution.read_text("direct_url.json") or "{}")
-    if direct.get("vcs_info", {}).get("commit_id") != MEM0_SOURCE_COMMIT:
-        raise ValueError("BENCHMARK_MEM0_SOURCE_NOT_PINNED")
-    source = Path(str(distribution.locate_file("mem0")))
-    return {"version": distribution.version, "source_commit": MEM0_SOURCE_COMMIT,
-        "source_sha256": {str(path.relative_to(source)): hashlib.sha256(
-                              path.read_bytes()).hexdigest()
-                          for path in sorted(source.rglob("*")) if path.is_file()
-                          and "__pycache__" not in path.parts and path.suffix != ".pyc"}}
 
 
 @contextmanager

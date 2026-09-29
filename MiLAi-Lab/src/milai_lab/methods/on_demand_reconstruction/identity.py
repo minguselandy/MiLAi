@@ -7,6 +7,7 @@ from typing import Any
 
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
+from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
 from milai_lab.methods.on_demand_reconstruction.controller import (
     ODR_RECIPE_ID,
     ODR_TRANSPORT_VARIANT,
@@ -16,7 +17,7 @@ LAB = Path(__file__).resolve().parents[4]
 REFERENCE = LAB / "data/manifests/milai-odr-v19-reference.json"
 PLAN = LAB / "docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_DEVELOPMENT_PLAN_20260926.md"
 B1_CONFIG = LAB / "configs/langmem-b1-v16.json"
-REQUIRED_RUNTIME = {
+REQUIRED_RUNTIME = set(REQUEST_SOURCE_FILES) | {
     "src/milai_lab/methods/on_demand_reconstruction/__init__.py",
     "src/milai_lab/methods/on_demand_reconstruction/schema.py",
     "src/milai_lab/methods/on_demand_reconstruction/freshness.py",

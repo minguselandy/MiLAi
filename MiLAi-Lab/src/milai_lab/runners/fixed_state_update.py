@@ -15,6 +15,7 @@ from typing import Any
 
 import httpx
 
+from milai_lab.analysis.trace_accounting import _accounting
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
@@ -38,7 +39,6 @@ from milai_lab.methods.local_state_attention.read_probe import (
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.frozen_action_continuation import _sha
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
-from milai_lab.runners.local_state_attention import _accounting
 from milai_lab.runners.writer_policy import _seed
 
 ARMS = {"all", "u_selector", "u_equals_a", "oracle_u"}

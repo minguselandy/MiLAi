@@ -9,6 +9,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from milai_lab.import_graph import scan_import_targets
+
 _SCHEMA = "milai.lab.tools-product-dependencies.v1"
 _CLASSIFICATIONS = frozenset({"PUBLIC", "TESTKIT", "LEGACY_PRIVATE"})
 
@@ -74,8 +76,7 @@ def _dependency(row: Mapping[str, object]) -> ToolProductDependency:
         not isinstance(raw_lines, list)
         or not raw_lines
         or any(
-            not isinstance(line, int) or isinstance(line, bool) or line < 1
-            for line in raw_lines
+            not isinstance(line, int) or isinstance(line, bool) or line < 1 for line in raw_lines
         )
     ):
         raise ValueError("dependency lines must be a non-empty list of positive integers")
@@ -143,22 +144,6 @@ def load_tools_boundary_policy(path: Path) -> ToolsBoundaryPolicy:
     )
 
 
-def _dynamic_import(node: ast.Call) -> tuple[str, int] | None:
-    is_builtin = isinstance(node.func, ast.Name) and node.func.id == "__import__"
-    is_importlib = (
-        isinstance(node.func, ast.Attribute)
-        and node.func.attr == "import_module"
-        and isinstance(node.func.value, ast.Name)
-        and node.func.value.id == "importlib"
-    )
-    if not (is_builtin or is_importlib) or not node.args:
-        return None
-    value = node.args[0]
-    if not isinstance(value, ast.Constant) or not isinstance(value.value, str):
-        return None
-    return value.value, node.lineno
-
-
 def scan_tool_product_imports(
     root: Path, product_import_roots: frozenset[str]
 ) -> dict[tuple[str, str], tuple[int, ...]]:
@@ -166,19 +151,10 @@ def scan_tool_product_imports(
     for path in sorted(root.rglob("*.py")):
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
         display = f"{root.name}/{path.relative_to(root).as_posix()}"
-        for node in ast.walk(tree):
-            modules: list[tuple[str, int]] = []
-            if isinstance(node, ast.Import):
-                modules.extend((alias.name, node.lineno) for alias in node.names)
-            elif isinstance(node, ast.ImportFrom) and node.module:
-                modules.append((node.module, node.lineno))
-            elif isinstance(node, ast.Call):
-                dynamic = _dynamic_import(node)
-                if dynamic is not None:
-                    modules.append(dynamic)
-            for module, line in modules:
-                if module.split(".", maxsplit=1)[0] in product_import_roots:
-                    observed[(display, module)].add(line)
+        for target in scan_import_targets(tree, "tools." + path.stem):
+            module = target.module
+            if module and module.split(".", maxsplit=1)[0] in product_import_roots:
+                observed[(display, module)].add(target.line)
     return {identity: tuple(sorted(lines)) for identity, lines in sorted(observed.items())}
 
 
@@ -186,13 +162,70 @@ def _classification(policy: ToolsBoundaryPolicy, path: str, module: str) -> str 
     if module in policy.public_modules:
         return "PUBLIC"
     if any(
-        module == prefix or module.startswith(prefix + ".")
-        for prefix in policy.testkit_prefixes
+        module == prefix or module.startswith(prefix + ".") for prefix in policy.testkit_prefixes
     ):
         return "TESTKIT"
     if (path, module) in policy.grandfathered_private:
         return "LEGACY_PRIVATE"
     return None
+
+
+def _reviewed_tool_loader(path: Path, tree: ast.Module, expression: str) -> bool:
+    """Preserve the existing offline frozen-checker and native-source audit loaders."""
+    checker_names = {
+        "audit_v0218_chain.py": ("v0218_frozen_checker", "checker_spec"),
+        "audit_v0218_discovery.py": ("discovery_frozen_checker", "loader"),
+        "audit_v0218_e2.py": ("discovery_frozen_checker", "loader"),
+        "audit_v0218_baseline.py": ("baseline_frozen_checker", "loader"),
+    }
+    if path.name in checker_names:
+        namespace, spec = checker_names[path.name]
+        create = (
+            f"importlib.util.spec_from_file_location('{namespace}', "
+            "root / 'executed-source/v0218_checker.py')"
+        )
+        calls = {ast.unparse(node) for node in ast.walk(tree) if isinstance(node, ast.Call)}
+        return create in calls and expression in {
+            create,
+            f"importlib.util.module_from_spec({spec})",
+            f"{spec}.loader.exec_module(checker)",
+        }
+    if path.name == "v02_readable_smoke_worker.py":
+        create = "importlib.machinery.SourceFileLoader('reader', '/usr/local/bin/milai-read')"
+        calls = {ast.unparse(node) for node in ast.walk(tree) if isinstance(node, ast.Call)}
+        return create in calls and expression in {
+            create,
+            "importlib.util.module_from_spec(spec)",
+            "loader.exec_module(reader)",
+        }
+    if path.name == "check_v0217_admission.py":
+        code = ast.unparse(tree)
+        required = {
+            "reward_path = root / 'supersede/src/supersede/reward.py'",
+            "rollout_path = root / 'supersede/src/supersede/rollout.py'",
+        }
+        reviewed = [
+            ast.unparse(node)
+            for node in ast.walk(tree)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "reviewed_module"
+        ]
+        return (
+            all(item in code for item in required)
+            and set(reviewed)
+            == {
+                "reviewed_module(reward_path, 'v0217_native_reward')",
+                "reviewed_module(rollout_path, 'v0217_native_rollout')",
+            }
+            and expression
+            in {
+                "importlib.util.spec_from_file_location(name, path)",
+                "importlib.util.module_from_spec(spec)",
+                "spec.loader.exec_module(module)",
+            }
+        )
+    return False
 
 
 def verify_tools_boundary(
@@ -201,20 +234,36 @@ def verify_tools_boundary(
     policy = load_tools_boundary_policy(inventory_path)
     imports = scan_tool_product_imports(root, policy.product_import_roots)
     findings: list[ToolsBoundaryFinding] = []
+    for path in sorted(root.rglob("*.py")):
+        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        for target in scan_import_targets(tree, "tools." + path.stem):
+            if (
+                target.module is None
+                or "*" in target.module
+                or target.kind in {"file_load", "loader_execution"}
+            ) and not _reviewed_tool_loader(path, tree, target.expression):
+                findings.append(
+                    ToolsBoundaryFinding(
+                        f"{root.name}/{path.relative_to(root).as_posix()}",
+                        target.line,
+                        "UNRESOLVED_TOOL_IMPORT",
+                        target.expression or "relative import",
+                    )
+                )
     dependencies: list[ToolProductDependency] = []
-    for (path, module), lines in imports.items():
-        classification = _classification(policy, path, module)
+    for (import_path, module), lines in imports.items():
+        classification = _classification(policy, import_path, module)
         if classification is None:
             findings.append(
                 ToolsBoundaryFinding(
-                    path,
+                    import_path,
                     lines[0],
                     "NEW_PRIVATE_PRODUCT_IMPORT",
                     f"{module} is not a public/testkit module or an exact grandfathered dependency",
                 )
             )
             continue
-        dependencies.append(ToolProductDependency(path, module, classification, lines))
+        dependencies.append(ToolProductDependency(import_path, module, classification, lines))
 
     actual = tuple(sorted(dependencies, key=lambda item: (item.path, item.module)))
     expected = policy.dependencies

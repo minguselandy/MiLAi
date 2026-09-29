@@ -13,7 +13,6 @@ from langchain_core.tools import tool
 
 from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import (
-    FoundationScope,
     VLLMEmbeddings,
     build_agent,
     invoke_public_message,
@@ -21,6 +20,7 @@ from milai_lab.baselines.langmem_agent import (
     resume_public_message,
 )
 from milai_lab.baselines.langmem_identity import sha256_file, verify_prepared_run
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,
@@ -28,9 +28,10 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc
@@ -52,6 +53,7 @@ def _verify_development_spike(config_path: Path, config: dict[str, Any], run: st
                 "src/milai_lab/runners/langmem_foundation.py",
                 "tools/run_langmem_foundation.py",
                 *APPLICATION_SOURCE_FILES,
+                *REQUEST_SOURCE_FILES,
             )
         },
     }

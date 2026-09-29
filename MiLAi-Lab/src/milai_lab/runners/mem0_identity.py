@@ -8,21 +8,21 @@ from typing import Any
 from milai_lab.baselines.langmem_agent import RECIPE_ID as B1_RECIPE_ID
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import read_json
-from milai_lab.methods.freshness_projection.identity import (
-    LAB,
-    REQUIRED_APPLICATION_V25_RUNTIME,
-    _verify_ser_lock,
-)
-from milai_lab.runners.mem0_native import (
+from milai_lab.integrations.memory.mem0 import (
     MEM0_POLICY,
     MEM0_PROTOCOL_ID,
     MEM0_SEARCH_CONTRACT_SHA256,
     MEM0_SYSTEM_PROMPT_SHA256,
 )
+from milai_lab.integrations.memory.mem0 import MEM0_SOURCE_COMMIT as MEM0_SOURCE_COMMIT
+from milai_lab.methods.freshness_projection.identity import (
+    LAB,
+    REQUIRED_APPLICATION_V25_RUNTIME,
+    _verify_ser_lock,
+)
 
 PROTOCOL = LAB / "data/manifests/milai-external-memory-v26-protocol.json"
 INPUT_REFERENCE = LAB / "data/manifests/milai-external-memory-v26-input-reference.json"
-MEM0_SOURCE_COMMIT = "f8082a7345dadd9e042ebbc40b57b1498c8f6d63"
 PROTOCOL_BY_ARM = {
     "b1_control": "langmem_default_v1",
     "mem0_native_autoadd": MEM0_PROTOCOL_ID,

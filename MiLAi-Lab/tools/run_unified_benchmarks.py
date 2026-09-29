@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Mapping
 from pathlib import Path
 
 
@@ -42,7 +43,7 @@ def main() -> None:
         from milai_lab.runners import merit_native
 
         action = merit_native.prepare if args.command == "prepare" else merit_native.run
-    result = action(args, lab_root=Path(__file__).resolve().parents[1])
+    result: Mapping[str, object] = action(args, lab_root=Path(__file__).resolve().parents[1])
     print(json.dumps({key: result[key] for key in ("status", "manifest_path", "identity_sha256")
                       if key in result}, ensure_ascii=False))
 

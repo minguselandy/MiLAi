@@ -13,7 +13,6 @@ from typing import Any, cast
 from milai_lab.baselines.langmem_agent import VLLMEmbeddings, open_persistent_state
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.datasets.merit import load_exposed_arc
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
@@ -22,15 +21,16 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.controller import ProjectionController
 from milai_lab.methods.freshness_projection.identity import (
     LAB,
     verify_ser_v22_lock,
     verify_ser_v22_prepared,
 )
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc

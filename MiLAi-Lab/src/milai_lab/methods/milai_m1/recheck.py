@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from milai_lab.baselines.langmem_revision_store import RevisionSidecar, canonical_json
+from milai_lab.memory.revision_store import RevisionSidecar, canonical_json
 from milai_lab.methods.milai_m1.decision_basis import DecisionDeltaError
 from milai_lab.methods.milai_m1.state_store import DecisionBasisStore, ScopeKey
 
