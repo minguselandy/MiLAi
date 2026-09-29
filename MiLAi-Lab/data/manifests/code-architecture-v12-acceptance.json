@@ -1,0 +1,214 @@
+{
+  "kind": "MILAI_CODE_ARCHITECTURE_V12_ACCEPTANCE",
+  "status": "IN_PROGRESS",
+  "base_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "plan_sha256": "bf9e748685fcdd7e449a57b50e83d226bce70da5caecff69854642e4c2301db4",
+  "criteria": [
+    {
+      "id": "C01",
+      "requirement": "application 无 runner import",
+      "phase": "S7",
+      "required_evidence": "AST imports including relative/nested/TYPE_CHECKING; boundary negative tests",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C02",
+      "requirement": "provider 无具体 method import",
+      "phase": "S5",
+      "required_evidence": "Generic pipeline source plus all-provider import graph; method-specific hook injection outside providers; wire/capacity equivalence",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C03",
+      "requirement": "shared baseline code 无 runner import",
+      "phase": "S3/S7",
+      "required_evidence": "All baseline source import graph and canonical integration consumers",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C04",
+      "requirement": "Mem0/SimpleMem canonical owner 不在 runner",
+      "phase": "S3",
+      "required_evidence": "Canonical implementations; pure old facades; pinned SDK/config/snapshot/call parity",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C05",
+      "requirement": "runner 不借其他 runner 公共 lifecycle",
+      "phase": "S4/S6",
+      "required_evidence": "Lifecycle helper definitions/consumers; remaining runner-edge ownership audit",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C06",
+      "requirement": "Request/Memory shared DTO canonical contracts",
+      "phase": "S1",
+      "required_evidence": "Actual canonical RequestContext/MemoryPlacement/ModelView, five Memory DTO/Protocols, Operation data contracts; same-object/render/type checks",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C07",
+      "requirement": "Memory service canonical path",
+      "phase": "S2",
+      "required_evidence": "mcp/strict_tools/revision_store canonical implementations; same schema/JSON/namespace/UUID/Store/exception/revisions",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C08",
+      "requirement": "old moved paths pure facade",
+      "phase": "S1-S7",
+      "required_evidence": "AST facade allowlist grammar plus negative tests; old/new object identity",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C09",
+      "requirement": "canonical sources covered by identity",
+      "phase": "S1-S7",
+      "required_evidence": "Required source maps include real implementation; package registration equality; omission/tamper rejection; historical locks unchanged",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C10",
+      "requirement": "package dependency DAG enforced in CI",
+      "phase": "S7",
+      "required_evidence": "Runtime/import/TYPE_CHECKING edges; negative fixtures; actual CI wiring; no hidden method reverse policy",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C11",
+      "requirement": "active canonical type coverage improves",
+      "phase": "S1-S7",
+      "required_evidence": "Strict contract/world/memory interfaces/integration interfaces/benchmark DTO checks; group ownership per active source prefix",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C12",
+      "requirement": "request/tool/store/on-disk contracts unchanged",
+      "phase": "S1-S7",
+      "required_evidence": "Frozen schemas/ToolMessages/business receipts/journal JSON/SQLite/render/JSON+native wire/capacity/benchmark manifests/source identity before-after",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C13",
+      "requirement": "affected Fast CI passes",
+      "phase": "S7",
+      "required_evidence": "Successful workflow on exact published implementation head; no skipped required groups",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C14",
+      "requirement": "zero semantic experiment calls",
+      "phase": "all",
+      "required_evidence": "No Host/embed/Judge calls, no downloads or services changes; ledger/process evidence",
+      "status": "PENDING",
+      "evidence": []
+    },
+    {
+      "id": "C15",
+      "requirement": "v10/R2 failure and continuous cost unchanged",
+      "phase": "all",
+      "required_evidence": "Frozen reports/locks/ledger SHA preserved, no state repair or repeat experiment",
+      "status": "PENDING",
+      "evidence": []
+    }
+  ],
+  "stages": {
+    "S0": "COMPLETE_INVENTORY_WITH_PHASE_GOLDENS_REQUIRED",
+    "S1": "IN_PROGRESS",
+    "S2": "PENDING",
+    "S3": "PENDING",
+    "S4": "PENDING",
+    "S5": "PENDING",
+    "S6": "PENDING",
+    "S7": "PENDING"
+  },
+  "explicit_deliverables": {
+    "S0": [
+      "docs/CODE_ARCHITECTURE_V12_BASELINE.md",
+      "data/manifests/code-architecture-v12-import-map.json"
+    ],
+    "contracts": [
+      "contracts/request.py",
+      "contracts/memory.py",
+      "contracts/operations.py"
+    ],
+    "memory": [
+      "memory/presentation.py",
+      "memory/mcp.py",
+      "memory/strict_tools.py",
+      "memory/revision_store.py"
+    ],
+    "integrations": [
+      "integrations/memory/mem0.py",
+      "integrations/memory/simplemem.py"
+    ],
+    "benchmarks": [
+      "harness/benchmark_execution.py OR benchmarks/execution.py"
+    ],
+    "provider": [
+      "generic RequestTransform",
+      "generic DeliveryObserver",
+      "generic ResponseHook",
+      "runner/recipe injected concrete hooks"
+    ],
+    "runner": [
+      "WriterPolicy/WRITER_POLICY_INSTRUCTIONS/run_writer_policy_turn ownership in runners/writer_policy.py"
+    ],
+    "docs": [
+      "LAB_ARCHITECTURE.md",
+      "PROJECT_MAP.md",
+      "LAB_CURRENT_STATUS.md",
+      "README.md",
+      "CODE_OWNERSHIP.md",
+      "DEPENDENCY_RULES.md",
+      "HISTORICAL_CODE_INDEX.md"
+    ]
+  },
+  "future_only_items": {
+    "sections_26_29": "Do not create another semantic formation algorithm or business truth platform; reserve clear ownership, preserve actual source contracts.",
+    "target_tree": "Illustrative ownership map, not a mandate to create unused files or migrate all historic tests.",
+    "historical_m1_odr_lsa": "No behavior rewrite; generic pipeline must preserve existing behavior while moving method-specific policy out of providers."
+  },
+  "goldens_required": [
+    "Memory MCP schemas",
+    "strict CRUD ToolMessages",
+    "business schemas",
+    "business receipts",
+    "journal JSON",
+    "SQLite schema",
+    "RequestContext render",
+    "JSON/native wire",
+    "capacity counts",
+    "benchmark manifest shape",
+    "source identity"
+  ],
+  "semantic_calls": {
+    "Host": 0,
+    "embedding": 0,
+    "Judge": 0
+  },
+  "ledger_sha256_before": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+  "phase_evidence": {
+    "S0": {
+      "inventory": "data/manifests/code-architecture-v12-import-map.json",
+      "baseline": "docs/CODE_ARCHITECTURE_V12_BASELINE.md",
+      "request_golden": "data/diagnostics/code-architecture-v12/request-render-golden.json",
+      "request_golden_cases": 16,
+      "request_golden_errors": 4,
+      "note": "Other phase-specific golden contracts must be frozen before their respective source changes; S0 completion is not completion of C12."
+    }
+  }
+}

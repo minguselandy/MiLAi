@@ -1,0 +1,159 @@
+{
+  "kind": "MILAI_V12_GOLDEN_CAPTURE_SPEC",
+  "status": "SPECIFICATION_NOT_CAPTURE_RESULTS",
+  "baseline_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "capture_policy": "Freeze before affected implementation change using synthetic inputs, existing local dependencies, MockHTTP and temporary local stores. No live Host/embedding/Judge/PostgreSQL. Preserve failure and retry records. Expected data is not consumed by runtime.",
+  "cases": [
+    {
+      "id": "memory_mcp",
+      "phase": "S2",
+      "coverage": [
+        "catalog names/order/descriptions/JSON schema",
+        "owner namespace and exact read resource",
+        "sync and async CRUD/read",
+        "read-only access",
+        "transport error with no automatic retry",
+        "owner isolation/pagination"
+      ],
+      "equality_contract": [
+        "same ToolMessage.model_dump",
+        "same Store call order/arguments",
+        "same propagated error/status",
+        "no extra writes"
+      ]
+    },
+    {
+      "id": "strict_crud",
+      "phase": "S2",
+      "coverage": [
+        "create with injected deterministic UUID",
+        "update existing/unknown",
+        "same-content noop",
+        "delete existing/unknown",
+        "invalid or omitted content/ID",
+        "store failure",
+        "sync/async"
+      ],
+      "equality_contract": [
+        "same JSON encoding/key order",
+        "same exception names/messages",
+        "same namespace/UUID",
+        "same revision/effect accounting"
+      ]
+    },
+    {
+      "id": "application",
+      "phase": "S2/S6",
+      "coverage": [
+        "business schemas and typed args",
+        "partial effect",
+        "unknown outcome and real query recovery",
+        "no-effect retry",
+        "later legitimate repeated args",
+        "journal re-open and SQLite schema"
+      ],
+      "equality_contract": [
+        "same schemas/receipts",
+        "same journal identity/JSON",
+        "same SQLite schemas/state/commit semantics",
+        "same raw checkpoint/tool IDs"
+      ]
+    },
+    {
+      "id": "request_render",
+      "phase": "S1",
+      "coverage": [
+        "existing frozen16 cases",
+        "existing frozen4 errors"
+      ],
+      "equality_contract": [
+        "same rendered bytes",
+        "no source history mutation",
+        "old/new object identity"
+      ]
+    },
+    {
+      "id": "provider_wire",
+      "phase": "S5",
+      "coverage": [
+        "JSON-action and native ordinary",
+        "zero/one/multiple tools",
+        "tool continuation",
+        "empty/multiple durable memories",
+        "system/current_request placement",
+        "MemoryBoundaryView full/compact and legacy/candidate labels",
+        "memory protocols A/B/C with actual receipts",
+        "M1/ODR/freshness projection supported paths",
+        "malformed/incomplete responses",
+        "native unsupported method combinations",
+        "capacity rejection before actual HTTP",
+        "usage unknown/error paths"
+      ],
+      "equality_contract": [
+        "ordered request dict",
+        "locked HTTP serialized body",
+        "tool catalog/order",
+        "delivery snapshot follows actual request",
+        "same decoded calls/IDs/arguments",
+        "same errors/effects",
+        "same reservation and usage accounting order"
+      ]
+    },
+    {
+      "id": "external",
+      "phase": "S3",
+      "coverage": [
+        "Mem0 native ADD/search/reopen",
+        "SimpleMem writer/query/snapshot/read-only",
+        "batch embedding order",
+        "provider option forwarding",
+        "SDK source/dependency identity",
+        "native retries and uncertain effects"
+      ],
+      "equality_contract": [
+        "upstream pins unchanged",
+        "same provider options/counts",
+        "same persisted IDs/snapshots",
+        "same retry policy and exceptions"
+      ]
+    },
+    {
+      "id": "benchmark_lifecycle",
+      "phase": "S4",
+      "coverage": [
+        "prepare sanitizes legal runtime inputs",
+        "source identity manifest",
+        "start once/order/prior failed job",
+        "finish success/failure/unknown",
+        "trace-cost categories",
+        "both MERIT/MemSyco callers"
+      ],
+      "equality_contract": [
+        "same manifest/status schema",
+        "same job/cost accounting",
+        "same ordered source maps apart from newly mandated canonical files",
+        "same no-gold runtime boundary"
+      ]
+    },
+    {
+      "id": "source_identity",
+      "phase": "each move",
+      "coverage": [
+        "all canonical files registered",
+        "missing canonical file",
+        "tampered canonical bytes",
+        "pure facade only cannot satisfy identity",
+        "newly added package file omitted"
+      ],
+      "equality_contract": [
+        "reject omitted/tampered implementation",
+        "package registry equals all package .py",
+        "historical lock bytes unchanged"
+      ]
+    }
+  ],
+  "already_frozen": {
+    "request_render": "data/diagnostics/code-architecture-v12/request-render-golden.json"
+  },
+  "pending": "All other captures require concrete output evidence before their phase; this specification alone proves no equivalence."
+}
