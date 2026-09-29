@@ -17,6 +17,19 @@ separate experimental variables; freeze each real diagnostic before calling serv
 Research remains NOT_ACHIEVED and Product NO_GO. Historical records follow.
 
 
+## v10 R1 L2 progress and explicit resume: 2026-09-29
+
+User paused after five L2 attempts, then explicitly said “继续任务”. Actual Goal is ACTIVE.
+All eight frozen attempts are now complete at execution6e061746, methodc0bec6a7.
+Read [L2 results](docs/MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md): both20/20 episodes,
+labels178→0, no truncation in either condition, four ancillary ticket writes each.
+This supports narrow output mitigation, not action reliability; legacy default remains.
+R1 L2 adds122generation/368191tokens/36embedding; cumulative6138/11396312/416838.
+Source freeze ended after207files rechecked. R2 now follows its separate
+[implementation contract](docs/MILAI_REPAIR_V10_R2_CONTRACT_20260929.md); Sol owns code,
+Root fixtures/reports/realcalls, Luna Git. No R2 real calls yet. Full R2–R7 remain.
+Historical pause paragraphs below do not override this latest explicit resume.
+
 ## v10 R1 L1 progress: 2026-09-29
 
 Read [the L1 result](docs/MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md) and

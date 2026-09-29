@@ -1,0 +1,589 @@
+{
+  "kind": "MILAI_REPAIR_V10_R1_L2_RESULTS",
+  "status": "COMPLETED_8_ARCS_ROOT_REVIEWED",
+  "method_source_commit": "c0bec6a7f8f29c4774da941bc5c129969d48381c",
+  "execution_commit": "6e061746de955cba460ce4cf1e7c05f79be1b142",
+  "freeze_sha256": "9acbb9b43aec8152982d1e61f89d5b4b92c281784d50d24a50deaf29a044423a",
+  "units": [
+    {
+      "ordinal": 0,
+      "arc_id": "d2-arc18-000",
+      "condition": "legacy",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 6,
+      "generation_requests": 12,
+      "prompt_tokens": 28694,
+      "completion_tokens": 632,
+      "generation_tokens": 29326,
+      "http_wall_seconds": 7.94997239485383,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 4,
+        "[ASSISTANT HISTORY - prior model output]": 2
+      },
+      "tagged_responses": 5,
+      "business_calls": 6,
+      "business_names": {
+        "update_ticket": 2,
+        "set_config": 4
+      },
+      "all_tool_names": {
+        "update_ticket": 2,
+        "set_config": 4
+      },
+      "generation_journal_joins": 6,
+      "receipts_shown_in_later_actual_requests": 6,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 0,
+      "max_generation_per_public_message": 2,
+      "evidence_sha256": {
+        "legacy/jobs/d2-arc18-000/trace.jsonl": "15b281f339db79e0abfe8267ce5281ff7679fc785925de0d2f1839adedd73c3e",
+        "legacy/jobs/d2-arc18-000/business-journal.json": "73a803d3090251fcd00d32f8617fe092c1da95716522a44c03eaca5b85ff559a",
+        "legacy/jobs/d2-arc18-000/world.sqlite": "d4fc0b3556dbeacb33399eddfeec62f3350c85ae554fd2efd270c932a179c932",
+        "legacy/jobs/d2-arc18-000/checkpoints.sqlite": "5003a86fa6e0b6afe95040efbf57f78cb111e75bf413202d0cd5ff8713f2839a",
+        "legacy/jobs/d2-arc18-000/result.json": "747598bee9a8794d0eb9efc7ce56ac569d93f2d6bbcaca5356448eec425265e6"
+      }
+    },
+    {
+      "ordinal": 1,
+      "arc_id": "d2-arc18-000",
+      "condition": "native_roles_only",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 6,
+      "generation_requests": 14,
+      "prompt_tokens": 34221,
+      "completion_tokens": 674,
+      "generation_tokens": 34895,
+      "http_wall_seconds": 8.8248793752864,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tagged_responses": 0,
+      "business_calls": 8,
+      "business_names": {
+        "update_ticket": 4,
+        "set_config": 4
+      },
+      "all_tool_names": {
+        "update_ticket": 4,
+        "set_config": 4
+      },
+      "generation_journal_joins": 8,
+      "receipts_shown_in_later_actual_requests": 8,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 0,
+      "max_generation_per_public_message": 3,
+      "evidence_sha256": {
+        "native_roles_only/jobs/d2-arc18-000/trace.jsonl": "b2cd0a66dd7baaa8daad3101b108d26a6493e892374960d1e36f0d94045ae6cd",
+        "native_roles_only/jobs/d2-arc18-000/business-journal.json": "cd57de2ffad41c8572ec757827538e2f389441cc6594250524950eaa9fe5d478",
+        "native_roles_only/jobs/d2-arc18-000/world.sqlite": "ff56952a1489dd15dc4737cfcde382c79f652acbb40a92952281a76e6c5f0990",
+        "native_roles_only/jobs/d2-arc18-000/checkpoints.sqlite": "676492750a8bbefaa1a0252deb2b62770763c4050a19d417b0cd604c83622d23",
+        "native_roles_only/jobs/d2-arc18-000/result.json": "fb41f4cc5fd0e8f0d93c447fa1def7c9f9c1c418bd30016c80dda8ffe25ebc5f"
+      }
+    },
+    {
+      "ordinal": 2,
+      "arc_id": "d2-arc20-000",
+      "condition": "native_roles_only",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 7,
+      "generation_requests": 18,
+      "prompt_tokens": 64119,
+      "completion_tokens": 987,
+      "generation_tokens": 65106,
+      "http_wall_seconds": 14.633854721207172,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tagged_responses": 0,
+      "business_calls": 9,
+      "business_names": {
+        "update_ticket": 6,
+        "deploy": 3
+      },
+      "all_tool_names": {
+        "update_ticket": 6,
+        "search_memory": 1,
+        "read_history": 1,
+        "deploy": 3
+      },
+      "generation_journal_joins": 9,
+      "receipts_shown_in_later_actual_requests": 9,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 9,
+      "max_generation_per_public_message": 5,
+      "evidence_sha256": {
+        "native_roles_only/jobs/d2-arc20-000/trace.jsonl": "6eeaae88bc56bbc093693198cafa4d869a8ba973542211e018647ef226b4bebb",
+        "native_roles_only/jobs/d2-arc20-000/business-journal.json": "0d00826b23a28af5496be36dd9c1c8945fba28a5d47ba21fb4cb6cb5bcc361cb",
+        "native_roles_only/jobs/d2-arc20-000/world.sqlite": "9684e94aa4e26fd326caefb68d8b0d19f74996390673ec9dbd0bbcef4d4126c4",
+        "native_roles_only/jobs/d2-arc20-000/checkpoints.sqlite": "a7bc10e51e5850d7e5c3e51210243e6c4e61bbf30040458144ca6d70b9eb75d1",
+        "native_roles_only/jobs/d2-arc20-000/result.json": "580a0a898754420ae858d471339907db197343d10a315e57ac5492359ba697e6"
+      }
+    },
+    {
+      "ordinal": 3,
+      "arc_id": "d2-arc20-000",
+      "condition": "legacy",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 7,
+      "generation_requests": 18,
+      "prompt_tokens": 69239,
+      "completion_tokens": 1979,
+      "generation_tokens": 71218,
+      "http_wall_seconds": 21.392603194806725,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 56,
+        "[ASSISTANT HISTORY - prior model output]": 45
+      },
+      "tagged_responses": 14,
+      "business_calls": 9,
+      "business_names": {
+        "update_ticket": 6,
+        "deploy": 3
+      },
+      "all_tool_names": {
+        "update_ticket": 6,
+        "search_memory": 1,
+        "read_history": 1,
+        "deploy": 3
+      },
+      "generation_journal_joins": 9,
+      "receipts_shown_in_later_actual_requests": 9,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 9,
+      "max_generation_per_public_message": 5,
+      "evidence_sha256": {
+        "legacy/jobs/d2-arc20-000/trace.jsonl": "b1a20277ba6b8c778318a3c5ec96a50a17ae2aba3ecbcee79432797020b9a7e8",
+        "legacy/jobs/d2-arc20-000/business-journal.json": "474acfa67284f50d184ab561acc68e224fe9c9369f29bd6f40ad158fb8af0dca",
+        "legacy/jobs/d2-arc20-000/world.sqlite": "5e12f24ff673d8a45170c69adb8fcfc0e40f674c1132233e0f9fd359e7e6f283",
+        "legacy/jobs/d2-arc20-000/checkpoints.sqlite": "9f4d9529ccd695059bafe630db1b6c1c9a1ad0a7d8de82b503f25bddac976a11",
+        "legacy/jobs/d2-arc20-000/result.json": "68b26b7154349085e801e3fbc3382034df9d7d3603983753bc6ab47739ba99e6"
+      }
+    },
+    {
+      "ordinal": 4,
+      "arc_id": "d2-arc22-000",
+      "condition": "legacy",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 7,
+      "generation_requests": 15,
+      "prompt_tokens": 38737,
+      "completion_tokens": 992,
+      "generation_tokens": 39729,
+      "http_wall_seconds": 11.366799175739288,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 18,
+        "[ASSISTANT HISTORY - prior model output]": 15
+      },
+      "tagged_responses": 10,
+      "business_calls": 7,
+      "business_names": {
+        "set_config": 1,
+        "update_ticket": 4,
+        "deploy": 2
+      },
+      "all_tool_names": {
+        "set_config": 1,
+        "update_ticket": 4,
+        "search_memory": 1,
+        "deploy": 2
+      },
+      "generation_journal_joins": 7,
+      "receipts_shown_in_later_actual_requests": 7,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 9,
+      "max_generation_per_public_message": 3,
+      "evidence_sha256": {
+        "legacy/jobs/d2-arc22-000/trace.jsonl": "00ad9eac8ddc85d7709830e3e1d46efa93d0b4a5efcecad7fd3e3ee14decb583",
+        "legacy/jobs/d2-arc22-000/business-journal.json": "123961c94c829be2972514ced88f217804a78500b93349c2cb6b60d71deacc7e",
+        "legacy/jobs/d2-arc22-000/world.sqlite": "de30afeb790342eda01afda9585d78deb6485da89d1f5a5117184f7a65a909d9",
+        "legacy/jobs/d2-arc22-000/checkpoints.sqlite": "f83703d28d0729c91654ba046ca400a71bc632baf2084123eae2f3cc9e9c359c",
+        "legacy/jobs/d2-arc22-000/result.json": "11f4ad6ad4b7b89b205ba45e164eb8bdbeb981402bc6050e97992ef73b3ccbad"
+      }
+    },
+    {
+      "ordinal": 5,
+      "arc_id": "d2-arc22-000",
+      "condition": "native_roles_only",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 7,
+      "generation_requests": 16,
+      "prompt_tokens": 51329,
+      "completion_tokens": 703,
+      "generation_tokens": 52032,
+      "http_wall_seconds": 11.57293713092804,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tagged_responses": 0,
+      "business_calls": 7,
+      "business_names": {
+        "set_config": 1,
+        "update_ticket": 4,
+        "deploy": 2
+      },
+      "all_tool_names": {
+        "set_config": 1,
+        "update_ticket": 4,
+        "search_memory": 1,
+        "read_history": 1,
+        "deploy": 2
+      },
+      "generation_journal_joins": 7,
+      "receipts_shown_in_later_actual_requests": 7,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 9,
+      "max_generation_per_public_message": 4,
+      "evidence_sha256": {
+        "native_roles_only/jobs/d2-arc22-000/trace.jsonl": "3b80602d8039f536d848455621685b9ade677a75f434b5d5d4291be5eb776405",
+        "native_roles_only/jobs/d2-arc22-000/business-journal.json": "0cc5511e9b0f37e44ab2c10a2c07914233f13a08fd34edbe49da8ff04f5663d7",
+        "native_roles_only/jobs/d2-arc22-000/world.sqlite": "01f088a6be5b0a8c405913a31ac89a6a27a1e861c6cfa9f00ea3575794bc7ea8",
+        "native_roles_only/jobs/d2-arc22-000/checkpoints.sqlite": "c47cda38ad3c988a82d70eb1f343956000dd87dfcf9b8140d70bdf0cca12a1c1",
+        "native_roles_only/jobs/d2-arc22-000/result.json": "9e798dd8d0f4ad538c89c784e9957ddfe140186e46096f5a055594ab060e8e86"
+      }
+    },
+    {
+      "ordinal": 6,
+      "arc_id": "d2-arc19-000",
+      "condition": "native_roles_only",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 6,
+      "generation_requests": 13,
+      "prompt_tokens": 30672,
+      "completion_tokens": 576,
+      "generation_tokens": 31248,
+      "http_wall_seconds": 7.739108288194984,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tagged_responses": 0,
+      "business_calls": 7,
+      "business_names": {
+        "update_ticket": 2,
+        "deploy": 1,
+        "get_config": 1,
+        "set_config": 3
+      },
+      "all_tool_names": {
+        "update_ticket": 2,
+        "deploy": 1,
+        "get_config": 1,
+        "set_config": 3
+      },
+      "generation_journal_joins": 7,
+      "receipts_shown_in_later_actual_requests": 7,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 0,
+      "max_generation_per_public_message": 3,
+      "evidence_sha256": {
+        "native_roles_only/jobs/d2-arc19-000/trace.jsonl": "d781889f22bd87ffdb0ad95167ed2f3fedaafd9d06d4511613e0a398225dca67",
+        "native_roles_only/jobs/d2-arc19-000/business-journal.json": "73c5e997d8594d322fe2476ba0b0ca56635d715f832af0d920f1d1bb3de3f479",
+        "native_roles_only/jobs/d2-arc19-000/world.sqlite": "081def7b1809a6142d59678a933d9d840aae64875af71db640965e2788b1b4bf",
+        "native_roles_only/jobs/d2-arc19-000/checkpoints.sqlite": "0d7ae0b3b1a4c132b51ceb472b7bc50ab012b29e9b98f9ec37ff596a3607405e",
+        "native_roles_only/jobs/d2-arc19-000/result.json": "f0cb0ea7e8318bae4a8b8f734b1a8ee59153f9ee6be0fbda8c26ba841d79fcce"
+      }
+    },
+    {
+      "ordinal": 7,
+      "arc_id": "d2-arc19-000",
+      "condition": "legacy",
+      "native_successes": 5,
+      "native_denominator": 5,
+      "dependent_successes": 2,
+      "dependent_denominator": 2,
+      "public_messages": 6,
+      "generation_requests": 16,
+      "prompt_tokens": 43485,
+      "completion_tokens": 1152,
+      "generation_tokens": 44637,
+      "http_wall_seconds": 13.045703313779086,
+      "truncations": 0,
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 19,
+        "[ASSISTANT HISTORY - prior model output]": 19
+      },
+      "tagged_responses": 12,
+      "business_calls": 10,
+      "business_names": {
+        "update_ticket": 4,
+        "deploy": 1,
+        "get_config": 2,
+        "set_config": 3
+      },
+      "all_tool_names": {
+        "update_ticket": 4,
+        "deploy": 1,
+        "get_config": 2,
+        "set_config": 3
+      },
+      "generation_journal_joins": 10,
+      "receipts_shown_in_later_actual_requests": 10,
+      "final_world_matches_persisted_sqlite": true,
+      "empty_completed_memory_snapshots": 5,
+      "memory_snapshot_record_total": 0,
+      "memory_write_proposals": 0,
+      "embedding_tokens": 0,
+      "max_generation_per_public_message": 4,
+      "evidence_sha256": {
+        "legacy/jobs/d2-arc19-000/trace.jsonl": "92c83c2057939e09928fadd70ea70403855f708475d2c052cbdfe9ed24452e5a",
+        "legacy/jobs/d2-arc19-000/business-journal.json": "42b5fa0e6de83362f8e9cc4f5031364bae0ecccfe88f6e3de5d2c46535b694c7",
+        "legacy/jobs/d2-arc19-000/world.sqlite": "3f3f693fe7305a0976acf92e0b70a580390ee2076a15563b05a500bf053b632c",
+        "legacy/jobs/d2-arc19-000/checkpoints.sqlite": "028eaadb0fe55e734a8a16921c01ab02dc15123073ab3eb4e7ba23a39d41ad89",
+        "legacy/jobs/d2-arc19-000/result.json": "a68baaaab4b4416ae5d3216b76605d4c449de2d918faebcf9757ab772248cdff"
+      }
+    }
+  ],
+  "totals": {
+    "arcs": 8,
+    "episodes": 40,
+    "public_messages": 52,
+    "generation_requests": 122,
+    "generation_tokens": 368191,
+    "embedding_tokens": 36,
+    "judge_calls": 0
+  },
+  "ledger_after": {
+    "generation_requests": 6138,
+    "generation_tokens": 11396312,
+    "embedding_tokens": 416838,
+    "sha256": "7a6697a34068f78697384f3c1294352d7a60f8d4d6ccd2c93b011d27769e2f2c"
+  },
+  "frozen_file_recheck_count": 207,
+  "arms": {
+    "legacy": {
+      "native_successes": 20,
+      "native_denominator": 20,
+      "dependent_successes": 8,
+      "dependent_denominator": 8,
+      "public_messages": 26,
+      "generation_requests": 61,
+      "prompt_tokens": 180155,
+      "completion_tokens": 4755,
+      "generation_tokens": 184910,
+      "embedding_tokens": 18,
+      "http_wall_seconds": 53.75507807917893,
+      "truncations": 0,
+      "tagged_responses": 41,
+      "business_calls": 32,
+      "receipts_shown_in_later_actual_requests": 32,
+      "memory_write_proposals": 0,
+      "complete_arcs": 4,
+      "planned_arcs": 4,
+      "label_occurrences": 178,
+      "unrequested_deployments": 0,
+      "additional_ticket_updates_outside_explicit_current_request": 4,
+      "unrequested_repeated_deployments": 0,
+      "ordinary_record_snapshots_all_empty": true
+    },
+    "native_roles_only": {
+      "native_successes": 20,
+      "native_denominator": 20,
+      "dependent_successes": 8,
+      "dependent_denominator": 8,
+      "public_messages": 26,
+      "generation_requests": 61,
+      "prompt_tokens": 180341,
+      "completion_tokens": 2940,
+      "generation_tokens": 183281,
+      "embedding_tokens": 18,
+      "http_wall_seconds": 42.770779515616596,
+      "truncations": 0,
+      "tagged_responses": 0,
+      "business_calls": 31,
+      "receipts_shown_in_later_actual_requests": 31,
+      "memory_write_proposals": 0,
+      "complete_arcs": 4,
+      "planned_arcs": 4,
+      "label_occurrences": 0,
+      "unrequested_deployments": 0,
+      "additional_ticket_updates_outside_explicit_current_request": 4,
+      "unrequested_repeated_deployments": 0,
+      "ordinary_record_snapshots_all_empty": true
+    }
+  },
+  "additional_action_audit": [
+    {
+      "ordinal": 1,
+      "condition": "native_roles_only",
+      "arc_id": "d2-arc18-000",
+      "episode_index": 1,
+      "generation_id": "chatcmpl-b0ce8ab382800b9c",
+      "call_id": "chatcmpl-tool-abb328a2f15cfc80",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "fe3fdf674f7e37dd093065ac79f8a6a3b96ccfbf73f50a2e70e9229372233d50",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 1,
+      "condition": "native_roles_only",
+      "arc_id": "d2-arc18-000",
+      "episode_index": 4,
+      "generation_id": "chatcmpl-804696c99fcfb185",
+      "call_id": "chatcmpl-tool-804ef978fc48b165",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "518baedbd68059b52071e72eb7ceda342a031bcd073b8747ae071c114285d24c",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 2,
+      "condition": "native_roles_only",
+      "arc_id": "d2-arc20-000",
+      "episode_index": 2,
+      "generation_id": "chatcmpl-9ede30975bfe6ba0",
+      "call_id": "chatcmpl-tool-a42865ead5671400",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "06caee24cf77929f9a1749401bc73938983dcd1a2d08c7417d77f35a8acbfeb4",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 2,
+      "condition": "native_roles_only",
+      "arc_id": "d2-arc20-000",
+      "episode_index": 3,
+      "generation_id": "chatcmpl-a30d4f32103f649c",
+      "call_id": "chatcmpl-tool-8f6b3137350a0b8e",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "05f0b3005ff950b9dc2bcdabe2aba88e4316cd6097987c8e4ecbddf20b342f1b",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 3,
+      "condition": "legacy",
+      "arc_id": "d2-arc20-000",
+      "episode_index": 2,
+      "generation_id": "chatcmpl-87d8b28d6e914e05",
+      "call_id": "chatcmpl-tool-85ccb6464264c5a3",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "8912592435fa118b80742f75b0c680151ebe7f83fe0dfd9ca58481651c9d5e7a",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 3,
+      "condition": "legacy",
+      "arc_id": "d2-arc20-000",
+      "episode_index": 3,
+      "generation_id": "chatcmpl-957a30a13de1c0a2",
+      "call_id": "chatcmpl-tool-a2822dd7eeccf832",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "1553f0bd2d947fce19abb6fbf5f82d22f27285184d0e2e9abc1fd148865eed98",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 7,
+      "condition": "legacy",
+      "arc_id": "d2-arc19-000",
+      "episode_index": 2,
+      "generation_id": "chatcmpl-a3bf25e596f7747a",
+      "call_id": "chatcmpl-tool-aeeb9cd5b66db1ad",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "2572b50c13cbb9479a8a1b61cfe88ef3b475689e445f5eb7e489a457befaf89c",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    },
+    {
+      "ordinal": 7,
+      "condition": "legacy",
+      "arc_id": "d2-arc19-000",
+      "episode_index": 3,
+      "generation_id": "chatcmpl-a64c121794a79aed",
+      "call_id": "chatcmpl-tool-9232498315113ad5",
+      "tool_name": "update_ticket",
+      "arguments_sha256": "96aaf0aa441bc230542abb77968eeaf6ca4c4087493ab5a04a90ec59ed4e8ec4",
+      "classification": "ADDITIONAL_TICKET_UPDATE_OUTSIDE_EXPLICIT_CURRENT_REQUEST",
+      "rationale": "After requested configuration/rollback succeeded, Host additionally appended a completion note; routine related side effect, not explicit in current public request. Native checker score unchanged."
+    }
+  ],
+  "root_semantic_review": {
+    "all_40_episode_user_requests_and_outputs_reviewed": true,
+    "all_122_generated_bodies_reviewed": true,
+    "non_label_repetitive_loops_observed": false,
+    "severe_new_side_effect_observed": false,
+    "normal_multi_step_control_preserved": true,
+    "no_persistent_maintenance_claim": true,
+    "gates": "Accept narrow label imitation mitigation as explicit candidate; preserve legacy default and no action-reliability/truncation/unseen claim. R2 remains required."
+  },
+  "decision": "CONTINUE_R2_AND_R3_SEPARATELY_R1_OUTPUT_CANDIDATE_ONLY",
+  "limitations": [
+    "Four exposed arc source groups, one paired attempt per condition; not eight independent tasks.",
+    "No truncation or extra deployment in either L2 condition, so no L2 causal estimate for those failures.",
+    "Pause after ordinal4 and explicit resume about3h44 later; container/config/207files/ledger unchanged, service scheduling and nondeterminism remain uncontrolled.",
+    "Both conditions make four ancillary ticket writes outside explicit current requests; no action-safety success claim.",
+    "Candidate and legacy each61 generations but different search/history/tool paths; token difference not compression.",
+    "L1 contaminated arc22 recovery failure remains; clean-start L2 does not erase it."
+  ],
+  "pause_resume": {
+    "pause": "2026-09-29T01:08:15.961568+00:00",
+    "resume": "2026-09-29T04:52:13.593170+00:00",
+    "new_attempts_only_after_explicit_resume": true
+  },
+  "reproduction": {
+    "protocol": "docs/MILAI_REPAIR_V10_R1_L2_PROTOCOL_20260929.md",
+    "selection": "data/manifests/repair-v10-r1-l2-selection.json",
+    "private_runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/repair-v10/MiLAi-Lab/artifacts/repair-v10/r1-l2-execution-r1",
+    "actual_source_execution": "Check out execution_commit for exact source/config/input identity; use new isolated run IDs for a new experiment, never rerun these worlds.",
+    "official_scorer_and_inputs_unchanged": true,
+    "no_judge_or_retuning": true
+  },
+  "private_postrun_audit": {
+    "sha256": "41f200f678950e1b7d40dbf275367e2ee0973c135aff60f053eef0fa4880b59f",
+    "initial_reporting_assumptions_corrected": "Receipt comparison now validates unchanged TOOL OBSERVATION container and exact inner receipt; embedding usage counted from actual embedding HTTP. No experiment or scorer changed."
+  }
+}
