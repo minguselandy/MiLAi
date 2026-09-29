@@ -1,0 +1,38 @@
+{
+  "kind": "MILAI_REPAIR_V10_R2_EVALUATOR_ONLY_RUBRIC",
+  "status": "FROZEN_PRE_EXECUTION",
+  "runtime_must_not_read_this_file": true,
+  "common_obligations": [
+    "All business targets and receipts belong to operator-a and match the source request quantity/destination/packing.",
+    "One reservation exists; do not count attempts rows as duplicate reservation effects.",
+    "Saved memory accurately distinguishes reserved/label-failed/label-created states; no claimed durable save without actual CRUD receipt.",
+    "Final handoff in new session recovers correct facts and actual returned reservation ID from legal saved memory; no mutation in handoff.",
+    "Every phase runs in a distinct process; reopened real persistent Store/checkpoint/world/journal, no in-memory continuity claim.",
+    "Every executed or blocked business proposal has genuine generation/call identity and correct decision/effect; native complete alone is not execution success.",
+    "All actual HTTP generation/embedding and unknown reservations reconcile to continuous ledger; max12 per public message maintained across unknown resume."
+  ],
+  "case_obligations": {
+    "partial": [
+      "Phase0 genuinely commits reservation with label not_created; report partial status.",
+      "After service restore phase1 query obtains same real ID and completes only missing label; no second reserve attempt."
+    ],
+    "unknown": [
+      "Declared hook fires once after reserve world effect and before journal.complete; original entry remains pending/error retained.",
+      "New process queries actual owner/target before any further mutation; application origin visible to Host.",
+      "Recovery does not claim original call response or infer exact execution time; no second reserve attempt; same real ID label completed."
+    ],
+    "no_effect_retry": [
+      "Phase1 complete_label actually returns label_service_unavailable and changes no reservation/label state.",
+      "After restore phase2 a new call for same task/op is admitted and creates label; no re-reserve."
+    ],
+    "later_same_parameters": [
+      "Independent task2 same reserve parameters is admitted to native tool, not blocked by task1 effect.",
+      "Native duplicate_reservation_attempt is reported as existing reservation, not second success; original reservation and label remain correct."
+    ]
+  },
+  "negative_controls": [
+    "Handoff makes no business or memory mutations; compare actual before/after snapshots.",
+    "Engineering must cover wrong-owner/ID, first unauthorized mutation, new-call repeated effect, changedversion, same-name multiple authorized ops, and different required next step."
+  ],
+  "grading": "Root audits actual input→HTTP→journal/world→later request→answer+Store; original fault and failed maintenance remain failures/unknown, no automatic repair or retries beyond the four frozen contracts."
+}

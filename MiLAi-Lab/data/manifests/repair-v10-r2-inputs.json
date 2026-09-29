@@ -1,0 +1,95 @@
+{
+  "kind": "MILAI_REPAIR_V10_R2_INPUTS",
+  "status": "FROZEN_BEFORE_REAL_CALLS",
+  "method_source_commit": "503b943d88f89e60fc4d5f90b761eead46545707",
+  "input_hashes": {
+    "data/diagnostics/repair-v10/r2-partial.json": "2d2ad4057aca5b70ecde473093870f364b60d54e5e631790f9bd8dac5faa1da4",
+    "data/diagnostics/repair-v10/r2-unknown.json": "73b4b402d25479db422891625a0a81089af6fb6ae3b94a7ae7f3ab69ec174dad",
+    "data/diagnostics/repair-v10/r2-no_effect_retry.json": "5c53aa9f6e977382cd34879e6e673f16ac5e872ada1562d0e4d271dd6522b81f",
+    "data/diagnostics/repair-v10/r2-later_same_parameters.json": "e75e8c88d1b343ca93b541fc00f6645bfd4ac3d4ac8d77156d6f7e490b28074f",
+    "data/diagnostics/repair-v10/r2-application-config.json": "167caa7f12fa76614b16f714fd47f7a154f2fcc90bdaf03b341a70038921bec0",
+    "data/diagnostics/repair-v10/r2-rubric.json": "283d02190154dac18d3beff9aef371d2e5cfa7e8777019a38a096cd715f56cf5",
+    "docs/MILAI_REPAIR_V10_R2_PROTOCOL_20260929.md": "4273826a61d3394005cef38fa6d7b5bb9568aa4976f30d3e6de4f5546af09091"
+  },
+  "order": [
+    {
+      "case": "partial",
+      "phase": 0,
+      "resume_unknown": false
+    },
+    {
+      "case": "partial",
+      "phase": 1,
+      "resume_unknown": false
+    },
+    {
+      "case": "partial",
+      "phase": 2,
+      "resume_unknown": false
+    },
+    {
+      "case": "unknown",
+      "phase": 0,
+      "resume_unknown": false
+    },
+    {
+      "case": "unknown",
+      "phase": 0,
+      "resume_unknown": true
+    },
+    {
+      "case": "unknown",
+      "phase": 1,
+      "resume_unknown": false
+    },
+    {
+      "case": "no_effect_retry",
+      "phase": 0,
+      "resume_unknown": false
+    },
+    {
+      "case": "no_effect_retry",
+      "phase": 1,
+      "resume_unknown": false
+    },
+    {
+      "case": "no_effect_retry",
+      "phase": 2,
+      "resume_unknown": false
+    },
+    {
+      "case": "no_effect_retry",
+      "phase": 3,
+      "resume_unknown": false
+    },
+    {
+      "case": "later_same_parameters",
+      "phase": 0,
+      "resume_unknown": false
+    },
+    {
+      "case": "later_same_parameters",
+      "phase": 1,
+      "resume_unknown": false
+    },
+    {
+      "case": "later_same_parameters",
+      "phase": 2,
+      "resume_unknown": false
+    }
+  ],
+  "public_messages": 12,
+  "process_invocations": 13,
+  "repetitions": 1,
+  "judge_calls": 0,
+  "exposure": "Root synthetic development diagnostics; not unseen benchmark evidence",
+  "execution_freeze": "Root private artifacts/repair-v10/r2-application/execution-freeze.json created after this input commit; includes exact source,bindings,scripts,service,ledger",
+  "maintenance": "Host strict memory MCP only; handoff new session read-only; no free writer",
+  "ledger_before": {
+    "generation_requests": 6138,
+    "generation_tokens": 11396312,
+    "embedding_tokens": 416838,
+    "sha256": "7a6697a34068f78697384f3c1294352d7a60f8d4d6ccd2c93b011d27769e2f2c"
+  },
+  "uncompleted": "Formal model/MCP/Postgres semantics not yet run. Protocol defines stop conditions and fixed unknown continuation."
+}

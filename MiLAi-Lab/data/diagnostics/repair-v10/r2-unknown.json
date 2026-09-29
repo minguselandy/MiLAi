@@ -1,0 +1,75 @@
+{
+  "case_id": "unknown",
+  "script": {
+    "kind": "MILAI_REPAIR_V10_R2_SYNTHETIC_APPLICATION",
+    "script_id": "r2-unknown",
+    "users": [
+      "operator-a",
+      "operator-b"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "reserve",
+            "user_id": "operator-a",
+            "session_id": "work",
+            "public_index": 0,
+            "text": "Reserve 2 Cedar sample kits for east desk E-4 using paper sleeves and create the label if possible. Do not create a second reservation if the label fails. Save the actual reservation details and label status for our later handoff, including the real reservation ID if one is returned. Report what actually completed and what remains."
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "handoff",
+            "user_id": "operator-a",
+            "session_id": "handoff",
+            "public_index": 0,
+            "text": "Read the saved reservation progress for Cedar sample kits and tell me the actual reservation ID, quantity, destination, packing, and whether the label was created. This is a handoff check only: do not change the business world or saved memories."
+          }
+        ]
+      }
+    ]
+  },
+  "target": {
+    "item_key": "Cedar sample kits",
+    "quantity": 2,
+    "destination": "east desk E-4",
+    "packing": "paper sleeves"
+  },
+  "fault": {
+    "point": "after_native_reserve_and_label_return_before_journal_complete",
+    "count": 1,
+    "exception": "InjectedOutcomeLost",
+    "resume_same_phase": 0,
+    "operator_event_before_resume": {
+      "event_id": "restore-after-lost-outcome",
+      "action": "set_label_available",
+      "available": true
+    }
+  },
+  "workflow": [
+    {
+      "message_id": "reserve",
+      "task_id": "delivery-1",
+      "operations": [
+        "reserve",
+        "query",
+        "label"
+      ]
+    },
+    {
+      "message_id": "handoff",
+      "task_id": "handoff-1",
+      "operations": []
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "case_id": "partial",
+  "script": {
+    "kind": "MILAI_REPAIR_V10_R2_SYNTHETIC_APPLICATION",
+    "script_id": "r2-partial",
+    "users": [
+      "operator-a",
+      "operator-b"
+    ],
+    "initial_label_available": false,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "reserve",
+            "user_id": "operator-a",
+            "session_id": "work",
+            "public_index": 0,
+            "text": "Reserve 2 Cedar sample kits for east desk E-4 using paper sleeves and create the label if possible. Do not create a second reservation if the label fails. Save the actual reservation details and label status for our later handoff, including the real reservation ID if one is returned. Report what actually completed and what remains."
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "operator_memory": [],
+        "world_events": [
+          {
+            "event_id": "label-service-1",
+            "action": "set_label_available",
+            "available": true
+          }
+        ],
+        "messages": [
+          {
+            "message_id": "finish",
+            "user_id": "operator-a",
+            "session_id": "work",
+            "public_index": 1,
+            "text": "Look up my existing reservation for Cedar sample kits. The label service is available now. Finish only the missing label using the real returned reservation ID; do not reserve again. Update the saved progress from actual tool receipts and report the result."
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "handoff",
+            "user_id": "operator-a",
+            "session_id": "handoff",
+            "public_index": 0,
+            "text": "Read the saved reservation progress for Cedar sample kits and tell me the actual reservation ID, quantity, destination, packing, and whether the label was created. This is a handoff check only: do not change the business world or saved memories."
+          }
+        ]
+      }
+    ]
+  },
+  "target": {
+    "item_key": "Cedar sample kits",
+    "quantity": 2,
+    "destination": "east desk E-4",
+    "packing": "paper sleeves"
+  },
+  "fault": null,
+  "workflow": [
+    {
+      "message_id": "reserve",
+      "task_id": "delivery-1",
+      "operations": [
+        "reserve",
+        "query",
+        "label"
+      ]
+    },
+    {
+      "message_id": "finish",
+      "task_id": "delivery-1",
+      "operations": [
+        "query",
+        "label"
+      ]
+    },
+    {
+      "message_id": "handoff",
+      "task_id": "handoff-1",
+      "operations": []
+    }
+  ]
+}
