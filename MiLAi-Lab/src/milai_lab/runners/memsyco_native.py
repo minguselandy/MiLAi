@@ -38,9 +38,23 @@ from milai_lab.baselines.langmem_benchmark import (
     retrieved_material,
     scope_config,
 )
+from milai_lab.contracts.benchmark import (
+    BenchmarkJob,
+    BenchmarkManifest,
+    BenchmarkPreparationReceipt,
+)
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.contextual import HistoryMessage, TaskInput
 from milai_lab.datasets.memsyco import MemSycoTask, load_memsyco_tasks
+from milai_lab.harness.benchmark_execution import (
+    finish_job,
+    prepare_manifest,
+    sha,
+    source_identity,
+    start_job,
+    trace_costs,
+    validate_config,
+)
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,
@@ -54,15 +68,6 @@ from milai_lab.memory.mcp import MemoryMCP
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.langmem_application_runtime import open_application_runtime
-from milai_lab.runners.merit_native import (
-    finish_job,
-    prepare_manifest,
-    sha,
-    source_identity,
-    start_job,
-    trace_costs,
-    validate_config,
-)
 
 ARMS = {"raw_dialogue", "milai", "milai_agent"}
 U2_ARMS = {"raw_dialogue", "strong_raw_rag", "rolling_summary", "ordinary_milai", "mem0_native",
@@ -106,7 +111,7 @@ def _config(config: dict[str, Any]) -> None:
         raise ValueError("MEMSYCO_NATIVE_CONFIG_INVALID")
 
 
-def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
+def prepare(args: Any, *, lab_root: Path) -> BenchmarkPreparationReceipt:
     config, selection = read_json(args.config), read_json(args.selection)
     _config(config)
     u2 = "benchmark_memory" in config
@@ -120,7 +125,8 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
     for source in selection["source_files"]:
         if sha(root / source["relative_path"]) != source["sha256"]:
             raise ValueError("MEMSYCO_SOURCE_CHANGED")
-    jobs = [{"job_id": row.case_id, "track": row.track, "owner": row.task.user_id,
+    jobs: list[BenchmarkJob] = [{"job_id": row.case_id, "track": row.track,
+             "owner": row.task.user_id,
              "history_id": row.task.history_id, "history_sha256": digest([
                  asdict(item) for item in row.task.history])} for row in tasks]
     runtime_tasks = {"kind": "MILAI_MEMSYCO_RUNTIME_TASKS", "tasks": [asdict(row) for row in tasks]}
@@ -228,7 +234,7 @@ def _method(identity: dict[str, Any], catalog: list[dict[str, Any]]) -> dict[str
 
 
 def _history_inputs(tasks: list[MemSycoTask], identity: dict[str, Any],
-                    jobs: list[dict[str, Any]]) -> dict[str, Any]:
+                    jobs: list[BenchmarkJob]) -> dict[str, Any]:
     method = {**_method(identity, identity["memory_tool_catalog"]),
               "backend": backend_identity(identity["arm_id"]),
               "config_sha256": identity["config_sha256"],
@@ -246,8 +252,8 @@ def _history_inputs(tasks: list[MemSycoTask], identity: dict[str, Any],
     return {"kind": "MILAI_MEMSYCO_RUNTIME_HISTORIES", "histories": list(units.values())}
 
 
-def _prepared_u2(args: Any, lab_root: Path) -> tuple[dict[str, Any], dict[str, Any]]:
-    manifest = read_json(args.runtime_root / "run_manifest.json")
+def _prepared_u2(args: Any, lab_root: Path) -> tuple[BenchmarkManifest, dict[str, Any]]:
+    manifest: BenchmarkManifest = read_json(args.runtime_root / "run_manifest.json")
     identity = manifest["identity"]
     if ("backend" not in identity or args.arm not in U2_ARMS
             or any(identity.get(key) != value for key, value in source_identity(lab_root).items())
@@ -394,7 +400,7 @@ def run_history(args: Any, *, lab_root: Path) -> dict[str, Any]:
 
 
 def _run_u2_query(args: Any, row: MemSycoTask, identity: dict[str, Any],
-                  manifest: dict[str, Any], root: Path) -> dict[str, Any]:
+                  manifest: BenchmarkManifest, root: Path) -> dict[str, Any]:
     job = next(value for value in manifest["jobs"] if value["job_id"] == args.job)
     key = job["build_history_id"]
     attempt = manifest.get("history_attempts", {}).get(key, {})

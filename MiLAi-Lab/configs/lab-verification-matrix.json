@@ -60,7 +60,8 @@
     "tests/unit/test_application_architecture.py",
     "tests/architecture/test_request_source_identity.py",
     "tests/memory/test_memory_contracts.py",
-    "tests/architecture/test_memory_architecture.py"
+    "tests/architecture/test_memory_architecture.py",
+    "tests/architecture/test_benchmark_execution_architecture.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -89,7 +90,8 @@
     "tests/architecture/test_memory_architecture.py",
     "tests/integrations/test_mem0_contracts.py",
     "tests/integrations/test_simplemem_contracts.py",
-    "tests/integrations/test_external_interfaces.py"
+    "tests/integrations/test_external_interfaces.py",
+    "tests/architecture/test_benchmark_execution_architecture.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",

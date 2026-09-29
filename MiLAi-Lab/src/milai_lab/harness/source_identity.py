@@ -3,6 +3,7 @@
 CONTRACT_SOURCE_FILES = (
     "src/milai_lab/contracts/__init__.py",
     "src/milai_lab/contracts/arms.py",
+    "src/milai_lab/contracts/benchmark.py",
     "src/milai_lab/contracts/memory.py",
     "src/milai_lab/contracts/operations.py",
     "src/milai_lab/contracts/protocol.py",
@@ -36,6 +37,9 @@ INTEGRATION_FACADE_FILES = (
 ARTIFACT_IO_SOURCE_FILES = (
     "src/milai_lab/harness/artifact_io.py",
 )
+BENCHMARK_EXECUTION_SOURCE_FILES = (
+    "src/milai_lab/harness/benchmark_execution.py",
+)
 REQUEST_SOURCE_FILES = (
     "src/milai_lab/harness/source_identity.py",
     *CONTRACT_SOURCE_FILES,
@@ -44,5 +48,6 @@ REQUEST_SOURCE_FILES = (
     *INTEGRATION_SOURCE_FILES,
     *INTEGRATION_FACADE_FILES,
     *ARTIFACT_IO_SOURCE_FILES,
+    *BENCHMARK_EXECUTION_SOURCE_FILES,
     "src/milai_lab/methods/request_context.py",
 )

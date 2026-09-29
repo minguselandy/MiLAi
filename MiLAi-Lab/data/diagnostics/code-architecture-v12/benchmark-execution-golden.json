@@ -1,0 +1,1086 @@
+{
+  "kind": "MILAI_V12_BENCHMARK_EXECUTION_GOLDEN_V1",
+  "baseline_source_commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
+  "fixture_metadata": {
+    "source": "synthetic manifest, ledger events and stdlib dependency/git fixture",
+    "fixed_inputs": {
+      "temp_root": "<TMP>",
+      "dependency_versions": "synthetic",
+      "source_git_sha": "ffffffffffffffffffffffffffffffffffffffff",
+      "python_version": "synthetic-python-version"
+    },
+    "real_services": [],
+    "downloads": [],
+    "runtime_clock_patch": false
+  },
+  "contracts": {
+    "lifecycle": {
+      "sequence_completed_completed": [
+        {
+          "operation": "prepare",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_completed_completed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "out_of_order",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ORDER"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_first",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "first",
+              "unknown": [
+                "kept"
+              ]
+            },
+            "<TMP>/sequence_completed_completed/run/jobs/first"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_first",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"COMPLETED\",\n      \"output\": \"<TMP>/sequence_completed_completed/run/jobs/first/result.json\",\n      \"error_type\": null\n    }\n  },\n  \"status\": \"PARTIALLY_COMPLETED\"\n}\n"
+          }
+        },
+        {
+          "operation": "already_attempted",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ALREADY_ATTEMPTED"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"COMPLETED\",\n      \"output\": \"<TMP>/sequence_completed_completed/run/jobs/first/result.json\",\n      \"error_type\": null\n    }\n  },\n  \"status\": \"PARTIALLY_COMPLETED\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_second",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "COMPLETED",
+                  "output": "<TMP>/sequence_completed_completed/run/jobs/first/result.json",
+                  "error_type": null
+                },
+                "second": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "second",
+              "owner": "synthetic-owner"
+            },
+            "<TMP>/sequence_completed_completed/run/jobs/second"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"COMPLETED\",\n      \"output\": \"<TMP>/sequence_completed_completed/run/jobs/first/result.json\",\n      \"error_type\": null\n    },\n    \"second\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_second",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"COMPLETED\",\n      \"output\": \"<TMP>/sequence_completed_completed/run/jobs/first/result.json\",\n      \"error_type\": null\n    },\n    \"second\": {\n      \"status\": \"COMPLETED\",\n      \"output\": null,\n      \"error_type\": null\n    }\n  },\n  \"status\": \"COMPLETED\"\n}\n"
+          }
+        },
+        {
+          "operation": "reprepare_keeps_finished_manifest",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_completed_completed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_completed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"COMPLETED\",\n      \"output\": \"<TMP>/sequence_completed_completed/run/jobs/first/result.json\",\n      \"error_type\": null\n    },\n    \"second\": {\n      \"status\": \"COMPLETED\",\n      \"output\": null,\n      \"error_type\": null\n    }\n  },\n  \"status\": \"COMPLETED\"\n}\n"
+          }
+        }
+      ],
+      "sequence_failed_completed": [
+        {
+          "operation": "prepare",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_failed_completed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "out_of_order",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ORDER"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_first",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "first",
+              "unknown": [
+                "kept"
+              ]
+            },
+            "<TMP>/sequence_failed_completed/run/jobs/first"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_first",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_completed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    }\n  },\n  \"status\": \"FAILED\"\n}\n"
+          }
+        },
+        {
+          "operation": "already_attempted",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ALREADY_ATTEMPTED"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_completed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    }\n  },\n  \"status\": \"FAILED\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_second",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "FAILED",
+                  "output": "<TMP>/sequence_failed_completed/run/jobs/first/result.json",
+                  "error_type": "TimeoutError"
+                },
+                "second": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "second",
+              "owner": "synthetic-owner"
+            },
+            "<TMP>/sequence_failed_completed/run/jobs/second"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_completed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_second",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_completed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"COMPLETED\",\n      \"output\": null,\n      \"error_type\": null\n    }\n  },\n  \"status\": \"COMPLETED_WITH_FAILURES\"\n}\n"
+          }
+        },
+        {
+          "operation": "reprepare_keeps_finished_manifest",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_failed_completed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_completed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_completed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"COMPLETED\",\n      \"output\": null,\n      \"error_type\": null\n    }\n  },\n  \"status\": \"COMPLETED_WITH_FAILURES\"\n}\n"
+          }
+        }
+      ],
+      "sequence_failed_failed": [
+        {
+          "operation": "prepare",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_failed_failed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "out_of_order",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ORDER"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_first",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "first",
+              "unknown": [
+                "kept"
+              ]
+            },
+            "<TMP>/sequence_failed_failed/run/jobs/first"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_first",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_failed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    }\n  },\n  \"status\": \"FAILED\"\n}\n"
+          }
+        },
+        {
+          "operation": "already_attempted",
+          "outcome": {
+            "exception": "ValueError",
+            "message": "UNIFIED_BENCHMARK_JOB_ALREADY_ATTEMPTED"
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_failed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    }\n  },\n  \"status\": \"FAILED\"\n}\n"
+          }
+        },
+        {
+          "operation": "start_second",
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "FAILED",
+                  "output": "<TMP>/sequence_failed_failed/run/jobs/first/result.json",
+                  "error_type": "TimeoutError"
+                },
+                "second": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "second",
+              "owner": "synthetic-owner"
+            },
+            "<TMP>/sequence_failed_failed/run/jobs/second"
+          ],
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_failed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+          }
+        },
+        {
+          "operation": "finish_second",
+          "outcome": {
+            "returned": null
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_failed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"FAILED\",\n      \"output\": null,\n      \"error_type\": \"ValueError\"\n    }\n  },\n  \"status\": \"COMPLETED_WITH_FAILURES\"\n}\n"
+          }
+        },
+        {
+          "operation": "reprepare_keeps_finished_manifest",
+          "outcome": {
+            "returned": {
+              "status": "PREPARED_ZERO_MODEL",
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "manifest_path": "<TMP>/sequence_failed_failed/run/run_manifest.json",
+              "identity_sha256": "83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309"
+            }
+          },
+          "files": {
+            "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/sequence_failed_failed/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+            "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"FAILED\",\n      \"output\": \"<TMP>/sequence_failed_failed/run/jobs/first/result.json\",\n      \"error_type\": \"TimeoutError\"\n    },\n    \"second\": {\n      \"status\": \"FAILED\",\n      \"output\": null,\n      \"error_type\": \"ValueError\"\n    }\n  },\n  \"status\": \"COMPLETED_WITH_FAILURES\"\n}\n"
+          }
+        }
+      ],
+      "runtime_dirty": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_RUNTIME_DIRTY"
+        },
+        "files": {
+          "run/existing.txt": "retain"
+        }
+      },
+      "identity_change": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_IDENTITY_CHANGED"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/identity_change/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+        }
+      },
+      "job_list_change": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_IDENTITY_CHANGED"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/job_list_change/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+        }
+      },
+      "prepared_digest_change": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_IDENTITY_CHANGED"
+        },
+        "files": {
+          "prepared.json": "{\n  \"identity_sha256\": \"wrong\",\n  \"unknown\": \"keep\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+        }
+      },
+      "unknown_job": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_JOB_UNKNOWN"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/unknown_job/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+        }
+      },
+      "duplicate_job": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_JOB_UNKNOWN"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    }\n  ],\n  \"manifest_path\": \"<TMP>/duplicate_job/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    }\n  ],\n  \"attempts\": {},\n  \"status\": \"PREPARED_ZERO_MODEL\"\n}\n"
+        }
+      },
+      "started_predecessor": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_JOB_ORDER"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/started_predecessor/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+        }
+      },
+      "dirty_job_root": {
+        "outcome": {
+          "exception": "ValueError",
+          "message": "UNIFIED_BENCHMARK_JOB_RUNTIME_DIRTY"
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/dirty_job_root/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/jobs/first/preserved.txt": "existing job data",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\"\n}\n"
+        }
+      },
+      "unknown_fields": {
+        "outcome": {
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING",
+              "unknown_manifest": {
+                "retain": "原文"
+              }
+            },
+            {
+              "job_id": "first",
+              "unknown": [
+                "kept"
+              ]
+            },
+            "<TMP>/unknown_fields/run/jobs/first"
+          ]
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/unknown_fields/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"STARTED\"\n    }\n  },\n  \"status\": \"RUNNING\",\n  \"unknown_manifest\": {\n    \"retain\": \"原文\"\n  }\n}\n"
+        }
+      },
+      "arbitrary_finish_status": {
+        "outcome": {
+          "returned": [
+            {
+              "identity": {
+                "run_id": "synthetic-run",
+                "unknown": {
+                  "retained": true
+                },
+                "source": "fixed"
+              },
+              "jobs": [
+                {
+                  "job_id": "first",
+                  "unknown": [
+                    "kept"
+                  ]
+                },
+                {
+                  "job_id": "second",
+                  "owner": "synthetic-owner"
+                }
+              ],
+              "attempts": {
+                "first": {
+                  "status": "STARTED"
+                }
+              },
+              "status": "RUNNING"
+            },
+            {
+              "job_id": "first",
+              "unknown": [
+                "kept"
+              ]
+            },
+            "<TMP>/arbitrary_finish_status/run/jobs/first"
+          ],
+          "finish": {
+            "returned": null
+          }
+        },
+        "files": {
+          "prepared.json": "{\n  \"status\": \"PREPARED_ZERO_MODEL\",\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"manifest_path\": \"<TMP>/arbitrary_finish_status/run/run_manifest.json\",\n  \"identity_sha256\": \"83ddbe82a9bbb9ddadbc111b7c7920467f8e4ead49bea9c06701333947da9309\"\n}\n",
+          "run/run_manifest.json": "{\n  \"identity\": {\n    \"run_id\": \"synthetic-run\",\n    \"unknown\": {\n      \"retained\": true\n    },\n    \"source\": \"fixed\"\n  },\n  \"jobs\": [\n    {\n      \"job_id\": \"first\",\n      \"unknown\": [\n        \"kept\"\n      ]\n    },\n    {\n      \"job_id\": \"second\",\n      \"owner\": \"synthetic-owner\"\n    }\n  ],\n  \"attempts\": {\n    \"first\": {\n      \"status\": \"synthetic_external_status\",\n      \"output\": null,\n      \"error_type\": null\n    }\n  },\n  \"status\": \"PARTIALLY_COMPLETED\"\n}\n"
+        }
+      }
+    },
+    "costs": {
+      "missing_trace": {
+        "roles": {},
+        "mcp_inclusive_observation_costs": {},
+        "physical_io": null,
+        "store_net_cpu_ns": null,
+        "timing_scope": "transport/service/material timings overlap; not additive",
+        "ledger_owner": "single runtime RunBudget; no second charge here"
+      },
+      "input_trace_bytes": "{\"event\": \"vllm_response\", \"path\": \"chat/completions\", \"usage\": {\"total_tokens\": 9}}\n{\"event\": \"vllm_error\", \"path\": \"chat/completions\", \"usage\": null}\n{\"event\": \"vllm_response\", \"path\": \"embeddings\", \"usage\": {\"total_tokens\": true}}\n{\"event\": \"benchmark_phase\", \"phase\": \"formation\"}\n{\"event\": \"vllm_response\", \"path\": \"embeddings\", \"usage\": {\"total_tokens\": 5}}\n{\"event\": \"vllm_response\", \"path\": \"chat/completions\", \"usage\": {\"total_tokens\": -2}}\n{\"event\": \"benchmark_phase\", \"phase\": \"reader\"}\n{\"event\": \"vllm_error\", \"path\": \"embeddings\", \"usage\": {}}\n{\"event\": \"langmem_mcp\", \"kind\": \"http\", \"cpu_ns\": 11, \"wall_ns\": 21, \"request_body\": \"请求\", \"response_body\": \"response\"}\n{\"event\": \"langmem_mcp\", \"kind\": \"resource_result\", \"cpu_ns\": 3, \"wall_ns\": 8, \"logical_bytes\": 13}\n{\"event\": \"langmem_mcp\", \"kind\": \"unaggregated\", \"unknown\": true}\n{\"event\": \"unknown_event\", \"usage\": {\"total_tokens\": 9000}}\n{\"event\": \"benchmark_backend_artifact_io\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"benchmark_backend_artifact_io\", \"unknown\": \"retain as observation\"}\n{\"event\": \"mem0_native_runtime\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"mem0_native_runtime\", \"unknown\": \"retain as observation\"}\n{\"event\": \"mem0_benchmark_archive_add\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"mem0_benchmark_archive_add\", \"unknown\": \"retain as observation\"}\n{\"event\": \"mem0_benchmark_search\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"mem0_benchmark_search\", \"unknown\": \"retain as observation\"}\n{\"event\": \"mem0_benchmark_snapshot\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"mem0_benchmark_snapshot\", \"unknown\": \"retain as observation\"}\n{\"event\": \"persistent_memory_checkpoint_read\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"persistent_memory_checkpoint_read\", \"unknown\": \"retain as observation\"}\n{\"event\": \"lsa_history_checkpoint_read\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"lsa_history_checkpoint_read\", \"unknown\": \"retain as observation\"}\n{\"event\": \"lsa_history_summary_result\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"lsa_history_summary_result\", \"unknown\": \"retain as observation\"}\n{\"event\": \"benchmark_summary_update\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"benchmark_summary_update\", \"unknown\": \"retain as observation\"}\n{\"event\": \"benchmark_raw_index\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"benchmark_raw_index\", \"unknown\": \"retain as observation\"}\n{\"event\": \"benchmark_raw_retrieval\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"benchmark_raw_retrieval\", \"unknown\": \"retain as observation\"}\n{\"event\": \"simplemem_observation\", \"calls\": 2, \"logical_bytes\": 17, \"cpu_ns\": 7, \"wall_ns\": 30}\n{\"event\": \"simplemem_observation\", \"unknown\": \"retain as observation\"}\n",
+      "aggregated": {
+        "roles": {
+          "task_host": {
+            "requests": 2,
+            "known_tokens": 9,
+            "unknown_usage": 1
+          },
+          "embedding:task_host": {
+            "requests": 1,
+            "known_tokens": 0,
+            "unknown_usage": 1
+          },
+          "embedding:formation": {
+            "requests": 1,
+            "known_tokens": 5,
+            "unknown_usage": 0
+          },
+          "formation": {
+            "requests": 1,
+            "known_tokens": -2,
+            "unknown_usage": 0
+          },
+          "embedding:reader": {
+            "requests": 1,
+            "known_tokens": 0,
+            "unknown_usage": 1
+          }
+        },
+        "mcp_inclusive_observation_costs": {
+          "http": {
+            "calls": 1,
+            "cpu_ns": 11,
+            "wall_ns": 21,
+            "logical_bytes": 14
+          },
+          "resource_result": {
+            "calls": 1,
+            "cpu_ns": 3,
+            "wall_ns": 8,
+            "logical_bytes": 13
+          }
+        },
+        "backend_observation_costs": {
+          "benchmark_backend_artifact_io": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "mem0_native_runtime": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "mem0_benchmark_archive_add": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "mem0_benchmark_search": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "mem0_benchmark_snapshot": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "persistent_memory_checkpoint_read": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "lsa_history_checkpoint_read": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "lsa_history_summary_result": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "benchmark_summary_update": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "benchmark_raw_index": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "benchmark_raw_retrieval": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          },
+          "simplemem_observation": {
+            "observations": 2,
+            "calls": 2,
+            "logical_bytes": 17,
+            "cpu_ns": 7,
+            "wall_ns": 30
+          }
+        },
+        "physical_io": null,
+        "store_net_cpu_ns": null,
+        "timing_scope": "transport/service/material timings overlap; not additive",
+        "ledger_owner": "single runtime RunBudget; no second charge here"
+      },
+      "invalid_json": {
+        "exception": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "missing_mcp_fields": {
+        "exception": "KeyError",
+        "message": "'cpu_ns'"
+      }
+    },
+    "config": {
+      "valid": {
+        "returned": null
+      },
+      "input": {
+        "host": {
+          "tool_mode": "native",
+          "max_tokens": 4096,
+          "max_calls": 12,
+          "temperature": 0,
+          "enable_thinking": false
+        },
+        "capacity": {
+          "enable_thinking": false
+        },
+        "budget_path": "<TMP>/budget.json",
+        "memory_contract": "strict",
+        "memory_transport": "mcp_http",
+        "unknown": {
+          "retain": true
+        }
+      },
+      "host_tool_mode": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "host_max_tokens": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "host_max_calls": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "host_temperature": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "host_enable_thinking": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "budget_path": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "memory_contract": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "memory_transport": {
+        "exception": "ValueError",
+        "message": "UNIFIED_BENCHMARK_CONFIG_INVALID"
+      },
+      "missing_required": {
+        "exception": "KeyError",
+        "message": "'tool_mode'"
+      }
+    },
+    "source_identity": {
+      "source_files": {
+        "src/milai_lab/z.py": "z = 1\n",
+        "src/milai_lab/contracts/a.py": "a = 2\n",
+        "tools/run_unified_benchmarks.py": "pass\n",
+        "pyproject.toml": "[project]\n",
+        "uv.lock": "synthetic lock\n",
+        "data/locks/unified-v8-v9-native-transport-20260928.requirements.txt": "synthetic==1\n"
+      },
+      "original": {
+        "source_sha256": {
+          "src/milai_lab/contracts/a.py": "1382c01db535c28d9d2e3137ea7b6ff14ed03537bc4dab2e8d40182bd48bbd69",
+          "src/milai_lab/z.py": "1bc01ef3687ccfe07da22018dfe7851781c442c8b4ec7bd718d0c1f145529ad1",
+          "tools/run_unified_benchmarks.py": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+          "pyproject.toml": "702a81c3836edef2d0ba11d2353fb6dabc777150a7ca83ea0d9e9a70313feabb"
+        },
+        "dependency_lock_sha256": "151552a8cc36dbb237e54f3a79629a36bee18d17c1a1b54f297be14defc2751b",
+        "native_transport_requirements_sha256": "27b1be46a78a0561541da12d8125a921e1b14244f684e6b59ddccf5768239b62",
+        "dependencies": {
+          "openai": "synthetic-openai",
+          "litellm": null,
+          "langchain-core": null,
+          "langgraph": null,
+          "langmem": null,
+          "mcp": null,
+          "httpx": "synthetic-httpx",
+          "transformers": null,
+          "tokenizers": null,
+          "psycopg": null,
+          "jsonschema": "synthetic-jsonschema"
+        },
+        "python": "synthetic-python-version",
+        "environment_packages": {
+          "a-first": "1",
+          "z-last": "2"
+        },
+        "git_sha": "ffffffffffffffffffffffffffffffffffffffff"
+      },
+      "tampered_source": {
+        "source_sha256": {
+          "src/milai_lab/contracts/a.py": "1382c01db535c28d9d2e3137ea7b6ff14ed03537bc4dab2e8d40182bd48bbd69",
+          "src/milai_lab/z.py": "1636baf59137ea08b410b795143377a892f1d6d41725aee1d7862094443e0b7c",
+          "tools/run_unified_benchmarks.py": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+          "pyproject.toml": "702a81c3836edef2d0ba11d2353fb6dabc777150a7ca83ea0d9e9a70313feabb"
+        },
+        "dependency_lock_sha256": "151552a8cc36dbb237e54f3a79629a36bee18d17c1a1b54f297be14defc2751b",
+        "native_transport_requirements_sha256": "27b1be46a78a0561541da12d8125a921e1b14244f684e6b59ddccf5768239b62",
+        "dependencies": {
+          "openai": "synthetic-openai",
+          "litellm": null,
+          "langchain-core": null,
+          "langgraph": null,
+          "langmem": null,
+          "mcp": null,
+          "httpx": "synthetic-httpx",
+          "transformers": null,
+          "tokenizers": null,
+          "psycopg": null,
+          "jsonschema": "synthetic-jsonschema"
+        },
+        "python": "synthetic-python-version",
+        "environment_packages": {
+          "a-first": "1",
+          "z-last": "2"
+        },
+        "git_sha": "ffffffffffffffffffffffffffffffffffffffff"
+      },
+      "optional_native_lock_absent": {
+        "source_sha256": {
+          "src/milai_lab/contracts/a.py": "1382c01db535c28d9d2e3137ea7b6ff14ed03537bc4dab2e8d40182bd48bbd69",
+          "src/milai_lab/z.py": "1636baf59137ea08b410b795143377a892f1d6d41725aee1d7862094443e0b7c",
+          "tools/run_unified_benchmarks.py": "9f56e761d79bfdb34304a012586cb04d16b435ef6130091a97702e559260a2f2",
+          "pyproject.toml": "702a81c3836edef2d0ba11d2353fb6dabc777150a7ca83ea0d9e9a70313feabb"
+        },
+        "dependency_lock_sha256": "151552a8cc36dbb237e54f3a79629a36bee18d17c1a1b54f297be14defc2751b",
+        "native_transport_requirements_sha256": null,
+        "dependencies": {
+          "openai": "synthetic-openai",
+          "litellm": null,
+          "langchain-core": null,
+          "langgraph": null,
+          "langmem": null,
+          "mcp": null,
+          "httpx": "synthetic-httpx",
+          "transformers": null,
+          "tokenizers": null,
+          "psycopg": null,
+          "jsonschema": "synthetic-jsonschema"
+        },
+        "python": "synthetic-python-version",
+        "environment_packages": {
+          "a-first": "1",
+          "z-last": "2"
+        },
+        "git_sha": "ffffffffffffffffffffffffffffffffffffffff"
+      },
+      "git_calls": [
+        {
+          "command": [
+            "/usr/bin/git",
+            "rev-parse",
+            "HEAD"
+          ],
+          "cwd": "<TMP>/synthetic_source",
+          "text": true
+        },
+        {
+          "command": [
+            "/usr/bin/git",
+            "rev-parse",
+            "HEAD"
+          ],
+          "cwd": "<TMP>/synthetic_source",
+          "text": true
+        },
+        {
+          "command": [
+            "/usr/bin/git",
+            "rev-parse",
+            "HEAD"
+          ],
+          "cwd": "<TMP>/synthetic_source",
+          "text": true
+        }
+      ]
+    }
+  }
+}

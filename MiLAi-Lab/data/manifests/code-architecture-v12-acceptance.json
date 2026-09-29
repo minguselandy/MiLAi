@@ -144,7 +144,7 @@
     "S1": "COMPLETE_LOCAL_CHECKS",
     "S2": "COMPLETE_LOCAL_CHECKS",
     "S3": "COMPLETE_LOCAL_CHECKS",
-    "S4": "PENDING",
+    "S4": "COMPLETE_LOCAL_CHECKS",
     "S5": "PENDING",
     "S6": "PENDING",
     "S7": "PENDING"
@@ -251,7 +251,17 @@
       "status": "LOCAL_PASS_REMOTE_CI_PENDING",
       "source_commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9",
       "tests_passed": 45,
-      "note": "Full native replay uses local pinned assets; portable External CI cohort is separately wired. Original timing mismatches and failed clock supplements retained."
+      "note": "Full native replay uses local pinned assets; portable External CI cohort is separately wired. Original timing mismatches and failed clock supplements retained.",
+      "commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405"
+    },
+    "S4": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s4-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
+      "tests_passed": 52,
+      "golden_sha256": "f5dd86e7ec77e56109671883b10c5ba9f4ce13f05e1ea967a7c0a9c41844e1b7",
+      "note": "Shared lifecycle equivalence proved; C05 remains pending S6 remaining runner-edge ownership audit."
     }
   }
 }

@@ -57,6 +57,9 @@ SHA256 `755e77811bb1d7089970da283498b79630c2e951847983df3d326509e72cef43`。
 
 - Mem0 相关 7 项、SimpleMem 相关 13 项、可移植接口 8 项、源码/身份结构检查 17 项通过，共 45 项。
 - Ruff、Core/Discovery/External mypy（33/148/5 个源文件）、两项 boundary、verification matrix 通过。
+  Ruff 的覆盖限制在 S4 发现：最后调整确定性 fixture 文件名后，只重查了 probe 文件，遗漏
+  `test_simplemem_contracts.py` 的一行超长字符串；因此 S3 的全量 Ruff 通过不覆盖这次最后的文件名调整。
+  S4 以纯换行修复并重新检查，行为与 SDK 重放结果不受影响。
 - 离线 sdist → wheel、新无依赖 Core 安装检查通过；Mem0/SimpleMem 分别借用已有依赖目录，
   从解包 sdist 的 helper/fixture 完整重放，所有加载的项目模块均验证来自新安装目录。
 

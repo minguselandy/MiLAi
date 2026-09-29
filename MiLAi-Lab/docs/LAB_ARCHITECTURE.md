@@ -34,6 +34,11 @@ Lab 内部按职责组织：
 外部集成使用底层 `harness/artifact_io.py` 处理共享 JSON 制品；该模块只有标准库依赖，
 不把研究编排带入集成层。原 harness 入口继续导出相同 IO 函数。
 
+MERIT 与 MemSyco 共用的 manifest、prepare/start/finish、源码身份和费用聚合位于
+`harness/benchmark_execution.py`，其现有字典结构由 `contracts/benchmark.py` 描述。
+MemSyco 不再为这些流程导入 MERIT runner；原生数据、业务世界与 scorer 仍由各自 runner 处理。
+合同比较与工程验证见 [S4记录](CODE_ARCHITECTURE_V12_S4_RESULTS.md)。
+
 ## 应用能力与实验编排
 
 本次从 `runners/langmem_foundation.py` 和 `runners/langmem_application.py` 提取复用能力。
