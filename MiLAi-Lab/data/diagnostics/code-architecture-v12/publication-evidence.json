@@ -1,0 +1,59 @@
+{
+  "kind": "MILAI_V12_VERIFIED_IMPLEMENTATION_PUBLICATION",
+  "date": "2026-09-30",
+  "PR": "https://github.com/minguselandy/MiLAi/pull/76",
+  "implementation_head": "a944742ce786ac693c08ac69c4377f82a39afd09",
+  "merge_commit": "48ad5439666d5398dff588b052dd80bd04e4ba4b",
+  "merge_method": "merge; nine commits retained; no squash, force push or branch deletion",
+  "remote_main_verified": "48ad5439666d5398dff588b052dd80bd04e4ba4b",
+  "Fast": {
+    "run": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333",
+    "head_sha": "a944742ce786ac693c08ac69c4377f82a39afd09",
+    "event": "pull_request",
+    "conclusion": "success",
+    "jobs": {
+      "Lab fast": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505445718",
+        "conclusion": "success"
+      },
+      "Foundation": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505445744",
+        "conclusion": "success"
+      },
+      "External adapter": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505445821",
+        "conclusion": "success"
+      },
+      "Fast aggregate": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109509507920",
+        "conclusion": "success"
+      },
+      "Fail-fast": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505359331",
+        "conclusion": "success"
+      },
+      "Product identity": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505445809",
+        "conclusion": "success"
+      },
+      "Conformance": {
+        "url": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333/job/109505496315",
+        "conclusion": "success"
+      }
+    },
+    "classification": "success",
+    "irrelevant_Product_Archive_jobs": "skipped; not counted as pass"
+  },
+  "first_failed_run": "https://github.com/minguselandy/MiLAi/actions/runs/36595782771",
+  "failure_and_repair": "ci-repair-evidence.json",
+  "merged_source_hashes_match_S7_and_CI_repair": true,
+  "historical_files_unchanged": 190,
+  "protected_Product_Archive_trees_unchanged": true,
+  "ledger_sha256": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+  "new_semantic_calls": {
+    "Host": 0,
+    "embedding": 0,
+    "Judge": 0
+  },
+  "limits": "Fast only. No claim of Full composition or semantic effectiveness. S7 package evidence precedes annotation-only CLI repair; runtime package modules unchanged. Documentation closeout follows code merge and does not change validated implementation."
+}

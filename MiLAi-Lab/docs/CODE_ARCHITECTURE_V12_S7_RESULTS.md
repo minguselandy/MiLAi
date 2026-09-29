@@ -1,6 +1,6 @@
 # v12 S7：自动边界与最终验收
 
-状态：本地工程验收完成，远端 Fast CI 与发布合并待完成。源码基线为
+状态：本地工程验收与远端 Fast CI 完成，PR #76 已合并。源码基线为
 `c8b7d81af54df65c4a74b720e7af1e359864cc4b`，S0–S6 均已保留独立提交。
 语义实验继续暂停，Product NO_GO。
 
@@ -42,7 +42,7 @@ baseline 目录同时包含真实配方、观察设施与兼容入口，不能�
   记录中的 8 次初始失败保留。解析使用有限词法作用域，未知重绑定拒绝。
 
 不重跑未受影响的 S3/S5/S6 SDK 与完整回放，不以机械检查宣称新增效果收益。
-十五项判据中十四项本地通过；C13 必须由实际发布实现对应的 Fast CI 验证。
+本地先通过十四项判据；C13 随修复后实现的远端 Fast CI 通过而完成。
 
 ## 源码、安装与保留证据
 
@@ -83,4 +83,6 @@ Foundation 因 CLI `run_unified_benchmarks.py` 对 TypedDict 使用动态键索�
 实际 CI 五个目标的 mypy 命令与局部 Ruff 通过；擦除注解后函数 AST 相同，36 个模拟 CLI
 场景的 stdout/stderr/调用/异常一致。未运行真实 benchmark，没有新增运行包模块变更，未重复构建。
 [修复证据](../data/diagnostics/code-architecture-v12/ci-repair-evidence.json)保留首失败、修复及验证范围。
-C13 仍等待修复后提交的完整 Fast CI，首轮失败不记为通过。
+修复提交 `a944742ce786ac693c08ac69c4377f82a39afd09` 的 [Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36597268333) 全部必需组及汇总门禁通过。
+[PR #76](https://github.com/minguselandy/MiLAi/pull/76) 已合并为 `48ad5439666d5398dff588b052dd80bd04e4ba4b`；C13 完成，首轮失败仍保留。
+精确 job、实现身份及合并后核对见[发布证据](../data/diagnostics/code-architecture-v12/publication-evidence.json)。

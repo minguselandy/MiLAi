@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v12 代码组织与 GitHub 发布 | Goal active，本地完成、发布待验 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
+| v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
 | R2 执行保护/恢复 | 工程已实现；真实验证失败且未完成 | [暂停详报](MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md) |
@@ -21,11 +21,11 @@
 详细合并 SHA、兼容修复与代码入口见[合并记录](GITHUB_MERGE_AND_STRUCTURE_20260929.md)。
 本次合并和导航整理不恢复实验，以下研究限制保持。
 
-后续 v12 从 `cca2fd9` 启动。S0 文档提交为 `19339bff`，S1 公共合同与请求呈现提交为
-`02dfacdc`，S2 通用记忆服务提交为 `379ad45e`，均已通过本地工程检查；
-S3 外部集成提交为 `5aa61b8d`，同样通过本地检查。上述提交尚未发布到远端 main；
-S4 benchmark 公共执行流程提交为 `2bc50583`，已通过本地检查；S5 提交为 `96a6ce17`，已通过本地检查；S6 已通过本地检查并提交为 `c8b7d81a`；S7 已完成本地门禁与包验证。
-最终发布与受影响 Fast CI 仍待完成，不能使用上一轮 CI 代替本轮验收。
+v12 从 `cca2fd9` 启动，S0–S7 与一项 CLI 类型修复共九个提交保留于
+[PR #76](https://github.com/minguselandy/MiLAi/pull/76)，已合并为 `48ad5439666d5398dff588b052dd80bd04e4ba4b`。
+实现 head `a944742ce786ac693c08ac69c4377f82a39afd09` 的 [Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36597268333) 全部受影响检查通过。
+[代码结构总体报告](CODE_ARCHITECTURE_V12_RESULTS.md)记录归属、兼容限制、各阶段证据和首轮 CI 失败。
+本次文档归档不修改已验收实现，也不恢复研究实验。
 
 ## 当前已知限制
 
