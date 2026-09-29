@@ -2,6 +2,42 @@
 
 ## Current scope and authority
 
+The v7 first slice is now executed and closed as **INCONCLUSIVE** with native **BLOCKED_ENVIRONMENT**.
+Follow the [v7 overall report](docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md),
+[execution record](docs/MILAI_DEVELOPMENT_EXPERIMENT_EXECUTION_V7_20260928.md), and
+[requirement audit](data/manifests/development-experiment-v7-requirement-audit-20260928.json).
+P0 read the full plan/review, preserved four v6 counterexamples and verified deployed vLLM 0.27.1
+without auto tool-choice/parser. P1's common projection, native capacity and strict execution
+checks are complete; engineering tests do not establish native model efficacy.
+All twelve runnable frozen J jobs finished once at B 2f30c14c: 26 messages, 22 sessions,
+92/92 task obligations (52 current, 8 later use, 32 persistent), 26 diagnostic observations.
+N's twelve planned jobs remain unrun and in the denominator. Six structures and two repeats
+are not twelve independent tasks. No J/N effect estimate or stable unseen claim is supported.
+Actual effects: 8 CREATE, 2 same-ID UPDATE, 2 reserve_and_label and 2 live get_reservation.
+New costs: 38 generation calls / 49,456 generation tokens / 294 embedding tokens.
+Continuous ledger: 3301 generation calls / 4,205,203 generation tokens / 23,570 embedding tokens;
+preserve all old history. Separate reasoning tokens remain unknown.
+C a1c6c683 only repairs a missing local-tokenizer test gate and matrix ownership; runtime,
+recipes and E1 freeze remain unchanged. Local checks passed; exact remote status is recorded
+in the execution record and GitHub PR checks. Do not repeat model runs for publication.
+
+This closes P0/P1/runnable E1/P5 for the plan-permitted environment-limited conclusion.
+The actual Goal may close only after final report publication and remote verification.
+No further N, E2–E6, second-family, prompt variants, downloads, deployments, object adapter,
+synchronous writer, State platform or selector follows automatically. Broader research remains
+NOT_ACHIEVED, stable unseen benefit unestablished, Product NO_GO. A new explicit task is required.
+The original plan DESIGN_ONLY and review research-only bytes are preserved; historical ACTIVE
+text is not an instruction to resume. v6 failed compact results are unchanged.
+
+Source A 37d48577 and execution B 2f30c14c are on draft PR71, stacked on PR70 @ c6f335fe.
+PR70 and PR71 remain draft/open; main remains 07cc364f. No merge authorization follows from v7.
+Preserve the original main tree's nine untracked plan/review files, v27 draft, all prior WIP,
+failed attempts, raw logs and continuous ledger. Root owns closeout docs, evidence and real calls;
+reused Sol xhigh owns source/config/tests, reused Luna high owns Git publication. No model role
+or thinking setting may be silently changed.
+
+The following v6 record remains historical:
+
 The current actual user Goal explicitly authorizes the complete [NEXT_DEVELOPMENT v6 plan](docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md).
 Follow the [v6 execution record](docs/MILAI_NEXT_DEVELOPMENT_EXECUTION_GOAL_V6_20260928.md).
 S0 PR69 is now merged at07cc364f by separate explicit user instruction. S1's explicit RequestContext,

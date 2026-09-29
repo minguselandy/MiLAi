@@ -1,0 +1,764 @@
+{
+  "kind": "MILAI_V7_P5_REQUIREMENT_AUDIT",
+  "scope": "Authorized P0/P1/E1 slice and mandatory P5 closure; not all conditional branches",
+  "execution_status": "CLOSED_INCONCLUSIVE",
+  "native_status": "BLOCKED_ENVIRONMENT",
+  "research_goal": "NOT_ACHIEVED",
+  "product": "NO_GO",
+  "requirement_count": 39,
+  "requirements": [
+    {
+      "id": "authority_identity",
+      "plan_sections": [
+        "1.1",
+        "1.2",
+        "4"
+      ],
+      "status": "COMPLETE",
+      "finding": "实际 v7 Goal 授权 P0/P1/E1 和 P5 收口；完整阅读 1055 行计划与 487 行复盘并保留原字节。基底 c6f335fe，方法 A，运行 B。PR71 叠于 PR70，均为 draft，无合并授权。",
+      "evidence": [
+        "plan",
+        "review",
+        "protocol",
+        "overall"
+      ]
+    },
+    {
+      "id": "preserve_prior_failures",
+      "plan_sections": [
+        "1.3",
+        "1.4",
+        "5.3",
+        "5.4",
+        "11.1"
+      ],
+      "status": "COMPLETE",
+      "finding": "保留四类 v6 原始失败链及实际世界评分修正；未改旧分数、guide、trace 或 WIP，未重新搜索提示措辞。",
+      "evidence": [
+        "failure_chain",
+        "overall"
+      ]
+    },
+    {
+      "id": "p0_model_assets",
+      "plan_sections": [
+        "5.2",
+        "5.5"
+      ],
+      "status": "COMPLETE_WITH_UNKNOWN",
+      "finding": "核对真实模型、服务版本、量化及部署与计数用 config/tokenizer/template 哈希。完整权重 revision 未独立取得，明确为 unknown。",
+      "evidence": [
+        "capabilities"
+      ]
+    },
+    {
+      "id": "p0_protocol",
+      "plan_sections": [
+        "5.2",
+        "6.5",
+        "12.5"
+      ],
+      "status": "COMPLETE_NATIVE_ENVIRONMENT_BLOCKED",
+      "finding": "部署 vLLM 0.27.1 缺 auto-tool-choice/parser，安装源码确认没有原生自动工具输出。不发无效探测、不声称观察到 HTTP400、不改共享服务。",
+      "evidence": [
+        "capabilities",
+        "overall"
+      ]
+    },
+    {
+      "id": "p0_options_usage",
+      "plan_sections": [
+        "5.2",
+        "6.5"
+      ],
+      "status": "COMPLETE_WITH_UNKNOWN",
+      "finding": "seed 支持但未发送或修改；temperature=0、max_tokens=4096、容量 65536、non-thinking、串行 1。usage 和 provider ID 可核对，独立 reasoning tokens 为 unknown，不填零或重复计数。",
+      "evidence": [
+        "capabilities",
+        "results"
+      ]
+    },
+    {
+      "id": "p0_cost",
+      "plan_sections": [
+        "1.5",
+        "5.5"
+      ],
+      "status": "COMPLETE",
+      "finding": "只读 P0 没有 generation 或 embedding 调用，原连续账本保留。",
+      "evidence": [
+        "capabilities",
+        "results"
+      ]
+    },
+    {
+      "id": "p1_shared_projection",
+      "plan_sections": [
+        "6.1",
+        "6.2",
+        "6.3"
+      ],
+      "status": "COMPLETE_ENGINEERING",
+      "finding": "共用合法 RequestContext 投影后才选择编码；正文、owner、权限、工具合同一致，协议表示不同。原 graph/checkpoint/tool JSON 不变。",
+      "evidence": [
+        "engineering",
+        "p1_checks"
+      ]
+    },
+    {
+      "id": "p1_json_compatibility",
+      "plan_sections": [
+        "6.2",
+        "6.3",
+        "6.7",
+        "13.3"
+      ],
+      "status": "COMPLETE_ENGINEERING",
+      "finding": "131 个历史有序实际请求在 full/compact 回放中，经锁定 HTTPX 编码与 MockTransport 对比一致；86 项审计及 checkpoint hash 不变。没有原 socket 抓包，也没有新生成。",
+      "evidence": [
+        "engineering",
+        "p1_checks"
+      ]
+    },
+    {
+      "id": "p1_capacity",
+      "plan_sections": [
+        "6.5",
+        "13.3"
+      ],
+      "status": "COMPLETE_ENGINEERING",
+      "finding": "实际锁定 tokenizer/template 含原生工具目录进入容量和 delivery 核算；窄测覆盖通过、拒绝及旧邻接路径。",
+      "evidence": [
+        "p1_checks",
+        "ci_repair"
+      ]
+    },
+    {
+      "id": "p1_native_execution",
+      "plan_sections": [
+        "6.4",
+        "6.7",
+        "13.3"
+      ],
+      "status": "COMPLETE_ENGINEERING_ONLY",
+      "finding": "真实 ToolNode 配合 MockTransport/SQLite 验证无工具、单多工具、拒绝、续接、更新、删除后读、坏参数、截断、ID、partial 和 owner。未观察真实 native Host 效果。",
+      "evidence": [
+        "engineering",
+        "p1_checks"
+      ]
+    },
+    {
+      "id": "p1_scheduling",
+      "plan_sections": [
+        "6.4"
+      ],
+      "status": "COMPLETE_ENGINEERING",
+      "finding": "核对同步 FoundationScope max_concurrency=1 和 ToolNode executor.map；异步 gather 不承诺串行。E1 实际 HTTP 串行 1，无 forced tool choice 或把叙述当已执行。",
+      "evidence": [
+        "engineering",
+        "p1_checks",
+        "results"
+      ]
+    },
+    {
+      "id": "p1_compatibility_profile",
+      "plan_sections": [
+        "6.2",
+        "6.6",
+        "6.7"
+      ],
+      "status": "COMPLETE_ENGINEERING",
+      "finding": "显式 protocol_calibration_v7 仅支持本批所需 B0/current_request/compact/non-thinking；native 对历史 C/M1/ODR 等不兼容组合明确拒绝。旧 JSON 默认保持，未实现全矩阵。",
+      "evidence": [
+        "engineering",
+        "p1_checks",
+        "protocol"
+      ]
+    },
+    {
+      "id": "local_checks",
+      "plan_sections": [
+        "13.1",
+        "13.3"
+      ],
+      "status": "COMPLETE",
+      "finding": "56 个去重窄测及回放、审计、静态、矩阵、边界检查完成；原 harness/lint/type 失败保留并局部修复，没有重复全仓测试或无关构建。",
+      "evidence": [
+        "p1_checks",
+        "engineering"
+      ]
+    },
+    {
+      "id": "ci_asset_repair",
+      "plan_sections": [
+        "13.3",
+        "14.3"
+      ],
+      "status": "COMPLETE_LOCAL_REMOTE_SEPARATE",
+      "finding": "B 远端在 HostCapacity 构造前因本地 tokenizer 缺失失败。C 补既有 local_artifacts 标记、矩阵和仅目录缺失时 skip；真实资产、缺失分支、矩阵、Ruff、diff 检查通过，运行源码和输入不变。",
+      "evidence": [
+        "ci_repair",
+        "overall"
+      ]
+    },
+    {
+      "id": "e1_freeze_publish",
+      "plan_sections": [
+        "10.1",
+        "10.2",
+        "12.3",
+        "15.1"
+      ],
+      "status": "COMPLETE",
+      "finding": "先发布源码 A，再发布输入 B；随后 24 个空初始状态且隔离的 job prepare/freeze，锁定输入、scorer、顺序、160 个源码文件、服务、工具合同和账本。真实运行身份始终为 B。",
+      "evidence": [
+        "protocol",
+        "order",
+        "freeze",
+        "results"
+      ]
+    },
+    {
+      "id": "e1_scope_units",
+      "plan_sections": [
+        "10.2",
+        "11.5",
+        "12.4"
+      ],
+      "status": "COMPLETE",
+      "finding": "六结构 × 两重复 × J/N，共 24 job、52 消息。J12/26 消息/22 session 各一次；N12 保留环境阻断。无换题、重试或将 92 条义务当独立样本。",
+      "evidence": [
+        "order",
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "e1_real_chain",
+      "plan_sections": [
+        "10.2",
+        "11.3",
+        "15.3"
+      ],
+      "status": "COMPLETE_FOR_J",
+      "finding": "Root 核对原输入→实际 HTTP→工具/world→Store→后续 delivery→回答。J92/92；8 CREATE、2 同 ID UPDATE、2 reserve、2 live lookup；无假保存或假更新。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "native_comparison",
+      "plan_sections": [
+        "10.2",
+        "14.4"
+      ],
+      "status": "BLOCKED_ENVIRONMENT_INCONCLUSIVE",
+      "finding": "现有共享部署未启用原生自动解析，N12 事前未运行；不是算法失败或零成本成功。不能估计 J/N 改善或选择新默认协议。",
+      "evidence": [
+        "capabilities",
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "legal_no_write",
+      "plan_sections": [
+        "10.2",
+        "11.3"
+      ],
+      "status": "COMPLETE_FOR_J",
+      "finding": "只读、被拒绝的命令式引文、临时覆盖均覆盖；18 条禁止写记忆消息无 mutation attempt 或内容改变，真实业务效果未越权。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "later_persistence",
+      "plan_sections": [
+        "10.2",
+        "11.3",
+        "11.4"
+      ],
+      "status": "COMPLETE_FOR_J",
+      "finding": "当前 52/52、持久 32/32、后续 8/8。正确记录正文与 ID 确实进入后续 HTTP；8 条后续义务分布于 6 消息，存在相关性。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "frozen_offline_evaluation",
+      "plan_sections": [
+        "11.1",
+        "11.2"
+      ],
+      "status": "COMPLETE_WITH_REPORTED_FORMAT_ADAPTER",
+      "finding": "Root 人工完整链评分以事前冻结可见要求为准。离线复用 obligation_trace；原 diagnostic_obligations 层名需在内存副本映射为 diagnostic_completeness。保留首次格式报错，原文件、ID、依据、标记和分数不变。",
+      "evidence": [
+        "obligations",
+        "guide",
+        "compose_receipt",
+        "overall"
+      ]
+    },
+    {
+      "id": "runtime_gold_boundary",
+      "plan_sections": [
+        "3.6",
+        "11.2"
+      ],
+      "status": "COMPLETE",
+      "finding": "runtime 仅接收 config 与公开输入；rubric 和人工 review 留在 Root 离线。无 Judge、关键词 writer、gold 路由、正确 memory/world 预填或答案修补。",
+      "evidence": [
+        "protocol",
+        "results",
+        "engineering"
+      ]
+    },
+    {
+      "id": "seven_layers",
+      "plan_sections": [
+        "11.3",
+        "15.2"
+      ],
+      "status": "COMPLETE",
+      "finding": "动作、参数、执行、持久、当前回答、后续使用、资源分别报告；执行更多操作不自动加分。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "conditional_denominators",
+      "plan_sections": [
+        "11.4"
+      ],
+      "status": "COMPLETE",
+      "finding": "所需操作消息 12；实际必要调用参数正确 14/14，参数正确后的执行 14/14；持久内容正确且实际交付后的使用 8/8。端到端 92/92 单列，不相乘相关比例。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "safety_partial_limits",
+      "plan_sections": [
+        "11.6",
+        "13.3"
+      ],
+      "status": "COMPLETE_REPORT_NOT_REAL_CAPABILITY_CLAIM",
+      "finding": "E1 无安全事故；真正 partial/unknown 恢复和跨 owner 对抗 Host 场景未运行，P1 工程检查不能替代 E5 真实链。",
+      "evidence": [
+        "p1_checks",
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "complete_cost",
+      "plan_sections": [
+        "12.1",
+        "12.2",
+        "12.3"
+      ],
+      "status": "COMPLETE_WITH_UNKNOWN",
+      "finding": "38 个 provider ID，47,831 输入＋1,625 输出＝49,456 generation tokens；10 次 embedding/294 tokens。formation、maintenance、business、use 分开；零错误/重试。HTTP19.028s，运行器65.449s；本地读/审计开销实测。完整数据库 IO、GPU 小时及货币成本 unknown，开发 token 单列。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "continuous_ledger",
+      "plan_sections": [
+        "1.5",
+        "12.1"
+      ],
+      "status": "COMPLETE",
+      "finding": "账本 3263/4,155,747/23,276 → 3301/4,205,203/23,570 完全对齐；末 hash f9efa35e，历史未清零。",
+      "evidence": [
+        "results"
+      ]
+    },
+    {
+      "id": "cost_benefit",
+      "plan_sections": [
+        "12.2",
+        "15.2"
+      ],
+      "status": "INCONCLUSIVE",
+      "finding": "报告 J 全部完成率与成本。N 缺席、v6 任务不同，无法比较相同质量下协议成本或宣称新压缩收益。旧回放 6870 tokens 差额不是新 v7 节省。",
+      "evidence": [
+        "overall",
+        "results"
+      ]
+    },
+    {
+      "id": "failure_reflection",
+      "plan_sections": [
+        "2",
+        "14.1",
+        "14.2",
+        "14.3"
+      ],
+      "status": "COMPLETE_INCONCLUSIVE_METHOD",
+      "finding": "四个旧反例分别列 Observed/Expected、实际链、首断点、两解释、混杂、最小下一步和 Stop。协议接线、native 环境、CI 资产失败分层；J 小批通过不注销旧失败。",
+      "evidence": [
+        "failure_chain",
+        "overall",
+        "ci_repair"
+      ]
+    },
+    {
+      "id": "bounded_scope_roles",
+      "plan_sections": [
+        "12.4",
+        "12.5",
+        "13.1",
+        "13.2"
+      ],
+      "status": "COMPLETE",
+      "finding": "Root 文档/输入/调用/评分，单个 Sol xhigh 源码/检查，Luna high Git。无 Product 迁移、服务改动、下载、新 runtime 或常驻审计；C 测试修复和 D 结果分开，B 身份不变。",
+      "evidence": [
+        "overall",
+        "engineering",
+        "ci_repair"
+      ]
+    },
+    {
+      "id": "E2_reasoning",
+      "plan_sections": [
+        "10.3"
+      ],
+      "status": "NOT_RUN",
+      "finding": "首批以外的条件项，未改变 thinking 或输出预算；真实协议比较仍未解决。",
+      "evidence": [
+        "overall"
+      ]
+    },
+    {
+      "id": "P2_E3_objects",
+      "plan_sections": [
+        "7",
+        "10.4"
+      ],
+      "status": "NOT_RUN",
+      "finding": "没有把对象接口候选混入 E1，旧 key/lookup 失败保留；J exact-key 2/2 不是广泛解决证明。",
+      "evidence": [
+        "overall",
+        "failure_chain"
+      ]
+    },
+    {
+      "id": "P3_E4_writer",
+      "plan_sections": [
+        "8",
+        "10.5"
+      ],
+      "status": "NOT_RUN",
+      "finding": "这批 J 没有自然漏存，旧反例仍保留；没有同步子任务、第二 writer、关键词保存或隐藏修复。",
+      "evidence": [
+        "overall"
+      ]
+    },
+    {
+      "id": "P4_E5_continuous",
+      "plan_sections": [
+        "9",
+        "10.6"
+      ],
+      "status": "NOT_RUN",
+      "finding": "本 slice 没有选定需开展综合验收的新修复；短 E1 不替代连续任务或真实 partial/unknown 能力。",
+      "evidence": [
+        "overall"
+      ]
+    },
+    {
+      "id": "E6_attention",
+      "plan_sections": [
+        "9.4",
+        "10.7"
+      ],
+      "status": "NOT_TRIGGERED_THIS_SLICE",
+      "finding": "38 次 delivery 都走 all，记忆规模很小，未出现真实 query/scope/capacity 瓶颈；无人工压力或 Attention 收益主张。",
+      "evidence": [
+        "results",
+        "overall"
+      ]
+    },
+    {
+      "id": "second_family",
+      "plan_sections": [
+        "10.8"
+      ],
+      "status": "NOT_RUN",
+      "finding": "没有具备对应授权和部署的独立服务，未下载权重；本次仍只有一个生成模型家族，不能证明跨模型鲁棒性。",
+      "evidence": [
+        "overall",
+        "capabilities"
+      ]
+    },
+    {
+      "id": "rollback_repro",
+      "plan_sections": [
+        "6.7",
+        "14.5",
+        "15.1"
+      ],
+      "status": "COMPLETE_DOCUMENTED",
+      "finding": "保留原 JSON；以运行 B 和锁定依赖、配置、顺序、新 namespace 复现。不能覆盖旧 attempted 或将报告提交冒充运行身份；Git 排除 DSN、原私密轨迹、DB 和资产。",
+      "evidence": [
+        "protocol",
+        "overall"
+      ]
+    },
+    {
+      "id": "P5_minimum_delivery",
+      "plan_sections": [
+        "14.4",
+        "15.2",
+        "15.3"
+      ],
+      "status": "COMPLETE_CONTENT_PUBLICATION_TO_VERIFY",
+      "finding": "所有可运行授权任务、合法完整投影与真实执行、基础诊断、反思、成本及明确停止均已报告。实际 Goal 只在最终远端发布核对后结案。",
+      "evidence": [
+        "overall",
+        "results",
+        "ci_repair"
+      ]
+    },
+    {
+      "id": "research_claim",
+      "plan_sections": [
+        "2.3",
+        "15.4",
+        "16.3"
+      ],
+      "status": "NOT_ACHIEVED",
+      "finding": "仅工程完成和有限 J 诊断通过；协议方法仍未定，稳定 unseen 收益未建立，第二家族 NOT_RUN，Product NO_GO。后续工作需新明确指令。",
+      "evidence": [
+        "overall"
+      ]
+    }
+  ],
+  "evidence": {
+    "plan": {
+      "path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v7.0.md",
+      "sha256": "a4b0fe36e77e20c5e227c6341ea6de3b5febcd415f22b2e4c6938c70d9a84269",
+      "public": true
+    },
+    "review": {
+      "path": "docs/MILAI_MEMORY_ARCHITECTURE_REVIEW_20260928.md",
+      "sha256": "03ba2a29c041b0a3ca5bb4e79db3585d6c996b781688b06496b79e6070928484",
+      "public": true
+    },
+    "capabilities": {
+      "path": "data/diagnostics/development-experiment-v7-p0/protocol_capabilities.json",
+      "sha256": "49110bed7f04f68f0b2742d5c615e585c7a67bdae7fb5ebe73407845f7bc2baf",
+      "public": true
+    },
+    "failure_chain": {
+      "path": "data/diagnostics/development-experiment-v7-p0/failure_chain.json",
+      "sha256": "092aa5d5f76626c2056d4fb1a23d0764ba8f8a5ada7c31565a79426f1b5b10e6",
+      "public": true
+    },
+    "engineering": {
+      "path": "docs/MILAI_V7_P0_P1_ENGINEERING_REPORT_20260928.md",
+      "sha256": "de1d10a09e9d33cc9e4b612676144828dd87e9b0f8f3d74483c0b09e19324160",
+      "public": true
+    },
+    "p1_checks": {
+      "path": "data/manifests/development-experiment-v7-p1-checks-20260928.json",
+      "sha256": "57b68b58b9fcf8137a2256504d9a9a609c8d95b76316dd8ca140ae2bbb19e654",
+      "public": true
+    },
+    "protocol": {
+      "path": "docs/MILAI_V7_E1_PROTOCOL_20260928.md",
+      "sha256": "3135178b7de9e6cd0a0dd9ec00a0ed351499351257a9171e918e13e7bda46a6e",
+      "public": true
+    },
+    "order": {
+      "path": "data/diagnostics/development-experiment-v7-e1/execution-order.json",
+      "sha256": "e92d5e4bc1bf6589b0a133e8e5de0647869783bc14be62805ef9624c6f1801ee",
+      "public": true
+    },
+    "obligations": {
+      "path": "data/diagnostics/development-experiment-v7-e1/obligations.json",
+      "sha256": "1fd4c1704c8489ff7371c11ccc26bdb6aed4bc6c5d716cddc66dbce5fd485006",
+      "public": true
+    },
+    "guide": {
+      "path": "data/diagnostics/development-experiment-v7-e1/rubric-guide.json",
+      "sha256": "5be83cbe3da13b24d7f5c34a11b3ea4106c786e9763e4255edc3f8506f50dec1",
+      "public": true
+    },
+    "results": {
+      "path": "data/manifests/development-experiment-v7-e1-results-20260928.json",
+      "sha256": "b76c59688c103627d178a4eae46fd1563e0301b5f2908b3904929ca88f87b571",
+      "public": true
+    },
+    "ci_repair": {
+      "path": "data/manifests/development-experiment-v7-ci-repair-checks-20260928.json",
+      "sha256": "a353cb10b52239343fda311afe1e244d05215ae9544c6e2cf04d1ae5aac288cd",
+      "public": true
+    },
+    "overall": {
+      "path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md",
+      "sha256": "7d7be5adf751130da932c1870bbb99c67d5172535179a1274b51d57b93651195",
+      "public": true
+    },
+    "freeze": {
+      "path": "artifacts/development-experiment-v7/e1/execution-freeze.json",
+      "sha256": "d46e343951e22d83f5691986bf38ac99bdeff29a1dd113408281db2cd9c0b467",
+      "public": false
+    },
+    "compose_receipt": {
+      "path": "artifacts/development-experiment-v7/e1/obligation-compose-receipt.json",
+      "sha256": "335c5637e7f894abf65cb2ce18fa6b1348ab2914e2c0131b54b58bd232e398e2",
+      "public": false
+    }
+  },
+  "offline_composer_receipt": {
+    "kind": "V7_EXISTING_OFFLINE_OBLIGATION_COMPOSER_RECEIPT",
+    "module": "src/milai_lab/analysis/obligation_trace.py",
+    "module_sha256": "03b90d2014c49133ab6872a00417addba47c6b670e83e84fe97ba626f46eab14",
+    "frozen_contract_sha256": "1fd4c1704c8489ff7371c11ccc26bdb6aed4bc6c5d716cddc66dbce5fd485006",
+    "initial_aggregation_error": "INVALID_OBLIGATION_LAYER: frozen diagnostic_obligations label differs from existing composer diagnostic_completeness",
+    "offline_adapter": "In-memory diagnostic layer name only mapped to diagnostic_completeness; all IDs, text, basis, task_failing flags and manual decisions unchanged; frozen file not changed. No semantic regrading.",
+    "repeats": [
+      {
+        "repeat": 1,
+        "task_counts": {
+          "total": 46,
+          "pass": 46,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 26,
+            "pass": 26,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 16,
+            "pass": 16,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 13,
+            "pass": 13,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "artifacts": [
+          {
+            "path": "artifacts/development-experiment-v7/e1/obligation-observations-r1.json",
+            "sha256": "aebe743b59ab3b57d455fa5f42c4c80527947086eff7b669d2b71dc6897cdeed"
+          },
+          {
+            "path": "artifacts/development-experiment-v7/e1/obligation-trace-r1.json",
+            "sha256": "a93272ecca55353738939fcf3f2b2d4c80b808d9ed8ac4f506e38dc7e3444434"
+          }
+        ]
+      },
+      {
+        "repeat": 2,
+        "task_counts": {
+          "total": 46,
+          "pass": 46,
+          "fail": 0,
+          "unknown": 0,
+          "not_applicable": 0,
+          "missing": 0
+        },
+        "layer_counts": {
+          "current_explicit_obligations": {
+            "total": 26,
+            "pass": 26,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "persistent_obligations": {
+            "total": 16,
+            "pass": 16,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "later_use_obligations": {
+            "total": 4,
+            "pass": 4,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          },
+          "diagnostic_completeness": {
+            "total": 13,
+            "pass": 13,
+            "fail": 0,
+            "unknown": 0,
+            "not_applicable": 0,
+            "missing": 0
+          }
+        },
+        "artifacts": [
+          {
+            "path": "artifacts/development-experiment-v7/e1/obligation-observations-r2.json",
+            "sha256": "5538c35a6f3f370d045e7e76b2a06c20543d68d8719a5ff5c9765adbdebf4887"
+          },
+          {
+            "path": "artifacts/development-experiment-v7/e1/obligation-trace-r2.json",
+            "sha256": "68f0357352c6f1a918b228a3963dd827f2fa1e0a04b021d3a780ec0a14a942fa"
+          }
+        ]
+      }
+    ],
+    "new_semantic_scores": false,
+    "model_calls": 0
+  },
+  "publication": {
+    "PR": 71,
+    "draft": true,
+    "base_PR": 70,
+    "base_commit": "c6f335fef7cf00c86fa3dbe201a60c802439ca12",
+    "method_commit": "37d48577bdff582f74faf2f5e663b359885350ec",
+    "execution_commit": "2f30c14c5e7ea82db2b0a962d3636e14de5f2391",
+    "CI_repair_commit": "a1c6c683a39e8d0bf87e75afec32061fae46dfd4",
+    "main_unchanged": "07cc364f96d484ad9ff8497adcf2a6f1b486bdb2",
+    "final_commit_identity": "Git commit containing this audit; never substituted for execution B",
+    "final_remote_receipt": "artifacts/development-experiment-v7/final-publication-verification.json (ignored) and PR71 checks; actualGoal closes only after verification"
+  },
+  "open_quality_goals": [
+    "native realprotocol comparison",
+    "secondindependentmodel family",
+    "stable unseen andlonghorizonbenefit",
+    "conditionalobjects/writer/StateAttention hypotheses"
+  ],
+  "new_real_calls_during_closeout": 0
+}

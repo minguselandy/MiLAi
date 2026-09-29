@@ -180,6 +180,31 @@ def test_attention_only_when_query_exceeds_capacity_and_base_can_fit() -> None:
                                            for row in events)
 
 
+@pytest.mark.parametrize("route", ["all", "query", "attention"])
+def test_native_catalog_is_present_in_every_complete_route_capacity_check(route: str) -> None:
+    class ToolCapacity(_Capacity):
+        def __init__(self) -> None:
+            super().__init__(1 if route == "attention" else 100)
+            self.catalogs = []
+
+        def check(self, messages, output, tools=None):
+            self.catalogs.append(copy.deepcopy(tools))
+            return super().check(messages, output)
+
+    rows = [{"id": str(i), "value": {"content": "body"}}
+            for i in range(1 if route == "all" else 33)]
+    capacity = ToolCapacity()
+    tools = [{"type": "function", "function": {"name": "read_memory",
+               "description": "Read an actual record.", "parameters": {"type": "object"}}}]
+    view, _messages, _, events = _view(rows, capacity, rows[:10],
+        attention=route == "attention", selector=lambda *_: [rows[0]["id"]])
+    context = _context(view).with_protocol("native", "Native reply contract.")
+    request = view.fit_final_request(context, tools=tools)
+    assert events[-1]["route"] == route and events[-1]["tool_protocol"] == "native"
+    assert capacity.catalogs and all(catalog == tools for catalog in capacity.catalogs)
+    assert "Native reply contract." in request[0]["content"]
+
+
 def test_retrieval_error_and_invalid_selected_identity_are_not_soft_success() -> None:
     rows = [{"id": str(i), "value": {"content": "body"}} for i in range(33)]
     view, _messages, _, _ = _view(rows, _Capacity(1), rows[:10], attention=True,

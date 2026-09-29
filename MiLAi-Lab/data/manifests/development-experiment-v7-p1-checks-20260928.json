@@ -1,0 +1,774 @@
+{
+  "kind": "MILAI_DEVELOPMENT_EXPERIMENT_V7_P1_SOURCE_CHECKS",
+  "status": "ENGINEERING_FREEZE_READY_NATIVE_REAL_EXECUTION_BLOCKED_ENVIRONMENT",
+  "base_git_sha": "c6f335fef7cf00c86fa3dbe201a60c802439ca12",
+  "environment": {
+    "python": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+    "core_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+    "foundation_python": "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+    "variables": {
+      "PYTHONPATH": "src",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "foundation_packages": {
+      "pytest": "8.4.2",
+      "httpx": "0.28.1",
+      "langchain-core": "1.6.5",
+      "langgraph": "1.1.10",
+      "langgraph-checkpoint": "2.1.2",
+      "langgraph-checkpoint-sqlite": "2.0.11",
+      "langmem": "0.0.30",
+      "transformers": "4.57.6",
+      "mypy": "1.20.2",
+      "ruff": "0.16.5"
+    }
+  },
+  "changed_files": [
+    {
+      "path": "src/milai_lab/providers/langmem_chat.py",
+      "sha256": "882e183bd750a9de243f19140f57fdbdc198f56c834d80dad842bc665e43e97d",
+      "bytes": 22306,
+      "base_sha256": "45c6751a58e92c2d02754d51b8a60c100e2927ce6a55947ed982d67215e6951d",
+      "base_bytes": 19584
+    },
+    {
+      "path": "src/milai_lab/methods/memory_boundaries.py",
+      "sha256": "c84a44be07a3578b3a1b5f00a0a091ed8840b43c303d14acfa2340a8bd664924",
+      "bytes": 26036,
+      "base_sha256": "9c62ba12cf4cf15ccbbfe41c6989569510fb239005626274a4b3eff9df0d500b",
+      "base_bytes": 24861
+    },
+    {
+      "path": "src/milai_lab/methods/request_context.py",
+      "sha256": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b",
+      "bytes": 5939,
+      "base_sha256": "159d6178d519e3c3471bb5ff88698d0855327c9ec16177d21b898f871adb3151",
+      "base_bytes": 4321
+    },
+    {
+      "path": "src/milai_lab/runners/persistent_memory.py",
+      "sha256": "befd30ccaf59b3d5b584cbec79fa525ac4ea86696cc9c62df5a309c8bb38b725",
+      "bytes": 29211,
+      "base_sha256": "11a52af6769351775ccf3098e35300d627ae2ec3d740a433f8701c41968ae230",
+      "base_bytes": 27743
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_agent.py",
+      "sha256": "caf2cb4ef171596ce55f80ff31bb23d5ce7be3a28a7bc74857940bd34e6b9d6d",
+      "bytes": 25552,
+      "base_sha256": "b7bb10c4dbbf93bb1f6dcc861d4510f636c575bb0a11f8d2af65b570effdf65b",
+      "base_bytes": 25334
+    },
+    {
+      "path": "tests/unit/test_langmem_foundation.py",
+      "sha256": "05ca9c624aed733a76d4ba8ac66ecc7eb6caff24c061c698e41c6466ee059f35",
+      "bytes": 39518,
+      "base_sha256": "4c33617f94ec12d1f823044cca38fa7719306bb5a6a456f41233777f6ad3d2a9",
+      "base_bytes": 36006
+    },
+    {
+      "path": "tests/unit/test_persistent_memory.py",
+      "sha256": "7f3de98d1c1105cb7455607860eaa3711a2c6179333784e577e52d5655579ae5",
+      "bytes": 57261,
+      "base_sha256": "31a51cae9588b1cf6a346fca209fa4bb759ab2ca6675545413c136d40873b769",
+      "base_bytes": 46062
+    },
+    {
+      "path": "tests/unit/test_memory_boundaries.py",
+      "sha256": "3b84446d4f778eebc71da28eb0824f9ebb8b1c3f0d645f15561bad26b26d3514",
+      "bytes": 21198,
+      "base_sha256": "3f9be60827f4c906aa70f81dbbc820052830623b4719047b5de53e8533a768e6",
+      "base_bytes": 19886
+    },
+    {
+      "path": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "sha256": "4517efff2230600fa46ce1c9679857e8e7f6532fb5638837cb60b1e650a278de",
+      "bytes": 2063
+    },
+    {
+      "path": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "sha256": "30ecd4ff008be15e276c4d55f58775042c7225a0e2f5dfb26d198a394fd22c3c",
+      "bytes": 2053
+    }
+  ],
+  "checks": [
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_memory_boundaries.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/core-tests.log",
+      "log_sha256": "f6ce3537e552856c89074e089ca651474ad60809a32a59ad5688b2f4b25bfa04",
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 0.12
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+        "tests/unit/test_persistent_memory.py::test_v7_profile_is_explicit_and_preserves_old_restrictions",
+        "tests/unit/test_langmem_foundation.py::test_native_invalid_proposal_never_reaches_toolnode",
+        "tests/unit/test_langmem_foundation.py::test_native_rejects_unsupported_extensions_before_http"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/first-native-tests.log",
+      "log_sha256": "fbc583ca1b659357ffbca77ec1e3bb8f40f85de68728e99a5503157db9d828da",
+      "passed": 15,
+      "failed": 2,
+      "skipped": 0,
+      "seconds": 2.93,
+      "failure": "New test parsed all prior ToolMessage bodies as JSON, including earlier actual Pydantic error text. Narrow fix selects the current three/two receipts before parsing."
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/native-graph-final.log",
+      "log_sha256": "5dfe1c4586511562e2af9778920c0ca6b2fceb23ad483f984142dd7914fe6705",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 2.1
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_memory_boundaries.py::test_native_catalog_is_present_in_every_complete_route_capacity_check"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/native-route-core.log",
+      "log_sha256": "28f94f35a697eb110a559cd36372f2edb63dbb960fb282482e1dcc485cb9a73e",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 0.1
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+        "tests/unit/test_langmem_foundation.py::test_native_invalid_proposal_never_reaches_toolnode",
+        "tests/unit/test_langmem_foundation.py::test_native_manage_store_value_error_is_not_converted",
+        "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost",
+        "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body",
+        "tests/unit/test_persistent_memory.py::test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control",
+        "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+        "tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order",
+        "tests/unit/test_langmem_foundation.py::test_invalid_arguments_return_tool_error_then_graph_corrects"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/native-capacity-adjacent.log",
+      "log_sha256": "01dcff72ec661de253b4ce17f42e6be9fb612e19a32788ad9198764dad5159be",
+      "passed": 27,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 4.79
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/providers/langmem_chat.py",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "src/milai_lab/methods/request_context.py",
+        "src/milai_lab/runners/persistent_memory.py",
+        "src/milai_lab/baselines/langmem_agent.py",
+        "tests/unit/test_langmem_foundation.py",
+        "tests/unit/test_persistent_memory.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/ruff-initial.log",
+      "log_sha256": "123cc7c95150cdbb60b8c1ebb21e241fff2ba718acc1a33c579141e3e90c5276",
+      "findings": 19,
+      "failure": "Two import ordering findings; line lengths; raw regex spelling; one test semicolon."
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/providers/langmem_chat.py",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "src/milai_lab/methods/request_context.py",
+        "src/milai_lab/runners/persistent_memory.py",
+        "src/milai_lab/baselines/langmem_agent.py",
+        "tests/unit/test_langmem_foundation.py",
+        "tests/unit/test_persistent_memory.py",
+        "tests/unit/test_memory_boundaries.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/ruff-final.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/providers/langmem_chat.py",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "src/milai_lab/methods/request_context.py",
+        "src/milai_lab/runners/persistent_memory.py",
+        "src/milai_lab/baselines/langmem_agent.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/mypy-initial.log",
+      "log_sha256": "7eaddc6e10493848750ea01ac941d531dc35000625fad368c4bf2d8de174c846",
+      "findings": 2,
+      "failure": "Renderer loop reused position before nullable current-user index; native content assignment reused JSON str variable. Renamed only these local variables."
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/providers/langmem_chat.py",
+        "src/milai_lab/methods/memory_boundaries.py",
+        "src/milai_lab/methods/request_context.py",
+        "src/milai_lab/runners/persistent_memory.py",
+        "src/milai_lab/baselines/langmem_agent.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/mypy-final.log",
+      "log_sha256": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+      "checked_sources": 5
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/methods/request_context.py",
+        "src/milai_lab/methods/memory_boundaries.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/core-mypy.log",
+      "log_sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "checked_sources": 2
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "tools/check_verification_matrix.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/matrix.log",
+      "log_sha256": "c38c0811635cd37239afdb2ca64b77f5d44e6513d76e377ae07c501ee900604b"
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/package-boundary.log",
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/tools-boundary.log",
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "artifacts/development-experiment-v7/p1-checks/replay_json_corpus.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/json-replay.log",
+      "log_sha256": "60ab16bf432afab6e60d1b63735943825fc34c6df81640876fb433f22237aceb",
+      "requests_per_mode": 131,
+      "modes": [
+        "full",
+        "compact_v6"
+      ],
+      "actual_turn_audits": 86
+    },
+    {
+      "command": [
+        "env",
+        "PYTHONPATH=src",
+        "HF_HUB_OFFLINE=1",
+        "TRANSFORMERS_OFFLINE=1",
+        "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+        "artifacts/development-experiment-v7/p1-checks/prepare_configs.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab",
+      "exit_code": 0,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/prepare-checks.log",
+      "log_sha256": "4d8b19c8389e45ff1476b608f7ce3ac11c30a27365545f0e5b714752915d2658",
+      "zero_model_prepares": 2
+    }
+  ],
+  "unique_successful_tests": {
+    "core": 20,
+    "foundation": 36,
+    "total": 56,
+    "skipped": 0,
+    "remaining_failures": 0,
+    "deduplication": "Core17 + new3. Foundation new shared2/profile1/unsupported6/invalid9/capacity1/Store4/query4/attention4/Host12cap2/legacyC1/JSONorder1/JSONbadargs1. Repaired and re-run nodes counted once."
+  },
+  "coverage": {
+    "legal_no_tools_and_final_text": "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+    "single_multi_tool_real_pairing_and_sync_order": [
+      "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+      "tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order"
+    ],
+    "strict_rejection_then_legal_continuation": "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+    "same_record_update_no_change_delete_then_exact_read": "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+    "owner_scope_and_current_material": [
+      "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+      "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery"
+    ],
+    "unknown_tool_bad_arguments_truncation_missing_duplicate_ids_invalid_call_shape": "tests/unit/test_langmem_foundation.py::test_native_invalid_proposal_never_reaches_toolnode",
+    "proposal_narrative_not_execution_reasoning_not_final": "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+    "partial_business_effect_kept_not_replayed": "tests/unit/test_persistent_memory.py::test_v7_shared_profile_actual_toolnode_crud_partial_and_no_tool",
+    "Store_exception_not_saved": "tests/unit/test_langmem_foundation.py::test_native_manage_store_value_error_is_not_converted",
+    "real_native_tools_template_capacity_and_preHTTP_failure": "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+    "every_native_route_all_query_attention_counts_catalog": "tests/unit/test_memory_boundaries.py::test_native_catalog_is_present_in_every_complete_route_capacity_check",
+    "ordinary_embedding_and_paid_selector_costs": [
+      "tests/unit/test_persistent_memory.py::test_boundary_query_uses_complete_query_actual_index_and_continuous_embedding_cost",
+      "tests/unit/test_persistent_memory.py::test_boundary_one_paid_selector_reuses_only_ids_and_resolves_updated_body"
+    ],
+    "12_Host_capacity_and_no_hidden_control": "tests/unit/test_persistent_memory.py::test_boundary_host_twelve_call_capacity_does_not_replay_or_add_control",
+    "legacy_C_same_graph_one_correction": "tests/unit/test_persistent_memory.py::test_same_graph_correction_uses_visible_refs_preserves_originals_and_capacity",
+    "same_text_new_event_identity_no_semantic_dedup": "tests/unit/test_memory_boundaries.py::test_audit_has_no_saved_certification_or_circular_evidence",
+    "core_optional_import_and_actual_CI_ownership": [
+      "core-tests.log",
+      "core-mypy.log",
+      "matrix.log"
+    ],
+    "old_JSON_payload_capacity_audit_checkpoint": "replay-summary.json"
+  },
+  "replay": {
+    "kind": "MILAI_V7_P1_HISTORICAL_JSON_ENCODING_PARITY",
+    "actual_requests": 131,
+    "actual_turn_audits": 86,
+    "full_default_matches_frozen_and_s1": true,
+    "compact_matches_root_combined_ordered_message_hash_and_tokens": true,
+    "all_non_message_request_fields_unchanged": true,
+    "full_checkpoint_llm_inputs_in_both_modes": true,
+    "graph_record_receipt_metadata_unchanged": true,
+    "readonly_checkpoint_hashes_unchanged": true,
+    "full_before_tokens": 180667,
+    "compact_after_tokens": 173797,
+    "saved_tokens": 6870,
+    "corpus_sha256": "dab15b48e76ed681b0e736a1146788db45d7563c20f442ff177c0c49aae34baa",
+    "root_profile_sha256": "a6f4a9054f29eb7cade23668340e445b1d731e44df28402b3a07df76da84c434",
+    "s1_observations_sha256": "65d34d0404edeee9900e497714db7fd82fba7d76b4070b4f4f22e71b2a49b925",
+    "helper_sha256": "94ecd3bdd301d68e93bbc69413846b546d187b142a09fe242d40c3a5df22ac87",
+    "observations": {
+      "full": {
+        "path": "artifacts/development-experiment-v7/p1-checks/full-observations.json",
+        "sha256": "46d511cb165997f9db6eec992f633e228828ed18f246693cda8cb0af0bcd89a3",
+        "bytes": 6938563
+      },
+      "compact_v6": {
+        "path": "artifacts/development-experiment-v7/p1-checks/compact_v6-observations.json",
+        "sha256": "a3093fcd7b22123348b4fba4242b8b0f7a7daa6617fd1a55c86f087f0b0c13f1",
+        "bytes": 6874978
+      },
+      "request_pairs": {
+        "path": "artifacts/development-experiment-v7/p1-checks/request-pairs.json",
+        "sha256": "5caf41f5fd7d57478af2ea50bbd90aae36c54427109ec241575dbdacae0ef493",
+        "bytes": 82070
+      }
+    },
+    "new_real_http_calls": 0,
+    "new_embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "client_budget": null,
+    "interpretation": "MockTransport serialized HTTP bytes are compared to the locked httpx encoding of actual ordered trace dictionaries; original socket bytes were not captured. Original response receipts and usage are returned unchanged, not interpreted as new compact generation or cost."
+  },
+  "replay_capture_limit": "Original trace stores ordered parsed request dictionaries, not original socket bytes. Equal locked httpx encoding is verified against actual MockTransport request.read() bytes, with original pre-model SQLite objects. No claim of original socket capture.",
+  "post_replay_changes": "Subsequent source edits are local-variable typing spelling and stricter native-only tool_calls shape parsing. JSON request serialization/control/layout unchanged; 131 replay not repeated.",
+  "prepare": {
+    "kind": "MILAI_V7_P1_ZERO_MODEL_PREPARE_CHECKS",
+    "prepared": [
+      {
+        "mode": "json_action",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "tools/run_persistent_memory.py",
+          "prepare",
+          "--config",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+          "--inputs",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+          "--run",
+          "v7-p1-json_action-prepare",
+          "--arm",
+          "B0",
+          "--runtime-root",
+          "/tmp/milai-v7-p1-prepare-ejuu7lng/json_action",
+          "--output",
+          "/tmp/milai-v7-p1-prepare-ejuu7lng/json_action/prepared.json"
+        ],
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/prepare-json_action.log",
+        "runtime_root": "/tmp/milai-v7-p1-prepare-ejuu7lng/json_action",
+        "manifest_sha256": "d206765818c3a15b08f5c586391da28b9dcb71c36add6bc700b6699fee1db12d",
+        "prepared": {
+          "status": "PREPARED_ZERO_MODEL",
+          "manifest_path": "/tmp/milai-v7-p1-prepare-ejuu7lng/json_action/run_manifest.json",
+          "identity_sha256": "a026c5f1607a09502394dc97ac736f1b74ce366b353fcc583b37b2a239972341",
+          "public_messages": 2
+        },
+        "source_count": 160,
+        "tool_names": [
+          "manage_memory",
+          "search_memory",
+          "read_memory",
+          "reserve_and_label",
+          "get_reservation",
+          "complete_label"
+        ],
+        "config_changes_limited_to_recipe_profile_and_protocol": true
+      },
+      {
+        "mode": "native",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/foundation/bin/python",
+          "tools/run_persistent_memory.py",
+          "prepare",
+          "--config",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/data/diagnostics/development-experiment-v7-e1/native-config.json",
+          "--inputs",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+          "--run",
+          "v7-p1-native-prepare",
+          "--arm",
+          "B0",
+          "--runtime-root",
+          "/tmp/milai-v7-p1-prepare-ejuu7lng/native",
+          "--output",
+          "/tmp/milai-v7-p1-prepare-ejuu7lng/native/prepared.json"
+        ],
+        "exit_code": 0,
+        "log": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v7/MiLAi-Lab/artifacts/development-experiment-v7/p1-checks/prepare-native.log",
+        "runtime_root": "/tmp/milai-v7-p1-prepare-ejuu7lng/native",
+        "manifest_sha256": "b26b702e08a2a0e0b1bd697fcfd6ce8321bd8956248b2c01c1451ebcd5e8c138",
+        "prepared": {
+          "status": "PREPARED_ZERO_MODEL",
+          "manifest_path": "/tmp/milai-v7-p1-prepare-ejuu7lng/native/run_manifest.json",
+          "identity_sha256": "fc1f19f253e1f69158f436c85be8aacdad47f8b8dd7cff9e0279974130a99290",
+          "public_messages": 2
+        },
+        "source_count": 160,
+        "tool_names": [
+          "manage_memory",
+          "search_memory",
+          "read_memory",
+          "reserve_and_label",
+          "get_reservation",
+          "complete_label"
+        ],
+        "config_changes_limited_to_recipe_profile_and_protocol": true
+      }
+    ],
+    "tool_catalog_equal": true,
+    "real_http_calls": 0,
+    "embedding_calls": 0,
+    "shared_postgres_calls": 0,
+    "no_dsn_read": true,
+    "budget_ledger_untouched": true
+  },
+  "configs": {
+    "research_profile": "protocol_calibration_v7",
+    "protocols": [
+      "json_action",
+      "native"
+    ],
+    "arm": "B0",
+    "history_mode": "retained",
+    "memory_placement": "current_request",
+    "model_view": "compact_v6",
+    "thinking": false,
+    "correction_entries": 0,
+    "attention_enabled": false,
+    "Host_max_calls": 12,
+    "Host_max_tokens": 4096,
+    "schema_and_tool_capability_equal": true,
+    "baseline_parameters_preserved_except_recipe_profile_and_native_tool_mode": true
+  },
+  "scope": {
+    "shared_postgres_calls": 0,
+    "real_network_http_calls": 0,
+    "real_embedding_calls": 0,
+    "model_service_changes": 0,
+    "downloads": 0,
+    "git_mutations": 0,
+    "test_backends": [
+      "httpx.MockTransport",
+      "InMemoryStore",
+      "actual local SQLite checkpoint",
+      "synthetic business action",
+      "locked local Qwen tokenizer/template"
+    ],
+    "mock_budget": "Independent local RunBudget only; historical replay has no attached ledger.",
+    "shared_continuous_budget_modified": false,
+    "running_check_sessions": []
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/compact_v6-observations.json",
+      "sha256": "a3093fcd7b22123348b4fba4242b8b0f7a7daa6617fd1a55c86f087f0b0c13f1",
+      "bytes": 6874978
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/core-mypy.log",
+      "sha256": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "bytes": 43
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/core-tests.log",
+      "sha256": "f6ce3537e552856c89074e089ca651474ad60809a32a59ad5688b2f4b25bfa04",
+      "bytes": 99
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/first-native-tests.log",
+      "sha256": "fbc583ca1b659357ffbca77ec1e3bb8f40f85de68728e99a5503157db9d828da",
+      "bytes": 14751
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/full-observations.json",
+      "sha256": "46d511cb165997f9db6eec992f633e228828ed18f246693cda8cb0af0bcd89a3",
+      "bytes": 6938563
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/json-replay.log",
+      "sha256": "60ab16bf432afab6e60d1b63735943825fc34c6df81640876fb433f22237aceb",
+      "bytes": 1550
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/matrix.log",
+      "sha256": "c38c0811635cd37239afdb2ca64b77f5d44e6513d76e377ae07c501ee900604b",
+      "bytes": 261
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/mypy-final.log",
+      "sha256": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+      "bytes": 43
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/mypy-initial.log",
+      "sha256": "7eaddc6e10493848750ea01ac941d531dc35000625fad368c4bf2d8de174c846",
+      "bytes": 370
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/native-capacity-adjacent.log",
+      "sha256": "01dcff72ec661de253b4ce17f42e6be9fb612e19a32788ad9198764dad5159be",
+      "bytes": 1871
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/native-graph-final.log",
+      "sha256": "5dfe1c4586511562e2af9778920c0ca6b2fceb23ad483f984142dd7914fe6705",
+      "bytes": 1993
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/native-route-core.log",
+      "sha256": "28f94f35a697eb110a559cd36372f2edb63dbb960fb282482e1dcc485cb9a73e",
+      "bytes": 98
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/package-boundary.log",
+      "sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+      "bytes": 61
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/prepare-checks.json",
+      "sha256": "9ecd2ad1d06d0b7e2258143596d20455f4a233898f72023c24ca9e1663905441",
+      "bytes": 3758
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/prepare-checks.log",
+      "sha256": "4d8b19c8389e45ff1476b608f7ce3ac11c30a27365545f0e5b714752915d2658",
+      "bytes": 3148
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/prepare-json_action.log",
+      "sha256": "909cb06482427b1ee94f7b75b2efcd67229aef86ed6302c916d11d8246e79a60",
+      "bytes": 852
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/prepare-native.log",
+      "sha256": "715427445d53a60cdefe274af2ee8fff7418247916e85ad4b17921b30b9d6256",
+      "bytes": 847
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/prepare_configs.py",
+      "sha256": "7be71825362393722b34ce97c1f1cee9e70c447bd9caab85973b545975e5ffbb",
+      "bytes": 3461
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/replay-summary.json",
+      "sha256": "8a8ecc0634177e75df1beaebaa6852d840eefc229f1ab70ac917ee7b07c23bb5",
+      "bytes": 1973
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/replay_json_corpus.py",
+      "sha256": "94ecd3bdd301d68e93bbc69413846b546d187b142a09fe242d40c3a5df22ac87",
+      "bytes": 14409
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/request-pairs.json",
+      "sha256": "5caf41f5fd7d57478af2ea50bbd90aae36c54427109ec241575dbdacae0ef493",
+      "bytes": 82070
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/ruff-final.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/ruff-initial.log",
+      "sha256": "123cc7c95150cdbb60b8c1ebb21e241fff2ba718acc1a33c579141e3e90c5276",
+      "bytes": 13567
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/tools-boundary.log",
+      "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "bytes": 100
+    },
+    {
+      "path": "artifacts/development-experiment-v7/p1-checks/write_receipt.py",
+      "sha256": "51fb2ae163799296ecab1b3f7d5bbdb05a2eac202596b7233ec250517755eb10",
+      "bytes": 12503
+    }
+  ],
+  "retained_intermediate_issues": [
+    "Two initial test-harness failures, 19 initial Ruff findings and two initial Mypy assignment findings remain in logs.",
+    "Read-only rg inspection named nonexistent tools/check_boundaries.py and returned code2. Corrected to existing public milai_lab.boundary/tools_boundary modules; no runtime failure.",
+    "Falsely shaped native tool_calls={} was rejected by explicit type check instead of being treated as absent calls. Native-only parser tightening has one necessary regression."
+  ],
+  "limits_and_not_run": [
+    "Deployed native auto-tool-choice/parser absent. Native real execution NOT_RUN/BLOCKED_ENVIRONMENT; offline engineering passes are not task-effect scores.",
+    "Only existing synchronous run_phase/invoke_public_message recipe is calibrated: FoundationScope max_concurrency1 plus ToolNode executor.map. Locked async ToolNode uses asyncio.gather; no serial async graph guarantee or new async recipe.",
+    "No cross-process semantic exactly-once guarantee for memory CREATE; no semantic automatic correction; no domain routing/key repair.",
+    "No whole suite or package build: no new packaged module, CLI, dependency or packaging declaration.",
+    "No P2/P3/P4, no real model/embedding/Postgres/service probe, no original trace or historical locks changed.",
+    "Prepublication prepares bind current base Git HEAD and WIP source hashes; Root must prepare formal identities after publication."
+  ],
+  "source_commit": "37d48577bdff582f74faf2f5e663b359885350ec",
+  "source_pr": 71,
+  "source_receipt_sha256": "379229a95fc9c5f92a96134608b501c7082cff09433b2a57dff51eb9dce92b87",
+  "root_review": {
+    "five_source_diffs_reviewed": true,
+    "no_E1_instance_literals_in_changed_source": true,
+    "J_vs_v6_config_differences": [
+      "recipe_id",
+      "research_profile"
+    ],
+    "J_vs_N_config_differences": [
+      "host.tool_mode",
+      "recipe_id"
+    ],
+    "original_budget_unchanged_sha256": "2df7547a9d038cb53105afbf5daa97bbd8225bb204c19af40b7c68eee264ade2"
+  }
+}

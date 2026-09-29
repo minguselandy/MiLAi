@@ -1,0 +1,26 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "morgan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "read_only-1",
+            "user_id": "morgan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "What is 18 + 27? Answer with just the number. This is read only: do not save memory, reserve, label, or dispatch anything."
+          }
+        ]
+      }
+    ]
+  }
+}

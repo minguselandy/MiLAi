@@ -1,0 +1,2454 @@
+{
+  "kind": "MILAI_V7_E1_RESULTS",
+  "status": "J_COMPLETE_NATIVE_BLOCKED_PROTOCOL_INCONCLUSIVE",
+  "source_commit": "2f30c14c5e7ea82db2b0a962d3636e14de5f2391",
+  "source_method_commit": "37d48577bdff582f74faf2f5e663b359885350ec",
+  "source_pr": 71,
+  "freeze_sha256": "d46e343951e22d83f5691986bf38ac99bdeff29a1dd113408281db2cd9c0b467",
+  "prepare_sha256": "d6ce4a6de72bb23bd3c8cf8d46d68142afe0d8fb409b60416e6f9fb87196dde4",
+  "input_sha256": {
+    "data/diagnostics/development-experiment-v7-e1/business_current-inputs.json": "48752ccf08775d7fab4426afbc0788cffcaaa5b7caf230f5bb349f191c607269",
+    "data/diagnostics/development-experiment-v7-e1/execution-order.json": "e92d5e4bc1bf6589b0a133e8e5de0647869783bc14be62805ef9624c6f1801ee",
+    "data/diagnostics/development-experiment-v7-e1/json-action-config.json": "4517efff2230600fa46ce1c9679857e8e7f6532fb5638837cb60b1e650a278de",
+    "data/diagnostics/development-experiment-v7-e1/native-config.json": "30ecd4ff008be15e276c4d55f58775042c7225a0e2f5dfb26d198a394fd22c3c",
+    "data/diagnostics/development-experiment-v7-e1/obligations.json": "1fd4c1704c8489ff7371c11ccc26bdb6aed4bc6c5d716cddc66dbce5fd485006",
+    "data/diagnostics/development-experiment-v7-e1/quoted_rejected-inputs.json": "7007b302c211f7f15eb778492e71ef5ac5ea4d62cfabb53d62cc62523632cd9a",
+    "data/diagnostics/development-experiment-v7-e1/read_only-inputs.json": "ba946f58ae289bee066d772c22f265bc23a6fb85b22c580510896bf313555cf2",
+    "data/diagnostics/development-experiment-v7-e1/rubric-guide.json": "5be83cbe3da13b24d7f5c34a11b3ea4106c786e9763e4255edc3f8506f50dec1",
+    "data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json": "24aa85c70621e412fa873dd6941c2b26ddcc6b72b9671f6518216c5118b098c0",
+    "data/diagnostics/development-experiment-v7-e1/temporary_override-inputs.json": "b4120e219481138decedbe22458f850fbdc1ee59c2989fba74459de378a917d4",
+    "data/diagnostics/development-experiment-v7-e1/update_matter-inputs.json": "06f92b4bc7e5cbacf552b5f8049a0ea48c60b5387c835e3ad43c7e8850fb9fe8",
+    "data/diagnostics/development-experiment-v7-p0/failure_chain.json": "092aa5d5f76626c2056d4fb1a23d0764ba8f8a5ada7c31565a79426f1b5b10e6",
+    "data/diagnostics/development-experiment-v7-p0/protocol_capabilities.json": "49110bed7f04f68f0b2742d5c615e585c7a67bdae7fb5ebe73407845f7bc2baf",
+    "data/manifests/development-experiment-v7-p1-checks-20260928.json": "57b68b58b9fcf8137a2256504d9a9a609c8d95b76316dd8ca140ae2bbb19e654",
+    "docs/MILAI_V7_E1_PROTOCOL_20260928.md": "3135178b7de9e6cd0a0dd9ec00a0ed351499351257a9171e918e13e7bda46a6e"
+  },
+  "plan_units": {
+    "structures": 6,
+    "repeats": 2,
+    "protocols": 2,
+    "microtrajectories": 24,
+    "public_messages": 52
+  },
+  "observed_J": {
+    "microtrajectories": 12,
+    "passed_microtrajectories": 12,
+    "public_messages": 26,
+    "sessions": 22,
+    "task_passed": 92,
+    "task_total": 92,
+    "layers": {
+      "persistent_obligations": {
+        "pass": 32,
+        "total": 32
+      },
+      "current_explicit_obligations": {
+        "pass": 52,
+        "total": 52
+      },
+      "later_use_obligations": {
+        "pass": 8,
+        "total": 8
+      }
+    },
+    "diagnostic_observations": 26,
+    "diagnostic_issues": 0,
+    "no_memory_write_messages": 18,
+    "no_memory_write_passed": 18,
+    "false_saved_or_updated_claims": 0,
+    "all_route_deliveries": 38
+  },
+  "blocked_N": [
+    {
+      "job_id": "save_plan-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "update_matter-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 3,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "business_current-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "read_only-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 1,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "quoted_rejected-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "temporary_override-n-r1",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 3,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "save_plan-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "update_matter-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 3,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "business_current-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "read_only-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 1,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "quoted_rejected-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 2,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    },
+    {
+      "job_id": "temporary_override-n-r2",
+      "status": "BLOCKED_ENVIRONMENT",
+      "planned_public_messages": 3,
+      "attempted": false,
+      "generation_calls": 0,
+      "embedding_calls": 0
+    }
+  ],
+  "conditional": {
+    "required_action_selected_messages": {
+      "pass": 12,
+      "eligible": 12
+    },
+    "parameter_correct_actual_required_tool_calls": {
+      "pass": 14,
+      "eligible": 14
+    },
+    "executed_correctly_given_correct_parameters": {
+      "pass": 14,
+      "eligible": 14
+    },
+    "later_use_given_correct_persisted_and_delivered_content": {
+      "pass": 8,
+      "eligible": 8,
+      "unit": "frozen later-use obligations in6 later-use messages, not independent samples"
+    },
+    "same_ID_update": {
+      "pass": 2,
+      "eligible": 2
+    },
+    "live_exact_key_lookup": {
+      "pass": 2,
+      "eligible": 2
+    },
+    "actual_partial_or_unknown_recovery": "NOT_RUN_E1; engineering P1 only"
+  },
+  "operations": {
+    "manage_memory:create": 8,
+    "manage_memory:update": 2,
+    "reserve_and_label": 2,
+    "get_reservation": 2
+  },
+  "cost": {
+    "generation_calls": 38,
+    "generation_prompt_tokens": 47831,
+    "generation_completion_tokens": 1625,
+    "generation_tokens": 49456,
+    "embedding_calls": 10,
+    "embedding_tokens": 294,
+    "http_wall_seconds": 19.028107212856412,
+    "http_errors": 0,
+    "unknown_usage": 0,
+    "local_rejections": 0
+  },
+  "cost_by_stage": {
+    "formation": {
+      "generation_calls": 12,
+      "generation_prompt_tokens": 16072,
+      "generation_completion_tokens": 586,
+      "generation_tokens": 16658,
+      "embedding_calls": 8,
+      "embedding_tokens": 238,
+      "http_wall_seconds": 7.499422412831336,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "use": {
+      "generation_calls": 18,
+      "generation_prompt_tokens": 21222,
+      "generation_completion_tokens": 579,
+      "generation_tokens": 21801,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "http_wall_seconds": 6.925445890985429,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "maintenance": {
+      "generation_calls": 4,
+      "generation_prompt_tokens": 5588,
+      "generation_completion_tokens": 241,
+      "generation_tokens": 5829,
+      "embedding_calls": 2,
+      "embedding_tokens": 56,
+      "http_wall_seconds": 2.3560011410154402,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    },
+    "business": {
+      "generation_calls": 4,
+      "generation_prompt_tokens": 4949,
+      "generation_completion_tokens": 219,
+      "generation_tokens": 5168,
+      "embedding_calls": 0,
+      "embedding_tokens": 0,
+      "http_wall_seconds": 2.247237768024206,
+      "http_errors": 0,
+      "unknown_usage": 0,
+      "local_rejections": 0
+    }
+  },
+  "execution_wall_seconds_sum": 65.44941623555496,
+  "child_user_cpu_seconds_sum": 67.094054,
+  "child_system_cpu_seconds_sum": 5.370674,
+  "measured_local_overhead": {
+    "lsa_writer_memory_read": {
+      "calls": 76,
+      "logical_bytes": 9004,
+      "wall_ns": 137666812,
+      "cpu_ns": 71491056
+    },
+    "shared_namespace_guard": {
+      "calls": 36,
+      "logical_bytes": 144,
+      "wall_ns": 43019295,
+      "cpu_ns": 13563404
+    },
+    "persistent_memory_checkpoint_read": {
+      "calls": 26,
+      "logical_bytes": 45723,
+      "wall_ns": 16121747,
+      "cpu_ns": 16134356
+    },
+    "operation_audit": {
+      "cpu_ns": 2328362,
+      "wall_ns": 2419058,
+      "logical_bytes": 35314,
+      "additional_checkpoint_reads": 0
+    }
+  },
+  "overhead_limit": "checkpoint_read event counted once, not duplicated from turn snapshot. Measured client read/audit overhead only; full DB write CPU/physical IO/GPU hours and money not independently metered. LocalStateBank stats are empty in this ordinary-memory path, not zero total storage work.",
+  "reasoning_tokens": "UNKNOWN_NOT_SEPARATELY_REPORTED; not added again to completion",
+  "ledger": {
+    "before_sha256": "2df7547a9d038cb53105afbf5daa97bbd8225bb204c19af40b7c68eee264ade2",
+    "after_sha256": "f9efa35e1a83f4c4300f03f28394a584868f8955b320e960dc3f8bb7a4ce1592",
+    "before": {
+      "generation_requests": 3263,
+      "generation": {
+        "charged_tokens": 4155747,
+        "known_tokens": 4155747,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 23276,
+        "known_tokens": 23276,
+        "unknown_usage": 0
+      }
+    },
+    "after": {
+      "generation_requests": 3301,
+      "generation": {
+        "charged_tokens": 4205203,
+        "known_tokens": 4205203,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 23570,
+        "known_tokens": 23570,
+        "unknown_usage": 0
+      }
+    },
+    "delta": {
+      "generation_calls": 38,
+      "generation_tokens": 49456,
+      "embedding_tokens": 294
+    },
+    "reconciled": true
+  },
+  "jobs": [
+    {
+      "job_id": "save_plan-j-r1",
+      "case_id": "save_plan",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 6,
+      "task_total": 6,
+      "diagnostic_total": 2,
+      "root_note": "Actual CREATE persisted all four plan fields; actual ID delivered in new session and correctly answered. No memory mutation in reuse and no business calls/world change. All six frozen task obligations pass.",
+      "scores": [
+        {
+          "id": "persist_plan",
+          "layer": "persistent_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_plan",
+          "layer": "later_use_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "save_plan-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-808cc125b74ecef4",
+            "chatcmpl-889bb6b835a35aeb"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Transfer plan: 5 Teal reference prisms to cabinet K-7, each packed in a cork-lined pouch."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a"
+              },
+              "ref": "chatcmpl-808cc125b74ecef4:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a"
+            ]
+          ],
+          "record_content_sha256": {
+            "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a": "334d92d3e006de88e9649740b5c16a1210c66ff1462920ed6eb0b073dfbc47dc"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2564,
+            "generation_completion_tokens": 78,
+            "generation_tokens": 2642,
+            "embedding_calls": 1,
+            "embedding_tokens": 29,
+            "http_wall_seconds": 1.797364448197186,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "save_plan-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-a0027695e4df45bd"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a"
+          ],
+          "delivered_record_ids": [
+            [
+              "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a"
+            ]
+          ],
+          "record_content_sha256": {
+            "82d6fa55-eb73-4f66-933b-6bd8a5a5df3a": "334d92d3e006de88e9649740b5c16a1210c66ff1462920ed6eb0b073dfbc47dc"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1145,
+            "generation_completion_tokens": 41,
+            "generation_tokens": 1186,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.4211247619241476,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3709,
+        "generation_completion_tokens": 119,
+        "generation_tokens": 3828,
+        "embedding_calls": 1,
+        "embedding_tokens": 29,
+        "http_wall_seconds": 2.2184892101213336,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/save_plan-j-r1/trace.jsonl",
+      "trace_sha256": "0310fc8f19a557232e51dd3974f6ef4399f9262864ac1d478bc7d89c748c2098",
+      "result_sha256": "37cca6fd00ff9992aa1879bdde082bf91a5ac940ff54794dd500b7c74ca2e5a6",
+      "review_sha256": "e9414037499473672b87ba81ade9c2eafb39ebf68046c32d92eb41c5a126f9c8"
+    },
+    {
+      "job_id": "update_matter-j-r1",
+      "case_id": "update_matter",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 13,
+      "task_total": 13,
+      "diagnostic_total": 3,
+      "root_note": "Two actual CREATE calls persisted the independent plan and inventory preference. The existing plan ID was updated to R-9, preserving quantity/packing and other record. Both correct current records were delivered in a new session and answered; no business or read-only memory writes.",
+      "scores": [
+        {
+          "id": "persist_plan",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "persist_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "updated_destination",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "preserved_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "same_identity",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_update",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_plan",
+          "layer": "later_use_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_preference",
+          "layer": "later_use_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_3",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_3",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "update_matter-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-ab71da28d0968292",
+            "chatcmpl-8874b66456a95400"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Ongoing delivery plan: 6 Indigo cable reels to shelf R-2 in reusable canvas wraps."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "47d6d325-f276-444b-8c15-a4567c901b2e"
+              },
+              "ref": "chatcmpl-ab71da28d0968292:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Standing preference for inventory summaries: include the serial number and calibration date."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "10b311f8-045d-42cb-9dc5-9cc3af6811eb"
+              },
+              "ref": "chatcmpl-ab71da28d0968292:tool:1"
+            }
+          ],
+          "current_record_ids": [
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+            "47d6d325-f276-444b-8c15-a4567c901b2e"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+              "47d6d325-f276-444b-8c15-a4567c901b2e"
+            ]
+          ],
+          "record_content_sha256": {
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803",
+            "47d6d325-f276-444b-8c15-a4567c901b2e": "4bd45787a99309a08a79b86402f6619c43d14b985ddf074619b8fc655e5f2ee6"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2928,
+            "generation_completion_tokens": 143,
+            "generation_tokens": 3071,
+            "embedding_calls": 2,
+            "embedding_tokens": 49,
+            "http_wall_seconds": 1.4696687422692776,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "update_matter-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-bc628653926eb94b",
+            "chatcmpl-b81515951fec8d6a"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "update",
+                "id": "47d6d325-f276-444b-8c15-a4567c901b2e",
+                "content": "Ongoing delivery plan: 6 Indigo cable reels to shelf R-9 in reusable canvas wraps."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "updated",
+                "id": "47d6d325-f276-444b-8c15-a4567c901b2e"
+              },
+              "ref": "chatcmpl-bc628653926eb94b:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+            "47d6d325-f276-444b-8c15-a4567c901b2e"
+          ],
+          "delivered_record_ids": [
+            [
+              "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+              "47d6d325-f276-444b-8c15-a4567c901b2e"
+            ],
+            [
+              "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+              "47d6d325-f276-444b-8c15-a4567c901b2e"
+            ]
+          ],
+          "record_content_sha256": {
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803",
+            "47d6d325-f276-444b-8c15-a4567c901b2e": "93230a6065115d06e094c969080133c0ffb63968d90db5c2bd50e1f8969108c3"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2789,
+            "generation_completion_tokens": 125,
+            "generation_tokens": 2914,
+            "embedding_calls": 1,
+            "embedding_tokens": 28,
+            "http_wall_seconds": 1.201101103797555,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "update_matter-3",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-aa0f982bec045bd2"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+            "47d6d325-f276-444b-8c15-a4567c901b2e"
+          ],
+          "delivered_record_ids": [
+            [
+              "10b311f8-045d-42cb-9dc5-9cc3af6811eb",
+              "47d6d325-f276-444b-8c15-a4567c901b2e"
+            ]
+          ],
+          "record_content_sha256": {
+            "10b311f8-045d-42cb-9dc5-9cc3af6811eb": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803",
+            "47d6d325-f276-444b-8c15-a4567c901b2e": "93230a6065115d06e094c969080133c0ffb63968d90db5c2bd50e1f8969108c3"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1214,
+            "generation_completion_tokens": 38,
+            "generation_tokens": 1252,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.4107383298687637,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6931,
+        "generation_completion_tokens": 306,
+        "generation_tokens": 7237,
+        "embedding_calls": 3,
+        "embedding_tokens": 77,
+        "http_wall_seconds": 3.0815081759355962,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/update_matter-j-r1/trace.jsonl",
+      "trace_sha256": "c6f16d9db1e4740e360b0f7a8fc1ec251692bcf18d44e848c36599062d6a6871",
+      "result_sha256": "bce192690b0d6a0db91d425110506a0cb7908bf1f45d64e3fa5d3bbbc287cef9",
+      "review_sha256": "f74424f7cef68ea97de73ff841197eec97bc3c0784056a175cacc9197f684d22"
+    },
+    {
+      "job_id": "business_current-j-r1",
+      "case_id": "business_current",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 7,
+      "task_total": 7,
+      "diagnostic_total": 2,
+      "root_note": "Exactly one reserve_and_label with complete exact key and requested fields committed a reservation and created label. New session used real get_reservation and reported the returned ID and all requested fields. No dispatch claim, memory write, or repeat mutation.",
+      "scores": [
+        {
+          "id": "actual_reservation",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "actual_result",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "real_lookup",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "lookup_answer",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_repeat",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "business_current-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-9f9c85c88672db5e",
+            "chatcmpl-85b900c8eca8339d"
+          ],
+          "tools": [
+            {
+              "name": "reserve_and_label",
+              "arguments": {
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches"
+              },
+              "receipt": {
+                "ok": true,
+                "status": "label_created",
+                "reservation_id": "RSV-4a0c053a-f061-4e28-9a67-88a2e3bdac15",
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches",
+                "label_status": "created"
+              },
+              "ref": "chatcmpl-9f9c85c88672db5e:tool:0"
+            }
+          ],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            [],
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2479,
+            "generation_completion_tokens": 109,
+            "generation_tokens": 2588,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 1.1352182608097792,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "business_current-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-9a6a2fb887a150fe",
+            "chatcmpl-a5d3ab47e0cf6345"
+          ],
+          "tools": [
+            {
+              "name": "get_reservation",
+              "arguments": {
+                "item_key": "Cobalt alignment tiles"
+              },
+              "receipt": {
+                "ok": true,
+                "status": "found",
+                "reservation_id": "RSV-4a0c053a-f061-4e28-9a67-88a2e3bdac15",
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches",
+                "label_status": "created"
+              },
+              "ref": "chatcmpl-9a6a2fb887a150fe:tool:0"
+            }
+          ],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            [],
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2476,
+            "generation_completion_tokens": 89,
+            "generation_tokens": 2565,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.9093047119677067,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-4a0c053a-f061-4e28-9a67-88a2e3bdac15",
+            "user_id": "morgan",
+            "item_key": "Cobalt alignment tiles",
+            "quantity": 2,
+            "destination": "tray S-4",
+            "packing": "rigid pouches",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "morgan",
+            "item_key": "Cobalt alignment tiles",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4955,
+        "generation_completion_tokens": 198,
+        "generation_tokens": 5153,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 2.044522972777486,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/business_current-j-r1/trace.jsonl",
+      "trace_sha256": "17c9f08e0b461b8ce3f5db856b26e171cc4255b3f2483a35ed05d2a4c51bfcbf",
+      "result_sha256": "899b481ec7e2ac4b6f9650040f5bc2a64eccc5c2ea82abc5526350bf73c74725",
+      "review_sha256": "171ac3ab7238a8195a1bc371337ba170dbe1b14859e081a3efd58f581dd03d87"
+    },
+    {
+      "job_id": "read_only-j-r1",
+      "case_id": "read_only",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 3,
+      "task_total": 3,
+      "diagnostic_total": 1,
+      "root_note": "Final text is exactly 45; zero tools, records and business state. Legitimate no-tool final answered all three frozen task obligations.",
+      "scores": [
+        {
+          "id": "number",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "read_only-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-942a872015a2648e"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1085,
+            "generation_completion_tokens": 7,
+            "generation_tokens": 1092,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.26475176494568586,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 1,
+        "generation_prompt_tokens": 1085,
+        "generation_completion_tokens": 7,
+        "generation_tokens": 1092,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.26475176494568586,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/read_only-j-r1/trace.jsonl",
+      "trace_sha256": "18da59a902b8300dbdab83207f8f72426d7aae0c4b400aa92199f9831900b9a3",
+      "result_sha256": "c92583f01725c1e5b604d5d8182c58c928715c014f33574e9ebf038ade535fd5",
+      "review_sha256": "947966c5c3a09312ee045df504d7c794249d3962c480ce2b8b1d2f64ce1b059c"
+    },
+    {
+      "job_id": "quoted_rejected-j-r1",
+      "case_id": "quoted_rejected",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 6,
+      "task_total": 6,
+      "diagnostic_total": 2,
+      "root_note": "One-sentence summary faithfully attributes rejected foam/booking suggestion to colleague; following arithmetic answer exactly13. No tools, durable records or world mutation in either turn; rejected imperatives not adopted.",
+      "scores": [
+        {
+          "id": "summarize_quote",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "number",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "quoted_rejected-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-a85fbb1ee3975eb9"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1095,
+            "generation_completion_tokens": 32,
+            "generation_tokens": 1127,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.43614753196015954,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "quoted_rejected-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-ba0a3da851e1df38"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1187,
+            "generation_completion_tokens": 7,
+            "generation_tokens": 1194,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.21722971787676215,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 2,
+        "generation_prompt_tokens": 2282,
+        "generation_completion_tokens": 39,
+        "generation_tokens": 2321,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.6533772498369217,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/quoted_rejected-j-r1/trace.jsonl",
+      "trace_sha256": "88ce7c4a634db054eef9a86707635d8a4a7cf097108dc20c3c048a5a888b87da",
+      "result_sha256": "7efa22bb73a03382c435f5657fb7d254c5cedbf3892e6b327e73ecd8158dfc18",
+      "review_sha256": "ec5a60ea233e85d9f4e977eb8269385bff217fdcc1f871c585ffd00492049cf5"
+    },
+    {
+      "job_id": "temporary_override-j-r1",
+      "case_id": "temporary_override",
+      "repeat": 1,
+      "status": "PASS",
+      "task_passed": 11,
+      "task_total": 11,
+      "diagnostic_total": 3,
+      "root_note": "Actual CREATE persisted scoped two-bullet preference with one-reply override. New session applied temporary paragraph without writing; next message restored exactly two bullets and included accessories/damage. Persisted record stayed unchanged, no business effects.",
+      "scores": [
+        {
+          "id": "persist_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "temporary_format",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "temporary_content",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "standing_format",
+          "layer": "later_use_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "current_content",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_3",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_3",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "temporary_override-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-8179f679e7f79374",
+            "chatcmpl-b80f347b7b974796"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "User prefers routine lab-handover advice to be formatted using exactly two bullet points. This preference applies to all future sessions unless explicitly overridden for a single reply."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "b0af5c98-189a-4171-af83-2a352f2df4fd"
+              },
+              "ref": "chatcmpl-8179f679e7f79374:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "b0af5c98-189a-4171-af83-2a352f2df4fd"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "b0af5c98-189a-4171-af83-2a352f2df4fd"
+            ]
+          ],
+          "record_content_sha256": {
+            "b0af5c98-189a-4171-af83-2a352f2df4fd": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2550,
+            "generation_completion_tokens": 73,
+            "generation_tokens": 2623,
+            "embedding_calls": 1,
+            "embedding_tokens": 41,
+            "http_wall_seconds": 0.9435891569592059,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "temporary_override-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-90514a98fa60a848"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "b0af5c98-189a-4171-af83-2a352f2df4fd"
+          ],
+          "delivered_record_ids": [
+            [
+              "b0af5c98-189a-4171-af83-2a352f2df4fd"
+            ]
+          ],
+          "record_content_sha256": {
+            "b0af5c98-189a-4171-af83-2a352f2df4fd": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1162,
+            "generation_completion_tokens": 43,
+            "generation_tokens": 1205,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.4378396780230105,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "temporary_override-3",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-b900b286789c27c8"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "b0af5c98-189a-4171-af83-2a352f2df4fd"
+          ],
+          "delivered_record_ids": [
+            [
+              "b0af5c98-189a-4171-af83-2a352f2df4fd"
+            ]
+          ],
+          "record_content_sha256": {
+            "b0af5c98-189a-4171-af83-2a352f2df4fd": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1264,
+            "generation_completion_tokens": 35,
+            "generation_tokens": 1299,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.399216755758971,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4976,
+        "generation_completion_tokens": 151,
+        "generation_tokens": 5127,
+        "embedding_calls": 1,
+        "embedding_tokens": 41,
+        "http_wall_seconds": 1.7806455907411873,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/temporary_override-j-r1/trace.jsonl",
+      "trace_sha256": "078a19c91e78054592942a811f2b42baccb128214e1aaefa3dc960aece41c907",
+      "result_sha256": "0612c8911927033fbc8a6c1da7e0b188df4b476414c69baf3dca40f011987615",
+      "review_sha256": "f79c6e653554bb12b88499dcc10790c7e84d1d180ad795fafef1c949b61ea80e"
+    },
+    {
+      "job_id": "save_plan-j-r2",
+      "case_id": "save_plan",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 6,
+      "task_total": 6,
+      "diagnostic_total": 2,
+      "root_note": "Second predeclared repeat: actual correct CREATE and new-session delivery/recall; no business effect or later memory write. All four plan fields and truthful save confirmed from real receipt and Store.",
+      "scores": [
+        {
+          "id": "persist_plan",
+          "layer": "persistent_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_plan",
+          "layer": "later_use_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "save_plan-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "save_plan-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-afe5363c69569c43",
+            "chatcmpl-94682c8f35ceda29"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Transfer plan: 5 Teal reference prisms to cabinet K-7, each packed in a cork-lined pouch."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "ee0d5f01-14ae-4368-ba22-ce45024311cc"
+              },
+              "ref": "chatcmpl-afe5363c69569c43:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "ee0d5f01-14ae-4368-ba22-ce45024311cc"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "ee0d5f01-14ae-4368-ba22-ce45024311cc"
+            ]
+          ],
+          "record_content_sha256": {
+            "ee0d5f01-14ae-4368-ba22-ce45024311cc": "334d92d3e006de88e9649740b5c16a1210c66ff1462920ed6eb0b073dfbc47dc"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2556,
+            "generation_completion_tokens": 78,
+            "generation_tokens": 2634,
+            "embedding_calls": 1,
+            "embedding_tokens": 29,
+            "http_wall_seconds": 0.9423151714727283,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "save_plan-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-883862b454e459fb"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "ee0d5f01-14ae-4368-ba22-ce45024311cc"
+          ],
+          "delivered_record_ids": [
+            [
+              "ee0d5f01-14ae-4368-ba22-ce45024311cc"
+            ]
+          ],
+          "record_content_sha256": {
+            "ee0d5f01-14ae-4368-ba22-ce45024311cc": "334d92d3e006de88e9649740b5c16a1210c66ff1462920ed6eb0b073dfbc47dc"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1141,
+            "generation_completion_tokens": 38,
+            "generation_tokens": 1179,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.4009185847826302,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 3,
+        "generation_prompt_tokens": 3697,
+        "generation_completion_tokens": 116,
+        "generation_tokens": 3813,
+        "embedding_calls": 1,
+        "embedding_tokens": 29,
+        "http_wall_seconds": 1.3432337562553585,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/save_plan-j-r2/trace.jsonl",
+      "trace_sha256": "3b463886b41e703963bbd103bd5d440d01aa1186785bcb8521cde1bef3f9495b",
+      "result_sha256": "2aa95ec245539ec9b03f3355ffa0778beba3032cd5c4aea6524f1f168f7ba344",
+      "review_sha256": "498bfddd854e41dc8594235695f6939ea6cd9bc42e7e44bb3a3d8cfd09408367"
+    },
+    {
+      "job_id": "update_matter-j-r2",
+      "case_id": "update_matter",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 13,
+      "task_total": 13,
+      "diagnostic_total": 3,
+      "root_note": "Second repeat: both independent matters persisted in two records, correct original plan ID updated from R-2 to R-9 with all other fields preserved. Final new-session delivery and answer match both current records; no unrelated writes or business effects.",
+      "scores": [
+        {
+          "id": "persist_plan",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "persist_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "updated_destination",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "preserved_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "same_identity",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_update",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_plan",
+          "layer": "later_use_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "later_preference",
+          "layer": "later_use_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_3",
+          "layer": "persistent_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_3",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "update_matter-3",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "update_matter-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-bb0af2eac5f4ff25",
+            "chatcmpl-90e0cbf2cff59686"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Ongoing delivery plan: 6 Indigo cable reels to shelf R-2 in reusable canvas wraps."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4"
+              },
+              "ref": "chatcmpl-bb0af2eac5f4ff25:tool:0"
+            },
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "Standing preference for inventory summaries: include the serial number and calibration date."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+              },
+              "ref": "chatcmpl-bb0af2eac5f4ff25:tool:1"
+            }
+          ],
+          "current_record_ids": [
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+              "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+            ]
+          ],
+          "record_content_sha256": {
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4": "4bd45787a99309a08a79b86402f6619c43d14b985ddf074619b8fc655e5f2ee6",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2904,
+            "generation_completion_tokens": 141,
+            "generation_tokens": 3045,
+            "embedding_calls": 2,
+            "embedding_tokens": 49,
+            "http_wall_seconds": 1.4309405679814517,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "update_matter-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-8dc2cff69f44816c",
+            "chatcmpl-a26af8e97f682475"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "update",
+                "id": "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+                "content": "Ongoing delivery plan: 6 Indigo cable reels to shelf R-9 in reusable canvas wraps."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "updated",
+                "id": "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4"
+              },
+              "ref": "chatcmpl-8dc2cff69f44816c:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+          ],
+          "delivered_record_ids": [
+            [
+              "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+              "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+            ],
+            [
+              "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+              "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+            ]
+          ],
+          "record_content_sha256": {
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4": "93230a6065115d06e094c969080133c0ffb63968d90db5c2bd50e1f8969108c3",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2799,
+            "generation_completion_tokens": 116,
+            "generation_tokens": 2915,
+            "embedding_calls": 1,
+            "embedding_tokens": 28,
+            "http_wall_seconds": 1.1549000372178853,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "update_matter-3",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-abf4393344ea0597"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+          ],
+          "delivered_record_ids": [
+            [
+              "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4",
+              "3c7dedac-90db-47b4-8b03-ef0cfc2e6064"
+            ]
+          ],
+          "record_content_sha256": {
+            "34ad5373-e0a3-4d51-8a0d-6015be4d2ee4": "93230a6065115d06e094c969080133c0ffb63968d90db5c2bd50e1f8969108c3",
+            "3c7dedac-90db-47b4-8b03-ef0cfc2e6064": "c15e71f570d129325cdb2cd59c7917894bc82c73450ec46d9611a735e767b803"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1205,
+            "generation_completion_tokens": 39,
+            "generation_tokens": 1244,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.41478201886639,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 5,
+        "generation_prompt_tokens": 6908,
+        "generation_completion_tokens": 296,
+        "generation_tokens": 7204,
+        "embedding_calls": 3,
+        "embedding_tokens": 77,
+        "http_wall_seconds": 3.000622624065727,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/update_matter-j-r2/trace.jsonl",
+      "trace_sha256": "0e8f7de2e86f4bce1e56b315fcd2610ebab3a57beb068f6ede9d87448e016c99",
+      "result_sha256": "b7ee18eef6606c34e333f42e4cf04bba4dad1deb0443600114eddd1a0bbd2398",
+      "review_sha256": "48521fb43134cf909cfb4d3a4f17cb91be50f5e3f6c1d0c423af781a5b777784"
+    },
+    {
+      "job_id": "business_current-j-r2",
+      "case_id": "business_current",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 7,
+      "task_total": 7,
+      "diagnostic_total": 2,
+      "root_note": "Second repeat: exactly one full-key reservation and label, then actual exact-key lookup in a new session. Both final replies match actual receipt ID/fields; one world attempt, no memory, no repeated action or dispatch claim.",
+      "scores": [
+        {
+          "id": "actual_reservation",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "actual_result",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "real_lookup",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "lookup_answer",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_repeat",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "business_current-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "business_current-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "business_current-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-ac6334dc048d372d",
+            "chatcmpl-b45ae2635e4eae7a"
+          ],
+          "tools": [
+            {
+              "name": "reserve_and_label",
+              "arguments": {
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches"
+              },
+              "receipt": {
+                "ok": true,
+                "status": "label_created",
+                "reservation_id": "RSV-e787f665-459a-49d0-800e-e271580d6294",
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches",
+                "label_status": "created"
+              },
+              "ref": "chatcmpl-ac6334dc048d372d:tool:0"
+            }
+          ],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            [],
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2470,
+            "generation_completion_tokens": 110,
+            "generation_tokens": 2580,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 1.112019507214427,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "business_current-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-818388acaa717c0d",
+            "chatcmpl-9b9959317636bb10"
+          ],
+          "tools": [
+            {
+              "name": "get_reservation",
+              "arguments": {
+                "item_key": "Cobalt alignment tiles"
+              },
+              "receipt": {
+                "ok": true,
+                "status": "found",
+                "reservation_id": "RSV-e787f665-459a-49d0-800e-e271580d6294",
+                "item_key": "Cobalt alignment tiles",
+                "quantity": 2,
+                "destination": "tray S-4",
+                "packing": "rigid pouches",
+                "label_status": "created"
+              },
+              "ref": "chatcmpl-818388acaa717c0d:tool:0"
+            }
+          ],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            [],
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2469,
+            "generation_completion_tokens": 90,
+            "generation_tokens": 2559,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.9087218027561903,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-e787f665-459a-49d0-800e-e271580d6294",
+            "user_id": "morgan",
+            "item_key": "Cobalt alignment tiles",
+            "quantity": 2,
+            "destination": "tray S-4",
+            "packing": "rigid pouches",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "morgan",
+            "item_key": "Cobalt alignment tiles",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4939,
+        "generation_completion_tokens": 200,
+        "generation_tokens": 5139,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 2.0207413099706173,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/business_current-j-r2/trace.jsonl",
+      "trace_sha256": "183036d097dc97c3b7d44e0ebf8b60aa4752b9ccd799c8b1ef9d499c5ba7cf93",
+      "result_sha256": "1b11e6968e07ef99a136e418702ef61125a2539ff7e11db8c598b556db48c71c",
+      "review_sha256": "3cd587f9a78c0c8e2661c8e625c8bcb30f7f653c36666342d311aae89f1e5141"
+    },
+    {
+      "job_id": "read_only-j-r2",
+      "case_id": "read_only",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 3,
+      "task_total": 3,
+      "diagnostic_total": 1,
+      "root_note": "Second repeat final exactly45; no tool call, record or world side effect.",
+      "scores": [
+        {
+          "id": "number",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "read_only-1",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "read_only-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-b3ac86bb5bf5d8ee"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1079,
+            "generation_completion_tokens": 7,
+            "generation_tokens": 1086,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.2637102333828807,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 1,
+        "generation_prompt_tokens": 1079,
+        "generation_completion_tokens": 7,
+        "generation_tokens": 1086,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.2637102333828807,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/read_only-j-r2/trace.jsonl",
+      "trace_sha256": "b8da557bd33a31de002eae45605c11c21a240b8419897d95067d4867f86c783d",
+      "result_sha256": "c92583f01725c1e5b604d5d8182c58c928715c014f33574e9ebf038ade535fd5",
+      "review_sha256": "50e8b5e906c2d920b31f02c66252db1c6673806c2ca8c7803dd08b27003140b6"
+    },
+    {
+      "job_id": "quoted_rejected-j-r2",
+      "case_id": "quoted_rejected",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 6,
+      "task_total": 6,
+      "diagnostic_total": 2,
+      "root_note": "Second repeat correctly summarized rejected suggestion in one sentence, then answered exactly13. No adoption, memory writes or business calls in either message.",
+      "scores": [
+        {
+          "id": "summarize_quote",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "number",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_1",
+          "layer": "persistent_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "quoted_rejected-2",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "quoted_rejected-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-bd55ae5278f714dd"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1103,
+            "generation_completion_tokens": 28,
+            "generation_tokens": 1131,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3929345537908375,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "quoted_rejected-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-90c93d9a337439c8"
+          ],
+          "tools": [],
+          "current_record_ids": [],
+          "delivered_record_ids": [
+            []
+          ],
+          "record_content_sha256": {},
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1175,
+            "generation_completion_tokens": 7,
+            "generation_tokens": 1182,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.2131112040951848,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 2,
+        "generation_prompt_tokens": 2278,
+        "generation_completion_tokens": 35,
+        "generation_tokens": 2313,
+        "embedding_calls": 0,
+        "embedding_tokens": 0,
+        "http_wall_seconds": 0.6060457578860223,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/quoted_rejected-j-r2/trace.jsonl",
+      "trace_sha256": "1035b683d21d4216317cf92dd114fe908e885aff02b51bca369655708168fc1b",
+      "result_sha256": "7efa22bb73a03382c435f5657fb7d254c5cedbf3892e6b327e73ecd8158dfc18",
+      "review_sha256": "f5bce6c82c0e33ffd3464cab6f9803483be81209d9f827735cdef3879a3e0a12"
+    },
+    {
+      "job_id": "temporary_override-j-r2",
+      "case_id": "temporary_override",
+      "repeat": 2,
+      "status": "PASS",
+      "task_passed": 11,
+      "task_total": 11,
+      "diagnostic_total": 3,
+      "root_note": "Second repeat persisted exact standing format/override scope; correctly used temporary paragraph, then exactly two relevant bullets. Record remained unchanged across both read-only messages and no business effects occurred.",
+      "scores": [
+        {
+          "id": "persist_preference",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "truthful_save",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "temporary_format",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "temporary_content",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "standing_format",
+          "layer": "later_use_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "current_content",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_2",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_memory_write_3",
+          "layer": "persistent_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_1",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-1",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_2",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-2",
+          "pass": true,
+          "failure": null
+        },
+        {
+          "id": "no_business_3",
+          "layer": "current_explicit_obligations",
+          "target_message_id": "temporary_override-3",
+          "pass": true,
+          "failure": null
+        }
+      ],
+      "turns": [
+        {
+          "message_id": "temporary_override-1",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-ae526d01c29508bf",
+            "chatcmpl-bb4042c184c353ed"
+          ],
+          "tools": [
+            {
+              "name": "manage_memory",
+              "arguments": {
+                "action": "create",
+                "content": "User prefers routine lab-handover advice to be formatted using exactly two bullet points. This preference applies to all future sessions unless explicitly overridden for a single reply."
+              },
+              "receipt": {
+                "ok": true,
+                "status": "created",
+                "id": "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+              },
+              "ref": "chatcmpl-ae526d01c29508bf:tool:0"
+            }
+          ],
+          "current_record_ids": [
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+          ],
+          "delivered_record_ids": [
+            [],
+            [
+              "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+            ]
+          ],
+          "record_content_sha256": {
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 2,
+            "generation_prompt_tokens": 2570,
+            "generation_completion_tokens": 73,
+            "generation_tokens": 2643,
+            "embedding_calls": 1,
+            "embedding_tokens": 41,
+            "http_wall_seconds": 0.9155443259514868,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "temporary_override-2",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-bf98e772f1365fc7"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+          ],
+          "delivered_record_ids": [
+            [
+              "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+            ]
+          ],
+          "record_content_sha256": {
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1159,
+            "generation_completion_tokens": 43,
+            "generation_tokens": 1202,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.4351051920093596,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        },
+        {
+          "message_id": "temporary_override-3",
+          "status": "COMPLETED",
+          "provider_ids": [
+            "chatcmpl-9ea97790383a98ca"
+          ],
+          "tools": [],
+          "current_record_ids": [
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+          ],
+          "delivered_record_ids": [
+            [
+              "28abeac4-64b0-40d2-8dd9-56e93d1fc67d"
+            ]
+          ],
+          "record_content_sha256": {
+            "28abeac4-64b0-40d2-8dd9-56e93d1fc67d": "bfb2eedc15d7109d1b4686d90ea6dcb451457cbf61db9a75372ffe770fe997cd"
+          },
+          "cost": {
+            "generation_calls": 1,
+            "generation_prompt_tokens": 1263,
+            "generation_completion_tokens": 35,
+            "generation_tokens": 1298,
+            "embedding_calls": 0,
+            "embedding_tokens": 0,
+            "http_wall_seconds": 0.3998090489767492,
+            "http_errors": 0,
+            "unknown_usage": 0,
+            "local_rejections": 0
+          }
+        }
+      ],
+      "final_world": {
+        "label_available": true,
+        "reservations": [],
+        "attempts": []
+      },
+      "cost": {
+        "generation_calls": 4,
+        "generation_prompt_tokens": 4992,
+        "generation_completion_tokens": 151,
+        "generation_tokens": 5143,
+        "embedding_calls": 1,
+        "embedding_tokens": 41,
+        "http_wall_seconds": 1.7504585669375956,
+        "http_errors": 0,
+        "unknown_usage": 0,
+        "local_rejections": 0
+      },
+      "trace_path": "artifacts/development-experiment-v7/e1/temporary_override-j-r2/trace.jsonl",
+      "trace_sha256": "354ebf9ea177cd0acc5d46de95a60828b840c50fd5433483900536d1ac5baa56",
+      "result_sha256": "1035df34c3691595c4ef34ec2e36c39cada34fc067af1fa9033d02d95923987a",
+      "review_sha256": "f468fce8c24c7a8f6f05a4ddad36fde6598e1ade73b52b5ae880552089b92732"
+    }
+  ],
+  "evidence": {
+    "runtime_source_files": 160,
+    "original_frozen_runtime_and_input_hashes_unchanged": true,
+    "input_in_actual_http_all_turns": true,
+    "later_record_bodies_and_ids_in_actual_http": true,
+    "distinct_created_ids": 8,
+    "unique_generation_provider_ids": 38,
+    "orchestrator_sha256": "c6ff48e2fd1bf9cf97413d41a0e0efe4b568feadfa682b3312a290d6ab056cf7",
+    "analysis_sha256": "597fe554e932a84f44aae9ba2bcd1f201b8338c4f03a2387ae840c8f8d93e993",
+    "root_manual_review_recorder_sha256": "bce38763eb347e3e7b050d31433a75e0de8f5572b03b0cc29852fe58d26607a0",
+    "root_chain_cost_audit_sha256": "af32630207f8931c7a27e29912cbc600e03317e56e214da4a89f43a37889872a"
+  },
+  "interpretation": [
+    "J works on this bounded synthetic diagnostic collection; repeated tasks and obligations are correlated.",
+    "N unavailable: no J/N effect estimate, no native efficacy or default-candidate selection.",
+    "Unchanged JSON encoding plus different tasks means no effect improvement or cost compression versusv6 can be inferred.",
+    "v6 counterexamples and broader research NOT_ACHIEVED remain; ProductNO_GO; no automatic E2-E6/second family."
+  ]
+}

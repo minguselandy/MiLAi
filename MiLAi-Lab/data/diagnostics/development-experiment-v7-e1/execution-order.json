@@ -1,0 +1,450 @@
+{
+  "kind": "MILAI_V7_E1_EXECUTION_ORDER",
+  "status": "INPUTS_FIXED_RUNTIME_FREEZE_PENDING",
+  "serial": true,
+  "attempts_per_job": 1,
+  "repeat_count": 2,
+  "planned_microtrajectories": 24,
+  "planned_public_messages": 52,
+  "runnable_J": 12,
+  "blocked_N": 12,
+  "post_freeze_repair_policy": "No repair/retry/replacement within this batch; retain ordinary semantic failures and finish independent safe jobs; unsafe permission/scope/replayed unknown side effect stops affected path.",
+  "steps": [
+    {
+      "job_id": "save_plan-j-r1",
+      "case_id": "save_plan",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-save_plan-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "job_id": "save_plan-n-r1",
+      "case_id": "save_plan",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-save_plan-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "job_id": "update_matter-n-r1",
+      "case_id": "update_matter",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-update_matter-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/update_matter-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "job_id": "update_matter-j-r1",
+      "case_id": "update_matter",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-update_matter-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/update_matter-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "job_id": "business_current-j-r1",
+      "case_id": "business_current",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-business_current-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/business_current-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "business",
+        "use"
+      ]
+    },
+    {
+      "job_id": "business_current-n-r1",
+      "case_id": "business_current",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-business_current-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/business_current-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "business",
+        "use"
+      ]
+    },
+    {
+      "job_id": "read_only-n-r1",
+      "case_id": "read_only",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-read_only-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/read_only-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 1,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "use"
+      ]
+    },
+    {
+      "job_id": "read_only-j-r1",
+      "case_id": "read_only",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-read_only-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/read_only-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 1,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "use"
+      ]
+    },
+    {
+      "job_id": "quoted_rejected-j-r1",
+      "case_id": "quoted_rejected",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-quoted_rejected-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/quoted_rejected-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "quoted_rejected-n-r1",
+      "case_id": "quoted_rejected",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-quoted_rejected-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/quoted_rejected-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "temporary_override-n-r1",
+      "case_id": "temporary_override",
+      "repeat": 1,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-temporary_override-n-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/temporary_override-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "temporary_override-j-r1",
+      "case_id": "temporary_override",
+      "repeat": 1,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-temporary_override-j-r1",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/temporary_override-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "save_plan-n-r2",
+      "case_id": "save_plan",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-save_plan-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "job_id": "save_plan-j-r2",
+      "case_id": "save_plan",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-save_plan-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/save_plan-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "use"
+      ]
+    },
+    {
+      "job_id": "update_matter-j-r2",
+      "case_id": "update_matter",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-update_matter-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/update_matter-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "job_id": "update_matter-n-r2",
+      "case_id": "update_matter",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-update_matter-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/update_matter-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "maintenance",
+        "use"
+      ]
+    },
+    {
+      "job_id": "business_current-n-r2",
+      "case_id": "business_current",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-business_current-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/business_current-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "business",
+        "use"
+      ]
+    },
+    {
+      "job_id": "business_current-j-r2",
+      "case_id": "business_current",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-business_current-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/business_current-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "business",
+        "use"
+      ]
+    },
+    {
+      "job_id": "read_only-j-r2",
+      "case_id": "read_only",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-read_only-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/read_only-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 1,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "use"
+      ]
+    },
+    {
+      "job_id": "read_only-n-r2",
+      "case_id": "read_only",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-read_only-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/read_only-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 1,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "use"
+      ]
+    },
+    {
+      "job_id": "quoted_rejected-n-r2",
+      "case_id": "quoted_rejected",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-quoted_rejected-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/quoted_rejected-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "quoted_rejected-j-r2",
+      "case_id": "quoted_rejected",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-quoted_rejected-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/quoted_rejected-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 2,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "temporary_override-j-r2",
+      "case_id": "temporary_override",
+      "repeat": 2,
+      "protocol": "J",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-temporary_override-j-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/temporary_override-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/json-action-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "RUNNABLE_AFTER_P1",
+      "environment_reason": null,
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    },
+    {
+      "job_id": "temporary_override-n-r2",
+      "case_id": "temporary_override",
+      "repeat": 2,
+      "protocol": "N",
+      "arm": "B0",
+      "run": "development-experiment-v7-e1-temporary_override-n-r2",
+      "inputs": "data/diagnostics/development-experiment-v7-e1/temporary_override-inputs.json",
+      "config": "data/diagnostics/development-experiment-v7-e1/native-config.json",
+      "phase": 0,
+      "planned_public_messages": 3,
+      "status_at_freeze": "BLOCKED_ENVIRONMENT",
+      "environment_reason": "deployed native auto parser disabled; no shared service change authorized",
+      "cost_stages": [
+        "formation",
+        "use",
+        "use"
+      ]
+    }
+  ]
+}

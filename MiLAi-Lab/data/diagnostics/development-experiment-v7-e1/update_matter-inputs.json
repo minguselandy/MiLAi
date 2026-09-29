@@ -1,0 +1,40 @@
+{
+  "kind": "MILAI_PERSISTENT_MEMORY_INPUTS",
+  "workload": "application",
+  "script": {
+    "users": [
+      "morgan"
+    ],
+    "initial_label_available": true,
+    "phases": [
+      {
+        "id": 0,
+        "operator_memory": [],
+        "world_events": [],
+        "messages": [
+          {
+            "message_id": "update_matter-1",
+            "user_id": "morgan",
+            "session_id": "session-1",
+            "public_index": 0,
+            "text": "Remember my ongoing delivery plan: 6 Indigo cable reels to shelf R-2 in reusable canvas wraps. Also remember a separate standing preference for inventory summaries: include the serial number and calibration date. Keep these independent matters available for future sessions. Save and confirm, without business action."
+          },
+          {
+            "message_id": "update_matter-2",
+            "user_id": "morgan",
+            "session_id": "session-2",
+            "public_index": 0,
+            "text": "Update only the destination of my ongoing Indigo cable reels plan to shelf R-9. Update the existing memory for that plan, keep its quantity and packing, and preserve my separate inventory-summary preference. Confirm the actual update; do not reserve, label, or dispatch anything."
+          },
+          {
+            "message_id": "update_matter-3",
+            "user_id": "morgan",
+            "session_id": "session-3",
+            "public_index": 0,
+            "text": "State the current item, quantity, destination, and packing in my saved delivery plan, and the two fields required by my separate inventory-summary preference. Read only: do not change memory or take business action."
+          }
+        ]
+      }
+    ]
+  }
+}

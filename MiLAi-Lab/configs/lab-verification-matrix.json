@@ -80,9 +80,10 @@
     "tests/unit/test_contextual_v9_prepare.py::test_prepare_v11_three_arms_share_source_identity_on_exposed_arc",
     "tests/unit/test_contextual_v9_prepare.py::test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation",
     "tests/unit/test_contextual_v9_prepare.py::test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_controls",
-    "tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction"
+    "tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction",
+    "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery"
   ],
-  "local_artifact_collected_nodes": 11,
-  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; run these historical tests only with those assets",
+  "local_artifact_collected_nodes": 12,
+  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets",
   "integration_tests": []
 }
