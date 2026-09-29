@@ -16,6 +16,7 @@ from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, RECIPE_ID, SYSTEM_PROMPT
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
+from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
 from milai_lab.providers.langmem_chat import _action_prompt, _action_schema
 
 LAB = Path(__file__).resolve().parents[3]
@@ -23,7 +24,7 @@ REFERENCE = LAB / "data/manifests/langmem-b1-v16-reference.json"
 FOUNDATION_LOCK = LAB / "data/locks/langmem-foundation.lock.json"
 INSTRUMENTATION_VERSION = "b1-sidecar-v1"
 ARMS = ("b0_control", "b1_instrumented")
-REQUIRED_OVERLAY = set(APPLICATION_SOURCE_FILES) | {
+REQUIRED_OVERLAY = set(APPLICATION_SOURCE_FILES) | set(REQUEST_SOURCE_FILES) | {
     "configs/langmem-b1-v16.json",
     "pyproject.toml",
     "uv.lock",

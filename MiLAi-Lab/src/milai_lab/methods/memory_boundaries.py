@@ -9,10 +9,9 @@ from collections.abc import Callable, Mapping, Sequence
 from datetime import UTC, datetime
 from typing import Any
 
-from milai_lab.methods.request_context import (
-    MemoryPlacement,
-    ModelView,
-    RequestContext,
+from milai_lab.contracts.memory import MemoryObjectRef, MemorySourceRef
+from milai_lab.contracts.request import MemoryPlacement, ModelView, RequestContext
+from milai_lab.memory.presentation import (
     record_material,
     render_request,
     render_system,
@@ -118,7 +117,7 @@ def operation_audit(messages: Sequence[Mapping[str, Any]], scope: Mapping[str, s
     """Pair actual calls/results; preceding observations are context, never support proof."""
     start = next((i for i in range(len(messages) - 1, -1, -1)
                   if messages[i].get("type") == "human"), len(messages))
-    events: list[dict[str, Any]] = []
+    events: list[MemorySourceRef] = []
     operations: list[dict[str, Any]] = []
     calls: dict[str, dict[str, Any]] = {}
     operation: dict[str, Any] | None = None
@@ -207,7 +206,7 @@ def working_state(audit: Mapping[str, Any], current_ref: str,
                   records: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
     """Only paired, successful accesses can activate a currently resolvable record."""
     current = {row["id"] for row in records}
-    refs: dict[str, dict[str, Any]] = {}
+    refs: dict[str, MemoryObjectRef] = {}
     for operation in audit["operations"]:
         record_id, status = operation["record_id"], operation["status"]
         if operation["tool_name"] not in {"manage_memory", "read_memory"} or not record_id:

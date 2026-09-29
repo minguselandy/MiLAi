@@ -28,6 +28,7 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
@@ -52,6 +53,7 @@ def _verify_development_spike(config_path: Path, config: dict[str, Any], run: st
                 "src/milai_lab/runners/langmem_foundation.py",
                 "tools/run_langmem_foundation.py",
                 *APPLICATION_SOURCE_FILES,
+                *REQUEST_SOURCE_FILES,
             )
         },
     }

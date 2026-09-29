@@ -49,8 +49,13 @@
       "requirement": "Request/Memory shared DTO canonical contracts",
       "phase": "S1",
       "required_evidence": "Actual canonical RequestContext/MemoryPlacement/ModelView, five Memory DTO/Protocols, Operation data contracts; same-object/render/type checks",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+        "tests/contracts/test_request_contracts.py",
+        "tests/architecture/test_request_architecture.py",
+        "tests/architecture/test_request_source_identity.py"
+      ]
     },
     {
       "id": "C07",
@@ -127,7 +132,7 @@
   ],
   "stages": {
     "S0": "COMPLETE_INVENTORY_WITH_PHASE_GOLDENS_REQUIRED",
-    "S1": "IN_PROGRESS",
+    "S1": "COMPLETE_LOCAL_CHECKS",
     "S2": "PENDING",
     "S3": "PENDING",
     "S4": "PENDING",
@@ -209,6 +214,15 @@
       "request_golden_cases": 16,
       "request_golden_errors": 4,
       "note": "Other phase-specific golden contracts must be frozen before their respective source changes; S0 completion is not completion of C12."
+    },
+    "S1": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+      "request_cases": 16,
+      "request_errors": 4,
+      "focused_tests_passed": 102,
+      "definition_ast_equal": 7,
+      "isolated_installed_render_cases": 16,
+      "note": "Local stage checks only; final CI and later phase contracts remain pending."
     }
   }
 }

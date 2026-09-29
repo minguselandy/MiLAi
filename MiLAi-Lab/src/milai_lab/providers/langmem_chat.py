@@ -16,6 +16,7 @@ from langchain_core.utils.function_calling import convert_to_openai_tool
 from pydantic import ConfigDict
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.memory.presentation import json_action_calls
 from milai_lab.methods.freshness_projection.projection import SOURCE_AUTHORITY
 from milai_lab.methods.memory_boundaries import MemoryBoundaryView
 from milai_lab.methods.memory_result import (
@@ -32,7 +33,6 @@ from milai_lab.methods.on_demand_reconstruction.schema import (
     ReconstructionError,
     odr_action_schema,
 )
-from milai_lab.methods.request_context import json_action_calls
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 

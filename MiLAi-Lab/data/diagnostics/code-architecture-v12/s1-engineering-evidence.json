@@ -1,0 +1,328 @@
+{
+  "phase": "S1",
+  "source_baseline_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "changed_files": [
+    {
+      "path": "../.github/workflows/ci.yml",
+      "before_sha256": "37adbde08d3b43c9a7abccd1ec8c9354bd75a8cc3058cdaf0677951bf81aa46f",
+      "after_sha256": "bbaf159becb6becde12fd42e4795335b4aa716a40e7d66e850e26d4747bef51c"
+    },
+    {
+      "path": "../.github/workflows/fast.yml",
+      "before_sha256": "fbbc5202b99512b2ff60a81f7a64a1e1be79b8fbfa417517ccdac59023482ff4",
+      "after_sha256": "37a06822cd7d7c9785ac4ac37e261a3651e1acf81a1c36b8d7a9d122453a69dc"
+    },
+    {
+      "path": "configs/lab-verification-matrix.json",
+      "before_sha256": "29283d0b5eaf0a53759df36e90f786da4377752750ae4c2d84f2b390ce5ab14b",
+      "after_sha256": "ae5c725028f02086067597f57f970925f327684ae63326068f56379ed2e55988"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_b1_identity.py",
+      "before_sha256": "6186098b99e8d050b670569b3149b061a5b7ddb6fa9114d7ae99a9cef91156fb",
+      "after_sha256": "98c9eff9bf8722948acf0e038f13ba5556df9c602a014ce3817e6bd0fe0e055c"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_identity.py",
+      "before_sha256": "dfd18be65ca35622e5ae64debb5b5bf7524308472db2309387d5639a83a02a94",
+      "after_sha256": "8b19827025e593e51909a389a208a40c688ea0f3a018a441d399d2d2c6911233"
+    },
+    {
+      "path": "src/milai_lab/contracts/__init__.py",
+      "before_sha256": "e0ab8e72b56b04ba0b38e93263b26bade5241ffa38199de061bd4638a02c68ce",
+      "after_sha256": "f638ee64be03e55515d35cd62352e12dde3f5aa83d1c40e227281f0426b74e8f"
+    },
+    {
+      "path": "src/milai_lab/contracts/memory.py",
+      "before_sha256": null,
+      "after_sha256": "bac685f06824df53306dc432412b1b4c4269bcdf76808e830d07c14130a39719"
+    },
+    {
+      "path": "src/milai_lab/contracts/operations.py",
+      "before_sha256": null,
+      "after_sha256": "45ecb4c8ffdd66cdbc288503a096490cb756dd660c28ee0cf2ccbc020a1c533c"
+    },
+    {
+      "path": "src/milai_lab/contracts/request.py",
+      "before_sha256": null,
+      "after_sha256": "1f1c9838b86677a7be46498545560175df4aee66cdf4a00e1bd65bd2f94a7fce"
+    },
+    {
+      "path": "src/milai_lab/harness/source_identity.py",
+      "before_sha256": null,
+      "after_sha256": "7cf01b5e03dc083e626d47a96efeab6291bdd8c923bce93d5ebc4ca487430858"
+    },
+    {
+      "path": "src/milai_lab/memory/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "8d5db4c158d52d91bc0821175643dbe23b289fa642a1c7a7e9337bfbd7ccac71"
+    },
+    {
+      "path": "src/milai_lab/memory/presentation.py",
+      "before_sha256": null,
+      "after_sha256": "ddfdaf71495d99cc6a4eec4f3f77ebd5204a1137ac2d700cf97048ffc8b136f3"
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/identity.py",
+      "before_sha256": "bc3e9b4fe6934f1ea8b9bd179112d206553003b9e7c53d5c3656d662397a5eaa",
+      "after_sha256": "aa5055f12e1f572d20d6f513f3fb497ca1d8e2906e013683c26bc7987e007b24"
+    },
+    {
+      "path": "src/milai_lab/methods/memory_boundaries.py",
+      "before_sha256": "b85b49f0bb1e0f74710893a3a0d8653f56edbc29d563f3bdaa67cd334dc0d556",
+      "after_sha256": "f590a682147266edb1ae22c67e2f4d90aff71666b5415912bc56dc3df05ff6a5"
+    },
+    {
+      "path": "src/milai_lab/methods/milai_m1/identity.py",
+      "before_sha256": "7ca19d497b28a0c76ebed245124b45295bf216ba292564918af74ab9a0c24b53",
+      "after_sha256": "9aa3f2226494a3b141bb3ce51cc7fd74aa292f1d635eccb5fc791643d235cf08"
+    },
+    {
+      "path": "src/milai_lab/methods/on_demand_reconstruction/identity.py",
+      "before_sha256": "f96fddca6c9fa7b82a0ed48d68368254ee3772cb2636146e7f291804b7298b0a",
+      "after_sha256": "4161c26b899eb6a475b633b17f9ac602c1e83d3f8692feea1a2b854259b7495e"
+    },
+    {
+      "path": "src/milai_lab/methods/request_context.py",
+      "before_sha256": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b",
+      "after_sha256": "290d9c009cecd665b791846a5890892544934ad5a70d08112edb4a82bc032c0b"
+    },
+    {
+      "path": "src/milai_lab/providers/langmem_chat.py",
+      "before_sha256": "882e183bd750a9de243f19140f57fdbdc198f56c834d80dad842bc665e43e97d",
+      "after_sha256": "cb73beb05094260ef927bfed7cae80affaf49acd486e01f0854d90acd9bece28"
+    },
+    {
+      "path": "tests/architecture/test_request_architecture.py",
+      "before_sha256": null,
+      "after_sha256": "3fd8fa84b4fdf9e974164d322b78ee9c1355146d89d14b690b4cb339b0bd784a"
+    },
+    {
+      "path": "tests/architecture/test_request_source_identity.py",
+      "before_sha256": null,
+      "after_sha256": "9133d33b3625f23bd542fe7533e8b0f4e15e7ae662598551d45d84d08b700a3d"
+    },
+    {
+      "path": "tests/contracts/test_request_contracts.py",
+      "before_sha256": null,
+      "after_sha256": "1ea82b31675ef796da1b0b657f0b759f7816b6eba6cd338272bbf3b4510216be"
+    },
+    {
+      "path": "tests/unit/test_application_architecture.py",
+      "before_sha256": "ec7c8713601207211e21309fe96397463d5679f31efbbf27c84b486617698832",
+      "after_sha256": "36129aedfb500983c6e878e40f9bb3f171d2a3d9f92c958d0547f8577ee99be8"
+    },
+    {
+      "path": "tools/check_verification_matrix.py",
+      "before_sha256": "1e1c20d4c77eab4eeaecb792cf0cc96d7b6b5586785b29044793b8d2bcd9e9e5",
+      "after_sha256": "0af1de18c463287c20a87358a8dc3f92bf72a143a41330721abd6e5b7336e8a8"
+    },
+    {
+      "path": "tools/run_langmem_foundation.py",
+      "before_sha256": "40985561262a514640a6d77aefc3220ca88dca89c057d9c660d9657ceed59d79",
+      "after_sha256": "e5bbdee58a34940b0b023d5b9d566959d7e4f0389927a9013639c60af8169e0b"
+    }
+  ],
+  "dto_origins": {
+    "MemoryRecord": {
+      "definition": "src/milai_lab/contracts/memory.py:8",
+      "actual_producer": "src/milai_lab/baselines/langmem_mcp.py",
+      "format": "id + unchanged Store value; no new keys",
+      "typed_evidence": "tests/architecture/test_request_source_identity.py:90"
+    },
+    "MemoryMutationReceipt": {
+      "definition": "src/milai_lab/contracts/memory.py:15",
+      "actual_producers": [
+        "src/milai_lab/baselines/langmem_strict_tools.py:17",
+        "src/milai_lab/baselines/langmem_strict_tools.py:25"
+      ],
+      "format": "ok/status, optional id/reason; no new serialization/validation"
+    },
+    "MemoryReadResult": {
+      "definition": "src/milai_lab/contracts/memory.py:24",
+      "actual_producer": "src/milai_lab/baselines/langmem_agent.py:141",
+      "format": "ok/status/id, value present only for found records"
+    },
+    "MemorySourceRef": {
+      "definition": "src/milai_lab/contracts/memory.py:33",
+      "actual_typed_producer": "src/milai_lab/methods/memory_boundaries.py:114",
+      "format": "existing checkpoint event id/kind/position/message_id/hash/observation time"
+    },
+    "MemoryObjectRef": {
+      "definition": "src/milai_lab/contracts/memory.py:44",
+      "actual_typed_producer": "src/milai_lab/methods/memory_boundaries.py:205",
+      "format": "record_id/access_receipt_ref; existing successful access reference"
+    },
+    "EffectStatus": {
+      "definition": "src/milai_lab/contracts/operations.py:7",
+      "actual_producers": [
+        "src/milai_lab/application/journal.py:266",
+        "src/milai_lab/application/journal.py:204"
+      ],
+      "format": "existing confirmed/partial/none/observed/unknown strings"
+    },
+    "OperationIdentity": {
+      "definition": "src/milai_lab/contracts/operations.py:10",
+      "actual_consumer": "src/milai_lab/application/journal.py:197",
+      "format": "existing run_id/arm_id/owner/task_id/operation_id fields"
+    },
+    "ApplicationTarget": {
+      "definition": "src/milai_lab/contracts/operations.py:20",
+      "actual_consumer": "src/milai_lab/application/journal.py:101",
+      "format": "existing native item_key/quantity/destination/packing plus optional resolved; completeness remains with journal"
+    }
+  },
+  "definition_equivalence": {
+    "unchanged_definition_ast": [
+      "MemoryPlacement",
+      "ModelView",
+      "RequestContext",
+      "json_action_calls",
+      "record_material",
+      "render_system",
+      "render_request"
+    ],
+    "baseline": "request_context-before.py"
+  },
+  "package": {
+    "sdist_sha256": "d633c308dbf8ca51f55bee4d1109017d4b1edc35e65e8bdf215e1b35a5162cbb",
+    "wheel_from_sdist_sha256": "1370b8d8242a6969ae345fb7225d4c4be4e211da1c429154b9079d4d3d28f656",
+    "canonical_source_bytes_verified": [
+      "src/milai_lab/contracts/__init__.py",
+      "src/milai_lab/contracts/arms.py",
+      "src/milai_lab/contracts/memory.py",
+      "src/milai_lab/contracts/operations.py",
+      "src/milai_lab/contracts/protocol.py",
+      "src/milai_lab/contracts/records.py",
+      "src/milai_lab/contracts/request.py",
+      "src/milai_lab/memory/__init__.py",
+      "src/milai_lab/memory/presentation.py",
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/methods/request_context.py"
+    ],
+    "offline": true,
+    "dependencies_installed": [],
+    "installed_render_cases": 16
+  },
+  "unchanged_golden_sha256": "656d213c1533a4cfafedd42d23e94335967cb24ed789dcdc91a6ca0f2f02dda5",
+  "scope": {
+    "host_calls": 0,
+    "embedding_calls": 0,
+    "judge_calls": 0,
+    "services_started": 0,
+    "model_downloads": 0,
+    "dependency_downloads": 0,
+    "git_operations": 0,
+    "source_serializers_added": 0,
+    "source_validators_added": 0
+  },
+  "remaining": [
+    "S2-S7 canonical extraction, complete package DAG/facade checks and full owner map remain future phases.",
+    "Historical locks and reports are unchanged and must replay at their original commits; current identity gates require canonical source registration.",
+    "No Fast CI remote run/commit/merge performed by the source writer. Local S1 verification is mechanical behavior evidence only.",
+    "No private assets, PostgreSQL/real external services, broad test suite or benchmarks were used."
+  ],
+  "checks": [
+    {
+      "label": "s1-before-behavior",
+      "returncode": 0,
+      "seconds": 1.159
+    },
+    {
+      "label": "s1-before-ruff",
+      "returncode": 0,
+      "seconds": 0.505
+    },
+    {
+      "label": "s1-before-mypy",
+      "returncode": 0,
+      "seconds": 2.296
+    },
+    {
+      "label": "s1-before-boundary",
+      "returncode": 0,
+      "seconds": 0.759
+    },
+    {
+      "label": "s1-before-tools-boundary",
+      "returncode": 0,
+      "seconds": 1.593
+    },
+    {
+      "label": "s1-before-matrix",
+      "returncode": 0,
+      "seconds": 0.724
+    },
+    {
+      "label": "s1-after-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.092
+    },
+    {
+      "label": "s1-after-behavior-initial",
+      "returncode": 1,
+      "seconds": 3.392
+    },
+    {
+      "label": "s1-after-mypy-initial",
+      "returncode": 0,
+      "seconds": 34.962
+    },
+    {
+      "label": "s1-after-ruff-final",
+      "returncode": 0,
+      "seconds": 0.152
+    },
+    {
+      "label": "s1-after-core-mypy-final",
+      "returncode": 0,
+      "seconds": 0.656
+    },
+    {
+      "label": "s1-after-matrix",
+      "returncode": 0,
+      "seconds": 0.793
+    },
+    {
+      "label": "s1-after-behavior-final",
+      "returncode": 0,
+      "seconds": 3.328
+    },
+    {
+      "label": "s1-build-sdist-initial",
+      "returncode": 0,
+      "seconds": 5.118
+    },
+    {
+      "label": "s1-build-wheel-from-sdist",
+      "returncode": 0,
+      "seconds": 0.546
+    },
+    {
+      "label": "s1-create-isolated-core",
+      "returncode": 0,
+      "seconds": 0.025
+    },
+    {
+      "label": "s1-install-isolated-core",
+      "returncode": 0,
+      "seconds": 0.156
+    },
+    {
+      "label": "s1-isolated-installed-import",
+      "returncode": 0,
+      "seconds": 0.055
+    },
+    {
+      "label": "s1-after-boundary",
+      "returncode": 0,
+      "seconds": 0.741
+    },
+    {
+      "label": "s1-after-tools-boundary",
+      "returncode": 0,
+      "seconds": 1.622
+    }
+  ],
+  "status": "LOCAL_S1_PASS_REMOTE_CI_PENDING"
+}
