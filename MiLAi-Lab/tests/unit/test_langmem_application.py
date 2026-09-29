@@ -3,6 +3,11 @@
 from __future__ import annotations
 
 import json
+import os
+import sqlite3
+import subprocess
+import sys
+from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -14,6 +19,7 @@ pytest.importorskip("langmem")
 
 from langchain_core.messages import AIMessage
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.store.base import Item, PutOp
 from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
@@ -25,6 +31,436 @@ from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application as app
 from milai_lab.runners import langmem_application_runtime as app_runtime
+
+
+class _R2DurableTestStore(InMemoryStore):
+    """Test-only SQLite persistence for real Host memory writes across processes."""
+
+    def __init__(self, path: Path) -> None:
+        super().__init__()
+        self.conn = sqlite3.connect(path, check_same_thread=False)
+        self.conn.execute("CREATE TABLE IF NOT EXISTS records "
+                          "(namespace TEXT, key TEXT, value TEXT, "
+                          "created_at TEXT, updated_at TEXT, "
+                          "PRIMARY KEY(namespace,key))")
+        self.conn.execute("CREATE TABLE IF NOT EXISTS writes (id INTEGER PRIMARY KEY)")
+        for namespace, key, value, created, updated in self.conn.execute("SELECT * FROM records"):
+            ns = tuple(json.loads(namespace))
+            self._data[ns][key] = Item(value=json.loads(value), key=key, namespace=ns,
+                                       created_at=datetime.fromisoformat(created),
+                                       updated_at=datetime.fromisoformat(updated))
+
+    def batch(self, ops: Any) -> Any:
+        operations = list(ops)
+        result = super().batch(operations)
+        with self.conn:
+            for op in operations:
+                if isinstance(op, PutOp):
+                    namespace = json.dumps(op.namespace)
+                    if op.value is None:
+                        self.conn.execute("DELETE FROM records WHERE namespace=? AND key=?",
+                                          (namespace, op.key))
+                    else:
+                        item = self._data[op.namespace][op.key]
+                        self.conn.execute("INSERT OR REPLACE INTO records VALUES(?,?,?,?,?)",
+                                          (namespace, op.key, json.dumps(op.value),
+                                           item.created_at.isoformat(),
+                                           item.updated_at.isoformat()))
+                    self.conn.execute("INSERT INTO writes DEFAULT VALUES")
+        return result
+
+    async def abatch(self, ops: Any) -> Any:
+        return self.batch(ops)
+
+
+def _r2_test_binding(scope: Any, message: dict[str, Any], task: str,
+                     operations: list[dict[str, Any]]) -> dict[str, Any]:
+    return {"run_id": scope.run_id, "arm_id": scope.arm_id, "owner": scope.user_id,
+            "thread_id": scope.config()["configurable"]["thread_id"],
+            "public_index": message["public_index"], "message_id": message["message_id"],
+            "task_id": task, "operations": operations,
+            "recovery": {"absence_means_no_effect": True, "no_deletion": True,
+                         "exclusive_writer": True}}
+
+
+def _r2_subprocess_driver(root_text: str, case: str, stage_text: str) -> None:
+    """Mechanical deterministic HTTP Host; this driver never contacts model services."""
+    from milai_lab.baselines.langmem_agent import FoundationScope
+    from milai_lab.harness.contextual_artifacts import read_json, write_json
+
+    root, stage = Path(root_text), int(stage_text)
+    target = {"item_key": "Mechanical parcel", "quantity": 2,
+              "destination": "east desk", "packing": "paper sleeves"}
+    reserve = {"operation_id": "reserve", "tool": "reserve_and_label", "args": target,
+               "target": target, "retry": "never"}
+    query = {"operation_id": "query", "tool": "get_reservation",
+             "args": {"item_key": target["item_key"]}, "target": target, "retry": "never"}
+    label = {"operation_id": "label", "tool": "complete_label", "args": {},
+             "reservation_from": "query", "target": target, "retry": "no_effect",
+             "depends_on": ["query"]}
+    messages = [
+        {"message_id": "reserve", "user_id": "alice", "session_id": "work",
+         "public_index": 0, "text": "Reserve once and save the actual parcel progress."},
+        {"message_id": "finish", "user_id": "alice",
+         "session_id": "later" if case == "later" else "work",
+         "public_index": 0 if case == "later" else 1,
+         "text": ("A new independent request: reserve with the same parameters once. "
+                  "Report the real outcome." if case == "later" else
+                  "Read the existing reservation, finish only the label, "
+                  "and update saved progress.")},
+        {"message_id": "handoff", "user_id": "alice", "session_id": "handoff",
+         "public_index": 0,
+         "text": "Read saved parcel progress. Change no business or memory state."},
+    ]
+    phases = [{"id": index, "operator_memory": [],
+               "world_events": ([{"event_id": "restore", "action": "set_label_available",
+                                  "available": True}] if index == 1 and case != "later" else []),
+               "messages": [message]} for index, message in enumerate(messages)]
+    if case == "unknown":
+        messages.pop(1)
+        phases = [{**phases[0]}, {**phases[2], "id": 1}]
+    script = {"initial_label_available": case == "later", "phases": phases}
+    bindings = {}
+    for phase in phases:
+        message = phase["messages"][0]
+        scope = FoundationScope("r2-mechanical", "protected", "alice",
+                                "application:" + message["session_id"])
+        task = "later-task" if message["message_id"] == "finish" and case == "later" else "task"
+        ops = ([] if message["message_id"] == "handoff" else [reserve, query, label]
+               if message["message_id"] == "reserve" else [reserve, query]
+               if case == "later" else [query, label])
+        bindings[message["message_id"]] = _r2_test_binding(scope, message, task, ops)
+    if case == "unknown" and stage == 1:
+        world = app.ApplicationWorld(root / "business-world.sqlite", False)
+        world.set_label_available("restore-unknown", True)
+        world.close()
+    wires: list[dict[str, Any]] = []
+    ids: dict[str, str] = {}
+    current_status = ""
+    operation_status = ""
+
+    def parse_receipts(wire: dict[str, Any]) -> None:
+        nonlocal current_status, operation_status
+        for row in wire["messages"]:
+            if row["role"] != "tool":
+                continue
+            try:
+                value = json.loads(row["content"])
+            except (ValueError, TypeError):
+                continue
+            if isinstance(value, dict) and value.get("status") == "ORIGINAL_CALL_OUTCOME_UNKNOWN":
+                value = json.loads(value["query_receipt"])
+            if isinstance(value, dict) and "reservation_id" in value:
+                ids["reservation"] = value["reservation_id"]
+                current_status = value.get("label_status", current_status)
+                operation_status = value.get("status", operation_status)
+            if isinstance(value, list) and value and "key" in value[0]:
+                ids["memory"] = value[0]["key"]
+                saved = json.loads(value[0]["value"]["content"])
+                ids["reservation"] = saved["reservation_id"]
+                current_status = current_status or saved["label_status"]
+
+    if stage == 0:
+        plan = ["reserve"]
+        if case == "no_effect":
+            plan += ["query", "label"]
+        plan += ["create", "answer"]
+    elif stage == 1:
+        plan = (["reserve", "answer"] if case == "later" else
+                ["label", "create", "answer"] if case == "unknown" else
+                ["query", "label", "search", "update", "answer"])
+    else:
+        plan = ["search", "answer"]
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        wires.append(wire)
+        parse_receipts(wire)
+        action_name = plan[len(wires) - 1]
+        facts = {**target, "reservation_id": ids.get("reservation", ""),
+                 "label_status": current_status}
+        actions = {
+            "reserve": ("reserve_and_label", target),
+            "query": ("get_reservation", {"item_key": target["item_key"]}),
+            "label": ("complete_label", {"reservation_id": ids.get("reservation", "")}),
+            "search": ("search_memory", {"query": "parcel", "limit": 10}),
+            "create": ("manage_memory", {"action": "create", "content": json.dumps(facts)}),
+            "update": ("manage_memory", {"action": "update", "id": ids.get("memory", ""),
+                                          "content": json.dumps(facts)}),
+        }
+        reported = ({**facts, "operation_status": operation_status}
+                    if case == "later" and stage == 1 else facts)
+        action = ({"answer": json.dumps(reported)} if action_name == "answer" else
+                  {"calls": [{"name": actions[action_name][0],
+                              "arguments": actions[action_name][1]}]})
+        return httpx.Response(200, json={
+            "id": f"r2-{case}-{stage}-{len(wires)}", "model": "mechanical-http",
+            "choices": [{"finish_reason": "stop", "message": {
+                "role": "assistant", "content": json.dumps(action)}}],
+            "usage": {"prompt_tokens": 5, "completion_tokens": 3}})
+
+    def lose_response(row: dict[str, Any], response: Any) -> None:
+        marker = root / "injected-once.json"
+        if case == "unknown" and row["name"] == "reserve_and_label" and not marker.exists():
+            actual = json.loads(response.content)
+            assert actual["status"] == "reserved_label_failed"
+            write_json(marker, {"pid": os.getpid(), "point": row["response_hook_point"],
+                                "native_status": actual["status"]})
+            raise RuntimeError("PREDECLARED_POST_COMMIT_RESPONSE_LOST")
+
+    base = _R2DurableTestStore(root / "memory.sqlite")
+    before_writes = base.conn.execute("SELECT COUNT(*) FROM writes").fetchone()[0]
+    sidecar = RevisionSidecar(root / "instrumentation.sqlite")
+    observer = ProvenanceObserver(sidecar, "r2-mechanical", "protected")
+    store = ObservedStore(base, observer)
+    with VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="mechanical-http",
+                               tool_mode="json_action"),
+                    transport=httpx.MockTransport(respond)) as client:
+        client.emit = observer.capture_provider_event
+        with SqliteSaver.from_conn_string(str(root / "checkpoint.sqlite")) as saver:
+            runtime = app_runtime.ApplicationRuntime(
+                VLLMChatModel(client=client, capacity_path=root / "capacity.json",
+                              observer=observer),
+                store, saver, observer)
+            phase_id = (0 if stage == 1 else 1) if case == "unknown" and stage else stage
+            try:
+                result = app.run_phase(script, root, "r2-mechanical", "protected", phase_id,
+                                       runtime, memory_contract="strict",
+                                       trusted_business_contracts=bindings,
+                                       business_response_hook=(
+                                           lose_response if case == "unknown" else None))
+            except RuntimeError as error:
+                if case != "unknown" or stage != 0 or str(error) != (
+                    "PREDECLARED_POST_COMMIT_RESPONSE_LOST"
+                ):
+                    raise
+                result = {"status": "EXPECTED_UNKNOWN", "error": str(error)}
+    namespace = ("langmem", "r2-mechanical", "protected", "alice")
+    records = [{"key": row.key, "value": row.value} for row in base.search(namespace)]
+    write_json(root / f"stage-{stage}-evidence.json", {
+        "pid": os.getpid(), "result": result, "wires": wires, "records": records,
+        "writes_before": before_writes,
+        "writes_after": base.conn.execute("SELECT COUNT(*) FROM writes").fetchone()[0],
+        "capacity": read_json(root / "capacity.json"),
+    })
+    sidecar.close()
+    base.conn.close()
+
+
+@pytest.mark.parametrize("case", ["partial", "unknown", "no_effect", "later"])
+def test_r2_four_application_lifecycles_in_real_subprocesses(tmp_path: Path, case: str) -> None:
+    from milai_lab.harness.contextual_artifacts import read_json
+
+    evidence_root = os.environ.get("MILAI_R2_ENGINEERING_EVIDENCE")
+    root = (Path(evidence_root) if evidence_root else tmp_path) / case
+    root.mkdir(parents=True)
+    for stage in range(3):
+        result = subprocess.run(  # noqa: S603
+            [sys.executable, "-c", "import runpy,sys; "
+             "runpy.run_path(sys.argv[1])['_r2_subprocess_driver'](*sys.argv[2:])",
+             str(Path(__file__).resolve()), str(root), case, str(stage)],
+            capture_output=True, text=True, timeout=60,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+    stages = [read_json(root / f"stage-{stage}-evidence.json") for stage in range(3)]
+    assert len({row["pid"] for row in stages}) == 3
+    world = app.ApplicationWorld(root / "business-world.sqlite", False)
+    snapshot = world.snapshot()
+    world.close()
+    assert len(snapshot["reservations"]) == 1
+    actual = snapshot["reservations"][0]
+    assert actual["label_status"] == "created"
+    assert sum(row["outcome"] == "reserved" for row in snapshot["attempts"]) == 1
+    assert len(stages[2]["records"]) == 1
+    facts = json.loads(stages[2]["records"][0]["value"]["content"])
+    assert facts["reservation_id"] == actual["reservation_id"]
+    assert facts["label_status"] == "created"
+    assert all(facts[field] == actual[field] for field in (
+        "item_key", "quantity", "destination", "packing"))
+    assert stages[2]["writes_before"] == stages[2]["writes_after"]
+    assert stages[2]["records"] == stages[1]["records"]
+    answer = json.loads(stages[2]["result"]["messages"][0]["answer"])
+    assert answer == facts
+    assert all(value <= 12 for row in stages for value in row["capacity"].values())
+    journal = read_json(root / "business-journal.json")
+    calls = [row for row in journal.values() if "thread_id" in row]
+    if case == "unknown":
+        original = next(row for row in calls if row["name"] == "reserve_and_label")
+        assert original["status"] == "pending" and "result" not in original
+        assert original["error"]["message"] == "PREDECLARED_POST_COMMIT_RESPONSE_LOST"
+        recovery = journal["_application"]["recoveries"][original["journal_key"]]
+        assert recovery["effect"] == "partial" and recovery["origin"] == "application_recovery"
+        wire = stages[1]["wires"][0]["messages"]
+        error = next(row for row in wire if row["role"] == "tool")
+        visible = json.loads(error["content"])
+        assert visible["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+        assert visible["origin"] == "application_recovery" and visible["original_receipt"] is None
+        assert json.loads(visible["query_receipt"])["reservation_id"] == actual["reservation_id"]
+        assert len([row for row in calls if row["name"] == "reserve_and_label"]) == 1
+        assert sum(stages[1]["capacity"].values()) == sum(len(row["wires"]) for row in stages[:2])
+    if case == "no_effect":
+        labels = [row for row in calls if row["name"] == "complete_label"]
+        assert [row["effect"] for row in labels] == ["none", "confirmed"]
+        assert labels[0]["operation_key"] == labels[1]["operation_key"]
+    if case == "later":
+        reserves = [row for row in calls if row["name"] == "reserve_and_label"]
+        assert len(reserves) == 2 and all(row["executed"] for row in reserves)
+        assert reserves[0]["operation_key"] != reserves[1]["operation_key"]
+        assert reserves[1]["effect"] == "none"
+        assert stages[1]["writes_before"] == stages[1]["writes_after"]
+        assert json.loads(stages[1]["result"]["messages"][0]["answer"])[
+            "operation_status"] == "duplicate_reservation_attempt"
+
+
+def test_r2_scoped_query_is_only_source_of_label_id_and_prestate(tmp_path: Path) -> None:
+    from langchain_core.messages import HumanMessage
+    from langgraph.graph import MessagesState, StateGraph
+    from langgraph.prebuilt import ToolNode
+
+    from milai_lab.baselines.langmem_agent import FoundationScope
+    from milai_lab.runners.langmem_foundation import BusinessActionJournal
+
+    world = app.ApplicationWorld(tmp_path / "world.sqlite", False)
+    target = {"item_key": "exact parcel", "quantity": 2, "destination": "east", "packing": "paper"}
+    sidecar = RevisionSidecar(tmp_path / "sidecar.sqlite")
+    observer = ProvenanceObserver(sidecar, "r2", "protected")
+    journal = BusinessActionJournal(tmp_path / "journal.json", app.BUSINESS_NAMES,
+                                    application_protection=True)
+    query_is_incomplete = False
+
+    def setup(owner: str, task: str, expected: dict[str, Any]) -> tuple[Any, Any]:
+        scope = FoundationScope("r2", "protected", owner, "application:" + task)
+        operations = [
+            {"operation_id": "reserve", "tool": "reserve_and_label", "args": expected,
+             "target": expected},
+            {"operation_id": "query", "tool": "get_reservation",
+             "args": {"item_key": expected["item_key"]}, "target": expected},
+            {"operation_id": "label", "tool": "complete_label", "args": {},
+             "target": expected, "reservation_from": "query", "retry": "no_effect",
+             "depends_on": ["query"], "precondition": {
+                 "query_operation_id": "query", "status": "found", "label_status": "not_created"}},
+        ]
+        journal.bind_request(_r2_test_binding(scope, {"public_index": 0, "message_id": task},
+                                              task, operations))
+        observer.begin_public_message(scope, 0, "Trusted request")
+
+        def wrapped(request: Any, execute: Any) -> Any:
+            def received(item: Any) -> Any:
+                response = execute(item)
+                if query_is_incomplete and item.tool_call["name"] == "get_reservation":
+                    raw = json.loads(response.content)
+                    raw.pop("quantity", None)  # Declared malformed read-response control.
+                    return response.model_copy(update={"content": json.dumps(raw)})
+                return response
+            return observer.run_tool(request, lambda item: journal(item, received), journal)
+
+        graph = StateGraph(MessagesState)
+        graph.add_node("tools", ToolNode(app._business_tools(world, owner), wrap_tool_call=wrapped))
+        graph.set_entry_point("tools")
+        graph.set_finish_point("tools")
+        return graph.compile(), scope
+
+    def call(agent: Any, scope: Any, name: str, args: dict[str, Any], call_id: str) -> Any:
+        result = agent.invoke({"messages": [HumanMessage(content="Trusted request"), AIMessage(
+            content="", id="generation-" + call_id,
+            tool_calls=[{"name": name, "args": args, "id": call_id}])]}, config=scope.config())
+        return result["messages"][-1]
+
+    agent, scope = setup("alice", "seed", target)
+    reserved = json.loads(call(agent, scope, "reserve_and_label", target, "seed").content)
+    reservation_id = reserved["reservation_id"]
+    agent, scope = setup("bob", "wrong-owner", target)
+    assert json.loads(call(agent, scope, "get_reservation", {"item_key": target["item_key"]},
+                           "bob-query").content)["status"] == "not_found"
+    assert call(agent, scope, "complete_label", {"reservation_id": reservation_id},
+                "bob-label").status == "error"
+    agent, scope = setup("alice", "mismatch", {**target, "quantity": 9})
+    call(agent, scope, "get_reservation", {"item_key": target["item_key"]}, "mismatch-query")
+    assert call(agent, scope, "complete_label", {"reservation_id": reservation_id},
+                "mismatch-label").status == "error"
+    agent, scope = setup("alice", "finish", target)
+    assert call(agent, scope, "complete_label", {"reservation_id": reservation_id},
+                "label-before-query").status == "error"
+    actual = json.loads(call(agent, scope, "get_reservation", {"item_key": target["item_key"]},
+                            "actual-query").content)
+    assert call(agent, scope, "complete_label", {"reservation_id": "guessed-id"},
+                "guessed-label").status == "error"
+    query_is_incomplete = True
+    call(agent, scope, "get_reservation", {"item_key": target["item_key"]}, "incomplete-query")
+    assert call(agent, scope, "complete_label", {"reservation_id": reservation_id},
+                "stale-id-after-incomplete-query").status == "error"
+    query_is_incomplete = False
+    call(agent, scope, "get_reservation", {"item_key": target["item_key"]}, "fresh-query")
+    unavailable = call(agent, scope, "complete_label", {"reservation_id": actual["reservation_id"]},
+                       "label-unavailable")
+    assert json.loads(unavailable.content)["status"] == "label_service_unavailable"
+    world.set_label_available("restore", True)
+    completed = call(agent, scope, "complete_label", {
+        "reservation_id": actual["reservation_id"]}, "label-retry")
+    assert json.loads(completed.content)["status"] == "label_created"
+    assert call(agent, scope, "complete_label", {"reservation_id": actual["reservation_id"]},
+                "label-duplicate").status == "error"
+    observer.assert_healthy()
+    assert len(world.snapshot()["attempts"]) == 2
+    world.close()
+    sidecar.close()
+
+
+def test_r2_pending_multicall_cannot_skip_an_unexecuted_call(tmp_path: Path) -> None:
+    from langchain_core.messages import HumanMessage
+    from langgraph.graph import MessagesState, StateGraph
+    from langgraph.prebuilt import ToolNode
+
+    from milai_lab.baselines.langmem_agent import FoundationScope, build_agent
+    from milai_lab.runners.langmem_foundation import BusinessActionJournal, UnknownBusinessAction
+
+    scope = FoundationScope("r2", "protected", "alice", "application:unknown")
+    target = {"item_key": "parcel", "quantity": 2, "destination": "east", "packing": "paper"}
+    world = app.ApplicationWorld(tmp_path / "world.sqlite", False)
+    sidecar = RevisionSidecar(tmp_path / "sidecar.sqlite")
+    observer = ProvenanceObserver(sidecar, "r2", "protected")
+    observer.begin_public_message(scope, 0, "Reserve once")
+
+    def lose_response(_row: dict[str, Any], _response: Any) -> None:
+        raise RuntimeError("declared lost outcome")
+
+    journal = BusinessActionJournal(tmp_path / "journal.json", app.BUSINESS_NAMES,
+                                    application_protection=True, response_hook=lose_response)
+    journal.bind_request(_r2_test_binding(scope, {"public_index": 0, "message_id": "m"}, "task", [
+        {"operation_id": "reserve", "tool": "reserve_and_label", "args": target, "target": target},
+        {"operation_id": "query", "tool": "get_reservation",
+         "args": {"item_key": "parcel"}, "target": target},
+    ]))
+    first_call = {"name": "reserve_and_label", "args": target, "id": "unknown"}
+    graph = StateGraph(MessagesState)
+    graph.add_node("tools", ToolNode(app._business_tools(world, "alice"), wrap_tool_call=journal))
+    graph.set_entry_point("tools")
+    graph.set_finish_point("tools")
+    with pytest.raises(RuntimeError, match="declared lost outcome"):
+        graph.compile().invoke({"messages": [HumanMessage(content="Reserve once"), AIMessage(
+            content="original body", id="original-generation", tool_calls=[first_call])]},
+            config=scope.config())
+    client = VLLMClient(VLLMConfig(base_url="http://mock/v1/", model="unused"),
+                        transport=httpx.MockTransport(lambda _request: pytest.fail("No Host call")))
+    with client, SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver:
+        model = VLLMChatModel(client=client, observer=observer)
+        agent = build_agent(model, InMemoryStore(), saver, app._business_tools(world, "alice"),
+                            business_call_wrapper=journal, observer=observer)
+        original = AIMessage(content="original body", id="original-generation", tool_calls=[
+            first_call, {"name": "get_reservation", "args": {"item_key": "parcel"},
+                         "id": "not-run"}])
+        agent.update_state(scope.config(), {"messages": [HumanMessage(content="Reserve once"),
+                                                       original]}, as_node="agent")
+        runtime = app_runtime.ApplicationRuntime(model, InMemoryStore(), saver, observer)
+        with pytest.raises(UnknownBusinessAction, match="OTHER_CALL_UNRESOLVED"):
+            app.recover_pending_application_call(agent, scope, journal, world, runtime)
+        snapshot = agent.get_state(scope.config())
+        assert snapshot.next == ("tools",) and snapshot.values["messages"][-1] == original
+    assert len(world.snapshot()["attempts"]) == 1
+    assert len(journal.calls_for_thread(scope.config()["configurable"]["thread_id"])) == 1
+    observer.assert_healthy()
+    world.close()
+    sidecar.close()
 
 
 def test_durable_partial_business_result_and_user_scope(tmp_path: Path) -> None:

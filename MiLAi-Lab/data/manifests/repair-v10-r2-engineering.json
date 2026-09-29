@@ -1,0 +1,359 @@
+{
+  "kind": "MILAI_REPAIR_V10_R2_ENGINEERING",
+  "status": "ENGINEERING_READY",
+  "contract": {
+    "path": "docs/MILAI_REPAIR_V10_R2_CONTRACT_20260929.md",
+    "sha256": "ded96c016f5e4371e34284cd44d6938870441ee1bf55bafbdf436cf0cd3f4d40"
+  },
+  "source_hashes": {
+    "src/milai_lab/runners/langmem_foundation.py": "42691db6840ae960891430131989a1939a13c244ade2d483617e525215777f4a",
+    "src/milai_lab/runners/langmem_application.py": "98a1149274c6d4a3b41e644d40c286e29e812e0ead8901a2ee35b9450023528d",
+    "tests/unit/test_langmem_foundation.py": "5d97c24d6bf0f4e01f7aae1a0cbcbddb65bb5ed00f44730d2c715bf092ec764f",
+    "tests/unit/test_langmem_application.py": "a1656bc3c25463bd5f22c35fa5b4afe6524c2df5704bdd7a84beb87fd6ad848e"
+  },
+  "changed_files": [
+    "src/milai_lab/runners/langmem_foundation.py",
+    "src/milai_lab/runners/langmem_application.py",
+    "tests/unit/test_langmem_foundation.py",
+    "tests/unit/test_langmem_application.py",
+    "data/diagnostics/repair-v10/r2-application-config.json"
+  ],
+  "schema_api_permissions": "Optional Lab run_phase/journal protection API and metadata added. Native defaults unchanged; no Product schema/API/permission migration. Trusted application grants only; no NL/gold authorization.",
+  "api": {
+    "run_phase_keywords": {
+      "trusted_business_contracts": "None by default; opt in with message_id -> trusted binding mapping. Each binding requires run_id,arm_id,owner,thread_id,public_index,message_id,task_id,operations.",
+      "business_response_hook": "None by default; callable(entry, ToolMessage) after native return and before durable complete. Root owns one-time fault marker."
+    },
+    "journal": "BusinessActionJournal(path,names,application_protection=True); bind_request(binding). Default construction remains native.",
+    "operation": "operation_id,tool,args,target; retry=never|no_effect; depends_on optional. Application targets require exact item_key,quantity,destination,packing. complete_label uses args={} and reservation_from=<query op>; dynamic ID only from matching real owner query. Optional precondition={query_operation_id,status,label_status}. Generic synthetic effects require explicit effect_contract status mapping.",
+    "recovery": "Pending original/exception retained; separate _application.recoveries entry records real application-origin query, raw ToolMessage and observed effect. Error ToolMessage paired with original call explicitly displays UNKNOWN, application query and real query receipt. No synthetic checkpoint AI/no Host capacity increment; Host continues and writes through existing tools.",
+    "identity": "Binding hash is per public message; task/op semantics compare canonical JSON across messages; reads may repeat; new task/op may execute same parameters."
+  },
+  "cases": {
+    "partial": {
+      "status": "PASS_MECHANICAL_MOCK_HTTP",
+      "evidence_directory": "artifacts/repair-v10/r2-engineering/attempt4-cases/partial",
+      "process_ids": [
+        2914689,
+        2914956,
+        2915149
+      ],
+      "processes": 3,
+      "mock_http_calls": 10,
+      "handoff_no_change": true,
+      "hashes": {
+        "business-journal.json": "d072787b2448e6bbd569c41cad8f162e5143018cf39667b854a1c75e05ecb719",
+        "business-world.sqlite": "f01678142bc65ea26e5f9a3bdcb8feaa881fda27e915f2fd50236c5dca76049d",
+        "capacity.json": "d9e0994f8347a780e61da43748418fb2581e20b3220e68c4d48482d72b9cfded",
+        "checkpoint.sqlite": "15643f5fdb09dd1c271d82ee71a40218f20618dfabed7c842bd92f03d3e6bb6c",
+        "instrumentation.sqlite": "2b2f6c6f08e7edb3d600e29eb1a86c53f8b7491e39d4454b2591a55bba2b7871",
+        "memory.sqlite": "a4311a1ff23d3ab44eb97c68ffe4e05ed0424977ef9f526c0197b8645e3aabba",
+        "phase-0-result.json": "158bc00c32155e9b5fd938d1624d01d08b804191664728214f99fdaf8a3fb4a9",
+        "phase-1-result.json": "8c1c2ca9f3cacd06c4f0b192375b440cc03b2f712483aea333f2a174545d8ac8",
+        "phase-2-result.json": "7ba142d45d1552e0e8e971aae01f06f0bb256639e9c665d48341dde92e9add74",
+        "phase-progress.json": "7726da9c2cceab2be3fdd1a33b353ef97055ec8b17075965324ae2ca03e71a93",
+        "stage-0-evidence.json": "657480e9cd757f7462d60332defe328783c5a79ebe6671f1ec28a76929fc1f95",
+        "stage-1-evidence.json": "e3091821aafa3b2fb0fd2304e27a2d9f4290427caf1cec4bf9013af5c430e47a",
+        "stage-2-evidence.json": "b3e38e7c37e8a7db529f2e36114f21aaa1931fb9374b3460fd31f957edd6b09f"
+      }
+    },
+    "unknown": {
+      "status": "PASS_MECHANICAL_MOCK_HTTP",
+      "evidence_directory": "artifacts/repair-v10/r2-engineering/attempt5-cases/unknown",
+      "process_ids": [
+        2927302,
+        2927484,
+        2927646
+      ],
+      "processes": 3,
+      "mock_http_calls": 6,
+      "handoff_no_change": true,
+      "hashes": {
+        "business-journal.json": "43d0042a16773871a16c8e77e501444c908a6a03095044b424cdf6912996ac4e",
+        "business-world.sqlite": "26218d16426a2a07336d944227ae6117c0343ab1a7fe9b21f1fc4db6a3082f21",
+        "capacity.json": "b74e5ce66febed7123c5541eab3a7a75280e3f447b6551eac2e926635137b287",
+        "checkpoint.sqlite": "bcca7374f0307b757fabc761157458f00846fdacb391fe432bf098c1980a7c97",
+        "injected-once.json": "0147194c2230fed7b2852842c69316febdf7c1de5f3842448b2e94ce01a713c7",
+        "instrumentation.sqlite": "8eebc89b11f1466f6311911e1a7642a816eefbeb97b9c59eb1ff4328bcff5bba",
+        "memory.sqlite": "4a4d2e81ff265d66a1b41aba72aeb39b488e8a7704e61fd8b40b7b9859a300a9",
+        "phase-0-result.json": "5baae22a04cc7c4d5c5d008fff8d1577e72ef961f0606f2bf5a87bb8e5579b2f",
+        "phase-1-result.json": "38a09053545561db3032e4129a3d5c3ebbe9726fdb9f8ecaedde7272de61d6ee",
+        "phase-progress.json": "44d06e5972c197c7f66d24ff5d3aa2161133fbbbf0ca05c079369f5bc2be3c19",
+        "stage-0-evidence.json": "b439016fc982dc2a4310657ec2179f01ba5eef72ec0525f91439e86180363ecf",
+        "stage-1-evidence.json": "20981f744b6b643fa4e208548fa4175f16bdb9453492c57f0988ac3d38ad8d9e",
+        "stage-2-evidence.json": "b6b7973ba9595e04e5a93f8252f933fbee137b217c958b42453ff49452b2d304"
+      }
+    },
+    "no_effect_retry": {
+      "status": "PASS_MECHANICAL_MOCK_HTTP",
+      "evidence_directory": "artifacts/repair-v10/r2-engineering/attempt4-cases/no_effect",
+      "process_ids": [
+        2915305,
+        2915490,
+        2915735
+      ],
+      "processes": 3,
+      "mock_http_calls": 12,
+      "handoff_no_change": true,
+      "hashes": {
+        "business-journal.json": "36b446ed6dc09db968c2234be2a93fea6ac1551c6b0c7dc288680fa11ef0541e",
+        "business-world.sqlite": "4b70d44a57fe4fb5b5ee3e8ff26108a9feee61e10622c50c0c578282ec36c8fa",
+        "capacity.json": "620cda3fc8edc7675f794438ed9c7b8995ed66a8226bdba143da182c95607d7e",
+        "checkpoint.sqlite": "8efa3d64a865039c15d44736a2c51a23f6cd87e10a8650d969c871137473850d",
+        "instrumentation.sqlite": "2ae1f4a92a60a8c8e922c6029d5f317bd7cf7086e44c1acf0391d05f926de9e7",
+        "memory.sqlite": "e2125df868d4fc9517917e9f92062a1b96e99ad00b8eb9a6291dc0a7249937c6",
+        "phase-0-result.json": "452fda213fd338ac89782913bb8457252da61fc546a52f0fafc207a1724d6224",
+        "phase-1-result.json": "158c39f1dec00b7cfaef96c18f595f7df91420d59a2bd0bdee2589cec8b944ce",
+        "phase-2-result.json": "9de4942f07b8c6b75c4720716440521835850844cc25709392587dfe017c61c4",
+        "phase-progress.json": "929edf34129e720f98ec29e7bdd783d254c2abf5bb5213810f166a45ab6a2f58",
+        "stage-0-evidence.json": "f4fd796ee7e9906b5053dd7a4ddd7c71ee7c6a2d048a106a9627aa4dd1761b29",
+        "stage-1-evidence.json": "431df3da7e3f1aea7c43651cc89a6b7b81c049f466e33a82bdeb1c1693f2e390",
+        "stage-2-evidence.json": "1d4f97e42aebe71c42a8354401220f3b53ba1adce14f679b4ec7c68b09ac6251"
+      }
+    },
+    "later_same_parameters": {
+      "status": "PASS_MECHANICAL_MOCK_HTTP",
+      "evidence_directory": "artifacts/repair-v10/r2-engineering/attempt5-cases/later",
+      "process_ids": [
+        2927808,
+        2928065,
+        2928242
+      ],
+      "processes": 3,
+      "mock_http_calls": 7,
+      "handoff_no_change": true,
+      "hashes": {
+        "business-journal.json": "c7701c1a4d3b852655b4e137104e1f4c740b7f489c10e95a6b103964292bd15a",
+        "business-world.sqlite": "cef1c4765a3299acee2ce105e3cd832d7a78b03dbfcdff401d60b307c3964ec9",
+        "capacity.json": "5e560af49a1fae81179673d33aba5d10f20faedcc15dd595a582083fd52715f1",
+        "checkpoint.sqlite": "9e6eeba724b8a51e6c5ec1617b8a82152cce350f2c8e3ae4cbf7170f13fec0dc",
+        "instrumentation.sqlite": "3a7d6e993624956b5ab96a376529606e3c831304b1b22ce3d3a6e0104269d04c",
+        "memory.sqlite": "62b7a1138a330d3400ca08efab0f091203dc92acc1867d1eb21619570d56869d",
+        "phase-0-result.json": "97b12f59e9d2af62844198c942ea0b1b7428bde3815f2aa54319a57852ca5cab",
+        "phase-1-result.json": "88802b70da25cdc934e751fd7e87af79440670b008d78f52af3b2594679d242b",
+        "phase-2-result.json": "3f5ed14d0015bf3124b8e9f58c3552683b983491bad4d80ad17db1f7735ac530",
+        "phase-progress.json": "b7183571418490d51f59eada8922d42aa4e315b941e018cbb91158c83f9b14cf",
+        "stage-0-evidence.json": "98bb8b8e0f5157689bf84e5fe502a4b966c425d5cb329197858f771de9b19c11",
+        "stage-1-evidence.json": "67ba1e54194a68cd8d56d4b041e5b09720d36bad3977dd42674611bcb367e463",
+        "stage-2-evidence.json": "80ad0ae839083c3a2560b589744c5178dbfa0b9a2e7c399227fa2fbfaf2140bd"
+      }
+    }
+  },
+  "unique_passed_nodes": 15,
+  "checks": [
+    {
+      "log": "02-foundation-slice.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_application_operation_contract_real_toolnode_and_legal_repetition tests/unit/test_langmem_foundation.py::test_business_journal_replays_result_but_never_unknown_action",
+      "status": "INITIAL_1_FAILED_1_PASSED",
+      "reason": "Standalone ToolNode lacked required graph runtime; fixed with a minimal MessagesState graph."
+    },
+    {
+      "log": "07-second-lifecycles.log",
+      "status": "3_PASSED_4_FAILED",
+      "reason": "Real observer detected test-driver requests without provider event settlement; test client.emit restored. Positive mechanical guards passed."
+    },
+    {
+      "log": "10-third-lifecycles.log",
+      "status": "2_PASSED_2_FAILED",
+      "reason": "Test Store restored values but regenerated Item timestamps; real RevisionSidecar correctly rejected revision binding. Full Item timestamps now persisted; strict observer unchanged."
+    },
+    {
+      "log": "14-native-defaults.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_business_receipt_and_thread_checkpoint_survive_reopen tests/unit/test_langmem_application.py::test_phase_reopens_checkpoint_and_new_session_starts_fresh tests/unit/test_langmem_application.py::test_mock_provider_business_call_commits_real_partial_result tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay",
+      "status": "7_PASSED"
+    },
+    {
+      "log": "15-fourth-lifecycles.log",
+      "command": "MILAI_R2_ENGINEERING_EVIDENCE=artifacts/repair-v10/r2-engineering/attempt4-cases PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_application.py::test_r2_four_application_lifecycles_in_real_subprocesses[partial] tests/unit/test_langmem_application.py::test_r2_four_application_lifecycles_in_real_subprocesses[no_effect]",
+      "status": "2_PASSED"
+    },
+    {
+      "log": "21-final-other-lifecycles.log",
+      "command": "MILAI_R2_ENGINEERING_EVIDENCE=artifacts/repair-v10/r2-engineering/attempt5-cases PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_application.py::test_r2_four_application_lifecycles_in_real_subprocesses[unknown] tests/unit/test_langmem_application.py::test_r2_four_application_lifecycles_in_real_subprocesses[later]",
+      "status": "2_PASSED",
+      "reason": "Necessary recheck after shared test Store persistence changed; no publication-only rerun."
+    },
+    {
+      "log": "18-final-typed-binding.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_foundation.py::test_application_operation_contract_real_toolnode_and_legal_repetition",
+      "status": "1_PASSED",
+      "covers": [
+        "first unauthorized action",
+        "same-call real redelivery",
+        "new-call duplicate",
+        "different next step",
+        "new task same args",
+        "changed version new op",
+        "declared same-name repeated steps",
+        "owner scope",
+        "tampered binding",
+        "1/true/1.0 distinct contracts"
+      ]
+    },
+    {
+      "log": "22-final-incomplete-query.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest -q tests/unit/test_langmem_application.py::test_r2_scoped_query_is_only_source_of_label_id_and_prestate",
+      "status": "1_PASSED",
+      "covers": [
+        "owner scoped real query",
+        "wrong owner/ID",
+        "target mismatch",
+        "query-derived exact ID",
+        "actual query precondition",
+        "known no-effect retry",
+        "incomplete later query invalidates prior dynamic ID"
+      ]
+    },
+    {
+      "log": "07-second-lifecycles.log",
+      "status": "PENDING_MULTICALL_GUARD_PASSED",
+      "covers": [
+        "unexecuted sibling call blocks recovery before query",
+        "original AI/body/checkpoint next preserved"
+      ]
+    },
+    {
+      "log": "23-final-query-ruff.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m ruff check src/milai_lab/runners/langmem_foundation.py tests/unit/test_langmem_application.py --output-format concise",
+      "status": "PASS"
+    },
+    {
+      "log": "19-final-foundation-ruff.log",
+      "status": "PASS",
+      "covers": [
+        "foundation test file"
+      ]
+    },
+    {
+      "log": "11-final-ruff.log",
+      "status": "PASS",
+      "covers": [
+        "application source file"
+      ]
+    },
+    {
+      "log": "24-final-query-mypy.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/runners/langmem_foundation.py",
+      "status": "PASS"
+    },
+    {
+      "log": "12-final-mypy.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/runners/langmem_foundation.py src/milai_lab/runners/langmem_application.py",
+      "status": "PASS"
+    },
+    {
+      "log": "13-boundary.log",
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/milai-lab-check-boundary",
+      "status": "PASS"
+    },
+    {
+      "artifact": "25-final-config-audit.json",
+      "status": "PASS_ZERO_CALLS",
+      "scope": "JSON roundtrip and exact preserved consumer values; no test/model/PG invocation."
+    }
+  ],
+  "all_logs_sha256": {
+    "01-initial-ruff.log": "09e0782f987cf8a9761f811587a4000c2dcf88c8b1d190ce132ca3e3f6a23d25",
+    "02-foundation-slice.log": "8544c49ea5c9cf85dc363faa8606a8dc0f72e250fcfb1d51e24cf2902caeda53",
+    "03-initial-mypy.log": "f24aa45127b113ff7809911fbde45fd8c354a1c700d9c4a6ccddd24cd43a3bc4",
+    "04-first-lifecycles.log": "06470ace91ec0ae9e257c58406bc30d2d6e39dbd3a44f197f7a0b72179a6fc41",
+    "05-ruff-with-tests.log": "9ceb24a615f7739a6c2d75280a5178c3fd73a4eae79784c100d99209f14a04d7",
+    "06-mypy-with-recovery.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+    "07-second-lifecycles.log": "dfcf8de480393c565d51f25f0a63c4b951e88f9bf72655fb4d5712a87d90ba60",
+    "08-final-ruff.log": "2affbd71388939c2eaf9e3b071d6ec130131fee74367927bec8decbccc8718ab",
+    "09-final-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+    "10-third-lifecycles.log": "dda02fc8dccaa0f00e8dd49a287e226349dd4c03d3462ab24fcd4f344a803ff6",
+    "11-final-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "12-final-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+    "13-boundary.log": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3",
+    "14-native-defaults.log": "5d8027c0755717671bdf672687aa8007596bc43ecc28c765c419c51d419db84b",
+    "15-fourth-lifecycles.log": "556eaa1e6c24a9d279c1e18b7d8ed0cd191737c6c555afd300876c42a27c8cec",
+    "16-final-test-ruff.log": "ea8018ebbcb5b5879c066f8c2e40edce29df0eeed9098c55f0a844f9d8a964ef",
+    "17-final-test-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "18-final-typed-binding.log": "ef68472f5e06acc391d8ad379aef04fb2fe1a05537d4a303a197f80d4ad3dc0c",
+    "19-final-foundation-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "20-final-foundation-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "21-final-other-lifecycles.log": "fd300230b7c953c593abe7eec57f2d943611af4d1db915248e0f9759801a3603",
+    "22-final-incomplete-query.log": "8c846fdb187226ec5f2116d9986c7b6b640a1836d951c532103a8ab62dc803e6",
+    "23-final-query-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "24-final-query-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+  },
+  "dependency_versions": {
+    "langchain-core": "1.6.5",
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "langmem": "0.0.30",
+    "pytest": "8.4.2"
+  },
+  "root_orchestration_review": {
+    "driver": "artifacts/repair-v10/r2-application/phase_driver.py",
+    "config": "data/diagnostics/repair-v10/r2-application-config.json",
+    "interface_compatible": true,
+    "consumed": "open_application_runtime consumes host,embedding,embedding_dimension,capacity,budget_path. Driver explicitly sets protocol_calibration_v7 and strict memory MCP agent_factory; run_phase consumes script, trusted bindings and fault hook. recipe_id/research_profile in config document the frozen recipe and explicit driver setting.",
+    "not_consumed": "Formal config removes unused memory_boundaries/history/formation/reader/benchmark/retrieval fields. No MemoryBoundaryView is instantiated; this is not an R1 legacy-label or compact/current-request rendering control."
+  },
+  "real_service_calls": {
+    "generation": 0,
+    "embedding": 0,
+    "judge": 0,
+    "postgres": 0
+  },
+  "git_or_download_actions": 0,
+  "validation_limits": [
+    "Mechanical MockHTTP Host, genuine ToolNode, SQLite world/checkpoint and test-only SQLite-persistent Store; real Postgres/MCP/model acceptance is Root-owned and not run here.",
+    "Serial sandbox only; journal rename is not atomic with world SQLite transaction; no power-loss/concurrency/general exactly-once claim.",
+    "Unresolved/mismatched/missing sibling receipts block continuation; safe stop is incomplete, not business success.",
+    "Known no-effect label retry is label_service_unavailable; generic exceptions remain unknown.",
+    "No R1/renderer/native MERIT/business tool semantics/decoding changes; R3/R6 untouched."
+  ],
+  "rollback": "Disable opt-in protection in a separately identified isolated run; publication/rollback Git identity belongs to Luna.",
+  "source_writes_stopped": true,
+  "full_research_status": "NOT_ACHIEVED",
+  "product_status": "NO_GO",
+  "configuration_hashes": {
+    "data/diagnostics/repair-v10/r2-application-config.json": "167caa7f12fa76614b16f714fd47f7a154f2fcc90bdaf03b341a70038921bec0"
+  },
+  "config_audit": {
+    "status": "PASS_JSON_AND_CONSUMPTION_AUDIT_ZERO_CALLS",
+    "draft_path": "data/diagnostics/repair-v10/r2-application-config-draft.json",
+    "draft_sha256": "a5be4cec2321a1e7dd6226ec7b2d897aa79c28050e44a560eac97a9885f0b553",
+    "final_path": "data/diagnostics/repair-v10/r2-application-config.json",
+    "final_sha256": "167caa7f12fa76614b16f714fd47f7a154f2fcc90bdaf03b341a70038921bec0",
+    "preserved_fields": [
+      "recipe_id",
+      "host",
+      "embedding",
+      "embedding_dimension",
+      "capacity",
+      "budget_path",
+      "research_profile"
+    ],
+    "removed_fields": [
+      "history",
+      "source_view_max_bytes",
+      "memory_contract",
+      "history_mode",
+      "memory_result",
+      "memory_boundaries",
+      "memory_transport",
+      "formation_instruction",
+      "reader",
+      "retrieval",
+      "agent_query",
+      "benchmark_memory"
+    ],
+    "runtime_consumed": [
+      "host",
+      "embedding",
+      "embedding_dimension",
+      "capacity",
+      "budget_path"
+    ],
+    "recipe_id": "Formal recipe identity metadata; not interpreted by open_application_runtime.",
+    "research_profile": "Actual protocol_calibration_v7 is set explicitly by Root phase_driver.py; config records this fixed setting. It is not read by open_application_runtime.",
+    "real_service_calls": 0,
+    "tests_rerun": false
+  },
+  "root_review": "Source,check logs,and four final case evidence hashes verified read-only; no tests rerun. Mechanical results only; real MCP/Postgres/model acceptance pending.",
+  "private_manifest_sha256": "c07d466f2d6bd1bd7f97216f2a6fe9ad01d4e75bf9734a24b02e72fa42c0ce10"
+}

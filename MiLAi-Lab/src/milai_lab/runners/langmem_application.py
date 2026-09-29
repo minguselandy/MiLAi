@@ -15,6 +15,8 @@ from typing import Any, Literal, cast
 import httpx
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
+from langgraph.graph import MessagesState, StateGraph
+from langgraph.prebuilt import ToolNode
 from langmem import create_manage_memory_tool  # type: ignore[import-untyped]
 
 from milai_lab.baselines.langmem_agent import (
@@ -38,7 +40,11 @@ from milai_lab.methods.local_state_attention.writers import (
     run_writer_boundary,
 )
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
-from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
+from milai_lab.runners.langmem_foundation import (
+    BusinessActionJournal,
+    UnknownBusinessAction,
+    native_business_tools,
+)
 
 WriterPolicy = Literal["native_host", "host_both", "boundary_both", "overlap"]
 WRITER_POLICY_INSTRUCTIONS = {
@@ -442,6 +448,117 @@ def _collect_turn_tail(agent: Any, scope: FoundationScope,
             "pending_event_ids": result["pending_event_ids"]}
 
 
+def recover_pending_application_call(
+    agent: Any, scope: FoundationScope, journal: BusinessActionJournal,
+    world: ApplicationWorld, runtime: ApplicationRuntime,
+) -> None:
+    """Observe an unknown effect before resuming tools; never replay its mutation."""
+    snapshot = agent.get_state(scope.config())
+    if not snapshot.values or "tools" not in snapshot.next:
+        return
+    messages = snapshot.values["messages"]
+    generated = messages[-1]
+    if not isinstance(generated, AIMessage) or not generated.id:
+        raise UnknownBusinessAction("APPLICATION_RECOVERY_GENERATION_MISSING")
+    thread_id = str(scope.config()["configurable"]["thread_id"])
+    if any(type(call.get("id")) is not str for call in generated.tool_calls):
+        raise UnknownBusinessAction("APPLICATION_RECOVERY_CALL_ID_MISSING")
+    entries = [journal.entry_for_call(thread_id, generated.id, cast(str, call["id"]))
+               for call in generated.tool_calls]
+    pending = [row for row in entries if row is not None and row["status"] == "pending"]
+    if not pending:
+        return
+    # ToolNode may have failed after executing only a prefix of a multi-call message.
+    if any(row is None for row in entries) or any(
+        row is not None and row["status"] == "pending" and
+        row["name"] not in {"reserve_and_label", "complete_label"} for row in entries
+    ):
+        raise UnknownBusinessAction("APPLICATION_RECOVERY_OTHER_CALL_UNRESOLVED")
+    binding = journal.binding
+    if binding is None:
+        raise UnknownBusinessAction("AUTHORIZATION_UNDETERMINED")
+    current_user = next(row for row in reversed(messages) if isinstance(row, HumanMessage))
+    runtime.observer.begin_public_message(scope, binding["public_index"], str(current_user.content))
+    deliveries: list[ToolMessage] = []
+    for original in entries:
+        assert original is not None
+        if original["status"] == "complete":
+            deliveries.append(ToolMessage.model_validate(original["result"]))
+            continue
+        original_key = original["journal_key"]
+        recovery = journal.recovery_for_call(original_key)
+        if recovery is None:
+            queries = [op for op in binding["operations"] if op["tool"] == "get_reservation"
+                       and op["target"] == original["target"]]
+            if len(queries) != 1:
+                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_NOT_AUTHORIZED")
+            query = queries[0]
+            query_call = {"name": "get_reservation", "args": query["args"],
+                          "id": "application-query-" + original_key}
+            query_ai = AIMessage(content="", id="application-recovery-" + original_key,
+                                 tool_calls=[query_call], response_metadata={
+                                     "application_recovery": True,
+                                     "original_journal_key": original_key})
+
+            def observe_query(request: Any, execute: Any) -> Any:
+                return runtime.observer.run_tool(request, lambda item: journal(item, execute),
+                                                 journal)
+
+            # This is an application-origin ToolNode query, not a Host generation.
+            query_node = ToolNode(_business_tools(world, scope.user_id),
+                                  wrap_tool_call=observe_query)
+            query_graph = StateGraph(MessagesState)
+            query_graph.add_node("tools", query_node)
+            query_graph.set_entry_point("tools")
+            query_graph.set_finish_point("tools")
+            result = query_graph.compile().invoke(
+                {"messages": [*messages, query_ai]},
+                config=cast(RunnableConfig, scope.config()))
+            raw = result["messages"][-1]
+            query_entry = journal.entry_for_call(thread_id, str(query_ai.id), query_call["id"])
+            if (not isinstance(raw, ToolMessage) or query_entry is None
+                    or not query_entry["executed"]):
+                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_NOT_EXECUTED")
+            try:
+                observation = json.loads(str(raw.content))
+            except ValueError as error:
+                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_INVALID") from error
+            effect = "unknown"
+            if (isinstance(observation, dict) and observation.get("status") == "found"
+                    and query_entry.get("target_matched") is True):
+                effect = ("confirmed" if observation.get("label_status") == "created"
+                          else "partial" if original["name"] == "reserve_and_label" else "none")
+            elif (isinstance(observation, dict) and observation.get("status") == "not_found"
+                  and all(binding.get("recovery", {}).get(field) is True for field in (
+                      "absence_means_no_effect", "no_deletion", "exclusive_writer"))):
+                effect = "none"
+            recovery = {"origin": "application_recovery", "original_journal_key": original_key,
+                        "original_call_status": "UNKNOWN", "thread_id": thread_id,
+                        "generation_id": original["generation_id"], "call_id": original["call_id"],
+                        "query": query_call, "query_journal_key": query_entry["journal_key"],
+                        "query_result": raw.model_dump(mode="json"), "effect": effect,
+                        "effect_source": "query_observation_not_original_execution_receipt"}
+            journal.record_recovery(original_key, recovery)
+        if recovery["effect"] == "unknown":
+            raise UnknownBusinessAction("APPLICATION_RECOVERY_OBSERVATION_UNRESOLVED")
+        delivery = ToolMessage(
+            content=json.dumps({
+                "status": "ORIGINAL_CALL_OUTCOME_UNKNOWN", "original_receipt": None,
+                "origin": "application_recovery", "original_journal_key": original_key,
+                "query": recovery["query"],
+                "query_receipt": recovery["query_result"]["content"],
+                "observed_effect": recovery["effect"],
+                "effect_source": recovery["effect_source"],
+                "instruction": "Use the actual query observation to choose remaining work; "
+                               "the original call outcome remains unknown.",
+            }, ensure_ascii=False),
+            name=original["name"], tool_call_id=original["call_id"], status="error",
+            additional_kwargs={"application_recovery": recovery})
+        deliveries.append(delivery)
+    # Append a new checkpoint version. Keep original AI text and pending journal entries intact.
+    agent.update_state(scope.config(), {"messages": deliveries}, as_node="tools")
+
+
 def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               phase_id: int, runtime: ApplicationRuntime,
               local_state_controller: LocalStateController | None = None,
@@ -455,6 +572,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
               agent_factory: Callable[..., Any] | None = None,
               public_turn_callback: Callable[..., None] | None = None,
               capture_interrupted_turn: bool = False,
+              trusted_business_contracts: dict[str, dict[str, Any]] | None = None,
+              business_response_hook: Callable[[dict[str, Any], ToolMessage], None] | None = None,
               ) -> dict[str, Any]:
     """Run one frozen phase; the next invocation reopens every process-owned resource."""
     phase = script["phases"][phase_id]
@@ -474,6 +593,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
         raise ValueError("APPLICATION_HISTORY_MODE_INVALID")
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
+    if business_response_hook is not None and trusted_business_contracts is None:
+        raise ValueError("APPLICATION_RESPONSE_HOOK_REQUIRES_PROTECTION")
     if (history_mode == "window") != (history_summary_controller is not None):
         raise ValueError("APPLICATION_HISTORY_SUMMARY_MISMATCH")
     if agent_factory is not None and (history_mode is not None
@@ -497,7 +618,10 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
             if event["action"] != "set_label_available":
                 raise ValueError("APPLICATION_WORLD_ACTION_UNKNOWN")
             world.set_label_available(event["event_id"], event["available"])
-        journal = BusinessActionJournal(root / "business-journal.json", BUSINESS_NAMES)
+        journal = BusinessActionJournal(
+            root / "business-journal.json", BUSINESS_NAMES,
+            application_protection=trusted_business_contracts is not None,
+            response_hook=business_response_hook)
         def capture_interruption(error: BaseException, agent: Any, scope: FoundationScope,
                                  public_index: int) -> None:
             if not capture_interrupted_turn or public_turn_callback is None:
@@ -541,6 +665,16 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
             if progress["pending_message"] not in (None, message_id):
                 raise ValueError("APPLICATION_PENDING_MESSAGE_CHANGED")
             scope = FoundationScope(run_id, arm_id, user_id, "application:" + session)
+            if trusted_business_contracts is not None:
+                binding = trusted_business_contracts.get(message_id)
+                journal.binding = None
+                if binding is not None:
+                    expected = {"run_id": run_id, "arm_id": arm_id, "owner": user_id,
+                                "thread_id": scope.config()["configurable"]["thread_id"],
+                                "public_index": public_index, "message_id": message_id}
+                    if any(binding.get(field) != value for field, value in expected.items()):
+                        raise ValueError("APPLICATION_PUBLIC_REQUEST_BINDING_CHANGED")
+                    journal.bind_request(binding)
             agent = agents.get(user_id)
             if agent is None and agent_factory is not None:
                 agent = agent_factory(
@@ -601,6 +735,8 @@ def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,
                         "body_bytes": local_state_controller.bank._bytes(snapshot["states"])})
 
             try:
+                if pending and trusted_business_contracts is not None:
+                    recover_pending_application_call(agent, scope, journal, world, runtime)
                 messages = invoke_or_resume_public_message(
                     agent, runtime.model, scope, message["text"], public_index, pending)
             except ValueError as error:
