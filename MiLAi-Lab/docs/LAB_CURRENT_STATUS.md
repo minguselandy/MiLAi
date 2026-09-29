@@ -13,6 +13,14 @@
 | R6 预算适配 / R7 独立确认 / 第二模型家族 | NOT_RUN | [要求状态](../data/manifests/repair-v10-pause-summary-20260929.json) |
 | Product | **NO_GO** | 结构重构不等于产品验收 |
 
+## 仓库整合
+
+#70–#74 已按依赖顺序合入 main，原提交与冻结 SHA 保留；旧 #51 的改动已被后续提交吸收，
+已按 superseded 关闭并保留分支。代码链整合提交为 `8781ad7`，对应 #74 最终 head `97efe0c`。
+后者的完整 Fast CI 已通过；Full composition 按规则 skipped，未计作通过。
+详细合并 SHA、兼容修复与代码入口见[合并记录](GITHUB_MERGE_AND_STRUCTURE_20260929.md)。
+本次合并和导航整理不恢复实验，以下研究限制保持。
+
 ## 当前已知限制
 
 R1 L2 两条件均为 20/20 episode，标签复述由 178 降为 0，但两组各有四次附带工单写入。

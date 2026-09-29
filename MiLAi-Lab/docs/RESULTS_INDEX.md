@@ -15,6 +15,9 @@ original date and do not supersede [current status](LAB_CURRENT_STATUS.md).
 | [R4/R5 audit](MILAI_REPAIR_V10_R4_R5_CONTRACT_AUDIT_20260929.md) | Contract/causal diagnosis, no claimed effect repair |
 | [v8/v9 baseline report](MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md) | Prior negative results and unknown denominators preserved |
 
+工程整合：[GitHub 合并与代码结构记录](GITHUB_MERGE_AND_STRUCTURE_20260929.md)。
+#70–#74 已进入 main；#51 已被替代关闭。该状态不改变上表实验结论或暂停边界。
+
 ## Historical entries
 
 
