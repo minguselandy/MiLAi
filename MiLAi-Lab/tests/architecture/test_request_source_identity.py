@@ -52,25 +52,7 @@ def test_development_identity_rejects_canonical_request_tampering(
         entry._verify_development_spike(config, settings, "request-architecture")
 
 
-@pytest.mark.parametrize("relative", [
-    "src/milai_lab/analysis/trace_accounting.py",
-    "src/milai_lab/runners/writer_policy.py",
-    "src/milai_lab/contracts/request.py",
-    "src/milai_lab/contracts/benchmark.py",
-    "src/milai_lab/contracts/scope.py",
-    "src/milai_lab/memory/mcp.py",
-    "src/milai_lab/memory/read_tools.py",
-    "src/milai_lab/memory/revision_store.py",
-    "src/milai_lab/memory/strict_tools.py",
-    "src/milai_lab/memory/embeddings.py",
-    "src/milai_lab/providers/chat_bridge.py",
-    "src/milai_lab/providers/request_pipeline.py",
-    "src/milai_lab/methods/langmem_recipe.py",
-    "src/milai_lab/integrations/memory/mem0.py",
-    "src/milai_lab/integrations/memory/simplemem.py",
-    "src/milai_lab/harness/artifact_io.py",
-    "src/milai_lab/harness/benchmark_execution.py",
-])
+@pytest.mark.parametrize("relative", REQUEST_SOURCE_FILES)
 def test_foundation_gate_rejects_missing_and_changed_request_sources(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, relative: str,
 ) -> None:

@@ -42,11 +42,40 @@ BENCHMARK_EXECUTION_SOURCE_FILES = (
     "src/milai_lab/harness/benchmark_execution.py",
 )
 PROVIDER_SOURCE_FILES = (
+    "src/milai_lab/providers/__init__.py",
     "src/milai_lab/providers/chat_bridge.py",
+    "src/milai_lab/providers/config.py",
+    "src/milai_lab/providers/contextual_capacity.py",
+    "src/milai_lab/providers/contextual_embeddings.py",
+    "src/milai_lab/providers/contextual_vllm.py",
+    "src/milai_lab/providers/merit_metered.py",
     "src/milai_lab/providers/request_pipeline.py",
     "src/milai_lab/providers/langmem_chat.py",
+)
+METHOD_RECIPE_SOURCE_FILES = (
     "src/milai_lab/methods/langmem_recipe.py",
 )
+HARNESS_SOURCE_FILES = (
+    "src/milai_lab/harness/__init__.py",
+    "src/milai_lab/harness/artifact_io.py",
+    "src/milai_lab/harness/artifacts.py",
+    "src/milai_lab/harness/benchmark_execution.py",
+    "src/milai_lab/harness/contextual_artifacts.py",
+    "src/milai_lab/harness/lease.py",
+    "src/milai_lab/harness/source_identity.py",
+)
+BOUNDARY_SOURCE_FILES = (
+    "src/milai_lab/boundary.py",
+    "src/milai_lab/import_graph.py",
+    "src/milai_lab/tools_boundary.py",
+)
+CANONICAL_PACKAGE_SOURCE_FILES = {
+    "contracts": CONTRACT_SOURCE_FILES,
+    "memory": MEMORY_SOURCE_FILES,
+    "integrations": INTEGRATION_SOURCE_FILES,
+    "providers": PROVIDER_SOURCE_FILES,
+    "harness": HARNESS_SOURCE_FILES,
+}
 RUNNER_ORCHESTRATION_SOURCE_FILES = (
     "src/milai_lab/analysis/trace_accounting.py",
     "src/milai_lab/runners/writer_policy.py",
@@ -54,15 +83,15 @@ RUNNER_ORCHESTRATION_SOURCE_FILES = (
     "src/milai_lab/runners/local_state_attention.py",
 )
 REQUEST_SOURCE_FILES = (
-    "src/milai_lab/harness/source_identity.py",
+    *HARNESS_SOURCE_FILES,
     *CONTRACT_SOURCE_FILES,
     *MEMORY_SOURCE_FILES,
     *MEMORY_FACADE_FILES,
     *INTEGRATION_SOURCE_FILES,
     *INTEGRATION_FACADE_FILES,
-    *ARTIFACT_IO_SOURCE_FILES,
-    *BENCHMARK_EXECUTION_SOURCE_FILES,
     *PROVIDER_SOURCE_FILES,
+    *METHOD_RECIPE_SOURCE_FILES,
+    *BOUNDARY_SOURCE_FILES,
     *RUNNER_ORCHESTRATION_SOURCE_FILES,
     "src/milai_lab/methods/request_context.py",
 )

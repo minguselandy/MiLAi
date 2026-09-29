@@ -55,6 +55,8 @@
 
 ## 当前报告和保留边界
 
+- [v12 总体整理报告](CODE_ARCHITECTURE_V12_RESULTS.md)：本轮canonical归属、分阶段验证和发布状态。
+
 - [v10 总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：最近实验结论与连续成本。
 - [R2 暂停详报](MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md)：错误事实真实持久化；未自动修复。
 - [架构整理记录](ARCHITECTURE_REFACTOR_20260929.md)：本次改动范围、检查与兼容性。

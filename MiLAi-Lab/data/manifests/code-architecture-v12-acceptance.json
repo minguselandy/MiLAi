@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_CODE_ARCHITECTURE_V12_ACCEPTANCE",
-  "status": "IN_PROGRESS",
+  "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
   "base_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
   "plan_sha256": "bf9e748685fcdd7e449a57b50e83d226bce70da5caecff69854642e4c2301db4",
   "criteria": [
@@ -9,8 +9,12 @@
       "requirement": "application 无 runner import",
       "phase": "S7",
       "required_evidence": "AST imports including relative/nested/TYPE_CHECKING; boundary negative tests",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json"
+      ]
     },
     {
       "id": "C02",
@@ -88,40 +92,65 @@
       "requirement": "old moved paths pure facade",
       "phase": "S1-S7",
       "required_evidence": "AST facade allowlist grammar plus negative tests; old/new object identity",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "tests/architecture/test_import_boundaries.py"
+      ]
     },
     {
       "id": "C09",
       "requirement": "canonical sources covered by identity",
       "phase": "S1-S7",
       "required_evidence": "Required source maps include real implementation; package registration equality; omission/tamper rejection; historical locks unchanged",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "tests/architecture/test_request_source_identity.py",
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json"
+      ]
     },
     {
       "id": "C10",
       "requirement": "package dependency DAG enforced in CI",
       "phase": "S7",
       "required_evidence": "Runtime/import/TYPE_CHECKING edges; negative fixtures; actual CI wiring; no hidden method reverse policy",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json",
+        "../.github/workflows/fast.yml"
+      ]
     },
     {
       "id": "C11",
       "requirement": "active canonical type coverage improves",
       "phase": "S1-S7",
       "required_evidence": "Strict contract/world/memory interfaces/integration interfaces/benchmark DTO checks; group ownership per active source prefix",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/manifests/code-architecture-v12-current-import-map.json",
+        "configs/lab-verification-matrix.json"
+      ]
     },
     {
       "id": "C12",
       "requirement": "request/tool/store/on-disk contracts unchanged",
       "phase": "S1-S7",
       "required_evidence": "Frozen schemas/ToolMessages/business receipts/journal JSON/SQLite/render/JSON+native wire/capacity/benchmark manifests/source identity before-after",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S1_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md"
+      ]
     },
     {
       "id": "C13",
@@ -136,16 +165,22 @@
       "requirement": "zero semantic experiment calls",
       "phase": "all",
       "required_evidence": "No Host/embed/Judge calls, no downloads or services changes; ledger/process evidence",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json"
+      ]
     },
     {
       "id": "C15",
       "requirement": "v10/R2 failure and continuous cost unchanged",
       "phase": "all",
       "required_evidence": "Frozen reports/locks/ledger SHA preserved, no state repair or repeat experiment",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
+        "docs/CODE_ARCHITECTURE_V12_RESULTS.md"
+      ]
     }
   ],
   "stages": {
@@ -156,7 +191,7 @@
     "S4": "COMPLETE_LOCAL_CHECKS",
     "S5": "COMPLETE_LOCAL_CHECKS",
     "S6": "COMPLETE_LOCAL_CHECKS",
-    "S7": "PENDING"
+    "S7": "LOCAL_COMPLETE_REMOTE_CI_PENDING"
   },
   "explicit_deliverables": {
     "S0": [
@@ -300,7 +335,24 @@
       "golden_writer_cases": 13,
       "golden_accounting_cases": 14,
       "deterministic_golden_sha256": "55971b7e1ada6166b5ade302c65dabc99a841ef004b1d8258f9273e57fabbee2",
-      "note": "Original nondeterministic comparison retained; fixed fixture whole bytes equal, installed replay equal. Formal S7 DAG and final CI pending."
+      "note": "Original nondeterministic comparison retained; fixed fixture whole bytes equal, installed replay equal. Formal S7 DAG and final CI pending.",
+      "commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b"
+    },
+    "S7": {
+      "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
+      "report": "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
+      "current_import_map": "data/manifests/code-architecture-v12-current-import-map.json",
+      "preservation": "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
+      "note": "Final independent fixed-policy test file: 199 passed; earlier Core204 overlaps. Foundation55, strict typing, offline packaging and isolated install evidence recorded. C13 awaits published-head Fast CI."
     }
+  },
+  "local_review": {
+    "date": "2026-09-30",
+    "passed_criteria": 14,
+    "pending": [
+      "C13"
+    ],
+    "scope": "Engineering structure and preserved synthetic contracts only; no semantic effectiveness claim. Remote publication and merge remain required."
   }
 }

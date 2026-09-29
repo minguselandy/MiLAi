@@ -67,7 +67,8 @@ flowchart TD
     JOURNAL --> ART[harness: journal 文件读写]
 ```
 
-`recovery` 还使用已有 Agent scope/observer 和 LangGraph ToolNode；它不是无依赖纯函数。
+`recovery` 使用共享 scope、实际调用所需的 `RecoveryObserver` 结构接口和 LangGraph ToolNode；
+它不再为了类型反向导入 baseline observer，也不是无依赖纯函数。
 相反，`world` 只需要标准库，包入口保持轻量。`application` 不依赖 runner，避免形成
 “可复用能力 → 编排器 → 可复用能力”的循环。源代码测试约束这一方向。
 
@@ -112,6 +113,12 @@ R2 的错误正文持久化仍作为失败证据保留。
 无副作用重试、后续新任务，以及真实子进程打开持久资源的 MockHTTP 链路。
 静态检查约束依赖方向和验证矩阵；模块移动还需构建并核对安装后的 canonical/兼容导入。
 这些检查不启动真实模型、embedding、PostgreSQL 或实验，也不改变连续成本账本。
+
+S7 在原 boundary/tools-boundary 上加入包内依赖和纯 facade 检查；限制涵盖嵌套、相对、
+TYPE_CHECKING 与有限动态导入，已审查的外部加载按精确规则处理。源码身份要求完整 canonical
+包的登记与文件集相等，漏项和篡改以负例验证。
+当前文件归属见[源码清单](../data/manifests/code-architecture-v12-current-import-map.json)，
+工程证据与静态分析范围见[S7记录](CODE_ARCHITECTURE_V12_S7_RESULTS.md)。
 
 检查归属见[验证矩阵](../configs/lab-verification-matrix.json)，本次实际命令和结果见
 [架构整理记录](ARCHITECTURE_REFACTOR_20260929.md)。不得把“测试通过”升级成记忆效果或

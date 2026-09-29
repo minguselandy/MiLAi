@@ -1,10 +1,10 @@
 # MiLAi Lab 当前状态
 
-更新日期：2026-09-29。此页提供当前导航；实际用户授权和 Goal 状态优先于历史文件中的 ACTIVE。
+更新日期：2026-09-30。此页提供当前导航；实际用户授权和 Goal 状态优先于历史文件中的 ACTIVE。
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v12 代码组织与 GitHub 发布 | Goal active，实施中 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
+| v12 代码组织与 GitHub 发布 | Goal active，本地完成、发布待验 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
 | R2 执行保护/恢复 | 工程已实现；真实验证失败且未完成 | [暂停详报](MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md) |
@@ -24,7 +24,7 @@
 后续 v12 从 `cca2fd9` 启动。S0 文档提交为 `19339bff`，S1 公共合同与请求呈现提交为
 `02dfacdc`，S2 通用记忆服务提交为 `379ad45e`，均已通过本地工程检查；
 S3 外部集成提交为 `5aa61b8d`，同样通过本地检查。上述提交尚未发布到远端 main；
-S4 benchmark 公共执行流程提交为 `2bc50583`，已通过本地检查；S5 提交为 `96a6ce17`，已通过本地检查；S6 也已通过本地检查，待独立提交；S7 尚未完成。
+S4 benchmark 公共执行流程提交为 `2bc50583`，已通过本地检查；S5 提交为 `96a6ce17`，已通过本地检查；S6 已通过本地检查并提交为 `c8b7d81a`；S7 已完成本地门禁与包验证。
 最终发布与受影响 Fast CI 仍待完成，不能使用上一轮 CI 代替本轮验收。
 
 ## 当前已知限制

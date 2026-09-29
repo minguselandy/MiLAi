@@ -1,0 +1,822 @@
+{
+  "kind": "MILAI_V12_FINAL_PRESERVATION",
+  "baseline_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "reviewed_HEAD": "c8b7d81af54df65c4a74b720e7af1e359864cc4b",
+  "historical_files": [
+    {
+      "path": "MiLAi-Lab/data/locks/hc4-host-cognitive-product-postrun.lock.json",
+      "sha256": "a6459909faf55fb769149dd8da69d2bc0992d352d79e9a3f4074253863fe7991"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/hc4-host-cognitive-product.lock.json",
+      "sha256": "2ef51de535a026cae9b261300bde91bddf145734a2b0d091a3e0ba926a8e4dad"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/langmem-b1.lock.json",
+      "sha256": "2098f2708081e1ae23341a301356543cb81e3b2be5fe1614ba487647ac8231a7"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/langmem-foundation.lock.json",
+      "sha256": "e3b98d9ff15030afeb34eb7548edae3571230f1c20db89766ec7b0c5b12c4090"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-application-v25.lock.json",
+      "sha256": "796b32df3dbe5d5028d799bbdd92a7ff313ac17fd73ce34a84de3cae3d4d0e25"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-external-memory-v26.lock.json",
+      "sha256": "f559887e0a781943afcfd0f8a586588aa4a785e13291ee64b0b53dabd3337191"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-freshness-projection-v19-a2.lock.json",
+      "sha256": "398669b26e9bd26a9b909f9920ab5525972377602f46d21b9ab97b1311395c27"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-freshness-projection-v19-a3.lock.json",
+      "sha256": "5a6a514f8e6281dda30565378e0824314ba2db8e7ec27f0dc1845de87d56169b"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-lifecycle-v24-formation-r2.lock.json",
+      "sha256": "7d5a1ecdc300252a5074fc2b000938669042d0d52dba61c09540ff86d5bbf882"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-lifecycle-v24-formation-r3.lock.json",
+      "sha256": "3b41b19ff0400f76323831f10e57ad3dc46f4e4df2d3a97a82bcb750a91f6c53"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-lifecycle-v24-formation.lock.json",
+      "sha256": "c31b8d1ce23a2401be9b28a351bf30d479c83b454b67ed8129c31d009f1632a3"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-lifecycle-v24-reconciliation-r1.lock.json",
+      "sha256": "e6b04d6fbad64ee28f392353215168a2b059a19871c2d81106952f75aa6dc931"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-lifecycle-v24-reconciliation-r2.lock.json",
+      "sha256": "ea702b127ae8506e6c8844ca60c3c6ec18e8204f9e7f533a10d8bb23594bec12"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-m1-v17.lock.json",
+      "sha256": "d03779620ab8a15c3da7902765b9e477af0207257f809046826e35ee80fceb02"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-m1-v18.lock.json",
+      "sha256": "200e8119ee09b1b8cbb5085e51f21c2b11c76755f5c5b335f3a09f1c48d54c11"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-odr-v19.lock.json",
+      "sha256": "b595101190d36f25f4b3a49456392eda547e650d7b0bf0f7bf1e456af9f2c77e"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v20-p4.lock.json",
+      "sha256": "0e9b9ab3557224fb219f70ac79548ea54f02eee23bdce298edb5f5300a604933"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v20.lock.json",
+      "sha256": "130b3b8bb99ff95fc24d10be2ec87608afff35d510eeb8f6eccc483f1ff970ef"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v21-p5.lock.json",
+      "sha256": "3ac92f27d6ac890ff66d03ce1ffbf7d4b160f34d87a4f23ede8a1d7b2c0ede83"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v21-p6r2.lock.json",
+      "sha256": "e80faf16a649308add7200a965fb29ab9d38fbf34cc6f5f789b37619208e9405"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v22-p7r2.lock.json",
+      "sha256": "7d9c8b0b6ed307d3c565967764846924631e3b239ba76411018bb628c66e82e1"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v22-p7r3.lock.json",
+      "sha256": "77a8aa63bb50e9c1fe54383adeeb95a93f55783dc1d731304746b6febfe1c46f"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v22.lock.json",
+      "sha256": "97821d7d0db2a6e4fe025c1fc63534057db8b133b48c697fb804f75ec7ab2247"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/milai-ser-v23.lock.json",
+      "sha256": "4ebfe530dc71d95f81d153b3cb9c1dbccbef0127e3b231fac581e824535b21eb"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product01-s1-product.lock.json",
+      "sha256": "6f39ac1993f57c483dc164cdf406eaf48ce73a4b744f9d7fdb8bde498f800c30"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product01-s2-product.lock.json",
+      "sha256": "f05bd7b6662e8cfdf207a2678c384e5b7c8b1740f224300119ae5bd6ac5fed2a"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product01-s3-product.lock.json",
+      "sha256": "49eb36a12fc1a41b010c4976cf972f4deea9ed97e69980331fc0bd2afdfd25fd"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product01-s4-product.lock.json",
+      "sha256": "2c6feae59df08b34d7c4a320cbab2c84beaf9e575ce2d9f7ced37c7af7203854"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product02-product.lock.json",
+      "sha256": "792db4da0c8582e45e4176842c122b18289ccc94e1e0b8e3f0f14daf0502fbe2"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product03-product.lock.json",
+      "sha256": "15450d541e0937103149a2580886d5fe386e143394c353ab6a37d99a0f2e6a35"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product05-product.lock.json",
+      "sha256": "5988a8b6975fd017a677d74f48736726dac6d8fba3aa61384ad7ec64f363c3e4"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product06-product-r4.lock.json",
+      "sha256": "366696fd871ccc62ece686ddefb9c905e75b30632337107a7088b7347bfcf7da"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product06-product.lock.json",
+      "sha256": "2ff4ab7631203cd0590594a8ea1e4f939d8484b560f81fb935114826bdc8e262"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product07-product-final.lock.json",
+      "sha256": "369220b32f6ac23e8843a61d13810432e5b8d41476451112e81eb952180bc927"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product07-product-s0.lock.json",
+      "sha256": "366696fd871ccc62ece686ddefb9c905e75b30632337107a7088b7347bfcf7da"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product07-product-s1.lock.json",
+      "sha256": "5b9dbc79e002dfd3f8748ff3d340e26cf679ee2e94090af32c5551f4dbdddb88"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product07-product-s2-b1.lock.json",
+      "sha256": "309d154e5477fed86df624cc7371d09cf27eb8c2f8437a452236e0f35330672e"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product08-host-mcp.lock.json",
+      "sha256": "8a4fb50b9a34c01cc5abfdb4c7fc700fe84056d80ee671cd6d71ab446514ae63"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product08-product.lock.json",
+      "sha256": "f491113c60f33b4e4a8a8641d7a30875527ac7e760b3077811300161ee02f76e"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product09-product.lock.json",
+      "sha256": "5d6722aa47c17bdc0aadb278d4e652b8a5fba4382586998b34a9247d4bdf8a70"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product10-a0-product.lock.json",
+      "sha256": "e0dfef950c4adc0527497160f878e4661547d89ed1279fc415e453dd07349e8b"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/product10-final-product.lock.json",
+      "sha256": "71a55bad0293ddd5ea6fb678b66fef782ac31ea9e9ed9e34aab4f559903689b4"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/unified-v8-v9-native-transport-20260928.requirements.txt",
+      "sha256": "27da7871dcb01959083cf911209d12295252f3f04945a1cd81eb4580e247d9ab"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt",
+      "sha256": "c4de4f0a77a4561a60528fb3b059b2aa4a5c2d2ae491ea84015f52bffb5fa48f"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-async-resolve-product.lock.json",
+      "sha256": "80e7fabe783a637aabf4bdb722167533b990886c4caf91bfb0f349b8bbdf2b2b"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-async-working-state-product.lock.json",
+      "sha256": "2aa666c701d7a325823a32cfcf6c12a1cfb34bd521c98e36d5bae0f338775039"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-binding-reuse-product.lock.json",
+      "sha256": "5b8d67ca0f41d9dddddbce324961324f24e72f2faa4a4d3f042970ecd9825774"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-blob-write-timing-clarified-product.lock.json",
+      "sha256": "6655bbfaa1ffa851afb3fe47b066d3ec74113e9581ee317a744a9d7b5406a4f5"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-blob-write-timing-product.lock.json",
+      "sha256": "b625f687bbb66cab09e1d2c31e051b8316a7505ceb178ca3f201018b56eec61d"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-context-bind-product.lock.json",
+      "sha256": "4746e966000bdfec5867330f729b18383640dc23d6fb0e127663b88f4984402b"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-context-work-product.lock.json",
+      "sha256": "6899172c287b38b50473893501230c25f26ef92df66752fce4f11f98330448e2"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-database-capacity-product.lock.json",
+      "sha256": "f626f8aa7d888f63a18da7e635a4b7ef170a6599f73432692be248112732a22e"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-date-scan-product.lock.json",
+      "sha256": "e0756647fa78c6ef858aa23145850a8cbdc9c2e3f89c2921d9269911d7f55d08"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-date-signal-product.lock.json",
+      "sha256": "a0a520ad5a255a35e7391943ca90d80ec49e4dc0a6fd49ecb64e0560edc9d7ca"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-deferred-raw-product.lock.json",
+      "sha256": "08e012f505e842af2c499d763d26474387b1b79cfffa8f39ebe8cced4073b0a6"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-deferred-snapshot-product.lock.json",
+      "sha256": "d99dc6da4d5e4b90a14a45a935f20ea8684aa8043c6c46a2906be423796170e9"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-durable-blob-product.lock.json",
+      "sha256": "ef8989a16b64ba61da58dbfad475846a9f76ec9d56fe398fcd7fe0825c13c3b7"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-durable-save-fidelity-product.lock.json",
+      "sha256": "49948543e39b913eb21fb689b1df3a1ab3181214dc4f2e427c73937a7cc62daa"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-e2e-budget-status-product.lock.json",
+      "sha256": "32027300718cc57b69c853dc41e17b43105dbbf4bc7e468a197c1c48dafe1ab4"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-e2e-disclosure-product.lock.json",
+      "sha256": "d09506f806d63be6eb0b43fe9356b192b976c73fbb0253ceb41c524ecf66934c"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-excerpt-focus-product.lock.json",
+      "sha256": "a95402f2a54f40586f43b95ae7025410655c37bd96a1b8e32a9905d77f35a377"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-http-transport-timing-product.lock.json",
+      "sha256": "d5ccc53b63563943ad2f910bfa7be0bd57eeb7b75c7b0c0f712df346af0055c5"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-lazy-snapshot-product.lock.json",
+      "sha256": "804032162ba12e6eaa7260a12d3c16a06dd8d1cb718b4c1d7ad513283371ffc4"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-lazy-source-offsets-product.lock.json",
+      "sha256": "fcb0dfd58383d08b0f41815806a27297aef2513bc69447491f7ad602fd6087a3"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-lme-incremental-product.lock.json",
+      "sha256": "918901ed55a1257b2ed0c3d118736806c716a05e0ce7d0a6490002c088f82957"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-low-cost-reuse-product.lock.json",
+      "sha256": "68b857ed99b6f0b477963eb1a2392010c69f9c3fe67fa3e92f8efdb2ae4e632a"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-mcp-boundary-timing-product.lock.json",
+      "sha256": "5715255660273804f0665f70870ff3b5f90160a0de0e2c9637198547438ef772"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-memory-flow-product-d93bef8b.lock.json",
+      "sha256": "4548e4794ead087fbbf7856ca5b01472597f74f84f2a38d390870ea16806a5c7"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-memory-flow-product.lock.json",
+      "sha256": "918901ed55a1257b2ed0c3d118736806c716a05e0ce7d0a6490002c088f82957"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-prepared-spans-product.lock.json",
+      "sha256": "1ee195156ea237a3e06f71a4256509b56d6ac0ce403b4a535f0d06e33f1a7a79"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-project-planning-resumed-product.lock.json",
+      "sha256": "581f469136d55044ea2c38c0dba3ab60664bdc94d319733757267b07005e62f8"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-ranking-features-product.lock.json",
+      "sha256": "4d1b3b0451f66282606386d26f35722855dbd8bd9226d3337989cd9234a01fad"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-request-timing-product.lock.json",
+      "sha256": "447229ce4a410e549ea7e6a494695c41e4ed8d2d182d5ae756e1e21dc8ee0440"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-sim03-product.lock.json",
+      "sha256": "28d9dcf7193882b896e989a54bdc704e4c19b578aa1ec0ed7cab0c9f70d1ac57"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-sim04-ref-capacity-product.lock.json",
+      "sha256": "55a7f1fe062b9de40b70b25315912758cf1f8150585c6b41d2ed44fd9f4bf0f1"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-snapshot-ownership-product.lock.json",
+      "sha256": "ab98dd2fae53384de8e6e19fbae69cf8eec0a3b693b53573b516a9002df96149"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-state-payload-fidelity-product.lock.json",
+      "sha256": "e8f14739090a69118ad826cfd864f82b6daee656ca54f8c8f69229e54694479f"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-tenant-admission-product.lock.json",
+      "sha256": "85e81d7b8f72a9996996d43e7746b5e66b953fbf35baab7c66e0cbe683de2315"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-text-reuse-product.lock.json",
+      "sha256": "ad863cef53e1fa5ee1d993d20042478d4b438bf3d35d59aa4477c8b0e3ed5f95"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-transaction-timing-product.lock.json",
+      "sha256": "8eb62635bc3ef1865a831931805ea2a9b86a48cac421c47afff0c4e375928599"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v02-worker-idle-product.lock.json",
+      "sha256": "aa0461b8a0e6d994e9e9c2aca55d646eeee347516aa85a1674259aa62db73299"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/v06-http-bootstrap-product.lock.json",
+      "sha256": "7b4cdd79b997148575ab901d65e2ef1c3718b46e4da40804e003a29127b37a59"
+    },
+    {
+      "path": "MiLAi-Lab/data/locks/workspace-rwc-repair-product.lock.json",
+      "sha256": "cca5a2ce53aee42abf83a7e1c590c65ee2cf47d85a52290bcb1559ea1ff058b5"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-action-audit.json",
+      "sha256": "48a747dc91ea00d2b297072e38f25efede22f054988d7bab941e9723998cbc66"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-baseline.json",
+      "sha256": "428b37dd9ebfc3a2b87bde2440e8299d22f04fbd0717c58ec781b2d8be1ec4b0"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-exposure-registry.json",
+      "sha256": "3f44f97173056b459d20a182e8a5e1e9283ef21004cc8c5c6d17e375de21a22c"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-failure-audit.json",
+      "sha256": "3cce3232808cf735476729619f2c4dc36d5e531df92c3ebbe91122f27776ee3c"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-pause-summary-20260929.json",
+      "sha256": "a633a5ee5d18615a858a39afba2f844c9cac48e9adcb3418570fcc3e72d4fbf8"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r1-engineering.json",
+      "sha256": "f61fffc7f11ddb5c02b4367f07d5b49d9485dacc9bcd588c3570e7cfd1dc0fd8"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r1-l1-inputs.json",
+      "sha256": "eea9cdf87d73a5b77081e1fb090eeed30325da514a452034daf67d0b7def11b0"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r1-l1-results.json",
+      "sha256": "b4fea4582c9d874a31a01754dfdc0d7c13ee66af08d86ef844394e0985158277"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r1-l2-results.json",
+      "sha256": "e645f3fe47d65df9c2e826c1886d39b27a77fb22edc01cc835ebbddd62801dc5"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r1-l2-selection.json",
+      "sha256": "96ba982093a780777819f68e3f092de642235f8ae26aa727eac26a31b9842b52"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r2-engineering.json",
+      "sha256": "d6faad6fa4cdc54c2c663672841279ad9c1570eab56574277fd8bdd55bf7af12"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r2-inputs.json",
+      "sha256": "816e45f721cd28fe9086d2c24a5ee237105527f3eaf77deed69dd72a4350325c"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r2-pause-results.json",
+      "sha256": "119d548e3dc4fdd10d41cad6883b0cd32ee3969698e3e76090fbf8b1e6237088"
+    },
+    {
+      "path": "MiLAi-Lab/data/manifests/repair-v10-r4-r5-contract-audit.json",
+      "sha256": "f049b0676594dcc5e4059f2de9191502d4172796a411bdef59b1cd4a95c9645c"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260923.md",
+      "sha256": "b8c47a71daeb9983674b85c98402a18a27e5625a5344936f5d005a16853fc814"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_RESULTS_20260924.md",
+      "sha256": "142eafdc25c7d725e3b06feb7f42a2478d0bfecff0b9fbbd1089e9f2af582829"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V10_R2_RESULTS_20260925.md",
+      "sha256": "2b18ba1ead5462e1dae5991b26e72d864af01a0e066f2a34175d5d8fa0bc77aa"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V10_RESULTS_20260925.md",
+      "sha256": "ef542c22f82826b277747a01e9cf8962b8d3e12fc55a87408e4e988fbc2267ac"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V11_RESULTS_20260925.md",
+      "sha256": "cce91ae6e3e23ffb7dfc80b935675ff48d72574780be3fdd670ab0aefe8ea3bc"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V12_RESULTS_20260925.md",
+      "sha256": "8ef92285afc9f5fe5d815238da918952682075afbeadc80b5ea698befef5453a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V13_RESULTS_20260925.md",
+      "sha256": "01d3ab9e105693f6b4a0f817f434c77ce9d0000d3bf2f2d7ef8f86ab6349c776"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V14_RESULTS_20260926.md",
+      "sha256": "54d4855555e1ac672f4e9272521aede57b49876512f3145282083688cd95c9c7"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V5_RESULTS_20260924.md",
+      "sha256": "4f0906097906a3d0821062b293dd397dbab86a8c93b349ec93e3ca46c6b9c4d1"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V6_RESULTS_20260924.md",
+      "sha256": "1efa3af7903133d9ab56709f9dbf681cddd6c7296f5a8622eedc052588b1822a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V7_RESULTS_20260925.md",
+      "sha256": "5549cb1f2b38825dbb513becf292077d143c1e9ee3ca2eae12c7f99b36985f23"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md",
+      "sha256": "40ac45a54c2eaa6dcd08f8c45db05161586a4132b7a617df552b972f5c898470"
+    },
+    {
+      "path": "MiLAi-Lab/docs/CONTEXTUAL_USER_MEMORY_V9_RESULTS_20260925.md",
+      "sha256": "e3523583ebf1f95d244a53cd2733b63025778a255b89e456da01ceb9f27e079d"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_APPLICATION_V25_RESULTS_20260927.md",
+      "sha256": "69952a1fdb30c49f10e0e91cbd40bdd6e789b9d5d2e4c70b932b0b5bce3c7682"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_APPLICATION_V25_SHORT_RESULTS_20260927.md",
+      "sha256": "92de97d8e75c9fbd40ddc1c216203916c792c0de6c8e26d11ab0bf87430b8143"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_V7_OVERALL_REPORT_20260928.md",
+      "sha256": "7d7be5adf751130da932c1870bbb99c67d5172535179a1274b51d57b93651195"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_EXTERNAL_MEMORY_V26_RESULTS_20260927.md",
+      "sha256": "942e0784abacf4923dafdd5f1f252ac653c5111dcf9c8b72022662c50fe03730"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LIFECYCLE_V24_FORMATION_R1_RESULTS_20260927.md",
+      "sha256": "f12b3bac8a196de600559748f3751092f2dd655a345290af7c28ab6b76a87a12"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LIFECYCLE_V24_FORMATION_R2_RESULTS_20260927.md",
+      "sha256": "f6158cb6eced547d84c2854b36e13969a4aaae540ff1e7e3a859e0c3c3ec4b97"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LIFECYCLE_V24_FORMATION_R3_RESULTS_20260927.md",
+      "sha256": "5cce99182db50a5aab69115c69cca6470420ab80fa126bffec16001757596d41"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R1_RESULTS_20260927.md",
+      "sha256": "376babb65dce6fdceb78372ce1dce1d0c62c4de37cf1a8fc564c210fe2b8e899"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LIFECYCLE_V24_RECONCILIATION_R2_RESULTS_20260927.md",
+      "sha256": "fc2422e4ba81ae0d677080f7ba5ff6f734380e6538d073428bc97a0477cd046f"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_HISTORY_WIRING_R1_RESULTS_20260927.md",
+      "sha256": "936959e54efe88289fd1c3b42c40dcafe16614db924b2d26f03db7dae52bac96"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R1_RESULTS_20260927.md",
+      "sha256": "3f97f2eed390917f6e561b21f12d4d283c7cc4aeb129f78f66670df248eef0cd"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_HOST_SNAPSHOT_R2_RESULTS_20260927.md",
+      "sha256": "4113d4b347d4caaa736a7461fffc4feed24ba8ebc0745458b1deebe36d0271d0"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_LR_WIRING_R1_RESULTS_20260927.md",
+      "sha256": "b2a66f8c2f5fe0966353ad19aee3ebbb09a806eda704983a21e6d8025f9c7800"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_MAINTENANCE_EVENTS_R1_RESULTS_20260927.md",
+      "sha256": "34d36bdef567ed03808e662b9b4b20fec1a64cb00b6a5a9f7b4fe143d4611ef6"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_OVERALL_EXPERIMENT_REPORT_20260927.md",
+      "sha256": "77e3a7680f9c93587875bf6b63b8e03c04fbe0cb2f8e05742322faa2ecf25086"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P1_R1_RESULTS_20260927.md",
+      "sha256": "6b3ca4f44403b5e40f1b759669299ede5b6925df964c096d63f4922edbddfcaf"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P1_R2_RESULTS_20260927.md",
+      "sha256": "fe690fed5727705910bcb49c86f08c274f0b13bdbedeff6e3436475ec1114afe"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P1_R3_RESULTS_20260927.md",
+      "sha256": "a812769d92c58c1f525d12459a47e12f9cef846b7996c2a13afb2d9d60cff53a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P1_R4_RESULTS_20260927.md",
+      "sha256": "4bfaf7b8031e88312690da4a0be44a13dfa7f1cb65058e8c50aa5d720062e170"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P1_R5_RESULTS_20260927.md",
+      "sha256": "58b48f413eda0e50c65be1e052208e1443c9847f84f71427e900da85a47e5775"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P2_R1_RESULTS_20260927.md",
+      "sha256": "afa5a778c60459984725ff71d7afc4f1a75f5d56268e8e00f58016a35a4f3ea7"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P3_MATCHED_R1_RESULTS_20260927.md",
+      "sha256": "4a95d24b9a2035b7b3297ff7227c8fa5af50ee3f643dbdd24001644cf999a317"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R1_RESULTS_20260927.md",
+      "sha256": "1964a4e30d3632807110e3eb62cfd87625a91f6b31bf01218afbc9d4a35469fa"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R2_RESULTS_20260927.md",
+      "sha256": "e53f047e90674c36ea7d8536d726a515c2fa2490edfa156e36228c9b6f283b3b"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_P3_WIRING_R3_RESULTS_20260927.md",
+      "sha256": "913f236bc2b75532bcd17add7e597376e19d9fe15d98818a57860086f0639105"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LOCAL_STATE_ATTENTION_WINDOW_SUMMARY_WIRING_R1_RESULTS_20260927.md",
+      "sha256": "43ac962b2d17a4868b3378b3271b0edecda380a864cad4e9e21708d96357c25c"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LSA_REVIEW_E2_R1_RESULTS_20260927.md",
+      "sha256": "3c2ad9634468668ee41e53e270240c3aa90227e296c191380c35d1ff413cef6a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LSA_REVIEW_E2_SANDBOX_R1_RESULTS_20260927.md",
+      "sha256": "0ec69eedf4b087043b0edc25249102395e84256b6d59b697470288cd7307cbc3"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_LSA_REVIEW_OVERALL_EXPERIMENT_REPORT_20260927.md",
+      "sha256": "2a2b52edc9086997caa1ce37bba7c1b6869bd0d3cf4f35ea3f4914ee7c059433"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_N2_RESULTS_20260928.md",
+      "sha256": "6768b760470af0f222496d9db937eee766157270022a5d39d8aba0446ef21186"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_N3_RESULTS_20260928.md",
+      "sha256": "c3d6ccc830242a3732ad7ebb46ebf33adddf9ba071083453b4459ee60a4e9a92"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_N5_RESULTS_20260928.md",
+      "sha256": "ac5a635bd36443544191f8f80f861881b50cd9676715fb597ba5be7a9b91fc36"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V2_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "4f597d871f8fe137f293cbceb8f251defc5318eba2326d4c4246a6d87f0e4416"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V3_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "8b09ff74ce39c5ceb419c95db01b6dd013ad1ec1fec232c69dc849f62c4446df"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V3_P2_RESULTS_20260928.md",
+      "sha256": "771a0887f5de9a25957a87a9f150ceaf5200502863a6e047e23de612f1d1a0f1"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V4_B_R1_RESULTS_20260928.md",
+      "sha256": "37eb4169c6800b64b8f98674ea9d3b268d4048d2cbe2be23a036ba141f3160c5"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V4_B_R2_RESULTS_20260928.md",
+      "sha256": "12bdfb17ecaa4fd94770c3f7e2bfdf14bd45a5c08a0947a2d663adbf4dd6c7f7"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V4_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "5dc7606f1987f1c93d5e93f6ad54603880f7829294c80926e9a0ed5399914261"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V5_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "80038f5ec6084defb9a43397253f7ac5f70b52a97436c0f28a842f1ad2f28951"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V5_PROSPECTIVE_R1_RESULTS_20260928.md",
+      "sha256": "b2a3af5d3c4a4069cb072a252bc6bde0cce7b09d282883bf82468d2ffe424564"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V6_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "1a3d21dfcda5ddeeeb93684326dc64291ea09ca3b0abef58ab6c302aaf8ef412"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V6_S1_ASSEMBLY_RESULTS_20260928.md",
+      "sha256": "d9938ae56a54218c390145c47f33b429242890687d79dc839ec4f666dc81ce16"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V6_S2_PROFILE_S3A_RESULTS_20260928.md",
+      "sha256": "b3148cb62d176ce392db175a7d866d35ad6210f4a0db9f7b2dee51360c891166"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V6_S3B_REGRESSION_RESULTS_20260928.md",
+      "sha256": "c1158ea723ecc8587d1813e660bded65f4573e80b7ea8d971ce3c3a345a44c61"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_V6_S4_INDEPENDENT_RESULTS_20260928.md",
+      "sha256": "0e552af158a94ad4a621d0e0a5026fa50394b183560c72a79b86c7f1082ec987"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_NEXT_IMPROVEMENT_OVERALL_EXPERIMENT_REPORT_20260928.md",
+      "sha256": "9696c63625bda61b48d5ef665a3c2d4381fe2f897da565466bcd6f6f5e2eb209"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_OVERALL_EXPERIMENT_REPORT_V2_PAUSE_20260928.md",
+      "sha256": "3e1e9d7658a45ab5e8979ca5b764aa791f87d95eced7aabeee150a371fd3f001"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md",
+      "sha256": "12259ee103c619d9e43595cfbb2bd60125f1abb73c1a081d934b6e764ed41899"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md",
+      "sha256": "09bfee07f7ac76e28339358cbb83e872ed1321a2dd1c2a35e3ea6e7bcb14f45c"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md",
+      "sha256": "4b951a137756c9be7abce607e2aae6255058ee156de961e538587b9adc68bc3a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md",
+      "sha256": "aa15a1184358a00e532ea2d3496592b1f1847ff27865b5d5202b017e9379a689"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V20_P3_RESULTS_20260927.md",
+      "sha256": "0f8d3fc06efc1b1a764dfc529aff5295770996593edcba28554cd896650e9943"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V20_P4_RESULTS_20260927.md",
+      "sha256": "e59adada32f31fb301b98eb1542f7df7329e72dfcc35592272345ebfea56b192"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V21_FINAL_RESULTS_20260927.md",
+      "sha256": "b08390befb85f3a302676c07dc61d961c3fdf408643469552d15f877629b635f"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V21_P5_R1_RESULTS_20260927.md",
+      "sha256": "1fafd402a909f9b191e9803d08b04a43f7d15ff33a07cacf77ee695a9fc92b4d"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V21_P5_R2_RESULTS_20260927.md",
+      "sha256": "704cba18ccab91c47e0a62c9b14f91f8f6c3df04b282b512f9ec01d84490cbe8"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V21_P6_R1_RESULTS_20260927.md",
+      "sha256": "6aba989ac23b63509f4cbe15f0044ec6614f66e70f7861b94c41301280665911"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V22_P7_R1_RESULTS_20260927.md",
+      "sha256": "099748858fb740e478e0a4999c57a64bf152308ac4af14468b653f77a1cdfcd0"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V22_P7_R2_RESULTS_20260927.md",
+      "sha256": "bdba463f6c47cb4c4d7a98f3b2b37caf82e96f6ab0543805740c475f76ffe8a7"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V22_P7_R3_RESULTS_20260927.md",
+      "sha256": "6242463e197d34a495455398d01172664d61344c480929d0ae9ddf4ff73ed2dc"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_SER_V23_RESULTS_20260927.md",
+      "sha256": "db7744d48cafcaa3acdb149a3305ae3075114c81435837f063f1ea92ecdd6a09"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_MCP_FUNCTIONAL_RESULTS_20260928.md",
+      "sha256": "b6a19e328e2d26a9971e4d663838806da796ab911b123e0922dd1f452d034a94"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_U1_NATIVE_RESULTS_20260929.md",
+      "sha256": "a49b351ef4421015c8de24ba6e99517e39f78bd8d44f303b46cfdb005787869e"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_U2_MAIN_RESULTS_20260929.md",
+      "sha256": "9619d9a3cd9ec02776682d153061830d9456bb5920070accbb2bf3927fb32470"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_U2_PILOT_RESULTS_20260929.md",
+      "sha256": "a97ce1905aac271df9eb4db4f1065c166650dc763608f129ff8b6039ded66fe3"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_U2_SIMPLEMEM_PILOT_RESULTS_20260929.md",
+      "sha256": "03738cbd6fb9cb6a0107d28126cab5293d51dd1ac80628cc272722820f8e51aa"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md",
+      "sha256": "b4a8c2f758b1c4d47e46521af183f62a11c241a2c5cad3ca6030443b2d9a7cc3"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILAI_V7_P0_P1_ENGINEERING_REPORT_20260928.md",
+      "sha256": "de1d10a09e9d33cc9e4b612676144828dd87e9b0f8f3d74483c0b09e19324160"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_CONTEXTUAL_USER_MEMORY_EXPERIMENT_REPORT_20260924.md",
+      "sha256": "858a609b4f67ca720b1a384db40fea2783dfdac8eb77f00dabacf8ded28d66ee"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_CONTEXTUAL_USER_MEMORY_V6_EXPERIMENT_REPORT_20260924.md",
+      "sha256": "6b0fa36f8aa68d7b975b995fc994fb62a139db5a7b1866b40747f7e45b5be612"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_CONTEXTUAL_USER_MEMORY_V8_EXPERIMENT_REPORT_20260925.md",
+      "sha256": "7b5d11515cfd147384c9bd81ae824c6fbf7eb36a676c2093b18290599f968e3a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_FRESHNESS_PROJECTION_V19_REPAIR_RESULTS_20260926.md",
+      "sha256": "3750963609c0c868d4702dbfe337143ef188feac6bf4e661e4b9d2e1afe0ce1d"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_LAB_DEVELOPMENT_REPORT_20260924.md",
+      "sha256": "2fa3b9e9bb1561c28cdb5e4d954d24cf8d5d858ddeeba14c6658e43559377573"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_LANGMEM_FOUNDATION_V15_RESULTS_20260926.md",
+      "sha256": "1446863ee74e880aabf6cf4dd98c041abf99fac8d4c0f4bc66bb6cb269360e9b"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_LANGMEM_M1_PIVOT_V18_RESULTS_20260926.md",
+      "sha256": "48047842b1e49874d6bcaec89058b9856a66e95629733b51f260e136f0d9bee6"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_LANGMEM_M1_V17_RESULTS_20260926.md",
+      "sha256": "64cd957f6ce0de6b84602c2f6b5bd09faad26469993446c3ff1ec405d99d9f82"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_LANGMEM_PROVENANCE_V16_RESULTS_20260926.md",
+      "sha256": "0d5fa1642e644ad01eea658078bf41c5bccdf0bfd1e6f539e617958f3938b6a7"
+    },
+    {
+      "path": "MiLAi-Lab/docs/MILA_ON_DEMAND_RECONSTRUCTION_V19_RESULTS_20260926.md",
+      "sha256": "d00a7516e4d6b358d99bdaaaa85d5fa8794031bf9929830652567c2d617a411a"
+    },
+    {
+      "path": "MiLAi-Lab/docs/RESULTS_INDEX.md",
+      "sha256": "292348ec81837ff89d00ebb1105e1dad461fa55313ffa295415804c79597165e"
+    },
+    {
+      "path": "MiLAi-Lab/docs/UTILITY_PROXY_RESULT.md",
+      "sha256": "888b45890fad2816243c8b9e4e7a11a64055b0d43e7305a0c733f345b5523f98"
+    }
+  ],
+  "historical_files_unchanged": 190,
+  "experimental_ledger_sha256": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+  "protected_bundles": {
+    "MiLAi-Product": {
+      "baseline_and_HEAD_tree": "cb661e044ee50c0a7dff364e72d7e6d525a1ac6c",
+      "uncommitted_changes": false
+    },
+    "MiLAi-Artifact-Archive": {
+      "baseline_and_HEAD_tree": "36ac04b4b0562265250bb15f01a4d40c4ac4f710",
+      "uncommitted_changes": false
+    }
+  },
+  "scope": "Git-tracked baseline locks/results/reports and repair-v10 manifests; authoritative ignored ledger. Existing draft presence is reviewed separately, not claimed as byte-comparison without a prior hash.",
+  "preexisting_drafts": [
+    {
+      "workspace_role": "original_checkout",
+      "HEAD": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+      "untracked_preserved": [
+        "MiLAi-Lab/docs/MILAI_BENCHMARK_FUNCTIONAL_COMPARISON_PLAN_20260928_v9.0.md",
+        "MiLAi-Lab/docs/MILAI_CODE_ORGANIZATION_BOUNDARY_PLAN_20260929_v12.0.md",
+        "MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v7.0.md",
+        "MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20260928_v8.0.md",
+        "MiLAi-Lab/docs/MILAI_MEMORY_ARCHITECTURE_REVIEW_20260928.md",
+        "MiLAi-Lab/docs/MILAI_MODEL_SENSITIVITY_V27_GOAL.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v2.0.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v3.0.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v4.0.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v5.0.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_DEVELOPMENT_PLAN_20260928_v6.0.md",
+        "MiLAi-Lab/docs/MILAI_NEXT_IMPROVEMENT_PLAN_20260927_v1.0.md",
+        "MiLAi-Lab/docs/MILAI_REPAIR_DEVELOPMENT_EXPERIMENT_PLAN_20260929_v10.0.md",
+        "MiLAi-Lab/docs/MILAI_UNIFIED_DEVELOPMENT_EXPERIMENT_PLAN_V8_V9_20260928.md"
+      ],
+      "tracked_changes": false,
+      "note": "Presence/status review; no before-hash claim for preexisting untracked drafts."
+    },
+    {
+      "workspace_role": "repair_v10",
+      "HEAD": "091dcbd48dc1800e5b8cc7f0ee3066dc00a76311",
+      "untracked_preserved": [
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-application-config-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-fixture-design.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-later_same_parameters-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-no_effect_retry-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-partial-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-rubric-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r2-unknown-draft.json",
+        "MiLAi-Lab/data/diagnostics/repair-v10/r3-formation-scope-instruction-draft.txt",
+        "MiLAi-Lab/data/manifests/repair-v10-r3-f-selection-draft.json"
+      ],
+      "tracked_changes": false,
+      "note": "Presence/status review; no before-hash claim for preexisting untracked drafts."
+    }
+  ],
+  "worktrees_not_removed": true
+}
