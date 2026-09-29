@@ -17,6 +17,20 @@ separate experimental variables; freeze each real diagnostic before calling serv
 Research remains NOT_ACHIEVED and Product NO_GO. Historical records follow.
 
 
+## v10 R1 L1 progress: 2026-09-29
+
+Read [the L1 result](docs/MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md) and
+[per-call evidence](data/manifests/repair-v10-r1-l1-results.json). Source c0bec6a7,
+execution77a8784b; all24 frozen first responses completed, no tool execution.
+Legacy4/12 truncated, candidate2/12; contaminated arc22 still fails both repeats.
+Three legal control proposals remain correct. This permits separately frozen L2,
+not candidate promotion or R2 completion. Default remains legacy; no history cleaning.
+New24generation/106780tokens/0embedding; cumulative6016/11028121/416802.
+R0 and all20 scope offline audit complete; R2 read-only source contract inspected.
+R1 L2, R2 implementation/recovery, R3 single-variable repair, applicable R4–R7,
+final report and full acceptance remain unfinished. Goal stays ACTIVE. No source edits
+until the next variable's contract/identity is fixed. Do not resume old failed worlds.
+
 ## Latest user stop: 2026-09-29
 
 The user explicitly requested: “暂停当前实验，生成实验报告”. Actual Goal is **paused**.
