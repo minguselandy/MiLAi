@@ -344,7 +344,8 @@
       "evidence": "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
       "current_import_map": "data/manifests/code-architecture-v12-current-import-map.json",
       "preservation": "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
-      "note": "Final independent fixed-policy test file: 199 passed; earlier Core204 overlaps. Foundation55, strict typing, offline packaging and isolated install evidence recorded. C13 awaits published-head Fast CI."
+      "note": "Final independent fixed-policy test file: 199 passed; earlier Core204 overlaps. Foundation55, strict typing, offline packaging and isolated install evidence recorded. C13 awaits published-head Fast CI.",
+      "commit": "2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba"
     }
   },
   "local_review": {
@@ -354,5 +355,12 @@
       "C13"
     ],
     "scope": "Engineering structure and preserved synthetic contracts only; no semantic effectiveness claim. Remote publication and merge remain required."
+  },
+  "publication": {
+    "PR": "https://github.com/minguselandy/MiLAi/pull/76",
+    "first_run": "https://github.com/minguselandy/MiLAi/actions/runs/36595782771",
+    "first_run_conclusion": "failure",
+    "repair_evidence": "data/diagnostics/code-architecture-v12/ci-repair-evidence.json",
+    "status": "REPAIR_LOCAL_PASS_NEW_HEAD_CI_PENDING"
   }
 }

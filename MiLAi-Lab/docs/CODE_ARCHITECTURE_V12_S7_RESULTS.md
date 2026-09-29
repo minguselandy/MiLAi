@@ -69,3 +69,18 @@ wheel 相同，194 个 runtime 文件字节相同。因此复用原隔离安装�
 静态门禁覆盖有限常量、别名、相对/嵌套/TYPE_CHECKING 及已审查的固定外部加载规则。
 它不宣称能证明任意生成 Python 代码的行为。既有外部 SDK 检查复用 S3 证据；没有新增
 下载、真实模型调用或修改模型服务，旧实验失败继续保留。
+
+## 首轮远端 CI 与最小修复
+
+S7 提交为 `2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba`，已发布至 [PR #76](https://github.com/minguselandy/MiLAi/pull/76)。
+[首次 Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36595782771) 的 Lab、External、边界与实现一致性检查通过，
+Foundation 因 CLI `run_unified_benchmarks.py` 对 TypedDict 使用动态键索引而失败，汇总 gate 随之失败。
+本地同命令复现，排除了仅由 CI 环境差异导致的解释。
+
+此前本地 Foundation 的 src discovery/explicit 检查未运行已有 CLI mypy 命令，矩阵检查也不能
+替代实际执行这条命令。修复只增加标准库 Mapping 导入，将原 result 注解为只读
+`Mapping[str, object]`；不转换返回对象，不改输出投影、字段、顺序或 producer。
+实际 CI 五个目标的 mypy 命令与局部 Ruff 通过；擦除注解后函数 AST 相同，36 个模拟 CLI
+场景的 stdout/stderr/调用/异常一致。未运行真实 benchmark，没有新增运行包模块变更，未重复构建。
+[修复证据](../data/diagnostics/code-architecture-v12/ci-repair-evidence.json)保留首失败、修复及验证范围。
+C13 仍等待修复后提交的完整 Fast CI，首轮失败不记为通过。

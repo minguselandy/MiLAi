@@ -68,5 +68,5 @@ S7 正式 DAG/facade/identity/type/optional/package 门禁已完成，详细检�
 11,407,086 generation tokens、416,930 embedding tokens；没有清零费用或修复历史失败。
 
 十五项判据中十四项本地通过，C13 等待本次实际发布实现对应的 Fast CI。
-尚无本轮 GitHub PR 或合并 SHA，不能以既有 main 的 CI 代替。
+[PR #76](https://github.com/minguselandy/MiLAi/pull/76) 已发布，S7 提交为 `2ecd5630`。首轮 CI 的 Foundation CLI 类型错误已最小修复；等待新提交验证，尚未合并。首轮失败与本地检查漏项见 S7 报告。
 结构回滚基线为 `cca2fd9d1cb4614c44a40ddc0458325d959e6740`，分阶段提交便于逐项审查。
