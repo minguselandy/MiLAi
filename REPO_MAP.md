@@ -27,6 +27,20 @@ MiLAi/
 | Product application seams | `MiLAi-Product/runtime/src/milai/application/recollection`, `context_prepare` | facade、route、binding、serialization 等稳定边界；兼容入口保留在旧模块路径 |
 | OpenWorker host seams | `MiLAi-Product/integrations/openworker-mcp/src/milai_openworker_mcp/host` | Host orchestrator 与 host 兼容层；memory/provider/tool 组件不得回流到根目录 |
 
+## Lab 内部结构
+
+| 目录 | 维护职责 |
+|---|---|
+| `MiLAi-Lab/src/milai_lab/application/` | 可复用业务 world、操作 journal、工具与恢复能力；不导入 runner |
+| `MiLAi-Lab/src/milai_lab/runners/` | 实验阶段与运行资源编排，保留旧入口兼容 |
+| `MiLAi-Lab/src/milai_lab/methods/` | 明确方法身份的记忆/工作视图实现 |
+| `MiLAi-Lab/src/milai_lab/baselines/`、`providers/` | Agent/参考系统接口与实际模型协议 |
+| `MiLAi-Lab/docs/`、`data/manifests/` | 协议、结果、来源身份与精简证据 |
+
+详细入口见 [Lab 项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)，
+本轮整合见 [GitHub 合并记录](MiLAi-Lab/docs/GITHUB_MERGE_AND_STRUCTURE_20260929.md)。
+上述是维护职责，不代表所有历史模块均已完成相同分层；实验状态以当前状态页为准。
+
 ## 运行与测试入口
 
 - Product：先进入 `MiLAi-Product/`，按其 `pyproject.toml`、`uv.lock`、README 和 CI 执行。
