@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import canonical_json
+from milai_lab.memory.revision_store import canonical_json
 from milai_lab.methods.on_demand_reconstruction.evidence_view import EvidenceView
 from milai_lab.methods.on_demand_reconstruction.freshness import freshness_block, inspect_freshness
 from milai_lab.methods.on_demand_reconstruction.schema import (

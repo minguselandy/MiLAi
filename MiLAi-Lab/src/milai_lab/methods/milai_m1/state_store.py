@@ -9,7 +9,7 @@ import threading
 from pathlib import Path
 from typing import Any, cast
 
-from milai_lab.baselines.langmem_revision_store import canonical_json
+from milai_lab.memory.revision_store import canonical_json
 
 ScopeKey = tuple[str, str, str, str]
 

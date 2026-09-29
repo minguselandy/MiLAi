@@ -1,0 +1,4419 @@
+{
+  "kind": "MILAI_V12_MEMORY_CONTRACT_GOLDEN",
+  "capture_source_commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929",
+  "original_behavior_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
+  "test_only_fixed_inputs": {
+    "uuid4": "00000000-0000-4000-8000-000000000001",
+    "Store_datetime": "2026-09-29T00:00:00Z",
+    "SQLite_datetime_now": "2026-09-29 00:00:00",
+    "strftime": "2026-09-29T00:00:00Z",
+    "perf_counter_ns": 1000,
+    "process_time_ns": 1000
+  },
+  "mcp_capture_transport": "in-process direct binding; ephemeral real HTTP tests are separate",
+  "contracts": {
+    "strict": {
+      "sync": {
+        "catalog": [
+          {
+            "type": "function",
+            "function": {
+              "name": "manage_memory",
+              "description": "Create, update, or delete a memory to persist across conversations.\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\nProactively call this tool when you:\n\n1. Identify a new USER preference.\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\n3. Are working and want to record important context.\n4. Identify that an existing MEMORY is incorrect or outdated.\nCreate and update require non-null content. Update and delete require an existing memory in this user's namespace; an unchanged update makes no write.",
+              "parameters": {
+                "properties": {
+                  "content": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "action": {
+                    "default": "create",
+                    "enum": [
+                      "create",
+                      "update",
+                      "delete"
+                    ],
+                    "type": "string"
+                  },
+                  "id": {
+                    "anyOf": [
+                      {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [],
+                "type": "object"
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "read_memory",
+              "description": "Read one ordinary memory by its exact id in this user's namespace. This makes no write.",
+              "parameters": {
+                "properties": {
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "cases": [
+          {
+            "case_id": "create-no-content",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-no-content",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-no-content\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create-null",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-null",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-null\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create-with-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"create_must_omit_id\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-with-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"create_must_omit_id\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-with-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "put",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "保留原文"
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": {
+                      "content": "保留原文"
+                    },
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "read-found",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"found\", \"id\": \"00000000-0000-4000-8000-000000000001\", \"value\": {\"content\": \"保留原文\"}}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "read_memory",
+                "id": null,
+                "tool_call_id": "read-found",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\", \\\"value\\\": {\\\"content\\\": \\\"保留原文\\\"}}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-found\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update-null",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-null",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-null\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "update-no-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"target_id_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-no-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"target_id_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-no-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "update-unknown",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000099\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-unknown",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000099\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-unknown\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000099"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000099",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update-noop",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"no_change\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-noop",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-noop\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"updated\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "put",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "新原文"
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": {
+                      "content": "新原文"
+                    },
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete-no-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"target_id_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete-no-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"target_id_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete-no-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "delete",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"deleted\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "delete",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": null,
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete-unknown",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete-unknown",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete-unknown\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "read-missing",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "read_memory",
+                "id": null,
+                "tool_call_id": "read-missing",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-missing\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "invalid-id",
+            "outcome": {
+              "exception": "ValidationError",
+              "message": "1 validation error for read_memory\nid\n  Input should be a valid UUID, invalid character: found `i` at 1 [type=uuid_parsing, input_value='invalid', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/uuid_parsing"
+            },
+            "store_calls": []
+          }
+        ],
+        "failures": [
+          {
+            "case_id": "put",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store put failed"
+            },
+            "store_calls": [
+              {
+                "method": "put",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "store failure"
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "get",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store get failed"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store delete failed"
+            },
+            "store_calls": [
+              {
+                "method": "get",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "batch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "delete",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              }
+            ]
+          }
+        ]
+      },
+      "async": {
+        "catalog": [
+          {
+            "type": "function",
+            "function": {
+              "name": "manage_memory",
+              "description": "Create, update, or delete a memory to persist across conversations.\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\nProactively call this tool when you:\n\n1. Identify a new USER preference.\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\n3. Are working and want to record important context.\n4. Identify that an existing MEMORY is incorrect or outdated.\nCreate and update require non-null content. Update and delete require an existing memory in this user's namespace; an unchanged update makes no write.",
+              "parameters": {
+                "properties": {
+                  "content": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "action": {
+                    "default": "create",
+                    "enum": [
+                      "create",
+                      "update",
+                      "delete"
+                    ],
+                    "type": "string"
+                  },
+                  "id": {
+                    "anyOf": [
+                      {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [],
+                "type": "object"
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "read_memory",
+              "description": "Read one ordinary memory by its exact id in this user's namespace. This makes no write.",
+              "parameters": {
+                "properties": {
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "cases": [
+          {
+            "case_id": "create-no-content",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-no-content",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-no-content\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create-null",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-null",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-null\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create-with-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"create_must_omit_id\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create-with-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"create_must_omit_id\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create-with-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "create",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "create",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aput",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "保留原文"
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": {
+                      "content": "保留原文"
+                    },
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "read-found",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"found\", \"id\": \"00000000-0000-4000-8000-000000000001\", \"value\": {\"content\": \"保留原文\"}}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "read_memory",
+                "id": null,
+                "tool_call_id": "read-found",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\", \\\"value\\\": {\\\"content\\\": \\\"保留原文\\\"}}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-found\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update-null",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-null",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-null\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "update-no-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"target_id_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-no-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"target_id_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-no-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "update-unknown",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000099\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-unknown",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000099\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-unknown\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000099"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000099",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update-noop",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"no_change\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update-noop",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-noop\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "update",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "update",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"updated\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "aput",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "新原文"
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": {
+                      "content": "新原文"
+                    },
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete-no-id",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"target_id_required\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete-no-id",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"target_id_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete-no-id\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": []
+          },
+          {
+            "case_id": "delete",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": true, \"status\": \"deleted\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete",
+                "artifact": null,
+                "status": "success"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete\",\"artifact\":null,\"status\":\"success\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "adelete",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "PutOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "value": null,
+                    "index": null,
+                    "ttl": null
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete-unknown",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "manage_memory",
+                "id": null,
+                "tool_call_id": "delete-unknown",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete-unknown\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "read-missing",
+            "outcome": {
+              "model_dump": {
+                "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+                "additional_kwargs": {},
+                "response_metadata": {},
+                "type": "tool",
+                "name": "read_memory",
+                "id": null,
+                "tool_call_id": "read-missing",
+                "artifact": null,
+                "status": "error"
+              },
+              "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-missing\",\"artifact\":null,\"status\":\"error\"}"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "invalid-id",
+            "outcome": {
+              "exception": "ValidationError",
+              "message": "1 validation error for read_memory\nid\n  Input should be a valid UUID, invalid character: found `i` at 1 [type=uuid_parsing, input_value='invalid', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/uuid_parsing"
+            },
+            "store_calls": []
+          }
+        ],
+        "failures": [
+          {
+            "case_id": "put",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store aput failed"
+            },
+            "store_calls": [
+              {
+                "method": "aput",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001",
+                  {
+                    "content": "store failure"
+                  }
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "get",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store aget failed"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              }
+            ]
+          },
+          {
+            "case_id": "delete",
+            "outcome": {
+              "exception": "OSError",
+              "message": "synthetic Store adelete failed"
+            },
+            "store_calls": [
+              {
+                "method": "aget",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "abatch",
+                "args": [
+                  {
+                    "type": "GetOp",
+                    "namespace": [
+                      "langmem",
+                      "synthetic-owner"
+                    ],
+                    "key": "00000000-0000-4000-8000-000000000001",
+                    "refresh_ttl": true
+                  }
+                ],
+                "kwargs": {}
+              },
+              {
+                "method": "adelete",
+                "args": [
+                  [
+                    "langmem",
+                    "synthetic-owner"
+                  ],
+                  "00000000-0000-4000-8000-000000000001"
+                ],
+                "kwargs": {}
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "mcp": {
+      "protocol": "2026-07-28",
+      "resource": "milai://memory/records",
+      "scope": {
+        "foundation_run_id": "synthetic-run",
+        "arm_id": "synthetic-arm",
+        "user_id": "synthetic-owner"
+      },
+      "namespace": [
+        "langmem",
+        "synthetic-run",
+        "synthetic-arm",
+        "synthetic-owner"
+      ],
+      "catalog": [
+        {
+          "type": "function",
+          "function": {
+            "name": "manage_memory",
+            "description": "Create, update, or delete a memory to persist across conversations.\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\nProactively call this tool when you:\n\n1. Identify a new USER preference.\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\n3. Are working and want to record important context.\n4. Identify that an existing MEMORY is incorrect or outdated.\nCreate and update require non-null content. Update and delete require an existing memory in this user's namespace; an unchanged update makes no write.",
+            "parameters": {
+              "properties": {
+                "content": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "action": {
+                  "default": "create",
+                  "enum": [
+                    "create",
+                    "update",
+                    "delete"
+                  ],
+                  "type": "string"
+                },
+                "id": {
+                  "anyOf": [
+                    {
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": [],
+              "type": "object"
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "search_memory",
+            "description": "Search your long-term memories for information relevant to your current context.",
+            "parameters": {
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 10,
+                  "type": "integer"
+                },
+                "offset": {
+                  "default": 0,
+                  "type": "integer"
+                },
+                "filter": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read_memory",
+            "description": "Read one ordinary memory by its exact id in this user's namespace. This makes no write.",
+            "parameters": {
+              "properties": {
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": "object"
+            }
+          }
+        }
+      ],
+      "list_tools": {
+        "model_dump": {
+          "meta": null,
+          "ttl_ms": 0,
+          "cache_scope": "private",
+          "next_cursor": null,
+          "tools": [
+            {
+              "name": "manage_memory",
+              "title": null,
+              "description": "Create, update, or delete a memory to persist across conversations.\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\nProactively call this tool when you:\n\n1. Identify a new USER preference.\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\n3. Are working and want to record important context.\n4. Identify that an existing MEMORY is incorrect or outdated.\nCreate and update require non-null content. Update and delete require an existing memory in this user's namespace; an unchanged update makes no write.",
+              "input_schema": {
+                "properties": {
+                  "content": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  },
+                  "action": {
+                    "default": "create",
+                    "enum": [
+                      "create",
+                      "update",
+                      "delete"
+                    ],
+                    "type": "string"
+                  },
+                  "id": {
+                    "anyOf": [
+                      {
+                        "format": "uuid",
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [],
+                "type": "object"
+              },
+              "execution": null,
+              "output_schema": null,
+              "icons": null,
+              "annotations": null,
+              "meta": null
+            },
+            {
+              "name": "search_memory",
+              "title": null,
+              "description": "Search your long-term memories for information relevant to your current context.",
+              "input_schema": {
+                "properties": {
+                  "query": {
+                    "type": "string"
+                  },
+                  "limit": {
+                    "default": 10,
+                    "type": "integer"
+                  },
+                  "offset": {
+                    "default": 0,
+                    "type": "integer"
+                  },
+                  "filter": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": true,
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "query"
+                ],
+                "type": "object"
+              },
+              "execution": null,
+              "output_schema": null,
+              "icons": null,
+              "annotations": null,
+              "meta": null
+            },
+            {
+              "name": "read_memory",
+              "title": null,
+              "description": "Read one ordinary memory by its exact id in this user's namespace. This makes no write.",
+              "input_schema": {
+                "properties": {
+                  "id": {
+                    "format": "uuid",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "execution": null,
+              "output_schema": null,
+              "icons": null,
+              "annotations": null,
+              "meta": null
+            }
+          ],
+          "result_type": "complete"
+        },
+        "json_bytes": "{\"meta\":null,\"ttl_ms\":0,\"cache_scope\":\"private\",\"next_cursor\":null,\"tools\":[{\"name\":\"manage_memory\",\"title\":null,\"description\":\"Create, update, or delete a memory to persist across conversations.\\nInclude the MEMORY ID when updating or deleting a MEMORY. Omit when creating a new MEMORY - it will be created for you.\\nProactively call this tool when you:\\n\\n1. Identify a new USER preference.\\n2. Receive an explicit USER request to remember something or otherwise alter your behavior.\\n3. Are working and want to record important context.\\n4. Identify that an existing MEMORY is incorrect or outdated.\\nCreate and update require non-null content. Update and delete require an existing memory in this user's namespace; an unchanged update makes no write.\",\"input_schema\":{\"properties\":{\"content\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"action\":{\"default\":\"create\",\"enum\":[\"create\",\"update\",\"delete\"],\"type\":\"string\"},\"id\":{\"anyOf\":[{\"format\":\"uuid\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[],\"type\":\"object\"},\"execution\":null,\"output_schema\":null,\"icons\":null,\"annotations\":null,\"meta\":null},{\"name\":\"search_memory\",\"title\":null,\"description\":\"Search your long-term memories for information relevant to your current context.\",\"input_schema\":{\"properties\":{\"query\":{\"type\":\"string\"},\"limit\":{\"default\":10,\"type\":\"integer\"},\"offset\":{\"default\":0,\"type\":\"integer\"},\"filter\":{\"anyOf\":[{\"additionalProperties\":true,\"type\":\"object\"},{\"type\":\"null\"}],\"default\":null}},\"required\":[\"query\"],\"type\":\"object\"},\"execution\":null,\"output_schema\":null,\"icons\":null,\"annotations\":null,\"meta\":null},{\"name\":\"read_memory\",\"title\":null,\"description\":\"Read one ordinary memory by its exact id in this user's namespace. This makes no write.\",\"input_schema\":{\"properties\":{\"id\":{\"format\":\"uuid\",\"type\":\"string\"}},\"required\":[\"id\"],\"type\":\"object\"},\"execution\":null,\"output_schema\":null,\"icons\":null,\"annotations\":null,\"meta\":null}],\"result_type\":\"complete\"}"
+      },
+      "calls": [
+        {
+          "case_id": "create",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "manage_memory",
+              "id": null,
+              "tool_call_id": "create",
+              "artifact": null,
+              "status": "success"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"create\",\"artifact\":null,\"status\":\"success\"}"
+          },
+          "store_calls": [
+            {
+              "method": "put",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001",
+                {
+                  "content": "synthetic memory"
+                }
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "PutOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "value": {
+                    "content": "synthetic memory"
+                  },
+                  "index": null,
+                  "ttl": null
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        },
+        {
+          "case_id": "update-noop",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": true, \"status\": \"no_change\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "manage_memory",
+              "id": null,
+              "tool_call_id": "update-noop",
+              "artifact": null,
+              "status": "success"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"update-noop\",\"artifact\":null,\"status\":\"success\"}"
+          },
+          "store_calls": [
+            {
+              "method": "get",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001"
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "GetOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "refresh_ttl": true
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        },
+        {
+          "case_id": "read",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": true, \"status\": \"found\", \"id\": \"00000000-0000-4000-8000-000000000001\", \"value\": {\"content\": \"synthetic memory\"}}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "read_memory",
+              "id": null,
+              "tool_call_id": "read",
+              "artifact": null,
+              "status": "success"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\", \\\"value\\\": {\\\"content\\\": \\\"synthetic memory\\\"}}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read\",\"artifact\":null,\"status\":\"success\"}"
+          },
+          "store_calls": [
+            {
+              "method": "get",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001"
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "GetOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "refresh_ttl": true
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        },
+        {
+          "case_id": "read-invalid",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": false, \"status\": \"invalid_arguments\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "read_memory",
+              "id": null,
+              "tool_call_id": "read-invalid",
+              "artifact": null,
+              "status": "error"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-invalid\",\"artifact\":null,\"status\":\"error\"}"
+          },
+          "store_calls": []
+        },
+        {
+          "case_id": "missing-content",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": false, \"status\": \"invalid_arguments\", \"reason\": \"content_required\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "manage_memory",
+              "id": null,
+              "tool_call_id": "missing-content",
+              "artifact": null,
+              "status": "error"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"invalid_arguments\\\", \\\"reason\\\": \\\"content_required\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"missing-content\",\"artifact\":null,\"status\":\"error\"}"
+          },
+          "store_calls": []
+        },
+        {
+          "case_id": "search",
+          "outcome": {
+            "model_dump": {
+              "content": "[{\"namespace\":[\"langmem\",\"synthetic-run\",\"synthetic-arm\",\"synthetic-owner\"],\"key\":\"00000000-0000-4000-8000-000000000001\",\"value\":{\"content\":\"synthetic memory\"},\"created_at\":\"2026-09-29T00:00:00+00:00\",\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"score\":null}]",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "search_memory",
+              "id": null,
+              "tool_call_id": "search",
+              "artifact": null,
+              "status": "success"
+            },
+            "json_bytes": "{\"content\":\"[{\\\"namespace\\\":[\\\"langmem\\\",\\\"synthetic-run\\\",\\\"synthetic-arm\\\",\\\"synthetic-owner\\\"],\\\"key\\\":\\\"00000000-0000-4000-8000-000000000001\\\",\\\"value\\\":{\\\"content\\\":\\\"synthetic memory\\\"},\\\"created_at\\\":\\\"2026-09-29T00:00:00+00:00\\\",\\\"updated_at\\\":\\\"2026-09-29T00:00:00+00:00\\\",\\\"score\\\":null}]\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"search_memory\",\"id\":null,\"tool_call_id\":\"search\",\"artifact\":null,\"status\":\"success\"}"
+          },
+          "store_calls": [
+            {
+              "method": "search",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ]
+              ],
+              "kwargs": {
+                "query": "memory",
+                "filter": null,
+                "limit": 3,
+                "offset": 0
+              }
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "SearchOp",
+                  "namespace_prefix": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "filter": null,
+                  "limit": 3,
+                  "offset": 0,
+                  "query": "memory",
+                  "refresh_ttl": true
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        },
+        {
+          "case_id": "delete",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": true, \"status\": \"deleted\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "manage_memory",
+              "id": null,
+              "tool_call_id": "delete",
+              "artifact": null,
+              "status": "success"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"delete\",\"artifact\":null,\"status\":\"success\"}"
+          },
+          "store_calls": [
+            {
+              "method": "get",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001"
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "GetOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "refresh_ttl": true
+                }
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "delete",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001"
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "PutOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "value": null,
+                  "index": null,
+                  "ttl": null
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        },
+        {
+          "case_id": "read-missing",
+          "outcome": {
+            "model_dump": {
+              "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+              "additional_kwargs": {},
+              "response_metadata": {},
+              "type": "tool",
+              "name": "read_memory",
+              "id": null,
+              "tool_call_id": "read-missing",
+              "artifact": null,
+              "status": "error"
+            },
+            "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"read-missing\",\"artifact\":null,\"status\":\"error\"}"
+          },
+          "store_calls": [
+            {
+              "method": "get",
+              "args": [
+                [
+                  "langmem",
+                  "synthetic-run",
+                  "synthetic-arm",
+                  "synthetic-owner"
+                ],
+                "00000000-0000-4000-8000-000000000001"
+              ],
+              "kwargs": {}
+            },
+            {
+              "method": "batch",
+              "args": [
+                {
+                  "type": "GetOp",
+                  "namespace": [
+                    "langmem",
+                    "synthetic-run",
+                    "synthetic-arm",
+                    "synthetic-owner"
+                  ],
+                  "key": "00000000-0000-4000-8000-000000000001",
+                  "refresh_ttl": true
+                }
+              ],
+              "kwargs": {}
+            }
+          ]
+        }
+      ],
+      "scope_errors": [
+        {
+          "exception": "ValueError",
+          "message": "MCP_MEMORY_SCOPE_CHANGED"
+        },
+        {
+          "exception": "ValueError",
+          "message": "MCP_FULL_TOOL_CALL_REQUIRED"
+        }
+      ],
+      "records": [
+        {
+          "id": "00000000-0000-0000-0000-000000000001",
+          "value": {
+            "content": "synthetic-0",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000002",
+          "value": {
+            "content": "synthetic-1",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000003",
+          "value": {
+            "content": "synthetic-2",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000004",
+          "value": {
+            "content": "synthetic-3",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000005",
+          "value": {
+            "content": "synthetic-4",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000006",
+          "value": {
+            "content": "synthetic-5",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000007",
+          "value": {
+            "content": "synthetic-6",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000008",
+          "value": {
+            "content": "synthetic-7",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000009",
+          "value": {
+            "content": "synthetic-8",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000a",
+          "value": {
+            "content": "synthetic-9",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000b",
+          "value": {
+            "content": "synthetic-10",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000c",
+          "value": {
+            "content": "synthetic-11",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000d",
+          "value": {
+            "content": "synthetic-12",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000e",
+          "value": {
+            "content": "synthetic-13",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000000f",
+          "value": {
+            "content": "synthetic-14",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000010",
+          "value": {
+            "content": "synthetic-15",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000011",
+          "value": {
+            "content": "synthetic-16",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000012",
+          "value": {
+            "content": "synthetic-17",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000013",
+          "value": {
+            "content": "synthetic-18",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000014",
+          "value": {
+            "content": "synthetic-19",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000015",
+          "value": {
+            "content": "synthetic-20",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000016",
+          "value": {
+            "content": "synthetic-21",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000017",
+          "value": {
+            "content": "synthetic-22",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000018",
+          "value": {
+            "content": "synthetic-23",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000019",
+          "value": {
+            "content": "synthetic-24",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001a",
+          "value": {
+            "content": "synthetic-25",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001b",
+          "value": {
+            "content": "synthetic-26",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001c",
+          "value": {
+            "content": "synthetic-27",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001d",
+          "value": {
+            "content": "synthetic-28",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001e",
+          "value": {
+            "content": "synthetic-29",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000001f",
+          "value": {
+            "content": "synthetic-30",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000020",
+          "value": {
+            "content": "synthetic-31",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000021",
+          "value": {
+            "content": "synthetic-32",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000022",
+          "value": {
+            "content": "synthetic-33",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000023",
+          "value": {
+            "content": "synthetic-34",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000024",
+          "value": {
+            "content": "synthetic-35",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000025",
+          "value": {
+            "content": "synthetic-36",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000026",
+          "value": {
+            "content": "synthetic-37",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000027",
+          "value": {
+            "content": "synthetic-38",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000028",
+          "value": {
+            "content": "synthetic-39",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000029",
+          "value": {
+            "content": "synthetic-40",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002a",
+          "value": {
+            "content": "synthetic-41",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002b",
+          "value": {
+            "content": "synthetic-42",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002c",
+          "value": {
+            "content": "synthetic-43",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002d",
+          "value": {
+            "content": "synthetic-44",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002e",
+          "value": {
+            "content": "synthetic-45",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000002f",
+          "value": {
+            "content": "synthetic-46",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000030",
+          "value": {
+            "content": "synthetic-47",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000031",
+          "value": {
+            "content": "synthetic-48",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000032",
+          "value": {
+            "content": "synthetic-49",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000033",
+          "value": {
+            "content": "synthetic-50",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000034",
+          "value": {
+            "content": "synthetic-51",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000035",
+          "value": {
+            "content": "synthetic-52",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000036",
+          "value": {
+            "content": "synthetic-53",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000037",
+          "value": {
+            "content": "synthetic-54",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000038",
+          "value": {
+            "content": "synthetic-55",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000039",
+          "value": {
+            "content": "synthetic-56",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003a",
+          "value": {
+            "content": "synthetic-57",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003b",
+          "value": {
+            "content": "synthetic-58",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003c",
+          "value": {
+            "content": "synthetic-59",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003d",
+          "value": {
+            "content": "synthetic-60",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003e",
+          "value": {
+            "content": "synthetic-61",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-00000000003f",
+          "value": {
+            "content": "synthetic-62",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000040",
+          "value": {
+            "content": "synthetic-63",
+            "unknown": {
+              "retain": true
+            }
+          }
+        },
+        {
+          "id": "00000000-0000-0000-0000-000000000041",
+          "value": {
+            "content": "synthetic-64",
+            "unknown": {
+              "retain": true
+            }
+          }
+        }
+      ],
+      "pagination_store_calls": [
+        {
+          "method": "search",
+          "args": [
+            [
+              "langmem",
+              "synthetic-run",
+              "synthetic-arm",
+              "synthetic-owner"
+            ]
+          ],
+          "kwargs": {
+            "limit": 64,
+            "offset": 0
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "SearchOp",
+              "namespace_prefix": [
+                "langmem",
+                "synthetic-run",
+                "synthetic-arm",
+                "synthetic-owner"
+              ],
+              "filter": null,
+              "limit": 64,
+              "offset": 0,
+              "query": null,
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "search",
+          "args": [
+            [
+              "langmem",
+              "synthetic-run",
+              "synthetic-arm",
+              "synthetic-owner"
+            ]
+          ],
+          "kwargs": {
+            "limit": 64,
+            "offset": 64
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "SearchOp",
+              "namespace_prefix": [
+                "langmem",
+                "synthetic-run",
+                "synthetic-arm",
+                "synthetic-owner"
+              ],
+              "filter": null,
+              "limit": 64,
+              "offset": 64,
+              "query": null,
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        }
+      ],
+      "pagination_event": {
+        "event": "lsa_writer_memory_read",
+        "user_id": "synthetic-owner",
+        "calls": 2,
+        "records": 65,
+        "transport": "mcp_http",
+        "logical_bytes": 7465,
+        "wall_ns": 0,
+        "cpu_ns": 0
+      },
+      "async_read": {
+        "model_dump": {
+          "content": "{\"ok\": true, \"status\": \"found\", \"id\": \"00000000-0000-0000-0000-000000000001\", \"value\": {\"content\": \"synthetic-0\", \"unknown\": {\"retain\": true}}}",
+          "additional_kwargs": {},
+          "response_metadata": {},
+          "type": "tool",
+          "name": "read_memory",
+          "id": null,
+          "tool_call_id": "async-read",
+          "artifact": null,
+          "status": "success"
+        },
+        "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"id\\\": \\\"00000000-0000-0000-0000-000000000001\\\", \\\"value\\\": {\\\"content\\\": \\\"synthetic-0\\\", \\\"unknown\\\": {\\\"retain\\\": true}}}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"read_memory\",\"id\":null,\"tool_call_id\":\"async-read\",\"artifact\":null,\"status\":\"success\"}"
+      },
+      "readonly_catalog": [
+        {
+          "type": "function",
+          "function": {
+            "name": "search_memory",
+            "description": "Search your long-term memories for information relevant to your current context.",
+            "parameters": {
+              "properties": {
+                "query": {
+                  "type": "string"
+                },
+                "limit": {
+                  "default": 10,
+                  "type": "integer"
+                },
+                "offset": {
+                  "default": 0,
+                  "type": "integer"
+                },
+                "filter": {
+                  "anyOf": [
+                    {
+                      "additionalProperties": true,
+                      "type": "object"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                }
+              },
+              "required": [
+                "query"
+              ],
+              "type": "object"
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read_memory",
+            "description": "Read one ordinary memory by its exact id in this user's namespace. This makes no write.",
+            "parameters": {
+              "properties": {
+                "id": {
+                  "format": "uuid",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ],
+              "type": "object"
+            }
+          }
+        }
+      ],
+      "readonly_write": {
+        "exception": "ValueError",
+        "message": "MCP_MEMORY_TOOL_UNKNOWN"
+      },
+      "readonly_write_store_calls": [],
+      "transport_failure": {
+        "exception": "RuntimeError",
+        "message": "synthetic uncertain transport outcome"
+      },
+      "transport_attempts": 1,
+      "bindings_after_failure": 0
+    },
+    "revision": {
+      "receipts": [
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-0",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-0\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"no_change\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-1",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-1\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"updated\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-2",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"updated\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-2\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"deleted\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-3",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-3\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": false, \"status\": \"not_found\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-4",
+            "artifact": null,
+            "status": "error"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-4\",\"artifact\":null,\"status\":\"error\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"created\", \"id\": \"00000000-0000-4000-8000-000000000001\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "manage_memory",
+            "id": null,
+            "tool_call_id": "revision-call-5",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"manage_memory\",\"id\":null,\"tool_call_id\":\"revision-call-5\",\"artifact\":null,\"status\":\"success\"}"
+        }
+      ],
+      "store_calls": [
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "PutOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "value": {
+                "content": "first"
+              },
+              "index": null,
+              "ttl": null
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "PutOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "value": {
+                "content": "second"
+              },
+              "index": null,
+              "ttl": null
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "PutOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "value": null,
+              "index": null,
+              "ttl": null
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": true
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "PutOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "value": {
+                "content": "recreated"
+              },
+              "index": null,
+              "ttl": null
+            }
+          ],
+          "kwargs": {}
+        },
+        {
+          "method": "get",
+          "args": [
+            [
+              "langmem",
+              "synthetic-owner"
+            ],
+            "00000000-0000-4000-8000-000000000001"
+          ],
+          "kwargs": {
+            "refresh_ttl": false
+          }
+        },
+        {
+          "method": "batch",
+          "args": [
+            {
+              "type": "GetOp",
+              "namespace": [
+                "langmem",
+                "synthetic-owner"
+              ],
+              "key": "00000000-0000-4000-8000-000000000001",
+              "refresh_ttl": false
+            }
+          ],
+          "kwargs": {}
+        }
+      ],
+      "rows": {
+        "bodies": [
+          {
+            "body_ref": "body:string:c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "kind": "string",
+            "content_sha256": "c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "body_json": "\"Synthetic only\""
+          },
+          {
+            "body_ref": "body:string:a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "kind": "string",
+            "content_sha256": "a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "body_json": "\"first\""
+          },
+          {
+            "body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "kind": "string",
+            "content_sha256": "0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "kind": "string",
+            "content_sha256": "760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "kind": "string",
+            "content_sha256": "16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "body_json": "\"second\""
+          },
+          {
+            "body_ref": "body:string:5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "kind": "string",
+            "content_sha256": "5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"updated\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "kind": "string",
+            "content_sha256": "a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "kind": "string",
+            "content_sha256": "2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "body_json": "\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "kind": "string",
+            "content_sha256": "e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "body_json": "\"recreated\""
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "57a891bc9b6bf331d840f1ff2a159d6f2110d458be921b15f4152562e3fdcb10",
+            "run_id": "synthetic-run",
+            "arm_id": "synthetic-arm",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "session_id": "session",
+            "public_message_index": 0,
+            "role": "user",
+            "actor_ref": "synthetic-owner",
+            "artifact": "public_message",
+            "content_sha256": "c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "body_ref": "body:string:c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "observed_at": "2026-09-29 00:00:00",
+            "delivery_count": 1
+          }
+        ],
+        "tool_calls": [
+          {
+            "call_key": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-0",
+            "call_id": "revision-call-0",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"content\":\"first\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "21ac0f63a4251d0b0e580d277d29e38e7e26b5a23f7c5cfa0ec0d5344a60373f",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-1",
+            "call_id": "revision-call-1",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"update\",\"content\":\"first\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-2",
+            "call_id": "revision-call-2",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"update\",\"content\":\"second\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-3",
+            "call_id": "revision-call-3",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"delete\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "401fa37ac6f3d7928fbabc9303fa26dff07e79bdd3aec378fec38e4d86edae1d",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-4",
+            "call_id": "revision-call-4",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"delete\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "error",
+            "journal_status": null,
+            "result_body_ref": "body:string:2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "tool_message_status": "error",
+            "last_error": null
+          },
+          {
+            "call_key": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-5",
+            "call_id": "revision-call-5",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"content\":\"recreated\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "tool_message_status": "success",
+            "last_error": null
+          }
+        ],
+        "operations": [
+          {
+            "operation_id": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f:1:store:1",
+            "call_key": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "create",
+            "status": "complete",
+            "actual_effect": "insert",
+            "pre_item_json": null,
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e:1:store:1",
+            "call_key": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "update",
+            "status": "complete",
+            "actual_effect": "update",
+            "pre_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec:1:store:1",
+            "call_key": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "delete",
+            "status": "complete",
+            "actual_effect": "delete",
+            "pre_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}",
+            "post_item_json": null,
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c:1:store:1",
+            "call_key": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "create",
+            "status": "complete",
+            "actual_effect": "recreate",
+            "pre_item_json": null,
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"recreated\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          }
+        ],
+        "revisions": [
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 1,
+            "operation_id": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f:1:store:1",
+            "requested_action": "create",
+            "actual_effect": "insert",
+            "content_json": "\"first\"",
+            "content_kind": "string",
+            "content_sha256": "a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "body_ref": "body:string:a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": null,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}"
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 2,
+            "operation_id": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e:1:store:1",
+            "requested_action": "update",
+            "actual_effect": "update",
+            "content_json": "\"second\"",
+            "content_kind": "string",
+            "content_sha256": "16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "body_ref": "body:string:16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 1,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}"
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 3,
+            "operation_id": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec:1:store:1",
+            "requested_action": "delete",
+            "actual_effect": "delete",
+            "content_json": null,
+            "content_kind": null,
+            "content_sha256": null,
+            "body_ref": null,
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 2,
+            "created_at": null,
+            "updated_at": null,
+            "tombstone": 1,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": null
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 4,
+            "operation_id": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c:1:store:1",
+            "requested_action": "create",
+            "actual_effect": "recreate",
+            "content_json": "\"recreated\"",
+            "content_kind": "string",
+            "content_sha256": "e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "body_ref": "body:string:e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 3,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"recreated\"}}"
+          }
+        ],
+        "searches": [],
+        "requests": [],
+        "request_material": [],
+        "assistant_lineage": []
+      },
+      "schema": [
+        [
+          "index",
+          "sqlite_autoindex_assistant_lineage_1",
+          "assistant_lineage",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_bodies_1",
+          "bodies",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_observations_1",
+          "observations",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_operations_1",
+          "operations",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_request_material_1",
+          "request_material",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_requests_1",
+          "requests",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_revisions_1",
+          "revisions",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_revisions_2",
+          "revisions",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_searches_1",
+          "searches",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_tool_calls_1",
+          "tool_calls",
+          null
+        ],
+        [
+          "table",
+          "assistant_lineage",
+          "assistant_lineage",
+          "CREATE TABLE assistant_lineage(\n                thread_id TEXT NOT NULL, response_id TEXT NOT NULL,\n                generating_request_id TEXT NOT NULL,\n                original_body_ref TEXT NOT NULL,\n                exact_snapshot_json TEXT NOT NULL,\n                unknown_items INTEGER NOT NULL,\n                PRIMARY KEY(thread_id, response_id)\n            )"
+        ],
+        [
+          "table",
+          "bodies",
+          "bodies",
+          "CREATE TABLE bodies(\n                body_ref TEXT PRIMARY KEY, kind TEXT NOT NULL,\n                content_sha256 TEXT NOT NULL, body_json TEXT NOT NULL\n            )"
+        ],
+        [
+          "table",
+          "health",
+          "health",
+          "CREATE TABLE health(\n                id INTEGER PRIMARY KEY CHECK(id=1), status TEXT NOT NULL,\n                reason TEXT NOT NULL, recorded_at TEXT NOT NULL\n            )"
+        ],
+        [
+          "table",
+          "observations",
+          "observations",
+          "CREATE TABLE observations(\n                observation_id TEXT PRIMARY KEY, run_id TEXT NOT NULL,\n                arm_id TEXT NOT NULL, thread_id TEXT NOT NULL,\n                session_id TEXT NOT NULL, public_message_index INTEGER NOT NULL,\n                role TEXT NOT NULL, actor_ref TEXT NOT NULL, artifact TEXT NOT NULL,\n                content_sha256 TEXT NOT NULL, body_ref TEXT NOT NULL,\n                observed_at TEXT NOT NULL, delivery_count INTEGER NOT NULL DEFAULT 1\n            )"
+        ],
+        [
+          "table",
+          "operations",
+          "operations",
+          "CREATE TABLE operations(\n                operation_id TEXT PRIMARY KEY, call_key TEXT NOT NULL,\n                attempt_no INTEGER NOT NULL, ordinal INTEGER NOT NULL,\n                namespace_json TEXT NOT NULL, memory_id TEXT NOT NULL,\n                requested_action TEXT NOT NULL, status TEXT NOT NULL,\n                actual_effect TEXT, pre_item_json TEXT, post_item_json TEXT,\n                started_at TEXT NOT NULL, completed_at TEXT,\n                error_type TEXT, extra_reads INTEGER NOT NULL DEFAULT 0\n            )"
+        ],
+        [
+          "table",
+          "request_material",
+          "request_material",
+          "CREATE TABLE request_material(\n                request_id TEXT NOT NULL, tool_call_id TEXT NOT NULL,\n                source_kind TEXT NOT NULL, source_id TEXT,\n                content_sha256 TEXT, body_ref TEXT,\n                coverage TEXT NOT NULL, range_start INTEGER,\n                range_end INTEGER,\n                PRIMARY KEY(request_id, tool_call_id)\n            )"
+        ],
+        [
+          "table",
+          "requests",
+          "requests",
+          "CREATE TABLE requests(\n                request_id TEXT PRIMARY KEY, thread_id TEXT NOT NULL,\n                public_message_index INTEGER NOT NULL, request_index INTEGER NOT NULL,\n                status TEXT NOT NULL, planned_at TEXT NOT NULL,\n                finished_at TEXT, provider_receipt_id TEXT,\n                request_object_sha256 TEXT, request_json TEXT,\n                trace_path TEXT, trace_byte_offset INTEGER, trace_record_sha256 TEXT,\n                http_status INTEGER, error_type TEXT\n            )"
+        ],
+        [
+          "table",
+          "revisions",
+          "revisions",
+          "CREATE TABLE revisions(\n                namespace_json TEXT NOT NULL, memory_id TEXT NOT NULL,\n                revision INTEGER NOT NULL, operation_id TEXT NOT NULL UNIQUE,\n                requested_action TEXT NOT NULL, actual_effect TEXT NOT NULL,\n                content_json TEXT, content_kind TEXT, content_sha256 TEXT,\n                body_ref TEXT, source_refs_json TEXT, source_status TEXT NOT NULL,\n                recorded_at TEXT NOT NULL, supersedes_revision INTEGER,\n                created_at TEXT, updated_at TEXT, tombstone INTEGER NOT NULL,\n                content_unchanged INTEGER NOT NULL, history_status TEXT NOT NULL,\n                post_item_json TEXT,\n                PRIMARY KEY(namespace_json, memory_id, revision)\n            )"
+        ],
+        [
+          "table",
+          "searches",
+          "searches",
+          "CREATE TABLE searches(\n                search_id TEXT PRIMARY KEY, call_key TEXT NOT NULL,\n                attempt_no INTEGER NOT NULL, ordinal INTEGER NOT NULL,\n                thread_id TEXT NOT NULL, generation_id TEXT NOT NULL,\n                call_id TEXT NOT NULL, arguments_json TEXT NOT NULL,\n                namespace_json TEXT NOT NULL, query_text TEXT,\n                filter_json TEXT, result_limit INTEGER NOT NULL,\n                result_offset INTEGER NOT NULL, returned_at TEXT,\n                status TEXT NOT NULL, returned_json TEXT,\n                tool_message_body_ref TEXT, tool_message_status TEXT,\n                error_type TEXT\n            )"
+        ],
+        [
+          "table",
+          "stats",
+          "stats",
+          "CREATE TABLE stats(\n                id INTEGER PRIMARY KEY CHECK(id=1), transactions INTEGER NOT NULL,\n                observer_cpu_ns INTEGER NOT NULL, observer_wall_ns INTEGER NOT NULL,\n                extra_store_reads INTEGER NOT NULL,\n                extra_read_cpu_ns INTEGER NOT NULL, extra_read_wall_ns INTEGER NOT NULL,\n                initial_db_bytes INTEGER NOT NULL\n            )"
+        ],
+        [
+          "table",
+          "tool_calls",
+          "tool_calls",
+          "CREATE TABLE tool_calls(\n                call_key TEXT PRIMARY KEY, thread_id TEXT NOT NULL,\n                generation_id TEXT NOT NULL, call_id TEXT NOT NULL,\n                tool_name TEXT NOT NULL, arguments_json TEXT NOT NULL,\n                attempts INTEGER NOT NULL DEFAULT 0,\n                deliveries INTEGER NOT NULL DEFAULT 0,\n                status TEXT NOT NULL DEFAULT 'started',\n                journal_status TEXT, result_body_ref TEXT,\n                tool_message_status TEXT, last_error TEXT\n            )"
+        ]
+      ],
+      "costs": {
+        "id": 1,
+        "transactions": 58,
+        "observer_cpu_ns": 0,
+        "observer_wall_ns": 0,
+        "extra_store_reads": 8,
+        "extra_read_cpu_ns": 0,
+        "extra_read_wall_ns": 0,
+        "initial_db_bytes": 98304,
+        "sqlite_db_bytes": 98304,
+        "net_sqlite_db_bytes": 0,
+        "byte_scope": "SQLite main DB including retained revision bodies and indexes; DELETE journal mode"
+      },
+      "async_failure": {
+        "exception": "NotImplementedError",
+        "message": "B1 observes only the current synchronous LangMem path"
+      },
+      "reopen_rows": {
+        "bodies": [
+          {
+            "body_ref": "body:string:c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "kind": "string",
+            "content_sha256": "c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "body_json": "\"Synthetic only\""
+          },
+          {
+            "body_ref": "body:string:a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "kind": "string",
+            "content_sha256": "a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "body_json": "\"first\""
+          },
+          {
+            "body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "kind": "string",
+            "content_sha256": "0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"created\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "kind": "string",
+            "content_sha256": "760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"no_change\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "kind": "string",
+            "content_sha256": "16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "body_json": "\"second\""
+          },
+          {
+            "body_ref": "body:string:5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "kind": "string",
+            "content_sha256": "5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"updated\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "kind": "string",
+            "content_sha256": "a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "body_json": "\"{\\\"ok\\\": true, \\\"status\\\": \\\"deleted\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "kind": "string",
+            "content_sha256": "2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "body_json": "\"{\\\"ok\\\": false, \\\"status\\\": \\\"not_found\\\", \\\"id\\\": \\\"00000000-0000-4000-8000-000000000001\\\"}\""
+          },
+          {
+            "body_ref": "body:string:e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "kind": "string",
+            "content_sha256": "e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "body_json": "\"recreated\""
+          }
+        ],
+        "observations": [
+          {
+            "observation_id": "57a891bc9b6bf331d840f1ff2a159d6f2110d458be921b15f4152562e3fdcb10",
+            "run_id": "synthetic-run",
+            "arm_id": "synthetic-arm",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "session_id": "session",
+            "public_message_index": 0,
+            "role": "user",
+            "actor_ref": "synthetic-owner",
+            "artifact": "public_message",
+            "content_sha256": "c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "body_ref": "body:string:c959d262d0f5e8360d29664f59bef48bf8b78520ac624f4b2d5274c1b6c529c3",
+            "observed_at": "2026-09-29 00:00:00",
+            "delivery_count": 1
+          }
+        ],
+        "tool_calls": [
+          {
+            "call_key": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-0",
+            "call_id": "revision-call-0",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"content\":\"first\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "21ac0f63a4251d0b0e580d277d29e38e7e26b5a23f7c5cfa0ec0d5344a60373f",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-1",
+            "call_id": "revision-call-1",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"update\",\"content\":\"first\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:760751dfea38955bc2ff32486e9308b48e8e7d21edd4d50d43d13000003bc064",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-2",
+            "call_id": "revision-call-2",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"update\",\"content\":\"second\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:5dbda722d2a0e3d73520a744b4847883c70cf553bd46e167b4629d8579701802",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-3",
+            "call_id": "revision-call-3",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"delete\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:a9a5850984a9ead000343bd670ae40da6d1e259f1d68a9c77750152bb4863d15",
+            "tool_message_status": "success",
+            "last_error": null
+          },
+          {
+            "call_key": "401fa37ac6f3d7928fbabc9303fa26dff07e79bdd3aec378fec38e4d86edae1d",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-4",
+            "call_id": "revision-call-4",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"action\":\"delete\",\"id\":\"00000000-0000-4000-8000-000000000001\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "error",
+            "journal_status": null,
+            "result_body_ref": "body:string:2885518fd9839d7d3a80901cfc91f6c3653e9cfc523edd4cb89a849f0428b967",
+            "tool_message_status": "error",
+            "last_error": null
+          },
+          {
+            "call_key": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c",
+            "thread_id": "8a88b890cf28aa82589e7f4f66520ae5c4acdd3ccf071298330947000acb9e84",
+            "generation_id": "generation-5",
+            "call_id": "revision-call-5",
+            "tool_name": "manage_memory",
+            "arguments_json": "{\"content\":\"recreated\"}",
+            "attempts": 1,
+            "deliveries": 1,
+            "status": "success",
+            "journal_status": null,
+            "result_body_ref": "body:string:0a77ca06d1e5acbc1634a92ab75698a0b4a3d6ed1a090467fae4119ec471703b",
+            "tool_message_status": "success",
+            "last_error": null
+          }
+        ],
+        "operations": [
+          {
+            "operation_id": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f:1:store:1",
+            "call_key": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "create",
+            "status": "complete",
+            "actual_effect": "insert",
+            "pre_item_json": null,
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e:1:store:1",
+            "call_key": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "update",
+            "status": "complete",
+            "actual_effect": "update",
+            "pre_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec:1:store:1",
+            "call_key": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "delete",
+            "status": "complete",
+            "actual_effect": "delete",
+            "pre_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}",
+            "post_item_json": null,
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          },
+          {
+            "operation_id": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c:1:store:1",
+            "call_key": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c",
+            "attempt_no": 1,
+            "ordinal": 1,
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "requested_action": "create",
+            "status": "complete",
+            "actual_effect": "recreate",
+            "pre_item_json": null,
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"recreated\"}}",
+            "started_at": "2026-09-29 00:00:00",
+            "completed_at": "2026-09-29 00:00:00",
+            "error_type": null,
+            "extra_reads": 2
+          }
+        ],
+        "revisions": [
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 1,
+            "operation_id": "bbeffb104c386dcd5b6caf5fbc2c1b83a25386804f26dd8c37d095d82a95901f:1:store:1",
+            "requested_action": "create",
+            "actual_effect": "insert",
+            "content_json": "\"first\"",
+            "content_kind": "string",
+            "content_sha256": "a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "body_ref": "body:string:a7937b64b8caa58f03721bb6bacf5c78cb235febe0e70b1b84cd99541461a08e",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": null,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"first\"}}"
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 2,
+            "operation_id": "057dc71f86deba685db3e2b467055bd64f8d556a9e87ea966b4ed9c0b8ad640e:1:store:1",
+            "requested_action": "update",
+            "actual_effect": "update",
+            "content_json": "\"second\"",
+            "content_kind": "string",
+            "content_sha256": "16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "body_ref": "body:string:16367aacb67a4a017c8da8ab95682ccb390863780f7114dda0a0e0c55644c7c4",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 1,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"second\"}}"
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 3,
+            "operation_id": "621574464ef49fc61148f05bde1db604fe521168296e0a903282ef4a0d4e32ec:1:store:1",
+            "requested_action": "delete",
+            "actual_effect": "delete",
+            "content_json": null,
+            "content_kind": null,
+            "content_sha256": null,
+            "body_ref": null,
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 2,
+            "created_at": null,
+            "updated_at": null,
+            "tombstone": 1,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": null
+          },
+          {
+            "namespace_json": "[\"langmem\",\"synthetic-owner\"]",
+            "memory_id": "00000000-0000-4000-8000-000000000001",
+            "revision": 4,
+            "operation_id": "6bb8596c67bb7af9a4b002e17e272152b6ce5b689ae62964e4965a84f0a4ea3c:1:store:1",
+            "requested_action": "create",
+            "actual_effect": "recreate",
+            "content_json": "\"recreated\"",
+            "content_kind": "string",
+            "content_sha256": "e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "body_ref": "body:string:e569dbda12a505b3a8ffb7e15e568b1569574c0c364c430bc132355d0a07162a",
+            "source_refs_json": null,
+            "source_status": "UNKNOWN_NOT_DECLARED",
+            "recorded_at": "2026-09-29T00:00:00Z",
+            "supersedes_revision": 3,
+            "created_at": "2026-09-29T00:00:00+00:00",
+            "updated_at": "2026-09-29T00:00:00+00:00",
+            "tombstone": 0,
+            "content_unchanged": 0,
+            "history_status": "COMPLETE",
+            "post_item_json": "{\"created_at\":\"2026-09-29T00:00:00+00:00\",\"key\":\"00000000-0000-4000-8000-000000000001\",\"namespace\":[\"langmem\",\"synthetic-owner\"],\"updated_at\":\"2026-09-29T00:00:00+00:00\",\"value\":{\"content\":\"recreated\"}}"
+          }
+        ],
+        "searches": [],
+        "requests": [],
+        "request_material": [],
+        "assistant_lineage": []
+      },
+      "unresolved": []
+    },
+    "application": {
+      "schemas": [
+        {
+          "type": "function",
+          "function": {
+            "name": "reserve_and_label",
+            "description": "Reserve an item for the current user and attempt its label. A failed label may leave a real reservation. One call is one attempt.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "item_key": {
+                  "type": "string",
+                  "description": "Copy the complete item reference including qualifiers; use this same exact key for later reads."
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "destination": {
+                  "type": "string"
+                },
+                "packing": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "item_key",
+                "quantity",
+                "destination",
+                "packing"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "get_reservation",
+            "description": "Read the current user's actual reservation and label state for an item.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "item_key": {
+                  "type": "string",
+                  "description": "Copy the complete item reference including qualifiers; use the exact key used for the reservation."
+                }
+              },
+              "required": [
+                "item_key"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "complete_label",
+            "description": "Create the label for the current user's existing reservation. This does not reserve again or dispatch anything.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "reservation_id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "reservation_id"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ],
+      "receipts": [
+        {
+          "model_dump": {
+            "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\", \"item_key\": \"Synthetic item\", \"quantity\": 2, \"destination\": \"Synthetic destination\", \"packing\": \"Synthetic packing\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "reserve_and_label",
+            "id": null,
+            "tool_call_id": "reserve",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"reserved_label_failed\\\", \\\"reason\\\": \\\"label_service_unavailable\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"reserve_and_label\",\"id\":null,\"tool_call_id\":\"reserve\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\", \"item_key\": \"Synthetic item\", \"quantity\": 2, \"destination\": \"Synthetic destination\", \"packing\": \"Synthetic packing\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": null,
+            "tool_call_id": "query",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"get_reservation\",\"id\":null,\"tool_call_id\":\"query\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": false, \"status\": \"label_service_unavailable\", \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\", \"item_key\": \"Synthetic item\", \"quantity\": 2, \"destination\": \"Synthetic destination\", \"packing\": \"Synthetic packing\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "complete_label",
+            "id": null,
+            "tool_call_id": "label-no-effect",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": false, \\\"status\\\": \\\"label_service_unavailable\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"complete_label\",\"id\":null,\"tool_call_id\":\"label-no-effect\",\"artifact\":null,\"status\":\"success\"}"
+        },
+        {
+          "model_dump": {
+            "content": "{\"ok\": true, \"status\": \"label_created\", \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\", \"item_key\": \"Synthetic item\", \"quantity\": 2, \"destination\": \"Synthetic destination\", \"packing\": \"Synthetic packing\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "complete_label",
+            "id": null,
+            "tool_call_id": "label-retry",
+            "artifact": null,
+            "status": "success"
+          },
+          "json_bytes": "{\"content\":\"{\\\"ok\\\": true, \\\"status\\\": \\\"label_created\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"created\\\"}\",\"additional_kwargs\":{},\"response_metadata\":{},\"type\":\"tool\",\"name\":\"complete_label\",\"id\":null,\"tool_call_id\":\"label-retry\",\"artifact\":null,\"status\":\"success\"}"
+        }
+      ],
+      "world": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-00000000-0000-4000-8000-000000000001",
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "quantity": 2,
+            "destination": "Synthetic destination",
+            "packing": "Synthetic packing",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "schema": [
+        [
+          "index",
+          "sqlite_autoindex_reservations_1",
+          "reservations",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_reservations_2",
+          "reservations",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_settings_1",
+          "settings",
+          null
+        ],
+        [
+          "index",
+          "sqlite_autoindex_world_events_1",
+          "world_events",
+          null
+        ],
+        [
+          "table",
+          "attempts",
+          "attempts",
+          "CREATE TABLE attempts (id INTEGER PRIMARY KEY, user_id TEXT NOT NULL, item_key TEXT NOT NULL, operation TEXT NOT NULL, outcome TEXT NOT NULL)"
+        ],
+        [
+          "table",
+          "reservations",
+          "reservations",
+          "CREATE TABLE reservations (reservation_id TEXT PRIMARY KEY, user_id TEXT NOT NULL, item_key TEXT NOT NULL, quantity INTEGER NOT NULL, destination TEXT NOT NULL, packing TEXT NOT NULL, label_status TEXT NOT NULL, UNIQUE(user_id,item_key))"
+        ],
+        [
+          "table",
+          "settings",
+          "settings",
+          "CREATE TABLE settings (name TEXT PRIMARY KEY, value INTEGER NOT NULL)"
+        ],
+        [
+          "table",
+          "world_events",
+          "world_events",
+          "CREATE TABLE world_events (event_id TEXT PRIMARY KEY, available INTEGER NOT NULL)"
+        ]
+      ],
+      "journal_json_bytes": "{\n  \"_application\": {\n    \"bindings\": {\n      \"0f3ff7cee3e20cec0a3da6c95863b6ad2d314ac3baeb19b4109935c96e49f6bf\": {\n        \"hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n        \"binding\": {\n          \"arm_id\": \"arm\",\n          \"message_id\": \"synthetic-public\",\n          \"operations\": [\n            {\n              \"args\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"operation_id\": \"reserve\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"reserve_and_label\"\n            },\n            {\n              \"args\": {\n                \"item_key\": \"Synthetic item\"\n              },\n              \"operation_id\": \"query\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"get_reservation\"\n            },\n            {\n              \"args\": {},\n              \"depends_on\": [\n                \"query\"\n              ],\n              \"operation_id\": \"label\",\n              \"reservation_from\": \"query\",\n              \"retry\": \"no_effect\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"complete_label\"\n            }\n          ],\n          \"owner\": \"owner\",\n          \"public_index\": 0,\n          \"run_id\": \"synthetic-business\",\n          \"task_id\": \"synthetic-task\",\n          \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\"\n        }\n      }\n    },\n    \"operations\": {\n      \"9d34fd1ad2e21a693c486a95dd18be84def3682a5beb80c04f500b472e2c0cc2\": {\n        \"args\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"operation_id\": \"reserve\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"reserve_and_label\"\n      },\n      \"688eee39c5bc114a68a5d8fee76af0106b5cf06d98b841d8e70ddeea78fbf604\": {\n        \"args\": {\n          \"item_key\": \"Synthetic item\"\n        },\n        \"operation_id\": \"query\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"get_reservation\"\n      },\n      \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\": {\n        \"args\": {},\n        \"depends_on\": [\n          \"query\"\n        ],\n        \"operation_id\": \"label\",\n        \"reservation_from\": \"query\",\n        \"retry\": \"no_effect\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"complete_label\"\n      }\n    },\n    \"resolved\": {\n      \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\": {\n        \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\"\n      }\n    },\n    \"recoveries\": {}\n  },\n  \"d53b1ff9c67c1b4797ac89a49fae5d53f402c36b1e1392ed1321d58d9f35bfe9\": {\n    \"status\": \"complete\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"generation-reserve\",\n    \"call_id\": \"reserve\",\n    \"name\": \"reserve_and_label\",\n    \"args\": {\n      \"item_key\": \"Synthetic item\",\n      \"quantity\": 2,\n      \"destination\": \"Synthetic destination\",\n      \"packing\": \"Synthetic packing\"\n    },\n    \"journal_key\": \"d53b1ff9c67c1b4797ac89a49fae5d53f402c36b1e1392ed1321d58d9f35bfe9\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"host\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"partial\",\n    \"operation_key\": \"9d34fd1ad2e21a693c486a95dd18be84def3682a5beb80c04f500b472e2c0cc2\",\n    \"operation_id\": \"reserve\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"result\": {\n      \"content\": \"{\\\"ok\\\": false, \\\"status\\\": \\\"reserved_label_failed\\\", \\\"reason\\\": \\\"label_service_unavailable\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\n      \"additional_kwargs\": {},\n      \"response_metadata\": {},\n      \"type\": \"tool\",\n      \"name\": \"reserve_and_label\",\n      \"id\": null,\n      \"tool_call_id\": \"reserve\",\n      \"artifact\": null,\n      \"status\": \"success\"\n    }\n  },\n  \"1e20ad48ba2c2149809318463ed3795bf1aae391531217370cbbc24a7aa9a97b\": {\n    \"status\": \"complete\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"generation-query\",\n    \"call_id\": \"query\",\n    \"name\": \"get_reservation\",\n    \"args\": {\n      \"item_key\": \"Synthetic item\"\n    },\n    \"journal_key\": \"1e20ad48ba2c2149809318463ed3795bf1aae391531217370cbbc24a7aa9a97b\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"host\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"observed\",\n    \"operation_key\": \"688eee39c5bc114a68a5d8fee76af0106b5cf06d98b841d8e70ddeea78fbf604\",\n    \"operation_id\": \"query\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"target_matched\": true,\n    \"result\": {\n      \"content\": \"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\n      \"additional_kwargs\": {},\n      \"response_metadata\": {},\n      \"type\": \"tool\",\n      \"name\": \"get_reservation\",\n      \"id\": null,\n      \"tool_call_id\": \"query\",\n      \"artifact\": null,\n      \"status\": \"success\"\n    }\n  },\n  \"b942913770377baddd619ac3aac8d09dd4da40fcc930bc39be10f9a3dba94a22\": {\n    \"status\": \"complete\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"generation-label-no-effect\",\n    \"call_id\": \"label-no-effect\",\n    \"name\": \"complete_label\",\n    \"args\": {\n      \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\"\n    },\n    \"journal_key\": \"b942913770377baddd619ac3aac8d09dd4da40fcc930bc39be10f9a3dba94a22\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"host\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"none\",\n    \"operation_key\": \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\",\n    \"operation_id\": \"label\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"result\": {\n      \"content\": \"{\\\"ok\\\": false, \\\"status\\\": \\\"label_service_unavailable\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\n      \"additional_kwargs\": {},\n      \"response_metadata\": {},\n      \"type\": \"tool\",\n      \"name\": \"complete_label\",\n      \"id\": null,\n      \"tool_call_id\": \"label-no-effect\",\n      \"artifact\": null,\n      \"status\": \"success\"\n    }\n  },\n  \"c739e56bbacd4930d7b9a552af485062a3cac9b55c8332c11aa3eb430ed7b3cc\": {\n    \"status\": \"complete\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"generation-label-retry\",\n    \"call_id\": \"label-retry\",\n    \"name\": \"complete_label\",\n    \"args\": {\n      \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\"\n    },\n    \"journal_key\": \"c739e56bbacd4930d7b9a552af485062a3cac9b55c8332c11aa3eb430ed7b3cc\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"host\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"confirmed\",\n    \"operation_key\": \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\",\n    \"operation_id\": \"label\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"result\": {\n      \"content\": \"{\\\"ok\\\": true, \\\"status\\\": \\\"label_created\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"created\\\"}\",\n      \"additional_kwargs\": {},\n      \"response_metadata\": {},\n      \"type\": \"tool\",\n      \"name\": \"complete_label\",\n      \"id\": null,\n      \"tool_call_id\": \"label-retry\",\n      \"artifact\": null,\n      \"status\": \"success\"\n    }\n  }\n}\n",
+      "world_reopened": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-00000000-0000-4000-8000-000000000001",
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "quantity": 2,
+            "destination": "Synthetic destination",
+            "packing": "Synthetic packing",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          },
+          {
+            "id": 2,
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "operation": "complete_label",
+            "outcome": "created"
+          }
+        ]
+      },
+      "unknown_call": {
+        "exception": "RuntimeError",
+        "message": "synthetic receipt lost after committed reservation"
+      },
+      "real_query_recovery": {
+        "returned": null
+      },
+      "recovery_updates": [
+        {
+          "config": {
+            "configurable": {
+              "thread_id": "204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd",
+              "foundation_run_id": "synthetic-business",
+              "arm_id": "arm",
+              "user_id": "owner"
+            },
+            "max_concurrency": 1,
+            "recursion_limit": 128
+          },
+          "messages": [
+            {
+              "content": "{\"status\": \"ORIGINAL_CALL_OUTCOME_UNKNOWN\", \"original_receipt\": null, \"origin\": \"application_recovery\", \"original_journal_key\": \"1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\", \"query\": {\"name\": \"get_reservation\", \"args\": {\"item_key\": \"Synthetic item\"}, \"id\": \"application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\"}, \"query_receipt\": \"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\", \"observed_effect\": \"partial\", \"effect_source\": \"query_observation_not_original_execution_receipt\", \"instruction\": \"Use the actual query observation to choose remaining work; the original call outcome remains unknown.\"}",
+              "additional_kwargs": {
+                "application_recovery": {
+                  "origin": "application_recovery",
+                  "original_journal_key": "1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79",
+                  "original_call_status": "UNKNOWN",
+                  "thread_id": "204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd",
+                  "generation_id": "generation-unknown-reserve",
+                  "call_id": "unknown-reserve",
+                  "query": {
+                    "name": "get_reservation",
+                    "args": {
+                      "item_key": "Synthetic item"
+                    },
+                    "id": "application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79"
+                  },
+                  "query_journal_key": "082f9439999d2024fa47cc3a319e9967e2b752e1303ed56f2d2babb0c6b4a5b2",
+                  "query_result": {
+                    "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\", \"item_key\": \"Synthetic item\", \"quantity\": 2, \"destination\": \"Synthetic destination\", \"packing\": \"Synthetic packing\", \"label_status\": \"not_created\"}",
+                    "additional_kwargs": {},
+                    "response_metadata": {},
+                    "type": "tool",
+                    "name": "get_reservation",
+                    "id": "00000000-0000-4000-8000-000000000001",
+                    "tool_call_id": "application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79",
+                    "artifact": null,
+                    "status": "success"
+                  },
+                  "effect": "partial",
+                  "effect_source": "query_observation_not_original_execution_receipt"
+                }
+              },
+              "response_metadata": {},
+              "type": "tool",
+              "name": "reserve_and_label",
+              "id": null,
+              "tool_call_id": "unknown-reserve",
+              "artifact": null,
+              "status": "error"
+            }
+          ],
+          "kwargs": {
+            "as_node": "tools"
+          }
+        }
+      ],
+      "unknown_journal_json_bytes": "{\n  \"_application\": {\n    \"bindings\": {\n      \"0f3ff7cee3e20cec0a3da6c95863b6ad2d314ac3baeb19b4109935c96e49f6bf\": {\n        \"hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n        \"binding\": {\n          \"arm_id\": \"arm\",\n          \"message_id\": \"synthetic-public\",\n          \"operations\": [\n            {\n              \"args\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"operation_id\": \"reserve\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"reserve_and_label\"\n            },\n            {\n              \"args\": {\n                \"item_key\": \"Synthetic item\"\n              },\n              \"operation_id\": \"query\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"get_reservation\"\n            },\n            {\n              \"args\": {},\n              \"depends_on\": [\n                \"query\"\n              ],\n              \"operation_id\": \"label\",\n              \"reservation_from\": \"query\",\n              \"retry\": \"no_effect\",\n              \"target\": {\n                \"destination\": \"Synthetic destination\",\n                \"item_key\": \"Synthetic item\",\n                \"packing\": \"Synthetic packing\",\n                \"quantity\": 2\n              },\n              \"tool\": \"complete_label\"\n            }\n          ],\n          \"owner\": \"owner\",\n          \"public_index\": 0,\n          \"run_id\": \"synthetic-business\",\n          \"task_id\": \"synthetic-task\",\n          \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\"\n        }\n      }\n    },\n    \"operations\": {\n      \"9d34fd1ad2e21a693c486a95dd18be84def3682a5beb80c04f500b472e2c0cc2\": {\n        \"args\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"operation_id\": \"reserve\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"reserve_and_label\"\n      },\n      \"688eee39c5bc114a68a5d8fee76af0106b5cf06d98b841d8e70ddeea78fbf604\": {\n        \"args\": {\n          \"item_key\": \"Synthetic item\"\n        },\n        \"operation_id\": \"query\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"get_reservation\"\n      },\n      \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\": {\n        \"args\": {},\n        \"depends_on\": [\n          \"query\"\n        ],\n        \"operation_id\": \"label\",\n        \"reservation_from\": \"query\",\n        \"retry\": \"no_effect\",\n        \"target\": {\n          \"destination\": \"Synthetic destination\",\n          \"item_key\": \"Synthetic item\",\n          \"packing\": \"Synthetic packing\",\n          \"quantity\": 2\n        },\n        \"tool\": \"complete_label\"\n      }\n    },\n    \"resolved\": {\n      \"fe88b77f3de408d9a6819eb4091809c30a5f43288628a4de02492f6597c4a65f\": {\n        \"reservation_id\": \"RSV-00000000-0000-4000-8000-000000000001\"\n      }\n    },\n    \"recoveries\": {\n      \"1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\": {\n        \"origin\": \"application_recovery\",\n        \"original_journal_key\": \"1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n        \"original_call_status\": \"UNKNOWN\",\n        \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n        \"generation_id\": \"generation-unknown-reserve\",\n        \"call_id\": \"unknown-reserve\",\n        \"query\": {\n          \"name\": \"get_reservation\",\n          \"args\": {\n            \"item_key\": \"Synthetic item\"\n          },\n          \"id\": \"application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\"\n        },\n        \"query_journal_key\": \"082f9439999d2024fa47cc3a319e9967e2b752e1303ed56f2d2babb0c6b4a5b2\",\n        \"query_result\": {\n          \"content\": \"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\n          \"additional_kwargs\": {},\n          \"response_metadata\": {},\n          \"type\": \"tool\",\n          \"name\": \"get_reservation\",\n          \"id\": \"00000000-0000-4000-8000-000000000001\",\n          \"tool_call_id\": \"application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n          \"artifact\": null,\n          \"status\": \"success\"\n        },\n        \"effect\": \"partial\",\n        \"effect_source\": \"query_observation_not_original_execution_receipt\"\n      }\n    }\n  },\n  \"1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\": {\n    \"status\": \"pending\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"generation-unknown-reserve\",\n    \"call_id\": \"unknown-reserve\",\n    \"name\": \"reserve_and_label\",\n    \"args\": {\n      \"item_key\": \"Synthetic item\",\n      \"quantity\": 2,\n      \"destination\": \"Synthetic destination\",\n      \"packing\": \"Synthetic packing\"\n    },\n    \"journal_key\": \"1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"host\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"unknown\",\n    \"operation_key\": \"9d34fd1ad2e21a693c486a95dd18be84def3682a5beb80c04f500b472e2c0cc2\",\n    \"operation_id\": \"reserve\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"response_hook_point\": \"after_execute_before_journal_complete\",\n    \"error\": {\n      \"type\": \"RuntimeError\",\n      \"message\": \"synthetic receipt lost after committed reservation\"\n    }\n  },\n  \"082f9439999d2024fa47cc3a319e9967e2b752e1303ed56f2d2babb0c6b4a5b2\": {\n    \"status\": \"complete\",\n    \"thread_id\": \"204451191e76b58c6f5e6b907700cde17bc15a96a77797399aee6b77aeeff1fd\",\n    \"generation_id\": \"application-recovery-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n    \"call_id\": \"application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n    \"name\": \"get_reservation\",\n    \"args\": {\n      \"item_key\": \"Synthetic item\"\n    },\n    \"journal_key\": \"082f9439999d2024fa47cc3a319e9967e2b752e1303ed56f2d2babb0c6b4a5b2\",\n    \"binding_hash\": \"6c2326f017dd6f8cb36c02ee4183680ce32553b6618cb75e96267807d12a914d\",\n    \"origin\": \"application_recovery\",\n    \"decision\": \"authorized\",\n    \"reason\": \"APPLICATION_OPERATION_AUTHORIZED\",\n    \"executed\": true,\n    \"effect\": \"observed\",\n    \"operation_key\": \"688eee39c5bc114a68a5d8fee76af0106b5cf06d98b841d8e70ddeea78fbf604\",\n    \"operation_id\": \"query\",\n    \"task_id\": \"synthetic-task\",\n    \"owner\": \"owner\",\n    \"target\": {\n      \"destination\": \"Synthetic destination\",\n      \"item_key\": \"Synthetic item\",\n      \"packing\": \"Synthetic packing\",\n      \"quantity\": 2\n    },\n    \"target_matched\": true,\n    \"result\": {\n      \"content\": \"{\\\"ok\\\": true, \\\"status\\\": \\\"found\\\", \\\"reservation_id\\\": \\\"RSV-00000000-0000-4000-8000-000000000001\\\", \\\"item_key\\\": \\\"Synthetic item\\\", \\\"quantity\\\": 2, \\\"destination\\\": \\\"Synthetic destination\\\", \\\"packing\\\": \\\"Synthetic packing\\\", \\\"label_status\\\": \\\"not_created\\\"}\",\n      \"additional_kwargs\": {},\n      \"response_metadata\": {},\n      \"type\": \"tool\",\n      \"name\": \"get_reservation\",\n      \"id\": null,\n      \"tool_call_id\": \"application-query-1fbce2a4122e974135917d65cb3ec3a675eb4608a313a4001572fc34c1daeb79\",\n      \"artifact\": null,\n      \"status\": \"success\"\n    }\n  }\n}\n",
+      "unknown_world": {
+        "label_available": false,
+        "reservations": [
+          {
+            "reservation_id": "RSV-00000000-0000-4000-8000-000000000001",
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "quantity": 2,
+            "destination": "Synthetic destination",
+            "packing": "Synthetic packing",
+            "label_status": "not_created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "owner",
+            "item_key": "Synthetic item",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      }
+    },
+    "scope": {
+      "config": {
+        "configurable": {
+          "thread_id": "febd0114163ced3cc87a72a2b3089fde32ace5f811388a3ba90727194e9d49c1",
+          "foundation_run_id": "run",
+          "arm_id": "arm",
+          "user_id": "owner"
+        },
+        "max_concurrency": 1,
+        "recursion_limit": 128
+      },
+      "empty_error": {
+        "exception": "ValueError",
+        "message": "FOUNDATION_SCOPE_EMPTY_PART"
+      }
+    }
+  }
+}

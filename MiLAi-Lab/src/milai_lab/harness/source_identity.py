@@ -8,14 +8,25 @@ CONTRACT_SOURCE_FILES = (
     "src/milai_lab/contracts/protocol.py",
     "src/milai_lab/contracts/records.py",
     "src/milai_lab/contracts/request.py",
+    "src/milai_lab/contracts/scope.py",
 )
 MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/__init__.py",
+    "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/presentation.py",
+    "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/revision_store.py",
+    "src/milai_lab/memory/strict_tools.py",
+)
+MEMORY_FACADE_FILES = (
+    "src/milai_lab/baselines/langmem_mcp.py",
+    "src/milai_lab/baselines/langmem_revision_store.py",
+    "src/milai_lab/baselines/langmem_strict_tools.py",
 )
 REQUEST_SOURCE_FILES = (
     "src/milai_lab/harness/source_identity.py",
     *CONTRACT_SOURCE_FILES,
     *MEMORY_SOURCE_FILES,
+    *MEMORY_FACADE_FILES,
     "src/milai_lab/methods/request_context.py",
 )

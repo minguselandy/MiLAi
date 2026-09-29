@@ -62,8 +62,11 @@
       "requirement": "Memory service canonical path",
       "phase": "S2",
       "required_evidence": "mcp/strict_tools/revision_store canonical implementations; same schema/JSON/namespace/UUID/Store/exception/revisions",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json"
+      ]
     },
     {
       "id": "C08",
@@ -133,7 +136,7 @@
   "stages": {
     "S0": "COMPLETE_INVENTORY_WITH_PHASE_GOLDENS_REQUIRED",
     "S1": "COMPLETE_LOCAL_CHECKS",
-    "S2": "PENDING",
+    "S2": "COMPLETE_LOCAL_CHECKS",
     "S3": "PENDING",
     "S4": "PENDING",
     "S5": "PENDING",
@@ -222,7 +225,18 @@
       "focused_tests_passed": 102,
       "definition_ast_equal": 7,
       "isolated_installed_render_cases": 16,
-      "note": "Local stage checks only; final CI and later phase contracts remain pending."
+      "note": "Local stage checks only; final CI and later phase contracts remain pending.",
+      "commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929"
+    },
+    "S2": {
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929",
+      "golden": "data/diagnostics/code-architecture-v12/memory-contract-golden.json",
+      "golden_sha256": "76f543e29026f8d9c62fa402b09ed24a942f89ef21952e443b7aba8e09517aae",
+      "mcp_capture_transport": "in-process direct binding; real loopback tests separately required",
+      "note": "Before/after/installed synthetic contracts match; final CI and later phase contracts remain pending.",
+      "report": "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json"
     }
   }
 }

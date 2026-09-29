@@ -15,7 +15,6 @@ from langgraph.store.base import BaseStore
 
 from milai_lab.baselines.langmem_agent import (
     RECIPE_ID,
-    FoundationScope,
     build_agent,
     invoke_or_resume_public_message,
 )
@@ -23,6 +22,7 @@ from milai_lab.baselines.langmem_instrumentation import (
     InstrumentationIncomplete,
     ProvenanceObserver,
 )
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.merit import load_exposed_arc, load_frozen_arc
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
 from milai_lab.providers.langmem_chat import VLLMChatModel

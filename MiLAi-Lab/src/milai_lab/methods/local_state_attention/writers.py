@@ -21,7 +21,7 @@ from langmem import create_search_memory_tool  # type: ignore[import-untyped]
 from langmem.utils import NamespaceTemplate  # type: ignore[import-untyped]
 from typing_extensions import TypedDict
 
-from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
+from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.protocol import ControlResponseError
 

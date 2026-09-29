@@ -11,7 +11,7 @@ from langchain_core.messages import BaseMessage
 from langgraph.store.base import BaseStore
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import canonical_json
+from milai_lab.memory.revision_store import canonical_json
 from milai_lab.methods.freshness_projection.lineage import (
     delivered_exact_snapshot,
     project_derived_assistants,

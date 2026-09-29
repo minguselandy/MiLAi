@@ -25,14 +25,14 @@ from langgraph.store.base import BaseStore
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     SYSTEM_PROMPT,
-    FoundationScope,
     build_agent,
     create_history_read_tool,
-    create_memory_read_tool,
 )
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.memory.read_tools import create_memory_read_tool
+from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (
     ControlResponseError,
@@ -268,7 +268,7 @@ def _identity(
             "final_reply": "native natural text" if native else "decoded JSON answer",
             "native_service_verified_by_runner": False})
     if config.get("memory_transport", "direct") == "mcp_http":
-        from milai_lab.baselines.langmem_mcp import MCP_PROTOCOL, RECORDS_RESOURCE
+        from milai_lab.memory.mcp import MCP_PROTOCOL, RECORDS_RESOURCE
 
         identity.update({"method": "persistent-memory-mcp-v8-v9",
             "memory_transport": "mcp_http", "mcp_protocol": MCP_PROTOCOL,
@@ -388,7 +388,7 @@ def _adapters(
         )
         peer = None
         if config.get("memory_transport", "direct") == "mcp_http":
-            from milai_lab.baselines.langmem_mcp import MemoryMCP
+            from milai_lab.memory.mcp import MemoryMCP
 
             if mcp_stack is None:
                 raise ValueError("PERSISTENT_MEMORY_MCP_LIFECYCLE_MISSING")

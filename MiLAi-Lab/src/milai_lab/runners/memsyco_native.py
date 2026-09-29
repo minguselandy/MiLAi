@@ -27,7 +27,6 @@ from milai_lab.baselines.benchmark_memories import (
     trace_raw,
     validate_u2,
 )
-from milai_lab.baselines.langmem_agent import FoundationScope
 from milai_lab.baselines.langmem_benchmark import (
     FORMATION_INSTRUCTION,
     ArchiveInput,
@@ -40,7 +39,7 @@ from milai_lab.baselines.langmem_benchmark import (
     retrieved_material,
     scope_config,
 )
-from milai_lab.baselines.langmem_mcp import MemoryMCP
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.contextual import HistoryMessage, TaskInput
 from milai_lab.datasets.memsyco import MemSycoTask, load_memsyco_tasks
 from milai_lab.harness.contextual_artifacts import (
@@ -51,6 +50,7 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.memory.mcp import MemoryMCP
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.langmem_application_runtime import open_application_runtime

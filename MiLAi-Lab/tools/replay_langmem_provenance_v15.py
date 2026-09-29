@@ -19,8 +19,8 @@ from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import VLLMEmbeddings
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.harness.contextual_artifacts import write_json
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc

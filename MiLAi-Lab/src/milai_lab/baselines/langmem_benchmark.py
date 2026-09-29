@@ -25,14 +25,14 @@ from milai_lab.baselines.benchmark_memories import (
 )
 from milai_lab.baselines.langmem_agent import (
     SYSTEM_PROMPT,
-    FoundationScope,
     build_agent,
     create_history_read_tool,
     invoke_public_message,
 )
-from milai_lab.baselines.langmem_mcp import MemoryMCP
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.contextual import HistoryMessage, TaskInput
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
+from milai_lab.memory.mcp import MemoryMCP
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController

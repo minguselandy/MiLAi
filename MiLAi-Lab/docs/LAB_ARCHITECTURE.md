@@ -1,7 +1,8 @@
 # MiLAi Lab 代码架构
 
 更新日期：2026-09-29。Lab 是研究、实验与评测的唯一实现目录。
-当前代码整理在固定报告提交 `091dcbd` 上进行，实验仍暂停；研究状态和效果见
+当前 v12 代码整理以 `cca2fd9` 为基线，阶段实施和验证见
+[执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)。实验仍暂停；研究状态和效果见
 [当前状态](LAB_CURRENT_STATUS.md)，而非从模块名称推导。
 
 ## 目录边界
@@ -14,11 +15,12 @@ Lab 内部按职责组织：
 
 | 模块 | 负责 | 不应承担 |
 |---|---|---|
-| `contracts/` | arm 权限、输入/结果等数据合同 | 模型调用、业务执行 |
+| `contracts/` | arm 权限、请求、记忆、操作、scope 等数据合同 | 模型调用、业务执行 |
 | `datasets/` | benchmark 来源、合法输入和固定实例 | 使用 scorer 答案补输入 |
 | `harness/` | 结果制品、trace、容量/费用等共享设施 | 改写任务以取得通过 |
 | `providers/` | 实际 HTTP、模型协议和容量边界 | 判断业务事实正确性 |
-| `baselines/` | Agent、MCP/Store 接口及参考方法集成 | 自动授予业务权限 |
+| `baselines/` | Agent 配方、实际 baseline 与兼容入口 | 自动授予业务权限、成为通用能力的唯一 owner |
+| `memory/` | 通用 MCP/Store、严格操作、版本和材料呈现 | Agent 配方、业务世界、scorer |
 | `methods/` | 显式 recipe 的记忆/工作视图候选 | 持有第二套业务世界 |
 | `application/` | 可复用业务 world、journal、工具与恢复能力 | CLI、实验分组、scorer、服务创建 |
 | `runners/` | 组合方法、运行阶段、资源生命周期和结果交接 | 作为通用业务能力的唯一实现位置 |
@@ -27,6 +29,7 @@ Lab 内部按职责组织：
 
 这是维护职责图，不宣称所有历史模块已经完成同样的分层。按阶段保留的方法、旧入口和
 冻结文件仍存在；新工作应从[项目地图](PROJECT_MAP.md)定位当前链路。
+详细维护规则见[代码职责](CODE_OWNERSHIP.md)和[依赖边界](DEPENDENCY_RULES.md)。
 
 ## 应用能力与实验编排
 

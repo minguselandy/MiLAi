@@ -13,7 +13,6 @@ from langchain_core.tools import tool
 
 from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import (
-    FoundationScope,
     VLLMEmbeddings,
     build_agent,
     invoke_public_message,
@@ -21,6 +20,7 @@ from milai_lab.baselines.langmem_agent import (
     resume_public_message,
 )
 from milai_lab.baselines.langmem_identity import sha256_file, verify_prepared_run
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
     RunLimits,

@@ -33,11 +33,11 @@ from milai_lab.application.tools import (
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
-    FoundationScope,
     build_agent,
 )
-from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.read_probe import first_action
 from milai_lab.providers.contextual_vllm import generation_schema
 from milai_lab.providers.langmem_chat import (

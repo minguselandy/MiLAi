@@ -36,10 +36,10 @@ from milai_lab.application.world import uuid as uuid
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     SYSTEM_PROMPT,
-    FoundationScope,
     build_agent,
     invoke_or_resume_public_message,
 )
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController

@@ -10,7 +10,7 @@ from typing import Any
 
 from langgraph.store.base import Item
 
-from milai_lab.baselines.langmem_revision_store import (
+from milai_lab.memory.revision_store import (
     RevisionSidecar,
     canonical_json,
     content_identity,

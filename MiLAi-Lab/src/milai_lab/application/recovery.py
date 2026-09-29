@@ -15,8 +15,8 @@ from milai_lab.application.tools import _business_tools
 from milai_lab.application.world import ApplicationWorld
 
 if TYPE_CHECKING:
-    from milai_lab.baselines.langmem_agent import FoundationScope
     from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+    from milai_lab.contracts.scope import FoundationScope
 
 
 class ApplicationRuntime(Protocol):

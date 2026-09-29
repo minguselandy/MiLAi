@@ -13,7 +13,6 @@ from typing import Any, cast
 from milai_lab.baselines.langmem_agent import VLLMEmbeddings, open_persistent_state
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.datasets.merit import load_exposed_arc
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
@@ -22,6 +21,7 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.controller import ProjectionController
 from milai_lab.methods.freshness_projection.identity import (
     LAB,

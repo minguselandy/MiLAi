@@ -52,13 +52,21 @@ def test_development_identity_rejects_canonical_request_tampering(
         entry._verify_development_spike(config, settings, "request-architecture")
 
 
+@pytest.mark.parametrize("relative", [
+    "src/milai_lab/contracts/request.py",
+    "src/milai_lab/contracts/scope.py",
+    "src/milai_lab/memory/mcp.py",
+    "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/revision_store.py",
+    "src/milai_lab/memory/strict_tools.py",
+])
 def test_foundation_gate_rejects_missing_and_changed_request_sources(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, relative: str,
 ) -> None:
     monkeypatch.setattr(langmem_identity, "LAB", tmp_path)
     registered = (*APPLICATION_SOURCE_FILES, *REQUEST_SOURCE_FILES)
-    for relative in ("uv.lock", "pyproject.toml", "upstream.json", *registered):
-        path = tmp_path / relative
+    for registered_relative in ("uv.lock", "pyproject.toml", "upstream.json", *registered):
+        path = tmp_path / registered_relative
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("synthetic source identity\n")
     sha = langmem_identity.sha256_file
@@ -81,9 +89,14 @@ def test_foundation_gate_rejects_missing_and_changed_request_sources(
     with pytest.raises(ValueError, match="FOUNDATION_REQUEST_SOURCE_MAP_MISSING"):
         langmem_identity.verify_foundation_lock(lock_path, config_path)
     lock["source_sha256"] = {relative: sha(tmp_path / relative) for relative in registered}
+    omitted = lock["source_sha256"].pop(relative)
     lock_path.write_text(json.dumps(lock))
-    (tmp_path / "src/milai_lab/contracts/request.py").write_text("changed implementation\n")
-    with pytest.raises(ValueError, match=r"FOUNDATION_SOURCE_CHANGED:.*contracts/request"):
+    with pytest.raises(ValueError, match="FOUNDATION_REQUEST_SOURCE_MAP_MISSING"):
+        langmem_identity.verify_foundation_lock(lock_path, config_path)
+    lock["source_sha256"][relative] = omitted
+    lock_path.write_text(json.dumps(lock))
+    (tmp_path / relative).write_text("changed implementation\n")
+    with pytest.raises(ValueError, match="FOUNDATION_SOURCE_CHANGED:" + relative):
         langmem_identity.verify_foundation_lock(lock_path, config_path)
 
 

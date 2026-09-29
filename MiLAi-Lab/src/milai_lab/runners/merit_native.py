@@ -220,7 +220,7 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         from langgraph.store.memory import InMemoryStore
 
         from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, create_history_read_tool
-        from milai_lab.baselines.langmem_mcp import MemoryMCP
+        from milai_lab.memory.mcp import MemoryMCP
 
         peer = MemoryMCP(InMemoryStore(), args.run, args.arm, "schema-only",
                          history_tool=create_history_read_tool(None),

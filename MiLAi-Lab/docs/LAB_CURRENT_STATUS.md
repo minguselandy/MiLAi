@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| 项目梳理、代码架构优化、GitHub 发布 | 本次明确授权 | 用户最新请求；[AGENTS](../AGENTS.md) |
+| v12 代码组织与 GitHub 发布 | Goal active，实施中 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
 | R2 执行保护/恢复 | 工程已实现；真实验证失败且未完成 | [暂停详报](MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md) |
@@ -20,6 +20,10 @@
 后者的完整 Fast CI 已通过；Full composition 按规则 skipped，未计作通过。
 详细合并 SHA、兼容修复与代码入口见[合并记录](GITHUB_MERGE_AND_STRUCTURE_20260929.md)。
 本次合并和导航整理不恢复实验，以下研究限制保持。
+
+后续 v12 从 `cca2fd9` 启动。S0 文档提交为 `19339bff`，S1 公共合同与请求呈现提交为
+`02dfacdc`，已通过本地工程检查；它们尚未发布到远端 main。S2 正在迁移通用记忆服务。
+最终发布与受影响 Fast CI 仍待完成，不能使用上一轮 CI 代替本轮验收。
 
 ## 当前已知限制
 

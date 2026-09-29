@@ -1,0 +1,361 @@
+{
+  "kind": "MILAI_V12_S2_ENGINEERING_RECEIPT",
+  "baseline_source_commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929",
+  "changed_file_count": 57,
+  "changed_files_sha256": {
+    "../.github/workflows/ci.yml": "65cf52706c60d12fd7a248d4216fde50498438370825370e8125b6a357d58828",
+    "../.github/workflows/fast.yml": "69ce3701f758a88e9d782e47ede07b960d6fc52aad9dd07c3485e02340d23d15",
+    "configs/lab-verification-matrix.json": "7615092899a0efd7781f7931fdf62ffc467da82c1725e9d2a6461255668ef3bb",
+    "src/milai_lab/application/recovery.py": "07564ad8d67a01622b051e72e5442f26a28a04416781445d0f7ff0e746b4aed1",
+    "src/milai_lab/baselines/langmem_agent.py": "71dacbeef124a201044c521780284579daa4d0f502a4ae211243e2b4f236854e",
+    "src/milai_lab/baselines/langmem_benchmark.py": "d1fb248566166596842948b9898e83a06f326b35f7702ff4c85905fd22452a58",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "0fea97120ffd1b9a079584aab728c05ed88d0bcb28119355e8629b68f1e32555",
+    "src/milai_lab/baselines/langmem_mcp.py": "0872970c2ce36b3cc86d83f1e16e39844a9693b9fecdc0a5e2be8aad5e516ddf",
+    "src/milai_lab/baselines/langmem_revision_store.py": "fda7d2bb518cb43e4a58506b0f09280ecee8fe09df4898cb8b26c9702f317cb0",
+    "src/milai_lab/baselines/langmem_strict_tools.py": "2c354bedb78ef2d15fec0a5b5b8eb1492cd226dffab2cf25d0430a4e7730cab6",
+    "src/milai_lab/contracts/__init__.py": "80490a09e4d07877bf4c59f62ead7d657e2705c684ede40217aa8a6968cddd89",
+    "src/milai_lab/contracts/scope.py": "68cc146e1a6487c17c4875b95f029486a3baf442f8694c786786551037bf2086",
+    "src/milai_lab/harness/source_identity.py": "dc23ae1cfadcd3874a5707184ebe443e470bef9de3cbfd65aff93c1cb0b04452",
+    "src/milai_lab/memory/mcp.py": "32f006b70bdb8fab0b35bfc1bafeb50140bdf70bd7cea8dc0353987f9e730797",
+    "src/milai_lab/memory/read_tools.py": "0337a930b25db5055a0089b13a473dbd7396dcf5bbb1b215539af2ee709e0efc",
+    "src/milai_lab/memory/revision_store.py": "7cffb1a4d186bfdc6c3bfe2f9b865110d9fc93a357b941a90b693d684a2d2aa4",
+    "src/milai_lab/memory/strict_tools.py": "46e7c740e2158a607e16a8a7a8970472269c465f5c38151354175ea3dd040cc5",
+    "src/milai_lab/methods/freshness_projection/controller.py": "4857d121fe51e93c30d261c196d2ddd77592229561e6a35392b9489894be4f73",
+    "src/milai_lab/methods/freshness_projection/lineage.py": "82e8c7d84174157726596dc8f555b80aaaec68dd7952dcd5c2e233f9bbc86e7f",
+    "src/milai_lab/methods/freshness_projection/projection.py": "1128c46ae53e43c41f2438a8e75d13da4e4208b9ad580b7dd9786a70a23cf613",
+    "src/milai_lab/methods/local_state_attention/writers.py": "e0297da8486ff09e0df7690c4ce43b18f9f146bcaac388ab3b8b80c0d5450cad",
+    "src/milai_lab/methods/milai_m1/controller.py": "c0c27255b0833e39a7f6608f6784c69b569ba0b55df7c213f6515514419eb33f",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "eceeed43e4ee48a46e432ab339ad7f24c74218c184d7050241b41d4124d506d6",
+    "src/milai_lab/methods/milai_m1/recheck.py": "b88f2f9f8562eb185d65d3a2d4c536864a420ec21796b16ecbcedeb4a041f12d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "d6fe4b403a893e4eac5572d721b79db69cc5c5e50e62c99e6acf5902676e87d4",
+    "src/milai_lab/methods/on_demand_reconstruction/controller.py": "6edce58edafe13f4147cb1aa9e0011ac30e2b1ab481a80a7e5f53fcf4d721f74",
+    "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py": "12bb36c296b8c7c56cb4714cf07c60e1ceadd3d39bcdff13ecdf07e766b4c9d4",
+    "src/milai_lab/methods/on_demand_reconstruction/freshness.py": "db81b5bdf8438d20f08c2a36d1775bfca3f56cc43d2de3aaf7f1ac2179cf24cb",
+    "src/milai_lab/runners/fixed_state_read.py": "448ec9e98e379cb87cab7cc358abb2ece1c4a388883149cd3374c68e1bb665b3",
+    "src/milai_lab/runners/frozen_action_continuation.py": "c5eb0b89957ccfefb7067812e631eee1e512b85a728777648f5d19a49b4455f2",
+    "src/milai_lab/runners/langmem_application.py": "904f5f32ddfdc6cd4bc5e88692d98a2c9ee14496ef577fe76c4a4328845ff897",
+    "src/milai_lab/runners/langmem_application_runtime.py": "b980af5800e0b3efdc6972120439a8de5a14c6a189d861cec17164b2bc549127",
+    "src/milai_lab/runners/langmem_diagnostic.py": "fdc24108d0f8a6a7a59894e785d2773916bb002d88d7634b85532a41703a1e4d",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "ba1e47f1e9f44b435f9c319a9d1533b22ee1e890efb038680856b318b425ff62",
+    "src/milai_lab/runners/langmem_merit.py": "63bb92fc452f67ea2494ae49b56e5b7370a762aa798d54fbe573d2f3ea156abe",
+    "src/milai_lab/runners/mem0_native.py": "382ebd4daa1d1020af609c1134cd7156ebe4ec920650f5828b874d0fb7609340",
+    "src/milai_lab/runners/memsyco_native.py": "73c8286294ef88dadeba41e74e834524bf5c9e7f56216586c29ce9c6d57d6901",
+    "src/milai_lab/runners/merit_native.py": "6488e65d25e20d66b45cbfc0dc15fe7e359e8ac9c025b68e02640f38432d6db5",
+    "src/milai_lab/runners/persistent_memory.py": "59764478d6979858bf86029a80aea7aeb015e15c35fcbdad4a68b5457e632b55",
+    "src/milai_lab/runners/shared_record_use.py": "53aa2f2f05a3d12fa91008b91883c0f0f510df1cb2cea5d1f2244ad990124677",
+    "src/milai_lab/runners/simplemem_native.py": "02e0046375811baf227a6539688bff269fdf598b7c293a6a2036c70b208193a0",
+    "src/milai_lab/runners/writer_policy.py": "9ec4b1dafff4afddf1c910517a2526d1f6add9a0a1f41b0d822fe7c5e03d32cf",
+    "tests/architecture/test_memory_architecture.py": "0c19e78d2b609e11b4b00e123b76524254cf29ec63bb32281581fa10b95b7a2e",
+    "tests/architecture/test_request_source_identity.py": "05a860635a92d33e6d8046b19ba51d2d7b7ad19530a065edc8588af446df7532",
+    "tests/memory/contract_probe.py": "d2020d438bee61d498f3eac998d4b133f0abdd111903a31a49166e73c2ae2536",
+    "tests/memory/test_memory_contracts.py": "bb240abfd3d15edd7144787eb9ef8e3eadfceb2e11bde5dfafa3abf741ec932a",
+    "tools/check_langmem_provenance_store.py": "6ad2d6b1d4d759838bc679c35d310f20381bf972ac8187111c5575a00ffbae62",
+    "tools/check_verification_matrix.py": "6e87eeed8e138f49622138ba11eb992aa49b93c85959644f9d7e1d218f63d070",
+    "tools/replay_langmem_provenance_v15.py": "e5aeb68e2bbc25f52fcb242f0a9595489a595e21471c4cb64323cc4d4333d8b9",
+    "tools/run_langmem_foundation.py": "af70aad715600989d28e2c2e87ee6e1488a3d24213a0a61ff4d8575344c66a99",
+    "tools/run_langmem_provenance.py": "cb25fe55505dfdfd6f9bb72ebfaf23ebba3e804dea83557e2e1db9542f80e15b",
+    "tools/run_milai_external_memory_v26.py": "092d52e49f41fe76d7b881b550170b0bb20f7a80748060d36c419b74e7c434a2",
+    "tools/run_milai_freshness_projection.py": "c944847e09fa248f6b0dba752088564c5b3ce8003886579af11ebc0a52a8a323",
+    "tools/run_milai_m1.py": "4bbe226f0963634f4c237be345903bb3655de10fa7c7234a48cc33ede0cd0922",
+    "tools/run_milai_odr.py": "82d89148b680b1c72f60ae75f56771578c01deb24a0376590367c4f5ae3f40e7",
+    "tools/run_milai_ser_v22.py": "efdc7cc6199ee390d978dc7a65ab3edd472ec2535780c0d0a513af78a2710548",
+    "tools/run_milai_ser_v23.py": "fade42e270948d9becd1de4a898a831b757e457b91bbf7075a69b0b46bf22a94"
+  },
+  "definitions": {
+    "baseline_source_commit": "02dfacdc75eab478c0d4a49f9765c82073dd7929",
+    "definitions": [
+      {
+        "old": "baselines/langmem_strict_tools.py:_receipt",
+        "new": "memory/strict_tools.py:_receipt",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_strict_tools.py:_invalid_receipt",
+        "new": "memory/strict_tools.py:_invalid_receipt",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_strict_tools.py:create_strict_manage_memory_tool",
+        "new": "memory/strict_tools.py:create_strict_manage_memory_tool",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_revision_store.py:canonical_json",
+        "new": "memory/revision_store.py:canonical_json",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_revision_store.py:content_identity",
+        "new": "memory/revision_store.py:content_identity",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_revision_store.py:_item",
+        "new": "memory/revision_store.py:_item",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_revision_store.py:RevisionSidecar",
+        "new": "memory/revision_store.py:RevisionSidecar",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_revision_store.py:ObservedStore",
+        "new": "memory/revision_store.py:ObservedStore",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_mcp.py:_RemoteTool",
+        "new": "memory/mcp.py:_RemoteTool",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_mcp.py:MemoryMCP",
+        "new": "memory/mcp.py:MemoryMCP",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_agent.py:FoundationScope",
+        "new": "contracts/scope.py:FoundationScope",
+        "AST_equal": true
+      },
+      {
+        "old": "baselines/langmem_agent.py:create_memory_read_tool",
+        "new": "memory/read_tools.py:create_memory_read_tool",
+        "AST_equal": true
+      }
+    ],
+    "permitted_MCP_dependency_statement_removed": [
+      "ImportFrom(module='milai_lab.baselines.langmem_agent', names=[alias(name='create_memory_read_tool')], level=0)"
+    ],
+    "agent_recipe_definitions_unchanged": [
+      "VLLMEmbeddings",
+      "_emit_public_context",
+      "_finalize_memory_result",
+      "_set_memory_turn",
+      "build_agent",
+      "create_history_read_tool",
+      "invoke_or_resume_public_message",
+      "invoke_public_message",
+      "open_persistent_state",
+      "resume_public_message"
+    ]
+  },
+  "owners": {
+    "contracts/scope.py": "Exact original FoundationScope dataclass and config. Agent reexports the same class; SDK/runtime users import this stdlib owner.",
+    "memory/read_tools.py": "Exact original create_memory_read_tool closure factory. Agent reexports the same factory; MCP directly imports it.",
+    "memory/strict_tools.py": "Original strict manage tool; sync/async CRUD, no-change, missing-argument and Store-error receipts unchanged.",
+    "memory/revision_store.py": "Original RevisionSidecar and ObservedStore; SQLite schema and operation/effect/cost rows unchanged.",
+    "memory/mcp.py": "Original transport and MCP owner. Only local agent import removed and strict/read dependency imports redirected.",
+    "baselines/langmem_{mcp,strict_tools,revision_store}.py": "Pure explicit reexports, including original imported public and private module symbols. Canonical __all__ makes those exports explicit for strict mypy.",
+    "harness/source_identity.py": "Registers every canonical contracts/memory file and old Memory facade for all current inheriting identity gates."
+  },
+  "capture": {
+    "public_frozen_fixture": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/data/diagnostics/code-architecture-v12/memory-contract-golden.json",
+    "sha256_all_three": "76f543e29026f8d9c62fa402b09ed24a942f89ef21952e443b7aba8e09517aae",
+    "components": [
+      "strict",
+      "mcp",
+      "revision",
+      "application",
+      "scope"
+    ],
+    "strict_sync_async_cases": 36,
+    "direct_MCP_calls": 8,
+    "MCP_transport": "Capture uses direct in-process actual server binding; actual HTTP loopback comes from separate existing test_mcp_* tests.",
+    "application_scope": "Actual synthetic business schema, ToolMessage/receipt/journal JSON bytes, world SQLite schema/state, unknown-outcome query recovery, no-effect retry and reopen.",
+    "determinism": "UUID4, Store datetime, SQLite datetime(now), strftime and local cost counters fixed only by synthetic test fixtures; runtime sources do not gain these patches.",
+    "unknown_fields": "Captured owner records retain arbitrary extra metadata; CRUD/read/records JSON values are unchanged."
+  },
+  "passed_test_counts": {
+    "new_contract_architecture_and_identity": 23,
+    "existing_affected_behavior_with_real_loopback": 22
+  },
+  "mypy_checked_sources": {
+    "core": 32,
+    "foundation_explicit": 63,
+    "foundation_discovery": 143
+  },
+  "matrix_summary": {
+    "active_sources": 181,
+    "core_direct": 32,
+    "excluded_recovered": 38,
+    "external_direct": 3,
+    "foundation_discovery": 143,
+    "foundation_explicit": 63,
+    "integration_tests": 0,
+    "optional_tests_owned": 24,
+    "private_asset_tests": 12,
+    "protocol_contract_present": true
+  },
+  "packaging": {
+    "sdist_sha256": "81fa2140d9d809fe6706c9f5ba6a42c2fe0556890fd830a2af766c5fd8a5384e",
+    "wheel_from_sdist_sha256": "4a8421f6ab110b377e6514f298f923f8b2c94689bfc5852b2859a02ee16ceaf2",
+    "source_bytes_verified": [
+      "src/milai_lab/contracts/__init__.py",
+      "src/milai_lab/contracts/arms.py",
+      "src/milai_lab/contracts/memory.py",
+      "src/milai_lab/contracts/operations.py",
+      "src/milai_lab/contracts/protocol.py",
+      "src/milai_lab/contracts/records.py",
+      "src/milai_lab/contracts/request.py",
+      "src/milai_lab/contracts/scope.py",
+      "src/milai_lab/memory/__init__.py",
+      "src/milai_lab/memory/mcp.py",
+      "src/milai_lab/memory/presentation.py",
+      "src/milai_lab/memory/read_tools.py",
+      "src/milai_lab/memory/revision_store.py",
+      "src/milai_lab/memory/strict_tools.py",
+      "src/milai_lab/baselines/langmem_mcp.py",
+      "src/milai_lab/baselines/langmem_revision_store.py",
+      "src/milai_lab/baselines/langmem_strict_tools.py",
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/methods/request_context.py",
+      "src/milai_lab/baselines/langmem_agent.py"
+    ],
+    "offline": true,
+    "dependencies_installed": [],
+    "installed_core_render_cases": 16,
+    "installed_foundation_contract_components": 5,
+    "isolated_package_origin_assertion": "every loaded milai_lab module lives under the fresh installation"
+  },
+  "first_failures": [
+    {
+      "label": "s2-after-ruff-initial",
+      "returncode": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/artifacts/code-architecture-v12/s2-after-ruff-initial.log",
+      "cause": "Mechanical import sorting, agent imports unused after extraction, facade __all__ sorting, test lambda loop binding/noqa placement and matrix checker line formatting.",
+      "resolution": "Local import/format/test-helper fixes; final full repository Ruff succeeds."
+    },
+    {
+      "label": "s2-after-foundation-explicit-mypy",
+      "returncode": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/artifacts/code-architecture-v12/s2-after-foundation-explicit-mypy-initial.log",
+      "cause": "72 strict-mypy no-implicit-reexport errors for old module imported symbols preserved by compatibility facades.",
+      "resolution": "Canonical literal __all__ lists, same existing symbol objects; explicit Foundation mypy succeeds.",
+      "preservation_note": "First receipt and tool-displayed full stdout preserved. One same-label rerun overwrote its original log; exact original diagnostics recovered from that output and unchanged import lines, with explicit provenance. Recorder now creates distinct attempt logs."
+    },
+    {
+      "label": "s2-package-driver-initial",
+      "returncode": 1,
+      "log": "/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab/artifacts/code-architecture-v12/s2-package-driver-initial.log",
+      "cause": "Artifact driver assumed PYTHON was Path; capture runner constant is str.",
+      "resolution": "Cast Path(PYTHON), resume only remaining Foundation probe. Successful build/install/Core commands were reused unchanged."
+    }
+  ],
+  "remaining_scope_and_limits": [
+    "This establishes S2 Memory/contracts boundaries. Remaining provider/application/integration/method architecture migrations are later S3-S7 work; no whole-project target DAG claim yet.",
+    "Historical locks and experiment outputs remain frozen. They are not silently re-signed for current-source identity.",
+    "Fresh installed Core has no optional dependencies. Installed Foundation reuses already-present optional SDK packages via an appended dependency site directory; every milai_lab module is asserted to come from the fresh wheel, and all five contract components replay there.",
+    "Of 38 non-agent consumer files, 22 had an available reference copy matching exact captured baseline SHA and passed AST equality excluding imports. The rest retain before SHA evidence and are reviewable from the grouped source diff; no unverified AST equality is claimed.",
+    "No Host, embedding, Judge, PG/service deployment, downloads, semantic experiment or Git operation was performed."
+  ],
+  "status": "LOCAL_S2_PASS_REMOTE_CI_PENDING",
+  "checks": [
+    {
+      "label": "s2-before-affected-mypy",
+      "returncode": 0,
+      "seconds": 3.762
+    },
+    {
+      "label": "s2-before-affected-behavior",
+      "returncode": 0,
+      "seconds": 9.231
+    },
+    {
+      "label": "s2-after-golden-initial",
+      "returncode": 0,
+      "seconds": 2.358
+    },
+    {
+      "label": "s2-after-ruff-initial",
+      "returncode": 1,
+      "seconds": 0.159
+    },
+    {
+      "label": "s2-after-ruff",
+      "returncode": 0,
+      "seconds": 0.049
+    },
+    {
+      "label": "s2-after-contract-architecture",
+      "returncode": 0,
+      "seconds": 6.791
+    },
+    {
+      "label": "s2-after-affected-behavior",
+      "returncode": 0,
+      "seconds": 9.236
+    },
+    {
+      "label": "s2-after-foundation-explicit-mypy",
+      "returncode": 1,
+      "seconds": 11.722
+    },
+    {
+      "label": "s2-after-active-boundary",
+      "returncode": 0,
+      "seconds": 0.744
+    },
+    {
+      "label": "s2-after-matrix",
+      "returncode": 0,
+      "seconds": 0.744
+    },
+    {
+      "label": "s2-after-tools-boundary",
+      "returncode": 0,
+      "seconds": 1.661
+    },
+    {
+      "label": "s2-after-ruff",
+      "returncode": 0,
+      "seconds": 0.084
+    },
+    {
+      "label": "s2-after-foundation-explicit-mypy",
+      "returncode": 0,
+      "seconds": 4.444
+    },
+    {
+      "label": "s2-after-core-mypy",
+      "returncode": 0,
+      "seconds": 0.196
+    },
+    {
+      "label": "s2-after-foundation-discovery-mypy",
+      "returncode": 0,
+      "seconds": 6.853
+    },
+    {
+      "label": "s2-build-sdist",
+      "returncode": 0,
+      "seconds": 4.719
+    },
+    {
+      "label": "s2-build-wheel-from-sdist",
+      "returncode": 0,
+      "seconds": 0.482
+    },
+    {
+      "label": "s2-create-isolated-env",
+      "returncode": 0,
+      "seconds": 0.014
+    },
+    {
+      "label": "s2-install-isolated-wheel",
+      "returncode": 0,
+      "seconds": 0.111
+    },
+    {
+      "label": "s2-isolated-installed-core",
+      "returncode": 0,
+      "seconds": 0.056
+    },
+    {
+      "label": "s2-isolated-installed-foundation",
+      "returncode": 0,
+      "seconds": 3.411
+    }
+  ]
+}

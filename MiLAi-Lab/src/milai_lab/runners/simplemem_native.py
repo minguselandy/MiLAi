@@ -23,7 +23,7 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import StructuredTool
 from openai.types.chat import ChatCompletion
 
-from milai_lab.baselines.langmem_agent import FoundationScope
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient

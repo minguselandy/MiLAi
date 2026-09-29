@@ -2,25 +2,21 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import time
-import uuid
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
-from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Annotated, Any, Literal, cast
+from typing import TYPE_CHECKING, Any, Literal, cast
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.embeddings import Embeddings
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
-from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool, tool
+from langchain_core.tools import BaseTool, tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.config import get_store
 from langgraph.prebuilt import create_react_agent
 from langgraph.prebuilt.tool_node import ToolCallWrapper, ToolNode
 from langgraph.store.base import BaseStore
@@ -29,10 +25,11 @@ from langmem import (  # type: ignore[import-untyped]
     create_manage_memory_tool,
     create_search_memory_tool,
 )
-from langmem.utils import NamespaceTemplate  # type: ignore[import-untyped]
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
+from milai_lab.contracts.scope import FoundationScope as FoundationScope
+from milai_lab.memory.read_tools import create_memory_read_tool as create_memory_read_tool
+from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import (
     HISTORY_TOOL_DESCRIPTION,
@@ -52,7 +49,7 @@ from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.langmem_chat import VLLMChatModel
 
 if TYPE_CHECKING:
-    from milai_lab.baselines.langmem_mcp import MemoryMCP
+    from milai_lab.memory.mcp import MemoryMCP
     from milai_lab.methods.local_state_attention.writers import WriterTools
 
 RECIPE_ID = "langmem-hotpath-react-json-action-v1"
@@ -64,29 +61,6 @@ SYSTEM_PROMPT = (
 MEMORY_NAMESPACE = ("langmem", "{foundation_run_id}", "{arm_id}", "{user_id}")
 
 
-@dataclass(frozen=True)
-class FoundationScope:
-    run_id: str
-    arm_id: str
-    user_id: str
-    episode_id: str
-
-    def config(self) -> dict[str, Any]:
-        parts = [self.run_id, self.arm_id, self.user_id, self.episode_id]
-        if not all(parts):
-            raise ValueError("FOUNDATION_SCOPE_EMPTY_PART")
-        thread_id = hashlib.sha256(json.dumps(parts, ensure_ascii=False).encode()).hexdigest()
-        return {
-            "configurable": {
-                "thread_id": thread_id,
-                "foundation_run_id": self.run_id,
-                "arm_id": self.arm_id,
-                "user_id": self.user_id,
-            },
-            "max_concurrency": 1,
-            # The model's own counter enforces the 12-request public-message limit.
-            "recursion_limit": 128,
-        }
 
 
 class VLLMEmbeddings(Embeddings):
@@ -138,33 +112,6 @@ def create_history_read_tool(history: HistoryAccess | None) -> BaseTool:
     return read_history
 
 
-def create_memory_read_tool(namespace: tuple[str, ...], store: BaseStore | None = None,
-                            ) -> BaseTool:
-    """Exact ordinary-memory READ with the same public namespace contract as CRUD."""
-    namespacer = NamespaceTemplate(namespace)
-
-    def receipt(row: Any, memory_id: uuid.UUID, call_id: str) -> ToolMessage:
-        return ToolMessage(name="read_memory", tool_call_id=call_id,
-            status="success" if row is not None else "error",
-            content=json.dumps({"ok": row is not None,
-                                "status": "found" if row is not None else "not_found",
-                                "id": str(memory_id),
-                                **({"value": row.value} if row is not None else {})},
-                               ensure_ascii=False))
-
-    def read_memory(id: uuid.UUID, *,
-                    tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
-        current = store if store is not None else get_store()
-        return receipt(current.get(namespacer(), str(id)), id, tool_call_id)
-
-    async def aread_memory(id: uuid.UUID, *,
-                          tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
-        current = store if store is not None else get_store()
-        return receipt(await current.aget(namespacer(), str(id)), id, tool_call_id)
-
-    return StructuredTool.from_function(read_memory, coroutine=aread_memory,
-        name="read_memory", description="Read one ordinary memory by its exact id in this "
-                                        "user's namespace. This makes no write.")
 
 
 def build_agent(

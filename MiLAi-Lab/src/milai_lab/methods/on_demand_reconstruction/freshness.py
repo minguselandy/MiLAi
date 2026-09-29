@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from milai_lab.baselines.langmem_revision_store import RevisionSidecar
+from milai_lab.memory.revision_store import RevisionSidecar
 
 
 def inspect_freshness(handles: dict[str, dict[str, Any]],

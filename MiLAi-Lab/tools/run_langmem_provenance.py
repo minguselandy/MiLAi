@@ -21,11 +21,6 @@ from milai_lab.baselines.langmem_b1_identity import (
 )
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.baselines.langmem_revision_store import (
-    ObservedStore,
-    RevisionSidecar,
-    canonical_json,
-)
 from milai_lab.datasets.merit import load_exposed_arc
 from milai_lab.harness.contextual_artifacts import (
     RunBudget,
@@ -33,6 +28,11 @@ from milai_lab.harness.contextual_artifacts import (
     Trace,
     read_json,
     write_json,
+)
+from milai_lab.memory.revision_store import (
+    ObservedStore,
+    RevisionSidecar,
+    canonical_json,
 )
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig

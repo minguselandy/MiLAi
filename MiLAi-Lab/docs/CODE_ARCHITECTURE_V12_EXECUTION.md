@@ -8,7 +8,7 @@
 |---|---|---|
 | S0 inventory / golden preparation | 盘点完成；分阶段继续冻结 | 全源import/owner/CI分组、实际断点分析、迁移前合同冻结 |
 | S1 contracts / presentation | 本地检查完成 | canonical Request/Memory/Operation合同、旧入口纯兼容、render等价 |
-| S2 Memory core | 未开始 | MCP/strict tools/revision Store canonical、回执/Store合同等价 |
+| S2 Memory core | 本地检查完成 | MCP/strict tools/revision Store canonical、回执/Store合同等价 |
 | S3 external integrations | 未开始 | Mem0/SimpleMem归属与SDK身份/语义保留 |
 | S4 benchmark lifecycle | 未开始 | 提取公共prepare/start/finish/identity/costs，移除跨runner公共依赖 |
 | S5 provider pipeline | 未开始 | 通用hooks与外部方法注入，冻结wire/容量等价 |
@@ -16,7 +16,8 @@
 | S7 boundaries / types / docs / publication | 未开始 | DAG/facade/identity/optional/build自动门禁、逐项验收与FastCI |
 
 S0已完成170文件静态盘点、真实反向依赖定位及16个RequestContext渲染/4个错误基线。
-S1已完成合同/呈现迁移及本地验证，见[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md)。
+S1已完成合同/呈现迁移及本地验证，并提交为 `02dfacdc75eab478c0d4a49f9765c82073dd7929`，
+见[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md)。S2通用记忆服务提取已通过本地检查，见[S2结果](CODE_ARCHITECTURE_V12_S2_RESULTS.md)。
 S2–S5的专属golden仍须在对应改动前冻结，不能用S1检查替代。
 旧代理在继续时已不在live列表，已按相同模型/职责重新启用Sol与Luna；Astra仅分析
 S5旧构造参数兼容与无方法依赖之间的具体设计冲突，不承担源码写入。

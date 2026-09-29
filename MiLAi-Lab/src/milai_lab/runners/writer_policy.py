@@ -14,7 +14,10 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any, cast
 
-from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, FoundationScope
+from milai_lab.baselines.langmem_agent import (
+    MEMORY_NAMESPACE,
+)
+from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import (

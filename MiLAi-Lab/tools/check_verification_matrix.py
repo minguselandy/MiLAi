@@ -30,8 +30,12 @@ def _require(job: str, value: str, label: str) -> None:
 
 def _pytest_targets(job: str) -> set[str]:
     commands = re.findall(r"(?m)^\s*uv run --no-sync pytest[^\n]*", job)
-    return set(re.findall(r"tests/(?:unit|integration|contracts|architecture)/test_[\w]+\.py",
-                          "\n".join(commands)))
+    return set(
+        re.findall(
+            r"tests/(?:unit|integration|contracts|architecture|memory)/test_[\w]+\.py",
+            "\n".join(commands),
+        )
+    )
 
 
 def _pytest_commands(job: str) -> list[str]:
