@@ -177,7 +177,7 @@ jobs:
           uv run --no-sync milai-lab-check-boundary
           uv run --no-sync milai-lab-check-tools-boundary
           uv run --no-sync ruff check src tests tools
-          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py src/milai_lab/memory/presentation.py src/milai_lab/methods/request_context.py src/milai_lab/methods/memory_result.py src/milai_lab/methods/memory_boundaries.py
+          uv run --no-sync mypy src/milai_lab/contracts src/milai_lab/analysis src/milai_lab/harness src/milai_lab/scorers src/milai_lab/boundary.py src/milai_lab/tools_boundary.py src/milai_lab/memory/presentation.py src/milai_lab/methods/request_context.py src/milai_lab/methods/memory_result.py src/milai_lab/methods/memory_boundaries.py src/milai_lab/memory/embeddings.py src/milai_lab/providers/request_pipeline.py
           if test -f tests/unit/test_lsa_controller_contract.py; then
             uv run --no-sync mypy src/milai_lab/methods/local_state_attention/protocol.py
             uv run --no-sync pytest -q tests/unit/test_lsa_controller_contract.py
@@ -201,7 +201,7 @@ jobs:
             --ignore=tests/unit/test_application_architecture.py \
             --ignore=tests/architecture/test_request_source_identity.py \
             --ignore=tests/memory/test_memory_contracts.py \
-            --ignore=tests/architecture/test_memory_architecture.py --ignore=tests/architecture/test_benchmark_execution_architecture.py \
+            --ignore=tests/architecture/test_memory_architecture.py --ignore=tests/architecture/test_benchmark_execution_architecture.py --ignore=tests/architecture/test_provider_architecture.py \
             --ignore=tests/integrations/test_mem0_contracts.py \
             --ignore=tests/integrations/test_simplemem_contracts.py \
             --ignore=tests/integrations/test_external_interfaces.py \
@@ -231,8 +231,8 @@ jobs:
           uv sync --frozen --dev --group baseline-langmem --python 3.11
           uv run --no-sync python -c 'import langchain_core, langgraph, langmem, openai'
           uv run --no-sync milai-lab-check-boundary
-          uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/application src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/application src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
+          uv run --no-sync ruff check src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/application src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py tools/run_langmem_foundation.py tools/prepare_langmem_foundation.py tools/summarize_langmem_foundation.py tests/unit/test_langmem_foundation.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_agent.py src/milai_lab/baselines/langmem_identity.py src/milai_lab/providers/langmem_chat.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/runners/langmem_foundation.py src/milai_lab/application src/milai_lab/runners/langmem_merit.py src/milai_lab/runners/langmem_diagnostic.py src/milai_lab/datasets/merit.py
           uv run --no-sync pytest -q tests/unit/test_langmem_foundation.py
           uv run --no-sync ruff check src/milai_lab/methods/local_state_attention src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py tools/run_local_state_attention.py tests/unit/test_local_state_attention.py
           uv run --no-sync mypy src/milai_lab/methods/local_state_attention/bank.py src/milai_lab/methods/local_state_attention/controller.py src/milai_lab/methods/local_state_attention/integration.py src/milai_lab/baselines/langmem_agent.py src/milai_lab/runners/langmem_application.py src/milai_lab/runners/langmem_application_runtime.py tools/run_local_state_attention.py
@@ -260,11 +260,11 @@ jobs:
           uv run --no-sync pytest -q tests/unit/test_shared_record_use.py
           uv run --no-sync ruff check src/milai_lab/methods/memory_result.py src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py tests/unit/test_memory_result.py tests/unit/test_persistent_memory.py
           uv run --no-sync mypy src/milai_lab/runners/persistent_memory.py tools/run_persistent_memory.py
-          uv run --no-sync pytest -q tests/unit/test_persistent_memory.py
+          uv run --no-sync pytest -q tests/unit/test_persistent_memory.py tests/architecture/test_provider_architecture.py
           uv run --no-sync mypy src/milai_lab/providers/merit_metered.py src/milai_lab/baselines/langmem_benchmark.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py tools/run_unified_benchmarks.py
           uv run --no-sync pytest -q tests/unit/test_unified_benchmarks.py tests/unit/test_merit_native.py tests/unit/test_benchmark_memories.py tests/architecture/test_benchmark_execution_architecture.py
           uv run --no-sync mypy src/milai_lab
-          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/baselines/benchmark_memories.py src/milai_lab/application/*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/memory/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py
+          uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/baselines/benchmark_memories.py src/milai_lab/application/*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/memory/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
 
   lab-external-fast:

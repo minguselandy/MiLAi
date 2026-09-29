@@ -25,7 +25,7 @@ from milai_lab.baselines.langmem_instrumentation import (
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.datasets.merit import load_exposed_arc, load_frozen_arc
 from milai_lab.harness.contextual_artifacts import digest, read_json, write_json
-from milai_lab.providers.langmem_chat import VLLMChatModel
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
 

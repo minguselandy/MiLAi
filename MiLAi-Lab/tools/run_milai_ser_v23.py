@@ -28,9 +28,9 @@ from milai_lab.methods.freshness_projection.identity import (
     verify_ser_v23_lock,
     verify_ser_v23_prepared,
 )
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_merit import run_frozen_merit_arc
 from run_langmem_provenance import _trace_emit
 

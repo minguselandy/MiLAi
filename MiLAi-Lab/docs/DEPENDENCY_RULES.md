@@ -37,3 +37,14 @@ S3 将原 `harness.contextual_artifacts` 中的 `digest`、`read_json`、`write_
 
 这是对计划职责图中未展开的公共设施节点的具体化；原 JSON 字节、排序、摘要和临时文件
 替换行为仍须保持。应用 journal 的旧公共入口无需随之全仓改写。
+
+## Provider 使用的轻量记忆叶子
+
+S1 的 `memory.presentation` 为消息呈现提供通用转换；S5 将原 reasoning-bank 中的
+`normalized` 原实现提取到 `memory.embeddings`，供 embedding Provider 与方法共同使用。
+后者只检查向量维度、有限数值和非零范数并归一化，没有模型调用、记忆策略或持久化。
+
+Provider 对这两个明确叶子的依赖不能扩展成对整个 Memory core 的授权。最终边界检查应
+同时约束它们自身仅使用标准库/轻量合同，不引入 Store、SDK、runner 或方法。它们是实际
+共用的数据呈现与向量处理能力；不是把研究方法改成通用名字后留在 Provider 中。
+迁移状态及等价证据见 [S5记录](CODE_ARCHITECTURE_V12_S5_RESULTS.md)。

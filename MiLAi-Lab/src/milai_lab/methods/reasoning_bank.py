@@ -9,12 +9,12 @@ from __future__ import annotations
 
 import copy
 import hashlib
-import math
 import re
 from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
+from milai_lab.memory.embeddings import normalized as normalized
 from milai_lab.methods.controlled_workspace import MemoryCard
 from milai_lab.methods.experience_utility import VersionUtility
 
@@ -48,13 +48,6 @@ class BankConfig:
     read_chars: int = 4000
 
 
-def normalized(vector: list[float], dimension: int) -> list[float]:
-    if len(vector) != dimension or any(not math.isfinite(x) for x in vector):
-        raise ValueError("EMBEDDING_CONTRACT_MISMATCH")
-    norm = math.sqrt(sum(x * x for x in vector))
-    if norm == 0:
-        raise ValueError("ZERO_EMBEDDING")
-    return [x / norm for x in vector]
 
 
 def parse_memory_items(raw: str, maximum: int = 3) -> list[str]:

@@ -32,14 +32,15 @@ from milai_lab.baselines.langmem_agent import (
 )
 from milai_lab.baselines.langmem_strict_tools import create_strict_manage_memory_tool
 from milai_lab.harness.contextual_artifacts import write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.writers import (
     create_writer_tools,
     execute_writes,
 )
+from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners.langmem_foundation import (
     BusinessActionJournal,
     UnknownBusinessAction,

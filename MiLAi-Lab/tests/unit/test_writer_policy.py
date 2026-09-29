@@ -18,11 +18,11 @@ from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.writers import create_writer_tools
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_application import (
     BUSINESS_NAMES,
     ApplicationWorld,

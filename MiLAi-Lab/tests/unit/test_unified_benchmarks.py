@@ -32,8 +32,8 @@ from milai_lab.baselines.langmem_mcp import MemoryMCP
 from milai_lab.datasets.contextual import HistoryMessage, TaskInput
 from milai_lab.datasets.memsyco import TRACKS, load_memsyco_tasks
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace, write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import memsyco_native
 from milai_lab.runners.merit_native import finish_job, prepare_manifest, start_job
 

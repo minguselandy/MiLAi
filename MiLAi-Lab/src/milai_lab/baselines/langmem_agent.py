@@ -30,6 +30,7 @@ from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.contracts.scope import FoundationScope as FoundationScope
 from milai_lab.memory.read_tools import create_memory_read_tool as create_memory_read_tool
 from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import (
     HISTORY_TOOL_DESCRIPTION,
@@ -46,7 +47,6 @@ from milai_lab.methods.local_state_attention.summary import HistorySummaryContro
 from milai_lab.methods.memory_boundaries import MemoryBoundaryView
 from milai_lab.methods.memory_result import CORRECTION_TOOLS, correction_marker
 from milai_lab.providers.contextual_vllm import VLLMClient
-from milai_lab.providers.langmem_chat import VLLMChatModel
 
 if TYPE_CHECKING:
     from milai_lab.memory.mcp import MemoryMCP

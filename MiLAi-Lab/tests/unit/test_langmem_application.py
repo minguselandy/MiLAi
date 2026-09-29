@@ -25,10 +25,10 @@ from langgraph.store.memory import InMemoryStore
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.baselines.langmem_revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.identity import LAB
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.controller import CONTROL_STAGE
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners import langmem_application as app
 from milai_lab.runners import langmem_application_runtime as app_runtime
 

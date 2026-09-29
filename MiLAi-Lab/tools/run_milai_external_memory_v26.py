@@ -25,9 +25,9 @@ from milai_lab.harness.contextual_artifacts import (
 from milai_lab.integrations.memory.mem0 import Mem0NativeRuntime
 from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.identity import LAB
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.mem0_identity import (
     INPUT_REFERENCE,

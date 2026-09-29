@@ -22,13 +22,9 @@ from langgraph.store.memory import InMemoryStore
 
 from milai_lab.baselines.langmem_agent import SYSTEM_PROMPT
 from milai_lab.harness.contextual_artifacts import read_json, write_json
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
+from milai_lab.providers.chat_bridge import _action_prompt, _action_schema, _json_action_history
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import (
-    VLLMChatModel,
-    _action_prompt,
-    _action_schema,
-    _json_action_history,
-)
 from milai_lab.runners.frozen_action_continuation import (
     _catalog,
     continue_job,

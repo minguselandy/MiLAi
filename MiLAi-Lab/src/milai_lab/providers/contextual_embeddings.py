@@ -6,7 +6,7 @@ from collections.abc import Sequence
 
 from tokenizers import Tokenizer  # type: ignore[import-untyped]
 
-from milai_lab.methods.reasoning_bank import normalized
+from milai_lab.memory.embeddings import normalized
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 

@@ -17,7 +17,7 @@ from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, RECIPE_ID, SYSTE
 from milai_lab.baselines.langmem_identity import sha256_file
 from milai_lab.harness.contextual_artifacts import digest, read_json
 from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
-from milai_lab.providers.langmem_chat import _action_prompt, _action_schema
+from milai_lab.providers.chat_bridge import _action_prompt, _action_schema
 
 LAB = Path(__file__).resolve().parents[3]
 REFERENCE = LAB / "data/manifests/langmem-b1-v16-reference.json"

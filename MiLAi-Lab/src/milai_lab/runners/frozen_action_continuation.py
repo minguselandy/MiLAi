@@ -39,12 +39,12 @@ from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.local_state_attention.read_probe import first_action
-from milai_lab.providers.contextual_vllm import generation_schema
-from milai_lab.providers.langmem_chat import (
+from milai_lab.providers.chat_bridge import (
     _action_prompt,
     _action_schema,
     _json_action_history,
 )
+from milai_lab.providers.contextual_vllm import generation_schema
 from milai_lab.runners.langmem_application_runtime import (
     ApplicationRuntime,
     open_application_runtime,

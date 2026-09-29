@@ -27,7 +27,7 @@ from milai_lab.baselines.langmem_instrumentation import (
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.revision_store import canonical_json
-from milai_lab.providers.langmem_chat import VLLMChatModel
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
 

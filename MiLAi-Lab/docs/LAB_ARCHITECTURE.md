@@ -18,7 +18,7 @@ Lab 内部按职责组织：
 | `contracts/` | arm 权限、请求、记忆、操作、scope 等数据合同 | 模型调用、业务执行 |
 | `datasets/` | benchmark 来源、合法输入和固定实例 | 使用 scorer 答案补输入 |
 | `harness/` | 结果制品、trace、容量/费用等共享设施 | 改写任务以取得通过 |
-| `providers/` | 实际 HTTP、模型协议和容量边界 | 判断业务事实正确性 |
+| `providers/` | 实际 HTTP、模型协议、容量边界及通用 request/delivery/response hooks | 具体研究方法分支、判断业务事实正确性 |
 | `baselines/` | Agent 配方、实际 baseline 与兼容入口 | 自动授予业务权限、成为通用能力的唯一 owner |
 | `memory/` | 通用 MCP/Store、严格操作、版本和材料呈现 | Agent 配方、业务世界、scorer |
 | `integrations/memory/` | Mem0/SimpleMem 原生 SDK、数据库与调用适配 | 任务顺序、scorer、方法策略 |
@@ -39,16 +39,25 @@ MERIT 与 MemSyco 共用的 manifest、prepare/start/finish、源码身份和费
 MemSyco 不再为这些流程导入 MERIT runner；原生数据、业务世界与 scorer 仍由各自 runner 处理。
 合同比较与工程验证见 [S4记录](CODE_ARCHITECTURE_V12_S4_RESULTS.md)。
 
+通用聊天实现位于 `providers/chat_bridge.py`，三个 hook 合同位于
+`providers/request_pipeline.py`。具体 C/M1/ODR/projection 等策略由
+`methods/langmem_recipe.py` 显式组装；它继承通用生成、容量与计账流程，只持有方法状态并注入
+hooks。旧 `providers/langmem_chat.py` 导出通用类的同一对象，当前方法调用者使用新的配方入口。
+构造兼容范围及冻结字节对照见 [S5记录](CODE_ARCHITECTURE_V12_S5_RESULTS.md)。
+
 ## 应用能力与实验编排
 
-本次从 `runners/langmem_foundation.py` 和 `runners/langmem_application.py` 提取复用能力。
+前次 PR #74 从 `runners/langmem_foundation.py` 和 `runners/langmem_application.py` 提取复用能力。
 此前 `methods/memory_lifecycle.py` 为使用 journal 反向依赖 runner；只需 world 或工具 schema
 的调用者也会加载 LangMem/LSA 阶段编排。拆分针对这些实际依赖，而非按文件行数划分。
 
 ```mermaid
 flowchart TD
     CLI[tools / 受控实验入口] --> RUN[runners: run_phase / writer cadence / runtime]
-    RUN --> HOST[baselines + providers: Agent / MCP / HTTP]
+    RUN --> HOST[baselines: Agent 配方]
+    HOST --> RECIPE[methods.langmem_recipe]
+    RECIPE --> PROVIDER[providers: 通用协议 / HTTP]
+    HOST --> MEMORY[memory: MCP / Store]
     RUN --> REC[application.recovery]
     RUN --> TOOLS[application.tools]
     REC --> TOOLS

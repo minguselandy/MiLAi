@@ -10,7 +10,9 @@
 | Agent 组装、记忆工具与原生工具续接 | `baselines/langmem_agent.py` | `tests/unit/test_langmem_foundation.py` |
 | 严格记忆 MCP 传输、Store 读写 | `memory/mcp.py`、`strict_tools.py`、`read_tools.py`、`revision_store.py`；旧 baseline 路径为兼容导出 | foundation/provenance/persistent-memory 测试；[S2进度](CODE_ARCHITECTURE_V12_S2_RESULTS.md) |
 | 请求和跨组件数据合同 | `contracts/request.py`、`memory.py`、`operations.py`、`scope.py` | `tests/contracts/`、`tests/architecture/` |
-| 模型 HTTP、容量与实际 request | `providers/contextual_vllm.py`、`langmem_chat.py`、`contextual_capacity.py` | provider/capacity 和真实模板的分组检查 |
+| 模型 HTTP、容量与实际 request | `providers/contextual_vllm.py`、`chat_bridge.py`、`request_pipeline.py`、`contextual_capacity.py`；旧 `langmem_chat.py` 为兼容导出 | provider/capacity、冻结 wire 和分组检查；[S5记录](CODE_ARCHITECTURE_V12_S5_RESULTS.md) |
+| C/M1/ODR/projection 等配方组装 | `methods/langmem_recipe.py` 显式构造并注入通用 hooks | 原方法断言、live fields 与 request/delivery/response 时序对照 |
+| 通用向量合同与归一化 | `memory/embeddings.py`；`methods/reasoning_bank.py` 导出同一函数 | 数学/embedding 边界对照；只含标准库数学，不启动模型 |
 | 业务 world 与 owner 对象 | `application/world.py` | application world/lifecycle 检查 |
 | 操作授权、重复、partial/unknown 记录 | `application/journal.py` | foundation journal 与 R2 机械反控 |
 | 原生 schema 与工具适配 | `application/tools.py` | schema-only 与原始回执检查 |

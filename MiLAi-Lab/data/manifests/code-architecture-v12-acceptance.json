@@ -17,8 +17,13 @@
       "requirement": "provider 无具体 method import",
       "phase": "S5",
       "required_evidence": "Generic pipeline source plus all-provider import graph; method-specific hook injection outside providers; wire/capacity equivalence",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s5-engineering-evidence.json",
+        "tests/architecture/test_provider_pipeline_core.py",
+        "tests/architecture/test_provider_architecture.py"
+      ]
     },
     {
       "id": "C03",
@@ -145,7 +150,7 @@
     "S2": "COMPLETE_LOCAL_CHECKS",
     "S3": "COMPLETE_LOCAL_CHECKS",
     "S4": "COMPLETE_LOCAL_CHECKS",
-    "S5": "PENDING",
+    "S5": "COMPLETE_LOCAL_CHECKS",
     "S6": "PENDING",
     "S7": "PENDING"
   },
@@ -261,7 +266,24 @@
       "source_commit": "5aa61b8d767a2e6b3db8783f9497dad82b671405",
       "tests_passed": 52,
       "golden_sha256": "f5dd86e7ec77e56109671883b10c5ba9f4ce13f05e1ea967a7c0a9c41844e1b7",
-      "note": "Shared lifecycle equivalence proved; C05 remains pending S6 remaining runner-edge ownership audit."
+      "note": "Shared lifecycle equivalence proved; C05 remains pending S6 remaining runner-edge ownership audit.",
+      "commit": "2bc50583d02b86dd70ceb25f42eed43b9082f413"
+    },
+    "S5": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S5_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s5-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "2bc50583d02b86dd70ceb25f42eed43b9082f413",
+      "foundation_tests_passed": 307,
+      "existing_local_asset_tests_deselected": 2,
+      "affected_mem0_tests_passed": 1,
+      "final_identity_facade_tests_passed": 22,
+      "golden_groups": [
+        27,
+        44,
+        35
+      ],
+      "note": "Complete source capture parity; installed probes replay manual27/edges35. Generic constructor intentionally rejects method kwargs; current recipe callers migrated."
     }
   }
 }

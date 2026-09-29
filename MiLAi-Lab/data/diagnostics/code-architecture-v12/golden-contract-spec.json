@@ -153,7 +153,16 @@
     }
   ],
   "already_frozen": {
-    "request_render": "data/diagnostics/code-architecture-v12/request-render-golden.json"
+    "request_render": "data/diagnostics/code-architecture-v12/request-render-golden.json",
+    "memory_mcp_strict_store_application": "data/diagnostics/code-architecture-v12/memory-contract-golden.json",
+    "mem0_original": "data/diagnostics/code-architecture-v12/mem0-contract-golden.json",
+    "simplemem_original": "data/diagnostics/code-architecture-v12/simplemem-contract-golden.json",
+    "mem0_deterministic_supplement": "data/diagnostics/code-architecture-v12/mem0-contract-deterministic-golden.json",
+    "simplemem_deterministic_supplement": "data/diagnostics/code-architecture-v12/simplemem-contract-deterministic-golden.json",
+    "benchmark_lifecycle": "data/diagnostics/code-architecture-v12/benchmark-execution-golden.json",
+    "provider-manual-golden": "data/diagnostics/code-architecture-v12/provider-manual-golden.json",
+    "provider-real-golden": "data/diagnostics/code-architecture-v12/provider-real-golden.json",
+    "provider-edges-golden": "data/diagnostics/code-architecture-v12/provider-edges-golden.json"
   },
-  "pending": "All other captures require concrete output evidence before their phase; this specification alone proves no equivalence."
+  "pending": "S5 three before/after capture groups match full bytes; final engineering acceptance and publication pending. S6 must freeze affected orchestration before migration. This specification is not an equivalence result; stage reports contain actual comparisons and limits."
 }

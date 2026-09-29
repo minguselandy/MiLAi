@@ -34,9 +34,9 @@ from milai_lab.memory.revision_store import (
     RevisionSidecar,
     canonical_json,
 )
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc
 

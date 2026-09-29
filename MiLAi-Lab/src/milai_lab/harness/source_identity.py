@@ -13,6 +13,7 @@ CONTRACT_SOURCE_FILES = (
 )
 MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/__init__.py",
+    "src/milai_lab/memory/embeddings.py",
     "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/presentation.py",
     "src/milai_lab/memory/read_tools.py",
@@ -40,6 +41,12 @@ ARTIFACT_IO_SOURCE_FILES = (
 BENCHMARK_EXECUTION_SOURCE_FILES = (
     "src/milai_lab/harness/benchmark_execution.py",
 )
+PROVIDER_SOURCE_FILES = (
+    "src/milai_lab/providers/chat_bridge.py",
+    "src/milai_lab/providers/request_pipeline.py",
+    "src/milai_lab/providers/langmem_chat.py",
+    "src/milai_lab/methods/langmem_recipe.py",
+)
 REQUEST_SOURCE_FILES = (
     "src/milai_lab/harness/source_identity.py",
     *CONTRACT_SOURCE_FILES,
@@ -49,5 +56,6 @@ REQUEST_SOURCE_FILES = (
     *INTEGRATION_FACADE_FILES,
     *ARTIFACT_IO_SOURCE_FILES,
     *BENCHMARK_EXECUTION_SOURCE_FILES,
+    *PROVIDER_SOURCE_FILES,
     "src/milai_lab/methods/request_context.py",
 )

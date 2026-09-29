@@ -26,13 +26,14 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
 from milai_lab.methods.local_state_attention.controller import ControlResponseError
 from milai_lab.methods.memory_boundaries import event_reference, operation_audit
 from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT
+from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import IncompleteChatResponse, VLLMChatModel
 from milai_lab.runners import persistent_memory as runner
 from milai_lab.runners.langmem_application import BUSINESS_NAMES, ApplicationWorld, _business_tools
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime

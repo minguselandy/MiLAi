@@ -23,9 +23,10 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateScope
+from milai_lab.providers.chat_bridge import _action_prompt
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel, _action_prompt
 from milai_lab.runners import shared_record_use as runner
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
 

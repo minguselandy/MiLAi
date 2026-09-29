@@ -32,6 +32,7 @@ from milai_lab.harness.contextual_artifacts import (
     write_json,
 )
 from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.methods.milai_m1.controller import (
     M1_PROTOCOL,
     M1Controller,
@@ -44,9 +45,9 @@ from milai_lab.methods.milai_m1.identity import (
     verify_m1_prepared,
 )
 from milai_lab.methods.milai_m1.state_store import DecisionBasisStore
+from milai_lab.providers.chat_bridge import _action_prompt, _action_schema
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel, _action_prompt, _action_schema
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc
 from run_langmem_provenance import _trace_emit

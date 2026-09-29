@@ -29,9 +29,9 @@ from milai_lab.harness.contextual_artifacts import (
     write_json,
 )
 from milai_lab.harness.source_identity import REQUEST_SOURCE_FILES
+from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
-from milai_lab.providers.langmem_chat import VLLMChatModel
 from milai_lab.runners.langmem_diagnostic import run_frozen_diagnostics
 from milai_lab.runners.langmem_foundation import BusinessActionJournal
 from milai_lab.runners.langmem_merit import run_exposed_merit_arc
