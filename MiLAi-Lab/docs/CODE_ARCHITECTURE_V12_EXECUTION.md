@@ -9,7 +9,7 @@
 | S0 inventory / golden preparation | 盘点完成；分阶段继续冻结 | 全源import/owner/CI分组、实际断点分析、迁移前合同冻结 |
 | S1 contracts / presentation | 本地检查完成 | canonical Request/Memory/Operation合同、旧入口纯兼容、render等价 |
 | S2 Memory core | 本地检查完成 | MCP/strict tools/revision Store canonical、回执/Store合同等价 |
-| S3 external integrations | 未开始 | Mem0/SimpleMem归属与SDK身份/语义保留 |
+| S3 external integrations | 本地检查完成 | Mem0/SimpleMem归属与SDK身份/语义保留 |
 | S4 benchmark lifecycle | 未开始 | 提取公共prepare/start/finish/identity/costs，移除跨runner公共依赖 |
 | S5 provider pipeline | 未开始 | 通用hooks与外部方法注入，冻结wire/容量等价 |
 | S6 orchestration | 未开始 | writer policy独立归属，phase生命周期保留 |
@@ -17,7 +17,8 @@
 
 S0已完成170文件静态盘点、真实反向依赖定位及16个RequestContext渲染/4个错误基线。
 S1已完成合同/呈现迁移及本地验证，并提交为 `02dfacdc75eab478c0d4a49f9765c82073dd7929`，
-见[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md)。S2通用记忆服务提取已通过本地检查，见[S2结果](CODE_ARCHITECTURE_V12_S2_RESULTS.md)。
+见[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md)。S2通用记忆服务提取已通过本地检查，并提交为 `379ad45eab3fc40798534bd7a73e7a1245918bc9`，
+见[S2结果](CODE_ARCHITECTURE_V12_S2_RESULTS.md)。S3外部集成归属整理已通过本地检查，见[S3结果](CODE_ARCHITECTURE_V12_S3_RESULTS.md)。
 S2–S5的专属golden仍须在对应改动前冻结，不能用S1检查替代。
 旧代理在继续时已不在live列表，已按相同模型/职责重新启用Sol与Luna；Astra仅分析
 S5旧构造参数兼容与无方法依赖之间的具体设计冲突，不承担源码写入。
@@ -45,3 +46,12 @@ Astra只提供此具体设计问题的建议；实现仍由Sol统一负责。
 
 [代码职责](CODE_OWNERSHIP.md)、[依赖规则](DEPENDENCY_RULES.md)与
 [历史复现入口](HISTORICAL_CODE_INDEX.md)说明维护范围；各阶段是否完成以本表和验收证据为准。
+
+## S3 公共 IO 归属决定
+
+Mem0 的源码身份常量与校验函数随外部适配器进入 integration，旧 baseline 保留 re-export。
+外部适配器还共用 `digest/read_json/write_json`。这三项是通用制品 IO，不应为了目录表而
+放入 memory。其原实现提取为只依赖标准库的 `harness/artifact_io.py`，原 harness 入口导出
+相同对象；允许 integrations 对这个明确叶子模块的依赖，不扩大为对研究 harness 的授权。
+决定及最终自动边界要求见[依赖规则](DEPENDENCY_RULES.md)。本项属于行为保持的职责提取，
+须核对原 AST、JSON/摘要/临时文件替换语义和 canonical source identity。

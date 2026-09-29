@@ -183,10 +183,8 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         "scorer": "official native checker; pre_satisfied distinct from success",
         "rubric_read_by_runner": False}
     if args.arm in U2_ARMS:
-        from milai_lab.baselines.benchmark_memories import (
-            backend_identity,
-            mem0_dependency_identity,
-        )
+        from milai_lab.baselines.benchmark_memories import backend_identity
+        from milai_lab.integrations.memory.mem0 import mem0_dependency_identity
 
         identity.update({"backend": backend_identity(args.arm),
             "transport": "common public LangGraph/v1/native ToolNode; same native business schemas",
@@ -199,7 +197,7 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
         if args.arm == "mem0_native":
             identity["mem0_dependency"] = mem0_dependency_identity()
     if args.arm == "simplemem_text":
-        from milai_lab.runners.simplemem_native import dependency_identity, validate_simplemem
+        from milai_lab.integrations.memory.simplemem import dependency_identity, validate_simplemem
 
         identity["simplemem_dependency"] = dependency_identity(validate_simplemem(config))
         identity["memory_cadence"] = (
@@ -230,14 +228,17 @@ def prepare(args: Any, *, lab_root: Path) -> dict[str, Any]:
             identity["memory_tools"] = [tool for tool in peer.catalog
                                         if tool["function"]["name"] == "read_history"]
         if args.arm == "mem0_native":
-            from milai_lab.runners.mem0_native import MEM0_SEARCH_DESCRIPTION, MEM0_SEARCH_SCHEMA
+            from milai_lab.integrations.memory.mem0 import (
+                MEM0_SEARCH_DESCRIPTION,
+                MEM0_SEARCH_SCHEMA,
+            )
 
             identity["memory_tools"] = [{"type": "function", "function": {
                 "name": "search_memory", "description": MEM0_SEARCH_DESCRIPTION,
                 "parameters": MEM0_SEARCH_SCHEMA}},
                 convert_to_openai_tool(create_history_read_tool(None))]
         if args.arm == "simplemem_text":
-            from milai_lab.runners.simplemem_native import SEARCH_DESCRIPTION, SEARCH_SCHEMA
+            from milai_lab.integrations.memory.simplemem import SEARCH_DESCRIPTION, SEARCH_SCHEMA
 
             identity["memory_tools"] = [{"type": "function", "function": {
                 "name": "search_memory", "description": SEARCH_DESCRIPTION,

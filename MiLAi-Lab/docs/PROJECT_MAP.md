@@ -19,7 +19,8 @@
 | 请求副本中的记忆/历史呈现 | `memory/presentation.py`；具体策略在 `methods/memory_boundaries.py`；旧 `methods/request_context.py` 为兼容导出 | boundary 与 R1 现有合同；[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md) |
 | 普通记忆形成及共同读取接口 | `baselines/langmem_benchmark.py` | `tests/unit/test_benchmark_memories.py`、unified 检查 |
 | MemSyco/MERIT 系统比较 | `runners/memsyco_native.py`、`merit_native.py`；`tools/run_unified_benchmarks.py` | unified/native 测试；实际数据需独立授权和冻结 |
-| 外部 Mem0/SimpleMem | `runners/mem0_native.py`、`simplemem_native.py` | external 依赖组和原 pin；不能静默改原 baseline |
+| 外部 Mem0/SimpleMem | `integrations/memory/mem0.py`、`simplemem.py`；旧 runner 为兼容导出 | [S3记录](CODE_ARCHITECTURE_V12_S3_RESULTS.md)、External 依赖组和原 pin |
+| 通用 JSON 制品与摘要 | `harness/artifact_io.py`；原 `contextual_artifacts` 导出相同对象 | IO 字节/摘要、原子替换、轻量导入检查 |
 | 成本、输入来源和结果 | `harness/`、`analysis/`、`scorers/`、`data/manifests/` | 离线检查；运行时不可读取 rubric/gold |
 
 上述是路径导航，不表示每个方法都启用。M1、ODR、各版本 State/Attention 等历史候选留在

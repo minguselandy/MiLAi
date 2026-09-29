@@ -23,10 +23,26 @@ MEMORY_FACADE_FILES = (
     "src/milai_lab/baselines/langmem_revision_store.py",
     "src/milai_lab/baselines/langmem_strict_tools.py",
 )
+INTEGRATION_SOURCE_FILES = (
+    "src/milai_lab/integrations/__init__.py",
+    "src/milai_lab/integrations/memory/__init__.py",
+    "src/milai_lab/integrations/memory/mem0.py",
+    "src/milai_lab/integrations/memory/simplemem.py",
+)
+INTEGRATION_FACADE_FILES = (
+    "src/milai_lab/runners/mem0_native.py",
+    "src/milai_lab/runners/simplemem_native.py",
+)
+ARTIFACT_IO_SOURCE_FILES = (
+    "src/milai_lab/harness/artifact_io.py",
+)
 REQUEST_SOURCE_FILES = (
     "src/milai_lab/harness/source_identity.py",
     *CONTRACT_SOURCE_FILES,
     *MEMORY_SOURCE_FILES,
     *MEMORY_FACADE_FILES,
+    *INTEGRATION_SOURCE_FILES,
+    *INTEGRATION_FACADE_FILES,
+    *ARTIFACT_IO_SOURCE_FILES,
     "src/milai_lab/methods/request_context.py",
 )

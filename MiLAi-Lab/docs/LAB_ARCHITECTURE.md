@@ -21,6 +21,7 @@ Lab 内部按职责组织：
 | `providers/` | 实际 HTTP、模型协议和容量边界 | 判断业务事实正确性 |
 | `baselines/` | Agent 配方、实际 baseline 与兼容入口 | 自动授予业务权限、成为通用能力的唯一 owner |
 | `memory/` | 通用 MCP/Store、严格操作、版本和材料呈现 | Agent 配方、业务世界、scorer |
+| `integrations/memory/` | Mem0/SimpleMem 原生 SDK、数据库与调用适配 | 任务顺序、scorer、方法策略 |
 | `methods/` | 显式 recipe 的记忆/工作视图候选 | 持有第二套业务世界 |
 | `application/` | 可复用业务 world、journal、工具与恢复能力 | CLI、实验分组、scorer、服务创建 |
 | `runners/` | 组合方法、运行阶段、资源生命周期和结果交接 | 作为通用业务能力的唯一实现位置 |
@@ -30,6 +31,8 @@ Lab 内部按职责组织：
 这是维护职责图，不宣称所有历史模块已经完成同样的分层。按阶段保留的方法、旧入口和
 冻结文件仍存在；新工作应从[项目地图](PROJECT_MAP.md)定位当前链路。
 详细维护规则见[代码职责](CODE_OWNERSHIP.md)和[依赖边界](DEPENDENCY_RULES.md)。
+外部集成使用底层 `harness/artifact_io.py` 处理共享 JSON 制品；该模块只有标准库依赖，
+不把研究编排带入集成层。原 harness 入口继续导出相同 IO 函数。
 
 ## 应用能力与实验编排
 

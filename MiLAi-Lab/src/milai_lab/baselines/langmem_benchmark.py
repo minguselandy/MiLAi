@@ -248,7 +248,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                        config: dict[str, Any], stack: ExitStack, backend: str,
                        ) -> tuple[Callable[..., Any], Callable[..., None]]:
     """One public graph; only the archive material/actual backend cadence differs."""
-    from milai_lab.runners.mem0_native import Mem0NativeRuntime
+    from milai_lab.integrations.memory.mem0 import Mem0NativeRuntime
 
     bank = LocalStateBank(runtime.store)
     peers: dict[str, MemoryMCP] = {}
@@ -287,7 +287,10 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
             if native.snapshot(user_id, measure=True):
                 raise ValueError("BENCHMARK_MEMORY_NAMESPACE_DIRTY")
         elif backend == "simplemem_text":
-            from milai_lab.runners.simplemem_native import SimpleMemTextRuntime, validate_simplemem
+            from milai_lab.integrations.memory.simplemem import (
+                SimpleMemTextRuntime,
+                validate_simplemem,
+            )
 
             if runtime.embedding_client is None:
                 raise ValueError("BENCHMARK_EMBEDDING_CLIENT_MISSING")
@@ -354,7 +357,7 @@ def _u2_merit_adapters(runtime: Any, root: Path, run_id: str, arm: str,
                                      "actual_result": result}
                 material = selected[key]["material"]
             elif backend == "simplemem_text":
-                from milai_lab.runners.simplemem_native import material_rows
+                from milai_lab.integrations.memory.simplemem import material_rows
 
                 if key not in selected:
                     with phase(model.client, "simplemem_retrieval"):

@@ -25,16 +25,22 @@
       "requirement": "shared baseline code 无 runner import",
       "phase": "S3/S7",
       "required_evidence": "All baseline source import graph and canonical integration consumers",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json"
+      ]
     },
     {
       "id": "C04",
       "requirement": "Mem0/SimpleMem canonical owner 不在 runner",
       "phase": "S3",
       "required_evidence": "Canonical implementations; pure old facades; pinned SDK/config/snapshot/call parity",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json"
+      ]
     },
     {
       "id": "C05",
@@ -137,7 +143,7 @@
     "S0": "COMPLETE_INVENTORY_WITH_PHASE_GOLDENS_REQUIRED",
     "S1": "COMPLETE_LOCAL_CHECKS",
     "S2": "COMPLETE_LOCAL_CHECKS",
-    "S3": "PENDING",
+    "S3": "COMPLETE_LOCAL_CHECKS",
     "S4": "PENDING",
     "S5": "PENDING",
     "S6": "PENDING",
@@ -236,7 +242,16 @@
       "mcp_capture_transport": "in-process direct binding; real loopback tests separately required",
       "note": "Before/after/installed synthetic contracts match; final CI and later phase contracts remain pending.",
       "report": "docs/CODE_ARCHITECTURE_V12_S2_RESULTS.md",
-      "evidence": "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json"
+      "evidence": "data/diagnostics/code-architecture-v12/s2-engineering-evidence.json",
+      "commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9"
+    },
+    "S3": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S3_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s3-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "379ad45eab3fc40798534bd7a73e7a1245918bc9",
+      "tests_passed": 45,
+      "note": "Full native replay uses local pinned assets; portable External CI cohort is separately wired. Original timing mismatches and failed clock supplements retained."
     }
   }
 }

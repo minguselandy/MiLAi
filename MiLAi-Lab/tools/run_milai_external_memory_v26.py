@@ -22,6 +22,7 @@ from milai_lab.harness.contextual_artifacts import (
     read_json,
     write_json,
 )
+from milai_lab.integrations.memory.mem0 import Mem0NativeRuntime
 from milai_lab.memory.revision_store import ObservedStore, RevisionSidecar
 from milai_lab.methods.freshness_projection.identity import LAB
 from milai_lab.providers.contextual_capacity import HostCapacity
@@ -35,7 +36,6 @@ from milai_lab.runners.mem0_identity import (
     verify_external_v26_lock,
     verify_external_v26_prepared,
 )
-from milai_lab.runners.mem0_native import Mem0NativeRuntime
 from run_langmem_provenance import _trace_emit
 
 

@@ -32,7 +32,7 @@ def _pytest_targets(job: str) -> set[str]:
     commands = re.findall(r"(?m)^\s*uv run --no-sync pytest[^\n]*", job)
     return set(
         re.findall(
-            r"tests/(?:unit|integration|contracts|architecture|memory)/test_[\w]+\.py",
+            r"tests/(?:unit|integration|integrations|contracts|architecture|memory)/test_[\w]+\.py",
             "\n".join(commands),
         )
     )
@@ -45,7 +45,7 @@ def _pytest_commands(job: str) -> list[str]:
 def _marked_local_artifacts() -> tuple[set[str], int]:
     nodes: set[str] = set()
     collected = 0
-    for path in (LAB / "tests/unit").glob("test_*.py"):
+    for path in (LAB / "tests").rglob("test_*.py"):
         for node in ast.parse(path.read_text()).body:
             if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 continue

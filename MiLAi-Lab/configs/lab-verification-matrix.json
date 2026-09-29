@@ -86,16 +86,24 @@
     "tests/unit/test_application_architecture.py",
     "tests/architecture/test_request_source_identity.py",
     "tests/memory/test_memory_contracts.py",
-    "tests/architecture/test_memory_architecture.py"
+    "tests/architecture/test_memory_architecture.py",
+    "tests/integrations/test_mem0_contracts.py",
+    "tests/integrations/test_simplemem_contracts.py",
+    "tests/integrations/test_external_interfaces.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
     "src/milai_lab/runners/mem0_identity.py",
-    "src/milai_lab/runners/simplemem_native.py"
+    "src/milai_lab/runners/simplemem_native.py",
+    "src/milai_lab/integrations/memory/mem0.py",
+    "src/milai_lab/integrations/memory/simplemem.py"
   ],
   "external_tests": [
     "tests/unit/test_external_memory_v26.py",
-    "tests/unit/test_simplemem_native.py"
+    "tests/unit/test_simplemem_native.py",
+    "tests/integrations/test_mem0_contracts.py",
+    "tests/integrations/test_simplemem_contracts.py",
+    "tests/integrations/test_external_interfaces.py"
   ],
   "local_artifact_tests": [
     "tests/unit/test_contextual_merit_adapter.py::test_v8_selection_requires_declared_config_and_matching_freeze",
@@ -108,10 +116,12 @@
     "tests/unit/test_contextual_v9_prepare.py::test_prepare_accepts_a_frozen_nondefault_arc_identity_without_new_generation",
     "tests/unit/test_contextual_v9_prepare.py::test_prepare_current_notes_preserves_repair_protocol_and_rejects_other_controls",
     "tests/unit/test_freshness_projection.py::test_frozen_merit_loader_and_three_arm_construction",
-    "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery"
+    "tests/unit/test_persistent_memory.py::test_v7_native_actual_template_counts_tools_and_rejects_before_delivery",
+    "tests/integrations/test_mem0_contracts.py::test_native_mem0_contract_matches_frozen_baseline",
+    "tests/integrations/test_simplemem_contracts.py::test_native_simplemem_contract_matches_frozen_baseline"
   ],
-  "local_artifact_collected_nodes": 12,
-  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets",
+  "local_artifact_collected_nodes": 14,
+  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets; S3 exact SDK golden replay additionally requires the frozen existing Mem0 dependency/spaCy/BM25 cache cohort and pinned SimpleMem source/dependency cohort, with MockHTTP and temporary databases",
   "integration_tests": [],
   "simplemem_source_prepare": "tools/prepare_simplemem_text_source.py --prepare",
   "simplemem_dependencies": "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt"

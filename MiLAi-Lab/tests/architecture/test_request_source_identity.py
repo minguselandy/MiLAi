@@ -59,6 +59,9 @@ def test_development_identity_rejects_canonical_request_tampering(
     "src/milai_lab/memory/read_tools.py",
     "src/milai_lab/memory/revision_store.py",
     "src/milai_lab/memory/strict_tools.py",
+    "src/milai_lab/integrations/memory/mem0.py",
+    "src/milai_lab/integrations/memory/simplemem.py",
+    "src/milai_lab/harness/artifact_io.py",
 ])
 def test_foundation_gate_rejects_missing_and_changed_request_sources(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, relative: str,
