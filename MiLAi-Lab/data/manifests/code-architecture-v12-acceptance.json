@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_CODE_ARCHITECTURE_V12_ACCEPTANCE",
-  "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
+  "status": "COMPLETE_IMPLEMENTATION_VERIFIED_AND_MERGED",
   "base_commit": "cca2fd9d1cb4614c44a40ddc0458325d959e6740",
   "plan_sha256": "bf9e748685fcdd7e449a57b50e83d226bce70da5caecff69854642e4c2301db4",
   "criteria": [
@@ -157,8 +157,11 @@
       "requirement": "affected Fast CI passes",
       "phase": "S7",
       "required_evidence": "Successful workflow on exact published implementation head; no skipped required groups",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_REMOTE",
+      "evidence": [
+        "data/diagnostics/code-architecture-v12/publication-evidence.json",
+        "https://github.com/minguselandy/MiLAi/actions/runs/36597268333"
+      ]
     },
     {
       "id": "C14",
@@ -191,7 +194,7 @@
     "S4": "COMPLETE_LOCAL_CHECKS",
     "S5": "COMPLETE_LOCAL_CHECKS",
     "S6": "COMPLETE_LOCAL_CHECKS",
-    "S7": "LOCAL_COMPLETE_REMOTE_CI_PENDING"
+    "S7": "COMPLETE_REMOTE_FAST_PASS_MERGED"
   },
   "explicit_deliverables": {
     "S0": [
@@ -339,13 +342,16 @@
       "commit": "c8b7d81af54df65c4a74b720e7af1e359864cc4b"
     },
     "S7": {
-      "status": "LOCAL_COMPLETE_REMOTE_CI_PENDING",
+      "status": "COMPLETE_REMOTE_FAST_PASS_MERGED",
       "report": "docs/CODE_ARCHITECTURE_V12_S7_RESULTS.md",
       "evidence": "data/diagnostics/code-architecture-v12/s7-engineering-evidence.json",
       "current_import_map": "data/manifests/code-architecture-v12-current-import-map.json",
       "preservation": "data/diagnostics/code-architecture-v12/final-preservation-evidence.json",
       "note": "Final independent fixed-policy test file: 199 passed; earlier Core204 overlaps. Foundation55, strict typing, offline packaging and isolated install evidence recorded. C13 awaits published-head Fast CI.",
-      "commit": "2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba"
+      "commit": "2ecd5630a5c0ce8ae3e19be9f20cdb5597835bba",
+      "implementation_head": "a944742ce786ac693c08ac69c4377f82a39afd09",
+      "merge_commit": "48ad5439666d5398dff588b052dd80bd04e4ba4b",
+      "publication_evidence": "data/diagnostics/code-architecture-v12/publication-evidence.json"
     }
   },
   "local_review": {
@@ -358,9 +364,19 @@
   },
   "publication": {
     "PR": "https://github.com/minguselandy/MiLAi/pull/76",
+    "implementation_head": "a944742ce786ac693c08ac69c4377f82a39afd09",
+    "merge_commit": "48ad5439666d5398dff588b052dd80bd04e4ba4b",
+    "Fast": "https://github.com/minguselandy/MiLAi/actions/runs/36597268333",
+    "status": "MERGED_VERIFIED",
+    "evidence": "data/diagnostics/code-architecture-v12/publication-evidence.json",
     "first_run": "https://github.com/minguselandy/MiLAi/actions/runs/36595782771",
     "first_run_conclusion": "failure",
-    "repair_evidence": "data/diagnostics/code-architecture-v12/ci-repair-evidence.json",
-    "status": "REPAIR_LOCAL_PASS_NEW_HEAD_CI_PENDING"
+    "repair_evidence": "data/diagnostics/code-architecture-v12/ci-repair-evidence.json"
+  },
+  "final_review": {
+    "date": "2026-09-30",
+    "passed_criteria": 15,
+    "pending": [],
+    "scope": "All v12 engineering criteria met by local and exact implementation-head Fast evidence. Semantic experiments remain paused; broader research goal remains incomplete. This metadata-only closeout follows code merge."
   }
 }

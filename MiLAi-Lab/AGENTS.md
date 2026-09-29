@@ -2,12 +2,14 @@
 
 ## Current authorization
 
-The active user Goal authorizes full execution of
+The user authorized full execution of
 [code organization and boundary plan v12.0](docs/MILAI_CODE_ORGANIZATION_BOUNDARY_PLAN_20260929_v12.0.md).
 Its PLAN_ONLY metadata is the original planning snapshot, not a refusal of current execution.
 Work in `/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab`,
 based on main `cca2fd9d1cb4614c44a40ddc0458325d959e6740`.
-The code-organization Goal is active; all semantic experiments remain paused.
+The v12 implementation passed all fifteen criteria and merged in PR #76; see
+[the final report](docs/CODE_ARCHITECTURE_V12_RESULTS.md). All semantic experiments remain paused.
+This completed code-organization scope does not authorize further research execution.
 No real Host, embedding, Judge, PostgreSQL experiment, model download, deployment or service
 configuration change is authorized by v12. Product remains NO_GO.
 

@@ -1,6 +1,6 @@
 # v12 执行与验收记录
 
-状态：LOCAL_COMPLETE_REMOTE_CI_PENDING；代码组织 Goal active，语义实验暂停。当前源码基线为 `cca2fd9`。
+状态：COMPLETE_IMPLEMENTATION_VERIFIED_AND_MERGED；代码整理完成，语义实验暂停。当前源码基线为 `cca2fd9`。
 [计划](MILAI_CODE_ORGANIZATION_BOUNDARY_PLAN_20260929_v12.0.md)与[基线](CODE_ARCHITECTURE_V12_BASELINE.md)
 定义完整范围；[验收矩阵](../data/manifests/code-architecture-v12-acceptance.json)按十五项完成判据逐项记录。
 
@@ -13,7 +13,7 @@
 | S4 benchmark lifecycle | 本地检查完成 | 提取公共prepare/start/finish/identity/costs，移除跨runner公共依赖 |
 | S5 provider pipeline | 本地检查完成 | 通用hooks与外部方法注入，冻结wire/容量等价 |
 | S6 orchestration | 本地检查完成 | writer policy独立归属，phase生命周期保留 |
-| S7 boundaries / types / docs / publication | 本地完成；远端待验 | DAG/facade/identity/optional/build自动门禁、逐项验收与FastCI |
+| S7 boundaries / types / docs / publication | 完成，PR #76 已合并 | DAG/facade/identity/optional/build自动门禁、逐项验收与FastCI |
 
 S0已完成170文件静态盘点、真实反向依赖定位及16个RequestContext渲染/4个错误基线。
 S1已完成合同/呈现迁移及本地验证，并提交为 `02dfacdc75eab478c0d4a49f9765c82073dd7929`，
@@ -25,7 +25,8 @@ S1已完成合同/呈现迁移及本地验证，并提交为 `02dfacdc75eab478c0
 见[S6结果](CODE_ARCHITECTURE_V12_S6_RESULTS.md)，提交为
 `c8b7d81af54df65c4a74b720e7af1e359864cc4b`。S7 正式门禁、本地验收与包检查完成，源码已停止写入。
 S2–S5各自已完成改动前专属golden及迁移后对照；S6亦已完成writer/accounting完整对照与必要工程检查，
-S7 正式门禁已完成；远端 CI 与发布合并仍待完成，不能用其它阶段的检查替代。
+S7 正式门禁及 [Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36597268333) 已完成，PR #76 合并为 `48ad5439666d5398dff588b052dd80bd04e4ba4b`。
+首轮 CLI 类型失败、最小修复和最终证据见 [S7 报告](CODE_ARCHITECTURE_V12_S7_RESULTS.md)。
 旧代理在继续时已不在live列表，已按相同模型/职责重新启用Sol与Luna；Astra仅分析
 S5旧构造参数兼容与无方法依赖之间的具体设计冲突，不承担源码写入。
 原AGENTS按原字节归档，v12 plan按原字节复制，旧工作树/草稿/ledger保持。

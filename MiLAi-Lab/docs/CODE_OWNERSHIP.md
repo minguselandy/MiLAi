@@ -29,5 +29,5 @@ Luna high 负责 Git 发布。每个文件同时只有一个写入负责人。As
 
 `baselines/` 不是一个统一的底层服务层：真实 Agent/方法配方、观察设施、身份模块和完整 facade
 必须按实际职责区分。它们均不能反向导入 runner；旧目录名不能成为隐藏依赖的豁免。
-S7 将活动源码的 owner 与实际验证组对应，完成情况见阶段报告；仅属于 Foundation discovery
+S7 已将活动源码的 owner 与实际验证组对应，证据见阶段报告；仅属于 Foundation discovery
 范围不能替代真实 strict 检查和所需可选依赖。

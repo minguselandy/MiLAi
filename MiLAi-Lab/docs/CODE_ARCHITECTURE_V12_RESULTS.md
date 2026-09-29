@@ -1,6 +1,6 @@
 # v12 代码结构整理总体报告
 
-状态：本地工程整理与验收完成。S0–S6 已保留分阶段提交；S7 待集成提交与远端 Fast CI、合并。
+状态：v12 工程整理验收完成，代码已通过 Fast CI 并合入 main。十五项判据均有证据；本页为合并后的文档归档。
 基线为 `cca2fd9d1cb4614c44a40ddc0458325d959e6740`，完整范围见
 [v12 计划](MILAI_CODE_ORGANIZATION_BOUNDARY_PLAN_20260929_v12.0.md)与
 [十五项验收矩阵](../data/manifests/code-architecture-v12-acceptance.json)。
@@ -35,7 +35,7 @@
 | S4 benchmark 公共流程 | `2bc50583` | [S4](CODE_ARCHITECTURE_V12_S4_RESULTS.md) |
 | S5 Provider / 方法解耦 | `96a6ce17` | [S5](CODE_ARCHITECTURE_V12_S5_RESULTS.md) |
 | S6 writer 编排与 trace 计账 | `c8b7d81a` | [S6](CODE_ARCHITECTURE_V12_S6_RESULTS.md) |
-| S7 自动边界、类型与发布 | 本地完成；发布待验 | [S7](CODE_ARCHITECTURE_V12_S7_RESULTS.md) |
+| S7 自动边界、类型与发布 | `2ecd5630`；CI 修复 `a944742c` | [S7](CODE_ARCHITECTURE_V12_S7_RESULTS.md) |
 
 迁移前冻结合成输入和合法错误，迁移后比较原消息、实际 MockHTTP、工具/Store、回执、
 持久化、容量与费用；必要构建核对 sdist/wheel 和安装来源。各阶段报告列出检查范围、
@@ -67,6 +67,12 @@ S7 正式 DAG/facade/identity/type/optional/package 门禁已完成，详细检�
 本轮新增真实 Host/embedding/Judge 调用均为 0。连续账本保持 6,145 次 generation、
 11,407,086 generation tokens、416,930 embedding tokens；没有清零费用或修复历史失败。
 
-十五项判据中十四项本地通过，C13 等待本次实际发布实现对应的 Fast CI。
-[PR #76](https://github.com/minguselandy/MiLAi/pull/76) 已发布，S7 提交为 `2ecd5630`。首轮 CI 的 Foundation CLI 类型错误已最小修复；等待新提交验证，尚未合并。首轮失败与本地检查漏项见 S7 报告。
+十五项判据全部通过：[PR #76](https://github.com/minguselandy/MiLAi/pull/76) 已以 merge commit 合并，保留九个实现提交。
+已验证实现 head 为 `a944742ce786ac693c08ac69c4377f82a39afd09`，远端 main 合并 SHA 为 `48ad5439666d5398dff588b052dd80bd04e4ba4b`。
+[完整 Fast CI](https://github.com/minguselandy/MiLAi/actions/runs/36597268333) 的 Lab、Foundation、External、边界、身份、一致性和汇总门禁全部通过。
+无关 Product/Archive jobs 按条件跳过，不计作通过，也不声称完成 Full composition。
+
+首次 CI 的 Foundation CLI 类型错误和本地漏检已保留于 S7 报告；最小修复使用 Mapping 注解，
+没有改变输出行为。[发布证据](../data/diagnostics/code-architecture-v12/publication-evidence.json)记录精确版本、CI job 链接和合并后保留核查。
+本次归档只更新文档/验收元数据，不改变通过验证的实现。
 结构回滚基线为 `cca2fd9d1cb4614c44a40ddc0458325d959e6740`，分阶段提交便于逐项审查。
