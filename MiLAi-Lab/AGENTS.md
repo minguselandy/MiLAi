@@ -1,5 +1,19 @@
 # MiLAi Lab agent instructions
 
+## Current merge authorization: 2026-09-29
+
+The user explicitly requested organizing GitHub commits, completing repository merges and
+clarifying code structure. This authorizes integrating the reviewed Lab PR chain into main
+with merge commits and preserving historical source SHAs. It supersedes historical
+no-main/no-old-PR-merge restrictions below for this integration task only.
+Root owns navigation and merge evidence; Sol xhigh owns necessary source/CI fixes; Luna high
+owns commit, push, PR state and merge operations. Do not bypass failing required checks.
+A superseded PR may be closed only after verifying its changes are already incorporated;
+retain its original evidence and branch. Preserve all original worktrees and drafts.
+The research Goal remains paused; no experiment, model asset download, deployment, service
+change or Product promotion is authorized. R2's real failure and all cost ledgers remain.
+
+
 ## Current code-organization authorization: 2026-09-29
 
 The user explicitly requested project review, code-architecture optimization and GitHub

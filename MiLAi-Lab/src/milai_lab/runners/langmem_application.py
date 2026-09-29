@@ -26,7 +26,7 @@ from milai_lab.application.tools import (
     BUSINESS_SCHEMAS as BUSINESS_SCHEMAS,
 )
 from milai_lab.application.tools import (
-    _business_tools,
+    _business_tools as _business_tools,
 )
 from milai_lab.application.tools import (
     native_business_tools as native_business_tools,
