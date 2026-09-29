@@ -70,12 +70,17 @@ def boundary_policy(value: Any) -> dict[str, Any] | None:
     model_view = value.get("model_view", "full")
     if not isinstance(model_view, str) or model_view not in {"full", "compact_v6"}:
         raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
+    assistant_role_labels = value.get("assistant_role_labels", "legacy")
+    if not isinstance(assistant_role_labels, str) or assistant_role_labels not in {
+        "legacy", "native_roles_only"
+    }:
+        raise ValueError("MEMORY_BOUNDARY_CONFIG_INVALID")
     if not value.get("enabled", False):
         return None
     policy = {"enabled": True, "candidate_count_threshold": 32,
               "candidate_token_threshold": 6000, "query_limit": 10,
               "attention_enabled": False, "memory_placement": "system",
-              "model_view": "full", **value}
+              "model_view": "full", "assistant_role_labels": "legacy", **value}
     if any(type(policy[key]) is not int or policy[key] <= 0 for key in (
         "candidate_count_threshold", "candidate_token_threshold", "query_limit"
     )) or type(policy["attention_enabled"]) is not bool:
@@ -322,7 +327,9 @@ class MemoryBoundaryView:
                 }
                 # Replace the earlier v3 receipt prefix only in this v4 request copy.
                 copy["content"] = original["content"]
-            elif kind == "ai":
+            elif kind == "ai" and (self.policy or {}).get(
+                "assistant_role_labels", "legacy"
+            ) == "legacy":
                 label = ("[WORKING HYPOTHESIS]" if original.get("tool_calls") else
                          "[ASSISTANT HISTORY - prior model output]")
                 if original.get("tool_calls") and copy.get("tool_calls"):
