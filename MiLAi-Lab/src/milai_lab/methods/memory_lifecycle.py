@@ -10,8 +10,8 @@ from typing import Any
 
 from langchain_core.messages import AIMessage, BaseMessage, ToolMessage
 
+from milai_lab.application.journal import BusinessActionJournal
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
-from milai_lab.runners.langmem_foundation import BusinessActionJournal
 
 FORMATION_PROTOCOL_ID = "prospective_retention_duty_v2"
 FORMATION_CUE = (

@@ -1,0 +1,505 @@
+{
+  "kind": "MILAI_ARCHITECTURE_REFACTOR_ACCEPTANCE",
+  "date": "2026-09-29",
+  "base_commit": "091dcbd48dc1800e5b8cc7f0ee3066dc00a76311",
+  "branch": "refactor/lab-architecture-20260929",
+  "status": "LOCAL_ENGINEERING_ACCEPTED",
+  "experiment_goal": "PAUSED",
+  "roles": {
+    "source": "gpt-6-sol / xhigh",
+    "documentation_acceptance": "Root",
+    "git_publication": "gpt-6-luna / high"
+  },
+  "scope": "Mechanical application-core extraction; one canonical implementation; compatible old imports; runner orchestration retained.",
+  "source_inventory": {
+    "before_files": 165,
+    "after_files": 170,
+    "before_lines": 48404,
+    "after_lines": 48487,
+    "runner_lines": {
+      "src/milai_lab/runners/langmem_foundation.py": {
+        "before": 424,
+        "after": 9
+      },
+      "src/milai_lab/runners/langmem_application.py": {
+        "before": 826,
+        "after": 552
+      }
+    },
+    "removed_dependency": "methods.memory_lifecycle -> runners.langmem_foundation",
+    "remaining_non_runner_to_runner_imports": [
+      {
+        "source": "src/milai_lab/baselines/langmem_benchmark.py",
+        "target": "milai_lab.runners.mem0_native"
+      },
+      {
+        "source": "src/milai_lab/baselines/langmem_benchmark.py",
+        "target": "milai_lab.runners.simplemem_native"
+      },
+      {
+        "source": "src/milai_lab/baselines/langmem_benchmark.py",
+        "target": "milai_lab.runners.simplemem_native"
+      },
+      {
+        "source": "src/milai_lab/baselines/benchmark_memories.py",
+        "target": "milai_lab.runners.simplemem_native"
+      }
+    ]
+  },
+  "implementation_config_ci_files": [
+    {
+      "path": "src/milai_lab/application/__init__.py",
+      "sha256": "4ba1e2e0d2b73a4acc5c6899d7afa06d57ca3663e9058a2d4d0048728adb8f4c",
+      "bytes": 336
+    },
+    {
+      "path": "src/milai_lab/application/journal.py",
+      "sha256": "d731dda880fd4e09d3c3aa266f31d6aa7cccfa383718a691737f6b9e11694dfb",
+      "bytes": 21547
+    },
+    {
+      "path": "src/milai_lab/application/world.py",
+      "sha256": "ebbf128e85044f296c5be46ddee92ab3bca3efc36cb31e976d1073f89079ba12",
+      "bytes": 7171
+    },
+    {
+      "path": "src/milai_lab/application/tools.py",
+      "sha256": "baabb28184494f302c5aa1d5e444ee6ed3bef62cfda1184f58657836ffde0fda",
+      "bytes": 3654
+    },
+    {
+      "path": "src/milai_lab/application/recovery.py",
+      "sha256": "7110db433bf45d921d9730a59bbe82bab4b240e89c5335cc17b21360d03f5739",
+      "bytes": 7698
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_foundation.py",
+      "sha256": "d113c45fced3f635bdda739e542dec3eed833f561c10a16405be887934c5e8bf",
+      "bytes": 358
+    },
+    {
+      "path": "src/milai_lab/runners/langmem_application.py",
+      "sha256": "3dc6ba887d76bdb154c153ada60c1bac9f5218b58f81919b92296ab3df92cc84",
+      "bytes": 31665
+    },
+    {
+      "path": "src/milai_lab/runners/frozen_action_continuation.py",
+      "sha256": "4cc7375f72c88346fa39ad3b811d45cf6504c70a250f421b350cab240650ad63",
+      "bytes": 23041
+    },
+    {
+      "path": "src/milai_lab/methods/memory_lifecycle.py",
+      "sha256": "f71841e57ef2e6abeac02e6ae1787f19fed8187dc3e2ed9e322ba7e412677316",
+      "bytes": 9841
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_identity.py",
+      "sha256": "dfd18be65ca35622e5ae64debb5b5bf7524308472db2309387d5639a83a02a94",
+      "bytes": 4800
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_b1_identity.py",
+      "sha256": "6186098b99e8d050b670569b3149b061a5b7ddb6fa9114d7ae99a9cef91156fb",
+      "bytes": 5921
+    },
+    {
+      "path": "src/milai_lab/methods/freshness_projection/identity.py",
+      "sha256": "bc3e9b4fe6934f1ea8b9bd179112d206553003b9e7c53d5c3656d662397a5eaa",
+      "bytes": 18647
+    },
+    {
+      "path": "tools/run_langmem_foundation.py",
+      "sha256": "40985561262a514640a6d77aefc3220ca88dca89c057d9c660d9657ceed59d79",
+      "bytes": 8452
+    },
+    {
+      "path": "tests/unit/test_application_architecture.py",
+      "sha256": "ec7c8713601207211e21309fe96397463d5679f31efbbf27c84b486617698832",
+      "bytes": 6459
+    },
+    {
+      "path": "configs/lab-verification-matrix.json",
+      "sha256": "29283d0b5eaf0a53759df36e90f786da4377752750ae4c2d84f2b390ce5ab14b",
+      "bytes": 5485
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "38759e470209e7cea546588df68657935101cd59127cab0a2ea91914f264f521",
+      "bytes": 4039
+    },
+    {
+      "path": "../.github/workflows/fast.yml",
+      "sha256": "fbbc5202b99512b2ff60a81f7a64a1e1be79b8fbfa417517ccdac59023482ff4",
+      "bytes": 18638
+    },
+    {
+      "path": "../.github/workflows/ci.yml",
+      "sha256": "37adbde08d3b43c9a7abccd1ec8c9354bd75a8cc3058cdaf0677951bf81aa46f",
+      "bytes": 22050
+    }
+  ],
+  "validation_environment": {
+    "python": "existing Lab development environment; commands normalized to python",
+    "PYTHONPATH": "src (this worktree)",
+    "UV_OFFLINE": "1",
+    "PIP_NO_INDEX": "1",
+    "local_scripts": "artifacts scripts/logs are local evidence, not public runtime or mandatory dependencies"
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_langmem_foundation.py::test_business_journal_replays_result_but_never_unknown_action",
+        "tests/unit/test_langmem_foundation.py::test_application_operation_contract_real_toolnode_and_legal_repetition",
+        "tests/unit/test_langmem_foundation.py::test_business_receipt_and_thread_checkpoint_survive_reopen",
+        "tests/unit/test_langmem_foundation.py::test_json_action_executes_every_upstream_call_in_order",
+        "tests/unit/test_langmem_foundation.py::test_invalid_arguments_return_tool_error_then_graph_corrects",
+        "tests/unit/test_langmem_application.py::test_r2_four_application_lifecycles_in_real_subprocesses",
+        "tests/unit/test_langmem_application.py::test_r2_scoped_query_is_only_source_of_label_id_and_prestate",
+        "tests/unit/test_langmem_application.py::test_r2_pending_multicall_cannot_skip_an_unexecuted_call",
+        "tests/unit/test_langmem_application.py::test_durable_partial_business_result_and_user_scope",
+        "tests/unit/test_langmem_application.py::test_phase_resume_and_local_capacity_only_skip_same_session",
+        "tests/unit/test_langmem_application.py::test_phase_passes_strict_host_contract_without_changing_operator_path",
+        "tests/unit/test_langmem_application.py::test_phase_reopens_checkpoint_and_new_session_starts_fresh",
+        "tests/unit/test_langmem_application.py::test_mock_provider_business_call_commits_real_partial_result",
+        "tests/unit/test_langmem_provenance.py::test_business_journal_key_replay_and_unknown_are_linked_without_reexecution",
+        "tests/unit/test_persistent_memory.py::test_boundary_run_phase_preserves_partial_and_unknown_effects_without_replay"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/01-moved-contracts.log",
+      "log_sha256": "11c5a0e5e5c6c2504f148d437b595f11a06d18e851f418da22d91967f0f3c6db"
+    },
+    {
+      "command": [
+        "python",
+        "artifacts/architecture-20260929/compare_migration.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/02-equivalence.log",
+      "log_sha256": "50ea4237eea5c729fcbd2a0593e18687a7cd6d43f0fb5c4c3294c72e27bfce06"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_application_architecture.py",
+        "tests/unit/test_local_state_attention.py::test_turn_end_capacity_closes_tail_but_other_fault_only_collects",
+        "tests/unit/test_frozen_action_continuation.py::test_frozen_contract_rejects_changed_catalog_and_parallel_first_calls",
+        "tests/unit/test_writer_policy.py::test_native_host_policy_keeps_the_original_memory_business_catalog",
+        "tests/unit/test_freshness_projection.py::test_observation_reminder_requires_current_journal_bound_business_receipt",
+        "tests/unit/test_freshness_projection.py::test_reconciliation_uses_only_pre_action_full_exact_refs_and_real_ok"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/03-architecture-consumers.log",
+      "log_sha256": "bd6ec0926d6b2fdc21e0122d926e438ec0f199319464e0823c44a23e1a62662b"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/application",
+        "src/milai_lab/runners/langmem_foundation.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/frozen_action_continuation.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/baselines/langmem_identity.py",
+        "src/milai_lab/baselines/langmem_b1_identity.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tools/run_langmem_foundation.py",
+        "tests/unit/test_application_architecture.py"
+      ],
+      "exit_code": 1,
+      "local_log": "artifacts/architecture-20260929/04-ruff-initial.log",
+      "log_sha256": "807127282a682895b5d1dbbdb40d54d8ff24d538f6ce3774a422b91294654a7f"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "mypy",
+        "src/milai_lab/application",
+        "src/milai_lab/runners/langmem_foundation.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/frozen_action_continuation.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/baselines/langmem_identity.py",
+        "src/milai_lab/baselines/langmem_b1_identity.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tools/run_langmem_foundation.py"
+      ],
+      "exit_code": 1,
+      "local_log": "artifacts/architecture-20260929/05-mypy.log",
+      "log_sha256": "33aeb19a2bd25be41ac98f25ff62436aa41cdfc3d8ae59313973ac70d7b2098f"
+    },
+    {
+      "command": [
+        "python",
+        "tools/check_verification_matrix.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/06-verification-matrix.log",
+      "log_sha256": "b894ce39783782dddeb1bf008be50362590a7a1b3c0bac420f0f5bdf737e3044"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "--fix",
+        "src/milai_lab/application",
+        "src/milai_lab/runners/langmem_foundation.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/frozen_action_continuation.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/baselines/langmem_identity.py",
+        "src/milai_lab/baselines/langmem_b1_identity.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tools/run_langmem_foundation.py",
+        "tests/unit/test_application_architecture.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/07-ruff-fix.log",
+      "log_sha256": "18a1870e43654de125f6cf52d247a1e8da43d31a58999f7c8f4b52783084d1be"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "mypy",
+        "src/milai_lab/application/__init__.py",
+        "src/milai_lab/application/journal.py",
+        "src/milai_lab/application/recovery.py",
+        "src/milai_lab/application/tools.py",
+        "src/milai_lab/application/world.py",
+        "src/milai_lab/runners/langmem_foundation.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/frozen_action_continuation.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/baselines/langmem_identity.py",
+        "src/milai_lab/baselines/langmem_b1_identity.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tools/run_langmem_foundation.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/08-mypy-final.log",
+      "log_sha256": "8f3f4c0ebcb835e848682f2c6610a1bf32c86a993bdb626d9ff36e3a49408398"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/09-package-boundary.log",
+      "log_sha256": "ba28c60540449b9f0d9dfa8c65e1d768339fcc0a3e02e47dee0f4c7ed89b9fa3"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/10-tools-boundary.log",
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "command": [
+        "python",
+        "artifacts/architecture-20260929/build_distribution.py"
+      ],
+      "exit_code": 1,
+      "local_log": "artifacts/architecture-20260929/11-distribution.log",
+      "log_sha256": "afca0c94150432f392a2e080dcaf8d6578fc6e6e333009cea955203633f680df"
+    },
+    {
+      "command": [
+        "python",
+        "artifacts/architecture-20260929/build_distribution.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/12-distribution-final.log",
+      "log_sha256": "bcc59aeb93c70897cd17266ce819cc886ca2a597eab3fb4ebf280952fd6a4ec5"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/application",
+        "src/milai_lab/runners/langmem_foundation.py",
+        "src/milai_lab/runners/langmem_application.py",
+        "src/milai_lab/runners/frozen_action_continuation.py",
+        "src/milai_lab/methods/memory_lifecycle.py",
+        "src/milai_lab/baselines/langmem_identity.py",
+        "src/milai_lab/baselines/langmem_b1_identity.py",
+        "src/milai_lab/methods/freshness_projection/identity.py",
+        "tools/run_langmem_foundation.py",
+        "tests/unit/test_application_architecture.py"
+      ],
+      "exit_code": 0,
+      "local_log": "artifacts/architecture-20260929/13-ruff-final.log",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  ],
+  "check_counts": {
+    "pytest_nodes": 31,
+    "pytest_failures": 0,
+    "pytest_batches": 2,
+    "real_subprocess_recovery_cases": 4,
+    "recovery_subprocesses": 12,
+    "ast_definitions_equal": 10,
+    "schema_assignments_equal": 2,
+    "golden_comparisons": [
+      "business catalog/receipts/SQLite bytes",
+      "native journal JSON/results/errors/effects"
+    ],
+    "ruff_files": 14,
+    "mypy_files": 13,
+    "boundary_checks": 2,
+    "verification_matrix_checks": 1,
+    "sdist_builds_completed": 1,
+    "wheel_builds_from_sdist_completed": 1,
+    "isolated_project_installs": 1,
+    "isolated_installed_lab_modules": 55,
+    "final_validation_groups_passed": 8,
+    "initial_failed_checks_preserved": 3
+  },
+  "compatibility": {
+    "equivalence_path": "artifacts/architecture-20260929/migration-equivalence.json",
+    "equivalence_sha256": "5c9c020e4407d9466accd57733cd7b1aa78a7fceb3a761d08bab5b0d3dae3f65",
+    "final_ast_hashes_still_match": true,
+    "old_imports_same_objects": true,
+    "recovery_parameter_signature_preserved": true,
+    "world_uuid_injection_alias_preserved": true,
+    "schema_only_none_world_supported": true,
+    "existing_runner_global_monkeypatch_cases_passed": true,
+    "world_and_package_entry_need_no_optional_sdk": true,
+    "application_to_runner_import_guard": "Static unit regression checks absolute and relative imports.",
+    "defaults_requests_schemas_results_persistent_identity": "Unchanged; business and recovery behavior retained.",
+    "private_global_monkeypatch_scope": "Only actual existing consumers were checked; moving implementation globals is not a general monkeypatch-forwarding facility."
+  },
+  "source_identity": {
+    "canonical_source_files": [
+      "src/milai_lab/application/__init__.py",
+      "src/milai_lab/application/journal.py",
+      "src/milai_lab/application/world.py",
+      "src/milai_lab/application/tools.py",
+      "src/milai_lab/application/recovery.py"
+    ],
+    "explicit_current_gates": [
+      {
+        "path": "src/milai_lab/baselines/langmem_identity.py",
+        "behavior": "Require all canonical files before checking every source hash."
+      },
+      {
+        "path": "src/milai_lab/baselines/langmem_b1_identity.py",
+        "behavior": "REQUIRED_OVERLAY includes the canonical files."
+      },
+      {
+        "path": "src/milai_lab/methods/freshness_projection/identity.py",
+        "behavior": "REQUIRED_RUNTIME and derived SER/lifecycle/application sets include the canonical files."
+      },
+      {
+        "path": "tools/run_langmem_foundation.py",
+        "behavior": "Development spike hashes all canonical files and rejects changed identity."
+      }
+    ],
+    "recursive_collectors_unchanged": [
+      "src/milai_lab/runners/persistent_memory.py",
+      "src/milai_lab/runners/shared_record_use.py"
+    ],
+    "historical_locks": "Unchanged. Frozen historical results reproduce at their original commits; this tree requires a new source identity.",
+    "new_freezes_created": 0
+  },
+  "initial_failures": [
+    {
+      "log": "artifacts/architecture-20260929/04-ruff-initial.log",
+      "cause": "Four import-format issues and a regex raw-string marker.",
+      "fix": "Scoped Ruff import ordering and explicit raw regex; no function-body change. Final non-mutating Ruff check 13 passed."
+    },
+    {
+      "log": "artifacts/architecture-20260929/05-mypy.log",
+      "cause": "Canonical world did not explicitly export uuid for the compatible runner injection path.",
+      "fix": "import uuid as uuid; final explicit 13-file mypy passed."
+    },
+    {
+      "log": "artifacts/architecture-20260929/11-distribution.log",
+      "cause": "Cached hatchling backend dependency tomlkit was absent from the build process import path.",
+      "fix": "Use the already cached tomlkit path; offline sdist-to-wheel build and isolated install passed; no dependency installed."
+    },
+    {
+      "cause": "Root static inventory initially attempted to parse LICENSE as Python.",
+      "fix": "Restricted inventory to .py; no source or experiment data mutation."
+    },
+    {
+      "cause": "Root acceptance export initially used files instead of baseline_source as the inventory key.",
+      "fix": "Corrected exporter key before writing public manifest; no implementation mutation."
+    }
+  ],
+  "distribution": {
+    "isolated_project_install": "artifacts/architecture-20260929/wheel-install",
+    "new_dependency_installations": 0,
+    "download_requests": 0,
+    "sdist": {
+      "path": "artifacts/architecture-20260929/dist-attempt2/milai_lab-0.1.0.tar.gz",
+      "sha256": "4c99d90eba4eb50d13542a5793c6f730d4455d2350ecde2408f335efbebcb867"
+    },
+    "wheel_built_from_sdist": {
+      "path": "artifacts/architecture-20260929/dist-attempt2/milai_lab-0.1.0-py3-none-any.whl",
+      "sha256": "fc675fb69ce5c1879deb58a640988c0207eab364742c8b13531c7bc6dc740cfc"
+    },
+    "canonical_source_payloads_equal": true,
+    "isolated_full_imports": "PASS",
+    "world_import_without_site_packages": "PASS"
+  },
+  "real_calls": {
+    "generation": 0,
+    "embedding": 0,
+    "judge": 0,
+    "postgresql": 0,
+    "downloads": 0,
+    "new_dependency_installations": 0
+  },
+  "preserved_experimental_ledger": {
+    "path_in_original_checkout": "MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+    "generation_requests": 6145,
+    "generation_tokens": 11407086,
+    "embedding_tokens": 416930
+  },
+  "preserved_assets": {
+    "original_repair_v10_untracked_drafts": 9,
+    "historical_locks_and_v10_reports_unchanged": true,
+    "original_v27_draft": "retained in original checkout",
+    "private_traces_databases_and_builds": "not published"
+  },
+  "limitations": [
+    "Engineering checks use deterministic MockHTTP and local SQLite/Store; no model capability claim.",
+    "R2 unsupported facts/key mismatch and paused experiment evidence were not changed or repaired.",
+    "Optional SDK warnings were retained; no runtime or dependency migration was performed.",
+    "Only affected checks ran; historical source locks and broad benchmarks were not rerun.",
+    "Original R2 failure remains unresolved; no effect, latency or cost improvement is claimed.",
+    "External backend runner dependencies remain; no broad historical runner rewrite.",
+    "Local checks passed; remote GitHub CI is a separate result."
+  ],
+  "local_engineering_record": {
+    "path": "artifacts/architecture-20260929/engineering.json",
+    "sha256": "21b5bbb13ef8cdfb2e939829bcdd7fafbf61147683afc18972f3173449c186d8"
+  },
+  "documentation_validation": {
+    "local_links_checked": 108,
+    "missing_links": 0,
+    "json_parsed": true
+  }
+}
