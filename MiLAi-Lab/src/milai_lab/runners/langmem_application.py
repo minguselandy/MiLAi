@@ -4,10 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-import sqlite3
-import threading
 import time
-import uuid
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -15,10 +12,27 @@ from typing import Any, Literal, cast
 import httpx
 from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
-from langgraph.graph import MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode
 from langmem import create_manage_memory_tool  # type: ignore[import-untyped]
 
+from milai_lab.application.journal import BusinessActionJournal as BusinessActionJournal
+from milai_lab.application.journal import UnknownBusinessAction as UnknownBusinessAction
+from milai_lab.application.recovery import (
+    recover_pending_application_call as recover_pending_application_call,
+)
+from milai_lab.application.tools import (
+    BUSINESS_NAMES as BUSINESS_NAMES,
+)
+from milai_lab.application.tools import (
+    BUSINESS_SCHEMAS as BUSINESS_SCHEMAS,
+)
+from milai_lab.application.tools import (
+    _business_tools as _business_tools,
+)
+from milai_lab.application.tools import (
+    native_business_tools as native_business_tools,
+)
+from milai_lab.application.world import ApplicationWorld as ApplicationWorld
+from milai_lab.application.world import uuid as uuid
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     SYSTEM_PROMPT,
@@ -40,11 +54,6 @@ from milai_lab.methods.local_state_attention.writers import (
     run_writer_boundary,
 )
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
-from milai_lab.runners.langmem_foundation import (
-    BusinessActionJournal,
-    UnknownBusinessAction,
-    native_business_tools,
-)
 
 WriterPolicy = Literal["native_host", "host_both", "boundary_both", "overlap"]
 WRITER_POLICY_INSTRUCTIONS = {
@@ -189,180 +198,6 @@ def run_writer_policy_turn(
                           if runtime.model.capacity_path is not None else None),
     }
 
-BUSINESS_SCHEMAS: list[dict[str, Any]] = [
-    {"type": "function", "function": {
-        "name": "reserve_and_label",
-        "description": (
-            "Reserve an item for the current user and attempt its label. "
-            "A failed label may leave a real reservation. One call is one attempt."),
-        "parameters": {"type": "object", "properties": {
-            "item_key": {"type": "string", "description": (
-                "Copy the complete item reference including qualifiers; use this same exact "
-                "key for later reads.")},
-            "quantity": {"type": "integer", "minimum": 1},
-            "destination": {"type": "string"}, "packing": {"type": "string"}},
-            "required": ["item_key", "quantity", "destination", "packing"],
-            "additionalProperties": False}}},
-    {"type": "function", "function": {
-        "name": "get_reservation",
-        "description": "Read the current user's actual reservation and label state for an item.",
-        "parameters": {"type": "object", "properties": {
-            "item_key": {"type": "string", "description": (
-                "Copy the complete item reference including qualifiers; use the exact "
-                "key used for the reservation.")}}, "required": ["item_key"],
-            "additionalProperties": False}}},
-    {"type": "function", "function": {
-        "name": "complete_label",
-        "description": (
-            "Create the label for the current user's existing reservation. "
-            "This does not reserve again or dispatch anything."),
-        "parameters": {"type": "object", "properties": {
-            "reservation_id": {"type": "string"}}, "required": ["reservation_id"],
-            "additionalProperties": False}}},
-]
-BUSINESS_NAMES = [entry["function"]["name"] for entry in BUSINESS_SCHEMAS]
-
-
-class ApplicationWorld:
-    """Compute receipts from committed, user-scoped SQLite state."""
-
-    def __init__(self, path: Path, initial_label_available: bool) -> None:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        self.conn = sqlite3.connect(path, check_same_thread=False)
-        self.tool_lock = threading.RLock()
-        self.conn.row_factory = sqlite3.Row
-        with self.conn:
-            self.conn.execute("CREATE TABLE IF NOT EXISTS settings "
-                              "(name TEXT PRIMARY KEY, value INTEGER NOT NULL)")
-            self.conn.execute("CREATE TABLE IF NOT EXISTS world_events "
-                              "(event_id TEXT PRIMARY KEY, available INTEGER NOT NULL)")
-            self.conn.execute(
-                "CREATE TABLE IF NOT EXISTS reservations ("
-                "reservation_id TEXT PRIMARY KEY, user_id TEXT NOT NULL, item_key TEXT NOT NULL, "
-                "quantity INTEGER NOT NULL, destination TEXT NOT NULL, packing TEXT NOT NULL, "
-                "label_status TEXT NOT NULL, UNIQUE(user_id,item_key))")
-            self.conn.execute(
-                "CREATE TABLE IF NOT EXISTS attempts ("
-                "id INTEGER PRIMARY KEY, user_id TEXT NOT NULL, item_key TEXT NOT NULL, "
-                "operation TEXT NOT NULL, outcome TEXT NOT NULL)")
-            self.conn.execute(
-                "INSERT OR IGNORE INTO settings(name,value) VALUES('label_available',?)",
-                (int(initial_label_available),))
-
-    def close(self) -> None:
-        self.conn.close()
-
-    def set_label_available(self, event_id: str, available: bool) -> None:
-        with self.conn:
-            prior = self.conn.execute(
-                "SELECT available FROM world_events WHERE event_id=?", (event_id,)).fetchone()
-            if prior is not None:
-                if prior["available"] != int(available):
-                    raise ValueError("APPLICATION_WORLD_EVENT_CHANGED")
-                return
-            self.conn.execute("UPDATE settings SET value=? WHERE name='label_available'",
-                              (int(available),))
-            self.conn.execute("INSERT INTO world_events VALUES(?,?)",
-                              (event_id, int(available)))
-
-    def _available(self) -> bool:
-        row = self.conn.execute(
-            "SELECT value FROM settings WHERE name='label_available'").fetchone()
-        return bool(row["value"])
-
-    @staticmethod
-    def _receipt(**fields: Any) -> str:
-        return json.dumps(fields, ensure_ascii=False)
-
-    @staticmethod
-    def _state(row: sqlite3.Row) -> dict[str, Any]:
-        return {key: row[key] for key in (
-            "reservation_id", "item_key", "quantity", "destination", "packing",
-            "label_status")}
-
-    def reserve_and_label(self, user_id: str, item_key: str, quantity: int,
-                          destination: str, packing: str) -> str:
-        if quantity < 1 or not all((item_key, destination, packing)):
-            return self._receipt(ok=False, status="invalid_arguments")
-        with self.conn:
-            prior = self.conn.execute(
-                "SELECT * FROM reservations WHERE user_id=? AND item_key=?",
-                (user_id, item_key)).fetchone()
-            if prior is not None:
-                self.conn.execute("INSERT INTO attempts(user_id,item_key,operation,outcome) "
-                                  "VALUES(?,?,'reserve_and_label','duplicate')",
-                                  (user_id, item_key))
-                return self._receipt(ok=False, status="duplicate_reservation_attempt",
-                                     **self._state(prior))
-            reservation_id = "RSV-" + str(uuid.uuid4())
-            self.conn.execute(
-                "INSERT INTO reservations VALUES(?,?,?,?,?,?,?)",
-                (reservation_id, user_id, item_key, quantity, destination, packing,
-                 "not_created"))
-            self.conn.execute("INSERT INTO attempts(user_id,item_key,operation,outcome) "
-                              "VALUES(?,?,'reserve_and_label','reserved')",
-                              (user_id, item_key))
-        if not self._available():
-            row = self.conn.execute("SELECT * FROM reservations WHERE reservation_id=?",
-                                    (reservation_id,)).fetchone()
-            return self._receipt(ok=False, status="reserved_label_failed",
-                                 reason="label_service_unavailable", **self._state(row))
-        with self.conn:
-            self.conn.execute("UPDATE reservations SET label_status='created' "
-                              "WHERE reservation_id=?", (reservation_id,))
-        row = self.conn.execute("SELECT * FROM reservations WHERE reservation_id=?",
-                                (reservation_id,)).fetchone()
-        return self._receipt(ok=True, status="label_created", **self._state(row))
-
-    def get_reservation(self, user_id: str, item_key: str) -> str:
-        row = self.conn.execute(
-            "SELECT * FROM reservations WHERE user_id=? AND item_key=?",
-            (user_id, item_key)).fetchone()
-        return (self._receipt(ok=True, status="found", **self._state(row)) if row
-                else self._receipt(ok=False, status="not_found", item_key=item_key))
-
-    def complete_label(self, user_id: str, reservation_id: str) -> str:
-        row = self.conn.execute(
-            "SELECT * FROM reservations WHERE user_id=? AND reservation_id=?",
-            (user_id, reservation_id)).fetchone()
-        if row is None:
-            return self._receipt(ok=False, status="not_found", reservation_id=reservation_id)
-        if row["label_status"] == "created":
-            return self._receipt(ok=False, status="already_labeled", **self._state(row))
-        if not self._available():
-            return self._receipt(ok=False, status="label_service_unavailable",
-                                 **self._state(row))
-        with self.conn:
-            self.conn.execute("UPDATE reservations SET label_status='created' "
-                              "WHERE reservation_id=?", (reservation_id,))
-            self.conn.execute("INSERT INTO attempts(user_id,item_key,operation,outcome) "
-                              "VALUES(?,?,'complete_label','created')",
-                              (user_id, row["item_key"]))
-        updated = self.conn.execute("SELECT * FROM reservations WHERE reservation_id=?",
-                                    (reservation_id,)).fetchone()
-        return self._receipt(ok=True, status="label_created", **self._state(updated))
-
-    def snapshot(self) -> dict[str, Any]:
-        return {
-            "label_available": self._available(),
-            "reservations": [dict(row) for row in self.conn.execute(
-                "SELECT * FROM reservations ORDER BY user_id,item_key")],
-            "attempts": [dict(row) for row in self.conn.execute(
-                "SELECT * FROM attempts ORDER BY id")],
-        }
-
-
-def _business_tools(world: ApplicationWorld, user_id: str) -> list[Any]:
-    def invoke(method: Callable[..., str], **arguments: Any) -> str:
-        with world.tool_lock:
-            return method(user_id, **arguments)
-
-    functions = {
-        "reserve_and_label": lambda _world, **args: invoke(world.reserve_and_label, **args),
-        "get_reservation": lambda _world, **args: invoke(world.get_reservation, **args),
-        "complete_label": lambda _world, **args: invoke(world.complete_label, **args),
-    }
-    return native_business_tools(None, BUSINESS_SCHEMAS, functions)
 
 
 def _operator_memory_event(event: dict[str, Any], run_id: str, arm_id: str,
@@ -448,115 +283,6 @@ def _collect_turn_tail(agent: Any, scope: FoundationScope,
             "pending_event_ids": result["pending_event_ids"]}
 
 
-def recover_pending_application_call(
-    agent: Any, scope: FoundationScope, journal: BusinessActionJournal,
-    world: ApplicationWorld, runtime: ApplicationRuntime,
-) -> None:
-    """Observe an unknown effect before resuming tools; never replay its mutation."""
-    snapshot = agent.get_state(scope.config())
-    if not snapshot.values or "tools" not in snapshot.next:
-        return
-    messages = snapshot.values["messages"]
-    generated = messages[-1]
-    if not isinstance(generated, AIMessage) or not generated.id:
-        raise UnknownBusinessAction("APPLICATION_RECOVERY_GENERATION_MISSING")
-    thread_id = str(scope.config()["configurable"]["thread_id"])
-    if any(type(call.get("id")) is not str for call in generated.tool_calls):
-        raise UnknownBusinessAction("APPLICATION_RECOVERY_CALL_ID_MISSING")
-    entries = [journal.entry_for_call(thread_id, generated.id, cast(str, call["id"]))
-               for call in generated.tool_calls]
-    pending = [row for row in entries if row is not None and row["status"] == "pending"]
-    if not pending:
-        return
-    # ToolNode may have failed after executing only a prefix of a multi-call message.
-    if any(row is None for row in entries) or any(
-        row is not None and row["status"] == "pending" and
-        row["name"] not in {"reserve_and_label", "complete_label"} for row in entries
-    ):
-        raise UnknownBusinessAction("APPLICATION_RECOVERY_OTHER_CALL_UNRESOLVED")
-    binding = journal.binding
-    if binding is None:
-        raise UnknownBusinessAction("AUTHORIZATION_UNDETERMINED")
-    current_user = next(row for row in reversed(messages) if isinstance(row, HumanMessage))
-    runtime.observer.begin_public_message(scope, binding["public_index"], str(current_user.content))
-    deliveries: list[ToolMessage] = []
-    for original in entries:
-        assert original is not None
-        if original["status"] == "complete":
-            deliveries.append(ToolMessage.model_validate(original["result"]))
-            continue
-        original_key = original["journal_key"]
-        recovery = journal.recovery_for_call(original_key)
-        if recovery is None:
-            queries = [op for op in binding["operations"] if op["tool"] == "get_reservation"
-                       and op["target"] == original["target"]]
-            if len(queries) != 1:
-                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_NOT_AUTHORIZED")
-            query = queries[0]
-            query_call = {"name": "get_reservation", "args": query["args"],
-                          "id": "application-query-" + original_key}
-            query_ai = AIMessage(content="", id="application-recovery-" + original_key,
-                                 tool_calls=[query_call], response_metadata={
-                                     "application_recovery": True,
-                                     "original_journal_key": original_key})
-
-            def observe_query(request: Any, execute: Any) -> Any:
-                return runtime.observer.run_tool(request, lambda item: journal(item, execute),
-                                                 journal)
-
-            # This is an application-origin ToolNode query, not a Host generation.
-            query_node = ToolNode(_business_tools(world, scope.user_id),
-                                  wrap_tool_call=observe_query)
-            query_graph = StateGraph(MessagesState)
-            query_graph.add_node("tools", query_node)
-            query_graph.set_entry_point("tools")
-            query_graph.set_finish_point("tools")
-            result = query_graph.compile().invoke(
-                {"messages": [*messages, query_ai]},
-                config=cast(RunnableConfig, scope.config()))
-            raw = result["messages"][-1]
-            query_entry = journal.entry_for_call(thread_id, str(query_ai.id), query_call["id"])
-            if (not isinstance(raw, ToolMessage) or query_entry is None
-                    or not query_entry["executed"]):
-                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_NOT_EXECUTED")
-            try:
-                observation = json.loads(str(raw.content))
-            except ValueError as error:
-                raise UnknownBusinessAction("APPLICATION_RECOVERY_QUERY_INVALID") from error
-            effect = "unknown"
-            if (isinstance(observation, dict) and observation.get("status") == "found"
-                    and query_entry.get("target_matched") is True):
-                effect = ("confirmed" if observation.get("label_status") == "created"
-                          else "partial" if original["name"] == "reserve_and_label" else "none")
-            elif (isinstance(observation, dict) and observation.get("status") == "not_found"
-                  and all(binding.get("recovery", {}).get(field) is True for field in (
-                      "absence_means_no_effect", "no_deletion", "exclusive_writer"))):
-                effect = "none"
-            recovery = {"origin": "application_recovery", "original_journal_key": original_key,
-                        "original_call_status": "UNKNOWN", "thread_id": thread_id,
-                        "generation_id": original["generation_id"], "call_id": original["call_id"],
-                        "query": query_call, "query_journal_key": query_entry["journal_key"],
-                        "query_result": raw.model_dump(mode="json"), "effect": effect,
-                        "effect_source": "query_observation_not_original_execution_receipt"}
-            journal.record_recovery(original_key, recovery)
-        if recovery["effect"] == "unknown":
-            raise UnknownBusinessAction("APPLICATION_RECOVERY_OBSERVATION_UNRESOLVED")
-        delivery = ToolMessage(
-            content=json.dumps({
-                "status": "ORIGINAL_CALL_OUTCOME_UNKNOWN", "original_receipt": None,
-                "origin": "application_recovery", "original_journal_key": original_key,
-                "query": recovery["query"],
-                "query_receipt": recovery["query_result"]["content"],
-                "observed_effect": recovery["effect"],
-                "effect_source": recovery["effect_source"],
-                "instruction": "Use the actual query observation to choose remaining work; "
-                               "the original call outcome remains unknown.",
-            }, ensure_ascii=False),
-            name=original["name"], tool_call_id=original["call_id"], status="error",
-            additional_kwargs={"application_recovery": recovery})
-        deliveries.append(delivery)
-    # Append a new checkpoint version. Keep original AI text and pending journal entries intact.
-    agent.update_state(scope.config(), {"messages": deliveries}, as_node="tools")
 
 
 def run_phase(script: dict[str, Any], root: Path, run_id: str, arm_id: str,

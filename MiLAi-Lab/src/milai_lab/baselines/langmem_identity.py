@@ -12,6 +12,7 @@ from langmem import (  # type: ignore[import-untyped]
     create_search_memory_tool,
 )
 
+from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import MEMORY_NAMESPACE, RECIPE_ID, SYSTEM_PROMPT
 from milai_lab.harness.contextual_artifacts import digest, read_json
 from milai_lab.providers.langmem_chat import _action_prompt, _action_schema
@@ -45,6 +46,8 @@ def verify_foundation_lock(
     for key, value in expected.items():
         if lock.get(key) != value:
             raise ValueError(f"FOUNDATION_LOCK_{key.upper()}_CHANGED")
+    if not set(APPLICATION_SOURCE_FILES) <= lock["source_sha256"].keys():
+        raise ValueError("FOUNDATION_APPLICATION_SOURCE_MAP_MISSING")
     for relative, value in lock["source_sha256"].items():
         if sha256_file(LAB / relative) != value:
             raise ValueError(f"FOUNDATION_SOURCE_CHANGED:{relative}")

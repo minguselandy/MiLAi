@@ -1,5 +1,23 @@
 # Results index
 
+## Current results and execution status — 2026-09-29
+
+The repair-v10 experiment Goal is **paused**; the new user request authorizes code
+organization only. Product remains NO_GO. Historical “latest” entries below retain their
+original date and do not supersede [current status](LAB_CURRENT_STATUS.md).
+
+| Evidence | Result |
+|---|---|
+| [v10 overall report](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) | Partial output improvement; full research NOT_ACHIEVED |
+| [R1 L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md) | 24 first responses; legacy 4/12 and candidate 2/12 truncations; no tool execution |
+| [R1 L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) | Both 20/20 episodes; labels 178→0; ancillary writes 4 each |
+| [R2 pause](MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md) | Only 2/13 processes; business blocked; unsupported business ID actually persisted |
+| [R4/R5 audit](MILAI_REPAIR_V10_R4_R5_CONTRACT_AUDIT_20260929.md) | Contract/causal diagnosis, no claimed effect repair |
+| [v8/v9 baseline report](MILAI_UNIFIED_V8_V9_EXPERIMENT_REPORT_20260929.md) | Prior negative results and unknown denominators preserved |
+
+## Historical entries
+
+
 Latest scoped memory development: [v8 results](CONTEXTUAL_USER_MEMORY_V8_RESULTS_20260925.md).
 A–E implemented; fixed document sequence and same exposed MERIT arc validated in stages.
 Final original-episode replay: 1/1, original card updated to completed, no stale pending card.

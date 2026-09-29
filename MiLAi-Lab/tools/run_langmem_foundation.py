@@ -11,6 +11,7 @@ from typing import Any
 
 from langchain_core.tools import tool
 
+from milai_lab.application import APPLICATION_SOURCE_FILES
 from milai_lab.baselines.langmem_agent import (
     FoundationScope,
     VLLMEmbeddings,
@@ -50,6 +51,7 @@ def _verify_development_spike(config_path: Path, config: dict[str, Any], run: st
                 "src/milai_lab/providers/langmem_chat.py",
                 "src/milai_lab/runners/langmem_foundation.py",
                 "tools/run_langmem_foundation.py",
+                *APPLICATION_SOURCE_FILES,
             )
         },
     }

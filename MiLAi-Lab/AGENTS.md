@@ -1,5 +1,42 @@
 # MiLAi Lab agent instructions
 
+## Current merge authorization: 2026-09-29
+
+The user explicitly requested organizing GitHub commits, completing repository merges and
+clarifying code structure. This authorizes integrating the reviewed Lab PR chain into main
+with merge commits and preserving historical source SHAs. It supersedes historical
+no-main/no-old-PR-merge restrictions below for this integration task only.
+Root owns navigation and merge evidence; Sol xhigh owns necessary source/CI fixes; Luna high
+owns commit, push, PR state and merge operations. Do not bypass failing required checks.
+A superseded PR may be closed only after verifying its changes are already incorporated;
+retain its original evidence and branch. Preserve all original worktrees and drafts.
+The research Goal remains paused; no experiment, model asset download, deployment, service
+change or Product promotion is authorized. R2's real failure and all cost ledgers remain.
+
+
+## Current code-organization authorization: 2026-09-29
+
+The user explicitly requested project review, code-architecture optimization and GitHub
+publication. This authorizes the separate, behavior-preserving architecture task in
+`/cra/memory/mx_memory/MiLAi-worktrees/architecture-20260929/MiLAi-Lab`, based on report
+`091dcbd48dc1800e5b8cc7f0ee3066dc00a76311`. It supersedes the source-work pause below only
+for this code-organization scope. The experiment Goal remains **paused**; no real Host,
+embedding, Judge, experiment, model download or service change follows from this request.
+
+Root owns current navigation, architecture documents and the review/acceptance record.
+One reused Sol xhigh owns source/config/CI/tests; reused Luna high owns worktree/commit/push.
+Extract reusable application responsibilities from runner orchestration with one canonical
+implementation and compatible old imports. Preserve request bytes, tool schemas/results,
+operation identities, on-disk formats, defaults and historical evidence. This task does not
+claim to fix R2's unsupported business facts or change any experiment result.
+
+Run only affected checks plus needed package/boundary validation for moved modules.
+Do not repeat old experiments or broad benchmarks. Keep the continuous ledger untouched.
+Keep Product NO_GO, preserve the repair-v10 worktree and all its untracked drafts, and publish
+an isolated PR stacked on the report branch; no main or old-PR merge. Historical instructions
+below describe earlier stages; the latest explicit user scope controls current work.
+
+
 ## Latest explicit pause and report-only authorization: 2026-09-29
 
 User said “暂停当前开发”, then authorized summary/report and GitHub publication.

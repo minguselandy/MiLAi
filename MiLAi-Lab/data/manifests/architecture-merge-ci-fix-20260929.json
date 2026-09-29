@@ -1,0 +1,129 @@
+{
+  "kind": "MILAI_APPLICATION_MERGE_CI_FIX_20260929",
+  "status": "LOCAL_FIX_VALIDATED_SOURCE_FROZEN",
+  "parent_head": "bfd22e1afb4d0c522ad7f51a83c71c4421e459dd",
+  "experiment_goal": "PAUSED",
+  "failure": {
+    "run_id": 36532390246,
+    "job_id": 109288836238,
+    "job_name": "Lab LangMem foundation fast gate",
+    "job_url": "https://github.com/minguselandy/MiLAi/actions/runs/36532390246/job/109288836238",
+    "first_breakpoint_utc": "2026-09-29T06:43:36.1203569Z",
+    "error": "src/milai_lab/runners/shared_record_use.py:44: Module milai_lab.runners.langmem_application does not explicitly export attribute _business_tools [attr-defined]",
+    "logs": "artifacts/architecture-20260929/merge-ci-original-job.log",
+    "logs_sha256": "18aadc2cafe17a584022f93bdc695815b0921c537e111c9754dd0aa77f38a1ea"
+  },
+  "competing_explanations": [
+    {
+      "explanation": "The runtime compatibility function was removed or replaced during extraction.",
+      "finding": "Rejected: old runner/shared/persistent imports still reference the same canonical function; previous runtime and subprocess checks passed."
+    },
+    {
+      "explanation": "Strict mypy treats the imported private name as unexported without an explicit self alias.",
+      "finding": "Supported by the precise CI diagnostic; the explicit self alias resolves the four-file consumer mypy check."
+    }
+  ],
+  "source_change": {
+    "path": "src/milai_lab/runners/langmem_application.py",
+    "before_sha256": "3dc6ba887d76bdb154c153ada60c1bac9f5218b58f81919b92296ab3df92cc84",
+    "after_sha256": "1fcf394ebcbce1fb4609e6d5afbc59d263f3202ec7985fbf2d067dee92d85a1f",
+    "diff": "-    _business_tools,\n+    _business_tools as _business_tools,\n",
+    "changed_source_files": 1,
+    "function_and_class_asts_equal": true,
+    "other_17_original_file_hashes_unchanged": true
+  },
+  "checks": [
+    {
+      "command": [
+        "python",
+        "-m",
+        "mypy",
+        "src/milai_lab/runners/shared_record_use.py",
+        "tools/run_shared_record_use.py",
+        "src/milai_lab/runners/persistent_memory.py",
+        "tools/run_persistent_memory.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "src",
+        "UV_OFFLINE": "1",
+        "PIP_NO_INDEX": "1"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 2.908,
+      "log": "artifacts/architecture-20260929/14-merge-consumer-mypy.log",
+      "record": "artifacts/architecture-20260929/14-merge-consumer-mypy.json",
+      "record_sha256": "8ef2c823bb35b434f846fcf29929fff00469fa072189750b991a2568225ef97a",
+      "log_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb"
+    },
+    {
+      "command": [
+        "python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/runners/langmem_application.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "src",
+        "UV_OFFLINE": "1",
+        "PIP_NO_INDEX": "1"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 0.045,
+      "log": "artifacts/architecture-20260929/15-merge-ruff.log",
+      "record": "artifacts/architecture-20260929/15-merge-ruff.json",
+      "record_sha256": "e186e79f51c1ef23f3578483fed6304b35d44a2f84db8bcb80a7d05c32b68aac",
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "command": [
+        "python",
+        "-c",
+        "from milai_lab.application.tools import _business_tools; from milai_lab.runners import langmem_application as app; from milai_lab.runners.shared_record_use import _business_tools as shared; from milai_lab.runners.persistent_memory import _business_tools as persistent; assert app._business_tools is _business_tools is shared is persistent; print(\"PASS old runner/shared/persistent exports reference the same canonical function\")"
+      ],
+      "environment": {
+        "PYTHONPATH": "src",
+        "UV_OFFLINE": "1",
+        "PIP_NO_INDEX": "1"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 2.091,
+      "log": "artifacts/architecture-20260929/16-merge-alias.log",
+      "record": "artifacts/architecture-20260929/16-merge-alias.json",
+      "record_sha256": "503356eba2f378202c59e5f5afc001b81e6ff3a73bf983b350fc83d58a1baf41",
+      "log_sha256": "6612def6d222411fd000496d65f32f25857f8bd248ae86ba9c9d02071bf753d1"
+    }
+  ],
+  "validation_counts": {
+    "consumer_mypy_files": 4,
+    "scoped_ruff_files": 1,
+    "same_object_alias_checks": 1
+  },
+  "reused_previous_evidence": {
+    "path": "artifacts/architecture-20260929/engineering.json",
+    "sha256": "21b5bbb13ef8cdfb2e939829bcdd7fafbf61147683afc18972f3173449c186d8",
+    "tests": 31,
+    "ast_definitions": 10,
+    "sdist_to_wheel_and_isolated_import": "PASS",
+    "not_repeated": true,
+    "historical_receipt_retained": "The original architecture acceptance receipt continues to describe the original commit; this supplemental record covers the explicit import-only fix."
+  },
+  "source_and_merge_risks": [
+    "One canonical implementation and old runtime imports remain compatible.",
+    "Five canonical files remain required in explicit source identities; recursive collectors already cover them.",
+    "World/package entry remain free of optional SDK imports; optional modules retain Foundation CI ownership.",
+    "Remote CI must complete successfully on the next published head before merge; local checks do not replace the required workflow."
+  ],
+  "zero_real_calls": {
+    "generation": 0,
+    "embedding": 0,
+    "judge": 0,
+    "postgresql": 0,
+    "dependency_downloads": 0,
+    "new_dependency_installations": 0
+  },
+  "source_write_stop": true,
+  "source_write_stop_confirmed_utc": "2026-09-29T06:49:29.440916+00:00",
+  "local_record_sha256": "4cc26b2a5c52b654f6d3f3f8d9f548eade5431582825891dbaca5600f6a9c6dc",
+  "remote_status_at_publication": "PENDING_NEW_HEAD_CI"
+}
