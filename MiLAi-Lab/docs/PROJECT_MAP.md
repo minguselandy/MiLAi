@@ -17,6 +17,8 @@
 | 操作授权、重复、partial/unknown 记录 | `application/journal.py` | foundation journal 与 R2 机械反控 |
 | 原生 schema 与工具适配 | `application/tools.py` | schema-only 与原始回执检查 |
 | unknown 后实际查询恢复 | `application/recovery.py` | 多调用 pending 与真实子进程 MockHTTP 检查 |
+| writer 策略与受控触发编排 | `runners/writer_policy.py` | [S6记录](CODE_ARCHITECTURE_V12_S6_RESULTS.md)、writer/phase 合同与导入顺序检查 |
+| 原 LSA trace 与连续预算汇总 | `analysis/trace_accounting.py` | 14 个合成计账边界；不替代 benchmark 的 `trace_costs` |
 | 多阶段应用运行、资源重开 | `runners/langmem_application.py`、`langmem_application_runtime.py` | `tests/unit/test_langmem_application.py` |
 | 请求副本中的记忆/历史呈现 | `memory/presentation.py`；具体策略在 `methods/memory_boundaries.py`；旧 `methods/request_context.py` 为兼容导出 | boundary 与 R1 现有合同；[S1结果](CODE_ARCHITECTURE_V12_S1_RESULTS.md) |
 | 普通记忆形成及共同读取接口 | `baselines/langmem_benchmark.py` | `tests/unit/test_benchmark_memories.py`、unified 检查 |

@@ -162,7 +162,9 @@
     "benchmark_lifecycle": "data/diagnostics/code-architecture-v12/benchmark-execution-golden.json",
     "provider-manual-golden": "data/diagnostics/code-architecture-v12/provider-manual-golden.json",
     "provider-real-golden": "data/diagnostics/code-architecture-v12/provider-real-golden.json",
-    "provider-edges-golden": "data/diagnostics/code-architecture-v12/provider-edges-golden.json"
+    "provider-edges-golden": "data/diagnostics/code-architecture-v12/provider-edges-golden.json",
+    "writer_policy_and_trace_accounting": "data/diagnostics/code-architecture-v12/writer-accounting-golden.json",
+    "writer_policy_and_trace_accounting_deterministic": "data/diagnostics/code-architecture-v12/writer-accounting-deterministic-golden.json"
   },
-  "pending": "S5 three before/after capture groups match full bytes; final engineering acceptance and publication pending. S6 must freeze affected orchestration before migration. This specification is not an equivalence result; stage reports contain actual comparisons and limits."
+  "pending": "S1-S6 phase capture comparisons and local engineering checks completed. S7 formal gates and final remote CI/publication remain pending. S6 original nondeterministic captures are retained; supplementary fixture fixes hash seed, clock and SDK UUID6 randomness. This specification is not final acceptance; see stage reports."
 }

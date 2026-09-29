@@ -14,6 +14,8 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.store.base import BaseStore
 from langmem import create_manage_memory_tool  # type: ignore[import-untyped]
 
+from milai_lab.application.journal import BusinessActionJournal
+from milai_lab.application.tools import native_business_tools
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     build_agent,
@@ -28,7 +30,6 @@ from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.revision_store import canonical_json
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
-from milai_lab.runners.langmem_foundation import BusinessActionJournal, native_business_tools
 
 
 def _fixture_memory_effect(

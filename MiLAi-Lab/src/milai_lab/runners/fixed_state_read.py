@@ -17,6 +17,7 @@ from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMe
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.store.memory import InMemoryStore
 
+from milai_lab.analysis.trace_accounting import _accounting
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     build_agent,
@@ -39,7 +40,6 @@ from milai_lab.runners.langmem_application_runtime import (
     ApplicationRuntime,
     open_application_runtime,
 )
-from milai_lab.runners.local_state_attention import _accounting
 from milai_lab.runners.writer_policy import _seed
 
 ARMS = {"all", "query", "query_enhanced", "a_selector", "full_history"}

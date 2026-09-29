@@ -77,12 +77,19 @@ flowchart TD
 | `application/world.py` | 本地 SQLite 合成业务世界、真实 owner 对象、业务状态提交 |
 | `application/tools.py` | schema、原生工具适配和 owner 工具绑定 |
 | `application/recovery.py` | 先查询真实状态，再交付明确 UNKNOWN 恢复观察 |
-| `runners/langmem_application.py` | public message/phase 顺序、writer cadence、历史和运行结果编排 |
+| `runners/langmem_application.py` | public message/phase 顺序、历史和运行结果交接 |
+| `runners/writer_policy.py` | writer 策略、触发时机与受控研究编排 |
 | `runners/langmem_application_runtime.py` | Host、Store、checkpoint、observer 的资源构造与关闭 |
 
 旧 runner 路径保留显式 re-export，转向相同类、函数和常量对象。没有复制第二份实现，也没有
 新增持久状态库、业务计划器、Reviewer 或对象平台。旧编排函数保留在原模块，避免无关的
 调用入口及已有测试 patch 位置漂移。
+
+S6 的 `WriterPolicy`、`WRITER_POLICY_INSTRUCTIONS`、`run_writer_policy_turn`
+由既有 `runners/writer_policy.py` 单独拥有。通用 trace 汇总位于
+`analysis/trace_accounting.py`，保留原 `_accounting` 的分类、公式和输出；它不是 S4 benchmark
+`trace_costs` 的替代实现。旧路径保持同一对象导出，phase/runtime 的合法组合继续保留。
+完整合同及剩余 runner 依赖理由见 [S6记录](CODE_ARCHITECTURE_V12_S6_RESULTS.md)。
 
 ## 行为与持久化兼容
 

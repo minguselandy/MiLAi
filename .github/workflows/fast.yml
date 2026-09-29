@@ -201,7 +201,7 @@ jobs:
             --ignore=tests/unit/test_application_architecture.py \
             --ignore=tests/architecture/test_request_source_identity.py \
             --ignore=tests/memory/test_memory_contracts.py \
-            --ignore=tests/architecture/test_memory_architecture.py --ignore=tests/architecture/test_benchmark_execution_architecture.py --ignore=tests/architecture/test_provider_architecture.py \
+            --ignore=tests/architecture/test_memory_architecture.py --ignore=tests/architecture/test_benchmark_execution_architecture.py --ignore=tests/architecture/test_provider_architecture.py --ignore=tests/architecture/test_writer_orchestration.py \
             --ignore=tests/integrations/test_mem0_contracts.py \
             --ignore=tests/integrations/test_simplemem_contracts.py \
             --ignore=tests/integrations/test_external_interfaces.py \
@@ -245,7 +245,7 @@ jobs:
           uv run --no-sync pytest -q tests/unit/test_frozen_action_continuation.py
           uv run --no-sync ruff check src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py tests/unit/test_writer_policy.py
           uv run --no-sync mypy src/milai_lab/runners/writer_policy.py tools/run_writer_policy.py
-          uv run --no-sync pytest -q tests/unit/test_writer_policy.py
+          uv run --no-sync pytest -q tests/unit/test_writer_policy.py tests/architecture/test_writer_orchestration.py
           uv run --no-sync ruff check src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py tests/unit/test_state_update_probe.py
           uv run --no-sync mypy src/milai_lab/runners/state_update_probe.py tools/run_state_update_probe.py
           uv run --no-sync pytest -q tests/unit/test_state_update_probe.py

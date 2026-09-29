@@ -1,0 +1,203 @@
+{
+  "kind": "MILAI_V12_S6_ENGINEERING_RECEIPT",
+  "baseline_commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3",
+  "source_writes_stopped": true,
+  "changed_file_count": 22,
+  "changed_runtime_file_count": 13,
+  "changed_files_sha256": {
+    "../.github/workflows/ci.yml": "ed441ec7ce04579d20a53e2222d981ebfe2a9ba7b0c897c351b4346b26e56f0c",
+    "../.github/workflows/fast.yml": "40437582e7d74d94b4fa59a82e850a0217fa34aeb6a9d54fea889a51fc1a50c3",
+    ".github/workflows/ci.yml": "50125ef735a8087d064be00d1f34c4217c81704f968b68cd76696b6c254393a2",
+    "configs/lab-verification-matrix.json": "ef5280a126848bd69a5dad7d37de0fb8f4f230ea3ab0f56f4bea33557de1e5eb",
+    "src/milai_lab/analysis/trace_accounting.py": "1add411a5a84d994dd41c25efa253b559c1aeb4b06d591848ed5b87f9176cf72",
+    "src/milai_lab/harness/source_identity.py": "4a0840f7938b9e6031e96fd895852718722c7b9d4e30f6919b075dc85185dfa2",
+    "src/milai_lab/runners/fixed_state_read.py": "acef380542947fb3aa6546be6de4c18f9901208f290d107558c14d25af8e0e2e",
+    "src/milai_lab/runners/fixed_state_update.py": "53ed0bc3cf288fc1e68aafd7afa26884796c7be2382720c2d41ac33540afa14b",
+    "src/milai_lab/runners/langmem_application.py": "30da6cfd0412a47d32fa273d4f4babe5d18eec5d93a32b1342298dd700fb1946",
+    "src/milai_lab/runners/langmem_diagnostic.py": "a1ef694d7857b75f9fc897fa8a4174638de29c80ae21b8bcf74c961b49a4b983",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "18d62105335a94e8edcacafd3c86cb1142a37d2bd2a44d1ab9244ea2c69a8906",
+    "src/milai_lab/runners/langmem_merit.py": "e708e2038ad62f115b026cd32421527a485232edc22ebd391ac3177de609117c",
+    "src/milai_lab/runners/local_state_attention.py": "8684908368a2e0f53e2b2808a5b9fe42900482c898b12dac229cb8daac882aaf",
+    "src/milai_lab/runners/persistent_memory.py": "5f97715a203eab9ac6f4a4a02cd701594bc458f4e5b004eca914b580cf2dce14",
+    "src/milai_lab/runners/shared_record_use.py": "426d23d7b0260e4334517e8cce6ee46f1bbfdea109f69bfea2f3fbfe640427a9",
+    "src/milai_lab/runners/state_update_probe.py": "0500cb1d547c9cea052c3008e6ca604a6288337bc8b40431eff10ef97d7a583b",
+    "src/milai_lab/runners/writer_policy.py": "bb5df9f72737159aaff326ec67d3187df1b61e93173a0462866de314d7b64a29",
+    "tests/architecture/test_request_source_identity.py": "77631e70f574d69acba26006c8c9849fa9520b1d212603f9a8d07690e95d1bdb",
+    "tests/architecture/test_trace_accounting.py": "c2232eea9ff07712cd20e50c0533069600509a5982bd56a00edc595ebdea5b3c",
+    "tests/architecture/test_writer_orchestration.py": "9ee453b3a62fbdebf4eddd8732a7c7212f32a351db38a4970a387a5c55548938",
+    "tests/architecture/writer_contract_probe.py": "381130aaa87055ee0ada381229eecfaaaa3210ac78f1bd6acf236822803deaea",
+    "tests/unit/test_writer_policy.py": "8768d9781fa1da4cb0568b1d7c3e49e81688155c75e786ff4f470cfe478e1305"
+  },
+  "canonical_owners": {
+    "WriterPolicy_WRITER_POLICY_INSTRUCTIONS_run_writer_policy_turn": "src/milai_lab/runners/writer_policy.py",
+    "original_trace_only_accounting": "src/milai_lab/analysis/trace_accounting.py"
+  },
+  "compatibility": "old application exports three exact canonical objects; old LSA and CLI accounting exports the exact canonical function; all shared consumers use direct canonical imports",
+  "new_runtime_validation_serialization_prompt_budget_or_error_rules": [],
+  "application_phase_preserved_functions": [
+    "_collect_turn_tail",
+    "_operator_memory_event",
+    "run_phase"
+  ],
+  "AST_evidence": {
+    "writer_function_and_both_assignments_AST_identical": true,
+    "accounting_original_AST_identical": true,
+    "all_retained_application_functions_AST_identical": [
+      "_collect_turn_tail",
+      "_operator_memory_event",
+      "run_phase"
+    ],
+    "all_preexisting_writer_and_LSA_functions_AST_identical": true,
+    "other_existing_modules": {
+      "src/milai_lab/runners/fixed_state_read.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/fixed_state_update.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/state_update_probe.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/shared_record_use.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/langmem_diagnostic.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/langmem_merit.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/langmem_m1_mechanism.py": "imports only; all existing executable AST identical",
+      "src/milai_lab/runners/persistent_memory.py": "imports only; all existing executable AST identical",
+      "tests/unit/test_writer_policy.py": "imports only; all original assertions and fixtures retained"
+    }
+  },
+  "remaining_runner_ownership_review": "s6-runner-ownership-review.json",
+  "golden": {
+    "raw_public": "writer-accounting-golden.json",
+    "raw_before": "s6-writer-accounting-before.json",
+    "raw_after_failed_comparison": "s6-writer-accounting-after.json",
+    "raw_differences": {
+      "count": 69,
+      "ack_set_iteration_fields": 42,
+      "LangGraph_internal_UUID6_task_time_fields": 27,
+      "details": "s6-first-after-differences.json"
+    },
+    "supplemental_public": "writer-accounting-deterministic-golden.json",
+    "before": "s6-writer-accounting-before-deterministic-v2.json",
+    "after": "s6-writer-accounting-after-deterministic-v2.json",
+    "whole_before_after_bytes_equal": true,
+    "bytes": 2101064,
+    "sha256": "55971b7e1ada6166b5ade302c65dabc99a841ef004b1d8258f9273e57fabbee2",
+    "writer_cases": 13,
+    "accounting_cases": 14,
+    "frozen_baseline_modules": 67,
+    "current_after_modules": 65,
+    "frozen_helper_and_test_file_SHA_verified": true,
+    "identical_loaded_SDK_files": 115,
+    "clocks_RNG_hashseed_fixture_declared": true,
+    "runtime_and_SDK_unchanged": true,
+    "incomplete_first_seed_attempt": "s6-writer-accounting-before-deterministic.json retains success output but has old raw metadata and lacks SDK clock fixtures; it is not accepted supplemental golden"
+  },
+  "installed_scope": "Successful Core14/Foundation13 installed replay belongs to original pre-EOF wheel and is preserved in s6-package-receipt-pre-eof.json; reused only because exact one-LF delta has identical AST and the other 12 runtime modules remain byte-identical. Final rebuilt package is verified against all13 current runtime bytes; it has not been installed or replayed again.",
+  "optional_dependency_ownership": "trace accounting and its golden test are Core; writer graph/cycle/same-object/full replay tests explicitly Foundation in matrix and both root workflows, excluded from Core; analysis and writer canonical code are strict paths already owned by respective groups",
+  "prohibitions_observed": {
+    "real_services": [],
+    "downloads": [],
+    "SDK_writes": [],
+    "historical_lock_writes": [],
+    "ledger_writes": [],
+    "git_write_operations": [],
+    "experiments": []
+  },
+  "next_phase": "stop source writes for group F; S7 not started",
+  "checks": {
+    "new_architecture_and_identity": "27 passed (includes full 13-case writer child replay)",
+    "affected_existing_writer_phase_CLI_consumers": "41 passed",
+    "strict_changed_runtime_and_registry": "13 source files passed",
+    "final_Ruff": "s6-final-full-ruff.log",
+    "matrix": "s6-matrix.log",
+    "boundaries": [
+      "s6-current-boundary.log",
+      "s6-tools-boundary.log"
+    ],
+    "all_commands_results_logs": "s6-checks.jsonl",
+    "first_failures_preserved": [
+      {
+        "label": "s6-first-after",
+        "returncode": 1
+      },
+      {
+        "label": "s6-first-ruff",
+        "returncode": 1
+      },
+      {
+        "label": "s6-first-event-order-proof",
+        "returncode": 1
+      },
+      {
+        "label": "s6-helper-ruff",
+        "returncode": 1
+      },
+      {
+        "label": "s6-final-import-ruff",
+        "returncode": 1
+      },
+      {
+        "label": "s6-first-staged-diffcheck",
+        "returncode": null
+      }
+    ]
+  },
+  "offline_package": {
+    "kind": "MILAI_V12_S6_FINAL_EOF_PACKAGE_RECEIPT",
+    "baseline_source_commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3",
+    "sdist": {
+      "sha256": "29a56f91ffb9163175bae91e1c67aa352f31151532c77fac0673522015c1408f"
+    },
+    "wheel_built_from_sdist": {
+      "sha256": "1ec870094ffa1563b96c81ef65e3ee6620053c7bad8d5d1f88928e698d173125"
+    },
+    "changed_runtime_sha256": {
+      "src/milai_lab/analysis/trace_accounting.py": "1add411a5a84d994dd41c25efa253b559c1aeb4b06d591848ed5b87f9176cf72",
+      "src/milai_lab/harness/source_identity.py": "4a0840f7938b9e6031e96fd895852718722c7b9d4e30f6919b075dc85185dfa2",
+      "src/milai_lab/runners/fixed_state_read.py": "acef380542947fb3aa6546be6de4c18f9901208f290d107558c14d25af8e0e2e",
+      "src/milai_lab/runners/fixed_state_update.py": "53ed0bc3cf288fc1e68aafd7afa26884796c7be2382720c2d41ac33540afa14b",
+      "src/milai_lab/runners/langmem_application.py": "30da6cfd0412a47d32fa273d4f4babe5d18eec5d93a32b1342298dd700fb1946",
+      "src/milai_lab/runners/langmem_diagnostic.py": "a1ef694d7857b75f9fc897fa8a4174638de29c80ae21b8bcf74c961b49a4b983",
+      "src/milai_lab/runners/langmem_m1_mechanism.py": "18d62105335a94e8edcacafd3c86cb1142a37d2bd2a44d1ab9244ea2c69a8906",
+      "src/milai_lab/runners/langmem_merit.py": "e708e2038ad62f115b026cd32421527a485232edc22ebd391ac3177de609117c",
+      "src/milai_lab/runners/local_state_attention.py": "8684908368a2e0f53e2b2808a5b9fe42900482c898b12dac229cb8daac882aaf",
+      "src/milai_lab/runners/persistent_memory.py": "5f97715a203eab9ac6f4a4a02cd701594bc458f4e5b004eca914b580cf2dce14",
+      "src/milai_lab/runners/shared_record_use.py": "426d23d7b0260e4334517e8cce6ee46f1bbfdea109f69bfea2f3fbfe640427a9",
+      "src/milai_lab/runners/state_update_probe.py": "0500cb1d547c9cea052c3008e6ca604a6288337bc8b40431eff10ef97d7a583b",
+      "src/milai_lab/runners/writer_policy.py": "bb5df9f72737159aaff326ec67d3187df1b61e93173a0462866de314d7b64a29"
+    },
+    "all_changed_runtime_bytes_match_worktree_sdist_wheel": true,
+    "runtime_files_verified": 13,
+    "only_runtime_change_since_tested_original_wheel": "analysis/trace_accounting.py removes exactly one trailing LF; all other 12 runtime modules identical",
+    "AST_evidence": "s6-eof-fix-evidence.json",
+    "prior_installed_evidence_reused": {
+      "receipt": "s6-package-receipt-pre-eof.json",
+      "original_sdist_sha256": "811c04e1964c0d6ac9850b7a5f3e5d277bbf6503dc515bdc6a3de6079fd57553",
+      "original_wheel_sha256": "1ebd83ddc3189a05510cf3b32948490d7baa82fe617eef775ddc38e3e83d72a9",
+      "Core_accounting_cases": 14,
+      "Foundation_writer_cases": 13,
+      "AST_identical": true,
+      "not_rerun_or_reinstalled_after_EOF_fix": true
+    },
+    "new_package_evidence_scope": "offline rebuild and exact current-worktree/sdist/wheel bytes for all 13 changed runtime modules; old wheel diff exactly one trailing LF in the accounting module",
+    "downloads": [],
+    "real_services": [],
+    "git_write_operations": []
+  },
+  "source_receipt_sha256": "b90df6dee602426af1de640e1f8e77fc8d625a2dac1b25ac1357d10e479f8131",
+  "source_hash_manifest_sha256": "5a8d8c89c4498f0c8d29d1dfccf81f1db2e717ca07e057cc9a0ea1dd593c5a1a",
+  "root_review": {
+    "original_and_supplement_before_loaded_sources_verified": 67,
+    "supplement_before_after_public_whole_bytes_equal": true,
+    "all_22_current_changed_file_hashes_match_receipt": true
+  },
+  "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+  "format_fix": {
+    "kind": "MILAI_V12_S6_EOF_FORMAT_FIX",
+    "reported_check": "Luna group F git diff --cached --check (staged previously untracked file)",
+    "reported_failure": "src/milai_lab/analysis/trace_accounting.py:107: new blank line at EOF.",
+    "source": "Root NEW_TASK; initial staged check failure reported before any group F commit",
+    "fix": "remove exactly one trailing LF; final newline retained",
+    "file": "src/milai_lab/analysis/trace_accounting.py",
+    "before_sha256": "c615914b3389ba8fb2a3721470345a0c11a00b3992308ac96dd66b41a9424463",
+    "after_sha256": "1add411a5a84d994dd41c25efa253b559c1aeb4b06d591848ed5b87f9176cf72",
+    "AST_identical": true,
+    "staging_owned_by": "Luna",
+    "behavior_checks_not_repeated": true
+  }
+}

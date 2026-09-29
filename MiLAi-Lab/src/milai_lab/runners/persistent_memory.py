@@ -22,6 +22,8 @@ from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.prebuilt.tool_node import ToolCallWrapper
 from langgraph.store.base import BaseStore
 
+from milai_lab.application.tools import _business_tools
+from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
     SYSTEM_PROMPT,
@@ -58,7 +60,7 @@ from milai_lab.methods.memory_result import RESPONSIBILITY_PROMPT, turn_receipts
 from milai_lab.providers.contextual_capacity import CapacityExceeded
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.runners.frozen_action_continuation import _sha
-from milai_lab.runners.langmem_application import ApplicationWorld, _business_tools, run_phase
+from milai_lab.runners.langmem_application import run_phase
 from milai_lab.runners.langmem_application_runtime import (
     ApplicationRuntime,
     open_application_runtime,

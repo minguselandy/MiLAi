@@ -9,9 +9,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any, Literal, cast
 
-import httpx
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, ToolMessage
-from langchain_core.runnables import RunnableConfig
+from langchain_core.messages import AIMessage, ToolMessage
 from langmem import create_manage_memory_tool  # type: ignore[import-untyped]
 
 from milai_lab.application.journal import BusinessActionJournal as BusinessActionJournal
@@ -35,7 +33,6 @@ from milai_lab.application.world import ApplicationWorld as ApplicationWorld
 from milai_lab.application.world import uuid as uuid
 from milai_lab.baselines.langmem_agent import (
     MEMORY_NAMESPACE,
-    SYSTEM_PROMPT,
     build_agent,
     invoke_or_resume_public_message,
 )
@@ -45,159 +42,17 @@ from milai_lab.methods.local_state_attention.bank import LocalStateBank, StateSc
 from milai_lab.methods.local_state_attention.controller import LocalStateController
 from milai_lab.methods.local_state_attention.history import HistoryAccess
 from milai_lab.methods.local_state_attention.integration import collect_observations
-from milai_lab.methods.local_state_attention.protocol import ControlResponseError
 from milai_lab.methods.local_state_attention.summary import HistorySummaryController
-from milai_lab.methods.local_state_attention.writers import (
-    WriterProposalContext,
-    WriterTools,
-    make_maintenance_trigger,
-    run_writer_boundary,
-)
 from milai_lab.runners.langmem_application_runtime import ApplicationRuntime
-
-WriterPolicy = Literal["native_host", "host_both", "boundary_both", "overlap"]
-WRITER_POLICY_INSTRUCTIONS = {
-    "host_both": ("You own ordinary-memory and local-State writes through the available "
-                  "tools. Read actual scoped records and source events; use exact record ids "
-                  "for updates or deletions. Tool receipts, including errors, describe what "
-                  "actually occurred."),
-    "boundary_both": ("An automatic writer boundary ran before this turn; its actual result "
-                      "appears in the working view. You may read both record types and request "
-                      "maintenance with maintain_records when needed. A trigger request is not "
-                      "a new fact; use its returned receipts to judge what occurred."),
-    "overlap": ("During this turn you own ordinary-memory writes through the available tools "
-                "and may read local State. One separate local-State maintenance boundary runs "
-                "after your final answer. Do not report that later boundary as already done."),
-}
-
-
-def run_writer_policy_turn(
-    policy: WriterPolicy, messages: list[BaseMessage],
-    raw_history: tuple[dict[str, Any], ...], runtime: ApplicationRuntime,
-    scope: FoundationScope, world: ApplicationWorld, journal: BusinessActionJournal,
-    bank: LocalStateBank, toolset: WriterTools,
-    controller: LocalStateController, *, source_view_max_bytes: int = 16384,
-) -> dict[str, Any]:
-    """Execute one real Host turn and the selected, explicit writer cadence."""
-    if policy not in {"native_host", "host_both", "boundary_both", "overlap"}:
-        raise ValueError("LSA_WRITER_POLICY_UNKNOWN")
-    if not messages or not isinstance(messages[-1], HumanMessage):
-        raise ValueError("LSA_WRITER_CURRENT_USER_MISSING")
-    graph_config: RunnableConfig = cast(RunnableConfig, scope.config())
-    state_scope = StateScope(scope.run_id, scope.arm_id, scope.user_id)
-    thread_id = str(graph_config["configurable"]["thread_id"])
-    public_index = sum(isinstance(row, HumanMessage) for row in messages) - 1
-    message_key = f"{thread_id}:{public_index}"
-    current_task = str(messages[-1].content)
-    original_history = tuple(raw_history)
-    boundary_receipt_history: list[dict[str, Any]] = []
-
-    def remember_boundary_receipts(result: Any) -> None:
-        boundary_receipt_history.extend({
-            "origin": "boundary_executor", "name": row.name,
-            "tool_call_id": row.tool_call_id, "status": row.status,
-            "content": str(row.content)} for row in result.receipts)
-
-    def proposal_context(_reason: str = "", _config: RunnableConfig | None = None,
-                         ) -> WriterProposalContext:
-        events = bank.events(state_scope)
-        # The trigger reason is a request by Host, not a new source observation.
-        receipts = tuple({"origin": "source_event", **{key: row.get(key) for key in (
-            "id", "kind", "actor", "tool_call_id", "content", "status")}}
-            for row in events if row.get("kind") == "tool") + tuple(
-                boundary_receipt_history)
-        return WriterProposalContext(
-            state_scope, message_key, current_task,
-            original_history, actual_receipts=receipts,
-            maintenance_request_reason=_reason)
-
-    def boundary(allowed: tuple[Any, ...]) -> dict[str, Any]:
-        events = bank.pending(state_scope)
-        latest_user = next((row["id"] for row in reversed(events)
-                            if row.get("kind") == "user"), None)
-        try:
-            result = run_writer_boundary(
-                controller, toolset, proposal_context(), allowed,
-                config=graph_config, query_source_id=latest_user)
-            remember_boundary_receipts(result)
-            return {"status": result.status, "proposals": result.proposals,
-                    "receipts": [row.model_dump(mode="json") for row in result.receipts],
-                    "pending_event_ids": result.pending_event_ids,
-                    "acknowledged_event_ids": result.acknowledged_event_ids}
-        except (ControlResponseError, httpx.TimeoutException) as error:
-            return {"status": "DEGRADED", "reason": str(error),
-                    "receipts": [], "pending_event_ids": [row["id"]
-                                                     for row in bank.pending(state_scope)],
-                    "acknowledged_event_ids": []}
-
-    initial_boundary: dict[str, Any] | None = None
-    if policy == "boundary_both" and any(
-        row.get("kind") == "user" for row in bank.pending(state_scope)
-    ):
-        initial_boundary = boundary(toolset.host_tools())
-
-    trigger = (make_maintenance_trigger(controller, toolset, proposal_context,
-                                        remember_boundary_receipts)
-               if policy == "boundary_both" else None)
-    tool_mode: Literal["full", "read_only", "memory_only"] = (
-        "full" if policy == "host_both" else
-        "read_only" if policy == "boundary_both" else "memory_only")
-    agent = build_agent(
-        runtime.model, runtime.store, runtime.checkpointer,
-        _business_tools(world, scope.user_id), business_call_wrapper=journal,
-        observer=runtime.observer, memory_contract="strict",
-        system_prompt=(SYSTEM_PROMPT + "\n" + WRITER_POLICY_INSTRUCTIONS[policy]
-                       if policy != "native_host" else SYSTEM_PROMPT),
-        writer_tools=(toolset if policy != "native_host" else None),
-        writer_tool_mode=(tool_mode if policy != "native_host" else "full"),
-        writer_maintenance_trigger=trigger,
-        writer_view_bank=(bank if policy != "native_host" else None),
-        writer_initial_boundary=initial_boundary,
-        writer_known_prefix_messages=len(messages),
-        source_view_max_bytes=(source_view_max_bytes if policy != "native_host" else None))
-    runtime.model.begin_public_message(message_key)
-    if runtime.observer is not None:
-        runtime.observer.begin_public_message(scope, public_index, current_task)
-    result = agent.invoke({"messages": messages}, config=graph_config)
-    final_messages: list[BaseMessage] = result["messages"]
-    if policy != "native_host":
-        from milai_lab.methods.local_state_attention.integration import collect_observations
-
-        collect_observations(bank, state_scope, thread_id, final_messages,
-                             skip_before=len(messages), include_tool_status=True)
-    host_acknowledged_event_ids: list[str] = []
-    if policy == "host_both":
-        # Terminal Host turn has seen these actual sources, including its tool receipts.
-        # This records consumption only; it certifies no semantic correctness.
-        host_acknowledged_event_ids = [row["id"] for row in bank.pending(state_scope)]
-        bank.acknowledge_events(state_scope, set(host_acknowledged_event_ids))
-    final = next((row for row in reversed(final_messages)
-                  if isinstance(row, AIMessage) and not row.tool_calls), None)
-    post_turn_boundary = (boundary((toolset.manage_state, toolset.read_record,
-                                     toolset.search_memory))
-                          if policy == "overlap" else None)
-    return {
-        "status": "COMPLETED", "writer_policy": policy,
-        "scope": {"run_id": scope.run_id, "arm_id": scope.arm_id,
-                  "user_id": scope.user_id, "thread_id": thread_id,
-                  "public_index": public_index},
-        "answer": str(final.content) if final is not None else "",
-        "messages": [row.model_dump(mode="json") for row in final_messages],
-        "initial_boundary": initial_boundary,
-        "post_turn_boundary": post_turn_boundary,
-        "host_acknowledged_event_ids": host_acknowledged_event_ids,
-        "host_tool_receipts": [row.model_dump(mode="json") for row in final_messages
-                               if isinstance(row, ToolMessage)][len([
-                                   row for row in messages if isinstance(row, ToolMessage)]):],
-        "business_calls": journal.calls_for_thread(thread_id),
-        "world": world.snapshot(),
-        "states": bank.states(state_scope),
-        "pending_event_ids": [row["id"] for row in bank.pending(state_scope)],
-        "state_store_stats": bank.store_stats(),
-        "host_capacity": (read_json(runtime.model.capacity_path)
-                          if runtime.model.capacity_path is not None else None),
-    }
-
+from milai_lab.runners.writer_policy import (
+    WRITER_POLICY_INSTRUCTIONS as WRITER_POLICY_INSTRUCTIONS,
+)
+from milai_lab.runners.writer_policy import (
+    WriterPolicy as WriterPolicy,
+)
+from milai_lab.runners.writer_policy import (
+    run_writer_policy_turn as run_writer_policy_turn,
+)
 
 
 def _operator_memory_event(event: dict[str, Any], run_id: str, arm_id: str,

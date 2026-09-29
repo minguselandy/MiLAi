@@ -53,6 +53,8 @@ def test_development_identity_rejects_canonical_request_tampering(
 
 
 @pytest.mark.parametrize("relative", [
+    "src/milai_lab/analysis/trace_accounting.py",
+    "src/milai_lab/runners/writer_policy.py",
     "src/milai_lab/contracts/request.py",
     "src/milai_lab/contracts/benchmark.py",
     "src/milai_lab/contracts/scope.py",

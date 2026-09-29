@@ -52,8 +52,12 @@
       "requirement": "runner 不借其他 runner 公共 lifecycle",
       "phase": "S4/S6",
       "required_evidence": "Lifecycle helper definitions/consumers; remaining runner-edge ownership audit",
-      "status": "PENDING",
-      "evidence": []
+      "status": "PASS_LOCAL",
+      "evidence": [
+        "docs/CODE_ARCHITECTURE_V12_S4_RESULTS.md",
+        "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+        "data/diagnostics/code-architecture-v12/s6-runner-ownership-review.json"
+      ]
     },
     {
       "id": "C06",
@@ -151,7 +155,7 @@
     "S3": "COMPLETE_LOCAL_CHECKS",
     "S4": "COMPLETE_LOCAL_CHECKS",
     "S5": "COMPLETE_LOCAL_CHECKS",
-    "S6": "PENDING",
+    "S6": "COMPLETE_LOCAL_CHECKS",
     "S7": "PENDING"
   },
   "explicit_deliverables": {
@@ -283,7 +287,20 @@
         44,
         35
       ],
-      "note": "Complete source capture parity; installed probes replay manual27/edges35. Generic constructor intentionally rejects method kwargs; current recipe callers migrated."
+      "note": "Complete source capture parity; installed probes replay manual27/edges35. Generic constructor intentionally rejects method kwargs; current recipe callers migrated.",
+      "commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3"
+    },
+    "S6": {
+      "report": "docs/CODE_ARCHITECTURE_V12_S6_RESULTS.md",
+      "evidence": "data/diagnostics/code-architecture-v12/s6-engineering-evidence.json",
+      "status": "LOCAL_PASS_REMOTE_CI_PENDING",
+      "source_commit": "96a6ce17b331c350f44d44d71e2e0205f33aeab3",
+      "architecture_identity_tests_passed": 27,
+      "affected_behavior_tests_passed": 41,
+      "golden_writer_cases": 13,
+      "golden_accounting_cases": 14,
+      "deterministic_golden_sha256": "55971b7e1ada6166b5ade302c65dabc99a841ef004b1d8258f9273e57fabbee2",
+      "note": "Original nondeterministic comparison retained; fixed fixture whole bytes equal, installed replay equal. Formal S7 DAG and final CI pending."
     }
   }
 }

@@ -47,6 +47,12 @@ PROVIDER_SOURCE_FILES = (
     "src/milai_lab/providers/langmem_chat.py",
     "src/milai_lab/methods/langmem_recipe.py",
 )
+RUNNER_ORCHESTRATION_SOURCE_FILES = (
+    "src/milai_lab/analysis/trace_accounting.py",
+    "src/milai_lab/runners/writer_policy.py",
+    "src/milai_lab/runners/langmem_application.py",
+    "src/milai_lab/runners/local_state_attention.py",
+)
 REQUEST_SOURCE_FILES = (
     "src/milai_lab/harness/source_identity.py",
     *CONTRACT_SOURCE_FILES,
@@ -57,5 +63,6 @@ REQUEST_SOURCE_FILES = (
     *ARTIFACT_IO_SOURCE_FILES,
     *BENCHMARK_EXECUTION_SOURCE_FILES,
     *PROVIDER_SOURCE_FILES,
+    *RUNNER_ORCHESTRATION_SOURCE_FILES,
     "src/milai_lab/methods/request_context.py",
 )
