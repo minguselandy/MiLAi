@@ -219,8 +219,18 @@ def test_retrieval_error_and_invalid_selected_identity_are_not_soft_success() ->
 
 
 def _graph(messages: list) -> list:
-    originals = [{"id": f"message-{i}", "type": {"user": "human", "assistant": "ai"}.get(
+    originals = [{"id": row.get("id", f"message-{i}"),
+                  "type": {"user": "human", "assistant": "ai"}.get(
         row["role"], row["role"]), "content": row["content"]} for i, row in enumerate(messages)]
+    for message, original in zip(messages, originals, strict=True):
+        for key in ("name", "tool_call_id"):
+            if key in message:
+                original[key] = message[key]
+        if message.get("tool_calls"):
+            original["tool_calls"] = [{"id": call["id"], "name": call["function"]["name"],
+                "args": json.loads(call["function"]["arguments"])}
+                for call in message["tool_calls"]]
+            original["response_metadata"] = {"memory_turn": SCOPE}
     return [SimpleNamespace(model_dump=lambda original=original, **_kwargs: copy.deepcopy(original))
             for original in originals]
 
@@ -242,6 +252,119 @@ def test_model_view_is_explicitly_validated_even_when_disabled() -> None:
         for enabled in (True, False):
             with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
                 boundary_policy({"enabled": enabled, "model_view": model_view})
+
+
+def test_assistant_role_labels_is_explicitly_validated_even_when_disabled() -> None:
+    assert boundary_policy({"enabled": True})["assistant_role_labels"] == "legacy"
+    for labels in ("legacy", "native_roles_only"):
+        assert boundary_policy({"enabled": True, "assistant_role_labels": labels})[
+            "assistant_role_labels"] == labels
+        assert boundary_policy({"enabled": False, "assistant_role_labels": labels}) is None
+    for labels in (None, [], {}, True, 1, "", "native", "LEGACY"):
+        for enabled in (True, False):
+            with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
+                boundary_policy({"enabled": enabled, "assistant_role_labels": labels})
+
+
+def _role_label_messages(body: str, current_query: str) -> list[dict]:
+    tags = "[ASSISTANT HISTORY - prior model output]\n[WORKING HYPOTHESIS]"
+    def call(call_id: str, name: str, arguments: dict) -> dict:
+        return {"id": call_id, "type": "function", "function": {
+            "name": name, "arguments": json.dumps(arguments, ensure_ascii=False)}}
+    return [
+        {"role": "system", "content": "original prepared system", "id": "system"},
+        {"role": "user", "content": "Historical user quoted: " + tags, "id": "history-user"},
+        {"role": "assistant", "content": body, "id": "history-answer"},
+        {"role": "user", "content": current_query + "\nLiteral: " + tags, "id": "current-user"},
+        {"role": "assistant", "content": body, "id": "single-call-answer", "tool_calls": [
+            call("read-call", "read_memory", {"id": "actual"})]},
+        {"role": "tool", "name": "read_memory", "tool_call_id": "read-call", "id": "read",
+         "content": json.dumps({"ok": True, "status": "found", "id": "actual",
+                                "value": {"content": "Tool quoted: " + tags}})},
+        {"role": "assistant", "content": body, "id": "multi-call-answer", "tool_calls": [
+            call("update-call", "manage_memory", {"action": "update", "id": "actual",
+                                                   "content": "Keep argument: " + tags}),
+            call("history-call", "read_history", {"session_id": "previous", "offset": 0})]},
+        {"role": "tool", "name": "manage_memory", "tool_call_id": "update-call", "id": "update",
+         "content": json.dumps({"ok": True, "status": "updated", "id": "actual"})},
+        {"role": "tool", "name": "read_history", "tool_call_id": "history-call", "id": "history",
+         "content": "Historical tool quoted: " + tags},
+    ]
+
+
+@pytest.mark.parametrize("placement", list(MemoryPlacement))
+@pytest.mark.parametrize("model_view", list(ModelView))
+@pytest.mark.parametrize("protocol", ["json_action", "native"])
+@pytest.mark.parametrize("body", ["", "Natural assistant text.",
+    "[ASSISTANT HISTORY - prior model output]\n[WORKING HYPOTHESIS]\nModel-generated tags."])
+@pytest.mark.parametrize("current_query", [
+    "Use the current record.", "Compare the earlier record."])
+def test_assistant_label_candidate_changes_only_program_prefixes(
+    placement, model_view, protocol, body, current_query,
+) -> None:
+    rows = [{"id": "actual", "value": {"content": "完整当前正文"}}]
+    messages = _role_label_messages(body, current_query)
+    graph = _graph(messages)
+    before = copy.deepcopy(messages)
+    originals = [row.model_dump() for row in graph]
+    original_hash = hashlib.sha256(json.dumps(originals, sort_keys=True).encode()).hexdigest()
+    results = []
+    for labels in (None, "legacy", "native_roles_only"):
+        options = {"enabled": True, "memory_placement": placement, "model_view": model_view}
+        if labels is not None:
+            options["assistant_role_labels"] = labels
+        capacity = _Capacity()
+        view = MemoryBoundaryView(policy=boundary_policy(options), capacity=capacity,
+            capacity_error=_CapacityError, retrieve=lambda *_: [])
+        view.prepare(SCOPE, "thread", rows, base_system="Original source/permission rules.",
+                     system_tail="\nPreserve exact tail.")
+        projected, returned = view.project(messages, graph, SCOPE["message_key"], 1)
+        assert view.project(messages, graph, SCOPE["message_key"], 2)[0] == projected
+        context = view.final_request_context("Original action catalog." if protocol == "json_action"
+                                            else None, native=protocol == "native")
+        context_before = copy.deepcopy(context)
+        rendered = render_request(context, placement)
+        assert render_request(context, placement) == rendered
+        assert view.fit_final_request(context) == rendered
+        assert capacity.requests == [rendered]
+        assert view.delivery["final_capacity"]["prompt_tokens"] == len(json.dumps(rendered))
+        assert context == context_before and returned is graph
+        assert context.assistant_call_labels == ({} if labels == "native_roles_only" else {
+            3: "[WORKING HYPOTHESIS]", 5: "[WORKING HYPOTHESIS]"})
+        results.append((rendered, context, view.delivery))
+    default, legacy, candidate = results
+    assert default == legacy
+    old_request, old_context, old_delivery = legacy
+    new_request, new_context, new_delivery = candidate
+    assert old_context.working_state == new_context.working_state
+    assert old_context.working_state["active_refs"][0]["record_id"] == "actual"
+    assert old_context.tool_observations == new_context.tool_observations
+    assert old_context.durable_records == new_context.durable_records == tuple(rows)
+    assert old_request[0] == new_request[0]
+    assert "[WORKING HYPOTHESIS - current task references]" in new_request[0]["content"]
+    for original, old, new in zip(messages[1:], old_request[1:], new_request[1:], strict=True):
+        if original["role"] != "assistant":
+            assert old == new
+            assert new["content"].endswith(original["content"])
+            continue
+        expected = copy.deepcopy(original)
+        if protocol == "json_action" and original.get("tool_calls"):
+            expected.pop("tool_calls")
+            expected["content"] = json.dumps({"calls": [{"name": call["function"]["name"],
+                "arguments": json.loads(call["function"]["arguments"])}
+                for call in original["tool_calls"]]}, ensure_ascii=False)
+        assert new == expected
+        label = ("[WORKING HYPOTHESIS]" if original.get("tool_calls") else
+                 "[ASSISTANT HISTORY - prior model output]")
+        assert old == {**expected, "content": label + "\n" + expected["content"]}
+    for key in ("selected_record_ids", "selected_material_tokens", "selected_material_bytes",
+                "candidate_tokens", "query", "route", "trigger_reason"):
+        assert old_delivery[key] == new_delivery[key]
+    assert new_delivery["final_capacity"]["prompt_tokens"] < (
+        old_delivery["final_capacity"]["prompt_tokens"])
+    assert messages == before and [row.model_dump() for row in graph] == originals
+    assert hashlib.sha256(json.dumps(
+        [row.model_dump() for row in graph], sort_keys=True).encode()).hexdigest() == original_hash
 
 
 @pytest.mark.parametrize("placement", list(MemoryPlacement))

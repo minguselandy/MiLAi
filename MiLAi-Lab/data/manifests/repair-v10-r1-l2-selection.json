@@ -1,0 +1,72 @@
+{
+  "kind": "MILAI_REPAIR_V10_R1_L2_EXPOSED_REGRESSION_SELECTION",
+  "status": "SELECTED_NO_REAL_CALLS_NOT_EXECUTION_FREEZE",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "basis_selection_sha256": "e1f0540a9101517044f169ee14fb517ea91acf21907a24687ffdd7a8193edac3",
+  "groups": {
+    "development": {
+      "purpose": "exposed regression: three known failure arcs and one successful multi-step control",
+      "arcs": [
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "arc_id": "d2-arc18-000",
+          "base_seed": 18,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=18",
+          "selection_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/data/manifests/unified-v8-v9-merit-development/d2-arc18-000.json",
+          "selection_sha256": "cb882445db6201778ce17c87a3979f3c4dc4921e432bb1adbea824d71d24f098",
+          "arc_sha256": "1f9239326f70e1b0829580d33ed6a92371dc8f1698966a928d74d5db8049bcca",
+          "initial_world_sha256": "49252294a8a126668979c71ff098c5aeb57667b9cbd22382872f7bcd6468017a",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 6
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "arc_id": "d2-arc20-000",
+          "base_seed": 20,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=20",
+          "selection_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/data/manifests/unified-v8-v9-merit-development/d2-arc20-000.json",
+          "selection_sha256": "50350005f9f2421245e00b0f4d2fee914c6804712cc4ecc583edc4f740a55436",
+          "arc_sha256": "9fc03be13a3bcd8c3fd3d15f367eb8389b3c30406c5b32072467392653bc5834",
+          "initial_world_sha256": "4d8241b653cd766ba85a5485194d7b6eb48fb9d2cc722fb64a10d91109422fd3",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 7
+        },
+        {
+          "domain": "d2",
+          "difficulty": "hard",
+          "arc_id": "d2-arc22-000",
+          "base_seed": 22,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=22",
+          "selection_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/data/manifests/unified-v8-v9-merit-development/d2-arc22-000.json",
+          "selection_sha256": "d90a1183ec2c4843698296f608ace8b014feefda348721f15883423f12b80b7b",
+          "arc_sha256": "01696bc5dd010ff1b1881796f9b997e966a038840a1a8d19cde1c88c4546d365",
+          "initial_world_sha256": "30f92199295c25a4d50f5e6524764aaeaeb0f63920b6d4892d443a56aa75ddfb",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 7
+        },
+        {
+          "domain": "d2",
+          "difficulty": "easy",
+          "arc_id": "d2-arc19-000",
+          "base_seed": 19,
+          "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=19",
+          "selection_path": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/data/manifests/unified-v8-v9-merit-development/d2-arc19-000.json",
+          "selection_sha256": "6becae44e4c5ea501a337b0b1c2640dd1a3dd386d4b3bc4c3e8771ecd4eab470",
+          "arc_sha256": "8e07d346ae30faff03511bfc72728c04d0662339c7253e59c0589308fe28d959",
+          "initial_world_sha256": "793885558f3ebe55f288d22bfd0e82d66e2c6d4ffe43de2a87d00433f87f08d7",
+          "episode_count": 5,
+          "dependent_episode_count": 2,
+          "user_message_count": 6
+        }
+      ]
+    }
+  },
+  "original_arc_and_initial_world_bytes_preserved": true,
+  "fresh_world_required": true,
+  "completed_arc_claim": false
+}

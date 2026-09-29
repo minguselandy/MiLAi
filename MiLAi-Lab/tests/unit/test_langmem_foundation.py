@@ -19,7 +19,8 @@ from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_core.tools import tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.prebuilt.tool_node import ToolCallRequest
+from langgraph.graph import MessagesState, StateGraph
+from langgraph.prebuilt.tool_node import ToolCallRequest, ToolNode
 from langgraph.store.memory import InMemoryStore
 from langmem import create_manage_memory_tool, create_search_memory_tool
 
@@ -422,6 +423,99 @@ def test_business_journal_replays_result_but_never_unknown_action(tmp_path: Path
     with pytest.raises(UnknownBusinessAction):
         BusinessActionJournal(path, ["record_action"])(unknown, execute)
     assert effects == ["call-1", "call-2", "call-3"]
+
+
+def test_application_operation_contract_real_toolnode_and_legal_repetition(tmp_path: Path) -> None:
+    effects: list[str] = []
+
+    @tool
+    def record_action(value: str) -> str:
+        """Record one declared synthetic effect, including legal repeated values."""
+        effects.append(value)
+        return json.dumps({"status": "recorded", "value": value})
+
+    @tool
+    def extra_action(value: str) -> str:
+        """A synthetic operation that needs its own explicit authorization."""
+        effects.append("extra:" + value)
+        return json.dumps({"status": "recorded"})
+
+    scope = FoundationScope("r2-run", "protected", "alice", "application:work")
+    config = scope.config()
+    journal = BusinessActionJournal(tmp_path / "journal.json", ["record_action", "extra_action"],
+                                    application_protection=True)
+    node = ToolNode([record_action, extra_action], wrap_tool_call=journal)
+    graph = StateGraph(MessagesState)
+    graph.add_node("tools", node)
+    graph.set_entry_point("tools")
+    graph.set_finish_point("tools")
+    agent = graph.compile()
+
+    def operation(op_id: str, value: str = "same", version: str = "v1",
+                  dependencies: tuple[str, ...] = ()) -> dict[str, Any]:
+        return {"operation_id": op_id, "tool": "record_action", "args": {"value": value},
+                "target": {"version": version}, "depends_on": list(dependencies),
+                "effect_contract": {"recorded": "confirmed"}, "retry": "never"}
+
+    def bind(task: str, index: int, operations: list[dict[str, Any]]) -> dict[str, Any]:
+        binding = {"run_id": scope.run_id, "arm_id": scope.arm_id, "owner": scope.user_id,
+                   "thread_id": config["configurable"]["thread_id"], "public_index": index,
+                   "message_id": f"m{index}", "task_id": task, "operations": operations}
+        journal.bind_request(binding)
+        return binding
+
+    def call(index: int, call_id: str, name: str = "record_action",
+             value: str = "same") -> ToolMessage:
+        tool_call = {"name": name, "args": {"value": value}, "id": call_id}
+        result = agent.invoke({"messages": [
+            *[HumanMessage(content="Explicit application request") for _ in range(index + 1)],
+            AIMessage(content="", id="generation-" + call_id, tool_calls=[tool_call]),
+        ]}, config=config)
+        return result["messages"][-1]
+
+    assert call(0, "unmapped").status == "error"
+    binding = bind("task-1", 0, [operation("one"),
+                               operation("next", "next", dependencies=("one",))])
+    assert call(0, "extra", "extra_action").status == "error"
+    assert call(0, "premature", value="next").status == "error"
+    first = call(0, "one")
+    assert first.status == "success"
+    assert call(0, "one").model_dump(exclude={"id"}) == first.model_dump(exclude={"id"})
+    assert call(0, "duplicate").status == "error"
+    assert call(0, "next", value="next").status == "success"
+    assert effects == ["same", "next"]
+    bind("task-2", 1, [operation("one")])
+    assert call(1, "independent").status == "success"
+    bind("task-2", 2, [operation("changed-version", version="v2")])
+    assert call(2, "version").status == "success"
+    bind("task-3", 3, [operation("step-1"), operation("step-2", dependencies=("step-1",))])
+    assert call(3, "step-1").status == "success"
+    assert call(3, "step-2").status == "success"
+    assert call(3, "step-3").status == "error"
+    assert effects == ["same", "next", "same", "same", "same", "same"]
+    with pytest.raises(ValueError, match="APPLICATION_BINDING_CHANGED"):
+        journal.bind_request({**binding, "task_id": "tampered"})
+    with pytest.raises(ValueError, match="APPLICATION_OPERATION_CHANGED"):
+        bind("task-2", 4, [operation("one", value="changed")])
+    typed_op = operation("typed")
+    typed_op["args"] = {"value": 1}
+    bind("typed-task", 5, [typed_op])
+    for replacement in (True, 1.0):
+        with pytest.raises(ValueError, match="APPLICATION_OPERATION_CHANGED"):
+            bind("typed-task", 6, [{**typed_op, "args": {"value": replacement}}])
+    # Exact transport identity cannot be reused for a new owner, arguments, or binding.
+    journal.bind_request(binding)
+    with pytest.raises(ValueError, match="APPLICATION_CALL_IDENTITY_CHANGED"):
+        call(0, "one", value="tampered")
+    wrong = {**config, "configurable": {**config["configurable"], "user_id": "bob"}}
+    with pytest.raises(ValueError, match="APPLICATION_CALL_SCOPE_CHANGED"):
+        agent.invoke({"messages": [HumanMessage(content="wrong owner"), AIMessage(
+            content="", id="wrong", tool_calls=[{
+                "name": "record_action", "args": {"value": "same"}, "id": "wrong"}])]},
+            config=wrong)
+    rows = journal.calls_for_thread(config["configurable"]["thread_id"])
+    assert all(row["executed"] is False and row["effect"] == "none"
+               for row in rows if row["decision"] == "blocked")
 
 
 def test_invalid_arguments_return_tool_error_then_graph_corrects(tmp_path: Path) -> None:

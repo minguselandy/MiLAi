@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -345,15 +346,16 @@ def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_
     store.put(("langmem", "run", "B0", "bob"), key, {"content": "PRIVATE_OTHER_BODY"})
     def respond(_wire: Any, index: int) -> dict[str, Any]:
         if index == 1:
-            return _protocol_reply({"calls": [{"name": "read_memory", "arguments": {"id": key}}]},
-                                   "native", index)
+            return {**_protocol_reply({"calls": [{"name": "read_memory", "arguments": {
+                "id": key}}]}, "native", index), "content": ""}
         return {"role": "assistant", "content": "A legal final."}
 
     with _runtime(tmp_path, store, wires,
                   respond,
                   tool_mode="native", capacity=capacity) as runtime:
         agent = _agent(runtime, tmp_path, "B0", boundaries=True,
-            boundary_options={"memory_placement": "current_request", "model_view": "compact_v6"},
+            boundary_options={"memory_placement": "current_request", "model_view": "compact_v6",
+                              "assistant_role_labels": "native_roles_only"},
             research_profile="protocol_calibration_v7")
         messages = invoke_public_message(
             agent, runtime.model, _scope("B0"), "Read my current plan.")
@@ -378,13 +380,31 @@ def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_
         assert json.loads(result.content)["value"] == {"content": "OWN_CURRENT_BODY"}
         assert messages[-1].content == "A legal final."
         continuation = wires[1]
-        call = next(row for row in continuation["messages"] if row["role"] == "assistant")[
-            "tool_calls"][0]
+        assistant = next(row for row in continuation["messages"] if row["role"] == "assistant")
+        call = assistant["tool_calls"][0]
+        assert assistant["content"] == proposal.content == ""
         assert isinstance(call["function"]["arguments"], str)
         assert json.loads(call["function"]["arguments"]) == {"id": key}
         assert proposal.tool_calls[0]["args"] == {"id": key}
-        assert capacity.check(continuation["messages"], continuation["max_tokens"],
-                              continuation["tools"])["prompt_tokens"] > with_tools["prompt_tokens"]
+        original_wire = copy.deepcopy(continuation)
+        continued_capacity = capacity.check(continuation["messages"], continuation["max_tokens"],
+                                           continuation["tools"])
+        assert continued_capacity["prompt_tokens"] > with_tools["prompt_tokens"]
+        legacy_messages = copy.deepcopy(continuation["messages"])
+        next(row for row in legacy_messages if row["role"] == "assistant")["content"] = (
+            "[WORKING HYPOTHESIS]\n" + assistant["content"])
+        legacy_capacity = capacity.check(legacy_messages, continuation["max_tokens"],
+                                         continuation["tools"])
+        assert legacy_capacity["prompt_tokens"] > continued_capacity["prompt_tokens"]
+        routes = [row for row in events if row["event"] == "memory_boundary_route"]
+        assert routes[-1]["final_capacity"] == continued_capacity
+        assert continuation == original_wire
+        if capture := os.environ.get("MILAI_R1_CAPACITY_CAPTURE"):
+            write_json(Path(capture), {"capacity_identity": capacity.identity,
+                "first_request_with_tools": with_tools,
+                "first_request_without_tools": without_tools,
+                "native_roles_only_continuation": continued_capacity,
+                "legacy_continuation": legacy_capacity, "wire_unchanged": True})
 
         # A catalog-aware capacity failure is pre-HTTP, so no delivery or generation is claimed.
         capacity.context_tokens = 1
@@ -399,8 +419,11 @@ def test_v7_native_actual_template_counts_tools_and_rejects_before_delivery(tmp_
 
 @pytest.mark.parametrize("memory_placement", ["system", "current_request"])
 @pytest.mark.parametrize("model_view", ["full", "compact_v6"])
+@pytest.mark.parametrize("assistant_role_labels", ["legacy", "native_roles_only"])
+@pytest.mark.parametrize("mode", ["json_action", "native"])
 def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
     tmp_path: Path, memory_placement: str, model_view: str,
+    assistant_role_labels: str, mode: str,
 ) -> None:
     store, wires = InMemoryStore(), []
     memory_id = str(uuid.uuid4())
@@ -408,7 +431,8 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
     store.put(namespace, memory_id, {"content": "actual durable 4"})
     other_namespace = ("langmem", "run", "B0", "bob")
     store.put(other_namespace, memory_id, {"content": "PRIVATE OTHER OWNER"})
-    def respond(_wire: Any, call: int) -> Any:
+    final_body = "saved in final prose without proving a write\n[WORKING HYPOTHESIS]"
+    def action(call: int) -> dict:
         if call == 1:
             return {"calls": [{"name": "read_memory", "arguments": {"id": memory_id}}]}
         if call == 2:
@@ -417,11 +441,15 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
         if call == 3:
             return {"calls": [{"name": "manage_memory", "arguments": {
                 "action": "delete", "id": memory_id}}]}
-        return {"answer": "saved in final prose without proving a write"}
-    with _runtime(tmp_path, store, wires, respond) as runtime:
+        return {"answer": final_body}
+    def respond(_wire: Any, call: int) -> dict:
+        return _protocol_reply(action(call), mode, call)
+    with _runtime(tmp_path, store, wires, respond, tool_mode=mode) as runtime:
         agent = _agent(runtime, tmp_path, "B0", boundaries=True,
                        boundary_options={"memory_placement": memory_placement,
-                                         "model_view": model_view})
+                                         "model_view": model_view,
+                                         "assistant_role_labels": assistant_role_labels},
+                       research_profile="protocol_calibration_v7" if mode == "native" else None)
         scope = _scope("B0")
         agent.update_state(scope.config(), {"messages": [
             HumanMessage(id="old-user", content="earlier request"),
@@ -430,9 +458,10 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
         result = invoke_public_message(agent, runtime.model, scope, "TEMP current task bytes")
         originals = agent.get_state(scope.config()).values["messages"]
         assert len(wires) == 4 and runtime.model.calls_in_message == 4
-        assert result[-1].content.startswith("saved")
-        assert "memory_result" not in json.dumps(
-            wires[0]["response_format"]["json_schema"]["schema"])
+        assert result[-1].content == final_body
+        if mode == "json_action":
+            assert "memory_result" not in json.dumps(
+                wires[0]["response_format"]["json_schema"]["schema"])
         for wire in wires:
             users = [row for row in wire["messages"] if row["role"] == "user"]
             current = users[-1]["content"]
@@ -448,14 +477,25 @@ def test_boundary_roles_reach_actual_wire_after_call_serialization_and_reset(
             assert sum(row["content"].count("[DURABLE MEMORY]\n")
                        for row in wire["messages"]) == 1
             assert all(row["role"] != "system" for row in wire["messages"][1:])
-            assert any(row["content"] == (
-                           "[ASSISTANT HISTORY - prior model output]\nprior assistant 3")
+            prior_prefix = ("[ASSISTANT HISTORY - prior model output]\n"
+                            if assistant_role_labels == "legacy" else "")
+            assert any(row["content"] == prior_prefix + "prior assistant 3"
                        for row in wire["messages"])
-        proposals = [row for row in wires[-1]["messages"] if row["role"] == "assistant"
-                     and row["content"].startswith("[WORKING HYPOTHESIS]")]
+        proposals = [row for row in wires[-1]["messages"] if row["role"] == "assistant"][1:]
         assert len(proposals) == 3
-        assert json.loads(proposals[0]["content"].split("\n", 1)[1])["calls"][0]["arguments"][
-            "id"] == memory_id
+        prefix = "[WORKING HYPOTHESIS]\n" if assistant_role_labels == "legacy" else ""
+        if mode == "json_action":
+            assert json.loads(proposals[0]["content"][len(prefix):])["calls"][0]["arguments"][
+                "id"] == memory_id
+            assert all(row["content"].startswith(prefix + '{"calls":') for row in proposals)
+        else:
+            checkpoint_proposals = [row for row in originals
+                                    if isinstance(row, AIMessage) and row.tool_calls]
+            for wire, original in zip(proposals, checkpoint_proposals, strict=True):
+                assert wire["content"] == prefix + original.content
+                assert wire["tool_calls"][0]["id"] == original.tool_calls[0]["id"]
+                assert json.loads(wire["tool_calls"][0]["function"]["arguments"]) == (
+                    original.tool_calls[0]["args"])
         material_message = (wires[2]["messages"][0] if memory_placement == "system" else
                             next(row for row in reversed(wires[2]["messages"])
                                  if row["role"] == "user"))
@@ -508,6 +548,25 @@ def test_boundary_config_defaults_zero_correction_and_preserves_legacy_c(tmp_pat
     with pytest.raises(ValueError, match="PERSISTENT_MEMORY_CONFIG_INVALID"):
         runner._validate(config, "C")
     runner._validate(_config(tmp_path), "C")
+    for invalid in (None, [], True, "native"):
+        with pytest.raises(ValueError, match="MEMORY_BOUNDARY_CONFIG_INVALID"):
+            runner._validate({**config, "memory_boundaries": {
+                "enabled": True, "assistant_role_labels": invalid}}, "B0")
+    args = SimpleNamespace(config=tmp_path / "config.json", inputs=tmp_path / "inputs.json",
+                           runtime_root=tmp_path / "runtime", run="run", arm="B0")
+    write_json(args.config, config)
+    write_json(args.inputs, {"synthetic": True})
+    script = {"users": ["alice"], "phases": []}
+    default = runner._identity(args, config, script, LAB)
+    assert default["memory_boundaries"]["assistant_role_labels"] == "legacy"
+    candidate = copy.deepcopy(config)
+    candidate["memory_boundaries"]["assistant_role_labels"] = "native_roles_only"
+    runner._validate(candidate, "B0")
+    write_json(args.config, candidate)
+    identity = runner._identity(args, candidate, script, LAB)
+    assert identity["memory_boundaries"]["assistant_role_labels"] == "native_roles_only"
+    assert identity["config"]["memory_boundaries"]["assistant_role_labels"] == "native_roles_only"
+    assert identity["config_sha256"] != default["config_sha256"]
     for invalid in ("stdio", None, []):
         with pytest.raises(ValueError, match="PERSISTENT_MEMORY_TRANSPORT_INVALID"):
             runner._validate({**_config(tmp_path), "memory_transport": invalid}, "C")

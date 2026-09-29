@@ -1,0 +1,761 @@
+{
+  "kind": "MILAI_REPAIR_V10_R1_L1_RESULTS",
+  "planned_calls": 24,
+  "attempted": 24,
+  "by_condition": {
+    "legacy": {
+      "attempted": 12,
+      "completed": 12,
+      "truncated": 4,
+      "with_program_marker_text": 11,
+      "label_occurrences": 1661,
+      "generation_calls": 12,
+      "generation_tokens": 57982,
+      "input_tokens": 41048,
+      "output_tokens": 16934,
+      "wall_seconds": 115.64543879544362,
+      "business_executions": 0
+    },
+    "native_roles_only": {
+      "attempted": 12,
+      "completed": 12,
+      "truncated": 2,
+      "with_program_marker_text": 8,
+      "label_occurrences": 750,
+      "generation_calls": 12,
+      "generation_tokens": 48798,
+      "input_tokens": 40072,
+      "output_tokens": 8726,
+      "wall_seconds": 60.93233078531921,
+      "business_executions": 0
+    }
+  },
+  "rows": [
+    {
+      "ordinal": 0,
+      "repeat": 0,
+      "case_id": "d2-arc18-000",
+      "generation": 5,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 1
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-a7a99843aeb7a2ac",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"checkout-api\", \"version\": \"latest\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2385
+      },
+      "result_sha256": "1f42130022444f80ddf080ca85aa0f0ac4ba5292152b6bfeaa66c2a6e9971920",
+      "trace_sha256": "a26970ffed087ff60dfa9daf959258aa07dde6d0bff131203b2a69636f788529",
+      "semantic_review": "FIRST_EXTRA_DEPLOY_PROPOSED_AFTER_CONFIRMED_COMPLETION",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 1,
+      "repeat": 0,
+      "case_id": "d2-arc18-000",
+      "generation": 5,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "stop",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2296
+      },
+      "result_sha256": "6dbe291978d6f49979000f2df549e0f792a2469b74d89dd00a32551c711c58d1",
+      "trace_sha256": "93b451ed894120b8755017f0f52f9e7a48159d113002c717377e93e18c85b491",
+      "semantic_review": "ACCURATE_COMPLETION_NO_EXTRA_PROPOSAL",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 2,
+      "repeat": 0,
+      "case_id": "d2-arc20-000",
+      "generation": 17,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 455,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9884
+      },
+      "result_sha256": "87514a998a7f75df223b49d9c392998667b262ed7b8fb267339240c8ce9ee7f2",
+      "trace_sha256": "50c2274921bb9e8f7a7ae62c63f3215c3eaa4af00bbbc038c1fd619dcda385d7",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_NO_TASK_PROPOSAL",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 3,
+      "repeat": 0,
+      "case_id": "d2-arc20-000",
+      "generation": 17,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-9262fcd80e2b9e25",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"search-api\", \"version\": \"v4.1.2\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 5685
+      },
+      "result_sha256": "1bd8ff9e4f39434f3198b4af0d989375e3bfe0fc759b6aac877872df2b5c33b2",
+      "trace_sha256": "947a911f039bd79e0405c20be5a9d1bd3da6644994a32b253c74a916be13d3a7",
+      "semantic_review": "CORRECT_REQUESTED_DEPLOY_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 4,
+      "repeat": 0,
+      "case_id": "d2-arc22-000",
+      "generation": 12,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 372
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9225
+      },
+      "result_sha256": "104bc2fdc823f492f66292e36979213a97e8d30b2442ffdbbabe0e7b796bc51f",
+      "trace_sha256": "dc62da878a72904c180728c91a36588fe34c0fbb1348d1e52683483bc17b4bb5",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_AFTER_PRIOR_EXECUTION",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 5,
+      "repeat": 0,
+      "case_id": "d2-arc22-000",
+      "generation": 12,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 372
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9118
+      },
+      "result_sha256": "d20cc8c68dc976ed31ae1028ad9c2794167edb18bc2c171d6b0cc720ca8847a7",
+      "trace_sha256": "dcae49222c2a0a6cd09648814bdbcd9704af4bec6583afa51308df0e2d2ca937",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_AFTER_PRIOR_EXECUTION",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 6,
+      "repeat": 0,
+      "case_id": "d2-arc19-000",
+      "generation": 3,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 1
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-b6901ce897c6c626",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"metrics-api\", \"version\": \"v3.7.5\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1970
+      },
+      "result_sha256": "5a3626b6ea40628db5689931d4f274340971614959a2e3329b0e78e3456af7fb",
+      "trace_sha256": "92711ed8e58408cf4c37b6fe8719f3167d3417f12482db7edc5a7496300345b1",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 7,
+      "repeat": 0,
+      "case_id": "d2-arc19-000",
+      "generation": 3,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-a249bad04b6075c7",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"metrics-api\", \"version\": \"v3.7.5\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1924
+      },
+      "result_sha256": "81562ffdd1a82b3d72545d810a5b1eb153428e559c07276ad48aee8c8a8f749d",
+      "trace_sha256": "1e6c04b77c2c3be6d60c78509198bb5c544ceaf83abea4b0e75d0985a3b539a2",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 8,
+      "repeat": 0,
+      "case_id": "d2-arc19-000",
+      "generation": 6,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-abb9cb1e6585a4db",
+          "type": "function",
+          "function": {
+            "name": "set_config",
+            "arguments": "{\"key\": \"pool_size\", \"service\": \"search-api\", \"value\": \"5695\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2347
+      },
+      "result_sha256": "082b3c55173e7a8c950492a28fdfcf1bb1b820d80e3c29f4e3e6434183b74ae8",
+      "trace_sha256": "1ce67e0e43d39c349b0b3d45f33d145c7a528e1be3e328aac14e12e796354a7b",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 9,
+      "repeat": 0,
+      "case_id": "d2-arc19-000",
+      "generation": 6,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-b8165fb29b78611b",
+          "type": "function",
+          "function": {
+            "name": "set_config",
+            "arguments": "{\"key\": \"pool_size\", \"service\": \"search-api\", \"value\": \"5695\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2298
+      },
+      "result_sha256": "c8feeb4361cdebde813452318ede3c9ca9efa6f4d03347e810ca54fdbbec2c4e",
+      "trace_sha256": "71c539bb846302da30e454e7d0158187dd87f7d7e003f42a25ffc3ccaa52df83",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 10,
+      "repeat": 0,
+      "case_id": "d3-arc23-000",
+      "generation": 13,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-b1ee5fe07d46f46e",
+          "type": "function",
+          "function": {
+            "name": "create_event",
+            "arguments": "{\"day\": \"Thursday\", \"location\": \"Izakaya Meridian\", \"time\": \"18:45\", \"title\": \"Dinner with Ravi\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 3196
+      },
+      "result_sha256": "4952a13f239d03bb2d4a62b49fa300014d484541723981b029dfafaab854f835",
+      "trace_sha256": "2265da44f0a73f38aa679eb70e20a2d5daaf70610a7788430aa66719dd1dc951",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 11,
+      "repeat": 0,
+      "case_id": "d3-arc23-000",
+      "generation": 13,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-a9998a149101bb0f",
+          "type": "function",
+          "function": {
+            "name": "create_event",
+            "arguments": "{\"day\": \"Thursday\", \"location\": \"Izakaya Meridian\", \"time\": \"18:45\", \"title\": \"Dinner with Ravi\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 3078
+      },
+      "result_sha256": "97e93fc2e93474da86e940ff3d044dcd8e30c1a86141c0a3e9e9be65a52403f9",
+      "trace_sha256": "802448ddaad5664ce0e9533b78a756543f3a84e0b40f05c5625162f865cabf6b",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 12,
+      "repeat": 1,
+      "case_id": "d2-arc18-000",
+      "generation": 5,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "stop",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2296
+      },
+      "result_sha256": "be9dca7211e543699e5a99a031d0c47adbe5480633b60fac482d84881b9d6e96",
+      "trace_sha256": "35e6becb7ec0d935e93984330b2bfcbea70887de982cf5697b98846982339c4b",
+      "semantic_review": "ACCURATE_COMPLETION_NO_EXTRA_PROPOSAL",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 13,
+      "repeat": 1,
+      "case_id": "d2-arc18-000",
+      "generation": 5,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "stop",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2339
+      },
+      "result_sha256": "542e4820634a79fbab0177dff8de51d991c73e0fd673fb5230568190b97baf61",
+      "trace_sha256": "7be763aab956ab5fe8309f8df19722131d72401d44b9d055a1b2148ff17756a0",
+      "semantic_review": "ACCURATE_COMPLETION_NO_EXTRA_PROPOSAL",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 14,
+      "repeat": 1,
+      "case_id": "d2-arc20-000",
+      "generation": 17,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-8aa23218408a832e",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"search-api\", \"version\": \"v4.1.2\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 5685
+      },
+      "result_sha256": "7ba23a96943c522a93705dd2a9ac082d59e4cea2cdc75c3ef51e5219052b4b27",
+      "trace_sha256": "62531efa2e7ecaa92407001c4460eb9182446812b62c7353aed1660e241d3f40",
+      "semantic_review": "CORRECT_REQUESTED_DEPLOY_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 15,
+      "repeat": 1,
+      "case_id": "d2-arc20-000",
+      "generation": 17,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 455,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9884
+      },
+      "result_sha256": "af07efe18445c265eff30436e6b9f9964429ca6c141322ecb1c54d4fbc37e561",
+      "trace_sha256": "5e6421702a11cb35cc626387452b1110149bcba4b177c6f70e61e186deb5869c",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_NO_TASK_PROPOSAL",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 16,
+      "repeat": 1,
+      "case_id": "d2-arc22-000",
+      "generation": 12,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 372
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9118
+      },
+      "result_sha256": "aaa7818a321f17ef28102a6b870066405daa96500aa9e89b76faf65c254e0d53",
+      "trace_sha256": "a1e8f2c41aff6f40e9e1a9bf2c1790eac6f1623e8ffc59a2ccccf264d3313be3",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_AFTER_PRIOR_EXECUTION",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 17,
+      "repeat": 1,
+      "case_id": "d2-arc22-000",
+      "generation": 12,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "length",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 372
+      },
+      "tool_proposals": [],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 9225
+      },
+      "result_sha256": "b2b5a07de73eacf7810bad0cbd0cd89f4a5ee4fc759cbc964192c34adb100389",
+      "trace_sha256": "8e2f7848b84f296bcd3b9ad30f023681f5d000ca99661b9f3794b6b9185679f8",
+      "semantic_review": "LABEL_LOOP_TRUNCATION_AFTER_PRIOR_EXECUTION",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 18,
+      "repeat": 1,
+      "case_id": "d2-arc19-000",
+      "generation": 3,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-a5655f4ed4fc7f61",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"metrics-api\", \"version\": \"v3.7.5\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1924
+      },
+      "result_sha256": "b3eb4d009d8d37a1596f6ee13469ecd85d1b52b0658ba688399e20673fd1d6bc",
+      "trace_sha256": "dcdc43c6f1c5f1c45cce3af4d0e408223a5375ba3fa222e4761e66f7cc5be7bb",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 19,
+      "repeat": 1,
+      "case_id": "d2-arc19-000",
+      "generation": 3,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 1
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-9e1b431aadaeff32",
+          "type": "function",
+          "function": {
+            "name": "deploy",
+            "arguments": "{\"service\": \"metrics-api\", \"version\": \"v3.7.5\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 1955
+      },
+      "result_sha256": "057010bb12b2a65a63ebb965a173b7e26ba0f6ca156f88a349425f091f4efea3",
+      "trace_sha256": "c58ce5b0e425cbf717dfef75e407e2097476524e4553d58d189814a7507b6062",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 20,
+      "repeat": 1,
+      "case_id": "d2-arc19-000",
+      "generation": 6,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-81598dec91ca47fa",
+          "type": "function",
+          "function": {
+            "name": "set_config",
+            "arguments": "{\"key\": \"pool_size\", \"service\": \"search-api\", \"value\": \"5695\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2298
+      },
+      "result_sha256": "be5ff9c7c6a9a21fbd7d86bcbd0c464855bba9a8e46a80891acfe86e52dcfb17",
+      "trace_sha256": "c0af2cb42b26440726170a9e0f705dc83c17b8b4658cfd08e08fdf9ed4ffaa09",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 21,
+      "repeat": 1,
+      "case_id": "d2-arc19-000",
+      "generation": 6,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 0,
+        "[ASSISTANT HISTORY - prior model output]": 1
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-a20b5a417fb7e971",
+          "type": "function",
+          "function": {
+            "name": "set_config",
+            "arguments": "{\"key\": \"pool_size\", \"service\": \"search-api\", \"value\": \"5695\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 2376
+      },
+      "result_sha256": "4584222ee47a16e7ea8dda453efbc44357086bac0ab11bc99a73924dd8c615fa",
+      "trace_sha256": "2e0adde575f1bd1b4f0545a19d70b0a069af8da6bd3ef9562417b72d2d67f28d",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 22,
+      "repeat": 1,
+      "case_id": "d3-arc23-000",
+      "generation": 13,
+      "condition": "native_roles_only",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-acb6de68c3beb220",
+          "type": "function",
+          "function": {
+            "name": "create_event",
+            "arguments": "{\"day\": \"Thursday\", \"location\": \"Izakaya Meridian\", \"time\": \"18:45\", \"title\": \"Dinner with Ravi\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 3078
+      },
+      "result_sha256": "7930b4428aa5cc5bd2607ace853da9d84cb614e48e86324b4313c8509ca34a9a",
+      "trace_sha256": "72b2f3196906968331c11580e954656355a2ed74f1f2572911ddf2d374c90949",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    },
+    {
+      "ordinal": 23,
+      "repeat": 1,
+      "case_id": "d3-arc23-000",
+      "generation": 13,
+      "condition": "legacy",
+      "status": "COMPLETED",
+      "finish_reason": "tool_calls",
+      "label_occurrences": {
+        "[WORKING HYPOTHESIS]": 1,
+        "[ASSISTANT HISTORY - prior model output]": 0
+      },
+      "tool_proposals": [
+        {
+          "id": "chatcmpl-tool-9353e47ef2ca930a",
+          "type": "function",
+          "function": {
+            "name": "create_event",
+            "arguments": "{\"day\": \"Thursday\", \"location\": \"Izakaya Meridian\", \"time\": \"18:45\", \"title\": \"Dinner with Ravi\"}"
+          }
+        }
+      ],
+      "cost": {
+        "generation_calls": 1,
+        "generation_tokens": 3196
+      },
+      "result_sha256": "b4bd875dff65009b473daa0698c7f31d8970d4d6348d3381ea4e971b201e7576",
+      "trace_sha256": "ee3fd4b549379dbe521732611730e5466621eec7d41dddc256603b5a6de89ee1",
+      "semantic_review": "CORRECT_LEGAL_CONTROL_PROPOSAL_NOT_EXECUTED",
+      "business_executions": 0
+    }
+  ],
+  "limits": [
+    "Six exposed prefixes, repeated responses are not independent source tasks.",
+    "No tools executed; cannot score business success or persistent memory maintenance.",
+    "Original model-generated labels retained; four prefixes are contaminated-history diagnostics.",
+    "Label text is an observation, not by itself a semantic failure.",
+    "Full prevention R1 L2 and independent R2 action protection still outstanding."
+  ],
+  "status": "ALL_24_ATTEMPTED_ONCE_ROOT_REVIEWED",
+  "method_source_commit": "c0bec6a7f8f29c4774da941bc5c129969d48381c",
+  "execution_commit": "77a8784b91d0a482da365904303bad4d307d2704",
+  "execution_freeze_sha256": "a2bd42c10104d3b7de114c2aafce38da5a6f23cbb4f15565f11f870ad0fdf35d",
+  "distinct_generation_ids": 24,
+  "new_calls": {
+    "generation_requests": 24,
+    "generation_tokens": 106780,
+    "embedding_tokens": 0,
+    "Judge_calls": 0,
+    "business_executions": 0
+  },
+  "ledger_after": {
+    "generation_requests": 6016,
+    "generation_tokens": 11028121,
+    "embedding_tokens": 416802,
+    "sha256": "e8db8d8ad91e2609f2d33526e24dfa9e66acf69513084348a1e47701afec9ff5"
+  },
+  "decision": {
+    "l1_gate": "CONTINUE_TO_SEPARATELY_FROZEN_L2",
+    "candidate_promoted": false,
+    "new_clear_risk_observed": false,
+    "control_proposals_correct": "All three control prefixes, both arms, both repeats; proposed tool and target arguments reviewed against legal input. No execution claim.",
+    "unrequested_deploy_arc18": {
+      "legacy": 1,
+      "native_roles_only": 0,
+      "attempts_per_condition": 2
+    },
+    "arc20": {
+      "legacy_truncated": 2,
+      "candidate_correct_requested_deploy_proposals": 2
+    },
+    "arc22": {
+      "both_conditions_truncated": 2,
+      "recovery_failed": true
+    },
+    "independent_r2_required": true,
+    "unseen_benefit": "NOT_ESTABLISHED"
+  },
+  "causal_chain": "Only program-added assistant prefixes changed; exact input projection verified; actual HTTP receipts show selective output improvement. Existing generated labels remain and can still support repetition.",
+  "competing_explanations": [
+    "Program-added labels contribute to imitation/amplification in some prefixes.",
+    "Existing contaminated model text can sustain repetition even without fresh program prefixes.",
+    "At temperature0 a legacy first-extra-action prefix differed between repeats; service-level variation and fixed order can affect single observations."
+  ],
+  "next_experiment": "L2 full prevention: original3abnormal arcs plus d2-arc19 control;2conditions;fresh isolated initial states,8fullarc attempts, separately frozen safety stop contract and costs. No resumption of old worlds.",
+  "limitations": [
+    "Six exposed prefixes, repeated responses are not independent source tasks.",
+    "No tools executed; cannot score business success or persistent memory maintenance.",
+    "Original model-generated labels retained; four prefixes are contaminated-history diagnostics.",
+    "Label text is an observation, not by itself a semantic failure.",
+    "Full prevention R1 L2 and independent R2 action protection still outstanding.",
+    "Five exposed arcs underlie six prefixes; two repetitions are not independent source groups.",
+    "No new ordinary repetition apart from shown label loops was observed; a short legal label quote is not itself failure.",
+    "Token difference includes different completions/truncations; not a memory-compression effect or total lifecycle estimate."
+  ]
+}

@@ -1,5 +1,73 @@
 # MiLAi Lab agent instructions
 
+## Latest explicit pause and report-only authorization: 2026-09-29
+
+User said “暂停当前开发”, then authorized summary/report and GitHub publication.
+Actual Goal is **paused**. This overrides historical ACTIVE/resume paragraphs below.
+Read [the v10 overall pause report](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)
+and [requirement/cost summary](data/manifests/repair-v10-pause-summary-20260929.json).
+Only Root report/read-only reconciliation and Luna Git publication are authorized now.
+No new source work, experiments, downloads, deployment or automatic remaining R2 execution.
+
+R1 L1/L2 are complete local diagnostics: L2 both20/20, labels178→0, ancillary writes4each;
+no general action reliability/unseen claim. R2 method503b943d/execution42c82c2b has15 narrow
+checks passed, but only2/13processes and2/12messages ran; no complete recovery case.
+Target singular/plural mismatch blocked reserve; next message invented a business ID,
+actually CREATED then UPDATED the same durable memory despite an empty world.
+Read [R2 pause results](docs/MILAI_REPAIR_V10_R2_PAUSE_RESULTS_20260929.md).
+Do not repair/delete this evidence or blindly resume the remaining11invocations.
+
+Continuous ledger6145generation/11407086generationtokens/416930embeddingtokens;
+v10 increment153generation/485745tokens/128embeddingtokens,0Judge. No owned worker remains
+running; existing services unchanged. R3 only offlineaudit/drafts; R4/R5 diagnosticcontracts;
+R6/R7/secondfamily NOT_RUN. Full research NOT_ACHIEVED, Product NO_GO.
+PR73 remains draft/open/unmerged; no main/oldPR merge. Preserve all drafts and old locks.
+
+
+## Current v10 authorization: 2026-09-29
+
+The actual user Goal explicitly authorizes reading and executing the full
+[repair v10 plan](docs/MILAI_REPAIR_DEVELOPMENT_EXPERIMENT_PLAN_20260929_v10.0.md).
+This new instruction resumes R0–R7 within their evidence gates; the pause below and
+the plan's design-time NOT_GRANTED metadata are historical. Preserve the original scope.
+Work only in this separate repair-v10 worktree based on 983669dd. Root owns plans,
+protocols, evidence analysis, freezes and all real model/embedding/Judge calls (serial 1).
+One Sol xhigh owns source/config/CI and narrow checks; Luna high owns Git publication
+and authorized resources. Reuse matching live agents when available. No main or old PR
+merge, service reconfiguration, second-family download/deployment, automatic SimpleMem
+138-unit run or five-method rerun is authorized by this repair execution.
+Keep the continuous ledger and all old failures untouched. R1, R2, R3 and R6 remain
+separate experimental variables; freeze each real diagnostic before calling services.
+Research remains NOT_ACHIEVED and Product NO_GO. Historical records follow.
+
+
+## v10 R1 L2 progress and explicit resume: 2026-09-29
+
+User paused after five L2 attempts, then explicitly said “继续任务”. Actual Goal is ACTIVE.
+All eight frozen attempts are now complete at execution6e061746, methodc0bec6a7.
+Read [L2 results](docs/MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md): both20/20 episodes,
+labels178→0, no truncation in either condition, four ancillary ticket writes each.
+This supports narrow output mitigation, not action reliability; legacy default remains.
+R1 L2 adds122generation/368191tokens/36embedding; cumulative6138/11396312/416838.
+Source freeze ended after207files rechecked. R2 now follows its separate
+[implementation contract](docs/MILAI_REPAIR_V10_R2_CONTRACT_20260929.md); Sol owns code,
+Root fixtures/reports/realcalls, Luna Git. No R2 real calls yet. Full R2–R7 remain.
+Historical pause paragraphs below do not override this latest explicit resume.
+
+## v10 R1 L1 progress: 2026-09-29
+
+Read [the L1 result](docs/MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md) and
+[per-call evidence](data/manifests/repair-v10-r1-l1-results.json). Source c0bec6a7,
+execution77a8784b; all24 frozen first responses completed, no tool execution.
+Legacy4/12 truncated, candidate2/12; contaminated arc22 still fails both repeats.
+Three legal control proposals remain correct. This permits separately frozen L2,
+not candidate promotion or R2 completion. Default remains legacy; no history cleaning.
+New24generation/106780tokens/0embedding; cumulative6016/11028121/416802.
+R0 and all20 scope offline audit complete; R2 read-only source contract inspected.
+R1 L2, R2 implementation/recovery, R3 single-variable repair, applicable R4–R7,
+final report and full acceptance remain unfinished. Goal stays ACTIVE. No source edits
+until the next variable's contract/identity is fixed. Do not resume old failed worlds.
+
 ## Latest user stop: 2026-09-29
 
 The user explicitly requested: “暂停当前实验，生成实验报告”. Actual Goal is **paused**.

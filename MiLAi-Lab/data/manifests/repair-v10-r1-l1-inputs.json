@@ -1,0 +1,271 @@
+{
+  "kind": "MILAI_REPAIR_V10_L1_INPUTS",
+  "status": "PREPARED_NO_REAL_CALLS",
+  "prefixes": [
+    {
+      "case_id": "d2-arc18-000",
+      "generation": 5,
+      "reason": "first_extra_deploy",
+      "original_trace_line": 62,
+      "trace_sha256": "c604644ec7feeacf3af011d447a085877e89c0499f67ff1149f48cbe610c44ba",
+      "checkpoint_sha256": "d051e4de9ef80a771bdb229d5c8e89138ca1ca753bd42ab7161d2c5c2d3f53d9",
+      "checkpoint_id": "1f1bb841-6b25-6614-8007-8014c7e7b19c",
+      "original_graph_messages_sha256": "3779907e64c185957660c7394b3fb3674aebd569b579842ceafe3dcbf3891022",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc18-000-g5-legacy.json",
+          "sha256": "fc234ee12988be529cffac6015d46fe743df61e2c4036de6b2ea7727a1a64afb",
+          "ordered_request_sha256": "78885daefc0a38aafc99914ec0f380c2f7201616ee4adbcc30f19d91f72e239e"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc18-000-g5-native_roles_only.json",
+          "sha256": "9a98d043f56e96e3e6bf68fefae6236a86800db092bb14c487cc8c47563ea5c7",
+          "ordered_request_sha256": "8411d1732515bd1c52fe950ad61ff61e3bd64ae8ecfc256ad472bc24dbefe1ea"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4,
+        6,
+        8
+      ],
+      "original_model_label_occurrences_retained": 0,
+      "diagnostic_class": "pre_amplification_prefix",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    },
+    {
+      "case_id": "d2-arc20-000",
+      "generation": 17,
+      "reason": "first_direct_repetition",
+      "original_trace_line": 247,
+      "trace_sha256": "2eda936a371058cfe615980dd7228dfa0b4886d3e1cbadeb07dfe1ef51b7ca49",
+      "checkpoint_sha256": "4888a85e8b65d61ccb25a6944a5dff36e72838823fb93d5c7639786526f4baf2",
+      "checkpoint_id": "1f1bb84c-aa07-69d7-8001-b5ad17a7283f",
+      "original_graph_messages_sha256": "a5b06f96915e502d520f8c34cf3bc6311fb5ac9066e33d7929c2c38ea42f7a51",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc20-000-g17-legacy.json",
+          "sha256": "1b5b519685d73a8fb152f4dddae640dd7cc3712eeeeb1210c6fc3f4b96b3597a",
+          "ordered_request_sha256": "fe9ae24e0fd94f88267cfd559da04394beadad96e633d8685783f18d55584ad4"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc20-000-g17-native_roles_only.json",
+          "sha256": "8cbd17b60133fd8111f579bf02c7fe9269af0e0451461a4f22800788567bc78d",
+          "ordered_request_sha256": "1f95995b2b37b1de83d6d78ecf683d96b699bda9114a52c4c48851d863f476d5"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        26,
+        28,
+        30,
+        32
+      ],
+      "original_model_label_occurrences_retained": 62,
+      "diagnostic_class": "contaminated_prefix_recovery",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    },
+    {
+      "case_id": "d2-arc22-000",
+      "generation": 12,
+      "reason": "repetition_after_business_completion",
+      "original_trace_line": 177,
+      "trace_sha256": "e2b63e8f45f76844c248a40e1e3261b5ff2ffb5d09f72763541369ee121afd58",
+      "checkpoint_sha256": "63f50615442f06f4c83a0eb602820e282af2423c5b703ecd805b0cdafe326e1f",
+      "checkpoint_id": "1f1bb854-20fa-682b-800a-1ada5e5bab16",
+      "original_graph_messages_sha256": "2f92cc60e719e1290442bf927f6c25efc9062224f9103a0ebc69c8a6fb78d279",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc22-000-g12-legacy.json",
+          "sha256": "ce5b73299c868cbccf1937a2ad10534f2037713a65195f006f430a4962d55183",
+          "ordered_request_sha256": "a36ac38f4b9e91cb3a710bb430688ce4848a6d570c73843bca098e134f05e3a0"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc22-000-g12-native_roles_only.json",
+          "sha256": "b77233c3ff2211f682ab291db1054572f4d3b8a52684d766027195e6a0204160",
+          "ordered_request_sha256": "e78c9eb4a1a9e0d34c178bc17abc33c74ef075ae21a7ac106314df04e29842a8"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22
+      ],
+      "original_model_label_occurrences_retained": 12,
+      "diagnostic_class": "contaminated_prefix_recovery",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    },
+    {
+      "case_id": "d2-arc19-000",
+      "generation": 3,
+      "reason": "new_legitimate_deploy_after_other_task",
+      "original_trace_line": 40,
+      "trace_sha256": "0425c17ac2e584f990bc0e733cf2b65fdfc61e6c46d471632b086b49c6678dec",
+      "checkpoint_sha256": "f13af64d2042c98aa0f46b80ac21085524c28acd030522bef545a5dbafac0dea",
+      "checkpoint_id": "1f1bb84b-5164-63a0-8001-200cb679ce7e",
+      "original_graph_messages_sha256": "2b2ab5f85a2caece2c4f3b15ab4a46f8d8590af24eb4686be1a276a7e202d1ee",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc19-000-g3-legacy.json",
+          "sha256": "1200fbe1697303f633456da56dc6c5fd30bd339feb06cccf9f738eaef7172a7b",
+          "ordered_request_sha256": "b8e7a275cd35999ea3f359d68656d4a0813b471d73e319e77db8f6f4919465dd"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc19-000-g3-native_roles_only.json",
+          "sha256": "e656b1ddb37b48c305ad6be341c027a935c0cd4812a8542b8a0ab77501bf4834",
+          "ordered_request_sha256": "1572b3402ee3ca5bc39a011a212dab195e6fbf814ae6eb159d2d4a1fd8ef2ed4"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4
+      ],
+      "original_model_label_occurrences_retained": 0,
+      "diagnostic_class": "pre_amplification_prefix",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    },
+    {
+      "case_id": "d2-arc19-000",
+      "generation": 6,
+      "reason": "necessary_config_change_after_read",
+      "original_trace_line": 81,
+      "trace_sha256": "0425c17ac2e584f990bc0e733cf2b65fdfc61e6c46d471632b086b49c6678dec",
+      "checkpoint_sha256": "f13af64d2042c98aa0f46b80ac21085524c28acd030522bef545a5dbafac0dea",
+      "checkpoint_id": "1f1bb84b-63ce-693f-8004-0726e6af4c29",
+      "original_graph_messages_sha256": "9ce37f94bd7a4346e67a4a984c201a41386aa18e79d3fb4998e4b5b507fe348d",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc19-000-g6-legacy.json",
+          "sha256": "b758ef9f7ae7805448598de49418e1e9f1a5a595fda486b0317dfefd34daef58",
+          "ordered_request_sha256": "a5990d29df5a8bb813eb7b2eef4b81aa908983f5f5de3d66cbf87cc52c077ee0"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d2-arc19-000-g6-native_roles_only.json",
+          "sha256": "dad77a645582ec843fc91242c6474d68234a082f13cc03bcc9c0b7526ade4fef",
+          "ordered_request_sha256": "9cd133206f4b3e7fb7d8dbaf4fa64e646621597490c55376de07bfb5e4b00a7e"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "original_model_label_occurrences_retained": 1,
+      "diagnostic_class": "contaminated_prefix_recovery",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    },
+    {
+      "case_id": "d3-arc23-000",
+      "generation": 13,
+      "reason": "later_task_uses_historical_commitment",
+      "original_trace_line": 183,
+      "trace_sha256": "c4ef49a5d6c5cb25a57b6c849b611d08dc865372d20c45b27a310ff4a23f71e3",
+      "checkpoint_sha256": "460d2e389e5118f4573975e8e613782a0e1fd44c0ff09c4ca2d6b221309caa34",
+      "checkpoint_id": "1f1bb857-95a5-6146-8001-89e0ab94eeee",
+      "original_graph_messages_sha256": "e8a2d943e988d9d040646031b721e34a170b4f4a84f261f4eedcdec476325380",
+      "conditions": {
+        "legacy": {
+          "path": "artifacts/repair-v10/r1-prefixes/d3-arc23-000-g13-legacy.json",
+          "sha256": "b03381030ec0ee938113defc8881cc1eded405046bb3572de482523030c10d84",
+          "ordered_request_sha256": "1fe5f781419154960bf7215b17d4ade4541f3c30d8c2806d8719b7400da2b5e1"
+        },
+        "native_roles_only": {
+          "path": "artifacts/repair-v10/r1-prefixes/d3-arc23-000-g13-native_roles_only.json",
+          "sha256": "6f177479d2602042715c40dc1ba85ac375a65f090b2c9bb8627736792bae8d16",
+          "ordered_request_sha256": "7af1d263f7f2e80f9c3598dad1cb5c3502a6ccd5e281773a2c302727bdc5cf8f"
+        }
+      },
+      "only_removed_program_prefix_positions": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24
+      ],
+      "original_model_label_occurrences_retained": 6,
+      "diagnostic_class": "contaminated_prefix_recovery",
+      "proposal_execution": false,
+      "legacy_matches_actual_historical_request": true,
+      "candidate_exact_declared_difference": true,
+      "checkpoint_readonly_unchanged": true
+    }
+  ],
+  "prefix_count": 6,
+  "conditions": [
+    "legacy",
+    "native_roles_only"
+  ],
+  "repetitions": 2,
+  "planned_first_response_calls": 24,
+  "order": "repeat outer (0 then1), six prefixes in listed order, conditions legacy then native_roles_only on repeat0; reverse on repeat1",
+  "source_sha256": {
+    "src/milai_lab/methods/memory_boundaries.py": "b85b49f0bb1e0f74710893a3a0d8653f56edbc29d563f3bdaa67cd334dc0d556",
+    "src/milai_lab/methods/request_context.py": "d0ae47a3f0e2c82d8372e67f023f10b6fb8324d087781f324d0dcfadbd71055b"
+  },
+  "no_business_execution": true,
+  "cost_contract": "All24 first responses billed to continuous ledger; no outcome-dependent extra samples. Existing contaminated source bodies retained.",
+  "freeze_status": "Not executable until published source identity and Root execution freeze are recorded.",
+  "method_source_commit": "c0bec6a7f8f29c4774da941bc5c129969d48381c",
+  "preparation_helper_sha256": "64d106da913c9399264667d496f6320d46c950918d3875d4c60c9eb98a6904e6",
+  "preparation_log_sha256": "75a5070008ed377ecb3dcfcd4f93f65837223ef4f3f754541d5d34049a4ab5b8",
+  "transport_preflight": {
+    "status": "PASS",
+    "unique_requests": 12,
+    "real_calls": 0,
+    "receipt_sha256": "d5023aefcbf36df5f0893f3e6e89c01a8ee40f5caf4d24a7c4ffd3aa12374e1b",
+    "runner_sha256": "1001c15351dea31fc77930ba022481d7be6c5760a28bee2fa316d82f809d4bfb",
+    "order_sha256": "78a7c21689310d0302bc5c9ba6ad829ffb2d4c9eed800d261a89d1acf55e9dde"
+  },
+  "prefreeze_selection_correction": {
+    "case_id": "d2-arc19-000",
+    "from_generation": 7,
+    "to_generation": 6,
+    "reason": "Post-config ticket update is not an unambiguous required next step. Use successful config read before explicitly requested config change, so required action continuation is identifiable without checker.",
+    "new_outputs_seen": 0,
+    "original_manifest_sha256": "468c21db36e710f2ed3619cc4b78e8ef64650af217c2c2611fe9f2d65f1e390a",
+    "earlier_artifacts_retained": true
+  }
+}
