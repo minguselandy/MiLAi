@@ -1,0 +1,80 @@
+{
+  "kind": "MILAI_V13_1_MEMSYCO_SOURCE_AVAILABILITY",
+  "status": "NOMINAL_UNSEEN_FORMAL_POOL_INSUFFICIENT",
+  "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+  "official_source_files": [
+    {
+      "task": "contextual_scope_control",
+      "relative_path": "data/contextual_scope_control.jsonl",
+      "sha256": "a233ee49a17434255fd372a95284f57bfa3bbbbcbb5cf9be2d0c6c793865d748",
+      "row_count": 300
+    },
+    {
+      "task": "valid_memory_selection",
+      "relative_path": "data/valid_memory_selection.jsonl",
+      "sha256": "7db0f062306a925f7cea9ea9cfb32cb94bbe2bb17999eff3e4a764aeabc4d498",
+      "row_count": 350
+    },
+    {
+      "task": "personalized_memory_use",
+      "relative_path": "data/personalized_memory_use.jsonl",
+      "sha256": "7e4384008478265e338c8571a0f6d8e7a8720439f97dff8e735c1c858f613e17",
+      "row_count": 300
+    }
+  ],
+  "source_root": "/cra/memory/mx_memory/reference-sources/contextual-v3/MemSyco-Bench",
+  "source_exposure_sha256": "ce9e9b8d499d441091e9050332e19dbdccf5af18ecefb875d845bc0ca5df2b44",
+  "legacy_memsyco_group_labels": 60,
+  "legacy_group_labels_resolved": 60,
+  "component_rule": "Transitive union of exact nonempty metadata.source_id OR SHA256 canonical complete dialogue; exclude any component touching exposed/reserved native case/source/history hash or any resolved legacy group representative. No question/answer/outcome/length selection.",
+  "canonicalization": "UTF-8 JSON ensure_ascii=False/sort_keys=True/compact comma-colon",
+  "counts": {
+    "contextual_scope_control": {
+      "official_rows": 300,
+      "official_source_components": 300,
+      "excluded_rows": 30,
+      "available_rows_before_new_pilot": 270,
+      "available_source_components": 270,
+      "nominal_pilot_questions": 20,
+      "nominal_formal_questions": 100,
+      "formal_100_possible_even_before_pilot": true
+    },
+    "valid_memory_selection": {
+      "official_rows": 350,
+      "official_source_components": 45,
+      "excluded_rows": 287,
+      "available_rows_before_new_pilot": 63,
+      "available_source_components": 15,
+      "nominal_pilot_questions": 20,
+      "nominal_formal_questions": 100,
+      "formal_100_possible_even_before_pilot": false
+    },
+    "personalized_memory_use": {
+      "official_rows": 300,
+      "official_source_components": 121,
+      "excluded_rows": 205,
+      "available_rows_before_new_pilot": 95,
+      "available_source_components": 79,
+      "nominal_pilot_questions": 20,
+      "nominal_formal_questions": 100,
+      "formal_100_possible_even_before_pilot": false
+    }
+  },
+  "total_rows": 950,
+  "source_components": 431,
+  "excluded_components": 80,
+  "remote_HEAD_readonly": {
+    "returncode": 0,
+    "stdout": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221\tHEAD",
+    "stderr": ""
+  },
+  "metadata_catalog_sha256": "37e35c683030a3b23108a7551e709c4823a1ea4b64a14e761673716f4ea3ff28",
+  "audit_script_sha256": "ac8b2189916ab40f62419e3931ab85b190c35bfcbdb85de96ecbfb32120a1534",
+  "formal_selection": "NOT_SELECTED",
+  "pilot_selection": "NOT_SELECTED",
+  "runtime_gold_boundary": "Machine parses local JSON only to retain ID/source/hash metadata; no questions/evaluation content emitted to developer, Host or writer. No formal test inputs/gold inspected.",
+  "consequence": "Current pinned valid-memory and personalized source pools cannot supply nominal100 unseen formal questions even before newpilot. Do not relabel exposed rows as unseen, replace tracks or alter full goal silently. Preserve nominal requirement unmet while other phases progress.",
+  "new_model_calls": 0,
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

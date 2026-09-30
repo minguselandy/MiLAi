@@ -65,3 +65,5 @@ v10 新增 153 次 generation、485,745 generation tokens、128 embedding tokens
 
 固定material公共合同诊断4generation/4496tokens：两臂业务状态消费改善，但Mem0额外虚构
 来源引文，仍失败。原micro5/6结论保留；[P2实际16消息](V13_1_P2_TYPED_RECEIPTS.md)完成8条显式字段形成；后续两臂各2/4符合预定说明，历史未检索送达，Ref另有2条虚构绝对scope。完整P2仍PARTIAL，无全段prose验证承诺。
+
+P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，Attention不准入。新增合计12generation/21439tokens；最新连续6447generation/11902007tokens/420830embedding，unknown0。[直接证据](V13_1_P2_TYPED_RECEIPTS.md)。

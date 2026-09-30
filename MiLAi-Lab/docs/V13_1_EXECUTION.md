@@ -131,3 +131,7 @@ R9预定正常开发门槛已通过；完整Engineering-valid、Usability-ready�
 后续两臂各2/4符合预定说明，Ref另1FAIL/1UNKNOWN、Field2FAIL；全部只GET，历史未检索送达。
 Ref另外2条scope虚构绝对日期，完整fact review不通过。新增46generation/92756tokens，连续
 6435generation/11880568tokens/420830embedding，unknown0。有限字段不保护scope/notes/引文；完整P2仍PARTIAL。
+
+P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，Attention不准入。新增合计12generation/21439tokens；最新连续6447generation/11902007tokens/420830embedding，unknown0。[直接证据](V13_1_P2_TYPED_RECEIPTS.md)。
+
+[来源容量核查](V13_1_SOURCE_AVAILABILITY.md)：旧来源组全部解析并排除后，valid剩63题/15来源组、personalized剩95题/79来源组，新pilot前已不足各100正式题。官方HEAD未变化；正式集未选、不复用曝光题，完整目标继续ACTIVE，等待额外来源信息时继续独立任务。

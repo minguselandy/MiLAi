@@ -70,3 +70,17 @@ get_reservation，没有search/read，历史bank未送达；最早断点为历�
 新增46generation/92756generation tokens/0embedding，与每个真实response和连续账本精确核对。
 连续6435generation/11880568generation tokens/420830embedding tokens，unknown0/Judge0。
 独立读回wall/CPU与文件/逻辑字节有记录；总Store I/O仍partial。原失败不被后续诊断覆盖。
+
+
+## 历史送达诊断：保留负结果
+
+同一真实bank/world/checkpoints的配对副本，新s3只给原自然问题；不直接带入s2回答。
+[通用历史证据提示](../data/manifests/v13-1-p2-history-delivery-results.json)4腿：control均错把查询
+当先前操作，candidate均说历史不明；全部仍只GET。新增8generation/13998tokens。
+[明确历史查询工具规则](../data/manifests/v13-1-p2-explicit-history-query-results.json)2腿，新s4/
+原bank/原问题：实际wire包含search_memory工具和完整规则，但仍只GET，没有送达历史bank。
+新增4generation/7441tokens；两腿historical result均UNKNOWN，不能当成功。
+这两个提示诊断不修复原记忆/回答，不重新宣称guard收益；也不证明已经调用的普通query失败。
+保持Attention不准入。停止继续堆叠此提示分支，转向其余独立baseline/恢复合同工作。
+连续6447generation/11902007generation tokens/
+420830embedding，unknown0；SHA256 6379511737f91cf0d44b556bcbac30fe59a0e1829d1c8038d2a00198033577f0。

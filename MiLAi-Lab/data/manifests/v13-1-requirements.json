@@ -26,7 +26,8 @@
       "authoritative_evidence_required": "conservative registry + generated grouped selection excluding all historical exposure",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-1-source-exposure.json"
+        "data/manifests/v13-1-source-exposure.json",
+        "data/manifests/v13-1-memsyco-source-availability.json"
       ],
       "conditional": false
     },
@@ -61,7 +62,9 @@
         "data/manifests/v13-1-p3-partial-contract-protocol.json",
         "data/manifests/v13-1-p3-partial-contract-results.json",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -277,7 +280,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -293,7 +298,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -309,7 +316,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -325,7 +334,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -341,7 +352,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -357,7 +370,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -373,7 +388,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -386,7 +403,9 @@
       "status": "NOT_VERIFIED",
       "evidence": [
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -402,7 +421,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -418,7 +439,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-p2-typed-receipts-results.json",
-        "docs/V13_1_P2_TYPED_RECEIPTS.md"
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
       ],
       "conditional": false
     },
@@ -556,7 +579,9 @@
       "requirement": "60 new development MemSyco samples,20 per task,5 methods then SimpleMem same sources",
       "authoritative_evidence_required": "300 planned method-question denominators plus SimpleMem results",
       "status": "NOT_VERIFIED",
-      "evidence": [],
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json"
+      ],
       "conditional": false
     },
     {
@@ -596,7 +621,9 @@
       "requirement": "Formal MemSyco300 unexposed source-group questions,100/task x6 methods",
       "authoritative_evidence_required": "1800 method-question units complete planned denominators",
       "status": "NOT_VERIFIED",
-      "evidence": [],
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json"
+      ],
       "conditional": false
     },
     {
@@ -636,7 +663,9 @@
       "requirement": "Frozen second family60 MemSyco/18MERIT/20Lifecycle bases x2 conditions and three controls",
       "authoritative_evidence_required": "writer-fixed reader-change separated from new writer+reader results",
       "status": "NOT_VERIFIED",
-      "evidence": [],
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json"
+      ],
       "conditional": false
     },
     {
