@@ -7,7 +7,7 @@ import hashlib
 import json
 import subprocess
 import sys
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -27,11 +27,21 @@ from milai_lab.memory.service_tools import create_service_tools
 
 @contextmanager
 def opened(
-    root: Path, owner: str = "alice", mode: GroundingMode = "field_grounded"
+    root: Path,
+    owner: str = "alice",
+    mode: GroundingMode = "field_grounded",
+    receipt_contract: str = "optional",
+    observer: Callable[[dict[str, Any]], None] | None = None,
 ) -> Iterator[MemoryService]:
     with SqliteStore.from_conn_string(str(root / "memory.sqlite")) as store:
         yield MemoryService(
-            store, ("langmem", "run", mode, owner), owner, root / "memory.lock", mode=mode
+            store,
+            ("langmem", "run", mode, owner),
+            owner,
+            root / "memory.lock",
+            mode=mode,
+            receipt_contract=receipt_contract,
+            observer=observer,
         )
 
 
@@ -100,7 +110,10 @@ def test_source_capture_is_immutable_unformed_and_hashes_actual_body(tmp_path: P
 
 
 @pytest.mark.parametrize("wrong", ["nonexistent", "foreign"])
-def test_source_and_object_refs_are_owner_bound(tmp_path: Path, wrong: str) -> None:
+@pytest.mark.parametrize("receipt_contract", ["optional", "explicit_receipt_v1"])
+def test_source_and_object_refs_are_owner_bound(
+    tmp_path: Path, wrong: str, receipt_contract: str
+) -> None:
     world = ApplicationWorld(tmp_path / "world.sqlite", False)
     try:
         with opened(tmp_path, "bob") as other:
@@ -111,8 +124,8 @@ def test_source_and_object_refs_are_owner_bound(tmp_path: Path, wrong: str) -> N
                 )
                 is None
             )
-        with opened(tmp_path) as service:
-            source = captured(service)
+        with opened(tmp_path, receipt_contract=receipt_contract) as service:
+            source, _, _ = tool_event(service, world, "owned-call")
             bad = foreign_source if wrong == "foreign" else "src-nonexistent"
             rejected = service.commit("s1", "p1", proposal(bad))
             assert rejected["reason"] == "source_not_found_or_not_owned"
@@ -120,7 +133,9 @@ def test_source_and_object_refs_are_owner_bound(tmp_path: Path, wrong: str) -> N
                 "s1",
                 "p2",
                 proposal(
-                    source, object_ref=(foreign_ref if wrong == "foreign" else "imaginary-object")
+                    source,
+                    basis="tool_observation",
+                    object_ref=(foreign_ref if wrong == "foreign" else "imaginary-object"),
                 ),
             )
             assert rejected["reason"] == "object_ref_not_found_or_not_owned"
@@ -178,6 +193,16 @@ def test_receipt_idempotence_partial_fields_and_prose_never_verified(tmp_path: P
             )
             receipt = service.commit("s1", "p1", raw)
             assert receipt["fields_verification"] == "receipt_matched"
+            assert set(receipt) == {
+                "ok", "status", "id", "revision", "source_ref", "formation_status",
+                "content_verification", "fields_verification", "effect", "mode",
+            }
+            version = service.read(receipt["id"])["value"]
+            assert set(version) == {
+                "revision", "content", "kind", "scope", "basis", "source_ref", "object_ref",
+                "fields", "mode", "content_verification", "source_status", "fields_verification",
+                "observed_at", "committed_at", "session",
+            }
             duplicate = service.commit("s1", "different-call", raw)
             assert duplicate["status"] == "no_change" and duplicate["id"] == receipt["id"]
             assert len(service.records()) == 1
@@ -193,6 +218,330 @@ def test_receipt_idempotence_partial_fields_and_prose_never_verified(tmp_path: P
             assert len(world.snapshot()["attempts"]) == 1
     finally:
         world.close()
+
+
+@pytest.mark.parametrize("mode", ["ref_only", "field_grounded"])
+@pytest.mark.parametrize(
+    ("fields", "reason"),
+    [
+        ({}, "receipt_fields_required"),
+        ({"status": "reserved_label_failed"}, "receipt_fields_required"),
+        ({"status": "reserved_label_failed", "label_status": "not_created", "extra": "raw"},
+         "unsupported_operational_field"),
+        ({"status": 1, "label_status": "not_created"}, "invalid_receipt_fields"),
+    ],
+)
+def test_explicit_receipt_invalid_fields_reject_without_consuming_source(
+    tmp_path: Path, mode: GroundingMode, fields: dict[str, Any], reason: str
+) -> None:
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    try:
+        with opened(tmp_path, mode=mode, receipt_contract="explicit_receipt_v1") as service:
+            source, ref, body = tool_event(service, world)
+            claims = {key: body[key] for key in ("status", "label_status")}
+            raw = proposal(
+                source,
+                json.dumps(claims),
+                basis="tool_observation",
+                object_ref=ref,
+                fields=fields,
+                content_format="receipt_json_v1",
+            )
+            rejected = service.commit("s1", "missing", raw)
+            assert rejected["reason"] == reason
+            assert service.store.search(service.attempts_namespace)[0].value["raw"] == raw
+            assert service.sources()[0]["formation_status"] == "pending"
+            assert service.records() == []
+            if not fields:
+                # Omitting the model ref cannot bypass a real reservation source's
+                # contract (the public tool would discover this ref internally).
+                omitted = service.commit("s1", "omitted-ref", {**raw, "object_ref": None})
+                assert omitted["reason"] == "receipt_fields_required"
+            accepted = service.commit("s1", "corrected-model-proposal", {**raw, "fields": claims})
+            assert accepted["status"] == "committed"
+            assert service.read(accepted["id"])["value"]["fields"] == claims
+    finally:
+        world.close()
+
+
+@pytest.mark.parametrize("mode", ["ref_only", "field_grounded"])
+@pytest.mark.parametrize("conflict", ["receipt", "body"])
+def test_explicit_receipt_schema_does_not_turn_ref_only_into_field_grounding(
+    tmp_path: Path, mode: GroundingMode, conflict: str
+) -> None:
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    try:
+        with opened(tmp_path, mode=mode, receipt_contract="explicit_receipt_v1") as service:
+            source, ref, body = tool_event(service, world)
+            claims = {key: body[key] for key in ("status", "label_status")}
+            false_claims = {"status": "label_created", "label_status": "created"}
+            raw = proposal(
+                source,
+                json.dumps({**false_claims, "notes": "Unverified invented quotation."}),
+                basis="tool_observation",
+                object_ref=ref,
+                fields=false_claims if conflict == "receipt" else claims,
+                content_format="receipt_json_v1",
+            )
+            result = service.commit("s1", "wrong", raw)
+            if mode == "field_grounded":
+                prefix = "field_conflict:" if conflict == "receipt" else "receipt_body_conflict:"
+                assert result["reason"].startswith(prefix)
+                assert service.records() == []
+                assert service.store.search(service.attempts_namespace)[0].value["raw"] == raw
+            else:
+                assert result["status"] == "committed"
+                value = service.read(result["id"])["value"]
+                assert value["content"] == raw["content"] and value["fields"] == raw["fields"]
+                assert value["fields_verification"] == "unchecked"
+                assert value["body_fields_verification"] == "unchecked"
+                assert value["content_verification"] == value["notes_verification"] == "unchecked"
+    finally:
+        world.close()
+
+
+@pytest.mark.parametrize(
+    ("content", "content_format", "reason"),
+    [
+        ('{"status":"reserved_label_failed","label_status":"not_created"}', None,
+         "receipt_content_format_required"),
+        ('{"status":"reserved_label_failed","label_status":"not_created"}', "plain",
+         "receipt_content_format_required"),
+        ('{"status":', "receipt_json_v1", "receipt_body_invalid_json"),
+        ('```json\n{}\n```', "receipt_json_v1", "receipt_body_invalid_json"),
+        ('[]', "receipt_json_v1", "receipt_body_invalid_schema"),
+        ('{"status":"reserved_label_failed"}', "receipt_json_v1", "receipt_body_invalid_schema"),
+        ('{"status":1,"label_status":"not_created"}', "receipt_json_v1",
+         "receipt_body_invalid_schema"),
+        ('{"status":"reserved_label_failed","label_status":"not_created","extra":"claim"}',
+         "receipt_json_v1", "receipt_body_invalid_schema"),
+        ('{"status":"reserved_label_failed","label_status":"not_created","notes":null}',
+         "receipt_json_v1", "receipt_body_invalid_schema"),
+        ('{"status":"reserved_label_failed","status":"other","label_status":"not_created"}',
+         "receipt_json_v1", "receipt_body_invalid_json"),
+    ],
+)
+@pytest.mark.parametrize("mode", ["ref_only", "field_grounded"])
+def test_explicit_receipt_invalid_body_preserved_across_store_reopening(
+    tmp_path: Path, content: str, content_format: str | None, reason: str, mode: GroundingMode
+) -> None:
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    try:
+        with opened(tmp_path, mode=mode, receipt_contract="explicit_receipt_v1") as service:
+            source, ref, body = tool_event(service, world)
+            raw = proposal(
+                source, content, basis="tool_observation", object_ref=ref,
+                fields={key: body[key] for key in ("status", "label_status")},
+                content_format=content_format,
+                requested={"content": content, "content_format": content_format},
+            )
+            first = service.commit("s1", "invalid-body", raw)
+            assert first["reason"] == reason and first["effect"] == "none"
+        with opened(tmp_path, mode=mode, receipt_contract="explicit_receipt_v1") as service:
+            attempt = service.store.search(service.attempts_namespace)[0].value
+            assert attempt == {"raw": raw, "receipt": first}
+            replay = service.commit("s1", "invalid-body", raw)
+            assert replay["replayed"] and replay["reason"] == reason
+            assert service.records() == []
+            assert service.sources()[0]["formation_status"] == "pending"
+    finally:
+        world.close()
+
+
+def test_explicit_receipt_tool_binding_history_and_idempotence(tmp_path: Path) -> None:
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    try:
+        with opened(tmp_path, receipt_contract="explicit_receipt_v1") as service:
+            source, ref, body = tool_event(service, world)
+            fields = {key: body[key] for key in ("status", "label_status")}
+            content = json.dumps({**fields, "notes": "Invented quote and free prose unchecked."})
+            arguments = {
+                "content": content, "basis": "tool_observation", "fields": fields,
+                "content_format": "receipt_json_v1",
+            }
+            node = ToolNode(create_service_tools(service))
+
+            async def save() -> dict[str, Any]:
+                result = await node.ainvoke(
+                    [call("manage_memory", arguments)], config=config(),
+                    runtime=Runtime(store=service.store),
+                )
+                return json.loads(result["messages"][0].content)
+
+            first = asyncio.run(save())
+            assert first["status"] == "committed", first
+            assert first["receipt_contract"] == "explicit_receipt_v1"
+            assert first["body_fields_verification"] == "matches_proposed_fields"
+            assert first["receipt_claim_fields"] == ["status", "label_status"]
+            assert first["content_verification"] == first["notes_verification"] == "unchecked"
+            stored = service.store.get(service.namespace, first["id"]).value["_v13_1"]
+            raw = next(iter(stored["proposals"].values()))["raw"]
+            assert raw["requested"] == {
+                "content": content, "action": "create", "kind": "semantic", "scope": None,
+                "basis": "tool_observation", "target_query": None, "id": None,
+                "expected_revision": None, "source_ref": None, "object_ref": None,
+                "fields": fields, "content_format": "receipt_json_v1",
+            }
+            assert raw["source_ref"] == source and raw["object_ref"] == ref
+            assert asyncio.run(save())["status"] == "no_change"
+            assert service.commit("s1", "different-id", raw)["status"] == "no_change"
+            changed = {
+                **raw, "content": json.dumps({**fields, "notes": "Different unchecked note"})
+            }
+            assert service.commit("s1", "conflict", changed)["reason"] == "receipt_already_consumed"
+            # A later real receipt can form a new revision; no live lookup edits
+            # the earlier observed fields or raw body.
+            world.set_label_available("availability", True)
+            latest_body = world.complete_label("alice", body["reservation_id"])
+            latest_source = service.event_id("s1", "complete", "tool")
+            latest_ref = verified_reservation_ref(
+                world, "alice", latest_source, "complete_label", latest_body
+            )
+            assert latest_ref is not None
+            service.capture_tool("s1", "complete", "complete_label", latest_body, latest_ref)
+            updated_fields = {key: json.loads(latest_body)[key] for key in fields}
+            update = proposal(
+                latest_source, json.dumps(updated_fields), basis="tool_observation",
+                object_ref=latest_ref.id, fields=updated_fields, content_format="receipt_json_v1",
+                id=first["id"], expected_revision=1,
+            )
+            assert service.commit("s1", "revision", update)["revision"] == 2
+            assert service.commit("s1", "revision-replay", update)["reason"] == "revision_conflict"
+            assert service.commit("s1", "revision", update)["status"] == "no_change"
+            duplicate = service.commit("s1", "same-receipt", {**update, "expected_revision": 2})
+            assert duplicate["status"] == "no_change" and duplicate["revision"] == 2
+        with opened(tmp_path, receipt_contract="explicit_receipt_v1") as service:
+            assert service.read(first["id"], 1)["value"]["content"] == content
+            assert service.read(first["id"], 1)["value"]["fields"] == fields
+            assert service.read(first["id"])["value"]["fields"] == updated_fields
+            history = service.store.get(service.namespace, first["id"]).value["_v13_1"]["history"]
+            assert len(history) == 2
+    finally:
+        world.close()
+
+
+def test_explicit_receipt_leaves_preferences_and_unbound_tool_prose_unchanged(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, receipt_contract="explicit_receipt_v1") as service:
+        preference = proposal(captured(service), "I prefer brief replies, unchecked prose.")
+        result = service.commit("s1", "preference", preference)
+        assert result["status"] == "committed" and "receipt_contract" not in result
+        source = service.capture_tool("s1", "other", "other_public_tool", "Observed prose", None)
+        unbound = proposal(source["source_ref"], "Unchecked tool prose", basis="tool_observation")
+        result = service.commit("s1", "unbound", unbound)
+        assert result["status"] == "committed" and "receipt_contract" not in result
+        assert service.read(result["id"])["value"]["content_verification"] == "unchecked"
+
+
+@pytest.mark.parametrize("mode", ["ref_only", "field_grounded"])
+@pytest.mark.parametrize("receipt_contract", ["optional", "explicit_receipt_v1"])
+def test_explicit_receipt_minimal_body_found_by_original_public_item(
+    tmp_path: Path, mode: GroundingMode, receipt_contract: str, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    observed = []
+    try:
+        with opened(
+            tmp_path, mode=mode, receipt_contract=receipt_contract, observer=observed.append
+        ) as service:
+            receipts = {}
+            for item in ("parcel", "envelope"):
+                source, ref, body = tool_event(service, world, item)
+                fields = {key: body[key] for key in ("status", "label_status")}
+                raw = proposal(
+                    source, json.dumps(fields), basis="tool_observation",
+                    object_ref=ref, fields=fields, content_format="receipt_json_v1",
+                )
+                receipts[item] = service.commit("s1", item, raw)
+            assert len(service.records()) == 2
+            before = service.records()
+            original_get = service.store.get
+            source_gets = []
+
+            def get(namespace: tuple[str, ...], key: str, **kwargs: Any) -> Any:
+                if namespace == service.sources_namespace:
+                    source_gets.append(key)
+                return original_get(namespace, key, **kwargs)
+
+            monkeypatch.setattr(service.store, "get", get)
+            result = service.search("parcel", include_raw=False)
+            if receipt_contract == "optional":
+                assert result["records"] == [] and "source_relation" not in result
+                assert source_gets == [] and observed == []
+                return
+            assert [row["id"] for row in result["records"]] == [receipts["parcel"]["id"]]
+            assert len(source_gets) == result["source_relation"]["store_get_calls"] == 2
+            assert observed[-1]["query"] == "parcel" and observed[-1]["store_get_calls"] == 2
+            assert observed[-1]["wall_ns"] > 0 and observed[-1]["cpu_ns"] > 0
+            assert {json.loads(row["original_result"]["content"])["item_key"]
+                    for row in observed[-1]["lookups"]} == {"parcel", "envelope"}
+            assert result["records"][0] == next(
+                row for row in before if row["id"] == receipts["parcel"]["id"]
+            )
+            # A normal search reuses its already loaded raw sources and performs
+            # no additional source gets for this relation.
+            public = service.search("envelope")
+            assert [row["id"] for row in public["records"]] == [receipts["envelope"]["id"]]
+            assert public["source_relation"]["store_get_calls"] == 0
+            assert observed[-1]["lookups"] == []
+            assert service.records() == before
+            tools = {tool.name: tool for tool in create_service_tools(service)}
+            read = tools["read_memory"].invoke(
+                call("read_memory", {"query": "envelope"}, "natural-read"), config=config(mode)
+            )
+            assert json.loads(read.content)["id"] == receipts["envelope"]["id"]
+            assert service.search("missingparcel", include_raw=False)["records"] == []
+            with opened(tmp_path, "bob", mode, receipt_contract) as other:
+                source, ref, body = tool_event(other, world, "foreignparcel")
+                fields = {key: body[key] for key in ("status", "label_status")}
+                other.commit("s1", "foreign", proposal(
+                    source, json.dumps(fields), basis="tool_observation",
+                    object_ref=ref, fields=fields, content_format="receipt_json_v1",
+                ))
+            assert service.search("foreignparcel", include_raw=False)["records"] == []
+            assert service.search("")["records"] == sorted(before, key=lambda row: row["id"])
+            assert "source_relation" not in service.search("")
+            # Public updates discover the exact target by original item, without
+            # a user-supplied memory id or source/object ref.
+            body_text = world.get_reservation("alice", "parcel")
+            source = service.event_id("s1", "rediscovery", "tool")
+            ref = verified_reservation_ref(
+                world, "alice", source, "get_reservation", body_text
+            )
+            assert ref is not None
+            service.capture_tool("s1", "rediscovery", "get_reservation", body_text, ref)
+            fields = {key: json.loads(body_text)[key] for key in ("status", "label_status")}
+            update = tools["manage_memory"].invoke(call("manage_memory", {
+                "action": "update", "target_query": "parcel", "content": json.dumps(fields),
+                "basis": "tool_observation", "fields": fields, "content_format": "receipt_json_v1",
+            }, "natural-update"), config=config(mode))
+            receipt = json.loads(update.content)
+            assert receipt["id"] == receipts["parcel"]["id"] and receipt["revision"] == 2
+            assert service.read(receipt["id"], 1)["value"]["source_ref"] != source
+            assert observed[-1]["store_get_calls"] == 2
+            # Failed actual source I/O is counted and its first error is preserved.
+            def fail(namespace: tuple[str, ...], key: str, **kwargs: Any) -> Any:
+                if namespace == service.sources_namespace:
+                    raise OSError("source relation Store get failed")
+                return original_get(namespace, key, **kwargs)
+
+            monkeypatch.setattr(service.store, "get", fail)
+            with pytest.raises(OSError, match="source relation Store get failed"):
+                service.search("parcel", include_raw=False)
+            assert observed[-1]["store_get_calls"] == 1
+            assert observed[-1]["lookups"][0]["error"] == "source relation Store get failed"
+    finally:
+        world.close()
+
+
+@pytest.mark.parametrize("invalid", [None, True, 1, [], {}, "", "explicit_receipt_v2"])
+def test_explicit_receipt_configuration_rejects_unknown_types_and_values(
+    tmp_path: Path, invalid: Any
+) -> None:
+    with pytest.raises(ValueError, match="V13_MEMORY_RECEIPT_CONTRACT_INVALID"):
+        with opened(tmp_path, receipt_contract=invalid):
+            pass
 
 
 def test_revisions_conflicts_and_duplicate_proposals_preserve_history(tmp_path: Path) -> None:

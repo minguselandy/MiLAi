@@ -8,7 +8,12 @@ from typing import Annotated, Any, Literal
 import anyio
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
-from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
+from langchain_core.tools import (
+    BaseTool,
+    InjectedToolCallId,
+    StructuredTool,
+    create_schema_from_function,
+)
 
 from milai_lab.memory.service import MemoryService
 
@@ -45,6 +50,7 @@ def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
         source_ref: str | None = None,
         object_ref: str | None = None,
         fields: dict[str, str] | None = None,
+        content_format: str | None = None,
     ) -> ToolMessage:
         """Save a proposed memory or revise a discovered record. Prose is always unchecked.
 
@@ -70,6 +76,8 @@ def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
             "object_ref": object_ref,
             "fields": fields,
         }
+        if service.receipt_contract == "explicit_receipt_v1":
+            requested["content_format"] = content_format
         sources = service.sources(session)
         if source_ref is None:
             relevant = [
@@ -110,6 +118,8 @@ def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
             "requested": requested,
             "target_resolution_error": target_resolution_error,
         }
+        if service.receipt_contract == "explicit_receipt_v1":
+            proposal["content_format"] = content_format
         receipt = service.commit(session, tool_call_id, proposal)
         return message("manage_memory", tool_call_id, receipt)
 
@@ -167,11 +177,39 @@ def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
     async def aread_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: read_memory(config=config, **arguments))
 
-    return tuple(
-        StructuredTool.from_function(function, coroutine=coroutine, name=name)
-        for name, function, coroutine in (
-            ("manage_memory", manage_memory, amanage_memory),
-            ("search_memory", search_memory, asearch_memory),
-            ("read_memory", read_memory, aread_memory),
+    explicit = service.receipt_contract == "explicit_receipt_v1"
+    manage_tool = StructuredTool.from_function(
+        manage_memory,
+        coroutine=amanage_memory,
+        name="manage_memory",
+        args_schema=(
+            None if explicit else create_schema_from_function(
+                "manage_memory", manage_memory,
+                filter_args=["run_manager", "callbacks", "config", "content_format"],
+            )
+        ),
+    )
+    if explicit:
+        manage_tool.description += (
+            "\n\nExplicit receipt contract: for tool_observation bound to an actual reservation "
+            "receipt, propose both status and label_status as strings in fields. Declare "
+            "content_format='receipt_json_v1' and provide content as a JSON object with "
+            "literal string status and label_status, plus optional notes (string); no other "
+            "keys. Missing claims or undeclared/malformed bodies are rejected. Field-grounded "
+            "mode compares fields to the original observed receipt and body literals to fields; "
+            "Ref-only mode checks refs/schema while claims remain unchecked. Never fill or "
+            "repair a rejected proposal silently. Only these two finite claims can be matched; "
+            "notes, free prose and quotations are always unchecked. This contract does not "
+            "assert current applicability of historical observations. Ordinary user preferences "
+            "need no receipt JSON. Source/object refs are discovered internally when omitted."
         )
+    return (
+        manage_tool,
+        *(
+            StructuredTool.from_function(function, coroutine=coroutine, name=name)
+            for name, function, coroutine in (
+                ("search_memory", search_memory, asearch_memory),
+                ("read_memory", read_memory, aread_memory),
+            )
+        ),
     )

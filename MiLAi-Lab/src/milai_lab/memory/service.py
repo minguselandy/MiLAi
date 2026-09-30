@@ -11,9 +11,10 @@ from __future__ import annotations
 import fcntl
 import hashlib
 import json
+import time
 import unicodedata
 import uuid
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from dataclasses import asdict
 from datetime import UTC, datetime
@@ -37,6 +38,23 @@ def _hash(value: Any) -> str:
 
 def _body_hash(value: Any) -> str:
     return hashlib.sha256((value if isinstance(value, str) else _json(value)).encode()).hexdigest()
+
+
+def _receipt_json(content: str) -> Any:
+    """Read declared JSON without silently discarding duplicate literal claims."""
+
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("duplicate_receipt_key")
+            result[key] = value
+        return result
+
+    def invalid_constant(value: str) -> Any:
+        raise ValueError("non_json_constant:" + value)
+
+    return json.loads(content, object_pairs_hook=unique_object, parse_constant=invalid_constant)
 
 
 def _lexical_tokens(text: str, *, include_cjk_unigrams: bool = False) -> list[str]:
@@ -98,6 +116,8 @@ class MemoryService:
         lock_path: Path,
         *,
         mode: GroundingMode = "field_grounded",
+        receipt_contract: str = "optional",
+        observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
             raise TypeError("V13_MEMORY_REQUIRES_SQLITE_STORE")
@@ -107,9 +127,17 @@ class MemoryService:
             raise ValueError("V13_MEMORY_OWNER_NAMESPACE_MISMATCH")
         self.store, self.namespace, self.owner = store, namespace, owner
         self.mode, self.lock_path = mode, lock_path.resolve()
+        self.receipt_contract = self.validate_receipt_contract(receipt_contract)
+        self.observer = observer
         self.sources_namespace = (*namespace, "v13_1_sources")
         self.attempts_namespace = (*namespace, "v13_1_attempts")
         self.lock_path.parent.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    def validate_receipt_contract(value: Any) -> str:
+        if not isinstance(value, str) or value not in ("optional", "explicit_receipt_v1"):
+            raise ValueError("V13_MEMORY_RECEIPT_CONTRACT_INVALID")
+        return value
 
     @contextmanager
     def _locked(self) -> Iterator[None]:
@@ -234,6 +262,44 @@ class MemoryService:
                 result.append({**event, "formation_status": "formed" if formed else "pending"})
             return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
 
+    def _uses_explicit_receipt(
+        self, proposal: dict[str, Any], source: dict[str, Any]
+    ) -> bool:
+        ref = source.get("object_ref")
+        return (
+            self.receipt_contract == "explicit_receipt_v1"
+            and proposal["basis"] == "tool_observation"
+            and ref is not None
+            and ref.get("application") == "ApplicationWorld.reservation"
+        )
+
+    def _receipt_claims(
+        self, proposal: dict[str, Any]
+    ) -> tuple[str | None, dict[str, Any] | None]:
+        required = {"status", "label_status"}
+        fields = proposal["fields"]
+        if not required <= fields.keys():
+            return "receipt_fields_required", None
+        if fields.keys() != required:
+            return "unsupported_operational_field", None
+        if not all(isinstance(value, str) for value in fields.values()):
+            return "invalid_receipt_fields", None
+        if proposal.get("content_format") != "receipt_json_v1":
+            return "receipt_content_format_required", None
+        try:
+            body = _receipt_json(proposal["content"])
+        except ValueError:
+            return "receipt_body_invalid_json", None
+        if (
+            not isinstance(body, dict)
+            or not required <= body.keys()
+            or not body.keys() <= required | {"notes"}
+            or not all(isinstance(body[key], str) for key in required)
+            or ("notes" in body and not isinstance(body["notes"], str))
+        ):
+            return "receipt_body_invalid_schema", None
+        return None, body
+
     def _validate(self, proposal: dict[str, Any]) -> tuple[str | None, dict[str, Any] | None]:
         if (
             not isinstance(proposal.get("content"), str)
@@ -270,6 +336,11 @@ class MemoryService:
             return "operational_fields_require_object_ref", source
         if proposal["fields"] and proposal["basis"] != "tool_observation":
             return "operational_fields_require_tool_observation", source
+        body = None
+        if self._uses_explicit_receipt(proposal, source):
+            reason, body = self._receipt_claims(proposal)
+            if reason is not None:
+                return reason, source
         if self.mode == "field_grounded" and proposal["fields"]:
             assert ref is not None
             for field, value in proposal["fields"].items():
@@ -277,6 +348,10 @@ class MemoryService:
                     return "unsupported_operational_field", source
                 if not isinstance(value, str) or ref["fields"].get(field) != value:
                     return "field_conflict:" + field, source
+            if body is not None:
+                for field in ("status", "label_status"):
+                    if body[field] != proposal["fields"][field]:
+                        return "receipt_body_conflict:" + field, source
         return None, source
 
     def commit(self, session: str, proposal_id: str, proposal: dict[str, Any]) -> dict[str, Any]:
@@ -330,7 +405,7 @@ class MemoryService:
                     for accepted in row["value"].get("_v13_1", {}).get("proposals", {}).values():
                         old = accepted["raw"]
                         if accepted["receipt"]["ok"] and old["source_ref"] == raw["source_ref"]:
-                            comparable = (
+                            comparable: tuple[str, ...] = (
                                 "content",
                                 "kind",
                                 "scope",
@@ -338,6 +413,8 @@ class MemoryService:
                                 "object_ref",
                                 "fields",
                             )
+                            if self._uses_explicit_receipt(raw, source):
+                                comparable += ("content_format",)
                             if (row["id"] == target or raw.get("id") is None) and all(
                                 old.get(k) == raw.get(k) for k in comparable
                             ):
@@ -385,6 +462,21 @@ class MemoryService:
                 "effect": "memory_only",
                 "mode": self.mode,
             }
+            if self._uses_explicit_receipt(raw, source):
+                # This verifies only two literal claims against a historical
+                # observation. Notes, quotations and general prose are unchecked;
+                # it does not assert current applicability of the old receipt.
+                finite_claims = {
+                    "receipt_contract": self.receipt_contract,
+                    "content_format": raw["content_format"],
+                    "receipt_claim_fields": ["status", "label_status"],
+                    "body_fields_verification": "matches_proposed_fields"
+                    if self.mode == "field_grounded"
+                    else "unchecked",
+                    "notes_verification": "unchecked",
+                }
+                version.update(finite_claims)
+                receipt.update(finite_claims)
             history = [*(metadata or {}).get("history", []), version]
             proposals = {
                 **(metadata or {}).get("proposals", {}),
@@ -494,9 +586,77 @@ class MemoryService:
         enumerate_bank = not query.strip()
         records = self.records()
         raw = self.sources() if include_raw else []
+        linked_text: dict[str, str] = {}
+        relation: dict[str, Any] = {}
+        if self.receipt_contract == "explicit_receipt_v1" and tokens:
+            started_wall, started_cpu = time.monotonic_ns(), time.process_time_ns()
+            # Reuse sources already loaded for raw search. Internal target discovery
+            # excludes raw output and needs one exact Store get per distinct source.
+            source_cache: dict[str, dict[str, Any] | None] = {
+                event["event_id"]: event for event in raw
+            }
+            lookups: list[dict[str, Any]] = []
+            links: list[dict[str, str]] = []
+
+            def observe_relation() -> dict[str, Any]:
+                cost = {
+                    "kind": "captured_public_tool",
+                    "joined_records": len(links),
+                    "store_get_calls": len(lookups),
+                    "wall_ns": time.monotonic_ns() - started_wall,
+                    "cpu_ns": time.process_time_ns() - started_cpu,
+                    "io_accounting": "captured_source_gets_only",
+                }
+                if self.observer is not None:
+                    self.observer({
+                        "event": "v13_memory_source_relation", "owner": self.owner,
+                        "query": query, **cost, "links": links, "lookups": lookups,
+                    })
+                return cost
+
+            for row in records:
+                version = row.get("value") or {}
+                if (
+                    not row["ok"]
+                    or version.get("receipt_contract") != "explicit_receipt_v1"
+                    or version.get("content_format") != "receipt_json_v1"
+                ):
+                    continue
+                source_ref = version["source_ref"]
+                if not include_raw and source_ref not in source_cache:
+                    lookup: dict[str, Any] = {"source_ref": source_ref}
+                    lookups.append(lookup)
+                    try:
+                        event = self.source(source_ref)
+                    except Exception as error:
+                        lookup.update(error_type=type(error).__name__, error=str(error))
+                        observe_relation()
+                        raise
+                    source_cache[source_ref] = event
+                    lookup["original_result"] = event
+                event = source_cache.get(source_ref)
+                if event is None or not self._uses_explicit_receipt(version, event):
+                    continue
+                ref = event["object_ref"]
+                if (
+                    event["role"] != "tool"
+                    or event["event_id"] != source_ref
+                    or ref["id"] != version["object_ref"]
+                    or ref["owner"] != self.owner
+                    or ref["source_ref"] != source_ref
+                ):
+                    continue
+                linked_text[row["id"]] = _json(
+                    {"origin": event["origin"], "content": event["content"]}
+                )
+                links.append({"id": row["id"], "source_ref": source_ref})
+            relation = observe_relation()
 
         def rank(row: dict[str, Any]) -> int:
-            text_tokens = set(_lexical_tokens(_json(row), include_cjk_unigrams=True))
+            text = _json(row)
+            if row.get("id") in linked_text:
+                text += " " + linked_text[row["id"]]
+            text_tokens = set(_lexical_tokens(text, include_cjk_unigrams=True))
             return sum(token in text_tokens for token in tokens)
 
         records = sorted(
@@ -515,4 +675,5 @@ class MemoryService:
             "degradation_reason": degradation,
             "records": records,
             "raw_events": raw,
+            **({"source_relation": relation} if relation else {}),
         }

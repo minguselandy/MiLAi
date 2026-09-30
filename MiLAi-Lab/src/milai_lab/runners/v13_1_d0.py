@@ -62,7 +62,15 @@ def _system_prompt(config: dict[str, Any]) -> str:
     return prompt
 
 
-def _catalog(root: Path, mode: GroundingMode) -> list[dict[str, Any]]:
+def _receipt_contract(config: dict[str, Any]) -> str:
+    return MemoryService.validate_receipt_contract(
+        config.get("memory_receipt_contract", "optional")
+    )
+
+
+def _catalog(
+    root: Path, mode: GroundingMode, *, receipt_contract: str = "optional"
+) -> list[dict[str, Any]]:
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
             store,
@@ -70,6 +78,7 @@ def _catalog(root: Path, mode: GroundingMode) -> list[dict[str, Any]]:
             "schema-owner",
             root / "memory.lock",
             mode=mode,
+            receipt_contract=receipt_contract,
         )
         return [
             *[convert_to_openai_tool(tool) for tool in create_service_tools(service)],
@@ -103,13 +112,14 @@ def prepare(
     # Instantiate only the config DTO here, never a client or model service.
     VLLMConfig(**config["host"])
     system_prompt = _system_prompt(config)
+    receipt_contract = _receipt_contract(config)
     if "capacity" not in config or "budget_path" not in config:
         raise ValueError("V13_D0_CAPACITY_AND_CONTINUOUS_BUDGET_REQUIRED")
     budget_path = Path(config["budget_path"])
     if not budget_path.is_file():
         raise ValueError("V13_D0_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
     budget_limits = read_json(budget_path)["limits"]
-    catalog = _catalog(root, mode)
+    catalog = _catalog(root, mode, receipt_contract=receipt_contract)
     frozen = {
         "kind": "MILAI_V13_1_D0_RUNTIME_FREEZE",
         "fixture": fixture,
@@ -120,6 +130,7 @@ def prepare(
         "config_path": str(config_path.resolve()),
         "budget_limits": budget_limits,
         "mode": mode,
+        "memory_receipt_contract": receipt_contract,
         "transport": transport,
         "run_id": root.resolve().name,
         "source_sha256": _sources(),
@@ -203,7 +214,13 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
         )
         stack.callback(world.close)
         service = MemoryService(
-            store, namespace, scope.user_id, case_root / "memory.lock", mode=frozen["mode"]
+            store,
+            namespace,
+            scope.user_id,
+            case_root / "memory.lock",
+            mode=frozen["mode"],
+            receipt_contract=_receipt_contract(settings),
+            observer=trace,
         )
         source_receipt = service.capture_user(
             public["session_id"], public["message_id"], public["content"]

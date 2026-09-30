@@ -63,15 +63,26 @@ def prepared(tmp_path: Path, **config_updates: Any) -> Path:
 
 
 @pytest.mark.parametrize("configured_prompt", [None, "  Configured prompt sentinel.\n"])
+@pytest.mark.parametrize("receipt_contract", ["optional", "explicit_receipt_v1"])
 def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_messages(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     configured_prompt: str | None,
+    receipt_contract: str,
 ) -> None:
-    root = prepared(tmp_path, **({"system_prompt": configured_prompt} if configured_prompt else {}))
+    root = prepared(
+        tmp_path, memory_receipt_contract=receipt_contract,
+        **({"system_prompt": configured_prompt} if configured_prompt else {}),
+    )
     expected_prompt = runner.SYSTEM_PROMPT if configured_prompt is None else configured_prompt
     expected_hash = hashlib.sha256(expected_prompt.encode()).hexdigest()
     assert runner._frozen(root)["prompt_sha256"] == expected_hash
+    assert runner._frozen(root)["memory_receipt_contract"] == receipt_contract
+    explicit = receipt_contract == "explicit_receipt_v1"
+    fields = {"status": "reserved_label_failed", "label_status": "not_created"}
+    proposed_content = (
+        json.dumps(fields) if explicit else "Raw Host proposal: reserved, label unavailable"
+    )
     wires = []
     actions = [
         {
@@ -92,13 +103,11 @@ def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_message
                 {
                     "name": "manage_memory",
                     "arguments": {
-                        "content": "Raw Host proposal: reserved, label unavailable",
+                        "content": proposed_content,
                         "kind": "episodic",
                         "basis": "tool_observation",
-                        "fields": {
-                            "status": "reserved_label_failed",
-                            "label_status": "not_created",
-                        },
+                        "fields": fields,
+                        **({"content_format": "receipt_json_v1"} if explicit else {}),
                     },
                 }
             ]
@@ -142,6 +151,11 @@ def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_message
     assert "FUTURE_USER_MESSAGE" not in json.dumps(wires)
     assert first["records"][0]["value"]["fields"]["label_status"] == "not_created"
     assert first["records"][0]["value"]["content_verification"] == "unchecked"
+    assert first["records"][0]["value"]["content"] == proposed_content
+    if explicit:
+        assert first["records"][0]["value"]["body_fields_verification"] == "matches_proposed_fields"
+    else:
+        assert "body_fields_verification" not in first["records"][0]["value"]
     assert len(first["world"]["attempts"]) == 1
     assert (
         first["execution_wall_ns"] > 0 and first["persistent_resource_bytes"]["memory.sqlite"] > 0
@@ -157,6 +171,16 @@ def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_message
     assert second["status"] == "completed", second
     assert second["records"] == first["records"]
     assert len(second["world"]["attempts"]) == 1
+    second_trace = [
+        json.loads(line) for line in next(root.glob("*/message-1.jsonl")).read_text().splitlines()
+    ]
+    relation = [row for row in second_trace if row["event"] == "v13_memory_source_relation"]
+    if explicit:
+        assert len(relation) == 1 and relation[0]["query"] == "reserved"
+        assert relation[0]["store_get_calls"] == 0 and relation[0]["lookups"] == []
+        assert relation[0]["joined_records"] == 1
+    else:
+        assert relation == []
     # Resubmission of a completed public message spends no further generation.
     assert runner.step(root, "mechanical", 0) == first
     assert len(wires) == 5
@@ -167,6 +191,45 @@ def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_message
         assert wire["messages"][0]["content"].endswith(expected_prompt)
         if configured_prompt is not None:
             assert runner.SYSTEM_PROMPT not in wire["messages"][0]["content"]
+    # JSON-action catalog is sent in the actual provider system wire, and the
+    # configured contract must also be enforced by the constructed service.
+    assert ("receipt_json_v1" in wires[0]["messages"][0]["content"]) == explicit
+
+
+@pytest.mark.parametrize("invalid_contract", [None, True, 123, [], {}, "", "explicit_receipt_v2"])
+def test_prepare_rejects_invalid_supplied_memory_receipt_contract(
+    tmp_path: Path, invalid_contract: Any
+) -> None:
+    with pytest.raises(ValueError, match="V13_MEMORY_RECEIPT_CONTRACT_INVALID"):
+        prepared(tmp_path, memory_receipt_contract=invalid_contract)
+    assert not (tmp_path / "run/input-freeze.json").exists()
+
+
+def test_optional_catalog_matches_pre_contract_frozen_catalog_exactly(tmp_path: Path) -> None:
+    catalog = runner._catalog(tmp_path, "field_grounded")
+    assert catalog == runner._catalog(tmp_path, "field_grounded", receipt_contract="optional")
+    serialized = json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
+    # Captured from the actual pre-change R9 tool composition, not synthesized
+    # by removing fields from the candidate catalog.
+    assert hashlib.sha256(serialized).hexdigest() == (
+        "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926"
+    )
+    explicit = runner._catalog(tmp_path, "field_grounded", receipt_contract="explicit_receipt_v1")
+    assert explicit[1:] == catalog[1:]
+    legacy_manage = catalog[0]["function"]
+    explicit_manage = explicit[0]["function"]
+    properties = explicit_manage["parameters"]["properties"]
+    assert "content_format" in properties
+    assert "content_format" not in legacy_manage["parameters"]["properties"]
+    assert {key: value for key, value in properties.items() if key != "content_format"} == (
+        legacy_manage["parameters"]["properties"]
+    )
+    assert explicit_manage["description"].startswith(legacy_manage["description"])
+    assert "notes" in explicit_manage["description"]
+    assert "unchecked" in explicit_manage["description"]
+    root = prepared(tmp_path)
+    assert runner._frozen(root)["memory_receipt_contract"] == "optional"
+    assert runner._frozen(root)["tool_catalog"] == catalog
 
 
 @pytest.mark.parametrize("invalid_prompt", [None, True, 123, [], {}, "", " \t\n"])
