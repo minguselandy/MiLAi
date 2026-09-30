@@ -1,0 +1,93 @@
+{
+  "kind": "V13_2_R0_DEVELOPMENT_COHORT_ACCOUNTING",
+  "status": "R0_ACTUAL_ENDED_NOT_PROMOTED",
+  "runtime_manifest_sha256": "73de4df5a690cdb444dc4167d7dcaae6b2e47d32ab3db235beb156600532c1fe",
+  "source_commit": "bb1b9a7ad878678cd51fb573dc55cbe2e2ef106c",
+  "source_map_sha256": "bba7a9b218cc2c60ac066b123ebf3968e2170e6f9d3a556e706b89705e140e8f",
+  "actual_free_trajectories": {
+    "planned": 47,
+    "attempted": 47,
+    "completed": 45,
+    "interrupted": 2
+  },
+  "actual_free_messages": {
+    "planned": 109,
+    "attempted": 106,
+    "complete": 104,
+    "interrupted": 2,
+    "not_run": 3,
+    "http_finals_linked": 104
+  },
+  "controlled_e1_boundaries": {
+    "planned": 16,
+    "completed": 16,
+    "free_host_samples": 0
+  },
+  "costs": {
+    "generation_requests": 292,
+    "known_generation_tokens": 903698,
+    "embedding_requests": 143,
+    "known_embedding_tokens": 61122,
+    "host_generation_requests": 237,
+    "host_known_tokens": 722344,
+    "formation_generation_requests": 55,
+    "formation_known_tokens": 181354,
+    "new_unknown_usage": 0
+  },
+  "ledger_delta": {
+    "generation_requests": 292,
+    "generation": {
+      "charged_tokens": 903698,
+      "known_tokens": 903698,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 61122,
+      "known_tokens": 61122,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_snapshot_paths_sha256": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-before.json": "02b667cfa0d19f0bf07cc0f0f6c31dc472ba8a0223a8de574e7917f4aba0386f",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E0.json": "130b2022eadec71134869d5f552f3ceaecbec0e031387d380d0f47c432ef3a81",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E1-controlled.json": "250e389f10508fcaca6e8664b84cba0caef7928e2e8b3fc122e0cf2f91e7c69b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E1-free.json": "4a6bf896631565fc48f253a5181fbdb6078f5b4a13e3a2e505a01ee41e05297b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E2-free.json": "c2f271973b807ccfd5c5fb808348339335df162045bf00b6f04a84373bce2d87"
+  },
+  "continuous_ledger_at_r0_end": {
+    "generation_requests": 8238,
+    "generation": {
+      "charged_tokens": 21244736,
+      "known_tokens": 21214349,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 778310,
+      "known_tokens": 778310,
+      "unknown_usage": 0
+    }
+  },
+  "results_sha256": {
+    "data/manifests/v13-2-e0-normal-results.json": "694e7e3a6e7f3a70c60654a73d7184e04cb87b7149e598c945a222fa88582131",
+    "data/manifests/v13-2-e1-development-results.json": "b818f4c01647e272765c7232d6b729919e789b4d67eb94d588a628897c21280b",
+    "data/manifests/v13-2-e2-development-results.json": "f28369ce23b2faf10792d6eae04007841dc4916c5dfa787f74e577828f08649a"
+  },
+  "root_drivers_postrun_identity": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_development.py": "b4d9a267e8a6d1240314da67c09c664264fc4ff4d25ec55bf8e274b632f3f91d",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/fixed_flow.py": "0054788ab1cd2a5ab9ca8e83a3d8bcb6a724b7d4fba0615cb3647dea2efc2adf",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_fixed_flow_sequence.py": "66649b6651c4cf0c7d0817ca8dbd1bafd38f3a41ef7a2e22e4005cede848a6dd",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_e1_free.py": "96cba16f579c430496cd1cd0d456c5e3ac906f15eef6f85109d98772851a464e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_e2_free.py": "a1750b63b92134fb01d82559d0ae47d869679fa477afb495ace3e1ec47298efa",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/reopen_e0.py": "2bfd61e6df49a332cbc1861997c426521958c9306fe027e04962cbf41639516b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/reopen_e1_e2.py": "1a60ecc7e34ddaababe805a9ea5cfedc5fe28e337ce13e1cd0daf319d56d55cd",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/write_e0_review.py": "7faabe2893dfbd7e2cf620bf2fcadc0efa57ae2edd17119af7fbf41722f21e8d",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/write_e1_review.py": "314251566bf4b736a1d95c041a5e5a72962d75694d4f8878d6f0dc902e24d688",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/write_e2_review.py": "537ce50b59f2206f96ff4ff5cbfe1e13dec5d6c53645ab7da07d5cd4bbb96e0a"
+  },
+  "driver_timing_qualification": "Initial prepare and controlled fixed-flow child driver identity frozen before their actual HTTP. Parent serial launchers were recorded as created before their respective stages; this post-run inventory does not retroactively claim all parent/analyzer drivers were in initial R0 freeze. Post-run review drivers run no model HTTP.",
+  "promotion": "NOT_PASSED: E0 18 PASS,5 FAIL,1 UNKNOWN; supported original old-update repairs fail. Subsequent fixes require a separate full24 E0 cohort; preserve R0 cost and evidence.",
+  "independent_semantic_rating": false,
+  "gpu_hours": null,
+  "dollars": null,
+  "product": "NO_GO"
+}

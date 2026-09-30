@@ -1,0 +1,654 @@
+{
+  "kind": "V13_2_E0_NORMAL_DEVELOPMENT_RESULT",
+  "status": "ACTUAL_COMPLETE_ROOT_DEVELOPMENT_REVIEW_ONLY",
+  "review_amendment": {
+    "reason": "Full current-claim/source support recheck after provisional Root draft. Original runtime evidence unchanged.",
+    "superseded_private_draft_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E0-normal/root-review-before-support-recheck.json",
+    "superseded_private_draft_sha256": "4e764848745c8291f92736f99bbfbef488daf7de45f01bbf18fa38adcb9c85d6"
+  },
+  "runtime_manifest_sha256": "73de4df5a690cdb444dc4167d7dcaae6b2e47d32ab3db235beb156600532c1fe",
+  "planned": 24,
+  "attempted": 24,
+  "completed": 24,
+  "messages": 48,
+  "actual_http_finals_linked": 48,
+  "root_review": {
+    "pass": 18,
+    "fail": 5,
+    "unknown": 1,
+    "independent": false,
+    "allplanned_denominator": 24
+  },
+  "normal_gate": {
+    "minimum_pass": 22,
+    "confirmed_pass": 18,
+    "maximum_if_unknown_later_passes": 19,
+    "status": "NOT_PASSED",
+    "reason": "18 evidence-backed development passes; original update-2/update-3 structurally revised but changed claims cite only old contradictory sources. Both semantic support repairs and normal22/24 gate failed."
+  },
+  "original_exposed_update_repairs": {
+    "update-2": {
+      "same_record_revised": true,
+      "r1_to_r2": true,
+      "history_retained": true,
+      "new_preference_supported_by_current_correction_source": false,
+      "complete_repair": false
+    },
+    "update-3": {
+      "same_record_revised": true,
+      "r1_to_r2": true,
+      "history_retained": true,
+      "new_preference_supported_by_current_correction_source": false,
+      "complete_repair": false
+    }
+  },
+  "owner_leaks_identified": 0,
+  "false_durable_commit_receipts_identified": 0,
+  "semantic_failures_not_false_commit_claims": true,
+  "bounded_packets_verified_in_actual_http": 33,
+  "semantic_maintenance_status_counts": {
+    "skipped_host_committed": 20,
+    "pending": 22,
+    "committed": 4,
+    "partial": 1,
+    "no_change": 1
+  },
+  "trace_costs": {
+    "generation_requests": 126,
+    "generation_classified_requests": 98,
+    "generation_known_tokens": 375063,
+    "generation_classified_known_tokens": 285950,
+    "embedding_requests": 49,
+    "embedding_classified_requests": 49,
+    "embedding_known_tokens": 21017,
+    "embedding_classified_known_tokens": 21017,
+    "semantic_writer_classified_requests": 28,
+    "semantic_writer_classified_known_tokens": 89113
+  },
+  "ledger_delta": {
+    "generation_requests": 126,
+    "generation": {
+      "charged_tokens": 375063,
+      "known_tokens": 375063,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 21017,
+      "known_tokens": 21017,
+      "unknown_usage": 0
+    },
+    "trace_known_tokens_match": true,
+    "trace_generation_requests_match": true
+  },
+  "private_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E0-normal/audit.json",
+    "sha256": "39b7a77bcfd15a44e31e1fa4e855ee84bfc57d0b60285c4d5d0523b4f2a70a47"
+  },
+  "actual_sdk_reopen": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E0-normal/independent-sdk-reopen.json",
+    "sha256": "bbaa708e12887aaf91544ce494ee871ee07789ab6f3e91daeee4e3eb79c6daed"
+  },
+  "root_review_driver_sha256": "7faabe2893dfbd7e2cf620bf2fcadc0efa57ae2edd17119af7fbf41722f21e8d",
+  "rows": [
+    {
+      "case_id": "save-1",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "实际偏好提交且独立SDK重开一致，最终确认与保存内容相符。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "178bf9908492a44acb061865698b23a7c1f3d472223a3a68a77ea959feece8b9",
+          "trace_sha256": "d9f83e59bbc319e8c8c143734b7188bb437b0bcb85ac7b2f6ae4e9983567fedb",
+          "process_id": 3009746
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "save-2",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "实际偏好提交且独立SDK重开一致，最终确认与保存内容相符。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "79570baec3d5158c8b53d2ea63a2b7b1f7648bdb4c2b221d3815554907e6e02a",
+          "trace_sha256": "6d3a247b7cd6b642ba6fef79aa37e9410bb08e2c08669915ed30ea951e40038e",
+          "process_id": 3040157
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "save-3",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "实际偏好提交且独立SDK重开一致，最终确认与保存内容相符。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "546dd06d1e43279de55d0fb6772d5a68960e5b5f716c99924428a19e5d0e7c77",
+          "trace_sha256": "3db63f0d4dec33935b1ccf00188a20bf498e5819caf6aac65bc1e605c56394f2",
+          "process_id": 3040722
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "save-4",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "实际偏好提交且独立SDK重开一致，最终确认与保存内容相符。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "46222bb04d79c3200360a70f000c906483bff4cd26f50ef8e45d7214f6f88f4f",
+          "trace_sha256": "33f1dd72a1697e5bdc8b7caf1189178ed06dbb4de336ef12193d37363f7bebcb",
+          "process_id": 3041188
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "recall-1",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "原偏好通过实际HTTP历史材料送达；最终正确回忆，后置拒绝未改变原卡。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "0c7afbb9554bf3a47c6264b86053e58c0f182f969786615ef3475d23e53f4feb",
+          "trace_sha256": "b201a7f828fd0cd435722e62704d1721e84a8ac5ad2ebba4c07e46127c3e8e58",
+          "process_id": 3010331
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "fca5cb45d224c8b8bbf0cb8323f479863cbad1ce63e02297a011ffecc85b21b9",
+          "trace_sha256": "9927e3ccc0f25c8ab49e58be2fd8d2ae50bb14b6afbb112a2ac7f0acf23136d1",
+          "process_id": 3010874
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "recall-2",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "原偏好通过实际HTTP历史材料送达；最终正确回忆，后置拒绝未改变原卡。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "57cb98b2cde1f2f18496637560f06fea54b8c9bc5b78b5bfec66c4c6f48d1cf7",
+          "trace_sha256": "fdb1ac2e5799e7cb9399ce1fca2a9797a8842df7917cb7e11f158f837ceb9867",
+          "process_id": 3041753
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "9d1d83cc9a5c1c2bcc0175d898e3ae44e34160130217d5193e778f8bbeedb6fc",
+          "trace_sha256": "66803d2aceae58e6e962b5102db22d3c0c3af23395a5a03a26a07f83eac83fc6",
+          "process_id": 3042264
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "recall-3",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "原偏好通过实际HTTP历史材料送达；最终正确回忆，后置拒绝未改变原卡。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "42b0e150c8325c417a1b9aa70e0729295d52472d75377ffb43dc4b4e07427697",
+          "trace_sha256": "361b861f741ba19a90f185bd026ab0717d2d426df4922b1b2965a4bebd2a5652",
+          "process_id": 3042913
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "2c11b735234da5f766357314602dd75e16983e425d4328f006c3db5190c60245",
+          "trace_sha256": "cac0fe9cbf1018df504f239ae435e8c167c15e5bb079b0e6ceb2dbc531e0dd34",
+          "process_id": 3043420
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "recall-4",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "原偏好通过实际HTTP历史材料送达；最终正确回忆，后置拒绝未改变原卡。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "c09c2b7de4bf9b00801a1d2478e7a26b88941b5626255f543e14befecede0373",
+          "trace_sha256": "0f1a5364c6770a4dc7c3594e77b4eb5d531453cbf1f0209aab4ce385c4cbb4ba",
+          "process_id": 3044001
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "8680d8c1f7b3faa1b50292148e2df0970b8a07e45e0a5995bb122037aa01df91",
+          "trace_sha256": "f606e6a721503766728d1d4e04c994f977431f81177d99707a88e192141054ea",
+          "process_id": 3044618
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "实际HTTP已送达原咖啡卡和候选句柄；Host把source_refs嵌入semantic_patch，两次invalid_semantic_patch后另CREATE茶卡并引用旧咖啡源。最终历史/当前回答正确，原卡仍r1，身份修订失败。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "c71a7dcc165b0443a84852eff66907547ed62af7c2d1093d4c44baa821fab4af",
+          "trace_sha256": "66dcac1728140e61b5602a92d538eb65000158e8a036bd97a2084b9208f024c2",
+          "process_id": 3011522
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "5cab06e6c56d57544f535d73f62f8df22fce4190c74e52f9eff272b982f2c392",
+          "trace_sha256": "dc6b881f2412787080b611d9ff3bdf1b8e8eb9304e6082d01e280a6e2769dd0d",
+          "process_id": 3012109
+        },
+        {
+          "index": 2,
+          "receipt_sha256": "63cad30c92e792c92bb093fc042616acf4732ad8d8c0e2b260e5064946b9f0f5",
+          "trace_sha256": "c37f47f55433e335743c85331f0bd60070ee958a6a1867e0371288747beb4761",
+          "process_id": 3013100
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "update-2",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "原card同ID从r1修订为r2且历史保留，实际回答正确；新中文偏好却仅引用旧英文陈述。结构修订成立，语义来源支持失败，不能视为旧update-2完整修复。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "26e19a66e6ed8c07ec7b184a9c9e583e87a8870cc748f03b54af186d1082d6f3",
+          "trace_sha256": "cfdd4ed12f8b0570c86585bd25a3e1ded1a51cb52d86b00cc45fef308bac7c47",
+          "process_id": 3027655
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "9893c39383fcd0250d3b03d8d5c420745084489c8dd6d0ee8d783c8334d681a2",
+          "trace_sha256": "9a52cf4f36f14670fe0830da232359d4578c08a816ab7d79bbcf4d0fb10f65c5",
+          "process_id": 3028212
+        },
+        {
+          "index": 2,
+          "receipt_sha256": "69264e68a86d98dfe984daaedf9360c176a5412d20883d2fbf7cd3d9e2891bfb",
+          "trace_sha256": "c85be65f36679deb4e0d811b135702698667601fce530ece43c4cf0cccf11c65",
+          "process_id": 3028940
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "update-3",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "原card同ID从r1修订为r2且历史保留，实际回答正确；新公里偏好却仅引用旧英里陈述。结构修订成立，语义来源支持失败，不能视为旧update-3完整修复。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "75057ed5ef4169ae991326295fe9e7b8637c675eddbcd239cb20329d6423d05b",
+          "trace_sha256": "84c078244f0d8b22e700d4ae6784a0eec49405197bdca199424d4f18f58716fe",
+          "process_id": 3029539
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "5f9a030766eeb883f27fd3c9392815b903333d34e83004bcd08cdfe64ded871b",
+          "trace_sha256": "f449f2c403b217bcc384dd49c0344d83dda7bae8c817a5336487d7aec340a130",
+          "process_id": 3030108
+        },
+        {
+          "index": 2,
+          "receipt_sha256": "0e5775f53ea940543ceac206783f2331539c298d95277b1cbaa746ea8afee4cd",
+          "trace_sha256": "34f17a2f2145756ff661f492557f904604e492453ea8fca781c22bc7c0807a30",
+          "process_id": 3030798
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "update-4",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "原card同ID从r1修订为r2且历史保留，实际回答正确；新下午偏好却仅引用旧上午陈述，语义来源支持失败。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "fe44e5d869a38c077d026042526d1ef632282b989a41bef89bd48c707d2aa675",
+          "trace_sha256": "9481b8e9f6a37d8e9b419cc786bcd0696f2ecc072896b5c8a6832a0f5dc52012",
+          "process_id": 3045161
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "27667fa914a587696a56155b2e6c9e238035a061f64a7fd28d208ffb9ee1ea4d",
+          "trace_sha256": "6936915cad3d51efbb307e24d6e40198e415533ef9b8e4a14c7f27a437976223",
+          "process_id": 3045720
+        },
+        {
+          "index": 2,
+          "receipt_sha256": "356e55926b6a65654d383b5192384d89e1753f5270a427bf6f5a55155cf0535d",
+          "trace_sha256": "37592314c2a70a68f1ba289408ea8a1bd17b5e22e0e955526167a4a4b3fc71e7",
+          "process_id": 3046348
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "最终回答正确保留团队/个人否定范围，但后置writer把问题另存为肯定的长期个人素食偏好。真实来源和哈希不保证概括正确。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "9489df26270d3f3e005f09b40cf93c81d5c9f3d1268ef48073f8446f678d81a3",
+          "trace_sha256": "0ac8093e9db6392254dce3e330e7304f40cde465560dbc0b1704985928ceb43e",
+          "process_id": 3013731
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "d2aa801509226b7942462f7e0c81382335f0c0ec683615e8f537aa1e7895389a",
+          "trace_sha256": "455d4dd22eb11a84f39235626a92d2c6f6c90968320b249b6a9791f764f56b03",
+          "process_id": 3014394
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "scope-2",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "最终正确区分个人/项目或通常/本次范围，无相应长期错误推定。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "5fb6d542c001e189146e9f29b67738f0149f6a6806573b7dd515bcd235d1638f",
+          "trace_sha256": "3d111a536d04ed679c69307a267e9a5d17ce3376938e925aa83a583eaa644c71",
+          "process_id": 3047052
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "20c99a4bce5737ef5241730999093f1205bb54edf0a57ba22b6c5babd746a45d",
+          "trace_sha256": "8382f61eb88d41c835001ec454d1f9123c2e6b1ae67795e7e52d35e3e15b7e90",
+          "process_id": 3047545
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "scope-3",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "最终正确区分个人/项目或通常/本次范围，无相应长期错误推定。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "8a6533c74b53df182f400a584a946bbcb2b394f2d0780df6555ce3c315a585f9",
+          "trace_sha256": "96a16602d8c7ca4fe5ac133bb03461faa72bb9d935e882c08bef80f3522948db",
+          "process_id": 3048116
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "43c4760f99885875d07c717ba27a48a7f3571d4f622b04d5b526c258930b6e8a",
+          "trace_sha256": "504c2edf27dc05e23f88ccaf2c2cc7357ef46ab372a48d0167a56bf0e5e8860c",
+          "process_id": 3048672
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "scope-4",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "UNKNOWN",
+      "independent": false,
+      "note": "未生成绝对日期，但记录和回答将项目内相对约定改述为相对于当前时间；缺少可信时间锚。该语义转述是否满足保留原词义不能仅凭没有绝对日期判通过。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "31e8493bd1c9283ca100ec9bfba9c0255dd612a2e7b80d27d800c7f9f95ac988",
+          "trace_sha256": "00c45de105567cf6591d841162f562fd33c469777f3594409b6a04c1838afe71",
+          "process_id": 3049379
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "937ae82512381ba2399caa964b992b689c3d07579d8c81abb1db75ded021b223",
+          "trace_sha256": "a684bf25be4a77cbcd6e1fbf99c70f0bf521c86b26a77681c254e0c77308cde1",
+          "process_id": 3049964
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "object-continue-1",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "真实对象仅预订并制标签一次；下一会话查询同一对象，created字段与回答一致，无重复业务效果；纯字段由原实际回执派生。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "70898c1ba2a9063fe1af191452cb3c403b60cf342031587cae8b735aa01b9cde",
+          "trace_sha256": "75b6bffe63935cec6ae1b71e6fc0f5e4fa0c496c6f5d15c029d57d8627ea219d",
+          "process_id": 3015004
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "d44fc68284df630cf62009bc602b801828fbc74889888bfd669515d4c5c8c4ea",
+          "trace_sha256": "465718f4a8cb9ab779649b54cf490fecd2dd49148f8ad8d6ef947cd1b7a7e45a",
+          "process_id": 3016031
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "object-continue-2",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "真实对象仅预订并制标签一次；下一会话查询同一对象，created字段与回答一致，无重复业务效果；纯字段由原实际回执派生。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "97718ed84484071c913e550cb5d20c1ef8d6c1618e0111460824bb0e6e47f855",
+          "trace_sha256": "21797abf0bef6cd435bcee26fa69be4b132d1214180a399cb11b676d771f8025",
+          "process_id": 3050571
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "2f7403169c9db0b29248eb47503dfb85212021f1784473d3c21d254e0853a022",
+          "trace_sha256": "4a98754b14ebcfa12c30e2ddab8c262a4767a5306713d3abf0693032845f999c",
+          "process_id": 3051694
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "object-continue-3",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "真实对象仅预订并制标签一次；下一会话查询同一对象，created字段与回答一致，无重复业务效果；纯字段由原实际回执派生。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "e84d7138c3c2392eb5a7097bdb721b33bbb60a5a9a6fa1a0e0ca2bef34b3b606",
+          "trace_sha256": "9908cec1fc4df276d449cf1cb755e9e291e07a68bd61c1bb2c14256cb22e6037",
+          "process_id": 3052533
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "b71675f4c9f84a2d148dda5fc2aba42dd9e6f1d763992d80af952d0563b4f0f5",
+          "trace_sha256": "ccfe91f92d68f0c00451fd30a37e5108524ad6041af3cf0700fba1add0c242aa",
+          "process_id": 3053626
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "object-continue-4",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "真实对象仅预订并制标签一次；下一会话查询同一对象，created字段与回答一致，无重复业务效果；纯字段由原实际回执派生。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "dfb53871cacc0275cdb5b8a4003b6dac8a073851920c9469a5e2677b50732c9f",
+          "trace_sha256": "8553ec964af9d77e5b59864cf38713ad439d4924d9b82581ec831d0e387e1ffc",
+          "process_id": 3054331
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "710fd478c5efe9dc7f5f18d4c124ee40950f15a3c2a4f39f8130578280f690db",
+          "trace_sha256": "449576ee0f1eeaee0d412801bd385aced3b4e5d1d255a3211ea9dde0b8b44840",
+          "process_id": 3055585
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "restart-1",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "独立子进程使用同一持久资源；原偏好重开一致，最终正确回忆。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "086c3a3d4f401f3a87ba1e309e61ec53a1cf48f9538fcc2601a2f958357ae35e",
+          "trace_sha256": "3c3603143c52a79a403d4dfb442e63f49f19f5c28557d6cda6eb702e71f5ed87",
+          "process_id": 3016863
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "4b5de6db999f6e59ddbef7417394331f53c7714aa0895e4323d53cc3cd536440",
+          "trace_sha256": "d720039089d964dd2763199c9f2b28cd9295fc83ab092977aa14d88fe28d4317",
+          "process_id": 3017481
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "restart-2",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "独立子进程使用同一持久资源；原偏好重开一致，最终正确回忆。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "1b659e2fff904e30a8869c49a0405e6aaf2ee0749e280d9292ad33b104214333",
+          "trace_sha256": "5e7a6e47e55d79311c911f041cda368dd330ed734e74ce13866f95ab502db409",
+          "process_id": 3056338
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "b5d49b2c9d18e64572a3c17201a9bee59aaa5abf78d1b486d805b7328d20e93d",
+          "trace_sha256": "71306dd74de5024d1932e1c91c275d6db6202d3d016b84ca6f6e4bd54e70da6c",
+          "process_id": 3056889
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "restart-3",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "独立子进程使用同一持久资源；原偏好重开一致，最终正确回忆。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "6ca008b17a43034c9379a8fce4c62fc2a2f8918e77a2404c522e9311f49cbf3f",
+          "trace_sha256": "fc6aa87654b9c88faf0c3a16e7664156fce155a4acec1662bc6a38ec3843addd",
+          "process_id": 3057454
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "7bdba9c5e31df281fa642b5fb0425e64bb0d4eb83cee3adc57c00bfbd6578bf2",
+          "trace_sha256": "ec19e2db0e9866f9cc537f18397bb5a90355a1ff1b3ba8a1fbe98a1390bc0ad8",
+          "process_id": 3058064
+        }
+      ],
+      "sdk_reopen_verified": true
+    },
+    {
+      "case_id": "restart-4",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "独立子进程使用同一持久资源；原偏好重开一致，最终正确回忆。",
+      "evidence": [
+        {
+          "index": 0,
+          "receipt_sha256": "fedc01161a550c30f6daa9311ddc93d037b6d470e2e7d93dc74b7d452dcd6894",
+          "trace_sha256": "913552992efc7681addc0b8419d627b106916e224c6eb5afb206f072dba26c86",
+          "process_id": 3058657
+        },
+        {
+          "index": 1,
+          "receipt_sha256": "63dcfac765384041017fa3f2dc0d8f65980e574a18f912d80ed154a8b93d8b39",
+          "trace_sha256": "8a9d61330dab6cc95f5c7f746f3a567c3bec3944a128554449f7781946fe8f62",
+          "process_id": 3059141
+        }
+      ],
+      "sdk_reopen_verified": true
+    }
+  ],
+  "qualifications": [
+    "No independent semantic rating. Correct current/former answers and correct original-card revisions are different metrics.",
+    "All48 messages completed once; pending/partial and costs retained.",
+    "Public owner names retained from the exposed original normal24 fixture; no benchmark-ID routing or hidden/scorer inputs used. No unseen claim.",
+    "Current configuration generated28 paid boundary proposals; source-level dedup did not prove complete semantic preservation.",
+    "Historical R9 cost is not a fair current shared-capability baseline."
+  ],
+  "product": "NO_GO"
+}

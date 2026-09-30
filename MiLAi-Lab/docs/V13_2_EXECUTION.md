@@ -63,9 +63,23 @@ Valid七行只有两组件，不能支撑充分独立的更新验证或5个百�
 
 ## 当前工作与剩余门禁
 
-D2工程阶段已接受；D3有界预取、source→record反链、小patch、批量语义边界和Host提交去重已通过[限定工程门禁](../data/manifests/v13-2-d3-engineering-acceptance.json)。54项当前reader/来源/实际SIGKILL检查通过；一个内部schema断言首次失败保留，改用真实公开tool_call_schema后的单项通过。此前137项affected属于较早API身份，不冒称当前整套共同SHA。普通recall_context与显式追加search_memory(query)已分开，后者按实际参数检索并收费。源码提交bb1b9a7保持HOLD。
-[E0/E1/E2运行身份](../data/manifests/v13-2-small-development-runtime.json)已无网络冻结208源码/CLI文件、8配置、工具目录、rubric、环境、模型route与连续账本；每回合普通2048/6、批量最多6动作、默认修复0，Host/source级去重不保证多事项保存完整。冻结时新generation/embedding均0，下一步Root串行实际运行。E1共同固定观察流已由4个真实应用子进程生成：各预订一次、独立重开只查询；四设置的形成/交付检验尚未运行。
-运行后证据collector已在旧R9核对48个实际HTTP最终回答及107次／170,905 tokens；篡改、缺失、畸形回包保持未验证，不自动语义评分。
+D2工程阶段已接受；D3有界预取、source→record反链、小patch、批量语义边界和Host提交去重已通过[限定工程门禁](../data/manifests/v13-2-d3-engineering-acceptance.json)。54项reader/来源/实际SIGKILL检查通过；一个内部schema断言首次失败保留，改用真实公开tool_call_schema后的单项通过。此前137项affected属于较早API身份，不冒称当前整套共同SHA。普通recall_context与显式追加search_memory(query)已分开，后者按实际参数检索并收费。
+[R0运行身份](../data/manifests/v13-2-small-development-runtime.json)在HTTP前冻结208源码/CLI文件、8配置、工具目录、rubric、环境、模型route与连续账本，执行源码为bb1b9a7；每回合普通2048/6、批量最多6动作、默认修复0。冻结时新调用0是准备阶段状态，R0现在已结束，不能继续把该快照写成未运行。源码修复后不再执行原R0根目录。
+
+| R0开发段 | 实际执行 | Root事后诊断 |
+| --- | --- | --- |
+| [E0 normal24](../data/manifests/v13-2-e0-normal-results.json) | 24/24完整、48实际HTTP最终回答 | 18 PASS、5 FAIL、1 UNKNOWN；22/24门槛未通过 |
+| [E1固定流](../data/manifests/v13-2-e1-development-results.json) | 16边界完整；Field8次形成生成、derived0 | 实际字段形成与来源留存；不算自由Host样本 |
+| E1自由Host | 8/8完整、16实际HTTP最终回答 | 当前world/回答8通过；预取4条历史送达，自主4条未检索，原操作归属未证明 |
+| [E2身份](../data/manifests/v13-2-e2-development-results.json) | 15/15尝试、13完整、2中断；40完整消息、2中断、3未运行 | 11 PASS、2 FAIL、2 INTERRUPTED；14适格原卡中11条更正边界支持完整修订 |
+
+E0 update-1两次把source_refs嵌入patch被拒后CREATE另卡，原咖啡卡仍r1；scope-1后置writer把问题存为长期个人素食偏好。update-2/3/4虽把同ID原卡写到r2，新主张却只引用旧偏好。来源复核纠正了尚未提交的21 PASS草稿，旧草稿hash保存在private审计中；结构修订和完整语义修复分别报告，两旧update修复门禁未通过。scope-4相对时间改述仍UNKNOWN。
+
+E2两个上限中断的首断点分别为非业务字段误用及猜造source_ref；全部12次请求、原历史和NOT_RUN留存。反链+patch的update-3也仅引用旧英里来源；旧target-query项目例最终遗漏实际存在的原格式历史。另有六个不受所引旧陈述支持的中间r2留在history，不被后置修订抹掉。没有以13完整计13成功，当前开发不能证明方法优势。
+
+E0真实独立SQLite Store SDK重开24库；E1/E2另外只读重开23库、读取455原始items，均与最后实际回执相符，数据库SHA前后相同、0模型请求、0记忆mutation。持久化一致并非语义正确。所有104自由Host最终回答均链接实际HTTP原回包；Root审查不是独立Judge。collector对篡改、缺失、畸形回包保持未验证，不自动补答案。
+
+负结果后的一般修复仅闭合opt-in公开patch/profile字段schema，并要求新revision至少关联当前可信boundary的实际来源；历史支持可共存，no_change不新写版本。32项窄检查、两文件mypy、ruff及两边界通过，四组legacy公共catalog逐字节相同。完整参数schema实际进入Host提示；现有generation_only grammar仍仅约束action外壳。当前来源成员资格不验证文字含义，CREATE行为未改变。证据见[修复工程验收](../data/manifests/v13-2-schema-source-acceptance.json)。下一轮另冻结完整24 E0、沿用原rubric并在writer加入Host已有的“问题不是已确认偏好”和相对时间规则，不覆盖R0或挑最好重跑。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
@@ -78,8 +92,8 @@ D5新pilot、正式独立来源比较、公开任务、独立评分、第二家�
 权威连续账本仍是原checkout `MiLAi-Lab/artifacts/ser-v20/budget.json`。
 v13.2入口为7,946 generation／20,341,038 charged generation tokens／717,188 embedding tokens；
 生成已知20,310,651，保守未知费用30,387，unknown usage为1；embedding unknown为0。
-[历史账本差额审计](../data/manifests/v13-2-historical-ledger-bridge.json)将旧快照到入口的485次生成对到484次有响应请求／4,568,357已知tokens及1次30,387保守未知费用；449次embedding／178,885 tokens也与差额一致。旧文稿44份completed回执是完成消息数，不是完整轨迹数；缺响应请求未推定完成或归零。入口表遗漏的20个源码/config差异已按两个提交的实际字节补齐并保留修订身份。v13.2当前新增实验generation/embedding均0，账本hash仍等于入口。
-价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
+[历史账本差额审计](../data/manifests/v13-2-historical-ledger-bridge.json)将旧快照到入口的485次生成对到484次有响应请求／4,568,357已知tokens及1次30,387保守未知费用；449次embedding／178,885 tokens也与差额一致。旧文稿44份completed回执是完成消息数，不是完整轨迹数；缺响应请求未推定完成或归零。入口表遗漏的20个源码/config差异已按两个提交的实际字节补齐并保留修订身份。入口hash只对应实验开始前，后续实际调用和快照另列。
+[R0新增费用](../data/manifests/v13-2-r0-development-accounting.json)为292次generation／903,698已知tokens与143次embedding／61,122 tokens，逐trace和连续账本完全对上。其中Host237次／722,344 tokens，形成55次／181,354 tokens；新增unknown为0。R0末累计8,238次generation／21,244,736 charged、21,214,349 known、unknown1与embedding778,310、unknown0。入口历史保守未知30,387仍留在账本。价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
 
 两个D0/source-group分析工具ruff通过，实际tools边界检查通过；现存6项grandfathered依赖未新增。
 D1目标static/mypy和package边界通过，未跑全suite、build、模型质量或远端CI。

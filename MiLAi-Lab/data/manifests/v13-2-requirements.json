@@ -80,10 +80,11 @@
       "completion_evidence": "当前事件/显式多来源、错owner、源码hash变更及引文存在但含义不受验证的窄测试。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d1-source-acceptance.json"
+        "data/manifests/v13-2-d1-source-acceptance.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
     },
     {
       "id": "D1-02",
@@ -95,10 +96,11 @@
       "completion_evidence": "跨owner/伪句柄拒绝、读取后交错更新冲突、重开可核查且未自动取最新revision。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d1-source-acceptance.json"
+        "data/manifests/v13-2-d1-source-acceptance.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
     },
     {
       "id": "D1-03",
@@ -110,10 +112,11 @@
       "completion_evidence": "真实安装SDK离线关闭前采集与关闭后重开，错误传播，随后另冻结真实新cohort。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d1-source-acceptance.json"
+        "data/manifests/v13-2-d1-source-acceptance.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
     },
     {
       "id": "D1-04",
@@ -125,10 +128,11 @@
       "completion_evidence": "受影响legacy回归、配置默认与老记录未升级可信度，历史文件哈希不改。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d1-source-acceptance.json"
+        "data/manifests/v13-2-d1-source-acceptance.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
     },
     {
       "id": "D2-01",
@@ -141,10 +145,12 @@
       "completion_evidence": "预订/文稿profile与第三合成schema；核心无case_id/gold/实体值依赖。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d2-observation-acceptance.json"
+        "data/manifests/v13-2-d2-observation-acceptance.json",
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-e1-development-results.json"
       ],
       "condition": null,
-      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
+      "qualification": "Scoped projection/partial replay, actual SIGKILL W2 and R0 E1 literal evidence. No unseen quality or independent representation advantage."
     },
     {
       "id": "D2-02",
@@ -157,10 +163,12 @@
       "completion_evidence": "真实旧回执与确定性机械测试，事件+对象+字段+projector身份；prose仍unchecked。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d2-observation-acceptance.json"
+        "data/manifests/v13-2-d2-observation-acceptance.json",
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-e1-development-results.json"
       ],
       "condition": null,
-      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
+      "qualification": "Scoped projection/partial replay, actual SIGKILL W2 and R0 E1 literal evidence. No unseen quality or independent representation advantage."
     },
     {
       "id": "D2-03",
@@ -172,10 +180,12 @@
       "completion_evidence": "缺失/显式清除/旧版本/不可比版本/unknown/业务valid time测试与历史可查询。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d2-observation-acceptance.json"
+        "data/manifests/v13-2-d2-observation-acceptance.json",
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-e1-development-results.json"
       ],
       "condition": null,
-      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
+      "qualification": "Scoped projection/partial replay, actual SIGKILL W2 and R0 E1 literal evidence. No unseen quality or independent representation advantage."
     },
     {
       "id": "D2-04",
@@ -188,10 +198,12 @@
       "completion_evidence": "W2真实持久化中断重开/dirty重放；不重复业务mutation，projection版本独立。",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-2-d2-observation-acceptance.json"
+        "data/manifests/v13-2-d2-observation-acceptance.json",
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-e1-development-results.json"
       ],
       "condition": null,
-      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
+      "qualification": "Scoped projection/partial replay, actual SIGKILL W2 and R0 E1 literal evidence. No unseen quality or independent representation advantage."
     },
     {
       "id": "D3-01",
@@ -202,9 +214,15 @@
       ],
       "requirement": "prepare_context复用StrongRawRAG词法+dense，输入仅当前公开消息/真实owner/已发现ref。",
       "completion_evidence": "检索实现审查与实际HTTP无future/scorer/hidden/fault注入；硬权限过滤和真实空结果。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "D3-02",
@@ -214,9 +232,15 @@
       ],
       "requirement": "每用户回合最多一次公共预取；2048 tokens/最多6记录初值，全部元数据计预算。",
       "completion_evidence": "真实packet进入HTTP，材料/来源/版本全计token，1024/2048开发配置平等候选。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "D3-03",
@@ -227,9 +251,15 @@
       ],
       "requirement": "续接复用包，新观察/修订只刷新受影响条目；bank_revision/packet_hash防旧缓存。",
       "completion_evidence": "同回合/新事件/重开/源删除的刷新检查与usage，证据不回流原始user/tool事件。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "D3-04",
@@ -239,9 +269,15 @@
       ],
       "requirement": "可重建source→record/revision反链，跨语言检索原源可发现所支持卡。",
       "completion_evidence": "中→英、英→中、歧义两卡、dense降级真实标记；不模糊修业务key。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "D3-05",
@@ -251,9 +287,15 @@
       ],
       "requirement": "小patch append/revise/supersede/no_change，保留未改metadata与历史。",
       "completion_evidence": "原卡修订/纠正/两事项歧义/未知目标pending，不把update失败隐藏为create成功。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "D3-06",
@@ -264,9 +306,15 @@
       ],
       "requirement": "工具事实无需writer重抄；一次边界语义batch，Host已提交则去重。",
       "completion_evidence": "冻结观察边界writer≤1，拒绝指纹止盲试/pending；预启修复最多1额外调用合计≤2与成本。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-small-development-runtime.json",
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-schema-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
     },
     {
       "id": "E0-01",
@@ -276,9 +324,12 @@
       ],
       "requirement": "新配置固定24正常开发回归≥22/24，两旧更新失败均有直接修复证据。",
       "completion_evidence": "事前协议、24完整逐轨迹原结果、来源/版本/多对象/迟到机械回归，不把曝光修复当泛化。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "NOT_PASSED",
+      "evidence": [
+        "data/manifests/v13-2-e0-normal-results.json"
+      ],
+      "condition": null,
+      "qualification": "R0 once-run24complete:18PASS/5FAIL/1UNKNOWN. Oldupdate-2/3 structural revisions cite only old contradictory claims; supported repair and22/24 gates fail. New cohort separate."
     },
     {
       "id": "E1-01",
@@ -288,9 +339,12 @@
       ],
       "requirement": "固定观察流与完整自由Agent各完成旧Field/新派生×自主/一次预取小型2×2。",
       "completion_evidence": "匹配bank/Host/工具/预算/源，形成/材料送达/实际回答与调用费用分别报告。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-e1-development-results.json"
+      ],
+      "condition": null,
+      "qualification": "Actual fixed16boundaries/free8trajectories complete. Prefetch original history4/4delivered; autonomous4/4no read, historical attribution unverified. Two exposed bases; no independent representation advantage."
     },
     {
       "id": "E2-01",
@@ -300,9 +354,13 @@
       ],
       "requirement": "固定节奏与读入比较target_query、反链、反链+读时句柄patch。",
       "completion_evidence": "双向跨语言/同名不同事/用户纠正/两并发修订/历史查询；正确更新/重复/错误合并/冲突/最终一致指标。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-e2-development-results.json",
+        "data/manifests/v13-2-d3-engineering-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "15attempted/13complete/2interrupted;3NOT_RUNmessages. Original-card eligible14,correct supported correction-boundary11. Six unsupported intermediate revisions preserved. Mechanical read-time CAS separate from natural conflicts."
     },
     {
       "id": "D4-01",
@@ -574,9 +632,13 @@
       ],
       "requirement": "W1公开discovery unknown、W2源持久后投影重放、W3真实记忆提交后回执重放。",
       "completion_evidence": "三个真实进程崩溃窗口/状态重开；业务无重复，最终一致性无效查询不得假定no-effect。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "REC-02",
@@ -586,9 +648,13 @@
       ],
       "requirement": "旧W3要求UPDATE保持，不可达标N/A，新事实投影后故障独立语义。",
       "completion_evidence": "各方法可达边界与实际commit类型witness，不把ADD/READ算旧W3。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "INV-01",
@@ -600,9 +666,13 @@
       ],
       "requirement": "来源不放大、身份不猜测、时间不偷换、效果不重放；索引可重建非权威。",
       "completion_evidence": "owner/版本/源/投影/operation→commit记录，公共Store事务不足就显式pending。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "INV-02",
@@ -613,9 +683,13 @@
       ],
       "requirement": "既有职责增量Lab-only，无benchmarkcase/gold/私有SDK连接/Product依赖。",
       "completion_evidence": "必要boundary/tools/static checks与代码审查，Product/Archive与服务无改动。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "INV-03",
@@ -626,9 +700,13 @@
       ],
       "requirement": "每cohort一个manifest/逐轨迹表/来源预算摘要；源/SDK/模型route/工具/提示/时序/预算/scorer/停止规则齐。",
       "completion_evidence": "执行SHA和报告SHA区分，原连续账本所有缓存/失败/重启/维护/index/评审计费，unknown不填0。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "INV-04",
@@ -639,9 +717,13 @@
       ],
       "requirement": "按Go/Pivot/Stop作修复/收缩/相关运行停止，普通语义失败不停止独立安全工作。",
       "completion_evidence": "每次结论追首断点与实际source/commit/delivery/action/answer，未证明优势/独立评审保持未完成。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     },
     {
       "id": "DEL-01",
@@ -653,9 +735,13 @@
       ],
       "requirement": "首v13.2结果和完整复现收口回答首断点/正常效用/强简单独立价值/新成本与未解决失败。",
       "completion_evidence": "命令/环境/锁/输入/评分/所有失败/result/hash/限制作可审查报告，不用first batch替代full goal。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d3-engineering-acceptance.json",
+        "data/manifests/v13-2-r0-development-accounting.json"
+      ],
+      "condition": null,
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     }
   ],
   "product": "NO_GO"

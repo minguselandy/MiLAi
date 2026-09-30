@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v13.2 证据关联、增量维护与有界交付 | **ACTIVE**；D0旧139进程／101回答重新核查、30完整轨迹Root诊断；D1来源与读时句柄窄验证、D2工程100项检查通过；D3实施中，新模型cohort未运行、D4–D5未完成 | [执行记录](V13_2_EXECUTION.md)、[D0结果](V13_2_D0_PRIOR_COHORT.md)、[完整验收映射](../data/manifests/v13-2-requirements.json) |
+| v13.2 证据关联、增量维护与有界交付 | **ACTIVE**；D0旧139进程／101回答重新核查、30完整轨迹Root诊断；D1来源与读时句柄窄验证、D2工程100项检查通过；R0 E0完整24但18通过/5失败/1未知；E1完整8，E2完整13/尝试15；一般来源/schema修复后待新24验证，D4–D5未完成 | [执行记录](V13_2_EXECUTION.md)、[D0结果](V13_2_D0_PRIOR_COHORT.md)、[完整验收映射](../data/manifests/v13-2-requirements.json) |
 | v13.1 可用性优先开发与实验 | **ACTIVE**，正常门槛22/24；等额配置开发48题对完成，生命周期45/60条尝试、30条完成消息；文稿实跑未开始，完整P0–P8未完成 | [当前实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
