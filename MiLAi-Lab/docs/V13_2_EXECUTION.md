@@ -86,8 +86,14 @@ E0真实独立SQLite Store SDK重开24库；E1/E2另外只读重开23库、读�
 R1实际Host六次来源拒绝、writer十三次拒绝保留；26次writer形成生成不能当26次维护成功。24库又以只读SQLite Store SDK读取418 items，最后回执与head相符、DB字节不变、0请求/0mutation。此前仅验证每份ordinary packet的metadata在2048内；同一HTTP若同时带System与旧recall ToolMessage材料，尚未证明合计2048，重复输入已计费。下一接口修复必须把当前索引与唯一ordinary材料共同计预算。
 
 只读源码/实际wire复核确认：Host的当前user source_ref只在capture文件和trace，HumanMessage正文未含ID，历史reader明确排除当前源；追加同文本查询也不能发现该ref。业务工具回执已交付实际tool ref，writer的actual_events也已含当前ref，不能把writer语义误归属归咎于这个Host缺口。现在补公开只读trusted来源索引及新建语义卡的当前边界成员检查，原输入/角色/hash不改、无目标强选/语义修正。下一cohort在READY后另冻结；D4仍未准入。
-当前接口修复已提交fd1ce596并通过[限定工程验收](../data/manifests/v13-2-source-index-acceptance.json)：首输入实际来源索引、业务batch刷新、同epoch分页/空binding、CREATE当前成员guard及逐消息位置的ordinary引用投影。最终六项窄测试、mypy、ruff、八原配置真实catalog/decoder与实际Qwen tokenizer模拟wire通过；此前47项属于另一个position修复前SHA，未冒称同一执行身份。Root最终两项边界及独立token复算通过；初始配置枚举失败和hash序列化误用保留。2048覆盖当前index、一份System ordinary包及每条当前recall引用正文；过去回合不同packet、协议schema、显式追加和真实业务材料另计完整实际输入费用。R2仅改实验身份标签，保留R1提示/12admissions/repair0，准备完整24一次尝试；实跑和原卡支持修订门禁仍待验证。
-[R2运行身份](../data/manifests/v13-2-e0-r2-runtime.json)已在HTTP前另冻结208源码/CLI、同一原24/48输入、公开catalog/prompt、Rootprepare与串行parent、原rubric/collector和连续账本；执行源码fd1ce596、紧凑map SHA906d86f4。prepare禁止socket连接，实际生成/嵌入0，账本与R1末相同。随后将保留完整24新cohort的全部首尝试结果及费用，R0/R1原根目录不再执行。
+当前接口修复已提交fd1ce596并通过[限定工程验收](../data/manifests/v13-2-source-index-acceptance.json)：首输入实际来源索引、业务batch刷新、同epoch分页/空binding、CREATE当前成员guard及逐消息位置的ordinary引用投影。最终六项窄测试、mypy、ruff、八原配置真实catalog/decoder与实际Qwen tokenizer模拟wire通过；此前47项属于另一个position修复前SHA，未冒称同一执行身份。Root最终两项边界及独立token复算通过；初始配置枚举失败和hash序列化误用保留。2048覆盖当前index、一份System ordinary包及每条当前recall引用正文；过去回合不同packet、协议schema、显式追加和真实业务材料另计完整实际输入费用。R2仅改实验身份标签，保留R1提示/12admissions/repair0。
+[R2运行身份](../data/manifests/v13-2-e0-r2-runtime.json)在HTTP前另冻结208源码/CLI、同一原24/48输入、公开catalog/prompt、Rootprepare与串行parent、原rubric/collector和连续账本；执行源码fd1ce596、紧凑map SHA906d86f4。prepare禁止socket连接，实际生成/嵌入0，账本与R1末相同。R2现在全部24轨迹/48消息完成，48最终回答均链接实际HTTP；[逐例结果](../data/manifests/v13-2-e0-r2-results.json)为19 PASS、3 FAIL、2 UNKNOWN，22/24门槛及两个旧更新完整修复门禁仍未通过。R0/R1/R2独立保留，不拼接最佳结果，原运行根目录不再执行。
+
+R2四个更新都在更正边界修订同ID原卡、引用实际当前更正、保留真实历史且未另建偏好副本。但语言例最终遗漏旧英文，writer进一步把可见材料缺失写入r3；会议例最终遗漏旧上午。项目预算例把未提供私人预算改述并持久化成个人status=not_set，仅引用当前问题，来源不支持这个缺失主张。单位例核心英里/公里及原卡维护正确，附带当前源描述仍有歧义；一个对象例业务仅一次且真实label_status=created，但最终把原操作status=label_created称作标签状态。两条按全部主张/回执忠实性规则记UNKNOWN，不计成功。另一些提问回合修订丢掉直接旧叶子引用，实际历史仍保留；这些来源完整性限制单列，不以机械成员检查冒称语义验证。
+
+Root逐实际wire复算104次Host请求：当前索引、一份ordinary材料及全部当前recall引用正文共同计预算，最大1975 tokens、至多6条；实际当前user ref/role/hash与真实capture匹配。此界限不包括完整HTTP的schema、业务回执、显式追加读取及旧回合packet，其费用完整保留。独立只读SQLite Store SDK又重开24库、读取407 items，head/history与最后回执相符、DB字节不变、0请求/0mutation。维护为23 skipped_host_committed、13 committed、3 no_change、9 pending；六次writer拒绝均留存。
+
+只读源码审计发现后续缺口：普通record只呈现当前revision；source回链内部保存matched revisions，公开结果却只返回当前卡。已有read_memory(id,revision)可读确切旧版，但没有实际版本枚举或明确省略入口。计划5.2/5.3及6.1要求的有界历史可发现性尚不完整；候选修复须只呈现已选卡的实际版本/匹配版本metadata、保留原预算与CAS，不用语言或案例选版本。单次writer目前只开放写工具，索引本身不会给它旧正文，也不证明上述语义错误会消失。先保留当前执行身份的100/1k/10k性能基线，再接受一般修复。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
@@ -104,6 +110,7 @@ v13.2入口为7,946 generation／20,341,038 charged generation tokens／717,188 
 [历史账本差额审计](../data/manifests/v13-2-historical-ledger-bridge.json)将旧快照到入口的485次生成对到484次有响应请求／4,568,357已知tokens及1次30,387保守未知费用；449次embedding／178,885 tokens也与差额一致。旧文稿44份completed回执是完成消息数，不是完整轨迹数；缺响应请求未推定完成或归零。入口表遗漏的20个源码/config差异已按两个提交的实际字节补齐并保留修订身份。入口hash只对应实验开始前，后续实际调用和快照另列。
 [R0新增费用](../data/manifests/v13-2-r0-development-accounting.json)为292次generation／903,698已知tokens与143次embedding／61,122 tokens，逐trace和连续账本完全对上。其中Host237次／722,344 tokens，形成55次／181,354 tokens；新增unknown为0。R0末累计8,238次generation／21,244,736 charged、21,214,349 known、unknown1与embedding778,310、unknown0。
 R1另新增124次generation／395,787已知tokens与49次embedding／21,081 tokens；其中Host98次／307,459，writer26次／88,328，全部费用对账。R1末累计8,362次generation／21,640,523 charged、21,610,136 known、unknown1；embedding799,391、unknown0。入口历史保守未知30,387仍留在账本，未宣称成本下降。价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
+R2另新增129次generation／473,736已知tokens与50次embedding／20,370 tokens；Host104次／385,702，writer25次／88,034，逐trace与账本一致、新unknown0。R2末累计8,491次generation／22,114,259 charged、22,083,872 known、unknown1；embedding819,761、unknown0。R0–R2合计新增545次generation／1,773,221已知tokens与242次embedding／102,573 tokens；历史未知费用未清零，未证明节省成本。
 
 两个D0/source-group分析工具ruff通过，实际tools边界检查通过；现存6项grandfathered依赖未新增。
 D1目标static/mypy和package边界通过，未跑全suite、build、模型质量或远端CI。
