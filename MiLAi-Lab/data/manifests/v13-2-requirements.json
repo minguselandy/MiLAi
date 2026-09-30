@@ -82,7 +82,8 @@
       "evidence": [
         "data/manifests/v13-2-d1-source-acceptance.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
-        "data/manifests/v13-2-e0-r1-results.json"
+        "data/manifests/v13-2-e0-r1-results.json",
+        "data/manifests/v13-2-source-index-acceptance.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
@@ -130,7 +131,8 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d1-source-acceptance.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-source-index-acceptance.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
@@ -239,7 +241,8 @@
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
-        "data/manifests/v13-2-e0-r1-results.json"
+        "data/manifests/v13-2-e0-r1-results.json",
+        "data/manifests/v13-2-source-index-acceptance.json"
       ],
       "condition": null,
       "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
@@ -258,7 +261,8 @@
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-source-index-acceptance.json"
       ],
       "condition": null,
       "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
