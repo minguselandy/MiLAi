@@ -1,0 +1,37 @@
+{
+  "kind": "V13_1_NEAREST_WORK_READONLY_AUDIT",
+  "date": "2026-09-30",
+  "status": "SOURCE_AND_CLAIM_BOUNDARIES_CHECKED_NOT_RUNTIME_REPRODUCTION",
+  "hindsight": {
+    "readonly_upstream_head": "c82c7fde69384342ca185133c9dbdcd2772c3019",
+    "identity_transport": "git ls-remote HEAD; GitHub REST first403 rate-limit retained as unavailable, no inferred pin from REST",
+    "readme_sha256": "a3e2745dedec4f9e0d4452857ef054699e60414740f5d8f12d41bd42711d476a",
+    "paper": "https://arxiv.org/html/2512.12818v1",
+    "readme": "https://github.com/vectorize-io/hindsight/blob/c82c7fde69384342ca185133c9dbdcd2772c3019/README.md",
+    "mechanism_scope": "Paper v1 separates observed facts/experiences, synthesized summaries and beliefs with retain/recall/reflect. Current README terminology/version is not the paper dependency. No marketing scores adopted.",
+    "runtime_available_in_checked_mem0_env": false,
+    "default_http8888_health": "URLError; only checked default address, not proof of every possible deployment",
+    "micro_acceptance": "NOT_RUN",
+    "claim_limit": "No novelty or superiority from source tracking/evidence-vs-inference labels alone. A retain/recall-only backend would be separate from full reflect and background consolidation, all internal costs charged."
+  },
+  "himem": {
+    "existing_local_clone_commit": "0cd4a2500f91a0353178c9e380e491c99a0ad61f",
+    "read_files_sha256": {
+      "README.md": "45245ecea8074b34e8d480d17216b7193753989bb621c6bd48a47847dfa95d19",
+      "himem/memory/main.py": "30a36eb6f82ca9eaf87601d7f0d058327563b220bfe73a0fc42dc717cd832cf5",
+      "himem/memory/note_store.py": "9d16cf8c5fc3094abecc30371e5bb744bca18b176d8f1a5015d552bc163b1940",
+      "himem/memory/episode_store.py": "87c13ccea5ac3ae346c1592bcbca274e400a45dff8089580e49d9e9720596d2f"
+    },
+    "paper": "https://arxiv.org/html/2601.06377v1",
+    "mechanism_scope": "Episode/Note hierarchy, conditional best-effort retrieval and conflict-aware reconsolidation; README supports all/note/episode and knowledge alignment. Static existence is not behavioral acceptance.",
+    "runtime_available_in_checked_mem0_env": false,
+    "opensearchpy_present": false,
+    "required_checked_default_opensearch9200": "URLError",
+    "local_source_capacity_boundary": "EpisodeStore native kNN mapping hardcodes768 while existing common BGE produces1024. Faithful common-embedding comparison requires an explicit recorded capacity adaptation, not silent native identity claim.",
+    "micro_acceptance": "NOT_RUN",
+    "claim_limit": "Type-only versus Flat+Scope development does not prove independent dual-type gain. Do not present two names/layers as new contribution or use Mem0/SimpleMem as replacement for targeted HiMem check."
+  },
+  "scope": "Read-only source/paper/installed-module/default-address checks only. No packages installed, services deployed, or model requests. Model-service absence is separate from missing nearest-system runtime adapters.",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

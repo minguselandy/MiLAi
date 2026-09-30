@@ -509,11 +509,14 @@
       "plan_section": "4.2,5",
       "requirement": "Closest-neighbor Hindsight/HiMem matched to actual claimed contribution or narrow unsupported claim",
       "authoritative_evidence_required": "primary-source audit and faithful small slice or explicit limitation",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
-        "docs/V13_1_NEAREST_PRIOR.md"
+        "docs/V13_1_NEAREST_PRIOR.md",
+        "data/manifests/v13-1-nearest-work-readonly-audit.json",
+        "docs/V13_1_NEAREST_WORK_BOUNDARIES.md"
       ],
-      "conditional": false
+      "conditional": false,
+      "qualification": "Plan4.2/5 allowed claim-boundary route only: primary papers/local exact source checked; faithful runtime unavailable/not reproduced explicitly; no novelty/superiority from type names or provenance/evidence-vs-inference. Hindsight retain/recall-only would not imply full reflect, HiMem missing OpenSearch/dimension adaptation disclosed. Wider future claims still require faithful targeted comparison."
     },
     {
       "id": "P3-fair",
