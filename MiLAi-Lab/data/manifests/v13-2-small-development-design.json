@@ -27,7 +27,21 @@
     "messages": 16,
     "observed_flow_stage": "First replay actual preserved source receipt streams mechanically on all4 settings; then8 freely acting Host trajectories.",
     "shared_contract": "Same actual bank/public source access/Host/business tools/guard/budget; projection and prefetch are independent switches.",
-    "primary_diagnostic": "Actual material arrival, supported observation/structure burden, actual final current-vs-history answer, paid maintenance costs."
+    "primary_diagnostic": "Actual material arrival, supported observation/structure burden, actual final current-vs-history answer, paid maintenance costs.",
+    "fixed_flow_source": {
+      "path": "artifacts/v13-2-e1-fixed-stream/observed-flow.json",
+      "sha256": "aabd7aa0c7a21b68f1e567fea204d23f5af776e3b052d95f62b7a284bef2c2c3",
+      "builder": "tools/build_v13_2_e1_observed_flow.py",
+      "builder_sha256": "55cb1a6921eed3d485f8a626bd9fcfcdf8049257e9d414c4d60e624dc2a3c745",
+      "world_source_sha256": "ebbf128e85044f296c5be46ddee92ab3bca3efc36cb31e976d1073f89079ba12",
+      "status": "ACTUAL_PUBLIC_STREAM_CREATED_FOUR_CELLS_NOT_RUN",
+      "source_label": "First-boundary user+actual reserve receipt; later query withheld until its boundary. Actual world snapshots are offline-only.",
+      "processes": 4,
+      "new_generation": 0,
+      "new_embedding": 0,
+      "reviewed_reproduction_driver_sha256": "03e974d74b221eca8f78e80a83e0d73324f6b469b014ce13dc06108dabe1b043",
+      "builder_identity_note": "Original actual capture hash retained; subsequent ruff formatting changed driver bytes only. Raw observed flow and actual world source remain unchanged. No claim of identical driver bytes across these stages."
+    }
   },
   "E2": {
     "fixture": "data/fixtures/v13-2-e2-identity-development.json",
@@ -77,5 +91,15 @@
     "sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
     "readable_by_runtime": false,
     "declared_before_actual_model_outputs": true
+  },
+  "offline_collector": {
+    "path": "tools/audit_v13_2_development.py",
+    "sha256": "76787d88352654b82d6572e5bed230a5b46600c6a6917e1728e9b24c7b9fad30",
+    "validation_path": "artifacts/v13-2-analysis-validation/validation-final.json",
+    "validation_sha256": "415451db92840e7ca64e757190030640cc4379a31ca3acdbca8d6b24d24e2a5d",
+    "actual_old_finals_linked": 48,
+    "known_costs_crosscheck": "107 generation /170905 known tokens equal original R9 result; all24 semantic verdicts remain unreviewed.",
+    "malformed_missing_tampered_response": "not verified, never replaced",
+    "runtime_imports": false
   }
 }
