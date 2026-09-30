@@ -340,8 +340,8 @@ class MemoryService:
             rows = self._rows(self.namespace)
             bank_revision = _hash([(row["id"], row["value"].get("_v13_1", {}).get("revision"))
                                    for row in sorted(rows, key=lambda row: row["id"])])
-            matched: set[str] = set()
-            for source_ref in source_refs:
+            matched: dict[str, list[dict[str, Any]]] = {}
+            for source_ref in dict.fromkeys(source_refs):
                 source = self.source(source_ref)
                 if source is None:
                     continue
@@ -364,9 +364,84 @@ class MemoryService:
                     self.store.put(self.backlinks_namespace, source_ref, value, index=False)
                 else:
                     value = old.value
-                matched.update(value["records"])
+                for memory_id, versions in value["records"].items():
+                    matched.setdefault(memory_id, []).append({
+                        "source_ref": source_ref, "source_hash": value["source_hash"],
+                        "matched_revisions": versions[:6],
+                        "matched_revision_count": len(versions),
+                        "matched_revision_set_hash": _hash(versions),
+                        "omitted_matched_revision_count": max(0, len(versions) - 6),
+                        "read_more": {"tool": "read_memory", "id": memory_id,
+                                      "view": "history", "source_ref": source_ref},
+                        "matched_at_bank_revision": value["bank_revision"],
+                    })
         # read() issues a handle under its own lock. Do not hold a second flock.
-        return [self.read(memory_id) for memory_id in sorted(matched)[:limit]]
+        result = []
+        for memory_id in sorted(matched)[:limit]:
+            row = self.read(memory_id)
+            if row["ok"] and self.mutation_contract == "event_bound_v1":
+                version = row["value"]
+                source_matches = [{**match,
+                    "current_revision_at_read": version["revision"],
+                    "current_version_cites_source": match["source_ref"] in
+                    self._version_source_refs(version),
+                    "content_verification": "unchecked"} for match in matched[memory_id]]
+                row.update(source_matches=source_matches[:6],
+                           source_match_count=len(source_matches),
+                           source_match_set_hash=_hash(source_matches),
+                           omitted_source_match_count=max(0, len(source_matches) - 6),
+                           source_matches_read_more={"tool": "read_memory", "id": memory_id,
+                                                     "view": "history"})
+            result.append(row)
+        return result
+
+    def history_index(
+        self, memory_id: str, *, cursor: str | None = None, limit: int = 6,
+        source_ref: str | None = None,
+    ) -> dict[str, Any]:
+        """Enumerate actual owner-bound stored revisions; this grants no write authority."""
+        if type(limit) is not int or not 1 <= limit <= 6:
+            raise ValueError("V13_HISTORY_INDEX_LIMIT_INVALID")
+        item = self.store.get(self.namespace, memory_id)
+        metadata = item.value.get("_v13_1") if item is not None else None
+        if item is None or (metadata is not None and metadata.get("owner") != self.owner):
+            return {"ok": False, "status": "not_found", "id": memory_id}
+        if metadata is None:
+            return {"ok": True, "status": "history_unavailable", "id": memory_id,
+                    "revision_count": None, "revisions": [], "omitted_count": None,
+                    "content_verification": "unchecked"}
+        versions = sorted(metadata["history"], key=lambda row: row["revision"])
+        source = self.source(source_ref) if source_ref is not None else None
+        if source_ref is not None:
+            if source is None:
+                raise ValueError("V13_HISTORY_SOURCE_NOT_FOUND")
+            versions = [row for row in versions if source_ref in self._version_source_refs(row)]
+        revisions = [version["revision"] for version in versions]
+        if (len(set(revisions)) != len(revisions)
+                or any(type(revision) is not int or revision < 1 for revision in revisions)):
+            raise ValueError("V13_HISTORY_INDEX_INVALID")
+        index_hash = _hash([self.owner, self.namespace, memory_id, metadata["revision"],
+                            source_ref, source["content_sha256"] if source else None, versions])
+        start = 0
+        if cursor is not None:
+            if not isinstance(cursor, str):
+                raise ValueError("V13_HISTORY_CURSOR_CHANGED_OR_INVALID")
+            prefix, separator, offset = cursor.rpartition(":")
+            if (separator != ":" or prefix != "history-" + index_hash[:24]
+                    or not offset.isdecimal() or not 0 <= int(offset) < len(revisions)):
+                raise ValueError("V13_HISTORY_CURSOR_CHANGED_OR_INVALID")
+            start = int(offset)
+        end = min(start + limit, len(revisions))
+        return {"ok": True, "status": "available", "id": memory_id,
+                "current_revision_at_snapshot": metadata["revision"],
+                "revision_count": len(revisions), "revisions": revisions[start:end],
+                "start": start, "omitted_count": len(revisions) - end,
+                "index_kind": "source_citations" if source_ref is not None else "stored_history",
+                "source_ref": source_ref,
+                "source_hash": source["content_sha256"] if source else None,
+                "index_hash": index_hash, "next_cursor":
+                "history-" + index_hash[:24] + ":" + str(end) if end < len(revisions) else None,
+                "content_verification": "unchecked", "business_authority": False}
 
     def revise(
         self, session: str, proposal_id: str, candidate_handle: str,

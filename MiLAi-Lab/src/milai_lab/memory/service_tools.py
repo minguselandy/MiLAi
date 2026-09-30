@@ -15,7 +15,7 @@ from langchain_core.tools import (
     StructuredTool,
     create_schema_from_function,
 )
-from pydantic import BaseModel, WithJsonSchema, create_model
+from pydantic import BaseModel, Field, WithJsonSchema, create_model
 
 from milai_lab.memory.service import MemoryService
 
@@ -38,6 +38,7 @@ def create_service_tools(
     context_provider: Callable[[str, RunnableConfig], dict[str, Any]] | None = None,
     recall_provider: Callable[[RunnableConfig], dict[str, Any]] | None = None,
     source_index_provider: Callable[[str | None, RunnableConfig], dict[str, Any]] | None = None,
+    selected_page_provider: Callable[[str, RunnableConfig], dict[str, Any]] | None = None,
 ) -> tuple[BaseTool, ...]:
     if type(replay_requested) is not bool:
         raise ValueError("V13_MEMORY_REPLAY_REQUESTED_INVALID")
@@ -259,6 +260,44 @@ def create_service_tools(
     async def aread_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: read_memory(config=config, **arguments))
 
+    def read_memory_history(
+        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+        id: str | None = None, query: str | None = None, revision: int | None = None,
+        view: Literal["version", "history"] = "version", cursor: str | None = None,
+        max_revisions: Annotated[int, Field(ge=1, le=6)] = 6,
+        source_ref: str | None = None,
+    ) -> ToolMessage:
+        """Read an exact revision or enumerate stored history for a known record ID.
+
+        view=history requires an explicit ID; it returns at most six actual revision
+        numbers and an opaque next-page cursor. Changed histories invalidate cursors.
+        Optional source_ref enumerates only revisions that actually cite that owned source.
+        view=version preserves exact id/revision reads and optional unique-query discovery.
+        Old citations do not support a current version unless it actually cites them.
+        Historical handles remain stale for new writes; no latest revision is filled in.
+        Semantic text remains unchecked and no business authority is granted.
+        """
+        session_for(config)
+        if view == "history":
+            if id is None or query is not None or revision is not None:
+                raise ValueError("V13_HISTORY_READ_REQUIRES_EXACT_ID")
+            receipt = service.history_index(id, cursor=cursor, limit=max_revisions,
+                                            source_ref=source_ref)
+            return message("read_memory", tool_call_id, receipt)
+        if cursor is not None or max_revisions != 6 or source_ref is not None:
+            raise ValueError("V13_HISTORY_ARGUMENTS_REQUIRE_HISTORY_VIEW")
+        result = read_memory(config, tool_call_id=tool_call_id,
+                             id=id, query=query, revision=revision)
+        receipt = json.loads(str(result.content))
+        if receipt["ok"]:
+            receipt["history_index"] = service.history_index(receipt["id"])
+            receipt["read_view"] = "current_at_read" if revision is None else "exact_revision"
+        return message("read_memory", tool_call_id, receipt)
+
+    async def aread_memory_history(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(
+            lambda: read_memory_history(config=config, **arguments))
+
     def revise_memory(
         candidate_handle: str,
         semantic_patch: SemanticPatch,
@@ -310,6 +349,29 @@ def create_service_tools(
 
     async def arecall_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: recall_context(config=config, **arguments))
+
+    def recall_selected_context(
+        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+        cursor: str | None = None,
+    ) -> ToolMessage:
+        """Recall the fixed ordinary public-query packet, or read its omitted-item menu.
+
+        With no cursor this is the single ordinary read, shared with prefetch/dirty refresh.
+        With an actual coverage cursor this is an explicit additional page of read pointers
+        over the cached selection, with no new retrieval. Its complete tool body is delivered
+        and charged separately; it is not an ordinary packet reference. Empty search does
+        not prove the archive is empty. Additional queries use search_memory(query).
+        """
+        if cursor is None:
+            return recall_context(config, tool_call_id=tool_call_id)
+        session_for(config)
+        if selected_page_provider is None:
+            raise ValueError("V13_SELECTED_PAGE_PROVIDER_REQUIRED")
+        return message("recall_context", tool_call_id, selected_page_provider(cursor, config))
+
+    async def arecall_selected_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(
+            lambda: recall_selected_context(config=config, **arguments))
 
     def read_current_sources(
         config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
@@ -497,7 +559,11 @@ def create_service_tools(
                   "An object ref may be taken from the exactly selected actual source.")
     return (
         manage_tool,
-        *([StructuredTool.from_function(recall_context, coroutine=arecall_context,
+        *([StructuredTool.from_function(
+            recall_selected_context if service.mutation_contract == "event_bound_v1"
+            else recall_context,
+            coroutine=arecall_selected_context if service.mutation_contract == "event_bound_v1"
+            else arecall_context,
                                         name="recall_context")]
           if recall_provider is not None else []),
         *(
@@ -521,7 +587,9 @@ def create_service_tools(
                 if name == "search_memory" and context_provider else None)
             for name, function, coroutine in (
                 ("search_memory", search_memory, asearch_memory),
-                ("read_memory", read_memory, aread_memory),
+                ("read_memory", read_memory_history, aread_memory_history)
+                if service.mutation_contract == "event_bound_v1"
+                else ("read_memory", read_memory, aread_memory),
             )
         ),
     )

@@ -192,6 +192,7 @@ def _memory_tools(
         if settings.get("memory_reader_policy")
         else None,
         source_index_provider=recipe.current_sources_tool if recipe else None,
+        selected_page_provider=recipe.selected_page_tool if recipe else None,
     )
     if settings.get("memory_reader_policy") == "bounded_evidence_v1":
         next(tool for tool in tools if tool.name == "search_memory").description = (
