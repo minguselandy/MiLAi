@@ -1,64 +1,25 @@
-# MiLAi Lab active operating constraints
+# MiLAi Lab v13.1 active operating constraints
 
-## Current authorization
+The user explicitly authorized full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_1.md.
+This supersedes previous scope-specific research pauses for v13.1; historical methods and reports remain frozen.
+Work only in this isolated v13.1 worktree based on main255dfcd. Root owns docs, freezes, fixtures, scoring,
+real model HTTP and continuous accounting; one delegated source owner owns source/tests/configuration.
+Agent model is inherited under current tool policy; reasoning xhigh. Do not silently switch models.
+No standing reviewer. Git publication is not required for local first-batch acceptance.
 
-The user authorized full execution of
-[code organization and boundary plan v12.0](docs/MILAI_CODE_ORGANIZATION_BOUNDARY_PLAN_20260929_v12.0.md).
-Its PLAN_ONLY metadata is the original planning snapshot, not a refusal of current execution.
-Work in `/cra/memory/mx_memory/MiLAi-worktrees/code-architecture-v12-20260929/MiLAi-Lab`,
-based on main `cca2fd9d1cb4614c44a40ddc0458325d959e6740`.
-The v12 implementation passed all fifteen criteria and merged in PR #76; see
-[the final report](docs/CODE_ARCHITECTURE_V12_RESULTS.md). All semantic experiments remain paused.
-This completed code-organization scope does not authorize further research execution.
-No real Host, embedding, Judge, PostgreSQL experiment, model download, deployment or service
-configuration change is authorized by v12. Product remains NO_GO.
+Execute P0-P8 faithfully; first batch is P0/P1/P2 under section16, not the whole Goal.
+No broad matrix, Attention, second-family deployment or Product migration in first batch.
+Use one logical MemoryService and existing Store/journal/Agent; opt-in only, preserve legacy contracts.
+Ref-only and Field-grounded are separate; two public receipt fields first. Free prose is not verified.
+No gold, hidden world, future question, injection label, standard execution plan or case-specific repair
+in Host/writer/memory input. Preserve raw proposals, failures, historical observations and real side effects.
+User requests use natural language; user need not manufacture internal IDs or refs.
 
-## Owners and scope
-
-Root owns plans, baseline inventories, synthetic fixture specifications, documentation,
-acceptance and integration decisions. One reused gpt-6-sol / xhigh owns source, tests,
-configuration and necessary CI. Reused gpt-6-luna / high owns Git publication and merges.
-Use gpt-6-astra / xhigh only for a concrete difficult issue with evidence and a clear question.
-Keep one writer per file; do not silently change model or reasoning level.
-Work in Lab and necessary root navigation/CI; do not alter Product or Archive implementation.
-
-## Required end state
-
-Follow S0–S7 and all fifteen completion criteria without replacing them with a smaller cleanup.
-Canonical contracts, memory, external integrations, benchmark lifecycle and generic provider
-hooks must own the reusable behavior. Old moved paths are pure re-exports of the same objects.
-Enforce the real dependency DAG and facade purity automatically; do not hide violations in
-TYPE_CHECKING, dynamic imports, new generic-looking wrappers or broad allowlists.
-Keep method-specific logic in methods/recipe composition, never generic provider code.
-
-## Behavior, evidence and validation
-
-Freeze baseline schemas, receipts, requests/wire, Store calls, identities and on-disk contracts
-before moving their implementation. Preserve ordering, errors, namespace, UUID, tool call IDs,
-accounting, defaults, upstream SDK identity and real historical failures.
-No rubric/gold in runtime inputs; no sample-specific rules; no R2 semantic repair or method
-promotion in this task. Keep legacy labels and all algorithm/budget settings unchanged.
-Every canonical move must enter current source identity and the verification matrix.
-Historical locks and experiment reports are immutable; replay old results at original commits.
-Use the existing Core/Foundation/External/Local-artifact groups with real dependency coverage.
-Run affected Ruff/mypy/behavior/boundary/matrix checks and package/install checks for module
-moves. Do not repeat passed checks unless code changes or evidence justifies them. Do not run
-broad benchmarks, download new dependencies or use skips to manufacture a pass.
-Preserve initial check failures and fixes. Local mechanical tests are not semantic evidence.
-
-## Publication and preservation
-
-Use reviewable S1–S6 commit groups (A–F in the plan); one integration PR is allowed.
-Luna publishes after concrete changes and checks, then merges only after affected Fast CI passes.
-Do not force-push, squash away frozen history, bypass required checks, delete original worktrees,
-remove drafts or publish credentials, private traces, databases, caches, weights or build output.
-The continuous experimental ledger remains the original checkout's
-`artifacts/ser-v20/budget.json`; do not reset or rewrite it.
-
-## Historical instructions
-
-The previous AGENTS bytes are preserved unchanged in
-[the pre-v12 snapshot](docs/agent-history/AGENTS_PRE_V12_20260929.md).
-Historical ACTIVE, pause and no-merge paragraphs describe their dated scopes and cannot override
-this Goal or later explicit user instructions. Root cross-bundle AGENTS and Source of Truth
-continue to govern ownership; the original research objective is not complete.
+Real generation/embedding concurrency1, only Root initiates HTTP. Retain original cumulative ledger
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; do not reset charges.
+Use isolated resource namespaces; no old private data mutation, new service deployment or service changes.
+Run affected mechanical/SDK/persistence/source/boundary checks before small frozen real smoke.
+Mocks are engineering evidence, not semantic success. Formal sources stay unseen until pilot freeze.
+Track full acceptance in data/manifests/v13-1-requirements.json and docs/V13_1_EXECUTION.md.
+Product NO_GO; no Product/Archive edits. Root AGENTS and Source of Truth still govern boundaries.
+The pre-v13.1 AGENTS bytes are preserved at docs/agent-history/AGENTS_PRE_V13_1_20260930.md.

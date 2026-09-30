@@ -17,6 +17,8 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/presentation.py",
     "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/service.py",
+    "src/milai_lab/memory/service_tools.py",
     "src/milai_lab/memory/revision_store.py",
     "src/milai_lab/memory/strict_tools.py",
 )

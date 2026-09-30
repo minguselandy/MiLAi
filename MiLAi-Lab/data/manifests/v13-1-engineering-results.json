@@ -1,0 +1,86 @@
+{
+  "kind": "MILAI_V13_1_P1_P2_ENGINEERING_RESULTS",
+  "status": "SCOPED_MECHANICAL_VALIDATION",
+  "final_test_counts": {
+    "final_service_and_runner": 16,
+    "legacy_crud_mcp": 9,
+    "architecture_boundary_source": 217,
+    "mypy_files": 6,
+    "ruff": "PASS",
+    "matrix_sources": 198,
+    "zero_model_prepare": "PASS"
+  },
+  "checks": [
+    {
+      "path": "artifacts/v13-1-source-checks/first-pytest.txt",
+      "sha256": "f94c673b8869dcc88b08323bfb6c2138d11bef3c1e0d0451a9ec9a5bcc3b5106"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/final-matrix.txt",
+      "sha256": "85f851a7e0f5bbdb0e3e013c35ff91959780516831eb1d41050b66fe693a5e4f"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/final-ruff.txt",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/legacy-contract-pytest.txt",
+      "sha256": "7f72494306d6f5d3db3b9e153378b8c33cc980152dd8a5c1799e9dacc8a43fb3"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/first-runner-pytest.txt",
+      "sha256": "54e42efb82cc204e80507ed837f36917d88a66af25afc0774067812f4582a5fa"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/final-mypy.txt",
+      "sha256": "ab35ee42183d4d6d3ba483825ab037d18a5a15622d03be01d82220b1564851ff"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/final-service-runner-pytest.txt",
+      "sha256": "53613c14aaeaf0cadbb4a9ac2305566806fcc4a3acae8443cf3f2f0503fd0558"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/first-ruff.txt",
+      "sha256": "65dce5179dc5a65fde386c5dcf875267a3901fcf4c1401641a3a9ce24983537a"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/first-architecture-pytest.txt",
+      "sha256": "5e14a9f03c62860487c0f132ee8f94ddeb614dbc846f243998d80b49c6a7e2f3"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/first-matrix.txt",
+      "sha256": "aef03c3e5e58d3696a7ca8f1729609ef720e2c676f747e43887ddda33011fa59"
+    },
+    {
+      "path": "artifacts/v13-1-source-checks/first-mypy.txt",
+      "sha256": "8c639af056abf998dfe60af838ed71ba34527483221f8cd31dafd8f3833f0289"
+    }
+  ],
+  "first_failures": [
+    {
+      "check": "service",
+      "result": "2 failed11passed",
+      "causes": [
+        "test expected one of two simultaneously conflicting fields but canonical-key iteration returned the other (both correctly rejected)",
+        "async standalone ToolNode fixture omitted required Runtime and accessed wrong result shape; test corrected to real public Runtime/messages contract"
+      ]
+    },
+    {
+      "check": "ruff",
+      "result": "9 errors then fixed formatting/noqa placement"
+    },
+    {
+      "check": "verification_matrix",
+      "result": "new optional test paths missing in root fast/ci Foundation lists and Core dependency exclusions; synchronized"
+    }
+  ],
+  "tests_not_run": [
+    "broad benchmark matrices",
+    "real PostgreSQL/CAS",
+    "P5 real crash windows",
+    "full package build(no module movement)",
+    "remote CI(no Git publication)"
+  ],
+  "product": "NO_GO",
+  "schema_api_permission_canonical_product_change": false
+}

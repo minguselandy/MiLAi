@@ -1,0 +1,267 @@
+{
+  "kind": "MILAI_V13_1_D0_SIX_STORIES_R1_RESULTS",
+  "status": "TERMINAL_DEVELOPMENT_NEGATIVE_USABILITY_RESULT",
+  "created_at": "2026-09-30T02:26:10.426005+00:00",
+  "source_manifest_sha256": "da7705e5f35a1e316040f2a7c340ed69d75a987fdeea24a5fde994563e4f0c6b",
+  "input_freeze_sha256": "becf42ee83c506648c294ad7b2c251c1a03c148822ebc09c7e24b6386bcf81d2",
+  "config_sha256": "26d725f464a943eb53735f3d9a701349d2274f50aa0307654e77ff64b717ca35",
+  "tool_catalog_sha256": "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926",
+  "source_files": 199,
+  "mode": "field_grounded",
+  "transport": "direct",
+  "experiment_arm_kind": "RESEARCH_PROTOTYPE",
+  "planned_normal_cases": 24,
+  "run_cases": 6,
+  "not_run_cases": 18,
+  "planned_six_messages": 12,
+  "completed_messages": 12,
+  "six_story_successes": 3,
+  "case_results": [
+    {
+      "case_id": "save-1",
+      "verdict": "PASS",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": null,
+      "public_message_processes": [
+        3423321
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 0,
+      "wrong_effects": 0,
+      "additional_notes": null
+    },
+    {
+      "case_id": "recall-1",
+      "verdict": "FAIL",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": "retrieval: whitespace-only full query fails to match correctly committed Chinese preference",
+      "public_message_processes": [
+        3423751,
+        3424194
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 0,
+      "wrong_effects": 0,
+      "additional_notes": null
+    },
+    {
+      "case_id": "update-1",
+      "verdict": "FAIL",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": "proposal: user requested revision, Host creates a second unrelated record; later retrieval returns old record only",
+      "public_message_processes": [
+        3424534,
+        3424922,
+        3425314
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 0,
+      "wrong_effects": 0,
+      "additional_notes": null
+    },
+    {
+      "case_id": "scope-1",
+      "verdict": "FAIL",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": "reader/proposal: correctly scoped episodic card and original raw source delivered; current question misread as personal preference assertion, then committed",
+      "public_message_processes": [
+        3425787,
+        3426121
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 0,
+      "wrong_effects": 0,
+      "additional_notes": null
+    },
+    {
+      "case_id": "object-continue-1",
+      "verdict": "PASS",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": null,
+      "public_message_processes": [
+        3426488,
+        3427083
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 1,
+      "wrong_effects": 0,
+      "additional_notes": "Already-created label triggered one unnecessary complete_label proposal; actual API returned already_labeled without new effect. Field-grounded actual save omitted fields, so no live finite field support exercised."
+    },
+    {
+      "case_id": "restart-1",
+      "verdict": "PASS",
+      "offline_trace_review": "Root reviewed original proposals, receipts, store snapshots, final answers and separate-process SDK readback",
+      "earliest_break": null,
+      "public_message_processes": [
+        3427519,
+        3427854
+      ],
+      "distinct_processes": true,
+      "wrong_proposals": 0,
+      "wrong_effects": 0,
+      "additional_notes": null
+    }
+  ],
+  "messages": [
+    {
+      "case_id": "save-1",
+      "message_index": 0,
+      "process_id": 3423321,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/c767736efe5cb2bc/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/c767736efe5cb2bc/message-0.json",
+      "final_answer_sha256": "3b5abdef91fad393beb358929f7f7fe832c8ab26e2536ad263fbe7c489531b34"
+    },
+    {
+      "case_id": "recall-1",
+      "message_index": 0,
+      "process_id": 3423751,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/1ed93fe22f2194f3/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/1ed93fe22f2194f3/message-0.json",
+      "final_answer_sha256": "4a38807bae54aa87dab4ed5e30faf98945ff9e75f24753eb4b131c8611278660"
+    },
+    {
+      "case_id": "recall-1",
+      "message_index": 1,
+      "process_id": 3424194,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/1ed93fe22f2194f3/message-1.jsonl",
+      "receipt": "artifacts/v13-1-d0/1ed93fe22f2194f3/message-1.json",
+      "final_answer_sha256": "f9c295e2ed3eff38c828b3c1c9bcdbde5b15c720ebc5efc6b73dab03cf722916"
+    },
+    {
+      "case_id": "update-1",
+      "message_index": 0,
+      "process_id": 3424534,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/bf411db9a172dfea/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/bf411db9a172dfea/message-0.json",
+      "final_answer_sha256": "98d88cc601efe2aa218159cdf94048e42796636a6fc5b62690c5b63941f19fc1"
+    },
+    {
+      "case_id": "update-1",
+      "message_index": 1,
+      "process_id": 3424922,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/bf411db9a172dfea/message-1.jsonl",
+      "receipt": "artifacts/v13-1-d0/bf411db9a172dfea/message-1.json",
+      "final_answer_sha256": "c7e8545cb6d22e52d838973e0c3e4ddf01796cae37509a32896a6c1582d69691"
+    },
+    {
+      "case_id": "update-1",
+      "message_index": 2,
+      "process_id": 3425314,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/bf411db9a172dfea/message-2.jsonl",
+      "receipt": "artifacts/v13-1-d0/bf411db9a172dfea/message-2.json",
+      "final_answer_sha256": "121de7beec8ba4544b24a492bb9bedc3fb5199e14ae25236986dbdd3453cde44"
+    },
+    {
+      "case_id": "scope-1",
+      "message_index": 0,
+      "process_id": 3425787,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/20fe66d09904df13/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/20fe66d09904df13/message-0.json",
+      "final_answer_sha256": "4fd56c23a32c75702e1b9c0090fe55f6a79934bd89989ce687a11234df366012"
+    },
+    {
+      "case_id": "scope-1",
+      "message_index": 1,
+      "process_id": 3426121,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/20fe66d09904df13/message-1.jsonl",
+      "receipt": "artifacts/v13-1-d0/20fe66d09904df13/message-1.json",
+      "final_answer_sha256": "05921120257bbc999fcfb5799503cdeb8e66e1d340b65545fa5ae071172bc871"
+    },
+    {
+      "case_id": "object-continue-1",
+      "message_index": 0,
+      "process_id": 3426488,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-0.json",
+      "final_answer_sha256": "38f9a08e87e9b5c566885d0fadb62406875a23881dbffcb0683611c61efaf8ac"
+    },
+    {
+      "case_id": "object-continue-1",
+      "message_index": 1,
+      "process_id": 3427083,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-1.jsonl",
+      "receipt": "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-1.json",
+      "final_answer_sha256": "ba0f8a1cf11d3a58585d172b73fa28dbc26c2c4011faa7cc143481e2361b547c"
+    },
+    {
+      "case_id": "restart-1",
+      "message_index": 0,
+      "process_id": 3427519,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/c4d7bee81059802e/message-0.jsonl",
+      "receipt": "artifacts/v13-1-d0/c4d7bee81059802e/message-0.json",
+      "final_answer_sha256": "82922a0de934b2fd809ecdba811b6d398e996845e767c96ad9a5c2ce0830d447"
+    },
+    {
+      "case_id": "restart-1",
+      "message_index": 1,
+      "process_id": 3427854,
+      "status": "completed",
+      "trace": "artifacts/v13-1-d0/c4d7bee81059802e/message-1.jsonl",
+      "receipt": "artifacts/v13-1-d0/c4d7bee81059802e/message-1.json",
+      "final_answer_sha256": "c3a047e29b4676b8fcb8bc7a64d4fa5fda80b2e82a488b3dffcd8ef6131d6d0f"
+    }
+  ],
+  "charges": {
+    "new_generation_requests": 28,
+    "new_generation_tokens": 35132,
+    "new_embedding_tokens": 0,
+    "new_judge_requests": 0,
+    "unknown_usage": 0,
+    "continuous_generation_requests": 6173,
+    "continuous_generation_tokens": 11442218,
+    "continuous_embedding_tokens": 416930,
+    "ledger_sha256": "f0a6f45bd14b748005b24bac231e13b72f9ed4e409849d5b98a2f73d6f314748",
+    "io": "program ref discovery measured; aggregate step wall/cpu and DB bytes measured; complete Store I/O per-operation accounting not implemented"
+  },
+  "mechanical_tests": {
+    "final_service_and_runner": 16,
+    "legacy_crud_mcp": 9,
+    "architecture_boundary_source": 217,
+    "mypy_files": 6,
+    "ruff": "PASS",
+    "matrix_sources": 198,
+    "zero_model_prepare": "PASS"
+  },
+  "usability_gate": "NOT_MET;24-case denominator not yet collected, no22/24 claim",
+  "research_supported": false,
+  "live_field_grounding": "NOT_EXERCISED(fields empty in actual tool-observation save)",
+  "owner_leaks_observed": 0,
+  "false_saved_receipts_observed": 0,
+  "evidence_files_sha256": {
+    "artifacts/v13-1-d0/c767736efe5cb2bc/message-0.json": "51d203df565f2bb6d7d8b03e7ac241f9a5b01c77abc72b089034afa1b5f8f88d",
+    "artifacts/v13-1-d0/1ed93fe22f2194f3/message-0.json": "7bb6d439b9215045084ec797d70ff44812a2d1dac662167050da00484c161a4a",
+    "artifacts/v13-1-d0/1ed93fe22f2194f3/message-1.json": "b704b8a093b589ebe62e2a989ec285a16fb21a03dd17f7cbe51b68d7172bf275",
+    "artifacts/v13-1-d0/bf411db9a172dfea/message-0.json": "d278c85561b3762f75c4475c37202db7d575a07a6d861a0703404c2742952e35",
+    "artifacts/v13-1-d0/bf411db9a172dfea/message-1.json": "ed22b446f967cd241072c369dec23ce9b76a48d68ea73df48a13b81db2ca630c",
+    "artifacts/v13-1-d0/bf411db9a172dfea/message-2.json": "715dd45596db4c9152b024a4ecce4f4d7a91408ba1adc00b53889b70ce606004",
+    "artifacts/v13-1-d0/20fe66d09904df13/message-0.json": "d09af4e60d9cbf826815d60444ce47089fb4d1d561ad512d871caeb5f2e56329",
+    "artifacts/v13-1-d0/20fe66d09904df13/message-1.json": "d96446a0eb124e87b1629cc954af3fa5e1c85d59d465530024757a79ff409522",
+    "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-0.json": "4db5f92d0fe837448268ae3e38de6632b9507a49d429a4f45963bd7b5b653140",
+    "artifacts/v13-1-d0/73a12f9eb8f0f0b7/message-1.json": "651d25f5d283d07c985ba8fbc33713b99bac04d837dd1498b53a2b84c3fd66ff",
+    "artifacts/v13-1-d0/c4d7bee81059802e/message-0.json": "a20e9da528a8ee82c75547dda04e81cb8d9c49b5f91c606ead749a83752a231d",
+    "artifacts/v13-1-d0/c4d7bee81059802e/message-1.json": "0446c366027d2c63ae43574a5bdfd5bbd608b0867a1575781e359bdfa7886122",
+    "artifacts/v13-1-d0/input-freeze.json": "becf42ee83c506648c294ad7b2c251c1a03c148822ebc09c7e24b6386bcf81d2",
+    "artifacts/v13-1-d0/process-results.json": "93a1781dd12f43aa1fdf108545e6b7ec4ee144cef18392f253ab042226e70034",
+    "artifacts/v13-1-d0/separate-process-readback.json": "40b3e4c9980620736ace4680bbbfe7f5695c4b3249d03279af89566a4c54580c",
+    "artifacts/v13-1-d0/six-stories-process.log": "aa20b8f60dd4213dbb187a76a0096e6b9e6514f93fb5787cfe0f7b8d1f78719a"
+  },
+  "limitations": [
+    "All six stories are exposed development; no independent sample or comparison claim",
+    "Raw/keyword service only; no semantic dense ranking claim",
+    "SQLite cooperating service writers only;no generic CAS/exactly-once guarantee",
+    "Three failed stories and one wrong mutation proposal retained",
+    "Semantic false preference persisted under unchecked prose contract; source existence is not semantic support",
+    "Root manual trace review is development scoring, not blind human evaluation"
+  ]
+}

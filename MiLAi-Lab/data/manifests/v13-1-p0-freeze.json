@@ -1,0 +1,233 @@
+{
+  "kind": "MILAI_V13_1_P0_FREEZE",
+  "created_at": "2026-09-30T01:54:15.476136+00:00",
+  "status": "READ_ONLY_IDENTITY_RECHECKED_NOT_METHOD_FREEZE",
+  "plan": {
+    "original_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_1.md",
+    "copied_path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_1.md",
+    "sha256": "e67cc5253cbe6967d935cc5c9b9f4453c731665d1937d9049e323c10e54dc9ca",
+    "bytes_preserved": true
+  },
+  "base_commit": "255dfcde5d73b9fc800cdd7f866460a09908c12f",
+  "branch": "feat/lab-usability-v13-1-20260930",
+  "experiment_arm_kind": "RESEARCH_PROTOTYPE",
+  "services": [
+    {
+      "name": "vigorous_knuth",
+      "container_id": "25f0a0dee927bc1a94abd3efce5990a52d5c0c219ab40afb6defa2298ff64ab5",
+      "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+      "started_at": "2026-09-26T00:47:24.391950959Z",
+      "running": true,
+      "command": [
+        "/models",
+        "--port",
+        "7860",
+        "--tensor-parallel-size",
+        "2",
+        "--max-model-len",
+        "65536",
+        "--served-model-name",
+        "Qwen3.6-35B-A3B-FP8",
+        "--gpu-memory-utilization",
+        "0.9",
+        "--reasoning-parser",
+        "qwen3",
+        "--default-chat-template-kwargs",
+        "{\"enable_thinking\": false}"
+      ],
+      "mounts": [
+        {
+          "source": "/cra/qwen36-35B",
+          "destination": "/models",
+          "rw": true
+        }
+      ]
+    },
+    {
+      "name": "milai-unified-v8-v9-native-host-r2",
+      "container_id": "b144371a277fb382ec5ffd1ea1b440c145bf094fc6ee04011fcc0699850f687c",
+      "image": "sha256:e0cfcfcb9b86e2c2d0d52a93689773f20f380cb8e050a24ce550c44f6f55c5eb",
+      "started_at": "2026-09-28T15:09:34.431137062Z",
+      "running": true,
+      "command": [
+        "/models",
+        "--port",
+        "7862",
+        "--tensor-parallel-size",
+        "2",
+        "--max-model-len",
+        "65536",
+        "--served-model-name",
+        "Qwen3.6-35B-A3B-FP8",
+        "--gpu-memory-utilization",
+        "0.88",
+        "--reasoning-parser",
+        "qwen3",
+        "--default-chat-template-kwargs",
+        "{\"enable_thinking\": false}",
+        "--enable-auto-tool-choice",
+        "--tool-call-parser",
+        "qwen3_coder"
+      ],
+      "mounts": [
+        {
+          "source": "/cra/qwen36-35B",
+          "destination": "/models",
+          "rw": false
+        }
+      ]
+    },
+    {
+      "name": "bge-m3",
+      "container_id": "f5fb0de5a8a8e17fe8ecfc3d742288ca76b5113efd43117315687a111122060c",
+      "image": "sha256:05775a190d5667293e18d3a269561846f60324ea28d21df8be8a2763aec01970",
+      "started_at": "2026-08-19T02:58:40.358777542Z",
+      "running": true,
+      "command": null,
+      "mounts": [
+        {
+          "source": "/data/models",
+          "destination": "/data/models",
+          "rw": true
+        },
+        {
+          "source": "/root/.cache/huggingface",
+          "destination": "/data/.cache/huggingface",
+          "rw": true
+        }
+      ]
+    }
+  ],
+  "http_probes": [
+    {
+      "url": "http://127.0.0.1:7860/v1/models",
+      "http_status": 200,
+      "models": [
+        {
+          "id": "Qwen3.6-35B-A3B-FP8",
+          "root": "/models",
+          "max_model_len": 65536
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:7861/v1/models",
+      "http_status": 200,
+      "models": [
+        {
+          "id": "bge-m3",
+          "root": "/data/models/embed",
+          "max_model_len": 8192
+        }
+      ]
+    },
+    {
+      "url": "http://127.0.0.1:7862/v1/models",
+      "http_status": 200,
+      "models": [
+        {
+          "id": "Qwen3.6-35B-A3B-FP8",
+          "root": "/models",
+          "max_model_len": 65536
+        }
+      ]
+    }
+  ],
+  "model_artifact_identity": {
+    "/cra/qwen36-35B": {
+      "config.json": "570ef7ea45a7e1d3de2b1d3c70c4ac3562d0e768acdc195778cb4f4d95025845",
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+      "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "configuration.json": "c1b09db419119513247e9b8b912c4b9897106c9b20c6cada7e107d993c5435eb"
+    },
+    "/data/models/embed": {
+      "config.json": "26159e7ad065073448460117eb24b7a4572f6f4e78eadff65dc0a11c052449fa",
+      "tokenizer.json": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+      "tokenizer_config.json": "a62b2b6784f990259fddef5f16388693a8043be4f69179e6a5257eeb3f9abac4",
+      "configuration.json": "007c616ed9187f4f3d6096ed2d55cece33c3f48866dbd7bc6afefcb9645a37c1"
+    }
+  },
+  "model_revision_limit": "Mounted complete weight file bytes and configuration/tokenizer/template hashes verified; upstream revision label is not inferred from a local path.",
+  "thinking": false,
+  "http_concurrency": 1,
+  "stage_order": [
+    "P0",
+    "P1",
+    "P2",
+    "P3",
+    "P4",
+    "P5",
+    "P6",
+    "P7",
+    "P8"
+  ],
+  "current_batch": [
+    "P0",
+    "P1",
+    "P2"
+  ],
+  "historical_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "7f0e54548dcbebe1325ebbac4a0fc4441f20efc949cd16be4084c3f9b8aeda43",
+    "generation_requests": 6145,
+    "generation_tokens": 11407086,
+    "embedding_tokens": 416930,
+    "unknown_usage": 0,
+    "reset": false
+  },
+  "exposure_registry_inputs": [
+    {
+      "path": "data/manifests/repair-v10-exposure-registry.json",
+      "sha256": "3f44f97173056b459d20a182e8a5e1e9283ef21004cc8c5c6d17e375de21a22c",
+      "role": "development exclusion authority; union, never reset"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-exposure-20260928.json",
+      "sha256": "0c070c564f0598ec80555fdbb2909d1e4228a299e65b409f76a3ce7740a27910",
+      "role": "development exclusion authority; union, never reset"
+    },
+    {
+      "path": "data/manifests/local-state-attention-merit-exposure.json",
+      "sha256": "b2acb978c68cbc4d58d94b51e73b79d3f66cf7310cfb3b9bf667bb9402899418",
+      "role": "development exclusion authority; union, never reset"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v14-exposure-rule.json",
+      "sha256": "c318ea79923c5b94f554fb9ebec239d2e10c36f612f1e1dc71043bba75ff8c0d",
+      "role": "development exclusion authority; union, never reset"
+    }
+  ],
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "new_judge_calls": 0,
+  "budget": {
+    "total_money": null,
+    "gpu_hour_price": null,
+    "full_matrix_tokens": null,
+    "policy": "derive pilot costs before formal freeze; no invented price/cap"
+  },
+  "limitations": [
+    "server_info endpoints returned404; live process/container command and mounted templates used instead",
+    "D0 fixtures are development only, not independent research confirmation",
+    "Second-family deployment not part of first batch",
+    "Product NO_GO; no Product migration"
+  ],
+  "baseline_current_source_identity": "data/manifests/v13-1-baseline-audit.json",
+  "d0_input": {
+    "path": "data/fixtures/v13-1-d0-normal.json",
+    "sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+    "normal_cases": 24,
+    "public_messages": 48,
+    "categories": 6,
+    "per_category": 4,
+    "offline_rubric_read_by_runtime": false
+  },
+  "complete_weight_identity": {
+    "path": "data/manifests/v13-1-model-weights.json",
+    "sha256": "3e55a3f0cec64f58c362715d3ae2efff69615dd887b563fd3cf12ec3891d975e",
+    "weight_files": 43,
+    "bytes": 39734807990
+  }
+}

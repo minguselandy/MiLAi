@@ -1,0 +1,506 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_DEVELOPMENT",
+  "cases": [
+    {
+      "case_id": "save-1",
+      "category": "save",
+      "owner": "save-1-owner",
+      "messages": [
+        {
+          "message_id": "save-1-m1",
+          "session_id": "s1",
+          "content": "请记住：我喜欢简短回答。",
+          "new_process_before": false
+        }
+      ]
+    },
+    {
+      "case_id": "save-2",
+      "category": "save",
+      "owner": "save-2-owner",
+      "messages": [
+        {
+          "message_id": "save-2-m1",
+          "session_id": "s1",
+          "content": "请保存我的饮品偏好：不含咖啡因的茶。",
+          "new_process_before": false
+        }
+      ]
+    },
+    {
+      "case_id": "save-3",
+      "category": "save",
+      "owner": "save-3-owner",
+      "messages": [
+        {
+          "message_id": "save-3-m1",
+          "session_id": "s1",
+          "content": "以后替我选择餐食时，请记住我是素食者。",
+          "new_process_before": false
+        }
+      ]
+    },
+    {
+      "case_id": "save-4",
+      "category": "save",
+      "owner": "save-4-owner",
+      "messages": [
+        {
+          "message_id": "save-4-m1",
+          "session_id": "s1",
+          "content": "请记住我阅读时喜欢大字号。",
+          "new_process_before": false
+        }
+      ]
+    },
+    {
+      "case_id": "recall-1",
+      "category": "recall",
+      "owner": "recall-1-owner",
+      "messages": [
+        {
+          "message_id": "recall-1-m1",
+          "session_id": "s1",
+          "content": "请记住我通勤更喜欢火车。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "recall-1-m2",
+          "session_id": "s2",
+          "content": "我之前告诉过你偏好的通勤方式是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "recall-2",
+      "category": "recall",
+      "owner": "recall-2-owner",
+      "messages": [
+        {
+          "message_id": "recall-2-m1",
+          "session_id": "s1",
+          "content": "请保存我常用的编程语言是 Python。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "recall-2-m2",
+          "session_id": "s2",
+          "content": "我之前告诉你的常用编程语言是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "recall-3",
+      "category": "recall",
+      "owner": "recall-3-owner",
+      "messages": [
+        {
+          "message_id": "recall-3-m1",
+          "session_id": "s1",
+          "content": "请记住我通常喜欢把会议安排在上午。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "recall-3-m2",
+          "session_id": "s2",
+          "content": "安排新会议时，我之前说过倾向什么时间？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "recall-4",
+      "category": "recall",
+      "owner": "recall-4-owner",
+      "messages": [
+        {
+          "message_id": "recall-4-m1",
+          "session_id": "s1",
+          "content": "请保存：我喜欢先看到邮件的提纲，再看正文。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "recall-4-m2",
+          "session_id": "s2",
+          "content": "按我之前表达过的偏好，邮件怎样组织比较合适？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "owner": "update-1-owner",
+      "messages": [
+        {
+          "message_id": "update-1-m1",
+          "session_id": "s1",
+          "content": "请保存我的饮品偏好：咖啡。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-1-m2",
+          "session_id": "s2",
+          "content": "更新一下：我现在更喜欢茶，不再首选咖啡。请保存新偏好。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-1-m3",
+          "session_id": "s3",
+          "content": "我的当前饮品偏好是什么？以前是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "update-2",
+      "category": "update",
+      "owner": "update-2-owner",
+      "messages": [
+        {
+          "message_id": "update-2-m1",
+          "session_id": "s1",
+          "content": "请记住我希望默认用英文交流。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-2-m2",
+          "session_id": "s2",
+          "content": "我的偏好改为默认用中文交流，请更新。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-2-m3",
+          "session_id": "s3",
+          "content": "现在和以前的交流语言偏好分别是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "update-3",
+      "category": "update",
+      "owner": "update-3-owner",
+      "messages": [
+        {
+          "message_id": "update-3-m1",
+          "session_id": "s1",
+          "content": "请保存：距离单位默认使用英里。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-3-m2",
+          "session_id": "s2",
+          "content": "从现在起默认距离单位改用公里，请更新。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-3-m3",
+          "session_id": "s3",
+          "content": "我当前和历史的距离单位偏好是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "update-4",
+      "category": "update",
+      "owner": "update-4-owner",
+      "messages": [
+        {
+          "message_id": "update-4-m1",
+          "session_id": "s1",
+          "content": "请保存：通常把会议安排在上午。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-4-m2",
+          "session_id": "s2",
+          "content": "我的安排变了，以后通常把会议安排在下午，请更新。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-4-m3",
+          "session_id": "s3",
+          "content": "目前和过去我偏好的会议时间是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "owner": "scope-1-owner",
+      "messages": [
+        {
+          "message_id": "scope-1-m1",
+          "session_id": "s1",
+          "content": "我自己没有固定素食偏好。请只为本周的团队午餐保存要求：给整个团队准备素食。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "scope-1-m2",
+          "session_id": "s2",
+          "content": "下一次给我个人安排晚餐时，你是否知道我长期坚持素食？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "scope-2",
+      "category": "scope",
+      "owner": "scope-2-owner",
+      "messages": [
+        {
+          "message_id": "scope-2-m1",
+          "session_id": "s1",
+          "content": "我一般喜欢详细说明，但今天的现场演示时间有限。请只为这次演示保存要求：回答尽量简短。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "scope-2-m2",
+          "session_id": "s2",
+          "content": "我平时喜欢详细还是简短说明？那次现场演示有什么不同？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "scope-3",
+      "category": "scope",
+      "owner": "scope-3-owner",
+      "messages": [
+        {
+          "message_id": "scope-3-m1",
+          "session_id": "s1",
+          "content": "请保存：出差项目每晚住宿预算不超过800元；这是项目规则，不是我的私人旅行偏好。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "scope-3-m2",
+          "session_id": "s2",
+          "content": "我私人旅行的长期住宿预算是多少？出差项目的规则是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "scope-4",
+      "category": "scope",
+      "owner": "scope-4-owner",
+      "messages": [
+        {
+          "message_id": "scope-4-m1",
+          "session_id": "s1",
+          "content": "请记住：我说的“Friday交稿”只是这个项目的相对时间约定，目前还没有提供具体日期。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "scope-4-m2",
+          "session_id": "s2",
+          "content": "项目说的Friday交稿，能确认是哪一天的绝对日期吗？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "object-continue-1",
+      "category": "object_continue",
+      "owner": "object-continue-1-owner",
+      "messages": [
+        {
+          "message_id": "object-continue-1-m1",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“蓝色玻璃杯-展厅A”，数量2，目的地“一楼展厅”，包装要求“防震隔层”。请保存真实结果，方便下一次继续。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "object-continue-1-m2",
+          "session_id": "s2",
+          "content": "请查看“蓝色玻璃杯-展厅A”的实际状态，只完成仍然获授权且尚未完成的标签工作；已完成的工作不要重做。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": true
+      }
+    },
+    {
+      "case_id": "object-continue-2",
+      "category": "object_continue",
+      "owner": "object-continue-2-owner",
+      "messages": [
+        {
+          "message_id": "object-continue-2-m1",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“项目B设备箱-批次二”，数量1，目的地“二楼会议室”，包装要求“原箱封装”。请保存真实结果，方便下一次继续。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "object-continue-2-m2",
+          "session_id": "s2",
+          "content": "请查看“项目B设备箱-批次二”的实际状态，只完成仍然获授权且尚未完成的标签工作；已完成的工作不要重做。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": true
+      }
+    },
+    {
+      "case_id": "object-continue-3",
+      "category": "object_continue",
+      "owner": "object-continue-3-owner",
+      "messages": [
+        {
+          "message_id": "object-continue-3-m1",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“实验耗材-冷链区”，数量6，目的地“冷链收货点”，包装要求“保温包装”。请保存真实结果，方便下一次继续。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "object-continue-3-m2",
+          "session_id": "s2",
+          "content": "请查看“实验耗材-冷链区”的实际状态，只完成仍然获授权且尚未完成的标签工作；已完成的工作不要重做。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": true
+      }
+    },
+    {
+      "case_id": "object-continue-4",
+      "category": "object_continue",
+      "owner": "object-continue-4-owner",
+      "messages": [
+        {
+          "message_id": "object-continue-4-m1",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“宣传手册-中文新版”，数量30，目的地“访客接待处”，包装要求“按十本分组”。请保存真实结果，方便下一次继续。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "object-continue-4-m2",
+          "session_id": "s2",
+          "content": "请查看“宣传手册-中文新版”的实际状态，只完成仍然获授权且尚未完成的标签工作；已完成的工作不要重做。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": true
+      }
+    },
+    {
+      "case_id": "restart-1",
+      "category": "restart",
+      "owner": "restart-1-owner",
+      "messages": [
+        {
+          "message_id": "restart-1-m1",
+          "session_id": "s1",
+          "content": "请保存我的回复格式偏好：先列步骤，再给例子。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "restart-1-m2",
+          "session_id": "s2",
+          "content": "我之前保存的回复格式偏好是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "restart-2",
+      "category": "restart",
+      "owner": "restart-2-owner",
+      "messages": [
+        {
+          "message_id": "restart-2-m1",
+          "session_id": "s1",
+          "content": "请记住我更喜欢安静的会议室。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "restart-2-m2",
+          "session_id": "s2",
+          "content": "我之前对会议室环境表达过什么偏好？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "restart-3",
+      "category": "restart",
+      "owner": "restart-3-owner",
+      "messages": [
+        {
+          "message_id": "restart-3-m1",
+          "session_id": "s1",
+          "content": "请保存：我想要餐食中少放辣椒。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "restart-3-m2",
+          "session_id": "s2",
+          "content": "我之前对辣椒用量有什么偏好？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "restart-4",
+      "category": "restart",
+      "owner": "restart-4-owner",
+      "messages": [
+        {
+          "message_id": "restart-4-m1",
+          "session_id": "s1",
+          "content": "请保存我的笔记组织习惯：按项目分类。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "restart-4-m2",
+          "session_id": "s2",
+          "content": "我之前希望笔记怎么组织？",
+          "new_process_before": true
+        }
+      ]
+    }
+  ],
+  "six_story_order": [
+    "save-1",
+    "recall-1",
+    "update-1",
+    "scope-1",
+    "object-continue-1",
+    "restart-1"
+  ],
+  "normal_check_count": 24,
+  "normal_check_categories": [
+    "save",
+    "recall",
+    "update",
+    "scope",
+    "object_continue",
+    "restart"
+  ],
+  "policy": "Four per capability, all predeclared; no results-based selection. All are development, not unseen evaluation. Every new public message in a new process reopens same durable resources.",
+  "runtime_must_not_read_rubric": true,
+  "model_budget": {
+    "host_calls_per_message": 12,
+    "host_max_output_tokens": 4096,
+    "temperature": 0,
+    "enable_thinking": false,
+    "http_concurrency": 1
+  },
+  "use_gate": {
+    "minimum_successes": 22,
+    "denominator": 24,
+    "maximum_owner_leaks": 0,
+    "maximum_false_saved_receipts": 0
+  }
+}
