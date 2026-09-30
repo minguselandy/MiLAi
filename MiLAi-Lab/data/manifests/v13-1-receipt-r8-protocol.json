@@ -1,0 +1,52 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_RECEIPT_CONSUMPTION_R8",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "data/fixtures/v13-1-receipt-r8-fixed-state.json",
+  "fixture_sha256": "2e2a38fffe2e6742b2d98c0ca9c4bc1e2e323cff3507c703d88d5126b2b1aaf6",
+  "origin": "R7 actual source/tool receipts, correctly committed memory and actual completed world; no regeneration or semantic bank repair",
+  "source_public_field_semantics": "ApplicationWorld.complete_label returns already_labeled when current label_status is created; operation status found reflects lookup result, not unfinished label work. This is public tool contract guidance, no task-specific execution plan.",
+  "changed_variable": "One generic instruction distinguishing operation result status from label creation status",
+  "held_constant": [
+    "identical actual world/memory/journal bytes",
+    "all R7 instructions",
+    "same original public continue query with fresh s3 identity",
+    "source, tool schemas and field guard",
+    "actual application lookup permissions",
+    "owner/namespace/mode",
+    "model/parameters/cadence/caps",
+    "original ledger and HTTP concurrency1"
+  ],
+  "arms": {
+    "control": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-receipt-r8/control/v13-1-d0-r7",
+      "initial_resource_sha256": {
+        "memory.sqlite": "ae0043f9e3393fe5c5b5544ea577e3a00e26dd262f8eddad67008af3b861383d",
+        "world.sqlite": "991c81829640aa2f2a979e445c3df83d7cc80e492081046130593ecb778bf02a",
+        "business-journal.json": "ab4aad6ce74b6c1f6d1af4616e3f52fea9130c750c530247c56d91eabca3d3f0"
+      }
+    },
+    "candidate": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-receipt-r8/candidate/v13-1-d0-r7",
+      "initial_resource_sha256": {
+        "memory.sqlite": "ae0043f9e3393fe5c5b5544ea577e3a00e26dd262f8eddad67008af3b861383d",
+        "world.sqlite": "991c81829640aa2f2a979e445c3df83d7cc80e492081046130593ecb778bf02a",
+        "business-journal.json": "ab4aad6ce74b6c1f6d1af4616e3f52fea9130c750c530247c56d91eabca3d3f0"
+      }
+    }
+  },
+  "offline_acceptance": [
+    "actual lookup returns same created label state in both",
+    "final answer reflects completed label work consistently",
+    "no extra reserve/label mutation or unsupported memory proposal",
+    "preserve any wrong proposal or final answer; no posthoc rewrite"
+  ],
+  "competition": "Same model may vary at temperature0; original R7 is retained. If both new arms answer correctly, do not claim accuracy gain; still qualify as a generic public contract guidance test.",
+  "falsifier": "Candidate still says labeling unfinished after actually delivered created receipt, or mutates already completed work.",
+  "per_message_calls": 12,
+  "per_call_output_tokens": 4096,
+  "ledger_before_sha256": "1df9f7b68e568a13d55d42df199e1a43bfcfa90780587289ecede8afcc514229",
+  "full_goal_status": "ACTIVE",
+  "normal_denominator_unchanged": 24,
+  "normal_gate": "NOT_MET",
+  "runtime_cannot_read_protocol_or_rubric": true
+}

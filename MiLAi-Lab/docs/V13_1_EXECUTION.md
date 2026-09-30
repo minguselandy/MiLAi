@@ -45,6 +45,9 @@ native-tools Qwen3.6-35B-A3B-FP8服务；7861为bge-m3。均实际GET200，上�
 [R7实际六故事](V13_1_D0_R7_RESULTS.md)为5/6；对象lookup正确但最终回答矛盾，余18例NOT_RUN。
 新增26generation/38144tokens，R7终态连续6226generation/11519083tokens，unknown0；R8单独
 检验公开回执字段含义的消费，不修改原回答或bank。
+[R8](V13_1_RECEIPT_R8_RESULTS.md)在相同实际lookup回执下，通用字段含义说明修复最终矛盾回答；
+两组都无新业务效果。新增4generation/5314tokens；R8终态连续6230generation/11524397tokens，
+unknown0。R9组合正常24协议已冻结，仍先检查原六故事，未宣布门槛通过。
 后续每次形成、Host、embedding、恢复和失败重试继续原账本，不建立零起点替代账本。
 价格与总费用上限未知，保持null；正式预算由pilot的实际分布决定。
 

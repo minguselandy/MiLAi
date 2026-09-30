@@ -51,7 +51,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md"
       ],
       "conditional": false
     },
@@ -187,7 +189,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md"
       ],
       "conditional": false
     },
@@ -664,7 +668,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md"
       ],
       "conditional": false
     },
@@ -681,7 +687,9 @@
         "data/manifests/v13-1-temporal-r5-results.json",
         "docs/V13_1_TEMPORAL_R5_RESULTS.md",
         "data/manifests/v13-1-scope-r6-results.json",
-        "docs/V13_1_SCOPE_R6_RESULTS.md"
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md"
       ],
       "conditional": false
     },
@@ -764,7 +772,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md"
       ],
       "conditional": false
     }
