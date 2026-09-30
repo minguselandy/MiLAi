@@ -139,9 +139,12 @@
       ],
       "requirement": "公开profile声明对象/字段路径、类型、版本、完整性与效果；无benchmark/gold路由。",
       "completion_evidence": "预订/文稿profile与第三合成schema；核心无case_id/gold/实体值依赖。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d2-observation-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
     },
     {
       "id": "D2-02",
@@ -152,9 +155,12 @@
       ],
       "requirement": "同源多对象多字段的实际值派生，零新增LLM调用；注释与可信事实分离。",
       "completion_evidence": "真实旧回执与确定性机械测试，事件+对象+字段+projector身份；prose仍unchecked。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d2-observation-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
     },
     {
       "id": "D2-03",
@@ -164,9 +170,12 @@
       ],
       "requirement": "部分/缺失字段不删除旧事实；可比较版本不被迟到观察回滚；不可比冲突保留。",
       "completion_evidence": "缺失/显式清除/旧版本/不可比版本/unknown/业务valid time测试与历史可查询。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d2-observation-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
     },
     {
       "id": "D2-04",
@@ -177,9 +186,12 @@
       ],
       "requirement": "相同事件重放幂等，可重建；源已捕获但投影未提交时返回pending而非全部成功。",
       "completion_evidence": "W2真实持久化中断重开/dirty重放；不重复业务mutation，projection版本独立。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d2-observation-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Engineering stage passed: actual-source/Store projection and pending replay; real E1 and killed-process W2 evidence remain unverified."
     },
     {
       "id": "D3-01",

@@ -60,17 +60,20 @@
         {
           "message_id": "language-reverse-0",
           "session_id": "s1",
-          "content": "Please remember that for our weekly support report I prefer a short narrative rather than bullet points. Record this preference in Chinese for my team."
+          "content": "Please remember that for our weekly support report I prefer a short narrative rather than bullet points. Record this preference in Chinese for my team.",
+          "new_process_before": false
         },
         {
           "message_id": "language-reverse-1",
           "session_id": "s2",
-          "content": "For that weekly support report I now prefer bullet points, replacing the short narrative preference. Update the saved preference and retain its history."
+          "content": "For that weekly support report I now prefer bullet points, replacing the short narrative preference. Update the saved preference and retain its history.",
+          "new_process_before": true
         },
         {
           "message_id": "language-reverse-2",
           "session_id": "s3",
-          "content": "What are my present and former format preferences for the weekly support report?"
+          "content": "What are my present and former format preferences for the weekly support report?",
+          "new_process_before": true
         }
       ]
     },
@@ -82,17 +85,20 @@
         {
           "message_id": "same-project-0",
           "session_id": "s1",
-          "content": "请分别保存两个项目的报告偏好：曙光项目的周报用叙述段落，海风项目的周报用要点列表。不要把两个项目的偏好合并。"
+          "content": "请分别保存两个项目的报告偏好：曙光项目的周报用叙述段落，海风项目的周报用要点列表。不要把两个项目的偏好合并。",
+          "new_process_before": false
         },
         {
           "message_id": "same-project-1",
           "session_id": "s2",
-          "content": "仅更新曙光项目的周报格式：以后也用要点列表。保留它以前的偏好，海风项目不变。"
+          "content": "仅更新曙光项目的周报格式：以后也用要点列表。保留它以前的偏好，海风项目不变。",
+          "new_process_before": true
         },
         {
           "message_id": "same-project-2",
           "session_id": "s3",
-          "content": "两个项目现在的周报格式分别是什么？曙光项目以前是什么？"
+          "content": "两个项目现在的周报格式分别是什么？曙光项目以前是什么？",
+          "new_process_before": true
         }
       ]
     },
@@ -104,39 +110,25 @@
         {
           "message_id": "correction-0",
           "session_id": "s1",
-          "content": "请保存我希望本季度的设计审查通常在周二上午进行。"
+          "content": "请保存我希望本季度的设计审查通常在周二上午进行。",
+          "new_process_before": false
         },
         {
           "message_id": "correction-1",
           "session_id": "s2",
-          "content": "更正刚才的安排：本季度设计审查应在周四下午，不是周二上午。请修订原记录。这个安排不适用于其他类型的会议。"
+          "content": "更正刚才的安排：本季度设计审查应在周四下午，不是周二上午。请修订原记录。这个安排不适用于其他类型的会议。",
+          "new_process_before": true
         },
         {
           "message_id": "correction-2",
           "session_id": "s3",
-          "content": "本季度设计审查应该安排在什么时间？原来怎样说的？这是否也规定了我所有会议的时间？"
+          "content": "本季度设计审查应该安排在什么时间？原来怎样说的？这是否也规定了我所有会议的时间？",
+          "new_process_before": true
         }
       ]
     }
   ],
-  "six_story_order": [
-    "save-1",
-    "recall-1",
-    "update-1",
-    "scope-1",
-    "object-continue-1",
-    "restart-1"
-  ],
-  "normal_check_count": 24,
-  "normal_check_categories": [
-    "save",
-    "recall",
-    "update",
-    "scope",
-    "object_continue",
-    "restart"
-  ],
-  "policy": "Four per capability, all predeclared; no results-based selection. All are development, not unseen evaluation. Every new public message in a new process reopens same durable resources.",
+  "policy": "Five predeclared exposed/development cases, compared under three discovery/update interfaces. Same source binding, read strategy and formation cadence where supported. Each public message executes in a fresh process; no new pilot or normal24 success claim.",
   "runtime_must_not_read_rubric": true,
   "model_budget": {
     "host_calls_per_message": 12,
@@ -145,11 +137,7 @@
     "enable_thinking": false,
     "http_concurrency": 1
   },
-  "use_gate": {
-    "minimum_successes": 22,
-    "denominator": 24,
-    "maximum_owner_leaks": 0,
-    "maximum_false_saved_receipts": 0
-  },
-  "use": "Exposed plus predeclared development variations; not independent pilot. Version interleaving is separately mechanical, never parallel real HTTP."
+  "use": "Exposed plus predeclared development variations; not independent pilot. Version interleaving is separately mechanical, never parallel real HTTP.",
+  "study_kind": "MILAI_V13_2_E2_IDENTITY_DEVELOPMENT",
+  "development_case_count": 5
 }

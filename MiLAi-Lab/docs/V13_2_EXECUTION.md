@@ -37,7 +37,12 @@ D1来源/候选/交错更新/重开/实际runner脚本17项新窄测试通过；
 独立重开及observed_events_v1载体4项通过，另实际update/get/history重开1项通过。
 这些SDK检查禁止网络、使用有限向量/离线provider，只证明工程合同，不证明原生抽取或模型质量。
 阶段记录在ignored `artifacts/v13-2-d1/source-checks.json`；每命令执行hash当时未保存，
-其末尾source snapshot不能冒称所有检查共同使用的执行SHA。后续D2变更检查将逐命令留身份与日志。
+其末尾source snapshot不能冒称所有检查共同使用的执行SHA。D2变更检查已逐命令保存执行前后身份及原日志。
+
+D2确定性投影工程阶段已通过100项相关测试、四文件mypy、affected ruff和package边界。
+[阶段验收](../data/manifests/v13-2-d2-observation-acceptance.json)记录各命令执行前后源码/测试身份与原stdout hash。
+同源多对象/多字段、缺失与显式清除、迟到/不可比/同版本冲突、真实预订partial和文稿版本域通过。
+实际持久Store部分写入失败保持pending，独立重开只重放投影；此证据不替代真实进程W2 crash或模型E1。
 
 ## 来源组与后续研究边界
 
@@ -58,15 +63,14 @@ Valid七行只有两组件，不能支撑充分独立的更新验证或5个百�
 
 ## 当前工作与剩余门禁
 
-源码负责人继续D2：公开profile从实际源派生多对象/多字段，只读事实与语义注释分开；
-缺失字段不覆盖、旧可比版本不回滚、不可比冲突保留、projection pending可重放。
-文稿document_version只标正文版本，不误用作批准/发布整体资源版本。
-
-之后实施D3一次有界公共预取、source→record反链、小patch、一次语义边界和Host提交去重，
+D2工程阶段已接受；源码负责人继续实施D3一次有界公共预取、source→record反链、小patch、一次语义边界和Host提交去重，
 必要窄检查后固定E0正常24及E1/E2小型真实自由Host诊断。此前未启动v13.2模型实验。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
+[开发评分标准](../data/diagnostics/v13-2-small-development-rubric.json)已在新模型输出前固定；
+[配对统计草案](../data/manifests/v13-2-statistical-design.json)固定主要比较、5pp界、依赖聚类和缺失上下界。
+最终正式样本数和运行身份须由新pilot精度与实际独立来源事前补齐；该草案不算正式统计完成。
 
 ## 账本与验证边界
 

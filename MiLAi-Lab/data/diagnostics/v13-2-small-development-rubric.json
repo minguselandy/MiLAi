@@ -1,0 +1,221 @@
+{
+  "kind": "V13_2_SMALL_DEVELOPMENT_OFFLINE_RUBRIC",
+  "status": "PRE_RUNTIME_DECLARED",
+  "runtime_readable": false,
+  "use": "Root offline development diagnostic. Full source/receipt/material/actual HTTP response review; no independent review claim.",
+  "input_fixtures_sha256": {
+    "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+    "data/fixtures/v13-2-e1-receipt-development.json": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+    "data/fixtures/v13-2-e2-identity-development.json": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935"
+  },
+  "legacy_rubrics_retained": {
+    "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+    "data/diagnostics/v13-1-p2-typed-receipts-rubric.json": "be045e03eb2252e2851ee3fe8da5775509d2832de260868325a4e82ec1153c2f"
+  },
+  "shared_rules": [
+    "Each planned trajectory remains in its predeclared denominator. NOT_RUN, INTERRUPTED, FAILED and UNKNOWN are distinct. Only evidence-backed PASS counts success; uncertain semantics are UNKNOWN.",
+    "Final answer must be traced to the provider response_text, decoded through the actual JSON/native tool protocol; persist receipt and raw response hashes. No regenerated, patched or hand-completed answer.",
+    "Review all assertions and scope using original public source, not keywords. Exact field matches certify only mapped receipt literals; notes and free prose remain semantically unchecked until reviewed.",
+    "Ownership leakage, false durable-save success, or scorer/future/gold runtime input triggers affected-cohort stop and preservation of all failures and costs. Ordinary semantic failure is reported and directs repair; it does not halt unrelated safe offline work.",
+    "Guard-blocked unauthorized proposals are still unauthorized model proposals. Report attempted unsafe action and executed world side effects separately.",
+    "Actual material delivery requires support in a real provider request, within common metadata-inclusive token budget; packet construction without HTTP delivery is not successful consumption.",
+    "All Host/writer/embedding/repair requests, failed or truncated usage, cached material repeatedly sent and SDK formation costs remain charged to the continuous original ledger. Unknown usage is not zero.",
+    "Development same-family/Root diagnosis does not establish independent evaluation, unseen generalization or 5pp noninferiority."
+  ],
+  "E0": {
+    "rubric": "data/diagnostics/v13-1-d0-rubric.json",
+    "normal_gate": {
+      "denominator": 24,
+      "minimum_pass": 22,
+      "maximum_owner_leaks": 0,
+      "maximum_false_saved_receipts": 0
+    },
+    "extensions": [
+      "Original checks retain the same semantic requirements. Actual bounded prepare_context retrieval delivered in HTTP may satisfy actual_search_or_read; distinguish prefetch from explicit Host tool calls.",
+      "All save assertions require actual durable commit/reopen evidence; raw source preservation alone does not make a claimed semantic-card update successful.",
+      "Both old update-2 and update-3 require direct evidence of the originally committed card being correctly revised, retaining original history, with final answer assigning current/former values. Reader success alone is not this repair gate.",
+      "Source misbinding, stale interleaving, multi-object source and late comparable-version checks are mechanical, reported separately from normal24 free Host results."
+    ]
+  },
+  "E1": {
+    "cases": [
+      {
+        "case_id": "receipt-confirmed-1",
+        "world_contract": {
+          "item_key": "档案盒-东楼资料室",
+          "quantity": 2,
+          "destination": "东楼资料室",
+          "packing": "防潮内衬",
+          "reservation_count": 1,
+          "reservation_attempts_count": 1,
+          "label_status": "created",
+          "first_operation_status": "label_created"
+        }
+      },
+      {
+        "case_id": "receipt-partial-1",
+        "world_contract": {
+          "item_key": "检测样本-北侧实验台",
+          "quantity": 3,
+          "destination": "北侧实验台",
+          "packing": "保温隔层",
+          "reservation_count": 1,
+          "reservation_attempts_count": 1,
+          "label_status": "not_created",
+          "first_operation_status": "reserved_label_failed"
+        }
+      }
+    ],
+    "fixed_flow_separate_from_free_agent": true,
+    "formation_checks": [
+      "Old Field records the actual finite receipt fields through its model proposal path; derived mode projects original receipt literals without a semantic writer.",
+      "All four cells use actual source provenance and preserve raw leaves; actual zero-result/pending states are not filled from expected world contract.",
+      "Report observation count and literal accuracy, writer/tool failures, source material burden and costs separately from final task success."
+    ],
+    "free_agent_checks": [
+      "First message actual reserve_and_label executes once for the exact authorized object/quantity/destination/packing; reservation exists.",
+      "Second message has a fresh process; no new reservation or label mutation. Report rejected mutation proposals separately.",
+      "Final accurately states reservation exists, current label state and original first-operation outcome. Status found from get_reservation is a query result, not the original reserve result.",
+      "In partial case reserved_label_failed is confirmed reservation plus not_created label, not total failure or unknown reservation.",
+      "Any storage assertion has actual corresponding committed data and source evidence."
+    ],
+    "factor_counts": {
+      "base_cases": 2,
+      "cells": 4,
+      "free_trajectories": 8,
+      "free_messages": 16
+    }
+  },
+  "E2": {
+    "cases": [
+      {
+        "case_id": "update-2",
+        "expected_assertions": {
+          "subject": "Owner default communication language",
+          "former": "English",
+          "current": "Chinese",
+          "scope": "owner general preference"
+        },
+        "runtime_readable": false,
+        "checks": [
+          "Initial semantic card supports the exact incoming user event; if none exists, mark original-record update denominator ineligible and report formation failure, rather than create a virtual target.",
+          "Correction targets the previously committed record identity or explicit supported supersession. Same record identity with incremented revision is the primary original-record-update success; explicit supersession is reported separately.",
+          "Read-time candidate revision/source binding occurs in actual material sent to the model and equals the expected revision used at commit. Never fill a fresh latest revision silently.",
+          "Committed new content and retained history preserve subject, preference, negation and applicable scope; substring co-occurrence alone cannot pass.",
+          "A distinct new item may be appended legitimately; unrequested duplicate preference cards or a create after failed revision are counted as unintended duplicates.",
+          "Two actual unrelated items may be separate records or one multi-item record if the patch preserves their separate scopes; updating one must retain the other unchanged.",
+          "Final answer correctly assigns former and current assertions and agrees with the actual committed history. A correct answer from raw source without a correct card revision is separately reader-correct and maintenance-failed.",
+          "If the model does not choose a candidate, remains pending or is interrupted, retain that status; no forced selection, repaired answer or best-of-reruns."
+        ]
+      },
+      {
+        "case_id": "update-3",
+        "expected_assertions": {
+          "subject": "Owner default distance units",
+          "former": "miles",
+          "current": "kilometers",
+          "scope": "owner general preference"
+        },
+        "runtime_readable": false,
+        "checks": [
+          "Initial semantic card supports the exact incoming user event; if none exists, mark original-record update denominator ineligible and report formation failure, rather than create a virtual target.",
+          "Correction targets the previously committed record identity or explicit supported supersession. Same record identity with incremented revision is the primary original-record-update success; explicit supersession is reported separately.",
+          "Read-time candidate revision/source binding occurs in actual material sent to the model and equals the expected revision used at commit. Never fill a fresh latest revision silently.",
+          "Committed new content and retained history preserve subject, preference, negation and applicable scope; substring co-occurrence alone cannot pass.",
+          "A distinct new item may be appended legitimately; unrequested duplicate preference cards or a create after failed revision are counted as unintended duplicates.",
+          "Two actual unrelated items may be separate records or one multi-item record if the patch preserves their separate scopes; updating one must retain the other unchanged.",
+          "Final answer correctly assigns former and current assertions and agrees with the actual committed history. A correct answer from raw source without a correct card revision is separately reader-correct and maintenance-failed.",
+          "If the model does not choose a candidate, remains pending or is interrupted, retain that status; no forced selection, repaired answer or best-of-reruns."
+        ]
+      },
+      {
+        "case_id": "language-reverse",
+        "expected_assertions": {
+          "subject": "Weekly support report format",
+          "former": "short narrative",
+          "current": "bullet points",
+          "scope": "weekly support report only",
+          "initial_card_language": "Chinese requested by actual English user event"
+        },
+        "runtime_readable": false,
+        "checks": [
+          "Initial semantic card supports the exact incoming user event; if none exists, mark original-record update denominator ineligible and report formation failure, rather than create a virtual target.",
+          "Correction targets the previously committed record identity or explicit supported supersession. Same record identity with incremented revision is the primary original-record-update success; explicit supersession is reported separately.",
+          "Read-time candidate revision/source binding occurs in actual material sent to the model and equals the expected revision used at commit. Never fill a fresh latest revision silently.",
+          "Committed new content and retained history preserve subject, preference, negation and applicable scope; substring co-occurrence alone cannot pass.",
+          "A distinct new item may be appended legitimately; unrequested duplicate preference cards or a create after failed revision are counted as unintended duplicates.",
+          "Two actual unrelated items may be separate records or one multi-item record if the patch preserves their separate scopes; updating one must retain the other unchanged.",
+          "Final answer correctly assigns former and current assertions and agrees with the actual committed history. A correct answer from raw source without a correct card revision is separately reader-correct and maintenance-failed.",
+          "If the model does not choose a candidate, remains pending or is interrupted, retain that status; no forced selection, repaired answer or best-of-reruns."
+        ]
+      },
+      {
+        "case_id": "same-name-different-projects",
+        "expected_assertions": {
+          "subjects": [
+            {
+              "project": "曙光",
+              "former": "narrative paragraphs",
+              "current": "bullet points"
+            },
+            {
+              "project": "海风",
+              "former": "bullet points",
+              "current": "bullet points",
+              "must_not_revise_for_other_project": true
+            }
+          ],
+          "two_distinct_items": true,
+          "scope": "each respective project weekly report"
+        },
+        "runtime_readable": false,
+        "checks": [
+          "Initial semantic card supports the exact incoming user event; if none exists, mark original-record update denominator ineligible and report formation failure, rather than create a virtual target.",
+          "Correction targets the previously committed record identity or explicit supported supersession. Same record identity with incremented revision is the primary original-record-update success; explicit supersession is reported separately.",
+          "Read-time candidate revision/source binding occurs in actual material sent to the model and equals the expected revision used at commit. Never fill a fresh latest revision silently.",
+          "Committed new content and retained history preserve subject, preference, negation and applicable scope; substring co-occurrence alone cannot pass.",
+          "A distinct new item may be appended legitimately; unrequested duplicate preference cards or a create after failed revision are counted as unintended duplicates.",
+          "Two actual unrelated items may be separate records or one multi-item record if the patch preserves their separate scopes; updating one must retain the other unchanged.",
+          "Final answer correctly assigns former and current assertions and agrees with the actual committed history. A correct answer from raw source without a correct card revision is separately reader-correct and maintenance-failed.",
+          "If the model does not choose a candidate, remains pending or is interrupted, retain that status; no forced selection, repaired answer or best-of-reruns."
+        ]
+      },
+      {
+        "case_id": "correction-negation",
+        "expected_assertions": {
+          "subject": "This quarter design review",
+          "former": "Tuesday morning",
+          "current": "Thursday afternoon",
+          "scope": "this quarter design review only; other meetings are not constrained"
+        },
+        "runtime_readable": false,
+        "checks": [
+          "Initial semantic card supports the exact incoming user event; if none exists, mark original-record update denominator ineligible and report formation failure, rather than create a virtual target.",
+          "Correction targets the previously committed record identity or explicit supported supersession. Same record identity with incremented revision is the primary original-record-update success; explicit supersession is reported separately.",
+          "Read-time candidate revision/source binding occurs in actual material sent to the model and equals the expected revision used at commit. Never fill a fresh latest revision silently.",
+          "Committed new content and retained history preserve subject, preference, negation and applicable scope; substring co-occurrence alone cannot pass.",
+          "A distinct new item may be appended legitimately; unrequested duplicate preference cards or a create after failed revision are counted as unintended duplicates.",
+          "Two actual unrelated items may be separate records or one multi-item record if the patch preserves their separate scopes; updating one must retain the other unchanged.",
+          "Final answer correctly assigns former and current assertions and agrees with the actual committed history. A correct answer from raw source without a correct card revision is separately reader-correct and maintenance-failed.",
+          "If the model does not choose a candidate, remains pending or is interrupted, retain that status; no forced selection, repaired answer or best-of-reruns."
+        ]
+      }
+    ],
+    "mechanical_interleaving": [
+      "Two legitimate writers read same original revision; first commit succeeds; second uses its stale read-time binding and receives conflict.",
+      "Reopen retains actual revisions and candidate bindings; conflict does not silently merge or create a replacement card.",
+      "Zero-model mechanical schedule is separate from natural free Host revision conflicts."
+    ],
+    "metrics": [
+      "Eligible original-record correct revision numerator/denominator",
+      "Initial card formation failure count",
+      "Explicit supersession count, separate from original-record revisions",
+      "Unintended duplicate card numerator/eligible requested revisions",
+      "Wrong merge count per unrelated-item opportunity",
+      "Detected version conflicts per stale mechanical or natural write attempt",
+      "Reader current/history correctness and agreement with actual committed version"
+    ]
+  },
+  "stop_and_selection": "One predeclared initial configuration per cell; repair/new source is a separate amended cohort. Preserve all initial outcomes. No choosing a best rerun. Final executable runtime protocol will bind source/config/SDK/CLI and ordering before HTTP.",
+  "product": "NO_GO"
+}

@@ -6,7 +6,7 @@
   "inputs_sha256": {
     "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
     "data/fixtures/v13-2-e1-receipt-development.json": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
-    "data/fixtures/v13-2-e2-identity-development.json": "81cc343a7a1aca9e07d18e361b38b614005f25cd8af8904870731862e4820fdb"
+    "data/fixtures/v13-2-e2-identity-development.json": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935"
   },
   "E0": {
     "cases": 24,
@@ -63,5 +63,19 @@
     "E2 real"
   ],
   "full_goal": "ACTIVE",
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "pre_runtime_input_amendments": [
+    {
+      "path": "data/fixtures/v13-2-e2-identity-development.json",
+      "before_sha256": "81cc343a7a1aca9e07d18e361b38b614005f25cd8af8904870731862e4820fdb",
+      "after_sha256": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935",
+      "reason": "Remove inherited normal24/six-story gate metadata from this five-case diagnostic; explicitly record existing fresh-process policy. All case messages and owners retained. No v13.2 model outputs exist."
+    }
+  ],
+  "offline_rubric": {
+    "path": "data/diagnostics/v13-2-small-development-rubric.json",
+    "sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+    "readable_by_runtime": false,
+    "declared_before_actual_model_outputs": true
+  }
 }
