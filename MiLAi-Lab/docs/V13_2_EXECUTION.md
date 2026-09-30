@@ -140,3 +140,7 @@ R3新增120 generation／462,391已知tokens、49 embedding／20,342 tokens；�
 另只读实际SQLite SDK重开24库/416items，最后回执一致、数据库hash不变、0mutation。实际95 Host请求的当前索引/唯一ordinary包/当前recall引用共同预算最大2048，48消息实际源role/hash匹配；schema、显式读取、旧packet及业务全文仍独立计完整HTTP费用。六个writer pending、五no_change、十四committed和二十三Host已提交跳过均保留，新增生成/嵌入0，原连续账本不变。
 
 用户要求检索的论文与项目保存：[资料索引与失败反思](V13_2_DESIGN_LITERATURE.md)保存5篇论文、3项目固定源码及1份SDK参考，PDF/HTML/README/LICENSE和完整文件hash在本地ignored资料目录，公开链接/版本/hash进Git。新研究继续追加。改进沿用来源关联、增量维护、确定性投影、有界交付；先区分历史实际交付与消费、当前新增主张与问题触发，不泄漏案例/未来/gold。
+
+## R4通用公开指令诊断事前冻结
+
+[R4设计](../data/manifests/v13-2-e0-r4-design.json)与[运行身份](../data/manifests/v13-2-e0-r4-runtime.json)在真实调用前冻结。仅Host关于selected/omitted及菜单不等于旧正文的解释、writer关于先提取新增主张/仅查询decline/保留真实支持源的说明改变；同样规则前瞻提供基线。两个instruction因素一起变，不宣称单因素表示收益。原208运行源码4fe85502、原24/48、原rubric、12admissions、4096输出、普通2048/6与repair0不变；性能WIP未合入。准备禁socket、0生成/嵌入，连续入口仍R3末9ba23552；单候选完整24另根执行，旧运行全部保留。
