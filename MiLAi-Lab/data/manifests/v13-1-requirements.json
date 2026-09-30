@@ -521,14 +521,15 @@
       "plan_section": "4.1,6",
       "requirement": "B2/B3/Ours equal reasonable development config candidates; common evidence/budget/guards; native vs matched tables separate",
       "authoritative_evidence_required": "pre-results configuration and execution contracts",
-      "status": "NOT_VERIFIED",
+      "status": "PASSED_SCOPED",
       "evidence": [
-        "data/manifests/v13-1-development-configuration-candidates.json",
         "data/manifests/v13-1-equal-config-development-selection.json",
-        "data/manifests/v13-1-p3-controls-micro-protocol.json"
+        "data/manifests/v13-1-equal-config-development-protocol.json",
+        "data/manifests/v13-1-equal-config-development-results.json",
+        "docs/V13_1_EQUAL_CONFIG_DEVELOPMENT.md"
       ],
       "conditional": false,
-      "qualification": "Exactly two reasonable draft candidates eachB2/B3/Ours_public. Same eight old exposed components4scope+2valid+2personalized selected by metadata. Actual48 configuration-question pairs not yet executed; no fair tuning completion claim."
+      "qualification": "Equal two actual configurations on the same eight already exposed source groups:48 pairs/96processes/48SDKreopens;44 actual rolling summaries; canonical native reader shared; originalledgerall costs. Same-family local diagnostic nativeJudge48 only, no official/independent/leaderboard/inferential effect claim. Select actualB2a/B3a/Scopes12a by preregistered per-track development rule/cost tie. Formation cadence differs as declared; public Scope has no operational grounding/auth/revision guarantee. Formal/pilot method full adapters and nearest-neighbor obligations still pending."
     },
     {
       "id": "P4-factor",

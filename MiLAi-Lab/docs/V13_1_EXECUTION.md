@@ -150,8 +150,10 @@ P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，A
 另NoMemory实际当前get查询成功，长期记忆仍为空，world未变，新增2generation/1252tokens；该当前任务不需要历史记忆。
 历史问题35答案有26有限正确、9能力范围内未知；未知不计语义成功，不由固定开发故事声称泛化。
 最新连续账本6762generation/12788273generationtokens/425835embeddingtokens，unknown0、Judge0。
-两套B2/B3/Ours配置共48个旧开发题对尚待执行；新pilot仅身份预留，完整目标与发布边界不变。
+两套B2/B3/Ours配置共48个旧开发题对已实际完成，见[等额配置比较](V13_1_EQUAL_CONFIG_DEVELOPMENT.md)；新pilot仅身份预留，完整目标与发布边界不变。
 
 [四臂生命周期比较](V13_1_P5_COMPARISON.md)代码已完成限定机械核验，包括原生 Mem0 UPDATE 的同 owner 前后读回与新历史证明；成功回执但正文无改变不计 UPDATE，无法核对保留 unknown。matched、原生维护节奏、有限字段视图关闭与手动 Mem0 UPDATE 扩展分别声明，实际模型比较仍 NOT_RUN。
 
-等额配置准备首次在零模型调用时发现一个原生 valid 历史从 assistant 开始、以 user 结束；闭合回合接口的假设不成立。已完整保留 24 份先前准备资源和首个错误，要求 opt-in 静态归档保留边缘消息后重新冻结，不换题或伪造结尾。连续账本仍为上述6762次生成，来源缺口与完整正式规模要求保留。
+等额配置准备首次在零模型调用时发现一个原生 valid 历史从 assistant 开始、以 user 结束；闭合回合接口的假设不成立。已完整保留 24 份先前准备资源和首个错误，opt-in 静态归档保留边缘消息后重新冻结，不换题或伪造结尾。
+
+实际96进程/48SDK资源及48次独立评分调用均完成。按事前诊断规则选B2-a、B3-a、Ours_scope-a；同族Judge诊断分别6/8、6/8、8/8，各任务分开报告，不作小样本优越／非劣或 operational grounding 主张。新增156generation/278722tokens/28728embedding，包含48generation/78556tokens独立列出的同族Judge费用。最新原连续6918generation/13066995generationtokens/454563embeddingtokens，unknown0；v13累计Judge48。来源缺口、完整正式规模与第二家族要求保留。
