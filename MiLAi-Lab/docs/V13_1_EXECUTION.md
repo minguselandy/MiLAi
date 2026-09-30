@@ -89,9 +89,10 @@ Mem0旧after_turn只摄入用户+最终助手；新的MERIT completed路径实�
 历史数据的JSON包，不改其原生抽取算法；实际HTTP wire与保留效果待P3固定微型运行验证。
 不能由after_turn一个函数推断全部历史表，也不能把静态调用路径称为实测模型保真。
 
-SimpleMem实际speaker保留role，content保留tool字段，timestamp映射；原event/id只在trace
-source_mapping，未进入native dialogue content。P3须独立冻结lossless trace-equal载体或明示
-限制；此处不把可追踪ID和实际模型可见原ID混为一谈。没有新增安装、下载或服务部署。
+SimpleMem旧默认speaker保留role、工具字段和timestamp，原event/id只在trace source_mapping。
+[P3微型检查](V13_1_P3_BASELINE_MICRO.md)新增独立opt-in lossless trace_equal_v1载体，
+固定SDK MockHTTP检查12项通过；原生抽取与检索不改。完整原ID到达writer输入与原生持久保留
+分开验收，当前真实微型结果仍待运行。没有新增安装、下载或服务部署。
 
 ## 门禁与待办
 

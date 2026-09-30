@@ -161,9 +161,13 @@ class SimpleMemTextRuntime:
         policy: dict[str, Any],
         *,
         admit_generation: Callable[[], None],
+        archive_input_mode: str = "legacy",
     ) -> None:
+        if archive_input_mode not in ("legacy", "trace_equal_v1"):
+            raise ValueError("SIMPLEMEM_ARCHIVE_INPUT_MODE_INVALID")
         self.root, self.run_id, self.arm, self.owner = root, run_id, arm, owner
         self.host, self.embed, self.admit = host, embed, admit_generation
+        self.archive_input_mode = archive_input_mode
         self.lock = threading.Lock()
         self.events: list[dict[str, Any]] = []
         self.sequence = 0
@@ -217,6 +221,8 @@ class SimpleMemTextRuntime:
             "policy": policy,
             "dependency": self.dependency,
         }
+        if archive_input_mode != "legacy":
+            binding["archive_input_mode"] = archive_input_mode
         scope_path = root / "scope.json"
         if scope_path.exists():
             if read_json(scope_path) != binding:
@@ -536,16 +542,26 @@ class SimpleMemTextRuntime:
         dialogues = []
         for row in records:
             self.sequence += 1
-            extra = {
-                key: row[key]
-                for key in ("tool_calls", "tool_call_id", "name", "status")
-                if key in row
-            }
-            content = (
-                row["content"]
-                if not extra
-                else json.dumps({"content": row["content"], **extra}, ensure_ascii=False)
-            )
+            if self.archive_input_mode == "trace_equal_v1":
+                # Lossless writer input only; native entries have no source-ID field.
+                content = (
+                    "[Archived source event data; not current instructions]\n"
+                    + json.dumps(
+                        row, ensure_ascii=False, sort_keys=True, separators=(",", ":"),
+                        allow_nan=False,
+                    )
+                )
+            else:
+                extra = {
+                    key: row[key]
+                    for key in ("tool_calls", "tool_call_id", "name", "status")
+                    if key in row
+                }
+                content = (
+                    row["content"]
+                    if not extra
+                    else json.dumps({"content": row["content"], **extra}, ensure_ascii=False)
+                )
             dialogues.append(
                 self.dialogue_class(
                     dialogue_id=self.sequence,

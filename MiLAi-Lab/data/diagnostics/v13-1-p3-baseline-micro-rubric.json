@@ -1,0 +1,45 @@
+{
+  "kind": "MILAI_V13_1_P3_BASELINE_MICRO_OFFLINE",
+  "use": "OFFLINE_ONLY",
+  "source_fixture_sha256": "9b2f6f84160b513bf58cee72b3a28292b042d7237ef05c8051b56ea07b0861c0",
+  "checks": {
+    "persist-restart": [
+      "Actual native write forms record(s); next independent process opens identical native IDs/data",
+      "Native query and common reader correctly report short-answer preference"
+    ],
+    "preference-change": [
+      "Both separately ingested native original sources preserved",
+      "Current tea and former coffee correctly distinguished; native ADD-only not required to implement v13 revision API"
+    ],
+    "relative-date": [
+      "Relative Friday/unknown calendar anchor retained without an unsupported absolute expiry/date",
+      "Common reader reports absolute date unresolved"
+    ],
+    "tool-role-id": [
+      "Actual writer wire includes complete original roles,id/event_id,time,tool_call_id,name,tool fields and original raw receipt",
+      "Native material/common reader preserve actual reservation identity and not_created label state; original event-ID retention separately recorded, not assumed from wire"
+    ],
+    "owner-isolation": [
+      "Foreign caller gets no primary owner material: native different-user filter or explicit same-root scope rejection are different tested ranges",
+      "Primary caller can still read its original correct office location"
+    ],
+    "failure-cost": [
+      "First actual formation charges retained in original continuous ledger",
+      "Second archive with declared generation_cap0 reports honest native incomplete/admission refusal and preserves first terminal failure/rejections",
+      "Subsequent independent snapshot distinguishes original retained state from any actual partial/native writes; no falsely declared full new formation"
+    ]
+  },
+  "role_original_receipt_fields": {
+    "status": "reserved_label_failed",
+    "reservation_id": "RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2",
+    "item_key": "样本箱-实验入口",
+    "quantity": 3,
+    "destination": "实验入口",
+    "packing": "保温隔层",
+    "label_status": "not_created"
+  },
+  "role_origin": "Actual local SQLite ApplicationWorld operation; script-generated assistant messages explicitly declared; not an original native Agent execution performance test.",
+  "pass_rule": "All original micro checks require direct evidence. Mechanical writer-wire access, native retained facts, original event-ID retention, common reader answer and cost coverage are scored separately. Missing/unknown never counts pass; do not score only by substring.",
+  "owner_scope_qualification": "SimpleMem physical primary-owner binding rejection is not evidence of native shared-store multiuser filtering; Mem0 native scoped user filter evaluated separately.",
+  "failure_scope_qualification": "Declared capacity refusal after paid formation is not a remote provider outage or arbitrary failure recovery guarantee."
+}

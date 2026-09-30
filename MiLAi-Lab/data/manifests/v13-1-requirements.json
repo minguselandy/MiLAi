@@ -413,7 +413,9 @@
       "authoritative_evidence_required": "upstream/installed/source identity and completed six micro checks per method",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-1-baseline-audit.json"
+        "data/manifests/v13-1-baseline-audit.json",
+        "data/manifests/v13-1-p3-baseline-micro-protocol.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md"
       ],
       "conditional": false
     },
@@ -425,7 +427,9 @@
       "authoritative_evidence_required": "actual emitted wire requests from fixed micro run",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-1-baseline-audit.json"
+        "data/manifests/v13-1-baseline-audit.json",
+        "data/manifests/v13-1-p3-baseline-micro-protocol.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md"
       ],
       "conditional": false
     },
