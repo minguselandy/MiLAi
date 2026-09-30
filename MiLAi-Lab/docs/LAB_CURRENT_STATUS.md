@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v13.1 可用性优先开发与实验 | **ACTIVE**，R9正常开发门槛22/24；完整P0–P8未完成 | [R9](V13_1_D0_R9_RESULTS.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
+| v13.1 可用性优先开发与实验 | **ACTIVE**，R9正常开发门槛22/24；外部微型两臂各5/6限定通过，完整P0–P8未完成 | [R9](V13_1_D0_R9_RESULTS.md)；[外部微型](V13_1_P3_BASELINE_MICRO.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
@@ -58,3 +58,7 @@ v10 新增 153 次 generation、485,745 generation tokens、128 embedding tokens
 本页替换了长期累积的旧“当前状态”叙述，原文保留在
 [固定 Git 快照](https://github.com/minguselandy/MiLAi/blob/091dcbd48dc1800e5b8cc7f0ee3066dc00a76311/MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)。
 [结果索引](RESULTS_INDEX.md)和各历史报告继续保留原结论；它们不授权恢复已暂停的实验。
+
+当前v13.1连续账本累计6385generation/11783316generation tokens/420830embedding tokens，unknown0；
+本轮外部微型新增48generation/88014tokens/3900embedding，首次Mem0 setup失败与两个回执消费
+未通过都保留。此状态覆盖上文v10暂停时的历史费用快照，不恢复其历史实验。

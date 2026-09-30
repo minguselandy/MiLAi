@@ -1,6 +1,6 @@
 # v13.1 执行记录
 
-日期：2026-09-30。状态：ACTIVE / R9正常开发门槛22/24；完整P0–P8未完成。
+日期：2026-09-30。状态：ACTIVE / R9正常开发门槛22/24；外部微型各5/6限定通过，完整P0–P8未完成。
 
 ## 授权与原始范围
 
@@ -92,7 +92,10 @@ Mem0旧after_turn只摄入用户+最终助手；新的MERIT completed路径实�
 SimpleMem旧默认speaker保留role、工具字段和timestamp，原event/id只在trace source_mapping。
 [P3微型检查](V13_1_P3_BASELINE_MICRO.md)新增独立opt-in lossless trace_equal_v1载体，
 固定SDK MockHTTP检查12项通过；原生抽取与检索不改。完整原ID到达writer输入与原生持久保留
-分开验收，当前真实微型结果仍待运行。没有新增安装、下载或服务部署。
+分开验收，真实外部微型两臂各5/6限定通过，回执局部结果消费失败保留；两臂原始SourceEvent ID均未进入
+形成记录。Mem0首次离线BM25缺缓存0调用失败，既有缓存环境修正独立冻结并保留原分母。
+新增48generation/88014tokens/3900embedding，逐响应核对连续6385generation/11783316tokens/
+420830embedding，unknown0。没有新增安装、下载或服务部署。
 
 ## 门禁与待办
 
@@ -101,7 +104,7 @@ SimpleMem旧默认speaker保留role、工具字段和timestamp，原event/id只�
 | P0 | main/服务/ledger/基线安装/暴露引用有直接只读核查 | PARTIAL；完整候选身份和正式分组还未冻结 |
 | P1 | R1六故事3/6、R7为5/6保留；R9六故事6/6，完整24为22/24 | NORMAL_GATE_PASS；两个版本更新失败，完整P1仍PARTIAL |
 | P2 | 服务/Agent16、legacy9、architecture217，静态/矩阵通过 | SCOPED_MECHANICAL；实际模型fields为空，效果未证明 |
-| P3 | 实际摄入调用路径与外部环境身份核查 | PARTIAL；微型行为验收NOT_RUN |
+| P3 | 固定SDK真实wire与45进程核查；两臂各5/6限定通过 | PARTIAL；回执消费失败，Source ID未保留；B0–B6/最近邻待执行 |
 | P4–P8 | 原始scope/恢复/pilot/正式矩阵/第二家族/统计/复现/初稿要求完整保留 | NOT_RUN |
 
 R9预定正常开发门槛已通过；完整Engineering-valid、Usability-ready全部配套要求和Research-supported

@@ -1,0 +1,567 @@
+{
+  "kind": "MILAI_V13_1_P3_NATIVE_MICRO_RESULTS",
+  "status": "ENGINEERING_SCOPE_CONFIRMED_BEHAVIORAL_PARTIAL; 5/6 required cases per corrected arm; no research gain claim",
+  "source_commit": "52c1cbf",
+  "protocol_path": "data/manifests/v13-1-p3-baseline-micro-protocol.json",
+  "protocol_sha256": "780e213b30bf55b933cf4a3ae781c4edd6a424e7634181950d4e30c0f26c61a5",
+  "fixture_sha256": "9b2f6f84160b513bf58cee72b3a28292b042d7237ef05c8051b56ea07b0861c0",
+  "rubric_sha256": "9c6c31ace06027470b86c2ad692b950ef7ab66ded21c0db30adf1243bf333545",
+  "scenarios": {
+    "mem0_oss": [
+      {
+        "case_id": "persist-restart",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Stored native IDs/data identical on independent reopen; query delivered short-answer preference and common reader correctly used it.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "5f850dd1ff53908a7fbfeaeeecc7abe3e3e7aaecfe7b07d2cecacff4a7bb5730"
+        },
+        "cost": {
+          "generation_requests": 2,
+          "generation_tokens": 8892,
+          "embedding_tokens": 277
+        }
+      },
+      {
+        "case_id": "preference-change",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Native retained coffee and later explicit switch to tea; both actual readers distinguish current tea/former coffee. ADD-only did not implement revision API.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "a2": "COMPLETED",
+          "s2": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "29101de4948ebb46c713b2d0017a37984154353824bc075119729f519418d3da"
+        },
+        "cost": {
+          "generation_requests": 3,
+          "generation_tokens": 17933,
+          "embedding_tokens": 551
+        }
+      },
+      {
+        "case_id": "relative-date",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Native facts retain Friday/unknown absolute anchor and actual reader refuses absolute confirmation. Source timestamps are observations, not inferred deadline.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "1b80de3765e6213bd9788d695e6f7e00ce54c7795272edc71914534b58c38142"
+        },
+        "cost": {
+          "generation_requests": 2,
+          "generation_tokens": 8959,
+          "embedding_tokens": 316
+        }
+      },
+      {
+        "case_id": "tool-role-id",
+        "outcome": "FAIL_PARTIAL_RESULT_DISTINCTION",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "writer_lossless_archive_input": true,
+          "native_business_reservation_id": true,
+          "native_label_not_created": true,
+          "reader_partial_result_explicit": false,
+          "native_original_source_event_ids_retained": false,
+          "native_tool_role_attribution": "FAIL_ASSISTANT_ATTRIBUTION"
+        },
+        "review_note": "Actual writer HTTP contains every full original row/role/id/tool result. Both retain true reservation ID and not_created, but actual reader fails to explicitly distinguish successful reservation from failed label, instead calls reservation-and-label failed. This fails required partial-result clarity; ambiguity is not scored as proven world error. Native original SourceEvent IDs absent.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "ea462a7973a92c46eabc04f5357e430f1f3b1e23844c673e7afcdad739d9609f"
+        },
+        "cost": {
+          "generation_requests": 2,
+          "generation_tokens": 10021,
+          "embedding_tokens": 1073
+        }
+      },
+      {
+        "case_id": "owner-isolation",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "foreign_primary_material_delivered": false,
+          "foreign_status": "COMPLETED",
+          "primary_query_after_rejection": "COMPLETED",
+          "isolation_mechanism": "native user_id filter"
+        },
+        "review_note": "Foreign native search empty (Mem0) or completed physical-owner rejection (SimpleMem); legitimate primary search subsequently correct. No primary data delivered to foreign reader. Tested scope mechanisms differ.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q-foreign": "COMPLETED",
+          "q-owner": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q-foreign": "1aab94a2e861e5af6ac45d0d748df102c16d4f7e06d233f7c09f8228a00b00b5",
+          "q-owner": "9116f0db8228822a3a730fa0c4e4de2ac994c1c38b87be67a47c2fbb29c1b493"
+        },
+        "cost": {
+          "generation_requests": 3,
+          "generation_tokens": 9127,
+          "embedding_tokens": 301
+        }
+      },
+      {
+        "case_id": "failure-cost",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "first_paid_formation": true,
+          "native_refusal_status": "MAINTENANCE_INCOMPLETE",
+          "refusal_count": 1,
+          "refusal_generation_requests": 0,
+          "refusal_embedding_tokens": 248,
+          "first_failure_preserved": true,
+          "post_refusal_state_unchanged": true
+        },
+        "review_note": "Paid first formation retained. Zero generation cap produces honest native incomplete status; first refusal preserved, next process state unchanged. This is admission refusal, not actual remote outage.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "a2-refused": "MAINTENANCE_INCOMPLETE",
+          "s2": "COMPLETED"
+        },
+        "answer_sha256": {},
+        "cost": {
+          "generation_requests": 1,
+          "generation_tokens": 8542,
+          "embedding_tokens": 514
+        }
+      }
+    ],
+    "simplemem_text": [
+      {
+        "case_id": "persist-restart",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Stored native IDs/data identical on independent reopen; query delivered short-answer preference and common reader correctly used it.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "7f857fcf8257edf36d2e9bfdf443e7da17d9ca50ddd4e1e750b4305b6dc8fd6e"
+        },
+        "cost": {
+          "generation_requests": 6,
+          "generation_tokens": 3634,
+          "embedding_tokens": 80
+        }
+      },
+      {
+        "case_id": "preference-change",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Native retained coffee and later explicit switch to tea; both actual readers distinguish current tea/former coffee. ADD-only did not implement revision API.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "a2": "COMPLETED",
+          "s2": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "71870e538457e839598eba6cb22ef826aa7ac0d7c99dbdad55fff3dce0b172c8"
+        },
+        "cost": {
+          "generation_requests": 7,
+          "generation_tokens": 4948,
+          "embedding_tokens": 87
+        }
+      },
+      {
+        "case_id": "relative-date",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true
+        },
+        "review_note": "Native facts retain Friday/unknown absolute anchor and actual reader refuses absolute confirmation. Source timestamps are observations, not inferred deadline.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "495f30411b0db6ba440d2c7140e7f2366b465318dbcda74ce98946fe25923874"
+        },
+        "cost": {
+          "generation_requests": 6,
+          "generation_tokens": 3658,
+          "embedding_tokens": 109
+        }
+      },
+      {
+        "case_id": "tool-role-id",
+        "outcome": "FAIL_PARTIAL_RESULT_DISTINCTION",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "writer_lossless_archive_input": true,
+          "native_business_reservation_id": true,
+          "native_label_not_created": true,
+          "reader_partial_result_explicit": false,
+          "native_original_source_event_ids_retained": false,
+          "native_tool_role_attribution": "TOOL_ROLE_IN_RESTATEMENT_ONLY"
+        },
+        "review_note": "Actual writer HTTP contains every full original row/role/id/tool result. Both retain true reservation ID and not_created, but actual reader fails to explicitly distinguish successful reservation from failed label, instead calls reservation-and-label failed. This fails required partial-result clarity; ambiguity is not scored as proven world error. Native original SourceEvent IDs absent.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q1": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q1": "0f564911e5622b11942d907fa9f90226291405f519d2a1b26fc0102012d0cf30"
+        },
+        "cost": {
+          "generation_requests": 6,
+          "generation_tokens": 5595,
+          "embedding_tokens": 297
+        }
+      },
+      {
+        "case_id": "owner-isolation",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "foreign_primary_material_delivered": false,
+          "foreign_status": "REJECTED",
+          "primary_query_after_rejection": "COMPLETED",
+          "isolation_mechanism": "one-owner resource binding"
+        },
+        "review_note": "Foreign native search empty (Mem0) or completed physical-owner rejection (SimpleMem); legitimate primary search subsequently correct. No primary data delivered to foreign reader. Tested scope mechanisms differ.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "q-foreign": "REJECTED",
+          "q-owner": "COMPLETED"
+        },
+        "answer_sha256": {
+          "q-owner": "77cee40a2db775d309872b648b86817d95e7768daba4e79b98b1bd3eecf61e72"
+        },
+        "cost": {
+          "generation_requests": 9,
+          "generation_tokens": 5332,
+          "embedding_tokens": 242
+        }
+      },
+      {
+        "case_id": "failure-cost",
+        "outcome": "PASS_SCOPED",
+        "checks": {
+          "separate_process_steps": true,
+          "native_snapshot_reopens_same_state": true,
+          "first_paid_formation": true,
+          "native_refusal_status": "INCOMPLETE",
+          "refusal_count": 9,
+          "refusal_generation_requests": 0,
+          "refusal_embedding_tokens": 0,
+          "first_failure_preserved": true,
+          "post_refusal_state_unchanged": true
+        },
+        "review_note": "Paid first formation retained. Zero generation cap produces honest native incomplete status; first refusal preserved, next process state unchanged. This is admission refusal, not actual remote outage.",
+        "method": "Root offline full native material/answer/public-source review; development unblinded, no model Judge",
+        "step_statuses": {
+          "a1": "COMPLETED",
+          "s1": "COMPLETED",
+          "a2-refused": "INCOMPLETE",
+          "s2": "COMPLETED"
+        },
+        "answer_sha256": {},
+        "cost": {
+          "generation_requests": 1,
+          "generation_tokens": 1373,
+          "embedding_tokens": 53
+        }
+      }
+    ]
+  },
+  "case_outcomes": {
+    "mem0_oss": {
+      "PASS_SCOPED": 5,
+      "FAIL_PARTIAL_RESULT_DISTINCTION": 1
+    },
+    "simplemem_text": {
+      "PASS_SCOPED": 5,
+      "FAIL_PARTIAL_RESULT_DISTINCTION": 1
+    }
+  },
+  "planned_denominators": {
+    "initial_steps": 44,
+    "initial_mem0_steps_executed": 1,
+    "initial_mem0_steps_not_run_common_setup_gap": 21,
+    "declared_corrective_mem0_steps": 22,
+    "total_declared_step_slots": 66,
+    "all_actual_processes": 45,
+    "corrected_mem0_steps": 22,
+    "simplemem_steps": 22,
+    "scope": "Initial Mem0 setup failure and its full original planned denominator retained separately; corrective same-input run is not substitution."
+  },
+  "accounting": {
+    "totals": {
+      "mem0_oss": {
+        "actual_steps": 1,
+        "statuses": {
+          "INTERRUPTED": 1
+        },
+        "generation_calls": 0,
+        "generation_tokens": 0,
+        "embedding_tokens": 0
+      },
+      "mem0_oss-cache-r2": {
+        "actual_steps": 22,
+        "statuses": {
+          "COMPLETED": 21,
+          "MAINTENANCE_INCOMPLETE": 1
+        },
+        "generation_calls": 13,
+        "generation_tokens": 63474,
+        "embedding_tokens": 3032
+      },
+      "simplemem_text": {
+        "actual_steps": 22,
+        "statuses": {
+          "COMPLETED": 20,
+          "INCOMPLETE": 1,
+          "REJECTED": 1
+        },
+        "generation_calls": 35,
+        "generation_tokens": 24540,
+        "embedding_tokens": 868
+      }
+    },
+    "all_trace_totals": {
+      "embedding_calls": 53,
+      "embedding_tokens": 3900,
+      "generation_calls": 48,
+      "generation_tokens": 88014
+    },
+    "distinct_actual_pids": 45,
+    "ledger_after_sha256": "b00501550dc14c4626223771f208a6a10b3ce0295f1126b9888801085d58b887",
+    "provider_usage_and_ledger_exact_match": true
+  },
+  "continuous_before": {
+    "generation_requests": 6337,
+    "generation_tokens": 11695302,
+    "embedding_tokens": 416930,
+    "sha256": "e86e20257aeb0a8a7bc826f5b207f5092fc2b28d8795639666112f698b98fbec"
+  },
+  "continuous_after": {
+    "generation_requests": 6385,
+    "generation_tokens": 11783316,
+    "embedding_tokens": 420830,
+    "unknown_generation_usage": 0,
+    "unknown_embedding_usage": 0,
+    "sha256": "b00501550dc14c4626223771f208a6a10b3ce0295f1126b9888801085d58b887"
+  },
+  "judge_calls": 0,
+  "full_v13_1_since_original_start": {
+    "generation_requests": 240,
+    "generation_tokens": 376230,
+    "embedding_tokens": 3900
+  },
+  "wire_conclusion": "Actual all14 completed archives include full original rows and exclude future current reader question. Source events reach model; no original source-ID retention in formed native records for either backend.",
+  "native_receipt_conclusion": "Mem0 compresses original tool fact to ambiguous failed reservation-and-label request and attributes it to assistant; SimpleMem retains reserved_label_failed literal and tool role in prose. Neither common reader clearly separates reservation success/label failure. No synthetic complete repair or new business operation.",
+  "limitations": [
+    "Two partial receipt fields and event-ID persistence not guaranteed by native compression.",
+    "Native capacities and SDK failure semantics are current small public micro evidence, not arbitrary input/concurrency guarantee.",
+    "SimpleMem physical owner binding is not native shared-store multiowner filtering.",
+    "Refusal cost includes Mem0 embedding248 before rejected generation; SimpleMem9 finite SDK refusals have0HTTP.",
+    "Zero-cap known refusal does not test real provider outages or all failure windows.",
+    "Resource bytes and native snapshot I/O measured; complete capture/Store I/O remains partial. Process wall includes independent CLI startup but no complete CPU/accounting profile.",
+    "No B0-B6 micro, nearest-neighbor execution, pilot/formal/second-family/statistical research acceptance."
+  ],
+  "artifact_sha256": {
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "1ab0b362d0af6b61f9f06349ed054d76aa036ce27f1209f68cd49a1bdb46e107",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "2710fc398517a8902c5a4376b8590b985ab8eb97259b9d4baf1cb66293f484c9",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "0656c17e2b25bef817d63702c9ae776f7114f328037eb8539d56a6a593aa16d3",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "5f4fd3503fc4f9e01caf71ed479650f65b1b134935b94f7465c732cebc9634a9",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "4fe97468006243d72167a69f3ed448b6f9c98d397e1decba1ed39c636ea84448",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "7a6b1b528733453f865371a11dd5515968736acd9881acf0eeb085952b6b3ea4",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "8c6417da4fd89b03fc25baf7fa17a58ec403f959c09e3949055924bdf2748e8d",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "53e1339ec692ed246519fccc05dc553ab5c6f3f789fb58b5a2bf408f57ade2c3",
+    "mem0_oss-cache-r2/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "68259165f9eb04d7cefc9eb5e1641efe5cc9cbd26db13383c2382ee06b250587",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "6c7b93061313ef46976e8ee60a01f0091ae72888fdea1217d66f092beb530d2a",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "942b5330cfdee9f1f3365856e3e6bd41bb918e56daaaa53aae811d67fa3fb6f3",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "aa6cbf3f85a833d60f95edefad251f4f02fa2517a1a08f3292a35a70de1c7725",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "5180e566d949f6f57ad09285908b26731114a2f3b0fc2018f691c08984b01e4f",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "467a4454f2c6cea1f2c87d43ba381a470b2bfd16d9a7410c83492a34ac845cc3",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "dcbd1f70ca1aa65db3d3e7913d7fc19fdfdb2d28bec9374e98ef8c850a450eff",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07.json": "ed67f543a9a7f2531392ce928c8f52703f1ea3c1075b95871509afc6a992e14d",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07.jsonl": "eb992acb37873890f8730fda607cc3e6f8e793683aaa1e35b9a3d8ffd39940b4",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07-process.json": "664cbd3619576e109bcef15558a799eb20466d5a54e78f53319a0c1b253152df",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.json": "962e30a20cd170b3882eb4fa20e5ea62cef9c55cc3428be6675451d3983a287e",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.jsonl": "42b07cea8f78a9aa674c193c3bc3bb7b94d6e9daff17cab2688a9d606d2d544e",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4-process.json": "4de810e1a929aec3c50cda1ba68a12c3e5e5332060ef5aea0c9561f9f312369a",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "87e67bac5dfaf53b24704b17aecb0d777fafe42e4130a4637222cc4383d14819",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "b585fd3a8c0af158baa4b6ced0d889dbc2d29b2550bda38d6f6707d2ace7b379",
+    "mem0_oss-cache-r2/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "dc5c46cec8a2b5f0369b0994850d3fff1db1a72c1d4b2e2ea41a6512c7a755b1",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "ed8119839492f19e0b9afe339439afc4c53b09eaea4a3ef5fa9e90e3ee8d0e81",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "c13e0fe06d4e4faf047da2d5d670ec544c8a9a6eb5df5eca505d0b8b4ec4b820",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "5c0b86b2905eee5ac74975e7ca4402dbbbc6bd1022c79a4cc30e1e974d2e9bfd",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "94699aafba6f8dcfc798479a09daef8eba7427f4b2cd777ab3893947c84fbf56",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "f26b7667200934df998f22db78d05e503247d5a95f9c7b8f6554bc59f5719e36",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "5a4455ab4ae8b849fda9f1786f1091bc6b4f3cd102b60377dde36af06cf8972a",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "2677506fc77b7d2086c283a51143292ee0d3d0b4ddaf84fe072110a87f01796a",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "a0ba23efad65e8914d5c17e4d91b085a6d62a2f5da7850f1277add54cd97af6b",
+    "mem0_oss-cache-r2/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "bf97e5d3637f1fad7c9d5676bca3de5fc585cdd815841438e13cadd0ac9939c0",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "5be9a26f42ee7e386a27aeb3c90508da41baaacc0a16e91cbf315e69fa0d8ef0",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "c188d3948609934c593c6e32cbb2132e84625e1bf57748b4a8986f9f9f2ead1f",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "e16ca962ae8c3f3812d91eb0fafaed9d2033b16137852f70193d2435e2cdebe0",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "c82901311ba56a8c6cf0e5319473c00d6d7460ec92027bb9df93acc3305b4c15",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "6935ecd0b69b8cd7d25f063f2de7713f8ecfcdb4e517713d6537662616c88155",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "1b6027696f62b8f5c063f34cacb5110b6926ac1b7a872b9db5b5fdd22e4ec8ca",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "55b8b14e08a3c28084b73a49e20ff41039ca93404b1db37d03caa05f107e144a",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "a6a933f87bb204d120cf1d42899fc2827dbc25e9fe9da797ee3e80350d3a3a31",
+    "mem0_oss-cache-r2/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "6ee8be47141527f6cfe017828626b9babaf88d80351979a1d2552b905a793e87",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "42e13b8710dc8ffec9d0ff7b116187b7a2a96d28d4332d9cf0b9f267f43b3fc0",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "f166369a99cf4a95ef795f93ea9e0957f9479555b2eae55795fe57107730fc0b",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "582bef7feb3a951528f294023742fa91744473944e0993e683df201699ed4355",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "f215a9b3fd2b43e727633755d6406b162ffc8d87d16cbc04bb6cef8bd55221eb",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "d212e4b717e374e133113a3268d28a86519beb3c180fc5fac70401f0b4b19309",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "7200181b55920fb89baba4b9c6b9a6e32321f00f05d49cc91b71168c3bac1b4c",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38.json": "57a9d1a1758bb42d51f90de9235881d3bcd70b14a8b59030c0d9118d69002433",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38.jsonl": "fa84e01038d1bc7867df41f821cf331876e0bafc7a331aa70ab6f1e2ddea909e",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38-process.json": "89c0abda66599ec2dd21b7274e819a4847421f4061899a0243d8c2f2ea1b25f0",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373.json": "9bcd7a7838cb8be405a15af0b234f22aa14d7e39e0c60b7e855bd9c493031693",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373.jsonl": "e5c8b489ea1ed0112a12588d5d4e7825b8b94bf924509ec45b79c946273920c2",
+    "mem0_oss-cache-r2/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373-process.json": "7ae36523284fa0d95c561368bd188a33bfc992fe9d23179234bffa27c4be11e5",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "8bf1b690078aa98e8f21cd75f364d300e3c6cf701ebc153430c02d05696ea645",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "f506428dc74ae36834688436fcfbe4cf57767ced0b8da6c7fc4726f7add1ef38",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "a47c26d759768b418a547e0376a607706bebb61743e7a38a41807b71f466daef",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "b436561f9e0869f81bbf69b58e614e78bfc1c61fa98fb76e467b35ba817c4493",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "a4688256016fb4a6f9de5bbb23f9cacfe98a314a045d0907eaca40768aa434d3",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "bf87fbba42c8405d80c8106a445fe0cd8136ad89fb0e221a4ef432a5d1ec42c2",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19.json": "8503dd8ae6893abf141d9de23078d8ae627bd50e2b12c6e9d180445cbd1d6b68",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19.jsonl": "b7c0bf25b19812ca3af7b34862b6e93b0f1597c3a22ff195d31769672f14cbfc",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19-process.json": "e7ef3ec680d482749778bba01b83813cb810ed35037a4635a3863ae8bd6f30f7",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.json": "f6fb0c0755c9d781815cd7483c0e4bb33fa6390b4efe7c56d6e3ac349b309959",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.jsonl": "b5ca607b7a11f461ffe063b1217b04a2c7862cf8bf2307119d06b92815348611",
+    "mem0_oss-cache-r2/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4-process.json": "6b7a467b752880933083be841de246b9f06da34edc9ba0b3dc1e5a916aa9d8fd",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "e7e4a2ada6ebd30da85419169921f5df05768356c6e651c8f0b58b9db4ae16fb",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "113ba8b28b270805e098c0d99507b1bb3d8058ca179367c6ea7a09c787e977e0",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "0d806846fb9510ee43e7e7dacc02753312a7eae1962eb67cfe6ac3d8feab9170",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "354dc9cfc4be9e44ef7d786e3b2ea61a75186d693792e418ef4772effa55dd97",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "b8f357df901d21cacffadab3f73ba644e35af9151946d25b5444a43c8ea8ac1d",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "62d5da4368515efdb9613e023187d9dcc6b3b69903e993d1453ffedb4c51b22d",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "550a5e1ec71ae4a8e3a3e2325e847baefbe9b1b65b06774f4133846e123d9caa",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "44938d714ec0be537f121b631393b0919ff1d595d756cde6413dfa147f14ac71",
+    "simplemem_text/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "d1f2897415f12e97f07359aafba7803b24b20835159463f6ccbb3a9111be25e7",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "a0d7c15e7f2c7bc28a4dea9f82cbf4144cc55ad64ec9af45f3f9a28e1577441e",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "9df68dfac95a7ad533d1cde1bf6fc50ffbc1cd7930943bff0e41fa329e1981de",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "61039817f25fbe7b689afb1dd8bf8192d4135bcf53ef7c26e9c90e5b66196d9a",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "16b64b5d221e20cc58ab17aecb17146e9e38efbc06ba35c460f6bcc498f13c72",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "fe7e23273e12535dadc7a506b31c32fb0d5d838f0c3cc85c864811727a5e0766",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "42663baeac12970e6255fc3ce4bf1c000235e2c35a029305e023dcd42b0f3c21",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07.json": "a490c3ffdd765439191fb1d43694330422898dbef3cb2c550451236b87b66211",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07.jsonl": "14620fa91ae6954a065d8125a99b0cc78bb15bccc2754d2150c0754e1cd55e77",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-2c3a4249d77070058649dbd822dcaf7957586fce428cfb2ca88b94741eda8b07-process.json": "65d17fdea091b28f33b3ed238866c2f44db1428c099cb254300bd4f0776ebd75",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.json": "b790af25d5d6ba2abb7e1e8d984d40d4d2fe4530d802b34f5387532714f3b803",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.jsonl": "9564de365e05c944756ab42ad7565152997195234b59d23843dd740eca808098",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4-process.json": "5b714bdecafb149a7e021cc0d1a0e4121a9abb35de895852d20e4ac94fd2cd07",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "65da16144531ad3c4801702bc47d99bf5e8cbe0c80a5d69605c4edce0a495a81",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "b3f6109eb798efa6ba30773ce59d1c0909a3264b0d56796a2864951fa3ceec92",
+    "simplemem_text/8d1c1f7b6a513d940c2ba62be5a00058d45a35043efe77eccd9351ccc975a5c6/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "23b91217a43f3545e4a2cf391b3fed1580ba72565d45a97ac6e0ba92ae8df45b",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "b1a41969bbf3164f3828cda74d2a9f1d08fe62610317f041e2a9ddc9d3260d89",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "2e254b840e16f1ae6a430335bdf05aff20d1a312144674ad43e1dda0033ce20a",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "fa2528026f6040e3e3a1a4f0b27b42e5a414882d69c42a1c1775ca030ea0f88d",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "4c133e273828033fb920e32565bedaae4b6429d20d035449779ea33b0ea0e384",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "8a86529488201e9226af336c1fd005dd156059073f2616a6005ca487bb58b5ce",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "c935f762cc203da7808c5c89e9fae855744f15bdca0232e57e5aa317aedb9ffc",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "29cbaf0e2b578247fb9120e21cd739f682e8bf15d2b8e399b22f7073783d112a",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "0f889cde2104f3e667b49b7782e1951728b7d16f43d642a7654c5cac2a8ce8bb",
+    "simplemem_text/d1317aa7ab88e4f847974002f93f9fff0b6f76d9dd98e65d6d93013cf91fb6db/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "18f337df939930ada3668cfa888058f10f184fc14fbe41504cf373abf110dfdf",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "d4197cbbc11f7ec3067b5753e512c88b38ba9c8fa88d86163797f72d514d72b6",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "b36f209fd93a80c28b83999cc7a9e4e4bd19d3ff02902230d01ecb51d38e0e6a",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "4cab0fa3da1a83a73cc1bd29a0ef0a5cc831f3ad661ef08d5e7e6a9aad342c08",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "0e88c44e375c38c36d04a6439a1b0edde7df6f54556e50d5233ded2c58298a64",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "4f441b015431402c91bc92f3820c33af73ac4d0680368f88d626b81b2684a53c",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "b3a65f1d146112880a37bbeb3e0cb037fa5f131059f699fe6aa624e0500b6b50",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.json": "370b7a5b2302bb9233a414240a903751d52ec3c92e1b6b757fafa36bf416dc1a",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb.jsonl": "a8fd2e23452d968c26a19219fce7a7ce56757aa11227e67b632bdf3baa5d783b",
+    "simplemem_text/187bb31de494b1d3e56ac3bab8b3a15bb4278ab7b5587f322b86949ccedaa3a5/step-c75de8c1b7c3ae5252091267a736a9bf57001d80e82668b3cb3cd09e2f6a43cb-process.json": "86692d179e9ac6fd48b5c998b3e6603de3a5a928b9e7284fe99b8401275d5c7f",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "8c18066f5731b96a5be745383aadeefd0ccd03e2c33258228a4e7e5c96105552",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "3ff0ab8cc9f20ae9d14602c9ad3454787360310e0bc178f0a164c6d68005c53a",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "37b7eea9d43b88215b6fb2cb00d5f677ca2e0ca65c4fad6344428a1d07f13aba",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "e60ea23a112d72929b5aed394385c7a479d8b4df00640b32ea45271640cc2bda",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "710f50ad0df5249ed5d314483c87131c3c65424c72e3c9581325ddabb0404992",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "618a9e795b4b2d66576b642f5de2d21b8301bd3f5752baaf47be1fd2a54cd3ef",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38.json": "4c8afc29e50ab138e0c79c6018b9e8e56f1f31fd2deb9d383a1ed3879a4cc1b0",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38.jsonl": "0ff8e32082367c3c6381015a74b3fd4faafada7a8e00deb30a61970c9e80a8cf",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-11c0f03ad07dfb494152953d6846c3b29d328ab7e40b36e726c5a236b0c05e38-process.json": "b87936ad3eff097e317e2eb75f17fc3595b267a0497f44bb2b4c6ab6f5a28ed7",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373.json": "e1ba8356ede3877fadd8810ac4a31744c57fe48084e70182d91e36843f50b387",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373.jsonl": "60ee0dfb6ce31723832a1626481f132b818473b7a7f0c0e99afd4cfd8b95dfc2",
+    "simplemem_text/b8767717e66f1d5144e186c2cd4612a74c4328742d3a01613d609c76039b943e/step-1ab32f2eef8c1a05c9b46b9c8e3d8d9e6ff72b3994b30837aadfd54e251fe373-process.json": "d7c9384141591b89d5e7fbd4501602778ef4046a2a97e5df73fd4482808fbd2c",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "a8adccfade8265d3aba083feb4406abda1d89bbe04d4d4740fbb77b209cb112f",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "da1af038deb9c9f20af8d9af0d06152588de1f25eb163a0b62bf4cc8dc6320a1",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114-process.json": "9e55669d71393e2d57d23517bbe5774359161139b753d93f2579f9af2c803e09",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.json": "1652d8d8e6666e20f897a2bbdebf1221690f4fca3fc454a4d07470a3c710899a",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc.jsonl": "606efa60d2e0b1793e9b63b50583438f168a304da481a5a4f3986f9fee9fe6e7",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc-process.json": "d63af95da48e63b95eaec7d0713d40472b3ad5c2045585b3f2f109e31f66e441",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19.json": "0adb28c674bf45927d42c4440a0cb0823e75c6daf2946cfd395f374561ba9dd0",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19.jsonl": "7fa84c9d44a862cb6c396348609b6d2175ae43b34a6e5dfde5aa27cf872ac8cb",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-56bcc1e5072371e06f5b4f21503f103c827e39575d441218560cbd9bd6bcac19-process.json": "801c5149104cac58933fd88e6812f2ce716b45c83d04d807eaddf7d222a9dec6",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.json": "f93985faee7ed087758df7c3094765ccd8235ed2347b38967a7c4d9a276fbffa",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4.jsonl": "d6326f2e5bd5fbeae41561e1f0c1ad4f8ff3bbd34242cea2345df13fd21e140e",
+    "simplemem_text/e20b6836f2caad53390a41fa96adb014af2d0b461fd4e10617555a7141b807c7/step-ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4-process.json": "4291e1157063b22f2713df358da2bd913ad33fa3c5c7ac1f2fd5f1caf9f1f954",
+    "mem0_oss/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.json": "b8d0617fb5d6627cfe175b36eaed7306b62306bdf05507b3897d69d1e2863e83",
+    "mem0_oss/c4d13e40304809f6b096a24de4a8db60bec8d3c1e7e501fe61d9ce332bef31cd/step-f55ff16f66f43360266b95db6f8fec01d76031054306ae4a4b380598f6cfd114.jsonl": "08a1739f46705553bd144bcfeeb1bfb2593ecbdcb901188d8911ef008a35157e",
+    "accounting-reconciliation.json": "f9c87c921d6f77b2885816bb70d36036b12940e6b60000c22b6e37b8c3f46e58",
+    "writer-wire-checks.json": "4cee0e68282cd05bbc35ac29ed59153d0cc76020e7e51a4f3697f66e3f49802c",
+    "bm25-offline-cache-check.json": "4daa274df174bb63abf0c626f8944ccd333525c511875142dd63c36060307bcb",
+    "remaining-case-progress.json": "ad4c1235e975dc79362baffeb3db0567991e72ebeba646657f2dea605923f609"
+  },
+  "full_goal": "ACTIVE P0-P8 unchanged",
+  "product": "NO_GO"
+}

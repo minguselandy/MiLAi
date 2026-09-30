@@ -55,7 +55,9 @@
         "data/manifests/v13-1-receipt-r8-results.json",
         "docs/V13_1_RECEIPT_R8_RESULTS.md",
         "data/manifests/v13-1-d0-r9-results.json",
-        "docs/V13_1_D0_R9_RESULTS.md"
+        "docs/V13_1_D0_R9_RESULTS.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md"
       ],
       "conditional": false
     },
@@ -415,7 +417,8 @@
       "evidence": [
         "data/manifests/v13-1-baseline-audit.json",
         "data/manifests/v13-1-p3-baseline-micro-protocol.json",
-        "docs/V13_1_P3_BASELINE_MICRO.md"
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json"
       ],
       "conditional": false
     },
@@ -425,13 +428,15 @@
       "plan_section": "4.3",
       "requirement": "Trace actual runner ingestion retaining roles/IDs/tool receipts; no untracked extraction change",
       "authoritative_evidence_required": "actual emitted wire requests from fixed micro run",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-baseline-audit.json",
         "data/manifests/v13-1-p3-baseline-micro-protocol.json",
-        "docs/V13_1_P3_BASELINE_MICRO.md"
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json"
       ],
-      "conditional": false
+      "conditional": false,
+      "qualification": "All14 completed actual writer archives contain full original roles/IDs/tool body and exclude future question. Actual native records retain0original SourceEvent IDs; receipt role/factual consumption limits disclosed. Scoped wire preservation only."
     },
     {
       "id": "P3-nearest",

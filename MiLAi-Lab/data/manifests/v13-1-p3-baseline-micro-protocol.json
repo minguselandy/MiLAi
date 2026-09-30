@@ -353,5 +353,244 @@
       "p3-micro-ruff-final.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
       "p3-micro-ruff-first.txt": "5fdf662f1882a38ca58486274e5db6af6c457df9f6b5b58cf859c46a50baab93"
     }
+  },
+  "initial_mem0_setup_failure": {
+    "status": "INTERRUPTED",
+    "error": "MEM0_BM25_NOT_ACTIVE",
+    "first_error_stage": "setup",
+    "generation_requests": 0,
+    "generation_tokens": 0,
+    "embedding_tokens": 0,
+    "terminal_sha256": "b8d0617fb5d6627cfe175b36eaed7306b62306bdf05507b3897d69d1e2863e83",
+    "initial_run_log_sha256": "d61ed18b4e2f7e69f21464248553590231028b77dccf649e9359e9547f36da80",
+    "remaining_initial_mem0_steps": "NOT_RUN due common native setup gap, not successes"
+  },
+  "mem0_cache_correction": {
+    "status": "PRE_RESULTS_FROZEN",
+    "case_count": 6,
+    "steps": 22,
+    "run_root": "artifacts/v13-1-p3-baseline-micro/mem0_oss-cache-r2",
+    "config_path": "configs/v13-1-p3-mem0-cache.json",
+    "config_sha256": "ba6388192a1ef5604262dafa7b036d6a65deae372c8f4dd9c3c8dd29298a069f",
+    "input_freeze_sha256": "b602952e2e39cf835debe6e8b7e7097fa7d396673deb3a03ca3ccc5012186d5d",
+    "effective_environment": {
+      "FASTEMBED_CACHE_PATH": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "cache_readiness": {
+      "kind": "MILAI_V13_1_BM25_OFFLINE_CACHE_CHECK",
+      "cache_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/cache/fastembed",
+      "HF_HUB_OFFLINE": "1",
+      "model": "Qdrant/bm25",
+      "files": {
+        "blobs/00af58791541ed63f33c98207199f6b32727f571": {
+          "sha256": "58ac7f7c074b70dc0fc86f6fcf40b2c227e9f95627e90e57971d5cce1e30e2e9",
+          "bytes": 813,
+          "symlink": false
+        },
+        "blobs/1280aa3b08d64b846272b2d23314377200db36e9": {
+          "sha256": "019f104ba2ed07436d05f9cdd3383034ad66014edc27fc651f837e1a038b6451",
+          "bytes": 936,
+          "symlink": false
+        },
+        "blobs/45651c90ec7ea5b26c51ea9a11fddafb00652190": {
+          "sha256": "0ab53d21cbde00c6bf367706a0243c646140ba564cce7e83ac33d80f8923e957",
+          "bytes": 1910,
+          "symlink": false
+        },
+        "blobs/47ee200f6781ddfdb31af37e317e1f05d10a04ff": {
+          "sha256": "952af766edc9b8e7ddc877fc464cbd94b91754b5621fdfdd7020568fd4813fcd",
+          "bytes": 1579,
+          "symlink": false
+        },
+        "blobs/5a48ccce0737bb38cb99cafa1f8d3d0ce34e7488": {
+          "sha256": "f2c7f0c2bd3dba42da700776266831853a3b5f1207fada5c15207334109abb57",
+          "bytes": 260,
+          "symlink": false
+        },
+        "blobs/6a7d50cc633609c8bc2da53c3dac9a015c248b62": {
+          "sha256": "6125eadf28ba664a60bf4296147bcbd40b80be93670056fdb229960ac15e2310",
+          "bytes": 2176,
+          "symlink": false
+        },
+        "blobs/6ee02b51fb1711625c1de28595615cdecba4de7c": {
+          "sha256": "293d7841f198e4012f49e8e5653c3bfd073a58cea1259fa2c0fcec894167b628",
+          "bytes": 1654,
+          "symlink": false
+        },
+        "blobs/742bb6263b99fb2ea6e1e3624a65eb2799a1e24c": {
+          "sha256": "2a9d9d756bc4257d49329994f805c712cd5ab6746162e2082752238766c1c0c8",
+          "bytes": 559,
+          "symlink": false
+        },
+        "blobs/94e9f9a0b07a68aeff30605fc445db71f63be630": {
+          "sha256": "64a68b5ebaa616b25bd976ac915c326f2ea8cce8b59a0ac8c5728b980ae4fb0c",
+          "bytes": 1227,
+          "symlink": false
+        },
+        "blobs/9ac1abbb6cba1fb3159caa6d88b25543b9080031": {
+          "sha256": "f7e5b42208ccf1b1f282f9e0f8570e464272762bda5718b6b26750f510a688dc",
+          "bytes": 851,
+          "symlink": false
+        },
+        "blobs/9d08b144659c4ae804bb84a624e1248bb2b90e40": {
+          "sha256": "7a97c6dc81144f7e8fcfe976025954ca3731f78a75d1fd86aa87f261fd195dae",
+          "bytes": 2167,
+          "symlink": false
+        },
+        "blobs/9e26dfeeb6e641a33dae4961196235bdb965b21b": {
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "bytes": 2,
+          "symlink": false
+        },
+        "blobs/c2241d0ee7bbc192abe3b56efffb75f29a29e185": {
+          "sha256": "f0c25acd7ec02a31f6679d9664ec5222ca846fdbc58db96160f4e7c0ddb0f7ea",
+          "bytes": 1362,
+          "symlink": false
+        },
+        "blobs/cafa0324b53763f7efadda5b0f3d0321ffa7ab38": {
+          "sha256": "e5a2a7c390fe3ad0c0a132586ed11492b635d66a1f426cd89677f80b07bc76a6",
+          "bytes": 453,
+          "symlink": false
+        },
+        "blobs/d3edc6757912e3d83acfa241859c4a1bdb6005ad": {
+          "sha256": "1bedc9cf5a8830dacf8c4ee0d8b301f0801861756ad0d504431d01047f961b0c",
+          "bytes": 424,
+          "symlink": false
+        },
+        "blobs/eb53a8fc2544b16d2a849d98e26c6e34bf07bdb0": {
+          "sha256": "6e7b98378c6b728266a83ebf035d927abf16b9e0d815d6204d81d90d896bcc9b",
+          "bytes": 1286,
+          "symlink": false
+        },
+        "blobs/ecb83d4a7f393b67b054b44e337d683b2ff2d973": {
+          "sha256": "1743191192b4a4f77fcc216499455dc00c1b8626fdd407076a8deefff80e3d59",
+          "bytes": 1235,
+          "symlink": false
+        },
+        "blobs/ee3a26e793f8ab69a44b30332708cc122b258b51": {
+          "sha256": "0df01c0a184d8c15077c6f0ee70e25e0c0308d827b92b14a19f5f819a0c465d0",
+          "bytes": 6348,
+          "symlink": false
+        },
+        "files_metadata.json": {
+          "sha256": "56f3e451766c6152a9df8a416b79511e346e8d4abf21a82b472021adc045cf58",
+          "bytes": 2456,
+          "symlink": false
+        },
+        "refs/main": {
+          "sha256": "2c7abc4aab2af8a57d18868f76bdf4d27cabff8945d059535fa29d5673da1749",
+          "bytes": 40,
+          "symlink": false
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/arabic.txt": {
+          "sha256": "0df01c0a184d8c15077c6f0ee70e25e0c0308d827b92b14a19f5f819a0c465d0",
+          "bytes": 6348,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/config.json": {
+          "sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "bytes": 2,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/danish.txt": {
+          "sha256": "1bedc9cf5a8830dacf8c4ee0d8b301f0801861756ad0d504431d01047f961b0c",
+          "bytes": 424,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/dutch.txt": {
+          "sha256": "e5a2a7c390fe3ad0c0a132586ed11492b635d66a1f426cd89677f80b07bc76a6",
+          "bytes": 453,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/english.txt": {
+          "sha256": "019f104ba2ed07436d05f9cdd3383034ad66014edc27fc651f837e1a038b6451",
+          "bytes": 936,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/finnish.txt": {
+          "sha256": "952af766edc9b8e7ddc877fc464cbd94b91754b5621fdfdd7020568fd4813fcd",
+          "bytes": 1579,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/french.txt": {
+          "sha256": "58ac7f7c074b70dc0fc86f6fcf40b2c227e9f95627e90e57971d5cce1e30e2e9",
+          "bytes": 813,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/german.txt": {
+          "sha256": "f0c25acd7ec02a31f6679d9664ec5222ca846fdbc58db96160f4e7c0ddb0f7ea",
+          "bytes": 1362,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/greek.txt": {
+          "sha256": "7a97c6dc81144f7e8fcfe976025954ca3731f78a75d1fd86aa87f261fd195dae",
+          "bytes": 2167,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/hungarian.txt": {
+          "sha256": "64a68b5ebaa616b25bd976ac915c326f2ea8cce8b59a0ac8c5728b980ae4fb0c",
+          "bytes": 1227,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/italian.txt": {
+          "sha256": "293d7841f198e4012f49e8e5653c3bfd073a58cea1259fa2c0fcec894167b628",
+          "bytes": 1654,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/mock.file": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "symlink": false
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/norwegian.txt": {
+          "sha256": "f7e5b42208ccf1b1f282f9e0f8570e464272762bda5718b6b26750f510a688dc",
+          "bytes": 851,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/portuguese.txt": {
+          "sha256": "6e7b98378c6b728266a83ebf035d927abf16b9e0d815d6204d81d90d896bcc9b",
+          "bytes": 1286,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/romanian.txt": {
+          "sha256": "0ab53d21cbde00c6bf367706a0243c646140ba564cce7e83ac33d80f8923e957",
+          "bytes": 1910,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/russian.txt": {
+          "sha256": "1743191192b4a4f77fcc216499455dc00c1b8626fdd407076a8deefff80e3d59",
+          "bytes": 1235,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/spanish.txt": {
+          "sha256": "6125eadf28ba664a60bf4296147bcbd40b80be93670056fdb229960ac15e2310",
+          "bytes": 2176,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/swedish.txt": {
+          "sha256": "2a9d9d756bc4257d49329994f805c712cd5ab6746162e2082752238766c1c0c8",
+          "bytes": 559,
+          "symlink": true
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/tamil.txt": {
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "symlink": false
+        },
+        "snapshots/22b8d2af71a76161e18dd432d2cee0eefa66e412/turkish.txt": {
+          "sha256": "f2c7f0c2bd3dba42da700776266831853a3b5f1207fada5c15207334109abb57",
+          "bytes": 260,
+          "symlink": true
+        }
+      },
+      "encoding_nonempty": true,
+      "encoder_dimension_nonzeros": 2,
+      "model_provider_calls": 0
+    },
+    "variables_changed": "Only Root launch offline cache path; existing cached files, no download/install/SDK/source/writer/reader/query/rubric changes. New namespace, original error retained.",
+    "before_ledger_sha256": "d676445977ceb2ec9d3c0fda8332247ddef5185128e211502414296c4fe9ad65",
+    "cache_config_enforcement": "Root command environment; native mem0_native_runtime trace records effective cache path; runner does not set these metadata keys itself.",
+    "claims": "This correction is separate evidence, not replacement of initial setup failure. No hidden fallback to dense-only."
   }
 }
