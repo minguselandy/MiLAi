@@ -25,20 +25,23 @@ from langgraph.store.sqlite import SqliteStore
 from langgraph.types import Command
 
 from milai_lab.application.journal import BusinessActionJournal
-from milai_lab.application.refs import verified_reservation_ref
+from milai_lab.application.refs import observation_profile, verified_reservation_ref
 from milai_lab.application.tools import BUSINESS_NAMES, BUSINESS_SCHEMAS, _business_tools
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import SYSTEM_PROMPT, build_agent
-from milai_lab.contracts.memory import GroundingMode
+from milai_lab.contracts.memory import GroundingMode, ObservationProfile
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
 from milai_lab.memory.mcp import MemoryMCP
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
+from milai_lab.methods.grounded_memory import POLICY as GROUNDED_POLICY
+from milai_lab.methods.grounded_memory import GroundedMemoryRecipe
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 
 LAB = Path(__file__).resolve().parents[3]
 
@@ -68,8 +71,232 @@ def _receipt_contract(config: dict[str, Any]) -> str:
     )
 
 
+def _mutation_contract(config: dict[str, Any]) -> str:
+    return MemoryService.validate_mutation_contract(
+        config.get("memory_mutation_contract", "legacy")
+    )
+
+
+def _observation_profile(config: dict[str, Any]) -> ObservationProfile | None:
+    name = config.get("memory_observation_profile")
+    if name is None:
+        return None
+    if (_mutation_contract(config) != "event_bound_v1"
+            or name != config.get("application_workflow", "reservation_v1")):
+        raise ValueError("V13_OBSERVATION_CONFIGURATION_INVALID")
+    return observation_profile(name)
+
+
+def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
+    options = {
+        "source_backlinks": settings.get("memory_source_backlinks", "disabled"),
+        "candidate_contract": settings.get("memory_candidate_contract"),
+    }
+    if _mutation_contract(settings) != "event_bound_v1" and (
+        options["source_backlinks"] != "disabled" or options["candidate_contract"] is not None
+    ):
+        raise ValueError("V13_MEMORY_OPT_IN_REQUIRED")
+    return options
+
+
+def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
+    reader = settings.get("memory_reader_policy")
+    formation = settings.get("memory_formation_policy", "none")
+    if reader is None and formation == "none":
+        return None
+    if (
+        _mutation_contract(settings) != "event_bound_v1"
+        or reader not in {None, "bounded_evidence_v1"}
+        or settings.get("memory_prefetch", "enabled") not in {"enabled", "disabled"}
+        or formation not in {"none", "tool_only_v1", "after_host_final_v1"}
+        or settings.get("memory_representation", "milai") not in {"raw", "receipt", "milai"}
+        or type(settings.get("memory_writer_repairs", 0)) is not int
+        or settings.get("memory_writer_repairs", 0) not in {0, 1}
+    ):
+        raise ValueError("V13_RECIPE_CONFIGURATION_INVALID")
+    if formation == "tool_only_v1" and _observation_profile(settings) is None:
+        raise ValueError("V13_TOOL_ONLY_OBSERVATION_PROFILE_REQUIRED")
+    if formation == "after_host_final_v1" and not settings.get("writer_system_prompt"):
+        raise ValueError("V13_WRITER_INSTRUCTION_REQUIRED")
+    if reader is not None:
+        VLLMConfig(**settings["embedding"])
+    if reader is not None and not all(
+        key in settings for key in ("embedding_capacity", "embedding_dimension", "embedding_batch")
+    ):
+        raise ValueError("V13_RECIPE_EMBEDDING_CONTRACT_REQUIRED")
+    return {
+        **GROUNDED_POLICY,
+        "prefetch_enabled": reader is not None
+        and settings.get("memory_prefetch", "enabled") == "enabled",
+        "retrieval_enabled": reader is not None,
+        "representation": settings.get("memory_representation", "milai"),
+        "formation": formation,
+        "writer_max_generations": int(formation == "after_host_final_v1"),
+        "writer_max_repairs": settings.get("memory_writer_repairs", 0),
+        "writer_mutations_per_generation": 6,
+        "writer_batch_atomic": False,
+        "host_dedup": "source-level successful semantic submission; completeness not established",
+    }
+
+
+def _make_recipe(
+    service: MemoryService,
+    settings: dict[str, Any],
+    model: Any,
+    budget: RunBudget,
+    trace: Any,
+    stack: ExitStack,
+) -> GroundedMemoryRecipe | None:
+    policy = _recipe_settings(settings)
+    if policy is None:
+        return None
+    if not policy["retrieval_enabled"] and policy["formation"] != "after_host_final_v1":
+        return None
+    if model.client.capacity is None:
+        raise ValueError("V13_PACKET_HOST_TOKENIZER_REQUIRED")
+    embeddings = None
+    if policy["retrieval_enabled"]:
+        client = stack.enter_context(
+            VLLMClient(VLLMConfig(**settings["embedding"]), emit=trace, budget=budget)
+        )
+        embeddings = MeteredEmbeddings(
+            client,
+            settings["embedding"]["model"],
+            settings["embedding_capacity"],
+            dimension=settings["embedding_dimension"],
+            batch_size=settings["embedding_batch"],
+        )
+    return GroundedMemoryRecipe(
+        service,
+        model.client.capacity.text_tokens,
+        embeddings=embeddings,
+        representation=policy["representation"],
+        observer=trace,
+    )
+
+
+def _memory_tools(
+    service: MemoryService,
+    settings: dict[str, Any],
+    *,
+    replay_requested: bool = False,
+    recipe: GroundedMemoryRecipe | None = None,
+) -> tuple[Any, ...]:
+    tools = create_service_tools(
+        service,
+        replay_requested=replay_requested,
+        context_provider=(
+            recipe.search_tool if recipe else lambda query, config: {"ok": True, "items": []}
+        )
+        if settings.get("memory_reader_policy")
+        else None,
+        recall_provider=(recipe.recall_tool if recipe else lambda config: {"ok": True, "items": []})
+        if settings.get("memory_reader_policy")
+        else None,
+    )
+    if settings.get("memory_reader_policy") == "bounded_evidence_v1":
+        next(tool for tool in tools if tool.name == "search_memory").description = (
+            "Search bounded owner-scoped historical evidence using the actual explicit query "
+            "argument. Each invocation performs a separate paid ordinary BM25+dense query, "
+            "2048 tokens including metadata and six record candidates. For the current public "
+            "request's fixed ordinary packet use recall_context(), which shares prefetch and "
+            "refreshes selected dirty identities. Empty recall has no items. "
+            "Observations remain historical; prose is unchecked."
+        )
+    if settings.get("memory_formation_policy") == "tool_only_v1":
+        return tuple(tool for tool in tools if tool.name not in {"manage_memory", "revise_memory"})
+    return tools
+
+
+def _maintain_final(
+    recipe: GroundedMemoryRecipe | None,
+    model: Any,
+    service: MemoryService,
+    settings: dict[str, Any],
+    session: str,
+    turn_id: str,
+    messages: list[Any],
+    config: dict[str, Any],
+    trace: Any,
+) -> dict[str, Any] | None:
+    if recipe is None or settings.get("memory_formation_policy") != "after_host_final_v1":
+        return None
+    start = next(
+        (
+            i
+            for i, row in enumerate(messages)
+            if isinstance(row, HumanMessage) and row.id == turn_id
+        ),
+        len(messages),
+    )
+    current = messages[start:]
+    if not any(isinstance(row, AIMessage) and not row.tool_calls for row in current):
+        return None
+    refs = [service.event_id(session, turn_id, "user")]
+    generating = None
+    for row in current:
+        if isinstance(row, AIMessage):
+            generating = row
+            if not row.tool_calls:
+                refs.append(service.event_id(session, row.id or turn_id + ":final", "assistant"))
+        elif isinstance(row, ToolMessage) and generating is not None:
+            ref = service.event_id(session, str(generating.id) + ":" + row.tool_call_id, "tool")
+            if service.source(ref) is not None:
+                refs.append(ref)
+    trace(
+        {
+            "event": "v13_host_final_before_maintenance",
+            "turn_id": turn_id,
+            "host_answer_unchanged": True,
+            "source_refs": refs,
+        }
+    )
+    trace({"event": "benchmark_phase", "phase": "semantic_boundary"})
+    try:
+        return recipe.maintain(
+            model,
+            session=session,
+            turn_id=turn_id,
+            source_refs=refs,
+            config=cast(Any, config),
+            instruction=settings["writer_system_prompt"],
+            repairs=settings.get("memory_writer_repairs", 0),
+        )
+    finally:
+        trace({"event": "benchmark_phase", "phase": "task_host"})
+
+
+def _observe_captured(
+    service: MemoryService, source_ref: str, settings: dict[str, Any], trace: Any
+) -> dict[str, Any] | None:
+    profile = _observation_profile(settings)
+    if profile is None:
+        return None
+    receipt = service.observe(source_ref, profile)
+    trace({"event": "v13_observation_capture", "receipt": receipt})
+    return receipt
+
+
+def _capture_final_assistant(
+    service: MemoryService, session: str, message_id: str, messages: list[Any], trace: Any
+) -> None:
+    """Only the actual Host final message; no writer cues, packets or old summaries."""
+    if service.mutation_contract != "event_bound_v1":
+        return
+    start = next((index for index, row in enumerate(messages)
+                  if isinstance(row, HumanMessage) and row.id == message_id), len(messages))
+    final = next((row for row in reversed(messages[start + 1:])
+                  if isinstance(row, AIMessage) and not row.tool_calls), None)
+    if final is None:
+        return
+    receipt = service.capture_assistant(session, final.id or message_id + ":final", final.content)
+    trace({"event": "v13_source_capture", "role": "assistant", "receipt": receipt})
+
+
 def _catalog(
-    root: Path, mode: GroundingMode, *, receipt_contract: str = "optional"
+    root: Path, mode: GroundingMode, *, receipt_contract: str = "optional",
+    mutation_contract: str = "legacy", service_options: dict[str, Any] | None = None,
+    settings: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
@@ -79,9 +306,11 @@ def _catalog(
             root / "memory.lock",
             mode=mode,
             receipt_contract=receipt_contract,
+            mutation_contract=mutation_contract,
+            **(service_options or {}),
         )
         return [
-            *[convert_to_openai_tool(tool) for tool in create_service_tools(service)],
+            *[convert_to_openai_tool(tool) for tool in _memory_tools(service, settings or {})],
             *BUSINESS_SCHEMAS,
         ]
 
@@ -113,13 +342,21 @@ def prepare(
     VLLMConfig(**config["host"])
     system_prompt = _system_prompt(config)
     receipt_contract = _receipt_contract(config)
+    _observation_profile(config)
+    recipe_policy = _recipe_settings(config)
+    if recipe_policy is not None and recipe_policy["retrieval_enabled"] and transport != "direct":
+        raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
     if "capacity" not in config or "budget_path" not in config:
         raise ValueError("V13_D0_CAPACITY_AND_CONTINUOUS_BUDGET_REQUIRED")
     budget_path = Path(config["budget_path"])
     if not budget_path.is_file():
         raise ValueError("V13_D0_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
     budget_limits = read_json(budget_path)["limits"]
-    catalog = _catalog(root, mode, receipt_contract=receipt_contract)
+    mutation_contract = _mutation_contract(config)
+    catalog = _catalog(root, mode, receipt_contract=receipt_contract,
+                       mutation_contract=mutation_contract,
+                       service_options=_service_options(config),
+                       settings=config)
     frozen = {
         "kind": "MILAI_V13_1_D0_RUNTIME_FREEZE",
         "fixture": fixture,
@@ -131,6 +368,10 @@ def prepare(
         "budget_limits": budget_limits,
         "mode": mode,
         "memory_receipt_contract": receipt_contract,
+        **(
+            {"memory_mutation_contract": mutation_contract}
+            if mutation_contract != "legacy" else {}
+        ),
         "transport": transport,
         "run_id": root.resolve().name,
         "source_sha256": _sources(),
@@ -142,6 +383,7 @@ def prepare(
         "backend": "public_sdk_sqlite",
         "memory_retrieval": "raw_keyword",
         "semantic_evidence": False,
+        **({"memory_reader_policy": recipe_policy} if recipe_policy is not None else {}),
     }
     root.mkdir(parents=True, exist_ok=True)
     target = root / "input-freeze.json"
@@ -179,6 +421,7 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
     scope = FoundationScope(frozen["run_id"], frozen["mode"], case["owner"], public["session_id"])
     config = scope.config()
     config["configurable"]["v13_session"] = public["session_id"]
+    config["configurable"]["v13_turn_id"] = public["message_id"]
     namespace = ("langmem", scope.run_id, scope.arm_id, scope.user_id)
     trace = Trace(case_root / f"message-{message_index}.jsonl", "v13_1_d0")
     trace(
@@ -220,11 +463,15 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
             case_root / "memory.lock",
             mode=frozen["mode"],
             receipt_contract=_receipt_contract(settings),
+            mutation_contract=_mutation_contract(settings),
+            **_service_options(settings),
             observer=trace,
         )
         source_receipt = service.capture_user(
             public["session_id"], public["message_id"], public["content"]
         )
+        service.bind_source_boundary(public["session_id"], public["message_id"],
+                                     [source_receipt["source_ref"]])
         write_json(case_root / f"message-{message_index}-capture.json", source_receipt)
         trace({"event": "v13_source_capture", "receipt": source_receipt})
         journal = BusinessActionJournal(case_root / "business-journal.json", BUSINESS_NAMES)
@@ -247,6 +494,9 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
             capture = service.capture_tool(
                 public["session_id"], identity, request.tool_call["name"], body, ref
             )
+            service.bind_source_boundary(public["session_id"], str(generating.id),
+                                         [capture["source_ref"]], append=True)
+            projection = _observe_captured(service, capture["source_ref"], settings, trace)
             trace(
                 {
                     "event": "v13_business_receipt",
@@ -265,13 +515,17 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                             "source_ref": source_ref,
                             "object_ref": ref.id if ref else None,
                             "observation_only": True,
+                            **(
+                                {"observation_capture": projection}
+                                if projection is not None else {}
+                            ),
                         },
                         ensure_ascii=False,
                     )
                 }
             )
 
-        tools = create_service_tools(service)
+        tools = _memory_tools(service, settings)
         if frozen["transport"] == "mcp_http":
             peer = stack.enter_context(
                 MemoryMCP(
@@ -289,6 +543,11 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     capacity_path=case_root / "host-capacity.json",
                     max_calls_per_message=settings.get("max_calls_per_message", 12),
                 )
+                recipe = _make_recipe(service, settings, model, budget, trace, stack)
+                if recipe is not None and settings.get("memory_reader_policy"):
+                    if frozen["transport"] != "direct":
+                        raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
+                    tools = _memory_tools(service, settings, recipe=recipe)
                 # Explicit reuse of the existing Agent loop and provider protocol.
                 agent = build_agent(
                     model,
@@ -298,6 +557,10 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     business_call_wrapper=business_wrapper,
                     memory_tools=tools,
                     system_prompt=_system_prompt(settings),
+                    benchmark_view_hook=(recipe.hook(_system_prompt(settings))
+                                         if recipe and settings.get("memory_reader_policy") and
+                                         settings.get("memory_prefetch", "enabled") == "enabled"
+                                         else None),
                 )
                 key = public["message_id"]
                 model.begin_public_message(key)
@@ -316,6 +579,14 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                         config=config,
                     )
                     messages = result["messages"]
+                _capture_final_assistant(
+                    service, public["session_id"], public["message_id"], messages, trace
+                )
+                maintenance = _maintain_final(recipe, model, service, settings,
+                                              public["session_id"],
+                                              public["message_id"], messages, config, trace)
+                if maintenance is not None:
+                    output["semantic_maintenance"] = maintenance
                 output.update(
                     status="completed",
                     messages=[row.model_dump(mode="json") for row in messages],

@@ -26,8 +26,18 @@ from langgraph.store.sqlite import SqliteStore
 from milai_lab.contracts.memory import (
     RECEIPT_PROFILES,
     GroundingMode,
+    ObservationProfile,
     SourceEvent,
     VerifiedObjectRef,
+)
+from milai_lab.memory.observation import (
+    PROJECTOR_VERSION,
+    ObservationError,
+    derive_observations,
+    profile_identity,
+)
+from milai_lab.memory.observation import (
+    observation_view as field_observation_view,
 )
 
 
@@ -124,6 +134,9 @@ class MemoryService:
         receipt_contract: str = "optional",
         operational_projection: str = "enabled",
         receipt_profile: str = "reservation_v1",
+        mutation_contract: str = "legacy",
+        source_backlinks: str = "disabled",
+        candidate_contract: str | None = None,
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -135,6 +148,20 @@ class MemoryService:
         self.store, self.namespace, self.owner = store, namespace, owner
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
+        self.mutation_contract = self.validate_mutation_contract(mutation_contract)
+        if type(source_backlinks) is not str or source_backlinks not in {"disabled", "enabled"}:
+            raise ValueError("V13_SOURCE_BACKLINKS_INVALID")
+        self.source_backlinks = source_backlinks
+        if candidate_contract is None:
+            candidate_contract = (
+                "read_handle_v1"
+                if self.mutation_contract == "event_bound_v1" else "legacy_query_v1"
+            )
+        if type(candidate_contract) is not str or candidate_contract not in {
+            "legacy_query_v1", "id_revision_v1", "read_handle_v1"
+        }:
+            raise ValueError("V13_CANDIDATE_CONTRACT_INVALID")
+        self.candidate_contract = candidate_contract
         if type(receipt_profile) is not str or receipt_profile not in RECEIPT_PROFILES:
             raise ValueError("V13_MEMORY_RECEIPT_PROFILE_INVALID")
         self.receipt_profile = receipt_profile
@@ -148,6 +175,11 @@ class MemoryService:
         self.observer = observer
         self.sources_namespace = (*namespace, "v13_1_sources")
         self.attempts_namespace = (*namespace, "v13_1_attempts")
+        self.candidates_namespace = (*namespace, "v13_2_candidates")
+        self.observations_namespace = (*namespace, "v13_2_observations")
+        self.projections_namespace = (*namespace, "v13_2_projections")
+        self.backlinks_namespace = (*namespace, "v13_2_backlinks")
+        self._source_boundaries: dict[str, tuple[str, list[str]]] = {}
         self.lock_path.parent.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
@@ -155,6 +187,371 @@ class MemoryService:
         if not isinstance(value, str) or value not in ("optional", "explicit_receipt_v1"):
             raise ValueError("V13_MEMORY_RECEIPT_CONTRACT_INVALID")
         return value
+
+    @staticmethod
+    def validate_mutation_contract(value: Any) -> str:
+        if type(value) is not str or value not in {"legacy", "event_bound_v1"}:
+            raise ValueError("V13_MEMORY_MUTATION_CONTRACT_INVALID")
+        return value
+
+    def bind_source_boundary(
+        self, session: str, boundary_id: str, source_refs: list[str], *, append: bool = False
+    ) -> None:
+        """Trusted runner binding to actual events, never a latest-role lookup.
+
+        A tool batch uses its generating message identity as boundary_id; all
+        observed events in that batch accumulate rather than selecting its last
+        completion. A new public user message starts a new singleton boundary.
+        This transient binding is established again from actual input on reopen.
+        """
+        if self.mutation_contract != "event_bound_v1":
+            return
+        if not session or not boundary_id or not source_refs:
+            raise ValueError("V13_SOURCE_BOUNDARY_REQUIRED")
+        with self._locked():
+            for source_ref in source_refs:
+                event = self.source(source_ref)
+                if event is None or event["session"] != session:
+                    raise ValueError("V13_SOURCE_BOUNDARY_SCOPE_MISMATCH")
+            prior_id, prior_refs = self._source_boundaries.get(session, ("", []))
+            refs = prior_refs if append and prior_id == boundary_id else []
+            self._source_boundaries[session] = (
+                boundary_id, list(dict.fromkeys([*refs, *source_refs]))
+            )
+
+    def boundary_sources(self, session: str) -> list[str]:
+        """Only explicitly bound current events; history cannot fill a missing binding."""
+        with self._locked():
+            return list(self._source_boundaries.get(session, ("", []))[1])
+
+    @staticmethod
+    def _version_source_refs(version: dict[str, Any]) -> list[str]:
+        return cast(list[str], version.get("source_refs", [version["source_ref"]]))
+
+    def _source_bindings(self, source_refs: list[str]) -> list[dict[str, Any]] | None:
+        bindings = []
+        for source_ref in source_refs:
+            event = self.source(source_ref)
+            if event is None:
+                return None
+            bindings.append({"source_ref": source_ref, "role": event["role"],
+                             "content_sha256": event["content_sha256"]})
+        return bindings
+
+    def _issue_candidate(self, record_id: str, version: dict[str, Any]) -> str:
+        bindings = self._source_bindings(self._version_source_refs(version))
+        if bindings is None:
+            raise ValueError("V13_CANDIDATE_SUPPORT_UNAVAILABLE")
+        if "source_bindings" in version and bindings != version["source_bindings"]:
+            raise ValueError("V13_CANDIDATE_SUPPORT_CHANGED")
+        bound = {"owner": self.owner, "namespace": list(self.namespace),
+                 "record_id": record_id, "revision": version["revision"],
+                 "support_sources": bindings, "version_sha256": _hash(version)}
+        handle = "cand-" + _hash(bound)[:24]
+        prior = self.store.get(self.candidates_namespace, handle)
+        if prior is not None and prior.value != bound:
+            raise ValueError("V13_CANDIDATE_HANDLE_COLLISION")
+        if prior is None:
+            self.store.put(self.candidates_namespace, handle, bound, index=False)
+        return handle
+
+    def candidate(self, handle: str | None) -> dict[str, Any] | None:
+        """Resolve only an issued owner-bound read-time version, including after reopen."""
+        if not isinstance(handle, str):
+            return None
+        item = self.store.get(self.candidates_namespace, handle)
+        if item is None:
+            return None
+        bound = item.value
+        if (bound.get("owner") != self.owner or bound.get("namespace") != list(self.namespace)
+                or handle != "cand-" + _hash(bound)[:24]):
+            return None
+        bindings = self._source_bindings([row["source_ref"] for row in bound["support_sources"]])
+        if bindings is None or bindings != bound["support_sources"]:
+            return None
+        item = self.store.get(self.namespace, bound["record_id"])
+        metadata = item.value.get("_v13_1", {}) if item is not None else {}
+        version = next((row for row in metadata.get("history", [])
+                        if row["revision"] == bound["revision"]), None)
+        if (metadata.get("owner") != self.owner or version is None
+                or self._version_source_refs(version) != [row["source_ref"] for row in bindings]
+                or _hash(version) != bound["version_sha256"]):
+            return None
+        return bound
+
+    def candidate_for_version(self, memory_id: str, revision: int) -> str | None:
+        """Ablation ID+revision interface still resolves only an issued read version."""
+        for row in self._rows(self.candidates_namespace):
+            bound = row["value"]
+            if bound.get("record_id") == memory_id and bound.get("revision") == revision:
+                if self.candidate(row["id"]) is not None:
+                    return str(row["id"])
+        return None
+
+    def backlink_candidates(self, source_refs: list[str], limit: int = 6) -> list[dict[str, Any]]:
+        """Rebuildable source→record index; association does not choose a semantic target.
+
+        Validate the current bank fingerprint before using the index. This initial
+        implementation scans primary record identities for invalidation; it makes
+        no unmeasured scale or speed claim. Supporting histories remain authority.
+        """
+        if self.source_backlinks != "enabled":
+            return []
+        if not 1 <= limit <= 100:
+            raise ValueError("V13_SEARCH_LIMIT_INVALID")
+        with self._locked():
+            rows = self._rows(self.namespace)
+            bank_revision = _hash([(row["id"], row["value"].get("_v13_1", {}).get("revision"))
+                                   for row in sorted(rows, key=lambda row: row["id"])])
+            matched: set[str] = set()
+            for source_ref in source_refs:
+                source = self.source(source_ref)
+                if source is None:
+                    continue
+                old = self.store.get(self.backlinks_namespace, source_ref)
+                if (old is None or old.value.get("bank_revision") != bank_revision
+                        or old.value.get("source_hash") != source["content_sha256"]):
+                    links = {}
+                    for row in rows:
+                        metadata = row["value"].get("_v13_1", {})
+                        if metadata.get("owner") != self.owner:
+                            continue
+                        versions = [version["revision"] for version in metadata["history"]
+                                    if source_ref in self._version_source_refs(version)]
+                        if versions:
+                            links[row["id"]] = versions
+                    value = {"owner": self.owner, "source_ref": source_ref,
+                             "source_hash": source["content_sha256"],
+                             "bank_revision": bank_revision,
+                             "records": links}
+                    self.store.put(self.backlinks_namespace, source_ref, value, index=False)
+                else:
+                    value = old.value
+                matched.update(value["records"])
+        # read() issues a handle under its own lock. Do not hold a second flock.
+        return [self.read(memory_id) for memory_id in sorted(matched)[:limit]]
+
+    def revise(
+        self, session: str, proposal_id: str, candidate_handle: str,
+        semantic_patch: dict[str, Any], source_refs: list[str] | None = None, *,
+        operation: str = "revise",
+    ) -> dict[str, Any]:
+        """Small semantic patch over the version actually read; observed literals are immutable."""
+        requested = {"candidate_handle": candidate_handle, "semantic_patch": semantic_patch,
+                     "source_refs": source_refs, "operation": operation}
+
+        def rejected(reason: str) -> dict[str, Any]:
+            identity = _hash([session, proposal_id])
+            with self._locked():
+                return self._save_attempt(identity, {"requested": requested}, {
+                    "ok": False, "status": "rejected", "reason": reason, "effect": "none",
+                    "formation_status": "pending", "raw_preserved": True,
+                    "content_verification": "unchecked", "id": None, "revision": None,
+                })
+
+        if source_refs is None:
+            source_refs = self.boundary_sources(session)
+            if len(source_refs) != 1:
+                return rejected("source_selection_required")
+
+        bound = self.candidate(candidate_handle)
+        if bound is None:
+            return rejected("candidate_handle_required_or_invalid")
+        if (operation not in {"revise", "supersede", "no_change"}
+                or not isinstance(semantic_patch, dict)
+                or not semantic_patch.keys() <= {"content", "scope", "basis", "kind"}
+                or not source_refs):
+            return rejected("invalid_semantic_patch")
+        version = self.read(bound["record_id"], bound["revision"])["value"]
+        scope = semantic_patch.get("scope", {})
+        if not isinstance(scope, dict):
+            return rejected("invalid_semantic_patch")
+        proposal = {"action": "update", "id": bound["record_id"],
+                    "expected_revision": bound["revision"], "candidate_handle": candidate_handle,
+                    "source_ref": source_refs[0], "source_refs": source_refs,
+                    "content": semantic_patch.get("content", version["content"]),
+                    "kind": semantic_patch.get("kind", version["kind"]),
+                    "scope": {**version["scope"], **scope},
+                    "basis": semantic_patch.get("basis", version["basis"]),
+                    "fields": {}, "object_ref": None, "patch_operation": operation,
+                    "requested": requested}
+        return self.commit(session, proposal_id, proposal)
+
+    def semantic_receipts(self, source_ref: str) -> list[dict[str, Any]]:
+        """Successful semantic submissions citing one owner-checked actual source."""
+        if self.source(source_ref) is None:
+            return []
+        return [entry["receipt"] for row in self._rows(self.namespace)
+                if row["value"].get("_v13_1", {}).get("owner") == self.owner
+                for entry in row["value"].get("_v13_1", {}).get("proposals", {}).values()
+                if entry["receipt"]["ok"] and source_ref in entry["raw"].get(
+                    "source_refs", [entry["raw"].get("source_ref")])]
+
+    @staticmethod
+    def _projection_id(source_ref: str, profile: ObservationProfile) -> str:
+        return "projection-" + _hash([source_ref, profile.profile_id,
+                                     profile.adapter_version, PROJECTOR_VERSION])
+
+    def observe(self, source_ref: str, profile: ObservationProfile) -> dict[str, Any]:
+        """Derive only real source literals, with detectable pending and idempotent replay.
+
+        The public Store has no multi-item transaction here. A complete marker
+        follows verified fact writes; partial writes remain invisible in the
+        complete view and can be replayed without repeating any business tool.
+        """
+        if self.mutation_contract != "event_bound_v1":
+            raise ValueError("V13_OBSERVATION_REQUIRES_EVENT_BOUND")
+        profile_hash = profile_identity(profile)
+        projection_id = self._projection_id(source_ref, profile)
+        initial_source = self.source(source_ref)
+        if initial_source is None:
+            return {"ok": False, "status": "rejected",
+                    "reason": "source_not_found_or_not_owned", "effect": "none"}
+        initial_binding = {"owner": self.owner, "source_event_id": source_ref,
+                           "source_hash": initial_source["content_sha256"],
+                           "adapter_id": profile.profile_id,
+                           "adapter_version": profile.adapter_version,
+                           "adapter_sha256": profile_hash, "projector_version": PROJECTOR_VERSION}
+        with self._locked():
+            initial_projection = self.store.get(self.projections_namespace, projection_id)
+            if (initial_projection is not None and any(
+                    initial_projection.value.get(key) != value
+                    for key, value in initial_binding.items())):
+                return {"ok": False, "status": "rejected", "reason": "projection_binding_changed",
+                        "projection_id": projection_id, "effect": "none"}
+            if initial_projection is None:
+                # A real kill at W2 must leave a public, profile-bound dirty witness.
+                witness = {**initial_binding, "status": "pending", "receipt": {
+                    "ok": False, "status": "pending", "projection_id": projection_id,
+                    "source_ref": source_ref, "source_hash": initial_source["content_sha256"],
+                    "projector_version": PROJECTOR_VERSION, "raw_preserved": True,
+                    "effect": "memory_projection_only", "current_verified": False,
+                    "reason": "projection_not_started",
+                }}
+                self.store.put(self.projections_namespace, projection_id, witness, index=False)
+                persisted = self.store.get(self.projections_namespace, projection_id)
+                if persisted is None or persisted.value != witness:
+                    raise RuntimeError("V13_PROJECTION_PENDING_NOT_VISIBLE")
+        if self.observer is not None and (initial_projection is None
+                                         or initial_projection.value["status"] != "complete"):
+            # Driver evidence can read the service; callbacks run outside its lock.
+            self.observer({"event": "v13_observation_boundary", "phase": "source_persisted",
+                           "source_ref": source_ref, "projection_id": projection_id})
+        with self._locked():
+            source = self.source(source_ref)
+            if source is None:
+                return {"ok": False, "status": "rejected",
+                        "reason": "source_not_found_or_not_owned", "effect": "none"}
+            item = self.store.get(self.projections_namespace, projection_id)
+            prior = item.value if item is not None else None
+            binding = {"owner": self.owner, "source_event_id": source_ref,
+                       "source_hash": source["content_sha256"], "adapter_id": profile.profile_id,
+                       "adapter_version": profile.adapter_version, "adapter_sha256": profile_hash,
+                       "projector_version": PROJECTOR_VERSION}
+            if prior is not None and any(prior.get(key) != value for key, value in binding.items()):
+                return {"ok": False, "status": "rejected", "reason": "projection_binding_changed",
+                        "projection_id": projection_id, "effect": "none"}
+            receipt: dict[str, Any] = {
+                "ok": False, "status": "pending", "projection_id": projection_id,
+                "source_ref": source_ref, "source_hash": source["content_sha256"],
+                "projector_version": PROJECTOR_VERSION, "raw_preserved": True,
+                "effect": "memory_projection_only", "current_verified": False,
+            }
+            try:
+                facts, outcome = derive_observations(source, profile)
+            except ObservationError as error:
+                receipt.update(reason=str(error), observation_count=0)
+                if prior is None or prior.get("status") != "complete":
+                    self.store.put(self.projections_namespace, projection_id,
+                                   {**binding, "status": "pending", "receipt": receipt},
+                                   index=False)
+                return receipt
+            facts = [{**fact, "projection_id": projection_id} for fact in facts]
+            hashes = {fact["observation_id"]: _hash(fact) for fact in facts}
+            receipt["expected_observation_count"] = len(facts)
+            if prior is not None and prior.get("status") == "complete":
+                consistent = prior.get("fact_sha256") == hashes
+                for fact_id, expected_hash in hashes.items():
+                    fact_item = self.store.get(self.observations_namespace, fact_id)
+                    consistent = (consistent and fact_item is not None
+                                  and _hash(fact_item.value) == expected_hash)
+                if consistent:
+                    return {**prior["receipt"], "status": "no_change", "replayed": True,
+                            "original_status": prior["receipt"]["status"]}
+            pending = {**binding, "status": "pending", "fact_sha256": hashes, "receipt": receipt,
+                       "outcome": outcome}
+            # Persist the recovery witness before any independent fact writes.
+            self.store.put(self.projections_namespace, projection_id, pending, index=False)
+            try:
+                for fact in facts:
+                    existing = self.store.get(self.observations_namespace, fact["observation_id"])
+                    if existing is not None and existing.value != fact:
+                        raise ValueError("V13_OBSERVATION_IDENTITY_CHANGED")
+                    if existing is None:
+                        self.store.put(self.observations_namespace, fact["observation_id"], fact,
+                                       index=False)
+                    written = self.store.get(self.observations_namespace, fact["observation_id"])
+                    if written is None or written.value != fact:
+                        raise RuntimeError("V13_OBSERVATION_WRITE_NOT_VISIBLE")
+                receipt.update(ok=True,
+                               status="observed_unknown" if outcome == "unknown" else "projected",
+                               observation_count=len(facts), outcome=outcome)
+                complete = {**pending, "status": "complete", "fact_sha256": hashes,
+                            "receipt": receipt}
+                self.store.put(self.projections_namespace, projection_id, complete, index=False)
+                readback = self.store.get(self.projections_namespace, projection_id)
+                if readback is None or readback.value != complete:
+                    raise RuntimeError("V13_PROJECTION_COMMIT_NOT_VISIBLE")
+            except Exception as error:
+                receipt.pop("observation_count", None)
+                receipt.update(ok=False, status="pending", reason="projection_write_incomplete",
+                               error_type=type(error).__name__, error=str(error))
+                pending = {**pending, "fact_sha256": hashes, "receipt": receipt}
+                self.store.put(self.projections_namespace, projection_id, pending, index=False)
+                pending_witness = self.store.get(self.projections_namespace, projection_id)
+                if pending_witness is None or pending_witness.value != pending:
+                    raise RuntimeError("V13_PROJECTION_PENDING_NOT_VISIBLE") from error
+                return receipt
+        if self.observer is not None:
+            self.observer({"event": "v13_observation_boundary", "phase": "projection_committed",
+                           "source_ref": source_ref, "projection_id": projection_id,
+                           "receipt": receipt})
+        return receipt
+
+    def projection_receipt(
+        self, source_ref: str, profile: ObservationProfile
+    ) -> dict[str, Any] | None:
+        item = self.store.get(self.projections_namespace, self._projection_id(source_ref, profile))
+        return item.value["receipt"] if item is not None else None
+
+    def observations(self) -> dict[str, Any]:
+        """Only complete verified projections; dirty events and unknown outcomes stay explicit."""
+        with self._locked():
+            facts, pending, unknown = [], [], []
+            for marker in self._rows(self.projections_namespace):
+                state = marker["value"]
+                if state["owner"] != self.owner:
+                    continue
+                source = self.source(state["source_event_id"])
+                if source is None or source["content_sha256"] != state["source_hash"]:
+                    raise ValueError("V13_OBSERVATION_SOURCE_CHANGED")
+                if state["status"] != "complete":
+                    pending.append(state["receipt"])
+                    continue
+                collected = []
+                for fact_id, expected_hash in state["fact_sha256"].items():
+                    item = self.store.get(self.observations_namespace, fact_id)
+                    if item is None or _hash(item.value) != expected_hash:
+                        raise ValueError("V13_OBSERVATION_COMMIT_INCOMPLETE")
+                    collected.append(item.value)
+                facts.extend(collected)
+                if state["outcome"] == "unknown":
+                    unknown.append(state["receipt"])
+            return {"ok": True,
+                    "observations": sorted(facts, key=lambda row: row["observation_id"]),
+                    "objects": field_observation_view(facts),
+                    "pending": pending, "unknown": unknown,
+                    "current_verified": False}
 
     @contextmanager
     def _locked(self) -> Iterator[None]:
@@ -173,6 +570,14 @@ class MemoryService:
     def capture_user(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
         """Capture an actual incoming user event, not a model-selected source body."""
         return self._capture(session, event_key, "user", "public_user_message", content, None)
+
+    def capture_assistant(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
+        """Trusted actual assistant message; proposals/packets are never original messages."""
+        if self.mutation_contract != "event_bound_v1":
+            raise ValueError("V13_ASSISTANT_CAPTURE_REQUIRES_EVENT_BOUND")
+        return self._capture(
+            session, event_key, "assistant", "public_assistant_message", content, None
+        )
 
     def capture_tool(
         self,
@@ -224,7 +629,7 @@ class MemoryService:
                     raise ValueError("V13_SOURCE_EVENT_CHANGED")
                 event = cast(SourceEvent, prior.value)
                 formed = any(
-                    version["source_ref"] == event_id
+                    event_id in self._version_source_refs(version)
                     for record in self._rows(self.namespace)
                     for version in record["value"].get("_v13_1", {}).get("history", [])
                 )
@@ -272,7 +677,7 @@ class MemoryService:
                 if event is None or (session is not None and event["session"] != session):
                     continue
                 formed = any(
-                    version["source_ref"] == row["id"]
+                    row["id"] in self._version_source_refs(version)
                     for record in records
                     for version in record["value"].get("_v13_1", {}).get("history", [])
                 )
@@ -319,6 +724,9 @@ class MemoryService:
         )
 
     def _validate(self, proposal: dict[str, Any]) -> tuple[str | None, dict[str, Any] | None]:
+        if (self.mutation_contract == "event_bound_v1"
+                and proposal.get("action") not in {"create", "update"}):
+            return "invalid_proposal", None
         if (
             not isinstance(proposal.get("content"), str)
             or proposal.get("kind") not in {"semantic", "episodic"}
@@ -330,6 +738,8 @@ class MemoryService:
             return "invalid_proposal", None
         if proposal.get("target_resolution_error"):
             return "target_not_unique", None
+        if proposal.get("binding_error"):
+            return str(proposal["binding_error"]), None
         if proposal.get("action") == "update" and not proposal.get("id"):
             return "update_target_required", None
         if proposal.get("action") == "create" and proposal.get("id") is not None:
@@ -337,6 +747,17 @@ class MemoryService:
         source = self.source(proposal.get("source_ref", ""))
         if source is None:
             return "source_not_found_or_not_owned", None
+        if self.mutation_contract == "event_bound_v1":
+            refs = proposal.get("source_refs")
+            if (not isinstance(refs, list) or not refs or not all(isinstance(r, str) for r in refs)
+                    or len(refs) != len(set(refs)) or proposal["source_ref"] not in refs):
+                return "source_selection_required", source
+            sources = [self.source(ref) for ref in refs]
+            if any(event is None for event in sources):
+                return "source_not_found_or_not_owned", source
+            role = {"user_statement": "user", "tool_observation": "tool"}.get(proposal["basis"])
+            if role is not None and any(event["role"] != role for event in sources if event):
+                return "source_role_mismatch", source
         if (proposal["basis"] == "user_statement" and source["role"] != "user") or (
             proposal["basis"] == "tool_observation" and source["role"] != "tool"
         ):
@@ -414,6 +835,18 @@ class MemoryService:
             uuid.uuid5(uuid.NAMESPACE_URL, _json([self.namespace, session, proposal_id]))
         )
         with self._locked():
+            if (self.mutation_contract == "event_bound_v1" and raw.get("action") == "update"
+                    and self.candidate_contract != "legacy_query_v1"):
+                bound = self.candidate(raw.get("candidate_handle"))
+                if bound is None:
+                    raw["binding_error"] = "candidate_handle_required_or_invalid"
+                elif ((raw.get("id") is not None and raw["id"] != bound["record_id"])
+                      or (raw.get("expected_revision") is not None
+                          and raw["expected_revision"] != bound["revision"])):
+                    raw["binding_error"] = "candidate_binding_mismatch"
+                else:
+                    raw["id"], raw["expected_revision"] = bound["record_id"], bound["revision"]
+                    target = bound["record_id"]
             prior = self.store.get(self.namespace, target)
             attempt = self.store.get(self.attempts_namespace, identity)
             metadata = prior.value.get("_v13_1") if prior is not None else None
@@ -481,6 +914,11 @@ class MemoryService:
                     prior.value if prior is not None and metadata else None,
                 )
             assert source is not None
+            if raw.get("patch_operation") == "no_change":
+                return self._save_attempt(identity, raw, {
+                    "ok": True, "status": "no_change", "id": target, "revision": revision,
+                    "effect": "none", "content_verification": "unchecked",
+                })
             version = {
                 "revision": revision + 1,
                 "content": raw["content"],
@@ -512,6 +950,14 @@ class MemoryService:
                 "effect": "memory_only",
                 "mode": self.mode,
             }
+            if self.mutation_contract == "event_bound_v1":
+                bindings = self._source_bindings(raw["source_refs"])
+                version.update(source_refs=raw["source_refs"], source_bindings=bindings,
+                               mutation_contract=self.mutation_contract)
+                if raw.get("patch_operation") == "supersede":
+                    version["supersedes_revision"] = revision
+                receipt.update(source_refs=raw["source_refs"], source_bindings=bindings,
+                               mutation_contract=self.mutation_contract)
             if self._uses_explicit_receipt(raw, source):
                 # This verifies only two literal claims against a historical
                 # observation. Notes, quotations and general prose are unchecked;
@@ -581,6 +1027,8 @@ class MemoryService:
             "effect": "none",
             "content_verification": "unchecked",
         }
+        if self.mutation_contract == "event_bound_v1":
+            receipt.update(formation_status="pending", raw_preserved=True)
         if prior is None:
             return self._save_attempt(identity, raw, receipt)
         prior["_v13_1"]["proposals"][identity] = {"raw": raw, "receipt": receipt}
@@ -608,13 +1056,17 @@ class MemoryService:
             if revision is None
             else next((row for row in metadata["history"] if row["revision"] == revision), None)
         )
-        return {
+        result = {
             "ok": version is not None,
             "status": "found" if version else "revision_not_found",
             "id": memory_id,
             "value": version,
             "observation_only": True,
         }
+        if self.mutation_contract == "event_bound_v1" and version is not None:
+            with self._locked():
+                result["candidate_handle"] = self._issue_candidate(memory_id, version)
+        return result
 
     def records(self) -> list[dict[str, Any]]:
         """Current material only; capture/attempt subnamespaces are not memory records."""
@@ -647,6 +1099,15 @@ class MemoryService:
         raw = self.sources() if include_raw else []
         linked_text: dict[str, str] = {}
         relation: dict[str, Any] = {}
+        if self.source_backlinks == "enabled" and tokens:
+            all_sources = raw if include_raw else self.sources()
+            matching_sources = [event for event in all_sources
+                                if any(token in set(_lexical_tokens(_json(event),
+                                     include_cjk_unigrams=True)) for token in tokens)]
+            for event in matching_sources:
+                for record in self.backlink_candidates([event["event_id"]], limit=100):
+                    linked_text[record["id"]] = (linked_text.get(record["id"], "")
+                                                 + " " + _json(event))
         if self.receipt_contract == "explicit_receipt_v1" and tokens:
             started_wall, started_cpu = time.monotonic_ns(), time.process_time_ns()
             # Reuse sources already loaded for raw search. Internal target discovery
@@ -686,27 +1147,27 @@ class MemoryService:
                     lookup: dict[str, Any] = {"source_ref": source_ref}
                     lookups.append(lookup)
                     try:
-                        event = self.source(source_ref)
+                        receipt_event = self.source(source_ref)
                     except Exception as error:
                         lookup.update(error_type=type(error).__name__, error=str(error))
                         observe_relation()
                         raise
-                    source_cache[source_ref] = event
-                    lookup["original_result"] = event
-                event = source_cache.get(source_ref)
-                if event is None or not self._uses_explicit_receipt(version, event):
+                    source_cache[source_ref] = receipt_event
+                    lookup["original_result"] = receipt_event
+                receipt_event = source_cache.get(source_ref)
+                if receipt_event is None or not self._uses_explicit_receipt(version, receipt_event):
                     continue
-                ref = event["object_ref"]
+                ref = receipt_event["object_ref"]
                 if (
-                    event["role"] != "tool"
-                    or event["event_id"] != source_ref
+                    receipt_event["role"] != "tool"
+                    or receipt_event["event_id"] != source_ref
                     or ref["id"] != version["object_ref"]
                     or ref["owner"] != self.owner
                     or ref["source_ref"] != source_ref
                 ):
                     continue
                 linked_text[row["id"]] = _json(
-                    {"origin": event["origin"], "content": event["content"]}
+                    {"origin": receipt_event["origin"], "content": receipt_event["content"]}
                 )
                 links.append({"id": row["id"], "source_ref": source_ref})
             relation = observe_relation()

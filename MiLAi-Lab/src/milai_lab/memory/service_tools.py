@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Callable
 from typing import Annotated, Any, Literal
 
 import anyio
@@ -20,7 +21,9 @@ from milai_lab.memory.service import MemoryService
 
 
 def create_service_tools(
-    service: MemoryService, *, replay_requested: bool = False
+    service: MemoryService, *, replay_requested: bool = False,
+    context_provider: Callable[[str, RunnableConfig], dict[str, Any]] | None = None,
+    recall_provider: Callable[[RunnableConfig], dict[str, Any]] | None = None,
 ) -> tuple[BaseTool, ...]:
     if type(replay_requested) is not bool:
         raise ValueError("V13_MEMORY_REPLAY_REQUESTED_INVALID")
@@ -32,8 +35,21 @@ def create_service_tools(
         return str(cfg["v13_session"])
 
     def message(name: str, call_id: str, receipt: dict[str, Any]) -> ToolMessage:
+        if (service.mutation_contract == "event_bound_v1"
+                and service.candidate_contract != "read_handle_v1"):
+            def without_handles(value: Any) -> Any:
+                if isinstance(value, dict):
+                    return {key: without_handles(child) for key, child in value.items()
+                            if key != "candidate_handle"}
+                if isinstance(value, list):
+                    return [without_handles(child) for child in value]
+                return value
+            receipt = without_handles(receipt)
         return ToolMessage(
-            content=json.dumps(receipt, ensure_ascii=False),
+            content=json.dumps(receipt, ensure_ascii=False,
+                               separators=(",", ":")
+                               if ((name == "search_memory" and context_provider)
+                                   or (name == "recall_context" and recall_provider)) else None),
             name=name,
             tool_call_id=call_id,
             status="success" if receipt["ok"] else "error",
@@ -57,6 +73,8 @@ def create_service_tools(
         object_ref: str | None = None,
         fields: dict[str, str] | None = None,
         content_format: str | None = None,
+        source_refs: list[str] | None = None,
+        candidate_handle: str | None = None,
     ) -> ToolMessage:
         """Save a proposed memory or revise a discovered record. Prose is always unchecked.
 
@@ -69,7 +87,7 @@ def create_service_tools(
         is selected. A committed receipt confirms memory storage only.
         """
         session = session_for(config)
-        requested = {
+        requested: dict[str, Any] = {
             "content": content,
             "action": action,
             "kind": kind,
@@ -84,24 +102,57 @@ def create_service_tools(
         }
         if service.receipt_contract == "explicit_receipt_v1":
             requested["content_format"] = content_format
+        exact = service.mutation_contract == "event_bound_v1"
+        if exact:
+            requested.update(source_refs=source_refs, candidate_handle=candidate_handle)
         if replay_requested:
             prior_receipt = service.replay_requested(session, tool_call_id, requested)
             if prior_receipt is not None:
                 return message("manage_memory", tool_call_id, prior_receipt)
-        sources = service.sources(session)
-        if source_ref is None:
-            relevant = [
-                event
-                for event in sources
-                if event["role"] == ("tool" if basis == "tool_observation" else "user")
-            ]
-            source_ref = relevant[-1]["event_id"] if relevant else ""
+        binding_error = None
+        if exact:
+            if source_refs is None:
+                source_refs = (
+                    [source_ref] if source_ref is not None else service.boundary_sources(session)
+                )
+                if len(source_refs) != 1:
+                    binding_error = "source_selection_required"
+            if source_ref is None:
+                source_ref = source_refs[0] if source_refs else ""
+            if action == "update":
+                if service.candidate_contract != "legacy_query_v1":
+                    if (service.candidate_contract == "id_revision_v1" and candidate_handle is None
+                            and id is not None and expected_revision is not None):
+                        candidate_handle = service.candidate_for_version(id, expected_revision)
+                    bound = service.candidate(candidate_handle)
+                    if bound is None:
+                        binding_error = "candidate_handle_required_or_invalid"
+                    elif (
+                        (id is not None and id != bound["record_id"])
+                        or (expected_revision is not None
+                            and expected_revision != bound["revision"])
+                    ):
+                        binding_error = "candidate_binding_mismatch"
+                    else:
+                        id, expected_revision = bound["record_id"], bound["revision"]
+            elif expected_revision is None:
+                expected_revision = 0
+        else:
+            sources = service.sources(session)
+            if source_ref is None:
+                relevant = [
+                    event
+                    for event in sources
+                    if event["role"] == ("tool" if basis == "tool_observation" else "user")
+                ]
+                source_ref = relevant[-1]["event_id"] if relevant else ""
         event = service.source(source_ref)
         if object_ref is None and basis == "tool_observation" and event is not None:
             ref = event.get("object_ref")
             object_ref = ref["id"] if ref else None
         target_resolution_error = False
-        if action == "update" and id is None:
+        legacy_target = not exact or service.candidate_contract == "legacy_query_v1"
+        if legacy_target and action == "update" and id is None:
             result = service.search(target_query or "", include_raw=False)
             candidates = result["records"]
             if len(candidates) == 1:
@@ -110,7 +161,7 @@ def create_service_tools(
                 # Preserve the proposal as a rejected attempt; do not pick an
                 # arbitrary match or create a replacement memory silently.
                 target_resolution_error = True
-        if expected_revision is None:
+        if legacy_target and expected_revision is None:
             prior = service.read(id) if id else None
             expected_revision = (prior or {}).get("value", {}).get("revision", 0)
         proposal = {
@@ -130,6 +181,9 @@ def create_service_tools(
         }
         if service.receipt_contract == "explicit_receipt_v1":
             proposal["content_format"] = content_format
+        if exact:
+            proposal.update(source_refs=source_refs, candidate_handle=candidate_handle,
+                            binding_error=binding_error)
         receipt = service.commit(session, tool_call_id, proposal)
         return message("manage_memory", tool_call_id, receipt)
 
@@ -150,6 +204,8 @@ def create_service_tools(
         No result says nothing about existence in the business application.
         """
         session_for(config)
+        if context_provider is not None:
+            return message("search_memory", tool_call_id, context_provider(query, config))
         return message("search_memory", tool_call_id, service.search(query, limit, dense=dense))
 
     async def asearch_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
@@ -187,21 +243,144 @@ def create_service_tools(
     async def aread_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: read_memory(config=config, **arguments))
 
+    def revise_memory(
+        candidate_handle: str,
+        semantic_patch: dict[str, Any],
+        config: RunnableConfig,
+        *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+        source_refs: list[str] | None = None,
+        operation: Literal["revise", "supersede", "no_change"] = "revise",
+    ) -> ToolMessage:
+        """Patch an explicitly selected read-time candidate; preserve other semantic metadata.
+
+        semantic_patch may contain only content, scope, basis and kind. Scope merges
+        named keys. Actual source_refs retain roles; omitted refs bind only a trusted
+        current singleton event, while multiple events require explicit selection.
+        All prose remains unchecked.
+        Observation fields cannot be patched. Supersede preserves earlier revisions;
+        no_change writes no new revision. Conflicts do not create replacement cards.
+        """
+        session = session_for(config)
+        requested = {"candidate_handle": candidate_handle, "semantic_patch": semantic_patch,
+                     "source_refs": source_refs, "operation": operation}
+        if replay_requested:
+            prior = service.replay_requested(session, tool_call_id, requested)
+            if prior is not None:
+                return message("revise_memory", tool_call_id, prior)
+        return message("revise_memory", tool_call_id, service.revise(
+            session, tool_call_id, candidate_handle, semantic_patch, source_refs,
+            operation=operation,
+        ))
+
+    async def arevise_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(lambda: revise_memory(config=config, **arguments))
+
+    def recall_context(config: RunnableConfig, *,
+                       tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
+        """Recall bounded historical evidence using the actual current public user request.
+
+        This ordinary no-query read shares a fixed packet with prefetch and dirty refresh.
+        For an explicit additional query use search_memory(query); that retrieval is charged.
+        Observations remain historical and prose is unchecked.
+        """
+        session_for(config)
+        if recall_provider is None:
+            raise ValueError("V13_RECALL_PROVIDER_REQUIRED")
+        return message("recall_context", tool_call_id, recall_provider(config))
+
+    async def arecall_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(lambda: recall_context(config=config, **arguments))
+
+    def read_source(
+        source_ref: str, config: RunnableConfig, *,
+        tool_call_id: Annotated[str, InjectedToolCallId], start: int = 0, max_chars: int = 4096,
+    ) -> ToolMessage:
+        """Read an original owner-bound source leaf; ranges refer to its original content text.
+
+        This explicit escape preserves role/hash and does not assert semantic or current truth.
+        """
+        session_for(config)
+        if (type(start) is not int or start < 0 or type(max_chars) is not int
+                or not 1 <= max_chars <= 16000):
+            raise ValueError("V13_SOURCE_READ_RANGE_INVALID")
+        source = service.source(source_ref)
+        if source is None:
+            return message("read_source", tool_call_id, {"ok": False, "status": "not_found"})
+        body = source["content"] if isinstance(source["content"], str) else json.dumps(
+            source["content"], ensure_ascii=False, sort_keys=True)
+        end = min(len(body), start + max_chars)
+        return message("read_source", tool_call_id, {"ok": True, "source_ref": source_ref,
+            "role": source["role"], "source_hash": source["content_sha256"],
+            "observed_at": source["observed_at"], "content": body[start:end],
+            "range": [start, end], "range_basis": "original_content_text",
+            "next_start": end if end < len(body) else None, "content_verification": "unchecked"})
+
+    def read_observations(
+        object_id: str, config: RunnableConfig, *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+    ) -> ToolMessage:
+        """Read all historical field candidates for an observed object, retaining conflicts.
+
+        object_id is an exact observation id or actual public external object id.
+        Observation identity confers no business write permission or current verification.
+        """
+        session_for(config)
+        objects = [row for row in service.observations()["objects"]
+                   if object_id in {row["object_ref"]["id"], row["object_ref"]["external_id"]}]
+        return message("read_observations", tool_call_id,
+                       {"ok": bool(objects), "objects": objects, "current_verified": False})
+
+    async def aread_source(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(lambda: read_source(config=config, **arguments))
+
+    async def aread_observations(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(lambda: read_observations(config=config, **arguments))
+
     explicit = service.receipt_contract == "explicit_receipt_v1"
+    hidden = ["run_manager", "callbacks", "config"]
+    if not explicit:
+        hidden.append("content_format")
+    if service.mutation_contract == "legacy":
+        hidden.extend(["source_refs", "candidate_handle"])
+    elif service.candidate_contract != "read_handle_v1":
+        hidden.append("candidate_handle")
     manage_tool = StructuredTool.from_function(
         manage_memory,
         coroutine=amanage_memory,
         name="manage_memory",
-        args_schema=(
-            None
-            if explicit
-            else create_schema_from_function(
-                "manage_memory",
-                manage_memory,
-                filter_args=["run_manager", "callbacks", "config", "content_format"],
-            )
+        args_schema=create_schema_from_function(
+            "manage_memory", manage_memory, filter_args=hidden,
         ),
     )
+    if service.mutation_contract == "event_bound_v1":
+        manage_tool.description = (
+            "Save an unchecked semantic proposal, or update a candidate you actually read. "
+            "For update, supply candidate_handle from search/read; similarity and a single match "
+            "never select a target. Its read-time revision must still be current, otherwise the "
+            "proposal is rejected as a conflict. Omitted source refs bind only a singleton actual "
+            "event in the current boundary. For multiple events select source_refs explicitly; "
+            "roles and original hashes are retained. user_statement requires user sources, "
+            "tool_observation requires tool sources, and mixed sources need plan/inference. "
+            "Quotations or references do not verify semantic meaning. Use scope to retain "
+            "personal/project/time limits. Tool fields need a captured source and issued "
+            "object_ref; "
+            "only status and label_status can be receipt matched. A committed receipt confirms "
+            "memory storage only. Rejection preserves raw input pending and does not create a "
+            "replacement card."
+        )
+        if service.candidate_contract == "id_revision_v1":
+            manage_tool.description = manage_tool.description.replace(
+                "supply candidate_handle from search/read",
+                "supply id and expected_revision from search/read",
+            )
+        elif service.candidate_contract == "legacy_query_v1":
+            manage_tool.description = (
+                "Frozen legacy target-query control: updates may discover a unique target_query; "
+                "the original query interface binds its revision internally. Source refs still "
+                "bind actual current events; multiple sources require explicit source_refs. "
+                "Prose is unchecked; actual tool facts require captured object refs and fields."
+            )
     if service.receipt_profile == "document_publication_v1":
         base_schema = manage_tool.args_schema
         assert isinstance(base_schema, type) and issubclass(base_schema, BaseModel)
@@ -243,10 +422,34 @@ def create_service_tools(
                 "preferences "
                 "need no receipt JSON. Source/object refs are discovered internally when omitted."
             )
+    if service.mutation_contract == "event_bound_v1":
+        manage_tool.description = manage_tool.description.replace(
+            "Source/object refs are discovered internally when omitted.",
+            "An object ref may be taken from the exactly selected actual source.",
+        ).replace("Refs are discovered internally.",
+                  "An object ref may be taken from the exactly selected actual source.")
     return (
         manage_tool,
+        *([StructuredTool.from_function(recall_context, coroutine=arecall_context,
+                                        name="recall_context")]
+          if recall_provider is not None else []),
         *(
-            StructuredTool.from_function(function, coroutine=coroutine, name=name)
+            [StructuredTool.from_function(read_source, coroutine=aread_source, name="read_source"),
+             StructuredTool.from_function(read_observations, coroutine=aread_observations,
+                                          name="read_observations")]
+            if service.mutation_contract == "event_bound_v1" else []
+        ),
+        *(
+            [StructuredTool.from_function(revise_memory, coroutine=arevise_memory,
+                                          name="revise_memory")]
+            if service.mutation_contract == "event_bound_v1"
+            and service.candidate_contract == "read_handle_v1" else []
+        ),
+        *(
+            StructuredTool.from_function(function, coroutine=coroutine, name=name,
+                args_schema=create_schema_from_function(name, function,
+                    filter_args=["run_manager", "callbacks", "config", "limit", "dense"])
+                if name == "search_memory" and context_provider else None)
             for name, function, coroutine in (
                 ("search_memory", search_memory, asearch_memory),
                 ("read_memory", read_memory, aread_memory),

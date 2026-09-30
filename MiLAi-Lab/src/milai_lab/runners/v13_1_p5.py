@@ -54,7 +54,6 @@ from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
 from milai_lab.memory.service import MemoryService
-from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -145,8 +144,14 @@ def business_schemas(settings: dict[str, Any]) -> list[dict[str, Any]]:
 
 def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[dict[str, Any]]:
     contract = d0._receipt_contract(settings)
+    d0._observation_profile(settings)
+    mutation_contract = d0._mutation_contract(settings)
+    d0._recipe_settings(settings)
     if application_workflow(settings) == "reservation_v1":
-        return d0._catalog(root, mode, receipt_contract=contract)
+        return d0._catalog(root, mode, receipt_contract=contract,
+                           mutation_contract=mutation_contract,
+                           service_options=d0._service_options(settings),
+                           settings=settings)
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
             store,
@@ -156,8 +161,11 @@ def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[
             mode=mode,
             receipt_contract=contract,
             receipt_profile="document_publication_v1",
+            mutation_contract=mutation_contract,
+            **d0._service_options(settings),
         )
-        return [*map(convert_to_openai_tool, create_service_tools(service)), *document_schemas()]
+        return [*map(convert_to_openai_tool, d0._memory_tools(service, settings)),
+                *document_schemas()]
 
 
 def prepare(
@@ -211,6 +219,17 @@ def prepare(
     if "generation_cap_profile" in settings:
         frozen["generation_cap_profile"] = settings["generation_cap_profile"]
         frozen["effective_generation_cap"] = cap
+    if d0._mutation_contract(settings) != "legacy":
+        frozen["memory_mutation_contract"] = d0._mutation_contract(settings)
+    recipe_policy = d0._recipe_settings(settings)
+    if recipe_policy is not None:
+        frozen["memory_reader_policy"] = recipe_policy
+    if d0._observation_profile(settings) is not None:
+        frozen["policy"] = {**frozen["policy"], "windows": {
+            **frozen["policy"]["windows"],
+            "W2_projection": "actual_source_durable_before_projection_commit",
+            "W3_projection": "projection_complete_marker_durable_before_delivery",
+        }}
     seen: set[str] = set()
     with TemporaryDirectory() as temporary:
         for case in fixture["cases"]:
@@ -399,6 +418,8 @@ def step(
                 bank=service._rows(service.namespace),
                 attempts=service._rows(service.attempts_namespace),
             )
+            if frozen["config"].get("memory_observation_profile") is not None:
+                output["observations"] = service.observations()
         if "comparison" in active:
             output["comparison"] = active["comparison"].snapshot()
         if "world" in active:
@@ -487,7 +508,9 @@ def step(
             active["evidence_collected_before_close"] = True
 
     try:
-        if phase not in {"start", "resume"} or window not in {"none", "W1", "W2", "W3"}:
+        if phase not in {"start", "resume"} or window not in {
+            "none", "W1", "W2", "W3", "W2_projection", "W3_projection"
+        }:
             raise ValueError("V13_P5_PHASE_OR_WINDOW_INVALID")
         if type(hit) is not int or hit < 1 or (phase == "resume" and window != "none"):
             raise ValueError("V13_P5_WINDOW_CONTROL_INVALID")
@@ -512,6 +535,9 @@ def step(
         if not 0 <= message_index < len(case["messages"]):
             raise ValueError("V13_P5_MESSAGE_INDEX_INVALID")
         public, settings = case["messages"][message_index], frozen["config"]
+        if (window in {"W2_projection", "W3_projection"}
+                and d0._observation_profile(settings) is None):
+            raise ValueError("V13_PROJECTION_WINDOW_REQUIRES_OPT_IN")
         workflow = application_workflow(settings)
         document_mode = workflow == "document_publication_v1"
         names = DOCUMENT_NAMES if document_mode else BUSINESS_NAMES
@@ -528,6 +554,7 @@ def step(
         )
         config = scope.config()
         config["configurable"]["v13_session"] = scope.episode_id
+        config["configurable"]["v13_turn_id"] = public["message_id"]
         active.update(config=config, thread_id=config["configurable"]["thread_id"])
         output.update(
             message_id=public["message_id"],
@@ -590,6 +617,13 @@ def step(
                         "label_available": label_available,
                     }
                 )
+            def service_observer(event: dict[str, Any]) -> None:
+                trace(event)
+                if event.get("event") == "v13_observation_boundary":
+                    boundary = {"source_persisted": "W2_projection",
+                                "projection_committed": "W3_projection"}[event["phase"]]
+                    crash_at(boundary, "observe", event)
+
             service = MemoryService(
                 store,
                 ("langmem", scope.run_id, scope.arm_id, scope.user_id),
@@ -597,7 +631,9 @@ def step(
                 resource_root / "memory.lock",
                 mode=frozen["mode"],
                 receipt_contract=d0._receipt_contract(settings),
-                observer=trace,
+                mutation_contract=d0._mutation_contract(settings),
+                **d0._service_options(settings),
+                observer=service_observer,
                 **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
                 **({} if composition is None else composition.service_options(frozen)),
             )
@@ -643,6 +679,9 @@ def step(
                 binder = verified_document_ref if document_mode else verified_reservation_ref
                 ref = binder(world, scope.user_id, source_ref, call["name"], body, observer=trace)
                 receipt = service.capture_tool(scope.episode_id, identity, call["name"], body, ref)
+                service.bind_source_boundary(scope.episode_id, str(generating.id),
+                                             [receipt["source_ref"]], append=True)
+                projection = d0._observe_captured(service, receipt["source_ref"], settings, trace)
                 if not receipt["ok"]:
                     raise ValueError("V13_P5_TOOL_SOURCE_CAPTURE_REJECTED:" + receipt["status"])
                 captured = True
@@ -666,6 +705,10 @@ def step(
                                 "source_ref": receipt["source_ref"],
                                 "object_ref": ref.id if ref else None,
                                 "observation_only": True,
+                                **(
+                                    {"observation_capture": projection}
+                                    if projection is not None else {}
+                                ),
                             },
                             ensure_ascii=False,
                         )
@@ -703,6 +746,9 @@ def step(
 
             model = make_model(settings, budget, trace, resource_root)
             stack.callback(model.client.close)
+            recipe = d0._make_recipe(service, settings, model, budget, trace, stack)
+            if recipe is not None and composition is not None:
+                raise ValueError("V13_RECIPE_COMPARISON_HOOK_CONFLICT")
             comparison = None
             if composition is not None:
                 comparison = active["comparison"] = composition.open(
@@ -728,12 +774,15 @@ def step(
                 else _business_tools(world, scope.user_id),
                 business_call_wrapper=wrapper,
                 memory_tools=(
-                    create_service_tools(service, replay_requested=True)
+                    d0._memory_tools(service, settings, replay_requested=True, recipe=recipe)
                     if comparison is None
                     else comparison.tools()
                 ),
                 system_prompt=d0._system_prompt(settings),
-                benchmark_view_hook=None if comparison is None else comparison.hook,
+                benchmark_view_hook=(recipe.hook(d0._system_prompt(settings))
+                                     if recipe is not None and settings.get("memory_reader_policy")
+                                     and settings.get("memory_prefetch", "enabled") == "enabled"
+                                     else None if comparison is None else comparison.hook),
             )
             active["agent"] = agent
             state = agent.get_state(config)
@@ -748,6 +797,8 @@ def step(
             capture_receipt = service.capture_user(
                 scope.episode_id, public["message_id"], public["content"]
             )
+            service.bind_source_boundary(scope.episode_id, public["message_id"],
+                                         [capture_receipt["source_ref"]])
             output["capture_receipt"] = capture_receipt
             if not capture_receipt["ok"]:
                 raise ValueError("V13_P5_USER_SOURCE_CAPTURE_REJECTED")
@@ -799,6 +850,19 @@ def step(
                     config=config,
                     durability="sync",
                 )
+            if service.mutation_contract == "event_bound_v1":
+                final_state = agent.get_state(config)
+                d0._capture_final_assistant(
+                    service, scope.episode_id, public["message_id"],
+                    final_state.values.get("messages", []) if final_state.values else [], trace,
+                )
+                maintenance = d0._maintain_final(
+                    recipe, model, service, settings, scope.episode_id, public["message_id"],
+                    final_state.values.get("messages", []) if final_state.values else [],
+                    config, trace,
+                )
+                if maintenance is not None:
+                    output["semantic_maintenance"] = maintenance
             if comparison is not None:
                 comparison.completed()
             output["status"] = "completed"
@@ -922,7 +986,9 @@ def main() -> None:
     parser.add_argument("--message-index", type=int)
     parser.add_argument("--phase", choices=("start", "resume"), default="start")
     parser.add_argument("--attempt-id", default="start")
-    parser.add_argument("--window", choices=("none", "W1", "W2", "W3"), default="none")
+    parser.add_argument("--window", choices=(
+        "none", "W1", "W2", "W3", "W2_projection", "W3_projection"
+    ), default="none")
     parser.add_argument("--window-tool", choices=(*BUSINESS_NAMES, "manage_memory"))
     parser.add_argument("--hit", type=int, default=1)
     parser.add_argument("--label-available", choices=("true", "false"))

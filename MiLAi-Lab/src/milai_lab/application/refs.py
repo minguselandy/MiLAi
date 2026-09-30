@@ -8,7 +8,43 @@ from collections.abc import Callable
 from typing import Any
 
 from milai_lab.application.world import ApplicationWorld
-from milai_lab.contracts.memory import VerifiedObjectRef
+from milai_lab.contracts.memory import (
+    RECEIPT_PROFILES,
+    ObservationField,
+    ObservationProfile,
+    VerifiedObjectRef,
+)
+
+
+def observation_profile(workflow: str) -> ObservationProfile:
+    """Only public receipt structure; no correctness plans or hidden task metadata.
+
+    document_version orders the document's content, not approval/publication
+    effects. Those fields therefore have no declared ordered version domain.
+    Reservation receipts expose no comparable business version at all.
+    """
+    if workflow == "reservation_v1":
+        return ObservationProfile(
+            profile_id=workflow, adapter_version="1", application="ApplicationWorld.reservation",
+            origins=("reserve_and_label", "get_reservation", "complete_label"),
+            object_id_path=("reservation_id",),
+            fields=(ObservationField("status", ("status",), "string"),
+                    ObservationField("label_status", ("label_status",), "string")),
+        )
+    if workflow == "document_publication_v1":
+        from milai_lab.application.document_publication import DOCUMENT_NAMES
+
+        return ObservationProfile(
+            profile_id=workflow, adapter_version="1", application="ApplicationWorld.document",
+            origins=tuple(DOCUMENT_NAMES), object_id_path=("document_id",),
+            resource_version_path=("document_version",), resource_version_type="integer",
+            fields=tuple(ObservationField(
+                name, (name,), "integer" if dtype == "integer" else "string",
+                version_domain=("document_content"
+                                if name in {"content_digest", "document_version"} else None),
+            ) for name, dtype in RECEIPT_PROFILES[workflow]["fields"].items()),
+        )
+    raise ValueError("V13_OBSERVATION_WORKFLOW_INVALID")
 
 
 def verified_reservation_ref(
