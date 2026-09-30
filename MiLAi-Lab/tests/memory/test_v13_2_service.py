@@ -208,6 +208,7 @@ def test_read_time_revision_conflicts_after_interleaved_update(tmp_path: Path) -
         handle = service.read(first["id"])["candidate_handle"]
     with opened(tmp_path) as concurrent:
         source = user(concurrent, "u2", "Detailed preference")
+        concurrent.bind_source_boundary("s1", "u2", [source])
         result = save(
             concurrent,
             "Detailed preference",
@@ -219,6 +220,7 @@ def test_read_time_revision_conflicts_after_interleaved_update(tmp_path: Path) -
         assert result["revision"] == 2
     with opened(tmp_path) as stale:
         source = user(stale, "u3", "Brief preference")
+        stale.bind_source_boundary("s1", "u3", [source])
         result = save(
             stale,
             "Brief preference",

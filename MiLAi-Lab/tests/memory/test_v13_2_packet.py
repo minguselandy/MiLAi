@@ -121,6 +121,7 @@ def test_dirty_refresh_updates_same_record_and_never_adds_new_backlinks(tmp_path
         record = next(row["record"] for row in packet["packet"]["items"] if row["type"] == "record")
         assert record["id"] == first["id"] and record["revision"] == 1
         newer = bound.user(memory, "correction", "Use detail")
+        memory.bind_source_boundary("s1", "correction", [newer])
         assert memory.revise(
             "s1",
             "patch",

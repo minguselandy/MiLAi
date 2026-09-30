@@ -15,9 +15,22 @@ from langchain_core.tools import (
     StructuredTool,
     create_schema_from_function,
 )
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, WithJsonSchema, create_model
 
 from milai_lab.memory.service import MemoryService
+
+SemanticPatch = Annotated[dict[str, Any], WithJsonSchema({
+    "type": "object",
+    "properties": {
+        "content": {"type": "string"},
+        "scope": {"type": "object", "additionalProperties": True},
+        "basis": {"type": "string", "enum": [
+            "user_statement", "tool_observation", "plan", "inference",
+        ]},
+        "kind": {"type": "string", "enum": ["semantic", "episodic"]},
+    },
+    "additionalProperties": False,
+})]
 
 
 def create_service_tools(
@@ -245,7 +258,7 @@ def create_service_tools(
 
     def revise_memory(
         candidate_handle: str,
-        semantic_patch: dict[str, Any],
+        semantic_patch: SemanticPatch,
         config: RunnableConfig,
         *,
         tool_call_id: Annotated[str, InjectedToolCallId],
@@ -254,9 +267,12 @@ def create_service_tools(
     ) -> ToolMessage:
         """Patch an explicitly selected read-time candidate; preserve other semantic metadata.
 
-        semantic_patch may contain only content, scope, basis and kind. Scope merges
-        named keys. Actual source_refs retain roles; omitted refs bind only a trusted
-        current singleton event, while multiple events require explicit selection.
+        semantic_patch may contain only content, scope, basis and kind; put source_refs
+        beside semantic_patch, never inside it. Scope merges named keys. New revisions
+        need at least one actual source in the trusted current boundary; historical
+        refs can provide additional support. Actual source_refs retain roles; omitted
+        refs bind only a trusted current singleton event, while multiple events require
+        explicit selection. no_change creates no revision and needs no new source.
         All prose remains unchecked.
         Observation fields cannot be patched. Supersede preserves earlier revisions;
         no_change writes no new revision. Conflicts do not create replacement cards.
@@ -362,6 +378,8 @@ def create_service_tools(
             "event in the current boundary. For multiple events select source_refs explicitly; "
             "roles and original hashes are retained. user_statement requires user sources, "
             "tool_observation requires tool sources, and mixed sources need plan/inference. "
+            "Updates need at least one actual current boundary source; historical sources "
+            "may provide additional support. "
             "Quotations or references do not verify semantic meaning. Use scope to retain "
             "personal/project/time limits. Tool fields need a captured source and issued "
             "object_ref; "
@@ -423,6 +441,27 @@ def create_service_tools(
                 "need no receipt JSON. Source/object refs are discovered internally when omitted."
             )
     if service.mutation_contract == "event_bound_v1":
+        base_schema = manage_tool.args_schema
+        assert isinstance(base_schema, type) and issubclass(base_schema, BaseModel)
+        # Annotation metadata survives LangChain's public tool_call_schema subset.
+        # Preserve dictionary DTOs and the existing runtime receipt checks.
+        field_type = (dict[str, Any] if service.receipt_profile == "document_publication_v1"
+                      else dict[str, str])
+        manage_tool.args_schema = create_model(
+            "manage_memory", __base__=base_schema,
+            fields=(Annotated[field_type, WithJsonSchema({
+                "type": "object",
+                "properties": {key: {"type": dtype}
+                               for key, dtype in service.receipt_fields.items()},
+                "additionalProperties": False,
+            })] | None, None),
+        )
+        manage_tool.description += (
+            "\n\nfields contains only literal business receipt claims for this profile: "
+            + ", ".join(service.receipt_fields)
+            + ". Put semantic preferences and their qualifiers in content/scope instead. "
+            "Unknown fields are invalid; do not move rejected values or guess object_ref."
+        )
         manage_tool.description = manage_tool.description.replace(
             "Source/object refs are discovered internally when omitted.",
             "An object ref may be taken from the exactly selected actual source.",

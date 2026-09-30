@@ -105,6 +105,7 @@ def test_source_backlink_finds_cross_language_card_without_rewriting_business_ke
             first["id"]: [1]
         }
         newer = bound.user(service, "u2", "松林项目回复要更详细")
+        service.bind_source_boundary("s1", "u2", [newer])
         revised = service.revise(
             "s1",
             "patch",
@@ -137,6 +138,7 @@ def test_small_patch_preserves_scope_history_and_rejects_observation_fields_or_s
         )
         handle = service.read(first["id"])["candidate_handle"]
         newer = bound.user(service, "u2", "Add a date bound")
+        service.bind_source_boundary("s1", "u2", [newer])
         tools = {tool.name: tool for tool in create_service_tools(service, replay_requested=True)}
         request = {
             "name": "revise_memory",

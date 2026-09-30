@@ -871,6 +871,12 @@ class MemoryService:
                     identity + ":" + _hash(raw), raw, target, "proposal_id_conflict", None
                 )
             reason, source = self._validate(raw)
+            if (reason is None and self.mutation_contract == "event_bound_v1"
+                    and raw.get("action") == "update"
+                    and raw.get("patch_operation") != "no_change"
+                    and not set(raw["source_refs"]).intersection(
+                        self._source_boundaries.get(session, ("", []))[1])):
+                reason = "current_boundary_source_required"
             if reason is None and raw.get("id") is not None and prior is None:
                 reason = "record_not_found"
             if reason is None and prior is not None and metadata is None:
