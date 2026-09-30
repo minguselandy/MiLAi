@@ -1,0 +1,32 @@
+{
+  "status": "ROOT_VERIFIED_WHOLE_UNION_ZERO_MODEL_HTTP",
+  "source_count": 208,
+  "source_closure_sha256": "0340619532520d16d78eb3171234401d41d7a18ae7e706754e8b6ead70ef21cf",
+  "source_identity_artifact_sha256": "7c8c7d29156b36205e4729cbfe3f5fa1f20e160644a03ca564e35cb3e014a698",
+  "comparison_prepare_closure": {
+    "source_count": 207,
+    "sha256": "1831f21caae0fda60509204e8bb3f0529a7585164e56c54cb107a7769a7c3f3e"
+  },
+  "controls_prepare_closure": {
+    "source_count": 206,
+    "sha256": "ec3a5f4218be89f2a9ed0a741496778cd82ab9a96d8ebb9e351769cd9b258b27"
+  },
+  "all_source_and_changed_test_bytes_verified": true,
+  "checks_sha256": {
+    "controls-archive-final-candidate-pytest.txt": "86556f46b631be9691efae53fa9568dc545811a5f15ba70fe06825e4c9fd6b53",
+    "controls-archive-final-mypy.txt": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "controls-archive-final-pytest.txt": "5547cfd5afadedb2a40e131bd39b7e06ee172126784d5d0859b0bab689b16ab6",
+    "controls-archive-final-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "controls-archive-first-mypy.txt": "c71116f4f7fcedf0ce1bcdeeb76f4c745b933fb90abd6b74bcce82bf2dadcf73",
+    "controls-archive-first-pytest.txt": "c5fc669c9a5db1a92515d846f5666d9a23fda37c5fed9f8c014e2f5fda2efa99",
+    "controls-archive-first-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "controls-archive-second-pytest.txt": "5e738f6c641a7763ec368ede6b17fd93a8ce30937e09f0831074e54905c1de32"
+  },
+  "first_failed_root_preparation_retained": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-controls-replay/MiLAi-Lab/artifacts/v13-1-equal-config-development-first-closed-boundary-failure",
+  "default_ingest_closed_contract_unchanged": true,
+  "archive_contract": "opt-in original past fragments; no synthetic assistant/role/ID/time/body repair; real closed turns only summarized; all orphan/unclosed and unsummarized rows delivered in original order; no future task/question/gold argument",
+  "qualification": "32 affected realSDK/Mock provider checks; final8 after annotation correction, Ruff/mypy1; native comparison historical checks retained separately. No model semantic or official scoring evidence yet.",
+  "original_ledger_sha256": "623549365186300918d05c938b81e73d80815507854af274c80908ab6a2b2394",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

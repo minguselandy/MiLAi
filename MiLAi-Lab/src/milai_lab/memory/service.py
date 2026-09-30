@@ -117,6 +117,7 @@ class MemoryService:
         *,
         mode: GroundingMode = "field_grounded",
         receipt_contract: str = "optional",
+        operational_projection: str = "enabled",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -128,6 +129,11 @@ class MemoryService:
         self.store, self.namespace, self.owner = store, namespace, owner
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
+        if type(operational_projection) is not str or operational_projection not in {
+            "enabled", "disabled"
+        }:
+            raise ValueError("V13_OPERATIONAL_PROJECTION_INVALID")
+        self.operational_projection = operational_projection
         self.observer = observer
         self.sources_namespace = (*namespace, "v13_1_sources")
         self.attempts_namespace = (*namespace, "v13_1_attempts")
@@ -509,6 +515,15 @@ class MemoryService:
                 }
                 version.update(finite_claims)
                 receipt.update(finite_claims)
+            if self.operational_projection == "disabled" and source["role"] == "tool":
+                # Identical proposal validation and semantic body/revision commit.
+                # Keep claims in raw diagnostics, but persist no verified field view.
+                version["fields"] = {}
+                for value in (version, receipt):
+                    value["fields_verification"] = "checked_proposal_no_projection"
+                    value["operational_projection"] = "disabled"
+                    if "body_fields_verification" in value:
+                        value["body_fields_verification"] = "checked_proposal_no_projection"
             history = [*(metadata or {}).get("history", []), version]
             proposals = {
                 **(metadata or {}).get("proposals", {}),

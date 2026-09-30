@@ -232,6 +232,165 @@ def test_actual_sdk_reopen_scope_capture_and_question_free_formation(
     )
 
 
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "B3", "B4", "B5", "B6"])
+def test_static_archive_edges_preserved_with_real_sdk_reopen_and_original_wires(
+    tmp_path: Path, arm: str
+) -> None:
+    from milai_lab.baselines.v13_1_controls import ControlsBackend
+
+    config = settings(tmp_path)
+    config["controls"]["summary"]["window_completed_turns"] = 1
+    replies = (
+        [{"summary": "First closed past only."}]
+        if arm == "B3"
+        else [{"answer": "No write needed."}] * 4
+    )
+    model, embed, wires = runtime(tmp_path, config, replies)
+    leading = {
+        "id": "original-leading",
+        "role": "assistant",
+        "content": "Cobalt original leading reply.",
+        "timestamp": None,
+        "session_id": "original",
+    }
+    trailing = {
+        "event_id": "original-trailing",
+        "role": "user",
+        "content": "Original trailing user fragment.",
+        "timestamp": "2026-01-01T00:03:00Z",
+        "session_id": "original",
+    }
+    first, recent = archive("first", "First closed past."), archive("recent", "Recent past.")
+    source = [leading, *first, *recent, trailing]
+    original_bytes = json.dumps(source, ensure_ascii=False)
+    store_path, saver_path = tmp_path / "store.sqlite", tmp_path / "checkpoint.sqlite"
+    with (
+        SqliteStore.from_conn_string(str(store_path)) as store,
+        SqliteSaver.from_conn_string(str(saver_path)) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", arm, "alice", config, model, embed)
+        for index, row in enumerate((leading, trailing)):
+            with pytest.raises(ValueError, match="UNCLOSED_EVENT_BOUNDARY"):
+                backend.ingest("alice", f"default-edge-{index}", [row])
+        assert not wires and backend.snapshot("alice")["archive"] == []
+        with pytest.raises(ValueError, match="OWNER_SCOPE_MISMATCH"):
+            backend.ingest_archive("bob", "leading", [leading])
+        backend.ingest_archive("alice", "leading", [leading])
+        backend.ingest("alice", "first", first)
+        backend.ingest("alice", "recent", recent)
+        backend.ingest_archive("alice", "trailing", [trailing])
+        count = len(wires)
+        replay = backend.ingest_archive("alice", "leading", [leading])
+        assert replay["status"] == ("COMPLETED" if arm == "B0" else "no_change")
+        assert len(wires) == count
+        if arm != "B0":
+            with pytest.raises(ValueError, match="ORIGINAL_EVENT_CHANGED"):
+                backend.ingest_archive("alice", "changed", [{**trailing, "content": "Changed."}])
+        assert json.dumps(source, ensure_ascii=False) == original_bytes
+    with (
+        SqliteStore.from_conn_string(str(store_path)) as store,
+        SqliteSaver.from_conn_string(str(saver_path)) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", arm, "alice", config, model, embed)
+        assert backend.snapshot("alice")["archive"] == ([] if arm == "B0" else source)
+        result = backend.recall("alice", "CURRENT_READER_QUESTION")
+        if arm == "B0":
+            assert result["material"] == "" and not store.search(("v13_1_controls",))
+        if arm == "B1":
+            assert json.loads(result["material"].split("\n", 1)[1])["original_records"] == source
+        if arm == "B2":
+            chunks = json.loads(result["material"].split("\n", 1)[1])
+            assert {chunk["source_id"] for chunk in chunks} == {
+                row.get("event_id", row.get("id")) for row in source
+            }
+            assert sorted(
+                (json.loads(chunk["content"]) for chunk in chunks), key=lambda r: r["content"]
+            ) == sorted(source, key=lambda r: r["content"])
+        if arm == "B3":
+            material = json.loads(result["material"].split("\n", 1)[1])
+            assert material["model_generated_summary"] == "First closed past only."
+            assert material["recent_original_records"] == [leading, *recent, trailing]
+            assert result["delivered_ids"] == [
+                "original-leading",
+                "recentu",
+                "recentf",
+                "original-trailing",
+            ]
+    generation = [wire for path, wire in wires if path.endswith("chat/completions")]
+    if arm == "B3":
+        assert len(generation) == 1
+        payload = json.loads(generation[0]["messages"][1]["content"])
+        assert payload["new_completed_turns"][0]["messages"] == first
+        assert payload["new_completed_turns"][0]["source_ids"] == ["firstu", "firstf"]
+        assert all(row["content"] not in json.dumps(generation) for row in (leading, trailing))
+    if arm in {"B4", "B5"}:
+        delivered = [
+            json.loads(wire["messages"][1]["content"].split("[Archived conversation data]\n", 1)[1])
+            for wire in generation
+        ]
+        assert delivered == [[leading], first, recent, [trailing]]
+    assert all("CURRENT_READER_QUESTION" not in json.dumps(wire) for wire in generation)
+    assert model.client.budget.state["generation_requests"] == (
+        1 if arm == "B3" else 4 if arm in {"B4", "B5"} else 0
+    )
+
+
+def test_archive_pending_tool_calls_are_not_summary_closed_turns(tmp_path: Path) -> None:
+    from milai_lab.baselines.v13_1_controls import ControlsBackend
+
+    config = settings(tmp_path)
+    model, embed, wires = runtime(tmp_path, config, [{"summary": "Completed past only."}])
+    first = archive("first", "Completed original past.")
+    pending = [
+        {"id": "pending-user", "role": "user", "content": "Past pending request."},
+        {
+            "id": "pending-assistant",
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [{"id": "original-call", "name": "lookup", "args": {}}],
+        },
+        {
+            "id": "pending-tool",
+            "role": "tool",
+            "tool_call_id": "original-call",
+            "content": "Actual public observation.",
+        },
+        {
+            "id": "pending-next-call",
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [{"id": "original-next", "name": "lookup", "args": {}}],
+        },
+    ]
+    path = tmp_path / "store.sqlite"
+    with (
+        SqliteStore.from_conn_string(str(path)) as store,
+        SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", "B3", "alice", config, model, embed)
+        backend.ingest("alice", "first", first)
+        with pytest.raises(ValueError, match="UNCLOSED_EVENT_BOUNDARY"):
+            backend.ingest("alice", "pending-default", pending)
+        backend.ingest_archive("alice", "pending-archive", pending)
+    with (
+        SqliteStore.from_conn_string(str(path)) as store,
+        SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.sqlite")) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", "B3", "alice", config, model, embed)
+        state = backend.snapshot("alice")
+        assert state["archive"] == [*first, *pending] and state["covered_ordinal"] == 0
+        material = json.loads(
+            backend.recall("alice", "CURRENT_QUESTION")["material"].split("\n", 1)[1]
+        )
+        assert material["recent_original_records"] == pending
+    assert len(wires) == 1
+    assert (
+        json.loads(wires[0][1]["messages"][1]["content"])["new_completed_turns"][0]["messages"]
+        == first
+    )
+    assert model.client.budget.state["generation_requests"] == 1
+
+
 def test_embedding_overcapacity_rejects_before_any_mock_http_even_with_tokenizer_truncation(
     tmp_path: Path,
 ) -> None:

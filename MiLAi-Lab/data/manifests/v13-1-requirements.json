@@ -619,8 +619,13 @@
       "requirement": "Same refs/guard/discovery: no projection, Receipt-RAG, full candidate; neutral recovery request",
       "authoritative_evidence_required": "all three real lifecycle comparisons without injection labels entering Agent",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "evidence": [
+        "data/manifests/v13-1-p5-comparison-source-acceptance.json",
+        "data/manifests/v13-1-p5-comparison-development-candidates.json",
+        "docs/V13_1_P5_COMPARISON.md"
+      ],
+      "conditional": false,
+      "qualification": "Source/runtime composition mechanically checked; actual comparison NOT_RUN. Finite-fields-view ablation only, not a general automatic O_t projector. Current six old single-workflow development cases do not replace Pilot-L12 or formal60 independent bases/two substantive workflows. Native ADD-only/manual UPDATE and native/matched maintenance timing remain separate."
     },
     {
       "id": "P6-pilotS",

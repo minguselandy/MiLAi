@@ -75,7 +75,8 @@
     "tests/memory/test_v13_1_d0.py",
     "tests/unit/test_v13_1_baseline_micro.py",
     "tests/memory/test_v13_1_p5.py",
-    "tests/unit/test_v13_1_controls.py"
+    "tests/unit/test_v13_1_controls.py",
+    "tests/memory/test_v13_1_p5_compare.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -112,7 +113,8 @@
     "tests/memory/test_v13_1_d0.py",
     "tests/unit/test_v13_1_baseline_micro.py",
     "tests/memory/test_v13_1_p5.py",
-    "tests/unit/test_v13_1_controls.py"
+    "tests/unit/test_v13_1_controls.py",
+    "tests/memory/test_v13_1_p5_compare.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",

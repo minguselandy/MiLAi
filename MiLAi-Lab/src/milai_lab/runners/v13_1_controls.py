@@ -249,7 +249,7 @@ def operation(
     attempts = {"generation": 0, "embedding": 0}
 
     def emit(event: dict[str, Any]) -> None:
-        if event["event"] == "vllm_request":
+        if event["event"] in {"vllm_response", "vllm_error"}:
             attempts["embedding" if event["path"] == "embeddings" else "generation"] += 1
         if output["first_error"] is None and event["event"] in {
             "vllm_error",

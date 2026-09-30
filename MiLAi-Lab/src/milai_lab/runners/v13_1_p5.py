@@ -95,7 +95,8 @@ def _sdk() -> dict[str, Any]:
 
 def _binding(frozen: dict[str, Any], case: dict[str, Any], index: int) -> dict[str, Any]:
     public = case["messages"][index]
-    scope = FoundationScope(frozen["run_id"], frozen["mode"], case["owner"], public["session_id"])
+    scope = FoundationScope(frozen["run_id"], frozen.get("scope_arm", frozen["mode"]),
+                            case["owner"], public["session_id"])
     authorization = public.get("application_binding")
     if not isinstance(authorization, dict) or set(authorization) - {
         "task_id",
@@ -283,6 +284,7 @@ def step(
     attempt_id: str = "start",
     label_available: bool | None = None,
     world_event_id: str | None = None,
+    composition: Any = None,
 ) -> dict[str, Any]:
     """One process/attempt. Hard kill intentionally bypasses cleanup and final delivery."""
     wall, cpu = time.perf_counter_ns(), time.process_time_ns()
@@ -339,6 +341,8 @@ def step(
                 bank=service._rows(service.namespace),
                 attempts=service._rows(service.attempts_namespace),
             )
+        if "comparison" in active:
+            output["comparison"] = active["comparison"].snapshot()
         if "world" in active:
             # Evaluator sidecar only. Never fed into graph, prompt or any tool input.
             output["world"] = active["world"].snapshot()
@@ -438,13 +442,14 @@ def step(
             )
         ):
             raise ValueError("V13_P5_WORLD_EVENT_INVALID")
-        frozen = _frozen(root)
+        frozen = _frozen(root) if composition is None else composition.frozen(root)
         case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
         if not 0 <= message_index < len(case["messages"]):
             raise ValueError("V13_P5_MESSAGE_INDEX_INVALID")
         public, settings = case["messages"][message_index], frozen["config"]
         scope = FoundationScope(
-            frozen["run_id"], frozen["mode"], case["owner"], public["session_id"]
+            frozen["run_id"], frozen.get("scope_arm", frozen["mode"]),
+            case["owner"], public["session_id"]
         )
         config = scope.config()
         config["configurable"]["v13_session"] = scope.episode_id
@@ -491,6 +496,7 @@ def step(
                 mode=frozen["mode"],
                 receipt_contract=d0._receipt_contract(settings),
                 observer=trace,
+                **({} if composition is None else composition.service_options(frozen)),
             )
             active["service"] = service
 
@@ -543,6 +549,8 @@ def step(
                         "origin": row["origin"],
                     }
                 )
+                if "comparison" in active:
+                    active["comparison"].observed(receipt["source_ref"])
                 if not wrap:
                     return response
                 return response.model_copy(
@@ -575,7 +583,9 @@ def step(
                             "receipt": receipt,
                         }
                     )
-                    if receipt.get("ok") and receipt.get("status") == "committed":
+                    if (receipt.get("ok") and receipt.get("status") == "committed"
+                            and (composition is None or
+                                 request.tool_call["args"].get("action") == "update")):
                         crash_at(
                             "W3", name, {"requested_call": request.tool_call, "receipt": receipt}
                         )
@@ -583,14 +593,24 @@ def step(
 
             model = make_model(settings, budget, trace, resource_root)
             stack.callback(model.client.close)
+            comparison = None
+            if composition is not None:
+                comparison = active["comparison"] = composition.open(
+                    frozen=frozen, service=service, store=store, saver=saver,
+                    scope=scope, model=model, budget=budget, trace=trace,
+                    resource_root=resource_root, stack=stack, crash_at=crash_at,
+                    wrapper=wrapper,
+                )
             agent = build_agent(
                 model,
                 store,
                 saver,
                 _business_tools(world, scope.user_id),
                 business_call_wrapper=wrapper,
-                memory_tools=create_service_tools(service, replay_requested=True),
+                memory_tools=(create_service_tools(service, replay_requested=True)
+                              if comparison is None else comparison.tools()),
                 system_prompt=d0._system_prompt(settings),
+                benchmark_view_hook=None if comparison is None else comparison.hook,
             )
             active["agent"] = agent
             state = agent.get_state(config)
@@ -637,6 +657,8 @@ def step(
                     agent, scope, journal, world, _RecoveryCapture(capture, trace)
                 )
                 state = agent.get_state(config)
+                if comparison is not None:
+                    comparison.recovered(state.values.get("messages", []))
             if phase == "start" or state.next:
                 agent.invoke(
                     None
@@ -649,6 +671,8 @@ def step(
                     config=config,
                     durability="sync",
                 )
+            if comparison is not None:
+                comparison.completed()
             output["status"] = "completed"
             if window != "none":
                 output["window_status"] = "NOT_REACHED"

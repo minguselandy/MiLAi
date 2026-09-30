@@ -55,6 +55,19 @@ def _closed_turns(
     return turns, [originals[id(row)] for row in unclosed]
 
 
+def _summary_turns(
+    records: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    turns, unclosed = _closed_turns(records)
+    completed: list[dict[str, Any]] = []
+    for turn in turns:
+        if turn["messages"][-1].get("tool_calls"):
+            unclosed.extend(turn["messages"])
+        else:
+            completed.append({**turn, "ordinal": len(completed)})
+    return completed, unclosed
+
+
 def validate_config(config: dict[str, Any]) -> None:
     controls = config["controls"]
     if type(controls["material_max_tokens"]) is not int or controls["material_max_tokens"] < 1:
@@ -228,6 +241,26 @@ class ControlsBackend:
 
     def ingest(self, owner: str, boundary_id: str, records: list[dict[str, Any]]) -> dict[str, Any]:
         """Only closed past records. No query/question/task/gold argument exists."""
+        return self._ingest(owner, boundary_id, records, archive_fragment=False)
+
+    def ingest_archive(
+        self, owner: str, boundary_id: str, records: list[dict[str, Any]]
+    ) -> dict[str, Any]:
+        """Opt-in original past archive fragments, including orphan/unclosed rows.
+
+        The caller supplies chronological past data only. No task or reader
+        question is accepted; rows are never repaired or synthetically closed.
+        """
+        return self._ingest(owner, boundary_id, records, archive_fragment=True)
+
+    def _ingest(
+        self,
+        owner: str,
+        boundary_id: str,
+        records: list[dict[str, Any]],
+        *,
+        archive_fragment: bool,
+    ) -> dict[str, Any]:
         self._owner(owner)
         if not boundary_id or not records:
             raise ValueError("CONTROL_CLOSED_BOUNDARY_REQUIRED")
@@ -240,9 +273,14 @@ class ControlsBackend:
                 or row.get("owner", owner) != owner
             ):
                 raise ValueError("CONTROL_ORIGINAL_RECORD_INVALID")
-        turns, unclosed = _closed_turns(records)
-        if unclosed or not turns or any(turn["messages"][-1].get("tool_calls") for turn in turns):
-            raise ValueError("CONTROL_UNCLOSED_EVENT_BOUNDARY")
+        if not archive_fragment:
+            turns, unclosed = _closed_turns(records)
+            if (
+                unclosed
+                or not turns
+                or any(turn["messages"][-1].get("tool_calls") for turn in turns)
+            ):
+                raise ValueError("CONTROL_UNCLOSED_EVENT_BOUNDARY")
         if self.arm == "B0":
             return {
                 "status": "COMPLETED",
@@ -272,6 +310,8 @@ class ControlsBackend:
                 seen[key] = row
         state["archive"].extend(added)
         state["boundaries"][boundary_id] = {"status": "RAW_CAPTURED", "source_sha256": source_hash}
+        if archive_fragment:
+            state["boundaries"][boundary_id]["input_mode"] = "past_archive_fragment"
         self._put(state)
         agent = None
         try:
@@ -292,7 +332,7 @@ class ControlsBackend:
                 if self.arm == "B6":
                     state["projection"] = receipt_projection(state["archive"])
             elif self.arm == "B3":
-                all_turns, _ = _closed_turns(state["archive"])
+                all_turns, _ = _summary_turns(state["archive"])
                 policy = self.config["controls"]["summary"]
                 stop = max(0, len(all_turns) - policy["window_completed_turns"])
                 newly_covered = all_turns[state["covered_ordinal"] + 1 : stop]
@@ -382,20 +422,24 @@ class ControlsBackend:
         if any(row["status"] != "COMPLETED" for row in state["boundaries"].values()):
             raise ValueError("CONTROL_MAINTENANCE_INCOMPLETE")
         if self.arm in {"B1", "B3"}:
-            value = (
-                {"original_records": state["archive"]}
-                if self.arm == "B1"
-                else {
+            if self.arm == "B1":
+                value = {"original_records": state["archive"]}
+            else:
+                turns, unclosed = _summary_turns(state["archive"])
+                recent_ids = {event_id(row) for row in unclosed}
+                recent_ids.update(
+                    event_id(row)
+                    for turn in turns
+                    if turn["ordinal"] > state["covered_ordinal"]
+                    for row in turn["messages"]
+                )
+                value = {
                     "model_generated_summary": state["summary"],
                     "covered_ordinal": state["covered_ordinal"],
                     "recent_original_records": [
-                        r
-                        for t in _closed_turns(state["archive"])[0]
-                        if t["ordinal"] > state["covered_ordinal"]
-                        for r in t["messages"]
+                        row for row in state["archive"] if event_id(row) in recent_ids
                     ],
                 }
-            )
             material = self._material(value)
             if not self._fits(material):
                 raise ValueError("CONTROL_MATERIAL_CAPACITY_EXCEEDED")
