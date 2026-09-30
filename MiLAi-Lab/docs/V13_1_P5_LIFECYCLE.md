@@ -19,3 +19,13 @@ clean与partial三条消息链完成，实际同一record UPDATE保留历史；�
 Root以公共SDK重开六个实际数据库核对bank/source/rejected attempts/world和owner隔离；所有已提交历史revision的两个业务字段都与真实Source一致。六案均仅一个目标正确的预约，无错误业务副作用。73次实际生成、300,948 tokens全部与原账本核对，embedding新增0，unknown usage0，Judge0。完整账本增至6,584次生成/12,305,254生成tokens/420,830 embeddingtokens。
 
 下一步只增加一轮单独冻结的通用JSON正文说明；源码、guard、工具catalog、模型、上限及六个开发身份保持一致，以新隔离资源执行，继续原账本。首轮失败不会改判，提示改变不能归因为恢复架构的收益。
+
+[通用格式诊断R2](../data/manifests/v13-1-p5-lifecycle-r2-results.json)已完成全部计划分母：18条消息中12完成、3耗尽预算、3NOT_RUN；实际18个不同子进程，W1两种实际效果与W2均真实硬终止。clean完整链通过受限字段检查；partial与known-no-effect完成回答但未保存记忆，另三案未完成。因此完整生命周期只有1/6受限成功，不能用12条完成回答宣称整体提升。
+
+unknown-no-effect恢复实际查询标签不存在，再按已授权的有限合同成功补标签；原始丢失回执仍UNKNOWN。unknown-effect-happened不重复标签。两者都因记忆提案失败而耗尽后续预算，最终回答未完成。所有六案业务对象正确且仅一次预约，没有错误实际副作用。
+
+R2实际45个唯一记忆提案中3提交、42拒绝。10个提案把当前created绑定到原先not_created的真实SourceRef，Field guard拒绝；它们还猜错expected_revision，不能据此推断只有字段guard能阻止错误。四案多次遗漏独立fields参数；空bank上的update也失败。拒绝提案须同时从bank的proposals和独立attempts命名空间读取，不能漏算既有record的拒绝。
+
+跨会话search_memory实际返回原始归档raw_events，即使bank为空也可能正确回答历史；这只能支持归档访问，不能算保存/修订成功。部分回答还错误地把记忆参数验证失败归因于标签服务不可用，或将当前查询status误说为先前reserved_label_failed。均保留为语义反例。
+
+R2新增82次生成、396,021 tokens；两轮合计155次/696,969 tokens，embedding新增0，unknown usage0，Judge0。连续账本为6,666次生成/12,701,275生成tokens/420,830 embeddingtokens。不会再尝试提示变体。原W3案例仍失败；可以用真实clean bank的完整未修改副本，增加一条中性公开消息单独验证W3 UPDATE机械行为，并单列为非独立机制证据。

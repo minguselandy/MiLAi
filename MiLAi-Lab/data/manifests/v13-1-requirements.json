@@ -375,7 +375,9 @@
         "data/manifests/v13-1-p2-typed-receipts-results.json",
         "docs/V13_1_P2_TYPED_RECEIPTS.md",
         "data/manifests/v13-1-p2-history-delivery-results.json",
-        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+        "data/manifests/v13-1-p2-explicit-history-query-results.json",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md"
       ],
       "conditional": false
     },
@@ -553,7 +555,8 @@
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
-        "docs/V13_1_P5_LIFECYCLE.md"
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
       ],
       "conditional": false,
       "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
@@ -568,7 +571,8 @@
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
-        "docs/V13_1_P5_LIFECYCLE.md"
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
       ],
       "conditional": false,
       "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
@@ -583,7 +587,8 @@
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
-        "docs/V13_1_P5_LIFECYCLE.md"
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
       ],
       "conditional": false,
       "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
