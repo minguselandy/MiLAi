@@ -1,0 +1,847 @@
+{
+  "kind": "MILAI_V13_1_PROSPECTIVE_PILOT_RESERVATION",
+  "status": "METADATA_IDENTITIES_RESERVED_NO_NEW_CONTENT_EMITTED_NO_MODEL_CALLS",
+  "selection_seed": "v13-1-pilot-source-reservation:20260930",
+  "old_exposure": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/data/manifests/v13-1-source-exposure.json",
+    "sha256": "ce9e9b8d499d441091e9050332e19dbdccf5af18ecefb875d845bc0ca5df2b44"
+  },
+  "availability": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/data/manifests/v13-1-memsyco-source-availability.json",
+    "sha256": "b6b28e3e79f3fcaceceff1b1db355ddeb5c182e9b02ad3658c4455b919f5eec8"
+  },
+  "memsyco": {
+    "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+    "official_source_files": [
+      {
+        "task": "contextual_scope_control",
+        "relative_path": "data/contextual_scope_control.jsonl",
+        "sha256": "a233ee49a17434255fd372a95284f57bfa3bbbbcbb5cf9be2d0c6c793865d748",
+        "row_count": 300
+      },
+      {
+        "task": "valid_memory_selection",
+        "relative_path": "data/valid_memory_selection.jsonl",
+        "sha256": "7db0f062306a925f7cea9ea9cfb32cb94bbe2bb17999eff3e4a764aeabc4d498",
+        "row_count": 350
+      },
+      {
+        "task": "personalized_memory_use",
+        "relative_path": "data/personalized_memory_use.jsonl",
+        "sha256": "7e4384008478265e338c8571a0f6d8e7a8720439f97dff8e735c1c858f613e17",
+        "row_count": 300
+      }
+    ],
+    "rule": "For each task, choose lowest SHA256(seed+colon+nativecaseID)20 from whole components untouched by all prior exposure/reservation. No content/gold/outcome/length selection. Reserve ALL members of every selected component for development; source groups may repeat within pilot and must be clustered, never split into formal.",
+    "selected": [
+      {
+        "case_id": "mso_hard_000078",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000078",
+        "dialogue_sha256": "80050a6b3d9a58756e35b71efe31643b3e0555e81ce53a3fd33576555cd60359",
+        "raw_line_sha256": "c1e3baecd622b687631ba77c776525d2f387d00992472f8ef484836f521e675a",
+        "source_group_id": "v13-memsyco-source-c6100b8f5322db9f3fc5ae5c"
+      },
+      {
+        "case_id": "mso_hard_000297",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000297",
+        "dialogue_sha256": "eb31f2aff78c9151012ef3892c21abead89fbb68d370dd721c8e6791c333c235",
+        "raw_line_sha256": "d671bbdf58869b5c496e9f9ad421f4f89244de4464f5f68f343785cc1861c93f",
+        "source_group_id": "v13-memsyco-source-8e69a3fc822d752a501e1b84"
+      },
+      {
+        "case_id": "mso_hard_000129",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000129",
+        "dialogue_sha256": "f052ba38e4ba26f7ff5d66ee654ea6cd21ce3f7a8ab369bb060bf0b5257c9051",
+        "raw_line_sha256": "76aae96e5bb8f8af93243a5e504ed61c876a7b19bb5c6a123132072a49daa72e",
+        "source_group_id": "v13-memsyco-source-2cb84914103d44e1a6758ca1"
+      },
+      {
+        "case_id": "mso_hard_000151",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000151",
+        "dialogue_sha256": "1d188875c774ef418fb60e490478b68e3517d574d0b6ab0f43f897469477801e",
+        "raw_line_sha256": "f47a1a6427339e889193f0b93c1a874129db2a11e55725da4edb4006230c62d3",
+        "source_group_id": "v13-memsyco-source-4ba5e3faf13bf7fa5ad5dc72"
+      },
+      {
+        "case_id": "mso_hard_000140",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000140",
+        "dialogue_sha256": "3a02ba339ae0ef25515ebcc4db2a54c135ea80f2f291da85143ff426f104ad13",
+        "raw_line_sha256": "3938128f75e11c899cde2f11b575d901703c31a2e9a56a2ccd9a0aa17fdce26c",
+        "source_group_id": "v13-memsyco-source-24051c138f7e8b1bef092593"
+      },
+      {
+        "case_id": "mso_hard_000173",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000173",
+        "dialogue_sha256": "0fcd803965ff21c9e207a2ec1c640a0cf742a086bb449ef16989145764782667",
+        "raw_line_sha256": "34eb81dab7598484f12ad3c44902008431afe5091b89fd60bb513df32adc2f87",
+        "source_group_id": "v13-memsyco-source-1e3849c7f42e8c15da0db934"
+      },
+      {
+        "case_id": "mso_hard_000251",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000251",
+        "dialogue_sha256": "ffb65c38d609dd0f90dfd473f8254c7e3bebf001238d2d2c8063090955bd834a",
+        "raw_line_sha256": "43f468ab5786e66dd2288b282e6e79ef2f5e3b7e6ada1b653428093164c1b5f0",
+        "source_group_id": "v13-memsyco-source-006b35d6de6e8e50d1d149d7"
+      },
+      {
+        "case_id": "mso_hard_000019",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000019",
+        "dialogue_sha256": "02bf9fbe07f861fa7f1e6d3ce95c8938249fa50ea8c47042bc0dbf3312e1a465",
+        "raw_line_sha256": "1c9175f463a637895ac63de1506ef2ff5258057fc3a8b3af4a017733eafcbf86",
+        "source_group_id": "v13-memsyco-source-74735829ccb7fae3ea771b91"
+      },
+      {
+        "case_id": "mso_hard_000211",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000211",
+        "dialogue_sha256": "eda9309c1a08d14e2ed968f29b5341a3506043c3543d877950199c177b0b4b79",
+        "raw_line_sha256": "4b8e489df5c1425ef9fb4ff5a3c99afa1874351d5b55c04490ed4694c0064044",
+        "source_group_id": "v13-memsyco-source-b42568fcf936f25b08e8019e"
+      },
+      {
+        "case_id": "mso_hard_000045",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000045",
+        "dialogue_sha256": "02d2cef760c8695b90e1406ca23118cd74f5e37202dcdf3498431ae5ce33874c",
+        "raw_line_sha256": "d3ce0588bdadf1dd5f6fb25f05c6aa015cc2e9daf3ecd6a26889fdf5257c36c6",
+        "source_group_id": "v13-memsyco-source-470ca88c561b07e68fa30ab2"
+      },
+      {
+        "case_id": "mso_hard_000202",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000202",
+        "dialogue_sha256": "70bcd5a62a6eaefbfc9997a92d918c96e9a86ac7659c45dab27a93e93954e327",
+        "raw_line_sha256": "746e280c7bd3bb20774b0e78f81efeb4d9dd84bd05698fca999aa570d0ab40bc",
+        "source_group_id": "v13-memsyco-source-0677927e59081a315de65309"
+      },
+      {
+        "case_id": "mso_hard_000248",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000248",
+        "dialogue_sha256": "af9760c8fb3975b3448789b563c48bfd69aff498acfc56323d51b445e3b76df9",
+        "raw_line_sha256": "dbb2e715fe7454a26e000911b1dd79eb911502711afd508932378558e83b4dd6",
+        "source_group_id": "v13-memsyco-source-708e0e8371f58d851ccd1246"
+      },
+      {
+        "case_id": "mso_hard_000114",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000114",
+        "dialogue_sha256": "8df5e16ee66f44d8bfd1986f039224d24c342b3b04bafccde4d8e62cf46b1fac",
+        "raw_line_sha256": "2ca53d678dd79922ffdc77530c37227d0875daaf8feccf0d8455a7fe6c80efbd",
+        "source_group_id": "v13-memsyco-source-9a2c6001317835b621bb62e3"
+      },
+      {
+        "case_id": "mso_hard_000025",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000025",
+        "dialogue_sha256": "88155461f5713b06ead76b88f0263b181d8e397d25a4f2ae2e2f987d51891d47",
+        "raw_line_sha256": "7dec99f99b2fc805793576d8ff7419a2cc3d101baea950e127da0e80d1d93953",
+        "source_group_id": "v13-memsyco-source-336b700675a3c4a97e9e661f"
+      },
+      {
+        "case_id": "mso_hard_000285",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000285",
+        "dialogue_sha256": "d9decc0e97a46a8d0805d83de9a4655540e624709bbebdb3f35d7a16905b1ad5",
+        "raw_line_sha256": "3782d9a9a288ef00473dcec4ae5728e03aaede23c26e9378b97c41445bbfdad3",
+        "source_group_id": "v13-memsyco-source-a890991ef0d8cc992f70662e"
+      },
+      {
+        "case_id": "mso_hard_000254",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000254",
+        "dialogue_sha256": "ec39e9731d26ccb61145c933def05889987d649ddc80f2b5ba9d027faa805435",
+        "raw_line_sha256": "256caf850306c24acc1e95380d16e342b4ec100f38f7137f0c5619daf964d4da",
+        "source_group_id": "v13-memsyco-source-4aa8c3ac86e5340f9f93dbb0"
+      },
+      {
+        "case_id": "mso_hard_000175",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000175",
+        "dialogue_sha256": "da6af476f4e7dde87fdbce85bcbcdcb2460d1a6c3d1f15a015294d425147412b",
+        "raw_line_sha256": "5660df355e67753b5dd5f5152a2c64964a539508c7bb8feac4bf3073efad9b4b",
+        "source_group_id": "v13-memsyco-source-75dbaa21a1f8ee83396a8077"
+      },
+      {
+        "case_id": "mso_hard_000136",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000136",
+        "dialogue_sha256": "f93d1ce383f9bcba6545fe1d2c4392bb970144d775e5eebe0e6984f1c209342c",
+        "raw_line_sha256": "af9dc1fb1d542701bfb49280fc238a09c18f4f43ee541b3cd38786c4a0e083af",
+        "source_group_id": "v13-memsyco-source-420bb382de061e9bd625639f"
+      },
+      {
+        "case_id": "mso_hard_000008",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000008",
+        "dialogue_sha256": "d60bfba12e5bce82e4fd8c5318f76084414eadcea82f9b6877352850bce4001f",
+        "raw_line_sha256": "6ad4947de806393d6ccc3d2f404d81b67312788330c8a0b2524c8c1a8da4cb9f",
+        "source_group_id": "v13-memsyco-source-36ac4ed1e39a289e5a7389ce"
+      },
+      {
+        "case_id": "mso_hard_000157",
+        "task": "contextual_scope_control",
+        "native_source_id": "mso_hard_000157",
+        "dialogue_sha256": "0f6aad5c8dac3ecb44a300a5bb56c91aa8817a3c5b92206d4227b9a8281ca326",
+        "raw_line_sha256": "32dbbfd13fd3e8a27953eac7fafaafa2495e9ca5ea9f4b6c55ef75ee56066a57",
+        "source_group_id": "v13-memsyco-source-3fb281bceb52c89fd01dc1eb"
+      },
+      {
+        "case_id": "v11_000904",
+        "task": "valid_memory_selection",
+        "native_source_id": "9b5d8c65-f439-47da-a21b-f05743cba515",
+        "dialogue_sha256": "b4111bafe1059f42e27dd3bb00ff5983a9b04420b8a1047cb4931c28a5b8a3b0",
+        "raw_line_sha256": "b483d7ee503b9812006128e10bc802ad0c786efe3175dac17f9be759638f00a2",
+        "source_group_id": "v13-memsyco-source-087c174927202c7edd262ba2"
+      },
+      {
+        "case_id": "v11_001028",
+        "task": "valid_memory_selection",
+        "native_source_id": "ceaba7cf-7f7d-4bbb-9927-fdb1af713fc4",
+        "dialogue_sha256": "ae1a74aa8e1e1662bbecd444c38d5298c8b9915fb545a4ef94118fabf184c0ec",
+        "raw_line_sha256": "61ac08aa2f9a22074d82aa008a64062b873a697eb6e4113b6b76f623e347eeb1",
+        "source_group_id": "v13-memsyco-source-5aaddb7f9f0ea6c21cee8762"
+      },
+      {
+        "case_id": "v11_000995",
+        "task": "valid_memory_selection",
+        "native_source_id": "a2543130-a95f-4bb4-877f-0d82314abfa3",
+        "dialogue_sha256": "e34ed2346d6fbda54d0642d8e8a457f450cc5f7062a124ace36823417680db79",
+        "raw_line_sha256": "3c8770a172d68c895dd5c32582f9035e6afe3f136d14ecf51a3d078d7331947f",
+        "source_group_id": "v13-memsyco-source-735934bd85db81d345b41b60"
+      },
+      {
+        "case_id": "v11_000437",
+        "task": "valid_memory_selection",
+        "native_source_id": "344ea859-e70d-48d2-8a97-7b68a104c6ae",
+        "dialogue_sha256": "af493a4ccaa98b85c38a07e4ae1fce459e48b72278f041c5d313a0948d98f3ea",
+        "raw_line_sha256": "9c622cf21b9686978a7635091929ce771402733d9d0c348609256f5c8e1c5ff1",
+        "source_group_id": "v13-memsyco-source-0d650b47368d8598f1fdbea8"
+      },
+      {
+        "case_id": "v11_001014",
+        "task": "valid_memory_selection",
+        "native_source_id": "78ebcdd3-c419-4777-be35-ab836f645b9e",
+        "dialogue_sha256": "85d97196fb695e3ac9a556421431523e11bce47628c560232265dc2b59d1521a",
+        "raw_line_sha256": "08fcf93d8d3b0764cd918d443934af4007993a624c803a4defa0ca9127837a78",
+        "source_group_id": "v13-memsyco-source-165d26ae94d5fe01fa480ed5"
+      },
+      {
+        "case_id": "v11_000813",
+        "task": "valid_memory_selection",
+        "native_source_id": "4537a81c-a44f-49b9-aa76-a04dbd1118b2",
+        "dialogue_sha256": "db76820381a0df418706cec742b369a2e3d986a4925fb0db99f00f90cb6c5a3c",
+        "raw_line_sha256": "df7529ffe4b5d95d4d0edebe34230ab3c600e684b782de4c944baf45ca7996bc",
+        "source_group_id": "v13-memsyco-source-44ba2a27b57f92cfda43199a"
+      },
+      {
+        "case_id": "v11_000848",
+        "task": "valid_memory_selection",
+        "native_source_id": "845b91bc-8cd5-451d-a6fe-dd2b176e5758",
+        "dialogue_sha256": "e3065109aecf952d806868783a636895a6c035759a24007c9948a1db18e4fc6c",
+        "raw_line_sha256": "a7d25edec17a6fd9e5ddc5ca332d1c3d9c63962e5954f2087d414c17e9986175",
+        "source_group_id": "v13-memsyco-source-c03fc9a174ad1be71c7c457b"
+      },
+      {
+        "case_id": "v11_000619",
+        "task": "valid_memory_selection",
+        "native_source_id": "a09f9d41-c40f-4b86-b94e-03691a4bd945",
+        "dialogue_sha256": "437ab55196192a41a6da505555b9b70376349356f7cd1e879e0a22a9f91c449d",
+        "raw_line_sha256": "aa8ab921bd5d88d77a8cb95dc80dc683e8e59be39cd6c609eb850f153384bcf6",
+        "source_group_id": "v13-memsyco-source-52fa73c0e33a49736fce1fea"
+      },
+      {
+        "case_id": "v11_000616",
+        "task": "valid_memory_selection",
+        "native_source_id": "a09f9d41-c40f-4b86-b94e-03691a4bd945",
+        "dialogue_sha256": "c0358ac09c27a01dae3777d1ada7dda87fb7cf5df50bf0ab1abc768f66952bc7",
+        "raw_line_sha256": "0623e6e3fd36d7e5fa8648965d41caa91ab20704d5e67b6f6d08850686914ccf",
+        "source_group_id": "v13-memsyco-source-52fa73c0e33a49736fce1fea"
+      },
+      {
+        "case_id": "v11_000527",
+        "task": "valid_memory_selection",
+        "native_source_id": "098bb7ce-49fb-457e-a8bd-82a6dc63c060",
+        "dialogue_sha256": "a0deb7aa527e903ec92824a63c8974f6a9d0bee341a299fbe4b2683a47ecbe8c",
+        "raw_line_sha256": "70f9e9b533a2255ac3553813ee560d6c65f53614fff69af4a69f508f90f06984",
+        "source_group_id": "v13-memsyco-source-9050954adf8b9b8ec06b45ac"
+      },
+      {
+        "case_id": "v11_001032",
+        "task": "valid_memory_selection",
+        "native_source_id": "ceaba7cf-7f7d-4bbb-9927-fdb1af713fc4",
+        "dialogue_sha256": "04d62e137c64c6ea6a744b91b569ff3e46b24689edddad6041bcf6b87a0cdb35",
+        "raw_line_sha256": "41e5e426babc54fe7a5f34a3766b0d9a806e1e251cfcfeb758d48e95a35a53f1",
+        "source_group_id": "v13-memsyco-source-5aaddb7f9f0ea6c21cee8762"
+      },
+      {
+        "case_id": "v11_000852",
+        "task": "valid_memory_selection",
+        "native_source_id": "845b91bc-8cd5-451d-a6fe-dd2b176e5758",
+        "dialogue_sha256": "bcfd94fbb129f03c926a5ff9e9e0d4ec9afabe204f9717065c6971cafb67225c",
+        "raw_line_sha256": "ed375304123e6dd20ddd87dfb28ecf0feea485d93e8adacfb0a1c341090a08be",
+        "source_group_id": "v13-memsyco-source-c03fc9a174ad1be71c7c457b"
+      },
+      {
+        "case_id": "v11_000994",
+        "task": "valid_memory_selection",
+        "native_source_id": "a2543130-a95f-4bb4-877f-0d82314abfa3",
+        "dialogue_sha256": "fa0cca6ad93d01a876c1eed02b097ff9f811931ce047ecd12a5e7657410fb346",
+        "raw_line_sha256": "cb7f530acc84ae47b8b063279f3d94340f8ca709167a20d69c6901f0df0e77bf",
+        "source_group_id": "v13-memsyco-source-735934bd85db81d345b41b60"
+      },
+      {
+        "case_id": "v11_000403",
+        "task": "valid_memory_selection",
+        "native_source_id": "60023d63-4f11-47dc-8cef-82e3ca665a68",
+        "dialogue_sha256": "c5854bca89e92c651792b5416164bc2170fee1ab392baa00da5226995627c03e",
+        "raw_line_sha256": "a17845d504463371046a91edfa049123db01ea40be35363edba53b731c195a0d",
+        "source_group_id": "v13-memsyco-source-a39c467be4f068fe55f064bb"
+      },
+      {
+        "case_id": "v11_000529",
+        "task": "valid_memory_selection",
+        "native_source_id": "098bb7ce-49fb-457e-a8bd-82a6dc63c060",
+        "dialogue_sha256": "0782aaf5291ad99f07f0f3b4988100b18b7a2c8f8dfbc6615e118d6e8baaa69f",
+        "raw_line_sha256": "b06851ffa5a9bffb8f735e346c01bdd71bab0128a1509a0dcd360f20f452a072",
+        "source_group_id": "v13-memsyco-source-9050954adf8b9b8ec06b45ac"
+      },
+      {
+        "case_id": "v11_000614",
+        "task": "valid_memory_selection",
+        "native_source_id": "a09f9d41-c40f-4b86-b94e-03691a4bd945",
+        "dialogue_sha256": "30928fe424fe0b56ea4e81a97f5a999fe72627450d38c9721c21662dd016c798",
+        "raw_line_sha256": "79ffaca9bc7837da1cd05958b00de39bd4c6ab3cc1aefeb6b8fee4f5d57b8995",
+        "source_group_id": "v13-memsyco-source-52fa73c0e33a49736fce1fea"
+      },
+      {
+        "case_id": "v11_000353",
+        "task": "valid_memory_selection",
+        "native_source_id": "a40d5f67-8ec6-480b-a901-9709eecee9b9",
+        "dialogue_sha256": "1766c968471369c3afcf8029ab4f33d8a602b624a1c16ea7a2915987ab0857d6",
+        "raw_line_sha256": "0470ffeb0c7c5ff168597bf0adbd7dc775b57e00e8e71c639424b82961fda55c",
+        "source_group_id": "v13-memsyco-source-3a9af9c0b2d0e5bf52ebed2c"
+      },
+      {
+        "case_id": "v11_001018",
+        "task": "valid_memory_selection",
+        "native_source_id": "78ebcdd3-c419-4777-be35-ab836f645b9e",
+        "dialogue_sha256": "19732474828b4ce27316b8f7b361ca9d970eb1fc64e4be8b22e90ee31bdcf860",
+        "raw_line_sha256": "4f1bf841438ac8817c0e990a6b637ba749ddfe068fd0f399d30ecbaae5f5d011",
+        "source_group_id": "v13-memsyco-source-165d26ae94d5fe01fa480ed5"
+      },
+      {
+        "case_id": "v11_000528",
+        "task": "valid_memory_selection",
+        "native_source_id": "098bb7ce-49fb-457e-a8bd-82a6dc63c060",
+        "dialogue_sha256": "f8facaf8ec0bf5f6edf609205c576a791772e429635440a1856b5af170b35170",
+        "raw_line_sha256": "12ce5710e8cc0eddd0042a560d11ef87e949c94fd2baf29617bd59d68688178c",
+        "source_group_id": "v13-memsyco-source-9050954adf8b9b8ec06b45ac"
+      },
+      {
+        "case_id": "v11_000886",
+        "task": "valid_memory_selection",
+        "native_source_id": "e0f78337-f591-4d13-9db2-368a0a9facd3",
+        "dialogue_sha256": "ece0632904deec72927a83dc3946ddde616babe28ae784d8f615187cb85d6355",
+        "raw_line_sha256": "feee76e2d3d9ba160d2275484f468387cee7117be4cf797924fcdca8fef868a0",
+        "source_group_id": "v13-memsyco-source-2dff479d25872baf271fa4d6"
+      },
+      {
+        "case_id": "rec_gen_0020",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0020",
+        "dialogue_sha256": "018fa3231528038c56e3ae0a1c56949d307185967255272effbf3527c0ac1ac1",
+        "raw_line_sha256": "2af4c5a14e73c7b61786b33353b16b014f54fcfd6e9be334875c6e06dfbf2b6f",
+        "source_group_id": "v13-memsyco-source-2264a22c40ff2b6b62e03dcd"
+      },
+      {
+        "case_id": "rec_gen_0068",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0068",
+        "dialogue_sha256": "6ae045ee411819f695a5cdbd9f3ae42681374723aa4320efb58a41df76275d15",
+        "raw_line_sha256": "aaf374d1bda6d2c7b9ce0060de49106bf9f414e20c66c2f54386c1a832ddb786",
+        "source_group_id": "v13-memsyco-source-3d4906aa9e1c35ccaadb9d3f"
+      },
+      {
+        "case_id": "rec_gen_0082",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0082",
+        "dialogue_sha256": "5b93d55b27148b2e61bafb71bb8f212cc565821eef72b7d6dfe61521df1436f8",
+        "raw_line_sha256": "ff2e20e45f31537ca3ea76ed5f944fdc1d265d58e8113fdb483719451ef65521",
+        "source_group_id": "v13-memsyco-source-3444442de1d7dcec274e9e2c"
+      },
+      {
+        "case_id": "rec_gen_0023",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0023",
+        "dialogue_sha256": "93f1a3ef027a6f4bdd1a8ee94c05f97b9d319ba6a1d1d12fc5e4c8a6bd99a961",
+        "raw_line_sha256": "3a28eaf4a4756a2dd8e04dd94f83be3e088358e2448a9df92608c21cd91e5661",
+        "source_group_id": "v13-memsyco-source-4190d59ba4d924b0a4b791d6"
+      },
+      {
+        "case_id": "v11_001192",
+        "task": "personalized_memory_use",
+        "native_source_id": "344ea859-e70d-48d2-8a97-7b68a104c6ae",
+        "dialogue_sha256": "eb9c9c21d34e888900613fba54aed2f60419fe7021558223f668b4bd4bca12a5",
+        "raw_line_sha256": "783303ae2b51af4c72af2510829546c113e8497de50b44dcd1de0d36e849261b",
+        "source_group_id": "v13-memsyco-source-0d650b47368d8598f1fdbea8"
+      },
+      {
+        "case_id": "rec_gen_0049",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0049",
+        "dialogue_sha256": "7f2fc8378ba66c2e8e693afdbdd918001429254ea2b4ab9d2d59db0b6caaa877",
+        "raw_line_sha256": "3f158bc8d444cfe207af10a9682914fe2c4564fd554714c4e06867fd926e166a",
+        "source_group_id": "v13-memsyco-source-3e457aa0258222384f140798"
+      },
+      {
+        "case_id": "v11_001222",
+        "task": "personalized_memory_use",
+        "native_source_id": "a09f9d41-c40f-4b86-b94e-03691a4bd945",
+        "dialogue_sha256": "02ee52faaa4dd5b5cf9263ffc9491c785be4859fdcf1d32aeacf9c681a26bee9",
+        "raw_line_sha256": "f90cbdbd9628e081f22d3d9183b884e8a99c27d651b3a39848af9fa3ca7c4e8f",
+        "source_group_id": "v13-memsyco-source-52fa73c0e33a49736fce1fea"
+      },
+      {
+        "case_id": "rec_gen_0056",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0056",
+        "dialogue_sha256": "388ab7f9a61b023e737a74cfdcdfb9b2fd09d8945a97a5dfd47e58fa10b341fb",
+        "raw_line_sha256": "5d7eaadf6fce358355d903b592a7ba2e3013c4e32ea1ea970bc557a2e1c9a89c",
+        "source_group_id": "v13-memsyco-source-f04175cf36ef650993dfb316"
+      },
+      {
+        "case_id": "v11_001285",
+        "task": "personalized_memory_use",
+        "native_source_id": "e0f78337-f591-4d13-9db2-368a0a9facd3",
+        "dialogue_sha256": "66673a4c687978f02a07551ef62d7b832cf9bfaf2926e9f619954a9e6bece472",
+        "raw_line_sha256": "fb5bc3103db720a8020fba766063a8f5c6c8f0053929b423ecf479f2534e8c56",
+        "source_group_id": "v13-memsyco-source-2dff479d25872baf271fa4d6"
+      },
+      {
+        "case_id": "rec_gen_0061",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0061",
+        "dialogue_sha256": "d836bbc1f1549816edbd905ae69af8300b44c95000e9b92a9e73815f19485c68",
+        "raw_line_sha256": "0866bf11c5cbcba9168c723cfd4b9839653abcbf4227f13304d3379b7ab1ea69",
+        "source_group_id": "v13-memsyco-source-17928b961e5cdb15b1ef67b0"
+      },
+      {
+        "case_id": "rec_gen_0074",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0074",
+        "dialogue_sha256": "bf97115563ca3c1a57b67543d6b0c54aabb6f30c9bfa82a2757020d69528ed57",
+        "raw_line_sha256": "1848ef613c33afdbfc7eb5e611890788dbb979452599eb796b336a9446fb8b06",
+        "source_group_id": "v13-memsyco-source-38afbebbef94ef22e37889e2"
+      },
+      {
+        "case_id": "v11_001121",
+        "task": "personalized_memory_use",
+        "native_source_id": "a09f9d41-c40f-4b86-b94e-03691a4bd945",
+        "dialogue_sha256": "da8ed91bbf99a20caebd9b7ce339f6196ee02716c9d8e3862d2d941c67cda6a4",
+        "raw_line_sha256": "0b04be6adee5f2f7f2e5758c95f40c32c773a03408a7bfd3222aba2a0fc42fe1",
+        "source_group_id": "v13-memsyco-source-52fa73c0e33a49736fce1fea"
+      },
+      {
+        "case_id": "rec_gen_0022",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0022",
+        "dialogue_sha256": "29e5b90fc69bd280b577e44c523bcfb23618240c24e3b6ee25a080c5f56edddc",
+        "raw_line_sha256": "3393a5b11a9c2110fa2a237370ac64ce36c1b2db88f521adcc74932e50a5c808",
+        "source_group_id": "v13-memsyco-source-9371757cf003427774064bba"
+      },
+      {
+        "case_id": "rec_gen_0038",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0038",
+        "dialogue_sha256": "93a419a18d67433bb4d64cce506e0aca9f28d7c0addbb200ef28526435f608b5",
+        "raw_line_sha256": "0d5b488fe5aae46b78d5e3646cb62ec6b8107d4ba91d6dd6dec9d17252288eb7",
+        "source_group_id": "v13-memsyco-source-e12f8955a97b13eadbb318e3"
+      },
+      {
+        "case_id": "rec_gen_0058",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0058",
+        "dialogue_sha256": "af6edf57c761b2e0ad0305a13aff6106f7975da75516270e3f0cc04c06aa36d5",
+        "raw_line_sha256": "f9e463d10f4ffb68986f86226de0e115662143bf4cd2a7326393ec6f4019e014",
+        "source_group_id": "v13-memsyco-source-f7c423eb9ba078adf807250a"
+      },
+      {
+        "case_id": "rec_gen_0031",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0031",
+        "dialogue_sha256": "3a035927d940965d6d3bd9e8ba351a002cda769b633f7f24adead8a3e3d19db3",
+        "raw_line_sha256": "12b6d16485de06b7f46dd1b70cf8cd519a38b070560f587d192388e1fe4ffd95",
+        "source_group_id": "v13-memsyco-source-5fb528e6dad0366e775e9073"
+      },
+      {
+        "case_id": "rec_gen_0002",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0002",
+        "dialogue_sha256": "60f7ad54ba61bd691863c12b5a4709132f9a059c95dac96e7dbcc1e9bce6a45e",
+        "raw_line_sha256": "e89b84cb83c547d2144f2144bbc704faf4078839c583a88cedb1c03d1bf48986",
+        "source_group_id": "v13-memsyco-source-6e2e50c3ac2a86cbef742b5d"
+      },
+      {
+        "case_id": "rec_gen_0007",
+        "task": "personalized_memory_use",
+        "native_source_id": "rec_expansion_0007",
+        "dialogue_sha256": "4f090c856b19d5c82976259a591c5c9543d1289a8d8c98c1329ca85c44df4f29",
+        "raw_line_sha256": "3eaacfaa47a80895eb184cdac85c314039547af3ba0846f0e1372962f6b7b2c9",
+        "source_group_id": "v13-memsyco-source-a385ec057c123c3a06ae8add"
+      },
+      {
+        "case_id": "v11_001284",
+        "task": "personalized_memory_use",
+        "native_source_id": "f60ea749-0577-409d-ac52-5fbbdbb5d983",
+        "dialogue_sha256": "66673a4c687978f02a07551ef62d7b832cf9bfaf2926e9f619954a9e6bece472",
+        "raw_line_sha256": "83ad589a546e7dd9f0a496a10cdc34a3f36215a184bb93b0ed76ace07907aefd",
+        "source_group_id": "v13-memsyco-source-2dff479d25872baf271fa4d6"
+      },
+      {
+        "case_id": "v11_001306",
+        "task": "personalized_memory_use",
+        "native_source_id": "8a432a27-3c39-426f-a853-fe8f8b3c5c41",
+        "dialogue_sha256": "956169c03181a096a24a592bb5d58ec642c8e902c15d95376633f0760b655c2d",
+        "raw_line_sha256": "d56cdd28e7bd92dd19bd33ffd0b006f1e578f742c79229c5191fba7c4e596027",
+        "source_group_id": "v13-memsyco-source-fa9be72b5b8466c74bcf095d"
+      }
+    ],
+    "counts": {
+      "contextual_scope_control": {
+        "pilot_questions": 20,
+        "pilot_distinct_source_components": 20,
+        "remaining_unreserved_questions": 250,
+        "remaining_unreserved_components": 250,
+        "nominal_formal100_still_unmet": false
+      },
+      "valid_memory_selection": {
+        "pilot_questions": 20,
+        "pilot_distinct_source_components": 12,
+        "remaining_unreserved_questions": 7,
+        "remaining_unreserved_components": 2,
+        "nominal_formal100_still_unmet": true
+      },
+      "personalized_memory_use": {
+        "pilot_questions": 20,
+        "pilot_distinct_source_components": 18,
+        "remaining_unreserved_questions": 54,
+        "remaining_unreserved_components": 53,
+        "nominal_formal100_still_unmet": true
+      }
+    },
+    "denominator": "60 new pilot questions,5 core methods300 units + SimpleMem same60=360. Distinct component counts disclosed; question count is not independent history count."
+  },
+  "merit": {
+    "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+    "rule": "Smallest globally unused seeds65..82, fixed domain d1/d2/d3 x difficulty easy/medium/hard x2. Native Domain.generate_suite full5episode arcs. Generation only after adapter/source/config readiness; no outcome filtering/replacement.",
+    "arcs": [
+      {
+        "domain": "d1",
+        "difficulty": "easy",
+        "replicate": 0,
+        "base_seed": 65,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=65",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 65,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d1",
+        "difficulty": "easy",
+        "replicate": 1,
+        "base_seed": 66,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=66",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 66,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d1",
+        "difficulty": "medium",
+        "replicate": 0,
+        "base_seed": 67,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=67",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 67,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d1",
+        "difficulty": "medium",
+        "replicate": 1,
+        "base_seed": 68,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=68",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 68,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d1",
+        "difficulty": "hard",
+        "replicate": 0,
+        "base_seed": 69,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=69",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 69,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d1",
+        "difficulty": "hard",
+        "replicate": 1,
+        "base_seed": 70,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=70",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 70,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "easy",
+        "replicate": 0,
+        "base_seed": 71,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=71",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 71,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "easy",
+        "replicate": 1,
+        "base_seed": 72,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=72",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 72,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "medium",
+        "replicate": 0,
+        "base_seed": 73,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=73",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 73,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "medium",
+        "replicate": 1,
+        "base_seed": 74,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=74",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 74,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "hard",
+        "replicate": 0,
+        "base_seed": 75,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=75",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 75,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d2",
+        "difficulty": "hard",
+        "replicate": 1,
+        "base_seed": 76,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=76",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 76,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "easy",
+        "replicate": 0,
+        "base_seed": 77,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=77",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 77,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "easy",
+        "replicate": 1,
+        "base_seed": 78,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=78",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 78,
+          "difficulty": "easy"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "medium",
+        "replicate": 0,
+        "base_seed": 79,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=79",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 79,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "medium",
+        "replicate": 1,
+        "base_seed": 80,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=80",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 80,
+          "difficulty": "medium"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "hard",
+        "replicate": 0,
+        "base_seed": 81,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=81",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 81,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      },
+      {
+        "domain": "d3",
+        "difficulty": "hard",
+        "replicate": 1,
+        "base_seed": 82,
+        "source_group_id": "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=82",
+        "generator_arguments": {
+          "n_arcs": 1,
+          "episodes_per_arc": 5,
+          "dep_ratio": 0.5,
+          "base_seed": 82,
+          "difficulty": "hard"
+        },
+        "generation_status": "NOT_GENERATED",
+        "execution_status": "NOT_RUN"
+      }
+    ],
+    "denominator": "18 full new arcs x5 core methods=90 method-arcs plus SimpleMem same18=108, not independent episodes.",
+    "historical_collision_policy": "Before any model, check full arc/world hashes against known historical generated artifacts. Record collisions without silently picking a replacement."
+  },
+  "method_freeze": "NOT_READY; reservations do not authorize claiming pilot executed or method selected. Exact byte inputs/configs/models/budgets/cadence/scorer boundary frozen after source acceptance, before corresponding first model call.",
+  "formal": "NOT_SELECTED; original nominal300 MemSyco requirement remains unmet due source availability, user confirms no additional official source. Other formal benchmarks remain planned.",
+  "gold_boundary": "Only preexisting ID/source/history/raw-line hash metadata used for MemSyco. No new questions, evaluations, memory content or MERIT arcs/checkers emitted to developer or models by this step.",
+  "new_generation_calls": 0,
+  "new_embedding_calls": 0,
+  "Judge_calls": 0,
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

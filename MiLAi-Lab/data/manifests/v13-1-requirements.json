@@ -591,7 +591,9 @@
       "authoritative_evidence_required": "300 planned method-question denominators plus SimpleMem results",
       "status": "NOT_VERIFIED",
       "evidence": [
-        "data/manifests/v13-1-memsyco-source-availability.json"
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
       ],
       "conditional": false
     },
@@ -602,7 +604,10 @@
       "requirement": "18 new stratified MERIT arcs with5 methods; no episode pseudo-independence",
       "authoritative_evidence_required": "90 method-arc denominator and native checker results",
       "status": "NOT_VERIFIED",
-      "evidence": [],
+      "evidence": [
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
+      ],
       "conditional": false
     },
     {
@@ -633,7 +638,9 @@
       "authoritative_evidence_required": "1800 method-question units complete planned denominators",
       "status": "NOT_VERIFIED",
       "evidence": [
-        "data/manifests/v13-1-memsyco-source-availability.json"
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
       ],
       "conditional": false
     },

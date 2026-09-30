@@ -18,3 +18,9 @@ case、原source、完整历史hash或旧来源组关联的整组都排除。60�
 没有删除暴露排除条件、偷换任务、把重复问题计作新来源组或悄悄缩小完整目标。
 用户已确认没有额外未曝光官方来源；使用现pin继续其他独立baseline/恢复/开发任务。P6/P7 nominal规模要求
 保留未完成，待pilot与来源条件支持后按原规划冻结，不能先宣告300未见已可运行。
+
+新[pilot身份预留](../data/manifests/v13-1-pilot-prospective-selection.json)仅按ID哈希在每任务选20题，未读取问题或评分内容。
+其来源组分别为20、12、18；同历史题必须聚类，不能称60个独立来源。所选组件的全部117题均预留为development。
+整组件排除后，三个任务还剩250、7、54题；valid与personalized仍不能满足正式各100题。
+追加[暴露预留清单](../data/manifests/v13-1-source-exposure-pilot-reservation.json)保留原暴露文件身份，之后正式选择必须取两者并集。
+MERIT按三个领域、三种难度各两arc预留全局未用seed65–82；尚未生成arc或执行pilot。
