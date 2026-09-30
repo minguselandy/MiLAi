@@ -64,7 +64,10 @@
         "data/manifests/v13-1-p2-typed-receipts-results.json",
         "docs/V13_1_P2_TYPED_RECEIPTS.md",
         "data/manifests/v13-1-p2-history-delivery-results.json",
-        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+        "data/manifests/v13-1-p2-explicit-history-query-results.json",
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
       ],
       "conditional": false
     },
@@ -518,8 +521,12 @@
       "plan_section": "10.E-S",
       "requirement": "Flat,Type-only,Flat+Scope,Type+Scope same histories/model/cadence/material budget",
       "authoritative_evidence_required": "2x2 freeze and all four results with source-only scope formation",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
+      ],
       "conditional": false
     },
     {
@@ -528,8 +535,12 @@
       "plan_section": "8.P4,9.D1",
       "requirement": "MemSyco exposed development diagnostics first earliest break, no future question/gold in formation",
       "authoritative_evidence_required": "question-free formation inputs and failure chain report",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
+      ],
       "conditional": false
     },
     {
