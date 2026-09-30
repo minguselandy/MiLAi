@@ -1,0 +1,1533 @@
+{
+  "kind": "MILAI_V13_1_D0_R9_ALL24_RESULTS",
+  "status": "PREDECLARED_NORMAL_GATE_PASSED_WITH_TWO_UPDATE_FAILURES",
+  "protocol_sha256": "31466b70d314871701540394ac51b9b09617b36b8637f31ead49c974d72b434e",
+  "runtime_freeze_sha256": "7ab4dd3687753140b96c514b6a07871f855b0dcfebe53587afa2318f99ba9fdd",
+  "fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "rubric_sha256": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+  "config_sha256": "b13f844d9d2e3ce323054cd8e15932b3b932ba91eeae5fc0889721852d0a670d",
+  "source_manifest_sha256": "412503f53ea7ab9f47b103451c9eb74e8afcdd7e677c5f0542f62b4437d20f5c",
+  "tool_catalog_sha256": "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926",
+  "prompt_sha256": "145da12f83ef5a10c7a5b6e263c3ff65f05d4551857ff3fa35195d00ed84b933",
+  "result": {
+    "pass": 22,
+    "fail": 2,
+    "unknown": 0,
+    "not_run": 0,
+    "denominator": 24,
+    "public_messages": 48,
+    "distinct_actual_step_processes": 48,
+    "gate_minimum": 22,
+    "owner_leaks_observed": 0,
+    "false_saved_receipts_observed": 0,
+    "normal_use_gate": "PASS",
+    "complete_plan": "NOT_COMPLETE"
+  },
+  "categories": {
+    "save": {
+      "pass": 4,
+      "denominator": 4
+    },
+    "recall": {
+      "pass": 4,
+      "denominator": 4
+    },
+    "update": {
+      "pass": 2,
+      "denominator": 4
+    },
+    "scope": {
+      "pass": 4,
+      "denominator": 4
+    },
+    "object_continue": {
+      "pass": 4,
+      "denominator": 4
+    },
+    "restart": {
+      "pass": 4,
+      "denominator": 4
+    }
+  },
+  "cases": {
+    "save-1": {
+      "category": "save",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 1,
+      "messages": [
+        {
+          "message_id": "save-1-m1",
+          "session": "s1",
+          "process_id": 3670204,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "我喜欢简短回答。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal",
+                "preference": "short_answers"
+              }
+            }
+          ],
+          "final_answer_sha256": "6dcbf30c78149936a60858e3ccc198326623452da6c5bc017cdbfa8323d31045",
+          "terminal_sha256": "e5516983e11c2f0f0663e0c9aef7829cf8327e176f1bc5db337549c0789ff7bb",
+          "trace_sha256": "037a6c97e459f7d5a2cbf8cf0a37d286cc7917e01a8d89ef20db571063ad21e0",
+          "generation_requests": 2,
+          "generation_tokens": 2576,
+          "execution_wall_ns": 2434993538,
+          "execution_cpu_ns": 965592678
+        }
+      ]
+    },
+    "save-2": {
+      "category": "save",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 1,
+      "messages": [
+        {
+          "message_id": "save-2-m1",
+          "session": "s1",
+          "process_id": 3687655,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "饮品偏好：不含咖啡因的茶",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "42433f9ae3dcf21b9709dee1cc994f7d4bf3100ee1a9aeb401b1eca76e2f0cf4",
+          "terminal_sha256": "eaef7af181f40d0bceb19e7e40235c993562c0c0a8fc94ca4c348f59ae74188e",
+          "trace_sha256": "d2ba6e6f33d07907d297cae18fee0c481b2f78f1570a626052f743d7dfe6c1e4",
+          "generation_requests": 2,
+          "generation_tokens": 2581,
+          "execution_wall_ns": 2152876905,
+          "execution_cpu_ns": 1025732227
+        }
+      ]
+    },
+    "save-3": {
+      "category": "save",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 1,
+      "messages": [
+        {
+          "message_id": "save-3-m1",
+          "session": "s1",
+          "process_id": 3688073,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户是素食者，在选择餐食时应遵循素食原则。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "domain": "meal_selection",
+                "preference": "vegetarian"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "a9cf2b3a490baba0a9edc749f8e1337f97d383b7b7b4884105730bf65370e1ab",
+          "terminal_sha256": "55fec61cb1d4a3bac68377e2fcc69f16e72a8a25d245dc8a33460acc9745c917",
+          "trace_sha256": "1dcfc94cb3f6a2b702b325613d172ab1020a118f41bd5552e1ac703068b36bbf",
+          "generation_requests": 2,
+          "generation_tokens": 2638,
+          "execution_wall_ns": 1977064274,
+          "execution_cpu_ns": 818845686
+        }
+      ]
+    },
+    "save-4": {
+      "category": "save",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 1,
+      "messages": [
+        {
+          "message_id": "save-4-m1",
+          "session": "s1",
+          "process_id": 3688431,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "阅读时喜欢大字号",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "domain": "reading",
+                "preference": "large_font_size"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "3d0014859a3c0ed5896a79dd181df4b62bdbe13bd1a9c86c3ae964078bbcaf2a",
+          "terminal_sha256": "3db545916e7ba331db84a5b47f5c4963b8ba752720ddf77ea93fe55388c8ea3c",
+          "trace_sha256": "602f2240b4fce4f39537f07bca5468c2b0ed9cccd9d6f1231c655c018265100c",
+          "generation_requests": 2,
+          "generation_tokens": 2596,
+          "execution_wall_ns": 1828042460,
+          "execution_cpu_ns": 791053796
+        }
+      ]
+    },
+    "recall-1": {
+      "category": "recall",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "recall-1-m1",
+          "session": "s1",
+          "process_id": 3670635,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "通勤更喜欢火车",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement",
+              "scope": {
+                "type": "personal"
+              }
+            }
+          ],
+          "final_answer_sha256": "c96a65b5b303f823d572b2dfd73c4bf01d0dc6cd985333f6cb38ea9e4ff12a6e",
+          "terminal_sha256": "829fc338ec841b898e9face46d990fdd63f05bb1cee719d32ee519b2e8b620a3",
+          "trace_sha256": "e87f0b419664c188b99b3a0b35946772dc0c336e139e8ace95e907ed6b7d192a",
+          "generation_requests": 2,
+          "generation_tokens": 2609,
+          "execution_wall_ns": 2081656020,
+          "execution_cpu_ns": 901707285
+        },
+        {
+          "message_id": "recall-1-m2",
+          "session": "s2",
+          "process_id": 3671002,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "45b479cf873980dadffb89636871ef59bad9263ef2077c30d633199d5b37030c",
+          "terminal_sha256": "8221e127eb69931de74b30dff937e762e9c8034c5756726b2c8b98ae9dfe6000",
+          "trace_sha256": "5285bf8df2503f593e771553828bf8696f5acba142a78c3a37c2172192846ffd",
+          "generation_requests": 2,
+          "generation_tokens": 3153,
+          "execution_wall_ns": 1533857474,
+          "execution_cpu_ns": 827321970
+        }
+      ]
+    },
+    "recall-2": {
+      "category": "recall",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "recall-2-m1",
+          "session": "s1",
+          "process_id": 3688856,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "常用的编程语言是 Python",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal",
+                "subject": "programming_language",
+                "preference": "Python"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "136ac00ba68bcd94ac1ca5bd666ca492fe87023ee01bba4897f44a5a1c09fb40",
+          "terminal_sha256": "3b3870cc6937721ac3bbef08fc296c933d46891bdcbab5a32ad2cc3499bf59bc",
+          "trace_sha256": "3c171cc620babe79c07320b4c19cdb86c70f5a0d8fbaff001473f3e99f89a10d",
+          "generation_requests": 2,
+          "generation_tokens": 2606,
+          "execution_wall_ns": 2180591656,
+          "execution_cpu_ns": 947956930
+        },
+        {
+          "message_id": "recall-2-m2",
+          "session": "s2",
+          "process_id": 3689277,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "fe316eb02a7b8858f08c215a552dd651934dc169baad8012d8e80bad645e809e",
+          "terminal_sha256": "20b6516975d1a4e02a651cc588f889430a638d894cab20a1265f977a2e43c194",
+          "trace_sha256": "9434466366b95b9d5a66511a20da29604215dd631f4613ac47633df8b4f67b61",
+          "generation_requests": 2,
+          "generation_tokens": 3166,
+          "execution_wall_ns": 1684276528,
+          "execution_cpu_ns": 953390893
+        }
+      ]
+    },
+    "recall-3": {
+      "category": "recall",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "recall-3-m1",
+          "session": "s1",
+          "process_id": 3689639,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户通常喜欢把会议安排在上午。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "preference",
+                "subject": "meeting_scheduling",
+                "time_preference": "morning"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "78cd8c028f529f78b756d7a30862fa37261669289859516a4f32a608c2ac35c2",
+          "terminal_sha256": "202307a3b5aee2aa2a590d7db1091b622ca1c59578be55756ad30e96dadb9bcc",
+          "trace_sha256": "5c854741b2c18cadad242d76f98384778298870dfe9d68f822704bcdcd6db911",
+          "generation_requests": 2,
+          "generation_tokens": 2624,
+          "execution_wall_ns": 2040972874,
+          "execution_cpu_ns": 945040489
+        },
+        {
+          "message_id": "recall-3-m2",
+          "session": "s2",
+          "process_id": 3689981,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "a17055c257192f4aa78808845723caf520b1ef84eb22c5fa1ce17068fe99a706",
+          "terminal_sha256": "f3361e83113b470b29146562b26564ac17ce248f4ec30cf957f48f4333b8e2f9",
+          "trace_sha256": "b06c759cc526b1aa116b50ffc4bccd6fc3f2b71faca37ba82d1a83a429fc9ee2",
+          "generation_requests": 2,
+          "generation_tokens": 3193,
+          "execution_wall_ns": 1692475405,
+          "execution_cpu_ns": 918193525
+        }
+      ]
+    },
+    "recall-4": {
+      "category": "recall",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "recall-4-m1",
+          "session": "s1",
+          "process_id": 3690317,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "我喜欢先看到邮件的提纲，再看正文。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "subject": "email",
+                "preference": "outline_first"
+              }
+            }
+          ],
+          "final_answer_sha256": "dd8659a67ed2c199d72eac7e8f6d25fb80110b77c3e5fe110f7e61c57bedd22a",
+          "terminal_sha256": "2097be3670cd775d900e9bcedcf9fada013a1724b020d934cb16bbfe174fc344",
+          "trace_sha256": "3cb6b6e1f1a54bc7a5ce68e79195f70a4a23e3a4ed9e5b9ea0f7ed0e04c0727c",
+          "generation_requests": 2,
+          "generation_tokens": 2610,
+          "execution_wall_ns": 2091426076,
+          "execution_cpu_ns": 976466117
+        },
+        {
+          "message_id": "recall-4-m2",
+          "session": "s2",
+          "process_id": 3690672,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "60b91637da6175b122335de18a46edd3c6b1461f881e51ab4ad90a7350dfd6fd",
+          "terminal_sha256": "2d7876500b555c084d7ae15f324faee35950efad1a4b03178473e0d5e1c1f787",
+          "trace_sha256": "1320227b6e711344682a738661cfa8c4f58ff0a7708726c98aee125815fc7c6f",
+          "generation_requests": 2,
+          "generation_tokens": 3208,
+          "execution_wall_ns": 1694948101,
+          "execution_cpu_ns": 844412071
+        }
+      ]
+    },
+    "update-1": {
+      "category": "update",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        2
+      ],
+      "history_versions": 1,
+      "source_count": 3,
+      "messages": [
+        {
+          "message_id": "update-1-m1",
+          "session": "s1",
+          "process_id": 3671342,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "饮品偏好：咖啡",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "category": "beverage",
+                "preference": "coffee"
+              }
+            }
+          ],
+          "final_answer_sha256": "ef84c4d45580589f2ae22fcfeff6f913f18713de2de1367744378b76c63e32df",
+          "terminal_sha256": "8474cac21a497b5459043ea6763a56eb0bf2dc9c48fc05b930ec94c8d9f04a2b",
+          "trace_sha256": "796562201b15a2f7db3e774d42a752518cd9ac1f88f1d8458e9e2ca5f0025db6",
+          "generation_requests": 2,
+          "generation_tokens": 2586,
+          "execution_wall_ns": 1824091078,
+          "execution_cpu_ns": 802430617
+        },
+        {
+          "message_id": "update-1-m2",
+          "session": "s2",
+          "process_id": 3671681,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "饮品偏好：茶，不再首选咖啡",
+              "action": "update",
+              "id": "ddb8cb6f-b4fd-58f9-8862-3b569c6445d7",
+              "basis": "user_statement",
+              "source_ref": "src-49e93ac167fce373d24c814d78097df2ebc6ebb909831ab8045edf6d3e7a4c53"
+            }
+          ],
+          "final_answer_sha256": "70a2bf4444c41e6aa5f9373fee20e72472fc89f8817c0938cdfd049ec2b455cc",
+          "terminal_sha256": "2b579a0a7796051c62df81e80cdc7b9c11a5de806d8fefbede273cabdbc8b52f",
+          "trace_sha256": "5b98757b2644c53b379f13301350cb053f8ec492d56ce29c8f92c7b6ac8f7785",
+          "generation_requests": 3,
+          "generation_tokens": 5669,
+          "execution_wall_ns": 2987238082,
+          "execution_cpu_ns": 960730413
+        },
+        {
+          "message_id": "update-1-m3",
+          "session": "s3",
+          "process_id": 3672120,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "f7dc34275f94cb3d5cab6945f4285d8efd82ab431d17075b111c42ee43d44490",
+          "terminal_sha256": "c8c9e9490ca29b994b28975cf6308629ebdc28c237c25efd486e450faa88820b",
+          "trace_sha256": "0eff8947ee96fed44c2814d79cff20686293a758e6ec16db490ba65c55c754a7",
+          "generation_requests": 2,
+          "generation_tokens": 3410,
+          "execution_wall_ns": 1803026306,
+          "execution_cpu_ns": 976974839
+        }
+      ]
+    },
+    "update-2": {
+      "category": "update",
+      "verdict": "FAIL",
+      "reason": "No original record revision2 or linked historical version; old and new preferences are separate current revision1 cards. Final answer correct, but true versioned update fails.",
+      "records": 2,
+      "current_revisions": [
+        1,
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 3,
+      "messages": [
+        {
+          "message_id": "update-2-m1",
+          "session": "s1",
+          "process_id": 3691177,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "I hope to communicate in English by default.",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "language": "en",
+                "default": true
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "099f8987856292e90948b95b08f086c2c24e983d9f4410f4f6f9119d17a6407d",
+          "terminal_sha256": "d2ef3af1aa116f3731303ff3b82b4a2374eff2984f10caf46c5d8081c95e17a9",
+          "trace_sha256": "26d48ab1ce18d2b71ab9ebf26a5fbeca244371171692e4160a182b4e433514e5",
+          "generation_requests": 2,
+          "generation_tokens": 2596,
+          "execution_wall_ns": 2288892370,
+          "execution_cpu_ns": 950093315
+        },
+        {
+          "message_id": "update-2-m2",
+          "session": "s2",
+          "process_id": 3691543,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "read_memory",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户希望默认用中文交流",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal",
+                "language": "zh"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "d72b9c35401de662695908a4088f62571cd29e0e7e34c2863bf4cb44b194ce8a",
+          "terminal_sha256": "80d52976dc16569573997cd503291953d5a951501b9749529dbbd2192478a263",
+          "trace_sha256": "28f6fd2333dbb159209ce52b89d6d0dc8b8abbd55949146af0906483ff38ef15",
+          "generation_requests": 4,
+          "generation_tokens": 6738,
+          "execution_wall_ns": 2854341083,
+          "execution_cpu_ns": 1008163774
+        },
+        {
+          "message_id": "update-2-m3",
+          "session": "s3",
+          "process_id": 3691980,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "db07404c402cf95154a9af2c88bb6a809e16f9f2ef8e12677209e4391046c8ef",
+          "terminal_sha256": "6669e29cfe7b42a47efb7850a9babd034d364762d49a39e9bb725926d35df047",
+          "trace_sha256": "e8b4bdbd9ea198ae978413bd0bd2e7bf7c260ef13e9dc95bb2d67b3047faf483",
+          "generation_requests": 2,
+          "generation_tokens": 3691,
+          "execution_wall_ns": 1746436988,
+          "execution_cpu_ns": 843144904
+        }
+      ]
+    },
+    "update-3": {
+      "category": "update",
+      "verdict": "FAIL",
+      "reason": "No original record revision2 or linked historical version; old and new preferences are separate current revision1 cards. Final answer correct, but true versioned update fails.",
+      "records": 2,
+      "current_revisions": [
+        1,
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 3,
+      "messages": [
+        {
+          "message_id": "update-3-m1",
+          "session": "s1",
+          "process_id": 3692331,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "距离单位默认使用英里。",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "a86f5f20e984f1e8eb8c01ac3401495f25a28f1926041616c9e40cf7ca3cb09d",
+          "terminal_sha256": "7ccd0891d876ad5eda71cddc60dead2e3d8ed9cf4f98d6e99bdcab33798db6f3",
+          "trace_sha256": "7bffc4b5a3c47769d4608aebe0f0bf3c64672281864b97b37bde5b81882e272b",
+          "generation_requests": 2,
+          "generation_tokens": 2570,
+          "execution_wall_ns": 1829600759,
+          "execution_cpu_ns": 842828179
+        },
+        {
+          "message_id": "update-3-m2",
+          "session": "s2",
+          "process_id": 3692694,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "默认距离单位改用公里",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal",
+                "preference": "unit_system"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "ce691aa31b5fac6acf5282c22d8079acf3beb333628f30cdab27862a02d41504",
+          "terminal_sha256": "313f3bf606717e84d071d0b5d708cfe843393118cef1bc7d621a51e6a57754c1",
+          "trace_sha256": "95285f070b9e0ebaf0f9033fc40e1486f35ac25c9b36834316e89f28bf4cc6c2",
+          "generation_requests": 2,
+          "generation_tokens": 2603,
+          "execution_wall_ns": 1788330600,
+          "execution_cpu_ns": 953775664
+        },
+        {
+          "message_id": "update-3-m3",
+          "session": "s3",
+          "process_id": 3693031,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "268fe9960d15790c8b60255d0e47c89f32d6c2e14f55c4693e3e95828a6e2f21",
+          "terminal_sha256": "debe26a88f27f5578eb47541edb499f7979354e71827b1e4b47ed2e2f71c61e7",
+          "trace_sha256": "76cc833bf1c03f0a4db7343e3d32059b3a26647e0e7503d839f3ee514e5a3f35",
+          "generation_requests": 2,
+          "generation_tokens": 3704,
+          "execution_wall_ns": 1959671252,
+          "execution_cpu_ns": 984456128
+        }
+      ]
+    },
+    "update-4": {
+      "category": "update",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        2
+      ],
+      "history_versions": 1,
+      "source_count": 3,
+      "messages": [
+        {
+          "message_id": "update-4-m1",
+          "session": "s1",
+          "process_id": 3693528,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "通常把会议安排在上午。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "preference",
+                "subject": "meeting_scheduling",
+                "time_of_day": "morning"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "464d9354caa76caff8fecaef6ed96bfa11ec42e23081670b6d981c6c7b24ca00",
+          "terminal_sha256": "ea47ec2595d4161c0174f6887a5eb3c38d77e0b43cb2d4ad35cb7b57f1c0b2f3",
+          "trace_sha256": "c33e9fabbecab97e96c32f1cef76d3cebe41888471428f16c105cd8424b21480",
+          "generation_requests": 2,
+          "generation_tokens": 2619,
+          "execution_wall_ns": 1880608440,
+          "execution_cpu_ns": 799753472
+        },
+        {
+          "message_id": "update-4-m2",
+          "session": "s2",
+          "process_id": 3693884,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "通常把会议安排在下午。",
+              "action": "update",
+              "id": "8540b812-f9af-5f5b-a632-be90e301af17",
+              "kind": "semantic",
+              "scope": {
+                "subject": "meeting_scheduling",
+                "time_of_day": "afternoon",
+                "type": "preference"
+              },
+              "basis": "user_statement",
+              "source_ref": "src-fc2bcb11562d5c3201834d11e49c42b45bc997233cb2c747024db54dedc7739a"
+            }
+          ],
+          "final_answer_sha256": "a1352c2052b31e1fbffe2c05fe3c56335a2c3b61329f7b700b8e91543f710a15",
+          "terminal_sha256": "e5a606e5df9a0c9e833638ed2a4bb3485cadc56fed97e0b1ecb8b44cc4b6d6fc",
+          "trace_sha256": "9a8320198c1c7742c31d4ea21308ebd67264c4415b915ca14ff115a9e10cf479",
+          "generation_requests": 3,
+          "generation_tokens": 5727,
+          "execution_wall_ns": 3373530205,
+          "execution_cpu_ns": 1060517498
+        },
+        {
+          "message_id": "update-4-m3",
+          "session": "s3",
+          "process_id": 3694365,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "b68678dcdc785ed4b48f8c6741e4fd073462cca6e568dafd1b95b18582fecdbe",
+          "terminal_sha256": "b5f354c51cd98015a8e4b1d4598cf023ea2d1cd3bc766cfa4902f2806e87f6fd",
+          "trace_sha256": "8119ce3432808214a016e43353ae4db28711776eb3d5b804a866ff17ecfdf46b",
+          "generation_requests": 2,
+          "generation_tokens": 3426,
+          "execution_wall_ns": 1809920856,
+          "execution_cpu_ns": 945624940
+        }
+      ]
+    },
+    "scope-1": {
+      "category": "scope",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "scope-1-m1",
+          "session": "s1",
+          "process_id": 3672569,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "本周团队午餐需要为整个团队准备素食。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "event": "团队午餐",
+                "time": "本周",
+                "subject": "整个团队"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "7e996032cf0730a5959506afec8e9b3c4c178e6d20350f15e84f4dd3972a39e1",
+          "terminal_sha256": "9f9aeb19789d1359eafab74d4af1f7df52ddf50e133647786ed2ee52aa3039aa",
+          "trace_sha256": "a8cf08cd810ef2b7e9138b8382ffd0029434354d25bdf58cc54720fd4c96bcdf",
+          "generation_requests": 2,
+          "generation_tokens": 2644,
+          "execution_wall_ns": 2082618091,
+          "execution_cpu_ns": 951344987
+        },
+        {
+          "message_id": "scope-1-m2",
+          "session": "s2",
+          "process_id": 3672995,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "29c1ad21954d599803687befdf6c6855fa671175a675fa39164c7e40978c27c5",
+          "terminal_sha256": "4d737584371bbcfeee5580d541fe090269dbc8618a3a80e823f855afbb970f66",
+          "trace_sha256": "97d5e2bd4108e6cf8382ae02a247e28bfb02f08d77d8f854906218618f8e72fd",
+          "generation_requests": 2,
+          "generation_tokens": 3265,
+          "execution_wall_ns": 2027848018,
+          "execution_cpu_ns": 932702418
+        }
+      ]
+    },
+    "scope-2": {
+      "category": "scope",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "scope-2-m1",
+          "session": "s1",
+          "process_id": 3694716,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "在今天的现场演示中，回答应尽量简短。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "event": "今天的现场演示",
+                "time": "today"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "5499fb138525feb44883a8940df70cb0c10599525c8abeaa6d558acf6c56e47b",
+          "terminal_sha256": "ca2c5dfa8725aa12596d66c915fafad08969369a3e6835c83c5fcf22aabaf8f5",
+          "trace_sha256": "bebdfc3f50f6a59667d78b0efaf4a09f7bc4cfa9c8e2ac8ba78440115b93d098",
+          "generation_requests": 2,
+          "generation_tokens": 2644,
+          "execution_wall_ns": 2040022821,
+          "execution_cpu_ns": 965393805
+        },
+        {
+          "message_id": "scope-2-m2",
+          "session": "s2",
+          "process_id": 3695078,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "37596be3799451b40c4c6a994866098f578b3c55275c594232c65d6f3c982a30",
+          "terminal_sha256": "273d98038397d73f837816cdc9014cd0d156056ff7fea47c89ad61d40ae987ef",
+          "trace_sha256": "d4ab63c54916dde2463945365c329b2c2d431bd4fba78cea809021b610040425",
+          "generation_requests": 2,
+          "generation_tokens": 4101,
+          "execution_wall_ns": 2012193329,
+          "execution_cpu_ns": 842983124
+        }
+      ]
+    },
+    "scope-3": {
+      "category": "scope",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "scope-3-m1",
+          "session": "s1",
+          "process_id": 3695499,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "出差项目每晚住宿预算不超过800元",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "project_rule",
+                "excludes": "personal_travel"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "7c2656542baa33d29567c81a4cd2a9156be88e51596f1d03ba08a33d494bc263",
+          "terminal_sha256": "4cbcb190bcde3fe80130fc035893238e7a6222f18d5acbd3aa842210e3150b84",
+          "trace_sha256": "7993f0e4e94c7c0b7d8d3a27f8602cc361f21a6a42446053f6de0d3237d4fa27",
+          "generation_requests": 2,
+          "generation_tokens": 2714,
+          "execution_wall_ns": 2511435324,
+          "execution_cpu_ns": 990956380
+        },
+        {
+          "message_id": "scope-3-m2",
+          "session": "s2",
+          "process_id": 3695950,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "02b22fef4cbc4ffaf74520e5d2f80985ec90e8945c918e2b65910f00a55fc591",
+          "terminal_sha256": "a9602665886f0e077df6db0b7ce04f8c2ba521bdfe79367facf54370a33f2d05",
+          "trace_sha256": "78ec0c5ca321b48d4559bfa8276cb471b7cc0f8c9afba2daef04c8c519322cf6",
+          "generation_requests": 2,
+          "generation_tokens": 4128,
+          "execution_wall_ns": 2443468887,
+          "execution_cpu_ns": 984212526
+        }
+      ]
+    },
+    "scope-4": {
+      "category": "scope",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "scope-4-m1",
+          "session": "s1",
+          "process_id": 3696397,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户表示“Friday交稿”是相对于当前项目的约定，目前尚未提供具体的绝对日期。"
+            }
+          ],
+          "final_answer_sha256": "00d1f4dff1a41cf95292374ac1b1520766cccb62b3a5c7a08b9ab54c3518e9f7",
+          "terminal_sha256": "3579efda71efaa6eef976c98c9e2c1c8a025689e57ca7b89a64764e8c626bcf0",
+          "trace_sha256": "b23921259658e78273a8720c9ce825b880411118c4bd271f9fb4abddf027bc83",
+          "generation_requests": 2,
+          "generation_tokens": 2608,
+          "execution_wall_ns": 1981867619,
+          "execution_cpu_ns": 932881473
+        },
+        {
+          "message_id": "scope-4-m2",
+          "session": "s2",
+          "process_id": 3696764,
+          "status": "completed",
+          "tool_names": [],
+          "manage_proposals": [],
+          "final_answer_sha256": "28d00d5f211765db3dc4f60a5f9a43b4747907d3fa70b894fd1fa79514dd0bb0",
+          "terminal_sha256": "b9329ed77f7243430723da3b390a875ac7e63d39ffa9dedcf07ce47fee8bb472",
+          "trace_sha256": "587e7e657f11c99666b54b934e7665ab600c60e483c4056b852e933639e1d550",
+          "generation_requests": 1,
+          "generation_tokens": 1199,
+          "execution_wall_ns": 1416940103,
+          "execution_cpu_ns": 903742439
+        }
+      ]
+    },
+    "object-continue-1": {
+      "category": "object_continue",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 4,
+      "messages": [
+        {
+          "message_id": "object-continue-1-m1",
+          "session": "s1",
+          "process_id": 3673357,
+          "status": "completed",
+          "tool_names": [
+            "reserve_and_label",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户预订了2个蓝色玻璃杯（展厅A），目的地为一楼展厅，包装要求防震隔层。预订成功，标签已创建。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "project": "展厅布置"
+              },
+              "basis": "tool_observation",
+              "source_ref": "src-fc881887b2230577e8a3db013c4ece9ff0f396ccd73f3a64da6cfc7667a0bf39",
+              "object_ref": "src-fc881887b2230577e8a3db013c4ece9ff0f396ccd73f3a64da6cfc7667a0bf39:RSV-fedd653f-10b9-4baa-8edc-f8de30364638"
+            }
+          ],
+          "final_answer_sha256": "5cb67577179c2c1a12960e224e5e453828a0a1b57279a552ae5f25a6ac489b5c",
+          "terminal_sha256": "dc1db93a9c195932be781e505583327af17bdb8bc642caa534370d8d0552f920",
+          "trace_sha256": "16586c0405797a52b35b0f45df42e337ea1eb0c93fff90c81a77a8c7d70e102b",
+          "generation_requests": 3,
+          "generation_tokens": 4973,
+          "execution_wall_ns": 4148541537,
+          "execution_cpu_ns": 886595353
+        },
+        {
+          "message_id": "object-continue-1-m2",
+          "session": "s2",
+          "process_id": 3673823,
+          "status": "completed",
+          "tool_names": [
+            "get_reservation"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "2a94eafff3814147c60e7261522266b9834151eb737431b5e34e6a2e516c16de",
+          "terminal_sha256": "ffda8d69bd14eaff66d6834ee3156b59cf975ca47ae414666bcd74042b1a66f2",
+          "trace_sha256": "2a2adb5f140a48cc28e2f52e80e00f60c4032ff507f9cd646563319a661efa0d",
+          "generation_requests": 2,
+          "generation_tokens": 2702,
+          "execution_wall_ns": 1734852142,
+          "execution_cpu_ns": 959653523
+        }
+      ]
+    },
+    "object-continue-2": {
+      "category": "object_continue",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 4,
+      "messages": [
+        {
+          "message_id": "object-continue-2-m1",
+          "session": "s1",
+          "process_id": 3697094,
+          "status": "completed",
+          "tool_names": [
+            "reserve_and_label",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户已为物品'项目B设备箱-批次二'完成预订并制作标签。数量：1，目的地：二楼会议室，包装要求：原箱封装。状态：标签已创建。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "project": "项目B",
+                "batch": "批次二"
+              },
+              "basis": "tool_observation",
+              "source_ref": "src-b03a15bd1ffe9f1ded32b09f2f544d4a34272635c9fca02213a8216ed2c88506",
+              "object_ref": "src-b03a15bd1ffe9f1ded32b09f2f544d4a34272635c9fca02213a8216ed2c88506:RSV-b22ba2fe-1d59-4328-9850-18ee527c6474"
+            }
+          ],
+          "final_answer_sha256": "602f7c2800ee72754e85adc33365cd9743693809d1f4a72a4bb4f8d5d013ec07",
+          "terminal_sha256": "f813f846629a9e0171b0428e27ec221c84ed106732973fbb82091fe1dcd7d367",
+          "trace_sha256": "c9bbbd8054d1719936fefe021e14c84a3d93e7599daf04e93aaecdaafc9aeb39",
+          "generation_requests": 3,
+          "generation_tokens": 5023,
+          "execution_wall_ns": 4207974940,
+          "execution_cpu_ns": 1017844957
+        },
+        {
+          "message_id": "object-continue-2-m2",
+          "session": "s2",
+          "process_id": 3697572,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "get_reservation"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "63ba0d7845901a3e1e77d871ba2a00e555330bf65afb8fd4d3367e108faadea9",
+          "terminal_sha256": "dec914f29736fc9d6a4b873481990be57a320f593329eeaf85033f77a48fbb22",
+          "trace_sha256": "5ba57f33cc6a62641e620e6f4f082e29c27f714a5f4b7859ca0e0ad5b51b1a84",
+          "generation_requests": 3,
+          "generation_tokens": 7099,
+          "execution_wall_ns": 2528515963,
+          "execution_cpu_ns": 976840569
+        }
+      ]
+    },
+    "object-continue-3": {
+      "category": "object_continue",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 4,
+      "messages": [
+        {
+          "message_id": "object-continue-3-m1",
+          "session": "s1",
+          "process_id": 3698002,
+          "status": "completed",
+          "tool_names": [
+            "reserve_and_label",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户已为物品'实验耗材-冷链区'预订并制作标签，数量6，目的地'冷链收货点'，包装要求'保温包装'。reservation_id: RSV-fd87b339-7f15-4034-b5ec-9a39036caf33",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "project": "实验耗材预订"
+              },
+              "basis": "tool_observation",
+              "source_ref": "src-21a83ded5baab46db4b06a3abc232255965e3f187c18a0a9e248a30dfa722e52",
+              "object_ref": "src-21a83ded5baab46db4b06a3abc232255965e3f187c18a0a9e248a30dfa722e52:RSV-fd87b339-7f15-4034-b5ec-9a39036caf33"
+            }
+          ],
+          "final_answer_sha256": "844d755a524c3df45e2f4e10a6a467456d1a651c8d4b32295d6f05ad514441e8",
+          "terminal_sha256": "f0f05a258b9c3a7d4d90b543a3d905f62d4fcfbf8c425d86e9956a71aeaffb14",
+          "trace_sha256": "147f6be89d513ea38529ea165fae75d27c6a3d5384a277b7b25d333b7ad3cda0",
+          "generation_requests": 3,
+          "generation_tokens": 5066,
+          "execution_wall_ns": 5420898629,
+          "execution_cpu_ns": 985400005
+        },
+        {
+          "message_id": "object-continue-3-m2",
+          "session": "s2",
+          "process_id": 3698711,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "get_reservation"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "d49fe0af1a00c51e77cbfcd1008f7c908f9757e0db5b433d816e23687f10fd2e",
+          "terminal_sha256": "017dd3ca695b230d96ea4d4a48c41f814e548960b1573cada3c7a2fab7a0a40b",
+          "trace_sha256": "a0dcea67af87e65e035864138b8f055576d7fb354a79dd7560fc2c9e26d1b4f4",
+          "generation_requests": 3,
+          "generation_tokens": 7103,
+          "execution_wall_ns": 2410338434,
+          "execution_cpu_ns": 865870899
+        }
+      ]
+    },
+    "object-continue-4": {
+      "category": "object_continue",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 4,
+      "messages": [
+        {
+          "message_id": "object-continue-4-m1",
+          "session": "s1",
+          "process_id": 3699073,
+          "status": "completed",
+          "tool_names": [
+            "reserve_and_label",
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "预订并制作标签：物品完整引用是“宣传手册-中文新版”，数量30，目的地“访客接待处”，包装要求“按十本分组”。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "project": "访客接待处"
+              },
+              "basis": "tool_observation",
+              "source_ref": "src-8fdaeae31db63571c04a928708ce28a48985fba10febf89359956a88e9461174",
+              "object_ref": "src-8fdaeae31db63571c04a928708ce28a48985fba10febf89359956a88e9461174:RSV-dfc076b5-2b62-48f1-812a-8c0bfe2d000b"
+            }
+          ],
+          "final_answer_sha256": "32b4d63c8868c03f8de9f1f73d6173aa0bb9d5ba2d8267ae88edd99b95902d11",
+          "terminal_sha256": "1ba46b067bd6c2b78789136b52004b23a6001ab717a08125787e47a4dc747bc9",
+          "trace_sha256": "9e73f58e3e45906535e4ede9a861ee790640df41250c05263ceda964e2a98395",
+          "generation_requests": 3,
+          "generation_tokens": 5003,
+          "execution_wall_ns": 4049321276,
+          "execution_cpu_ns": 1000294226
+        },
+        {
+          "message_id": "object-continue-4-m2",
+          "session": "s2",
+          "process_id": 3699619,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "get_reservation"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "f906762a07c398794256f01db89140ca35b72c9cdec9518dcec78ff8582be0a8",
+          "terminal_sha256": "db89c7ccb89143438c74b3b2821acfd7df8885540c7cc1035e39f231c007af50",
+          "trace_sha256": "f5d27c53649af5f1faefd22ee203014ee62a29dd7476a6af99bf349d50618882",
+          "generation_requests": 3,
+          "generation_tokens": 7039,
+          "execution_wall_ns": 2350502420,
+          "execution_cpu_ns": 872297514
+        }
+      ]
+    },
+    "restart-1": {
+      "category": "restart",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "restart-1-m1",
+          "session": "s1",
+          "process_id": 3674179,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "action": "create",
+              "basis": "user_statement",
+              "content": "用户偏好回复格式：先列步骤，再给例子。",
+              "kind": "semantic",
+              "scope": {
+                "topic": "reply_format"
+              }
+            }
+          ],
+          "final_answer_sha256": "f3329800081fd3f06ee68acddfb185b25df098bac9d129c12dc60b9991d2f861",
+          "terminal_sha256": "a35d7b05b9cfcac2cb1f7aba0481f49cd3cc0c144382776cce63a38d67986dbc",
+          "trace_sha256": "b9deeb968571f4b46d93ecda98cfcd9a5f2ceb94c5a16f03840bf8bdc859d4d9",
+          "generation_requests": 2,
+          "generation_tokens": 2624,
+          "execution_wall_ns": 2091509798,
+          "execution_cpu_ns": 942890527
+        },
+        {
+          "message_id": "restart-1-m2",
+          "session": "s2",
+          "process_id": 3674614,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "c6a2e4328376d904b69cb16f08bf8a106820733b916656aedf1893c4cfe56f5f",
+          "terminal_sha256": "8583cb38dcc62150a930b27f63f2f10a60f3d516ba9e396563da95a4428937f7",
+          "trace_sha256": "ed57d14d15b4c3422c95b90f3bfe1c7bd62bc548f24033f77ceea9d57fb1f001",
+          "generation_requests": 2,
+          "generation_tokens": 3181,
+          "execution_wall_ns": 1756510944,
+          "execution_cpu_ns": 966590243
+        }
+      ]
+    },
+    "restart-2": {
+      "category": "restart",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "restart-2-m1",
+          "session": "s1",
+          "process_id": 3699990,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "User prefers quiet meeting rooms.",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement",
+              "scope": {
+                "type": "personal_preference"
+              }
+            }
+          ],
+          "final_answer_sha256": "a338ef26f4c3866a655efa4026b90c268179ab4cb758bb95ee962878dec2d96a",
+          "terminal_sha256": "f1b57fa15d5d3f3128fab8745c22a6b3d92626df460d9c13ea49d2010566f683",
+          "trace_sha256": "ac12ee037827610be9ba3e72c8a80b473d45514dc33634f400cbe63baca45279",
+          "generation_requests": 2,
+          "generation_tokens": 2612,
+          "execution_wall_ns": 2142494142,
+          "execution_cpu_ns": 954666819
+        },
+        {
+          "message_id": "restart-2-m2",
+          "session": "s2",
+          "process_id": 3700333,
+          "status": "completed",
+          "tool_names": [
+            "search_memory",
+            "read_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "7f694606932e814bc0239a2b10d58d2c040d52e17a0fbe454c4b8ee9ea5e1d8e",
+          "terminal_sha256": "cc08b920612c38ab9344a7b9d37f5bb3e2717efca9edc33829e8f8f23217ed26",
+          "trace_sha256": "ca89339292c614be5fede213cc6323755d5cc70a5c54579829d1319de7dc408f",
+          "generation_requests": 3,
+          "generation_tokens": 4656,
+          "execution_wall_ns": 2115856051,
+          "execution_cpu_ns": 995038396
+        }
+      ]
+    },
+    "restart-3": {
+      "category": "restart",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "restart-3-m1",
+          "session": "s1",
+          "process_id": 3700867,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "我想要餐食中少放辣椒。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "category": "food_preference",
+                "subject": "spiciness",
+                "preference": "less chili"
+              }
+            }
+          ],
+          "final_answer_sha256": "e27c0ec9ca774ec133460a1a83ceb0eaebcdac64f13980f77dd4eb2402467b6c",
+          "terminal_sha256": "48f01159400be94b764313896c2cf94cb9cf938b8c8873023bb1476144ef887d",
+          "trace_sha256": "69d69efc75f4b06cb92506d097376111c708a3eca9237ae7d6e2efba5b597d1b",
+          "generation_requests": 2,
+          "generation_tokens": 2623,
+          "execution_wall_ns": 2019158536,
+          "execution_cpu_ns": 943763458
+        },
+        {
+          "message_id": "restart-3-m2",
+          "session": "s2",
+          "process_id": 3701277,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "fc6c9d8d13b3248b126ab05694aef4e9444478dfd2c2897b052400c4c84f53b7",
+          "terminal_sha256": "dea49214e65873cbb883f23e0134fb861593227f266c31fe573a1d836dc2ad85",
+          "trace_sha256": "668d5a8ef7ea5d4050c16eb43fedc9681148195d7510417354ab5c086a00bf78",
+          "generation_requests": 2,
+          "generation_tokens": 3189,
+          "execution_wall_ns": 1635370165,
+          "execution_cpu_ns": 852045065
+        }
+      ]
+    },
+    "restart-4": {
+      "category": "restart",
+      "verdict": "PASS",
+      "reason": "Full original semantic task and frozen checks passed after Root transcript review and durable readback.",
+      "records": 1,
+      "current_revisions": [
+        1
+      ],
+      "history_versions": 0,
+      "source_count": 2,
+      "messages": [
+        {
+          "message_id": "restart-4-m1",
+          "session": "s1",
+          "process_id": 3701615,
+          "status": "completed",
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_proposals": [
+            {
+              "content": "用户希望将笔记按项目进行分类组织。",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement",
+              "scope": {
+                "topic": "note_organization"
+              }
+            }
+          ],
+          "final_answer_sha256": "e546b2f4a6561527060c4ae757fcf76143e209b5367c481c51bedc534bd11215",
+          "terminal_sha256": "278552e73f076c163b0e542edfd71e39fdd5989c3a3b2bd943bde196a68b565d",
+          "trace_sha256": "62ac61cd63809413db2bb2ad2c03d9805fe695421e2377c08c0f2f738cb20496",
+          "generation_requests": 2,
+          "generation_tokens": 2650,
+          "execution_wall_ns": 2238072345,
+          "execution_cpu_ns": 863422029
+        },
+        {
+          "message_id": "restart-4-m2",
+          "session": "s2",
+          "process_id": 3702057,
+          "status": "completed",
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_proposals": [],
+          "final_answer_sha256": "61c95601fd8ca717842f8388e844f8b59745f375b038cc1036e2add7a14a682a",
+          "terminal_sha256": "147fe7c6177e0a424debfa5b8ab9394bee620830316617d775b9837a171683cc",
+          "trace_sha256": "7a17bd0313bf1a302f795b4347f25ef50776b46bcc857461d9d58c8d5154dfd0",
+          "generation_requests": 2,
+          "generation_tokens": 3160,
+          "execution_wall_ns": 1761837978,
+          "execution_cpu_ns": 970493791
+        }
+      ]
+    }
+  },
+  "offline_adjudication": "Root read complete original source, proposal, commit, delivered material, world and final answers; then independently reopened all24 via public SDK after real process exits. No substring-only semantic classifier or model Judge. The two version failures are counted even though their final answers are correct.",
+  "failure_details": {
+    "update-2": "Initial English preference card written in English; Chinese lexical search/read could find raw Chinese statement but no matching formed record, then create. Later final answer correctly inferred history, but both cards current revision1.",
+    "update-3": "Explicit distance-unit change generated create immediately despite generic update instruction. Later current/history answer correct from original sources, but no revision2."
+  },
+  "qualification": [
+    "This is a synthetic development gate, not unseen formal research evidence or general safety assurance.",
+    "Generic prompt guidance accounts for observed repairs; strong simple and Prompt-only baselines must get equivalent guidance.",
+    "All four actual business memory proposals omit finite fields and remain fields_verification unchecked. No actual model Field-grounded effect demonstrated.",
+    "Some updates omit scope; free prose may paraphrase object keys or omit result state. Supported identity stays in original receipts and bound refs, not automatically verified prose.",
+    "restart-2 succeeds from original raw Chinese source while its English formed card is not returned by Chinese keyword read. Do not attribute raw-source fallback to semantic card quality.",
+    "Full per-operation Store IO still incomplete; Postgres/concurrency/crash/lifecycle/pilot/formal/second-family/statistics/paper acceptance remain outstanding."
+  ],
+  "readback": {
+    "path": "artifacts/v13-1-d0-r9/separate-process-all24-readback.json",
+    "sha256": "a60bd632cc13925091e7d489bd47a6c5b5057456ac1abfeb89bcea409efbcb84"
+  },
+  "cost": {
+    "generation_requests_delta": 107,
+    "generation_tokens_delta": 170905,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "six_generation_requests": 26,
+    "six_generation_tokens": 39392,
+    "ledger_before_sha256": "7f9b7e3a108a136ede59f04830c5bb91bd80e0626f3f80845cabd53e3782690c",
+    "ledger_after_sha256": "e86e20257aeb0a8a7bc826f5b207f5092fc2b28d8795639666112f698b98fbec",
+    "continuous_generation_requests": 6337,
+    "continuous_generation_tokens": 11695302,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial",
+    "dollar_or_gpu_savings": null
+  },
+  "next": "P2 complete finite field/content/failure accounting gaps and P3 opt-in lossless external baseline micro acceptance before pilot or formal matrix. Preserve R9 failures and new source/config freezes.",
+  "product": "NO_GO",
+  "full_goal_status": "ACTIVE",
+  "offline_object_world_checks": {
+    "path": "artifacts/v13-1-d0-r9/offline-object-world-checks.json",
+    "sha256": "83a338f8f6736a4f10ee28ac7e5bb53db78e92b1866be5f8ae23c67d0f1d2877",
+    "original_rubric_fields_all_match": true
+  }
+}

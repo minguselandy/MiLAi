@@ -53,7 +53,9 @@
         "data/manifests/v13-1-d0-r7-six-results.json",
         "docs/V13_1_D0_R7_RESULTS.md",
         "data/manifests/v13-1-receipt-r8-results.json",
-        "docs/V13_1_RECEIPT_R8_RESULTS.md"
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -65,7 +67,9 @@
       "authoritative_evidence_required": "gate evidence and explicit report",
       "status": "PARTIAL",
       "evidence": [
-        "docs/V13_1_EXECUTION.md"
+        "docs/V13_1_EXECUTION.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -75,7 +79,7 @@
       "plan_section": "2,16.2",
       "requirement": "Six natural save/read/update/scope/continue/restart E2E development stories",
       "authoritative_evidence_required": "actual model/tool traces, real stores and process exit/reopen",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-engineering-results.json",
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
@@ -87,7 +91,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -97,13 +103,15 @@
       "plan_section": "2,8.2",
       "requirement": "24 fixed normal checks, four per capability; >=22 successful, no owner leak/false saved receipt",
       "authoritative_evidence_required": "all planned24 independent case receipts and offline evaluation",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-engineering-results.json",
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -117,7 +125,9 @@
       "evidence": [
         "data/manifests/v13-1-engineering-results.json",
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
-        "docs/V13_1_D0_R1_RESULTS.md"
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -133,7 +143,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-retrieval-r2-results.json",
-        "docs/V13_1_RETRIEVAL_R2_RESULTS.md"
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -151,7 +163,9 @@
         "data/manifests/v13-1-update-r3-results.json",
         "docs/V13_1_UPDATE_R3_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -173,7 +187,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-d0-r7-six-results.json",
-        "docs/V13_1_D0_R7_RESULTS.md"
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -191,7 +207,9 @@
         "data/manifests/v13-1-d0-r7-six-results.json",
         "docs/V13_1_D0_R7_RESULTS.md",
         "data/manifests/v13-1-receipt-r8-results.json",
-        "docs/V13_1_RECEIPT_R8_RESULTS.md"
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -201,11 +219,13 @@
       "plan_section": "2",
       "requirement": "Terminate actual process then reconnect same resource; do not use Python memory as proof",
       "authoritative_evidence_required": "exit codes, process identities and persistent readback",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-engineering-results.json",
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
-        "docs/V13_1_D0_R1_RESULTS.md"
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -219,7 +239,9 @@
       "evidence": [
         "data/manifests/v13-1-engineering-results.json",
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
-        "docs/V13_1_D0_R1_RESULTS.md"
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -670,7 +692,9 @@
         "data/manifests/v13-1-d0-r7-six-results.json",
         "docs/V13_1_D0_R7_RESULTS.md",
         "data/manifests/v13-1-receipt-r8-results.json",
-        "docs/V13_1_RECEIPT_R8_RESULTS.md"
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -689,7 +713,9 @@
         "data/manifests/v13-1-scope-r6-results.json",
         "docs/V13_1_SCOPE_R6_RESULTS.md",
         "data/manifests/v13-1-receipt-r8-results.json",
-        "docs/V13_1_RECEIPT_R8_RESULTS.md"
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     },
@@ -774,7 +800,9 @@
         "data/manifests/v13-1-d0-r7-six-results.json",
         "docs/V13_1_D0_R7_RESULTS.md",
         "data/manifests/v13-1-receipt-r8-results.json",
-        "docs/V13_1_RECEIPT_R8_RESULTS.md"
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
       ],
       "conditional": false
     }

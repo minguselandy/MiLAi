@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v13.1 可用性优先开发与实验 | **ACTIVE**，首批P0/P1/P2进行中；完整P0–P8未完成 | [执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
+| v13.1 可用性优先开发与实验 | **ACTIVE**，R9正常开发门槛22/24；完整P0–P8未完成 | [R9](V13_1_D0_R9_RESULTS.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |

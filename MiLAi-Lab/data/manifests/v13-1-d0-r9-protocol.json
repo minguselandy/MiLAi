@@ -1,0 +1,52 @@
+{
+  "kind": "MILAI_V13_1_COMBINED_NORMAL_D0_R9",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "data/fixtures/v13-1-d0-normal.json",
+  "fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "config_path": "configs/v13-1-d0-r9.json",
+  "config_sha256": "b13f844d9d2e3ce323054cd8e15932b3b932ba91eeae5fc0889721852d0a670d",
+  "source_commit": "3f44ac5; Python content unchanged from cd88fb8",
+  "included_engineering_changes": [
+    "Unicode lexical retrieval from R2",
+    "generic update instruction from R3",
+    "relative-time instruction from R5",
+    "question/scope instruction from predeclared R4 and real R6 candidate consumption",
+    "generic public status/label_status meaning instruction from R8"
+  ],
+  "held_constant": [
+    "original normal24 fixture and offline rubric",
+    "model/parameters/Host tool permissions",
+    "SourceEvent/ref/mode field_grounded",
+    "old default behavior",
+    "original continuous ledger",
+    "fresh process/session per public message",
+    "same persistence resource within each case",
+    "per-message12calls/output4096/HTTPconcurrency1"
+  ],
+  "execution_sequence": {
+    "first_six": [
+      "save-1",
+      "recall-1",
+      "update-1",
+      "scope-1",
+      "object-continue-1",
+      "restart-1"
+    ],
+    "remaining18": "Only after Root checks actual six terminal chains; run all remaining predeclared cases on identical source/config without adjusting instructions to outcomes."
+  },
+  "offline_gate": {
+    "minimum_successes": 22,
+    "denominator": 24,
+    "maximum_owner_leaks": 0,
+    "maximum_false_saved_receipts": 0
+  },
+  "offline_rubric_sha256": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+  "offline_scorer": "Root full actual proposals/receipts/records/world/answers + independent SDK reopening; no keyword-only scoring; uncertain staysunknown",
+  "pending_fields_limitation": "Actual fields projection may be empty; do not infer model grounding benefit from mechanical guard. Current scope omission in update remains an explicit limitation.",
+  "failure_policy": "Preserve all outcomes and earliest breaks; do not silently rewrite bank, retry into pass, alter rubric or drop cases. Research matrix remains separate.",
+  "ledger_before_sha256": "7f9b7e3a108a136ede59f04830c5bb91bd80e0626f3f80845cabd53e3782690c",
+  "full_goal_status": "ACTIVE; P0-P8 unchanged",
+  "runtime_must_not_read_protocol_or_rubric": true,
+  "previous_r7_result_sha256": "c973a3bab6ce263f1d1ab29f454be3db06bab4a887668a01d89e0be75f8cbaa9",
+  "previous_r7_policy": "R7 negative5/6 and remaining18 NOT_RUN remain preserved, R9 is a distinct source/config identity and all costs continue"
+}

@@ -1,6 +1,6 @@
 # v13.1 执行记录
 
-日期：2026-09-30。状态：ACTIVE / P1/P2机械原型通过，首6故事3/6；完整规划未完成。
+日期：2026-09-30。状态：ACTIVE / R9正常开发门槛22/24；完整P0–P8未完成。
 
 ## 授权与原始范围
 
@@ -48,6 +48,9 @@ native-tools Qwen3.6-35B-A3B-FP8服务；7861为bge-m3。均实际GET200，上�
 [R8](V13_1_RECEIPT_R8_RESULTS.md)在相同实际lookup回执下，通用字段含义说明修复最终矛盾回答；
 两组都无新业务效果。新增4generation/5314tokens；R8终态连续6230generation/11524397tokens，
 unknown0。R9组合正常24协议已冻结，仍先检查原六故事，未宣布门槛通过。
+[R9完整正常检查](V13_1_D0_R9_RESULTS.md)原六故事6/6后执行余18例；最终22/24，两个更新
+版本失败仍计入分母。48消息/48实际进程及独立SDK全24读回，正常开发门槛通过。新增
+107generation/170905tokens；R9终态连续6337generation/11695302tokens/416930embedding，unknown0。
 后续每次形成、Host、embedding、恢复和失败重试继续原账本，不建立零起点替代账本。
 价格与总费用上限未知，保持null；正式预算由pilot的实际分布决定。
 
@@ -95,12 +98,13 @@ source_mapping，未进入native dialogue content。P3须独立冻结lossless tr
 | 阶段 | 当前证据 | 状态 |
 |---|---|---|
 | P0 | main/服务/ledger/基线安装/暴露引用有直接只读核查 | PARTIAL；完整候选身份和正式分组还未冻结 |
-| P1 | 原R1六故事3/6；合并R7为5/6，对象回执消费失败 | PARTIAL；24门槛未通过，余18NOT_RUN |
+| P1 | R1六故事3/6、R7为5/6保留；R9六故事6/6，完整24为22/24 | NORMAL_GATE_PASS；两个版本更新失败，完整P1仍PARTIAL |
 | P2 | 服务/Agent16、legacy9、architecture217，静态/矩阵通过 | SCOPED_MECHANICAL；实际模型fields为空，效果未证明 |
 | P3 | 实际摄入调用路径与外部环境身份核查 | PARTIAL；微型行为验收NOT_RUN |
 | P4–P8 | 原始scope/恢复/pilot/正式矩阵/第二家族/统计/复现/初稿要求完整保留 | NOT_RUN |
 
-Engineering-valid、Usability-ready和Research-supported均未验收。Product保持NO_GO。
+R9预定正常开发门槛已通过；完整Engineering-valid、Usability-ready全部配套要求和Research-supported
+仍有未满足项，不能把局部门槛当完整规划完成。Product保持NO_GO。
 完整计划不能因负结果或预算耗尽自动改写为较小目标；后续按实际证据更新每项要求。
 
 ## 反思记录 0：已有字段真实性断点

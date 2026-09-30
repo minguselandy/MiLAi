@@ -1,0 +1,173 @@
+{
+  "kind": "MILAI_V13_1_D0_R9_SIX_GATE",
+  "status": "SIX_CLOSED_ALLOW_ORIGINAL_REMAINING18",
+  "runtime_freeze_sha256": "7ab4dd3687753140b96c514b6a07871f855b0dcfebe53587afa2318f99ba9fdd",
+  "fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "config_sha256": "b13f844d9d2e3ce323054cd8e15932b3b932ba91eeae5fc0889721852d0a670d",
+  "cases": {
+    "save-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3670204,
+          "generation_requests": 2,
+          "generation_tokens": 2576,
+          "terminal_sha256": "e5516983e11c2f0f0663e0c9aef7829cf8327e176f1bc5db337549c0789ff7bb",
+          "trace_sha256": "037a6c97e459f7d5a2cbf8cf0a37d286cc7917e01a8d89ef20db571063ad21e0",
+          "final_answer_sha256": "6dcbf30c78149936a60858e3ccc198326623452da6c5bc017cdbfa8323d31045"
+        }
+      ]
+    },
+    "recall-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3670635,
+          "generation_requests": 2,
+          "generation_tokens": 2609,
+          "terminal_sha256": "829fc338ec841b898e9face46d990fdd63f05bb1cee719d32ee519b2e8b620a3",
+          "trace_sha256": "e87f0b419664c188b99b3a0b35946772dc0c336e139e8ace95e907ed6b7d192a",
+          "final_answer_sha256": "c96a65b5b303f823d572b2dfd73c4bf01d0dc6cd985333f6cb38ea9e4ff12a6e"
+        },
+        {
+          "status": "completed",
+          "process_id": 3671002,
+          "generation_requests": 2,
+          "generation_tokens": 3153,
+          "terminal_sha256": "8221e127eb69931de74b30dff937e762e9c8034c5756726b2c8b98ae9dfe6000",
+          "trace_sha256": "5285bf8df2503f593e771553828bf8696f5acba142a78c3a37c2172192846ffd",
+          "final_answer_sha256": "45b479cf873980dadffb89636871ef59bad9263ef2077c30d633199d5b37030c"
+        }
+      ]
+    },
+    "update-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3671342,
+          "generation_requests": 2,
+          "generation_tokens": 2586,
+          "terminal_sha256": "8474cac21a497b5459043ea6763a56eb0bf2dc9c48fc05b930ec94c8d9f04a2b",
+          "trace_sha256": "796562201b15a2f7db3e774d42a752518cd9ac1f88f1d8458e9e2ca5f0025db6",
+          "final_answer_sha256": "ef84c4d45580589f2ae22fcfeff6f913f18713de2de1367744378b76c63e32df"
+        },
+        {
+          "status": "completed",
+          "process_id": 3671681,
+          "generation_requests": 3,
+          "generation_tokens": 5669,
+          "terminal_sha256": "2b579a0a7796051c62df81e80cdc7b9c11a5de806d8fefbede273cabdbc8b52f",
+          "trace_sha256": "5b98757b2644c53b379f13301350cb053f8ec492d56ce29c8f92c7b6ac8f7785",
+          "final_answer_sha256": "70a2bf4444c41e6aa5f9373fee20e72472fc89f8817c0938cdfd049ec2b455cc"
+        },
+        {
+          "status": "completed",
+          "process_id": 3672120,
+          "generation_requests": 2,
+          "generation_tokens": 3410,
+          "terminal_sha256": "c8c9e9490ca29b994b28975cf6308629ebdc28c237c25efd486e450faa88820b",
+          "trace_sha256": "0eff8947ee96fed44c2814d79cff20686293a758e6ec16db490ba65c55c754a7",
+          "final_answer_sha256": "f7dc34275f94cb3d5cab6945f4285d8efd82ab431d17075b111c42ee43d44490"
+        }
+      ]
+    },
+    "scope-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3672569,
+          "generation_requests": 2,
+          "generation_tokens": 2644,
+          "terminal_sha256": "9f9aeb19789d1359eafab74d4af1f7df52ddf50e133647786ed2ee52aa3039aa",
+          "trace_sha256": "a8cf08cd810ef2b7e9138b8382ffd0029434354d25bdf58cc54720fd4c96bcdf",
+          "final_answer_sha256": "7e996032cf0730a5959506afec8e9b3c4c178e6d20350f15e84f4dd3972a39e1"
+        },
+        {
+          "status": "completed",
+          "process_id": 3672995,
+          "generation_requests": 2,
+          "generation_tokens": 3265,
+          "terminal_sha256": "4d737584371bbcfeee5580d541fe090269dbc8618a3a80e823f855afbb970f66",
+          "trace_sha256": "97d5e2bd4108e6cf8382ae02a247e28bfb02f08d77d8f854906218618f8e72fd",
+          "final_answer_sha256": "29c1ad21954d599803687befdf6c6855fa671175a675fa39164c7e40978c27c5"
+        }
+      ]
+    },
+    "object-continue-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3673357,
+          "generation_requests": 3,
+          "generation_tokens": 4973,
+          "terminal_sha256": "dc1db93a9c195932be781e505583327af17bdb8bc642caa534370d8d0552f920",
+          "trace_sha256": "16586c0405797a52b35b0f45df42e337ea1eb0c93fff90c81a77a8c7d70e102b",
+          "final_answer_sha256": "5cb67577179c2c1a12960e224e5e453828a0a1b57279a552ae5f25a6ac489b5c"
+        },
+        {
+          "status": "completed",
+          "process_id": 3673823,
+          "generation_requests": 2,
+          "generation_tokens": 2702,
+          "terminal_sha256": "ffda8d69bd14eaff66d6834ee3156b59cf975ca47ae414666bcd74042b1a66f2",
+          "trace_sha256": "2a2adb5f140a48cc28e2f52e80e00f60c4032ff507f9cd646563319a661efa0d",
+          "final_answer_sha256": "2a94eafff3814147c60e7261522266b9834151eb737431b5e34e6a2e516c16de"
+        }
+      ]
+    },
+    "restart-1": {
+      "adjudication": "PASS",
+      "messages": [
+        {
+          "status": "completed",
+          "process_id": 3674179,
+          "generation_requests": 2,
+          "generation_tokens": 2624,
+          "terminal_sha256": "a35d7b05b9cfcac2cb1f7aba0481f49cd3cc0c144382776cce63a38d67986dbc",
+          "trace_sha256": "b9deeb968571f4b46d93ecda98cfcd9a5f2ceb94c5a16f03840bf8bdc859d4d9",
+          "final_answer_sha256": "f3329800081fd3f06ee68acddfb185b25df098bac9d129c12dc60b9991d2f861"
+        },
+        {
+          "status": "completed",
+          "process_id": 3674614,
+          "generation_requests": 2,
+          "generation_tokens": 3181,
+          "terminal_sha256": "8583cb38dcc62150a930b27f63f2f10a60f3d516ba9e396563da95a4428937f7",
+          "trace_sha256": "ed57d14d15b4c3422c95b90f3bfe1c7bd62bc548f24033f77ceea9d57fb1f001",
+          "final_answer_sha256": "c6a2e4328376d904b69cb16f08bf8a106820733b916656aedf1893c4cfe56f5f"
+        }
+      ]
+    }
+  },
+  "result": {
+    "pass": 6,
+    "denominator": 6,
+    "remaining18": "AUTHORIZED_BY_PREDECLARED_PROTOCOL_AFTER_SIX_CHAIN_GATE; not yet scored",
+    "normal24_gate": "NOT_YET_SCORED"
+  },
+  "offline_audit": "Root full actual message/proposal/receipt/world/answer inspection plus independent public SDK reopened all six after process exit; correct current/historical revisions, team/week scope and label receipt consumption. No substring-only verdict.",
+  "readback_sha256": "5c769f7eac16b70e73cc8b7c2f0475e15195af5ae637e8b1c8eb95d2310c7152",
+  "owner_leaks_observed": 0,
+  "false_saved_receipts_observed": 0,
+  "qualification": "Field-grounded actual object proposal fields={} still unchecked, update scope omission and free prose remain limitations. No research or Product gate implied.",
+  "cost": {
+    "generation_requests_delta": 26,
+    "generation_tokens_delta": 39392,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "7f9b7e3a108a136ede59f04830c5bb91bd80e0626f3f80845cabd53e3782690c",
+    "ledger_after_sha256": "6c7af423ddecc076364faacf9a415a2a7f0e3bc8ce237115aeebe85d6ab4a01b",
+    "continuous_generation_requests": 6256,
+    "continuous_generation_tokens": 11563789,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial"
+  },
+  "full_goal_status": "ACTIVE"
+}
