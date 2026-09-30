@@ -79,7 +79,13 @@ E2两个上限中断的首断点分别为非业务字段误用及猜造source_re
 
 E0真实独立SQLite Store SDK重开24库；E1/E2另外只读重开23库、读取455原始items，均与最后实际回执相符，数据库SHA前后相同、0模型请求、0记忆mutation。持久化一致并非语义正确。所有104自由Host最终回答均链接实际HTTP原回包；Root审查不是独立Judge。collector对篡改、缺失、畸形回包保持未验证，不自动补答案。
 
-负结果后的一般修复仅闭合opt-in公开patch/profile字段schema，并要求新revision至少关联当前可信boundary的实际来源；历史支持可共存，no_change不新写版本。32项窄检查、两文件mypy、ruff及两边界通过，四组legacy公共catalog逐字节相同。完整参数schema实际进入Host提示；现有generation_only grammar仍仅约束action外壳。当前来源成员资格不验证文字含义，CREATE行为未改变。证据见[修复工程验收](../data/manifests/v13-2-schema-source-acceptance.json)。下一轮另冻结完整24 E0、沿用原rubric并在writer加入Host已有的“问题不是已确认偏好”和相对时间规则，不覆盖R0或挑最好重跑。
+负结果后的一般修复闭合opt-in公开patch/profile字段schema，并要求新revision至少关联当前可信boundary的实际来源；历史支持可共存，no_change不新写版本。32项窄检查、两文件mypy、ruff及两边界通过，四组legacy公共catalog逐字节相同。完整参数schema实际进入Host提示；现有generation_only grammar仍仅约束action外壳。当前来源成员资格不验证文字含义，f5a15c7未改变CREATE。证据见[修复工程验收](../data/manifests/v13-2-schema-source-acceptance.json)。
+
+[R1运行身份](../data/manifests/v13-2-e0-r1-runtime.json)独立冻结完整24 E0，沿用原rubric，在writer加入Host已有的问题/相对时间规则，保持12生成admissions、2048/6与repair0。24轨迹、48消息均完成；[R1结果](../data/manifests/v13-2-e0-r1-results.json)为20 PASS、4 FAIL、0 UNKNOWN，22/24及两个旧更新修复门禁仍未通过。四个更新例各有一张非意图偏好副本；其中语言/会议原卡后来确实修订并关联当前更正，但不能掩掉Host先前另建的旧源副本。语言最终遗漏旧英文，单位原卡仍r1，饮品最终倒置当前/以前。scope两项此次通过，不与R0拼成最佳结果。另一张重复工具观察语义卡单列，真实业务效果仍仅一次。
+
+R1实际Host六次来源拒绝、writer十三次拒绝保留；26次writer形成生成不能当26次维护成功。24库又以只读SQLite Store SDK读取418 items，最后回执与head相符、DB字节不变、0请求/0mutation。此前仅验证每份ordinary packet的metadata在2048内；同一HTTP若同时带System与旧recall ToolMessage材料，尚未证明合计2048，重复输入已计费。下一接口修复必须把当前索引与唯一ordinary材料共同计预算。
+
+只读源码/实际wire复核确认：Host的当前user source_ref只在capture文件和trace，HumanMessage正文未含ID，历史reader明确排除当前源；追加同文本查询也不能发现该ref。业务工具回执已交付实际tool ref，writer的actual_events也已含当前ref，不能把writer语义误归属归咎于这个Host缺口。现在补公开只读trusted来源索引及新建语义卡的当前边界成员检查，原输入/角色/hash不改、无目标强选/语义修正。下一cohort在READY后另冻结；D4仍未准入。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
@@ -93,7 +99,8 @@ D5新pilot、正式独立来源比较、公开任务、独立评分、第二家�
 v13.2入口为7,946 generation／20,341,038 charged generation tokens／717,188 embedding tokens；
 生成已知20,310,651，保守未知费用30,387，unknown usage为1；embedding unknown为0。
 [历史账本差额审计](../data/manifests/v13-2-historical-ledger-bridge.json)将旧快照到入口的485次生成对到484次有响应请求／4,568,357已知tokens及1次30,387保守未知费用；449次embedding／178,885 tokens也与差额一致。旧文稿44份completed回执是完成消息数，不是完整轨迹数；缺响应请求未推定完成或归零。入口表遗漏的20个源码/config差异已按两个提交的实际字节补齐并保留修订身份。入口hash只对应实验开始前，后续实际调用和快照另列。
-[R0新增费用](../data/manifests/v13-2-r0-development-accounting.json)为292次generation／903,698已知tokens与143次embedding／61,122 tokens，逐trace和连续账本完全对上。其中Host237次／722,344 tokens，形成55次／181,354 tokens；新增unknown为0。R0末累计8,238次generation／21,244,736 charged、21,214,349 known、unknown1与embedding778,310、unknown0。入口历史保守未知30,387仍留在账本。价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
+[R0新增费用](../data/manifests/v13-2-r0-development-accounting.json)为292次generation／903,698已知tokens与143次embedding／61,122 tokens，逐trace和连续账本完全对上。其中Host237次／722,344 tokens，形成55次／181,354 tokens；新增unknown为0。R0末累计8,238次generation／21,244,736 charged、21,214,349 known、unknown1与embedding778,310、unknown0。
+R1另新增124次generation／395,787已知tokens与49次embedding／21,081 tokens；其中Host98次／307,459，writer26次／88,328，全部费用对账。R1末累计8,362次generation／21,640,523 charged、21,610,136 known、unknown1；embedding799,391、unknown0。入口历史保守未知30,387仍留在账本，未宣称成本下降。价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
 
 两个D0/source-group分析工具ruff通过，实际tools边界检查通过；现存6项grandfathered依赖未新增。
 D1目标static/mypy和package边界通过，未跑全suite、build、模型质量或远端CI。

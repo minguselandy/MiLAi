@@ -1,0 +1,89 @@
+{
+  "kind": "V13_2_D4_COMMON_CAPABILITY_DRAFT",
+  "status": "READ_ONLY_DESIGN_NOT_IMPLEMENTED",
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus both original old update repairs. R0 failed; R1 underway, no D4 runtime admitted yet.",
+  "main_comparison": "M vs B6+",
+  "secondary_comparison": "M vs B2+",
+  "arms": {
+    "B2+": {
+      "label": "StrongRawRAG+",
+      "representation": "Original actually observed source events with original roles/time/hash.",
+      "formation": "Capture original events only; no semantic generation.",
+      "reader": "Common lexical+dense public-query bounded reader; records from raw sources.",
+      "memory_mutations": "No unsupported CRUD placeholders."
+    },
+    "B6+": {
+      "label": "Receipt-RAG+",
+      "representation": "Same public deterministic profiles, original source leaves and simple semantic-summary fallback.",
+      "formation": "Actual observed boundary, projection0generation; at most1paid simple summary generation for useful semantic matter, retained literal source provenance and unchecked meaning.",
+      "reader": "Same raw retrieval, deterministic observations and summary units within common2048/6budget.",
+      "limitations": "Summary does not gain M candidate revision machinery; old B6 results keep original labels."
+    },
+    "X1": {
+      "label": "Mem0-TraceEqual",
+      "representation": "Observed_events_v1 actual event carrier through pinned native Memory SDK infer=True.",
+      "formation": "Same declared closed observed boundary; native internal calls fully charged.",
+      "reader": "Public native owner-filtered get_all/get/history snapshot plus raw leaves; same public-query bounded read and metadata budget.",
+      "lifecycle": "Snapshot before SDK/history/vector close; retain close errors; independent same-path SDK reopen verifies actual add-returned IDs through public get/history. Unconfirmed native add is not automatically repeated.",
+      "snapshot": "Pinned public get_all defaults top_k20. Explicit declared snapshot bound and possible_truncation required; no private Qdrant/SQLite reads to claim full bank.",
+      "limitations": "Native timestamp/history stay native; no invented MiLAi integer revision/CAS handle or per-card semantic provenance proof."
+    },
+    "M": {
+      "label": "MiLAi v13.2",
+      "representation": "Same deterministic observations plus original source leaves and semantic candidate identity/patch.",
+      "formation": "Same observed boundary, synchronous one paid batch≤6mutations/repair0; source-level dedup qualification retained.",
+      "reader": "Common raw lexical+dense retrieval/backlinks, actual read-time candidates and bounded metadata."
+    }
+  },
+  "common": {
+    "host": "Existing7860Qwen3.6-35B-A3B-FP8,temperature0,out4096; no deployment/model change.",
+    "business": "Same public reservation/document tools, guard, live discovery, inputs and lawful threads.",
+    "prefetch": "One current-public-input prepare_context per user turn, shared continuations; explicit search_memory(query) is an extra charged read.",
+    "ordinary_material": "All metadata/source/ref/versions included in2048token/max6record initial budget.",
+    "scope": "No future/scorer/gold/hidden-world routing; actual source/owner/ref only.",
+    "public_hint": "The same generic observed-results/historical-status interpretation prompt for all arms.",
+    "recovery": "Common reachable W1/W2/W3; old actual-UPDATE W3 stays distinct/N_A if unreachable."
+  },
+  "candidate_policy": {
+    "status": "PROPOSED_BEFORE_D4_OUTPUTS_NOT_SELECTED",
+    "equal_candidates_per_arm": 2,
+    "candidates": [
+      {
+        "name": "packet1024",
+        "material_tokens": 1024,
+        "max_records": 6
+      },
+      {
+        "name": "packet2048",
+        "material_tokens": 2048,
+        "max_records": 6
+      }
+    ],
+    "selection": "Same development trajectories/configuration budget for every arm; all candidates retained. Prospective deterministic-task/semantic review rule needed before admitting actual outputs; no continuous M-only tuning into method superiority."
+  },
+  "cohorts": {
+    "exposed_document": "Original six exposed stories×fourarms=24development trajectories per selected quality setting. Current documents are an already designed workflow, not unseen.",
+    "quality": "Per-message24total generation admission, native/Host/formation/repair costs all accounted; actual enforcement must be checked before run.",
+    "budget12": "Separate common12totalgeneration cohort, no stitching old interrupted outputs into new successes.",
+    "pilot": "Proposed12newbase×2conditions×4arms96 after valid core, source graph/template family freeze before content access.",
+    "formal": "Initial60base×2×4=480 proposal, final size/stopping precision based on pilot before formal outputs."
+  },
+  "public_task_references": [
+    "NoMemory",
+    "FullHistory",
+    "RollingSummary",
+    "Ordinary-Matched",
+    "Prompt-only",
+    "old Field key cost/repair slice",
+    "SimpleMem-Text bounded official-contract confirmation; exact existing source/SDK identity before run"
+  ],
+  "implementation_risks": [
+    "ComparisonRuntime recall currently executes per ReAct; needs an opt-in ordinary cache cadence.",
+    "matched_observation_v1 formation currently runs per tool and old multi-turn Field writer; preserve legacy and add a distinct closed-boundary opt-in.",
+    "Common backend reader comparison is not complete native ask/reflect reproduction.",
+    "Second family and independent scorer unavailable; related claims remain incomplete.",
+    "Pinned public native snapshot bound must be truthful, including complete versus possibly truncated."
+  ],
+  "product": "NO_GO"
+}

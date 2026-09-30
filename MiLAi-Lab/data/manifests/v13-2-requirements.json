@@ -81,10 +81,11 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d1-source-acceptance.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "D1-02",
@@ -237,10 +238,11 @@
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "D3-03",
@@ -292,10 +294,11 @@
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "D3-06",
@@ -311,10 +314,11 @@
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "E0-01",
@@ -326,10 +330,11 @@
       "completion_evidence": "事前协议、24完整逐轨迹原结果、来源/版本/多对象/迟到机械回归，不把曝光修复当泛化。",
       "status": "NOT_PASSED",
       "evidence": [
-        "data/manifests/v13-2-e0-normal-results.json"
+        "data/manifests/v13-2-e0-normal-results.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "R0 once-run24complete:18PASS/5FAIL/1UNKNOWN. Oldupdate-2/3 structural revisions cite only old contradictory claims; supported repair and22/24 gates fail. New cohort separate."
+      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results."
     },
     {
       "id": "E1-01",
@@ -703,10 +708,11 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
-        "data/manifests/v13-2-r0-development-accounting.json"
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "INV-04",
@@ -720,10 +726,11 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
-        "data/manifests/v13-2-r0-development-accounting.json"
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-e0-r1-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
     },
     {
       "id": "DEL-01",
