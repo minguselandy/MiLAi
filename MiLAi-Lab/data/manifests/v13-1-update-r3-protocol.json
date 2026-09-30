@@ -1,0 +1,47 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_UPDATE_INSTRUCTION",
+  "status": "PRE_RESULTS_FROZEN",
+  "original_normal_fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "formation_source_commit": "983812e",
+  "formation_fixture": "data/fixtures/v13-1-update-r3-formation.json",
+  "diagnostic_fixture": "data/fixtures/v13-1-update-r3-fixed-bank.json",
+  "formation_run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-update-r3/formation/v13-1-update-r3",
+  "bank": "TO_BE_FORMED_ONCE_BY_ACTUAL_BASELINE_HOST_AND_COPIED_IDENTICALLY",
+  "arm_configs": {
+    "control": "configs/v13-1-update-r3-control.json",
+    "candidate": "configs/v13-1-update-r3-candidate.json"
+  },
+  "changed_variable": "One general system instruction for discovering and revising an explicitly changed saved preference",
+  "held_constant": [
+    "identical question-free formed bank",
+    "runtime source after shared optional-prompt plumbing",
+    "Unicode retrieval",
+    "memory tool descriptions and schemas",
+    "source/event capture and owner",
+    "field guard and CRUD",
+    "public update and current/history question",
+    "fresh process/session per message",
+    "business tool permissions",
+    "model parameters and budget",
+    "continuous ledger and HTTP concurrency1"
+  ],
+  "offline_acceptance": [
+    "baseline and candidate original proposals and committed revisions retained",
+    "candidate actual update of the discovered original record, revision2 with revision1 retrievable",
+    "new-process current/history answer identifies new and old preferences accurately",
+    "no wrong additional current memory, owner leak, or false saved-success receipt"
+  ],
+  "competing_explanation": "Retrieval repair alone may now let baseline solve final current/history answer despite duplicate cards; final-answer correctness and true versioned update must be scored separately.",
+  "denial_condition": "No correct update proposal despite explicit generic instruction, or correct persisted versions but incorrect reader response; retain the earliest break and do not silently merge cards.",
+  "generation_caps": {
+    "max_calls_per_public_message": 12,
+    "max_output_tokens": 4096,
+    "http_concurrency": 1
+  },
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_formation_sha256": "2d5c1e145d18b88cec19b230ae9177c298cc7dc8cd75f1ea855f956b58401da1",
+  "normal_check_denominator": 24,
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE; P0-P8 unchanged",
+  "runtime_must_not_read_offline_protocol_or_rubric": true
+}

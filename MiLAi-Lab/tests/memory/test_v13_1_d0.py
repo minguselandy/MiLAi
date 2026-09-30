@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -14,7 +15,7 @@ from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.runners import v13_1_d0 as runner
 
 
-def prepared(tmp_path: Path) -> Path:
+def prepared(tmp_path: Path, **config_updates: Any) -> Path:
     RunBudget(RunLimits(1, 1, None, None, None), tmp_path / "budget.json").reserve(
         "chat/completions", {"messages": [], "max_tokens": 1}
     )
@@ -53,6 +54,7 @@ def prepared(tmp_path: Path) -> Path:
         "capacity": {},
         "budget_path": str(tmp_path / "budget.json"),
     }
+    config.update(config_updates)
     write_json(tmp_path / "public.json", fixture)
     write_json(tmp_path / "config.json", config)
     root = tmp_path / "run"
@@ -60,11 +62,16 @@ def prepared(tmp_path: Path) -> Path:
     return root
 
 
+@pytest.mark.parametrize("configured_prompt", [None, "  Configured prompt sentinel.\n"])
 def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_messages(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    configured_prompt: str | None,
 ) -> None:
-    root = prepared(tmp_path)
+    root = prepared(tmp_path, **({"system_prompt": configured_prompt} if configured_prompt else {}))
+    expected_prompt = runner.SYSTEM_PROMPT if configured_prompt is None else configured_prompt
+    expected_hash = hashlib.sha256(expected_prompt.encode()).hexdigest()
+    assert runner._frozen(root)["prompt_sha256"] == expected_hash
     wires = []
     actions = [
         {
@@ -153,6 +160,22 @@ def test_existing_agent_loop_captures_real_partial_receipt_and_only_seen_message
     # Resubmission of a completed public message spends no further generation.
     assert runner.step(root, "mechanical", 0) == first
     assert len(wires) == 5
+    for wire in wires:
+        assert wire["messages"][0]["role"] == "system"
+        # The existing JSON-action provider prefixes its wire protocol; the
+        # effective Agent prompt must still be passed through verbatim.
+        assert wire["messages"][0]["content"].endswith(expected_prompt)
+        if configured_prompt is not None:
+            assert runner.SYSTEM_PROMPT not in wire["messages"][0]["content"]
+
+
+@pytest.mark.parametrize("invalid_prompt", [None, True, 123, [], {}, "", " \t\n"])
+def test_prepare_rejects_invalid_supplied_system_prompt(
+    tmp_path: Path, invalid_prompt: Any
+) -> None:
+    with pytest.raises(ValueError, match="V13_D0_SYSTEM_PROMPT_INVALID"):
+        prepared(tmp_path, system_prompt=invalid_prompt)
+    assert not (tmp_path / "run/input-freeze.json").exists()
 
 
 def test_pre_host_capture_failure_has_first_terminal_receipt(

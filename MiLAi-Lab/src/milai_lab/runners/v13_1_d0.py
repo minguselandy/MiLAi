@@ -55,6 +55,13 @@ def _sources() -> dict[str, str]:
     return {path.relative_to(LAB).as_posix(): _sha(path) for path in paths}
 
 
+def _system_prompt(config: dict[str, Any]) -> str:
+    prompt = config.get("system_prompt", SYSTEM_PROMPT)
+    if not isinstance(prompt, str) or not prompt.strip():
+        raise ValueError("V13_D0_SYSTEM_PROMPT_INVALID")
+    return prompt
+
+
 def _catalog(root: Path, mode: GroundingMode) -> list[dict[str, Any]]:
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
@@ -95,6 +102,7 @@ def prepare(
                 raise ValueError("V13_D0_PUBLIC_MESSAGE_INVALID")
     # Instantiate only the config DTO here, never a client or model service.
     VLLMConfig(**config["host"])
+    system_prompt = _system_prompt(config)
     if "capacity" not in config or "budget_path" not in config:
         raise ValueError("V13_D0_CAPACITY_AND_CONTINUOUS_BUDGET_REQUIRED")
     budget_path = Path(config["budget_path"])
@@ -115,7 +123,7 @@ def prepare(
         "transport": transport,
         "run_id": root.resolve().name,
         "source_sha256": _sources(),
-        "prompt_sha256": hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest(),
+        "prompt_sha256": hashlib.sha256(system_prompt.encode()).hexdigest(),
         "tool_catalog": catalog,
         "tool_catalog_sha256": hashlib.sha256(
             json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
@@ -272,6 +280,7 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     _business_tools(world, scope.user_id),
                     business_call_wrapper=business_wrapper,
                     memory_tools=tools,
+                    system_prompt=_system_prompt(settings),
                 )
                 key = public["message_id"]
                 model.begin_public_message(key)

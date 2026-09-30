@@ -1,0 +1,28 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_FIXED_BANK_UPDATE",
+  "diagnostic_only": true,
+  "not_a_new_normal_check": true,
+  "cases": [
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "owner": "update-1-owner",
+      "messages": [
+        {
+          "message_id": "update-1-m2",
+          "session_id": "s2",
+          "content": "更新一下：我现在更喜欢茶，不再首选咖啡。请保存新偏好。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-1-m3",
+          "session_id": "s3",
+          "content": "我的当前饮品偏好是什么？以前是什么？",
+          "new_process_before": true
+        }
+      ]
+    }
+  ],
+  "policy": "Same original explicit update and current/history question, in fresh processes/sessions over a single common formed bank; one general instruction variable."
+}
