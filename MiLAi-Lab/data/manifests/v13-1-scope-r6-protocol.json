@@ -1,0 +1,50 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_SCOPE_READER_R6",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "data/fixtures/v13-1-scope-r4-fixed-bank.json",
+  "fixture_sha256": "e3fe63ec3b498f6472c9853e5fdc68e1beb21b633ad75e900c6508727b5426bc",
+  "bank_origin": "R5 candidate actually formed once; passed predeclared team/time scope gate, no repairs",
+  "bank_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-temporal-r5/candidate/v13-1-temporal-r5/20fe66d09904df13/memory.sqlite",
+  "initial_bank_sha256": "ff78de7b1958f018322f05384228d4c5119829aea07425eeb825477b708124b7",
+  "r5_result_sha256": "1b3bb2de071521fcaffa87c46f7f2536050183b595802bff5f77bfe00d77ca87",
+  "namespace_run_id": "v13-1-temporal-r5",
+  "arms": {
+    "control": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-scope-r6/control/v13-1-temporal-r5",
+      "bank_sha256": "ff78de7b1958f018322f05384228d4c5119829aea07425eeb825477b708124b7",
+      "config": "configs/v13-1-scope-r6-control.json"
+    },
+    "candidate": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-scope-r6/candidate/v13-1-temporal-r5",
+      "bank_sha256": "ff78de7b1958f018322f05384228d4c5119829aea07425eeb825477b708124b7",
+      "config": "configs/v13-1-scope-r6-candidate.json"
+    }
+  },
+  "changed_variable": "Generic question-versus-assertion and scope applicability prompt from originally predeclared R4",
+  "held_constant": [
+    "identical actual bank bytes",
+    "temporal instruction",
+    "public original reader question",
+    "runtime source and tool catalog",
+    "owner/namespace/mode",
+    "source capture",
+    "CRUD/ref guard",
+    "business tools/permissions",
+    "model parameters/call budgets",
+    "original ledger, HTTP concurrency1"
+  ],
+  "offline_acceptance": [
+    "inspect actual delivered card and full original negating user source",
+    "do not infer a confirmed personal long-term vegetarian preference",
+    "do not persist the current question hypothesis as a confirmed personal preference",
+    "preserve any wrong proposals and actual commits even if final answer correct"
+  ],
+  "falsifier": "Correct scoped evidence delivered but erroneous inference/persistence remains: prompt insufficiency; no automatic natural-language verification or extra writer.",
+  "ledger_before_sha256": "1560ba3999cac1be47c72bbb72b0b5c314a645fbd34b009236764f8d3b910a9d",
+  "per_message_call_cap": 12,
+  "per_call_output_cap": 4096,
+  "normal_denominator_unchanged": 24,
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE",
+  "runtime_cannot_read_protocol_or_rubric": true
+}

@@ -1,0 +1,83 @@
+{
+  "kind": "MILAI_V13_1_SCOPE_R6_RESULT",
+  "status": "CANDIDATE_REAL_SCOPE_CONSUMPTION_PASSED_COMPARISON_QUALIFIED",
+  "protocol_sha256": "9d17d56bd4a25b7683706f24ac693d87db7d690e6831d3abe135b6a6050042a2",
+  "pair_freeze_sha256": "097b4072d15768f48aa031a8f89f1dd74c5ecb783dcf2b1e7dd15460ea8fabb8",
+  "initial_bank_sha256": "ff78de7b1958f018322f05384228d4c5119829aea07425eeb825477b708124b7",
+  "first_wire_difference": "system message only",
+  "arms": {
+    "control": {
+      "status": "completed",
+      "process_id": 3591497,
+      "actual_calls": [],
+      "delivered_record_ids": [],
+      "delivered_raw_event_ids": [],
+      "record_count_after": 1,
+      "new_manage_proposals": 0,
+      "final_answer_sha256": "596ba18513a195a0a1812fed29e90359826b4630756123c6af82f5d13e25c58c",
+      "final_non_inference_adjudication": "PASS",
+      "bank_consumption_adjudication": "NOT_EXERCISED: no search/read",
+      "generation_requests": 1,
+      "generation_tokens": 1016,
+      "freeze_sha256": "14c5ce26033bb9f501cd11a8409e29fa54f3e67c53294572bf3c07b4799781c5",
+      "terminal_sha256": "304b56e1d924c5a296371d8f8a1b0925fac9a55a0015737fd5388a20919a9be8",
+      "trace_sha256": "cc5c652f2504f1bdc288ef0fd06b6d7167c1030cff4a1fda1fa29cf3285292cc",
+      "execution_wall_ns": 1532552116,
+      "execution_cpu_ns": 886744854
+    },
+    "candidate": {
+      "status": "completed",
+      "process_id": 3594741,
+      "actual_calls": [
+        {
+          "name": "search_memory",
+          "args": {
+            "query": "个人饮食偏好 素食",
+            "limit": 5
+          },
+          "id": "chatcmpl-9ef520f9b3c4cb0b:tool:0",
+          "type": "tool_call"
+        }
+      ],
+      "delivered_record_ids": [
+        "984a8ab3-17f7-5cd5-827f-396c95cf4328"
+      ],
+      "delivered_raw_event_ids": [
+        "src-78168c1b14695b20e7a199b77a8cfb1f2cb8845d23755a5da2846b70e7466ee9",
+        "src-12c9e5cfa676ce81b6d68bf6226831e3f40265d131f0133e7e47cdbda10befd6"
+      ],
+      "record_count_after": 1,
+      "new_manage_proposals": 0,
+      "final_answer_sha256": "8d4323289c99731e47372aaca56396c5434d4aebfd206c2938f1454e6563fe03",
+      "final_non_inference_adjudication": "PASS",
+      "bank_consumption_adjudication": "PASS: searched actual bank, delivered scoped card and explicit original negation, used both correctly",
+      "generation_requests": 2,
+      "generation_tokens": 3030,
+      "freeze_sha256": "06fbb73d7c5e865c76eedecf7d27a513c78f6b7c2c7cb3531e3dad857b7594ef",
+      "terminal_sha256": "b9543b8d9d413d39d7b61b13141c95cd5bfb9d92eff2334566ae486efff29184",
+      "trace_sha256": "dfed0266e29b6907232e84ab93b2a123b6f78e88281aa69b51d9cd37571dce2b",
+      "execution_wall_ns": 1858761851,
+      "execution_cpu_ns": 821947193
+    }
+  },
+  "adjudication_basis": "Root read complete answers/proposals and actual delivered raw negation/scoped card; independent SDK reopened after both exits. No keyword-only verdict.",
+  "qualification": "Both final non-inference answers pass. Control read no bank, candidate searched and consumed correct scoped evidence. This is a free Agent prompt treatment with equal archive/tool access, not a strict matched delivered-material reader comparison. No final accuracy benefit or structural novelty established.",
+  "readback_sha256": "ed12a662d4ebe7c92721289a40be6eb91890ce810ca4661e577fdf84abf9ecf3",
+  "cost": {
+    "generation_requests_delta": 3,
+    "generation_tokens_delta": 4046,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "1560ba3999cac1be47c72bbb72b0b5c314a645fbd34b009236764f8d3b910a9d",
+    "ledger_after_sha256": "169c5fa4bdea11c22e71217ea7c1692368fd3fe5fa6f6a89279d2fce9d963a45",
+    "continuous_generation_requests": 6200,
+    "continuous_generation_tokens": 11480939,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial"
+  },
+  "decision": "Retain general prompt as an engineering candidate; strongest prompt-only baselines must receive equivalent generic guidance. Run combined candidate on original six stories, then original24 without data changes if chain closes.",
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE"
+}

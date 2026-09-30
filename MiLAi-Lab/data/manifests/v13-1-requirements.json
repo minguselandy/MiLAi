@@ -47,7 +47,9 @@
         "data/manifests/v13-1-scope-r4-results.json",
         "docs/V13_1_SCOPE_R4_RESULTS.md",
         "data/manifests/v13-1-temporal-r5-results.json",
-        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     },
@@ -77,7 +79,9 @@
         "data/manifests/v13-1-retrieval-r2-results.json",
         "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
         "data/manifests/v13-1-update-r3-results.json",
-        "docs/V13_1_UPDATE_R3_RESULTS.md"
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     },
@@ -155,7 +159,9 @@
         "data/manifests/v13-1-scope-r4-results.json",
         "docs/V13_1_SCOPE_R4_RESULTS.md",
         "data/manifests/v13-1-temporal-r5-results.json",
-        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     },
@@ -642,7 +648,9 @@
         "data/manifests/v13-1-scope-r4-results.json",
         "docs/V13_1_SCOPE_R4_RESULTS.md",
         "data/manifests/v13-1-temporal-r5-results.json",
-        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     },
@@ -657,7 +665,9 @@
         "data/manifests/v13-1-update-r3-results.json",
         "docs/V13_1_UPDATE_R3_RESULTS.md",
         "data/manifests/v13-1-temporal-r5-results.json",
-        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     },
@@ -736,7 +746,9 @@
         "data/manifests/v13-1-scope-r4-results.json",
         "docs/V13_1_SCOPE_R4_RESULTS.md",
         "data/manifests/v13-1-temporal-r5-results.json",
-        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md"
       ],
       "conditional": false
     }

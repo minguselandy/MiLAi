@@ -39,6 +39,9 @@ native-tools Qwen3.6-35B-A3B-FP8服务；7861为bge-m3。均实际GET200，上�
 新增2generation/2214tokens；该轮终态连续6193generation/11472393tokens，unknown0。
 随后[R5](V13_1_TEMPORAL_R5_RESULTS.md)相对时间通用提示保留本周/团队scope；原指令再次虚构日期。
 新增4generation/4500tokens，该轮终态连续6197generation/11476893tokens，unknown0。
+随后[R6](V13_1_SCOPE_R6_RESULTS.md)候选实际读取完整否定源和scoped卡后正确使用；原指令未读取，
+两组最终均未错误推断，因此不宣称reader准确率优势。新增3generation/4046tokens；终态
+连续6200generation/11480939tokens，unknown0。R7组合候选和正常24协议已冻结，先执行原六故事。
 后续每次形成、Host、embedding、恢复和失败重试继续原账本，不建立零起点替代账本。
 价格与总费用上限未知，保持null；正式预算由pilot的实际分布决定。
 
@@ -86,7 +89,7 @@ source_mapping，未进入native dialogue content。P3须独立冻结lossless tr
 | 阶段 | 当前证据 | 状态 |
 |---|---|---|
 | P0 | main/服务/ledger/基线安装/暴露引用有直接只读核查 | PARTIAL；完整候选身份和正式分组还未冻结 |
-| P1 | 原6故事3/6；R2检索传播通过，R3通用提示及时update通过 | PARTIAL；scope未修，合并候选与24门槛未验证 |
+| P1 | 原6故事3/6；R2/R3/R5工程诊断和R6候选scope实际消费通过 | PARTIAL；合并候选与原24门槛未验证 |
 | P2 | 服务/Agent16、legacy9、architecture217，静态/矩阵通过 | SCOPED_MECHANICAL；实际模型fields为空，效果未证明 |
 | P3 | 实际摄入调用路径与外部环境身份核查 | PARTIAL；微型行为验收NOT_RUN |
 | P4–P8 | 原始scope/恢复/pilot/正式矩阵/第二家族/统计/复现/初稿要求完整保留 | NOT_RUN |
