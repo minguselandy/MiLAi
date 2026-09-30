@@ -63,8 +63,8 @@ Valid七行只有两组件，不能支撑充分独立的更新验证或5个百�
 
 ## 当前工作与剩余门禁
 
-D2工程阶段已接受；源码负责人继续实施D3一次有界公共预取、source→record反链、小patch、一次语义边界和Host提交去重，
-必要窄检查后固定E0正常24及E1/E2小型真实自由Host诊断。此前未启动v13.2模型实验。E1共同固定观察流已由4个真实应用子进程生成：各预订一次、独立重开只查询；四设置的形成/交付检验尚未运行。
+D2工程阶段已接受；D3有界预取、source→record反链、小patch、批量语义边界和Host提交去重已通过[限定工程门禁](../data/manifests/v13-2-d3-engineering-acceptance.json)。54项当前reader/来源/实际SIGKILL检查通过；一个内部schema断言首次失败保留，改用真实公开tool_call_schema后的单项通过。此前137项affected属于较早API身份，不冒称当前整套共同SHA。普通recall_context与显式追加search_memory(query)已分开，后者按实际参数检索并收费。源码提交bb1b9a7保持HOLD。
+[E0/E1/E2运行身份](../data/manifests/v13-2-small-development-runtime.json)已无网络冻结208源码/CLI文件、8配置、工具目录、rubric、环境、模型route与连续账本；每回合普通2048/6、批量最多6动作、默认修复0，Host/source级去重不保证多事项保存完整。冻结时新generation/embedding均0，下一步Root串行实际运行。E1共同固定观察流已由4个真实应用子进程生成：各预订一次、独立重开只查询；四设置的形成/交付检验尚未运行。
 运行后证据collector已在旧R9核对48个实际HTTP最终回答及107次／170,905 tokens；篡改、缺失、畸形回包保持未验证，不自动语义评分。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。

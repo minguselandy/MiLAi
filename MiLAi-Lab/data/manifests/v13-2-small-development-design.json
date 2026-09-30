@@ -1,6 +1,6 @@
 {
   "kind": "V13_2_SMALL_DEVELOPMENT_DESIGN",
-  "status": "INPUTS_DECLARED_RUNTIME_NOT_FROZEN",
+  "status": "INPUTS_DECLARED_RUNTIME_FROZEN",
   "executable": false,
   "selection_uses_v13_2_outcomes": false,
   "inputs_sha256": {
@@ -109,5 +109,11 @@
       "actual_model_samples": 0,
       "scope": "Isolated semantic_boundary versus task_host generation accounting, unknown preserved; does not supersede the separate old48-final linkage validation identity."
     }
+  },
+  "runtime": {
+    "path": "data/manifests/v13-2-small-development-runtime.json",
+    "sha256": "73de4df5a690cdb444dc4167d7dcaae6b2e47d32ab3db235beb156600532c1fe",
+    "prepared_without_network": true,
+    "source_commit": "bb1b9a7ad878678cd51fb573dc55cbe2e2ef106c"
   }
 }
