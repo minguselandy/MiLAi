@@ -93,7 +93,7 @@ R2四个更新都在更正边界修订同ID原卡、引用实际当前更正、�
 
 Root逐实际wire复算104次Host请求：当前索引、一份ordinary材料及全部当前recall引用正文共同计预算，最大1975 tokens、至多6条；实际当前user ref/role/hash与真实capture匹配。此界限不包括完整HTTP的schema、业务回执、显式追加读取及旧回合packet，其费用完整保留。独立只读SQLite Store SDK又重开24库、读取407 items，head/history与最后回执相符、DB字节不变、0请求/0mutation。维护为23 skipped_host_committed、13 committed、3 no_change、9 pending；六次writer拒绝均留存。
 
-只读源码审计发现后续缺口：普通record只呈现当前revision；source回链内部保存matched revisions，公开结果却只返回当前卡。已有read_memory(id,revision)可读确切旧版，但没有实际版本枚举或明确省略入口。计划5.2/5.3及6.1要求的有界历史可发现性尚不完整；候选修复须只呈现已选卡的实际版本/匹配版本metadata、保留原预算与CAS，不用语言或案例选版本。单次writer目前只开放写工具，索引本身不会给它旧正文，也不证明上述语义错误会消失。先保留当前执行身份的100/1k/10k性能基线，再接受一般修复。
+只读源码审计发现后续缺口：普通record只呈现当前revision；source回链内部保存matched revisions，公开结果却只返回当前卡。已有read_memory(id,revision)可读确切旧版，但没有实际版本枚举或明确省略入口。计划5.2/5.3及6.1要求的有界历史可发现性尚不完整；候选修复须只呈现已选卡的实际版本/匹配版本metadata、保留原预算与CAS，不用语言或案例选版本。单次writer目前只开放写工具，索引本身不会给它旧正文，也不证明上述语义错误会消失。固定fd1执行身份的[100/1k/10k Source规模基线](V13_2_SOURCE_SCALE_BASELINE.md)已完成三规模七阶段各20次，共420可控性能样本；Source与原账本字节未变、0模型HTTP。缓存仍扫描全bank且随规模明显变慢，保留全部负性能结果；actual SDK/tokenizer但离线向量、10语义卡且无业务对象/操作流，D5-10仅PARTIAL。此基线不证明方法加速或长程语义收益；随后才接受一般历史修复。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 公开任务另有[只读准入合同](V13_2_PUBLIC_TASK_ADMISSION.md)：MERIT作者固定commit/包闭包核对，已曝光seed0原完整五episode/七消息arc与world字节重建一致，五原生初始checker均false、world未变、0新arc/0业务/0模型请求。此限定复现不准入新任务，旧及预留seeds继续排除，D5-04仅PARTIAL。

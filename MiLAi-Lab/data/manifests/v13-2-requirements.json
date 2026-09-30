@@ -596,9 +596,14 @@
       ],
       "requirement": "100/1000/10000可控事件索引扫描与p50/p95增长，测后再优化。",
       "completion_evidence": "扫描/lookup/I/O/wall分布和重放，不拿性能合成文本冒称长程语义收益。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-source-scale-baseline-freeze.json",
+        "data/manifests/v13-2-source-scale-baseline-results.json",
+        "docs/V13_2_SOURCE_SCALE_BASELINE.md"
+      ],
+      "condition": null,
+      "qualification": "All100/1k/10k Source/10semantic-card scopes and420controlled samples complete before optimization; actual SDK/tokenizer, offline vectors/zeroHTTP. No object/operation stream, natural long-range semantics or method speedup; shared-host wall timings descriptive."
     },
     {
       "id": "D5-11",
