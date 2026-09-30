@@ -1,6 +1,6 @@
 {
   "kind": "MILAI_V13_1_P3_CONTROLS_MICRO_PUBLIC",
-  "status": "DRAFT_BEFORE_SOURCE_ACCEPTANCE_AND_REAL_HTTP",
+  "status": "PUBLIC_INPUT_FROZEN_BEFORE_REAL_HTTP",
   "origin": "OriginalP3 actualcapturedpublic user/tool receipts unchanged; scripted assistants exactlyretained. Two cases add substantive scriptedclosedpublicpreferences/limits, suppliedidenticallyall7controls, not model-generated history. No artificialnoise for accuracy/Attention; long failure input only explicit capacity mechanicalstress.",
   "cases": [
     {
@@ -202,18 +202,17 @@
             "boundary_id": "closed-3",
             "records": [
               {
-                "id": "m-ebd5175fd920cb639b892a95",
-                "event_id": "src-239d80dc2084f28f4159e71f40fd527b2b175fbd82b481b4cfde5603a323001d",
+                "id": "v13-controls-preference-change-2-user",
                 "role": "user",
                 "content": "这个变化是我目前的个人偏好；过去首选咖啡的观察要作为历史保留。",
-                "timestamp": "2026-09-30T04:23:53.782092+00:00",
-                "session_id": "s-0b889c27d6bfe2ad4ec3bb92"
+                "timestamp": "2026-09-30T05:00:02+00:00",
+                "execution_origin": "synthetic_scripted_history"
               },
               {
-                "id": "m-ad65511a788004ebfde027ad",
+                "id": "v13-controls-preference-change-2-assistant",
                 "role": "assistant",
                 "content": "收到这条信息。",
-                "timestamp": "2026-09-30T04:23:53.793378+00:00",
+                "timestamp": "2026-09-30T05:00:02.100000+00:00",
                 "execution_origin": "synthetic_scripted_history"
               }
             ]
@@ -573,6 +572,7 @@
           "step_id": "q-capacity",
           "action": "read",
           "admission_key": "current-public-capacity-probe",
+          "large_input_capacity_probe": true,
           "value": {
             "owner": "u-78230ce5c78b26e9c5a42b2f"
           },
