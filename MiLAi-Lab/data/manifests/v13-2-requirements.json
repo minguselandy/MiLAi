@@ -342,10 +342,11 @@
       "evidence": [
         "data/manifests/v13-2-e0-normal-results.json",
         "data/manifests/v13-2-e0-r1-results.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-e0-r3-results.json"
       ],
       "condition": null,
-      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results."
+      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent."
     },
     {
       "id": "E1-01",

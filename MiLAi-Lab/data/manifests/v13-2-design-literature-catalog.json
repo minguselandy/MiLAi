@@ -1,0 +1,297 @@
+{
+  "kind": "V13_2_DESIGN_LITERATURE_CATALOG",
+  "retrieved_at_utc": "2026-09-30T23:43:37+00:00",
+  "rows": [
+    {
+      "kind": "paper",
+      "id": "2307.03172",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "read_scope": "Relevant methods and failure interpretation; not benchmark questions/gold",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2307.03172",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2307.03172/paper.pdf",
+          "sha256": "653b29619eae2ae4b361d7bdcdc06db4bedcb1b0eabe31814036beca8c1af0b1",
+          "bytes": 747542,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2307.03172",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2307.03172/paper.html",
+          "sha256": "9a9069ad7b90740b3245e80b0efc424b2e5c91601119a675536ef2193e12f701",
+          "bytes": 174392,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2307.03172",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2307.03172/abstract.html",
+          "sha256": "af63ac4b31d2d47748f3ad62081349ff820ca488c577888c8b0289545915c275",
+          "bytes": 41931,
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2504.19413",
+      "title": "Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory",
+      "read_scope": "Relevant methods and failure interpretation; not benchmark questions/gold",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2504.19413",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2504.19413/paper.pdf",
+          "sha256": "bec870b657aa73405275a6d8fe27bcd4271799e028bc62986ab9c4cd27a3712d",
+          "bytes": 1144031,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2504.19413",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2504.19413/paper.html",
+          "sha256": "999aea13b219b6fc761cbb517df11dda2c8d9ae0ebf7cdd9b7c0482777005436",
+          "bytes": 244706,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2504.19413",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2504.19413/abstract.html",
+          "sha256": "5fbbadd822da7a752c32c0d131d16cc88fa06c7943cb16b576b515c5fb7817e8",
+          "bytes": 43569,
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2512.12818",
+      "title": "Hindsight is 20/20: Building Agent Memory that Retains, Recalls, and Reflects",
+      "read_scope": "Relevant methods and failure interpretation; not benchmark questions/gold",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2512.12818",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/paper.pdf",
+          "sha256": "1c0bb9fd4e53f45107e587766d6fc3b4b3441877567b17bdbbb5172015c120d4",
+          "bytes": 2452730,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2512.12818",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/paper.html",
+          "sha256": "78e8d3d1ae37344d6bbb2efc5db19465b91e6de92acb1ac923796a3ee5243202",
+          "bytes": 436919,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2512.12818",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/abstract.html",
+          "sha256": "6078de2a88c8d2fa08e96f7b61252a69030a955f09197cdb8ff929adaaa821ff",
+          "bytes": 44275,
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2609.01836",
+      "title": "Agent Memory Is a Surface for Endogenous Authorization Laundering",
+      "read_scope": "Relevant methods and failure interpretation; not benchmark questions/gold",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2609.01836",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/paper.pdf",
+          "sha256": "2f1d09a04e4b16a21686cbf28a85140ba1ce9b9c75ede53b36d919ea9afac342",
+          "bytes": 1661441,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2609.01836",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/paper.html",
+          "sha256": "490edfb47c547dce38cba493978ebf6bfadab37500fd410a3f3c86188929e573",
+          "bytes": 767614,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.01836",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/abstract.html",
+          "sha256": "8c9097a654da6792e67e5bf7f8bb9ad470616f5bb7fbfe8f475d2a8d0d350079",
+          "bytes": 41965,
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "nelson-liu/lost-in-the-middle",
+      "url": "https://github.com/nelson-liu/lost-in-the-middle",
+      "commit": "29b8a6d042ce29abccee3db1a73171a107d7e6af",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/lost-in-the-middle",
+      "selected_implementation_paths": [
+        "src"
+      ],
+      "snapshot_file_count": 12,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/project-manifests/lost-in-the-middle.json",
+      "snapshot_manifest_sha256": "6cb76ad997cb382a56dcf0dc76d035f198f5cb6fdc3b54e292db07f4e45d98bb",
+      "status": "SAVED_SPARSE_IMPLEMENTATION",
+      "read_scope": "README/license and method source; benchmark/gold directories not checked out"
+    },
+    {
+      "kind": "project",
+      "id": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "commit": "f2c33cc405023dcaa8aa8ef4c0120e1f262f05ad",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/hindsight",
+      "selected_implementation_paths": [
+        "hindsight-api-slim/hindsight_api"
+      ],
+      "snapshot_file_count": 353,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/project-manifests/hindsight.json",
+      "snapshot_manifest_sha256": "1d770b1b61a16c6362e67334b0138e321f9ee8c1cc0bfbdfb6432a47217a5dab",
+      "status": "SAVED_SPARSE_IMPLEMENTATION",
+      "read_scope": "README/license and method source; benchmark/gold directories not checked out",
+      "archival_correction": "Initial expected old layout yielded zero source files; inspected tree metadata and saved actual implementation path."
+    },
+    {
+      "kind": "paper",
+      "id": "2601.06377",
+      "title": "HiMem: Hierarchical Long-Term Memory",
+      "read_scope": "Relevant methods and failure interpretation; not benchmark questions/gold",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2601.06377",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.06377/paper.pdf",
+          "sha256": "26c08a417bf5ec96663a508dd54b3d8b8dfc5673ba05b7895dc219ee1e7761c7",
+          "bytes": 5221493,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2601.06377",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.06377/paper.html",
+          "sha256": "eebb876fc53f069978e97237b69a6b53033ef3fae408c6a70a226d45da3ed47e",
+          "bytes": 249547,
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2601.06377",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.06377/abstract.html",
+          "sha256": "2ed36186c6964e876380c6f22dae1b0771e7c0b5ecaafb97ce55ff49fb76936e",
+          "bytes": 42598,
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "mem0ai/mem0",
+      "url": "https://github.com/mem0ai/mem0",
+      "commit": "94c3fe9f238f3dbf29c9ce98643bd71eb13077cd",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0",
+      "selected_implementation_paths": [
+        "mem0"
+      ],
+      "snapshot_file_count": 171,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/project-manifests/mem0.json",
+      "snapshot_manifest_sha256": "0450a112fd8a40498bf6a1c6314e6c429b3a62c6e3e25a5158490222728f1808",
+      "status": "SAVED_SPARSE_IMPLEMENTATION",
+      "read_scope": "README/license and method source; benchmark/gold directories not checked out"
+    },
+    {
+      "kind": "project",
+      "id": "langchain-ai/langgraph Store reference",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "commit": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+      "installed_version": "2.0.11",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference",
+      "snapshot_file_count": 7,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/manifest.json",
+      "snapshot_manifest_sha256": "16a42a85c92f8cacfad8b9b45b4f057e83925ba249ef031a8bbedf98512b849c",
+      "status": "SAVED_SOURCE_AND_OFFICIAL_DOCUMENTATION",
+      "read_scope": "Pinned installed 2.0.11 LIKE behavior and observed SDK-return counters motivate this candidate; current main uses improved segment-aware matching but still enumerates descendants.",
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-base-commit.json",
+          "url": "https://api.github.com/repos/langchain-ai/langgraph/commits?path=libs/checkpoint-sqlite/langgraph/store/sqlite/base.py&per_page=1",
+          "retrieved_at": "2026-09-30T23:43:58.329520+00:00",
+          "commit_or_version": "official main path latest",
+          "sha256": "0c09f96f1fc1c0bb76afcc9340b642b91accc40bcdbcfa695c93cd9e83fbfcfb",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-base-commit.json"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-base.py",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/libs/checkpoint-sqlite/langgraph/store/sqlite/base.py",
+          "retrieved_at": "2026-09-30T23:43:59.043198+00:00",
+          "commit_or_version": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "sha256": "7d25e1d6f36e82f701ed83089ae30830d3cfc4b72f5e4a59da7a475930c310f4",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-base.py"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-README.md",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/README.md",
+          "retrieved_at": "2026-09-30T23:43:59.708141+00:00",
+          "commit_or_version": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "sha256": "3a13e257af1216962d53d72414a7f44ac1fc5cea34d994bdff60ea2a3b045933",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-README.md"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-LICENSE",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/LICENSE",
+          "retrieved_at": "2026-09-30T23:44:00.369924+00:00",
+          "commit_or_version": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "sha256": "d9bb52f2e3540d60ff50d8f0f5b6ba649b7fd346948c4c3d086c8afb120763c7",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-LICENSE"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-stores.md",
+          "url": "https://docs.langchain.com/oss/python/langgraph/stores.md",
+          "retrieved_at": "2026-09-30T23:44:01.483372+00:00",
+          "commit_or_version": "rolling official documentation at retrieval",
+          "sha256": "bb9ce0ae918bd833c1c20634808a7911ddd18395058adc477d78a6c6d2f93de9",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-stores.md"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/installed-2.0.11-base.py",
+          "url": "https://pypi.org/project/langgraph-checkpoint-sqlite/2.0.11/",
+          "local_original": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph/store/sqlite/base.py",
+          "retrieved_at": "2026-09-30T23:44:01.486220+00:00",
+          "commit_or_version": "2.0.11",
+          "sha256": "278485f0ad48f132f58289ccf80830b2c81d87c8bafc0e0d48c1585549171a87",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/installed-2.0.11-base.py"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/installed-METADATA",
+          "local_original": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph_checkpoint_sqlite-2.0.11.dist-info/METADATA",
+          "commit_or_version": "2.0.11",
+          "sha256": "2e6def2ab7b5ba073de36b47579ca43d87413332ac304d99438cfd46526a386f",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/installed-METADATA"
+        }
+      ]
+    }
+  ],
+  "complete": true,
+  "new_model_calls": 0,
+  "archival_issues_retained": [
+    "Hindsight initial old implementation path had zero source files; actual hindsight-api-slim/hindsight_api found from tree metadata, 353 files now saved and verified.",
+    "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present."
+  ],
+  "recorded_at_utc": "2026-09-30T23:51:55+00:00",
+  "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
+  "paper_count": 5,
+  "project_count": 4,
+  "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
+  "new_experimental_model_calls": 0,
+  "readme_or_project_commands_executed": false,
+  "benchmark_questions_gold_accessed": false
+}

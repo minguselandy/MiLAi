@@ -132,3 +132,11 @@ R3新增120 generation／462,391已知tokens、49 embedding／20,342 tokens；�
 ## GitHub提交后恢复（2026-10-01）
 
 主提交与未验证WIP分别推送并核对远端SHA，草稿PR #79创建完成。用户明确要求随后继续实验；Goal已恢复active。首先完成R3全部既有证据审计/评分，失败后查阅原设计与相关原始论文/官方文档，改进实际首断点；保持来源关联、增量维护、确定性投影与有界交付方向，不按案例特判、不泄漏未来问题/评分答案。新修复另验收冻结，旧cohort与否定结果保留，原账本继续。
+
+## R3完整复核与资料保存
+
+[R3完整结果](../data/manifests/v13-2-e0-r3-results.json)为20 PASS、3 FAIL、1 UNKNOWN：语言/会议漏旧值、writer新增错误个人素食；对象2附带发运措辞未被实际合同确认而UNKNOWN。22/24及两旧更新门禁仍未通过。四原卡更正边界同ID r2/真实源/历史无副本通过；七条查询维护直接来源缺口另列，不能把正常任务PASS当完整蕴含验证。Root诊断不是独立Judge，原NOT_SCORED发布快照保留。
+
+另只读实际SQLite SDK重开24库/416items，最后回执一致、数据库hash不变、0mutation。实际95 Host请求的当前索引/唯一ordinary包/当前recall引用共同预算最大2048，48消息实际源role/hash匹配；schema、显式读取、旧packet及业务全文仍独立计完整HTTP费用。六个writer pending、五no_change、十四committed和二十三Host已提交跳过均保留，新增生成/嵌入0，原连续账本不变。
+
+用户要求检索的论文与项目保存：[资料索引与失败反思](V13_2_DESIGN_LITERATURE.md)保存5篇论文、3项目固定源码及1份SDK参考，PDF/HTML/README/LICENSE和完整文件hash在本地ignored资料目录，公开链接/版本/hash进Git。新研究继续追加。改进沿用来源关联、增量维护、确定性投影、有界交付；先区分历史实际交付与消费、当前新增主张与问题触发，不泄漏案例/未来/gold。

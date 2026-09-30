@@ -1,0 +1,38 @@
+# v13.2 设计资料索引与失败反思
+
+2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。此次保存5篇论文PDF/HTML/摘要，3个上游项目的固定commit方法源码、README与LICENSE，以及1份官方/实际安装SDK版本参考。
+
+完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
+
+## 论文与可借鉴内容
+
+| 资料 | 方法要点 | 对当前设计的用途与边界 |
+| --- | --- | --- |
+| [Lost in the Middle](https://arxiv.org/abs/2307.03172) | 研究相关证据在长上下文不同位置时的消费差异。 | 材料进入上下文不保证答案消费。R3首先要解决旧正文未交付，再分别测交付和使用，不能把增加上下文长度当作修复。 |
+| [Mem0](https://arxiv.org/abs/2504.19413) | 把新候选事实抽取与对旧记忆的操作选择分成两个阶段，包含NOOP。 | 借鉴“先判断有没有新事实，再决定维护”的职责。保留现有一次writer边界与来源/CAS，不增加后台服务；这只是修复假设，不移植论文收益。 |
+| [Hindsight](https://arxiv.org/abs/2512.12818) | 保留时间/实体信息，区分事实、经历与意见；通过多路检索关联有关记忆。 | 参考实际历史关联和主张性质的表达。沿用原词法+dense与source回链，只压缩重复metadata并交付真实相关版本，不默认接新reranker、推断日期或重建大型图。 |
+| [HiMem](https://arxiv.org/abs/2601.06377) | Episode与Note关联，冲突感知再整合帮助动态维护。 | 作为类型/关联机制近邻，保留可选kind及现有身份修订。当前先验证单条实际关联/更新，不据此强制双Store或宣称双类型更好。 |
+| [EAL-Bench论文](https://arxiv.org/abs/2609.01836) | 分析错误权威在记忆形成和下游行动中的传播，比较来源约束与有界事件溯源。 | 提示存在来源ID仍不等于概括被支持，推断/提问不能升级成用户事实或业务授权。gold引用源gate属于诊断条件，不引入运行时隐藏授权或gold。 |
+
+上表是对原始论文相关方法部分的概括；应用到当前系统的取舍是Root推断，尚未通过新实验。论文自报性能不作为MiLAi性能结论。HiMem和EAL的代码未作忠实复现；项目版本也不自动等于论文评测版本。
+
+## 已保存项目版本
+
+| 官方项目 | 保存身份 | 本地内容 |
+| --- | --- | --- |
+| [nelson-liu/lost-in-the-middle](https://github.com/nelson-liu/lost-in-the-middle) | `29b8a6d042ce29abccee3db1a73171a107d7e6af` | `projects/lost-in-the-middle`；12份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | `f2c33cc405023dcaa8aa8ef4c0120e1f262f05ad` | `projects/hindsight`；353份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [mem0ai/mem0](https://github.com/mem0ai/mem0) | `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | `projects/mem0`；171份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；7份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+
+LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源码与包METADATA；官方新版本的分段匹配和实际安装版本的LIKE行为分开记录，没有升级SDK。Hindsight目录重组使首次旧路径未取到源码，随后按tree metadata找到实际路径并核对353份文件；这个归档问题不算实验失败或成功。
+
+## R3失败给出的改进假设
+
+实际证据见[R3全24结果](../data/manifests/v13-2-e0-r3-results.json)。四个更新查询的普通包都只送达当前正文；历史revision/source匹配菜单占据大量预算，另五个已选单元被省略。饮品/距离的Host显式读旧版后能回答历史；语言/会议未读取所需旧版或只重复读当前，最终漏旧值。这支持优先检查“元数据与正文如何分配同一预算”，不能把revision菜单存在当作历史消费成功，也不能按“以前”等语言关键词选答案。
+
+通用读入修复候选是在固定选中record/source范围内压缩重复metadata，把真实相关旧版本和叶子片段按同一2048/6限制呈现，保留读时CAS、来源角色/hash和省略页。不改变检索排名或强行选更新目标；构造、实际HTTP送达和最终消费分别验收。
+
+维护方面，R3在无新偏好陈述的查询边界仍发生额外修订，七条轨迹只以问题引用旧事实；团队午餐例还新增错误长期个人素食卡。抽取新主张与选择修改应先在同一writer推理中明确区分：仅查询既有信息时允许直接decline/no_change，当前事件是触发而非旧事实的全部支持；保留实际旧支持与未改字段。这个语义判断仍由模型完成，不能用固定问号/中文词或benchmark ID替代，也不声称引文匹配能验证蕴含。
+
+下一次候选必须另列修改范围、冻结配置/源码/rubric和费用身份；共同解释规则同样提供给基线。保留R0–R3全量否定结果，不挑最好回答。此阶段仍是曝光开发诊断，完整独立来源pilot、独立评分和泛化验证未完成。

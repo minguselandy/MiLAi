@@ -5,6 +5,9 @@ The checkpoint is published and remotely verified: draft PR https://github.com/m
 Goal status is active. See data/manifests/v13-2-publication-and-resume-20261001.json.
 On failures, search relevant primary design methods, reflect on the mechanism and improve it.
 Preserve the original design direction, generic method behavior and generalization; no case-specific fixes.
+Save every paper/project actually used for design research with URL/date/version/hash and local readable resources;
+maintain docs/V13_2_DESIGN_LITERATURE.md and data/manifests/v13-2-design-literature-catalog.json.
+Do not read new benchmark/gold/holdout content while inspecting method source.
 The historical pause snapshot in docs/V13_2_PAUSE_STATUS_20261001.md remains unchanged as evidence.
 The full original plan docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md remains authorized and incomplete.
 Preserve the complete original plan bytes, historical cohorts, original failures, costs and P0-P8 statuses.
