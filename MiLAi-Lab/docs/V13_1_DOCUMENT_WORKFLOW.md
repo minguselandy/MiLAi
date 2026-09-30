@@ -29,3 +29,7 @@ Field-grounded 的可选文稿合同只检查八个字面字段：status、docum
 [后续载体补丁](../data/manifests/v13-1-mem0-observed-carrier-source-acceptance.json)将比较器显式设置为 `observed_events_v1`，保留原始行和原生 ADD 抽取算法；旧默认载体保持原样。
 实际安装 SDK 的两个网络拒绝／MockHTTP 检查、九个受影响边界检查及静态检查通过，只证明机械路径。
 此前2672373版本的完整源码身份、零调用准备和首个预检错误保持原样；新补丁尚须另冻完整 Source／CLI 后实跑，文稿模型质量仍 NOT_RUN。
+
+后续34262e9版本已完成14种设置的零调用准备，但 Field writer 的形成提示仍称这些已观察事件为闭合边界。
+五份文稿配置在任何文稿模型输出前共同改为“actually observed source events”；仅修正输入标签，保留原始行、算法、预算和顺序。
+34262e9准备及hold记录保持，修订后的配置须重新冻结；这不是由模型成绩选择提示。

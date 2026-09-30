@@ -1,6 +1,6 @@
 {
   "kind": "V13_1_DOCUMENT_DEVELOPMENT_PROSPECTIVE_DRAFT",
-  "status": "ROOT_INPUTS_DECLARED_SOURCE_NOT_READY_NO_HTTP",
+  "status": "ROOT_INPUTS_AND_SOURCE_MECHANICAL_READY_ACTUAL_HTTP_NOT_RUN",
   "methods": [
     {
       "id": "B2-matched",
@@ -100,11 +100,11 @@
     "doc-stale-approval"
   ],
   "configuration_sha256": {
-    "configs/v13-1-document-budget12-matched.json": "8a063238ba5e1ba9128c59ad0f48402259eac0c6555d2f1e5f3637e2e8150456",
-    "configs/v13-1-document-quality-matched.json": "28537ddd175522dfec05d0f2881554e0689ac24b91943dea98b20fe5acffd448",
-    "configs/v13-1-document-quality-mem0-manual.json": "eb5e1104a5bf51c9cf5d381d250b587a1faf7a61871ba3d6d0fc076193b3b6cf",
-    "configs/v13-1-document-quality-native.json": "1ee09c76105316a2a56ea05f60314f71f89f9396a0943ada2128cb326412e474",
-    "configs/v13-1-document-quality-projection-off.json": "933759fb425cec6b5914eb59c843b17e86479b030061dedad18b1bfe314158f6"
+    "configs/v13-1-document-budget12-matched.json": "ea172720f8577d83b9372e996abfd47c727f7579493b27a127a52a81416302e2",
+    "configs/v13-1-document-quality-matched.json": "e0f5de68dd28e56c15f2dfe9d42dde9fffa9db2a2275cd48544d709f8a6b83a4",
+    "configs/v13-1-document-quality-mem0-manual.json": "65a457103dbf3275ed43d09c8750a30ce4faec2250c478d2bfd834751d263cf3",
+    "configs/v13-1-document-quality-native.json": "b4db63a4a90ee6eed39bf674187721ae1df0ce0b96301913eda9dc4d8dd38f77",
+    "configs/v13-1-document-quality-projection-off.json": "d709b9eb874c60f0b3edaa7c74e796d7380981c3a56e6531c4b066c310974f0e"
   },
   "planned_development_trajectories": 84,
   "primary_matched_trajectories": 24,
@@ -115,5 +115,18 @@
   "quality_gate": "No all-cases-perfect gate. Freeze complete Source/CLI/environment/config/input/protocol before actual HTTP; preserve first errors.",
   "full_goal": "ACTIVE",
   "product": "NO_GO",
-  "root_first_authority_failure": "artifacts/v13-1-document-first-authority-operation-change/first-error.json"
+  "root_first_authority_failure": "artifacts/v13-1-document-first-authority-operation-change/first-error.json",
+  "pre_output_formation_label_revision": {
+    "earlier_config_sha256": {
+      "configs/v13-1-document-budget12-matched.json": "8a063238ba5e1ba9128c59ad0f48402259eac0c6555d2f1e5f3637e2e8150456",
+      "configs/v13-1-document-quality-matched.json": "28537ddd175522dfec05d0f2881554e0689ac24b91943dea98b20fe5acffd448",
+      "configs/v13-1-document-quality-mem0-manual.json": "eb5e1104a5bf51c9cf5d381d250b587a1faf7a61871ba3d6d0fc076193b3b6cf",
+      "configs/v13-1-document-quality-native.json": "1ee09c76105316a2a56ea05f60314f71f89f9396a0943ada2128cb326412e474",
+      "configs/v13-1-document-quality-projection-off.json": "933759fb425cec6b5914eb59c843b17e86479b030061dedad18b1bfe314158f6"
+    },
+    "reason": "Already observed user/tool events may still be in an open turn. Accurate input label only, before any document model output; original rows, algorithms, shared reader/guard, budgets and method order unchanged.",
+    "prior_zero_http_source_commit": "34262e992f7d2060c5ccb458bae61948d0932778",
+    "prior_preparation_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-document-observed-replay/MiLAi-Lab/artifacts/v13-1-document-development",
+    "actual_document_model_calls_before_revision": 0
+  }
 }
