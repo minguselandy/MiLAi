@@ -1,6 +1,6 @@
 {
   "kind": "V13_2_FULL_PLAN_ACCEPTANCE",
-  "status": "PAUSED",
+  "status": "ACTIVE",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
   "scope": "Full original v13.2 D0-D5; conditional branches keep their stated evidence gates.",
   "historical_requirements_path": "data/manifests/v13-1-requirements.json",
@@ -782,6 +782,13 @@
     "goal_status": "paused",
     "complete": false,
     "summary_path": "data/manifests/v13-2-pause-summary-20261001.json",
+    "individual_requirement_statuses_preserved": true
+  },
+  "resume": {
+    "user_instruction": "提交后继续后续的实验，如果遇到失败，检索相关的设计方法，反思改进方法，但是设计方向不要改变，方法保持通用性和泛化性",
+    "recorded_at_utc": "2026-09-30T23:36:49+00:00",
+    "goal_status": "active",
+    "publication_receipt": "data/manifests/v13-2-publication-and-resume-20261001.json",
     "individual_requirement_statuses_preserved": true
   }
 }

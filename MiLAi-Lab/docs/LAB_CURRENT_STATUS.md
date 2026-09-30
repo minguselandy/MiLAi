@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v13.2 证据关联、增量维护与有界交付 | **PAUSED**，用户要求暂停并提交GitHub；R3全部24轨迹/48回答完成但NOT_SCORED，R2为19通过/3失败/2未知、正常门禁仍未通过；Source规模基线420样本完成但D5性能仅PARTIAL，D4–D5未完成；未验证性能WIP另存独立分支 | [暂停快照](V13_2_PAUSE_STATUS_20261001.md)、[执行记录](V13_2_EXECUTION.md)、[完整验收映射](../data/manifests/v13-2-requirements.json) |
+| v13.2 证据关联、增量维护与有界交付 | **ACTIVE**，GitHub草稿PR #79提交核对后按新指令恢复；R3全部24/48完成，完整评分待完成；R2为19通过/3失败/2未知、门禁仍未通过；D4–D5未完成，失败后检索设计并保持通用性/泛化性 | [发布与恢复](../data/manifests/v13-2-publication-and-resume-20261001.json)、[执行记录](V13_2_EXECUTION.md)、[完整验收映射](../data/manifests/v13-2-requirements.json) |
 | v13.1 可用性优先开发与实验 | **ACTIVE**，正常门槛22/24；等额配置开发48题对完成，生命周期45/60条尝试、30条完成消息；文稿实跑未开始，完整P0–P8未完成 | [当前实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |

@@ -1,8 +1,8 @@
 # v13.2 执行记录
 
-2026-10-01。状态 **PAUSED**：用户要求“暂停当前实验，提交到github上”，Goal已暂停。原计划D0–D5及条件门禁仍未全部完成；不以首批、机械测试或开发样本代替完成。
+2026-10-01。状态 **ACTIVE**：按最新用户指令，GitHub提交核对完成后继续原完整计划。遇到失败检索相关设计方法、反思改进，保持既定设计方向与方法通用性、泛化性。D0–D5及条件门禁仍未全部完成。
 
-[暂停快照](V13_2_PAUSE_STATUS_20261001.md)记录最新R3运行完成但未评分、连续费用、剩余工作和独立WIP分支；暂停后只整理与发布既有证据。
+[PR #79](https://github.com/minguselandy/MiLAi/pull/79)为草稿；主快照`48b93b3`和独立WIP`795a769`已推送并逐SHA核对。此前[暂停快照](V13_2_PAUSE_STATUS_20261001.md)作为历史边界保留；[发布与恢复记录](../data/manifests/v13-2-publication-and-resume-20261001.json)明确恢复授权，不改写已冻结结果。
 
 用户明确要求详细阅读并执行[589行原计划](MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md)。
 原文SHA256为 `84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a`，
@@ -128,3 +128,7 @@ D1目标static/mypy和package边界通过，未跑全suite、build、模型质�
 R3新增120 generation／462,391已知tokens、49 embedding／20,342 tokens；其中按semantic_boundary分类的writer25次／91,005 tokens，其余95次／371,386 tokens保留collector分类限制。逐trace与原连续账本完全对上，新unknown0。暂停累计8,611 generation／22,576,650 charged、22,546,263 known、unknown1；embedding840,103、unknown0。账本SHA为`9ba23552d639ba4703253c5a1bbb6f8a2501eca3e77cf5fb21a8e4c090b53795`，历史保守未知30,387未清零。
 
 暂停时208份冻结运行源码字节仍与R3一致。隔离性能WIP只有两个未验证源码文件，另存`feat/lab-v13-2-derived-index-cost-20261001`，未进入主执行分支、没有性能收益证据。后续仅保存公开摘要/hash，不提交原始私密回包、数据库或日志。恢复须有新用户指令，原冻结根目录、失败与成本继续保留。
+
+## GitHub提交后恢复（2026-10-01）
+
+主提交与未验证WIP分别推送并核对远端SHA，草稿PR #79创建完成。用户明确要求随后继续实验；Goal已恢复active。首先完成R3全部既有证据审计/评分，失败后查阅原设计与相关原始论文/官方文档，改进实际首断点；保持来源关联、增量维护、确定性投影与有界交付方向，不按案例特判、不泄漏未来问题/评分答案。新修复另验收冻结，旧cohort与否定结果保留，原账本继续。
