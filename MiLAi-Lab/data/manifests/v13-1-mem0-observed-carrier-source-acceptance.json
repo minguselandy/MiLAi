@@ -1,0 +1,67 @@
+{
+  "kind": "V13_1_MEM0_OBSERVED_CARRIER_PATCH_ACCEPTANCE",
+  "date": "2026-09-30",
+  "status": "PATCH_MECHANICAL_READY_NEW_MODEL_FREEZE_REQUIRED",
+  "base_commit": "ca8337a30c352b65b35b3e68b958f224689b1da8",
+  "patch_sha256": "f6b249bb8d9394f87c1b6db57328f788922e8f3dcaaf7e848f878bb0bd7c3fb1",
+  "changed_paths_sha256": {
+    "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a",
+    "src/milai_lab/runners/v13_1_p5_compare.py": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b",
+    "tests/memory/test_v13_1_p5_compare.py": "fded0ea0aba744d69eb062426e4cbfe6167d4fc5eee018d3a87e9549a6422253"
+  },
+  "native_sdk": {
+    "python": "3.12.11 (main, Jul 23 2025, 00:34:44) [Clang 20.1.4 ]",
+    "mem0ai": "2.1.0",
+    "direct_url": {
+      "url": "https://github.com/mem0ai/mem0.git",
+      "vcs_info": {
+        "vcs": "git",
+        "commit_id": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+        "requested_revision": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63"
+      }
+    }
+  },
+  "logs_sha256": {
+    "mem0-observed-carrier-boundaries-pytest.txt": "bddb7d8e8cf7cdaf3e5abfb4a57fb20a81455170f6273811d9148ce97f8f6268",
+    "mem0-observed-carrier-candidate-pytest.txt": "7a4266c701d10aec31953f00c81dd31e970403420ec9a69427e217f8e94f3486",
+    "mem0-observed-carrier-contract-red-pytest.txt": "78aeb611bbbdadea0859fe1996ef0e4defc5c6980886d96f97474145292ab5f5",
+    "mem0-observed-carrier-final-pytest.txt": "5ce84fb6a4b79b43b7295888a6da3e50123f671b99058473655f5034e30d1dd2",
+    "mem0-observed-carrier-first-pytest.txt": "6a041a4d8239fee7aa9455e2b8c5250b5fae2aff35985c54da5625509d02ee1a",
+    "mem0-observed-carrier-mypy.txt": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+    "mem0-observed-carrier-ready-pytest.txt": "e6ff6e5c19eba6feb29f0e173ba6f517322b76eb8c135a3edf681d527cac2ab2",
+    "mem0-observed-carrier-ready-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "mem0-observed-carrier-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  "interface": {
+    "default": "legacy_completed_v1",
+    "opt_in": "add_archive(owner, rows, archive_input_profile=\"observed_events_v1\")",
+    "comparison": "fixed observed_events_v1 in both T3 native and matched observation cadence; frozen mem0_archive_input_profile only for Mem0 arm"
+  },
+  "results": {
+    "installed_native_sdk_carrier_tests": "2 passed",
+    "affected_prepare_and_integration_boundaries": "9 passed",
+    "ruff": "pass 3 paths",
+    "mypy": "pass 2 source paths"
+  },
+  "root_checks": {
+    "changed_source_test_digests": "3/3 match readiness",
+    "preserved_log_digests": "9/9 match readiness; failed candidate logs remain failures",
+    "installed_native_sdk_carrier_repeat": "2 passed, 22 deselected; existing audited native interpreter, socket forbidden, MockTransport only",
+    "diff_whitespace": "git diff --check passed",
+    "experimental_http_requests": 0,
+    "original_ledger_unchanged": true
+  },
+  "limits": [
+    "socket network forbidden; HTTP MockTransport only; temporary ledger only",
+    "actual SDK native extraction returns empty facts in these mechanics; no semantic native memory or ID persistence claim",
+    "unchanged SDK flattens outer carrier framing whitespace; original JSON rows survive wire decoding",
+    "legacy default native API carrier bytes and receipt keys unchanged",
+    "public Scope code only inspected; no source/test/config/matrix edit for that task yet",
+    "no realHTTP/originalLedger/commit/immutable edits",
+    "Patch-only acceptance; original 2672373 source acceptance and zero-HTTP preparation remain historical identities.",
+    "No new source-union/model-driver freeze or actual document model run has occurred at this snapshot.",
+    "Original paid Mem0 evidence-close failures and old208 cohort denominators remain unchanged."
+  ],
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

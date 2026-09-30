@@ -86,6 +86,8 @@ def _parameters(config: dict[str, Any], arm: str) -> dict[str, Any]:
         "mem0_formation_route": "add_archive infer=True ADD-only; manual update is separate opt-in"
         if arm == "mem0_trace_equal"
         else None,
+        **({"mem0_archive_input_profile": "observed_events_v1"}
+           if arm == "mem0_trace_equal" else {}),
         "common_guard": p5.POLICY,
         "source_input": "original captured user/tool SourceEvents; no synthesized receipt",
         "el_contract": "same checked proposal and semantic revision; finite operational view off",
@@ -329,7 +331,9 @@ class ComparisonRuntime:
             if self.arm in {"B2", "B6"}:
                 receipt = self.backend.commit_observed(rows)
             elif self.arm == "mem0_trace_equal":
-                receipt = self.backend.add_archive(self.scope.user_id, rows)
+                receipt = self.backend.add_archive(
+                    self.scope.user_id, rows, archive_input_profile="observed_events_v1"
+                )
                 if receipt["status"] != "COMPLETED":
                     raise ValueError("P5_COMPARE_NATIVE_MAINTENANCE_INCOMPLETE")
             else:

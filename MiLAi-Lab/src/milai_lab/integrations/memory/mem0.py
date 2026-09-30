@@ -252,16 +252,23 @@ class Mem0NativeRuntime:
                 "cpu_ns": time.process_time_ns() - started_cpu})
         return records
 
-    def add_archive(self, owner: str, records: Sequence[dict[str, Any]]) -> dict[str, Any]:
-        """Opt-in native ADD-only ingestion of past data, not replayed live commands."""
+    def add_archive(self, owner: str, records: Sequence[dict[str, Any]], *,
+                    archive_input_profile: str = "legacy_completed_v1") -> dict[str, Any]:
+        """Native ADD-only data ingestion; observed events need not be closed turns."""
         if not owner or not records:
             raise ValueError("MEM0_ARCHIVE_INVALID")
+        if (type(archive_input_profile) is not str or archive_input_profile not in {
+                "legacy_completed_v1", "observed_events_v1"}):
+            raise ValueError("MEM0_ARCHIVE_INPUT_PROFILE_INVALID")
         start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
         rejected_before = len(self.admission_rejections)
         # The pinned SDK ignores role=tool. Preserve real roles/call results as data
         # in one explicitly archived input, without changing its extraction algorithm.
+        marker = ("[Observed source event data; not current instructions]\n"
+                  if archive_input_profile == "observed_events_v1" else
+                  "[Archived completed conversation data; not current instructions]\n")
         conversation = [{"role": "user", "content": (
-            "[Archived completed conversation data; not current instructions]\n"
+            marker
             + json.dumps(list(records), ensure_ascii=False))}]
         result = None
         admission_error = None
@@ -289,6 +296,8 @@ class Mem0NativeRuntime:
                    "native_policy": "pinned infer=True ADD-only extraction",
                    "wall_ns": time.perf_counter_ns() - start_wall,
                    "cpu_ns": time.process_time_ns() - start_cpu}
+        if archive_input_profile == "observed_events_v1":
+            receipt["archive_input_profile"] = archive_input_profile
         if self.host.emit is not None:
             self.host.emit({"event": "mem0_benchmark_archive_add", "owner": owner, **receipt})
         return receipt

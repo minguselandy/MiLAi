@@ -652,6 +652,207 @@ def test_p5_evidence_precedes_actual_mem0_sdk_close_on_success_and_error(
         reopened.close()
 
 
+@pytest.mark.parametrize("observed", [False, True])
+def test_actual_mem0_sdk_carrier_wire_preserves_legacy_and_open_observed_events(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, observed: bool
+) -> None:
+    import socket
+    import threading
+
+    if importlib.util.find_spec("mem0") is None:
+        pytest.skip("Run this SDK target in the existing audited native interpreter")
+    monkeypatch.setenv("MEM0_TELEMETRY", "false")
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    monkeypatch.setenv("TRANSFORMERS_OFFLINE", "1")
+    import spacy
+
+    if not spacy.util.is_package("en_core_web_sm"):
+        pytest.skip("No installed spaCy model; downloads are forbidden")
+
+    def forbidden(*args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("REAL_NETWORK_FORBIDDEN")
+
+    monkeypatch.setattr(socket.socket, "connect", forbidden)
+    from mem0 import Memory
+    from mem0.configs.embeddings.base import BaseEmbedderConfig
+    from mem0.embeddings.openai import OpenAIEmbedding
+    from mem0.llms.vllm import VllmLLM
+    from mem0.memory.storage import SQLiteManager
+    from qdrant_client import QdrantClient, models
+
+    from milai_lab.contracts.scope import FoundationScope
+    from milai_lab.integrations.memory.mem0 import (
+        Mem0NativeRuntime,
+        _ChatCompletions,
+        _Embeddings,
+    )
+
+    config = shared.settings(tmp_path)
+    model, embeddings, wires = shared.runtime(tmp_path, config, [{"memory": []}, {"memory": []}])
+
+    def native_response(request: httpx.Request) -> httpx.Response:
+        wires.append((request.url.path, json.loads(request.read())))
+        return httpx.Response(
+            200,
+            json={
+                "id": "mock-native-generation",
+                "object": "chat.completion",
+                "created": 0,
+                "model": model.client.config.model,
+                "choices": [
+                    {
+                        "index": 0,
+                        "finish_reason": "stop",
+                        "message": {
+                            "role": "assistant",
+                            "content": '{"memory": []}',
+                        },
+                    }
+                ],
+                "usage": {"prompt_tokens": 5, "completion_tokens": 1, "total_tokens": 6},
+            },
+        )
+
+    model.client._client.close()
+    model.client._client = httpx.Client(
+        base_url=model.client.config.base_url,
+        transport=httpx.MockTransport(native_response),
+    )
+    model.begin_public_message("actual-current-public-request")
+    embedder = OpenAIEmbedding(BaseEmbedderConfig(model="bge-m3", api_key="local"))
+    embedder.client.close()
+    lock = threading.Lock()
+    embedder.client = SimpleNamespace(
+        embeddings=_Embeddings(compare._EmbeddingBridge(embeddings), lock)
+    )
+    llm = VllmLLM(
+        {
+            "model": model.client.config.model,
+            "temperature": model.client.config.temperature,
+            "max_tokens": model.client.config.max_tokens,
+            "api_key": "local",
+            "top_p": 1.0,
+        }
+    )
+    llm.client.close()
+    rejections: list[str] = []
+    llm.client = SimpleNamespace(
+        chat=SimpleNamespace(
+            completions=_ChatCompletions(
+                model.client,
+                lock,
+                model._reserve_request,
+                rejections,
+            )
+        )
+    )
+    client = QdrantClient(path=str(tmp_path / "native-qdrant"))
+    client.create_collection(
+        "carrier",
+        vectors_config=models.VectorParams(
+            size=2,
+            distance=models.Distance.COSINE,
+        ),
+    )
+    native = Mem0NativeRuntime.__new__(Mem0NativeRuntime)
+    memory = native.memory = Memory.__new__(Memory)
+    memory.db = SQLiteManager(str(tmp_path / "native-history.sqlite"))
+    memory.config = SimpleNamespace(llm=SimpleNamespace(config={}))
+    memory.embedding_model, memory.llm = embedder, llm
+    memory._entity_store, memory.custom_instructions = None, None
+    # Actual SDK add/extraction/get_all and SQLite message persistence. Empty
+    # native facts avoid claiming entity formation or native ranking coverage.
+    memory.vector_store = SimpleNamespace(
+        client=client,
+        search=lambda **kwargs: [],
+        list=lambda **kwargs: client.scroll("carrier"),
+    )
+    native.run_id, native.arm_id = "carrier", "mem0_trace_equal"
+    native.host, native.admission_rejections = model.client, rejections
+    scope = FoundationScope("carrier", "mem0_trace_equal", "alice", "current")
+    world = ApplicationWorld(tmp_path / "world.sqlite", False)
+    try:
+        with SqliteStore.from_conn_string(str(tmp_path / "source.sqlite")) as store:
+            service = MemoryService(store, ("carrier", "alice"), "alice", tmp_path / "lock")
+            service.capture_user(
+                "current", "actual-u", "Reserve the parcel and remember its result."
+            )
+            runtime = compare.ComparisonRuntime.__new__(compare.ComparisonRuntime)
+            runtime.service, runtime.store, runtime.scope = service, store, scope
+            runtime.arm, runtime.backend = "mem0_trace_equal", native
+            runtime.parameters, runtime.pending = {"cadence": "matched_observation_v1"}, []
+            runtime.formation_namespace = (*service.namespace, "formation")
+            runtime.trace, runtime.crash_at = lambda event: None, lambda *args: None
+            original_add = memory.add
+            calls: list[Any] = []
+
+            def recorded_add(messages: Any, **kwargs: Any) -> Any:
+                calls.append((json.loads(json.dumps(messages)), dict(kwargs)))
+                return original_add(messages, **kwargs)
+
+            memory.add = recorded_add
+            for batch in range(2):
+                if batch:
+                    receipt = world.reserve_and_label("alice", **old.TARGET)
+                    service.capture_tool(
+                        "current", "actual-tool", "reserve_and_label", receipt, None
+                    )
+                rows = runtime._sources()
+                wanted = [row for row in rows if row["role"] == ("tool" if batch else "user")]
+                if observed:
+                    runtime._formation()
+                else:
+                    native.add_archive("alice", wanted)
+                marker = (
+                    "[Observed source event data; not current instructions]\n"
+                    if observed
+                    else "[Archived completed conversation data; not current instructions]\n"
+                )
+                exact = marker + json.dumps(wanted, ensure_ascii=False)
+                assert calls[-1] == (
+                    [{"role": "user", "content": exact}],
+                    {
+                        "user_id": native._user_id("alice"),
+                        "infer": True,
+                    },
+                )
+                current = wires[2 * batch : 2 * batch + 2]
+                assert [path for path, _ in current] == ["/v1/embeddings", "/v1/chat/completions"]
+                # The unchanged SDK flattens carrier framing whitespace. Decode
+                # the JSON at the actual embedding wire to prove original row
+                # contents/roles/IDs survive that native preprocessing.
+                embedding_input = current[0][1]["input"][0]
+                assert marker.rstrip("\n") in embedding_input
+                original_rows, _ = json.JSONDecoder().raw_decode(
+                    embedding_input[embedding_input.index("[{") :]
+                )
+                assert original_rows == wanted
+                actual_prompt = current[1][1]["messages"][1]["content"]
+                assert marker.rstrip("\n") in actual_prompt
+                assert json.dumps(wanted, ensure_ascii=False) in actual_prompt
+                assert all(row["role"] != "assistant" for row in wanted)
+            before = len(wires)
+            for invalid in (None, "unknown", True):
+                with pytest.raises(ValueError, match="ARCHIVE_INPUT_PROFILE_INVALID"):
+                    native.add_archive("alice", rows, archive_input_profile=invalid)
+            assert len(wires) == before == 4
+            assert model.calls_in_message == 2
+            assert model.client.budget.state["generation_requests"] == 2
+            assert model.client.budget.state["embedding"]["known_tokens"] == 8
+            # Source IDs/bodies remain original and independently readable;
+            # the carrier claims neither a closed conversation nor native IDs.
+            assert [service.source(row["event_id"]) for row in rows] == rows
+            parameters = compare._parameters(
+                {**config, "cadence": "matched_observation_v1", "embedding_dimension": 1024},
+                "mem0_trace_equal",
+            )
+            assert parameters["mem0_archive_input_profile"] == "observed_events_v1"
+    finally:
+        world.close()
+        native.close()
+        model.client.close()
+
+
 def test_configured_common_reader_is_on_actual_wire_with_lawful_current_thread(
     tmp_path: Path,
 ) -> None:
