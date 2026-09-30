@@ -1,0 +1,107 @@
+{
+  "kind": "MILAI_V13_1_EQUAL_CONFIG_OLD_DEVELOPMENT_SELECTION",
+  "status": "METADATA_IDENTITIES_SELECTED_BEFORE_TUNING_NO_NEW_PILOT_OR_FORMAL_CONTENT",
+  "upstream_pin": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+  "selection_rule": "Reuse four already frozen P4 scope IDs; choose two old exposed valid and two old exposed personalized by ascending SHA256(seed:case_id), skipping entire components already selected. No content/outcome/length selection. Same eight sources every candidate.",
+  "seed": "v13-equal-config-development-20260930",
+  "tasks": {
+    "contextual_scope_control": 4,
+    "personalized_memory_use": 2,
+    "valid_memory_selection": 2
+  },
+  "distinct_original_components": 8,
+  "selected": [
+    {
+      "case_id": "mso_hard_000138",
+      "task": "contextual_scope_control",
+      "native_source_id": "mso_hard_000138",
+      "dialogue_sha256": "6f701e22e4572cf625b8215cbcd5003cee89e838faac8aae104c1cc222cc3c2f",
+      "raw_line_sha256": "391846ea5c0aa3e10fed17eca88e59dcf707c325599d005ab1ed066258b95c60",
+      "source_group_id": "v13-memsyco-source-d210b016a881ca3954396c14",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "task": "contextual_scope_control",
+      "native_source_id": "mso_hard_000206",
+      "dialogue_sha256": "5204c9314278aa1b65111e95a473b960cb640c1c60a086843089aea127cbfa23",
+      "raw_line_sha256": "a302dd4ec46494286f5040befe18e327ffcdb7825b15b4dae5ce808ca44c84de",
+      "source_group_id": "v13-memsyco-source-6ffcc93511b1c9794b7875e1",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "task": "contextual_scope_control",
+      "native_source_id": "mso_hard_000204",
+      "dialogue_sha256": "39ce26b1b8d4649fa5baa1dba4ad38a32699570ded907253b7deddc250f878c8",
+      "raw_line_sha256": "45b813f5d18bf574a3dfda368b13b4e6b1baa6e6ee18b1a52a16ec9f763032e7",
+      "source_group_id": "v13-memsyco-source-efde236549ba0ce4dee34917",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "task": "contextual_scope_control",
+      "native_source_id": "mso_hard_000059",
+      "dialogue_sha256": "5b6c431aa43eea39936a2d74b2b05393087983e7f96203edc3365e8a19539863",
+      "raw_line_sha256": "d4abc66b21bc96d8e9278cd3763cd85c256e4b907a21d7ee5e61e7e96b769f3b",
+      "source_group_id": "v13-memsyco-source-92348f202f9e0cdaad056833",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "v11_001074",
+      "task": "valid_memory_selection",
+      "native_source_id": "f940f3ad-a774-4d7d-9c93-daa40c7bb813",
+      "dialogue_sha256": "b813cc6e7285cafc53d667a80f86a7953fb3bca8a2530a53393cffa5d6cf7371",
+      "raw_line_sha256": "80ec5de37d2c458ab89c349524907387117180a6dbf227a1af2a44a2055e35be",
+      "source_group_id": "v13-memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "v11_000504",
+      "task": "valid_memory_selection",
+      "native_source_id": "61769393-ef00-4764-8b59-622ee660b1cb",
+      "dialogue_sha256": "1c213cf953b1b71ac2f867b7b082a51488e05d2fc88573265fd300e0bbd1f441",
+      "raw_line_sha256": "cd335612772b98e8cd6b1fd39cf492ae8932cb3a7d3a4cc329a928b68bcd43a3",
+      "source_group_id": "v13-memsyco-source-30bb21c20ef0fca40394b377",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "rec_gen_0048",
+      "task": "personalized_memory_use",
+      "native_source_id": "rec_expansion_0048",
+      "dialogue_sha256": "81b805dc00b55f82c7226428706a9d6cfdf6e30e9d7ab17243410a9ae09e8af9",
+      "raw_line_sha256": "291bc4bb1257cb335a42a2123b50abcb6162abd205441b5eb92d87100aee0847",
+      "source_group_id": "v13-memsyco-source-8fd8855a1956153401fc0805",
+      "old_component_excluded": true
+    },
+    {
+      "case_id": "rec_gen_0021",
+      "task": "personalized_memory_use",
+      "native_source_id": "rec_expansion_0021",
+      "dialogue_sha256": "0412fe6a2fd56269b74062c425a4598a18d025c7571f4ae6b023e1d8775d15a8",
+      "raw_line_sha256": "6361df37c6c5408f33a1c449482386a905667cf21fa6f1b5b3119a68c826fda7",
+      "source_group_id": "v13-memsyco-source-df0520dbb1c9c7d10be66f68",
+      "old_component_excluded": true
+    }
+  ],
+  "metadata_inputs_sha256": {
+    "artifacts/v13-1-source-availability/metadata-components.json": "37e35c683030a3b23108a7551e709c4823a1ea4b64a14e761673716f4ea3ff28",
+    "data/manifests/v13-1-source-exposure.json": "ce9e9b8d499d441091e9050332e19dbdccf5af18ecefb875d845bc0ca5df2b44",
+    "data/manifests/v13-1-p4-type-scope-protocol.json": "5ff4e47994d6b90b2ce655feea85ab9029bbcea0581149857c3b06b5bbca8d59"
+  },
+  "selection_script_sha256": "9d32d2bcb7bb80e6b55b57768ead1b002e60d27778b744b89d581982f9bacb48",
+  "draft_candidate_paths_sha256": {
+    "configs/v13-1-controls-b2-a.json": "53f0519bec32798d6a8fa7841ba7dab414fc92e4c27a2355b0662412432fb765",
+    "configs/v13-1-controls-b2-b.json": "e1715cc36c8d14826e9b41c1a7bc0ce3f4ca960782cfee5ec475f990f8f21e0e",
+    "configs/v13-1-controls-b3-a.json": "58fbc59fdddf4c5fd60e466db5bebc4637abc1b428739c99a46cd5dfa168b65b",
+    "configs/v13-1-controls-b3-b.json": "df5cd53db3a77b68525f486f7b1a48803cb0ac0aed4b2748520204ec42c1e9b2",
+    "configs/v13-1-public-scope-candidate-a.json": "3fb129ea4f89298824df6745e8f838ad7ff5e930adcc8e581e0dbd21bb10eb62",
+    "configs/v13-1-public-scope-candidate-b.json": "a8740980fc3cf7fa45ca43a5d5925f7ac207a1087ad9ea7491f7927d857294ce"
+  },
+  "source_and_common_native_reader_freeze": "Still required before tuning HTTP; Source config same number does not establish actual fair tuning.",
+  "gold_policy": "After runtime/adapters/configs freeze, only selected old public dialogue/question may enter backend. Offline task Judge/gold remains separate. No new pilot/formal content emitted or tuned here.",
+  "statistical_scope": "Eight deliberately old development groups, descriptive configuration choice only. No research effect/independent confirmation claim.",
+  "planned_candidate_question_pairs": 48,
+  "full_goal": "ACTIVE; nominalformal source gap preserved",
+  "product": "NO_GO"
+}
