@@ -92,6 +92,7 @@ D5新pilot、正式独立来源比较、公开任务、独立评分、第二家�
 [开发评分标准](../data/diagnostics/v13-2-small-development-rubric.json)已在新模型输出前固定；
 [配对统计草案](../data/manifests/v13-2-statistical-design.json)固定主要比较、5pp界、依赖聚类和缺失上下界。
 最终正式样本数和运行身份须由新pilot精度与实际独立来源事前补齐；该草案不算正式统计完成。
+离线统计工具另有[20项合成数值验收](../data/manifests/v13-2-statistical-analysis-acceptance.json)：依赖传递连接、基础任务等权、共同抽样、缺失上下界与独立评分/二元生命周期非劣门禁均通过，CLI和工具边界也通过。实际实验样本与模型HTTP为0；[输入合同](V13_2_STATISTICAL_INPUT.md)要求事前冻结及完整账本分配，工具不能验证评分独立性或来源身份。D5统计仍为PARTIAL，未得出正式非劣结论。
 
 ## 账本与验证边界
 

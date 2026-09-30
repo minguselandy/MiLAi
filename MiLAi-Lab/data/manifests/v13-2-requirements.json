@@ -552,9 +552,14 @@
       ],
       "requirement": "按基础任务/源组配对cluster统计、效用成本联合报告，clean非劣5pp在正式结果前冻结。",
       "completion_evidence": "依赖结构bootstrap与95%区间，缺失上下界；独立cluster少只描述，不以p不显著称无退化。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-statistical-design.json",
+        "data/manifests/v13-2-statistical-analysis-acceptance.json",
+        "docs/V13_2_STATISTICAL_INPUT.md"
+      ],
+      "condition": null,
+      "qualification": "Prospective design and20 synthetic analytical checks passed; zero experimental samples/model HTTP. Actual new pilot, formal paired statistics, independent review and sample-size precision remain unverified."
     },
     {
       "id": "D5-09",

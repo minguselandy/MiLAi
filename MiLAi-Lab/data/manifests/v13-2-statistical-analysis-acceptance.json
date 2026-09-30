@@ -1,0 +1,190 @@
+{
+  "kind": "V13_2_OFFLINE_STATISTICS_ENGINEERING_ACCEPTANCE",
+  "status": "PASSED_SCOPED_ENGINEERING_ONLY",
+  "analyzer": "tools/analyze_v13_2_paired.py",
+  "analyzer_sha256": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+  "design": "data/manifests/v13-2-statistical-design.json",
+  "design_sha256": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+  "input_contract": "docs/V13_2_STATISTICAL_INPUT.md",
+  "input_contract_sha256": "a3820ffe9d708f5c562ddf7021ce543cf7dd1393843d16da06db018d46a08036",
+  "analytical_validation": {
+    "kind": "V13_2_OFFLINE_STATISTICS_ANALYTICAL_VALIDATION",
+    "synthetic_only": true,
+    "actual_experimental_samples": 0,
+    "generation_requests": 0,
+    "embedding_requests": 0,
+    "checks": [
+      "all-equal analytical zero difference",
+      "development cannot claim formal NI",
+      "Root rating cannot open NI gate",
+      "missing row keeps exact allplanned bounds and unknown cost",
+      "charged reservation distinct from known cost",
+      "fewer20clusters descriptive only",
+      "source and template transitive dependency",
+      "base task equal weight despite unequal cluster sizes",
+      "same draw preserves utility-cost relationship",
+      "deterministic metric cannot bypass independent clean-NI gate",
+      "component identities stable under input reorder",
+      "duplicate output rejected",
+      "missing cost with zero unknown-count is still unavailable",
+      "each-arm missing bounds preserved",
+      "field metric cannot be task clean-NI",
+      "fractional utility cannot be binary lifecycle clean-NI",
+      "empty cohort does not fabricate a zero success result",
+      "nonfinite negative boolean cost rejected",
+      "unknown stage rejected",
+      "string source list cannot masquerade as character components"
+    ],
+    "analyzer_sha256": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+    "design_sha256": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+    "driver_sha256": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a"
+  },
+  "checks": [
+    {
+      "name": "analytical20-final",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-root-drivers/validate_statistics.py"
+      ],
+      "exit_code": 0,
+      "before": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "after": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "identity_unchanged": true,
+      "log_sha256": "1565197ebf3f6330c889620f30ff8ebdd5a10750a3d522807c3aa59fc346fb69"
+    },
+    {
+      "name": "ruff-final",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "tools/analyze_v13_2_paired.py"
+      ],
+      "exit_code": 0,
+      "before": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "after": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "identity_unchanged": true,
+      "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "name": "tools-boundary",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "exit_code": 0,
+      "before": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "after": {
+        "direct": {
+          "tools/analyze_v13_2_paired.py": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+          "data/manifests/v13-2-statistical-design.json": "f1de7e662d22ba4e2ce5d9583a2a8a4f94c7a5d517abed66b4929d10bfd27578",
+          "artifacts/v13-2-root-drivers/validate_statistics.py": "a726d3e68101f8e4f7acf4eef0ca84619dc7dcaa13301e7d4ec2331d8b8d115a",
+          "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+          "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+          "docs/tools-product-dependencies.json": "f442373f399a1bb455aff3d679318ccdd652c5d638fb873bf26e129acaec1cc2"
+        },
+        "tools_file_count": 535,
+        "tools_map_sha256": "a1f1a7933e06ca60e011485bc843a37cc6541169f2ce95cd46bcc23aba65fca9",
+        "ledger_sha256": "24b8ce9a1a1d64ebbc8205786f9cc4e32f327b6364c6a842a409d77644d7f37f"
+      },
+      "identity_unchanged": true,
+      "log_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+    },
+    {
+      "name": "synthetic-cli",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "tools/analyze_v13_2_paired.py",
+        "--input",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-statistics/synthetic-cli-input.json",
+        "--design",
+        "data/manifests/v13-2-statistical-design.json",
+        "--output",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-statistics/synthetic-cli-output.json"
+      ],
+      "exit_code": 0,
+      "analyzer_before_sha256": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+      "analyzer_after_sha256": "657f2a4aeeffda8791c0293383715609c4d233f3a166e35096f0c4d87ca0d279",
+      "input_sha256": "b9b53a9c2b53b09b53cd590b2821eac3b47dc7715b6b91932ee33abceff3e096",
+      "log_sha256": "3247d3d6abe993ca5807a6dfeae8968ffc7f54106a0b9972c6087062d9265158",
+      "output_sha256": "04437799f1c8b23d0226b992dd63458d47f77221fd899026072a283b0ba54daa"
+    }
+  ],
+  "evidence_scope": "Synthetic numerical inputs only; no corpus, pilot or formal outcomes read. CLI synthetic rows are not experimental samples. Exact command identities and logs retained privately; no runtime freeze inferred from analyzer-only identity.",
+  "initial_checks": "Earlier12-check analyzer and initial lint diagnostics used an earlier source identity; they are not promoted to the final20-check identity. Final checks all ran without source changes.",
+  "model_http": {
+    "generation_requests": 0,
+    "embedding_requests": 0,
+    "continuous_ledger_unchanged": true
+  },
+  "not_claimed": [
+    "No pilot or formal statistical result",
+    "No independent semantic review",
+    "No clean noninferiority established",
+    "No sample-size precision achieved",
+    "No full D5 acceptance"
+  ],
+  "product": "NO_GO"
+}
