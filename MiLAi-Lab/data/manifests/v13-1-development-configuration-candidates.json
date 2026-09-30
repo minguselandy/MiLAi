@@ -1,0 +1,48 @@
+{
+  "kind": "MILAI_V13_1_EQUAL_DEVELOPMENT_CONFIGURATION_CANDIDATES",
+  "status": "DRAFT_PARAMETERS_NOT_RUNTIME_FROZEN_OR_EXECUTED",
+  "B2": [
+    {
+      "id": "b2-a",
+      "config": "configs/v13-1-controls-b2-a.json",
+      "change": "raw1024chars/step896"
+    },
+    {
+      "id": "b2-b",
+      "config": "configs/v13-1-controls-b2-b.json",
+      "change": "raw2048chars/step1792"
+    }
+  ],
+  "B3": [
+    {
+      "id": "b3-a",
+      "config": "configs/v13-1-controls-b3-a.json",
+      "change": "rollingclosed2turnwindow/1536outtokens/6000contentchars"
+    },
+    {
+      "id": "b3-b",
+      "config": "configs/v13-1-controls-b3-b.json",
+      "change": "rollingclosed2turnwindow/3072outtokens/12000contentchars"
+    }
+  ],
+  "Ours_public": [
+    {
+      "id": "scope-a",
+      "config": "configs/v13-1-public-scope-candidate-a.json",
+      "change": "flat+closedScope,12maxrecords"
+    },
+    {
+      "id": "scope-b",
+      "config": "configs/v13-1-public-scope-candidate-b.json",
+      "change": "flat+closedScope,24maxrecords"
+    }
+  ],
+  "public_candidate_contract": "Controlled public QA scope preservation only, no authenticated business object refs/receipt claims available in MemSyco native dialogues, so no finite operational guard efficacy attributed to this table. Flat+Scope motivated by exposed P4 factor outcomes; no independent dual-type gain claim. P5 receipt candidate and native action controls separate.",
+  "fairness": "Two reasonable candidates each, identical disclosed old development histories/questions/source roles/currentquery, sameQwen65536/input admission,4096Hostout,6000actualdeliveredmaterialtokens and same12boundedscheduledpublicgenerationkey; allwriter/reader/embedding/nativeinternalcosts originalledger. Actual method cadence (RAGindex vsrollingmaintenance vsoncehistoryformation) recorded, not calledsame algorithm. Byte/source/SDK/schema/selection/scorer/callboundaries freeze BEFORE tuning model outcomes.",
+  "selection": "NOT_READY: Sourcecontrols mechanical/realmicro acceptance pending; no claimequal tuning completed from metadata. Pilotnew60/questions not used for selection yet; formalunseen none read.",
+  "embedding": "Actual local BGE processmodel/data/models/embed,1024dim,tokenizerSha actualmount plain8192 withspecials. Sourcehelpermechanical/realcapacityverification pending; not inheriting old tinyinputcapacity claim.",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "new_model_calls": 0,
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

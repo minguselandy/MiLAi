@@ -551,15 +551,17 @@
       "plan_section": "3.7",
       "requirement": "confirmed/partial/known-no-effect/unknown separated; never blind-retry unknown mutation",
       "authoritative_evidence_required": "public discovery plus side-effect journal and original failure records",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
         "docs/V13_1_P5_LIFECYCLE.md",
-        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
       ],
       "conditional": false,
-      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
     },
     {
       "id": "P5-crash",
@@ -567,15 +569,17 @@
       "plan_section": "3.7",
       "requirement": "Three windows: success before durable receipt; receipt before memory revision; revision before response",
       "authoritative_evidence_required": "three real crash/restart traces on identical durable backend",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
         "docs/V13_1_P5_LIFECYCLE.md",
-        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
       ],
       "conditional": false,
-      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
     },
     {
       "id": "P5-idempotent",
@@ -583,15 +587,17 @@
       "plan_section": "3.7",
       "requirement": "Duplicate real receipt no duplicate fact; CAS/atomic commit and tested concurrency limits",
       "authoritative_evidence_required": "SDK readbacks/conflict tests/idempotent revision evidence",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
         "data/manifests/v13-1-p5-lifecycle-r1-results.json",
         "docs/V13_1_P5_LIFECYCLE.md",
-        "data/manifests/v13-1-p5-lifecycle-r2-results.json"
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
       ],
       "conditional": false,
-      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
     },
     {
       "id": "P5-compare",

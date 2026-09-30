@@ -29,3 +29,7 @@ R2实际45个唯一记忆提案中3提交、42拒绝。10个提案把当前creat
 跨会话search_memory实际返回原始归档raw_events，即使bank为空也可能正确回答历史；这只能支持归档访问，不能算保存/修订成功。部分回答还错误地把记忆参数验证失败归因于标签服务不可用，或将当前查询status误说为先前reserved_label_failed。均保留为语义反例。
 
 R2新增82次生成、396,021 tokens；两轮合计155次/696,969 tokens，embedding新增0，unknown usage0，Judge0。连续账本为6,666次生成/12,701,275生成tokens/420,830 embeddingtokens。不会再尝试提示变体。原W3案例仍失败；可以用真实clean bank的完整未修改副本，增加一条中性公开消息单独验证W3 UPDATE机械行为，并单列为非独立机制证据。
+
+[W3真实bank机制检查](../data/manifests/v13-1-p5-w3-mechanism-results.json)已通过受限验收：完整复制R2clean的实际bank/world/journal/checkpoints，保持原owner/run和所有原始资源字节不变，新公开M3仅授权查询与修订。模型实际UPDATE从revision2提交到3，SIGKILL发生在提交后、ToolNode应答进入图之前；新进程重放完全相同的tool call返回原committed回执，status=no_change/replayed，仍是revision3，三个历史版本完整，无重复记录和业务变化，最终保存声明真实。
+
+此项新增3次实际生成/12,436 tokens；连续账本为6,669次/12,713,711生成tokens/420,830 embeddingtokens，unknown0，Judge0。现在三个窗口均有实际模型+硬终止+公共SDK重开的机械证据；它们来自同一工作流、不同开发路径，不能合成六案都成功或修复原W3失败。P5-outcomes/crash/idempotent仅标记PASSED_SCOPED机械原语，P5-compare和完整生命周期质量仍未完成。
