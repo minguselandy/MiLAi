@@ -622,14 +622,18 @@
       "plan_section": "10.E-L",
       "requirement": "Same refs/guard/discovery: no projection, Receipt-RAG, full candidate; neutral recovery request",
       "authoritative_evidence_required": "all three real lifecycle comparisons without injection labels entering Agent",
-      "status": "NOT_VERIFIED",
+      "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-1-p5-comparison-source-acceptance.json",
         "data/manifests/v13-1-p5-comparison-development-candidates.json",
-        "docs/V13_1_P5_COMPARISON.md"
+        "docs/V13_1_P5_COMPARISON.md",
+        "data/manifests/v13-1-p5-comparison-old208-coverage-results.json",
+        "docs/V13_1_P5_COMPARISON_OLD208_COVERAGE.md",
+        "data/manifests/v13-1-document-source-acceptance.json",
+        "docs/V13_1_DOCUMENT_WORKFLOW.md"
       ],
       "conditional": false,
-      "qualification": "Source/runtime composition mechanically checked; actual comparison NOT_RUN. Finite-fields-view ablation only, not a general automatic O_t projector. Current six old single-workflow development cases do not replace Pilot-L12 or formal60 independent bases/two substantive workflows. Native ADD-only/manual UPDATE and native/matched maintenance timing remain separate."
+      "qualification": "OldSource207 comparison/208union:45of60 trajectories attempted,139actualprocesses,45SDKreadbacks,cost exact; first3Mem0nativeclosed-snapshotfailed retained and affectedremaining15not-run. Native/matched and finiteE-L separate; original12caps and failures retained. Completed30message-trajectories do not imply semantic task success. NewDoc second substantiveworkflow mechanicalready, no modelqualityyet; Pilot12/formal60 not replaced. No independent/generalautomatic O_t projector."
     },
     {
       "id": "P6-pilotS",
