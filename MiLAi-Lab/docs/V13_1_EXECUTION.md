@@ -165,3 +165,7 @@ P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，A
 [原冻结生命周期覆盖](V13_1_P5_COMPARISON_OLD208_COVERAGE.md)已完成45/60条采集与139进程／45SDK资源的零模型审计；30条完成所有消息，语义成功另审。23次实际 SIGKILL 覆盖W1/W2/W3，原失败、额度耗尽、截断和15条未执行都留在分母。新增543generation／2675299tokens／83740embedding；本阶段收口连续7461generation／15742294generationtokens／538303embeddingtokens，unknown0，Judge仍48。该计数是阶段终态，后续沿同一账本增长。
 
 [文稿审批与发布](V13_1_DOCUMENT_WORKFLOW.md)作为第二实质工作流已完成机械源码验收和六个开发故事的授权校验。共享质量24与联合12预算在文稿模型输出前分别声明；14方法设置共84条拟定开发轨迹，实际质量尚未运行。原快照失败保持，新证据生命周期修复另冻。正式60基础任务、模板敏感性与独立服务缺口没有被开发轨迹数替代。
+
+用户要求“总结当前实验情况，提交到github上，使用luna模型”。本次由 `gpt-6-luna` 整理[实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)，Root核对证据与原连续账本并发布当前实验分支；报告代理不参与实验评分或第二家族确认。
+[固定发布快照](../data/manifests/v13-1-experiment-status-20260930.json)记录当前7461次generation／15742294生成tokens／538303嵌入tokens、v13.1增量和60项要求的有限状态（11 PASSED_SCOPED／26 PARTIAL／23 NOT_VERIFIED），不把有限通过比例当目标完成率。
+运行前载体修正已提交 `1787b60`，只接受准确的已观察事件标记及机械验证；新完整冻结和文稿模型质量仍待执行。为固定本次报告状态暂缓新的实验HTTP，完整P0–P8目标保持ACTIVE。

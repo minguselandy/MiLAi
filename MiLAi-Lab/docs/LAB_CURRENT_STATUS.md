@@ -4,7 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
-| v13.1 可用性优先开发与实验 | **ACTIVE**，R9正常开发门槛22/24；外部微型两臂各5/6限定通过，完整P0–P8未完成 | [R9](V13_1_D0_R9_RESULTS.md)；[外部微型](V13_1_P3_BASELINE_MICRO.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
+| v13.1 可用性优先开发与实验 | **ACTIVE**，正常门槛22/24；等额配置开发48题对完成，生命周期45/60条尝试、30条完成消息；文稿实跑未开始，完整P0–P8未完成 | [当前实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
@@ -69,3 +69,6 @@ v10 新增 153 次 generation、485,745 generation tokens、128 embedding tokens
 P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，Attention不准入。新增合计12generation/21439tokens；最新连续6447generation/11902007tokens/420830embedding，unknown0。[直接证据](V13_1_P2_TYPED_RECEIPTS.md)。
 
 [P4已曝光开发2×2](V13_1_P4_TYPE_SCOPE.md)首轮因素混淆保留，R2机械分离成立但类型独立收益未证明。Flat/Type-only/Flat+Scope/Type+Scope task分别2/2/3/2（各4），后者另1UNKNOWN；更广来源归属错误单列。最新连续6511generation/12004306tokens/420830embedding，unknown0。
+
+2026-09-30本次发布快照：原连续账本7461次generation／15742294 generation tokens／538303 embedding tokens，unknown0；v13.1新增1316次／4335208生成tokens／121373嵌入tokens，包含48次同族诊断Judge。上文计数均为历史阶段快照。
+[当前总结](V13_1_EXPERIMENT_STATUS_20260930.md)与[机器快照](../data/manifests/v13-1-experiment-status-20260930.json)记录实际分母、失败、成本、来源／服务缺口和未执行项。Luna仅整理总结，不构成独立Judge或第二实验模型家族；完整目标仍ACTIVE，Product仍NO_GO。

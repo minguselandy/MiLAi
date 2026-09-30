@@ -1,0 +1,164 @@
+{
+  "kind": "V13_1_EXPERIMENT_STATUS_PUBLICATION_SNAPSHOT",
+  "date": "2026-09-30",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO",
+  "branch": "feat/lab-usability-v13-1-20260930",
+  "repository": "https://github.com/minguselandy/MiLAi",
+  "publication_scope": "Current Lab experiment branch; no main merge or Product release.",
+  "requirements": {
+    "planned": 60,
+    "status_counts": {
+      "PARTIAL": 26,
+      "PASSED_SCOPED": 11,
+      "NOT_VERIFIED": 23
+    },
+    "interpretation": "PASSED_SCOPED is limited evidence, not full requirement completion or a completion percentage.",
+    "source": "data/manifests/v13-1-requirements.json"
+  },
+  "accounting": {
+    "ledger": "original checkout artifacts/ser-v20/budget.json",
+    "ledger_sha256": "165f89487c70d988bca88b58d8f84960609e270c4d0da26cedb8fd8d4904fb7b",
+    "baseline": {
+      "generation_requests": 6145,
+      "generation_tokens": 11407086,
+      "embedding_tokens": 416930
+    },
+    "current": {
+      "generation_requests": 7461,
+      "generation_tokens": 15742294,
+      "embedding_tokens": 538303,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    },
+    "v13_1_delta": {
+      "generation_requests": 1316,
+      "generation_tokens": 4335208,
+      "embedding_tokens": 121373
+    },
+    "v13_1_local_same_family_judge": {
+      "generation_requests": 48,
+      "generation_tokens": 78556,
+      "included_in_generation_totals": true,
+      "official_or_independent": false
+    },
+    "prices_dollars_gpu_hours": null,
+    "all_original_failures_and_recovery_costs_retained": true,
+    "combined_generation_embedding_concurrency": 1,
+    "report_agent_consumption_is_experiment_usage": false
+  },
+  "normal_gate": {
+    "correct": 22,
+    "planned": 24,
+    "status": "PASSED_SCOPED",
+    "source": "data/manifests/v13-1-d0-r9-results.json"
+  },
+  "equal_configuration_development": {
+    "planned_and_executed_question_pairs": 48,
+    "real_processes": 96,
+    "reopened_sdk_resources": 48,
+    "local_same_family_judge_calls": 48,
+    "selected": [
+      "B2-a",
+      "B3-a",
+      "Ours_scope-a"
+    ],
+    "source": "data/manifests/v13-1-equal-config-development-results.json",
+    "interpretation": "Old exposed sources, development selection only; no independent superiority or operational grounding claim."
+  },
+  "old208_lifecycle_cohort": {
+    "planned_trajectories": 60,
+    "attempted": 45,
+    "all_messages_completed": 30,
+    "interrupted": 15,
+    "not_run": 15,
+    "real_processes": 139,
+    "sdk_readbacks": 45,
+    "actual_sigkill": {
+      "total": 23,
+      "W1": 14,
+      "W2": 6,
+      "W3": 3
+    },
+    "first_terminal_causes": {
+      "public_message_generation_capacity_exceeded": 10,
+      "vllm_chat_truncated": 2,
+      "native_evidence_capture_failed": 3
+    },
+    "source": "data/manifests/v13-1-p5-comparison-old208-coverage-results.json",
+    "interpretation": "Completed messages are not lifecycle semantic success; original failures and missing trajectories remain."
+  },
+  "document_development": {
+    "workflow": "document_publication_v1",
+    "status": "MECHANICAL_AND_ZERO_HTTP_PREPARATION_ONLY_NEW_FREEZE_REQUIRED",
+    "planned_methods": 14,
+    "development_stories": 6,
+    "planned_trajectories": 84,
+    "primary_matched_trajectories": 24,
+    "actual_model_trajectories": 0,
+    "quality_shared_generation_cap": 24,
+    "separate_budget_generation_cap": 12,
+    "source_acceptance": "data/manifests/v13-1-document-source-acceptance.json",
+    "subsequent_carrier_patch": "data/manifests/v13-1-mem0-observed-carrier-source-acceptance.json",
+    "prospective_inputs": "data/manifests/v13-1-document-development-candidates.json",
+    "earlier_zero_http_preflight_errors_preserved": true
+  },
+  "source_gap": {
+    "official_pin": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+    "pre_pilot_unseen_rows": {
+      "contextual_scope_control": 270,
+      "valid_memory_selection": 63,
+      "personalized_memory_use": 95
+    },
+    "post_pilot_component_reservation_unseen_rows": {
+      "contextual_scope_control": 250,
+      "valid_memory_selection": 7,
+      "personalized_memory_use": 54
+    },
+    "formal_required_rows_per_task": 100,
+    "pilotS_question_ids_reserved": 60,
+    "pilotS_component_member_rows_reserved": 117,
+    "pilotS_question_or_gold_read": false,
+    "pilotM_reserved_seeds": [
+      65,
+      82
+    ],
+    "pilotM_arcs_generated": 0,
+    "formal_selected": false,
+    "additional_official_source_user_reply": "没有额外的",
+    "source": "data/manifests/v13-1-memsyco-source-availability.json"
+  },
+  "service_gaps": {
+    "official_independent_judge_available": false,
+    "second_family_available": false,
+    "user_reply": "没有额外服务，继续其余实验",
+    "existing_7860_7862_same_qwen_family": true,
+    "luna_report_agent_is_second_experimental_family": false,
+    "source": "data/manifests/v13-1-external-service-availability.json"
+  },
+  "report_model": {
+    "requested": "luna",
+    "tool_model": "gpt-6-luna",
+    "role": "Write experimental status prose only; Root reviews evidence and performs Git publication."
+  },
+  "remaining_work": [
+    "Freeze new complete Source/CLI and run document development models with original continuous accounting.",
+    "Run corrected affected native paths as a separate frozen cohort; preserve old208 first failures.",
+    "Implement public S/M selected candidate adapters, then execute prospectively reserved pilot.",
+    "Complete formal source availability, independent scoring and second-family requirements when supporting inputs/services exist.",
+    "Complete formal matrices, repeat selection, statistics, failure analysis and reproducibility without shrinking original P0-P8 target."
+  ],
+  "source_head": "1787b602fa09df98b94fe12bea715bfb959af38f",
+  "source_base": "255dfcde5d73b9fc800cdd7f866460a09908c12f",
+  "source_patch_acceptance": "data/manifests/v13-1-mem0-observed-carrier-source-acceptance.json",
+  "publication_validation": {
+    "relative_document_links": "all 88 checked local targets exist",
+    "verification_matrix": "205 active/owned sources; 37 optional tests owned; pass",
+    "active_package_boundary": "pass",
+    "active_tools_boundary": "pass; 11 files/20 dependencies/6 preexisting grandfathered private dependencies",
+    "carrier_installed_sdk_tests": "2 passed, no real network",
+    "remote_ci": "not run as part of local validation; no remote CI pass claimed",
+    "report_changes_public_api_schema_permissions_canonical": false,
+    "source_change_scope": "Opt-in observed-event carrier parameter; legacy default preserved, Product unchanged."
+  }
+}
