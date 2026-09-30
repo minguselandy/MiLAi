@@ -16,5 +16,5 @@ case、原source、完整历史hash或旧来源组关联的整组都排除。60�
 实际git ls-remote核对官方HEAD仍是fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221。
 只输出ID/source/hash分组元数据，不显示问题、memory、evaluation或gold；没有将正式题送给Host。
 没有删除暴露排除条件、偷换任务、把重复问题计作新来源组或悄悄缩小完整目标。
-已请求额外未曝光官方来源信息；其他独立baseline/恢复/开发任务继续。P6/P7 nominal规模要求
+用户已确认没有额外未曝光官方来源；使用现pin继续其他独立baseline/恢复/开发任务。P6/P7 nominal规模要求
 保留未完成，待pilot与来源条件支持后按原规划冻结，不能先宣告300未见已可运行。

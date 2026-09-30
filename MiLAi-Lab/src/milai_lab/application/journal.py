@@ -133,6 +133,14 @@ class BusinessActionJournal:
                 or type(op["reservation_from"]) is not str
             ):
                 raise ValueError("APPLICATION_RESERVATION_BINDING_INVALID")
+            if "recovery_retry" in op and (
+                op["recovery_retry"] != "confirmed_no_effect_v1"
+                or op["tool"] != "complete_label" or op.get("retry") != "no_effect"
+                or op.get("reservation_from") is None
+                or precondition != {"query_operation_id": op["reservation_from"],
+                                    "status": "found", "label_status": "not_created"}
+            ):
+                raise ValueError("APPLICATION_RECOVERY_RETRY_CONTRACT_INVALID")
             if op["tool"] in {"reserve_and_label", "get_reservation", "complete_label"}:
                 if "effect_contract" in op:
                     raise ValueError("APPLICATION_NATIVE_EFFECT_CONTRACT_FIXED")
@@ -236,7 +244,9 @@ class BusinessActionJournal:
                 prior = [row for row in self._op_entries(entries, key) if row.get("executed")][-1]
                 status = (json.loads(prior["result"]["content"]).get("status")
                           if prior.get("result") else None)
-                if status != "label_service_unavailable":
+                if status != "label_service_unavailable" and not self._recovery_retry_allowed(
+                    entries, prior, op
+                ):
                     reason = "APPLICATION_OPERATION_RETRY_NOT_ALLOWED"
                     continue
             if any(not any(effect in {"confirmed", "partial", "observed"}
@@ -261,6 +271,35 @@ class BusinessActionJournal:
                     continue
             return op, "APPLICATION_OPERATION_AUTHORIZED"
         return None, reason
+
+    def _recovery_retry_allowed(
+        self, entries: dict[str, Any], prior: dict[str, Any], op: dict[str, Any]
+    ) -> bool:
+        """A finite opt-in permission from a new query, never an original receipt.
+
+        Old pending/effect=unknown rows remain untouched. Only a separately
+        journaled, executed, target-matched discovery of this reservation with its
+        label still absent can enable the explicit no-effect retry contract.
+        """
+        if op.get("recovery_retry") != "confirmed_no_effect_v1":
+            return False
+        recovery = self._application(entries)["recoveries"].get(prior["journal_key"], {})
+        query = entries.get(recovery.get("query_journal_key"), {})
+        if (prior.get("status") != "pending" or prior.get("result") is not None
+                or recovery.get("original_call_status") != "UNKNOWN"
+                or recovery.get("effect") != "none"
+                or recovery.get("effect_source") != (
+                    "query_observation_not_original_execution_receipt")
+                or query.get("status") != "complete" or query.get("executed") is not True
+                or query.get("name") != "get_reservation" or query.get("target_matched") is not True
+                or query.get("target") != prior.get("target")):
+            return False
+        try:
+            observation = json.loads(query["result"]["content"])
+        except (KeyError, ValueError, TypeError):
+            return False
+        return (isinstance(observation, dict) and observation.get("status") == "found"
+                and observation.get("label_status") == "not_created")
 
     @staticmethod
     def _receipt_effect(op: dict[str, Any], response: ToolMessage) -> str:

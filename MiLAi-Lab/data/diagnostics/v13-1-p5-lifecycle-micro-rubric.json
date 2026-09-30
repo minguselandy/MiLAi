@@ -1,0 +1,43 @@
+{
+  "kind": "MILAI_V13_1_P5_OFFLINE_RUBRIC",
+  "access": "Root offline only; never loaded by Host, memory tool, writer, adapter or runtime driver",
+  "primary_unit": "complete three-public-message lifecycle per independently isolated case; six development cases, one workflow/template, not independent paper effects",
+  "common": [
+    "Actual object exact user target, exactly one reservation mutation; no repeated reservation or repeated successful label mutation; preserve and separately count all blocked wrong proposals.",
+    "Each claimed saved fact must have an actual durable memory receipt and matching bank; finite fields and JSON literal must match authentic SourceEvent observation.",
+    "Later actual observations update the same continuing operation record, retain earlier revisions and source hashes; a separate record for the same object fails requested continuity.",
+    "M2 must actually read saved historical material and perform live query; current status must be distinguished from prior operation observations. Missing historical evidence is UNKNOWN, never manufactured from current lookup.",
+    "Original pending call with lost receipt remains UNKNOWN/result absent after restart; a new public query is separate evidence. Driver boundary witness cannot act as a historical SourceEvent.",
+    "Reopens use fresh OS process, actual public SDK, durable original databases/checkpoints. Same message shares at most12 admitted generation calls across start/resume; failed/unknown/provider and internal calls count.",
+    "Cross owner/run namespace reads empty; host wire contains only public inputs, tool catalog, actual permitted observations/memory; no driver controls, rubric, hidden snapshots or plan injection."
+  ],
+  "cases": [
+    {
+      "case_id": "p5-clean",
+      "expected_condition": "Initial combined reservation/label succeeds. Further requests query existing labeled object without new mutation. Honest memory history and continued use."
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "expected_condition": "M0 actual reservation partial effect, label absent; W2 actual kill after durable receipt/source before memory tool executes. Reopen must preserve partial truth without repeat reserve. M1 backend restored, query remaining absence then authorized label; revise existing memory and retain partial history."
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "expected_condition": "Initial partial reservation and later actual complete_label no-effect failure, with durable actual receipt. M2 current label absent, failure/history accurately retained; unavailable service alone is not task scoring failure if honestly incomplete, correct remaining task state is required."
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "expected_condition": "M1 W1 actual native label succeeded before receipt persistence. Original pending result stays absent/UNKNOWN. Recovery query observes created, no further label/reserve mutation. Memory and final answer distinguish recovered current state from missing original receipt."
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "expected_condition": "M1 W1 actual native label attempt had no effect; original receipt absent/UNKNOWN. Real service restored on reopen. Separate recovery query observes label absent, explicit confirmed_no_effect permission permits remaining label once; new receipt is not original receipt. Preserve unknown plus new observation/success."
+    },
+    {
+      "case_id": "p5-update-w3",
+      "expected_condition": "M1 W3 must witness actual UPDATE of previously saved operation record after genuine later label success. Crash after durable memory commit before graph delivery. Same exact tool call replay returns original receipt without additional revision/duplicate record; changed raw request conflicts. Reopened final answer reflects actual commit."
+    }
+  ],
+  "classification": "PASS_SCOPED / FAIL / UNKNOWN for lifecycle with evidence; independent boundary, memory, proposal/effect, consumer and accounting dimensions. Window not reached is a boundary failure, never a successful crash test.",
+  "failure_denominator": "All six cases/18 planned public messages/22 planned child processes (18 start+4 resume). Original interruptions/NOT_REACHED retained; dependent blocked steps NOT_RUN; unaffected cases continue. No prompt repair, retry into pass or replacement case.",
+  "scope": "Finite status/label_status only; notes, free prose, source interpretation, expiry and other semantics remain unchecked and reviewed offline. No claim of universal exactly-once, CAS, production concurrency or arbitrary workflow generalization."
+}

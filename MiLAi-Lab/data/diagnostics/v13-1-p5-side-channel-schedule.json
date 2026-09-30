@@ -1,0 +1,186 @@
+{
+  "kind": "MILAI_V13_1_P5_DRIVER_ONLY",
+  "use": "Driver only, never delivered to Host/writer. Real world availability events and kill boundaries, no expected output.",
+  "scheduled_public_messages": 18,
+  "extra_reopens": 4,
+  "schedule": [
+    {
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "window": "W2",
+      "window_tool": "manage_memory",
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "p5-partial-w2-availability-before-m1",
+        "label_available": true,
+        "phase": "start"
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "window": "W1",
+      "window_tool": "complete_label",
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "p5-unknown-happened-availability-before-m1",
+        "label_available": true,
+        "phase": "start"
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "window": "W1",
+      "window_tool": "complete_label",
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": {
+        "event_id": "p5-unknown-none-availability-on-reopen",
+        "label_available": true,
+        "phase": "resume"
+      }
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "window": "W3",
+      "window_tool": "manage_memory",
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "p5-update-w3-availability-before-m1",
+        "label_available": true,
+        "phase": "start"
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    }
+  ]
+}

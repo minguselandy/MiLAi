@@ -18,7 +18,11 @@ from langchain_core.tools import (
 from milai_lab.memory.service import MemoryService
 
 
-def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
+def create_service_tools(
+    service: MemoryService, *, replay_requested: bool = False
+) -> tuple[BaseTool, ...]:
+    if type(replay_requested) is not bool:
+        raise ValueError("V13_MEMORY_REPLAY_REQUESTED_INVALID")
     def session_for(config: RunnableConfig) -> str:
         cfg = config.get("configurable", {})
         if cfg.get("user_id") != service.owner or not cfg.get("v13_session"):
@@ -78,6 +82,10 @@ def create_service_tools(service: MemoryService) -> tuple[BaseTool, ...]:
         }
         if service.receipt_contract == "explicit_receipt_v1":
             requested["content_format"] = content_format
+        if replay_requested:
+            prior_receipt = service.replay_requested(session, tool_call_id, requested)
+            if prior_receipt is not None:
+                return message("manage_memory", tool_call_id, prior_receipt)
         sources = service.sources(session)
         if source_ref is None:
             relevant = [

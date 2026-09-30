@@ -354,6 +354,38 @@ class MemoryService:
                         return "receipt_body_conflict:" + field, source
         return None, source
 
+    def replay_requested(
+        self, session: str, proposal_id: str, requested: dict[str, Any]
+    ) -> dict[str, Any] | None:
+        """Opt-in replay before automatic source/target/revision binding.
+
+        Compare the exact original tool request, not newly resolved state. A changed
+        request is preserved as a conflicting attempt. The stored proposal and its
+        historical receipt remain intact; this does not execute a second commit.
+        """
+        if not session or not proposal_id:
+            raise ValueError("V13_PROPOSAL_IDENTITY_REQUIRED")
+        requested = json.loads(_json(requested))
+        identity = _hash([session, proposal_id])
+        with self._locked():
+            attempt = self.store.get(self.attempts_namespace, identity)
+            previous = next(
+                (row["value"].get("_v13_1", {}).get("proposals", {})[identity]
+                 for row in self._rows(self.namespace)
+                 if row["value"].get("_v13_1", {}).get("owner") == self.owner
+                 and identity in row["value"].get("_v13_1", {}).get("proposals", {})),
+                attempt.value if attempt is not None else None,
+            )
+            if previous is None:
+                return None
+            if previous["raw"].get("requested") != requested:
+                raw = {"requested": requested}
+                return self._reject(identity + ":" + _hash(raw), raw,
+                                    previous["receipt"]["id"], "proposal_id_conflict", None)
+            receipt = previous["receipt"]
+            return {**receipt, "status": "no_change" if receipt["ok"] else "rejected",
+                    "replayed": True, "original_status": receipt["status"]}
+
     def commit(self, session: str, proposal_id: str, proposal: dict[str, Any]) -> dict[str, Any]:
         """Commit a raw Host proposal; no semantic repair or fabricated result projection."""
         raw = json.loads(_json(proposal))
