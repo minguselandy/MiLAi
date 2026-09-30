@@ -1,6 +1,6 @@
 # v13.1 P2 显式有限回执提案合同
 
-状态：READY_FROZEN_FOR_LIVE_HOST；完整P0–P8仍ACTIVE，Product NO_GO。
+状态：PARTIAL / 16真实消息完成；完整P0–P8仍ACTIVE，Product NO_GO。
 
 R9实际Host的所有业务记忆fields为空，只有unchecked正文，不能用机械guard测试声称实际
 字段支持收益。P3固定material进一步观察到：真实native ID旁的引用句来自系统prompt，
@@ -36,7 +36,7 @@ prepare两臂0HTTP，冻结实际tool catalog、prompt、整个Source与原账�
 
 每消息12generation/输出4096/并发1；capture/真实ref lookup/Host/写入/查询/读回按实测范围
 记成本，仍不把已有局部Store I/O称为完整测量。原连续账本不重置、Judge0、不换算美元/GPU。
-当前尚无本轮实际模型结果，不宣布新的可用性或研究门禁通过。
+实际结果见下文；不宣布完整可用性或研究门禁通过。
 
 65受影响mechanical/SDK/MockHTTP检查通过（26deselected），Ruff5文件、strict mypy3源文件和
 whitespace通过；初次42API失败、2最小正文自然检索失败及静态错误保留。旧默认catalog
@@ -48,3 +48,25 @@ SHA256a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926与预编�
 真实工具ref的原source内容作lexical关联，保持原排名公式、限制、存储和正文，两臂相同。
 真实两记录search/read/update与foreign排除通过；内部分别source各get一次（2），
 正常raw查询复用已加载源额外get0。Observer记录原读回、失败读、wallCPU与查询，IO仍partial。
+
+
+## 首轮真实结果与独立读回
+
+[结果清单](../data/manifests/v13-1-p2-typed-receipts-results.json)记录8案例臂/16消息/16独立进程。
+真实SDK再次打开全部8个Store/world，核对当前记录、revision1、原始工具SourceEvent/hash/
+object ref与真实reservation；每臂每例只有1次预约，无后续mutation或虚假Saved。
+全部8条形成记录都由实际Host明确提出两字段JSON，4条Field有限claim与原观察匹配；
+4条Ref有限claim仍标unchecked。6次初始prose/单引号正文被receipt_body_invalid_json拒绝，
+原requested/raw提案和随后模型付费提交的新提案同时保留。未出现实际field/body literal conflict，
+所以这轮不证明Field语义拒绝收益。notes、scope、自由正文与引用仍unchecked。
+
+预定后续说明标准：Ref2PASS/1FAIL/1UNKNOWN，Field2PASS/2FAIL。两个confirmed后续都正确；
+partial1两臂与partial2 Field把“前一次操作”错称为“即本次查询”，没有报告原局部结果。
+partial2 Ref仅说标签未创建或失败，原失败尝试未知，不能算通过。所有8次后续都只调用
+get_reservation，没有search/read，历史bank未送达；最早断点为历史检索选择，Attention不准入。
+此外Ref confirmed2虚构2023-10-27绝对时间、partial2虚构2024-12-31截止；独立事实审查另记失败，
+不把预定continuation分数偷换成完整事实可靠性或归因于grounding。
+
+新增46generation/92756generation tokens/0embedding，与每个真实response和连续账本精确核对。
+连续6435generation/11880568generation tokens/420830embedding tokens，unknown0/Judge0。
+独立读回wall/CPU与文件/逻辑字节有记录；总Store I/O仍partial。原失败不被后续诊断覆盖。

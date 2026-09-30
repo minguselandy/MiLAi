@@ -1,0 +1,1506 @@
+{
+  "kind": "MILAI_V13_1_P2_TYPED_RECEIPTS_RESULTS",
+  "status": "PARTIAL",
+  "planned_case_arms": 8,
+  "completed_case_arms": 8,
+  "planned_messages": 16,
+  "completed_messages": 16,
+  "distinct_processes": 16,
+  "unknown_provider_usage": 0,
+  "formation_finite_contract": "8/8 actual Host formed explicit2field JSON;4/4 Field bounded claims matched;4/4 Ref unchecked",
+  "first_invalid_json_rejections": 6,
+  "receipt_field_conflict_rejections_live": 0,
+  "body_literal_conflict_rejections_live": 0,
+  "primary_continuation_counts": {
+    "ref_only": {
+      "pass": 2,
+      "fail": 1,
+      "unknown": 1,
+      "total": 4
+    },
+    "field_grounded": {
+      "pass": 2,
+      "fail": 2,
+      "unknown": 0,
+      "total": 4
+    }
+  },
+  "unsupported_absolute_scope_count": 2,
+  "historical_memory_delivery_m2_count": 0,
+  "earliest_observed_break": "historical_memory_not_requested_or_delivered; only current readonly get_reservation in all8m2",
+  "attention_eligible": false,
+  "semantic_guard_gain_established": false,
+  "limits": "Shared schema rejects invalid JSON, not observed unsupported field values; actual proposed fields truthful in both arms. Scope/notes/prose remain unchecked. No general truth/quotation/current authorization/exactly-once claim. Independent readback adds measured partial SDK read cost, no model. Primary preregistered continuation separately from broader unsupported-scope review; unknown not pass.",
+  "cost": {
+    "distinct_pids": 16,
+    "provider_totals": {
+      "generation_requests": 46,
+      "generation_tokens": 92756,
+      "embedding_tokens": 0
+    },
+    "exact_continuous_ledger_match": true,
+    "message_tools_cost": [
+      {
+        "arm": "ref-only",
+        "case": "receipt-partial-2",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 9031
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-partial-2",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3426
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-confirmed-1",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory"
+        ],
+        "generation_requests": 3,
+        "generation_tokens": 6046
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-confirmed-1",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3393
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-confirmed-2",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 8931
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-confirmed-2",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3353
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-partial-1",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 9099
+      },
+      {
+        "arm": "ref-only",
+        "case": "receipt-partial-1",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3401
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-partial-2",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 8886
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-partial-2",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3400
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-confirmed-1",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory"
+        ],
+        "generation_requests": 3,
+        "generation_tokens": 6047
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-confirmed-1",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3388
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-confirmed-2",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 8788
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-confirmed-2",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3352
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-partial-1",
+        "message": 0,
+        "tool_delivery": [
+          "reserve_and_label",
+          "manage_memory",
+          "manage_memory"
+        ],
+        "generation_requests": 4,
+        "generation_tokens": 8823
+      },
+      {
+        "arm": "field-grounded",
+        "case": "receipt-partial-1",
+        "message": 1,
+        "tool_delivery": [
+          "get_reservation"
+        ],
+        "generation_requests": 2,
+        "generation_tokens": 3392
+      }
+    ]
+  },
+  "cases": [
+    {
+      "arm": "ref-only",
+      "mode": "ref_only",
+      "case_id": "receipt-confirmed-1",
+      "process_ids": [
+        126914,
+        127488
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/ref-only/4103d38dc8ed8e88",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "unchecked",
+      "body_fields_verification": "unchecked",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-fe1a44b89f1b9bfbe7305a81652b5fbd7b64c1f86549059fef695ceab17e25d0:RSV-4e4d46f5-e25d-4799-ae7e-b433dcd3c5d3",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-fe1a44b89f1b9bfbe7305a81652b5fbd7b64c1f86549059fef695ceab17e25d0:RSV-4e4d46f5-e25d-4799-ae7e-b433dcd3c5d3",
+              "scope": {
+                "destination": "东楼资料室",
+                "packing": "防潮内衬",
+                "quantity": 2,
+                "subject": "档案盒-东楼资料室"
+              },
+              "source_ref": "src-fe1a44b89f1b9bfbe7305a81652b5fbd7b64c1f86549059fef695ceab17e25d0",
+              "target_query": null
+            },
+            "scope": {
+              "destination": "东楼资料室",
+              "packing": "防潮内衬",
+              "quantity": 2,
+              "subject": "档案盒-东楼资料室"
+            },
+            "source_ref": "src-fe1a44b89f1b9bfbe7305a81652b5fbd7b64c1f86549059fef695ceab17e25d0",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "8a042a92-117b-50b0-bc1a-4c3b53ff6843",
+            "revision": 1,
+            "source_ref": "src-fe1a44b89f1b9bfbe7305a81652b5fbd7b64c1f86549059fef695ceab17e25d0",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "unchecked",
+            "effect": "memory_only",
+            "mode": "ref_only",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "unchecked",
+            "notes_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 0,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "PASS",
+      "unsupported_absolute_scope": false,
+      "scope": {
+        "destination": "东楼资料室",
+        "packing": "防潮内衬",
+        "quantity": 2,
+        "subject": "档案盒-东楼资料室"
+      },
+      "primary_required_case_outcome": "PASS",
+      "broader_fact_review_outcome": "PASS",
+      "m0_final_answer": "预订和标签制作已完成。物品：档案盒-东楼资料室，数量：2，目的地：东楼资料室，包装：防潮内衬。 reservation_id: RSV-4e4d46f5-e25d-4799-ae7e-b433dcd3c5d3，label_status: created。操作事实已保存。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-4e4d46f5-e25d-4799-ae7e-b433dcd3c5d3，物品为“档案盒-东楼资料室”，数量为2，目的地为“东楼资料室”，包装方式为“防潮内衬”。标签状态为“created”（已创建）。前一次操作已成功完成预约并创建了标签。",
+      "usage": {
+        "generation_requests": 5,
+        "generation_tokens": 9439,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 20119685,
+      "independent_readback_cpu_ns": 20118144,
+      "artifact_sha256": {
+        "message-1-capture.json": "7ab88aaf65678def7d0663d4d92982be796d14ec274f1b3582e848e0fe7511f5",
+        "message-0-capture.json": "fb2587dd368c1e4e4d7d852b6d51388f2e265bce3c186c1c9a8daccd4fe305d0",
+        "message-0.jsonl": "6fef8ffd9c83bf82057dec4c2c79fb8de91e387bdda6daaecc0e8648158bb3ba",
+        "world.sqlite": "d0edccb3a0d664f366ad89ae7dfc18bddaba6ea7058f0307940040e4e6a20d53",
+        "message-0.json": "aa82002ccd9627c902af67952ef3a0f5058dea0936506a5f5e72d14581893139",
+        "host-capacity.json": "8c43bd88c67f64b9dbf4fde295a9a143dcc34162171083fe854f84f546d914a1",
+        "message-1.jsonl": "117da54a21c501127cab690614796315b7cf0ddaff274a2518ccc92803b0f3e8",
+        "memory.sqlite": "ea305ce2671ffca462fec5750484b005af055669e697b971fb7adca16633759e",
+        "message-1.json": "e59acc1b8f7cca265d1f6df0b97121f613e15e64c4f7caf96c3a004791ffe732",
+        "checkpoints.sqlite": "ce052d3ebc215dc20ba864c56139aa25732d0a86fd595fefd5c20b648215b517",
+        "business-journal.json": "d6a667a725259ab088e0747291de4e0e66de7939441b794e336f070b78cf28fa"
+      }
+    },
+    {
+      "arm": "ref-only",
+      "mode": "ref_only",
+      "case_id": "receipt-partial-1",
+      "process_ids": [
+        148273,
+        148974
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/ref-only/80bc27763d643af8",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "unchecked",
+      "body_fields_verification": "unchecked",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503:RSV-59d78994-c19a-434a-b262-a19451a07607",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503:RSV-59d78994-c19a-434a-b262-a19451a07607",
+              "scope": {
+                "project": "lab_operations",
+                "time": "current_session"
+              },
+              "source_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503",
+              "target_query": null
+            },
+            "scope": {
+              "project": "lab_operations",
+              "time": "current_session"
+            },
+            "source_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "f351c391-d6d4-58af-82fa-60ab71cf178e",
+            "revision": 1,
+            "source_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "unchecked",
+            "effect": "memory_only",
+            "mode": "ref_only",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "unchecked",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "On the reservation for item '检测样本-北侧实验台' (quantity 3, destination '北侧实验台', packing '保温隔层'), the reservation was successfully created (reservation_id: RSV-59d78994-c19a-434a-b262-a19451a07607) but the label creation failed because the label service was unavailable. Status: reserved_label_failed. Label status: not_created.",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503:RSV-59d78994-c19a-434a-b262-a19451a07607",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "On the reservation for item '检测样本-北侧实验台' (quantity 3, destination '北侧实验台', packing '保温隔层'), the reservation was successfully created (reservation_id: RSV-59d78994-c19a-434a-b262-a19451a07607) but the label creation failed because the label service was unavailable. Status: reserved_label_failed. Label status: not_created.",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503:RSV-59d78994-c19a-434a-b262-a19451a07607",
+              "scope": {
+                "project": "lab_operations",
+                "time": "current_session"
+              },
+              "source_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503",
+              "target_query": null
+            },
+            "scope": {
+              "project": "lab_operations",
+              "time": "current_session"
+            },
+            "source_ref": "src-89a2d5885aefa00a32555fdd9c7ee388df90c2bf2a436fa0a56106c3a0631503",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "184c9bc8-daf3-5062-b879-42b7213c8007",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "FAIL_HISTORICAL_RESULT",
+      "unsupported_absolute_scope": false,
+      "scope": {
+        "project": "lab_operations",
+        "time": "current_session"
+      },
+      "primary_required_case_outcome": "FAIL_HISTORICAL_RESULT",
+      "broader_fact_review_outcome": "FAIL_HISTORICAL_RESULT",
+      "m0_final_answer": "预订已成功创建（预订ID：RSV-59d78994-c19a-434a-b262-a19451a07607），但标签制作失败，原因是标签服务不可用。该操作事实已保存以便后续查找。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-59d78994-c19a-434a-b262-a19451a07607，物品为“检测样本-北侧实验台”，数量为3，目的地为“北侧实验台”，包装方式为“保温隔层”。当前标签状态为“not_created”（未创建）。前一次操作（即本次查询）成功找到了该预约记录。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12500,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2667174,
+      "independent_readback_cpu_ns": 2667649,
+      "artifact_sha256": {
+        "message-1-capture.json": "82bf27161e0d4ecc05b8254b3b647016eeeb5c8d8eb507728654809a6e6d530b",
+        "message-0-capture.json": "27b6e242c15a7f8e2eabd15b09ab7d32974128c4a959e9b784f5ded26076e5dc",
+        "message-0.jsonl": "e96fd4b23db5bd97f70e5ad12dace07f4d1ac166891d37c575cbd87881b0bde9",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83",
+        "host-capacity.json": "3eab7fc64b73a30abbcca2fa70231cbc055bba9a8db8f1dfa5443892a0ac9d14",
+        "message-1.jsonl": "c9a8ac758ab4a5df478d38eb01ca5ef5f59df5d1e60faafc561a7b8c5747ebdb",
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "message-1.json": "39c851bc54b5028c371adbb65fdd7e8d410da2484788aa74b074322e63737e75",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e"
+      }
+    },
+    {
+      "arm": "ref-only",
+      "mode": "ref_only",
+      "case_id": "receipt-confirmed-2",
+      "process_ids": [
+        150851,
+        151553
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/ref-only/749c089598601d81",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "unchecked",
+      "body_fields_verification": "unchecked",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"label_created\", \"label_status\": \"created\", \"notes\": \"Reservation and label for 测量仪-西侧工位, qty 1, dest 西侧工位, packing 防震泡沫\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d:RSV-fe998a88-4d80-4849-85ab-a5cac6e7974a",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"label_created\", \"label_status\": \"created\", \"notes\": \"Reservation and label for 测量仪-西侧工位, qty 1, dest 西侧工位, packing 防震泡沫\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d:RSV-fe998a88-4d80-4849-85ab-a5cac6e7974a",
+              "scope": {
+                "time": "2023-10-27T10:00:00Z"
+              },
+              "source_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d",
+              "target_query": null
+            },
+            "scope": {
+              "time": "2023-10-27T10:00:00Z"
+            },
+            "source_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "16f219b8-4efc-5488-898a-5ef416a20805",
+            "revision": 1,
+            "source_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "unchecked",
+            "effect": "memory_only",
+            "mode": "ref_only",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "unchecked",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{'status': 'label_created', 'label_status': 'created', 'notes': 'Reservation and label for 测量仪-西侧工位, qty 1, dest 西侧工位, packing 防震泡沫'}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d:RSV-fe998a88-4d80-4849-85ab-a5cac6e7974a",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{'status': 'label_created', 'label_status': 'created', 'notes': 'Reservation and label for 测量仪-西侧工位, qty 1, dest 西侧工位, packing 防震泡沫'}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d:RSV-fe998a88-4d80-4849-85ab-a5cac6e7974a",
+              "scope": {
+                "time": "2023-10-27T10:00:00Z"
+              },
+              "source_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d",
+              "target_query": null
+            },
+            "scope": {
+              "time": "2023-10-27T10:00:00Z"
+            },
+            "source_ref": "src-b77882675bac712cfaab2d7647d8ed7696f86e6c816a3b1525724b6e1f49e43d",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "5f5b0e09-0d53-5145-a6be-80b0b6dace3f",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "PASS",
+      "unsupported_absolute_scope": true,
+      "scope": {
+        "time": "2023-10-27T10:00:00Z"
+      },
+      "primary_required_case_outcome": "PASS",
+      "broader_fact_review_outcome": "FAIL_UNSUPPORTED_SCOPE",
+      "m0_final_answer": "预订和标签制作已完成。物品“测量仪-西侧工位”（数量1，目的地“西侧工位”，包装“防震泡沫”）已成功预订并生成标签。操作事实已保存，方便下次查找。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-fe998a88-4d80-4849-85ab-a5cac6e7974a，标签状态为 created（已创建）。前一次操作已成功完成预约并创建了标签。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12284,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2583694,
+      "independent_readback_cpu_ns": 2584324,
+      "artifact_sha256": {
+        "message-1-capture.json": "c45d2442ff9914e822303a7cfbc65bdf40b4b75a8ab09239f5006d475ad43eca",
+        "message-0-capture.json": "31039a0522efe76d9997b63afa9767328e8b182724ec7311c4334fa21551845d",
+        "message-0.jsonl": "6d9a059bde90e407517042b18283bcf07cf4c97c30b4e230ddaf47b3306bfc26",
+        "world.sqlite": "260bb2931284e825b1fc2d54e2f0680f4808e690134e63e5090e08fcd3bb4515",
+        "message-0.json": "fb81571311a22564340a0a1edd500e5fb5051b7a6cce7e29aaefe349c27568ee",
+        "host-capacity.json": "1f73de1e32c9cc2089ac5ebc1c24b68fadf88e3abb7af605eff00e44abdd4468",
+        "message-1.jsonl": "1cdc0b34d49a816800020a898d7eddc47182a1edef80b604bcfc2c0288de7be2",
+        "memory.sqlite": "f01d3ee83e28a8f44e4cef0f7538bdb598a8039d5990940c514d408f78ad49c9",
+        "message-1.json": "2f2fbc274dddebc5b10330da9bd958fe601558a14a76f7817dc904635af70580",
+        "checkpoints.sqlite": "912e5470118aaa50d4ca162dd24720d5f581a1d91edfa52ae3220479e93a87f1",
+        "business-journal.json": "95897f65af4e263f558290c22cb5ddf2c75dfee8f13d431acfae2dd66e20410f"
+      }
+    },
+    {
+      "arm": "ref-only",
+      "mode": "ref_only",
+      "case_id": "receipt-partial-2",
+      "process_ids": [
+        153439,
+        154152
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/ref-only/f9ffedad6f20a768",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "unchecked",
+      "body_fields_verification": "unchecked",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service unavailable. Reservation created but label not created.\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01:RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service unavailable. Reservation created but label not created.\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01:RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94",
+              "scope": {
+                "project": "校准器-后勤库",
+                "time_limit": "2024-12-31T23:59:59Z"
+              },
+              "source_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01",
+              "target_query": null
+            },
+            "scope": {
+              "project": "校准器-后勤库",
+              "time_limit": "2024-12-31T23:59:59Z"
+            },
+            "source_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "9045c163-2210-523e-9f0e-cd49e06f1318",
+            "revision": 1,
+            "source_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "unchecked",
+            "effect": "memory_only",
+            "mode": "ref_only",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "unchecked",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service unavailable. Reservation created but label not created.'}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01:RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service unavailable. Reservation created but label not created.'}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01:RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94",
+              "scope": {
+                "project": "校准器-后勤库",
+                "time_limit": "2024-12-31T23:59:59Z"
+              },
+              "source_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01",
+              "target_query": null
+            },
+            "scope": {
+              "project": "校准器-后勤库",
+              "time_limit": "2024-12-31T23:59:59Z"
+            },
+            "source_ref": "src-3b9c73cd5b90e7c85bd702c48d968580f360623b3262c61213e22cd18d40aa01",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "04d0f439-f8a0-53a4-bd80-ea2eee128b7d",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "unsupported_absolute_scope": true,
+      "scope": {
+        "project": "校准器-后勤库",
+        "time_limit": "2024-12-31T23:59:59Z"
+      },
+      "primary_required_case_outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "broader_fact_review_outcome": "FAIL_UNSUPPORTED_SCOPE",
+      "m0_final_answer": "预订已成功创建（reservation_id: RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94），但标签制作失败，原因是标签服务不可用。该操作事实已保存，方便下次查找。",
+      "m1_final_answer": "查询结果如下：\n\n1. **预约存在性**：存在。系统已找到该预约，预约ID为 `RSV-c3be1bfb-95ab-47f7-b8be-0e97a8028d94`。\n2. **标签状态**：`not_created`（未创建）。\n3. **前一次操作结果**：根据 `label_status` 为 `not_created` 且 `status` 为 `found`，表明之前的操作成功创建了预约（reservation），但标签（label）尚未创建或创建失败。目前仅处于已预约但未贴标状态。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12457,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2606941,
+      "independent_readback_cpu_ns": 2607919,
+      "artifact_sha256": {
+        "message-1-capture.json": "419681673fc13934964b1b2cc5c289ed0d83f7df6ad53a01d3be4554b53a9498",
+        "message-0-capture.json": "0d22d3308b0e244e508d387a75d750743655c55e7c9d5d537ef9591b52d006bd",
+        "message-0.jsonl": "54f7561479030edbbc5d5d4a5ea9bd109ef796848d8f10b4482f0af1fdec74b6",
+        "world.sqlite": "c680ed8347db4c0869e0f470fd9a1290661088a97238e74fb77127358e8d8cc9",
+        "message-0.json": "fc1252d17b9bf26b97ab18e1b354663039fadcac6725ba36c3865d4bbbccf9db",
+        "host-capacity.json": "1470d494b3522e00d825120bfb0622319013e6f380ae61821ab5046d2638e5e4",
+        "message-1.jsonl": "96ad0fb4db8347b957835f2c5c7c811b3ed3cddb3c37b295da46bf1253df37db",
+        "memory.sqlite": "6618fe84262b171e931f82d4a0cb5c6ecb2bc48b101035c82b0e887c09142e94",
+        "message-1.json": "0d6e3b5cbffe42d3d5a45bd7d5cd12200f6c60cf9d332de3113aeba2ec7b47ba",
+        "checkpoints.sqlite": "1aa3b57ec38ca2ad954cbae6d9eb90f7a7c57300b4089e31c690abf8c8b82011",
+        "business-journal.json": "65872b867e92f2a933f5d9d0549d7e5278608243fbc2faf2b92b43e0a9b76429"
+      }
+    },
+    {
+      "arm": "field-grounded",
+      "mode": "field_grounded",
+      "case_id": "receipt-confirmed-1",
+      "process_ids": [
+        131114,
+        131669
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/field-grounded/4103d38dc8ed8e88",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "receipt_matched",
+      "body_fields_verification": "matches_proposed_fields",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-9f68004fc3085e4a50a8c07eac512fc016ae1de9726f391ebb3132794d0b2d46:RSV-085f7fc6-a04a-4397-bcf9-a4192aba9c9f",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-9f68004fc3085e4a50a8c07eac512fc016ae1de9726f391ebb3132794d0b2d46:RSV-085f7fc6-a04a-4397-bcf9-a4192aba9c9f",
+              "scope": {
+                "destination": "东楼资料室",
+                "packing": "防潮内衬",
+                "quantity": 2,
+                "subject": "档案盒-东楼资料室"
+              },
+              "source_ref": "src-9f68004fc3085e4a50a8c07eac512fc016ae1de9726f391ebb3132794d0b2d46",
+              "target_query": null
+            },
+            "scope": {
+              "destination": "东楼资料室",
+              "packing": "防潮内衬",
+              "quantity": 2,
+              "subject": "档案盒-东楼资料室"
+            },
+            "source_ref": "src-9f68004fc3085e4a50a8c07eac512fc016ae1de9726f391ebb3132794d0b2d46",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "c10c1269-bbbb-5b42-92b6-d07f830a1723",
+            "revision": 1,
+            "source_ref": "src-9f68004fc3085e4a50a8c07eac512fc016ae1de9726f391ebb3132794d0b2d46",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "receipt_matched",
+            "effect": "memory_only",
+            "mode": "field_grounded",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "matches_proposed_fields",
+            "notes_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 0,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "PASS",
+      "unsupported_absolute_scope": false,
+      "scope": {
+        "destination": "东楼资料室",
+        "packing": "防潮内衬",
+        "quantity": 2,
+        "subject": "档案盒-东楼资料室"
+      },
+      "primary_required_case_outcome": "PASS",
+      "broader_fact_review_outcome": "PASS",
+      "m0_final_answer": "预订和标签制作已完成。物品：档案盒-东楼资料室，数量：2，目的地：东楼资料室，包装：防潮内衬。 reservation_id: RSV-085f7fc6-a04a-4397-bcf9-a4192aba9c9f，标签状态：已创建。操作事实已保存。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-085f7fc6-a04a-4397-bcf9-a4192aba9c9f，物品为“档案盒-东楼资料室”，数量为2，目的地为“东楼资料室”，包装方式为“防潮内衬”。标签状态为“created”（已创建）。前一次操作已成功完成预约并创建了标签。",
+      "usage": {
+        "generation_requests": 5,
+        "generation_tokens": 9435,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2795767,
+      "independent_readback_cpu_ns": 2796347,
+      "artifact_sha256": {
+        "message-1-capture.json": "8bfa454f2fff7e399ea0380f6ce9a307f9cece32245cff3166dc0934560c492b",
+        "message-0-capture.json": "9c0a44ae8d40f4f2245324cb914874a02f19bbc8ef05e94770cbd938a88c0cbc",
+        "message-0.jsonl": "e35bccbc4f825ed26b378f9ad4163a17cf061bc6ddd3fd3e54619d20a3893575",
+        "world.sqlite": "5d0065fce43390796f0fcfc36bd835cef8ae8a05a34827729230b2c728e5907f",
+        "message-0.json": "dd35cdcb06ac09672b4b0079fedb07845babbe4c0d584c762e3914e11fc4b745",
+        "host-capacity.json": "8c43bd88c67f64b9dbf4fde295a9a143dcc34162171083fe854f84f546d914a1",
+        "message-1.jsonl": "bde7a9047c1d91c842052ac716320da5b00b13d68cfae06a62b0dbda8104dfce",
+        "memory.sqlite": "0f235b2a46adaa3d50a73bcd2fa9e5c21da41bf4b8b9829b61482e8d80d0cfd4",
+        "message-1.json": "7605784323430dcab495224fbb51b1cb27421a9a01e41d9719644ba95beea2a8",
+        "checkpoints.sqlite": "4ece610abaee1a49668282d10495100aab84f68106d9b02c93526f4b39cc6093",
+        "business-journal.json": "a455781638928a6d4e3519be29c5505b835e48bf6b95062a9d7bd9ee148f18f2"
+      }
+    },
+    {
+      "arm": "field-grounded",
+      "mode": "field_grounded",
+      "case_id": "receipt-partial-1",
+      "process_ids": [
+        149652,
+        150259
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/field-grounded/80bc27763d643af8",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "receipt_matched",
+      "body_fields_verification": "matches_proposed_fields",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service was unavailable. Reservation created successfully.\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5:RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service was unavailable. Reservation created successfully.\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5:RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d",
+              "scope": {
+                "project": "北侧实验台检测样本"
+              },
+              "source_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5",
+              "target_query": null
+            },
+            "scope": {
+              "project": "北侧实验台检测样本"
+            },
+            "source_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "a9d49ef5-38d3-566f-910e-4f628e2b5279",
+            "revision": 1,
+            "source_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "receipt_matched",
+            "effect": "memory_only",
+            "mode": "field_grounded",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "matches_proposed_fields",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service was unavailable. Reservation created successfully.'}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5:RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service was unavailable. Reservation created successfully.'}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5:RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d",
+              "scope": {
+                "project": "北侧实验台检测样本"
+              },
+              "source_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5",
+              "target_query": null
+            },
+            "scope": {
+              "project": "北侧实验台检测样本"
+            },
+            "source_ref": "src-f353728ad8da950413dde149d9f728d9dc32c19a3dbda13ef6ba5d958be3b9b5",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "eb3a1eb4-fa6d-5cd2-946a-775e90bde21b",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "FAIL_HISTORICAL_RESULT",
+      "unsupported_absolute_scope": false,
+      "scope": {
+        "project": "北侧实验台检测样本"
+      },
+      "primary_required_case_outcome": "FAIL_HISTORICAL_RESULT",
+      "broader_fact_review_outcome": "FAIL_HISTORICAL_RESULT",
+      "m0_final_answer": "预订已成功创建（reservation_id: RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d），但标签制作失败，原因是标签服务不可用。该操作事实已保存，方便下次查找。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d，物品为“检测样本-北侧实验台”，数量为3，目的地为“北侧实验台”，包装方式为“保温隔层”。当前标签状态为“not_created”（未创建）。前一次操作（即本次查询）成功找到了该预约记录。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12215,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2545257,
+      "independent_readback_cpu_ns": 2545984,
+      "artifact_sha256": {
+        "message-1-capture.json": "0f9226af79ff464dbd1802a40962abe3ea8569827dd854d1bb92e84efa761374",
+        "message-0-capture.json": "0604f453bedecb494fdd4c9f4888dfaacc537ba38078d6804d35b525b50048dd",
+        "message-0.jsonl": "fceace4636330ac608fd8287368dadb6fbd0b5cee281d408478015121d294480",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74",
+        "host-capacity.json": "3eab7fc64b73a30abbcca2fa70231cbc055bba9a8db8f1dfa5443892a0ac9d14",
+        "message-1.jsonl": "cbd1dec4abc8c577992f63fc2d09a035337dbe3cd70c4dccd9c6ceb70963c986",
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "message-1.json": "2a2a65779565ef69988e82de39afeaea537e374b50c7d9f0961ec57fa34fed0e",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2"
+      }
+    },
+    {
+      "arm": "field-grounded",
+      "mode": "field_grounded",
+      "case_id": "receipt-confirmed-2",
+      "process_ids": [
+        152136,
+        152829
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/field-grounded/749c089598601d81",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "receipt_matched",
+      "body_fields_verification": "matches_proposed_fields",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963:RSV-f889e392-7aa8-48f3-9036-eae76aeef1cc",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"label_created\", \"label_status\": \"created\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963:RSV-f889e392-7aa8-48f3-9036-eae76aeef1cc",
+              "scope": null,
+              "source_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963",
+              "target_query": null
+            },
+            "scope": {},
+            "source_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "22ad6de1-6901-505b-881f-af13d62bd6cd",
+            "revision": 1,
+            "source_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "receipt_matched",
+            "effect": "memory_only",
+            "mode": "field_grounded",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "matches_proposed_fields",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{'status': 'label_created', 'label_status': 'created'}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "created",
+              "status": "label_created"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963:RSV-f889e392-7aa8-48f3-9036-eae76aeef1cc",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{'status': 'label_created', 'label_status': 'created'}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "created",
+                "status": "label_created"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963:RSV-f889e392-7aa8-48f3-9036-eae76aeef1cc",
+              "scope": null,
+              "source_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963",
+              "target_query": null
+            },
+            "scope": {},
+            "source_ref": "src-d430a0a9e1570e995221314888f31161429a856f68073ca4dc5d66fe534a9963",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "9b720021-a639-589f-a50a-98c2e2449ca6",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "PASS",
+      "unsupported_absolute_scope": false,
+      "scope": {},
+      "primary_required_case_outcome": "PASS",
+      "broader_fact_review_outcome": "PASS",
+      "m0_final_answer": "预订和标签制作已成功完成。物品“测量仪-西侧工位”已预订，数量为1，目的地为“西侧工位”，包装要求为“防震泡沫”。标签状态为“created”。操作事实已保存，方便下次查找。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-f889e392-7aa8-48f3-9036-eae76aeef1cc，标签状态为 created（已创建）。前一次操作已成功完成预约并创建了标签。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12140,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 3083417,
+      "independent_readback_cpu_ns": 3083382,
+      "artifact_sha256": {
+        "message-1-capture.json": "3a182139a20ca206cca19c9ab28bf23e21909c4b2758911ea052b0a786d27021",
+        "message-0-capture.json": "bb75058e723df9bec8a1e99c04e0545983c1d56c7b15d913792017406b28d1d9",
+        "message-0.jsonl": "fca56101c854abc040b151dbabec9718051662caf0037c58fe749a959f76b700",
+        "world.sqlite": "7a4b749f3c098b119588cc4115aee63d6f070e885899cc0057dae6709b49b15e",
+        "message-0.json": "18d30d23f9caac32633195c91d9a10dbef9856501c51f868fc8f8e0f62c743ce",
+        "host-capacity.json": "1f73de1e32c9cc2089ac5ebc1c24b68fadf88e3abb7af605eff00e44abdd4468",
+        "message-1.jsonl": "7a47c95e82c586cba7a878093f3861c59f998b340745a395386bedd8f958e47c",
+        "memory.sqlite": "78dbf85efbe8418ef800856dd8bccececf34b4f19e39aa0242224e00469c12a0",
+        "message-1.json": "e2fd675c384f77d80a7b38a8568a3258691b8373cff7e3d1d8bc5710db53075e",
+        "checkpoints.sqlite": "8f1500c535670d42d23b2eb7291abaf1bc9af2f35e29e131368a8c474511cb85",
+        "business-journal.json": "1408bb246bd74e35fde5bd493d1438fe255f1fa9f3cca997e5d81e4359fe936a"
+      }
+    },
+    {
+      "arm": "field-grounded",
+      "mode": "field_grounded",
+      "case_id": "receipt-partial-2",
+      "process_ids": [
+        154794,
+        155482
+      ],
+      "artifact_root": "artifacts/v13-1-p2-typed-receipts/field-grounded/f9ffedad6f20a768",
+      "sdk_readback": "PASS",
+      "source_hash_owner_ref_match": "PASS",
+      "finite_fields_match_original_observation": true,
+      "fields_verification": "receipt_matched",
+      "body_fields_verification": "matches_proposed_fields",
+      "content_notes_scope_verification": "unchecked",
+      "raw_proposals": [
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service unavailable. Reservation created but label not created.\"}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151:RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{\"status\": \"reserved_label_failed\", \"label_status\": \"not_created\", \"notes\": \"Label service unavailable. Reservation created but label not created.\"}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151:RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3",
+              "scope": {
+                "project": "后勤库",
+                "time": "unknown"
+              },
+              "source_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151",
+              "target_query": null
+            },
+            "scope": {
+              "project": "后勤库",
+              "time": "unknown"
+            },
+            "source_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": true,
+            "status": "committed",
+            "id": "b8926775-c7c1-59fa-8c16-84bc8b359692",
+            "revision": 1,
+            "source_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151",
+            "formation_status": "host_proposed",
+            "content_verification": "unchecked",
+            "fields_verification": "receipt_matched",
+            "effect": "memory_only",
+            "mode": "field_grounded",
+            "receipt_contract": "explicit_receipt_v1",
+            "content_format": "receipt_json_v1",
+            "receipt_claim_fields": [
+              "status",
+              "label_status"
+            ],
+            "body_fields_verification": "matches_proposed_fields",
+            "notes_verification": "unchecked"
+          }
+        },
+        {
+          "raw": {
+            "action": "create",
+            "basis": "tool_observation",
+            "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service unavailable. Reservation created but label not created.'}",
+            "content_format": "receipt_json_v1",
+            "expected_revision": 0,
+            "fields": {
+              "label_status": "not_created",
+              "status": "reserved_label_failed"
+            },
+            "id": null,
+            "kind": "episodic",
+            "object_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151:RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3",
+            "requested": {
+              "action": "create",
+              "basis": "tool_observation",
+              "content": "{'status': 'reserved_label_failed', 'label_status': 'not_created', 'notes': 'Label service unavailable. Reservation created but label not created.'}",
+              "content_format": "receipt_json_v1",
+              "expected_revision": null,
+              "fields": {
+                "label_status": "not_created",
+                "status": "reserved_label_failed"
+              },
+              "id": null,
+              "kind": "episodic",
+              "object_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151:RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3",
+              "scope": {
+                "project": "后勤库",
+                "time": "unknown"
+              },
+              "source_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151",
+              "target_query": null
+            },
+            "scope": {
+              "project": "后勤库",
+              "time": "unknown"
+            },
+            "source_ref": "src-b3269e3ef45912241eb1c18347398d4c1b9e67fe1f435a8da9447feaefa99151",
+            "target_query": null,
+            "target_resolution_error": false
+          },
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "reason": "receipt_body_invalid_json",
+            "id": "7a0caa56-8f34-5d22-b993-0c435a663633",
+            "revision": null,
+            "effect": "none",
+            "content_verification": "unchecked"
+          }
+        }
+      ],
+      "rejected_first_proposals": 1,
+      "committed_records": 1,
+      "history_revisions": 1,
+      "no_false_saved": true,
+      "independent_foreign_namespace_read": "not_found",
+      "real_world_exact": "PASS",
+      "reservation_attempts": 1,
+      "additional_mutations": 0,
+      "historical_memory_delivered_m2": false,
+      "m2_tool_names": [
+        "get_reservation"
+      ],
+      "continuation_outcome": "FAIL_HISTORICAL_RESULT",
+      "unsupported_absolute_scope": false,
+      "scope": {
+        "project": "后勤库",
+        "time": "unknown"
+      },
+      "primary_required_case_outcome": "FAIL_HISTORICAL_RESULT",
+      "broader_fact_review_outcome": "FAIL_HISTORICAL_RESULT",
+      "m0_final_answer": "预订已成功创建（reservation_id: RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3），但标签制作失败，原因是标签服务不可用。该操作事实已保存，方便下次查找。",
+      "m1_final_answer": "预约存在。预约ID为 RSV-f21438f3-98d6-4e06-919d-55de4d2f97a3，物品为“校准器-后勤库”，数量为4，目的地为“后勤库”，包装方式为“密封防潮袋”。当前标签状态为“not_created”（未创建）。前一次操作（即本次查询）成功找到了该预约记录。",
+      "usage": {
+        "generation_requests": 6,
+        "generation_tokens": 12286,
+        "embedding_tokens": 0
+      },
+      "independent_readback_wall_ns": 2571908,
+      "independent_readback_cpu_ns": 2572528,
+      "artifact_sha256": {
+        "message-1-capture.json": "b18a1c0088c4e53f8118ec7be15e4a047a2babf251c6ddea2f38586edbf082d3",
+        "message-0-capture.json": "223ad342291b6280b3958b59fafb33bc4d2c3678da4c4ee0f895eefac09fb74b",
+        "message-0.jsonl": "2696ffcf5500d67ea3dc1937f1432bb7a7d9b1129a552c2a8a3181d439bfd43d",
+        "world.sqlite": "0d62f0f73264af97eb407678e7e13ad8205948b4d065728cbb24ca902a000560",
+        "message-0.json": "71c64ec2b6552bd0515f6ea2feec667689bc61a82403097c4d025f9a9b9029b8",
+        "host-capacity.json": "1470d494b3522e00d825120bfb0622319013e6f380ae61821ab5046d2638e5e4",
+        "message-1.jsonl": "b461e3cfc9f103c075531f0e683c39de14e158d5c89d0009be9924b510eab609",
+        "memory.sqlite": "c8b5d3ee8aded99df05a2a37abf3ed929570a801306b8e8cb69d27a88dd71167",
+        "message-1.json": "0b6ae9d7e7a626398e87fcd514aa93b05d4c021c624ea325781ab3286b8e3fb0",
+        "checkpoints.sqlite": "ba524e652a1780d561c5ebc38e88c3ab3eb75ba2d6194d5900f8b738a6f93a50",
+        "business-journal.json": "13001802b891962d359af82bf89fee3db46314e62eb1d9485319ca665a7e9d9b"
+      }
+    }
+  ],
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

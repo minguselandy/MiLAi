@@ -59,9 +59,9 @@ v10 新增 153 次 generation、485,745 generation tokens、128 embedding tokens
 [固定 Git 快照](https://github.com/minguselandy/MiLAi/blob/091dcbd48dc1800e5b8cc7f0ee3066dc00a76311/MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)。
 [结果索引](RESULTS_INDEX.md)和各历史报告继续保留原结论；它们不授权恢复已暂停的实验。
 
-当前v13.1连续账本累计6389generation/11787812generation tokens/420830embedding tokens，unknown0；
+当前v13.1连续账本累计6435generation/11880568generation tokens/420830embedding tokens，unknown0；
 本轮外部微型新增48generation/88014tokens/3900embedding，首次Mem0 setup失败与两个回执消费
 未通过都保留。此状态覆盖上文v10暂停时的历史费用快照，不恢复其历史实验。
 
 固定material公共合同诊断4generation/4496tokens：两臂业务状态消费改善，但Mem0额外虚构
-来源引文，仍失败。原micro5/6结论保留；P2显式两字段合同仍在开发，无全段prose验证承诺。
+来源引文，仍失败。原micro5/6结论保留；[P2实际16消息](V13_1_P2_TYPED_RECEIPTS.md)完成8条显式字段形成；后续两臂各2/4符合预定说明，历史未检索送达，Ref另有2条虚构绝对scope。完整P2仍PARTIAL，无全段prose验证承诺。

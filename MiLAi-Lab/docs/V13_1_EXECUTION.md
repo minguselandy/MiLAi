@@ -106,7 +106,7 @@ unknown0。没有新增安装、下载或服务部署。
 |---|---|---|
 | P0 | main/服务/ledger/基线安装/暴露引用有直接只读核查 | PARTIAL；完整候选身份和正式分组还未冻结 |
 | P1 | R1六故事3/6、R7为5/6保留；R9六故事6/6，完整24为22/24 | NORMAL_GATE_PASS；两个版本更新失败，完整P1仍PARTIAL |
-| P2 | 服务/Agent16、legacy9、architecture217，静态/矩阵通过 | SCOPED_MECHANICAL；实际模型fields为空，效果未证明 |
+| P2 | 新显式合同65机械检查；真实16消息/SDK8臂读回，8条完整字段形成 | PARTIAL；有限合同成立，历史未送达/后续错误，未证明语义guard收益 |
 | P3 | 固定SDK真实wire与45进程核查；两臂各5/6限定通过 | PARTIAL；回执消费失败，Source ID未保留；B0–B6/最近邻待执行 |
 | P4–P8 | 原始scope/恢复/pilot/正式矩阵/第二家族/统计/复现/初稿要求完整保留 | NOT_RUN |
 
@@ -124,3 +124,10 @@ R9预定正常开发门槛已通过；完整Engineering-valid、Usability-ready�
 不变：旧默认、公开工具合同、来源/owner、两字段支持范围；不增加Attention或reviewer。
 否定条件：合法字段被大量误拒或Ref-only同等减少传播，必须修合同或缩小贡献。
 本次零模型机械诊断不发生generation；真实D0每消息最大12调用/4096输出/并发1，全部计费。
+
+
+[P2显式回执实际运行](V13_1_P2_TYPED_RECEIPTS.md)8案例臂/16独立进程全部完成；8条实际Host
+提出两字段JSON，Field4条有限claim匹配，Ref4条unchecked。6次初次不合法JSON拒绝和付费新提案保留。
+后续两臂各2/4符合预定说明，Ref另1FAIL/1UNKNOWN、Field2FAIL；全部只GET，历史未检索送达。
+Ref另外2条scope虚构绝对日期，完整fact review不通过。新增46generation/92756tokens，连续
+6435generation/11880568tokens/420830embedding，unknown0。有限字段不保护scope/notes/引文；完整P2仍PARTIAL。
