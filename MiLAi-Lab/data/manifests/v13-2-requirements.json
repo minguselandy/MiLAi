@@ -1,6 +1,6 @@
 {
   "kind": "V13_2_FULL_PLAN_ACCEPTANCE",
-  "status": "ACTIVE",
+  "status": "PAUSED",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
   "scope": "Full original v13.2 D0-D5; conditional branches keep their stated evidence gates.",
   "historical_requirements_path": "data/manifests/v13-1-requirements.json",
@@ -775,5 +775,13 @@
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
     }
   ],
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "pause": {
+    "user_instruction": "暂停当前实验，提交到github上",
+    "recorded_at_utc": "2026-09-30T23:34:00+00:00",
+    "goal_status": "paused",
+    "complete": false,
+    "summary_path": "data/manifests/v13-2-pause-summary-20261001.json",
+    "individual_requirement_statuses_preserved": true
+  }
 }

@@ -1,9 +1,13 @@
-# MiLAi Lab v13.2 active operating constraints
+# MiLAi Lab v13.2 paused operating constraints
 
-The user explicitly authorized full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md.
-This supersedes historical scope-specific pauses and v13.1-only restrictions for v13.2.
+The latest user instruction is: 暂停当前实验，提交到github上. Goal status is paused.
+Do not start model calls, tests, source development or performance experiments until the user resumes.
+Only pause documentation, preservation and GitHub publication are currently authorized.
+See docs/V13_2_PAUSE_STATUS_20261001.md and data/manifests/v13-2-pause-summary-20261001.json.
+The earlier full-plan authorization below is retained as incomplete historical scope.
+The user previously authorized full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md.
 Preserve the complete original plan bytes, historical cohorts, original failures, costs and P0-P8 statuses.
-Execute D0-D5 / E0-E4 and the conditional requirements in the full plan; a first batch is not completion.
+Historical authorized scope: D0-D5 / E0-E4 and conditional requirements; a first batch is not completion.
 Work in the isolated development-experiment-v13-2 worktree based on verified origin/main95bf708.
 Root owns docs/fixtures/rubrics/source freezes, all actual generation/embedding HTTP and scoring/accounting.
 Retain the existing one delegated source owner arrangement. Agent model is inherited; no silent switches.
@@ -14,7 +18,7 @@ All v13.2 behavior is opt-in; preserve old defaults and public Store boundaries.
 No gold, scorer, future question, benchmark case identifiers or hidden-world routing in runtime inputs.
 Use one logical MemoryService and existing journal/Store; deterministic facts come from actual public receipts.
 Exact source/role binding, read-time version handles and truthful pending receipts precede model comparisons.
-Run affected deterministic/source/SDK checks, then freeze the smallest real E1/E2 slices and E0 normal24.
+Historical execution sequence: affected deterministic/source/SDK checks, then frozen E1/E2 and E0 normal24.
 No all-method84 matrix; four common-capability arms and second-workflow24 follow D1-D3 validity.
 Mem0 keeps observed_events_v1 and native extraction, snapshots before close and separate SDK reopen.
 Do not relabel old interrupted runs as success, mocks as model samples, or Root review as independent review.

@@ -1,6 +1,8 @@
 # v13.2 执行记录
 
-2026-10-01。状态 **ACTIVE**，完整范围为原计划D0–D5及其条件门禁，不以首批、机械测试或开发样本代替完成。
+2026-10-01。状态 **PAUSED**：用户要求“暂停当前实验，提交到github上”，Goal已暂停。原计划D0–D5及条件门禁仍未全部完成；不以首批、机械测试或开发样本代替完成。
+
+[暂停快照](V13_2_PAUSE_STATUS_20261001.md)记录最新R3运行完成但未评分、连续费用、剩余工作和独立WIP分支；暂停后只整理与发布既有证据。
 
 用户明确要求详细阅读并执行[589行原计划](MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md)。
 原文SHA256为 `84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a`，
@@ -10,7 +12,7 @@
 新分支为 `feat/lab-evidence-incremental-v13-2-20261001`，工作树为
 `/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2`。
 用户入口主工作树及v13.1未提交改动未动。[入口冻结](../data/manifests/v13-2-entry-freeze.json)
-记录原计划、旧cohort、源码差异和真实账本。回滚基线是95bf708，尚未推送此分支或合并远端。
+记录原计划、旧cohort、源码差异和真实账本。回滚基线是95bf708；本次按用户暂停指令提交独立分支和草稿PR，不合并main。
 
 [完整48项验收映射](../data/manifests/v13-2-requirements.json)覆盖D0–D5、E0–E4、恢复、
 预算、来源分组、正式统计、迁移、长程及条件消融。旧v13.1 P0–P8 requirements和实验结论
@@ -118,3 +120,11 @@ R2另新增129次generation／473,736已知tokens与50次embedding／20,370 toke
 D1目标static/mypy和package边界通过，未跑全suite、build、模型质量或远端CI。
 全部改动属于Lab研究opt-in合同；Product API、权限、Schema和Canonical未改，Product仍NO_GO。
 没有把代码存在或局部测试通过表述为方法优势或发布就绪。
+
+## 用户暂停快照（2026-10-01）
+
+用户要求暂停并提交GitHub，覆盖上文执行中的当前工作。R3在暂停前完成全部24轨迹/48消息，48最终回答均链接实际HTTP原回包；[只读收集结果](../data/manifests/v13-2-e0-r3-unscored-results.json)仍为NOT_SCORED，没有R3聚合通过数。完整语义评分、独立评分、只读SDK重开与全部actual-wire预算复核未完成；先前R2门禁未通过，D4/D5未完成，Product仍NO_GO。
+
+R3新增120 generation／462,391已知tokens、49 embedding／20,342 tokens；其中按semantic_boundary分类的writer25次／91,005 tokens，其余95次／371,386 tokens保留collector分类限制。逐trace与原连续账本完全对上，新unknown0。暂停累计8,611 generation／22,576,650 charged、22,546,263 known、unknown1；embedding840,103、unknown0。账本SHA为`9ba23552d639ba4703253c5a1bbb6f8a2501eca3e77cf5fb21a8e4c090b53795`，历史保守未知30,387未清零。
+
+暂停时208份冻结运行源码字节仍与R3一致。隔离性能WIP只有两个未验证源码文件，另存`feat/lab-v13-2-derived-index-cost-20261001`，未进入主执行分支、没有性能收益证据。后续仅保存公开摘要/hash，不提交原始私密回包、数据库或日志。恢复须有新用户指令，原冻结根目录、失败与成本继续保留。
