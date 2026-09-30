@@ -87,6 +87,7 @@ R1实际Host六次来源拒绝、writer十三次拒绝保留；26次writer形成
 
 只读源码/实际wire复核确认：Host的当前user source_ref只在capture文件和trace，HumanMessage正文未含ID，历史reader明确排除当前源；追加同文本查询也不能发现该ref。业务工具回执已交付实际tool ref，writer的actual_events也已含当前ref，不能把writer语义误归属归咎于这个Host缺口。现在补公开只读trusted来源索引及新建语义卡的当前边界成员检查，原输入/角色/hash不改、无目标强选/语义修正。下一cohort在READY后另冻结；D4仍未准入。
 当前接口修复已提交fd1ce596并通过[限定工程验收](../data/manifests/v13-2-source-index-acceptance.json)：首输入实际来源索引、业务batch刷新、同epoch分页/空binding、CREATE当前成员guard及逐消息位置的ordinary引用投影。最终六项窄测试、mypy、ruff、八原配置真实catalog/decoder与实际Qwen tokenizer模拟wire通过；此前47项属于另一个position修复前SHA，未冒称同一执行身份。Root最终两项边界及独立token复算通过；初始配置枚举失败和hash序列化误用保留。2048覆盖当前index、一份System ordinary包及每条当前recall引用正文；过去回合不同packet、协议schema、显式追加和真实业务材料另计完整实际输入费用。R2仅改实验身份标签，保留R1提示/12admissions/repair0，准备完整24一次尝试；实跑和原卡支持修订门禁仍待验证。
+[R2运行身份](../data/manifests/v13-2-e0-r2-runtime.json)已在HTTP前另冻结208源码/CLI、同一原24/48输入、公开catalog/prompt、Rootprepare与串行parent、原rubric/collector和连续账本；执行源码fd1ce596、紧凑map SHA906d86f4。prepare禁止socket连接，实际生成/嵌入0，账本与R1末相同。随后将保留完整24新cohort的全部首尝试结果及费用，R0/R1原根目录不再执行。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
