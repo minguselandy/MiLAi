@@ -1,6 +1,6 @@
 # v13.1 P5 真实恢复开发检查
 
-状态：源码机械验收 PASSED_SCOPED；实际模型生命周期尚未运行。完整 v13.1 目标 ACTIVE，Product NO_GO。
+状态：源码机械验收 PASSED_SCOPED；实际模型首轮 PARTIAL。完整 v13.1 目标 ACTIVE，Product NO_GO。
 
 [冻结协议](../data/manifests/v13-1-p5-lifecycle-micro-protocol.json)安排六个开发案例、18条公开消息和22个子进程：W1两次、W2一次、W3一次真实 SIGKILL 后以新进程恢复。所有实际模型调用继续记入原连续账本。故障时点与后台可用性变化只由驱动使用，评分规则仅用于离线审核。
 
@@ -11,3 +11,11 @@
 源码负责人保留全部初次失败。最终17项检查通过，包括真实子进程硬终止、SQLite重开、W3 UPDATE重放、共享同条消息预算与新消息独立预算；12项受影响回归通过，Ruff、严格mypy和验证矩阵通过。这些检查采用脚本模型，只证明机械行为。真实模型结果、实际提案/副作用、历史保真与完整失败分母将另行填写。
 
 六案均使用同一种预约/标签工作流，不构成计划中正式生命周期的两工作流、60基础任务证据；P3近邻比较、P6 pilot与P7/P8仍须继续。
+
+[首轮实际结果](../data/manifests/v13-1-p5-lifecycle-r1-results.json)保留六案全部分母：18条消息中7完成、4耗尽同条消息12次调用上限、7因前置失败NOT_RUN。实际13个不同子进程；W2与unknown-effect-happened的W1真实硬终止，后者在恢复后耗尽预算；unknown-no-effect的第二W1与W3 UPDATE因原始保存失败未运行。
+
+clean与partial三条消息链完成，实际同一record UPDATE保留历史；只能报告两案的受限业务字段成功。clean还接受了无证据的2025过期日期，不能声称整条记忆真实。其余四案首断点为模型持续提交非JSON正文，拒绝回执已实际出现在模型输入，全部失败提案保留。unknown-effect-happened的原始标签调用仍pending/UNKNOWN、缺失原回执，独立恢复查询真实观察标签已创建，未重做标签；但最终修订/回答未完成。
+
+Root以公共SDK重开六个实际数据库核对bank/source/rejected attempts/world和owner隔离；所有已提交历史revision的两个业务字段都与真实Source一致。六案均仅一个目标正确的预约，无错误业务副作用。73次实际生成、300,948 tokens全部与原账本核对，embedding新增0，unknown usage0，Judge0。完整账本增至6,584次生成/12,305,254生成tokens/420,830 embeddingtokens。
+
+下一步只增加一轮单独冻结的通用JSON正文说明；源码、guard、工具catalog、模型、上限及六个开发身份保持一致，以新隔离资源执行，继续原账本。首轮失败不会改判，提示改变不能归因为恢复架构的收益。

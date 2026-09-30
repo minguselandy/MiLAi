@@ -549,9 +549,14 @@
       "plan_section": "3.7",
       "requirement": "confirmed/partial/known-no-effect/unknown separated; never blind-retry unknown mutation",
       "authoritative_evidence_required": "public discovery plus side-effect journal and original failure records",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md"
+      ],
+      "conditional": false,
+      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
     },
     {
       "id": "P5-crash",
@@ -559,9 +564,14 @@
       "plan_section": "3.7",
       "requirement": "Three windows: success before durable receipt; receipt before memory revision; revision before response",
       "authoritative_evidence_required": "three real crash/restart traces on identical durable backend",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md"
+      ],
+      "conditional": false,
+      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
     },
     {
       "id": "P5-idempotent",
@@ -569,9 +579,14 @@
       "plan_section": "3.7",
       "requirement": "Duplicate real receipt no duplicate fact; CAS/atomic commit and tested concurrency limits",
       "authoritative_evidence_required": "SDK readbacks/conflict tests/idempotent revision evidence",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md"
+      ],
+      "conditional": false,
+      "qualification": "Actual R1 model7/18 messages completed,4caps,7NOTRUN; real W1/W2 only, W3/unknown-no-effect mechanical scripted checks but real model path unrun. Finite fields/SDK readback passed; general semantics partial."
     },
     {
       "id": "P5-compare",
