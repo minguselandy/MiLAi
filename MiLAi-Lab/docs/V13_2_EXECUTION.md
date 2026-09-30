@@ -96,6 +96,7 @@ Root逐实际wire复算104次Host请求：当前索引、一份ordinary材料及
 只读源码审计发现后续缺口：普通record只呈现当前revision；source回链内部保存matched revisions，公开结果却只返回当前卡。已有read_memory(id,revision)可读确切旧版，但没有实际版本枚举或明确省略入口。计划5.2/5.3及6.1要求的有界历史可发现性尚不完整；候选修复须只呈现已选卡的实际版本/匹配版本metadata、保留原预算与CAS，不用语言或案例选版本。单次writer目前只开放写工具，索引本身不会给它旧正文，也不证明上述语义错误会消失。先保留当前执行身份的100/1k/10k性能基线，再接受一般修复。
 D4同能力四臂、第二工作流24新冻结开发轨迹与12/24分轨仍未运行。
 D5新pilot、正式独立来源比较、公开任务、独立评分、第二家族、统计和完整复现仍未完成。
+公开任务另有[只读准入合同](V13_2_PUBLIC_TASK_ADMISSION.md)：MERIT作者固定commit/包闭包核对，已曝光seed0原完整五episode/七消息arc与world字节重建一致，五原生初始checker均false、world未变、0新arc/0业务/0模型请求。此限定复现不准入新任务，旧及预留seeds继续排除，D5-04仅PARTIAL。
 相关机制只有满足原门禁才消融或扩大；负结果要求追首断点/一般修复，不能删失败或补答案。
 [开发评分标准](../data/diagnostics/v13-2-small-development-rubric.json)已在新模型输出前固定；
 [配对统计草案](../data/manifests/v13-2-statistical-design.json)固定主要比较、5pp界、依赖聚类和缺失上下界。

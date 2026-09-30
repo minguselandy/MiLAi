@@ -513,8 +513,11 @@
       ],
       "requirement": "MERIT官方任务/工具/scorer独立锚点；18 pilot/90 formal为预算候选按领域难度完整arc。",
       "completion_evidence": "固定upstreamcommit、未见sources、无未来消息gold进入方法、完整官方scorer和实际迁移限制。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-public-task-readiness.json",
+        "docs/V13_2_PUBLIC_TASK_ADMISSION.md"
+      ],
       "condition": null
     },
     {

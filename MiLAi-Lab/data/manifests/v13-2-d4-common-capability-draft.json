@@ -2,7 +2,7 @@
   "kind": "V13_2_D4_COMMON_CAPABILITY_DRAFT",
   "status": "READ_ONLY_DESIGN_NOT_IMPLEMENTED",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
-  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus both original old update repairs. R0 failed; R1 underway, no D4 runtime admitted yet.",
+  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus both original old update repairs. R0/R1/R2 gates failed; R2 actual24 complete with19PASS/3FAIL/2UNKNOWN. No D4 runtime admitted yet.",
   "main_comparison": "M vs B6+",
   "secondary_comparison": "M vs B2+",
   "arms": {
@@ -40,7 +40,8 @@
     "host": "Existing7860Qwen3.6-35B-A3B-FP8,temperature0,out4096; no deployment/model change.",
     "business": "Same public reservation/document tools, guard, live discovery, inputs and lawful threads.",
     "prefetch": "One current-public-input prepare_context per user turn, shared continuations; explicit search_memory(query) is an extra charged read.",
-    "ordinary_material": "All metadata/source/ref/versions included in2048token/max6record initial budget.",
+    "ordinary_material": "Actual current source index, one ordinary packet, all current recall reference bodies and history/source/version/omission metadata jointly fit2048token/max6record initial budget. Explicit extra reads and retained earlier-turn packets are additionally charged.",
+    "historical_discovery": "All arms need truthful bounded discovery/read-more for their actual archived evidence and supported histories. Raw sources retain actual role/time/ref; native versions/timestamps remain native. M-only integer revision handles are not granted to baselines as fabricated native semantics. Missing visible ordinary material must not imply no historical source or no user preference.",
     "scope": "No future/scorer/gold/hidden-world routing; actual source/owner/ref only.",
     "public_hint": "The same generic observed-results/historical-status interpretation prompt for all arms.",
     "recovery": "Common reachable W1/W2/W3; old actual-UPDATE W3 stays distinct/N_A if unreachable."
