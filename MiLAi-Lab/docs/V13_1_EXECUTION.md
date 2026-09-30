@@ -1,6 +1,6 @@
 # v13.1 执行记录
 
-日期：2026-09-30。状态：ACTIVE / R9正常开发门槛22/24；外部微型各5/6限定通过，完整P0–P8未完成。
+日期：2026-09-30。状态：ACTIVE / R9正常门槛22/24；B0–B6真实微型与NoMemory当前工具已验收，P5机械恢复有限通过；完整P0–P8未完成。
 
 ## 授权与原始范围
 
@@ -58,7 +58,7 @@ unknown0。R9组合正常24协议已冻结，仍先检查原六故事，未宣�
 来源，并从11个历史registry/selection/audit元数据计算保守并集：90个case ID、61个原source ID、
 120个来源组引用、66个完整历史hash及65个MERIT seed。按source ID、完整历史hash及来源组
 排除；MERIT0–4已曝光，5–64旧规划reserved不能
-凭假设重新当未见。正式集和pilot均未选取，不查看正式问题或gold。
+凭假设重新当未见。正式集未选；新增pilot仅预留60题及seed65–82的身份，未读取其问题或gold。
 
 ## 第一批固定开发输入
 
@@ -107,9 +107,10 @@ unknown0。没有新增安装、下载或服务部署。
 | P0 | main/服务/ledger/基线安装/暴露引用有直接只读核查 | PARTIAL；完整候选身份和正式分组还未冻结 |
 | P1 | R1六故事3/6、R7为5/6保留；R9六故事6/6，完整24为22/24 | NORMAL_GATE_PASS；两个版本更新失败，完整P1仍PARTIAL |
 | P2 | 新显式合同65机械检查；真实16消息/SDK8臂读回，8条完整字段形成 | PARTIAL；有限合同成立，历史未送达/后续错误，未证明语义guard收益 |
-| P3 | 固定SDK真实wire与45进程核查；两臂各5/6限定通过 | PARTIAL；回执消费失败，Source ID未保留；B0–B6/最近邻待执行 |
+| P3 | 外部两臂各5/6限定通过；B0–B6有238真实进程/42SDK读回与B0当前工具 | PARTIAL；旧计数bug保留并已独立对账；实际等额配置试跑待做，最近邻主张有限 |
 | P4 | 四已曝光源×2×2、64真实形成/读取，独立SDK全16 bank再读 | SCOPED因素诊断完成；类型独立收益未证明，首轮列混淆保留 |
-| P5–P8 | 恢复/pilot/正式矩阵/第二家族/统计/复现/初稿要求完整保留 | 恢复开发中；其余NOT_RUN |
+| P5 | 两种真实W1结果、W2及独立原资源W3 UPDATE/SIGKILL/replay | 机械原语PASSED_SCOPED；原完整Agent6故事失败保留，四臂比较待实跑 |
+| P6–P8 | pilot身份预留；正式矩阵/第二家族/统计/复现/初稿要求完整保留 | pilot模型NOT_RUN；nominal正式来源题量不足；其余待执行 |
 
 R9预定正常开发门槛已通过；完整Engineering-valid、Usability-ready全部配套要求和Research-supported
 仍有未满足项，不能把局部门槛当完整规划完成。Product保持NO_GO。
@@ -135,6 +136,18 @@ Ref另外2条scope虚构绝对日期，完整fact review不通过。新增46gene
 
 P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，Attention不准入。新增合计12generation/21439tokens；最新连续6447generation/11902007tokens/420830embedding，unknown0。[直接证据](V13_1_P2_TYPED_RECEIPTS.md)。
 
-[来源容量核查](V13_1_SOURCE_AVAILABILITY.md)：旧来源组全部解析并排除后，valid剩63题/15来源组、personalized剩95题/79来源组，新pilot前已不足各100正式题。官方HEAD未变化；正式集未选、不复用曝光题，完整目标继续ACTIVE，等待额外来源信息时继续独立任务。
+[来源容量核查](V13_1_SOURCE_AVAILABILITY.md)：旧来源组全部解析并排除后，valid剩63题/15来源组、personalized剩95题/79来源组，新pilot前已不足各100正式题。用户确认无额外来源。新增pilot按整组件预留117行后，三任务剩250/7/54题；官方HEAD未变化。正式集未选、不复用曝光题，nominal缺口保持，完整目标继续ACTIVE并执行其余阶段。
 
 [P4类型×scope诊断](V13_1_P4_TYPE_SCOPE.md)首轮开放scope混入类型，保留；R2清洁列因素下Flat2/4、Type-only2/4、Flat+Scope3/4、Type+Scope2/4另1UNKNOWN。无类型独立收益；来源引用存在仍可能错归用户意图。两轮新增64generation/102299tokens，最新连续6511generation/12004306tokens/420830embedding，unknown0。
+
+[P5结果与恢复](V13_1_P5_LIFECYCLE.md)保留R1/R2全部原始失败。真实两种W1结果通过独立实际query区别；W2重新打开相同资源。
+另以未改R2 clean资源副本完成真实UPDATE2→3/W3硬退出/精确receipt replay，原record/history仍为3。
+这是一个workflow、协作串行SQLite的机械原语；R2完整Agent六故事仅1/6有限成功，不能改称完整P5质量通过。
+
+[强简单实际验收](V13_1_P3_CONTROLS.md)执行七臂共238不同进程：224完成、7owner拒绝、7真实容量拒绝；42份SDK资源读回一致。
+四次真实rolling summary、原始角色/ID/时间/工具正文、无未来query入writer、拒绝前后bank不变均有直接证据。
+原runner调用计数监听错误保留，Root由完整response/error wire核对91generation/73310tokens/5005embedding，未改原结果。
+另NoMemory实际当前get查询成功，长期记忆仍为空，world未变，新增2generation/1252tokens；该当前任务不需要历史记忆。
+历史问题35答案有26有限正确、9能力范围内未知；未知不计语义成功，不由固定开发故事声称泛化。
+最新连续账本6762generation/12788273generationtokens/425835embeddingtokens，unknown0、Judge0。
+两套B2/B3/Ours配置共48个旧开发题对尚待执行；新pilot仅身份预留，完整目标与发布边界不变。

@@ -456,9 +456,17 @@
       "plan_section": "4.1",
       "requirement": "B0-B6 faithfully implemented; strong hybrid RAG fixed fusion, rolling real summaries, full history no silent truncation",
       "authoritative_evidence_required": "backend implementations + fixed micro acceptance and candidate configuration ledger",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p3-controls-source-acceptance.json",
+        "data/manifests/v13-1-p3-controls-micro-protocol.json",
+        "data/manifests/v13-1-p3-controls-micro-results.json",
+        "data/manifests/v13-1-b0-live-query-protocol.json",
+        "data/manifests/v13-1-b0-live-query-results.json",
+        "docs/V13_1_P3_CONTROLS.md"
+      ],
+      "conditional": false,
+      "qualification": "All7 core APIs,238 fresh processes,42 SDK reopens, B0 actual current tools validated. Old HTTP counter bug retained and trace/ledger reconciled. B0/B6 historical limitations UNKNOWN not passes. Default parameters only; tuning, formal runtime/source counter correction remain."
     },
     {
       "id": "P3-external",
@@ -514,8 +522,13 @@
       "requirement": "B2/B3/Ours equal reasonable development config candidates; common evidence/budget/guards; native vs matched tables separate",
       "authoritative_evidence_required": "pre-results configuration and execution contracts",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "conditional": false
+      "evidence": [
+        "data/manifests/v13-1-development-configuration-candidates.json",
+        "data/manifests/v13-1-equal-config-development-selection.json",
+        "data/manifests/v13-1-p3-controls-micro-protocol.json"
+      ],
+      "conditional": false,
+      "qualification": "Exactly two reasonable draft candidates eachB2/B3/Ours_public. Same eight old exposed components4scope+2valid+2personalized selected by metadata. Actual48 configuration-question pairs not yet executed; no fair tuning completion claim."
     },
     {
       "id": "P4-factor",
