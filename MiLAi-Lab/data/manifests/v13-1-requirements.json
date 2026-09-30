@@ -45,7 +45,9 @@
         "data/manifests/v13-1-update-r3-results.json",
         "docs/V13_1_UPDATE_R3_RESULTS.md",
         "data/manifests/v13-1-scope-r4-results.json",
-        "docs/V13_1_SCOPE_R4_RESULTS.md"
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
       ],
       "conditional": false
     },
@@ -151,7 +153,9 @@
         "data/manifests/v13-1-d0-six-stories-r1-results.json",
         "docs/V13_1_D0_R1_RESULTS.md",
         "data/manifests/v13-1-scope-r4-results.json",
-        "docs/V13_1_SCOPE_R4_RESULTS.md"
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
       ],
       "conditional": false
     },
@@ -636,7 +640,9 @@
         "data/manifests/v13-1-update-r3-results.json",
         "docs/V13_1_UPDATE_R3_RESULTS.md",
         "data/manifests/v13-1-scope-r4-results.json",
-        "docs/V13_1_SCOPE_R4_RESULTS.md"
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
       ],
       "conditional": false
     },
@@ -649,7 +655,9 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-1-update-r3-results.json",
-        "docs/V13_1_UPDATE_R3_RESULTS.md"
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
       ],
       "conditional": false
     },
@@ -726,7 +734,9 @@
         "data/manifests/v13-1-update-r3-results.json",
         "docs/V13_1_UPDATE_R3_RESULTS.md",
         "data/manifests/v13-1-scope-r4-results.json",
-        "docs/V13_1_SCOPE_R4_RESULTS.md"
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md"
       ],
       "conditional": false
     }

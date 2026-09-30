@@ -1,0 +1,91 @@
+{
+  "kind": "MILAI_V13_1_TEMPORAL_R5_RESULT",
+  "status": "SCOPED_TEMPORAL_PROMPT_ONLY_SUCCESS",
+  "protocol_sha256": "3c7e4d912e862f53622fbd1fb7d398f98c954bc63c3c05ead218c173bc9fb5fe",
+  "pair_freeze_sha256": "eb0c1c2fc404be794fe4f5b660672e6b2b4e75d205af2971bb86cb8d1ba70895",
+  "first_wire_difference": "system message only",
+  "arms": {
+    "control": {
+      "status": "completed",
+      "process_id": 3570998,
+      "proposal": [
+        {
+          "content": "本周团队午餐要求：给整个团队准备素食。",
+          "action": "create",
+          "kind": "episodic",
+          "scope": {
+            "time_limit": "2024-05-20T23:59:59Z",
+            "project": "team_lunch"
+          },
+          "basis": "user_statement"
+        }
+      ],
+      "actual_scope": {
+        "project": "team_lunch",
+        "time_limit": "2024-05-20T23:59:59Z"
+      },
+      "actual_kind": "episodic",
+      "record_id": "a0e73222-8803-5e4d-bfb5-5575fa44a1de",
+      "bank_sha256": "e841a1c4bdb8611d4f389618918861563a9702fdfad7c22e5c15632d4f0d9a54",
+      "terminal_sha256": "5cf8ba42d7c81e9b195395ed617fcbf9c07ac553f4fa8032cf7c59b9f7c48735",
+      "trace_sha256": "44cc89c79cef7105181a6741e06abd08a1443b2e417ba1c2d099e811ceb6b928",
+      "freeze_sha256": "7c3748da3d831ca950b5e8d86408d2f7de81409e70ef82afaa51292ee949972e",
+      "final_answer_sha256": "7e996032cf0730a5959506afec8e9b3c4c178e6d20350f15e84f4dd3972a39e1",
+      "adjudication": "FAIL: unsupported absolute expiry",
+      "generation_requests": 2,
+      "generation_tokens": 2223
+    },
+    "candidate": {
+      "status": "completed",
+      "process_id": 3574259,
+      "proposal": [
+        {
+          "content": "为本周的团队午餐准备素食。",
+          "action": "create",
+          "kind": "episodic",
+          "scope": {
+            "timeframe": "本周",
+            "event": "团队午餐",
+            "dietary_requirement": "素食"
+          },
+          "basis": "user_statement"
+        }
+      ],
+      "actual_scope": {
+        "dietary_requirement": "素食",
+        "event": "团队午餐",
+        "timeframe": "本周"
+      },
+      "actual_kind": "episodic",
+      "record_id": "984a8ab3-17f7-5cd5-827f-396c95cf4328",
+      "bank_sha256": "ff78de7b1958f018322f05384228d4c5119829aea07425eeb825477b708124b7",
+      "terminal_sha256": "71010c18f02c652c3e16f96db766ecddb90ccbe7ef09096bc8f8b7e22362c5af",
+      "trace_sha256": "79804cfe08d40191a15843229c42b4dcaec1c4d30a10cafd5bf4e52422092e69",
+      "freeze_sha256": "acdbf8245a63839399aa8786025ab080de6959f2640e73112e48aebdb8067a4a",
+      "final_answer_sha256": "7e996032cf0730a5959506afec8e9b3c4c178e6d20350f15e84f4dd3972a39e1",
+      "adjudication": "PASS: team event / relative 本周 preserved, no unsupported absolute anchor",
+      "generation_requests": 2,
+      "generation_tokens": 2277
+    }
+  },
+  "readback_path": "artifacts/v13-1-temporal-r5/separate-process-readback.json",
+  "readback_sha256": "58681daf71d233ab8c90f5738c16f0312635d18b96a0c277626bdbf5b7390a9f",
+  "root_semantic_audit": "Full actual original source, proposals and records read; nonempty scope alone is not accepted. Relative team event/week must be retained and unsupported absolute date absent. No runtime verifier or posthoc repair.",
+  "cost": {
+    "generation_requests_delta": 4,
+    "generation_tokens_delta": 4500,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "566b67ae1e947ba1635a6db8e3c727b4d50af0cf3b5d664c9511e303c0d600a0",
+    "ledger_after_sha256": "1560ba3999cac1be47c72bbb72b0b5c314a645fbd34b009236764f8d3b910a9d",
+    "continuous_generation_requests": 6197,
+    "continuous_generation_tokens": 11476893,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial"
+  },
+  "decision": "Retain generic temporal instruction; candidate actual bank passes prior scope formation gate for a separate frozen-bank reader comparison. Both R4 and R5 old failures retained; no general rate/novelty claim from one pair.",
+  "full_goal_status": "ACTIVE",
+  "normal_gate": "NOT_MET"
+}

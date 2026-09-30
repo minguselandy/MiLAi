@@ -37,6 +37,8 @@ native-tools Qwen3.6-35B-A3B-FP8服务；7861为bge-m3。均实际GET200，上�
 修订、无重复卡，两组最终答案均正确。该轮终态连续6191generation/11470179tokens，unknown0。
 随后[R4](V13_1_SCOPE_R4_RESULTS.md)形成提案虚构绝对截止日期，门禁失败，两组reader均NOT_RUN。
 新增2generation/2214tokens；该轮终态连续6193generation/11472393tokens，unknown0。
+随后[R5](V13_1_TEMPORAL_R5_RESULTS.md)相对时间通用提示保留本周/团队scope；原指令再次虚构日期。
+新增4generation/4500tokens，该轮终态连续6197generation/11476893tokens，unknown0。
 后续每次形成、Host、embedding、恢复和失败重试继续原账本，不建立零起点替代账本。
 价格与总费用上限未知，保持null；正式预算由pilot的实际分布决定。
 

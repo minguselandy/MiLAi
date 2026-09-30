@@ -1,0 +1,39 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_TEMPORAL_FORMATION",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "data/fixtures/v13-1-scope-r4-formation.json",
+  "fixture_sha256": "a997d6a7ea4cb6d849d76ac0f3275b342913583a1c15c46aa864a60515fdfb23",
+  "source_commit": "cd88fb8",
+  "changed_variable": "One general prompt instruction retaining relative time terms without invented absolute dates",
+  "held_constant": [
+    "same original public scope message",
+    "fresh empty stores and same namespace/owner",
+    "runtime source/tools/CRUD/ref guard",
+    "no future reader question",
+    "Host model/parameters/call budget",
+    "trusted source capture",
+    "business permissions",
+    "original ledger and HTTP concurrency1"
+  ],
+  "arm_roots": {
+    "control": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-temporal-r5/control/v13-1-temporal-r5",
+    "candidate": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-temporal-r5/candidate/v13-1-temporal-r5"
+  },
+  "offline_acceptance": [
+    "preserve team one-off requirement without long-term personal promotion",
+    "retain relative time expression or explicit unknown anchor",
+    "do not fabricate unsupported absolute date/expiry",
+    "actual proposal, committed card, saved acknowledgement and durable new-process read consistent"
+  ],
+  "competing_explanation": "R4 time hallucination may vary even with the same base prompt; one pair establishes only this development behavior, not a general probability reduction. Preserve all outcomes and qualify.",
+  "denial_condition": "If candidate still invents date or loses team scope, do not pass or repair bank. A correct candidate bank may be frozen for a separate reader consumption experiment.",
+  "cost_caps": {
+    "generation_calls_per_message": 12,
+    "max_output_tokens": 4096,
+    "concurrency": 1
+  },
+  "ledger_before_sha256": "566b67ae1e947ba1635a6db8e3c727b4d50af0cf3b5d664c9511e303c0d600a0",
+  "runtime_cannot_read_protocol_or_rubric": true,
+  "normal_denominator_unchanged": 24,
+  "full_goal_status": "ACTIVE"
+}
