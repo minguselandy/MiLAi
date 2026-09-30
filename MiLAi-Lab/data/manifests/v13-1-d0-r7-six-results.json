@@ -1,0 +1,371 @@
+{
+  "kind": "MILAI_V13_1_D0_R7_SIX_RESULT",
+  "status": "NEGATIVE_COMBINED_USABILITY_RESULT",
+  "protocol_sha256": "951a58e4242fe4cf3a184c472ee14674b942631f397c1f4e794661f628504ea8",
+  "runtime_freeze_sha256": "1c1704ffc2a9b505b90da219c803566e931444ece523cbabbedb05c0915043f2",
+  "fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "config_sha256": "39c84b8850e45870de329b21407e3eb2754850029f0256190b683fa2ebf3b77e",
+  "result": {
+    "passed": 5,
+    "failed": 1,
+    "six_denominator": 6,
+    "remaining18": "NOT_RUN: six closure gate failed",
+    "normal24_gate": "NOT_MET"
+  },
+  "cases": {
+    "save-1": {
+      "status": "PASS",
+      "messages": [
+        {
+          "message_id": "save-1-m1",
+          "status": "completed",
+          "process_id": 3613634,
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "我喜欢简短回答。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "topic": "communication_preference",
+                "subject": "response_length",
+                "value": "brief"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "6dcbf30c78149936a60858e3ccc198326623452da6c5bc017cdbfa8323d31045",
+          "generation_requests": 2,
+          "generation_tokens": 2493,
+          "terminal_sha256": "721a38192aca48eb5194f12ce1f50d6130b63c23541022a9d971493bb4bad13f",
+          "trace_sha256": "c8a30777c470eb8ef83bfd311aff5c7366909feb17efebbcb12af35b46bdfb42"
+        }
+      ],
+      "records": 1,
+      "sources": 1,
+      "readback_current_revisions": [
+        1
+      ],
+      "history_versions": {
+        "956c8d00-e844-509c-8a8c-779d7142643a": 0
+      }
+    },
+    "recall-1": {
+      "status": "PASS",
+      "messages": [
+        {
+          "message_id": "recall-1-m1",
+          "status": "completed",
+          "process_id": 3613958,
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "通勤更喜欢火车",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement",
+              "scope": {
+                "topic": "commute",
+                "preference": "train"
+              }
+            }
+          ],
+          "final_answer_sha256": "c96a65b5b303f823d572b2dfd73c4bf01d0dc6cd985333f6cb38ea9e4ff12a6e",
+          "generation_requests": 2,
+          "generation_tokens": 2517,
+          "terminal_sha256": "f5c08cee69d27747b4c2c684f75794943807b730f6008e7f7ad9643ee0114f77",
+          "trace_sha256": "5a24f849f93febbbe6d1cfc2f01d1349532398733b515a70842e417b0cbaf064"
+        },
+        {
+          "message_id": "recall-1-m2",
+          "status": "completed",
+          "process_id": 3614321,
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_arguments": [],
+          "final_answer_sha256": "3ef31efc14544036956462830e5efa580e6bc00df5b5d685edb47010e63ef784",
+          "generation_requests": 2,
+          "generation_tokens": 3054,
+          "terminal_sha256": "57a6579b59a714ad9335cd1e05c27a8c5ddbbd0942020e6494c11ef4fe5d42ae",
+          "trace_sha256": "59125f84b8cd94bc55b8f3a059fbdcb69cfdd77813f754aa8058c6a1111a68ef"
+        }
+      ],
+      "records": 1,
+      "sources": 2,
+      "readback_current_revisions": [
+        1
+      ],
+      "history_versions": {
+        "bace0f7a-58e9-5979-ab06-289f897d654d": 0
+      }
+    },
+    "update-1": {
+      "status": "PASS",
+      "messages": [
+        {
+          "message_id": "update-1-m1",
+          "status": "completed",
+          "process_id": 3614655,
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "饮品偏好：咖啡",
+              "action": "create",
+              "kind": "semantic",
+              "basis": "user_statement",
+              "scope": {
+                "type": "personal"
+              }
+            }
+          ],
+          "final_answer_sha256": "ef84c4d45580589f2ae22fcfeff6f913f18713de2de1367744378b76c63e32df",
+          "generation_requests": 2,
+          "generation_tokens": 2523,
+          "terminal_sha256": "20412dd82de3a05bc8a585e74a0323105c9bc5624d5ab2a5367c34494614f6b0",
+          "trace_sha256": "d54a96d42e99e98eb5f3fed37bb6cf2ad5890ada40c55d8b764ca1016639fc27"
+        },
+        {
+          "message_id": "update-1-m2",
+          "status": "completed",
+          "process_id": 3615073,
+          "tool_names": [
+            "search_memory",
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "饮品偏好：更喜欢茶，不再首选咖啡",
+              "action": "update",
+              "id": "332155ae-25d6-52a3-9492-e661b1c50f0f",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal"
+              },
+              "basis": "user_statement",
+              "source_ref": "src-d7e7a934633bb012097774739ccbb87f40fc5576ca958656bf542f2ccfe1d86b",
+              "object_ref": null,
+              "fields": {},
+              "target_query": "饮品偏好：咖啡"
+            }
+          ],
+          "final_answer_sha256": "70a2bf4444c41e6aa5f9373fee20e72472fc89f8817c0938cdfd049ec2b455cc",
+          "generation_requests": 3,
+          "generation_tokens": 5555,
+          "terminal_sha256": "9fd50db38fe008c6c8045546686cd571748dc6564dd2172856521d117ffe4b54",
+          "trace_sha256": "35a633c9ed05eefbd15d84b8e3b501282a2ece6a68df330b004d42e4d11b9261"
+        },
+        {
+          "message_id": "update-1-m3",
+          "status": "completed",
+          "process_id": 3615624,
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_arguments": [],
+          "final_answer_sha256": "4380c28089bb111f2342fbaa3e233aef0f4513c42731552cf764c2e4f1bec9c4",
+          "generation_requests": 2,
+          "generation_tokens": 3301,
+          "terminal_sha256": "442c9ec275dc5a9035989e4d3ee27c1790684ec359259835b0cd49a964d54f5c",
+          "trace_sha256": "37142cfd37b2147fa2695cb8ea63b032bb97f44f9ee06835f8e831618ecc43b1"
+        }
+      ],
+      "records": 1,
+      "sources": 3,
+      "readback_current_revisions": [
+        2
+      ],
+      "history_versions": {
+        "332155ae-25d6-52a3-9492-e661b1c50f0f": 1
+      }
+    },
+    "scope-1": {
+      "status": "PASS",
+      "messages": [
+        {
+          "message_id": "scope-1-m1",
+          "status": "completed",
+          "process_id": 3615963,
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "本周团队午餐需要为整个团队准备素食。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "event": "team_lunch",
+                "time": "this_week"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "final_answer_sha256": "7e996032cf0730a5959506afec8e9b3c4c178e6d20350f15e84f4dd3972a39e1",
+          "generation_requests": 2,
+          "generation_tokens": 2527,
+          "terminal_sha256": "15b31b72a703fe9e9b58b699c07f1f15aef337c24080ca887e67f63a3ad31848",
+          "trace_sha256": "768b59dace21531fb9598be4d233d71eca515006422ab28c92368fe65fc1fbce"
+        },
+        {
+          "message_id": "scope-1-m2",
+          "status": "completed",
+          "process_id": 3616320,
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_arguments": [],
+          "final_answer_sha256": "4459f440e6859928c28fc927fb9d36dfd0778875d999952b7a5a1e851c28ea98",
+          "generation_requests": 2,
+          "generation_tokens": 3124,
+          "terminal_sha256": "db3f775f1b8ff0f6caa866854eba6c21ece2c7c255aaa0c6e2340cb31b96f85a",
+          "trace_sha256": "7eb431e0e90157f0303e429cede537e6c0796a11554a1dd55d7d186f14c3da8f"
+        }
+      ],
+      "records": 1,
+      "sources": 2,
+      "readback_current_revisions": [
+        1
+      ],
+      "history_versions": {
+        "2859767e-2fb6-5a5d-a091-1e50f1765c78": 0
+      }
+    },
+    "object-continue-1": {
+      "status": "FAIL",
+      "messages": [
+        {
+          "message_id": "object-continue-1-m1",
+          "status": "completed",
+          "process_id": 3616766,
+          "tool_names": [
+            "reserve_and_label",
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "content": "用户已预订物品'蓝色玻璃杯-展厅A'，数量2，目的地'一楼展厅'，包装要求'防震隔层'。预订成功，标签已创建。",
+              "action": "create",
+              "kind": "episodic",
+              "scope": {
+                "project": "展厅布置",
+                "expiry": null
+              },
+              "basis": "tool_observation",
+              "source_ref": "src-32ede1e783ef5af3f5d08d83f86ca5dbb1d8255f70f5ef361871cde060d7b6de",
+              "object_ref": "src-32ede1e783ef5af3f5d08d83f86ca5dbb1d8255f70f5ef361871cde060d7b6de:RSV-eb75f922-517a-4799-bf0d-3b58071cfb3a"
+            }
+          ],
+          "final_answer_sha256": "162aab98f17a09463bc8522a15d8fc616a390284ebcefc0891a8110736e4d6ba",
+          "generation_requests": 3,
+          "generation_tokens": 4862,
+          "terminal_sha256": "b428857793be3b9c777c1795c35366c66a30943f74b6ce95e6cc4ae818319f74",
+          "trace_sha256": "0ec0ce5a12a80a239861eda07dba5be8460f0076865dc92d3bd0c5d5771b1e3c"
+        },
+        {
+          "message_id": "object-continue-1-m2",
+          "status": "completed",
+          "process_id": 3617256,
+          "tool_names": [
+            "get_reservation"
+          ],
+          "manage_arguments": [],
+          "final_answer_sha256": "063ba51ae609a57110aa92552d0ad93b6c33afea432e1d818cda0c8eeffe3cb5",
+          "generation_requests": 2,
+          "generation_tokens": 2615,
+          "terminal_sha256": "ef37621c97b262fbad8d8d4bdaaa4c873f46ed93a379eb26307084446ee103ef",
+          "trace_sha256": "81542f0bb16d9bac806d84a5cade1c24f9dd3086db90491041626bf992190480"
+        }
+      ],
+      "records": 1,
+      "sources": 4,
+      "readback_current_revisions": [
+        1
+      ],
+      "history_versions": {
+        "4a64c76f-8734-595c-bc62-f781400aa53b": 0
+      }
+    },
+    "restart-1": {
+      "status": "PASS",
+      "messages": [
+        {
+          "message_id": "restart-1-m1",
+          "status": "completed",
+          "process_id": 3617595,
+          "tool_names": [
+            "manage_memory"
+          ],
+          "manage_arguments": [
+            {
+              "action": "create",
+              "basis": "user_statement",
+              "content": "回复格式偏好：先列步骤，再给例子。",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal"
+              }
+            }
+          ],
+          "final_answer_sha256": "f3329800081fd3f06ee68acddfb185b25df098bac9d129c12dc60b9991d2f861",
+          "generation_requests": 2,
+          "generation_tokens": 2506,
+          "terminal_sha256": "88322f17db552f7c2f280225a7716a6d753b36d2d5f2e842c3a8f16d956891d7",
+          "trace_sha256": "e420cef096e53f9a80b0da62cca0fa996b93ac481db73e82c3fbb3ec2c1c0645"
+        },
+        {
+          "message_id": "restart-1-m2",
+          "status": "completed",
+          "process_id": 3618110,
+          "tool_names": [
+            "search_memory"
+          ],
+          "manage_arguments": [],
+          "final_answer_sha256": "c6a2e4328376d904b69cb16f08bf8a106820733b916656aedf1893c4cfe56f5f",
+          "generation_requests": 2,
+          "generation_tokens": 3067,
+          "terminal_sha256": "9e24fa495b0ef6e6f73e9caf39136e73bd7e67cacf4f5871cc1b6da2d061bdb7",
+          "trace_sha256": "9cbc03fa9c199c8a70d990860b64dbb4ba5fa13d9b12d04d7ca09d0fb73eb515"
+        }
+      ],
+      "records": 1,
+      "sources": 2,
+      "readback_current_revisions": [
+        1
+      ],
+      "history_versions": {
+        "b5af5ef1-dd84-500c-bf2a-038fbb17fee1": 0
+      }
+    }
+  },
+  "earliest_new_break": "Object actual get_reservation succeeded and delivered label_status=created; final answer contradicted that state by saying labeling unfinished. No new business mutation or persistent false card on second message.",
+  "root_adjudication": "Read complete actual messages, original proposals, delivered receipts and final world; independent public SDK after all process exits. Five other stories have correct source/content/scope/current+historical revisions and answers. No substring-only success.",
+  "wrong_business_effects_observed": 0,
+  "wrong_final_answer": 1,
+  "owner_leaks_observed": 0,
+  "false_saved_receipts_observed": 0,
+  "fields_grounding_limitation": "Actual object memory fields={} / unchecked; no real model field-grounding benefit shown. Free prose/final output never silently repaired.",
+  "readback_sha256": "bc5f875e4ea7eee500b505468e167d04f58f135745224d463d41dc1325484e3b",
+  "cost": {
+    "generation_requests_delta": 26,
+    "generation_tokens_delta": 38144,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "169c5fa4bdea11c22e71217ea7c1692368fd3fe5fa6f6a89279d2fce9d963a45",
+    "ledger_after_sha256": "1df9f7b68e568a13d55d42df199e1a43bfcfa90780587289ecede8afcc514229",
+    "continuous_generation_requests": 6226,
+    "continuous_generation_tokens": 11519083,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial"
+  },
+  "next_minimal_discriminator": "Same actual world/bank/query, only public operation-status versus label-status semantics instruction changes; actual lookup still required and no answer rewrite, case-specific routing or extra writer.",
+  "full_goal_status": "ACTIVE"
+}

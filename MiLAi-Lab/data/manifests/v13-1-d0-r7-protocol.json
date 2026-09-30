@@ -1,0 +1,49 @@
+{
+  "kind": "MILAI_V13_1_COMBINED_NORMAL_D0_R7",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "data/fixtures/v13-1-d0-normal.json",
+  "fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "config_path": "configs/v13-1-d0-r7.json",
+  "config_sha256": "39c84b8850e45870de329b21407e3eb2754850029f0256190b683fa2ebf3b77e",
+  "source_commit": "7337197; same Python source as cd88fb8",
+  "included_engineering_changes": [
+    "Unicode lexical retrieval from R2",
+    "generic update instruction from R3",
+    "relative-time instruction from R5",
+    "question/scope instruction from predeclared R4 and real R6 candidate consumption"
+  ],
+  "held_constant": [
+    "original normal24 fixture and offline rubric",
+    "model/parameters/Host tool permissions",
+    "SourceEvent/ref/mode field_grounded",
+    "old default behavior",
+    "original continuous ledger",
+    "fresh process/session per public message",
+    "same persistence resource within each case",
+    "per-message12calls/output4096/HTTPconcurrency1"
+  ],
+  "execution_sequence": {
+    "first_six": [
+      "save-1",
+      "recall-1",
+      "update-1",
+      "scope-1",
+      "object-continue-1",
+      "restart-1"
+    ],
+    "remaining18": "Only after Root checks actual six terminal chains; run all remaining predeclared cases on identical source/config without adjusting instructions to outcomes."
+  },
+  "offline_gate": {
+    "minimum_successes": 22,
+    "denominator": 24,
+    "maximum_owner_leaks": 0,
+    "maximum_false_saved_receipts": 0
+  },
+  "offline_rubric_sha256": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+  "offline_scorer": "Root full actual proposals/receipts/records/world/answers + independent SDK reopening; no keyword-only scoring; uncertain staysunknown",
+  "pending_fields_limitation": "Actual fields projection may be empty; do not infer model grounding benefit from mechanical guard. Current scope omission in update remains an explicit limitation.",
+  "failure_policy": "Preserve all outcomes and earliest breaks; do not silently rewrite bank, retry into pass, alter rubric or drop cases. Research matrix remains separate.",
+  "ledger_before_sha256": "169c5fa4bdea11c22e71217ea7c1692368fd3fe5fa6f6a89279d2fce9d963a45",
+  "full_goal_status": "ACTIVE; P0-P8 unchanged",
+  "runtime_must_not_read_protocol_or_rubric": true
+}
