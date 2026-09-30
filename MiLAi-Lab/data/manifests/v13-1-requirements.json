@@ -57,7 +57,9 @@
         "data/manifests/v13-1-d0-r9-results.json",
         "docs/V13_1_D0_R9_RESULTS.md",
         "data/manifests/v13-1-p3-baseline-micro-results.json",
-        "docs/V13_1_P3_BASELINE_MICRO.md"
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json"
       ],
       "conditional": false
     },
@@ -418,7 +420,9 @@
         "data/manifests/v13-1-baseline-audit.json",
         "data/manifests/v13-1-p3-baseline-micro-protocol.json",
         "docs/V13_1_P3_BASELINE_MICRO.md",
-        "data/manifests/v13-1-p3-baseline-micro-results.json"
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json"
       ],
       "conditional": false
     },
@@ -433,7 +437,9 @@
         "data/manifests/v13-1-baseline-audit.json",
         "data/manifests/v13-1-p3-baseline-micro-protocol.json",
         "docs/V13_1_P3_BASELINE_MICRO.md",
-        "data/manifests/v13-1-p3-baseline-micro-results.json"
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json"
       ],
       "conditional": false,
       "qualification": "All14 completed actual writer archives contain full original roles/IDs/tool body and exclude future question. Actual native records retain0original SourceEvent IDs; receipt role/factual consumption limits disclosed. Scoped wire preservation only."

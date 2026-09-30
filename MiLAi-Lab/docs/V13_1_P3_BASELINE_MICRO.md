@@ -105,3 +105,22 @@ v13.1自原起点合计240generation/376230tokens/3900embedding。
 每臂每条件1调用，总4次，容量与原账本计费；首轮输出与全部失败保留。
 若明确公共合同仍不改善，不能称“已修复”或只重试取最好结果；若改善只属通用提示消费解释，
 不是候选guard或结构记忆收益。此诊断仍不补原SourceEvent ID，B0–B6/最近邻/P4–P8继续待执行。
+
+## 固定material的公共合同诊断结果
+
+[配对协议](../data/manifests/v13-1-p3-partial-contract-protocol.json)冻结实际q1交付material与
+两个共同prompt；[逐leg结果](../data/manifests/v13-1-p3-partial-contract-results.json)保留4次输出。
+原micro形成/检索不重跑；控制与候选每臂material hash完全相同，候选只补公开两阶段合同。
+
+两个控制仍明确把“预订结果”说成失败。两个候选都正确说明历史预约已创建、标签未创建，
+原真实业务ID不变。SimpleMem候选该有限consumer检查通过。Mem0候选另外写出一段不存在于
+native memory80986163的引文，并把公共prompt中的“reservation was created but the label attempt
+failed”归给该真实记忆。因此其业务字段正确、来源归因失败，overall仍失败。
+
+公共合同可以改变消费解释，但真实记忆ID不证明引文受原内容支持。此轮不能声称guard、
+类型或整体准确率独立增益；不能替换原micro5/6结论或把原Source ID补入native bank。
+语义引文/自由prose仍未经受限字段guard验证。后续P2只保证公开两字段与实际观察一致。
+
+本诊断4generation/4496tokens/0embedding，Judge0；每次1调用、无重试，全usage与原连续
+账本匹配。最新6389generation/11787812generation tokens/420830embedding，unknown0；
+账本SHA256566214e33f79cccceec3c30c8b2a2c7f8fe830ea3223685b41cd63593ace0d23。

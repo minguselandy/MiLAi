@@ -95,7 +95,10 @@ SimpleMem旧默认speaker保留role、工具字段和timestamp，原event/id只�
 分开验收，真实外部微型两臂各5/6限定通过，回执局部结果消费失败保留；两臂原始SourceEvent ID均未进入
 形成记录。Mem0首次离线BM25缺缓存0调用失败，既有缓存环境修正独立冻结并保留原分母。
 新增48generation/88014tokens/3900embedding，逐响应核对连续6385generation/11783316tokens/
-420830embedding，unknown0。没有新增安装、下载或服务部署。
+420830embedding，unknown0。固定各臂实际交付material的[公共合同诊断](V13_1_P3_BASELINE_MICRO.md)
+新增4generation/4496tokens，两候选业务局部状态均正确，但Mem0候选虚构记忆引文，仍失败；
+不改原micro结论，不归因于guard/结构。连续6389generation/11787812tokens/420830embedding，
+unknown0。没有新增安装、下载或服务部署。
 
 ## 门禁与待办
 
