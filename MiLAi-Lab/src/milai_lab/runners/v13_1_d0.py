@@ -102,6 +102,13 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
 def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
     reader = settings.get("memory_reader_policy")
     formation = settings.get("memory_formation_policy", "none")
+    index_storage = settings.get("memory_derived_index_storage", "bank_prefix")
+    if index_storage not in {"bank_prefix", "owner_bank_v1"}:
+        raise ValueError("V13_RAW_INDEX_STORAGE_INVALID")
+    if index_storage != "bank_prefix" and (
+        reader != "bounded_evidence_v1" or _mutation_contract(settings) != "event_bound_v1"
+    ):
+        raise ValueError("V13_RAW_INDEX_STORAGE_REQUIRES_BOUND_READER")
     if reader is None and formation == "none" and _mutation_contract(settings) != "event_bound_v1":
         return None
     if (
@@ -126,6 +133,7 @@ def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
         raise ValueError("V13_RECIPE_EMBEDDING_CONTRACT_REQUIRED")
     return {
         **GROUNDED_POLICY,
+        **({"raw_index_storage": index_storage} if index_storage != "bank_prefix" else {}),
         "prefetch_enabled": reader is not None
         and settings.get("memory_prefetch", "enabled") == "enabled",
         "retrieval_enabled": reader is not None,
@@ -169,6 +177,7 @@ def _make_recipe(
         model.client.capacity.text_tokens,
         embeddings=embeddings,
         representation=policy["representation"],
+        raw_index_storage=settings.get("memory_derived_index_storage", "bank_prefix"),
         observer=trace,
     )
 

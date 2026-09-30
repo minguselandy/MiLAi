@@ -63,13 +63,28 @@ class GroundedMemoryRecipe:
         *,
         embeddings: Any = None,
         representation: str = "milai",
+        raw_index_storage: str = "bank_prefix",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if representation not in {"raw", "receipt", "milai"}:
             raise ValueError("V13_PACKET_POLICY_INVALID")
+        if raw_index_storage not in {"bank_prefix", "owner_bank_v1"}:
+            raise ValueError("V13_RAW_INDEX_STORAGE_INVALID")
+        if raw_index_storage != "bank_prefix" and service.mutation_contract != "event_bound_v1":
+            raise ValueError("V13_RAW_INDEX_STORAGE_REQUIRES_EVENT_BOUND")
         self.service, self.token_count, self.embeddings = service, token_count, embeddings
         self.representation, self.observer = representation, observer
         self.namespace = (*service.namespace, "v13_2_recipe")
+        self.raw_index_storage = raw_index_storage
+        self.index_namespace = self.namespace
+        if raw_index_storage == "owner_bank_v1":
+            # The installed public SDK uses a textual prefix LIKE. A different
+            # leading literal also avoids partial-component prefix matches.
+            leading = ".".join(service.namespace)[0].casefold()
+            if leading in {"%", "_"}:
+                raise ValueError("V13_RAW_INDEX_BANK_PREFIX_REQUIRES_LITERAL")
+            root = "derived-raw-index-v1" if leading != "d" else "separate-raw-index-v1"
+            self.index_namespace = (root, _hash([service.owner, service.namespace]), service.owner)
         self.policy = {
             **POLICY,
             "representation": representation,
@@ -78,6 +93,51 @@ class GroundedMemoryRecipe:
         }
         if service.mutation_contract == "event_bound_v1":
             self.policy["history_discovery"] = "actual revisions; bounded menus; visible coverage"
+        if raw_index_storage != "bank_prefix":
+            self.policy["raw_index_storage"] = raw_index_storage
+
+    def _index_binding(self) -> dict[str, Any]:
+        return {"schema": "owner_bank_raw_index_v1", "owner": self.service.owner,
+                "bank_namespace": list(self.service.namespace),
+                "document_contract": "raw_chunks_current_record_v1:2048:1792"}
+
+    def _previous_index(self) -> tuple[dict[str, Any] | None, str]:
+        item = self.service.store.get(self.index_namespace, "raw_index")
+        if self.raw_index_storage == "bank_prefix":
+            return (item.value if item is not None else None), "bank_prefix"
+        if item is None:
+            old = self.service.store.get(self.namespace, "raw_index")
+            return None, "legacy_inline_ignored" if old is not None else "missing_rebuild"
+        value = item.value
+        if any(value.get(key) != expected for key, expected in self._index_binding().items()):
+            return None, "binding_invalid_rebuild"
+        if value.get("status") != "complete":
+            return None, "pending_rebuild"
+        index = value.get("index")
+        if (not isinstance(index, dict) or value.get("index_sha256") != _hash(index)):
+            return None, "hash_invalid_rebuild"
+        return index, "complete_reuse"
+
+    def _index_pending(self, reason: str) -> None:
+        if self.raw_index_storage != "bank_prefix":
+            value = {**self._index_binding(), "status": "pending", "reason": reason}
+            self.service.store.put(self.index_namespace, "raw_index", value, index=False)
+            self._emit({"event": "v13_derived_raw_index", **value,
+                        "index_namespace": list(self.index_namespace),
+                        "legacy_inline_removed": False})
+
+    def _index_complete(self, index: dict[str, Any]) -> None:
+        value = index
+        if self.raw_index_storage != "bank_prefix":
+            value = {**self._index_binding(), "status": "complete", "index": index,
+                     "index_sha256": _hash(index)}
+        self.service.store.put(self.index_namespace, "raw_index", value, index=False)
+        if self.raw_index_storage != "bank_prefix":
+            self._emit({"event": "v13_derived_raw_index", **self._index_binding(),
+                        "status": "complete", "index_sha256": value["index_sha256"],
+                        "index_namespace": list(self.index_namespace),
+                        "new_embedding_chunks": index["new_embedding_chunks"],
+                        "legacy_inline_removed": False})
 
     def _emit(self, value: dict[str, Any]) -> None:
         if self.observer is not None:
@@ -147,7 +207,7 @@ class GroundedMemoryRecipe:
     def _retrieve(
         self, documents: list[dict[str, Any]], query: str
     ) -> tuple[list[dict[str, Any]], str]:
-        previous = self.service.store.get(self.namespace, "raw_index")
+        previous, index_state = self._previous_index()
         chunks = [vars(row) for row in raw_chunks(documents)]
         if not chunks:
             return [], "empty"
@@ -156,12 +216,13 @@ class GroundedMemoryRecipe:
         degradation = "dense_unavailable"
         if self.embeddings is not None:
             try:
+                self._index_pending(index_state)
                 index = raw_index(
                     documents,
                     self.embeddings.embed_documents,
-                    previous.value if previous is not None else None,
+                    previous,
                 )
-                self.service.store.put(self.namespace, "raw_index", index, index=False)
+                self._index_complete(index)
                 query_vector = self.embeddings.embed_query(query)
                 query_norm = normalized(query_vector, len(query_vector))
                 cosines = [
