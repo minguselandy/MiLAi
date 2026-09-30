@@ -356,3 +356,64 @@ with SqliteStore.from_conn_string(str(root/'memory.sqlite')) as store:
         assert reopened.read(receipt["id"])["value"]["revision"] == 2
         assert reopened.read(receipt["id"], 1)["value"]["content"] == "I prefer short replies"
         assert reopened.source(source)["content"] == "Keep short replies"
+
+
+@pytest.mark.parametrize("include_raw", [False, True])
+def test_fixed_chinese_bank_retrieves_commuting_card_without_unrelated_or_foreign_records(
+    tmp_path: Path, include_raw: bool
+) -> None:
+    card = "用户通勤时更喜欢选择火车。"
+    distractor = "用户每天勤于阅读，通话只在周末。"  # noqa: RUF001 - original CJK punctuation
+    with opened(tmp_path, "bob") as foreign:
+        foreign_source = captured(foreign, content=card)
+        foreign.commit("s1", "foreign", proposal(foreign_source, card))
+    with opened(tmp_path) as service:
+        source = captured(service, "commuting", card)
+        target = service.commit("s1", "commuting", proposal(source, card))
+        other = captured(service, "reading", distractor)
+        service.commit("s1", "reading", proposal(other, distractor))
+        before = service.records()
+
+        result = service.search("通勤方式偏好", include_raw=include_raw)
+        assert result["retrieval"] == "raw_keyword"
+        assert [row["id"] for row in result["records"]] == [target["id"]]
+        assert [row["event_id"] for row in result["raw_events"]] == (
+            [source] if include_raw else []
+        )
+        assert service.search("天文学")["status"] == "no_results"
+        # Only an explicit empty/whitespace query enumerates this owner's bank.
+        assert service.search("！？")["status"] == "no_results"  # noqa: RUF001
+        for empty in ("", " \t "):
+            enumerated = service.search(empty, include_raw=False)["records"]
+            assert [row["id"] for row in enumerated] == sorted(row["id"] for row in before)
+        assert service.records() == before
+
+
+@pytest.mark.parametrize(
+    ("query", "card", "distractor"),
+    [
+        ("ART!", "I enjoy art exhibitions.", "I study cartography at weekends."),
+        ("CAFÉ!", "I meet friends at Cafe\u0301 after work.", "I listen to piano music."),
+        ("القراءة، المساء؟", "أفضل القراءة في المساء.", "أمارس السباحة صباحاً."),
+        ("पसंदीदा, भोजन?", "मेरा पसंदीदा भोजन दाल है।", "मैं सुबह तैरता हूँ।"),
+        ("配送状況", "配送の状況を確認しました。", "週末は映画を観ます。"),
+        ("배송상태", "배송의 상태를 확인했습니다.", "주말에는 영화를 봅니다."),
+        ("Python入门！", "我想阅读Python的入门教程。", "我喜欢徒步旅行。"),  # noqa: RUF001
+        ("茶", "我喝茶。", "我喜欢散步。"),
+    ],
+)
+def test_multilingual_fixed_bank_keyword_queries_preserve_original_content(
+    tmp_path: Path, query: str, card: str, distractor: str
+) -> None:
+    with opened(tmp_path) as service:
+        source = captured(service, "target", card)
+        target = service.commit("s1", "target", proposal(source, card))
+        other = captured(service, "unrelated", distractor)
+        service.commit("s1", "unrelated", proposal(other, distractor))
+
+        result = service.search(query)
+        assert [row["id"] for row in result["records"]] == [target["id"]]
+        assert [row["event_id"] for row in result["raw_events"]] == [source]
+        assert result["records"][0]["value"]["content"] == card
+        assert result["raw_events"][0]["content"] == card
+        assert service.source(source)["content_sha256"] == hashlib.sha256(card.encode()).hexdigest()

@@ -11,6 +11,7 @@ from __future__ import annotations
 import fcntl
 import hashlib
 import json
+import unicodedata
 import uuid
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -36,6 +37,54 @@ def _hash(value: Any) -> str:
 
 def _body_hash(value: Any) -> str:
     return hashlib.sha256((value if isinstance(value, str) else _json(value)).encode()).hexdigest()
+
+
+def _lexical_tokens(text: str, *, include_cjk_unigrams: bool = False) -> list[str]:
+    """Unicode words plus overlapping Han/kana/Hangul bigrams, without a dictionary.
+
+    Multi-character CJK query runs use bigrams rather than common individual
+    characters. Candidate unigrams also allow an explicitly single-character
+    query. Canonical normalization and case folding apply only to matching;
+    original queries and stored bodies are untouched.
+    """
+    tokens: list[str] = []
+    run: list[str] = []
+    cjk = False
+
+    def flush() -> None:
+        if not run:
+            return
+        if cjk:
+            if include_cjk_unigrams or len(run) == 1:
+                tokens.extend(run)
+            tokens.extend(run[index] + run[index + 1] for index in range(len(run) - 1))
+        else:
+            tokens.append("".join(run))
+        run.clear()
+
+    for character in unicodedata.normalize("NFC", text.casefold()):
+        category = unicodedata.category(character)[0]
+        if category in {"L", "N"}:
+            is_cjk = unicodedata.name(character, "").startswith(
+                (
+                    "CJK UNIFIED",
+                    "CJK COMPATIBILITY",
+                    "HIRAGANA",
+                    "KATAKANA",
+                    "HALFWIDTH KATAKANA",
+                    "HANGUL",
+                )
+            )
+            if run and is_cjk != cjk:
+                flush()
+            cjk = is_cjk
+            run.append(character)
+        elif category == "M" and run:
+            run.append(character)
+        else:
+            flush()
+    flush()
+    return tokens
 
 
 class MemoryService:
@@ -441,20 +490,21 @@ class MemoryService:
                 degradation = "dense_no_indexed_results"
             except Exception as error:
                 degradation = "dense_unavailable:" + type(error).__name__
-        tokens = query.casefold().split()
+        tokens = _lexical_tokens(query)
+        enumerate_bank = not query.strip()
         records = self.records()
         raw = self.sources() if include_raw else []
 
         def rank(row: dict[str, Any]) -> int:
-            text = _json(row).casefold()
-            return sum(token in text for token in tokens)
+            text_tokens = set(_lexical_tokens(_json(row), include_cjk_unigrams=True))
+            return sum(token in text_tokens for token in tokens)
 
         records = sorted(
-            (row for row in records if row["ok"] and (not tokens or rank(row))),
+            (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
             key=lambda row: (-rank(row), row["id"]),
         )[:limit]
         raw = sorted(
-            (row for row in raw if not tokens or rank(row)),
+            (row for row in raw if enumerate_bank or rank(row)),
             key=lambda row: (-rank(row), row["event_id"]),
         )[:limit]
         return {
