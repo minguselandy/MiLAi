@@ -83,6 +83,7 @@ def test_new_revision_needs_current_boundary_support_but_no_change_does_not(
         service = MemoryService(store, ("current", "alice"), "alice", tmp_path / "lock",
                                 mutation_contract="event_bound_v1")
         history = source(service, "old", "Original scoped preference")
+        service.bind_source_boundary("s1", "old", [history])
         created = invoke(service, "manage_memory", {"content": "Original",
             "source_refs": [history], "scope": {"project": "A"}}, "create")
         handle = service.read(created["id"])["candidate_handle"]
@@ -171,6 +172,7 @@ def test_direct_commit_and_all_candidate_interfaces_require_current_update_sourc
         service = MemoryService(store, ("interfaces", "alice"), "alice", tmp_path / "lock",
             mutation_contract="event_bound_v1", candidate_contract=candidate_contract)
         history = source(service, "old", "Original preference")
+        service.bind_source_boundary("s1", "old", [history])
         created = invoke(service, "manage_memory", {"content": "Original",
                          "source_refs": [history]}, "create")
         read = service.read(created["id"])
@@ -204,6 +206,7 @@ def test_actual_recipe_mock_wire_delivers_schema_and_does_not_repair_bad_argumen
         service = MemoryService(store, ("wire", "alice"), "alice", tmp_path / "lock",
                                 mutation_contract="event_bound_v1")
         history = source(service, "old", "Original preference")
+        service.bind_source_boundary("s1", "old", [history])
         created = invoke(service, "manage_memory", {"content": "Original",
                          "scope": {"project": "A"}, "source_refs": [history]}, "create")
         handle = service.read(created["id"])["candidate_handle"]

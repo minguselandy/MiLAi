@@ -779,10 +779,10 @@ def step(
                     else comparison.tools()
                 ),
                 system_prompt=d0._system_prompt(settings),
-                benchmark_view_hook=(recipe.hook(d0._system_prompt(settings))
-                                     if recipe is not None and settings.get("memory_reader_policy")
-                                     and settings.get("memory_prefetch", "enabled") == "enabled"
-                                     else None if comparison is None else comparison.hook),
+                benchmark_view_hook=(recipe.hook(d0._system_prompt(settings), prefetch=bool(
+                    settings.get("memory_reader_policy")
+                    and settings.get("memory_prefetch", "enabled") == "enabled"))
+                    if recipe is not None else None if comparison is None else comparison.hook),
             )
             active["agent"] = agent
             state = agent.get_state(config)

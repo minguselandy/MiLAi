@@ -76,7 +76,10 @@ def test_missing_boundary_preserves_pending_and_does_not_guess_from_history(tmp_
         assert service.sources()[0]["formation_status"] == "pending"
         attempt = service.store.search(service.attempts_namespace)[0].value
         assert attempt["raw"]["requested"]["content"] == "Unbound proposal"
-        assert save(service, "Explicitly selected", "explicit", source_ref=source)["ok"]
+        assert save(service, "Explicitly selected", "explicit", source_ref=source)["reason"] == (
+            "current_boundary_source_required")
+        service.bind_source_boundary("s1", "actual-request", [source])
+        assert save(service, "Explicitly selected", "bound", source_ref=source)["ok"]
 
 
 def test_multiple_actual_events_require_selection_and_same_batch_accumulates(
@@ -110,6 +113,7 @@ def test_mixed_roles_are_retained_and_cannot_be_promoted_to_user_statement(tmp_p
             "source_ref"
         ]
         sources = [expressed, observed]
+        service.bind_source_boundary("s1", "actual-batch", sources)
         bad = save(service, "The user confirmed completion", "bad", source_refs=sources)
         assert bad["reason"] == "source_role_mismatch"
         good = save(
@@ -171,6 +175,7 @@ def test_search_read_issue_handles_and_update_never_chooses_single_candidate(
 ) -> None:
     with opened(tmp_path) as service:
         source = user(service, "u1", "Use concise replies")
+        service.bind_source_boundary("s1", "u1", [source])
         first = save(service, "Concise replies", "create", source_ref=source)
         second = user(service, "u2", "Now include detail")
         service.bind_source_boundary("s1", "u2", [second])
@@ -204,6 +209,7 @@ def test_search_read_issue_handles_and_update_never_chooses_single_candidate(
 def test_read_time_revision_conflicts_after_interleaved_update(tmp_path: Path) -> None:
     with opened(tmp_path) as service:
         source = user(service, "u1", "Initial preference")
+        service.bind_source_boundary("s1", "u1", [source])
         first = save(service, "Preference", "create", source_ref=source)
         handle = service.read(first["id"])["candidate_handle"]
     with opened(tmp_path) as concurrent:
@@ -242,6 +248,7 @@ def test_read_time_revision_conflicts_after_interleaved_update(tmp_path: Path) -
 def test_handles_reopen_and_cannot_cross_owner_or_mutate_support(tmp_path: Path) -> None:
     with opened(tmp_path) as service:
         source = user(service, "u1", "Original source")
+        service.bind_source_boundary("s1", "u1", [source])
         first = save(service, "Original card", "create", source_ref=source)
         handle = service.read(first["id"])["candidate_handle"]
         bound = service.candidate(handle)
@@ -316,6 +323,12 @@ def test_p5_actual_runner_binds_current_user_and_observed_tool_offline(
     spec.loader.exec_module(helpers)
     helpers.prepared(tmp_path)
     settings = read_json(tmp_path / "config.json")
+    capacity_helper = Path(__file__).parents[1] / "unit/test_v13_1_controls.py"
+    capacity_spec = importlib.util.spec_from_file_location("source_index_capacity", capacity_helper)
+    assert capacity_spec and capacity_spec.loader
+    capacity_module = importlib.util.module_from_spec(capacity_spec)
+    capacity_spec.loader.exec_module(capacity_module)
+    settings["capacity"] = capacity_module.settings(tmp_path)["capacity"]
     settings["memory_mutation_contract"] = "event_bound_v1"
     if project:
         settings["memory_observation_profile"] = "reservation_v1"
@@ -325,7 +338,14 @@ def test_p5_actual_runner_binds_current_user_and_observed_tool_offline(
     assert frozen["memory_mutation_contract"] == "event_bound_v1"
     schema = frozen["tool_catalog"][0]["function"]["parameters"]
     assert "candidate_handle" in schema["properties"] and "source_refs" in schema["properties"]
-    monkeypatch.setattr(runner, "make_model", helpers.local_model)
+    def local_model_with_capacity(*args: Any, **kwargs: Any) -> Any:
+        from milai_lab.providers.contextual_capacity import HostCapacity
+
+        model = helpers.local_model(*args, **kwargs)
+        model.client.capacity = HostCapacity(settings["capacity"])
+        return model
+
+    monkeypatch.setattr(runner, "make_model", local_model_with_capacity)
     before = (tmp_path / "budget.json").read_bytes()
     result = runner.step(root, "mechanical", 0)
     assert result["status"] == "completed", result

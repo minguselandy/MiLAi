@@ -102,7 +102,7 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
 def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
     reader = settings.get("memory_reader_policy")
     formation = settings.get("memory_formation_policy", "none")
-    if reader is None and formation == "none":
+    if reader is None and formation == "none" and _mutation_contract(settings) != "event_bound_v1":
         return None
     if (
         _mutation_contract(settings) != "event_bound_v1"
@@ -150,8 +150,6 @@ def _make_recipe(
     policy = _recipe_settings(settings)
     if policy is None:
         return None
-    if not policy["retrieval_enabled"] and policy["formation"] != "after_host_final_v1":
-        return None
     if model.client.capacity is None:
         raise ValueError("V13_PACKET_HOST_TOKENIZER_REQUIRED")
     embeddings = None
@@ -193,6 +191,7 @@ def _memory_tools(
         recall_provider=(recipe.recall_tool if recipe else lambda config: {"ok": True, "items": []})
         if settings.get("memory_reader_policy")
         else None,
+        source_index_provider=recipe.current_sources_tool if recipe else None,
     )
     if settings.get("memory_reader_policy") == "bounded_evidence_v1":
         next(tool for tool in tools if tool.name == "search_memory").description = (
@@ -557,10 +556,10 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     business_call_wrapper=business_wrapper,
                     memory_tools=tools,
                     system_prompt=_system_prompt(settings),
-                    benchmark_view_hook=(recipe.hook(_system_prompt(settings))
-                                         if recipe and settings.get("memory_reader_policy") and
-                                         settings.get("memory_prefetch", "enabled") == "enabled"
-                                         else None),
+                    benchmark_view_hook=(recipe.hook(_system_prompt(settings), prefetch=bool(
+                        settings.get("memory_reader_policy")
+                        and settings.get("memory_prefetch", "enabled") == "enabled"))
+                        if recipe else None),
                 )
                 key = public["message_id"]
                 model.begin_public_message(key)

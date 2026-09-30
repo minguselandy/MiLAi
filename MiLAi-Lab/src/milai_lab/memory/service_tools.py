@@ -37,6 +37,7 @@ def create_service_tools(
     service: MemoryService, *, replay_requested: bool = False,
     context_provider: Callable[[str, RunnableConfig], dict[str, Any]] | None = None,
     recall_provider: Callable[[RunnableConfig], dict[str, Any]] | None = None,
+    source_index_provider: Callable[[str | None, RunnableConfig], dict[str, Any]] | None = None,
 ) -> tuple[BaseTool, ...]:
     if type(replay_requested) is not bool:
         raise ValueError("V13_MEMORY_REPLAY_REQUESTED_INVALID")
@@ -62,7 +63,9 @@ def create_service_tools(
             content=json.dumps(receipt, ensure_ascii=False,
                                separators=(",", ":")
                                if ((name == "search_memory" and context_provider)
-                                   or (name == "recall_context" and recall_provider)) else None),
+                                   or (name == "recall_context" and recall_provider)
+                                   or (name == "read_current_sources" and source_index_provider))
+                               else None),
             name=name,
             tool_call_id=call_id,
             status="success" if receipt["ok"] else "error",
@@ -308,6 +311,29 @@ def create_service_tools(
     async def arecall_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: recall_context(config=config, **arguments))
 
+    def read_current_sources(
+        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+        cursor: str | None = None,
+    ) -> ToolMessage:
+        """List actual trusted current boundary source refs, roles and original hashes.
+
+        No query or guessed source ID is needed. An opaque cursor reads the next page
+        of the same boundary; changed boundaries invalidate cursors. Missing bindings
+        return an empty index. Boundary membership does not verify semantic claims or
+        business state and grants no business write permission.
+        """
+        session = session_for(config)
+        if source_index_provider is not None:
+            receipt = source_index_provider(cursor, config)
+        else:
+            receipt = {"ok": True, "source_index": service.source_boundary(session, cursor=cursor),
+                       "historical_empty": True, "items": []}
+        return message("read_current_sources", tool_call_id, receipt)
+
+    async def aread_current_sources(config: RunnableConfig, **arguments: Any) -> ToolMessage:
+        return await anyio.to_thread.run_sync(
+            lambda: read_current_sources(config=config, **arguments))
+
     def read_source(
         source_ref: str, config: RunnableConfig, *,
         tool_call_id: Annotated[str, InjectedToolCallId], start: int = 0, max_chars: int = 4096,
@@ -378,8 +404,10 @@ def create_service_tools(
             "event in the current boundary. For multiple events select source_refs explicitly; "
             "roles and original hashes are retained. user_statement requires user sources, "
             "tool_observation requires tool sources, and mixed sources need plan/inference. "
-            "Updates need at least one actual current boundary source; historical sources "
+            "Creates and updates need at least one actual current boundary source; "
+            "historical sources "
             "may provide additional support. "
+            "The current source index or read_current_sources reveals those actual refs. "
             "Quotations or references do not verify semantic meaning. Use scope to retain "
             "personal/project/time limits. Tool fields need a captured source and issued "
             "object_ref; "
@@ -473,7 +501,9 @@ def create_service_tools(
                                         name="recall_context")]
           if recall_provider is not None else []),
         *(
-            [StructuredTool.from_function(read_source, coroutine=aread_source, name="read_source"),
+            [StructuredTool.from_function(read_current_sources, coroutine=aread_current_sources,
+                                          name="read_current_sources"),
+             StructuredTool.from_function(read_source, coroutine=aread_source, name="read_source"),
              StructuredTool.from_function(read_observations, coroutine=aread_observations,
                                           name="read_observations")]
             if service.mutation_contract == "event_bound_v1" else []

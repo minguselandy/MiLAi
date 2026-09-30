@@ -224,6 +224,43 @@ class MemoryService:
         with self._locked():
             return list(self._source_boundaries.get(session, ("", []))[1])
 
+    def source_boundary(
+        self, session: str, *, cursor: str | None = None, limit: int = 6,
+    ) -> dict[str, Any]:
+        """Public metadata over the actual trusted binding; no latest-event discovery."""
+        if type(limit) is not int or not 1 <= limit <= 6:
+            raise ValueError("V13_SOURCE_INDEX_LIMIT_INVALID")
+        with self._locked():
+            boundary_id, refs = self._source_boundaries.get(session, ("", []))
+            members = []
+            for ref in refs:
+                event = self.source(ref)
+                if event is None or event["session"] != session:
+                    raise ValueError("V13_SOURCE_BOUNDARY_SCOPE_MISMATCH")
+                members.append({"source_ref": ref, "role": event["role"],
+                                "content_sha256": event["content_sha256"],
+                                "origin": event["origin"], "observed_at": event["observed_at"]})
+            value = {"owner": self.owner, "boundary_ref":
+                     "boundary-" + _hash([self.namespace, session, boundary_id])[:24]
+                     if boundary_id else None, "members": members,
+                     "content_verification": "unchecked"}
+            index_hash = _hash(value)
+            start = 0
+            if cursor is not None:
+                if not isinstance(cursor, str):
+                    raise ValueError("V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID")
+                prefix, separator, offset = cursor.rpartition(":")
+                if (separator != ":" or prefix != "sources-" + index_hash[:24]
+                        or not offset.isdecimal() or not 0 <= int(offset) < len(members)):
+                    raise ValueError("V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID")
+                start = int(offset)
+            end = min(start + limit, len(members))
+            return {**value, "members": members[start:end], "source_index_hash": index_hash,
+                    "member_count": len(members), "start": start,
+                    "omitted_count": len(members) - end,
+                    "next_cursor": "sources-" + index_hash[:24] + ":" + str(end)
+                    if end < len(members) else None}
+
     @staticmethod
     def _version_source_refs(version: dict[str, Any]) -> list[str]:
         return cast(list[str], version.get("source_refs", [version["source_ref"]]))
@@ -872,7 +909,7 @@ class MemoryService:
                 )
             reason, source = self._validate(raw)
             if (reason is None and self.mutation_contract == "event_bound_v1"
-                    and raw.get("action") == "update"
+                    and raw.get("action") in {"create", "update"}
                     and raw.get("patch_operation") != "no_change"
                     and not set(raw["source_refs"]).intersection(
                         self._source_boundaries.get(session, ("", []))[1])):

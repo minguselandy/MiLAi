@@ -89,7 +89,8 @@ def test_selected_late_original_json_range_and_true_empty_reuse_reopen(tmp_path:
         empty = recipe.prepare_context(
             "zqxv-unrelated", owner="alice", session="s1", turn_id="empty"
         )
-        assert empty["material"] == "" and empty["packet"]["items"] == []
+        assert empty["packet"]["historical_empty"] and empty["packet"]["items"] == []
+        assert empty["packet"]["source_index"]["members"] == []  # no implicit history binding
         with pytest.raises(ValueError, match="OWNER"):
             recipe.prepare_context("LATE_TOKEN", owner="bob", session="s1", turn_id="q")
         with pytest.raises(ValueError, match="ACTUAL_PUBLIC"):
@@ -111,6 +112,7 @@ def test_dirty_refresh_updates_same_record_and_never_adds_new_backlinks(tmp_path
     with SqliteStore.from_conn_string(str(tmp_path / "store.sqlite")) as store:
         memory = service(store, tmp_path, source_backlinks="enabled")
         source = bound.user(memory, "past", "松林偏好")
+        memory.bind_source_boundary("s1", "past", [source])
         first = bound.save(
             memory, "Pine concise preference", "one", source_ref=source, scope={"project": "Pine"}
         )
@@ -129,7 +131,8 @@ def test_dirty_refresh_updates_same_record_and_never_adds_new_backlinks(tmp_path
             {"content": "Pine detailed preference"},
             [newer],
         )["ok"]
-        added = bound.save(memory, "Unrelated card sharing past source", "two", source_ref=source)
+        added = bound.save(memory, "Unrelated card sharing past source", "two",
+                           source_refs=[newer, source])
         refreshed = recipe.prepare_context("松林", owner="alice", session="s1", turn_id="q")
         delivered = [
             row["record"] for row in refreshed["packet"]["items"] if row["type"] == "record"
@@ -197,6 +200,7 @@ def test_ablation_interface_keeps_same_source_contract_and_separates_handles(
     with SqliteStore.from_conn_string(str(tmp_path / "store.sqlite")) as store:
         memory = service(store, tmp_path, candidate_contract=contract, source_backlinks=backlinks)
         ref = bound.user(memory, "past", "松林偏好")
+        memory.bind_source_boundary("s1", "past", [ref])
         first = bound.save(memory, "Pine preference", "save", source_ref=ref)
         found = bound.invoke(memory, "search_memory", {"query": "松林"}, "search")
         records = found["records"]

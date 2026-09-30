@@ -90,6 +90,7 @@ def test_source_backlink_finds_cross_language_card_without_rewriting_business_ke
             source_backlinks="enabled",
         )
         source = bound.user(service, "u1", "松林项目, 我偏好简短回答")
+        service.bind_source_boundary("s1", "u1", [source])
         first = bound.save(
             service,
             "Prefer concise Pine project replies",
@@ -128,6 +129,7 @@ def test_small_patch_preserves_scope_history_and_rejects_observation_fields_or_s
 ) -> None:
     with bound.opened(tmp_path) as service:
         source = bound.user(service, "u1", "Initial scoped preference")
+        service.bind_source_boundary("s1", "u1", [source])
         first = bound.save(
             service,
             "Concise replies",

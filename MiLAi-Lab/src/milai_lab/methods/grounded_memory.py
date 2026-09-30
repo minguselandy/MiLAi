@@ -31,11 +31,15 @@ POLICY: dict[str, Any] = {
     "query": "actual current public user text",
     "refresh": "same selected source ranges, record identities and object fields",
     "range_basis": "serialized_original_event_json",
-    "empty": "empty material",
+    "empty": "historical_empty with actual current source metadata; no historical items",
     "trimming": "whole fields then explicit text/candidate truncation; retain conflicts",
     "unit_order": "selected records, selected object fields, selected source ranges",
     "candidate_limit": "six distinct record/object identities; source ranges are supporting leaves",
     "extra_query": "search_memory executes each explicit query and charges independently",
+    "source_index": "actual trusted boundary metadata shares the ordinary 2048-token budget",
+    "source_index_page_members": 6,
+    "ordinary_delivery": "one System packet; matching current-turn recall_context body "
+    "is a reference",
 }
 
 
@@ -290,7 +294,11 @@ class GroundedMemoryRecipe:
         priority = {"record": 0, "observation_field": 1, "source": 2}
         return sorted(units, key=lambda row: priority[row["type"]])
 
-    def _packet(self, units: list[dict[str, Any]], revision: str) -> tuple[dict[str, Any], str]:
+    def _packet(
+        self, units: list[dict[str, Any]], revision: str | None,
+        source_index: dict[str, Any] | None = None, *,
+        request_ref: str | None = None, query_kind: str = "ordinary_public",
+    ) -> tuple[dict[str, Any], str]:
         packet = {
             "ok": True,
             "schema": "bounded_evidence_v1",
@@ -299,6 +307,9 @@ class GroundedMemoryRecipe:
             "items": units,
             "current_verified": False,
         }
+        if source_index is not None:
+            packet.update(source_index=source_index, historical_empty=not units,
+                          request_ref=request_ref, query_kind=query_kind)
         identities = {
             "record:" + unit["record"]["id"] for unit in units if unit["type"] == "record"
         }
@@ -312,11 +323,19 @@ class GroundedMemoryRecipe:
         return packet, HEADER + _json(packet)
 
     def _fit(
-        self, units: list[dict[str, Any]], revision: str
+        self, units: list[dict[str, Any]], revision: str,
+        source_index: dict[str, Any] | None = None, *,
+        request_ref: str | None = None, query_kind: str = "ordinary_public",
+        material_budget: int = 2048,
     ) -> tuple[list[dict[str, Any]], list[str]]:
         chosen: list[dict[str, Any]] = []
         omitted, delivered = [], set()
         candidates: set[str] = set()
+
+        def material(values: list[dict[str, Any]]) -> str:
+            return self._packet(values, revision, source_index, request_ref=request_ref,
+                                query_kind=query_kind)[1]
+
         for unit in units:
             key = unit["unit_id"]
             if key in delivered:
@@ -336,7 +355,7 @@ class GroundedMemoryRecipe:
                 omitted.append(key)
                 continue
             value = json.loads(_json(unit))
-            if self.token_count(self._packet([*chosen, value], revision)[1]) > POLICY["budget"]:
+            if self.token_count(material([*chosen, value])) > material_budget:
                 # Candidate omission is explicit and never resolves a conflict by choosing a winner.
                 if value["type"] == "observation_field":
                     value["omitted_candidate_count"] = value["candidate_count"]
@@ -357,8 +376,8 @@ class GroundedMemoryRecipe:
                         middle = (low + high + 1) // 2
                         target[field] = body[:middle]
                         if (
-                            self.token_count(self._packet([*chosen, value], revision)[1])
-                            <= POLICY["budget"]
+                            self.token_count(material([*chosen, value]))
+                            <= material_budget
                         ):
                             low = middle
                         else:
@@ -366,7 +385,7 @@ class GroundedMemoryRecipe:
                     target[field] = body[:low]
                     if field == "excerpt":
                         value["range"][1] = value["range"][0] + low
-            if self.token_count(self._packet([*chosen, value], revision)[1]) > POLICY["budget"]:
+            if self.token_count(material([*chosen, value])) > material_budget:
                 omitted.append(key)
                 continue
             chosen.append(value)
@@ -374,6 +393,34 @@ class GroundedMemoryRecipe:
             if identity is not None:
                 candidates.add(identity)
         return chosen, omitted
+
+    def _request_ref(self, session: str, turn_id: str) -> str:
+        return "request-" + _hash([self.service.namespace, session, turn_id])[:24]
+
+    def _source_index(
+        self, session: str, *, cursor: str | None = None, request_ref: str | None = None,
+        revision: str | None = None, query_kind: str = "metadata_only",
+        material_budget: int = 2048,
+    ) -> dict[str, Any]:
+        for limit in range(POLICY["source_index_page_members"], 0, -1):
+            index = self.service.source_boundary(session, cursor=cursor, limit=limit)
+            if index["next_cursor"] is not None:
+                index["read_more"] = {"tool": "read_current_sources",
+                                      "cursor": index["next_cursor"]}
+            _, material = self._packet([], revision, index, request_ref=request_ref,
+                                       query_kind=query_kind)
+            if self.token_count(material) <= material_budget:
+                return index
+        raise ValueError("V13_SOURCE_INDEX_MEMBER_EXCEEDS_MATERIAL_BUDGET")
+
+    def current_sources_tool(
+        self, cursor: str | None, config: RunnableConfig,
+    ) -> dict[str, Any]:
+        cfg = config["configurable"]
+        if cfg.get("user_id") != self.service.owner or not cfg.get("v13_session"):
+            raise ValueError("V13_PACKET_OWNER_MISMATCH")
+        index = self._source_index(cfg["v13_session"], cursor=cursor)
+        return self._packet([], None, index, query_kind="metadata_only")[0]
 
     def prepare_context(
         self,
@@ -383,9 +430,12 @@ class GroundedMemoryRecipe:
         session: str,
         turn_id: str,
         explicit_query: str | None = None,
+        material_budget: int = 2048,
     ) -> dict[str, Any]:
         if owner != self.service.owner:
             raise ValueError("V13_PACKET_OWNER_MISMATCH")
+        if type(material_budget) is not int or not 1 <= material_budget <= POLICY["budget"]:
+            raise ValueError("V13_PACKET_MATERIAL_BUDGET_INVALID")
         current_source = self.service.event_id(session, turn_id, "user")
         actual = self.service.source(current_source)
         if actual is None or actual["content"] != public_request:
@@ -399,13 +449,20 @@ class GroundedMemoryRecipe:
             if explicit_query is None
             else "query:" + _hash([session, turn_id, query])
         )
+        request_ref = self._request_ref(session, turn_id)
+        query_kind = "ordinary_public" if explicit_query is None else "explicit_additional"
         cached = self.service.store.get(self.namespace, key)
         documents, observations, revision = self._snapshot(current_source)
+        source_index = (self._source_index(session, request_ref=request_ref, revision=revision,
+                                         query_kind=query_kind, material_budget=material_budget)
+                        if self.service.mutation_contract == "event_bound_v1" else None)
         if cached is not None and explicit_query is None:
             state = cached.value
             if state["query_hash"] != _hash(public_request) or state["policy"] != self.policy:
                 raise ValueError("V13_PACKET_TURN_CHANGED")
-            if state["bank_revision"] == revision:
+            if (state["bank_revision"] == revision
+                    and state["packet"].get("source_index") == source_index
+                    and state.get("material_budget", POLICY["budget"]) == material_budget):
                 result = {**state, "reused": True, "retrieval_calls": 0}
                 self._emit(
                     {"event": "v13_evidence_packet_reused", "packet_hash": state["packet_hash"]}
@@ -415,20 +472,26 @@ class GroundedMemoryRecipe:
         else:
             ranked, retrieval = self._retrieve(documents, query)
             selected, calls = self._select(ranked, observations), 1
-        chosen, omitted = self._fit(self._units(selected, observations), revision)
-        packet, material = self._packet(chosen, revision)
-        if not chosen:
+        chosen, omitted = self._fit(self._units(selected, observations), revision, source_index,
+                                    request_ref=request_ref, query_kind=query_kind,
+                                    material_budget=material_budget)
+        packet, material = self._packet(chosen, revision, source_index,
+                                        request_ref=request_ref, query_kind=query_kind)
+        if not chosen and source_index is None:
             material = ""
+        if self.token_count(material) > material_budget:
+            raise ValueError("V13_PACKET_METADATA_EXCEEDS_MATERIAL_BUDGET")
         state = {
             "policy": self.policy,
             "query_hash": _hash(query),
-            "query_kind": "ordinary_public" if explicit_query is None else "explicit_additional",
+            "query_kind": query_kind,
             "actual_public_request_hash": _hash(public_request),
             "bank_revision": revision,
             "packet": packet,
             "packet_hash": packet["packet_hash"],
             "material": material,
             "material_tokens": self.token_count(material),
+            "material_budget": material_budget,
             "selected": selected,
             "omitted_ids": omitted,
             "retrieval": retrieval,
@@ -437,6 +500,8 @@ class GroundedMemoryRecipe:
             "wall_ns": time.perf_counter_ns() - wall,
             "cpu_ns": time.process_time_ns() - cpu,
             "measurement": "whole source/record/fact snapshot scans; Store IO not fully counted",
+            "recall_packet_hashes": (cached.value.get("recall_packet_hashes", [])
+                                     if cached is not None and explicit_query is None else []),
         }
         self.service.store.put(self.namespace, key, state, index=False)
         self.service.store.put(
@@ -447,6 +512,8 @@ class GroundedMemoryRecipe:
 
     def _public_source(self, config: RunnableConfig) -> tuple[dict[str, Any], dict[str, Any]]:
         cfg = config["configurable"]
+        if cfg.get("user_id") != self.service.owner:
+            raise ValueError("V13_PACKET_OWNER_MISMATCH")
         source = self.service.source(
             self.service.event_id(cfg["v13_session"], cfg["v13_turn_id"], "user")
         )
@@ -470,6 +537,10 @@ class GroundedMemoryRecipe:
                 "packet_hash": packet["packet_hash"],
             }
         )
+        key = "packet:" + _hash([cfg["v13_session"], cfg["v13_turn_id"]])
+        state = {**packet, "recall_packet_hashes": list(dict.fromkeys([
+            *packet.get("recall_packet_hashes", []), packet["packet_hash"]]))}
+        self.service.store.put(self.namespace, key, state, index=False)
         return dict(packet["packet"])
 
     def search_tool(self, query: str, config: RunnableConfig) -> dict[str, Any]:
@@ -492,25 +563,95 @@ class GroundedMemoryRecipe:
         )
         return dict(packet["packet"])
 
-    def hook(self, base_system: str) -> Callable[..., dict[str, Any]]:
+    def hook(self, base_system: str, *, prefetch: bool = True) -> Callable[..., dict[str, Any]]:
         def prepare(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
             cfg = config["configurable"]
             human = next(
                 row for row in reversed(state["messages"]) if isinstance(row, HumanMessage)
             )
-            packet = self.prepare_context(
-                str(human.content),
-                owner=cfg["user_id"],
-                session=cfg["v13_session"],
-                turn_id=str(human.id),
+            actual, _ = self._public_source(config)
+            if actual["content"] != human.content or actual["event_id"] != self.service.event_id(
+                cfg["v13_session"], str(human.id), "user"
+            ):
+                raise ValueError("V13_PACKET_ACTUAL_PUBLIC_REQUEST_REQUIRED")
+            request_ref = self._request_ref(cfg["v13_session"], str(human.id))
+            ordinary = self.service.store.get(
+                self.namespace, "packet:" + _hash([cfg["v13_session"], str(human.id)])
             )
+            current_start = max(index for index, row in enumerate(state["messages"])
+                                if row is human)
+            recalls: dict[int, dict[str, Any]] = {}
+            for position, row in enumerate(state["messages"][current_start + 1:],
+                                           start=current_start + 1):
+                if not isinstance(row, ToolMessage) or row.name != "recall_context":
+                    continue
+                try:
+                    body = json.loads(str(row.content))
+                except (TypeError, ValueError):
+                    continue
+                if (ordinary is not None and isinstance(body, dict) and body.get("ok") is True
+                        and row.status == "success" and body.get("schema") == "bounded_evidence_v1"
+                        and body.get("owner") == self.service.owner
+                        and body.get("request_ref") == request_ref
+                        and body.get("query_kind") == "ordinary_public"
+                        and body.get("packet_hash") in ordinary.value.get(
+                            "recall_packet_hashes", [])
+                        and body.get("packet_hash") == _hash({
+                            key: value for key, value in body.items() if key != "packet_hash"})):
+                    recalls[position] = body
+            reference_bodies: dict[int, str] = {}
+            if prefetch or recalls:
+                available = POLICY["budget"]
+                for _ in range(6):
+                    context = self.prepare_context(
+                        str(human.content), owner=cfg["user_id"], session=cfg["v13_session"],
+                        turn_id=str(human.id), material_budget=available,
+                    )
+                    packet, material = context["packet"], context["material"]
+                    reference_bodies = {position: _json({
+                        "ok": body["ok"], "packet_hash": body["packet_hash"],
+                        "presented_packet_hash": packet["packet_hash"],
+                    }) for position, body in recalls.items()}
+                    total = self.token_count(material) + sum(
+                        self.token_count(body) for body in reference_bodies.values())
+                    if total <= POLICY["budget"]:
+                        break
+                    # Same frozen selections, no new dense query. Leave a small margin
+                    # because a new packet hash can tokenize differently after trimming.
+                    available -= total - POLICY["budget"] + 16
+                else:
+                    raise ValueError("V13_ORDINARY_TOTAL_MATERIAL_BUDGET_EXCEEDED")
+            else:
+                index = self._source_index(cfg["v13_session"], request_ref=request_ref)
+                packet, material = self._packet([], None, index, request_ref=request_ref,
+                                                query_kind="metadata_only")
+            # Only this tool's actual current-turn packet is repeated in the System view.
+            # The complete Graph/checkpoint receipt and all other tool bodies are unchanged.
+            projected = [row.model_copy(update={"content": reference_bodies[position]})
+                if position in recalls else row
+                for position, row in enumerate(state["messages"])]
+            self._emit({"event": "v13_current_source_delivery",
+                        "packet_hash": packet["packet_hash"],
+                        "source_index_hash": packet["source_index"]["source_index_hash"],
+                        "material": material, "material_tokens": self.token_count(material),
+                        "reference_tokens": sum(self.token_count(body)
+                                                for body in reference_bodies.values()),
+                        "ordinary_total_tokens": self.token_count(material) + sum(
+                            self.token_count(body) for body in reference_bodies.values()),
+                        "historical_empty": packet["historical_empty"],
+                        "projected_recall_ids": [state["messages"][position].tool_call_id
+                                                 for position in recalls],
+                        "projected_recall_positions": list(recalls),
+                        "budget_scope": "current index, one ordinary packet "
+                        "and recall reference bodies; "
+                        "chat envelope and explicit reads extra"})
             return {
                 "llm_input_messages": [
                     SystemMessage(
                         content=base_system
-                        + ("\n" + packet["material"] if packet["material"] else "")
+                        + ("\n" + material if material else "")
                     ),
-                    *state["messages"],
+                    *projected,
                 ]
             }
 
