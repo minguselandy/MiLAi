@@ -727,9 +727,11 @@
       "authoritative_evidence_required": "writer-fixed reader-change separated from new writer+reader results",
       "status": "NOT_VERIFIED",
       "evidence": [
-        "data/manifests/v13-1-memsyco-source-availability.json"
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-external-service-availability.json"
       ],
-      "conditional": false
+      "conditional": false,
+      "qualification": "User confirms no additional endpoint/service. 7860/7862 are same Qwen family. Full second-family requirement remains NOT_VERIFIED; continue independent experiments without relabeling same-family runs."
     },
     {
       "id": "P7-repeat",
