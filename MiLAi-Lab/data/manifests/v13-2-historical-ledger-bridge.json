@@ -1,0 +1,72 @@
+{
+  "roots": [
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-document-replay/MiLAi-Lab/artifacts/v13-1-document-development",
+      "receipt_files": 0,
+      "trace_files": 0,
+      "receipt_status_counts": {},
+      "unique_trace_costs": {}
+    },
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-document-events-replay/MiLAi-Lab/artifacts/v13-1-document-development",
+      "receipt_files": 64,
+      "trace_files": 65,
+      "receipt_status_counts": {
+        "interrupted": 9,
+        "completed": 44,
+        "hard_exit_armed": 11
+      },
+      "unique_trace_costs": {
+        "generation_requests": 484,
+        "generation_known_tokens": 4568357,
+        "embedding_requests": 449,
+        "embedding_known_tokens": 178885
+      }
+    },
+    {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-document-observed-replay/MiLAi-Lab/artifacts/v13-1-document-development",
+      "receipt_files": 0,
+      "trace_files": 0,
+      "receipt_status_counts": {},
+      "unique_trace_costs": {}
+    }
+  ],
+  "dedup_rule": "Exact trace file sha256, copied traces counted once",
+  "total_trace_costs": {
+    "generation_requests": 484,
+    "generation_known_tokens": 4568357,
+    "embedding_requests": 449,
+    "embedding_known_tokens": 178885
+  },
+  "ledger_plan_to_v13_2_entry_delta": {
+    "generation_requests": 485,
+    "generation_known_tokens": 4568357,
+    "generation_charged_tokens": 4598744,
+    "generation_unknown_usage": 1,
+    "embedding_known_tokens": 178885
+  },
+  "new_generation": 0,
+  "orphan_traces": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-document-events-replay/MiLAi-Lab/artifacts/v13-1-document-development/field_grounded-matched/018f1e9f802140d6/attempt-m0-start.jsonl",
+      "sha256": "ffcf9ad9ec4af68a2886227970aa6720cc4f12e44cf67566ce5b8f237c5b35d7",
+      "note": "No same-stem receipt; response events, if present, remain counted. Not evidence that the unknown charged request belongs to this trace."
+    }
+  ],
+  "unknown_charged_generation": {
+    "requests": 1,
+    "conservative_tokens": 30387,
+    "attribution": "Exact request has no response/error trace and remains unattributed. Budget reservation precedes HTTP; request event is emitted only after response/error. Do not infer HTTP completion or zero use."
+  },
+  "semantic_regrading_performed": false,
+  "kind": "V13_2_HISTORICAL_LEDGER_BRIDGE",
+  "status": "ACCOUNTING_ONLY_NOT_NEW_COHORT",
+  "private_evidence_path": "artifacts/v13-2-d0/later-old-document-cost-audit.json",
+  "private_evidence_sha256": "04c356902b4ed38b8aba3367b17509155c67f9c77824bc2633047914d2b9488f",
+  "source_file_count": 132,
+  "source_identity_digest": "7eedf1484dd9e34b3763583644bdd1c147b241473c679c79964c6ffe6e69a386",
+  "prior_entry_path": "data/manifests/v13-2-entry-freeze.json",
+  "prior_entry_sha256": "062b4b3d38da22ca7d4073f2491cf185874e9de38a23403d5ca13ba2bea64460",
+  "receipt_counts_unit": "Per-message attempt receipts; 44 completed messages are not 44 completed trajectories.",
+  "scope": "Later old v13.1 document attempts before v13.2 entry. Does not alter the D0 original60 or substitute D4 newly frozen24."
+}

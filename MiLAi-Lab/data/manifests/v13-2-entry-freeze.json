@@ -6,7 +6,128 @@
   "plan_path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
   "original_prior_execution": "eaff074",
-  "source_config_changes_since_prior_execution": [],
+  "source_config_changes_since_prior_execution": [
+    {
+      "status": "M",
+      "path": "configs/lab-verification-matrix.json",
+      "old_execution_sha256": "56b7aa6d814d810d81e362a44715fdcee44da4f5802b45ddbbba371fb896c30a",
+      "entry_main_sha256": "1d8a9c38d92d483ac7d346fdf10422148d5a658e4fe8cf4df4dc4ae48bf50464"
+    },
+    {
+      "status": "A",
+      "path": "configs/v13-1-document-budget12-matched.json",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "ea172720f8577d83b9372e996abfd47c727f7579493b27a127a52a81416302e2"
+    },
+    {
+      "status": "A",
+      "path": "configs/v13-1-document-quality-matched.json",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "e0f5de68dd28e56c15f2dfe9d42dde9fffa9db2a2275cd48544d709f8a6b83a4"
+    },
+    {
+      "status": "A",
+      "path": "configs/v13-1-document-quality-mem0-manual.json",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "65a457103dbf3275ed43d09c8750a30ce4faec2250c478d2bfd834751d263cf3"
+    },
+    {
+      "status": "A",
+      "path": "configs/v13-1-document-quality-native.json",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "b4db63a4a90ee6eed39bf674187721ae1df0ce0b96301913eda9dc4d8dd38f77"
+    },
+    {
+      "status": "A",
+      "path": "configs/v13-1-document-quality-projection-off.json",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "d709b9eb874c60f0b3edaa7c74e796d7380981c3a56e6531c4b066c310974f0e"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/application/__init__.py",
+      "old_execution_sha256": "2bccb88eebf987153656e816105f950dab3656363e7600e3c8ad572c28643113",
+      "entry_main_sha256": "a737f7b48047d3dfdcbe31ef8eece66db65bc6452c5b57899693f9df37915343"
+    },
+    {
+      "status": "A",
+      "path": "src/milai_lab/application/document_publication.py",
+      "old_execution_sha256": null,
+      "entry_main_sha256": "29f39d2790bbe506299fe56d7049577acd0aa3a11cf063ce0ac21347c6e9fd15"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/application/journal.py",
+      "old_execution_sha256": "8d30921b621c889f902326eeab2ba2944cf4d0b691905927bb46e3736bb1c875",
+      "entry_main_sha256": "6b5ab1b478bf00158829e2a22898a04a77928f5812690f6ab0e6dd6c5485dad7"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/application/recovery.py",
+      "old_execution_sha256": "dd1aff6da6e8f860181f620dca9d030faa73d2487fa2d1e294f62216ea5628c7",
+      "entry_main_sha256": "799874e391766d7e778f253fb6062120afad05c59667f78830c69dc464bb074d"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/application/refs.py",
+      "old_execution_sha256": "5475895d213adabde4fcb26baacde8a5bdeadec70801fa1a4151c5660ec148ad",
+      "entry_main_sha256": "0dc0e7cd19727122489e283c0fa6e07e743795b4a6c5baba3a6f0e91a38bee74"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/application/tools.py",
+      "old_execution_sha256": "baabb28184494f302c5aa1d5e444ee6ed3bef62cfda1184f58657836ffde0fda",
+      "entry_main_sha256": "3deef5847552e4a81c2ebaf383bd35124984110c66ebe71c6a0b9836a165bcfd"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/baselines/v13_1_controls.py",
+      "old_execution_sha256": "837b03cf98687cd91b92ff1e72a13456e5a6074cb762d7b1e92428a4461ec3d0",
+      "entry_main_sha256": "de6c5105ef26dfe37e6bb9f45c90eb1e8e8391516404a7382300b8fdd22c7f3e"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/contracts/memory.py",
+      "old_execution_sha256": "568b7e9671509c1e2cdbc28ddcdd3e4d13416f4ea7a49eb88cb50e5496894342",
+      "entry_main_sha256": "3196cd8914b3ae69c97699deb4011be87680ea692437c8178b0db85b0799ca6d"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/integrations/memory/mem0.py",
+      "old_execution_sha256": "8597b0a84aecb3800a1388494672c70fec770b4ad9ee1c7481afe21a8494df4f",
+      "entry_main_sha256": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/memory/service.py",
+      "old_execution_sha256": "ab20fd0ef0a23ab1f20cbd7a95503f8e52ce90927455191bd01e8f1df2d6e846",
+      "entry_main_sha256": "dbc1cfd08aefb4a30f25bb57b52e89b0cc3246bd08fc07e6cd05f36485e3a456"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/memory/service_tools.py",
+      "old_execution_sha256": "ccfaa2e2d2ab977fb73c32b6f9881847f58942ce36c280a4df9ada5b4e7654ac",
+      "entry_main_sha256": "c6d0630b1d9690df4b754ae9a0940f4a294a9f6ec2f37450eaead7aa74ef1fc5"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/runners/v13_1_controls.py",
+      "old_execution_sha256": "1810c815f97bff1ee1004a8072c32a749330d46083800918172ae39a3e52bd06",
+      "entry_main_sha256": "c15fca3c7cd44cb5629ba83b3b29735bc505eabc75a3e8c2cbc1b2a2586f61bd"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/runners/v13_1_p5.py",
+      "old_execution_sha256": "c85f50df1b4f46086e473ddc0740b3a4063b75c6c35e28e9ce20a4142d101e7c",
+      "entry_main_sha256": "bc05a7ee8ce55f6078c7641b4a250fdc7ecf2e53cef7cd3d5cd808ded17e9919"
+    },
+    {
+      "status": "M",
+      "path": "src/milai_lab/runners/v13_1_p5_compare.py",
+      "old_execution_sha256": "15a56d2e1bdaa721dc5a39761125ce9b43d45ba8447ebf695288a09cd45716b8",
+      "entry_main_sha256": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b"
+    }
+  ],
   "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
   "ledger_sha256": "02b667cfa0d19f0bf07cc0f0f6c31dc472ba8a0223a8de574e7917f4aba0386f",
   "ledger_at_v13_2_entry": {
@@ -34,5 +155,11 @@
   "old_worktrees_unchanged": true,
   "independent_judge": "UNAVAILABLE",
   "second_model_family": "UNAVAILABLE",
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "pre_runtime_amendments": [
+    {
+      "prior_entry_file_sha256": "7c83d554442ee18a1a5cf4587eb491b7f9b41b3a30140745d070807fc5525f09",
+      "reason": "Correct omitted source/config delta array; exact git diff and bytes show20 paths already described in D0 report. Baseline, actual ledger, plan and old results unchanged; no v13.2 model outputs."
+    }
+  ]
 }

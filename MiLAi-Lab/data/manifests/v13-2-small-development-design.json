@@ -94,12 +94,20 @@
   },
   "offline_collector": {
     "path": "tools/audit_v13_2_development.py",
-    "sha256": "76787d88352654b82d6572e5bed230a5b46600c6a6917e1728e9b24c7b9fad30",
+    "sha256": "532cd14368c3bfe8c9a338b611d28ebfafe5b0a4f49d23f2a0a923b4827e7a33",
     "validation_path": "artifacts/v13-2-analysis-validation/validation-final.json",
     "validation_sha256": "415451db92840e7ca64e757190030640cc4379a31ca3acdbca8d6b24d24e2a5d",
     "actual_old_finals_linked": 48,
     "known_costs_crosscheck": "107 generation /170905 known tokens equal original R9 result; all24 semantic verdicts remain unreviewed.",
     "malformed_missing_tampered_response": "not verified, never replaced",
-    "runtime_imports": false
+    "runtime_imports": false,
+    "historical_validated_sha256": "76787d88352654b82d6572e5bed230a5b46600c6a6917e1728e9b24c7b9fad30",
+    "phase_classification_validation": {
+      "path": "artifacts/v13-2-analysis-validation/phase-accounting.json",
+      "sha256": "640b53aae1dc150f55fa742b57f863bbae7bf9118a2e0be7b9c335772b0f4d9a",
+      "script_sha256": "532cd14368c3bfe8c9a338b611d28ebfafe5b0a4f49d23f2a0a923b4827e7a33",
+      "actual_model_samples": 0,
+      "scope": "Isolated semantic_boundary versus task_host generation accounting, unknown preserved; does not supersede the separate old48-final linkage validation identity."
+    }
   }
 }

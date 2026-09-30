@@ -144,17 +144,23 @@ def collect(
                     != source["content_sha256"]
                 ):
                     raise ValueError(f"Source owner/hash mismatch: {path}")
+            phase = None
             for ordinal, event in enumerate(events):
+                if event.get("event") == "benchmark_phase":
+                    phase = event.get("phase")
                 if event.get("event") not in {"vllm_response", "vllm_error"}:
                     continue
                 category = "embedding" if event["path"] == "embeddings" else "generation"
-                writer = category == "generation" and any(
-                    message.get("role") == "user"
-                    and any(
-                        str(message.get("content", "")).startswith(prefix)
-                        for prefix in writer_prefixes
+                writer = category == "generation" and (
+                    phase == "semantic_boundary"
+                    or any(
+                        message.get("role") == "user"
+                        and any(
+                            str(message.get("content", "")).startswith(prefix)
+                            for prefix in writer_prefixes
+                        )
+                        for message in event.get("request", {}).get("messages", [])
                     )
-                    for message in event.get("request", {}).get("messages", [])
                 )
                 detail = "semantic_writer" if writer else category
                 usage = event.get("usage")
@@ -172,6 +178,7 @@ def collect(
                         "trace_ordinal": ordinal,
                         "category": category,
                         "detail": detail,
+                        "recorded_phase": phase,
                         "known_tokens": tokens,
                         "event": event["event"],
                         "wall_seconds": event.get("wall_seconds"),

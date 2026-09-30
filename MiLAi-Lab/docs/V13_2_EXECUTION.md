@@ -78,7 +78,7 @@ D5新pilot、正式独立来源比较、公开任务、独立评分、第二家�
 权威连续账本仍是原checkout `MiLAi-Lab/artifacts/ser-v20/budget.json`。
 v13.2入口为7,946 generation／20,341,038 charged generation tokens／717,188 embedding tokens；
 生成已知20,310,651，保守未知费用30,387，unknown usage为1；embedding unknown为0。
-这些包括后续旧v13.1文稿费用。v13.2当前新增实验generation/embedding均0，账本hash仍等于入口。
+[历史账本差额审计](../data/manifests/v13-2-historical-ledger-bridge.json)将旧快照到入口的485次生成对到484次有响应请求／4,568,357已知tokens及1次30,387保守未知费用；449次embedding／178,885 tokens也与差额一致。旧文稿44份completed回执是完成消息数，不是完整轨迹数；缺响应请求未推定完成或归零。入口表遗漏的20个源码/config差异已按两个提交的实际字节补齐并保留修订身份。v13.2当前新增实验generation/embedding均0，账本hash仍等于入口。
 价格、美元和GPU小时未测。所有新调用、失败、重启、维护及评审继续本账本，真实HTTP串行。
 
 两个D0/source-group分析工具ruff通过，实际tools边界检查通过；现存6项grandfathered依赖未新增。
