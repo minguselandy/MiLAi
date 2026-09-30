@@ -1,0 +1,38 @@
+{
+  "kind": "V13_2_ENTRY_IDENTITY",
+  "verified_remote_main": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "branch": "feat/lab-evidence-incremental-v13-2-20261001",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2",
+  "plan_path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md",
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "original_prior_execution": "eaff074",
+  "source_config_changes_since_prior_execution": [],
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_sha256": "02b667cfa0d19f0bf07cc0f0f6c31dc472ba8a0223a8de574e7917f4aba0386f",
+  "ledger_at_v13_2_entry": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 7946,
+    "generation": {
+      "charged_tokens": 20341038,
+      "known_tokens": 20310651,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 717188,
+      "known_tokens": 717188,
+      "unknown_usage": 0
+    }
+  },
+  "new_experiment_generation": 0,
+  "historical_v13_1_document_usage_included_before_entry": true,
+  "old_worktrees_unchanged": true,
+  "independent_judge": "UNAVAILABLE",
+  "second_model_family": "UNAVAILABLE",
+  "product": "NO_GO"
+}

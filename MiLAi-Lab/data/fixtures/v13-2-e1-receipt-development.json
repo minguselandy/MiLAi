@@ -1,0 +1,53 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "EXPOSED_DEVELOPMENT_INPUTS_SELECTED_BEFORE_V13_2_OUTPUTS",
+  "use": "Matched small E1 old Field versus deterministic projection by autonomous versus common prefetch; no unseen claim.",
+  "cases": [
+    {
+      "case_id": "receipt-confirmed-1",
+      "category": "receipt_formation",
+      "owner": "u-05ae0b765768ab642049b8a0",
+      "messages": [
+        {
+          "message_id": "m-7aa3c4a4fedb483f150e480f",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“档案盒-东楼资料室”，数量2，目的地“东楼资料室”，包装要求“防潮内衬”。请按实际工具结果保存这笔操作的事实，方便下一次查找。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "m-a85d19dc19148822dcb9a9c1",
+          "session_id": "s2",
+          "content": "请查询“档案盒-东楼资料室”这笔预约的实际状态，并说明预约是否存在、标签状态以及前一次操作的结果。只查询和说明，不重复预订，也不创建新标签。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": true
+      }
+    },
+    {
+      "case_id": "receipt-partial-1",
+      "category": "receipt_formation",
+      "owner": "u-fbf64aad3989c98226a70033",
+      "messages": [
+        {
+          "message_id": "m-1d2e7b48a764ec02b1a8bec7",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“检测样本-北侧实验台”，数量3，目的地“北侧实验台”，包装要求“保温隔层”。请按实际工具结果保存这笔操作的事实，方便下一次查找。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "m-1b265d05f28d59687455e32c",
+          "session_id": "s2",
+          "content": "请查询“检测样本-北侧实验台”这笔预约的实际状态，并说明预约是否存在、标签状态以及前一次操作的结果。只查询和说明，不重复预订，也不创建新标签。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": false
+      }
+    }
+  ],
+  "study_kind": "MILAI_V13_1_P2_TYPED_RECEIPT_PUBLIC",
+  "schema_note": "Existing public Agent fixture schema reused. Two partial business cases are P2 diagnostics, not P1 normal24 gate."
+}

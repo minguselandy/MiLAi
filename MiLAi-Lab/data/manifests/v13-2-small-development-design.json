@@ -1,0 +1,67 @@
+{
+  "kind": "V13_2_SMALL_DEVELOPMENT_DESIGN",
+  "status": "INPUTS_DECLARED_RUNTIME_NOT_FROZEN",
+  "executable": false,
+  "selection_uses_v13_2_outcomes": false,
+  "inputs_sha256": {
+    "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+    "data/fixtures/v13-2-e1-receipt-development.json": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+    "data/fixtures/v13-2-e2-identity-development.json": "81cc343a7a1aca9e07d18e361b38b614005f25cd8af8904870731862e4820fdb"
+  },
+  "E0": {
+    "cases": 24,
+    "fixture": "data/fixtures/v13-1-d0-normal.json",
+    "gate": "At least22/24 normal use plus direct repair of exposed update-2/update-3; owner leak/false save/gold are hard invalidation conditions.",
+    "initial_validity_order": "Original six category-leading cases, then update-2/update-3, then remaining16; each occurs once on common frozen source."
+  },
+  "E1": {
+    "fixture": "data/fixtures/v13-2-e1-receipt-development.json",
+    "base_cases": 2,
+    "arms": [
+      "field_autonomous",
+      "field_prefetch",
+      "derived_autonomous",
+      "derived_prefetch"
+    ],
+    "trajectories": 8,
+    "messages": 16,
+    "observed_flow_stage": "First replay actual preserved source receipt streams mechanically on all4 settings; then8 freely acting Host trajectories.",
+    "shared_contract": "Same actual bank/public source access/Host/business tools/guard/budget; projection and prefetch are independent switches.",
+    "primary_diagnostic": "Actual material arrival, supported observation/structure burden, actual final current-vs-history answer, paid maintenance costs."
+  },
+  "E2": {
+    "fixture": "data/fixtures/v13-2-e2-identity-development.json",
+    "base_cases": 5,
+    "arms": [
+      "old_target_query",
+      "source_backlinks",
+      "source_backlinks_read_handles_patch"
+    ],
+    "trajectories": 15,
+    "shared_contract": "Same source binding where interfaces permit, fixed delivery strategy and formation cadence; record any remaining old-contract differences prospectively.",
+    "mechanical_parallel_update": "Two legitimate interleaved revisions with stale read-time handle, sequential processes and zero model parallelism.",
+    "primary_diagnostic": [
+      "original-record correct revision",
+      "unintended new cards",
+      "wrong merge",
+      "revision conflict",
+      "answer vs committed version"
+    ]
+  },
+  "runtime_freeze_required": [
+    "D2/D3 complete narrow source/SDK checks",
+    "actual CLI/config supported by tested runner",
+    "common prefetch2048/6 full-metadata budget",
+    "tools/schema/profile/prompt/source/env/model route/SDK identity",
+    "continuous original budget before/after",
+    "scorer outside runtime and actual-response linkage"
+  ],
+  "not_started": [
+    "E0 real",
+    "E1 fixed-observation integration",
+    "E1 real",
+    "E2 real"
+  ],
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

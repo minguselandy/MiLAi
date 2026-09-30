@@ -1,0 +1,155 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_DEVELOPMENT",
+  "cases": [
+    {
+      "case_id": "update-2",
+      "category": "update",
+      "owner": "update-2-owner",
+      "messages": [
+        {
+          "message_id": "update-2-m1",
+          "session_id": "s1",
+          "content": "请记住我希望默认用英文交流。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-2-m2",
+          "session_id": "s2",
+          "content": "我的偏好改为默认用中文交流，请更新。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-2-m3",
+          "session_id": "s3",
+          "content": "现在和以前的交流语言偏好分别是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "update-3",
+      "category": "update",
+      "owner": "update-3-owner",
+      "messages": [
+        {
+          "message_id": "update-3-m1",
+          "session_id": "s1",
+          "content": "请保存：距离单位默认使用英里。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "update-3-m2",
+          "session_id": "s2",
+          "content": "从现在起默认距离单位改用公里，请更新。",
+          "new_process_before": true
+        },
+        {
+          "message_id": "update-3-m3",
+          "session_id": "s3",
+          "content": "我当前和历史的距离单位偏好是什么？",
+          "new_process_before": true
+        }
+      ]
+    },
+    {
+      "case_id": "language-reverse",
+      "category": "update",
+      "owner": "u-v132-language-reverse",
+      "messages": [
+        {
+          "message_id": "language-reverse-0",
+          "session_id": "s1",
+          "content": "Please remember that for our weekly support report I prefer a short narrative rather than bullet points. Record this preference in Chinese for my team."
+        },
+        {
+          "message_id": "language-reverse-1",
+          "session_id": "s2",
+          "content": "For that weekly support report I now prefer bullet points, replacing the short narrative preference. Update the saved preference and retain its history."
+        },
+        {
+          "message_id": "language-reverse-2",
+          "session_id": "s3",
+          "content": "What are my present and former format preferences for the weekly support report?"
+        }
+      ]
+    },
+    {
+      "case_id": "same-name-different-projects",
+      "category": "scope-update",
+      "owner": "u-v132-projects",
+      "messages": [
+        {
+          "message_id": "same-project-0",
+          "session_id": "s1",
+          "content": "请分别保存两个项目的报告偏好：曙光项目的周报用叙述段落，海风项目的周报用要点列表。不要把两个项目的偏好合并。"
+        },
+        {
+          "message_id": "same-project-1",
+          "session_id": "s2",
+          "content": "仅更新曙光项目的周报格式：以后也用要点列表。保留它以前的偏好，海风项目不变。"
+        },
+        {
+          "message_id": "same-project-2",
+          "session_id": "s3",
+          "content": "两个项目现在的周报格式分别是什么？曙光项目以前是什么？"
+        }
+      ]
+    },
+    {
+      "case_id": "correction-negation",
+      "category": "update",
+      "owner": "u-v132-correction",
+      "messages": [
+        {
+          "message_id": "correction-0",
+          "session_id": "s1",
+          "content": "请保存我希望本季度的设计审查通常在周二上午进行。"
+        },
+        {
+          "message_id": "correction-1",
+          "session_id": "s2",
+          "content": "更正刚才的安排：本季度设计审查应在周四下午，不是周二上午。请修订原记录。这个安排不适用于其他类型的会议。"
+        },
+        {
+          "message_id": "correction-2",
+          "session_id": "s3",
+          "content": "本季度设计审查应该安排在什么时间？原来怎样说的？这是否也规定了我所有会议的时间？"
+        }
+      ]
+    }
+  ],
+  "six_story_order": [
+    "save-1",
+    "recall-1",
+    "update-1",
+    "scope-1",
+    "object-continue-1",
+    "restart-1"
+  ],
+  "normal_check_count": 24,
+  "normal_check_categories": [
+    "save",
+    "recall",
+    "update",
+    "scope",
+    "object_continue",
+    "restart"
+  ],
+  "policy": "Four per capability, all predeclared; no results-based selection. All are development, not unseen evaluation. Every new public message in a new process reopens same durable resources.",
+  "runtime_must_not_read_rubric": true,
+  "model_budget": {
+    "host_calls_per_message": 12,
+    "host_max_output_tokens": 4096,
+    "temperature": 0,
+    "enable_thinking": false,
+    "http_concurrency": 1
+  },
+  "use_gate": {
+    "minimum_successes": 22,
+    "denominator": 24,
+    "maximum_owner_leaks": 0,
+    "maximum_false_saved_receipts": 0
+  },
+  "use": "Exposed plus predeclared development variations; not independent pilot. Version interleaving is separately mechanical, never parallel real HTTP."
+}

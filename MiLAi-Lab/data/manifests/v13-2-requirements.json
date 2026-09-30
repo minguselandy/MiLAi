@@ -1,0 +1,650 @@
+{
+  "kind": "V13_2_FULL_PLAN_ACCEPTANCE",
+  "status": "ACTIVE",
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "scope": "Full original v13.2 D0-D5; conditional branches keep their stated evidence gates.",
+  "historical_requirements_path": "data/manifests/v13-1-requirements.json",
+  "historical_P0_P8_amendment": {
+    "P0": "D0/D5 source/environment grouping",
+    "P1": "E0 normal24 and D1 repairs",
+    "P2": "D1/D2 source and deterministic projection, old Field preserved",
+    "P3": "D4 common-capability four arms and key controls",
+    "P4": "conditional Type/Scope ablations",
+    "P5": "REC-01/02 recovery plus D4 two workflows",
+    "P6": "D5 new pilots/prospective amendments",
+    "P7": "D5 independent/formal/generalization",
+    "P8": "D5 statistics/reproduction/decision report"
+  },
+  "missing_design_attachments": [
+    "v13_2_experiment_manifest.template.yaml",
+    "Original Word reading copy and source registry not present in supplied checkout; do not fabricate already executable CLI."
+  ],
+  "requirements": [
+    {
+      "id": "D0-01",
+      "work_package": "D0",
+      "plan_sections": [
+        "1.2",
+        "15"
+      ],
+      "requirement": "冻结main、原计划bytes、旧cohort身份和当前连续账本。",
+      "completion_evidence": "远端SHA、计划SHA、旧执行SHA/源闭包、实际账本与unknown usage。",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-2-entry-freeze.json"
+      ],
+      "condition": null
+    },
+    {
+      "id": "D0-02",
+      "work_package": "D0",
+      "plan_sections": [
+        "1.2",
+        "9.1",
+        "15"
+      ],
+      "requirement": "逐条复核45旧尝试、30完整轨迹的目标/历史/副作用/答案，保留15中断和15未运行。",
+      "completion_evidence": "全部原回执/trace内容哈希、逐轨迹证据、按原rubric区分事后诊断与独立评分。",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-2-d0-prior-cohort-results.json",
+        "data/manifests/v13-2-d0-review-notes.json"
+      ],
+      "condition": null
+    },
+    {
+      "id": "D0-03",
+      "work_package": "D0",
+      "plan_sections": [
+        "2.1",
+        "7.3",
+        "13.1"
+      ],
+      "requirement": "定位旧代码/预算差异、首断点和逐调用开销。",
+      "completion_evidence": "执行到基线源码diff、真实调用角色/拒绝重试子集、逐轨迹首错误；不推断未知usage。",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-2-entry-freeze.json",
+        "data/manifests/v13-2-d0-prior-cohort-results.json"
+      ],
+      "condition": null
+    },
+    {
+      "id": "D1-01",
+      "work_package": "D1",
+      "plan_sections": [
+        "0.2",
+        "6.3"
+      ],
+      "requirement": "真实事件来源绑定；多同角色与多角色引用保留歧义、角色和实际hash。",
+      "completion_evidence": "当前事件/显式多来源、错owner、源码hash变更及引文存在但含义不受验证的窄测试。",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d1-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+    },
+    {
+      "id": "D1-02",
+      "work_package": "D1",
+      "plan_sections": [
+        "6.2"
+      ],
+      "requirement": "候选短句柄绑定owner/record/读取时revision/支持来源；更新仅使用已交付版本。",
+      "completion_evidence": "跨owner/伪句柄拒绝、读取后交错更新冲突、重开可核查且未自动取最新revision。",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d1-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+    },
+    {
+      "id": "D1-03",
+      "work_package": "D1",
+      "plan_sections": [
+        "7.2"
+      ],
+      "requirement": "Mem0 evidence-before-close与独立SDK重开；原生算法/carrier身份保留。",
+      "completion_evidence": "真实安装SDK离线关闭前采集与关闭后重开，错误传播，随后另冻结真实新cohort。",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d1-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+    },
+    {
+      "id": "D1-04",
+      "work_package": "D1",
+      "plan_sections": [
+        "14.1"
+      ],
+      "requirement": "v13.2 opt-in，legacy optional/explicit_receipt_v1/Field/原source schema与默认路径不变。",
+      "completion_evidence": "受影响legacy回归、配置默认与老记录未升级可信度，历史文件哈希不改。",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-d1-source-acceptance.json"
+      ],
+      "condition": null,
+      "qualification": "Opt-in source/handle mechanics and offline installed SDK checks pass by stage; D2 current source checks and new frozen real cohort still required. Final snapshot hash is not every check execution hash."
+    },
+    {
+      "id": "D2-01",
+      "work_package": "D2",
+      "plan_sections": [
+        "4.1",
+        "4.2"
+      ],
+      "requirement": "公开profile声明对象/字段路径、类型、版本、完整性与效果；无benchmark/gold路由。",
+      "completion_evidence": "预订/文稿profile与第三合成schema；核心无case_id/gold/实体值依赖。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D2-02",
+      "work_package": "D2",
+      "plan_sections": [
+        "4.2",
+        "4.3"
+      ],
+      "requirement": "同源多对象多字段的实际值派生，零新增LLM调用；注释与可信事实分离。",
+      "completion_evidence": "真实旧回执与确定性机械测试，事件+对象+字段+projector身份；prose仍unchecked。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D2-03",
+      "work_package": "D2",
+      "plan_sections": [
+        "4.4"
+      ],
+      "requirement": "部分/缺失字段不删除旧事实；可比较版本不被迟到观察回滚；不可比冲突保留。",
+      "completion_evidence": "缺失/显式清除/旧版本/不可比版本/unknown/业务valid time测试与历史可查询。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D2-04",
+      "work_package": "D2",
+      "plan_sections": [
+        "4.5",
+        "7.1"
+      ],
+      "requirement": "相同事件重放幂等，可重建；源已捕获但投影未提交时返回pending而非全部成功。",
+      "completion_evidence": "W2真实持久化中断重开/dirty重放；不重复业务mutation，projection版本独立。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-01",
+      "work_package": "D3",
+      "plan_sections": [
+        "5.1",
+        "5.2"
+      ],
+      "requirement": "prepare_context复用StrongRawRAG词法+dense，输入仅当前公开消息/真实owner/已发现ref。",
+      "completion_evidence": "检索实现审查与实际HTTP无future/scorer/hidden/fault注入；硬权限过滤和真实空结果。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-02",
+      "work_package": "D3",
+      "plan_sections": [
+        "5.3"
+      ],
+      "requirement": "每用户回合最多一次公共预取；2048 tokens/最多6记录初值，全部元数据计预算。",
+      "completion_evidence": "真实packet进入HTTP，材料/来源/版本全计token，1024/2048开发配置平等候选。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-03",
+      "work_package": "D3",
+      "plan_sections": [
+        "5.3",
+        "5.4"
+      ],
+      "requirement": "续接复用包，新观察/修订只刷新受影响条目；bank_revision/packet_hash防旧缓存。",
+      "completion_evidence": "同回合/新事件/重开/源删除的刷新检查与usage，证据不回流原始user/tool事件。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-04",
+      "work_package": "D3",
+      "plan_sections": [
+        "6.1"
+      ],
+      "requirement": "可重建source→record/revision反链，跨语言检索原源可发现所支持卡。",
+      "completion_evidence": "中→英、英→中、歧义两卡、dense降级真实标记；不模糊修业务key。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-05",
+      "work_package": "D3",
+      "plan_sections": [
+        "6.3"
+      ],
+      "requirement": "小patch append/revise/supersede/no_change，保留未改metadata与历史。",
+      "completion_evidence": "原卡修订/纠正/两事项歧义/未知目标pending，不把update失败隐藏为create成功。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D3-06",
+      "work_package": "D3",
+      "plan_sections": [
+        "6.4",
+        "7.4"
+      ],
+      "requirement": "工具事实无需writer重抄；一次边界语义batch，Host已提交则去重。",
+      "completion_evidence": "冻结观察边界writer≤1，拒绝指纹止盲试/pending；预启修复最多1额外调用合计≤2与成本。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "E0-01",
+      "work_package": "D3",
+      "plan_sections": [
+        "9.1"
+      ],
+      "requirement": "新配置固定24正常开发回归≥22/24，两旧更新失败均有直接修复证据。",
+      "completion_evidence": "事前协议、24完整逐轨迹原结果、来源/版本/多对象/迟到机械回归，不把曝光修复当泛化。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "E1-01",
+      "work_package": "D3",
+      "plan_sections": [
+        "9.2"
+      ],
+      "requirement": "固定观察流与完整自由Agent各完成旧Field/新派生×自主/一次预取小型2×2。",
+      "completion_evidence": "匹配bank/Host/工具/预算/源，形成/材料送达/实际回答与调用费用分别报告。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "E2-01",
+      "work_package": "D3",
+      "plan_sections": [
+        "9.3"
+      ],
+      "requirement": "固定节奏与读入比较target_query、反链、反链+读时句柄patch。",
+      "completion_evidence": "双向跨语言/同名不同事/用户纠正/两并发修订/历史查询；正确更新/重复/错误合并/冲突/最终一致指标。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-01",
+      "work_package": "D4",
+      "plan_sections": [
+        "8.1",
+        "8.2"
+      ],
+      "requirement": "四主臂B2+/B6+/Mem0-TraceEqual/M同公共预取/观察流/guard/发现/工具材料预算。",
+      "completion_evidence": "能力逐项合同与源码/SDK/形成节奏冻结；不把共同reader backend说成原框架完整ask/reflect。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-02",
+      "work_package": "D4",
+      "plan_sections": [
+        "8.1"
+      ],
+      "requirement": "B6+同确定性投影并补原文与简单语义摘要后备以支持偏好。",
+      "completion_evidence": "一般使用微型合同与原生摘要/失败费用；新B6+不更名旧结果。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-03",
+      "work_package": "D4",
+      "plan_sections": [
+        "8.2"
+      ],
+      "requirement": "同数量少量配置在开发集选择，完整系统/机制表分开。",
+      "completion_evidence": "所有候选/事前选择规则/结果留存，匹配材料/形成预算，不连续只调M。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-04",
+      "work_package": "D4",
+      "plan_sections": [
+        "9.4",
+        "15"
+      ],
+      "requirement": "第二工作流原六曝光故事×四主臂24新冻结开发轨迹，必要预订回归。",
+      "completion_evidence": "同执行source完整批次逐轨迹评分与事实/动作/历史证据，不算新pilot。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-05",
+      "work_package": "D4",
+      "plan_sections": [
+        "9.4"
+      ],
+      "requirement": "质量每消息24生成与共同12预算分别冻结采集，不和旧失败拼表。",
+      "completion_evidence": "两个独立cohort身份、跨重启累计预算、失败/unknown保存与成本对账。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-06",
+      "work_package": "D4",
+      "plan_sections": [
+        "8.1"
+      ],
+      "requirement": "保留NoMemory/FullHistory/RollingSummary/Ordinary-Matched/Prompt-only和旧Field关键诊断。",
+      "completion_evidence": "实际参照能力/小型必要确认，保留合法当前查询，不声称所有任务必须记忆。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D4-07",
+      "work_package": "D4",
+      "plan_sections": [
+        "8.1"
+      ],
+      "requirement": "已接入SimpleMem-Text合同/预算验收后公开主表或固定确认；近邻复现边界如实披露。",
+      "completion_evidence": "实际SDK与微型确认或显式未完成；Hindsight/HiMem未复现不宣称优于。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-01",
+      "work_package": "D5",
+      "plan_sections": [
+        "11.1",
+        "11.2"
+      ],
+      "requirement": "metadata-only来源组关联图和可用独立组数，任何pilot内容访问前amendment。",
+      "completion_evidence": "追加原曝光/预留registry而不覆盖；未获可审计未访问证明的组件保持排除。",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-2-source-group-amendment.json"
+      ],
+      "condition": null,
+      "qualification": "431 metadata components audited; no reserved source reclaimed, no pilot content accessed; new pilot/selection/statistics remain unverified."
+    },
+    {
+      "id": "D5-02",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.4"
+      ],
+      "requirement": "新pilot建议12基础任务×2条件×4臂96，来源/结构独立且冻结前无内容选择。",
+      "completion_evidence": "真实新任务、两个工作流、配对clean/平衡异常；最终名义规模可事前公开修订。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-03",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.4",
+        "12.2"
+      ],
+      "requirement": "正式初始60基础任务×2条件×4臂480规划；样本数由pilot精度与变异事前决定。",
+      "completion_evidence": "新来源正式freeze、预定停止规则、全部结果；不以显著性停采/模板换名伪独立。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-04",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.5"
+      ],
+      "requirement": "MERIT官方任务/工具/scorer独立锚点；18 pilot/90 formal为预算候选按领域难度完整arc。",
+      "completion_evidence": "固定upstreamcommit、未见sources、无未来消息gold进入方法、完整官方scorer和实际迁移限制。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-05",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.5",
+        "11.1"
+      ],
+      "requirement": "MemSyco源池修订后再新pilot，三个任务各报，增量/全历史形成匹配。",
+      "completion_evidence": "来源组amendment、官方scorer边界与三个分母，不合总准确率。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-06",
+      "work_package": "D5",
+      "plan_sections": [
+        "11.3"
+      ],
+      "requirement": "确定性业务/副作用/版本评分独立于runtime，自由文本/scope独立盲评分。",
+      "completion_evidence": "固定rubric、匿名顺序证据包、独立人/模型实际评分；Root/同族judge仅开发诊断。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-07",
+      "work_package": "D5",
+      "plan_sections": [
+        "12.1",
+        "12.2"
+      ],
+      "requirement": "分别报告完成性/事实/消费/维护/行动/效用/费用；M vs B6+主要，M vs B2+次要。",
+      "completion_evidence": "逐轨迹来源/动作/answer证据，guard拦截不计模型正确，missing保持unknown。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-08",
+      "work_package": "D5",
+      "plan_sections": [
+        "12.2"
+      ],
+      "requirement": "按基础任务/源组配对cluster统计、效用成本联合报告，clean非劣5pp在正式结果前冻结。",
+      "completion_evidence": "依赖结构bootstrap与95%区间，缺失上下界；独立cluster少只描述，不以p不显著称无退化。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-09",
+      "work_package": "D5",
+      "plan_sections": [
+        "10.1"
+      ],
+      "requirement": "核心冻结后新工具schema/任务结构/双向语言验证；第二家族reader与端到端迁移。",
+      "completion_evidence": "独立工作流/留出模板冻结、schema只公开映射、实际第二家族结果；缺服务仍未证明。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-10",
+      "work_package": "D5",
+      "plan_sections": [
+        "10.3",
+        "7.3"
+      ],
+      "requirement": "100/1000/10000可控事件索引扫描与p50/p95增长，测后再优化。",
+      "completion_evidence": "扫描/lookup/I/O/wall分布和重放，不拿性能合成文本冒称长程语义收益。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "D5-11",
+      "work_package": "D5",
+      "plan_sections": [
+        "10.3"
+      ],
+      "requirement": "小型成立后自然长程两个owner各20–30session、15–25实际事项。",
+      "completion_evidence": "自然干扰/修订/临时覆盖/历史当前任务真实轨迹，禁止随机无义文本制造优势。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": "E1-E3 supporting small method validity and practical value"
+    },
+    {
+      "id": "C-01",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.6"
+      ],
+      "requirement": "支持后才扩去反链/修订/B6+及Flat/Type×Scope2×2，按单机制与调用差异消融。",
+      "completion_evidence": "预定门禁与单机制冻结，负面时报告收缩，不强行扩大。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": "E1-E3 support continuation"
+    },
+    {
+      "id": "C-02",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.6"
+      ],
+      "requirement": "State–Attention仅正确记忆到达且普通Q/W不足时可启动Q/W/A。",
+      "completion_evidence": "触发证据与比较独立freeze，否则保持条件未满足。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": "Correct delivered memory and ordinary Q/W insufficiency"
+    },
+    {
+      "id": "C-03",
+      "work_package": "D5",
+      "plan_sections": [
+        "9.5"
+      ],
+      "requirement": "EAL-Bench仅自然支持可见授权历史时补；oracle source gate仅诊断。",
+      "completion_evidence": "无隐藏ledger派生工具source，实际自然可见合同。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": "Natural visible authorization history supported"
+    },
+    {
+      "id": "REC-01",
+      "work_package": "D2-D4",
+      "plan_sections": [
+        "7.1"
+      ],
+      "requirement": "W1公开discovery unknown、W2源持久后投影重放、W3真实记忆提交后回执重放。",
+      "completion_evidence": "三个真实进程崩溃窗口/状态重开；业务无重复，最终一致性无效查询不得假定no-effect。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "REC-02",
+      "work_package": "D2-D4",
+      "plan_sections": [
+        "7.1"
+      ],
+      "requirement": "旧W3要求UPDATE保持，不可达标N/A，新事实投影后故障独立语义。",
+      "completion_evidence": "各方法可达边界与实际commit类型witness，不把ADD/READ算旧W3。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "INV-01",
+      "work_package": "D0-D5",
+      "plan_sections": [
+        "3.2",
+        "7.3",
+        "14.1"
+      ],
+      "requirement": "来源不放大、身份不猜测、时间不偷换、效果不重放；索引可重建非权威。",
+      "completion_evidence": "owner/版本/源/投影/operation→commit记录，公共Store事务不足就显式pending。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "INV-02",
+      "work_package": "D0-D5",
+      "plan_sections": [
+        "10.2",
+        "13.2"
+      ],
+      "requirement": "既有职责增量Lab-only，无benchmarkcase/gold/私有SDK连接/Product依赖。",
+      "completion_evidence": "必要boundary/tools/static checks与代码审查，Product/Archive与服务无改动。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "INV-03",
+      "work_package": "D0-D5",
+      "plan_sections": [
+        "14.2",
+        "14.3"
+      ],
+      "requirement": "每cohort一个manifest/逐轨迹表/来源预算摘要；源/SDK/模型route/工具/提示/时序/预算/scorer/停止规则齐。",
+      "completion_evidence": "执行SHA和报告SHA区分，原连续账本所有缓存/失败/重启/维护/index/评审计费，unknown不填0。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "INV-04",
+      "work_package": "D0-D5",
+      "plan_sections": [
+        "12.3",
+        "15"
+      ],
+      "requirement": "按Go/Pivot/Stop作修复/收缩/相关运行停止，普通语义失败不停止独立安全工作。",
+      "completion_evidence": "每次结论追首断点与实际source/commit/delivery/action/answer，未证明优势/独立评审保持未完成。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    },
+    {
+      "id": "DEL-01",
+      "work_package": "D5",
+      "plan_sections": [
+        "13.1",
+        "14.2",
+        "15"
+      ],
+      "requirement": "首v13.2结果和完整复现收口回答首断点/正常效用/强简单独立价值/新成本与未解决失败。",
+      "completion_evidence": "命令/环境/锁/输入/评分/所有失败/result/hash/限制作可审查报告，不用first batch替代full goal。",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "condition": null
+    }
+  ],
+  "product": "NO_GO"
+}

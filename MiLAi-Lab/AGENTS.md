@@ -1,25 +1,25 @@
-# MiLAi Lab v13.1 active operating constraints
+# MiLAi Lab v13.2 active operating constraints
 
-The user explicitly authorized full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_1.md.
-This supersedes previous scope-specific research pauses for v13.1; historical methods and reports remain frozen.
-Work only in this isolated v13.1 worktree based on main255dfcd. Root owns docs, freezes, fixtures, scoring,
-real model HTTP and continuous accounting; one delegated source owner owns source/tests/configuration.
-Agent model is inherited under current tool policy; reasoning xhigh. Do not silently switch models.
-No standing reviewer. Git publication is not required for local first-batch acceptance.
-
-Execute P0-P8 faithfully; first batch is P0/P1/P2 under section16, not the whole Goal.
-No broad matrix, Attention, second-family deployment or Product migration in first batch.
-Use one logical MemoryService and existing Store/journal/Agent; opt-in only, preserve legacy contracts.
-Ref-only and Field-grounded are separate; two public receipt fields first. Free prose is not verified.
-No gold, hidden world, future question, injection label, standard execution plan or case-specific repair
-in Host/writer/memory input. Preserve raw proposals, failures, historical observations and real side effects.
-User requests use natural language; user need not manufacture internal IDs or refs.
-
-Real generation/embedding concurrency1, only Root initiates HTTP. Retain original cumulative ledger
-/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; do not reset charges.
-Use isolated resource namespaces; no old private data mutation, new service deployment or service changes.
-Run affected mechanical/SDK/persistence/source/boundary checks before small frozen real smoke.
-Mocks are engineering evidence, not semantic success. Formal sources stay unseen until pilot freeze.
-Track full acceptance in data/manifests/v13-1-requirements.json and docs/V13_1_EXECUTION.md.
-Product NO_GO; no Product/Archive edits. Root AGENTS and Source of Truth still govern boundaries.
-The pre-v13.1 AGENTS bytes are preserved at docs/agent-history/AGENTS_PRE_V13_1_20260930.md.
+The user explicitly authorized full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md.
+This supersedes historical scope-specific pauses and v13.1-only restrictions for v13.2.
+Preserve the complete original plan bytes, historical cohorts, original failures, costs and P0-P8 statuses.
+Execute D0-D5 / E0-E4 and the conditional requirements in the full plan; a first batch is not completion.
+Work in the isolated development-experiment-v13-2 worktree based on verified origin/main95bf708.
+Root owns docs/fixtures/rubrics/source freezes, all actual generation/embedding HTTP and scoring/accounting.
+Retain the existing one delegated source owner arrangement. Agent model is inherited; no silent switches.
+Only Root starts real model HTTP, concurrency1, using the existing continuous ledger:
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No new services, model deployment or changes to existing vLLM services. No Product/Archive edits.
+All v13.2 behavior is opt-in; preserve old defaults and public Store boundaries.
+No gold, scorer, future question, benchmark case identifiers or hidden-world routing in runtime inputs.
+Use one logical MemoryService and existing journal/Store; deterministic facts come from actual public receipts.
+Exact source/role binding, read-time version handles and truthful pending receipts precede model comparisons.
+Run affected deterministic/source/SDK checks, then freeze the smallest real E1/E2 slices and E0 normal24.
+No all-method84 matrix; four common-capability arms and second-workflow24 follow D1-D3 validity.
+Mem0 keeps observed_events_v1 and native extraction, snapshots before close and separate SDK reopen.
+Do not relabel old interrupted runs as success, mocks as model samples, or Root review as independent review.
+Do not repeat missing-independent-Judge/second-family questions or deploy replacements by default.
+Source group amendments precede new pilot content access; old exposed/reserved components stay excluded
+unless the exact plan's evidence/amendment conditions are met. No blind pool access for development.
+Product remains NO_GO. Required boundary and root governance rules still apply.
+Historical operating instructions are preserved in docs/agent-history/AGENTS_PRE_V13_2_20261001.md.
