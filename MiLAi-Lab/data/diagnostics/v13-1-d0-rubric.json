@@ -1,0 +1,328 @@
+{
+  "kind": "MILAI_V13_1_D0_OFFLINE_RUBRIC",
+  "use": "OFFLINE_ONLY",
+  "all_case_ids": [
+    "save-1",
+    "save-2",
+    "save-3",
+    "save-4",
+    "recall-1",
+    "recall-2",
+    "recall-3",
+    "recall-4",
+    "update-1",
+    "update-2",
+    "update-3",
+    "update-4",
+    "scope-1",
+    "scope-2",
+    "scope-3",
+    "scope-4",
+    "object-continue-1",
+    "object-continue-2",
+    "object-continue-3",
+    "object-continue-4",
+    "restart-1",
+    "restart-2",
+    "restart-3",
+    "restart-4"
+  ],
+  "cases": [
+    {
+      "case_id": "save-1",
+      "checks": {
+        "durable_saved": true,
+        "saved_content_contains": [
+          "简短"
+        ],
+        "false_saved_receipt": false
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "save-2",
+      "checks": {
+        "durable_saved": true,
+        "saved_content_contains": [
+          "不含咖啡因"
+        ],
+        "false_saved_receipt": false
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "save-3",
+      "checks": {
+        "durable_saved": true,
+        "saved_content_contains": [
+          "素食"
+        ],
+        "false_saved_receipt": false
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "save-4",
+      "checks": {
+        "durable_saved": true,
+        "saved_content_contains": [
+          "大字号"
+        ],
+        "false_saved_receipt": false
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "recall-1",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "火车"
+        ],
+        "fresh_session": true,
+        "actual_search_or_read": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "recall-2",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "Python"
+        ],
+        "fresh_session": true,
+        "actual_search_or_read": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "recall-3",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "上午"
+        ],
+        "fresh_session": true,
+        "actual_search_or_read": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "recall-4",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "提纲"
+        ],
+        "fresh_session": true,
+        "actual_search_or_read": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "update-1",
+      "checks": {
+        "current_preference": "茶",
+        "historical_preference": "咖啡",
+        "history_retained": true,
+        "final_answer_contains": [
+          "茶",
+          "咖啡"
+        ],
+        "no_silent_evidence_deletion": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "update-2",
+      "checks": {
+        "current_preference": "中文",
+        "historical_preference": "英文",
+        "history_retained": true,
+        "final_answer_contains": [
+          "中文",
+          "英文"
+        ],
+        "no_silent_evidence_deletion": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "update-3",
+      "checks": {
+        "current_preference": "公里",
+        "historical_preference": "英里",
+        "history_retained": true,
+        "final_answer_contains": [
+          "公里",
+          "英里"
+        ],
+        "no_silent_evidence_deletion": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "update-4",
+      "checks": {
+        "current_preference": "下午",
+        "historical_preference": "上午",
+        "history_retained": true,
+        "final_answer_contains": [
+          "下午",
+          "上午"
+        ],
+        "no_silent_evidence_deletion": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "scope-1",
+      "checks": {
+        "must_not_infer_personal_vegetarian": true,
+        "team_scope_retained": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "scope-2",
+      "checks": {
+        "long_term_contains": "详细",
+        "one_time_contains": "简短",
+        "one_time_scope_retained": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "scope-3",
+      "checks": {
+        "must_not_infer_personal_budget": true,
+        "project_budget": 800,
+        "project_scope_retained": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "scope-4",
+      "checks": {
+        "must_not_invent_absolute_date": true,
+        "relative_anchor_unknown": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "object-continue-1",
+      "checks": {
+        "reservation_count": 1,
+        "exact_item_key": "蓝色玻璃杯-展厅A",
+        "quantity": 2,
+        "destination": "一楼展厅",
+        "packing": "防震隔层",
+        "final_label_status": "created",
+        "duplicate_reservation_attempts": 0,
+        "same_reservation_identity": true,
+        "final_answer_matches_actual_receipt": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "object-continue-2",
+      "checks": {
+        "reservation_count": 1,
+        "exact_item_key": "项目B设备箱-批次二",
+        "quantity": 1,
+        "destination": "二楼会议室",
+        "packing": "原箱封装",
+        "final_label_status": "created",
+        "duplicate_reservation_attempts": 0,
+        "same_reservation_identity": true,
+        "final_answer_matches_actual_receipt": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "object-continue-3",
+      "checks": {
+        "reservation_count": 1,
+        "exact_item_key": "实验耗材-冷链区",
+        "quantity": 6,
+        "destination": "冷链收货点",
+        "packing": "保温包装",
+        "final_label_status": "created",
+        "duplicate_reservation_attempts": 0,
+        "same_reservation_identity": true,
+        "final_answer_matches_actual_receipt": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "object-continue-4",
+      "checks": {
+        "reservation_count": 1,
+        "exact_item_key": "宣传手册-中文新版",
+        "quantity": 30,
+        "destination": "访客接待处",
+        "packing": "按十本分组",
+        "final_label_status": "created",
+        "duplicate_reservation_attempts": 0,
+        "same_reservation_identity": true,
+        "final_answer_matches_actual_receipt": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "restart-1",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "步骤",
+          "例子"
+        ],
+        "real_process_exit_before_recall": true,
+        "same_persistent_resource": true,
+        "no_in_memory_carry": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "restart-2",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "安静"
+        ],
+        "real_process_exit_before_recall": true,
+        "same_persistent_resource": true,
+        "no_in_memory_carry": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "restart-3",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "少"
+        ],
+        "real_process_exit_before_recall": true,
+        "same_persistent_resource": true,
+        "no_in_memory_carry": true
+      },
+      "runtime_readable": false
+    },
+    {
+      "case_id": "restart-4",
+      "checks": {
+        "durable_saved": true,
+        "final_answer_contains": [
+          "项目"
+        ],
+        "real_process_exit_before_recall": true,
+        "same_persistent_resource": true,
+        "no_in_memory_carry": true
+      },
+      "runtime_readable": false
+    }
+  ],
+  "pass_rule": "All declared case checks must pass; uncertain semantic verdict stays UNKNOWN and cannot count success. No substring-only semantic scoring: assertions/history/scope and final receipt fidelity require trace review."
+}

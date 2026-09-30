@@ -1,0 +1,57 @@
+{
+  "kind": "MILAI_V13_1_SCOPE_R4_FORMATION_FAILURE",
+  "status": "FORMATION_GATE_FAILED_READER_ARMS_NOT_RUN",
+  "protocol_sha256": "8e895bf38c9f5f575a8a5591a3bfc0609f60480591a6821fb71c0b11170ca5c0",
+  "formation": {
+    "status": "completed",
+    "terminal_sha256": "25f7ff9862e6772b34d43d6e8ba9625f6d171eb0c59c77d2a2678ae952ecdc21",
+    "trace_sha256": "0fe9c5c604f6e809acb5376519445b209fd3f8a21d2cbdb7774c3871824d6dc0",
+    "freeze_sha256": "8c006e78beb7633b5d749726cd61f43a8229fecd852281aa53ea95f897caaefe",
+    "actual_proposals": [
+      {
+        "content": "本周团队午餐要求：给整个团队准备素食。",
+        "action": "create",
+        "kind": "episodic",
+        "scope": {
+          "time_limit": "2024-05-20T23:59:59Z",
+          "project": "team_lunch"
+        },
+        "basis": "user_statement"
+      }
+    ],
+    "actual_scope": {
+      "project": "team_lunch",
+      "time_limit": "2024-05-20T23:59:59Z"
+    },
+    "raw_input_sha256": "b8b9374db26537ce78230186e0dfca9520e4f5ac50b0b2fc1e365dfcae142549",
+    "offline_adjudication": "FAIL: source says only 本周, no explicit calendar anchor or date; writer invented expiry 2024-05-20T23:59:59Z. Actual trusted capture is 2026-09-30. Team scope/body retained but time applicability unsupported."
+  },
+  "earliest_break": "source -> formation proposal before reader delivery",
+  "reader_arms": {
+    "control": "NOT_RUN",
+    "candidate": "NOT_RUN"
+  },
+  "root_setup_error": {
+    "bank_freeze_path": "artifacts/v13-1-scope-r4/bank-freeze.json",
+    "bank_freeze_sha256": "75b6fe353abaab08da057653d24926c945255e31ee9edf62eb3576347f3e156d",
+    "description": "Root scripted precheck only required nonempty scope and initially wrote a too-broad correct-scope adjudication, then immediately inspected actual value and rejected the invented date before any reader HTTP. Original initial diagnostic/clones/zero-HTTP control prepare retained. This result supersedes that adjudication."
+  },
+  "falsification_applied": "Predeclared correct-scope gate failed, so consumption comparison is stopped, not repaired or retried into a pass.",
+  "next_minimal_discriminator": "Separate general temporal formation prompt: preserve relative user terms absent a legitimate explicit anchor; same public input/source/model/tools, no deterministic prose verifier or silent date backfill.",
+  "cost": {
+    "generation_requests_delta": 2,
+    "generation_tokens_delta": 2214,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "ledger_before_sha256": "276a2370b6ea185b733bc11f7fa8d333a6c7bd0a2b4ab9d3d1abee57115b795c",
+    "ledger_after_sha256": "566b67ae1e947ba1635a6db8e3c727b4d50af0cf3b5d664c9511e303c0d600a0",
+    "continuous_generation_requests": 6193,
+    "continuous_generation_tokens": 11472393,
+    "continuous_embedding_tokens": 416930,
+    "usage_reconciled": true,
+    "IO": "partial"
+  },
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE"
+}

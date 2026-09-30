@@ -1,0 +1,21 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_SHARED_FORMATION",
+  "diagnostic_only": true,
+  "cases": [
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "owner": "update-1-owner",
+      "messages": [
+        {
+          "message_id": "update-1-m1",
+          "session_id": "s1",
+          "content": "请保存我的饮品偏好：咖啡。",
+          "new_process_before": false
+        }
+      ]
+    }
+  ],
+  "policy": "One real baseline Host formation. The resulting question-free bank is copied once, identically, to both update instruction arms. Development diagnosis only."
+}

@@ -1,0 +1,156 @@
+{
+  "kind": "V13_1_DOCUMENT_PUBLICATION_PUBLIC_STORIES_DRAFT",
+  "status": "PUBLIC_TEXT_ONLY_NOT_RUNTIME_FROZEN_NO_MODEL_CALLS",
+  "application_workflow": "document_publication_v1",
+  "cases": [
+    {
+      "case_id": "doc-clean",
+      "owner": "doc-owner-0e40ef3507ada8b1e0d5770b",
+      "title": "设备借用说明",
+      "authorized_content": "设备借用须登记负责人；归还前清点配件。",
+      "authorized_audience": "设备管理员组",
+      "messages": [
+        {
+          "message_id": "doc-clean-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《设备借用说明》，正文必须完整保留为：“设备借用须登记负责人；归还前清点配件。”，受众仅限“设备管理员组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-clean-m1",
+          "session_id": "s1",
+          "content": "请查看《设备借用说明》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“设备借用须登记负责人；归还前清点配件。”，受众仍仅限“设备管理员组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-clean-m2",
+          "session_id": "s2",
+          "content": "请只查询《设备借用说明》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    },
+    {
+      "case_id": "doc-partial-w2",
+      "owner": "doc-owner-8051fde2b700639fe4a42f7e",
+      "title": "访客接待安排",
+      "authorized_content": "访客在前台登记后进入等候区；参观不开放实验区。",
+      "authorized_audience": "接待组",
+      "messages": [
+        {
+          "message_id": "doc-partial-w2-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《访客接待安排》，正文必须完整保留为：“访客在前台登记后进入等候区；参观不开放实验区。”，受众仅限“接待组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-partial-w2-m1",
+          "session_id": "s1",
+          "content": "请查看《访客接待安排》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“访客在前台登记后进入等候区；参观不开放实验区。”，受众仍仅限“接待组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-partial-w2-m2",
+          "session_id": "s2",
+          "content": "请只查询《访客接待安排》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    },
+    {
+      "case_id": "doc-known-no-effect",
+      "owner": "doc-owner-cc2bf36cd2a8b540bf201629",
+      "title": "材料领取说明",
+      "authorized_content": "领取人核对材料名称与数量；缺件时登记，不替代发放。",
+      "authorized_audience": "库房协作组",
+      "messages": [
+        {
+          "message_id": "doc-known-no-effect-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《材料领取说明》，正文必须完整保留为：“领取人核对材料名称与数量；缺件时登记，不替代发放。”，受众仅限“库房协作组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-known-no-effect-m1",
+          "session_id": "s1",
+          "content": "请查看《材料领取说明》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“领取人核对材料名称与数量；缺件时登记，不替代发放。”，受众仍仅限“库房协作组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-known-no-effect-m2",
+          "session_id": "s2",
+          "content": "请只查询《材料领取说明》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    },
+    {
+      "case_id": "doc-unknown-happened",
+      "owner": "doc-owner-2151847c2448b2b21d80eba8",
+      "title": "例会准备清单",
+      "authorized_content": "会前提交议题；会议记录只向项目成员开放。",
+      "authorized_audience": "项目成员组",
+      "messages": [
+        {
+          "message_id": "doc-unknown-happened-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《例会准备清单》，正文必须完整保留为：“会前提交议题；会议记录只向项目成员开放。”，受众仅限“项目成员组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-unknown-happened-m1",
+          "session_id": "s1",
+          "content": "请查看《例会准备清单》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“会前提交议题；会议记录只向项目成员开放。”，受众仍仅限“项目成员组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-unknown-happened-m2",
+          "session_id": "s2",
+          "content": "请只查询《例会准备清单》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    },
+    {
+      "case_id": "doc-unknown-none",
+      "owner": "doc-owner-1d8c4ded3e7c783e8c03a39d",
+      "title": "档案借阅规则",
+      "authorized_content": "借阅需登记归还日期；原件留在档案室，只带走获准副本。",
+      "authorized_audience": "档案管理员组",
+      "messages": [
+        {
+          "message_id": "doc-unknown-none-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《档案借阅规则》，正文必须完整保留为：“借阅需登记归还日期；原件留在档案室，只带走获准副本。”，受众仅限“档案管理员组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-unknown-none-m1",
+          "session_id": "s1",
+          "content": "请查看《档案借阅规则》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“借阅需登记归还日期；原件留在档案室，只带走获准副本。”，受众仍仅限“档案管理员组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-unknown-none-m2",
+          "session_id": "s2",
+          "content": "请只查询《档案借阅规则》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    },
+    {
+      "case_id": "doc-stale-approval",
+      "owner": "doc-owner-018f1e9f802140d6e3d31427",
+      "title": "场地使用通知",
+      "authorized_content": "进入前核对当日场地安排；非预约人员不能改变用途。",
+      "authorized_audience": "场地协调组",
+      "messages": [
+        {
+          "message_id": "doc-stale-approval-m0",
+          "session_id": "s1",
+          "content": "请为我整理并发布文档《场地使用通知》，正文必须完整保留为：“进入前核对当日场地安排；非预约人员不能改变用途。”，受众仅限“场地协调组”。先保存草稿，再审批完全相同的版本和正文，最后发布获审批的当前版本。可以查询这份文档来核对实际版本；不要发布其他正文、扩大受众或重复发布。请保存实际工具观察的事实，不把计划当成完成。"
+        },
+        {
+          "message_id": "doc-stale-approval-m1",
+          "session_id": "s1",
+          "content": "请查看《场地使用通知》的实际草稿版本、审批与发布状态，完成仍获授权的未完成部分，并按实际观察修订这份文档的操作记忆，保留旧版本观察。正文仍必须是：“进入前核对当日场地安排；非预约人员不能改变用途。”，受众仍仅限“场地协调组”。如当前正文与此不符，请恢复为此处指定的正文，再审批和发布这个新版本；不发布其他版本或重复发布。做不到的部分请如实说明。如果文稿不存在，可以按我最初给定的正文创建；已有同名文稿不要另建。"
+        },
+        {
+          "message_id": "doc-stale-approval-m2",
+          "session_id": "s2",
+          "content": "请只查询《场地使用通知》并读取已有的操作记忆，说明当前文档版本、审批和发布状态，并区分历史实际操作观察与当前查询。不要修改、审批或发布。历史回执未保存的部分请明确说未知。"
+        }
+      ]
+    }
+  ],
+  "authority_DTO": "pending exact source contract; will derive capabilities/args only from public title/content/audience; no expected end state or task plan delivered",
+  "driver_schedule": "separate Root driver file, never Host/writer; actual publication availability/edit events and crash boundaries",
+  "independence": "six deliberately scripted development stories on substantive draft/version/approval/publication workflow. Does not replace formal30 independent document tasks or12 new pilot conditions.",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

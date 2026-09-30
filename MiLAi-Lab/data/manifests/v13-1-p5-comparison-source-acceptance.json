@@ -1,0 +1,28 @@
+{
+  "status": "ROOT_SOURCE_CHECKED_ZERO_MODEL_HTTP",
+  "source_count": 207,
+  "source_closure_sha256": "c0c3896ffab51634c58f47fcf35a0e9d348fa9d858c305e675cdf4db7b7b2878",
+  "source_identity_artifact_sha256": "51bcb0474f3acbc6b409c5d40959ce267b8869298c9402e42a0bcc8ee8ed7231",
+  "current_byte_mismatches": [],
+  "check_logs_sha256": {
+    "p5-native-readback-final-mypy.txt": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "p5-native-readback-final-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "p5-native-readback-first-mypy.txt": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "p5-native-readback-first-pytest.txt": "16ba8a0af1081bc155a00a1ddfe12d7f73632a70524f70f8c91d21779ef51e20",
+    "p5-native-readback-first-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "p5-native-readback-sdk-final-pytest.txt": "9a1ef7b8379f9dc4081f85e974d1e67d5816d40e6e5e2d00f7b427386e73e6ca",
+    "p5-native-readback-sdk-first-pytest.txt": "dfc1e68e9d0da9dcb11201db918d2243c4d4ed6101d905a89e9e4bfdb1af3d2c",
+    "p5-native-readback-second-pytest.txt": "0c8df1cdfc6c234e3c0f7eb8d49e4ca3b081be3eceba97df69b3af203be68443"
+  },
+  "mechanical_evidence": "125 affected checks before finite native readback change; final15 comparison reader checks; targeted6 actual installed Mem0 SDK+MockHTTP after readback; Ruff/mypy and prior matrix passed. Neither native HTTP nor semantic success claimed.",
+  "native_update_contract": "same-owner actual BEFORE/AFTER snapshot/get/history; changed exact requested body plus new actual UPDATE old/new history; no_change excludesW3; unverifiable UNKNOWN/no retry; original proposals preserved",
+  "first_red_retained": true,
+  "original_ledger_sha256": "623549365186300918d05c938b81e73d80815507854af274c80908ab6a2b2394",
+  "generation_requests": 6762,
+  "generation_tokens": 12788273,
+  "embedding_tokens": 425835,
+  "later_controls_gap": "Official archived history can have original leading assistant/trailing user. New opt-in archive ingestion requested separately; native-readback evidence remains its earlier closure.",
+  "root_review_correction": "First aggregate digest check used compact separators, inconsistent with existing artifact_io.digest. All207 per-file checks had passed; corrected digest convention, no source/model changes.",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

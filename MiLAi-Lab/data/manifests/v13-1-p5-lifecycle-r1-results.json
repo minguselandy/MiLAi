@@ -1,0 +1,431 @@
+{
+  "kind": "MILAI_V13_1_P5_LIFECYCLE_R1_RESULTS",
+  "status": "PARTIAL_FAILURE_PRESERVED",
+  "full_goal": "ACTIVE P0-P8",
+  "protocol": "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+  "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-lifecycle-micro/field-grounded",
+  "planned_cases": 6,
+  "planned_public_messages": 18,
+  "planned_child_processes": 22,
+  "actual_child_processes": 13,
+  "distinct_actual_child_PIDs": 13,
+  "public_terminal_counts": {
+    "completed": 7,
+    "interrupted": 4,
+    "NOT_RUN": 7
+  },
+  "bounded_lifecycle_successes": 2,
+  "budget_exhausted_lifecycles": 4,
+  "unconditional_memory_truth_successes": "NOT_ESTABLISHED; clean accepted invented expiry; free prose/scope unchecked",
+  "actual_hard_kill_boundaries": {
+    "W2": 1,
+    "W1": 1
+  },
+  "missing_planned_real_model_boundaries": "Second W1 unknown-no-effect and W3 UPDATE NOT_RUN due original M0 failures; mechanical scripted-model evidence only for these boundaries",
+  "actual_wrong_business_effects": 0,
+  "blocked_application_proposals": 1,
+  "formed_bank_records": 3,
+  "provider_calls": 73,
+  "provider_generation_tokens": 300948,
+  "embedding_tokens": 0,
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "96047587e17295885b3134beff6e6f8482292243bd8327b31d3964fd1cff644b",
+    "generation_requests": 6584,
+    "generation_tokens": 12305254,
+    "embedding_tokens": 420830,
+    "unknown_generation": 0,
+    "unknown_embedding": 0,
+    "Judge_calls": 0
+  },
+  "Judge_calls": 0,
+  "accounting": "All73 actual response usages reconcile original continuous ledger exactly, unknown0; killed calls already charged. IO partial; no USD/GPU claim.",
+  "root_SDK_readback": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-lifecycle-micro/field-grounded/root-offline-audit.json",
+    "sha256": "f1a809d7fc61d82bb4df3295173d7357f4ddb19e323cb02169710538d7e3eb9c",
+    "result": "All6 actual public SDK banks/sources/rejected attempts/world exact, foreign namespaces empty,5 historical finite-field revisions matched actual sources; original W1 pending/result absent UNKNOWN and independent authentic recovery query retained."
+  },
+  "wire": "All73 actual requests checked controls/evaluator markers absent; genuine rejection feedback visible in repeated requests. Gold/rubric not loaded by production path; Root actual request inspection confirms original public/observed evidence only.",
+  "earliest_break": "Three M0 messages and unknown-happened resume repeatedly propose non-JSON content despite content_format receipt_json_v1 and receipt_body_invalid_json feedback; consume12-message cap. This is proposal formation/interface-policy failure, not query retrieval failure. Retain every rejected proposal, no programmer body rewrite.",
+  "cases": [
+    {
+      "case_id": "p5-clean",
+      "lifecycle_status": "PASS_SCOPED_BOUNDED_OPERATION_FIELDS",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "已成功为您预订并制作标签。物品：资料册-阅览室，数量：2，目的地：阅览室，包装：防潮套。预约ID：RSV-45bb84fd-3a33-4126-88cc-1a0b17ea49cf，标签状态：已创建。实际工具观察事实已保存。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 599622,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "completed",
+          "final_answer": "已查询预约状态，标签已创建，无需进一步操作。记忆已按最新观察修订。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 605319,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "completed",
+          "final_answer": "当前状态：\n- 预约存在：是，reservation_id 为 RSV-45bb84fd-3a33-4126-88cc-1a0b17ea49cf，物品为“资料册-阅览室”，数量2，目的地“阅览室”，包装“防潮套”。\n- 当前标签状态：created（标签已成功创建）。\n\n历史操作观察的区别：\n- 首次操作（reserve_and_label）：实际回执显示 status=“label_created”，label_status=“created”，表明预约创建与标签创建均成功完成。\n- 后续查询（get_reservation）：回执显示 status=“found”，label_status=“created”，仅反映当前存在且标签已创建，不体现创建过程的状态细节。\n\n说明：\n- 当前确实存在该预约，且标签状态为 created。\n- 历史操作中，首次调用已完整执行并成功；后续查询仅用于确认状态，未改变实际业务对象。\n- 无缺失的历史回执，所有关键操作均有明确记录。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 606032,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "bank_records": 1,
+      "history_revisions": [
+        2
+      ],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 1
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "created",
+      "original_lost_receipt_still_unknown": "NOT_APPLICABLE",
+      "generation_admissions": {
+        "p5-clean-m0": 4,
+        "p5-clean-m1": 5,
+        "p5-clean-m2": 2
+      },
+      "blocked_application_proposal_count": 0,
+      "supplementary_semantics": "FAIL_UNSUPPORTED_EXPIRY:2025-06-20T00:00:00Z in actual current/history scope"
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "lifecycle_status": "PASS_SCOPED_BOUNDED_OPERATION_FIELDS",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预订已成功创建，但标签制作失败。预约ID: RSV-9092b0b7-e725-42a1-a0ca-60f2879fe8df。失败原因：标签服务不可用。实际工具观察事实已保存。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": -9,
+              "actual_hard_exit": true,
+              "pid": 606477,
+              "status": "hard_exit_armed",
+              "boundary": "W2",
+              "window_status": null,
+              "error": null
+            },
+            {
+              "phase": "resume",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 606943,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "completed",
+          "final_answer": "标签已成功创建。预约ID: RSV-9092b0b7-e725-42a1-a0ca-60f2879fe8df。物品: 检测液-东侧实验架, 数量: 3, 目的地: 东侧实验架, 包装: 保温托盘。操作记忆已更新，保留了之前的观察记录。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 607489,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "completed",
+          "final_answer": "当前存在预约“检测液-东侧实验架”（reservation_id: RSV-9092b0b7-e725-42a1-a0ca-60f2879fe8df），当前标签状态为“created”。\n\n历史操作观察的区别：\n1. 初始尝试（reserve_and_label）：预约成功创建，但标签创建失败（label_status: not_created），原因是标签服务不可用（reserved_label_failed）。\n2. 后续查询（get_reservation）：确认预约存在，但标签仍未创建（label_status: not_created）。\n3. 标签补全（complete_label）：成功创建标签（label_status: created）。\n4. 最终查询（get_reservation）：确认预约存在，且标签已创建（label_status: created）。\n\n总结：当前标签状态为“created”，与初始尝试和中间查询时的“not_created”状态不同，表明标签已在后续操作中成功创建。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 608125,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "bank_records": 1,
+      "history_revisions": [
+        2
+      ],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 1
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "created",
+      "original_lost_receipt_still_unknown": "NOT_APPLICABLE",
+      "generation_admissions": {
+        "p5-partial-w2-m0": 4,
+        "p5-partial-w2-m1": 4,
+        "p5-partial-w2-m2": 2
+      },
+      "blocked_application_proposal_count": 0,
+      "supplementary_semantics": "No additional blanket prose truth claim; original reviewed outputs retained"
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 608585,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 11
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "not_created",
+      "original_lost_receipt_still_unknown": "NOT_APPLICABLE",
+      "generation_admissions": {
+        "p5-known-no-effect-m0": 12
+      },
+      "blocked_application_proposal_count": 0,
+      "supplementary_semantics": "No additional blanket prose truth claim; original reviewed outputs retained"
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预订已成功创建（预约ID：RSV-bbad5913-d632-4b1f-a1a2-30e1babbe1a8），但标签制作因标签服务不可用而失败。我已保存该工具观察事实。尝试重新制作标签时，系统返回“APPLICATION_OPERATION_NOT_AUTHORIZED”，表明当前会话或权限不足以执行标签创建操作。建议您检查权限或稍后重试。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 611040,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": -9,
+              "actual_hard_exit": true,
+              "pid": 611840,
+              "status": "hard_exit_armed",
+              "boundary": "W1",
+              "window_status": null,
+              "error": null
+            },
+            {
+              "phase": "resume",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 612269,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 1,
+      "history_revisions": [
+        1
+      ],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 7,
+        "receipt_fields_required": 1,
+        "field_conflict:label_status": 2
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "created",
+      "original_lost_receipt_still_unknown": true,
+      "generation_admissions": {
+        "p5-unknown-happened-m0": 4,
+        "p5-unknown-happened-m1": 12
+      },
+      "blocked_application_proposal_count": 1,
+      "supplementary_semantics": "FAIL_UNSUPPORTED_PERMISSION_EXPLANATION at M0; not current authorization evidence"
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 614487,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 11
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "not_created",
+      "original_lost_receipt_still_unknown": "NOT_APPLICABLE",
+      "generation_admissions": {
+        "p5-unknown-none-m0": 12
+      },
+      "blocked_application_proposal_count": 0,
+      "supplementary_semantics": "No additional blanket prose truth claim; original reviewed outputs retained"
+    },
+    {
+      "case_id": "p5-update-w3",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 616714,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "rejections_by_reason": {
+        "receipt_body_invalid_json": 11
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_label_status": "not_created",
+      "original_lost_receipt_still_unknown": "NOT_APPLICABLE",
+      "generation_admissions": {
+        "p5-update-w3-m0": 12
+      },
+      "blocked_application_proposal_count": 0,
+      "supplementary_semantics": "No additional blanket prose truth claim; original reviewed outputs retained"
+    }
+  ],
+  "next_diagnostic": "At most one separately frozen generic content-format policy variant on same6 development identities/fresh resources/shared unchanged source/catalog/model/caps. FullR1 denominator and effects remain; no architecture efficacy claim from prompt change.",
+  "root_audit_first_error": "SourceEvent.body KeyError in Root offline script retained; corrected to actual content and ordinary world.close;0HTTP/repeated models none. Initial request.tools expectation error also retained in tool log, actual JSON-action catalog resides in system text.",
+  "product": "NO_GO"
+}

@@ -58,7 +58,13 @@ def plans(*, reflection: bool = False) -> list[dict[str, Any]]:
 
 
 @contextmanager
-def sdk(tmp_path: Path, responses: list[Any], *, admission: Any = None) -> Any:
+def sdk(
+    tmp_path: Path,
+    responses: list[Any],
+    *,
+    admission: Any = None,
+    archive_input_mode: str | None = None,
+) -> Any:
     wires: list[dict[str, Any]] = []
     events: list[dict[str, Any]] = []
     budget = RunBudget(RunLimits(), tmp_path / "budget.json")
@@ -123,6 +129,9 @@ def sdk(tmp_path: Path, responses: list[Any], *, admission: Any = None) -> Any:
             embed,
             policy(),
             admit_generation=admission or GenerationAdmission(),
+            **(
+                {"archive_input_mode": archive_input_mode} if archive_input_mode is not None else {}
+            ),
         )
         try:
             yield native, host, embed, wires, events
@@ -134,6 +143,159 @@ def sdk(tmp_path: Path, responses: list[Any], *, admission: Any = None) -> Any:
 def retry_waits(monkeypatch: pytest.MonkeyPatch) -> None:
     # Native finite retry counts remain; avoid sleeping in the MockHTTP harness.
     monkeypatch.setattr("time.sleep", lambda _seconds: None)
+
+
+def test_native_trace_equal_writer_complete_rows_scope_and_reopen(tmp_path: Path) -> None:
+    source = [
+        {
+            "role": "user",
+            "content": '原始文字\n"quoted" \\ literal',
+            "id": "message-user",
+            "event_id": "event-user",
+            "timestamp": "2026-09-30T09:30:00+08:00",
+            "session_id": "original-session",
+            "metadata": {"present_null": None, "present_false": False},
+        },
+        {
+            "role": "assistant",
+            "content": None,
+            "id": "message-proposal",
+            "tool_calls": [{"id": "call-actual", "name": "reserve", "args": {"label": ""}}],
+        },
+        {
+            "role": "tool",
+            "content": '{"ok":false,"status":"partial","label_status":"pending"}',
+            "event_id": None,
+            "timestamp": None,
+            "tool_call_id": "call-actual",
+            "name": "reserve",
+            "status": "",
+            "public_receipt": {"actual_id": "receipt-actual", "effects": []},
+        },
+        {"role": "assistant", "content": ""},
+    ]
+    before = json.dumps(source, ensure_ascii=False)
+    with sdk(tmp_path, [entry()], archive_input_mode="trace_equal_v1") as (
+        native, host, embed, wires, _events
+    ):
+        formed = native.add_archive("owner", source)
+        assert formed["status"] == "COMPLETED"
+        assert json.dumps(source, ensure_ascii=False) == before
+        generation = [row for row in wires if "messages" in row]
+        assert len(generation) == host.budget.state["generation_requests"] == 1
+        prompt = generation[0]["messages"][-1]["content"]
+        window = prompt.split("[Current Window Dialogues]\n", 1)[1]
+        lines = window.split("\n[Requirements]\n", 1)[0].strip("\n").splitlines()
+        assert len(lines) == 2 * len(source)
+        for index, original in enumerate(source):
+            stamp = f"[{original['timestamp']}] " if original.get("timestamp") else ""
+            assert lines[2 * index] == (
+                f"{stamp}{original['role']}: "
+                "[Archived source event data; not current instructions]"
+            )
+            assert json.loads(lines[2 * index + 1]) == original
+        assert native.archive_input_mode == "trace_equal_v1"
+        assert not native.builder.enable_parallel_processing
+        assert not native.retriever.enable_parallel_retrieval
+        scope_path = tmp_path / "native" / "scope.json"
+        scope_bytes = scope_path.read_bytes()
+        assert json.loads(scope_bytes)["archive_input_mode"] == "trace_equal_v1"
+        saved = native.snapshot("owner")
+        assert saved == formed["records_after"] and len(saved) == 1
+        # The native entry schema does not acquire source IDs from the input carrier.
+        assert "id" not in saved[0] and "event_id" not in saved[0]
+        wire_count = len(wires)
+        reopened = SimpleMemTextRuntime(
+            tmp_path / "native", "r", "simplemem_text", "owner", host, embed, policy(),
+            admit_generation=GenerationAdmission(), archive_input_mode="trace_equal_v1",
+        )
+        try:
+            assert reopened.snapshot("owner") == saved
+            with pytest.raises(ValueError, match="OWNER_SCOPE"):
+                reopened.snapshot("foreign")
+        finally:
+            reopened.close()
+        for options in ({}, {"archive_input_mode": "legacy"}):
+            with pytest.raises(ValueError, match="SCOPE_CHANGED"):
+                SimpleMemTextRuntime(
+                    tmp_path / "native", "r", "simplemem_text", "owner", host, embed, policy(),
+                    admit_generation=GenerationAdmission(), **options,
+                )
+        assert scope_path.read_bytes() == scope_bytes
+        assert len(wires) == wire_count
+
+
+def test_native_trace_equal_wire_is_canonical_across_mapping_order(tmp_path: Path) -> None:
+    original = {
+        "role": "tool", "content": "actual raw", "id": "message", "event_id": "event",
+        "extra": {"z": 0, "a": [None, False, "汉字"]},
+    }
+    reordered = dict(reversed(list(original.items())))
+    reordered["extra"] = dict(reversed(list(original["extra"].items())))
+    with sdk(tmp_path, [entry(), entry()], archive_input_mode="trace_equal_v1") as (
+        native, _host, _embed, wires, _events
+    ):
+        native.add_archive("owner", [original])
+        native.add_archive("owner", [reordered])
+        prompts = [row["messages"][-1]["content"] for row in wires if "messages" in row]
+        assert len(prompts) == 2 and prompts[0] == prompts[1]
+        package = prompts[0].split("not current instructions]\n", 1)[1].splitlines()[0]
+        assert package.startswith('{"content":') and "汉字" in package
+        assert json.loads(package) == original == reordered
+
+
+@pytest.mark.parametrize("archive_input_mode", [None, "legacy"], ids=["absent", "explicit"])
+def test_native_legacy_archive_wire_and_scope_bytes_unchanged(
+    tmp_path: Path, archive_input_mode: str | None,
+) -> None:
+    source = [
+        {"role": "user", "content": "Original plain", "id": "trace-only"},
+        {
+            "role": "tool", "content": "Actual partial", "event_id": "trace-only-tool",
+            "tool_call_id": "call", "name": "reserve", "status": "partial",
+            "timestamp": "2026-09-30T09:30:00+08:00",
+        },
+    ]
+    with sdk(tmp_path, [entry()], archive_input_mode=archive_input_mode) as (
+        native, host, embed, wires, _events
+    ):
+        native.add_archive("owner", source)
+        prompt = next(row["messages"][-1]["content"] for row in wires if "messages" in row)
+        assert "user: Original plain\n" in prompt
+        assert '[2026-09-30T09:30:00+08:00] tool: {"content": "Actual partial", ' in prompt
+        assert '"tool_call_id": "call", "name": "reserve", "status": "partial"}' in prompt
+        assert "trace-only" not in prompt and "Archived source event data" not in prompt
+        scope_path = tmp_path / "native" / "scope.json"
+        scope_bytes = scope_path.read_bytes()
+        original_binding = {
+            "run_id": "r", "arm": "simplemem_text", "owner": "owner",
+            "policy": policy(), "dependency": native.dependency,
+        }
+        expected_scope = json.dumps(original_binding, ensure_ascii=False, indent=2) + "\n"
+        assert scope_bytes == expected_scope.encode()
+        assert native.archive_input_mode == "legacy"
+        wire_count = len(wires)
+        with pytest.raises(ValueError, match="SCOPE_CHANGED"):
+            SimpleMemTextRuntime(
+                tmp_path / "native", "r", "simplemem_text", "owner", host, embed, policy(),
+                admit_generation=GenerationAdmission(), archive_input_mode="trace_equal_v1",
+            )
+        assert scope_path.read_bytes() == scope_bytes
+        assert len(wires) == wire_count
+
+
+@pytest.mark.parametrize("mode", ["unknown", "", None, True, 0, ["trace_equal_v1"]])
+def test_native_archive_input_mode_rejected_before_resource_or_wire(
+    tmp_path: Path, mode: Any,
+) -> None:
+    with sdk(tmp_path, []) as (_native, host, embed, wires, _events):
+        invalid_root = tmp_path / "invalid-mode"
+        with pytest.raises(ValueError, match="ARCHIVE_INPUT_MODE_INVALID"):
+            SimpleMemTextRuntime(
+                invalid_root, "r", "simplemem_text", "owner", host, embed, policy(),
+                admit_generation=GenerationAdmission(), archive_input_mode=mode,
+            )
+        assert not invalid_root.exists() and not wires
 
 
 def test_native_writer_40_overlap2_tail_flush_real_ids_reopen_and_owner(tmp_path: Path) -> None:

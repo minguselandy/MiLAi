@@ -1,0 +1,23 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_FIXED_BANK_READER_DIAGNOSTIC",
+  "diagnostic_only": true,
+  "not_a_new_normal_check": true,
+  "source_fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "cases": [
+    {
+      "case_id": "recall-1",
+      "category": "recall",
+      "owner": "recall-1-owner",
+      "messages": [
+        {
+          "message_id": "recall-1-m3",
+          "session_id": "s3",
+          "content": "我之前告诉过你偏好的通勤方式是什么？",
+          "new_process_before": true
+        }
+      ]
+    }
+  ],
+  "policy": "Same saved bank from R1; same public query in a fresh process/session; one retrieval implementation variable; no reformation of the bank; not unseen evaluation."
+}

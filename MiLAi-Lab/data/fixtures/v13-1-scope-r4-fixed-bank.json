@@ -1,0 +1,22 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_SCOPE_BANK_CONSUMPTION",
+  "diagnostic_only": true,
+  "not_a_new_normal_check": true,
+  "cases": [
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "owner": "scope-1-owner",
+      "messages": [
+        {
+          "message_id": "scope-1-m2",
+          "session_id": "s2",
+          "content": "下一次给我个人安排晚餐时，你是否知道我长期坚持素食？",
+          "new_process_before": true
+        }
+      ]
+    }
+  ],
+  "policy": "Same actually formed scoped bank and original public question; fresh process/session. One general evidence/scope consumption instruction variable."
+}

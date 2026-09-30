@@ -1,0 +1,164 @@
+{
+  "kind": "MILAI_V13_1_P2_HISTORY_DELIVERY_RESULTS",
+  "status": "FAIL_OR_UNKNOWN_NO_DELIVERY",
+  "planned_legs": 4,
+  "executed_legs": 4,
+  "distinct_processes": 4,
+  "generation_requests": 8,
+  "generation_tokens": 13998,
+  "embedding_tokens": 0,
+  "ledger_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 6443,
+    "generation": {
+      "charged_tokens": 11894566,
+      "known_tokens": 11894566,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 420830,
+      "known_tokens": 420830,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_after_sha256": "d942baca533c3380ea275f8d1733943f64a6e0a3a666af8fd7bd08a602f9928f",
+  "cases": [
+    {
+      "mode": "ref_only",
+      "condition": "control",
+      "run_root": "artifacts/v13-1-p2-history-delivery/control/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "input_freeze_sha256": "e4228b8edf92c2fe0cf75f31a608470c7817c090c0efceb6e25f1d6b03a7e638",
+      "prompt_sha256": "36b9498479ef73da78bc5c6a58e7d8d66f1dd5b9f3f14749e8e9526c2b36f010",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 245651,
+      "status": "completed",
+      "historical_memory_delivered": false,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "prompt_and_memory_catalog_visible_in_actual_request": true,
+      "bank_and_world_unchanged": true,
+      "outcome": "FAIL_HISTORICAL_RESULT",
+      "final_answer": "预约存在。预约ID为 RSV-59d78994-c19a-434a-b262-a19451a07607，物品为“检测样本-北侧实验台”，数量为3，目的地为“北侧实验台”，包装方式为“保温隔层”。当前标签状态为“not_created”（未创建）。前一次操作（即本次查询）成功找到了该预约记录。",
+      "generation_requests": 2,
+      "generation_tokens": 3387,
+      "terminal_sha256": "4f1e28b61d20c8630bfafbb329cde9ee957647afcaeae2f63af9163c101fb0b4",
+      "trace_sha256": "0b55481a51b9cd840f6959db4fe22027c7af862297022e7fbb6d65a3488d60ce"
+    },
+    {
+      "mode": "ref_only",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-history-delivery/candidate/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "input_freeze_sha256": "657d55a37c9405eb43277747e7c5c708f1ccc9db7f3aafbe56a9524c0513c8ae",
+      "prompt_sha256": "7c6b64d863ec82152341d67e7bd864a2841225e08da25c4be21ec05596dbbabd",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 246083,
+      "status": "completed",
+      "historical_memory_delivered": false,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "prompt_and_memory_catalog_visible_in_actual_request": true,
+      "bank_and_world_unchanged": true,
+      "outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "final_answer": "查询结果显示：\n1. **预约存在**：是的，存在一笔针对“检测样本-北侧实验台”的预约，预约ID为 RSV-59d78994-c19a-434a-b262-a19451a07607。\n2. **标签状态**：当前标签状态为 **not_created**（未创建）。\n3. **前一次操作结果**：根据当前查询结果，该预约已建立，但标签尚未生成。由于仅执行了查询操作，未进行新的预订或标签创建，因此没有新的操作结果。若此前有过标签创建尝试，当前状态显示该尝试未完成或失败（具体历史操作细节需结合日志，但当前状态确认为未创建标签）。",
+      "generation_requests": 2,
+      "generation_tokens": 3609,
+      "terminal_sha256": "17dfaa54bffbe18b215b56ca23d2b228fbaea35fc93b9d9f55ac241d0fe46018",
+      "trace_sha256": "98cea9a0a5e7bfb8024a1727f32382a69781e5414b1c0d1afda9fcf063baac87"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "control",
+      "run_root": "artifacts/v13-1-p2-history-delivery/control/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "input_freeze_sha256": "ade0a70b3f65af60091708548a66aa94cd40e3136afe3f0c8223ad047fdce435",
+      "prompt_sha256": "36b9498479ef73da78bc5c6a58e7d8d66f1dd5b9f3f14749e8e9526c2b36f010",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 246438,
+      "status": "completed",
+      "historical_memory_delivered": false,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "prompt_and_memory_catalog_visible_in_actual_request": true,
+      "bank_and_world_unchanged": true,
+      "outcome": "FAIL_HISTORICAL_RESULT",
+      "final_answer": "预约存在。预约ID为 RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d，物品为“检测样本-北侧实验台”，数量为3，目的地为“北侧实验台”，包装方式为“保温隔层”。当前标签状态为“not_created”（未创建）。前一次操作（即本次查询）成功找到了该预约记录。",
+      "generation_requests": 2,
+      "generation_tokens": 3390,
+      "terminal_sha256": "2b4eeb16cee837b5793a1c70de28222ea8db3fe125feb0f13b28256bb05462d3",
+      "trace_sha256": "d81d8e8b083a6eaca0255b0c6b069646519bd6b11f1dbe80c093d6c7cc83ddb2"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-history-delivery/candidate/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "input_freeze_sha256": "90f121e83466e01fffdb1e4af21b92427fcad379067dfabd69afed4f98eede53",
+      "prompt_sha256": "7c6b64d863ec82152341d67e7bd864a2841225e08da25c4be21ec05596dbbabd",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 246951,
+      "status": "completed",
+      "historical_memory_delivered": false,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "prompt_and_memory_catalog_visible_in_actual_request": true,
+      "bank_and_world_unchanged": true,
+      "outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "final_answer": "查询结果显示：\n1. **预约存在**：当前存在一笔针对“检测样本-北侧实验台”的预约，预约ID为 `RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d`，数量为3，目的地为北侧实验台，包装方式为保温隔层。\n2. **标签状态**：标签尚未创建（`label_status: not_created`）。\n3. **前一次操作结果**：根据当前查询结果，该预约处于已预订但未打标签的状态。由于工具仅返回当前状态，无法直接回溯前一次具体操作（如是否曾尝试打标失败），但当前明确显示标签未生成。",
+      "generation_requests": 2,
+      "generation_tokens": 3612,
+      "terminal_sha256": "9f37a59c6a8a3a1733590835acf6402121b3709f07ed0a705670bd6186301271",
+      "trace_sha256": "3597d0f06460ce3b536363f948feb53aa66625b044c89ce9323523ee24b1543a"
+    }
+  ],
+  "claim": "Generic evidence instruction did not trigger memory query. Candidate uncertainty is more honest but original requested historical outcome unresolved. No bank repair/guard gain/Attention admission.",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

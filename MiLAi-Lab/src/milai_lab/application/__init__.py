@@ -5,5 +5,7 @@ APPLICATION_SOURCE_FILES = (
     "src/milai_lab/application/journal.py",
     "src/milai_lab/application/world.py",
     "src/milai_lab/application/tools.py",
+    "src/milai_lab/application/refs.py",
     "src/milai_lab/application/recovery.py",
+    "src/milai_lab/application/document_publication.py",
 )

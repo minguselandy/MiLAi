@@ -1,0 +1,100 @@
+{
+  "kind": "MILAI_V13_1_P2_EXPLICIT_HISTORY_QUERY_RESULTS",
+  "status": "UNKNOWN_NO_DELIVERY",
+  "planned_legs": 2,
+  "completed_legs": 2,
+  "distinct_processes": 2,
+  "cases": [
+    {
+      "mode": "ref_only",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-explicit-history-query/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "input_freeze_sha256": "c912411643b41521b9ab079b194c4d0afaebfa4c3a54f3b9db460d8d33ca7c87",
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "prompt_sha256": "ab3a03a220470f71f6f9a8dae423698debddab34da783e6c0615724f2655cf60",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 262280,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "historical_memory_delivered": false,
+      "source_relation_events": 0,
+      "actual_prompt_catalog_visible": true,
+      "bank_world_unchanged": true,
+      "outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "current_state_answer": "PASS_SCOPED",
+      "final_answer": "查询结果显示：\n1. **预约存在**：是的，存在一笔针对“检测样本-北侧实验台”的预约，预约ID为 RSV-59d78994-c19a-434a-b262-a19451a07607，数量为3，目的地为北侧实验台，包装方式为保温隔层。\n2. **标签状态**：当前标签状态为 `not_created`，即尚未创建标签。\n3. **前一次操作结果**：根据当前查询结果，该预约已存在但标签未创建。由于工具仅返回当前状态，无法直接确认前一次具体操作（如是否曾尝试创建标签但失败），但当前状态表明标签服务尚未成功生成标签。",
+      "generation_requests": 2,
+      "generation_tokens": 3745,
+      "terminal_sha256": "a0576ca7d6578963b275d54b67da55756d9da2788d28af228d145498ea9f36e9",
+      "trace_sha256": "ea8354daf12606b74282ce3b49c1221c2987b2f6e709adbfbf2affb551abca49"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-explicit-history-query/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "input_freeze_sha256": "b63889d0a4ff07f3588a98bb678da57e51caa44e9561c5c5da0fcde5f6179029",
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "prompt_sha256": "ab3a03a220470f71f6f9a8dae423698debddab34da783e6c0615724f2655cf60",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d",
+      "process_id": 262805,
+      "tool_names": [
+        "get_reservation"
+      ],
+      "historical_memory_delivered": false,
+      "source_relation_events": 0,
+      "actual_prompt_catalog_visible": true,
+      "bank_world_unchanged": true,
+      "outcome": "UNKNOWN_HISTORICAL_RESULT",
+      "current_state_answer": "PASS_SCOPED",
+      "final_answer": "查询结果显示：\n1. **预约存在**：当前存在一笔针对“检测样本-北侧实验台”的预约，预约ID为 RSV-dea3cc05-5d0d-4a32-9283-71cc0326407d。\n2. **标签状态**：标签尚未创建（label_status: not_created）。\n3. **前一次操作结果**：根据当前查询结果，该预约已建立，但标签服务尚未成功生成标签。",
+      "generation_requests": 2,
+      "generation_tokens": 3696,
+      "terminal_sha256": "69398197a76f36c56d70d5fd357149dd1e41665199b45f63fbd1769a17addd23",
+      "trace_sha256": "d0c3f6ce766d53ebd2f5d0582f1dc63761dba27881fc1bc81225c6289d73f4d6"
+    }
+  ],
+  "generation_requests": 4,
+  "generation_tokens": 7441,
+  "embedding_tokens": 0,
+  "ledger_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 6447,
+    "generation": {
+      "charged_tokens": 11902007,
+      "known_tokens": 11902007,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 420830,
+      "known_tokens": 420830,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_after_sha256": "6379511737f91cf0d44b556bcbac30fe59a0e1829d1c8038d2a00198033577f0",
+  "claim": "Even explicit generic search_memory instruction did not elicit retrieval. No claim of broken lexical query or proven memory consumption/guard improvement; first break remains autonomous query choice. Original6diagnostic attempts retained, not retry-into-pass. Attention not admitted.",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

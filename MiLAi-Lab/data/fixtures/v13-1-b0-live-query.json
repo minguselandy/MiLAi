@@ -1,0 +1,25 @@
+{
+  "kind": "MILAI_V13_1_B0_CURRENT_PUBLIC_QUERY",
+  "owner": "u-2af1c4d4582d16ad78f59a57",
+  "run_id": "v13-b0-current-query",
+  "episode_id": "current-only",
+  "message_id": "v13-b0-current-query-user-1",
+  "question": "请只查看我的实际业务状态：物品完整引用“资料册-阅览室”，数量2，目的地“阅览室”，包装“防潮套”。请说明预约是否存在和当前标签状态，不推断以前的执行结果，不预订或创建标签。",
+  "application_binding": {
+    "task_id": "v13-b0-current-query",
+    "operations": [
+      {
+        "operation_id": "inspect",
+        "tool": "get_reservation",
+        "args": {"item_key": "资料册-阅览室"},
+        "target": {
+          "item_key": "资料册-阅览室",
+          "quantity": 2,
+          "destination": "阅览室",
+          "packing": "防潮套"
+        },
+        "retry": "never"
+      }
+    ]
+  }
+}

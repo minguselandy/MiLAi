@@ -1,0 +1,31 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN",
+  "use": "Four public development cases, two grounding arms same model and generic public contract; not formal or research gain sample.",
+  "cases": [
+    {
+      "case_id": "receipt-partial-1",
+      "category": "receipt_formation",
+      "owner": "u-fbf64aad3989c98226a70033",
+      "messages": [
+        {
+          "message_id": "m-1d2e7b48a764ec02b1a8bec7",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“检测样本-北侧实验台”，数量3，目的地“北侧实验台”，包装要求“保温隔层”。请按实际工具结果保存这笔操作的事实，方便下一次查找。",
+          "new_process_before": false
+        },
+        {
+          "message_id": "p2-history-contract-query",
+          "session_id": "s3",
+          "content": "请查询“检测样本-北侧实验台”这笔预约的实际状态，并说明预约是否存在、标签状态以及前一次操作的结果。只查询和说明，不重复预订，也不创建新标签。",
+          "new_process_before": true
+        }
+      ],
+      "initial_world": {
+        "label_available": false
+      }
+    }
+  ],
+  "study_kind": "MILAI_V13_1_P2_HISTORY_DELIVERY_PROMPT_DIAGNOSTIC",
+  "schema_note": "Existing public Agent fixture schema reused. Two partial business cases are P2 diagnostics, not P1 normal24 gate."
+}

@@ -4,6 +4,7 @@
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
+| v13.1 可用性优先开发与实验 | **ACTIVE**，正常门槛22/24；等额配置开发48题对完成，生命周期45/60条尝试、30条完成消息；文稿实跑未开始，完整P0–P8未完成 | [当前实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |
 | R1 标签修复 | 局部输出证据 | [L1](MILAI_REPAIR_V10_R1_L1_RESULTS_20260929.md)、[L2](MILAI_REPAIR_V10_R1_L2_RESULTS_20260929.md) |
@@ -57,3 +58,17 @@ v10 新增 153 次 generation、485,745 generation tokens、128 embedding tokens
 本页替换了长期累积的旧“当前状态”叙述，原文保留在
 [固定 Git 快照](https://github.com/minguselandy/MiLAi/blob/091dcbd48dc1800e5b8cc7f0ee3066dc00a76311/MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)。
 [结果索引](RESULTS_INDEX.md)和各历史报告继续保留原结论；它们不授权恢复已暂停的实验。
+
+当前v13.1连续账本累计6435generation/11880568generation tokens/420830embedding tokens，unknown0；
+本轮外部微型新增48generation/88014tokens/3900embedding，首次Mem0 setup失败与两个回执消费
+未通过都保留。此状态覆盖上文v10暂停时的历史费用快照，不恢复其历史实验。
+
+固定material公共合同诊断4generation/4496tokens：两臂业务状态消费改善，但Mem0额外虚构
+来源引文，仍失败。原micro5/6结论保留；[P2实际16消息](V13_1_P2_TYPED_RECEIPTS.md)完成8条显式字段形成；后续两臂各2/4符合预定说明，历史未检索送达，Ref另有2条虚构绝对scope。完整P2仍PARTIAL，无全段prose验证承诺。
+
+P2历史送达提示诊断4+2腿仍无memory query，原失败/unknown保留，Attention不准入。新增合计12generation/21439tokens；最新连续6447generation/11902007tokens/420830embedding，unknown0。[直接证据](V13_1_P2_TYPED_RECEIPTS.md)。
+
+[P4已曝光开发2×2](V13_1_P4_TYPE_SCOPE.md)首轮因素混淆保留，R2机械分离成立但类型独立收益未证明。Flat/Type-only/Flat+Scope/Type+Scope task分别2/2/3/2（各4），后者另1UNKNOWN；更广来源归属错误单列。最新连续6511generation/12004306tokens/420830embedding，unknown0。
+
+2026-09-30本次发布快照：原连续账本7461次generation／15742294 generation tokens／538303 embedding tokens，unknown0；v13.1新增1316次／4335208生成tokens／121373嵌入tokens，包含48次同族诊断Judge。上文计数均为历史阶段快照。
+[当前总结](V13_1_EXPERIMENT_STATUS_20260930.md)与[机器快照](../data/manifests/v13-1-experiment-status-20260930.json)记录实际分母、失败、成本、来源／服务缺口和未执行项。Luna仅整理总结，不构成独立Judge或第二实验模型家族；完整目标仍ACTIVE，Product仍NO_GO。

@@ -1,0 +1,949 @@
+{
+  "kind": "MILAI_V13_1_FULL_REQUIREMENTS",
+  "plan_sha256": "e67cc5253cbe6967d935cc5c9b9f4453c731665d1937d9049e323c10e54dc9ca",
+  "full_goal_preserved": true,
+  "completion_rule": "Every explicit requirement must be proved by direct current-state evidence; engineering subset is not whole-plan completion. Conditional gates require an evidence-based admission decision.",
+  "status": "ACTIVE",
+  "requirements": [
+    {
+      "id": "P0-identity",
+      "stage": "P0",
+      "plan_section": "0,6.3,8",
+      "requirement": "Freeze actual main, deployed configuration, template/tokenizer/model/dependency identity",
+      "authoritative_evidence_required": "live service probe, source/dependency hashes, complete source freeze",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p0-freeze.json",
+        "data/manifests/v13-1-baseline-audit.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P0-exposure",
+      "stage": "P0",
+      "plan_section": "6,7,9",
+      "requirement": "Union historical exposure; test split at original source/history group level",
+      "authoritative_evidence_required": "conservative registry + generated grouped selection excluding all historical exposure",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-source-exposure.json",
+        "data/manifests/v13-1-memsyco-source-availability.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P0-accounting",
+      "stage": "P0",
+      "plan_section": "12",
+      "requirement": "Preserve original continuous ledger; account every actual attempt and unknown cost",
+      "authoritative_evidence_required": "original ledger hash + all requests reconciled to live ledger",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p0-freeze.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "data/manifests/v13-1-retrieval-r2-results.json",
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-scope-r4-results.json",
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json",
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P0-claims",
+      "stage": "P0",
+      "plan_section": "1.3,8.2",
+      "requirement": "Engineering/usability/research/product status remain distinct",
+      "authoritative_evidence_required": "gate evidence and explicit report",
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_1_EXECUTION.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-six",
+      "stage": "P1",
+      "plan_section": "2,16.2",
+      "requirement": "Six natural save/read/update/scope/continue/restart E2E development stories",
+      "authoritative_evidence_required": "actual model/tool traces, real stores and process exit/reopen",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-retrieval-r2-results.json",
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-24",
+      "stage": "P1",
+      "plan_section": "2,8.2",
+      "requirement": "24 fixed normal checks, four per capability; >=22 successful, no owner leak/false saved receipt",
+      "authoritative_evidence_required": "all planned24 independent case receipts and offline evaluation",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-save",
+      "stage": "P1",
+      "plan_section": "2,3.6",
+      "requirement": "Save receipt reflects actual durable effect; distinguish raw capture/pending semantic formation",
+      "authoritative_evidence_required": "actual store readback after process restart, injected failed write",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-find",
+      "stage": "P1",
+      "plan_section": "2",
+      "requirement": "New-session retrieval does not equate absent memory with nonexistent world",
+      "authoritative_evidence_required": "real new-session recall and lawful lookup trace",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-retrieval-r2-results.json",
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-update",
+      "stage": "P1",
+      "plan_section": "2,3.7",
+      "requirement": "Preference revision retains historical version/conflict evidence",
+      "authoritative_evidence_required": "versioned store readback and historical query",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-scope",
+      "stage": "P1",
+      "plan_section": "2,3.3",
+      "requirement": "One-time/group request does not silently become long-term personal preference",
+      "authoritative_evidence_required": "fixed scope user histories and complete use outcomes",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-scope-r4-results.json",
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-continue",
+      "stage": "P1",
+      "plan_section": "2",
+      "requirement": "Continue remaining steps without redoing confirmed action; unknown first discovery",
+      "authoritative_evidence_required": "world actions plus original proposal and query traces",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-restart",
+      "stage": "P1",
+      "plan_section": "2",
+      "requirement": "Terminate actual process then reconnect same resource; do not use Python memory as proof",
+      "authoritative_evidence_required": "exit codes, process identities and persistent readback",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-explain",
+      "stage": "P1",
+      "plan_section": "2",
+      "requirement": "Show sources/versions/pending/rejection without user-generated UUID/internal ref",
+      "authoritative_evidence_required": "natural requests and authentic tool receipts",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P1-degrade",
+      "stage": "P1",
+      "plan_section": "2",
+      "requirement": "Embedding/extraction outage: raw event persists and explicit raw/keyword fallback",
+      "authoritative_evidence_required": "actual outage behavior and new-process readback",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-source",
+      "stage": "P2",
+      "plan_section": "3.2",
+      "requirement": "Program-issued SourceEvent includes owner/session/role/hash/observed time; cannot be invented by model",
+      "authoritative_evidence_required": "source capture from actual message and ref rejection tests",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-object",
+      "stage": "P2",
+      "plan_section": "3.2,3.5",
+      "requirement": "VerifiedObjectRef originates in actual receipt/lookup; owner, existence, authorization,current state separate",
+      "authoritative_evidence_required": "issued ref trace and cross-owner/nonexistent/stale tests",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-contract",
+      "stage": "P2",
+      "plan_section": "3.2",
+      "requirement": "Optional metadata within one logical MemoryService; legacy content-only is source-unknown",
+      "authoritative_evidence_required": "unchanged default/legacy read and opt-in isolated store validation",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-dimensions",
+      "stage": "P2",
+      "plan_section": "3.3",
+      "requirement": "kind,scope,basis remain distinct; user claim is not observed business state",
+      "authoritative_evidence_required": "typed proposal/state contract and user-assertion counterexample",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-refonly",
+      "stage": "P2",
+      "plan_section": "3.4,16.3",
+      "requirement": "Ref-only independent mode checks source/object legality without semantic-support claims",
+      "authoritative_evidence_required": "same true-ref wrong-field proposal visibly accepted under ref-only boundary",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-fields",
+      "stage": "P2",
+      "plan_section": "3.4,16.4",
+      "requirement": "Field-grounded two public-schema fields; deterministic support path/value match; no gold/no prose verifier",
+      "authoritative_evidence_required": "actual receipt field mappings and false supported-field rejection",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-proposals",
+      "stage": "P2",
+      "plan_section": "3.4",
+      "requirement": "Preserve raw proposal and conflict receipt; never silently fix free-text answer",
+      "authoritative_evidence_required": "proposal trace + stored values + reader raw answer",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-time",
+      "stage": "P2",
+      "plan_section": "3.5",
+      "requirement": "Historical observations retained; current actions discover/version-check; no invented relative-date anchor",
+      "authoritative_evidence_required": "stale/historical/Friday contract tests",
+      "status": "NOT_VERIFIED",
+      "evidence": [
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-cadence",
+      "stage": "P2",
+      "plan_section": "3.6,6.2",
+      "requirement": "Raw capture separate from semantic writer; additional matched formation independently frozen/costed",
+      "authoritative_evidence_required": "cadence declarations and all generation records",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P2-mechanics",
+      "stage": "P2",
+      "plan_section": "8.1",
+      "requirement": "Missing/cross-owner/stale refs, wrong fields, duplicate receipts, revision conflicts, partial/unknown/restart/fallback/budget/HTTP",
+      "authoritative_evidence_required": "narrow unit/SDK-persistence/real-HTTP mechanical verification",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-engineering-results.json",
+        "data/manifests/v13-1-d0-six-stories-r1-results.json",
+        "docs/V13_1_D0_R1_RESULTS.md",
+        "data/manifests/v13-1-p2-typed-receipts-results.json",
+        "docs/V13_1_P2_TYPED_RECEIPTS.md",
+        "data/manifests/v13-1-p2-history-delivery-results.json",
+        "data/manifests/v13-1-p2-explicit-history-query-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P3-simple",
+      "stage": "P3",
+      "plan_section": "4.1",
+      "requirement": "B0-B6 faithfully implemented; strong hybrid RAG fixed fusion, rolling real summaries, full history no silent truncation",
+      "authoritative_evidence_required": "backend implementations + fixed micro acceptance and candidate configuration ledger",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p3-controls-source-acceptance.json",
+        "data/manifests/v13-1-p3-controls-micro-protocol.json",
+        "data/manifests/v13-1-p3-controls-micro-results.json",
+        "data/manifests/v13-1-b0-live-query-protocol.json",
+        "data/manifests/v13-1-b0-live-query-results.json",
+        "docs/V13_1_P3_CONTROLS.md"
+      ],
+      "conditional": false,
+      "qualification": "All7 core APIs,238 fresh processes,42 SDK reopens, B0 actual current tools validated. Old HTTP counter bug retained and trace/ledger reconciled. B0/B6 historical limitations UNKNOWN not passes. Default parameters only; tuning, formal runtime/source counter correction remain."
+    },
+    {
+      "id": "P3-external",
+      "stage": "P3",
+      "plan_section": "4.2",
+      "requirement": "Mem0 OSS and SimpleMem-Text actual installations, persistence, capacity, isolation, retries/costs verified",
+      "authoritative_evidence_required": "upstream/installed/source identity and completed six micro checks per method",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-baseline-audit.json",
+        "data/manifests/v13-1-p3-baseline-micro-protocol.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P3-wire",
+      "stage": "P3",
+      "plan_section": "4.3",
+      "requirement": "Trace actual runner ingestion retaining roles/IDs/tool receipts; no untracked extraction change",
+      "authoritative_evidence_required": "actual emitted wire requests from fixed micro run",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-baseline-audit.json",
+        "data/manifests/v13-1-p3-baseline-micro-protocol.json",
+        "docs/V13_1_P3_BASELINE_MICRO.md",
+        "data/manifests/v13-1-p3-baseline-micro-results.json",
+        "data/manifests/v13-1-p3-partial-contract-protocol.json",
+        "data/manifests/v13-1-p3-partial-contract-results.json"
+      ],
+      "conditional": false,
+      "qualification": "All14 completed actual writer archives contain full original roles/IDs/tool body and exclude future question. Actual native records retain0original SourceEvent IDs; receipt role/factual consumption limits disclosed. Scoped wire preservation only."
+    },
+    {
+      "id": "P3-nearest",
+      "stage": "P3",
+      "plan_section": "4.2,5",
+      "requirement": "Closest-neighbor Hindsight/HiMem matched to actual claimed contribution or narrow unsupported claim",
+      "authoritative_evidence_required": "primary-source audit and faithful small slice or explicit limitation",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "docs/V13_1_NEAREST_PRIOR.md",
+        "data/manifests/v13-1-nearest-work-readonly-audit.json",
+        "docs/V13_1_NEAREST_WORK_BOUNDARIES.md"
+      ],
+      "conditional": false,
+      "qualification": "Plan4.2/5 allowed claim-boundary route only: primary papers/local exact source checked; faithful runtime unavailable/not reproduced explicitly; no novelty/superiority from type names or provenance/evidence-vs-inference. Hindsight retain/recall-only would not imply full reflect, HiMem missing OpenSearch/dimension adaptation disclosed. Wider future claims still require faithful targeted comparison."
+    },
+    {
+      "id": "P3-fair",
+      "stage": "P3",
+      "plan_section": "4.1,6",
+      "requirement": "B2/B3/Ours equal reasonable development config candidates; common evidence/budget/guards; native vs matched tables separate",
+      "authoritative_evidence_required": "pre-results configuration and execution contracts",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-equal-config-development-selection.json",
+        "data/manifests/v13-1-equal-config-development-protocol.json",
+        "data/manifests/v13-1-equal-config-development-results.json",
+        "docs/V13_1_EQUAL_CONFIG_DEVELOPMENT.md"
+      ],
+      "conditional": false,
+      "qualification": "Equal two actual configurations on the same eight already exposed source groups:48 pairs/96processes/48SDKreopens;44 actual rolling summaries; canonical native reader shared; originalledgerall costs. Same-family local diagnostic nativeJudge48 only, no official/independent/leaderboard/inferential effect claim. Select actualB2a/B3a/Scopes12a by preregistered per-track development rule/cost tie. Formation cadence differs as declared; public Scope has no operational grounding/auth/revision guarantee. Formal/pilot method full adapters and nearest-neighbor obligations still pending."
+    },
+    {
+      "id": "P4-factor",
+      "stage": "P4",
+      "plan_section": "10.E-S",
+      "requirement": "Flat,Type-only,Flat+Scope,Type+Scope same histories/model/cadence/material budget",
+      "authoritative_evidence_required": "2x2 freeze and all four results with source-only scope formation",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P4-diagnose",
+      "stage": "P4",
+      "plan_section": "8.P4,9.D1",
+      "requirement": "MemSyco exposed development diagnostics first earliest break, no future question/gold in formation",
+      "authoritative_evidence_required": "question-free formation inputs and failure chain report",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p4-type-scope-r1-results.json",
+        "data/manifests/v13-1-p4-type-scope-r2-results.json",
+        "docs/V13_1_P4_TYPE_SCOPE.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P5-outcomes",
+      "stage": "P5",
+      "plan_section": "3.7",
+      "requirement": "confirmed/partial/known-no-effect/unknown separated; never blind-retry unknown mutation",
+      "authoritative_evidence_required": "public discovery plus side-effect journal and original failure records",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
+      ],
+      "conditional": false,
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
+    },
+    {
+      "id": "P5-crash",
+      "stage": "P5",
+      "plan_section": "3.7",
+      "requirement": "Three windows: success before durable receipt; receipt before memory revision; revision before response",
+      "authoritative_evidence_required": "three real crash/restart traces on identical durable backend",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
+      ],
+      "conditional": false,
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
+    },
+    {
+      "id": "P5-idempotent",
+      "stage": "P5",
+      "plan_section": "3.7",
+      "requirement": "Duplicate real receipt no duplicate fact; CAS/atomic commit and tested concurrency limits",
+      "authoritative_evidence_required": "SDK readbacks/conflict tests/idempotent revision evidence",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-1-p5-lifecycle-micro-protocol.json",
+        "data/manifests/v13-1-p5-lifecycle-r1-results.json",
+        "docs/V13_1_P5_LIFECYCLE.md",
+        "data/manifests/v13-1-p5-lifecycle-r2-results.json",
+        "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+        "data/manifests/v13-1-p5-w3-mechanism-results.json"
+      ],
+      "conditional": false,
+      "qualification": "Mechanical primitive only on one workflow with cooperating serial native SQLite. ActualR2 two W1effectstates plusW2; separateactualunmodifiedR2clean clone W3realUPDATE3/SIGKILL/replay3. Originalsix-case lifecycle1/6 scoped success inR2, R1/R2failedW3case unchanged; fullP5agent/comparisons/quality notpassed. No external exactly-once/CAS/concurrency guarantee."
+    },
+    {
+      "id": "P5-compare",
+      "stage": "P5",
+      "plan_section": "10.E-L",
+      "requirement": "Same refs/guard/discovery: no projection, Receipt-RAG, full candidate; neutral recovery request",
+      "authoritative_evidence_required": "all three real lifecycle comparisons without injection labels entering Agent",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-p5-comparison-source-acceptance.json",
+        "data/manifests/v13-1-p5-comparison-development-candidates.json",
+        "docs/V13_1_P5_COMPARISON.md",
+        "data/manifests/v13-1-p5-comparison-old208-coverage-results.json",
+        "docs/V13_1_P5_COMPARISON_OLD208_COVERAGE.md",
+        "data/manifests/v13-1-document-source-acceptance.json",
+        "docs/V13_1_DOCUMENT_WORKFLOW.md"
+      ],
+      "conditional": false,
+      "qualification": "OldSource207 comparison/208union:45of60 trajectories attempted,139actualprocesses,45SDKreadbacks,cost exact; first3Mem0nativeclosed-snapshotfailed retained and affectedremaining15not-run. Native/matched and finiteE-L separate; original12caps and failures retained. Completed30message-trajectories do not imply semantic task success. NewDoc second substantiveworkflow mechanicalready, no modelqualityyet; Pilot12/formal60 not replaced. No independent/generalautomatic O_t projector."
+    },
+    {
+      "id": "P6-pilotS",
+      "stage": "P6",
+      "plan_section": "9.1",
+      "requirement": "60 new development MemSyco samples,20 per task,5 methods then SimpleMem same sources",
+      "authoritative_evidence_required": "300 planned method-question denominators plus SimpleMem results",
+      "status": "NOT_VERIFIED",
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P6-pilotM",
+      "stage": "P6",
+      "plan_section": "9.1",
+      "requirement": "18 new stratified MERIT arcs with5 methods; no episode pseudo-independence",
+      "authoritative_evidence_required": "90 method-arc denominator and native checker results",
+      "status": "NOT_VERIFIED",
+      "evidence": [
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P6-pilotL",
+      "stage": "P6",
+      "plan_section": "9.1",
+      "requirement": "12 lifecycle condition trajectories x4 methods",
+      "authoritative_evidence_required": "48 complete trajectories incl side effects/costs",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P6-freeze",
+      "stage": "P6",
+      "plan_section": "6.3,9,11,12",
+      "requirement": "Use pilot to choose variance/sample size/caps/NI margin; freeze one candidate before viewing test",
+      "authoritative_evidence_required": "pretest method/source/model/scorer/config/selection and statistical contract",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P7-S",
+      "stage": "P7",
+      "plan_section": "7,9.2",
+      "requirement": "Formal MemSyco300 unexposed source-group questions,100/task x6 methods",
+      "authoritative_evidence_required": "1800 method-question units complete planned denominators",
+      "status": "NOT_VERIFIED",
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-pilot-prospective-selection.json",
+        "data/manifests/v13-1-source-exposure-pilot-reservation.json"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P7-M",
+      "stage": "P7",
+      "plan_section": "7,9.2",
+      "requirement": "Formal MERIT90 new arcs,3 domains x3 difficulty x10 x7 inclNoMemory",
+      "authoritative_evidence_required": "630 method-arcs plus all native dependent/update/whole-arc scores",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P7-L",
+      "stage": "P7",
+      "plan_section": "7,9.2",
+      "requirement": "Lifecycle60 substantive bases,>=2 workflows each>=30,clean+balanced5 conditions x4 methods",
+      "authoritative_evidence_required": "480 full trajectories,120 conditions,60 independent base units",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P7-grounding",
+      "stage": "P7",
+      "plan_section": "10.E-G",
+      "requirement": "Ordinary-Matched/Prompt-only/Ref-only/Field-grounded: fixed observation,actual generated banks reader propagation",
+      "authoritative_evidence_required": "formation+commit-check+free Agent tables distinguished",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P7-second",
+      "stage": "P7",
+      "plan_section": "9.3",
+      "requirement": "Frozen second family60 MemSyco/18MERIT/20Lifecycle bases x2 conditions and three controls",
+      "authoritative_evidence_required": "writer-fixed reader-change separated from new writer+reader results",
+      "status": "NOT_VERIFIED",
+      "evidence": [
+        "data/manifests/v13-1-memsyco-source-availability.json",
+        "data/manifests/v13-1-external-service-availability.json"
+      ],
+      "conditional": false,
+      "qualification": "User confirms no additional endpoint/service. 7860/7862 are same Qwen family. Full second-family requirement remains NOT_VERIFIED; continue independent experiments without relabeling same-family runs."
+    },
+    {
+      "id": "P7-repeat",
+      "stage": "P7",
+      "plan_section": "9.3",
+      "requirement": "Preselect20% representative repeats; report all outcomes not best result",
+      "authoritative_evidence_required": "frozen repeat list and full result distribution",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P7-attention",
+      "stage": "P7",
+      "plan_section": "10.E-A",
+      "requirement": "Q/W/A only if correctly persisted memory plus real retrieval failure; include selector costs",
+      "authoritative_evidence_required": "documented admission gate or evidence-based NOT_APPLICABLE",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": true
+    },
+    {
+      "id": "P7-eal",
+      "stage": "P7",
+      "plan_section": "7",
+      "requirement": "EAL native appropriate track only if authorization supported; never oracle gate deployment claim",
+      "authoritative_evidence_required": "conditional admission decision/native results or explicit NOT_APPLICABLE",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": true
+    },
+    {
+      "id": "P8-metrics",
+      "stage": "P8",
+      "plan_section": "11.1",
+      "requirement": "Unsupported proposals/commits,supported retention,wrong proposals/effects,clean/lifecycle success,cost",
+      "authoritative_evidence_required": "correct denominators from original traces, real world and scoped adjudication",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P8-stats",
+      "stage": "P8",
+      "plan_section": "11.2",
+      "requirement": "Clustered paired bootstrap10000,95%CI,primary comparisons,multiple-testing control,NI not p>0.05",
+      "authoritative_evidence_required": "offline scripts+source/arc/base units and frozen analysis outputs",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P8-failures",
+      "stage": "P8",
+      "plan_section": "11.3",
+      "requirement": "Completed-correct/wrong,budget-exhausted,provider-error,not-run all included",
+      "authoritative_evidence_required": "full planned denominator, coverage and bounds",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P8-scoring",
+      "stage": "P8",
+      "plan_section": "11.4",
+      "requirement": "MERIT checker unchanged;MemSyco task Judge;official/diagnostic separate;fixed blinded stratified human review",
+      "authoritative_evidence_required": "scorer hash+native outputs+review protocol/disagreement",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P8-reflection",
+      "stage": "P8",
+      "plan_section": "13",
+      "requirement": "Every failed round: observation,earliest break,competition,minimal discriminator,fixed vars,falsifier,cost/stopping",
+      "authoritative_evidence_required": "per-round failure logs isolated from runtime/test answers",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-retrieval-r2-results.json",
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-scope-r4-results.json",
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P8-decisions",
+      "stage": "P8",
+      "plan_section": "14",
+      "requirement": "Follow Go/Pivot/Stop; shrink contribution when prompt/receipt/scope simpler alternatives match",
+      "authoritative_evidence_required": "evidence-specific decision table, retain negative outcomes",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    },
+    {
+      "id": "P8-assets",
+      "stage": "P8",
+      "plan_section": "15",
+      "requirement": "Public task/lifecycle/ablations/cost-failure figures/second-family counterexamples and paper draft",
+      "authoritative_evidence_required": "complete tables,exportable figures and traceable manuscript",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "P8-repro",
+      "stage": "P8",
+      "plan_section": "15",
+      "requirement": "Source/deps/baselines/data sampling/input/prompt/schema/trace/scoring/cost/service/run guide; private/public boundary honest",
+      "authoritative_evidence_required": "runnable reproducibility package with checksums and no credentials/raw private DB",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "INV-grounded",
+      "stage": "ALL",
+      "plan_section": "0.1,3.1",
+      "requirement": "One logical MemoryService; journal immutable history; program deterministic/model semantic",
+      "authoritative_evidence_required": "implementation inspection and architecture checks",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "INV-nooracle",
+      "stage": "ALL",
+      "plan_section": "0.1,6,10",
+      "requirement": "No gold/hidden labels/standard plans/future messages in Host/writer/adapter; no case-specific patches/reviewer loop",
+      "authoritative_evidence_required": "actual frozen wire/inputs and dependency audit",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "INV-optin",
+      "stage": "ALL",
+      "plan_section": "8.2",
+      "requirement": "All new strategies opt-in; preserve old failures/methods/resources; isolated migration only",
+      "authoritative_evidence_required": "legacy regression evidence and Git diff/source identity",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "INV-product",
+      "stage": "ALL",
+      "plan_section": "1.3,8.2",
+      "requirement": "Lab engineering results never imply Product ready; no unauthorized Product/schema/API change",
+      "authoritative_evidence_required": "cross-bundle diff and status report",
+      "status": "NOT_VERIFIED",
+      "evidence": [],
+      "conditional": false
+    },
+    {
+      "id": "INV-cost",
+      "stage": "ALL",
+      "plan_section": "12",
+      "requirement": "All formation/Host/embed/retry/recovery/reflection costs,Judge separately;no invented dollars/GPU savings",
+      "authoritative_evidence_required": "reconciled attempt traces and cumulative ledger",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-1-retrieval-r2-results.json",
+        "docs/V13_1_RETRIEVAL_R2_RESULTS.md",
+        "data/manifests/v13-1-update-r3-results.json",
+        "docs/V13_1_UPDATE_R3_RESULTS.md",
+        "data/manifests/v13-1-scope-r4-results.json",
+        "docs/V13_1_SCOPE_R4_RESULTS.md",
+        "data/manifests/v13-1-temporal-r5-results.json",
+        "docs/V13_1_TEMPORAL_R5_RESULTS.md",
+        "data/manifests/v13-1-scope-r6-results.json",
+        "docs/V13_1_SCOPE_R6_RESULTS.md",
+        "data/manifests/v13-1-d0-r7-six-results.json",
+        "docs/V13_1_D0_R7_RESULTS.md",
+        "data/manifests/v13-1-receipt-r8-results.json",
+        "docs/V13_1_RECEIPT_R8_RESULTS.md",
+        "data/manifests/v13-1-d0-r9-results.json",
+        "docs/V13_1_D0_R9_RESULTS.md"
+      ],
+      "conditional": false
+    }
+  ]
+}

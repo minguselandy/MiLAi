@@ -1,0 +1,4208 @@
+{
+  "kind": "MILAI_V13_1_EXPOSURE_UNION",
+  "status": "METADATA_UNION_COMPUTED_SELECTION_COMPONENTS_PENDING",
+  "inputs": [
+    {
+      "path": "data/manifests/repair-v10-exposure-registry.json",
+      "sha256": "3f44f97173056b459d20a182e8a5e1e9283ef21004cc8c5c6d17e375de21a22c",
+      "top_keys": [
+        "kind",
+        "status",
+        "prior_registry",
+        "memsyco",
+        "merit",
+        "v10",
+        "unseen_confirmation_frozen"
+      ],
+      "exposure_class": "development_or_reserved_excluded",
+      "apply_rule": "union all original source IDs/dialogue hashes/groups/base seeds, never only question rows"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-exposure-20260928.json",
+      "sha256": "0c070c564f0598ec80555fdbb2909d1e4228a299e65b409f76a3ce7740a27910",
+      "top_keys": [
+        "kind",
+        "status",
+        "memsyco",
+        "merit",
+        "scan",
+        "new_generation_calls",
+        "new_embedding_calls",
+        "limitations",
+        "merit_recheck"
+      ],
+      "exposure_class": "development_or_reserved_excluded",
+      "apply_rule": "union all original source IDs/dialogue hashes/groups/base seeds, never only question rows"
+    },
+    {
+      "path": "data/manifests/local-state-attention-merit-exposure.json",
+      "sha256": "b2acb978c68cbc4d58d94b51e73b79d3f66cf7310cfb3b9bf667bb9402899418",
+      "top_keys": [
+        "kind",
+        "status",
+        "known_exposed_base_seeds",
+        "records",
+        "execution_evidence",
+        "future_rule",
+        "limits",
+        "real_model_calls",
+        "new_native_arcs_generated"
+      ],
+      "exposure_class": "development_or_reserved_excluded",
+      "apply_rule": "union all original source IDs/dialogue hashes/groups/base seeds, never only question rows"
+    },
+    {
+      "path": "data/manifests/contextual-memory-v14-exposure-rule.json",
+      "sha256": "c318ea79923c5b94f554fb9ebec239d2e10c36f612f1e1dc71043bba75ff8c0d",
+      "top_keys": [
+        "kind",
+        "status",
+        "date",
+        "native_commit",
+        "known_exposed_base_seeds",
+        "known_original_hashes",
+        "records",
+        "rule",
+        "new_model_calls",
+        "new_native_arcs_generated"
+      ],
+      "exposure_class": "development_or_reserved_excluded",
+      "apply_rule": "union all original source IDs/dialogue hashes/groups/base seeds, never only question rows"
+    },
+    {
+      "path": "data/manifests/repair-v10-failure-audit.json",
+      "sha256": "3cce3232808cf735476729619f2c4dc36d5e531df92c3ebbe91122f27776ee3c",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/repair-v10-r1-l2-selection.json",
+      "sha256": "96ba982093a780777819f68e3f092de642235f8ae26aa727eac26a31b9842b52",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-merit-development-inputs-20260929.json",
+      "sha256": "e1f0540a9101517044f169ee14fb517ea91acf21907a24687ffdd7a8193edac3",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-merit-selection-policy-20260928.json",
+      "sha256": "aa829ce2265800ad7fdb3e59ea6c41f215e04959d888e7bf77c8a6126c7856e9",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-merit-smoke-inputs-20260929.json",
+      "sha256": "0c1d95e5407d6b7f4697a5da0137b8c47348116b41ac88e571c25e264e95430d",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+      "sha256": "25c60f8328531574ff4238fa98d530a84e4f3267cebd10a0e9c9dfd4eede604b",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-u2-pilot-merit-selection-20260929.json",
+      "sha256": "cd655b4bd389ef6ed0b36c3e26f6bfbbf4648fbc7e290cbb25bfcf25f5769052",
+      "role": "historical selection/audit metadata only, all reserved rows conservatively excluded"
+    }
+  ],
+  "d0": {
+    "fixture": "data/fixtures/v13-1-d0-normal.json",
+    "classification": "development",
+    "count": 24,
+    "may_be_formal_test": false
+  },
+  "merit": {
+    "known_exposed_base_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "previously_reserved_seeds": "5..64 conservatively reserved by v8/v9; new selection must be checked against local actual execution metadata, no reuse by assumption",
+    "explicitly_exposed_or_reserved_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64
+    ]
+  },
+  "memsyco": {
+    "exclude": "all historical exposed/reserved IDs AND complete source/history connected groups, plus v10 inspected failure/confirmation rows",
+    "formal_selection_status": "NOT_SELECTED",
+    "pilot_selection_status": "NOT_SELECTED"
+  },
+  "unknown_manual_exposure": "cannot be disproved by files, disclose",
+  "new_model_calls": 0,
+  "explicit_union": {
+    "case_ids": [
+      "mso_hard_000004",
+      "mso_hard_000007",
+      "mso_hard_000011",
+      "mso_hard_000013",
+      "mso_hard_000024",
+      "mso_hard_000026",
+      "mso_hard_000028",
+      "mso_hard_000034",
+      "mso_hard_000036",
+      "mso_hard_000037",
+      "mso_hard_000041",
+      "mso_hard_000049",
+      "mso_hard_000059",
+      "mso_hard_000062",
+      "mso_hard_000068",
+      "mso_hard_000071",
+      "mso_hard_000072",
+      "mso_hard_000138",
+      "mso_hard_000144",
+      "mso_hard_000147",
+      "mso_hard_000162",
+      "mso_hard_000163",
+      "mso_hard_000188",
+      "mso_hard_000194",
+      "mso_hard_000204",
+      "mso_hard_000206",
+      "mso_hard_000217",
+      "mso_hard_000235",
+      "mso_hard_000279",
+      "mso_hard_000294",
+      "rec_gen_0001",
+      "rec_gen_0003",
+      "rec_gen_0017",
+      "rec_gen_0021",
+      "rec_gen_0024",
+      "rec_gen_0025",
+      "rec_gen_0028",
+      "rec_gen_0036",
+      "rec_gen_0041",
+      "rec_gen_0045",
+      "rec_gen_0047",
+      "rec_gen_0048",
+      "rec_gen_0055",
+      "rec_gen_0057",
+      "rec_gen_0059",
+      "rec_gen_0062",
+      "rec_gen_0063",
+      "rec_gen_0077",
+      "rec_gen_0078",
+      "rec_gen_0081",
+      "v11_000338",
+      "v11_000342",
+      "v11_000360",
+      "v11_000404",
+      "v11_000413",
+      "v11_000445",
+      "v11_000462",
+      "v11_000504",
+      "v11_000538",
+      "v11_000569",
+      "v11_000580",
+      "v11_000632",
+      "v11_000664",
+      "v11_000713",
+      "v11_000744",
+      "v11_000759",
+      "v11_000793",
+      "v11_000856",
+      "v11_000865",
+      "v11_000872",
+      "v11_000937",
+      "v11_000977",
+      "v11_000986",
+      "v11_001002",
+      "v11_001003",
+      "v11_001004",
+      "v11_001037",
+      "v11_001056",
+      "v11_001074",
+      "v11_001083",
+      "v11_001094",
+      "v11_001113",
+      "v11_001174",
+      "v11_001187",
+      "v11_001210",
+      "v11_001256",
+      "v11_001283",
+      "v11_001297",
+      "v11_001314",
+      "v11_001324"
+    ],
+    "native_source_ids": [
+      "15153299-ad3a-477e-8eee-29f95de9f0d9",
+      "1743e9cb-de16-4ea8-80cf-fef97a8b2259",
+      "431e1c24-b09a-4bc4-b6d0-32e7c0631353",
+      "4afc48ca-e6a7-4467-abd2-911915199315",
+      "51d9fdba-9e05-411f-a933-a30c561e4a57",
+      "5370f186-0028-41f4-b436-c48575899fca",
+      "59eec48a-de28-4440-8c16-b6f5f16e2a8d",
+      "6142fba4-a233-405a-a4fe-a5b2e27374a7",
+      "61769393-ef00-4764-8b59-622ee660b1cb",
+      "827b4d7e-4a87-4500-8399-9ea7e01c6ff1",
+      "863adfaa-d193-4f89-9925-f07f41333d32",
+      "87cfa0aa-b318-4b34-8fc5-545fd51e734c",
+      "9468e5ca-c4a5-4ef7-9ac0-abc13731d5f8",
+      "9af8a326-7675-42e0-861f-d99f2e28be46",
+      "9f8abbfe-84a6-4761-b791-f1d6e9763ffc",
+      "abc977e6-cdfc-4515-a3ee-791d0a7aa6c1",
+      "afb21079-ddc7-48e8-b280-d08d1e01dc50",
+      "b3588797-acdf-40d3-bcc5-951f81896f95",
+      "c6d22f3d-282f-4e11-b9fd-39e2a687ef18",
+      "ce9c7c39-c600-4971-9a7d-51a46e6c915c",
+      "d3cf97c8-4698-49d0-bc39-25cdc856f295",
+      "edcae48c-d5f6-4aba-9aae-d6946ded8ad8",
+      "f940f3ad-a774-4d7d-9c93-daa40c7bb813",
+      "mso_hard_000004",
+      "mso_hard_000007",
+      "mso_hard_000011",
+      "mso_hard_000013",
+      "mso_hard_000024",
+      "mso_hard_000028",
+      "mso_hard_000034",
+      "mso_hard_000036",
+      "mso_hard_000037",
+      "mso_hard_000049",
+      "mso_hard_000059",
+      "mso_hard_000062",
+      "mso_hard_000071",
+      "mso_hard_000072",
+      "mso_hard_000147",
+      "mso_hard_000162",
+      "mso_hard_000163",
+      "mso_hard_000194",
+      "mso_hard_000206",
+      "mso_hard_000217",
+      "mso_hard_000235",
+      "mso_hard_000294",
+      "rec_expansion_0001",
+      "rec_expansion_0003",
+      "rec_expansion_0017",
+      "rec_expansion_0021",
+      "rec_expansion_0028",
+      "rec_expansion_0036",
+      "rec_expansion_0041",
+      "rec_expansion_0045",
+      "rec_expansion_0047",
+      "rec_expansion_0048",
+      "rec_expansion_0055",
+      "rec_expansion_0059",
+      "rec_expansion_0062",
+      "rec_expansion_0077",
+      "rec_expansion_0078",
+      "rec_expansion_0081"
+    ],
+    "source_group_ids": [
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=11",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=12",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=13",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=14",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=15",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=16",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=29",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=30",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=31",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=32",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=33",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=34",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=35",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=36",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=37",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=38",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=39",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=40",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=5",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=6",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=17",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=18",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=19",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=20",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=21",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=22",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=41",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=42",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=43",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=44",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=45",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=46",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=47",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=48",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=49",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=50",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=51",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=52",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=7",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=8",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=10",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=23",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=24",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=25",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=26",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=27",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=28",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=53",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=54",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=55",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=56",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=57",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=58",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=59",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=60",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=61",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=62",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=63",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=64",
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=9",
+      "memsyco-source-0766599c522b23c9e8d6fbae",
+      "memsyco-source-0ab63353c2392de7e9eccc4c",
+      "memsyco-source-0ffec5a4d91d844302e277ce",
+      "memsyco-source-14dca35e860862716d26e7b7",
+      "memsyco-source-15a1d551a28d4cfa1e5fa8a1",
+      "memsyco-source-190caca2001c506afd365198",
+      "memsyco-source-1c51ea16132dd22ef1ee6be7",
+      "memsyco-source-2652433cf440ffb7b6126dc8",
+      "memsyco-source-2667d3c60fa1498b25f2a8ef",
+      "memsyco-source-274aefd0d61191729ed6e385",
+      "memsyco-source-288bb8dedec81fc38e175b2d",
+      "memsyco-source-30bb21c20ef0fca40394b377",
+      "memsyco-source-365d77354e9006031d8fdfb7",
+      "memsyco-source-384a31e2c7996eef8d024908",
+      "memsyco-source-3d0b1290434c89ff63fe4f76",
+      "memsyco-source-40181068d091b642803df762",
+      "memsyco-source-43d04f8dceebe7a2fb4d907e",
+      "memsyco-source-444e6531cda8729cb1eafa1c",
+      "memsyco-source-47aa8b0f78a0dc94ff34538c",
+      "memsyco-source-4aa6b078f2655b8c73fd0bdf",
+      "memsyco-source-4bc3cc764b241c96a3af69e5",
+      "memsyco-source-4e11a65bfb7aa806dbe0e850",
+      "memsyco-source-4ec73480f0c02b4d1ccf8af1",
+      "memsyco-source-50d9e9ccb2718e28048a67d5",
+      "memsyco-source-52685c3a8526c10ff025ca2c",
+      "memsyco-source-52697258b1183ae20d7954e3",
+      "memsyco-source-529c67ef5a9813602b7f6a58",
+      "memsyco-source-5ae2d7900019902b0e86c59e",
+      "memsyco-source-64328d93481b0bfabb68d3cb",
+      "memsyco-source-6dc70eb1b2283fbdce69c8d7",
+      "memsyco-source-6eaaf3b08e55c55d08223120",
+      "memsyco-source-6ffcc93511b1c9794b7875e1",
+      "memsyco-source-86b9287b9cd8faf0a1fedbdf",
+      "memsyco-source-8c1cc981bae9ca5399aa7781",
+      "memsyco-source-8c6408e40bd53877e175cbe6",
+      "memsyco-source-8fd8855a1956153401fc0805",
+      "memsyco-source-92348f202f9e0cdaad056833",
+      "memsyco-source-9cbe67332d764fb91749efcb",
+      "memsyco-source-a36827f12d2691b971456a45",
+      "memsyco-source-a46202ff65fb65762114cfba",
+      "memsyco-source-aa9abf729a149417ef1aeaca",
+      "memsyco-source-ad15635a550a2f0ab144c26a",
+      "memsyco-source-b1200e9a3652dc9b42d228fc",
+      "memsyco-source-b545fde42062315e92fa8e4b",
+      "memsyco-source-c65c39d5d02e4db8e6e2cb90",
+      "memsyco-source-c7c638d4db63f5ad3c852193",
+      "memsyco-source-c9f6985bec208ffaa141224f",
+      "memsyco-source-cb4decd8382c70d985f75233",
+      "memsyco-source-d6cc5a965785a60d61cda5f1",
+      "memsyco-source-d9dadebac3abf2e6ebcd02df",
+      "memsyco-source-dd08b4957f2aeef9f4e117fd",
+      "memsyco-source-df0520dbb1c9c7d10be66f68",
+      "memsyco-source-e0fb723775a336bcb989bd56",
+      "memsyco-source-e707f00fd5aa05e214dbd14e",
+      "memsyco-source-e7d11f6a33164e81a103cdc0",
+      "memsyco-source-f560bb7e791ce9d2c6f228b1",
+      "memsyco-source-f68d634666ba80614d79aa90",
+      "memsyco-source-f8138680743667cf8b599f60",
+      "memsyco-source-fdad3218243f87f29d010910",
+      "memsyco-source-ff775348f627efe69160c14d"
+    ],
+    "dialogue_sha256": [
+      "004ba5d9ab281367e8b39251ceac024cc8e0d5a7457763b3301f1541f4588884",
+      "01fd32726960a088bb49cd2c69f3346fa12426fbfb615695563b7ab066d45f35",
+      "0412fe6a2fd56269b74062c425a4598a18d025c7571f4ae6b023e1d8775d15a8",
+      "0637e9d47b672ae67c076f9dd70fa94dd00123819e7d443f6721bda12726e513",
+      "09abb46f7282dffe5bbc8b9bd3fe2b7a5f563642bc146d0bddf39b8485383ecf",
+      "104cc24fa5bd677d6dce7e632d3b776ccd00019441818423925b7b329a256268",
+      "10d910a48fd0518407557069da929ba6c98b84d5db5c01ba99872d71bfd4d4be",
+      "128a73b6ff6c687969d9f29d3728ab218343ad81f9c394068c2477e7d64066a9",
+      "14cad7580689f9ebed85b3491f04e7a9a68e90424abf2193dbb31cbabbc75428",
+      "17939e54f3947d805374ea903ea882f289fa9ecc6784adaa605990ac2eb0a12f",
+      "18689e26b8f89a7db419fa6c50319603f09cdf9ba40b7b04f9184680e96670a3",
+      "194548f31c61297d7cca45c5a475872d61be2f9edae63763e71a248239719d0d",
+      "1ae71abaeeaedb45f0ea8fea1ff562d044ea8e0392de49efcfdb30f838303c06",
+      "1c213cf953b1b71ac2f867b7b082a51488e05d2fc88573265fd300e0bbd1f441",
+      "20f11442282203565641a50c0031b9c6cab167c192e954e4dcfa0ae75ef72cc8",
+      "22b8b230cdc1a4086e339776675a93141808644725b5934cb7c01977fd9209b6",
+      "25e2cb6b3279ada781ddc542818b665f7c9e61de8f51ad74d8e29ff5c4abf94a",
+      "2a000fbeb550b5630a815fb7a5f74c3d7ba4bbaa50a772937e92baaf43c208bd",
+      "37a96920d2ab3257a68ea9b5e2ca5492900f62bb01637fc2379771fa4b4e9827",
+      "4310b36ad3c5ab9accb2f210ba6ac7c03038e41100fc2555857aa3ec46140b09",
+      "458098d3adde820c2e62dca91f9f50b72bec3a72d70bad4dc1c11d5071c631d9",
+      "4c3f4746fe512277863934780ff4d021cf3e882dd4191ee647666cd74d584cad",
+      "5014cc4b84443dc72fd792b504dcaf4d46602f275d4e2c75931f84c4c2c95b51",
+      "50e607293ee5808a967ab90f9dd89711f490c5300e52c95dd1993d3641751331",
+      "5204c9314278aa1b65111e95a473b960cb640c1c60a086843089aea127cbfa23",
+      "544b6a80244b69945b420d9008a43c0ba1975f122102587d05aab97cc50ae1b6",
+      "5711fb66767ee4a43c078fae031a309df177cb03258dc222c2413b081ab72a18",
+      "5b6c431aa43eea39936a2d74b2b05393087983e7f96203edc3365e8a19539863",
+      "5b718e785f5b509a8779a75bb71d05bcd0725b3d25052e383af9482dd4858335",
+      "5c974ca5e70296f10d3d3af46b4187a4f3f9a75540e31e2c002bdc81cf6accee",
+      "5cc9a1a3653338b31cff3f848a08cf667c5b16d066054c21aae4d0c73aa0a3a3",
+      "5f02baaec6f36266280d13033d488da41ac732280cce5adbaf3b3d85b7914bed",
+      "662609eafc0bb40428c508daef2a1f7c12a2b968a658f81e88e7ab04ce2041dc",
+      "66b4c238aaec7bdbebd9e0401d2cc8886a86e8cbcabbe03b319672ca4aba2f53",
+      "6970e28dfdef59f671819379a9c1cfae9a8cd00b054fa1529b00a30b5f1b744d",
+      "69d0984c029c1c40091203fa365c9571d34ba11b4dcd99ad1add442b0dac368d",
+      "706f4daf5cece7c4b6859c405fdbb19b75274d31cb96fa5662dd5c69c9cdbd65",
+      "7c801001f68673bc67798c4740fc2548e33380743e558b36d890a98f5240da0b",
+      "7ec9dedc2d9103f7eeab0a9e9fbb7841def4c42161e50f9408b596790b9c18a2",
+      "81b805dc00b55f82c7226428706a9d6cfdf6e30e9d7ab17243410a9ae09e8af9",
+      "8b1f22fda133a3ae2f9d6a0a52546d889e4d0ba357f555a3ebd2c3761fa25082",
+      "8e9a568c5c7c46e674996b2998315f234e148700fe2ae219bce855fac3e0d426",
+      "962cf37aba2567598c8de9cd17e4ead740312dfd1c8263b63ba9c5486fe08380",
+      "9f6abded6edb3b42292d573eccedf2ab09e4cb43ca5e0d0162a1f5946aeb830e",
+      "a221297a0b5cb7006fa82bd941fe3aa253afd34529074b790c47fef81566a842",
+      "abfd8ca5d1c62bbf0e8fb8ce759af49820ff11c160cff1e067e093450c152c67",
+      "ae056fb61d7e76f2a8e621ef6349b4db694f3f055d1087de0f1b3b2e57e337f0",
+      "b723ebb25ff56bb9463dd3f41dee0b3759cde84d2b9d317421978d4eb50e179d",
+      "b813cc6e7285cafc53d667a80f86a7953fb3bca8a2530a53393cffa5d6cf7371",
+      "bd39967700d4a88173fd77949a421a0ad15eb713f373e66a02ac4956b58da95d",
+      "c206babd4891b017eabfeb68a348f6d16a2e49dce150dc935ec0467cdf16b4af",
+      "c782852ceb36e3c2b3783ee18e6bb01c1a44c19c9074cec219afdf0fc310dab8",
+      "d51bde981d13368f35e47413f997c2e05fda2ef1bd8e5406b6f7a67c7866c35f",
+      "d586816d49890bde5e79c9174492f27b35538e56bf350def846f041fb3faf6cb",
+      "dafe858a97864326c153888b0ef67a72cc0340eb81647dd189d1aa07c22dbf55",
+      "e1c316bdeffa6ba521d1f194b2650353770b09755153e8c26063dffbf500f8a7",
+      "e80018d67e257b4ef3f0a0ff05cbe266898e95cb4edc1efb0996759d4fc3c192",
+      "e85dc0c1574774c1765f40ea1c4476494a6b06cd314570b25b1dedf23cbc0d00",
+      "e99b6d982514ec2f7a627fd06d4f5e35bda0ad3b62839ad81b683f09426982e5",
+      "eb14d965b924d74c5c49a61e64cb4b6945f312664c8fb4bd379ca04f4a9b64e7",
+      "efa342d47401dd078a540eeacc9a5e4d5313072e36ea8cc20f2a834a67b9ed46",
+      "f4321e0c2a734c72c07b39d71c2873f16f0a2dc9296b0e69862c80f4667f5384",
+      "f4521b1a6489867aaaa49c60bbf5f0f3707f4ffa400cfe503ea55a5c3b9a4fe3",
+      "f677f99dd5087e7c757f349b85b5c4159b3eadef5f792c08b5e1a907e0e7e33c",
+      "f69bddc121103217a656df7a8d380e1d44f4a5208279ac508cd1ecfa7ab3238b",
+      "f6e705323fc3ac56f77ea320891c678eb33a7acf747b98571079900dbce3e974"
+    ],
+    "merit_base_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64
+    ]
+  },
+  "union_evidence_sites": {
+    "case_ids": {
+      "mso_hard_000072": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/0/case_id"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+          "json_path": "/groups/smoke/cases/0/case_id"
+        }
+      ],
+      "mso_hard_000024": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/1/case_id"
+        }
+      ],
+      "v11_000865": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/2/case_id"
+        }
+      ],
+      "v11_000504": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/3/case_id"
+        }
+      ],
+      "rec_gen_0021": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/4/case_id"
+        }
+      ],
+      "rec_gen_0017": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/5/case_id"
+        }
+      ],
+      "mso_hard_000059": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/6/case_id"
+        }
+      ],
+      "mso_hard_000294": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/7/case_id"
+        }
+      ],
+      "mso_hard_000163": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/8/case_id"
+        }
+      ],
+      "mso_hard_000028": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/9/case_id"
+        }
+      ],
+      "mso_hard_000036": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/10/case_id"
+        }
+      ],
+      "mso_hard_000162": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/11/case_id"
+        }
+      ],
+      "mso_hard_000004": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/12/case_id"
+        }
+      ],
+      "mso_hard_000206": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/13/case_id"
+        }
+      ],
+      "mso_hard_000034": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/14/case_id"
+        }
+      ],
+      "mso_hard_000062": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/15/case_id"
+        }
+      ],
+      "mso_hard_000011": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/16/case_id"
+        }
+      ],
+      "mso_hard_000147": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/17/case_id"
+        }
+      ],
+      "mso_hard_000217": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/18/case_id"
+        }
+      ],
+      "mso_hard_000071": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/19/case_id"
+        }
+      ],
+      "mso_hard_000194": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/20/case_id"
+        }
+      ],
+      "mso_hard_000007": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/21/case_id"
+        }
+      ],
+      "mso_hard_000049": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/22/case_id"
+        }
+      ],
+      "mso_hard_000235": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/23/case_id"
+        }
+      ],
+      "mso_hard_000013": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/24/case_id"
+        }
+      ],
+      "mso_hard_000037": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/25/case_id"
+        }
+      ],
+      "v11_000413": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/26/case_id"
+        }
+      ],
+      "v11_000538": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/27/case_id"
+        }
+      ],
+      "v11_000937": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/28/case_id"
+        }
+      ],
+      "v11_000342": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/29/case_id"
+        }
+      ],
+      "v11_000793": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/30/case_id"
+        }
+      ],
+      "v11_000360": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/31/case_id"
+        }
+      ],
+      "v11_001004": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/32/case_id"
+        }
+      ],
+      "v11_000856": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/33/case_id"
+        }
+      ],
+      "v11_001037": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/34/case_id"
+        }
+      ],
+      "v11_000445": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/35/case_id"
+        }
+      ],
+      "v11_001083": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/36/case_id"
+        }
+      ],
+      "v11_001056": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/37/case_id"
+        }
+      ],
+      "v11_000713": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/38/case_id"
+        }
+      ],
+      "v11_000338": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/39/case_id"
+        }
+      ],
+      "v11_000744": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/40/case_id"
+        }
+      ],
+      "v11_000759": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/41/case_id"
+        }
+      ],
+      "v11_000872": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/42/case_id"
+        }
+      ],
+      "v11_000632": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/43/case_id"
+        }
+      ],
+      "v11_000580": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/44/case_id"
+        }
+      ],
+      "v11_001074": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/45/case_id"
+        }
+      ],
+      "rec_gen_0047": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/46/case_id"
+        }
+      ],
+      "rec_gen_0045": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/47/case_id"
+        }
+      ],
+      "v11_001187": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/48/case_id"
+        }
+      ],
+      "rec_gen_0001": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/49/case_id"
+        }
+      ],
+      "rec_gen_0055": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/50/case_id"
+        }
+      ],
+      "v11_001297": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/51/case_id"
+        }
+      ],
+      "v11_001094": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/52/case_id"
+        }
+      ],
+      "rec_gen_0078": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/53/case_id"
+        }
+      ],
+      "rec_gen_0028": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/54/case_id"
+        }
+      ],
+      "v11_001174": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/55/case_id"
+        }
+      ],
+      "rec_gen_0041": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/56/case_id"
+        }
+      ],
+      "rec_gen_0059": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/57/case_id"
+        }
+      ],
+      "rec_gen_0077": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/58/case_id"
+        }
+      ],
+      "rec_gen_0048": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/59/case_id"
+        }
+      ],
+      "rec_gen_0062": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/60/case_id"
+        }
+      ],
+      "rec_gen_0081": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/61/case_id"
+        }
+      ],
+      "v11_001283": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/62/case_id"
+        }
+      ],
+      "v11_001314": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/63/case_id"
+        }
+      ],
+      "rec_gen_0036": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/64/case_id"
+        }
+      ],
+      "rec_gen_0003": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/65/case_id"
+        }
+      ],
+      "mso_hard_000026": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/0/native_id"
+        }
+      ],
+      "mso_hard_000041": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/1/native_id"
+        }
+      ],
+      "mso_hard_000068": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/2/native_id"
+        }
+      ],
+      "mso_hard_000138": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/3/native_id"
+        }
+      ],
+      "mso_hard_000144": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/4/native_id"
+        }
+      ],
+      "mso_hard_000188": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/5/native_id"
+        }
+      ],
+      "mso_hard_000204": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/6/native_id"
+        }
+      ],
+      "mso_hard_000279": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/7/native_id"
+        }
+      ],
+      "rec_gen_0024": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/8/native_id"
+        }
+      ],
+      "rec_gen_0025": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/9/native_id"
+        }
+      ],
+      "rec_gen_0057": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/10/native_id"
+        }
+      ],
+      "rec_gen_0063": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/11/native_id"
+        }
+      ],
+      "v11_000404": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/12/native_id"
+        }
+      ],
+      "v11_000462": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/13/native_id"
+        }
+      ],
+      "v11_000569": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/14/native_id"
+        }
+      ],
+      "v11_000664": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/15/native_id"
+        }
+      ],
+      "v11_000977": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/16/native_id"
+        }
+      ],
+      "v11_000986": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/17/native_id"
+        }
+      ],
+      "v11_001002": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/18/native_id"
+        }
+      ],
+      "v11_001003": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/19/native_id"
+        }
+      ],
+      "v11_001113": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/20/native_id"
+        }
+      ],
+      "v11_001210": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/21/native_id"
+        }
+      ],
+      "v11_001256": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/22/native_id"
+        }
+      ],
+      "v11_001324": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/memsyco/records/23/native_id"
+        }
+      ]
+    },
+    "native_source_ids": {
+      "mso_hard_000072": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/0/native_source_id"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+          "json_path": "/groups/smoke/cases/0/native_source_id"
+        }
+      ],
+      "mso_hard_000024": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/1/native_source_id"
+        }
+      ],
+      "9f8abbfe-84a6-4761-b791-f1d6e9763ffc": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/2/native_source_id"
+        }
+      ],
+      "61769393-ef00-4764-8b59-622ee660b1cb": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/3/native_source_id"
+        }
+      ],
+      "rec_expansion_0021": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/4/native_source_id"
+        }
+      ],
+      "rec_expansion_0017": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/5/native_source_id"
+        }
+      ],
+      "mso_hard_000059": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/6/native_source_id"
+        }
+      ],
+      "mso_hard_000294": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/7/native_source_id"
+        }
+      ],
+      "mso_hard_000163": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/8/native_source_id"
+        }
+      ],
+      "mso_hard_000028": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/9/native_source_id"
+        }
+      ],
+      "mso_hard_000036": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/10/native_source_id"
+        }
+      ],
+      "mso_hard_000162": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/11/native_source_id"
+        }
+      ],
+      "mso_hard_000004": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/12/native_source_id"
+        }
+      ],
+      "mso_hard_000206": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/13/native_source_id"
+        }
+      ],
+      "mso_hard_000034": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/14/native_source_id"
+        }
+      ],
+      "mso_hard_000062": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/15/native_source_id"
+        }
+      ],
+      "mso_hard_000011": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/16/native_source_id"
+        }
+      ],
+      "mso_hard_000147": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/17/native_source_id"
+        }
+      ],
+      "mso_hard_000217": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/18/native_source_id"
+        }
+      ],
+      "mso_hard_000071": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/19/native_source_id"
+        }
+      ],
+      "mso_hard_000194": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/20/native_source_id"
+        }
+      ],
+      "mso_hard_000007": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/21/native_source_id"
+        }
+      ],
+      "mso_hard_000049": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/22/native_source_id"
+        }
+      ],
+      "mso_hard_000235": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/23/native_source_id"
+        }
+      ],
+      "mso_hard_000013": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/24/native_source_id"
+        }
+      ],
+      "mso_hard_000037": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/25/native_source_id"
+        }
+      ],
+      "ce9c7c39-c600-4971-9a7d-51a46e6c915c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/26/native_source_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/48/native_source_id"
+        }
+      ],
+      "59eec48a-de28-4440-8c16-b6f5f16e2a8d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/27/native_source_id"
+        }
+      ],
+      "d3cf97c8-4698-49d0-bc39-25cdc856f295": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/28/native_source_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/51/native_source_id"
+        }
+      ],
+      "5370f186-0028-41f4-b436-c48575899fca": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/29/native_source_id"
+        }
+      ],
+      "afb21079-ddc7-48e8-b280-d08d1e01dc50": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/30/native_source_id"
+        }
+      ],
+      "6142fba4-a233-405a-a4fe-a5b2e27374a7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/31/native_source_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/55/native_source_id"
+        }
+      ],
+      "9af8a326-7675-42e0-861f-d99f2e28be46": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/32/native_source_id"
+        }
+      ],
+      "827b4d7e-4a87-4500-8399-9ea7e01c6ff1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/33/native_source_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/62/native_source_id"
+        }
+      ],
+      "431e1c24-b09a-4bc4-b6d0-32e7c0631353": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/34/native_source_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/63/native_source_id"
+        }
+      ],
+      "c6d22f3d-282f-4e11-b9fd-39e2a687ef18": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/35/native_source_id"
+        }
+      ],
+      "9468e5ca-c4a5-4ef7-9ac0-abc13731d5f8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/36/native_source_id"
+        }
+      ],
+      "1743e9cb-de16-4ea8-80cf-fef97a8b2259": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/37/native_source_id"
+        }
+      ],
+      "15153299-ad3a-477e-8eee-29f95de9f0d9": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/38/native_source_id"
+        }
+      ],
+      "b3588797-acdf-40d3-bcc5-951f81896f95": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/39/native_source_id"
+        }
+      ],
+      "51d9fdba-9e05-411f-a933-a30c561e4a57": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/40/native_source_id"
+        }
+      ],
+      "edcae48c-d5f6-4aba-9aae-d6946ded8ad8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/41/native_source_id"
+        }
+      ],
+      "87cfa0aa-b318-4b34-8fc5-545fd51e734c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/42/native_source_id"
+        }
+      ],
+      "863adfaa-d193-4f89-9925-f07f41333d32": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/43/native_source_id"
+        }
+      ],
+      "abc977e6-cdfc-4515-a3ee-791d0a7aa6c1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/44/native_source_id"
+        }
+      ],
+      "f940f3ad-a774-4d7d-9c93-daa40c7bb813": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/45/native_source_id"
+        }
+      ],
+      "rec_expansion_0047": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/46/native_source_id"
+        }
+      ],
+      "rec_expansion_0045": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/47/native_source_id"
+        }
+      ],
+      "rec_expansion_0001": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/49/native_source_id"
+        }
+      ],
+      "rec_expansion_0055": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/50/native_source_id"
+        }
+      ],
+      "4afc48ca-e6a7-4467-abd2-911915199315": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/52/native_source_id"
+        }
+      ],
+      "rec_expansion_0078": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/53/native_source_id"
+        }
+      ],
+      "rec_expansion_0028": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/54/native_source_id"
+        }
+      ],
+      "rec_expansion_0041": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/56/native_source_id"
+        }
+      ],
+      "rec_expansion_0059": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/57/native_source_id"
+        }
+      ],
+      "rec_expansion_0077": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/58/native_source_id"
+        }
+      ],
+      "rec_expansion_0048": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/59/native_source_id"
+        }
+      ],
+      "rec_expansion_0062": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/60/native_source_id"
+        }
+      ],
+      "rec_expansion_0081": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/61/native_source_id"
+        }
+      ],
+      "rec_expansion_0036": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/64/native_source_id"
+        }
+      ],
+      "rec_expansion_0003": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/65/native_source_id"
+        }
+      ]
+    },
+    "source_group_ids": {
+      "memsyco-source-444e6531cda8729cb1eafa1c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/0/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/17"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+          "json_path": "/groups/smoke/cases/0/source_group_id"
+        }
+      ],
+      "memsyco-source-288bb8dedec81fc38e175b2d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/1/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/10"
+        }
+      ],
+      "memsyco-source-2652433cf440ffb7b6126dc8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/2/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/7"
+        }
+      ],
+      "memsyco-source-30bb21c20ef0fca40394b377": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/3/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/11"
+        }
+      ],
+      "memsyco-source-df0520dbb1c9c7d10be66f68": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/4/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/51"
+        }
+      ],
+      "memsyco-source-d6cc5a965785a60d61cda5f1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/5/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/48"
+        }
+      ],
+      "memsyco-source-92348f202f9e0cdaad056833": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/6/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/36"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/0/source_group_id"
+        }
+      ],
+      "memsyco-source-8c6408e40bd53877e175cbe6": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/7/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/34"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/1/source_group_id"
+        }
+      ],
+      "memsyco-source-a46202ff65fb65762114cfba": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/8/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/39"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/2/source_group_id"
+        }
+      ],
+      "memsyco-source-50d9e9ccb2718e28048a67d5": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/9/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/23"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/3/source_group_id"
+        }
+      ],
+      "memsyco-source-43d04f8dceebe7a2fb4d907e": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/10/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/16"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/4/source_group_id"
+        }
+      ],
+      "memsyco-source-0ffec5a4d91d844302e277ce": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/11/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/2"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/5/source_group_id"
+        }
+      ],
+      "memsyco-source-0ab63353c2392de7e9eccc4c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/12/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/1"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/6/source_group_id"
+        }
+      ],
+      "memsyco-source-6ffcc93511b1c9794b7875e1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/13/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/31"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/7/source_group_id"
+        }
+      ],
+      "memsyco-source-4e11a65bfb7aa806dbe0e850": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/14/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/21"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/8/source_group_id"
+        }
+      ],
+      "memsyco-source-dd08b4957f2aeef9f4e117fd": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/15/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/50"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/9/source_group_id"
+        }
+      ],
+      "memsyco-source-8c1cc981bae9ca5399aa7781": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/16/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/33"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/10/source_group_id"
+        }
+      ],
+      "memsyco-source-384a31e2c7996eef8d024908": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/17/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/13"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/11/source_group_id"
+        }
+      ],
+      "memsyco-source-c9f6985bec208ffaa141224f": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/18/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/46"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/12/source_group_id"
+        }
+      ],
+      "memsyco-source-40181068d091b642803df762": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/19/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/15"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/13/source_group_id"
+        }
+      ],
+      "memsyco-source-e7d11f6a33164e81a103cdc0": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/20/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/54"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/14/source_group_id"
+        }
+      ],
+      "memsyco-source-47aa8b0f78a0dc94ff34538c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/21/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/18"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/15/source_group_id"
+        }
+      ],
+      "memsyco-source-4aa6b078f2655b8c73fd0bdf": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/22/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/19"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/16/source_group_id"
+        }
+      ],
+      "memsyco-source-d9dadebac3abf2e6ebcd02df": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/23/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/49"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/17/source_group_id"
+        }
+      ],
+      "memsyco-source-cb4decd8382c70d985f75233": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/24/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/47"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/18/source_group_id"
+        }
+      ],
+      "memsyco-source-fdad3218243f87f29d010910": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/25/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/58"
+        },
+        {
+          "registry": "repair-v10-failure-audit.json",
+          "json_path": "/rows/19/source_group_id"
+        }
+      ],
+      "memsyco-source-f68d634666ba80614d79aa90": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/26/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/48/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/56"
+        }
+      ],
+      "memsyco-source-365d77354e9006031d8fdfb7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/27/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/12"
+        }
+      ],
+      "memsyco-source-190caca2001c506afd365198": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/28/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/51/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/5"
+        }
+      ],
+      "memsyco-source-aa9abf729a149417ef1aeaca": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/29/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/52/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/40"
+        }
+      ],
+      "memsyco-source-2667d3c60fa1498b25f2a8ef": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/30/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/8"
+        }
+      ],
+      "memsyco-source-b1200e9a3652dc9b42d228fc": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/31/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/55/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/42"
+        }
+      ],
+      "memsyco-source-274aefd0d61191729ed6e385": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/32/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/9"
+        }
+      ],
+      "memsyco-source-52697258b1183ae20d7954e3": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/33/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/62/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/25"
+        }
+      ],
+      "memsyco-source-64328d93481b0bfabb68d3cb": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/34/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/63/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/28"
+        }
+      ],
+      "memsyco-source-52685c3a8526c10ff025ca2c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/35/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/24"
+        }
+      ],
+      "memsyco-source-ad15635a550a2f0ab144c26a": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/36/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/41"
+        }
+      ],
+      "memsyco-source-a36827f12d2691b971456a45": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/37/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/38"
+        }
+      ],
+      "memsyco-source-3d0b1290434c89ff63fe4f76": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/38/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/14"
+        }
+      ],
+      "memsyco-source-15a1d551a28d4cfa1e5fa8a1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/39/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/4"
+        }
+      ],
+      "memsyco-source-e0fb723775a336bcb989bd56": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/40/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/52"
+        }
+      ],
+      "memsyco-source-c7c638d4db63f5ad3c852193": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/41/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/45"
+        }
+      ],
+      "memsyco-source-1c51ea16132dd22ef1ee6be7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/42/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/6"
+        }
+      ],
+      "memsyco-source-14dca35e860862716d26e7b7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/43/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/3"
+        }
+      ],
+      "memsyco-source-e707f00fd5aa05e214dbd14e": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/44/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/53"
+        }
+      ],
+      "memsyco-source-4ec73480f0c02b4d1ccf8af1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/45/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/22"
+        }
+      ],
+      "memsyco-source-86b9287b9cd8faf0a1fedbdf": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/46/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/32"
+        }
+      ],
+      "memsyco-source-5ae2d7900019902b0e86c59e": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/47/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/27"
+        }
+      ],
+      "memsyco-source-529c67ef5a9813602b7f6a58": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/49/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/26"
+        }
+      ],
+      "memsyco-source-9cbe67332d764fb91749efcb": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/50/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/37"
+        }
+      ],
+      "memsyco-source-c65c39d5d02e4db8e6e2cb90": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/53/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/44"
+        }
+      ],
+      "memsyco-source-4bc3cc764b241c96a3af69e5": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/54/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/20"
+        }
+      ],
+      "memsyco-source-b545fde42062315e92fa8e4b": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/56/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/43"
+        }
+      ],
+      "memsyco-source-f560bb7e791ce9d2c6f228b1": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/57/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/55"
+        }
+      ],
+      "memsyco-source-ff775348f627efe69160c14d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/58/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/59"
+        }
+      ],
+      "memsyco-source-8fd8855a1956153401fc0805": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/59/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/35"
+        }
+      ],
+      "memsyco-source-6dc70eb1b2283fbdce69c8d7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/60/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/29"
+        }
+      ],
+      "memsyco-source-0766599c522b23c9e8d6fbae": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/61/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/0"
+        }
+      ],
+      "memsyco-source-f8138680743667cf8b599f60": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/64/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/57"
+        }
+      ],
+      "memsyco-source-6eaaf3b08e55c55d08223120": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/65/source_group_id"
+        },
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/source_groups_excluded_from_confirmation/30"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=18": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/0/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/7/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/7/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=20": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/1/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/9/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/9/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=22": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/2/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/11/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/11/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=19": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/3/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/8/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/8/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=11": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/0/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/0/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=12": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/1/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/1/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=13": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/2/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/2/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=14": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/3/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/3/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=15": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/4/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/4/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=16": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/5/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/5/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=17": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/6/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/6/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=21": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/10/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/10/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=23": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/12/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/12/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=24": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/13/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/13/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=25": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/14/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/14/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=26": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/15/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/15/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=27": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/16/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/16/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=28": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/17/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/17/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=5": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/0/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/0/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-merit-selection-20260929.json",
+          "json_path": "/groups/smoke/arcs/0/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=6": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/1/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/1/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=7": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/2/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/2/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=8": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/3/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/3/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=9": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/4/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/4/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=10": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/5/source_group_id"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/5/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=29": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/0/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=30": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/1/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=31": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/2/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=32": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/3/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=33": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/4/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=34": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/5/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=35": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/6/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=36": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/7/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=37": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/8/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=38": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/9/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=39": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/10/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d1:base_seed=40": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/11/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=41": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/12/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=42": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/13/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=43": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/14/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=44": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/15/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=45": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/16/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=46": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/17/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=47": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/18/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=48": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/19/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=49": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/20/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=50": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/21/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=51": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/22/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d2:base_seed=52": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/23/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=53": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/24/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=54": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/25/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=55": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/26/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=56": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/27/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=57": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/28/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=58": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/29/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=59": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/30/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=60": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/31/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=61": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/32/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=62": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/33/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=63": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/34/source_group_id"
+        }
+      ],
+      "MERIT:293933d96b1d1849e1f20d1bb324def5de9ed33f:d3:base_seed=64": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/35/source_group_id"
+        }
+      ]
+    },
+    "dialogue_sha256": {
+      "544b6a80244b69945b420d9008a43c0ba1975f122102587d05aab97cc50ae1b6": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/0/dialogue_sha256"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-memsyco-selection-20260929.json",
+          "json_path": "/groups/smoke/cases/0/dialogue_sha256"
+        }
+      ],
+      "962cf37aba2567598c8de9cd17e4ead740312dfd1c8263b63ba9c5486fe08380": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/1/dialogue_sha256"
+        }
+      ],
+      "128a73b6ff6c687969d9f29d3728ab218343ad81f9c394068c2477e7d64066a9": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/2/dialogue_sha256"
+        }
+      ],
+      "1c213cf953b1b71ac2f867b7b082a51488e05d2fc88573265fd300e0bbd1f441": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/3/dialogue_sha256"
+        }
+      ],
+      "0412fe6a2fd56269b74062c425a4598a18d025c7571f4ae6b023e1d8775d15a8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/4/dialogue_sha256"
+        }
+      ],
+      "c206babd4891b017eabfeb68a348f6d16a2e49dce150dc935ec0467cdf16b4af": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/5/dialogue_sha256"
+        }
+      ],
+      "5b6c431aa43eea39936a2d74b2b05393087983e7f96203edc3365e8a19539863": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/6/dialogue_sha256"
+        }
+      ],
+      "6970e28dfdef59f671819379a9c1cfae9a8cd00b054fa1529b00a30b5f1b744d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/7/dialogue_sha256"
+        }
+      ],
+      "18689e26b8f89a7db419fa6c50319603f09cdf9ba40b7b04f9184680e96670a3": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/8/dialogue_sha256"
+        }
+      ],
+      "004ba5d9ab281367e8b39251ceac024cc8e0d5a7457763b3301f1541f4588884": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/9/dialogue_sha256"
+        }
+      ],
+      "01fd32726960a088bb49cd2c69f3346fa12426fbfb615695563b7ab066d45f35": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/10/dialogue_sha256"
+        }
+      ],
+      "eb14d965b924d74c5c49a61e64cb4b6945f312664c8fb4bd379ca04f4a9b64e7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/11/dialogue_sha256"
+        }
+      ],
+      "f4521b1a6489867aaaa49c60bbf5f0f3707f4ffa400cfe503ea55a5c3b9a4fe3": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/12/dialogue_sha256"
+        }
+      ],
+      "5204c9314278aa1b65111e95a473b960cb640c1c60a086843089aea127cbfa23": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/13/dialogue_sha256"
+        }
+      ],
+      "5711fb66767ee4a43c078fae031a309df177cb03258dc222c2413b081ab72a18": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/14/dialogue_sha256"
+        }
+      ],
+      "e1c316bdeffa6ba521d1f194b2650353770b09755153e8c26063dffbf500f8a7": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/15/dialogue_sha256"
+        }
+      ],
+      "e85dc0c1574774c1765f40ea1c4476494a6b06cd314570b25b1dedf23cbc0d00": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/16/dialogue_sha256"
+        }
+      ],
+      "66b4c238aaec7bdbebd9e0401d2cc8886a86e8cbcabbe03b319672ca4aba2f53": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/17/dialogue_sha256"
+        }
+      ],
+      "8e9a568c5c7c46e674996b2998315f234e148700fe2ae219bce855fac3e0d426": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/18/dialogue_sha256"
+        }
+      ],
+      "5c974ca5e70296f10d3d3af46b4187a4f3f9a75540e31e2c002bdc81cf6accee": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/19/dialogue_sha256"
+        }
+      ],
+      "50e607293ee5808a967ab90f9dd89711f490c5300e52c95dd1993d3641751331": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/20/dialogue_sha256"
+        }
+      ],
+      "efa342d47401dd078a540eeacc9a5e4d5313072e36ea8cc20f2a834a67b9ed46": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/21/dialogue_sha256"
+        }
+      ],
+      "4c3f4746fe512277863934780ff4d021cf3e882dd4191ee647666cd74d584cad": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/22/dialogue_sha256"
+        }
+      ],
+      "706f4daf5cece7c4b6859c405fdbb19b75274d31cb96fa5662dd5c69c9cdbd65": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/23/dialogue_sha256"
+        }
+      ],
+      "5cc9a1a3653338b31cff3f848a08cf667c5b16d066054c21aae4d0c73aa0a3a3": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/24/dialogue_sha256"
+        }
+      ],
+      "c782852ceb36e3c2b3783ee18e6bb01c1a44c19c9074cec219afdf0fc310dab8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/25/dialogue_sha256"
+        }
+      ],
+      "f69bddc121103217a656df7a8d380e1d44f4a5208279ac508cd1ecfa7ab3238b": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/26/dialogue_sha256"
+        }
+      ],
+      "104cc24fa5bd677d6dce7e632d3b776ccd00019441818423925b7b329a256268": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/27/dialogue_sha256"
+        }
+      ],
+      "17939e54f3947d805374ea903ea882f289fa9ecc6784adaa605990ac2eb0a12f": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/28/dialogue_sha256"
+        }
+      ],
+      "f4321e0c2a734c72c07b39d71c2873f16f0a2dc9296b0e69862c80f4667f5384": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/29/dialogue_sha256"
+        }
+      ],
+      "5f02baaec6f36266280d13033d488da41ac732280cce5adbaf3b3d85b7914bed": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/30/dialogue_sha256"
+        }
+      ],
+      "22b8b230cdc1a4086e339776675a93141808644725b5934cb7c01977fd9209b6": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/31/dialogue_sha256"
+        }
+      ],
+      "bd39967700d4a88173fd77949a421a0ad15eb713f373e66a02ac4956b58da95d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/32/dialogue_sha256"
+        }
+      ],
+      "8b1f22fda133a3ae2f9d6a0a52546d889e4d0ba357f555a3ebd2c3761fa25082": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/33/dialogue_sha256"
+        }
+      ],
+      "f677f99dd5087e7c757f349b85b5c4159b3eadef5f792c08b5e1a907e0e7e33c": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/34/dialogue_sha256"
+        }
+      ],
+      "458098d3adde820c2e62dca91f9f50b72bec3a72d70bad4dc1c11d5071c631d9": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/35/dialogue_sha256"
+        }
+      ],
+      "ae056fb61d7e76f2a8e621ef6349b4db694f3f055d1087de0f1b3b2e57e337f0": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/36/dialogue_sha256"
+        }
+      ],
+      "69d0984c029c1c40091203fa365c9571d34ba11b4dcd99ad1add442b0dac368d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/37/dialogue_sha256"
+        }
+      ],
+      "10d910a48fd0518407557069da929ba6c98b84d5db5c01ba99872d71bfd4d4be": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/38/dialogue_sha256"
+        }
+      ],
+      "d586816d49890bde5e79c9174492f27b35538e56bf350def846f041fb3faf6cb": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/39/dialogue_sha256"
+        }
+      ],
+      "7ec9dedc2d9103f7eeab0a9e9fbb7841def4c42161e50f9408b596790b9c18a2": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/40/dialogue_sha256"
+        }
+      ],
+      "7c801001f68673bc67798c4740fc2548e33380743e558b36d890a98f5240da0b": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/41/dialogue_sha256"
+        }
+      ],
+      "9f6abded6edb3b42292d573eccedf2ab09e4cb43ca5e0d0162a1f5946aeb830e": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/42/dialogue_sha256"
+        }
+      ],
+      "25e2cb6b3279ada781ddc542818b665f7c9e61de8f51ad74d8e29ff5c4abf94a": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/43/dialogue_sha256"
+        }
+      ],
+      "e99b6d982514ec2f7a627fd06d4f5e35bda0ad3b62839ad81b683f09426982e5": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/44/dialogue_sha256"
+        }
+      ],
+      "b813cc6e7285cafc53d667a80f86a7953fb3bca8a2530a53393cffa5d6cf7371": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/45/dialogue_sha256"
+        }
+      ],
+      "1ae71abaeeaedb45f0ea8fea1ff562d044ea8e0392de49efcfdb30f838303c06": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/46/dialogue_sha256"
+        }
+      ],
+      "a221297a0b5cb7006fa82bd941fe3aa253afd34529074b790c47fef81566a842": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/47/dialogue_sha256"
+        }
+      ],
+      "e80018d67e257b4ef3f0a0ff05cbe266898e95cb4edc1efb0996759d4fc3c192": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/48/dialogue_sha256"
+        }
+      ],
+      "662609eafc0bb40428c508daef2a1f7c12a2b968a658f81e88e7ab04ce2041dc": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/49/dialogue_sha256"
+        }
+      ],
+      "2a000fbeb550b5630a815fb7a5f74c3d7ba4bbaa50a772937e92baaf43c208bd": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/50/dialogue_sha256"
+        }
+      ],
+      "20f11442282203565641a50c0031b9c6cab167c192e954e4dcfa0ae75ef72cc8": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/51/dialogue_sha256"
+        }
+      ],
+      "09abb46f7282dffe5bbc8b9bd3fe2b7a5f563642bc146d0bddf39b8485383ecf": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/52/dialogue_sha256"
+        }
+      ],
+      "5b718e785f5b509a8779a75bb71d05bcd0725b3d25052e383af9482dd4858335": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/53/dialogue_sha256"
+        }
+      ],
+      "0637e9d47b672ae67c076f9dd70fa94dd00123819e7d443f6721bda12726e513": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/54/dialogue_sha256"
+        }
+      ],
+      "5014cc4b84443dc72fd792b504dcaf4d46602f275d4e2c75931f84c4c2c95b51": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/55/dialogue_sha256"
+        }
+      ],
+      "d51bde981d13368f35e47413f997c2e05fda2ef1bd8e5406b6f7a67c7866c35f": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/56/dialogue_sha256"
+        }
+      ],
+      "4310b36ad3c5ab9accb2f210ba6ac7c03038e41100fc2555857aa3ec46140b09": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/57/dialogue_sha256"
+        }
+      ],
+      "abfd8ca5d1c62bbf0e8fb8ce759af49820ff11c160cff1e067e093450c152c67": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/58/dialogue_sha256"
+        }
+      ],
+      "81b805dc00b55f82c7226428706a9d6cfdf6e30e9d7ab17243410a9ae09e8af9": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/59/dialogue_sha256"
+        }
+      ],
+      "14cad7580689f9ebed85b3491f04e7a9a68e90424abf2193dbb31cbabbc75428": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/60/dialogue_sha256"
+        }
+      ],
+      "dafe858a97864326c153888b0ef67a72cc0340eb81647dd189d1aa07c22dbf55": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/61/dialogue_sha256"
+        }
+      ],
+      "b723ebb25ff56bb9463dd3f41dee0b3759cde84d2b9d317421978d4eb50e179d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/62/dialogue_sha256"
+        }
+      ],
+      "37a96920d2ab3257a68ea9b5e2ca5492900f62bb01637fc2379771fa4b4e9827": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/63/dialogue_sha256"
+        }
+      ],
+      "194548f31c61297d7cca45c5a475872d61be2f9edae63763e71a248239719d0d": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/64/dialogue_sha256"
+        }
+      ],
+      "f6e705323fc3ac56f77ea320891c678eb33a7acf747b98571079900dbce3e974": [
+        {
+          "registry": "repair-v10-exposure-registry.json",
+          "json_path": "/memsyco/known_v8_v9_exposed_rows/65/dialogue_sha256"
+        }
+      ]
+    },
+    "merit_base_seeds": {
+      "0": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/0/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/0/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/0/generator_arguments/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/0/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/1/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/2/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/3/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/4/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/5/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/12/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/13/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/14/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/15/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/16/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/19/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/20/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/21/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds/0"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds/0"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds/0"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds/0"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/known_exposed_base_seeds/0"
+        }
+      ],
+      "1": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/1/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/1/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/1/generator_arguments/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/6/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/7/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/8/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/17/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds/1"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds/1"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds/1"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds/1"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/known_exposed_base_seeds/1"
+        }
+      ],
+      "2": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/2/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/2/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/2/generator_arguments/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/9/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/10/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/11/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/records/18/base_seed"
+        },
+        {
+          "registry": "contextual-memory-v14-exposure-rule.json",
+          "json_path": "/known_exposed_base_seeds/2"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds/2"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds/2"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds/2"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/known_exposed_base_seeds/2"
+        }
+      ],
+      "3": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/3/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/3/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/3/generator_arguments/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds/3"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds/3"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds/3"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/known_exposed_base_seeds/3"
+        }
+      ],
+      "4": [
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/4/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_arcs/4/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/4/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/records/4/generator_arguments/base_seed"
+        },
+        {
+          "registry": "local-state-attention-merit-exposure.json",
+          "json_path": "/known_exposed_base_seeds/4"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit/known_exposed_base_seeds/4"
+        },
+        {
+          "registry": "unified-v8-v9-exposure-20260928.json",
+          "json_path": "/merit_recheck/known_exposed_base_seeds/4"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/known_exposed_base_seeds/4"
+        }
+      ],
+      "18": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/7/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/7/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/7/generator_arguments/base_seed"
+        }
+      ],
+      "20": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/9/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/9/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/9/generator_arguments/base_seed"
+        }
+      ],
+      "22": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/11/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/11/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/11/generator_arguments/base_seed"
+        }
+      ],
+      "19": [
+        {
+          "registry": "repair-v10-r1-l2-selection.json",
+          "json_path": "/groups/development/arcs/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/8/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/8/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/8/generator_arguments/base_seed"
+        }
+      ],
+      "11": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/0/generator_arguments/base_seed"
+        }
+      ],
+      "12": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/1/generator_arguments/base_seed"
+        }
+      ],
+      "13": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/2/generator_arguments/base_seed"
+        }
+      ],
+      "14": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/3/generator_arguments/base_seed"
+        }
+      ],
+      "15": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/4/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/4/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/4/generator_arguments/base_seed"
+        }
+      ],
+      "16": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/5/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/5/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/5/generator_arguments/base_seed"
+        }
+      ],
+      "17": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/6/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/6/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/6/generator_arguments/base_seed"
+        }
+      ],
+      "21": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/10/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/10/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/10/generator_arguments/base_seed"
+        }
+      ],
+      "23": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/12/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/12/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/12/generator_arguments/base_seed"
+        }
+      ],
+      "24": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/13/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/13/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/13/generator_arguments/base_seed"
+        }
+      ],
+      "25": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/14/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/14/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/14/generator_arguments/base_seed"
+        }
+      ],
+      "26": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/15/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/15/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/15/generator_arguments/base_seed"
+        }
+      ],
+      "27": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/16/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/16/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/16/generator_arguments/base_seed"
+        }
+      ],
+      "28": [
+        {
+          "registry": "unified-v8-v9-merit-development-inputs-20260929.json",
+          "json_path": "/groups/development/arcs/17/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/17/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/development/cases/17/generator_arguments/base_seed"
+        }
+      ],
+      "5": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/0/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-u2-pilot-merit-selection-20260929.json",
+          "json_path": "/groups/smoke/arcs/0/base_seed"
+        }
+      ],
+      "6": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/1/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/1/base_seed"
+        }
+      ],
+      "7": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/2/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/2/base_seed"
+        }
+      ],
+      "8": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/3/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/3/base_seed"
+        }
+      ],
+      "9": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/4/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/4/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/4/base_seed"
+        }
+      ],
+      "10": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/5/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/smoke/cases/5/generator_arguments/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-smoke-inputs-20260929.json",
+          "json_path": "/groups/smoke/arcs/5/base_seed"
+        }
+      ],
+      "29": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/0/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/0/generator_arguments/base_seed"
+        }
+      ],
+      "30": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/1/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/1/generator_arguments/base_seed"
+        }
+      ],
+      "31": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/2/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/2/generator_arguments/base_seed"
+        }
+      ],
+      "32": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/3/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/3/generator_arguments/base_seed"
+        }
+      ],
+      "33": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/4/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/4/generator_arguments/base_seed"
+        }
+      ],
+      "34": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/5/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/5/generator_arguments/base_seed"
+        }
+      ],
+      "35": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/6/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/6/generator_arguments/base_seed"
+        }
+      ],
+      "36": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/7/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/7/generator_arguments/base_seed"
+        }
+      ],
+      "37": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/8/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/8/generator_arguments/base_seed"
+        }
+      ],
+      "38": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/9/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/9/generator_arguments/base_seed"
+        }
+      ],
+      "39": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/10/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/10/generator_arguments/base_seed"
+        }
+      ],
+      "40": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/11/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/11/generator_arguments/base_seed"
+        }
+      ],
+      "41": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/12/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/12/generator_arguments/base_seed"
+        }
+      ],
+      "42": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/13/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/13/generator_arguments/base_seed"
+        }
+      ],
+      "43": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/14/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/14/generator_arguments/base_seed"
+        }
+      ],
+      "44": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/15/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/15/generator_arguments/base_seed"
+        }
+      ],
+      "45": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/16/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/16/generator_arguments/base_seed"
+        }
+      ],
+      "46": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/17/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/17/generator_arguments/base_seed"
+        }
+      ],
+      "47": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/18/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/18/generator_arguments/base_seed"
+        }
+      ],
+      "48": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/19/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/19/generator_arguments/base_seed"
+        }
+      ],
+      "49": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/20/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/20/generator_arguments/base_seed"
+        }
+      ],
+      "50": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/21/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/21/generator_arguments/base_seed"
+        }
+      ],
+      "51": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/22/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/22/generator_arguments/base_seed"
+        }
+      ],
+      "52": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/23/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/23/generator_arguments/base_seed"
+        }
+      ],
+      "53": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/24/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/24/generator_arguments/base_seed"
+        }
+      ],
+      "54": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/25/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/25/generator_arguments/base_seed"
+        }
+      ],
+      "55": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/26/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/26/generator_arguments/base_seed"
+        }
+      ],
+      "56": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/27/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/27/generator_arguments/base_seed"
+        }
+      ],
+      "57": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/28/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/28/generator_arguments/base_seed"
+        }
+      ],
+      "58": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/29/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/29/generator_arguments/base_seed"
+        }
+      ],
+      "59": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/30/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/30/generator_arguments/base_seed"
+        }
+      ],
+      "60": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/31/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/31/generator_arguments/base_seed"
+        }
+      ],
+      "61": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/32/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/32/generator_arguments/base_seed"
+        }
+      ],
+      "62": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/33/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/33/generator_arguments/base_seed"
+        }
+      ],
+      "63": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/34/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/34/generator_arguments/base_seed"
+        }
+      ],
+      "64": [
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/35/base_seed"
+        },
+        {
+          "registry": "unified-v8-v9-merit-selection-policy-20260928.json",
+          "json_path": "/groups/confirmation/cases/35/generator_arguments/base_seed"
+        }
+      ]
+    }
+  },
+  "union_rule": "All exposed and historically reserved references are conservatively excluded; source/history component propagation still required when selecting new public data. Only metadata, never answers, was read.",
+  "union_counts": {
+    "case_ids": 90,
+    "native_source_ids": 61,
+    "source_group_ids": 120,
+    "dialogue_sha256": 66,
+    "merit_base_seeds": 65
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_ACTUAL_RECEIPT_CONSUMPTION",
+  "diagnostic_only": true,
+  "not_a_new_normal_check": true,
+  "cases": [
+    {
+      "case_id": "object-continue-1",
+      "category": "object_continue",
+      "owner": "object-continue-1-owner",
+      "initial_world": {
+        "label_available": true
+      },
+      "messages": [
+        {
+          "message_id": "object-continue-1-m3",
+          "session_id": "s3",
+          "content": "请查看“蓝色玻璃杯-展厅A”的实际状态，只完成仍然获授权且尚未完成的标签工作；已完成的工作不要重做。",
+          "new_process_before": true
+        }
+      ]
+    }
+  ],
+  "policy": "Same actual completed reservation/label world and saved bank from R7; same public query in a fresh process/session; one generic public tool field semantics instruction. No reformation or mutation repair."
+}

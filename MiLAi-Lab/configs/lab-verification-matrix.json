@@ -70,7 +70,14 @@
     "tests/architecture/test_memory_architecture.py",
     "tests/architecture/test_benchmark_execution_architecture.py",
     "tests/architecture/test_provider_architecture.py",
-    "tests/architecture/test_writer_orchestration.py"
+    "tests/architecture/test_writer_orchestration.py",
+    "tests/memory/test_v13_1_service.py",
+    "tests/memory/test_v13_1_d0.py",
+    "tests/unit/test_v13_1_baseline_micro.py",
+    "tests/memory/test_v13_1_p5.py",
+    "tests/unit/test_v13_1_controls.py",
+    "tests/memory/test_v13_1_p5_compare.py",
+    "tests/memory/test_v13_1_document_publication.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -102,7 +109,14 @@
     "tests/integrations/test_external_interfaces.py",
     "tests/architecture/test_benchmark_execution_architecture.py",
     "tests/architecture/test_provider_architecture.py",
-    "tests/architecture/test_writer_orchestration.py"
+    "tests/architecture/test_writer_orchestration.py",
+    "tests/memory/test_v13_1_service.py",
+    "tests/memory/test_v13_1_d0.py",
+    "tests/unit/test_v13_1_baseline_micro.py",
+    "tests/memory/test_v13_1_p5.py",
+    "tests/unit/test_v13_1_controls.py",
+    "tests/memory/test_v13_1_p5_compare.py",
+    "tests/memory/test_v13_1_document_publication.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",

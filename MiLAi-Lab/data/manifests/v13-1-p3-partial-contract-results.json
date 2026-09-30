@@ -1,0 +1,96 @@
+{
+  "kind": "MILAI_V13_1_P3_PARTIAL_CONTRACT_MATCHED_READER_RESULTS",
+  "status": "PARTIAL_CONSUMPTION_IMPROVEMENT_WITH_ONE_FALSE_SOURCE_ATTRIBUTION",
+  "protocol_sha256": "af582c5cd5f2051f056fb20de83bea6b8a83dcd63819d5cf0a1ad95a464b345a",
+  "rows": [
+    {
+      "backend": "mem0_oss",
+      "leg": "control",
+      "status": "COMPLETED",
+      "material_sha256": "4d5341705932f058f631f06b3ef1460c68d303fae0dbe6b4db22018406fb54e4",
+      "business_partial_distinction": "FAIL",
+      "source_attribution": "NO_ADDITIONAL_FALSE_ATTRIBUTION_DETECTED",
+      "overall": "FAIL",
+      "review_method": "Root full answer/material/public-contract comparison; unblinded development, no model Judge",
+      "review_note": "Reservation result directly described as failure; required historical partial distinction fails.",
+      "answer_sha256": "e166d5167a8bcfbacb2834c508f687ec13cdd2655d546b1c11b40ee768f4a927",
+      "generation_calls": 1,
+      "generation_tokens": 902,
+      "embedding_tokens": 0
+    },
+    {
+      "backend": "mem0_oss",
+      "leg": "candidate",
+      "status": "COMPLETED",
+      "material_sha256": "4d5341705932f058f631f06b3ef1460c68d303fae0dbe6b4db22018406fb54e4",
+      "business_partial_distinction": "PASS",
+      "source_attribution": "FAIL_INVENTED_MEMORY_QUOTE",
+      "overall": "FAIL",
+      "review_method": "Root full answer/material/public-contract comparison; unblinded development, no model Judge",
+      "review_note": "Correctly distinguishes historical reservation created/label not_created; exact real business ID and historical qualification. Invents quotation attributed to existing native memory80986163: reservation was created but the label attempt failed. That phrase came from added public prompt, not actual fixed memory; final field correctness is not evidence attribution correctness.",
+      "answer_sha256": "ecc93e9bde33982313859ff812d9a17b36b0cf5a8c0514696f3b060191d66522",
+      "generation_calls": 1,
+      "generation_tokens": 1124,
+      "embedding_tokens": 0
+    },
+    {
+      "backend": "simplemem_text",
+      "leg": "control",
+      "status": "COMPLETED",
+      "material_sha256": "6cbf4e8f5aca16c03c90c889c742658a5d1836e6ecee15ab0302899043ef01be",
+      "business_partial_distinction": "FAIL",
+      "source_attribution": "NO_ADDITIONAL_FALSE_ATTRIBUTION_DETECTED",
+      "overall": "FAIL",
+      "review_method": "Root full answer/material/public-contract comparison; unblinded development, no model Judge",
+      "review_note": "Reservation result directly described as failure; required historical partial distinction fails.",
+      "answer_sha256": "6d2899dc92d398a5532b44e697c62e18b7e7a55655f9e2f3a47ff88275ff5948",
+      "generation_calls": 1,
+      "generation_tokens": 1146,
+      "embedding_tokens": 0
+    },
+    {
+      "backend": "simplemem_text",
+      "leg": "candidate",
+      "status": "COMPLETED",
+      "material_sha256": "6cbf4e8f5aca16c03c90c889c742658a5d1836e6ecee15ab0302899043ef01be",
+      "business_partial_distinction": "PASS",
+      "source_attribution": "NO_ADDITIONAL_FALSE_ATTRIBUTION_DETECTED",
+      "overall": "PASS_SCOPED",
+      "review_method": "Root full answer/material/public-contract comparison; unblinded development, no model Judge",
+      "review_note": "Correctly distinguishes historical reservation created/label not_created; exact real business ID and historical qualification.",
+      "answer_sha256": "368403afdebb73090e4b9bbb78b0bd345c4e6d6900bce269df3386fd217ad3c3",
+      "generation_calls": 1,
+      "generation_tokens": 1324,
+      "embedding_tokens": 0
+    }
+  ],
+  "cost": {
+    "generation_requests": 4,
+    "generation_tokens": 4496,
+    "embedding_tokens": 0,
+    "judge_requests": 0,
+    "original_native_formation_cost": "Not repeated or free: separately all native micro48generation/88014tokens/3900embedding in original ledger."
+  },
+  "continuous_after": {
+    "generation_requests": 6389,
+    "generation_tokens": 11787812,
+    "embedding_tokens": 420830,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0,
+    "sha256": "566214e33f79cccceec3c30c8b2a2c7f8fe830ea3223685b41cd63593ace0d23"
+  },
+  "conclusion": "Public two-stage contract improves final reservation/label distinction on same actual material. SimpleMem candidate fully scoped correct; Mem0 candidate fields correct but cites invented phrase to real nativeID, failing attribution. Do not equate real reference with support, repair native bank, replace initial failed reader, or claim guard/type/research accuracy gain.",
+  "original_micro_gate": "Unchanged: both original arms5/6 required cases; no source-ID retention in native formed records.",
+  "artifact_sha256": {
+    "mem0_oss-control.json": "93b0a60e0bf35bbdf2f1020d9505760eb3487df9cd0b6c616f7d152d8a8eaf1e",
+    "mem0_oss-control.jsonl": "8e3e085fa80d21e1e20d07c0a8e67e3a9c4f00015fddab9d3d95363fffb51704",
+    "mem0_oss-candidate.json": "e77cacac1d936bfe5494b44f33e6072aa07fccb70f9d5000db1c7f0b5a364b02",
+    "mem0_oss-candidate.jsonl": "16e1914388718139a9ed33c5e89e32f9bf20f7c32745ff91b02039c1587e7f21",
+    "simplemem_text-control.json": "2849898b6f3a5eda0d0dc2110c9fa45bc41568039b11314902c857fc9f930ae7",
+    "simplemem_text-control.jsonl": "6afdceaf49d1f36bc3f6d69a60ec9f117ebab9441d04aa88972d329d414bec4f",
+    "simplemem_text-candidate.json": "06ffc4fce603f6c799f827991146c9d30bb61a96e3fbbd0ae6e091bddd326f80",
+    "simplemem_text-candidate.jsonl": "a8e87301a1b8f43d9da555d38e3a06fb1b7ef0f17a4bc49b67b61ebd675ad6e7"
+  },
+  "full_goal": "ACTIVE P0-P8 unchanged",
+  "product": "NO_GO"
+}

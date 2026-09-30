@@ -1,0 +1,372 @@
+{
+  "kind": "MILAI_V13_1_P4_TYPE_SCOPE_R1_RESULTS",
+  "status": "FAIL_FACTOR_ISOLATION",
+  "planned_case_arms": 16,
+  "completed_formations": 16,
+  "completed_readers": 16,
+  "generation_requests": 32,
+  "generation_tokens": 51011,
+  "embedding_tokens": 0,
+  "ledger_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 6479,
+    "generation": {
+      "charged_tokens": 11953018,
+      "known_tokens": 11953018,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 420830,
+      "known_tokens": 420830,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_after_sha256": "fc31f632c9037b42518a6b50ae576b6bf9285875a4c68d481a471acd4b3d6691",
+  "cases": [
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "flat",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        342583,
+        343246
+      ],
+      "memory_records": 12,
+      "material_tokens": 689,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": false,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000138/flat",
+      "terminal_sha256": {
+        "form": "c8eccc55d1ea247969fae7b17c7cb28ee4505b4f9d5517ad763e5e8cc64b226f",
+        "read": "7a90c03534fe30bd031690e96ee779ec2fef4668933318df7e7450cc69dcdc42"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "type_only",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        343579,
+        344271
+      ],
+      "memory_records": 12,
+      "material_tokens": 752,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": false,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000138/type_only",
+      "terminal_sha256": {
+        "form": "89030e826aea5c146a16be8d3ec9fc484a95adacb437060c9b58ee820ca719fd",
+        "read": "f4ed7ddd951974b3c3da8ab9a8fe2fb4e0287c91fa146d3b628ee3b228d149d5"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "flat_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        344598,
+        345033
+      ],
+      "memory_records": 4,
+      "material_tokens": 395,
+      "flat_scope_type_columns_contaminated": true,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000138/flat_scope",
+      "terminal_sha256": {
+        "form": "616948ec6d4d7e8ccc1c26c60f4a1fb5ae8aefc1ce3cb667817bea01a27ec35d",
+        "read": "7150914ef1238cbd3769db289318fb307c1cb1c25f03ce2129068231684cef38"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "type_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        345462,
+        346196
+      ],
+      "memory_records": 12,
+      "material_tokens": 880,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": false,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000138/type_scope",
+      "terminal_sha256": {
+        "form": "4193733f517bacad31903c4d8b5fc55fcd1b197b38e297fd8f0f482082f23f3b",
+        "read": "77fa2aa5a414baccae44bb0d66266b1f7d6606e4e1347108aa6237b2bb68ce81"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "flat",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        346612,
+        347078
+      ],
+      "memory_records": 8,
+      "material_tokens": 538,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000206/flat",
+      "terminal_sha256": {
+        "form": "dcb9e8661a3f0ead5e89327abed117b2bbe3dbb7af073632ffc2c17b74cd098f",
+        "read": "3a17a144296f4227bf9296a57e71acf4ba93100b81c10660eb5b9a15c64aa6d2"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "type_only",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        347507,
+        348068
+      ],
+      "memory_records": 8,
+      "material_tokens": 546,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000206/type_only",
+      "terminal_sha256": {
+        "form": "3c05877ca82115d1e5d9574e03561ccb7f228912d1ff3dbb26d61c6b45b40c85",
+        "read": "6d3c6032e6fa31a5f2fb9b7ffa186f9608a0b67d6a5f5237749eddde5cd0c4e9"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "flat_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        348494,
+        349003
+      ],
+      "memory_records": 7,
+      "material_tokens": 548,
+      "flat_scope_type_columns_contaminated": true,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000206/flat_scope",
+      "terminal_sha256": {
+        "form": "a16d2994ff563cfdbfb9d0eb0d738d4fb91d9ac05db29e76adb29d02efad1be6",
+        "read": "5b41fc0ad9e46924f88e47d6567d931f22f2bd919fc14f1b1c50387c2f80385b"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "type_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        349427,
+        350118
+      ],
+      "memory_records": 8,
+      "material_tokens": 625,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000206/type_scope",
+      "terminal_sha256": {
+        "form": "30debed910df4065922c5b15c1e945d04b90217361c54c228a7ebb8f48f6a4b3",
+        "read": "4f07384a2d05a5c46cebd217bd4c4b5f3dacf3687bf02b219fc22e651cf79fee"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "flat",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        350464,
+        351016
+      ],
+      "memory_records": 8,
+      "material_tokens": 518,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000204/flat",
+      "terminal_sha256": {
+        "form": "27f49a0ff24511df04ad22a6522613fe2776e2852dc92773aa6e9ea473b06e31",
+        "read": "8de2e262454a2ceade23b35236feceb294c89d0dfe8af3b7168ed607c2217b07"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "type_only",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        351367,
+        351920
+      ],
+      "memory_records": 7,
+      "material_tokens": 463,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000204/type_only",
+      "terminal_sha256": {
+        "form": "10645c1737719674244ee749fdd5e70894bf936e302849c9b1aea4289ad12c55",
+        "read": "46b625da97de3c93c74c3d41d1e18d410f861f4311c68a01ebcc6788ef787260"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "flat_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        352372,
+        352834
+      ],
+      "memory_records": 5,
+      "material_tokens": 411,
+      "flat_scope_type_columns_contaminated": true,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000204/flat_scope",
+      "terminal_sha256": {
+        "form": "37818b5ad9d9ae189cb8005cc937040cfe6176836bfecbdacde9140651f3f220",
+        "read": "0acdc3547f8ba061e58e6de9c34a0601290a0b59bebcb7161d4a9db66d70f6df"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "type_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        353242,
+        353749
+      ],
+      "memory_records": 7,
+      "material_tokens": 559,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000204/type_scope",
+      "terminal_sha256": {
+        "form": "f824738a27a508f789a262bd33edbafc4e9c5682577c2a292226b389e0ef4be2",
+        "read": "0ffbb20e9de24e5f06da960fe11c60f19136ef256990ab9b85bb2550a7d6b7f1"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "flat",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        354291,
+        354884
+      ],
+      "memory_records": 11,
+      "material_tokens": 709,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000059/flat",
+      "terminal_sha256": {
+        "form": "2e682b8b04196635159c97dc398d248a70a486a5c19117ea477df01c6050cf56",
+        "read": "a7d83124335c1bedee420f6ba181df2a94ebb4e70c6039cb8002d10fc61a5d16"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "type_only",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        355297,
+        355878
+      ],
+      "memory_records": 10,
+      "material_tokens": 685,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000059/type_only",
+      "terminal_sha256": {
+        "form": "144baeddf5e0b20c62c58db0c58242ebb80e6138cbce79b27593b6f27a2e848e",
+        "read": "c4046866c2fdad04fadbcc2b5f0cb30d2e12fef995f68ff248ac5d9ba9ead9dd"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "flat_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        356220,
+        357114
+      ],
+      "memory_records": 12,
+      "material_tokens": 853,
+      "flat_scope_type_columns_contaminated": true,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000059/flat_scope",
+      "terminal_sha256": {
+        "form": "2e6bb317ddfbf9f2c10294b575ec4b67bab540a735d7f556963fe0fcaa6eb5b2",
+        "read": "69dec70b920eed76df03a6de1f980c51a7a685174b8e57e3042beb9e111de2ce"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "type_scope",
+      "phase_status": [
+        "COMPLETED",
+        "COMPLETED"
+      ],
+      "process_ids": [
+        357466,
+        358170
+      ],
+      "memory_records": 11,
+      "material_tokens": 797,
+      "flat_scope_type_columns_contaminated": false,
+      "retained_last_public_event": true,
+      "artifact_root": "artifacts/v13-1-p4-type-scope/mso_hard_000059/type_scope",
+      "terminal_sha256": {
+        "form": "a768432cd547872f209edd962604e386e23e53cf699c43c74e236b48d3357c7c",
+        "read": "fe3ac55719181a8112de6da756e9ff1325be3734e65c84f16389aa41ac8c7329"
+      }
+    }
+  ],
+  "primary_interpretation": "Open scope admitted kind/type surrogate annotations in Flat+Scope; clean Type×Scope separation not established. Bank omission of last episode occurred under record cap despite context/material capacity admission. No Attention eligible (missing bank evidence). No score/independent type gain asserted. R1 original artifacts not repaired; R2 closescope schema generically, paidnewformation.",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

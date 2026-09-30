@@ -1,0 +1,83 @@
+{
+  "status": "ROOT_SOURCE_CHECKED_ZERO_GENERATION_OR_EMBEDDING",
+  "source_file_count": 205,
+  "source_sha256": "cda9bf914dfdd9291626c219c32c3cff8c5b1cd28ae13596e0b28b599b20b68a",
+  "source_identity_artifact_sha256": "6b115946067ee23090cb1f801fc3ebd979174aa4eff65006ed7c666b673aa20f",
+  "continuous_ledger_before_sha256": "16ab395bdbf189b3a34608bdf5621e9a3dbb443cfa34fb1b94a472a992f993e9",
+  "generation_requests": 6669,
+  "generation_tokens": 12713711,
+  "embedding_tokens": 420830,
+  "live_readonly_models": {
+    "7860": {
+      "object": "list",
+      "data": [
+        {
+          "id": "Qwen3.6-35B-A3B-FP8",
+          "object": "model",
+          "created": 1790762207,
+          "owned_by": "vllm",
+          "root": "/models",
+          "parent": null,
+          "max_model_len": 65536,
+          "permission": [
+            {
+              "id": "modelperm-a3af03c06d49e4f8",
+              "object": "model_permission",
+              "created": 1790762207,
+              "allow_create_engine": false,
+              "allow_sampling": true,
+              "allow_logprobs": true,
+              "allow_search_indices": false,
+              "allow_view": true,
+              "allow_fine_tuning": false,
+              "organization": "*",
+              "group": null,
+              "is_blocking": false
+            }
+          ]
+        }
+      ]
+    },
+    "7861": {
+      "object": "list",
+      "data": [
+        {
+          "id": "bge-m3",
+          "object": "model",
+          "created": 1790762207,
+          "owned_by": "vllm",
+          "root": "/data/models/embed",
+          "parent": null,
+          "max_model_len": 8192,
+          "permission": [
+            {
+              "id": "modelperm-27d32265cf2c416597c4e8665fa831df",
+              "object": "model_permission",
+              "created": 1790762207,
+              "allow_create_engine": false,
+              "allow_sampling": true,
+              "allow_logprobs": true,
+              "allow_search_indices": false,
+              "allow_view": true,
+              "allow_fine_tuning": false,
+              "organization": "*",
+              "group": null,
+              "is_blocking": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "mechanical_test_qualification": "80 actual SDK/Mock provider tests; no model semantic evidence",
+  "tests": {
+    "p3-controls-final-mypy.txt": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+    "p3-controls-final-ruff.txt": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "p3-controls-final-matrix.txt": "db00c2c01219517c18d5de8a3f1d61dbd57347d0345cfe01256e7825fd883b44",
+    "p3-controls-final-pytest.txt": "62336a60967f470a351f7feeee0d7e32d574044d67654b75f868e6b037bcaeff"
+  },
+  "first_red_retained": true,
+  "root_input_draft_corrections": "Independent synthetic IDs for new preference boundary; capacity stress recipe explicitly flagged before source/fixture freeze; no HTTP replays",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

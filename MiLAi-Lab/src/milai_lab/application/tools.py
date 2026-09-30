@@ -84,3 +84,16 @@ def _business_tools(world: ApplicationWorld, user_id: str) -> list[Any]:
         "complete_label": lambda _world, **args: invoke(world.complete_label, **args),
     }
     return native_business_tools(None, BUSINESS_SCHEMAS, functions)
+
+
+def document_business_tools(world: Any, user_id: str) -> list[BaseTool]:
+    from milai_lab.application.document_publication import DOCUMENT_NAMES, document_schemas
+
+    def execute(name: str, **arguments: Any) -> str:
+        with world.tool_lock:
+            return str(getattr(world, name)(user_id, **arguments))
+
+    functions = {
+        name: (lambda _world, _name=name, **args: execute(_name, **args)) for name in DOCUMENT_NAMES
+    }
+    return native_business_tools(None, document_schemas(), functions)

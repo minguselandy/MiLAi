@@ -1,0 +1,64 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_RETRIEVAL_DIAGNOSTIC",
+  "status": "PRE_RESULTS_FROZEN",
+  "fixture_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/data/fixtures/v13-1-retrieval-r2-fixed-bank.json",
+  "fixture_sha256": "e9ad70bbb672d5588a85c144f4118559b29103d2c2d07ddd19db31539a1bf9cc",
+  "original_source_commit": "54e8a96",
+  "original_bank_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-d0/1ed93fe22f2194f3/memory.sqlite",
+  "original_bank_sha256": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+  "identical_initial_bank": true,
+  "namespace_run_id": "v13-1-d0",
+  "fixed_zero_model_query": "通勤方式偏好",
+  "fixed_negative_zero_model_query": "紫色沙滩帐篷",
+  "zero_model_query_limit": 10,
+  "arms": {
+    "control": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-retrieval-r2/control/v13-1-d0",
+      "initial_bank_sha256": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+      "initial_bank_bytes": 24576,
+      "source_lab": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-r1-replay/MiLAi-Lab",
+      "runtime_freeze": "NOT_PREPARED"
+    },
+    "candidate": {
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-retrieval-r2/candidate/v13-1-d0",
+      "initial_bank_sha256": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+      "initial_bank_bytes": 24576,
+      "source_lab": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab",
+      "runtime_freeze": "NOT_PREPARED"
+    }
+  },
+  "held_constant": [
+    "public input",
+    "persisted bank",
+    "owner and namespace",
+    "fresh session id s3",
+    "Host model and parameters",
+    "tool catalog and system prompt",
+    "user/tool SourceEvent capture",
+    "proposal validation and CRUD",
+    "field guard",
+    "call budget",
+    "continuous ledger",
+    "tool permissions and cadence"
+  ],
+  "changed_variable": "MemoryService raw_keyword Unicode lexical tokenization only",
+  "raw_current_capture_clock_note": "Runtime timestamps differ; actual source event and public content identities are identical. Original bank bytes are identical before capture. No model request is made during preparation.",
+  "offline_acceptance": [
+    "original query returns no relevant record in control, relevant committed record in candidate",
+    "negative query remains no-match in both",
+    "compare first actual Host request payloads and generated search queries",
+    "candidate must actually receive correct record and answer original commuting preference",
+    "record any new proposals or mutations, all failures and usage"
+  ],
+  "denial_condition": "Correct record still missing disproves lexical sufficiency; correct delivery but wrong answer localizes a later reader break. Different first Host requests or search query require a qualified comparison.",
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_sha256": "f0a6f45bd14b748005b24bac231e13b72f9ed4e409849d5b98a2f73d6f314748",
+  "generation_requests_before": 6173,
+  "generation_tokens_before": 11442218,
+  "embedding_tokens_before": 416930,
+  "judge_requests": 0,
+  "http_concurrency": 1,
+  "cost_limits": "same existing ledger limits and original D0 per-message cap; all real retries charged",
+  "normal_check_denominator_unchanged": 24,
+  "full_goal_status": "ACTIVE; P0-P8 unchanged"
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "status": "PRE_RESULTS_FROZEN_SHARED_SCOPE_FORMATION",
+  "diagnostic_only": true,
+  "cases": [
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "owner": "scope-1-owner",
+      "messages": [
+        {
+          "message_id": "scope-1-m1",
+          "session_id": "s1",
+          "content": "我自己没有固定素食偏好。请只为本周的团队午餐保存要求：给整个团队准备素食。",
+          "new_process_before": false
+        }
+      ]
+    }
+  ],
+  "policy": "One actual baseline Host formation; verify scope remains intact before frozen-bank reader diagnosis. Do not rewrite a malformed bank."
+}

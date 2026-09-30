@@ -1,0 +1,605 @@
+{
+  "kind": "MILAI_V13_1_P3_CONTROLS_MICRO_PUBLIC",
+  "status": "PUBLIC_INPUT_FROZEN_BEFORE_REAL_HTTP",
+  "origin": "OriginalP3 actualcapturedpublic user/tool receipts unchanged; scripted assistants exactlyretained. Two cases add substantive scriptedclosedpublicpreferences/limits, suppliedidenticallyall7controls, not model-generated history. No artificialnoise for accuracy/Attention; long failure input only explicit capacity mechanicalstress.",
+  "cases": [
+    {
+      "case_id": "persist-restart",
+      "category": "persist_restart",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-f52fbf57b72937d5fa643367",
+                "event_id": "src-7f9a4ae0a4fc5aa76506eb7bbf6ecb76cd24e62e7a2f03a3c014944b6fa3b28c",
+                "role": "user",
+                "content": "请记住：我偏好简短回答。",
+                "timestamp": "2026-09-30T04:23:53.596782+00:00",
+                "session_id": "s-c789275ddae962ce52081b18"
+              },
+              {
+                "id": "m-abba19a631439febb1ad44ff",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.764943+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a2",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-2",
+            "records": [
+              {
+                "id": "v13-controls-persist-restart-1-user",
+                "role": "user",
+                "content": "解释复杂概念时也请先用一句话说明结论，再补充必要细节。",
+                "timestamp": "2026-09-30T05:00:01+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              },
+              {
+                "id": "v13-controls-persist-restart-1-assistant",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T05:00:01.100000+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s2",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a3",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-3",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-3",
+            "records": [
+              {
+                "id": "v13-controls-persist-restart-2-user",
+                "role": "user",
+                "content": "如果我单独要求详细说明，再展开；默认回答仍保持简短。",
+                "timestamp": "2026-09-30T05:00:02+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              },
+              {
+                "id": "v13-controls-persist-restart-2-assistant",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T05:00:02.100000+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s3",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-3",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q1",
+          "action": "read",
+          "admission_key": "current-public-q1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "question": "我之前说过的回答长短偏好是什么？"
+          },
+          "large_input_capacity_probe": false
+        }
+      ]
+    },
+    {
+      "case_id": "preference-change",
+      "category": "preference_change",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-fcbf4089a9adc677b0f720bc",
+                "event_id": "src-8bf0e128b0e017d5c5da60706972dc225e0edbf0629208442042ff199dd073c6",
+                "role": "user",
+                "content": "请保存我的饮品偏好：咖啡。",
+                "timestamp": "2026-09-30T04:23:53.765029+00:00",
+                "session_id": "s-346e12901ff59b37b7737770"
+              },
+              {
+                "id": "m-ee45e2265a0e2f81c4677c35",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.782028+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a2",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-2",
+            "records": [
+              {
+                "id": "m-ebd5175fd920cb639b892a95",
+                "event_id": "src-239d80dc2084f28f4159e71f40fd527b2b175fbd82b481b4cfde5603a323001d",
+                "role": "user",
+                "content": "更新我的饮品偏好：现在更喜欢茶，不再首选咖啡。",
+                "timestamp": "2026-09-30T04:23:53.782092+00:00",
+                "session_id": "s-0b889c27d6bfe2ad4ec3bb92"
+              },
+              {
+                "id": "m-ad65511a788004ebfde027ad",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.793378+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s2",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a3",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-3",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-3",
+            "records": [
+              {
+                "id": "v13-controls-preference-change-2-user",
+                "role": "user",
+                "content": "这个变化是我目前的个人偏好；过去首选咖啡的观察要作为历史保留。",
+                "timestamp": "2026-09-30T05:00:02+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              },
+              {
+                "id": "v13-controls-preference-change-2-assistant",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T05:00:02.100000+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s3",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-3",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a4",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-4",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-4",
+            "records": [
+              {
+                "id": "v13-controls-preference-change-3-user",
+                "role": "user",
+                "content": "团体会议按同事需要供咖啡，这个安排不改变我现在偏好茶。",
+                "timestamp": "2026-09-30T05:00:03+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              },
+              {
+                "id": "v13-controls-preference-change-3-assistant",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T05:00:03.100000+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s4",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-4",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a5",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-5",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-5",
+            "records": [
+              {
+                "id": "v13-controls-preference-change-4-user",
+                "role": "user",
+                "content": "我目前个人工作日上午也偏好茶；共享团队安排属于其他人的需求。",
+                "timestamp": "2026-09-30T05:00:04+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              },
+              {
+                "id": "v13-controls-preference-change-4-assistant",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T05:00:04.100000+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s5",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-5",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q1",
+          "action": "read",
+          "admission_key": "current-public-q1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "question": "我当前和以前的饮品偏好分别是什么？"
+          },
+          "large_input_capacity_probe": false
+        }
+      ]
+    },
+    {
+      "case_id": "relative-date",
+      "category": "relative_date",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-23e183eaddda2e313515891f",
+                "event_id": "src-db547b1fcbdca0f163fb4c19f4d81760310c0ef6a2bb070ea5cd20eb0705d023",
+                "role": "user",
+                "content": "项目的Friday交稿只是相对时间约定；尚未提供具体日期，不能确认绝对日期。",
+                "timestamp": "2026-09-30T04:23:53.793439+00:00",
+                "session_id": "s-90ab5ea308bfa4ad8eafbb33"
+              },
+              {
+                "id": "m-cd63c37fc12258610d07db96",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.801625+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q1",
+          "action": "read",
+          "admission_key": "current-public-q1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "question": "项目Friday交稿是否已经能确认绝对日期？"
+          },
+          "large_input_capacity_probe": false
+        }
+      ]
+    },
+    {
+      "case_id": "tool-role-id",
+      "category": "tool_role_id",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-e29f0ad8eea7795b4266ba71",
+                "event_id": "src-e6114ee58b962280b070b7876e45cdefda70b584ab9abceda21959eab9199c12",
+                "role": "user",
+                "content": "请为我预订并制作标签：物品完整引用是“样本箱-实验入口”，数量3，目的地“实验入口”，包装要求“保温隔层”。",
+                "timestamp": "2026-09-30T04:23:53.841790+00:00",
+                "session_id": "s-240e81269b05c4070d71ba49"
+              },
+              {
+                "id": "m-4e8b6a92a090d3a5589ff2e4",
+                "role": "assistant",
+                "content": "",
+                "tool_calls": [
+                  {
+                    "id": "c-a838ff2ee1cd1edf343e295a",
+                    "type": "function",
+                    "function": {
+                      "name": "reserve_and_label",
+                      "arguments": "{\"item_key\": \"样本箱-实验入口\", \"quantity\": 3, \"destination\": \"实验入口\", \"packing\": \"保温隔层\"}"
+                    }
+                  }
+                ],
+                "execution_origin": "synthetic_scripted_public_tool_call"
+              },
+              {
+                "id": "m-4a54ee595df49687ed61583d",
+                "event_id": "src-11be9d25aadd6ff1ec1829b9c76d469614a5f6db7566a98cd9130a727811f141",
+                "role": "tool",
+                "content": "{\"ok\": false, \"status\": \"reserved_label_failed\", \"reason\": \"label_service_unavailable\", \"reservation_id\": \"RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2\", \"item_key\": \"样本箱-实验入口\", \"quantity\": 3, \"destination\": \"实验入口\", \"packing\": \"保温隔层\", \"label_status\": \"not_created\"}",
+                "timestamp": "2026-09-30T04:23:53.911679+00:00",
+                "session_id": "s-240e81269b05c4070d71ba49",
+                "tool_call_id": "c-a838ff2ee1cd1edf343e295a",
+                "name": "reserve_and_label",
+                "status": "success",
+                "execution_origin": "actual_SQLite_ApplicationWorld_public_operation"
+              },
+              {
+                "id": "m-1f365c74d34ef3bd7d92d6da",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.921971+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q1",
+          "action": "read",
+          "admission_key": "current-public-q1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "question": "根据实际工具结果，样本箱-实验入口的预订结果、预约ID和标签状态是什么？"
+          },
+          "large_input_capacity_probe": false
+        }
+      ]
+    },
+    {
+      "case_id": "owner-isolation",
+      "category": "owner_isolation",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-3541f7151646ca5402ba0daa",
+                "event_id": "src-47a46cad9b482da02c2122834c7e79c72eebcc8e022d13cce97de319f6508118",
+                "role": "user",
+                "content": "请保存我的常用办公地点：北侧阅读室。",
+                "timestamp": "2026-09-30T04:23:53.801671+00:00",
+                "session_id": "s-3442c36e04228e96c55d9fd7"
+              },
+              {
+                "id": "m-6ef1d7d71d6fbaf37d3e2db3",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.812191+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q-foreign",
+          "action": "read",
+          "admission_key": "current-public-q-foreign",
+          "value": {
+            "owner": "u-35aac9ec69d45e8bf5685ed1",
+            "question": "我之前保存的常用办公地点是什么？"
+          },
+          "large_input_capacity_probe": false
+        },
+        {
+          "step_id": "q-owner",
+          "action": "read",
+          "admission_key": "current-public-q-owner",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "question": "我之前保存的常用办公地点是什么？"
+          },
+          "large_input_capacity_probe": false
+        }
+      ]
+    },
+    {
+      "case_id": "failure-cost",
+      "category": "failure_cost",
+      "owner": "u-78230ce5c78b26e9c5a42b2f",
+      "steps": [
+        {
+          "step_id": "a1",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-1",
+            "records": [
+              {
+                "id": "m-23a341bc36cc140e693a0f38",
+                "event_id": "src-a504b7fe8c908414d68aaa89df59ad83628cbaecaa7de0ad758f130295e472ee",
+                "role": "user",
+                "content": "请保存我的餐食偏好：少放辣椒。",
+                "timestamp": "2026-09-30T04:23:53.812235+00:00",
+                "session_id": "s-dcbc3ca3e5afff8f5c693899"
+              },
+              {
+                "id": "m-8bbcf056a6afba660ebba96a",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.830811+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s1",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-1",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "a2",
+          "action": "ingest",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f",
+            "boundary_id": "closed-2",
+            "records": [
+              {
+                "id": "m-cdddc7216fadd31a2b8410ea",
+                "event_id": "src-baa003420a5d4642afd20143a75b3619b255bb977d831d1fc461b96631cf8b04",
+                "role": "user",
+                "content": "请更新我的餐食偏好：现在可以多放辣椒。",
+                "timestamp": "2026-09-30T04:23:53.830855+00:00",
+                "session_id": "s-381418861945dd7b9cbecae1"
+              },
+              {
+                "id": "m-b57bcbc332e36f6470f6d9aa",
+                "role": "assistant",
+                "content": "收到这条信息。",
+                "timestamp": "2026-09-30T04:23:53.841734+00:00",
+                "execution_origin": "synthetic_scripted_history"
+              }
+            ]
+          }
+        },
+        {
+          "step_id": "s2",
+          "action": "snapshot",
+          "admission_key": "closed-public-boundary-2",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          }
+        },
+        {
+          "step_id": "q-capacity",
+          "action": "read",
+          "admission_key": "current-public-capacity-probe",
+          "large_input_capacity_probe": true,
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          },
+          "capacity_probe_recipe": {
+            "prefix": "这是公开的输入容量检查，请在能够完整接收输入时回答。",
+            "unit": "容量检查数据。",
+            "repeat_count": 20000,
+            "suffix": "请只说是否能完整处理这条输入。",
+            "actual_question_sha256": "6599141eb4e3a64b57a32033156fc4a390e0e1f287da6a5e88495090d52950f4",
+            "actual_question_plain_Host_tokens": 80023,
+            "use": "Root exactconstruct beforeoperation+verifySHA/tokens. SourceCLI sees fullactualquestionstr only. All7arms samecurrentinput."
+          }
+        },
+        {
+          "step_id": "s-after-refusal",
+          "action": "snapshot",
+          "admission_key": "current-public-capacity-probe",
+          "value": {
+            "owner": "u-78230ce5c78b26e9c5a42b2f"
+          },
+          "run_after_expected_capacity_refusal": true
+        }
+      ]
+    }
+  ],
+  "separate_B0_live_tool_check": "Roottofreeze actualNoMemory Host using normal liveget_reservation tools over realisolatednativeworld, independentcurrentquery nohistory shown; readonlytask success establishes live lookup is legal.",
+  "failure_contract": "Intentional long CURRENT publicquestion, actualtokenizer/BGE/Host capacity rejects beforeHTTP, no truncation/free retry. Original aftersuccessfulclosedhistory resources reopened andcompared unchanged; all prior actualwriter/index costs paid. Doesnot test semanticquality or expose gold towriter. Root constructs exact stress public question from frozen literal recipe and verifies SHA/plain-token count before every call; no outcome-dependent generation. The two originalfood preference boundaries now have ordinary declared12 generationcaps, no fabricated prior admission. Newcurrent capacity refusal substitutes prior external generationcap0 diagnostic, so this controls acceptance is not a matched quality comparison to oldexternalmicro.",
+  "large_current_input_probe_tokens": 80023,
+  "large_current_input_probe_context": 65536
+}

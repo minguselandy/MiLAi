@@ -1,0 +1,94 @@
+{
+  "kind": "V13_1_P5_COMPARISON_DEVELOPMENT_DRAFT",
+  "status": "PARAMETERS_DECLARED_NOT_RUNTIME_FROZEN_OR_EXECUTED",
+  "methods": [
+    {
+      "id": "B2-matched",
+      "arm": "B2",
+      "config": "configs/v13-1-p5-comparison-matched.json",
+      "role": "four-arm controlled T3 development comparison; Mem0 infer ADD-only retained"
+    },
+    {
+      "id": "B6-matched",
+      "arm": "B6",
+      "config": "configs/v13-1-p5-comparison-matched.json",
+      "role": "four-arm controlled T3 development comparison; Mem0 infer ADD-only retained"
+    },
+    {
+      "id": "mem0_trace_equal-matched",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-p5-comparison-matched.json",
+      "role": "four-arm controlled T3 development comparison; Mem0 infer ADD-only retained"
+    },
+    {
+      "id": "field_grounded-matched",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-p5-comparison-matched.json",
+      "role": "four-arm controlled T3 development comparison; Mem0 infer ADD-only retained"
+    },
+    {
+      "id": "B2-native",
+      "arm": "B2",
+      "config": "configs/v13-1-p5-comparison-native.json",
+      "role": "native maintenance timing, distinct system table; W2/W3 unsupported for post-response external formation"
+    },
+    {
+      "id": "B6-native",
+      "arm": "B6",
+      "config": "configs/v13-1-p5-comparison-native.json",
+      "role": "native maintenance timing, distinct system table; W2/W3 unsupported for post-response external formation"
+    },
+    {
+      "id": "mem0_trace_equal-native",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-p5-comparison-native.json",
+      "role": "native maintenance timing, distinct system table; W2/W3 unsupported for post-response external formation"
+    },
+    {
+      "id": "field_grounded-native",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-p5-comparison-native.json",
+      "role": "native maintenance timing, distinct system table; W2/W3 unsupported for post-response external formation"
+    },
+    {
+      "id": "field_grounded-projection-off",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-p5-comparison-projection-off.json",
+      "role": "bounded E-L finite persisted/delivered fields off; validator/semantic body/revision/source/guard unchanged; not a general automatic O_t ablation"
+    },
+    {
+      "id": "mem0_trace_equal-manual-update",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-p5-comparison-mem0-manual.json",
+      "role": "separately named T3 manual public Memory.update extension; native extractor ADD-only unchanged; not vanilla SDK maintenance"
+    }
+  ],
+  "fixture_path": "data/fixtures/v13-1-p5-lifecycle-micro.json",
+  "fixture_sha256": "9c577f6b4318c31a8e4d15cd2dd7302aa0121111fe684b3943f866272cb1397f",
+  "schedule_path": "data/diagnostics/v13-1-p5-side-channel-schedule.json",
+  "schedule_sha256": "75b08a823d678110bd5626c814cef7caa92fb5ae29e7aac8a0b9541cf8731d21",
+  "cases": [
+    "p5-clean",
+    "p5-partial-w2",
+    "p5-known-no-effect",
+    "p5-unknown-happened",
+    "p5-unknown-none",
+    "p5-update-w3"
+  ],
+  "configuration_sha256": {
+    "configs/v13-1-p5-comparison-matched.json": "c8d6fb115daff12f1761a4ee206658309197dc40fa048d0d174229cf64f28a4a",
+    "configs/v13-1-p5-comparison-native.json": "afdfba6ee87a1f972efd0653c727c1d5ed134d782d2d19c6aa08a1bb1a98c937",
+    "configs/v13-1-p5-comparison-projection-off.json": "e4b51b02756f795077d007956d97c7dfa2d885eff813d5a0921caf32774ea87f",
+    "configs/v13-1-p5-comparison-mem0-manual.json": "aba098ffab430195ea61572d26d302eba1deb9acbaa2c16a8d509c42132d8646"
+  },
+  "planned_development_trajectories": 60,
+  "primary_matched_trajectories": 24,
+  "planned_public_messages": 180,
+  "source_freeze": "new whole source closure after opt-in archive fix still required before any model calls",
+  "crash_rule": "Same event/window meaning and schedule. For nonfield matched W2/W3 use memory_formation selector; field actual manage_memory UPDATE. Native ADD never UPDATE; no-change or unsupported remains NOT_REACHED. Only hard_exit_armed plus actual -9 triggers one fresh resume. Ordinary errors retain terminal; later unstarted messages NOT_RUN. W1 query actual state, preserve missing original receipt.",
+  "classification": "Existing six already exposed single-workflow development cases; these60 method-condition trajectories are not12 new Pilot-L scenarios or60 independent formal base tasks. Two substantive workflows/formal planning remain mandatory.",
+  "models": "Qwen first family only; all actual model and embedding concurrency1; full original ledger preserved",
+  "quality_gate": "Mechanical validity permits semantic failures and capacity outcomes; no all-cases-perfect precondition",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

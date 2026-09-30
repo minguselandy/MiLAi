@@ -1,0 +1,673 @@
+{
+  "kind": "MILAI_V13_1_BASELINE_IDENTITY_AND_WIRE_AUDIT",
+  "status": "ZERO_MODEL_READ_ONLY_AUDIT_NOT_BASELINE_ACCEPTANCE",
+  "base_commit": "255dfcde5d73b9fc800cdd7f866460a09908c12f",
+  "environments": {
+    "foundation": {
+      "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+      "packages": {
+        "langmem": {
+          "version": "0.0.30",
+          "direct_url": {
+            "url": "https://github.com/langchain-ai/langmem.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+              "requested_revision": "9d033b47d9ce53e37e92c92241b0496c0278932e"
+            }
+          }
+        },
+        "langgraph": {
+          "version": "1.1.10",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-sqlite": {
+          "version": "2.0.11",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-postgres": {
+          "version": "2.0.25",
+          "direct_url": null
+        },
+        "mem0ai": {
+          "status": "NOT_INSTALLED"
+        },
+        "qdrant-client": {
+          "status": "NOT_INSTALLED"
+        },
+        "fastembed": {
+          "status": "NOT_INSTALLED"
+        },
+        "lancedb": {
+          "status": "NOT_INSTALLED"
+        },
+        "pylance": {
+          "status": "NOT_INSTALLED"
+        },
+        "pyarrow": {
+          "status": "NOT_INSTALLED"
+        },
+        "dateparser": {
+          "status": "NOT_INSTALLED"
+        },
+        "tantivy": {
+          "status": "NOT_INSTALLED"
+        },
+        "mcp": {
+          "version": "2.1.1",
+          "direct_url": null
+        },
+        "httpx2": {
+          "version": "2.12.0",
+          "direct_url": null
+        },
+        "numpy": {
+          "version": "2.4.6",
+          "direct_url": null
+        },
+        "pydantic": {
+          "version": "2.13.5",
+          "direct_url": null
+        },
+        "openai": {
+          "version": "3.19.2",
+          "direct_url": null
+        }
+      }
+    },
+    "mem0": {
+      "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/bin/python",
+      "packages": {
+        "langmem": {
+          "version": "0.0.30",
+          "direct_url": {
+            "url": "https://github.com/langchain-ai/langmem.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+              "requested_revision": "9d033b47d9ce53e37e92c92241b0496c0278932e"
+            }
+          }
+        },
+        "langgraph": {
+          "version": "1.1.10",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-sqlite": {
+          "version": "2.0.11",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-postgres": {
+          "version": "2.0.25",
+          "direct_url": null
+        },
+        "mem0ai": {
+          "version": "2.1.0",
+          "direct_url": {
+            "url": "https://github.com/mem0ai/mem0.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+              "requested_revision": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63"
+            }
+          }
+        },
+        "qdrant-client": {
+          "version": "1.19.1",
+          "direct_url": null
+        },
+        "fastembed": {
+          "version": "0.8.1",
+          "direct_url": null
+        },
+        "lancedb": {
+          "status": "NOT_INSTALLED"
+        },
+        "pylance": {
+          "status": "NOT_INSTALLED"
+        },
+        "pyarrow": {
+          "status": "NOT_INSTALLED"
+        },
+        "dateparser": {
+          "status": "NOT_INSTALLED"
+        },
+        "tantivy": {
+          "status": "NOT_INSTALLED"
+        },
+        "mcp": {
+          "version": "2.1.1",
+          "direct_url": null
+        },
+        "httpx2": {
+          "version": "2.12.0",
+          "direct_url": null
+        },
+        "numpy": {
+          "version": "2.5.2",
+          "direct_url": null
+        },
+        "pydantic": {
+          "version": "2.13.5",
+          "direct_url": null
+        },
+        "openai": {
+          "version": "3.19.2",
+          "direct_url": null
+        }
+      }
+    },
+    "simplemem": {
+      "python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+      "packages": {
+        "langmem": {
+          "version": "0.0.30",
+          "direct_url": {
+            "url": "https://github.com/langchain-ai/langmem.git",
+            "vcs_info": {
+              "vcs": "git",
+              "commit_id": "9d033b47d9ce53e37e92c92241b0496c0278932e",
+              "requested_revision": "9d033b47d9ce53e37e92c92241b0496c0278932e"
+            }
+          }
+        },
+        "langgraph": {
+          "version": "1.1.10",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-sqlite": {
+          "version": "2.0.11",
+          "direct_url": null
+        },
+        "langgraph-checkpoint-postgres": {
+          "version": "2.0.25",
+          "direct_url": null
+        },
+        "mem0ai": {
+          "status": "NOT_INSTALLED"
+        },
+        "qdrant-client": {
+          "status": "NOT_INSTALLED"
+        },
+        "fastembed": {
+          "status": "NOT_INSTALLED"
+        },
+        "lancedb": {
+          "version": "0.25.3",
+          "direct_url": null
+        },
+        "pylance": {
+          "version": "0.39.0",
+          "direct_url": null
+        },
+        "pyarrow": {
+          "version": "22.0.0",
+          "direct_url": null
+        },
+        "dateparser": {
+          "version": "1.2.2",
+          "direct_url": null
+        },
+        "tantivy": {
+          "version": "0.26.2",
+          "direct_url": null
+        },
+        "mcp": {
+          "version": "2.1.1",
+          "direct_url": null
+        },
+        "httpx2": {
+          "version": "2.12.0",
+          "direct_url": null
+        },
+        "numpy": {
+          "version": "2.4.6",
+          "direct_url": null
+        },
+        "pydantic": {
+          "version": "2.13.5",
+          "direct_url": null
+        },
+        "openai": {
+          "version": "3.19.2",
+          "direct_url": null
+        }
+      }
+    }
+  },
+  "source_sha256": {
+    "src/milai_lab/integrations/memory/mem0.py": "8597b0a84aecb3800a1388494672c70fec770b4ad9ee1c7481afe21a8494df4f",
+    "src/milai_lab/integrations/memory/simplemem.py": "ce283d2f18a5a03516b5e4e99e647c76bb85398a65f8c7a1d7403f3a0b27213e",
+    "src/milai_lab/baselines/langmem_benchmark.py": "e37ac9239d5dc2523cf984dbf0fa1ead2dbd9142be4b0b5e10d30ea4fc158429",
+    "src/milai_lab/runners/memsyco_native.py": "d2670bcaad26aa25b08fc14f776b84346739df01a8ca847952575605d53708c0",
+    "src/milai_lab/runners/merit_native.py": "b35682df6e51f8a520576c7409357a6eba9996440fe40dd48068a9f518afae6c",
+    "src/milai_lab/baselines/benchmark_memories.py": "749a86c5b0b221a63767aa5d3f68665c16c5d2a7fa50f3f611dc1b1447a01fe0",
+    "data/locks/unified-v8-v9-native-transport-20260928.requirements.txt": "27da7871dcb01959083cf911209d12295252f3f04945a1cd81eb4580e247d9ab",
+    "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt": "c4de4f0a77a4561a60528fb3b059b2aa4a5c2d2ae491ea84015f52bffb5fa48f"
+  },
+  "actual_call_sites": [
+    {
+      "path": "src/milai_lab/integrations/memory/mem0.py",
+      "line": 234,
+      "method": "add",
+      "call": "self.memory.add(conversation, user_id=self._user_id(case_id), infer=True)"
+    },
+    {
+      "path": "src/milai_lab/integrations/memory/mem0.py",
+      "line": 269,
+      "method": "add",
+      "call": "self.memory.add(conversation, user_id=self._user_id(owner), infer=True)"
+    },
+    {
+      "path": "src/milai_lab/integrations/memory/mem0.py",
+      "line": 319,
+      "method": "search_archive",
+      "call": "self.search_archive(scope.user_id, query)"
+    },
+    {
+      "path": "src/milai_lab/integrations/memory/simplemem.py",
+      "line": 607,
+      "method": "search_archive",
+      "call": "self.search_archive(scope.user_id, query)"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_benchmark.py",
+      "line": 431,
+      "method": "add_archive",
+      "call": "external[scope.user_id].add_archive(scope.user_id, archived)"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_benchmark.py",
+      "line": 355,
+      "method": "search_archive",
+      "call": "external[user_id].search_archive(user_id, str(current[0].content))"
+    },
+    {
+      "path": "src/milai_lab/baselines/langmem_benchmark.py",
+      "line": 364,
+      "method": "search_archive",
+      "call": "external[user_id].search_archive(user_id, str(current[0].content))"
+    },
+    {
+      "path": "src/milai_lab/runners/memsyco_native.py",
+      "line": 364,
+      "method": "add_archive",
+      "call": "native.add_archive(archive.user_id, records)"
+    },
+    {
+      "path": "src/milai_lab/runners/memsyco_native.py",
+      "line": 480,
+      "method": "search_archive",
+      "call": "native.search_archive(row.task.user_id, row.task.question)"
+    },
+    {
+      "path": "src/milai_lab/runners/memsyco_native.py",
+      "line": 495,
+      "method": "search_archive",
+      "call": "native.search_archive(row.task.user_id, row.task.question)"
+    },
+    {
+      "path": "src/milai_lab/runners/memsyco_native.py",
+      "line": 374,
+      "method": "add_archive",
+      "call": "native.add_archive(archive.user_id, records)"
+    }
+  ],
+  "methods": {
+    "mem0_oss": {
+      "upstream_commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "installation": "PIN_VERIFIED_IN_EXISTING_EXTERNAL_ENV",
+      "legacy_live_path": "after_turn uses user+final-assistant only; no general inference about all old runs",
+      "new_memsyco_path": "memsyco_native._build_backend calls add_archive with question-free prior source records",
+      "new_merit_path": "langmem_benchmark.completed obtains closed current turn from checkpoint and includes original role/id/content/tool_calls/tool_call_id/name/status then add_archive",
+      "wire": "one user-role carrier explicitly labeled Archived completed conversation data, JSON contains original roles and IDs; does not relabel provenance as user assertion",
+      "model_transport": "injected _ChatCompletions/_Embeddings -> existing VLLMClient with same shared budget/admission; no unmetered native client",
+      "micro_acceptance": {
+        "save_restart_recall": "NOT_RUN_V13_1",
+        "preference_update": "NOT_RUN_V13_1",
+        "relative_time": "NOT_RUN_V13_1",
+        "receipt_role_ids": "NOT_RUN_V13_1",
+        "owner_isolation": "NOT_RUN_V13_1",
+        "failure_cost": "NOT_RUN_V13_1"
+      },
+      "current_source_files": 149,
+      "current_source_sha256": {
+        "__init__.py": "d4dea4af0e23d544a8a004dd385656ab49ea14180d1d854ef81483e94c1d045d",
+        "client/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "client/main.py": "bc739380bf6b2a8cb8f38d0b46930160a192f4d05b7bdc4cc4c82dadabd25436",
+        "client/project.py": "3bb243747a6fb7d53434639dc027980b27288f3f56cbf1a16ae46e90af768aa4",
+        "client/types.py": "b6b2c86348fb524ea189bedd381048c97419c0ba251131bbb8a4c78ac48f4467",
+        "client/utils.py": "1ec13580e186cab82c3831597c593b226467d7fa3a5d34a67614f151b2a50754",
+        "configs/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "configs/base.py": "8bc0431f599c13ab2aff887e7b6eecc2688f8f4d070d76f029b3b55e37169b33",
+        "configs/embeddings/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "configs/embeddings/base.py": "3c79daa02ecb4b6f33fe4ddca1ae1eea49ade1c3f538bc9bf46a501da0062dd8",
+        "configs/enums.py": "e6a8fe3ed972ffee7f867ad0779562051db081011595e9dd622302ac0fc42bd1",
+        "configs/llms/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "configs/llms/anthropic.py": "3d6cc5496e76a984793c2553f230488092c9cacbd6871ed528ecbd8575384cf5",
+        "configs/llms/aws_bedrock.py": "ca7be049412194d2cefed1ac66b7807645da8777e92816605152bf4085002e27",
+        "configs/llms/azure.py": "1b12b6b3044eac3863125cf4990108a0088cca49899fbaae68c5862b8a8e5111",
+        "configs/llms/base.py": "3db97971a4f46b63115a51db27eff3c176ffd31e50b98e9f1c9ca0ddd6914a75",
+        "configs/llms/deepseek.py": "bbe5e20b8bd345720f9f574c6dd0f7d81d050100515082edc5a7a8d4f9e760c0",
+        "configs/llms/gemini.py": "04a96785d88e713353706e0cd251fffd5bd0d92b46d83edce5a6d159ca49e221",
+        "configs/llms/lmstudio.py": "80875b3430984bfb3bb5bdeb0876ec2953c812acc75b083c3e4c9dcbf3381611",
+        "configs/llms/minimax.py": "c6acd0008572a7228e47dfd0ed5a11d3b6a960407caf738a2fb261195929fecc",
+        "configs/llms/ollama.py": "d411d730a5e310feac63861d1d223697bfe897b1dbae1aa11bdd6f2e204fa5b7",
+        "configs/llms/openai.py": "d8df3a7a75da977fdb64cde5df698a724fd3cf1295f89bb002d37c850dd0e57f",
+        "configs/llms/vllm.py": "cdbd4df82c9c1f9ebfcd20873ad17c54aae0f41555c83b0e6a170ddcdd5f83ff",
+        "configs/llms/xai.py": "cb8325680735667aef72be6addb00a11b086c129a6fe127afa898c83983b86ab",
+        "configs/prompts.py": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c",
+        "configs/rerankers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "configs/rerankers/base.py": "df568877646715891388d42be71c5297c8b9238168248cb20b4a3826b4ed1079",
+        "configs/rerankers/cohere.py": "6d164a5a8e9c52a003324883ec4946916c095d16438752b09a70c68ac322e308",
+        "configs/rerankers/config.py": "5099a7b1286aec81733dd6002c476b030d52764e1b6f41557266529650a5f6d6",
+        "configs/rerankers/huggingface.py": "48362b5bb1a65158b789b9ca5988d8eef0966e72b6cfeaee025520460df22ad7",
+        "configs/rerankers/llm.py": "0293432de9e7a8f28e7e4e0a5019ee634a287fad6b4a9a044011efb7230e183e",
+        "configs/rerankers/sentence_transformer.py": "0261894a3f4d1fbecbdb793abfa92e94fb10127db1315b0ac605c409ccdd658f",
+        "configs/rerankers/zero_entropy.py": "2bb3e1ed63408b78f1fe1154b89520eb24ceb88f88f7115583e3ce305380cd43",
+        "configs/vector_stores/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "configs/vector_stores/azure_ai_search.py": "3f33344ce2f711b07cde80260a055a72dd288e4013ef9cbd348e688b049233a6",
+        "configs/vector_stores/azure_mysql.py": "711f2813a10f18f3ecf3896bb4ac04c4b6b9129d526760bee76e53d2d82237fa",
+        "configs/vector_stores/baidu.py": "0e903174000914a9fb63699b834b02637002299e64dd91867e20922987ce0f69",
+        "configs/vector_stores/cassandra.py": "492a0614143d52b216e0e8d7c91ff9348a168ba8caefea6bf7f4952ff4e6c209",
+        "configs/vector_stores/chroma.py": "bfeefb033ec7ba62b2ed606893ed10b04d2d775823d3722e418315220e391692",
+        "configs/vector_stores/databricks.py": "f0fab02bf061c5b81796710c69a5e2d1db0511ce3d9b0b73d41a20302e778586",
+        "configs/vector_stores/elasticsearch.py": "6072b8656567f71711fe5f6eb6fc9567e065846c6a4065da8dcfe71238491fcd",
+        "configs/vector_stores/faiss.py": "34927b2053b21ed3383bf781f76a342200fd901876f18d6d1cb8fea0510b80a9",
+        "configs/vector_stores/langchain.py": "28765b90753841f5572992f33e2268e57a0890a0f62d95e819ea2eb7ed706da3",
+        "configs/vector_stores/milvus.py": "54832b9127b59fe3b1a3737dd13b38445e2be7681c70e43717eb688c797dad9e",
+        "configs/vector_stores/mongodb.py": "5e7847c17440c47d36d5d451f19314b0ae155a7c2210417552d04fcb850673bf",
+        "configs/vector_stores/neptune.py": "37c45fbfcb65629267384645b26d2867b6605749587817db468cb8777a3887ca",
+        "configs/vector_stores/opensearch.py": "8dc4e9e8ff60eb9d7ddc49b36cd84561dbfd3d7b558d0f415bc1d9e72774d5fc",
+        "configs/vector_stores/oracledb.py": "08d1896d9010daa188a17c9ceb51c46e41940d6ba4fc1afc65cbe3c2a2f2545a",
+        "configs/vector_stores/pgvector.py": "4591db8b9af737299db7744a998eaa3c56139ccc2d8bb9b44fca4e38520ccb33",
+        "configs/vector_stores/pinecone.py": "0f2a753e2f56bbdb4a113fcd20ee060b324e75660edb02dbdbb77f00b83842d7",
+        "configs/vector_stores/qdrant.py": "9494f03cabd54cb99a838cfdba03a979ea2aba5061fc0df696a8874f588314a1",
+        "configs/vector_stores/redis.py": "2adfacf5f0b76f2e382a3a829068c144fb3075d3824d9501035d929b4032031c",
+        "configs/vector_stores/s3_vectors.py": "360cdf31fbd76ccf02bc176812859ef3b70cb84935bdf0d25fd0c8222ba8aa7b",
+        "configs/vector_stores/supabase.py": "9d6324867d62c867f67a12d71a842bd14e9f425b8719da6d36ad861d9289228a",
+        "configs/vector_stores/turbopuffer.py": "2973f51375bad43c8c2340f62c3b99e035c408f7867ceec40d40cb1fe3691858",
+        "configs/vector_stores/upstash_vector.py": "85f5cd33841e8c27070fd34bb310db6027be164955d145a2675bd0a29d1e4ab4",
+        "configs/vector_stores/valkey.py": "4db5e399ffa9a641173e830dc4ef28138a1e213c8380f185dd6c33b43deb8de1",
+        "configs/vector_stores/vertex_ai_vector_search.py": "cfbb0a95cfdc2d67dc34642e54192b7e2c265b2cf4d6bebf266d7df307866e25",
+        "configs/vector_stores/weaviate.py": "ec45fbc4bcd83296f4fd7c477e03cb96694e110326ffc5cd5c4534868031d061",
+        "embeddings/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "embeddings/aws_bedrock.py": "5676217c22c5443816f696da0554fa07620fed13d3e220564c8515bb2b3159cb",
+        "embeddings/azure_openai.py": "56f0c01e059a7a812ce5e71347554edf1ccdd21123b9190cfad04284f5cd8e03",
+        "embeddings/base.py": "4e75edb85c9bf458b634c538c3b5055b85d22df9afc749dc50aeb94a872c1d0f",
+        "embeddings/configs.py": "be7c3b79ef2806bb279afe53ef3909c3fdea9bb8524d00bd7d95a8e11f0b46fa",
+        "embeddings/fastembed.py": "3ec2ae87df5d0bebedb8b5471366c3412975847458499f66097f7b8c9ac8c9b8",
+        "embeddings/gemini.py": "ddb14e5247ca20cd56d52b8ff56baa97882d387a1051221fe67bf03a044f56a9",
+        "embeddings/huggingface.py": "95166966e36e663138f8b85a9ddc073d4f230ab92b8dd0996e438de61cd23521",
+        "embeddings/langchain.py": "fe5c2944ca6a36b84a4e21d385f5b2dd6c96f759df5fb023dd6286421c649f4d",
+        "embeddings/lmstudio.py": "526d4245396c56a9709aeacab06a5cabc7049496ead73709fcb6369aa4f7db50",
+        "embeddings/mock.py": "70e9fb95fad06d7f287fa299451f6b8f6ecda4ab9ec8798f693b6449b73bd81e",
+        "embeddings/ollama.py": "94257bb2e73d82e5fd0f0b0bb1f4b2f4e7886a2e4068e88beec5d1872469b3bb",
+        "embeddings/openai.py": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1",
+        "embeddings/together.py": "a0e5aa65a525d656026a9c7e2403a127f25fe15062457360c927cc99e59c1599",
+        "embeddings/vertexai.py": "a84a8ee289eb9936f22d6e16be6dec1eb40e5aa581fc575687bed0e8de6ed646",
+        "exceptions.py": "10e7ef87206d22ed7f39aa122e8d27a73b38c2aa688a352fca3337b1e97ce472",
+        "llms/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "llms/anthropic.py": "105562dfee9a375deba90660c713b3902230d9909b389b12ea5ffbbbfdd7c2ec",
+        "llms/aws_bedrock.py": "b62b9410be9b2acf26d18844c1fa35cc203b585645e0fcb95ec023c897184ab9",
+        "llms/azure_openai.py": "fa14f5f3aff8bf4a020dd25164e49bad8d3e71b5a4f2167b5a24531320969b8f",
+        "llms/azure_openai_structured.py": "7bfeb3008afd1c4c15ef1a6cc4bab9d1fa1e7d4ca11abe7e9b25c002956c97a9",
+        "llms/base.py": "b8fda28dfb6cd92723169f8dc8837f2686653768cadfb822e73e5aa46710f730",
+        "llms/configs.py": "9e230de7c6b9e9a85372932bb273249a75028ea1c427274fcafee437591c999c",
+        "llms/deepseek.py": "1c44a599c30e9a01814087ccc74b5b237771481674c575886e13b300320b0602",
+        "llms/gemini.py": "999a809809ae1585316c066540bcd303497be6aff4abacb8848ec4481aaf9743",
+        "llms/groq.py": "9e6beab99e80493c506a3f0847d2c5c1889ed5a409193d21f0fd38022b6eedfe",
+        "llms/langchain.py": "78651608636c1e0095e530467530642356cd7ccb4a7c3ba6ba0d4bf2c37b2249",
+        "llms/litellm.py": "25fbf5dbfc2bc0ff045758f9e33ea38d8e2f4b55214b163272f4606cea8b2385",
+        "llms/lmstudio.py": "f35ec1b0afb610773e6f875fb40d0fb98b2d8bcf21cffc77a64de5a7265ac65d",
+        "llms/minimax.py": "696ef47841934a8688de656c18733481720ab959b6fd206a0bed7d722f548351",
+        "llms/ollama.py": "72b0f52b7d99dbfa854bbb1a8c706fd56396e53da89b5c75c439db599a2cf2c5",
+        "llms/openai.py": "37e6d3c22b55df0731740f4e0868b95bd480ce44363227fe53461db328c5f67e",
+        "llms/openai_structured.py": "680886444d2780b6a5c50a9cf7da0a84b7ce662e2eed7453a373d5b39e0f8aa3",
+        "llms/sarvam.py": "934af602a498618eb7baf192a81b670820dc5e65a41ce3eb42f40aa866a90398",
+        "llms/together.py": "b5248713eed7d9712d3cc1fe3f439b7c28dfbb29c02db04c4030df580662817c",
+        "llms/vllm.py": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+        "llms/xai.py": "d21a9ca07d837399958f24af87c920939b725ba6ada118b67551dc50c49d1e5d",
+        "memory/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "memory/base.py": "bb093eacbeb409b12b043b7df9b3152b895a00bb5ce30776a1e56c915cf17777",
+        "memory/main.py": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+        "memory/notices.py": "1b6fb1d780559886d7f7aae485c3516915ec8ac053b6d7bbc36ebe8028680188",
+        "memory/oss_notices_config.json": "2ba311f6bd217360ff7a3a35374af53899d44287c8a2a24da1d0247a16f6bf73",
+        "memory/setup.py": "840d3af99b628be4070cd88c30ded45e1c5532279128fcc5fc6f99f3eed829ea",
+        "memory/storage.py": "5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd",
+        "memory/telemetry.py": "89f36bd0b87059fa0710adcccfbd9639ab4d5c4a762d875a1caceaf688aca687",
+        "memory/utils.py": "f1dcbfcb0261de5717755ef41c0b9db35939d42056a4e06cdfca37650c0eb1f9",
+        "proxy/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "proxy/main.py": "9615d5477b077d59452210550386dd3805c77321d58eb2b11f3cd50086cc1d08",
+        "reranker/__init__.py": "3cba45d0c29035a410f89a9b0e466070e1657d38b5ad25d512955adfdd8ffb81",
+        "reranker/base.py": "12af1b5c2cf348fa63b3a4bf7b053c98639c76d5554a06066d04d8c3d2cf68c8",
+        "reranker/cohere_reranker.py": "9ea041ffb1484a98280c929db52e589c744fa4d0418c2a25620d405218cefdd7",
+        "reranker/huggingface_reranker.py": "f0c64c00160559ec2fbb1b2901943827ec86bae6d8283376fd8a81acefdc4741",
+        "reranker/llm_reranker.py": "c5af685a31676cb1703c9dcf7f9d59b831de1dc7a96f17d219ff4d19064b64d7",
+        "reranker/sentence_transformer_reranker.py": "c710df03a62dce783b54846ca179d09e21521417148c32d34df28913d4f0cc6d",
+        "reranker/zero_entropy_reranker.py": "9adefe3ca38294b7ddd16395d34456d7956c3aca595081b82448c32443a17aad",
+        "utils/entity_extraction.py": "46aee82cb08cd9e37ee6928fb7b1e518d8fe00bb6b507133121b48f65bd1224e",
+        "utils/factory.py": "b7883d7c48264eeac449e3696ad90d96db4ae6d3404e886c8dfc930d0843d02d",
+        "utils/gcp_auth.py": "2fd5ad335cbab10d61411f26dd1e4488b60b9c0d468422e66792e72a7137d5a7",
+        "utils/http.py": "a88328b2b61a1968fa8db7e3b6a4a0f85767a44dd24cd07b04de5dd6ba5e5969",
+        "utils/lemmatization.py": "7b53da59417d29c3b2adcf71ed9e272c1038667c308859b0c5182f7e67e9408c",
+        "utils/scoring.py": "9a4313fda723ad05cb52278e9ef0b9b5792b71fb3b41ba6318410121022e4527",
+        "utils/spacy_models.py": "d3e5705a56b826a85572b7b8be5063e33fc0ba2dfa40087839c890819245cd83",
+        "vector_stores/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "vector_stores/azure_ai_search.py": "43274cf0ce752664b3e41efbc088613d27e0445b7bae5896bb4f2ffa7d5768d1",
+        "vector_stores/azure_mysql.py": "45c4248656c7a8a24a894b3252d4ffe3fa0b191c0d74c2db638b95cd44dd12a5",
+        "vector_stores/baidu.py": "a1033f130c54fbc0efde51ef53b07fcaeaabaa5d0036d47b41889f47d35ed965",
+        "vector_stores/base.py": "c9d7f6a5fd6d74411eec0be17b409f69d377630ab85ba0a70f754a6df6215450",
+        "vector_stores/cassandra.py": "67c5118c87250fc9b5bb810862a64f110a9b58cde04fa4536992b51db55af88c",
+        "vector_stores/chroma.py": "dce0932308fa20fab95c21ff72c50dea878713846f4ff7f6d2af03b4559a07be",
+        "vector_stores/configs.py": "f6f449eae10e16dad4767d83a7480a7ab891f5abf9ce519db46a8ece5771e003",
+        "vector_stores/databricks.py": "ed6f04d7f0b6c98c931082b953ba79b901bebf47c3c39298a89b42fefcc0c016",
+        "vector_stores/elasticsearch.py": "9ed4d08fef729ffc3053cca8de07eae83b620630647685dd6dd7fdf946ffeda8",
+        "vector_stores/faiss.py": "4b2f4ee39ca5cee021adabc31759b80661f937b1232bedd0d3afb070198f1ae7",
+        "vector_stores/langchain.py": "895944935d18ed68a99f0443b9c0591e27d7e7b6bcb2c609bd17ac02a383760d",
+        "vector_stores/milvus.py": "7f14f283d6696c6f44825b957e5b9ac1fbf938348d300533f30b6a17ca2a61a9",
+        "vector_stores/mongodb.py": "2782ce484d87759b165ac1c942763246a0498897fa5c47f231b0ebd8eb6f6b4a",
+        "vector_stores/neptune_analytics.py": "9ddfbfd8291842d75489739078462617daac552d482584a54bc55283b9adf259",
+        "vector_stores/opensearch.py": "4f7048aa74ef1e8e0d970e7e132dbcf2d1db381e57ea4b7e193a246018a1a75c",
+        "vector_stores/oracledb.py": "adb135d6f31caf195546025482a4bb1f651f2745f88f4d3835dcd24a94cdc6e2",
+        "vector_stores/pgvector.py": "4cbc53362155bc05156f2c0641871afdab9b047445d668b2730ea9c2fa8a280f",
+        "vector_stores/pinecone.py": "5be7651893b614319d5547c7c2928e42f40f78e1f25ef4bd471d7dbc539a75a5",
+        "vector_stores/qdrant.py": "da570579d5cad69e6f123fdfe32b725235a25604e70047666bec763ba6e2bf43",
+        "vector_stores/redis.py": "17917dd872df47ba569c78e5a285addbdf3d3ae93812cc0ac0da18fae355ed0b",
+        "vector_stores/s3_vectors.py": "cc8c634dc7395642b8b37eab7019daf2dfb1bbd8a6d830c4d23211ef0480212f",
+        "vector_stores/supabase.py": "1a537178f7f4367d638cc755e8c9917b63c609041044229474276917112839ae",
+        "vector_stores/turbopuffer.py": "04c085fd908c0eb713fd88386032432a4c57a0b09b14f92c9fd5774b077f2d68",
+        "vector_stores/upstash_vector.py": "7f387d213e7aad4bf93de14c924971e64de4536b33e09290bf48aad66db334ba",
+        "vector_stores/valkey.py": "eefefcea870a15601a58e2f69e551304c0e86c55c542940e69cdfeb94588c8cc",
+        "vector_stores/vertex_ai_vector_search.py": "3db143a6f1feb8aa0a55ea20ea075a70e6a9f780380cc5cb180b6df7a87a0872",
+        "vector_stores/weaviate.py": "a036df3f6aefcec57ddfc98f5a7cc57ff0bc3c35084f980c62b152ede5471e9b"
+      },
+      "source_manifest_sha256": "9047f2e39e5e9d1539afac6ba43e7976433259da5d6e698743cc8ff1f1dc4051"
+    },
+    "simplemem_text": {
+      "upstream_commit": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+      "installation": "CURRENT_DEPENDENCY_AND159_SOURCE_FILES_PIN_VERIFIED",
+      "mode": "pinned text core with native writer/planning/reflection, common final reader; not Omni/EvolveMem",
+      "ingestion": "add_archive maps actual role to Dialogue.speaker; content carries only original content plus tool_calls/tool_call_id/name/status when present; timestamp mapped; source ID is tracked in trace source_mapping but not inserted into native dialogue content",
+      "transport": "injected tracked completions/embeddings, all native retries counted; inspect actual runtime traces in P3",
+      "micro_acceptance": {
+        "save_restart_recall": "NOT_RUN_V13_1",
+        "preference_update": "NOT_RUN_V13_1",
+        "relative_time": "NOT_RUN_V13_1",
+        "receipt_role_ids": "NOT_RUN_V13_1",
+        "owner_isolation": "NOT_RUN_V13_1",
+        "failure_cost": "NOT_RUN_V13_1"
+      },
+      "gap": "Original event/id is not included in actual native content; source_mapping proves trace lineage only. P3 must decide and freeze explicit lossless trace-equal carrier before calling this identity-preserving.",
+      "source_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem",
+      "current_source_sha256": {
+        "simplemem/__init__.py": "4a08e5986d32f6ec89485a8d67d30df36a53e768f6724bed4e6cc0ecf7f9ad56",
+        "simplemem/config.py": "2929648721debc490617f033b98c11959e5aa062cfe4425282e347189d0467ef",
+        "simplemem/core/__init__.py": "fabc99c84f1ca8fdecd49c496cb09d6af8cc7ebae9b05535da82183b1610be67",
+        "simplemem/core/answer_generator.py": "ba8946134e9db0de63da00a9f223229800d2487c6fd34d22d7c5296093d0470c",
+        "simplemem/core/config_default.py": "77b06780502e42a62ed308eee75dadd2a8192f20b127177bb14b5c614cc622cf",
+        "simplemem/core/database/__init__.py": "e623f8d4fd590473a0cb1ca73e016f9760b07efe08542bae352436ec4b4faada",
+        "simplemem/core/database/vector_store.py": "a7519fa27cfcfdceb4e146780c948c96e2840cea11965a94c296b786623fff29",
+        "simplemem/core/database/vector_store_backend.py": "2406f5c267f9013af0dc34c8668def8b20b3e66326827c57d975f6129f502c26",
+        "simplemem/core/hybrid_retriever.py": "63d6a3522e8a4c5d3a073b5dbf8ac003844c37993bf16033bb5c9a3807db5381",
+        "simplemem/core/memory_builder.py": "ade5d9c252158ede2d0bd4ca3da027e913d6e88dbe616e00f5962178053c9dc7",
+        "simplemem/core/models/__init__.py": "a64a0ee787d6476b3f488c8e3276ee337aae16763fb9b38158cd8ccc81b8ac06",
+        "simplemem/core/models/memory_entry.py": "487209f5d6981a12568ec3f6f4597d2bd1437a82a0ef9af85c5dc755bc2947c8",
+        "simplemem/core/settings.py": "3ca77f1d035fd309a541fdc7555e8519ddb9d77ce4f82161f1fa027619784de2",
+        "simplemem/core/utils/__init__.py": "d348d4588c4de3874438b576b3e92c6ff6015238506eaea712277973de478eb0",
+        "simplemem/core/utils/embedding.py": "da72ef639c5c0f6a6d9a0ecd5f4f45f65019da52e32191571ac718ff0b7c6d68",
+        "simplemem/core/utils/llm_client.py": "19533ebf5b3a12096c70ae35df54305d8b307b22240377ce1977e2aaff527bd8",
+        "simplemem/evolver/__init__.py": "caace77a56b929154a4313fbb92baa8113e7668e7539b16a519612b53f7a1599",
+        "simplemem/evolver/benchmarks/__init__.py": "94a997b053b07a64a5ebebe3376478870128b38c5cfd584247eff8bdb9cddd1f",
+        "simplemem/evolver/benchmarks/base.py": "434e45af12aafc3f97bac2e9654e2ef2bee7d0960d8e62bcfb6f4baccc0244e3",
+        "simplemem/evolver/benchmarks/locomo.py": "38d12115f98c17c02f3e373c369d60f2aa6de800d97fd5b2ce08783937e226bf",
+        "simplemem/evolver/benchmarks/longmemeval.py": "8fdaf6c4538a5aedca5238761faf54ade6c749fb345d6683be68be805af73e89",
+        "simplemem/evolver/benchmarks/membench.py": "e31242961789e597a30ba5daa0532019014d9a905c5966f13e80f78b221a978d",
+        "simplemem/evolver/benchmarks/metrics.py": "2355f6e5d99b593f389ac46763c6d06c208db01dab6efacff40f91ba2c1bb95c",
+        "simplemem/evolver/candidate.py": "3e02920e022b5a56f972248de176af097a17348b041a0b35ca7640d28cd4e378",
+        "simplemem/evolver/config.py": "0dedd2bf79e5560709ad9940c6e0774d4c098bdc4b11169ce336a6d0da7aa058",
+        "simplemem/evolver/consolidator.py": "33b16befb0e4c5d3b2a98c229d3762a77127ccc48b3d21f0fb7c8cb71697f141",
+        "simplemem/evolver/diagnosis.py": "3acc88b463c42617a014007046d917adc131fbb5b8e458bce8a4c27b634ce663",
+        "simplemem/evolver/embeddings.py": "3f48280bd518cefe9bad9aacde47472bf8b3752b6f4ad70267099fc74bb140de",
+        "simplemem/evolver/evolution.py": "7600a7c058c34e9ebf483d6564120be0aeed6b481b99b72a6b2c1a3a001b48c7",
+        "simplemem/evolver/evolution_cookbook.py": "f774d1e7ee2f7a4f2f5d3fe86ccd30d107ca849c763a395875c817b28633f204",
+        "simplemem/evolver/extractor.py": "821564f1b2ef505f7a9403beb55382b564cc4fe0a3530ff97eecee4d1bb8bc3a",
+        "simplemem/evolver/kg.py": "f87ea801f1220fd91fec7821eabf87c928418a1b8653f764b8c468b9d74ac1b0",
+        "simplemem/evolver/manager.py": "bac39e4e3447932d8926cc4324312d64f3af9af7bdc463043ffeb96725197582",
+        "simplemem/evolver/meta_analysis.py": "d9ba5c2a83553c435a42772aa030ee046ad46fdfa5e1a432574dea0ef4ac571e",
+        "simplemem/evolver/metrics.py": "f02978dda0388a7c8708b58ea30838d8c894727444fe776cd3e30da69f2e7940",
+        "simplemem/evolver/models.py": "774359402b96d9c1d3f43bd6f7fe3f1c1988503168447b4524857462dd6b346a",
+        "simplemem/evolver/multi_retriever.py": "537a360d96de8737d82d8f1575321b1dde8c5ea77f1e645072c4fed8b7fc737e",
+        "simplemem/evolver/optimize.py": "15bf8b18376dbcb4c31f50c51a6e46d3291e1bdca2133671a1b75615b266edf0",
+        "simplemem/evolver/policy.py": "2e3ec0097d0b01f02b3f92e76da3d4e59af3983561d81302fd68d7596bbd8a2b",
+        "simplemem/evolver/policy_optimizer.py": "c8db6e44b59d7cd3847715d1a04d1ec80b869e9aa97e7230e99c68ed60f32c7f",
+        "simplemem/evolver/policy_store.py": "1f5c87ff642ef8b2828dd5ee3fc65a181f3b023ca5f2ea7ddff6f5277a5fe89f",
+        "simplemem/evolver/promotion.py": "aaa6f915054438221df404c78c8534e932af7c5680ac36915ad548eace21652e",
+        "simplemem/evolver/replay.py": "b2297be9e914dc3b9ca32eb0840d809195a2b8e3ba8c607bc8e594e80152e80d",
+        "simplemem/evolver/retriever.py": "f07b517fec32a69604544d17066a69fb859d436f322f6658a413255f70f6a098",
+        "simplemem/evolver/scope.py": "da82b6b5b851dd5a5f86ee10fe57654cb59017e2c7880a8c7da07039446041d3",
+        "simplemem/evolver/self_upgrade.py": "99381a8e5d08875feed6b0a71b3183519e97f22d8a8918d38ec0d21019e048d9",
+        "simplemem/evolver/store.py": "8717a431dac3e4be59c489d2d5441ed8c4a0bd1d8eed0073546c8c32d375e538",
+        "simplemem/evolver/telemetry.py": "93d09e803e87db1ff882c5ad3bb0b46f8286b271fb8b27db9015240297fa0e51",
+        "simplemem/evolver/upgrade_worker.py": "507fbbf68d590c864f0a0c6af041b748937ae6fcdb4eeb7798d5ca60189192db",
+        "simplemem/integrations/config/__init__.py": "b021ac71568d93e27786c2eb5709e3cbcc44f6154a0237e18527a469e36bea04",
+        "simplemem/integrations/config/settings.py": "0b6a7dd9f5bf7854614018a351eed947a527e9db8e9625e8788c081c5d5b1c13",
+        "simplemem/integrations/reference/core/__init__.py": "fabc99c84f1ca8fdecd49c496cb09d6af8cc7ebae9b05535da82183b1610be67",
+        "simplemem/integrations/reference/core/answer_generator.py": "31a895d9c5721a5a037de564261e54fc73d9b00053f998923dddd6d3df31e2c8",
+        "simplemem/integrations/reference/core/hybrid_retriever.py": "2b293f6baf3c20844b3078c8103c1ecf1f5944d3db0a53023e0b28a8287dafe4",
+        "simplemem/integrations/reference/core/memory_builder.py": "3ea54da5b9d86a2201f5cd88fef966273ed7f79a9469209b190b97030a5c3fab",
+        "simplemem/integrations/reference/database/vector_store.py": "5346d9095bc3fd286d682b3e9930b76ab6ae7b109d0e09af2f493a6e2a99e14a",
+        "simplemem/integrations/reference/main.py": "55e17af861880316ea3a7b720b3fce78217a6b17f0bd8803d1302f409319832e",
+        "simplemem/integrations/reference/models/__init__.py": "a64a0ee787d6476b3f488c8e3276ee337aae16763fb9b38158cd8ccc81b8ac06",
+        "simplemem/integrations/reference/models/memory_entry.py": "4fe9531e44993d649648b0ccb20df6622806cb7fd3ea118d1d0d6b13f67c7cf1",
+        "simplemem/integrations/reference/test_locomo10.py": "e3553fa944db7ee592e8f4c2fa1f27cb5023b054a05c6630e038271870d5b59b",
+        "simplemem/integrations/reference/test_ref/load_dataset.py": "b249429a6624e6e79e5e099c90bfcf7ab96c8fd40f3b1074b750dd0b2823661b",
+        "simplemem/integrations/reference/test_ref/test_advanced.py": "e6d2178ebe92ec69eb403dfb8e000e8e581eb91ec343265d484ee4d3c05753dd",
+        "simplemem/integrations/reference/test_ref/utils.py": "778236a617d27b7b9c2d0f052bb9e873586194960431cfa5935dd2302c66e73b",
+        "simplemem/integrations/reference/utils/__init__.py": "d348d4588c4de3874438b576b3e92c6ff6015238506eaea712277973de478eb0",
+        "simplemem/integrations/reference/utils/embedding.py": "6530f1a1ff3ca9735c6b6d16f51068186e961a315ef60e0211e14739b9621940",
+        "simplemem/integrations/reference/utils/llm_client.py": "d28f9c5311811648009701836e2b940bc9c796241c85ac0af594fea72935a5b2",
+        "simplemem/integrations/register.py": "f54754a278cb7419528215b03b736e8e9d414685c19ba3c760b327dc8a0ca740",
+        "simplemem/integrations/run.py": "76951bef8ef6bc436f3e1b2474d69369a1bd1ddcefa54f22312d54b3ba84f36e",
+        "simplemem/integrations/server/__init__.py": "095cb81de835ed9ba1a790f50118f534cabdfe3fcc5d4505b48d0378718aca7a",
+        "simplemem/integrations/server/auth/__init__.py": "a81e97cfa9f1714ef0cb1ba2786e71b6845033ce4a2a5528c45e2ec42a31ec0a",
+        "simplemem/integrations/server/auth/models.py": "77c153356ab2bafb7efed638251ff1fac691f3dfd9045e8386d4168a15943a91",
+        "simplemem/integrations/server/auth/token_manager.py": "91e9819f57453c544ef061e81c325baecad79e1c57830fdedb0e8f386f8dd041",
+        "simplemem/integrations/server/core/__init__.py": "d9f9fa1efd9a7f6a6a1e08cdc75e9b42f2e062a91f9eaa1b1070c1fb067852ce",
+        "simplemem/integrations/server/core/answer_generator.py": "3d0b50fa1b9eebf0e3538c1829c1a1daeb4d23099ff042fc498a8f0f2fc8821c",
+        "simplemem/integrations/server/core/memory_builder.py": "9a1909d4dbfc84bad9475e680fc14de76ab7495800118feeed3b76d904706428",
+        "simplemem/integrations/server/core/retriever.py": "71ba56c4eea9a8a2a447131566e572cdbe9451771329cf9b35da70ed919d33ec",
+        "simplemem/integrations/server/database/__init__.py": "61b01476ce337ede01ab8fc8d3aa9d1483e17dec9a27d8e59183fc8c3c81a80e",
+        "simplemem/integrations/server/database/user_store.py": "067d6b015655a3a3d0775ec1335b3c649d4bde9a85a3affab31e87ec27d0fb13",
+        "simplemem/integrations/server/database/vector_store.py": "7c423f814c52567c7b7dd4da81fac87633a8248337fa666bafe1bf09dc22b9c3",
+        "simplemem/integrations/server/http_server.py": "bab2cbb02791344f247a7dd8a3feecc7a5c281f1ad3a6894a9243619f2670c2e",
+        "simplemem/integrations/server/integrations/__init__.py": "989c995f6288d9212543c3ae0115874b32ff1abe6f0348346bcd66c389345298",
+        "simplemem/integrations/server/integrations/ollama.py": "93ddc370c7c554243c02b98a71acc6a9dbd05f0420485b1be84523ce51817a7c",
+        "simplemem/integrations/server/integrations/openrouter.py": "4ccb2a864de52e2d99f133998bce06b02efc85e8eec2008f953e35d2f38f8740",
+        "simplemem/integrations/server/integrations/requesty.py": "3f16bb2e9405508ee58c689ad7edbe879dff06181ee10a21b89cafcf7c3c1e59",
+        "simplemem/integrations/server/mcp_handler.py": "3885e8227b734690a118f5f26632a79122a8f3546f80a75239dc60070ce07cac",
+        "simplemem/integrations/simplemem-skill/scripts/cli_persistent_memory.py": "bed6be3f8e948bd0a4da560e61ea3c29b197de4643cf516b8e92e42834f50286",
+        "simplemem/integrations/simplemem-skill/src/core/__init__.py": "fabc99c84f1ca8fdecd49c496cb09d6af8cc7ebae9b05535da82183b1610be67",
+        "simplemem/integrations/simplemem-skill/src/core/answer_generator.py": "31a895d9c5721a5a037de564261e54fc73d9b00053f998923dddd6d3df31e2c8",
+        "simplemem/integrations/simplemem-skill/src/core/hybrid_retriever.py": "2b293f6baf3c20844b3078c8103c1ecf1f5944d3db0a53023e0b28a8287dafe4",
+        "simplemem/integrations/simplemem-skill/src/core/memory_builder.py": "3ea54da5b9d86a2201f5cd88fef966273ed7f79a9469209b190b97030a5c3fab",
+        "simplemem/integrations/simplemem-skill/src/database/vector_store.py": "96b4cdec858579d61707fb5bafa20afefad05b3b1bda47983f0df57d7ac9be19",
+        "simplemem/integrations/simplemem-skill/src/main.py": "6421881b5c5e6d040c9b72edec5fcabac15470c9911f407ed01566523a620388",
+        "simplemem/integrations/simplemem-skill/src/models/__init__.py": "a64a0ee787d6476b3f488c8e3276ee337aae16763fb9b38158cd8ccc81b8ac06",
+        "simplemem/integrations/simplemem-skill/src/models/memory_entry.py": "4fe9531e44993d649648b0ccb20df6622806cb7fd3ea118d1d0d6b13f67c7cf1",
+        "simplemem/integrations/simplemem-skill/src/utils/__init__.py": "d348d4588c4de3874438b576b3e92c6ff6015238506eaea712277973de478eb0",
+        "simplemem/integrations/simplemem-skill/src/utils/embedding.py": "4e2571e1d60afd5752e60f873eb634601c9034398fdfa29350676ef7d771c9ed",
+        "simplemem/integrations/simplemem-skill/src/utils/llm_client.py": "1276d7b0404337cc940f006d8bc9523aff892d99dadd8c88f529337c054ea248",
+        "simplemem/integrations/simplemem-skill/src/utils/openrouter.py": "2fb5cf5de1949f646e185dfdd69b2a67cdbde2e6b06c34207679cdb3028bc0f5",
+        "simplemem/integrations/simplemem-skill/src/utils/requesty.py": "5d84cf07c4fcb128f64899069167ac2db06c8c8dd0019e79c19e1e3dc9294e74",
+        "simplemem/integrations/test_ollama.py": "c96001c9ee1ce674cc639fb5bfa58d75703e76f7e3d364e68dd3e7c95947a8c3",
+        "simplemem/multimodal/__init__.py": "81c93cc318f131f5d73642893bb465cc3ce783188d9d44ed5d3eebca1352b33c",
+        "simplemem/multimodal/app.py": "0ff5f347e55f06afab908e90798aebe5aa5368ee82dc061b63ab5547d439febb",
+        "simplemem/multimodal/core/__init__.py": "bcd866adef845fb52f781ee795b06206880027a7a320a4bafa7446da2c62686f",
+        "simplemem/multimodal/core/config.py": "43dd7f3762222e4fd3a7c0322468be5a8028dcb1fb6ed7ce6484f6a24af03095",
+        "simplemem/multimodal/core/event.py": "27430a28c6c76f91a4a80a36ba8042163155afa1720496f02123f13708cd172f",
+        "simplemem/multimodal/core/mau.py": "11f849461d256e3906101157f9a4de440d64962efd6d01cb91f9723a429d6250",
+        "simplemem/multimodal/evaluation/__init__.py": "36b15451822ee1492b96c8ab6ca233590c40cf7d0bae9a40fa834764f968a794",
+        "simplemem/multimodal/evaluation/benchmarks.py": "a0815bd22765fe0326856cc34384cde818f0b34ca994134db1a65268fd5ce6b3",
+        "simplemem/multimodal/evaluation/evaluator.py": "c69952b9d7b2a4dead52cf1d19e7c52b7aa68000eb56d3895bace043a159270a",
+        "simplemem/multimodal/evaluation/metrics.py": "d4e9a459bc4a6ce8b468b932977272662e37de18e5b779be052956d9ec1ef9a0",
+        "simplemem/multimodal/evolution/__init__.py": "d68fff133e060d52794dd8f07e181b6f024b4b87af8f789272129afacdcdcb8a",
+        "simplemem/multimodal/evolution/evolution_config.py": "2fcb14a6701de5c4b19e5cc61576cb552d82766d370517a090fdc505f11d705f",
+        "simplemem/multimodal/evolution/experience_engine.py": "7e1b6fe910434e45a9313dec4b115152e94fd5e81ded19e2c4977126181917b4",
+        "simplemem/multimodal/evolution/meta_controller.py": "a79f98ab059db43aecea6d99a3a8a6f9df33f2e05d9a3344cd96a93571776e82",
+        "simplemem/multimodal/evolution/strategy_optimizer.py": "53671cc50fcb5d8a7da508884bf1a20dc879238179ce0de35e8d650a1d3d2ae3",
+        "simplemem/multimodal/graph/__init__.py": "3d19fcada497625a3606fdf4688ee0c9e380deae6b044192418b15a27daf0484",
+        "simplemem/multimodal/graph/event_manager.py": "555fa3df9b45976cb6c0b35bb302793e1939cf9762eca8d7f034db7f551c113d",
+        "simplemem/multimodal/graph/event_store.py": "f04fa0cfeae9bcdb7818b07b0830314657f46be810487f702c5c639a4e369625",
+        "simplemem/multimodal/knowledge/__init__.py": "56d68ef6d7d27cf1e86b0d7bd7805b3adf7f3069fe924f6aa68bbb8e71650a3d",
+        "simplemem/multimodal/knowledge/entity_extractor.py": "6fe9d12f29e48917790885995710d23623be8a4ca5e6178bb2ba2eac03b80324",
+        "simplemem/multimodal/knowledge/graph_retriever.py": "769b03879940984b936a22601dceeeda50e3a77326b2056de9950290512a43a9",
+        "simplemem/multimodal/knowledge/knowledge_graph.py": "f89bd79718001b7e7a0450a6cedbac3d03e229263455827e75ad2957257c847b",
+        "simplemem/multimodal/orchestrator.py": "b68274b274f2afd5e852aa0c982a871d67af1318f23b21603a101bf145ab3fb7",
+        "simplemem/multimodal/parametric/__init__.py": "c1a0c5495370f925ceaf85126692a694178e0be08cf7c4ea11320d5ce99d6e78",
+        "simplemem/multimodal/parametric/consolidator.py": "1ddb44a13296ce2e6fa9f048767604411664e762e0afa3d3ef397d858abe0772",
+        "simplemem/multimodal/parametric/memory_distiller.py": "7ae3dfb789cb85d3670e16cd3e4d9e92de9f0a5acaeb948327773d366cadaffa",
+        "simplemem/multimodal/parametric/parametric_store.py": "4578aca26000c4b7281fad3bc6a98d3354a3da0a7438efdc0d16cbf89d1b908c",
+        "simplemem/multimodal/processors/__init__.py": "a52772e9e8cd602778df7007e69f2282540a928a00a7c224183f22004abdf96b",
+        "simplemem/multimodal/processors/audio_processor.py": "a1e0c6524687a23a7c3818a729a41343f1332f876db2c5a822c507247f4916cd",
+        "simplemem/multimodal/processors/base.py": "798d0a63b83a1d83aa866de13690d378d9ade449df1f2c52726f754bdd63f9b8",
+        "simplemem/multimodal/processors/image_processor.py": "4278f6c7775b3d7e43ec74acff943ec2d0b4c2469aa6970735a98dba5384fc13",
+        "simplemem/multimodal/processors/text_processor.py": "ef305999c7a2ff82ddbaf4430f613f608c9e677864379d6c17077b992baa4448",
+        "simplemem/multimodal/processors/video_processor.py": "6c6e6cd2c265e97638833e72278b094cf8a7828113596c4b83740a9f81901edf",
+        "simplemem/multimodal/retrieval/__init__.py": "fe97940c9ddd8ab5ecdfb65bb0a459e0c1b00b59b2781a407166b5ad7f1cb173",
+        "simplemem/multimodal/retrieval/bm25_store.py": "85aa79abd2ee074c20f28fcdd04a6a3fd38b07742e61d6c03bf02a5c6bd108de",
+        "simplemem/multimodal/retrieval/expansion_manager.py": "9dea4d55200e0df4053582b3162e6321bae43052c4dd1077ee33378179f9d85e",
+        "simplemem/multimodal/retrieval/pyramid_retriever.py": "2ee43c21d3e33e5be49156088e686049e068193c145b50c1fd66734861c69d4d",
+        "simplemem/multimodal/retrieval/query_processor.py": "cc548c092777492b075501b17d32bcccdbc7fa66a6f747a4b49e81bc2da7e3a7",
+        "simplemem/multimodal/routing/__init__.py": "d8d19dae741b1e77594ef87ee679950baf1287f22ce47be1ebe8814b41c05973",
+        "simplemem/multimodal/routing/features.py": "95f4820ebd6d96c778be63796a6c2ba7da15968b7112ea77efcdee8072286cb2",
+        "simplemem/multimodal/routing/policy.py": "131f75a8038037c102f93cc5211dd8323ecf1bae63a88ba6985eab967e740129",
+        "simplemem/multimodal/routing/router.py": "da596758e9897170229fad5fd5fed26fe86c51b1d3ac6d89e011f55b82b52f79",
+        "simplemem/multimodal/storage/__init__.py": "6ee112652d177e456ad327a9576a9e136a70d9e26b4797c9790680b8fec52e6f",
+        "simplemem/multimodal/storage/cold_storage.py": "d2e30873281931f0d385f44c18cf249d2df1541ec644b5ed8145cfd264a892b5",
+        "simplemem/multimodal/storage/mau_store.py": "1dfc7490789d96da8489d909b4853bb927a84d74dff97548ced5c0c7d54cbf15",
+        "simplemem/multimodal/storage/semantic_store.py": "b25ba3d4555d311793ebbf93783beb15979fe600551b483074d6dc97e4b23dbb",
+        "simplemem/multimodal/storage/vector_store.py": "ad46284b100637457893f07bbea44a220b57a69535dbf741e875a1a90814411a",
+        "simplemem/multimodal/triggers/__init__.py": "0924fb2a4cf277f6fd2f818bfef5fae531c2f008901e4a891a8ba792d33d7b87",
+        "simplemem/multimodal/triggers/audio_trigger.py": "0062b666369eaac68a4bb0f6f564f8d555ca8d4bbc3912cb84e228e8972bb185",
+        "simplemem/multimodal/triggers/base.py": "f1d028ba69de0714ac28115214f662ad508e0769a8c07a2d5385fe737775a156",
+        "simplemem/multimodal/triggers/visual_trigger.py": "fce042ed79796b810115ef0a1e05771d5cfcc5cc428e7613417057932a5ea5fd",
+        "simplemem/multimodal/utils/__init__.py": "cc98f52d48f49aff9fc9133b4d4e9e42510f4dc6e12a1c8b4ef19a628f89575a",
+        "simplemem/multimodal/utils/embedding.py": "309663b656a4cf729ee6e58078b9548b7b6154eb0e2305b82cbe19e5465fc350",
+        "simplemem/multimodal/utils/logging_config.py": "c4e161f77de002efb41b65c835227517f7d594297339bcd77ca00a5754a30153",
+        "simplemem/multimodal/utils/model_utils.py": "4fcae06b285d1669ba6c7d964177551c3bacff6f4d11ad38d55a5548b8f9c4a3",
+        "simplemem/multimodal/utils/openvision_clip.py": "67f4815873d2f57044b3fab477ae241d7df9124af22ed86b913463f78e302317",
+        "simplemem/router.py": "fe29f316d4606679e910ae45689558938006cd6699b92eeb8cfffd589f361bb0",
+        "simplemem/text/__init__.py": "f2203f2e9bef56330e007d8bf00200b31c796749d76f51157a435f07d9291028",
+        "simplemem/text/system.py": "47a8fbfd5b6ea820f20f838e8453b91ff88926e503c1ccb78133aecbc5bee2c8"
+      },
+      "source_manifest_sha256": "884d1c207fe0c0bfd9fbd3bb72c287c7a53245774a81d463a6138b3cd3d2d4f7"
+    }
+  },
+  "limitations": [
+    "AST and source audit verifies composition paths, not actual emitted HTTP input or effective semantic retention",
+    "Existing historical results remain at their original source identities; no cherry-picked reuse as v13.1 acceptance",
+    "No new baseline installs or model calls performed in first audit",
+    "SimpleMem actual native wire omits original event ID; no claim of lossless complete identity acceptance."
+  ]
+}

@@ -1,0 +1,627 @@
+{
+  "kind": "MILAI_V13_1_P4_TYPE_SCOPE_R2_RESULTS",
+  "status": "PASSED_SCOPED_FACTOR_ENGINEERING_SEMANTICS_PARTIAL",
+  "planned_case_arms": 16,
+  "completed_formations": 16,
+  "completed_readers": 16,
+  "distinct_processes": 32,
+  "counts": {
+    "flat": {
+      "pass": 2,
+      "fail": 2,
+      "unknown": 0,
+      "total": 4
+    },
+    "type_only": {
+      "pass": 2,
+      "fail": 2,
+      "unknown": 0,
+      "total": 4
+    },
+    "flat_scope": {
+      "pass": 3,
+      "fail": 1,
+      "unknown": 0,
+      "total": 4
+    },
+    "type_scope": {
+      "pass": 2,
+      "fail": 1,
+      "unknown": 1,
+      "total": 4
+    }
+  },
+  "last_event_retention": 16,
+  "generation_requests": 32,
+  "generation_tokens": 51288,
+  "embedding_tokens": 0,
+  "ledger_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 6511,
+    "generation": {
+      "charged_tokens": 12004306,
+      "known_tokens": 12004306,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 420830,
+      "known_tokens": 420830,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_after_sha256": "7e43b6a2e16f80494c0bc90cafdb8fb8c30120e92d41de77d7d12e7993bd99ca",
+  "cases": [
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "flat",
+      "process_ids": [
+        378092,
+        378551
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 6,
+      "material_tokens": 408,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Focuses on note system; does not retain enough total-cost comparison explanation for pricing audience.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, the approach to the decision regarding the pricing change (memory-0005) would be guided by the user's preference for a lightweight, compact system for small decisions (memory-0000). Specifically, the user intends to test a new note-taking approach on this upcoming writing project decision by starting with a single page rather than a new application, aiming to reduce configuration time and improve searchability (memory-0003).\n\nThe process would involve:\n1.  Using a single page to document the situation, where the monthly fee has risen but two separately billed services are now included (memory-0005).\n2.  Keeping active proposals near the top of the page and archiving decided items at the bottom (memory-0004).\n3.  Writing in a style that reaches the point quickly, avoiding long introductions or unnecessary transitions, and using short paragraphs with direct claims (memory-0001, memory-0002).\n4.  Conducting a review after a few weeks to determine if recurring patterns justify a more structured system (memory-0004).\n\nSince nothing has been finalized and a proposal is needed for discussion (memory-0005), this single-page method serves as the initial framework for organizing that discussion and decision-making process.",
+      "readback_wall_ns": 11294984,
+      "readback_cpu_ns": 11291920,
+      "generation_requests": 2,
+      "generation_tokens": 2543,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000138/flat",
+      "artifact_sha256": {
+        "form.json": "a6c02731d16d046d3b27c4688d060c01ace0c1992ea187d9da557ad195db3f8e",
+        "form.jsonl": "c076fb230790706b9f94f46cd49298917d3de6c6e3d2d6574671868c78bfb6f7",
+        "read.json": "9de49d0f1e635703721e7a53c368e9db173cbe20e8a980c32d120e93ec000ae3",
+        "read.jsonl": "2597e0e5c4c9be7f39922c25b45045ae76e6ab556bfdc0a4a94d000e6891dc55",
+        "memory.sqlite": "c154fd6268193a3b06cd892c962f1951b34063af328450524d8af531f03a0997"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "type_only",
+      "process_ids": [
+        378871,
+        379302
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 4,
+      "material_tokens": 362,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Splits contexts then recommends passive waiting; does not supply compact sufficient pricing explanation.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, the approach to the decision depends on which specific situation is being referenced, as the memories describe two distinct contexts:\n\n**1. If referring to the writing project decision:**\nThe approach would be to test a new note-taking method on a single upcoming decision. This involves:\n*   Using a single page rather than a new application to minimize configuration time and improve searchability (memory-0002).\n*   Keeping active proposals at the top and archiving decided items at the bottom (memory-0002).\n*   Conducting a review after a few weeks to determine if recurring patterns justify a more structured system (memory-0002).\n*   Ensuring the system remains lightweight and compact, avoiding formal systems that require more maintenance than the decisions themselves (memory-0000).\n\n**2. If referring to the pricing change situation:**\nThe current approach is to wait. The announcement is not finalized, and the involved people can respond only once a proposal is ready for discussion (memory-0003). No specific decision-making framework is stored for this situation other than the condition for when input can be provided.\n\nSince the question asks about \"the situation we discussed\" without specifying which one, and the memories do not link a specific decision-making framework to the pricing change (memory-0003), the answer is split by context. If the \"situation\" refers to the writing project, the approach is the single-page test (memory-0002). If it refers to the pricing change, the approach is currently passive pending a finalized proposal (memory-0003).",
+      "readback_wall_ns": 1345720,
+      "readback_cpu_ns": 1345967,
+      "generation_requests": 2,
+      "generation_tokens": 2501,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000138/type_only",
+      "artifact_sha256": {
+        "form.json": "bdcda7cac9571e1bfbe181fad5544b5eb299dcfa60a7a524b3fb33976c053202",
+        "form.jsonl": "6ef589613e1a87419bbd9168672158beb83b5e1b5a6d2123baee8d6036241742",
+        "read.json": "3b74d883a861c05c08f09f2612e6cf2357499e94c12dc421e088231323d5b20c",
+        "read.jsonl": "2c32636ac050d38a1f57e4fa0b4a1eb4e051554b7ee323d28e755d4d8da5bd33",
+        "memory.sqlite": "a4a53b114fad3ef9245f930bac93b4526359584f0c2a10565c3a44eae94c6d6f"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "flat_scope",
+      "process_ids": [
+        379628,
+        380509
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 9,
+      "material_tokens": 890,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Keeps concise communication and enough context for comparing old/new total cost; separately distinguishes pricing from note-system pilot.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, the approach to the decision regarding the **pricing change** (where the monthly fee rose but two separately billed services became included) is as follows:\n\n1.  **Create a Short Announcement**: You intend to draft a brief announcement that provides enough context for readers to compare the old and new total costs. This aligns with your general preference for writing that reaches the point quickly, avoids long introductions, and uses economy in detail (memory-0002, memory-0007).\n2.  **Allow for Feedback**: You plan to allow people involved in the pricing change to respond once there is a concrete proposal to discuss (memory-0008).\n3.  **Avoid Formal Systems**: Consistent with your preference for organizing small decisions related to writing projects, you are avoiding formal systems or elaborate scoring tables for this decision (memory-0000).\n\nNote: While you have a plan to test a new note-taking approach on an *upcoming writing project decision* (memory-0003), the pricing change appears to be a separate current situation involving communication and feedback rather than a writing project decision requiring that specific pilot test.",
+      "readback_wall_ns": 1230997,
+      "readback_cpu_ns": 1231568,
+      "generation_requests": 2,
+      "generation_tokens": 3850,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000138/flat_scope",
+      "artifact_sha256": {
+        "form.json": "04b6a16ade51e7c37d72cf1c54a1ae9a213005476bd7088a1e3209a3124094fa",
+        "form.jsonl": "3d120f6dea9998e5c2b0472106f0cd0babcedaa926c9a8f787d5f0ed199306dc",
+        "read.json": "2616c44809801e28520fe4689f99c2284da04e95b304554a9db4ed8ca62f7a4b",
+        "read.jsonl": "3a015242709401238893dd5d93654a7015b5743110c8fd24836474fa33fb2d81",
+        "memory.sqlite": "e0d9cc3223381858406ec9d76bf9bd8f34d4359ed3d1ed5778a2e6652d308917"
+      }
+    },
+    {
+      "case_id": "mso_hard_000138",
+      "arm": "type_scope",
+      "process_ids": [
+        380830,
+        381360
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 4,
+      "material_tokens": 533,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "UNKNOWN",
+      "reason": "Context separated and uncertainty stated, but no actual pricing explanation approach; required task not fulfilled.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, the approach to the decision depends on which specific situation is being referenced, as the memories distinguish between general preferences for writing projects and a specific current business situation.\n\n**1. If referring to the general approach for writing project decisions:**\nThe user prefers a **lightweight, compact system** that avoids formal systems requiring high maintenance (memory-0000). Specifically, the user plans to **test a new note-taking approach** on one upcoming writing project decision (memory-0002). This approach involves:\n*   Starting with a **single page** rather than a new application to reduce configuration time and improve searchability (memory-0002).\n*   Keeping **active proposals at the top** and **archiving decided items at the bottom** (memory-0002).\n*   Conducting a **review after a few weeks** to determine if recurring patterns justify a more structured system (memory-0002).\n\n**2. If referring to the current pricing change situation:**\nThe user is currently dealing with a **pricing change** where the monthly fee has risen, but two separately billed services are now included (memory-0003). The situation is **not finalized**, and the user is **preparing a proposal for discussion** with involved parties (memory-0003). The memories do not specify the exact decision-making framework used for this specific pricing event, only that a proposal is being prepared for discussion.\n\n**Uncertainty:**\nThe memories do not explicitly link the \"lightweight note-taking test\" (memory-0002) to the \"pricing change\" (memory-0003). Therefore, it is uncertain if the single-page note-taking approach is being applied to the pricing decision or if the pricing decision is handled separately. The memories also do not specify the outcome of the pricing discussion or the final decision made.",
+      "readback_wall_ns": 1065748,
+      "readback_cpu_ns": 1066142,
+      "generation_requests": 2,
+      "generation_tokens": 3048,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000138/type_scope",
+      "artifact_sha256": {
+        "form.json": "3b8f42aa7b7f63bb87199d38ee1d9a2394c699b8d2a2f6392cf5acf2973a935e",
+        "form.jsonl": "d2321a5bcf8feedc33e7f8902937f1c1a91b1f69139d42f763902c720e5b395a",
+        "read.json": "3d04d5f55689707642beab605be6f7ddbcec997b375d05f67ee8fcda96e9d017",
+        "read.jsonl": "789e509c6cb79e60d3b95395f73f2d5268765e6bd8ae415e51e8b97957802f07",
+        "memory.sqlite": "2d6ca48729f8b36dc35c3ecc0e8e34a082e18f43edbae5350b7b40dfeb32902a"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "flat",
+      "process_ids": [
+        381853,
+        382324
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 7,
+      "material_tokens": 473,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Explicitly applies user preference for receiving blunt/strongest-concern-first feedback to nervous junior recipient, without adapting delivery to recipient context.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation involving the junior colleague’s presentation:\n\n**Recommendation**\nYou should provide direct, honest feedback prioritizing the strongest concern first, as you prefer clear statements about what is not working over polite cushioning (memory-0000). The primary issue to address is that the colleague’s delivery is difficult to follow when speaking quickly, compounded by their nervousness about presenting to senior staff (memory-0005). Since you prefer creating one coherent plan rather than adding alternatives, you should consolidate your preparation into a single, unified strategy to help the colleague manage their pacing and anxiety (memory-0006).\n\n**Organization**\nTo organize this interaction and reduce the fatigue you experience from repeated switching during decision-making (memory-0001), you should apply your intended method of separating discovery from commitment (memory-0002). Specifically:\n\n1.  **Preparation Phase (Discovery):** Write a provisional proposal for the coaching session. Mark any assumptions clearly. This aligns with your plan to use a lightweight note structure for feedback and mentoring, using descriptive titles, one sentence for the decision, and one for the reason or next action (memory-0004).\n2.  **Execution Phase (Commitment):** During the session, deliver the feedback directly, starting with the strongest concern regarding delivery speed and clarity (memory-0000).\n3.  **Documentation:** Keep the decision log lightweight. Since this involves a specific, likely non-recurring event (a single presentation) and does not necessarily involve others in the decision-making process, brief notes are sufficient rather than a formal decision log (memory-0003).\n\nThis approach minimizes context switching by locking in the plan beforehand and ensures the feedback is delivered in the manner you find most effective.",
+      "readback_wall_ns": 1099888,
+      "readback_cpu_ns": 1100513,
+      "generation_requests": 2,
+      "generation_tokens": 2808,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000206/flat",
+      "artifact_sha256": {
+        "form.json": "ac8ed835023520dd3eb350f07761bb545710dea8d1bb1ec1b3ebe8e462e0f655",
+        "form.jsonl": "e2ec5148cce86809cc78b5211fb372848e9f324aea5261bf103281a3f90fa3f5",
+        "read.json": "31d4ed8e06d2d9fb03e6dcc4e80a578b26e790d0caa3e55aa27161d5db909fbf",
+        "read.jsonl": "492c7645e10c9acb77a58484b402bf4fdb61edd153c8919e517774da36b17ee3",
+        "memory.sqlite": "e369dc0094538fb2b4bbd583e6149b423d96cabf4ce238d9a994dfd650c89ca1"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "type_only",
+      "process_ids": [
+        382675,
+        383107
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 4,
+      "material_tokens": 326,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Explicitly applies user preference for receiving blunt/strongest-concern-first feedback to nervous junior recipient, without adapting delivery to recipient context.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation involving the junior colleague’s presentation practice:\n\n**Recommendation**\nGiven that the colleague’s content is strong but delivery is difficult to follow due to speed, and they are nervous about presenting to senior staff, the recommendation is to provide **direct feedback** prioritizing the strongest concern first. Specifically, you should state clearly that the **speed of delivery** is the primary issue hindering clarity, rather than cushioning this with praise for the content. This aligns with the user’s preference for honest assessments and clear statements about what is not working, avoiding polite cushioning which is difficult to parse.\n\n**Organization**\nTo organize this feedback and reduce decision-making loops, you should:\n1.  **Separate discovery from commitment:** Write a **provisional proposal** for how the colleague can adjust their delivery (e.g., pausing, slowing down) and mark any assumptions made about their specific needs.\n2.  **Use a lightweight note structure:** Record this feedback in a note with a **descriptive title** (e.g., \"Feedback: Junior Colleague Presentation Delivery\") and include **brief reasons** for the recommendation. This structure is limited to choices likely to recur or involve others, ensuring efficiency.\n3.  **Prioritize the strongest concern:** In the note and conversation, lead with the issue of speed and nervousness affecting clarity, as this is the most critical barrier to success for senior staff audiences.\n\nThis approach respects the user’s need for directness, minimizes time spent on decision loops, and provides a clear, actionable path for the junior colleague.",
+      "readback_wall_ns": 1711517,
+      "readback_cpu_ns": 1711923,
+      "generation_requests": 2,
+      "generation_tokens": 2443,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000206/type_only",
+      "artifact_sha256": {
+        "form.json": "9e7c7d77c2ce4b1413afe8a58459c9787ad1ee646589abdb054bb6de389a14e0",
+        "form.jsonl": "0f9bf11e18628399356a7c6d108b7f2616548ea83f87a4c21b50156ef903ce82",
+        "read.json": "1afc497edd5c839f8929e228eb456b71911c7451eea3a1dc19d1dda8cb778334",
+        "read.jsonl": "613dfa969bea268232dab65e8d4689b25cc46cdcc50addba82b4d0dd75966027",
+        "memory.sqlite": "8899c6491cfadfe13b28d310a82e765d73fedf3e522f3e577d24e6676ee1a32f"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "flat_scope",
+      "process_ids": [
+        383427,
+        384105
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 7,
+      "material_tokens": 700,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Explicitly applies user preference for receiving blunt/strongest-concern-first feedback to nervous junior recipient, without adapting delivery to recipient context.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation involving the junior colleague’s presentation practice.\n\n### Recommendation\n\nGiven that the junior colleague’s content is strong but delivery is difficult to follow when speaking quickly, and they are nervous about presenting to senior staff, the recommendation is to **prioritize clarity and pacing over content refinement**.\n\nThis aligns with the user’s preference for **direct feedback** and hearing the **strongest concern first** (memory-0000). The strongest concern here is the delivery issue, which directly impacts the colleague’s confidence and the audience's understanding. Polite cushioning is difficult for the user to parse, so the feedback should be straightforward: the content is good, but the speed and clarity of delivery need immediate adjustment to mitigate nervousness and ensure comprehension.\n\n### Organization\n\nTo organize this mentoring session and reduce the user’s fatigue from repeated switching (memory-0001), the following structure is recommended, adhering to the user’s plan to separate discovery from commitment (memory-0002) and pilot a lightweight note structure (memory-0004):\n\n1.  **Preparation (Lightweight Note Structure):**\n    *   **Descriptive Title:** Feedback Plan for Junior Colleague’s Presentation.\n    *   **Decision:** Focus feedback exclusively on pacing and clarity of delivery; defer content review unless critical errors are found.\n    *   **Reason/Next Action:** This reduces switching by limiting the scope to one coherent plan (memory-0006) and addresses the strongest concern first (memory-0000).\n\n2.  **Execution (Direct Feedback):**\n    *   **Start with the Strongest Concern:** Immediately address the delivery speed and clarity. State clearly that while the content is strong, the current pace makes it difficult to follow, which exacerbates nervousness.\n    *   **Provisional Proposal:** Suggest specific techniques for slowing down and pausing, rather than offering multiple alternatives. This supports the user’s desire for one coherent plan (memory-0006) and avoids the fatigue of choosing between many options (memory-0001).\n\n3.  **Documentation (Lightweight Decision Log):**\n    *   Since this involves a recurring type of decision (mentoring feedback) and another person (the junior colleague), a lightweight decision log is appropriate (memory-0003).\n    *   Record the key feedback points and the agreed-upon next steps for practice, ensuring the log remains brief to maintain efficiency.\n\nThis approach respects the user’s need for directness, minimizes decision fatigue by focusing on a single coherent plan, and uses the proposed lightweight structure to organize the mentoring effort effectively.",
+      "readback_wall_ns": 1615635,
+      "readback_cpu_ns": 1616282,
+      "generation_requests": 2,
+      "generation_tokens": 3654,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000206/flat_scope",
+      "artifact_sha256": {
+        "form.json": "08205899bd11429ecdd12ef35c034d4df5225de315197688b22907a4d116cfb2",
+        "form.jsonl": "e52b86ae492dc6d1f4311bcac6009c55d4ef9c4c7830f8b9277785025b9c1286",
+        "read.json": "23c58263d3f188ba84729d58f474fb7e05f5b5108d215bb5c9c77886cb9cc756",
+        "read.jsonl": "1eecdb7e14fd422d79dce47742e046a36cd2af55ee4ad9bf2c9969298593b84c",
+        "memory.sqlite": "eba375b3198055611e7f63809983ddf5c9d2b5acec58e91f8ad93a649ffaf7e9"
+      }
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "arm": "type_scope",
+      "process_ids": [
+        384559,
+        385141
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 6,
+      "material_tokens": 679,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "FAIL",
+      "reason": "Explicitly applies user preference for receiving blunt/strongest-concern-first feedback to nervous junior recipient, without adapting delivery to recipient context.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [
+        "memory-0004"
+      ],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation involving the junior colleague's presentation practice.\n\n### Recommendation\n\nGiven the user’s preference for direct feedback and the strongest concern first, the recommendation is to prioritize addressing the **delivery issue** (difficulty following speech when speaking quickly) as the primary focus, while acknowledging the colleague’s strong content and nervousness.\n\nThe user intends to create **one coherent plan** rather than adding alternatives, which aligns with the user’s fatigue from repeated switching and desire to avoid unfinished choices due to new details.\n\n### Organization of the Plan\n\nTo organize this effectively, the plan should adhere to the user’s established methods for feedback and mentoring decisions:\n\n1.  **Separate Discovery from Commitment**:\n    *   Draft a **provisional proposal** for the coaching plan.\n    *   Mark any **assumptions** clearly within this proposal to reduce cognitive switching and decision fatigue.\n\n2.  **Structure the Feedback**:\n    *   Start with the **strongest concern**: The delivery is difficult to follow when speaking quickly.\n    *   Provide **direct, honest assessment** without polite cushioning, as the user finds cushioning difficult to parse.\n    *   Acknowledge the **strong content** and the colleague’s **nervousness** as context, but keep the focus on the actionable delivery improvement.\n\n3.  **Lightweight Decision Log**:\n    *   Since this involves a junior colleague and is likely to recur or involve others, use a **lightweight decision log** structure:\n        *   **Descriptive Title**: e.g., \"Coaching Plan for Junior Colleague's Presentation Delivery.\"\n        *   **One Sentence for the Decision**: e.g., \"Focus coaching exclusively on pacing and clarity of delivery to address the primary barrier to effective communication.\"\n        *   **One Sentence for Reason/Next Action**: e.g., \"This addresses the strongest concern directly and avoids decision fatigue from multiple alternatives; next step is to schedule a focused practice session on slowing down speech.\"\n\n4.  **Pilot the Approach**:\n    *   Run this as a **small pilot** of the lightweight decision log structure to determine its utility for this specific mentoring interaction, as the user intends to test this method in feedback and mentoring contexts.\n\nThis approach respects the user’s need for directness, minimizes switching fatigue, and provides a clear, single coherent plan for the junior colleague’s preparation.",
+      "readback_wall_ns": 1191454,
+      "readback_cpu_ns": 1192223,
+      "generation_requests": 2,
+      "generation_tokens": 3541,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000206/type_scope",
+      "artifact_sha256": {
+        "form.json": "a4ad9887ad13efd9ccc3a91a8c499ddcb794a4765b999047431284f4e0f72582",
+        "form.jsonl": "9752ffbbded14ccb189152dcfea423f8eac69c0c91d7ec35fba6e01e0b46ce1c",
+        "read.json": "355e317a59ebbbf47d62a74349d84adaeff8e882b76cda8e7950478cbdc7de92",
+        "read.jsonl": "09a31d4dd0ff19ea2379b1c52c5ed4000b82fdaceb7d5160c71d1f83299743b1",
+        "memory.sqlite": "1d68710b3049e6c1c042db0e26bf99351020a438b53e53ce3ca306c6357d24c0"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "flat",
+      "process_ids": [
+        385585,
+        386127
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 6,
+      "material_tokens": 476,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Recommends midrange on commuting reliability/repair/lifecycle value while avoiding unused premium features; price default is not controlling.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [
+        "memory-0003"
+      ],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories regarding your approach to everyday purchases and the specific context of needing a rain jacket for bicycle commuting, here is the recommendation and organization strategy:\n\n### Recommendation\nFor the rain jacket, you should **propose the midrange option**.\n\n*   **Reasoning:** While your general preference is for the lowest-priced option capable of doing the job, the low-priced option has demonstrated a failure mode (seam leakage after one season) that compromises its ability to perform the core job (keeping you dry while commuting). The midrange jacket is repairable and lacks the unnecessary design extras of premium models, aligning with your dislike for paying for branding or unused features. It represents a concrete reason to spend more than the absolute minimum, as the cheaper option is not reliably \"capable of doing the job.\"\n\n### Organization\nYou should organize this decision using the **three-status label system** on a **single page** of ordinary prose, rather than a new application.\n\n1.  **Status Label:** Mark the midrange jacket as **\"proposed\"**.\n    *   Do *not* mark it as \"decided\" yet, to avoid reopening settled choices or assuming early ideas were agreed upon.\n    *   Do *not* mark it as \"exploring\" if you have already narrowed it down to this specific viable option.\n2.  **Content Structure:**\n    *   Write a **provisional proposal** for the midrange jacket.\n    *   **Mark assumptions** (e.g., \"Assuming repairability holds up over time\").\n    *   **Leave other details alone** (e.g., exact color, specific brand features not related to function) to reduce switching costs.\n    *   **Highlight feedback points** for this proposed item (e.g., \"Is the repairability claim verified?\").\n3.  **Placement:**\n    *   Place this entry at the **top** of your single-page note for everyday purchases.\n    *   If you have already decided on other items, archive them at the bottom.\n4.  **Review:**\n    *   Set a **review trigger** for this item after a few weeks to determine if more structure is needed or if the decision can be finalized.\n    *   Since this is a personal purchase (no other person involved), you do not need to add an owner or response date.\n\nThis approach separates the discovery (identifying the midrange jacket as the viable option) from the final commitment, reducing the time spent circling around the decision while respecting your need to distinguish between leaned-toward options and actually decided items.",
+      "readback_wall_ns": 971409,
+      "readback_cpu_ns": 972187,
+      "generation_requests": 2,
+      "generation_tokens": 2953,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000204/flat",
+      "artifact_sha256": {
+        "form.json": "0f5ab57baa7dc9f9ced1d42aab7a107c325da642bf3f07e1934c022ac2fc1d5f",
+        "form.jsonl": "fda27ba1d2957c8b8a865ee7acfbea22f570021c4e1adedc031cf287dd389074",
+        "read.json": "214f578b9b58ebbe9222454f7738aa138e25e29a6f1921fd3396ba9d5e6f998e",
+        "read.jsonl": "be1d79093455e780807b5c8a38bd0019948151ee169ea094986e39ff738845db",
+        "memory.sqlite": "9cc8a3718c22b7d3955253b2a5a6e50a1801aac8ee1fc25c2d0831b37f996199"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "type_only",
+      "process_ids": [
+        386565,
+        387187
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 5,
+      "material_tokens": 447,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Recommends midrange on commuting reliability/repair/lifecycle value while avoiding unused premium features; price default is not controlling.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organizational structure for the rain jacket decision, aligned with your established preferences for everyday purchases.\n\n### Recommendation\n\n**Recommendation:** Proceed with the **midrange jacket**.\n\n**Reasoning:**\n1.  **Alignment with Core Preference:** You prefer starting with the lowest-priced option capable of doing the job and dislike paying for unused specifications or branding (memory-0001). The midrange jacket fits this by being repairable and lacking the \"design extras\" of premium models.\n2.  **Risk Mitigation:** While the low-priced option is cheaper, reviews indicate seam leakage after a season, which compromises its ability to \"do the job\" reliably for regular bicycle commuting (memory-0004). The midrange option offers a better balance of cost and durability without the high cost of premium features you find unnecessary.\n3.  **Decision Efficiency:** You avoid comparing expensive products as it consumes disproportionate time (memory-0001). By selecting the midrange option, you avoid the time sink of evaluating premium alternatives while ensuring the product is adequate for your needs.\n\n### Organization\n\nTo organize this decision within your existing system:\n\n1.  **Use the Single-Page Note:** Record this decision in your single-page everyday purchase notes rather than a new application, to reduce configuration time and improve searchability (memory-0003).\n2.  **Mark as a Provisional Proposal:** Since you are currently \"attempting to form a usable proposal,\" mark this entry as a **provisional proposal** with clear **assumptions** noted (e.g., \"Assumption: Midrange jacket durability is sufficient for 2+ years of commuting\"). This helps separate the decision from mere leaning and preserves context for later information (memory-0000, memory-0002).\n3.  **Placement:** Keep this entry at the **top** of the page as an active proposal (memory-0003).\n4.  **Future Review:** Schedule a review after a few weeks to determine if more structure is needed for this type of decision (memory-0003). Once the purchase is made and the jacket is in use, move the entry to the **bottom** to archive it (memory-0003).\n\nThis approach respects your goal of reducing time spent on everyday purchase decisions by separating discovery from commitment and avoiding unnecessary comparisons (memory-0000, memory-0001).",
+      "readback_wall_ns": 1003015,
+      "readback_cpu_ns": 1003102,
+      "generation_requests": 2,
+      "generation_tokens": 2877,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000204/type_only",
+      "artifact_sha256": {
+        "form.json": "46a425efebfa9ada0b37e9a67f04d5cc00d2268b79db2ac8513a37f9d290fffb",
+        "form.jsonl": "82fe79962bb6dfc3c0829da1af1175baa44c2dcb811c737930cce5f5cf1660e0",
+        "read.json": "5258864e4f5a49099ee6152db0414bf6f557995cd47cfa0681f2a6230b24e7fc",
+        "read.jsonl": "b40679969abbd57dc46ce5c0810c945e73d4a52b788eb636c11b61881c7f8ff3",
+        "memory.sqlite": "69bc05ed4db5f384f4defb17fa16fa44715bae09f5973924848d578fcfccd29f"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "flat_scope",
+      "process_ids": [
+        387605,
+        388294
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 7,
+      "material_tokens": 671,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Recommends midrange on commuting reliability/repair/lifecycle value while avoiding unused premium features; price default is not controlling.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories regarding your approach to **everyday purchases** and the specific context of a **rain jacket for bicycle commuting**, here is the recommended organization and decision strategy:\n\n### 1. Organization of the Decision Process\nTo align with your goal of reducing time spent on everyday purchase decisions, you should organize this specific purchase using the following structure:\n\n*   **Single-Page Note:** Record this decision on the same single page used for other everyday purchases.\n*   **Placement:** Place the rain jacket as an **active item at the top** of the page, as it is currently under consideration.\n*   **Provisional Proposal & Assumptions:** Write a provisional proposal for the jacket. Explicitly **mark assumptions** (e.g., \"Assumes seam leakage is rare\" or \"Assumes manufacturer repair is reliable\") to preserve context for later information and reduce switching costs.\n*   **Distinction of Status:** Clearly distinguish between **actual decisions** and **mere leanings**. Do not treat early ideas as agreed upon to avoid reopening settled choices prematurely.\n\n### 2. Recommendation on Selection\nGiven your preference for starting with the lowest-priced option capable of doing the job and your dislike for paying for branding or unused specifications, the recommendation involves weighing the trade-offs between the low-priced and midrange options:\n\n*   **Low-Priced Option:** This fits your general preference for basic models and low cost. However, you must account for the specific risk identified in reviews: **seam leakage after a season**. Since this is for *regular* bicycle commuting, durability is a functional requirement, not just a preference.\n*   **Midrange Option:** This option offers **manufacturer repairability** and fewer design extras (aligning with your dislike for decorative features). It avoids the specific failure mode (seam leakage) noted for the cheaper option.\n\n**Conclusion:**\nWhile the low-priced option aligns with your general \"lowest price\" heuristic, the **midrange option** appears more suitable for *regular* commuting due to the reliability concern (seam leakage) associated with the cheaper model. The midrange option’s repairability and lack of unnecessary extras align with your values of functionality and avoiding unused specifications.\n\nYou should record this as a **leaning** rather than a final decision on your single-page note, noting the trade-off between the lower upfront cost of the first option and the long-term reliability/repairability of the second. Review this note after a few weeks to determine if the decision is settled or if more structure is needed.",
+      "readback_wall_ns": 1414935,
+      "readback_cpu_ns": 1415319,
+      "generation_requests": 2,
+      "generation_tokens": 3551,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000204/flat_scope",
+      "artifact_sha256": {
+        "form.json": "20bfd80f677a0f5c526f6947a50fd689468422ff2ef21a70b7a3dbe61066c292",
+        "form.jsonl": "79d81cc767656f379e821f59e7cc530c3823a018530a929db4a566fbc77a3fb9",
+        "read.json": "401de50ca71e3befbddb2863254af0a896b4e055fba3f7fa37dd778a45b5a5b3",
+        "read.jsonl": "ebc18c5819ade165d4a8b236100d326a9ae1dc63ea80b44968ffe247f49a6253",
+        "memory.sqlite": "58432958d56cb4a4ab4d7a5ff91c3bf3d7bc50306303e41b3e76febcbdddf454"
+      }
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "arm": "type_scope",
+      "process_ids": [
+        388719,
+        389332
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 7,
+      "material_tokens": 690,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Recommends midrange on commuting reliability/repair/lifecycle value while avoiding unused premium features; price default is not controlling.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories regarding your approach to everyday purchases and the specific context of selecting a rain jacket for bicycle commuting, here is the recommended organization and decision path.\n\n### Recommended Organization\n\nTo align with your goal of reducing switching fatigue and separating discovery from commitment, you should organize this decision within your **single-page everyday purchase notes** system (memory-0003).\n\n1.  **Placement:** Add the rain jacket to the **top section** of the page as an \"active item\" (memory-0003).\n2.  **Structure:**\n    *   **Discovery Phase:** List the three options (low-priced, midrange, premium) with their key attributes.\n    *   **Assumptions:** Explicitly mark assumptions, such as \"I need a jacket that lasts more than one season\" or \"I prioritize repairability over brand prestige\" (memory-0000).\n    *   **Distinction:** Clearly label any preliminary thoughts as \"leanings\" rather than \"decisions\" to avoid reopening settled choices prematurely (memory-0002).\n\n### Recommendation\n\nGiven your preference for starting with the lowest-priced option capable of doing the job and your dislike for paying for branding or unused features (memory-0001), the **midrange rain jacket** is the recommended choice.\n\n**Reasoning:**\n*   **Low-priced option:** While it fits your budget preference, reviews indicate seam leakage after a season (memory-0005). This fails the \"capable of doing the job\" criterion for *regular* bicycle commuting, as reliability is essential for this use case (memory-0004).\n*   **Midrange option:** It fits your criteria of being repairable by the manufacturer and lacking unnecessary design extras found in premium models (memory-0006). This aligns with your dislike for paying for unused features (memory-0001) and offers better long-term value than the low-priced option.\n*   **Premium option:** Likely contains \"design extras\" you dislike (memory-0001) and higher branding costs, which you prefer to avoid.\n\n### Next Steps\n1.  Record the midrange jacket as the current leaning in your single-page note.\n2.  Mark the assumption that \"repairability is a critical factor for regular commuting.\"\n3.  Wait a few weeks, then review the page to assess if this decision holds or if more structure is needed (memory-0003).",
+      "readback_wall_ns": 1456963,
+      "readback_cpu_ns": 1457298,
+      "generation_requests": 2,
+      "generation_tokens": 3615,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000204/type_scope",
+      "artifact_sha256": {
+        "form.json": "e80294db4ba76d9868afc3a85d924084d5d1a602db14b126ca63d3f46c189de9",
+        "form.jsonl": "91051f3a304d60868327f3eab6d7d124dfd2c799d3cae9f3ab0c27435bde7858",
+        "read.json": "3618912a90ce2943b8e9b04e29385c8ca6253af5c6be474e24fd71da7a20512f",
+        "read.jsonl": "e04b7a2b2c94c1ae5532bd01706f68d12f5ada73bf1b21fc4310ffa2a2a58fd1",
+        "memory.sqlite": "ae25c6c7dd4694893613c65abe347545064779cd395c88b5b9385c90792c2ec3"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "flat",
+      "process_ids": [
+        389757,
+        390332
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 7,
+      "material_tokens": 661,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Retains concise prose but explicitly explains approval-step reason for new hires to avoid unsupported action-only instructions.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [
+        "memory-0005"
+      ],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for your writing project decisions, specifically tailored to your preference for economy and your goal of reducing decision fatigue.\n\n### Recommendation\nAdopt a **\"Discovery then Commitment\"** workflow to stop the tiring cycle of switching between documents and possibilities. Instead of expanding lists indefinitely, you should:\n1.  **Separate Discovery from Commitment:** Allow a short, fixed period to collect missing facts.\n2.  **Write a Provisional Proposal:** Once the discovery period ends, write a single proposal rather than continuing to gather options.\n3.  **Mark Assumptions:** Clearly identify which details are confirmed facts and which are assumptions that could change the choice. This allows others (or your future self) to challenge relevant assumptions without requiring a full rewrite.\n\n### Organization\nTo keep decision notes lightweight and readable after the immediate issue is resolved, organize them using the following structure:\n\n*   **Descriptive Title:** Clear and specific.\n*   **One Sentence for the Decision:** State the choice directly.\n*   **One Sentence for the Reason/Next Action:** Provide the brief justification or immediate next step.\n*   **Assumptions/Options (Conditional):** Add options and review triggers *only* if they are likely to matter later or involve someone else. For small personal decisions, the title and one-sentence reason/action are sufficient.\n*   **Archiving:** Periodically archive completed notes to keep the active page useful and uncluttered.\n\nThis approach aligns with your preference for writing that reaches the point quickly, avoids long introductions, and values economy by leaving the reader (or you) with the central point clear and unburied. It also addresses the specific case of onboarding notes (memory-0006) by ensuring that unusual steps are explained with a coherent reason, preventing new hires from skipping them due to perceived redundancy.",
+      "readback_wall_ns": 1003233,
+      "readback_cpu_ns": 1003691,
+      "generation_requests": 2,
+      "generation_tokens": 3201,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000059/flat",
+      "artifact_sha256": {
+        "form.json": "2df75bd1bc7c01468e05f9b7471ca1d447e329c7a82b6d183199d1c6965af5d6",
+        "form.jsonl": "c16fa37729b45f9e3b772aafd8fac4cb7fbef4ae33cf9214916ee08e79743c20",
+        "read.json": "b62a9202dea01e8bd30f9a4889d16ce71f323d7eb556b80a0392dd7656f0a4c2",
+        "read.jsonl": "a04d647150386582caa5a44c808045bcd0a0ec7e99279cb178f8e7bca308b240",
+        "memory.sqlite": "bdf62a93a1bc2e82168edb8300838c060fbe2f0d0cb8ab7e4ba509997b5e4917"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "type_only",
+      "process_ids": [
+        390748,
+        391349
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 9,
+      "material_tokens": 866,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Retains concise prose but explicitly explains approval-step reason for new hires to avoid unsupported action-only instructions.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [
+        "memory-0003",
+        "memory-0005",
+        "memory-0007"
+      ],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation regarding the onboarding notes (memory-0008), aligned with your established writing preferences (memories-0000, 0002–0007).\n\n### Recommendation\nCreate a **single, coherent onboarding note** that explicitly explains the unusual approval step. Do not add alternative workflows or redundant action lists. This addresses the gap where new hires might skip the step because existing staff treat the reason as common knowledge (memory-0008).\n\n### Organization\nStructure the note to respect your preference for economy and directness (memory-0000) while maintaining the lightweight, provisional nature of your decision logs (memories-0002, 0006, 0007):\n\n1.  **Title**: Use a descriptive title (e.g., \"Onboarding: Unusual Approval Step\").\n2.  **Decision/Action**: One sentence stating the requirement (e.g., \"All new hires must complete the X approval step before Y\").\n3.  **Rationale**: One sentence explaining *why* this step exists, specifically targeting the knowledge gap for new hires (e.g., \"This step is required because Z, which is not obvious to new staff\").\n4.  **Scope**: Keep it lightweight. Since this is a recurring workflow issue involving others, it warrants a note, but it does not need a long template or day-specific reminders (memory-0006).\n5.  **Future-Proofing**: Mark any assumptions (e.g., \"Assumption: The reason for Z will not change in the next quarter\") to allow for easy updates if the context shifts, preserving the \"provisional proposal\" style (memory-0002, 0004).\n\nThis approach avoids circling around decisions (memory-0001) by making one coherent plan now, rather than leaving the issue open or creating multiple alternatives.",
+      "readback_wall_ns": 1150194,
+      "readback_cpu_ns": 1150765,
+      "generation_requests": 2,
+      "generation_tokens": 3701,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000059/type_only",
+      "artifact_sha256": {
+        "form.json": "bd3c0a854f41f005520371e9bc29225f10f966376abf3d670520a683058a7dd3",
+        "form.jsonl": "d4d2464fe3c5bb5485b7a2b0827d6e6815bb160f224107af7b919a8460ac6202",
+        "read.json": "3fb5bcee7b4a3f0e39e34d8c0ae0341341cfce939225c6ff598560b26d148f28",
+        "read.jsonl": "1dff6722b64e8cb03d8c0d7e1513f634c86a80521ebffe8c5804702091e798eb",
+        "memory.sqlite": "f2b053e70a616b547776cd94974b776137beeacc8369c6d385c9f1e5f416177f"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "flat_scope",
+      "process_ids": [
+        391765,
+        392350
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 5,
+      "material_tokens": 703,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Retains concise prose but explicitly explains approval-step reason for new hires to avoid unsupported action-only instructions.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the situation regarding **onboarding notes for a workflow with one unusual approval step** (memory-0004).\n\n### Recommendation\nCreate **one coherent plan** rather than adding alternatives, as you have sufficient time to do so (memory-0004). The plan must explicitly explain the **reason** for the unusual approval step, not just list the action, because existing staff treat it as common knowledge but new hires may skip it if the reason is missing (memory-0004).\n\n### Organization\nTo organize this within your preferred writing and decision-making framework:\n\n1.  **Structure:** Use a **lightweight note structure** with a clear title and brief reason, avoiding long templates or day-specific reminders (memory-0003).\n2.  **Content Style:**\n    *   Reach the point quickly with short paragraphs and direct claims (memory-0000).\n    *   Avoid long introductions or scene-setting (memory-0000).\n    *   Include supporting detail only where it changes understanding (e.g., explaining *why* the step exists to prevent new hires from skipping it) (memory-0000).\n3.  **Decision Process:**\n    *   Since this is a specific workflow issue likely to recur or involve others, it qualifies for the lightweight note structure (memory-0003).\n    *   Separate discovery from commitment: Ensure the \"reason\" for the approval step is a confirmed fact or a clearly marked assumption that others can challenge without requiring a full rewrite (memory-0002).\n    *   Distinguish between confirmed details (the step exists) and the chosen explanation (the reason) to create a workable first version (memory-0002).\n\nThis approach minimizes time spent circling decisions (memory-0001) while ensuring the onboarding document is effective for new hires (memory-0004).",
+      "readback_wall_ns": 1025884,
+      "readback_cpu_ns": 1025800,
+      "generation_requests": 2,
+      "generation_tokens": 3426,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000059/flat_scope",
+      "artifact_sha256": {
+        "form.json": "1d53de122a2011f78fe28620ce995e249181dd099ef630142fb035f412d79ee8",
+        "form.jsonl": "b17dc1d1a0ded83aca3fccbe8e1ca1d03ae9de459f57ba02587e5d7b0e4ef8fb",
+        "read.json": "320f3582051d0a1b751b0a23f216a28758d41bd5288719425c9aa061d0d2963c",
+        "read.jsonl": "2269807fd12b84b42dcc7883802143acf5aa5cffa0af55156bc96722d092d7fd",
+        "memory.sqlite": "0c5d7880261944b2cd00b7370dcb2ae2aabe7bc0a3bc512d370e0437def7e9db"
+      }
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "arm": "type_scope",
+      "process_ids": [
+        392778,
+        393437
+      ],
+      "sdk_independent_reopen_exact": true,
+      "actual_writer_input_exact_past_only": true,
+      "actual_reader_input_exact_sdk_material": true,
+      "source_refs_exist_in_owner_history": true,
+      "closed_scope_columns_factor_check": "PASS",
+      "memory_records": 5,
+      "material_tokens": 754,
+      "last_public_event_retained": true,
+      "native_scope_rubric_root_review": "PASS_SCOPED",
+      "reason": "Retains concise prose but explicitly explains approval-step reason for new hires to avoid unsupported action-only instructions.",
+      "scorer": "Root semantic review after all outputs fixed, using original official4case evaluation rubric; no modelJudge, not official published benchmark score",
+      "unsupported_assistant_plan_attribution_memory_ids": [],
+      "scope_content_truth": "unchecked, identity/shape checks are not semantic truth",
+      "answer": "Based on the stored memories, here is the recommendation and organization for the **onboarding notes** situation, applying your established preferences for writing and decision-making.\n\n### Recommendation\nCreate a **single, coherent plan** for the onboarding notes rather than adding alternatives. This aligns with your preference for making one coherent plan when you have enough time (memory-0004) and your general preference for writing that reaches the point quickly without long introductions or scene-setting (memory-0000).\n\n### Organization\nStructure the onboarding note as a **lightweight decision note** to ensure it remains readable and useful after the immediate issue is resolved (memory-0003). Use the following format:\n\n1.  **Title:** Descriptive title indicating the specific workflow step (e.g., \"Approval Step X in Onboarding\").\n2.  **Decision/Action:** One sentence stating the required action (e.g., \"New hires must complete Step X before proceeding\").\n3.  **Reason:** One sentence explaining *why* this step exists, specifically addressing the gap between existing staff knowledge and new hire understanding (e.g., \"This step is required because [specific reason], which is not common knowledge for new hires\").\n4.  **Next Action:** One sentence on what the new hire should do next.\n\n**Key Constraints:**\n*   **Do not** list options or review triggers unless they are likely to matter later (memory-0003).\n*   **Do not** use a long template; keep it brief to avoid burying the central point (memory-0000).\n*   **Separate discovery from commitment:** Since this is a one-time preparation for onboarding, the \"discovery\" phase (identifying the knowledge gap) is complete. The \"commitment\" is the single coherent plan (memory-0002, memory-0004).\n\nThis approach minimizes time spent circling around decisions (memory-0001) and ensures the note is clear for new hires while respecting the unusual nature of the approval step (memory-0004).",
+      "readback_wall_ns": 1404534,
+      "readback_cpu_ns": 1405149,
+      "generation_requests": 2,
+      "generation_tokens": 3576,
+      "artifacts": "artifacts/v13-1-p4-type-scope-r2/mso_hard_000059/type_scope",
+      "artifact_sha256": {
+        "form.json": "e3abed69d8722e25bccf904d150a1338b80472c11eebb078d3f2626fdec0de2a",
+        "form.jsonl": "817b5a1ffc97a9705ce6a9b46751ace06220144b90605f80a15c35b39c09352a",
+        "read.json": "5f1d925f387c7b550493191ba85c92f5ded3f070167373b96664971ec0728408",
+        "read.jsonl": "1733385b842e65eb2d7e98229b0d9b3903c93b492409a93cc8730e94780f190b",
+        "memory.sqlite": "18dbd3e3c9e572f54e00393fd6c15626d35aa31bbd3e09e62017c43da6e25505"
+      }
+    }
+  ],
+  "type_independent_gain_established": false,
+  "descriptive_type_main_effect": "Typed4/8 versus flat5/8; no statistical inference or unseen claim from exposed4cases",
+  "descriptive_scope_main_effect": "Explicit scope5/8 versus no column4/8; minimal description, no confirmed scope benefit",
+  "earliest_breaks": [
+    "Pricing explanatory detail omitted or underused; all-delivered bank availability not sufficient task success.",
+    "Junior recipient context and personal feedback preference both retained/delivered; all4readers still transfer subject wrongly.",
+    "Legitimate source IDs coexist with assistant-proposed plans attributed to user intentions; source_refs do not verify prose."
+  ],
+  "attention_admission": "NOT_ADMITTED: no ordinary query failure diagnosed; bank omission or delivered-material consumer misapplication.",
+  "scope": "Schema factors isolated in R2, same public inputs/prompt/model/cadence/budget/SDK. R1 factor contamination retained. Shared scope-definition prompt change also changed flat formations; R1→R2 difference not causal schema-only gain. All-delivered diagnosis not retrieval efficacy/full candidate replacement. Four exposed development originals share broad templates; no formal/pilot/generalization/naturalAgent success claim. Root native rubric labels and broader source-attribution failures separately, unknown not pass.",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

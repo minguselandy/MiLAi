@@ -1,0 +1,98 @@
+{
+  "kind": "MILAI_V13_1_P3_ACTUAL_FIXED_MATERIAL",
+  "rows": [
+    {
+      "backend": "mem0_oss",
+      "question": "根据实际工具结果，样本箱-实验入口的预订结果、预约ID和标签状态是什么？",
+      "memories": [
+        {
+          "id": "7683b2eb-9830-4587-9bca-bd2893b95b2e",
+          "memory": "User requested to reserve and label 3 '样本箱-实验入口' (Sample Box - Experimental Entry) items destined for '实验入口' with '保温隔层' (thermal insulation) packing requirements",
+          "hash": "fd4a8c5d7f248b326330a16b6814a48b",
+          "metadata": null,
+          "score": 0.6461194221930242,
+          "created_at": "2026-09-30T04:56:06.416379+00:00",
+          "updated_at": "2026-09-30T04:56:06.416379+00:00",
+          "user_id": "mem0_oss-cache-r2:mem0_oss:u-78230ce5c78b26e9c5a42b2f",
+          "attributed_to": "user"
+        },
+        {
+          "id": "80986163-a073-49fd-b436-ac96abf10449",
+          "memory": "The reservation and label request for 3 sample boxes failed because the label service was unavailable, resulting in reservation ID RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2 with label status not created",
+          "hash": "2b752a87629daca62b939b2220b10114",
+          "metadata": null,
+          "score": 0.6106747826056154,
+          "created_at": "2026-09-30T04:56:06.421643+00:00",
+          "updated_at": "2026-09-30T04:56:06.421643+00:00",
+          "user_id": "mem0_oss-cache-r2:mem0_oss:u-78230ce5c78b26e9c5a42b2f",
+          "attributed_to": "assistant"
+        }
+      ],
+      "source_terminal_sha256": "55b8b14e08a3c28084b73a49e20ff41039ca93404b1db37d03caa05f107e144a",
+      "source_material_sha256": "4d5341705932f058f631f06b3ef1460c68d303fae0dbe6b4db22018406fb54e4",
+      "source_first_answer_sha256": "ea462a7973a92c46eabc04f5357e430f1f3b1e23844c673e7afcdad739d9609f"
+    },
+    {
+      "backend": "simplemem_text",
+      "question": "根据实际工具结果，样本箱-实验入口的预订结果、预约ID和标签状态是什么？",
+      "memories": [
+        {
+          "entry_id": "2b160768-f163-4f48-8c32-8d2d956d111d",
+          "lossless_restatement": "At 2026-09-30T04:23:53.911679+00:00, the tool execution for reserving and labeling item '样本箱-实验入口' (quantity 3, destination '实验入口', packing '保温隔层') failed with status 'reserved_label_failed' due to 'label_service_unavailable', resulting in reservation ID 'RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2' and label status 'not_created'.",
+          "keywords": [
+            "label_service_unavailable",
+            "reserved_label_failed",
+            "RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2",
+            "样本箱-实验入口",
+            "failure"
+          ],
+          "timestamp": "2026-09-30T04:23:53.911679+00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "RSV-60dd5dc0-2152-4fe4-b3d8-af50818348c2",
+            "样本箱-实验入口"
+          ],
+          "topic": "Labeling service failure"
+        },
+        {
+          "entry_id": "f6d240ac-3850-4a53-9e5a-2e03b2dcf523",
+          "lossless_restatement": "At 2026-09-30T04:23:53.841790+00:00, the user requested to reserve and label 3 units of the item '样本箱-实验入口' (Sample Box - Lab Entrance) with the destination '实验入口' (Lab Entrance) and packing requirement '保温隔层' (Insulated Layer).",
+          "keywords": [
+            "样本箱-实验入口",
+            "实验入口",
+            "保温隔层",
+            "reservation",
+            "labeling",
+            "packing"
+          ],
+          "timestamp": "2026-09-30T04:23:53.841790+00:00",
+          "location": "实验入口",
+          "persons": [],
+          "entities": [
+            "样本箱-实验入口"
+          ],
+          "topic": "Item reservation and labeling request"
+        },
+        {
+          "entry_id": "3ebdffb1-8ad4-4225-b745-a7c4507a2e24",
+          "lossless_restatement": "At 2026-09-30T04:23:53.921971+00:00, the assistant acknowledged receipt of the previous information.",
+          "keywords": [
+            "assistant",
+            "acknowledgment",
+            "receipt"
+          ],
+          "timestamp": "2026-09-30T04:23:53.921971+00:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Assistant acknowledgment"
+        }
+      ],
+      "source_terminal_sha256": "370b7a5b2302bb9233a414240a903751d52ec3c92e1b6b757fafa36bf416dc1a",
+      "source_material_sha256": "6cbf4e8f5aca16c03c90c889c742658a5d1836e6ecee15ab0302899043ef01be",
+      "source_first_answer_sha256": "0f564911e5622b11942d907fa9f90226291405f519d2a1b26fc0102012d0cf30"
+    }
+  ],
+  "origin": "Exact native delivered material from completed micro q1; no edits/fabricated receipt/live hidden state/gold."
+}

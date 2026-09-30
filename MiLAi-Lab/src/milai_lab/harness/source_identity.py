@@ -17,6 +17,8 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/presentation.py",
     "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/service.py",
+    "src/milai_lab/memory/service_tools.py",
     "src/milai_lab/memory/revision_store.py",
     "src/milai_lab/memory/strict_tools.py",
 )
@@ -48,6 +50,7 @@ PROVIDER_SOURCE_FILES = (
     "src/milai_lab/providers/contextual_capacity.py",
     "src/milai_lab/providers/contextual_embeddings.py",
     "src/milai_lab/providers/contextual_vllm.py",
+    "src/milai_lab/providers/embedding_capacity.py",
     "src/milai_lab/providers/merit_metered.py",
     "src/milai_lab/providers/request_pipeline.py",
     "src/milai_lab/providers/langmem_chat.py",

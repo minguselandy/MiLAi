@@ -42,6 +42,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import JSONResponse, Response
 
 from milai_lab.memory.read_tools import create_memory_read_tool
+from milai_lab.memory.service import MemoryService
+from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 
 MCP_PROTOCOL = "2026-07-28"
@@ -79,7 +81,7 @@ class MemoryMCP:
     def __init__(self, store: BaseStore, run_id: str, arm_id: str, user_id: str, *,
                  emit: Callable[[dict[str, Any]], None] | None = None,
                  history_tool: BaseTool | None = None, timeout: float = 180,
-                 read_only: bool = False) -> None:
+                 read_only: bool = False, service: MemoryService | None = None) -> None:
         self.store = store
         self.scope = {"foundation_run_id": run_id, "arm_id": arm_id, "user_id": user_id}
         self.namespace = ("langmem", run_id, arm_id, user_id)
@@ -88,10 +90,18 @@ class MemoryMCP:
         if type(read_only) is not bool:
             raise ValueError("MCP_MEMORY_READ_ONLY_INVALID")
         self.read_only = read_only
+        self.service = service
+        if service is not None and (
+            service.store is not store or service.namespace != self.namespace
+        ):
+            raise ValueError("MCP_MEMORY_SERVICE_SCOPE_MISMATCH")
         local = [*([] if read_only else [
                      create_strict_manage_memory_tool(self.namespace, store)]),
                  create_search_memory_tool(namespace=self.namespace, store=store),
                  create_memory_read_tool(self.namespace, store)]
+        if service is not None:
+            local = [tool for tool in create_service_tools(service)
+                     if not read_only or tool.name != "manage_memory"]
         if history_tool is not None:
             local.append(history_tool)
         self.local_tools = {tool.name: tool for tool in local}
@@ -154,7 +164,7 @@ class MemoryMCP:
             raise ValueError("MCP_MEMORY_RECEIPT_INVALID")
         if not isinstance(result.content, str):
             raise ValueError("MCP_MEMORY_RECEIPT_CONTENT_INVALID")
-        if params.name == "search_memory" and any(
+        if self.service is None and params.name == "search_memory" and any(
             tuple(row["namespace"]) != self.namespace for row in json.loads(result.content)
         ):
             raise ValueError("MCP_MEMORY_STORE_SCOPE_CHANGED")
@@ -178,13 +188,19 @@ class MemoryMCP:
         if offset < 0:
             raise ValueError("MCP_MEMORY_RESOURCE_CURSOR_INVALID")
         start_wall, start_cpu = time.perf_counter_ns(), time.process_time_ns()
-        page = await anyio.to_thread.run_sync(lambda: context.run(
-            self.store.search, self.namespace, limit=64, offset=offset))
-        if any(tuple(item.namespace) != self.namespace for item in page):
-            raise ValueError("MCP_MEMORY_STORE_SCOPE_CHANGED")
-        rows = [{"id": item.key, "value": item.value} for item in page]
-        body = json.dumps({"records": rows, "next_offset": offset + len(page)
-                          if len(page) == 64 else None}, ensure_ascii=False)
+        if self.service is not None:
+            service = self.service
+            material = await anyio.to_thread.run_sync(lambda: context.run(service.records))
+            rows = [{"id": row["id"], "value": row["value"]}
+                    for row in material[offset:offset + 64]]
+        else:
+            page = await anyio.to_thread.run_sync(lambda: context.run(
+                self.store.search, self.namespace, limit=64, offset=offset))
+            if any(tuple(item.namespace) != self.namespace for item in page):
+                raise ValueError("MCP_MEMORY_STORE_SCOPE_CHANGED")
+            rows = [{"id": item.key, "value": item.value} for item in page]
+        body = json.dumps({"records": rows, "next_offset": offset + len(rows)
+                          if len(rows) == 64 else None}, ensure_ascii=False)
         self._emit({"kind": "resource_result", "origin": binding["origin"],
                     "calls": 1, "logical_bytes": len(body.encode("utf-8")),
                     "cpu_ns": time.process_time_ns() - start_cpu,
@@ -336,6 +352,8 @@ class MemoryMCP:
         if receipt.status != "success":
             raise ValueError("MCP_MEMORY_MATERIAL_SEARCH_REJECTED")
         rows = json.loads(str(receipt.content))
+        if self.service is not None:
+            return [{"id": row["id"], "value": row["value"]} for row in rows["records"]]
         if any(tuple(row["namespace"]) != self.namespace for row in rows):
             raise ValueError("MCP_MEMORY_STORE_SCOPE_CHANGED")
         return [{"id": row["key"], "value": row["value"]} for row in rows]

@@ -1,0 +1,95 @@
+{
+  "kind": "MILAI_V13_1_P2_HISTORY_DELIVERY_PROTOCOL",
+  "status": "READY_FROZEN",
+  "planned_legs": 4,
+  "source_case": "receipt-partial-1, already exposed development only",
+  "source_results": "data/manifests/v13-1-p2-typed-receipts-results.json",
+  "fixture_path": "data/fixtures/v13-1-p2-history-delivery.json",
+  "fixture_sha256": "22fe8bad61fa21208e0c8e01d38a92f65b5462d5a16904e737680eceefa2ddf4",
+  "candidate_config_sha256": "a6c3c718595a0a923f55455a6fd67483b86d96fe6207b4041b038f50ca16980e",
+  "prompt_only_addition": " When a user asks about a previous operation, distinguish historical observations from the current lookup. The current discovery result establishes current observable state; it does not establish the outcome of an earlier operation. Consult legitimately captured historical memory for the earlier outcome, and state uncertainty if it is unavailable. Do not equate a successful lookup with the success of a previous mutation.",
+  "legs": [
+    {
+      "mode": "ref_only",
+      "condition": "control",
+      "run_root": "artifacts/v13-1-p2-history-delivery/control/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "input_freeze_sha256": "e4228b8edf92c2fe0cf75f31a608470c7817c090c0efceb6e25f1d6b03a7e638",
+      "prompt_sha256": "36b9498479ef73da78bc5c6a58e7d8d66f1dd5b9f3f14749e8e9526c2b36f010",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    },
+    {
+      "mode": "ref_only",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-history-delivery/candidate/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "input_freeze_sha256": "657d55a37c9405eb43277747e7c5c708f1ccc9db7f3aafbe56a9524c0513c8ae",
+      "prompt_sha256": "7c6b64d863ec82152341d67e7bd864a2841225e08da25c4be21ec05596dbbabd",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "control",
+      "run_root": "artifacts/v13-1-p2-history-delivery/control/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "input_freeze_sha256": "ade0a70b3f65af60091708548a66aa94cd40e3136afe3f0c8223ad047fdce435",
+      "prompt_sha256": "36b9498479ef73da78bc5c6a58e7d8d66f1dd5b9f3f14749e8e9526c2b36f010",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-history-delivery/candidate/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "prepare_http": 0,
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "input_freeze_sha256": "90f121e83466e01fffdb1e4af21b92427fcad379067dfabd69afed4f98eede53",
+      "prompt_sha256": "7c6b64d863ec82152341d67e7bd864a2841225e08da25c4be21ec05596dbbabd",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    }
+  ],
+  "budget_before_sha256": "30748d2918dfc666a95e615dbb45dde97356709e396c6f3849a80b365cb44559",
+  "concurrency": 1,
+  "max_generation_per_leg": 12,
+  "output_tokens": 4096,
+  "input_boundary": "Unchanged natural m2 query, new public s3/messageID identical across paired clones. Each arm reuses exact persisted bank/world/journal/checkpoints after original m2; only m0 terminal copied as prerequisite, no m1 terminal. Namespace remains original run_id from root basename; no namespace rewrite. s3 fresh checkpoint thread; s2 transcript not directly delivered. No rubrics/future questions/gold/expected values inserted.",
+  "cost": "All calls original continuous ledger; no new writer/formation or free retrieval/reader; controls rerun are paid diagnostic attempts and do not replace original failure. No temp0 determinism claim.",
+  "score": "Inspect actual memory tool delivery, full output and unchanged bank/world; unknown not pass; candidate status claim must be supported by historical source, no invented quote. Both arm banks untouched before query; differing modes not causal guard effect here.",
+  "stop": "Keep4 planned legs incl provider/refusal/unknown; do not retry a failed terminal into pass",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

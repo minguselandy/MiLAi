@@ -1,0 +1,246 @@
+{
+  "kind": "MILAI_V13_1_P4_TYPE_SCOPE_PUBLIC",
+  "cases": [
+    {
+      "case_id": "mso_hard_000138",
+      "owner": "p4-3c0068417984d33afaec",
+      "history": [
+        {
+          "event_id": "mso_hard_000138:0",
+          "role": "user",
+          "content": "I have several small decisions connected to writing projects coming up, and I am trying to organize them before they turn into a pile of half-finished notes. I usually begin by collecting examples, links, and possible approaches, but after a while the material becomes harder to compare than the original choices. I would like a lightweight way to keep the useful details visible without building a formal system that takes more effort to maintain than the decisions themselves."
+        },
+        {
+          "event_id": "mso_hard_000138:1",
+          "role": "assistant",
+          "content": "For the choices you are making around writing projects, a compact decision note could help. Give each item a one-sentence purpose, the two or three options you are genuinely considering, and the practical difference between them. Then add a next action or a date for revisiting anything that cannot be settled yet. Keeping links and background below that summary will prevent research material from crowding the comparison. You can reuse the same headings without forcing every decision into an elaborate scoring table."
+        },
+        {
+          "event_id": "mso_hard_000138:2",
+          "role": "user",
+          "content": "I prefer writing that reaches the point quickly. Long introductions make me impatient, and I often remove scene-setting, repeated definitions, and transitions that merely announce what the next paragraph will do. My own drafts tend to use short paragraphs and direct claims, with supporting detail added only where it changes the reader's understanding. I value that economy and would rather leave a reader wanting one extra detail than bury the central point beneath a polished but slow opening."
+        },
+        {
+          "event_id": "mso_hard_000138:3",
+          "role": "assistant",
+          "content": "That sounds like a useful personal default for writing projects, and the reasons behind it are clear. It can reduce the number of choices you reconsider from scratch and give you a familiar way to begin. I would record it near the top of the note in your own words, perhaps with one example of when it has worked well. Keeping the explanation concrete will make it useful later without turning it into a rigid rule or a long personal profile."
+        },
+        {
+          "event_id": "mso_hard_000138:4",
+          "role": "user",
+          "content": "This would make my notes on writing projects easier to revisit. Writing a provisional proposal would probably help me communicate as well. People respond more easily to a concrete draft than to a message asking what they want in general. I would like the proposal to show enough reasoning that someone can challenge the relevant assumption without rewriting everything. At the same time, it should remain obvious which details are confirmed and which were simply chosen to create a workable first version."
+        },
+        {
+          "event_id": "mso_hard_000138:5",
+          "role": "assistant",
+          "content": "In that kind of writing projects note, a good proposal can include a short rationale followed by clearly marked questions. Keep the questions specific, such as choosing between two timings or confirming one assumption, instead of asking for general thoughts. That helps readers respond without reopening settled parts of the draft. After the response window, update the status and preserve the earlier version only if the history will be useful. The process should support the decision, not become the main project."
+        },
+        {
+          "event_id": "mso_hard_000138:6",
+          "role": "user",
+          "content": "I would be comfortable testing the idea on one upcoming writing projects decision. I will probably begin with a single page rather than a new application. That makes it easy to search and reduces the temptation to spend time configuring categories. I can archive decided items at the bottom and keep only active proposals near the top. After a few weeks I should know whether recurring patterns justify a more structured system. For now, the main benefit would simply be seeing what still needs attention and why."
+        },
+        {
+          "event_id": "mso_hard_000138:7",
+          "role": "assistant",
+          "content": "Starting at that scale makes sense for your writing projects notes. A single page is a good pilot. Put active items at the top with a status and next action, then move completed entries into a dated archive section. Resist adding categories until you see a recurring retrieval problem. The first review after a few weeks should focus on whether the notes shortened decision time and improved handoffs, not whether every field was completed consistently. That will tell you whether more structure would solve a real problem."
+        },
+        {
+          "event_id": "mso_hard_000138:8",
+          "role": "user",
+          "content": "I need to explain a pricing change where the monthly fee rose but two separately billed services became included. A short announcement is possible, though readers need enough context to compare the old and new total cost. Nothing has been finalized, and the people involved can respond once there is a proposal to discuss."
+        },
+        {
+          "event_id": "mso_hard_000138:9",
+          "role": "assistant",
+          "content": "Got it. I will treat those details as the current situation and keep the recommendation grounded in them."
+        }
+      ],
+      "question": "For the situation we discussed, how would you approach the decision?",
+      "original_dialogue_sha256": "6f701e22e4572cf625b8215cbcd5003cee89e838faac8aae104c1cc222cc3c2f",
+      "raw_line_sha256": "391846ea5c0aa3e10fed17eca88e59dcf707c325599d005ab1ed066258b95c60",
+      "prior_exposure": "EXPOSED_DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "mso_hard_000206",
+      "owner": "p4-16ba14547efc1b39f053",
+      "history": [
+        {
+          "event_id": "mso_hard_000206:0",
+          "role": "user",
+          "content": "I am trying to reduce the amount of time I spend circling around decisions about feedback and mentoring. I often open several documents, compare a few possibilities, and then leave the choice unfinished because a new detail appears. The individual decisions are not enormous, but the repeated switching is tiring. I would like a method that helps me reach a workable proposal, note any open questions, and return to the rest of my work."
+        },
+        {
+          "event_id": "mso_hard_000206:1",
+          "role": "assistant",
+          "content": "For decisions involving feedback and mentoring, try separating discovery from commitment. Give yourself a short period to collect the missing facts, then write a provisional proposal instead of continuing to expand the list. Mark the assumptions that could change the choice and leave the rest alone. A proposal is easier to react to than an open set of possibilities, and it can still be revised. This should reduce switching while preserving a clear place for information that arrives later."
+        },
+        {
+          "event_id": "mso_hard_000206:2",
+          "role": "user",
+          "content": "I prefer feedback that is direct. Clear statements about what is not working save time and give me something concrete to change, while layers of polite cushioning can make the actual message difficult to locate. When I ask for critique, I would rather hear the strongest concern first and discuss solutions afterward. I do not take concise criticism personally, and I usually respect someone more when they trust me with an honest assessment instead of making every sentence sound comfortable."
+        },
+        {
+          "event_id": "mso_hard_000206:3",
+          "role": "assistant",
+          "content": "I can see why that approach has become your default in feedback and mentoring. It gives you a reliable starting point and reflects experience rather than an arbitrary habit. In the decision log, I would keep the preference as a brief background note and attach examples only when they help explain a choice. That gives future you useful context while keeping the entry flexible enough to accommodate circumstances that were not present when the preference was first recorded."
+        },
+        {
+          "event_id": "mso_hard_000206:4",
+          "role": "user",
+          "content": "I can imagine using that structure the next time a question about feedback and mentoring comes up. Writing a provisional proposal would probably help me communicate as well. People respond more easily to a concrete draft than to a message asking what they want in general. I would like the proposal to show enough reasoning that someone can challenge the relevant assumption without rewriting everything. At the same time, it should remain obvious which details are confirmed and which were simply chosen to create a workable first version."
+        },
+        {
+          "event_id": "mso_hard_000206:5",
+          "role": "assistant",
+          "content": "To keep the feedback and mentoring process proportionate, a good proposal can include a short rationale followed by clearly marked questions. Keep the questions specific, such as choosing between two timings or confirming one assumption, instead of asking for general thoughts. That helps readers respond without reopening settled parts of the draft. After the response window, update the status and preserve the earlier version only if the history will be useful. The process should support the decision, not become the main project."
+        },
+        {
+          "event_id": "mso_hard_000206:6",
+          "role": "user",
+          "content": "The distinction between active and archived notes now feels clearer for feedback and mentoring. I think I can keep this lightweight if I use it only for choices that are likely to recur or involve someone else. For small personal decisions, a sentence and a next action should be enough. I also want the notes to remain readable after the immediate issue is gone, rather than filling them with reminders that make sense only on the day they were written. A clear title and a brief reason may do more work than a long template."
+        },
+        {
+          "event_id": "mso_hard_000206:7",
+          "role": "assistant",
+          "content": "A small pilot in feedback and mentoring should tell you what is genuinely useful. That threshold makes sense. Use a descriptive title, one sentence for the decision, and one sentence for the reason or next action. Add options and review triggers only when they are likely to matter later. Periodically archive completed notes so the active page stays useful. A system this small should be easy to abandon or adjust, which is valuable while you are still learning what information actually helps you make and communicate these choices."
+        },
+        {
+          "event_id": "mso_hard_000206:8",
+          "role": "user",
+          "content": "A junior colleague practiced a presentation with me. The content is strong, but their delivery becomes difficult to follow when they speak quickly. They have said they are nervous about presenting to senior staff. I have enough time to prepare, but I would rather make one coherent plan than keep adding alternatives."
+        },
+        {
+          "event_id": "mso_hard_000206:9",
+          "role": "assistant",
+          "content": "Got it. I will treat those details as the current situation and keep the recommendation grounded in them."
+        }
+      ],
+      "question": "For the situation we discussed, what would you recommend, and how would you organize it?",
+      "original_dialogue_sha256": "5204c9314278aa1b65111e95a473b960cb640c1c60a086843089aea127cbfa23",
+      "raw_line_sha256": "a302dd4ec46494286f5040befe18e327ffcdb7825b15b4dae5ce808ca44c84de",
+      "prior_exposure": "EXPOSED_DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "mso_hard_000204",
+      "owner": "p4-9899c333452e3ec24e77",
+      "history": [
+        {
+          "event_id": "mso_hard_000204:0",
+          "role": "user",
+          "content": "I am trying to reduce the amount of time I spend circling around decisions about everyday purchases. I often open several documents, compare a few possibilities, and then leave the choice unfinished because a new detail appears. The individual decisions are not enormous, but the repeated switching is tiring. I would like a method that helps me reach a workable proposal, note any open questions, and return to the rest of my work."
+        },
+        {
+          "event_id": "mso_hard_000204:1",
+          "role": "assistant",
+          "content": "For decisions involving everyday purchases, try separating discovery from commitment. Give yourself a short period to collect the missing facts, then write a provisional proposal instead of continuing to expand the list. Mark the assumptions that could change the choice and leave the rest alone. A proposal is easier to react to than an open set of possibilities, and it can still be revised. This should reduce switching while preserving a clear place for information that arrives later."
+        },
+        {
+          "event_id": "mso_hard_000204:2",
+          "role": "user",
+          "content": "When I shop, I usually begin with the lowest-priced option that appears capable of doing the job. I dislike paying for branding, decorative features, or specifications I will never use, and I have often found that a basic model is perfectly adequate. Comparing expensive products can also consume more time than the purchase deserves. Unless there is a concrete reason to spend more, I am happiest choosing a simple, inexpensive option and moving on."
+        },
+        {
+          "event_id": "mso_hard_000204:3",
+          "role": "assistant",
+          "content": "I can see why that approach has become your default in everyday purchases. It gives you a reliable starting point and reflects experience rather than an arbitrary habit. In the decision log, I would keep the preference as a brief background note and attach examples only when they help explain a choice. That gives future you useful context while keeping the entry flexible enough to accommodate circumstances that were not present when the preference was first recorded."
+        },
+        {
+          "event_id": "mso_hard_000204:4",
+          "role": "user",
+          "content": "This would make my notes on everyday purchases easier to revisit. A short note sounds manageable. I also want to distinguish between something I have actually decided and an option I am merely leaning toward. In old documents those two states look almost identical, which leads me to reopen choices that were settled or assume that an early idea had already been agreed upon. A simple status label might help, as long as I do not end up maintaining a complicated workflow for decisions that only need a paragraph."
+        },
+        {
+          "event_id": "mso_hard_000204:5",
+          "role": "assistant",
+          "content": "To keep the everyday purchases process proportionate, three labels should be enough: exploring, proposed, and decided. Add an owner or response date only when another person is involved. The content of the note can stay ordinary prose rather than becoming a form. For a proposed item, highlight the one or two points where feedback would be useful; for a decided item, record the review trigger. That creates visible states without adding many administrative steps or encouraging you to track insignificant choices."
+        },
+        {
+          "event_id": "mso_hard_000204:6",
+          "role": "user",
+          "content": "I can see this fitting naturally into how I handle everyday purchases. I will probably begin with a single page rather than a new application. That makes it easy to search and reduces the temptation to spend time configuring categories. I can archive decided items at the bottom and keep only active proposals near the top. After a few weeks I should know whether recurring patterns justify a more structured system. For now, the main benefit would simply be seeing what still needs attention and why."
+        },
+        {
+          "event_id": "mso_hard_000204:7",
+          "role": "assistant",
+          "content": "Starting at that scale makes sense for your everyday purchases notes. A single page is a good pilot. Put active items at the top with a status and next action, then move completed entries into a dated archive section. Resist adding categories until you see a recurring retrieval problem. The first review after a few weeks should focus on whether the notes shortened decision time and improved handoffs, not whether every field was completed consistently. That will tell you whether more structure would solve a real problem."
+        },
+        {
+          "event_id": "mso_hard_000204:8",
+          "role": "user",
+          "content": "I need a rain jacket for regular bicycle commuting. The low-priced option fits and looks fine, but reviews mention seam leakage after a season. A midrange jacket can be repaired by the manufacturer and has fewer design extras than the premium models. The surrounding details are manageable, so I am trying to turn the available information into one usable proposal."
+        },
+        {
+          "event_id": "mso_hard_000204:9",
+          "role": "assistant",
+          "content": "Got it. I will treat those details as the current situation and keep the recommendation grounded in them."
+        }
+      ],
+      "question": "For the situation we discussed, what would you recommend, and how would you organize it?",
+      "original_dialogue_sha256": "39ce26b1b8d4649fa5baa1dba4ad38a32699570ded907253b7deddc250f878c8",
+      "raw_line_sha256": "45b813f5d18bf574a3dfda368b13b4e6b1baa6e6ee18b1a52a16ec9f763032e7",
+      "prior_exposure": "EXPOSED_DEVELOPMENT_ONLY"
+    },
+    {
+      "case_id": "mso_hard_000059",
+      "owner": "p4-0391498e941b31dbaf8c",
+      "history": [
+        {
+          "event_id": "mso_hard_000059:0",
+          "role": "user",
+          "content": "I am trying to reduce the amount of time I spend circling around decisions about writing projects. I often open several documents, compare a few possibilities, and then leave the choice unfinished because a new detail appears. The individual decisions are not enormous, but the repeated switching is tiring. I would like a method that helps me reach a workable proposal, note any open questions, and return to the rest of my work."
+        },
+        {
+          "event_id": "mso_hard_000059:1",
+          "role": "assistant",
+          "content": "For decisions involving writing projects, try separating discovery from commitment. Give yourself a short period to collect the missing facts, then write a provisional proposal instead of continuing to expand the list. Mark the assumptions that could change the choice and leave the rest alone. A proposal is easier to react to than an open set of possibilities, and it can still be revised. This should reduce switching while preserving a clear place for information that arrives later."
+        },
+        {
+          "event_id": "mso_hard_000059:2",
+          "role": "user",
+          "content": "I prefer writing that reaches the point quickly. Long introductions make me impatient, and I often remove scene-setting, repeated definitions, and transitions that merely announce what the next paragraph will do. My own drafts tend to use short paragraphs and direct claims, with supporting detail added only where it changes the reader's understanding. I value that economy and would rather leave a reader wanting one extra detail than bury the central point beneath a polished but slow opening."
+        },
+        {
+          "event_id": "mso_hard_000059:3",
+          "role": "assistant",
+          "content": "I can see why that approach has become your default in writing projects. It gives you a reliable starting point and reflects experience rather than an arbitrary habit. In the decision log, I would keep the preference as a brief background note and attach examples only when they help explain a choice. That gives future you useful context while keeping the entry flexible enough to accommodate circumstances that were not present when the preference was first recorded."
+        },
+        {
+          "event_id": "mso_hard_000059:4",
+          "role": "user",
+          "content": "I can imagine using that structure the next time a question about writing projects comes up. Writing a provisional proposal would probably help me communicate as well. People respond more easily to a concrete draft than to a message asking what they want in general. I would like the proposal to show enough reasoning that someone can challenge the relevant assumption without rewriting everything. At the same time, it should remain obvious which details are confirmed and which were simply chosen to create a workable first version."
+        },
+        {
+          "event_id": "mso_hard_000059:5",
+          "role": "assistant",
+          "content": "To keep the writing projects process proportionate, a good proposal can include a short rationale followed by clearly marked questions. Keep the questions specific, such as choosing between two timings or confirming one assumption, instead of asking for general thoughts. That helps readers respond without reopening settled parts of the draft. After the response window, update the status and preserve the earlier version only if the history will be useful. The process should support the decision, not become the main project."
+        },
+        {
+          "event_id": "mso_hard_000059:6",
+          "role": "user",
+          "content": "The distinction between active and archived notes now feels clearer for writing projects. I think I can keep this lightweight if I use it only for choices that are likely to recur or involve someone else. For small personal decisions, a sentence and a next action should be enough. I also want the notes to remain readable after the immediate issue is gone, rather than filling them with reminders that make sense only on the day they were written. A clear title and a brief reason may do more work than a long template."
+        },
+        {
+          "event_id": "mso_hard_000059:7",
+          "role": "assistant",
+          "content": "A small pilot in writing projects should tell you what is genuinely useful. That threshold makes sense. Use a descriptive title, one sentence for the decision, and one sentence for the reason or next action. Add options and review triggers only when they are likely to matter later. Periodically archive completed notes so the active page stays useful. A system this small should be easy to abandon or adjust, which is valuable while you are still learning what information actually helps you make and communicate these choices."
+        },
+        {
+          "event_id": "mso_hard_000059:8",
+          "role": "user",
+          "content": "I am preparing onboarding notes for a workflow with one unusual approval step. Existing staff treat the reason for that step as common knowledge, while new hires may see it as redundant and skip it if the document only lists actions. I have enough time to prepare, but I would rather make one coherent plan than keep adding alternatives."
+        },
+        {
+          "event_id": "mso_hard_000059:9",
+          "role": "assistant",
+          "content": "Got it. I will treat those details as the current situation and keep the recommendation grounded in them."
+        }
+      ],
+      "question": "For the situation we discussed, what would you recommend, and how would you organize it?",
+      "original_dialogue_sha256": "5b6c431aa43eea39936a2d74b2b05393087983e7f96203edc3365e8a19539863",
+      "raw_line_sha256": "d4abc66b21bc96d8e9278cd3763cd85c256e4b907a21d7ee5e61e7e96b769f3b",
+      "prior_exposure": "EXPOSED_DEVELOPMENT_ONLY"
+    }
+  ],
+  "runtime_boundary": "Writer receives only past history rows, never current/future question. Reader receives actual stored material and current question. Source synthetic IDs alias official dialogue positions, not authenticated tool refs."
+}

@@ -1,0 +1,155 @@
+{
+  "kind": "MILAI_V13_1_RECEIPT_R8_RESULT",
+  "status": "SCOPED_PUBLIC_FIELD_SEMANTICS_PROMPT_SUCCESS",
+  "protocol_sha256": "43d9460d10090f1ffe1429017d4cedc42ee360f4a89ab24d296bb6a38ec97e2d",
+  "pair_freeze_sha256": "0d2574447d77d50fff258958152dd18a9d97877282e4e7f7c6d6ef94f13ab8cb",
+  "initial_resources_equal": true,
+  "first_wire_difference": "system message only",
+  "actual_original_lookup_receipts_equal": true,
+  "issued_source_object_ref_ids": "Actual per-call IDs differ; original public receipt bodies and owner/world identical. No forged IDs or equalizing rewrite.",
+  "world_after_equal": true,
+  "arms": {
+    "control": {
+      "status": "completed",
+      "process_id": 3646441,
+      "calls": [
+        {
+          "name": "get_reservation",
+          "args": {
+            "item_key": "蓝色玻璃杯-展厅A"
+          },
+          "id": "chatcmpl-bc0d6aab17dd7b19:tool:0",
+          "type": "tool_call"
+        }
+      ],
+      "original_lookup_receipts": [
+        {
+          "ok": true,
+          "status": "found",
+          "reservation_id": "RSV-eb75f922-517a-4799-bf0d-3b58071cfb3a",
+          "item_key": "蓝色玻璃杯-展厅A",
+          "quantity": 2,
+          "destination": "一楼展厅",
+          "packing": "防震隔层",
+          "label_status": "created"
+        }
+      ],
+      "new_business_mutation_calls": 0,
+      "new_memory_proposals": 0,
+      "world_after": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-eb75f922-517a-4799-bf0d-3b58071cfb3a",
+            "user_id": "object-continue-1-owner",
+            "item_key": "蓝色玻璃杯-展厅A",
+            "quantity": 2,
+            "destination": "一楼展厅",
+            "packing": "防震隔层",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "object-continue-1-owner",
+            "item_key": "蓝色玻璃杯-展厅A",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "record_count_after": 1,
+      "final_answer_sha256": "4f7e9e6224c94f389914a0b8d7e1fa87317f3d3b7446499f4440a21473b45104",
+      "semantic_adjudication": "FAIL: actual created label receipt delivered but final says unfinished",
+      "generation_requests": 2,
+      "generation_tokens": 2605,
+      "terminal_sha256": "a1b2e6385937f9aab81dea4c965139620e4288c277aa8be550e4ada1bc1e468f",
+      "trace_sha256": "2a4003bf34b0b25547a4037b4296f48d04768118a61e43e86b089cbd363bb806",
+      "freeze_sha256": "8361abaa6482a9322707b98b50eb3b76190b9e4e0227fb38abffa9491905cc6a",
+      "execution_wall_ns": 2270581329,
+      "execution_cpu_ns": 978248025
+    },
+    "candidate": {
+      "status": "completed",
+      "process_id": 3649207,
+      "calls": [
+        {
+          "name": "get_reservation",
+          "args": {
+            "item_key": "蓝色玻璃杯-展厅A"
+          },
+          "id": "chatcmpl-a467515d2bfec692:tool:0",
+          "type": "tool_call"
+        }
+      ],
+      "original_lookup_receipts": [
+        {
+          "ok": true,
+          "status": "found",
+          "reservation_id": "RSV-eb75f922-517a-4799-bf0d-3b58071cfb3a",
+          "item_key": "蓝色玻璃杯-展厅A",
+          "quantity": 2,
+          "destination": "一楼展厅",
+          "packing": "防震隔层",
+          "label_status": "created"
+        }
+      ],
+      "new_business_mutation_calls": 0,
+      "new_memory_proposals": 0,
+      "world_after": {
+        "label_available": true,
+        "reservations": [
+          {
+            "reservation_id": "RSV-eb75f922-517a-4799-bf0d-3b58071cfb3a",
+            "user_id": "object-continue-1-owner",
+            "item_key": "蓝色玻璃杯-展厅A",
+            "quantity": 2,
+            "destination": "一楼展厅",
+            "packing": "防震隔层",
+            "label_status": "created"
+          }
+        ],
+        "attempts": [
+          {
+            "id": 1,
+            "user_id": "object-continue-1-owner",
+            "item_key": "蓝色玻璃杯-展厅A",
+            "operation": "reserve_and_label",
+            "outcome": "reserved"
+          }
+        ]
+      },
+      "record_count_after": 1,
+      "final_answer_sha256": "2a94eafff3814147c60e7261522266b9834151eb737431b5e34e6a2e516c16de",
+      "semantic_adjudication": "PASS: actual created label interpreted as completed, no redo",
+      "generation_requests": 2,
+      "generation_tokens": 2709,
+      "terminal_sha256": "86632793b17dee6ae1fb3e545b1e701e45c4e7bd7e350065a0bed08b8b556f1b",
+      "trace_sha256": "2f2f620af9efcbaf2a04602a96c1f1758d822f1a33e41b861001b066c1a287e3",
+      "freeze_sha256": "d6d11f17ab68b95608375a01adf67abe25f2f9a2f2e9981763f8d750136c31ca",
+      "execution_wall_ns": 1830568134,
+      "execution_cpu_ns": 810940093
+    }
+  },
+  "offline_adjudicator": "Root read complete actual lookup receipts, worlds and full final answers; no keyword-only or model Judge.",
+  "guard_benefit_claim": false,
+  "qualification": "The corrected outcome comes from common public tool field semantics guidance, not a stronger binding/guard or natural-language verifier. One development pair cannot estimate general benefit. Original R7 failure retained; all strong baseline prompts must receive the same public contract meaning.",
+  "cost": {
+    "generation_requests_delta": 4,
+    "generation_tokens_delta": 5314,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "1df9f7b68e568a13d55d42df199e1a43bfcfa90780587289ecede8afcc514229",
+    "ledger_after_sha256": "7f9b7e3a108a136ede59f04830c5bb91bd80e0626f3f80845cabd53e3782690c",
+    "continuous_generation_requests": 6230,
+    "continuous_generation_tokens": 11524397,
+    "continuous_embedding_tokens": 416930,
+    "IO": "partial"
+  },
+  "decision": "Retain generic public contract instruction for next opt-in combined normal candidate. Run original six and then full24 if chains close; no outcome editing.",
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE"
+}

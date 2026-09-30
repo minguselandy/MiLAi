@@ -1,0 +1,110 @@
+{
+  "kind": "MILAI_V13_1_P2_TYPED_RECEIPT_OFFLINE_ONLY",
+  "source_fixture_sha256": "9a1a2bc36cac135f42cbf10e9ae81f608c3d0b27e76af6b27cde902a134ca30c",
+  "use": "OFFLINE_ONLY; runtime never reads this file",
+  "cases": [
+    {
+      "case_id": "receipt-confirmed-1",
+      "world_contract": {
+        "item_key": "档案盒-东楼资料室",
+        "quantity": 2,
+        "destination": "东楼资料室",
+        "packing": "防潮内衬",
+        "reservation_count": 1,
+        "reservation_attempts_count": 1,
+        "label_status": "created",
+        "first_operation_status": "label_created"
+      },
+      "formation": [
+        "Real source/object reference captured from actual owner-bound tool result, not expected fields supplied to Host.",
+        "Model proposes2explicit fields and receipt_json_v1 literal body; any0/1-field rejection/raw requested input preserved; committed claims exactly original source receipt.",
+        "Ref-only values unchecked; Field-grounded finite JSON claims matched, notes/free prose unchecked.",
+        "First answer claiming storage requires actual successful commit."
+      ],
+      "continuation": [
+        "Distinct second process reads persisted native SDK data/source/history.",
+        "Real readonly discovery may occur; no further reservation/label mutation.",
+        "Final describes actual reservation exists plus created/not_created label and confirmed/partial original joint result correctly; current tool operation status and historical result distinguished."
+      ],
+      "semantic_scoring": "Root full public source/actual world/bank/material/output review; no substring-only/Judge. Unknown not pass."
+    },
+    {
+      "case_id": "receipt-partial-1",
+      "world_contract": {
+        "item_key": "检测样本-北侧实验台",
+        "quantity": 3,
+        "destination": "北侧实验台",
+        "packing": "保温隔层",
+        "reservation_count": 1,
+        "reservation_attempts_count": 1,
+        "label_status": "not_created",
+        "first_operation_status": "reserved_label_failed"
+      },
+      "formation": [
+        "Real source/object reference captured from actual owner-bound tool result, not expected fields supplied to Host.",
+        "Model proposes2explicit fields and receipt_json_v1 literal body; any0/1-field rejection/raw requested input preserved; committed claims exactly original source receipt.",
+        "Ref-only values unchecked; Field-grounded finite JSON claims matched, notes/free prose unchecked.",
+        "First answer claiming storage requires actual successful commit."
+      ],
+      "continuation": [
+        "Distinct second process reads persisted native SDK data/source/history.",
+        "Real readonly discovery may occur; no further reservation/label mutation.",
+        "Final describes actual reservation exists plus created/not_created label and confirmed/partial original joint result correctly; current tool operation status and historical result distinguished."
+      ],
+      "semantic_scoring": "Root full public source/actual world/bank/material/output review; no substring-only/Judge. Unknown not pass."
+    },
+    {
+      "case_id": "receipt-confirmed-2",
+      "world_contract": {
+        "item_key": "测量仪-西侧工位",
+        "quantity": 1,
+        "destination": "西侧工位",
+        "packing": "防震泡沫",
+        "reservation_count": 1,
+        "reservation_attempts_count": 1,
+        "label_status": "created",
+        "first_operation_status": "label_created"
+      },
+      "formation": [
+        "Real source/object reference captured from actual owner-bound tool result, not expected fields supplied to Host.",
+        "Model proposes2explicit fields and receipt_json_v1 literal body; any0/1-field rejection/raw requested input preserved; committed claims exactly original source receipt.",
+        "Ref-only values unchecked; Field-grounded finite JSON claims matched, notes/free prose unchecked.",
+        "First answer claiming storage requires actual successful commit."
+      ],
+      "continuation": [
+        "Distinct second process reads persisted native SDK data/source/history.",
+        "Real readonly discovery may occur; no further reservation/label mutation.",
+        "Final describes actual reservation exists plus created/not_created label and confirmed/partial original joint result correctly; current tool operation status and historical result distinguished."
+      ],
+      "semantic_scoring": "Root full public source/actual world/bank/material/output review; no substring-only/Judge. Unknown not pass."
+    },
+    {
+      "case_id": "receipt-partial-2",
+      "world_contract": {
+        "item_key": "校准器-后勤库",
+        "quantity": 4,
+        "destination": "后勤库",
+        "packing": "密封防潮袋",
+        "reservation_count": 1,
+        "reservation_attempts_count": 1,
+        "label_status": "not_created",
+        "first_operation_status": "reserved_label_failed"
+      },
+      "formation": [
+        "Real source/object reference captured from actual owner-bound tool result, not expected fields supplied to Host.",
+        "Model proposes2explicit fields and receipt_json_v1 literal body; any0/1-field rejection/raw requested input preserved; committed claims exactly original source receipt.",
+        "Ref-only values unchecked; Field-grounded finite JSON claims matched, notes/free prose unchecked.",
+        "First answer claiming storage requires actual successful commit."
+      ],
+      "continuation": [
+        "Distinct second process reads persisted native SDK data/source/history.",
+        "Real readonly discovery may occur; no further reservation/label mutation.",
+        "Final describes actual reservation exists plus created/not_created label and confirmed/partial original joint result correctly; current tool operation status and historical result distinguished."
+      ],
+      "semantic_scoring": "Root full public source/actual world/bank/material/output review; no substring-only/Judge. Unknown not pass."
+    }
+  ],
+  "mechanical_vs_agent": "Fixed-proposal receipt/field/body validation distinct from actual free Host formation. No deliberate incorrect gold-filled proposal into actual Agent task.",
+  "claims": "Only finite2public receipt fields; no general prose/notes/quotation or world truth verification. Both arms share complete-field/body schema and input cadence; Ref-only still unchecked actual receipt claims.",
+  "stop_rule": "Preserve planned8case-arms/16messages. Provider/unknown errors keep terminal and subsequent not-run; no rerun selecting best. Micro refusal and false save success reviewed directly."
+}

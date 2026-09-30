@@ -1,0 +1,4758 @@
+{
+  "status": "ROOT_OFFLINE_TRACE_AND_SQLITE_SDK_RECONCILED",
+  "script_sha256": "1cd1fa24299b8e6e2882b425e6482323fbde2682c16e8bf1c77f59246006d26c",
+  "planned_trajectories": 60,
+  "attempted_trajectories": 45,
+  "planned_attempts_are_not_independent_scenarios": true,
+  "independent_source_scope": "Six exposed development stories, one workflow; not Pilot-L12/formal60",
+  "actual_processes": 139,
+  "unique_processes": 139,
+  "http": {
+    "generation": 543,
+    "embedding": 295
+  },
+  "tokens": {
+    "generation": 2675299,
+    "embedding": 83740
+  },
+  "original_ledger_before": {
+    "generation_requests": 6918,
+    "generation_tokens": 13066995,
+    "embedding_tokens": 454563,
+    "generation_unknown": 0,
+    "embedding_unknown": 0
+  },
+  "original_ledger_after": {
+    "generation_requests": 7461,
+    "generation_tokens": 15742294,
+    "embedding_tokens": 538303,
+    "generation_unknown": 0,
+    "embedding_unknown": 0
+  },
+  "ledger_delta": {
+    "generation_requests": 543,
+    "generation_tokens": 2675299,
+    "embedding_tokens": 83740,
+    "generation_unknown": 0,
+    "embedding_unknown": 0
+  },
+  "ledger_sha256": "165f89487c70d988bca88b58d8f84960609e270c4d0da26cedb8fd8d4904fb7b",
+  "judge_calls_this_stage": 0,
+  "per_method_costs": {
+    "B2-matched": {
+      "http": {
+        "generation": 55,
+        "embedding": 73
+      },
+      "tokens": {
+        "generation": 288379,
+        "embedding": 20657
+      }
+    },
+    "B6-matched": {
+      "http": {
+        "generation": 63,
+        "embedding": 80
+      },
+      "tokens": {
+        "generation": 455942,
+        "embedding": 18238
+      }
+    },
+    "mem0_trace_equal-matched": {
+      "http": {
+        "embedding": 35,
+        "generation": 16
+      },
+      "tokens": {
+        "embedding": 4823,
+        "generation": 56012
+      }
+    },
+    "field_grounded-matched": {
+      "http": {
+        "generation": 106
+      },
+      "tokens": {
+        "generation": 559647
+      }
+    },
+    "B2-native": {
+      "http": {
+        "generation": 55,
+        "embedding": 57
+      },
+      "tokens": {
+        "generation": 207509,
+        "embedding": 22413
+      }
+    },
+    "B6-native": {
+      "http": {
+        "generation": 51,
+        "embedding": 50
+      },
+      "tokens": {
+        "generation": 218510,
+        "embedding": 17609
+      }
+    },
+    "mem0_trace_equal-native": {
+      "http": {},
+      "tokens": {}
+    },
+    "field_grounded-native": {
+      "http": {
+        "generation": 75
+      },
+      "tokens": {
+        "generation": 353339
+      }
+    },
+    "field_grounded-projection-off": {
+      "http": {
+        "generation": 122
+      },
+      "tokens": {
+        "generation": 535961
+      }
+    },
+    "mem0_trace_equal-manual-update": {
+      "http": {},
+      "tokens": {}
+    }
+  },
+  "table": [
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "interrupted",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "interrupted",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "interrupted",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "interrupted",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "interrupted",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "interrupted"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-native",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "interrupted",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "INCOMPLETE",
+      "world_matches_condition_contract": false,
+      "requested_business_goal_completed": false,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "completed",
+        "completed",
+        "completed"
+      ],
+      "trajectory_status": "COMPLETE",
+      "world_matches_condition_contract": true,
+      "requested_business_goal_completed": true,
+      "wrong_effects_machine_scope": 0,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "PENDING_SEMANTIC_REVIEW",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-clean",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-partial-w2",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-known-no-effect",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-unknown-happened",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-unknown-none",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    },
+    {
+      "method_id": "mem0_trace_equal-manual-update",
+      "case_id": "p5-update-w3",
+      "planned_messages": 3,
+      "message_statuses": [
+        "NOT_RUN",
+        "NOT_RUN",
+        "NOT_RUN"
+      ],
+      "trajectory_status": "NOT_RUN",
+      "world_matches_condition_contract": null,
+      "requested_business_goal_completed": null,
+      "wrong_effects_machine_scope": null,
+      "denied_business_proposals": 0,
+      "denial_reasons": {},
+      "full_lifecycle_success": "NOT_PROVEN",
+      "world_measurement_scope": "Serial native SQLite, exact public target, duplicate reservation/label effects; no general external exactly-once claim"
+    }
+  ],
+  "attempts": [
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1712748,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 4
+      },
+      "tokens": {
+        "generation": 14507,
+        "embedding": 1009
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "a892bfbbc09dc995aced02d457d974e75179935eb74ec7315bc420a419bc554d",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1714452,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1009,
+        "generation": 19392
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "a37d83f718c5b2072c62e2b675a4c07d09f0abdfba23b76f749f5afc3ea5fd39",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1715878,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 934,
+        "generation": 11754
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "6f1ddb4f876140e3ff4b137edf370b3928fec86cc4b79b8c3e56f455b0578bf9",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1730047,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1116,
+        "generation": 9581
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "c27c7b71cfa41e89bb32afc056ed445f14f6c6a0e36766db6e65bdbdee94a7a2",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1729590,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 1
+      },
+      "tokens": {
+        "generation": 1245
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "ac9b56596a094670ce522fa237016a26422bedee22be768fb9b15e6fc097fd17",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1730836,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 6,
+        "generation": 4
+      },
+      "tokens": {
+        "embedding": 1634,
+        "generation": 20692
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "3f83e9f2b716f05cee03a2789a56d33ed982a15031ae901215cfb15fdc2a2687",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1731668,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 928,
+        "generation": 15259
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/dc77f546084be7a6/attempt-m2-start.json",
+      "receipt_sha256": "0ff20fdc7f406a619634dee0c7144262e6062a28129caa43a7ca3f905489f3c9",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1742912,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 4
+      },
+      "tokens": {
+        "generation": 10876,
+        "embedding": 1133
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "e7270b04cd146a2bc238ab7af52569f534f8b87b9feb1b57355f811b9fe8afaa",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1744055,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1658,
+        "generation": 16276
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "8b510e5f59d448237de1749b9a06e5ac266a544fa67e2b6615ff65d2214d6f79",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1744894,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 958,
+        "generation": 15782
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/47c4eaae7844ded0/attempt-m2-start.json",
+      "receipt_sha256": "6406c33278cd73e824bb49a00817e2de2b6951ccffe1907809e4562f0412f4ef",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1748828,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 3
+      },
+      "tokens": {
+        "generation": 9427,
+        "embedding": 1091
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "bc6f356b49231e8ff140c6221249c95342e5d0147300f5d9fbedf331e6bad925",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1750563,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 1458,
+        "generation": 17286
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "43e2436fba1d163dc45376447f85634375d6c0276b71c4b16514e3d9a5dbf51d",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1749917,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 960,
+        "generation": 10100
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "3dccbcf08e1f23e1978aea8a7fecdd4bcdedbfcc6db76a4b30aff29e850b6c72",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1751510,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 968,
+        "generation": 18338
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/db32919c7de9603a/attempt-m2-start.json",
+      "receipt_sha256": "4d1b2aa8c590bf7ad15f5107fd995fd9c4a68c71b1e54a0a9b581ce57d128c3e",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1770847,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 4
+      },
+      "tokens": {
+        "generation": 11026,
+        "embedding": 1114
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "a8a29ee5e06e7d1c1fccc57e5e7aece291bda0770ff51793ecf02722f9143fdc",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1772273,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 1426,
+        "generation": 14856
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "f25cc81fe40c3daa6ed24e2d1ef4d392874c5e97a2affff8af2bd11da1116845",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1771696,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 958,
+        "generation": 8660
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "44432b26766e7b9298ba0d99808fe275716dfbe91b0ea24a6fbe09a8967b770b",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1773068,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 933,
+        "generation": 18724
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/f19e05a2ff2c3770/attempt-m2-start.json",
+      "receipt_sha256": "849a4d08c709d3154dbc51bd017f2912a777b0f0b7e42714325e22470574d5d6",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1773909,
+      "status": "interrupted",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "evidence_error": null,
+      "http": {
+        "generation": 8,
+        "embedding": 8
+      },
+      "tokens": {
+        "generation": 44598,
+        "embedding": 1370
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-matched/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "5a58b056ed7f53314a673e3906ee7687c29111233110fa25bc03b31a2da36fa0",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1710170,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 3
+      },
+      "tokens": {
+        "generation": 9970,
+        "embedding": 670
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "89cdd05e3b02dcffee620d39ed098cbd543241caf2e919245503fc054522238c",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1711097,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 753,
+        "generation": 22525
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "124de6c651ecf13f6c6e3df499ec96d1d7368daae5560b6fb251e442f416d914",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1712056,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 671,
+        "generation": 12098
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "7bb4542c318cf1b504226cbf145a8299648fcbc378d9b232f817bec2eeb57fa0",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1725121,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "embedding": 14,
+        "generation": 11
+      },
+      "tokens": {
+        "embedding": 1504,
+        "generation": 133878
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "790d219bcbd86d570247d212cc40d74ce72bda89e1362ddd433ccc34ab838eff",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1724594,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 1
+      },
+      "tokens": {
+        "generation": 1204
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "a7c0fa4c1f6696392fd5b031b75b2e2f5871e8255070fd287cf49cb8a7dab06e",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1733782,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5,
+        "embedding": 5
+      },
+      "tokens": {
+        "generation": 28482,
+        "embedding": 941
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "5bac06b0b46b05c1e1b01e8e92e7b4a47d7d09d8da95693396dcc9eecc925577",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1735715,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1420,
+        "generation": 24736
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "c0eee41fd4aa6359f93bc3a0db4d597603cab43c59fa4cdf6e7cf55a9dcc799b",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1736797,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 698,
+        "generation": 10398
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/47c4eaae7844ded0/attempt-m2-start.json",
+      "receipt_sha256": "17ff1e8ba4a28a77a12ddece811370f974b26767178054488c10805bbe9ba47f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1745582,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5,
+        "embedding": 5
+      },
+      "tokens": {
+        "generation": 23996,
+        "embedding": 929
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "4b9ce521f9f421fb2bfd43e8b0a6f154a98bc2ea7d9473671eb9424f31374c98",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1747222,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 5,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 2052,
+        "generation": 26047
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "743bc212473fda5f70417c5126e1857dee432d59a7b785441eb7e19cae1b30c7",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1746633,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 692,
+        "generation": 14200
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "1f17da8d1a0aa8322d82426291f909d219e98d1c2344c1054aca0ad19323b3e4",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1748028,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 653,
+        "generation": 14068
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/db32919c7de9603a/attempt-m2-start.json",
+      "receipt_sha256": "659d1fd583d4e6d45e3b14c797f806b2153b68f6e3b4c585542338fbe8ea10ae",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1767325,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5,
+        "embedding": 5
+      },
+      "tokens": {
+        "generation": 26482,
+        "embedding": 940
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "01230baffb184e71ca2cfe1357b13887b70cdf2551f384131bf0aeccfee21c8f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1769245,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 2021,
+        "generation": 18830
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "40f66d973615e15b0c1635dfbd30b3bf6d4057a68e991379599a785f5b357be0",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1768658,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 697,
+        "generation": 15518
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "40ceb01a5f51d07685613554e9614448bc42c6fb5374c6d4c34426770e35abe2",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1769958,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 678,
+        "generation": 14314
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/f19e05a2ff2c3770/attempt-m2-start.json",
+      "receipt_sha256": "6633daab2504973ebaeec5f112358412c1d537de11080ae0c31494ff21e106e5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1778325,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 4
+      },
+      "tokens": {
+        "generation": 19771,
+        "embedding": 864
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "e6b4ecb9b4559aa33d82f99bdf7ab78221dcf87e132c528b303eafb057d296e7",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1779987,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 756,
+        "generation": 22525
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/c450db276ff4a3fd/attempt-m1-resume.json",
+      "receipt_sha256": "a94ae8ab407624e026c218d934d8879eaed24f3532da0fd7e1bf15ecfc84b87d",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1779514,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 2,
+        "generation": 1
+      },
+      "tokens": {
+        "embedding": 636,
+        "generation": 6470
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "060a957f0d98ed19075cc8a81533878225aa51b810c9b6a4cab6af02735e525f",
+      "boundary": "W3",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1780878,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 663,
+        "generation": 10430
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-matched/c450db276ff4a3fd/attempt-m2-start.json",
+      "receipt_sha256": "de232691cf59ae69c489edd5df6c88402799c6d530c18e1d568198a8983df9d2",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1704849,
+      "status": "interrupted",
+      "error": "V13_P5_EVIDENCE_CAPTURE_FAILED:{'type': 'RuntimeError', 'error': 'QdrantLocal instance is closed. Please create a new instance.'}",
+      "evidence_error": {
+        "type": "RuntimeError",
+        "error": "QdrantLocal instance is closed. Please create a new instance."
+      },
+      "http": {
+        "embedding": 9,
+        "generation": 4
+      },
+      "tokens": {
+        "embedding": 1343,
+        "generation": 14513
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/mem0_trace_equal-matched/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "d0c5be43872d784965617c4a7c048d746f73bd9c4a223a9d682eb593d9cd19ba",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1723272,
+      "status": "interrupted",
+      "error": "V13_P5_EVIDENCE_CAPTURE_FAILED:{'type': 'RuntimeError', 'error': 'QdrantLocal instance is closed. Please create a new instance.'}",
+      "evidence_error": {
+        "type": "RuntimeError",
+        "error": "QdrantLocal instance is closed. Please create a new instance."
+      },
+      "http": {
+        "embedding": 13,
+        "generation": 6
+      },
+      "tokens": {
+        "embedding": 1793,
+        "generation": 22306
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/mem0_trace_equal-matched/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "18bf5276b849e0ff6cd30331d0d2a71c0ad1cca836a956b36909517538f44357",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1722578,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 2,
+        "generation": 1
+      },
+      "tokens": {
+        "embedding": 137,
+        "generation": 1237
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/mem0_trace_equal-matched/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "2b1006abd839537fe9e66c12648a7e3da62e964f2f05db402105ff0a575b9678",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1732559,
+      "status": "interrupted",
+      "error": "V13_P5_EVIDENCE_CAPTURE_FAILED:{'type': 'RuntimeError', 'error': 'QdrantLocal instance is closed. Please create a new instance.'}",
+      "evidence_error": {
+        "type": "RuntimeError",
+        "error": "QdrantLocal instance is closed. Please create a new instance."
+      },
+      "http": {
+        "embedding": 11,
+        "generation": 5
+      },
+      "tokens": {
+        "embedding": 1550,
+        "generation": 17956
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/mem0_trace_equal-matched/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "1a6b4dcc3ec74b0cddb82d01fd9fa012ebb0c73ce90e735bcd360909a944d542",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1706193,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 20503
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "d241119ecc6c033ce1eb180fb75e349a865275f1bfb68f24066e4c70ef0a9088",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1707607,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 31175
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "e3deed2114f50ba486f5782bbe520dccc1f459a30628fc9f3c635dd6229b4bf5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1709039,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 25822
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "43f368a902cd353d856051df13bdee9169fdd031161a250365a0249e3d2b41f3",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1717593,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 9637
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "2c18365e7861ca6e70cd328dd46845482d3ba990ef59eef31712697fa4ef37d9",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1716717,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 4262
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "c86976b322b9c5cc9f6ce36ebdaf2c2f588b525ff7109d2db14fc7ac1ae79b66",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1718628,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 10
+      },
+      "tokens": {
+        "generation": 70995
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "0152dacd11c2cd15d2059ca1c05748f65f8e26cbf0a09eb09ceffa59f3504f97",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1721482,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 29753
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/dc77f546084be7a6/attempt-m2-start.json",
+      "receipt_sha256": "ef8fff7a80a2efee4eb09f04696362d6a6a1be25bf0b72fb93186b1e38084ee0",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1737487,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 13565
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "6b28d0e11165e4757f6bc9586f0ec047eebed2d8e13cce7071f610a6d8f459e7",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1738444,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 28475
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "dab2dd72a4f90e351f085ba3f7f7941f770fb08b4a863304c859c9c1fa286546",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1740005,
+      "status": "interrupted",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 14455
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/47c4eaae7844ded0/attempt-m2-start.json",
+      "receipt_sha256": "541aedee86dab0cb89dbae3ea4f5c579ab384f5ae3061b8345203604f59cbe90",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1752247,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 16773
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "fe7db5a7241ec4904155c7e9ed0d2438a489599b960e069ce07302c22c7cc2b6",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1754488,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 45147
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "84f9f7e8d9243d7602599a29654cf47bc8512e2db6dd813edd0cf55696e1b43e",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1753481,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 22110
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "c8dfeb356f9b15a835270527842a28d15d162710d1f4c32cd577d2e61e9b031a",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1761638,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 17079
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "9d2f3a49efb3e3775ebf4478dec7f09a736aba425255fbfe7b3a45b0a8c002c4",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1763296,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 11
+      },
+      "tokens": {
+        "generation": 90085
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "b48634c45cfd0d9f3dbc11c280f927aaebdad6e94f5872398b9a1ac49ae3fc72",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1762839,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 1
+      },
+      "tokens": {
+        "generation": 3698
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "b6571e55142f34a6ce7cbc2bb46aae3c7b1a36e98db1094229da135163aced6a",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1781571,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 13516
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "6ea9d70da0ac6e02d7bb8cf4629891c083b1f2cb26181a668e066ffd500e580f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1782569,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 12
+      },
+      "tokens": {
+        "generation": 102597
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-matched/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "3ea6076190b7856d26e48ef4f808efc5c168eeeb90675ecafa45e7e1237cb1ce",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1818859,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4468,
+        "embedding": 825
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "a3de320da413457ac84cef594e3a451e8ce357cb4b24b7b001ee6ba4fdfb7433",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1819551,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1013,
+        "generation": 9743
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "71ad28894632e12d6f3e88dbd5919ed5e1f480569fc7616f6bdc9c827f5311a5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1820333,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 959,
+        "generation": 10866
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "f1ad06872c0f27758224340cf7271fcab5f9eab37bf0a9fb2dce4a45e0f6706b",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1826132,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 6411,
+        "embedding": 931
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "a653e521ac4344df33799cec6ad0c7286e0a0a397834fc68df07fbee163928a9",
+      "boundary": null,
+      "window_status": "NOT_REACHED"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1827194,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 5,
+        "generation": 4
+      },
+      "tokens": {
+        "embedding": 1651,
+        "generation": 15311
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "7ee6a766b3ab3a2fee85f2e2f268a647cfa01a17c55b4740147a5760527bc361",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1828217,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 942,
+        "generation": 13887
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/dc77f546084be7a6/attempt-m2-start.json",
+      "receipt_sha256": "c4a96c5e9f4614771f6b5b7ad15dcf40f14781f3b1018ce4a396f315e4dafd26",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1849010,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 6733,
+        "embedding": 954
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "fbb40d466b94d9654bfc49d88e70ab623945da4a355daeb2bd524ebe99d36a45",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1849937,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1670,
+        "generation": 11984
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "3f0ec42af015bc15b3aade5d522d2c949406d9ade26abbb38c37669cbb7cb495",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1850673,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 972,
+        "generation": 14649
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/47c4eaae7844ded0/attempt-m2-start.json",
+      "receipt_sha256": "2c67f3b8be13430cbcac777083fe985de7513b8aa21c802e15959ad4a74bed62",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1862100,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 6638,
+        "embedding": 917
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "9a12d3d55a86e7abc2e420e15358f906ac4a8da4630f30c07e7530254095eb32",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1863498,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 2251,
+        "generation": 8260
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "f511d2b440b51db143c7ccca9d9b1ff1490547aa1a478d3c74cd848dbb1b7c4e",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1863021,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 1,
+        "generation": 1
+      },
+      "tokens": {
+        "embedding": 68,
+        "generation": 3494
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "6e49e9a507f7707c4a9c7a3b008171cc3d2ac619c80ad37768c108ee297f643b",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1864222,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 938,
+        "generation": 17178
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/db32919c7de9603a/attempt-m2-start.json",
+      "receipt_sha256": "5aae3e7ae1b82d82fc8d28a60460760babd7d61e63f366049e63efaedc1d6d7f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1876416,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4705,
+        "embedding": 924
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "35cd692dbb1d8e33e257c440371dd2e97db8c4979521bfe17953970ca448e5be",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1877707,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 5,
+        "generation": 4
+      },
+      "tokens": {
+        "embedding": 2984,
+        "generation": 17245
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "53122b53bef7b3245ae24346c9cb276b3f2256eee5e1bf19e10d402c53c163fb",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1877239,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 1,
+        "generation": 1
+      },
+      "tokens": {
+        "embedding": 66,
+        "generation": 3361
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "482169bca08e2cfc1794454fecc5fe603ea572beaac960da5eab5875357e6b4d",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1878844,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 933,
+        "generation": 19883
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/f19e05a2ff2c3770/attempt-m2-start.json",
+      "receipt_sha256": "f503fad58f8baacff937bd6a3a9907001b3cd4c903099dba6d4d0760781b75cb",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1886406,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 6582,
+        "embedding": 921
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "8eb4f2c6ff5e5ceb99c19ef3445bee938320e88db110b0ca388cf43edaec8e43",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1887337,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1570,
+        "generation": 11984
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "c67cf0668c9634b1dac94588da119bda008626d32b8d7ed9c3db0da570856bd1",
+      "boundary": null,
+      "window_status": "NOT_REACHED"
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1888378,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 924,
+        "generation": 14127
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B2-native/c450db276ff4a3fd/attempt-m2-start.json",
+      "receipt_sha256": "bac49156b3c1c7b919ced4f1eda9e707662e6349f8b2caf7bbcbef3fe21eadd9",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1823760,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4428,
+        "embedding": 570
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "3c2aff6b1e9e21f852dbdddd925dfcf86b9b11351e28725a58fc4ef00fe969f3",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1824424,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 765,
+        "generation": 12187
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "c8fbe94bc6a52509b588ea3801545c4e414579bae8051b8bd6c6633e296231fb",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1825411,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 679,
+        "generation": 13608
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "1a723af4902cc8edeeb17ef352e0e9396f301df6b5530791eb157454ed0102ae",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1837121,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4681,
+        "embedding": 638
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "64db4e3283442ace631ed87e9b8e2672cb50c3face7d9a4bb1f1350c73297e0a",
+      "boundary": null,
+      "window_status": "NOT_REACHED"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1837820,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1307,
+        "generation": 18282
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "e86b17b334d0333f5ac4452fe1f9825b93989c045ce25c10d0604fdfb738713c",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1838602,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 657,
+        "generation": 9935
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/dc77f546084be7a6/attempt-m2-start.json",
+      "receipt_sha256": "afe307f3198b94aacc2274a8df8c99eca56873b990b645f4004400b053f6c50f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1843164,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4728,
+        "embedding": 664
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "a803b08c83231926eefda01683839d80cb0c40c0fa98b9749716eb0928f3cdcd",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1843904,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1423,
+        "generation": 18686
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "e595524729587747d51d994162d063aca38ec885a62cb7c8b8e8be38cf936656",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1844756,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 679,
+        "generation": 9744
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/47c4eaae7844ded0/attempt-m2-start.json",
+      "receipt_sha256": "ce888cf8fc4e38ab322eeec2baaf68e753d7784b910839c60b4323dc6b546dae",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1859198,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 6317,
+        "embedding": 666
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "574f59cf93d7a4e1612d923d43a688a3571143d9fdb0831f0475d8298a07bf3c",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1860722,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 2042,
+        "generation": 12939
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "e6f897571c20a56e51a2a31a6ba0e775b3027e68700563138ca60713dd91e569",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1859963,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 2,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 136,
+        "generation": 11665
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "778d3f5898d735861f018cb442846c787d4d506585b955ff27d8278fd1e1455a",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1861359,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 710,
+        "generation": 14193
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/db32919c7de9603a/attempt-m2-start.json",
+      "receipt_sha256": "fb4fef36439c6d7108096577f5fd00a5df7c44046638ab7c33629ebd25acc1c3",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1865136,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4631,
+        "embedding": 670
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "d5ac81e0b59c291d0c96234ea0792f8573b54a819925a2b920a37a626f895fa5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1866325,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 2632,
+        "generation": 20076
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "916bba6f2ac3fa41566b457f231542c554bf1d9019d82beb74d1cc12d6a6d4b5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1865848,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 1,
+        "generation": 1
+      },
+      "tokens": {
+        "embedding": 66,
+        "generation": 5836
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "bbf5b0576ea21448e67f32a574c7aae2756b86083c259ea25fa6ea03b5151445",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1867282,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 666,
+        "generation": 13990
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/f19e05a2ff2c3770/attempt-m2-start.json",
+      "receipt_sha256": "478d0058658e408432955fbaa42e9d88f8aa86851cc202a7d397d56f74e60312",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1893401,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3,
+        "embedding": 1
+      },
+      "tokens": {
+        "generation": 4537,
+        "embedding": 650
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "f79a829aacfbf21e3817602fa98a576d2cd628362c69d0c5eea9fe203515c335",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1894043,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 4,
+        "generation": 3
+      },
+      "tokens": {
+        "embedding": 1309,
+        "generation": 18351
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "df50c844986c2b0e963eec4a64f9ae0e440febae58f6b107ac37b7a1fdf7163a",
+      "boundary": null,
+      "window_status": "NOT_REACHED"
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1894925,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "embedding": 3,
+        "generation": 2
+      },
+      "tokens": {
+        "embedding": 680,
+        "generation": 9696
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/B6-native/c450db276ff4a3fd/attempt-m2-start.json",
+      "receipt_sha256": "5ab54183081c28236972debbb36af578fdb894c5234523ad6736f41be501af1d",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1821069,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 7539
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "e0fab39012b5e46fa3d9a7d3c7be8d96e402fca42f7ac3a493a6affa5f09f883",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1821785,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 32976
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "10e837007b21bb087e6685a2ce021f3fde2ef6cd805377ac2cb9420874fbd9be",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1823175,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 7655
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "ba9d1f8e4df85d600bfec74074d0f063b90346ffca8605aca3dda90f4eceefc8",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1829985,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 1
+      },
+      "tokens": {
+        "generation": 3237
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "b517dfe374358f2512aa8f4cf787729e4a5be389ca4a8c76581a4d9b51f87d86",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1829158,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 4349
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "21a6e598f7dfe4684206ff0d17814ffb2cd6f98ca4e7bdcefdaf25f60693f13d",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1830625,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 23207
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "d92d1034208ede936b9d3f989e980f2e7a63d9b631048326ea06800ef21394ce",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1831897,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 10269
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/dc77f546084be7a6/attempt-m2-start.json",
+      "receipt_sha256": "6db7cd41003ef505184e8d78df9b460bb8427327372dc8f52917b23f2d2c7193",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1839521,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 7716
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "fb511daa6713a3fdfd6384ba3214d766d71f3d4699a9141bf957cdcd1dca0593",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1840366,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 12
+      },
+      "tokens": {
+        "generation": 78401
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "5b7cc734b57a6dbbc9c7f4d39cdb242a88862e0efe126a340a2514d3c83f6931",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1851600,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 7521
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "7fec8bff0746ea4a772b9c85bb571f205cff5bfd8e156542cf596b9cc87dfe6f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1852830,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4
+      },
+      "tokens": {
+        "generation": 21345
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "35e9e8bbc0f75122e0d6dfa77910b2a305c9b0e3470dba43eed65dff7cc44bd6",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1852339,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 7418
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "73374e8c0ac20ea42e382168367e8a5422259de18c4d3df49745e0904a8f0555",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1854062,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 9248
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/db32919c7de9603a/attempt-m2-start.json",
+      "receipt_sha256": "7fe9ff276a3db9b246fdfe00d905753b993803d86213eb377801ce828f8070aa",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1872544,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 7605
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "e3fc96cbb2e91b7f2e62bc48e104e3094a78c91913709994276f3a2c5bd42a3f",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1873915,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 10
+      },
+      "tokens": {
+        "generation": 68400
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "6bb0982898e4a0d6adb9f848ef93f408182dc9376378cd9dd710b50410290d98",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1873373,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 7567
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "4504a2afcb0281fa730ed46e57e8ea3b44700c0f1ec2c04bb6b2e47bcca42b24",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1889354,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 14498
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "8e5f4808a1e151d76eec127928e43b2bcdc7f5acb05c99700ff29c5e0f8ccd87",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1891680,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 1
+      },
+      "tokens": {
+        "generation": 5848
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/c450db276ff4a3fd/attempt-m1-resume.json",
+      "receipt_sha256": "b2bf9fcb8fb4bfb3c65e01b6e7fcf94c91489d1029c9e3f3c4f9673ef7e882bd",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1890742,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 14586
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "354647a023b4835d082e8cf3604487fcd7c83d881f85921fca7e2612b18d2a87",
+      "boundary": "W3",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1892463,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 3
+      },
+      "tokens": {
+        "generation": 13954
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-native/c450db276ff4a3fd/attempt-m2-start.json",
+      "receipt_sha256": "0a9052fc9190689e0d5a0950457662ec473a7ec9cf1f1e59ffb942436712a8b6",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1814498,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 15704
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/2af1c4d4582d16ad/attempt-m0-start.json",
+      "receipt_sha256": "8192a7466fadf24f29f928e7f89c75f3ca19ede719736fba93368c363ac3c846",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1815570,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 9
+      },
+      "tokens": {
+        "generation": 41683
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/2af1c4d4582d16ad/attempt-m1-start.json",
+      "receipt_sha256": "9ec2523d29021425f1c7d28583a766818203de3bbb53373881e23bc21ccd5e47",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1817407,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 32446
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/2af1c4d4582d16ad/attempt-m2-start.json",
+      "receipt_sha256": "a8ec4d2924f0a77ae5750d20135c8c7a52c3afa15416ca06ac7df1ef6666c142",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-resume",
+      "process_id": 1833628,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 16747
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/dc77f546084be7a6/attempt-m0-resume.json",
+      "receipt_sha256": "0a015c9123af38adc2cbb8b4b5618991eb722c2aa3dbe7d40e0d5f5ac3d7de83",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-partial-w2",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1832883,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 2
+      },
+      "tokens": {
+        "generation": 4163
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/dc77f546084be7a6/attempt-m0-start.json",
+      "receipt_sha256": "8c494bbe169a217a6536d37aa7fce5a2f1e31ae4d6567d1ece47e570bbb2391e",
+      "boundary": "W2",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-partial-w2",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1834852,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 12
+      },
+      "tokens": {
+        "generation": 60918
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/dc77f546084be7a6/attempt-m1-start.json",
+      "receipt_sha256": "5f37c0fefd8912f086bdf78f171903e3efa0cc810a10b74117f441b643d4ae59",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-known-no-effect",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1845570,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 21129
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/47c4eaae7844ded0/attempt-m0-start.json",
+      "receipt_sha256": "d32877970567fa90114338e55e05550ed1a07be0535688bf767fdf9a2e1f20a4",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-known-no-effect",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1846943,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 12
+      },
+      "tokens": {
+        "generation": 56715
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/47c4eaae7844ded0/attempt-m1-start.json",
+      "receipt_sha256": "7243e69dbdd2791736f4c7c9ed5d22a48f787ba48f037c15e3b534e9d1c75d09",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-happened",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1854669,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 8
+      },
+      "tokens": {
+        "generation": 23842
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/db32919c7de9603a/attempt-m0-start.json",
+      "receipt_sha256": "774f36b712f9221d09f730c0b6998380ed4c3a681963652c70aceee102514ff5",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1857563,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 24218
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/db32919c7de9603a/attempt-m1-resume.json",
+      "receipt_sha256": "a90fee036e14b62550115bc415b3ec6abbd723d60851b28289d1801bd81db4ad",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-happened",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1856178,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 34399
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/db32919c7de9603a/attempt-m1-start.json",
+      "receipt_sha256": "caf9ceda86b9fdae1a6d3c1e04e450cc67308cbe1288c87d6c75799f8a3d3c97",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-none",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1868016,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 21377
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/f19e05a2ff2c3770/attempt-m0-start.json",
+      "receipt_sha256": "0fc27a6cd9aeaf83cb47cdccb4231b5b9cda6aada99164a16afadd20451be3c1",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1870939,
+      "status": "interrupted",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "evidence_error": null,
+      "http": {
+        "generation": 5
+      },
+      "tokens": {
+        "generation": 22390
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/f19e05a2ff2c3770/attempt-m1-resume.json",
+      "receipt_sha256": "6df746d69168bb83b9a3580ad491ab3ca011c53749dfb6bf3dd4e6eb65e8eae3",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-none",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1869487,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 36494
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/f19e05a2ff2c3770/attempt-m1-start.json",
+      "receipt_sha256": "f42a36c72f2d6fc2314bb4654fd0bfcb6d1a4eb5f3747f9971725741f0460ac4",
+      "boundary": "W1",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "message_index": 0,
+      "attempt_id": "m0-start",
+      "process_id": 1879890,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 21079
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/c450db276ff4a3fd/attempt-m0-start.json",
+      "receipt_sha256": "2ff4b5e9fe301e322b6db50314a1faa677351bae86793d039b5034cd36081fc6",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-resume",
+      "process_id": 1882572,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 7
+      },
+      "tokens": {
+        "generation": 34692
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/c450db276ff4a3fd/attempt-m1-resume.json",
+      "receipt_sha256": "36bdf7c6c183e719ea1d98b4fcba1b7fddc61d3b8e7b0b062493e4352c3807bb",
+      "boundary": null,
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "message_index": 1,
+      "attempt_id": "m1-start",
+      "process_id": 1881458,
+      "status": "hard_exit_armed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 4
+      },
+      "tokens": {
+        "generation": 16633
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/c450db276ff4a3fd/attempt-m1-start.json",
+      "receipt_sha256": "405927c9a92a948df411ca85c4350bf14d4b35c444562440c1058b5178890475",
+      "boundary": "W3",
+      "window_status": null
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "message_index": 2,
+      "attempt_id": "m2-start",
+      "process_id": 1884328,
+      "status": "completed",
+      "error": null,
+      "evidence_error": null,
+      "http": {
+        "generation": 6
+      },
+      "tokens": {
+        "generation": 51332
+      },
+      "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/field_grounded-projection-off/c450db276ff4a3fd/attempt-m2-start.json",
+      "receipt_sha256": "42f53887aeab31ccaac0b198db2179266b058f7fddc3816c7bcb3ddef12efb86",
+      "boundary": null,
+      "window_status": null
+    }
+  ],
+  "sdk_readback": [
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 8,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 8,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 2,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 2,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 9,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 9,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 2,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 2,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "mem0_trace_equal-matched",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 2,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 2,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 4,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 2,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 4,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 5,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 8,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 9,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 8,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 9,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 0,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 2,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 5,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 8,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 1,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-partial-w2",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 5,
+      "record_count": 2,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-known-no-effect",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 5,
+      "record_count": 2,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-happened",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 3,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-unknown-none",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 6,
+      "record_count": 3,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "sdk_readback_bank_sources_attempts_exact": true,
+      "foreign_exact_owner_empty": true,
+      "source_count": 7,
+      "record_count": 3,
+      "qualification": "Missing first-failure backend snapshot remains missing; readback does not repair original receipt."
+    }
+  ],
+  "source_quarantine": "mem0_trace_equal Qdrant close-order defect; all first failures retained; pending fresh Source freeze",
+  "qualifications": [
+    "No scorer, gold, hidden world or driver fault labels in model wire.",
+    "Finite receipt fields checked; prose, scope and quotations remain unchecked.",
+    "IO/CPU/storage partial; no measured GPU hours or dollars.",
+    "Original terminal status never changed by audit."
+  ],
+  "full_goal": "ACTIVE",
+  "product": "NO_GO",
+  "source_closure_sha256": "1831f21caae0fda60509204e8bb3f0529a7585164e56c54cb107a7769a7c3f3e",
+  "source_count": 207,
+  "source_commit": "eaff074",
+  "root_audit_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/root-offline-old208-quarantined-audit.json",
+  "root_audit_sha256": "622f0ff5e8a5afe2810ca61f121154d3f9868666421fa56164b61d70a4db79c9",
+  "kill_witness_audit": {
+    "status": "ALL_RECORDED_HARD_EXITS_HAVE_ACTUAL_SIGKILL_PROCESS_RETURN",
+    "windows": [
+      {
+        "method_id": "B2-matched",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1729590
+      },
+      {
+        "method_id": "B2-matched",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1749917
+      },
+      {
+        "method_id": "B2-matched",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1771696
+      },
+      {
+        "method_id": "B6-matched",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1724594
+      },
+      {
+        "method_id": "B6-matched",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1746633
+      },
+      {
+        "method_id": "B6-matched",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1768658
+      },
+      {
+        "method_id": "B6-matched",
+        "case_id": "p5-update-w3",
+        "boundary": "W3",
+        "actual_signal_returncode": -9,
+        "process_id": 1779514
+      },
+      {
+        "method_id": "mem0_trace_equal-matched",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1722578
+      },
+      {
+        "method_id": "field_grounded-matched",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1716717
+      },
+      {
+        "method_id": "field_grounded-matched",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1753481
+      },
+      {
+        "method_id": "field_grounded-matched",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1762839
+      },
+      {
+        "method_id": "B2-native",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1863021
+      },
+      {
+        "method_id": "B2-native",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1877239
+      },
+      {
+        "method_id": "B6-native",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1859963
+      },
+      {
+        "method_id": "B6-native",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1865848
+      },
+      {
+        "method_id": "field_grounded-native",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1829158
+      },
+      {
+        "method_id": "field_grounded-native",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1852339
+      },
+      {
+        "method_id": "field_grounded-native",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1873373
+      },
+      {
+        "method_id": "field_grounded-native",
+        "case_id": "p5-update-w3",
+        "boundary": "W3",
+        "actual_signal_returncode": -9,
+        "process_id": 1890742
+      },
+      {
+        "method_id": "field_grounded-projection-off",
+        "case_id": "p5-partial-w2",
+        "boundary": "W2",
+        "actual_signal_returncode": -9,
+        "process_id": 1832883
+      },
+      {
+        "method_id": "field_grounded-projection-off",
+        "case_id": "p5-unknown-happened",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1856178
+      },
+      {
+        "method_id": "field_grounded-projection-off",
+        "case_id": "p5-unknown-none",
+        "boundary": "W1",
+        "actual_signal_returncode": -9,
+        "process_id": 1869487
+      },
+      {
+        "method_id": "field_grounded-projection-off",
+        "case_id": "p5-update-w3",
+        "boundary": "W3",
+        "actual_signal_returncode": -9,
+        "process_id": 1881458
+      }
+    ],
+    "unsupported_or_no_update_not_reached": "Not promoted to crash witness",
+    "model_calls": 0
+  },
+  "native_original_failed_snapshot_forensics": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-comparison-replay/MiLAi-Lab/artifacts/v13-1-p5-comparison-development/native-first-failure-forensics/root-forensics.json",
+    "sha256": "629a286cf73dddcb3f17c4cc8f87f5fa931d5e5166b23c81baccb1680d9aa5dd",
+    "native_records": 5,
+    "resources": 3,
+    "original_first_results_repaired": false
+  },
+  "classification": "Development coverage and exact cost/SDK/effect audit only; final semantic scores pending. Old six exposed one-workflow stories are not newPilot12 or formal60bases. All Mem0 paths quarantined after known mechanical validity defect; matched first3 failed retained, other15 not-run. Distinct post-fix Source/cohort must be separate.",
+  "not_run_trajectories": 15
+}

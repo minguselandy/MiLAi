@@ -1,0 +1,74 @@
+{
+  "kind": "MILAI_V13_1_P5_W3_MECHANISM_RESULTS",
+  "status": "PASSED_SCOPED_FIXED_ACTUAL_RESOURCE",
+  "protocol": "data/manifests/v13-1-p5-w3-mechanism-protocol.json",
+  "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-w3-mechanism/field-grounded-r2",
+  "planned_public_messages": 1,
+  "planned_processes": 2,
+  "distinct_actual_PIDs": [
+    730653,
+    731112
+  ],
+  "actual_SIGKILL_after_UPDATE_before_delivery": true,
+  "actual_action": "update",
+  "original_revision": 2,
+  "committed_revision": 3,
+  "after_replay_revision": 3,
+  "duplicate_records": 0,
+  "replay_receipt": {
+    "ok": true,
+    "status": "no_change",
+    "id": "28416218-e973-568e-89a4-ab5cc16835c9",
+    "revision": 3,
+    "source_ref": "src-4b310c19f800f4d1d2d1e691c93a9534732043fe8ec7c0883da64685e4bf32ea",
+    "formation_status": "host_proposed",
+    "content_verification": "unchecked",
+    "fields_verification": "receipt_matched",
+    "effect": "memory_only",
+    "mode": "field_grounded",
+    "receipt_contract": "explicit_receipt_v1",
+    "content_format": "receipt_json_v1",
+    "receipt_claim_fields": [
+      "status",
+      "label_status"
+    ],
+    "body_fields_verification": "matches_proposed_fields",
+    "notes_verification": "unchecked",
+    "replayed": true,
+    "original_status": "committed"
+  },
+  "exact_same_tool_call_replayed": true,
+  "actual_business_world_unchanged": true,
+  "original_prerequisite_resources_byte_unchanged": true,
+  "root_SDK_readback": {
+    "pid": 747021,
+    "wall_ns": 22263801,
+    "cpu_ns": 22246144,
+    "bank_source_records_exact": true,
+    "all3historical_finitefields_source_matched": true,
+    "foreign_namespace_empty": true
+  },
+  "final_answer": "已查询预约状态，确认标签已创建（label_status: created），无需进一步操作。记忆已按最新观察修订（保留历史版本）。",
+  "provider_calls": 3,
+  "generation_tokens": 12436,
+  "embedding_tokens": 0,
+  "Judge_calls": 0,
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "16ab395bdbf189b3a34608bdf5621e9a3dbb443cfa34fb1b94a472a992f993e9",
+    "generation_requests": 6669,
+    "generation_tokens": 12713711,
+    "embedding_tokens": 420830,
+    "unknown_generation": 0,
+    "unknown_embedding": 0
+  },
+  "artifact_hashes": {
+    "2af1c4d4582d16ad/attempt-m3-resume.json": "6dddeca4cbfa498ddf12351c68f52d38844d023d7ba365852877328f942e0287",
+    "2af1c4d4582d16ad/attempt-m3-resume.jsonl": "00acfdb31e3326282dc71a459e89a284fa47f572e13ef511459f89edb02f5da8",
+    "2af1c4d4582d16ad/attempt-m3-start.json": "7c0c3acc664fd7bb89fec9bb0e8dcf1e025b9951832cb6577e249cc10f29d8c0",
+    "2af1c4d4582d16ad/attempt-m3-start.jsonl": "27e2309940bce2e17435246d0ffd6407de2ed58cb34b16064cf79c82e2a85a4a"
+  },
+  "qualification": "One newneutralpublicmessage on actualR2clean completeunmodifiedclone, not independentcase or six-case lifecycle success. Original failedp5-update-w3 and allR1/R2 denominators remain. Shared12 samepublicmsg, allnewHTTPpaidoriginalledger; actual Store IO partial, no external concurrency/exactly-once guarantee. No genericpromptvariant/source repair.",
+  "product": "NO_GO",
+  "full_goal": "ACTIVE"
+}

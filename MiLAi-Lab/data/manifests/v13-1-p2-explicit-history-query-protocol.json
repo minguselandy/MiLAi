@@ -1,0 +1,52 @@
+{
+  "kind": "MILAI_V13_1_P2_EXPLICIT_HISTORY_QUERY_PROTOCOL",
+  "status": "READY_FROZEN",
+  "planned_legs": 2,
+  "controls": "Previous fixed paired controls and generic candidate retained; this2leg test is diagnostic, not new randomized causal comparison.",
+  "prompt_only_addition": " Historical-query tool rule: when a request asks about a saved fact or a previous operation, use search_memory with the relevant natural object or topic before answering that historical part. Read a uniquely relevant result if needed. Keep historical observations distinct from any current business lookup. If retrieval is empty or ambiguous, report that limitation. Memory results never authorize a new business mutation.",
+  "fixture_sha256": "a6ecc52c54a21cfdab1a7366c99baf7be6da3a988324de82bebc6ca73454f9d0",
+  "config_sha256": "2048d8c9f53598290baf62f3a44cf4ad033db8eb587a7c54ed9b77efcaa58070",
+  "legs": [
+    {
+      "mode": "ref_only",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-explicit-history-query/ref-only",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "input_freeze_sha256": "c912411643b41521b9ab079b194c4d0afaebfa4c3a54f3b9db460d8d33ca7c87",
+      "cloned_files_sha256": {
+        "memory.sqlite": "195fdf994767f4c917b871b5371893171b6bd30d7228204b32ec242b93afdde1",
+        "checkpoints.sqlite": "b2ad0a314d6a34ded4a10faf71264f80914bde61ceb248b12cfc17f9fa2c29fc",
+        "world.sqlite": "733e6b70b033d8df136b9d85c02d229de0f385b31a5d9405b3c47bdf25dbc04f",
+        "business-journal.json": "5fe71ef391b715113ad9317ea79e526a921bd81a14f936f2cc0081463d4b6c3e",
+        "message-0.json": "d030967758fad8dc185f71bb4ede0861d1f44ed5099c5f9a7c0b2e0513cd0b83"
+      },
+      "prompt_sha256": "ab3a03a220470f71f6f9a8dae423698debddab34da783e6c0615724f2655cf60",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    },
+    {
+      "mode": "field_grounded",
+      "condition": "candidate",
+      "run_root": "artifacts/v13-1-p2-explicit-history-query/field-grounded",
+      "case_id": "receipt-partial-1",
+      "message_index": 1,
+      "input_freeze_sha256": "b63889d0a4ff07f3588a98bb678da57e51caa44e9561c5c5da0fcde5f6179029",
+      "cloned_files_sha256": {
+        "memory.sqlite": "cbb8d878b9a9d4b92e0f6f57a94b588fdd9ce20aaf56a494b2a549d1a6807d74",
+        "checkpoints.sqlite": "61d7cce96dfb40e300241780dde6d965e3ab4c35c6843980bae676f4f8edec9a",
+        "world.sqlite": "e2068dd822a55d8862480ed90846300af3e622f7aa06cc4186eb16d67d3379ba",
+        "business-journal.json": "1612d7e722fc480d7ffc7ff82d170dcbd553218f7a9521d8315fd9c8ff2b9dc2",
+        "message-0.json": "7f75f70b4a4aa34404dc51f1864293ee5fc1f48f7c9084cca8502382ddc52f74"
+      },
+      "prompt_sha256": "ab3a03a220470f71f6f9a8dae423698debddab34da783e6c0615724f2655cf60",
+      "tool_catalog_sha256": "6056483b8e6a68e0cb09ab0d32352839009884f05f1170270798c4b93a6c907d"
+    }
+  ],
+  "prepare_http": 0,
+  "budget_before_sha256": "d942baca533c3380ea275f8d1733943f64a6e0a3a666af8fd7bd08a602f9928f",
+  "input_boundary": "Same natural query/same actual arm bank/world from original run; fresh s4. Only generic read-only historical query tool policy, no case-specific result/action plan, no writer.",
+  "cost": "Original ledger/concurrency1/12generation per leg/output4096; all calls paid; no retry failed terminal.",
+  "score": "Actual delivered material/proposals/output and unchangedworld; uncertainty not pass; no semantic guard claim",
+  "full_goal": "ACTIVE P0-P8",
+  "product": "NO_GO"
+}

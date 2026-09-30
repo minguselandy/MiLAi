@@ -1,0 +1,44 @@
+{
+  "kind": "MILAI_V13_1_SINGLE_VARIABLE_SCOPE_CONSUMPTION",
+  "status": "PRE_RESULTS_FROZEN",
+  "source_normal_fixture_sha256": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+  "formation_fixture": "data/fixtures/v13-1-scope-r4-formation.json",
+  "diagnostic_fixture": "data/fixtures/v13-1-scope-r4-fixed-bank.json",
+  "formation_run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-1/MiLAi-Lab/artifacts/v13-1-scope-r4/formation/v13-1-scope-r4",
+  "bank": "TO_BE_FORMED_ONCE_AND_VERIFIED_THEN_COPIED_IDENTICALLY; no bank repair",
+  "changed_variable": "One general instruction distinguishing questions from factual support and preserving applicability scope",
+  "held_constant": [
+    "one actual model-formed scoped bank",
+    "full original user source with explicit negation",
+    "public reader question",
+    "Unicode retrieval",
+    "prompt-config runtime plumbing and all source",
+    "tool catalog and CRUD/guards",
+    "owner, namespace and resource paths per arm",
+    "business permissions",
+    "source capture",
+    "fresh process/session",
+    "model parameters and per-message budget",
+    "original continuous ledger, HTTP concurrency1"
+  ],
+  "offline_acceptance": [
+    "actual formed bank must retain team/time scope before comparison",
+    "observe exactly what search/read delivered",
+    "final answer must not infer a personal long-term preference from team one-off request or current question",
+    "no new unsupported personal preference memory; preserve original raw proposal if generated",
+    "no gold or offline adjudication enters Host"
+  ],
+  "competing_explanation": "Even with correct bank scope, reader may promote the current question to a confirmed preference; generic prompt-only instructions may suffice, limiting any structural novelty claim.",
+  "denial_condition": "If correct scope is absent before reader, stop consumption comparison and record earlier formation break. If correct scope delivered but candidate still infers or persists queried preference, reject this prompt as sufficient.",
+  "generation_caps": {
+    "max_calls_per_public_message": 12,
+    "max_output_tokens": 4096,
+    "http_concurrency": 1
+  },
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_formation": "Snapshot immediately before real formation, after prior experiment has fully finished",
+  "normal_check_denominator": 24,
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE; P0-P8 unchanged",
+  "runtime_must_not_read_protocol_or_rubric": true
+}

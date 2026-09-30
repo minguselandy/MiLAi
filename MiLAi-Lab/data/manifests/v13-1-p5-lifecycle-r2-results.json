@@ -1,0 +1,590 @@
+{
+  "kind": "MILAI_V13_1_P5_LIFECYCLE_R2_RESULTS",
+  "status": "PARTIAL_FAILURE_PRESERVED_NO_MORE_PROMPT_VARIANTS",
+  "protocol": "data/manifests/v13-1-p5-lifecycle-r2-protocol.json",
+  "full_goal": "ACTIVE P0-P8",
+  "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-lifecycle-micro/field-grounded-r2",
+  "planned_cases": 6,
+  "planned_public_messages": 18,
+  "planned_child_processes": 22,
+  "actual_child_processes": 18,
+  "distinct_actual_PIDs": 18,
+  "public_terminal_counts": {
+    "completed": 12,
+    "interrupted": 3,
+    "NOT_RUN": 3
+  },
+  "whole_lifecycle_counts": {
+    "PASS_SCOPED_BOUNDED_OPERATION_FIELDS": 1,
+    "COMPLETED_WRONG_MEMORY_NOT_SAVED": 2,
+    "BUDGET_EXHAUSTED": 3
+  },
+  "actual_hard_kill_boundaries": {
+    "W1": 2,
+    "W2": 1
+  },
+  "W3_actual_update_status": "NOT_RUN_BOUNDARY_NOT_REACHED: original M0bankempty and M1budgetexhausted; keep original case failure, scripted mechanical checks only.",
+  "actual_wrong_business_effects": 0,
+  "actual_application_blocked_proposals": 0,
+  "memory_proposals": {
+    "total_unique": 45,
+    "committed": 3,
+    "rejected": 42,
+    "field_conflict_label_status": 10,
+    "receipt_fields_required": 27,
+    "target_not_unique": 5,
+    "note": "Actual45 unique proposals:3committed,42rejected. All source/bank/attempt namespaces combined by original proposal identity.",
+    "by_receipt": {
+      "committed": 3,
+      "receipt_fields_required": 27,
+      "target_not_unique": 5,
+      "field_conflict:label_status": 10
+    }
+  },
+  "ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "6e53b0af4d0720292e9516621be2341a4689718f107c2b286296b66c84a2d229",
+    "generation_requests": 6666,
+    "generation_tokens": 12701275,
+    "embedding_tokens": 420830,
+    "unknown_generation": 0,
+    "unknown_embedding": 0,
+    "Judge_calls": 0
+  },
+  "provider_calls": 82,
+  "provider_generation_tokens": 396021,
+  "embedding_tokens": 0,
+  "Judge_calls": 0,
+  "accounting": "All82 actual response usages exactly reconcile unchanged continuous ledger; unknown0; IOpartial. R1+R2 total155generation696969tokens, noembedding.",
+  "root_SDK_readback": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-lifecycle-micro/field-grounded-r2/root-offline-audit.json",
+    "sha256": "76287c8fa550e5518eaba6a8d1a0f232fdf4d6701d3d6611497bfaa56f8474b5",
+    "all6_resources_exact": true,
+    "finite_field_history_support_verified": true,
+    "foreign_namespaces_empty": true
+  },
+  "full_proposals": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-1-p5-replay/MiLAi-Lab/artifacts/v13-1-p5-lifecycle-micro/field-grounded-r2/root-complete-proposal-audit.json",
+    "sha256": "24c2f0d6d025d84f507fc1b1c69ff9838ca92e14f43255aadf2caa76992ad406",
+    "original_raw_requests_and_receipts": true
+  },
+  "unknown_recovery_mechanics": "Two actual W1world outcomes: one label effect alreadyhappened, one native no-effect then genuine backendrestored. Both original entries staypending/UNKNOWN/resultabsent. Separate target-matched actualpublicquery observes created ornot_created. happened path doesnotrepeat label. none path authorized confirmed_no_effect retryactuallycreates one label afternewquery; finalmemory/answer stillfails.",
+  "new_real_field_counterexamples": "unknown-happened Host proposes validJSON/currentcreated with oldactualSourceRef whose observedlabelnot_created. Guardrejects10 field_conflict:label_status. Same proposals also specifywrongexpectedrevision2 vsactual1, so no exclusivefieldguard/taskgain inferred. Correct oldhistoricalbank preserved, consumerfails cap.",
+  "formation_failure": "Four other cases omitrequired fields whilecontentJSON containsboth keys: receipt_fields_required. Emptybank makes update target_not_unique; original diagnostics not repaired by programmer. Some completed replies falselyattribute memoryvalidation failure to unavailable label service orclaimcurrent query operationstatusreserved_label_failed; distinct semantic errors.",
+  "delivery_caveat": "In M2 partial/known-no-effect, actualsearch_memory returns original raw_events even when records empty; honesthistory can be supported by Archive access. These are not successfulmemorysave/Revision or evidencebanknecessary. Sourcefallback andbankmaterialdelivery mustbe separated incontrols/pilot.",
+  "earliest_breaks": "Requiredmodelproposalfields orcurrentqueryboundtooldSource; toolsyntax/rejectionpolicyalone insufficient. No realordinaryquerymiss on a correctbank proven; AttentionNOT_ADMITTED.",
+  "cases": [
+    {
+      "case_id": "p5-clean",
+      "lifecycle_status": "PASS_SCOPED_BOUNDED_OPERATION_FIELDS",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预订和标签制作已完成。预约ID：RSV-e8b5d5a9-2ab4-42fb-a690-50c1f156c31d。物品：资料册-阅览室，数量：2，目的地：阅览室，包装：防潮套。状态：标签已创建。事实已保存。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 676032,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "completed",
+          "final_answer": "已查询预约状态，确认标签已创建（label_status: created），无需进一步操作。记忆已按最新观察修订（保留历史版本）。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 676535,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "completed",
+          "final_answer": "当前状态：\n- 预约存在：是。预约 ID 为 RSV-e8b5d5a9-2ab4-42fb-a690-50c1f156c31d，物品为“资料册-阅览室”，数量 2，目的地“阅览室”，包装“防潮套”。\n- 当前标签状态：created（标签已成功创建）。\n\n历史操作观察的区别：\n- 历史操作（reserve_and_label 工具回执）：状态为 label_created，标签状态为 created。该操作成功完成了预订和标签创建。\n- 当前观察（get_reservation 工具回执）：状态为 found，标签状态为 created。该操作仅确认了预约存在且标签已创建，未进行新的预订或标签创建。\n\n总结：当前预约存在且标签已创建。历史操作成功完成了预订和标签创建，而当前观察仅确认了现有状态，未进行新的操作。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 677172,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "bank_records": 1,
+      "history_revisions": [
+        2
+      ],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 2,
+        "receipts": {
+          "committed": 2
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "created",
+      "original_lost_receipt_unknown_separate_query": {},
+      "source_scopes": [
+        {}
+      ],
+      "generation_admissions": {
+        "p5-clean-m0": 3,
+        "p5-clean-m1": 3,
+        "p5-clean-m2": 2
+      }
+    },
+    {
+      "case_id": "p5-partial-w2",
+      "lifecycle_status": "COMPLETED_WRONG_MEMORY_NOT_SAVED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预约已成功创建（预约ID: RSV-45442a26-e865-485f-93a3-276a2862def7），但标签制作失败，原因是标签服务不可用。由于标签服务暂时不可用，我无法将此次工具观察的事实保存为记忆。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": -9,
+              "actual_hard_exit": true,
+              "pid": 677624,
+              "status": "hard_exit_armed",
+              "boundary": "W2",
+              "window_status": null,
+              "error": null
+            },
+            {
+              "phase": "resume",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 678069,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "completed",
+          "final_answer": "标签已成功创建。预约ID为 RSV-45442a26-e865-485f-93a3-276a2862def7，物品为“检测液-东侧实验架”，数量3，目的地“东侧实验架”，包装“保温托盘”。由于记忆保存工具对收据格式校验严格，且当前无法通过标准流程保存该操作记录，因此未更新记忆。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 678529,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "completed",
+          "final_answer": "当前存在预约“检测液-东侧实验架”（reservation_id: RSV-45442a26-e865-485f-93a3-276a2862def7），当前标签状态为“created”。\n\n历史操作观察的区别：\n1. 初始尝试预订并打标签时，系统返回“reserved_label_failed”，此时标签状态为“not_created”（仅预约成功，标签创建失败）。\n2. 随后查询预约状态时，标签状态仍为“not_created”。\n3. 执行“complete_label”操作后，系统返回“label_created”，标签状态更新为“created”。\n4. 最新查询确认标签状态为“created”。\n\n总结：当前标签已成功创建，与历史中“not_created”的状态不同。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 679313,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 4,
+        "receipts": {
+          "receipt_fields_required": 4
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "created",
+      "original_lost_receipt_unknown_separate_query": {},
+      "source_scopes": [],
+      "generation_admissions": {
+        "p5-partial-w2-m0": 4,
+        "p5-partial-w2-m1": 5,
+        "p5-partial-w2-m2": 2
+      }
+    },
+    {
+      "case_id": "p5-known-no-effect",
+      "lifecycle_status": "COMPLETED_WRONG_MEMORY_NOT_SAVED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预约已成功创建，但标签制作失败。具体信息如下：\n\n- **预约ID**: RSV-1ca3d310-4517-4135-bcd0-202b6d52de6b\n- **物品**: 样品袋-南侧储物间\n- **数量**: 4\n- **目的地**: 南侧储物间\n- **包装**: 密封夹层\n- **状态**: 已预约，但标签服务不可用，导致标签未创建 (reserved_label_failed)\n\n由于标签服务暂时不可用，标签未能生成。您可以稍后尝试重新制作标签。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 679763,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "completed",
+          "final_answer": "很抱歉，目前无法完成标签制作。根据最新查询结果，您的预约（ID: RSV-1ca3d310-4517-4135-bcd0-202b6d52de6b）状态仍为“reserved_label_failed”，标签状态为“not_created”。原因是标签服务当前不可用（label_service_unavailable）。由于服务持续不可用，我无法为您创建标签，也无法更新记忆记录（因系统拒绝保存）。建议您稍后重试。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 680376,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "completed",
+          "final_answer": "当前存在预约“样品袋-南侧储物间”（reservation_id: RSV-1ca3d310-4517-4135-bcd0-202b6d52de6b），当前标签状态为 not_created。\n\n历史操作观察的区别：\n1. 初始预订尝试（reserve_and_label）：状态为 reserved_label_failed，原因是 label_service_unavailable，标签状态为 not_created。\n2. 后续尝试完成标签（complete_label）：状态为 label_service_unavailable，标签状态为 not_created。\n3. 当前查询（get_reservation）：状态为 found，标签状态为 not_created。\n\n所有历史操作均显示标签未创建，且由于标签服务不可用，导致标签创建失败。当前状态与历史观察一致，均为标签未创建。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 681793,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 5,
+        "receipts": {
+          "receipt_fields_required": 4,
+          "target_not_unique": 1
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "not_created",
+      "original_lost_receipt_unknown_separate_query": {},
+      "source_scopes": [],
+      "generation_admissions": {
+        "p5-known-no-effect-m0": 4,
+        "p5-known-no-effect-m1": 10,
+        "p5-known-no-effect-m2": 2
+      }
+    },
+    {
+      "case_id": "p5-unknown-happened",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "预订已成功创建，但标签制作失败。预约ID为 RSV-7f57547b-9e88-4371-9b46-61d6e519136e，物品为“温控探头-北侧工位”，数量1，目的地“北侧工位”，包装“防震盒”。标签服务不可用导致标签未生成。实际观察事实已保存。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 682248,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": -9,
+              "actual_hard_exit": true,
+              "pid": 682719,
+              "status": "hard_exit_armed",
+              "boundary": "W1",
+              "window_status": null,
+              "error": null
+            },
+            {
+              "phase": "resume",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 683282,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 1,
+      "history_revisions": [
+        1
+      ],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 11,
+        "receipts": {
+          "committed": 1,
+          "field_conflict:label_status": 10
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "created",
+      "original_lost_receipt_unknown_separate_query": {
+        "bc20585028d7c17e388612f778e3f10b2ac29dc8b99d7f9eb3f0e484984490e5": {
+          "origin": "application_recovery",
+          "original_journal_key": "bc20585028d7c17e388612f778e3f10b2ac29dc8b99d7f9eb3f0e484984490e5",
+          "original_call_status": "UNKNOWN",
+          "thread_id": "3c537a2732276b0ddd9f7e45a2391b5b10272f87418896433dc111b2b2f4d876",
+          "generation_id": "chatcmpl-aafafaccfac155fb",
+          "call_id": "chatcmpl-aafafaccfac155fb:tool:0",
+          "query": {
+            "name": "get_reservation",
+            "args": {
+              "item_key": "温控探头-北侧工位"
+            },
+            "id": "application-query-bc20585028d7c17e388612f778e3f10b2ac29dc8b99d7f9eb3f0e484984490e5"
+          },
+          "query_journal_key": "dc38d22bfd6278cbb32869d0cc317d06d31b1db2e9725dd4efd84c50d2934ed1",
+          "query_result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-7f57547b-9e88-4371-9b46-61d6e519136e\", \"item_key\": \"温控探头-北侧工位\", \"quantity\": 1, \"destination\": \"北侧工位\", \"packing\": \"防震盒\", \"label_status\": \"created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": "841b6ce4-7672-4857-8bff-fc95b05c3dbc",
+            "tool_call_id": "application-query-bc20585028d7c17e388612f778e3f10b2ac29dc8b99d7f9eb3f0e484984490e5",
+            "artifact": null,
+            "status": "success"
+          },
+          "effect": "confirmed",
+          "effect_source": "query_observation_not_original_execution_receipt"
+        }
+      },
+      "source_scopes": [
+        {}
+      ],
+      "generation_admissions": {
+        "p5-unknown-happened-m0": 3,
+        "p5-unknown-happened-m1": 12
+      }
+    },
+    {
+      "case_id": "p5-unknown-none",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "抱歉，我无法保存该工具观察记录。系统拒绝了两次尝试，原因均为“receipt_fields_required”（需要收据字段）。根据工具定义，对于 reservation tool_observation，content 必须是包含 literal string status 和 label_status 的 JSON 对象，且 content_format 必须设为 'receipt_json_v1'。我已严格按照此格式提交，但系统仍拒绝。这可能是因为系统期望的字段名或格式与我提交的略有不同，或者存在其他未明确的验证规则。由于无法成功保存，该事实未被记录。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 685737,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": -9,
+              "actual_hard_exit": true,
+              "pid": 686363,
+              "status": "hard_exit_armed",
+              "boundary": "W1",
+              "window_status": null,
+              "error": null
+            },
+            {
+              "phase": "resume",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 686765,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 12,
+        "receipts": {
+          "receipt_fields_required": 10,
+          "target_not_unique": 2
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "created",
+      "original_lost_receipt_unknown_separate_query": {
+        "4a0ae05946a0f67cb780f601e648232000ed96875c38cc89a2f1406a8dbbe49c": {
+          "origin": "application_recovery",
+          "original_journal_key": "4a0ae05946a0f67cb780f601e648232000ed96875c38cc89a2f1406a8dbbe49c",
+          "original_call_status": "UNKNOWN",
+          "thread_id": "0bee704cc9278ccb615cf401d4333f0564818c72ca163d8e4c897779635fb30a",
+          "generation_id": "chatcmpl-9a31a471063239b3",
+          "call_id": "chatcmpl-9a31a471063239b3:tool:0",
+          "query": {
+            "name": "get_reservation",
+            "args": {
+              "item_key": "校准砝码-检验台"
+            },
+            "id": "application-query-4a0ae05946a0f67cb780f601e648232000ed96875c38cc89a2f1406a8dbbe49c"
+          },
+          "query_journal_key": "81fde3041b4497a607e5dc1c3a0c5df06cb8852df7c9b5dd39b655ddf6095d43",
+          "query_result": {
+            "content": "{\"ok\": true, \"status\": \"found\", \"reservation_id\": \"RSV-a0b689eb-8772-417c-a78f-372cb3ad5900\", \"item_key\": \"校准砝码-检验台\", \"quantity\": 2, \"destination\": \"检验台\", \"packing\": \"软垫隔层\", \"label_status\": \"not_created\"}",
+            "additional_kwargs": {},
+            "response_metadata": {},
+            "type": "tool",
+            "name": "get_reservation",
+            "id": "dd3bd4b1-ef34-4a9c-8fbb-2ad40babf823",
+            "tool_call_id": "application-query-4a0ae05946a0f67cb780f601e648232000ed96875c38cc89a2f1406a8dbbe49c",
+            "artifact": null,
+            "status": "success"
+          },
+          "effect": "none",
+          "effect_source": "query_observation_not_original_execution_receipt"
+        }
+      },
+      "source_scopes": [],
+      "generation_admissions": {
+        "p5-unknown-none-m0": 4,
+        "p5-unknown-none-m1": 12
+      }
+    },
+    {
+      "case_id": "p5-update-w3",
+      "lifecycle_status": "BUDGET_EXHAUSTED",
+      "public_messages": [
+        {
+          "index": 0,
+          "status": "completed",
+          "final_answer": "抱歉，由于标签服务暂时不可用，您的预约虽然创建成功（预约ID: RSV-2104d2dd-597c-4c40-b51a-346ff4494e40），但标签制作失败了。因此，我无法按照严格的合同要求保存包含完整状态和标签状态的观察记录，因为系统拒绝了该提议。建议您稍后重试标签制作。",
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 0,
+              "actual_hard_exit": false,
+              "pid": 688871,
+              "status": "completed",
+              "boundary": null,
+              "window_status": null,
+              "error": null
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "status": "interrupted",
+          "final_answer": null,
+          "processes": [
+            {
+              "phase": "start",
+              "returncode": 1,
+              "actual_hard_exit": false,
+              "pid": 689562,
+              "status": "interrupted",
+              "boundary": null,
+              "window_status": null,
+              "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "status": "NOT_RUN",
+          "final_answer": null,
+          "processes": []
+        }
+      ],
+      "bank_records": 0,
+      "history_revisions": [],
+      "all_unique_memory_proposals": {
+        "all_unique_proposal_count": 11,
+        "receipts": {
+          "receipt_fields_required": 9,
+          "target_not_unique": 2
+        }
+      },
+      "actual_target_exact_one_reservation": true,
+      "actual_current_label_status": "created",
+      "original_lost_receipt_unknown_separate_query": {},
+      "source_scopes": [],
+      "generation_admissions": {
+        "p5-update-w3-m0": 4,
+        "p5-update-w3-m1": 12
+      }
+    }
+  ],
+  "next": "No morepromptvariants. SeparateW3mechanism may use newneutralpublicmessage over unmodifiedclone of actualR2clean bank/world/checkpoint, neverrepair failedW3case orcountasindependenttask. Continue B0–B6/Receipt-RAG comparisons and unseenpilot.",
+  "product": "NO_GO"
+}

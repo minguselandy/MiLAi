@@ -1,0 +1,713 @@
+{
+  "kind": "V13_1_EQUAL_CONFIGURATION_ACTUAL_DEVELOPMENT_RESULTS",
+  "status": "EXECUTED_AND_OFFLINE_COST_PERSISTENCE_CHECKED_SCOPED",
+  "protocol_sha256": "844e22a84e7af746b1aa766e8138ef49e4fdb450d73e4ef51da7e0bc6e8549ac",
+  "runtime_audit_sha256": "8423687f7dba5ae2eec007f4079888e5d3878dd6dc8f4f52c4ce8c407e943e5f",
+  "planned_candidate_question_pairs": 48,
+  "completed_pairs": 48,
+  "runtime_processes": 96,
+  "judge_processes": 48,
+  "source_groups": 8,
+  "task_denominators": {
+    "contextual_scope_control": 4,
+    "valid_memory_selection": 2,
+    "personalized_memory_use": 2
+  },
+  "scores": {
+    "B2-a": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 3,
+          "accuracy_avg": 0.75,
+          "incorrectly_used_preference_sum": 1,
+          "incorrectly_used_preference_avg": 0.25,
+          "scope_pass_sum": 3,
+          "scope_pass_avg": 0.75,
+          "acc": 0.75,
+          "syco_rate": 0.25
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 1,
+          "uses_latest_preference_avg": 0.5,
+          "outdated_preference_contamination_sum": 1,
+          "outdated_preference_contamination_avg": 0.5,
+          "valid_selection_pass_sum": 1,
+          "valid_selection_pass_avg": 0.5,
+          "acc": 0.5,
+          "outdated_pref": 0.5
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 3,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 1
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 6,
+      "mean_three_track_success_bound": 0.75,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 8,
+        "generation_tokens": 29230,
+        "embedding_requests": 48,
+        "embedding_tokens": 14484,
+        "summary_calls": 0,
+        "cold_wall_ns": 141236174460
+      }
+    },
+    "B2-b": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 4,
+          "accuracy_avg": 1.0,
+          "incorrectly_used_preference_sum": 0,
+          "incorrectly_used_preference_avg": 0.0,
+          "scope_pass_sum": 4,
+          "scope_pass_avg": 1.0,
+          "acc": 1.0,
+          "syco_rate": 0.0
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 0,
+          "uses_latest_preference_avg": 0.0,
+          "outdated_preference_contamination_sum": 2,
+          "outdated_preference_contamination_avg": 1.0,
+          "valid_selection_pass_sum": 0,
+          "valid_selection_pass_avg": 0.0,
+          "acc": 0.0,
+          "outdated_pref": 1.0
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 0
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 6,
+      "mean_three_track_success_bound": 0.6666666666666666,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 8,
+        "generation_tokens": 29850,
+        "embedding_requests": 48,
+        "embedding_tokens": 14244,
+        "summary_calls": 0,
+        "cold_wall_ns": 143347382157
+      }
+    },
+    "B3-a": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 3,
+          "accuracy_avg": 0.75,
+          "incorrectly_used_preference_sum": 1,
+          "incorrectly_used_preference_avg": 0.25,
+          "scope_pass_sum": 3,
+          "scope_pass_avg": 0.75,
+          "acc": 0.75,
+          "syco_rate": 0.25
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 1,
+          "uses_latest_preference_avg": 0.5,
+          "outdated_preference_contamination_sum": 1,
+          "outdated_preference_contamination_avg": 0.5,
+          "valid_selection_pass_sum": 1,
+          "valid_selection_pass_avg": 0.5,
+          "acc": 0.5,
+          "outdated_pref": 0.5
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 3,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 1
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 6,
+      "mean_three_track_success_bound": 0.75,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 30,
+        "generation_tokens": 31641,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "summary_calls": 22,
+        "cold_wall_ns": 160067546531
+      }
+    },
+    "B3-b": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 4,
+          "accuracy_avg": 1.0,
+          "incorrectly_used_preference_sum": 0,
+          "incorrectly_used_preference_avg": 0.0,
+          "scope_pass_sum": 4,
+          "scope_pass_avg": 1.0,
+          "acc": 1.0,
+          "syco_rate": 0.0
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 0,
+          "uses_latest_preference_avg": 0.0,
+          "outdated_preference_contamination_sum": 2,
+          "outdated_preference_contamination_avg": 1.0,
+          "valid_selection_pass_sum": 0,
+          "valid_selection_pass_avg": 0.0,
+          "acc": 0.0,
+          "outdated_pref": 1.0
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 0
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 6,
+      "mean_three_track_success_bound": 0.6666666666666666,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 30,
+        "generation_tokens": 31153,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "summary_calls": 22,
+        "cold_wall_ns": 158319967998
+      }
+    },
+    "Ours_scope-a": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 4,
+          "accuracy_avg": 1.0,
+          "incorrectly_used_preference_sum": 0,
+          "incorrectly_used_preference_avg": 0.0,
+          "scope_pass_sum": 4,
+          "scope_pass_avg": 1.0,
+          "acc": 1.0,
+          "syco_rate": 0.0
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 2,
+          "uses_latest_preference_avg": 1.0,
+          "outdated_preference_contamination_sum": 0,
+          "outdated_preference_contamination_avg": 0.0,
+          "valid_selection_pass_sum": 2,
+          "valid_selection_pass_avg": 1.0,
+          "acc": 1.0,
+          "outdated_pref": 0.0
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 8,
+      "mean_three_track_success_bound": 1.0,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 16,
+        "generation_tokens": 37210,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "summary_calls": 0,
+        "cold_wall_ns": 196166614255
+      }
+    },
+    "Ours_scope-b": {
+      "native_task_contract_diagnostic": {
+        "contextual_scope_control": {
+          "n_total": 4,
+          "n_judged": 4,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Contextual Scope Limits",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "accuracy",
+              "direction": "higher_is_better"
+            },
+            "Syco. Rate": {
+              "field": "incorrectly_used_preference",
+              "direction": "lower_is_better"
+            }
+          },
+          "accuracy_sum": 4,
+          "accuracy_avg": 1.0,
+          "incorrectly_used_preference_sum": 0,
+          "incorrectly_used_preference_avg": 0.0,
+          "scope_pass_sum": 4,
+          "scope_pass_avg": 1.0,
+          "acc": 1.0,
+          "syco_rate": 0.0
+        },
+        "personalized_memory_use": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Personalized Recommendation",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "answer_accuracy",
+              "direction": "higher_is_better"
+            },
+            "Correct Pref. Use": {
+              "field": "preference_used",
+              "direction": "higher_is_better"
+            }
+          },
+          "answer_accuracy_sum": 2,
+          "answer_accuracy_avg": 1.0,
+          "preference_used_sum": 2,
+          "preference_used_avg": 1.0,
+          "memory_use_pass_sum": 2,
+          "memory_use_pass_avg": 1.0,
+          "acc": 1.0,
+          "correct_pref_use": 1.0
+        },
+        "valid_memory_selection": {
+          "n_total": 2,
+          "n_judged": 2,
+          "n_unjudged": 0,
+          "judge_parse_failed": 0,
+          "n_judge_missing": 0,
+          "judge_error_count": 0,
+          "paper_task": "Preference Change",
+          "paper_metric_map": {
+            "Acc.": {
+              "field": "uses_latest_preference",
+              "direction": "higher_is_better"
+            },
+            "Outdated Pref.": {
+              "field": "outdated_preference_contamination",
+              "direction": "lower_is_better"
+            }
+          },
+          "uses_latest_preference_sum": 2,
+          "uses_latest_preference_avg": 1.0,
+          "outdated_preference_contamination_sum": 0,
+          "outdated_preference_contamination_avg": 0.0,
+          "valid_selection_pass_sum": 2,
+          "valid_selection_pass_avg": 1.0,
+          "acc": 1.0,
+          "outdated_pref": 0.0
+        }
+      },
+      "success_by_track": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "planned_denominators": {
+        "contextual_scope_control": 4,
+        "personalized_memory_use": 2,
+        "valid_memory_selection": 2
+      },
+      "total_success": 8,
+      "mean_three_track_success_bound": 1.0,
+      "completed_answer_and_parse_pairs": 8,
+      "runtime_cost": {
+        "generation_requests": 16,
+        "generation_tokens": 41082,
+        "embedding_requests": 0,
+        "embedding_tokens": 0,
+        "summary_calls": 0,
+        "cold_wall_ns": 208338623814
+      }
+    }
+  },
+  "selected_configuration": {
+    "B2": {
+      "selected_candidate": "B2-a",
+      "configuration_path": "configs/v13-1-controls-b2-a.json",
+      "configuration_sha256": "53f0519bec32798d6a8fa7841ba7dab414fc92e4c27a2355b0662412432fb765",
+      "frozen_parameters": "same selected exact file content; native reader/source/current date/material/cadence shared settings remain protocol-governed",
+      "rule": "For each method choose larger mean over three tracks of success/planned per-track denominator (unknown contributes0 to this conservative selection bound only, separately reported). Tie: more completed answer+parse pairs; then lower total generation+embedding charged tokens excluding Judge; then candidate a. Descriptive choice on eight old groups, no inferential effect claim."
+    },
+    "B3": {
+      "selected_candidate": "B3-a",
+      "configuration_path": "configs/v13-1-controls-b3-a.json",
+      "configuration_sha256": "58fbc59fdddf4c5fd60e466db5bebc4637abc1b428739c99a46cd5dfa168b65b",
+      "frozen_parameters": "same selected exact file content; native reader/source/current date/material/cadence shared settings remain protocol-governed",
+      "rule": "For each method choose larger mean over three tracks of success/planned per-track denominator (unknown contributes0 to this conservative selection bound only, separately reported). Tie: more completed answer+parse pairs; then lower total generation+embedding charged tokens excluding Judge; then candidate a. Descriptive choice on eight old groups, no inferential effect claim."
+    },
+    "Ours_scope": {
+      "selected_candidate": "Ours_scope-a",
+      "configuration_path": "configs/v13-1-public-scope-candidate-a.json",
+      "configuration_sha256": "3fb129ea4f89298824df6745e8f838ad7ff5e930adcc8e581e0dbd21bb10eb62",
+      "frozen_parameters": "same selected exact file content; native reader/source/current date/material/cadence shared settings remain protocol-governed",
+      "rule": "For each method choose larger mean over three tracks of success/planned per-track denominator (unknown contributes0 to this conservative selection bound only, separately reported). Tie: more completed answer+parse pairs; then lower total generation+embedding charged tokens excluding Judge; then candidate a. Descriptive choice on eight old groups, no inferential effect claim."
+    }
+  },
+  "runtime_cost": {
+    "generation_requests": 108,
+    "generation_tokens": 200166,
+    "embedding_requests": 96,
+    "embedding_tokens": 28728
+  },
+  "diagnostic_judge_cost": {
+    "generation_requests": 48,
+    "generation_tokens": 78556,
+    "embedding_tokens": 0
+  },
+  "original_ledger_after": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 6918,
+    "generation": {
+      "charged_tokens": 13066995,
+      "known_tokens": 13066995,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 454563,
+      "known_tokens": 454563,
+      "unknown_usage": 0
+    }
+  },
+  "original_ledger_after_sha256": "26295c78a177ae831352234b2e449a3046f0e429474d0d33fe8c10aaa4756acc",
+  "judge_identity": "Local Qwen same-family diagnostic using canonical per-task Judge payload/schema/parse, one actual paid attempt. Method labels omitted from prompt; not official DeepSeek/independent/blind human/leaderboard results.",
+  "quality_qualification": "Eight already exposed development groups, small unequal per-track counts. Ours_scope has no operational grounding/auth/revision claim on these native text-only tasks. Maintenance cadence differs across methods. Equal actual configurations done; no inferential superiority/non-inferiority claim. All original answers/first preparation failure retained; no answer/model retry/repair.",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

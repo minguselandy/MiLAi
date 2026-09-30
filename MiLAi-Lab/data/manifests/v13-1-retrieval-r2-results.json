@@ -1,0 +1,161 @@
+{
+  "kind": "MILAI_V13_1_RETRIEVAL_R2_RESULT",
+  "status": "SCOPED_DEVELOPMENT_SINGLE_VARIABLE_SUCCESS",
+  "protocol_sha256": "51539aa58bbbb68a0fa0d516e0a28ecd0a32faedf7761b461dae23007172c125",
+  "initial_bank_sha256": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+  "pair_freeze_sha256": "eb450e824da99ab406cd7b9a060165953b71bc532050e9a7dd00d47acc3adafd",
+  "source_changed_paths": [
+    "src/milai_lab/memory/service.py"
+  ],
+  "all_other_runtime_freeze_fields_equal": true,
+  "first_actual_host_requests_equal": true,
+  "qualification": "Temperature0 still generated differing optional limit: control5, candidate default10. The identical query and fixed-bank zero-model test are strictly controlled; actual bank cardinalities are below both limits, no truncation. Runtime current capture timestamps differ. One synthetic case does not establish general semantic quality or research benefit.",
+  "arms": {
+    "control": {
+      "status": "completed",
+      "process_id": 3481505,
+      "freeze_sha256": "4574650564a7565f70802212bdc6aa953578759850b05644db8719c0ad02435d",
+      "source_manifest_sha256": "da7705e5f35a1e316040f2a7c340ed69d75a987fdeea24a5fde994563e4f0c6b",
+      "fixture_sha256": "e9ad70bbb672d5588a85c144f4118559b29103d2c2d07ddd19db31539a1bf9cc",
+      "first_host_request_sha256": "164548a1eb56ee2c38e7edf7547b646fdf9b6a8b09c72701b8270fa9853d50d2",
+      "zero_model_sha256": "cdd7ff96e438b40d2538ac61f9e35c443fd05d23a939eeac5cdb6ae5c63b8cab",
+      "zero_model_bank_sha256_after_read": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+      "zero_model_queries": {
+        "通勤方式偏好": {
+          "status": "no_results",
+          "record_count": 0,
+          "raw_event_count": 0
+        },
+        "紫色沙滩帐篷": {
+          "status": "no_results",
+          "record_count": 0,
+          "raw_event_count": 0
+        }
+      },
+      "actual_search_arguments": [
+        {
+          "query": "通勤方式偏好",
+          "limit": 5
+        }
+      ],
+      "actual_delivered_record_ids": [],
+      "actual_delivered_raw_count": [
+        0
+      ],
+      "final_answer_sha256": "f9c295e2ed3eff38c828b3c1c9bcdbde5b15c720ebc5efc6b73dab03cf722916",
+      "offline_adjudication": "FAIL",
+      "adjudication_basis": "Root read complete answer and original saved source/card; control denied finding preference; candidate explicitly reported original train preference. No keyword-only classifier.",
+      "new_memory_proposals": 0,
+      "records_after": 1,
+      "sources_after": 3,
+      "generation_requests": 2,
+      "generation_tokens": 1976,
+      "embedding_tokens": 0,
+      "execution_wall_ns": 1521654465,
+      "execution_cpu_ns": 806767753,
+      "artifacts": {
+        "terminal_path": "artifacts/v13-1-retrieval-r2/control/v13-1-d0/1ed93fe22f2194f3/message-0.json",
+        "terminal_sha256": "ad509fef416ef4132fc6d8888e0fbdecdf72d9c84086b4ca7f5a0306d8c3b181",
+        "trace_path": "artifacts/v13-1-retrieval-r2/control/v13-1-d0/1ed93fe22f2194f3/message-0.jsonl",
+        "trace_sha256": "4cd1b333bd3677fbc1250a9eaec7b3fb3b06e9a630859f5181b98cc0686e1f1e"
+      }
+    },
+    "candidate": {
+      "status": "completed",
+      "process_id": 3495117,
+      "freeze_sha256": "ee89dde279c0c17b2e056d026812f5c9c2f1f064838909d20319aa95d1c16632",
+      "source_manifest_sha256": "cde9c29aa55b0d1dc9919ef421bb7e62c5566f689e519af25444ccf9e8b79181",
+      "fixture_sha256": "e9ad70bbb672d5588a85c144f4118559b29103d2c2d07ddd19db31539a1bf9cc",
+      "first_host_request_sha256": "164548a1eb56ee2c38e7edf7547b646fdf9b6a8b09c72701b8270fa9853d50d2",
+      "zero_model_sha256": "566f77456bc456e841e7be4cdfbda7329341131f51b8f3d60dd76ace5b199726",
+      "zero_model_bank_sha256_after_read": "a8ed9e6fc56b011abf96175647dedabcfc50e144aba9060aca143027b17bb7d9",
+      "zero_model_queries": {
+        "通勤方式偏好": {
+          "status": "found",
+          "record_count": 1,
+          "raw_event_count": 2
+        },
+        "紫色沙滩帐篷": {
+          "status": "no_results",
+          "record_count": 0,
+          "raw_event_count": 0
+        }
+      },
+      "actual_search_arguments": [
+        {
+          "query": "通勤方式偏好"
+        }
+      ],
+      "actual_delivered_record_ids": [
+        "a7c7ee07-1fea-5ad9-a08b-10b6cbde7e9a"
+      ],
+      "actual_delivered_raw_count": [
+        3
+      ],
+      "final_answer_sha256": "ddd4b3c25e89b706d6548883c839e5d927612292f2aa0926f4f4d3b48d43d752",
+      "offline_adjudication": "PASS",
+      "adjudication_basis": "Root read complete answer and original saved source/card; control denied finding preference; candidate explicitly reported original train preference. No keyword-only classifier.",
+      "new_memory_proposals": 0,
+      "records_after": 1,
+      "sources_after": 3,
+      "generation_requests": 2,
+      "generation_tokens": 2932,
+      "embedding_tokens": 0,
+      "execution_wall_ns": 1724953478,
+      "execution_cpu_ns": 843323977,
+      "artifacts": {
+        "terminal_path": "artifacts/v13-1-retrieval-r2/candidate/v13-1-d0/1ed93fe22f2194f3/message-0.json",
+        "terminal_sha256": "5670d7e34af867f7a4d5b33fdc67a8f3b61c901e74956cff913a2409b6552579",
+        "trace_path": "artifacts/v13-1-retrieval-r2/candidate/v13-1-d0/1ed93fe22f2194f3/message-0.jsonl",
+        "trace_sha256": "29f34c8402ccc2a2b00c6d004086ba17a931fffe5e50a0fe6e9118a7000e9342"
+      }
+    }
+  },
+  "engineering": {
+    "affected_pytest": "12 passed,11 deselected",
+    "ruff": "pass",
+    "mypy": "1 source pass",
+    "initial_pytest": "9 failed,1 passed, preserved before repair",
+    "initial_ruff": "4 findings preserved",
+    "evidence": [
+      {
+        "path": "artifacts/v13-1-source-checks/retrieval-r2-mypy-final.txt",
+        "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/retrieval-r2-pytest-final.txt",
+        "sha256": "d173a0ae21dc3738b0dcddd05ff027a32af11642fbab96c997051173d715c8f2"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/retrieval-r2-pytest-first.txt",
+        "sha256": "669d7d835d66ec82c808e3e0adcb484f5fb9675386c0b7ebda6eae53699902e1"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/retrieval-r2-ruff-final.txt",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/retrieval-r2-ruff-first.txt",
+        "sha256": "4e895bcc973b560a73eeb63dc9f5f4b079a316aec6062e272853669a12fc02e4"
+      }
+    ]
+  },
+  "cost": {
+    "generation_requests_delta": 4,
+    "generation_tokens_delta": 4908,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "ledger_before_sha256": "f0a6f45bd14b748005b24bac231e13b72f9ed4e409849d5b98a2f73d6f314748",
+    "ledger_after_sha256": "2d5c1e145d18b88cec19b230ae9177c298cc7dc8cd75f1ea855f956b58401da1",
+    "continuous_generation_requests": 6177,
+    "continuous_generation_tokens": 11447126,
+    "continuous_embedding_tokens": 416930,
+    "request_usage_reconciled": true,
+    "cost_scope": "all real generation; IO partial; no dollar or GPU saving inference"
+  },
+  "full_goal_status": "ACTIVE",
+  "normal_gate": "NOT_MET; R1 3/6 unchanged, remaining18 NOT_RUN; R2 is a fixed-bank diagnostic not a normal24 replacement",
+  "next": "Separate update-proposal instruction diagnosis; then scope bank-consumption diagnosis, without changing retrieval or guard concurrently."
+}

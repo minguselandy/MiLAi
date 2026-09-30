@@ -1,0 +1,187 @@
+{
+  "kind": "MILAI_V13_1_D0_NORMAL_USE",
+  "study_kind": "MILAI_V13_1_P5_W3_FIXED_ACTUAL_BANK_MECHANISM",
+  "cases": [
+    {
+      "case_id": "p5-clean",
+      "owner": "u-2af1c4d4582d16ad78f59a57",
+      "initial_world": {
+        "label_available": true
+      },
+      "messages": [
+        {
+          "message_id": "p5-clean-m0",
+          "session_id": "s1",
+          "content": "请为我预订并制作标签：物品完整引用是“资料册-阅览室”，数量2，目的地“阅览室”，包装要求“防潮套”。请保存实际工具观察的事实。若需要查看状态来处理当前任务，可以查询这笔预约；不要重复预订。",
+          "application_binding": {
+            "task_id": "p5-clean",
+            "operations": [
+              {
+                "operation_id": "reserve",
+                "tool": "reserve_and_label",
+                "args": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "never"
+              },
+              {
+                "operation_id": "inspect",
+                "tool": "get_reservation",
+                "args": {
+                  "item_key": "资料册-阅览室"
+                },
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "never"
+              },
+              {
+                "operation_id": "label",
+                "tool": "complete_label",
+                "args": {},
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "no_effect",
+                "reservation_from": "inspect",
+                "precondition": {
+                  "query_operation_id": "inspect",
+                  "status": "found",
+                  "label_status": "not_created"
+                },
+                "recovery_retry": "confirmed_no_effect_v1"
+              }
+            ],
+            "recovery": {
+              "absence_means_no_effect": true,
+              "no_deletion": true,
+              "exclusive_writer": true
+            }
+          }
+        },
+        {
+          "message_id": "p5-clean-m1",
+          "session_id": "s1",
+          "content": "请查看“资料册-阅览室”这笔预约的实际状态，完成仍获授权的未完成标签部分，并按实际观察修订已有的这笔操作记忆，保留以前的观察。不要重新预订或创建重复标签；如果当前做不到，请如实说明。",
+          "application_binding": {
+            "task_id": "p5-clean",
+            "operations": [
+              {
+                "operation_id": "inspect",
+                "tool": "get_reservation",
+                "args": {
+                  "item_key": "资料册-阅览室"
+                },
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "never"
+              },
+              {
+                "operation_id": "label",
+                "tool": "complete_label",
+                "args": {},
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "no_effect",
+                "reservation_from": "inspect",
+                "precondition": {
+                  "query_operation_id": "inspect",
+                  "status": "found",
+                  "label_status": "not_created"
+                },
+                "recovery_retry": "confirmed_no_effect_v1"
+              }
+            ],
+            "recovery": {
+              "absence_means_no_effect": true,
+              "no_deletion": true,
+              "exclusive_writer": true
+            }
+          }
+        },
+        {
+          "message_id": "p5-clean-m2",
+          "session_id": "s2",
+          "content": "请只查询“资料册-阅览室”这笔预约并读取已有操作记忆，说明当前是否存在、当前标签状态和历史操作观察的区别。不进行预订或标签创建；没有历史回执的部分请明确说未知。",
+          "application_binding": {
+            "task_id": "p5-clean",
+            "operations": [
+              {
+                "operation_id": "inspect",
+                "tool": "get_reservation",
+                "args": {
+                  "item_key": "资料册-阅览室"
+                },
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "never"
+              }
+            ],
+            "recovery": {
+              "absence_means_no_effect": true,
+              "no_deletion": true,
+              "exclusive_writer": true
+            }
+          }
+        },
+        {
+          "message_id": "p5-clean-m3-w3-mechanism",
+          "session_id": "s1",
+          "content": "请只查询“资料册-阅览室”这笔预约的实际状态，使用本次实际查询观察修订已有的这笔操作记忆，保留以前的观察与版本。不进行预订或标签创建。如果记忆没有成功保存，请如实说明。",
+          "application_binding": {
+            "task_id": "p5-clean",
+            "operations": [
+              {
+                "operation_id": "inspect",
+                "tool": "get_reservation",
+                "args": {
+                  "item_key": "资料册-阅览室"
+                },
+                "target": {
+                  "item_key": "资料册-阅览室",
+                  "quantity": 2,
+                  "destination": "阅览室",
+                  "packing": "防潮套"
+                },
+                "retry": "never"
+              }
+            ],
+            "recovery": {
+              "absence_means_no_effect": true,
+              "no_deletion": true,
+              "exclusive_writer": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "binding_boundary": "Only authority DTO based on public target and authorized capability; not delivered to Host as action plan. No expected outcome/gold/fault label. Relative dependencies define object lookup/current applicability. World schedule separate offline/driver file."
+}

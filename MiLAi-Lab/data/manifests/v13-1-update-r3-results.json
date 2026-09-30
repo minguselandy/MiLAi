@@ -1,0 +1,319 @@
+{
+  "kind": "MILAI_V13_1_UPDATE_R3_RESULT",
+  "status": "SCOPED_DEVELOPMENT_PROMPT_ONLY_UPDATE_SUCCESS",
+  "protocol_sha256": "1ebe4046e423a8936b6a0f9807f0ed2a1d6500d912ec7677f979177bab3d9fee",
+  "bank_freeze_sha256": "f688fe80d6cd6972a52857b568e5dd1ffe3b13cd71e53e8d3bbb39154489c027",
+  "initial_bank_sha256": "f999357049e963f19b8689cca571f855a8684a2f5378db5e4361bf0d8e3ce9e7",
+  "pair_freeze_sha256": "11dabad7b6448004b100a2ce6c71b64e37d0eb2efb4bcbd0a3484e8400cbb307",
+  "source_and_catalog_identical_between_arms": true,
+  "first_wire_difference": "system message only; remaining request fields and public message identical",
+  "arms": {
+    "formation": {
+      "freeze_sha256": "b22d7dc6898881d58ed0be94c908414aa6501b97da78bd062813a0cf4e61409e",
+      "prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+      "source_manifest_sha256": "cde9c29aa55b0d1dc9919ef421bb7e62c5566f689e519af25444ccf9e8b79181",
+      "tool_catalog_sha256": "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926",
+      "messages": [
+        {
+          "message_id": "update-1-m1",
+          "process_id": 3514008,
+          "status": "completed",
+          "manage_memory_arguments": [
+            {
+              "content": "饮品偏好：咖啡",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "type": "personal",
+                "category": "preferences",
+                "domain": "beverages"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "tool_names": [
+            "manage_memory"
+          ],
+          "record_count": 1,
+          "records": [
+            {
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "revision": 1,
+              "scope": {
+                "category": "preferences",
+                "domain": "beverages",
+                "type": "personal"
+              },
+              "source_ref": "src-23e91f7c0285870d2bade02786221be7f5c890e4267f06d4b1b8b6ae60d86873"
+            }
+          ],
+          "final_answer_sha256": "98d88cc601efe2aa218159cdf94048e42796636a6fc5b62690c5b63941f19fc1",
+          "final_answer_adjudication": "correct actual saved preference",
+          "generation_requests": 2,
+          "generation_tokens": 2148,
+          "execution_wall_ns": 1778739253,
+          "execution_cpu_ns": 787029182,
+          "terminal_path": "artifacts/v13-1-update-r3/formation/v13-1-update-r3/bf411db9a172dfea/message-0.json",
+          "terminal_sha256": "9fee4f4a9c4225c29d72a9d1d566ec3e72798f92132a3835bfe19940d8a6d85b",
+          "trace_sha256": "8aeade86af83c1e26fc66ebe6d238f0d39d212739b5ba076fd178e058c77eb5d"
+        }
+      ]
+    },
+    "control": {
+      "freeze_sha256": "9f26a6dddc08d72a1f68d57adc5e9fb587f6b3a19f7216f2948220c4b2137073",
+      "prompt_sha256": "edeaf06db6a0b39bc3702b9343127fa199a1702b665dbc8d2eb942b10a8eb9f4",
+      "source_manifest_sha256": "412503f53ea7ab9f47b103451c9eb74e8afcdd7e677c5f0542f62b4437d20f5c",
+      "tool_catalog_sha256": "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926",
+      "messages": [
+        {
+          "message_id": "update-1-m2",
+          "process_id": 3526129,
+          "status": "completed",
+          "manage_memory_arguments": [
+            {
+              "content": "用户更喜欢茶，不再首选咖啡。",
+              "action": "create",
+              "kind": "semantic",
+              "scope": {
+                "category": "personal_preference",
+                "domain": "beverage"
+              },
+              "basis": "user_statement"
+            }
+          ],
+          "tool_names": [
+            "manage_memory"
+          ],
+          "record_count": 2,
+          "records": [
+            {
+              "id": "136f4891-f91a-525c-841b-c527eaaffe5f",
+              "revision": 1,
+              "scope": {
+                "category": "personal_preference",
+                "domain": "beverage"
+              },
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            },
+            {
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "revision": 1,
+              "scope": {
+                "category": "preferences",
+                "domain": "beverages",
+                "type": "personal"
+              },
+              "source_ref": "src-23e91f7c0285870d2bade02786221be7f5c890e4267f06d4b1b8b6ae60d86873"
+            }
+          ],
+          "final_answer_sha256": "c7e8545cb6d22e52d838973e0c3e4ddf01796cae37509a32896a6c1582d69691",
+          "final_answer_adjudication": "correct update acknowledgement",
+          "generation_requests": 2,
+          "generation_tokens": 2163,
+          "execution_wall_ns": 1873606757,
+          "execution_cpu_ns": 934912707,
+          "terminal_path": "artifacts/v13-1-update-r3/control/v13-1-update-r3/bf411db9a172dfea/message-0.json",
+          "terminal_sha256": "e5677538ce3c0408a2d7e8ede296d6e960fc310a053fa598bbfff92168b854c2",
+          "trace_sha256": "ce5dc7e894c29ed0ecfecbb75d1fef18873fa7d5ba3d5b8e5d1db5a5d34e8096"
+        },
+        {
+          "message_id": "update-1-m3",
+          "process_id": 3526474,
+          "status": "completed",
+          "manage_memory_arguments": [
+            {
+              "content": "饮品偏好：茶",
+              "action": "update",
+              "kind": "semantic",
+              "scope": {
+                "category": "preferences",
+                "domain": "beverages",
+                "type": "personal"
+              },
+              "basis": "user_statement",
+              "target_query": "饮品偏好",
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            }
+          ],
+          "tool_names": [
+            "search_memory",
+            "read_memory",
+            "manage_memory"
+          ],
+          "record_count": 2,
+          "records": [
+            {
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "revision": 2,
+              "scope": {
+                "category": "preferences",
+                "domain": "beverages",
+                "type": "personal"
+              },
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            },
+            {
+              "id": "136f4891-f91a-525c-841b-c527eaaffe5f",
+              "revision": 1,
+              "scope": {
+                "category": "personal_preference",
+                "domain": "beverage"
+              },
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            }
+          ],
+          "final_answer_sha256": "8c2b18179fc55a2a42218e0e77bb8bcc0b58f5fc8ad175fa7264f91d80d251c1",
+          "final_answer_adjudication": "correct current tea / previous coffee answer",
+          "generation_requests": 4,
+          "generation_tokens": 8205,
+          "execution_wall_ns": 3585360441,
+          "execution_cpu_ns": 982666533,
+          "terminal_path": "artifacts/v13-1-update-r3/control/v13-1-update-r3/bf411db9a172dfea/message-1.json",
+          "terminal_sha256": "09d5f0939caf004d0986c691ad815296fa25dda1dbf8cf42fdb3ee325ce696db",
+          "trace_sha256": "c2dd30acdc52b5536f6c835837e5621a43acc12eff93ef31ea0ce269db9eeb4a"
+        }
+      ]
+    },
+    "candidate": {
+      "freeze_sha256": "1f9bb50a17110d62cff1a8264a3356fa6e2b0aecf3e290d124459cc3fc7719a6",
+      "prompt_sha256": "41394ab66fb59dd3c3045e1e7c9a4a83ac2b5ce0191f022aba031b518f22e4fe",
+      "source_manifest_sha256": "412503f53ea7ab9f47b103451c9eb74e8afcdd7e677c5f0542f62b4437d20f5c",
+      "tool_catalog_sha256": "a8e94be08e0b4114a215289a4cd612993bddf85a59b1e3b2bae3cd43a5c30926",
+      "messages": [
+        {
+          "message_id": "update-1-m2",
+          "process_id": 3531895,
+          "status": "completed",
+          "manage_memory_arguments": [
+            {
+              "content": "饮品偏好：茶",
+              "action": "update",
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "basis": "user_statement"
+            }
+          ],
+          "tool_names": [
+            "search_memory",
+            "manage_memory"
+          ],
+          "record_count": 1,
+          "records": [
+            {
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "revision": 2,
+              "scope": {},
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            }
+          ],
+          "final_answer_sha256": "4e1942e4e699c358d9422e0b3f82b77fe27f235d21e961dd9944c5ed6cc74621",
+          "final_answer_adjudication": "correct update acknowledgement",
+          "generation_requests": 3,
+          "generation_tokens": 5026,
+          "execution_wall_ns": 2751829363,
+          "execution_cpu_ns": 784056185,
+          "terminal_path": "artifacts/v13-1-update-r3/candidate/v13-1-update-r3/bf411db9a172dfea/message-0.json",
+          "terminal_sha256": "911121a31917422fe47e011a4467fc0942ce6023a72716bdbfcf34d267cd0f91",
+          "trace_sha256": "4d74a4039a2f5808a77ad5cec1bbccffd6e262bebd83181c2fec361067d8e18b"
+        },
+        {
+          "message_id": "update-1-m3",
+          "process_id": 3532320,
+          "status": "completed",
+          "manage_memory_arguments": [],
+          "tool_names": [
+            "search_memory",
+            "read_memory"
+          ],
+          "record_count": 1,
+          "records": [
+            {
+              "id": "d328e6a2-1ba4-565c-9508-cebb10a4b3cd",
+              "revision": 2,
+              "scope": {},
+              "source_ref": "src-41a9552c0771f82423b25cc60053298bf687bae57cee89eacc134ccb261b5a57"
+            }
+          ],
+          "final_answer_sha256": "8c2b18179fc55a2a42218e0e77bb8bcc0b58f5fc8ad175fa7264f91d80d251c1",
+          "final_answer_adjudication": "correct current tea / previous coffee answer",
+          "generation_requests": 3,
+          "generation_tokens": 5511,
+          "execution_wall_ns": 2262621107,
+          "execution_cpu_ns": 819575726,
+          "terminal_path": "artifacts/v13-1-update-r3/candidate/v13-1-update-r3/bf411db9a172dfea/message-1.json",
+          "terminal_sha256": "cf03ac787dd11ad079e976a65436d23983c6837f95cb6abe9a6fd144b48c848b",
+          "trace_sha256": "974710f62170135c1b50631bfb7d6b9a121003c9ca3754b20c70085db14ce05d"
+        }
+      ]
+    }
+  },
+  "adjudication": {
+    "control": {
+      "immediate_versioned_update": "FAIL: created a second record",
+      "final_answer": "PASS",
+      "eventual_original_revision2": "PASS: query triggered update from prior actual source",
+      "duplicate_current_card_remaining": true
+    },
+    "candidate": {
+      "immediate_versioned_update": "PASS: same original id revision2",
+      "final_answer": "PASS",
+      "revision1_independent_process_read": "PASS",
+      "duplicate_current_card_remaining": false
+    },
+    "reader_answer_accuracy_benefit": "NOT_OBSERVED: both final answers correct",
+    "scope_limitation": "Candidate did not propose scope on update; new current scope is empty, original scope remains in historical revision. Generic update instruction does not prove applicability metadata preservation. No silent backfill was added.",
+    "semantic_adjudicator": "Root read entire actual messages/proposals and independent public SDK current+historical reads; no model Judge/keyword-only verdict"
+  },
+  "readback": {
+    "path": "artifacts/v13-1-update-r3/separate-process-readback.json",
+    "sha256": "f11f1216735225c9e47f21c9c489395b43bf9810e20d9392079e223e352d0220"
+  },
+  "engineering": {
+    "runner_pytest": "11 passed",
+    "ruff": "pass",
+    "mypy": "1 source pass",
+    "initial_pytest": "8 failed,3 passed before repair; preserved",
+    "initial_ruff": "3 findings preserved",
+    "evidence": [
+      {
+        "path": "artifacts/v13-1-source-checks/update-r3-plumbing-mypy-final.txt",
+        "sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/update-r3-plumbing-pytest-final.txt",
+        "sha256": "8c43aa3bf95605b209aad5e4335fc1ac1fe912d10aeb20b47d5a3043c1a23cfd"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/update-r3-plumbing-pytest-first.txt",
+        "sha256": "a8da49414be1089e07a5c683afaec5520133df9071c73ef6f573dbf4461dcb61"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/update-r3-plumbing-ruff-final.txt",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      {
+        "path": "artifacts/v13-1-source-checks/update-r3-plumbing-ruff-first.txt",
+        "sha256": "720fb5ff9ad3a735fb30e116ed2797921d9f573ab99bd30f01bb6217150e224f"
+      }
+    ]
+  },
+  "cost": {
+    "generation_requests_delta": 14,
+    "generation_tokens_delta": 23053,
+    "formation_generation_requests": 2,
+    "formation_generation_tokens": 2148,
+    "embedding_tokens_delta": 0,
+    "judge_requests": 0,
+    "unknown_usage": 0,
+    "all_usage_reconciled": true,
+    "ledger_before_sha256": "2d5c1e145d18b88cec19b230ae9177c298cc7dc8cd75f1ea855f956b58401da1",
+    "ledger_after_sha256": "276a2370b6ea185b733bc11f7fa8d333a6c7bd0a2b4ab9d3d1abee57115b795c",
+    "continuous_generation_requests": 6191,
+    "continuous_generation_tokens": 11470179,
+    "continuous_embedding_tokens": 416930,
+    "dollar_or_gpu_claim": null,
+    "IO": "partial"
+  },
+  "decision": "Keep generic instruction as an opt-in engineering prompt candidate; no structure innovation or final-accuracy gain claim. Independent scope consumption follows. Original diagnostics not substituted for normal24.",
+  "normal_gate": "NOT_MET",
+  "full_goal_status": "ACTIVE"
+}

@@ -7,6 +7,7 @@ import hashlib
 import importlib
 import importlib.util
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -125,5 +126,6 @@ def test_explicit_identities_bind_all_canonical_application_sources(
                              for relative in (*APPLICATION_SOURCE_FILES, *REQUEST_SOURCE_FILES)}
     lock_path.write_text(json.dumps(lock))
     (tmp_path / APPLICATION_SOURCE_FILES[-1]).write_text("changed implementation\n")
-    with pytest.raises(ValueError, match=r"FOUNDATION_SOURCE_CHANGED:.*application/recovery"):
+    with pytest.raises(ValueError, match=re.escape(
+        "FOUNDATION_SOURCE_CHANGED:" + APPLICATION_SOURCE_FILES[-1])):
         langmem_identity.verify_foundation_lock(lock_path, config)
