@@ -504,6 +504,154 @@ def test_actual_mem0_sdk_update_get_history_with_mock_embedding_and_persistent_r
         reopened.close()
 
 
+@pytest.mark.parametrize("fail_after_open", [False, True])
+def test_p5_evidence_precedes_actual_mem0_sdk_close_on_success_and_error(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fail_after_open: bool
+) -> None:
+    import socket
+    import uuid
+
+    if importlib.util.find_spec("mem0") is None:
+        pytest.skip("Run this SDK target in the existing audited native interpreter")
+    monkeypatch.setenv("MEM0_TELEMETRY", "false")
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    monkeypatch.setenv("TRANSFORMERS_OFFLINE", "1")
+    import spacy
+
+    if not spacy.util.is_package("en_core_web_sm"):
+        pytest.skip("No installed spaCy model; downloads are forbidden")
+
+    def forbidden(*args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("REAL_NETWORK_FORBIDDEN")
+
+    monkeypatch.setattr(socket.socket, "connect", forbidden)
+    from mem0 import Memory
+    from mem0.memory.storage import SQLiteManager
+    from qdrant_client import QdrantClient, models
+
+    from milai_lab.integrations.memory.mem0 import Mem0NativeRuntime
+    from milai_lab.memory.service_tools import create_service_tools
+
+    root = old.prepared(tmp_path)
+    monkeypatch.setattr(p5, "make_model", old.local_model)
+    target = str(uuid.uuid4())
+    order: list[str] = []
+    wires: list[Any] = []
+    qpath, hpath = tmp_path / "native-qdrant", tmp_path / "native-history.sqlite"
+
+    class NativeEvidenceComposition:
+        frozen = staticmethod(p5._frozen)
+        service_options = staticmethod(lambda frozen: {})
+
+        @staticmethod
+        def open(**context: Any) -> Any:
+            stack, scope = context["stack"], context["scope"]
+
+            def respond(request: httpx.Request) -> httpx.Response:
+                wires.append(json.loads(request.read()))
+                return httpx.Response(
+                    200,
+                    json={
+                        "data": [{"index": 0, "embedding": [1.0, 0.0]}],
+                        "usage": {"total_tokens": 4},
+                    },
+                )
+
+            embed = stack.enter_context(
+                VLLMClient(
+                    VLLMConfig(base_url="http://mock/v1", model="bge-m3"),
+                    budget=context["budget"],
+                    transport=httpx.MockTransport(respond),
+                )
+            )
+            client = QdrantClient(path=str(qpath))
+            history = SQLiteManager(str(hpath))
+            # Actual SDK get_all/close and persistent Qdrant/SQLite. This finite
+            # vector facade does not exercise native extraction or ranking.
+            memory = Memory.__new__(Memory)
+            memory.db, memory._entity_store = history, None
+            memory.vector_store = SimpleNamespace(
+                client=client,
+                list=lambda filters, top_k: client.scroll(
+                    "proof",
+                    limit=top_k,
+                    scroll_filter=models.Filter(
+                        must=[
+                            models.FieldCondition(key=k, match=models.MatchValue(value=v))
+                            for k, v in filters.items()
+                        ]
+                    ),
+                ),
+            )
+            native = Mem0NativeRuntime.__new__(Mem0NativeRuntime)
+            native.memory, native.run_id, native.arm_id = memory, scope.run_id, scope.arm_id
+
+            def close() -> None:
+                order.append("close")
+                native.close()
+
+            stack.callback(close)
+            client.create_collection(
+                "proof",
+                vectors_config=models.VectorParams(
+                    size=2,
+                    distance=models.Distance.COSINE,
+                ),
+            )
+            vector = embed.embed(["Original native note"], "bge-m3")[0]
+            client.upsert(
+                "proof",
+                points=[
+                    models.PointStruct(
+                        id=target,
+                        vector=vector,
+                        payload={
+                            "data": "Original native note",
+                            "user_id": native._user_id(scope.user_id),
+                            "hash": "original",
+                            "created_at": "2026-01-01T00:00:00Z",
+                            "updated_at": "2026-01-01T00:00:00Z",
+                        },
+                    )
+                ],
+            )
+            history.add_history(target, None, "Original native note", "ADD")
+
+            def snapshot() -> dict[str, Any]:
+                order.append("snapshot")
+                return {"backend": native.snapshot(scope.user_id)}
+
+            def completed() -> None:
+                if fail_after_open:
+                    raise RuntimeError("ORIGINAL_FAILURE_AFTER_NATIVE_OPEN")
+
+            return SimpleNamespace(
+                hook=None,
+                observed=lambda source: None,
+                completed=completed,
+                tools=lambda: create_service_tools(context["service"], replay_requested=True),
+                snapshot=snapshot,
+            )
+
+    result = p5.step(root, "mechanical", 0, composition=NativeEvidenceComposition())
+    assert "evidence_error" not in result, result
+    assert order == ["snapshot", "close"]  # one readback, then one close
+    assert result["comparison"]["backend"][0]["memory"] == "Original native note"
+    assert result["status"] == ("interrupted" if fail_after_open else "completed")
+    if fail_after_open:
+        assert result["first_error"]["error"] == "ORIGINAL_FAILURE_AFTER_NATIVE_OPEN"
+    assert len(wires) == 1
+    assert result["budget"]["embedding"]["known_tokens"] == 4
+    reopened = QdrantClient(path=str(qpath))
+    history = SQLiteManager(str(hpath))
+    try:
+        assert reopened.retrieve("proof", ids=[target])[0].payload["data"] == "Original native note"
+        assert history.get_history(target)[0]["event"] == "ADD"
+    finally:
+        history.close()
+        reopened.close()
+
+
 def test_configured_common_reader_is_on_actual_wire_with_lawful_current_thread(
     tmp_path: Path,
 ) -> None:

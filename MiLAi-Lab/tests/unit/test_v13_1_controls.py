@@ -391,6 +391,58 @@ def test_archive_pending_tool_calls_are_not_summary_closed_turns(tmp_path: Path)
     assert model.client.budget.state["generation_requests"] == 1
 
 
+def test_finite_lifecycle_quality_profile_shared_writer_reader_admission_reopens(
+    tmp_path: Path,
+) -> None:
+    from milai_lab.baselines.v13_1_controls import ControlsBackend, validate_config
+
+    config = settings(tmp_path)
+    for invalid in (
+        {"max_calls_per_message": 24},
+        {"generation_cap_profile": "lifecycle_quality_24_v1", "max_calls_per_message": 25},
+        {"generation_cap_profile": "unlimited", "max_calls_per_message": 24},
+    ):
+        with pytest.raises(ValueError, match="GENERATION_CAP"):
+            validate_config({**config, **invalid})
+    config.update(generation_cap_profile="lifecycle_quality_24_v1", max_calls_per_message=24)
+    model, embed, wires = runtime(tmp_path, config, [{"answer": "Original writer result."}] * 13)
+    store_path, saver_path = tmp_path / "store.sqlite", tmp_path / "checkpoint.sqlite"
+    with (
+        SqliteStore.from_conn_string(str(store_path)) as store,
+        SqliteSaver.from_conn_string(str(saver_path)) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", "B4", "alice", config, model, embed)
+        backend.ingest("alice", "past", archive())
+        for _ in range(12):
+            backend.read_text("alice", "Current question")
+        assert (
+            model.calls_in_message == 13 and model.client.budget.state["generation_requests"] == 13
+        )
+    model.client.close()
+    reopened, embed2, wires2 = runtime(
+        tmp_path, config, [{"answer": "Original reader result."}] * 11
+    )
+    with (
+        SqliteStore.from_conn_string(str(store_path)) as store,
+        SqliteSaver.from_conn_string(str(saver_path)) as saver,
+    ):
+        backend = ControlsBackend(store, saver, "r", "B4", "alice", config, reopened, embed2)
+        assert reopened.calls_in_message == 13
+        for _ in range(11):
+            backend.read_text("alice", "Current question")
+        assert reopened.calls_in_message == 24
+        with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+            backend.read_text("alice", "Current question")
+        with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+            backend.ingest("alice", "next-past", archive("next"))
+        assert (
+            backend.snapshot("alice")["boundaries"]["next-past"]["status"]
+            == "MAINTENANCE_INCOMPLETE"
+        )
+        assert reopened.client.budget.state["generation_requests"] == 24
+    assert len(wires) + len(wires2) == 24
+
+
 def test_embedding_overcapacity_rejects_before_any_mock_http_even_with_tokenizer_truncation(
     tmp_path: Path,
 ) -> None:

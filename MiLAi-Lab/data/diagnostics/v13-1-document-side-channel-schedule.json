@@ -1,0 +1,185 @@
+{
+  "kind": "V13_1_DOCUMENT_DRIVER_ONLY_DEVELOPMENT",
+  "use": "Driver events never become model input or a fabricated SourceEvent. Document collaborator edit is an actual backend transaction, approval invalidated; subsequent actual public query captures new state.",
+  "scheduled_public_messages": 18,
+  "schedule": [
+    {
+      "case_id": "doc-clean",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-clean",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-clean",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-partial-w2",
+      "message_index": 0,
+      "window": "W2",
+      "window_tool": "manage_memory",
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-partial-w2",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "doc-partial-w2-publication-availability-before-m1",
+        "publication_available": true
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-partial-w2",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-known-no-effect",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-known-no-effect",
+      "message_index": 1,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-known-no-effect",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-unknown-happened",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-unknown-happened",
+      "message_index": 1,
+      "window": "W1",
+      "window_tool": "publish_approved_document",
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "doc-unknown-happened-publication-availability-before-m1",
+        "publication_available": true
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-unknown-happened",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-unknown-none",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-unknown-none",
+      "message_index": 1,
+      "window": "W1",
+      "window_tool": "publish_approved_document",
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": {
+        "event_id": "doc-unknown-none-publication-availability-on-reopen",
+        "publication_available": true
+      }
+    },
+    {
+      "case_id": "doc-unknown-none",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-stale-approval",
+      "message_index": 0,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-stale-approval",
+      "message_index": 1,
+      "window": "W3",
+      "window_tool": "manage_memory",
+      "hit": 1,
+      "before_start_world_event": {
+        "event_id": "doc-stale-approval-publication-availability-before-m1",
+        "publication_available": true,
+        "document_edit": {
+          "title": "场地使用通知",
+          "content": "协作者临时补充：场地使用前请先核查预约信息。"
+        }
+      },
+      "on_resume_world_event": null
+    },
+    {
+      "case_id": "doc-stale-approval",
+      "message_index": 2,
+      "window": "none",
+      "window_tool": null,
+      "hit": 1,
+      "before_start_world_event": null,
+      "on_resume_world_event": null
+    }
+  ]
+}

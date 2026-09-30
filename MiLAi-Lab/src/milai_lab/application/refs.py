@@ -61,3 +61,68 @@ def verified_reservation_ref(
         application="ApplicationWorld.reservation",
         fields=fields,
     )
+
+
+def verified_document_ref(
+    world: Any,
+    owner: str,
+    source_ref: str,
+    tool_name: str,
+    receipt: str,
+    *,
+    observer: Callable[[dict[str, Any]], None] | None = None,
+) -> VerifiedObjectRef | None:
+    from milai_lab.application.document_publication import DOCUMENT_FIELDS, DOCUMENT_NAMES
+
+    if tool_name not in DOCUMENT_NAMES:
+        return None
+    body = json.loads(receipt)
+    if (
+        not isinstance(body, dict)
+        or not body.get("document_id")
+        or not body.get("title")
+        or type(body.get("document_version")) is not int
+        or body["document_version"] < 1
+        or not isinstance(body.get("content_digest"), str)
+    ):
+        return None
+    wall, cpu = time.perf_counter_ns(), time.process_time_ns()
+    actual = json.loads(world.get_document_status(owner, body["title"]))
+    if observer is not None:
+        observer(
+            {
+                "event": "v13_ref_discovery",
+                "owner": owner,
+                "source_ref": source_ref,
+                "tool": "get_document_status",
+                "arguments": {"title": body["title"]},
+                "original_lookup_result": actual,
+                "lookup_calls": 1,
+                "wall_ns": time.perf_counter_ns() - wall,
+                "cpu_ns": time.process_time_ns() - cpu,
+                "generation_tokens": 0,
+            }
+        )
+    if (
+        actual.get("status") != "found"
+        or actual.get("document_id") != body["document_id"]
+        or not any(
+            value["document_version"] == body.get("document_version")
+            and value["content_digest"] == body.get("content_digest")
+            for value in actual.get("versions", [])
+        )
+    ):
+        return None
+    fields = {
+        key: body[key]
+        for key, dtype in DOCUMENT_FIELDS.items()
+        if type(body.get(key)) is (int if dtype == "integer" else str)
+    }
+    return VerifiedObjectRef(
+        source_ref + ":" + body["document_id"],
+        owner,
+        source_ref,
+        body["document_id"],
+        "ApplicationWorld.document",
+        fields,
+    )

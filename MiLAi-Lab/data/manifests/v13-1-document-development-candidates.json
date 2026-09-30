@@ -1,0 +1,119 @@
+{
+  "kind": "V13_1_DOCUMENT_DEVELOPMENT_PROSPECTIVE_DRAFT",
+  "status": "ROOT_INPUTS_DECLARED_SOURCE_NOT_READY_NO_HTTP",
+  "methods": [
+    {
+      "id": "B2-matched",
+      "arm": "B2",
+      "config": "configs/v13-1-document-quality-matched.json",
+      "role": "Document development quality24 matched cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "B6-matched",
+      "arm": "B6",
+      "config": "configs/v13-1-document-quality-matched.json",
+      "role": "Document development quality24 matched cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "mem0_trace_equal-matched",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-document-quality-matched.json",
+      "role": "Document development quality24 matched cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "field_grounded-matched",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-document-quality-matched.json",
+      "role": "Document development quality24 matched cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "B2-native",
+      "arm": "B2",
+      "config": "configs/v13-1-document-quality-native.json",
+      "role": "Document development quality24 native cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "B6-native",
+      "arm": "B6",
+      "config": "configs/v13-1-document-quality-native.json",
+      "role": "Document development quality24 native cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "mem0_trace_equal-native",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-document-quality-native.json",
+      "role": "Document development quality24 native cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "field_grounded-native",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-document-quality-native.json",
+      "role": "Document development quality24 native cadence; ADD-only Mem0 unchanged"
+    },
+    {
+      "id": "field_grounded-projection-off",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-document-quality-projection-off.json",
+      "role": "Finite persisted/delivered fields view ablation only; same validator, sources, revisions, guards"
+    },
+    {
+      "id": "mem0_trace_equal-manual-update",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-document-quality-mem0-manual.json",
+      "role": "Separate public manual native UPDATE extension; does not replace ADD-only extractor"
+    },
+    {
+      "id": "B2-budget12",
+      "arm": "B2",
+      "config": "configs/v13-1-document-budget12-matched.json",
+      "role": "Separate joint generation12 budget, same all-arms; not original quality24 run repaired"
+    },
+    {
+      "id": "B6-budget12",
+      "arm": "B6",
+      "config": "configs/v13-1-document-budget12-matched.json",
+      "role": "Separate joint generation12 budget, same all-arms; not original quality24 run repaired"
+    },
+    {
+      "id": "mem0_trace_equal-budget12",
+      "arm": "mem0_trace_equal",
+      "config": "configs/v13-1-document-budget12-matched.json",
+      "role": "Separate joint generation12 budget, same all-arms; not original quality24 run repaired"
+    },
+    {
+      "id": "field_grounded-budget12",
+      "arm": "field_grounded",
+      "config": "configs/v13-1-document-budget12-matched.json",
+      "role": "Separate joint generation12 budget, same all-arms; not original quality24 run repaired"
+    }
+  ],
+  "fixture_path": "data/fixtures/v13-1-document-lifecycle-development.json",
+  "fixture_sha256": "b333be571370489049c18dcb93f4d7f6fff1402a83f53ffc7daaff71c84de018",
+  "schedule_path": "data/diagnostics/v13-1-document-side-channel-schedule.json",
+  "schedule_sha256": "4d29746426e2b4fa810b55ecb34bbfa6c7404e8c8b410782c3bd7a511a696a24",
+  "cases": [
+    "doc-clean",
+    "doc-partial-w2",
+    "doc-known-no-effect",
+    "doc-unknown-happened",
+    "doc-unknown-none",
+    "doc-stale-approval"
+  ],
+  "configuration_sha256": {
+    "configs/v13-1-document-budget12-matched.json": "8a063238ba5e1ba9128c59ad0f48402259eac0c6555d2f1e5f3637e2e8150456",
+    "configs/v13-1-document-quality-matched.json": "28537ddd175522dfec05d0f2881554e0689ac24b91943dea98b20fe5acffd448",
+    "configs/v13-1-document-quality-mem0-manual.json": "eb5e1104a5bf51c9cf5d381d250b587a1faf7a61871ba3d6d0fc076193b3b6cf",
+    "configs/v13-1-document-quality-native.json": "1ee09c76105316a2a56ea05f60314f71f89f9396a0943ada2128cb326412e474",
+    "configs/v13-1-document-quality-projection-off.json": "933759fb425cec6b5914eb59c843b17e86479b030061dedad18b1bfe314158f6"
+  },
+  "planned_development_trajectories": 84,
+  "primary_matched_trajectories": 24,
+  "planned_public_messages": 252,
+  "crash_rule": "One fresh resume only on hard_exit_armed with actual SIGKILL. Original public-message24/12 admission persists across reopen. W3 only witnessed actual durable UPDATE, never ADD/READ/no-change; native post-response maintenance remains NOT_REACHED if window unsupported. Ordinary semantic/provider/capacity errors remain first terminal with later messages NOT_RUN. No repeated models to repair output.",
+  "classification": "Six newly constructed but now development-exposed document stories; second substantive workflow. These84 method trajectories are not new Pilot-L12 or formal60 independent bases. Native closed-store first paid failures from prior reservation cohort remain original.",
+  "models": "Existing first Qwen family/BGE only. Combined generation+embedding concurrency1; every native/Host/writer/failed/recovery cost in original ledger. Official/independent Judge and second-family unavailable and remain required gaps.",
+  "quality_gate": "No all-cases-perfect gate. Freeze complete Source/CLI/environment/config/input/protocol before actual HTTP; preserve first errors.",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO",
+  "root_first_authority_failure": "artifacts/v13-1-document-first-authority-operation-change/first-error.json"
+}

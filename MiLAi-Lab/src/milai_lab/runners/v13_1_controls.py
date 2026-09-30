@@ -91,6 +91,14 @@ def _parameters(config: dict[str, Any]) -> dict[str, Any]:
         "host_capacity": capacity.identity,
         "embedding_capacity": embedding.identity,
         "budget_limits": limits,
+        **(
+            {
+                "generation_cap_profile": config["generation_cap_profile"],
+                "effective_generation_cap": config["max_calls_per_message"],
+            }
+            if "generation_cap_profile" in config
+            else {}
+        ),
         "effective_controls": config["controls"],
         "summary_prompt_sha256": hashlib.sha256(SUMMARY_PROMPT.encode()).hexdigest(),
         "prompt_sha256": {

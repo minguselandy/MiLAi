@@ -68,6 +68,20 @@ def _summary_turns(
     return completed, unclosed
 
 
+def generation_cap(config: dict[str, Any]) -> int:
+    cap = config.get("max_calls_per_message", 12)
+    if "generation_cap_profile" in config:
+        if (
+            config["generation_cap_profile"] != "lifecycle_quality_24_v1"
+            or type(cap) is not int
+            or cap != 24
+        ):
+            raise ValueError("CONTROL_GENERATION_CAP_PROFILE_INVALID")
+    elif type(cap) is not int or not 1 <= cap <= 12:
+        raise ValueError("CONTROL_GENERATION_CAP_INVALID")
+    return int(cap)
+
+
 def validate_config(config: dict[str, Any]) -> None:
     controls = config["controls"]
     if type(controls["material_max_tokens"]) is not int or controls["material_max_tokens"] < 1:
@@ -91,13 +105,12 @@ def validate_config(config: dict[str, Any]) -> None:
     ):
         if type(config[name]) is not str or not config[name].strip():
             raise ValueError("CONTROL_PROMPT_INVALID:" + name)
-    cap = config.get("max_calls_per_message", 12)
-    if type(cap) is not int or not 1 <= cap <= 12:
-        raise ValueError("CONTROL_GENERATION_CAP_INVALID")
+    generation_cap(config)
 
 
 def receipt_projection(records: list[dict[str, Any]]) -> dict[str, Any]:
     objects: dict[str, Any] = {}
+    documents: dict[str, Any] = {}
     unknown: list[dict[str, Any]] = []
     for row in records:
         if row["role"] != "tool":
@@ -115,6 +128,34 @@ def receipt_projection(records: list[dict[str, Any]]) -> dict[str, Any]:
             continue
         native = body.get("receipt", body)
         tool = row.get("name", row.get("origin"))
+        if (
+            tool
+            in {
+                "create_or_update_draft",
+                "approve_document_version",
+                "publish_approved_document",
+                "get_document_status",
+            }
+            and isinstance(native, dict)
+            and type(native.get("document_id")) is str
+        ):
+            from milai_lab.contracts.memory import RECEIPT_PROFILES
+
+            fields = {
+                key: native[key]
+                for key, dtype in RECEIPT_PROFILES["document_publication_v1"]["fields"].items()
+                if type(native.get(key)) is (int if dtype == "integer" else str)
+            }
+            observed = {
+                "source_id": event_id(row),
+                "fields": fields,
+                "original_record": row,
+                "field_path_prefix": "receipt." if "receipt" in body else "",
+            }
+            projected = documents.setdefault(native["document_id"], {"history": []})
+            projected["history"].append(observed)
+            projected["latest_observation"] = observed
+            continue
         if (
             tool not in {"reserve_and_label", "complete_label", "get_reservation"}
             or not isinstance(native, dict)
@@ -136,6 +177,7 @@ def receipt_projection(records: list[dict[str, Any]]) -> dict[str, Any]:
         projected["latest_observation"] = observed
     return {
         "objects": objects,
+        **({"documents": documents} if documents else {}),
         "unknown": unknown,
         "contract": "original_observations_only; no live applicability or object authorization",
     }
@@ -492,6 +534,12 @@ class ControlsBackend:
                             u for u in state["projection"]["unknown"] if u["source_id"] == source_id
                         ],
                     }
+                    if "documents" in state["projection"]:
+                        proposed["observed_projection"]["documents"] = {
+                            key: obj
+                            for key, obj in state["projection"]["documents"].items()
+                            if any(h["source_id"] == source_id for h in obj["history"])
+                        }
                 if self._fits(self._material([*rows, proposed])):
                     rows.append(proposed)
                 else:

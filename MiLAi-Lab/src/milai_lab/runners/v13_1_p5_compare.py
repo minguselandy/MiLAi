@@ -23,7 +23,7 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 
-from milai_lab.application.tools import BUSINESS_SCHEMAS
+from milai_lab.application.tools import BUSINESS_SCHEMAS as BUSINESS_SCHEMAS
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import ControlsBackend, event_id, receipt_projection
 from milai_lab.contracts.scope import FoundationScope
@@ -74,6 +74,11 @@ def _parameters(config: dict[str, Any], arm: str) -> dict[str, Any]:
     return {
         **parameters,
         "arm": arm,
+        **(
+            {"application_workflow": p5.application_workflow(config)}
+            if "application_workflow" in config
+            else {}
+        ),
         "cadence": config["cadence"],
         "operational_projection": projection,
         "mem0_update_interface": native_interface,
@@ -107,7 +112,7 @@ def prepare(fixture: Path, config: Path, root: Path, arm: str) -> dict[str, Any]
     if arm != "field_grounded":
         frozen["tool_catalog"] = [
             *map(convert_to_openai_tool, _backend_tools(None)),
-            *BUSINESS_SCHEMAS,
+            *p5.business_schemas(settings),
         ]
         frozen["tool_catalog_sha256"] = digest(frozen["tool_catalog"])
     target = root / "input-freeze.json"
@@ -765,6 +770,8 @@ def main() -> None:
     parser.add_argument("--window-tool")
     parser.add_argument("--hit", type=int, default=1)
     parser.add_argument("--label-available", choices=("true", "false"))
+    parser.add_argument("--publication-available", choices=("true", "false"))
+    parser.add_argument("--document-edit-file", type=Path)
     parser.add_argument("--world-event-id")
     args = parser.parse_args()
     if args.command == "prepare":
@@ -786,6 +793,12 @@ def main() -> None:
         hit=args.hit,
         world_event_id=args.world_event_id,
         label_available=None if args.label_available is None else args.label_available == "true",
+        publication_available=None
+        if args.publication_available is None
+        else args.publication_available == "true",
+        document_edit=None
+        if args.document_edit_file is None
+        else read_json(args.document_edit_file),
     )
     print(json.dumps({key: result.get(key) for key in ("status", "error", "attempt_id")}))
     if result["status"] != "completed":

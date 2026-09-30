@@ -14,6 +14,7 @@ from langchain_core.tools import (
     StructuredTool,
     create_schema_from_function,
 )
+from pydantic import BaseModel, create_model
 
 from milai_lab.memory.service import MemoryService
 
@@ -23,6 +24,7 @@ def create_service_tools(
 ) -> tuple[BaseTool, ...]:
     if type(replay_requested) is not bool:
         raise ValueError("V13_MEMORY_REPLAY_REQUESTED_INVALID")
+
     def session_for(config: RunnableConfig) -> str:
         cfg = config.get("configurable", {})
         if cfg.get("user_id") != service.owner or not cfg.get("v13_session"):
@@ -191,26 +193,56 @@ def create_service_tools(
         coroutine=amanage_memory,
         name="manage_memory",
         args_schema=(
-            None if explicit else create_schema_from_function(
-                "manage_memory", manage_memory,
+            None
+            if explicit
+            else create_schema_from_function(
+                "manage_memory",
+                manage_memory,
                 filter_args=["run_manager", "callbacks", "config", "content_format"],
             )
         ),
     )
-    if explicit:
-        manage_tool.description += (
-            "\n\nExplicit receipt contract: for tool_observation bound to an actual reservation "
-            "receipt, propose both status and label_status as strings in fields. Declare "
-            "content_format='receipt_json_v1' and provide content as a JSON object with "
-            "literal string status and label_status, plus optional notes (string); no other "
-            "keys. Missing claims or undeclared/malformed bodies are rejected. Field-grounded "
-            "mode compares fields to the original observed receipt and body literals to fields; "
-            "Ref-only mode checks refs/schema while claims remain unchecked. Never fill or "
-            "repair a rejected proposal silently. Only these two finite claims can be matched; "
-            "notes, free prose and quotations are always unchecked. This contract does not "
-            "assert current applicability of historical observations. Ordinary user preferences "
-            "need no receipt JSON. Source/object refs are discovered internally when omitted."
+    if service.receipt_profile == "document_publication_v1":
+        base_schema = manage_tool.args_schema
+        assert isinstance(base_schema, type) and issubclass(base_schema, BaseModel)
+        manage_tool.args_schema = create_model(
+            "manage_memory", __base__=base_schema, fields=(dict[str, Any] | None, None)
         )
+        manage_tool.description = manage_tool.description.replace(
+            "only status and label_status can be receipt matched.",
+            "only the declared finite document receipt fields can be matched; "
+            "document_version is an integer.",
+        )
+    if explicit:
+        if service.receipt_profile == "document_publication_v1":
+            manage_tool.description += (
+                "\n\nExplicit document receipt contract: tool_observation bound to a real document "
+                "receipt requires exactly these fields: "
+                + ", ".join(service.receipt_fields)
+                + ". document_version is an integer; other fields are literal strings. Declare "
+                "content_format='receipt_json_v1' with the same eight literal JSON fields and "
+                "optional notes:string only. Field-grounded mode compares the original observed "
+                "receipt and body literals; Ref-only claims remain unchecked. Never repair a "
+                "rejected proposal. Notes/prose/quotations stay unchecked; no live applicability "
+                "claim. Refs are discovered internally. Ordinary preferences need no receipt JSON."
+            )
+        else:
+            manage_tool.description += (
+                "\n\nExplicit receipt contract: for tool_observation bound to an actual "
+                "reservation "
+                "receipt, propose both status and label_status as strings in fields. Declare "
+                "content_format='receipt_json_v1' and provide content as a JSON object with "
+                "literal string status and label_status, plus optional notes (string); no other "
+                "keys. Missing claims or undeclared/malformed bodies are rejected. Field-grounded "
+                "mode compares fields to the original observed receipt and body literals "
+                "to fields; "
+                "Ref-only mode checks refs/schema while claims remain unchecked. Never fill or "
+                "repair a rejected proposal silently. Only these two finite claims can be matched; "
+                "notes, free prose and quotations are always unchecked. This contract does not "
+                "assert current applicability of historical observations. Ordinary user "
+                "preferences "
+                "need no receipt JSON. Source/object refs are discovered internally when omitted."
+            )
     return (
         manage_tool,
         *(

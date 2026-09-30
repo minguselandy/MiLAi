@@ -25,17 +25,30 @@ from tempfile import TemporaryDirectory
 from typing import Any, cast
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
+from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.prebuilt.tool_node import ToolCallRequest
 from langgraph.store.sqlite import SqliteStore
 from langgraph.types import Command
 
+from milai_lab.application.document_publication import (
+    DOCUMENT_MUTATIONS,
+    DOCUMENT_NAMES,
+    DocumentPublicationWorld,
+    document_schemas,
+)
 from milai_lab.application.journal import BusinessActionJournal
 from milai_lab.application.recovery import recover_pending_application_call
-from milai_lab.application.refs import verified_reservation_ref
-from milai_lab.application.tools import BUSINESS_NAMES, _business_tools
+from milai_lab.application.refs import verified_document_ref, verified_reservation_ref
+from milai_lab.application.tools import (
+    BUSINESS_NAMES,
+    BUSINESS_SCHEMAS,
+    _business_tools,
+    document_business_tools,
+)
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import build_agent
+from milai_lab.baselines.v13_1_controls import generation_cap
 from milai_lab.contracts.memory import GroundingMode
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
@@ -117,6 +130,36 @@ def _binding(frozen: dict[str, Any], case: dict[str, Any], index: int) -> dict[s
     }
 
 
+def application_workflow(settings: dict[str, Any]) -> str:
+    value = settings.get("application_workflow", "reservation_v1")
+    if type(value) is not str or value not in {"reservation_v1", "document_publication_v1"}:
+        raise ValueError("V13_P5_APPLICATION_WORKFLOW_INVALID")
+    return str(value)
+
+
+def business_schemas(settings: dict[str, Any]) -> list[dict[str, Any]]:
+    if application_workflow(settings) == "document_publication_v1":
+        return document_schemas()
+    return BUSINESS_SCHEMAS
+
+
+def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[dict[str, Any]]:
+    contract = d0._receipt_contract(settings)
+    if application_workflow(settings) == "reservation_v1":
+        return d0._catalog(root, mode, receipt_contract=contract)
+    with SqliteStore.from_conn_string(":memory:") as store:
+        service = MemoryService(
+            store,
+            ("schema", "owner"),
+            "owner",
+            root / "memory.lock",
+            mode=mode,
+            receipt_contract=contract,
+            receipt_profile="document_publication_v1",
+        )
+        return [*map(convert_to_openai_tool, create_service_tools(service)), *document_schemas()]
+
+
 def prepare(
     fixture_path: Path, config_path: Path, root: Path, mode: GroundingMode = "field_grounded"
 ) -> dict[str, Any]:
@@ -127,9 +170,13 @@ def prepare(
     if mode not in {"ref_only", "field_grounded"}:
         raise ValueError("V13_P5_MODE_INVALID")
     VLLMConfig(**settings["host"])
-    cap = settings.get("max_calls_per_message", 12)
-    if type(cap) is not int or not 1 <= cap <= 12:
-        raise ValueError("V13_P5_GENERATION_CAP_INVALID")
+    try:
+        cap = generation_cap(settings)
+    except ValueError:
+        if "generation_cap_profile" not in settings:
+            raise ValueError("V13_P5_GENERATION_CAP_INVALID") from None
+        raise
+    workflow = application_workflow(settings)
     if not isinstance(settings.get("capacity"), dict):
         raise ValueError("V13_P5_CAPACITY_REQUIRED")
     budget_path = Path(settings["budget_path"])
@@ -156,8 +203,14 @@ def prepare(
         "memory_retrieval": "raw_keyword",
         "semantic_evidence": False,
         "runtime_sdk": _sdk(),
-        "tool_catalog": d0._catalog(root, mode, receipt_contract=contract),
+        "tool_catalog": _catalog(root, mode, settings),
     }
+    if workflow != "reservation_v1":
+        frozen["application_workflow"] = workflow
+        frozen["receipt_profile"] = workflow
+    if "generation_cap_profile" in settings:
+        frozen["generation_cap_profile"] = settings["generation_cap_profile"]
+        frozen["effective_generation_cap"] = cap
     seen: set[str] = set()
     with TemporaryDirectory() as temporary:
         for case in fixture["cases"]:
@@ -173,8 +226,9 @@ def prepare(
             seen.add(case["case_id"])
             journal = BusinessActionJournal(
                 Path(temporary) / (str(len(seen)) + ".json"),
-                BUSINESS_NAMES,
+                DOCUMENT_NAMES if workflow == "document_publication_v1" else BUSINESS_NAMES,
                 application_protection=True,
+                application_workflow=workflow,
             )
             message_ids: set[str] = set()
             for index, public in enumerate(case["messages"]):
@@ -284,6 +338,8 @@ def step(
     attempt_id: str = "start",
     label_available: bool | None = None,
     world_event_id: str | None = None,
+    publication_available: bool | None = None,
+    document_edit: dict[str, str] | None = None,
     composition: Any = None,
 ) -> dict[str, Any]:
     """One process/attempt. Hard kill intentionally bypasses cleanup and final delivery."""
@@ -298,7 +354,7 @@ def step(
     receipt_path = resource_root / f"attempt-{attempt_id}.json"
     if receipt_path.exists():
         raise ValueError("V13_P5_ATTEMPT_ALREADY_RECORDED")
-    controls = {
+    controls: dict[str, Any] = {
         "phase": phase,
         "window": window,
         "window_tool": window_tool,
@@ -306,6 +362,8 @@ def step(
         "label_available": label_available,
         "world_event_id": world_event_id,
     }
+    if publication_available is not None or document_edit is not None:
+        controls.update(publication_available=publication_available, document_edit=document_edit)
     output: dict[str, Any] = {
         "case_id": case_id,
         "message_index": message_index,
@@ -433,12 +491,19 @@ def step(
             raise ValueError("V13_P5_PHASE_OR_WINDOW_INVALID")
         if type(hit) is not int or hit < 1 or (phase == "resume" and window != "none"):
             raise ValueError("V13_P5_WINDOW_CONTROL_INVALID")
-        if (label_available is None) != (world_event_id is None) or (
-            label_available is not None
+        if (
+            publication_available is None
+            and document_edit is None
             and (
-                type(label_available) is not bool
-                or type(world_event_id) is not str
-                or not world_event_id
+                (label_available is None) != (world_event_id is None)
+                or (
+                    label_available is not None
+                    and (
+                        type(label_available) is not bool
+                        or type(world_event_id) is not str
+                        or not world_event_id
+                    )
+                )
             )
         ):
             raise ValueError("V13_P5_WORLD_EVENT_INVALID")
@@ -447,9 +512,19 @@ def step(
         if not 0 <= message_index < len(case["messages"]):
             raise ValueError("V13_P5_MESSAGE_INDEX_INVALID")
         public, settings = case["messages"][message_index], frozen["config"]
+        workflow = application_workflow(settings)
+        document_mode = workflow == "document_publication_v1"
+        names = DOCUMENT_NAMES if document_mode else BUSINESS_NAMES
+        if publication_available is not None or document_edit is not None:
+            if not document_mode or label_available is not None or not world_event_id:
+                raise ValueError("V13_P5_DOCUMENT_EVENT_INVALID")
+        if document_mode and label_available is not None:
+            raise ValueError("V13_P5_RESERVATION_EVENT_WRONG_WORKFLOW")
         scope = FoundationScope(
-            frozen["run_id"], frozen.get("scope_arm", frozen["mode"]),
-            case["owner"], public["session_id"]
+            frozen["run_id"],
+            frozen.get("scope_arm", frozen["mode"]),
+            case["owner"],
+            public["session_id"],
         )
         config = scope.config()
         config["configurable"]["v13_session"] = scope.episode_id
@@ -461,7 +536,12 @@ def step(
             source_sha256=frozen["source_sha256"],
             fixture_sha256=frozen["fixture_sha256"],
         )
-        with ExitStack() as stack:
+        with ExitStack() as finalizers:
+            # Evidence owns the outer lifetime. All current and subsequently
+            # registered SDK/client/Store resources remain live for this one
+            # readback, including when initialization or execution raises.
+            stack = finalizers.enter_context(ExitStack())
+            finalizers.callback(evidence_before_close)
             lock = stack.enter_context((root / "execution.lock").open("a+b"))
             fcntl.flock(lock, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**frozen["budget_limits"]), Path(settings["budget_path"]))
@@ -472,15 +552,37 @@ def step(
             saver = stack.enter_context(
                 SqliteSaver.from_conn_string(str(resource_root / "checkpoints.sqlite"))
             )
-            world = ApplicationWorld(
-                resource_root / "world.sqlite",
-                case.get("initial_world", {}).get("label_available", True),
+            world = (
+                DocumentPublicationWorld(
+                    resource_root / "world.sqlite",
+                    case.get("initial_world", {}).get("publication_available", True),
+                )
+                if document_mode
+                else ApplicationWorld(
+                    resource_root / "world.sqlite",
+                    case.get("initial_world", {}).get("label_available", True),
+                )
             )
             active["world"] = world
             stack.callback(world.close)
-            stack.callback(evidence_before_close)
             if world_event_id is not None:
-                world.set_label_available(world_event_id, cast(bool, label_available))
+                if document_mode:
+                    event = cast(DocumentPublicationWorld, world).apply_backend_event(
+                        world_event_id,
+                        available=publication_available,
+                        edit=document_edit,
+                        owner=scope.user_id,
+                    )
+                    trace(
+                        {
+                            "event": "v13_p5_backend_event",
+                            "event_id": world_event_id,
+                            "actual": event,
+                        }
+                    )
+                else:
+                    world.set_label_available(world_event_id, cast(bool, label_available))
+            if world_event_id is not None and not document_mode:
                 trace(
                     {
                         "event": "v13_p5_backend_event",
@@ -496,12 +598,15 @@ def step(
                 mode=frozen["mode"],
                 receipt_contract=d0._receipt_contract(settings),
                 observer=trace,
+                **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
                 **({} if composition is None else composition.service_options(frozen)),
             )
             active["service"] = service
 
             def response_hook(row: dict[str, Any], response: ToolMessage) -> None:
-                if row["name"] in {"reserve_and_label", "complete_label"}:
+                if row["name"] in (
+                    DOCUMENT_MUTATIONS if document_mode else {"reserve_and_label", "complete_label"}
+                ):
                     crash_at(
                         "W1",
                         row["name"],
@@ -513,9 +618,10 @@ def step(
 
             journal = BusinessActionJournal(
                 resource_root / "business-journal.json",
-                BUSINESS_NAMES,
+                names,
                 application_protection=True,
                 response_hook=response_hook,
+                application_workflow=workflow,
             )
             active["journal"] = journal
             journal.bind_request(_binding(frozen, case, message_index))
@@ -534,9 +640,8 @@ def step(
                 body = str(response.content)
                 identity = str(generating.id) + ":" + call_id
                 source_ref = service.event_id(scope.episode_id, identity, "tool")
-                ref = verified_reservation_ref(
-                    world, scope.user_id, source_ref, call["name"], body, observer=trace
-                )
+                binder = verified_document_ref if document_mode else verified_reservation_ref
+                ref = binder(world, scope.user_id, source_ref, call["name"], body, observer=trace)
                 receipt = service.capture_tool(scope.episode_id, identity, call["name"], body, ref)
                 if not receipt["ok"]:
                     raise ValueError("V13_P5_TOOL_SOURCE_CAPTURE_REJECTED:" + receipt["status"])
@@ -572,7 +677,7 @@ def step(
                 if name == "manage_memory" and captured:
                     crash_at("W2", name, {"requested_call": request.tool_call})
                 response = journal(request, execute)
-                if name in BUSINESS_NAMES and isinstance(response, ToolMessage):
+                if name in names and isinstance(response, ToolMessage):
                     response = capture(request, response)
                 if name == "manage_memory" and isinstance(response, ToolMessage):
                     receipt = json.loads(str(response.content))
@@ -583,9 +688,14 @@ def step(
                             "receipt": receipt,
                         }
                     )
-                    if (receipt.get("ok") and receipt.get("status") == "committed"
-                            and (composition is None or
-                                 request.tool_call["args"].get("action") == "update")):
+                    if (
+                        receipt.get("ok")
+                        and receipt.get("status") == "committed"
+                        and (
+                            composition is None
+                            or request.tool_call["args"].get("action") == "update"
+                        )
+                    ):
                         crash_at(
                             "W3", name, {"requested_call": request.tool_call, "receipt": receipt}
                         )
@@ -596,19 +706,32 @@ def step(
             comparison = None
             if composition is not None:
                 comparison = active["comparison"] = composition.open(
-                    frozen=frozen, service=service, store=store, saver=saver,
-                    scope=scope, model=model, budget=budget, trace=trace,
-                    resource_root=resource_root, stack=stack, crash_at=crash_at,
+                    frozen=frozen,
+                    service=service,
+                    store=store,
+                    saver=saver,
+                    scope=scope,
+                    model=model,
+                    budget=budget,
+                    trace=trace,
+                    resource_root=resource_root,
+                    stack=stack,
+                    crash_at=crash_at,
                     wrapper=wrapper,
                 )
             agent = build_agent(
                 model,
                 store,
                 saver,
-                _business_tools(world, scope.user_id),
+                document_business_tools(world, scope.user_id)
+                if document_mode
+                else _business_tools(world, scope.user_id),
                 business_call_wrapper=wrapper,
-                memory_tools=(create_service_tools(service, replay_requested=True)
-                              if comparison is None else comparison.tools()),
+                memory_tools=(
+                    create_service_tools(service, replay_requested=True)
+                    if comparison is None
+                    else comparison.tools()
+                ),
                 system_prompt=d0._system_prompt(settings),
                 benchmark_view_hook=None if comparison is None else comparison.hook,
             )
@@ -654,7 +777,12 @@ def step(
             model.begin_public_message(public["message_id"], checkpoint_calls=checkpoint_calls)
             if phase == "resume":
                 recover_pending_application_call(
-                    agent, scope, journal, world, _RecoveryCapture(capture, trace)
+                    agent,
+                    scope,
+                    journal,
+                    world,
+                    _RecoveryCapture(capture, trace),
+                    application_workflow=workflow,
                 )
                 state = agent.get_state(config)
                 if comparison is not None:

@@ -23,7 +23,12 @@ from typing import Any, cast
 
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.contracts.memory import GroundingMode, SourceEvent, VerifiedObjectRef
+from milai_lab.contracts.memory import (
+    RECEIPT_PROFILES,
+    GroundingMode,
+    SourceEvent,
+    VerifiedObjectRef,
+)
 
 
 def _json(value: Any) -> str:
@@ -118,6 +123,7 @@ class MemoryService:
         mode: GroundingMode = "field_grounded",
         receipt_contract: str = "optional",
         operational_projection: str = "enabled",
+        receipt_profile: str = "reservation_v1",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -129,8 +135,13 @@ class MemoryService:
         self.store, self.namespace, self.owner = store, namespace, owner
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
+        if type(receipt_profile) is not str or receipt_profile not in RECEIPT_PROFILES:
+            raise ValueError("V13_MEMORY_RECEIPT_PROFILE_INVALID")
+        self.receipt_profile = receipt_profile
+        self.receipt_fields: dict[str, str] = RECEIPT_PROFILES[receipt_profile]["fields"]
         if type(operational_projection) is not str or operational_projection not in {
-            "enabled", "disabled"
+            "enabled",
+            "disabled",
         }:
             raise ValueError("V13_OPERATIONAL_PROJECTION_INVALID")
         self.operational_projection = operational_projection
@@ -268,27 +279,23 @@ class MemoryService:
                 result.append({**event, "formation_status": "formed" if formed else "pending"})
             return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
 
-    def _uses_explicit_receipt(
-        self, proposal: dict[str, Any], source: dict[str, Any]
-    ) -> bool:
+    def _uses_explicit_receipt(self, proposal: dict[str, Any], source: dict[str, Any]) -> bool:
         ref = source.get("object_ref")
         return (
             self.receipt_contract == "explicit_receipt_v1"
             and proposal["basis"] == "tool_observation"
             and ref is not None
-            and ref.get("application") == "ApplicationWorld.reservation"
+            and ref.get("application") == RECEIPT_PROFILES[self.receipt_profile]["application"]
         )
 
-    def _receipt_claims(
-        self, proposal: dict[str, Any]
-    ) -> tuple[str | None, dict[str, Any] | None]:
-        required = {"status", "label_status"}
+    def _receipt_claims(self, proposal: dict[str, Any]) -> tuple[str | None, dict[str, Any] | None]:
+        required = set(self.receipt_fields)
         fields = proposal["fields"]
         if not required <= fields.keys():
             return "receipt_fields_required", None
         if fields.keys() != required:
             return "unsupported_operational_field", None
-        if not all(isinstance(value, str) for value in fields.values()):
+        if not all(self._field_type(key, value) for key, value in fields.items()):
             return "invalid_receipt_fields", None
         if proposal.get("content_format") != "receipt_json_v1":
             return "receipt_content_format_required", None
@@ -300,11 +307,16 @@ class MemoryService:
             not isinstance(body, dict)
             or not required <= body.keys()
             or not body.keys() <= required | {"notes"}
-            or not all(isinstance(body[key], str) for key in required)
+            or not all(self._field_type(key, body[key]) for key in required)
             or ("notes" in body and not isinstance(body["notes"], str))
         ):
             return "receipt_body_invalid_schema", None
         return None, body
+
+    def _field_type(self, key: str, value: Any) -> bool:
+        return (
+            type(value) is int if self.receipt_fields[key] == "integer" else isinstance(value, str)
+        )
 
     def _validate(self, proposal: dict[str, Any]) -> tuple[str | None, dict[str, Any] | None]:
         if (
@@ -350,12 +362,12 @@ class MemoryService:
         if self.mode == "field_grounded" and proposal["fields"]:
             assert ref is not None
             for field, value in proposal["fields"].items():
-                if field not in {"status", "label_status"}:
+                if field not in self.receipt_fields:
                     return "unsupported_operational_field", source
-                if not isinstance(value, str) or ref["fields"].get(field) != value:
+                if not self._field_type(field, value) or ref["fields"].get(field) != value:
                     return "field_conflict:" + field, source
             if body is not None:
-                for field in ("status", "label_status"):
+                for field in self.receipt_fields:
                     if body[field] != proposal["fields"][field]:
                         return "receipt_body_conflict:" + field, source
         return None, source
@@ -507,7 +519,7 @@ class MemoryService:
                 finite_claims = {
                     "receipt_contract": self.receipt_contract,
                     "content_format": raw["content_format"],
-                    "receipt_claim_fields": ["status", "label_status"],
+                    "receipt_claim_fields": list(self.receipt_fields),
                     "body_fields_verification": "matches_proposed_fields"
                     if self.mode == "field_grounded"
                     else "unchecked",

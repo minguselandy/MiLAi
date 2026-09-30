@@ -7,6 +7,26 @@ from typing import Any, Literal, NotRequired, TypedDict
 
 GroundingMode = Literal["ref_only", "field_grounded"]
 
+RECEIPT_PROFILES: dict[str, dict[str, Any]] = {
+    "reservation_v1": {
+        "application": "ApplicationWorld.reservation",
+        "fields": {"status": "string", "label_status": "string"},
+    },
+    "document_publication_v1": {
+        "application": "ApplicationWorld.document",
+        "fields": {
+            "status": "string",
+            "document_version": "integer",
+            "content_digest": "string",
+            "approval_status": "string",
+            "approved_digest": "string",
+            "publication_status": "string",
+            "published_digest": "string",
+            "audience": "string",
+        },
+    },
+}
+
 
 @dataclass(frozen=True)
 class VerifiedObjectRef:
@@ -17,7 +37,7 @@ class VerifiedObjectRef:
     source_ref: str
     external_id: str
     application: str
-    fields: dict[str, str]
+    fields: dict[str, str | int]
 
 
 class SourceEvent(TypedDict):
