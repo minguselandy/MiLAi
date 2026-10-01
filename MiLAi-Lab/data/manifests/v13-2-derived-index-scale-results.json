@@ -1,13 +1,13 @@
 {
   "kind": "V13_2_SAME_SOURCE_DERIVED_INDEX_SCALE_AUDIT",
-  "status": "PARTIAL_RUNNING",
+  "status": "SCOPED_COMPLETE_D5_PARTIAL",
   "freeze_sha256": "e37979df0088b4482618a630453d7121de00f249bd6c6fff8b12ef6ccc5dc2d7",
   "audit_tool_sha256": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
   "source_map_sha256": "255caa86b375041e82cec242b30a762f20d1630e95803635097854725feb9190",
   "planned_profiles": 6,
-  "completed_profiles": 5,
+  "completed_profiles": 6,
   "planned_samples": 840,
-  "complete_profile_samples": 700,
+  "complete_profile_samples": 840,
   "profiles": [
     {
       "id": "n100-bank_prefix",
@@ -2188,18 +2188,445 @@
       "final_sqlite_resource_bytes": 35811328,
       "result_sha256": "cf0d24ad7ad239ceed1b2ce01256cd188a1099a1c6957632d8cf2d53230cf10d",
       "samples_sha256": "729aa885efc9d50cee683eb21a13b458328b22d8426ee0c26ee90a9e391a45a4"
-    }
-  ],
-  "pending": [
+    },
     {
       "id": "n10000-owner_bank_v1",
       "size": 10000,
       "storage": "owner_bank_v1",
       "samples": 140,
-      "status": "INCOMPLETE_ATTEMPT",
-      "observed_samples": 2
+      "status": "COMPLETE",
+      "phases": [
+        {
+          "phase": "ordinary_first_per_turn",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 57007.395828,
+              "p95": 59975.842147749994,
+              "min": 56236.615369,
+              "max": 60480.513284
+            },
+            "cpu_ms": {
+              "p50": 56857.039269,
+              "p95": 59800.437566149994,
+              "min": 55205.636077,
+              "max": 60281.15351
+            },
+            "sdk_search_returned_rows": {
+              "p50": 90360.0,
+              "p95": 90496.8,
+              "min": 90175,
+              "max": 90512
+            },
+            "sdk_get_calls": {
+              "p50": 20094.0,
+              "p95": 20094.05,
+              "min": 20094,
+              "max": 20095
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 6729952.0,
+              "p95": 6846457.2,
+              "min": 6607904,
+              "max": 6857576
+            },
+            "peak_process_rss_kib": {
+              "p50": 582424.0,
+              "p95": 583499.2,
+              "min": 423732,
+              "max": 584472
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 401881,
+            "get_returned_items": 401853,
+            "put_calls": 86,
+            "search_calls": 18200,
+            "search_exact_namespace_rows": 201600,
+            "search_returned_rows": 1807167
+          },
+          "offline_embedding_totals": {
+            "document_batches": 20,
+            "documents_encoded": 10028,
+            "query_calls": 20
+          }
+        },
+        {
+          "phase": "ordinary_cached_reuse",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 17248.1761445,
+              "p95": 17429.3675896,
+              "min": 17030.40609,
+              "max": 17501.997951
+            },
+            "cpu_ms": {
+              "p50": 17242.825535999997,
+              "p95": 17425.9286751,
+              "min": 17026.697258,
+              "max": 17493.948715
+            },
+            "sdk_search_returned_rows": {
+              "p50": 30132.0,
+              "p95": 30132.0,
+              "min": 30132,
+              "max": 30132
+            },
+            "sdk_get_calls": {
+              "p50": 20033.0,
+              "p95": 20033.0,
+              "min": 20033,
+              "max": 20033
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 2244088.0,
+              "p95": 2248534.4,
+              "min": 2244088,
+              "max": 2248656
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 400660,
+            "get_returned_items": 400660,
+            "search_calls": 6080,
+            "search_exact_namespace_rows": 200400,
+            "search_returned_rows": 602640
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "new_source_capture",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 10.342936000000002,
+              "p95": 14.806445650000002,
+              "min": 8.056857,
+              "max": 17.190939
+            },
+            "cpu_ms": {
+              "p50": 0.559869,
+              "p95": 0.8818472,
+              "min": 0.507186,
+              "max": 0.976756
+            },
+            "sdk_search_returned_rows": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 88.0,
+              "p95": 138.80000000000004,
+              "min": 80,
+              "max": 192
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 20,
+            "get_returned_items": 0,
+            "put_calls": 20
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "ordinary_dirty_refresh",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 17682.9873915,
+              "p95": 17832.6387656,
+              "min": 17560.321687,
+              "max": 18081.090263
+            },
+            "cpu_ms": {
+              "p50": 17633.528854,
+              "p95": 17791.05542155,
+              "min": 17496.620454,
+              "max": 17795.628371
+            },
+            "sdk_search_returned_rows": {
+              "p50": 30163.5,
+              "p95": 30189.15,
+              "min": 30135,
+              "max": 30192
+            },
+            "sdk_get_calls": {
+              "p50": 20084.0,
+              "p95": 20101.1,
+              "min": 20065,
+              "max": 20103
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 2246348.0,
+              "p95": 2247774.4,
+              "min": 2244936,
+              "max": 2249112
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 401680,
+            "get_returned_items": 401680,
+            "put_calls": 40,
+            "search_calls": 6080,
+            "search_exact_namespace_rows": 200610,
+            "search_returned_rows": 603270
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "source_idempotent_replay",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 5446.1009825,
+              "p95": 5573.91823655,
+              "min": 5351.25128,
+              "max": 5605.061071
+            },
+            "cpu_ms": {
+              "p50": 5443.782717,
+              "p95": 5542.2263672,
+              "min": 5350.715786,
+              "max": 5554.952856
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10086.0,
+              "p95": 10086.0,
+              "min": 10086,
+              "max": 10086
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 763496.0,
+              "p95": 763632.8,
+              "min": 763496,
+              "max": 766232
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 20,
+            "get_returned_items": 20,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201720
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_validated_lookup",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 5399.7626655,
+              "p95": 5481.0374544,
+              "min": 5376.698129,
+              "max": 5581.700165
+            },
+            "cpu_ms": {
+              "p50": 5399.124254,
+              "p95": 5480.2734853,
+              "min": 5370.649879,
+              "max": 5578.394393
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10086.0,
+              "p95": 10086.0,
+              "min": 10086,
+              "max": 10086
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 763496.0,
+              "p95": 767894.0,
+              "min": 763496,
+              "max": 769984
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "get_calls": 600,
+            "get_returned_items": 600,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201720
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_delete_and_rebuild",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 5543.818268999999,
+              "p95": 5761.51428775,
+              "min": 5483.995785,
+              "max": 6052.620693
+            },
+            "cpu_ms": {
+              "p50": 5424.6969235,
+              "p95": 5655.29568465,
+              "min": 5373.470413,
+              "max": 5799.412749
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10080.0,
+              "p95": 10080.0,
+              "min": 10080,
+              "max": 10080
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 763536.0,
+              "p95": 764768.4,
+              "min": 763480,
+              "max": 767816
+            },
+            "peak_process_rss_kib": {
+              "p50": 586520.0,
+              "p95": 586520.0,
+              "min": 586520,
+              "max": 586520
+            }
+          },
+          "sdk_totals": {
+            "delete_calls": 120,
+            "get_calls": 600,
+            "get_returned_items": 480,
+            "put_calls": 120,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201600
+          },
+          "offline_embedding_totals": {}
+        }
+      ],
+      "seed_sqlite_sha256": "02fb4d31c4f186db543dda770f6e391d42b5091aefa61207d5106791d90aa15b",
+      "seed_metadata_sha256": "ed8115b4b8ac2dae71b531fc17933145149585e08db2b4b582e61e41c0f3de8b",
+      "ordinary_first_selected_hashes": [
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe",
+        "6a243dffd9628d464e7f023c0ecb954a816d969784fe648ded6704836924defe"
+      ],
+      "initial_raw_index_bytes": 37306234,
+      "initial_sqlite_resource_bytes": 35782656,
+      "final_sqlite_resource_bytes": 35811328,
+      "result_sha256": "5173f83516d365f78c9b988b8ca8856ba6f5a7ee850674417f5e73c30ff3f08a",
+      "samples_sha256": "022e02fa2c6e11b6feed1491fd39d127e1ee70bacf528fd07a3f51765431ef18"
     }
   ],
+  "pending": [],
   "pair_identity_checks": [
     {
       "size": 100,
@@ -2210,11 +2637,16 @@
       "size": 1000,
       "exact_seed_bytes_match": true,
       "all_twenty_first_query_selected_identities_match": true
+    },
+    {
+      "size": 10000,
+      "exact_seed_bytes_match": true,
+      "all_twenty_first_query_selected_identities_match": true
     }
   ],
-  "process_results_sha256": "edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0",
-  "process_results_snapshot_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0.json",
-  "terminal_command_receipts_verified": 8,
+  "process_results_sha256": "1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1",
+  "process_results_snapshot_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1.json",
+  "terminal_command_receipts_verified": 9,
   "new_generation_requests": 0,
   "new_embedding_http_requests": 0,
   "qualifications": [

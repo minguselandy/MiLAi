@@ -95,5 +95,58 @@
       "new_model_http": 0,
       "limit": "Same unchanged tool; no repeat lint/mypy/boundary or full840 claim."
     }
-  ]
+  ],
+  "full840_strict_audit": {
+    "status": "SCOPED_COMPLETE_D5_PARTIAL",
+    "observed_at_utc": "2026-10-01T02:33:06.650779+00:00",
+    "completed_profiles": 6,
+    "complete_profile_samples": 840,
+    "terminal_commands_verified": 9,
+    "strict_allow_partial": false,
+    "audit_tool_sha256": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+    "pair_identity_checks": [
+      {
+        "size": 100,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      },
+      {
+        "size": 1000,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      },
+      {
+        "size": 10000,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      }
+    ],
+    "original_ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "evidence": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-derived-index-scale-results.json",
+        "sha256": "181e989f4f09f475a23be082eaa33c241bba0a68f10849c027319c56ca0ecca2"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/full840.stdout.log",
+        "sha256": "385cfe2bef8c1a982768035f29074257bf717e5d03d815d937ac6a5672e5ab36"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/full840.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1.json",
+        "sha256": "1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1"
+      }
+    ],
+    "generation_embedding_http_during_measurement": 0,
+    "limits": [
+      "Same current runtime sources for both arms, only opt-in derived raw_index storage differs; original fd1 baseline retained, not substituted or stitched.",
+      "Fixed sequential arms counterbalanced by N; no randomized repeated order blocks, affinity/frequency lock, machine idle or OS cache reset. Agent engineering/read-only work may overlap, report wall/CPU/SDK descriptive distributions without pure causal claim.",
+      "Public Store logical returned rows are not physical IO; OS process block counters cache-dependent; preserve every phase including rebuilding derived backlinks.",
+      "Fresh bank comparison does not measure benefit when a legacy inline index is retained; opt-in does not delete/migrate legacy inline rows.",
+      "No business-object/operation stream, semantic model quality, independent Judge, long-range/generalization or full D5 acceptance from these synthetic samples."
+    ]
+  }
 }

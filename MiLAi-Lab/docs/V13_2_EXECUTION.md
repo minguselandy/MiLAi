@@ -206,3 +206,17 @@ Source在独立8b38f2d只读树交付49份带完整209源码前后map的查阅/�
 实际Mem0固定pin是f8082a73、安装mem0ai2.1.0；Root另核对六个git对象、安装源码/METADATA/direct_url及148模块hash，保存为独立第七组项目参考，不覆盖94c3fe9论文设计参考。[资料索引](V13_2_DESIGN_LITERATURE.md)及本地54链接可查看原件；622文件的只读存储hash核查通过。
 
 [四臂设计](../data/manifests/v13-2-d4-common-capability-draft.json)仍非运行准入。恢复风险是缺失file/key以Host checkpoint下界代替完整native/summary计数；损坏JSON当前已抛错，未伪称已运行恢复故障。下一步Source仅在新隔离树实施默认关闭的共享admission持久化与fail-closed resume，脚本化四调用路径及12/24检查不作模型样本。当前209源码、R5配置及运行中的性能树保持HOLD，B6摘要/common reader/cache/闭合形成边界/Host写工具策略尚未实施。
+
+## R5实际wire审计准备
+
+Root新增离线实际HTTP审计器，校验真实送达的profile/hash、current index与当前recall引用联合Qwen预算，并把current/history/Source交付及省略与原构造日志的selected inventory、读时version身份对应。既有R4完整48条消息/107实际Host请求校准通过，最大2048；10项原wire/合成篡改控制及三原compact packet解码通过。0新模型HTTP/socket，未得到任何R5包或语义消费结论，SQLite版本重开另验。
+
+首轮Root审计器错误要求截断Source仍有完整原range，八条旧R4消息因此未验证；原脚本/结果/log均保存，修正为实际前缀、相应range终点与完整excerpt hash后通过。没有修改运行实现、旧cohort或Root原评分。具体脚本身份和证据SHA列入[R5事前设计](../data/manifests/v13-2-e0-r5-design.json)，真实运行仍须全840严格审计和新freeze。
+
+## 全840性能测量严格收口
+
+父子实际进程已终止，9条原命令全部returncode0，父日志记录all_profiles_terminal。Root不带allow-partial运行原审计工具，六profile/840样本、三组完全相同seed字节及每组20个首查询selected identity通过。原process-results按hash另留不可变快照；测量前后连续账本SHA均32265299，新增模型/embedding HTTP0。
+
+10k的bank_prefix与owner_bank_v1首查询p50分别116.862秒/57.007秒，缓存35.968秒/17.248秒，dirty40.923秒/17.683秒；全部七阶段和CPU/SDK计数见[完整阶段分布](V13_2_DERIVED_INDEX_SCALE.md)。共有机器、交错工程、固定顺序与无legacy inline的限制保留；绝对成本仍高，D5-10继续PARTIAL，不升级模型/泛化或D4。
+
+这一测量协议已结束，R5可进入fresh route/input/runtime/ledger freeze，再串行执行原24/48。此前preview、历史cohort及性能根不再执行；后续模型费用继续原权威账本，测量的ledger-before/after快照不改。
