@@ -244,10 +244,11 @@
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-source-index-acceptance.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented."
     },
     {
       "id": "D3-03",
@@ -304,7 +305,8 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-e0-r1-results.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
       "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
@@ -343,10 +345,11 @@
         "data/manifests/v13-2-e0-normal-results.json",
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r2-results.json",
-        "data/manifests/v13-2-e0-r3-results.json"
+        "data/manifests/v13-2-e0-r3-results.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
-      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent."
+      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent. Separate R4 full24:20PASS/4FAIL,22 gate NOT_PASSED. Four same-ID corrections/history preserved; update2/3 actual explicit historical reads/finals pass scoped, query r3 direct question-only source gap prevents full update2 gate. Scope1 unsupported personal card and scope2 one-time broadening retained. No stitching or independent claim."
     },
     {
       "id": "E1-01",
@@ -699,7 +702,8 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
-        "data/manifests/v13-2-r0-development-accounting.json"
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
@@ -716,7 +720,8 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
-        "data/manifests/v13-2-r0-development-accounting.json"
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
@@ -734,7 +739,8 @@
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-e0-r1-results.json"
+        "data/manifests/v13-2-e0-r1-results.json",
+        "data/manifests/v13-2-e0-r4-results.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."

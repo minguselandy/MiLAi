@@ -23,7 +23,7 @@
 | [nelson-liu/lost-in-the-middle](https://github.com/nelson-liu/lost-in-the-middle) | `29b8a6d042ce29abccee3db1a73171a107d7e6af` | `projects/lost-in-the-middle`；12份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | `f2c33cc405023dcaa8aa8ef4c0120e1f262f05ad` | `projects/hindsight`；353份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | `projects/mem0`；171份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
-| [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；7份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；10份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 
 LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源码与包METADATA；官方新版本的分段匹配和实际安装版本的LIKE行为分开记录，没有升级SDK。Hindsight目录重组使首次旧路径未取到源码，随后按tree metadata找到实际路径并核对353份文件；这个归档问题不算实验失败或成功。
 
@@ -36,3 +36,13 @@ LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源�
 维护方面，R3在无新偏好陈述的查询边界仍发生额外修订，七条轨迹只以问题引用旧事实；团队午餐例还新增错误长期个人素食卡。抽取新主张与选择修改应先在同一writer推理中明确区分：仅查询既有信息时允许直接decline/no_change，当前事件是触发而非旧事实的全部支持；保留实际旧支持与未改字段。这个语义判断仍由模型完成，不能用固定问号/中文词或benchmark ID替代，也不声称引文匹配能验证蕴含。
 
 下一次候选必须另列修改范围、冻结配置/源码/rubric和费用身份；共同解释规则同样提供给基线。保留R0–R3全量否定结果，不挑最好回答。此阶段仍是曝光开发诊断，完整独立来源pilot、独立评分和泛化验证未完成。
+
+## R4复检后的取舍
+
+[R4完整结果](../data/manifests/v13-2-e0-r4-results.json)20通过/4失败，没有达到门槛。重新查阅[Mem0原论文](https://arxiv.org/abs/2504.19413)、[Hindsight原论文](https://arxiv.org/abs/2512.12818)及[固定Mem0抽取/更新源码](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py)，来源正文和固定代码均已保存。抽取允许空候选、维护允许不变只是设计职责，不保证模型能正确区分问题前提与用户事实；不会整段照搬上游prompt、时钟推断或示例。
+
+R4查询维护15次no_change说明同一writer能够选择不改，但团队素食误写、临时演示范围扩大和语言查询单问题引用仍然存在。实际引用成员验证不等于支持主张，更不等于范围正确。这些是Root结合本地证据的推断，论文收益没有迁移为MiLAi结论。
+
+表示候选只压缩已有选中单元的重复metadata，留出真实历史/叶子正文预算；不按题目语种或关键词改变检索/更新选择。先验收工程交付，再冻结新的全量开发cohort；相同公开说明提供各基线。默认旧行为保留，索引存储性能改动独立测量，不合并为单因素收益。
+
+SDK检查另保存官方固定Store接口与实际安装`langgraph-checkpoint==2.1.2`接口/METADATA。公开put禁止namespace分量包含句点；无效测试样例失败与修正依据保留。官方最新分段行为与实际Sqlite2.0.11前缀LIKE继续分开，没有升级SDK。新增资源和失败反思在本地SDK参考的`namespace-validation/`可查看。

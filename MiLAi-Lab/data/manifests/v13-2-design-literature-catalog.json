@@ -215,11 +215,11 @@
       "commit": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
       "installed_version": "2.0.11",
       "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference",
-      "snapshot_file_count": 7,
+      "snapshot_file_count": 10,
       "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/manifest.json",
-      "snapshot_manifest_sha256": "16a42a85c92f8cacfad8b9b45b4f057e83925ba249ef031a8bbedf98512b849c",
+      "snapshot_manifest_sha256": "07210eab8a58e53505cda9f21fc95a0ac0ef40855e0bdf4b04bae54af712f576",
       "status": "SAVED_SOURCE_AND_OFFICIAL_DOCUMENTATION",
-      "read_scope": "Pinned installed 2.0.11 LIKE behavior and observed SDK-return counters motivate this candidate; current main uses improved segment-aware matching but still enumerates descendants.",
+      "read_scope": "Pinned installed 2.0.11 LIKE behavior and observed SDK-return counters motivate this candidate; current main uses improved segment-aware matching but still enumerates descendants. Public namespace validation rejects period-containing components; installed and pinned official interfaces saved separately. No SDK upgrade.",
       "files": [
         {
           "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/official-base-commit.json",
@@ -276,8 +276,37 @@
           "commit_or_version": "2.0.11",
           "sha256": "2e6def2ab7b5ba073de36b47579ca43d87413332ac304d99438cfd46526a386f",
           "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/installed-METADATA"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/official-store-interface.py",
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/11ee185999b86bfea2d8c0e69cef9a5e37acf686/libs/checkpoint/langgraph/store/base/__init__.py",
+          "retrieved_at": "2026-10-01T00:07:07.115390+00:00",
+          "commit_or_version": "11ee185999b86bfea2d8c0e69cef9a5e37acf686",
+          "sha256": "c91e0bcd0bba52a5368217cf2cc1cfa9c73bc84bda5304f2a0d88867aa8cd268",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/official-store-interface.py"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/installed-store-interface.py",
+          "local_original": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph/store/base/__init__.py",
+          "url": "https://pypi.org/project/langgraph-checkpoint/2.1.2/",
+          "retrieved_at": "2026-10-01T00:07:07.117868+00:00",
+          "commit_or_version": "2.1.2",
+          "sha256": "45ce11f486651c910e5092ba4978010bed1c09861f095fbe4ea7e96084666552",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/installed-store-interface.py"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/installed-store-interface-METADATA",
+          "local_original": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph_checkpoint-2.1.2.dist-info/METADATA",
+          "url": "https://pypi.org/project/langgraph-checkpoint/2.1.2/",
+          "retrieved_at": "2026-10-01T00:07:07.118070+00:00",
+          "commit_or_version": "2.1.2",
+          "sha256": "2783edfb9bf13ba7a6efff4ac1a9392d16fb88a692b7d0730c2b6bbd4fde6735",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-derived-index-cost/MiLAi-Lab/artifacts/v13-2-design-literature-source/installed-store-interface-METADATA"
         }
-      ]
+      ],
+      "supplement_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/original-supplement.json",
+      "supplement_manifest_sha256": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
+      "installed_interface_version": "2.1.2"
     }
   ],
   "complete": true,
@@ -286,12 +315,27 @@
     "Hindsight initial old implementation path had zero source files; actual hindsight-api-slim/hindsight_api found from tree metadata, 353 files now saved and verified.",
     "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present."
   ],
-  "recorded_at_utc": "2026-09-30T23:51:55+00:00",
+  "recorded_at_utc": "2026-10-01T00:17:09.203434+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
   "paper_count": 5,
   "project_count": 4,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
-  "benchmark_questions_gold_accessed": false
+  "benchmark_questions_gold_accessed": false,
+  "design_rechecks": [
+    {
+      "cohort": "R4 full failure review",
+      "rechecked_at_utc": "2026-10-01T00:17:09.203434+00:00",
+      "sources": [
+        "https://arxiv.org/abs/2504.19413",
+        "https://arxiv.org/abs/2512.12818",
+        "https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py"
+      ],
+      "new_papers_downloaded": 0,
+      "resources_already_saved": true,
+      "new_sdk_supplement": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
+      "runtime_benchmark_gold_accessed": false
+    }
+  ]
 }
