@@ -1023,5 +1023,14 @@
     "root_criteria_prepared": 42,
     "original_prefix_commands_verified": 17,
     "runtime213_test391_config316_maps_unchanged": true
+  },
+  "http_owner_full_plan_entry_coverage_recheck": {
+    "manifest": "data/manifests/v13-2-http-owner-plan-entry-coverage.json",
+    "sha256": "394639fed949ae42c36720a7b549a3e31a7a1d63a1b4ee4561c843d9f19ce3e8",
+    "status": "STATIC_RECHECK_AND_ARCHIVE_VERIFIED_IMPLEMENTATION_NOT_ACCEPTED",
+    "engineering_accepted": false,
+    "E1_E2_historical_not_relabelled": true,
+    "actual_new_model_http": 0,
+    "all_requirement_rows_exactly_unchanged": true
   }
 }

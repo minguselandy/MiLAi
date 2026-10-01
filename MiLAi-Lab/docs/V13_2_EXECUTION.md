@@ -345,3 +345,12 @@ A按真实ordinary/query发行快照exact get，保持原选择/Source/角色/ha
 Root独立准备42项原件验收条件及5事件/11阶段合成计费算术对照，含历史unknown1、原limits/costs/opaque history保持；这些仅为准备，没有运行请求/机制或作实现验收。另固定核对当时17条已完成命令前缀、1预期socket拒绝非零、1360执行源码snapshot核验，保留135索引文件；Source仍运行，不冒充最终handoff/代码通过。Root审计器首次抄录scope哈希漏两字符而提前拒绝，原driver/stdout/stderr/rc1保存；修正后原件审计0，不改Source、不重跑机制，失败时未取得after maps明确不倒补。
 
 主树213运行/391测试/316完整配置和ledger374fcef4前后相等，17论文/15参考/745文件/133链接保持，0新资源GET/实际模型HTTP。5+1源码实施及Root最终字节工程验收仍待完成；没有新真实cohort冻结或重跑R7。48状态仍4 PASSED_SCOPED/27 PARTIAL/1 NOT_PASSED/16 NOT_VERIFIED，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO，原历史失败与费用不变。
+
+
+## 完整计划入口复检与离线入口失败的primary反思
+
+[入口覆盖与反思记录](../data/manifests/v13-2-http-owner-plan-entry-coverage.json)静态核对8个实际源码/Root历史驱动，并确认R0 E1固定形成driver直接默认构造budget/client，位于当前Source5路径和213运行map之外；导入D0 helper不证明取得新owner。Root后续另建驱动、合成lifetime/accounting控制及新冻结，旧driver/root不改/不重跑，Source范围不扩；自由Host D0路径仍需实际新身份验收。E1/E2的R0结果继续按208/bb1b9a7解释，不能由新owner工程或旧结果升级为当前验证。源码发现首轮错误猜v13_2 runner路径的rg rc2保存，按真实文件发现纠正；当时maps缺失不倒补。
+
+Source报告core30早期通过、actual入口first1通过/11失败，正在修正scope/import/nominal测试身份，原件等待最终独立交接核验。Root保存CPython3.11.13 contextlib与Pydantic2.13.5两组固定官方源码/文档及安装文件观察，两关键文件分别字节相等；rolling版本/重定向单列。9GET全200，Source13固定参考hash不改，上游不执行/SDK不升级。当前17论文/17项目参考、768文件/147本地链接、独立审计0问题，[中文原件总结](V13_2_DESIGN_LITERATURE.md)可查看；原745/133阶段和Root误读catalog键失败保持。0实际新增HTTP/新cohort，主213/391/316、ledger374fcef4/原计划及48状态保持；实现尚未验收，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO。
+
+上述Source描述是当时报告，未作最终验收。随后agent因容量限制结束；这不是实际模型HTTP失败。Root在14:08:27 UTC核对54条完成receipt、0未完成命令目录/活跃原生命令，final-new-checks及final-mypy元数据rc0、final-ruff rc1、尚无HANDOFF。已向同一Source恢复任务，实际agent列表显示running；不切模型、不新建agent、不重启已结束命令，保留全部失败原件。Root首次恢复观察因调用不存在的python别名rc127提前失败，纠正使用现有venv；当时未取得maps不倒补。原准备manifest另存，再附当前容量恢复观察，不把早期或中途通过当最终字节证据。

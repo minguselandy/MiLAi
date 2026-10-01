@@ -1,5 +1,21 @@
 # v13.2 设计资料索引与失败反思
 
+2026-10-01 当前保存 **17篇论文 / 17组项目与SDK方法参考、768个独立核验文件 / 147个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)保留原URL、UTC、版本/commit、SHA和范围，完整PDF/HTML及方法相关源码可从 ignored `artifacts/v13-2-design-literature/index.html` 查看。原17论文未重下载；GitHub发布索引与总结，第三方原件本地保存，不称完整项目复现。下文旧阶段与计数保留其发生时语义。
+
+## 当前真实入口失败：生命周期与验证对象身份
+
+同一Source报告早期core30通过，而实际D0/P5/micro首轮1通过/11失败，涉及P5 wrapper误在catalog作用域、micro漏导入、Pydantic名义类型与测试替身不兼容；原失败与修正各有原件。此处仍是实现方报告，Root没有接受最终执行字节，不把早期通过或修正意图当最终验收，也没有新真实模型样本。
+
+保存[CPython3.11.13 contextlib固定源码/文档](https://github.com/python/cpython/tree/498b971ea3673012a1d4b21860b229d55fc6e575)及[官方ExitStack说明](https://docs.python.org/3.11/library/contextlib.html#contextlib.ExitStack)：清理按注册逆序执行，嵌套资源和部分构造失败要分别核验。Root采用的通用审计条件是外层owner覆盖真正入口、evidence/snapshot、SDK/client关闭和最终结果落盘，不能用放错作用域或未调用helper代替实际生命周期。官网rolling3.11.16独立保存，不当安装3.11.13证明。保存的Lib/contextlib.py与实际3.11.13文件逐字节相等。
+
+保存[Pydantic2.13.5固定配置/验证源码](https://github.com/pydantic/pydantic/tree/001dea020e0809844e5b17666432c9135a976f46)及[官方配置说明](https://pydantic.dev/docs/validation/latest/api/pydantic/config/)：允许任意字段类型仍检查真实instance类型，具有相似方法的替身或另次加载的旧class不自动满足原注解。Root反思是比较夹具应保留各自实际类身份并比较完整wire/schema/receipt，不能放松生产validator来消除夹具错误。安装_generate_schema.py与固定版本字节相等；rolling页重定向完整保留，不升级SDK或执行上游源码。
+
+9次新方法资源GET均200，17/17/768/147由独立原hash/PDF头/链接审计核验0问题。两新项目组另建目录，Source当前13份固定参考及其manifest的hash保持，不自动扩读scope。原745/133 index/catalog/audit和旧总结按hash另存。Root初次猜catalog的projects键所致KeyError保留，纠正为实际rows/project_count；缺失的当时maps不倒补。这些是工程与资料失败，0实际gen/embed/新cohort，主213/391/316及连续ledger374fcef4保持。
+
+[完整计划入口复检](../data/manifests/v13-2-http-owner-plan-entry-coverage.json)另静态保存8个实际主树/Root驱动源码：E1固定观察流的Root旧driver直接构造默认RunBudget/VLLMClient，不因导入D0 helper就自动拥有lease，且位于当前5路径范围与213运行map之外。后续必须由Root另建/冻结驱动并有限核验，不修改或重跑R0原driver/root；E1/E2自由Host的D0路径也须新配置/冻结和最终字节检查。仅静态推断，没有提前扩大Source范围、启真实HTTP或称四臂/12/24/质量验收。原E1/E2仍PARTIAL，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO。
+
+## 此前共享HTTP范围与历次原记录
+
 2026-10-01 当前保存 **17篇论文 / 15组项目与SDK方法参考、745个独立核验文件 / 133个本地链接 / 0问题**。完整PDF、HTML、固定实现片段及摘要可从 ignored `artifacts/v13-2-design-literature/index.html` 查看；[机器目录](../data/manifests/v13-2-design-literature-catalog.json)保留URL、UTC、版本/commit、SHA和范围。GitHub发布索引与摘要，原第三方资源本地留存；方法相关快照不是完整项目复现。下文旧计数和旧阶段是其发生时记录，不当当前总数。
 
 ## 当前共享HTTP/连续账本设计参考与取舍
