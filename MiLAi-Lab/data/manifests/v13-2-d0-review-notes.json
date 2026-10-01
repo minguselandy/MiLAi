@@ -1,0 +1,374 @@
+{
+  "kind": "V13_2_D0_ROOT_DIAGNOSTIC_NOTES",
+  "rubric": {
+    "original": "Use frozen v13-1-p5-comparison protocol and original statuses; do not rescore old terminal outcomes.",
+    "posthoc_dimensions": [
+      "current object/label answer vs actual recorded world",
+      "initial action vs query/unknown receipt history",
+      "actual memory update receipts and retained history",
+      "wrong/duplicate effects vs original action journal"
+    ],
+    "uncertainty": "No independent judge; no-definite-contradiction is not a reliable full lifecycle score; ambiguous claims stay qualified."
+  },
+  "reviews": [
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-partial-w2",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-known-no-effect",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-happened",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "WRONG_ORIGINAL_CALL_IDENTITY",
+      "notes": [
+        "m2 assigns lost/unknown original receipt to reserve_and_label although that source is present; unknown belongs to complete_label.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace.",
+        "m1 claims operation memory revised even though its explicit Host update was denied; automatic raw ingestion is not that requested semantic revision."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-matched",
+      "case_id": "p5-unknown-none",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-known-no-effect",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "UNSUPPORTED_UNKNOWN",
+      "notes": [
+        "m2 treats reserved_label_failed as unknown reservation outcome despite its actual reservation_id and known failure receipt.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-happened",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-unknown-none",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-matched",
+      "case_id": "p5-update-w3",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Current card notes wrongly describe previous get_reservation source status as label_created; actual source is found. m2 adds a second card. Final explanation itself distinguishes the correct original tool status."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-matched",
+      "case_id": "p5-partial-w2",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "m1 original-card UPDATE fails receipt_fields_required then receipt_already_consumed; later create commits separate observed-state cards. Final history is correct, but original-card revision was not achieved."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-partial-w2",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "WRONG_ORIGINAL_CALL_IDENTITY",
+      "notes": [
+        "m2 asserts original reserve_and_label receipt lost after explicitly citing its preserved reserved_label_failed observation; no UNKNOWN source in this trajectory.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-known-no-effect",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace.",
+        "Answer describes original receipt as partly truncated; retrieval serialized wrapper was split into overlapping chunks. Recheck complete HTTP material before claiming missing historical evidence."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-happened",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-unknown-none",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "WRONG_ORIGINAL_CALL_IDENTITY",
+      "notes": [
+        "m2 correctly lists subsequent unknown complete_label then incorrectly attributes UNKNOWN to initial reservation in its summary.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B2-native",
+      "case_id": "p5-update-w3",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace.",
+        "Answer describes original receipt as partly truncated; retrieval serialized wrapper was split into overlapping chunks. Recheck complete HTTP material before claiming missing historical evidence."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-partial-w2",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-known-no-effect",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-happened",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-unknown-none",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "B6-native",
+      "case_id": "p5-update-w3",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Explicit Host manage_memory requests were denied by native_method_has_no_requested_operation; raw/receipt backend ingestion is separate and exists. Do not infer absent memory from empty semantic-card namespace."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "INCOMPLETE_HISTORY_EXPLANATION",
+      "notes": [
+        "m2 ends at the initial tool status clause; actual final response stopped normally, current state is given but required history explanation is incomplete."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-partial-w2",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-unknown-happened",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "m1 update remains rejected field_conflict:status/receipt_fields_required; original semantic card stays stale although current state and original unknown complete_label distinction are correctly answered."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-native",
+      "case_id": "p5-update-w3",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-clean",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score."
+      ],
+      "original_scores_unchanged": true
+    },
+    {
+      "method_id": "field_grounded-projection-off",
+      "case_id": "p5-update-w3",
+      "review_kind": "POSTHOC_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+      "current_object_and_label_answer": "CONSISTENT_WITH_RECORDED_WORLD",
+      "historical_explanation": "NO_DEFINITE_CONTRADICTION_IDENTIFIED",
+      "notes": [
+        "Read all original final answers with actual user/tool sources; this label is not an independent accuracy score.",
+        "Actual W3 persisted update/replay exists, but later target_not_unique/receipt_already_consumed and additional cards occur; answer acknowledges a failed update rather than hiding it."
+      ],
+      "original_scores_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,1162 @@
+{
+  "kind": "V13_2_R9_E2_ALL_FIRST_ATTEMPTS_ROOT_DEVELOPMENT_RESULTS",
+  "status": "ALL_FIRST_ATTEMPTS_COMPLETE_SEMANTIC_FAILURES_RETAINED_NOT_METHOD_PROMOTED",
+  "recorded_at_utc": "2026-10-01T21:54:20.037019+00:00",
+  "executing_published_git_head": "4ca2204732d0ea238e53fa6fc751d5de7bc80da9",
+  "runtime": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-e2-r9-runtime.json",
+    "sha256": "aa1f4ae7fd3bcc8e11e0361f2099d66a07d84c360dcb865b9188ce2b307ce878",
+    "bytes": 11422
+  },
+  "design": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-e2-r9-design.json",
+    "sha256": "bce4f0bd1428b9205184b47cebf72fedf267852934b6f513e139973a00f884a9",
+    "bytes": 7139
+  },
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "pre_first_actual_HTTP_GitHub_verification": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/pre-first-generation-github-verified.json",
+    "sha256": "6aba46fcb01c1e35cb58319a869f1ce32e9a55724ce99d74c30e9555608edade",
+    "bytes": 1814
+  },
+  "mechanical_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/all-first-attempt-audit-first/result.json",
+    "sha256": "19e0618e165c27b7ac306ce8bc9f8e80275b4cf84840d7f08b5bf7a5c6496fa0",
+    "bytes": 216605
+  },
+  "explicit_Root_judgements": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/public-results-record-first/explicit-root-trajectory-judgements.json",
+    "sha256": "b186031281c2c351fd6a652cb648a97f722d8c0a79baf9c675fb0da540a20c51",
+    "bytes": 40967
+  },
+  "planned_and_completed_trajectories": 15,
+  "planned_and_completed_public_messages": 45,
+  "NOT_RUN_or_interrupted_messages": 0,
+  "root_Reader_query_development_diagnostics": {
+    "PASS_SCOPED": 13,
+    "PARTIAL_SCOPE_EXPRESSION": 1,
+    "FAIL_HISTORICAL_READER": 1,
+    "not_independent_Judge": true
+  },
+  "same_original_ID_core_corrections": {
+    "count": 15,
+    "denominator": 15,
+    "not_all_scope_or_clean_proposal_constraints_proven": true
+  },
+  "query_maintenance": {
+    "paid_generation_requests": 15,
+    "known_tokens": 60678,
+    "no_change": 6,
+    "rejected_pending": 1,
+    "unnecessary_commits": 8,
+    "unsupported_current_question_sources": 8,
+    "existing_record_extra_revisions": 6,
+    "new_duplicate_or_redundant_cards": 2
+  },
+  "source_or_hash_owner_actual_mechanical_stop_events": 0,
+  "hard_stop_not_inferred_from_ordinary_semantic_failure": true,
+  "failure_original_indices": {
+    "Chinese_save_body_not_Chinese": [
+      18,
+      19
+    ],
+    "rejected_Host_proposals": [
+      27,
+      31,
+      39,
+      40
+    ],
+    "query_commit_Source_unsupported": [
+      7,
+      8,
+      25,
+      26,
+      34,
+      35,
+      43,
+      44
+    ],
+    "query_unnecessary_rejected_proposal": [
+      33
+    ],
+    "query_historical_answer_wrong": [
+      42
+    ],
+    "structured_scope_full_update_erasure": [
+      12,
+      39,
+      40
+    ],
+    "query_current_scope_loss": [
+      43
+    ],
+    "frequency_modifier_absent_in_initial_card": [
+      36
+    ],
+    "query_report_language_expression_ambiguous": [
+      26
+    ]
+  },
+  "actual_costs": {
+    "generation_requests": 148,
+    "embedding_requests": 63,
+    "generation_known_tokens": 899383,
+    "embedding_known_tokens": 24315,
+    "generation_prompt_tokens": 888705,
+    "generation_completion_tokens": 10678,
+    "maintenance_generation_requests": 15,
+    "new_generation_unknown": 0,
+    "new_embedding_unknown": 0
+  },
+  "actual_arm_costs": {
+    "old-target-query": {
+      "generation_requests": 51,
+      "embedding_requests": 20,
+      "generation_known_tokens": 291730,
+      "embedding_known_tokens": 8072,
+      "generation_prompt_tokens": 288007,
+      "generation_completion_tokens": 3723,
+      "maintenance_generation_requests": 5,
+      "new_generation_unknown": 0,
+      "new_embedding_unknown": 0,
+      "maintenance_generation_known_tokens": 19009
+    },
+    "source-backlinks": {
+      "generation_requests": 48,
+      "embedding_requests": 21,
+      "generation_known_tokens": 288516,
+      "embedding_known_tokens": 7983,
+      "generation_prompt_tokens": 284755,
+      "generation_completion_tokens": 3761,
+      "maintenance_generation_requests": 5,
+      "new_generation_unknown": 0,
+      "new_embedding_unknown": 0,
+      "maintenance_generation_known_tokens": 19548
+    },
+    "source-backlinks-read-handles-patch": {
+      "generation_requests": 49,
+      "embedding_requests": 22,
+      "generation_known_tokens": 319137,
+      "embedding_known_tokens": 8260,
+      "generation_prompt_tokens": 315943,
+      "generation_completion_tokens": 3194,
+      "maintenance_generation_requests": 5,
+      "new_generation_unknown": 0,
+      "new_embedding_unknown": 0,
+      "maintenance_generation_known_tokens": 22121
+    }
+  },
+  "canonical_ledger_after_sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+  "actual_terminal_SDK_reopens": {
+    "banks": 15,
+    "all_items": 347,
+    "current_records": 20,
+    "history_versions": 41,
+    "captured_sources_by_actual_role": {
+      "user": 45,
+      "assistant": 45
+    },
+    "new_HTTP": 0,
+    "new_store_mutations": 0,
+    "all_db_hashes_unchanged": true
+  },
+  "rows": [
+    {
+      "case_index": 0,
+      "arm": "old-target-query",
+      "original_indices": [
+        0,
+        3,
+        6
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "原ID正确修订/旧英文与新中文完整历史；查询后原Source保持。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-00.json",
+          "sha256": "c329f8e2054e63ddfd0cbce13fb21efcdb1227a83f1a14de6ab8ab4db6f623b7",
+          "bytes": 1262
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-03.json",
+          "sha256": "3d12611a316a47c694e87ccd9cc3bd05ee269ddaaa9f216bced5b4492171dce1",
+          "bytes": 1334
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-06.json",
+          "sha256": "da8e4d10c2851371248174491d42a7a58ec74b0e55f4ad643d8cfe2a3fefe55a",
+          "bytes": 1703
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-06/result.json",
+          "sha256": "bcdf42db581c2757c38ef7a501b1e9f21af6329427c1ea60d6eac43221322e9d",
+          "bytes": 262963
+        },
+        "all_items_read": 19,
+        "records": [
+          {
+            "id": "b328f190-c62d-52cc-85ac-e41f827d979c",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "I have noted your preference to communicate in English by default.",
+        "已更新您的偏好，默认交流语言已改为中文。",
+        "根据记录的历史偏好：\n\n1. **以前的偏好**（第1版）：默认交流语言为 **英语 (English)**。\n2. **现在的偏好**（第2版）：默认交流语言已更改为 **中文 (Chinese)**。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 0,
+      "arm": "source-backlinks",
+      "original_indices": [
+        1,
+        4,
+        7
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_UNSUPPORTED_COMMIT",
+      "explicit_Root_assessment": "Reader正确；查询后同中文卡r3仅引用询问Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-01.json",
+          "sha256": "ae742b5b3749427e178008cac4ad96d344bac2c0e12910fcc7e653550d505b79",
+          "bytes": 1171
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-04.json",
+          "sha256": "375a24fdc5f76a13c87925a28ee9fbf2714634a00bf30209d486f2f002e2a829",
+          "bytes": 1292
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-07.json",
+          "sha256": "368e69a13323cc224df9b860ba207ea4f4380b9ae9f62fda40130e9f952ea987",
+          "bytes": 1841
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-07/result.json",
+          "sha256": "ca4dd0d44a8d3dcec44cb24f6c8322f5228d48865fdee186fb04faf98c5bc6b4",
+          "bytes": 304056
+        },
+        "all_items_read": 25,
+        "records": [
+          {
+            "id": "ba510600-eb93-5723-a79e-9104bd860eb9",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "I have noted your preference to communicate in English by default.",
+        "已更新您的偏好，默认交流语言现在为中文。",
+        "根据记录，您的交流语言偏好历史如下：\n\n1. **以前的偏好**：English（英语）\n2. **现在的偏好**：Chinese（中文）"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 0,
+      "arm": "source-backlinks-read-handles-patch",
+      "original_indices": [
+        2,
+        5,
+        8
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_UNSUPPORTED_COMMIT",
+      "explicit_Root_assessment": "真实句柄修订正确；查询后r3历史/当前中文正文仅引用询问Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-02.json",
+          "sha256": "30d64ac622f210ebc4f0912bc3479b020a62b15724b3e98bc326a1ce1f7270d9",
+          "bytes": 1219
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-05.json",
+          "sha256": "3c3c1bd88a6c3f2b5b9a326121234f42f8909bb8d36ba10596cd39a5930cf680",
+          "bytes": 1338
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-08.json",
+          "sha256": "638c9ff46d7a788f59fd06aecde73286c499f2eb73d36a7e0d08061f7afeb38b",
+          "bytes": 1793
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-08/result.json",
+          "sha256": "bc531cee91ee7c00314e4ca8e3d8965091942026dbf1bdd6489240eb02f757eb",
+          "bytes": 280477
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "a068f26e-cb6d-5120-be55-ffc7cab74094",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "I have noted your preference to communicate in English by default.",
+        "您的沟通偏好已更新为默认使用中文。",
+        "根据记录，您的语言偏好变更如下：\n\n*   **以前**：偏好使用 **英语** (English) 进行交流。\n*   **现在**：偏好使用 **中文** (Chinese) 进行交流。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 1,
+      "arm": "old-target-query",
+      "original_indices": [
+        9,
+        12,
+        15
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "原ID与单位/旧Source正确；完整update清空结构scope，默认距离限定仍在正文，单列限制。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-09.json",
+          "sha256": "203d671591bc38aed535656bc0286479692ca5682cd20aa3ab23d5dfb8ecf2fb",
+          "bytes": 1474
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-12.json",
+          "sha256": "ff32d91acd0c20439ab6fd1d74a511e64e35b0436eb70bdac5b697c3485fea63",
+          "bytes": 1502
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-15.json",
+          "sha256": "3ed3d7773f34ee6dc8257269406f20cf4f4787037478d8ac018459133e959e9e",
+          "bytes": 1567
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-15/result.json",
+          "sha256": "86913c6c752f3d461a5565bb78d55272f55edbb064c3fdd045d35e5d63d6f9de",
+          "bytes": 263738
+        },
+        "all_items_read": 19,
+        "records": [
+          {
+            "id": "cfbf95e6-4409-599e-9148-c62bdf8c9528",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已保存：距离单位默认使用英里。",
+        "已更新默认距离单位为公里。",
+        "您当前的距离单位偏好是 **千米 (kilometers)**。\n\n历史记录显示，您之前的偏好是 **英里 (miles)**。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 1,
+      "arm": "source-backlinks",
+      "original_indices": [
+        10,
+        13,
+        16
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "混合语言正文单位正确；依据实际第二HTTP完整材料而非先前截断tool DTO。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-10.json",
+          "sha256": "3a9a2f0efb66e7162f1321b72b0ff236707c8a752eb1c7c492e02bae398f4e46",
+          "bytes": 1332
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-13.json",
+          "sha256": "4e792aaa52cbdee48bd6a44b452890ab5c6265c90b3fa3185af2e81144590bef",
+          "bytes": 1382
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-16.json",
+          "sha256": "bfe2a42cee93484fa42ebff36d8a45cb5c8e924e5ee28f930e4ab4bfadabd047",
+          "bytes": 1684
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-16/result.json",
+          "sha256": "54cce63319275629a62e9435afd3d6b984206ce723050942df013c1156f986cc",
+          "bytes": 273753
+        },
+        "all_items_read": 23,
+        "records": [
+          {
+            "id": "1c8434e0-f646-52c4-8105-9353e261e01f",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已成功保存距离单位默认使用英里的偏好设置。",
+        "已将默认距离单位更新为公里。",
+        "根据历史记录，您之前的距离单位偏好是英里（miles），当前的偏好已更新为公里（kilometers）。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 1,
+      "arm": "source-backlinks-read-handles-patch",
+      "original_indices": [
+        11,
+        14,
+        17
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "英文JSON正文原ID句柄修订；实际追加交付中完整current/history送达。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-11.json",
+          "sha256": "0add2dc289e273fe2900ed15a350bef4a294897c59c79decab385db28583c6e6",
+          "bytes": 1418
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-14.json",
+          "sha256": "5c135f528ff6f4aee1ba51c8b3022b7a9e444394d1a6970ab513f8d6a663dac7",
+          "bytes": 1506
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-17.json",
+          "sha256": "07b5c4c8b45f9999798633c83c508a61b36f245d23e676d42b6abe5e4a86a8f3",
+          "bytes": 1635
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-17/result.json",
+          "sha256": "7d11c36773a08d81f546485ea527e9aaafae8dddd0bd15c3547191086c9c52b3",
+          "bytes": 297067
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "a8c700c8-9b28-5bb9-97d0-4051a8f22d56",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已将“距离单位默认使用英里”保存为语义偏好。",
+        "已更新默认距离单位为公里。",
+        "根据历史记录，您之前的距离单位偏好是英里（miles），当前的偏好已更新为公里（kilometers）。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 2,
+      "arm": "old-target-query",
+      "original_indices": [
+        18,
+        21,
+        24
+      ],
+      "initial_save_Root_quality": "FAIL_SAVE_LANGUAGE",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "实际英语卡未按要求用中文保存；格式修订和历史Reader正确，不能冒充反向语言样本。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-18.json",
+          "sha256": "163931a99fe54e88ea1b6c715247be518e5613fc50468d91c7006b2926ffde20",
+          "bytes": 1929
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-21.json",
+          "sha256": "b2983a6579a7ba183a5d94779e644da7ef5739a1fd34afeab78d1358d12d0a58",
+          "bytes": 1731
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-24.json",
+          "sha256": "2930ad6150e58637f1ae40d014a0cf18cceca2b985880541a04c38ef6d1ee110",
+          "bytes": 1558
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-24/result.json",
+          "sha256": "6abfd419aa3a75fc13269feccc16cb33c0d07bb1a444a65acfd8c063767c8352",
+          "bytes": 268386
+        },
+        "all_items_read": 19,
+        "records": [
+          {
+            "id": "83488acc-be8a-5118-aaa8-92e7b6c558c1",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "I have recorded your preference for the weekly support report format. For your team in Chinese, you can say: “对于每周的支持报告，我更喜欢简短的叙述形式，而不是要点列表。” (Duìyú měi zhōu de zhīchí bàogào, wǒ gèng xǐhuān jiǎnduǎn de xùshù xíngshì, ér bùshì yàodiǎn lièbiǎo.)",
+        "The preference for the weekly support report has been updated to bullet points. The previous preference for a short narrative format has been retained in the history.",
+        "Your present format preference for the weekly support report is **bullet points**.\n\nYour former preference was a **short narrative format** (with an explicit exclusion of bullet points)."
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 2,
+      "arm": "source-backlinks",
+      "original_indices": [
+        19,
+        22,
+        25
+      ],
+      "initial_save_Root_quality": "FAIL_SAVE_LANGUAGE",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_UNSUPPORTED_COMMIT",
+      "explicit_Root_assessment": "初始英语正文违反中文保存；查询后r3仅问题Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-19.json",
+          "sha256": "a8e57747279d16ad5352ec4f95d3af21bf3931ead3ce7b5d519fcfcb99b96cf1",
+          "bytes": 1622
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-22.json",
+          "sha256": "54920af7efa7492f565be0e1228b65b992381457bbca4d7176eef6ba1cdbc1ca",
+          "bytes": 1744
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-25.json",
+          "sha256": "0974b6259297a2593974eb6248864c1f1924991ef374ad509ac71d1f77f10f9b",
+          "bytes": 1741
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-25/result.json",
+          "sha256": "277088e1c59e7b2f8901072ad365932c3166013dc1b0ebfbf48259ca5b58a2b4",
+          "bytes": 286906
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "190a41db-bb87-5f49-9f83-3223bb236aa4",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "I have recorded your preference for the weekly support report to use a short narrative format instead of bullet points. I will ensure this is communicated to your team in Chinese.",
+        "The preference for the weekly support report has been updated to bullet points. The previous preference (short narrative) is retained in the history as revision 1, and the new preference is stored as revision 2.",
+        "Your present format preference for the weekly support report is **bullet points**. Your former preference was a **short narrative format**."
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 2,
+      "arm": "source-backlinks-read-handles-patch",
+      "original_indices": [
+        20,
+        23,
+        26
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PARTIAL_SCOPE_EXPRESSION",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_UNSUPPORTED_COMMIT",
+      "explicit_Root_assessment": "真实中文卡/英语源原IDpatch；Reader格式正确但额外report in Chinese含义歧义，查询后r3仅问题Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-20.json",
+          "sha256": "00b0c5a52a3d678fd2db566e635ac57513817f015748dd253c8c437c582268ec",
+          "bytes": 1569
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-23.json",
+          "sha256": "e6b15811ff136fbe4cc227660c31e042d0237a65c52e25fb454e73fbf025a0e5",
+          "bytes": 1705
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-26.json",
+          "sha256": "3c8fd9069b80e3416921bfe57cc21dedfdbbe9e11a6451ad428437251da278a1",
+          "bytes": 1843
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-26/result.json",
+          "sha256": "88c2a88a4c6170d5ac7cc26bb47516fa1042f845909eaf9b002f6f92ed08456f",
+          "bytes": 285492
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "4da81c0b-b94b-56c8-886e-96829500d0d0",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "我已经记录了您的偏好：对于每周的支持报告，您更喜欢使用简短的叙述性文字，而不是项目符号列表。这条记录已保存，语言为中文。",
+        "I have updated your preference for the weekly support report to use bullet points instead of short narrative text. This change has been saved as revision 2, preserving the previous preference in your history.",
+        "Your current preference for the weekly support report (in Chinese) is to use bullet point lists rather than short narrative text. Your former preference was to use short narrative text rather than bullet point lists."
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 3,
+      "arm": "old-target-query",
+      "original_indices": [
+        27,
+        30,
+        33
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED_WITH_REJECTED_PROPOSALS",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_UNNECESSARY_REJECTED_MAINTENANCE",
+      "explicit_Root_assessment": "初次2个无证据业务字段提议被拒后真实独立保存；只曙光修订/海风不变；查询Writer把record ID填object_ref，无id/query被拒pending。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-27.json",
+          "sha256": "4937490a7e9d6431cc6c1303bff5162dc310a5b31b39b1e14ed378d4cf8b0230",
+          "bytes": 1791
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-30.json",
+          "sha256": "d8953df7108f37a39278530534742bad7653e8860ad04a8e4f0b45d218516c7e",
+          "bytes": 1594
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-33.json",
+          "sha256": "9efc2d8ac7e41a0cb86e632413965dc25772f628140ea67ed2dca7d858fb3c62",
+          "bytes": 1725
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-33/result.json",
+          "sha256": "52dfc388f8266dce28e2cd1cb1937e419d3beee39e5bda7887d009eec33b2099",
+          "bytes": 326984
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "786638ea-abb4-508c-a2f1-8ffe1e13a35d",
+            "revision": 1,
+            "history_count": 1
+          },
+          {
+            "id": "f0ade0c6-0535-50bd-b553-414ea7ca54d9",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已成功保存两个项目的报告偏好：\n1. 曙光项目：周报使用叙述段落。\n2. 海风项目：周报使用要点列表。",
+        "已更新曙光项目的周报格式偏好为要点列表（第2版），海风项目的偏好保持不变。",
+        "两个项目现在的周报格式均为要点列表。曙光项目以前的周报格式为叙述段落。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 3,
+      "arm": "source-backlinks",
+      "original_indices": [
+        28,
+        31,
+        34
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_DUPLICATE_AND_SOURCE_UNSUPPORTED",
+      "explicit_Root_assessment": "项目范围在JSONString正文；修订首次拼接不存在Source被拒；查询后真实新增重复海风卡、仅问题Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-28.json",
+          "sha256": "56a3922ae47afe548fad73423847a55e77604ebe15e52f6df891c7a4b16f207f",
+          "bytes": 1610
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-31.json",
+          "sha256": "49e0d85725eb7b9559da2476f7b2ac96fdc92669bdc82a5aff44280cc5b0e6da",
+          "bytes": 1805
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-34.json",
+          "sha256": "a9c4e6112f73d13ffb09b8c373e41acb879434c70bc0df0992deae13b39fc552",
+          "bytes": 1790
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-34/result.json",
+          "sha256": "6a2c0849425b3965f3d84222903570d347f5b733f4d244610d8072e060d2d840",
+          "bytes": 344359
+        },
+        "all_items_read": 27,
+        "records": [
+          {
+            "id": "63ec6e43-6898-584a-9138-6da0798c4be2",
+            "revision": 1,
+            "history_count": 1
+          },
+          {
+            "id": "7d80e86b-334a-5288-8a70-820c748f9b6e",
+            "revision": 1,
+            "history_count": 1
+          },
+          {
+            "id": "e5f971ff-37c4-5382-ba70-c5df184b41cc",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已分别保存两个项目的报告偏好：曙光项目的周报偏好为叙述段落（记录ID: e5f971ff-37c4-5382-ba70-c5df184b41cc），海风项目的周报偏好为要点列表（记录ID: 7d80e86b-334a-5288-8a70-820c748f9b6e）。",
+        "曙光项目的周报格式已更新为要点列表。海风项目的偏好保持不变。",
+        "两个项目现在的周报格式均为“要点列表”。曙光项目以前的周报格式是“叙述段落”。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 3,
+      "arm": "source-backlinks-read-handles-patch",
+      "original_indices": [
+        29,
+        32,
+        35
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_REDUNDANT_HISTORY_CARD_AND_SOURCE_UNSUPPORTED",
+      "explicit_Root_assessment": "真实独立项目scope/曙光句柄patch；查询后把已存曙光r1历史再create独立卡，仅问题Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-29.json",
+          "sha256": "6d2f5a20a353b56dcd656e3499ec5e3405c4650bdd80d873359d093759143224",
+          "bytes": 1627
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-32.json",
+          "sha256": "cfa6f6f416e96bc193de9412e52d8580474fb93c027289afe9ee1c0283a047f1",
+          "bytes": 1693
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-35.json",
+          "sha256": "7424aeaec0b0bc57f1644b91b96d6b6d8a2e526a5426e96173571b35f1d52bd6",
+          "bytes": 1923
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-35/result.json",
+          "sha256": "488ec16a88fc2aade4620aa0e16cee80b12072014f87372d6aa0b041db4c94ff",
+          "bytes": 380320
+        },
+        "all_items_read": 28,
+        "records": [
+          {
+            "id": "0b992418-b426-596e-836a-954b51b2c470",
+            "revision": 2,
+            "history_count": 2
+          },
+          {
+            "id": "3b3e3a61-adcb-535a-8442-29d38566ddc3",
+            "revision": 1,
+            "history_count": 1
+          },
+          {
+            "id": "a8f59757-b709-5e4f-8d7c-6fd965c8c6db",
+            "revision": 1,
+            "history_count": 1
+          }
+        ]
+      },
+      "original_finals": [
+        "已分别保存两个项目的报告偏好：\n1. 曙光项目：周报使用叙述段落（ID: 0b992418-b426-596e-836a-954b51b2c470）。\n2. 海风项目：周报使用要点列表（ID: a8f59757-b709-5e4f-8d7c-6fd965c8c6db）。",
+        "已更新曙光项目的周报格式为要点列表，并保留了其使用叙述段落格式的历史偏好。海风项目的偏好未受影响。",
+        "根据记录，两个项目现在的周报格式均为**要点列表**格式（曙光项目和海风项目）。曙光项目以前的周报格式偏好为**叙述段落**格式。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 4,
+      "arm": "old-target-query",
+      "original_indices": [
+        36,
+        39,
+        42
+      ],
+      "initial_save_Root_quality": "PARTIAL_FREQUENCY_MODIFIER",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "FAIL_HISTORICAL_READER",
+      "query_maintenance_Root_quality": "no_change",
+      "explicit_Root_assessment": "初卡未显式保存通常；修订错误Source和额外业务字段两提议被拒，合法r2清空scope/未显式排除。查询只读r2，把原周二上午误述为周四下午；r1仍在库且索引可用。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-36.json",
+          "sha256": "777b93312f0680af2288d05c9944773bf13bee90c60a2e5b626f8f7f9ad1f0b4",
+          "bytes": 1590
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-39.json",
+          "sha256": "86f235ea66e903c0d0cf4135ac255fff4609bc57b8bb164c522b83e0f47df95b",
+          "bytes": 1989
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-42.json",
+          "sha256": "19fed980ee1eb2f4c4c6b21658bf49a8d95f718e13c6721e1b27a65a44b55ba4",
+          "bytes": 2076
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-42/result.json",
+          "sha256": "cff48accde022ffc2574dda5f30190c664f4c74907195b034bfbcd30946edfa8",
+          "bytes": 271706
+        },
+        "all_items_read": 19,
+        "records": [
+          {
+            "id": "20d65bad-64f2-5d85-8790-ed1fad8b0d0a",
+            "revision": 2,
+            "history_count": 2
+          }
+        ]
+      },
+      "original_finals": [
+        "已保存：本季度的设计审查通常在周二上午进行。",
+        "已为您修订本季度设计审查的安排：现在定于**周四下午**进行。原周二上午的记录已更新，且该安排仅适用于设计审查会议。",
+        "根据记录，本季度的设计审查应安排在**周四下午**。\n\n关于您的其他问题：\n1. **原来怎样说的？**：您之前的陈述明确指定了“本季度”、“周四”和“下午”用于“设计审查”活动。\n2. **这是否也规定了我所有会议的时间？**：不，这一偏好仅针对**设计审查**（design_review）这一特定活动，并未规定您所有会议的时间。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 4,
+      "arm": "source-backlinks",
+      "original_indices": [
+        37,
+        40,
+        43
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_AND_SCOPE_LOSS",
+      "explicit_Root_assessment": "修订首用旧Source被拒后合法r2/exclusions，结构scope清空。Reader读r1/r2正确；Writer r3只剩周四下午design_review，失本季度/其他会议排除，仅问题Source。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-37.json",
+          "sha256": "9e0e39aea8b162b471cd000fc687bb015acefc5db7b0178c520ffc64ff12f684",
+          "bytes": 1503
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-40.json",
+          "sha256": "560a5f1482385a6f68257f4d857f686f7341481cf98514bc3a847362731ec472",
+          "bytes": 1780
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-43.json",
+          "sha256": "a66159df35fd766c30e041d556066a6b20b8c3e92d40ed4bf7d6bc6574723a0b",
+          "bytes": 2053
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-43/result.json",
+          "sha256": "54906bfdce6cfce1045d53aba5b64d9181d83bca0b04fcd9d1e959c525f8eec2",
+          "bytes": 285817
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "1d11f472-b8e0-5133-8d91-18794f55f649",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "已保存您的偏好：本季度的设计审查通常在周二上午进行。记录ID为 1d11f472-b8e0-5133-8d91-18794f55f649。",
+        "已更正：本季度设计审查安排在周四下午，且不适用于其他类型的会议。",
+        "根据记录，关于本季度设计审查的时间安排如下：\n\n1. **当前规定**：本季度的设计审查通常在**周四下午**进行。\n2. **原来的说法**：之前（第1版记录）曾规定在**周二上午**进行，但后来已更新。\n3. **适用范围**：该规定**仅针对设计审查**，明确排除了其他类型的会议，因此不规定您所有会议的时间。"
+      ],
+      "Root_not_independent_Judge": true
+    },
+    {
+      "case_index": 4,
+      "arm": "source-backlinks-read-handles-patch",
+      "original_indices": [
+        38,
+        41,
+        44
+      ],
+      "initial_save_Root_quality": "PASS_SCOPED",
+      "correction_same_original_id_and_core_preference": "PASS_SCOPED",
+      "correction_sources_bound_to_actual_current_correction": "PASS_SCOPED",
+      "query_Reader_Root_quality": "PASS_SCOPED",
+      "query_maintenance_Root_quality": "FAIL_SOURCE_UNSUPPORTED_COMMIT",
+      "explicit_Root_assessment": "合法句柄r2保留scope排除；原实际HTTP已送达当前与旧r1全文，Host零额外Tool即正确；Writer重复r3仅问题Source，scope/body保留。",
+      "original_boundary_reviews": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-38.json",
+          "sha256": "3484d136d0d96475ae077bfe471201496605982eaf743b667512fd230903b63b",
+          "bytes": 1442
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-41.json",
+          "sha256": "d223271426acbea885b527a5a12bf95416af9f2d3f30667f9c138302802315b1",
+          "bytes": 1729
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/root-boundary-reviews/e2-44.json",
+          "sha256": "58d9a99a0bbe014f9a1c8022bc2848cd8157c5ba36cc3999a0dd450545032755",
+          "bytes": 2080
+        }
+      ],
+      "terminal_actual_SDK_reopen": {
+        "original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/sdk-boundary-reopens/e2-44/result.json",
+          "sha256": "69bd7a76c4d41be67c0606d0fb0333b827d9b788b34b67527f52c17613ce22bf",
+          "bytes": 286164
+        },
+        "all_items_read": 24,
+        "records": [
+          {
+            "id": "0da53b57-2e97-5261-bb70-10568bffff27",
+            "revision": 3,
+            "history_count": 3
+          }
+        ]
+      },
+      "original_finals": [
+        "已保存您的偏好：本季度的设计审查通常在周二上午进行。",
+        "已修订记录。本季度设计审查安排已更新为周四下午，且该安排仅适用于设计审查，不适用于其他类型的会议。",
+        "根据记录，本季度设计审查应安排在**周四下午**。原来的说法是希望安排在**周二上午**。该记录通过 scope 中的 excludes 字段明确排除了其他会议类型，因此这**不规定**您所有会议的时间，仅针对本季度的设计审查。"
+      ],
+      "Root_not_independent_Judge": true
+    }
+  ],
+  "literature_current_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/full-first-attempt-archive-first/literature-875-original.json",
+    "sha256": "30333c8ef8edfd69ffe2cc20ec0e12ef2f6350c06a6f924cf54e82656439648d",
+    "bytes": 228419
+  },
+  "literature_primary_rechecks": [
+    {
+      "cohort": "R9 e2-07 original query-to-current-fact unsupported source",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-query-source-gap-primary-recheck.json",
+        "sha256": "d8210fcd8493224cc07b0ff88a3253e8262159f6e12ea3a8c275d7fe77018190",
+        "bytes": 7546
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/v13-2-design-literature-catalog-before-6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc.json",
+          "sha256": "6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc",
+          "bytes": 269818
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/catalog.local-before-6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc.json",
+          "sha256": "6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc",
+          "bytes": 269818
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/index-before-a739b76637ea2738e807125efbc554d888b6067015781a17ce52767a1f236359.html",
+          "sha256": "a739b76637ea2738e807125efbc554d888b6067015781a17ce52767a1f236359",
+          "bytes": 30002
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/current-archive-before-1c5c6099fe83521f40ce0e674f1ad445985d2b33f446c8497dd9486d7ef697a7.json",
+          "sha256": "1c5c6099fe83521f40ce0e674f1ad445985d2b33f446c8497dd9486d7ef697a7",
+          "bytes": 221019
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-4b6b0d8402d79419322851cc8efc16141f18bd639c0b5d1923ff06e2fe99c32c.md",
+          "sha256": "4b6b0d8402d79419322851cc8efc16141f18bd639c0b5d1923ff06e2fe99c32c",
+          "bytes": 44562
+        }
+      ]
+    },
+    {
+      "cohort": "R9 English card despite Chinese save instruction; real Chinese control",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-language-shape-primary-recheck.json",
+        "sha256": "96091430bfc33d9d8623e41d04ee31d4fe96c3e1785c050c3a0dcf783d3cda16",
+        "bytes": 5876
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/v13-2-design-literature-catalog-before-c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741.json",
+          "sha256": "c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741",
+          "bytes": 272302
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/catalog.local-before-c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741.json",
+          "sha256": "c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741",
+          "bytes": 272302
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/index-before-a1c36065c9e6797945f52470bef77b80ec1b548058942efe87b2e99bd407eeec.html",
+          "sha256": "a1c36065c9e6797945f52470bef77b80ec1b548058942efe87b2e99bd407eeec",
+          "bytes": 30245
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/current-archive-before-bba31efa2c411c21ec0acecba747b153cb9681f9eed6cf00973ac307d117611c.json",
+          "sha256": "bba31efa2c411c21ec0acecba747b153cb9681f9eed6cf00973ac307d117611c",
+          "bytes": 222872
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-45e438af4ebed0cc1076b1d09fd39e8bcbd0ac7cc28a84105f91f8e48468a184.md",
+          "sha256": "45e438af4ebed0cc1076b1d09fd39e8bcbd0ac7cc28a84105f91f8e48468a184",
+          "bytes": 45498
+        }
+      ]
+    },
+    {
+      "cohort": "R9 rejected invented opaque Source ID; actual owner guard and paid model-led recovery",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-opaque-source-primary-recheck.json",
+        "sha256": "0f9c4ab6e2cb3960f04bbeeb5fce98a9416766c2fe2e3b68309f4c65c98c54d6",
+        "bytes": 8250
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/v13-2-design-literature-catalog-before-f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14.json",
+          "sha256": "f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14",
+          "bytes": 274786
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/catalog.local-before-f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14.json",
+          "sha256": "f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14",
+          "bytes": 274786
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/index-before-90da1ab50648530c9507a277c23874135d6c4102c3206e4787befb82210b3796.html",
+          "sha256": "90da1ab50648530c9507a277c23874135d6c4102c3206e4787befb82210b3796",
+          "bytes": 30477
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/current-archive-before-e3f5ed5bf05356b9f2599e0fda46dcd2820d0a0cd136468a02e5fb657fa233ec.json",
+          "sha256": "e3f5ed5bf05356b9f2599e0fda46dcd2820d0a0cd136468a02e5fb657fa233ec",
+          "bytes": 224713
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-6325f5e1405a590845f9d0142fbb7a5522a2ac09f793b66ad4e31db05d219782.md",
+          "sha256": "6325f5e1405a590845f9d0142fbb7a5522a2ac09f793b66ad4e31db05d219782",
+          "bytes": 46205
+        }
+      ]
+    },
+    {
+      "cohort": "R9 stored historical version not consumed; actual wire and Source distinctions",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-history-consumption-primary-recheck.json",
+        "sha256": "353232a842ebbccd2c8808c63690be045730ae39248c879a6dc37f878c4365a7",
+        "bytes": 5795
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/v13-2-design-literature-catalog-before-2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484.json",
+          "sha256": "2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484",
+          "bytes": 277279
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/catalog.local-before-2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484.json",
+          "sha256": "2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484",
+          "bytes": 277279
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/index-before-4ed38c4396118e78deb3fcd36c399006628496707fec3ff043bfdb5c072a4301.html",
+          "sha256": "4ed38c4396118e78deb3fcd36c399006628496707fec3ff043bfdb5c072a4301",
+          "bytes": 30706
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/current-archive-before-4e57864c7bae940bf7c23d6221077b25896b6ef71e709139737757a407df4878.json",
+          "sha256": "4e57864c7bae940bf7c23d6221077b25896b6ef71e709139737757a407df4878",
+          "bytes": 226548
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-531a62bf51c1ab845995d81081974fb374d4068adca0cb2979776a75c7c8002d.md",
+          "sha256": "531a62bf51c1ab845995d81081974fb374d4068adca0cb2979776a75c7c8002d",
+          "bytes": 47011
+        }
+      ]
+    }
+  ],
+  "no_retry_or_refund_or_final_rewrite": true,
+  "actual_card_language_not_assumed_from_requested_language": true,
+  "legacy_query_latest_fill_retained_not_explicit_CAS_pass": true,
+  "finite_concurrent_version_controls_not_new_model_conflict_samples": true,
+  "R0_to_R9_not_single_factor_causal_comparison": true,
+  "all_45_offline_input_gates_not_actual_model_samples": true,
+  "independent_Judge_or_second_family_verified": false,
+  "original_48_requirement_rows_unchanged": true,
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "full_plan_completed": false,
+  "full_first_attempt_archive": {
+    "file_index": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/full-first-attempt-archive-first/file-index.json",
+      "sha256": "374f06ef4b422409ea9d189e24438487e92c65e97f4c709f666d71f384f7091f",
+      "bytes": 172665
+    },
+    "seal": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/full-first-attempt-archive-first/SEAL.json",
+      "sha256": "dcc00cb9f5b7a7d8e470a483e8da8dc33d9f0b73aa8088539b2874345e51b782",
+      "bytes": 1604
+    },
+    "indexed_original_files": 1069,
+    "symlink_metadata_entries": 0,
+    "future_writes_outside_closed_root": true
+  }
+}

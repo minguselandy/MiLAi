@@ -1,0 +1,128 @@
+{
+  "kind": "V13_2_USER_REQUESTED_PAUSE_SUMMARY_CHECKPOINT",
+  "status": "PAUSED",
+  "paused_at_utc_observed": "2026-10-01T22:28:21Z",
+  "recorded_at_utc": "2026-10-01T22:35:59.762318+00:00",
+  "user_request": "暂停当前实验，生成总结报告，提交到github上",
+  "goal_observed": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-pause-summary-publication-20261002/actual-paused-goal-fresh.json",
+    "sha256": "69d22eadb425a15f9d650fa2b43d5840c8b2652d37d7d1a154099cea6d40d860",
+    "bytes": 404
+  },
+  "report": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/docs/V13_2_PAUSE_STATUS_20261002.md",
+    "sha256": "bee4d34a58cd747153187fd566fd3dd4f3982d716814ea0012d219a550c28380",
+    "bytes": 9451
+  },
+  "last_verified_public_R9_commit": "fd6bf53bbe3c2553863635af4c4f2445caf1d1bc",
+  "branch": "feat/lab-evidence-incremental-v13-2-20261001",
+  "draft_PR": "https://github.com/minguselandy/MiLAi/pull/79",
+  "rollback_main": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "original_48_requirements_count": 48,
+  "original_48_statuses": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "original_48_rows_sha256": "b535c235beb678eecea83673bd244423451099d1d7d115136cee9bf22e71da97",
+  "R9_results": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-e2-r9-results.json",
+    "sha256": "f1f0e04cc95061876db9ee1217b30500e0d83c4eb05aa58217aab3c9fe166cfd",
+    "bytes": 58023
+  },
+  "R9_completed_trajectories": 15,
+  "R9_completed_public_messages": 45,
+  "R9_reader_diagnostics": {
+    "PASS_SCOPED": 13,
+    "PARTIAL_SCOPE_EXPRESSION": 1,
+    "FAIL_HISTORICAL_READER": 1,
+    "not_independent_Judge": true
+  },
+  "R9_query_maintenance": {
+    "paid_generation_requests": 15,
+    "known_tokens": 60678,
+    "no_change": 6,
+    "rejected_pending": 1,
+    "unnecessary_commits": 8,
+    "unsupported_current_question_sources": 8,
+    "existing_record_extra_revisions": 6,
+    "new_duplicate_or_redundant_cards": 2
+  },
+  "R9_actual_costs": {
+    "generation_requests": 148,
+    "embedding_requests": 63,
+    "generation_known_tokens": 899383,
+    "embedding_known_tokens": 24315,
+    "generation_prompt_tokens": 888705,
+    "generation_completion_tokens": 10678,
+    "maintenance_generation_requests": 15,
+    "new_generation_unknown": 0,
+    "new_embedding_unknown": 0
+  },
+  "R0_to_R9_cumulative": {
+    "generation_requests": 1452,
+    "known_generation_tokens": 6696226,
+    "embedding_requests": 590,
+    "embedding_tokens": 247457
+  },
+  "canonical_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+    "generation_requests": 9398,
+    "known_generation_tokens": 27006877,
+    "charged_generation_tokens": 27037264,
+    "embedding_known_charged_tokens": 964645,
+    "historical_unknown_generation_requests": 1,
+    "conservative_unknown_charge": 30387
+  },
+  "common_engineering_checkpoint": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-common-boundary-engineering-acceptance.json",
+    "sha256": "38771ced16dd19e36a66b8200f296870fb750867674832503380f6fbbd099d4d",
+    "bytes": 17567
+  },
+  "current_maps": {
+    "runtime": {
+      "count": 217,
+      "compact_sha256": "ee2b62bdcfd3f51cb3817f4652f4e2c23aeea0fe4d14a44b04a3e6b466c27d94"
+    },
+    "tests": {
+      "count": 398,
+      "compact_sha256": "79bd9b2007a578e56c5f16b6e12cb3762cb71b7837cba2dee5255d5d37a41d77"
+    },
+    "configs": {
+      "count": 323,
+      "compact_sha256": "f504e27b76f41591f9fca5b08c924cf14368f9cdeec465bd92c9263182c0c853"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "paper_count": 19,
+  "project_reference_groups": 21,
+  "verified_literature_files": 895,
+  "local_index_links": 193,
+  "literature_catalog": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-design-literature-catalog.json",
+    "sha256": "fca579fd4d9424d145e6e33141aad9b2a0ee4de8ccb3925fe3a24651aeda812d",
+    "bytes": 293963
+  },
+  "literature_audit_immutable": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/pause-existing-evidence-closure-first/literature-895-original.json",
+    "sha256": "af41486db149a425f98458d08232ade50a16739541a55edcd9cb584c69e51977",
+    "bytes": 234172
+  },
+  "literature_local_entry": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/index.html",
+  "active_experiment_processes": 0,
+  "source_owner": "READY/HOLD completed",
+  "experiments_or_model_HTTP_started_after_pause": 0,
+  "resume_requires_new_explicit_user_instruction": true,
+  "E0": "NOT_PASSED",
+  "D4": "NOT_ADMITTED",
+  "Product": "NO_GO",
+  "full_original_plan_complete": false,
+  "publication_proof_destination": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-pause-summary-publication-20261002",
+  "checkpoint_publication_records_external_to_all_closed_experiment_roots": true
+}

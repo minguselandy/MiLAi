@@ -863,6 +863,7 @@ def test_configured_common_reader_is_on_actual_wire_with_lawful_current_thread(
     runtime = compare.ComparisonRuntime.__new__(compare.ComparisonRuntime)
     runtime.scope = FoundationScope("r", "B2", "alice", "current-episode")
     runtime.settings, runtime.model = config, model
+    runtime.common_profiles = compare.profiles(config)
     runtime.parameters, runtime.arm = {"cadence": "t3_native"}, "B2"
     runtime.service = SimpleNamespace(sources=lambda: [])
     runtime.trace = lambda event: None

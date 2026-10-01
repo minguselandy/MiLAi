@@ -1,0 +1,101 @@
+{
+  "kind": "V13_2_DIRECT_SUPPORT_READONLY_PROPOSAL_ACCEPTANCE",
+  "status": "READONLY_ACCEPTED_ISOLATED_IMPLEMENTATION_AUTHORIZED_NOT_RUNTIME_ADMITTED",
+  "root_verification": {
+    "path": "artifacts/v13-2-direct-support-root-audit/original-proposal-verification.json",
+    "sha256": "55c545a6d81b822b9177e466c879ca485c13272f00fea825a5b6d85bcb3f7b77"
+  },
+  "source_final_report": {
+    "path": "artifacts/v13-2-direct-support-proposal-source/source-checks-final.json",
+    "sha256": "3a1cc3520ad65745fe5b9b0c857448dddb226e2cbde336ee5e7a9e551a0e142f"
+  },
+  "source_original_proposal": {
+    "path": "artifacts/v13-2-direct-support-proposal-source/design.md",
+    "sha256": "b6c57ef4167492af0115171fa3d3b22e171e82006db89442b5c52dae3355b3d7"
+  },
+  "source_freeze_clarifications": {
+    "path": "artifacts/v13-2-direct-support-proposal-source/freeze-notes.md",
+    "sha256": "c076a711ff1a0ce0026108da078000804711ceb4e5bf0b1c01a88c5008752c7d"
+  },
+  "source_provenance_correction": {
+    "path": "artifacts/v13-2-direct-support-proposal-source/provenance-correction.json",
+    "sha256": "88141c9e6e1951e10bedc54a63cbbc201a4aedf29940d7099fbab97a60ca696a"
+  },
+  "indexed_receipts": 41,
+  "original_before_after_receipts": 39,
+  "recovered_receipts_missing_original_after": [
+    "canonical-action-schema",
+    "inventory-shape-inspection-failure"
+  ],
+  "original_failures": 4,
+  "original_file_snapshots": 12,
+  "saved_exposed_r5_traces": 11,
+  "saved_request_receipt_pairs": 17,
+  "copied_source_artifacts": 262,
+  "original_claim_limits": [
+    "Read-only saved exposed R5 requests + static code audit; no implementation or runtime validation of this proposal.",
+    "Root review task24PASS/source7gaps is reported provenance, not an independent rescore here.",
+    "Trigger/support separation, exact whole-field lineage, trigger-key Host skip cadence, and opt-in companion IDs are a combined profile.",
+    "Legacy whole-version source sets do not provide finer per-assertion attribution.",
+    "Metadata identity does not imply full Source/history body delivery/read or semantic support.",
+    "No automatic inheritance for changed fields; actual leaves remain model-selected and prose unchecked.",
+    "Original design mentions an unexecuted finite_checks draft that was removed at freeze; see freeze-notes.md.",
+    "Two recovered failures lack original after maps; the outside-helper shape failure also lacks original before. Recovery maps are later observations.",
+    "The pre-dispatch helper failure lacks its exact rg pattern argument; receipt retains known invocation/source paths without inventing that argument.",
+    "No source/test byte-unchanged claim is derived from missing maps. Complete command maps show no source changes during each such command.",
+    "Two observed runtime maps reflect Root post-R5 admission cherry-pick, not an audit source edit.",
+    "Successful setup/reading calls outside the monitored helper are not claimed to have original before/after receipts.",
+    "The first recovered receipt guessed a preceding chat_bridge path incorrectly. provenance-correction.json supersedes only that recovered field; the full original preceding argument list remains unknown."
+  ],
+  "root_missing_draft_read": {
+    "path": "artifacts/v13-2-shared-admission-integration/root-lineage-draft-missing-read.json",
+    "sha256": "0ea28df6b5277f0f5f0e89c21ff1864600b2eb38744089627e358d4dfaba9823"
+  },
+  "source_runtime_checks_executed": 0,
+  "source_sdk_constructions_imports": 0,
+  "actual_model_http": 0,
+  "actual_embedding_http": 0,
+  "ledger_before_after_sha256": "26f46d5fe3aeeaf0e399587098311e6d15bfacf01a0f231aca759207e6b0398b",
+  "source_lineage_families_match_r5": true,
+  "r5_source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+  "current_runtime_map_sha256": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+  "authorized_implementation": {
+    "status": "AUTHORIZED_ISOLATED_NOT_ACCEPTED",
+    "base_commit": "87f74c6ca3f0cff0c17b07e86ad9869248270c6a",
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-direct-support",
+    "branch": "feat/lab-v13-2-direct-support-20261001",
+    "support_contract_default": "legacy",
+    "opt_in": "direct_support_v1",
+    "requires": [
+      "event_bound_v1",
+      "read_handle_v1"
+    ],
+    "joint_factors": [
+      "Trusted actual public-turn trigger separate from supporting leaves",
+      "Explicit whole-field exact reuse with actual read-time candidate/hash/current CAS",
+      "Host-success suppression by trusted trigger; explicit cadence factor",
+      "Literal companion string object ID from same actually captured Source DTO",
+      "Required generic bounded protocol presentation"
+    ],
+    "forbidden": [
+      "Semantic entailment verifier",
+      "Automatic/latest current source selection or union of old sources",
+      "Reuse support for changed fields",
+      "Case/language/question branches",
+      "Widening2048/6 or ranking/selection/threshold changes",
+      "Dictionary coercion or generic JSON grammar rewrite",
+      "Extra writer/paid repair/free undisclosed historical reads",
+      "New benchmark/gold/holdout or SDK upgrade",
+      "Actual HTTP/global ledger/primary/Product/Archive changes"
+    ],
+    "source_owner": "retained v13_2_source_resume",
+    "primary_and_existing_source_trees": "HOLD",
+    "root_prospective_requirements": {
+      "path": "artifacts/v13-2-root-drivers/r6-prospective-requirements.json",
+      "sha256": "f06263a10f80f62b54d1adf3634b2b2072af837909492e8525638e38c9d77781"
+    }
+  },
+  "d4": "NOT_ADMITTED",
+  "independent_review": false,
+  "product": "NO_GO"
+}

@@ -1,0 +1,64 @@
+{
+  "kind": "V13_2_READ_PROTOCOL_READ_ONLY_TWO_DEPENDENCY_ADDENDUM",
+  "status": "AUTHORIZED_ONLY_AFTER_REMOTE_VERIFICATION_READ_ONLY_NOT_IMPLEMENTATION",
+  "prepared_at_utc": "2026-10-01T09:55:02.160857+00:00",
+  "base_commit": "da33e6169c2745fbb50aee3f0a4370b9ceb1f02f",
+  "source_owner": "/root/v13_2_source_resume",
+  "source_tree": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-proposal",
+  "original_scope_sha256": "7e2f8d10bce661a10b3f319bfb19373d4d3f40c5182cf092edbdcfd2211169ff",
+  "original_scope_document_sha256": "3b75e26f7b0f8a52adccdeaf3e11a92e2b2c0e94973d06ac6d5d8534c7036e3d",
+  "addendum_document_sha256": "abb031ef2dbd2f9c8c8181fe75652436f3d87435d3a2f6de06c7ac6518f1dfec",
+  "additional_static_runtime_content": {
+    "src/milai_lab/baselines/langmem_instrumentation.py": {
+      "sha256": "0fea97120ffd1b9a079584aab728c05ed88d0bcb28119355e8629b68f1e32555",
+      "bytes": 10294
+    },
+    "src/milai_lab/application/journal.py": {
+      "sha256": "6b5ab1b478bf00158829e2a22898a04a77928f5812690f6ab0e6dd6c5485dad7",
+      "bytes": 30804
+    }
+  },
+  "allowed_static_reasoning": {
+    "observer": [
+      "ProvenanceObserver.run_tool",
+      "safe",
+      "incomplete",
+      "assert_healthy",
+      "call context and direct helpers"
+    ],
+    "journal": [
+      "BusinessActionJournal.__call__",
+      "entry_for_call",
+      "direct execution/rejection/exception recording helpers and necessary types"
+    ]
+  },
+  "external_imports_not_newly_allowed": true,
+  "map_identities": {
+    "source": {
+      "count": 212,
+      "sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf"
+    },
+    "tests": {
+      "count": 389,
+      "sha256": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "write_scope_unchanged": true,
+  "original_external_bootstrap_deviation": {
+    "path": "/cra/memory/mx_memory/artifacts/v13-2-read-protocol-proposal-bootstrap",
+    "retrospective_narrow_exception": "retain existing originals HOLD and copy exact bytes to authorized new tree; report deviation and hashes, no new external writes or reconstructed maps",
+    "handoff_root_independent_review": "PENDING"
+  },
+  "runtime_edits_authorized": false,
+  "tests_sdk_synthetic_execution_authorized": false,
+  "actual_model_http_authorized": 0,
+  "global_ledger_or_experiment_content_authorized": false,
+  "all_original_prohibitions_preserved": true,
+  "full_plan": "ACTIVE",
+  "d4_admission": "NOT_ADMITTED",
+  "product": "NO_GO"
+}

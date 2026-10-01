@@ -1,0 +1,242 @@
+{
+  "kind": "V13_2_ROOT_STAGED_COHORT_REVIEW_SCOPED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_LOCAL_ORCHESTRATION_NOT_MODEL_OR_GLOBAL_HTTP_OWNER",
+  "recorded_at_utc": "2026-10-01T11:24:20.520125+00:00",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "plan_sections": [
+    "9.1",
+    "12.3",
+    "15"
+  ],
+  "trigger": "Original R7 false durable semantic-save claim was detected during full Root review after all24 trajectories were terminal; historical timing/results unchanged.",
+  "public_controller": {
+    "path": "tools/run_v13_2_staged_e0.py",
+    "sha256": "561f493bbd770f08c67844faf5f79d6d233cc32379892daadb19d26f7a1fcc82"
+  },
+  "documentation": {
+    "path": "docs/V13_2_STAGED_COHORT_REVIEW.md",
+    "sha256": "d41d01ccff98a5fa9a381d38ad5532e3a0d96d4af7de2c8d06afe85bee1686c8"
+  },
+  "controller_domains": {
+    "actual_frozen_e0": "Only new separately accepted/frozen/GitHub-verified24-trajectory48-message first attempts, canonical existing continuous ledger.",
+    "scripted_local_control": "Explicitly labelled fake CLI/isolated precreated synthetic ledger, socket denial, no Lab/SDK/model."
+  },
+  "design": {
+    "one_trajectory_then_review": true,
+    "explicit_root_diagnostic_not_independent_judge": true,
+    "all_prior_original_attempt_file_closures_checked": true,
+    "acknowledged_review_and_evidence_hashes_checked": true,
+    "hard_stop_findings": [
+      "leak",
+      "gold_contamination",
+      "shared_owner_pollution",
+      "false_durable_save",
+      "original_results_corruption"
+    ],
+    "detected_or_unresolved_hard_stop": "HOLD_AFFECTED_COHORT",
+    "ordinary_failure": "Only explicit Root independent-continuation decision and saved primary-method reflection, next unrun case only.",
+    "unfinished_dispatch": "DISPATCHING outcome unknown; no automatic redispatch.",
+    "original_bytes": "Exclusive file creation+flush+fsync, original rc/stdout/stderr/ledger/process-results, variable1/2/3 message lengths, no fabricated final.",
+    "no_model_input_or_tool_routing_change": true
+  },
+  "final_exact_file_checks": {
+    "local_control_count": 44,
+    "isolated_fixture_count": 34,
+    "result": {
+      "path": "artifacts/v13-2-staged-controller-controls-public-final-first/result.json",
+      "sha256": "ef7058063fd54185284eecd82a44257adc89f699ee9dd662881b396a9144c903"
+    },
+    "harness": {
+      "path": "artifacts/v13-2-root-drivers/check_staged_e0_controller_public_final.py",
+      "sha256": "758541fdc006bd64684a186dc878cf80748873eaffb46276b79274685fb09291"
+    },
+    "original_native_command_chunk": "8c16a4",
+    "original_completion_chunk": "6fbe39",
+    "actual_returncode": 0,
+    "all_control_labels": [
+      "refuse-reinitialize-original-state",
+      "one-real-local-child-and-no-review-no-next",
+      "all24-scripted-attempts48-variable-length-messages-not-quality",
+      "hard-stop-false_durable_save",
+      "hold-does-not-resume-false_durable_save",
+      "hard-stop-gold_contamination",
+      "hold-does-not-resume-gold_contamination",
+      "hard-stop-leak",
+      "hold-does-not-resume-leak",
+      "hard-stop-original_results_corruption",
+      "hold-does-not-resume-original_results_corruption",
+      "hard-stop-shared_owner_pollution",
+      "hold-does-not-resume-shared_owner_pollution",
+      "unresolved-hard-stop-holds-no-guessed-score",
+      "wrong-attempt",
+      "wrong-case",
+      "claimed-independence",
+      "missing-explanation",
+      "failed-original-no-reflection-no-next",
+      "failed-original-preserved-reflected-independent-next-never-retry",
+      "ledger-drift",
+      "source-byte-drift",
+      "source-new-path",
+      "freeze-drift",
+      "fixture-drift",
+      "config-drift",
+      "raw-cohort-drift",
+      "original-output-drift-stdout.log",
+      "original-output-drift-stderr.log",
+      "original-output-drift-ledger-before.json",
+      "original-output-drift-ledger-after.json",
+      "original-output-drift-issued.json",
+      "original-output-drift-receipt.json",
+      "original-output-drift-original-process-results.json",
+      "earlier-acknowledged-review-drift",
+      "earlier-original-evidence-drift",
+      "earlier-reflection-drift",
+      "actual-interrupted-parent-never-redispatches-charged-unknown",
+      "actual-parent-interruption-original-unknown-and-missing-receipt-preserved",
+      "unfinished-dispatch-no-automatic-redispatch",
+      "missing-ledger-never-creates-replacement",
+      "existing-case-never-replay",
+      "second-parent-refuses-before-any-child",
+      "held-parent-lock-local-scope-not-global-http-owner"
+    ],
+    "actual_scripted_parent_interruption": {
+      "parent_pid": 2795287,
+      "child_pid": 2795288,
+      "parent_returncode": -15,
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/run_v13_2_staged_e0.py",
+        "next",
+        "--manifest",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-staged-controller-controls-public-final-first/actual-parent-interrupted-after-scripted-child-charge/parent/manifest.json"
+      ],
+      "missing_original_receipt": true,
+      "phase": "DISPATCHING",
+      "scripted_unknown_usage_retained": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "actual_model_http": 0
+    },
+    "final_narrow_checks": [
+      {
+        "path": "artifacts/v13-2-development-r7/staged-controller-final-ruff/receipt.json",
+        "sha256": "e94dc6fc559228a36ccee080abe949e391381f92bfce3d841c88bd73c6a71360",
+        "name": "ruff",
+        "actual_returncode": 0
+      },
+      {
+        "path": "artifacts/v13-2-development-r7/staged-controller-final-mypy/receipt.json",
+        "sha256": "51ff413cdeb8ed32446fe893c5c2cb597d003811bc3f0dbae557e39ddcb9ecb8",
+        "name": "mypy",
+        "actual_returncode": 0
+      },
+      {
+        "path": "artifacts/v13-2-development-r7/staged-controller-final-package-boundary/receipt.json",
+        "sha256": "237182ec18ec7e56ed01f93bba2c6525277ad66b13716d4bab846991f2dd0a73",
+        "name": "package-boundary",
+        "actual_returncode": 0
+      },
+      {
+        "path": "artifacts/v13-2-development-r7/staged-controller-final-tools-boundary/receipt.json",
+        "sha256": "a5b4f5ee6dd41bd08534012732b54c3572af56d0437e1549e7a6857ce383d797",
+        "name": "tools-boundary",
+        "actual_returncode": 0
+      }
+    ]
+  },
+  "root_original_verification": {
+    "path": "artifacts/v13-2-development-r7/staged-controller-public-originals-root-verification.json",
+    "sha256": "8b4f8ffc85d4d0fddfc79166ae69b6c3719dbe538826163c745b4d8f993f0dd4",
+    "original_native_command_chunk": "22a79a",
+    "actual_returncode": 0,
+    "previous_original_files": 2376,
+    "new_public_original_files": 1992,
+    "previous_audit": {
+      "path": "artifacts/v13-2-development-r7/staged-controller-originals-root-verification.json",
+      "sha256": "9e241e856577b781a94add174798bb849b78c6fb7b2d431a3d2d411a8791a620"
+    },
+    "native_command_origins": {
+      "path": "artifacts/v13-2-development-r7/staged-controller-public-native-command-origins.json",
+      "sha256": "abd36756610a4507f28f357170a647b7586e091e634979b541ccbe481d5a1c58"
+    },
+    "previous_native_origins": {
+      "path": "artifacts/v13-2-development-r7/staged-controller-original-native-command-origins.json",
+      "sha256": "a1e51834bcb6f42c7b0630866aa9aa4300c3a19082ccaced042dbdd308ef2e3b"
+    }
+  },
+  "preserved_failures": [
+    {
+      "original_native_command_chunk": "5b2789",
+      "original_completion_chunk": "22a4b0",
+      "actual_returncode": 1,
+      "kind": "ROOT_HARNESS_EXACT_FILE_BINDING_ERROR",
+      "finding": "v2 harness still loaded v1; original-output-drift-stdout.log control expected refusal but old driver continued.",
+      "original_stderr": {
+        "path": "artifacts/v13-2-development-r7/staged-controller-v2-first.stderr.log",
+        "sha256": "479d1c1ffcaa5c7769c59636b817304b52cb3504a32734107ef4fc0288cbde26"
+      },
+      "at_time_full_maps": "Not serialized before failure; do not substitute later maps."
+    },
+    {
+      "original_native_command_chunk": "b5d3e2",
+      "actual_returncode": 1,
+      "kind": "ROOT_PUBLIC_FIRST_RUFF",
+      "reported_findings": 51,
+      "original_stdout": {
+        "path": "artifacts/v13-2-development-r7/staged-controller-public-ruff-first.stdout.log",
+        "sha256": "8988061544ec00a13c4d4da2b28b1984e1e8a5daa3671e08c40e89d3346213f4"
+      }
+    },
+    {
+      "original_native_command_chunk": "1b5237",
+      "actual_returncode": 1,
+      "kind": "ROOT_PUBLIC_FIRST_MYPY",
+      "reported_findings": 2,
+      "original_stdout": {
+        "path": "artifacts/v13-2-development-r7/staged-controller-public-mypy-first.stdout.log",
+        "sha256": "ff90b16c6c1870f0542a3a999dcb4a0514ef19510179cffd0090608f01fc44ef"
+      }
+    }
+  ],
+  "unchanged_primary_identity": {
+    "source": {
+      "file_count": 212,
+      "compact_map_sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf"
+    },
+    "tests": {
+      "file_count": 389,
+      "compact_map_sha256": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6"
+    },
+    "configs": {
+      "file_count": 316,
+      "compact_map_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "continuous_actual_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+    "generation_requests": 9200,
+    "known_generation_tokens": 25757358,
+    "charged_generation_tokens": 25787745,
+    "historical_generation_unknown_usage": 1,
+    "historical_conservative_unknown_tokens": 30387,
+    "known_and_charged_embedding_tokens": 920843,
+    "embedding_unknown_usage": 0
+  },
+  "limits": {
+    "effective_semantic_review_quality": "Not independently certified; Root checkpoints must be original-evidence-based human/agent development diagnostics.",
+    "global_all_client_http_owner": "NOT_IMPLEMENTED; local same-job parent flock is not an HTTP owner or universal external-process protection.",
+    "actual_new_cohort": "NOT_STARTED; Source A/B/C acceptance and fresh complete publication required, never replayR7.",
+    "method_effects_or_generalization": "NOT_VERIFIED",
+    "tests_scope": "Finite scripted controls and four narrow static checks, no full suite/build/remote CI."
+  },
+  "new_actual_generation_http": 0,
+  "new_actual_embedding_http": 0,
+  "new_Lab_SDK_mechanism_execution": 0,
+  "new_independent_semantic_reviews": 0,
+  "source_A_B_C_status": "IN_PROGRESS_UNACCEPTED",
+  "full_plan": "ACTIVE",
+  "d4": "NOT_ADMITTED",
+  "product": "NO_GO",
+  "rollback_baseline": "95bf708bfd8aac9f7855485166e3bf739928b949"
+}

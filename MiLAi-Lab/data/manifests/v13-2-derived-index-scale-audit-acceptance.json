@@ -1,0 +1,152 @@
+{
+  "kind": "V13_2_DERIVED_INDEX_AUDIT_ROOT_CHECKS",
+  "recorded_at_utc": "2026-10-01T00:42:18.930411+00:00",
+  "checks": [
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/audit_v13_2_derived_index_scale.py",
+        "--allow-partial",
+        "--output",
+        "data/manifests/v13-2-derived-index-scale-results.json"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/0-stdout.log",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/0-stderr.log",
+      "stdout_sha256": "5568ffc2e896ae8a7cab2f09ba75dcfee4ff3c71daaf84eddb2cd01fb19bb6ae",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tool_sha256_before": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "tool_sha256_after": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "ledger_sha256_before": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/ruff",
+        "check",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/audit_v13_2_derived_index_scale.py"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/1-stdout.log",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/1-stderr.log",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tool_sha256_before": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "tool_sha256_after": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "ledger_sha256_before": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/mypy",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/audit_v13_2_derived_index_scale.py"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/2-stdout.log",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/2-stderr.log",
+      "stdout_sha256": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tool_sha256_before": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "tool_sha256_after": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "ledger_sha256_before": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/milai-lab-check-tools-boundary"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/3-stdout.log",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/3-stderr.log",
+      "stdout_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tool_sha256_before": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "tool_sha256_after": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+      "ledger_sha256_before": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793"
+    }
+  ],
+  "tool_unchanged": true,
+  "ledger_unchanged": true,
+  "historical_failures": [
+    {
+      "phase": "Earlier audit tool lint",
+      "reason": "E501 101-character line exceeded100; corrected before current checks. Original tool output retained in session; no original log-file hash available."
+    }
+  ],
+  "new_generation_requests": 0,
+  "new_embedding_http_requests": 0,
+  "status": "SCOPED_ROOT_AUDITOR_CHECKS_PASSED",
+  "private_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/checks.json",
+  "private_manifest_sha256": "1e3e2a3d5e2442b334eabd4f90ae2c314de18b333cb979a9e850810456da0b75",
+  "scope": "One stdlib-only offline result auditor; actual partial560-sample input, ruff, mypy1file and tools boundary. Does not validate model quality or full840 measurements.",
+  "actual_partial_result_sha256": "da90dc15e2aaf1edcfd326c3b818b36373735d6920081581efcefc04b9f2ce63",
+  "additional_verified_snapshots": [
+    {
+      "status": "PARTIAL_RUNNING",
+      "complete_profile_samples": 700,
+      "completed_profiles": 5,
+      "terminal_command_receipts_verified": 8,
+      "report_sha256": "2b6f71c8dd5da0ec6565350a04b278df2b69643a1b47cbd6e8e4166792d3bdad",
+      "process_results_sha256": "edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0",
+      "process_results_snapshot_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0.json",
+      "stdout_sha256": "815e8df6e92dc0e266108c9c7f2f5516496361519ca6671f70ae0c6e3388e324",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_model_http": 0,
+      "limit": "Same unchanged tool; no repeat lint/mypy/boundary or full840 claim."
+    }
+  ],
+  "full840_strict_audit": {
+    "status": "SCOPED_COMPLETE_D5_PARTIAL",
+    "observed_at_utc": "2026-10-01T02:33:06.650779+00:00",
+    "completed_profiles": 6,
+    "complete_profile_samples": 840,
+    "terminal_commands_verified": 9,
+    "strict_allow_partial": false,
+    "audit_tool_sha256": "46c99e6d9ef14250210da30a0048d62542d09fa2bf21a42c5e1758819f25729d",
+    "pair_identity_checks": [
+      {
+        "size": 100,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      },
+      {
+        "size": 1000,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      },
+      {
+        "size": 10000,
+        "exact_seed_bytes_match": true,
+        "all_twenty_first_query_selected_identities_match": true
+      }
+    ],
+    "original_ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "evidence": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-derived-index-scale-results.json",
+        "sha256": "181e989f4f09f475a23be082eaa33c241bba0a68f10849c027319c56ca0ecca2"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/full840.stdout.log",
+        "sha256": "385cfe2bef8c1a982768035f29074257bf717e5d03d815d937ac6a5672e5ab36"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/full840.stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1.json",
+        "sha256": "1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1"
+      }
+    ],
+    "generation_embedding_http_during_measurement": 0,
+    "limits": [
+      "Same current runtime sources for both arms, only opt-in derived raw_index storage differs; original fd1 baseline retained, not substituted or stitched.",
+      "Fixed sequential arms counterbalanced by N; no randomized repeated order blocks, affinity/frequency lock, machine idle or OS cache reset. Agent engineering/read-only work may overlap, report wall/CPU/SDK descriptive distributions without pure causal claim.",
+      "Public Store logical returned rows are not physical IO; OS process block counters cache-dependent; preserve every phase including rebuilding derived backlinks.",
+      "Fresh bank comparison does not measure benefit when a legacy inline index is retained; opt-in does not delete/migrate legacy inline rows.",
+      "No business-object/operation stream, semantic model quality, independent Judge, long-range/generalization or full D5 acceptance from these synthetic samples."
+    ]
+  }
+}

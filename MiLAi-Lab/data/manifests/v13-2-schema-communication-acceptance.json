@@ -1,0 +1,658 @@
+{
+  "kind": "V13_2_SCHEMA_COMMUNICATION_SCOPED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_DEFAULT_OFF_FOR_R7_PREPARATION_NOT_SEMANTIC_PASS",
+  "accepted_at_utc": "2026-10-01T08:15:48.412759+00:00",
+  "scope_path": "data/manifests/v13-2-schema-communication-scope.json",
+  "scope_sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+  "scope_publication_commit": "8a9143f07f5a94656f9078a9f743c2d8922a8fd8",
+  "source_commit": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+  "source_remote_commit_verified": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+  "source_base_commit": "8a9143f07f5a94656f9078a9f743c2d8922a8fd8",
+  "source_owner": "HOLD",
+  "primary_transfer_commit": "410e02f6cca2e3ff1df62c35866df35b3d2ee6b5",
+  "primary_transfer_verified": true,
+  "runtime_source_count": 212,
+  "runtime_map_sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+  "test_source_count": 389,
+  "test_map_sha256": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+  "config_file_count": 315,
+  "config_map_sha256": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40",
+  "profile": {
+    "default": "legacy",
+    "opt_in": "shape_feedback_v1",
+    "actual_experiment_config_enabled_at_acceptance": false
+  },
+  "combined_factors": [
+    "Actual public schema descriptions/shape examples",
+    "Original safe structural-origin feedback",
+    "Trigger-metadata versus actual Source-body wording"
+  ],
+  "schema_api_permissions": "Lab descriptions/opt-in safe captured-error presentation only; raw parameter constraints, free-argument generation grammar, public DTO/Store, validation/Service reasons, owner/role/hash/CAS, Source selection and business permission unchanged. No Product/Archive edits.",
+  "original_source_indexed_files": 1844,
+  "copied_original_files": 1853,
+  "original_source_command_receipts": 143,
+  "original_source_nonzero_commands": [
+    {
+      "label": "actual-entry-cap-resume-first",
+      "exit_code": 1,
+      "receipt_sha256": "6a93ae738aa61136b1d5467879c59eba91ef2a0902c8863acf17eb7a8631f787"
+    },
+    {
+      "label": "boundary-tool-inventory",
+      "exit_code": 2,
+      "receipt_sha256": "5de817288b85e06e65cea81e6f0d2ca47f9c87d91020b5566344cc95b3f4ce36"
+    },
+    {
+      "label": "capture-pressure-prefix-omission-details",
+      "exit_code": 1,
+      "receipt_sha256": "6f3aafef72f435bfbe95b87ffae0eaef88298183f6cc262583a4a4d78d04f87b"
+    },
+    {
+      "label": "default-current-four-compositions",
+      "exit_code": 1,
+      "receipt_sha256": "7791277ad41398b8ec25a64f35765cf308f7402939278dc0cbe7ef6f0c306069"
+    },
+    {
+      "label": "default-original-four-compositions",
+      "exit_code": 1,
+      "receipt_sha256": "f8e2b054539af85fd3ed88d04d0bbe1e67aa2be23105af2378b68be9c719764c"
+    },
+    {
+      "label": "failed-shared-toolnode-fix-only",
+      "exit_code": 1,
+      "receipt_sha256": "a43cd9cadf77eff91a60cbaaf58db1eae53651d5d6ed8e5167bae55a24575171"
+    },
+    {
+      "label": "final-finite-helper-controls",
+      "exit_code": 1,
+      "receipt_sha256": "1cb69651cfd7e12033d1b7b0931d1e55bacc05abf6091b94768a71be89c00c5a"
+    },
+    {
+      "label": "final-static-ruff",
+      "exit_code": 1,
+      "receipt_sha256": "542471ffd9014dc670d4e7190effaafd6393b21879d6361a7368b22d15f79e44"
+    },
+    {
+      "label": "first-actual-host-d0-p5-writer-controls",
+      "exit_code": 1,
+      "receipt_sha256": "eacfe26953c997d2e742b4a279e2400a33ab6393d01e3d58287ee2e24c07a923"
+    },
+    {
+      "label": "first-source-static-lint",
+      "exit_code": 1,
+      "receipt_sha256": "d106bc589349546cbfcf2144a366b1024b909a73166def855320f757c8ea80fe"
+    },
+    {
+      "label": "inspect-budget-unit-types",
+      "exit_code": 2,
+      "receipt_sha256": "eac45b9bcb1251ebfedc9c276bbcad1daccbf179812bc47322e1376f2ae8711e"
+    },
+    {
+      "label": "legacy-final-error-raw-wire",
+      "exit_code": 1,
+      "receipt_sha256": "6ce1fb5b1c4a1eef8ff40d22cae0036cc9407097b3628f80f0e2fa9f8f6d1d6f"
+    },
+    {
+      "label": "legacy-original-error-raw-wire",
+      "exit_code": 1,
+      "receipt_sha256": "7b061567004a28c9abaade5cf9c853f1be4eac1095450ece7efb8e027293db36"
+    },
+    {
+      "label": "source-mypy-first",
+      "exit_code": 1,
+      "receipt_sha256": "f6d93b39fa2347700d8ac8ff685643d90115a968162e4b22df93bccd3de23c67"
+    },
+    {
+      "label": "source-static-second",
+      "exit_code": 1,
+      "receipt_sha256": "9a4f1d2be3310c292b409d391e073a983040b8d13fb8748407c6d9db3389e7c0"
+    }
+  ],
+  "original_source_checks": {
+    "path": "artifacts/v13-2-schema-communication-source/source-checks.json",
+    "sha256": "f39ac3098896ceb4aa8533dce1cc14daa535032cdd94df5ad201e6d67b275cca"
+  },
+  "original_source_index": {
+    "path": "artifacts/v13-2-schema-communication-source/file-index.json",
+    "sha256": "198d6b9f696162770594a5c264cb89f3bb478b784b82dc280268e66705ab03b5"
+  },
+  "original_source_handoff": {
+    "path": "artifacts/v13-2-schema-communication-source/HANDOFF.md",
+    "sha256": "5612fa72f442ea16b068b8562a21cafc0d90dfcb352484927a74ff24d077af1e"
+  },
+  "root_original_verification": {
+    "path": "artifacts/v13-2-schema-communication-root-audit/original-handoff-verification.json",
+    "sha256": "07174e107f470beadadd517375283fa6ad45d14fc897484cd9cf9850651b6ad3"
+  },
+  "root_copy_manifest": {
+    "path": "artifacts/v13-2-schema-communication-source/root-copy-manifest.json",
+    "sha256": "53d536c03684d2f1e551509d72e301e7b06b7a1023a251798f36ad30a16c0d04"
+  },
+  "root_integration_checks": [
+    {
+      "receipt": {
+        "path": "artifacts/v13-2-schema-communication-integration/runs/affected-unit-memory-suites/receipt.json",
+        "sha256": "83ab4d56ebf90410f705da5aa0149b9dcb79d5c65116cd043b5db0b838f585f3"
+      },
+      "kind": "ROOT_SCHEMA_COMMUNICATION_FINAL_INTEGRATION_COMMAND",
+      "label": "affected-unit-memory-suites",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit/test_tool_schema_communication.py",
+        "tests/memory/test_v13_2_schema.py",
+        "tests/memory/test_v13_2_direct_support.py",
+        "--basetemp=artifacts/v13-2-schema-communication-integration/affected-tests"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+      "started_at": "2026-10-01T08:03:49.686018+00:00",
+      "finished_at": "2026-10-01T08:04:10.219580+00:00",
+      "returncode": 0,
+      "driver_sha256": "141db49e1bde9a20b83f07abca078eb01e26999c239875199040dbf97b062399",
+      "network_guard_sha256": "6840d22af4e25294a3b03b2b8694d39dad394ee6f81a3427e524796c1ea12230",
+      "stdout_sha256": "34a6190d3a75e69feb229bb191898196256665549d9047b3097334112a26309b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "after_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "before_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "after_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "source_tests_configs_unchanged": true,
+      "ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_unchanged": true,
+      "network_policy": "Child interpreter socket.connect/connect_ex/create_connection/getaddrinfo denied; actual generation/embedding HTTP forbidden."
+    },
+    {
+      "receipt": {
+        "path": "artifacts/v13-2-schema-communication-integration/runs/both-boundaries/receipt.json",
+        "sha256": "af5138004f3962c71ba5135d104d0176e011fa31a8bbb74864046ce69244fc0d"
+      },
+      "kind": "ROOT_SCHEMA_COMMUNICATION_FINAL_INTEGRATION_COMMAND",
+      "label": "both-boundaries",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-c",
+        "from milai_lab.boundary import main as a; from milai_lab.tools_boundary import main as b; x=a([]); y=b([]); raise SystemExit(x or y)"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+      "started_at": "2026-10-01T08:04:30.983727+00:00",
+      "finished_at": "2026-10-01T08:04:39.176063+00:00",
+      "returncode": 0,
+      "driver_sha256": "141db49e1bde9a20b83f07abca078eb01e26999c239875199040dbf97b062399",
+      "network_guard_sha256": "6840d22af4e25294a3b03b2b8694d39dad394ee6f81a3427e524796c1ea12230",
+      "stdout_sha256": "795a5a38988d188e7997508caea51849c48494d5aed3f2d40fd1774096368cdd",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "after_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "before_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "after_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "source_tests_configs_unchanged": true,
+      "ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_unchanged": true,
+      "network_policy": "Child interpreter socket.connect/connect_ex/create_connection/getaddrinfo denied; actual generation/embedding HTTP forbidden."
+    },
+    {
+      "receipt": {
+        "path": "artifacts/v13-2-schema-communication-integration/runs/independent-pressure-and-wire/receipt.json",
+        "sha256": "4f161bac81d01d361accd1135ca714e9fb2e32ae991244c3741e52a7e2f10ffa"
+      },
+      "kind": "ROOT_SCHEMA_COMMUNICATION_FINAL_INTEGRATION_COMMAND",
+      "label": "independent-pressure-and-wire",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-root-drivers/verify_schema_communication_pressure_and_wire.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+      "started_at": "2026-10-01T08:10:56.831774+00:00",
+      "finished_at": "2026-10-01T08:10:59.283651+00:00",
+      "returncode": 0,
+      "driver_sha256": "141db49e1bde9a20b83f07abca078eb01e26999c239875199040dbf97b062399",
+      "network_guard_sha256": "6840d22af4e25294a3b03b2b8694d39dad394ee6f81a3427e524796c1ea12230",
+      "stdout_sha256": "f768f15321dbb584bb0d9b4d2022758adf519418aa8334dad88e66b69f65955e",
+      "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+      "before_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "after_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "before_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "after_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "source_tests_configs_unchanged": true,
+      "ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_unchanged": true,
+      "network_policy": "Child interpreter socket.connect/connect_ex/create_connection/getaddrinfo denied; actual generation/embedding HTTP forbidden."
+    },
+    {
+      "receipt": {
+        "path": "artifacts/v13-2-schema-communication-integration/runs/mypy-seven-files/receipt.json",
+        "sha256": "cc4296ae0b1e023b9df2a914d4484049896701e329ed2b0d9b675cdd2d684b7b"
+      },
+      "kind": "ROOT_SCHEMA_COMMUNICATION_FINAL_INTEGRATION_COMMAND",
+      "label": "mypy-seven-files",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/contracts/tool_schema_communication.py",
+        "src/milai_lab/providers/chat_bridge.py",
+        "src/milai_lab/baselines/langmem_agent.py",
+        "src/milai_lab/methods/langmem_recipe.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "src/milai_lab/runners/v13_1_p5.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+      "started_at": "2026-10-01T08:04:30.983680+00:00",
+      "finished_at": "2026-10-01T08:04:35.426925+00:00",
+      "returncode": 0,
+      "driver_sha256": "141db49e1bde9a20b83f07abca078eb01e26999c239875199040dbf97b062399",
+      "network_guard_sha256": "6840d22af4e25294a3b03b2b8694d39dad394ee6f81a3427e524796c1ea12230",
+      "stdout_sha256": "050c52a2b0c61e8b681ef5c485e0bc03340b8d55148e0acef27d744c8be42033",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "after_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "before_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "after_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "source_tests_configs_unchanged": true,
+      "ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_unchanged": true,
+      "network_policy": "Child interpreter socket.connect/connect_ex/create_connection/getaddrinfo denied; actual generation/embedding HTTP forbidden."
+    },
+    {
+      "receipt": {
+        "path": "artifacts/v13-2-schema-communication-integration/runs/ruff-ten-files/receipt.json",
+        "sha256": "ee918b159b4005082d872cbfd4e1c8fa21cb2e582b6e52210baa80e24c602d1d"
+      },
+      "kind": "ROOT_SCHEMA_COMMUNICATION_FINAL_INTEGRATION_COMMAND",
+      "label": "ruff-ten-files",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/ruff",
+        "check",
+        "src/milai_lab/contracts/tool_schema_communication.py",
+        "src/milai_lab/providers/chat_bridge.py",
+        "src/milai_lab/baselines/langmem_agent.py",
+        "src/milai_lab/methods/langmem_recipe.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "src/milai_lab/runners/v13_1_p5.py",
+        "tests/unit/test_tool_schema_communication.py",
+        "tests/memory/test_v13_2_schema.py",
+        "tests/memory/test_v13_2_direct_support.py"
+      ],
+      "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+      "started_at": "2026-10-01T08:04:30.987213+00:00",
+      "finished_at": "2026-10-01T08:04:31.338134+00:00",
+      "returncode": 0,
+      "driver_sha256": "141db49e1bde9a20b83f07abca078eb01e26999c239875199040dbf97b062399",
+      "network_guard_sha256": "6840d22af4e25294a3b03b2b8694d39dad394ee6f81a3427e524796c1ea12230",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "after_sha256": "8feb82d87afec6366202d1bc8565707d4ff1dc1e08bd8fcf66941f0e14f6ea0f",
+      "before_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "after_maps": {
+        "runtime": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+        "tests": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6",
+        "configs": "a6d4a1c3e9a864d2749f1ad92178f968dfc0603461dbdba3504771994b272f40"
+      },
+      "source_tests_configs_unchanged": true,
+      "ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+      "ledger_unchanged": true,
+      "network_policy": "Child interpreter socket.connect/connect_ex/create_connection/getaddrinfo denied; actual generation/embedding HTTP forbidden."
+    }
+  ],
+  "root_final_primary_tests": 86,
+  "root_static": {
+    "ruff_files": 10,
+    "mypy_source_files": 7,
+    "both_boundaries": "PASS"
+  },
+  "default_preserved_order_and_raw_error_pairs": 8,
+  "final_source_protocol_scripted_calls": 4,
+  "root_actual_final_host_writer_scripted_requests": 6,
+  "root_pressure_and_wire": {
+    "path": "artifacts/v13-2-schema-communication-integration/independent-pressure-and-wire.json",
+    "sha256": "2e68fc04f665e2d5c0d30fcf8d5c0f2558b69d4a0b83223346b9b35b2b7411d3"
+  },
+  "root_original_r6_wire_calibration": {
+    "path": "artifacts/v13-2-r7-driver-checks/wire-original-r6-calibration/receipt.json",
+    "sha256": "34066db5e90925924f9e5c75b84a408f2e59c90332757ef9966ab5f75246c938"
+  },
+  "root_final_communication_wire_controls": {
+    "path": "artifacts/v13-2-r7-driver-checks/wire-communication-controls-v2/result.json",
+    "sha256": "10add6f11178bbce8a0b0443f0da5170534d05ebb5c215d8188254ac3ca3b3b2"
+  },
+  "final_wire_auditor_sha256": "15e25ff0fbfab8135de241fe19554a4942d97562f677b4e053985fe26b53b65e",
+  "final_wire_decoder_sha256": "690f0364825bd763d65e96460e831456667e01de489d2128d7e9c078606e92d7",
+  "wire_calibration_qualification": "Original eaa79 auditor retained exact150 R6 wires/all48 original fields and original failed audit. Final change only honors existing json_action default in new-profile checks;9 final synthetic controls and6 actual final primary Host/writer mock-wire checks close that path. No historical artifact or cohort kind is relabeled.",
+  "feedback_aggregate_policy": {
+    "single_projection_utf8_bytes": 4096,
+    "nodes": 8,
+    "depth": 3,
+    "segments": 16,
+    "single_segment_or_expected_bytes": 512
+  },
+  "feedback_pressure": [
+    {
+      "stage": "before",
+      "utf8_bytes": 64550,
+      "feedback_text_tokens": 21680,
+      "synthetic_whole_request_prompt_tokens": 21717
+    },
+    {
+      "stage": "after",
+      "utf8_bytes": 3966,
+      "feedback_text_tokens": 1864,
+      "synthetic_whole_request_prompt_tokens": 1901
+    }
+  ],
+  "pressure": [
+    {
+      "composition": "direct_one_short",
+      "profile": "legacy",
+      "ordinary_tokens": 2044,
+      "counts": {
+        "record": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 1,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "historical_record": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "source": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 0
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        4345,
+        4362
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    },
+    {
+      "composition": "direct_one_short",
+      "profile": "shape_feedback_v1",
+      "ordinary_tokens": 2048,
+      "counts": {
+        "record": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 1,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "historical_record": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "source": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 0
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        5594,
+        5474
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    },
+    {
+      "composition": "direct_one_long",
+      "profile": "legacy",
+      "ordinary_tokens": 2046,
+      "counts": {
+        "record": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 0
+        },
+        "historical_record": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "source": {
+          "selected": 3,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 2
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        4347,
+        4364
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    },
+    {
+      "composition": "direct_one_long",
+      "profile": "shape_feedback_v1",
+      "ordinary_tokens": 2042,
+      "counts": {
+        "record": {
+          "selected": 1,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 0
+        },
+        "historical_record": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        },
+        "source": {
+          "selected": 3,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 3
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        5588,
+        5468
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    },
+    {
+      "composition": "direct_three_history",
+      "profile": "legacy",
+      "ordinary_tokens": 2043,
+      "counts": {
+        "record": {
+          "selected": 3,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 3
+        },
+        "historical_record": {
+          "selected": 3,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 2
+        },
+        "source": {
+          "selected": 6,
+          "delivered": 2,
+          "full": 0,
+          "prefix": 2,
+          "omitted": 4
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        4344,
+        4361
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    },
+    {
+      "composition": "direct_three_history",
+      "profile": "shape_feedback_v1",
+      "ordinary_tokens": 2047,
+      "counts": {
+        "record": {
+          "selected": 3,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 3
+        },
+        "historical_record": {
+          "selected": 3,
+          "delivered": 1,
+          "full": 0,
+          "prefix": 1,
+          "omitted": 2
+        },
+        "source": {
+          "selected": 6,
+          "delivered": 2,
+          "full": 0,
+          "prefix": 2,
+          "omitted": 4
+        },
+        "observation_field": {
+          "selected": 0,
+          "delivered": 0,
+          "full": 0,
+          "prefix": 0,
+          "omitted": 0
+        }
+      },
+      "actual_local_qwen_full_prompt_tokens": [
+        5593,
+        5473
+      ],
+      "source_artifact_sha256": "75bb84bbb95e621fa12e7b4cb9f2d858cf71e0f245cf9a566524c1c8b6d717b3"
+    }
+  ],
+  "ledger_before_after_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+  "actual_model_http": 0,
+  "actual_embedding_http": 0,
+  "rollback_commit": "c3221e03b5f98546546b19df97b7a2d33d11c2e6",
+  "source_stage_and_provenance_limits": [
+    "Engineering only: no real model/embedding HTTP, native SDK invocation, semantic/quality gate or deployment.",
+    "Native in four invoke controls means existing native tool_mode, not Mem0 SDK; all replies scripted MockTransport.",
+    "Original RunBudget/global ledger unchanged; local synthetic ledgers only. Cap rejection trace is unimplemented/out of scope.",
+    "Structural legality and public expected constraints do not establish prose entailment or authorize business operations.",
+    "4096 UTF8 bytes caps one structural error projection, not an entire conversation or all ToolMessages of a request.",
+    "Descriptions/protocol/feedback cost whole paid request tokens; ordinary packet remains separately bounded2048/6.",
+    "New packet text changes existing feasible body delivery, with truthful prefixes/omissions; selection unchanged.",
+    "48 checks ran at7a210683; final formatting recovery changed only equal scoped statements with identical AST. Final11 identity-sensitive entry checks and static/boundary checks ran at36338eb5.",
+    "Pressure/default packet driver ran at54d00151 before formatting; exact packets and source maps preserved, not relabeled as final execution.",
+    "First6 recorded read-only commands have original partial210 runtime/262 config inventories; corrected original211/315 full inventory8c466 was observed before implementation. Original maps were never overwritten.",
+    "Two bootstrap shell calls preceded recorder (worktree creation and artifact mkdir; original tool chunks0db1ec/bb0cb9, exit0); their complete stdout and at-instant maps were not persisted. No synthetic receipts are substituted.",
+    "apply_patch tool edits are represented by adjacent observed full maps and immutable source/test versions; they are not falsely labeled subprocess executions.",
+    "Current finalization run completion receipt/logs/maps are written by enclosing audit.py after source-checks/index creation; separate control paths intentionally avoid recursive self-hashes."
+  ],
+  "root_qualifications": [
+    "Engineering acceptance only. R6 task/source/authorization failures, all24/48 denominator and historical costs remain unchanged; actual R7 config/root/runtime freeze and model run have not occurred.",
+    "Root final86 tests run at212/36338eb5; Source48 earlier7a and pressure earlier54 retain their actual stage identities, even where final AST is equal.",
+    "New public communication is paid in complete requests and consumes ordinary material. Short Source195->39 bytes; long omitted Sources2->3; history/Source prefixes125/136/131->18/2/23 bytes. Original selection unchanged, no full-body or quality benefit claim.",
+    "One4096-byte feedback cap does not cap the entire request or all accumulated ToolMessages; ordinary2048/max6/Host12/writer1/repair0 unchanged.",
+    "No cap trace repair, provider grammar, common four-arm admission, HTTP owner lease/full-request closure, independent review, second family, unseen/generalization, full-suite/remote CI or Product acceptance."
+  ],
+  "publication_driver_sha256": "0bf579b7b7c1b10b5c986e3c86a1a5926bfcaa6ec24e302f5e9f63fbd750e134",
+  "product": "NO_GO"
+}

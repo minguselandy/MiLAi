@@ -1,0 +1,64 @@
+{
+  "kind": "V13_2_SERIAL_HTTP_SCOPED_READONLY_AUDIT_ACCEPTANCE",
+  "status": "READONLY_ACCEPTED_COMMON_HTTP_CLOSURE_NOT_IMPLEMENTED",
+  "accepted_at_utc": "2026-10-01T03:34:49.602041+00:00",
+  "root_original_verification": {
+    "path": "artifacts/v13-2-serial-http-root-audit/original-source-verification.json",
+    "sha256": "58c49e67da24ca8e05d884a56a6b837059db775e0d849750e8dc22c8c33d83a0"
+  },
+  "source_original_report": {
+    "path": "artifacts/v13-2-serial-http-audit-source/source-checks.json",
+    "sha256": "bf0de0b64dd51b6a49487d5db124b27027d3f056a7f3bcb8e8ada7798c654318"
+  },
+  "runtime_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+  "runtime_count": 209,
+  "indexed_read_attempt_receipts": 58,
+  "actual_recorded_subprocess_dispatches": 57,
+  "pre_dispatch_helper_failures": 1,
+  "helper_failure_map_provenance": {
+    "label": "native-threads",
+    "exit_code": 1,
+    "receipt": "runs/native-threads/receipt.json",
+    "receipt_sha256": "69c7bda1517e9a3826a16902ad616141e97e44e692f2d123fddfe9838ea4f944",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "fa3c2d064e1488bac30eaa84f615f7dce13837c762e16639655dd7fd42e4e6d0",
+    "before_sha256": "cd29b92ea7738789b5380d4014b8c8b708ceae8e1eaccbf0bab0ed5c112c4314",
+    "after_sha256": "cd29b92ea7738789b5380d4014b8c8b708ceae8e1eaccbf0bab0ed5c112c4314",
+    "command_executed": false,
+    "failure_origin": "audit helper inventory JSON write/read raced during parallel independent reads; no runtime code execution",
+    "original_stderr_provenance": "exact tool-returned traceback; not subprocess-written because helper failed before subprocess",
+    "after_map_provenance": "recovery copy of original before map; next successful command independently maps unchanged 208 sources"
+  },
+  "root_original_failure_sha256": "e594cebfff99b36d8d2ba3b44bcd92f9196fb7468ef8b16106812d083d4db1eb",
+  "failed_commands": [
+    "dependency-tool-node-path",
+    "native-threads"
+  ],
+  "original_unwrapped_commands_limit": "Bootstrap directory creation/discovery/AGENTS reads, helper correction, and evidence assembly were not recorder-wrapped. No claim of complete original stdout for those shell setup commands. All formal read commands and both failures are preserved.",
+  "selected_exact_installed_sdk_files": 9,
+  "ast_checks": 13,
+  "copied_artifact_count": 354,
+  "scoped_conclusion": "One Mem0 runtime serializes its two bridged callbacks; selected synchronous SDK executor is local entity search after embedding. No common request mutex/owner lease covers all VLLMClient paths and cross-root ledger lifetimes.",
+  "original_read_file_snapshots": 31,
+  "original_source_maps": "First57 indexed receipts map208 sources; last receipt maps209 with CLI. Maps are not retroactively expanded.",
+  "original_limits_preserved_in_report": [
+    "Static reachability and lock nesting, no executed overlapping HTTP incident.",
+    "Finite AST assertions and pinned byte equality do not certify full SDK/transport behavior, global ledger correctness, or four-arm D4 acceptance.",
+    "090901b durable generation admission does not serialize HTTP; it remains unaccepted HOLD.",
+    "Selected reference source fragments and installed metadata, not full project reproduction.",
+    "Proposed gate/lease and future MockTransport/process-cut slice are not implemented or executed."
+  ],
+  "current_shared_admission_status": "Separately accepted210-source opt-in; original read-only report retains its earlier unaccepted HOLD statement as historical provenance.",
+  "minimal_future_proposal": "One EX|NB process owner lease for the canonical ledger/controller/deployment domain before ledger/client/SDK construction, plus one common request mutex covering reserve through dispatch, finish and close for all VLLMClient routes. Native outer lock remains distinct. Not implemented or tested.",
+  "not_claimed": [
+    "Observed actual concurrent HTTP race",
+    "All-path serial runtime enforcement",
+    "Complete SDK reproduction",
+    "Four-arm D4 admission"
+  ],
+  "actual_model_http": 0,
+  "actual_embedding_http": 0,
+  "new_mock_http": 0,
+  "ledger_at_root_publication_sha256": "26f46d5fe3aeeaf0e399587098311e6d15bfacf01a0f231aca759207e6b0398b",
+  "product": "NO_GO"
+}

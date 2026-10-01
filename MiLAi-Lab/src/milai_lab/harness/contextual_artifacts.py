@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from threading import Lock
@@ -11,6 +14,15 @@ from typing import Any
 from milai_lab.harness.artifact_io import digest as digest
 from milai_lab.harness.artifact_io import read_json as read_json
 from milai_lab.harness.artifact_io import write_json as write_json
+from milai_lab.harness.http_ownership import (
+    HttpOwnership,
+    HttpOwnershipError,
+    OwnedReservation,
+    canonical,
+    freeze_fields,
+    normalized_domain,
+    settings_profile,
+)
 
 
 class BudgetExceeded(RuntimeError):
@@ -34,30 +46,53 @@ class RunBudget:
     Reservations are saved before sending, so an interrupted request remains charged.
     """
 
-    def __init__(self, limits: RunLimits, path: Path) -> None:
+    def __init__(
+        self, limits: RunLimits, path: Path, *, http_owner: HttpOwnership | None = None
+    ) -> None:
+        if current_http_budget() is not None:
+            raise HttpOwnershipError("HTTP_OWNER_SECOND_BUDGET_REJECTED")
+        if http_owner is not None:
+            http_owner.assert_live()
         self.limits, self.path, self.lock = limits, path, Lock()
+        self.http_owner = http_owner
+        self._pending: dict[int, tuple[str, int]] = {}
         self.state: dict[str, Any] = {
             "limits": asdict(limits),
             "generation_requests": 0,
             "generation": {"charged_tokens": 0, "known_tokens": 0, "unknown_usage": 0},
             "embedding": {"charged_tokens": 0, "known_tokens": 0, "unknown_usage": 0},
         }
-        if path.exists():
+        if http_owner is not None:
+            self.state = json.loads(canonical(http_owner.initial_state))
+            if canonical(self.state["limits"]) != canonical(asdict(limits)):
+                raise HttpOwnershipError("HTTP_OWNER_BUDGET_LIMITS_CHANGED")
+            http_owner.bind_budget(self)
+        elif path.exists():
             self.state = read_json(path)
             if self.state["limits"] != asdict(limits):
                 raise ValueError("Run budget limits changed on resume")
 
     def reserve(
-        self, path: str, request: dict[str, Any], *,
-        generation_holdback_tokens: int = 0, generation_holdback_requests: int = 0,
+        self,
+        path: str,
+        request: dict[str, Any],
+        *,
+        generation_holdback_tokens: int = 0,
+        generation_holdback_requests: int = 0,
         generation_input_tokens: int | None = None,
     ) -> tuple[str, int]:
-        if (type(generation_holdback_tokens) is not int or generation_holdback_tokens < 0
-                or type(generation_holdback_requests) is not int
-                or generation_holdback_requests < 0):
+        if self.http_owner is not None:
+            self.http_owner.budget_operation(self)
+        if (
+            type(generation_holdback_tokens) is not int
+            or generation_holdback_tokens < 0
+            or type(generation_holdback_requests) is not int
+            or generation_holdback_requests < 0
+        ):
             raise ValueError("INVALID_GENERATION_HOLDBACK")
-        if (generation_input_tokens is not None
-                and (type(generation_input_tokens) is not int or generation_input_tokens < 0)):
+        if generation_input_tokens is not None and (
+            type(generation_input_tokens) is not int or generation_input_tokens < 0
+        ):
             raise ValueError("INVALID_GENERATION_INPUT_TOKENS")
         kind = "embedding" if path == "embeddings" else "generation"
         if kind == "embedding":
@@ -68,11 +103,11 @@ class RunBudget:
             cap = self.limits.embedding_tokens
         else:
             estimate = (
-                (generation_input_tokens if generation_input_tokens is not None else
-                 len(json.dumps(request, ensure_ascii=False).encode())
-                 + 32 * len(request["messages"]))
-                + request["max_tokens"]
-            )
+                generation_input_tokens
+                if generation_input_tokens is not None
+                else len(json.dumps(request, ensure_ascii=False).encode())
+                + 32 * len(request["messages"])
+            ) + request["max_tokens"]
             cap = self.limits.generation_tokens
         with self.lock:
             if (
@@ -89,11 +124,22 @@ class RunBudget:
                 self.state["generation_requests"] += 1
             self.state[kind]["charged_tokens"] += estimate
             self.state[kind]["unknown_usage"] += 1
-            write_json(self.path, self.state)
+            self._persist()
+        if self.http_owner is not None:
+            result = OwnedReservation(kind, estimate)
+            self._pending[id(result)] = result
+            return result
         return kind, estimate
 
     def finish(self, reservation: tuple[str, int], usage: Any) -> None:
+        if self.http_owner is not None:
+            self.http_owner.budget_operation(self)
+            if self._pending.get(id(reservation)) is not reservation:
+                raise HttpOwnershipError("HTTP_OWNER_COMPLETION_NOT_AUTHORIZED")
+            self._pending.pop(id(reservation))
         total = usage.get("total_tokens") if isinstance(usage, dict) else None
+        if self.http_owner is not None and type(total) is int and total < 0:
+            raise HttpOwnershipError("HTTP_OWNER_USAGE_NEGATIVE")
         if type(total) is not int:
             return
         kind, estimate = reservation
@@ -101,13 +147,80 @@ class RunBudget:
             self.state[kind]["charged_tokens"] += total - estimate
             self.state[kind]["known_tokens"] += total
             self.state[kind]["unknown_usage"] -= 1
+            self._persist()
+
+    def _persist(self) -> None:
+        if self.http_owner is None:
             write_json(self.path, self.state)
+        else:
+            self.http_owner.persist(self)
 
 
+_HTTP_BUDGET: ContextVar[RunBudget | None] = ContextVar("http_owned_budget", default=None)
 
 
+def current_http_budget() -> RunBudget | None:
+    """Exact scoped instance; constructing a second cache is never adoption."""
+    return _HTTP_BUDGET.get()
 
 
+@contextmanager
+def http_budget_scope(
+    settings: dict[str, Any],
+    limits: RunLimits | None = None,
+    *,
+    client_configs: list[dict[str, Any]] | None = None,
+) -> Iterator[RunBudget | None]:
+    """Lease before loading; outer entry owns closure through final result artifacts."""
+    selected = settings_profile(settings)
+    current = _HTTP_BUDGET.get()
+    if selected == "legacy":
+        if current is not None:
+            raise HttpOwnershipError("HTTP_OWNER_SCOPE_PROFILE_CONFLICT")
+        yield None
+        return
+    freeze_fields(settings, client_configs=client_configs)
+    if current is not None:
+        owner = current.http_owner
+        assert owner is not None
+        owner.assert_budget(current)
+        if (
+            Path(settings["budget_path"]).resolve() != owner.path
+            or canonical(normalized_domain(settings["http_ownership_domain"]))
+            != canonical(owner.domain)
+            or (
+                limits is not None
+                and canonical(asdict(limits)) != canonical(asdict(current.limits))
+            )
+        ):
+            raise HttpOwnershipError("HTTP_OWNER_SCOPE_CHANGED")
+        yield current
+        return
+    owner = HttpOwnership(Path(settings["budget_path"]), settings["http_ownership_domain"])
+    try:
+        actual_limits = RunLimits(**owner.initial_state["limits"]) if limits is None else limits
+        budget = RunBudget(actual_limits, Path(settings["budget_path"]), http_owner=owner)
+        token = _HTTP_BUDGET.set(budget)
+        try:
+            yield budget
+        finally:
+            _HTTP_BUDGET.reset(token)
+    finally:
+        owner.close()
+
+
+def entry_budget(limits: RunLimits, path: Path) -> RunBudget:
+    current = _HTTP_BUDGET.get()
+    if current is None:
+        return RunBudget(limits, path)
+    owner = current.http_owner
+    assert owner is not None
+    owner.assert_budget(current)
+    if path.resolve() != owner.path or canonical(asdict(limits)) != canonical(
+        asdict(current.limits)
+    ):
+        raise HttpOwnershipError("HTTP_OWNER_ENTRY_BUDGET_CHANGED")
+    return current
 
 
 class Trace:

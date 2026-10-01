@@ -1,0 +1,24 @@
+{
+  "kind": "V13_2_GITHUB_PUBLICATION_AND_USER_RESUME",
+  "status": "ACTIVE",
+  "recorded_at_utc": "2026-09-30T23:36:49+00:00",
+  "user_instruction": "提交后继续后续的实验，如果遇到失败，检索相关的设计方法，反思改进方法，但是设计方向不要改变，方法保持通用性和泛化性",
+  "publication": {
+    "repository": "minguselandy/MiLAi",
+    "draft_pr": "https://github.com/minguselandy/MiLAi/pull/79",
+    "branches_verified": {
+      "feat/lab-evidence-incremental-v13-2-20261001": "48b93b36ee1705ba28babe970ffdccdcfe4660d2",
+      "feat/lab-v13-2-derived-index-cost-20261001": "795a769876b08147178297f2a7f46f0dd8dac2fd"
+    },
+    "main_merged": false,
+    "checkpoint_summary": "data/manifests/v13-2-pause-summary-20261001.json"
+  },
+  "resume_scope": "Original v13.2 full plan, all incomplete gates retained. Complete R3 evidence/scoring first; investigate actual failure mechanisms using primary design research before general repairs.",
+  "constraints": [
+    "Preserve design direction: source-grounded evidence, incremental maintenance, deterministic projection and bounded delivery.",
+    "Use generic behavior and source/version/scope information; no case routing, gold/future-question access or answer stitching.",
+    "Freeze code/config/rubric before real calls; keep continuous ledger and negative results.",
+    "One existing Source owner works separately; Root owns real model calls, source acceptance, documents and scoring."
+  ],
+  "product": "NO_GO"
+}

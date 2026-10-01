@@ -1,0 +1,211 @@
+{
+  "kind": "V13_2_E1_DEVELOPMENT_RESULT",
+  "status": "ACTUAL_COMPLETE_ROOT_DIAGNOSTIC_NOT_INDEPENDENT",
+  "runtime_manifest_sha256": "73de4df5a690cdb444dc4167d7dcaae6b2e47d32ab3db235beb156600532c1fe",
+  "controlled": {
+    "planned_boundaries": 16,
+    "completed_boundaries": 16,
+    "free_host_sample": false,
+    "costs": {
+      "generation_requests": 8,
+      "generation_known_tokens": 30267,
+      "embedding_requests": 32,
+      "embedding_known_tokens": 13622,
+      "unknown_usage": 0
+    },
+    "actual_source_audit_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E1-controlled-audit.json",
+    "actual_source_audit_sha256": "0d439f9e26c686b5162b3f5b3d1dfe1b50e2610a32b3cfa945f25c43cacc5798",
+    "formation": "Field8 direct formation generations preserve literal fields through actual model proposals; derived0 semantic generation projects2 fields per actual receipt. All16 boundary operations completed; committed alone is not semantic quality."
+  },
+  "free_host": {
+    "planned": 8,
+    "completed": 8,
+    "messages": 16,
+    "actual_finals_linked": 16,
+    "current_state_and_world_root_pass": 8,
+    "history_material_delivered": 4,
+    "history_attribution_root_confirmed": 4,
+    "history_attribution_unverified": 4,
+    "independent_semantic_review": false,
+    "trace_costs": {
+      "generation_requests": 36,
+      "generation_classified_requests": 36,
+      "generation_known_tokens": 87487,
+      "generation_classified_known_tokens": 87487,
+      "embedding_requests": 8,
+      "embedding_classified_requests": 8,
+      "embedding_known_tokens": 5831,
+      "embedding_classified_known_tokens": 5831
+    },
+    "ledger_delta": {
+      "generation_requests": 36,
+      "generation_known_tokens": 87487,
+      "embedding_known_tokens": 5831,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    },
+    "rows": [
+      {
+        "cell": "field_autonomous",
+        "case_id": "receipt-confirmed-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": false,
+        "original_history_root_review": "UNVERIFIED_ATTRIBUTION",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "label_created",
+        "current_label_status": "created",
+        "receipt_sha256": [
+          "0a62242bad026e724ba4d8232f5f4577ccfab856643cc9224b91e295460cb802",
+          "0b68fa13a091f0cddcb6f1c0fc0b82aadf1d2cfa99e08dd824af9fe89af9a7cf"
+        ],
+        "audit_sha256": "6769b19e9a7dfcfed283a3050342f30fbbfc5f479d84ce240e90bb084fa37973"
+      },
+      {
+        "cell": "field_autonomous",
+        "case_id": "receipt-partial-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": false,
+        "original_history_root_review": "UNVERIFIED_ATTRIBUTION",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "reserved_label_failed",
+        "current_label_status": "not_created",
+        "receipt_sha256": [
+          "02d86e8c2cee3164009f6ff4b826acabc31ee2d8188064a1795361e9640ca561",
+          "33391e391a0fa1e9d3e130daae7295891e4e8a5c45c089f678ae659c4bdbac34"
+        ],
+        "audit_sha256": "6769b19e9a7dfcfed283a3050342f30fbbfc5f479d84ce240e90bb084fa37973"
+      },
+      {
+        "cell": "field_prefetch",
+        "case_id": "receipt-confirmed-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": true,
+        "original_history_root_review": "PASS",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "label_created",
+        "current_label_status": "created",
+        "receipt_sha256": [
+          "98ee39a47f6d9da413fafd8b38bbcb78656ef1e710646ebb6fbf2e141532fe5d",
+          "89edd96054e17665414db2c7d9247186102b08f3e76619cdcbe20ccd910b3657"
+        ],
+        "audit_sha256": "40e32e17707d08c68272d05bd6d98123523c057ab394bb641b0b5bf6e2855f5c"
+      },
+      {
+        "cell": "field_prefetch",
+        "case_id": "receipt-partial-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": true,
+        "original_history_root_review": "PASS",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "reserved_label_failed",
+        "current_label_status": "not_created",
+        "receipt_sha256": [
+          "e1decf098b551b601bdd818bcd3e27f7cd4cdd24883745c4001e1373c0d2aabb",
+          "88b5bb42b31926b239d243a0c40e236eaea97266fc1c6d8dede10168c7cad390"
+        ],
+        "audit_sha256": "40e32e17707d08c68272d05bd6d98123523c057ab394bb641b0b5bf6e2855f5c"
+      },
+      {
+        "cell": "derived_autonomous",
+        "case_id": "receipt-confirmed-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": false,
+        "original_history_root_review": "UNVERIFIED_ATTRIBUTION",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "label_created",
+        "current_label_status": "created",
+        "receipt_sha256": [
+          "35b2fc0cad3d5563a2d726dc573f79b08602dd646de981dcec81b8adbe452d92",
+          "c3e6340b1851ebc7fb83f5d733c546dcaf9b70d8d054525865786fc096ab3fd3"
+        ],
+        "audit_sha256": "2eb6d295ba619d749933c978275f87249a9698b51e027cafdd71af3711bf00f4"
+      },
+      {
+        "cell": "derived_autonomous",
+        "case_id": "receipt-partial-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": false,
+        "original_history_root_review": "UNVERIFIED_ATTRIBUTION",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "reserved_label_failed",
+        "current_label_status": "not_created",
+        "receipt_sha256": [
+          "e6c67fc0e4a054fe16cb3f5062713f11ad444a43d992e86039675e2bb0df6e3e",
+          "3ddf77ca0c0a7c36749121ab2e3c53dca6380c1dfd25a15ade19e8e93097b3ed"
+        ],
+        "audit_sha256": "2eb6d295ba619d749933c978275f87249a9698b51e027cafdd71af3711bf00f4"
+      },
+      {
+        "cell": "derived_prefetch",
+        "case_id": "receipt-confirmed-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": true,
+        "original_history_root_review": "PASS",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "label_created",
+        "current_label_status": "created",
+        "receipt_sha256": [
+          "8b0ff30a13969abb3975ce226925132e108ab182b904fa9a17fbcd70d68e6d19",
+          "f7740871298049cd68a81536cabf856d117f1cab4f6230ac8ad964ecabf8105d"
+        ],
+        "audit_sha256": "2ec336d7fbbdb72748a4a0a1764e92568a10b2c88e35ae75f00c4463ed775cf7"
+      },
+      {
+        "cell": "derived_prefetch",
+        "case_id": "receipt-partial-1",
+        "complete": true,
+        "current_world_and_answer_root_review": "PASS",
+        "original_historical_material_in_http": true,
+        "original_history_root_review": "PASS",
+        "memory_read_tools": [],
+        "no_extra_business_mutation": true,
+        "independent_process_reopen": true,
+        "first_operation_status": "reserved_label_failed",
+        "current_label_status": "not_created",
+        "receipt_sha256": [
+          "153ae27f15d34d7c3aefd07e010b3ea1334bbf0880a5e610f5e211479294a359",
+          "36e33b20a2fc12460fadde22284c9187cfdda70d2ce0ab3fe087d5a2755cf74b"
+        ],
+        "audit_sha256": "2ec336d7fbbdb72748a4a0a1764e92568a10b2c88e35ae75f00c4463ed775cf7"
+      }
+    ]
+  },
+  "actual_sdk_reopen": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E1-E2-independent-sdk-reopen.json",
+    "sha256": "dd25e9296760a08b14d8424268f316caf70e3ba30740e3ab300a331aeaf4aeee",
+    "e1_free_banks": 8,
+    "new_memory_mutations": 0,
+    "new_model_requests": 0
+  },
+  "root_review_driver_sha256": "314251566bf4b736a1d95c041a5e5a72962d75694d4f8878d6f0dc902e24d688",
+  "qualifications": [
+    "Two exposed base stories and four cells only; no confidence interval, new-family or unseen claim.",
+    "SDK-controlled ordinary read is activated in both delivery cells and does not estimate free Host read propensity.",
+    "Autonomous final descriptions agree with actual current state, but no original archived material entered their HTTP. They do not prove original-outcome attribution or historical consumption.",
+    "Prefetch delivered history on both representations; this supports a delivery observation, not an independent representation advantage.",
+    "Free Field and derived policies differ in available semantic mutation capability as declared. All share actual business schema, source capture, reader capability and budget.",
+    "All first attempts and costs preserved."
+  ],
+  "product": "NO_GO"
+}

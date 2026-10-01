@@ -1,0 +1,79 @@
+{
+  "kind": "V13_2_PROSPECTIVE_STATISTICAL_DESIGN",
+  "status": "PRE_PILOT_PARTIAL_RUNTIME_AND_FINAL_SAMPLE_SIZE_NOT_FROZEN",
+  "use": "Offline analysis only; no generation or scoring calls initiated by this file.",
+  "primary_comparison": [
+    "M",
+    "B6_PLUS"
+  ],
+  "secondary_comparison": [
+    "M",
+    "B2_PLUS"
+  ],
+  "outcome_separation": [
+    "planned/attempted/completed/terminal status",
+    "finite mapped receipt literal invariants",
+    "free-text support, role, scope and time",
+    "historical material delivery and interpretation",
+    "original-card revision, unintended duplicate, wrong merge, conflict",
+    "unsafe model proposal, guard rejection, executed side effect",
+    "native task success, complete arc, clean success, complete lifecycle",
+    "Host/writer/repair/embed calls, charged and known tokens, unknown usage, wall latency, storage"
+  ],
+  "paired_unit": "Same source history/arc/base task under both arms. Clean/anomaly variants and seeds remain paired within that unit.",
+  "dependency_cluster": "Connected component of shared source history and predeclared task graph/template family. Variants, seeds and arm instances never create extra independent clusters. Cluster metadata is registered before outcomes.",
+  "weights": "Equal weight per base task within each separately reported condition/workflow; preserving all paired variants when resampling a cluster. Do not pool MemSyco tasks into one accuracy.",
+  "bootstrap": {
+    "replicates": 20000,
+    "seed": 132026,
+    "resampling": "Uniform sampling of independent dependency clusters with replacement; carry all paired task/condition/arm rows; recompute the equal-base-task mean in each replicate. Use the same draw for utility and cost differences.",
+    "interval": "Percentile 2.5%/97.5% paired difference interval. Report exact independent cluster and base-task counts.",
+    "minimum_clusters_for_inferential_claim": 20,
+    "small_cluster_rule": "Below20 independent clusters report paired descriptive differences, missing bounds and denominators only. This operational threshold does not guarantee coverage for any particular distribution."
+  },
+  "clean_noninferiority": {
+    "margin_pp": 5,
+    "delta": "M clean success rate minus B6_PLUS clean success rate",
+    "rule": "95% lower paired interval must be at least -0.05, including predeclared worst-case missing bounds. A non-significant p-value or a high development pass count is not noninferiority.",
+    "scoring_gate": "Actual independent blind semantic review plus deterministic business scoring; Root/same-family development diagnoses do not satisfy this gate."
+  },
+  "utility_cost_joint_report": {
+    "utility": "Paired task/lifecycle success difference with separate clean/anomaly/workflow results.",
+    "costs": [
+      "generation requests",
+      "charged generation tokens",
+      "known generation tokens",
+      "embedding requests",
+      "charged embedding tokens",
+      "known embedding tokens",
+      "unknown usage count"
+    ],
+    "policy": "All maintenance/index/repair/restart/failed and truncated requests remain included. Report cost differences with the utility interval; do not infer dollar/GPU cost from tokens."
+  },
+  "missingness": {
+    "planned_results": "Retain every planned arm/task row including NOT_RUN and infrastructure failures.",
+    "completion_metric": "Incomplete lifecycle remains incomplete irrespective of fault cause.",
+    "semantic_scoring": "Unscorable or ambiguous assertions remain null/UNKNOWN, never silently false, true or zero cost.",
+    "additional_complete_pair_report": "Clearly labeled scorable-pair estimate only; it does not replace all-planned results.",
+    "utility_bounds": "Lower difference assigns M unknown=0 and comparator unknown=1; upper difference assigns M unknown=1 and comparator unknown=0. Also display each-arm all-planned bounds.",
+    "cost_unknown": "Preserve conservative charged reservations and known-only costs separately; unavailable latency/storage stays unmeasured."
+  },
+  "sample_size": {
+    "initial_plan_base_tasks": 60,
+    "initial_plan_instances": 120,
+    "initial_plan_four_arm_trajectories": 480,
+    "precision_target_for_planning": "95% paired clean success-difference interval half-width0.05, before formal results. Pilot dependency counts, paired variation and unknown rates must inform feasibility.",
+    "final_decision": "After new independent pilot and before any formal outputs, append exact source availability, dependencies, paired variance/precision calculation, final number and stopping rule to the formal runtime manifest. Do not sample until significance or treat zero observed pilot failures as zero population risk.",
+    "fallback": "If independent sources/scoring/precision are insufficient, retain unproven status and report that constraint; no pseudo-independent renamed templates."
+  },
+  "public_anchors": "MERIT native task/tool/scorer and MemSyco three task denominators are analyzed separately. Freeze official upstream commit and actual interface adaptations before runs.",
+  "conditional_expansion": "Ablations/natural long horizon require E1-E3 support; Attention requires correct memory delivered plus ordinary Q/W insufficiency; EAL requires natural visible authorization evidence.",
+  "not_claimed": [
+    "No pilot or formal result",
+    "No independent scores",
+    "No cross-family transfer",
+    "No precision achieved",
+    "No method advantage or Product readiness"
+  ],
+  "product": "NO_GO"
+}

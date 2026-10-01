@@ -1,0 +1,129 @@
+{
+  "kind": "V13_2_D2_ENGINEERING_ACCEPTANCE",
+  "captured_at": "2026-09-30T16:54:25.215607+00:00",
+  "status": "ENGINEERING_STAGE_PASSED_REAL_COHORT_NOT_RUN",
+  "checks": [
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/memory/test_v13_2_observation.py",
+        "tests/memory/test_v13_2_service.py",
+        "tests/memory/test_v13_1_service.py",
+        "-q"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "exit_code": 0,
+      "source_unchanged": true,
+      "execution_identity_map_sha256": "8e2cf79f95452117d7d28ddec58fc5100deb301dc1b8fec5296d597c9d1dfeb0",
+      "execution_identity_file_count": 213,
+      "stage_record": "artifacts/v13-2-d2/d2-affected.json",
+      "stage_record_sha256": "22f84fef638762563d9e3c7f0ae7bdf2c7c629ab79a6bc9c576b47b5dc22b2b1",
+      "stdout_log": "artifacts/v13-2-d2/d2-affected.log",
+      "stdout_sha256": "8540ad2e70978a94c939ab3c50ea11b735fdda1b9d5bafec823db818c11ec152",
+      "stdout_summary": "100 passed, 4 warnings in 14.22s"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "exit_code": 0,
+      "source_unchanged": true,
+      "execution_identity_map_sha256": "8e2cf79f95452117d7d28ddec58fc5100deb301dc1b8fec5296d597c9d1dfeb0",
+      "execution_identity_file_count": 213,
+      "stage_record": "artifacts/v13-2-d2/d2-boundary.json",
+      "stage_record_sha256": "72029d22789d22152cd91386918e4e3a59094293f2a0b969f2fb707b5ede4834",
+      "stdout_log": "artifacts/v13-2-d2/d2-boundary.log",
+      "stdout_sha256": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "stdout_summary": "PASS active package DAG, pure facades, shared leaves and import paths"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/ruff",
+        "check",
+        "src/milai_lab/memory/observation.py",
+        "src/milai_lab/contracts/memory.py",
+        "src/milai_lab/application/refs.py",
+        "src/milai_lab/memory/service.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "src/milai_lab/runners/v13_1_p5.py",
+        "tests/memory/test_v13_2_observation.py",
+        "tests/memory/test_v13_2_service.py"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "exit_code": 0,
+      "source_unchanged": true,
+      "execution_identity_map_sha256": "8e2cf79f95452117d7d28ddec58fc5100deb301dc1b8fec5296d597c9d1dfeb0",
+      "execution_identity_file_count": 213,
+      "stage_record": "artifacts/v13-2-d2/d2-lint.json",
+      "stage_record_sha256": "f7f55d27a221da571e8eaaf7b1715e7b8dceb6abd47baa4d42e65ccabd97bce7",
+      "stdout_log": "artifacts/v13-2-d2/d2-lint.log",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "stdout_summary": "All checks passed!"
+    },
+    {
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/memory/service.py",
+        "src/milai_lab/memory/observation.py",
+        "src/milai_lab/application/refs.py",
+        "src/milai_lab/contracts/memory.py",
+        "--follow-imports=silent"
+      ],
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "exit_code": 0,
+      "source_unchanged": true,
+      "execution_identity_map_sha256": "8e2cf79f95452117d7d28ddec58fc5100deb301dc1b8fec5296d597c9d1dfeb0",
+      "execution_identity_file_count": 213,
+      "stage_record": "artifacts/v13-2-d2/d2-types.json",
+      "stage_record_sha256": "e556d3ff545830e4a38c8b8781dc148b7273ba2fd7921cb26e631abcdb5d065b",
+      "stdout_log": "artifacts/v13-2-d2/d2-types.log",
+      "stdout_sha256": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+      "stdout_summary": "Success: no issues found in 4 source files"
+    }
+  ],
+  "affected_test_execution_sha256": {
+    "src/milai_lab/application/refs.py": "dcd67392cff163761049473b5556f65111b08b1484a1194865b0549862007e2e",
+    "src/milai_lab/contracts/memory.py": "68985a64e8588e41202cae2d108ca30ed6f9fdebb98baa220aa0bae0ab7be9e7",
+    "src/milai_lab/memory/observation.py": "d08ba2305f847311b105cecf4220981babd8ae859c87e817e55c9c0818aba9b5",
+    "src/milai_lab/memory/service.py": "a9ee7a8bafd55da20854cce3ef0d543d5dec09891135208977c1ebc351942ada",
+    "src/milai_lab/memory/service_tools.py": "1ced70b9f1a3dbb86990c6fdb72ecdba9f4fe872b6a9227af1c1f51d4deeb6a7",
+    "src/milai_lab/runners/v13_1_d0.py": "8668524555d4bfef443475fc3f860f720f50bd6301302d7f29ebd9ea4f2215d8",
+    "src/milai_lab/runners/v13_1_p5.py": "91240e8435a127eed51c76778fd58d5b037ae7e67db6461acf16e7a016e7f820",
+    "tests/memory/test_v13_2_service.py": "0796d7b91793b06ce804596a606b9efc34480e4f01ac0303e11ff4bb393baf40",
+    "tests/memory/test_v13_2_observation.py": "6be8d8aadec84d79f2f4f27abe305f3e05ceaeb801cb466decf137fbc703c361"
+  },
+  "coverage": [
+    "Single actual receipt derives multiple objects and fields under a public profile; original source unchanged.",
+    "Source/owner/origin/type/profile hash and duplicate JSON key checks; no LLM writer.",
+    "Missing fields preserve confirmed history; false is a value; clear requires declared null semantics.",
+    "Comparable integer business versions reject late rollback; opaque/unordered and equal-version disagreements retain conflict.",
+    "Document content domain does not order approval/publication fields; reservation has no business version.",
+    "Independent persistent Store reopen and idempotent replay; partial independent writes remain pending and excluded from complete view.",
+    "Actual reservation partial receipt and actual document draft/approval/edit contracts.",
+    "Actual P5 offline runner routes opt-in capture to observe without changing legacy defaults."
+  ],
+  "limitations": [
+    "Deterministic engineering checks and MockTransport runner checks are not free Host samples.",
+    "Injected Store write failure plus reopen is not yet a real killed-process W2 experiment.",
+    "Actual bounded read packet delivery, E1 fixed-flow integration and new real cohorts remain unverified.",
+    "Each command retains its execution map; no claim that later D3 edits were used by D2 commands."
+  ],
+  "new_generation": 0,
+  "new_embedding": 0,
+  "product": "NO_GO"
+}

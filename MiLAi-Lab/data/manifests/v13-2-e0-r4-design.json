@@ -1,0 +1,27 @@
+{
+  "kind": "V13_2_E0_R4_PRE_MODEL_DESIGN",
+  "status": "FROZEN_READY",
+  "created_at_utc": "2026-09-30T23:55:04+00:00",
+  "config": "configs/v13-2-e0-normal-r4.json",
+  "changes": [
+    "Generic coverage/history-body distinction and truthful business/identity wording in public Host instructions",
+    "New-claim extraction before maintenance, no-change for retrieval-only boundaries and actual carried-over provenance in writer instructions"
+  ],
+  "unchanged": "All other R3 settings/source/fixture/rubric/budget; bank_prefix storage default.",
+  "direction": "Same source-grounded incremental memory, deterministic projection and bounded delivery.",
+  "generality": "No case IDs/domains or language keywords in new rules; semantic decisions remain with model; common policies apply prospectively to baselines.",
+  "rationale_sources": [
+    "docs/V13_2_DESIGN_LITERATURE.md",
+    "data/manifests/v13-2-e0-r3-results.json"
+  ],
+  "comparison_scope": "Two instruction factors change together; no one-factor representation or causal mechanism advantage claim.",
+  "candidate_count": 1,
+  "planned_trajectories": 24,
+  "planned_messages": 48,
+  "independent_review": false,
+  "new_generation_requests": 0,
+  "new_embedding_requests": 0,
+  "product": "NO_GO",
+  "runtime_manifest": "data/manifests/v13-2-e0-r4-runtime.json",
+  "runtime_manifest_sha256": "e8abe6e76817c1281729ca3823d42929e72d6d47ae80bef6467ae68a74272aec"
+}

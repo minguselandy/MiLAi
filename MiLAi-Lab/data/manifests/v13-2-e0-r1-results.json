@@ -1,0 +1,1169 @@
+{
+  "kind": "V13_2_E0_R1_ACTUAL_DEVELOPMENT_RESULT",
+  "status": "ALL24_COMPLETE_ROOT_REVIEW_GATE_NOT_PASSED",
+  "runtime_manifest_sha256": "56c9e05c3247702f07f5c0d4b5b88d605a03819c576773861d981d9ebabf821a",
+  "planned": 24,
+  "attempted": 24,
+  "completed": 24,
+  "messages": 48,
+  "actual_http_finals_linked": 48,
+  "root_review": {
+    "pass": 20,
+    "fail": 4,
+    "unknown": 0,
+    "independent": false,
+    "allplanned_denominator": 24
+  },
+  "normal_gate": {
+    "minimum_pass": 22,
+    "confirmed_pass": 20,
+    "status": "NOT_PASSED"
+  },
+  "original_exposed_update_repairs": {
+    "update-2": {
+      "original_record_revised_at_correction_boundary": true,
+      "new_revision_has_actual_current_correction_source": true,
+      "history_retained": true,
+      "unintended_duplicate_preference_card": true,
+      "final_current_and_former_complete": false,
+      "complete_repair": false
+    },
+    "update-3": {
+      "original_record_revised_at_correction_boundary": false,
+      "original_revision_at_end": 1,
+      "history_retained": true,
+      "unintended_duplicate_preference_card": true,
+      "final_current_and_former_complete": true,
+      "complete_repair": false
+    }
+  },
+  "owner_leaks_identified": 0,
+  "false_durable_commit_receipts_identified": 0,
+  "source_guard_and_semantic_quality_distinct": true,
+  "unintended_duplicate_preference_cards": 4,
+  "duplicate_tool_observation_semantic_cards": 1,
+  "semantic_maintenance_status_counts": {
+    "skipped_host_committed": 22,
+    "committed": 10,
+    "pending": 16
+  },
+  "host_rejection_counts": {
+    "current_boundary_source_required": 5,
+    "source_role_mismatch": 1
+  },
+  "writer_rejection_counts": {
+    "source_role_mismatch": 6,
+    "source_selection_required": 5,
+    "current_boundary_source_required": 2
+  },
+  "bounded_packets_verified_in_actual_http": 33,
+  "packet_budget_qualification": "Each constructed/delivered ordinary packet≤2048including metadata/max6records verified. Aggregate duplicate ordinary material across multiple System/ToolMessage occurrences in one HTTP was not yet proven≤2048; repetition is charged. Next source-index presentation must share an explicit single-packet budget.",
+  "trace_costs": {
+    "generation_requests": 124,
+    "generation_classified_requests": 98,
+    "generation_known_tokens": 395787,
+    "generation_classified_known_tokens": 307459,
+    "embedding_requests": 49,
+    "embedding_classified_requests": 49,
+    "embedding_known_tokens": 21081,
+    "embedding_classified_known_tokens": 21081,
+    "semantic_writer_classified_requests": 26,
+    "semantic_writer_classified_known_tokens": 88328
+  },
+  "ledger_delta": {
+    "generation_requests": 124,
+    "generation": {
+      "charged_tokens": 395787,
+      "known_tokens": 395787,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 21081,
+      "known_tokens": 21081,
+      "unknown_usage": 0
+    },
+    "trace_known_tokens_match": true,
+    "trace_generation_requests_match": true
+  },
+  "private_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r1/E0-normal-r1/audit.json",
+    "sha256": "c6807d331302e283288a2499feedf6f349d80c6377d77a863103767c1ad19735"
+  },
+  "actual_sdk_reopen": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r1/E0-independent-readonly-sdk-reopen.json",
+    "sha256": "0d65e98efea92d0b655d90693e2556e8cb601ef394695539776d0be464eb7123",
+    "banks": 24,
+    "items_sdk_read": 418,
+    "database_byte_identity_verified": true,
+    "new_model_requests": 0,
+    "new_memory_mutations": 0
+  },
+  "root_review_driver_sha256": "db521bbd3699759bd89a151808bf029d5dff09fd97d94c6f0b7ab6b4794b1028",
+  "rows": [
+    {
+      "case_id": "save-1",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 1,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "53db0617d6f559c246e875e3d9083e012fdfa78e6111597eb6bceacdaaa9a047",
+          "trace_sha256": "79650bf97e3e560267a1c4b8754c57b6c3a91125bc59fda7a91d540c7f856cb1",
+          "process_id": 3331545,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-81b52ed719acf42b",
+                "raw_response_sha256": "447b5b3ebdd800b04db473e93c4b071cf9fca99ffbc6b062e3e992db8ac4a330"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "save-2",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 1,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "b5c19ff3280b794df5343a73950663705315c7af6e87e43d3cb21e760313263c",
+          "trace_sha256": "2082201b5bea8f9a583cbd7cd62bb4287b35b62bafce063b4781d625b28eef76",
+          "process_id": 3345782,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-9c7f9311cdddc7a8",
+                "raw_response_sha256": "bf4330b99ecf02859ec0d6459120ff74995da0d5077d22df9b5cc3aec5e2a7b9"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "save-3",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 1,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "05e151e622b976f6f4eef261df4d24fc7577b559b5578af5abdd9a482bcbd934",
+          "trace_sha256": "d8ce52ea1953342b8f127817bc9b65f3324db6131cf7fadf50fe431ef11b20c8",
+          "process_id": 3346535,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-9d41002c86214082",
+                "raw_response_sha256": "c5d14ac4b2c0d3abed7c0837ccf85b93fbd8136e018ab28c0fc930701d69a648"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "save-4",
+      "category": "save",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 1,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "501326b5c8e45e1e13cbfe6bcbb89e420b40ec1abcdc13cd106034cf5d4d7aa1",
+          "trace_sha256": "8c81f350701838903b84362a724352f1840d2aa587d196229bf3c03f3cea05b9",
+          "process_id": 3347287,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-990abebd41fb9e19",
+                "raw_response_sha256": "c9fcf6d8caa008b5c03be38ae50e1da1acc6f4e75a7320fbecc82a0a0c9b90c0"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "recall-1",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "1a7ee8323d84f6117a810cc8a2a1d1fa7e36b9640ae4cfafd1a2ceb9018ad242",
+          "trace_sha256": "f20e67a4302e8d1a91f935570198ef5c943ceda19e8fc90da9bc93d2dc86748b",
+          "process_id": 3332480,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a0e2b187bc903345",
+                "raw_response_sha256": "778a4bec2a4bdcaa561999761f8046b7644bc2fd144715079baba8e36adc0bfb"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "0ba45ef7400acc64fda0037be47c96dd8292e270478db516581bae184f30af52",
+          "trace_sha256": "d02386d604355a1ce8aca1bfa81945b06dfe058f43d6ceb45b6b967c5e0f5899",
+          "process_id": 3332968,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-85d01ad73b85a8b3",
+                "raw_response_sha256": "a9fd888f48668c81de83e7ce8fa51db7e5827422fbab64d860304192e92d3516"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "recall-2",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "726907b25f8bbb061c3ad40f735ce2d015a99aeb1a1c48f0e13e5d3c3c4747c7",
+          "trace_sha256": "1688d72940e8ff33167dca2d993ecb5d519302806b1b3b3348d15b65a50a14fc",
+          "process_id": 3348121,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-96dd92088abb1ba1",
+                "raw_response_sha256": "d7c7f67ac400994dce4822d846e224f4ee924dea3ca57afb9e878be1ed076c1a"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "035255cdbaed03bbe861c3b660726a4c5aaa19b484d106b55d4952e785bce4f7",
+          "trace_sha256": "ac213d2b1c04061af6994a4034f4f975b14fbce7566142f8d6b4796fafde2f28",
+          "process_id": 3348577,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-947cad88a215d82c",
+                "raw_response_sha256": "55d249434ccaa9eafa93e665cca19d4482f0f5e0a6b6c58de5f861d4ba708502"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "recall-3",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "571a952e393bf0338a0786c7655039a3c6fa345f90f9f2c314926e72e6bde668",
+          "trace_sha256": "0840d088a73c24340bd48c1487dfa821c4ebde3e5811044e28dc4301010a0e58",
+          "process_id": 3349359,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-80a4f7840357487a",
+                "raw_response_sha256": "40c20af50bfe12d864b2c1577db0ccbe71bd0093c9a2b6435ca67bf2cd8db491"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "3fc48333e6717a5c0042303aa71f80977722afe40add292f5fb369c5c87d0923",
+          "trace_sha256": "d46890eca2a5cde0ecdd9c4e0fe5232f5d59a990d03884405692a8ed3141fbc8",
+          "process_id": 3349996,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-a31c0aa92a49a0ab",
+                "raw_response_sha256": "4fcc32fe69f41fc728fb4168b48116da8a122aedbe072a8aade54748bf8ebc4d"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "recall-4",
+      "category": "recall",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "4e90d971dc92bce247f8d9648f9963752666f2ef26734dab3b9c66c86587a066",
+          "trace_sha256": "239f831fb73751f7647fc171aafa46fa0ff331b2cc246cbed8cd3f9874818ee3",
+          "process_id": 3350806,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8e53bc2eee4914bf",
+                "raw_response_sha256": "b32de253f2e9f05350eef83f0f358feb4d01b6bbdc85a4f1ea5406c789a3b273"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "52ead4042cd3858efb64b6d4ce16d395130c70bc3b5d253bec931a8fb7b38b83",
+          "trace_sha256": "37cb6711874882f0b3623829f257b285462db3bc8c8aec4030fff62b26ed040d",
+          "process_id": 3351283,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-b6d1cce06b8d959c",
+                "raw_response_sha256": "2455966cb1ed2d444ed8423c935614ddc1f092a338eaca5babcb9c4d85adfc7d"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "原卡/读时句柄已送达；两次旧源更新被current_boundary_source_required拒绝后另CREATE茶卡。第三回合把咖啡说成当前、茶说成以前，writer用提问来源写入同样反转的current/past标记。来源成员守卫工作，但维护与最终回答失败。",
+      "actual_http_finals_linked": 3,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "ea37d4d60fa75e32a8a5033e449d525f5fea653c6a8533f5ab6577fb4bacb940",
+          "trace_sha256": "c4d44b5393fae477a3f401604f7f5044b12b54ca9db3cfd6906958c4a5e774be",
+          "process_id": 3333733,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-86cc30982093330f",
+                "raw_response_sha256": "c58143c4bc629c63a713b151e2f027291834aacc40a62fe7c43af65cd541c8d7"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "a97c2cc11b6882928a48babe207b617aa21f09b59716a10f6766167b134ac85a",
+          "trace_sha256": "b6704bd840ebb721790bfc16c53142db4853dd63d61a9cab7ffee057a7c01b1a",
+          "process_id": 3334398,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-884d83aae700c89e",
+                "raw_response_sha256": "8dcc8496d6a40340711c20785a6dea48dccfb0b63304a0469a0d92733e88612c"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "receipt_sha256": "2ef7c91b55a0b417984cbb447b629bbf6b06436c16d8696a6ce8a7fb6ea85864",
+          "trace_sha256": "cada67ad8b55e68ed820f4c89c55e78f29237e16ae82e9229208aa73eaf72e88",
+          "process_id": 3335197,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-a79bb488f6087ce9",
+                "raw_response_sha256": "11c56bdef1088a0ac717c882409a8c21dd6f7ccae1f2648274e80654dd46f301"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "update-2",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "Host另CREATE中文副本且只引用旧英文陈述；后置writer才把原卡r1→r2并引用实际本次中文更正。第三回合最终只回答当前中文，遗漏旧英文；writer再把原卡r3支持改为提问。原卡边界结构/当前来源修订部分成立，重复卡和完整历史回答失败。",
+      "actual_http_finals_linked": 3,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "79d3a92b9289919ce0d642068b1f67e6602096779531de10931a66b5d2899057",
+          "trace_sha256": "261e013387b6d4ac6acbdf0fd051794c7ed1d4676d081459fe5db447a54d9b8b",
+          "process_id": 3341014,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a3cab92c25dcf881",
+                "raw_response_sha256": "760c1ed2699819e5443efe1979b297d984779a8d7e6601aea1f5a8559315ce3a"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "551ef2a6084bc41b8e55938eeabc70c1d4cda2f21c643269661bee63af36d9b3",
+          "trace_sha256": "5bdd9f5b4989a01b478c142c6cf973671a975eb5283babe64130f1220d032f61",
+          "process_id": 3341599,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 19,
+                "provider_id": "chatcmpl-91709383f3123e70",
+                "raw_response_sha256": "b4e713423637c87cec0bad41153c8d8d70b6d65830d3528dd900148310239f0d"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "receipt_sha256": "bfbcb20c3bb595ac7ec505c7e72b1f326e3f40de3dca4bcb0ed91a40a9ef5eac",
+          "trace_sha256": "4d00fcbd4fe1afc96939327233513a76b7ed3e59fc8e6f13b679178113ae221c",
+          "process_id": 3342593,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-bd057af6f4435dac",
+                "raw_response_sha256": "6ec24de9b41eaba01108fbefc636530abaeb98e9f8116134b539c428cbedeab1"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "update-3",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "旧源修订被拒后另CREATE公里卡，原英里卡仍r1。实际最终回答正确区分英里/公里，但原记录修订门禁失败。",
+      "actual_http_finals_linked": 3,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "170f7ed47541d9a461e464bfd16aab56565e286d370dc42f67b7748bff253966",
+          "trace_sha256": "77c6f7c00ab5404e23c4e329894be2ae101edc04c93566543b684d6bbbfee0a2",
+          "process_id": 3343562,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8c9bd59b725e7137",
+                "raw_response_sha256": "1bf93f1ff6bdc6460bb6b6081954efb6d935b2274e534867a8548a3ee2cd8186"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "e69e4bb9c01c8954411e2a5c254eaad89f41907992cc7d566738757454b908b2",
+          "trace_sha256": "c06538d225e9a037e9cb2cccadb12beb7775d1fa651178bc919466ef7a0ee8ce",
+          "process_id": 3344044,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 17,
+                "provider_id": "chatcmpl-abc636fc822ecc46",
+                "raw_response_sha256": "11e334a0294f78de531b7bbcca935e265dc0e0e2018e76c1c6f32e366bc63dd6"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "receipt_sha256": "f603b2908482bae116b8ff5fec040b32fb84f43f7d162053bcf7c8d1766d87f6",
+          "trace_sha256": "e436e1987fe4820f8cc1ed7c070e99ff0d61f3ccfb7e208987e65dc84381ba5c",
+          "process_id": 3344779,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-924a13ac5ddd2902",
+                "raw_response_sha256": "caa1380173cb813ebfc6d899cc2b09883db266a47e39e20fc63ab85a00de38ed"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "update-4",
+      "category": "update",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "Host另CREATE下午卡并只引用旧上午源，后置writer把原卡正确修订为r2并引用本次实际下午更正；重复卡仍存在，下一提问又被用于修订重复卡支持。最终当前/以前回答正确，不受旧来源支持的重复偏好卡使维护失败。",
+      "actual_http_finals_linked": 3,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "8d5d31509bc4bdf7f4f65740b61219cad3cbf4a832b6e83caa21395e5a06659b",
+          "trace_sha256": "4f011df11ebe57584a39f404895ddf1dcac4dfbfc4ac3b535236c916a9187e94",
+          "process_id": 3352228,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-999e006e4c786633",
+                "raw_response_sha256": "8478439fa20f47ea9c564bd68343710ece6a93e62204cc697ac779bfe70fa493"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "1e7c1a94afd432a1c0cc46e7cf5e13a02ceb57a73ea0908985e96605b0fda969",
+          "trace_sha256": "a135c97a9598c1943b0b29478a5737430eec67ae43ebed27ddd5e29d89ba6b36",
+          "process_id": 3352735,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-b70f0ebbae81b1e0",
+                "raw_response_sha256": "1ebe3b787f9879a7cbb0be3cc7cf5b8abbdf0e82be8850993726b56c384f0c63"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "receipt_sha256": "b06c9126546db9692f7fec31bb445b181de7d4af240813543bc04caa0bca9377",
+          "trace_sha256": "0bf12ce60f2de3601eb203eaf0dd1f0b7c40c1b23ed5039f197bda8b6a850820",
+          "process_id": 3353479,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-be104666c4804e25",
+                "raw_response_sha256": "eb81b5119222e5533b90a2a749b29ab0bfab06c96637373e7b70d862a5822545"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "db464777127d2a7d06d385421e8947fe1b72b3f26002a5000742773a5ef0a3c0",
+          "trace_sha256": "a132ff2bff8c1f9cf6a2c7edd78d14368207278821f3e3513ac30c1c537b20eb",
+          "process_id": 3336217,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a2a031754886a5de",
+                "raw_response_sha256": "873eaa17578330d132a13b81482f5d8bda48889c19d9917b46ad9fab27ccb613"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "8a04af206f088c0042a31f2439c93ce9a696e113729b99171ca3838a670fded9",
+          "trace_sha256": "ac0393233cb04a72d509063fdbd128a729b20427689e95ba24badf48a7f0e8ad",
+          "process_id": 3336778,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-8611cd466afb4184",
+                "raw_response_sha256": "0ca80f5e75f457f674b0bd23ddbed284dfbcf51b0beb1778de3c89e6cfea99ae"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "scope-2",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "ef90fb448e3dfa3fa03a05859c6102f21abf77f3d1e7da6666b1610eae67388c",
+          "trace_sha256": "236df4b7fd8f606d98d2fffbf3ae41f5cd32efa191c438b0327e7c24a4f69ba5",
+          "process_id": 3354468,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8bc88cf1a4c63d5d",
+                "raw_response_sha256": "7416bd7c77b6eb3a90cb33adccd6a820336fc517b27522ce23df7d920b09cde7"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "664705771b8a6fa311a318f32e40de5f1776ebcd378e926e5c1ecaf5cd779e7b",
+          "trace_sha256": "d0292efe4c78380923d87a682a8541ca88cd93d685e3fbec2e3cb856083e014c",
+          "process_id": 3354941,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-9dcdcae042110031",
+                "raw_response_sha256": "7092fe972a090ba57288eff6f8fcc226d1835580231b720dce4fa69cf8558570"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "scope-3",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "8c27d4e8677e22e4862a4aac53509c5a96a6e7560f5295ba7b82f1b25841a5cc",
+          "trace_sha256": "53e79814ac240c57556821799eb26d88fb530fa6b8e9bf7f3d6e5235657ff87f",
+          "process_id": 3355817,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b18f22176472def8",
+                "raw_response_sha256": "059ba5dc375c4f931015a58bea8cc84ab688f47530b34d57fdfa8cf4d8ae9eea"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "61305b934986431b6223f7e5926049cb7e582691f26a96d1b38df054ff313283",
+          "trace_sha256": "aa1e5cb66989b00bd93685a6d3a09b4399a94a1bfc4b2571d94244a09633f8ff",
+          "process_id": 3356344,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-b300c11721f697df",
+                "raw_response_sha256": "dd7c5c220cf5cc704cc94d35e8f1f48094e3349022cbeaeca86477b2a8fd33db"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "scope-4",
+      "category": "scope",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。 保持当前项目相对约定、无绝对日期，r2支持保留原陈述加本次提问，故该轮无需沿用R0 UNKNOWN。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "808dfea192454df7f68d91e774b703ae61ef91d8ca99f08d7c2830785ea59eac",
+          "trace_sha256": "d1d4e1a7cd707fc7603f7a6837507bf03426aec5b8273b2f24771a5f6404d6ae",
+          "process_id": 3357301,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a87c51f712fdefb3",
+                "raw_response_sha256": "f61e955e8856687e0ec9d71dfe19a4dd9fcc8585bcdc01294d82faeda996ef57"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "c54237529c90933255a9b8863bd714c489fbb84b7203a76795a29fd7e33ffade",
+          "trace_sha256": "e5835f6ddd63883ba2001b07d26c310945e6c32dc70292c554f2a14583805680",
+          "process_id": 3357812,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-865e2367706964e9",
+                "raw_response_sha256": "d35544257f3ccfdf19eb1a8c85bdadf2c1d3e25e92abe8ea605edb57bfe2f109"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "object-continue-1",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "e35e26542de368947fb1a9720ec1b171a084457aa07993080326e7c595ad4ac4",
+          "trace_sha256": "927bf6a9441d40445d0f5852616b4275d5ed958af54b829af59ed32662483534",
+          "process_id": 3337684,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 12,
+                "provider_id": "chatcmpl-9e25fcece3043663",
+                "raw_response_sha256": "97f125ce002d80870e6d840a30b94a8915405127d882a2bef0ef73665645154b"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "5898fcd38e04f99e5063905ef58f33e66e3c63d9f411acfe839c94983bd3c497",
+          "trace_sha256": "ccc38741899588f3f47608fef18c8a6e9f342c556f114b38fd7ea45a9a4e4999",
+          "process_id": 3338636,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-902bb9d32d6d4677",
+                "raw_response_sha256": "ac3e6c1ffa3e6eede54ce1fff5e24484173513098400ed289c459fe7862f2b51"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "object-continue-2",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "160f4d50cd0635816740915e9d82caf866582032a8e66638d400edd2e6d57d25",
+          "trace_sha256": "2f0e74dbbf33001e62e5890fde77c6aefc587c8a8255b47ee9f030d93f0ff1ff",
+          "process_id": 3358674,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 12,
+                "provider_id": "chatcmpl-b1ebed586f1b4c8b",
+                "raw_response_sha256": "1602bcf5b1868d095bf8b272506f81a7a90330b86f214b60132a452d74a45798"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "5155073e2109c299d176032c89c5ebf96d691525280c16191cea8b7ea3c2888e",
+          "trace_sha256": "cbf2c040956ad5e059c6c771716ee753e80805692569071116a0f24b55c2f4c2",
+          "process_id": 3359652,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-a7483ea64439f0f8",
+                "raw_response_sha256": "339ec784e1893ee3e62da5946b6196219837e1c96c18457ad3c6f8630027ea23"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "object-continue-3",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "3f8fe10431c27829a712002aeb16024031ffe8db19df85c19892f7a366f256e9",
+          "trace_sha256": "3fe5314921095786d01212b14b8c4885e833ec650ee4a58a826c844eda9015d7",
+          "process_id": 3360635,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 12,
+                "provider_id": "chatcmpl-95ae8e0f8146546c",
+                "raw_response_sha256": "14c7b4fcb63c0fa4fe1c760c62faf9fae8fa0fc2cfd4971b386f674fc27877f6"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "8a3302d1a15af14014ad30231519da81277f795a5391aaa1bdae0dc4fd0a7133",
+          "trace_sha256": "11b8fe83dcaa49d8ac7e5d82a4c5379954c24a4697a90d3a0a77320860677e59",
+          "process_id": 3361611,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-a692f36053969f58",
+                "raw_response_sha256": "bb03747a9bb420c5151d7a6f94555f5c87ea241db62acbe3ffb4554f7fbfbc38"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "object-continue-4",
+      "category": "object_continue",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。 两张重复语义工具观察卡单列为额外维护，world仅一次预订/制签、无重复效果；不把副本数当任务效用增益。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "2ea6832248d9352e4629b5725d7d0184dc46d0b59a220e0166541c41726b8ebc",
+          "trace_sha256": "2f90766963b3de8f10a59314eff42a545dfadf646c387cb53ea9ddaf5022ffcb",
+          "process_id": 3362507,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 12,
+                "provider_id": "chatcmpl-8dc3f615818b2772",
+                "raw_response_sha256": "0a4fe8d8faee39af5b72fa0025a14fcfb2bee781955df61b15508ff817afe0c7"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "f61adc0dd5c196bf6706d0b263a32770d65e6ab0da975ef060b4e331ac75279e",
+          "trace_sha256": "cadfd35067bb43b135f817618404d08c0831212f6720ec8aa0dd5f8c84207fb4",
+          "process_id": 3363475,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-90f82b61fa974fcd",
+                "raw_response_sha256": "6ce0391a10af11f27842bedda3b309ebd48590aa2e3a4c90fb332e4c331250f4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "restart-1",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "1726b61e41fd473513600b8f9d455df56b5eca6fb0ceef206f69554251e9962f",
+          "trace_sha256": "35f9aabdffc7bc779063656cc8d9fca9707378b8e4a64b57604a5362a0986c1c",
+          "process_id": 3339559,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8a773ab00bcf264e",
+                "raw_response_sha256": "11b1884e022857e99ab43f666671dd25e2ac5909458a7d908565dc20761fa9f6"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "609704fe6d8a6de7064d64d1a3704abc05ba248cdbdb017ee0db2f48528dcd43",
+          "trace_sha256": "f598a7b7115ec0ddc7e9ec1ddea63daa3a4eb7a8b0fd595a07fe177402a39913",
+          "process_id": 3340122,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-bc44eefa62b06493",
+                "raw_response_sha256": "16d1f496dba53dc7502b8f308c64c6fe9f75a31ea0ee6e01f479e780358a5344"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "restart-2",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "0fbf63d494501cd6bd9ea07f9fa7e468512ef8b7f7a0e75cc0ff40df30a2ec6d",
+          "trace_sha256": "8db7df3ba1cf79e1e3e2ec84bdd8fe25d4dfe77ef8bc340b23f7e5d3b9326164",
+          "process_id": 3364610,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-9dfd49723cacc569",
+                "raw_response_sha256": "5d9682a5d67326beb3830e8fa5f2fa80feecb6dbb0496bc5926df7eb46ae42fc"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "e524afbd68185682c757d429cbe652b24a2f9fe18baa0e149695ad577247fc73",
+          "trace_sha256": "cc2d3aae87ac27ddd348ad2025553bac00c3ebca643abd3044b9b0c5bf4c519c",
+          "process_id": 3365088,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-969e785093c6e7b6",
+                "raw_response_sha256": "deef716e622411925e5be9c8ff1db6396a507c0c45679838473f63ee009c6ffa"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "restart-3",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "f8643c1b022d5d232fe3a7456d4b404f01e8ffdbeb0e9ca5d4fc3ce9f8408ff3",
+          "trace_sha256": "94c7322d172b43d825f6fe260940b073de9b4cb1bbc13f56a3b84f2bc61ec33d",
+          "process_id": 3366028,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a21bd07b334c8e41",
+                "raw_response_sha256": "ae689a68a095cdbfed3701c68134659b3de0a017a804648207412727359ad4c8"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "28a33eaf6d891df6aa0e7d459df77bb2d7a66468e78042dbd07d36e959b4651a",
+          "trace_sha256": "bc5d2a5e1f807193d44afdc32a2273f75b88dda49a00e0be840d552c3e15200b",
+          "process_id": 3366573,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-81fb5b3235cd6e6b",
+                "raw_response_sha256": "b8326e6f7951e7e626e388994cefa35f1db3b9660a6db9cec9a328eb62d71518"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "restart-4",
+      "category": "restart",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "逐实际HTTP回答、真实来源、范围和持久重开核对原rubric全部相关检查通过。",
+      "actual_http_finals_linked": 2,
+      "sdk_readonly_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "receipt_sha256": "6d26a6218c54a3d5d400fcd0da01cacb7859bc0502c86483d2220811044a6315",
+          "trace_sha256": "f22aac87050baa0af815a84b85f9c9636f6f503e6a61020f16ad356d458e1d04",
+          "process_id": 3367368,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b339f90e22a7b379",
+                "raw_response_sha256": "27839b236a6cda9afaa0cdde3b0fe57f2998ce9b959926a781c2253c4ab1170a"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "receipt_sha256": "6f49062dbe51832ab83852dd71be6c9d2cfd695576c8a3a2a74b16950aae18af",
+          "trace_sha256": "8631df2782d1ce744b24fe05e6a2a460d1a2e12b48408320acd2abbe90724895",
+          "process_id": 3368033,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-a00c98953115905e",
+                "raw_response_sha256": "6e09e020e3f5df697774eb302c5e8fdcaef67d2f3089534011e98033ade7c7f5"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "qualifications": [
+    "Full24 source/config/rubric frozen before HTTP; first attempts only, no altered answers.",
+    "R0 and R1 retained separately; costs are additive, no best-result stitching.",
+    "No independent semantic rating, new-family or unseen generalization.",
+    "Current user source ID missing from Host public discovery; Writer did receive actual current events. Subsequent repair must distinguish these causes.",
+    "Questions/assistant interpretations still produced unsupported semantic maintenance despite current-boundary membership; that guard does not prove meaning.",
+    "Native Mem0/D4/D5/conditional experiments remain unverified; normal gate does not admit D4 yet."
+  ],
+  "product": "NO_GO"
+}

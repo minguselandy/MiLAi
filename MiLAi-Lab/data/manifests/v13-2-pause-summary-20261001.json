@@ -1,0 +1,140 @@
+{
+  "kind": "V13_2_USER_PAUSE_AND_GITHUB_SNAPSHOT",
+  "status": "PAUSED",
+  "goal_status": "paused",
+  "complete": false,
+  "user_instruction": "暂停当前实验，提交到github上",
+  "recorded_at_utc": "2026-09-30T23:34:00+00:00",
+  "recorded_at_asia_shanghai": "2026-10-01T07:34:00+08:00",
+  "plan_path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_2.md",
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "branch": "feat/lab-evidence-incremental-v13-2-20261001",
+  "repository": "minguselandy/MiLAi",
+  "base_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "pre_pause_report_commit": "c47620907e2d28f365145ef3042a2d06cfbd5a7e",
+  "execution_source_commit": "1e329a44d10fd4600ffecb737f2dde1e842249d6",
+  "execution_source_map_sha256": "4fe85502d25d807d823ecbd9d6f0350ff8c21fdece0011fdd3ac91dbe4a03fca",
+  "pause_source_check": {
+    "frozen_files": 208,
+    "all_actual_bytes_match": true,
+    "source_mutations_during_pause_packaging": 0
+  },
+  "experimental_processes": "No matching R3/scale/derived-index experiment command remains running at packaging; Source agent interrupted and HOLD.",
+  "r3": {
+    "status": "RUN_COMPLETE_NOT_SCORED",
+    "planned_trajectories": 24,
+    "complete_trajectories": 24,
+    "planned_messages": 48,
+    "completed_messages": 48,
+    "linked_actual_http_finals": 48,
+    "process_returncodes": {
+      "0": 24
+    },
+    "semantic_verdict": null,
+    "aggregate_pass_count": null,
+    "independent_review": false,
+    "sdk_reopen": "NOT_RUN",
+    "full_actual_wire_audit": "NOT_RUN",
+    "evidence_path": "data/manifests/v13-2-e0-r3-unscored-results.json",
+    "evidence_sha256": "745fa1a062f29fe9442a650eedd0036f4ad174d2b73e959d023f5c8805a5a8b4",
+    "trace_costs": {
+      "generation_requests": 120,
+      "generation_classified_requests": 95,
+      "generation_known_tokens": 462391,
+      "generation_classified_known_tokens": 371386,
+      "embedding_requests": 49,
+      "embedding_classified_requests": 49,
+      "embedding_known_tokens": 20342,
+      "embedding_classified_known_tokens": 20342,
+      "semantic_writer_classified_requests": 25,
+      "semantic_writer_classified_known_tokens": 91005
+    },
+    "ledger_delta": {
+      "generation_requests": 120,
+      "generation": {
+        "charged_tokens": 462391,
+        "known_tokens": 462391,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "charged_tokens": 20342,
+        "known_tokens": 20342,
+        "unknown_usage": 0
+      },
+      "trace_known_tokens_match": true,
+      "trace_generation_requests_match": true
+    },
+    "partial_root_review": "Earlier partial review observed old-language and old-meeting omissions and a question persisted as a personal long-term vegetarian fact. Provisional diagnostics only; full cohort scoring is unfinished."
+  },
+  "prior_full_e0_diagnostics": {
+    "R0": {
+      "PASS": 18,
+      "FAIL": 5,
+      "UNKNOWN": 1
+    },
+    "R1": {
+      "PASS": 20,
+      "FAIL": 4,
+      "UNKNOWN": 0
+    },
+    "R2": {
+      "PASS": 19,
+      "FAIL": 3,
+      "UNKNOWN": 2
+    },
+    "reviewer": "Root retrospective development review, not independent Judge",
+    "22_of_24_gate": "NOT_PASSED",
+    "two_old_update_complete_repair_gate": "NOT_PASSED",
+    "best_of_runs_stitching": false
+  },
+  "continuous_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "9ba23552d639ba4703253c5a1bbb6f8a2501eca3e77cf5fb21a8e4c090b53795",
+    "same_as_r3_after_snapshot": true,
+    "generation_requests": 8611,
+    "generation": {
+      "charged_tokens": 22576650,
+      "known_tokens": 22546263,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 840103,
+      "known_tokens": 840103,
+      "unknown_usage": 0
+    },
+    "historical_conservative_unknown_generation_tokens": 30387,
+    "embedding_request_count": "No cumulative request field in continuous ledger; R3 trace counted 49.",
+    "v13_2_added_generation_requests": 665,
+    "v13_2_added_known_generation_tokens": 2235612,
+    "v13_2_added_embedding_requests": 291,
+    "v13_2_added_embedding_tokens": 122915,
+    "new_unknown_usage": 0,
+    "usd_or_gpu_hours": "NOT_MEASURED"
+  },
+  "unverified_wip": {
+    "status": "PAUSED_UNVERIFIED",
+    "branch": "feat/lab-v13-2-derived-index-cost-20261001",
+    "base_commit": "c47620907e2d28f365145ef3042a2d06cfbd5a7e",
+    "files_sha256": {
+      "MiLAi-Lab/src/milai_lab/methods/grounded_memory.py": "46372aaee06b44174c5b26a40d18690fd27b1b6af30c6d0252e93a2a56d82f23",
+      "MiLAi-Lab/src/milai_lab/runners/v13_1_d0.py": "910c3303f3572db83f202a2d9601a72a4979a5e07b1b934452028bade54d9243"
+    },
+    "local_patch_path": "artifacts/v13-2-pause-20261001/derived-index-cost-unverified.patch",
+    "local_patch_sha256": "52c231c3b4f68f999d611ab3d23a35d1c8b49cb1e4f35fab65e74fb67fc74acc",
+    "description": "Two-file opt-in owner/bank derived raw-index storage draft. No completed acceptance or performance comparison. Saved on a separate branch and excluded from accepted primary source.",
+    "formal_performance_samples": 0,
+    "real_model_calls": 0
+  },
+  "remaining_work": [
+    "R3 full per-trajectory semantic/source/receipt scoring, independent scoring, read-only SDK reopen, and full actual-wire budget audit remain unfinished.",
+    "D4 common-capability four-arm comparison, second workflow 24, and separately frozen 12/24 budgets are not run.",
+    "D5 new source-independent pilot and formal comparison, independent Judge, second model family, generalization, public task execution, formal statistics and complete reproduction are unfinished.",
+    "Fixed-source 100/1k/10k baseline is complete but D5-10 is only PARTIAL; unverified storage WIP has no measured speedup.",
+    "Conditional ablations, recovery/lifecycle, migration/deletion and remaining requirements retain their existing incomplete evidence gates."
+  ],
+  "publication_scope": "Tracked Lab code, fixtures, public evidence hashes/accounting and pause docs. Private bodies, HTTP logs, SQLite databases, tokens, models and ignored runtime artifacts remain local.",
+  "pause_packaging": "Existing-file collector and source/ledger hash verification only; no new experiment, semantic scoring, SDK exercise, performance trial or model HTTP.",
+  "resume_policy": "Resume only after a new user instruction; retain original freezes, roots, failures, costs and incomplete requirement statuses.",
+  "product": "NO_GO",
+  "product_api_schema_permissions_canonical_changed": false
+}

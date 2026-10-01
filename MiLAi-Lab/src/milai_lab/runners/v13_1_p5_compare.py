@@ -18,7 +18,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from typing import Annotated, Any, Literal, cast
 
-from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
 from langchain_core.utils.function_calling import convert_to_openai_tool
@@ -26,6 +26,9 @@ from langchain_core.utils.function_calling import convert_to_openai_tool
 from milai_lab.application.tools import BUSINESS_SCHEMAS as BUSINESS_SCHEMAS
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import ControlsBackend, event_id, receipt_projection
+from milai_lab.contracts.common_boundary import HEADER as COMMON_HEADER
+from milai_lab.contracts.common_boundary import bounded_view, clone, profiles, validate
+from milai_lab.contracts.common_boundary import digest as view_digest
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import digest, read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, Trace
@@ -36,6 +39,7 @@ from milai_lab.integrations.memory.mem0 import (
 )
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
+from milai_lab.methods.grounded_memory import _hash as packet_key_hash
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
@@ -68,11 +72,13 @@ def _parameters(config: dict[str, Any], arm: str) -> dict[str, Any]:
         raise ValueError("P5_COMPARE_MEM0_INTERFACE_INVALID")
     if config["cadence"] == "t3_native" and native_interface != "add_only":
         raise ValueError("P5_COMPARE_NATIVE_T3_IS_ADD_ONLY")
+    common = validate(config, arm)
     parameters = controls._parameters(config)
     if arm == "mem0_trace_equal" and config["embedding_dimension"] != 1024:
         raise ValueError("P5_COMPARE_PINNED_MEM0_REQUIRES_DIMENSION_1024")
     return {
         **parameters,
+        **({"common_boundary": common} if common else {}),
         "arm": arm,
         **(
             {"application_workflow": p5.application_workflow(config)}
@@ -113,9 +119,25 @@ def prepare(fixture: Path, config: Path, root: Path, arm: str) -> dict[str, Any]
     )
     if arm != "field_grounded":
         frozen["tool_catalog"] = [
-            *map(convert_to_openai_tool, _backend_tools(None)),
+            *map(convert_to_openai_tool, _backend_tools(
+                None, readonly=bool(parameters.get("common_boundary")))),
             *p5.business_schemas(settings),
         ]
+        frozen["tool_catalog_sha256"] = digest(frozen["tool_catalog"])
+    if arm == "field_grounded" and profiles(settings)["common_host_profile"] != "legacy":
+        frozen["tool_catalog"] = [row for row in frozen["tool_catalog"]
+            if row["function"]["name"] not in {"manage_memory", "revise_memory"}]
+        frozen["tool_catalog_sha256"] = digest(frozen["tool_catalog"])
+    if arm == "mem0_trace_equal" and profiles(settings)["common_read_profile"] != "legacy":
+        def read_native_memory(id: str, snapshot_sha256: str | None = None) -> str:
+            """Explicit paid owner-scoped native get/history for a real selected snapshot id;
+            actual SDK DTOs, no M CAS or complete-history claim."""
+            raise ValueError("P5_COMPARE_CATALOG_ONLY")
+        frozen["tool_catalog"].insert(-len(p5.business_schemas(settings)),
+            convert_to_openai_tool(StructuredTool.from_function(
+                read_native_memory, name="read_native_memory",
+                description="Explicit paid owner-scoped native get/history for a real selected "
+                "snapshot id; actual SDK DTOs, no M CAS or complete-history claim.")))
         frozen["tool_catalog_sha256"] = digest(frozen["tool_catalog"])
     target = root / "input-freeze.json"
     if target.exists() and read_json(target) != frozen:
@@ -230,6 +252,14 @@ class ComparisonRuntime:
         self.settings = self.frozen["config"]
         self.parameters = self.frozen["comparison_parameters"]
         self.arm = self.parameters["arm"]
+        self.common_profiles = profiles(self.settings)
+        self.common = self.parameters.get("common_boundary", {})
+        self.recipe = None
+        if self.arm == "field_grounded" and self.common:
+            self.recipe = d0._make_recipe(
+                self.service, self.settings, self.model, self.budget, self.trace, self.stack)
+            if self.recipe is None:
+                raise ValueError("COMMON_BOUNDARY_M_EXISTING_RECIPE_REQUIRED")
         self.pending: list[str] = []
         self.last_material: dict[str, Any] = {}
         self.backend: Any = None
@@ -407,6 +437,237 @@ class ComparisonRuntime:
             )
             raise
 
+    def _public_binding(self, config: RunnableConfig) -> tuple[dict[str, Any], dict[str, Any]]:
+        cfg = config["configurable"]
+        if any(cfg.get(key) != value for key, value in {
+            "foundation_run_id": self.scope.run_id, "arm_id": self.scope.arm_id,
+            "user_id": self.scope.user_id, "v13_session": self.scope.episode_id,
+        }.items()):
+            raise ValueError("COMMON_BOUNDARY_OWNER_SCOPE_CHANGED")
+        turn = cfg.get("v13_turn_id")
+        if type(turn) is not str or not turn:
+            raise ValueError("COMMON_BOUNDARY_PUBLIC_TURN_REQUIRED")
+        row = self.service.source(self.service.event_id(self.scope.episode_id, turn, "user"))
+        if row is None or row["role"] != "user" or row["owner"] != self.scope.user_id:
+            raise ValueError("COMMON_BOUNDARY_ACTUAL_HUMAN_REQUIRED")
+        binding = {"owner": self.scope.user_id, "bank": list(self.service.namespace),
+            "session": self.scope.episode_id, "turn_id": turn,
+            "request_ref": row["event_id"], "request_sha256": row["content_sha256"],
+            "config_sha256": self.frozen["config_sha256"],
+            "profiles": self.common_profiles}
+        return row, binding
+
+    def _common_recall(self, query: str, config: RunnableConfig, *, ordinary: bool = False
+                       ) -> dict[str, Any]:
+        actual, binding = self._public_binding(config)
+        if type(query) is not str or (ordinary and query != actual["content"]):
+            raise ValueError("COMMON_BOUNDARY_ACTUAL_QUERY_REQUIRED")
+        namespace = (*self.service.namespace, "common_reader_v1")
+        key = "ordinary:" + digest([binding["session"], binding["turn_id"]])
+        prior = self.store.get(namespace, key) if ordinary else None
+        if prior is not None:
+            if prior.value["binding"] != binding or prior.value["query"] != query:
+                raise ValueError("COMMON_BOUNDARY_ORDINARY_IDENTITY_CHANGED")
+            value = prior.value
+            packet = value["packet"]
+            capacity = self.model.client.capacity
+            if self.arm == "field_grounded":
+                if (capacity is None or value["common_cache_sha256"] != view_digest({
+                        k: v for k, v in value.items() if k != "common_cache_sha256"})
+                        or capacity.text_tokens(value["material"]) > 2048
+                        or value["packet_hash"] != packet_key_hash({
+                            k: v for k, v in packet.items() if k != "packet_hash"})):
+                    raise ValueError("COMMON_BOUNDARY_CACHED_PACKET_CHANGED")
+            elif (capacity is None or view_digest(packet) != value["packet_sha256"]
+                    or view_digest(value["snapshot_rows"]) != packet["snapshot_sha256"]
+                    or view_digest(value["result_metadata"]) != packet["result_metadata_sha256"]
+                    or packet["binding"] != binding
+                    or capacity.text_tokens(value["material"]) > 2048
+                    or value["material"] != COMMON_HEADER
+                        + json.dumps(packet, ensure_ascii=False, separators=(",", ":"))):
+                raise ValueError("COMMON_BOUNDARY_CACHED_PACKET_CHANGED")
+            result = {**clone(value), "reused": True, "retrieval_calls": 0}
+            self.trace({"event": "common_memory_material_reused", "arm": self.arm,
+                        "packet_sha256": result.get("packet_sha256", result.get("packet_hash"))})
+            return result
+        if self.arm == "field_grounded":
+            if self.recipe is None:
+                raise ValueError("COMMON_BOUNDARY_M_RECIPE_REQUIRED")
+            result = self.recipe.prepare_context(actual["content"], owner=self.scope.user_id,
+                session=self.scope.episode_id, turn_id=binding["turn_id"],
+                explicit_query=None if ordinary else query)
+            # Existing M selection/allocator/CAS remain authoritative. Freeze this public
+            # turn's delivered result; later changes require an explicit read or next turn.
+            result.update(binding=binding, query=query)
+            result["common_cache_sha256"] = view_digest(result)
+            if ordinary:
+                self.store.put(namespace, key, result, index=False)
+            self.trace({"event": "common_memory_material", "arm": self.arm, **result})
+            return result
+        if self.arm in {"B2", "B6"}:
+            original = self.backend.recall(self.scope.user_id, query)
+            rows = json.loads(original["material"].split("\n", 1)[1])
+            metadata = {key: value for key, value in original.items() if key != "material"}
+            if self.arm == "B6" and self.common_profiles["common_semantic_fallback"] != "legacy":
+                state = self.backend.snapshot(self.scope.user_id)
+                metadata["semantic_summary"] = {
+                    "content": state.get("closed_summary", ""),
+                    "content_verification": "unchecked",
+                    "source_ids": state.get("closed_summary_source_ids", []),
+                                        "status": state.get("closed_summary_status", "not_formed"),
+                    "latest_attempt": state.get("closed_summary_latest_attempt")}
+        else:
+            original = self.backend.search_archive(self.scope.user_id, query)
+            if not isinstance(original, dict) or not isinstance(original.get("results"), list):
+                raise ValueError("COMMON_BOUNDARY_NATIVE_RESULT_INVALID")
+            rows = original["results"]
+            if any(not isinstance(row, dict)
+                or row.get("user_id") != self.backend._user_id(self.scope.user_id) for row in rows):
+                raise ValueError("COMMON_BOUNDARY_NATIVE_RESULT_OWNER_INVALID")
+            metadata = {"native_filter": {"user_id": self.backend._user_id(self.scope.user_id)},
+                "search_top_k": 20, "search_threshold": 0.1,
+                "native_result_metadata": {key: value for key, value in original.items()
+                                           if key != "results"},
+                "native_snapshot_scope": "actual returned search subset; no full-corpus claim"}
+        capacity = self.model.client.capacity
+        if capacity is None:
+            raise ValueError("COMMON_BOUNDARY_TOKENIZER_REQUIRED")
+        result = bounded_view(rows, binding=binding, token_count=capacity.text_tokens,
+            query_kind="ordinary_public" if ordinary else "explicit_additional",
+            result_metadata=metadata)
+        result.update(binding=binding, query=query, retrieval_calls=1, reused=False)
+        if ordinary:
+            self.store.put(namespace, key, result, index=False)
+        if self.arm == "mem0_trace_equal":
+            snapshot_key = "native_snapshot:" + view_digest([
+                binding, result["packet"]["snapshot_sha256"]])
+            self.store.put(namespace, snapshot_key, result, index=False)
+        self.trace({"event": "common_memory_material", "arm": self.arm, **result})
+        return result
+
+    def resume_context(self, config: RunnableConfig) -> None:
+        """Read back the already prepared packet before a checkpoint can skip its hook."""
+        if self.common_profiles["common_read_profile"] == "legacy":
+            return
+        actual, binding = self._public_binding(config)
+        namespace = (*self.service.namespace, "common_reader_v1")
+        key = "ordinary:" + digest([binding["session"], binding["turn_id"]])
+        if self.store.get(namespace, key) is None:
+            raise ValueError("COMMON_BOUNDARY_RESUMED_PACKET_MISSING")
+        self.last_material = self._common_recall(actual["content"], config, ordinary=True)
+        self.last_material["delivery_note"] = "existing graph checkpoint packet; no new retrieval"
+
+    def native_read(self, id: str, config: RunnableConfig,
+                    snapshot_sha256: str | None = None) -> dict[str, Any]:
+        _, binding = self._public_binding(config)
+        namespace = (*self.service.namespace, "common_reader_v1")
+        key = "ordinary:" + digest([binding["session"], binding["turn_id"]])
+        if snapshot_sha256 is not None:
+            key = "native_snapshot:" + view_digest([binding, snapshot_sha256])
+        cached = self.store.get(namespace, key)
+        if cached is None or cached.value["binding"] != binding:
+            raise ValueError("COMMON_BOUNDARY_NATIVE_SNAPSHOT_REQUIRED")
+        if self.arm != "mem0_trace_equal" or id not in {
+            row["id"] for row in cached.value["packet"]["selected"]
+        }:
+            raise ValueError("COMMON_BOUNDARY_NATIVE_SELECTED_ID_REQUIRED")
+        # Validate the exact actual snapshot without another query before paid readback.
+        value, capacity = cached.value, self.model.client.capacity
+        packet = value["packet"]
+        if (capacity is None or view_digest(packet) != value["packet_sha256"]
+                or view_digest(value["snapshot_rows"]) != packet["snapshot_sha256"]
+                or view_digest(value["result_metadata"]) != packet["result_metadata_sha256"]
+                or packet["binding"] != binding
+                or capacity.text_tokens(value["material"]) > 2048
+                or value["material"] != COMMON_HEADER
+                    + json.dumps(packet, ensure_ascii=False, separators=(",", ":"))):
+            raise ValueError("COMMON_BOUNDARY_CACHED_PACKET_CHANGED")
+        actual = self._native_readback(id)
+        if not actual["valid"]:
+            raise ValueError("COMMON_BOUNDARY_NATIVE_OWNER_OR_READBACK_INVALID")
+        self.trace({"event": "common_native_explicit_read", "target": id,
+                    "binding": binding, "actual": actual,
+                    "scope": "actual filtered snapshot/get/history only; "
+                    "not complete corpus or CAS"})
+        return {"ok": True, "native_id": id, "actual": actual, "binding": binding,
+                "snapshot_sha256": cached.value["packet"]["snapshot_sha256"],
+                "protection": "read snapshot only; no M revision/version/handle/CAS"}
+
+    def _closed_formation(self, messages: list[Any], config: RunnableConfig) -> dict[str, Any]:
+        actual, binding = self._public_binding(config)
+        start = next((i for i, message in enumerate(messages)
+            if isinstance(message, HumanMessage) and message.id == binding["turn_id"]), None)
+        if start is None or messages[start].content != actual["content"]:
+            raise ValueError("COMMON_BOUNDARY_ACTUAL_HUMAN_REQUIRED")
+        current = messages[start:]
+        if (not current or not isinstance(current[-1], AIMessage)
+                or current[-1].tool_calls or type(current[-1].content) is not str):
+            raise ValueError("COMMON_BOUNDARY_HOST_NOT_CLOSED")
+        refs = [actual["event_id"]]
+        generating = None
+        for message in current[1:]:
+            if isinstance(message, AIMessage):
+                generating = message
+                if not message.tool_calls:
+                    refs.append(self.service.event_id(self.scope.episode_id,
+                        message.id or binding["turn_id"] + ":final", "assistant"))
+            elif isinstance(message, ToolMessage) and generating is not None:
+                ref = self.service.event_id(self.scope.episode_id,
+                    str(generating.id) + ":" + message.tool_call_id, "tool")
+                if self.service.source(ref) is not None:
+                    refs.append(ref)
+        maybe_rows = [self.service.source(ref) for ref in refs]
+        if any(row is None for row in maybe_rows):
+            raise ValueError("COMMON_BOUNDARY_SOURCE_MISSING")
+        rows = cast(list[dict[str, Any]], maybe_rows)
+        requested = {"binding": binding, "source_refs": refs, "source_sha256": digest(rows),
+                     "host_final_sha256": digest(current[-1].model_dump(mode="json"))}
+        key = "closed:" + digest([binding["session"], binding["turn_id"]])
+        prior = self.store.get(self.formation_namespace, key)
+        if prior is not None:
+            if prior.value["requested"] != requested:
+                raise ValueError("COMMON_BOUNDARY_CLOSED_INPUT_CHANGED")
+            if prior.value["status"] != "COMPLETED":
+                raise ValueError("COMMON_BOUNDARY_FORMATION_OUTCOME_UNKNOWN")
+            return {**prior.value["receipt"], "replayed": True}
+        attempt = {"status": "PENDING", "requested": requested}
+        self.store.put(self.formation_namespace, key, attempt, index=False)
+        self.trace({"event": "common_host_closed_before_formation", "arm": self.arm,
+                    "requested": requested, "host_answer_unchanged": True})
+        try:
+            if self.arm in {"B2", "B6"}:
+                receipt = self.backend.commit_observed(
+                    [row for row in rows if row["role"] in {"user", "tool"}])
+                if (self.arm == "B6"
+                        and self.common_profiles["common_semantic_fallback"] != "legacy"):
+                    summary = self.backend.closed_summary(rows, key)
+                    receipt = {**receipt, "semantic_fallback": summary}
+            elif self.arm == "mem0_trace_equal":
+                receipt = self.backend.add_archive(self.scope.user_id, rows,
+                    archive_input_profile="observed_events_v1")
+                if receipt["status"] != "COMPLETED":
+                    raise ValueError("COMMON_BOUNDARY_NATIVE_FORMATION_INCOMPLETE")
+            else:
+                if self.recipe is None:
+                    raise ValueError("COMMON_BOUNDARY_M_RECIPE_REQUIRED")
+                self.service.bind_source_boundary(self.scope.episode_id,
+                    binding["turn_id"] + ":closed", refs)
+                receipt = self.recipe.maintain(self.model, session=self.scope.episode_id,
+                    turn_id=binding["turn_id"], source_refs=refs, config=config,
+                    instruction=self.settings["writer_system_prompt"], repairs=0)
+                if receipt["status"] in {"pending", "partial"}:
+                    attempt.update(status="INCOMPLETE", receipt=receipt)
+                    self.store.put(self.formation_namespace, key, attempt, index=False)
+                    return receipt
+            attempt.update(status="COMPLETED", receipt=receipt)
+            self.store.put(self.formation_namespace, key, attempt, index=False)
+            self.trace({"event": "common_closed_formation", "arm": self.arm, **attempt})
+            return cast(dict[str, Any], receipt)
+        except Exception as error:
+            attempt.update(status="INCOMPLETE", error_type=type(error).__name__, error=str(error))
+            self.store.put(self.formation_namespace, key, attempt, index=False)
+            raise
+
     def _recall(self, query: str) -> dict[str, Any]:
         if self.arm in {"B2", "B6"}:
             return cast(dict[str, Any], self.backend.recall(self.scope.user_id, query))
@@ -425,6 +686,45 @@ class ComparisonRuntime:
         return {"material": material, "material_tokens": tokens, "query": query, "result": result}
 
     def hook(self, state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+        if self.common_profiles["common_read_profile"] != "legacy":
+            actual, binding = self._public_binding(config)
+            human = next(m for m in reversed(state["messages"]) if isinstance(m, HumanMessage))
+            if human.id != binding["turn_id"] or human.content != actual["content"]:
+                raise ValueError("COMMON_BOUNDARY_ACTUAL_HUMAN_REQUIRED")
+            if self.arm == "field_grounded":
+                if self.recipe is None:
+                    raise ValueError("COMMON_BOUNDARY_M_RECIPE_REQUIRED")
+                self.last_material = self._common_recall(actual["content"], config, ordinary=True)
+                packet_hash = self.last_material["packet_hash"]
+                projected = []
+                reference_tokens = 0
+                for message in state["messages"]:
+                    if isinstance(message, ToolMessage) and message.name == "recall_context":
+                        try:
+                            body = json.loads(str(message.content))
+                        except (TypeError, ValueError):
+                            body = None
+                        if (isinstance(body, dict) and message.status == "success"
+                                and body.get("query_kind") == "ordinary_public"
+                                and body.get("packet_hash") == packet_hash):
+                            reference = json.dumps({"ok": body["ok"], "packet_hash": packet_hash})
+                            reference_tokens += self.recipe.token_count(reference)
+                            message = message.model_copy(update={"content": reference})
+                    projected.append(message)
+                ordinary_tokens = self.recipe.token_count(self.last_material["material"])
+                if ordinary_tokens + reference_tokens > 2048:
+                    raise ValueError("COMMON_BOUNDARY_ORDINARY_REFERENCES_EXCEED_BUDGET")
+                self.trace({"event": "common_m_ordinary_delivery", "material":
+                    self.last_material["material"], "material_tokens": ordinary_tokens,
+                    "reference_tokens": reference_tokens,
+                    "ordinary_total_tokens": ordinary_tokens + reference_tokens})
+                return {"llm_input_messages": [SystemMessage(content=
+                    self.settings["reader_system_prompt"] + "\n" + self.last_material["material"]),
+                    *projected]}
+            self.last_material = self._common_recall(actual["content"], config, ordinary=True)
+            return {"llm_input_messages": [SystemMessage(content=
+                self.settings["reader_system_prompt"] + "\n" + self.last_material["material"]),
+                *state["messages"]]}
         cfg = config["configurable"]
         if any(
             cfg[key] != value
@@ -439,7 +739,8 @@ class ComparisonRuntime:
             row["role"] == "tool" and row["event_id"] not in self._formed_ids()
             for row in self._sources()
         )
-        if self.parameters["cadence"] == "matched_observation_v1" and unformed_tool:
+        if (self.common_profiles["common_formation_profile"] == "legacy"
+                and self.parameters["cadence"] == "matched_observation_v1" and unformed_tool):
             self._formation()
         messages = state["messages"]
         human = next(m for m in reversed(messages) if isinstance(m, HumanMessage))
@@ -458,9 +759,34 @@ class ComparisonRuntime:
 
     def tools(self) -> tuple[BaseTool, ...]:
         if self.arm == "field_grounded":
-            return create_service_tools(self.service, replay_requested=True)
-
-        return _backend_tools(self)
+            tools = (d0._memory_tools(self.service, self.settings, replay_requested=True,
+                                     recipe=self.recipe) if self.common
+                     else create_service_tools(self.service, replay_requested=True))
+            if self.common_profiles["common_read_profile"] != "legacy":
+                original = next(tool for tool in tools if tool.name == "recall_context")
+                def recall_context(config: RunnableConfig, query: str | None = None) -> str:
+                    actual, _ = self._public_binding(config)
+                    result = self._common_recall(actual["content"] if query is None else query,
+                        config, ordinary=query is None)
+                    return json.dumps(result["packet"], ensure_ascii=False)
+                tools = tuple(StructuredTool.from_function(recall_context,
+                    name=original.name, description=original.description,
+                    args_schema=original.args_schema, infer_schema=False)
+                    if tool.name == original.name else tool for tool in tools)
+            return tuple(tool for tool in tools
+                         if tool.name not in {"manage_memory", "revise_memory"}
+                         ) if self.common_profiles["common_host_profile"] != "legacy" else tools
+        tools = _backend_tools(self, readonly=bool(self.common))
+        if (self.arm == "mem0_trace_equal"
+                and self.common_profiles["common_read_profile"] != "legacy"):
+            def read_native_memory(id: str, config: RunnableConfig,
+                                   snapshot_sha256: str | None = None) -> str:
+                return json.dumps(self.native_read(id, config, snapshot_sha256), ensure_ascii=False)
+            tools = (*tools, StructuredTool.from_function(read_native_memory,
+                name="read_native_memory",
+                description="Explicit paid owner-scoped native get/history for a real selected "
+                "snapshot id; actual SDK DTOs, no M CAS or complete-history claim."))
+        return tools
 
     def recovered(self, messages: list[Any]) -> None:
         start = next(
@@ -482,9 +808,15 @@ class ComparisonRuntime:
                 )
                 self.observed(result["source_ref"])
 
-    def completed(self) -> None:
+    def completed(self, messages: list[Any] | None = None,
+                  config: RunnableConfig | None = None) -> dict[str, Any] | None:
+        if self.common_profiles["common_formation_profile"] != "legacy":
+            if messages is None or config is None:
+                raise ValueError("COMMON_BOUNDARY_ACTUAL_CLOSED_MESSAGES_REQUIRED")
+            return self._closed_formation(messages, config)
         if self.parameters["cadence"] == "t3_native" and self.arm != "field_grounded":
             self._formation()
+        return None
 
     def snapshot(self) -> dict[str, Any]:
         events = (
@@ -678,7 +1010,8 @@ class ComparisonRuntime:
             )
 
 
-def _backend_tools(runtime: ComparisonRuntime | None) -> tuple[BaseTool, ...]:
+def _backend_tools(runtime: ComparisonRuntime | None, *,
+                   readonly: bool = False) -> tuple[BaseTool, ...]:
     def bound(config: RunnableConfig) -> ComparisonRuntime:
         if runtime is None:
             raise ValueError("P5_COMPARE_CATALOG_ONLY")
@@ -695,10 +1028,20 @@ def _backend_tools(runtime: ComparisonRuntime | None) -> tuple[BaseTool, ...]:
         return runtime
 
     def search_memory(query: str, config: RunnableConfig) -> str:
-        return json.dumps(bound(config)._recall(query), ensure_ascii=False)
+        active = bound(config)
+        result = (active._common_recall(query, config)
+                  if active.common_profiles["common_read_profile"] != "legacy"
+                  else active._recall(query))
+        # Persisted internal full snapshots never silently enter the tool's ordinary budget.
+        return json.dumps(result["packet"] if "packet" in result else result, ensure_ascii=False)
 
     def read_memory(query: str, config: RunnableConfig) -> str:
-        return json.dumps(bound(config)._recall(query), ensure_ascii=False)
+        active = bound(config)
+        result = (active._common_recall(query, config)
+                  if active.common_profiles["common_read_profile"] != "legacy"
+                  else active._recall(query))
+        # Persisted internal full snapshots never silently enter the tool's ordinary budget.
+        return json.dumps(result["packet"] if "packet" in result else result, ensure_ascii=False)
 
     def manage_memory(
         content: str,
@@ -740,11 +1083,16 @@ def _backend_tools(runtime: ComparisonRuntime | None) -> tuple[BaseTool, ...]:
                 "Claims are unchecked; manual Mem0 update requires explicit opt-in.",
             ),
         )
+        if not readonly or name != "manage_memory"
     )
 
 
 class Composition:
     frozen = staticmethod(_frozen)
+
+    @staticmethod
+    def owns_recipe(frozen: dict[str, Any]) -> bool:
+        return bool(frozen["comparison_parameters"].get("common_boundary"))
 
     @staticmethod
     def service_options(frozen: dict[str, Any]) -> dict[str, Any]:

@@ -1,0 +1,530 @@
+{
+  "kind": "V13_2_DURABLE_SHARED_ADMISSION_SCOPED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_DEFAULT_OFF_NOT_FOUR_ARM_RUNTIME_ADMISSION",
+  "accepted_at_utc": "2026-10-01T03:34:49.600115+00:00",
+  "source_commit": "090901b62c75ae9b73d845bf5e25032c5877fe24",
+  "primary_transfer_commit": "552e0144b7128ea66c0ba49c4dac1500be7ebd9b",
+  "source_branch_remote_verified": "feat/lab-v13-2-shared-admission-20261001",
+  "runtime_source_count": 210,
+  "runtime_map_sha256": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+  "test_map_sha256": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+  "config_map_sha256": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f",
+  "changed_paths": [
+    "MiLAi-Lab/src/milai_lab/providers/chat_bridge.py",
+    "MiLAi-Lab/src/milai_lab/providers/generation_admission.py",
+    "MiLAi-Lab/src/milai_lab/runners/v13_1_p5.py",
+    "MiLAi-Lab/tests/memory/test_v13_2_generation_admission.py"
+  ],
+  "profile": {
+    "default": "legacy",
+    "opt_in": "durable_shared_v1",
+    "actual_experiment_configs_enabled": false
+  },
+  "source_report": {
+    "path": "artifacts/v13-2-shared-admission-source/source-checks.json",
+    "sha256": "eaae8da2e4774f79530f848df6ec40b99108036d24249acb8f0d5fa7f0271f65"
+  },
+  "root_original_handoff_verification": {
+    "path": "artifacts/v13-2-shared-admission-root-audit/original-source-verification.json",
+    "sha256": "69bf079632a6bd09f40513da20bec0ec104b0a10c7fb4df2dbfed61c4bf7a276"
+  },
+  "source_original_commands": [
+    {
+      "label": "admission-final",
+      "exit_code": 0,
+      "receipt_sha256": "ffa6dc12a3203bcfdf302f4d0c06c1dd706dd1031a55d48b808bb0f554324fe1",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "admission-first",
+      "exit_code": 1,
+      "receipt_sha256": "8d80ff2919643064ffb46cc0287dfed1080bafc77a2e7e86b6e73086a1d4d136",
+      "maps": {
+        "before": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "admission-second",
+      "exit_code": 1,
+      "receipt_sha256": "3571d7180947d432e558b5f3cad1c707c686f5aa59d6f3296a0544a5191bf260",
+      "maps": {
+        "before": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "commit-source",
+      "exit_code": 0,
+      "receipt_sha256": "87eed258dfeb4c1ce723d4edb0e5c3c64586266d179eb9492d4cea05be81c8eb",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "default-parity",
+      "exit_code": 0,
+      "receipt_sha256": "1078e1cbbafb2263185a81ecb4b20df619c1d914dcba1a6b4f30acc82657e7d7",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "lab-boundary",
+      "exit_code": 0,
+      "receipt_sha256": "f93904823ad920986aa1895c1ff8c812585937c64722b533aa31da6b9e610a00",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "legacy-affected",
+      "exit_code": 0,
+      "receipt_sha256": "9a1c4039540ddc2f8d6c6a25ba9a0c51e0e1df0834e81306dd705fd8602ab2d7",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "mypy-final",
+      "exit_code": 0,
+      "receipt_sha256": "ffc748bbf07ea5d65b232964700158603280aacc6a18040ed3a4cdb4b8885b8f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "mypy-first",
+      "exit_code": 1,
+      "receipt_sha256": "b49fc56935adc2b5a9cf5204e49b02c96df734e05aa1cef6ff0bd23fc412cd1c",
+      "maps": {
+        "before": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "mypy-second",
+      "exit_code": 0,
+      "receipt_sha256": "d51b8446e994d6522510a74dcfcba9bf435723d99598d3960644c01f0abd99f4",
+      "maps": {
+        "before": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "stage-source",
+      "exit_code": 0,
+      "receipt_sha256": "e483262321a7d1a3a5b0e62207fd13f22bea4d8088787d178d6e999cad6aa6d9",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "static-final",
+      "exit_code": 0,
+      "receipt_sha256": "edf731d80a0c0feac4c2244df33057341a2865dddd1b1d0a82d4416ce16f9e96",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "static-first",
+      "exit_code": 1,
+      "receipt_sha256": "c4bfd9b8f3e37bd06aef89a9ea29c9cc999baf08703e059f0a31f19f22ab4692",
+      "maps": {
+        "before": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "d2a8898512be02791f5c01474cb68d5044d7f3c765ec864350b020a6df6ce937",
+          "tests": "585b952ee9b323091e6a5dea9773ae3812eaa2094ebe18a09be1a56eff2c6e46",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "static-second",
+      "exit_code": 0,
+      "receipt_sha256": "cedb38efea65520bff70df66859a22de14f71398bb24f61bdd942a15ef740da3",
+      "maps": {
+        "before": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "622abc10e26239ba00923f025af73dc8852f5a11e21455463e518382c55e0c72",
+          "tests": "696ebf02f5703a3044951235aeefc35de31c83cb8d154fd467e3f1dcacf1259b",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "tools-boundary",
+      "exit_code": 0,
+      "receipt_sha256": "ae1cf9db39e9c3784bfd49e5007cb8c8ae7b6d004da3eb19cbf5fdd0585e0bc7",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    }
+  ],
+  "source_original_failures": [
+    {
+      "run": "admission-first",
+      "result": "17PASS/15FAIL",
+      "cause": "Unchanged JSON-action bridge rejects empty tool schema(oneOf[]); invalid no-tool test fixture. Original test assertions/code/logs preserved; real tool catalog used thereafter, no old schema fix."
+    },
+    {
+      "run": "static-first",
+      "result": "3 line-width violations",
+      "cause": "Formatting only; retained."
+    },
+    {
+      "run": "mypy-first",
+      "result": "2 Any-return violations",
+      "cause": "Explicit validated casts/int annotation; retained."
+    },
+    {
+      "run": "admission-second",
+      "result": "30PASS/2FAIL",
+      "cause": "Existing M replay adds replayed=True; original erroneous byte-equality expectation retained and corrected to actual replay contract."
+    }
+  ],
+  "source_original_artifacts_preserved": 209,
+  "source_final_tests": {
+    "admission": 33,
+    "affected_legacy_parameterized": 17
+  },
+  "default_ast_comparisons": 6,
+  "original_default_wire_receipt_capacity_captures_equal": true,
+  "root_integration_commands": [
+    {
+      "label": "admission-and-affected",
+      "receipt": {
+        "path": "artifacts/v13-2-shared-admission-integration/runs/admission-and-affected/receipt.json",
+        "sha256": "89b95cddd414144051e7efc34d0bbb8774e364a24c7330240c84304fdb8b92d1"
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/memory/test_v13_2_generation_admission.py",
+        "tests/memory/test_v13_1_p5.py::test_generation_cap_is_shared_across_crash_resume_and_later_attempts",
+        "tests/memory/test_v13_1_p5.py::test_admitted_unknown_request_cannot_become_free_on_restart",
+        "tests/memory/test_v13_1_p5.py::test_new_public_message_in_same_session_gets_own_cap_not_old_ai_history",
+        "tests/memory/test_v13_1_p5_compare.py::test_field_matched_actual_update_replay_shares_writer_reader_admissions",
+        "tests/memory/test_v13_1_document_publication.py::test_document_prepare_freezes_equal_finite_quality_cap_and_public_schema_zero_http",
+        "tests/architecture/test_provider_architecture.py::test_old_facade_is_pure_and_exports_generic_same_objects",
+        "tests/architecture/test_provider_architecture.py::test_generic_constructor_rejects_method_fields_explicitly",
+        "tests/architecture/test_provider_architecture.py::test_recipe_only_assembles_hooks_and_retains_live_setters",
+        "tests/architecture/test_provider_architecture.py::test_generic_hooks_run_around_one_accounted_transport"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "b1a15b1b268c3ca8692cd811bb4b4fb270f0ad5985dbf555fcd43dd802fbac47",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "after_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "static",
+      "receipt": {
+        "path": "artifacts/v13-2-shared-admission-integration/runs/static/receipt.json",
+        "sha256": "6ca674d2d41ab662b1d7fae5903fefc1393f21aea1a41839955a089d5735c2ac"
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/providers/generation_admission.py",
+        "src/milai_lab/providers/chat_bridge.py",
+        "src/milai_lab/runners/v13_1_p5.py",
+        "tests/memory/test_v13_2_generation_admission.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "after_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "mypy",
+      "receipt": {
+        "path": "artifacts/v13-2-shared-admission-integration/runs/mypy/receipt.json",
+        "sha256": "ad70af3eb4e543bde2b900fb2e9a50a433cdab50afcb3f2b4f7a8d2579ceca99"
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/providers/generation_admission.py",
+        "src/milai_lab/providers/chat_bridge.py",
+        "src/milai_lab/runners/v13_1_p5.py"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "after_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "lab-boundary",
+      "receipt": {
+        "path": "artifacts/v13-2-shared-admission-integration/runs/lab-boundary/receipt.json",
+        "sha256": "216cfbf251a0cf7fa89f2bf2855354febadc4f67d5202d8179b7ffbc6c84bffd"
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "after_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    },
+    {
+      "label": "tools-boundary",
+      "receipt": {
+        "path": "artifacts/v13-2-shared-admission-integration/runs/tools-boundary/receipt.json",
+        "sha256": "cf4a9ad853edf8ce3bae2d2e746e04b5599f69dd55f0dacbfa9a06eb50373180"
+      },
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "exit_code": 0,
+      "stdout_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "before_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "after_sha256": "5b07a43d0a6fa9cfa39fcbc6fe73817d8b61ff97d1fde2c1b2a7dcbc8871961f",
+      "maps": {
+        "before": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        },
+        "after": {
+          "source": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+          "tests": "d779eb58b3015e5f8a129773e26f428e0861c480c7bfb103f7e72d79887487b2",
+          "configs": "f578f1bef9bc762419c0f0a8bf61438af498ce6667b774cf474625820373e00f"
+        }
+      }
+    }
+  ],
+  "root_integration_tests": {
+    "passed": 50,
+    "new_admission": 33,
+    "affected_legacy": 17
+  },
+  "root_static": {
+    "ruff_files": 4,
+    "mypy_files": 3,
+    "package_boundary": "PASS",
+    "tools_boundary": "PASS"
+  },
+  "ledger_before_after_sha256": "26f46d5fe3aeeaf0e399587098311e6d15bfacf01a0f231aca759207e6b0398b",
+  "actual_model_http": 0,
+  "actual_embedding_http": 0,
+  "unchanged_historical_r5": {
+    "source_count": 209,
+    "source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+    "runtime_manifest": {
+      "path": "data/manifests/v13-2-e0-r5-runtime.json",
+      "sha256": "6f3e2388a5c3164dd97520cc3da98fe62b4a0e10390c35ff9385d3ca516a5c12"
+    },
+    "result_manifest": {
+      "path": "data/manifests/v13-2-e0-r5-results.json",
+      "sha256": "5990828a5d606dc48444bc875c4b13fd42b056c4668cfbea10c0a3974756537c"
+    }
+  },
+  "root_publication_helper_failures": [
+    {
+      "path": "artifacts/v13-2-shared-admission-integration/publication-first-python-version-failure.json",
+      "sha256": "41efe0d133cd618bb7b396d801ecb80bee32b0904231bc8280ae3e9e1bcaca56"
+    },
+    {
+      "path": "artifacts/v13-2-shared-admission-integration/publication-first-read-count-failure.json",
+      "sha256": "9f5c11bf5d1ccfd8e796e1b6b80a4c47142fea3fffa09ab9fa93a5d841370375"
+    }
+  ],
+  "limits": [
+    "Actual model.invoke, native callback and GroundedRecipe paths use socket-denied MockTransport, local SDK/SQLite and isolated synthetic ledgers; no actual four-arm model sample.",
+    "Scripted summary callback is not implemented B6+ formation. Common reader/cache/cadence/Host write strategy remain incomplete.",
+    "Flock serializes admission file updates and releases before dispatch. This is not a shared HTTP mutex or process owner lease.",
+    "Persisted unknown slots remain counted; coherent complete rollback lacks external attestation. Structural identity/checkpoint/live lower bounds do not prove semantic validity.",
+    "Local fsync/replace and os._exit cuts do not prove universal hardware power-loss recovery. Admission persisted before a Host checkpoint may fail closed rather than recover.",
+    "Legacy counter fallback and public Store/default wire behavior remain legacy. A new experiment profile requires a separate prospective config/runtime freeze.",
+    "No full test suite, remote CI, model superiority, generalization, D4 or complete-plan pass. Product remains NO_GO."
+  ],
+  "root_publication_driver_sha256": "901097cdacd159dfb51d42d945c19c1374d748f48db6419dbcf91b1bddc46686",
+  "product": "NO_GO"
+}

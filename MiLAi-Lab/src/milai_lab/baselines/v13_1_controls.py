@@ -440,6 +440,52 @@ class ControlsBackend:
             self._put(state)
             raise
 
+    def closed_summary(self, records: list[dict[str, Any]], boundary_id: str) -> dict[str, Any]:
+        """One optional plain semantic summary of actual completed-boundary data."""
+        state = self._state()
+        key = "summary:" + boundary_id
+        source_hash = digest(records)
+        attempts = state.setdefault("closed_summary_attempts", {})
+        prior = attempts.get(key)
+        if prior is not None:
+            if prior["source_sha256"] != source_hash:
+                raise ValueError("CONTROL_SUMMARY_SOURCE_CHANGED")
+            if prior["status"] != "COMPLETED":
+                raise ValueError("CONTROL_SUMMARY_OUTCOME_UNKNOWN")
+            return {**prior["receipt"], "replayed": True}
+        if any(row.get("owner") != self.owner for row in records):
+            raise ValueError("CONTROL_SUMMARY_OWNER_CHANGED")
+        policy = self.config["controls"]["summary"]
+        messages, schema = summary_request(state.get("closed_summary", ""),
+            [{"messages": records, "source_ids": [event_id(row) for row in records]}],
+            policy["content_max_chars"])
+        attempts[key] = {"status": "PENDING", "source_sha256": source_hash}
+        state["closed_summary_latest_attempt"] = {
+            "boundary_id": key, "status": "PENDING", "source_sha256": source_hash}
+        self._put(state)
+        try:
+            self.model._reserve_request(origin="simple_semantic_summary")
+            response = self.model.client.chat(messages, response_format=schema)
+            text = parse_summary(response, policy["content_max_chars"])
+            receipt = {"status": "COMPLETED", "generation_calls": 1,
+                "summary": text, "content_verification": "unchecked",
+                "source_ids": [event_id(row) for row in records],
+                "summary_policy": "single paid generic summary; no repair"}
+            state.update(closed_summary=text, closed_summary_status="COMPLETED",
+                         closed_summary_source_ids=receipt["source_ids"])
+            attempts[key].update(status="COMPLETED", receipt=receipt)
+            state["closed_summary_latest_attempt"]["status"] = "COMPLETED"
+            self._put(state)
+            if self.model.client.emit is not None:
+                self.model.client.emit({"event": "control_closed_summary", **receipt})
+            return receipt
+        except Exception as error:
+            attempts[key].update(status="INCOMPLETE",
+                error_type=type(error).__name__, error=str(error))
+            state["closed_summary_latest_attempt"]["status"] = "INCOMPLETE"
+            self._put(state)
+            raise
+
     def _material(self, value: Any) -> str:
         return MATERIAL_HEADER + json.dumps(value, ensure_ascii=False)
 

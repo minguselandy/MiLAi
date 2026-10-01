@@ -1,0 +1,1146 @@
+{
+  "kind": "V13_2_R8_E1_FREE_ACTUAL_COMPLETE_ROOT_DIAGNOSTIC",
+  "status": "ALL_FIRST_FREE_ATTEMPTS_COMPLETE_ORIGINAL_FAILURES_AND_DELIVERY_LIMITS_RETAINED",
+  "observed_at_utc": "2026-10-01T18:35:13.186962+00:00",
+  "runtime_sha256": "bb4eddc9ff4216e036a8053b425c3b55bb3653428c9173906e08d7584bb8ef07",
+  "planned_trajectories": 8,
+  "planned_messages": 16,
+  "attempted_messages": 16,
+  "execution_completed_messages": 16,
+  "automatic_task_quality_pass": false,
+  "root_not_independent_judge": true,
+  "original_costs": {
+    "generation_requests": 42,
+    "generation_known_tokens": 289441,
+    "embedding_known_tokens": 5707,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0
+  },
+  "actual_http_requests": {
+    "chat/completions": 42,
+    "embeddings": 8
+  },
+  "costs_by_cell": {
+    "field_autonomous": {
+      "generation_requests": 14,
+      "generation_known_tokens": 116554,
+      "embedding_known_tokens": 0,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    },
+    "derived_autonomous": {
+      "generation_requests": 8,
+      "generation_known_tokens": 33966,
+      "embedding_known_tokens": 0,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    },
+    "field_prefetch": {
+      "generation_requests": 12,
+      "generation_known_tokens": 100224,
+      "embedding_known_tokens": 3416,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    },
+    "derived_prefetch": {
+      "generation_requests": 8,
+      "generation_known_tokens": 38697,
+      "embedding_known_tokens": 2291,
+      "generation_unknown_usage": 0,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "ledger_before_sha256": "63834ce20750972f022664b6aaa86f9d5c34d59d7db6a479b99ed02d6d9a4c61",
+  "ledger_after_sha256": "8547f1ef8d32455ad121799e5c0132a3de24a992067408c4fbbb73d2fb199ca5",
+  "host_manage_memory_receipts": {
+    "rejected": 8,
+    "committed": 4
+  },
+  "business_calls": {
+    "reserve_and_label": 8,
+    "get_reservation": 8
+  },
+  "sdk_reopen": {
+    "banks": 8,
+    "items": 154,
+    "semantic_records": 4,
+    "literal_observations": 16,
+    "sources": 48,
+    "all_database_hashes_unchanged": true,
+    "banks_detail": [
+      {
+        "cell": "field_autonomous",
+        "stream_index": 0,
+        "items": 13,
+        "semantic_records": 1,
+        "observations": 0,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-04/result.json",
+          "sha256": "b2c7ff4b321fe55eff9b5bf1b03f3ca8b2d059c8d5bbfc3f315c38f298a4333f",
+          "bytes": 50062
+        }
+      },
+      {
+        "cell": "derived_autonomous",
+        "stream_index": 0,
+        "items": 14,
+        "semantic_records": 0,
+        "observations": 4,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-05/result.json",
+          "sha256": "6ddd7fb66154a53c7041f2014f7cb5b58033d0891fbf666dc1928fcacdfcaf9b",
+          "bytes": 25780
+        }
+      },
+      {
+        "cell": "field_prefetch",
+        "stream_index": 0,
+        "items": 24,
+        "semantic_records": 1,
+        "observations": 0,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-06/result.json",
+          "sha256": "5042ffd10245474d4a67753809a141d90a22c67ada6ca7877d68a461c0115863",
+          "bytes": 262226
+        }
+      },
+      {
+        "cell": "derived_prefetch",
+        "stream_index": 0,
+        "items": 26,
+        "semantic_records": 0,
+        "observations": 4,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-07/result.json",
+          "sha256": "c2ab60fc4e3f5a316f16b759077873948d6c01836a64c765f1a88dc148143824",
+          "bytes": 218029
+        }
+      },
+      {
+        "cell": "field_autonomous",
+        "stream_index": 1,
+        "items": 13,
+        "semantic_records": 1,
+        "observations": 0,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-12/result.json",
+          "sha256": "63ca470deffc04e8409b8aedb7c9c1246c8590c429f3bf93c8f0edb37656f5c0",
+          "bytes": 50843
+        }
+      },
+      {
+        "cell": "derived_autonomous",
+        "stream_index": 1,
+        "items": 14,
+        "semantic_records": 0,
+        "observations": 4,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-13/result.json",
+          "sha256": "20785001ed3f1d326b12eb33142a2f6e5c1dc1413deab0fadbe1431eb1db4842",
+          "bytes": 26202
+        }
+      },
+      {
+        "cell": "field_prefetch",
+        "stream_index": 1,
+        "items": 24,
+        "semantic_records": 1,
+        "observations": 0,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-14/result.json",
+          "sha256": "0abda67873b0f8abbef2cfc92264d4d732ef690cf1fb6f0b570bc41691a57cb5",
+          "bytes": 264743
+        }
+      },
+      {
+        "cell": "derived_prefetch",
+        "stream_index": 1,
+        "items": 26,
+        "semantic_records": 0,
+        "observations": 4,
+        "sources": 6,
+        "database_unchanged": true,
+        "sdk_original": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-single-sdk-first/bank-15/result.json",
+          "sha256": "ffb71b18d61246a76c3ea61911390d31f9ed30839cb5fb139758c412ecbc71fe",
+          "bytes": 219639
+        }
+      }
+    ],
+    "new_model_http": 0
+  },
+  "original_controlled_prefix_361_files_unchanged": true,
+  "executing_maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 394,
+      "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+    },
+    "configs": {
+      "count": 320,
+      "compact_sha256": "91f756422bd227fff74d0197cd71b701290e848b7628a34d3c30b275f21cecad"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "primary_archive": {
+    "paper_count": 19,
+    "project_reference_count": 21,
+    "verified_unique_files": 845,
+    "local_index_links": 181
+  },
+  "limitations": [
+    "Two exposed scenes/fixed order/common opt-in engineering and old Field prompt/formation differences; not unseen/generalization or single-factor causal evidence",
+    "Root review is not independent Judge; running complete16 does not imply quality16",
+    "Raw observation capture/two literal values are not semantic cards, complete fact coverage or live authority; broad save wording scope qualified by Root",
+    "Current business query can produce a correct response without original history read; metadata/prefix/empty candidate lists are not historical body read",
+    "Explicit Host rejected/repeated proposals and all schema/material tokens retained, not a bounded-repair policy success",
+    "All SDK reopen calls offline socket denied; only actual Provider/ledger observations establish model costs",
+    "No old cohort replay/relabel, automatic retry/refund/reread/answer rewrite or classifier repair"
+  ],
+  "full_plan_completed": false,
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "original_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/free-slice-audit-first/result.json",
+    "sha256": "e035ba769a79644a94b007940aebbba708e840e4f673ad177f01e69d8d7eff10",
+    "bytes": 145789
+  },
+  "final_ledger_summary": {
+    "generation_requests": 9250,
+    "generation": {
+      "charged_tokens": 26137881,
+      "known_tokens": 26107494,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 940330,
+      "known_tokens": 940330,
+      "unknown_usage": 0
+    }
+  },
+  "historical_unknown_conservative_charge_retained": 30387,
+  "root_diagnostic_qualification": {
+    "unusable_final_messages": 1,
+    "unusable_final_indices": [
+      3
+    ],
+    "original_partial_label_failure_not_recovered_from_history_indices": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "broad_literal_save_scope_and_Host_acknowledgement_unverified_indices": [
+      9,
+      11
+    ],
+    "explicit_identical_rejected_Host_proposal_indices": [
+      8
+    ],
+    "Field_Host_rejected_proposals": 8,
+    "Field_actual_committed_records": 4,
+    "autonomous_followup_actual_memory_read_messages": 0,
+    "autonomous_followup_total_messages": 4,
+    "prefetched_followup_original_tool_body_or_literal_value_read_messages": 0,
+    "prefetched_followup_total_messages": 4,
+    "all_free_initial_business_attempts": 8,
+    "all_followup_current_business_queries": 8,
+    "no_detected_effect_none_fake_storage_or_gold_owner_leakage": true,
+    "no_formal_or_independent_quality_rate": true
+  },
+  "rows": [
+    {
+      "index": 0,
+      "cell": "field_autonomous",
+      "stream_index": 0,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 161790,
+      "record_count": 1,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 5,
+        "generation_known_tokens": 43806,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "COMMITTED_AFTER_THREE_DISTINCT_HOST_REJECTIONS",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-00/receipt.json",
+        "sha256": "0ffe60682ee094059480fd2066465613428261b699c12165e4a8bbb7bbee2568",
+        "bytes": 2308
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/4103d38dc8ed8e88/message-0.json",
+        "sha256": "0635b17cbd3b63962db2d405bb5091ddd4a7ddfef0d363c4dd3b9513498f08b5",
+        "bytes": 36337
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/4103d38dc8ed8e88/message-0.jsonl",
+        "sha256": "59e109330c264bbe72bdd56d94b26bf52d7ea47449390bef8bbafd8c8514035d",
+        "bytes": 281933
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-00.json",
+        "sha256": "0b9bfc307f5c8d991a8dc1e2c54e041eed7409e4738a0b7189cfe3790790b674",
+        "bytes": 1851
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-00.json",
+        "sha256": "fb78707ad31cd7188db6b7c090db63e2dd4858154ed363f329b9acb055f96f48",
+        "bytes": 6458
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-00.json",
+        "sha256": "06942e62ba56c1f5e486ddcf2d5a39f008a569feedab431d19c22bae4ad7aff1",
+        "bytes": 51798
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 1,
+      "cell": "derived_autonomous",
+      "stream_index": 0,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 170786,
+      "record_count": 0,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8462,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "BUSINESS_RECEIPT_TRUTHFUL_NO_SEMANTIC_SAVE_CLAIM",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-01/receipt.json",
+        "sha256": "5788a652c3b9c8e2e155e4210c3f04faa27b2e7db4418b054dfde1d2d27bd653",
+        "bytes": 2310
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/4103d38dc8ed8e88/message-0.json",
+        "sha256": "4d0dd7d23133750e402b42c3227eb2e2642d4cf9057f66291fb6187fc2791495",
+        "bytes": 14449
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/4103d38dc8ed8e88/message-0.jsonl",
+        "sha256": "8ebd5c3300013afe518982df00f5bfdceb9842b4962bf5271ec9fbc190a307ef",
+        "bytes": 88418
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-01.json",
+        "sha256": "49509186aa4ba3f164b7fcc5defe7eb0f3b8d011cd386fe8e86f7a21f245a0db",
+        "bytes": 1683
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-01.json",
+        "sha256": "844a1149607f2014b1e4d4fa6453c3054270dbadad56c533c8280bd0029e9c54",
+        "bytes": 1270
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-01.json",
+        "sha256": "18cf00129bad8fd75715f6d63b408894063ea1f6609eb5635ed4cf5c2c689591",
+        "bytes": 22205
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 2,
+      "cell": "field_prefetch",
+      "stream_index": 0,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 176649,
+      "record_count": 1,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 4,
+        "generation_known_tokens": 33559,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "COMMITTED_AFTER_ONE_EXPLICIT_HOST_REJECTION",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-02/receipt.json",
+        "sha256": "a911c0cf39a9fa1b27ad9432258926c4a66a485f1a8e018ec072d9d260779497",
+        "bytes": 2306
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/4103d38dc8ed8e88/message-0.json",
+        "sha256": "df907df45bf0b2fdda404cc884e7d3b85b103eb3973f11aafa019a86fbcf269d",
+        "bytes": 29858
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/4103d38dc8ed8e88/message-0.jsonl",
+        "sha256": "c9ff5816b3231a864d6f61f59c8fb89c09bda6a0525e70bccaf79aeb853c9936",
+        "bytes": 257413
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-02.json",
+        "sha256": "2df17d727dc0655a38d18db6d7d78c548c4e276ee7d82a940e134d5953d0545c",
+        "bytes": 1763
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-02.json",
+        "sha256": "af926aded7b0fb734c77c79d739019675cb4572ca1081bde63da8e3f08e718b3",
+        "bytes": 6398
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-02.json",
+        "sha256": "a66f72c878070245e7089f2c1f5021653c6669babf1380b1c6ade879fd92b693",
+        "bytes": 73138
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 3,
+      "cell": "derived_prefetch",
+      "stream_index": 0,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 183637,
+      "record_count": 0,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8849,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "TASK_FINAL_FAILED_VALID_JSON_STOP_RETAINED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-03/receipt.json",
+        "sha256": "7fbfd80fe1a897e0b9e71a2d9c02cc3fa5799a65baca0eb01d70b95001255866",
+        "bytes": 2308
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/4103d38dc8ed8e88/message-0.json",
+        "sha256": "eefce8296967effc19e20d12b8775a78fc5cc83307503ceebc6a9b7969dc0956",
+        "bytes": 13877
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/4103d38dc8ed8e88/message-0.jsonl",
+        "sha256": "3521f024e6bed93db614e66d8dcb43d12a258567b6638d33eed84f434d12f9f5",
+        "bytes": 110936
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-03.json",
+        "sha256": "188e0a9395b1b1731d066860cdee5e4b761a115e578e7e11076219874d24f3e6",
+        "bytes": 1772
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-03.json",
+        "sha256": "65a4df8399edc8a153c6c2c85c5efde2d1db98eb307dcae76f65198dc4208f0e",
+        "bytes": 1078
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-03.json",
+        "sha256": "f36fdccc814bbec2727da781b371e888707319693f6d468666827ed33c934aaa",
+        "bytes": 41585
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 4,
+      "cell": "field_autonomous",
+      "stream_index": 0,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 187905,
+      "record_count": 1,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 14193,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "READ_ONLY_LOOKUP_TRUTHFUL_NO_ORIGINAL_HISTORY_DELIVERED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-04/receipt.json",
+        "sha256": "51397e40477bec4e7668825f03f4078dcef30e42a8bd9ada80d39a8b1d84a55d",
+        "bytes": 2308
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/4103d38dc8ed8e88/message-1.json",
+        "sha256": "45e818a4c23f0bf0d82dc461b72ea8aa62a6d722c27d86239737a1c037643fe2",
+        "bytes": 21585
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/4103d38dc8ed8e88/message-1.jsonl",
+        "sha256": "8918d0ee777c12fefa0dbfad642eff5badc939e3c9316f1306fda7a094b7a26e",
+        "bytes": 118651
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-04.json",
+        "sha256": "59c45667546274845fa9c43b6fd3c2943fc17c18a75ab1313943343443337003",
+        "bytes": 1779
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-04.json",
+        "sha256": "12ceee053a9bcd0b99acd48c9aed381cad0ebe2f0918317e1429e8b2c75727e5",
+        "bytes": 6508
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-04.json",
+        "sha256": "fd06367ee360adec91145a1e39102aab58b85fdb71f1db96109e49329d51c4fb",
+        "bytes": 24063
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 5,
+      "cell": "derived_autonomous",
+      "stream_index": 0,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 193496,
+      "record_count": 0,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8431,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "READ_ONLY_LOOKUP_TRUTHFUL_NO_ORIGINAL_HISTORY_DELIVERED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-05/receipt.json",
+        "sha256": "06247c88ff1cd754a734af3e7927e968751deb41cf2498fc075937114f28d0ae",
+        "bytes": 2310
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/4103d38dc8ed8e88/message-1.json",
+        "sha256": "39e64b870fc9c74c1b74bcc751a497ac0269c5bede08cce8a27e276fad1705b3",
+        "bytes": 16990
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/4103d38dc8ed8e88/message-1.jsonl",
+        "sha256": "6a5af875be0b11ee2b10f332fa87d5a0ac2e0623670ba97affd9b6e5ef31773b",
+        "bytes": 88140
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-05.json",
+        "sha256": "cd76d788bd4330d9a539be29379f90b79a5aa3ebce0e54686db9602a8be3b52f",
+        "bytes": 1750
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-05.json",
+        "sha256": "e3569113c98861e81c101589a60a2262f6354dfffa72d5f0b8dbaf3d1413df2b",
+        "bytes": 1356
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-05.json",
+        "sha256": "9a4edd04522d9d6d045dc713a3ac2ef3f76978b3f952cd05a4b6da92d98021fa",
+        "bytes": 24717
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 6,
+      "cell": "field_prefetch",
+      "stream_index": 0,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 204883,
+      "record_count": 1,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 16315,
+        "embedding_known_tokens": 1656,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "READ_ONLY_LOOKUP_WITH_TRUNCATED_HEADER_PREFETCH",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-06/receipt.json",
+        "sha256": "3e7271df5c147d59269c2fcb46a756a49980ccffb632d2e27f01b384416ff186",
+        "bytes": 2306
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/4103d38dc8ed8e88/message-1.json",
+        "sha256": "04c72eeef837e61f7c14d64052ca2e680d6bf3af6bc73b08275bf3d051d1e2a3",
+        "bytes": 22664
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/4103d38dc8ed8e88/message-1.jsonl",
+        "sha256": "e630b9548cf5da0fe807dd1aa986d03cbe5fd31a171b4585915fd4dbe53e2867",
+        "bytes": 401958
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-06.json",
+        "sha256": "b36f6dad0486d705e4c8c726dc921d9ef28c5513813cb61e3bd8c73fd4b4cd03",
+        "bytes": 1885
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-06.json",
+        "sha256": "b252e9aaf7247df849a374bb38c850df7eada71984251323356e99f926dc460a",
+        "bytes": 6582
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-06.json",
+        "sha256": "374c6b03032e9debf759571d4e46036a895123db09f7988e245ed03f7b58bcd0",
+        "bytes": 58871
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 7,
+      "cell": "derived_prefetch",
+      "stream_index": 0,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 209716,
+      "record_count": 0,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 10453,
+        "embedding_known_tokens": 1050,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "READ_ONLY_LOOKUP_WITH_CANDIDATE_VALUES_OMITTED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-07/receipt.json",
+        "sha256": "f159731f4ae9a3a1c7e2add57cade03e24d197645c9236ef659ed628615d335f",
+        "bytes": 2308
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/4103d38dc8ed8e88/message-1.json",
+        "sha256": "4f8f7ef3b4f04b62c1df6cfa67d78a5a3a1c9760a44ecc7af3122af19238b079",
+        "bytes": 17510
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/4103d38dc8ed8e88/message-1.jsonl",
+        "sha256": "2bfc97780f62a87da785e18e3201e467954553c35a788ecef5c78f3341843959",
+        "bytes": 327523
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-07.json",
+        "sha256": "5a3b8deacbdfc157d97cf1f89e5ed7efb2ee59208a9d21b7be0c6bee7c48673a",
+        "bytes": 1914
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-07.json",
+        "sha256": "b510610187bebe8613381c83c6b596d0c701ca950e485bf17e75b9f78932f1c8",
+        "bytes": 1362
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-07.json",
+        "sha256": "1f857969554d8fa8ccd83ee8b12cf25be9fb6252085a86b9aba30942191ea307",
+        "bytes": 60001
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 8,
+      "cell": "field_autonomous",
+      "stream_index": 1,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 213617,
+      "record_count": 1,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 5,
+        "generation_known_tokens": 44265,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "TRUTHFUL_PARTIAL_AND_COMMIT_REPEATED_HOST_PROPOSAL_RETAINED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-08/receipt.json",
+        "sha256": "28dcee2a2780f8eb1c7988fdd87b2d414a5e52ad71534fe72c25a782d9d7c580",
+        "bytes": 2304
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/80bc27763d643af8/message-0.json",
+        "sha256": "492d93588cc9b0ce83d297f424c334877d10ccd76158a27ec4ccb75cbe9dea33",
+        "bytes": 37142
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/80bc27763d643af8/message-0.jsonl",
+        "sha256": "c2225c60c587c32a6a54632f72ea04be77ac8f392eb69c73ac739a4cafc00f66",
+        "bytes": 282730
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-08.json",
+        "sha256": "6fd04f76d228cce3958a87f5d354eb0337539faa90f42f13d4cf504f533ddccc",
+        "bytes": 1931
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-08.json",
+        "sha256": "1e8367385cac929299491815b6caea01d2d2d99109541676ef20ff05a59ad062",
+        "bytes": 6655
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-08.json",
+        "sha256": "1fb7f985ca8e9d10a24c501faaa14a15a786d20517df439d6bef2fff7cdefe40",
+        "bytes": 52164
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 9,
+      "cell": "derived_autonomous",
+      "stream_index": 1,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 220311,
+      "record_count": 0,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8584,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "TRUTHFUL_PARTIAL_LITERAL_PERSISTENCE_SAVE_SCOPE_UNCERTIFIED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-09/receipt.json",
+        "sha256": "d84c91cc963de164b77b2ab65345331b8701c9e9b2bf57c9f1e1f2cefd4dbff4",
+        "bytes": 2306
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/80bc27763d643af8/message-0.json",
+        "sha256": "0af4fdb6d349be13a497b5bfe2febbdaf3ae5085a18e3099acc27f629d026c65",
+        "bytes": 15359
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/80bc27763d643af8/message-0.jsonl",
+        "sha256": "657bc0e5e85731d555d2cb1cc7cb477da4ebb6a91efec31a5e4f9e920576cbad",
+        "bytes": 89062
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-09.json",
+        "sha256": "19baedca55b678ae18a2f330fadc9a69e111394e3635b5af99b2d23dbef0c861",
+        "bytes": 2013
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-09.json",
+        "sha256": "2e4b6e256fcbbf929f72a5f98114492a50da6747a2806385579016fca0a7a7a0",
+        "bytes": 1502
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-09.json",
+        "sha256": "0330467dedb6a87261575321f249b75e4c689d7be6713e9248c1261f104a8651",
+        "bytes": 22649
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 10,
+      "cell": "field_prefetch",
+      "stream_index": 1,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 236843,
+      "record_count": 1,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 4,
+        "generation_known_tokens": 34016,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "TRUTHFUL_PARTIAL_COMMITTED_CARD_AFTER_ONE_REJECTION",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-10/receipt.json",
+        "sha256": "b591acf1e15d716217ae129fdf732f19937ac5a140b0c5883d28a1bb8ae5320e",
+        "bytes": 2303
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/80bc27763d643af8/message-0.json",
+        "sha256": "b99ad93a85dc581cd675c48d4a04541a92b502b2729673b621c68476081c0659",
+        "bytes": 31452
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/80bc27763d643af8/message-0.jsonl",
+        "sha256": "f059ebd8d2cc6827c9901220a7d969f8be9e60b8e476430703b80557f331756a",
+        "bytes": 259457
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-10.json",
+        "sha256": "1195d32eef1726b159abb4fdfa01aacc51f53a60ea42e61d8c86dc6682a7a228",
+        "bytes": 1836
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-10.json",
+        "sha256": "8bb4602e89bcc24d6dacd3d37b8e35b7f585db2a3a78f1bc24617cfda9460c22",
+        "bytes": 6859
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-10.json",
+        "sha256": "c79f23445fae074c1a407d084e83da966d7a0e9b3bef629d1fb9952187a89602",
+        "bytes": 73698
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 11,
+      "cell": "derived_prefetch",
+      "stream_index": 1,
+      "boundary": 0,
+      "terminal_status": "completed",
+      "process_id": 241570,
+      "record_count": 0,
+      "source_count": 3,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8969,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "reserve_and_label"
+      ],
+      "root_disposition": "TRUTHFUL_PARTIAL_LITERAL_PERSISTENCE_SAVE_SCOPE_UNCERTIFIED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-11/receipt.json",
+        "sha256": "806dd0734784c77e83322eded6b23747b6a8771685e6b250d2690cbf0504abb4",
+        "bytes": 2305
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/80bc27763d643af8/message-0.json",
+        "sha256": "0aa460506dde345c19939ae8ddabe54f18f2d1aa824d031b6b4758b64b382e60",
+        "bytes": 15395
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/80bc27763d643af8/message-0.jsonl",
+        "sha256": "dbb0390d0ccfe482a7e05c2d24f8d42e82ec7de7631de255e261a9d8532f7cd1",
+        "bytes": 111981
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-11.json",
+        "sha256": "7ed472164482d8278701357a63913fc5a812ae98e709b9ef8d228f01dab76ba8",
+        "bytes": 1986
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-11.json",
+        "sha256": "4653685bfffd39b22ebb78c9edbfb70b6a0fe09373c78e96682d1e9913e995ea",
+        "bytes": 1513
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-11.json",
+        "sha256": "10e6b02adc6eac66258f61fd813b23d7b963bb522dabea75c684cdffd660e90d",
+        "bytes": 42232
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 12,
+      "cell": "field_autonomous",
+      "stream_index": 1,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 252365,
+      "record_count": 1,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 14290,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "CURRENT_LOOKUP_TRUTHFUL_PRIOR_OPERATION_UNCONFIRMED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-12/receipt.json",
+        "sha256": "af2474c2f29bbc449d1f9b52bd92117b5384cf2fa3160ba8af0d5fa1ca636fec",
+        "bytes": 2305
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/80bc27763d643af8/message-1.json",
+        "sha256": "3f188502f49f07ac7ac2fe47af01692d906a398f593f3711ab805336dd6b49f8",
+        "bytes": 23013
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0/80bc27763d643af8/message-1.jsonl",
+        "sha256": "ea226ccea97d8efd95b9afa55bfff81da46db261e3eb68a57752715c0e151a26",
+        "bytes": 119473
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-12.json",
+        "sha256": "5a1bc9e65b3f90c277fef155c856fd63e57f436f8bdde3ee44055595e35c1061",
+        "bytes": 1887
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-12.json",
+        "sha256": "f21a9800c8e83d41d3c516db0aaea8598115a8bf26c32adb2c9dd30e2b68848c",
+        "bytes": 6924
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-12.json",
+        "sha256": "5511b80a0d0bfe2959f2a7526be406065d6e8d8c7b17142f7e133d0ae7deea8a",
+        "bytes": 24702
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 13,
+      "cell": "derived_autonomous",
+      "stream_index": 1,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 258791,
+      "record_count": 0,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 8489,
+        "embedding_known_tokens": 0,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "CURRENT_LOOKUP_TRUTHFUL_PRIOR_LABEL_FAILURE_NOT_RECOVERED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-13/receipt.json",
+        "sha256": "def7e1a310bc2080042f077077540a1c4517e6942848da2f4080f3b8179d96a1",
+        "bytes": 2307
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/80bc27763d643af8/message-1.json",
+        "sha256": "e44c2720466e0b28a95703781a232164119ad58314d1bc40d86a2f6fb6d9ca69",
+        "bytes": 17551
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1/80bc27763d643af8/message-1.jsonl",
+        "sha256": "9c192de828717ad68beb2bdb4eaeb8d06c31b2d1247c22cf7b0e6f923b877c2f",
+        "bytes": 88355
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-13.json",
+        "sha256": "88e335a06501091d7817774cfa8e95477f200e24f80cc8435aa7f795d21cc666",
+        "bytes": 1873
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-13.json",
+        "sha256": "b424135d876b5869673eb57515f09a61ff471fecc99832f4ce4dc950ba1aaca7",
+        "bytes": 1426
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-13.json",
+        "sha256": "6ee8e1b361079e46d88f117a516eb509818b8614fdf52fe46993361af272adde",
+        "bytes": 25135
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 14,
+      "cell": "field_prefetch",
+      "stream_index": 1,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 270863,
+      "record_count": 1,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 16334,
+        "embedding_known_tokens": 1760,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "CURRENT_LOOKUP_TRUTHFUL_PREFETCH_HEADERS_PRIOR_FAILURE_UNCONFIRMED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-14/receipt.json",
+        "sha256": "edef1d3349c9e6d4bb906e00f43efd70f5288d2bb5002f47cb5fec0e4a496465",
+        "bytes": 2303
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/80bc27763d643af8/message-1.json",
+        "sha256": "f206ae6ed3e87e7105ac736130e4b7acb751184d566ab1ac6e93be99a2ae9465",
+        "bytes": 23678
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2/80bc27763d643af8/message-1.jsonl",
+        "sha256": "ca1e4dc4cb9ad597248396a705b438eb9a531ca7206e47ee38afc12bc1406d33",
+        "bytes": 404249
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-14.json",
+        "sha256": "0edc44f4a79adcb9bec1d9781f5f631861300b7506206c1355eed401493e3e04",
+        "bytes": 1900
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-14.json",
+        "sha256": "ae294e814f1ca7932f4b6da177f2b4ddbf1df11c519385e03e0c152319f39e64",
+        "bytes": 6841
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-14.json",
+        "sha256": "a2e9157bd772833983aa9ad37e356b2262420ce6dae3131ad6b07223d1489825",
+        "bytes": 59964
+      },
+      "execution_complete_not_quality_pass": true
+    },
+    {
+      "index": 15,
+      "cell": "derived_prefetch",
+      "stream_index": 1,
+      "boundary": 1,
+      "terminal_status": "completed",
+      "process_id": 277323,
+      "record_count": 0,
+      "source_count": 6,
+      "costs": {
+        "generation_requests": 2,
+        "generation_known_tokens": 10426,
+        "embedding_known_tokens": 1241,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "business_calls": [
+        "get_reservation"
+      ],
+      "root_disposition": "CURRENT_LOOKUP_TRUTHFUL_CANDIDATES_OMITTED_PRIOR_FAILURE_NOT_RECOVERED",
+      "original_parent": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/one-step-originals/free_host-15/receipt.json",
+        "sha256": "34a673623f027d51b2d1e8afea48642c28b4dbf7237535aebd8d3b3b6ffdace8",
+        "bytes": 2305
+      },
+      "original_child": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/80bc27763d643af8/message-1.json",
+        "sha256": "0ccb65cef04fc94541718da0ead40b59d6ea5aae8e6cfcc5fe6eac5a8708737d",
+        "bytes": 18324
+      },
+      "original_trace": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3/80bc27763d643af8/message-1.jsonl",
+        "sha256": "c724a3871aabec913a6729befb91cbaf3f33b39b62fa923c1beb2b2869ad6efa",
+        "bytes": 329327
+      },
+      "root_review": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-boundary-reviews/free_host-15.json",
+        "sha256": "e3f1f0567c151f4c3af811be07e3b71eb38f20de41ab17fd5f3e8c47704cc7bb",
+        "bytes": 2026
+      },
+      "root_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-inspections/free_host-15.json",
+        "sha256": "042ab0ce5e2c852ce8a80cb4107731c814a2dece56ab4b764a498feff4e029ad",
+        "bytes": 1449
+      },
+      "root_context_inspection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/root-free-context-inspections/free_host-15.json",
+        "sha256": "58eeb3f1385ee70f26493d63026950751946bc49efa33791586faab23ab7d212",
+        "bytes": 60682
+      },
+      "execution_complete_not_quality_pass": true
+    }
+  ],
+  "combined_r8_costs": {
+    "generation_requests": 50,
+    "generation_known_tokens": 350136,
+    "embedding_requests": 40,
+    "embedding_known_tokens": 19487,
+    "new_generation_unknown": 0,
+    "new_embedding_unknown": 0
+  },
+  "cumulative_r0_through_r8_costs": {
+    "generation_requests": 1304,
+    "generation_known_tokens": 5796843,
+    "embedding_requests": 527,
+    "embedding_known_tokens": 223142,
+    "historical_unknown_unchanged": true
+  },
+  "future_generic_candidates_not_applied": [
+    "Public source-member/required-field/inner-body relationship wording with original guards/defaults",
+    "True completed typed capture effect and limited literal count, without semantic save promotion",
+    "Exact-restorable generic metadata compression under same budget/order/query/rank/selection, no automatic reread",
+    "Distinguish explicit Host repeated unchanged proposals from bounded background maintenance; retain original rejects/costs"
+  ],
+  "full_first_attempt_archive": {
+    "file_index": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/full-first-attempt-prefix-archive-first/file-index.json",
+      "sha256": "0d0a4030fc348bce1a862f0116db0e640589c0fc8735899bdd909ea84a0be1a7",
+      "bytes": 122347
+    },
+    "seal": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/full-first-attempt-prefix-archive-first/SEAL.json",
+      "sha256": "1213c7768fbad2eb37b40e692ee0a184b4d03aa86c53a8522663c2e18a770770",
+      "bytes": 1189
+    },
+    "indexed_files": 734,
+    "symlink_metadata_entries": 0,
+    "original_controlled_361_files_unchanged": true,
+    "future_publication_records_outside_closed_root": true
+  }
+}

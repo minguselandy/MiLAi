@@ -1,0 +1,116 @@
+{
+  "kind": "V13_2_HTTP_OWNER_ACTUAL_SETUP_START_AND_ROOT_AUDIT_PROGRESS",
+  "status": "ACTIVE_SOURCE_OFFLINE_IMPLEMENTATION_NOT_ACCEPTED",
+  "recorded_at_utc": "2026-10-01T13:24:08.247819+00:00",
+  "source_owner": "/root/v13_2_source_resume",
+  "source_tree": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation",
+  "source_branch": "feat/lab-http-owner-implementation-v13-2-20261001",
+  "source_base": "8b1fdf3c017477ee80a0284f08ca4a1f5f52e670",
+  "published_scope_commit": "dc91b72a7e8224a9d37556b710b5dd840a5257cf",
+  "scope_manifest_sha256": "c31075de89ee19baaf319af32e7e2e7f7f7b30fe3a4bf8aa2b4a0f6973437183",
+  "scope_document_sha256": "778e867210aea4b670e4600c76322131a51a7afccb7e5d7df8b636402246be80",
+  "historical_scope_and_publication_records": "Frozen before setup/start; their pending/source_started=false fields remain unchanged and qualified by this separate later progress record.",
+  "publication_exact_remote_pr_head_body_verified": true,
+  "actual_scope_remote_tool_chunk": "cc11c7",
+  "actual_new_worktree_created": true,
+  "actual_root_setup": {
+    "first_tool_chunk": "a0cae8",
+    "completion_tool_chunk": "a0586e",
+    "returncode": 0,
+    "root_ready_path": "artifacts/v13-2-http-owner-root-preparation/source-tree-setup-first/source-ready.json",
+    "root_ready_sha256": "2f793dca12572d9bf6bac1c22b58af23987ae46e3219a771b1cc2559b165989d",
+    "source_ready_at_setup_sha256": "2f793dca12572d9bf6bac1c22b58af23987ae46e3219a771b1cc2559b165989d",
+    "command_count": 6,
+    "branch_absent_control_original_returncode": 1,
+    "authorization_only_copies": [
+      "v13-2-http-owner-implementation-scope.json",
+      "V13_2_HTTP_OWNER_IMPLEMENTATION_SCOPE.md"
+    ],
+    "source_started_at_original_setup_time": false
+  },
+  "actual_source_start": {
+    "tool": "collaboration.followup_task",
+    "target": "/root/v13_2_source_resume",
+    "new_agent_spawned": false,
+    "existing_owner_explicitly_started_after_setup_and_verification": true,
+    "authoritative_list_agents_state_observed": "running",
+    "source_reply": "Scope/doc/setup SHAs read and checked; socket-denial installed with original refusal rc1 retained; bounded implementation ongoing.",
+    "completed_original_commands_independently_verified": 17,
+    "current_active_source_head_or_final_byte_equivalence_claim": false,
+    "all_previous_source_trees": "READY_HOLD"
+  },
+  "root_independent_acceptance_preparation": {
+    "receipt": "artifacts/v13-2-http-owner-root-preparation/independent-acceptance-first/receipt.json",
+    "sha256": "ae4a67a288d49b675f1937b64571887f95e65e926d828546e7239e0762698d4e",
+    "actual_tool_chunk": "8c8e25",
+    "returncode": 0,
+    "criteria": 42,
+    "synthetic_oracle_events": 5,
+    "synthetic_oracle_stages": 11,
+    "status": "PREPARED_NOT_MECHANISM_EXECUTED_NOT_ACCEPTED",
+    "historical_unknown": "Explicit synthetic prior unknown1, limits, costs and opaque history preserved in independent arithmetic only; no actual ledger content parsed or copied.",
+    "scope_expansion": false
+  },
+  "root_completed_prefix_original_audit": {
+    "result": "artifacts/v13-2-http-owner-root-preparation/completed-prefix-audit-corrected-first/result.json",
+    "sha256": "23697e8b61f80ddc1e52be3cdff99baa77e1fe9a064d00dbef66544e53eb0e11",
+    "actual_tool_chunk": "9d3cb8",
+    "returncode": 0,
+    "commands": 17,
+    "nonzero_commands": 1,
+    "executing_snapshot_checks": 1360,
+    "indexed_files": 135,
+    "file_index_sha256": "0367bb3b9c9de86710be4e16c8401ebb3f54ea5435e24bebe42cda2847edb156",
+    "nonzero": "Actual socket-denial probe rc1, expected refusal; original retained.",
+    "limits": "Fixed finalized prefix only, Source active; no full handoff/final code/engineering or model-quality acceptance.",
+    "root_original_auditor_failure": {
+      "tool_chunk": "997208",
+      "returncode": 1,
+      "failure_record": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-http-owner-root-preparation/completed-prefix-audit-first/failure.json",
+      "reason": "Scope digest transcription omitted two hexadecimal characters; original refused before command audit. No Source or mechanism rerun.",
+      "at_failed_execution_after_full_maps": "unavailable; not backfilled"
+    }
+  },
+  "primary_compact_maps": {
+    "runtime": {
+      "count": 213,
+      "sha256": "dfa818dc9c67ea0c3856e98ff0bb28dab333892b33e21bba07eeac084438ffbd"
+    },
+    "tests": {
+      "count": 391,
+      "sha256": "d78ff9aa8d0f096548c85337d89be4f26952bb3e2b45e80fe4bad4f2c52613f1"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "continuous_ledger_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "requirement_status_counts_unchanged": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "engineering_accepted": false,
+  "global_http_owner_implemented_or_accepted": false,
+  "new_actual_generation_http": 0,
+  "new_actual_embedding_http": 0,
+  "actual_new_cohort_frozen": false,
+  "r7_replayed": false,
+  "d4_fairness_or_inclusive12_24_accepted": false,
+  "model_quality_or_generalization_claim": false,
+  "literature": {
+    "papers": 17,
+    "project_reference_groups": 15,
+    "verified_files": 745,
+    "local_links": 133,
+    "new_gets_this_progress_stage": 0
+  },
+  "next": "Same Source owner completes scoped offline work and honest originals/local commit; Root then independently audits final handoff, exact diff and required final-byte controls before accepting or freezing a new actual cohort.",
+  "full_plan": "ACTIVE",
+  "e0": "NOT_PASSED",
+  "d4": "NOT_ADMITTED",
+  "product": "NO_GO"
+}

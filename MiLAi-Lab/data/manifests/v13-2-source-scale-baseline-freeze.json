@@ -1,0 +1,64 @@
+{
+  "kind": "V13_2_SOURCE_SEMANTIC_SCALE_BASELINE_FREEZE",
+  "status": "PRE_RUN",
+  "frozen_at": "2026-09-30T21:34:48.843764+00:00",
+  "source_commit": "fd1ce5965926bf636ed4c5af00332d03e925d6a9",
+  "source_map_sha256": "906d86f4a7ef8104bc49991f4a05ebf81325b08dcbb03454d9d894fa8674c07a",
+  "source_map_serialization": "json.dumps(sort_keys=True,separators=(comma,colon)); UTF8",
+  "driver_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/measure_scale_fd1.py",
+  "driver_sha256": "9eebe1a30d346db76e13a9bf57b48a245248ca873cedcde6c05336e8ded31967",
+  "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+  "sdk_packages": {
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint": "2.1.2",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "langchain-core": "1.6.5",
+    "openai": "3.19.2",
+    "tiktoken": "0.14.0",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "httpx": "0.28.1",
+    "numpy": "2.4.6"
+  },
+  "sizes": [
+    100,
+    1000,
+    10000
+  ],
+  "per_size": {
+    "initial_events": "N-20 controlled archived user assertions and 20 actual query-source events",
+    "semantic_cards": 10,
+    "first_per_turn": 20,
+    "cached_same_turn": 20,
+    "new_source_capture": 20,
+    "dirty_same_selection_refresh": 20,
+    "idempotent_source_replay": 20,
+    "backlinks_validated_lookup": 20,
+    "backlinks_delete_and_rebuild": 20
+  },
+  "offline_embedding": {
+    "dimension": 1024,
+    "method": "deterministic sha256 one-hot, public provider interface",
+    "http": 0
+  },
+  "tokenizer": "same actual frozen Qwen tokenizer as R2",
+  "concurrency": 1,
+  "ledger_before_sha256": "543572df0b51166e0a3a58cae061e3afb96ab53f999cccea544f05b782b6ffd5",
+  "generation_requests": 0,
+  "embedding_http_requests": 0,
+  "metrics": [
+    "wall and CPU p50/p95, 20 descriptive samples",
+    "instrumented public SDK get/search/put/delete counts and search returned/exact-namespace rows",
+    "process OS block counters, peak RSS",
+    "initial logical raw-index and actual SQLite resource bytes"
+  ],
+  "scope_limits": [
+    "No object-projection stream; partial D5 performance only.",
+    "Offline embeddings do not measure real model latency, semantic retrieval or HTTP tokens.",
+    "First-per-turn includes one cold initial index and 19 queries with incremental index reuse.",
+    "Ordinary cache reuse still scans current bank; full cost measured.",
+    "Returned logical rows are not physical disk reads.",
+    "No source changes or legacy implementation optimization before the baseline finishes."
+  ],
+  "product": "NO_GO"
+}

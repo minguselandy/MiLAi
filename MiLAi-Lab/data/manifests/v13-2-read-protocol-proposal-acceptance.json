@@ -1,0 +1,53 @@
+{
+  "kind": "V13_2_ROOT_BLIND_STATIC_READ_PROTOCOL_PROPOSAL_ACCEPTANCE",
+  "status": "STATIC_PROPOSAL_ACCEPTED_NOT_IMPLEMENTATION_OR_MODEL_EFFECTS",
+  "checked_at_utc": "2026-10-01T10:28:42.777540+00:00",
+  "source_base_commit": "da33e6169c2745fbb50aee3f0a4370b9ceb1f02f",
+  "source_original_identities": {
+    "HANDOFF.md": "04768b12f31b170a710cc6d8f87ecb7867b93f0185f4f502604bf6840c6b36d6",
+    "DESIGN.md": "85a17c817ebb5e64597c0e85905b027f787642e5dd0207ccfc7c7ffe0a666d1c",
+    "source-checks.json": "c9d851ffb95f34939f92ea1ffbd59e9eb2efbc6865dbbd750c3d86aa85c1995f",
+    "file-index.json": "345bf4671d35cf4364008d79c9400384b5e46d5b538a16c2d0c576467c0b9a98",
+    "manifest.json": "38c5a8a035b141bd04b3f1ab28772d0971bb6f4a2955081bd4add69d344766b3"
+  },
+  "source_original_indexed_files": 255,
+  "all_original_copied_files": 262,
+  "completed_original_subprocesses": 38,
+  "nonzero_original_subprocesses": 0,
+  "additional_tool_read_control": {
+    "count": 1,
+    "chunk": "d97f93",
+    "at_time_maps": "UNAVAILABLE_NOT_RECONSTRUCTED"
+  },
+  "runtime_test_snapshots": 21,
+  "saved_primary_methods": 8,
+  "root_independent_verification_path": "artifacts/v13-2-development-r7/read-protocol-proposal-root-verification.json",
+  "root_independent_verification_sha256": "796d558ea9faf7bdf517d6319f815a609bbb4d1596477c2a62b3a88154fd8c96",
+  "root_actual_verification_tool_chunk": "6ab0a9",
+  "root_actual_verification_returncode": 0,
+  "original_source_copy": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-read-protocol-proposal-source",
+  "source_test_config_maps": {
+    "source": {
+      "count": 212,
+      "sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf"
+    },
+    "tests": {
+      "count": 389,
+      "sha256": "bc05df9ab688b39307c4a2d3385ba4aa293574c827e739d0a7ed2c454c1323f6"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "bootstrap_scope_deviation_retained": true,
+  "bootstrap_retrospective_exception": "existing originals HOLD; exact retain/copy only; no prior-authorization or missing maps reconstruction claims",
+  "ledger_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "actual_new_model_http": 0,
+  "sdk_or_mechanism_execution": 0,
+  "source_unchanged": true,
+  "semantic_or_generalization_accepted": false,
+  "full_plan": "ACTIVE",
+  "d4_admission": "NOT_ADMITTED",
+  "product": "NO_GO"
+}

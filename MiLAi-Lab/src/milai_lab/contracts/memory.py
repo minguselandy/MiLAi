@@ -46,7 +46,9 @@ class SourceEvent(TypedDict):
     event_id: str
     owner: str
     session: str
-    role: Literal["user", "tool"]
+    # Assistant capture is available only in opt-in event_bound_v1; historical
+    # user/tool events keep their original dictionaries and identity bytes.
+    role: Literal["user", "tool", "assistant"]
     origin: str
     content: Any
     content_sha256: str
@@ -95,3 +97,45 @@ class MemoryObjectRef(TypedDict):
 
     record_id: str
     access_receipt_ref: str
+
+
+class CandidateBinding(TypedDict):
+    """Opt-in server-issued read-time handle payload, never a live application ref."""
+
+    owner: str
+    namespace: list[str]
+    record_id: str
+    revision: int
+    support_sources: list[dict[str, Any]]
+    version_sha256: str
+
+
+@dataclass(frozen=True)
+class ObservationField:
+    """Public field mapping; an ordered version domain is declared per field."""
+
+    name: str
+    path: tuple[str, ...]
+    dtype: Literal["string", "integer", "boolean", "number", "json"]
+    version_domain: str | None = None
+    allow_null_clear: bool = False
+
+
+@dataclass(frozen=True)
+class ObservationProfile:
+    """A trusted adapter contract, without task plans, gold or hidden-world routing."""
+
+    profile_id: str
+    adapter_version: str
+    application: str
+    origins: tuple[str, ...]
+    object_id_path: tuple[str, ...]
+    fields: tuple[ObservationField, ...]
+    objects_path: tuple[str, ...] = ()
+    owner_path: tuple[str, ...] | None = None
+    resource_version_path: tuple[str, ...] | None = None
+    resource_version_type: Literal["integer", "opaque"] = "opaque"
+    valid_time_path: tuple[str, ...] | None = None
+    completeness: Literal["partial", "complete"] = "partial"
+    unknown_path: tuple[str, ...] = ("status",)
+    unknown_values: tuple[str, ...] = ("ORIGINAL_CALL_OUTCOME_UNKNOWN",)

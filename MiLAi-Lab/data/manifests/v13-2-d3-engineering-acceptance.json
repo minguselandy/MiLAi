@@ -1,0 +1,194 @@
+{
+  "kind": "V13_2_D3_ENGINEERING_ACCEPTANCE",
+  "status": "PASSED_SCOPED_ENGINEERING_REAL_COHORT_NOT_RUN",
+  "source_owner": "READY_HOLD",
+  "checks": [
+    {
+      "path": "artifacts/v13-2-d3/d3-affected.json",
+      "sha256": "ace750bfb2c8ffa6937808c46a8448b40eebaeb28478fd25dbfc4af40c463c59",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/memory/test_v13_2_packet.py",
+        "tests/memory/test_v13_2_delivery.py",
+        "tests/memory/test_v13_2_observation.py",
+        "tests/memory/test_v13_2_service.py",
+        "tests/memory/test_v13_1_service.py",
+        "tests/memory/test_v13_1_d0.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": false,
+      "stdout_log": "artifacts/v13-2-d3/d3-affected.log",
+      "stdout_sha256": "15a73d9790ca75bcd62a6bae6f1585dc8d368e33960563ef05b5df5fa8133a8d",
+      "summary": "137 passed, 16 warnings in 26.47s",
+      "execution_identity_map_sha256": "a802545f0ba3afeab14bc322e6c28f6124f8762a0e9cb166cd6c05d13cab611f",
+      "execution_identity_file_count": 587
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-reader-final.json",
+      "sha256": "e0e3cb265b2df03ea8fe15a670b29946c9cae99f79ff4be886d1d27ea649c69c",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/memory/test_v13_2_packet.py",
+        "tests/memory/test_v13_2_service.py",
+        "tests/memory/test_v13_2_delivery.py",
+        "tests/memory/test_v13_1_d0.py",
+        "-q"
+      ],
+      "exit_code": 1,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-reader-final.log",
+      "stdout_sha256": "20a23c669233a69dcc9a8220064ced3403f997d2812ddeea1d8183965859388a",
+      "summary": "1 failed, 54 passed, 16 warnings in 16.96s",
+      "execution_identity_map_sha256": "f8a955ab83052f22187c8cdf5f4b51e79354963c0e81d745b18885d94d39a8eb",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-explicit-recall-final.json",
+      "sha256": "c35522ffc284f90ddb64b5c155633178b7ef42f380beab80b3983bd9585e7bed",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "pytest",
+        "tests/memory/test_v13_2_packet.py",
+        "-k",
+        "autonomous_recall",
+        "-q"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-explicit-recall-final.log",
+      "stdout_sha256": "448b0a3b65f3f42c3626286accb49b7c8f770e1a86a5d629b83d1c904c613cf2",
+      "summary": "1 passed, 11 deselected, 2 warnings in 2.76s",
+      "execution_identity_map_sha256": "06f48e3c0f33a38208b31b68c9672c94e8be74b5ea5479882767d257761f0f91",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-types-final.json",
+      "sha256": "c2428a6e4ff6ffb6f45d581e63bfd3c88c4ce7a39f5d055dce029786de1956b2",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/memory/service.py",
+        "src/milai_lab/memory/service_tools.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "src/milai_lab/runners/v13_1_p5.py",
+        "--follow-imports=silent"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-types-final.log",
+      "stdout_sha256": "e317872697c2cbfdefa321527a6efe73290dff3a390b0fa8723b87092eccba6a",
+      "summary": "Success: no issues found in 5 source files",
+      "execution_identity_map_sha256": "f8a955ab83052f22187c8cdf5f4b51e79354963c0e81d745b18885d94d39a8eb",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-lint-final.json",
+      "sha256": "ba5386cd251dcb8e89eed79f6da69545924641414597dca54cec7e67129a81e2",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/memory/service.py",
+        "src/milai_lab/memory/service_tools.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "src/milai_lab/runners/v13_1_p5.py",
+        "tests/memory/test_v13_2_packet.py",
+        "tests/memory/test_v13_2_delivery.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-lint-final.log",
+      "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "summary": "All checks passed!",
+      "execution_identity_map_sha256": "f8a955ab83052f22187c8cdf5f4b51e79354963c0e81d745b18885d94d39a8eb",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-boundary-final.json",
+      "sha256": "39a44142b616d3bfb65137c4996606aedf5aabb4def467f2e8474f8eaf964803",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.boundary"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-boundary-final.log",
+      "stdout_sha256": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "summary": "PASS active package DAG, pure facades, shared leaves and import paths",
+      "execution_identity_map_sha256": "f8a955ab83052f22187c8cdf5f4b51e79354963c0e81d745b18885d94d39a8eb",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-tools-boundary-final.json",
+      "sha256": "5dfdf0ad752e5700e5fbae75c7b968d9be1fa662bd7c81eb2c9fc3ac14af6d1b",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "milai_lab.tools_boundary"
+      ],
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-tools-boundary-final.log",
+      "stdout_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "summary": "PASS active tools Product dependency inventory (11 files, 20 dependencies, 6 grandfathered private)",
+      "execution_identity_map_sha256": "06f48e3c0f33a38208b31b68c9672c94e8be74b5ea5479882767d257761f0f91",
+      "execution_identity_file_count": 595
+    },
+    {
+      "path": "artifacts/v13-2-d3/d3-config-contracts-final.json",
+      "sha256": "9c4cd1e9b9668330b465c887d0347fa21b87262b8204f6b9ae248229ae147266",
+      "command": "one-off public config/contracts, pinned local tokenizers and existing decoder schema; socket.connect forbidden",
+      "exit_code": 0,
+      "source_unchanged_during_command": true,
+      "matches_final_src": true,
+      "stdout_log": "artifacts/v13-2-d3/d3-config-contracts-final.log",
+      "stdout_sha256": "5403463cbb43d7379b70c38c929938ed391c0e3ab3bfa187d823f8216324c2f4",
+      "summary": "}",
+      "execution_identity_map_sha256": "06f48e3c0f33a38208b31b68c9672c94e8be74b5ea5479882767d257761f0f91",
+      "execution_identity_file_count": 595
+    }
+  ],
+  "root_verified_raw_logs_and_per_command_hashes": true,
+  "earlier_affected137_not_promoted_to_latest_api_identity": true,
+  "final_reader_stage": "54 passed and1 internal-schema introspection assertion failed; exact first failure retained. Only assertion changed to actual public tool_call_schema, targeted1 passed on same src. No claim whole55 suite ran on one test identity.",
+  "crash_windows": "Actual W2/W3 projection SIGKILL and independent SDK reopen included in54 passed; pending witness W2, complete/no_change W3; world not replayed. W3 projection is separate from actual UPDATE crash.",
+  "scope": [
+    "one public ordinary retrieval2048/6",
+    "real query additional reads separately paid",
+    "source backlinks and read-time candidate patches",
+    "one generation up to6 independent mutations; non-atomic partial receipts",
+    "optional one repair; repeated rejection fingerprint suppressed",
+    "source-level Host commit dedup",
+    "packet source leaf hash/ranges, metadata truncation and conflicts"
+  ],
+  "limits": [
+    "MockTransport tests not quality samples",
+    "snapshot scans and partial IO measurement",
+    "source-level dedup does not prove multi-fact complete save",
+    "relevance cosine0.2 developmental initial not optimum",
+    "E0/E1/E2 actual HTTP and semantic results still required",
+    "D4/D5 remain incomplete"
+  ],
+  "new_generation": 0,
+  "new_embedding": 0,
+  "product": "NO_GO",
+  "source_local_commit": "bb1b9a7ad878678cd51fb573dc55cbe2e2ef106c"
+}

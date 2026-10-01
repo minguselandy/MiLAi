@@ -19,9 +19,22 @@ from typing import Any, cast
 
 from milai_lab.baselines.benchmark_memories import GenerationAdmission
 from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits, Trace
+from milai_lab.harness.contextual_artifacts import (
+    BudgetExceeded,
+    RunBudget,
+    RunLimits,
+    Trace,
+    entry_budget,
+    http_budget_scope,
+)
+from milai_lab.harness.http_ownership import (
+    check_frozen as check_http_frozen,
+)
+from milai_lab.harness.http_ownership import (
+    freeze_fields as http_freeze_fields,
+)
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
 
 LAB = Path(__file__).resolve().parents[3]
 CLI = LAB / "tools/run_v13_1_baseline_micro.py"
@@ -143,51 +156,57 @@ def _validate(fixture: Any, config: Any, backend: str) -> None:
 
 def prepare(fixture_path: Path, config_path: Path, root: Path, backend: str) -> dict[str, Any]:
     fixture, config = read_json(fixture_path), read_json(config_path)
-    _validate(fixture, config, backend)
-    budget_limits = read_json(Path(config["budget_path"]))["limits"]
-    RunLimits(**budget_limits)
-    native: dict[str, Any]
-    if backend == "simplemem_text":
-        native = {"policy": _policy(config), "archive_input_mode": ARCHIVE_INPUT_MODE}
-    else:
-        from milai_lab.integrations.memory.mem0 import MEM0_POLICY
+    with http_budget_scope(config, client_configs=ownership_client_configs(config)):
+        _validate(fixture, config, backend)
+        budget_limits = read_json(Path(config["budget_path"]))["limits"]
+        RunLimits(**budget_limits)
+        native: dict[str, Any]
+        if backend == "simplemem_text":
+            native = {"policy": _policy(config), "archive_input_mode": ARCHIVE_INPUT_MODE}
+        else:
+            from milai_lab.integrations.memory.mem0 import MEM0_POLICY
 
-        native = {"policy": MEM0_POLICY, "ingestion": "existing_marked_add_archive"}
-    frozen = {
-        "kind": "MILAI_V13_1_BASELINE_MICRO_FREEZE",
-        "fixture": fixture,
-        "fixture_path": str(fixture_path.resolve()),
-        "fixture_sha256": _sha(fixture_path),
-        "config": config,
-        "config_path": str(config_path.resolve()),
-        "config_sha256": _sha(config_path),
-        "source_sha256": _sources(),
-        "reader_prompt_sha256": hashlib.sha256(config["reader_system_prompt"].encode()).hexdigest(),
-        "reader_wire": (
-            "system=verbatim configured prompt; user=JSON question+native search results"
-        ),
-        "reader_temperature": 0,
-        "native_stage_temperatures": "existing adapter/SDK policy",
-        "backend": backend,
-        "native": native,
-        "dependency": _dependency_identity(backend, config),
-        "interpreter": _interpreter(),
-        "budget_limits": budget_limits,
-        "run_id": root.resolve().name,
-        "embedding_context": {
-            "configured_tokens": config.get("embedding_context_tokens"),
-            "admission_enforced": False,
-        },
-        "provider_concurrency": "serial phases; existing native generation/embedding bridge locks",
-    }
-    target = root / "input-freeze.json"
-    if target.exists() and read_json(target) != frozen:
-        raise ValueError("V13_MICRO_INPUT_FREEZE_CHANGED")
-    write_json(target, frozen)
-    return frozen
+            native = {"policy": MEM0_POLICY, "ingestion": "existing_marked_add_archive"}
+        frozen = {
+            "kind": "MILAI_V13_1_BASELINE_MICRO_FREEZE",
+            **http_freeze_fields(config),
+            "fixture": fixture,
+            "fixture_path": str(fixture_path.resolve()),
+            "fixture_sha256": _sha(fixture_path),
+            "config": config,
+            "config_path": str(config_path.resolve()),
+            "config_sha256": _sha(config_path),
+            "source_sha256": _sources(),
+            "reader_prompt_sha256": hashlib.sha256(
+                config["reader_system_prompt"].encode()
+            ).hexdigest(),
+            "reader_wire": (
+                "system=verbatim configured prompt; user=JSON question+native search results"
+            ),
+            "reader_temperature": 0,
+            "native_stage_temperatures": "existing adapter/SDK policy",
+            "backend": backend,
+            "native": native,
+            "dependency": _dependency_identity(backend, config),
+            "interpreter": _interpreter(),
+            "budget_limits": budget_limits,
+            "run_id": root.resolve().name,
+            "embedding_context": {
+                "configured_tokens": config.get("embedding_context_tokens"),
+                "admission_enforced": False,
+            },
+            "provider_concurrency": (
+                "serial phases; existing native generation/embedding bridge locks"
+            ),
+        }
+        target = root / "input-freeze.json"
+        if target.exists() and read_json(target) != frozen:
+            raise ValueError("V13_MICRO_INPUT_FREEZE_CHANGED")
+        write_json(target, frozen)
+        return frozen
 
 
-def _frozen(root: Path) -> dict[str, Any]:
+def _frozen(root: Path, http_stack: ExitStack | None = None) -> dict[str, Any]:
     frozen = cast(dict[str, Any], read_json(root / "input-freeze.json"))
     if frozen["source_sha256"] != _sources():
         raise ValueError("V13_MICRO_SOURCE_CHANGED_AFTER_FREEZE")
@@ -213,8 +232,17 @@ def _frozen(root: Path) -> dict[str, Any]:
         _dependency_identity(frozen["backend"], frozen["config"])
     ):
         raise ValueError("V13_MICRO_INTERPRETER_OR_DEPENDENCY_CHANGED")
-    if read_json(Path(frozen["config"]["budget_path"]))["limits"] != frozen["budget_limits"]:
-        raise ValueError("V13_MICRO_BUDGET_LIMITS_CHANGED")
+    check_http_frozen(frozen)
+    with ExitStack() as ownership:
+        (http_stack if http_stack is not None else ownership).enter_context(
+            http_budget_scope(
+                frozen["config"],
+                RunLimits(**frozen["budget_limits"]),
+                client_configs=ownership_client_configs(frozen["config"]),
+            )
+        )
+        if read_json(Path(frozen["config"]["budget_path"]))["limits"] != frozen["budget_limits"]:
+            raise ValueError("V13_MICRO_BUDGET_LIMITS_CHANGED")
     return frozen
 
 
@@ -299,244 +327,256 @@ def step(root: Path, case_id: str, step_id: str) -> dict[str, Any]:
             output["first_error"] = {"stage": phase, "event": event}
         trace(event)
 
-    try:
-        frozen = _frozen(root)
-        case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
-        index = next(i for i, row in enumerate(case["steps"]) if row["step_id"] == step_id)
-        item, config = case["steps"][index], frozen["config"]
-        if index:
-            prior_path = _paths(root, case_id, case["steps"][index - 1]["step_id"])[1]
-            if not prior_path.exists() or read_json(prior_path)["stop_case"]:
-                raise ValueError("V13_MICRO_PRIOR_TERMINAL_STEP_REQUIRED")
-        caller = item.get("owner", case["owner"])
+    with ExitStack() as http_stack:
+        try:
+            frozen = _frozen(root, http_stack)
+            case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
+            index = next(i for i, row in enumerate(case["steps"]) if row["step_id"] == step_id)
+            item, config = case["steps"][index], frozen["config"]
+            if index:
+                prior_path = _paths(root, case_id, case["steps"][index - 1]["step_id"])[1]
+                if not prior_path.exists() or read_json(prior_path)["stop_case"]:
+                    raise ValueError("V13_MICRO_PRIOR_TERMINAL_STEP_REQUIRED")
+            caller = item.get("owner", case["owner"])
+            output.update(
+                backend=frozen["backend"],
+                operation=item["operation"],
+                owner=caller,
+                primary_owner=case["owner"],
+                generation_cap=item.get("generation_cap", 12),
+            )
+            emit(
+                {
+                    "event": "micro_public_step",
+                    "input": item,
+                    "primary_owner": case["owner"],
+                    "process_id": os.getpid(),
+                    "fixture_sha256": frozen["fixture_sha256"],
+                }
+            )
+            phase = "setup"
+            budget = entry_budget(RunLimits(**frozen["budget_limits"]), Path(config["budget_path"]))
+            output["budget_before"] = json.loads(json.dumps(budget.state))
+            cap = GenerationAdmission(output["generation_cap"])
+
+            def admit() -> None:
+                assert cap is not None
+                try:
+                    cap()
+                except ValueError as error:
+                    rejected.append(str(error))
+                    emit(
+                        {
+                            "event": "micro_generation_cap_rejected",
+                            "reason": str(error),
+                            "request_sent": False,
+                        }
+                    )
+                    raise
+
+            with ExitStack() as stack:
+                capacity = HostCapacity(config["capacity"])
+                host = stack.enter_context(
+                    VLLMClient(
+                        VLLMConfig(**config["host"]),
+                        emit=emit,
+                        budget=budget,
+                        capacity=capacity,
+                    )
+                )
+                embed = stack.enter_context(
+                    VLLMClient(
+                        VLLMConfig(**config["embedding"]),
+                        emit=emit,
+                        budget=budget,
+                    )
+                )
+                resource = case_root / "backend-resource"
+                native = _native_runtime(
+                    frozen["backend"],
+                    config,
+                    resource,
+                    frozen["run_id"],
+                    case["owner"],
+                    host,
+                    embed,
+                    admit,
+                )
+                stack.callback(native.close)
+                phase = "native_api"
+                try:
+                    if item["operation"] == "archive":
+                        result = native.add_archive(caller, item["records"])
+                    elif item["operation"] == "snapshot":
+                        result = native.snapshot(caller)
+                    else:
+                        result = native.search_archive(caller, item["query"])
+                    output["native_result"] = result
+                    native_status = (
+                        result.get("status", "COMPLETED")
+                        if isinstance(result, dict)
+                        else ("COMPLETED")
+                    )
+                    output.update(
+                        native_status=native_status,
+                        status=native_status
+                        if native_status in {"INCOMPLETE", "MAINTENANCE_INCOMPLETE"}
+                        else "MAINTENANCE_INCOMPLETE"
+                        if rejected
+                        else native_status,
+                        stop_case=False,
+                    )
+                    provider_errors = [event for event in events if event["event"] == "vllm_error"]
+                    provider_outcomes = [
+                        event
+                        for event in events
+                        if event["event"] in {"vllm_error", "vllm_response"}
+                    ]
+                    pending_exhaustion, failed_native_stage = False, False
+                    for event in events:
+                        if event["event"] != "simplemem_observation":
+                            continue
+                        if event.get("kind") == "completion":
+                            pending_exhaustion = event.get("outcome") == "exhausted"
+                        elif event.get("kind") == "writer_window" or str(
+                            event.get("kind")
+                        ).startswith("_"):
+                            failed_native_stage |= pending_exhaustion and bool(
+                                event.get("native_fallback")
+                            )
+                            pending_exhaustion = False
+                    if (
+                        provider_errors
+                        and (provider_outcomes[-1]["event"] == "vllm_error" or failed_native_stage)
+                        and not rejected
+                    ):
+                        output.update(
+                            status="INTERRUPTED",
+                            stop_case=True,
+                            error="native provider exhaustion; original errors in trace",
+                        )
+                    if "reader_question" in item:
+                        output["reader_status"] = "NOT_RUN_NATIVE_INCOMPLETE"
+                        if not output["stop_case"] and output["status"] not in {
+                            "INCOMPLETE",
+                            "MAINTENANCE_INCOMPLETE",
+                        }:
+                            phase = "reader"
+                            admit()
+                            reader_input = {
+                                "question": item["reader_question"],
+                                "memories": result["results"],
+                            }
+                            response = host.chat(
+                                [
+                                    {"role": "system", "content": config["reader_system_prompt"]},
+                                    {
+                                        "role": "user",
+                                        "content": json.dumps(reader_input, ensure_ascii=False),
+                                    },
+                                ]
+                            )
+                            output["reader_receipt"] = response
+                            choice = response["choices"][0]
+                            if choice["finish_reason"] != "stop" or not isinstance(
+                                choice["message"].get("content"), str
+                            ):
+                                raise ValueError("V13_MICRO_READER_RESPONSE_INCOMPLETE")
+                            output.update(
+                                reader_status="COMPLETED", answer=choice["message"]["content"]
+                            )
+                except Exception as error:
+                    if _is_cap(error):
+                        output.update(status="MAINTENANCE_INCOMPLETE", stop_case=False)
+                        if phase == "reader":
+                            output["reader_status"] = "NOT_RUN_CAP_REFUSAL"
+                    elif (
+                        phase == "native_api"
+                        and isinstance(error, ValueError)
+                        and any(code in str(error) for code in ("OWNER_SCOPE", "SCOPE_CHANGED"))
+                    ):
+                        output.update(status="REJECTED", stop_case=False)
+                    else:
+                        output.update(status="INTERRUPTED", stop_case=True)
+                    output.update(
+                        error_type=type(error).__name__, error=str(error), failure_stage=phase
+                    )
+                    if output["first_error"] is None:
+                        output["first_error"] = {
+                            "stage": phase,
+                            "error_type": type(error).__name__,
+                            "error": str(error),
+                        }
+                phase = "readback"
+                read_wall, read_cpu = time.perf_counter_ns(), time.process_time_ns()
+                output["records_after"] = native.snapshot(case["owner"])
+                emit(
+                    {
+                        "event": "micro_primary_snapshot",
+                        "owner": case["owner"],
+                        "calls": 1,
+                        "logical_bytes": len(
+                            json.dumps(output["records_after"], ensure_ascii=False).encode()
+                        ),
+                        "wall_ns": time.perf_counter_ns() - read_wall,
+                        "cpu_ns": time.process_time_ns() - read_cpu,
+                    }
+                )
+                phase = "close"
+        except Exception as error:
+            output.update(
+                status="INTERRUPTED",
+                stop_case=True,
+                error_type=type(error).__name__,
+                error=str(error),
+                failure_stage=phase,
+            )
+            if output["first_error"] is None:
+                output["first_error"] = {
+                    "stage": phase,
+                    "error_type": type(error).__name__,
+                    "error": str(error),
+                }
         output.update(
-            backend=frozen["backend"],
-            operation=item["operation"],
-            owner=caller,
-            primary_owner=case["owner"],
-            generation_cap=item.get("generation_cap", 12),
+            execution_wall_ns=time.perf_counter_ns() - wall,
+            execution_cpu_ns=time.process_time_ns() - cpu,
+            generation_admitted=cap.calls if cap is not None else 0,
+            admission_rejections=rejected,
+            usage=trace.usage,
+            budget_after=budget.state if budget is not None else None,
+            persistent_resource_bytes={
+                str(path.relative_to(case_root)): path.stat().st_size
+                for path in (case_root / "backend-resource").rglob("*")
+                if path.is_file()
+            },
+            logical_snapshot_bytes=len(
+                json.dumps(output.get("records_after"), ensure_ascii=False).encode()
+            ),
+            cost_scope="full provider reservations/usage; resource sizes and snapshot IO partial",
+            cost_measurement_note=(
+                "excludes interpreter/import and terminal artifact write; "
+                "no complete Store IO trace"
+            ),
+            embedding_admission="configured context metadata only; no plain tokenizer enforcement",
         )
         emit(
             {
-                "event": "micro_public_step",
-                "input": item,
-                "primary_owner": case["owner"],
-                "process_id": os.getpid(),
-                "fixture_sha256": frozen["fixture_sha256"],
+                "event": "micro_terminal",
+                "status": output["status"],
+                "stop_case": output["stop_case"],
             }
         )
-        phase = "setup"
-        budget = RunBudget(RunLimits(**frozen["budget_limits"]), Path(config["budget_path"]))
-        output["budget_before"] = json.loads(json.dumps(budget.state))
-        cap = GenerationAdmission(output["generation_cap"])
-
-        def admit() -> None:
-            assert cap is not None
-            try:
-                cap()
-            except ValueError as error:
-                rejected.append(str(error))
-                emit(
-                    {
-                        "event": "micro_generation_cap_rejected",
-                        "reason": str(error),
-                        "request_sent": False,
-                    }
-                )
-                raise
-
-        with ExitStack() as stack:
-            capacity = HostCapacity(config["capacity"])
-            host = stack.enter_context(
-                VLLMClient(
-                    VLLMConfig(**config["host"]),
-                    emit=emit,
-                    budget=budget,
-                    capacity=capacity,
-                )
-            )
-            embed = stack.enter_context(
-                VLLMClient(
-                    VLLMConfig(**config["embedding"]),
-                    emit=emit,
-                    budget=budget,
-                )
-            )
-            resource = case_root / "backend-resource"
-            native = _native_runtime(
-                frozen["backend"],
-                config,
-                resource,
-                frozen["run_id"],
-                case["owner"],
-                host,
-                embed,
-                admit,
-            )
-            stack.callback(native.close)
-            phase = "native_api"
-            try:
-                if item["operation"] == "archive":
-                    result = native.add_archive(caller, item["records"])
-                elif item["operation"] == "snapshot":
-                    result = native.snapshot(caller)
-                else:
-                    result = native.search_archive(caller, item["query"])
-                output["native_result"] = result
-                native_status = (
-                    result.get("status", "COMPLETED") if isinstance(result, dict) else ("COMPLETED")
-                )
-                output.update(
-                    native_status=native_status,
-                    status=native_status
-                    if native_status in {"INCOMPLETE", "MAINTENANCE_INCOMPLETE"}
-                    else "MAINTENANCE_INCOMPLETE"
-                    if rejected
-                    else native_status,
-                    stop_case=False,
-                )
-                provider_errors = [event for event in events if event["event"] == "vllm_error"]
-                provider_outcomes = [
-                    event for event in events if event["event"] in {"vllm_error", "vllm_response"}
-                ]
-                pending_exhaustion, failed_native_stage = False, False
-                for event in events:
-                    if event["event"] != "simplemem_observation":
-                        continue
-                    if event.get("kind") == "completion":
-                        pending_exhaustion = event.get("outcome") == "exhausted"
-                    elif event.get("kind") == "writer_window" or str(event.get("kind")).startswith(
-                        "_"
-                    ):
-                        failed_native_stage |= pending_exhaustion and bool(
-                            event.get("native_fallback")
-                        )
-                        pending_exhaustion = False
-                if (
-                    provider_errors
-                    and (provider_outcomes[-1]["event"] == "vllm_error" or failed_native_stage)
-                    and not rejected
-                ):
-                    output.update(
-                        status="INTERRUPTED",
-                        stop_case=True,
-                        error="native provider exhaustion; original errors in trace",
-                    )
-                if "reader_question" in item:
-                    output["reader_status"] = "NOT_RUN_NATIVE_INCOMPLETE"
-                    if not output["stop_case"] and output["status"] not in {
-                        "INCOMPLETE",
-                        "MAINTENANCE_INCOMPLETE",
-                    }:
-                        phase = "reader"
-                        admit()
-                        reader_input = {
-                            "question": item["reader_question"],
-                            "memories": result["results"],
-                        }
-                        response = host.chat(
-                            [
-                                {"role": "system", "content": config["reader_system_prompt"]},
-                                {
-                                    "role": "user",
-                                    "content": json.dumps(reader_input, ensure_ascii=False),
-                                },
-                            ]
-                        )
-                        output["reader_receipt"] = response
-                        choice = response["choices"][0]
-                        if choice["finish_reason"] != "stop" or not isinstance(
-                            choice["message"].get("content"), str
-                        ):
-                            raise ValueError("V13_MICRO_READER_RESPONSE_INCOMPLETE")
-                        output.update(
-                            reader_status="COMPLETED", answer=choice["message"]["content"]
-                        )
-            except Exception as error:
-                if _is_cap(error):
-                    output.update(status="MAINTENANCE_INCOMPLETE", stop_case=False)
-                    if phase == "reader":
-                        output["reader_status"] = "NOT_RUN_CAP_REFUSAL"
-                elif (
-                    phase == "native_api"
-                    and isinstance(error, ValueError)
-                    and any(code in str(error) for code in ("OWNER_SCOPE", "SCOPE_CHANGED"))
-                ):
-                    output.update(status="REJECTED", stop_case=False)
-                else:
-                    output.update(status="INTERRUPTED", stop_case=True)
-                output.update(
-                    error_type=type(error).__name__, error=str(error), failure_stage=phase
-                )
-                if output["first_error"] is None:
-                    output["first_error"] = {
-                        "stage": phase,
-                        "error_type": type(error).__name__,
-                        "error": str(error),
-                    }
-            phase = "readback"
-            read_wall, read_cpu = time.perf_counter_ns(), time.process_time_ns()
-            output["records_after"] = native.snapshot(case["owner"])
-            emit(
+        write_json(receipt_path, output)
+        if output["first_error"] is not None and not (case_root / "first-error.json").exists():
+            write_json(
+                case_root / "first-error.json",
                 {
-                    "event": "micro_primary_snapshot",
-                    "owner": case["owner"],
-                    "calls": 1,
-                    "logical_bytes": len(
-                        json.dumps(output["records_after"], ensure_ascii=False).encode()
-                    ),
-                    "wall_ns": time.perf_counter_ns() - read_wall,
-                    "cpu_ns": time.process_time_ns() - read_cpu,
-                }
+                    "step_id": step_id,
+                    "process_id": os.getpid(),
+                    "first_error": output["first_error"],
+                },
             )
-            phase = "close"
-    except Exception as error:
-        output.update(
-            status="INTERRUPTED",
-            stop_case=True,
-            error_type=type(error).__name__,
-            error=str(error),
-            failure_stage=phase,
-        )
-        if output["first_error"] is None:
-            output["first_error"] = {
-                "stage": phase,
-                "error_type": type(error).__name__,
-                "error": str(error),
-            }
-    output.update(
-        execution_wall_ns=time.perf_counter_ns() - wall,
-        execution_cpu_ns=time.process_time_ns() - cpu,
-        generation_admitted=cap.calls if cap is not None else 0,
-        admission_rejections=rejected,
-        usage=trace.usage,
-        budget_after=budget.state if budget is not None else None,
-        persistent_resource_bytes={
-            str(path.relative_to(case_root)): path.stat().st_size
-            for path in (case_root / "backend-resource").rglob("*")
-            if path.is_file()
-        },
-        logical_snapshot_bytes=len(
-            json.dumps(output.get("records_after"), ensure_ascii=False).encode()
-        ),
-        cost_scope="full provider reservations/usage; resource sizes and snapshot IO partial",
-        cost_measurement_note=(
-            "excludes interpreter/import and terminal artifact write; no complete Store IO trace"
-        ),
-        embedding_admission="configured context metadata only; no plain tokenizer enforcement",
-    )
-    emit({"event": "micro_terminal", "status": output["status"], "stop_case": output["stop_case"]})
-    write_json(receipt_path, output)
-    if output["first_error"] is not None and not (case_root / "first-error.json").exists():
-        write_json(
-            case_root / "first-error.json",
-            {
-                "step_id": step_id,
-                "process_id": os.getpid(),
-                "first_error": output["first_error"],
-            },
-        )
-    return output
+        return output
 
 
 def run(root: Path, case_ids: list[str] | None = None) -> list[dict[str, Any]]:
