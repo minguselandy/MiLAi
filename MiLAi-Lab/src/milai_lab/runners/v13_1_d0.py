@@ -30,6 +30,24 @@ from milai_lab.application.tools import BUSINESS_NAMES, BUSINESS_SCHEMAS, _busin
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import SYSTEM_PROMPT, build_agent
 from milai_lab.contracts.memory import GroundingMode, ObservationProfile
+from milai_lab.contracts.read_protocol import (
+    check_frozen as check_read_frozen,
+)
+from milai_lab.contracts.read_protocol import (
+    freeze_fields as read_freeze_fields,
+)
+from milai_lab.contracts.read_protocol import (
+    nonlegacy as read_nonlegacy,
+)
+from milai_lab.contracts.read_protocol import (
+    present_catalog as receipt_catalog,
+)
+from milai_lab.contracts.read_protocol import (
+    profiles as read_profiles,
+)
+from milai_lab.contracts.read_protocol import (
+    validate_settings as validate_read_settings,
+)
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.contracts.tool_schema_communication import (
     check_frozen as check_communication_frozen,
@@ -97,7 +115,9 @@ def _observation_profile(config: dict[str, Any]) -> ObservationProfile | None:
 
 
 def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
+    validate_read_settings(settings)
     options = {
+        **read_nonlegacy(settings),
         "source_backlinks": settings.get("memory_source_backlinks", "disabled"),
         "candidate_contract": settings.get("memory_candidate_contract"),
     }
@@ -117,6 +137,7 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
 
 
 def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
+    validate_read_settings(settings)
     reader = settings.get("memory_reader_policy")
     formation = settings.get("memory_formation_policy", "none")
     index_storage = settings.get("memory_derived_index_storage", "bank_prefix")
@@ -157,6 +178,7 @@ def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
         raise ValueError("V13_RECIPE_EMBEDDING_CONTRACT_REQUIRED")
     return {
         **GROUNDED_POLICY,
+        **read_nonlegacy(settings),
         **({"raw_index_storage": index_storage} if index_storage != "bank_prefix" else {}),
         **({"material_profile": material_profile} if material_profile != "full_v1" else {}),
         "prefetch_enabled": reader is not None
@@ -352,10 +374,10 @@ def _catalog(
             mutation_contract=mutation_contract,
             **(service_options or {}),
         )
-        return [
+        return receipt_catalog([
             *[convert_to_openai_tool(tool) for tool in _memory_tools(service, settings or {})],
             *BUSINESS_SCHEMAS,
-        ]
+        ], (settings or {}).get("tool_save_communication", "legacy"))
 
 
 def prepare(
@@ -426,6 +448,7 @@ def prepare(
         "prompt_sha256": hashlib.sha256(system_prompt.encode()).hexdigest(),
         "tool_catalog": catalog,
         **communication_freeze_fields(catalog, config.get("tool_schema_communication", "legacy")),
+        **read_freeze_fields(config, catalog),
         "tool_catalog_sha256": hashlib.sha256(
             json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
         ).hexdigest(),
@@ -451,6 +474,7 @@ def _frozen(root: Path) -> dict[str, Any]:
     ):
         raise ValueError("V13_D0_INPUT_CHANGED_AFTER_FREEZE")
     check_communication_frozen(frozen)
+    check_read_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
@@ -592,6 +616,9 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     client=client,
                     capacity_path=case_root / "host-capacity.json",
                     max_calls_per_message=settings.get("max_calls_per_message", 12),
+                    tool_save_communication=cast(
+                        Any, read_profiles(settings)["tool_save_communication"]
+                    ),
                     tool_schema_communication=communication_profile(
                         settings.get("tool_schema_communication", "legacy")
                     ),
@@ -613,6 +640,9 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     tool_schema_communication=communication_profile(
                         settings.get("tool_schema_communication", "legacy")
                     ),
+                    tool_save_communication=cast(
+                        Any, read_profiles(settings)["tool_save_communication"]
+                    ),
                     benchmark_view_hook=(
                         recipe.hook(
                             _system_prompt(settings),
@@ -632,7 +662,8 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                 already_added = any(
                     isinstance(row, HumanMessage) and row.id == key for row in prior
                 )
-                if service.support_contract == "direct_support_v1":
+                if (service.support_contract == "direct_support_v1"
+                        or service.memory_read_protocol != "legacy"):
                     service.bind_public_turn(public["session_id"], key,
                                              source_receipt["source_ref"],
                                              config_sha256=frozen["config_sha256"],

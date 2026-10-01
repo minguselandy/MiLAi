@@ -6,6 +6,7 @@ import hashlib
 import json
 import time
 from collections.abc import Callable
+from contextvars import ContextVar
 from typing import Any
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
@@ -13,6 +14,14 @@ from langchain_core.runnables import RunnableConfig
 from pydantic import ValidationError as PydanticValidationError
 
 from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
+from milai_lab.contracts.read_protocol import (
+    SAVE_GUIDANCE,
+    canonical,
+    digest,
+    nonlegacy,
+    reject,
+    snapshot_key,
+)
 from milai_lab.contracts.tool_schema_communication import (
     TRIGGER_BODY_GUIDANCE,
     feedback_text,
@@ -94,6 +103,9 @@ class GroundedMemoryRecipe:
         self.material_profile = material_profile
         self.tool_schema_communication = communication_profile(tool_schema_communication)
         self.namespace = (*service.namespace, "v13_2_recipe")
+        self._read_context: ContextVar[dict[str, Any] | None] = ContextVar(
+            "selected_read_context", default=None
+        )
         self.raw_index_storage = raw_index_storage
         self.index_namespace = self.namespace
         if raw_index_storage == "owner_bank_v1":
@@ -127,6 +139,12 @@ class GroundedMemoryRecipe:
             self.policy["support_contract"] = service.support_contract
         if self.tool_schema_communication != "legacy":
             self.policy["tool_schema_communication"] = self.tool_schema_communication
+
+        self.policy.update(nonlegacy({
+            "memory_read_protocol": service.memory_read_protocol,
+            "tool_read_feedback": service.tool_read_feedback,
+            "tool_save_communication": service.tool_save_communication,
+        }))
 
     def _index_binding(self) -> dict[str, Any]:
         return {"schema": "owner_bank_raw_index_v1", "owner": self.service.owner,
@@ -514,8 +532,7 @@ class GroundedMemoryRecipe:
         if record.get("object_ref") is None:
             record.pop("object_ref", None)
 
-    @staticmethod
-    def _descriptor(unit: dict[str, Any]) -> dict[str, Any]:
+    def _descriptor(self, unit: dict[str, Any]) -> dict[str, Any]:
         value = {"unit_id": unit["unit_id"], "type": unit["type"],
                  "unit_snapshot_hash": _hash(unit), "content_verification": "unchecked"}
         if unit["type"] in {"record", "historical_record"}:
@@ -533,7 +550,53 @@ class GroundedMemoryRecipe:
             value.update(object_id=unit["object_ref"]["id"], field=unit["field"],
                          read_more={"tool": "read_observations",
                                     "object_id": unit["object_ref"]["id"]})
+            if self.service.memory_read_protocol != "legacy":
+                value["observation_members"] = []
+                for candidate in unit["candidates"]:
+                    source = self.service.source(candidate["source_event_id"])
+                    if source is None or source["content_sha256"] != candidate["source_hash"]:
+                        raise ValueError("V13_SELECTED_OBSERVATION_SOURCE_CHANGED")
+                    fact = self.service.selected_observation_member(
+                        candidate["observation_id"], unit["object_ref"]["id"], unit["field"]
+                    )
+                    value["observation_members"].append({
+                        "observation_id": candidate["observation_id"],
+                        "projection_id": fact["projection_id"], "fact_sha256": _hash(fact),
+                        "source_ref": candidate["source_event_id"], "role": source["role"],
+                        "source_hash": candidate["source_hash"], "member_sha256": _hash(candidate),
+                    })
         return value
+
+    def _selection_snapshot(
+        self, menu: list[dict[str, Any]], units: list[dict[str, Any]],
+        chosen: list[dict[str, Any]], inventory: list[dict[str, Any]] | None,
+    ) -> dict[str, Any]:
+        context = self._read_context.get()
+        if context is None:
+            raise ValueError("V13_SELECTED_SNAPSHOT_CONTEXT_REQUIRED")
+        binding = {**context, "owner": self.service.owner,
+                   "bank": list(self.service.namespace), "namespace": list(self.namespace),
+                   "policy": self.policy, "menu": menu,
+                   "selected_inventory": inventory or [],
+                   "selected_units_sha256": _hash(units),
+                   "delivered_units_sha256": _hash(chosen)}
+        full_hash = digest(binding)
+        return {"binding": binding, "snapshot_hash": full_hash,
+                "cursor_digest": full_hash[:24], "menu": menu, "status": "complete"}
+
+    def _persist_selection(self, row: dict[str, Any], packet_hash: str) -> None:
+        key = snapshot_key(row["cursor_digest"])
+        value = {**row, "issuing_packet_sha256": packet_hash,
+                 "receipt_sha256": digest([row["binding"], packet_hash])}
+        # Cooperative exact get/check/put; Store.put is not atomic backend CAS.
+        # Release before service.read(), which takes its own service lock.
+        with self.service._locked():
+            previous = self.service.store.get(self.namespace, key)
+            if previous is not None:
+                if canonical(previous.value) != canonical(value):
+                    raise ValueError("V13_SELECTED_SNAPSHOT_COLLISION_OR_CHANGED")
+                return
+            self.service.store.put(self.namespace, key, value, index=False)
 
     def _coverage(
         self, units: list[dict[str, Any]], chosen: list[dict[str, Any]],
@@ -550,10 +613,14 @@ class GroundedMemoryRecipe:
         truncated = sum(bool(unit.get("content_truncated") or unit.get("omitted_candidate_count")
                              or unit.get("record", {}).get("content_truncated")) for unit in chosen)
         digest = _hash([self.service.owner, self.namespace, request_ref, omitted])
+        snapshot = None
+        if self.service.memory_read_protocol != "legacy":
+            snapshot = self._selection_snapshot(omitted, units, chosen, inventory)
+            digest = snapshot["snapshot_hash"]
         status = ("no_matches" if not selection_count and not descriptors else
                   "selected_unavailable" if not units else
                   "partial_unavailable" if unavailable else "selected")
-        return {"selection_status": status, "retrieved_selection_count": selection_count,
+        coverage = {"selection_status": status, "retrieved_selection_count": selection_count,
                 "selected_unit_count": len(descriptors), "delivered_unit_count": len(delivered),
                 "unavailable_unit_count": unavailable,
                 "omitted_unit_count": len(omitted), "omitted_set_hash": digest,
@@ -562,7 +629,11 @@ class GroundedMemoryRecipe:
                 or (not units and selection_count)
                 else "complete_selection",
                 "read_more": {"tool": "recall_context", "cursor": "selected-" + digest[:24] + ":0"}
-                if omitted else None}, omitted
+                if omitted else None}
+        if snapshot is not None:
+            coverage.update(memory_read_protocol=self.service.memory_read_protocol,
+                            selected_snapshot_hash=snapshot["snapshot_hash"])
+        return coverage, omitted
 
     def _packet(
         self,
@@ -631,6 +702,9 @@ class GroundedMemoryRecipe:
                           "source_refs_from_bindings restores ordered source_refs; "
                           "shared_defaults record/history_index/source_match fills absent fields; "
                           "absent unit_id: record:<id> or history:<id>:<revision>")
+        if self.service.tool_save_communication != "legacy":
+            packet["save_communication"] = {"profile": self.service.tool_save_communication,
+                                            "guidance": SAVE_GUIDANCE}
         packet["packet_hash"] = _hash(packet)
         return packet, HEADER + _json(packet)
 
@@ -859,6 +933,29 @@ class GroundedMemoryRecipe:
         return self._packet([], None, index, query_kind="metadata_only")[0]
 
     def prepare_context(
+        self, public_request: str, *, owner: str, session: str, turn_id: str,
+        explicit_query: str | None = None, material_budget: int = 2048,
+    ) -> dict[str, Any]:
+        if self.service.memory_read_protocol == "legacy":
+            return self._prepare_context(public_request, owner=owner, session=session,
+                turn_id=turn_id, explicit_query=explicit_query, material_budget=material_budget)
+        if owner != self.service.owner:
+            raise ValueError("V13_PACKET_OWNER_MISMATCH")
+        trusted = self.service.public_turn(session, message_id=turn_id)
+        if trusted is None:
+            raise ValueError("V13_SELECTED_SNAPSHOT_TRUSTED_TURN_REQUIRED")
+        query = public_request if explicit_query is None else explicit_query
+        token = self._read_context.set({"public_turn": trusted,
+            "query_kind": "ordinary_public" if explicit_query is None else "explicit_additional",
+            "query_hash": _hash(query), "request_ref": self._request_ref(session, turn_id),
+            "material_budget": material_budget})
+        try:
+            return self._prepare_context(public_request, owner=owner, session=session,
+                turn_id=turn_id, explicit_query=explicit_query, material_budget=material_budget)
+        finally:
+            self._read_context.reset(token)
+
+    def _prepare_context(
         self,
         public_request: str,
         *,
@@ -892,6 +989,11 @@ class GroundedMemoryRecipe:
         source_index = (self._source_index(session, request_ref=request_ref, revision=revision,
                                          query_kind=query_kind, material_budget=material_budget)
                         if self.service.mutation_contract == "event_bound_v1" else None)
+        context = self._read_context.get()
+        if context is not None:
+            self._read_context.set({**context, "bank_revision": revision,
+                                    "source_index": source_index,
+                                    "source_index_sha256": _hash(source_index)})
         if cached is not None and explicit_query is None:
             state = cached.value
             if state["query_hash"] != _hash(public_request) or state["policy"] != self.policy:
@@ -955,6 +1057,10 @@ class GroundedMemoryRecipe:
             all_descriptors.update({unit["unit_id"]: self._descriptor(unit) for unit in units})
             state.update(omitted_menu=omitted_menu,
                          selected_inventory=list(all_descriptors.values()))
+        if self.service.memory_read_protocol != "legacy":
+            snapshot = self._selection_snapshot(omitted_menu, units, chosen, inventory)
+            self._persist_selection(snapshot, packet["packet_hash"])
+            state["selected_snapshot_hash"] = snapshot["snapshot_hash"]
         self.service.store.put(self.namespace, key, state, index=False)
         self.service.store.put(
             self.namespace, "last_packet:" + _hash([session, turn_id]), {"key": key}, index=False
@@ -962,21 +1068,77 @@ class GroundedMemoryRecipe:
         self._emit({"event": "v13_evidence_packet", **state})
         return state
 
+    def _resolve_selected_snapshot(
+        self, cursor: str, cfg: dict[str, Any],
+    ) -> tuple[list[dict[str, Any]], str, int]:
+        prefix, separator, offset = cursor.rpartition(":")
+        short = prefix.removeprefix("selected-")
+        if (separator != ":" or prefix != "selected-" + short or len(short) != 24
+                or any(char not in "0123456789abcdef" for char in short)
+                or not offset.isdecimal()):
+            reject("V13_SELECTED_CURSOR_CHANGED_OR_INVALID", "grounded_reader",
+                   self.service.tool_read_feedback)
+        with self.service._locked():
+            item = self.service.store.get(self.namespace, snapshot_key(short))
+            row = json.loads(_json(item.value)) if item is not None else None
+        if row is None:
+            reject("V13_SELECTED_SNAPSHOT_MISSING", "grounded_reader",
+                   self.service.tool_read_feedback)
+        assert row is not None
+        binding = row.get("binding")
+        if (not isinstance(binding, dict) or digest(binding) != row.get("snapshot_hash")
+                or row["snapshot_hash"][:24] != short or row.get("cursor_digest") != short
+                or row.get("menu") != binding.get("menu")
+                or not isinstance(row.get("issuing_packet_sha256"), str)
+                or len(row["issuing_packet_sha256"]) != 64
+                or row.get("receipt_sha256") != digest([binding, row["issuing_packet_sha256"]])):
+            raise ValueError("V13_SELECTED_SNAPSHOT_INTEGRITY_INVALID")
+        trusted = self.service.public_turn(cfg["v13_session"], message_id=cfg["v13_turn_id"],
+                                          config_sha256=cfg.get("v13_support_config_sha256"))
+        if (trusted is None or canonical(trusted) != canonical(binding.get("public_turn"))
+                or binding.get("owner") != self.service.owner
+                or binding.get("bank") != list(self.service.namespace)
+                or binding.get("namespace") != list(self.namespace)
+                or canonical(binding.get("policy")) != canonical(self.policy)
+                or cfg.get("v13_support_config_sha256") != trusted["config_sha256"]):
+            raise ValueError("V13_SELECTED_SNAPSHOT_BINDING_CHANGED")
+        if row.get("status") == "revoked":
+            reject("V13_SELECTED_SNAPSHOT_REVOKED", "grounded_reader",
+                   self.service.tool_read_feedback)
+        if row.get("status") != "complete":
+            raise ValueError("V13_SELECTED_SNAPSHOT_INTEGRITY_INVALID")
+        menu = row["menu"]
+        if not 0 <= int(offset) < len(menu):
+            reject("V13_SELECTED_CURSOR_CHANGED_OR_INVALID", "grounded_reader",
+                   self.service.tool_read_feedback)
+        return menu, row["snapshot_hash"], int(offset)
+
     def selected_page_tool(self, cursor: str, config: RunnableConfig) -> dict[str, Any]:
         """Explicit paid pointer page over actual omitted selection; never retrieves again."""
         _, cfg = self._public_source(config)
-        cached = self.service.store.get(
-            self.namespace, "packet:" + _hash([cfg["v13_session"], cfg["v13_turn_id"]]))
-        if cached is None:
-            raise ValueError("V13_SELECTED_PAGE_NOT_READY")
-        menu = cached.value.get("omitted_menu", [])
-        digest = _hash([self.service.owner, self.namespace,
-                       self._request_ref(cfg["v13_session"], cfg["v13_turn_id"]), menu])
-        prefix, separator, offset = cursor.rpartition(":")
-        if (separator != ":" or prefix != "selected-" + digest[:24]
-                or not offset.isdecimal() or not 0 <= int(offset) < len(menu)):
-            raise ValueError("V13_SELECTED_CURSOR_CHANGED_OR_INVALID")
-        start = int(offset)
+        if self.service.memory_read_protocol != "legacy":
+            menu, digest, start = self._resolve_selected_snapshot(cursor, cfg)
+        else:
+            cached = self.service.store.get(
+                self.namespace, "packet:" + _hash([cfg["v13_session"], cfg["v13_turn_id"]]))
+            if cached is None:
+                reject(
+                    "V13_SELECTED_PAGE_NOT_READY",
+                    "grounded_reader",
+                    self.service.tool_read_feedback,
+                )
+            menu = cached.value.get("omitted_menu", [])
+            digest = _hash([self.service.owner, self.namespace,
+                           self._request_ref(cfg["v13_session"], cfg["v13_turn_id"]), menu])
+            prefix, separator, offset = cursor.rpartition(":")
+            if (separator != ":" or prefix != "selected-" + digest[:24]
+                    or not offset.isdecimal() or not 0 <= int(offset) < len(menu)):
+                reject(
+                    "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
+                    "grounded_reader",
+                    self.service.tool_read_feedback,
+                )
+            start = int(offset)
         chosen: list[dict[str, Any]] = []
         identities: set[str] = set()
 
@@ -1004,6 +1166,21 @@ class GroundedMemoryRecipe:
                 version = self.service.read(row["id"], row["revision"])
                 if (not version["ok"] or _hash(version["value"]) != row["version_sha256"]):
                     raise ValueError("V13_SELECTED_REVISION_UNAVAILABLE")
+            elif self.service.memory_read_protocol != "legacy":
+                fields = ("observation_id", "source_event_id", "source_hash", "field_paths",
+                          "literal_value", "resource_version", "version_domain", "observed_at")
+                for member in row["observation_members"]:
+                    fact = self.service.selected_observation_member(
+                        member["observation_id"], row["object_id"], row["field"]
+                    )
+                    source = self.service.source(member["source_ref"])
+                    if (source is None or source["role"] != member["role"]
+                            or source["content_sha256"] != member["source_hash"]
+                            or fact["projection_id"] != member["projection_id"]
+                            or _hash(fact) != member["fact_sha256"]
+                            or _hash({key: fact[key] for key in fields})
+                            != member["member_sha256"]):
+                        raise ValueError("V13_SELECTED_OBSERVATION_CHANGED")
             identity = ("record:" + row["id"] if "id" in row else
                         "object:" + row["object_id"] if "object_id" in row else None)
             if identity is not None and identity not in identities and len(identities) >= 6:
@@ -1187,6 +1364,9 @@ class GroundedMemoryRecipe:
             self.tool_schema_communication
         ):
             raise ValueError("TOOL_SCHEMA_COMMUNICATION_PROFILE_CONFLICT")
+        if (getattr(model, "tool_save_communication", "legacy")
+                != self.service.tool_save_communication):
+            raise ValueError("V13_SAVE_COMMUNICATION_PROFILE_CONFLICT")
         user_ref = self.service.event_id(session, turn_id, "user")
         if user_ref not in source_refs or any(
             self.service.source(ref) is None for ref in source_refs
@@ -1266,6 +1446,8 @@ class GroundedMemoryRecipe:
                 request["support_policy"] = request["support_policy"].replace(
                     "Trigger is authorization, not support.", TRIGGER_BODY_GUIDANCE
                 )
+        if self.service.tool_save_communication != "legacy":
+            request["save_communication"] = SAVE_GUIDANCE
         messages: list[Any] = [
             SystemMessage(
                 content=instruction + "\nMake at most six direct mutations or explicitly decline. "

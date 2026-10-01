@@ -30,6 +30,7 @@ from milai_lab.contracts.memory import (
     SourceEvent,
     VerifiedObjectRef,
 )
+from milai_lab.contracts.read_protocol import profile, reject
 from milai_lab.memory.observation import (
     PROJECTOR_VERSION,
     ObservationError,
@@ -138,6 +139,9 @@ class MemoryService:
         source_backlinks: str = "disabled",
         candidate_contract: str | None = None,
         support_contract: str = "legacy",
+        memory_read_protocol: str = "legacy",
+        tool_read_feedback: str = "legacy",
+        tool_save_communication: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -172,6 +176,13 @@ class MemoryService:
         ):
             raise ValueError("V13_DIRECT_SUPPORT_REQUIRES_EVENT_BOUND_READ_HANDLE")
         self.support_contract = support_contract
+        self.memory_read_protocol = profile("memory_read_protocol", memory_read_protocol)
+        self.tool_read_feedback = profile("tool_read_feedback", tool_read_feedback)
+        self.tool_save_communication = profile("tool_save_communication", tool_save_communication)
+        if self.memory_read_protocol != "legacy" and (
+            mutation_contract != "event_bound_v1" or explicit_candidate_contract != "read_handle_v1"
+        ):
+            raise ValueError("V13_SELECTED_SNAPSHOT_REQUIRES_BOUND_READ_HANDLE")
         if type(receipt_profile) is not str or receipt_profile not in RECEIPT_PROFILES:
             raise ValueError("V13_MEMORY_RECEIPT_PROFILE_INVALID")
         self.receipt_profile = receipt_profile
@@ -236,7 +247,8 @@ class MemoryService:
         config_sha256: str, phase: str,
     ) -> dict[str, Any]:
         """Trusted actual Human binding; stable identity across explicit process resume."""
-        if (self.support_contract != "direct_support_v1" or not session or not message_id
+        if ((self.support_contract != "direct_support_v1" and self.memory_read_protocol == "legacy")
+                or not session or not message_id
                 or phase not in {"start", "resume"} or not isinstance(config_sha256, str)
                 or len(config_sha256) != 64
                 or any(c not in "0123456789abcdef" for c in config_sha256)):
@@ -330,11 +342,19 @@ class MemoryService:
             start = 0
             if cursor is not None:
                 if not isinstance(cursor, str):
-                    raise ValueError("V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID")
+                    reject(
+                        "V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID",
+                        "memory_service",
+                        self.tool_read_feedback,
+                    )
                 prefix, separator, offset = cursor.rpartition(":")
                 if (separator != ":" or prefix != "sources-" + index_hash[:24]
                         or not offset.isdecimal() or not 0 <= int(offset) < len(members)):
-                    raise ValueError("V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID")
+                    reject(
+                        "V13_SOURCE_INDEX_CURSOR_CHANGED_OR_INVALID",
+                        "memory_service",
+                        self.tool_read_feedback,
+                    )
                 start = int(offset)
             end = min(start + limit, len(members))
             return {**value, "members": members[start:end], "source_index_hash": index_hash,
@@ -507,11 +527,19 @@ class MemoryService:
         start = 0
         if cursor is not None:
             if not isinstance(cursor, str):
-                raise ValueError("V13_HISTORY_CURSOR_CHANGED_OR_INVALID")
+                reject(
+                    "V13_HISTORY_CURSOR_CHANGED_OR_INVALID",
+                    "memory_service",
+                    self.tool_read_feedback,
+                )
             prefix, separator, offset = cursor.rpartition(":")
             if (separator != ":" or prefix != "history-" + index_hash[:24]
                     or not offset.isdecimal() or not 0 <= int(offset) < len(revisions)):
-                raise ValueError("V13_HISTORY_CURSOR_CHANGED_OR_INVALID")
+                reject(
+                    "V13_HISTORY_CURSOR_CHANGED_OR_INVALID",
+                    "memory_service",
+                    self.tool_read_feedback,
+                )
             start = int(offset)
         end = min(start + limit, len(revisions))
         return {"ok": True, "status": "available", "id": memory_id,
@@ -810,6 +838,35 @@ class MemoryService:
                     "objects": field_observation_view(facts),
                     "pending": pending, "unknown": unknown,
                     "current_verified": False}
+
+    def selected_observation_member(
+        self, observation_id: str, object_id: str, field: str,
+    ) -> dict[str, Any]:
+        """Exact selected member/projection reads; no latest view or bank enumeration."""
+        if self.memory_read_protocol != "selected_snapshot_v1":
+            raise ValueError("V13_SELECTED_SNAPSHOT_PROFILE_REQUIRED")
+        with self._locked():
+            item = self.store.get(self.observations_namespace, observation_id)
+            if item is None:
+                raise ValueError("V13_SELECTED_OBSERVATION_UNAVAILABLE")
+            fact = item.value
+            if (fact.get("owner") != self.owner or fact.get("observation_id") != observation_id
+                    or fact.get("object_ref", {}).get("id") != object_id
+                    or fact.get("field") != field or not fact.get("projection_id")):
+                raise ValueError("V13_SELECTED_OBSERVATION_BINDING_CHANGED")
+            marker = self.store.get(self.projections_namespace, fact["projection_id"])
+            state = marker.value if marker is not None else None
+            if (state is None or state.get("owner") != self.owner
+                    or state.get("status") != "complete"
+                    or state.get("fact_sha256", {}).get(observation_id) != _hash(fact)
+                    or state.get("source_event_id") != fact.get("source_event_id")
+                    or state.get("source_hash") != fact.get("source_hash")):
+                raise ValueError("V13_SELECTED_OBSERVATION_COMMIT_CHANGED")
+            source = self.source(fact["source_event_id"])
+            if (source is None or source["role"] != "tool"
+                    or source["content_sha256"] != fact["source_hash"]):
+                raise ValueError("V13_SELECTED_OBSERVATION_SOURCE_CHANGED")
+            return cast(dict[str, Any], json.loads(_json(fact)))
 
     @contextmanager
     def _locked(self) -> Iterator[None]:

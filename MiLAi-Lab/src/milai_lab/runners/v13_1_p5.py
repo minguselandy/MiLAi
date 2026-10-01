@@ -50,6 +50,21 @@ from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import generation_cap
 from milai_lab.contracts.memory import GroundingMode
+from milai_lab.contracts.read_protocol import (
+    check_frozen as check_read_frozen,
+)
+from milai_lab.contracts.read_protocol import (
+    freeze_fields as read_freeze_fields,
+)
+from milai_lab.contracts.read_protocol import (
+    present_catalog as receipt_catalog,
+)
+from milai_lab.contracts.read_protocol import (
+    profiles as read_profiles,
+)
+from milai_lab.contracts.read_protocol import (
+    validate_settings as validate_read_settings,
+)
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.contracts.tool_schema_communication import (
     check_frozen as check_communication_frozen,
@@ -178,8 +193,8 @@ def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[
             mutation_contract=mutation_contract,
             **_service_options(settings),
         )
-        return [*map(convert_to_openai_tool, d0._memory_tools(service, settings)),
-                *document_schemas()]
+        return receipt_catalog([*map(convert_to_openai_tool, d0._memory_tools(service, settings)),
+                *document_schemas()], settings.get("tool_save_communication", "legacy"))
 
 
 def prepare(
@@ -233,6 +248,7 @@ def prepare(
             frozen["tool_catalog"], settings.get("tool_schema_communication", "legacy")
         )
     )
+    frozen.update(read_freeze_fields(settings, frozen["tool_catalog"]))
     if workflow != "reservation_v1":
         frozen["application_workflow"] = workflow
         frozen["receipt_profile"] = workflow
@@ -304,6 +320,7 @@ def _frozen(root: Path) -> dict[str, Any]:
     ] != d0._sha(Path(frozen["config_path"])):
         raise ValueError("V13_P5_INPUT_CHANGED_AFTER_FREEZE")
     check_communication_frozen(frozen)
+    check_read_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
@@ -311,6 +328,7 @@ def make_model(
     settings: dict[str, Any], budget: RunBudget, trace: Trace, resource_root: Path
 ) -> LangMemRecipeChatModel:
     """Production uses exactly the existing accounted client/model bridge."""
+    validate_read_settings(settings)
     selected_communication = communication_profile(
         settings.get("tool_schema_communication", "legacy")
     )
@@ -326,6 +344,7 @@ def make_model(
         max_calls_per_message=settings.get("max_calls_per_message", 12),
         generation_admission_profile=settings.get("generation_admission_profile", "legacy"),
         tool_schema_communication=selected_communication,
+        tool_save_communication=cast(Any, read_profiles(settings)["tool_save_communication"]),
     )
 
 
@@ -808,6 +827,9 @@ def step(
                     else comparison.tools()
                 ),
                 system_prompt=d0._system_prompt(settings),
+                tool_save_communication=cast(
+                    Any, read_profiles(settings)["tool_save_communication"]
+                ),
                 tool_schema_communication=communication_profile(
                     settings.get("tool_schema_communication", "legacy")
                 ),
@@ -843,7 +865,8 @@ def step(
             output["capture_receipt"] = capture_receipt
             if not capture_receipt["ok"]:
                 raise ValueError("V13_P5_USER_SOURCE_CAPTURE_REJECTED")
-            if service.support_contract == "direct_support_v1":
+            if (service.support_contract == "direct_support_v1"
+                    or service.memory_read_protocol != "legacy"):
                 service.bind_public_turn(scope.episode_id, public["message_id"],
                                          capture_receipt["source_ref"],
                                          config_sha256=frozen["config_sha256"], phase=phase)

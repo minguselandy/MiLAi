@@ -17,6 +17,7 @@ from langchain_core.tools import (
 )
 from pydantic import BaseModel, Field, WithJsonSchema, create_model
 
+from milai_lab.contracts.read_protocol import ReadProtocolRejected, reject
 from milai_lab.memory.service import MemoryService
 
 SemanticPatch = Annotated[dict[str, Any], WithJsonSchema({
@@ -317,21 +318,35 @@ def create_service_tools(
         Semantic text remains unchecked and no business authority is granted.
         """
         session_for(config)
-        if view == "history":
-            if id is None or query is not None or revision is not None:
-                raise ValueError("V13_HISTORY_READ_REQUIRES_EXACT_ID")
-            receipt = service.history_index(id, cursor=cursor, limit=max_revisions,
-                                            source_ref=source_ref)
+        try:
+            if view == "history":
+                if id is None or query is not None or revision is not None:
+                    reject(
+                        "V13_HISTORY_READ_REQUIRES_EXACT_ID",
+                        "memory_tools",
+                        service.tool_read_feedback,
+                    )
+                receipt = service.history_index(id, cursor=cursor, limit=max_revisions,
+                                                source_ref=source_ref)
+                return message("read_memory", tool_call_id, receipt)
+            if cursor is not None or max_revisions != 6 or source_ref is not None:
+                reject(
+                    "V13_HISTORY_ARGUMENTS_REQUIRE_HISTORY_VIEW",
+                    "memory_tools",
+                    service.tool_read_feedback,
+                )
+            result = read_memory(config, tool_call_id=tool_call_id,
+                                 id=id, query=query, revision=revision)
+            receipt = json.loads(str(result.content))
+            if receipt["ok"]:
+                receipt["history_index"] = service.history_index(receipt["id"])
+                receipt["read_view"] = "current_at_read" if revision is None else "exact_revision"
             return message("read_memory", tool_call_id, receipt)
-        if cursor is not None or max_revisions != 6 or source_ref is not None:
-            raise ValueError("V13_HISTORY_ARGUMENTS_REQUIRE_HISTORY_VIEW")
-        result = read_memory(config, tool_call_id=tool_call_id,
-                             id=id, query=query, revision=revision)
-        receipt = json.loads(str(result.content))
-        if receipt["ok"]:
-            receipt["history_index"] = service.history_index(receipt["id"])
-            receipt["read_view"] = "current_at_read" if revision is None else "exact_revision"
-        return message("read_memory", tool_call_id, receipt)
+
+        except ReadProtocolRejected as error:
+            if service.tool_read_feedback == "legacy":
+                raise
+            return message("read_memory", tool_call_id, error.receipt())
 
     async def aread_memory_history(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
@@ -412,9 +427,15 @@ def create_service_tools(
         if cursor is None:
             return recall_context(config, tool_call_id=tool_call_id)
         session_for(config)
-        if selected_page_provider is None:
-            raise ValueError("V13_SELECTED_PAGE_PROVIDER_REQUIRED")
-        return message("recall_context", tool_call_id, selected_page_provider(cursor, config))
+        try:
+            if selected_page_provider is None:
+                raise ValueError("V13_SELECTED_PAGE_PROVIDER_REQUIRED")
+            return message("recall_context", tool_call_id, selected_page_provider(cursor, config))
+
+        except ReadProtocolRejected as error:
+            if service.tool_read_feedback == "legacy":
+                raise
+            return message("recall_context", tool_call_id, error.receipt())
 
     async def arecall_selected_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
@@ -432,12 +453,19 @@ def create_service_tools(
         business state and grants no business write permission.
         """
         session = session_for(config)
-        if source_index_provider is not None:
-            receipt = source_index_provider(cursor, config)
-        else:
-            receipt = {"ok": True, "source_index": service.source_boundary(session, cursor=cursor),
-                       "historical_empty": True, "items": []}
-        return message("read_current_sources", tool_call_id, receipt)
+        try:
+            if source_index_provider is not None:
+                receipt = source_index_provider(cursor, config)
+            else:
+                receipt = {"ok": True,
+                           "source_index": service.source_boundary(session, cursor=cursor),
+                           "historical_empty": True, "items": []}
+            return message("read_current_sources", tool_call_id, receipt)
+
+        except ReadProtocolRejected as error:
+            if service.tool_read_feedback == "legacy":
+                raise
+            return message("read_current_sources", tool_call_id, error.receipt())
 
     async def aread_current_sources(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
@@ -644,7 +672,7 @@ def create_service_tools(
                 " semantic_patch changes only content/scope/basis/kind; scope merges named keys. "
                 "no_change creates no revision. Observation fields are immutable."
             )
-    return (
+    tools = (
         manage_tool,
         *([StructuredTool.from_function(
             recall_selected_context if service.mutation_contract == "event_bound_v1"
@@ -677,3 +705,23 @@ def create_service_tools(
             )
         ),
     )
+    if service.memory_read_protocol != "legacy":
+        recall_tool = next((tool for tool in tools if tool.name == "recall_context"), None)
+        if recall_tool is not None:
+            recall_tool.description += (
+                " An actual coverage cursor binds the immutable selected menu of its issuing "
+                "ordinary OR explicit-query packet, including owner/public turn/config and "
+                "delivered shape. Continuation returns paid version-bound pointers, not full "
+                "bodies or a fresh query; metadata/prefixes do not establish full reading. "
+                "Unavailable selected members stay visibly unavailable; never repair a cursor."
+            )
+    if any(value != "legacy" for value in (service.memory_read_protocol,
+                                           service.tool_read_feedback,
+                                           service.tool_save_communication)):
+        for tool in tools:
+            tool.metadata = {**(tool.metadata or {}), "read_protocol_profiles": {
+                "memory_read_protocol": service.memory_read_protocol,
+                "tool_read_feedback": service.tool_read_feedback,
+                "tool_save_communication": service.tool_save_communication,
+            }}
+    return tools

@@ -50,8 +50,10 @@ def _recipe_action_prompt(
     *,
     memory_result: bool = False,
     tool_schema_communication: str = "legacy",
+    tool_save_communication: str = "legacy",
 ) -> str:
-    prompt = _action_prompt(tools, tool_schema_communication=tool_schema_communication)
+    prompt = _action_prompt(tools, tool_schema_communication=tool_schema_communication,
+                            tool_save_communication=tool_save_communication)
     if memory_result:
         prompt = prompt.replace(
             'For a final reply use {"answer":"..."}. ',
@@ -177,6 +179,7 @@ class _RecipeRequestTransform:
                 tools,
                 memory_result=model.memory_protocol == "C",
                 tool_schema_communication=model.tool_schema_communication,
+                tool_save_communication=model.tool_save_communication,
             )
             m1_context = None
             odr_freshness = ""

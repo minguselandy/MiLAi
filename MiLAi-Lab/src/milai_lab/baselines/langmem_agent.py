@@ -27,6 +27,7 @@ from langmem import (  # type: ignore[import-untyped]
 )
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+from milai_lab.contracts.read_protocol import profile as read_profile
 from milai_lab.contracts.scope import FoundationScope as FoundationScope
 from milai_lab.contracts.tool_schema_communication import (
     feedback_text,
@@ -149,8 +150,18 @@ def build_agent(
     memory_mcp: MemoryMCP | None = None,
     benchmark_view_hook: Callable[..., Any] | None = None,
     tool_schema_communication: str | None = None,
+    tool_save_communication: str | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
+    selected_save = read_profile("tool_save_communication", model.tool_save_communication)
+    if tool_save_communication is not None and read_profile(
+        "tool_save_communication", tool_save_communication
+    ) != selected_save:
+        raise ValueError("V13_SAVE_COMMUNICATION_PROFILE_CONFLICT")
+    for memory_tool in memory_tools or ():
+        actual = (memory_tool.metadata or {}).get("read_protocol_profiles")
+        if actual is not None and actual.get("tool_save_communication") != selected_save:
+            raise ValueError("V13_SAVE_COMMUNICATION_SERVICE_CONFLICT")
     selected_communication = communication_profile(model.tool_schema_communication)
     if (
         tool_schema_communication is not None
