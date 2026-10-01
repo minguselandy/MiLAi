@@ -312,3 +312,8 @@ R7已完成默认关闭机制验收后的新配置/真实路由GET-only检查及
 R7 +171generation/1,222,370known（Host151/1,085,579，writer20/136,791）、52embedding/20,202，新unknown0，原trace/连续ledger差额精确匹配。累计9200gen/25,757,358known/25,787,745charged/历史unknown1/保守30,387，embed920,843/unknown0，末SHA374fcef4。R0–R7累计+1254generation/5,446,707known、487embedding/203,655，未声称成本下降。
 
 失败后保存6篇新primary摘要/固定PDF与2组官方project方法资料，累计17论文/12项目参考、711唯一文件/112本地链接核验PASS。GitHub未认证API的403原资源失败和一次空目录resume失败都保存；18论文原件未重复下载，独立git refs固定LangGraph1.1.10/AIP158，仅四次新方法资源GET，不升级/执行第三方。LangGraph标签源码与安装prebuilt1.0.13字节不同，两者独立留存，不宣称完全相同实现。方法参考与未采用reviewer/任务rubric/SQL detector/工具说明学习候选区分。下一通用候选先修正实际结果集快照身份及有限真实读取错误反馈，保留owner/turn/Source/版本/12/2048/6/writer1/repair0，不加语义verifier、案例分支或自动重试。所有48验收状态保持，D4未准入、完整原plan ACTIVE/Product NO_GO。
+
+## R7发布后的通用读取/保存方案审查范围
++
++R7完整失败/费用和17论文/12参考资料已提交da33e61，远端SHA及draft PR79 head/body精确核对。Root另发布[盲只读范围](V13_2_READ_PROTOCOL_PROPOSAL_SCOPE.md)，限同一既有Source在新隔离checkout对实际结果集分页身份、有限typed读取错误与Host/closed-writer保存回执时间顺序做静态设计；原R7结果/案例/rubric/ledger不供Source读取，不执行包/SDK/pytest/新合成机制。212运行/389测试/316完整配置maps冻结，仅允许所列源码/工程测试/已存primary方法内容。Root首次错误将263JSON-only数量与完整316比较，原失败driver/log保留，修正后全配置含51TXT/2upstream；没有补造当时完整map。主树、旧Source树HOLD，不授权实现或真实HTTP。先远端核对范围，再由同一Source交接READ_ONLY方案，Root另决定具体工程验收；原完整计划ACTIVE/D4未准入/Product NO_GO。
++

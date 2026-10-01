@@ -437,5 +437,17 @@
     },
     "actual_model_samples_definition": "All24 original planned development trajectories including2 incomplete;48 messages planned.",
     "actual_generation_requests": 171
+  },
+  "read_protocol_next_read_only_scope": {
+    "status": "AUTHORIZED_ONLY_AFTER_SCOPE_REMOTE_VERIFICATION_READ_ONLY_NOT_IMPLEMENTATION",
+    "path": "data/manifests/v13-2-read-protocol-proposal-scope.json",
+    "sha256": "7e2f8d10bce661a10b3f319bfb19373d4d3f40c5182cf092edbdcfd2211169ff",
+    "scope": "Blind static ordinary/explicit result-set continuation, finite actual read error propagation and durable-save receipt timing",
+    "base_commit": "da33e6169c2745fbb50aee3f0a4370b9ceb1f02f",
+    "source_owner": "/root/v13_2_source_resume",
+    "implementation_authorized": false,
+    "actual_model_http_authorized": 0,
+    "source_semantic_gate": "NOT_PASSED_R7",
+    "d4_admission": "NOT_ADMITTED"
   }
 }
