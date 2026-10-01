@@ -1082,6 +1082,407 @@
         "scope": "Pinned synchronization/retry/extra-network-surface source and installed dependency version metadata, no SDK or model execution",
         "runtime_closure_not_proven": true
       }
+    },
+    {
+      "kind": "paper",
+      "id": "2501.10868v3",
+      "title": "JSONSchemaBench: A Rigorous Benchmark of Structured Outputs for Language Models",
+      "version": "2501.10868v3",
+      "retrieved_at_utc": "2026-10-01T05:41:14.865490+00:00",
+      "status": "METHODS_ABSTRACT_REFERENCE",
+      "read_scope": "Primary abstract only; full PDF saved for user viewing, not read benchmark tasks/gold or executed evaluation.",
+      "summary": "Efficiency, schema-feature coverage and output quality are separate axes; archive methods reference, no benchmark input access.",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2501.10868v3",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2501.10868v3/abstract.html",
+          "started_at_utc": "2026-10-01T05:41:11.774819+00:00",
+          "sha256": "e484f566c57cd045abe422b80ec562428e09fe27ada4359b066ee206192d5d9d",
+          "bytes": 44348,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2501.10868v3",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:12.761554+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2501.10868v3",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2501.10868v3/paper.pdf",
+          "started_at_utc": "2026-10-01T05:41:12.761884+00:00",
+          "sha256": "0c540f59b5a143f2f18de79ede30ae16b109d13698a824316bda4190ca3aa50e",
+          "bytes": 3800079,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2501.10868v3",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:14.864855+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2609.17993v1",
+      "title": "Experimental Settings in LLM-Based Program Repair: A Study of Inputs, Tool Access, Feedback, and Validation",
+      "version": "2609.17993v1",
+      "retrieved_at_utc": "2026-10-01T05:41:17.355651+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Primary abstract only; full PDF saved for user viewing, not read benchmark tasks/gold or executed evaluation.",
+      "summary": "Searched APR setting-report candidate; abstract only read, not adopted as a memory mechanism.",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2609.17993v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.17993v1/abstract.html",
+          "started_at_utc": "2026-10-01T05:41:14.865624+00:00",
+          "sha256": "4e8863be58a905f93c0427c8c9c1e6ff3b6e3c0d5a14054b2c702e01b3e6c822",
+          "bytes": 41979,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2609.17993v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:16.192312+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2609.17993v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.17993v1/paper.pdf",
+          "started_at_utc": "2026-10-01T05:41:16.192721+00:00",
+          "sha256": "cfa9f425f245b96d075da9a54f0a1a882a507365642f2817d42e0c6be83c266b",
+          "bytes": 347056,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2609.17993v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:17.355273+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2609.23742v1",
+      "title": "Constrained Decoding Eliminates Structural Failures in Small LLMs but Reveals a Scale-Dependent Semantic Gap",
+      "version": "2609.23742v1",
+      "retrieved_at_utc": "2026-10-01T05:41:19.634131+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Primary abstract only; full PDF saved for user viewing, not read benchmark tasks/gold or executed evaluation.",
+      "summary": "Small-model preprint candidate separates schema and content; no transfer of its scores to current Qwen.",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2609.23742v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.23742v1/abstract.html",
+          "started_at_utc": "2026-10-01T05:41:17.355775+00:00",
+          "sha256": "8dee789463495da34b09858b841113ed1c08da31a63dcda75479d3b8dbd1b62e",
+          "bytes": 40901,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2609.23742v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:18.222715+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2609.23742v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.23742v1/paper.pdf",
+          "started_at_utc": "2026-10-01T05:41:18.224127+00:00",
+          "sha256": "4d1918187483bc336efc436eaf324f8b1d02a66b75c1dd96d3708940911eac07",
+          "bytes": 219981,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2609.23742v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:19.633705+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2605.26128v1",
+      "title": "The Constraint Tax: Measuring Validity-Correctness Tradeoffs in Structured Outputs for Small Language Models",
+      "version": "2605.26128v1",
+      "retrieved_at_utc": "2026-10-01T05:41:25.137816+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Primary abstract only; full PDF saved for user viewing, not read benchmark tasks/gold or executed evaluation.",
+      "summary": "Small-model preprint candidate: do not assume schema validity preserves task correctness.",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2605.26128v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2605.26128v1/abstract.html",
+          "started_at_utc": "2026-10-01T05:41:19.634257+00:00",
+          "sha256": "aff46ee5c8785d5f336a7d190929bfef8093213f23fd7b1cdfa50d0394597061",
+          "bytes": 43381,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2605.26128v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:20.453428+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2605.26128v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2605.26128v1/paper.pdf",
+          "started_at_utc": "2026-10-01T05:41:20.453926+00:00",
+          "sha256": "8c9e31b9b426821487e8386beb7f10d01e715285e103b9ebc8772bca695a7682",
+          "bytes": 1907237,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2605.26128v1",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:25.137347+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2602.19218v2",
+      "title": "Gecko: A Simulation Environment with Stateful Feedback for Refining Agent Tool Calls",
+      "version": "2602.19218v2",
+      "retrieved_at_utc": "2026-10-01T05:41:29.316712+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Primary abstract only; full PDF saved for user viewing, not read benchmark tasks/gold or executed evaluation.",
+      "summary": "Rules plus model simulation candidate; not adopted because current method must keep actual public receipts and existing model/cost boundaries.",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2602.19218v2",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.19218v2/abstract.html",
+          "started_at_utc": "2026-10-01T05:41:25.137929+00:00",
+          "sha256": "80966c68a86b871b5ba943169b5504ee15ca8a9ebb86aa51d292ee84f13d4361",
+          "bytes": 41899,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2602.19218v2",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:26.466540+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.19218v2",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.19218v2/paper.pdf",
+          "started_at_utc": "2026-10-01T05:41:26.467014+00:00",
+          "sha256": "a090a7da527164f83d72c352c8e682021f3e2bcd73e285183d920904c905aebe",
+          "bytes": 1232951,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2602.19218v2",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:29.316222+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "guidance-ai/jsonschemabench schema reference",
+      "url": "https://github.com/guidance-ai/jsonschemabench",
+      "commit": "9a94995b9279ae3af3aed4b2629172790b968d14",
+      "ref": "main",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschemabench-schema-reference",
+      "snapshot_file_count": 2,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschemabench-schema-reference/manifest.json",
+      "snapshot_manifest_sha256": "7bc75d03008a33742de163c55fb83ec2500556990116a98eb1c731220f37aa40",
+      "status": "SAVED_PINNED_METHODS_ONLY_REFERENCE",
+      "read_scope": "Original docs/validator methods only; no dataset/gold access or SDK upgrade.",
+      "files": [
+        {
+          "url": "https://api.github.com/repos/guidance-ai/jsonschemabench/commits/9a94995b9279ae3af3aed4b2629172790b968d14",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschemabench-schema-reference/git-commit-original.json",
+          "started_at_utc": "2026-10-01T05:41:29.316832+00:00",
+          "sha256": "20033dd1e391c5e1ecaff540e075ed99384c5276bc553e8de3e50e363ecaaa08",
+          "bytes": 12856,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://api.github.com/repos/guidance-ai/jsonschemabench/commits/9a94995b9279ae3af3aed4b2629172790b968d14",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:30.176052+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/guidance-ai/jsonschemabench/9a94995b9279ae3af3aed4b2629172790b968d14/README.md",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschemabench-schema-reference/README.md",
+          "started_at_utc": "2026-10-01T05:41:30.176757+00:00",
+          "sha256": "f41c15cfece6b974f870cc4624a2055cce16e96ab20f10e42ca6b39a99ba4c8d",
+          "bytes": 6632,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/guidance-ai/jsonschemabench/9a94995b9279ae3af3aed4b2629172790b968d14/README.md",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:30.885287+00:00",
+          "repository_path": "README.md"
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "vllm-project/vllm schema reference",
+      "url": "https://github.com/vllm-project/vllm",
+      "commit": "6e448d0ea9bf3d88d898b65449ca6dc2aec170ac",
+      "ref": "v0.27.1",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference",
+      "snapshot_file_count": 5,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/manifest.json",
+      "snapshot_manifest_sha256": "fb9833705e38106174624a23a0d9055a35795ce12898a5e96f27dcaf332347d4",
+      "status": "SAVED_PINNED_METHODS_ONLY_REFERENCE",
+      "read_scope": "Original docs/validator methods only; no dataset/gold access or SDK upgrade.",
+      "files": [
+        {
+          "url": "https://api.github.com/repos/vllm-project/vllm/commits/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/git-commit-original.json",
+          "started_at_utc": "2026-10-01T05:41:30.885998+00:00",
+          "sha256": "6abc65ac0a99dae983fc6883b3fca9d15c5f57efb36c0779948e53016d72d720",
+          "bytes": 4602,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://api.github.com/repos/vllm-project/vllm/commits/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:31.615082+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/vllm-project/vllm/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac/docs/features/tool_calling.md",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/docs/features/tool_calling.md",
+          "started_at_utc": "2026-10-01T05:41:31.615832+00:00",
+          "sha256": "caa6db0c295aabbfbf5ffa42b490129e8d8f9a78bb067884d79b81533e8a1ff1",
+          "bytes": 26886,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/vllm-project/vllm/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac/docs/features/tool_calling.md",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:32.490943+00:00",
+          "repository_path": "docs/features/tool_calling.md"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/vllm-project/vllm/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac/docs/features/structured_outputs.md",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/docs/features/structured_outputs.md",
+          "started_at_utc": "2026-10-01T05:41:32.491530+00:00",
+          "sha256": "0720d1d9b94f77b00710f76bb0c06a90b5ea7fbcbfb165ea65261bdf88733b1c",
+          "bytes": 13737,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/vllm-project/vllm/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac/docs/features/structured_outputs.md",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:33.229094+00:00",
+          "repository_path": "docs/features/structured_outputs.md"
+        },
+        {
+          "url": "https://docs.vllm.ai/en/v0.27.1/features/tool_calling/",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/official-docs/tool_calling.html",
+          "started_at_utc": "2026-10-01T05:41:33.229741+00:00",
+          "sha256": "0e67acf256074ab39a14c9b6125127cb401e22609b8db85711d9e352b6289c27",
+          "bytes": 653385,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://docs.vllm.ai/en/v0.27.1/features/tool_calling/",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:35.950232+00:00"
+        },
+        {
+          "url": "https://docs.vllm.ai/en/v0.27.1/features/structured_outputs/",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/vllm-0.27.1-schema-reference/official-docs/structured_outputs.html",
+          "started_at_utc": "2026-10-01T05:41:35.950896+00:00",
+          "sha256": "097a545dfc1b482559860b3fd8cddb68cb42c160b4473cfda0b8d7590929c349",
+          "bytes": 622445,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://docs.vllm.ai/en/v0.27.1/features/structured_outputs/",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:37.974591+00:00"
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "python-jsonschema/jsonschema schema reference",
+      "url": "https://github.com/python-jsonschema/jsonschema",
+      "commit": "a7277432b0f7bcd0551f6e589d30457017125df4",
+      "ref": "v4.26.0",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference",
+      "snapshot_file_count": 7,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/manifest.json",
+      "snapshot_manifest_sha256": "ec24875b6eedbfc9ad8ef1ce04627d9aa435d98987ca771451e4e26992c9e073",
+      "status": "SAVED_PINNED_METHODS_ONLY_REFERENCE",
+      "read_scope": "Original docs/validator methods only; no dataset/gold access or SDK upgrade.",
+      "files": [
+        {
+          "url": "https://api.github.com/repos/python-jsonschema/jsonschema/commits/a7277432b0f7bcd0551f6e589d30457017125df4",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/git-commit-original.json",
+          "started_at_utc": "2026-10-01T05:41:37.975548+00:00",
+          "sha256": "9bbb5585bbd3c4a58224f3bce9bdfc2bc71721645d298bd60124be4e9fcb6ce4",
+          "bytes": 4572,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://api.github.com/repos/python-jsonschema/jsonschema/commits/a7277432b0f7bcd0551f6e589d30457017125df4",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:38.808642+00:00"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/README.rst",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/README.rst",
+          "started_at_utc": "2026-10-01T05:41:38.809445+00:00",
+          "sha256": "525b3ff99da439e506f2fdac622a35e3083db7f0398864e978d00104f889a898",
+          "bytes": 6003,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/README.rst",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:39.578170+00:00",
+          "repository_path": "README.rst"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/docs/errors.rst",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/docs/errors.rst",
+          "started_at_utc": "2026-10-01T05:41:39.578845+00:00",
+          "sha256": "cb3590d95af13033c1980bd9d964e9b82da6d28e084d8dd1d1260362b955a976",
+          "bytes": 12360,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/docs/errors.rst",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:40.361349+00:00",
+          "repository_path": "docs/errors.rst"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/exceptions.py",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/jsonschema/exceptions.py",
+          "started_at_utc": "2026-10-01T05:41:40.362028+00:00",
+          "sha256": "6f8da150339f3c5729ac8e1994da630de2cabfc93dbce86059cb768f20e5c739",
+          "bytes": 15256,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/exceptions.py",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:41.188202+00:00",
+          "repository_path": "jsonschema/exceptions.py"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/validators.py",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/jsonschema/validators.py",
+          "started_at_utc": "2026-10-01T05:41:41.188872+00:00",
+          "sha256": "97f171b995b4b0ca05530a9366a1252fb1753f99f3cb7b1068b6d9aab1096fa5",
+          "bytes": 47159,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/validators.py",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:43.515040+00:00",
+          "repository_path": "jsonschema/validators.py"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/_keywords.py",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/jsonschema/_keywords.py",
+          "started_at_utc": "2026-10-01T05:41:43.515772+00:00",
+          "sha256": "afcfc3aea01f9fa40bc109e65c4820bde89253e51a20bda9da7b8f20d7a57c57",
+          "bytes": 14949,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/python-jsonschema/jsonschema/a7277432b0f7bcd0551f6e589d30457017125df4/jsonschema/_keywords.py",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:44.724945+00:00",
+          "repository_path": "jsonschema/_keywords.py"
+        },
+        {
+          "url": "https://python-jsonschema.readthedocs.io/en/v4.26.0/errors/",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/jsonschema-4.26.0-errors-reference/official-docs/errors.html",
+          "started_at_utc": "2026-10-01T05:41:44.725754+00:00",
+          "sha256": "9714e6737b051401705eb42f07f48b582fec83c3158aa7d0af2885d908d09403",
+          "bytes": 82171,
+          "status": "SAVED",
+          "http_status": 200,
+          "final_url": "https://python-jsonschema.readthedocs.io/en/v4.26.0/errors/",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T05:41:47.452472+00:00"
+        }
+      ]
     }
   ],
   "complete": true,
@@ -1104,8 +1505,8 @@
   ],
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
-  "paper_count": 6,
-  "project_count": 7,
+  "paper_count": 11,
+  "project_count": 10,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -1288,6 +1689,19 @@
         "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/direct-support-pressure-recheck.json",
         "sha256": "3cb58d2b295a1a52c621c8844629b4552f377db7a0ba115678b3dac8426b0623"
       }
+    },
+    {
+      "cohort": "R6 early schema loop failure",
+      "recheck_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r6-schema-research.json",
+        "sha256": "11d2c8b1fb172d751a9ca79e773f5ee0b61051cde82019115121ae369028560b",
+        "bytes": 8333
+      },
+      "new_readable_notes": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r6-schema-failure-review.html",
+        "sha256": "a455d97e2a7cdb122d8955fd2229f9bac7e08223043deb0906c53e1ae70575e4",
+        "bytes": 2709
+      }
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -1302,5 +1716,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T04:26:23.147034+00:00"
+  "updated_at_utc": "2026-10-01T05:41:47.491552+00:00"
 }

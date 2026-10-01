@@ -1,6 +1,6 @@
 # v13.2 设计资料索引与失败反思
 
-2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存6篇论文PDF/HTML/摘要和7组项目/SDK参考；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
+2026-10-01。按用户要求，检索的论文、项目和官方SDK资料均留存，采用的方法与未采用候选分别标明，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存11篇论文PDF/HTML/摘要和10组项目/SDK参考，680个唯一文件、83个本地索引链接通过原hash/PDF头/链接核对；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
@@ -112,3 +112,29 @@ R5重读原件及新增总结再次核对624个唯一文件、55个本地index�
 Root据此授权新profile展示的最小可逆改进：field_support仅索引同record既有完整source_bindings表；完全相等的父结构可共享，每字段完整有序leaf、mode、reuse parent record/revision/version和field hash须可恢复。完整表、解释和正文共同计入原2048/6，拒绝bool/float/负数/越界索引；存储lineage、原Source DTO、角色/hash/CAS、实际工具string参数、默认wire、排名与选取保持。这里只是通用表示推断，不移植Arrow性能或蕴含结论；正文分配与触发/cadence/伴随对象ID是联合因子。
 
 隔离树继续补测实际backlinks的current/history、超大多语种与完整roundtrip，须保留原交付退化并列报告。源码尚未被Root验收，真实R6未运行；模型能否遵守支持选择及语义门槛仍未知。资料核验当前651个唯一文件/57本地链接、PDF头/hash通过，前647报告及目录/index按hash保留。Root第一次shell启动找不到python、未执行driver或修改归档，原exit127记录另留，改用既有python3成功；不计为模型失败或样本。
+
+## R6参数形状失败后的新增资料
+
+上述651文件状态保留为该阶段历史；支持来源实现后来限定验收，真实[R6完整结果](V13_2_E0_R6_RESULTS.md)为21PASS/3FAIL，来源语义门槛未过。新检索原文均保存，不只留搜索标题；新增五篇的PDF已下载，当前仅阅读primary摘要，未读取其benchmark任务、gold或数据。
+
+| 论文 | 本次用途与阅读范围 |
+| --- | --- |
+| [JSONSchemaBench v3](https://arxiv.org/abs/2501.10868v3) | 摘要方法参考：将结构合规、schema能力覆盖、效率和输出质量分开审查。仅借鉴分项原则，不引入benchmark数据、约束框架或论文分数。 |
+| [Experimental Settings in LLM-Based Program Repair v1](https://arxiv.org/abs/2609.17993v1) | 检索候选，原件留存；程序修复任务不等于当前记忆/工具合同，未采用。 |
+| [Constrained Decoding…Semantic Gap v1](https://arxiv.org/abs/2609.23742v1) | 检索候选，原件留存；小模型预印本结果不证明当前Qwen系统语义效果，未采用。 |
+| [The Constraint Tax v1](https://arxiv.org/abs/2605.26128v1) | 检索候选，原件留存；没有迁移其validity/correctness分数或变更当前provider grammar。 |
+| [Gecko v2](https://arxiv.org/abs/2602.19218v2) | 检索候选，原件留存；模拟环境/额外反馈模型不适合当前真实回执与完整计费方向，未采用。 |
+
+| 官方项目资料 | 固定身份与保存范围 |
+| --- | --- |
+| [guidance-ai/jsonschemabench](https://github.com/guidance-ai/jsonschemabench/tree/9a94995b9279ae3af3aed4b2629172790b968d14) | commit `9a94995b9279ae3af3aed4b2629172790b968d14`；README和原commit API，未保存/运行任务集。 |
+| [vLLM v0.27.1](https://github.com/vllm-project/vllm/tree/6e448d0ea9bf3d88d898b65449ca6dc2aec170ac) | tag对应commit `6e448d0ea9bf3d88d898b65449ca6dc2aec170ac`；tool_calling、structured_outputs固定Markdown、官方HTML和commit原件。它是设计参考，不证明当前bdbaea18定制server构建等于tag。 |
+| [python-jsonschema v4.26.0](https://github.com/python-jsonschema/jsonschema/tree/a7277432b0f7bcd0551f6e589d30457017125df4) | commit `a7277432b0f7bcd0551f6e589d30457017125df4`；README、错误文档、exceptions/validators/_keywords方法源码、官方HTML及commit原件。实际安装4.26.0另观察，未升级。 |
+
+[vLLM官方结构输出说明](https://docs.vllm.ai/en/v0.27.1/features/structured_outputs/)要求实际提供的schema与提示配合；[tool calling说明](https://docs.vllm.ai/en/v0.27.1/features/tool_calling/)区分具体选择方式/约束范围。R6实际generation_only schema的arguments仅为object，不能把strict:true理解为已约束完整工具字段，实际执行前参数schema仍有效。不会未经新工程/冻结就启用完整provider schema、更换服务或parser。
+
+[jsonschema官方错误结构](https://python-jsonschema.readthedocs.io/en/v4.26.0/errors/)提供instance/schema路径、validator及子错误context，message本身可能不足以定位问题。Root据实际失败推断：下一默认关闭通用候选先清楚分开真实top-level字段值与field_support对象，给出完整合法结构；校验反馈可包含原路径/keyword/原schema类型或enum，但不能填入正确业务值/来源、自动修写proposal或增加重试。元数据/说明/错误输入均继续计费，2048/max6、writer1/repair0、角色/owner/hash/CAS及旧默认不放宽。
+
+结构合法也未解决直接来源语义：真实更正选旧叶、查询选问题源、无支持限制扩大及被拒重复操作均保存。采用方向仍是由模型选择真实证据、程序验证明确机械关系、业务回执真实，不引入case词分类、强制current-source、额外语义verifier或后台模型。此处为Root修复假设，尚未实现或取得新模型收益。
+
+24次成功只读资源GET的原URL/最终URL/时间/status/bytes/hash在`artifacts/v13-2-literature-audit/r6-schema-research/retrieval-attempts.json`；本地`index.html`新增26链接，`design-rechecks/r6-schema-failure-review.html`可读早期失败反思。最终核验11论文/10项目参考、680唯一文件/83链接、0issue；此前651目录/index/catalog和审计按原hash保存。资料归档自身0模型HTTP/第三方执行；同时间Root授权R6的账本变化另算，不宣称并行阶段整份账本不变。

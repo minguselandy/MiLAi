@@ -272,3 +272,15 @@ Root事前R6 parent在隔离stdlib假CLI/局部账本上九项控制通过，覆
 ## R6新运行事前冻结
 
 [R6冻结](V13_2_E0_R6_FREEZE.md)完成原24/48与原rubric的新空root，211源码8c466、原3.11.13/SDK、既有两模型route及原连续账本26f46d5f。只新增direct_support_v1联合profile与实验说明，原R5 Host/writer提示、2048/max6、bank_prefix和Host12/writer1/repair0保持，admission仍legacy。实际prepare禁socket0HTTP，前后源码/测试/315配置相等；新wire/解码/SDK/后检在任何模型调用前各自复制固定。此前缺acceptance拒绝/静态错误/失败各保留；冻结提交核对后按完整24首尝试串行执行，尚无R6质量结果。
+
+## R6首次完整分母与失败后研究
+
+[R6逐条结果](V13_2_E0_R6_RESULTS.md)现已完成24首次子命令：23正常/1返回失败，45完整消息/1中断/2NOT_RUN，原分母48保持。Root原rubric完整主张/范围/授权审查21PASS/3FAIL，22门槛未过：初次参数形状失败耗尽额度；素食被扩大为所有动物制品限制；一个已完成标签仍被尝试complete_label且业务guard拒绝。正确最终答复、实际副作用0和被拒尝试分别报告，未删失败或补试。
+
+三原卡同ID更正/历史及当前旧值回答正确，但改动明确只选旧来源；两个旧update的支持更正和完整gate失败。三查询新revision只引问题，共5轨迹/6版本直接支持缺口。另保留scope.source_refs结构误用及“常用”被标preference的metadata偏移。26 Host成功跳过/14no_change/4committed/1pending与1未到维护/2未运行分开；实际显式whole-field reuse未执行，工程检查不升级为模型复用。
+
+Root只读SQLite Store SDK重开24bank/458items与最后真实回执一致，DB SHA不变。150已观察Host HTTP逐包检查最大ordinary2044/max6、完整field_map/trigger/version/叶hash与SDK匹配；45完成消息通过，update-1末准备与两缺消息仍UNVERIFIED，原冻结后检失败不改。单独原collector补齐全分母，Source及连续账本未变；cap文件12、错误回执和冻结project→reserve顺序另佐证末准备未dispatch，没有补造trace或重跑模型。
+
+R6 +169generation/958,878known（Host150/856,495，writer19/102,383）和45embedding/19,279，trace与原账本差额一致，新unknown0。累计9029generation/24,534,988known/24,565,375charged/unknown1，embedding900,641/unknown0；历史保守未知30,387保持，末SHA73c437ac。R0–R6累计+1083generation/4,224,337known、435embedding/183,453。没有成本下降、单因素收益或泛化声明。
+
+失败后新检索五论文/三固定project资料均已保存；[可查看资料目录](V13_2_DESIGN_LITERATURE.md)现11论文/10项目参考、680文件/83本地链接通过hash/头/链接核验，方法参考与未采用候选区分。只授权同一既有Source做通用参数说明/原validator路径反馈的READ_ONLY方案，不改当前211源码和所有冻结cohort。完整plan ACTIVE，来源/同能力/D4与D5门禁仍未完成、Product NO_GO。

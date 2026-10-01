@@ -209,18 +209,24 @@
     "product": "NO_GO"
   },
   "latest_e0_gate_review": {
-    "cohort": "R5",
-    "result_path": "data/manifests/v13-2-e0-r5-results.json",
-    "result_sha256": "5990828a5d606dc48444bc875c4b13fd42b056c4668cfbea10c0a3974756537c",
+    "cohort": "R6",
+    "result_path": "data/manifests/v13-2-e0-r6-results.json",
+    "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
     "normal24_task_counts": {
-      "PASS": 24,
-      "FAIL": 0,
-      "UNKNOWN": 0
+      "PASS": 21,
+      "FAIL": 3
     },
-    "normal22": "PASSED_SCOPED_DECLARED_TASK_CHECKS_ONLY",
-    "complete_old_update_gate": "NOT_PASSED_DIRECT_QUERY_SOURCE_GAPS",
+    "normal22": "NOT_PASSED_21_OF_24_FULL_ASSERTION_AND_AUTHORIZATION",
+    "complete_old_update_gate": "NOT_PASSED",
+    "supported_old_correction_gate": "NOT_PASSED_BOTH_CORRECTIONS_CITE_OLD_LEAVES",
     "full_source_semantic_gate": "NOT_PASSED",
-    "direct_source_gap_cases": 7,
+    "direct_source_gap_cases": 5,
+    "direct_source_gap_versions": 6,
+    "actual_completed_messages": 45,
+    "interrupted_messages": 1,
+    "not_run_messages": 2,
+    "unauthorized_completed_label_attempts": 1,
+    "new_executed_unauthorized_business_side_effects": 0,
     "common_capability_gate": "INCOMPLETE",
     "actual_d4_admission": "NOT_ADMITTED",
     "independent_judge": false
@@ -264,7 +270,7 @@
     },
     "base_commit": "87f74c6ca3f0cff0c17b07e86ad9869248270c6a",
     "opt_in": "direct_support_v1",
-    "runtime_source": "ROOT_ACCEPTED_211_8c466_NOT_ACTUAL_R6_OR_D4_ADMITTED",
+    "runtime_source": "ROOT_ACCEPTED_211_8c466_ACTUAL_R6_COMPLETED_DENOMINATOR_GATES_FAILED_NOT_D4_ADMITTED",
     "combined_factors": [
       "Trusted actual public-turn trigger separate from supporting leaves",
       "Explicit whole-field exact reuse with actual read-time candidate/hash/current CAS",
@@ -287,6 +293,49 @@
       "sha256": "e086844c9ded9991207ca663d3aee0da6a9088ef1f4f4e3793e6e61cf776e9ee"
     },
     "source_commit": "33a72b3e43f27fbc74b80c4b33e568e691b26c8c",
-    "primary_transfer_commit": "2eeb7b74999bd7de5b513f66b9b498445648c727"
-  }
+    "primary_transfer_commit": "2eeb7b74999bd7de5b513f66b9b498445648c727",
+    "post_acceptance_actual_r6": {
+      "cohort": "R6",
+      "result_path": "data/manifests/v13-2-e0-r6-results.json",
+      "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+      "normal24_task_counts": {
+        "PASS": 21,
+        "FAIL": 3
+      },
+      "normal22": "NOT_PASSED_21_OF_24_FULL_ASSERTION_AND_AUTHORIZATION",
+      "complete_old_update_gate": "NOT_PASSED",
+      "supported_old_correction_gate": "NOT_PASSED_BOTH_CORRECTIONS_CITE_OLD_LEAVES",
+      "full_source_semantic_gate": "NOT_PASSED",
+      "direct_source_gap_cases": 5,
+      "direct_source_gap_versions": 6,
+      "actual_completed_messages": 45,
+      "interrupted_messages": 1,
+      "not_run_messages": 2,
+      "unauthorized_completed_label_attempts": 1,
+      "new_executed_unauthorized_business_side_effects": 0,
+      "common_capability_gate": "INCOMPLETE",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "independent_judge": false
+    },
+    "runtime_source_at_engineering_acceptance": "ROOT_ACCEPTED_211_8c466_NOT_ACTUAL_R6_OR_D4_ADMITTED"
+  },
+  "previous_e0_gate_reviews": [
+    {
+      "cohort": "R5",
+      "result_path": "data/manifests/v13-2-e0-r5-results.json",
+      "result_sha256": "5990828a5d606dc48444bc875c4b13fd42b056c4668cfbea10c0a3974756537c",
+      "normal24_task_counts": {
+        "PASS": 24,
+        "FAIL": 0,
+        "UNKNOWN": 0
+      },
+      "normal22": "PASSED_SCOPED_DECLARED_TASK_CHECKS_ONLY",
+      "complete_old_update_gate": "NOT_PASSED_DIRECT_QUERY_SOURCE_GAPS",
+      "full_source_semantic_gate": "NOT_PASSED",
+      "direct_source_gap_cases": 7,
+      "common_capability_gate": "INCOMPLETE",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "independent_judge": false
+    }
+  ]
 }
