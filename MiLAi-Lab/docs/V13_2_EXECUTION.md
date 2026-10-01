@@ -156,3 +156,11 @@ R3新增120 generation／462,391已知tokens、49 embedding／20,342 tokens；�
 R4新增131 generation／537,169已知tokens，其中Host107／446,255、writer24／90,914；embedding49／20,752，trace与账本完全一致，新unknown0。累计8,742 generation／23,113,819 charged、23,083,432 known、unknown1；embedding860,855、unknown0。R0–R4新增796 generation／2,772,781已知tokens、340 embedding／143,667 tokens，历史未知30,387保留。无独立Judge、美元或GPU测量，无节省成本结论。
 
 失败后重新检索Mem0/Hindsight原论文，并检查已保存固定Mem0源码的事实抽取/维护职责。下一项工程候选只压缩重复发现metadata，让已有选中历史版本/叶子正文在相同2048/6内实际交付；不改排名、阈值、候选选择或用语言关键词特判。与索引存储优化分别冻结/测量，来源角色/hash、读时CAS、当前/历史与省略状态继续保留。既有失败全量保留；D4/D5与完整泛化验收尚未完成。
+
+## 索引存储独立工程验收与性能冻结
+
+R4全部审计结束后才合入此前暂停保存的WIP。Root逐hash核对[限定工程验收](../data/manifests/v13-2-derived-index-storage-acceptance.json)的17命令原回执、执行前后208运行文件、日志、测试文件前缀与AST：13项SDK case分批通过，非一次final整文件13PASS；保留E501、无效句点namespace样例和重建时间字段误断言三次失败。Root验收脚本一次误找CLI字段的KeyError也保留，改读实际runtime_sources，未重跑已通过测试。
+
+显式`memory_derived_index_storage=owner_bank_v1`只移动可重建raw_index的公共Store namespace；默认bank_prefix/原排序、选择、scope/来源/读时CAS不变。旧inline仍保留，其扫描成本不会自行消失。此前逻辑SDK counter不作为加速证明。
+
+[同源码性能协议](../data/manifests/v13-2-derived-index-scale-freeze.json)事前冻结100/1000/10000、两存储臂、七阶段各20样本（共840）。每个N通过公共SDK建立并关闭一个合成bank，两臂各复制完全相同SQLite字节、使用相同208运行源码255caa86；只存储开关不同。固定逐臂顺序按N反向，保存wall/CPU/SDK逻辑rows/OS块计数与全部失败；共享机器无空闲/频率/cache控制，只作描述性结果。仍无业务object/operation stream、语义模型与泛化结论，D5-10保持PARTIAL。在隔离性能树执行，材料压缩工程在另一树进行，不修改冻结执行源码。
