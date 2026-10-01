@@ -174,3 +174,5 @@ R4全部审计结束后才合入此前暂停保存的WIP。Root逐hash核对[限
 [共同能力草案](../data/manifests/v13-2-d4-common-capability-draft.json)补齐两个等额候选的事前选择规则：以原六曝光故事的确认clean完整成功数为先，再依次比较native成功、完整arc、实际全部生成/嵌入费用；缺失不增加确认成功，全部原失败和费用保留。两候选选择阶段计划48条，选定24视图复用曝光输出、不是独立验证；12次共同预算另根24。当前没有D4输出，运行仍未准入。
 
 只读固定五个实际源码身份确认：旧ComparisonRuntime每ReAct检索/匹配工具形成，不能改标签当一次回合缓存；旧B6仅raw chunks与receipt projection，B3的summary实现不代表B6+已有语义fallback。Mem0已向Host共享admission传入reserve回调，但新D4的Host/native/summary/writer合计24/12及中断重启持久上限尚需真实工程检查。此准备0模型HTTP，不升级D4状态或清除R4失败。
+
+[R5前瞻设计](../data/manifests/v13-2-e0-r5-design.json)仍为DRAFT_NOT_READY，未冻结运行源码或开始模型HTTP。材料工程的范围已明确包含可逆共享表示与按实际token成本的正文分配；两项联合改变，不能归因纯字节压缩。保留原候选、排名、首次record顺序及2048/6，真实省略与可能少送后续current的取舍另计。原多语种压力失败/断言保留，保持R4两提示不变。Source验收及独立性能的零HTTP账本协议结束后，才另冻原全24/48；旧根目录不再执行。

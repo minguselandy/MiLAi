@@ -1,0 +1,41 @@
+{
+  "kind": "V13_2_E0_R5_PROSPECTIVE_MATERIAL_DELIVERY_DESIGN",
+  "status": "DRAFT_NOT_READY_NOT_RUNTIME_FROZEN",
+  "prior_cohort": "R4 full24/48, Root20PASS/4FAIL; all previous cohorts and source-semantic failures retained independently.",
+  "design_direction": "Same logical MemoryService, actual source association, incremental semantic record identity, deterministic observations and bounded delivery. No case/language/query-keyword branch, ranking change or new model/service.",
+  "candidate": {
+    "memory_material_profile": "compact_v1",
+    "default_material_profile": "full_v1",
+    "raw_index_storage": "bank_prefix",
+    "representation": "Explicit reversible dictionaries for complete repeated actual values; source role/hash and scope/record/version/read-handle meanings retained. Shared tables and decoder explanation count toward the same material budget.",
+    "allocation_scope_amendment": "After preserved multi-record engineering failures, the opt-in candidate may group already selected units by actual record identity in original first-record order and allocate complete bodies/field groups by actual tokenizer cost, with stable ties and remaining-budget prefixes. No additional candidates selected; conflict field groups stay together. Record current/history/Source delivery and omission counts, including later-current omissions.",
+    "causal_limit": "Representation sharing and body allocation change together as one delivery-profile candidate. Do not attribute results to byte compression alone. Final implementation and all changed allocation rules require scoped acceptance before runtime freeze.",
+    "instructions": "Keep R4 Host/writer instructions unchanged. No additional semantic verifier or repeated prompt tuning. Same public interpretation rules will be provided to comparison arms."
+  },
+  "cohort": {
+    "trajectories": 24,
+    "public_messages": 48,
+    "inputs": "Original exposed E0normal24 fixture, original rubric, independent new run root; no new blind pool/benchmark/gold access.",
+    "host_max_generation_admissions_per_message": 12,
+    "host_output_tokens": 4096,
+    "temperature": 0,
+    "ordinary_material_tokens": 2048,
+    "maximum_record_object_identities": 6,
+    "writer_paid_calls_per_boundary": 1,
+    "writer_repair_calls": 0,
+    "decision": "Report all24 full-assertion/source/scope/state verdicts,22/24 threshold and both original update repairs separately. Root review remains non-independent; source membership is not semantic entailment.",
+    "failures": "Preserve every rejection, pending receipt, false prose, omitted evidence, extra memory card, incomplete attempt and charged cost. No best-answer stitching or restarting old frozen roots."
+  },
+  "admission_requirements": [
+    "Source READY/HOLD at a concrete committed identity; per-command source/config/test maps and original failure receipts verified by Root",
+    "Default full_v1 legacy output/catalog behavior and bank_prefix path verified on declared affected cases; no universal equivalence claim from finite checks",
+    "Actual Qwen-tokenizer joint source-index/ordinary/reference budget, reversible provenance/version/scope bindings, ownership and stale-CAS checks",
+    "The separate840-sample performance driver must terminate and its original unchanged-ledger protocol must be audited before any new model HTTP",
+    "Fresh config/runtime/CLI/environment/catalog/rubric/driver/model-route/ledger freeze and zero-HTTP preparation before execution"
+  ],
+  "execution_source_commit": null,
+  "runtime_freeze": null,
+  "actual_model_http": 0,
+  "independent_judge": false,
+  "product": "NO_GO"
+}
