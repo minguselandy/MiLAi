@@ -142,6 +142,10 @@ def business_schemas(settings: dict[str, Any]) -> list[dict[str, Any]]:
     return BUSINESS_SCHEMAS
 
 
+def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
+    return d0._service_options(settings)
+
+
 def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[dict[str, Any]]:
     contract = d0._receipt_contract(settings)
     d0._observation_profile(settings)
@@ -150,7 +154,7 @@ def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[
     if application_workflow(settings) == "reservation_v1":
         return d0._catalog(root, mode, receipt_contract=contract,
                            mutation_contract=mutation_contract,
-                           service_options=d0._service_options(settings),
+                           service_options=_service_options(settings),
                            settings=settings)
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
@@ -162,7 +166,7 @@ def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[
             receipt_contract=contract,
             receipt_profile="document_publication_v1",
             mutation_contract=mutation_contract,
-            **d0._service_options(settings),
+            **_service_options(settings),
         )
         return [*map(convert_to_openai_tool, d0._memory_tools(service, settings)),
                 *document_schemas()]
@@ -221,6 +225,8 @@ def prepare(
         frozen["effective_generation_cap"] = cap
     if d0._mutation_contract(settings) != "legacy":
         frozen["memory_mutation_contract"] = d0._mutation_contract(settings)
+    if settings.get("memory_support_contract", "legacy") != "legacy":
+        frozen["memory_support_contract"] = _service_options(settings)["support_contract"]
     recipe_policy = d0._recipe_settings(settings)
     if recipe_policy is not None:
         frozen["memory_reader_policy"] = recipe_policy
@@ -633,7 +639,7 @@ def step(
                 mode=frozen["mode"],
                 receipt_contract=d0._receipt_contract(settings),
                 mutation_contract=d0._mutation_contract(settings),
-                **d0._service_options(settings),
+                **_service_options(settings),
                 observer=service_observer,
                 **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
                 **({} if composition is None else composition.service_options(frozen)),
@@ -803,6 +809,11 @@ def step(
             output["capture_receipt"] = capture_receipt
             if not capture_receipt["ok"]:
                 raise ValueError("V13_P5_USER_SOURCE_CAPTURE_REJECTED")
+            if service.support_contract == "direct_support_v1":
+                service.bind_public_turn(scope.episode_id, public["message_id"],
+                                         capture_receipt["source_ref"],
+                                         config_sha256=frozen["config_sha256"], phase=phase)
+                config["configurable"]["v13_support_config_sha256"] = frozen["config_sha256"]
             trace(
                 {
                     "event": "v13_public_input",
