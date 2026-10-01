@@ -1,8 +1,14 @@
 # v13.2 设计资料索引与失败反思
 
-当前保存 **17篇论文 / 18组项目参考、784个独立核验文件 / 152个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)与本地 `artifacts/v13-2-design-literature/index.html` 保存原文、URL/UTC/版本/SHA和中文范围；此前768/147及更早阶段按发生时解释。第三方方法原件本地保留，GitHub发布索引与反思。
+当前保存 **17篇论文 / 19组项目参考、807个独立核验文件 / 159个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)与本地 `artifacts/v13-2-design-literature/index.html` 保存原文、URL/UTC/版本/SHA和中文范围；此前768/147及更早阶段按发生时解释。第三方方法原件本地保留，GitHub发布索引与反思。
 
-## 当前独立发现：构造成功后验证失败的清理缺口
+## 当前Root固定流：配置类型、原回合绑定与完整关闭范围
+
+新Root入口最终15项有限SDK/Mock检查、ruff/mypy与两个边界通过；首次样式/类型失败、首12项旧版本通过和归档路径错误保留原件。固定1.6.5公开RunnableConfig与固定3.11.13 cast用于同一既有公开config，实际当前user Source/config hash和writer公开通信沿用D0，不改变核心算法、模型/SDK、参数或默认配置。新增资源9次GET200，其中首文件在progress落盘失败后复用原字节，8次在新恢复label完成；网页浏览Unsupported Markdown与归档路径TypeError分别保留，不冒称HTTP失败。三个LC文件与安装字节相同，typing与固定解释器相同。rolling官方原件/UTC/hash与固定版本证明分开。
+
+资料位于本地 `projects/langchain-core-1.6.5-runnable-config-reference/`，可从index首屏查看中文范围、官方原件和manifest。参考片段保存不等于整仓复现，上游代码未执行。通用改进只对齐公开SDK类型/真实上下文载体，并将outer owner覆盖最终回执与真实关闭；unknown writer保留pending/unconfirmed，不重试/退款。Source最终清理修正在此前1270b85已接受，下面缺口发现段保留其发生时尚待交接语义。[当前工程范围和限制](V13_2_ROOT_FIXED_FLOW_OWNED_ENGINEERING_ACCEPTANCE.md)不算模型质量或独立泛化通过，E0/D4状态保持。
+
+## 此前独立发现：构造成功后验证失败的清理缺口
 
 Root保存Source首不可变提交fc894b9的8路径/parent/完整patch；在214运行文件逐字节副本中、合成非零历史账本、真实SDK和MockTransport/禁止socket条件下复现：合法URL的规范化差异导致实际客户端创建后的身份校验抛错，登记却已撤销、lease随后释放，底层HTTP客户端仍打开，新owner可取得同一合成账本。原始状态/异常/执行map/stdout/stderr保存，观察后才作Root显式清理；0 reserve/dispatch/实际模型HTTP，原账本字节保持。复现rc0表示缺口成立，不是实现通过。[原件与通用改进记录](../data/manifests/v13-2-http-owner-partial-init-counterexample.json)可核对。
 

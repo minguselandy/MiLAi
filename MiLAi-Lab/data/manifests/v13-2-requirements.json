@@ -1048,5 +1048,13 @@
     "primary_transfer_commit": "28671c3e8641cbe455823033f5f8a1f24808be3e",
     "research_gate_statuses_unchanged": true,
     "new_actual_cohort": false
+  },
+  "fixed_flow_owned_engineering_acceptance": {
+    "path": "data/manifests/v13-2-root-fixed-flow-owned-engineering-acceptance.json",
+    "sha256": "17b203dc4e774ecbfca550afdc94df4c715f3a6bb3acfc2627952044f859c98c",
+    "status": "ACCEPTED_SCOPED_ENGINEERING_ONLY",
+    "actual_model_http": 0,
+    "new_actual_cohort_started": false,
+    "no_original_row_status_upgrade": true
   }
 }

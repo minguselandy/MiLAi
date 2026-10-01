@@ -368,3 +368,8 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## HTTP owner 最终独立工程验收
 
 最终Source02e619e精确8路径转入28671c3，默认legacy。[验收与边界](V13_2_HTTP_OWNER_ENGINEERING_ACCEPTANCE.md)保存完整交接、13原非零、Root两次审计失败及独立最终执行证据。59控制、ruff8/mypy6/双边界和转入后主树双边界通过；另有4实际清理模式、5事件11状态含真实进程cut、9DTO字段/嵌套漂移、emit互斥、持久写序/同sidecar与fresh-process、5用量类型控制。214/393/316完整map一致，原continuous ledger374fcef4与全部历史费用/48状态不变。SDK未返回内部资源、完整native SDK/模型质量及未来Root fixed-flow仍不冒称覆盖；下一新驱动与fresh freeze独立准备，无新实际cohort。资料17论文/18参考、784文件/152本地链接保持，原件和总结可查看；完整planACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO。
+
+
+## Root固定观察流入口工程验收（2026-10-02北京时间）
+
+新Root入口的15项有限SDK/Mock控制、ruff/mypy和两个边界通过；8条原命令、2次静态失败、383索引原件和7条symlink元数据保留。outer owner覆盖最终回执与资源关闭，当前公开user/config绑定与writer公开通信对齐D0；unknown writer remains pending/unconfirmed，不能将boundary completed当形成成功。原Source214/配置316/ledger374fcef4、原48要求及R0–R7不变，0实际模型HTTP。资料当前17/19/807/159/0问题，新增固定LC/CPython类型原件及归档progress路径失败保存，未升级/执行上游代码。下一E1/E2/E0需新freeze及远端核对，完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO。[验收与限制](V13_2_ROOT_FIXED_FLOW_OWNED_ENGINEERING_ACCEPTANCE.md)。

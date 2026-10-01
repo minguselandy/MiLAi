@@ -1,0 +1,403 @@
+{
+  "kind": "V13_2_ROOT_FIXED_FLOW_OWNED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_SCOPED_ENGINEERING_ONLY",
+  "observed_at_utc": "2026-10-01T16:36:39.422243+00:00",
+  "driver": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/run_v13_2_fixed_flow_owned.py",
+    "sha256": "7d7f4f9087745f787c809d94e455b96ac2adb994de545efbaf526d42f992ec6b",
+    "bytes": 11876
+  },
+  "tests": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tests/memory/test_v13_2_fixed_flow_owned.py",
+    "sha256": "6e9e07e6cde5ad153dee800dfbeb1bf62a7c74a1be5fbb7095a694826cff64d5",
+    "bytes": 19098
+  },
+  "auditor": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/audit_fixed_flow_owned_final.py",
+    "sha256": "202f2c424ea51bcb72a71f9969dd5875cc05b61dc01e0d05f6b53fc2065b45af",
+    "bytes": 9081
+  },
+  "commands": [
+    {
+      "label": "actual-main-first",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/actual-main-first/receipt.json",
+        "sha256": "cc685bf79f31b9599b98a2e514deed764843c2bf83f062bce0b12526e1065b91",
+        "bytes": 3518
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "f80cf69b6ba1163c0b44fa18eff41b6c7e45e939bc32fa452b186691a08a0fce"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "01b5552fca4a1b7d5db96c9f9900432c023da59cdeee2156fa57a2d79afe1f88"
+        }
+      }
+    },
+    {
+      "label": "ruff-first",
+      "returncode": 1,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/ruff-first/receipt.json",
+        "sha256": "d2503d66c46ba2f355a4cbdecb0286e6177c823837cea03d421c863f00bcb38c",
+        "bytes": 3400
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "f80cf69b6ba1163c0b44fa18eff41b6c7e45e939bc32fa452b186691a08a0fce"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "01b5552fca4a1b7d5db96c9f9900432c023da59cdeee2156fa57a2d79afe1f88"
+        }
+      }
+    },
+    {
+      "label": "mypy-first",
+      "returncode": 1,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/mypy-first/receipt.json",
+        "sha256": "b27285736cb674dfbdb575d6cfafe12eb0a28f31ed62be486b6ce7e14f862beb",
+        "bytes": 3433
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "f80cf69b6ba1163c0b44fa18eff41b6c7e45e939bc32fa452b186691a08a0fce"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "01b5552fca4a1b7d5db96c9f9900432c023da59cdeee2156fa57a2d79afe1f88"
+        }
+      }
+    },
+    {
+      "label": "actual-main-final",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/actual-main-final/receipt.json",
+        "sha256": "9efc83333f62e549bab34657408f24e3fed21496c8eb9bdbc99141db1a54cab5",
+        "bytes": 3518
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+        }
+      }
+    },
+    {
+      "label": "ruff-final",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/ruff-final/receipt.json",
+        "sha256": "b91610c35046dc36aebdacbd24a5d219c2cb08d45be31b3aeb413ea61b5893c1",
+        "bytes": 3400
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+        }
+      }
+    },
+    {
+      "label": "mypy-final",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/mypy-final/receipt.json",
+        "sha256": "8ec675d0ae246a58e9b8623eaf2530fe3b1e4e38be3948cffaa83e84234c7533",
+        "bytes": 3433
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+        }
+      }
+    },
+    {
+      "label": "package-boundary-final",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/package-boundary-final/receipt.json",
+        "sha256": "2843a04fe2b33d1f4f200cc56d4a0e2d86cb732d8e56ecde534ef9b9e9fee724",
+        "bytes": 3353
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+        }
+      }
+    },
+    {
+      "label": "tools-boundary-final",
+      "returncode": 0,
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/runs/tools-boundary-final/receipt.json",
+        "sha256": "fe79e3d2dc1781b7e495d87e117eca46006da7e28d727d5df34d7d93f178b14d",
+        "bytes": 3357
+      },
+      "full_maps": {
+        "runtime": {
+          "count": 214,
+          "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+        },
+        "tests": {
+          "count": 394,
+          "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+        },
+        "configs": {
+          "count": 316,
+          "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+        },
+        "tools": {
+          "count": 539,
+          "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+        }
+      }
+    }
+  ],
+  "original_nonzero_commands": 2,
+  "final_offline_controls": 15,
+  "prior_stage_controls": 12,
+  "actual_generation_embedding_http": 0,
+  "actual_cohort_started": false,
+  "executing_maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 394,
+      "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+    },
+    "configs": {
+      "count": 316,
+      "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "actual_ledger_sha256_only": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "normal_mock_cells": [
+    [
+      false,
+      "tool_only_v1",
+      true
+    ],
+    [
+      true,
+      "tool_only_v1",
+      true
+    ],
+    [
+      false,
+      "none",
+      true
+    ],
+    [
+      true,
+      "none",
+      true
+    ],
+    [
+      false,
+      "tool_only_v1",
+      false
+    ],
+    [
+      true,
+      "none",
+      false
+    ],
+    [
+      false,
+      "none",
+      false
+    ],
+    [
+      true,
+      "tool_only_v1",
+      false
+    ]
+  ],
+  "actual_original_fixture_artifacts": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce6/actual-root-controlled-flow.json",
+      "sha256": "92d0179513eba8d256514b3536ecb6534d333259e4f4392b190a3a9690322973",
+      "bytes": 59804
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce7/actual-root-controlled-flow.json",
+      "sha256": "0864d78c525fcde1478afedb511c5205a5244f33f9ea9b911b510e1263dde4a0",
+      "bytes": 60236
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce4/actual-root-controlled-flow.json",
+      "sha256": "175bb1a288cb087de9b80475d8a232c0c2f15c2a933a6b299eba50afcb7da35b",
+      "bytes": 64591
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce5/actual-root-controlled-flow.json",
+      "sha256": "bd07cc0621ea5ec2246fdfc97562453b69b91bbf73b12bcfbacacc5fca80a9a9",
+      "bytes": 67342
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce2/actual-root-controlled-flow.json",
+      "sha256": "e908cf6a5edde685f18d6f6a0bada5c10d21cb5b8d509c63e100ceb7ba6c541a",
+      "bytes": 44699
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce1/actual-root-controlled-flow.json",
+      "sha256": "4933f7b98774a2bb318f19002e9b0270c595741924905a5c5670304ba9c8f170",
+      "bytes": 57744
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce0/actual-root-controlled-flow.json",
+      "sha256": "2be86176659383a50256d99a99fdfc2f94009f63dc167346579eab5452f9464c",
+      "bytes": 58023
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_actual_fixed_flow_four_ce3/actual-root-controlled-flow.json",
+      "sha256": "3043260bc7b856c0d67fc042e11abddb6de449ce3161895543620067f0ffca18",
+      "bytes": 45129
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_controlled_constructor_fa0/constructor-failure-original.json",
+      "sha256": "5a8f2ee67e61310fc336875e48e9da005ba8d56be10f7fb7aee7c018ba797e6f",
+      "bytes": 1559
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_controlled_actual_transpo0/close-failure-before-manual-teardown.json",
+      "sha256": "3bdbe293f6a7d988ec0c001c8a9140e1dc1d7aeb01c00d84c8cbfb8b988f0f03",
+      "bytes": 37038
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/pytest-main-final/test_controlled_unknown_writer0/unknown-writer-original.json",
+      "sha256": "cbeef22159a067f50a909dc932bd0ca571419844a14daf90328d9059dddab6ca",
+      "bytes": 89578
+    }
+  ],
+  "historical_root_driver": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/fixed_flow.py",
+    "sha256": "0054788ab1cd2a5ab9ca8e83a3d8bcb6a724b7d4fba0615cb3647dea2efc2adf",
+    "bytes": 9591
+  },
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "literature": {
+    "paper_count": 17,
+    "project_reference_count": 19,
+    "verified_unique_files": 807,
+    "local_index_links": 159,
+    "catalog_sha256": "2c6d15aefdcb8c4a8a7f5201e69dbd02858fd10b7d1bb1b490a93d7a407d8c2e",
+    "index_sha256": "02b5ddc793b2570ec63f145dc33dcedef74a6913672f581b113bcdc799a6cf1d"
+  },
+  "limits": [
+    "Root implementation and Root review; not independent Judge",
+    "Mocks prove finite engineering only; no new model quality cohort",
+    "SDK resources hidden by a constructor throwing before returning are outside returned-client proof",
+    "Boundary completed does not imply writer success; pending/effect unconfirmed is retained without retry",
+    "Both fixed-flow delivery cells mechanically activate bounded read; later free Host behavior is separate",
+    "No four-arm admission, E0 quality upgrade, cross-model or generalization claim"
+  ],
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "local_review": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-fixed-flow-ownership-engineering/final-byte-review-first",
+    "result_sha256": "d3fadd937936ad75e7f01476af6562e69fef8c0f65dafb708c6678008bda86de",
+    "file_index_sha256": "02319636bee453956e41d03dbb521485905bf0e63c38ab40bc890d62a8746f50",
+    "seal_sha256": "d1c746410f0eba8b93bb00e00f8ea8c6b536908a361134d903f491eceb275d4e",
+    "indexed_files": 383,
+    "symlinks_with_metadata": 7,
+    "coverage": "383 indexed originals; index and later-written seal are separately hashed anchors"
+  },
+  "rollback_baseline": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "previous_published_checkpoint": "1270b856fcbffa8418ed4fcd0c8ee60c09b25792",
+  "all_original_requirement_fields_unchanged": true,
+  "original_history_not_replayed": true,
+  "full_plan_completed": false
+}
