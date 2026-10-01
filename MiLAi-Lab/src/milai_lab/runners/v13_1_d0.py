@@ -92,6 +92,14 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
         "source_backlinks": settings.get("memory_source_backlinks", "disabled"),
         "candidate_contract": settings.get("memory_candidate_contract"),
     }
+    support = settings.get("memory_support_contract", "legacy")
+    if type(support) is not str or support not in {"legacy", "direct_support_v1"}:
+        raise ValueError("V13_MEMORY_SUPPORT_CONTRACT_INVALID")
+    if support != "legacy":
+        if (_mutation_contract(settings) != "event_bound_v1"
+                or settings.get("memory_candidate_contract") != "read_handle_v1"):
+            raise ValueError("V13_DIRECT_SUPPORT_REQUIRES_EVENT_BOUND_READ_HANDLE")
+        options["support_contract"] = support
     if _mutation_contract(settings) != "event_bound_v1" and (
         options["source_backlinks"] != "disabled" or options["candidate_contract"] is not None
     ):
@@ -390,6 +398,8 @@ def prepare(
             {"memory_mutation_contract": mutation_contract}
             if mutation_contract != "legacy" else {}
         ),
+        **({"memory_support_contract": "direct_support_v1"}
+           if config.get("memory_support_contract") == "direct_support_v1" else {}),
         "transport": transport,
         "run_id": root.resolve().name,
         "source_sha256": _sources(),
@@ -587,6 +597,12 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                 already_added = any(
                     isinstance(row, HumanMessage) and row.id == key for row in prior
                 )
+                if service.support_contract == "direct_support_v1":
+                    service.bind_public_turn(public["session_id"], key,
+                                             source_receipt["source_ref"],
+                                             config_sha256=frozen["config_sha256"],
+                                             phase="resume" if already_added else "start")
+                    config["configurable"]["v13_support_config_sha256"] = frozen["config_sha256"]
                 if already_added and not snapshot.next:
                     messages = prior
                 else:

@@ -15,6 +15,7 @@ from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
 from milai_lab.memory.embeddings import normalized
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
+from milai_lab.memory.support_display import encode_field_support
 from milai_lab.methods.compact_material import compact_units
 from milai_lab.methods.contextual_memory.retrieval import IndexEntry, _bm25_scores, hybrid_order
 
@@ -111,6 +112,8 @@ class GroundedMemoryRecipe:
                                allocation="metadata first; feasible complete bodies by incremental "
                                "token cost (existing-order ties); remaining equal prefix shares; "
                                "explicit whole-unit omissions; version-bound prose prefixes")
+        if service.support_contract == "direct_support_v1":
+            self.policy["support_contract"] = service.support_contract
 
     def _index_binding(self) -> dict[str, Any]:
         return {"schema": "owner_bank_raw_index_v1", "owner": self.service.owner,
@@ -159,7 +162,8 @@ class GroundedMemoryRecipe:
         if self.observer is not None:
             self.observer(value)
 
-    def _record(self, row: dict[str, Any], *, delivery: bool = False) -> dict[str, Any]:
+    def _record(self, row: dict[str, Any], *, delivery: bool = False,
+                support_view: bool = False) -> dict[str, Any]:
         version = row.get("value") or {}
         result = {
             "id": row["id"],
@@ -188,6 +192,19 @@ class GroundedMemoryRecipe:
             ) if key in index}
             result["history_index"]["read_more"] = {"tool": "read_memory", "id": row["id"],
                 "view": "history", "cursor": result["history_index"].get("next_cursor")}
+        if self.service.support_contract == "direct_support_v1" and (delivery or support_view):
+            result["support_contract"] = self.service.support_contract
+            result["source_bindings"] = version.get("source_bindings")
+            result["field_support"] = None
+            if version.get("field_support"):
+                encoded, parents = encode_field_support(version["field_support"],
+                                                        version["source_bindings"])
+                result["field_support"] = encoded
+                if parents:
+                    result["field_support_parents"] = parents
+            result["lineage_scope"] = "field_map" if version.get("field_support") else (
+                "legacy_whole_version_set")
+            result["trigger_binding"] = version.get("trigger_binding")
         return result
 
     def _snapshot(self, current_source: str) -> tuple[list[dict[str, Any]], dict[str, Any], str]:
@@ -361,6 +378,9 @@ class GroundedMemoryRecipe:
                         "read_more": {"tool": "read_source", "source_ref": ref},
                     }
                 )
+                if self.service.support_contract == "direct_support_v1":
+                    units[-1]["tool_argument_ids"] = (
+                        self.service.argument_ids(event)["tool_argument_ids"])
             for memory_id in selected_row["record_ids"]:
                 if (memory_id in delivered_records
                         and self.service.mutation_contract == "event_bound_v1"):
@@ -417,7 +437,7 @@ class GroundedMemoryRecipe:
                         if not old["ok"]:
                             continue
                         historical.add(identity)
-                        old_record = self._record(old)
+                        old_record = self._record(old, support_view=True)
                         old_record.pop("candidate_handle", None)
                         self._light_semantic(old_record)
                         units.append({"unit_id": "history:" + memory_id + ":" + str(identity[1]),
@@ -563,6 +583,19 @@ class GroundedMemoryRecipe:
             if unit["type"] == "observation_field"
         )
         packet["candidate_count"] = len(identities)
+        if self.service.support_contract == "direct_support_v1":
+            packet["support_contract"] = {
+                "profile": "direct_support_v1",
+                "trigger": "actual public Human authorizes maintenance; not supporting evidence",
+                "selection": "explicit actual leaf IDs; whole-field reuse from same read candidate",
+                "visibility": "metadata is not a full read; preserve shown ranges/omissions",
+                "object_ref_argument": "string id in companion tool_argument_ids; "
+                "Source DTO unchanged",
+                "field_support_reference": "record_source_indices selects this record's full "
+                "source_bindings after ordinary binding expansion (historical unit bindings also "
+                "apply); reused_from_index selects its literal field_support_parents table. "
+                "Use decoded real Source IDs for tools, never indices.",
+            }
         if self.material_profile == "compact_v1":
             packet["items"], tables = compact_units(units)
             packet.update(tables)
@@ -1134,11 +1167,26 @@ class GroundedMemoryRecipe:
         ):
             raise ValueError("V13_WRITER_ACTUAL_BOUNDARY_REQUIRED")
         key = "maintenance:" + _hash([session, turn_id])
+        direct = self.service.support_contract == "direct_support_v1"
+        trigger = None
+        if direct:
+            cfg = config.get("configurable", {})
+            if (cfg.get("user_id") != self.service.owner or cfg.get("v13_session") != session
+                    or cfg.get("v13_turn_id") != turn_id
+                    or not cfg.get("v13_support_config_sha256")):
+                raise ValueError("V13_WRITER_PUBLIC_TRIGGER_REQUIRED")
+            trigger = self.service.public_turn(session, message_id=turn_id,
+                config_sha256=str(cfg["v13_support_config_sha256"]))
+            if trigger is None:
+                raise ValueError("V13_WRITER_PUBLIC_TRIGGER_REQUIRED")
         old = self.service.store.get(self.namespace, key)
         if old is not None:
+            if direct and old.value.get("trigger_binding") != trigger:
+                raise ValueError("V13_WRITER_PUBLIC_TRIGGER_CHANGED")
             return {**old.value, "replayed": True}
         # A successful Host proposal sourced in this user message suppresses redundant maintenance.
-        accepted = self.service.semantic_receipts(user_ref)
+        accepted = (self.service.semantic_receipts_for_turn(session) if direct
+                    else self.service.semantic_receipts(user_ref))
         if accepted:
             receipt = {
                 "status": "skipped_host_committed",
@@ -1146,6 +1194,8 @@ class GroundedMemoryRecipe:
                 "host_receipts": accepted,
                 "effect": "none",
             }
+            if direct:
+                receipt.update(trigger_binding=trigger, whole_turn_coverage="unchecked")
             self.service.store.put(self.namespace, key, receipt, index=False)
             self._emit({"event": "v13_semantic_boundary", **receipt})
             return receipt
@@ -1158,6 +1208,9 @@ class GroundedMemoryRecipe:
             "batch_atomic": False,
             "receipts": [],
         }
+        if direct:
+            pending.update(trigger_binding=trigger, whole_turn_coverage="unchecked",
+                           attempted_actions=[])
         self.service.store.put(self.namespace, key, pending, index=False)
         self.service.bind_source_boundary(session, turn_id + ":closed", source_refs)
         tools = [
@@ -1173,6 +1226,16 @@ class GroundedMemoryRecipe:
             "actual_events": [self.service.source(ref) for ref in source_refs],
             "candidate_packet": existing_packet.value["packet"] if existing_packet else {},
         }
+        if direct:
+            request.update(trigger_binding=trigger,
+                source_argument_ids=[self.service.argument_ids(event)
+                                     for event in request["actual_events"]],
+                support_policy="Trigger is authorization, not support. Select actual direct leaves "
+                "for content/scope/basis/kind via field_support. Explicit reuse_support_from must "
+                "be the same candidate_handle and an exactly equal whole field; select all "
+                "original leaves. Changed fields need explicit leaf selection. "
+                "Prefix/metadata is not a full "
+                "read. Source.object_ref is evidence DTO; tool object_ref uses its string id.")
         messages: list[Any] = [
             SystemMessage(
                 content=instruction + "\nMake at most six direct mutations or explicitly decline. "
@@ -1235,6 +1298,9 @@ class GroundedMemoryRecipe:
                         )
                     else:
                         tool = next(tool for tool in tools if tool.name == call["name"])
+                        if direct:
+                            pending["attempted_actions"].append(call)
+                            self.service.store.put(self.namespace, key, pending, index=False)
                         result = tool.invoke(call, config=config)
                         receipt = json.loads(result.content)
                         if not receipt.get("ok"):

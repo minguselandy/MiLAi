@@ -137,6 +137,7 @@ class MemoryService:
         mutation_contract: str = "legacy",
         source_backlinks: str = "disabled",
         candidate_contract: str | None = None,
+        support_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -152,6 +153,7 @@ class MemoryService:
         if type(source_backlinks) is not str or source_backlinks not in {"disabled", "enabled"}:
             raise ValueError("V13_SOURCE_BACKLINKS_INVALID")
         self.source_backlinks = source_backlinks
+        explicit_candidate_contract = candidate_contract
         if candidate_contract is None:
             candidate_contract = (
                 "read_handle_v1"
@@ -162,6 +164,14 @@ class MemoryService:
         }:
             raise ValueError("V13_CANDIDATE_CONTRACT_INVALID")
         self.candidate_contract = candidate_contract
+        if (type(support_contract) is not str
+                or support_contract not in {"legacy", "direct_support_v1"}):
+            raise ValueError("V13_MEMORY_SUPPORT_CONTRACT_INVALID")
+        if support_contract != "legacy" and (
+            mutation_contract != "event_bound_v1" or explicit_candidate_contract != "read_handle_v1"
+        ):
+            raise ValueError("V13_DIRECT_SUPPORT_REQUIRES_EVENT_BOUND_READ_HANDLE")
+        self.support_contract = support_contract
         if type(receipt_profile) is not str or receipt_profile not in RECEIPT_PROFILES:
             raise ValueError("V13_MEMORY_RECEIPT_PROFILE_INVALID")
         self.receipt_profile = receipt_profile
@@ -180,6 +190,8 @@ class MemoryService:
         self.projections_namespace = (*namespace, "v13_2_projections")
         self.backlinks_namespace = (*namespace, "v13_2_backlinks")
         self._source_boundaries: dict[str, tuple[str, list[str]]] = {}
+        self.turns_namespace = (*namespace, "v13_2_public_turns")
+        self._public_turns: dict[str, dict[str, Any]] = {}
         self.lock_path.parent.mkdir(parents=True, exist_ok=True)
 
     @staticmethod
@@ -219,6 +231,74 @@ class MemoryService:
                 boundary_id, list(dict.fromkeys([*refs, *source_refs]))
             )
 
+    def bind_public_turn(
+        self, session: str, message_id: str, source_ref: str, *,
+        config_sha256: str, phase: str,
+    ) -> dict[str, Any]:
+        """Trusted actual Human binding; stable identity across explicit process resume."""
+        if (self.support_contract != "direct_support_v1" or not session or not message_id
+                or phase not in {"start", "resume"} or not isinstance(config_sha256, str)
+                or len(config_sha256) != 64
+                or any(c not in "0123456789abcdef" for c in config_sha256)):
+            raise ValueError("V13_PUBLIC_TURN_BINDING_INVALID")
+        with self._locked():
+            source = self.source(source_ref)
+            if (source is None or source["session"] != session or source["role"] != "user"
+                    or source_ref != self.event_id(session, message_id, "user")):
+                raise ValueError("V13_PUBLIC_TURN_SOURCE_MISMATCH")
+            bound = {"owner": self.owner, "bank": list(self.namespace), "session": session,
+                     "message_id": message_id, "source_ref": source_ref,
+                     "content_sha256": source["content_sha256"],
+                     "config_sha256": config_sha256, "support_contract": self.support_contract,
+                     "origin_phase": "start"}
+            bound["trigger_ref"] = "turn-" + _hash(bound)[:24]
+            key = _hash([session, message_id])
+            prior = self.store.get(self.turns_namespace, key)
+            if phase == "resume" and prior is None:
+                raise ValueError("V13_PUBLIC_TURN_RESUME_MISSING")
+            if prior is not None and prior.value.get("binding") != bound:
+                raise ValueError("V13_PUBLIC_TURN_IDENTITY_CHANGED")
+            self.store.put(self.turns_namespace, key,
+                           {"binding": bound, "last_binding_phase": phase}, index=False)
+            self._public_turns[session] = bound
+            return cast(dict[str, Any], json.loads(_json(bound)))
+
+    def public_turn(
+        self, session: str, *, message_id: str | None = None, config_sha256: str | None = None,
+    ) -> dict[str, Any] | None:
+        """No discovery/latest-event fallback; a reopen needs explicit trusted rebind."""
+        bound = self._public_turns.get(session)
+        if bound is None or (message_id is not None and message_id != bound["message_id"]) or (
+            config_sha256 is not None and config_sha256 != bound["config_sha256"]
+        ):
+            return None
+        item = self.store.get(self.turns_namespace, _hash([session, bound["message_id"]]))
+        source = self.source(bound["source_ref"])
+        if (item is None or item.value.get("binding") != bound or source is None
+                or source["role"] != "user" or source["session"] != session
+                or source["content_sha256"] != bound["content_sha256"]):
+            return None
+        return cast(dict[str, Any], json.loads(_json(bound)))
+
+    def semantic_receipts_for_turn(self, session: str) -> list[dict[str, Any]]:
+        """Actual successful Host semantic commits, not whole-turn coverage."""
+        bound = self.public_turn(session)
+        if bound is None:
+            return []
+        return [entry["receipt"] for row in self._rows(self.namespace)
+                if row["value"].get("_v13_1", {}).get("owner") == self.owner
+                for entry in row["value"].get("_v13_1", {}).get("proposals", {}).values()
+                if entry["receipt"].get("ok") and entry["receipt"].get("effect") == "memory_only"
+                and entry["raw"].get("trigger_binding") == bound]
+
+    def argument_ids(self, source: dict[str, Any]) -> dict[str, Any]:
+        """Literal companion to this captured DTO; never changes Source or selects a source."""
+        ref = source.get("object_ref")
+        return {"source_ref": source["event_id"], "role": source["role"],
+                "content_sha256": source["content_sha256"],
+                "tool_argument_ids": {"object_ref": ref["id"]} if ref else {},
+                "body_visibility": "metadata_only", "content_verification": "unchecked"}
+
     def boundary_sources(self, session: str) -> list[str]:
         """Only explicitly bound current events; history cannot fill a missing binding."""
         with self._locked():
@@ -240,6 +320,8 @@ class MemoryService:
                 members.append({"source_ref": ref, "role": event["role"],
                                 "content_sha256": event["content_sha256"],
                                 "origin": event["origin"], "observed_at": event["observed_at"]})
+                if self.support_contract == "direct_support_v1":
+                    members[-1]["tool_argument_ids"] = self.argument_ids(event)["tool_argument_ids"]
             value = {"owner": self.owner, "boundary_ref":
                      "boundary-" + _hash([self.namespace, session, boundary_id])[:24]
                      if boundary_id else None, "members": members,
@@ -447,10 +529,14 @@ class MemoryService:
         self, session: str, proposal_id: str, candidate_handle: str,
         semantic_patch: dict[str, Any], source_refs: list[str] | None = None, *,
         operation: str = "revise",
+        field_support: dict[str, Any] | None = None,
+        trigger_binding: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Small semantic patch over the version actually read; observed literals are immutable."""
         requested = {"candidate_handle": candidate_handle, "semantic_patch": semantic_patch,
                      "source_refs": source_refs, "operation": operation}
+        if self.support_contract == "direct_support_v1":
+            requested.update(field_support=field_support, trigger_binding=trigger_binding)
 
         def rejected(reason: str) -> dict[str, Any]:
             identity = _hash([session, proposal_id])
@@ -462,11 +548,18 @@ class MemoryService:
                 })
 
         if source_refs is None:
+            if self.support_contract == "direct_support_v1":
+                return rejected("source_selection_required")
             source_refs = self.boundary_sources(session)
             if len(source_refs) != 1:
                 return rejected("source_selection_required")
 
-        bound = self.candidate(candidate_handle)
+        try:
+            bound = self.candidate(candidate_handle)
+        except ValueError:
+            if self.support_contract != "direct_support_v1":
+                raise
+            return rejected("candidate_support_integrity_failed")
         if bound is None:
             return rejected("candidate_handle_required_or_invalid")
         if (operation not in {"revise", "supersede", "no_change"}
@@ -487,7 +580,60 @@ class MemoryService:
                     "basis": semantic_patch.get("basis", version["basis"]),
                     "fields": {}, "object_ref": None, "patch_operation": operation,
                     "requested": requested}
+        if self.support_contract == "direct_support_v1":
+            proposal.update(field_support=field_support, trigger_binding=trigger_binding)
         return self.commit(session, proposal_id, proposal)
+
+    def _field_lineage(
+        self, raw: dict[str, Any], metadata: dict[str, Any] | None,
+    ) -> tuple[str | None, dict[str, Any]]:
+        """Validate model-selected leaf sets and explicit byte-equal whole-field reuse."""
+        selection = raw.get("field_support")
+        fields = {"content", "scope", "basis", "kind"}
+        if not isinstance(selection, dict) or selection.keys() != fields:
+            return "field_support_required", {}
+        result: dict[str, Any] = {}
+        for field in sorted(fields):
+            entry = selection[field]
+            if not isinstance(entry, dict):
+                return "field_support_invalid", {}
+            reused = None
+            attribution = "model_selected"
+            if entry.keys() == {"source_refs"}:
+                refs = entry["source_refs"]
+            elif entry.keys() == {"reuse_support_from"}:
+                handle = entry["reuse_support_from"]
+                bound = self.candidate(handle)
+                if (metadata is None or bound is None or handle != raw.get("candidate_handle")
+                        or bound["record_id"] != raw.get("id")
+                        or bound["revision"] != metadata["revision"]):
+                    return "field_support_candidate_mismatch", {}
+                version = metadata["current"]
+                if field not in version or _json(raw[field]) != _json(version[field]):
+                    return "field_support_changed_field", {}
+                old = version.get("field_support", {}).get(field)
+                refs = old["source_refs"] if old else self._version_source_refs(version)
+                old_bindings = old["source_bindings"] if old else version.get("source_bindings")
+                if self._source_bindings(refs) != old_bindings:
+                    return "field_support_source_changed", {}
+                attribution = "reused_equal_whole_field"
+                reused = {"candidate_handle": handle, "record_id": bound["record_id"],
+                          "revision": bound["revision"], "version_sha256": bound["version_sha256"],
+                          "field_sha256": _hash(version[field]),
+                          "lineage_scope": "field_map" if old else "legacy_whole_version_set"}
+            else:
+                return "field_support_invalid", {}
+            if (not isinstance(refs, list) or not refs or not all(isinstance(r, str) for r in refs)
+                    or len(set(refs)) != len(refs) or not set(refs) <= set(raw["source_refs"])):
+                return "field_support_selected_leaves_required", {}
+            bindings = self._source_bindings(refs)
+            if bindings is None:
+                return "source_not_found_or_not_owned", {}
+            result[field] = {"source_refs": refs, "source_bindings": bindings,
+                             "attribution": attribution, "content_verification": "unchecked"}
+            if reused is not None:
+                result[field]["reused_from"] = reused
+        return None, result
 
     def semantic_receipts(self, source_ref: str) -> list[dict[str, Any]]:
         """Successful semantic submissions citing one owner-checked actual source."""
@@ -940,6 +1086,8 @@ class MemoryService:
     def commit(self, session: str, proposal_id: str, proposal: dict[str, Any]) -> dict[str, Any]:
         """Commit a raw Host proposal; no semantic repair or fabricated result projection."""
         raw = json.loads(_json(proposal))
+        if self.support_contract == "direct_support_v1" and "trigger_binding" not in raw:
+            raw["trigger_binding"] = self.public_turn(session)
         if not session or not proposal_id:
             raise ValueError("V13_PROPOSAL_IDENTITY_REQUIRED")
         identity = _hash([session, proposal_id])
@@ -949,7 +1097,12 @@ class MemoryService:
         with self._locked():
             if (self.mutation_contract == "event_bound_v1" and raw.get("action") == "update"
                     and self.candidate_contract != "legacy_query_v1"):
-                bound = self.candidate(raw.get("candidate_handle"))
+                try:
+                    bound = self.candidate(raw.get("candidate_handle"))
+                except ValueError:
+                    if self.support_contract != "direct_support_v1":
+                        raise
+                    bound = None
                 if bound is None:
                     raw["binding_error"] = "candidate_handle_required_or_invalid"
                 elif ((raw.get("id") is not None and raw["id"] != bound["record_id"])
@@ -982,8 +1135,21 @@ class MemoryService:
                 return self._reject(
                     identity + ":" + _hash(raw), raw, target, "proposal_id_conflict", None
                 )
-            reason, source = self._validate(raw)
+            lineage: dict[str, Any] = {}
+            try:
+                reason, source = self._validate(raw)
+                if reason is None and self.support_contract == "direct_support_v1":
+                    trigger = self.public_turn(session)
+                    if trigger is None or raw.get("trigger_binding") != trigger:
+                        reason = "public_turn_required_or_mismatched"
+                    elif raw.get("patch_operation") != "no_change":
+                        reason, lineage = self._field_lineage(raw, metadata)
+            except ValueError:
+                if self.support_contract != "direct_support_v1":
+                    raise
+                reason, source = "source_integrity_failed", None
             if (reason is None and self.mutation_contract == "event_bound_v1"
+                    and self.support_contract == "legacy"
                     and raw.get("action") in {"create", "update"}
                     and raw.get("patch_operation") != "no_change"
                     and not set(raw["source_refs"]).intersection(
@@ -1075,7 +1241,11 @@ class MemoryService:
                 if raw.get("patch_operation") == "supersede":
                     version["supersedes_revision"] = revision
                 receipt.update(source_refs=raw["source_refs"], source_bindings=bindings,
-                               mutation_contract=self.mutation_contract)
+                                mutation_contract=self.mutation_contract)
+            if self.support_contract == "direct_support_v1":
+                for value in (version, receipt):
+                    value.update(support_contract=self.support_contract,
+                                 trigger_binding=raw["trigger_binding"], field_support=lineage)
             if self._uses_explicit_receipt(raw, source):
                 # This verifies only two literal claims against a historical
                 # observation. Notes, quotations and general prose are unchecked;

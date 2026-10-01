@@ -32,6 +32,18 @@ SemanticPatch = Annotated[dict[str, Any], WithJsonSchema({
     "additionalProperties": False,
 })]
 
+FieldSupport = Annotated[dict[str, Any], WithJsonSchema({
+    "type": "object",
+    "properties": {field: {"oneOf": [
+        {"type": "object", "properties": {"source_refs": {
+            "type": "array", "items": {"type": "string"}, "minItems": 1,
+        }}, "required": ["source_refs"], "additionalProperties": False},
+        {"type": "object", "properties": {"reuse_support_from": {"type": "string"}},
+         "required": ["reuse_support_from"], "additionalProperties": False},
+    ]} for field in ("content", "scope", "basis", "kind")},
+    "required": ["content", "scope", "basis", "kind"], "additionalProperties": False,
+})]
+
 
 def create_service_tools(
     service: MemoryService, *, replay_requested: bool = False,
@@ -48,6 +60,16 @@ def create_service_tools(
         if cfg.get("user_id") != service.owner or not cfg.get("v13_session"):
             raise ValueError("V13_MEMORY_TOOL_SCOPE_MISMATCH")
         return str(cfg["v13_session"])
+
+    def trigger_for(config: RunnableConfig) -> dict[str, Any] | None:
+        cfg = config.get("configurable", {})
+        if not cfg.get("v13_turn_id") or not cfg.get("v13_support_config_sha256"):
+            return None
+        try:
+            return service.public_turn(session_for(config), message_id=str(cfg["v13_turn_id"]),
+                                       config_sha256=str(cfg["v13_support_config_sha256"]))
+        except ValueError:
+            return None
 
     def message(name: str, call_id: str, receipt: dict[str, Any]) -> ToolMessage:
         if (service.mutation_contract == "event_bound_v1"
@@ -92,6 +114,7 @@ def create_service_tools(
         content_format: str | None = None,
         source_refs: list[str] | None = None,
         candidate_handle: str | None = None,
+        field_support: FieldSupport | None = None,
     ) -> ToolMessage:
         """Save a proposed memory or revise a discovered record. Prose is always unchecked.
 
@@ -122,6 +145,9 @@ def create_service_tools(
         exact = service.mutation_contract == "event_bound_v1"
         if exact:
             requested.update(source_refs=source_refs, candidate_handle=candidate_handle)
+        direct = service.support_contract == "direct_support_v1"
+        if direct:
+            requested.update(field_support=field_support, trigger_binding=trigger_for(config))
         if replay_requested:
             prior_receipt = service.replay_requested(session, tool_call_id, requested)
             if prior_receipt is not None:
@@ -129,11 +155,16 @@ def create_service_tools(
         binding_error = None
         if exact:
             if source_refs is None:
-                source_refs = (
-                    [source_ref] if source_ref is not None else service.boundary_sources(session)
-                )
-                if len(source_refs) != 1:
+                if direct:
+                    source_refs = []
                     binding_error = "source_selection_required"
+                else:
+                    source_refs = (
+                        [source_ref] if source_ref is not None
+                        else service.boundary_sources(session)
+                    )
+                    if len(source_refs) != 1:
+                        binding_error = "source_selection_required"
             if source_ref is None:
                 source_ref = source_refs[0] if source_refs else ""
             if action == "update":
@@ -141,7 +172,12 @@ def create_service_tools(
                     if (service.candidate_contract == "id_revision_v1" and candidate_handle is None
                             and id is not None and expected_revision is not None):
                         candidate_handle = service.candidate_for_version(id, expected_revision)
-                    bound = service.candidate(candidate_handle)
+                    try:
+                        bound = service.candidate(candidate_handle)
+                    except ValueError:
+                        if not direct:
+                            raise
+                        bound = None
                     if bound is None:
                         binding_error = "candidate_handle_required_or_invalid"
                     elif (
@@ -201,6 +237,9 @@ def create_service_tools(
         if exact:
             proposal.update(source_refs=source_refs, candidate_handle=candidate_handle,
                             binding_error=binding_error)
+        if direct:
+            proposal.update(field_support=field_support,
+                            trigger_binding=requested["trigger_binding"])
         receipt = service.commit(session, tool_call_id, proposal)
         return message("manage_memory", tool_call_id, receipt)
 
@@ -306,6 +345,7 @@ def create_service_tools(
         tool_call_id: Annotated[str, InjectedToolCallId],
         source_refs: list[str] | None = None,
         operation: Literal["revise", "supersede", "no_change"] = "revise",
+        field_support: FieldSupport | None = None,
     ) -> ToolMessage:
         """Patch an explicitly selected read-time candidate; preserve other semantic metadata.
 
@@ -322,13 +362,20 @@ def create_service_tools(
         session = session_for(config)
         requested = {"candidate_handle": candidate_handle, "semantic_patch": semantic_patch,
                      "source_refs": source_refs, "operation": operation}
+        direct = service.support_contract == "direct_support_v1"
+        if direct:
+            requested.update(field_support=field_support, trigger_binding=trigger_for(config))
         if replay_requested:
             prior = service.replay_requested(session, tool_call_id, requested)
             if prior is not None:
                 return message("revise_memory", tool_call_id, prior)
+        support_args: dict[str, Any] = (
+            {"field_support": field_support, "trigger_binding": requested["trigger_binding"]}
+            if direct else {})
         return message("revise_memory", tool_call_id, service.revise(
             session, tool_call_id, candidate_handle, semantic_patch, source_refs,
             operation=operation,
+            **support_args,
         ))
 
     async def arevise_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
@@ -443,6 +490,8 @@ def create_service_tools(
 
     explicit = service.receipt_contract == "explicit_receipt_v1"
     hidden = ["run_manager", "callbacks", "config"]
+    if service.support_contract == "legacy":
+        hidden.append("field_support")
     if not explicit:
         hidden.append("content_format")
     if service.mutation_contract == "legacy":
@@ -557,6 +606,44 @@ def create_service_tools(
             "An object ref may be taken from the exactly selected actual source.",
         ).replace("Refs are discovered internally.",
                   "An object ref may be taken from the exactly selected actual source.")
+    revise_tool = None
+    if (service.mutation_contract == "event_bound_v1"
+            and service.candidate_contract == "read_handle_v1"):
+        revise_tool = StructuredTool.from_function(
+            revise_memory, coroutine=arevise_memory, name="revise_memory",
+            args_schema=create_schema_from_function("revise_memory", revise_memory,
+                filter_args=["run_manager", "callbacks", "config"]
+                + (["field_support"] if service.support_contract == "legacy" else [])),
+        )
+    if service.support_contract == "direct_support_v1":
+        support_description = (
+            "Direct support contract: the actual public turn is a trusted trigger, not evidence. "
+            "Explicitly select nonempty source_refs of real supporting leaves "
+            "(current or historical); "
+            "omission never chooses a current/latest source. field_support must contain content, "
+            "scope, basis and kind: each value is exactly {'source_refs':[actual leaf IDs]} or "
+            "{'reuse_support_from':candidate_handle}. Reuse requires that same actually read "
+            "candidate and an exactly equal whole field; include all its original field leaf IDs "
+            "in outer source_refs. Legacy versions lacking field maps can reuse only their entire "
+            "legacy_whole_version_set. Changed fields require explicitly selected real leaves. "
+            "Current CAS and source owner/role/hash must still match. Metadata/prefix delivery "
+            "does "
+            "not establish full-body reading or entailment; use the existing explicit read tools "
+            "when needed. All prose is unchecked. scope retains original applicability limits; "
+            "user_statement uses user leaves, tool_observation uses tool leaves, mixed roles need "
+            "plan/inference. Tool object_ref is the STRING id from the exactly selected Source's "
+            "tool_argument_ids companion, never its object_ref DTO. Literal receipt constraints "
+            "and consumption dedup remain; a memory commit grants no business action authority. "
+            "Rejected raw actions remain pending; never silently repair them."
+        )
+        manage_tool.description = support_description + (
+            "\n" + manage_tool.description[manage_tool.description.index("Explicit"):]
+            if explicit and "Explicit" in manage_tool.description else "")
+        if revise_tool is not None:
+            revise_tool.description = support_description + (
+                " semantic_patch changes only content/scope/basis/kind; scope merges named keys. "
+                "no_change creates no revision. Observation fields are immutable."
+            )
     return (
         manage_tool,
         *([StructuredTool.from_function(
@@ -575,10 +662,7 @@ def create_service_tools(
             if service.mutation_contract == "event_bound_v1" else []
         ),
         *(
-            [StructuredTool.from_function(revise_memory, coroutine=arevise_memory,
-                                          name="revise_memory")]
-            if service.mutation_contract == "event_bound_v1"
-            and service.candidate_contract == "read_handle_v1" else []
+            [revise_tool] if revise_tool is not None else []
         ),
         *(
             StructuredTool.from_function(function, coroutine=coroutine, name=name,
