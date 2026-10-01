@@ -15,6 +15,7 @@ from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
 from milai_lab.memory.embeddings import normalized
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
+from milai_lab.methods.compact_material import compact_units
 from milai_lab.methods.contextual_memory.retrieval import IndexEntry, _bm25_scores, hybrid_order
 
 HEADER = "[Archived evidence; observations are historical and prose is unchecked]\n"
@@ -63,12 +64,18 @@ class GroundedMemoryRecipe:
         *,
         embeddings: Any = None,
         representation: str = "milai",
+        material_profile: str = "full_v1",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if representation not in {"raw", "receipt", "milai"}:
             raise ValueError("V13_PACKET_POLICY_INVALID")
+        if material_profile not in {"full_v1", "compact_v1"}:
+            raise ValueError("V13_PACKET_MATERIAL_PROFILE_INVALID")
+        if material_profile != "full_v1" and service.mutation_contract != "event_bound_v1":
+            raise ValueError("V13_COMPACT_MATERIAL_REQUIRES_EVENT_BOUND")
         self.service, self.token_count, self.embeddings = service, token_count, embeddings
         self.representation, self.observer = representation, observer
+        self.material_profile = material_profile
         self.namespace = (*service.namespace, "v13_2_recipe")
         self.policy = {
             **POLICY,
@@ -78,6 +85,14 @@ class GroundedMemoryRecipe:
         }
         if service.mutation_contract == "event_bound_v1":
             self.policy["history_discovery"] = "actual revisions; bounded menus; visible coverage"
+        if material_profile != "full_v1":
+            self.policy.update(material_profile=material_profile,
+                               unit_order="existing selected record identity order; "
+                               "group already selected current/historical units; "
+                               "then fields/sources",
+                               allocation="metadata first; feasible complete bodies by incremental "
+                               "token cost (existing-order ties); remaining equal prefix shares; "
+                               "explicit whole-unit omissions; version-bound prose prefixes")
 
     def _emit(self, value: dict[str, Any]) -> None:
         if self.observer is not None:
@@ -486,6 +501,19 @@ class GroundedMemoryRecipe:
             if unit["type"] == "observation_field"
         )
         packet["candidate_count"] = len(identities)
+        if self.material_profile == "compact_v1":
+            packet["items"], tables = compact_units(units)
+            packet.update(tables)
+            packet.update(material_profile="compact_v1", binding_reference=
+                          "0-based *_index/indices select *_table; "
+                          "record_id_index->id; scope_index->scope; "
+                          "source_binding_indices->full source_bindings; "
+                          "source_binding_index restores source_ref/source_hash "
+                          "(content_sha256->source_hash), plus role only for source units; "
+                          "in read_more it restores source_ref only; "
+                          "source_refs_from_bindings restores ordered source_refs; "
+                          "shared_defaults record/history_index/source_match fills absent fields; "
+                          "absent unit_id: record:<id> or history:<id>:<revision>")
         packet["packet_hash"] = _hash(packet)
         return packet, HEADER + _json(packet)
 
@@ -496,6 +524,11 @@ class GroundedMemoryRecipe:
         material_budget: int = 2048,
         inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
     ) -> tuple[list[dict[str, Any]], list[str]]:
+        if self.material_profile == "compact_v1":
+            return self._fit_compact(units, revision, source_index,
+                                     request_ref=request_ref, query_kind=query_kind,
+                                     material_budget=material_budget, inventory=inventory,
+                                     selection_count=selection_count)
         chosen: list[dict[str, Any]] = []
         omitted, delivered = [], set()
         candidates: set[str] = set()
@@ -563,6 +596,121 @@ class GroundedMemoryRecipe:
             delivered.add(key)  # only actually delivered cards are deduplicated
             if identity is not None:
                 candidates.add(identity)
+        return chosen, omitted
+
+    def _fit_compact(
+        self, units: list[dict[str, Any]], revision: str,
+        source_index: dict[str, Any] | None = None, *,
+        request_ref: str | None = None, query_kind: str = "ordinary_public",
+        material_budget: int = 2048,
+        inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
+    ) -> tuple[list[dict[str, Any]], list[str]]:
+        """Allocate within selected units; neither rank nor source/record selection changes."""
+        chosen: list[dict[str, Any]] = []
+        originals: list[dict[str, Any]] = []
+        omitted: list[str] = []
+        delivered: set[str] = set()
+        candidates: set[str] = set()
+
+        def cost(values: list[dict[str, Any]]) -> int:
+            coverage = self._coverage(units, values, request_ref=request_ref,
+                                      inventory=inventory, selection_count=selection_count)[0]
+            return self.token_count(self._packet(values, revision, source_index,
+                                    request_ref=request_ref, query_kind=query_kind,
+                                    coverage=coverage if source_index is not None else None)[1])
+
+        def prefix(unit: dict[str, Any], length: int) -> dict[str, Any]:
+            value: dict[str, Any] = json.loads(_json(unit))
+            field = "excerpt" if value["type"] == "source" else "content"
+            target = value if field == "excerpt" else value.get("record", {})
+            if field in target and length < len(target[field]):
+                body = target[field]
+                target["content_truncated"] = True
+                if field == "excerpt" or not value.get("version_sha256"):
+                    target["full_content_sha256"] = hashlib.sha256(body.encode()).hexdigest()
+                target[field] = body[:length]
+                if field == "excerpt":
+                    value["range"][1] = value["range"][0] + length
+            if value["type"] == "observation_field":
+                value.update(omitted_candidate_count=value["candidate_count"],
+                             candidate_set_hash=_hash(value["candidates"]), candidates=[],
+                             read_more={"tool": "read_observations",
+                                        "object_id": value["object_ref"]["id"]})
+            return value
+
+        ordered: list[dict[str, Any]] = []
+        grouped: set[str] = set()
+        for unit in units:
+            if unit["type"] in {"record", "historical_record"}:
+                memory_id = unit["record"]["id"]
+                if memory_id not in grouped:
+                    ordered.extend(member for member in units
+                                   if member["type"] in {"record", "historical_record"}
+                                   and member["record"]["id"] == memory_id)
+                    grouped.add(memory_id)
+            else:
+                ordered.append(unit)
+
+        for unit in ordered:
+            key = unit["unit_id"]
+            if key in delivered:
+                continue
+            identity = ("record:" + unit["record"]["id"]
+                        if unit["type"] in {"record", "historical_record"} else
+                        "object:" + unit["object_ref"]["id"]
+                        if unit["type"] == "observation_field" else None)
+            if (identity is not None and identity not in candidates
+                    and len(candidates) >= POLICY["max_records"]):
+                omitted.append(key)
+                continue
+            value = prefix(unit, 0)
+            if cost([*chosen, unit]) < cost([*chosen, value]):
+                value = json.loads(_json(unit))
+            if cost([*chosen, value]) > material_budget:
+                omitted.append(key)
+                continue
+            chosen.append(value)
+            originals.append(unit)
+            delivered.add(key)
+            if identity is not None:
+                candidates.add(identity)
+
+        def replace(position: int, value: dict[str, Any]) -> list[dict[str, Any]]:
+            return [*chosen[:position], value, *chosen[position + 1:]]
+
+        while True:
+            before = cost(chosen)
+            upgrades = [(cost(replace(position, unit)) - before, position)
+                        for position, unit in enumerate(originals)
+                        if chosen[position] != unit
+                        and cost(replace(position, unit)) <= material_budget]
+            if not upgrades:
+                break
+            _, position = min(upgrades)
+            chosen[position] = json.loads(_json(originals[position]))
+
+        remaining = [position for position, unit in enumerate(originals)
+                     if chosen[position] != unit and (unit["type"] == "source"
+                     or "content" in unit.get("record", {}))]
+        for ordinal, position in enumerate(remaining):
+            unit = originals[position]
+            before = cost(chosen)
+            target_budget = before + (material_budget - before) // (len(remaining) - ordinal)
+
+            if cost(replace(position, unit)) <= target_budget:
+                chosen[position] = json.loads(_json(unit))
+                continue
+            field = "excerpt" if unit["type"] == "source" else "content"
+            body = (unit.get(field, "") if field == "excerpt"
+                    else unit.get("record", {}).get(field, ""))
+            low, high = 0, len(body)
+            while low < high:
+                middle = (low + high + 1) // 2
+                if cost(replace(position, prefix(unit, middle))) <= target_budget:
+                    low = middle
+                else:
+                    high = middle - 1
+            chosen[position] = prefix(unit, low)
         return chosen, omitted
 
     def _request_ref(self, session: str, turn_id: str) -> str:

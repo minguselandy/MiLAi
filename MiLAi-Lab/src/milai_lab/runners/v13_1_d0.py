@@ -102,6 +102,13 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
 def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
     reader = settings.get("memory_reader_policy")
     formation = settings.get("memory_formation_policy", "none")
+    material_profile = settings.get("memory_material_profile", "full_v1")
+    if material_profile not in {"full_v1", "compact_v1"}:
+        raise ValueError("V13_PACKET_MATERIAL_PROFILE_INVALID")
+    if material_profile != "full_v1" and (
+        reader != "bounded_evidence_v1" or _mutation_contract(settings) != "event_bound_v1"
+    ):
+        raise ValueError("V13_COMPACT_MATERIAL_REQUIRES_BOUND_READER")
     if reader is None and formation == "none" and _mutation_contract(settings) != "event_bound_v1":
         return None
     if (
@@ -126,6 +133,7 @@ def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
         raise ValueError("V13_RECIPE_EMBEDDING_CONTRACT_REQUIRED")
     return {
         **GROUNDED_POLICY,
+        **({"material_profile": material_profile} if material_profile != "full_v1" else {}),
         "prefetch_enabled": reader is not None
         and settings.get("memory_prefetch", "enabled") == "enabled",
         "retrieval_enabled": reader is not None,
@@ -169,6 +177,7 @@ def _make_recipe(
         model.client.capacity.text_tokens,
         embeddings=embeddings,
         representation=policy["representation"],
+        material_profile=settings.get("memory_material_profile", "full_v1"),
         observer=trace,
     )
 
