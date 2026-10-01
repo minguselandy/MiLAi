@@ -294,3 +294,7 @@ R6 +169generation/958,878known（Host150/856,495，writer19/102,383）和45embed
 Root已单独准备后续R7 parent/SDK/wire/postcheck草稿：11项冻结/no-replay/一致错误profile拒绝及8项后检失败保留控制在纯合成文件和mock子命令上通过，0真实SDK/模型。wire失败不再使独立完整collector跳过，原非零、错误artifact与完整分母分别保留；源码或账本变动立即停止。首Path monkeypatch harness失败的原driver/log与独立修正均留存，未修改运行实现。实际R7配置/root/冻结/HTTP尚无，profile-specific wire校准须等待实现；211/8c466与账本73c437ac保持。
 
 48项验收状态不变，D5-10另追加当前840/六profile/九terminal的已发布完成证据，旧“10k仍在运行”qualification原样保留并标明历史阶段。当前PARTIAL缘于方法/自然长程/对象流等剩余要求，不再由旧未完成性能阶段解释。另一次Root只读导航rg路径失败保存工具来源与当时map缺失限制；所有这些工作0新增实验模型HTTP。
+
+## 通用工具说明的限定工程验收
+
+[验收记录](V13_2_SCHEMA_COMMUNICATION_ACCEPTANCE.md)保留1844索引原件/143回执/15非零并复制1853文件。Source d6bb0a2精确转入410e02f，212/36338eb5；Root最终86受影响测试、ruff/mypy与双boundary通过。8默认/原错误字节对照、6压力原包及Qwen全请求成本、6主树实际Mock Host/writer冻结呈现对应均核验；原阶段和正文交付退化保留。原R6 150wire/48行与原失败完整保持，最终9合成wire guards通过。0真实新HTTP，连续账本73c437ac不变；所有48验收状态/R6失败/完整plan ACTIVE/Product NO_GO保持。允许准备R7，实际配置/root/冻结/模型样本尚无。

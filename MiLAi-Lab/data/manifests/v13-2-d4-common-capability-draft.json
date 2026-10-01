@@ -339,7 +339,7 @@
     }
   ],
   "schema_communication_next_engineering_scope": {
-    "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+    "status": "ACCEPTED_DEFAULT_OFF_FOR_R7_PREPARATION_NOT_SEMANTIC_PASS",
     "profile": "shape_feedback_v1",
     "path": "data/manifests/v13-2-schema-communication-scope.json",
     "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
@@ -348,9 +348,31 @@
       "Safe faithful origin-specific structural error presentation",
       "Trigger metadata versus actual Source body wording"
     ],
-    "implementation_not_started": true,
+    "implementation_not_started": false,
     "actual_model_samples": 0,
     "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
-    "d4_admission": "NOT_ADMITTED"
+    "d4_admission": "NOT_ADMITTED",
+    "historical_scope_publication_snapshot": {
+      "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+      "profile": "shape_feedback_v1",
+      "path": "data/manifests/v13-2-schema-communication-scope.json",
+      "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+      "combined_factors": [
+        "Generic actual public catalog parameter shape/descriptions",
+        "Safe faithful origin-specific structural error presentation",
+        "Trigger metadata versus actual Source body wording"
+      ],
+      "implementation_not_started": true,
+      "actual_model_samples": 0,
+      "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
+      "d4_admission": "NOT_ADMITTED"
+    },
+    "implementation_acceptance": {
+      "path": "data/manifests/v13-2-schema-communication-acceptance.json",
+      "sha256": "4326cfc8b5fb72fe8e515879bb1ed7e9bf50f66b4750f17ac2e21d209acf7664"
+    },
+    "source_commit": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+    "primary_transfer_commit": "410e02f6cca2e3ff1df62c35866df35b3d2ee6b5",
+    "runtime_source": "ROOT_ACCEPTED_212_36338_NOT_ACTUAL_R7_OR_D4_ADMITTED"
   }
 }

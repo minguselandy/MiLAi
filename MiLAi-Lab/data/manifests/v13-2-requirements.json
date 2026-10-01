@@ -891,5 +891,15 @@
     "statuses_not_upgraded": true,
     "full_plan": "ACTIVE",
     "product": "NO_GO"
+  },
+  "schema_communication_engineering_acceptance": {
+    "status": "ACCEPTED_DEFAULT_OFF_FOR_R7_PREPARATION_NOT_SEMANTIC_PASS",
+    "path": "data/manifests/v13-2-schema-communication-acceptance.json",
+    "sha256": "4326cfc8b5fb72fe8e515879bb1ed7e9bf50f66b4750f17ac2e21d209acf7664",
+    "runtime_count": 212,
+    "runtime_map_sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+    "actual_model_http": 0,
+    "all48_requirement_statuses_unchanged": true,
+    "semantic_latest_cohort": "Original R6 remainsNOT_PASSED; no R7 model samples yet."
   }
 }
