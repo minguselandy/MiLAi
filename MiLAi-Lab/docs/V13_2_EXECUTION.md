@@ -246,3 +246,11 @@ R5新增118generation/492,678known（Host95/402,845，writer23/89,833）与50emb
 [HTTP串行只读验收](V13_2_SERIAL_HTTP_AUDIT.md)核对58查阅尝试、57实际subprocess、1dispatch前helper失败及两非零回执；31文件快照/9installed-git匹配/13AST/354原产物，Root首次KeyError与恢复map来源各自明确。native实例锁覆盖自身callback，当前所有client及跨root ledger没有共同整请求mutex/owner lease。未执行实际并发事故，没有把SDK本地entity检索线程当模型HTTP并行。
 
 22份实际固定SDK/依赖原件及Root补充manifest加入[资料库](V13_2_DESIGN_LITERATURE.md)，现六论文/七项目参考、647文件/56本地链接通过hash核验。以上新增真实模型/embedding HTTP0，连续账本SHA26f46d5f不变；合成测试使用独立局部账本。D4共同reader/cache/形成/B6/Host写策略及HTTP闭包仍未实施，来源语义门槛未通过，Product NO_GO/full plan active。
+
+## 支持来源通用方案的只读验收与隔离实施
+
+[方案](V13_2_DIRECT_SUPPORT_DESIGN.md)区分trusted实际public-turn trigger与model显式支持叶、只允许实际read candidate上整字段严格等值复用、按trigger查Host成功回执，并仅在新profile增加同Source实际string object ID伴随投影。继承旧整版引用不伪造子句归因，改写仍选真实叶；联合cadence/展示变化单列，不禁用query维护、不加语义verifier/案例分支/额外writer，不放宽2048/6或CAS。
+
+Root逐hash核对41索引/39原完整maps/四失败/12快照/11原R5 trace/17请求对并复制262产物；两个恢复回执缺原after/一个也缺before，未知命令参数和误猜路径均留真实来源限制及独立勘误。finite草稿未执行，Root后续missing-file读另留，0新运行/机制测试或SDK构造。全部原R5/source-family与post-R5 admission210身份区分、账本SHA26f46d5f不变。
+
+同一既有Source owner获授权在新direct-support树、87f74c6基线上实施默认关闭profile，原所有树HOLD；Root配置/rubric/实际HTTP仍归Root。尚未接受源码或运行R6，后续须限定工程检查、实际token/wire审计和新的完整冻结；新方法的语义结果与泛化仍未知，完整计划active。

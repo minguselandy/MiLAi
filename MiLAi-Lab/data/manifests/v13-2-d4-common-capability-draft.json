@@ -255,5 +255,29 @@
     "pre_dispatch_helper_failure": 1,
     "runtime_closure": "NOT_IMPLEMENTED",
     "actual_d4_admission": "NOT_ADMITTED"
+  },
+  "direct_support_next_engineering_scope": {
+    "status": "READONLY_PROPOSAL_ACCEPTED_ISOLATED_IMPLEMENTATION_AUTHORIZED",
+    "acceptance": {
+      "path": "data/manifests/v13-2-direct-support-design-acceptance.json",
+      "sha256": "c00dc01d11f2c3370a85ba84e5151326025032fc1455557353d7d4c7903c2bd7"
+    },
+    "base_commit": "87f74c6ca3f0cff0c17b07e86ad9869248270c6a",
+    "opt_in": "direct_support_v1",
+    "runtime_source": "NOT_IMPLEMENTED_OR_FROZEN",
+    "combined_factors": [
+      "Trusted actual public-turn trigger separate from supporting leaves",
+      "Explicit whole-field exact reuse with actual read-time candidate/hash/current CAS",
+      "Host-success suppression by trusted trigger; explicit cadence factor",
+      "Literal companion string object ID from same actually captured Source DTO",
+      "Required generic bounded protocol presentation"
+    ],
+    "actual_d4_admission": "NOT_ADMITTED",
+    "not_claimed": [
+      "Semantic source-gate repair",
+      "R6 task results",
+      "Independent or unseen generalization",
+      "Single-factor causal improvement"
+    ]
   }
 }
