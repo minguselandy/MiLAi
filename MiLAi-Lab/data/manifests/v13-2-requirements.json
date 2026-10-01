@@ -1032,5 +1032,13 @@
     "E1_E2_historical_not_relabelled": true,
     "actual_new_model_http": 0,
     "all_requirement_rows_exactly_unchanged": true
+  },
+  "http_owner_independent_partial_init_recheck": {
+    "manifest": "data/manifests/v13-2-http-owner-partial-init-counterexample.json",
+    "sha256": "57248533bbad826d8e9e00d1fedfe040bbffaf2982f251feecc41919f199d79d",
+    "status": "INDEPENDENT_DEFECT_REPRODUCED_SOURCE_FIX_AND_FINAL_ACCEPTANCE_PENDING",
+    "engineering_accepted": false,
+    "all_original_requirement_rows_unchanged": true,
+    "actual_new_model_http": 0
   }
 }

@@ -354,3 +354,12 @@ Root独立准备42项原件验收条件及5事件/11阶段合成计费算术对�
 Source报告core30早期通过、actual入口first1通过/11失败，正在修正scope/import/nominal测试身份，原件等待最终独立交接核验。Root保存CPython3.11.13 contextlib与Pydantic2.13.5两组固定官方源码/文档及安装文件观察，两关键文件分别字节相等；rolling版本/重定向单列。9GET全200，Source13固定参考hash不改，上游不执行/SDK不升级。当前17论文/17项目参考、768文件/147本地链接、独立审计0问题，[中文原件总结](V13_2_DESIGN_LITERATURE.md)可查看；原745/133阶段和Root误读catalog键失败保持。0实际新增HTTP/新cohort，主213/391/316、ledger374fcef4/原计划及48状态保持；实现尚未验收，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO。
 
 上述Source描述是当时报告，未作最终验收。随后agent因容量限制结束；这不是实际模型HTTP失败。Root在14:08:27 UTC核对54条完成receipt、0未完成命令目录/活跃原生命令，final-new-checks及final-mypy元数据rc0、final-ruff rc1、尚无HANDOFF。已向同一Source恢复任务，实际agent列表显示running；不切模型、不新建agent、不重启已结束命令，保留全部失败原件。Root首次恢复观察因调用不存在的python别名rc127提前失败，纠正使用现有venv；当时未取得maps不倒补。原准备manifest另存，再附当前容量恢复观察，不把早期或中途通过当最终字节证据。
+
+
+## 独立部分初始化反例与原范围修正
+
+Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引498＋原末端/包装provenance3＝501文件、两aggregate末端明确自引用排除；仍不是完整HANDOFF。另原件捕获首不可变fc894b9精确8路径和base8b1fdf3，不当最终amend。Root在精确214/1ce0de987c96副本、合成历史非零账本和真实已安装HTTPX/Mock/禁止socket下复现构造后校验失败只撤登记未关client：lease已释放/新owner已取得、httpx仍open。原异常/字节/执行map与后观察显式Root清理保存；rc0是反例成立，0 reserve/dispatch/实际gen/embed，Source树未执行/修改、不可变副本实际执行。[独立反例记录](../data/manifests/v13-2-http-owner-partial-init-counterexample.json)不宣称owner通过。
+
+已要求同一Source仅原provider/新测试通用清理，保留fc及后续amend/早期53控制、79旧控制和所有失败原件；运行字节改变后按影响补验。固定HTTPX0.28.1 close先标CLOSED后transport close，is_closed不能代替close正常完成；新官方Clients HTML GET200保存，固定源码与CPython方法复用，Source13 hash/scope不改。[资料总结](V13_2_DESIGN_LITERATURE.md)17论文/18组参考/784文件/152链接，独立核验0问题。修正/最终交接/Root接受/新cohort仍待，主213/391/316/ledger374fcef4/原plan及48状态保持，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO。
+
+随后同一Source报告provider15行最小修正、6新增清理控制首次通过/合计59新控制，实际raw-wire8、ruff8/mypy6/双boundary在新map通过；关闭抛错保留登记/lease，原初始化异常原类型/实例与cleanup cause保持、实际另一进程BUSY。此处仍为实现方报告，最终provenance/amend/index正在生成，Root尚未接受最终提交与执行字节；原反例和旧fc/f28阶段保留。

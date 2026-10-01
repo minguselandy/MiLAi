@@ -1,5 +1,17 @@
 # v13.2 设计资料索引与失败反思
 
+当前保存 **17篇论文 / 18组项目参考、784个独立核验文件 / 152个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)与本地 `artifacts/v13-2-design-literature/index.html` 保存原文、URL/UTC/版本/SHA和中文范围；此前768/147及更早阶段按发生时解释。第三方方法原件本地保留，GitHub发布索引与反思。
+
+## 当前独立发现：构造成功后验证失败的清理缺口
+
+Root保存Source首不可变提交fc894b9的8路径/parent/完整patch；在214运行文件逐字节副本中、合成非零历史账本、真实SDK和MockTransport/禁止socket条件下复现：合法URL的规范化差异导致实际客户端创建后的身份校验抛错，登记却已撤销、lease随后释放，底层HTTP客户端仍打开，新owner可取得同一合成账本。原始状态/异常/执行map/stdout/stderr保存，观察后才作Root显式清理；0 reserve/dispatch/实际模型HTTP，原账本字节保持。复现rc0表示缺口成立，不是实现通过。[原件与通用改进记录](../data/manifests/v13-2-http-owner-partial-init-counterexample.json)可核对。
+
+复用固定[HTTPX0.28.1源码](https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_client.py)，另保存[官方Clients清理说明](https://www.python-httpx.org/advanced/clients/)HTML；其close先设CLOSED再关闭transport，close抛错时is_closed不能证明底层完成。复用固定CPython3.11.13 contextlib与[官方部分获取失败清理模式](https://docs.python.org/3.11/library/contextlib.html#cleaning-up-in-an-enter-implementation)：资源成功获取后、校验成功前必须覆盖清理。Root要求在原provider/新测试范围按通用资源顺序修正，清理失败保留真实登记/lease与异常链，不放松验证、不按URL或业务案例特判、不自动重试/升级SDK。同一Source已确认，修正/终SHA/最终字节验收尚待交接。
+
+1次新增官方资源GET200，17/18/784/152独立hash/链接审计0问题；Source13固定参考hash与范围保持，新组不扩读。Root对新摘要含糊的早期检查计数措辞作纠正，原摘要/manifest保留，没有重下原件。Source报告的53控制/旧79和早期静态通过都按其执行阶段解释，不能掩盖本次反例或代替修正后最终检查。完整计划ACTIVE、E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO。
+
+## 此前入口失败与资料阶段原记录
+
 2026-10-01 当前保存 **17篇论文 / 17组项目与SDK方法参考、768个独立核验文件 / 147个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)保留原URL、UTC、版本/commit、SHA和范围，完整PDF/HTML及方法相关源码可从 ignored `artifacts/v13-2-design-literature/index.html` 查看。原17论文未重下载；GitHub发布索引与总结，第三方原件本地保存，不称完整项目复现。下文旧阶段与计数保留其发生时语义。
 
 ## 当前真实入口失败：生命周期与验证对象身份

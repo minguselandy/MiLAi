@@ -1,0 +1,183 @@
+{
+  "kind": "V13_2_HTTP_OWNER_PARTIAL_CLIENT_INITIALIZATION_COUNTEREXAMPLE",
+  "status": "INDEPENDENT_DEFECT_REPRODUCED_SOURCE_FIX_AND_FINAL_ACCEPTANCE_PENDING",
+  "recorded_at_utc": "2026-10-01T14:53:48.380493+00:00",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "source_scope_sha256_unchanged": "c31075de89ee19baaf319af32e7e2e7f7f7b30fe3a4bf8aa2b4a0f6973437183",
+  "root_completed_command_prefix_audit": {
+    "closure": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/completed-prefix-audit-after-final-controls-first/aggregate-terminal-result.json",
+      "sha256": "20c24f144c0a8ab03d2c445946c9fa45b45b895de5c83f27a37136cfe31f756f",
+      "bytes": 801
+    },
+    "aggregate_file_index": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/completed-prefix-audit-after-final-controls-first/aggregate-file-index.json",
+      "sha256": "7e69ed9cb95b34aa20631fb3c99c8c513a00acf3369d66f7f5ce1831d71c9746",
+      "bytes": 92106
+    },
+    "actual_audit_native_chunk": "22c6ce",
+    "actual_closure_native_chunk": "c7f3fb",
+    "completed_commands": 74,
+    "original_nonzero_commands": 12,
+    "executing_snapshot_checks": 6227,
+    "indexed_files": 501,
+    "not_source_final_handoff_or_pass": true
+  },
+  "source_first_immutable_commit_capture": {
+    "result": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/immutable-source-commit-inspection-first/result.json",
+      "sha256": "837c094edf1e3ac26022564c62da0fcc65407173dea89b9081a493baf6c41312",
+      "bytes": 12223
+    },
+    "patch": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/immutable-source-commit-inspection-first/immutable-source.patch",
+      "sha256": "e31715f7e111fb53e2e2e6c9c0354f5e2cfc13b3717b92d63f066d049515d241",
+      "bytes": 210603
+    },
+    "actual_native_chunk": "66a4fc",
+    "source_commit": "fc894b9f7fa8a178dc4e085205dc14c94bbbbc8c",
+    "source_base": "8b1fdf3c017477ee80a0284f08ca4a1f5f52e670",
+    "exact_allowed_paths": [
+      "MiLAi-Lab/src/milai_lab/harness/contextual_artifacts.py",
+      "MiLAi-Lab/src/milai_lab/harness/http_ownership.py",
+      "MiLAi-Lab/src/milai_lab/providers/contextual_vllm.py",
+      "MiLAi-Lab/src/milai_lab/runners/v13_1_baseline_micro.py",
+      "MiLAi-Lab/src/milai_lab/runners/v13_1_d0.py",
+      "MiLAi-Lab/src/milai_lab/runners/v13_1_p5.py",
+      "MiLAi-Lab/tests/memory/test_v13_2_http_owner_entries.py",
+      "MiLAi-Lab/tests/unit/test_http_ownership.py"
+    ],
+    "first_commit_not_claimed_final": true
+  },
+  "root_actual_counterexample": {
+    "receipt": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/partial-client-initialization-counterexample-first/receipt.json",
+      "sha256": "7fd15a109ccb85dd7d14364c04f47b18c9778242c716d09cab74409b70ae86ab",
+      "bytes": 1270
+    },
+    "observed_original": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/partial-client-initialization-counterexample-first/counterexample.json",
+      "sha256": "fe88e2da5a697d80c34ab4081e109ab69d929533f2ae6865ae2f4e0367dce47f",
+      "bytes": 1284
+    },
+    "probe": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/partial-client-initialization-counterexample-first/probe.py",
+      "sha256": "c16b4106ffbfcd5d7a1f866801ccb8c8fed32125fdde775a863284c66b493f81",
+      "bytes": 3719
+    },
+    "executing_runtime": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/partial-client-initialization-counterexample-first/executing-runtime-files.json",
+      "sha256": "85baf440374ed5bbc9753eb5f3847a046911714f324dfb1a3bf779644b52da58",
+      "bytes": 25330
+    },
+    "actual_native_start": "8cd165",
+    "actual_native_completion": "b89a9b",
+    "returncode": 0,
+    "meaning_of_returncode_zero": "The defect reproduced; not an implementation pass.",
+    "runtime_count": 214,
+    "runtime_sha256": "1ce0de987c962e66c1372a1ce35a1776d4cd51ef9c7705ff4a39e946bc16269d",
+    "underlying_httpx_still_open_after_constructor_error": true,
+    "owner_released_and_fresh_owner_acquired": true,
+    "synthetic_ledger_original_bytes_unchanged": true,
+    "real_sockets_denied": true,
+    "MockTransport_only": true,
+    "actual_http_dispatches": 0,
+    "working_source_tree_not_executed_or_modified": true,
+    "immutable_copy_code_actually_executed": true,
+    "root_explicit_resource_cleanup_after_observation": {
+      "path": "artifacts/v13-2-http-owner-root-preparation/partial-client-initialization-counterexample-first/root-post-observation-cleanup.json",
+      "sha256": "cf231ca26afa8dea02a4c57c3930e311828cdb31105b0861d9ea9ec44bc92c4e",
+      "bytes": 25
+    },
+    "no_actual_experiment_or_model_quality_claim": true
+  },
+  "generic_correction_requested_same_owner": {
+    "provider_and_authorized_new_tests_only": true,
+    "source_scope_expanded": false,
+    "requested_behavior": "Close successfully created actual HTTP client before deregistration on validation failure. If cleanup raises, retain unresolved ownership and original exception chain; is_closed does not prove underlying transport cleanup.",
+    "no_URL_or_business_case_special_branches_or_weaker_validation": true,
+    "no_automatic_retry_or_SDK_upgrade_or_direction_change": true,
+    "source_acknowledges_minimal_cleanup_fix_pending": true,
+    "source_report_only": "First53 independent controls, old79 and static/boundaries reported before Root discovered this gap; wire raw bytes supplemented with planned same-commit amend. Early stages retain their execution identities.",
+    "final_handoff_commit_and_final_byte_checks_still_pending": true
+  },
+  "primary_failure_methods_archive": {
+    "result": {
+      "path": "artifacts/v13-2-literature-audit/http-owner-partial-init-first/result.json",
+      "sha256": "de79803639b1f67ddd7d21949efb03f7c5bbb5434a40f550a8e3002db7f90bc9",
+      "bytes": 429
+    },
+    "research_gets": 1,
+    "failed_resource_gets": 0,
+    "actual_native_start": "777e55",
+    "actual_native_completion": "da380b",
+    "httpx_pin": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+    "httpx_version": "0.28.1",
+    "fixed_HTTPX_source_and_installed_observation_reused": true,
+    "fixed_CPython3_11_13_resource_cleanup_reference_reused": true,
+    "official_rolling_clients_page": "https://www.python-httpx.org/advanced/clients/",
+    "rolling_docs_not_fixed_sdk_version_proof": true,
+    "new_project_reference_groups": 1,
+    "new_papers": 0,
+    "source13_reference_hashes_and_authorization_unchanged": true,
+    "summary_wording_correction_originals_retained": true
+  },
+  "independent_archive_verification": {
+    "report": {
+      "path": "artifacts/v13-2-literature-audit/current-archive.json",
+      "sha256": "9d28b68e4a38846b69b025b6316e0448618ba54273a7fbea45618416b5aa39e3",
+      "bytes": 202230
+    },
+    "actual_native_chunk": "b8cdd9",
+    "returncode": 0,
+    "status": "PASS",
+    "paper_count": 17,
+    "project_reference_groups": 18,
+    "verified_unique_files": 784,
+    "local_index_links": 152,
+    "issues": []
+  },
+  "primary_maps_unchanged": {
+    "runtime": {
+      "count": 213,
+      "sha256": "dfa818dc9c67ea0c3856e98ff0bb28dab333892b33e21bba07eeac084438ffbd"
+    },
+    "tests": {
+      "count": 391,
+      "sha256": "d78ff9aa8d0f096548c85337d89be4f26952bb3e2b45e80fe4bad4f2c52613f1"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "continuous_ledger_sha256_unchanged": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "original_requirement_status_counts_unchanged": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "actual_new_generation_http": 0,
+  "actual_new_embedding_http": 0,
+  "new_actual_cohort_created": false,
+  "source_or_global_owner_accepted": false,
+  "E1_E2_historical_not_promoted": true,
+  "four_arm_fairness_or_inclusive12_24_or_quality_proven": false,
+  "e0": "NOT_PASSED",
+  "d4": "NOT_ADMITTED",
+  "full_plan": "ACTIVE",
+  "product": "NO_GO",
+  "latest_source_cleanup_report_not_independent_acceptance": {
+    "new_cleanup_controls_reported": 6,
+    "all_new_independent_controls_reported": 59,
+    "provider_diff_lines_reported": 15,
+    "raw_default_wire_pairs_reported": 8,
+    "ruff8_mypy6_original_two_boundaries_reported_pass": true,
+    "source_final_stage_provenance_amend_and_terminal_index_in_progress": true,
+    "final_commit_and_final_executing_bytes_independently_verified": false,
+    "implementation_accepted": false,
+    "source_original_initialization_error_type_instance_and_cleanup_cause_reported_retained": true,
+    "actual_competitor_BUSY_after_cleanup_failure_reported": true
+  }
+}

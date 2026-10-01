@@ -2913,6 +2913,117 @@
       ],
       "status": "SAVED_METHOD_REFERENCE_NOT_FULL_REPRODUCTION",
       "read_scope": "Pinned2.13.5 arbitrary_types_allowed uses concrete instance schema; a duck-typed fake or separately loaded historical VLLMClient class is not automatically an instance of the annotated current class. Root inference: baseline/current composition fixtures must preserve each real class identity and compare full wire/artifacts; do not weaken production validation or claim an unexecuted baseline. Rolling docs redirect retained independently. No validation bypass or new runtime adapter."
+    },
+    {
+      "kind": "project",
+      "id": "HTTPX0.28.1 client construction cleanup reference",
+      "url": "https://github.com/encode/httpx",
+      "ref": "0.28.1",
+      "commit": "26d48e0634e6ee9cdc0533996db289ce4b430177",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference",
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/manifest.json",
+      "snapshot_manifest_sha256": "bec70f86c5f570c2c887d9a552e7086b77354c9cc24c933826d582f6b67f4645",
+      "snapshot_file_count": 7,
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/git-ref-observation.json",
+          "sha256": "1f99a9d4aa336ea01e7e8cf5d87c0932bd79bd6277c909478bc92c3310e7ce65",
+          "bytes": 451,
+          "original_saved_reference": {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/git-ref-observation.json",
+            "sha256": "1f99a9d4aa336ea01e7e8cf5d87c0932bd79bd6277c909478bc92c3310e7ce65",
+            "bytes": 451
+          },
+          "url": null,
+          "origin": "Byte-exact reuse of previously saved pinned primary method original; no redownload."
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/httpx/_client.py",
+          "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+          "bytes": 65714,
+          "original_saved_reference": {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/httpx/_client.py",
+            "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+            "bytes": 65714
+          },
+          "url": "https://raw.githubusercontent.com/encode/httpx/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_client.py",
+          "origin": "Byte-exact reuse of previously saved pinned primary method original; no redownload."
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/LICENSE.md",
+          "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+          "bytes": 1508,
+          "original_saved_reference": {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/LICENSE.md",
+            "sha256": "4ec59d544f12b5f539a3a716fd321ac58ccd8030b465221f2c880200cdf28d8d",
+            "bytes": 1508
+          },
+          "url": "https://raw.githubusercontent.com/encode/httpx/26d48e0634e6ee9cdc0533996db289ce4b430177/LICENSE.md",
+          "origin": "Byte-exact reuse of previously saved pinned primary method original; no redownload."
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/installed-observation/_client.py",
+          "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+          "bytes": 65714,
+          "original_saved_reference": {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/installed-observation/_client.py",
+            "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+            "bytes": 65714
+          },
+          "url": null,
+          "origin": "Byte-exact reuse of previously saved pinned primary method original; no redownload."
+        },
+        {
+          "url": "https://www.python-httpx.org/advanced/clients/",
+          "started_at_utc": "2026-10-01T14:46:42.423957+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://www.python-httpx.org/advanced/clients/",
+          "response_headers": {
+            "Connection": "close",
+            "Content-Length": "63166",
+            "Server": "GitHub.com",
+            "Content-Type": "text/html; charset=utf-8",
+            "x-origin-cache": "HIT",
+            "Last-Modified": "Thu, 11 Sep 2025 11:03:01 GMT",
+            "Access-Control-Allow-Origin": "*",
+            "ETag": "\"68c2ac65-f6be\"",
+            "expires": "Thu, 01 Oct 2026 14:56:46 GMT",
+            "Cache-Control": "max-age=600",
+            "x-proxy-cache": "MISS",
+            "X-GitHub-Request-Id": "39F6:315F81:18AF5:1A243:6ABE7256",
+            "x-github-edge-region": "southeastasia",
+            "Accept-Ranges": "bytes",
+            "Age": "0",
+            "Date": "Thu, 01 Oct 2026 14:46:47 GMT",
+            "Via": "1.1 varnish",
+            "X-Served-By": "cache-sin-wsap440032-SIN",
+            "X-Cache": "MISS",
+            "X-Cache-Hits": "0",
+            "X-Timer": "S1790866007.813696,VS0,VE272",
+            "Vary": "Accept-Encoding",
+            "X-Fastly-Request-ID": "6200fb323b3c7073dcca742896084140c4467279"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/official-docs/clients.html",
+          "sha256": "9e8119ec1da842d3a4c97973fbe6bdf3e7250da44e2706cc546ac4f7644a7f0a",
+          "bytes": 63166,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T14:46:44.090506+00:00",
+          "rolling_docs_not_fixed_version_proof": true
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/reused-contextlib-reference.json",
+          "sha256": "05c00a327ed3c70e456df79ea2c6b7af97326e11410ea7f4f85e5a5194a0e3fb",
+          "bytes": 1208
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-client-cleanup-reference/READ_SCOPE.md",
+          "sha256": "54644cfc34f5e56773e5ad1ad57f6a91f30608aac1753b7a9d0887d5a60922e0",
+          "bytes": 963
+        }
+      ],
+      "status": "SAVED_METHOD_REFERENCE_NOT_FULL_REPRODUCTION",
+      "read_scope": "Explicit client cleanup after construction/validation failure; is_closed is not proof of underlying transport close success."
     }
   ],
   "complete": true,
@@ -2936,7 +3047,7 @@
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
   "paper_count": 17,
-  "project_count": 17,
+  "project_count": 18,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -3261,6 +3372,41 @@
           "bytes": 32697
         }
       ]
+    },
+    {
+      "cohort": "Offline immutable-source partial-client-init counterexample only; no actual cohort",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/http-owner-partial-client-init-methods.json",
+        "sha256": "6149455641cd4d88860e896de25d0ef53e50d3bacb5669bcb1c0b32156a8da92",
+        "bytes": 6936
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/http-owner-partial-init-first/index-before-cd46c4a51f122682867c370da41006d724035193824b77d1699979803ed79a11.html",
+          "sha256": "cd46c4a51f122682867c370da41006d724035193824b77d1699979803ed79a11",
+          "bytes": 24266
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/http-owner-partial-init-first/catalog.local-before-8a7f7dc8ef2c51f276c27b78e7459be5d069e79b12d3a322e247666427f4596b.json",
+          "sha256": "8a7f7dc8ef2c51f276c27b78e7459be5d069e79b12d3a322e247666427f4596b",
+          "bytes": 206269
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/http-owner-partial-init-first/v13-2-design-literature-catalog-before-8a7f7dc8ef2c51f276c27b78e7459be5d069e79b12d3a322e247666427f4596b.json",
+          "sha256": "8a7f7dc8ef2c51f276c27b78e7459be5d069e79b12d3a322e247666427f4596b",
+          "bytes": 206269
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/http-owner-partial-init-first/current-archive-before-cab3eaa1116c02ee64918b27bd27955027cd62d4a9b174cf3d872b255439339d.json",
+          "sha256": "cab3eaa1116c02ee64918b27bd27955027cd62d4a9b174cf3d872b255439339d",
+          "bytes": 197897
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/http-owner-partial-init-first/V13_2_DESIGN_LITERATURE-before-12f4a5aa0bd4ef76ded4f0d8e9ab3918e188289e6d09912987df77a203703679.md",
+          "sha256": "12f4a5aa0bd4ef76ded4f0d8e9ab3918e188289e6d09912987df77a203703679",
+          "bytes": 36139
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -3275,5 +3421,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T13:55:52.681193+00:00"
+  "updated_at_utc": "2026-10-01T14:46:44.093535+00:00"
 }
