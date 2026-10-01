@@ -317,3 +317,4 @@ R7 +171generation/1,222,370known（Host151/1,085,579，writer20/136,791）、52e
 +
 +R7完整失败/费用和17论文/12参考资料已提交da33e61，远端SHA及draft PR79 head/body精确核对。Root另发布[盲只读范围](V13_2_READ_PROTOCOL_PROPOSAL_SCOPE.md)，限同一既有Source在新隔离checkout对实际结果集分页身份、有限typed读取错误与Host/closed-writer保存回执时间顺序做静态设计；原R7结果/案例/rubric/ledger不供Source读取，不执行包/SDK/pytest/新合成机制。212运行/389测试/316完整配置maps冻结，仅允许所列源码/工程测试/已存primary方法内容。Root首次错误将263JSON-only数量与完整316比较，原失败driver/log保留，修正后全配置含51TXT/2upstream；没有补造当时完整map。主树、旧Source树HOLD，不授权实现或真实HTTP。先远端核对范围，再由同一Source交接READ_ONLY方案，Root另决定具体工程验收；原完整计划ACTIVE/D4未准入/Product NO_GO。
 +
+资料入口另将R7放在首屏、R6标为历史，原711/112 index/catalog/audit按hash保留；当前715唯一文件/114链接PASS，17论文/12参考保持，0新资源GET/模型HTTP。既有Source已接收远端核对的盲READ_ONLY范围，准备新隔离静态方案；未授权实现或下一真实cohort，主运行源码/原连续账本保持。

@@ -168,3 +168,5 @@ R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失�
 [AIP158](https://google.aip.dev/158)的continuation与请求身份一致、token不授资源权限原则对应当前缺口：应解析实际已返回的owner/bank/turn/selection快照，继续核对原叶/版本，不重新检索、补来源、挑候选或改用户参数。保存承诺仍必须实际commit回执，writer pending/truncation不能升级成功；原24失败不重跑、不改答。
 
 本地入口`artifacts/v13-2-design-literature/index.html`新增R7中文反思及完整版本/hash记录，当前17论文/12项目参考、711唯一文件/112本地链接全部核验PASS。原682/85报告和index/catalog保留为历史。首次资源GET18成功后GitHub API403、首次resume因已创建空目录失败，都保留原driver/stdout/stderr/返回和错误响应；18论文原件复用不重取，独立git ls-remote固定refs后只新增4资源GET。归档0模型HTTP/0SDK升级/0第三方执行，Source和原账本374fcef4保持；browser失败查询记录也保留，不冒充成功。
+
+本地入口随后把R7完整结果与当前17论文/12参考放在首屏，旧R6“当前结果”标题明确标为历史。原index、711/112审计和catalog按原hash保留并进入新版closure；新增原件/论文/项目/模型HTTP均0。当前715唯一文件/114本地链接核验PASS，新增4文件是原导航/目录/审计保存及导航变更记录；原711/112仍是归档完成时的正确阶段统计。

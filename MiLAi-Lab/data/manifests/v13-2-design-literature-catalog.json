@@ -2147,6 +2147,31 @@
         "sha256": "73f7ca8f65a41f6c610fe74baaf1a7a954b727735ad014e66bb894390a832616",
         "bytes": 4114
       }
+    },
+    {
+      "cohort": "R7 current readable navigation after711/112 audit",
+      "navigation_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r7-navigation-update.json",
+        "sha256": "4f0ffe9b3da3f208dafe7b2b7f4de3f3b70d0bd4603f09ac4fb0e3675ba20cea",
+        "bytes": 1556
+      },
+      "retained_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r7-current-navigation/index-before-d7bee4a9b4c58223ba602273ce4dbe748faf2eef8201f713bbff1e85f44c1e17.html",
+          "sha256": "d7bee4a9b4c58223ba602273ce4dbe748faf2eef8201f713bbff1e85f44c1e17",
+          "bytes": 19251
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r7-current-navigation/current-archive-before-e2c99aabeec1d679b102b85a73d77c3a94aff7b452be9148235f44bc154666ae.json",
+          "sha256": "e2c99aabeec1d679b102b85a73d77c3a94aff7b452be9148235f44bc154666ae",
+          "bytes": 182851
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r7-current-navigation/v13-2-design-literature-catalog-before-0523afe11759faf26e6c80357ff7c163e88b3eb793306d8f58d7dd3b1a4a2af5.json",
+          "sha256": "0523afe11759faf26e6c80357ff7c163e88b3eb793306d8f58d7dd3b1a4a2af5",
+          "bytes": 141031
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
