@@ -392,8 +392,11 @@
       "requirement": "四主臂B2+/B6+/Mem0-TraceEqual/M同公共预取/观察流/guard/发现/工具材料预算。",
       "completion_evidence": "能力逐项合同与源码/SDK/形成节奏冻结；不把共同reader backend说成原框架完整ask/reflect。",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "evidence": [
+        "data/manifests/v13-2-d4-common-capability-draft.json"
+      ],
+      "condition": null,
+      "qualification": "Prospective common-capability/selection design and five-file read-only source audit only; current B6 has no semantic fallback, new common cached cadence and inclusive24/12 admission/restart tests remain unimplemented. No D4 model output; NOT_VERIFIED retained."
     },
     {
       "id": "D4-02",
@@ -404,8 +407,11 @@
       "requirement": "B6+同确定性投影并补原文与简单语义摘要后备以支持偏好。",
       "completion_evidence": "一般使用微型合同与原生摘要/失败费用；新B6+不更名旧结果。",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "evidence": [
+        "data/manifests/v13-2-d4-common-capability-draft.json"
+      ],
+      "condition": null,
+      "qualification": "Prospective common-capability/selection design and five-file read-only source audit only; current B6 has no semantic fallback, new common cached cadence and inclusive24/12 admission/restart tests remain unimplemented. No D4 model output; NOT_VERIFIED retained."
     },
     {
       "id": "D4-03",
@@ -416,8 +422,11 @@
       "requirement": "同数量少量配置在开发集选择，完整系统/机制表分开。",
       "completion_evidence": "所有候选/事前选择规则/结果留存，匹配材料/形成预算，不连续只调M。",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "evidence": [
+        "data/manifests/v13-2-d4-common-capability-draft.json"
+      ],
+      "condition": null,
+      "qualification": "Prospective common-capability/selection design and five-file read-only source audit only; current B6 has no semantic fallback, new common cached cadence and inclusive24/12 admission/restart tests remain unimplemented. No D4 model output; NOT_VERIFIED retained."
     },
     {
       "id": "D4-04",
@@ -441,8 +450,11 @@
       "requirement": "质量每消息24生成与共同12预算分别冻结采集，不和旧失败拼表。",
       "completion_evidence": "两个独立cohort身份、跨重启累计预算、失败/unknown保存与成本对账。",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "evidence": [
+        "data/manifests/v13-2-d4-common-capability-draft.json"
+      ],
+      "condition": null,
+      "qualification": "Prospective common-capability/selection design and five-file read-only source audit only; current B6 has no semantic fallback, new common cached cadence and inclusive24/12 admission/restart tests remain unimplemented. No D4 model output; NOT_VERIFIED retained."
     },
     {
       "id": "D4-06",

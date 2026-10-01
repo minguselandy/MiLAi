@@ -2,7 +2,7 @@
   "kind": "V13_2_D4_COMMON_CAPABILITY_DRAFT",
   "status": "READ_ONLY_DESIGN_NOT_IMPLEMENTED",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
-  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus both original old update repairs. R0/R1/R2 gates failed; R2 actual24 complete with19PASS/3FAIL/2UNKNOWN. No D4 runtime admitted yet.",
+  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus direct repairs of both original old updates. R0-R4 preserved separately; latest R4 full24 is20PASS/4FAIL and complete source-semantic gate unmet. D4 runtime not admitted; read-only common-capability/selection preparation continues.",
   "main_comparison": "M vs B6+",
   "secondary_comparison": "M vs B2+",
   "arms": {
@@ -47,7 +47,7 @@
     "recovery": "Common reachable W1/W2/W3; old actual-UPDATE W3 stays distinct/N_A if unreachable."
   },
   "candidate_policy": {
-    "status": "PROPOSED_BEFORE_D4_OUTPUTS_NOT_SELECTED",
+    "status": "PROSPECTIVE_RULE_DEFINED_BEFORE_D4_OUTPUTS_RUNTIME_NOT_ADMITTED",
     "equal_candidates_per_arm": 2,
     "candidates": [
       {
@@ -61,7 +61,22 @@
         "max_records": 6
       }
     ],
-    "selection": "Same development trajectories/configuration budget for every arm; all candidates retained. Prospective deterministic-task/semantic review rule needed before admitting actual outputs; no continuous M-only tuning into method superiority."
+    "selection": {
+      "setting": "Quality24 inclusive generation admissions per public message, same original six exposed stories and both candidates for every arm. No new story/holdout access for selection.",
+      "planned_denominator_per_candidate": 6,
+      "primary": "Maximize number of confirmed full-arc clean successes among all six planned trajectories. A clean success requires the declared native task/goal, truthful final claims, supported provenance/scope and no unrequested/duplicate business effects. Root diagnosis is labeled non-independent.",
+      "lexicographic_ties": [
+        "More confirmed native-task successes over the same six planned trajectories",
+        "More completed full public-message arcs over the same six planned trajectories",
+        "Lower actual charged generation tokens including Host/native/formation/repair/failures/recovery",
+        "Lower actual charged embedding tokens",
+        "Prefer packet1024 when all previous fields tie"
+      ],
+      "missing": "Interrupted/unscorable/NOT_RUN cannot add confirmed successes; publish their counts and missing lower/upper bounds separately. All planned six remain in the selection denominator.",
+      "hard_contract_violation": "Gold/future/scorer leak, wrong-owner delivery, false durable success or broken ledger/freezes makes that candidate ineligible for promotion. Preserve all costs and failures; if neither candidate is eligible, that arm remains NOT_ADMITTED.",
+      "accounting": "Each arm has exactly two predeclared candidates. Development selection has48 planned arm-candidate-story trajectories; publish every candidate. The selected24-trajectory view reuses these already exposed development outputs and is not independent evaluation or an additional run. The separate12-admission condition uses a new24-trajectory frozen root after selection.",
+      "stopping": "No additional prompt/threshold/rank/candidate changes after these outputs. A new repair requires a separate version and preserves the previous selection/cohort."
+    }
   },
   "cohorts": {
     "exposed_document": "Original six exposed stories×fourarms=24development trajectories per selected quality setting. Current documents are an already designed workflow, not unseen.",
@@ -86,5 +101,34 @@
     "Second family and independent scorer unavailable; related claims remain incomplete.",
     "Pinned public native snapshot bound must be truthful, including complete versus possibly truncated."
   ],
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "read_only_implementation_audit": {
+    "recorded_at_utc": "2026-10-01T00:51:03.748818+00:00",
+    "source_sha256": {
+      "src/milai_lab/runners/v13_1_p5_compare.py": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b",
+      "src/milai_lab/runners/v13_1_p5.py": "571d5b01c054daaae56b6dc16ee4dd8e7c4f0ee7c96ca54b264cdd4a6a2abcbd",
+      "src/milai_lab/providers/chat_bridge.py": "992674f2341285ea3456324cb7cd2a0b2568f1fbf9917f73282ef3caff535ddd",
+      "src/milai_lab/baselines/v13_1_controls.py": "de6c5105ef26dfe37e6bb9f45c90eb1e8e8391516404a7382300b8fdd22c7f3e",
+      "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a"
+    },
+    "findings": [
+      "ComparisonRuntime currently recalls per ReAct and can form per matched tool: old behavior cannot be relabeled as one cached ordinary delivery/closed boundary.",
+      "Current B6 ObservedControls ingests raw chunks and receipt_projection; it has no simple semantic-summary fallback. Existing B3 summary callback does not demonstrate B6+ fallback implementation.",
+      "Mem0 ComparisonRuntime explicitly passes host model._reserve_request into the native chat bridge, which reserves before client.chat. This static path is present; actual shared24/12 admission across native calls/restart remains unverified for new D4.",
+      "Host per-message admission state is persisted in host-capacity.json and begin_public_message takes checkpoint count. New baseline summary must use the same counter, and new checks must cover persistence after interrupted transport.",
+      "Current native reader uses public search_archive and get_all/history snapshots. A common backend comparison must retain native source/snapshot limits and cannot invent MiLAi revision semantics."
+    ],
+    "required_before_model_http": [
+      "Opt-in closed-boundary formation and one ordinary cached prepare per public turn for all arms",
+      "Same public D2 observation contract for B6+/M, with actual source association and truthful raw/summary/basis distinction",
+      "B6+ at most one paid simple semantic-summary call; no M candidate revision machinery",
+      "Actual Qwen tokenizer joint2048/6 delivery, source/history discovery, owner and omission checks",
+      "Shared per-public-message24 and12 inclusive admission tests across Host/native/summary/M writer, plus resumed persisted cap and unknown transport receipts",
+      "Installed native SDK snapshot before close, independent same-path reopen, frozen artifacts and original ledger accounting"
+    ],
+    "new_model_http": 0,
+    "runtime_admission": "NOT_ADMITTED",
+    "second_family": "UNAVAILABLE_UNCHANGED",
+    "independent_judge": "UNAVAILABLE_UNCHANGED"
+  }
 }
