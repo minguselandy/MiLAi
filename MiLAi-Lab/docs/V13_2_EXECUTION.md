@@ -383,3 +383,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## E1 R8固定16边界完成，原pending保留（2026-10-02北京时间）
 
 16首尝试/逐边界Root审查；Field首次3commit/1pending，后续4no_change；派生8边界0生成/最终16个真实字面观察。8库SDK重开核对175 items/3卡/16观察/32Source，数据库hash保持。8生成60695known+32embedding13780，新unknown0，原unknown1/30387保持，ledger63834ce2。Root早期SDK审计/归档错误保留，不称Source或模型失败。资料当前19/20/829/176/0问题，候选未采用、freeze不改。自由Host8/16尚未开始，完整16行与因果/泛化限制见[结果](V13_2_E1_R8_CONTROLLED_RESULTS.md)。原48状态和完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。
+
+## R8自由Host完整首尝试与限定结论
+
+[完整结果](V13_2_E1_R8_FREE_RESULTS.md)：8轨迹/16消息均首尝试结束并逐条Root审查，1条无用最终答复/4条原失败历史未恢复、2条字面保存范围/Host确认局限及重复Host拒绝保留。SDK8库154items/4语义卡/16观察/48Source与原终态核对、DB hash不变；控制前缀361原件保持。自由段+42生成/289441 known、8embedding/5707，原账本SHA8547f1ef；R8合计50生成/350136、40embedding/19487，R0–R8累计1304生成/5796843、527embedding/223142，历史unknown1/30387不变。资料19论文/21项目参考组/845文件/181链接核验通过。所有差异/元数据截断/未读历史均限定，不上升因果、泛化、独立评分或Product结论；原48行/完整计划未完成状态保持。继续通用opt-in合同工程与E2/E0及条件要求，不修改本R8旧freeze/失败。

@@ -1072,5 +1072,19 @@
     "original_first_pending_retained": true,
     "free_host_attempted": 0,
     "original_48_requirement_fields_unchanged": true
+  },
+  "e1_r8_free_results": {
+    "manifest": "data/manifests/v13-2-e1-r8-free-results.json",
+    "sha256": "f457452bb3e0c0b041ac57704ef1af4efc5319042934cb3d7394924d6e3f5b5d",
+    "status": "ALL_FIRST_FREE_ATTEMPTS_COMPLETE_ORIGINAL_FAILURES_AND_DELIVERY_LIMITS_RETAINED",
+    "planned_trajectories": 8,
+    "execution_completed_messages": 16,
+    "unusable_final_messages": 1,
+    "original_historical_label_failure_unrecovered_messages": 4,
+    "independent_quality_gate_advanced": false,
+    "original_48_requirement_rows_unchanged": true,
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
   }
 }

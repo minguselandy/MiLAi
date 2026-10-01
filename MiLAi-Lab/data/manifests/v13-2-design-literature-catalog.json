@@ -3695,6 +3695,18 @@
           "bytes": 447
         }
       ]
+    },
+    {
+      "kind": "project",
+      "id": "LangGraph official finite loop stopping reference",
+      "url": "https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT",
+      "ref": "Rolling official page snapshot with actual UTC/SHA",
+      "commit": null,
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-loop-stopping-reference",
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-loop-stopping-reference/manifest.json",
+      "snapshot_manifest_sha256": "5b40e7d106d07c9808ee3798e591ef590701549659687389c38b273011ea7b96",
+      "status": "SAVED_OFFICIAL_METHOD_DOCUMENT_NOT_PROJECT_REPRODUCTION",
+      "read_scope": "Graph step limit versus Root inferred explicit Host repeated-proposal control; no limit increase or reproduction"
     }
   ],
   "complete": true,
@@ -3718,7 +3730,7 @@
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
   "paper_count": 19,
-  "project_count": 20,
+  "project_count": 21,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -4148,6 +4160,76 @@
           "bytes": 40067
         }
       ]
+    },
+    {
+      "cohort": "R8 first free Host explicit shape refusals and unusable valid-JSON final retained",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r8-free-host-shape-and-task-recheck.json",
+        "sha256": "179928fb6c1055616c452f032c84e96c67a01540abf058a24cfc08a4d3dfad5a",
+        "bytes": 7275
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-free-host-shape-recheck-first/v13-2-design-literature-catalog-before-7962d2120432b58a9eae59ac01201d96b7435baaceb6d7efac6a06cb31d1fb11.json",
+          "sha256": "7962d2120432b58a9eae59ac01201d96b7435baaceb6d7efac6a06cb31d1fb11",
+          "bytes": 261414
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-free-host-shape-recheck-first/catalog.local-before-7962d2120432b58a9eae59ac01201d96b7435baaceb6d7efac6a06cb31d1fb11.json",
+          "sha256": "7962d2120432b58a9eae59ac01201d96b7435baaceb6d7efac6a06cb31d1fb11",
+          "bytes": 261414
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-free-host-shape-recheck-first/index-before-151bc3263f2ddd13e18ef297ecb61c939809ef583391c4dbf6364b5b4b2b61f9.html",
+          "sha256": "151bc3263f2ddd13e18ef297ecb61c939809ef583391c4dbf6364b5b4b2b61f9",
+          "bytes": 29152
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-free-host-shape-recheck-first/current-archive-before-3b6df45cfa6a2e3b7f0c9722a81c840c79ae09cef2ac8b80b5661917c8c0baa4.json",
+          "sha256": "3b6df45cfa6a2e3b7f0c9722a81c840c79ae09cef2ac8b80b5661917c8c0baa4",
+          "bytes": 214547
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-free-host-shape-recheck-first/V13_2_DESIGN_LITERATURE-before-664954cae95568b644190ae8a0a4411fa266262508b73d04aee152213ce5f87a.md",
+          "sha256": "664954cae95568b644190ae8a0a4411fa266262508b73d04aee152213ce5f87a",
+          "bytes": 42322
+        }
+      ]
+    },
+    {
+      "cohort": "R8 free Host repeat and prefetch value omissions, originals unchanged",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r8-loop-stopping-and-delivery.json",
+        "sha256": "f42b536f16e2528660ab7d2f2ad50b8de08034ebbf62a0d545733f8bde47d191",
+        "bytes": 8205
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-loop-stopping-first/v13-2-design-literature-catalog-before-2e200e10c1b2cc75ee31364736259ba8d7baf4af0cdd58fdd8ccadee4da7a067.json",
+          "sha256": "2e200e10c1b2cc75ee31364736259ba8d7baf4af0cdd58fdd8ccadee4da7a067",
+          "bytes": 263876
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-loop-stopping-first/catalog.local-before-2e200e10c1b2cc75ee31364736259ba8d7baf4af0cdd58fdd8ccadee4da7a067.json",
+          "sha256": "2e200e10c1b2cc75ee31364736259ba8d7baf4af0cdd58fdd8ccadee4da7a067",
+          "bytes": 263876
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-loop-stopping-first/index-before-4b33674c29669508368fd0ab05e7f2238f7d38485272bb6905539ef45ee26e04.html",
+          "sha256": "4b33674c29669508368fd0ab05e7f2238f7d38485272bb6905539ef45ee26e04",
+          "bytes": 29407
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-loop-stopping-first/current-archive-before-1708c479887bf24fb3320bd1291a687fd02c8e2846548a20fbcdad2da99915c9.json",
+          "sha256": "1708c479887bf24fb3320bd1291a687fd02c8e2846548a20fbcdad2da99915c9",
+          "bytes": 216355
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-loop-stopping-first/V13_2_DESIGN_LITERATURE-before-41c6b27ee6ce65a3703d119759a136ab2db8419968a180273abd8b41b999aad7.md",
+          "sha256": "41c6b27ee6ce65a3703d119759a136ab2db8419968a180273abd8b41b999aad7",
+          "bytes": 43068
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -4162,5 +4244,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T17:04:45.696484+00:00"
+  "updated_at_utc": "2026-10-01T18:26:11.647960+00:00"
 }

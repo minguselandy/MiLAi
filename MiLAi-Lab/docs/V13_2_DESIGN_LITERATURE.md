@@ -228,3 +228,11 @@ R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失�
 本地入口`artifacts/v13-2-design-literature/index.html`新增R7中文反思及完整版本/hash记录，当前17论文/12项目参考、711唯一文件/112本地链接全部核验PASS。原682/85报告和index/catalog保留为历史。首次资源GET18成功后GitHub API403、首次resume因已创建空目录失败，都保留原driver/stdout/stderr/返回和错误响应；18论文原件复用不重取，独立git ls-remote固定refs后只新增4资源GET。归档0模型HTTP/0SDK升级/0第三方执行，Source和原账本374fcef4保持；browser失败查询记录也保留，不冒充成功。
 
 本地入口随后把R7完整结果与当前17论文/12参考放在首屏，旧R6“当前结果”标题明确标为历史。原index、711/112审计和catalog按原hash保留并进入新版closure；新增原件/论文/项目/模型HTTP均0。当前715唯一文件/114本地链接核验PASS，新增4文件是原导航/目录/审计保存及导航变更记录；原711/112仍是归档完成时的正确阶段统计。
+
+## R8自由Host首次格式拒绝与最终任务失败复查
+
+复用并重新核验JSONSchemaBench v3、官方2020-12 validation原文8.1–8.2与已保存When JSON Is Not Enough v1候选。Field首两配置实际格式拒绝的额外Host提案/费用，以及派生预取有效JSON但最终仅一个左花括号的任务失败全部保留。结构合法、回执内文、保存effect和任务完成分开；未来通用公开参数/内文关系说明候选尚未应用，不自动填Source、不paid retry、不改最终答复、不改R8freeze。原检索输出、旧catalog/index/核验报告/本说明均逐hash留存；论文19/项目参考组20不变。中文反思与SHA索引已加入本地artifacts/v13-2-design-literature/index.html。
+
+## R8自由Host重复提案与预取值省略复查
+
+保存官方[LangGraph最大步数/停止条件说明](https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT)的完整HTML、真实HTTP状态/头、抓取UTC/hash与中文范围总结，作为滚动方法参考；不提高recursion_limit、不执行示例。原重复Host提案与全部费用保留，图步数保护不证明错误指纹去重。预取只交付Source头/字段候选元数据时不记为历史正文已读。通用参数说明、拒绝指纹/材料元数据预算候选仍未采用，不改R8freeze、Source角色/hash/CAS、排序或自动补读。归档现19论文/21项目参考组；原文和反思索引加入本地HTML。
