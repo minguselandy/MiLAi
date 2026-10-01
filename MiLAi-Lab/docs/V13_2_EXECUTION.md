@@ -322,3 +322,11 @@ R7 +171generation/1,222,370known（Host151/1,085,579，writer20/136,791）、52e
 ## 逐轨迹审查推进的限定工程验收
 
 [推进驱动与验收](V13_2_STAGED_COHORT_REVIEW.md)已准备供后续全新冻结E0使用：每次只派发下一未运行轨迹，再等待Root原始证据检查点。最终公共字节44项隔离控制/34夹具及ruff、strict mypy、package/tools双边界实际均0，完整212运行/389测试/316配置及原ledger374fcef4前后不变，0真实模型/SDK机制。真实脚本父进程中断保留DISPATCHING/unknown/缺失receipt，不自动重派；已发现或未解决hard-stop保持HOLD，普通失败只有明确独立续接与已保存反思才继续。首次脚本仍加载旧版本、ruff51项与mypy2项失败均保存；Root最终逐字节核对原件，未倒补缺失的早期maps。此锁仅同一父job，不证明全client HTTP owner；Root诊断不当独立评分，48验收状态保持。R7原全部terminal后的假保存检测时点/否定结果/费用不改；A/B/C Source实现仍未验收，无新实际cohort，完整plan ACTIVE/D4未准入/Product NO_GO。
+
+## 结果快照、读取反馈与保存回执通信的限定工程验收
+
+[实现验收](V13_2_READ_PROTOCOL_IMPLEMENTATION_ACCEPTANCE.md)已将 Source 5c8aecb 精确11路径接入Root61456c6。1764索引+3 terminal原件共1767文件、128实际命令/13原非零、262原方案和11条执行版本关系逐字节核验；早期通过保留当时runtime/test SHA，未倒补未记录pwd maps。Root最终213运行/391测试/316完整配置：75新控制、91受影响旧控制（19明确deselect）、ruff11/mypy9与双boundary均通过；8默认wire/catalog/grammar/receipt对照及8原base模块Git字节核对，10保存Qwen包独立计量通过。所有控制断网/Mock，0实际新HTTP，原连续ledger374fcef4保持。
+
+A按真实ordinary/query发行快照exact get，保持原选择/Source/角色/hash/读时版本；B仅8 typed有限读取guard，未知/权限/SDK/CAS错误继续传播；C按已完成逐项receipt说明Host/closed-writer时序，默认均legacy。普通metadata/C提示成本增加，长Source/history/scope/冲突组的正文交付退化如实保留，不作压缩或质量收益。冲突pair保留两候选冲突stub但两正文omitted，1528→1863付费页仅Source pointer，不冒充冲突正文已读。快照合作锁非后端CAS/全局HTTP owner；持久存储3644–11858字节/行、无TTL/GC。
+
+资料保持17论文/12项目参考、715文件/114本地链接，无新检索。全局HTTP owner/连续账本lease仍为独立下一工程要求，实际下一E0仍须全新冻结/GitHub前置核对/逐轨迹审查，原R7不重跑。48要求状态/R7全部失败费用、E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO保持。

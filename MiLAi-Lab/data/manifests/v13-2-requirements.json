@@ -87,11 +87,13 @@
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
         "data/manifests/v13-2-e0-r6-results.json",
-        "data/manifests/v13-2-e0-r7-results.json"
+        "data/manifests/v13-2-e0-r7-results.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "D1-02",
@@ -109,12 +111,14 @@
         "data/manifests/v13-2-e0-r6-results.json",
         "data/manifests/v13-2-e0-r7-results.json",
         "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
-        "data/manifests/v13-2-read-protocol-implementation-scope.json"
+        "data/manifests/v13-2-read-protocol-implementation-scope.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
-      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "D1-03",
@@ -147,12 +151,14 @@
         "data/manifests/v13-2-source-index-acceptance.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
         "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
-        "data/manifests/v13-2-read-protocol-implementation-scope.json"
+        "data/manifests/v13-2-read-protocol-implementation-scope.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
-      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "D2-01",
@@ -789,11 +795,13 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-e0-r4-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "INV-02",
@@ -810,11 +818,13 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-e0-r4-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "INV-03",
@@ -836,12 +846,14 @@
         "data/manifests/v13-2-e0-r6-runtime.json",
         "data/manifests/v13-2-e0-r6-results.json",
         "data/manifests/v13-2-r7-blind-review-preparation.json",
-        "docs/V13_2_R7_BLIND_REVIEW_PREPARATION.md"
+        "docs/V13_2_R7_BLIND_REVIEW_PREPARATION.md",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
-      "latest_r7_review_preparation_qualification": "Original anonymous-label/random-order24 trajectories/48 messages;46 original finals/2 missing,300 conversation items/100 source bodies independently linked to frozen raw bytes;all48 score rows UNRATED. Independent reviewer absent, effective double-blind unverified. First linkage checker failed assuming uniform2 messages; exact original failure retained, v2 checks original1/2/3 lengths. No new model HTTP, SDK reopens, runtime/test/config/cohort/ledger changes. Preparation only; original R7 failure/cost/results and complete-plan obligations remain."
+      "latest_r7_review_preparation_qualification": "Original anonymous-label/random-order24 trajectories/48 messages;46 original finals/2 missing,300 conversation items/100 source bodies independently linked to frozen raw bytes;all48 score rows UNRATED. Independent reviewer absent, effective double-blind unverified. First linkage checker failed assuming uniform2 messages; exact original failure retained, v2 checks original1/2/3 lengths. No new model HTTP, SDK reopens, runtime/test/config/cohort/ledger changes. Preparation only; original R7 failure/cost/results and complete-plan obligations remain.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "INV-04",
@@ -859,12 +871,14 @@
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r5-results.json",
         "data/manifests/v13-2-e0-r6-results.json",
-        "data/manifests/v13-2-staged-cohort-review-acceptance.json"
+        "data/manifests/v13-2-staged-cohort-review-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
-      "staged_review_qualification": "Final public Root orchestration44 local controls/four narrow static checks pass, including actual scripted parent termination with unknown preserved. Root explicit per-trajectory development diagnostics only; no runtime semantic classifier, independent Judge, actual new cohort or global HTTP owner. Original R7 detection was after all24 terminal; original failures/costs and all48 statuses preserved."
+      "staged_review_qualification": "Final public Root orchestration44 local controls/four narrow static checks pass, including actual scripted parent termination with unknown preserved. Root explicit per-trajectory development diagnostics only; no runtime semantic classifier, independent Judge, actual new cohort or global HTTP owner. Original R7 detection was after all24 terminal; original failures/costs and all48 statuses preserved.",
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
     },
     {
       "id": "DEL-01",
@@ -976,5 +990,12 @@
     "actual_new_cohort_started": false,
     "global_http_owner_accepted": false,
     "full_plan_status_unchanged": true
+  },
+  "read_protocol_implementation_engineering_acceptance": {
+    "manifest": "data/manifests/v13-2-read-protocol-implementation-acceptance.json",
+    "sha256": "e63a107801300df8b63c429a467627ebdd082f1cd3e93458b397f6719af0404e",
+    "status": "ACCEPTED_OFFLINE_FINAL_SOURCE_NOT_MODEL_QUALITY",
+    "new_actual_model_http": 0,
+    "global_http_owner_implemented": false
   }
 }
