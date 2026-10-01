@@ -14,6 +14,7 @@ from langchain_core.runnables import RunnableConfig
 from pydantic import ValidationError as PydanticValidationError
 
 from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
+from milai_lab.contracts.public_memory_contracts import nonlegacy as public_nonlegacy
 from milai_lab.contracts.read_protocol import (
     SAVE_GUIDANCE,
     canonical,
@@ -34,6 +35,8 @@ from milai_lab.memory.embeddings import normalized
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.memory.support_display import encode_field_support
+from milai_lab.methods.compact_exact import decode as decode_exact
+from milai_lab.methods.compact_exact import encode as encode_exact
 from milai_lab.methods.compact_material import compact_units
 from milai_lab.methods.contextual_memory.retrieval import IndexEntry, _bm25_scores, hybrid_order
 
@@ -94,7 +97,7 @@ class GroundedMemoryRecipe:
             raise ValueError("V13_RAW_INDEX_STORAGE_INVALID")
         if raw_index_storage != "bank_prefix" and service.mutation_contract != "event_bound_v1":
             raise ValueError("V13_RAW_INDEX_STORAGE_REQUIRES_EVENT_BOUND")
-        if material_profile not in {"full_v1", "compact_v1"}:
+        if material_profile not in {"full_v1", "compact_v1", "compact_exact_v1"}:
             raise ValueError("V13_PACKET_MATERIAL_PROFILE_INVALID")
         if material_profile != "full_v1" and service.mutation_contract != "event_bound_v1":
             raise ValueError("V13_COMPACT_MATERIAL_REQUIRES_EVENT_BOUND")
@@ -140,6 +143,10 @@ class GroundedMemoryRecipe:
         if self.tool_schema_communication != "legacy":
             self.policy["tool_schema_communication"] = self.tool_schema_communication
 
+        self.policy.update(public_nonlegacy({
+            "tool_parameter_contract": service.tool_parameter_contract,
+            "observation_capture_feedback": service.observation_capture_feedback,
+        }))
         self.policy.update(nonlegacy({
             "memory_read_protocol": service.memory_read_protocol,
             "tool_read_feedback": service.tool_read_feedback,
@@ -684,12 +691,13 @@ class GroundedMemoryRecipe:
                 "apply); reused_from_index selects its literal field_support_parents table. "
                 "Use decoded real Source IDs for tools, never indices.",
             }
-            if self.tool_schema_communication != "legacy":
+            if (self.tool_schema_communication != "legacy"
+                    or self.service.tool_parameter_contract != "legacy"):
                 support_policy["trigger"] = TRIGGER_BODY_GUIDANCE
             packet["support_contract"] = support_policy
         if self.tool_schema_communication != "legacy":
             packet["tool_schema_communication"] = self.tool_schema_communication
-        if self.material_profile == "compact_v1":
+        if self.material_profile in {"compact_v1", "compact_exact_v1"}:
             packet["items"], tables = compact_units(units)
             packet.update(tables)
             packet.update(material_profile="compact_v1", binding_reference=
@@ -705,7 +713,14 @@ class GroundedMemoryRecipe:
         if self.service.tool_save_communication != "legacy":
             packet["save_communication"] = {"profile": self.service.tool_save_communication,
                                             "guidance": SAVE_GUIDANCE}
+        if self.material_profile == "compact_exact_v1":
+            packet["presentation_profile"] = "compact_exact_v1"
         packet["packet_hash"] = _hash(packet)
+        if self.material_profile == "compact_exact_v1":
+            frame = encode_exact(packet)
+            if decode_exact(frame) != packet:
+                raise ValueError("COMPACT_EXACT_ROUNDTRIP_CHANGED")
+            return packet, HEADER + _json(frame)
         return packet, HEADER + _json(packet)
 
     def _fit(
@@ -715,7 +730,7 @@ class GroundedMemoryRecipe:
         material_budget: int = 2048,
         inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
     ) -> tuple[list[dict[str, Any]], list[str]]:
-        if self.material_profile == "compact_v1":
+        if self.material_profile in {"compact_v1", "compact_exact_v1"}:
             return self._fit_compact(units, revision, source_index,
                                      request_ref=request_ref, query_kind=query_kind,
                                      material_budget=material_budget, inventory=inventory,

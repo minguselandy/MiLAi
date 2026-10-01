@@ -30,6 +30,7 @@ from milai_lab.contracts.memory import (
     SourceEvent,
     VerifiedObjectRef,
 )
+from milai_lab.contracts.public_memory_contracts import profile as public_profile
 from milai_lab.contracts.read_protocol import profile, reject
 from milai_lab.memory.observation import (
     PROJECTOR_VERSION,
@@ -142,6 +143,8 @@ class MemoryService:
         memory_read_protocol: str = "legacy",
         tool_read_feedback: str = "legacy",
         tool_save_communication: str = "legacy",
+        tool_parameter_contract: str = "legacy",
+        observation_capture_feedback: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not isinstance(store, SqliteStore):
@@ -176,6 +179,12 @@ class MemoryService:
         ):
             raise ValueError("V13_DIRECT_SUPPORT_REQUIRES_EVENT_BOUND_READ_HANDLE")
         self.support_contract = support_contract
+        self.tool_parameter_contract = public_profile(
+            "tool_parameter_contract", tool_parameter_contract
+        )
+        self.observation_capture_feedback = public_profile(
+            "observation_capture_feedback", observation_capture_feedback
+        )
         self.memory_read_protocol = profile("memory_read_protocol", memory_read_protocol)
         self.tool_read_feedback = profile("tool_read_feedback", tool_read_feedback)
         self.tool_save_communication = profile("tool_save_communication", tool_save_communication)

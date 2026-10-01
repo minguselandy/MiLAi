@@ -1094,5 +1094,15 @@
     "actual_model_http": 0,
     "original_baseline_configs_and_48_rows_unchanged": true,
     "model_or_independent_quality_gate_advanced": false
+  },
+  "public_contract_scoped_engineering": {
+    "manifest": "data/manifests/v13-2-public-contract-engineering-acceptance.json",
+    "sha256": "6acb8990883b5135419adcbc1de1678d157a10582c5f15dd6e61cb42e1d5199f",
+    "status": "ACCEPTED_SCOPED_ENGINEERING_ONLY",
+    "root_new_controls": 79,
+    "root_affected_legacy_controls": 25,
+    "actual_model_http": 0,
+    "C_next_actual_disabled": true,
+    "model_or_independent_quality_gate_advanced": false
   }
 }

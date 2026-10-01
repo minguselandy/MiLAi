@@ -236,3 +236,7 @@ R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失�
 ## R8自由Host重复提案与预取值省略复查
 
 保存官方[LangGraph最大步数/停止条件说明](https://docs.langchain.com/oss/python/langgraph/errors/GRAPH_RECURSION_LIMIT)的完整HTML、真实HTTP状态/头、抓取UTC/hash与中文范围总结，作为滚动方法参考；不提高recursion_limit、不执行示例。原重复Host提案与全部费用保留，图步数保护不证明错误指纹去重。预取只交付Source头/字段候选元数据时不记为历史正文已读。通用参数说明、拒绝指纹/材料元数据预算候选仍未采用，不改R8freeze、Source角色/hash/CAS、排序或自动补读。归档现19论文/21项目参考组；原文和反思索引加入本地HTML。
+
+## 可还原字典编码的成本反例复查
+
+复用并核验 [Apache Arrow 20.0.0 官方字典编码定义](https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout) 与固定 commit 的格式原文。整数索引/字典共同解释和可还原表示不证明 Qwen token 节省；表、校验、说明与正文必须计入同一预算。Source 有限报告显示元数据增加与正文覆盖减少，尚待 Root 独立验收；C 作为独立 opt-in 候选保留，下一实际配置不启用。不改2048预算、allocator、排名、Source角色/hash/CAS，也不按案例/语言切换。原浏览输出、阅读范围、中文反思、旧目录/索引/核验报告均保存并加入本地入口；没有新增论文/项目或模型请求。

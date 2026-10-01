@@ -4230,6 +4230,41 @@
           "bytes": 43068
         }
       ]
+    },
+    {
+      "cohort": "Source opt-in exact representation negative engineering cost; pending Root independent acceptance",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/compact-exact-negative-cost-primary-recheck.json",
+        "sha256": "21dba6d40a7a9fdeada7b19011a8b3bb0da62d457b714887216a3a24017610ca",
+        "bytes": 4792
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/compact-exact-negative-cost-primary-recheck-first/v13-2-design-literature-catalog-before-54661fe46f5d7aff879efee7fc2089e7fdae6d4c3829ac75c329dfdaa551aed5.json",
+          "sha256": "54661fe46f5d7aff879efee7fc2089e7fdae6d4c3829ac75c329dfdaa551aed5",
+          "bytes": 267247
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/compact-exact-negative-cost-primary-recheck-first/catalog.local-before-54661fe46f5d7aff879efee7fc2089e7fdae6d4c3829ac75c329dfdaa551aed5.json",
+          "sha256": "54661fe46f5d7aff879efee7fc2089e7fdae6d4c3829ac75c329dfdaa551aed5",
+          "bytes": 267247
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/compact-exact-negative-cost-primary-recheck-first/index-before-6358d9d55fe34156ab9cae5baf29d80758ff1e5321c7fd99a7f33a9cf4570134.html",
+          "sha256": "6358d9d55fe34156ab9cae5baf29d80758ff1e5321c7fd99a7f33a9cf4570134",
+          "bytes": 29740
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/compact-exact-negative-cost-primary-recheck-first/current-archive-before-78b7079dd8906cd0b64b69ab5b6d093f96e193c7b5a297b49ff80d87a5e2ab3f.json",
+          "sha256": "78b7079dd8906cd0b64b69ab5b6d093f96e193c7b5a297b49ff80d87a5e2ab3f",
+          "bytes": 219118
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/compact-exact-negative-cost-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-8f934b196437740c45558725006f95ef9ceee0b0506f2dafb3993b3a303afff4.md",
+          "sha256": "8f934b196437740c45558725006f95ef9ceee0b0506f2dafb3993b3a303afff4",
+          "bytes": 43790
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -4244,5 +4279,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T18:26:11.647960+00:00"
+  "updated_at_utc": "2026-10-01T20:03:54.162797+00:00"
 }

@@ -50,6 +50,15 @@ from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import generation_cap
 from milai_lab.contracts.memory import GroundingMode
+from milai_lab.contracts.public_memory_contracts import (
+    capture_effect,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    check_frozen as check_public_frozen,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    freeze_fields as public_freeze_fields,
+)
 from milai_lab.contracts.read_protocol import (
     check_frozen as check_read_frozen,
 )
@@ -262,6 +271,7 @@ def prepare(
             )
         )
         frozen.update(read_freeze_fields(settings, frozen["tool_catalog"]))
+        frozen.update(public_freeze_fields(settings, frozen["tool_catalog"]))
         frozen.update(http_freeze_fields(settings))
         if workflow != "reservation_v1":
             frozen["application_workflow"] = workflow
@@ -338,6 +348,7 @@ def _frozen(root: Path) -> dict[str, Any]:
         raise ValueError("V13_P5_INPUT_CHANGED_AFTER_FREEZE")
     check_communication_frozen(frozen)
     check_read_frozen(frozen)
+    check_public_frozen(frozen)
     check_http_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
@@ -800,6 +811,9 @@ def step(
                                     "source_ref": receipt["source_ref"],
                                     "object_ref": ref.id if ref else None,
                                     "observation_only": True,
+                                    **capture_effect(
+                                        receipt, projection, service.observation_capture_feedback
+                                    ),
                                     **(
                                         {"observation_capture": projection}
                                         if projection is not None

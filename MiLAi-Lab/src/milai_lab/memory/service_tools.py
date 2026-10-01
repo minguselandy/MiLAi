@@ -15,8 +15,10 @@ from langchain_core.tools import (
     StructuredTool,
     create_schema_from_function,
 )
+from langchain_core.utils.function_calling import convert_to_openai_tool
 from pydantic import BaseModel, Field, WithJsonSchema, create_model
 
+from milai_lab.contracts.public_memory_contracts import CAPTURE_GUIDANCE, parameter_guidance
 from milai_lab.contracts.read_protocol import ReadProtocolRejected, reject
 from milai_lab.memory.service import MemoryService
 
@@ -672,6 +674,21 @@ def create_service_tools(
                 " semantic_patch changes only content/scope/basis/kind; scope merges named keys. "
                 "no_change creates no revision. Observation fields are immutable."
             )
+    if service.tool_parameter_contract != "legacy":
+        for mutation_tool in [manage_tool, *([revise_tool] if revise_tool is not None else [])]:
+            properties = convert_to_openai_tool(mutation_tool)["function"]["parameters"].get(
+                "properties", {}
+            )
+            mutation_tool.description += "\n" + parameter_guidance(
+                properties, receipt_fields=service.receipt_fields,
+                receipt_contract=service.receipt_contract,
+                support_contract=service.support_contract,
+                grounding_mode=service.mode,
+            )
+    if service.observation_capture_feedback != "legacy":
+        manage_tool.description += "\n" + CAPTURE_GUIDANCE
+        if revise_tool is not None:
+            revise_tool.description += "\n" + CAPTURE_GUIDANCE
     tools = (
         manage_tool,
         *([StructuredTool.from_function(

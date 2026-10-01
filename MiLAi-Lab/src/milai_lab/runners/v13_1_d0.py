@@ -30,6 +30,18 @@ from milai_lab.application.tools import BUSINESS_NAMES, BUSINESS_SCHEMAS, _busin
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import SYSTEM_PROMPT, build_agent
 from milai_lab.contracts.memory import GroundingMode, ObservationProfile
+from milai_lab.contracts.public_memory_contracts import (
+    capture_effect,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    check_frozen as check_public_frozen,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    freeze_fields as public_freeze_fields,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    nonlegacy as public_nonlegacy,
+)
 from milai_lab.contracts.read_protocol import (
     check_frozen as check_read_frozen,
 )
@@ -130,6 +142,7 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
     validate_read_settings(settings)
     options = {
         **read_nonlegacy(settings),
+        **public_nonlegacy(settings),
         "source_backlinks": settings.get("memory_source_backlinks", "disabled"),
         "candidate_contract": settings.get("memory_candidate_contract"),
     }
@@ -160,7 +173,7 @@ def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
     ):
         raise ValueError("V13_RAW_INDEX_STORAGE_REQUIRES_BOUND_READER")
     material_profile = settings.get("memory_material_profile", "full_v1")
-    if material_profile not in {"full_v1", "compact_v1"}:
+    if material_profile not in {"full_v1", "compact_v1", "compact_exact_v1"}:
         raise ValueError("V13_PACKET_MATERIAL_PROFILE_INVALID")
     if material_profile != "full_v1" and (
         reader != "bounded_evidence_v1" or _mutation_contract(settings) != "event_bound_v1"
@@ -191,6 +204,7 @@ def _recipe_settings(settings: dict[str, Any]) -> dict[str, Any] | None:
     return {
         **GROUNDED_POLICY,
         **read_nonlegacy(settings),
+        **public_nonlegacy(settings),
         **({"raw_index_storage": index_storage} if index_storage != "bank_prefix" else {}),
         **({"material_profile": material_profile} if material_profile != "full_v1" else {}),
         "prefetch_enabled": reader is not None
@@ -474,6 +488,7 @@ def prepare(
                 catalog, config.get("tool_schema_communication", "legacy")
             ),
             **read_freeze_fields(config, catalog),
+            **public_freeze_fields(config, catalog),
             **http_freeze_fields(config),
             "tool_catalog_sha256": hashlib.sha256(
                 json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
@@ -501,6 +516,7 @@ def _frozen(root: Path) -> dict[str, Any]:
         raise ValueError("V13_D0_INPUT_CHANGED_AFTER_FREEZE")
     check_communication_frozen(frozen)
     check_read_frozen(frozen)
+    check_public_frozen(frozen)
     check_http_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
@@ -638,6 +654,9 @@ def _execute_step(
                                 "source_ref": source_ref,
                                 "object_ref": ref.id if ref else None,
                                 "observation_only": True,
+                                **capture_effect(
+                                    capture, projection, service.observation_capture_feedback
+                                ),
                                 **(
                                     {"observation_capture": projection}
                                     if projection is not None

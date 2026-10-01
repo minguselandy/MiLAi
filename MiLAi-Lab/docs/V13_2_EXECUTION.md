@@ -391,3 +391,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## E2三接口真实SDK预检与基线局限
 
 [离线预检](V13_2_E2_ROOT_ADMISSIBILITY.md)：39项检查通过，三接口实际SQLite控制中旧query填latest后第二旧读提案commit到3，ID/revision和read handle均拦截revision_conflict、终版2；回链由中文Source找到英文卡，基线0候选。仅合成机械证据/SDK重开、0模型HTTP。Root不生效配置键和DTO字段层级两次错误原件保留、恢复另存，原失败库不改。新Source工程未应用、模型cohort未启动，原账本8547f1ef及48行/完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。
+
+## 通用参数/真实捕获效果的有限工程验收
+
+[验收](V13_2_PUBLIC_CONTRACT_ENGINEERING_ACCEPTANCE.md)：Source 4e2f909 精确9路径转移；Root最终79+25控制、静态与双边界通过，86旧方法/default8组保持。Source23次非零/单次未dispatch失败、Root3次核验/收口脚本错误及原maps保持。可还原编码复核出现222→131正文、历史2→1及冲突355→60退化，C下一实际配置禁用；A/B独立默认关闭。0模型HTTP/账本8547f1ef不变。按原三接口另冻结共同A的E2候选；完整计划/E0/D4/Product门禁不变。
