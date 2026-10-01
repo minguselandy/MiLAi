@@ -1056,5 +1056,13 @@
     "actual_model_http": 0,
     "new_actual_cohort_started": false,
     "no_original_row_status_upgrade": true
+  },
+  "e1_r8_prospective_runtime": {
+    "path": "data/manifests/v13-2-e1-r8-runtime.json",
+    "sha256": "bb4eddc9ff4216e036a8053b425c3b55bb3653428c9173906e08d7584bb8ef07",
+    "status": "FROZEN_AWAITING_PUBLICATION_PREFIRST_HTTP",
+    "root_input_review_sha256": "a474feca304f38d51a8549176e67e6d7161e76e1525d4b235b1fe28f0828cadb",
+    "actual_model_http_at_prepare": 0,
+    "original_requirements_unchanged": true
   }
 }

@@ -1,0 +1,94 @@
+{
+  "host": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "context_tokens": 65536,
+    "output_tokens": 4096,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": false
+  },
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "max_calls_per_message": 12,
+  "system_prompt": "You are a helpful assistant. Use the available business tools when a task requires an action, and report their actual results. Use archived evidence and memory tools when relevant. Archived observations describe what was actually observed then, not current live authorization or verified current state. For an explicit change to a saved preference, discover its existing record and use the supported revision interface with the candidate identity and version actually read. Preserve history, unchanged scope and explicit exclusions. Create a new semantic record only for a separate new matter. An ambiguous match requires clarification. Keep relative times in the user's terms unless an absolute date or trusted anchor is available; do not invent a date or expiry. A question or assistant suggestion is not a confirmed user preference. User statements support expressed claims, not confirmed business effects. An observation object reference grants no business authority; discover and use the live application references required by its tools. Report partial effects and unknowns separately. A rejected memory proposal is not saved. The public reservation contract creates a reservation before attempting its label: reserved_label_failed confirms the reservation and a failed label attempt; label_created confirms both. found is a lookup outcome, while label_status describes label creation. Avoid repeating already completed work. Deterministic observation fields retain the original tool literals; annotations and natural-language cards remain unchecked. Read the tool schemas for the actual memory source-selection and revision contract. Public memory argument syntax for reservation tool_observation: content is a STRING containing JSON with exactly status and label_status and optional notes. status and label_status must equal the fields proposed from the selected actual receipt. Set content_format=receipt_json_v1. Propose the supported status and label_status in fields. Notes remain unchecked. Do not repeat an unchanged rejected proposal or claim storage succeeded after rejection.",
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch": 16,
+  "embedding_capacity": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "tokenizer_sha256": "21106b6d7dab2952c1d496fb21d5dc9db75c28ed361a05f5020bbba27810dd08",
+    "context_tokens": 8192
+  },
+  "memory_mutation_contract": "event_bound_v1",
+  "memory_source_backlinks": "enabled",
+  "memory_candidate_contract": "read_handle_v1",
+  "memory_reader_policy": "bounded_evidence_v1",
+  "memory_prefetch": "disabled",
+  "memory_representation": "milai",
+  "memory_formation_policy": "none",
+  "memory_writer_repairs": 0,
+  "writer_system_prompt": "Form useful supported operation memories from the supplied currently closed public events, without anticipating a later request. Preserve original roles and actual source identities. Tool observations are historical; lookup results do not replace the original operation outcome. Select the actual tool source_refs and object_ref; report storage rejection truthfully. Use only actual supported memory tools; at most six direct mutations. Public memory argument syntax for reservation tool_observation: content is a STRING containing JSON with exactly status and label_status and optional notes. status and label_status must equal the fields proposed from the selected actual receipt. Set content_format=receipt_json_v1. Propose the supported status and label_status in fields. Notes remain unchecked. Do not repeat an unchanged rejected proposal or claim storage succeeded after rejection.",
+  "experiment_contract": "v13.2 R8 exposed E1 development: formation x delivery four cells. Same actual public observed flow first, then independent free Host; all accepted compact/support/shape/selected-read/save-communication/HTTP-owner profiles common. Original cell Host/writer prompt, explicit_receipt_v1, formation policy and observation adapter differences are preserved and separately disclosed, so this is not a pure single-factor model-quality claim. Host12/output4096/temp0, ordinary2048/max6, fixed-flow Field writer1/repair0, derived projection0, existing model routes and original continuous ledger serialRoot1. No future/gold/scorer/case label in wire, automatic retry, output rewrite, new deployment or SDK upgrade. Boundary completion with pending/unconfirmed writer is not formation success; stop affected continuation for Root review before next boundary. Original R0-R7 and all failed attempts/costs remain.",
+  "memory_receipt_contract": "explicit_receipt_v1",
+  "memory_material_profile": "compact_v1",
+  "memory_support_contract": "direct_support_v1",
+  "tool_schema_communication": "shape_feedback_v1",
+  "memory_read_protocol": "selected_snapshot_v1",
+  "tool_read_feedback": "typed_read_v1",
+  "tool_save_communication": "completed_receipt_v1",
+  "http_ownership_profile": "serialized_ledger_owner_v1",
+  "http_ownership_domain": {
+    "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+    "clients": [
+      {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "response_format": null,
+        "enable_thinking": false
+      },
+      {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "response_format": null,
+        "enable_thinking": false
+      }
+    ]
+  }
+}

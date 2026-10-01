@@ -1,0 +1,317 @@
+{
+  "kind": "V13_2_R8_E1_FRESH_RUNTIME_FREEZE",
+  "status": "FROZEN_AWAITING_PUBLICATION_PREFIRST_HTTP",
+  "frozen_at_utc": "2026-10-01T16:47:02.536426+00:00",
+  "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+  "python_version": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+  "packages": {
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint": "2.1.2",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "langchain-core": "1.6.5",
+    "openai": "3.19.2",
+    "tiktoken": "0.14.0",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "httpx": "0.28.1",
+    "numpy": "2.4.6",
+    "jsonschema": "4.26.0",
+    "pydantic": "2.13.5"
+  },
+  "design_path": "data/manifests/v13-2-e1-r8-design.json",
+  "design_sha256": "1fd36d604e580d923a66bedea7a8f2ea5c7cfca63f64c40d431f8be23a55393c",
+  "fixture_path": "data/fixtures/v13-2-e1-receipt-development.json",
+  "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+  "offline_rubric_path": "data/diagnostics/v13-2-small-development-rubric.json",
+  "offline_rubric_sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+  "prepare_driver_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_r8_e1.py",
+  "prepare_driver_sha256": "3fa929f6c84a871107b709fe981f9d5651b2e275231b8edf941fd8a775ad9b01",
+  "controlled_driver_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tools/run_v13_2_fixed_flow_owned.py",
+  "controlled_driver_sha256": "7d7f4f9087745f787c809d94e455b96ac2adb994de545efbaf526d42f992ec6b",
+  "stream_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/actual-public-stream/observed-flow.json",
+  "stream_sha256": "36fd274f6a720b3d7f0d34e2a52c73f54bf481bde8ef9fc6be456e2f1b9f7dd8",
+  "stream_builder_path": "tools/build_v13_2_e1_observed_flow.py",
+  "stream_builder_sha256": "03e974d74b221eca8f78e80a83e0d73324f6b469b014ce13dc06108dabe1b043",
+  "models_preflight_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/preparation-first/models-read-only-preflight.json",
+  "models_preflight_sha256": "df3e0a9e0fbcfba61f00ed4220e4c49c9c849a5f703948996dba5ff5d25444a2",
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "ledger_before": {
+    "limits": {
+      "questions": 12,
+      "arms": 3,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "embedding_tokens": null
+    },
+    "generation_requests": 9200,
+    "generation": {
+      "charged_tokens": 25787745,
+      "known_tokens": 25757358,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 920843,
+      "known_tokens": 920843,
+      "unknown_usage": 0
+    },
+    "history": {
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c",
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "embedding_tokens": 808,
+      "sealed": true,
+      "earlier_history": {
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50",
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "embedding_tokens": 274,
+        "sealed": true,
+        "earlier_history": {
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "generation_requests": 16,
+          "generation_known_tokens": 19237,
+          "generation_charged_tokens": 19237,
+          "embedding_tokens": 267,
+          "unknown_usage": 0,
+          "judge_requests": 0,
+          "truncations": 1,
+          "sealed": true,
+          "earlier_history": {
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "generation_requests": 101,
+            "generation_known_tokens": 101810,
+            "generation_charged_tokens": 101810,
+            "embedding_tokens": 916,
+            "unknown_usage": 0,
+            "sealed": true,
+            "earlier_history": {
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "generation_requests": 55,
+              "generation_known_tokens": 40072,
+              "generation_charged_tokens": 40072,
+              "embedding_tokens": 443,
+              "unknown_usage": 0,
+              "judge_requests": 0,
+              "sealed": true,
+              "earlier_v15": {
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "generation_requests": 108,
+                "generation_known_tokens": 71846,
+                "generation_unknown_reservation": 4891,
+                "generation_charged_tokens": 76737,
+                "embedding_tokens": 836,
+                "unknown_usage": 1,
+                "judge_requests": 0,
+                "sealed": true
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "source_files": 214,
+  "executing_maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 394,
+      "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+    },
+    "configs": {
+      "count": 320,
+      "compact_sha256": "91f756422bd227fff74d0197cd71b701290e848b7628a34d3c30b275f21cecad"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "full_preparation_maps_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/preparation-first/before.json",
+  "arms": [
+    {
+      "cell": "field_autonomous",
+      "group": "controlled",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p0",
+      "input_freeze_sha256": "69279a9f1f167ab215af494affba7c99487114a5899bbf5ebeb9a268378b5e27",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-field-autonomous-r8.json",
+      "config_sha256": "2a6dcf780dc907b8ff7301344c1b6af58eef6126aa79288e7ed253aa82feeb12",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "33b2f1406392db2974bb184b2543d8e8947c925b95cb77c0934792eebd1a3f89",
+      "prompt_sha256": "2eabe6ceea0d9a8a72d170b404db7a9f9e5fef4b46dcfb483744e884da556e25",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": 4,
+      "planned_trajectories": null,
+      "planned_messages": null,
+      "controlled_flow_freeze_sha256": "211ad58817af70c67966cbb0e77e11686a7bd818225bbe95aab3a9f513699275"
+    },
+    {
+      "cell": "field_autonomous",
+      "group": "free_host",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0",
+      "input_freeze_sha256": "2dc144c04c07797d20b51924ae9777171b28b661bef4d602cd2bf08d08d191f4",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-field-autonomous-r8.json",
+      "config_sha256": "2a6dcf780dc907b8ff7301344c1b6af58eef6126aa79288e7ed253aa82feeb12",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "33b2f1406392db2974bb184b2543d8e8947c925b95cb77c0934792eebd1a3f89",
+      "prompt_sha256": "2eabe6ceea0d9a8a72d170b404db7a9f9e5fef4b46dcfb483744e884da556e25",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": null,
+      "planned_trajectories": 2,
+      "planned_messages": 4
+    },
+    {
+      "cell": "derived_autonomous",
+      "group": "controlled",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p1",
+      "input_freeze_sha256": "2afca26b130d966ee49b465dcb0c4f03089676fb1ff3b0a4ac3ae6b513a4c44b",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-derived-autonomous-r8.json",
+      "config_sha256": "845e8cf02d8a11af11b2051c487616a6443d644800ee264356fa2bd7a81a2e93",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "7143d04d694b6fc6624da79572c9d0e96ce2313d874716f7c859f9c9f1bdc59f",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": 4,
+      "planned_trajectories": null,
+      "planned_messages": null,
+      "controlled_flow_freeze_sha256": "211ad58817af70c67966cbb0e77e11686a7bd818225bbe95aab3a9f513699275"
+    },
+    {
+      "cell": "derived_autonomous",
+      "group": "free_host",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1",
+      "input_freeze_sha256": "0b921b76b0e0965f73fd89e9b63563ab364622eb29ca678716cece749587b10c",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-derived-autonomous-r8.json",
+      "config_sha256": "845e8cf02d8a11af11b2051c487616a6443d644800ee264356fa2bd7a81a2e93",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "7143d04d694b6fc6624da79572c9d0e96ce2313d874716f7c859f9c9f1bdc59f",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": null,
+      "planned_trajectories": 2,
+      "planned_messages": 4
+    },
+    {
+      "cell": "field_prefetch",
+      "group": "controlled",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p2",
+      "input_freeze_sha256": "011cb708e614abce05ee3bd3ac86f491f3c07467c8a4cf2b985cbb919f05152e",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-field-prefetch-r8.json",
+      "config_sha256": "5d0da2a388db11dff5ab1999af840b7822d053a2b3422d77f2984efc5a461360",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "33b2f1406392db2974bb184b2543d8e8947c925b95cb77c0934792eebd1a3f89",
+      "prompt_sha256": "2eabe6ceea0d9a8a72d170b404db7a9f9e5fef4b46dcfb483744e884da556e25",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": 4,
+      "planned_trajectories": null,
+      "planned_messages": null,
+      "controlled_flow_freeze_sha256": "211ad58817af70c67966cbb0e77e11686a7bd818225bbe95aab3a9f513699275"
+    },
+    {
+      "cell": "field_prefetch",
+      "group": "free_host",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2",
+      "input_freeze_sha256": "2af9890b25d3d89bd1b508e21aa779096b7fb4801ef7247dbbf6b4949911ece5",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-field-prefetch-r8.json",
+      "config_sha256": "5d0da2a388db11dff5ab1999af840b7822d053a2b3422d77f2984efc5a461360",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "33b2f1406392db2974bb184b2543d8e8947c925b95cb77c0934792eebd1a3f89",
+      "prompt_sha256": "2eabe6ceea0d9a8a72d170b404db7a9f9e5fef4b46dcfb483744e884da556e25",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": null,
+      "planned_trajectories": 2,
+      "planned_messages": 4
+    },
+    {
+      "cell": "derived_prefetch",
+      "group": "controlled",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p3",
+      "input_freeze_sha256": "41ab6921e2bd6d728437acbb088a23d458812d362f5b37a4528fe67617c87d43",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-derived-prefetch-r8.json",
+      "config_sha256": "c03fdf3efa49b3da3271e130fef5306c37140bc371ea631c68554cff0117d8af",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "7143d04d694b6fc6624da79572c9d0e96ce2313d874716f7c859f9c9f1bdc59f",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": 4,
+      "planned_trajectories": null,
+      "planned_messages": null,
+      "controlled_flow_freeze_sha256": "211ad58817af70c67966cbb0e77e11686a7bd818225bbe95aab3a9f513699275"
+    },
+    {
+      "cell": "derived_prefetch",
+      "group": "free_host",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3",
+      "input_freeze_sha256": "0e43649f2b5e4be0501d58244cd56232b1d5038638b2bd6fcbce4d3cd90c32a1",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e1-derived-prefetch-r8.json",
+      "config_sha256": "c03fdf3efa49b3da3271e130fef5306c37140bc371ea631c68554cff0117d8af",
+      "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+      "tool_catalog_sha256": "7143d04d694b6fc6624da79572c9d0e96ce2313d874716f7c859f9c9f1bdc59f",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      },
+      "planned_boundaries": null,
+      "planned_trajectories": 2,
+      "planned_messages": 4
+    }
+  ],
+  "planned_controlled_boundaries": 16,
+  "planned_free_host_trajectories": 8,
+  "planned_free_host_messages": 16,
+  "actual_model_http_at_prepare": 0,
+  "read_only_model_route_gets": 2,
+  "public_business_tool_calls_at_prepare": 4,
+  "concurrency": 1,
+  "old_roots_replayed": false,
+  "full_plan_completed": false,
+  "root_review_not_independent_judge": true,
+  "stops": "Every first boundary once; preserve attempted/pending/interrupted/unrun denominator. Inspect each actual controlled boundary before explicit next boundary. Source leak/false-save/gold hard stops affected runs. Free Host starts only after controlled rows disposed. Root is not independent Judge.",
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "execution_controller": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_r8_e1_one.py",
+    "sha256": "75f04db94931470b03c546ad815db4ff8652241cf15d05dfa801390f91c744b8",
+    "added_after_preparation_at_utc": "2026-10-01T16:49:56.308734+00:00",
+    "one_actual_step_per_invocation": true,
+    "prior_root_review_required": true,
+    "no_automatic_review_or_retry": true,
+    "scope": "Original32 controlled/free message slots; E1 only, not E0 controller reuse. Parent dispatch record precedes child; incomplete parent original refuses replay. Original child status/pending and logs preserved.",
+    "first_preparation_manifest_sha256": "a336ea6001e7e7cbaa5d27a45e1c3a07f3a9682bb4b382d3bec67ef39d27d272"
+  }
+}

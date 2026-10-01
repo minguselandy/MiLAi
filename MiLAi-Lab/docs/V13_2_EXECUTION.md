@@ -373,3 +373,8 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## Root固定观察流入口工程验收（2026-10-02北京时间）
 
 新Root入口的15项有限SDK/Mock控制、ruff/mypy和两个边界通过；8条原命令、2次静态失败、383索引原件和7条symlink元数据保留。outer owner覆盖最终回执与资源关闭，当前公开user/config绑定与writer公开通信对齐D0；unknown writer remains pending/unconfirmed，不能将boundary completed当形成成功。原Source214/配置316/ledger374fcef4、原48要求及R0–R7不变，0实际模型HTTP。资料当前17/19/807/159/0问题，新增固定LC/CPython类型原件及归档progress路径失败保存，未升级/执行上游代码。下一E1/E2/E0需新freeze及远端核对，完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO。[验收与限制](V13_2_ROOT_FIXED_FLOW_OWNED_ENGINEERING_ACCEPTANCE.md)。
+
+
+## E1 R8新运行冻结（2026-10-02北京时间，模型HTTP之前）
+
+为原2开发场景新建4共同profile配置/8新root、16固定边界后8自由轨迹/16消息。Python/SDK与原R7一致，既有模型两次/models GET200，4次公开SQLite业务工具构成新同源流；实际gen/embed0，ledger374fcef4保持。214/394/320/539完整maps冻结，32个单步输入核对仅验证输入，不称实际HTTP或负面gate通过。Field原语法/提示和形成/观察差异预先披露；Root单步原件与显式review先于下一HTTP。runtime bb4eddc9须远端核对；[范围与限制](V13_2_E1_R8_RUNTIME_FREEZE.md)。全48状态与E0/D4保持，原计划ACTIVE。
