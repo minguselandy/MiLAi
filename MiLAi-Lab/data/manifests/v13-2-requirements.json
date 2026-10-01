@@ -593,8 +593,12 @@
       "requirement": "确定性业务/副作用/版本评分独立于runtime，自由文本/scope独立盲评分。",
       "completion_evidence": "固定rubric、匿名顺序证据包、独立人/模型实际评分；Root/同族judge仅开发诊断。",
       "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "evidence": [
+        "data/manifests/v13-2-r7-blind-review-preparation.json",
+        "docs/V13_2_R7_BLIND_REVIEW_PREPARATION.md"
+      ],
+      "condition": null,
+      "latest_r7_review_preparation_qualification": "Original anonymous-label/random-order24 trajectories/48 messages;46 original finals/2 missing,300 conversation items/100 source bodies independently linked to frozen raw bytes;all48 score rows UNRATED. Independent reviewer absent, effective double-blind unverified. First linkage checker failed assuming uniform2 messages; exact original failure retained, v2 checks original1/2/3 lengths. No new model HTTP, SDK reopens, runtime/test/config/cohort/ledger changes. Preparation only; original R7 failure/cost/results and complete-plan obligations remain."
     },
     {
       "id": "D5-07",
@@ -815,11 +819,14 @@
         "data/manifests/v13-2-e0-r5-runtime.json",
         "data/manifests/v13-2-e0-r5-results.json",
         "data/manifests/v13-2-e0-r6-runtime.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-r7-blind-review-preparation.json",
+        "docs/V13_2_R7_BLIND_REVIEW_PREPARATION.md"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "latest_r7_review_preparation_qualification": "Original anonymous-label/random-order24 trajectories/48 messages;46 original finals/2 missing,300 conversation items/100 source bodies independently linked to frozen raw bytes;all48 score rows UNRATED. Independent reviewer absent, effective double-blind unverified. First linkage checker failed assuming uniform2 messages; exact original failure retained, v2 checks original1/2/3 lengths. No new model HTTP, SDK reopens, runtime/test/config/cohort/ledger changes. Preparation only; original R7 failure/cost/results and complete-plan obligations remain."
     },
     {
       "id": "INV-04",
