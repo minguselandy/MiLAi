@@ -307,18 +307,120 @@
       "supplement_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/original-supplement.json",
       "supplement_manifest_sha256": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
       "installed_interface_version": "2.1.2"
+    },
+    {
+      "kind": "project",
+      "id": "Apache Arrow dictionary encoding reference",
+      "url": "https://github.com/apache/arrow",
+      "commit": "3ad0370a04ccdae638755b94c3c31c8760a11193",
+      "release": "20.0.0",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference",
+      "snapshot_file_count": 8,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/manifest.json",
+      "snapshot_manifest_sha256": "6ebdf8438a0bced43c080b0b8363d58701a2d58b431c64873773d21e781148d9",
+      "source_manifest_sha256": "318e9a5c070e879675b428e4e22e2b824b2b422f926557be95e031f233ffc5c9",
+      "status": "SAVED_SELECTED_OFFICIAL_REPRESENTATION_REFERENCE",
+      "read_scope": "Selected official representation documentation, corresponding format source, project README/LICENSE and recursively dereferenced release tag metadata; not full repository checkout or reproduction.",
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-columnar.html",
+          "url": "https://arrow.apache.org/docs/20.0/format/Columnar.html",
+          "retrieved_at": "2026-10-01T00:28:59.244605+00:00",
+          "commit_or_version": "Apache Arrow 20.0.0 versioned documentation",
+          "sha256": "2b4e2e4bcde1de97ed6514b74cd4518988aba7bb5849402cfc20087f406a66a7",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-columnar.html",
+          "bytes": 180976
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-intro.html",
+          "url": "https://arrow.apache.org/docs/20.0/format/Intro.html",
+          "retrieved_at": "2026-10-01T00:28:59.912605+00:00",
+          "commit_or_version": "Apache Arrow 20.0.0 versioned documentation",
+          "sha256": "d962fc4abc20271cc7ee9110ea2d1e65bb35d142abe638f3765f40f90218164f",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-intro.html",
+          "bytes": 60015
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-tag.json",
+          "url": "https://api.github.com/repos/apache/arrow/git/ref/tags/apache-arrow-20.0.0",
+          "retrieved_at": "2026-10-01T00:29:00.564605+00:00",
+          "commit_or_version": "apache-arrow-20.0.0 tag ref",
+          "sha256": "d07d57902fbddfb070376b8524b1e2978a2213decfa9143fc093ae17139fbd8a",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-tag.json",
+          "bytes": 369
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-tag-object.json",
+          "url": "https://api.github.com/repos/apache/arrow/git/tags/97c79db1f8bc977bacbb90d2b85ae4909e4ca30d",
+          "retrieved_at": "2026-10-01T00:29:01.204605+00:00",
+          "commit_or_version": "97c79db1f8bc977bacbb90d2b85ae4909e4ca30d",
+          "sha256": "9831ee1666ef491d04e7a13874ef8995391db957ba522e3983f10489cb206af2",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-tag-object.json",
+          "bytes": 687
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-tag-object-1.json",
+          "url": "https://api.github.com/repos/apache/arrow/git/tags/f75dcf08ccf0f6b15ee4bb04d8ff7756c0409957",
+          "retrieved_at": "2026-10-01T00:29:51.244606+00:00",
+          "commit_or_version": "f75dcf08ccf0f6b15ee4bb04d8ff7756c0409957",
+          "sha256": "d4f98f9e130114c44bdb09204e71770b5f153b1c8724fdb3f3c35b21a8160034",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-tag-object-1.json",
+          "bytes": 701
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-columnar.rst",
+          "url": "https://raw.githubusercontent.com/apache/arrow/3ad0370a04ccdae638755b94c3c31c8760a11193/docs/source/format/Columnar.rst",
+          "retrieved_at": "2026-10-01T00:29:52.140606+00:00",
+          "commit_or_version": "3ad0370a04ccdae638755b94c3c31c8760a11193",
+          "sha256": "080084678f32538020aae5baec5ef1e93965ae8c37287d63d55a5af227579e85",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-columnar.rst",
+          "bytes": 72463
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-LICENSE.txt",
+          "url": "https://raw.githubusercontent.com/apache/arrow/3ad0370a04ccdae638755b94c3c31c8760a11193/LICENSE.txt",
+          "retrieved_at": "2026-10-01T00:29:52.936606+00:00",
+          "commit_or_version": "3ad0370a04ccdae638755b94c3c31c8760a11193",
+          "sha256": "36f65c663f1c9c910af64c73cb4302667d6513c3f0a617e42bd896d767ff4604",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-LICENSE.txt",
+          "bytes": 111773
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-README.md",
+          "url": "https://raw.githubusercontent.com/apache/arrow/3ad0370a04ccdae638755b94c3c31c8760a11193/README.md",
+          "retrieved_at": "2026-10-01T00:29:53.648606+00:00",
+          "commit_or_version": "3ad0370a04ccdae638755b94c3c31c8760a11193",
+          "sha256": "41a9d6ecf0c3c882daf3b4d615a807ffe21b32d3901c32d03a5bd81b3a95c8db",
+          "source_agent_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-design-literature-compact/arrow-20.0-README.md",
+          "bytes": 5094
+        }
+      ],
+      "method_summary": "Dictionary encoding keeps original complete values once and replaces repeated values with explicit integer indices. Shared dictionaries and indices travel together. This is a representation reference; no Arrow runtime dependency, binary format or new Store is introduced.",
+      "application": "Initial Qwen-tokenized two-record engineering fixtures omitted one selected old revision after binding sharing. Extend the generic reversible dictionary principle to repeated record IDs, exact repeated nonempty scope objects and explicit read-more references. Preserve complete actual values, body slices, source role/hash, historical/current labels and missing/partial coverage.",
+      "limitations": [
+        "JSON dictionaries can increase cost on small packets; tables and explanation count toward actual2048 Qwen-token budget.",
+        "Model interpretation and semantic benefit remain unverified; representation savings are not formal effectiveness or speedup.",
+        "No query/rank/threshold/source-selection change, new dependency/service, deployment, SDK upgrade or benchmark/gold access."
+      ],
+      "archive_attempts": [
+        {
+          "exit_code": 1,
+          "reason": "Initial fetch asserted a single annotated-tag dereference; release tag actually points to another tag. All retrieved docs/tag metadata retained; corrected recursive tag traversal resolves the actual commit."
+        }
+      ]
     }
   ],
   "complete": true,
   "new_model_calls": 0,
   "archival_issues_retained": [
     "Hindsight initial old implementation path had zero source files; actual hindsight-api-slim/hindsight_api found from tree metadata, 353 files now saved and verified.",
-    "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present."
+    "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present.",
+    "Arrow20.0.0 release tag points to another annotated tag; first single-dereference assertion failed, original metadata retained and recursive traversal resolves fixed commit3ad0370a."
   ],
-  "recorded_at_utc": "2026-10-01T00:17:09.203434+00:00",
+  "recorded_at_utc": "2026-10-01T00:41:14.229653+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
   "paper_count": 5,
-  "project_count": 4,
+  "project_count": 5,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,

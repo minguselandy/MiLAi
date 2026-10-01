@@ -1,6 +1,6 @@
 # v13.2 设计资料索引与失败反思
 
-2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。此次保存5篇论文PDF/HTML/摘要，3个上游项目的固定commit方法源码、README与LICENSE，以及1份官方/实际安装SDK版本参考。
+2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存5篇论文PDF/HTML/摘要，3个上游项目的固定commit方法源码、README与LICENSE，以及LangGraph SDK和Arrow表示格式两份官方参考。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
@@ -24,6 +24,7 @@
 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | `f2c33cc405023dcaa8aa8ef4c0120e1f262f05ad` | `projects/hindsight`；353份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | `projects/mem0`；171份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；10份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [Apache Arrow dictionary encoding reference](https://github.com/apache/arrow) | `3ad0370a04ccdae638755b94c3c31c8760a11193`，20.0.0 | `projects/apache-arrow-dictionary-reference`；8份官方版本文档、格式源码、README/LICENSE和tag元数据；选定参考片段，不是全仓复现 |
 
 LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源码与包METADATA；官方新版本的分段匹配和实际安装版本的LIKE行为分开记录，没有升级SDK。Hindsight目录重组使首次旧路径未取到源码，随后按tree metadata找到实际路径并核对353份文件；这个归档问题不算实验失败或成功。
 
@@ -41,8 +42,16 @@ LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源�
 
 [R4完整结果](../data/manifests/v13-2-e0-r4-results.json)20通过/4失败，没有达到门槛。重新查阅[Mem0原论文](https://arxiv.org/abs/2504.19413)、[Hindsight原论文](https://arxiv.org/abs/2512.12818)及[固定Mem0抽取/更新源码](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py)，来源正文和固定代码均已保存。抽取允许空候选、维护允许不变只是设计职责，不保证模型能正确区分问题前提与用户事实；不会整段照搬上游prompt、时钟推断或示例。
 
-R4查询维护15次no_change说明同一writer能够选择不改，但团队素食误写、临时演示范围扩大和语言查询单问题引用仍然存在。实际引用成员验证不等于支持主张，更不等于范围正确。这些是Root结合本地证据的推断，论文收益没有迁移为MiLAi结论。
+R4维护14次no_change说明同一writer能够选择不改，但团队素食误写、临时演示范围扩大和语言查询单问题引用仍然存在。实际引用成员验证不等于支持主张，更不等于范围正确。这些是Root结合本地证据的推断，论文收益没有迁移为MiLAi结论。
 
 表示候选只压缩已有选中单元的重复metadata，留出真实历史/叶子正文预算；不按题目语种或关键词改变检索/更新选择。先验收工程交付，再冻结新的全量开发cohort；相同公开说明提供各基线。默认旧行为保留，索引存储性能改动独立测量，不合并为单因素收益。
 
 SDK检查另保存官方固定Store接口与实际安装`langgraph-checkpoint==2.1.2`接口/METADATA。公开put禁止namespace分量包含句点；无效测试样例失败与修正依据保留。官方最新分段行为与实际Sqlite2.0.11前缀LIKE继续分开，没有升级SDK。新增资源和失败反思在本地SDK参考的`namespace-validation/`可查看。
+
+## 材料压缩工程失败与表示参考
+
+共享来源绑定后，两记录、多语种的实际Qwen tokenizer工程夹具仍只交付一份选中旧正文；失败回执保留。为减少重复字段，查阅并保存[Arrow 20.0字典编码格式](https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout)与[格式说明](https://arrow.apache.org/docs/20.0/format/Intro.html)。字典保存完整值，重复处使用明确索引；字典与索引需要一起传递。
+
+当前候选借鉴这个通用表示原则，压缩实际record ID、完全相等的scope及重复读入口，保留完整来源role/hash、版本hash/CAS、当前/历史区分和真实省略状态。表、解码说明及正文仍共同计入原2048预算。此应用是工程假设；不引入Arrow依赖，不改排名或选取范围，模型能否正确消费及完整语义收益尚未验证。小包可能因表开销变大，同样需要记录。
+
+20.0.0发布tag实际指向第二层tag；首次只解引用一层的归档检查失败，原元数据保留，递归解析后固定到上述实际commit。归档错误与材料交付失败分开，不算模型样本。
