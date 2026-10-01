@@ -363,3 +363,8 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 已要求同一Source仅原provider/新测试通用清理，保留fc及后续amend/早期53控制、79旧控制和所有失败原件；运行字节改变后按影响补验。固定HTTPX0.28.1 close先标CLOSED后transport close，is_closed不能代替close正常完成；新官方Clients HTML GET200保存，固定源码与CPython方法复用，Source13 hash/scope不改。[资料总结](V13_2_DESIGN_LITERATURE.md)17论文/18组参考/784文件/152链接，独立核验0问题。修正/最终交接/Root接受/新cohort仍待，主213/391/316/ledger374fcef4/原plan及48状态保持，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO。
 
 随后同一Source报告provider15行最小修正、6新增清理控制首次通过/合计59新控制，实际raw-wire8、ruff8/mypy6/双boundary在新map通过；关闭抛错保留登记/lease，原初始化异常原类型/实例与cleanup cause保持、实际另一进程BUSY。此处仍为实现方报告，最终provenance/amend/index正在生成，Root尚未接受最终提交与执行字节；原反例和旧fc/f28阶段保留。
+
+
+## HTTP owner 最终独立工程验收
+
+最终Source02e619e精确8路径转入28671c3，默认legacy。[验收与边界](V13_2_HTTP_OWNER_ENGINEERING_ACCEPTANCE.md)保存完整交接、13原非零、Root两次审计失败及独立最终执行证据。59控制、ruff8/mypy6/双边界和转入后主树双边界通过；另有4实际清理模式、5事件11状态含真实进程cut、9DTO字段/嵌套漂移、emit互斥、持久写序/同sidecar与fresh-process、5用量类型控制。214/393/316完整map一致，原continuous ledger374fcef4与全部历史费用/48状态不变。SDK未返回内部资源、完整native SDK/模型质量及未来Root fixed-flow仍不冒称覆盖；下一新驱动与fresh freeze独立准备，无新实际cohort。资料17论文/18参考、784文件/152本地链接保持，原件和总结可查看；完整planACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO。

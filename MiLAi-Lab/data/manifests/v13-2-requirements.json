@@ -1040,5 +1040,13 @@
     "engineering_accepted": false,
     "all_original_requirement_rows_unchanged": true,
     "actual_new_model_http": 0
+  },
+  "http_owner_engineering_acceptance": {
+    "status": "ACCEPTED_SCOPED_ENGINEERING_ONLY",
+    "manifest": "data/manifests/v13-2-http-owner-engineering-acceptance.json",
+    "source_commit": "02e619e3f2a4507bc80122c0c9f020621f7b7675",
+    "primary_transfer_commit": "28671c3e8641cbe455823033f5f8a1f24808be3e",
+    "research_gate_statuses_unchanged": true,
+    "new_actual_cohort": false
   }
 }
