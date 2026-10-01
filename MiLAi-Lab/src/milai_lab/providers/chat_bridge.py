@@ -5,19 +5,21 @@ from __future__ import annotations
 import json
 import uuid
 from contextlib import nullcontext
+from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, convert_to_openai_messages
 from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.utils.function_calling import convert_to_openai_tool
-from pydantic import ConfigDict, Field
+from pydantic import ConfigDict, Field, PrivateAttr
 
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.presentation import json_action_calls
 from milai_lab.providers.contextual_vllm import VLLMClient
+from milai_lab.providers.generation_admission import DurableGenerationAdmission
 from milai_lab.providers.request_pipeline import (
     ChatRequest,
     DeliveryObserver,
@@ -126,6 +128,10 @@ class VLLMChatModel(BaseChatModel):
     calls_in_message: int = 0
     capacity_path: Path | None = None
     active_message_key: str | None = None
+    generation_admission_profile: Literal["legacy", "durable_shared_v1"] = Field(
+        default="legacy", frozen=True
+    )
+    _generation_admission: DurableGenerationAdmission | None = PrivateAttr(default=None)
     request_transform: RequestTransform | None = Field(default=None, exclude=True, repr=False)
     delivery_observer: DeliveryObserver | None = Field(default=None, exclude=True, repr=False)
     response_hook: ResponseHook | None = Field(default=None, exclude=True, repr=False)
@@ -134,7 +140,25 @@ class VLLMChatModel(BaseChatModel):
     def _llm_type(self) -> str:
         return f"milai_vllm_{self.client.config.tool_mode}"
 
-    def begin_public_message(self, key: str, checkpoint_calls: int = 0) -> None:
+    def begin_public_message(
+        self, key: str, checkpoint_calls: int = 0, *,
+        admission_phase: Literal["start", "resume"] | None = None,
+        admission_scope: dict[str, Any] | None = None,
+    ) -> None:
+        if self.generation_admission_profile == "durable_shared_v1":
+            self._generation_admission = None
+            self.active_message_key = None
+            self.calls_in_message = 0
+            if self.capacity_path is None or admission_phase is None or admission_scope is None:
+                raise ValueError("GENERATION_ADMISSION_EXPLICIT_CONTEXT_REQUIRED")
+            gate = DurableGenerationAdmission(
+                self.capacity_path, key, admission_scope, asdict(self.client.config),
+                self.max_calls_per_message, admission_phase, checkpoint_calls,
+            )
+            self._generation_admission = gate
+            self.active_message_key = key
+            self.calls_in_message = gate.count
+            return
         self.active_message_key = key
         if self.capacity_path is None:
             self.calls_in_message = checkpoint_calls
@@ -142,7 +166,16 @@ class VLLMChatModel(BaseChatModel):
         state = read_json(self.capacity_path) if self.capacity_path.exists() else {}
         self.calls_in_message = max(state.get(key, 0), checkpoint_calls)
 
-    def _reserve_request(self) -> None:
+    def _reserve_request(self, *, origin: str | None = None) -> None:
+        if self.generation_admission_profile == "durable_shared_v1":
+            if self._generation_admission is None:
+                raise ValueError("GENERATION_ADMISSION_NOT_STARTED")
+            if self.active_message_key != self._generation_admission.identity["public_message_id"]:
+                raise ValueError("GENERATION_ADMISSION_ACTIVE_MESSAGE_CHANGED")
+            self.calls_in_message = self._generation_admission.reserve(
+                asdict(self.client.config), self.max_calls_per_message, origin,
+            )
+            return
         if self.calls_in_message >= self.max_calls_per_message:
             raise ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED")
         self.calls_in_message += 1
@@ -194,7 +227,10 @@ class VLLMChatModel(BaseChatModel):
                 _action_schema(tools, generation_only=True),
             )
         tools = prepared.tools
-        self._reserve_request()
+        if self.generation_admission_profile == "durable_shared_v1":
+            self._reserve_request(origin="model_invoke")
+        else:
+            self._reserve_request()
         scope = (
             self.delivery_observer.request_scope(prepared, self.calls_in_message)
             if self.delivery_observer is not None
