@@ -858,11 +858,13 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r5-results.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-staged-cohort-review-acceptance.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "staged_review_qualification": "Final public Root orchestration44 local controls/four narrow static checks pass, including actual scripted parent termination with unknown preserved. Root explicit per-trajectory development diagnostics only; no runtime semantic classifier, independent Judge, actual new cohort or global HTTP owner. Original R7 detection was after all24 terminal; original failures/costs and all48 statuses preserved."
     },
     {
       "id": "DEL-01",
@@ -966,5 +968,13 @@
     "status": "STATIC_PROPOSAL_ACCEPTED_NOT_IMPLEMENTATION_OR_MODEL_EFFECTS",
     "next_scope": "data/manifests/v13-2-read-protocol-implementation-scope.json",
     "actual_new_model_http": 0
+  },
+  "staged_cohort_review_engineering_acceptance": {
+    "manifest": "data/manifests/v13-2-staged-cohort-review-acceptance.json",
+    "status": "ACCEPTED_LOCAL_ORCHESTRATION_NOT_MODEL_OR_GLOBAL_HTTP_OWNER",
+    "new_actual_model_http": 0,
+    "actual_new_cohort_started": false,
+    "global_http_owner_accepted": false,
+    "full_plan_status_unchanged": true
   }
 }
