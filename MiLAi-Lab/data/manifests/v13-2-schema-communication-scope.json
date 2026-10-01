@@ -1,0 +1,89 @@
+{
+  "kind": "V13_2_SCHEMA_COMMUNICATION_NEXT_ISOLATED_ENGINEERING_SCOPE",
+  "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+  "recorded_at_utc": "2026-10-01T06:35:35.223886+00:00",
+  "published_parent_commit": "c3ffd5bfabc60628412ad3fde5997836a65f3ad5",
+  "implementation_base": "Exact subsequent scope publication commit; Root must provide remotely verified identity before Source starts",
+  "profile_key": "tool_schema_communication",
+  "opt_in": "shape_feedback_v1",
+  "default": "legacy",
+  "combined_factors": [
+    "Generic actual public catalog parameter shape/descriptions",
+    "Safe faithful origin-specific structural error presentation",
+    "Trigger metadata versus actual Source body wording"
+  ],
+  "source_owner": "Existing /root/v13_2_source_resume only; no new delegated agents",
+  "new_worktree": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-schema-communication",
+  "new_branch": "feat/lab-schema-communication-v13-2-20261001",
+  "allowed_source_paths": [
+    "src/milai_lab/contracts/tool_schema_communication.py",
+    "src/milai_lab/providers/chat_bridge.py",
+    "src/milai_lab/baselines/langmem_agent.py",
+    "src/milai_lab/methods/langmem_recipe.py",
+    "src/milai_lab/methods/grounded_memory.py",
+    "src/milai_lab/runners/v13_1_d0.py",
+    "src/milai_lab/runners/v13_1_p5.py"
+  ],
+  "allowed_test_paths": [
+    "tests/unit/test_tool_schema_communication.py",
+    "tests/memory/test_v13_2_schema.py",
+    "tests/memory/test_v13_2_direct_support.py"
+  ],
+  "root_owned": [
+    "docs/configs/fixtures/rubrics/freezes",
+    "All real generation and embedding HTTP concurrency1",
+    "Original continuous ledger and all case/Source semantic scoring"
+  ],
+  "original_source_proposal": {
+    "files": 280,
+    "copied_files": 282,
+    "commands": 48,
+    "original_returncodes": {
+      "0": 47,
+      "2": 1
+    },
+    "original_map_sizes": {
+      "17": 11,
+      "19": 37
+    },
+    "root_verified_reference_files": 9,
+    "original_root": "/cra/memory/mx_memory/artifacts/v13-2-schema-communication-proposal",
+    "exact_copied_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-schema-communication-proposal-source",
+    "handoff_sha256": "6773f8295755d6caa56d6834a832d4f7a4f5d67cf6450f40e5d43cb62f7f3809",
+    "manifest_sha256": "b3acdc2b3640b3e380e379c914483e4653fd0cb89d7df638de871796189bec4f",
+    "file_index_sha256": "2a84570570a206212246790785c169fc57cc5e00de0cd03c58a55d2d8cbeb4cb",
+    "root_verification_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-schema-communication-proposal-root/root-verification.json",
+    "root_verification_sha256": "b98ab921c73ed5d1f4a7585d1fe5fde0647d342f1d9de8cccb18bd958e6bb96d",
+    "source_subset_files": 19,
+    "source_subset_map_sha256": "d21e7f35917cf756746e49e88f5c55d3ae567f84a4f0bd2fad923e8421123226",
+    "full_source_map_was_supplied_identity_not_fresh_Source_audit": true
+  },
+  "root_fresh_source_files": 211,
+  "root_fresh_source_map_sha256": "8c466d3ca839ea0db5aaa722ae20ffa6c11460c8f1d5c068e53921b6cb6551ce",
+  "continuous_ledger_sha256_before": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+  "continuous_ledger_sha256_after": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+  "source_unchanged": true,
+  "ledger_unchanged": true,
+  "mechanism_tests_executed": 0,
+  "actual_new_model_http": 0,
+  "cap_observability": "SEPARATE_STATIC_PROPOSAL_NOT_AUTHORIZED_IN_THIS_PROFILE",
+  "engineering_checks_scope": "Actual D0 Host ToolNode/writer mocks, recipe/shared baseline interface/P5 freeze and resume, three true error origins, hostile/path/context bounds, existing source/CAS/owner/replay, original caps, actual local tokenizer and exact default legacy wire; relevant ruff/mypy and both boundaries only",
+  "prohibited_runtime_changes": [
+    "Argument coercion/rewrite/automatic retry",
+    "Default/forced current or inferred source/support union",
+    "Semantic verifier/question or language/case classifier",
+    "New preflight or stricter business validation",
+    "Provider grammar/model/server/SDK/admission/budget/ranking/selection changes",
+    "Actual benchmark/gold/holdout/scorer access by Source"
+  ],
+  "actual_followup_cohort": "NOT_CREATED; Root engineering acceptance and new complete pre-run freeze required",
+  "qualifications": [
+    "Structural communication is not proof of source entailment",
+    "No single-factor improvement or generalization",
+    "Original R6 21PASS/3FAIL and full source gate remain failed",
+    "Original 48 requirement statuses unchanged"
+  ],
+  "d4_admission": "NOT_ADMITTED",
+  "full_plan": "ACTIVE_INCOMPLETE",
+  "product": "NO_GO"
+}

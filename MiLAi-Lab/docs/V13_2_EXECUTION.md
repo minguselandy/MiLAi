@@ -284,3 +284,9 @@ Root只读SQLite Store SDK重开24bank/458items与最后真实回执一致，DB 
 R6 +169generation/958,878known（Host150/856,495，writer19/102,383）和45embedding/19,279，trace与原账本差额一致，新unknown0。累计9029generation/24,534,988known/24,565,375charged/unknown1，embedding900,641/unknown0；历史保守未知30,387保持，末SHA73c437ac。R0–R6累计+1083generation/4,224,337known、435embedding/183,453。没有成本下降、单因素收益或泛化声明。
 
 失败后新检索五论文/三固定project资料均已保存；[可查看资料目录](V13_2_DESIGN_LITERATURE.md)现11论文/10项目参考、682文件/85本地链接通过hash/头/链接核验，方法参考与未采用候选区分，早期检索笔记和完整R6诊断分别可读。只授权同一既有Source做通用参数说明/原validator路径反馈的READ_ONLY方案，不改当前211源码和所有冻结cohort。完整plan ACTIVE，来源/同能力/D4与D5门禁仍未完成、Product NO_GO。
+
+## 通用工具说明方案的Root核验与新隔离范围
+
+[新范围](V13_2_SCHEMA_COMMUNICATION_DESIGN.md)限定默认关闭shape_feedback_v1，联合呈现公开参数层级、三类真实错误来源与trigger元数据/Source正文说明。Root核对280索引原件/48回执、原17→19文件maps、19快照/9归档参考，精确复制282文件；47返回0/一rg返回2及Source初始metadata覆盖限制原样保留。Root新鲜211 map仍8c466、连续账本73c437ac不变，核验器首执行0且无机制测试/新模型HTTP；两次Root只读查阅失败的原工具来源另列，不补造当时map。
+
+范围只允许一个新增helper与六现有源码、三相关测试，D0实际入口、recipe、Host/基线/M、writer及P5恢复同flag闭包。旧默认/catalog/wire、实际grammar/参数、Source/CAS、12/2048/6/writer1/repair0保持；不补来源、问句分类、业务规则或语义verifier，不增加付费repair。独立cap可观测提案未纳入。先发布核对此范围，再由同一既有Source在新隔离树实现，旧树HOLD；实现和Root有限工程验收之前不建实际新cohort或启HTTP。资料682/85、R6失败、48验收项状态及完整plan ACTIVE/Product NO_GO保持。

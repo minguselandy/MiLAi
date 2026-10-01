@@ -337,5 +337,20 @@
       "actual_d4_admission": "NOT_ADMITTED",
       "independent_judge": false
     }
-  ]
+  ],
+  "schema_communication_next_engineering_scope": {
+    "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+    "profile": "shape_feedback_v1",
+    "path": "data/manifests/v13-2-schema-communication-scope.json",
+    "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+    "combined_factors": [
+      "Generic actual public catalog parameter shape/descriptions",
+      "Safe faithful origin-specific structural error presentation",
+      "Trigger metadata versus actual Source body wording"
+    ],
+    "implementation_not_started": true,
+    "actual_model_samples": 0,
+    "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
+    "d4_admission": "NOT_ADMITTED"
+  }
 }

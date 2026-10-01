@@ -4,6 +4,8 @@
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
+已归档的jsonschema/vLLM/JsonSchemaBench参考另用于[通用工具说明与真实结构反馈方案](V13_2_SCHEMA_COMMUNICATION_DESIGN.md)。原只读交接、48条命令及9参考原件逐hash另存；此次没有新增检索资源或实施机制，资料计数保持682/85，结构说明与语义收益分别验收。
+
 ## 论文与可借鉴内容
 
 | 资料 | 方法要点 | 对当前设计的用途与边界 |
