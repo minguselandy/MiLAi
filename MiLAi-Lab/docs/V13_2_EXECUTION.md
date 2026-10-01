@@ -220,3 +220,9 @@ Root新增离线实际HTTP审计器，校验真实送达的profile/hash、curren
 10k的bank_prefix与owner_bank_v1首查询p50分别116.862秒/57.007秒，缓存35.968秒/17.248秒，dirty40.923秒/17.683秒；全部七阶段和CPU/SDK计数见[完整阶段分布](V13_2_DERIVED_INDEX_SCALE.md)。共有机器、交错工程、固定顺序与无legacy inline的限制保留；绝对成本仍高，D5-10继续PARTIAL，不升级模型/泛化或D4。
 
 这一测量协议已结束，R5可进入fresh route/input/runtime/ledger freeze，再串行执行原24/48。此前preview、历史cohort及性能根不再执行；后续模型费用继续原权威账本，测量的ledger-before/after快照不改。
+
+## R5独立实际运行冻结
+
+[运行身份](../data/manifests/v13-2-e0-r5-runtime.json)已FROZEN_READY：209源码676ad5dc、原24轨迹/48消息、配置compact_v1与bank_prefix、R4两提示/rubric/12admissions/2048与6/repair0均固定，报告冻结提交49a7288与实际Source提交6514012分别记录。现有7860 Qwen和7861 bge-m3两次fresh models GET均200，未部署或换模型。
+
+实际prepare禁止socket/connect_ex并记录0attempts/0生成/0embedding，原连续账本仍32265299。实际新root为`artifacts/v13-2-development-r5/E0-normal-r5`；preview根永不执行。工具目录、环境/SDK、CLI、input/rubric、parent、原账本及全840结果hash固定；新wire审计器及独立decoder另外复制到不可变offline-tool-freeze，旧prepare的f04身份/未完成840拒绝回执保留。下一步单parent按首尝试串行执行24，无重跑/择优拼接；尚无R5质量结论。
