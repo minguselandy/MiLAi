@@ -238,3 +238,11 @@ Root后检修正一项实质审计错误：原命令仍指向R4，24库/407items
 R5新增118generation/492,678known（Host95/402,845，writer23/89,833）与50embedding/20,507；trace与原账本差额一致，新unknown0。累计8,860generation/23,606,497charged/23,576,110known/unknown1，embedding881,362/unknown0；R0–R5新增914generation/3,265,459known和390embedding/164,174。历史保守未知30,387不清零。最终账本SHA26f46d5f，成本下降、独立评分与泛化未证实。
 
 已重新查阅EAL/Hindsight方法和固定Mem0抽取/NONE源码，原PDF/HTML/项目文件及新失败总结可经资料索引查看。下一步只做通用支持叶子/触发职责与有限共享admission/串行闭包工程；保持设计方向和现有合同，不按问题类型特判、不启新服务或读取新holdout。完整计划仍active。
+
+## 共享额度合入与串行只读审计
+
+[共享admission限定验收](V13_2_SHARED_ADMISSION.md)接受默认关闭durable_shared_v1：Source090901b推送并远端精确核对，Root552e014转入；原15回执、209产物及四失败完整保存。最终33新/17默认检查与六AST/实际默认字节对照通过。主树50相关检查、ruff4/mypy3/package及tools边界通过，前后210源码b010a107/测试/配置均匹配Source最终map。实际配置尚未启用；历史R5仍固定209/676ad5dc，不能重标旧样本。Root发布辅助UTC import/read_files类型错误也保留，修正审计器，没有改运行实现。
+
+[HTTP串行只读验收](V13_2_SERIAL_HTTP_AUDIT.md)核对58查阅尝试、57实际subprocess、1dispatch前helper失败及两非零回执；31文件快照/9installed-git匹配/13AST/354原产物，Root首次KeyError与恢复map来源各自明确。native实例锁覆盖自身callback，当前所有client及跨root ledger没有共同整请求mutex/owner lease。未执行实际并发事故，没有把SDK本地entity检索线程当模型HTTP并行。
+
+22份实际固定SDK/依赖原件及Root补充manifest加入[资料库](V13_2_DESIGN_LITERATURE.md)，现六论文/七项目参考、647文件/56本地链接通过hash核验。以上新增真实模型/embedding HTTP0，连续账本SHA26f46d5f不变；合成测试使用独立局部账本。D4共同reader/cache/形成/B6/Host写策略及HTTP闭包仍未实施，来源语义门槛未通过，Product NO_GO/full plan active。

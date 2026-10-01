@@ -1,0 +1,13 @@
+# v13.2 HTTP串行边界的只读审计
+
+当前Mem0实例的桥接锁覆盖native chat/embed从admission到reserve、HTTP与finish，但Host和M的直接client路径未共享该锁；VLLMClient._post也没有整请求共同mutex。生成额度flock只串行计数修改。审计确认这些静态边界，没有执行或观察实际重叠HTTP故障；共同串行运行闭包尚未实现。见[原回执验收索引](../data/manifests/v13-2-serial-http-audit-acceptance.json)。
+
+Source保存58份查阅尝试回执，其中57次记录了subprocess dispatch，一次native-threads在辅助脚本JSON写读竞争时、dispatch前失败；恢复after map复制原before，下一成功命令独立确认208源码未变。另一次dependency-tool-node-path是真实非零路径查找。前57份208源码map及最后补CLI的209map各自保留，不回填扩张。bootstrap/helper修正/组装不全在recorder内，不能声称有它们的完整原stdout。Root曾误要求每份回执均有runtime_map字段，KeyError原脚本和错误记录保留；改按真实pre-dispatch来源核对，没有改SDK或运行实现。
+
+Root逐hash核对58份回执、31份文件快照/读取范围、9份已安装SDK文件与f8082a73固定git对象及依赖metadata，13项标准库AST断言通过，354份原证据复制保存。全程无新增Lab/SDK import、SDK构造、Mock/真实HTTP或Source测试。实际mem0ai2.1.0参考与94c3fe9论文设计参考分别归档；22份串行相关原件和Root新位置manifest加入[本地资料索引](V13_2_DESIGN_LITERATURE.md)。
+
+固定同步Memory.add先embed，再generation，再batch embed，源码中步骤顺序执行。选定SDK唯一同步ThreadPoolExecutor(max4)针对本地entity_store.search，embedding在executor前完成；不能归因该四线程会并行模型HTTP。现有ToolNode/max_concurrency1支持当前调度顺序，不能证明所有路径的全局互斥。httpx0.28.1实际transport retries0且_post无自动重试；SDK批量embedding失败后逐条fallback属于额外收费尝试。P5 execution.lock只保护单root；RunBudget的reserve/finish各自锁定，不统一不同对象或root的完整ledger生命周期。conditional telemetry、缺失spacy/FastEmbed资源的网络入口只是静态记录，未冒称已触发。
+
+最小后续候选是在ledger/client/SDK构造前取得同一controller/model deployment/canonical ledger域的非阻塞排他进程lease，保持到证据写入和close；所有Host/embed/native/M及未来已实现summary路径注入同一请求mutex，从reserve前持有至finish/finally。PID、冻结配置、budget身份及closed/fork/reentry状态须验证；native现有外层锁保持独立，避免重入死锁。该候选未实现，合成barrier/双进程lease/未知中断检查也未执行。恢复缺失budget的拒绝合同须由Root另冻，不能换账本或重置历史费用。
+
+此审计不是完整SDK复现、实际故障实验、全球ledger一致性或D4准入。另行接受的[共享admission](V13_2_SHARED_ADMISSION.md)只解决持久额度。R5来源门槛、共同四臂工程和完整计划继续未完成，Product保持NO_GO。

@@ -914,7 +914,174 @@
       "limits": [
         "Source/installed byte verification only; no native SDK lifecycle or actual model invocation.",
         "Reference subset excludes benchmark/gold content; SDK remains unchanged."
-      ]
+      ],
+      "serial_http_reference_supplement": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/root-manifest.json",
+        "sha256": "40486dc35e635d80ede4e9b63c0955ce8a33b2f3891c6ed70f87886398d603dc",
+        "source_manifest": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/manifest.json",
+          "sha256": "b8c5d9d1d779f641b096325e91109de6fa4d9092f4363507b48c72aa9fe4298d"
+        },
+        "files": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/LICENSE",
+            "relative_path": "LICENSE",
+            "sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/LICENSE",
+            "original_relative_path": "native-f808-reference/LICENSE"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/README.md",
+            "relative_path": "README.md",
+            "sha256": "7509347d34a767a2ef37ceb6cf6c714de9e8d84fe66ad5eea92bbae824a8fbeb",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/README.md",
+            "original_relative_path": "native-f808-reference/README.md"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/fastembed-0.8.1.dist-info/METADATA",
+            "relative_path": "installed-metadata/fastembed-0.8.1.dist-info/METADATA",
+            "sha256": "2ef7b92183cec69603398606de5e8eb27bfb34ac7f6d1889572f5bcb56b24e8b",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/fastembed-0.8.1.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/httpx-0.28.1.dist-info/METADATA",
+            "relative_path": "installed-metadata/httpx-0.28.1.dist-info/METADATA",
+            "sha256": "febb9b0f8f3e80d57c8199c304f35c4336e8581d1d18d7983c92766b82793b25",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/httpx-0.28.1.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/langchain_core-1.6.5.dist-info/METADATA",
+            "relative_path": "installed-metadata/langchain_core-1.6.5.dist-info/METADATA",
+            "sha256": "f53f235d74ccc1ca186b3136bfe7d5ce43629c6f0321685fbaa6e3781983f48a",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/langchain_core-1.6.5.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/langgraph-1.1.10.dist-info/METADATA",
+            "relative_path": "installed-metadata/langgraph-1.1.10.dist-info/METADATA",
+            "sha256": "aebea03f229d2e7c2fb04573e4f1f04c89ff907cd5bb8cca5fa1b6acfa5e0c4b",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/langgraph-1.1.10.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/langgraph_prebuilt-1.0.13.dist-info/METADATA",
+            "relative_path": "installed-metadata/langgraph_prebuilt-1.0.13.dist-info/METADATA",
+            "sha256": "786f2f9556332a260a4e4aab55fce49f0117961839f2ec0b7e3d86bb8eef0883",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/langgraph_prebuilt-1.0.13.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/mem0ai-2.1.0.dist-info/METADATA",
+            "relative_path": "installed-metadata/mem0ai-2.1.0.dist-info/METADATA",
+            "sha256": "e0c455a3331aa3da550aa21a2b47ff9c40084c0f29d184cf5f49604eacb161d9",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/mem0ai-2.1.0.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/mem0ai-2.1.0.dist-info/direct_url.json",
+            "relative_path": "installed-metadata/mem0ai-2.1.0.dist-info/direct_url.json",
+            "sha256": "7e21f1d558288fba4a1cc22156bc2c83c751adeb3a7dc1b052b8ef6c3917d2a7",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/mem0ai-2.1.0.dist-info/direct_url.json"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/openai-3.19.2.dist-info/METADATA",
+            "relative_path": "installed-metadata/openai-3.19.2.dist-info/METADATA",
+            "sha256": "c666d008ba46358b61369a56b5a5b2dbf65f835a5b2886ed6ee02f7608dee676",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/openai-3.19.2.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/installed-metadata/qdrant_client-1.19.1.dist-info/METADATA",
+            "relative_path": "installed-metadata/qdrant_client-1.19.1.dist-info/METADATA",
+            "sha256": "b1db9f41e614732dcdd0e5ed5f831139ff95ae6562cef2d955948b943d398288",
+            "url": null,
+            "original_relative_path": "native-f808-reference/installed-metadata/qdrant_client-1.19.1.dist-info/METADATA"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/manifest.json",
+            "relative_path": "manifest.json",
+            "sha256": "b8c5d9d1d779f641b096325e91109de6fa4d9092f4363507b48c72aa9fe4298d",
+            "url": null,
+            "original_relative_path": "native-f808-reference/manifest.json"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/embeddings/openai.py",
+            "relative_path": "mem0/embeddings/openai.py",
+            "sha256": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/embeddings/openai.py",
+            "original_relative_path": "native-f808-reference/mem0/embeddings/openai.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/llms/vllm.py",
+            "relative_path": "mem0/llms/vllm.py",
+            "sha256": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py",
+            "original_relative_path": "native-f808-reference/mem0/llms/vllm.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/memory/main.py",
+            "relative_path": "mem0/memory/main.py",
+            "sha256": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py",
+            "original_relative_path": "native-f808-reference/mem0/memory/main.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/memory/setup.py",
+            "relative_path": "mem0/memory/setup.py",
+            "sha256": "840d3af99b628be4070cd88c30ded45e1c5532279128fcc5fc6f99f3eed829ea",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/setup.py",
+            "original_relative_path": "native-f808-reference/mem0/memory/setup.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/memory/telemetry.py",
+            "relative_path": "mem0/memory/telemetry.py",
+            "sha256": "89f36bd0b87059fa0710adcccfbd9639ab4d5c4a762d875a1caceaf688aca687",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/telemetry.py",
+            "original_relative_path": "native-f808-reference/mem0/memory/telemetry.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/utils/entity_extraction.py",
+            "relative_path": "mem0/utils/entity_extraction.py",
+            "sha256": "46aee82cb08cd9e37ee6928fb7b1e518d8fe00bb6b507133121b48f65bd1224e",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/utils/entity_extraction.py",
+            "original_relative_path": "native-f808-reference/mem0/utils/entity_extraction.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/utils/lemmatization.py",
+            "relative_path": "mem0/utils/lemmatization.py",
+            "sha256": "7b53da59417d29c3b2adcf71ed9e272c1038667c308859b0c5182f7e67e9408c",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/utils/lemmatization.py",
+            "original_relative_path": "native-f808-reference/mem0/utils/lemmatization.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/utils/spacy_models.py",
+            "relative_path": "mem0/utils/spacy_models.py",
+            "sha256": "d3e5705a56b826a85572b7b8be5063e33fc0ba2dfa40087839c890819245cd83",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/utils/spacy_models.py",
+            "original_relative_path": "native-f808-reference/mem0/utils/spacy_models.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/mem0/vector_stores/qdrant.py",
+            "relative_path": "mem0/vector_stores/qdrant.py",
+            "sha256": "da570579d5cad69e6f123fdfe32b725235a25604e70047666bec763ba6e2bf43",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/vector_stores/qdrant.py",
+            "original_relative_path": "native-f808-reference/mem0/vector_stores/qdrant.py"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/serial-http-reference/pyproject.toml",
+            "relative_path": "pyproject.toml",
+            "sha256": "1662b662cf75295be5d78fa9c8be48166b7f09ab3985ff20891201cb9ceb708d",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/pyproject.toml",
+            "original_relative_path": "native-f808-reference/pyproject.toml"
+          }
+        ],
+        "selected_installed_sdk_files_byte_verified": 9,
+        "scope": "Pinned synchronization/retry/extra-network-surface source and installed dependency version metadata, no SDK or model execution",
+        "runtime_closure_not_proven": true
+      }
     }
   ],
   "complete": true,
@@ -1064,5 +1231,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T03:15:46.439254+00:00"
+  "updated_at_utc": "2026-10-01T03:25:47.517943+00:00"
 }

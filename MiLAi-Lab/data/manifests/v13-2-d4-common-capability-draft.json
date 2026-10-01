@@ -224,5 +224,36 @@
     "common_capability_gate": "INCOMPLETE",
     "actual_d4_admission": "NOT_ADMITTED",
     "independent_judge": false
+  },
+  "shared_admission_engineering_acceptance": {
+    "status": "ACCEPTED_DEFAULT_OFF_NOT_FOUR_ARM_RUNTIME_ADMISSION",
+    "manifest": {
+      "path": "data/manifests/v13-2-shared-admission-acceptance.json",
+      "sha256": "95bacb777f8b7573569b786606341639988bca22b84675623f17b34fb5e4d853"
+    },
+    "runtime_count": 210,
+    "runtime_map_sha256": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+    "root_affected_tests": 50,
+    "actual_experiment_profile_enabled": false,
+    "actual_d4_admission": "NOT_ADMITTED",
+    "not_implemented": [
+      "Common HTTP owner/mutex",
+      "B6 summary",
+      "Common reader/cache",
+      "Closed-boundary coordinator",
+      "Host write strategy"
+    ]
+  },
+  "serial_http_readonly_audit": {
+    "status": "READONLY_ACCEPTED_COMMON_HTTP_CLOSURE_NOT_IMPLEMENTED",
+    "manifest": {
+      "path": "data/manifests/v13-2-serial-http-audit-acceptance.json",
+      "sha256": "a5305f24b357ad49e4aabb8435898d1120f27097171fe6bed1b1c6eb3374606a"
+    },
+    "indexed_read_attempts": 58,
+    "actual_recorded_subprocesses": 57,
+    "pre_dispatch_helper_failure": 1,
+    "runtime_closure": "NOT_IMPLEMENTED",
+    "actual_d4_admission": "NOT_ADMITTED"
   }
 }
