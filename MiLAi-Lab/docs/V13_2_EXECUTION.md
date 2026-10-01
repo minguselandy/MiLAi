@@ -336,3 +336,12 @@ A按真实ordinary/query发行快照exact get，保持原选择/Source/角色/ha
 上一轮A/B/C工程验收8b1fdf3已远端/head/body/ls-remote精确核对，主树clean，无新实际HTTP，Source READY/HOLD。本轮当前实际调用链再确认所有参与client缺共同request mutex/owner，原预算短锁不覆盖整次HTTP、missing旧budget会置0。查阅保存CPython3.11.13 fixed498b971e、HTTPX0.28.1 fixed26d48e06及Linux flock官方手册三组primary方法；HTTPX安装Client源码与固定版本字节相等，rolling3.11文档显示3.11.16另存，不当原SDK证明。15原GET全部200，原web503/错误rg路径rc2保留；现17论文/15参考、745文件/133本地链接核验0问题，未执行上游。
 
 [具体默认关闭范围](V13_2_HTTP_OWNER_IMPLEMENTATION_SCOPE.md)冻结213/391/316：同一Source在Root之后创建的新8b1fdf3隔离树，只改5运行文件/1新harness stdlib helper/2测试，32运行依赖/3工程测试/13已存primary原件只读。canonical已存在ledger决定稳定EX|NB sidecar，deployment/client domain不能分片绕过同账本，PID/fork/close/预算/配置/实际HTTP对象绑定；共享mutex贯穿reserve→派发→finish/finally，reservation先durable，不retry/refund/新0ledger。D0/P5/native micro入口和实际Host/M/native callback需要有限断网验收；summary未实现不冒充样本，不改变算法或inclusive12/24。尚未实现/验收；先GitHub核对范围再Root真实创建和明确启动，旧树全部HOLD。完整plan ACTIVE/48状态与R7失败费用、ledger374fcef4/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。
+
+
+## 共享HTTP范围核对后的实际创建、启动与独立审计准备
+
+[当前进展记录](../data/manifests/v13-2-http-owner-implementation-progress.json)在dc91b72远端/PR head/body精确核对后，Root实际创建新8b1fdf3隔离树，保留6条原创建命令与branch-absent预期rc1；仅复制两份固定授权。随后通过明确followup_task启动同一既有Source，实际agent仍running，已实读scope/doc/setup并安装断网探针。原范围、发布和setup记录中尚未创建/启动的字段保持原时间语义，不回写为后来状态；旧Source树HOLD，主树运行代码尚未接入。
+
+Root独立准备42项原件验收条件及5事件/11阶段合成计费算术对照，含历史unknown1、原limits/costs/opaque history保持；这些仅为准备，没有运行请求/机制或作实现验收。另固定核对当时17条已完成命令前缀、1预期socket拒绝非零、1360执行源码snapshot核验，保留135索引文件；Source仍运行，不冒充最终handoff/代码通过。Root审计器首次抄录scope哈希漏两字符而提前拒绝，原driver/stdout/stderr/rc1保存；修正后原件审计0，不改Source、不重跑机制，失败时未取得after maps明确不倒补。
+
+主树213运行/391测试/316完整配置和ledger374fcef4前后相等，17论文/15参考/745文件/133链接保持，0新资源GET/实际模型HTTP。5+1源码实施及Root最终字节工程验收仍待完成；没有新真实cohort冻结或重跑R7。48状态仍4 PASSED_SCOPED/27 PARTIAL/1 NOT_PASSED/16 NOT_VERIFIED，E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO，原历史失败与费用不变。

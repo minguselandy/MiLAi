@@ -1011,5 +1011,17 @@
     "engineering_accepted": false,
     "actual_new_model_http": 0,
     "runtime213_test391_config316_maps_unchanged": true
+  },
+  "http_owner_implementation_progress": {
+    "manifest": "data/manifests/v13-2-http-owner-implementation-progress.json",
+    "sha256": "deae3a4144b04baa886d61521aedbc99e7b3ac4b8333cf8bf66a94003b083a4a",
+    "status": "ACTIVE_SOURCE_OFFLINE_IMPLEMENTATION_NOT_ACCEPTED",
+    "historical_scope_status_preserved": true,
+    "actual_new_source_tree_created_and_existing_owner_started": true,
+    "engineering_accepted": false,
+    "actual_new_model_http": 0,
+    "root_criteria_prepared": 42,
+    "original_prefix_commands_verified": 17,
+    "runtime213_test391_config316_maps_unchanged": true
   }
 }
