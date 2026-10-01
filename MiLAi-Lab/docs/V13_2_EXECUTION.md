@@ -262,3 +262,9 @@ Root逐hash核对41索引/39原完整maps/四失败/12快照/11原R5 trace/17请
 新增中文反思与原URL/版本/hash可经[资料库](V13_2_DESIGN_LITERATURE.md)查看；当前651文件/57链接通过，前647报告/index按原hash另留。归档shell第一次exit127未执行Python、未修改资源，恢复为既有python3；原失败记录保持。新增模型/embedding HTTP0，原连续账本SHA26f46d5f不变。
 
 Root事前R6 parent在隔离stdlib假CLI/局部账本上九项控制通过，覆盖完整24且有一子失败、旧尝试拒绝、前后源/配置/冻结身份变化、源path增加及错误profile；0SDK构造/socket/model。实际prepare因缺源码acceptance在导入Lab SDK或创建实验root前拒绝；两原拒绝和SDK重开/后检脚本事前冻结要求保存。没有R6实际配置、runtime或质量样本。下一步先完整Source原件/限定工程验收，再做新route/input/runtime/ledger冻结和原24/48首尝试串行运行，不重跑旧root，任务与支持来源门槛分别报告。
+
+## 新支持来源实现限定验收
+
+[实现验收](../data/manifests/v13-2-direct-support-acceptance.json)接受默认关闭direct_support_v1；Source33a72b3远端核对、Root2eeb7b7转入211源码8c466，实际D0入口和P5共享验证/传参。Root逐hash核对1775索引文件/113原subprocess/前后版本并复制1777原件，11非零回执/非subprocess限制和最初D0范围遗漏各自保存。38新profile＋32默认主树检查、六源码ruff/mypy和双边界通过，314配置及原连续账本SHA26f46d5f未变，0真实generation/embedding。
+
+12压力包全部真实material≤2048/max6且选择ID/次序相等，元数据造成的history/current/Source交付减少与空胶囊仍明确。Root独立解码完整有序叶/父版身份，最终新审计器对95原R5 wire原字段一致；13解码控制、11合成metadata控制、九parent控制仅为工程证据。Root空胶囊重复计数/发布SyntaxError原失败及未执行Python≥3.12草稿的静态纠正保持。实际R6配置/冻结/HTTP/SDK/任务与支持来源评分仍未执行，D4不准入、Product NO_GO，完整计划active。
