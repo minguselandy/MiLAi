@@ -59,7 +59,19 @@ from milai_lab.contracts.tool_schema_communication import (
     profile as communication_profile,
 )
 from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
+from milai_lab.harness.contextual_artifacts import (
+    RunBudget,
+    RunLimits,
+    Trace,
+    entry_budget,
+    http_budget_scope,
+)
+from milai_lab.harness.http_ownership import (
+    check_frozen as check_http_frozen,
+)
+from milai_lab.harness.http_ownership import (
+    freeze_fields as http_freeze_fields,
+)
 from milai_lab.memory.mcp import MemoryMCP
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
@@ -67,7 +79,7 @@ from milai_lab.methods.grounded_memory import POLICY as GROUNDED_POLICY
 from milai_lab.methods.grounded_memory import GroundedMemoryRecipe
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 
 LAB = Path(__file__).resolve().parents[3]
@@ -388,81 +400,95 @@ def prepare(
     transport: str = "direct",
 ) -> dict[str, Any]:
     fixture, config = read_json(fixture_path), read_json(config_path)
-    communication_profile(config.get("tool_schema_communication", "legacy"))
-    if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
-        raise ValueError("V13_D0_PUBLIC_FIXTURE_REQUIRED")
-    if mode not in {"ref_only", "field_grounded"} or transport not in {"direct", "mcp_http"}:
-        raise ValueError("V13_D0_MODE_OR_TRANSPORT_INVALID")
-    seen = set()
-    for case in fixture["cases"]:
-        if not case["case_id"] or case["case_id"] in seen or not case["owner"]:
-            raise ValueError("V13_D0_CASE_IDENTITY_INVALID")
-        seen.add(case["case_id"])
-        for message in case["messages"]:
-            if not all(
-                isinstance(message.get(key), str) and message[key]
-                for key in ("message_id", "session_id", "content")
-            ):
-                raise ValueError("V13_D0_PUBLIC_MESSAGE_INVALID")
-    # Instantiate only the config DTO here, never a client or model service.
-    VLLMConfig(**config["host"])
-    system_prompt = _system_prompt(config)
-    receipt_contract = _receipt_contract(config)
-    _observation_profile(config)
-    recipe_policy = _recipe_settings(config)
-    if recipe_policy is not None and recipe_policy["retrieval_enabled"] and transport != "direct":
-        raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
-    if "capacity" not in config or "budget_path" not in config:
-        raise ValueError("V13_D0_CAPACITY_AND_CONTINUOUS_BUDGET_REQUIRED")
-    budget_path = Path(config["budget_path"])
-    if not budget_path.is_file():
-        raise ValueError("V13_D0_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
-    budget_limits = read_json(budget_path)["limits"]
-    mutation_contract = _mutation_contract(config)
-    catalog = _catalog(root, mode, receipt_contract=receipt_contract,
-                       mutation_contract=mutation_contract,
-                       service_options=_service_options(config),
-                       settings=config)
-    frozen = {
-        "kind": "MILAI_V13_1_D0_RUNTIME_FREEZE",
-        "fixture": fixture,
-        "fixture_sha256": _sha(fixture_path),
-        "fixture_path": str(fixture_path.resolve()),
-        "config": config,
-        "config_sha256": _sha(config_path),
-        "config_path": str(config_path.resolve()),
-        "budget_limits": budget_limits,
-        "mode": mode,
-        "memory_receipt_contract": receipt_contract,
-        **(
-            {"memory_mutation_contract": mutation_contract} if mutation_contract != "legacy" else {}
-        ),
-        **(
-            {"memory_support_contract": "direct_support_v1"}
-            if config.get("memory_support_contract") == "direct_support_v1"
-            else {}
-        ),
-        "transport": transport,
-        "run_id": root.resolve().name,
-        "source_sha256": _sources(),
-        "prompt_sha256": hashlib.sha256(system_prompt.encode()).hexdigest(),
-        "tool_catalog": catalog,
-        **communication_freeze_fields(catalog, config.get("tool_schema_communication", "legacy")),
-        **read_freeze_fields(config, catalog),
-        "tool_catalog_sha256": hashlib.sha256(
-            json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
-        ).hexdigest(),
-        "backend": "public_sdk_sqlite",
-        "memory_retrieval": "raw_keyword",
-        "semantic_evidence": False,
-        **({"memory_reader_policy": recipe_policy} if recipe_policy is not None else {}),
-    }
-    root.mkdir(parents=True, exist_ok=True)
-    target = root / "input-freeze.json"
-    if target.exists() and read_json(target) != frozen:
-        raise ValueError("V13_D0_INPUT_FREEZE_CHANGED")
-    write_json(target, frozen)
-    return frozen
+    with http_budget_scope(config, client_configs=ownership_client_configs(config)):
+        communication_profile(config.get("tool_schema_communication", "legacy"))
+        if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
+            raise ValueError("V13_D0_PUBLIC_FIXTURE_REQUIRED")
+        if mode not in {"ref_only", "field_grounded"} or transport not in {"direct", "mcp_http"}:
+            raise ValueError("V13_D0_MODE_OR_TRANSPORT_INVALID")
+        seen = set()
+        for case in fixture["cases"]:
+            if not case["case_id"] or case["case_id"] in seen or not case["owner"]:
+                raise ValueError("V13_D0_CASE_IDENTITY_INVALID")
+            seen.add(case["case_id"])
+            for message in case["messages"]:
+                if not all(
+                    isinstance(message.get(key), str) and message[key]
+                    for key in ("message_id", "session_id", "content")
+                ):
+                    raise ValueError("V13_D0_PUBLIC_MESSAGE_INVALID")
+        # Instantiate only the config DTO here, never a client or model service.
+        VLLMConfig(**config["host"])
+        system_prompt = _system_prompt(config)
+        receipt_contract = _receipt_contract(config)
+        _observation_profile(config)
+        recipe_policy = _recipe_settings(config)
+        if (
+            recipe_policy is not None
+            and recipe_policy["retrieval_enabled"]
+            and transport != "direct"
+        ):
+            raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
+        if "capacity" not in config or "budget_path" not in config:
+            raise ValueError("V13_D0_CAPACITY_AND_CONTINUOUS_BUDGET_REQUIRED")
+        budget_path = Path(config["budget_path"])
+        if not budget_path.is_file():
+            raise ValueError("V13_D0_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
+        budget_limits = read_json(budget_path)["limits"]
+        mutation_contract = _mutation_contract(config)
+        catalog = _catalog(
+            root,
+            mode,
+            receipt_contract=receipt_contract,
+            mutation_contract=mutation_contract,
+            service_options=_service_options(config),
+            settings=config,
+        )
+        frozen = {
+            "kind": "MILAI_V13_1_D0_RUNTIME_FREEZE",
+            "fixture": fixture,
+            "fixture_sha256": _sha(fixture_path),
+            "fixture_path": str(fixture_path.resolve()),
+            "config": config,
+            "config_sha256": _sha(config_path),
+            "config_path": str(config_path.resolve()),
+            "budget_limits": budget_limits,
+            "mode": mode,
+            "memory_receipt_contract": receipt_contract,
+            **(
+                {"memory_mutation_contract": mutation_contract}
+                if mutation_contract != "legacy"
+                else {}
+            ),
+            **(
+                {"memory_support_contract": "direct_support_v1"}
+                if config.get("memory_support_contract") == "direct_support_v1"
+                else {}
+            ),
+            "transport": transport,
+            "run_id": root.resolve().name,
+            "source_sha256": _sources(),
+            "prompt_sha256": hashlib.sha256(system_prompt.encode()).hexdigest(),
+            "tool_catalog": catalog,
+            **communication_freeze_fields(
+                catalog, config.get("tool_schema_communication", "legacy")
+            ),
+            **read_freeze_fields(config, catalog),
+            **http_freeze_fields(config),
+            "tool_catalog_sha256": hashlib.sha256(
+                json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
+            ).hexdigest(),
+            "backend": "public_sdk_sqlite",
+            "memory_retrieval": "raw_keyword",
+            "semantic_evidence": False,
+            **({"memory_reader_policy": recipe_policy} if recipe_policy is not None else {}),
+        }
+        root.mkdir(parents=True, exist_ok=True)
+        target = root / "input-freeze.json"
+        if target.exists() and read_json(target) != frozen:
+            raise ValueError("V13_D0_INPUT_FREEZE_CHANGED")
+        write_json(target, frozen)
+        return frozen
 
 
 def _frozen(root: Path) -> dict[str, Any]:
@@ -475,10 +501,13 @@ def _frozen(root: Path) -> dict[str, Any]:
         raise ValueError("V13_D0_INPUT_CHANGED_AFTER_FREEZE")
     check_communication_frozen(frozen)
     check_read_frozen(frozen)
+    check_http_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
-def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any]:
+def _execute_step(
+    root: Path, case_id: str, message_index: int, *, _http_stack: ExitStack | None = None
+) -> dict[str, Any]:
     frozen = _frozen(root)
     case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
     if not 0 <= message_index < len(case["messages"]):
@@ -512,205 +541,251 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
             "transport": frozen["transport"],
         }
     )
-    budget = RunBudget(RunLimits(**frozen["budget_limits"]), Path(settings["budget_path"]))
-    output: dict[str, Any] = {
-        "case_id": case_id,
-        "message_id": public["message_id"],
-        "message_index": message_index,
-        "process_id": os.getpid(),
-        "owner": scope.user_id,
-        "session": public["session_id"],
-    }
-    with ExitStack() as stack:
-        store = stack.enter_context(SqliteStore.from_conn_string(str(case_root / "memory.sqlite")))
-        saver = stack.enter_context(
-            SqliteSaver.from_conn_string(str(case_root / "checkpoints.sqlite"))
+    with ExitStack() as ownership:
+        (_http_stack if _http_stack is not None else ownership).enter_context(
+            http_budget_scope(
+                settings,
+                RunLimits(**frozen["budget_limits"]),
+                client_configs=ownership_client_configs(settings),
+            )
         )
-        world = ApplicationWorld(
-            case_root / "world.sqlite", case.get("initial_world", {}).get("label_available", True)
-        )
-        stack.callback(world.close)
-        service = MemoryService(
-            store,
-            namespace,
-            scope.user_id,
-            case_root / "memory.lock",
-            mode=frozen["mode"],
-            receipt_contract=_receipt_contract(settings),
-            mutation_contract=_mutation_contract(settings),
-            **_service_options(settings),
-            observer=trace,
-        )
-        source_receipt = service.capture_user(
-            public["session_id"], public["message_id"], public["content"]
-        )
-        service.bind_source_boundary(public["session_id"], public["message_id"],
-                                     [source_receipt["source_ref"]])
-        write_json(case_root / f"message-{message_index}-capture.json", source_receipt)
-        trace({"event": "v13_source_capture", "receipt": source_receipt})
-        journal = BusinessActionJournal(case_root / "business-journal.json", BUSINESS_NAMES)
+        budget = entry_budget(RunLimits(**frozen["budget_limits"]), Path(settings["budget_path"]))
+        output: dict[str, Any] = {
+            "case_id": case_id,
+            "message_id": public["message_id"],
+            "message_index": message_index,
+            "process_id": os.getpid(),
+            "owner": scope.user_id,
+            "session": public["session_id"],
+        }
+        with ExitStack() as stack:
+            store = stack.enter_context(
+                SqliteStore.from_conn_string(str(case_root / "memory.sqlite"))
+            )
+            saver = stack.enter_context(
+                SqliteSaver.from_conn_string(str(case_root / "checkpoints.sqlite"))
+            )
+            world = ApplicationWorld(
+                case_root / "world.sqlite",
+                case.get("initial_world", {}).get("label_available", True),
+            )
+            stack.callback(world.close)
+            service = MemoryService(
+                store,
+                namespace,
+                scope.user_id,
+                case_root / "memory.lock",
+                mode=frozen["mode"],
+                receipt_contract=_receipt_contract(settings),
+                mutation_contract=_mutation_contract(settings),
+                **_service_options(settings),
+                observer=trace,
+            )
+            source_receipt = service.capture_user(
+                public["session_id"], public["message_id"], public["content"]
+            )
+            service.bind_source_boundary(
+                public["session_id"], public["message_id"], [source_receipt["source_ref"]]
+            )
+            write_json(case_root / f"message-{message_index}-capture.json", source_receipt)
+            trace({"event": "v13_source_capture", "receipt": source_receipt})
+            journal = BusinessActionJournal(case_root / "business-journal.json", BUSINESS_NAMES)
 
-        def business_wrapper(request: ToolCallRequest, execute: Any) -> ToolMessage | Command[Any]:
-            response = journal(request, execute)
-            if request.tool_call["name"] not in BUSINESS_NAMES or not isinstance(
-                response, ToolMessage
-            ):
-                return response
-            generating = request.state["messages"][-1]
-            identity = str(generating.id) + ":" + str(request.tool_call["id"])
-            source_ref = service.event_id(public["session_id"], identity, "tool")
-            # response was produced by the actual owner-bound tool or redelivered
-            # from its durable journal; no Host body is interpreted as a receipt.
-            body = str(response.content)
-            ref = verified_reservation_ref(
-                world, scope.user_id, source_ref, request.tool_call["name"], body, observer=trace
-            )
-            capture = service.capture_tool(
-                public["session_id"], identity, request.tool_call["name"], body, ref
-            )
-            service.bind_source_boundary(public["session_id"], str(generating.id),
-                                         [capture["source_ref"]], append=True)
-            projection = _observe_captured(service, capture["source_ref"], settings, trace)
-            trace(
-                {
-                    "event": "v13_business_receipt",
-                    "call": request.tool_call,
-                    "original_receipt": response.model_dump(mode="json"),
-                    "capture": capture,
-                }
-            )
-            # Deliver binding alongside, while the stored original tool receipt
-            # and old public business schema stay unchanged.
-            return response.model_copy(
-                update={
-                    "content": json.dumps(
-                        {
-                            "receipt": json.loads(body),
-                            "source_ref": source_ref,
-                            "object_ref": ref.id if ref else None,
-                            "observation_only": True,
-                            **(
-                                {"observation_capture": projection}
-                                if projection is not None else {}
-                            ),
-                        },
-                        ensure_ascii=False,
-                    )
-                }
-            )
-
-        tools = _memory_tools(service, settings)
-        if frozen["transport"] == "mcp_http":
-            peer = stack.enter_context(
-                MemoryMCP(
-                    store, scope.run_id, scope.arm_id, scope.user_id, service=service, emit=trace
+            def business_wrapper(
+                request: ToolCallRequest, execute: Any
+            ) -> ToolMessage | Command[Any]:
+                response = journal(request, execute)
+                if request.tool_call["name"] not in BUSINESS_NAMES or not isinstance(
+                    response, ToolMessage
+                ):
+                    return response
+                generating = request.state["messages"][-1]
+                identity = str(generating.id) + ":" + str(request.tool_call["id"])
+                source_ref = service.event_id(public["session_id"], identity, "tool")
+                # response was produced by the actual owner-bound tool or redelivered
+                # from its durable journal; no Host body is interpreted as a receipt.
+                body = str(response.content)
+                ref = verified_reservation_ref(
+                    world,
+                    scope.user_id,
+                    source_ref,
+                    request.tool_call["name"],
+                    body,
+                    observer=trace,
                 )
-            )
-            tools = peer.tools
-        try:
-            host_config = VLLMConfig(**settings["host"])
-            with VLLMClient(
-                host_config, emit=trace, budget=budget, capacity=HostCapacity(settings["capacity"])
-            ) as client:
-                model = LangMemRecipeChatModel(
-                    client=client,
-                    capacity_path=case_root / "host-capacity.json",
-                    max_calls_per_message=settings.get("max_calls_per_message", 12),
-                    tool_save_communication=cast(
-                        Any, read_profiles(settings)["tool_save_communication"]
-                    ),
-                    tool_schema_communication=communication_profile(
-                        settings.get("tool_schema_communication", "legacy")
-                    ),
+                capture = service.capture_tool(
+                    public["session_id"], identity, request.tool_call["name"], body, ref
                 )
-                recipe = _make_recipe(service, settings, model, budget, trace, stack)
-                if recipe is not None and settings.get("memory_reader_policy"):
-                    if frozen["transport"] != "direct":
-                        raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
-                    tools = _memory_tools(service, settings, recipe=recipe)
-                # Explicit reuse of the existing Agent loop and provider protocol.
-                agent = build_agent(
-                    model,
-                    store,
-                    saver,
-                    _business_tools(world, scope.user_id),
-                    business_call_wrapper=business_wrapper,
-                    memory_tools=tools,
-                    system_prompt=_system_prompt(settings),
-                    tool_schema_communication=communication_profile(
-                        settings.get("tool_schema_communication", "legacy")
-                    ),
-                    tool_save_communication=cast(
-                        Any, read_profiles(settings)["tool_save_communication"]
-                    ),
-                    benchmark_view_hook=(
-                        recipe.hook(
-                            _system_prompt(settings),
-                            prefetch=bool(
-                                settings.get("memory_reader_policy")
-                                and settings.get("memory_prefetch", "enabled") == "enabled"
-                            ),
+                service.bind_source_boundary(
+                    public["session_id"], str(generating.id), [capture["source_ref"]], append=True
+                )
+                projection = _observe_captured(service, capture["source_ref"], settings, trace)
+                trace(
+                    {
+                        "event": "v13_business_receipt",
+                        "call": request.tool_call,
+                        "original_receipt": response.model_dump(mode="json"),
+                        "capture": capture,
+                    }
+                )
+                # Deliver binding alongside, while the stored original tool receipt
+                # and old public business schema stay unchanged.
+                return response.model_copy(
+                    update={
+                        "content": json.dumps(
+                            {
+                                "receipt": json.loads(body),
+                                "source_ref": source_ref,
+                                "object_ref": ref.id if ref else None,
+                                "observation_only": True,
+                                **(
+                                    {"observation_capture": projection}
+                                    if projection is not None
+                                    else {}
+                                ),
+                            },
+                            ensure_ascii=False,
                         )
-                        if recipe
-                        else None
-                    ),
+                    }
                 )
-                key = public["message_id"]
-                model.begin_public_message(key)
-                snapshot = agent.get_state(config)
-                prior = snapshot.values.get("messages", []) if snapshot.values else []
-                already_added = any(
-                    isinstance(row, HumanMessage) and row.id == key for row in prior
-                )
-                if (service.support_contract == "direct_support_v1"
-                        or service.memory_read_protocol != "legacy"):
-                    service.bind_public_turn(public["session_id"], key,
-                                             source_receipt["source_ref"],
-                                             config_sha256=frozen["config_sha256"],
-                                             phase="resume" if already_added else "start")
-                    config["configurable"]["v13_support_config_sha256"] = frozen["config_sha256"]
-                if already_added and not snapshot.next:
-                    messages = prior
-                else:
-                    result = agent.invoke(
-                        None
-                        if already_added
-                        else {"messages": [HumanMessage(content=public["content"], id=key)]},
-                        config=config,
+
+            tools = _memory_tools(service, settings)
+            if frozen["transport"] == "mcp_http":
+                peer = stack.enter_context(
+                    MemoryMCP(
+                        store,
+                        scope.run_id,
+                        scope.arm_id,
+                        scope.user_id,
+                        service=service,
+                        emit=trace,
                     )
-                    messages = result["messages"]
-                _capture_final_assistant(
-                    service, public["session_id"], public["message_id"], messages, trace
                 )
-                maintenance = _maintain_final(recipe, model, service, settings,
-                                              public["session_id"],
-                                              public["message_id"], messages, config, trace)
-                if maintenance is not None:
-                    output["semantic_maintenance"] = maintenance
-                output.update(
-                    status="completed",
-                    messages=[row.model_dump(mode="json") for row in messages],
-                    final_answer=next(
-                        (
-                            row.content
-                            for row in reversed(messages)
-                            if isinstance(row, AIMessage) and not row.tool_calls
+                tools = peer.tools
+            try:
+                host_config = VLLMConfig(**settings["host"])
+                with VLLMClient(
+                    host_config,
+                    emit=trace,
+                    budget=budget,
+                    capacity=HostCapacity(settings["capacity"]),
+                ) as client:
+                    model = LangMemRecipeChatModel(
+                        client=client,
+                        capacity_path=case_root / "host-capacity.json",
+                        max_calls_per_message=settings.get("max_calls_per_message", 12),
+                        tool_save_communication=cast(
+                            Any, read_profiles(settings)["tool_save_communication"]
                         ),
-                        None,
-                    ),
+                        tool_schema_communication=communication_profile(
+                            settings.get("tool_schema_communication", "legacy")
+                        ),
+                    )
+                    recipe = _make_recipe(service, settings, model, budget, trace, stack)
+                    if recipe is not None and settings.get("memory_reader_policy"):
+                        if frozen["transport"] != "direct":
+                            raise ValueError("V13_RECIPE_DIRECT_TRANSPORT_REQUIRED")
+                        tools = _memory_tools(service, settings, recipe=recipe)
+                    # Explicit reuse of the existing Agent loop and provider protocol.
+                    agent = build_agent(
+                        model,
+                        store,
+                        saver,
+                        _business_tools(world, scope.user_id),
+                        business_call_wrapper=business_wrapper,
+                        memory_tools=tools,
+                        system_prompt=_system_prompt(settings),
+                        tool_schema_communication=communication_profile(
+                            settings.get("tool_schema_communication", "legacy")
+                        ),
+                        tool_save_communication=cast(
+                            Any, read_profiles(settings)["tool_save_communication"]
+                        ),
+                        benchmark_view_hook=(
+                            recipe.hook(
+                                _system_prompt(settings),
+                                prefetch=bool(
+                                    settings.get("memory_reader_policy")
+                                    and settings.get("memory_prefetch", "enabled") == "enabled"
+                                ),
+                            )
+                            if recipe
+                            else None
+                        ),
+                    )
+                    key = public["message_id"]
+                    model.begin_public_message(key)
+                    snapshot = agent.get_state(config)
+                    prior = snapshot.values.get("messages", []) if snapshot.values else []
+                    already_added = any(
+                        isinstance(row, HumanMessage) and row.id == key for row in prior
+                    )
+                    if (
+                        service.support_contract == "direct_support_v1"
+                        or service.memory_read_protocol != "legacy"
+                    ):
+                        service.bind_public_turn(
+                            public["session_id"],
+                            key,
+                            source_receipt["source_ref"],
+                            config_sha256=frozen["config_sha256"],
+                            phase="resume" if already_added else "start",
+                        )
+                        config["configurable"]["v13_support_config_sha256"] = frozen[
+                            "config_sha256"
+                        ]
+                    if already_added and not snapshot.next:
+                        messages = prior
+                    else:
+                        result = agent.invoke(
+                            None
+                            if already_added
+                            else {"messages": [HumanMessage(content=public["content"], id=key)]},
+                            config=config,
+                        )
+                        messages = result["messages"]
+                    _capture_final_assistant(
+                        service, public["session_id"], public["message_id"], messages, trace
+                    )
+                    maintenance = _maintain_final(
+                        recipe,
+                        model,
+                        service,
+                        settings,
+                        public["session_id"],
+                        public["message_id"],
+                        messages,
+                        config,
+                        trace,
+                    )
+                    if maintenance is not None:
+                        output["semantic_maintenance"] = maintenance
+                    output.update(
+                        status="completed",
+                        messages=[row.model_dump(mode="json") for row in messages],
+                        final_answer=next(
+                            (
+                                row.content
+                                for row in reversed(messages)
+                                if isinstance(row, AIMessage) and not row.tool_calls
+                            ),
+                            None,
+                        ),
+                    )
+            except Exception as error:
+                output.update(
+                    status="interrupted", error_type=type(error).__name__, error=str(error)
                 )
-        except Exception as error:
-            output.update(status="interrupted", error_type=type(error).__name__, error=str(error))
-        output.update(
-            records=service.records(),
-            sources=service.sources(),
-            world=world.snapshot(),
-            business_calls=journal.calls_for_thread(config["configurable"]["thread_id"]),
-            usage=trace.usage,
-            budget=budget.state,
-        )
-    write_json(receipt_path, output)
-    return output
+            output.update(
+                records=service.records(),
+                sources=service.sources(),
+                world=world.snapshot(),
+                business_calls=journal.calls_for_thread(config["configurable"]["thread_id"]),
+                usage=trace.usage,
+                budget=budget.state,
+            )
+        write_json(receipt_path, output)
+        return output
 
 
 def step(root: Path, case_id: str, message_index: int) -> dict[str, Any]:
@@ -720,44 +795,45 @@ def step(root: Path, case_id: str, message_index: int) -> dict[str, Any]:
     if receipt_path.exists():
         _frozen(root)
         return cast(dict[str, Any], read_json(receipt_path))
-    wall, cpu = time.perf_counter_ns(), time.process_time_ns()
-    try:
-        output = _execute_step(root, case_id, message_index)
-    except Exception as error:
-        capture_path = case_root / f"message-{message_index}-capture.json"
-        output = {
-            "case_id": case_id,
-            "message_id": None,
-            "message_index": message_index,
-            "process_id": os.getpid(),
-            "status": "interrupted",
-            "error_type": type(error).__name__,
-            "error": str(error),
-            "failure_stage": "setup_or_capture_or_finalization",
-            "capture_receipt": read_json(capture_path) if capture_path.exists() else None,
-            "capture_status": "raw_captured" if capture_path.exists() else "unconfirmed",
+    with ExitStack() as http_stack:
+        wall, cpu = time.perf_counter_ns(), time.process_time_ns()
+        try:
+            output = _execute_step(root, case_id, message_index, _http_stack=http_stack)
+        except Exception as error:
+            capture_path = case_root / f"message-{message_index}-capture.json"
+            output = {
+                "case_id": case_id,
+                "message_id": None,
+                "message_index": message_index,
+                "process_id": os.getpid(),
+                "status": "interrupted",
+                "error_type": type(error).__name__,
+                "error": str(error),
+                "failure_stage": "setup_or_capture_or_finalization",
+                "capture_receipt": read_json(capture_path) if capture_path.exists() else None,
+                "capture_status": "raw_captured" if capture_path.exists() else "unconfirmed",
+            }
+            case_root.mkdir(parents=True, exist_ok=True)
+            if receipt_path.exists():
+                return cast(dict[str, Any], read_json(receipt_path))
+        output["cost_scope"] = "generation full via existing client; IO partial"
+        output["execution_wall_ns"] = time.perf_counter_ns() - wall
+        output["execution_cpu_ns"] = time.process_time_ns() - cpu
+        output["persistent_resource_bytes"] = {
+            path.name: path.stat().st_size for path in case_root.glob("*.sqlite*")
         }
-        case_root.mkdir(parents=True, exist_ok=True)
-        if receipt_path.exists():
-            return cast(dict[str, Any], read_json(receipt_path))
-    output["cost_scope"] = "generation full via existing client; IO partial"
-    output["execution_wall_ns"] = time.perf_counter_ns() - wall
-    output["execution_cpu_ns"] = time.process_time_ns() - cpu
-    output["persistent_resource_bytes"] = {
-        path.name: path.stat().st_size for path in case_root.glob("*.sqlite*")
-    }
-    output["logical_source_snapshot_bytes"] = len(
-        json.dumps(output.get("sources", []), ensure_ascii=False).encode()
-    )
-    output["logical_record_snapshot_bytes"] = len(
-        json.dumps(output.get("records", []), ensure_ascii=False).encode()
-    )
-    output["cost_measurement_note"] = (
-        "step execution excluding interpreter/import and final metrics write; "
-        "snapshot byte counts are not total Store IO; program ref lookups are in trace"
-    )
-    write_json(receipt_path, output)
-    return output
+        output["logical_source_snapshot_bytes"] = len(
+            json.dumps(output.get("sources", []), ensure_ascii=False).encode()
+        )
+        output["logical_record_snapshot_bytes"] = len(
+            json.dumps(output.get("records", []), ensure_ascii=False).encode()
+        )
+        output["cost_measurement_note"] = (
+            "step execution excluding interpreter/import and final metrics write; "
+            "snapshot byte counts are not total Store IO; program ref lookups are in trace"
+        )
+        write_json(receipt_path, output)
+        return output
 
 
 def run(root: Path, case_ids: list[str] | None = None) -> list[dict[str, Any]]:
