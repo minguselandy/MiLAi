@@ -298,3 +298,5 @@ Root已单独准备后续R7 parent/SDK/wire/postcheck草稿：11项冻结/no-rep
 ## 通用工具说明的限定工程验收
 
 [验收记录](V13_2_SCHEMA_COMMUNICATION_ACCEPTANCE.md)保留1844索引原件/143回执/15非零并复制1853文件。Source d6bb0a2精确转入410e02f，212/36338eb5；Root最终86受影响测试、ruff/mypy与双boundary通过。8默认/原错误字节对照、6压力原包及Qwen全请求成本、6主树实际Mock Host/writer冻结呈现对应均核验；原阶段和正文交付退化保留。原R6 150wire/48行与原失败完整保持，最终9合成wire guards通过。0真实新HTTP，连续账本73c437ac不变；所有48验收状态/R6失败/完整plan ACTIVE/Product NO_GO保持。允许准备R7，实际配置/root/冻结/模型样本尚无。
+
+R7已完成默认关闭机制验收后的新配置/真实路由GET-only检查及无socket prepare：212/36338eb5，原3.11.13/SDK/Host7860与embed7861/原rubric/连续ledger73c437ac，原24轨迹48消息。冻结profile=shape_feedback_v1+direct_support_v1，原schemaSHA与新catalog/guide/反馈policy另存；旧base指令/ordinary2048/max6/Host12/output4096/temp0/writer1/repair0/legacy admission保持。SDK/wire/decoder/postcheck原driver字节独立冻结，普通audit失败仍继续完整collector。此阶段0gen/embed，未开始实际模型样本；先核对Github冻结提交再Root串行首次执行。48验收状态/历史R6/完整plan ACTIVE/Product NO_GO不变。

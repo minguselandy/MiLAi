@@ -901,5 +901,18 @@
     "actual_model_http": 0,
     "all48_requirement_statuses_unchanged": true,
     "semantic_latest_cohort": "Original R6 remainsNOT_PASSED; no R7 model samples yet."
+  },
+  "schema_communication_r7_runtime_preparation": {
+    "status": "FROZEN_READY_NOT_ACTUAL_MODEL_RESULT",
+    "path": "data/manifests/v13-2-e0-r7-runtime.json",
+    "sha256": "8b76cdc215557ecb9fd1aba222e8ad97270afeb07c2371a6ca78052003677ad2",
+    "runtime_source_count": 212,
+    "source_map_sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+    "planned_trajectories": 24,
+    "planned_messages": 48,
+    "actual_generation_requests": 0,
+    "actual_embedding_requests": 0,
+    "original_ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+    "all48_requirement_statuses_unchanged": true
   }
 }
