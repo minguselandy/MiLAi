@@ -226,3 +226,15 @@ Root新增离线实际HTTP审计器，校验真实送达的profile/hash、curren
 [运行身份](../data/manifests/v13-2-e0-r5-runtime.json)已FROZEN_READY：209源码676ad5dc、原24轨迹/48消息、配置compact_v1与bank_prefix、R4两提示/rubric/12admissions/2048与6/repair0均固定，报告冻结提交49a7288与实际Source提交6514012分别记录。现有7860 Qwen和7861 bge-m3两次fresh models GET均200，未部署或换模型。
 
 实际prepare禁止socket/connect_ex并记录0attempts/0生成/0embedding，原连续账本仍32265299。实际新root为`artifacts/v13-2-development-r5/E0-normal-r5`；preview根永不执行。工具目录、环境/SDK、CLI、input/rubric、parent、原账本及全840结果hash固定；新wire审计器及独立decoder另外复制到不可变offline-tool-freeze，旧prepare的f04身份/未完成840拒绝回执保留。下一步单parent按首尝试串行执行24，无重跑/择优拼接；尚无R5质量结论。
+
+## R5完整任务复核与来源语义限制
+
+[R5全部结果](V13_2_E0_R5_RESULTS.md)完成独立24轨迹/48消息，48最终回答关联原HTTP。原冻结rubric的Root完整复核24PASS/0FAIL/0UNKNOWN，正常22门槛限定通过；四原卡更正边界同IDr2/真实源/历史无副本且当前/旧值正确。四查询首个实际2048包均送完整current+完整r1，仍只有截断Source和3个Source省略；不归因纯压缩或升级泛化。
+
+完整来源语义仍未通过：四更新query r3及一张正确个人否定卡只引用当前问题；对象1/4 r2的历史操作措辞只引用新的get_reservation。旧真实叶子/历史仍存，但当前卡直接支持有7处缺口。两旧更新核心限定通过、完整门槛未过；D4仍未准入。25 Host已提交跳过、10 no_change、6 committed、7 pending全部保存，四dict object_ref验证失败与三个查询维护拒绝不补试。
+
+Root后检修正一项实质审计错误：原命令仍指向R4，24库/407items不能作R5证据；原脚本/结果/log/hash完整保留。真正R5只读SDK重开24库/404items最后回执一致/hash不变，95实际Host请求wire联合预算≤2048，源与原账本不变、0新增模型/embedding。首次SyntaxError及此前range假设错误同样保留；未重跑模型根目录。
+
+R5新增118generation/492,678known（Host95/402,845，writer23/89,833）与50embedding/20,507；trace与原账本差额一致，新unknown0。累计8,860generation/23,606,497charged/23,576,110known/unknown1，embedding881,362/unknown0；R0–R5新增914generation/3,265,459known和390embedding/164,174。历史保守未知30,387不清零。最终账本SHA26f46d5f，成本下降、独立评分与泛化未证实。
+
+已重新查阅EAL/Hindsight方法和固定Mem0抽取/NONE源码，原PDF/HTML/项目文件及新失败总结可经资料索引查看。下一步只做通用支持叶子/触发职责与有限共享admission/串行闭包工程；保持设计方向和现有合同，不按问题类型特判、不启新服务或读取新holdout。完整计划仍active。

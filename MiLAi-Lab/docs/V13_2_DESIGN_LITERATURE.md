@@ -82,3 +82,13 @@ SDK检查另保存官方固定Store接口与实际安装`langgraph-checkpoint==2
 Root下一步只授权在新隔离树修复通用共享admission的持久化与恢复：12/24上限覆盖同一计数入口，恢复缺失或不可信计数时拒绝dispatch；unknown仍占reservation。默认行为、当前209源码和R5实验身份保持。B6摘要、共同reader/cache/闭合形成边界及Host记忆写权限另有未实施要求，四臂未准入。
 
 资料库再次只读核对622个唯一文件与54个本地链接，PDF头与目录hash通过；结果保存于`artifacts/v13-2-literature-audit/current-archive.json`。这是资料可查看性核验，不是完整项目复现或模型收益。
+
+## R5来源缺口的重新查阅
+
+[R5完整复核](V13_2_E0_R5_RESULTS.md)24任务通过，但四更新query r3、一张正确个人否定卡和两张历史操作措辞存在直接来源缺口；7 pending与原失败均保留。再次检索既有[EAL v1方法](https://arxiv.org/html/2609.01836v1)、[Hindsight v1方法](https://arxiv.org/html/2512.12818v1)和[固定Mem0抽取/维护源码](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py)。原PDF/HTML与项目源码已保存；本次重读URL、原件hash和本地失败反思另追加机器目录与本地index，不覆盖旧资源。
+
+EAL把记忆错误形成与下游行动分开，其有界事件溯源在外部保留不可变更新日志；源码成员存在仍不足判断scope/历史语义。Hindsight区分原事实、经历与综合观察/意见，这些综合结果不是原始证据的替代。固定Mem0允许空抽取和NONE，并将抽取与选择维护分开；这不保证问题中隐含前提正确，也不能以问句形式一律丢掉新陈述。三者只是相关设计参考，没有移植其分数、gold gate、隐藏账本、额外模型或后台机制。
+
+结合R5实际trace，Root推断下一通用候选须区分“当前事件触发维护”与“真实叶子支持断言”，在同一模型语义选择中保留所选支持叶子和未改字段的来源关系；程序只验证owner/role/hash、选取范围、版本和提交回执，不自动证明蕴含或用固定词分类。object_ref应来自实际已声明公开string句柄，不能将结构对象当同类型输入。先验收机械合同，再另冻完整cohort检验；不通过禁用全部维护或只修曝光案例绕过来源门槛。
+
+R5重读原件及新增总结再次核对624个唯一文件、55个本地index链接，PDF头/hash通过；前一622文件报告按原hash保留。重读没有新增论文、SDK执行或实际模型调用。

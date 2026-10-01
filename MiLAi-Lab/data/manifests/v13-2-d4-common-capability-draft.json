@@ -207,5 +207,22 @@
       "Semantic or unseen/generalization benefit"
     ],
     "product": "NO_GO"
+  },
+  "latest_e0_gate_review": {
+    "cohort": "R5",
+    "result_path": "data/manifests/v13-2-e0-r5-results.json",
+    "result_sha256": "5990828a5d606dc48444bc875c4b13fd42b056c4668cfbea10c0a3974756537c",
+    "normal24_task_counts": {
+      "PASS": 24,
+      "FAIL": 0,
+      "UNKNOWN": 0
+    },
+    "normal22": "PASSED_SCOPED_DECLARED_TASK_CHECKS_ONLY",
+    "complete_old_update_gate": "NOT_PASSED_DIRECT_QUERY_SOURCE_GAPS",
+    "full_source_semantic_gate": "NOT_PASSED",
+    "direct_source_gap_cases": 7,
+    "common_capability_gate": "INCOMPLETE",
+    "actual_d4_admission": "NOT_ADMITTED",
+    "independent_judge": false
   }
 }

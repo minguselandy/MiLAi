@@ -956,6 +956,100 @@
       "resources_already_saved": true,
       "new_sdk_supplement": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
       "runtime_benchmark_gold_accessed": false
+    },
+    {
+      "cohort": "R5 full24 source-semantic failure review",
+      "rechecked_at_utc": "2026-10-01T03:15:46.439254+00:00",
+      "sources": [
+        "https://arxiv.org/html/2609.01836v1",
+        "https://arxiv.org/html/2512.12818v1",
+        "https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py"
+      ],
+      "new_papers_downloaded": 0,
+      "resources_already_saved": true,
+      "original_resources": [
+        {
+          "id": "2609.01836",
+          "version": "v1",
+          "rechecked_url": "https://arxiv.org/html/2609.01836v1",
+          "original_saved_files": [
+            {
+              "url": "https://arxiv.org/pdf/2609.01836",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/paper.pdf",
+              "sha256": "2f1d09a04e4b16a21686cbf28a85140ba1ce9b9c75ede53b36d919ea9afac342",
+              "bytes": 1661441,
+              "status": "SAVED",
+              "errors": []
+            },
+            {
+              "url": "https://arxiv.org/html/2609.01836",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/paper.html",
+              "sha256": "490edfb47c547dce38cba493978ebf6bfadab37500fd410a3f3c86188929e573",
+              "bytes": 767614,
+              "status": "SAVED",
+              "errors": []
+            },
+            {
+              "url": "https://arxiv.org/abs/2609.01836",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2609.01836/abstract.html",
+              "sha256": "8c9097a654da6792e67e5bf7f8bb9ad470616f5bb7fbfe8f475d2a8d0d350079",
+              "bytes": 41965,
+              "status": "SAVED",
+              "errors": []
+            }
+          ]
+        },
+        {
+          "id": "2512.12818",
+          "version": "v1",
+          "rechecked_url": "https://arxiv.org/html/2512.12818v1",
+          "original_saved_files": [
+            {
+              "url": "https://arxiv.org/pdf/2512.12818",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/paper.pdf",
+              "sha256": "1c0bb9fd4e53f45107e587766d6fc3b4b3441877567b17bdbbb5172015c120d4",
+              "bytes": 2452730,
+              "status": "SAVED",
+              "errors": []
+            },
+            {
+              "url": "https://arxiv.org/html/2512.12818",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/paper.html",
+              "sha256": "78e8d3d1ae37344d6bbb2efc5db19465b91e6de92acb1ac923796a3ee5243202",
+              "bytes": 436919,
+              "status": "SAVED",
+              "errors": []
+            },
+            {
+              "url": "https://arxiv.org/abs/2512.12818",
+              "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2512.12818/abstract.html",
+              "sha256": "6078de2a88c8d2fa08e96f7b61252a69030a955f09197cdb8ff929adaaa821ff",
+              "bytes": 44275,
+              "status": "SAVED",
+              "errors": []
+            }
+          ]
+        },
+        {
+          "id": "mem0ai/mem0",
+          "commit": "94c3fe9f238f3dbf29c9ce98643bd71eb13077cd",
+          "url": "https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0/mem0/configs/prompts.py",
+          "sha256": "10bc8a34b3b5f0ce24560a2a3190c9112b979a891b981f48393bbd168d915a5c",
+          "read_scope": "Fact extraction/empty candidates and NONE maintenance; no benchmark or SDK execution"
+        }
+      ],
+      "new_readable_notes": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r5-lineage-review.html",
+        "sha256": "3f2c79cb3136811007463e111c7e249890c6c34716ea3d902c34508aa46dcb4a"
+      },
+      "new_sdk_or_model_execution": false,
+      "runtime_benchmark_gold_accessed": false,
+      "root_inference": "Separate boundary trigger from direct supporting leaves and preserved semantic lineage; explicit true string handles; not a semantic entailment verifier or deployed repair.",
+      "recheck_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r5-lineage-recheck.json",
+        "sha256": "3a5622957f93d1f3b07180b06dbce8a902e95580cb3a2e471c9a42680dedd8d7"
+      }
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -970,5 +1064,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T02:12:36.530376+00:00"
+  "updated_at_utc": "2026-10-01T03:15:46.439254+00:00"
 }
