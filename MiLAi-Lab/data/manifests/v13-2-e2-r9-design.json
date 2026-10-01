@@ -1,0 +1,144 @@
+{
+  "kind": "V13_2_R9_E2_PROSPECTIVE_EXPOSED_DEVELOPMENT_DESIGN",
+  "status": "PREPARED_CONFIG_NOT_RUNTIME_FROZEN",
+  "created_at_utc": "2026-10-01T20:26:17.659132+00:00",
+  "base_published_checkpoint": "0c136267a3f7141c8b4b8077ae691c930529b2d9",
+  "engineering_acceptance_path": "data/manifests/v13-2-public-contract-engineering-acceptance.json",
+  "engineering_acceptance_sha256": "6acb8990883b5135419adcbc1de1678d157a10582c5f15dd6e61cb42e1d5199f",
+  "fixture_path": "data/fixtures/v13-2-e2-identity-development.json",
+  "fixture_sha256": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935",
+  "offline_rubric_path": "data/diagnostics/v13-2-small-development-rubric.json",
+  "offline_rubric_sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+  "common_profiles": {
+    "memory_material_profile": "compact_v1",
+    "tool_schema_communication": "shape_feedback_v1",
+    "tool_read_feedback": "typed_read_v1",
+    "tool_save_communication": "completed_receipt_v1",
+    "http_ownership_profile": "serialized_ledger_owner_v1",
+    "http_ownership_domain": {
+      "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+      "clients": [
+        {
+          "base_url": "http://127.0.0.1:7860/v1/",
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "temperature": 0,
+          "max_tokens": 4096,
+          "timeout": 180,
+          "tool_mode": "json_action",
+          "max_calls": 12,
+          "response_format": null,
+          "enable_thinking": false
+        },
+        {
+          "base_url": "http://127.0.0.1:7861/v1/",
+          "model": "bge-m3",
+          "temperature": 0,
+          "max_tokens": 4096,
+          "timeout": 180,
+          "tool_mode": "json_action",
+          "max_calls": 12,
+          "response_format": null,
+          "enable_thinking": false
+        }
+      ]
+    },
+    "tool_parameter_contract": "explicit_shape_v1"
+  },
+  "declared_arm_differences": [
+    "memory_candidate_contract",
+    "memory_source_backlinks"
+  ],
+  "shared_support_contract": "legacy",
+  "shared_read_protocol": "legacy",
+  "capture_feedback_profile": "legacy",
+  "exact_codec_enabled": false,
+  "arms": [
+    {
+      "name": "old-target-query",
+      "config_path": "configs/v13-2-e2-old-target-query-r9.json",
+      "config_sha256": "58de5cd78472eb260479dfafde6c5c0ec7a0746268df3220d7e411a47d879ea9",
+      "original_config_path": "configs/v13-2-e2-old-target-query.json",
+      "original_config_sha256": "f0a6e2f8a01be8ba8736da5627f923548fe4f382bfdb508e24ae36d27c3ebf4a",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a0",
+      "source_backlinks": "disabled",
+      "candidate_contract": "legacy_query_v1"
+    },
+    {
+      "name": "source-backlinks",
+      "config_path": "configs/v13-2-e2-source-backlinks-r9.json",
+      "config_sha256": "1854bf26e57648d52fb2507ab5fafb67240dfd6a7981ffe3d0b99d023704e912",
+      "original_config_path": "configs/v13-2-e2-source-backlinks.json",
+      "original_config_sha256": "146a8e7d2cafd5cd3343c2c983e88f025312858d8b886bc01da59e3e5e60e796",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a1",
+      "source_backlinks": "enabled",
+      "candidate_contract": "id_revision_v1"
+    },
+    {
+      "name": "source-backlinks-read-handles-patch",
+      "config_path": "configs/v13-2-e2-source-backlinks-read-handles-patch-r9.json",
+      "config_sha256": "64bf61c9a4e2ad6c43a37b256897c2607714ba75d9506b002366cbf617414dcf",
+      "original_config_path": "configs/v13-2-e2-source-backlinks-read-handles-patch.json",
+      "original_config_sha256": "fa64abc8b80f4aa459a70caef4b9bb407234b620a6d2155dea2057f68d51eba4",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a2",
+      "source_backlinks": "enabled",
+      "candidate_contract": "read_handle_v1"
+    }
+  ],
+  "planned_trajectories": 15,
+  "planned_public_messages": 45,
+  "concurrency": 1,
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_sha256": "8547f1ef8d32455ad121799e5c0132a3de24a992067408c4fbbb73d2fb199ca5",
+  "root_execution_controller": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_r9_e2_one.py",
+    "sha256": "04fa5533e433267c2e671e3d2bbb2449c20106c44050260ce5d94de41fae7176"
+  },
+  "root_inspector": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/inspect_r9_e2_step.py",
+    "sha256": "c3621a2ed864ee8d7556ad653e0d3fb4a1827569712101f705dc496b83bcadcc"
+  },
+  "order": "Original case order; each public boundary old-target-query, source-backlinks, read-handles-patch. Root inspects and explicitly records decision before each subsequent first attempt.",
+  "sample_policy": "Every first public boundary once, fresh child process; no replay/repair/final rewrite/refund. Interrupted prior messages leave their later boundaries NOT_RUN. Owner/hash/Source leak, false durable-save success or gold/future/offline inputs stop affected cohort. Root reviews are not independent Judge.",
+  "qualifications": [
+    "Five original exposed development cases; no new gold, holdout or independent samples.",
+    "Three original identity/update interfaces retain their declared differences and legacy-query latest-fill limitation; stronger read_handle-only support/read protocols are not forced across all arms.",
+    "Common prior accepted delivery/ownership and new public-shape explanation do not make R0-to-R9 a single-factor causal comparison.",
+    "Cross-language Source-to-card direction is recorded from actual generated card language, not assumed from an input request.",
+    "Every Host/writer/embedding/material/schema request and original failure remains in the same continuous ledger; scope/historical preservation and source-supported original-card revision remain separate from final answer correctness."
+  ],
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "actual_model_http": 0,
+  "full_plan_completed": false
+}

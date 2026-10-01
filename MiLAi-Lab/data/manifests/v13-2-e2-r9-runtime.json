@@ -1,0 +1,244 @@
+{
+  "kind": "V13_2_R9_E2_FRESH_RUNTIME_FREEZE",
+  "status": "FROZEN_AWAITING_PUBLICATION_PREFIRST_HTTP",
+  "frozen_at_utc": "2026-10-01T20:27:59.877106+00:00",
+  "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+  "python_version": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+  "packages": {
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint": "2.1.2",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "langchain-core": "1.6.5",
+    "openai": "3.19.2",
+    "tiktoken": "0.14.0",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "httpx": "0.28.1",
+    "numpy": "2.4.6",
+    "jsonschema": "4.26.0",
+    "pydantic": "2.13.5"
+  },
+  "design_path": "data/manifests/v13-2-e2-r9-design.json",
+  "design_sha256": "bce4f0bd1428b9205184b47cebf72fedf267852934b6f513e139973a00f884a9",
+  "fixture_path": "data/fixtures/v13-2-e2-identity-development.json",
+  "fixture_sha256": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935",
+  "offline_rubric_path": "data/diagnostics/v13-2-small-development-rubric.json",
+  "offline_rubric_sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+  "prepare_driver": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_r9_e2.py",
+    "sha256": "d6558e0264c24ea521bb54a505d18ea924372867c1d7a04ae9dbacb6e14f1722"
+  },
+  "execution_controller": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_r9_e2_one.py",
+    "sha256": "04fa5533e433267c2e671e3d2bbb2449c20106c44050260ce5d94de41fae7176"
+  },
+  "root_inspector": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/inspect_r9_e2_step.py",
+    "sha256": "c3621a2ed864ee8d7556ad653e0d3fb4a1827569712101f705dc496b83bcadcc"
+  },
+  "models_preflight_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/preparation-first/models-read-only-preflight.json",
+  "models_preflight_sha256": "d639bfe31766956ea9d73c6f8ea6f4c282ec9621c896341644a29fd78ec61782",
+  "models_preflight_completed_at_utc": "2026-10-01T20:27:56.610331+00:00",
+  "actual_ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "actual_ledger_before_sha256": "8547f1ef8d32455ad121799e5c0132a3de24a992067408c4fbbb73d2fb199ca5",
+  "actual_ledger_before": {
+    "embedding": {
+      "charged_tokens": 940330,
+      "known_tokens": 940330,
+      "unknown_usage": 0
+    },
+    "generation": {
+      "charged_tokens": 26137881,
+      "known_tokens": 26107494,
+      "unknown_usage": 1
+    },
+    "generation_requests": 9250,
+    "history": {
+      "earlier_history": {
+        "earlier_history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_v15": {
+                "embedding_tokens": 836,
+                "generation_charged_tokens": 76737,
+                "generation_known_tokens": 71846,
+                "generation_requests": 108,
+                "generation_unknown_reservation": 4891,
+                "judge_requests": 0,
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sealed": true,
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "unknown_usage": 1
+              },
+              "embedding_tokens": 443,
+              "generation_charged_tokens": 40072,
+              "generation_known_tokens": 40072,
+              "generation_requests": 55,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sealed": true,
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 916,
+            "generation_charged_tokens": 101810,
+            "generation_known_tokens": 101810,
+            "generation_requests": 101,
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sealed": true,
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "unknown_usage": 0
+          },
+          "embedding_tokens": 267,
+          "generation_charged_tokens": 19237,
+          "generation_known_tokens": 19237,
+          "generation_requests": 16,
+          "judge_requests": 0,
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sealed": true,
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "truncations": 1,
+          "unknown_usage": 0
+        },
+        "embedding_tokens": 274,
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sealed": true,
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+      },
+      "embedding_tokens": 808,
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sealed": true,
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "executing_maps": {
+    "runtime": {
+      "count": 216,
+      "compact_sha256": "436d7d983bf7596965de53c4361d2e652efda2788abf051246a6b467ffc4f7bd"
+    },
+    "tests": {
+      "count": 396,
+      "compact_sha256": "e5e78e6ebd39ccbbe3c9ac1be19a4dfd1b489c9b432a6b8368a43ecb834adf7a"
+    },
+    "configs": {
+      "count": 323,
+      "compact_sha256": "f504e27b76f41591f9fca5b08c924cf14368f9cdeec465bd92c9263182c0c853"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "full_preparation_maps_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/preparation-first/before.json",
+  "arms": [
+    {
+      "name": "old-target-query",
+      "config_path": "configs/v13-2-e2-old-target-query-r9.json",
+      "config_sha256": "58de5cd78472eb260479dfafde6c5c0ec7a0746268df3220d7e411a47d879ea9",
+      "original_config_path": "configs/v13-2-e2-old-target-query.json",
+      "original_config_sha256": "f0a6e2f8a01be8ba8736da5627f923548fe4f382bfdb508e24ae36d27c3ebf4a",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a0",
+      "source_backlinks": "disabled",
+      "candidate_contract": "legacy_query_v1",
+      "input_freeze_sha256": "6db6db131514a71add039437693315f1d9c873dd7b427a8d45c64afd4622adb7",
+      "tool_catalog_sha256": "0bb59bb05edfd8367735d16deb013d78affb2e02a3c56b4e7a84e83721f5c74f",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "public_parameter_profile": "explicit_shape_v1",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      }
+    },
+    {
+      "name": "source-backlinks",
+      "config_path": "configs/v13-2-e2-source-backlinks-r9.json",
+      "config_sha256": "1854bf26e57648d52fb2507ab5fafb67240dfd6a7981ffe3d0b99d023704e912",
+      "original_config_path": "configs/v13-2-e2-source-backlinks.json",
+      "original_config_sha256": "146a8e7d2cafd5cd3343c2c983e88f025312858d8b886bc01da59e3e5e60e796",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a1",
+      "source_backlinks": "enabled",
+      "candidate_contract": "id_revision_v1",
+      "input_freeze_sha256": "9de6f6e07332465c4ea7f98d97c160bb59ad4b0e193fbcd401496b59e1d1c02b",
+      "tool_catalog_sha256": "eecbabe90a27f62b96d996f72525d2dc4746fea42d3b824c2fb54f9c4f45eb4e",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "public_parameter_profile": "explicit_shape_v1",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      }
+    },
+    {
+      "name": "source-backlinks-read-handles-patch",
+      "config_path": "configs/v13-2-e2-source-backlinks-read-handles-patch-r9.json",
+      "config_sha256": "64bf61c9a4e2ad6c43a37b256897c2607714ba75d9506b002366cbf617414dcf",
+      "original_config_path": "configs/v13-2-e2-source-backlinks-read-handles-patch.json",
+      "original_config_sha256": "fa64abc8b80f4aa459a70caef4b9bb407234b620a6d2155dea2057f68d51eba4",
+      "changed_settings": [
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "tool_parameter_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r9/a2",
+      "source_backlinks": "enabled",
+      "candidate_contract": "read_handle_v1",
+      "input_freeze_sha256": "a8d9fc588a37ea2c4d0468208a523eb893596206b7c0e678cd32e78792e34620",
+      "tool_catalog_sha256": "7bc0f31898ed55bfb75f3b678a29a4933ec80a705269b0b5646e1811de07523b",
+      "prompt_sha256": "f246bc0cc0b72c7d39771624ec68a28971a1ac6b72a140d4433d728b6c6f8c96",
+      "public_parameter_profile": "explicit_shape_v1",
+      "http_ownership_binding": {
+        "canonical_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+        "domain_sha256": "4bbd5c560bf3e16ec752bba3e3c299e6e472894c3e67198a789242fc8592ea00"
+      }
+    }
+  ],
+  "planned_trajectories": 15,
+  "planned_public_messages": 45,
+  "concurrency": 1,
+  "read_only_model_route_gets": 2,
+  "actual_model_http_at_prepare": 0,
+  "old_roots_replayed": false,
+  "stronger_read_handle_contract_forced_on_baseline": false,
+  "exact_codec_enabled": false,
+  "Root_reviews_not_independent_judge": true,
+  "stops": "Every first public boundary once, fresh child process; no replay/repair/final rewrite/refund. Interrupted prior messages leave their later boundaries NOT_RUN. Owner/hash/Source leak, false durable-save success or gold/future/offline inputs stop affected cohort. Root reviews are not independent Judge.",
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "full_plan_completed": false
+}

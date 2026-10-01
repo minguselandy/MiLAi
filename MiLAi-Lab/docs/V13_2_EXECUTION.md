@@ -395,3 +395,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## 通用参数/真实捕获效果的有限工程验收
 
 [验收](V13_2_PUBLIC_CONTRACT_ENGINEERING_ACCEPTANCE.md)：Source 4e2f909 精确9路径转移；Root最终79+25控制、静态与双边界通过，86旧方法/default8组保持。Source23次非零/单次未dispatch失败、Root3次核验/收口脚本错误及原maps保持。可还原编码复核出现222→131正文、历史2→1及冲突355→60退化，C下一实际配置禁用；A/B独立默认关闭。0模型HTTP/账本8547f1ef不变。按原三接口另冻结共同A的E2候选；完整计划/E0/D4/Product门禁不变。
+
+## R9 E2新的共同参数说明条件：模型前冻结
+
+[冻结](V13_2_E2_R9_RUNTIME_FREEZE.md)：原三接口/五曝光开发场景，15轨迹45公开消息；共同A参数说明，其它接受的有界读取/真实receipt/HTTP owner保持，support/read legacy、B legacy、C禁用、原budget/formation不变。45离线输入门禁均退出0、两个既有模型/models GET确认、0生成/embedding；先发布并核对再按Root逐边界审查执行。原48行/计划与E0/D4/Product门禁不变。

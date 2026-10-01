@@ -1104,5 +1104,18 @@
     "actual_model_http": 0,
     "C_next_actual_disabled": true,
     "model_or_independent_quality_gate_advanced": false
+  },
+  "e2_r9_prospective_freeze": {
+    "runtime": "data/manifests/v13-2-e2-r9-runtime.json",
+    "runtime_sha256": "aa1f4ae7fd3bcc8e11e0361f2099d66a07d84c360dcb865b9188ce2b307ce878",
+    "design": "data/manifests/v13-2-e2-r9-design.json",
+    "design_sha256": "bce4f0bd1428b9205184b47cebf72fedf267852934b6f513e139973a00f884a9",
+    "status": "FROZEN_AWAITING_PUBLICATION_PREFIRST_HTTP",
+    "planned_trajectories": 15,
+    "planned_public_messages": 45,
+    "actual_model_http_at_freeze": 0,
+    "stronger_read_support_contract_not_forced_on_baseline": true,
+    "exact_codec_enabled": false,
+    "original_48_rows_unchanged": true
   }
 }
