@@ -408,6 +408,270 @@
           "reason": "Initial fetch asserted a single annotated-tag dereference; release tag actually points to another tag. All retrieved docs/tag metadata retained; corrected recursive tag traversal resolves the actual commit."
         }
       ]
+    },
+    {
+      "kind": "paper",
+      "id": "2601.02553v3",
+      "title": "SimpleMem: Efficient Lifelong Memory for LLM Agents",
+      "read_scope": "Abstract/method pipeline and pinned native text contracts; no benchmark/gold questions accessed",
+      "files": [
+        {
+          "url": "https://arxiv.org/pdf/2601.02553v3",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.02553/paper.pdf",
+          "sha256": "8752aa223e004ca286995bc1e8cbde8e89e67ad3aeb9ba0266f3ccab3cc11078",
+          "bytes": 844453,
+          "retrieved_at_utc": "2026-10-01T01:03:43.958600+00:00",
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/html/2601.02553v3",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.02553/paper.html",
+          "sha256": "4e9b41a8cf477be1fc62a95307c7252715418f3c17a45842c50e7d417e5d7e16",
+          "bytes": 464097,
+          "retrieved_at_utc": "2026-10-01T01:03:44.395574+00:00",
+          "status": "SAVED",
+          "errors": []
+        },
+        {
+          "url": "https://arxiv.org/abs/2601.02553v3",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2601.02553/abstract.html",
+          "sha256": "c8f8ae8f8ec0c40d9435cc3ee6d6dbf5212b05a682a0e73357e2be1a23d59aca",
+          "bytes": 42485,
+          "retrieved_at_utc": "2026-10-01T01:03:43.925987+00:00",
+          "status": "SAVED",
+          "errors": []
+        }
+      ]
+    },
+    {
+      "kind": "project",
+      "id": "aiming-lab/SimpleMem Text reference",
+      "url": "https://github.com/aiming-lab/SimpleMem",
+      "commit": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference",
+      "snapshot_file_count": 21,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/manifest.json",
+      "snapshot_manifest_sha256": "e4098715b684706b38d4e82b7eb039fc0ceafbf7188875964cec6e2489930ee4",
+      "status": "SAVED_PINNED_TEXT_METHOD_REFERENCE",
+      "read_scope": "Pinned text/core, import entry points, README/LICENSE/package metadata. No benchmark, gold, evaluation, multimodal or evolver data/code read or copied. SDK/protocol checks are engineering only, no paper reproduction.",
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/LICENSE",
+          "relative_path": "LICENSE",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/LICENSE",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/LICENSE",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.403348+00:00",
+          "sha256": "276dc8cc9eb5a8c59d1edca3283163815d2caa512b17bd0bf053050304b4cd3e",
+          "bytes": 1067
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/README.md",
+          "relative_path": "README.md",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/README.md",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/README.md",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.406118+00:00",
+          "sha256": "420cdf2a5c22d74354d11e7617fdd24a1ce60eeba8e0d21b51ed4442b7149001",
+          "bytes": 25454
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/__init__.py",
+          "relative_path": "simplemem/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.408362+00:00",
+          "sha256": "4a08e5986d32f6ec89485a8d67d30df36a53e768f6724bed4e6cc0ecf7f9ad56",
+          "bytes": 1700
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/config.py",
+          "relative_path": "simplemem/config.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/config.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/config.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.410632+00:00",
+          "sha256": "2929648721debc490617f033b98c11959e5aa062cfe4425282e347189d0467ef",
+          "bytes": 1915
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/__init__.py",
+          "relative_path": "simplemem/core/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.412810+00:00",
+          "sha256": "fabc99c84f1ca8fdecd49c496cb09d6af8cc7ebae9b05535da82183b1610be67",
+          "bytes": 222
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/answer_generator.py",
+          "relative_path": "simplemem/core/answer_generator.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/answer_generator.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/answer_generator.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.415237+00:00",
+          "sha256": "ba8946134e9db0de63da00a9f223229800d2487c6fd34d22d7c5296093d0470c",
+          "bytes": 4811
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/config_default.py",
+          "relative_path": "simplemem/core/config_default.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/config_default.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/config_default.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.417491+00:00",
+          "sha256": "77b06780502e42a62ed308eee75dadd2a8192f20b127177bb14b5c614cc622cf",
+          "bytes": 4851
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/database/__init__.py",
+          "relative_path": "simplemem/core/database/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/database/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/database/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.420071+00:00",
+          "sha256": "e623f8d4fd590473a0cb1ca73e016f9760b07efe08542bae352436ec4b4faada",
+          "bytes": 412
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/database/vector_store.py",
+          "relative_path": "simplemem/core/database/vector_store.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/database/vector_store.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/database/vector_store.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.422505+00:00",
+          "sha256": "a7519fa27cfcfdceb4e146780c948c96e2840cea11965a94c296b786623fff29",
+          "bytes": 6424
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/database/vector_store_backend.py",
+          "relative_path": "simplemem/core/database/vector_store_backend.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/database/vector_store_backend.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/database/vector_store_backend.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.424717+00:00",
+          "sha256": "2406f5c267f9013af0dc34c8668def8b20b3e66326827c57d975f6129f502c26",
+          "bytes": 10319
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/hybrid_retriever.py",
+          "relative_path": "simplemem/core/hybrid_retriever.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/hybrid_retriever.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/hybrid_retriever.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.428456+00:00",
+          "sha256": "63d6a3522e8a4c5d3a073b5dbf8ac003844c37993bf16033bb5c9a3807db5381",
+          "bytes": 39148
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/memory_builder.py",
+          "relative_path": "simplemem/core/memory_builder.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/memory_builder.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/memory_builder.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.431421+00:00",
+          "sha256": "ade5d9c252158ede2d0bd4ca3da027e913d6e88dbe616e00f5962178053c9dc7",
+          "bytes": 17967
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/models/__init__.py",
+          "relative_path": "simplemem/core/models/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/models/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/models/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.433840+00:00",
+          "sha256": "a64a0ee787d6476b3f488c8e3276ee337aae16763fb9b38158cd8ccc81b8ac06",
+          "bytes": 110
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/models/memory_entry.py",
+          "relative_path": "simplemem/core/models/memory_entry.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/models/memory_entry.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/models/memory_entry.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.435943+00:00",
+          "sha256": "487209f5d6981a12568ec3f6f4597d2bd1437a82a0ef9af85c5dc755bc2947c8",
+          "bytes": 2751
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/settings.py",
+          "relative_path": "simplemem/core/settings.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/settings.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/settings.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.438116+00:00",
+          "sha256": "3ca77f1d035fd309a541fdc7555e8519ddb9d77ce4f82161f1fa027619784de2",
+          "bytes": 2292
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/utils/__init__.py",
+          "relative_path": "simplemem/core/utils/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/utils/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/utils/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.440144+00:00",
+          "sha256": "d348d4588c4de3874438b576b3e92c6ff6015238506eaea712277973de478eb0",
+          "bytes": 137
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/utils/embedding.py",
+          "relative_path": "simplemem/core/utils/embedding.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/utils/embedding.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/utils/embedding.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.442234+00:00",
+          "sha256": "da72ef639c5c0f6a6d9a0ecd5f4f45f65019da52e32191571ac718ff0b7c6d68",
+          "bytes": 6521
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/core/utils/llm_client.py",
+          "relative_path": "simplemem/core/utils/llm_client.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/core/utils/llm_client.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/utils/llm_client.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.444435+00:00",
+          "sha256": "19533ebf5b3a12096c70ae35df54305d8b307b22240377ce1977e2aaff527bd8",
+          "bytes": 10863
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/router.py",
+          "relative_path": "simplemem/router.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/router.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/router.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.446636+00:00",
+          "sha256": "fe29f316d4606679e910ae45689558938006cd6699b92eeb8cfffd589f361bb0",
+          "bytes": 13252
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/text/__init__.py",
+          "relative_path": "simplemem/text/__init__.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/text/__init__.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/text/__init__.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.448749+00:00",
+          "sha256": "f2203f2e9bef56330e007d8bf00200b31c796749d76f51157a435f07d9291028",
+          "bytes": 68
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/simplemem-text-reference/simplemem/text/system.py",
+          "relative_path": "simplemem/text/system.py",
+          "source_original_path": "/cra/memory/mx_memory/reference-sources/contextual-v7/SimpleMem/simplemem/text/system.py",
+          "url": "https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/text/system.py",
+          "commit_or_version": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+          "retrieved_at_utc": "2026-10-01T01:03:44.451053+00:00",
+          "sha256": "47a8fbfd5b6ea820f20f838e8453b91ff88926e503c1ccb78133aecbc5bee2c8",
+          "bytes": 9807
+        }
+      ],
+      "limitations": [
+        "Pinned runtime code is a separate version from paper experiments; no complete paper reproduction or inherited benchmark scores.",
+        "Native entries have no source-event/owner/version-CAS field; original JSON may be preserved at trace_equal writer input without adding native semantic attribution.",
+        "Planning/reflection/native retries incur calls; public tool output requires an explicitly measured bounded material layer before common-budget comparison."
+      ]
     }
   ],
   "complete": true,
@@ -415,12 +679,13 @@
   "archival_issues_retained": [
     "Hindsight initial old implementation path had zero source files; actual hindsight-api-slim/hindsight_api found from tree metadata, 353 files now saved and verified.",
     "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present.",
-    "Arrow20.0.0 release tag points to another annotated tag; first single-dereference assertion failed, original metadata retained and recursive traversal resolves fixed commit3ad0370a."
+    "Arrow20.0.0 release tag points to another annotated tag; first single-dereference assertion failed, original metadata retained and recursive traversal resolves fixed commit3ad0370a.",
+    "SimpleMem fixed official tree page failed web cache lookup; existing official clone at db80b6a7 was verified against exact git object bytes for21 selected text/core/import/document files. All three paper v3 originals saved."
   ],
-  "recorded_at_utc": "2026-10-01T00:41:14.229653+00:00",
+  "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
-  "paper_count": 5,
-  "project_count": 5,
+  "paper_count": 6,
+  "project_count": 6,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,

@@ -1,6 +1,6 @@
 # v13.2 设计资料索引与失败反思
 
-2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存5篇论文PDF/HTML/摘要，3个上游项目的固定commit方法源码、README与LICENSE，以及LangGraph SDK和Arrow表示格式两份官方参考。
+2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存6篇论文PDF/HTML/摘要，4个上游项目的固定commit方法源码、README与LICENSE，以及LangGraph SDK和Arrow表示格式两份官方参考。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
@@ -13,6 +13,7 @@
 | [Hindsight](https://arxiv.org/abs/2512.12818) | 保留时间/实体信息，区分事实、经历与意见；通过多路检索关联有关记忆。 | 参考实际历史关联和主张性质的表达。沿用原词法+dense与source回链，只压缩重复metadata并交付真实相关版本，不默认接新reranker、推断日期或重建大型图。 |
 | [HiMem](https://arxiv.org/abs/2601.06377) | Episode与Note关联，冲突感知再整合帮助动态维护。 | 作为类型/关联机制近邻，保留可选kind及现有身份修订。当前先验证单条实际关联/更新，不据此强制双Store或宣称双类型更好。 |
 | [EAL-Bench论文](https://arxiv.org/abs/2609.01836) | 分析错误权威在记忆形成和下游行动中的传播，比较来源约束与有界事件溯源。 | 提示存在来源ID仍不等于概括被支持，推断/提问不能升级成用户事实或业务授权。gold引用源gate属于诊断条件，不引入运行时隐藏授权或gold。 |
+| [SimpleMem v3](https://arxiv.org/abs/2601.02553v3) | 语义结构压缩、会话内综合、意图检索规划分担不同职责。 | 核查已有Text接入的原生形成、规划/反思和全部费用。JSON载体保留原源不保证原生条目有来源ID、owner或revision/CAS；不迁移论文分数。 |
 
 上表是对原始论文相关方法部分的概括；应用到当前系统的取舍是Root推断，尚未通过新实验。论文自报性能不作为MiLAi性能结论。HiMem和EAL的代码未作忠实复现；项目版本也不自动等于论文评测版本。
 
@@ -25,6 +26,7 @@
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | `projects/mem0`；171份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；10份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [Apache Arrow dictionary encoding reference](https://github.com/apache/arrow) | `3ad0370a04ccdae638755b94c3c31c8760a11193`，20.0.0 | `projects/apache-arrow-dictionary-reference`；8份官方版本文档、格式源码、README/LICENSE和tag元数据；选定参考片段，不是全仓复现 |
+| [aiming-lab/SimpleMem Text reference](https://github.com/aiming-lab/SimpleMem) | `db80b6a7c591e0ea730a058e9f5fc4eb06572299` | `projects/simplemem-text-reference`；21份text/core、导入入口、README/LICENSE及包定义；未复制benchmark/evaluation、multimodal或evolver内容 |
 
 LangGraph另保留本次实际安装`langgraph-checkpoint-sqlite==2.0.11`的源码与包METADATA；官方新版本的分段匹配和实际安装版本的LIKE行为分开记录，没有升级SDK。Hindsight目录重组使首次旧路径未取到源码，随后按tree metadata找到实际路径并核对353份文件；这个归档问题不算实验失败或成功。
 
@@ -55,3 +57,9 @@ SDK检查另保存官方固定Store接口与实际安装`langgraph-checkpoint==2
 当前候选借鉴这个通用表示原则，压缩实际record ID、完全相等的scope及重复读入口，保留完整来源role/hash、版本hash/CAS、当前/历史区分和真实省略状态。表、解码说明及正文仍共同计入原2048预算。此应用是工程假设；不引入Arrow依赖，不改排名或选取范围，模型能否正确消费及完整语义收益尚未验证。小包可能因表开销变大，同样需要记录。
 
 20.0.0发布tag实际指向第二层tag；首次只解引用一层的归档检查失败，原元数据保留，递归解析后固定到上述实际commit。归档错误与材料交付失败分开，不算模型样本。
+
+## 已接入SimpleMem-Text的独立合同核查
+
+原规划8.1要求已有第二外部系统另作预算/微型确认。因此检查[固定Text原生条目](https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/models/memory_entry.py)与[公开VectorStore](https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/database/vector_store.py)：原生字段没有source-event、owner或MiLAi整数revision/CAS，不能补造为已验证归属。trace_equal载体可保留完整原Source JSON，但这种输入关联与原生条目字段分开报告。
+
+实际核查继续使用已存在专用环境及原固定代码，未升级或安装SDK，也不改变运行中的性能环境。原推理环境首次缺少lancedb metadata的构造失败留存；选用原专用环境后才能检查公开SDK持久化和调用入口。规划/反思、原生有限重试和闭合短flush保持原身份。离线脚本响应只证明工程合同，尚不能完成D4-07真实微型比较或宣称SimpleMem模型质量。

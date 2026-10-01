@@ -476,9 +476,13 @@
       ],
       "requirement": "已接入SimpleMem-Text合同/预算验收后公开主表或固定确认；近邻复现边界如实披露。",
       "completion_evidence": "实际SDK与微型确认或显式未完成；Hindsight/HiMem未复现不宣称优于。",
-      "status": "NOT_VERIFIED",
-      "evidence": [],
-      "condition": null
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-2-simplemem-contract-preflight.json",
+        "data/manifests/v13-2-design-literature-catalog.json"
+      ],
+      "condition": null,
+      "qualification": "Actual pinned core/LanceDB25-entry independent process reopen, owner wrapper, source JSON input and persisted mixed Host/native12/24 MockTransport callback checks completed. Constructor missing-environment failure retained;3091-token conversion exceeds common2048 and requires bounded delivery. Zero actual model HTTP/samples; complete native micro confirmation and public method comparison NOT_RUN."
     },
     {
       "id": "D5-01",

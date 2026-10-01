@@ -176,3 +176,11 @@ R4全部审计结束后才合入此前暂停保存的WIP。Root逐hash核对[限
 只读固定五个实际源码身份确认：旧ComparisonRuntime每ReAct检索/匹配工具形成，不能改标签当一次回合缓存；旧B6仅raw chunks与receipt projection，B3的summary实现不代表B6+已有语义fallback。Mem0已向Host共享admission传入reserve回调，但新D4的Host/native/summary/writer合计24/12及中断重启持久上限尚需真实工程检查。此准备0模型HTTP，不升级D4状态或清除R4失败。
 
 [R5前瞻设计](../data/manifests/v13-2-e0-r5-design.json)仍为DRAFT_NOT_READY，未冻结运行源码或开始模型HTTP。材料工程的范围已明确包含可逆共享表示与按实际token成本的正文分配；两项联合改变，不能归因纯字节压缩。保留原候选、排名、首次record顺序及2048/6，真实省略与可能少送后续current的取舍另计。原多语种压力失败/断言保留，保持R4两提示不变。Source验收及独立性能的零HTTP账本协议结束后，才另冻原全24/48；旧根目录不再执行。
+
+## SimpleMem-Text独立工程前检
+
+[限定SDK/callback结果](../data/manifests/v13-2-simplemem-contract-preflight.json)在现有固定db80b6a7与原专用环境执行四进程：25条合成提案经公开原生VectorStore持久化，退出后的独立SDK重开读回与退出前一致；wrapper错owner被拒。trace_equal原Source JSON实际进入原生writer请求，0admission形成返回INCOMPLETE而不伪称完成。Native条目不新增source-event/owner/revision/CAS字段。
+
+交替MockTransport Host/native生成在共享12/24上限各自拒绝额外dispatch；一次合成未知响应先留persisted count1，新进程在limit1拒绝重发。37chat/1embedding均为模拟transport，实际实验HTTP/模型样本0、原208源码与连续账本不变。Adapter close本身为pass，独立重开使用前进程退出；不冒称已实现显式native close协议。
+
+25条快照转换material的实际Qwen计数3091，超过共同2048，尚无新共同有界交付层，也未运行付费原生retrieval/模型语义微型。推理环境缺lancedb metadata的首次构造失败保留，随后使用既有专用环境，未安装/升级或改性能环境。D4-07仅PARTIAL，四臂总预算/实际比较仍未准入。[资料索引](V13_2_DESIGN_LITERATURE.md)另保存SimpleMem论文v3与21份固定text/core参考，现6论文/6项目参考。
