@@ -290,3 +290,7 @@ R6 +169generation/958,878known（Host150/856,495，writer19/102,383）和45embed
 [新范围](V13_2_SCHEMA_COMMUNICATION_DESIGN.md)限定默认关闭shape_feedback_v1，联合呈现公开参数层级、三类真实错误来源与trigger元数据/Source正文说明。Root核对280索引原件/48回执、原17→19文件maps、19快照/9归档参考，精确复制282文件；47返回0/一rg返回2及Source初始metadata覆盖限制原样保留。Root新鲜211 map仍8c466、连续账本73c437ac不变，核验器首执行0且无机制测试/新模型HTTP；两次Root只读查阅失败的原工具来源另列，不补造当时map。
 
 范围只允许一个新增helper与六现有源码、三相关测试，D0实际入口、recipe、Host/基线/M、writer及P5恢复同flag闭包。旧默认/catalog/wire、实际grammar/参数、Source/CAS、12/2048/6/writer1/repair0保持；不补来源、问句分类、业务规则或语义verifier，不增加付费repair。独立cap可观测提案未纳入。先发布核对此范围，再由同一既有Source在新隔离树实现，旧树HOLD；实现和Root有限工程验收之前不建实际新cohort或启HTTP。资料682/85、R6失败、48验收项状态及完整plan ACTIVE/Product NO_GO保持。
+
+Root已单独准备后续R7 parent/SDK/wire/postcheck草稿：11项冻结/no-replay/一致错误profile拒绝及8项后检失败保留控制在纯合成文件和mock子命令上通过，0真实SDK/模型。wire失败不再使独立完整collector跳过，原非零、错误artifact与完整分母分别保留；源码或账本变动立即停止。首Path monkeypatch harness失败的原driver/log与独立修正均留存，未修改运行实现。实际R7配置/root/冻结/HTTP尚无，profile-specific wire校准须等待实现；211/8c466与账本73c437ac保持。
+
+48项验收状态不变，D5-10另追加当前840/六profile/九terminal的已发布完成证据，旧“10k仍在运行”qualification原样保留并标明历史阶段。当前PARTIAL缘于方法/自然长程/对象流等剩余要求，不再由旧未完成性能阶段解释。另一次Root只读导航rg路径失败保存工具来源与当时map缺失限制；所有这些工作0新增实验模型HTTP。

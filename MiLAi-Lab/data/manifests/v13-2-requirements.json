@@ -655,7 +655,21 @@
         "docs/V13_2_DERIVED_INDEX_SCALE.md"
       ],
       "condition": null,
-      "qualification": "All100/1k/10k Source/10semantic-card scopes and420controlled samples complete before optimization; actual SDK/tokenizer, offline vectors/zeroHTTP. No object/operation stream, natural long-range semantics or method speedup; shared-host wall timings descriptive. Separate same-source storage study:100/1000 two arms560/840 planned samples complete and exact seed/selected identities verified;10000 still running. No legacy-inline migration, model quality, general speedup or full D5 acceptance."
+      "qualification": "All100/1k/10k Source/10semantic-card scopes and420controlled samples complete before optimization; actual SDK/tokenizer, offline vectors/zeroHTTP. No object/operation stream, natural long-range semantics or method speedup; shared-host wall timings descriptive. Separate same-source storage study:100/1000 two arms560/840 planned samples complete and exact seed/selected identities verified;10000 still running. No legacy-inline migration, model quality, general speedup or full D5 acceptance.",
+      "latest_completed_scale_review": {
+        "status": "ALL840_SYNTHETIC_SAMPLES_TERMINAL_ORIGINAL_REQUIREMENT_PARTIAL",
+        "result_path": "data/manifests/v13-2-derived-index-scale-results.json",
+        "result_sha256": "181e989f4f09f475a23be082eaa33c241bba0a68f10849c027319c56ca0ecca2",
+        "completed_profiles": 6,
+        "complete_samples": 840,
+        "original_terminal_commands": 9,
+        "source_map_sha256": "255caa86b375041e82cec242b30a762f20d1630e95803635097854725feb9190",
+        "all_three_exact_seed_and_twenty_first_query_identity_checks_pass": true,
+        "new_generation_requests": 0,
+        "new_embedding_http_requests": 0,
+        "original_qualification_preserved_as_historical": true,
+        "current_qualification": "The old qualification saying10k is still running describes the earlier incomplete stage. All6profiles/840samples now complete with9terminal commands and strict audit. D5-10 remainsPARTIAL: no object/operation stream, natural long-range model quality, legacy-inline migration or generalization/speedup acceptance; shared-machine fixed-order distributions remain descriptive."
+      }
     },
     {
       "id": "D5-11",
