@@ -254,3 +254,11 @@ R5新增118generation/492,678known（Host95/402,845，writer23/89,833）与50emb
 Root逐hash核对41索引/39原完整maps/四失败/12快照/11原R5 trace/17请求对并复制262产物；两个恢复回执缺原after/一个也缺before，未知命令参数和误猜路径均留真实来源限制及独立勘误。finite草稿未执行，Root后续missing-file读另留，0新运行/机制测试或SDK构造。全部原R5/source-family与post-R5 admission210身份区分、账本SHA26f46d5f不变。
 
 同一既有Source owner获授权在新direct-support树、87f74c6基线上实施默认关闭profile，原所有树HOLD；Root配置/rubric/实际HTTP仍归Root。尚未接受源码或运行R6，后续须限定工程检查、实际token/wire审计和新的完整冻结；新方法的语义结果与泛化仍未知，完整计划active。
+
+## 新支持来源压力反思与R6事前控制
+
+隔离首组真实material计量≤2048，但新增四字段metadata造成小夹具当前卡片省略及超大夹具Source交付减少；最早full-state误计driver、第一组交付包和退化结果分别保持。该组未开backlinks，不作为实际完整历史路径验证。重读已保存Arrow20完整字典/索引原则，Root只授权新profile的完整binding与parent结构可逆共享，字段全部leaf/mode/hash/version身份不删、表/解码说明计入2048/6。触发/cadence/对象ID/表示及正文分配是联合因子，不改变工具string、Source DTO、CAS、存储或排名选择。实际backlinks及多语种压力继续检查；Root尚未验收源码或启动R6。
+
+新增中文反思与原URL/版本/hash可经[资料库](V13_2_DESIGN_LITERATURE.md)查看；当前651文件/57链接通过，前647报告/index按原hash另留。归档shell第一次exit127未执行Python、未修改资源，恢复为既有python3；原失败记录保持。新增模型/embedding HTTP0，原连续账本SHA26f46d5f不变。
+
+Root事前R6 parent在隔离stdlib假CLI/局部账本上九项控制通过，覆盖完整24且有一子失败、旧尝试拒绝、前后源/配置/冻结身份变化、源path增加及错误profile；0SDK构造/socket/model。实际prepare因缺源码acceptance在导入Lab SDK或创建实验root前拒绝；两原拒绝和SDK重开/后检脚本事前冻结要求保存。没有R6实际配置、runtime或质量样本。下一步先完整Source原件/限定工程验收，再做新route/input/runtime/ledger冻结和原24/48首尝试串行运行，不重跑旧root，任务与支持来源门槛分别报告。

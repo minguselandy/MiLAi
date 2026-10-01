@@ -264,13 +264,14 @@
     },
     "base_commit": "87f74c6ca3f0cff0c17b07e86ad9869248270c6a",
     "opt_in": "direct_support_v1",
-    "runtime_source": "NOT_IMPLEMENTED_OR_FROZEN",
+    "runtime_source": "ISOLATED_IMPLEMENTATION_IN_PROGRESS_NOT_ROOT_ACCEPTED_OR_FROZEN",
     "combined_factors": [
       "Trusted actual public-turn trigger separate from supporting leaves",
       "Explicit whole-field exact reuse with actual read-time candidate/hash/current CAS",
       "Host-success suppression by trusted trigger; explicit cadence factor",
       "Literal companion string object ID from same actually captured Source DTO",
-      "Required generic bounded protocol presentation"
+      "Required generic bounded protocol presentation",
+      "New-profile reversible field-support indexes into complete binding/parent structures; unchanged selected IDs/order, all metadata counted in2048/6; consequent body allocation retained as a factor"
     ],
     "actual_d4_admission": "NOT_ADMITTED",
     "not_claimed": [
@@ -278,6 +279,8 @@
       "R6 task results",
       "Independent or unseen generalization",
       "Single-factor causal improvement"
-    ]
+    ],
+    "first_pressure_status": "Corrected actual material fits2048 but new metadata displaces current/Source; original full-state driver error and corrected first regression retained; initial fixtures lack true backlinks",
+    "representation_reference": "https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout"
   }
 }

@@ -1217,6 +1217,77 @@
         "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r5-lineage-recheck.json",
         "sha256": "3a5622957f93d1f3b07180b06dbce8a902e95580cb3a2e471c9a42680dedd8d7"
       }
+    },
+    {
+      "cohort": "direct_support_v1 first isolated material-pressure failure reflection",
+      "rechecked_at_utc": "2026-10-01T04:26:23.147034+00:00",
+      "sources": [
+        "https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout",
+        "https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-messages"
+      ],
+      "fixed_version": "Apache Arrow20.0.0",
+      "fixed_format_source_commit": "3ad0370a04ccdae638755b94c3c31c8760a11193",
+      "read_scope": "Dictionary layout and complete dictionary/schema semantics only",
+      "original_resources": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/apache-arrow-dictionary-reference/arrow-20.0-columnar.html",
+          "sha256": "2b4e2e4bcde1de97ed6514b74cd4518988aba7bb5849402cfc20087f406a66a7",
+          "url": "https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout"
+        }
+      ],
+      "first_pressure_evidence": {
+        "root_copied_result": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-direct-support-pressure-first/pressure-results.json",
+          "sha256": "a8e71285e148f4e875b97044284055a2e36a7493afefa50445ecfafa90bd8049"
+        },
+        "root_copy_manifest": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-direct-support-pressure-first/root-copy-manifest.json",
+          "sha256": "78b457f2502718bbc804fbd446e62e8c5a02fc2aa70adaa6ea8423ce5aff0ccd"
+        },
+        "copied_originals_verified": 14,
+        "driver_metering_failure": "Initial full-state measurement was wrong; Source original driver/log remains separate, not copied or claimed here",
+        "fixture_coverage_limit": "Original source_backlinks disabled; no complete actual-backlinks/history claim",
+        "corrected_material_tokens": [
+          [
+            2047,
+            1834
+          ],
+          [
+            2048,
+            2047
+          ],
+          [
+            2047,
+            2048
+          ]
+        ],
+        "actual_selected_ids_and_order_equal": true,
+        "initial_new_metadata_delivery_regression_retained": true
+      },
+      "new_readable_notes": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/direct-support-pressure-review.html",
+        "sha256": "cf4ffd6c518b074c90836cb8ff55d8c819d29440f099a6df587601cf915a035f"
+      },
+      "resources_already_saved": true,
+      "new_papers_downloaded": 0,
+      "new_projects_downloaded": 0,
+      "root_inference": "Reversible new-profile field-support indexes into complete already-selected bindings, preserve ordered leaves/roles/hashes/mode/reuse parent and field hashes; all table/explanation counted in2048/6",
+      "joint_profile_factors": [
+        "support/trigger/whole-field reuse",
+        "Host cadence",
+        "literal object ID projection",
+        "reversible metadata presentation and consequent body allocation"
+      ],
+      "source_implementation_not_root_accepted": true,
+      "new_sdk_or_model_execution": false,
+      "runtime_benchmark_gold_accessed": false,
+      "actual_r6_execution": false,
+      "ledger_before_sha256": "26f46d5fe3aeeaf0e399587098311e6d15bfacf01a0f231aca759207e6b0398b",
+      "product": "NO_GO",
+      "recheck_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/direct-support-pressure-recheck.json",
+        "sha256": "3cb58d2b295a1a52c621c8844629b4552f377db7a0ba115678b3dac8426b0623"
+      }
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -1231,5 +1302,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T03:25:47.517943+00:00"
+  "updated_at_utc": "2026-10-01T04:26:23.147034+00:00"
 }

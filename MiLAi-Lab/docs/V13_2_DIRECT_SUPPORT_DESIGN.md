@@ -13,3 +13,5 @@ trigger与模型支持/复用请求进入原proposal replay身份。相同ID/相
 Root核对41索引回执、39完整原before/after maps、四失败、12源码/文档快照、11已曝光R5 trace及17原请求对，复制262原产物。两恢复回执没有原after，其中shape检查也没有原before；晚期recovery map只表示后来观察，未知rg参数不补造。恢复时误猜chat_bridge路径的原receipt/第一版索引保留，并加独立勘误。design末句finite_checks.py为从未执行且已移除的草稿，冻结说明明确其PASS/机制测试为0；Root后来的missing-file读取记录另留。静态旧源码与原实际请求解释首次拒绝点，不是新修复已生效的证据。
 
 实施将以禁socket的实际工具/recipe/invoke MockTransport与局部SQLite SDK验证等值/类型/Unicode、CAS与来源变动、owner/trigger/config、恢复/replay、Host-tool来源及object参数路径，再检查真实Qwen计数和默认wire/边界。默认行为与所有旧树保持；原失败/前后源码测试配置map须保存。模型实验须Root另冻新配置/源码/route/ledger/空root，继续原24/48与评分政策；旧输出不重跑、不拼接。没有独立评分、泛化、单因子收益或D4准入结论，Product保持NO_GO。
+
+首次隔离压力显示新metadata会挤掉当前record及Source；原错误driver和修正后第一组交付退化保持，不作为成功。Root结合[固定Arrow20表示参考](V13_2_DESIGN_LITERATURE.md)进一步授权仅在direct_support_v1展示中以显式索引共享已有完整binding值，完整字段有序leaf/mode/reuse parent/version/field hash须严格可逆，所有表与说明计入同一2048/6。模型输入工具仍须实际string source_refs，不能自动索引coerce。若需compact helper，仅新profile路径可变；旧默认、存储、Source DTO、排序与选择保持。实际backlinks/current/history和超大材料须另测，联合表示及body allocation因子单列，源码与模型仍待验收。

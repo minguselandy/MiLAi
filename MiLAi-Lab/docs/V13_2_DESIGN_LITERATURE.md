@@ -102,3 +102,13 @@ R5重读原件及新增总结再次核对624个唯一文件、55个本地index�
 [共享计数工程](V13_2_SHARED_ADMISSION.md)已限定验收并合入210源码，默认关闭且未启用实际实验配置；上文授权阶段的209/R5 HOLD说明保留为历史。恢复时缺失或不可信完整计数拒绝dispatch，未知额度保留；这不替代共同HTTP锁、B6 summary或D4共同能力。
 
 当前资料库六论文/七项目参考，647个唯一文件、56个本地index链接、PDF头与hash核对通过。此前622/624文件报告按原hash另留，不覆盖原件或第一次归档失败。补充0新增论文/SDK执行/模型HTTP；选定参考文件不代表整仓复现。
+
+## 支持来源初次压力退化与可逆表示
+
+隔离`direct_support_v1`实现首次压力driver把完整prepare_context state误当普通材料预算；错误driver/日志由Source保留，修正计量后实际material均≤2048、原选中ID与顺序相同。但新增四字段来源metadata有真实交付成本：小夹具legacy2047送1当前record及2Source，新初版1834只送2Source并明确省略当前record；多历史两者都不送record/history；超大多语种legacy送5Source，新初版送4Source。Source可包含截断前缀，这些夹具关闭backlinks，不能解释完整真实历史路径，也不能宣称完整来源或模型收益。Root保存原六包、driver、汇总及hash副本，后续结果不覆盖首次退化。
+
+重新查阅已归档的[Arrow20字典布局](https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout)和[完整字典消息](https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-messages)：重复值可由完整字典和显式整数索引表示，解码需要相应字典/schema。固定20.0.0原文与3ad0370a源码保持原hash，无新论文/项目下载或依赖升级。重读URL、原文身份、第一次压力副本和可查看中文总结追加机器目录及本地index的`design-rechecks/direct-support-pressure-review.html`。
+
+Root据此授权新profile展示的最小可逆改进：field_support仅索引同record既有完整source_bindings表；完全相等的父结构可共享，每字段完整有序leaf、mode、reuse parent record/revision/version和field hash须可恢复。完整表、解释和正文共同计入原2048/6，拒绝bool/float/负数/越界索引；存储lineage、原Source DTO、角色/hash/CAS、实际工具string参数、默认wire、排名与选取保持。这里只是通用表示推断，不移植Arrow性能或蕴含结论；正文分配与触发/cadence/伴随对象ID是联合因子。
+
+隔离树继续补测实际backlinks的current/history、超大多语种与完整roundtrip，须保留原交付退化并列报告。源码尚未被Root验收，真实R6未运行；模型能否遵守支持选择及语义门槛仍未知。资料核验当前651个唯一文件/57本地链接、PDF头/hash通过，前647报告及目录/index按hash保留。Root第一次shell启动找不到python、未执行driver或修改归档，原exit127记录另留，改用既有python3成功；不计为模型失败或样本。
