@@ -245,10 +245,11 @@
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-source-index-acceptance.json",
         "data/manifests/v13-2-e0-r2-results.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-compact-material-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
     },
     {
       "id": "D3-03",
@@ -266,10 +267,11 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-source-index-acceptance.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-compact-material-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
     },
     {
       "id": "D3-04",
@@ -306,10 +308,11 @@
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r2-results.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-compact-material-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
     },
     {
       "id": "D3-06",

@@ -184,3 +184,11 @@ R4全部审计结束后才合入此前暂停保存的WIP。Root逐hash核对[限
 交替MockTransport Host/native生成在共享12/24上限各自拒绝额外dispatch；一次合成未知响应先留persisted count1，新进程在limit1拒绝重发。37chat/1embedding均为模拟transport，实际实验HTTP/模型样本0、原208源码与连续账本不变。Adapter close本身为pass，独立重开使用前进程退出；不冒称已实现显式native close协议。
 
 25条快照转换material的实际Qwen计数3091，超过共同2048，尚无新共同有界交付层，也未运行付费原生retrieval/模型语义微型。推理环境缺lancedb metadata的首次构造失败保留，随后使用既有专用环境，未安装/升级或改性能环境。D4-07仅PARTIAL，四臂总预算/实际比较仍未准入。[资料索引](V13_2_DESIGN_LITERATURE.md)另保存SimpleMem论文v3与21份固定text/core参考，现6论文/6项目参考。
+
+## 紧凑材料合入验收与R5配置准备
+
+[材料验收](V13_2_COMPACT_MATERIAL.md)和[原始命令索引](../data/manifests/v13-2-compact-material-acceptance.json)记录最终209源码676ad5dc、合入32项/默认双边界26项/ruff5/mypy3及五实际默认字节对照。Root核对原34回执/154产物/12失败、合入10回执/冲突失败及16方法AST，主树转入运行/测试hash一致。三固定压力独立Qwen解码复算2046/2048/2046：送1当前前缀+2完整旧正文，仍omit1当前+2Source；完整Role/Scope/version/hash未改。表示、冗余新正文hash省略及成本分配联合变化，不归因纯压缩。Root两次验收脚本字段假设错误和原脚本保存，修正审计器后通过，没有改运行实现或重标Source失败。
+
+[R5前瞻设计](../data/manifests/v13-2-e0-r5-design.json)已从DRAFT进入ENGINEERING_ACCEPTED_CONFIG_PREPARED_NOT_RUNTIME_FROZEN；[配置](../configs/v13-2-e0-normal-r5.json)只增材料profile和实验说明，R4 Host/writer指令、原24/48、rubric、12admissions/4096输出/2048与6/repair0保持。真实模型HTTP0，账本仍R4末。只有全840隔离性能协议结束并严格审计后才另冻实际运行根目录与模型route；不会执行preview或旧cohort，不升级E0/D4/泛化结果。
+
+R5另外完成主树catalog preview：socket/connect_ex禁止，实际209运行map与验收相同，原24/48及实际目录/prompt均生成，模型/embedding HTTP0，原账本不变。preview专用根目录永不执行，真实运行根、模型route、环境/ledger等仍未冻结，不能将内部input-freeze文件当FROZEN_READY运行准入。

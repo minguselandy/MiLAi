@@ -1,6 +1,6 @@
 {
   "kind": "V13_2_E0_R5_PROSPECTIVE_MATERIAL_DELIVERY_DESIGN",
-  "status": "DRAFT_NOT_READY_NOT_RUNTIME_FROZEN",
+  "status": "ENGINEERING_ACCEPTED_CONFIG_PREPARED_NOT_RUNTIME_FROZEN",
   "prior_cohort": "R4 full24/48, Root20PASS/4FAIL; all previous cohorts and source-semantic failures retained independently.",
   "design_direction": "Same logical MemoryService, actual source association, incremental semantic record identity, deterministic observations and bounded delivery. No case/language/query-keyword branch, ranking change or new model/service.",
   "candidate": {
@@ -10,7 +10,8 @@
     "representation": "Explicit reversible dictionaries for complete repeated actual values; source role/hash and scope/record/version/read-handle meanings retained. Shared tables and decoder explanation count toward the same material budget.",
     "allocation_scope_amendment": "After preserved multi-record engineering failures, the opt-in candidate may group already selected units by actual record identity in original first-record order and allocate complete bodies/field groups by actual tokenizer cost, with stable ties and remaining-budget prefixes. No additional candidates selected; conflict field groups stay together. Record current/history/Source delivery and omission counts, including later-current omissions.",
     "causal_limit": "Representation sharing and body allocation change together as one delivery-profile candidate. Do not attribute results to byte compression alone. Final implementation and all changed allocation rules require scoped acceptance before runtime freeze.",
-    "instructions": "Keep R4 Host/writer instructions unchanged. No additional semantic verifier or repeated prompt tuning. Same public interpretation rules will be provided to comparison arms."
+    "instructions": "Keep R4 Host/writer instructions unchanged. No additional semantic verifier or repeated prompt tuning. Same public interpretation rules will be provided to comparison arms.",
+    "additional_metadata_factor": "New compact record truncation omits a newly generated redundant body hash only when a true full version_sha256 already exists; existing hashes and all source digests retained. Joint factor, not byte sharing alone."
   },
   "cohort": {
     "trajectories": 24,
@@ -33,9 +34,34 @@
     "The separate840-sample performance driver must terminate and its original unchanged-ledger protocol must be audited before any new model HTTP",
     "Fresh config/runtime/CLI/environment/catalog/rubric/driver/model-route/ledger freeze and zero-HTTP preparation before execution"
   ],
-  "execution_source_commit": null,
+  "execution_source_commit": "65140126aba52c826c74e6ecbdc94dae89bf1845",
   "runtime_freeze": null,
   "actual_model_http": 0,
   "independent_judge": false,
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "runtime_source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+  "engineering_acceptance": "data/manifests/v13-2-compact-material-acceptance.json",
+  "config_path": "configs/v13-2-e0-normal-r5.json",
+  "runtime_admission": "WAIT_FULL840_PERFORMANCE_AUDIT_THEN_FRESH_FREEZE",
+  "catalog_preview": {
+    "kind": "V13_2_R5_CATALOG_PREVIEW_NOT_EXECUTION_FREEZE",
+    "status": "PREVIEW_ONLY_NOT_RUNTIME_ADMITTED",
+    "source_file_count": 209,
+    "runtime_map_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+    "socket_attempts": 0,
+    "actual_generation_http": 0,
+    "actual_embedding_http": 0,
+    "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "preview_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r5-preview/catalog-preview",
+    "input_preview_sha256": "f146663b9bc4dd2b0a7816f603e6c8fa3fe54d837820566af347c8a615f0807a",
+    "tool_catalog_sha256": "09c5e0b714a8f69af72fc8fb03724673a8356bb2090b28d889ed1b746c3bc732",
+    "prompt_sha256": "7a7dcd945a6a3d3cb7474ba8d04ae39b9327f442ad2dc06a5d2aa239886a0dbb",
+    "driver_sha256": "9caa1775c3fb35dfe07d2b32c66aeca6a925e445dc3f7d71f1fe041df559f563",
+    "execution_root": null,
+    "model_route_preflight": null,
+    "limits": "Preview is never executed; after full840 perf strict audit a fresh real root, ledger and current model-route/environment/driver/rubric freeze are required.",
+    "original_preview_result_sha256": "b04375a94d0232ef0f4eac7e4727d2821d63aed9d210499c61cd45aa63c7fdeb",
+    "stdout_sha256": "28652202ce2515b95015b9cee895b7b58e211918bb242c237c73732eeed71eb4",
+    "stderr_sha256": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9"
+  }
 }
