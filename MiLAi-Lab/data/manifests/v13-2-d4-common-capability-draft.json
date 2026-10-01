@@ -449,5 +449,22 @@
     "actual_model_http_authorized": 0,
     "source_semantic_gate": "NOT_PASSED_R7",
     "d4_admission": "NOT_ADMITTED"
+  },
+  "read_protocol_static_proposal_and_next_implementation": {
+    "status": "STATIC_PROPOSAL_ACCEPTED_IMPLEMENTATION_NOT_YET_EXECUTED",
+    "proposal_acceptance": "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+    "implementation_scope": "data/manifests/v13-2-read-protocol-implementation-scope.json",
+    "factors": [
+      "selected_snapshot_v1",
+      "typed_read_v1",
+      "completed_receipt_v1"
+    ],
+    "default": "legacy",
+    "source_before_files": 212,
+    "original_source_tree": "READY_HOLD",
+    "next_new_tree": "Root setup then existing Source owner only after scope remote verification",
+    "actual_new_model_http": 0,
+    "quality_or_four_arm_admission_accepted": false,
+    "status_preservation": "Original requirements, R7 failures and D4 NOT_ADMITTED unchanged; read-only scope metadata preserved as historical."
   }
 }

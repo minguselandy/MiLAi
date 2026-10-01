@@ -107,11 +107,14 @@
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
         "data/manifests/v13-2-e0-r6-results.json",
-        "data/manifests/v13-2-e0-r7-results.json"
+        "data/manifests/v13-2-e0-r7-results.json",
+        "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
     },
     {
       "id": "D1-03",
@@ -142,11 +145,14 @@
         "data/manifests/v13-2-d1-source-acceptance.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-source-index-acceptance.json",
-        "data/manifests/v13-2-direct-support-acceptance.json"
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
     },
     {
       "id": "D2-01",
@@ -259,11 +265,14 @@
         "data/manifests/v13-2-compact-material-acceptance.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
         "data/manifests/v13-2-e0-r5-results.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
     },
     {
       "id": "D3-03",
@@ -282,10 +291,13 @@
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-source-index-acceptance.json",
         "data/manifests/v13-2-e0-r2-results.json",
-        "data/manifests/v13-2-compact-material-acceptance.json"
+        "data/manifests/v13-2-compact-material-acceptance.json",
+        "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-scope.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain.",
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
     },
     {
       "id": "D3-04",
@@ -353,11 +365,14 @@
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+        "data/manifests/v13-2-read-protocol-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
-      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
+      "read_protocol_proposal_qualification": "Blind static proposal only:262 original files/38 native subprocesses and1 honest maps-unavailable tool control independently linked;runtime212/test389/config316 and ledger unchanged. A result snapshot/B finite typed read rejection/C truthful receipt copy are separate default-off candidates. Implementation scope published separately;no mechanism execution/SDK/model benefit or new E0 cohort yet. Original R7 failures/costs and all full-plan gates preserved."
     },
     {
       "id": "E0-01",
@@ -945,5 +960,11 @@
       "full_plan": "ACTIVE",
       "product": "NO_GO"
     }
-  ]
+  ],
+  "read_protocol_static_proposal_acceptance": {
+    "manifest": "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+    "status": "STATIC_PROPOSAL_ACCEPTED_NOT_IMPLEMENTATION_OR_MODEL_EFFECTS",
+    "next_scope": "data/manifests/v13-2-read-protocol-implementation-scope.json",
+    "actual_new_model_http": 0
+  }
 }
