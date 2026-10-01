@@ -399,3 +399,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## R9 E2新的共同参数说明条件：模型前冻结
 
 [冻结](V13_2_E2_R9_RUNTIME_FREEZE.md)：原三接口/五曝光开发场景，15轨迹45公开消息；共同A参数说明，其它接受的有界读取/真实receipt/HTTP owner保持，support/read legacy、B legacy、C禁用、原budget/formation不变。45离线输入门禁均退出0、两个既有模型/models GET确认、0生成/embedding；先发布并核对再按Root逐边界审查执行。原48行/计划与E0/D4/Product门禁不变。
+
+## R9 E2完整首尝试与通用方法反思（2026-10-02北京时间）
+
+[完整结果](V13_2_E2_R9_RESULTS.md)：15轨迹45公开消息全部原首尝试/逐条Root审查，15原ID核心修订且真实更正Source、结构scope/首次提议另限定；查询Reader开发13 scoped正确/1语言范围partial/1历史回答错误，后台8不必要commit仅问题Source（6额外修订/2重复或冗余卡）、1错误提议被拒pending、6 no_change。6个错误Host提议/语言保存失败/范围丢失和所有费用保留，没有重跑或改答案。148生成899383 known、63embedding24315，含15形成60678；新增Unknown0，原Unknown1/30387不变。完整actual HTTP投影/最终Host位置、15终态SDK只读重开347items/20卡/41版本核对，DB和ledger不变；账本后991a568c。资料4次R9复查保存原文/版本/UTC/hash/中文反思，19论文/21项目参考组/875文件/191链接0问题。普通语义失败没有被当成实际泄漏硬停，也没有被正确Reader遮盖；Root不是独立Judge。原48要求4 PASSED_SCOPED/27 PARTIAL/1 NOT_PASSED/16 NOT_VERIFIED及计划bytes保持，E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO/完整计划ACTIVE。后续共同能力Source工程另验收/冻结，不能宣称已修复R9来源问题。

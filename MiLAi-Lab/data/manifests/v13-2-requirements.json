@@ -1117,5 +1117,19 @@
     "stronger_read_support_contract_not_forced_on_baseline": true,
     "exact_codec_enabled": false,
     "original_48_rows_unchanged": true
+  },
+  "e2_r9_first_results": {
+    "manifest": "data/manifests/v13-2-e2-r9-results.json",
+    "sha256": "f1f0e04cc95061876db9ee1217b30500e0d83c4eb05aa58217aab3c9fe166cfd",
+    "status": "ALL_FIRST_ATTEMPTS_COMPLETE_SEMANTIC_FAILURES_RETAINED_NOT_METHOD_PROMOTED",
+    "completed_messages": 45,
+    "completed_trajectories": 15,
+    "unnecessary_query_commits": 8,
+    "wrong_historical_query_finals": 1,
+    "independent_quality_gate_advanced": false,
+    "original_48_requirement_rows_unchanged": true,
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
   }
 }

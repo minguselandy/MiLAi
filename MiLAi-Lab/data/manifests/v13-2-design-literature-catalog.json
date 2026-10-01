@@ -4265,6 +4265,146 @@
           "bytes": 43790
         }
       ]
+    },
+    {
+      "cohort": "R9 e2-07 original query-to-current-fact unsupported source",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-query-source-gap-primary-recheck.json",
+        "sha256": "d8210fcd8493224cc07b0ff88a3253e8262159f6e12ea3a8c275d7fe77018190",
+        "bytes": 7546
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/v13-2-design-literature-catalog-before-6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc.json",
+          "sha256": "6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc",
+          "bytes": 269818
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/catalog.local-before-6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc.json",
+          "sha256": "6b20009ff440496e097f32abaf60d2083166fecbddf8dffa98827b9af18814dc",
+          "bytes": 269818
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/index-before-a739b76637ea2738e807125efbc554d888b6067015781a17ce52767a1f236359.html",
+          "sha256": "a739b76637ea2738e807125efbc554d888b6067015781a17ce52767a1f236359",
+          "bytes": 30002
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/current-archive-before-1c5c6099fe83521f40ce0e674f1ad445985d2b33f446c8497dd9486d7ef697a7.json",
+          "sha256": "1c5c6099fe83521f40ce0e674f1ad445985d2b33f446c8497dd9486d7ef697a7",
+          "bytes": 221019
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-query-source-gap-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-4b6b0d8402d79419322851cc8efc16141f18bd639c0b5d1923ff06e2fe99c32c.md",
+          "sha256": "4b6b0d8402d79419322851cc8efc16141f18bd639c0b5d1923ff06e2fe99c32c",
+          "bytes": 44562
+        }
+      ]
+    },
+    {
+      "cohort": "R9 English card despite Chinese save instruction; real Chinese control",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-language-shape-primary-recheck.json",
+        "sha256": "96091430bfc33d9d8623e41d04ee31d4fe96c3e1785c050c3a0dcf783d3cda16",
+        "bytes": 5876
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/v13-2-design-literature-catalog-before-c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741.json",
+          "sha256": "c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741",
+          "bytes": 272302
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/catalog.local-before-c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741.json",
+          "sha256": "c0209bcaab847426fa2e1e9c6c2973067e702d066d953a71437d1167ecae5741",
+          "bytes": 272302
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/index-before-a1c36065c9e6797945f52470bef77b80ec1b548058942efe87b2e99bd407eeec.html",
+          "sha256": "a1c36065c9e6797945f52470bef77b80ec1b548058942efe87b2e99bd407eeec",
+          "bytes": 30245
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/current-archive-before-bba31efa2c411c21ec0acecba747b153cb9681f9eed6cf00973ac307d117611c.json",
+          "sha256": "bba31efa2c411c21ec0acecba747b153cb9681f9eed6cf00973ac307d117611c",
+          "bytes": 222872
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-language-shape-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-45e438af4ebed0cc1076b1d09fd39e8bcbd0ac7cc28a84105f91f8e48468a184.md",
+          "sha256": "45e438af4ebed0cc1076b1d09fd39e8bcbd0ac7cc28a84105f91f8e48468a184",
+          "bytes": 45498
+        }
+      ]
+    },
+    {
+      "cohort": "R9 rejected invented opaque Source ID; actual owner guard and paid model-led recovery",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-opaque-source-primary-recheck.json",
+        "sha256": "0f9c4ab6e2cb3960f04bbeeb5fce98a9416766c2fe2e3b68309f4c65c98c54d6",
+        "bytes": 8250
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/v13-2-design-literature-catalog-before-f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14.json",
+          "sha256": "f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14",
+          "bytes": 274786
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/catalog.local-before-f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14.json",
+          "sha256": "f1f434e81aec4c0dbf94347345082573483719db5b2ba5448e8cf38007a4eb14",
+          "bytes": 274786
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/index-before-90da1ab50648530c9507a277c23874135d6c4102c3206e4787befb82210b3796.html",
+          "sha256": "90da1ab50648530c9507a277c23874135d6c4102c3206e4787befb82210b3796",
+          "bytes": 30477
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/current-archive-before-e3f5ed5bf05356b9f2599e0fda46dcd2820d0a0cd136468a02e5fb657fa233ec.json",
+          "sha256": "e3f5ed5bf05356b9f2599e0fda46dcd2820d0a0cd136468a02e5fb657fa233ec",
+          "bytes": 224713
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-opaque-source-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-6325f5e1405a590845f9d0142fbb7a5522a2ac09f793b66ad4e31db05d219782.md",
+          "sha256": "6325f5e1405a590845f9d0142fbb7a5522a2ac09f793b66ad4e31db05d219782",
+          "bytes": 46205
+        }
+      ]
+    },
+    {
+      "cohort": "R9 stored historical version not consumed; actual wire and Source distinctions",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r9-history-consumption-primary-recheck.json",
+        "sha256": "353232a842ebbccd2c8808c63690be045730ae39248c879a6dc37f878c4365a7",
+        "bytes": 5795
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/v13-2-design-literature-catalog-before-2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484.json",
+          "sha256": "2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484",
+          "bytes": 277279
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/catalog.local-before-2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484.json",
+          "sha256": "2732a7a1cdf72b966590727578517e317309fd8d4c6385d25e8560445ba2b484",
+          "bytes": 277279
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/index-before-4ed38c4396118e78deb3fcd36c399006628496707fec3ff043bfdb5c072a4301.html",
+          "sha256": "4ed38c4396118e78deb3fcd36c399006628496707fec3ff043bfdb5c072a4301",
+          "bytes": 30706
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/current-archive-before-4e57864c7bae940bf7c23d6221077b25896b6ef71e709139737757a407df4878.json",
+          "sha256": "4e57864c7bae940bf7c23d6221077b25896b6ef71e709139737757a407df4878",
+          "bytes": 226548
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r9-history-consumption-primary-recheck-first/V13_2_DESIGN_LITERATURE-before-531a62bf51c1ab845995d81081974fb374d4068adca0cb2979776a75c7c8002d.md",
+          "sha256": "531a62bf51c1ab845995d81081974fb374d4068adca0cb2979776a75c7c8002d",
+          "bytes": 47011
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -4279,5 +4419,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T20:03:54.162797+00:00"
+  "updated_at_utc": "2026-10-01T21:48:53.171272+00:00"
 }

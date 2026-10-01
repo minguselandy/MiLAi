@@ -240,3 +240,19 @@ R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失�
 ## 可还原字典编码的成本反例复查
 
 复用并核验 [Apache Arrow 20.0.0 官方字典编码定义](https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout) 与固定 commit 的格式原文。整数索引/字典共同解释和可还原表示不证明 Qwen token 节省；表、校验、说明与正文必须计入同一预算。Source 有限报告显示元数据增加与正文覆盖减少，尚待 Root 独立验收；C 作为独立 opt-in 候选保留，下一实际配置不启用。不改2048预算、allocator、排名、Source角色/hash/CAS，也不按案例/语言切换。原浏览输出、阅读范围、中文反思、旧目录/索引/核验报告均保存并加入本地入口；没有新增论文/项目或模型请求。
+
+## R9 查询被绑定为事实来源的复查
+
+再次查阅 [EAL v1 方法的来源门控局限](https://arxiv.org/html/2609.01836v1)、[Hindsight v1 的形成/读取职责](https://arxiv.org/html/2512.12818v1)和 [Mem0 94c3fe9 的抽取/更新/NONE协议](https://github.com/mem0ai/mem0/blob/94c3fe9f238f3dbf29c9ce98643bd71eb13077cd/mem0/configs/prompts.py)。e2-07 正确历史回答后真实提交了以查询为唯一来源的同内容r3，直接语义依据失败。来源角色/hash有效与正确答案都不证明正文支持；Root推断需区分新事件证据与既有事实，避免无新增事实的重写，不采用疑问词/语言路由、自动Source union或oracle。原件、阅读范围、中文反思及浏览输出均保留，本轮运行配置不改；这是普通语义失败，后续原首次证据采集按冻结规则继续。旧论文下载身份不重标v1，没有新论文/项目、SDK或模型请求。
+
+## R9 保存语言与结构正确性的复查
+
+原e2-18/19虽提交真实记录但正文英语，未满足中文保存要求；e2-20确实形成中文卡，不将三者混作已完成反向语言样本。再次查看 [When JSON Is Not Enough v1摘要](https://arxiv.org/abs/2607.18261v1)和 [The Constraint Tax v1摘要](https://arxiv.org/abs/2605.26128v1)，结构有效性不证明内容意图/约束忠实性，小模型特定任务结果不直接外推本轮Qwen。原摘要/PDF、UTC/hash与中文方法反思加入本地索引；不改R9协议、thinking、预算或参数说明，不强制翻译重写或按语言/案例路由。没有新论文/项目、benchmark/gold阅读或实际模型请求。
+
+## R9 opaque Source ID错误提议的复查
+
+e2-31模型提议不存在的来源ID，被守卫拒绝后自行读本次来源索引，再正确更新。错误提议与费用保留。复查 [JSON Schema 2020-12官方validation](https://json-schema.org/draft/2020-12/json-schema-validation) 的type/enum/const与format及 [When JSON Is Not Enough v1摘要](https://arxiv.org/abs/2607.18261v1)：形态不证明ID存在、所属授权或语义支持。通用候选从真实回执绑定opaque引用、保留owner/hash/CAS并计metadata成本；本轮不启用ID修补、近似匹配、免费再读或案例规则。旧全文/PDF与中文反思进入本地索引；保存实际第二次browser原件，明确第一次DTO本地未保留及Root archiver执行前语法失败，无新增论文项目/模型HTTP。
+
+## R9 旧历史在库却未消费的复查
+
+e2-42只读当前r2，把原周二上午误述成周四下午；完整SDK历史r1仍在，实际HTTP只有当前正文与历史索引、没有旧r1正文。复查 [Lost in the Middle作者摘要](https://arxiv.org/abs/2307.03172)（本次入口v3）和 [Hindsight v1作者摘要](https://arxiv.org/abs/2512.12818v1)，先区分保留、检索、实际送达与消费，不能先归因长上下文位置或Attention不足。通用改进候选继续一次有界公共交付、真实版本/范围/遗漏、计费追加读；不按题型路由、自动再读、强制答案或最终改写。旧完整论文/各原URL版本hash、本次摘要浏览及中文反思保存到本地索引，没有新论文项目或模型HTTP；R9冻结不改，收益未验证。
