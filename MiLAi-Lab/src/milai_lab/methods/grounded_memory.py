@@ -10,8 +10,17 @@ from typing import Any
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
+from pydantic import ValidationError as PydanticValidationError
 
 from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
+from milai_lab.contracts.tool_schema_communication import (
+    TRIGGER_BODY_GUIDANCE,
+    feedback_text,
+    pydantic_feedback,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.memory.embeddings import normalized
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
@@ -67,6 +76,7 @@ class GroundedMemoryRecipe:
         representation: str = "milai",
         raw_index_storage: str = "bank_prefix",
         material_profile: str = "full_v1",
+        tool_schema_communication: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if representation not in {"raw", "receipt", "milai"}:
@@ -82,6 +92,7 @@ class GroundedMemoryRecipe:
         self.service, self.token_count, self.embeddings = service, token_count, embeddings
         self.representation, self.observer = representation, observer
         self.material_profile = material_profile
+        self.tool_schema_communication = communication_profile(tool_schema_communication)
         self.namespace = (*service.namespace, "v13_2_recipe")
         self.raw_index_storage = raw_index_storage
         self.index_namespace = self.namespace
@@ -114,6 +125,8 @@ class GroundedMemoryRecipe:
                                "explicit whole-unit omissions; version-bound prose prefixes")
         if service.support_contract == "direct_support_v1":
             self.policy["support_contract"] = service.support_contract
+        if self.tool_schema_communication != "legacy":
+            self.policy["tool_schema_communication"] = self.tool_schema_communication
 
     def _index_binding(self) -> dict[str, Any]:
         return {"schema": "owner_bank_raw_index_v1", "owner": self.service.owner,
@@ -552,9 +565,13 @@ class GroundedMemoryRecipe:
                 if omitted else None}, omitted
 
     def _packet(
-        self, units: list[dict[str, Any]], revision: str | None,
-        source_index: dict[str, Any] | None = None, *,
-        request_ref: str | None = None, query_kind: str = "ordinary_public",
+        self,
+        units: list[dict[str, Any]],
+        revision: str | None,
+        source_index: dict[str, Any] | None = None,
+        *,
+        request_ref: str | None = None,
+        query_kind: str = "ordinary_public",
         coverage: dict[str, Any] | None = None,
     ) -> tuple[dict[str, Any], str]:
         packet = {
@@ -584,7 +601,7 @@ class GroundedMemoryRecipe:
         )
         packet["candidate_count"] = len(identities)
         if self.service.support_contract == "direct_support_v1":
-            packet["support_contract"] = {
+            support_policy = {
                 "profile": "direct_support_v1",
                 "trigger": "actual public Human authorizes maintenance; not supporting evidence",
                 "selection": "explicit actual leaf IDs; whole-field reuse from same read candidate",
@@ -596,6 +613,11 @@ class GroundedMemoryRecipe:
                 "apply); reused_from_index selects its literal field_support_parents table. "
                 "Use decoded real Source IDs for tools, never indices.",
             }
+            if self.tool_schema_communication != "legacy":
+                support_policy["trigger"] = TRIGGER_BODY_GUIDANCE
+            packet["support_contract"] = support_policy
+        if self.tool_schema_communication != "legacy":
+            packet["tool_schema_communication"] = self.tool_schema_communication
         if self.material_profile == "compact_v1":
             packet["items"], tables = compact_units(units)
             packet.update(tables)
@@ -1161,6 +1183,10 @@ class GroundedMemoryRecipe:
         """At most one generation plus one enabled repair; up to six non-atomic mutations each."""
         if repairs not in {0, 1}:
             raise ValueError("V13_WRITER_REPAIR_POLICY_INVALID")
+        if communication_profile(getattr(model, "tool_schema_communication", "legacy")) != (
+            self.tool_schema_communication
+        ):
+            raise ValueError("TOOL_SCHEMA_COMMUNICATION_PROFILE_CONFLICT")
         user_ref = self.service.event_id(session, turn_id, "user")
         if user_ref not in source_refs or any(
             self.service.source(ref) is None for ref in source_refs
@@ -1236,6 +1262,10 @@ class GroundedMemoryRecipe:
                 "original leaves. Changed fields need explicit leaf selection. "
                 "Prefix/metadata is not a full "
                 "read. Source.object_ref is evidence DTO; tool object_ref uses its string id.")
+            if self.tool_schema_communication != "legacy":
+                request["support_policy"] = request["support_policy"].replace(
+                    "Trigger is authorization, not support.", TRIGGER_BODY_GUIDANCE
+                )
         messages: list[Any] = [
             SystemMessage(
                 content=instruction + "\nMake at most six direct mutations or explicitly decline. "
@@ -1336,7 +1366,12 @@ class GroundedMemoryRecipe:
             pending.update(
                 status="partial" if pending.get("committed_actions") else "pending",
                 error_type=type(error).__name__,
-                error=str(error),
+                error=(
+                    feedback_text(pydantic_feedback(error))
+                    if self.tool_schema_communication != "legacy"
+                    and isinstance(error, PydanticValidationError)
+                    else str(error)
+                ),
             )
         self.service.store.put(self.namespace, key, pending, index=False)
         self._emit({"event": "v13_semantic_boundary", **pending})

@@ -162,9 +162,14 @@ def test_document_integer_public_field_is_callable_without_dto_conversion(tmp_pa
         world.close()
 
 
-@pytest.mark.parametrize("candidate_contract", [
-    "legacy_query_v1", "id_revision_v1", "read_handle_v1",
-])
+@pytest.mark.parametrize(
+    "candidate_contract",
+    [
+        "legacy_query_v1",
+        "id_revision_v1",
+        "read_handle_v1",
+    ],
+)
 def test_direct_commit_and_all_candidate_interfaces_require_current_update_source(
     tmp_path: Path, candidate_contract: str,
 ) -> None:
@@ -271,3 +276,128 @@ def test_actual_recipe_mock_wire_delivers_schema_and_does_not_repair_bad_argumen
         value = service.read(created["id"])["value"]
         assert value["content"] == "Changed" and value["fields"] == {}
         assert value["scope"] == {"project": "A"} and value["source_refs"] == [current]
+
+
+@pytest.mark.parametrize("surface", ["baseline", "memory", "service"])
+def test_shape_feedback_actual_shared_toolnode_three_origins(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, surface: str
+) -> None:
+    import socket
+
+    from langchain_core.messages import ToolMessage
+    from langchain_core.tools import tool
+    from langgraph.checkpoint.memory import InMemorySaver
+
+    from milai_lab.baselines.langmem_agent import build_agent
+    from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+
+    def denied(*args: Any, **kwargs: Any) -> None:
+        raise AssertionError("SOCKET_FORBIDDEN")
+
+    monkeypatch.setattr(socket.socket, "connect", denied)
+    monkeypatch.setattr(socket, "getaddrinfo", denied)
+    executed = []
+
+    @tool
+    def echo(x: str) -> str:
+        """Echo the actual x string."""
+        executed.append(x)
+        return x
+
+    with SqliteStore.from_conn_string(str(tmp_path / "store.sqlite")) as store:
+        service = MemoryService(
+            store,
+            ("synthetic", "alice"),
+            "alice",
+            tmp_path / "lock",
+            mutation_contract="event_bound_v1",
+            candidate_contract="read_handle_v1",
+            support_contract="direct_support_v1",
+        )
+        ref = source(service, "u", "Actual expressed synthetic fact")
+        service.bind_source_boundary("s1", "u", [ref])
+        service.bind_public_turn("s1", "u", ref, config_sha256="a" * 64, phase="start")
+        config = {
+            "configurable": {
+                "user_id": "alice",
+                "v13_session": "s1",
+                "v13_turn_id": "u",
+                "v13_support_config_sha256": "a" * 64,
+                "thread_id": "synthetic",
+            }
+        }
+        args = (
+            {"x": {"source_refs": ["PRIVATE_INPUT"]}}
+            if surface == "baseline"
+            else {"content": "Actual assertion", "source_refs": [ref]}
+        )
+        if surface == "memory":
+            args["basis"] = {"source_refs": ["PRIVATE_INPUT"]}
+        name = "echo" if surface == "baseline" else "manage_memory"
+        wires = []
+
+        def respond(request: httpx.Request) -> httpx.Response:
+            wires.append(json.loads(request.content))
+            payload = (
+                {"calls": [{"name": name, "arguments": args}]}
+                if len(wires) == 1
+                else {"answer": "Structural attempt reported."}
+            )
+            return httpx.Response(
+                200,
+                json={
+                    "id": "synthetic-" + str(len(wires)),
+                    "choices": [
+                        {
+                            "finish_reason": "stop",
+                            "message": {"role": "assistant", "content": json.dumps(payload)},
+                        }
+                    ],
+                    "usage": {"prompt_tokens": 5, "completion_tokens": 2, "total_tokens": 7},
+                },
+            )
+
+        budget = RunBudget(RunLimits(1, 1, 12, 100000, 0), tmp_path / "local-budget.json")
+        with VLLMClient(
+            VLLMConfig("http://mock/v1", "mock"),
+            budget=budget,
+            transport=httpx.MockTransport(respond),
+        ) as client:
+            model = LangMemRecipeChatModel(
+                client=client,
+                tool_schema_communication="shape_feedback_v1",
+                max_calls_per_message=12,
+            )
+            model.begin_public_message("u")
+            graph = build_agent(
+                model,
+                store,
+                InMemorySaver(),
+                business_tools=[echo] if surface == "baseline" else [],
+                memory_tools=[] if surface == "baseline" else create_service_tools(service),
+                tool_schema_communication="shape_feedback_v1",
+            )
+            output = graph.invoke(
+                {"messages": [HumanMessage(content="Actual input", id="u")]}, config=config
+            )
+            result = next(row for row in output["messages"] if isinstance(row, ToolMessage))
+            receipt = json.loads(result.content)
+            assert result.status == "error" and result.name == name
+            assert len(wires) == model.calls_in_message == 2
+            original = next(row for row in output["messages"] if getattr(row, "tool_calls", []))
+            assert original.tool_calls[0]["args"] == args and not executed
+            assert service.records() == []
+            if surface == "service":
+                assert receipt["reason"] == "field_support_required"
+                assert "origin" not in receipt and "schema_path" not in receipt
+            else:
+                assert receipt["origin"] == "jsonschema"
+                assert receipt["error"]["path"]["segments"] == (
+                    ["x"] if surface == "baseline" else ["basis"]
+                )
+                assert "PRIVATE_INPUT" not in result.content
+            if surface == "baseline":
+                assert "field_support" not in wires[0]["messages"][0]["content"]
+            grammar = wires[0]["response_format"]["json_schema"]["schema"]
+            branches = grammar["oneOf"][1]["properties"]["calls"]["items"]["oneOf"]
+            assert all(row["properties"]["arguments"] == {"type": "object"} for row in branches)

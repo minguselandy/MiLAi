@@ -434,7 +434,9 @@ def test_object_dto_unchanged_string_contract_and_receipt_consumption(tmp_path: 
         ] == ("receipt_already_consumed")
 
 
-def model(tmp_path: Path, actions: list[dict[str, Any]]) -> tuple[Any, list[dict[str, Any]]]:
+def model(
+    tmp_path: Path, actions: list[dict[str, Any]], *, communication: str = "legacy"
+) -> tuple[Any, list[dict[str, Any]]]:
     wires = []
 
     def response(request: httpx.Request) -> httpx.Response:
@@ -469,7 +471,10 @@ def model(tmp_path: Path, actions: list[dict[str, Any]]) -> tuple[Any, list[dict
         transport=httpx.MockTransport(response),
     )
     result = LangMemRecipeChatModel(
-        client=client, capacity_path=tmp_path / "local-capacity.json", max_calls_per_message=12
+        client=client,
+        capacity_path=tmp_path / "local-capacity.json",
+        max_calls_per_message=12,
+        tool_schema_communication=communication,
     )
     result.begin_public_message("u")
     return result, wires
@@ -512,7 +517,10 @@ def test_actual_host_invoke_tool_only_support_suppresses_writer_by_trigger(tmp_p
         host.client.close()
 
 
-def test_actual_writer_raw_capture_failure_and_partial_batch_preserved(tmp_path: Path) -> None:
+@pytest.mark.parametrize("communication", ["legacy", "shape_feedback_v1"])
+def test_actual_writer_raw_capture_failure_and_partial_batch_preserved(
+    tmp_path: Path, communication: str
+) -> None:
     with opened(tmp_path) as service:
         public = turn(service)
         source, _ = tool_source(service)
@@ -538,8 +546,8 @@ def test_actual_writer_raw_capture_failure_and_partial_batch_preserved(tmp_path:
                 },
             },
         ]
-        writer, wires = model(tmp_path, actions)
-        recipe = GroundedMemoryRecipe(service, len)
+        writer, wires = model(tmp_path, actions, communication=communication)
+        recipe = GroundedMemoryRecipe(service, len, tool_schema_communication=communication)
         result = recipe.maintain(
             writer,
             session="s",
@@ -551,11 +559,16 @@ def test_actual_writer_raw_capture_failure_and_partial_batch_preserved(tmp_path:
         )
         assert result["status"] == "partial" and result["error_type"] == "ValidationError"
         assert result["committed_actions"] == 1 and len(result["attempted_actions"]) == 2
+        if communication != "legacy":
+            assert json.loads(result["error"])["origin"] == "pydantic"
+            assert "input" not in json.loads(result["error"])
         assert result["attempted_actions"][1]["args"]["object_ref"] == dto
         assert len(wires) == result["generation_calls"] == 1
         request = json.loads(wires[0]["messages"][-1]["content"])
         assert request["actual_events"][1]["object_ref"] == dto
         assert request["source_argument_ids"][1]["tool_argument_ids"]["object_ref"] == dto["id"]
+        if communication != "legacy":
+            assert "corresponding actual Human Source body" in request["support_policy"]
         assert recipe.maintain(
             writer,
             session="s",
@@ -694,8 +707,9 @@ def test_display_preserves_order_full_parent_hashes_and_literal_types() -> None:
         expand_field_support(encoded, bindings, parents)
 
 
+@pytest.mark.parametrize("communication", ["legacy", "shape_feedback_v1"])
 def test_actual_runner_binds_frozen_public_trigger_and_skips_paid_writer(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, communication: str
 ) -> None:
     helpers = runpy.run_path(str(Path(__file__).with_name("test_v13_1_p5.py")))
     helpers["prepared"](tmp_path)
@@ -711,6 +725,7 @@ def test_actual_runner_binds_frozen_public_trigger_and_skips_paid_writer(
         memory_formation_policy="after_host_final_v1",
         writer_system_prompt="Choose actual direct supporting leaves.",
         memory_writer_repairs=0,
+        **({"tool_schema_communication": communication} if communication != "legacy" else {}),
     )
     write_json(tmp_path / "config.json", settings)
     root = tmp_path / "direct-run"
@@ -786,7 +801,9 @@ def test_actual_runner_binds_frozen_public_trigger_and_skips_paid_writer(
             transport=httpx.MockTransport(response),
         )
         return LangMemRecipeChatModel(
-            client=client, capacity_path=resource_root / "host-capacity.json"
+            client=client,
+            capacity_path=resource_root / "host-capacity.json",
+            tool_schema_communication=config.get("tool_schema_communication", "legacy"),
         )
 
     monkeypatch.setattr(p5, "make_model", make_model)
@@ -816,8 +833,9 @@ def test_actual_runner_binds_frozen_public_trigger_and_skips_paid_writer(
 
 
 @pytest.mark.parametrize("path", ["host_commit", "writer_commit", "checkpoint_resume"])
+@pytest.mark.parametrize("communication", ["legacy", "shape_feedback_v1"])
 def test_actual_d0_entry_profile_host_writer_and_checkpoint_resume(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, path: str
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, path: str, communication: str
 ) -> None:
     helpers = runpy.run_path(str(Path(__file__).with_name("test_v13_1_p5.py")))
     helpers["prepared"](tmp_path)
@@ -834,11 +852,19 @@ def test_actual_d0_entry_profile_host_writer_and_checkpoint_resume(
         memory_formation_policy="after_host_final_v1",
         writer_system_prompt="Select actual supporting leaves for each whole field.",
         memory_writer_repairs=0,
+        **({"tool_schema_communication": communication} if communication != "legacy" else {}),
     )
     write_json(tmp_path / "config.json", settings)
     root = tmp_path / "direct-d0-run"
     frozen = d0.prepare(tmp_path / "public.json", tmp_path / "config.json", root)
     assert frozen["memory_support_contract"] == "direct_support_v1"
+    if communication != "legacy":
+        from milai_lab.contracts.tool_schema_communication import check_frozen, present_catalog
+
+        assert check_frozen(frozen) == communication
+        assert frozen["tool_schema_communication_catalog"] == present_catalog(
+            frozen["tool_catalog"], communication
+        )
     assert d0._service_options(settings) == p5._service_options(settings)
     catalog = frozen["tool_catalog"]
     manage = next(t for t in catalog if t["function"]["name"] == "manage_memory")
@@ -859,6 +885,9 @@ def test_actual_d0_entry_profile_host_writer_and_checkpoint_resume(
     def respond(request: httpx.Request) -> httpx.Response:
         wire = json.loads(request.content)
         wires.append(wire)
+        if communication != "legacy":
+            assert "UNUSABLE placeholders" in wire["messages"][0]["content"]
+            assert "Human Source body remains selectable support" in wire["messages"][0]["content"]
         assert actions, "UNEXPECTED_EXTRA_GENERATION"
         action = actions.pop(0)
         if action == "commit":
@@ -949,3 +978,161 @@ def test_actual_d0_entry_profile_host_writer_and_checkpoint_resume(
         },
     )
     print(json.dumps({"actual_d0_evidence": str(evidence)}))
+
+
+@pytest.mark.parametrize("runner", [d0, p5], ids=["d0", "p5"])
+@pytest.mark.parametrize("drift", ["unknown", "missing", "catalog", "guidance"])
+def test_communication_actual_entry_drift_rejects_before_dispatch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, runner: Any, drift: str
+) -> None:
+    helpers = runpy.run_path(str(Path(__file__).with_name("test_v13_1_p5.py")))
+    helpers["prepared"](tmp_path)
+    capacity = runpy.run_path(str(Path(__file__).parents[1] / "unit/test_v13_1_controls.py"))[
+        "settings"
+    ](tmp_path)
+    settings = read_json(tmp_path / "config.json")
+    settings.update(
+        host=capacity["host"],
+        capacity=capacity["capacity"],
+        tool_schema_communication="shape_feedback_v1",
+    )
+    write_json(tmp_path / "config.json", settings)
+    root = tmp_path / "communication-run"
+    frozen = runner.prepare(tmp_path / "public.json", tmp_path / "config.json", root)
+    if drift == "unknown":
+        frozen["tool_schema_communication"] = "unknown"
+    elif drift == "missing":
+        frozen.pop("tool_schema_communication_metadata")
+    elif drift == "catalog":
+        frozen["tool_schema_communication_catalog"][0]["function"]["description"] += " changed"
+    else:
+        frozen["tool_schema_communication_guidance"] += " changed"
+    write_json(root / "input-freeze.json", frozen)
+    calls = []
+
+    def forbidden(*args: Any, **kwargs: Any) -> Any:
+        calls.append(True)
+        raise AssertionError("DISPATCH_AFTER_INVALID_FREEZE")
+
+    monkeypatch.setattr(runner, "VLLMClient", forbidden)
+    result = runner.step(root, "mechanical", 0)
+    assert result["status"] == "interrupted", result
+    assert result["error_type"] == "ValueError"
+    assert result["error"].startswith("TOOL_SCHEMA_COMMUNICATION")
+    assert not calls
+
+
+@pytest.mark.parametrize("communication", ["legacy", "shape_feedback_v1"])
+def test_actual_mock_invoke_cap12_and_resume_no_extra_dispatch(
+    tmp_path: Path, communication: str
+) -> None:
+    actual, wires = model(tmp_path, [], communication=communication)
+    bound = actual.bind_tools(
+        [
+            {
+                "type": "function",
+                "function": {
+                    "name": "echo",
+                    "description": "Synthetic echo actual x.",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {"x": {"type": "string"}},
+                        "required": ["x"],
+                        "additionalProperties": False,
+                    },
+                },
+            }
+        ]
+    )
+    for _ in range(12):
+        bound.invoke([HumanMessage(content="Synthetic ordinary public message")])
+    assert len(wires) == 12 and read_json(tmp_path / "local-capacity.json")["u"] == 12
+    before = read_json(tmp_path / "local-budget.json")
+    with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+        bound.invoke([HumanMessage(content="Synthetic ordinary public message")])
+    actual.begin_public_message("u", checkpoint_calls=12)
+    with pytest.raises(ValueError, match="PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED"):
+        bound.invoke([HumanMessage(content="Synthetic ordinary public message")])
+    assert len(wires) == 12 and read_json(tmp_path / "local-budget.json") == before
+
+
+def test_actual_p5_shape_feedback_checkpoint_resume_reuses_profile(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    helpers = runpy.run_path(str(Path(__file__).with_name("test_v13_1_p5.py")))
+    helpers["prepared"](tmp_path)
+    capacity = runpy.run_path(str(Path(__file__).parents[1] / "unit/test_v13_1_controls.py"))[
+        "settings"
+    ](tmp_path)
+    settings = read_json(tmp_path / "config.json")
+    settings.update(
+        host=capacity["host"],
+        capacity=capacity["capacity"],
+        tool_schema_communication="shape_feedback_v1",
+        memory_mutation_contract="event_bound_v1",
+        memory_candidate_contract="read_handle_v1",
+        memory_support_contract="direct_support_v1",
+        memory_formation_policy="after_host_final_v1",
+        writer_system_prompt="Select real supporting leaves.",
+        memory_writer_repairs=0,
+    )
+    write_json(tmp_path / "config.json", settings)
+    root = tmp_path / "p5-shape-resume"
+    frozen = p5.prepare(tmp_path / "public.json", tmp_path / "config.json", root)
+    wires = []
+    original_client = p5.VLLMClient
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.content)
+        wires.append(wire)
+        assert "[shape_feedback_v1]" in wire["messages"][0]["content"]
+        assert len(wires) <= 2, "UNEXPECTED_EXTRA_GENERATION"
+        return httpx.Response(
+            200,
+            json={
+                "id": f"resume-{len(wires)}",
+                "choices": [
+                    {
+                        "finish_reason": "stop",
+                        "message": {
+                            "role": "assistant",
+                            "content": json.dumps({"answer": "No semantic change."}),
+                        },
+                    }
+                ],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 1, "total_tokens": 3},
+            },
+        )
+
+    def client(*args: Any, **kwargs: Any) -> Any:
+        return original_client(*args, transport=httpx.MockTransport(respond), **kwargs)
+
+    monkeypatch.setattr(p5, "VLLMClient", client)
+    original_capture = d0._capture_final_assistant
+
+    def cut(*args: Any, **kwargs: Any) -> None:
+        raise KeyboardInterrupt("SYNTHETIC_P5_AFTER_HOST_CHECKPOINT")
+
+    monkeypatch.setattr(d0, "_capture_final_assistant", cut)
+    with pytest.raises(KeyboardInterrupt, match="SYNTHETIC_P5_AFTER_HOST_CHECKPOINT"):
+        p5.step(root, "mechanical", 0)
+    assert len(wires) == 1
+    monkeypatch.setattr(d0, "_capture_final_assistant", original_capture)
+    result = p5.step(root, "mechanical", 0, phase="resume", attempt_id="resume")
+    assert result["status"] == "completed", result
+    assert len(wires) == 2
+    assert result["semantic_maintenance"]["generation_calls"] == 1
+    assert (
+        result["semantic_maintenance"]["trigger_binding"]["config_sha256"]
+        == frozen["config_sha256"]
+    )
+    write_json(
+        tmp_path / "shape-p5-resume-evidence.json",
+        {
+            "frozen": frozen,
+            "wire": wires,
+            "result": result,
+            "mock_dispatches": 2,
+            "socket_calls": 0,
+        },
+    )

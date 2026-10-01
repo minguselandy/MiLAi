@@ -31,6 +31,15 @@ from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import SYSTEM_PROMPT, build_agent
 from milai_lab.contracts.memory import GroundingMode, ObservationProfile
 from milai_lab.contracts.scope import FoundationScope
+from milai_lab.contracts.tool_schema_communication import (
+    check_frozen as check_communication_frozen,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    freeze_fields as communication_freeze_fields,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
 from milai_lab.memory.mcp import MemoryMCP
@@ -195,6 +204,9 @@ def _make_recipe(
         representation=policy["representation"],
         raw_index_storage=settings.get("memory_derived_index_storage", "bank_prefix"),
         material_profile=settings.get("memory_material_profile", "full_v1"),
+        tool_schema_communication=communication_profile(
+            settings.get("tool_schema_communication", "legacy")
+        ),
         observer=trace,
     )
 
@@ -320,10 +332,15 @@ def _capture_final_assistant(
 
 
 def _catalog(
-    root: Path, mode: GroundingMode, *, receipt_contract: str = "optional",
-    mutation_contract: str = "legacy", service_options: dict[str, Any] | None = None,
+    root: Path,
+    mode: GroundingMode,
+    *,
+    receipt_contract: str = "optional",
+    mutation_contract: str = "legacy",
+    service_options: dict[str, Any] | None = None,
     settings: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
+    communication_profile((settings or {}).get("tool_schema_communication", "legacy"))
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
             store,
@@ -349,6 +366,7 @@ def prepare(
     transport: str = "direct",
 ) -> dict[str, Any]:
     fixture, config = read_json(fixture_path), read_json(config_path)
+    communication_profile(config.get("tool_schema_communication", "legacy"))
     if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
         raise ValueError("V13_D0_PUBLIC_FIXTURE_REQUIRED")
     if mode not in {"ref_only", "field_grounded"} or transport not in {"direct", "mcp_http"}:
@@ -395,16 +413,19 @@ def prepare(
         "mode": mode,
         "memory_receipt_contract": receipt_contract,
         **(
-            {"memory_mutation_contract": mutation_contract}
-            if mutation_contract != "legacy" else {}
+            {"memory_mutation_contract": mutation_contract} if mutation_contract != "legacy" else {}
         ),
-        **({"memory_support_contract": "direct_support_v1"}
-           if config.get("memory_support_contract") == "direct_support_v1" else {}),
+        **(
+            {"memory_support_contract": "direct_support_v1"}
+            if config.get("memory_support_contract") == "direct_support_v1"
+            else {}
+        ),
         "transport": transport,
         "run_id": root.resolve().name,
         "source_sha256": _sources(),
         "prompt_sha256": hashlib.sha256(system_prompt.encode()).hexdigest(),
         "tool_catalog": catalog,
+        **communication_freeze_fields(catalog, config.get("tool_schema_communication", "legacy")),
         "tool_catalog_sha256": hashlib.sha256(
             json.dumps(catalog, sort_keys=True, ensure_ascii=False).encode()
         ).hexdigest(),
@@ -429,6 +450,7 @@ def _frozen(root: Path) -> dict[str, Any]:
         frozen["config_sha256"] != _sha(Path(frozen["config_path"]))
     ):
         raise ValueError("V13_D0_INPUT_CHANGED_AFTER_FREEZE")
+    check_communication_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
@@ -570,6 +592,9 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     client=client,
                     capacity_path=case_root / "host-capacity.json",
                     max_calls_per_message=settings.get("max_calls_per_message", 12),
+                    tool_schema_communication=communication_profile(
+                        settings.get("tool_schema_communication", "legacy")
+                    ),
                 )
                 recipe = _make_recipe(service, settings, model, budget, trace, stack)
                 if recipe is not None and settings.get("memory_reader_policy"):
@@ -585,10 +610,20 @@ def _execute_step(root: Path, case_id: str, message_index: int) -> dict[str, Any
                     business_call_wrapper=business_wrapper,
                     memory_tools=tools,
                     system_prompt=_system_prompt(settings),
-                    benchmark_view_hook=(recipe.hook(_system_prompt(settings), prefetch=bool(
-                        settings.get("memory_reader_policy")
-                        and settings.get("memory_prefetch", "enabled") == "enabled"))
-                        if recipe else None),
+                    tool_schema_communication=communication_profile(
+                        settings.get("tool_schema_communication", "legacy")
+                    ),
+                    benchmark_view_hook=(
+                        recipe.hook(
+                            _system_prompt(settings),
+                            prefetch=bool(
+                                settings.get("memory_reader_policy")
+                                and settings.get("memory_prefetch", "enabled") == "enabled"
+                            ),
+                        )
+                        if recipe
+                        else None
+                    ),
                 )
                 key = public["message_id"]
                 model.begin_public_message(key)
