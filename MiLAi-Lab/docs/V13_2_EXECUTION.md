@@ -378,3 +378,8 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## E1 R8新运行冻结（2026-10-02北京时间，模型HTTP之前）
 
 为原2开发场景新建4共同profile配置/8新root、16固定边界后8自由轨迹/16消息。Python/SDK与原R7一致，既有模型两次/models GET200，4次公开SQLite业务工具构成新同源流；实际gen/embed0，ledger374fcef4保持。214/394/320/539完整maps冻结，32个单步输入核对仅验证输入，不称实际HTTP或负面gate通过。Field原语法/提示和形成/观察差异预先披露；Root单步原件与显式review先于下一HTTP。runtime bb4eddc9须远端核对；[范围与限制](V13_2_E1_R8_RUNTIME_FREEZE.md)。全48状态与E0/D4保持，原计划ACTIVE。
+
+
+## E1 R8固定16边界完成，原pending保留（2026-10-02北京时间）
+
+16首尝试/逐边界Root审查；Field首次3commit/1pending，后续4no_change；派生8边界0生成/最终16个真实字面观察。8库SDK重开核对175 items/3卡/16观察/32Source，数据库hash保持。8生成60695known+32embedding13780，新unknown0，原unknown1/30387保持，ledger63834ce2。Root早期SDK审计/归档错误保留，不称Source或模型失败。资料当前19/20/829/176/0问题，候选未采用、freeze不改。自由Host8/16尚未开始，完整16行与因果/泛化限制见[结果](V13_2_E1_R8_CONTROLLED_RESULTS.md)。原48状态和完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。

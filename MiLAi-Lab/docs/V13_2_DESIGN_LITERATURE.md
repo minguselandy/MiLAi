@@ -1,8 +1,18 @@
 # v13.2 设计资料索引与失败反思
 
-当前保存 **17篇论文 / 19组项目参考、807个独立核验文件 / 159个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)与本地 `artifacts/v13-2-design-literature/index.html` 保存原文、URL/UTC/版本/SHA和中文范围；此前768/147及更早阶段按发生时解释。第三方方法原件本地保留，GitHub发布索引与反思。
+当前保存 **19篇论文 / 20组项目参考、829个独立核验文件 / 176个本地链接 / 0问题**。[机器目录](../data/manifests/v13-2-design-literature-catalog.json)与本地 `artifacts/v13-2-design-literature/index.html` 保存原文、URL/UTC/版本/SHA和中文范围；此前768/147及更早阶段按发生时解释。第三方方法原件本地保留，GitHub发布索引与反思。
 
-## 当前Root固定流：配置类型、原回合绑定与完整关闭范围
+## 当前R8实际来源集合失败与全部检索候选
+
+R8首个Field实际writer HTTP200/finish stop，提出的field_support含Human与tool叶子，outer source_refs却只有tool，原guard以field_support_selected_leaves_required拒绝；0语义卡、pending/effect none，未重试或修改冻结。另一个独立Field首边界真实提交两项有限字面回执，SDK reopen确认原current与存储包装的实际投影一致，数据库hash保持；这不是语义全文或因果收益证明。Root审查与校验不能冒称独立Judge。Source/角色/hash/CAS和默认行为未改。
+
+复查已存[JSONSchemaBench v3](https://arxiv.org/abs/2501.10868v3)的摘要方法区分：效率、schema覆盖和输出质量分别报告。另保存[官方2020-12结构验证说明](https://json-schema.org/draft/2020-12/json-schema-validation)和[条件字段存在说明](https://json-schema.org/understanding-json-schema/reference/conditionals)原HTML/URL/UTC/response/hash。Root推断是形状符合不等于显式来源集合关系成立；动态选中叶子仍由既有Service guard检查。通用候选只明确outer refs覆盖每字段显式所选叶子，同时保持原basis-role条件与Source/CAS，不自动union/改Source/放宽校验。尚未应用，须单独amended freeze，不能改R8原结果。
+
+检索返回的[Constraint Tax v1](https://arxiv.org/abs/2605.26128v1)与[Scale-Dependent Semantic Gap v1](https://arxiv.org/abs/2609.23742v1)复用已存原PDF/摘要；新存[Ordering Agents v1](https://arxiv.org/abs/2607.18261v1)及低相关[ImPaKT v1](https://arxiv.org/abs/2212.10770v1)原PDF/摘要/中文范围，均未采用方法或迁移自报结果，不读任务/gold/执行上游。全部四候选可从本地首屏查看。
+
+2官方说明GET200后，归档首driver试图新建已存候选目录而FileExistsError；原driver/资源/失败留存，新label复用原件，只新下载2候选的4资源GET，均200。恢复driver写成后的诊断print NameError与Root误认Store key前缀/原SQL字段/current包装的审计失败分别记录，不当SDK或模型失败，缺失的当时完整maps不倒补。最终19/20/829/176独立hash/PDF头/链接检查0问题。R8仍在逐边界执行，原48要求/E0/D4保持。
+
+## 此前Root固定流：配置类型、原回合绑定与完整关闭范围
 
 新Root入口最终15项有限SDK/Mock检查、ruff/mypy与两个边界通过；首次样式/类型失败、首12项旧版本通过和归档路径错误保留原件。固定1.6.5公开RunnableConfig与固定3.11.13 cast用于同一既有公开config，实际当前user Source/config hash和writer公开通信沿用D0，不改变核心算法、模型/SDK、参数或默认配置。新增资源9次GET200，其中首文件在progress落盘失败后复用原字节，8次在新恢复label完成；网页浏览Unsupported Markdown与归档路径TypeError分别保留，不冒称HTTP失败。三个LC文件与安装字节相同，typing与固定解释器相同。rolling官方原件/UTC/hash与固定版本证明分开。
 

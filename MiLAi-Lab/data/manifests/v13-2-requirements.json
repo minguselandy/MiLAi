@@ -1064,5 +1064,13 @@
     "root_input_review_sha256": "a474feca304f38d51a8549176e67e6d7161e76e1525d4b235b1fe28f0828cadb",
     "actual_model_http_at_prepare": 0,
     "original_requirements_unchanged": true
+  },
+  "e1_r8_controlled_results": {
+    "path": "data/manifests/v13-2-e1-r8-controlled-results.json",
+    "sha256": "acedd80c2fad956aebc3ded4a7f7bd0394683370e1682ff17f876efc989c9ea4",
+    "status": "CONTROLLED_COMPLETE_WITH_ORIGINAL_PENDING_RETAINED_FREE_HOST_NOT_STARTED",
+    "original_first_pending_retained": true,
+    "free_host_attempted": 0,
+    "original_48_requirement_fields_unchanged": true
   }
 }

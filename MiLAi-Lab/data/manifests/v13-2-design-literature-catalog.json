@@ -3434,6 +3434,267 @@
       ],
       "status": "SAVED_METHOD_REFERENCE_NOT_FULL_REPRODUCTION",
       "read_scope": "Public same-object config typing and context identity; no new semantic or performance claim"
+    },
+    {
+      "kind": "project",
+      "id": "JSON Schema 2020-12 official source-membership reflection reference",
+      "url": "https://json-schema.org",
+      "ref": "2020-12 informational draft and retrieved rolling conditionals",
+      "commit": null,
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference",
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/manifest-final.json",
+      "snapshot_manifest_sha256": "3c590925d1bd2660dc59501d8ca8711899c16749abac23ac5958b91030968400",
+      "files": [
+        {
+          "url": "https://json-schema.org/draft/2020-12/json-schema-validation",
+          "started_at_utc": "2026-10-01T17:01:42.557643+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://json-schema.org/draft/2020-12/json-schema-validation",
+          "response_headers": {
+            "Date": "Thu, 01 Oct 2026 17:01:46 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "close",
+            "x-content-type-options": "nosniff",
+            "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qnk8Hn72flNTiCpoOoRS18nz5tHmZk6DUL%2F1PuUgtiNMMb4luFkoBoecAFCWZKT73USSpUU1gGL3%2BV2kq18ARvQUUBFsetSHX0zXLsO1z7wP8pK2H863hCeFuijqu4EhnWM%3D\"}]}",
+            "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "public, max-age=0, must-revalidate",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "Server-Timing": "cfCacheStatus;desc=\"DYNAMIC\"",
+            "Server": "cloudflare",
+            "cf-cache-status": "DYNAMIC",
+            "CF-RAY": "a43d07fffa25ff82-SIN",
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/validation-2020-12-original.html",
+          "sha256": "e90100369faaae22357592215bdfb256f67709ed90b1cbebc1a3da66df3a61f9",
+          "bytes": 169790,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:01:44.287152+00:00"
+        },
+        {
+          "url": "https://json-schema.org/understanding-json-schema/reference/conditionals",
+          "started_at_utc": "2026-10-01T17:01:44.287449+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://json-schema.org/understanding-json-schema/reference/conditionals",
+          "response_headers": {
+            "Date": "Thu, 01 Oct 2026 17:01:48 GMT",
+            "Content-Type": "text/html; charset=utf-8",
+            "Transfer-Encoding": "chunked",
+            "Connection": "close",
+            "x-content-type-options": "nosniff",
+            "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qphuCQol8zY4IuJFlp5XYX7LsWZoABzfQnq1jXs7S9PCtfZyss4m%2Frz9V0qYroOQn4V8%2FDGBsPGZsiipBlSkJ%2BjLFDv41iUlc3AJgUWNTtr09dYxl%2F2i9AxD0BVIyK19VwY%3D\"}]}",
+            "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+            "Access-Control-Allow-Origin": "*",
+            "Cache-Control": "public, max-age=0, must-revalidate",
+            "referrer-policy": "strict-origin-when-cross-origin",
+            "Link": "<https://fonts.googleapis.com>; rel=\"preconnect\", </_next/static/css/ae31743a87551a60.css>; rel=\"preload\"; as=style",
+            "Server-Timing": "cfCacheStatus;desc=\"DYNAMIC\"",
+            "Server": "cloudflare",
+            "cf-cache-status": "DYNAMIC",
+            "CF-RAY": "a43d08086fb5f906-SIN",
+            "alt-svc": "h3=\":443\"; ma=86400"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/conditionals-original.html",
+          "sha256": "91e300cfd58d44de367b2424fef09ed7cdcdc551acf6f7bdc3b624aa40471f82",
+          "bytes": 498831,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:01:46.857776+00:00"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/READ_SCOPE.md",
+          "sha256": "a37002bfe2cfc4a9149f70035293aaebbd8311528025595013a927b4fb566d90",
+          "bytes": 1085
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/manifest.json",
+          "sha256": "bb9281033b173b2ea28bfb4fcbebc07d67e579417b92d37de5b45a8c2ceda5d0",
+          "bytes": 4303
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/candidate-2605.26128v1.md",
+          "sha256": "d3256b114f6c530674bc5c9e10b945a5150cb413c3215ef19913c974fa983a1c",
+          "bytes": 431
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/candidate-2609.23742v1.md",
+          "sha256": "704b68361dea32888279fcca2db6ef201516a1c99e6dfda7680c3b5f1a26ce2c",
+          "bytes": 426
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/candidate-2607.18261v1.md",
+          "sha256": "86594213c6d6e3788786553c9a77abe4a6eb8782b97325db2b7f26892c4204e3",
+          "bytes": 405
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/json-schema-2020-12-source-membership-reference/candidate-2212.10770v1.md",
+          "sha256": "bf5b79dc2ab3723f047051d7ac4c6f245935c689c416c77abd538e9992f98232",
+          "bytes": 398
+        }
+      ],
+      "status": "SAVED_OFFICIAL_METHOD_DOCUMENTS_NOT_PROJECT_REPRODUCTION",
+      "read_scope": "Only structural presence/value claims and existing custom guard distinction"
+    },
+    {
+      "kind": "paper",
+      "id": "2607.18261v1",
+      "title": "When JSON Is Not Enough: Semantic Reliability of Schema-Constrained LLM Ordering Agents",
+      "url": "https://arxiv.org/abs/2607.18261v1",
+      "version": "2607.18261v1",
+      "retrieved_at_utc": "2026-10-01T17:04:42.188656+00:00",
+      "status": "SAVED_SEARCH_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Search primary abstract candidate only; full PDF stored for user viewing, no benchmark/gold or evaluation read/execution",
+      "summary": "检索摘要候选，未复现ordering系统或采用新事务机制，收益不迁移。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2607.18261v1",
+          "started_at_utc": "2026-10-01T17:04:37.880844+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2607.18261v1",
+          "response_headers": {
+            "Connection": "close",
+            "Content-Length": "40690",
+            "content-type": "text/html; charset=utf-8",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "x-frame-options": "SAMEORIGIN",
+            "x-cloud-trace-context": "655d56958bf71ca643e491a0b5f49e54",
+            "content-security-policy": "frame-ancestors 'none'",
+            "cache-control": "max-age=3600",
+            "server": "Google Frontend",
+            "last-modified": "Mon, 24 Aug 2026 20:57:13 GMT",
+            "Accept-Ranges": "bytes",
+            "Age": "665808",
+            "Date": "Thu, 01 Oct 2026 17:04:42 GMT",
+            "X-Served-By": "cache-lga-kjfk8660070-LGA, cache-lga-kjfk8660070-LGA, cache-lga-kjfk8660068-LGA, cache-sin-wsap440070-SIN",
+            "X-Cache": "MISS, HIT, HIT",
+            "X-Timer": "S1790874283.638190,VS0,VE1"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2607.18261v1/abstract.html",
+          "sha256": "0a4c4ec7d0cfc5d038eb5ab0bd8dad4a468cb25ed5a01f51a9c6f340f7e3b2d5",
+          "bytes": 40690,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:04:39.548237+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2607.18261v1",
+          "started_at_utc": "2026-10-01T17:04:39.548505+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2607.18261v1",
+          "response_headers": {
+            "Connection": "close",
+            "Content-Length": "188241",
+            "content-disposition": "inline; filename=\"2607.18261v1.pdf\"",
+            "etag": "CKTn2vr95JUDEAI=",
+            "server": "Google Frontend",
+            "link": "<https://arxiv.org/pdf/2607.18261>; rel='canonical'",
+            "last-modified": "Wed, 22 Jul 2026 00:03:42 GMT",
+            "access-control-allow-origin": "*",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "content-type": "application/pdf",
+            "x-cloud-trace-context": "1abcc3ad6f97a7b6f2c701d250db3925",
+            "Accept-Ranges": "bytes",
+            "Age": "274556",
+            "Date": "Thu, 01 Oct 2026 17:04:43 GMT",
+            "X-Served-By": "cache-lga-kjfk8660067-LGA, cache-lga-kjfk8660067-LGA, cache-lga-kjfk8660062-LGA, cache-sin-wsap440025-SIN",
+            "X-Cache": "MISS, HIT, MISS",
+            "X-Timer": "S1790874284.660961,VS0,VE224"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2607.18261v1/paper.pdf",
+          "sha256": "ec8ad5ec57269f7a46093c47cf447fd422c42cc72d9b3606898763aa62124ed3",
+          "bytes": 188241,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:04:42.186689+00:00"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2607.18261v1/SUMMARY.md",
+          "sha256": "a60eaca057c47c6fa675bc40c8437d638659d618d74297fe7cea7900d48c5f63",
+          "bytes": 454
+        }
+      ]
+    },
+    {
+      "kind": "paper",
+      "id": "2212.10770v1",
+      "title": "ImPaKT: A Dataset for Open-Schema Knowledge Base Construction",
+      "url": "https://arxiv.org/abs/2212.10770v1",
+      "version": "2212.10770v1",
+      "retrieved_at_utc": "2026-10-01T17:04:45.672392+00:00",
+      "status": "SAVED_SEARCH_CANDIDATE_NOT_ADOPTED",
+      "read_scope": "Search primary abstract candidate only; full PDF stored for user viewing, no benchmark/gold or evaluation read/execution",
+      "summary": "检索返回的低相关候选，仅保存原件供查看，不采用方法/数据集，不读任务/gold。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2212.10770v1",
+          "started_at_utc": "2026-10-01T17:04:42.188744+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2212.10770v1",
+          "response_headers": {
+            "Connection": "close",
+            "Content-Length": "41530",
+            "last-modified": "Mon, 24 Aug 2026 21:04:25 GMT",
+            "cache-control": "max-age=3600",
+            "content-type": "text/html; charset=utf-8",
+            "content-security-policy": "frame-ancestors 'none'",
+            "x-cloud-trace-context": "3f636992e4984b78325f0363ea6b942b",
+            "server": "Google Frontend",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "x-frame-options": "SAMEORIGIN",
+            "Accept-Ranges": "bytes",
+            "Age": "439373",
+            "Date": "Thu, 01 Oct 2026 17:04:46 GMT",
+            "X-Served-By": "cache-lga-kjfk8660025-LGA, cache-lga-kjfk8660025-LGA, cache-lga-kjfk8660025-LGA, cache-sin-wsap440045-SIN",
+            "X-Cache": "MISS, HIT, HIT",
+            "X-Timer": "S1790874286.106349,VS0,VE1"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2212.10770v1/abstract.html",
+          "sha256": "98f807a3ba5c68eb9ad94c8f4ad98d5a9059511be2a608c984b50bc6342ff1d4",
+          "bytes": 41530,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:04:42.933243+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2212.10770v1",
+          "started_at_utc": "2026-10-01T17:04:42.933464+00:00",
+          "research_http_not_model_http": true,
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2212.10770v1",
+          "response_headers": {
+            "Connection": "close",
+            "Content-Length": "365413",
+            "content-disposition": "inline; filename=\"2212.10770v1.pdf\"",
+            "last-modified": "Mon, 23 Jan 2023 18:15:08 GMT",
+            "via": "1.1 google, 1.1 varnish, 1.1 varnish, 1.1 varnish",
+            "content-type": "application/pdf",
+            "etag": "CMvV3oim3vwCEAE=",
+            "server": "Google Frontend",
+            "x-cloud-trace-context": "4e977b581fca48e351140d9c3e0d4df3",
+            "access-control-allow-origin": "*",
+            "link": "<https://arxiv.org/pdf/2212.10770>; rel='canonical'",
+            "Accept-Ranges": "bytes",
+            "Age": "1071553",
+            "Date": "Thu, 01 Oct 2026 17:04:47 GMT",
+            "X-Served-By": "cache-lga-kjfk8660043-LGA, cache-lga-kjfk8660043-LGA, cache-lga-kjfk8660047-LGA, cache-sin-wsap440077-SIN",
+            "X-Cache": "MISS, HIT, HIT",
+            "X-Timer": "S1790874287.317363,VS0,VE1"
+          },
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2212.10770v1/paper.pdf",
+          "sha256": "c0d444cf3f734da7dd790ef90d953f61fd3f3ec6c5bda2b126e1a93e57229b9e",
+          "bytes": 365413,
+          "status": "SAVED",
+          "finished_at_utc": "2026-10-01T17:04:45.671999+00:00"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2212.10770v1/SUMMARY.md",
+          "sha256": "59f147dc6d4aa154f3f1edd80a37ffb269f4ff7817d79743babd67c88dd5b85d",
+          "bytes": 447
+        }
+      ]
     }
   ],
   "complete": true,
@@ -3456,8 +3717,8 @@
   ],
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
-  "paper_count": 17,
-  "project_count": 19,
+  "paper_count": 19,
+  "project_count": 20,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -3852,6 +4113,41 @@
           "bytes": 38626
         }
       ]
+    },
+    {
+      "cohort": "R8 first actual controlled failure, original pending retained",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r8-field-support-source-membership.json",
+        "sha256": "b5bb6275ca39f708b8a1d9ebcf6282f6b42b08b485f1dc71bc180b41f220b3fb",
+        "bytes": 6112
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-source-membership-recovery-first/v13-2-design-literature-catalog-before-2c6d15aefdcb8c4a8a7f5201e69dbd02858fd10b7d1bb1b490a93d7a407d8c2e.json",
+          "sha256": "2c6d15aefdcb8c4a8a7f5201e69dbd02858fd10b7d1bb1b490a93d7a407d8c2e",
+          "bytes": 243749
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-source-membership-recovery-first/catalog.local-before-2c6d15aefdcb8c4a8a7f5201e69dbd02858fd10b7d1bb1b490a93d7a407d8c2e.json",
+          "sha256": "2c6d15aefdcb8c4a8a7f5201e69dbd02858fd10b7d1bb1b490a93d7a407d8c2e",
+          "bytes": 243749
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-source-membership-recovery-first/index-before-02b5ddc793b2570ec63f145dc33dcedef74a6913672f581b113bcdc799a6cf1d.html",
+          "sha256": "02b5ddc793b2570ec63f145dc33dcedef74a6913672f581b113bcdc799a6cf1d",
+          "bytes": 26183
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-source-membership-recovery-first/current-archive-before-455835edfd9298c24818fc9b04aac5845f1db93942e0ed260fcabcb8d399b940.json",
+          "sha256": "455835edfd9298c24818fc9b04aac5845f1db93942e0ed260fcabcb8d399b940",
+          "bytes": 208754
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/r8-source-membership-recovery-first/V13_2_DESIGN_LITERATURE-before-9291692c9c3c1eea361b5d7c3194f1d299c9dec65b2dec24c54b76c0deaf1b6c.md",
+          "sha256": "9291692c9c3c1eea361b5d7c3194f1d299c9dec65b2dec24c54b76c0deaf1b6c",
+          "bytes": 40067
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -3866,5 +4162,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T16:33:11.437756+00:00"
+  "updated_at_utc": "2026-10-01T17:04:45.696484+00:00"
 }
