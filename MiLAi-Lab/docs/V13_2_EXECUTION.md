@@ -330,3 +330,9 @@ R7 +171generation/1,222,370known（Host151/1,085,579，writer20/136,791）、52e
 A按真实ordinary/query发行快照exact get，保持原选择/Source/角色/hash/读时版本；B仅8 typed有限读取guard，未知/权限/SDK/CAS错误继续传播；C按已完成逐项receipt说明Host/closed-writer时序，默认均legacy。普通metadata/C提示成本增加，长Source/history/scope/冲突组的正文交付退化如实保留，不作压缩或质量收益。冲突pair保留两候选冲突stub但两正文omitted，1528→1863付费页仅Source pointer，不冒充冲突正文已读。快照合作锁非后端CAS/全局HTTP owner；持久存储3644–11858字节/行、无TTL/GC。
 
 资料保持17论文/12项目参考、715文件/114本地链接，无新检索。全局HTTP owner/连续账本lease仍为独立下一工程要求，实际下一E0仍须全新冻结/GitHub前置核对/逐轨迹审查，原R7不重跑。48要求状态/R7全部失败费用、E0 NOT_PASSED/D4 NOT_ADMITTED/完整plan ACTIVE/Product NO_GO保持。
+
+## 共享HTTP与连续账本的具体工程范围
+
+上一轮A/B/C工程验收8b1fdf3已远端/head/body/ls-remote精确核对，主树clean，无新实际HTTP，Source READY/HOLD。本轮当前实际调用链再确认所有参与client缺共同request mutex/owner，原预算短锁不覆盖整次HTTP、missing旧budget会置0。查阅保存CPython3.11.13 fixed498b971e、HTTPX0.28.1 fixed26d48e06及Linux flock官方手册三组primary方法；HTTPX安装Client源码与固定版本字节相等，rolling3.11文档显示3.11.16另存，不当原SDK证明。15原GET全部200，原web503/错误rg路径rc2保留；现17论文/15参考、745文件/133本地链接核验0问题，未执行上游。
+
+[具体默认关闭范围](V13_2_HTTP_OWNER_IMPLEMENTATION_SCOPE.md)冻结213/391/316：同一Source在Root之后创建的新8b1fdf3隔离树，只改5运行文件/1新harness stdlib helper/2测试，32运行依赖/3工程测试/13已存primary原件只读。canonical已存在ledger决定稳定EX|NB sidecar，deployment/client domain不能分片绕过同账本，PID/fork/close/预算/配置/实际HTTP对象绑定；共享mutex贯穿reserve→派发→finish/finally，reservation先durable，不retry/refund/新0ledger。D0/P5/native micro入口和实际Host/M/native callback需要有限断网验收；summary未实现不冒充样本，不改变算法或inclusive12/24。尚未实现/验收；先GitHub核对范围再Root真实创建和明确启动，旧树全部HOLD。完整plan ACTIVE/48状态与R7失败费用、ledger374fcef4/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。

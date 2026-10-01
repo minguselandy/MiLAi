@@ -1,5 +1,19 @@
 # v13.2 设计资料索引与失败反思
 
+2026-10-01 当前保存 **17篇论文 / 15组项目与SDK方法参考、745个独立核验文件 / 133个本地链接 / 0问题**。完整PDF、HTML、固定实现片段及摘要可从 ignored `artifacts/v13-2-design-literature/index.html` 查看；[机器目录](../data/manifests/v13-2-design-literature-catalog.json)保留URL、UTC、版本/commit、SHA和范围。GitHub发布索引与摘要，原第三方资源本地留存；方法相关快照不是完整项目复现。下文旧计数和旧阶段是其发生时记录，不当当前总数。
+
+## 当前共享HTTP/连续账本设计参考与取舍
+
+原静态审计及当前调用路径复检确认：native callback实例外锁不覆盖所有Host/M/embedding client，RunBudget的reserve/finish短锁不覆盖整次HTTP；原legacy缺失账本会初始化0。下一[具体实现范围](V13_2_HTTP_OWNER_IMPLEMENTATION_SCOPE.md)只增加默认关闭的合作进程lease、共享request mutex和已存在连续账本绑定，不改变检索、Source/版本、模型提示或算法方向。这个机制尚未实现/验收，不能称完整D4、inclusive12/24或模型质量改善。
+
+保存[CPython v3.11.13](https://github.com/python/cpython/tree/498b971ea3673012a1d4b21860b229d55fc6e575)的fcntl/threading/os文档和相关源码，固定commit498b971e；官网3.11滚动页当时显示3.11.16，另存UTC/hash，不冒充实际3.11.13版本证明。保存[HTTPX0.28.1](https://github.com/encode/httpx/tree/26d48e0634e6ee9cdc0533996db289ce4b430177)的Client/API/README/许可及[官方API页](https://www.python-httpx.org/api/)；固定Client源码与实际安装0.28.1原文件逐字节相同，没有升级。保存[Linux flock官方原文](https://man7.org/linux/man-pages/man2/flock.2.html)，仅按检索UTC/hash固定rolling手册，未补造上游源码commit。三组项目参考的READ_SCOPE/manifest及原文件均在本地索引首屏。
+
+借鉴有限原理：LOCK_EX|LOCK_NB拒绝合作第二进程；同ledger使用稳定sidecar，不能按arm/root/domain分片或跟随ledger atomic replace换inode。fork/dup继承原open-file description，child不能unlock父owner；PID拒绝必须先于继承线程锁。一个共享请求mutex从reserve之前贯穿dispatch/finish，native外锁不同；线程共享HTTPX和GIL都不证明请求串行。这个应用是Root结合实际调用链的通用设计推断，不是官方资料给出的MiLAi效果。
+
+15次原资源GET均200，原web fcntl open的503另保留且不改称这15次下载失败；原首轮rg用错两个baseline文件目录的rc2也保留。原17论文资源未重下载，上游代码未执行，实际gen/embed0，主213/391/316和连续ledger374fcef4不变。原index/catalog/745前的715/114核验及旧总结字节全部复制保存。拒绝采用distributed lock服务、SDK更新、async迁移、自动重试/退款、新0账本、案例调度和任意外部篡改/回滚/网络文件系统安全保证。
+
+## 此前R6及各阶段原记录
+
 2026-10-01。按用户要求，检索的论文、项目和官方SDK资料均留存，采用的方法与未采用候选分别标明，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存11篇论文PDF/HTML/摘要和10组项目/SDK参考，682个唯一文件、85个本地索引链接通过原hash/PDF头/链接核对；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。

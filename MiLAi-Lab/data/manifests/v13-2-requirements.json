@@ -819,12 +819,14 @@
         "data/manifests/v13-2-e0-r4-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
         "data/manifests/v13-2-e0-r6-results.json",
-        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json",
+        "data/manifests/v13-2-http-owner-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
-      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged.",
+      "http_owner_scoped_work_qualification": "Concrete default-off implementation scope with5 editable/1 new harness helper/2 tests/32 readonly dependencies/3 engineering tests/13 saved primary method files. Current callsite review is static only; globalHTTP/continuous-ledger owner not implemented or accepted, no new actual cohort, all original statuses unchanged."
     },
     {
       "id": "INV-03",
@@ -847,13 +849,15 @@
         "data/manifests/v13-2-e0-r6-results.json",
         "data/manifests/v13-2-r7-blind-review-preparation.json",
         "docs/V13_2_R7_BLIND_REVIEW_PREPARATION.md",
-        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json",
+        "data/manifests/v13-2-http-owner-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
       "latest_r7_review_preparation_qualification": "Original anonymous-label/random-order24 trajectories/48 messages;46 original finals/2 missing,300 conversation items/100 source bodies independently linked to frozen raw bytes;all48 score rows UNRATED. Independent reviewer absent, effective double-blind unverified. First linkage checker failed assuming uniform2 messages; exact original failure retained, v2 checks original1/2/3 lengths. No new model HTTP, SDK reopens, runtime/test/config/cohort/ledger changes. Preparation only; original R7 failure/cost/results and complete-plan obligations remain.",
-      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged.",
+      "http_owner_scoped_work_qualification": "Concrete default-off implementation scope with5 editable/1 new harness helper/2 tests/32 readonly dependencies/3 engineering tests/13 saved primary method files. Current callsite review is static only; globalHTTP/continuous-ledger owner not implemented or accepted, no new actual cohort, all original statuses unchanged."
     },
     {
       "id": "INV-04",
@@ -872,13 +876,15 @@
         "data/manifests/v13-2-e0-r5-results.json",
         "data/manifests/v13-2-e0-r6-results.json",
         "data/manifests/v13-2-staged-cohort-review-acceptance.json",
-        "data/manifests/v13-2-read-protocol-implementation-acceptance.json"
+        "data/manifests/v13-2-read-protocol-implementation-acceptance.json",
+        "data/manifests/v13-2-http-owner-implementation-scope.json"
       ],
       "condition": null,
       "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
       "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation.",
       "staged_review_qualification": "Final public Root orchestration44 local controls/four narrow static checks pass, including actual scripted parent termination with unknown preserved. Root explicit per-trajectory development diagnostics only; no runtime semantic classifier, independent Judge, actual new cohort or global HTTP owner. Original R7 detection was after all24 terminal; original failures/costs and all48 statuses preserved.",
-      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged."
+      "read_protocol_engineering_qualification": "Root exact final-byte75 new/91 affected checks, default8 original comparisons,10 saved Qwen pressure packets; socket-denied engineering only. Source-role/hash/read-time identity preserved, semantic support/Save correctness/global HTTP ownership/new cohort unproven. R7 negative quality and all status values unchanged.",
+      "http_owner_scoped_work_qualification": "Concrete default-off implementation scope with5 editable/1 new harness helper/2 tests/32 readonly dependencies/3 engineering tests/13 saved primary method files. Current callsite review is static only; globalHTTP/continuous-ledger owner not implemented or accepted, no new actual cohort, all original statuses unchanged."
     },
     {
       "id": "DEL-01",
@@ -997,5 +1003,13 @@
     "status": "ACCEPTED_OFFLINE_FINAL_SOURCE_NOT_MODEL_QUALITY",
     "new_actual_model_http": 0,
     "global_http_owner_implemented": false
+  },
+  "http_owner_implementation_scope": {
+    "manifest": "data/manifests/v13-2-http-owner-implementation-scope.json",
+    "sha256": "c31075de89ee19baaf319af32e7e2e7f7f7b30fe3a4bf8aa2b4a0f6973437183",
+    "status": "PENDING_REMOTE_VERIFICATION_ROOT_SETUP_AND_SOURCE_START",
+    "engineering_accepted": false,
+    "actual_new_model_http": 0,
+    "runtime213_test391_config316_maps_unchanged": true
   }
 }
