@@ -298,6 +298,7 @@ def make_model(
         client=client,
         capacity_path=resource_root / "host-capacity.json",
         max_calls_per_message=settings.get("max_calls_per_message", 12),
+        generation_admission_profile=settings.get("generation_admission_profile", "legacy"),
     )
 
 
@@ -825,7 +826,22 @@ def step(
             )
             # Existing bridge admission file is written before client/provider dispatch.
             # Unknown provider outcomes consume this same per-message key on every attempt.
-            model.begin_public_message(public["message_id"], checkpoint_calls=checkpoint_calls)
+            if model.generation_admission_profile == "durable_shared_v1":
+                public_source = service.source(capture_receipt["source_ref"])
+                if public_source is None:
+                    raise ValueError("V13_P5_PUBLIC_SOURCE_IDENTITY_MISSING")
+                model.begin_public_message(
+                    public["message_id"], checkpoint_calls=checkpoint_calls,
+                    admission_phase="resume" if already else "start",
+                    admission_scope={
+                        "owner": scope.user_id, "bank": list(service.namespace),
+                        "session": scope.episode_id, "request_ref": public_source["event_id"],
+                        "request_sha256": public_source["content_sha256"],
+                        "config_sha256": frozen["config_sha256"],
+                    },
+                )
+            else:
+                model.begin_public_message(public["message_id"], checkpoint_calls=checkpoint_calls)
             if phase == "resume":
                 recover_pending_application_call(
                     agent,
