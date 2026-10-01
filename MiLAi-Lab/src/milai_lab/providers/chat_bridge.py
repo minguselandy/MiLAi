@@ -16,6 +16,13 @@ from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from pydantic import ConfigDict, Field, PrivateAttr
 
+from milai_lab.contracts.tool_schema_communication import (
+    present_catalog,
+    shape_guidance,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.presentation import json_action_calls
 from milai_lab.providers.contextual_vllm import VLLMClient
@@ -78,8 +85,10 @@ def _action_schema(
     }
 
 
-def _action_prompt(tools: list[dict[str, Any]]) -> str:
-    catalog = [item["function"] for item in tools]
+def _action_prompt(
+    tools: list[dict[str, Any]], *, tool_schema_communication: str = "legacy"
+) -> str:
+    catalog = [item["function"] for item in present_catalog(tools, tool_schema_communication)]
     prompt = (
         'Reply as exactly one JSON object. For a final reply use {"answer":"..."}. '
         'To call tools use {"calls":[{"name":"...","arguments":{...}}]}. '
@@ -88,7 +97,7 @@ def _action_prompt(tools: list[dict[str, Any]]) -> str:
         "A tool result will be returned before your next reply.\n"
         + json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     )
-    return prompt
+    return prompt + shape_guidance(tools, tool_schema_communication)
 
 
 def _json_action_history(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -130,6 +139,9 @@ class VLLMChatModel(BaseChatModel):
     active_message_key: str | None = None
     generation_admission_profile: Literal["legacy", "durable_shared_v1"] = Field(
         default="legacy", frozen=True
+    )
+    tool_schema_communication: Literal["legacy", "shape_feedback_v1"] = Field(
+        default="legacy", frozen=True, exclude=True, repr=False
     )
     _generation_admission: DurableGenerationAdmission | None = PrivateAttr(default=None)
     request_transform: RequestTransform | None = Field(default=None, exclude=True, repr=False)
@@ -208,6 +220,12 @@ class VLLMChatModel(BaseChatModel):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
         native = self.client.config.tool_mode == "native"
+        selected_communication = communication_profile(self.tool_schema_communication)
+        if native and selected_communication != "legacy":
+            wire_messages = _protocol_messages(
+                wire_messages, shape_guidance(tools, selected_communication)
+            )
+            tools = present_catalog(tools, selected_communication)
         request = ChatRequest(wire_messages, messages, tools, native, kwargs)
         if self.request_transform is not None:
             self.request_transform.validate(request)
@@ -222,7 +240,10 @@ class VLLMChatModel(BaseChatModel):
             prepared = PreparedRequest(wire_messages, tools)
         else:
             prepared = PreparedRequest(
-                _protocol_messages(_json_action_history(wire_messages), _action_prompt(tools)),
+                _protocol_messages(
+                    _json_action_history(wire_messages),
+                    _action_prompt(tools, tool_schema_communication=selected_communication),
+                ),
                 tools,
                 _action_schema(tools, generation_only=True),
             )

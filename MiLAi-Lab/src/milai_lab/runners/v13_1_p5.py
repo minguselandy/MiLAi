@@ -51,6 +51,15 @@ from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import generation_cap
 from milai_lab.contracts.memory import GroundingMode
 from milai_lab.contracts.scope import FoundationScope
+from milai_lab.contracts.tool_schema_communication import (
+    check_frozen as check_communication_frozen,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    freeze_fields as communication_freeze_fields,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
 from milai_lab.memory.service import MemoryService
@@ -147,6 +156,7 @@ def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
 
 
 def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[dict[str, Any]]:
+    communication_profile(settings.get("tool_schema_communication", "legacy"))
     contract = d0._receipt_contract(settings)
     d0._observation_profile(settings)
     mutation_contract = d0._mutation_contract(settings)
@@ -177,6 +187,7 @@ def prepare(
 ) -> dict[str, Any]:
     """Validate/freeze without constructing a model, client or optional native SDK."""
     fixture, settings = read_json(fixture_path), read_json(config_path)
+    communication_profile(settings.get("tool_schema_communication", "legacy"))
     if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
         raise ValueError("V13_P5_PUBLIC_FIXTURE_REQUIRED")
     if mode not in {"ref_only", "field_grounded"}:
@@ -217,6 +228,11 @@ def prepare(
         "runtime_sdk": _sdk(),
         "tool_catalog": _catalog(root, mode, settings),
     }
+    frozen.update(
+        communication_freeze_fields(
+            frozen["tool_catalog"], settings.get("tool_schema_communication", "legacy")
+        )
+    )
     if workflow != "reservation_v1":
         frozen["application_workflow"] = workflow
         frozen["receipt_profile"] = workflow
@@ -287,6 +303,7 @@ def _frozen(root: Path) -> dict[str, Any]:
         "config_sha256"
     ] != d0._sha(Path(frozen["config_path"])):
         raise ValueError("V13_P5_INPUT_CHANGED_AFTER_FREEZE")
+    check_communication_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
@@ -294,6 +311,9 @@ def make_model(
     settings: dict[str, Any], budget: RunBudget, trace: Trace, resource_root: Path
 ) -> LangMemRecipeChatModel:
     """Production uses exactly the existing accounted client/model bridge."""
+    selected_communication = communication_profile(
+        settings.get("tool_schema_communication", "legacy")
+    )
     client = VLLMClient(
         VLLMConfig(**settings["host"]),
         emit=trace,
@@ -305,6 +325,7 @@ def make_model(
         capacity_path=resource_root / "host-capacity.json",
         max_calls_per_message=settings.get("max_calls_per_message", 12),
         generation_admission_profile=settings.get("generation_admission_profile", "legacy"),
+        tool_schema_communication=selected_communication,
     )
 
 
@@ -624,6 +645,7 @@ def step(
                         "label_available": label_available,
                     }
                 )
+
             def service_observer(event: dict[str, Any]) -> None:
                 trace(event)
                 if event.get("event") == "v13_observation_boundary":
@@ -786,10 +808,22 @@ def step(
                     else comparison.tools()
                 ),
                 system_prompt=d0._system_prompt(settings),
-                benchmark_view_hook=(recipe.hook(d0._system_prompt(settings), prefetch=bool(
-                    settings.get("memory_reader_policy")
-                    and settings.get("memory_prefetch", "enabled") == "enabled"))
-                    if recipe is not None else None if comparison is None else comparison.hook),
+                tool_schema_communication=communication_profile(
+                    settings.get("tool_schema_communication", "legacy")
+                ),
+                benchmark_view_hook=(
+                    recipe.hook(
+                        d0._system_prompt(settings),
+                        prefetch=bool(
+                            settings.get("memory_reader_policy")
+                            and settings.get("memory_prefetch", "enabled") == "enabled"
+                        ),
+                    )
+                    if recipe is not None
+                    else None
+                    if comparison is None
+                    else comparison.hook
+                ),
             )
             active["agent"] = agent
             state = agent.get_state(config)
