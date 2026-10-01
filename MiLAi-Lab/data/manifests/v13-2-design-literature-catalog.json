@@ -1081,6 +1081,136 @@
         "selected_installed_sdk_files_byte_verified": 9,
         "scope": "Pinned synchronization/retry/extra-network-surface source and installed dependency version metadata, no SDK or model execution",
         "runtime_closure_not_proven": true
+      },
+      "common_boundary_reference_supplement": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/root-manifest.json",
+        "sha256": "bfe243ddf2a212aa73f752892375889942ea7242f01a205cd56c4fb4d56e8473",
+        "bytes": 13116,
+        "files": [
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/manifest.json",
+            "sha256": "1be976f2b47a58a0c765daa3288eeb69d6ab669fe0e783fe737e711bef4260ea",
+            "bytes": 4023,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/manifest.json",
+            "relative_path": "manifest.json",
+            "url": "https://github.com/mem0ai/mem0/tree/f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/embeddings/openai.py",
+            "sha256": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1",
+            "bytes": 3274,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/embeddings/openai.py",
+            "relative_path": "mem0/embeddings/openai.py",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/embeddings/openai.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/embeddings/openai.py.git-show.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/embeddings/openai.py.git-show.stderr",
+            "relative_path": "mem0/embeddings/openai.py.git-show.stderr",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/embeddings/openai.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/embeddings/openai.py.git-show.stdout",
+            "sha256": "bd8c0cfeaa1ac89511350d51c5042a3b01f90530e18259ed5b0c3e019595e1e1",
+            "bytes": 3274,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/embeddings/openai.py.git-show.stdout",
+            "relative_path": "mem0/embeddings/openai.py.git-show.stdout",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/embeddings/openai.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/llms/vllm.py",
+            "sha256": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+            "bytes": 3836,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/llms/vllm.py",
+            "relative_path": "mem0/llms/vllm.py",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/llms/vllm.py.git-show.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/llms/vllm.py.git-show.stderr",
+            "relative_path": "mem0/llms/vllm.py.git-show.stderr",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/llms/vllm.py.git-show.stdout",
+            "sha256": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+            "bytes": 3836,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/llms/vllm.py.git-show.stdout",
+            "relative_path": "mem0/llms/vllm.py.git-show.stdout",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/main.py",
+            "sha256": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+            "bytes": 168002,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/main.py",
+            "relative_path": "mem0/memory/main.py",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/main.py.git-show.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/main.py.git-show.stderr",
+            "relative_path": "mem0/memory/main.py.git-show.stderr",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/main.py.git-show.stdout",
+            "sha256": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+            "bytes": 168002,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/main.py.git-show.stdout",
+            "relative_path": "mem0/memory/main.py.git-show.stdout",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/storage.py",
+            "sha256": "5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd",
+            "bytes": 12886,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/storage.py",
+            "relative_path": "mem0/memory/storage.py",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/storage.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/storage.py.git-show.stderr",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "bytes": 0,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/storage.py.git-show.stderr",
+            "relative_path": "mem0/memory/storage.py.git-show.stderr",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/storage.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          },
+          {
+            "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/mem0/memory/storage.py.git-show.stdout",
+            "sha256": "5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd",
+            "bytes": 12886,
+            "original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/references/mem0-f808-installed/mem0/memory/storage.py.git-show.stdout",
+            "relative_path": "mem0/memory/storage.py.git-show.stdout",
+            "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/storage.py",
+            "source_recorded_utc": "2026-10-01T20:58:16Z"
+          }
+        ],
+        "readable_summary": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/summary.zh.html",
+          "sha256": "10b5ad9cefee50762d9d786da86e00fc262d167a9d4b90575c248c152861c23f",
+          "bytes": 4768
+        },
+        "scope": "Four actual read SDK modules and original git outputs; fixed Source UTC and new Root archival UTC; not a full project reproduction."
       }
     },
     {
@@ -4405,6 +4535,41 @@
           "bytes": 47011
         }
       ]
+    },
+    {
+      "cohort": "Common closed Host/read/cap engineering SDK reference only",
+      "methods_reflection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/common-boundary-reference/root-manifest.json",
+        "sha256": "bfe243ddf2a212aa73f752892375889942ea7242f01a205cd56c4fb4d56e8473",
+        "bytes": 13116
+      },
+      "retained_previous_originals": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/common-boundary-sdk-reference-first/v13-2-design-literature-catalog-before-e5fbd9ce923c524211dd74db72fa93c437fae00f5b806ca611e06bd5ed818935.json",
+          "sha256": "e5fbd9ce923c524211dd74db72fa93c437fae00f5b806ca611e06bd5ed818935",
+          "bytes": 279801
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/common-boundary-sdk-reference-first/catalog.local-before-e5fbd9ce923c524211dd74db72fa93c437fae00f5b806ca611e06bd5ed818935.json",
+          "sha256": "e5fbd9ce923c524211dd74db72fa93c437fae00f5b806ca611e06bd5ed818935",
+          "bytes": 279801
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/common-boundary-sdk-reference-first/index-before-8a96a8e549e2e0c9408dbe1287c6b13d0fa6801d9b8ff9f9b2ef0036862c6603.html",
+          "sha256": "8a96a8e549e2e0c9408dbe1287c6b13d0fa6801d9b8ff9f9b2ef0036862c6603",
+          "bytes": 30939
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/common-boundary-sdk-reference-first/V13_2_DESIGN_LITERATURE-before-210aa4258ab037a56f648c99302d6dc915db0f0e520d49c7075f73d6180584dd.md",
+          "sha256": "210aa4258ab037a56f648c99302d6dc915db0f0e520d49c7075f73d6180584dd",
+          "bytes": 47811
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-literature-audit/common-boundary-sdk-reference-first/current-archive-before-30333c8ef8edfd69ffe2cc20ec0e12ef2f6350c06a6f924cf54e82656439648d.json",
+          "sha256": "30333c8ef8edfd69ffe2cc20ec0e12ef2f6350c06a6f924cf54e82656439648d",
+          "bytes": 228419
+        }
+      ]
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -4419,5 +4584,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T21:48:53.171272+00:00"
+  "updated_at_utc": "2026-10-01T22:27:52.261036+00:00"
 }

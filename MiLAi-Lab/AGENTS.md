@@ -1,8 +1,10 @@
 # MiLAi Lab v13.2 active operating constraints
 
-The user requested a GitHub checkpoint, then explicitly resumed full subsequent experiments after publication.
-The checkpoint is published and remotely verified: draft PR https://github.com/minguselandy/MiLAi/pull/79.
-Goal status is active. See data/manifests/v13-2-publication-and-resume-20261001.json.
+The user paused experiments again on 2026-10-02 Asia/Shanghai and requested a summary report and GitHub checkpoint.
+Goal status is paused. Only existing-evidence collection, report authoring, archival verification and publication
+are authorized during this pause; do not start experiments, method development or new model HTTP until explicit resume.
+The existing remotely verified draft PR is https://github.com/minguselandy/MiLAi/pull/79.
+See data/manifests/v13-2-pause-summary-20261002.json for this pause and the retained earlier resume history.
 On failures, search relevant primary design methods, reflect on the mechanism and improve it.
 Preserve the original design direction, generic method behavior and generalization; no case-specific fixes.
 Save every paper/project actually used for design research with URL/date/version/hash and local readable resources;

@@ -1,6 +1,6 @@
 {
   "kind": "V13_2_FULL_PLAN_ACCEPTANCE",
-  "status": "ACTIVE",
+  "status": "PAUSED",
   "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
   "scope": "Full original v13.2 D0-D5; conditional branches keep their stated evidence gates.",
   "historical_requirements_path": "data/manifests/v13-1-requirements.json",
@@ -1131,5 +1131,17 @@
     "E0": "NOT_PASSED",
     "D4": "NOT_ADMITTED",
     "Product": "NO_GO"
+  },
+  "common_boundary_engineering_checkpoint": {
+    "manifest": "data/manifests/v13-2-common-boundary-engineering-acceptance.json",
+    "sha256": "38771ced16dd19e36a66b8200f296870fb750867674832503380f6fbbd099d4d",
+    "status": "FINITE_ENGINEERING_ACCEPTED_MODEL_EVALUATION_NOT_STARTED_PAUSED",
+    "research_gate_advanced": false
+  },
+  "latest_pause_20261002": {
+    "manifest": "data/manifests/v13-2-pause-summary-20261002.json",
+    "sha256": "ec18a31215da8ca2e2aca5f977ec1e4283d3ddad74d81def6e70b2d22473e123",
+    "status": "PAUSED",
+    "original_48_rows_unchanged": true
   }
 }

@@ -403,3 +403,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## R9 E2完整首尝试与通用方法反思（2026-10-02北京时间）
 
 [完整结果](V13_2_E2_R9_RESULTS.md)：15轨迹45公开消息全部原首尝试/逐条Root审查，15原ID核心修订且真实更正Source、结构scope/首次提议另限定；查询Reader开发13 scoped正确/1语言范围partial/1历史回答错误，后台8不必要commit仅问题Source（6额外修订/2重复或冗余卡）、1错误提议被拒pending、6 no_change。6个错误Host提议/语言保存失败/范围丢失和所有费用保留，没有重跑或改答案。148生成899383 known、63embedding24315，含15形成60678；新增Unknown0，原Unknown1/30387不变。完整actual HTTP投影/最终Host位置、15终态SDK只读重开347items/20卡/41版本核对，DB和ledger不变；账本后991a568c。资料4次R9复查保存原文/版本/UTC/hash/中文反思，19论文/21项目参考组/875文件/191链接0问题。普通语义失败没有被当成实际泄漏硬停，也没有被正确Reader遮盖；Root不是独立Judge。原48要求4 PASSED_SCOPED/27 PARTIAL/1 NOT_PASSED/16 NOT_VERIFIED及计划bytes保持，E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO/完整计划ACTIVE。后续共同能力Source工程另验收/冻结，不能宣称已修复R9来源问题。
+
+## 2026-10-02用户再次暂停：总结与检查点
+
+[本次总结](V13_2_PAUSE_STATUS_20261002.md)及[机器快照](../data/manifests/v13-2-pause-summary-20261002.json)：Goal PAUSED，实验不完整，后续只归档/报告/发布，需用户明确恢复才启动实验。R9完整45首尝试已发表fd6bf53；共同边界Source精确7路径已转入，Root39新+24旧/Primary36重复、8默认wire对、6Qwen压力包及静态/边界/离线包通过，17回执含2原非零保留，全部无真实模型HTTP，尚无新的四臂模型结果。895资料文件/193入口链接0问题，原计划/48行状态和E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持；原991a568c账本不变。

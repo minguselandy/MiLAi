@@ -858,7 +858,10 @@ def step(
 
                 model = make_model(settings, budget, trace, resource_root)
                 stack.callback(model.client.close)
-                recipe = d0._make_recipe(service, settings, model, budget, trace, stack)
+                comparison_recipe = (composition is not None
+                    and getattr(composition, "owns_recipe", lambda frozen: False)(frozen))
+                recipe = (None if comparison_recipe else
+                          d0._make_recipe(service, settings, model, budget, trace, stack))
                 if recipe is not None and composition is not None:
                     raise ValueError("V13_RECIPE_COMPARISON_HOOK_CONFLICT")
                 comparison = None
@@ -1000,6 +1003,9 @@ def step(
                     state = agent.get_state(config)
                     if comparison is not None:
                         comparison.recovered(state.values.get("messages", []))
+                        if getattr(comparison, "common_profiles", {}).get(
+                            "common_read_profile", "legacy") != "legacy":
+                            comparison.resume_context(config)
                 if phase == "start" or state.next:
                     agent.invoke(
                         None
@@ -1021,7 +1027,10 @@ def step(
                         final_state.values.get("messages", []) if final_state.values else [],
                         trace,
                     )
-                    maintenance = d0._maintain_final(
+                    maintenance = None if (comparison is not None
+                        and getattr(comparison, "common_profiles", {}).get(
+                            "common_formation_profile", "legacy") != "legacy"
+                    ) else d0._maintain_final(
                         recipe,
                         model,
                         service,
@@ -1035,7 +1044,16 @@ def step(
                     if maintenance is not None:
                         output["semantic_maintenance"] = maintenance
                 if comparison is not None:
-                    comparison.completed()
+                    if getattr(comparison, "common_profiles", {}).get(
+                        "common_formation_profile", "legacy") != "legacy":
+                        final_state = agent.get_state(config)
+                        closed_receipt = comparison.completed(
+                            final_state.values.get("messages", []) if final_state.values else [],
+                            config)
+                        if closed_receipt is not None:
+                            output["common_closed_formation"] = closed_receipt
+                    else:
+                        comparison.completed()
                 output["status"] = "completed"
                 if window != "none":
                     output["window_status"] = "NOT_REACHED"

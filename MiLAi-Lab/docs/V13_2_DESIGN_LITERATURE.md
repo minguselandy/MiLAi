@@ -256,3 +256,7 @@ e2-31模型提议不存在的来源ID，被守卫拒绝后自行读本次来源�
 ## R9 旧历史在库却未消费的复查
 
 e2-42只读当前r2，把原周二上午误述成周四下午；完整SDK历史r1仍在，实际HTTP只有当前正文与历史索引、没有旧r1正文。复查 [Lost in the Middle作者摘要](https://arxiv.org/abs/2307.03172)（本次入口v3）和 [Hindsight v1作者摘要](https://arxiv.org/abs/2512.12818v1)，先区分保留、检索、实际送达与消费，不能先归因长上下文位置或Attention不足。通用改进候选继续一次有界公共交付、真实版本/范围/遗漏、计费追加读；不按题型路由、自动再读、强制答案或最终改写。旧完整论文/各原URL版本hash、本次摘要浏览及中文反思保存到本地索引，没有新论文项目或模型HTTP；R9冻结不改，收益未验证。
+
+## 共同闭合边界的固定SDK参考补充
+
+[Mem0固定f808官方实现](https://github.com/mem0ai/mem0/tree/f8082a7345dadd9e042ebbc40b57b1498c8f6d63)的四个实际阅读模块、原git输出/UTC/hash及中文说明加入已有项目组。Root核对安装字节和固定git对象；真实公共构造、snapshot-before-close、close及独立进程重开为Mock/SDK机械证据，infer=True空结果、原生子集/ID/history不证明语义质量、完整历史或M CAS。共同有界读取、闭合final形成、共享额度沿原方向，Source/Root失败原件保留，没有新论文项目、模型HTTP、SDK升级或任务内容阅读。
