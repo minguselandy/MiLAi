@@ -387,3 +387,7 @@ Root固定核验74条已完成Source命令/12非零/6227执行snapshot，索引4
 ## R8自由Host完整首尝试与限定结论
 
 [完整结果](V13_2_E1_R8_FREE_RESULTS.md)：8轨迹/16消息均首尝试结束并逐条Root审查，1条无用最终答复/4条原失败历史未恢复、2条字面保存范围/Host确认局限及重复Host拒绝保留。SDK8库154items/4语义卡/16观察/48Source与原终态核对、DB hash不变；控制前缀361原件保持。自由段+42生成/289441 known、8embedding/5707，原账本SHA8547f1ef；R8合计50生成/350136、40embedding/19487，R0–R8累计1304生成/5796843、527embedding/223142，历史unknown1/30387不变。资料19论文/21项目参考组/845文件/181链接核验通过。所有差异/元数据截断/未读历史均限定，不上升因果、泛化、独立评分或Product结论；原48行/完整计划未完成状态保持。继续通用opt-in合同工程与E2/E0及条件要求，不修改本R8旧freeze/失败。
+
+## E2三接口真实SDK预检与基线局限
+
+[离线预检](V13_2_E2_ROOT_ADMISSIBILITY.md)：39项检查通过，三接口实际SQLite控制中旧query填latest后第二旧读提案commit到3，ID/revision和read handle均拦截revision_conflict、终版2；回链由中文Source找到英文卡，基线0候选。仅合成机械证据/SDK重开、0模型HTTP。Root不生效配置键和DTO字段层级两次错误原件保留、恢复另存，原失败库不改。新Source工程未应用、模型cohort未启动，原账本8547f1ef及48行/完整计划ACTIVE/E0 NOT_PASSED/D4 NOT_ADMITTED/Product NO_GO保持。

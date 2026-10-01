@@ -1086,5 +1086,13 @@
     "E0": "NOT_PASSED",
     "D4": "NOT_ADMITTED",
     "Product": "NO_GO"
+  },
+  "e2_root_offline_admissibility": {
+    "manifest": "data/manifests/v13-2-e2-root-admissibility.json",
+    "sha256": "c32420384999a802b21f46813d9d1b930aab9dc609d22417b4e8efddcd04aa92",
+    "status": "MECHANICAL_BASELINE_INTERFACE_LIMIT_CONFIRMED_NOT_MODEL_ADMITTED",
+    "actual_model_http": 0,
+    "original_baseline_configs_and_48_rows_unchanged": true,
+    "model_or_independent_quality_gate_advanced": false
   }
 }
