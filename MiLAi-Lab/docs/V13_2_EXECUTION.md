@@ -268,3 +268,7 @@ Root事前R6 parent在隔离stdlib假CLI/局部账本上九项控制通过，覆
 [实现验收](../data/manifests/v13-2-direct-support-acceptance.json)接受默认关闭direct_support_v1；Source33a72b3远端核对、Root2eeb7b7转入211源码8c466，实际D0入口和P5共享验证/传参。Root逐hash核对1775索引文件/113原subprocess/前后版本并复制1777原件，11非零回执/非subprocess限制和最初D0范围遗漏各自保存。38新profile＋32默认主树检查、六源码ruff/mypy和双边界通过，314配置及原连续账本SHA26f46d5f未变，0真实generation/embedding。
 
 12压力包全部真实material≤2048/max6且选择ID/次序相等，元数据造成的history/current/Source交付减少与空胶囊仍明确。Root独立解码完整有序叶/父版身份，最终新审计器对95原R5 wire原字段一致；13解码控制、11合成metadata控制、九parent控制仅为工程证据。Root空胶囊重复计数/发布SyntaxError原失败及未执行Python≥3.12草稿的静态纠正保持。实际R6配置/冻结/HTTP/SDK/任务与支持来源评分仍未执行，D4不准入、Product NO_GO，完整计划active。
+
+## R6新运行事前冻结
+
+[R6冻结](V13_2_E0_R6_FREEZE.md)完成原24/48与原rubric的新空root，211源码8c466、原3.11.13/SDK、既有两模型route及原连续账本26f46d5f。只新增direct_support_v1联合profile与实验说明，原R5 Host/writer提示、2048/max6、bank_prefix和Host12/writer1/repair0保持，admission仍legacy。实际prepare禁socket0HTTP，前后源码/测试/315配置相等；新wire/解码/SDK/后检在任何模型调用前各自复制固定。此前缺acceptance拒绝/静态错误/失败各保留；冻结提交核对后按完整24首尝试串行执行，尚无R6质量结果。
