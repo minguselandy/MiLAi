@@ -300,3 +300,15 @@ Root已单独准备后续R7 parent/SDK/wire/postcheck草稿：11项冻结/no-rep
 [验收记录](V13_2_SCHEMA_COMMUNICATION_ACCEPTANCE.md)保留1844索引原件/143回执/15非零并复制1853文件。Source d6bb0a2精确转入410e02f，212/36338eb5；Root最终86受影响测试、ruff/mypy与双boundary通过。8默认/原错误字节对照、6压力原包及Qwen全请求成本、6主树实际Mock Host/writer冻结呈现对应均核验；原阶段和正文交付退化保留。原R6 150wire/48行与原失败完整保持，最终9合成wire guards通过。0真实新HTTP，连续账本73c437ac不变；所有48验收状态/R6失败/完整plan ACTIVE/Product NO_GO保持。允许准备R7，实际配置/root/冻结/模型样本尚无。
 
 R7已完成默认关闭机制验收后的新配置/真实路由GET-only检查及无socket prepare：212/36338eb5，原3.11.13/SDK/Host7860与embed7861/原rubric/连续ledger73c437ac，原24轨迹48消息。冻结profile=shape_feedback_v1+direct_support_v1，原schemaSHA与新catalog/guide/反馈policy另存；旧base指令/ordinary2048/max6/Host12/output4096/temp0/writer1/repair0/legacy admission保持。SDK/wire/decoder/postcheck原driver字节独立冻结，普通audit失败仍继续完整collector。此阶段0gen/embed，未开始实际模型样本；先核对Github冻结提交再Root串行首次执行。48验收状态/历史R6/完整plan ACTIVE/Product NO_GO不变。
+
+## R7实际完整结果、硬门槛与资料归档
+
+[R7结果](V13_2_E0_R7_RESULTS.md)在GitHub预运行冻结b6e3301核对后首次串行执行原24/48：22命令0、2命令1，46消息完成/2中断/0未运行。Root原全部断言/范围/授权审查21PASS/3FAIL，22门槛失败，另发现1虚假持久语义卡保存答复。两个旧update原ID/更正叶/历史/当前旧值限定gate本轮通过，cohort来源门槛仍失败：update-4旧来源支持新值、scope-1查询问题支持新revision，共2轨迹/2提交版本。R0–R6历史失败不升级。
+
+两中断使用的是实际explicit search返回且实际送入HTTP的完整游标；冻结分页解析仅取ordinary packet，错误比较不同menu，Root以原请求/参数/hash及静态路由独立佐证，没有重放。一个初次Host final称结果已保存但卡数0，闭合writer的mixed role/user_statement被source_role_mismatch拒绝；原Source与确定性观察存在不替代语义保存承诺。此硬门槛在24均terminal后的完整离线评审才发现，诚实记录检测阶段；之后没有启动新实际模型cohort，先做通用机制再评估。scope-2混淆usual详细/特定demo简短；restart-3/4唯一writer截断pending但实际原卡和正确reader保持。
+
+冻结SDK/wire/collector三个原后检均0，Source/原账本不变。只读24bank/471SDK items均匹配最后receipt且DB hash不变；151 Host/171通信逐条mechanical wire PASS，ordinary最大2048/max6，不能把两中断当最终任务成功。维护26Host跳过/14no_change/2committed/4pending，另2未到维护。4对象各授权业务一次，重复完成label提案0，实际额外副作用0，owner泄漏未观察；一虚假保存独立失败。
+
+R7 +171generation/1,222,370known（Host151/1,085,579，writer20/136,791）、52embedding/20,202，新unknown0，原trace/连续ledger差额精确匹配。累计9200gen/25,757,358known/25,787,745charged/历史unknown1/保守30,387，embed920,843/unknown0，末SHA374fcef4。R0–R7累计+1254generation/5,446,707known、487embedding/203,655，未声称成本下降。
+
+失败后保存6篇新primary摘要/固定PDF与2组官方project方法资料，累计17论文/12项目参考、711唯一文件/112本地链接核验PASS。GitHub未认证API的403原资源失败和一次空目录resume失败都保存；18论文原件未重复下载，独立git refs固定LangGraph1.1.10/AIP158，仅四次新方法资源GET，不升级/执行第三方。LangGraph标签源码与安装prebuilt1.0.13字节不同，两者独立留存，不宣称完全相同实现。方法参考与未采用reviewer/任务rubric/SQL detector/工具说明学习候选区分。下一通用候选先修正实际结果集快照身份及有限真实读取错误反馈，保留owner/turn/Source/版本/12/2048/6/writer1/repair0，不加语义verifier、案例分支或自动重试。所有48验收状态保持，D4未准入、完整原plan ACTIVE/Product NO_GO。

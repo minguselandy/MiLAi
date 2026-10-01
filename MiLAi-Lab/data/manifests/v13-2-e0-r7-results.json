@@ -1,0 +1,2706 @@
+{
+  "kind": "V13_2_DEVELOPMENT_EVIDENCE_AUDIT",
+  "runtime_freeze_sha256": "1618e16a398f517d8777c3faaa3716e3e8bab67e86150ac4ef803af3a06ed7b6",
+  "execution_source_sha256": {
+    "src/milai_lab/__init__.py": "18bdacc496c62ab514ceaeeb61fade0f9f6973e54526aa2a96eb152c5b8c28ff",
+    "src/milai_lab/analysis/__init__.py": "4a2776360023e0eecb6a8ad3fde5334db99dc1914fd91b9f414466afd6853fb0",
+    "src/milai_lab/analysis/obligation_trace.py": "03b90d2014c49133ab6872a00417addba47c6b670e83e84fe97ba626f46eab14",
+    "src/milai_lab/analysis/opportunity_capture.py": "20f7b19dbc8eae275eac1f721a0173c8ce50bc75373f9d3e528b51d081950ea4",
+    "src/milai_lab/analysis/opportunity_ledger.py": "ad76a99696b415808cb875961c83d1af6d44ff9fb24280bf634048d451c6a37d",
+    "src/milai_lab/analysis/owner_exports.py": "ac5de073c12c5b27c1376225ee6d903c42f1771d71893b0daf666fece541b376",
+    "src/milai_lab/analysis/revision_eligibility.py": "35a74a9aea8a29d7e27dd35f889e1d4765ded3f06695d808954032f1ba4cd20e",
+    "src/milai_lab/analysis/trace_accounting.py": "1add411a5a84d994dd41c25efa253b559c1aeb4b06d591848ed5b87f9176cf72",
+    "src/milai_lab/analysis/trace_join.py": "5b3e5e54ce65b77b79e357049339a3883686ff95542947c8fdf7922c51510084",
+    "src/milai_lab/application/__init__.py": "a737f7b48047d3dfdcbe31ef8eece66db65bc6452c5b57899693f9df37915343",
+    "src/milai_lab/application/document_publication.py": "29f39d2790bbe506299fe56d7049577acd0aa3a11cf063ce0ac21347c6e9fd15",
+    "src/milai_lab/application/journal.py": "6b5ab1b478bf00158829e2a22898a04a77928f5812690f6ab0e6dd6c5485dad7",
+    "src/milai_lab/application/recovery.py": "799874e391766d7e778f253fb6062120afad05c59667f78830c69dc464bb074d",
+    "src/milai_lab/application/refs.py": "dcd67392cff163761049473b5556f65111b08b1484a1194865b0549862007e2e",
+    "src/milai_lab/application/tools.py": "3deef5847552e4a81c2ebaf383bd35124984110c66ebe71c6a0b9836a165bcfd",
+    "src/milai_lab/application/world.py": "ebbf128e85044f296c5be46ddee92ab3bca3efc36cb31e976d1073f89079ba12",
+    "src/milai_lab/baselines/__init__.py": "e18394ca5c345d1f959d33c2b3436c2681966433351d5e88a2b2900950b18a5e",
+    "src/milai_lab/baselines/benchmark_memories.py": "749a86c5b0b221a63767aa5d3f68665c16c5d2a7fa50f3f611dc1b1447a01fe0",
+    "src/milai_lab/baselines/langmem_agent.py": "917d3894f0dfec86300a3ab5fe0fd535b52e4bd32d6f51dfb16acdafd03bd42e",
+    "src/milai_lab/baselines/langmem_b1_identity.py": "4515c07ca6eadfa4b924dbc641882409b114e52deb1dd3873a5897beb1f61df1",
+    "src/milai_lab/baselines/langmem_benchmark.py": "e37ac9239d5dc2523cf984dbf0fa1ead2dbd9142be4b0b5e10d30ea4fc158429",
+    "src/milai_lab/baselines/langmem_identity.py": "c887491eddd552045ee45e8509e47726b46e29e3db722f0e514d4e6294a2d005",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "0fea97120ffd1b9a079584aab728c05ed88d0bcb28119355e8629b68f1e32555",
+    "src/milai_lab/baselines/langmem_mcp.py": "0872970c2ce36b3cc86d83f1e16e39844a9693b9fecdc0a5e2be8aad5e516ddf",
+    "src/milai_lab/baselines/langmem_revision_store.py": "fda7d2bb518cb43e4a58506b0f09280ecee8fe09df4898cb8b26c9702f317cb0",
+    "src/milai_lab/baselines/langmem_strict_tools.py": "2c354bedb78ef2d15fec0a5b5b8eb1492cd226dffab2cf25d0430a4e7730cab6",
+    "src/milai_lab/baselines/v13_1_controls.py": "de6c5105ef26dfe37e6bb9f45c90eb1e8e8391516404a7382300b8fdd22c7f3e",
+    "src/milai_lab/boundary.py": "bd356238373ae9c9be2b5459d9d3115fc95e25cd9f1820e26e668f8d3163a480",
+    "src/milai_lab/context_preflight.py": "600ead271809a72e7f142c864ff124441559ea794d674e21e226d5b017d49763",
+    "src/milai_lab/contracts/__init__.py": "80490a09e4d07877bf4c59f62ead7d657e2705c684ede40217aa8a6968cddd89",
+    "src/milai_lab/contracts/arms.py": "1417d119692ef9a6092982afc50aab6faf3dec3d8a8f272c24a457b0f00e3b7c",
+    "src/milai_lab/contracts/benchmark.py": "306c0f9212c43e440d68b837e409e4f702dde5dda28229eaed4de79273aad5d5",
+    "src/milai_lab/contracts/memory.py": "68985a64e8588e41202cae2d108ca30ed6f9fdebb98baa220aa0bae0ab7be9e7",
+    "src/milai_lab/contracts/operations.py": "45ecb4c8ffdd66cdbc288503a096490cb756dd660c28ee0cf2ccbc020a1c533c",
+    "src/milai_lab/contracts/protocol.py": "2400020757f754b86e2b53ed8d895d9f984495dc5c885101cdf51dd06206da06",
+    "src/milai_lab/contracts/records.py": "ff5367e1d9715c2cc86eeb608ffa73ad3ce8f4548312992b46cd0a047ee98fbd",
+    "src/milai_lab/contracts/request.py": "1f1c9838b86677a7be46498545560175df4aee66cdf4a00e1bd65bd2f94a7fce",
+    "src/milai_lab/contracts/scope.py": "68cc146e1a6487c17c4875b95f029486a3baf442f8694c786786551037bf2086",
+    "src/milai_lab/contracts/tool_schema_communication.py": "fd9038fb929d8e01b6cf165027a552ce759fcd0cd3261952e85fa1fe6b1f647b",
+    "src/milai_lab/datasets/__init__.py": "e5993b89c3642ad387531cf60ab045b21e201a5b41890cfce634913fbc6a63fb",
+    "src/milai_lab/datasets/contextual.py": "2d856518eb0ac3b5e0f5da03833563bcc4155663140f8c4a2f11519e465127bf",
+    "src/milai_lab/datasets/memsyco.py": "e6381c336625e86cb74237c59173cfefe9d90338d8dcf75b62f89495baa52326",
+    "src/milai_lab/datasets/merit.py": "827cca3c0ee30e506330d2bddd62c91335f5b4f95d16d7822f58d9e6e58c08e2",
+    "src/milai_lab/datasets/registry.py": "6fca725baa40322487763315765a17080dc94adaf1a055f2dc1cd7a0b6ea6b68",
+    "src/milai_lab/datasets/stale.py": "132a00b9adaa77dcc9974e87041460fa9462a55a97a6f4f6ddd6cd580109d447",
+    "src/milai_lab/harness/__init__.py": "c59aa43bb713ffbfa96002a0b03ca24cae6aeba621f1fe32bb8df59fa61d3717",
+    "src/milai_lab/harness/artifact_io.py": "8f580877172d7ac876bedf0821dd43ed8c5c96c414ad0ef3e72511b115cda903",
+    "src/milai_lab/harness/artifacts.py": "f06be68b2e21ed54239c146584a1d0bd06a528d4b625202db9d1be3a079536c1",
+    "src/milai_lab/harness/benchmark_execution.py": "b645ad4e431c060cba9a6626e251d081443471c85a51d5530e306cd04208a229",
+    "src/milai_lab/harness/contextual_artifacts.py": "b8c864b483656eb29fb3967a01bd1d1c18db8e47f1955030f7fb2e6a887ad22d",
+    "src/milai_lab/harness/lease.py": "8e73b8654bb57bc5639b984e38376e628766c19b5016c0fb7261929c3da8842b",
+    "src/milai_lab/harness/source_identity.py": "2ede82febe4c96d7614c5315c7a83cc6231d527087d233c9a9c9f46966576cef",
+    "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+    "src/milai_lab/integrations/__init__.py": "37d70aa814d51bea77c67a6085325fa92f39009dded2e9060c3af04a4cfd03e8",
+    "src/milai_lab/integrations/memory/__init__.py": "71a93c9a41aa8f04aab0586783d1763f1232d37566e4e433a9234d5bb30beb77",
+    "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a",
+    "src/milai_lab/integrations/memory/simplemem.py": "6f3ed72d5881042e19b0c98320b71d7e53b2a240e6925eaab4bb840b4ef40bd9",
+    "src/milai_lab/local_usability_gate.py": "599e9c37506f617001cb43d243b8f50d8f149059f0a7c09f186d98dc1d86ce6d",
+    "src/milai_lab/longmemeval_gate.py": "3e9235bf8696d36cc4ecd841f631f6553fcf2f6f6748b9b894c15e291b27a005",
+    "src/milai_lab/memory/__init__.py": "8d5db4c158d52d91bc0821175643dbe23b289fa642a1c7a7e9337bfbd7ccac71",
+    "src/milai_lab/memory/embeddings.py": "21592ca157bd2f96f904677ba6299f0a9b441bc9ca46cd8609b6a9bb89ffb28b",
+    "src/milai_lab/memory/mcp.py": "9ac097df7eb6d0583d3f3fedb4f93febe58b157d62559075f80da053536db9a8",
+    "src/milai_lab/memory/observation.py": "d08ba2305f847311b105cecf4220981babd8ae859c87e817e55c9c0818aba9b5",
+    "src/milai_lab/memory/presentation.py": "ddfdaf71495d99cc6a4eec4f3f77ebd5204a1137ac2d700cf97048ffc8b136f3",
+    "src/milai_lab/memory/read_tools.py": "0337a930b25db5055a0089b13a473dbd7396dcf5bbb1b215539af2ee709e0efc",
+    "src/milai_lab/memory/revision_store.py": "7cffb1a4d186bfdc6c3bfe2f9b865110d9fc93a357b941a90b693d684a2d2aa4",
+    "src/milai_lab/memory/service.py": "4cacb118936ab1b2df1ccd5bf167757e9a92a65fe27e5e4188cd122c6ee9b300",
+    "src/milai_lab/memory/service_tools.py": "168a344b18f93372438847459fb74d2cbd252104707e60359090ec3c3d00fbed",
+    "src/milai_lab/memory/strict_tools.py": "46e7c740e2158a607e16a8a7a8970472269c465f5c38151354175ea3dd040cc5",
+    "src/milai_lab/memory/support_display.py": "292bae3322ed07d7c82af0c57c9652463af8fae20b74115974148084d89913cb",
+    "src/milai_lab/methods/__init__.py": "59b20a7a91ee381dda1685ac330a3af7d10aa2c84dbe69cc0ef8b2f767044a81",
+    "src/milai_lab/methods/acquisition_use.py": "e401ca020f59aa0e53497e9c3a6a5a57842e1134b1d4893e11ebf35bd8a083ce",
+    "src/milai_lab/methods/adaptive_memory.py": "dd6d77e377c80811a1e4aae208813c9526d041d4f5b81e108d58886ab2fb581e",
+    "src/milai_lab/methods/attention_expansion.py": "9baac0b9391eb669cf3a2713eec79eb6e16d3e2f844d0d4909b2346335204b30",
+    "src/milai_lab/methods/bundle_adoption_proxy.py": "f716b5376b214019ebf3cb79436d2ffde42e8e3c9294e7d372a70f47e3084f88",
+    "src/milai_lab/methods/compact_material.py": "c88554907bd76ca8d9c1055e0464dcdb6756da665e9fb3b3433d20cbbad249a8",
+    "src/milai_lab/methods/contextual_memory/__init__.py": "2cead58efc51f4927abffb680acfa3ab94205136a1aa39e593a97764c3eaa58d",
+    "src/milai_lab/methods/contextual_memory/decision_basis.py": "2931e479c41593bd30ff4a05aebb74bb60ef7dc38114f96f14336dee5ed0d2bf",
+    "src/milai_lab/methods/contextual_memory/deletion.py": "9e9f6b6176a0c0187c6d8d8470d53db2d6cab369640402914de87089f0b441d1",
+    "src/milai_lab/methods/contextual_memory/material_view.py": "5ab7d170fbdbc98f005ccf01c5abacdcd288a4468da42e25f35ef6a217dd0b65",
+    "src/milai_lab/methods/contextual_memory/materials.py": "5311cdd7973130680a1dfb0cd4f98790e133df29be547f26b06d75b47dd09fa7",
+    "src/milai_lab/methods/contextual_memory/models.py": "07b82268552fd2aa2c34576a02e1184fd7c2d58d93d67d81efbf5aa1d3d2286d",
+    "src/milai_lab/methods/contextual_memory/operations.py": "6daf5b369afec36bab9a9868f06f6cfb2788d8ca4c42892525c08fd67629bced",
+    "src/milai_lab/methods/contextual_memory/query_context.py": "f3db98be98f232b9eb7682740821c9ddae771104af9640b4fd7f8d6bc65191a7",
+    "src/milai_lab/methods/contextual_memory/retrieval.py": "ce59cb2e50e414feba45ef374ef7344fcf8f974ab292e3458f7decd6f6c15bb4",
+    "src/milai_lab/methods/contextual_memory/revision.py": "362b0d3c4dc99a40b9e6e14c2d5cfa434881d324277f69ca52719e6ffd6243d6",
+    "src/milai_lab/methods/contextual_memory/store.py": "df4a67b086b6bd48599bcd2e98c2a06d86188560cc71871e9ff6ced38abee670",
+    "src/milai_lab/methods/contextual_memory/write_contract.py": "5ce2f4be7abdde608c93ed0470b8820dccffa4d6544cd209883646011ade9beb",
+    "src/milai_lab/methods/contextual_user_memory.py": "15dbf9020f57bbe21bacfddb2ec232fa4634677939babc5fa543f57d1c9ba17d",
+    "src/milai_lab/methods/controlled_workspace.py": "4d62f79faa15f7b442862bc7702cb9f2532e49c6051782544d973f96d3ea95a3",
+    "src/milai_lab/methods/correctable_control.py": "0fce55ae4a7bd8bfaa1c53bed5931c4208115c839700ed2ef3b855439b55c8da",
+    "src/milai_lab/methods/evidence_maintenance.py": "8db2a928ba35830fcc427fb5a6ce34a279ef2d1b68c178850e8cd6718ffd57c0",
+    "src/milai_lab/methods/evidence_utility_session.py": "9b63f2f70b46655e8d74b930b1905ffb3fd0d8d15c9d1eb2755951dd50680361",
+    "src/milai_lab/methods/experience_revision.py": "6133abd13e57e04db30bec622613841c45a4ea5bc81f1748ccf3d57aaea6e1a4",
+    "src/milai_lab/methods/experience_utility.py": "98cc37c277c7922a2535886e9d7cade77fdd3faf70c2b722f51a6896e7da7676",
+    "src/milai_lab/methods/external_diagnostic.py": "574a167967b395cc8f50e03b682d31ef461963eef4efc2b0a99db486f32c9bec",
+    "src/milai_lab/methods/finite_research_budget.py": "ac12ef1dc7fff48331573e27316358c5bef2cc279003706dfe43aac4f63ef55c",
+    "src/milai_lab/methods/freshness_projection/__init__.py": "edf49dc7f013532a7d43590e2081056a60dcb3ba5557ae9866d748fe15ccbd83",
+    "src/milai_lab/methods/freshness_projection/controller.py": "4857d121fe51e93c30d261c196d2ddd77592229561e6a35392b9489894be4f73",
+    "src/milai_lab/methods/freshness_projection/identity.py": "aa5055f12e1f572d20d6f513f3fb497ca1d8e2906e013683c26bc7987e007b24",
+    "src/milai_lab/methods/freshness_projection/lineage.py": "82e8c7d84174157726596dc8f555b80aaaec68dd7952dcd5c2e233f9bbc86e7f",
+    "src/milai_lab/methods/freshness_projection/projection.py": "1128c46ae53e43c41f2438a8e75d13da4e4208b9ad580b7dd9786a70a23cf613",
+    "src/milai_lab/methods/grounded_memory.py": "5d984e9dfb11eb033397c50c925a4beb9513005bac80553d5903022a667a2feb",
+    "src/milai_lab/methods/hiagent.py": "4f65c1bb908c1811088738bdcdb6d21e2a9b8907d296b1e87c92e6705a16f22e",
+    "src/milai_lab/methods/horizon_diagnostic.py": "7f2249148c15bebbe06b96115ea1906951575b1bb0aee136f73f2883ef064a98",
+    "src/milai_lab/methods/host_acquisition.py": "68b141735eeb9090a3d5c6473da8c906d2fa1e722f813a20e1d95107c182169e",
+    "src/milai_lab/methods/langmem_recipe.py": "08a4329e95fcc49511d525b3f25ff614397d94ec6ebbf934a905ef08fd6778f0",
+    "src/milai_lab/methods/local_state_attention/__init__.py": "f4eae7f0c83a0985a1f29771cb0e75037733a336d64e12d84b61018b7b30655a",
+    "src/milai_lab/methods/local_state_attention/bank.py": "df459a2a0d63a0e82f0ee5afada5f233050e775f83cd2c85dfefc487534a6454",
+    "src/milai_lab/methods/local_state_attention/controller.py": "c65edefcdbb97207e63115bfb23076af98d1d70222cd34f6ab07218063abc8ee",
+    "src/milai_lab/methods/local_state_attention/history.py": "019b0ff159a6c8811fd654261d1756c9b968baff7269cf58d119dbd9a804151f",
+    "src/milai_lab/methods/local_state_attention/integration.py": "b4c054ca575b734cfc28eda4323ca5ea2397b768cc5c216672a7c206b9e5c4e9",
+    "src/milai_lab/methods/local_state_attention/protocol.py": "402cf80653f3185b3832896dfa19686bddec8bbac3a1f46ce9bf2a76533e38da",
+    "src/milai_lab/methods/local_state_attention/read_probe.py": "b894c67e70c4874535b54b2567b3027a8de693f0ebf8bb9c8459a7af4bc5df65",
+    "src/milai_lab/methods/local_state_attention/summary.py": "cbbd1be804e70e73f93ff60847937cb43871e88bcd237ad2f1c15179bc10a08a",
+    "src/milai_lab/methods/local_state_attention/writers.py": "e0297da8486ff09e0df7690c4ce43b18f9f146bcaac388ab3b8b80c0d5450cad",
+    "src/milai_lab/methods/memory_boundaries.py": "f590a682147266edb1ae22c67e2f4d90aff71666b5415912bc56dc3df05ff6a5",
+    "src/milai_lab/methods/memory_lifecycle.py": "f71841e57ef2e6abeac02e6ae1787f19fed8187dc3e2ed9e322ba7e412677316",
+    "src/milai_lab/methods/memory_result.py": "8fa7ac561f6b23d8cc4afb084099b7eb92e4ddf423c28e8e85d6bff913fb7e6e",
+    "src/milai_lab/methods/memrl_port.py": "36998fa79ba5e797061c9967af23a85f88444c38dfade8d68ead1ca9cd0fecaa",
+    "src/milai_lab/methods/memrl_text.py": "0f7a754943daacee6fa6350f4ff2c511be80d14819807ca5a96fb55e67bedfca",
+    "src/milai_lab/methods/milai_m1/__init__.py": "8d9a1d208d0df6404166ca73436b42857fd6194707aed0ede0f6e6b86f68a624",
+    "src/milai_lab/methods/milai_m1/controller.py": "c0c27255b0833e39a7f6608f6784c69b569ba0b55df7c213f6515514419eb33f",
+    "src/milai_lab/methods/milai_m1/decision_basis.py": "07e28bc44c57cb7fc27cc6969bf16dce500449cb1cdef195143297ac3b4d38e7",
+    "src/milai_lab/methods/milai_m1/evidence_view.py": "eceeed43e4ee48a46e432ab339ad7f24c74218c184d7050241b41d4124d506d6",
+    "src/milai_lab/methods/milai_m1/identity.py": "9aa3f2226494a3b141bb3ce51cc7fd74aa292f1d635eccb5fc791643d235cf08",
+    "src/milai_lab/methods/milai_m1/recheck.py": "b88f2f9f8562eb185d65d3a2d4c536864a420ec21796b16ecbcedeb4a041f12d",
+    "src/milai_lab/methods/milai_m1/state_store.py": "d6fe4b403a893e4eac5572d721b79db69cc5c5e50e62c99e6acf5902676e87d4",
+    "src/milai_lab/methods/observational_capacity.py": "5185d6c4fe92c7986ac8651c5b67c0ec3415ad4f1bbc39a5c59831397d220444",
+    "src/milai_lab/methods/observational_memory.py": "bfffc745618715fdfba2f2dbc2bc91e9bcb4607bd63920693594b281993c081e",
+    "src/milai_lab/methods/on_demand_reconstruction/__init__.py": "98f05efd3b1250393d9fc2b276476884bfeb6b92eb1334c68e50a14e6ef669b8",
+    "src/milai_lab/methods/on_demand_reconstruction/controller.py": "6edce58edafe13f4147cb1aa9e0011ac30e2b1ab481a80a7e5f53fcf4d721f74",
+    "src/milai_lab/methods/on_demand_reconstruction/evidence_view.py": "12bb36c296b8c7c56cb4714cf07c60e1ceadd3d39bcdff13ecdf07e766b4c9d4",
+    "src/milai_lab/methods/on_demand_reconstruction/freshness.py": "db81b5bdf8438d20f08c2a36d1775bfca3f56cc43d2de3aaf7f1ac2179cf24cb",
+    "src/milai_lab/methods/on_demand_reconstruction/identity.py": "4161c26b899eb6a475b633b17f9ac602c1e83d3f8692feea1a2b854259b7495e",
+    "src/milai_lab/methods/on_demand_reconstruction/metrics.py": "64b82a7d98bd8e9721a142c3df866ea96eb69fd5b32c2c2edaa197e401d7518e",
+    "src/milai_lab/methods/on_demand_reconstruction/schema.py": "323032b7cd80d25bee501f0e2174aa070be9d0747ed5aacc171563c27e8e4c4c",
+    "src/milai_lab/methods/prospective_admission.py": "3b65d95f8b4f3a4de4b69cacc7f96d8215a8b4ab10d50da40badca8685f2a457",
+    "src/milai_lab/methods/reasoning_bank.py": "bd3fd7b5ad6cd660194a9b77f57d2a09d5d8c708a2ea9c578db1ca1af4999c17",
+    "src/milai_lab/methods/request_context.py": "290d9c009cecd665b791846a5890892544934ad5a70d08112edb4a82bc032c0b",
+    "src/milai_lab/methods/state_attention.py": "642b8eab8fbf4b34d48187c99b5d31960d32f5dbc98b7a0912073199382f4ebd",
+    "src/milai_lab/methods/state_control.py": "5a1c5e3b2e33e31798c00d2bbeb880d04956b42fbae5fae996459006b0161bc6",
+    "src/milai_lab/methods/state_focus.py": "bcdb8056944f7989cfed62361660ceb3be7a5a11db2ad8d7243fdacdb005b061",
+    "src/milai_lab/methods/workspace_control.py": "8f366c28c766f2f57e6b7ef1b6d5b09a2665b0a4a8c6bd853b224011bc81270e",
+    "src/milai_lab/methods/workspace_policy.py": "654c5e34d2ac0bc0a63ad1d6dc3d460c86193012a1ffab96635c9f08cfa87807",
+    "src/milai_lab/product02_decision.py": "46ce8a0e0dabde06689d7aeb8bec92aa555d062f76602b77f95c231a8236bc94",
+    "src/milai_lab/product03_opportunity.py": "f7780eb20235c4504541e6b1260329d5b0e249af3f9ff208af61c832a673c290",
+    "src/milai_lab/product10.py": "8a702ee615ab60512ebd905e2d57436b9c17b685ea805f63ccc3d9770aefd0e6",
+    "src/milai_lab/product11.py": "506135cc7fecdea5a1bd0c59787d81d9ed715ac2eaee3de18ab43f7f308ebb41",
+    "src/milai_lab/product11_human.py": "cc8d64b826489968b87106251cffd9a5d7d5801f79cdfff3bf0b18fbd292130b",
+    "src/milai_lab/product11_subagent.py": "b95e2e7a2ab99a29e99c5748d83924ee22a2f4d46c2366f8032093e50b815331",
+    "src/milai_lab/product_adapter/__init__.py": "70fc871cc98772cb7f07196c01ee48228d06492d192169e4226ca01f66d015b0",
+    "src/milai_lab/product_adapter/manifest.py": "cf9da2b3a06e311c047ec4abe1eecc11b2a084334df77b5271ca7b01ece5a11c",
+    "src/milai_lab/providers/__init__.py": "7fc7c732e07e783ec2451207afc831de42d3b02487347812f43fba72a3ab7dc5",
+    "src/milai_lab/providers/chat_bridge.py": "01e6ce8ff4f7ffce67508c6c620836d7c91bb49d2953af87edcb5649fd3a4cd4",
+    "src/milai_lab/providers/config.py": "7e3e894260ca2c8f0ad19f3f8f1f06059de59e9c7de00576f9c585bcceeeb63e",
+    "src/milai_lab/providers/contextual_capacity.py": "691daf0e1e52633f9c5f9c5db35b47db285718df8f5e1fbf984ac9b404c0cccc",
+    "src/milai_lab/providers/contextual_embeddings.py": "647504d100263c6c973f62d323a2fea3614928de34a3d5d218e70cf796dd09ea",
+    "src/milai_lab/providers/contextual_vllm.py": "a9f15fcbbcc0ead318f0871538269128eb904d6cbe13c2f3fbd7c23f5927809a",
+    "src/milai_lab/providers/embedding_capacity.py": "b8e26ec5b9bbe606e5520c8f3696c12f0c2c1df8673bbe2a199bfda0e9ca2857",
+    "src/milai_lab/providers/generation_admission.py": "13fe9440733c0a3f3b54310d806cb3df75c1a9413a9bd49c11e34717fc7ee4bf",
+    "src/milai_lab/providers/langmem_chat.py": "e151377d54118cfaab9d15bf559b2603b4212b5657dcbfd0d363727d0f891cfb",
+    "src/milai_lab/providers/merit_metered.py": "489cb0430905f6425b932772142fdc0fd01cca7ad6e4e65b0c46382bf095bdcd",
+    "src/milai_lab/providers/request_pipeline.py": "d4dba709336aa1f17bb7896c7b7ae8c6bf88785616a72b5daf114939366c3de5",
+    "src/milai_lab/recollection_gate.py": "a0ee5cdc6609491f2ca1c8ce5ec1e1500fe4e8d9892fe44fc1e3a011a68a551c",
+    "src/milai_lab/runners/__init__.py": "263c9773401ada5d66504b74851308d45b7447eedab4be6757bcac112fa44c94",
+    "src/milai_lab/runners/contextual.py": "49ba40b026af64a3cab715668c44ccbb38863c95449f79a04b750af29d195aa4",
+    "src/milai_lab/runners/contextual_agent_tasks.py": "2fbbb012931a05e9faa86bf78a9c66f62900bf6f409791e28d9568d7251ad6ba",
+    "src/milai_lab/runners/contextual_delivery.py": "88aeb913e4d433d78c04fa2a85d5a756c5346cb293ede836573f6d7138b13be3",
+    "src/milai_lab/runners/contextual_host.py": "1361c58fbb07a4e4b325e7fc3a89867cde09e6b0ab14184365e5ab881d93059f",
+    "src/milai_lab/runners/contextual_ingestion.py": "71817b6e967c7258567af7ef58e2331233b76f7abda9bd781da321bc2e03d604",
+    "src/milai_lab/runners/contextual_maintenance.py": "e4fc3b5018e1d31e428714585279cb02310caea7c5001051b3a814593ee69881",
+    "src/milai_lab/runners/contextual_profiles.py": "ceece4d86a31b510e3d1c7e3c95fc396d0f0c78d99682b271f29f21b2b83c01f",
+    "src/milai_lab/runners/contextual_runtime_store.py": "b424bf21d8c39b9d89700da624dc0623e50137b9e51efbef2bdc45444184edfc",
+    "src/milai_lab/runners/contextual_scoring.py": "4ac57a9f77f7ca5ccae7e3e5a04122500b3b41c9a39e8df246848fd08f7b4a12",
+    "src/milai_lab/runners/contextual_session.py": "246dc4fff5163a038d62297edf5deca5eb0398a3a58e35bb36331539b484c5cd",
+    "src/milai_lab/runners/fixed_state_read.py": "acef380542947fb3aa6546be6de4c18f9901208f290d107558c14d25af8e0e2e",
+    "src/milai_lab/runners/fixed_state_update.py": "53ed0bc3cf288fc1e68aafd7afa26884796c7be2382720c2d41ac33540afa14b",
+    "src/milai_lab/runners/frozen_action_continuation.py": "9261a6afbe02f6bc75a6f7e3bb696c9f4e3f52a8973b5198137d7739495cbb2a",
+    "src/milai_lab/runners/langmem_application.py": "30da6cfd0412a47d32fa273d4f4babe5d18eec5d93a32b1342298dd700fb1946",
+    "src/milai_lab/runners/langmem_application_runtime.py": "fce7cadc731b03b5c28732d321d6354d8daafa0cd7ec492b0381b8ea1a9c5459",
+    "src/milai_lab/runners/langmem_diagnostic.py": "a1ef694d7857b75f9fc897fa8a4174638de29c80ae21b8bcf74c961b49a4b983",
+    "src/milai_lab/runners/langmem_foundation.py": "d113c45fced3f635bdda739e542dec3eed833f561c10a16405be887934c5e8bf",
+    "src/milai_lab/runners/langmem_m1_mechanism.py": "18d62105335a94e8edcacafd3c86cb1142a37d2bd2a44d1ab9244ea2c69a8906",
+    "src/milai_lab/runners/langmem_merit.py": "e708e2038ad62f115b026cd32421527a485232edc22ebd391ac3177de609117c",
+    "src/milai_lab/runners/langmem_odr_mechanism.py": "a4d2a9b71e4f48cf8d70cbd68de751b9f6daa9443e22f51484d4dbdea020b9c5",
+    "src/milai_lab/runners/langmem_projection_mechanism.py": "cc033a498f8c387d9200c7583e27e369d998f8f0cc1142bea073faf122dd5982",
+    "src/milai_lab/runners/local_state_attention.py": "8684908368a2e0f53e2b2808a5b9fe42900482c898b12dac229cb8daac882aaf",
+    "src/milai_lab/runners/mem0_identity.py": "5bebd9d4b0976539abb588ad3e6ecdfbea88dc70716597459688f8199b03a485",
+    "src/milai_lab/runners/mem0_native.py": "65bff6e580d7ce7c2e23c80e1356d0c10ae25768537f64bd8770b1605e26212e",
+    "src/milai_lab/runners/memsyco_native.py": "d2670bcaad26aa25b08fc14f776b84346739df01a8ca847952575605d53708c0",
+    "src/milai_lab/runners/merit_native.py": "b35682df6e51f8a520576c7409357a6eba9996440fe40dd48068a9f518afae6c",
+    "src/milai_lab/runners/persistent_memory.py": "5f97715a203eab9ac6f4a4a02cd701594bc458f4e5b004eca914b580cf2dce14",
+    "src/milai_lab/runners/product02_context_gate.py": "c26257c7099b843a947ca8a3328da0e5d8f48c2a62d435105a0f1314a249a4cc",
+    "src/milai_lab/runners/product03_openworker_usability.py": "cb07222ee3f61c1af006a5f1ca64aec9bebf731036f201ceb8cb0dc4b7444183",
+    "src/milai_lab/runners/shared_record_use.py": "426d23d7b0260e4334517e8cce6ee46f1bbfdea109f69bfea2f3fbfe640427a9",
+    "src/milai_lab/runners/simplemem_native.py": "ba044c13433593e806e1046c08fbd4ee409ded025cc0926b6ac4924a4b9ee8f0",
+    "src/milai_lab/runners/state_update_probe.py": "0500cb1d547c9cea052c3008e6ca604a6288337bc8b40431eff10ef97d7a583b",
+    "src/milai_lab/runners/v13_1_baseline_micro.py": "593282682bcbc55876a9a08b368b5f2eaabac08ad11ff396662b07eb813922cb",
+    "src/milai_lab/runners/v13_1_controls.py": "c15fca3c7cd44cb5629ba83b3b29735bc505eabc75a3e8c2cbc1b2a2586f61bd",
+    "src/milai_lab/runners/v13_1_d0.py": "a3b12627b8c5f92b7a60c0f58245e8ac1f5bb8fd4661cf9930314110d25896ab",
+    "src/milai_lab/runners/v13_1_p5.py": "c24a1c324e0207645e9286cb7279803c92ba80a31f3858c0d484cf577a432d8b",
+    "src/milai_lab/runners/v13_1_p5_compare.py": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b",
+    "src/milai_lab/runners/writer_policy.py": "bb5df9f72737159aaff326ec67d3187df1b61e93173a0462866de314d7b64a29",
+    "src/milai_lab/scorers/__init__.py": "faf8ee91a4d7a449c237f0ea597212208401b118ddf338542459870e4458e458",
+    "src/milai_lab/scorers/answers.py": "19eefe2e40d2df37294826d8419e113b96bf51ceee671a375ebf23e50851a512",
+    "src/milai_lab/scorers/contextual.py": "d275c70d536b67702c9ef4e5ab0bb742a80301c1f5fe0b1da0e676d37f394558",
+    "src/milai_lab/scorers/focus.py": "2df3fb1593e4253c82f41e58faf4c6be4ab4102ee583e8ca08d6f74a32c0829b",
+    "src/milai_lab/scorers/memsyco.py": "667745a8b432b522ef780473316c18d4d61bcbf23485c22de98e2d66c5148bcc",
+    "src/milai_lab/scorers/stale.py": "683ff4bb82dc7c0c4e4a18824504a44d865f04980158322757f39e8612b0f75f",
+    "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+    "tools/run_v13_1_d0.py": "1e196ab1467f0e68b3f40a3187e422ea0f4d69ca5574479d513b5c31b2c420cb"
+  },
+  "script_sha256": "532cd14368c3bfe8c9a338b611d28ebfafe5b0a4f49d23f2a0a923b4827e7a33",
+  "input_artifacts_sha256": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/input-freeze.json": "1618e16a398f517d8777c3faaa3716e3e8bab67e86150ac4ef803af3a06ed7b6",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e0-normal-r7.json": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c767736efe5cb2bc/message-0.json": "0cb2c243ddfc78c498ee939d7e278556750e1e1e4b92db412bf6b2080f2f1072",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c767736efe5cb2bc/message-0.jsonl": "86b7a8f95710039ad9a5e5a14bb38d4ee884981c8826ec90573e1a51c68b84db",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c3593089e8881a50/message-0.json": "531309831cb8e5e5737c3b9e7a564f9c3a281b724c3ee25f11f236053b2abc28",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c3593089e8881a50/message-0.jsonl": "82f46c5b5293d47573dc590b3a4e90c089a197ed8c0d67a52dca164cfee5db42",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a23d58ff477e8f07/message-0.json": "1c8321becf4a48ac3d34042808b973d9099f59c36222c1df7fbdb61cc03a5a38",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a23d58ff477e8f07/message-0.jsonl": "f4ba08597a158221e26a2e0ce79c9561b31af4ae85a276050fcdea67c8cc38df",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/ce60b7e336b14de1/message-0.json": "3fc531ce08cd4586626e3726bb1a9acc723690926b71141623c9e193f9788e37",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/ce60b7e336b14de1/message-0.jsonl": "ed443744f3fd907f8741203a7f370a5311aecafaaffe463441e6c8fa6385e407",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-0.json": "8f1bd03d4f8c00f0f8f424f51261384f1b39edd825f1f735a5740ef07ee8e1ef",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-0.jsonl": "7200e0aae48562665ac3fbab5bb8bf4e744d7b1792493a932ad588d6047610df",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-1.json": "e79e4b5d5a42fce68bda9c7f9dea508c4539732ce0340f008ae69929e9716f09",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-1.jsonl": "9b85729a2096c17739a13faaa9ff08966042a2b01d2234e8577c533babf567f9",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-0.json": "125ebd993ffbcffdb48962ba7b02fca6a17df483f8351c22088c16458f0eddb7",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-0.jsonl": "d0ee7d0bc9eb1febe9ad75db8c528d6e054259b01d5d303cc231e0858f8ac494",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-1.json": "45c7a1a728ddae6e23244983dec1b007c54d451baa9ba077d12001773d7cb827",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-1.jsonl": "2fed0ce1b9c59d57af4c65154c6de73abff18e3b609099cac29914818bb71ded",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-0.json": "4c5ec716dfe0e917f546f82138ab0ce98c2913a9c31f532c7c8eda54d390cc84",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-0.jsonl": "1951f8552cbd46a313a378ba2db37df4cbc5285c74de08f67cd0cd0f382ca26e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-1.json": "f3af6c6a67da0599cfeb4f64438c822633c0594cb5617a0f5b00b2efca6249c4",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-1.jsonl": "95bdb92fc38b835bd60f198f0416b297f22b376faae9c351d5261573f790c142",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-0.json": "59986323bb8fd6f7748908f09e9ebd0c6406f82bb4e8fc5814146b7dadb39726",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-0.jsonl": "9bee8ff59e3af755c2515578fafec7cd492747cbb6a4e18d2fefdf44bde1cb01",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-1.json": "38fca094bcd3472252c09fa80b933a1800e634920f17c10e81774c72e1fcf842",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-1.jsonl": "9b24d5348e189fe681e11bf2cba77a74b9a89f35a0951ca9526c5016069d3c5b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-0.json": "6ae1844b8e97253502456f94e40781a146f4c6bff33172dae7ce4fd6b97030ea",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-0.jsonl": "4712e5a0b47082786c29429c28a2ba824f0134777248a1b3952850a60198aa82",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-1.json": "fe6672bb8b94c666d3b75f1ba3497fb44c6185a1b44ef57060810d829d27dd67",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-1.jsonl": "4323167b27feb448b7a2d508039edec8c16e667721599825876d73c218c5cc67",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-2.json": "166fd3ec58eeb55950d3341f75e935d1dd9f9d87be3bbcf27bbf4d264df95c86",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-2.jsonl": "b252a5b86a5fc85f46919aa0a763c0234ae07a826d42906167499f710d5fe509",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-0.json": "c512d2ab9fd5e7661645b8ec8ba2545f69cff04d2277c5fce55d58a355341e6a",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-0.jsonl": "8878c33a61abb2df5dabe3c3808a4dce8023541828bccf66c33e49da64666ecb",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-1.json": "de3ccf2f835b1b0b35d9500609a85343735f3452c15b55afe8a4cad2fba576f9",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-1.jsonl": "c8091cd89dd00fab321e2846783fcda17993d017904993b6691d72b9f5f06a73",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-2.json": "86c59e5668c18b8a80ecdad97ccf008c006b8dc7d2a01c1dce09921defbaf723",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-2.jsonl": "8807a88962a074e420caecffedc76c72c129ad12f47601980437561bd059bca7",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-0.json": "bb567a8247773231a45751630bd26cf11d764ca4bbfa78fa2b5002394f055f1e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-0.jsonl": "d6982ad5bc693834c7c9a45fb2c96a9290a74cd46e8dab9f405e492d97a66a94",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-1.json": "f631910581e14e3ff374fb5535e0b802cd66425d02ad0125c532e893b21e700f",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-1.jsonl": "575a9f790f54a16d29f26837eeef31b8f779b3989b9b71d8061783a609ea5e30",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-2.json": "62656bb7d8734b7bee0b2a343203b3f844077d4b7bff80b05a38302072078960",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-2.jsonl": "49e0a3b84525c1a279b58fab26cbb407ca52782e147f3c13f25b3b3fefa45adc",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-0.json": "66a185379b2921ccbb4a6a96374143d24231fb129df90d27ccae6ecd2dce08b8",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-0.jsonl": "d01fbecd03cee0fa92e01bb122641abba77a756c67e015d358c25c75b3d703df",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-1.json": "7d79496862b597daeeff8223e861406cd138d6bf66c32ec4775e9faa4b50c47e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-1.jsonl": "f03d649dbce03023edfcd488da88c201395c8cc007b7e89d6d4c2ae5e9c12d31",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-2.json": "3f83e31eb8c64ea820a6bf134e227779537800634cacf3aa77faf5b641f55f04",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-2.jsonl": "1ed4f5d272e59f67e5c853f9cdb2afbe960363c9dbf4ad805ae826e4c3ac6481",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-0.json": "db09b790392a341a952815233464d2b2b3daf3db18a5a41f1fec664c23740c1f",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-0.jsonl": "ea716ea36448dc2af6bb05280bf6ea9e14e1d94a3c3f762a6d022a9f0e634cd1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-1.json": "f6c180800472a066b101ac83c6de9b71ae10ded6a959c6400228cda7c99dbeae",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-1.jsonl": "b7fd83fa179d37694c6b06b52936f3d6921bc96767bab16e9d9998ce12ac3504",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-0.json": "522e4290b5c2c607d3d6140a43ee3d9a08cc27b41e2bd7b0a9f1f185eab97ae4",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-0.jsonl": "02f86c5f5edef2bb60a6a04104aef24d86f51020cd243d357feec2ccd2295f9d",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-1.json": "35f7b1b6d9a7b7f544f1d4f1c701ecc1680e315e4b3f7e3f0b0ffb50206a0de0",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-1.jsonl": "f7de160b496ed0d20fc49d829baac3e76911f01ec42918ebfbc9c22d9920ec97",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-0.json": "558ea96151131e1e5f860ce0469c6b0fdd660b89971cde6c6fd87d4e963e6db2",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-0.jsonl": "2465f8c6e245d502b044781c0b36d644808967253d76f60fc4fd3b699d1fd047",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-1.json": "a8fb006cf9e168b08c1e97b10ea493b487394a2218814c893debab3b35b0461a",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-1.jsonl": "7d8a24c05326150fe505df4417fc6710efc2e0072d48392dd3146c18c8cd2625",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-0.json": "af1143caf1c59b8b4e91272a4034d4870b3b4bcb8a7620fd2e018116b2c489c3",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-0.jsonl": "8d95b31370a9255cf9a8fdb34cef57c5944f56fee7c826b485b2b91985d68e52",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-1.json": "3a8a082adbe07ee3008471b371bbd3516357fb0fc090308b370b1de6eca1bdc1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-1.jsonl": "d80b8823b50d8f8ec62ddc29c2e8737c1fb7e1087d72055d13b79297533c5654",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-0.json": "4ac97b77d66bcac07d1d6989a157cfee43de6e8c10ce7a3e8184803507f3871b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-0.jsonl": "0a735ee2394b7860fe283d726ca148d73b6cb60b96a5dc36511e46c798d6961b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-1.json": "776e804651ce627fe0839d0342631197f2fb49c8c302aa67d73f58b4e684e725",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-1.jsonl": "ee010ba90ae0675910595a2f3d0f626fd1e61f5a4de56d1d42c53e3edc0e6f84",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-0.json": "df7dee8648b704c85d409dee962406b2d4ee010687494a1152f9f6a4f1e84e74",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-0.jsonl": "48c092ac258c35c458f46ee0fd6f4c5076fbf2e6502600ae594e913a52eef836",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-1.json": "120336473ea382a4eeb294cf2bf262e0973cd18b09b630fb0576d42ec0c31b62",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-1.jsonl": "8c6a0bb2b60577bbf9b2d096634a8a6ae28dc92b020c32e02f33956ad727a308",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-0.json": "6555487e5948e4f713dbaa2b9c523ef89b6511326237a39a90bad1fe2aae70dd",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-0.jsonl": "7687e6ac8708d48a806302a55aafb41a99f998b90b92fe8e362861ca6e742881",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-1.json": "b49d0021808de794d68a3adc2b2b087b101a7b24e53798c9a88cb8892e102feb",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-1.jsonl": "1b652292c27d92495efae6d8ed5754cf40aa93d0cc2a46d7d8a8fec2451eb126",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-0.json": "c8efa23fbd8854a2068475138e7ffec8981c6f4d6bdce0f47267c4164ddad7fb",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-0.jsonl": "aa5ad4239a23ef3caf644b553de34fc5baa14b95404c9478d97bf513b70bf9e6",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-1.json": "d15a3eb505b67555a459e37200c9e5b264b187982264bc2c730cde15486b74d3",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-1.jsonl": "666f1b5549c0da98601409388430520b3e4c6fd366ed43359710080de880bc6e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-0.json": "89457e26ee33ad900e40ca123e2615e813501f7ca55e9306223d2abdbb0ba71e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-0.jsonl": "821e73da892ff229ad26eef9d9551ca15e832a3e00147542de4dfc13ed49d310",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-1.json": "397ebc599f0c507c8fe458c4e4bd98904db1a79e3993862ecf0d00bdebd4eed4",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-1.jsonl": "99ef1742586cd7a56e559921b17009336c7c8ce01720f6d80101efef3d46f24a",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-0.json": "2cd6e175b12363c8bbf7e0c26fb4243165c0a5f6141de7f5a67ab097cd67c2a2",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-0.jsonl": "958cba8d61be8d344e9217e6652051d8fe5679de56c3f9ff128768063b90bbfd",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-1.json": "137878a1db7707b435c94567fbc326213d0556bea6fbd2830c35581ba8c707e9",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-1.jsonl": "5efc36807c7889e226a96419ab867a4e8ca302222497727328936f7bc1c7380e",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-0.json": "4d83fda9e32b833954288ae11c0283b5e6a9de16baac0a6240170e24f2c54bfa",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-0.jsonl": "5ebe8147412187ae1d5d623f441ae58a2dadb59f53e9d89107a53ebb8667e08d",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-1.json": "d87a9c36f2da4cb86bf77130af3ed5f6c5ef0a691e8ae7f166900c182a187000",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-1.jsonl": "a7c154ef7a7aa3b82e4e91b9e9999f9a87af2e4b5f44d53aff8ddfca79a165a3",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-0.json": "6e71e330ff96908a85c0104c6a64f5389a162dd1eb92741ecd219fcda3f00681",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-0.jsonl": "9da60da7312eb6eb56499f7d50b855c6fc4dc48581eaacc4a4f22c1551b8f42f",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-1.json": "350a5b2d45e99bdfb9b7336cedb2847c26e82ee50ff008cea11f52bf133d55dd",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-1.jsonl": "85d0c4c8442fb36224787b35ea5052b460255c8494cb6c1d29e8eb85acda5b56",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/ledger-before.json": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/ledger-after-E0.json": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f"
+  },
+  "planned": 24,
+  "complete": 22,
+  "trajectories": [
+    {
+      "case_id": "save-1",
+      "category": "save",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "save-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c767736efe5cb2bc/message-0.json",
+          "receipt_sha256": "0cb2c243ddfc78c498ee939d7e278556750e1e1e4b92db412bf6b2080f2f1072",
+          "trace_sha256": "86b7a8f95710039ad9a5e5a14bb38d4ee884981c8826ec90573e1a51c68b84db",
+          "process_id": 2141429,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 16,
+                "provider_id": "chatcmpl-ba5625db1bf3fea4",
+                "raw_response_sha256": "2fec368194a605db247ba4829c69477c403ba9de227c487a37b3a02c932574e6"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Durable concise-answer preference with actual Human support; truthful final and SDK reopen."
+    },
+    {
+      "case_id": "save-2",
+      "category": "save",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "save-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c3593089e8881a50/message-0.json",
+          "receipt_sha256": "531309831cb8e5e5737c3b9e7a564f9c3a281b724c3ee25f11f236053b2abc28",
+          "trace_sha256": "82f46c5b5293d47573dc590b3a4e90c089a197ed8c0d67a52dca164cfee5db42",
+          "process_id": 2159305,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-a8660932cb6a8a6d",
+                "raw_response_sha256": "a969cb0cb89838e4321f2e8ac6bee5eafbc6c435b59138ad73a73bcad6836b52"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Caffeine-free tea retained with beverage scope and actual Human support; truthful durable save."
+    },
+    {
+      "case_id": "save-3",
+      "category": "save",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "save-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a23d58ff477e8f07/message-0.json",
+          "receipt_sha256": "1c8321becf4a48ac3d34042808b973d9099f59c36222c1df7fbdb61cc03a5a38",
+          "trace_sha256": "f4ba08597a158221e26a2e0ce79c9561b31af4ae85a276050fcdea67c8cc38df",
+          "process_id": 2160591,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-916e882561f67dfd",
+                "raw_response_sha256": "a19250aa55846bc1488bbdc465ecae4a33d6b80ecea74a3a7d001df4ed3ddf5b"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Vegetarian meals retained without broadening to all animal products; actual Human support and durable save."
+    },
+    {
+      "case_id": "save-4",
+      "category": "save",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "save-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/ce60b7e336b14de1/message-0.json",
+          "receipt_sha256": "3fc531ce08cd4586626e3726bb1a9acc723690926b71141623c9e193f9788e37",
+          "trace_sha256": "ed443744f3fd907f8741203a7f370a5311aecafaaffe463441e6c8fa6385e407",
+          "process_id": 2161814,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-b49e66d1c9a985b9",
+                "raw_response_sha256": "e09571cd10caa9be4bdde181d05886d4fdd0fa9e27a9b9eeda54c05fa899a5ce"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Large-font reading preference correctly scoped and saved with actual Human support."
+    },
+    {
+      "case_id": "recall-1",
+      "category": "recall",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "recall-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-0.json",
+          "receipt_sha256": "8f1bd03d4f8c00f0f8f424f51261384f1b39edd825f1f735a5740ef07ee8e1ef",
+          "trace_sha256": "7200e0aae48562665ac3fbab5bb8bf4e744d7b1792493a932ad588d6047610df",
+          "process_id": 2142791,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-abf10fb30a8ae8bb",
+                "raw_response_sha256": "4a74633c356860c860f379f11787bf36cf5920e0f3caf90574280c0a066161da"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "recall-1-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1ed93fe22f2194f3/message-1.json",
+          "receipt_sha256": "e79e4b5d5a42fce68bda9c7f9dea508c4539732ce0340f008ae69929e9716f09",
+          "trace_sha256": "9b85729a2096c17739a13faaa9ff08966042a2b01d2234e8577c533babf567f9",
+          "process_id": 2143653,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 8,
+                "provider_id": "chatcmpl-82c1b29897ae7f63",
+                "raw_response_sha256": "ae078c61f283a4f71c0f0c5a3bdc42966f035ce673e1b98713de846dd9630cd1"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Fresh process correctly recalls train commuting from actual delivered card; no_change."
+    },
+    {
+      "case_id": "recall-2",
+      "category": "recall",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "recall-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-0.json",
+          "receipt_sha256": "125ebd993ffbcffdb48962ba7b02fca6a17df483f8351c22088c16458f0eddb7",
+          "trace_sha256": "d0ee7d0bc9eb1febe9ad75db8c528d6e054259b01d5d303cc231e0858f8ac494",
+          "process_id": 2163073,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-996def06cfc5dee6",
+                "raw_response_sha256": "fc0ed985977c170408e44ca5a375e4b181deb6ee36fd5c8bf51296c181f66e91"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "recall-2-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/78b250e44ea01f9a/message-1.json",
+          "receipt_sha256": "45c7a1a728ddae6e23244983dec1b007c54d451baa9ba077d12001773d7cb827",
+          "trace_sha256": "2fed0ce1b9c59d57af4c65154c6de73abff18e3b609099cac29914818bb71ded",
+          "process_id": 2163917,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 8,
+                "provider_id": "chatcmpl-a55dd378b59f0814",
+                "raw_response_sha256": "ced8eb39ac2ea148f93aa01cb8ea78c73da3ac6202c6ee354b4f0f6aa638e7fb"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Fresh process correctly recalls common Python usage; scope says common language, not invented preference; no_change."
+    },
+    {
+      "case_id": "recall-3",
+      "category": "recall",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "recall-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-0.json",
+          "receipt_sha256": "4c5ec716dfe0e917f546f82138ab0ce98c2913a9c31f532c7c8eda54d390cc84",
+          "trace_sha256": "1951f8552cbd46a313a378ba2db37df4cbc5285c74de08f67cd0cd0f382ca26e",
+          "process_id": 2164844,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-980ef9b5d1acc88c",
+                "raw_response_sha256": "310d1b493e18b68aff0f1a729a34639b1b9c8dc640acfed4a4b3ed5bc79141b6"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "recall-3-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0d840bb206a686e7/message-1.json",
+          "receipt_sha256": "f3af6c6a67da0599cfeb4f64438c822633c0594cb5617a0f5b00b2efca6249c4",
+          "trace_sha256": "95bdb92fc38b835bd60f198f0416b297f22b376faae9c351d5261573f790c142",
+          "process_id": 2165858,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 8,
+                "provider_id": "chatcmpl-a3e430cb5c74b90e",
+                "raw_response_sha256": "ac9554f15160052adf47aec14b1b496c64a4fd7c3c743d09c57b990387178222"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Fresh process correctly recalls usual morning meetings from original card/support; no_change."
+    },
+    {
+      "case_id": "recall-4",
+      "category": "recall",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "recall-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-0.json",
+          "receipt_sha256": "59986323bb8fd6f7748908f09e9ebd0c6406f82bb4e8fc5814146b7dadb39726",
+          "trace_sha256": "9bee8ff59e3af755c2515578fafec7cd492747cbb6a4e18d2fefdf44bde1cb01",
+          "process_id": 2166842,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 10,
+                "provider_id": "chatcmpl-a917b590fcadfe3c",
+                "raw_response_sha256": "169597a86806ab21b622cdb2eb9817f937297f31138a38074e9f8f19c1fbd51f"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "recall-4-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/83546fa9c539a342/message-1.json",
+          "receipt_sha256": "38fca094bcd3472252c09fa80b933a1800e634920f17c10e81774c72e1fcf842",
+          "trace_sha256": "9b24d5348e189fe681e11bf2cba77a74b9a89f35a0951ca9526c5016069d3c5b",
+          "process_id": 2167689,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-a1fd9162662e1c5c",
+                "raw_response_sha256": "d7f5084286119445f3c003f9b6af9791b7ae4043fab95630d00fdf842f808adb"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Fresh process correctly recalls outline before email body; original r1 retained, no_change."
+    },
+    {
+      "case_id": "update-1",
+      "category": "update",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "update-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-0.json",
+          "receipt_sha256": "6ae1844b8e97253502456f94e40781a146f4c6bff33172dae7ce4fd6b97030ea",
+          "trace_sha256": "4712e5a0b47082786c29429c28a2ba824f0134777248a1b3952850a60198aa82",
+          "process_id": 2144623,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 10,
+                "provider_id": "chatcmpl-9b8874a47e91d919",
+                "raw_response_sha256": "351a7cee69b5aba8728d07c7448f3137ec7efc7c264205c510cf258ac2af023e"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "update-1-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-1.json",
+          "receipt_sha256": "fe6672bb8b94c666d3b75f1ba3497fb44c6185a1b44ef57060810d829d27dd67",
+          "trace_sha256": "4323167b27feb448b7a2d508039edec8c16e667721599825876d73c218c5cc67",
+          "process_id": 2145358,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-948ce2fda313ce0d",
+                "raw_response_sha256": "f5379c761aa225b0d2f8c523a90a3aae978aa0bb49f3e86df44dd9c30c8da36e"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 2,
+          "message_id": "update-1-m3",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bf411db9a172dfea/message-2.json",
+          "receipt_sha256": "166fd3ec58eeb55950d3341f75e935d1dd9f9d87be3bbcf27bbf4d264df95c86",
+          "trace_sha256": "b252a5b86a5fc85f46919aa0a763c0234ae07a826d42906167499f710d5fe509",
+          "process_id": 2146222,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-ba23d2353f780cef",
+                "raw_response_sha256": "68ec0c1062229432a780dd34ba0ac9a2cff2e5552197152b7962e9f4b846cbab"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Same original ID r2 tea, original coffee r1 retained, all four r2 support fields select actual correction Human leaf; correct current/former final, no_change."
+    },
+    {
+      "case_id": "update-2",
+      "category": "update",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "update-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-0.json",
+          "receipt_sha256": "c512d2ab9fd5e7661645b8ec8ba2545f69cff04d2277c5fce55d58a355341e6a",
+          "trace_sha256": "8878c33a61abb2df5dabe3c3808a4dce8023541828bccf66c33e49da64666ecb",
+          "process_id": 2153601,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 10,
+                "provider_id": "chatcmpl-940a1e89ea67d476",
+                "raw_response_sha256": "22f949f57e287c74b0c30b90de00c4830e989c46f84b0b9e65c471862dd1dcdd"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "update-2-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-1.json",
+          "receipt_sha256": "de3ccf2f835b1b0b35d9500609a85343735f3452c15b55afe8a4cad2fba576f9",
+          "trace_sha256": "c8091cd89dd00fab321e2846783fcda17993d017904993b6691d72b9f5f06a73",
+          "process_id": 2154338,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-b587aad91f134b80",
+                "raw_response_sha256": "40e92d4e0eaf09e9b51cc959091bfccf8f6566c31ac893313a89eeead6dc00d2"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 2,
+          "message_id": "update-2-m3",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/1c3a6f1f63695bd1/message-2.json",
+          "receipt_sha256": "86c59e5668c18b8a80ecdad97ccf008c006b8dc7d2a01c1dce09921defbaf723",
+          "trace_sha256": "8807a88962a074e420caecffedc76c72c129ad12f47601980437561bd059bca7",
+          "process_id": 2155249,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-b563e98ed71fa9e5",
+                "raw_response_sha256": "067a52c20234db7f547ef6e12da8a380da27e643c68bd778fbdbee915ef2e92e"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Same original ID r2 Chinese, original English r1 retained, all four r2 support fields select actual correction Human leaf; correct current/former final, no_change."
+    },
+    {
+      "case_id": "update-3",
+      "category": "update",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "update-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-0.json",
+          "receipt_sha256": "bb567a8247773231a45751630bd26cf11d764ca4bbfa78fa2b5002394f055f1e",
+          "trace_sha256": "d6982ad5bc693834c7c9a45fb2c96a9290a74cd46e8dab9f405e492d97a66a94",
+          "process_id": 2156374,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-a83e7616328d3bf8",
+                "raw_response_sha256": "377bf07c2b4c8d269fab396b45aa13e357d810756af635eac5bb541909c79612"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "update-3-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-1.json",
+          "receipt_sha256": "f631910581e14e3ff374fb5535e0b802cd66425d02ad0125c532e893b21e700f",
+          "trace_sha256": "575a9f790f54a16d29f26837eeef31b8f779b3989b9b71d8061783a609ea5e30",
+          "process_id": 2157213,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-a2b14f9ac663333c",
+                "raw_response_sha256": "b9cc866556c4ee576d8f7f3bd747ef9e232bdb8a0167f05c623eb9954290bb96"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 2,
+          "message_id": "update-3-m3",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/4aedaa08a6e79324/message-2.json",
+          "receipt_sha256": "62656bb7d8734b7bee0b2a343203b3f844077d4b7bff80b05a38302072078960",
+          "trace_sha256": "49e0a3b84525c1a279b58fab26cbb407ca52782e147f3c13f25b3b3fefa45adc",
+          "process_id": 2158277,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-82eba8cf8dff54f2",
+                "raw_response_sha256": "657f62772094825e6835f104709934193f2c919a2eb712be2492c74b35202287"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Same original ID r2 kilometers/content+scope, original miles r1 retained, all four r2 support fields select actual correction Human leaf; correct current/former final, no_change."
+    },
+    {
+      "case_id": "update-4",
+      "category": "update",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "update-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-0.json",
+          "receipt_sha256": "66a185379b2921ccbb4a6a96374143d24231fb129df90d27ccae6ecd2dce08b8",
+          "trace_sha256": "d01fbecd03cee0fa92e01bb122641abba77a756c67e015d358c25c75b3d703df",
+          "process_id": 2168611,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-ab54185bf29cab3b",
+                "raw_response_sha256": "a1f899aecaaeb33a7a0ce1b69ef1c9551101aedc5efa18596dfb12c12a717658"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "update-4-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-1.json",
+          "receipt_sha256": "7d79496862b597daeeff8223e861406cd138d6bf66c32ec4775e9faa4b50c47e",
+          "trace_sha256": "f03d649dbce03023edfcd488da88c201395c8cc007b7e89d6d4c2ae5e9c12d31",
+          "process_id": 2169529,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-90f21a124d563748",
+                "raw_response_sha256": "1d2786dbc8f6116100eec6d407e3f7f566fa007e3fee91f56a67406083e950be"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 2,
+          "message_id": "update-4-m3",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/7cd93a17e27cd619/message-2.json",
+          "receipt_sha256": "3f83e31eb8c64ea820a6bf134e227779537800634cacf3aa77faf5b641f55f04",
+          "trace_sha256": "1ed4f5d272e59f67e5c853f9cdb2afbe960363c9dbf4ad805ae826e4c3ac6481",
+          "process_id": 2170504,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 14,
+                "provider_id": "chatcmpl-9616163953c1ad05",
+                "raw_response_sha256": "a2b37e86a51151e7c28f9287fa1cefb0ce233b2617afe1b7d4f25a2de27fdda2"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Same original ID r2 afternoon, original morning r1 retained and current/former final correct. Changed content cites only old morning Source; task/content/identity/reader pass separately from failed direct-support gate."
+    },
+    {
+      "case_id": "scope-1",
+      "category": "scope",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "scope-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-0.json",
+          "receipt_sha256": "db09b790392a341a952815233464d2b2b3daf3db18a5a41f1fec664c23740c1f",
+          "trace_sha256": "ea716ea36448dc2af6bb05280bf6ea9e14e1d94a3c3f762a6d022a9f0e634cd1",
+          "process_id": 2147371,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-b45ce27fad5a6c06",
+                "raw_response_sha256": "172b8fa5e64874723a0b0051f32ffc94b39d31a651801b76d11377a784b1c2ee"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "scope-1-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/20fe66d09904df13/message-1.json",
+          "receipt_sha256": "f6c180800472a066b101ac83c6de9b71ae10ded6a959c6400228cda7c99dbeae",
+          "trace_sha256": "b7fd83fa179d37694c6b06b52936f3d6921bc96767bab16e9d9998ce12ac3504",
+          "process_id": 2148233,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 22,
+                "provider_id": "chatcmpl-b55742f5aaf4f37e",
+                "raw_response_sha256": "3fb21ef6c405c21fe1a5caca26d25628d0a3241afd6eef2a29590f31b4f56e53"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Reader fully reads original Human statement and correctly distinguishes this-week team lunch from personal no fixed vegetarian preference. Boundary writer commits r2 carried facts/scope using only current question; task pass, direct-support failure."
+    },
+    {
+      "case_id": "scope-2",
+      "category": "scope",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "scope-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-0.json",
+          "receipt_sha256": "522e4290b5c2c607d3d6140a43ee3d9a08cc27b41e2bd7b0a9f1f185eab97ae4",
+          "trace_sha256": "02f86c5f5edef2bb60a6a04104aef24d86f51020cd243d357feec2ccd2295f9d",
+          "process_id": 2171647,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-9eda41e80d082f35",
+                "raw_response_sha256": "4e5965800179586869099c14ede93a982886c1b9e53829ec4ef03d551bd5b241"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "scope-2-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/cf4b05729ab61142/message-1.json",
+          "receipt_sha256": "35f7b1b6d9a7b7f544f1d4f1c701ecc1680e315e4b3f7e3f0b0ffb50206a0de0",
+          "trace_sha256": "f7de160b496ed0d20fc49d829baac3e76911f01ec42918ebfbc9c22d9920ec97",
+          "process_id": 2172512,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 22,
+                "provider_id": "chatcmpl-84dc3d60b8146b27",
+                "raw_response_sha256": "1a7ee7cb08b60edbc84e6c439d91447cbd8107caec701de701fe592c0a06be86"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "FAIL",
+      "root_review_notes": "FAIL: final misstates usual preference as brief and fails usual detailed versus this particular brief demo distinction. Initial card retained only demo constraint. Writer proposal using assistant Source for user_statement is rejected, pending, r1 unchanged."
+    },
+    {
+      "case_id": "scope-3",
+      "category": "scope",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "scope-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-0.json",
+          "receipt_sha256": "558ea96151131e1e5f860ce0469c6b0fdd660b89971cde6c6fd87d4e963e6db2",
+          "trace_sha256": "2465f8c6e245d502b044781c0b36d644808967253d76f60fc4fd3b699d1fd047",
+          "process_id": 2173762,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-92c1791474c1b1bd",
+                "raw_response_sha256": "5fc9de939237f79e7959046395d272bfaf2dde2c101490ea3fc060edd4c3e093"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "scope-3-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/0bb22f19a87d3f7f/message-1.json",
+          "receipt_sha256": "a8fb006cf9e168b08c1e97b10ea493b487394a2218814c893debab3b35b0461a",
+          "trace_sha256": "7d8a24c05326150fe505df4417fc6710efc2e0072d48392dd3146c18c8cd2625",
+          "process_id": 2174722,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-92fcc4005c637202",
+                "raw_response_sha256": "edced526e239786f6e73f6ee6876911971feebf4c425902f119ac313e1a96e95"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Project hotel <=800 CNY/night correctly separated from unrecorded personal travel budget; no_change."
+    },
+    {
+      "case_id": "scope-4",
+      "category": "scope",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "scope-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-0.json",
+          "receipt_sha256": "af1143caf1c59b8b4e91272a4034d4870b3b4bcb8a7620fd2e018116b2c489c3",
+          "trace_sha256": "8d95b31370a9255cf9a8fdb34cef57c5944f56fee7c826b485b2b91985d68e52",
+          "process_id": 2175844,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-9aa1708668b61fab",
+                "raw_response_sha256": "ec02e155f290a1cb1076913161fba76a2a768d589a35b1875a4c1b04e94de7b1"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "scope-4-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/3fd90012cc05c797/message-1.json",
+          "receipt_sha256": "3a8a082adbe07ee3008471b371bbd3516357fb0fc090308b370b1de6eca1bdc1",
+          "trace_sha256": "d80b8823b50d8f8ec62ddc29c2e8737c1fb7e1087d72055d13b79297533c5654",
+          "process_id": 2176721,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-9f5fb2aee4a2a0e7",
+                "raw_response_sha256": "4c7e2b93c62ddc475c37fd804d4f1ab834b5d3446fc62112f87a4cdbcff4e1a1"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Project-relative Friday retained; no absolute date invented; no_change."
+    },
+    {
+      "case_id": "object-continue-1",
+      "category": "object_continue",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "object-continue-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-0.json",
+          "receipt_sha256": "4ac97b77d66bcac07d1d6989a157cfee43de6e8c10ce7a3e8184803507f3871b",
+          "trace_sha256": "0a735ee2394b7860fe283d726ca148d73b6cb60b96a5dc36511e46c798d6961b",
+          "process_id": 2149633,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-b1f6b0edba7124d1",
+                "raw_response_sha256": "9d6fd42feebbdd9fcac902abca3e3f97e9520aeda65fe0ed15c0885c46f212eb"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 3,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "object-continue-1-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/73a12f9eb8f0f0b7/message-1.json",
+          "receipt_sha256": "776e804651ce627fe0839d0342631197f2fb49c8c302aa67d73f58b4e684e725",
+          "trace_sha256": "ee010ba90ae0675910595a2f3d0f626fd1e61f5a4de56d1d42c53e3edc0e6f84",
+          "process_id": 2150632,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 16,
+                "provider_id": "chatcmpl-aede70f6fa452551",
+                "raw_response_sha256": "3cc5f07f72492614bc39330a994a23e33154dfc393917e648b0215a12a7c7c9a"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "One exact authorized reservation/label with actual Tool-supported card. Follow-up gets same created reservation, no repeated business mutation, no_change."
+    },
+    {
+      "case_id": "object-continue-2",
+      "category": "object_continue",
+      "complete": false,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "object-continue-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-0.json",
+          "receipt_sha256": "df7dee8648b704c85d409dee962406b2d4ee010687494a1152f9f6a4f1e84e74",
+          "trace_sha256": "48c092ac258c35c458f46ee0fd6f4c5076fbf2e6502600ae594e913a52eef836",
+          "process_id": 2177746,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-bed30ed448498fa3",
+                "raw_response_sha256": "8011d5e393bdbc536c255ff56ce9bc386dbbc57094c275bec5ea5f5ee4ff24e8"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 3,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "object-continue-2-m2",
+          "status": "interrupted",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/346c819fbf202423/message-1.json",
+          "receipt_sha256": "120336473ea382a4eeb294cf2bf262e0973cd18b09b630fb0576d42ec0c31b62",
+          "trace_sha256": "8c6a0bb2b60577bbf9b2d096634a8a6ae28dc92b020c32e02f33956ad727a308",
+          "process_id": 2178881,
+          "final_linkage": {
+            "status": "NO_FINAL",
+            "provider_id": null
+          },
+          "error_type": "ValueError",
+          "error": "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "FAIL",
+      "root_review_notes": "FAIL/INTERRUPTED: initial exact reservation and Tool-supported durable card exist. Follow-up uses actual explicit-search advertised cursor; selected-page resolver checks ordinary packet instead and rejects. No final or business state lookup; no retry or duplicate side effect."
+    },
+    {
+      "case_id": "object-continue-3",
+      "category": "object_continue",
+      "complete": false,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "object-continue-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-0.json",
+          "receipt_sha256": "6555487e5948e4f713dbaa2b9c523ef89b6511326237a39a90bad1fe2aae70dd",
+          "trace_sha256": "7687e6ac8708d48a806302a55aafb41a99f998b90b92fe8e362861ca6e742881",
+          "process_id": 2179872,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-b90b71557a9e4743",
+                "raw_response_sha256": "88012c8e34dd022b4c01eaeef35b08bbc62aa2f05d8328c678d0deb6a3f0f542"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 3,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "object-continue-3-m2",
+          "status": "interrupted",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/e86696f850e5d3fd/message-1.json",
+          "receipt_sha256": "b49d0021808de794d68a3adc2b2b087b101a7b24e53798c9a88cb8892e102feb",
+          "trace_sha256": "1b652292c27d92495efae6d8ed5754cf40aa93d0cc2a46d7d8a8fec2451eb126",
+          "process_id": 2180843,
+          "final_linkage": {
+            "status": "NO_FINAL",
+            "provider_id": null
+          },
+          "error_type": "ValueError",
+          "error": "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "FAIL",
+      "root_review_notes": "FAIL/false durable save: initial exact reservation succeeds but Host final says result saved, while card count is zero and closed writer mixed Human/Tool user_statement proposal is rejected source_role_mismatch. Follow-up actual explicit-search cursor is rejected against ordinary packet, no final; raw Source/observation persistence is separate from requested durable semantic card."
+    },
+    {
+      "case_id": "object-continue-4",
+      "category": "object_continue",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "object-continue-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-0.json",
+          "receipt_sha256": "c8efa23fbd8854a2068475138e7ffec8981c6f4d6bdce0f47267c4164ddad7fb",
+          "trace_sha256": "aa5ad4239a23ef3caf644b553de34fc5baa14b95404c9478d97bf513b70bf9e6",
+          "process_id": 2181868,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-980168db32c3d243",
+                "raw_response_sha256": "afeca6fe1ce67badeeee116da7653dc6008f728af31f0301d0dec7ac3e36a89c"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 3,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "object-continue-4-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/bb61d3f44d0e6910/message-1.json",
+          "receipt_sha256": "d15a3eb505b67555a459e37200c9e5b264b187982264bc2c730cde15486b74d3",
+          "trace_sha256": "666f1b5549c0da98601409388430520b3e4c6fd366ed43359710080de880bc6e",
+          "process_id": 2182840,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 16,
+                "provider_id": "chatcmpl-a5cec9af3b2563d7",
+                "raw_response_sha256": "86625694f9d0ec862115384c2a033b0ea25904a23adceff83e6fa5e541898604"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 6,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "One exact authorized reservation/label and Tool-supported episodic card. Follow-up reads same created reservation without repeated work; no_change."
+    },
+    {
+      "case_id": "restart-1",
+      "category": "restart",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "restart-1-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-0.json",
+          "receipt_sha256": "89457e26ee33ad900e40ca123e2615e813501f7ca55e9306223d2abdbb0ba71e",
+          "trace_sha256": "821e73da892ff229ad26eef9d9551ca15e832a3e00147542de4dfc13ed49d310",
+          "process_id": 2151628,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-a4b0e01d82e3e66e",
+                "raw_response_sha256": "7ffc5f503acba3ecdaff8a6ad9bfdf65d6db97d5ad259b783f0fd90e91103cb4"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "restart-1-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/c4d7bee81059802e/message-1.json",
+          "receipt_sha256": "397ebc599f0c507c8fe458c4e4bd98904db1a79e3993862ecf0d00bdebd4eed4",
+          "trace_sha256": "99ef1742586cd7a56e559921b17009336c7c8ce01720f6d80101efef3d46f24a",
+          "process_id": 2152605,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-bbde5d08ac8de6f0",
+                "raw_response_sha256": "1790b7396147f1deaadc65e64caebd6bf8e6a4bd9c459d6f223e1342bce41bba"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Separate actual process reopens persistent bank and correctly recalls steps before examples; no_change."
+    },
+    {
+      "case_id": "restart-2",
+      "category": "restart",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "restart-2-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-0.json",
+          "receipt_sha256": "2cd6e175b12363c8bbf7e0c26fb4243165c0a5f6141de7f5a67ab097cd67c2a2",
+          "trace_sha256": "958cba8d61be8d344e9217e6652051d8fe5679de56c3f9ff128768063b90bbfd",
+          "process_id": 2183748,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 18,
+                "provider_id": "chatcmpl-8e00e091a81480ff",
+                "raw_response_sha256": "511b6dfceb0050ff7a155bd35d06169e4442c97a3453a4f754d48fd3789279c8"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "restart-2-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/214d82bffbaf8ccc/message-1.json",
+          "receipt_sha256": "137878a1db7707b435c94567fbc326213d0556bea6fbd2830c35581ba8c707e9",
+          "trace_sha256": "5efc36807c7889e226a96419ab867a4e8ca302222497727328936f7bc1c7380e",
+          "process_id": 2184841,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 22,
+                "provider_id": "chatcmpl-92f4bb009e70f258",
+                "raw_response_sha256": "962162214a89200f532b6cdd9242505434a741654f9fbe4c48788119c7a62deb"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Separate actual process reopens persistent bank and correctly recalls quiet meeting room; no_change."
+    },
+    {
+      "case_id": "restart-3",
+      "category": "restart",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "restart-3-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-0.json",
+          "receipt_sha256": "4d83fda9e32b833954288ae11c0283b5e6a9de16baac0a6240170e24f2c54bfa",
+          "trace_sha256": "5ebe8147412187ae1d5d623f441ae58a2dadb59f53e9d89107a53ebb8667e08d",
+          "process_id": 2185884,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 10,
+                "provider_id": "chatcmpl-acac8e65280cb72c",
+                "raw_response_sha256": "71de3b9d8786cea0e1e56d97b29dd4b62c8c6a73d743d650192203140de20312"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "restart-3-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/a1fd92e25ea28b1d/message-1.json",
+          "receipt_sha256": "d87a9c36f2da4cb86bf77130af3ed5f6c5ef0a691e8ae7f166900c182a187000",
+          "trace_sha256": "a7c154ef7a7aa3b82e4e91b9e9999f9a87af2e4b5f44d53aff8ddfca79a165a3",
+          "process_id": 2186817,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 8,
+                "provider_id": "chatcmpl-a0d55e527271a2fe",
+                "raw_response_sha256": "f1953fd426a2ec959d34fc4dca60b8ee7ebf38130dba13304f1d48b5c512555f"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Separate actual process correctly recalls less chili from original durable card. Subsequent one-call writer is truncated, pending without attempted actions/receipts; original card retained, no paid repair."
+    },
+    {
+      "case_id": "restart-4",
+      "category": "restart",
+      "complete": true,
+      "messages": [
+        {
+          "message_index": 0,
+          "message_id": "restart-4-m1",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-0.json",
+          "receipt_sha256": "6e71e330ff96908a85c0104c6a64f5389a162dd1eb92741ecd219fcda3f00681",
+          "trace_sha256": "9da60da7312eb6eb56499f7d50b855c6fc4dc48581eaacc4a4f22c1551b8f42f",
+          "process_id": 2189234,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-b4d3e207688a4f4d",
+                "raw_response_sha256": "e763875865e28145bda7393f1430bfe0cd66bd49f20f66f7a89fa77eeb97c5a1"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 2,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        },
+        {
+          "message_index": 1,
+          "message_id": "restart-4-m2",
+          "status": "completed",
+          "receipt_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7/421e43f0baf1b8dd/message-1.json",
+          "receipt_sha256": "350a5b2d45e99bdfb9b7336cedb2847c26e82ee50ff008cea11f52bf133d55dd",
+          "trace_sha256": "85d0c4c8442fb36224787b35ea5052b460255c8494cb6c1d29e8eb85acda5b56",
+          "process_id": 2190089,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-a92cb5ccb7df05d7",
+                "raw_response_sha256": "26f56ad06f109e0eab96d20cdbc2d5e2975e5b32994d795559be6d8535b0c542"
+              }
+            ]
+          },
+          "error_type": null,
+          "error": null,
+          "source_count": 4,
+          "semantic_review": "ROOT_FULL_ASSERTION_SOURCE_SCOPE_STATE_REVIEW_NOT_INDEPENDENT"
+        }
+      ],
+      "distinct_recorded_processes": true,
+      "semantic_verdict": "PASS",
+      "root_review_notes": "Separate actual process correctly recalls notes by project from original durable card. Subsequent one-call writer is truncated, pending without attempted actions/receipts; original card retained, no paid repair."
+    }
+  ],
+  "trace_costs": {
+    "generation_requests": 171,
+    "generation_classified_requests": 151,
+    "generation_known_tokens": 1222370,
+    "generation_classified_known_tokens": 1085579,
+    "embedding_requests": 52,
+    "embedding_classified_requests": 52,
+    "embedding_known_tokens": 20202,
+    "embedding_classified_known_tokens": 20202,
+    "semantic_writer_classified_requests": 20,
+    "semantic_writer_classified_known_tokens": 136791
+  },
+  "ledger_delta": {
+    "generation_requests": 171,
+    "generation": {
+      "charged_tokens": 1222370,
+      "known_tokens": 1222370,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 20202,
+      "known_tokens": 20202,
+      "unknown_usage": 0
+    },
+    "trace_known_tokens_match": true,
+    "trace_generation_requests_match": true
+  },
+  "writer_prefixes": [],
+  "review_status": "ROOT_FULL24_DECLARED_CASE_REVIEW_NOT_INDEPENDENT",
+  "qualifications": [
+    "Collector is not an independent Judge or semantic scorer.",
+    "Unclassified generation includes Host and any writer without declared prefix.",
+    "Trace known usage is separate from conservative ledger charges; unknown is not zero."
+  ],
+  "product": "NO_GO",
+  "reviewed_at_utc": "2026-10-01T09:07:43.795561+00:00",
+  "independent_judge": false,
+  "rubric_sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+  "normal24_case_counts": {
+    "PASS": 21,
+    "FAIL": 3
+  },
+  "normal22_gate": "NOT_PASSED_21_OF_24_AND_ONE_FALSE_DURABLE_SAVE",
+  "normal_gate_denominator": 24,
+  "normal_gate_minimum_pass": 22,
+  "owner_leaks_observed": 0,
+  "owner_source_instances_checked": 160,
+  "false_durable_saved_receipts_observed": 1,
+  "original_update_repairs": {
+    "update-1": {
+      "original_id": "dacedef1-1b9d-599e-ade7-809954ed2fcb",
+      "original_same_id_revision": true,
+      "correction_revision": 2,
+      "correct_content_and_current_former_reader": true,
+      "original_history_retained": true,
+      "unintended_preference_duplicates": 0,
+      "correction_source_supported": true,
+      "direct_leaves": [
+        "src-259cd6b14682b4e650a7fc6a04501b4fb94be8eae86b020b78f2c861d0ebec55"
+      ],
+      "actual_correction_leaf": "src-259cd6b14682b4e650a7fc6a04501b4fb94be8eae86b020b78f2c861d0ebec55",
+      "query_revision": 2,
+      "complete_old_update_gate": "PASSED_SCOPED_FULL_ORIGINAL_REPAIR"
+    },
+    "update-2": {
+      "original_id": "0b5e316e-1578-58d9-b56c-add05c835a0e",
+      "original_same_id_revision": true,
+      "correction_revision": 2,
+      "correct_content_and_current_former_reader": true,
+      "original_history_retained": true,
+      "unintended_preference_duplicates": 0,
+      "correction_source_supported": true,
+      "direct_leaves": [
+        "src-2dd16c721ccf3f0216c8d9b58e25a88f613118040c9ad7ab39996c9658fdb18d"
+      ],
+      "actual_correction_leaf": "src-2dd16c721ccf3f0216c8d9b58e25a88f613118040c9ad7ab39996c9658fdb18d",
+      "query_revision": 2,
+      "complete_old_update_gate": "PASSED_SCOPED_FULL_ORIGINAL_REPAIR"
+    },
+    "update-3": {
+      "original_id": "03d01737-ee3f-5849-816f-34dba0cb2177",
+      "original_same_id_revision": true,
+      "correction_revision": 2,
+      "correct_content_and_current_former_reader": true,
+      "original_history_retained": true,
+      "unintended_preference_duplicates": 0,
+      "correction_source_supported": true,
+      "direct_leaves": [
+        "src-cb2da33c589e6721f90beaf2a8b5fa8e88927db13d0c97bcdc49c39cc9790abb"
+      ],
+      "actual_correction_leaf": "src-cb2da33c589e6721f90beaf2a8b5fa8e88927db13d0c97bcdc49c39cc9790abb",
+      "query_revision": 2,
+      "complete_old_update_gate": "PASSED_SCOPED_FULL_ORIGINAL_REPAIR"
+    },
+    "update-4": {
+      "original_id": "98814679-7316-534e-8e0b-d680cc196120",
+      "original_same_id_revision": true,
+      "correction_revision": 2,
+      "correct_content_and_current_former_reader": true,
+      "original_history_retained": true,
+      "unintended_preference_duplicates": 0,
+      "correction_source_supported": false,
+      "direct_leaves": [
+        "src-0fa37f8660735f2e047cfe5a29498249e1fe5be38aee693285fbb2453a3babb4"
+      ],
+      "actual_correction_leaf": "src-133d3c876f2a374acd17913fcecd8d19e2af4904119e04cbae79df3329819438",
+      "query_revision": 2,
+      "complete_old_update_gate": "NOT_PASSED_CHANGED_CONTENT_OLD_SOURCE"
+    }
+  },
+  "both_old_update_core_content_identity_reader_gate": "PASSED_SCOPED_CONTENT_IDENTITY_READER",
+  "both_old_update_supported_correction_gate": "PASSED_SCOPED_ACTUAL_CORRECTION_HUMAN_LEAVES",
+  "both_old_update_complete_gate": "PASSED_SCOPED_BOTH_ORIGINAL_CARDS_HISTORY_CURRENT_FORMER_AND_SUPPORT",
+  "direct_source_support_gaps": {
+    "cases": [
+      "update-4",
+      "scope-1"
+    ],
+    "case_count": 2,
+    "distinct_committed_version_count": 2,
+    "changed_correction_only_old_source_cases": [
+      "update-4"
+    ],
+    "query_only_cases": [
+      "scope-1"
+    ],
+    "details": [
+      {
+        "case_id": "update-4",
+        "revision": 2,
+        "changed_fields": [
+          "content"
+        ],
+        "chosen_source_role": "user",
+        "chosen_source_body": "请保存：通常把会议安排在上午。",
+        "actual_correction_omitted": "src-133d3c876f2a374acd17913fcecd8d19e2af4904119e04cbae79df3329819438",
+        "finding": "Changed afternoon claim selects only old morning statement."
+      },
+      {
+        "case_id": "scope-1",
+        "revision": 2,
+        "changed_fields": [
+          "content",
+          "scope"
+        ],
+        "chosen_source_role": "user",
+        "chosen_source_body": "下一次给我个人安排晚餐时，你是否知道我长期坚持素食？",
+        "finding": "Question-only direct leaves do not establish copied team lunch/personal negation and scope."
+      }
+    ],
+    "semantic_entailment_proven_by_field_map": false,
+    "full_source_semantic_gate": "NOT_PASSED"
+  },
+  "unsupported_scope_and_assertion_findings": [
+    {
+      "case_id": "scope-2",
+      "status": "FAIL",
+      "finding": "Usual detailed preference omitted from final; demo brevity generalized."
+    }
+  ],
+  "maintenance_states": {
+    "skipped_host_committed": 26,
+    "no_change": 14,
+    "committed": 2,
+    "pending": 4,
+    "NOT_REACHED": 2
+  },
+  "planned_not_run_messages": 0,
+  "pending_maintenance": [
+    {
+      "case_id": "scope-2",
+      "message_index": 1,
+      "receipt_sha256": "35f7b1b6d9a7b7f544f1d4f1c701ecc1680e315e4b3f7e3f0b0ffb50206a0de0",
+      "original_maintenance": {
+        "status": "pending",
+        "effect": "none",
+        "generation_calls": 1,
+        "phase": "actual_public_events_boundary",
+        "source_refs": [
+          "src-15e7bb8d2bf788c07ee9a43ba2dabacb5cd0d7f78073e54919735099128153df",
+          "src-b6e70fb28c3301c3136c7b1f1cab955eeb062adbe63869a777c96cd6d20833dc"
+        ],
+        "batch_atomic": false,
+        "receipts": [
+          {
+            "action": {
+              "name": "manage_memory",
+              "args": {
+                "content": "用户希望回答尽量简短。",
+                "kind": "semantic",
+                "scope": {},
+                "basis": "user_statement",
+                "source_refs": [
+                  "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                ],
+                "field_support": {
+                  "content": {
+                    "source_refs": [
+                      "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                    ]
+                  },
+                  "scope": {
+                    "source_refs": [
+                      "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                    ]
+                  },
+                  "basis": {
+                    "source_refs": [
+                      "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                    ]
+                  },
+                  "kind": {
+                    "source_refs": [
+                      "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                    ]
+                  }
+                }
+              },
+              "id": "boundary:maintenance:1a07a4557a4bd2ead952078aa9278f09fdf41b2ee8de0cb5795fbfd84a528cf0:0:0",
+              "type": "tool_call"
+            },
+            "receipt": {
+              "ok": false,
+              "status": "rejected",
+              "reason": "source_role_mismatch",
+              "id": "892d2042-2036-5ee5-9c0d-09a84977e2c2",
+              "revision": null,
+              "effect": "none",
+              "content_verification": "unchecked",
+              "formation_status": "pending",
+              "raw_preserved": true
+            }
+          }
+        ],
+        "trigger_binding": {
+          "bank": [
+            "langmem",
+            "E0-normal-r7",
+            "field_grounded",
+            "scope-2-owner"
+          ],
+          "config_sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+          "content_sha256": "b1570cd6788c92f2d94ae59783efd4dff7bdfaba4191bd7c280c20add4eb05bd",
+          "message_id": "scope-2-m2",
+          "origin_phase": "start",
+          "owner": "scope-2-owner",
+          "session": "s2",
+          "source_ref": "src-15e7bb8d2bf788c07ee9a43ba2dabacb5cd0d7f78073e54919735099128153df",
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-67b7f8e5ed2fba98911a09dd"
+        },
+        "whole_turn_coverage": "unchecked",
+        "attempted_actions": [
+          {
+            "name": "manage_memory",
+            "args": {
+              "content": "用户希望回答尽量简短。",
+              "kind": "semantic",
+              "scope": {},
+              "basis": "user_statement",
+              "source_refs": [
+                "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+              ],
+              "field_support": {
+                "content": {
+                  "source_refs": [
+                    "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                  ]
+                },
+                "scope": {
+                  "source_refs": [
+                    "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                  ]
+                },
+                "basis": {
+                  "source_refs": [
+                    "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                  ]
+                },
+                "kind": {
+                  "source_refs": [
+                    "src-7391dc828061100f1f925f2a3ea32c4f4d8e7cf9acd4de1706d23104a2d43a18"
+                  ]
+                }
+              }
+            },
+            "id": "boundary:maintenance:1a07a4557a4bd2ead952078aa9278f09fdf41b2ee8de0cb5795fbfd84a528cf0:0:0",
+            "type": "tool_call"
+          }
+        ],
+        "successful_actions": 0,
+        "committed_actions": 0,
+        "rejected_actions": 1
+      }
+    },
+    {
+      "case_id": "object-continue-3",
+      "message_index": 0,
+      "receipt_sha256": "6555487e5948e4f713dbaa2b9c523ef89b6511326237a39a90bad1fe2aae70dd",
+      "original_maintenance": {
+        "status": "pending",
+        "effect": "none",
+        "generation_calls": 1,
+        "phase": "actual_public_events_boundary",
+        "source_refs": [
+          "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+          "src-dbeacecdd8a96b8e643cdb805068708e3e9896d1e067e1ff27330db49caea126",
+          "src-d34c5b552696614c67edf9625c2929e72ccbb0bbeada35c31df0e2bce9f26718"
+        ],
+        "batch_atomic": false,
+        "receipts": [
+          {
+            "action": {
+              "name": "manage_memory",
+              "args": {
+                "content": "预订并制作标签：物品完整引用是“实验耗材-冷链区”，数量6，目的地“冷链收货点”，包装要求“保温包装”。真实结果：预订ID RSV-33ec1917-808b-4b64-b69b-540955d477d4，状态标签已创建。",
+                "kind": "episodic",
+                "scope": {},
+                "basis": "user_statement",
+                "source_refs": [
+                  "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+                  "src-dbeacecdd8a96b8e643cdb805068708e3e9896d1e067e1ff27330db49caea126"
+                ],
+                "field_support": {
+                  "content": {
+                    "source_refs": [
+                      "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+                      "src-dbeacecdd8a96b8e643cdb805068708e3e9896d1e067e1ff27330db49caea126"
+                    ]
+                  },
+                  "scope": {
+                    "source_refs": [
+                      "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                    ]
+                  },
+                  "basis": {
+                    "source_refs": [
+                      "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                    ]
+                  },
+                  "kind": {
+                    "source_refs": [
+                      "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                    ]
+                  }
+                }
+              },
+              "id": "boundary:maintenance:19d642f2167a68d52186fa4bcbfa1e357fd0693c49991a8f749db9df64aabfba:0:0",
+              "type": "tool_call"
+            },
+            "receipt": {
+              "ok": false,
+              "status": "rejected",
+              "reason": "source_role_mismatch",
+              "id": "09022907-dc3a-5c6b-a82b-2f76139de2a3",
+              "revision": null,
+              "effect": "none",
+              "content_verification": "unchecked",
+              "formation_status": "pending",
+              "raw_preserved": true
+            }
+          }
+        ],
+        "trigger_binding": {
+          "bank": [
+            "langmem",
+            "E0-normal-r7",
+            "field_grounded",
+            "object-continue-3-owner"
+          ],
+          "config_sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+          "content_sha256": "b1e04fdbd9495228f4bda3166b6b9a3b21958f91a95802a10cdf4faa6295b0eb",
+          "message_id": "object-continue-3-m1",
+          "origin_phase": "start",
+          "owner": "object-continue-3-owner",
+          "session": "s1",
+          "source_ref": "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-443bd9ff704ac6036d653fa7"
+        },
+        "whole_turn_coverage": "unchecked",
+        "attempted_actions": [
+          {
+            "name": "manage_memory",
+            "args": {
+              "content": "预订并制作标签：物品完整引用是“实验耗材-冷链区”，数量6，目的地“冷链收货点”，包装要求“保温包装”。真实结果：预订ID RSV-33ec1917-808b-4b64-b69b-540955d477d4，状态标签已创建。",
+              "kind": "episodic",
+              "scope": {},
+              "basis": "user_statement",
+              "source_refs": [
+                "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+                "src-dbeacecdd8a96b8e643cdb805068708e3e9896d1e067e1ff27330db49caea126"
+              ],
+              "field_support": {
+                "content": {
+                  "source_refs": [
+                    "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277",
+                    "src-dbeacecdd8a96b8e643cdb805068708e3e9896d1e067e1ff27330db49caea126"
+                  ]
+                },
+                "scope": {
+                  "source_refs": [
+                    "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                  ]
+                },
+                "basis": {
+                  "source_refs": [
+                    "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                  ]
+                },
+                "kind": {
+                  "source_refs": [
+                    "src-25e8195f735a2266cbd25fff90a01ee6bb3f07abb4c4279ad0e0638ea3920277"
+                  ]
+                }
+              }
+            },
+            "id": "boundary:maintenance:19d642f2167a68d52186fa4bcbfa1e357fd0693c49991a8f749db9df64aabfba:0:0",
+            "type": "tool_call"
+          }
+        ],
+        "successful_actions": 0,
+        "committed_actions": 0,
+        "rejected_actions": 1
+      }
+    },
+    {
+      "case_id": "restart-3",
+      "message_index": 1,
+      "receipt_sha256": "d87a9c36f2da4cb86bf77130af3ed5f6c5ef0a691e8ae7f166900c182a187000",
+      "original_maintenance": {
+        "status": "pending",
+        "effect": "unconfirmed",
+        "generation_calls": 1,
+        "phase": "actual_public_events_boundary",
+        "source_refs": [
+          "src-e2031f16720863199d6ff8ee20173c01a25c10644ac7531c2a8f19cea4555f36",
+          "src-b31bc551354a22c1b1f257f07aa69936d686bc20db6afa73a28ef7a0cf936a74"
+        ],
+        "batch_atomic": false,
+        "receipts": [],
+        "trigger_binding": {
+          "bank": [
+            "langmem",
+            "E0-normal-r7",
+            "field_grounded",
+            "restart-3-owner"
+          ],
+          "config_sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+          "content_sha256": "ada7c7a0843ba1f4f1b00988715e5f778d9d954533d0d38c97a0b78b25c59942",
+          "message_id": "restart-3-m2",
+          "origin_phase": "start",
+          "owner": "restart-3-owner",
+          "session": "s2",
+          "source_ref": "src-e2031f16720863199d6ff8ee20173c01a25c10644ac7531c2a8f19cea4555f36",
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-66635ccadfb4c2b9d496ea63"
+        },
+        "whole_turn_coverage": "unchecked",
+        "attempted_actions": [],
+        "error_type": "IncompleteChatResponse",
+        "error": "VLLM_CHAT_TRUNCATED"
+      }
+    },
+    {
+      "case_id": "restart-4",
+      "message_index": 1,
+      "receipt_sha256": "350a5b2d45e99bdfb9b7336cedb2847c26e82ee50ff008cea11f52bf133d55dd",
+      "original_maintenance": {
+        "status": "pending",
+        "effect": "unconfirmed",
+        "generation_calls": 1,
+        "phase": "actual_public_events_boundary",
+        "source_refs": [
+          "src-af26769e2b7706dc521c165f28dea280c2c7231f40d463a153c565617f93bfc3",
+          "src-73b141c7046c4ed3329f93c8f49be18918b809f5fc9e89898670d6abecc52b88"
+        ],
+        "batch_atomic": false,
+        "receipts": [],
+        "trigger_binding": {
+          "bank": [
+            "langmem",
+            "E0-normal-r7",
+            "field_grounded",
+            "restart-4-owner"
+          ],
+          "config_sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+          "content_sha256": "deae1a8ccdf1fc52f92408df467b70b29ad69cadb33008f088e6b50eaa93b0a6",
+          "message_id": "restart-4-m2",
+          "origin_phase": "start",
+          "owner": "restart-4-owner",
+          "session": "s2",
+          "source_ref": "src-af26769e2b7706dc521c165f28dea280c2c7231f40d463a153c565617f93bfc3",
+          "support_contract": "direct_support_v1",
+          "trigger_ref": "turn-18627567758f41f37707d211"
+        },
+        "whole_turn_coverage": "unchecked",
+        "attempted_actions": [],
+        "error_type": "IncompleteChatResponse",
+        "error": "VLLM_CHAT_TRUNCATED"
+      }
+    }
+  ],
+  "actual_business_checks": [
+    {
+      "case_id": "object-continue-1",
+      "exact_authorized_reservation_once": true,
+      "same_reservation_identity": true,
+      "duplicate_reservation_attempts": 0,
+      "followup_state_check_completed": true,
+      "actual_followup_calls": [
+        {
+          "name": "get_reservation",
+          "args": {
+            "item_key": "蓝色玻璃杯-展厅A"
+          },
+          "result": {
+            "ok": true,
+            "status": "found",
+            "reservation_id": "RSV-7be9e85e-8bd5-4cd6-8675-993208cb2173",
+            "item_key": "蓝色玻璃杯-展厅A",
+            "quantity": 2,
+            "destination": "一楼展厅",
+            "packing": "防震隔层",
+            "label_status": "created"
+          }
+        }
+      ],
+      "unauthorized_completed_label_attempts": 0,
+      "new_executed_business_side_effects": 0,
+      "world_unchanged": true
+    },
+    {
+      "case_id": "object-continue-2",
+      "exact_authorized_reservation_once": true,
+      "same_reservation_identity": true,
+      "duplicate_reservation_attempts": 0,
+      "followup_state_check_completed": false,
+      "actual_followup_calls": [],
+      "unauthorized_completed_label_attempts": 0,
+      "new_executed_business_side_effects": 0,
+      "world_unchanged": true
+    },
+    {
+      "case_id": "object-continue-3",
+      "exact_authorized_reservation_once": true,
+      "same_reservation_identity": true,
+      "duplicate_reservation_attempts": 0,
+      "followup_state_check_completed": false,
+      "actual_followup_calls": [],
+      "unauthorized_completed_label_attempts": 0,
+      "new_executed_business_side_effects": 0,
+      "world_unchanged": true
+    },
+    {
+      "case_id": "object-continue-4",
+      "exact_authorized_reservation_once": true,
+      "same_reservation_identity": true,
+      "duplicate_reservation_attempts": 0,
+      "followup_state_check_completed": true,
+      "actual_followup_calls": [
+        {
+          "name": "get_reservation",
+          "args": {
+            "item_key": "宣传手册-中文新版"
+          },
+          "result": {
+            "ok": true,
+            "status": "found",
+            "reservation_id": "RSV-7e0a7544-f428-46a0-b009-9b1a5b68ca9e",
+            "item_key": "宣传手册-中文新版",
+            "quantity": 30,
+            "destination": "访客接待处",
+            "packing": "按十本分组",
+            "label_status": "created"
+          }
+        }
+      ],
+      "unauthorized_completed_label_attempts": 0,
+      "new_executed_business_side_effects": 0,
+      "world_unchanged": true
+    }
+  ],
+  "unauthorized_completed_label_attempts": 0,
+  "new_executed_unauthorized_business_side_effects": 0,
+  "explicit_reuse_support_from_actual_versions": 0,
+  "field_map_attributions": [
+    {
+      "case_id": "save-1",
+      "id": "e93664aa-ed3a-5979-9678-97d1f02c0203",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "save-2",
+      "id": "094e6bfd-bd39-5d23-bc00-5e91a7b4d16e",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "save-3",
+      "id": "38e16770-b1a8-5069-927e-d964e7ab0c4a",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "save-4",
+      "id": "7d96bea3-711e-5a2c-8f87-36b69d37b033",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "recall-1",
+      "id": "d586a8e8-26e1-5402-8ce9-8cbd9379dde6",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "recall-2",
+      "id": "0de0f4ea-1c87-5e09-b942-8385d53fc91b",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "recall-3",
+      "id": "7de5f3de-3ed0-5cc7-ae1d-6e717737406a",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "recall-4",
+      "id": "aa9d2f08-29fb-5caa-89d6-b9d1c42a5b68",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-1",
+      "id": "dacedef1-1b9d-599e-ade7-809954ed2fcb",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-1",
+      "id": "dacedef1-1b9d-599e-ade7-809954ed2fcb",
+      "revision": 2,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-2",
+      "id": "0b5e316e-1578-58d9-b56c-add05c835a0e",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-2",
+      "id": "0b5e316e-1578-58d9-b56c-add05c835a0e",
+      "revision": 2,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-3",
+      "id": "03d01737-ee3f-5849-816f-34dba0cb2177",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-3",
+      "id": "03d01737-ee3f-5849-816f-34dba0cb2177",
+      "revision": 2,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-4",
+      "id": "98814679-7316-534e-8e0b-d680cc196120",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "update-4",
+      "id": "98814679-7316-534e-8e0b-d680cc196120",
+      "revision": 2,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "scope-1",
+      "id": "53effc92-93b4-5198-a184-065313c18011",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "scope-1",
+      "id": "53effc92-93b4-5198-a184-065313c18011",
+      "revision": 2,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "scope-2",
+      "id": "f63aa16e-0f82-53d9-a963-e7b89c3a3cc2",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "scope-3",
+      "id": "04a3e808-bc40-51d6-a51d-a9dc88a37d48",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "scope-4",
+      "id": "b93cecc0-8075-5721-a24c-546b07369e87",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "object-continue-1",
+      "id": "660f0192-2f42-5ee9-813c-60a5935557e4",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "object-continue-2",
+      "id": "7660a132-30a1-5274-a146-539f363b88ef",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "object-continue-4",
+      "id": "36be1156-2deb-590b-8c79-a821ff1c44e2",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "restart-1",
+      "id": "82361c48-adfa-5af0-bfea-00709f6ce447",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "restart-2",
+      "id": "49a36a90-dab7-5ca5-b548-15d075c70f7e",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "restart-3",
+      "id": "c8867a41-3e7a-5ce0-ad01-af08ee525fe0",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    },
+    {
+      "case_id": "restart-4",
+      "id": "74224e5d-6ec5-56be-95d7-97b36ff1a578",
+      "revision": 1,
+      "attributions": {
+        "basis": "model_selected",
+        "content": "model_selected",
+        "kind": "model_selected",
+        "scope": "model_selected"
+      }
+    }
+  ],
+  "redundant_supported_unchanged_revision_cases": [],
+  "cursor_corroboration_sha256": "e19bb5694238aaa7444e34a054ed95b3e474217958ec5b1d2606298ebe5c786b",
+  "false_durable_save_corroboration_sha256": "5903a88826b7f2e2bd2e67f8496b4bfd3cc3063483d4dc75cfccebc56a54d4f2",
+  "read_only_reopen": {
+    "banks": 24,
+    "sdk_items": 471,
+    "all_last_receipts_match": true,
+    "all_database_hashes_unchanged": true,
+    "new_memory_mutations": 0,
+    "artifact_sha256": "a00685f56db066526497ec855ec4fa8ac616e6424aa8ed045765ebf64e94ad52"
+  },
+  "actual_delivery": {
+    "kind": "V13_2_E0_ACTUAL_HTTP_DELIVERY_AUDIT",
+    "status": "SCOPED_WIRE_CHECK_PASSED",
+    "run_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7",
+    "input_freeze_sha256": "1618e16a398f517d8777c3faaa3716e3e8bab67e86150ac4ef803af3a06ed7b6",
+    "driver_sha256": "15e25ff0fbfab8135de241fe19554a4942d97562f677b4e053985fe26b53b65e",
+    "decoder_sha256": "690f0364825bd763d65e96460e831456667e01de489d2128d7e9c078606e92d7",
+    "planned_messages": 48,
+    "checked_message_results": 48,
+    "host_http_requests_checked": 151,
+    "maximum_ordinary_tokens": 2048,
+    "tokenizer_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": false,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+    },
+    "issues": [],
+    "socket_attempts": 0,
+    "support_contract": "direct_support_v1",
+    "tool_schema_communication": "shape_feedback_v1",
+    "expected_sdk_kind": "V13_2_E0_R7_ACTUAL_READONLY_SQLITE_SDK_REOPEN",
+    "expected_arm": "E0-normal-r7",
+    "communication_http_requests_checked": 171,
+    "sdk_reopen_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-independent-readonly-sdk-reopen.json",
+    "sdk_reopen_sha256": "a00685f56db066526497ec855ec4fa8ac616e6424aa8ed045765ebf64e94ad52",
+    "actual_new_model_http": 0,
+    "limits": [
+      "Current ordinary packet/index plus current recall reference bodies only; old packets, explicit reads, envelope, schemas and business messages remain additionally charged.",
+      "Selection is checked against original construction traces; new-profile complete support/trigger/version metadata is checked against the separately produced actual SDK reopen, not inferred semantic truth.",
+      "Complete body counts refer to delivered selected record bodies; source excerpts are selected chunks, not entire source bodies. Missing results retain the full planned denominator.",
+      "Construction, provenance membership and body delivery do not prove semantic support, consumption, final answer quality or unseen generalization."
+    ]
+  },
+  "post_run_checks": {
+    "artifact_sha256": "1871b2f1e9e1939f4063f3f25282732fe0ede5abd0c5f5239a2251f82f52d912",
+    "all_three_original_frozen_commands_passed": true,
+    "source_unchanged": true,
+    "ledger_unchanged": true,
+    "checks": [
+      {
+        "name": "sdk-reopen",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/offline-tool-freeze/reopen_e0_r7_readonly.py"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "started_at": "2026-10-01T08:43:05.894395+00:00",
+        "finished_at": "2026-10-01T08:43:06.677743+00:00",
+        "returncode": 0,
+        "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/sdk-reopen.stdout.log",
+        "stdout_sha256": "6bcb474153a1870d828d880ada8a41066cebda5667fddbb0da942912c8477479",
+        "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/sdk-reopen.stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_unchanged": true,
+        "ledger_sha256_after": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+        "artifact_checks": [
+          {
+            "status": "PASS_ACTUAL_COHORT_KIND_AND_FULL24"
+          }
+        ]
+      },
+      {
+        "name": "actual-delivery",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/offline-tool-freeze/check_e0_wire_delivery.py",
+          "--run-root",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7",
+          "--sdk-reopen",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-independent-readonly-sdk-reopen.json",
+          "--output",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-actual-delivery-check.json"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "started_at": "2026-10-01T08:43:06.763980+00:00",
+        "finished_at": "2026-10-01T08:43:11.799381+00:00",
+        "returncode": 0,
+        "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/actual-delivery.stdout.log",
+        "stdout_sha256": "2263f5bf73584211f2a8a4ce9e25d01652f1978f3b377036aa26c8f3f0b85e6e",
+        "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/actual-delivery.stderr.log",
+        "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+        "source_unchanged": true,
+        "ledger_sha256_after": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+        "artifact_checks": []
+      },
+      {
+        "name": "full-collector",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "tools/audit_v13_2_development.py",
+          "--run-root",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-normal-r7",
+          "--output",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/E0-audit-complete-unscored.json",
+          "--private-dir",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/private-audit-complete-unscored",
+          "--ledger-before",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/ledger-before.json",
+          "--ledger-after",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/ledger-after-E0.json"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "started_at": "2026-10-01T08:43:11.817456+00:00",
+        "finished_at": "2026-10-01T08:43:12.170058+00:00",
+        "returncode": 0,
+        "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/full-collector.stdout.log",
+        "stdout_sha256": "7b534b5e7016f63a01f2df4eb7fcb5a39d8d5fbea0aab81b0294790e63fdf2c9",
+        "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r7/full-collector.stderr.log",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_unchanged": true,
+        "ledger_sha256_after": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+        "artifact_checks": []
+      }
+    ]
+  },
+  "ledger_identity": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+    "after": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+    "cumulative_generation_requests": 9200,
+    "cumulative_known_generation_tokens": 25757358,
+    "cumulative_charged_generation_tokens": 25787745,
+    "historical_unknown_generation_usage": 1,
+    "historical_conservative_unknown_charge": 30387,
+    "cumulative_embedding_tokens": 920843,
+    "new_unknown_usage": 0
+  },
+  "root_review_driver_sha256": "0b3708af4a0304cf29e338066d48f947a91ff1c479a44fa30cc6d239e4a159fb",
+  "original_unscored_packet_sha256": "10ecd108f2169b0428805a4f46c169d1b4cb278bd289b1fce70cbce58ddf8a50",
+  "exposed_development_not_unseen_validation": true,
+  "single_factor_causal_claim": false,
+  "d4_admission": "NOT_ADMITTED_FALSE_SAVE_SOURCE_SEMANTIC_AND_COMMON_CAPABILITY_GATES_INCOMPLETE",
+  "current_runtime_manifest_sha256": "8b76cdc215557ecb9fd1aba222e8ad97270afeb07c2371a6ca78052003677ad2",
+  "immutable_original_attempts": true,
+  "original_cohort_file_closure_sha256": "44f548c97cb3cd69f0fa6a20d801f93f7dbd47f5bd64e40c3c6c5588c037f0f1"
+}

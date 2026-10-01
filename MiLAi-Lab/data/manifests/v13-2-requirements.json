@@ -86,7 +86,8 @@
         "data/manifests/v13-2-source-index-acceptance.json",
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-e0-r7-results.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
@@ -105,7 +106,8 @@
         "data/manifests/v13-2-d1-source-acceptance.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-direct-support-acceptance.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-e0-r7-results.json"
       ],
       "condition": null,
       "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
@@ -373,7 +375,8 @@
         "data/manifests/v13-2-e0-r3-results.json",
         "data/manifests/v13-2-e0-r4-results.json",
         "data/manifests/v13-2-e0-r5-results.json",
-        "data/manifests/v13-2-e0-r6-results.json"
+        "data/manifests/v13-2-e0-r6-results.json",
+        "data/manifests/v13-2-e0-r7-results.json"
       ],
       "condition": null,
       "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent. Separate R4 full24:20PASS/4FAIL,22 gate NOT_PASSED. Four same-ID corrections/history preserved; update2/3 actual explicit historical reads/finals pass scoped, query r3 direct question-only source gap prevents full update2 gate. Scope1 unsupported personal card and scope2 one-time broadening retained. No stitching or independent claim.",
@@ -879,13 +882,18 @@
     "individual_requirement_statuses_preserved": true
   },
   "latest_development_review": {
-    "cohort": "R6",
-    "public_commit": "5ef0ee060646c5c2c993f029c3cbe7df5fa4d9b7",
-    "runtime": "data/manifests/v13-2-e0-r6-runtime.json",
-    "results": "data/manifests/v13-2-e0-r6-results.json",
-    "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
-    "normal_gate": "NOT_PASSED",
-    "complete_old_update_gate": "NOT_PASSED",
+    "cohort": "R7",
+    "runtime_pre_run_public_commit": "b6e33011f79ebfc640e04b136cca2b2b11319c44",
+    "runtime": "data/manifests/v13-2-e0-r7-runtime.json",
+    "results": "data/manifests/v13-2-e0-r7-results.json",
+    "result_sha256": "73af977f03805765c4278d16e438b3bc9c08154ede58700767e573e61649f8fe",
+    "normal_gate": "NOT_PASSED_21_OF_24_AND_FALSE_SAVE",
+    "complete_old_update_gate": "PASSED_SCOPED_BOTH_ORIGINAL_CARDS_HISTORY_CURRENT_FORMER_AND_SUPPORT",
+    "full_source_semantic_gate": "NOT_PASSED",
+    "false_durable_saved_receipts": 1,
+    "completed_messages": 46,
+    "interrupted_messages": 2,
+    "not_run_messages": 0,
     "actual_d4_admission": "NOT_ADMITTED",
     "all_original_cohorts_retained": true,
     "statuses_not_upgraded": true,
@@ -914,5 +922,21 @@
     "actual_embedding_requests": 0,
     "original_ledger_before_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
     "all48_requirement_statuses_unchanged": true
-  }
+  },
+  "previous_development_reviews": [
+    {
+      "cohort": "R6",
+      "public_commit": "5ef0ee060646c5c2c993f029c3cbe7df5fa4d9b7",
+      "runtime": "data/manifests/v13-2-e0-r6-runtime.json",
+      "results": "data/manifests/v13-2-e0-r6-results.json",
+      "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+      "normal_gate": "NOT_PASSED",
+      "complete_old_update_gate": "NOT_PASSED",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "all_original_cohorts_retained": true,
+      "statuses_not_upgraded": true,
+      "full_plan": "ACTIVE",
+      "product": "NO_GO"
+    }
+  ]
 }

@@ -1483,6 +1483,417 @@
           "finished_at_utc": "2026-10-01T05:41:47.452472+00:00"
         }
       ]
+    },
+    {
+      "kind": "paper",
+      "id": "2607.29167v1",
+      "title": "Memory Provenance Laundering in LLM Agents: A Non-Amplification Firewall for Persistent Memory",
+      "version": "2607.29167v1",
+      "url": "https://arxiv.org/abs/2607.29167v1",
+      "retrieved_at_utc": "2026-10-01T09:16:52.099392+00:00",
+      "status": "METHODS_ABSTRACT_REFERENCE_NOT_NEW_FIREWALL",
+      "summary": "平台保留原来源角色及权限的原则参考；不采用其固定风险策略、授权分类器或论文分数。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2607.29167",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2607.29167/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:11:44.119397+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2607.29167",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "d1743d3989d9e5bee30a0a617a9fe5ff9357a07ecf173aa325644df81719b210",
+          "bytes": 41568,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:45.342141+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2607.29167v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2607.29167v1/abstract.html",
+          "started_at_utc": "2026-10-01T09:11:45.345342+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2607.29167v1",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "7d5df1cee60a6ff24e5d776f3c54becd7e6218b8d1f5914f14c8461535052064",
+          "bytes": 41578,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:45.970977+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2607.29167v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2607.29167v1/paper.pdf",
+          "started_at_utc": "2026-10-01T09:11:45.971270+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2607.29167v1",
+          "response_content_type": "application/pdf",
+          "sha256": "13d58d39f5a82f889302efedfa2444431f81e775e00586133dcc417e67f9994c",
+          "bytes": 550084,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:47.839079+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "paper",
+      "id": "2602.17913v1",
+      "title": "From Lossy to Verified: A Provenance-Aware Tiered Memory for Agents",
+      "version": "2602.17913v1",
+      "url": "https://arxiv.org/abs/2602.17913v1",
+      "retrieved_at_utc": "2026-10-01T09:16:52.104564+00:00",
+      "status": "METHODS_ABSTRACT_REFERENCE_NOT_NEW_ROUTER",
+      "summary": "摘要中的不可变原始日志与provenance链接作为原始来源保留的参考；不采用sufficiency router、verified写回或其任务/分数。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2602.17913",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2602.17913/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:11:47.841505+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2602.17913",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "456ae9ea72e4e45a857f1eeb9eb85305ec0d1ff8b67af962bfdadba01a9b20ac",
+          "bytes": 41464,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:48.512429+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2602.17913v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.17913v1/abstract.html",
+          "started_at_utc": "2026-10-01T09:11:48.524739+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2602.17913v1",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "f05e3601d711a22916b51cc25d6bd970829bbee3c67df9ef4dd2b5595e2e3735",
+          "bytes": 41476,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:49.240733+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.17913v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.17913v1/paper.pdf",
+          "started_at_utc": "2026-10-01T09:11:49.241079+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2602.17913v1",
+          "response_content_type": "application/pdf",
+          "sha256": "22dc00d8441af5c7cd80793d644b417c51ea2043641ed8c25ab43ccd3dab24ce",
+          "bytes": 804826,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:50.555480+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "paper",
+      "id": "2604.27233v1",
+      "title": "Reinforced Agent: Inference-Time Feedback for Tool-Calling Agents",
+      "version": "2604.27233v1",
+      "url": "https://arxiv.org/abs/2604.27233v1",
+      "retrieved_at_utc": "2026-10-01T09:16:52.107674+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "summary": "检索候选留存；额外reviewer、预执行语义评价和优化不接入当前单模型真实回执/完整计费方法。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2604.27233",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2604.27233/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:11:50.556011+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2604.27233",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "d42652bb4dfc8dc6555b4cb34aff9d1c7c1af808e6f053e2aa334baf5474504c",
+          "bytes": 43326,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:51.050612+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.27233v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2604.27233v1/abstract.html",
+          "started_at_utc": "2026-10-01T09:11:51.051310+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2604.27233v1",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "1b63a0b7dfb82044fc1073b9b21b458c3482f9aa97a0d94c79141017ff66e18e",
+          "bytes": 43338,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:51.747908+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2604.27233v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2604.27233v1/paper.pdf",
+          "started_at_utc": "2026-10-01T09:11:51.748298+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2604.27233v1",
+          "response_content_type": "application/pdf",
+          "sha256": "352a4f39ae64d07722a7e63bfed3d9afad20f7529c406ee764af37d3503b40c8",
+          "bytes": 392086,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:52.792745+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "paper",
+      "id": "2605.09730v5",
+      "title": "RubricRefine: Improving Tool-Use Agent Reliability with Training-Free Pre-Execution Refinement",
+      "version": "2605.09730v5",
+      "url": "https://arxiv.org/abs/2605.09730v5",
+      "retrieved_at_utc": "2026-10-01T09:16:52.118907+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "summary": "检索候选留存；自动任务rubric、评分/反复修复不接入当前运行路径。仅离线原rubric由Root评分。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2605.09730",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2605.09730/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:11:52.793297+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2605.09730",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "e1077acc3dbf0a428c462a13947c9583094d755ee6be069d542f7548772547e8",
+          "bytes": 43871,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:53.374372+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2605.09730v5",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2605.09730v5/abstract.html",
+          "started_at_utc": "2026-10-01T09:11:53.375606+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2605.09730v5",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "d48b59226dec431a3bffd14d646e5fe86a73913f100b1529b015965cda02f20a",
+          "bytes": 43883,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:54.310156+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2605.09730v5",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2605.09730v5/paper.pdf",
+          "started_at_utc": "2026-10-01T09:11:54.310578+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2605.09730v5",
+          "response_content_type": "application/pdf",
+          "sha256": "6a5fc46c013309c24240e9abea216b64f1ebdafdf6f8f808365215577df1366b",
+          "bytes": 1877117,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:57.018450+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "paper",
+      "id": "2408.16991v1",
+      "title": "Tool-Assisted Agent on SQL Inspection and Refinement in Real-World Scenarios",
+      "version": "2408.16991v1",
+      "url": "https://arxiv.org/abs/2408.16991v1",
+      "retrieved_at_utc": "2026-10-01T09:16:52.122878+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "summary": "搜索返回的领域相关候选留存；SQL专用retriever/detector不替换当前领域通用读取/写入机制。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2408.16991",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2408.16991/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:11:57.019229+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2408.16991",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "7c7f1988609069be892d55ee4e4acf7261c13888ff2f1d062da4088ba5bb5e9e",
+          "bytes": 41340,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:57.732273+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2408.16991v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2408.16991v1/abstract.html",
+          "started_at_utc": "2026-10-01T09:11:57.732954+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2408.16991v1",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "7b43a1694feed4a592b5d6659e470dbca1877a2dacc227cd2e74bc99512e0f13",
+          "bytes": 41352,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:11:58.302841+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2408.16991v1",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2408.16991v1/paper.pdf",
+          "started_at_utc": "2026-10-01T09:11:58.303291+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2408.16991v1",
+          "response_content_type": "application/pdf",
+          "sha256": "3a9082bdf3a9e8e2bb2a995976a39535598792298abf36c16bb7aa72c549b44b",
+          "bytes": 646512,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:12:00.321019+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "paper",
+      "id": "2602.20426v2",
+      "title": "Learning to Rewrite Tool Descriptions for Reliable LLM-Agent Tool Use",
+      "version": "2602.20426v2",
+      "url": "https://arxiv.org/abs/2602.20426v2",
+      "retrieved_at_utc": "2026-10-01T09:16:52.173673+00:00",
+      "status": "SEARCHED_CANDIDATE_NOT_ADOPTED",
+      "summary": "工具说明学习候选留存；不基于暴露案例调优schema或加入训练/额外模型，实际公开schema不改变。",
+      "files": [
+        {
+          "url": "https://arxiv.org/abs/2602.20426",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/r7-discovery-2602.20426/abstract-original.html",
+          "started_at_utc": "2026-10-01T09:12:00.321629+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2602.20426",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "cd2a2a4145cc0cc19c32c256acdc0a41ea96eede57e8918e3a2e14968c58e5db",
+          "bytes": 42711,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:12:00.969700+00:00"
+        },
+        {
+          "url": "https://arxiv.org/abs/2602.20426v2",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.20426v2/abstract.html",
+          "started_at_utc": "2026-10-01T09:12:00.970404+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/abs/2602.20426v2",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "f59d44a20ad0ac82122f86c8aa4a724b824cfff6e781dc0b74b726e5c8ff1e2b",
+          "bytes": 42723,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:12:01.871766+00:00"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2602.20426v2",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/papers/2602.20426v2/paper.pdf",
+          "started_at_utc": "2026-10-01T09:12:01.872266+00:00",
+          "http_status": 200,
+          "final_url": "https://arxiv.org/pdf/2602.20426v2",
+          "response_content_type": "application/pdf",
+          "sha256": "154ff6a7570f2f3f7c70cfcbfde0ca1fceba9b6299c6566c7aa233f3047baa00",
+          "bytes": 7423329,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:12:07.410496+00:00"
+        }
+      ],
+      "read_scope": "Primary abstract only; full fixed-version PDF saved for user viewing. No full PDF/task/gold reading or evaluation execution."
+    },
+    {
+      "kind": "project",
+      "id": "langchain-ai/langgraph tool error reference",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "ref": "1.1.10",
+      "commit": "cb328b57f1b195ddbb974953537948b6d13cb9ad",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference",
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference/manifest.json",
+      "snapshot_manifest_sha256": "a49b6010f9883aed0306b93d29c187094826de0a545b27a43f32efa40e450b64",
+      "snapshot_file_count": 4,
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference/git-ref-observation.json",
+          "sha256": "faf66fa548bbb43005c37699e906ef913a8d7b869d01e9389c32ce3dd620fd26",
+          "bytes": 516
+        },
+        {
+          "url": "https://raw.githubusercontent.com/langchain-ai/langgraph/cb328b57f1b195ddbb974953537948b6d13cb9ad/libs/prebuilt/langgraph/prebuilt/tool_node.py",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference/libs/prebuilt/langgraph/prebuilt/tool_node.py",
+          "started_at_utc": "2026-10-01T09:16:52.174127+00:00",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/langchain-ai/langgraph/cb328b57f1b195ddbb974953537948b6d13cb9ad/libs/prebuilt/langgraph/prebuilt/tool_node.py",
+          "response_content_type": "text/plain; charset=utf-8",
+          "sha256": "9bac9d5cc86e1fa4cebfd45e75d3adc5b2fa81b56efc98d898a416b28bb0380c",
+          "bytes": 78333,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:16:53.246543+00:00"
+        },
+        {
+          "url": "https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference/official-docs/thinking-in-langgraph.html",
+          "started_at_utc": "2026-10-01T09:16:53.246852+00:00",
+          "http_status": 200,
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "b4f3a084ed814c607f31728af2611eb659cd4d5be88a4367cde97646f5833868",
+          "bytes": 1295902,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:16:56.894375+00:00"
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-1.1.10-tool-error-reference/installed-observation/tool_node.py",
+          "sha256": "84504b8a9d235c4261c0b57a9ea649511d09866dd2d78c1afa0a6e26ffb11977",
+          "bytes": 78370,
+          "origin_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph/prebuilt/tool_node.py",
+          "origin": "Read-only installed1.1.10 observation; no import or upgrade."
+        }
+      ],
+      "status": "SAVED_PINNED_METHODS_ONLY_REFERENCE",
+      "read_scope": "ToolNode default handler and model-recoverable/unexpected error separation; no broad catch, retry, SDK upgrade or benchmark content."
+    },
+    {
+      "kind": "project",
+      "id": "Google AIP158 pagination reference",
+      "url": "https://google.aip.dev/158",
+      "ref": "master observed on retrieval",
+      "commit": "23e176e7333ea3bc6b085f9950a5da03d2bbfc72",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/google-aip-158-pagination-reference",
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/google-aip-158-pagination-reference/manifest.json",
+      "snapshot_manifest_sha256": "73bef8e27dfd55569bbbce7d3639f0d84f5ced03b1430faec0d89c82d2f140b5",
+      "snapshot_file_count": 3,
+      "files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/google-aip-158-pagination-reference/git-ref-observation.json",
+          "sha256": "f1989a8ef41f66eaa2b7b273dc52a0a84c39388d43c6c1c215b4576ac375ad79",
+          "bytes": 499
+        },
+        {
+          "url": "https://raw.githubusercontent.com/aip-dev/google.aip.dev/23e176e7333ea3bc6b085f9950a5da03d2bbfc72/aip/general/0158.md",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/google-aip-158-pagination-reference/aip/general/0158.md",
+          "started_at_utc": "2026-10-01T09:16:56.896804+00:00",
+          "http_status": 200,
+          "final_url": "https://raw.githubusercontent.com/aip-dev/google.aip.dev/23e176e7333ea3bc6b085f9950a5da03d2bbfc72/aip/general/0158.md",
+          "response_content_type": "text/plain; charset=utf-8",
+          "sha256": "3275e7ac12a1f9f8b3f10e36edb47d942e83293ab5a27aa3aea3107f0f0e7b76",
+          "bytes": 9341,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:16:57.594479+00:00"
+        },
+        {
+          "url": "https://google.aip.dev/158",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/google-aip-158-pagination-reference/official-docs/pagination.html",
+          "started_at_utc": "2026-10-01T09:16:57.594814+00:00",
+          "http_status": 200,
+          "final_url": "https://google.aip.dev/158",
+          "response_content_type": "text/html; charset=utf-8",
+          "sha256": "2003590cb0f5e20a21236ad8fb3e767a32401dd457a0758c862333cb7b9cd0a7",
+          "bytes": 34530,
+          "status": "SAVED",
+          "errors": [],
+          "finished_at_utc": "2026-10-01T09:16:58.860611+00:00"
+        }
+      ],
+      "status": "SAVED_PINNED_METHODS_ONLY_REFERENCE",
+      "read_scope": "Opaque exact continuation for the actual returned result set; token does not grant authorization. No adopting AIP page-size coercion or automatic pagination."
     }
   ],
   "complete": true,
@@ -1505,8 +1916,8 @@
   ],
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
-  "paper_count": 11,
-  "project_count": 10,
+  "paper_count": 17,
+  "project_count": 12,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -1723,6 +2134,19 @@
       "public_commit": "5ef0ee060646c5c2c993f029c3cbe7df5fa4d9b7",
       "full_plan": "ACTIVE",
       "product": "NO_GO"
+    },
+    {
+      "cohort": "R7 full24 actual read/save/source failures",
+      "recheck_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r7-read-protocol-research.json",
+        "sha256": "695fab47d620b3afd3c2fc450a010fae8c54249c11c4beed89c5ebbaee0e2498",
+        "bytes": 16168
+      },
+      "new_readable_notes": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r7-read-protocol-failure-review.html",
+        "sha256": "73f7ca8f65a41f6c610fe74baaf1a7a954b727735ad014e66bb894390a832616",
+        "bytes": 4114
+      }
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -1737,5 +2161,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T06:10:20.281153+00:00"
+  "updated_at_utc": "2026-10-01T09:16:58.900848+00:00"
 }

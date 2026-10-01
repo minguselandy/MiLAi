@@ -142,3 +142,29 @@ Root据此授权新profile展示的最小可逆改进：field_support仅索引�
 24次成功只读资源GET的原URL/最终URL/时间/status/bytes/hash在`artifacts/v13-2-literature-audit/r6-schema-research/retrieval-attempts.json`；本地`index.html`新增26链接，`design-rechecks/r6-schema-failure-review.html`可读早期失败反思。最终核验11论文/10项目参考、680唯一文件/83链接、0issue；此前651目录/index/catalog和审计按原hash保存。资料归档自身0模型HTTP/第三方执行；同时间Root授权R6的账本变化另算，不宣称并行阶段整份账本不变。
 
 R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失败、费用、来源限制和下一通用假设同早期检索笔记分开保存；本地入口顶部可直接打开完整诊断和逐条结果，并明确旧笔记中的“未运行”是当时历史状态。外层HTML闭合已整理，历次原文不改；此前680报告/目录/index按hash保留。当前核验682唯一文件/85本地链接、0issue，新增论文/项目/模型HTTP均0，原账本73c437ac不变。
+
+## R7实际读取/保存失败后的新增资料
+
+[完整R7原评审](V13_2_E0_R7_RESULTS.md)21任务PASS/3FAIL、46完成/2中断，另1虚假语义卡保存和2版直接来源缺口。两中断调用实际explicit搜索返回的游标；Root以实际付费请求和menu hash确认，冻结resolver却只取ordinary结果集。这是结果集身份/生命周期的通用缺口，不能以改游标、扩大selection或放宽Source/version guard解决。
+
+| 新保存论文 | 固定版本、摘要阅读范围与采用状态 |
+| --- | --- |
+| [Memory Provenance Laundering](https://arxiv.org/abs/2607.29167v1) | 平台原来源角色/权限保留原则参考；不采用风险分类策略、firewall实现或论文分数。 |
+| [From Lossy to Verified / TierMem](https://arxiv.org/abs/2602.17913v1) | 原不可变日志与provenance链接原则参考；不采用sufficiency router、verified写回或任务分数。 |
+| [Reinforced Agent](https://arxiv.org/abs/2604.27233v1) | 检索候选留存，未采用额外reviewer/语义预检/优化；模型和全部费用边界保持。 |
+| [RubricRefine](https://arxiv.org/abs/2605.09730v5) | 检索候选留存，未采用任务rubric评分、迭代预执行修复；原评测rubric仍仅Root离线使用。 |
+| [SQL Inspection and Refinement](https://arxiv.org/abs/2408.16991v1) | 搜索返回候选留存，领域retriever/detector不替换通用记忆读取。 |
+| [Learning to Rewrite Tool Descriptions](https://arxiv.org/abs/2602.20426v2) | 检索候选留存，不按暴露任务学习/优化schema或加入额外模型训练。 |
+
+六篇均保存unversioned发现页、固定版本原摘要HTML和完整PDF，当前仅阅读primary摘要，全文供查看而未读取benchmark任务/gold或执行实验。已存Gecko候选保持，无重复下载。来源、UTC、最终URL、状态、bytes和SHA可在机器catalog及local index逐项查看。
+
+| 新官方project参考 | 固定身份与方法阅读范围 |
+| --- | --- |
+| [LangGraph1.1.10](https://github.com/langchain-ai/langgraph/tree/cb328b57f1b195ddbb974953537948b6d13cb9ad) | git tag实查`cb328b57f1b195ddbb974953537948b6d13cb9ad`；保存ToolNode方法、当前官方设计HTML和实际安装prebuilt1.0.13方法副本。标签与安装文件SHA不同，独立记录，不声称字节/行为完全相同，不升级。 |
+| [Google AIP158](https://google.aip.dev/158) | git master实查`23e176e7333ea3bc6b085f9950a5da03d2bbfc72`；保存固定0158.md、官方HTML及原git-ref结果。仅参考原样continuation/独立授权，不采用coercion、自动分页或取全量。 |
+
+[LangGraph官方设计](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph)将模型可恢复错误与未知程序错误区分；当前页面的≥1.2 error_handler不在实际1.1.10环境中，不采用。固定ToolNode默认只转换ToolInvocationError、普通执行异常传播；新的有限反馈须来自真实已知读取协议拒绝，不广泛catch权限/预算/CAS或未知异常。这个方向是Root根据原失败与方法作出的待工程验证推断。
+
+[AIP158](https://google.aip.dev/158)的continuation与请求身份一致、token不授资源权限原则对应当前缺口：应解析实际已返回的owner/bank/turn/selection快照，继续核对原叶/版本，不重新检索、补来源、挑候选或改用户参数。保存承诺仍必须实际commit回执，writer pending/truncation不能升级成功；原24失败不重跑、不改答。
+
+本地入口`artifacts/v13-2-design-literature/index.html`新增R7中文反思及完整版本/hash记录，当前17论文/12项目参考、711唯一文件/112本地链接全部核验PASS。原682/85报告和index/catalog保留为历史。首次资源GET18成功后GitHub API403、首次resume因已创建空目录失败，都保留原driver/stdout/stderr/返回和错误响应；18论文原件复用不重取，独立git ls-remote固定refs后只新增4资源GET。归档0模型HTTP/0SDK升级/0第三方执行，Source和原账本374fcef4保持；browser失败查询记录也保留，不冒充成功。
