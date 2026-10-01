@@ -84,10 +84,13 @@
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-source-index-acceptance.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D1-02",
@@ -100,10 +103,13 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d1-source-acceptance.json",
-        "data/manifests/v13-2-schema-source-acceptance.json"
+        "data/manifests/v13-2-schema-source-acceptance.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D1-03",
@@ -133,10 +139,12 @@
       "evidence": [
         "data/manifests/v13-2-d1-source-acceptance.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
-        "data/manifests/v13-2-source-index-acceptance.json"
+        "data/manifests/v13-2-source-index-acceptance.json",
+        "data/manifests/v13-2-direct-support-acceptance.json"
       ],
       "condition": null,
-      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending."
+      "qualification": "Scoped provenance/CAS and installed offline SDK checks. R0 old-only changed claims motivate current-boundary membership guard. Semantic meaning unchecked; new cohort and native Mem0 model evidence pending.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D2-01",
@@ -246,10 +254,14 @@
         "data/manifests/v13-2-source-index-acceptance.json",
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-e0-r4-results.json",
-        "data/manifests/v13-2-compact-material-acceptance.json"
+        "data/manifests/v13-2-compact-material-acceptance.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. R3/R4 actual-wire current source index plus unique ordinary packet and matching current recall bodies jointly<=2048 verified on95/107 Host requests; entire HTTP, old packets, schemas/explicit reads still separately charged. Same default selected historical bodies omitted. D4 equal candidates/baseline common capability not implemented. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D3-03",
@@ -287,10 +299,13 @@
         "data/manifests/v13-2-small-development-runtime.json",
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-history-discovery-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D3-05",
@@ -309,10 +324,14 @@
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-e0-r4-results.json",
-        "data/manifests/v13-2-compact-material-acceptance.json"
+        "data/manifests/v13-2-compact-material-acceptance.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged. Compact delivery scoped engineering32+26/static and five final same-runtime default comparisons pass; actual2048 pressure still omits1current+2Source. R5 not run, status remains PARTIAL; no semantic/generalization gain.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "D3-06",
@@ -330,10 +349,13 @@
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-schema-source-acceptance.json",
         "data/manifests/v13-2-e0-r1-results.json",
-        "data/manifests/v13-2-e0-r2-results.json"
+        "data/manifests/v13-2-e0-r2-results.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Bounded reader/backlinks/patch/batch engineering and R0 HTTP delivery/costs. Source dedup allowed unsupported/redundant revisions; normal gate failed. General schema/provenance fix needs a separate complete cohort. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "E0-01",
@@ -349,10 +371,13 @@
         "data/manifests/v13-2-e0-r1-results.json",
         "data/manifests/v13-2-e0-r2-results.json",
         "data/manifests/v13-2-e0-r3-results.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent. Separate R4 full24:20PASS/4FAIL,22 gate NOT_PASSED. Four same-ID corrections/history preserved; update2/3 actual explicit historical reads/finals pass scoped, query r3 direct question-only source gap prevents full update2 gate. Scope1 unsupported personal card and scope2 one-time broadening retained. No stitching or independent claim."
+      "qualification": "R0 18PASS/5FAIL/1UNKNOWN; separate frozen R1 24complete20PASS/4FAIL. Oldupdate2 duplicate+former-answer omission; oldupdate3 originalr1+newcard. Both gate failures preserved; no stitching best results. R3 full24:20PASS/3FAIL/1UNKNOWN; 22/24 and two old-update complete gates NOT_PASSED; seven direct-source gaps separate; not independent. Separate R4 full24:20PASS/4FAIL,22 gate NOT_PASSED. Four same-ID corrections/history preserved; update2/3 actual explicit historical reads/finals pass scoped, query r3 direct question-only source gap prevents full update2 gate. Scope1 unsupported personal card and scope2 one-time broadening retained. No stitching or independent claim.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "E1-01",
@@ -726,10 +751,13 @@
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "INV-02",
@@ -744,10 +772,13 @@
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-direct-support-acceptance.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "INV-03",
@@ -763,10 +794,15 @@
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-r0-development-accounting.json",
         "data/manifests/v13-2-e0-r1-results.json",
-        "data/manifests/v13-2-e0-r4-results.json"
+        "data/manifests/v13-2-e0-r4-results.json",
+        "data/manifests/v13-2-e0-r5-runtime.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-runtime.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "INV-04",
@@ -781,10 +817,13 @@
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
         "data/manifests/v13-2-r0-development-accounting.json",
-        "data/manifests/v13-2-e0-r1-results.json"
+        "data/manifests/v13-2-e0-r1-results.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-results.json"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion. R1 actual field/patch schema/source guard did not repair usability. Current user source index absent from Host public discovery; writer already has current IDs. Per-packet2048 verified, cumulative repeated ordinary material within a request not yet proven2048; all input repetitions charged.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     },
     {
       "id": "DEL-01",
@@ -799,10 +838,14 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-2-d3-engineering-acceptance.json",
-        "data/manifests/v13-2-r0-development-accounting.json"
+        "data/manifests/v13-2-r0-development-accounting.json",
+        "data/manifests/v13-2-e0-r5-results.json",
+        "data/manifests/v13-2-e0-r6-results.json",
+        "docs/V13_2_DESIGN_LITERATURE.md"
       ],
       "condition": null,
-      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion."
+      "qualification": "Actual R0 source/HTTP/accounting and bounded SIGKILL evidence. All required arms/workflows/crash windows/independent evaluation/full reproduction remain unverified. R0 failure directs separate general repair; no full-plan completion.",
+      "latest_r6_qualification": "Historical qualifications and statuses preserved. Accepted default-off211-source mechanics are separate from actual first-attempt R6:21PASS/3FAIL,45 completed/1 interrupted/2NOT_RUN, normal22 and both supported old-correction/full source gates NOT_PASSED. Mechanical owner/role/hash/CAS and decoded metadata do not certify entailment; scoped actual wire150/max2044/6 and readonly SDK24/458 are not common four-arm capability or unseen/independent validation."
     }
   ],
   "product": "NO_GO",
@@ -820,5 +863,19 @@
     "goal_status": "active",
     "publication_receipt": "data/manifests/v13-2-publication-and-resume-20261001.json",
     "individual_requirement_statuses_preserved": true
+  },
+  "latest_development_review": {
+    "cohort": "R6",
+    "public_commit": "5ef0ee060646c5c2c993f029c3cbe7df5fa4d9b7",
+    "runtime": "data/manifests/v13-2-e0-r6-runtime.json",
+    "results": "data/manifests/v13-2-e0-r6-results.json",
+    "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+    "normal_gate": "NOT_PASSED",
+    "complete_old_update_gate": "NOT_PASSED",
+    "actual_d4_admission": "NOT_ADMITTED",
+    "all_original_cohorts_retained": true,
+    "statuses_not_upgraded": true,
+    "full_plan": "ACTIVE",
+    "product": "NO_GO"
   }
 }

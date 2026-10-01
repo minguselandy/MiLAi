@@ -1702,6 +1702,27 @@
         "sha256": "a455d97e2a7cdb122d8955fd2229f9bac7e08223043deb0906c53e1ae70575e4",
         "bytes": 2709
       }
+    },
+    {
+      "cohort": "R6 complete first-attempt Root review",
+      "recorded_at_utc": "2026-10-01T06:10:20.280763+00:00",
+      "new_readable_notes": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/design-rechecks/r6-complete-review.html",
+        "sha256": "c121c3117ea4140f5da5b15769069adaaf586cf84d5b8457b59424edc94eeeda"
+      },
+      "actual_result": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-e0-r6-results.json",
+        "sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838"
+      },
+      "root_review_not_independent": true,
+      "new_papers_downloaded": 0,
+      "new_projects_downloaded": 0,
+      "new_model_http": 0,
+      "no_source_mutation": true,
+      "no_prior_note_overwrite": true,
+      "public_commit": "5ef0ee060646c5c2c993f029c3cbe7df5fa4d9b7",
+      "full_plan": "ACTIVE",
+      "product": "NO_GO"
     }
   ],
   "recovery_documentation_archival_failures": [
@@ -1716,5 +1737,5 @@
       "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
     }
   ],
-  "updated_at_utc": "2026-10-01T05:41:47.491552+00:00"
+  "updated_at_utc": "2026-10-01T06:10:20.281153+00:00"
 }

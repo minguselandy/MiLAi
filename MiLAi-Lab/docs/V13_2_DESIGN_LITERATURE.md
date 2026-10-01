@@ -1,6 +1,6 @@
 # v13.2 设计资料索引与失败反思
 
-2026-10-01。按用户要求，检索的论文、项目和官方SDK资料均留存，采用的方法与未采用候选分别标明，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存11篇论文PDF/HTML/摘要和10组项目/SDK参考，680个唯一文件、83个本地索引链接通过原hash/PDF头/链接核对；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
+2026-10-01。按用户要求，检索的论文、项目和官方SDK资料均留存，采用的方法与未采用候选分别标明，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存11篇论文PDF/HTML/摘要和10组项目/SDK参考，682个唯一文件、85个本地索引链接通过原hash/PDF头/链接核对；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
@@ -138,3 +138,5 @@ Root据此授权新profile展示的最小可逆改进：field_support仅索引�
 结构合法也未解决直接来源语义：真实更正选旧叶、查询选问题源、无支持限制扩大及被拒重复操作均保存。采用方向仍是由模型选择真实证据、程序验证明确机械关系、业务回执真实，不引入case词分类、强制current-source、额外语义verifier或后台模型。此处为Root修复假设，尚未实现或取得新模型收益。
 
 24次成功只读资源GET的原URL/最终URL/时间/status/bytes/hash在`artifacts/v13-2-literature-audit/r6-schema-research/retrieval-attempts.json`；本地`index.html`新增26链接，`design-rechecks/r6-schema-failure-review.html`可读早期失败反思。最终核验11论文/10项目参考、680唯一文件/83链接、0issue；此前651目录/index/catalog和审计按原hash保存。资料归档自身0模型HTTP/第三方执行；同时间Root授权R6的账本变化另算，不宣称并行阶段整份账本不变。
+
+R6完整审查后另加`design-rechecks/r6-complete-review.html`，将完整失败、费用、来源限制和下一通用假设同早期检索笔记分开保存；本地入口顶部可直接打开完整诊断和逐条结果，并明确旧笔记中的“未运行”是当时历史状态。外层HTML闭合已整理，历次原文不改；此前680报告/目录/index按hash保留。当前核验682唯一文件/85本地链接、0issue，新增论文/项目/模型HTTP均0，原账本73c437ac不变。

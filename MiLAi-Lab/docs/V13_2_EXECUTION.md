@@ -283,4 +283,4 @@ Root只读SQLite Store SDK重开24bank/458items与最后真实回执一致，DB 
 
 R6 +169generation/958,878known（Host150/856,495，writer19/102,383）和45embedding/19,279，trace与原账本差额一致，新unknown0。累计9029generation/24,534,988known/24,565,375charged/unknown1，embedding900,641/unknown0；历史保守未知30,387保持，末SHA73c437ac。R0–R6累计+1083generation/4,224,337known、435embedding/183,453。没有成本下降、单因素收益或泛化声明。
 
-失败后新检索五论文/三固定project资料均已保存；[可查看资料目录](V13_2_DESIGN_LITERATURE.md)现11论文/10项目参考、680文件/83本地链接通过hash/头/链接核验，方法参考与未采用候选区分。只授权同一既有Source做通用参数说明/原validator路径反馈的READ_ONLY方案，不改当前211源码和所有冻结cohort。完整plan ACTIVE，来源/同能力/D4与D5门禁仍未完成、Product NO_GO。
+失败后新检索五论文/三固定project资料均已保存；[可查看资料目录](V13_2_DESIGN_LITERATURE.md)现11论文/10项目参考、682文件/85本地链接通过hash/头/链接核验，方法参考与未采用候选区分，早期检索笔记和完整R6诊断分别可读。只授权同一既有Source做通用参数说明/原validator路径反馈的READ_ONLY方案，不改当前211源码和所有冻结cohort。完整plan ACTIVE，来源/同能力/D4与D5门禁仍未完成、Product NO_GO。
