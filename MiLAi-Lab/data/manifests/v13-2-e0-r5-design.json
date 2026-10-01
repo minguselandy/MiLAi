@@ -63,5 +63,105 @@
     "original_preview_result_sha256": "b04375a94d0232ef0f4eac7e4727d2821d63aed9d210499c61cd45aa63c7fdeb",
     "stdout_sha256": "28652202ce2515b95015b9cee895b7b58e211918bb242c237c73732eeed71eb4",
     "stderr_sha256": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9"
+  },
+  "prospective_root_drivers": {
+    "prepare_e0_r5.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_e0_r5.py",
+      "sha256": "f04d4d1633ff894df8b15f4801c6a5182b98d1fe4be4ab62dec8842c1a4c95d6",
+      "syntax_compiled": true,
+      "executed": true,
+      "execution": "Deliberate expected incomplete840 rejection only; no runtime freeze created."
+    },
+    "run_e0_r5.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_e0_r5.py",
+      "sha256": "6cfba8a833b120fd142e6fc01567bb49f40b66ccb5bdd718caaf29f86ddfbd6b",
+      "syntax_compiled": true,
+      "executed": true,
+      "execution": "Six synthetic isolated parent guard scenarios with mocked CLI subprocesses only; no actual experiment invocation."
+    },
+    "limits": "Concrete scripts prepared, syntax-checked and scoped guard-tested; no actual R5 input/runtime freeze or model call. Prepare requires full840 strict result and unchanged ledger plus fresh declared-route preflight; parent verifies frozen bytes before/after every first-attempt case and never replays a prior R5 result."
+  },
+  "root_driver_engineering_checks": {
+    "prepare-before-perf.json": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.json",
+      "sha256": "8326917f90a3ea0fc6182a059d6aa85b08e9433b71784134e260a64c2690f935",
+      "summary": {
+        "kind": "V13_2_R5_PREPARE_GATE_ENGINEERING_CHECK",
+        "status": "EXPECTED_REJECTION_BEFORE_COMPLETE840_GATE",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_e0_r5.py"
+        ],
+        "process_returncode": 1,
+        "driver_sha256": "f04d4d1633ff894df8b15f4801c6a5182b98d1fe4be4ab62dec8842c1a4c95d6",
+        "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.stdout.log",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.stderr.log",
+        "stderr_sha256": "1e3e52ca2bdd448c0f47429cb7627dc0b939d1333d775a798539cebf6ce057b9",
+        "runtime_root_created": false,
+        "runtime_manifest_created": false,
+        "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+        "actual_model_http": 0,
+        "limits": "Deliberate prospective-guard check; no R5 experiment attempted, no actual completed model sample."
+      }
+    },
+    "parent-guards.json": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/parent-guards.json",
+      "sha256": "61fc8c4268633cec4f67106208ec29dcab6e0690d6dde4c12762aeba22bafea1",
+      "summary": {
+        "kind": "V13_2_R5_PARENT_SYNTHETIC_GUARD_CHECKS",
+        "status": "SCOPED6_PASSED",
+        "checks": [
+          {
+            "scenario": "valid24_one_child_failure",
+            "status": "PASS",
+            "mock_child_dispatches": 24,
+            "expected_assertion": null,
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "existing_attempt",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "Never replay an existing R5 attempt",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_source_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_config_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_runtime_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_source_after_child",
+            "status": "PASS",
+            "mock_child_dispatches": 1,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          }
+        ],
+        "parent_driver_sha256": "6cfba8a833b120fd142e6fc01567bb49f40b66ccb5bdd718caaf29f86ddfbd6b",
+        "harness_sha256": "330a8d52ca0bc0281a9a0c1923683aebd477ab36ab0befe438e094dc90405be5",
+        "socket_attempts": 0,
+        "actual_model_http": 0,
+        "authority_ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+        "limits": "Synthetic isolated209 text files, mocked CLI subprocesses and synthetic ledger; no real SDK/model/semantic experiment. This checks no-replay/frozen-byte control flow, not actual shared call-cap enforcement."
+      }
+    }
   }
 }

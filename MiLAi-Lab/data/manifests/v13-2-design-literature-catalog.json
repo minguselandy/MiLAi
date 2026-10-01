@@ -306,7 +306,103 @@
       ],
       "supplement_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/namespace-validation/original-supplement.json",
       "supplement_manifest_sha256": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
-      "installed_interface_version": "2.1.2"
+      "installed_interface_version": "2.1.2",
+      "recovery_documentation_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/manifest.json",
+        "sha256": "dae1a3950bb97bff83e8bcaac0d47a468b02d1e5da0083df537842bbe16071a9"
+      },
+      "recovery_documentation_files": [
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/durable-execution.html",
+          "url": "https://docs.langchain.com/oss/python/langgraph/durable-execution",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "manual_308_redirects": [
+            {
+              "status": 308,
+              "from": "https://docs.langchain.com/oss/python/langgraph/durable-execution",
+              "to": "https://docs.langchain.com/oss/python/langgraph/persistence"
+            }
+          ],
+          "retrieved_at": "2026-10-01T01:59:35.161939+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "ba6b87c2a2dd1119d5b953516a2f3e5dd7994d75d5251e7e559319f851e6c6d2",
+          "bytes": 841739
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/persistence.html",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/persistence",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:35.947933+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "ba6b87c2a2dd1119d5b953516a2f3e5dd7994d75d5251e7e559319f851e6c6d2",
+          "bytes": 841739
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/persistence.md",
+          "url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/persistence.md",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:36.667822+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "eb1eaceb1fd817a2cbb4546c6fa4f4a8cd8a13a9c037138c6dda54efb235c1d7",
+          "bytes": 5265
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/checkpointers.html",
+          "url": "https://docs.langchain.com/oss/python/langgraph/checkpointers",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/checkpointers",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:38.099343+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "d9ded6415a2f023755afabcde475c009778617fa37cf2b7460a49f0cef0e2dd6",
+          "bytes": 1456369
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/checkpointers.md",
+          "url": "https://docs.langchain.com/oss/python/langgraph/checkpointers.md",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/checkpointers.md",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:38.843533+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "3881beeb186af756c6f5495c89effa821fd654957c63584341b91861e6677b6a",
+          "bytes": 46197
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/stores.html",
+          "url": "https://docs.langchain.com/oss/python/langgraph/stores",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/stores",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:39.813408+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "a9d81e5b4b910b70ea2009e29d17f5d2105115d2970306197e355d0ab1c8db59",
+          "bytes": 1096928
+        },
+        {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/langgraph-store-reference/recovery-documentation/stores.md",
+          "url": "https://docs.langchain.com/oss/python/langgraph/stores.md",
+          "final_url": "https://docs.langchain.com/oss/python/langgraph/stores.md",
+          "status": 200,
+          "content_type": "text/markdown; charset=utf-8",
+          "manual_308_redirects": [],
+          "retrieved_at": "2026-10-01T01:59:40.683322+00:00",
+          "commit_or_version": "rolling official documentation at retrieval; not installed-SDK version proof",
+          "sha256": "bb9ce0ae918bd833c1c20634808a7911ddd18395058adc477d78a6c6d2f93de9",
+          "bytes": 17933
+        }
+      ]
     },
     {
       "kind": "project",
@@ -672,6 +768,153 @@
         "Native entries have no source-event/owner/version-CAS field; original JSON may be preserved at trace_equal writer input without adding native semantic attribution.",
         "Planning/reflection/native retries incur calls; public tool output requires an explicitly measured bounded material layer before common-budget comparison."
       ]
+    },
+    {
+      "kind": "project",
+      "id": "mem0ai/mem0 actual-runtime f808 reference",
+      "url": "https://github.com/mem0ai/mem0",
+      "commit": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+      "installed_version": "2.1.0",
+      "local_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference",
+      "snapshot_file_count": 10,
+      "snapshot_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/manifest.json",
+      "snapshot_manifest_sha256": "87f7653a86cea24a7fdc2aabf62138367ae8dc6c48a58a9a2f71e394959f9b7f",
+      "status": "SAVED_PINNED_INSTALLED_INTERFACE_REFERENCE",
+      "read_scope": "Six exact-pin reference files, installed metadata and file hash map; not a full project reproduction.",
+      "files": [
+        {
+          "repository_path": "mem0/memory/main.py",
+          "sha256": "5b1b75e2f00aca7bd368a6e9cd5905145d60fd05a0e36d6b1ef3e2f1b4f28ca1",
+          "bytes": 168002,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "installed_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/mem0/memory/main.py",
+          "installed_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/mem0/memory/main.py",
+          "relative_path": "mem0/memory/main.py",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/mem0/memory/main.py",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "repository_path": "mem0/llms/vllm.py",
+          "sha256": "a47c9d95ce5720972310dc8c307458eac7008742f33f6cb42149d61ee4d2606f",
+          "bytes": 3836,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "installed_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/mem0/llms/vllm.py",
+          "installed_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/mem0/llms/vllm.py",
+          "relative_path": "mem0/llms/vllm.py",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/mem0/llms/vllm.py",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "repository_path": "mem0/memory/storage.py",
+          "sha256": "5f5ecdadd2b260fd14f36a0f338336eb760275465dd1056a99a47e1ef07702bd",
+          "bytes": 12886,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/storage.py",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "installed_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/mem0/memory/storage.py",
+          "installed_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/mem0/memory/storage.py",
+          "relative_path": "mem0/memory/storage.py",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/mem0/memory/storage.py",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "repository_path": "README.md",
+          "sha256": "7509347d34a767a2ef37ceb6cf6c714de9e8d84fe66ad5eea92bbae824a8fbeb",
+          "bytes": 11914,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/README.md",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/README.md",
+          "relative_path": "README.md",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/README.md",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "repository_path": "LICENSE",
+          "sha256": "0bbcbe931c353293a2fafce08326181dfeea0e568c566afd4ce8337a70f5e219",
+          "bytes": 11349,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/LICENSE",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/LICENSE",
+          "relative_path": "LICENSE",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/LICENSE",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "repository_path": "pyproject.toml",
+          "sha256": "1662b662cf75295be5d78fa9c8be48166b7f09ab3985ff20891201cb9ceb708d",
+          "bytes": 3312,
+          "url": "https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/pyproject.toml",
+          "git_show_exact_pin_verified": true,
+          "working_tree_bytes_match": true,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/pyproject.toml",
+          "relative_path": "pyproject.toml",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/pyproject.toml",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "installed_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/mem0ai-2.1.0.dist-info/direct_url.json",
+          "sha256": "7e21f1d558288fba4a1cc22156bc2c83c751adeb3a7dc1b052b8ef6c3917d2a7",
+          "bytes": 188,
+          "kind": "actual_installed_version_metadata",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/installed-dist-info/direct_url.json",
+          "relative_path": "installed-dist-info/direct_url.json",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/installed-dist-info/direct_url.json",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "installed_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/external-memory-v26/.venv/lib/python3.12/site-packages/mem0ai-2.1.0.dist-info/METADATA",
+          "sha256": "e0c455a3331aa3da550aa21a2b47ff9c40084c0f29d184cf5f49604eacb161d9",
+          "bytes": 15296,
+          "kind": "actual_installed_version_metadata",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/installed-dist-info/METADATA",
+          "relative_path": "installed-dist-info/METADATA",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/installed-dist-info/METADATA",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "sha256": "794e25bea054b874b14a8167700402e48d2a363cf1c7505d815d1fed4ba06c9d",
+          "kind": "installed_module_file_identity_only",
+          "module_count": 148,
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/installed-module-map.json",
+          "relative_path": "installed-module-map.json",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/installed-module-map.json",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        },
+        {
+          "sha256": "d9df7172ced84e2a4c33e37d97da5b5feba8ff7b61d5bfe7b957d72aac3beee1",
+          "kind": "fixed_commit_metadata",
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/git-commit.txt",
+          "relative_path": "git-commit.txt",
+          "source_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/native-f808-reference/git-commit.txt",
+          "accessed_at_utc": "2026-10-01T02:07:02.919034+00:00"
+        }
+      ],
+      "summary": [
+        "Actual sync add infer=True dispatches additive extraction through VllmLLM.generate_response and patched client.chat.completions.create.",
+        "Extraction transport exceptions raise LLMError; JSON parse errors can instead lead to an empty actual native result. Empty result is not proof of valid semantic no_change.",
+        "Public get_all filters owner, defaults top_k20/show_expired false and bounds internal fetch; absence of a returned card is not a full-bank absence proof.",
+        "Public get(id) and history(id) are not owner-filtered APIs; reader must establish actual owned ID before calling history/delivering get output.",
+        "Native history exposes actual entry IDs, old/new memory, event and timestamps. It does not expose MiLAi integer revisions or candidate CAS.",
+        "Snapshot must occur before close. Source inspection does not demonstrate actual independent same-path reopen or four-arm shared cap enforcement."
+      ],
+      "source_original_manifest": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/source-original-manifest.json",
+        "sha256": "b13af37dcf5219d2a5499744450f2d7eaf33063746a0656a211b97b461bcf069"
+      },
+      "separate_design_reference": "Root's 94c3fe9 project archive is a separate reference version; it is not this runtime SDK pin.",
+      "limits": [
+        "Source/installed byte verification only; no native SDK lifecycle or actual model invocation.",
+        "Reference subset excludes benchmark/gold content; SDK remains unchanged."
+      ]
     }
   ],
   "complete": true,
@@ -680,12 +923,22 @@
     "Hindsight initial old implementation path had zero source files; actual hindsight-api-slim/hindsight_api found from tree metadata, 353 files now saved and verified.",
     "Initial inline catalog-refresh command had a Python closing-delimiter syntax error before mutation; corrected refresh passed with all README/license/source snapshots present.",
     "Arrow20.0.0 release tag points to another annotated tag; first single-dereference assertion failed, original metadata retained and recursive traversal resolves fixed commit3ad0370a.",
-    "SimpleMem fixed official tree page failed web cache lookup; existing official clone at db80b6a7 was verified against exact git object bytes for21 selected text/core/import/document files. All three paper v3 originals saved."
+    "SimpleMem fixed official tree page failed web cache lookup; existing official clone at db80b6a7 was verified against exact git object bytes for21 selected text/core/import/document files. All three paper v3 originals saved.",
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/recovery-docs-archive-first-failure.json",
+      "sha256": "2b0cb94c09ac181a62e62228e6d069a9ad018a8dee9eaf3d20a6107f94d14c39",
+      "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/recovery-docs-archive-second-failure.json",
+      "sha256": "d7d72cb74d69a27bce0a2c232c1bb1833b83fc1696c3beca1839198533364d79",
+      "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
+    }
   ],
   "recorded_at_utc": "2026-10-01T01:10:56.220132+00:00",
   "archive_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature",
   "paper_count": 6,
-  "project_count": 6,
+  "project_count": 7,
   "archive_delivery": "PDF/HTML and sparse implementation snapshots are local ignored resources; public URLs, commits and hashes are tracked with the summary.",
   "new_experimental_model_calls": 0,
   "readme_or_project_commands_executed": false,
@@ -704,5 +957,18 @@
       "new_sdk_supplement": "af7df4f233d5d3ef9fdd6eef63f4ff2698323fce84902365529c1c39b2c4c6cc",
       "runtime_benchmark_gold_accessed": false
     }
-  ]
+  ],
+  "recovery_documentation_archival_failures": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/recovery-docs-archive-first-failure.json",
+      "sha256": "2b0cb94c09ac181a62e62228e6d069a9ad018a8dee9eaf3d20a6107f94d14c39",
+      "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/recovery-docs-archive-second-failure.json",
+      "sha256": "d7d72cb74d69a27bce0a2c232c1bb1833b83fc1696c3beca1839198533364d79",
+      "kind": "ARCHIVE_FAILURE_NOT_MODEL_EXPERIMENT"
+    }
+  ],
+  "updated_at_utc": "2026-10-01T02:12:36.530376+00:00"
 }

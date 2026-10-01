@@ -192,3 +192,17 @@ R4全部审计结束后才合入此前暂停保存的WIP。Root逐hash核对[限
 [R5前瞻设计](../data/manifests/v13-2-e0-r5-design.json)已从DRAFT进入ENGINEERING_ACCEPTED_CONFIG_PREPARED_NOT_RUNTIME_FROZEN；[配置](../configs/v13-2-e0-normal-r5.json)只增材料profile和实验说明，R4 Host/writer指令、原24/48、rubric、12admissions/4096输出/2048与6/repair0保持。真实模型HTTP0，账本仍R4末。只有全840隔离性能协议结束并严格审计后才另冻实际运行根目录与模型route；不会执行preview或旧cohort，不升级E0/D4/泛化结果。
 
 R5另外完成主树catalog preview：socket/connect_ex禁止，实际209运行map与验收相同，原24/48及实际目录/prompt均生成，模型/embedding HTTP0，原账本不变。preview专用根目录永不执行，真实运行根、模型route、环境/ledger等仍未冻结，不能将内部input-freeze文件当FROZEN_READY运行准入。
+
+## 700样本阶段审计与R5启动保护
+
+同源码性能第五profile结束，Root原工具核对700/840、8个terminal命令的原日志/源/账本，10000默认存储七阶段全部20样本分布加入[阶段报告](V13_2_DERIVED_INDEX_SCALE.md)。最后owner_bank_v1进程仍活，未混入完成样本、未提前启动R5或重跑旧根目录。
+
+R5实际freeze/串行parent已准备，六项纯合成隔离控制流检查通过：拒绝已有attempt、source/config/runtime字节变动；一个Mock child失败仍留24次各一次结果，child后源变即停止。一次真实prepare脚本在未完成840时按预期拒绝，未创建R5执行root/manifest；0模型HTTP、原账本不变。它们仅验证冻结/首尝试控制流，不是模型样本、完整SDK或共享24/12调用上限验收。
+
+## 四臂实际SDK身份审计与下一有限修复
+
+Source在独立8b38f2d只读树交付49份带完整209源码前后map的查阅/组装回执，Root逐条核对原stdout/stderr、returncode、固定源码与文档身份，并复制240份原证据；两次非零路径定位、嵌入查找错误及四个未封装setup失败均保留各自证据限制。实际模型HTTP、SDK构造及Source测试0，Root原账本SHA仍32265299。
+
+实际Mem0固定pin是f8082a73、安装mem0ai2.1.0；Root另核对六个git对象、安装源码/METADATA/direct_url及148模块hash，保存为独立第七组项目参考，不覆盖94c3fe9论文设计参考。[资料索引](V13_2_DESIGN_LITERATURE.md)及本地54链接可查看原件；622文件的只读存储hash核查通过。
+
+[四臂设计](../data/manifests/v13-2-d4-common-capability-draft.json)仍非运行准入。恢复风险是缺失file/key以Host checkpoint下界代替完整native/summary计数；损坏JSON当前已抛错，未伪称已运行恢复故障。下一步Source仅在新隔离树实施默认关闭的共享admission持久化与fail-closed resume，脚本化四调用路径及12/24检查不作模型样本。当前209源码、R5配置及运行中的性能树保持HOLD，B6摘要/common reader/cache/闭合形成边界/Host写工具策略尚未实施。

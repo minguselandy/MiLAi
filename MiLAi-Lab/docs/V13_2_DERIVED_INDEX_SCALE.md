@@ -1,10 +1,10 @@
 # v13.2 同源码索引存储阶段测量
 
-2026-10-01。四个存储/规模profile完成，共560/840计划样本；10000事件两臂尚未完成。完整目标保持ACTIVE，D5-10仍PARTIAL。下表只报告已经结束并核查的profile，正在运行的样本不混入分布。
+2026-10-01。五个存储/规模profile完成，共700/840计划样本；10000事件bank_prefix已结束，owner_bank_v1仍运行。完整目标保持ACTIVE，D5-10仍PARTIAL。下表只报告已经结束并核查的profile，正在运行的样本不混入分布。
 
 [事前冻结](../data/manifests/v13-2-derived-index-scale-freeze.json)、[逐阶段机器结果](../data/manifests/v13-2-derived-index-scale-results.json)、[离线审计工具](../tools/audit_v13_2_derived_index_scale.py)。原[优化前基线](V13_2_SOURCE_SCALE_BASELINE.md)独立保留，不与当前同源码比较拼接。
 
-两臂采用同一208运行源码，只切换raw_index存储；每个规模先通过实际公共SQLite Store建立并关闭合成bank，再复制完全相同的数据库字节。100和1000的两臂seed哈希、20次首查询的全部selected identity哈希一致。7份完成命令回执的源码前后、日志与连续账本哈希已核查。
+两臂采用同一208运行源码，只切换raw_index存储；每个规模先通过实际公共SQLite Store建立并关闭合成bank，再复制完全相同的数据库字节。100和1000的两臂seed哈希、20次首查询的全部selected identity哈希一致。8份完成命令回执的源码前后、日志与连续账本哈希已核查。
 
 | 事件数 | 阶段 | bank_prefix wall p50 / p95 (ms) | owner_bank_v1 wall p50 / p95 (ms) |
 | --- | --- | --- | --- |
@@ -23,10 +23,18 @@
 | 1000 | 反链查验 | 180.004 / 187.451 | 64.470 / 65.541 |
 | 1000 | 删除派生反链后重建 | 292.112 / 311.460 | 176.530 / 186.805 |
 
+| 10000 | 普通首查询 | 116861.981 / 125756.281 | 尚未完成 |
+| 10000 | 同回合缓存 | 35968.014 / 36571.553 | 尚未完成 |
+| 10000 | 新增Source | 10.592 / 16.368 | 尚未完成 |
+| 10000 | dirty缓存刷新 | 40923.073 / 41767.480 | 尚未完成 |
+| 10000 | Source幂等重放 | 17153.852 / 17340.910 | 尚未完成 |
+| 10000 | 反链查验 | 17200.436 / 17393.805 | 尚未完成 |
+| 10000 | 删除派生反链后重建 | 17221.182 / 17947.508 | 尚未完成 |
+
 每阶段20次。普通首查询含一次cold index及19次已建索引查询；CPU、SDK逻辑返回rows、get数量、OS进程块计数及内存等完整分布见机器结果。普通材料实际Qwen tokenizer计数≤2048，缓存/dirty刷新未增加检索或query embedding。离线SHA one-hot向量不是自然语义质量测试；新增生成/嵌入HTTP均0，原连续账本字节不变。
 
 1000事件已完成的各阶段通常在owner_bank_v1观察到较低耗时，100事件并不普遍下降。全bank扫描、逐项get等成本仍存在；此局部结果不能证明一般规模加速。共享机器未控制空闲、CPU频率、OS cache或重复随机执行顺序，源码工程可能同时运行；只作描述性分布，不能给出纯因果收益或显著性结论。
 
-两臂从无legacy inline的同一初始bank开始；opt-in不删除既有inline，此比较不证明迁移旧bank后的收益。没有业务object/operation stream、独立Judge、模型正确率、长程任务或泛化结论。10000和完整840尚未完成，不外推其结果。
+两臂从无legacy inline的同一初始bank开始；opt-in不删除既有inline，此比较不证明迁移旧bank后的收益。没有业务object/operation stream、独立Judge、模型正确率、长程任务或泛化结论。10000的完整双臂比较及全840尚未完成，不将运行中的另一臂样本混入分布。默认存储10000首查询p50为116.862秒、缓存p50为35.968秒；原全bank/逐项get成本仍明显。
 
 [Root审计验收](../data/manifests/v13-2-derived-index-scale-audit-acceptance.json)记录实际部分数据复算、ruff、mypy单文件与tools边界通过；11files/20dependencies/6grandfathered，未新增边界违规。较早一次E501行长失败保留，当前四项检查均通过。未运行全suite、远端CI或产品验收；Product仍NO_GO。

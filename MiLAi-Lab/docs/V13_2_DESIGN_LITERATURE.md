@@ -1,6 +1,6 @@
 # v13.2 设计资料索引与失败反思
 
-2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存6篇论文PDF/HTML/摘要，4个上游项目的固定commit方法源码、README与LICENSE，以及LangGraph SDK和Arrow表示格式两份官方参考。
+2026-10-01。按用户要求，检索并实际采用的论文、项目和官方SDK资料均留存，后续新增资料继续追加本索引与[机器目录](../data/manifests/v13-2-design-literature-catalog.json)。现保存6篇论文PDF/HTML/摘要和7组项目/SDK参考；Mem0论文设计参考与实际运行SDK的固定版本分别保存。
 
 完整本地资料位于`artifacts/v13-2-design-literature/`；打开其中`index.html`可查看总结并点击PDF、网页原文和项目README。二进制论文和第三方源码快照保持ignored，GitHub发布索引、原文链接、固定commit和SHA256，便于在其他机器重新下载核对。下载/保存不等于完整复现；原benchmark问题、gold、正式holdout未读入或用于修复。
 
@@ -24,6 +24,7 @@
 | [nelson-liu/lost-in-the-middle](https://github.com/nelson-liu/lost-in-the-middle) | `29b8a6d042ce29abccee3db1a73171a107d7e6af` | `projects/lost-in-the-middle`；12份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [vectorize-io/hindsight](https://github.com/vectorize-io/hindsight) | `f2c33cc405023dcaa8aa8ef4c0120e1f262f05ad` | `projects/hindsight`；353份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [mem0ai/mem0](https://github.com/mem0ai/mem0) | `94c3fe9f238f3dbf29c9ce98643bd71eb13077cd` | `projects/mem0`；171份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
+| [Mem0实际运行SDK参考](https://github.com/mem0ai/mem0/tree/f8082a7345dadd9e042ebbc40b57b1498c8f6d63) | `f8082a7345dadd9e042ebbc40b57b1498c8f6d63`，mem0ai 2.1.0 | `projects/mem0-runtime-f808-reference`；10份固定公开接口/README/LICENSE/包定义、安装METADATA/direct_url及148模块哈希清单；六个git对象与实际安装源码分别核对 |
 | [langchain-ai/langgraph Store reference](https://github.com/langchain-ai/langgraph) | `11ee185999b86bfea2d8c0e69cef9a5e37acf686` | `projects/langgraph-store-reference`；10份文件，源码/README/LICENSE或SDK版本参考，完整文件hash见目录 |
 | [Apache Arrow dictionary encoding reference](https://github.com/apache/arrow) | `3ad0370a04ccdae638755b94c3c31c8760a11193`，20.0.0 | `projects/apache-arrow-dictionary-reference`；8份官方版本文档、格式源码、README/LICENSE和tag元数据；选定参考片段，不是全仓复现 |
 | [aiming-lab/SimpleMem Text reference](https://github.com/aiming-lab/SimpleMem) | `db80b6a7c591e0ea730a058e9f5fc4eb06572299` | `projects/simplemem-text-reference`；21份text/core、导入入口、README/LICENSE及包定义；未复制benchmark/evaluation、multimodal或evolver内容 |
@@ -63,3 +64,21 @@ SDK检查另保存官方固定Store接口与实际安装`langgraph-checkpoint==2
 原规划8.1要求已有第二外部系统另作预算/微型确认。因此检查[固定Text原生条目](https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/models/memory_entry.py)与[公开VectorStore](https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/simplemem/core/database/vector_store.py)：原生字段没有source-event、owner或MiLAi整数revision/CAS，不能补造为已验证归属。trace_equal载体可保留完整原Source JSON，但这种输入关联与原生条目字段分开报告。
 
 实际核查继续使用已存在专用环境及原固定代码，未升级或安装SDK，也不改变运行中的性能环境。原推理环境首次缺少lancedb metadata的构造失败留存；选用原专用环境后才能检查公开SDK持久化和调用入口。规划/反思、原生有限重试和闭合短flush保持原身份。离线脚本响应只证明工程合同，尚不能完成D4-07真实微型比较或宣称SimpleMem模型质量。
+
+## 四臂恢复计数的官方设计参考
+
+另保存[Persistence](https://docs.langchain.com/oss/python/langgraph/persistence)、[Checkpointers](https://docs.langchain.com/oss/python/langgraph/checkpointers)、[Stores](https://docs.langchain.com/oss/python/langgraph/stores)的HTML/Markdown共7文件，位于既有LangGraph参考的`recovery-documentation/`。原durable-execution URL已重定向至Persistence，原请求和最终URL均记录；这些是检索时rolling文档，不作为本地SDK版本证明，没有SDK升级。
+
+官方说明将图状态checkpoint与图外应用Store区分，并说明replay会重新执行所选checkpoint之后的模型/API步骤；sync持久化在下一步前写入。结合只读调用链，Root推断：Host AI checkpoint计数不是所有native/summary paid callback的账本，恢复上限应依赖完整共享admission状态；缺失可信计数不能当零或仅补Host下界。此为下一opt-in工程要求，尚无实际四臂恢复故障结果，不移植新文档API或改变方法方向。
+
+归档首次系统Python urllib未处理308，七文件成功保存后又因已有最小HTML无显式body结束标签而索引追加失败；原两份脚本和失败stdout/stderr hash保存，按hash核查并补全索引，没有重新下载覆盖或把归档问题当实验结果。
+
+## 实际Mem0 SDK接口与恢复边界
+
+四臂只读审计查阅实际固定[f808公开Memory接口](https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/memory/main.py)、[vLLM调用入口](https://github.com/mem0ai/mem0/blob/f8082a7345dadd9e042ebbc40b57b1498c8f6d63/mem0/llms/vllm.py)及历史存储定义，原件已保存。它与94c3fe9设计参考是两个身份。Root核对49份带209源码前后map的只读回执和240份原始审计文件，保留两次非零路径查找及四份未封装setup失败；没有构造SDK、运行测试或调用模型。
+
+该固定接口的get_all使用owner过滤及声明边界；get/history本身不带owner，交付前需要真实已归属ID证明。默认top_k20及过期过滤使少于20条结果也不能证明整个bank完整。历史ID、时间和正文hash保持原生意义，不赋予MiLAi整数revision/CAS。抽取transport异常与parse失败后的空结果分开，空结果不证明正确semantic no_change。
+
+Root下一步只授权在新隔离树修复通用共享admission的持久化与恢复：12/24上限覆盖同一计数入口，恢复缺失或不可信计数时拒绝dispatch；unknown仍占reservation。默认行为、当前209源码和R5实验身份保持。B6摘要、共同reader/cache/闭合形成边界及Host记忆写权限另有未实施要求，四臂未准入。
+
+资料库再次只读核对622个唯一文件与54个本地链接，PDF头与目录hash通过；结果保存于`artifacts/v13-2-literature-audit/current-archive.json`。这是资料可查看性核验，不是完整项目复现或模型收益。

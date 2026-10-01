@@ -130,5 +130,82 @@
     "runtime_admission": "NOT_ADMITTED",
     "second_family": "UNAVAILABLE_UNCHANGED",
     "independent_judge": "UNAVAILABLE_UNCHANGED"
+  },
+  "source_interface_audit": {
+    "status": "ROOT_VERIFIED_READ_ONLY_DESIGN_NO_RUNTIME_ADMISSION",
+    "base_commit": "8b38f2d76494d411fa1d4b4bec3db891e35243ab",
+    "runtime_source_count": 209,
+    "runtime_source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+    "root_verification": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-d4-root-audit/read-only-source-verification.json",
+      "sha256": "34e108ef913ce47f31f2030058c7bc65eb8d35125fa235c4063bca4904684eb0"
+    },
+    "source_original_report": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/source-checks.json",
+      "sha256": "7d99b0b5d3e3247bd5a9b3141e9b7fe8a591328fc665382030869b52be022101"
+    },
+    "source_design": {
+      "json_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/design.json",
+      "json_sha256": "93d7cdbb63ff6ed24d414bfa6a22c90713e2f3f3ad60e52d725056aebf414773",
+      "readable_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/design.txt",
+      "readable_sha256": "b645e70763687f245566c5a5af5be015cf8def07ba100ed48a635b0fa643a07e"
+    },
+    "verified_command_count": 49,
+    "copied_source_artifacts": 240,
+    "nonzero_read_only_commands": 2,
+    "unwrapped_setup_failures": 4,
+    "installed_native_pin": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+    "installed_native_version": "2.1.0",
+    "native_reference_manifest": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/manifest.json",
+      "sha256": "87f7653a86cea24a7fdc2aabf62138367ae8dc6c48a58a9a2f71e394959f9b7f"
+    },
+    "exact_git_files_verified": 6,
+    "installed_module_hashes_verified": 148,
+    "findings": [
+      "Existing corrupt capacity JSON already raises; missing file/key instead falls back to0/max Host AI checkpoint lower bound. This is source reasoning, not executed destructive recovery fault evidence.",
+      "Host AI checkpoint messages do not reconstruct all native/direct summary callbacks; an expected resumed total must be trusted complete shared persisted admission or reject dispatch.",
+      "Common reader needs snapshot/refresh_selected/read_exact/history_menu with domain identities; native get/history lacks owner argument and needs actual owned-ID proof before delivery.",
+      "Native bounded get_all with expiration filtering cannot prove full-bank completeness even below top_k20; preserve truthful snapshot limits.",
+      "One ordinary public-query cadence, closed formation, actual B6 append-only summary and M-exclusive mutation strategy are proposed, not implemented."
+    ],
+    "new_actual_model_http": 0,
+    "sdk_constructions": 0,
+    "tests_executed": 0,
+    "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "runtime_admission": "NOT_ADMITTED",
+    "limits": [
+      "Source inspection and artifact assembly only; no cap fault, actual generation, native SDK lifecycle or four-arm runtime acceptance occurred.",
+      "Corrupt counter JSON already raises in existing code; missing persisted file/key undercount is an inference, not a fault-run result.",
+      "No repeated32/26 checks or original34 compact explorations. No physical source/test implementation commit created.",
+      "Parent owns actual R5/D4 admission, ledger, public docs/config/freezes and GitHub publication."
+    ]
+  },
+  "next_engineering_scope": {
+    "status": "AUTHORIZED_ISOLATED_IMPLEMENTATION_NOT_ACCEPTED_OR_TRANSFERRED",
+    "mechanism": "Default-off durable shared per-public-message generation admission and fail-closed resume only.",
+    "base_commit": "8b38f2d76494d411fa1d4b4bec3db891e35243ab",
+    "primary_source": "HOLD_209_FOR_R5",
+    "performance_source": "HOLD_ORIGINAL_208",
+    "requirements": [
+      "Explicit actual start/resume signal and validated public-message/scope/config identity; existing checkpoint only a lower-bound cross-check.",
+      "Unknown uses persisted reservation; missing expected state/key or invalid/incompatible/undercounted state rejects before dispatch, never silently resets.",
+      "One reserve before scripted transport for existing Host/native/M paths and explicitly labeled planned-summary callback only; preserve actual failure and distinguish reserve from HTTP dispatch.",
+      "12/24 shared-boundary and isolated restart/persistence-cut checks with socket-denied synthetic ledger; no real model requests or global ledger mutation.",
+      "Legacy defaults and existing Source trees unchanged; save original failed commands and per-command source/test maps."
+    ],
+    "deferred": [
+      "B6 summary formation implementation",
+      "Common backend reader and ordinary cache cadence",
+      "Closed-boundary comparison coordinator",
+      "Host memory tool read-only strategy"
+    ],
+    "not_claimed": [
+      "Actual four-arm inclusive formation enforcement",
+      "D4 runtime admission",
+      "E0 repair gate",
+      "Semantic or unseen/generalization benefit"
+    ],
+    "product": "NO_GO"
   }
 }

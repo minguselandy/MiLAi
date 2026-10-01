@@ -80,5 +80,20 @@
   "private_manifest_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale-audit-checks/20261001T004215/checks.json",
   "private_manifest_sha256": "1e3e2a3d5e2442b334eabd4f90ae2c314de18b333cb979a9e850810456da0b75",
   "scope": "One stdlib-only offline result auditor; actual partial560-sample input, ruff, mypy1file and tools boundary. Does not validate model quality or full840 measurements.",
-  "actual_partial_result_sha256": "da90dc15e2aaf1edcfd326c3b818b36373735d6920081581efcefc04b9f2ce63"
+  "actual_partial_result_sha256": "da90dc15e2aaf1edcfd326c3b818b36373735d6920081581efcefc04b9f2ce63",
+  "additional_verified_snapshots": [
+    {
+      "status": "PARTIAL_RUNNING",
+      "complete_profile_samples": 700,
+      "completed_profiles": 5,
+      "terminal_command_receipts_verified": 8,
+      "report_sha256": "2b6f71c8dd5da0ec6565350a04b278df2b69643a1b47cbd6e8e4166792d3bdad",
+      "process_results_sha256": "edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0",
+      "process_results_snapshot_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-derived-index-scale/process-results-audit-edd472c494d8fa3d9cea6a260625b238caa91dec33af92cd82253cded6ffdec0.json",
+      "stdout_sha256": "815e8df6e92dc0e266108c9c7f2f5516496361519ca6671f70ae0c6e3388e324",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "new_model_http": 0,
+      "limit": "Same unchanged tool; no repeat lint/mypy/boundary or full840 claim."
+    }
+  ]
 }
