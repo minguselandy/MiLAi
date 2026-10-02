@@ -40,6 +40,9 @@ from milai_lab.harness.contextual_artifacts import (
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
 from milai_lab.memory.functional import FunctionalMemory
+from milai_lab.memory.functional_state import digest as functional_digest
+from milai_lab.memory.functional_state import namespace as functional_namespace
+from milai_lab.memory.functional_state import visibility
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
@@ -246,6 +249,129 @@ def seed_sources(
     return receipts
 
 
+def _replay_evidence_ids(value: Any) -> set[str]:
+    """Inspect archived structured evidence; do not infer semantic copies from prose."""
+    refs: set[str] = set()
+    if isinstance(value, dict):
+        for key, child in value.items():
+            if key in {"source_ref", "event_id", "record_id", "id"} and isinstance(child, str):
+                refs.add(child)
+            elif key == "source_refs" and isinstance(child, list):
+                refs.update(ref for ref in child if isinstance(ref, str) and ref.startswith("src-"))
+            refs.update(_replay_evidence_ids(child))
+    elif isinstance(value, list):
+        for child in value:
+            refs.update(_replay_evidence_ids(child))
+    elif isinstance(value, str) and value.lstrip().startswith(("{", "[")):
+        try:
+            decoded = json.loads(value)
+        except ValueError:
+            pass
+        else:
+            refs.update(_replay_evidence_ids(decoded))
+    return refs
+
+
+def _visibility_replay(
+    service: MemoryService, archived: dict[str, Any], *, session: str, message_id: str,
+) -> dict[str, Any] | None:
+    """An archived receipt is not permission to redisclose now-revoked bodies.
+
+    A user input is not derived from prefetch. Its archived response/cache can
+    nevertheless contain the material actually delivered during that input.
+    """
+    visible = visibility(service)
+    hidden = set(visible["sources"])
+    hidden_records = set(visible["records"])
+    if not hidden and not hidden_records:
+        return None
+    public_ref = service.event_id(session, message_id, "user")
+    dependencies = _replay_evidence_ids(archived) | {
+        public_ref, service.event_id(session, message_id + ":final", "assistant")}
+    exposed = service.store.get(functional_namespace(service), "exposure:" + public_ref)
+    if exposed is not None:
+        dependencies.update(exposed.value["source_refs"])
+    revoked = sorted(dependencies.intersection(hidden))
+    revoked_records = sorted(dependencies.intersection(hidden_records))
+    if not revoked and not revoked_records:
+        return None
+    return {
+        "status": "VISIBILITY_REVOKED", "original_status": archived.get("status"),
+        "replayed": True, "forget_epoch": service.forget_epoch,
+        "revoked_source_refs": revoked, "revoked_ids": revoked_records,
+        "final_answer": None, "messages": [],
+        "records": [], "sources": [], "historical_artifact_retained": True,
+        "visibility_scope": "archived_response_dependencies_not_independent_user_facts",
+        "reason": "Archived response contains now-revoked source dependencies.",
+    }
+
+
+class _VisibilityReplayRevoked(Exception):
+    def __init__(self, receipt: dict[str, Any]) -> None:
+        super().__init__("FUNCTIONAL_REPLAY_VISIBILITY_REVOKED")
+        self.receipt = receipt
+
+
+def _verified_forget_continuation(
+    service: MemoryService, app: FunctionalApplication, messages: list[Any],
+    blocked: dict[str, Any], *, thread_id: str, session: str, message_id: str,
+) -> bool:
+    """Only an actual same-message forget receipt can authorize its recovery.
+
+    The checkpoint call, durable wrapper progress and Store visibility operation
+    must agree. Other messages' revocations cannot be excused by a hidden input.
+    """
+    generated = {row.id: row for row in messages if isinstance(row, AIMessage)}
+    operations = visibility(service)["operations"]
+    verified: set[str] = set()
+    source_refs: set[str] = set()
+    record_ids: set[str] = set()
+    for progress in app.progress.snapshot().values():
+        identity = progress["identity"]
+        if (identity.get("thread_id") != thread_id
+                or identity.get("session") != session or identity.get("turn_id") != message_id
+                or identity.get("owner") != service.owner
+                or identity.get("name") != "forget_memory"):
+            continue
+        row = generated.get(identity["generation_id"])
+        if row is None or not any(
+            call["id"] == identity["call_id"] and call["name"] == "forget_memory"
+            and call["args"] == identity["args"] for call in row.tool_calls
+        ):
+            continue
+        actual = operations.get(functional_digest([session, identity["call_id"]]))
+        response = progress.get("delivery_response", progress.get("memory_response"))
+        if actual is None or response is None:
+            continue
+        if response.get("tool_call_id") != identity["call_id"]:
+            continue
+        try:
+            receipt = json.loads(response["content"])
+        except (ValueError, TypeError, KeyError):
+            continue
+        # Replaying the same operation may add only its explicit replay marker.
+        original = {key: value for key, value in receipt.items() if key != "replayed"}
+        if (original != actual["receipt"] or not receipt.get("ok")
+                or receipt.get("status") != "visibility_revoked"):
+            continue
+        verified.add(identity["call_id"])
+        source_refs.update(receipt["revoked_source_refs"])
+        record_ids.update(receipt["revoked_ids"])
+    if not verified or not set(blocked["revoked_source_refs"]).issubset(source_refs):
+        return False
+    if not set(blocked["revoked_ids"]).issubset(record_ids):
+        return False
+    last = messages[-1] if messages else None
+    if isinstance(last, AIMessage) and last.tool_calls:
+        # A crashed W3 batch must first restore only proven forget receipts;
+        # do not execute unrelated stale arguments from the same generation.
+        return all(call["id"] in verified for call in last.tool_calls)
+    # A model-node continuation must already hold the actual receipt, which
+    # context_hook projects before it admits another generation.
+    return any(isinstance(row, ToolMessage) and row.name == "forget_memory"
+               and row.tool_call_id in verified for row in messages)
+
+
 def message(
     root: Path,
     *,
@@ -286,8 +412,18 @@ def message(
     input_path = bank_root / (identity + "-input.json")
     if input_path.exists() and read_json(input_path) != public:
         raise ValueError("FUNCTIONAL_PUBLIC_MESSAGE_IDENTITY_CHANGED")
+    namespace = ("functional", freeze["run_id"], bank, owner)
     if result_path.exists() and not resume:
-        return cast(dict[str, Any], read_json(result_path))
+        archived = cast(dict[str, Any], read_json(result_path))
+        if not (bank_root / "memory.sqlite").exists():
+            raise ValueError("FUNCTIONAL_REPLAY_VISIBILITY_STATE_MISSING")
+        with SqliteStore.from_conn_string(str(bank_root / "memory.sqlite")) as replay_store:
+            replay_service = MemoryService(
+                replay_store, namespace, owner, bank_root / "memory.lock",
+                functional_contract="functional_v1")
+            blocked = _visibility_replay(
+                replay_service, archived, session=session, message_id=message_id)
+        return blocked if blocked is not None else archived
     write_json(input_path, public)
     attempt = len(list(bank_root.glob(identity + "-attempt-*.json")))
     trace = Trace(bank_root / f"{identity}-trace-{attempt}.jsonl", "functional_v1")
@@ -298,7 +434,6 @@ def message(
         "attempt": attempt,
         "status": "UNKNOWN",
     }
-    namespace = ("functional", freeze["run_id"], bank, owner)
     scope = FoundationScope(freeze["run_id"], bank, owner, session + ":" + message_id)
     cfg = scope.config()
     cfg["configurable"].update(
@@ -434,10 +569,20 @@ def message(
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
 
             def context_hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+                messages = list(state["messages"])
+                blocked = _visibility_replay(service, {
+                    "status": "PENDING", "messages": [row.model_dump(mode="json")
+                                                         for row in messages]},
+                    session=session, message_id=message_id)
+                if blocked is not None and not _verified_forget_continuation(
+                    service, app, messages, blocked,
+                    thread_id=cfg["configurable"]["thread_id"],
+                    session=session, message_id=message_id,
+                ):
+                    raise _VisibilityReplayRevoked(blocked)
                 material = memory.context(
                     session, message_id, freeze["config_sha256"], query=content
                 )
-                messages = list(state["messages"])
                 rejected = format_failures(messages)
                 if len(rejected) > settings["format_reproposals"]:
                     trace({"event": "functional_format_budget_exhausted", "calls": rejected})
@@ -509,6 +654,22 @@ def message(
                 tool_schema_communication="shape_feedback_v1",
                 business_call_wrapper=dispatch,
             )
+            snapshot = agent.get_state(cfg)
+            prior = snapshot.values.get("messages", []) if snapshot.values else []
+            if prior:
+                blocked = _visibility_replay(service, {
+                    "status": "PENDING" if snapshot.next else "COMPLETED", "messages": [
+                        row.model_dump(mode="json") for row in prior]},
+                    session=session, message_id=message_id)
+                if blocked is not None and (not snapshot.next or not _verified_forget_continuation(
+                    service, app, prior, blocked,
+                    thread_id=cfg["configurable"]["thread_id"],
+                    session=session, message_id=message_id,
+                )):
+                    trace({"event": "functional_checkpoint_replay_visibility_revoked", **blocked})
+                    # Preserve old attempts/checkpoints; deny before any recovery
+                    # tool dispatch or new model request can receive their bodies.
+                    return blocked
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
@@ -569,6 +730,9 @@ def message(
                 formation_stage="host_tools_before_final",
                 snapshot_before_close=True,
             )
+        except _VisibilityReplayRevoked as revoked:
+            trace({"event": "functional_pre_model_visibility_revoked", **revoked.receipt})
+            return revoked.receipt
         except Exception as error:
             status, category = _status(error)
             output.update(

@@ -626,6 +626,8 @@ class FunctionalMemory:
         ) -> ToolMessage:
             """Save semantic memory using issued fragments; program extracts original quote/hash.
 
+            Create a new matter. For an existing continuing matter, read its record
+            and use update_memory; do not create a duplicate with save_memory.
             Scope is a JSON map of explicit personal/project/time limits, not Source objects.
             Confirm semantic saving only after an ok committed/no_change receipt.
             """
@@ -647,6 +649,8 @@ class FunctionalMemory:
             """Patch the exact read version using field, op=set/remove, and value for set.
 
             Fields are content/kind/basis or scope.KEY[.KEY]. Only scope paths support remove.
+            If the corrected claim is in content, patch content itself. Scope holds
+            applicability boundaries; it does not replace contradictory content.
             retract=true with changes=[] withdraws the fact and retains its history.
             Omitted fields retain original support; null is a value, never removal.
             Empty changes or exact same values return no_change without a new version.
@@ -698,6 +702,7 @@ class FunctionalMemory:
             """Read current/exact historical revision, or a previously issued cursor.
 
             history=true reads original stored revision bodies with snapshot pagination.
+            History is read-only: do not save an old value as a new or current fact.
             A cursor always continues its original
             ordinary/explicit snapshot; it never changes to latest results.
             """

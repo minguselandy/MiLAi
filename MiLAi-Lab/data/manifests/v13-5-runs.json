@@ -1,0 +1,46 @@
+{
+  "kind": "V13_5_COHORT_REGISTER",
+  "status": "DEVELOPMENT_IN_PROGRESS",
+  "cohorts": [
+    {
+      "id": "l1-r0",
+      "candidate_commit": "760e011",
+      "layer": "L1",
+      "state": "STOPPED_CORE_REVISION_FAILURE",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS": 8,
+        "FAIL": 2,
+        "NOT_RUN": 14
+      },
+      "message_counts": {
+        "COMPLETED": 17,
+        "NOT_RUN": 31
+      },
+      "cost_delta": {
+        "generation_requests": 36,
+        "generation.known_tokens": 179274,
+        "generation.charged_tokens": 179274,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "failures": [
+        "update-1: Host updated the same identity then saved a duplicate; later query reverted the current claim and created additional copies.",
+        "update-2: Host wrote a scope property while the contradictory primary content remained unchanged."
+      ],
+      "stop": "Profile disabled; a following admission failed before capture/provider. Its message remains NOT_RUN; CLI rejection retained separately.",
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r0/input-freeze.json": "42b0702c5279a1b66206d1e876a6b86af4d4b74c022bdd3d6509afa1e408053c",
+        "artifacts/v13-5/l1-r0-manual-review/seal.json": "9c37c6a4b4d40ebab54eb21ffc1c6d03dc91ffeb0585643ecf506f4236740939",
+        "artifacts/v13-5/l1-r0-manual-review/manual-grades.json": "235e9e376cb22b52bbc09a8ec653343a57b9d29e5aa50bf2e0155ade4ce6effb",
+        "artifacts/v13-5/l1-r0-evaluator-final/summary.json": "f2a9f148fd5d77414ea9aaca58c53487ab607a1cb3bf4b1215a25f390a6dbb73"
+      }
+    }
+  ],
+  "review_scope": "same inherited model family; developer semantic review, not independent Judge",
+  "prior_original_48_requirements": "unchanged",
+  "product": "NO_GO"
+}

@@ -65,7 +65,9 @@ to an external audience.
 
 ## Interrupted work and outcomes
 
-Reusing the same message ID with the same input returns its recorded result.
+Reusing the same message ID with the same input returns its recorded result only
+while its material remains visible. A later forget can invalidate live replay
+of that archived response; the original audit artifact remains retained.
 Changing text under that identity is rejected. `--resume` explicitly resumes an
 interrupted message using its durable checkpoint and remaining generation budget.
 Original attempt artifacts remain available. It does not grant permission to
@@ -79,6 +81,7 @@ repeat a mutation whose outcome is unknown.
 | `PROVIDER_ERROR` | The provider request failed; usage and the failed attempt remain recorded. |
 | `UNKNOWN` | A storage or business effect cannot be confirmed from its receipt. |
 | `NOT_RUN` | A preceding failure or queue stop prevented this step from running. |
+| `VISIBILITY_REVOKED` | A stored response depends on material later forgotten; live replay returns no archived body. Use a new message for a new request. |
 
 On an unknown business result, discover current state through its public query
 before considering any remaining action. The original unknown receipt is retained

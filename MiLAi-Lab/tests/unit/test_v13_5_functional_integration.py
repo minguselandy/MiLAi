@@ -385,6 +385,47 @@ def test_pending_public_read_resumes_with_a_distinct_real_query(
     assert sorted(row["status"] for row in calls) == ["complete", "pending"]
 
 
+def test_forget_w3_commit_reopens_same_input_without_restoring_visibility(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    control = {"one_shot_fault": {"message_index": 1, "boundary": "W3",
+        "target_operation": "forget_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            fragments = [row["fragment_handle"] for row in materials(wire)["items"]
+                         if row["type"] == "fragment"]
+            return tool("save_memory", content="marker MECHANICAL_FORGET_RESUME",
+                        fragment_handles=fragments)
+        if ordinal == 2:
+            return {"answer": "Saved."}
+        if ordinal == 3:
+            record = next(row for row in materials(wire)["items"] if row["type"] == "record")
+            return tool("forget_memory", read_handle=record["read_handle"])
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        assert "MECHANICAL_FORGET_RESUME" not in json.dumps(wire)
+        assert not any(row["type"] == "fragment" for row in materials(wire)["items"])
+        return {"answer": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply)
+    first = functional.message(root, bank="mechanical-bank", owner="alice", session="session",
+        message_id="save", content="Remember marker MECHANICAL_FORGET_RESUME.")
+    assert first["status"] == "COMPLETED"
+    args = {"bank": "mechanical-bank", "owner": "alice", "session": "session",
+            "message_id": "forget", "content": "Forget the marker.",
+            "evaluator_control": control, "message_index": 1}
+    interrupted = functional.message(root, **args)
+    assert interrupted["status"] == "UNKNOWN"
+    assert interrupted["error_type"] == "InjectedInterruption"
+    assert len(wires) == 3
+    recovered = functional.message(root, **args, resume=True)
+    assert recovered["status"] == "COMPLETED", recovered
+    assert len(wires) == 4
+    assert len(recovered["records"]) == 1
+    assert recovered["records"][0]["status"] == "visibility_revoked"
+
+
 def test_forget_trims_other_arguments_from_the_same_tool_call_batch(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

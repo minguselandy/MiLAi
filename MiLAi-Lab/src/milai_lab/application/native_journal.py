@@ -202,6 +202,7 @@ def recover_native_pending(app: Any, agent: Any, scope: Any, runtime: Any) -> No
     if any(row is None for row in entries):
         raise UnknownBusinessAction("NATIVE_RECOVERY_MIXED_BATCH_UNRESOLVED")
     deliveries = []
+    delivered_sources = []
     for original in entries:
         if original["status"] == "complete":
             deliveries.append(ToolMessage.model_validate(original["result"]))
@@ -210,9 +211,18 @@ def recover_native_pending(app: Any, agent: Any, scope: Any, runtime: Any) -> No
         field = "title" if app.journal.document_workflow else "item_key"
         if field not in original["target"]:
             raise UnknownBusinessAction("NATIVE_RECOVERY_DISCOVERY_TARGET_UNAVAILABLE")
-        query = {"name": query_name, "args": {field: original["target"][field]},
-                 "id": "discovery-" + original["journal_key"]}
-        query_ai = AIMessage(content="", id="discovery-" + original["journal_key"],
+        query_id = "discovery-" + original["journal_key"]
+        attempt = 0
+        while (prior_query := app.journal.entry_for_call(thread, query_id, query_id)) is not None:
+            if prior_query["status"] == "complete":
+                break
+            # A discovery read can itself lose its response. Never relabel or
+            # replay that call: a distinct public read obtains a fresh receipt.
+            # Completed reads retain their ID so capture/projection can resume.
+            attempt += 1
+            query_id = "discovery-" + original["journal_key"] + ":retry-" + str(attempt)
+        query = {"name": query_name, "args": {field: original["target"][field]}, "id": query_id}
+        query_ai = AIMessage(content="", id=query_id,
                              tool_calls=[query], response_metadata={"application_recovery": True})
 
         def wrap(request: Any, execute: Any) -> Any:
@@ -229,6 +239,7 @@ def recover_native_pending(app: Any, agent: Any, scope: Any, runtime: Any) -> No
         if recovery is None or recovery["effect"] == "unknown":
             raise UnknownBusinessAction("NATIVE_RECOVERY_OBSERVATION_UNRESOLVED")
         query_source = runtime.observer.query_source_delivery(recovery["query_journal_key"])
+        delivered_sources.append(query_source["source_ref"])
         deliveries.append(ToolMessage(
             name=original["name"], tool_call_id=original["call_id"], status="error",
             content=json.dumps({"status": "ORIGINAL_CALL_OUTCOME_UNKNOWN", "original_receipt": None,
@@ -238,4 +249,8 @@ def recover_native_pending(app: Any, agent: Any, scope: Any, runtime: Any) -> No
                                 "effect_source": recovery["effect_source"]}),
             additional_kwargs={"application_recovery": recovery},
         ))
+    # All discovery bodies are now selected for this delivery. Persist exposure
+    # before the checkpoint so a kill cannot leave a delivered body untracked;
+    # only a later assistant output can inherit this noncausal input edge.
+    runtime.observer.note_delivered_sources(delivered_sources)
     agent.update_state(scope.config(), {"messages": deliveries}, as_node="tools")

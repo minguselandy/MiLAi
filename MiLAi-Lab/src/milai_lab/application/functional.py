@@ -217,6 +217,17 @@ class FunctionalApplication:
             raise ValueError("FUNCTIONAL_CALL_CONFIGURATION_INVALID")
         if isinstance(self.journal, NativePublicActionJournal):
             source = service.source(service.event_id(session, turn_id, "user"))
+            if (source is None and runtime_config is not None
+                    and getattr(service, "functional_contract", "legacy") == "functional_v1"):
+                cfg = runtime_config.get("configurable", {})
+                digest = cfg.get("v13_support_config_sha256")
+                if (cfg.get("v13_session") != session or cfg.get("v13_turn_id") != turn_id
+                        or not isinstance(digest, str) or not digest):
+                    raise ValueError("FUNCTIONAL_PUBLIC_TURN_CONFIGURATION_INVALID")
+                # Forget may hide this exact in-flight trigger. Its persisted
+                # session/message/config binding permits continuation only;
+                # normal source retrieval and fragment issuance stay revoked.
+                source = service.active_public_input(session, turn_id, digest)
             if source is None:
                 raise ValueError("FUNCTIONAL_ACTUAL_PUBLIC_SOURCE_REQUIRED")
             self.journal.bind_public_turn(session, turn_id, source)
@@ -247,6 +258,21 @@ class FunctionalCallWrapper:
             "fragment_handle", "source_ref", "role", "origin", "start", "end",
             "source_total_codepoints", "range_basis",
         )} for fragment in self.service.source_fragments(source_ref)]
+
+    def note_delivered_sources(self, source_refs: list[str]) -> None:
+        if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
+            return
+        from milai_lab.memory.functional_state import note_exposure
+
+        with self.service._locked():
+            for ref in source_refs:
+                source = self.service.source(ref)
+                if source is None or source.get("role") != "tool":
+                    raise ValueError("FUNCTIONAL_VISIBLE_TOOL_SOURCE_REQUIRED")
+            # This is exposure for the future generated assistant, not a claim
+            # that the already-arrived user input derives from tool material.
+            note_exposure(self.service, self.service.event_id(self.session, self.turn_id, "user"),
+                          source_refs)
 
     def query_source_delivery(self, query_journal_key: str) -> dict[str, Any]:
         """Attach only the captured actual discovery source, never an original receipt."""
@@ -336,6 +362,8 @@ class FunctionalCallWrapper:
                     "source_ref": source_ref, "business_outcome": content["business_outcome"],
                     "actual_tool_receipt": row["result"], "origin": row["origin"],
                     "generation_requests": 0})
+        if wrap:
+            self.note_delivered_sources([source_ref])
         return delivery if wrap else response
 
     def __call__(self, request: Any, execute: Callable[[Any], Any]) -> Any:

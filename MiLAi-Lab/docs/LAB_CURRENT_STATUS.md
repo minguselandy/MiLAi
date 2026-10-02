@@ -3,6 +3,10 @@
 当前更新：2026-10-03。用户已授权完整执行 [v13.5 功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)，并在完成后提交 GitHub。
 当前为实现与验证阶段，尚无完整功能验收结论；见[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
 [用户入口](V13_5_FUNCTIONAL_USAGE.md)与[逐项验收](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
+L1-r0 因核心修订错误停止：8 PASS、2 FAIL、14 未运行；17/48 条消息完成，
+36 次 generation、179,274 tokens。正在修复并准备独立 r1；L2–L4 尚未运行。
+机械检查与模型结果分别见 [L0 检查](../data/manifests/v13-5-l0.json) 和
+[cohort 记录](../data/manifests/v13-5-runs.json)。
 v13.4 的 Simplify 退出保留，未恢复 T1–T3。Product 仍为 **NO_GO**。
 
 以下为历史状态快照，旧 ACTIVE/paused、费用和分数仅说明其记录时点：

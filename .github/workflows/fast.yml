@@ -220,7 +220,8 @@ jobs:
             --ignore=tests/application/test_v13_5_workflows.py \
             --ignore=tests/memory/test_v13_5_functional.py \
             --ignore=tests/unit/test_v13_5_functional_integration.py \
-            --ignore=tests/application/test_v13_5_sdk_lifecycle.py
+            --ignore=tests/application/test_v13_5_sdk_lifecycle.py \
+            --ignore=tests/unit/test_v13_5_visibility_replay.py
           uv run --no-sync python tools/check_legacy_archive.py
           uv build
 
@@ -277,7 +278,7 @@ jobs:
           uv run --no-sync mypy src/milai_lab
           uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/baselines/benchmark_memories.py src/milai_lab/application/*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/memory/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
-          uv run --no-sync pytest -q tests/application/test_v13_5_workflows.py tests/memory/test_v13_5_functional.py tests/unit/test_v13_5_functional_integration.py
+          uv run --no-sync pytest -q tests/application/test_v13_5_workflows.py tests/memory/test_v13_5_functional.py tests/unit/test_v13_5_functional_integration.py tests/unit/test_v13_5_visibility_replay.py
 
   lab-external-fast:
     name: Lab locked external adapter fast gate

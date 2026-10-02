@@ -306,5 +306,125 @@ def test_lost_public_query_response_never_blocks_a_later_native_mutation(tmp_pat
         assert len(app.world.snapshot()["attempts"]) == 1
 
 
+def test_revoked_current_input_binding_requires_exact_runtime_identity(tmp_path: Path) -> None:
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        memory = FunctionalMemory(service, len)
+        memory.context("session", "message", "a" * 64)
+        ref = service.event_id("session", "message", "user")
+        handles = [row["fragment_handle"] for row in service.source_fragments(ref)]
+        assert service.forget("session", "forget-source", fragment_handles=handles)["ok"]
+        assert service.source(ref) is None
+        cfg = config()
+        cfg["configurable"].update(v13_session="session", v13_turn_id="message",
+                                    v13_support_config_sha256="a" * 64)
+        with pytest.raises(ValueError, match="ACTUAL_PUBLIC_SOURCE_REQUIRED"):
+            app.call_wrapper(service, "session", "message")
+        for changed in ({"v13_session": "other"}, {"v13_turn_id": "other"},
+                        {"v13_support_config_sha256": ""}):
+            invalid = {**cfg, "configurable": {**cfg["configurable"], **changed}}
+            with pytest.raises(ValueError, match="PUBLIC_TURN_CONFIGURATION_INVALID"):
+                app.call_wrapper(service, "session", "message", runtime_config=invalid)
+        invalid = {**cfg, "configurable": {**cfg["configurable"],
+                                           "v13_support_config_sha256": "b" * 64}}
+        with pytest.raises(ValueError, match="ACTUAL_PUBLIC_SOURCE_REQUIRED"):
+            app.call_wrapper(service, "session", "message", runtime_config=invalid)
+        assert app.call_wrapper(service, "session", "message", runtime_config=cfg)
+        assert service.source(ref) is None
+        with pytest.raises(ValueError, match="SOURCE_UNAVAILABLE"):
+            service.source_fragments(ref)
+
+
+def test_lost_recovery_query_reopens_with_fresh_public_identity(tmp_path: Path) -> None:
+    def graph_for(app: Any, wrapper: Any, saver: Any) -> Any:
+        graph = StateGraph(MessagesState)
+        graph.add_node("tools", ToolNode(app.tools, wrap_tool_call=wrapper))
+        graph.set_entry_point("tools")
+        graph.set_finish_point("tools")
+        return graph.compile(checkpointer=saver)
+
+    def lost(row: Any, response: Any) -> None:
+        raise RuntimeError("mechanical native response lost")
+
+    scope = FoundationScope("run", "arm", "alice", "session")
+    with ExitStack() as stack:
+        app, _, wrapper = opened(stack, tmp_path, "reservation", response_hook=lost)
+        saver = stack.enter_context(SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.db")))
+        agent = graph_for(app, wrapper, saver)
+        native = {"name": "reserve_and_label", "args": reserve_args(),
+                  "id": "original", "type": "tool_call"}
+        with pytest.raises(RuntimeError, match="native response lost"):
+            agent.invoke({"messages": [HumanMessage(content="Operate", id="message"),
+                         AIMessage(content="", id="generation", tool_calls=[native])]},
+                         config(), durability="sync")
+        with pytest.raises(RuntimeError, match="native response lost"):
+            app.recover_pending(agent, scope, wrapper)
+        pending = app.journal._entries()
+        assert {row["name"] for row in pending.values()} == {
+            "reserve_and_label", "get_reservation"}
+        assert all(row["status"] == "pending" and "result" not in row
+                   for row in pending.values())
+
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation")
+        saver = stack.enter_context(SqliteSaver.from_conn_string(str(tmp_path / "checkpoint.db")))
+        agent = graph_for(app, wrapper, saver)
+        FunctionalMemory(service, len).context("session", "message", "a" * 64)
+        app.recover_pending(agent, scope, wrapper)
+        state = agent.get_state(config())
+        assert not state.next
+        delivered = json.loads(state.values["messages"][-1].content)
+        assert delivered["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+        assert delivered["original_receipt"] is None
+        assert delivered["query_receipt"]["status"] == "found"
+        assert delivered["observed_effect"] == "confirmed"
+        assert delivered["query_source"]["source_fragment_index"]
+        rows = app.journal._entries()
+        assert all(rows[key] == original for key, original in pending.items())
+        queries = [row for row in rows.values() if row.get("name") == "get_reservation"]
+        assert sorted(row["status"] for row in queries) == ["complete", "pending"]
+        assert len(service.sources()) == 2
+        assert len(app.world.snapshot()["reservations"]) == 1
+        assert len(app.world.snapshot()["attempts"]) == 1
+        copied = service.capture_assistant("session", "message:final",
+                                           json.dumps(delivered["query_receipt"]))["source_ref"]
+        service.capture_user("session", "forget", "Forget the discovered receipt.")
+        FunctionalMemory(service, len).context("session", "forget", "a" * 64)
+        forgotten = service.forget("session", "forget-query", fragment_handles=[
+            row["fragment_handle"] for row in delivered["query_source"]["source_fragment_index"]])
+        assert copied in forgotten["revoked_source_refs"]
+        assert service.source(service.event_id("session", "message", "user")) is not None
+
+
+@pytest.mark.parametrize("delivered", [False, True])
+def test_only_delivered_tool_source_becomes_an_assistant_dependency(
+    tmp_path: Path, delivered: bool,
+) -> None:
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation")
+        FunctionalMemory(service, len).context("session", "message", "a" * 64)
+        if not delivered:
+            def interrupt(window: str, event: Any) -> None:
+                if window == "W2":
+                    raise RuntimeError("captured but not delivered")
+            wrapper.boundary_hook = interrupt
+            with pytest.raises(RuntimeError, match="not delivered"):
+                call(wrapper, "reserve_and_label", reserve_args(), "reserve")
+        else:
+            assert receipt(call(wrapper, "reserve_and_label", reserve_args(), "reserve"))["ok"]
+        actual_tool = next(row for row in service.sources() if row["role"] == "tool")
+        copied = service.capture_assistant("session", "message:final",
+            actual_tool["content"] if delivered else "No tool result was received.")["source_ref"]
+        handles = [row["fragment_handle"]
+                   for row in service.source_fragments(actual_tool["event_id"])]
+        service.capture_user("session", "forget", "Forget the captured receipt.")
+        FunctionalMemory(service, len).context("session", "forget", "a" * 64)
+        forgotten = service.forget("session", "forget-tool", fragment_handles=handles)
+        assert (copied in forgotten["revoked_source_refs"]) is delivered
+        assert (service.source(copied) is None) is delivered
+        assert service.source(service.event_id("session", "message", "user")) is not None
+        assert len(app.world.snapshot()["reservations"]) == 1
+
+
 if __name__ == "__main__" and sys.argv[1] == "--worker":
     worker(Path(sys.argv[2]), sys.argv[3], sys.argv[4], sys.argv[5])
