@@ -15,6 +15,7 @@ from typing import Any
 
 import httpx
 import pytest
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage, messages_from_dict
 from tokenizers import Tokenizer, models, pre_tokenizers
 from transformers import PreTrainedTokenizerFast
 
@@ -106,6 +107,14 @@ def actual_tool_receipt(wire: dict[str, Any]) -> dict[str, Any]:
                            if row["role"] == "tool"))
 
 
+def memory_effects(wire: dict[str, Any]) -> dict[str, Any]:
+    system = next(row["content"] for row in wire["messages"] if row["role"] == "system")
+    summary = json.loads(system.splitlines()[-2])
+    assert summary["schema"] == "functional_memory_effects_v1"
+    assert summary["scope"] == "visible_checkpoint_of_current_public_message"
+    return summary
+
+
 def message(root: Path, **kwargs: Any) -> dict[str, Any]:
     return functional.message(root, bank="mechanical-bank", owner="alice", session="session",
                               message_id="message", content="Remember the local marker is blue.",
@@ -119,12 +128,19 @@ def test_unified_save_commits_before_final_and_same_path_reopen(
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal == 1:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 0
             fragments = [row["fragment_handle"] for row in materials(wire)["items"]
                          if row["type"] == "fragment"]
             return tool("save_memory", content="The local marker is blue.",
                         fragment_handles=fragments)
         receipt = actual_tool_receipt(wire)
         assert receipt["ok"] and receipt["status"] == "committed"
+        summary = memory_effects(wire)
+        actual_ref = next(row["tool_call_id"] for row in reversed(wire["messages"])
+                          if row["role"] == "tool")
+        assert summary["confirmed_semantic_commit_count"] == 1
+        assert summary["confirmed_semantic_commit_receipt_refs"] == [actual_ref]
+        assert "The local marker is blue." not in json.dumps(summary)
         return {"answer": "Saved the marker."}
 
     wires = scripted(monkeypatch, reply)
@@ -138,6 +154,9 @@ def test_unified_save_commits_before_final_and_same_path_reopen(
     assert again["status"] == "COMPLETED", again
     assert again["records"] == first["records"] and len(wires) == 2
     assert again["budget_before"] == first["budget_after"] == again["budget_after"]
+    restored = messages_from_dict([{"type": row["type"], "data": row}
+                                   for row in again["messages"]])
+    assert functional.memory_effects(restored) == memory_effects(wires[-1])
 
 
 def test_unified_provider_failure_resume_keeps_budget_and_one_semantic_commit(
@@ -147,12 +166,16 @@ def test_unified_provider_failure_resume_keeps_budget_and_one_semantic_commit(
 
     def reply(wire: dict[str, Any], ordinal: int) -> Any:
         if ordinal == 1:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 0
             handles = [row["fragment_handle"] for row in materials(wire)["items"]
                        if row["type"] == "fragment"]
             return tool("save_memory", content="The local marker is blue.",
                         fragment_handles=handles)
         if ordinal == 2:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
             return httpx.ReadTimeout("mechanical response interruption")
+        assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
+        assert memory_effects(wire) == memory_effects(wires[1])
         return {"answer": "The existing save is confirmed."}
 
     wires = scripted(monkeypatch, reply)
@@ -168,6 +191,52 @@ def test_unified_provider_failure_resume_keeps_budget_and_one_semantic_commit(
     admission = read_json(bank / "message-admission.json")
     assert next(iter(admission["messages"].values()))["count"] == 3
     assert read_json(root / "queue-admission.json")["requests"] == 3
+
+
+def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_unknowns() -> None:
+    secret = "MECHANICAL_BODY_MUST_NOT_APPEAR_IN_EFFECTS"
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1, "content": secret}
+
+    def call(name: str, ref: str) -> AIMessage:
+        return AIMessage(content=secret, id="generation-" + ref, tool_calls=[{
+            "name": name, "id": ref, "args": {"content": secret}}])
+
+    def receipt(name: str, ref: str, value: dict[str, Any], *, error: bool = False) -> ToolMessage:
+        return ToolMessage(name=name, tool_call_id=ref, content=json.dumps(value),
+                           status="error" if error else "success")
+
+    old = [HumanMessage(content="old request"), call("save_memory", "old"),
+           receipt("save_memory", "old", committed)]
+    current = [HumanMessage(content="current request"),
+        receipt("save_memory", "unpaired", committed),
+        call("save_memory", "wrong-name"), receipt("update_memory", "wrong-name", committed),
+        call("save_memory", "pending"),
+        call("save_memory", "unknown"), receipt("save_memory", "unknown", {
+            "ok": False, "status": "outcome_unknown", "effect": "unconfirmed", "reason": secret}),
+        call("save_memory", "failed"), receipt("save_memory", "failed", committed, error=True),
+        call("search_memory", "read"), receipt("search_memory", "read", committed),
+        call("update_memory", "unchanged"), receipt("update_memory", "unchanged", {
+            "ok": True, "status": "no_change", "effect": "none"}),
+        call("forget_memory", "forget"), receipt("forget_memory", "forget", {
+            "ok": True, "status": "visibility_revoked", "effect": "visibility_only"})]
+    zero = functional.memory_effects([*old, *current])
+    assert zero["confirmed_semantic_commit_count"] == 0
+    assert zero["confirmed_semantic_commit_receipt_refs"] == []
+    assert zero["pending_mutation_call_refs"] == ["pending"]
+    assert {row["receipt_ref"] for row in zero["mutation_receipts"]} == {
+        "unknown", "failed", "unchanged", "forget"}
+    assert secret not in json.dumps(zero)
+    final = functional.memory_effects([*old, *current,
+        call("save_memory", "actual"), receipt("save_memory", "actual", committed),
+        call("update_memory", "recovered"), receipt("update_memory", "recovered", {
+            **committed, "status": "no_change", "original_status": "committed", "replayed": True})])
+    assert final["confirmed_semantic_commit_count"] == 2
+    assert final["confirmed_semantic_commit_receipt_refs"] == ["actual", "recovered"]
+    assert final["semantic_completion"] == "unchecked"
+    assert final["raw_capture_is_semantic_save"] is False
+    assert final["reads_perform_semantic_writes"] is False
+    assert secret not in json.dumps(final)
 
 
 @pytest.mark.parametrize("workflow", ["reservation", "document"])

@@ -226,6 +226,31 @@ class FunctionalMemory:
             self.service.store.put(namespace(self.service), key, payload, index=False)
         return key
 
+    @staticmethod
+    def _read_only_metadata(items: list[dict[str, Any]]) -> dict[str, Any]:
+        record_ids = list(dict.fromkeys(
+            unit["record_id"] for unit in items if unit["type"] == "record"
+        ))
+        return {
+            "operation_effect": "read_only",
+            "semantic_write_performed": False,
+            "delivered_semantic_record_ids": record_ids,
+            "delivered_semantic_record_count": len(record_ids),
+            "delivered_semantic_record_units": sum(unit["type"] == "record" for unit in items),
+            "delivered_raw_fragment_count": sum(unit["type"] == "fragment" for unit in items),
+            "delivery_count_scope": "this_packet_items_only_not_owner_total_or_writes",
+            "record_unit_scope": "a_unit_may_be_only_part_of_a_record_body",
+            "formation_evidence": (
+                "Successful save_memory/update_memory receipt; "
+                "raw capture/search/read is not formation"
+            ),
+            "evidence_contract": {
+                "fragment_verification": "exact_original_span_only_not_semantic_support",
+                "new_values": "must_be_directly_supported_by_selected_fragments",
+                "trigger_binding": "execution_attribution_not_field_evidence",
+            },
+        }
+
     def _page(self, key: str, start: int, binding: dict[str, Any]) -> dict[str, Any]:
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None or key != "snapshot-" + digest(stored.value):
@@ -258,6 +283,7 @@ class FunctionalMemory:
                 "material_limit": self.material_limit,
                 "semantic_support": "unchecked",
                 "business_authority": False,
+                **self._read_only_metadata(chosen),
                 "delivery_status": "partial" if end < len(items) else "complete_snapshot",
                 "source_groups": list(
                     {
@@ -565,7 +591,11 @@ class FunctionalMemory:
                     return cast(dict[str, Any], previous["result"])
                 raise ValueError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
-                return {"ok": False, "status": "read_limit_exhausted", "limit": self.read_limit}
+                exhausted = {"ok": False, "status": "read_limit_exhausted",
+                             "limit": self.read_limit, **self._read_only_metadata([])}
+                if self.token_count(canonical(exhausted)) > self.material_limit:
+                    raise ValueError("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+                return exhausted
             state["calls"][call_id] = {"arguments": arguments, "forget_epoch": self.forget_epoch}
             self.service.store.put(namespace(self.service), key, state, index=False)
         try:
@@ -577,6 +607,12 @@ class FunctionalMemory:
                 "reason": str(error),
                 "retryable": False,
             }
+        if result.get("schema") != "functional_material_v1":
+            # Failed reads delivered no items; zero is a delivery count, not a
+            # claim that the owner has no records or that the lookup succeeded.
+            result = {**result, **self._read_only_metadata([])}
+            if self.token_count(canonical(result)) > self.material_limit:
+                raise ValueError("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         with self.service._locked():
             current = self.service.store.get(namespace(self.service), key)
             assert current is not None
@@ -628,6 +664,9 @@ class FunctionalMemory:
 
             Create a new matter. For an existing continuing matter, read its record
             and use update_memory; do not create a duplicate with save_memory.
+            Selected fragments must directly support the new content and scope.
+            A verified fragment proves original bytes, not semantic support.
+            The current request binding attributes execution; it is not field evidence.
             Scope is a JSON map of explicit personal/project/time limits, not Source objects.
             Confirm semantic saving only after an ok committed/no_change receipt.
             """
@@ -651,6 +690,10 @@ class FunctionalMemory:
             Fields are content/kind/basis or scope.KEY[.KEY]. Only scope paths support remove.
             If the corrected claim is in content, patch content itself. Scope holds
             applicability boundaries; it does not replace contradictory content.
+            Select fragments that directly support each NEW changed value, not
+            merely the old value. The current correction is not automatically
+            added as evidence: supply its issued fragment handles when it supports
+            the change. A trigger binding only attributes the current execution.
             retract=true with changes=[] withdraws the fact and retains its history.
             Omitted fields retain original support; null is a value, never removal.
             Empty changes or exact same values return no_change without a new version.
@@ -673,7 +716,13 @@ class FunctionalMemory:
         def search_memory(
             query: str, config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId]
         ) -> ToolMessage:
-            """Search owner material; complete available units paginate a fixed snapshot."""
+            """Search owner material read-only; units paginate a fixed snapshot.
+
+            Raw fragments are captured original Sources, not saved semantic records.
+            Record units are existing versions, possibly partial bodies. Counts refer
+            only to delivered items. Search never saves or updates: confirm a semantic
+            write only from a successful save_memory/update_memory receipt.
+            """
             return message(
                 "search_memory",
                 tool_call_id,
@@ -703,6 +752,8 @@ class FunctionalMemory:
 
             history=true reads original stored revision bodies with snapshot pagination.
             History is read-only: do not save an old value as a new or current fact.
+            Reading a record or raw fragment performs no semantic write. Only an
+            actual successful save_memory/update_memory receipt confirms that effect.
             A cursor always continues its original
             ordinary/explicit snapshot; it never changes to latest results.
             """
@@ -794,6 +845,8 @@ class FunctionalMemory:
             """Read an issued exact fragment or a full public source group, continuing its cursor.
 
             Source groups split only at public original boundaries; each page states omissions.
+            Original capture/read is not semantic formation. This read never saves;
+            a semantic write needs a successful save_memory/update_memory receipt.
             Every call, including a failed call, uses the explicit per-message read allowance.
             """
 

@@ -207,6 +207,64 @@ def format_failures(messages: list[Any]) -> list[str]:
     return list(dict.fromkeys(rejected))
 
 
+def memory_effects(messages: list[Any]) -> dict[str, Any]:
+    """Summarize paired current-message receipts, without reading more memory.
+
+    This is operation evidence, not a judgment about user intent, field support
+    or the truth of the Host's free-text answer. Forget projection runs first.
+    """
+    start = next((i for i in range(len(messages) - 1, -1, -1)
+                  if isinstance(messages[i], HumanMessage)), len(messages))
+    names = {"save_memory", "update_memory", "forget_memory"}
+    calls: dict[str, str] = {}
+    receipts = []
+    confirmed = []
+    for row in messages[start:]:
+        if isinstance(row, AIMessage):
+            for call in row.tool_calls:
+                ref = call.get("id")
+                if call["name"] in names and isinstance(ref, str) and ref:
+                    calls[ref] = call["name"]
+        elif isinstance(row, ToolMessage):
+            name = calls.pop(row.tool_call_id, None)
+            if name is None or row.name != name:
+                continue
+            try:
+                value = json.loads(str(row.content))
+            except ValueError:
+                value = None
+            if not isinstance(value, dict):
+                value = {"ok": False, "status": "receipt_unreadable", "effect": "unconfirmed"}
+            receipt = {key: value[key] for key in (
+                "ok", "status", "effect", "formation_status", "id", "revision",
+                "replayed", "original_status", "content_verification",
+            ) if key in value}
+            receipts.append({"tool": name, "receipt_ref": row.tool_call_id,
+                             "transport_status": row.status, **receipt})
+            if (row.status == "success" and value.get("ok") is True
+                    and name in {"save_memory", "update_memory"}
+                    and value.get("effect") == "memory_only"
+                    and (value.get("status") == "committed"
+                         or (value.get("status") == "no_change"
+                             and value.get("replayed") is True
+                             and value.get("original_status") == "committed"))):
+                confirmed.append(row.tool_call_id)
+    return {
+        "schema": "functional_memory_effects_v1",
+        "scope": "visible_checkpoint_of_current_public_message",
+        "mutation_receipts": receipts,
+        "pending_mutation_call_refs": list(calls),
+        "confirmed_semantic_commit_receipt_refs": confirmed,
+        "confirmed_semantic_commit_count": len(confirmed),
+        "raw_capture_is_semantic_save": False,
+        "reads_perform_semantic_writes": False,
+        "semantic_completion": "unchecked",
+        "interpretation": "Only actual mutation receipts confirm write effects. Raw fragments "
+        "and read-only search hits do not confirm semantic saving. An existing semantic record "
+        "may satisfy a request without a new write; assess its actual delivered content.",
+    }
+
+
 def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path
 ) -> list[dict[str, Any]]:
@@ -621,10 +679,14 @@ def message(
                         *messages[forgotten_at:],
                     ]
                 trace({"event": "functional_material_delivery", "material": material})
+                effects = memory_effects(messages)
+                trace({"event": "functional_memory_effects", "effects": effects})
                 return {
                     "llm_input_messages": [
                         SystemMessage(
                             content=settings["system_prompt"]
+                            + "\n"
+                            + json.dumps(effects, ensure_ascii=False)
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),

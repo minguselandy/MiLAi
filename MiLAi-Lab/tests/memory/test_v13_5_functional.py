@@ -82,6 +82,121 @@ def invoke(
     return json.loads(response.content)
 
 
+def assert_read_delivery(packet: dict[str, Any]) -> None:
+    items = packet.get("items", [])
+    ids = list(dict.fromkeys(u["record_id"] for u in items if u["type"] == "record"))
+    assert packet["operation_effect"] == "read_only"
+    assert packet["semantic_write_performed"] is False
+    assert packet["delivered_semantic_record_ids"] == ids
+    assert packet["delivered_semantic_record_count"] == len(ids)
+    assert packet["delivered_semantic_record_units"] == sum(u["type"] == "record" for u in items)
+    assert packet["delivered_raw_fragment_count"] == sum(u["type"] == "fragment" for u in items)
+    assert packet["delivery_count_scope"] == "this_packet_items_only_not_owner_total_or_writes"
+
+
+def test_read_only_raw_searches_are_not_formation_and_snapshot_counts_stay_fixed(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory, text="public synthetic marker")
+        ordinary = memory.context("s", "u", SHA)
+        for packet in [ordinary, *[
+            invoke(memory, "search_memory", {"query": "synthetic marker"}, f"search-{i}")
+            for i in range(2)
+        ]]:
+            assert_read_delivery(packet)
+            assert packet["delivered_semantic_record_count"] == 0
+            assert packet["delivered_raw_fragment_count"] > 0
+            assert {u["source_ref"] for u in packet["items"]} == {ref}
+        assert memory.service.records() == []
+        committed = memory.save(cfg(), "actual-save", "synthetic marker", handles(memory, ref))
+        assert committed["ok"] and committed["status"] == "committed"
+        assert memory.context("s", "u", SHA) == ordinary
+        read = invoke(memory, "read_memory", {"record_id": committed["id"]}, "record")
+        assert_read_delivery(read)
+        assert read["delivered_semantic_record_ids"] == [committed["id"]]
+        assert read["delivered_raw_fragment_count"] == 0
+        refused = invoke(memory, "read_source", {"fragment_handle": "unknown"}, "over-limit")
+        assert refused["status"] == "read_limit_exhausted" and not refused["ok"]
+        assert_read_delivery(refused)
+        assert len(memory.service.records()) == 1
+
+
+def test_read_delivery_metadata_is_budgeted_for_mixed_immutable_pages(tmp_path: Path) -> None:
+    with opened(tmp_path, material_limit=3500, fragment_chars=240, read_limit=40) as memory:
+        ref = turn(memory, text="synthetic source " * 90)
+        saved = memory.save(cfg(), "save", "synthetic record " * 80, handles(memory, ref))
+        turn(memory, "query", "synthetic")
+        page = memory.context("s", "query", SHA)
+        snapshot = memory.service.store.get(namespace(memory.service), page["snapshot_id"])
+        assert snapshot is not None
+        original_items = snapshot.value["items"]
+        delivered = []
+        index = 0
+        assert page["next_cursor"] is not None
+        while True:
+            assert_read_delivery(page)
+            assert len(canonical(page)) <= memory.material_limit
+            assert page["items"]
+            assert page["items"] == original_items[page["start"]:
+                                                  page["start"] + len(page["items"])]
+            delivered.extend(page["items"])
+            if page["next_cursor"] is None:
+                break
+            index += 1
+            page = invoke(memory, "read_memory", {"cursor": page["next_cursor"]},
+                          f"page-{index}", cfg("query"))
+        assert delivered == original_items
+        assert any(u["type"] == "fragment" for u in delivered)
+        chunks = [u for u in delivered if u["type"] == "record"]
+        assert len(chunks) > 1 and {u["record_id"] for u in chunks} == {saved["id"]}
+        assert "".join(u["content"] for u in sorted(chunks, key=lambda u: u["content_range"])) == (
+            memory.service.read(saved["id"])["value"]["content"]
+        )
+        failed = invoke(memory, "read_source", {"fragment_handle": "unknown"},
+                        "failed", cfg("query"))
+        assert failed["status"] == "read_rejected" and not failed["ok"]
+        assert_read_delivery(failed)
+        assert len(canonical(failed)) <= memory.material_limit
+
+
+def test_correction_fragment_selection_is_explicit_not_inferred_from_trigger(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path) as memory:
+        original = turn(memory, text="synthetic value A")
+        old_handles = handles(memory, original)
+        saved = memory.save(cfg(), "save", "synthetic value A", old_handles, {"project": "local"})
+        row = memory.service.read(saved["id"])
+        corrected = turn(memory, "correction", "synthetic value B")
+        new_handles = handles(memory, corrected)
+        result = memory.update(cfg("correction"), "correct", row["candidate_handle"],
+            [{"field": "content", "op": "set", "value": "synthetic value B"}], new_handles)
+        assert result["ok"] and result["fragment_provenance_verified"]
+        version = memory.service.read(saved["id"])["value"]
+        assert version["functional_support"]["content"]["fragment_handles"] == new_handles
+        assert version["functional_support"]["scope.project"]["fragment_handles"] == old_handles
+        # A later execution trigger alone never becomes evidence for a changed field.
+        unused = turn(memory, "other", "independent current request")
+        current = memory.service.read(saved["id"])
+        again = memory.update(cfg("other"), "explicit-support", current["candidate_handle"],
+            [{"field": "content", "op": "set", "value": "value B"}], new_handles)
+        assert again["ok"]
+        support = memory.service.read(saved["id"])["value"]["functional_support"]["content"]
+        assert support["fragment_handles"] == new_handles
+        assert unused not in support["source_refs"]
+        packet = invoke(memory, "read_memory", {"record_id": saved["id"]}, "read", cfg("other"))
+        assert packet["semantic_support"] == "unchecked"
+        assert packet["evidence_contract"]["trigger_binding"] == (
+            "execution_attribution_not_field_evidence"
+        )
+        descriptions = {t.name: t.description for t in memory.tools()}
+        assert "directly support the new content" in descriptions["save_memory"]
+        assert "NEW changed value" in descriptions["update_memory"]
+        assert "not automatically" in descriptions["update_memory"]
+        assert "Search never saves or updates" in descriptions["search_memory"]
+
+
 @pytest.mark.parametrize("after_put", [False, True])
 @pytest.mark.parametrize("write_phase", ["source", "confirmation"])
 def test_m01_actual_sqlite_unknown_capture_does_not_issue(
