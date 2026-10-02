@@ -1,0 +1,86 @@
+{
+  "kind": "V13_4_T0_ANNOTATION_AND_QUERY_FREEZE",
+  "frozen_at_utc": "2026-10-02T18:55:04.168686+00:00",
+  "code_head": "1c85c67361d18fca3788cccdd37d3af6e99d4cec",
+  "authoring_release": {
+    "path": "data/manifests/v13-4-t0-authoring-freeze.json",
+    "sha256": "8647403da69d81603b1df68d4f6ad305c0ae4faf6939b1358359271b6c12a357"
+  },
+  "runtime_queries": {
+    "path": "artifacts/v13-4/t0-runtime/queries.json",
+    "sha256": "ce179924568d8ead65d294604fdc844ea059b0bc7d522da01d8aacfc98315259",
+    "fields": [
+      "query_id",
+      "origin_id",
+      "question"
+    ]
+  },
+  "evaluator_review": {
+    "path": "artifacts/v13-4/t0-annotations/root-final-semantic-review.json",
+    "sha256": "2e7de66c8aa13727d836367d72c8fadc5592439c9adc4c39d322aeff0220528a"
+  },
+  "annotation_files": {
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9171.json": "0a5a702c4adb7a6b25a1a7b8d892c7069ce7d12b180dc37b883d3b3901db3d3a",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7469.json": "5256c438e802909bf57e215a21635259c87b7c14c83028073ecabc08cc77e465",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9886.json": "3336ef6ab44957dcad9c5e11714afe59a817ae3933462fc52bca9efc9321b587",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8239.json": "81a70b7955da1a596c2f6a51d8f09c4946c59225a14385e3d51481919166976b",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9204.json": "fc945822623b0ed6b10427588e2acb02765849e5940f1150e9726d97859ec9ec",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9711.json": "38cfabf746958ae1151615e6fed86e9287d943a1e7251d04b59fe077f221e4b4",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8345.json": "d0dd54e46c94c08d2fa14d56daa019261746471ef67d2a8b38a0687ebc17addc",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8972.json": "31be3df209204699c9f7b84b9b472dc22db3f8510cfa878bcc76755e35944faa",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9793.json": "03faf9f761ebb3a4c09ae2a3241a8f6b620da29b49ef1a0c15c493c8f8036eee",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8949.json": "80a9b85d657552afa85c1a48ace3540d49dc73d5e042959c9e80de99bd6f7455",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7644.json": "ae444347e0bc8ff4da49990ae77979d2e14df2c8b976284bf6e1449bd4ce9483",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8765.json": "15d1098cfb7a61a10f6da540421c5b8b1500ceb763c9f734b1347c1bd1c1ce8a",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8995.json": "7012b2fa67a7d579be50cffc53f487f7f009b4b876df0c5be4d42a5aae6a6807",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8259.json": "bbc1949079c0d53e3725bce31f094f084e93a589aec22692452192303412e807",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7940.json": "b4517a36820a22631cd7d48610e87267f61e2979793f5e599502dd85525b7e1c",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8824.json": "4faf5a0e714633c1f836be9385ad9fb337d0312b5697904d495e463b9a20144c",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8360.json": "8b437e0eb323b831af975c03be76b3c4f0a6782977ccabf024e6fa3413764ab3",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8466.json": "18c1c02b4c27d3fcf95e33a832286972b787d4d77901e85f71401178dcf0902c",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9132.json": "fc58075d1b571ed2ed422b9344fbb5c30253b45fb3fe96ff531466f20026c99b",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8794.json": "00485c01cdc86063369eaca0aa5f7fcb40872b3387877d7ec234b9431324c7e5",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9493.json": "edefceb133bafa7c2c9a1f8b4633670c08c0461c2e0955f6c68748026cd024a5",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9115.json": "140751c5665b63f3c43abd7e0a8a0b8386a07cfa35ba26d7dd49a034f6c5b007",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9605.json": "c4761427e62aecbee1b64659f12820d8dfd695bd8c6d9baef6f9426fd8a33bce",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7574.json": "948a859434ee2068e5df65dacd54f877bc4dfdc52d462d34116b8b97b76fc104",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7788.json": "ba31bea069f0e62cf7a302182910d744b2b51419c0ac4579141a13c5655c68c7",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8678.json": "64fd9610f9cf27707fbfe67b5dffe566be26c2e300ba6df1f4aba293c886917f",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9303.json": "5362d4f987975a074f5da3482e33232315785fc584484dab6d4ee445597e313b",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC8881.json": "e2bdf5a6364ea9f49aba2819faf913dfc490cca9f95e16d27ac7e986f993e3e9",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7430.json": "a6ffd1ab0691841d0f74515d04b7ddde1bffbae6b15458e26d93718e805a3682",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9580.json": "c2afef7d978a8d17317c836cfa5392a959da77872b31e88a2d62150f55442425",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC7970.json": "ff6f9a143c14da0d8ad87b6629f15e53f43c7da418c5185859d17c84adce04db",
+    "artifacts/v13-4/t0-annotations/evaluator/RFC9562.json": "d054e0bfc1f9ed8e955d771c07b9fb1b00805ba6038f3cfc4d07090d32a9ef3f"
+  },
+  "counts": {
+    "histories": 32,
+    "queries": 128,
+    "SOLVABLE": 123,
+    "PARTIALLY_SOLVABLE": 4,
+    "ARCHIVE_INSUFFICIENT": 1,
+    "ANNOTATION_UNKNOWN": 0,
+    "planned_reader_slots": 256,
+    "offline_variants": 1152
+  },
+  "whole_query_E_star_status": "ACCEPTED_SCOPED_NONEXHAUSTIVE_DEVELOPMENT; no-match is NO_ENUMERATED_SET_COVERED",
+  "driver": {
+    "path": "artifacts/v13-4/run_t0.py",
+    "sha256": "f843cceade0b94184b48aa3a749d302c69900d083460ea0c07130eebd2a2eaa8",
+    "synthetic_checks_passed": 4
+  },
+  "analysis_preregistration": {
+    "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+    "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+  },
+  "annotation_protocol": {
+    "path": "docs/V13_4_T0_ANNOTATION_PROTOCOL.md",
+    "sha256": "fd73cfdc0874ba90c107e6a8d53e3642d15666b4768d980f3382c55dbe45d877"
+  },
+  "natural_prepare_runs_before_freeze": 0,
+  "actual_T0_Reader_calls_before_freeze": 0,
+  "runtime_must_not_import_this_evaluator_manifest": true,
+  "independent_semantic_review": false,
+  "G1": "NOT_EVALUATED",
+  "Product": "NO_GO"
+}

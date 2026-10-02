@@ -9,12 +9,14 @@
     "18092f7",
     "1cdf810",
     "92d768d",
-    "08f82d8"
+    "08f82d8",
+    "5230d02",
+    "1c85c67"
   ],
   "work_packages": {
     "N0": "PARTIAL_SOURCE_ELIGIBILITY_PENDING",
     "N1": "PASSED_SCOPED_SOURCE_READER",
-    "N2": "B1_B2_B3_METADATA_INDEX_FROZEN_T0_ANNOTATIONS_AND_ACTUAL_RESULTS_PENDING",
+    "N2": "ANNOTATION_FROZEN_T0_OFFLINE_PREPARE_RUNNING",
     "N3": "PARTIAL_FORMATION_SUBSTEP_MOVED_BEFORE_QUERY_OTHER_WORK_G1_REQUIRED",
     "N4": "NOT_STARTED_G2_REQUIRED",
     "N5": "NOT_STARTED_METHOD_AND_PILOT_FREEZE_REQUIRED",
@@ -44,11 +46,10 @@
   "current_reader_config": "configs/v13-4-readonly-q0.json",
   "rejected_reader_config": "configs/v13-4-readonly-q0-r1.json",
   "next_actions": [
-    "Create128 natural queries and evaluator annotations after total prequery freeze; no method result-based question selection",
-    "Verify exact evidence bindings and semantic solvability/alternatives, then freeze T0 runtime driver and256-slot budget admission",
-    "Construct32-history T0 natural queries/solvability/allowed partial answers/E* with honest source-family and stratum gaps",
-    "Run T0 B1/B2 only after current data/baseline/source/budget freeze; distinguish relation ambiguity from ordinary retrieval and Reader failures",
-    "Use G1/G2 to decide conditional predictor/T1/T2/T3 and retain all original48 obligations"
+    "Complete1152 offline selections and verify256-slot Reader admission",
+    "Run T0 B1/B2 within exact prepared material/capacity freeze and continuous ledger",
+    "Score frozen outcomes under blinded development review and analyze coverage/source dependence/G1",
+    "Use G1/G2 to decide conditional work; preserve all original48 obligations"
   ],
   "existing_blocker": "No terminal blocker; remaining work is authorized and in progress",
   "Product": "NO_GO",
@@ -74,10 +75,11 @@
     "raw_bytes": 6803322,
     "substantive_candidates": 32,
     "T0_admitted": 0,
-    "queries_authored": 0,
+    "queries_authored": 128,
     "independent_semantic_review": false,
     "manifest": "data/manifests/v13-4-t0-acquisition.json",
-    "semantic_audit": "data/manifests/v13-4-t0-semantic-audit.json"
+    "semantic_audit": "data/manifests/v13-4-t0-semantic-audit.json",
+    "queries_status": "FROZEN_SINGLE_DEVELOPER_REVIEW"
   },
   "metadata_formation": {
     "writer_calls": 64,
@@ -128,5 +130,19 @@
     "queries_created": 0,
     "model_calls": 0,
     "result": "data/manifests/v13-4-n2-metadata-index-results.json"
+  },
+  "T0_authoring": {
+    "release": "data/manifests/v13-4-t0-authoring-freeze.json",
+    "status": "FROZEN_ANNOTATION_AND_RUNTIME_QUERY",
+    "provenance_checked_draft_queries": 128,
+    "semantic_review": "All128 reviewed; accepted scoped nonexhaustive E*; no independent Judge",
+    "driver": "artifacts/v13-4/run_t0.py",
+    "driver_sha256": "f843cceade0b94184b48aa3a749d302c69900d083460ea0c07130eebd2a2eaa8",
+    "driver_toy_checks": 4,
+    "natural_prepare_executed": true,
+    "actual_T0_Reader_calls": 0,
+    "last_updated_at_utc": "2026-10-02T18:55:04.168686+00:00",
+    "draft_queries_written": 128,
+    "annotation_freeze": "data/manifests/v13-4-t0-annotation-freeze.json"
   }
 }
