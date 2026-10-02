@@ -1,0 +1,23 @@
+{
+  "kind": "V13_4_N1_DIAGNOSTIC_SOURCE_VIEW",
+  "arm_kind": "RESEARCH_PROTOTYPE",
+  "origin": "Root-authored mechanical wiring diagnostic, synthetic. Not natural evidence, not T0, not an independent-history count.",
+  "group_id": "n1-correction-retrospective-scope-diagnostic",
+  "events": [
+    {
+      "key": "e1",
+      "role": "user",
+      "content": "At the 2026-04-02 planning meeting I said that project Cedar reports should be distributed as PDF. Project Birch reports should remain plain text."
+    },
+    {
+      "key": "e2",
+      "role": "user",
+      "content": "Correction to my Cedar note: I wrote PDF by mistake. The Cedar reports have actually required CSV since 2026-04-01. This is a correction of what I said on April 2, not a new format change today. The correction applies only to Cedar."
+    },
+    {
+      "key": "e3",
+      "role": "user",
+      "content": "For Cedar, the CSV rule covers the weekly reports. I have not specified a format for Cedar incident reports. Birch still uses plain text."
+    }
+  ]
+}

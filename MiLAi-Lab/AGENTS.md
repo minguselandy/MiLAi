@@ -1,3 +1,23 @@
+# MiLAi Lab v13.4 active execution
+
+The user explicitly requests full execution of docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md.
+This new activation supersedes the old v13.3 pause for v13.4 scope; the original plan and
+all historical pause/status/result bytes remain evidence. Work only in this isolated branch
+based on 2319401bc0c6f29142cdf139a09b22576c0da1c5. Do N0/N1 before T0, and respect G1/G2
+before complex N3/N4/N5 work. G0-Read is distinct from G0-Integrate.
+Root owns protocols, input freezes, all real generation/embedding HTTP (concurrency 1),
+scoring and the existing continuous ledger. One delegated source owner implements methods.
+A separate evaluator owner may audit requirements/data; never supply gold to runtime.
+No new services/model deployment or Product/Archive edits. Preserve existing defaults.
+All original 48 requirements remain inherited and unpromoted without direct evidence.
+Do not read new blind benchmark content before source grouping and exposure freeze.
+No remote publication or merge is required for local development; prepare reviewable changes.
+Product remains NO_GO. Full v13.4 is not completed by entry documents or mechanical tests.
+
+---
+
+## Historical v13.3 instructions (superseded scheduling, retained constraints)
+
 # MiLAi Lab v13.3 paused operating constraints
 
 The user explicitly activated full execution of docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_3.md on 2026-10-02.
