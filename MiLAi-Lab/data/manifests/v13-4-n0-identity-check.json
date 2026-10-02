@@ -1,0 +1,39 @@
+{
+  "kind": "V13_4_N0_DOCUMENT_IDENTITY_CHECK",
+  "historical_inputs": [
+    {
+      "path": "data/manifests/v13-2-requirements.json",
+      "sha256": "bbdc93e31012b7b18837a64a555b5dd1fd84bed2288bb291bf5bc0d836dd7dd3",
+      "byte_equal_to_2319401": true
+    },
+    {
+      "path": "data/manifests/v13-2-e2-r9-results.json",
+      "sha256": "f1f0e04cc95061876db9ee1217b30500e0d83c4eb05aa58217aab3c9fe166cfd",
+      "byte_equal_to_2319401": true
+    },
+    {
+      "path": "data/manifests/v13-2-e0-r7-results.json",
+      "sha256": "73af977f03805765c4278d16e438b3bc9c08154ede58700767e573e61649f8fe",
+      "byte_equal_to_2319401": true
+    },
+    {
+      "path": "data/manifests/v13-3-pause-summary-20261002.json",
+      "sha256": "1fb23cdc34f92b44d22a61deca85e99dda6f2d8e37e57276547aeb3aa6201ea6",
+      "byte_equal_to_2319401": true
+    },
+    {
+      "path": "docs/V13_3_PAUSE_STATUS_20261002.md",
+      "sha256": "614cca2678dc14d66cac32800f3dab2419bd840935e6daa475ee404ef02b8016",
+      "byte_equal_to_2319401": true
+    }
+  ],
+  "original_rows": 48,
+  "original_statuses": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "templates_verified": 6,
+  "runtime_test_or_model_evidence": false
+}

@@ -1,0 +1,1307 @@
+{
+  "kind": "V13_4_T0_DEVELOPMENT_SOURCE_ACQUISITION_RESULT",
+  "status": "ACQUISITION_TERMINAL_32_SUBSTANTIVE_SOURCE_CANDIDATES_T0_NOT_ADMITTED",
+  "recorded_at_utc": "2026-10-02T17:02:28.084196+00:00",
+  "acquisition_freeze": {
+    "path": "data/manifests/v13-4-t0-acquisition-freeze.json",
+    "sha256": "ee8db657a6228778c30655a52de259cb94d51e43dacd5404d3c1fbe86323ffcc",
+    "immutable": true
+  },
+  "shortlist_sha256": "ede223fbcc5ccfc0bb28b394c6bdc90a69173bfcaa75fb43dd46dea727948b93",
+  "artifact_root": "artifacts/v13-4/t0-acquisition",
+  "artifacts": {
+    "raw_catalog": {
+      "path": "artifacts/v13-4/t0-acquisition/raw-source-catalog.json",
+      "sha256": "40ef0aef74017a57771af2cbc3e958dac286574ddac375763710ee244d4d0908"
+    },
+    "exposure_log": {
+      "path": "artifacts/v13-4/t0-acquisition/exposure.jsonl",
+      "sha256": "8442c473fc152d876e7d2ef53f4a8afad64d1b42f902a2dd6ef5e6966d72e62e"
+    },
+    "license_audit": {
+      "path": "artifacts/v13-4/t0-acquisition/license-audit.json",
+      "sha256": "3f41102a5b2380461c50f6879d1bc1fd9c32db4259bc84b4e85fb1f258b88625"
+    },
+    "quotation_format_audit": {
+      "path": "artifacts/v13-4/t0-acquisition/source-view/quotation-format-audit.json",
+      "sha256": "202c3018511de21b9f27881fed4a1a06654e65d64f3f7239d508221d54be4beb"
+    },
+    "primary_fit_review": {
+      "path": "artifacts/v13-4/t0-acquisition/evaluator/primary-fit-review.json",
+      "sha256": "b826892f9f570271e500a1e8448acbd7b1725bf1bf8fe963c465f988020f29c6"
+    },
+    "final_fit_review": {
+      "path": "artifacts/v13-4/t0-acquisition/evaluator/fit-review.json",
+      "sha256": "b8ec65648401ed0136c7a2feb0c41f9dd532e196c641354e6993fd7877f99476"
+    },
+    "backup_activation": {
+      "path": "artifacts/v13-4/t0-acquisition/backup-activation-001.json",
+      "sha256": "eac62054d489b23fe6f1254af7735a4b88ba2a1d8b2391230dc85c1b87cf7206"
+    }
+  },
+  "counts": {
+    "primary_origins_read": 32,
+    "activated_backup_origins_read": 4,
+    "total_original_rfc_bodies": 36,
+    "official_erratum_bodies": 68,
+    "http_attempts": 104,
+    "http200_receipts": 104,
+    "http_failures": 0,
+    "preserved_raw_bytes": 6803322,
+    "primary_trivial_exclusions": 4,
+    "substantive_source_candidates": 32,
+    "t0_admitted_histories": 0,
+    "queries_created": 0,
+    "writer_metadata_calls": 0,
+    "method_model_requests": 0,
+    "independent_annotations": 0
+  },
+  "ordered_substitutions": [
+    {
+      "excluded_primary": "RFC9167",
+      "reason_code": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "ordered_backup": "RFC7430"
+    },
+    {
+      "excluded_primary": "RFC9622",
+      "reason_code": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "ordered_backup": "RFC9580"
+    },
+    {
+      "excluded_primary": "RFC8620",
+      "reason_code": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "ordered_backup": "RFC7970"
+    },
+    {
+      "excluded_primary": "RFC7584",
+      "reason_code": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "ordered_backup": "RFC9562"
+    }
+  ],
+  "remaining_unread_backups": [
+    "RFC9463",
+    "RFC7665",
+    "RFC9815"
+  ],
+  "source_formation_order": "No questions or writer metadata generated. Next stage must preregister query-free section/passage segmentation and Writer/Evaluator ordering before T0 questions or experiments.",
+  "packaging_boundary": "Full RFC bytes are preserved archival originals, not indivisible evidence units. Do not turn oversized whole-document sources into G1 budget failures. Query-free future sections/passages must bind original hash and Unicode spans; candidate versus packing omissions remain separate. Public erratum section pointers are source text, not an oracle query route.",
+  "fit_scope": "One developer reviewed source applicability only;32 have substantive technical corrections, including easy normal controls. No four8-history stratum claim, no128 queries, no verified semantic independence, no G1 claim.",
+  "time_boundary": "Source report/verification dates describe official record milestones, not semantic valid_time. Actual observed_at comes from HTTP receipt/ingestion; never backdate Verified status or infer rule validity from receipt time.",
+  "license_scope": {
+    "original_notice_check": "36/36 originals preserve individual IETF Trust/BCP78 copyright notices.4 pre5378 clauses are retained.",
+    "pre5378_sources": [
+      "RFC8259",
+      "RFC8881",
+      "RFC9580",
+      "RFC7970"
+    ],
+    "erratum_specific_republication_license": "NOT_VERIFIED; do not release or relicense corpus based solely on RFC copying permissions.",
+    "original_bytes_modified": false,
+    "source_view_heuristic_correction": "Initial source-view boolean missed line-broken pre5378 notices in RFC8259 and RFC8881; authoritative license-audit.json records the correction. Original notice text and raw bytes were preserved throughout."
+  },
+  "source_limitations": [
+    "RFC9580 official errata8465/8466 have corrected text TBD; retain uncertainty and do not supply invented text.",
+    "RFC9562 erratum7955 states PDF/HTML scope; do not silently extend its scope to the acquired TXT source even though its quoted old text also matches TXT.",
+    "Shared normative JSON/CBOR and other protocol dependencies need semantic provenance review; WG/update components alone do not prove every history independent.",
+    "All sources are one natural technical-standard/errata workflow; no personal-dialogue or cross-workflow generalization is established.",
+    "Four excluded primary sources and every body receipt remain in the development exposure record; no result-based selection occurred."
+  ],
+  "origins": [
+    {
+      "origin_id": "RFC9171",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-16f7852886dda31ae947",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9171.json",
+      "source_view_sha256": "aaee5cc8976d5606529b6b59385d41fdb8c4757dd5a3fc91454a5b74f5a55927",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9171/RFC9171.txt",
+      "original_raw_sha256": "74e542b143793c9ce41a397fca76f68782792cd0169db9f6a37b21de8dbb9ce5",
+      "original_raw_bytes": 134360,
+      "original_received_at_utc": "2026-10-02T16:49:47.444027+00:00",
+      "errata": [
+        {
+          "version_id": "eid8043",
+          "url": "https://errata.rfc-editor.org/eid8043/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9171/eid8043.html",
+          "sha256": "9ebba6486436f3f692d6ae3b16b97286bbfbaf8ee5b1f48743332df4ef50d81f",
+          "bytes": 10199,
+          "received_at_utc": "2026-10-02T16:49:47.580444+00:00"
+        },
+        {
+          "version_id": "eid8525",
+          "url": "https://errata.rfc-editor.org/eid8525/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9171/eid8525.html",
+          "sha256": "6e5cff7c7416714227d76a8ec6ce4b74ba1dfd70d1fe2367fc6513bd4586d1c5",
+          "bytes": 8663,
+          "received_at_utc": "2026-10-02T16:49:47.401390+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7469",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-979b2881564b4a00c642",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7469.json",
+      "source_view_sha256": "8bc72ab7780eac51ddc5b3a490190f2ee26e7d4893f7319a6a1b9f52f3ec9332",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7469/RFC7469.txt",
+      "original_raw_sha256": "c1d5b042e77e2eb0abcfc2f1bcd444873621ea00b632c0b045492effd0888064",
+      "original_raw_bytes": 61619,
+      "original_received_at_utc": "2026-10-02T16:49:47.946496+00:00",
+      "errata": [
+        {
+          "version_id": "eid4354",
+          "url": "https://errata.rfc-editor.org/eid4354/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7469/eid4354.html",
+          "sha256": "baf7ebd2e3fbc4912998a4ea3f96f96f9a2b6419d0ffeafe90c294f8df6c6ed7",
+          "bytes": 8390,
+          "received_at_utc": "2026-10-02T16:49:48.372788+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9167",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-82c46e33a35f5273519c",
+      "fit_status": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9167.json",
+      "source_view_sha256": "615c765ab1dca6f5a0e60f4aab7549e1f40e27da59af709b783a3f494c5c0fd0",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9167/RFC9167.txt",
+      "original_raw_sha256": "929f5b760a043ebb5c65672c5a636da8210406f5b817dd307ff9f408a43e9c2d",
+      "original_raw_bytes": 37611,
+      "original_received_at_utc": "2026-10-02T16:49:48.287548+00:00",
+      "errata": [
+        {
+          "version_id": "eid7176",
+          "url": "https://errata.rfc-editor.org/eid7176/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9167/eid7176.html",
+          "sha256": "bf7ee800dc571ed77ec65e5a980e9bb14d7ca10f137b0057f92f7a73277be39b",
+          "bytes": 8351,
+          "received_at_utc": "2026-10-02T16:49:48.867137+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9886",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-3222fff5ba297c51a4de",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9886.json",
+      "source_view_sha256": "ad26fab61632e6aecf6d041012197c65d65018d649a6d8977a127df8598a0cff",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9886/RFC9886.txt",
+      "original_raw_sha256": "57aff50e195584100227ebbca8f79bbbcf2a9fd31766175820c122c90476b7ed",
+      "original_raw_bytes": 64713,
+      "original_received_at_utc": "2026-10-02T16:49:48.979774+00:00",
+      "errata": [
+        {
+          "version_id": "eid8822",
+          "url": "https://errata.rfc-editor.org/eid8822/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9886/eid8822.html",
+          "sha256": "d20904e4d6dcf934c0111f9773842d11f7b1761d69a058dbddd9eb68079cb076",
+          "bytes": 11874,
+          "received_at_utc": "2026-10-02T16:49:49.355662+00:00"
+        },
+        {
+          "version_id": "eid8823",
+          "url": "https://errata.rfc-editor.org/eid8823/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9886/eid8823.html",
+          "sha256": "75ca627aeff8e76dd9221e2a7b48713337bb669b45d52554e5985cf4af980c64",
+          "bytes": 10636,
+          "received_at_utc": "2026-10-02T16:49:49.770151+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8239",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-c1d66824b6d22e3f933d",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8239.json",
+      "source_view_sha256": "e4846bd013f48fb7b67de8b1c5e366293510e671f3786ed4b191182053042bc9",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8239/RFC8239.txt",
+      "original_raw_sha256": "ba76897c96f5ae11f11e47de556f6bc1542f4cb5461d7bdec38a7cda46b151ee",
+      "original_raw_bytes": 39066,
+      "original_received_at_utc": "2026-10-02T16:49:49.567640+00:00",
+      "errata": [
+        {
+          "version_id": "eid5652",
+          "url": "https://errata.rfc-editor.org/eid5652/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8239/eid5652.html",
+          "sha256": "ebbbc6566b592dc97b9d01165528a3ca2413a9432497fd9f4216f4d7ea40f711",
+          "bytes": 8237,
+          "received_at_utc": "2026-10-02T16:49:50.271513+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9204",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-66b1248e688ce879cb3d",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9204.json",
+      "source_view_sha256": "2dfca9969f98903cb507b295546fcbec7602283f6c8f50bdc8aff6e40b20bead",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9204/RFC9204.txt",
+      "original_raw_sha256": "926b4d7e9772b5c316fe87a1e160f5ced118101459ede5b13d11bf9a9273c931",
+      "original_raw_bytes": 99258,
+      "original_received_at_utc": "2026-10-02T16:49:50.229505+00:00",
+      "errata": [
+        {
+          "version_id": "eid8410",
+          "url": "https://errata.rfc-editor.org/eid8410/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9204/eid8410.html",
+          "sha256": "755582f410a63ef03c230f89054a166275879b796ec0d35055b2024aa3b3ac87",
+          "bytes": 12888,
+          "received_at_utc": "2026-10-02T16:49:50.650575+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9622",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-2c7cf303e88e42780d20",
+      "fit_status": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9622.json",
+      "source_view_sha256": "cf816a373684b39e34ad3d8ee3271ee158a8d59d7312c7cdafe60532d24466b4",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9622/RFC9622.txt",
+      "original_raw_sha256": "c39108c68a4ede05fcfc741f4f0173372172ca03a7d9d41f894a62e100823267",
+      "original_raw_bytes": 200117,
+      "original_received_at_utc": "2026-10-02T16:49:50.836851+00:00",
+      "errata": [
+        {
+          "version_id": "eid8619",
+          "url": "https://errata.rfc-editor.org/eid8619/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9622/eid8619.html",
+          "sha256": "d82923f6549b6efd147205500f3aae797869a5513151bed943b3eed5b6dbe4aa",
+          "bytes": 8967,
+          "received_at_utc": "2026-10-02T16:49:50.836600+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9711",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-5471e686986d5137c1d2",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9711.json",
+      "source_view_sha256": "53eb04f225336ee8cd5bb330a5f00f5e21ab9a18baeaf22ec8eb54fb69be217a",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/RFC9711.txt",
+      "original_raw_sha256": "20d43b5a03151e5023533e069835e5581ebcaf5a70779a216d3d0ca06f2fd2c7",
+      "original_raw_bytes": 189519,
+      "original_received_at_utc": "2026-10-02T16:49:51.423721+00:00",
+      "errata": [
+        {
+          "version_id": "eid8528",
+          "url": "https://errata.rfc-editor.org/eid8528/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/eid8528.html",
+          "sha256": "4ee000f048befb522edc5390973dc5e2f6b8e987095d6be770b64060eb9c26a2",
+          "bytes": 9136,
+          "received_at_utc": "2026-10-02T16:49:51.439586+00:00"
+        },
+        {
+          "version_id": "eid8771",
+          "url": "https://errata.rfc-editor.org/eid8771/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/eid8771.html",
+          "sha256": "6f174fff7de149179afb152e5d01760c6c71199530804fb677daba59911fc781",
+          "bytes": 8255,
+          "received_at_utc": "2026-10-02T16:49:51.734291+00:00"
+        },
+        {
+          "version_id": "eid8776",
+          "url": "https://errata.rfc-editor.org/eid8776/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/eid8776.html",
+          "sha256": "6cf21f6f8adb403a25eb3142c9c2b4b9a63ab01c54f1604a7fa054538d5fe567",
+          "bytes": 8136,
+          "received_at_utc": "2026-10-02T16:49:51.984546+00:00"
+        },
+        {
+          "version_id": "eid8782",
+          "url": "https://errata.rfc-editor.org/eid8782/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/eid8782.html",
+          "sha256": "be1d3b8b840ec4006c2513f66321dc7fc839fb7fb4de567033301aea52afa3d1",
+          "bytes": 8363,
+          "received_at_utc": "2026-10-02T16:49:51.971284+00:00"
+        },
+        {
+          "version_id": "eid8783",
+          "url": "https://errata.rfc-editor.org/eid8783/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9711/eid8783.html",
+          "sha256": "00a8e3279e4e38e33dbeefe7b9515ad5d4e9339dd4031c6ab5db20c9efb093c8",
+          "bytes": 8349,
+          "received_at_utc": "2026-10-02T16:49:52.650571+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8345",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-dc0a59baf7ce9d316e95",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8345.json",
+      "source_view_sha256": "297f0c83f309d7bc4173edcc638edcd5f1c5d103f60ab398e0ce9e48173f47e4",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8345/RFC8345.txt",
+      "original_raw_sha256": "e60865886f36dce407598211ae9ba95363ca364ee62d91175420f521e78922f7",
+      "original_raw_bytes": 111154,
+      "original_received_at_utc": "2026-10-02T16:49:52.557944+00:00",
+      "errata": [
+        {
+          "version_id": "eid6900",
+          "url": "https://errata.rfc-editor.org/eid6900/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8345/eid6900.html",
+          "sha256": "7d3e300396d842572d77631ea55a40f8d0c5b7305ff6c1fcb94ab5de8b31f84f",
+          "bytes": 8059,
+          "received_at_utc": "2026-10-02T16:49:52.528983+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8972",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-fd43eacb523354914444",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8972.json",
+      "source_view_sha256": "3639beea9873b7e480856050711d8717a9519911f484bf249c2fd5c049a821d5",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8972/RFC8972.txt",
+      "original_raw_sha256": "8839ae063380394360bf58fe0a972684740cfcb89fbf76470181da633cb282a8",
+      "original_raw_bytes": 72950,
+      "original_received_at_utc": "2026-10-02T16:49:53.231079+00:00",
+      "errata": [
+        {
+          "version_id": "eid8199",
+          "url": "https://errata.rfc-editor.org/eid8199/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8972/eid8199.html",
+          "sha256": "fd0608be0dd0b2b0db2de73ad9ebf08f2cc7f640c2933fb06d53e402b962b6fd",
+          "bytes": 9066,
+          "received_at_utc": "2026-10-02T16:49:53.122376+00:00"
+        },
+        {
+          "version_id": "eid8339",
+          "url": "https://errata.rfc-editor.org/eid8339/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8972/eid8339.html",
+          "sha256": "a2845f400f6ce3978549f64f69f6159e393384cded5b7fa089c8a8722e2e9df4",
+          "bytes": 8461,
+          "received_at_utc": "2026-10-02T16:49:53.575408+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9793",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-d939fc2dde6fdd99eb5f",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9793.json",
+      "source_view_sha256": "09c2c263b2413ce21f0a1870ce32692129e1094b83415f85684835eb5e475fa4",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9793/RFC9793.txt",
+      "original_raw_sha256": "e6b2b61bb40b0f310ba818f65c434fa8a8a1b22c5ef407ea1e5b0093f3d0bc0e",
+      "original_raw_bytes": 29360,
+      "original_received_at_utc": "2026-10-02T16:49:53.969876+00:00",
+      "errata": [
+        {
+          "version_id": "eid8463",
+          "url": "https://errata.rfc-editor.org/eid8463/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9793/eid8463.html",
+          "sha256": "663dfb70a5384e46c126fe16cd4daa65d8153ddbdfe7d6d83792b23dfdbf12ab",
+          "bytes": 8704,
+          "received_at_utc": "2026-10-02T16:49:53.793864+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8949",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-df4989cfa9c1ef850be6",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8949.json",
+      "source_view_sha256": "25f85954aded56dfa1d05e8063e1206b0ad4d8e8e90268e00880fdb483f310c7",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8949/RFC8949.txt",
+      "original_raw_sha256": "f1164a5b31a39350ad46abe29b83575eb933ca6c45366989c118b6b1058a214a",
+      "original_raw_bytes": 185226,
+      "original_received_at_utc": "2026-10-02T16:49:54.395044+00:00",
+      "errata": [
+        {
+          "version_id": "eid8589",
+          "url": "https://errata.rfc-editor.org/eid8589/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8949/eid8589.html",
+          "sha256": "d46124a81573e9740ff1e2bdad833b5d7acd9d6d07f5bd80e8a204f7a675c894",
+          "bytes": 8561,
+          "received_at_utc": "2026-10-02T16:49:54.395568+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7644",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-643bcf2ca489466f4bbb",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7644.json",
+      "source_view_sha256": "3eaf457ef9b30d83ea9b5dbb679fe0bfa325a069a9a6005a203ce994d486a34c",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7644/RFC7644.txt",
+      "original_raw_sha256": "b9078e016c98b86934a23c80926b74fc8b59885ab2943729ec2493c17488a09b",
+      "original_raw_bytes": 170460,
+      "original_received_at_utc": "2026-10-02T16:49:54.508517+00:00",
+      "errata": [
+        {
+          "version_id": "eid7916",
+          "url": "https://errata.rfc-editor.org/eid7916/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7644/eid7916.html",
+          "sha256": "9ad3f88a772e94c7129966fe635475e30fdf6e43c9805b5f8ae8ba6ce892d3b6",
+          "bytes": 8887,
+          "received_at_utc": "2026-10-02T16:49:54.973594+00:00"
+        },
+        {
+          "version_id": "eid8096",
+          "url": "https://errata.rfc-editor.org/eid8096/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7644/eid8096.html",
+          "sha256": "5a537efceccdaf9a880c00339076f1f7b9f82b2c209f19545c94acf5ee6b02f2",
+          "bytes": 8436,
+          "received_at_utc": "2026-10-02T16:49:54.926540+00:00"
+        },
+        {
+          "version_id": "eid8365",
+          "url": "https://errata.rfc-editor.org/eid8365/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7644/eid8365.html",
+          "sha256": "38e5d8cec483e58605a967f38dde3290cdf6e2efe27439302500a172be87487c",
+          "bytes": 8310,
+          "received_at_utc": "2026-10-02T16:49:55.029029+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8765",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-e9059df934077d27f5a3",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8765.json",
+      "source_view_sha256": "eb0019ba1c765d1bc188e990d762afd74c1f3ededdfa6b8c1e3251688cea4836",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8765/RFC8765.txt",
+      "original_raw_sha256": "13bbe838db5cd456353e2017f5ff9a303c96bd07f849d69103239822a226847c",
+      "original_raw_bytes": 93159,
+      "original_received_at_utc": "2026-10-02T16:49:55.817502+00:00",
+      "errata": [
+        {
+          "version_id": "eid8560",
+          "url": "https://errata.rfc-editor.org/eid8560/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8765/eid8560.html",
+          "sha256": "9385f2802885e52a111d86480bde1f0383735c1dec419189d2921cf41370dd3f",
+          "bytes": 8689,
+          "received_at_utc": "2026-10-02T16:49:55.528095+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8995",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-228411d916c23ec8c433",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8995.json",
+      "source_view_sha256": "cfc6cafeb5b02938186792243040df7f7d47f937db8b7cfecbbc15aefdc0351b",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8995/RFC8995.txt",
+      "original_raw_sha256": "7207e277a1a191b30682a3eccd3f848e7351111dafd76be2ad21fd3c185a5c21",
+      "original_raw_bytes": 276567,
+      "original_received_at_utc": "2026-10-02T16:49:55.847675+00:00",
+      "errata": [
+        {
+          "version_id": "eid6716",
+          "url": "https://errata.rfc-editor.org/eid6716/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8995/eid6716.html",
+          "sha256": "8b1fe9a30d0a92d1a1358d276a71700b5ad4871314358b7bbafe27df9cc6bb80",
+          "bytes": 8699,
+          "received_at_utc": "2026-10-02T16:49:56.187457+00:00"
+        },
+        {
+          "version_id": "eid6834",
+          "url": "https://errata.rfc-editor.org/eid6834/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8995/eid6834.html",
+          "sha256": "0bf94b335f4e94be961b20d0e14a81581148b2cc0162d303399556ae5ae4fb24",
+          "bytes": 8366,
+          "received_at_utc": "2026-10-02T16:49:56.744661+00:00"
+        },
+        {
+          "version_id": "eid7576",
+          "url": "https://errata.rfc-editor.org/eid7576/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8995/eid7576.html",
+          "sha256": "f3834fa7a74a90d5618010fa67e59a763df7331cbb2f44d884c69bab58e1eeba",
+          "bytes": 8447,
+          "received_at_utc": "2026-10-02T16:49:56.435558+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8259",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-248412b80c4891d9d1c1",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8259.json",
+      "source_view_sha256": "5b562906d68165bb47b7cb413783982b53a658ee7a61101000ea0a46a50c786c",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8259/RFC8259.txt",
+      "original_raw_sha256": "61a5378f4255c720beb2a4b4a63b29540147c140f36988bf086291989b4cd2d7",
+      "original_raw_bytes": 28360,
+      "original_received_at_utc": "2026-10-02T16:49:56.823639+00:00",
+      "errata": [
+        {
+          "version_id": "eid7383",
+          "url": "https://errata.rfc-editor.org/eid7383/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8259/eid7383.html",
+          "sha256": "604e3f495585a1056d8c34428d4dbf05f47643e1d5208b41feecaf4f9793dc83",
+          "bytes": 7628,
+          "received_at_utc": "2026-10-02T16:49:57.098867+00:00"
+        },
+        {
+          "version_id": "eid7600",
+          "url": "https://errata.rfc-editor.org/eid7600/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8259/eid7600.html",
+          "sha256": "406547d978747e30a867b7f89f6fb1f1a23024676d667adfb725fcf593ae6fb9",
+          "bytes": 8437,
+          "received_at_utc": "2026-10-02T16:49:57.377906+00:00"
+        },
+        {
+          "version_id": "eid7603",
+          "url": "https://errata.rfc-editor.org/eid7603/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8259/eid7603.html",
+          "sha256": "48466623ae85455eca0aaa45384afd02ad12301546d1f5c974a4c399e3c753de",
+          "bytes": 8285,
+          "received_at_utc": "2026-10-02T16:49:57.521898+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": true,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8620",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-5652b41a0716586e01d0",
+      "fit_status": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8620.json",
+      "source_view_sha256": "a4442b15c2831a4a6052bf1691ca431ae24cad7985a49b570d8170dbccca2f39",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8620/RFC8620.txt",
+      "original_raw_sha256": "2faef52947b75a4a624154ae6bde930688c1a2f122f05925273c7d8a9a85cd25",
+      "original_raw_bytes": 180653,
+      "original_received_at_utc": "2026-10-02T16:49:57.825566+00:00",
+      "errata": [
+        {
+          "version_id": "eid5791",
+          "url": "https://errata.rfc-editor.org/eid5791/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8620/eid5791.html",
+          "sha256": "f18a29f885292dd0cf250bf2c40c65a6bae3f833b98f95cb492796d35f614d6d",
+          "bytes": 9168,
+          "received_at_utc": "2026-10-02T16:49:58.026653+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7940",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-622ee7a37a54e118caad",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7940.json",
+      "source_view_sha256": "365ca4c80fed75b4d6d1122d6dc87c79b8f7dd0c0cd650075812bfdccc58c00e",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7940/RFC7940.txt",
+      "original_raw_sha256": "0dac5b0eb8b57606399b375ba2cf0b50495a4097a1920cd22ba79fd198666383",
+      "original_raw_bytes": 170416,
+      "original_received_at_utc": "2026-10-02T16:49:58.272544+00:00",
+      "errata": [
+        {
+          "version_id": "eid5986",
+          "url": "https://errata.rfc-editor.org/eid5986/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7940/eid5986.html",
+          "sha256": "f292e78e69ce59f3b67c125f5f6f623c7da8a81093ce3344218aea86097cee4f",
+          "bytes": 8304,
+          "received_at_utc": "2026-10-02T16:49:58.377981+00:00"
+        },
+        {
+          "version_id": "eid8409",
+          "url": "https://errata.rfc-editor.org/eid8409/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7940/eid8409.html",
+          "sha256": "c0598a5e85dcd6d9739458dedfd3a51005b51032fbfa4011232ea984e25d1a57",
+          "bytes": 8184,
+          "received_at_utc": "2026-10-02T16:49:58.651956+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8824",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-324654c82057f325a9ab",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8824.json",
+      "source_view_sha256": "76747e066662c688115cc69f69a61537387cab9b29b5221300b5e673e1c04db4",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8824/RFC8824.txt",
+      "original_raw_sha256": "b8277e1e913616a4ebd48b0429f16bda49e8ac065ebcd00da08f834fba7dbbe1",
+      "original_raw_bytes": 67999,
+      "original_received_at_utc": "2026-10-02T16:49:58.789546+00:00",
+      "errata": [
+        {
+          "version_id": "eid7389",
+          "url": "https://errata.rfc-editor.org/eid7389/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8824/eid7389.html",
+          "sha256": "b5400995e2d9a2cd20caa6d4f60c572853a684bc8dce40a804b3acd3cb1de9e2",
+          "bytes": 8245,
+          "received_at_utc": "2026-10-02T16:49:58.935236+00:00"
+        },
+        {
+          "version_id": "eid7397",
+          "url": "https://errata.rfc-editor.org/eid7397/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8824/eid7397.html",
+          "sha256": "f6575e657b854164665845d724c3b84c16d3292ea64e3c1fb2d0763737eaf02d",
+          "bytes": 8542,
+          "received_at_utc": "2026-10-02T16:49:59.228056+00:00"
+        },
+        {
+          "version_id": "eid8270",
+          "url": "https://errata.rfc-editor.org/eid8270/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8824/eid8270.html",
+          "sha256": "10444a0355e303ccc6c52cb63caadf4f1a42ad13e670299e2fdb6e1b1713e9f0",
+          "bytes": 9327,
+          "received_at_utc": "2026-10-02T16:49:59.352566+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8360",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-2795c8af0172eb6ec4ec",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8360.json",
+      "source_view_sha256": "0aca4c76bb6db74fe5f5feddd2faac83d8b9473b994ebbb55224a0c9aa7f96ef",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8360/RFC8360.txt",
+      "original_raw_sha256": "af3c8e3637046687a2d2a4520e08f8f0da889434225c1ccb979a2d1ab23364b3",
+      "original_raw_bytes": 52125,
+      "original_received_at_utc": "2026-10-02T16:49:59.581427+00:00",
+      "errata": [
+        {
+          "version_id": "eid5638",
+          "url": "https://errata.rfc-editor.org/eid5638/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8360/eid5638.html",
+          "sha256": "ee0652cc2f71a3271722c0283ecc9c18deee8551ff2c3910359a4daf4bfbaa2c",
+          "bytes": 9082,
+          "received_at_utc": "2026-10-02T16:49:59.838692+00:00"
+        },
+        {
+          "version_id": "eid5870",
+          "url": "https://errata.rfc-editor.org/eid5870/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8360/eid5870.html",
+          "sha256": "f957a1af0a9e661478d0f6c8bfb078f4f66b4f3e30350f2e7b18722a9193fa34",
+          "bytes": 7916,
+          "received_at_utc": "2026-10-02T16:49:59.892644+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8466",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-92f1fe13e4901a89edd8",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8466.json",
+      "source_view_sha256": "efde474bbad34f82fd5ef6719ad63c9e90ae5a9de4c07979ec48a1e434f31406",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8466/RFC8466.txt",
+      "original_raw_sha256": "47e01112817732dc66a9fd81f7051a432d4d936505b36639fe07042d6ca835e8",
+      "original_raw_bytes": 315113,
+      "original_received_at_utc": "2026-10-02T16:50:00.591429+00:00",
+      "errata": [
+        {
+          "version_id": "eid5615",
+          "url": "https://errata.rfc-editor.org/eid5615/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8466/eid5615.html",
+          "sha256": "70925d44663d59f421a2b7ebe9eb255124a28e198682e804f4521551fb121a5a",
+          "bytes": 8294,
+          "received_at_utc": "2026-10-02T16:50:00.405325+00:00"
+        },
+        {
+          "version_id": "eid6922",
+          "url": "https://errata.rfc-editor.org/eid6922/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8466/eid6922.html",
+          "sha256": "aca18b6a5b911a68317d3bb89397ee09b1d54632effce3e51256a97425cb09fc",
+          "bytes": 9981,
+          "received_at_utc": "2026-10-02T16:50:00.726746+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9132",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-03ff5f0c4b877b32f47d",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9132.json",
+      "source_view_sha256": "3ce2c9c348a37d6f478b017d2bebc66a3d3278dcbda9a69a9ba73b61f34655d6",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9132/RFC9132.txt",
+      "original_raw_sha256": "95c68785fbfc0dce78ca14da6f0c073802dc3581529970fa2962925f62135222",
+      "original_raw_bytes": 248782,
+      "original_received_at_utc": "2026-10-02T16:50:01.174459+00:00",
+      "errata": [
+        {
+          "version_id": "eid7058",
+          "url": "https://errata.rfc-editor.org/eid7058/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9132/eid7058.html",
+          "sha256": "79645cc4642a1927194f99433d6f6a47596188c50637ce63876ea421c7db3f64",
+          "bytes": 8955,
+          "received_at_utc": "2026-10-02T16:50:01.159896+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8794",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-5e808ddbdb7c281c801d",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8794.json",
+      "source_view_sha256": "85dc463792407b7a34cb93fa2ebb56426bdf85f9b24102e78a996b80af749829",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8794/RFC8794.txt",
+      "original_raw_sha256": "3b39e9f494f040e3b7b91d9bbe2441af5f4b4e2ae4a374b8dcf917ab9aecd409",
+      "original_raw_bytes": 118551,
+      "original_received_at_utc": "2026-10-02T16:50:01.300593+00:00",
+      "errata": [
+        {
+          "version_id": "eid7189",
+          "url": "https://errata.rfc-editor.org/eid7189/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8794/eid7189.html",
+          "sha256": "af836e1e4605ca4b1c86c1b1845516655e302f6074027a776aace22fb1f492f3",
+          "bytes": 13380,
+          "received_at_utc": "2026-10-02T16:50:01.783586+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9493",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-a5b140887bfda16fc148",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9493.json",
+      "source_view_sha256": "183a275e41f4ebe575614147b3573139675fc710cd3904b43fa815f298679fb7",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9493/RFC9493.txt",
+      "original_raw_sha256": "bbe6bead7183681476eeb5caf63b1b166cf8310d806502e4fbadadbc26c1feab",
+      "original_raw_bytes": 37245,
+      "original_received_at_utc": "2026-10-02T16:50:01.783435+00:00",
+      "errata": [
+        {
+          "version_id": "eid7727",
+          "url": "https://errata.rfc-editor.org/eid7727/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9493/eid7727.html",
+          "sha256": "dbbe833c2a0d4f0af1b3abd2c05bf2389ff79c766eabe05dd87475f4287c4ebd",
+          "bytes": 8653,
+          "received_at_utc": "2026-10-02T16:50:01.826415+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9115",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-17a12c274f3d3c30e554",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9115.json",
+      "source_view_sha256": "498961db7eb407b9cc53ed33362e82119499514d89e7774e597da612ee5b0fbf",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9115/RFC9115.txt",
+      "original_raw_sha256": "50632e061ebf857b0b65c955d1a2ea42f45a85bfcceee617d450beadde2da707",
+      "original_raw_bytes": 84605,
+      "original_received_at_utc": "2026-10-02T16:50:02.408004+00:00",
+      "errata": [
+        {
+          "version_id": "eid7336",
+          "url": "https://errata.rfc-editor.org/eid7336/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9115/eid7336.html",
+          "sha256": "4a0683537276fa13df603f9fe0ca97df61ddb520b8a7192a7927cf8d6b9400b8",
+          "bytes": 8712,
+          "received_at_utc": "2026-10-02T16:50:02.365113+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7584",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-5fb32d973d4c81f7d9e6",
+      "fit_status": "INAPPLICABLE_TRIVIAL_CORRECTION",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7584.json",
+      "source_view_sha256": "73cd91513e4604f87802b0380b8741013b905453808b61f213792ebf2a8fa483",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7584/RFC7584.txt",
+      "original_raw_sha256": "8016de698bafb9889bc48e04c4a83756311fee558b315f51609d829e426e4c52",
+      "original_raw_bytes": 32675,
+      "original_received_at_utc": "2026-10-02T16:50:02.765371+00:00",
+      "errata": [
+        {
+          "version_id": "eid4413",
+          "url": "https://errata.rfc-editor.org/eid4413/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7584/eid4413.html",
+          "sha256": "40c962dc807830cb3abea02270cd3ba7c60766e117f09847d36d1da64f5d1269",
+          "bytes": 7903,
+          "received_at_utc": "2026-10-02T16:50:03.022958+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9605",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-618d4d1e8a4c5bc5d34f",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9605.json",
+      "source_view_sha256": "b66717ef7555004324cfa1e868cb161e0f180b8bea65a6e09836231327d5815b",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9605/RFC9605.txt",
+      "original_raw_sha256": "444ae64da1eef6e9467b1639d3e731620f7058d4aa8068dd60db7f37456979c2",
+      "original_raw_bytes": 114181,
+      "original_received_at_utc": "2026-10-02T16:50:02.997422+00:00",
+      "errata": [
+        {
+          "version_id": "eid8321",
+          "url": "https://errata.rfc-editor.org/eid8321/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9605/eid8321.html",
+          "sha256": "ab3f05a54a0eb0e007621ee08c95892de071e40f84e6d487526cbdb5a8af9685",
+          "bytes": 9309,
+          "received_at_utc": "2026-10-02T16:50:03.349291+00:00"
+        },
+        {
+          "version_id": "eid8565",
+          "url": "https://errata.rfc-editor.org/eid8565/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9605/eid8565.html",
+          "sha256": "604b673ddcf32ce7ea230f28a22c772c3bbf461de0fa4cb915709ee8d1f34b13",
+          "bytes": 8064,
+          "received_at_utc": "2026-10-02T16:50:03.588838+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7574",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-7fbfc2979f0b61fbc7df",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7574.json",
+      "source_view_sha256": "cd2efabcdf5ad52d3244de35cd581f47b6fa84caabdd89cfb2ef10b8142887bb",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7574/RFC7574.txt",
+      "original_raw_sha256": "c7fdda1b8c1c2ccdc7990b5d0c3cd6ed080abdab63bfe95208aaf3b338af57da",
+      "original_raw_bytes": 208360,
+      "original_received_at_utc": "2026-10-02T16:50:03.768723+00:00",
+      "errata": [
+        {
+          "version_id": "eid4724",
+          "url": "https://errata.rfc-editor.org/eid4724/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7574/eid4724.html",
+          "sha256": "00b656a207f75c4f56e699f7780bcd0b61adef53637656153adf1a08cb45e42e",
+          "bytes": 8565,
+          "received_at_utc": "2026-10-02T16:50:03.896238+00:00"
+        },
+        {
+          "version_id": "eid4725",
+          "url": "https://errata.rfc-editor.org/eid4725/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7574/eid4725.html",
+          "sha256": "eabff047a66df55dc8f05ccc40dffc725d441433b2f4cbdf1a182440f5cc7db1",
+          "bytes": 9751,
+          "received_at_utc": "2026-10-02T16:50:04.198706+00:00"
+        },
+        {
+          "version_id": "eid4726",
+          "url": "https://errata.rfc-editor.org/eid4726/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7574/eid4726.html",
+          "sha256": "9105f6919ea4d1b88f952e9deb2508d14372b3d872dd06ffc8d029c173985645",
+          "bytes": 9148,
+          "received_at_utc": "2026-10-02T16:50:04.319851+00:00"
+        },
+        {
+          "version_id": "eid4880",
+          "url": "https://errata.rfc-editor.org/eid4880/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7574/eid4880.html",
+          "sha256": "9464280f065c6271f58024585610fc54c8af0537f4b245326489f484400a890e",
+          "bytes": 9342,
+          "received_at_utc": "2026-10-02T16:50:04.512477+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7788",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-6f75860d9f29958f1551",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7788.json",
+      "source_view_sha256": "56cd9f1b6e8707cefcd503d034db226559d9495adcd6c47ff3e5da1771df7a4e",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7788/RFC7788.txt",
+      "original_raw_sha256": "148f0bc9da064a40bb062bea7b96a1db2120f9900e845cc40619209cff416096",
+      "original_raw_bytes": 94146,
+      "original_received_at_utc": "2026-10-02T16:50:05.005243+00:00",
+      "errata": [
+        {
+          "version_id": "eid4677",
+          "url": "https://errata.rfc-editor.org/eid4677/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7788/eid4677.html",
+          "sha256": "6eda048f180091e1d785bcdd63202848440b8e84b5de95dcac3a3b99c88ac8fa",
+          "bytes": 8935,
+          "received_at_utc": "2026-10-02T16:50:04.886232+00:00"
+        },
+        {
+          "version_id": "eid5021",
+          "url": "https://errata.rfc-editor.org/eid5021/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7788/eid5021.html",
+          "sha256": "c4026f193a8a76644a969d0da31e3c3ee0280b7660dc9479a62f97bcafc2934a",
+          "bytes": 7874,
+          "received_at_utc": "2026-10-02T16:50:05.077142+00:00"
+        },
+        {
+          "version_id": "eid5113",
+          "url": "https://errata.rfc-editor.org/eid5113/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7788/eid5113.html",
+          "sha256": "399063d96f74e1d50747424be4cc59c8706e1f4fd0671af6d8b24a202b308a73",
+          "bytes": 9605,
+          "received_at_utc": "2026-10-02T16:50:05.428553+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8678",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-f18522674cf0744d5c3f",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8678.json",
+      "source_view_sha256": "20065a816648a756a36c90792ed9aecb59fa5f1e5bcb8f68187a156531b2cb17",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8678/RFC8678.txt",
+      "original_raw_sha256": "118b70c744192a586f6d43199e8b541e8b128f239c8645e9287b9f224937fa72",
+      "original_raw_bytes": 127571,
+      "original_received_at_utc": "2026-10-02T16:50:05.949694+00:00",
+      "errata": [
+        {
+          "version_id": "eid8124",
+          "url": "https://errata.rfc-editor.org/eid8124/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8678/eid8124.html",
+          "sha256": "30253f71f15e50374343fca6324161c31ef124826a835eeb83fd44abc11dca72",
+          "bytes": 9091,
+          "received_at_utc": "2026-10-02T16:50:05.626344+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9303",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-f55d5e3009ad110f5c6e",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9303.json",
+      "source_view_sha256": "ea3f6bab3f8fd17d127f3401d72f3addc38a2313ee0f8c32588dab0d1aa96963",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9303/RFC9303.txt",
+      "original_raw_sha256": "0f0e02124dc5e83510d82b7bd4b600694780ef0d4f26912a8d9fd33c5d7143af",
+      "original_raw_bytes": 59010,
+      "original_received_at_utc": "2026-10-02T16:50:05.978637+00:00",
+      "errata": [
+        {
+          "version_id": "eid7423",
+          "url": "https://errata.rfc-editor.org/eid7423/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9303/eid7423.html",
+          "sha256": "6d2f1bc6292d581fe5f6c57284c3e1b7b47a975d1b22e67add856556a3c76f7f",
+          "bytes": 8269,
+          "received_at_utc": "2026-10-02T16:50:06.172107+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC8881",
+      "role": "PRIMARY",
+      "source_group_id": "rfc-wg-update-08db0207c1e42e2ceebd",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC8881.json",
+      "source_view_sha256": "902fac4518ba5aea20d557f3e991d505cc08158c2c248a85ac86486944bcd55b",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8881/RFC8881.txt",
+      "original_raw_sha256": "3b7750c792f5e507cd69289cd1132034aed5ceadc03f5ddf24779426ea42474d",
+      "original_raw_bytes": 1593486,
+      "original_received_at_utc": "2026-10-02T16:50:07.204893+00:00",
+      "errata": [
+        {
+          "version_id": "eid7386",
+          "url": "https://errata.rfc-editor.org/eid7386/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC8881/eid7386.html",
+          "sha256": "79afb7dc729fc4433a8f045aff53f016fec7d614bd9689ebc580cea2512d88ae",
+          "bytes": 8868,
+          "received_at_utc": "2026-10-02T16:50:06.550446+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": true,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7430",
+      "role": "ACTIVATED_BACKUP",
+      "source_group_id": "rfc-wg-update-8ac879ae6818232953d2",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7430.json",
+      "source_view_sha256": "9c683a38b60a20f1c5ed0750ebe4a917e2f8b61986e6ff00a76f491f9a746b13",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7430/RFC7430.txt",
+      "original_raw_sha256": "85c0275930413f396d01938fbbb966088cc5c09cc33406e5a0d1b18e89b2aeae",
+      "original_raw_bytes": 41877,
+      "original_received_at_utc": "2026-10-02T16:57:07.043528+00:00",
+      "errata": [
+        {
+          "version_id": "eid4565",
+          "url": "https://errata.rfc-editor.org/eid4565/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7430/eid4565.html",
+          "sha256": "82ff934e0368ce079033d15a2dcdc9a0cba913286e210e3e7da4e34042ac4d59",
+          "bytes": 8831,
+          "received_at_utc": "2026-10-02T16:57:06.745903+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9580",
+      "role": "ACTIVATED_BACKUP",
+      "source_group_id": "rfc-wg-update-3a2ed38584d83568bf4f",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9580.json",
+      "source_view_sha256": "1b1ee3445305f7beed0a68492107ae2a91667b559003d094d2e1d7520c5db924",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9580/RFC9580.txt",
+      "original_raw_sha256": "36540e57b63d24c0b17be0748b704bdeed3d643ce99a4fb1abb6469c1eb1ff18",
+      "original_raw_bytes": 404977,
+      "original_received_at_utc": "2026-10-02T16:57:06.786055+00:00",
+      "errata": [
+        {
+          "version_id": "eid8454",
+          "url": "https://errata.rfc-editor.org/eid8454/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9580/eid8454.html",
+          "sha256": "ce270623a44619618f7ddd14d29c8c103029a62a7ef43dfb9436713820c7e400",
+          "bytes": 8578,
+          "received_at_utc": "2026-10-02T16:57:07.734751+00:00"
+        },
+        {
+          "version_id": "eid8465",
+          "url": "https://errata.rfc-editor.org/eid8465/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9580/eid8465.html",
+          "sha256": "664e975d023d7cdb4a185762d6c09744862bb8e3b516612f2150d3d9c7578deb",
+          "bytes": 8254,
+          "received_at_utc": "2026-10-02T16:57:07.754356+00:00"
+        },
+        {
+          "version_id": "eid8466",
+          "url": "https://errata.rfc-editor.org/eid8466/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9580/eid8466.html",
+          "sha256": "3a61967a8af798eeb9f521e4538a5069e8baf7ee2c3dc342b06217f0e5f15c9c",
+          "bytes": 8813,
+          "received_at_utc": "2026-10-02T16:57:08.047196+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": true,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC7970",
+      "role": "ACTIVATED_BACKUP",
+      "source_group_id": "rfc-wg-update-3e3e52d049afbc2eadd6",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC7970.json",
+      "source_view_sha256": "a593dbd19fff3f094026df0f325b33f8837597a7289872cbf043d6b0e3724d74",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7970/RFC7970.txt",
+      "original_raw_sha256": "63e23655024199260e1deba59c9d4e2ae154f3e95bfc34aa2fae95e6826acd63",
+      "original_raw_bytes": 331061,
+      "original_received_at_utc": "2026-10-02T16:57:08.876794+00:00",
+      "errata": [
+        {
+          "version_id": "eid5351",
+          "url": "https://errata.rfc-editor.org/eid5351/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7970/eid5351.html",
+          "sha256": "bd2a797234bb8465453bc251c813b93f2eecd4ec6681c092f543492c662ed507",
+          "bytes": 12756,
+          "received_at_utc": "2026-10-02T16:57:08.748708+00:00"
+        },
+        {
+          "version_id": "eid5543",
+          "url": "https://errata.rfc-editor.org/eid5543/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7970/eid5543.html",
+          "sha256": "e6a7653294d1010c2c890c9e3697e9ac3411d57dfaf968a63fcdc953b42022ff",
+          "bytes": 8852,
+          "received_at_utc": "2026-10-02T16:57:08.936019+00:00"
+        },
+        {
+          "version_id": "eid5544",
+          "url": "https://errata.rfc-editor.org/eid5544/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7970/eid5544.html",
+          "sha256": "a7159fa7feb564e315bb86a9543d292f7266a7316a0f11c931332e49334a6647",
+          "bytes": 9908,
+          "received_at_utc": "2026-10-02T16:57:09.424705+00:00"
+        },
+        {
+          "version_id": "eid5583",
+          "url": "https://errata.rfc-editor.org/eid5583/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC7970/eid5583.html",
+          "sha256": "9c9aeb9ee48e0f45f14fc1ccdd52f7eb08d5af394bae1286a67c9e0f40154da8",
+          "bytes": 10557,
+          "received_at_utc": "2026-10-02T16:57:09.834081+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": true,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "origin_id": "RFC9562",
+      "role": "ACTIVATED_BACKUP",
+      "source_group_id": "rfc-wg-update-b8d3e155e2f4bf016527",
+      "fit_status": "SUBSTANTIVE_CORRECTION_CANDIDATE",
+      "source_view_path": "artifacts/v13-4/t0-acquisition/source-view/RFC9562.json",
+      "source_view_sha256": "f5df1d2d6199d106516fcd7d747a8612a3e75322921a1efa40dad7516f0e90ff",
+      "original_raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9562/RFC9562.txt",
+      "original_raw_sha256": "041870106b8701d9fa9261dcbc1679a6b7ab18cb179b37b69d7232431eac8042",
+      "original_raw_bytes": 114638,
+      "original_received_at_utc": "2026-10-02T16:57:09.718749+00:00",
+      "errata": [
+        {
+          "version_id": "eid7929",
+          "url": "https://errata.rfc-editor.org/eid7929/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9562/eid7929.html",
+          "sha256": "ab91424567a05504965b34daa886ce39df90e8d289a5252e2faf07ac148ca355",
+          "bytes": 8298,
+          "received_at_utc": "2026-10-02T16:57:10.099592+00:00"
+        },
+        {
+          "version_id": "eid7955",
+          "url": "https://errata.rfc-editor.org/eid7955/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9562/eid7955.html",
+          "sha256": "aaa9d654b4e6796819041702ccd86caa6ddda0bc6b7d0011251b64c5a76ee000",
+          "bytes": 8478,
+          "received_at_utc": "2026-10-02T16:57:10.425809+00:00"
+        },
+        {
+          "version_id": "eid7958",
+          "url": "https://errata.rfc-editor.org/eid7958/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9562/eid7958.html",
+          "sha256": "df29c9f1aedb57e58276acab4494ad126f0da9d8407062fd6d115364186d5026",
+          "bytes": 8827,
+          "received_at_utc": "2026-10-02T16:57:10.464428+00:00"
+        },
+        {
+          "version_id": "eid8288",
+          "url": "https://errata.rfc-editor.org/eid8288/",
+          "raw_path": "artifacts/v13-4/t0-acquisition/raw/RFC9562/eid8288.html",
+          "sha256": "023f0ea6725ec2c130240fe06ba8686373dcc3120255a4d313033ec90644137c",
+          "bytes": 11254,
+          "received_at_utc": "2026-10-02T16:57:10.747168+00:00"
+        }
+      ],
+      "copyright_notice_ietf_trust_bcp78": true,
+      "pre5378_notice_present": false,
+      "stage": "DEVELOPMENT_EXPOSED",
+      "t0_admission": "NOT_ADMITTED"
+    }
+  ],
+  "new_model_http_requests": 0,
+  "new_services": 0,
+  "remote_writes": 0,
+  "completion_claim": "Source acquisition and single-developer fit audit are complete for this frozen batch. Full32-history T0 annotation, G0/T0 runs, G1 and full v13.4 remain incomplete; goal stays active and Product NO_GO."
+}

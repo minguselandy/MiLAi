@@ -1,0 +1,33 @@
+{
+  "kind": "V13_4_ACTIVE_ENTRY",
+  "recorded_at_utc": "2026-10-02T16:25:33.092240+00:00",
+  "goal": "ACTIVE",
+  "authorization": "User explicitly requested detailed reading and execution of v13.4; supersedes document-delivery-only scheduling and historical pause for this scope.",
+  "plan_path": "docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+  "plan_sha256": "3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4",
+  "plan_lines": 517,
+  "baseline_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "branch": "feat/lab-correction-evidence-v13-4-20261003",
+  "continuous_ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "continuous_ledger_sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+  "ledger_entry_snapshot": "artifacts/v13-4/entry-budget.json",
+  "inherited_requirements": 48,
+  "inherited_status": "4 PASSED_SCOPED / 27 PARTIAL / 1 NOT_PASSED / 16 NOT_VERIFIED",
+  "inherited_gates": {
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "new_model_http": 0,
+  "work_packages": {
+    "N0": "IN_PROGRESS",
+    "N1": "STATIC_AUDIT_IN_PROGRESS",
+    "N2": "NOT_STARTED",
+    "N3": "NOT_STARTED",
+    "N4": "NOT_STARTED",
+    "N5": "NOT_STARTED",
+    "N6": "NOT_STARTED"
+  },
+  "scope": "Full conditional v13.4 plan; no completion inferred from mechanical readiness.",
+  "entry_snapshot_immutable_meaning": "Fields above record activation-time facts; current progress is in v13-4-progress.json."
+}

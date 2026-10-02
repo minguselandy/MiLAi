@@ -1,0 +1,44 @@
+{
+  "kind": "V13_4_N1_ENGINEERING_ACCEPTANCE",
+  "status": "PASSED_SCOPED_READONLY_SOURCE_ENTRY",
+  "scope": "Existing public MemoryService source/candidate/version guards + new isolated RESEARCH_PROTOTYPE entry. Mechanical controls cover nonempty version histories; actual model smoke uses3 raw Sources and no formed fact records. Not G0-Integrate or native Product.",
+  "executing_source_sha256": {
+    "src/milai_lab/contracts/correction_relation.py": "a3e87d9d5c89e49a6e94f941e07826b3091d309236456efe13aa54de377e38cc",
+    "src/milai_lab/methods/correction_reader.py": "cca7ddb974ecb478544400f3f9218405da4c8e3c8b483d37a56310cecafeabef",
+    "src/milai_lab/methods/correction_evidence.py": "62bc9f0f591bd089ec87d266934bdfb61795ad2a5ac0392ceba61e9c7a9d35ea",
+    "src/milai_lab/runners/correction_evidence_eval.py": "cbcccdc725da908d0b781410cf543c57d99c3dd3554cb5e85272049b9cb5a29f",
+    "tests/memory/test_correction_evidence.py": "6552a6f5b3863da7c7a8257f12652dd2f15892150e47fb5d794c81daa9e0fe44"
+  },
+  "checks": {
+    "affected_pytest": 80,
+    "new_controls": 11,
+    "ruff": "PASS",
+    "mypy_four_modules": "PASS",
+    "active_package_boundary": "PASS",
+    "sdist_and_wheel": "PASS_FINAL_MODULE_BYTES_MATCH",
+    "real_HTTP": "8 one-Reader diagnostic requests in2 frozen rounds",
+    "fact_source_digest": "unchanged in every real query; exception and adversarial mutation tested offline"
+  },
+  "limits": [
+    "trusted capture and freeze lineage required; coherent pre-freeze DTO forgery is not cryptographically detectable",
+    "logical Store get/search/read CPU/wall recorded; physical DB I/O unknown; nested timings not additive",
+    "full ingestion/writer lifecycle costs and timing not established by source-only wiring",
+    "generic API config identity requires reviewed outer freeze; actual driver verifies source/config/prompt/budget/K/input hashes",
+    "Reader semantic errors remain; neither N2 Chain/Temporal baselines nor T0/G1/G2 accepted",
+    "source review is engineering review, not independent semantic Judge"
+  ],
+  "evidence": [
+    "artifacts/v13-4/n1-checks/summary.json",
+    "artifacts/v13-4/n1-review/review.json",
+    "data/manifests/v13-4-package-check.json",
+    "data/manifests/v13-4-n1-r0-results.json",
+    "data/manifests/v13-4-n1-r1-results.json"
+  ],
+  "original_defaults_changed": false,
+  "Product_API_Schema_permissions_Canonical_changed": false,
+  "G0_Read": "PASSED_SCOPED_N1_ENTRY_CONTROLS_N2_DATA_AND_BASELINE_FREEZES_STILL_REQUIRED",
+  "G0_Integrate": "NOT_PASSED",
+  "E0": "NOT_PASSED",
+  "D4": "NOT_ADMITTED",
+  "Product": "NO_GO"
+}

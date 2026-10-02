@@ -1,0 +1,277 @@
+{
+  "kind": "V13_4_N0_BASELINE_CONFIG_AUDIT",
+  "observed_at_utc": "2026-10-02T16:28:59.215835+00:00",
+  "baseline_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "remote_identity": {
+    "observed_at_utc": "2026-10-02T16:28:59.215835+00:00",
+    "main": "95bf708bfd8aac9f7855485166e3bf739928b949",
+    "pr80": {
+      "number": 80,
+      "state": "open",
+      "draft": true,
+      "html_url": "https://github.com/minguselandy/MiLAi/pull/80"
+    },
+    "head": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+    "base_branch": "feat/lab-evidence-incremental-v13-2-20261001",
+    "method": "git ls-remote origin and GitHub REST GET /repos/minguselandy/MiLAi/pulls/80",
+    "local_main": "9515017a5dfaba6b6e306fa778fd20f4383b6e35"
+  },
+  "configs": [
+    {
+      "cohort": "R9",
+      "arm": "old-target-query",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e2-old-target-query-r9.json",
+      "sha256": "58de5cd78472eb260479dfafde6c5c0ec7a0746268df3220d7e411a47d879ea9",
+      "matches_executed_freeze": true,
+      "runtime_manifest": "data/manifests/v13-2-e2-r9-runtime.json",
+      "runtime_manifest_sha256": "aa1f4ae7fd3bcc8e11e0361f2099d66a07d84c360dcb865b9188ce2b307ce878",
+      "explicit_settings": {
+        "memory_mutation_contract": "event_bound_v1",
+        "memory_source_backlinks": "disabled",
+        "memory_candidate_contract": "legacy_query_v1",
+        "memory_reader_policy": "bounded_evidence_v1",
+        "memory_prefetch": "enabled",
+        "memory_representation": "milai",
+        "memory_formation_policy": "after_host_final_v1",
+        "memory_writer_repairs": 0,
+        "memory_observation_profile": "reservation_v1",
+        "memory_material_profile": "compact_v1",
+        "tool_schema_communication": "shape_feedback_v1",
+        "tool_read_feedback": "typed_read_v1",
+        "tool_save_communication": "completed_receipt_v1",
+        "http_ownership_profile": "serialized_ledger_owner_v1",
+        "http_ownership_domain": {
+          "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+          "clients": [
+            {
+              "base_url": "http://127.0.0.1:7860/v1/",
+              "model": "Qwen3.6-35B-A3B-FP8",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            },
+            {
+              "base_url": "http://127.0.0.1:7861/v1/",
+              "model": "bge-m3",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            }
+          ]
+        },
+        "tool_parameter_contract": "explicit_shape_v1"
+      },
+      "resolved_defaults": {
+        "memory_support_contract": "legacy",
+        "memory_read_protocol": "legacy",
+        "generation_admission_profile": "legacy"
+      },
+      "proof_scope": "exact config bytes and executed runtime freeze; inherited outcome report, no rerun"
+    },
+    {
+      "cohort": "R9",
+      "arm": "source-backlinks",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e2-source-backlinks-r9.json",
+      "sha256": "1854bf26e57648d52fb2507ab5fafb67240dfd6a7981ffe3d0b99d023704e912",
+      "matches_executed_freeze": true,
+      "runtime_manifest": "data/manifests/v13-2-e2-r9-runtime.json",
+      "runtime_manifest_sha256": "aa1f4ae7fd3bcc8e11e0361f2099d66a07d84c360dcb865b9188ce2b307ce878",
+      "explicit_settings": {
+        "memory_mutation_contract": "event_bound_v1",
+        "memory_source_backlinks": "enabled",
+        "memory_candidate_contract": "id_revision_v1",
+        "memory_reader_policy": "bounded_evidence_v1",
+        "memory_prefetch": "enabled",
+        "memory_representation": "milai",
+        "memory_formation_policy": "after_host_final_v1",
+        "memory_writer_repairs": 0,
+        "memory_observation_profile": "reservation_v1",
+        "memory_material_profile": "compact_v1",
+        "tool_schema_communication": "shape_feedback_v1",
+        "tool_read_feedback": "typed_read_v1",
+        "tool_save_communication": "completed_receipt_v1",
+        "http_ownership_profile": "serialized_ledger_owner_v1",
+        "http_ownership_domain": {
+          "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+          "clients": [
+            {
+              "base_url": "http://127.0.0.1:7860/v1/",
+              "model": "Qwen3.6-35B-A3B-FP8",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            },
+            {
+              "base_url": "http://127.0.0.1:7861/v1/",
+              "model": "bge-m3",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            }
+          ]
+        },
+        "tool_parameter_contract": "explicit_shape_v1"
+      },
+      "resolved_defaults": {
+        "memory_support_contract": "legacy",
+        "memory_read_protocol": "legacy",
+        "generation_admission_profile": "legacy"
+      },
+      "proof_scope": "exact config bytes and executed runtime freeze; inherited outcome report, no rerun"
+    },
+    {
+      "cohort": "R9",
+      "arm": "source-backlinks-read-handles-patch",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e2-source-backlinks-read-handles-patch-r9.json",
+      "sha256": "64bf61c9a4e2ad6c43a37b256897c2607714ba75d9506b002366cbf617414dcf",
+      "matches_executed_freeze": true,
+      "runtime_manifest": "data/manifests/v13-2-e2-r9-runtime.json",
+      "runtime_manifest_sha256": "aa1f4ae7fd3bcc8e11e0361f2099d66a07d84c360dcb865b9188ce2b307ce878",
+      "explicit_settings": {
+        "memory_mutation_contract": "event_bound_v1",
+        "memory_source_backlinks": "enabled",
+        "memory_candidate_contract": "read_handle_v1",
+        "memory_reader_policy": "bounded_evidence_v1",
+        "memory_prefetch": "enabled",
+        "memory_representation": "milai",
+        "memory_formation_policy": "after_host_final_v1",
+        "memory_writer_repairs": 0,
+        "memory_observation_profile": "reservation_v1",
+        "memory_material_profile": "compact_v1",
+        "tool_schema_communication": "shape_feedback_v1",
+        "tool_read_feedback": "typed_read_v1",
+        "tool_save_communication": "completed_receipt_v1",
+        "http_ownership_profile": "serialized_ledger_owner_v1",
+        "http_ownership_domain": {
+          "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+          "clients": [
+            {
+              "base_url": "http://127.0.0.1:7860/v1/",
+              "model": "Qwen3.6-35B-A3B-FP8",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            },
+            {
+              "base_url": "http://127.0.0.1:7861/v1/",
+              "model": "bge-m3",
+              "temperature": 0,
+              "max_tokens": 4096,
+              "timeout": 180,
+              "tool_mode": "json_action",
+              "max_calls": 12,
+              "response_format": null,
+              "enable_thinking": false
+            }
+          ]
+        },
+        "tool_parameter_contract": "explicit_shape_v1"
+      },
+      "resolved_defaults": {
+        "memory_support_contract": "legacy",
+        "memory_read_protocol": "legacy",
+        "generation_admission_profile": "legacy"
+      },
+      "proof_scope": "exact config bytes and executed runtime freeze; inherited outcome report, no rerun"
+    },
+    {
+      "cohort": "E0_R7",
+      "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e0-normal-r7.json",
+      "sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+      "matches_executed_freeze": true,
+      "runtime_manifest": "data/manifests/v13-2-e0-r7-runtime.json",
+      "runtime_manifest_sha256": "8b76cdc215557ecb9fd1aba222e8ad97270afeb07c2371a6ca78052003677ad2",
+      "explicit_settings": {
+        "memory_mutation_contract": "event_bound_v1",
+        "memory_source_backlinks": "enabled",
+        "memory_candidate_contract": "read_handle_v1",
+        "memory_reader_policy": "bounded_evidence_v1",
+        "memory_prefetch": "enabled",
+        "memory_representation": "milai",
+        "memory_formation_policy": "after_host_final_v1",
+        "memory_writer_repairs": 0,
+        "memory_observation_profile": "reservation_v1",
+        "memory_material_profile": "compact_v1",
+        "memory_support_contract": "direct_support_v1",
+        "tool_schema_communication": "shape_feedback_v1"
+      },
+      "effect_reported": "21/24; E0 NOT_PASSED",
+      "proof_scope": "config bytes matched; historical results not replayed"
+    }
+  ],
+  "failure_implementation_activation_effect": [
+    {
+      "issue": "historical body absent from Reader wire",
+      "implemented": "exact revisions/source read and compact bounded packer exist",
+      "enabled_R9": "compact_v1, max6, 2048 tokens; no complete-unit guarantee",
+      "effect": "historical query index42 failed despite old body in SDK; inherited report",
+      "v13_4_action": "N1 complete-unit packet, explicit omitted units and wire/body receipt; N2 Chain-RAG",
+      "not_claimed": "old quality repair or CEP complete"
+    },
+    {
+      "issue": "unsupported post-query writes",
+      "implemented": "after_host_final writer exists; readonly tool filter does not skip formation",
+      "enabled_R9": "after_host_final_v1, repair0",
+      "effect": "8 unsupported/unnecessary commits,1 pending,6 no_change; inherited report",
+      "v13_4_action": "isolated single Reader without writer hook; facts/source digest invariant",
+      "not_claimed": "EDM or write integration gate passed"
+    },
+    {
+      "issue": "source identity vs semantic support",
+      "implemented": "direct_support_v1 exists; role/hash/candidate primitives",
+      "enabled_R9": "support/read legacy; actual config omission resolves defaults",
+      "effect": "same source/owner/hash does not establish semantic support",
+      "v13_4_action": "reuse exact guards; hypotheses/metadata unchecked",
+      "not_claimed": "R9 direct_support failure"
+    },
+    {
+      "issue": "save/scope/exclusions and normal controls",
+      "implemented": "existing event/source and recovery primitives only",
+      "enabled_R9": "explicit_shape + completed_receipt; full writer lifecycle",
+      "effect": "save-language/scope-erasure/frequency losses remain; E0 R7 21/24",
+      "v13_4_action": "preserve inherited48 and G0-Integrate gates; only query selection research",
+      "not_claimed": "write or business-action reliability"
+    }
+  ],
+  "new_generation_requests": 0,
+  "new_embedding_requests": 0,
+  "old_artifacts_changed": false,
+  "old_results_independently_replayed": false,
+  "missing_companions": {
+    "names": [
+      "study_plan.yaml",
+      "freeze_manifest.json",
+      "annotation_template.json",
+      "decision_record.md"
+    ],
+    "searched_roots": [
+      "/cra/memory/mx_memory/MiLAi",
+      "/tmp"
+    ],
+    "status": "NOT_LOCATED; create new clearly labeled templates from plan"
+  },
+  "tool_environment_notes": [
+    "gh unavailable; used REST GET and git ls-remote",
+    "system python command unavailable; python3 and existing pinned Lab venv available"
+  ]
+}

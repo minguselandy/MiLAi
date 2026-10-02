@@ -1,0 +1,4291 @@
+{
+  "kind": "V13_4_FULL_PLAN_REQUIREMENTS_AND_INHERITANCE",
+  "schema_version": 1,
+  "created_on": "2026-10-03",
+  "status": "ACTIVE_REQUIREMENTS_INVENTORY_NOT_ACCEPTANCE",
+  "product": "NO_GO",
+  "scope": "完整 v13.4 N0-N6、T0-T3 及条件分支；保留原 v13.2 48 项原要求/状态/条件，不用只读研究替代集成验收。",
+  "authorization": {
+    "user_instruction": "详细阅读并执行/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+    "interpretation": "本次明确执行指令恢复并授权 v13.4；计划成文时的 document-only scope 与 v13.3 历史 pause 不自动限制新的明确指令。门禁/曝光/预算和只读隔离约束仍有效。",
+    "this_artifact": "N0 只读要求映射；不运行模型、不改源代码/配置/测试/旧 manifest/远端。"
+  },
+  "plan": {
+    "path": "docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+    "read_from": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+    "sha256": "3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4",
+    "line_count": 517,
+    "bytes_preserved": true
+  },
+  "baseline_observation": {
+    "branch": "feat/lab-correction-evidence-v13-4-20261003",
+    "head": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+    "evidence_scope": "local git rev-parse/branch observation during inventory only; complete N0 environment/remote/install freeze remains NOT_VERIFIED"
+  },
+  "status_semantics": {
+    "NOT_VERIFIED": "当前 v13.4 真实运行/验收证据尚未核验；即使文档/源码存在也不升级。",
+    "conditional": "未达到条件不是通过；实际退出需证据和正式 Go/Simplify/Stop。",
+    "historical_status": "只复制原值，限定范围及全部证据仍以原 manifest 为准。",
+    "completion_rule": "逐项查实际证据；缺失/间接/不确定均不算完成，不以模块存在或机械检查代表研究成功。"
+  },
+  "counts": {
+    "v13_4_requirements": 122,
+    "v13_4_statuses": {
+      "NOT_VERIFIED": 99,
+      "PASSED_SCOPED": 12,
+      "PARTIAL": 11
+    },
+    "original_requirements": 48,
+    "original_statuses": {
+      "PASSED_SCOPED": 4,
+      "PARTIAL": 27,
+      "NOT_PASSED": 1,
+      "NOT_VERIFIED": 16
+    }
+  },
+  "section_index": [
+    {
+      "section": "00",
+      "title": "总方向与执行顺序",
+      "requirement_ids": [
+        "V13_4-00-01",
+        "V13_4-00-02"
+      ]
+    },
+    {
+      "section": "01",
+      "title": "基线、证据与变更边界",
+      "requirement_ids": [
+        "V13_4-01-01",
+        "V13_4-01-02",
+        "V13_4-01-03",
+        "V13_4-01-04",
+        "V13_4-01-05",
+        "V13_4-01-06"
+      ]
+    },
+    {
+      "section": "02",
+      "title": "研究问题与查询语义",
+      "requirement_ids": [
+        "V13_4-02-01",
+        "V13_4-02-02",
+        "V13_4-02-03",
+        "V13_4-02-04",
+        "V13_4-02-05",
+        "V13_4-02-06"
+      ]
+    },
+    {
+      "section": "03",
+      "title": "相关工作与创新边界",
+      "requirement_ids": [
+        "V13_4-03-01",
+        "V13_4-03-02",
+        "V13_4-03-03",
+        "V13_4-03-04"
+      ]
+    },
+    {
+      "section": "04",
+      "title": "最小数据合同与信息权限",
+      "requirement_ids": [
+        "V13_4-04-01",
+        "V13_4-04-02",
+        "V13_4-04-03",
+        "V13_4-04-04",
+        "V13_4-04-05",
+        "V13_4-04-06",
+        "V13_4-04-07",
+        "V13_4-04-08"
+      ]
+    },
+    {
+      "section": "05",
+      "title": "写入与查询的最小实现",
+      "requirement_ids": [
+        "V13_4-05-01",
+        "V13_4-05-02",
+        "V13_4-05-03",
+        "V13_4-05-04",
+        "V13_4-05-05",
+        "V13_4-05-06"
+      ]
+    },
+    {
+      "section": "06",
+      "title": "证据价值预测与选择器",
+      "requirement_ids": [
+        "V13_4-06-01",
+        "V13_4-06-02",
+        "V13_4-06-03",
+        "V13_4-06-04",
+        "V13_4-06-05",
+        "V13_4-06-06",
+        "V13_4-06-07"
+      ]
+    },
+    {
+      "section": "07",
+      "title": "最小基础修复与继承关系",
+      "requirement_ids": [
+        "V13_4-07-01",
+        "V13_4-07-02",
+        "V13_4-07-03",
+        "V13_4-07-04",
+        "V13_4-07-05",
+        "V13_4-07-06",
+        "V13_4-07-07"
+      ]
+    },
+    {
+      "section": "08",
+      "title": "Baseline 与公平比较",
+      "requirement_ids": [
+        "V13_4-08-01",
+        "V13_4-08-02",
+        "V13_4-08-03",
+        "V13_4-08-04",
+        "V13_4-08-05",
+        "V13_4-08-06",
+        "V13_4-08-07",
+        "V13_4-08-08",
+        "V13_4-08-09"
+      ]
+    },
+    {
+      "section": "09",
+      "title": "T0：问题与证据可解性审计",
+      "requirement_ids": [
+        "V13_4-09-01",
+        "V13_4-09-02",
+        "V13_4-09-03",
+        "V13_4-09-04",
+        "V13_4-09-05",
+        "V13_4-09-06",
+        "V13_4-09-07"
+      ]
+    },
+    {
+      "section": "10",
+      "title": "T1：真实元数据的信息量试验",
+      "requirement_ids": [
+        "V13_4-10-01",
+        "V13_4-10-02",
+        "V13_4-10-03",
+        "V13_4-10-04",
+        "V13_4-10-05",
+        "V13_4-10-06",
+        "V13_4-10-07"
+      ]
+    },
+    {
+      "section": "11",
+      "title": "T2／T3：端到端与泛化",
+      "requirement_ids": [
+        "V13_4-11-01",
+        "V13_4-11-02",
+        "V13_4-11-03",
+        "V13_4-11-04",
+        "V13_4-11-05",
+        "V13_4-11-06",
+        "V13_4-11-07",
+        "V13_4-11-08"
+      ]
+    },
+    {
+      "section": "12",
+      "title": "数据、标注与曝光控制",
+      "requirement_ids": [
+        "V13_4-12-01",
+        "V13_4-12-02",
+        "V13_4-12-03",
+        "V13_4-12-04",
+        "V13_4-12-05",
+        "V13_4-12-06",
+        "V13_4-12-07",
+        "V13_4-12-08"
+      ]
+    },
+    {
+      "section": "13",
+      "title": "指标、统计与费用",
+      "requirement_ids": [
+        "V13_4-13-01",
+        "V13_4-13-02",
+        "V13_4-13-03",
+        "V13_4-13-04",
+        "V13_4-13-05",
+        "V13_4-13-06",
+        "V13_4-13-07",
+        "V13_4-13-08",
+        "V13_4-13-09"
+      ]
+    },
+    {
+      "section": "14",
+      "title": "开发工作包与职责",
+      "requirement_ids": [
+        "V13_4-14-01",
+        "V13_4-14-02",
+        "V13_4-14-03",
+        "V13_4-14-04",
+        "V13_4-14-05",
+        "V13_4-14-06",
+        "V13_4-14-07",
+        "V13_4-14-08",
+        "V13_4-14-09"
+      ]
+    },
+    {
+      "section": "15",
+      "title": "验收、预算与迭代限制",
+      "requirement_ids": [
+        "V13_4-15-01",
+        "V13_4-15-02",
+        "V13_4-15-03",
+        "V13_4-15-04",
+        "V13_4-15-05",
+        "V13_4-15-06",
+        "V13_4-15-07",
+        "V13_4-15-08",
+        "V13_4-15-09",
+        "V13_4-15-10",
+        "V13_4-15-11"
+      ]
+    },
+    {
+      "section": "16",
+      "title": "风险、备选线与论文收口",
+      "requirement_ids": [
+        "V13_4-16-01",
+        "V13_4-16-02",
+        "V13_4-16-03",
+        "V13_4-16-04",
+        "V13_4-16-05"
+      ]
+    },
+    {
+      "section": "A",
+      "title": "仓库与输入来源",
+      "requirement_ids": [
+        "V13_4-A-01"
+      ]
+    },
+    {
+      "section": "B",
+      "title": "外部文献与模板",
+      "requirement_ids": [
+        "V13_4-B-01",
+        "V13_4-B-02"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "V13_4-00-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "00"
+      ],
+      "requirement": "保留 Grounded Memory、Verified Object References、Semantic/Episodic Memory、Grounded Revision、Lifecycle Recovery 总方向与单一逻辑 MemoryService；研究解释不产生事实或授权。",
+      "completion_evidence": "架构与权限边界审查、研究注释与公开事实隔离的实际测试。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-00-02",
+      "work_package": "N0",
+      "plan_sections": [
+        "00"
+      ],
+      "requirement": "按完整链/时态缺口→真实元数据信号→同信息独立贡献的顺序执行；不先建完整信念图、多世界复制、常驻 verifier 或全量 Agent 重构。",
+      "completion_evidence": "阶段准入与 Go/Simplify/Stop 决策记录；实现范围与条件门禁一致。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-01-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "开发前核对 branch、worktree、安装来源及实际配置；拟定基点 2319401bc0c6f29142cdf139a09b22576c0da1c5 发生变化时先差异清单再冻结。",
+      "completion_evidence": "本地及远端身份、源码/安装闭包、配置差异与冻结哈希；历史报告不能代替当前核查。",
+      "condition": "before_implementation",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-entry.json",
+        "data/manifests/v13-4-baseline-config-audit.json",
+        "data/manifests/v13-4-local-runtime.json"
+      ],
+      "qualification": "Current branch/baseline/config/import origins verified; experiment source freeze separately required."
+    },
+    {
+      "id": "V13_4-01-02",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "保留 v13.3 未完成、EDM/CEP 未接入、旧 R9 查询后 8 次不必要提交、R7 E0 21/24 未通过和 D4 未准入的历史证据。",
+      "completion_evidence": "原报告/manifest 哈希与当前补充状态分列；不得升级历史分数。",
+      "condition": "always",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n0-identity-check.json"
+      ],
+      "qualification": "Historical report bytes preserved; not an independent replay."
+    },
+    {
+      "id": "V13_4-01-03",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "原 48 项保持 4 PASSED_SCOPED / 27 PARTIAL / 1 NOT_PASSED / 16 NOT_VERIFIED；逐项新增补充映射，不删除或重定义旧要求。",
+      "completion_evidence": "原 requirements 文件哈希、48 项 id/requirement/status/condition 对照和每项补充映射。",
+      "condition": "always",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n0-identity-check.json",
+        "data/manifests/v13-4-requirements.json#inheritance"
+      ],
+      "qualification": "All48 original row mappings retained; old status values unchanged."
+    },
+    {
+      "id": "V13_4-01-04",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "复用并复验已有来源、句柄、快照、观察原语；不把代码存在或历史局部验收当本轮方法成绩。",
+      "completion_evidence": "逐原语适用范围、当前源码与窄测试/SDK 实证；模型效果另记。",
+      "condition": "before_G0_Read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Existing source/candidate/history/snapshot regression covered in80 tests; source-only real Reader is not full v13.3 primitive acceptance."
+    },
+    {
+      "id": "V13_4-01-05",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "只读研究独立准入；新增持久写入、业务动作和默认切换仍受原 E0/安全/恢复要求约束。",
+      "completion_evidence": "G0-Read 与 G0-Integrate 两份独立判定及适用范围。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-01-06",
+      "work_package": "N0",
+      "plan_sections": [
+        "01"
+      ],
+      "requirement": "U0 历史 SHA/费用只作历史；U1 摘要及未取得 HTML/匿名选票不作独立验证；固定仓库与一手文献证据分级。",
+      "completion_evidence": "输入来源清单、可访问性、版本/hash、证据等级与未取得材料记录。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-02-01",
+      "work_package": "N2",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "更正可同时含变化、追溯纠正和局部覆盖；保留未决维度，明确当前 B 正常使用，不强迫三选一。",
+      "completion_evidence": "混合关系/明确更正/无歧义的结构与真实查询结果。",
+      "condition": "before_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-02-02",
+      "work_package": "N2",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "分别评价当前明确对象、陈述历史、追溯适用、跨时间/范围/对象四类自然问题。",
+      "completion_evidence": "四类 query 的 evaluator 标注与逐类效用结果，保留不确定性。",
+      "condition": "T0_through_T3",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-02-03",
+      "work_package": "N1",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "query_kind、人工 query mask、答案和标准动作不得进入运行时；人工 mask 仅 oracle 诊断。",
+      "completion_evidence": "Writer/Selector/Host 实际请求载荷与隔离测试、oracle 分表。",
+      "condition": "always",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "N1 runtime receives natural question and strict dataclass only; evaluator rubric is a separate file never loaded by actual driver. Oracle track not implemented."
+    },
+    {
+      "id": "V13_4-02-04",
+      "work_package": "N6",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "依次检验 H1 同预算简单方法有缺口、H2 真实 query-free 元数据在未见来源有信号、H3 同信息成本有独立净收益。",
+      "completion_evidence": "H1/H2/H3 各自预注册比较、真实数据和决定；不互相替代。",
+      "condition": "conditional_research_sequence",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-02-05",
+      "work_package": "N3",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "以 A(h,q) 答案约束等价指导取证；开放答案比较先由标注侧检验，运行时采用保守维度代理。",
+      "completion_evidence": "标注规则、代理定义、对答案无影响的歧义控制。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-02-06",
+      "work_package": "N3",
+      "plan_sections": [
+        "02"
+      ],
+      "requirement": "不得免费让 LLM 对所有解释预回答；候选一致不证明解释集合覆盖真实解释。",
+      "completion_evidence": "所有形成/推理调用账本、open_set/漏假设报告与 claims 审查。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-03-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "03"
+      ],
+      "requirement": "核对 Katsuno–Mendelzon、EC²、HEC、BeliefMem、Zep/TSM、LongMemEval、STALE、自调整计算的一手近邻与现有覆盖。",
+      "completion_evidence": "各一手资源 URL/版本/读取范围/hash、创新边界表；实际依赖另冻结。",
+      "condition": "before_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-03-02",
+      "work_package": "N6",
+      "plan_sections": [
+        "03"
+      ],
+      "requirement": "不把变化/纠错、多解释主动取证、时间/范围字段或未见新反证称为天然新贡献；评测、预测器、应用验证均由独立证据决定。",
+      "completion_evidence": "论文主张与最近邻公平对照一一对应，未证实之处明确列缺口。",
+      "condition": "before_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-03-03",
+      "work_package": "N3",
+      "plan_sections": [
+        "03"
+      ],
+      "requirement": "BeliefMem 候选分数不当互斥联合后验直接归一化；明确假设覆盖、先验、观测模型、噪声与相关性。",
+      "completion_evidence": "B4/M 概率与观测合同；近似条件及不可运行原因；不继承不满足条件的定理。",
+      "condition": "before_B4_admission",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-03-04",
+      "work_package": "N4",
+      "plan_sections": [
+        "03"
+      ],
+      "requirement": "先固定 selector 比 predictor 或固定 predictor 比 selector；不得只给 M 更强元数据和策略后归因于策略。",
+      "completion_evidence": "同信息交叉消融矩阵、冻结 shared inputs 和实际 trace。",
+      "condition": "before_T2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-04-01",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "复用 SourceEvent、record/revision、索引，仅新增可重建研究注释；不新建长期真相库。",
+      "completion_evidence": "公开接口调用与注释存储/重建检查，无 Product 私有导入。",
+      "condition": "before_G0_Read",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "New opt-in adapter uses existing MemoryService; no second factual state store or Product/Archive changes."
+    },
+    {
+      "id": "V13_4-04-02",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "CorrectionRelation 保存旧句柄、新 Source、显式变化、未决维度及原文 span；非三选一且不能全枚举时 open_set。",
+      "completion_evidence": "合同与多维/开放集合/错版本/错来源控制。",
+      "condition": "before_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-04-03",
+      "work_package": "N3",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "EvidenceMetadata 保存来源身份、主体/属性、时间/范围线索及出处，保留 unknown/conflict，不冒称语义真值。",
+      "completion_evidence": "真实 writer 形成样本、来源绑定和缺失/冲突/错误标记。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-04-04",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "QueryView 仅当前自然问题、合法 cutoff、预测 mask；SelectionPlan 留候选、分数、成本、选中/遗漏项和策略版本。",
+      "completion_evidence": "视图合同与实际 trace；不存在 gold 或未选原文语义结果。",
+      "condition": "before_G0_Read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "N1 query/candidate/snapshot/selected/omitted costs exist; predicted mask and broader semantic relation contracts await N3."
+    },
+    {
+      "id": "V13_4-04-05",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "DeliveryReceipt 保存实际送达 span/版本/token/快照/read 事件；非空、选中、完整送达和 Reader 消费分开计量。",
+      "completion_evidence": "实际 Reader 请求与 receipt 可逐 span 对账；消费由独立评分确认。",
+      "condition": "before_G0_Read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Source-only delivery spans/hash/token/wire receipts verified in8 requests. Nonempty record version guards tested offline; broader method version delivery and correct consumption remain unverified."
+    },
+    {
+      "id": "V13_4-04-06",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "observed_at 是真实观察时间，valid_time 仅用来源明确锚点；缺锚点为 unknown，不以运行日期替代。",
+      "completion_evidence": "时态合同及迟到更正/历史陈述/有效区间缺失控制。",
+      "condition": "before_T0",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Storage time distinctions preserved and metadata validity unknown; Reader still confuses observation time with issuance in diagnostics. R1 not adopted."
+    },
+    {
+      "id": "V13_4-04-07",
+      "work_package": "N1",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "span 使用 Unicode codepoint [start,end) 与原文 hash；区分机械来源、缺失、歧义、抽取错误和公开工具字面观察。",
+      "completion_evidence": "Unicode/越界/hash/owner/角色负控制，不将机械支持升级为语义真值。",
+      "condition": "before_G0_Read",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Unicode/CJK/emoji and canonical JSON body span/hash controls pass; proof is exact origin, not semantic truth."
+    },
+    {
+      "id": "V13_4-04-08",
+      "work_package": "N0",
+      "plan_sections": [
+        "04"
+      ],
+      "requirement": "共享候选池，池外遗漏单列；候选 K=32 与诊断解释 H=4 是待 pilot 前冻结参数，并保留未枚举标记。",
+      "completion_evidence": "前瞻 freeze、所有方法候选 ID/约束一致、池外漏失报告。",
+      "condition": "before_pilot",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-01",
+      "work_package": "N3",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "元数据仅在事件可见之后、未来问题出现之前 query-free 形成并冻结；不由 Reader 答案或检索注入文本形成新用户事实。",
+      "completion_evidence": "每事件 WriterView cutoff/输入 hash、生成时间与 metadata hash；污染负控制。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-02",
+      "work_package": "N0",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "已有 writer 输出的新增 token、存储、embedding 和解析失败全部计费；无 writer 的方案新增形成调用不算免费。",
+      "completion_evidence": "共同账本的形成角色/增量成本、冷启动与生命周期报告。",
+      "condition": "before_model_HTTP",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-03",
+      "work_package": "N3",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "共同 Q0 使用所有未决维度；Q1 仅开发来源训练冻结的轻量 query head，不新调 LLM，仅自然问题与元数据特征。",
+      "completion_evidence": "Q0/Q1 版本、group split、冻结参数、调用 trace 和逐维分类误差。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-04",
+      "work_package": "N3",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "缺失/无效元数据或不确定 query head 回退共同完整链/相关性，并报告原因；unknown 不当不相关证明。",
+      "completion_evidence": "缺失、冲突、invalid、uncertain 回退控制及明确问题效用。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-05",
+      "work_package": "N4",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "主轨道一次性选源，新增独立查询规划 LLM 调用 0，最终 Reader 一次，保存原始答案。",
+      "completion_evidence": "每 query 完整调用序列与账本、未重写原始输出。",
+      "condition": "T0_through_T3",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-05-06",
+      "work_package": "N4",
+      "plan_sections": [
+        "05"
+      ],
+      "requirement": "多轮读取/解释/再选择必须另建 adaptive 条件，全部中间/工具/答案共完整预算，静态与自适应分表。",
+      "completion_evidence": "独立预注册 adaptive 协议、共预算 trace；未启用时保持未准入。",
+      "condition": "if_adaptive_track",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-01",
+      "work_package": "N3",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "先不训练的缺失维度检索；出现空间才用正则化线性/排序模型，至多 12 个冻结特征，不新增 LM/图网络/RL。",
+      "completion_evidence": "冻结方法规格、特征清单、训练来源与低容量模型身份。",
+      "condition": "after_G1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-02",
+      "work_package": "N3",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "允许共同 BM25/dense、真实成本、主体/属性匹配、已知时间关系、线索/抽取状态、实际邻接/角色/重复；索引与 query embedding 计费。",
+      "completion_evidence": "特征 lineage、底层索引与嵌入账本、uncertain 字段传递。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-03",
+      "work_package": "N3",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "禁题型、模板/文件名、ID 编号、文件顺序、gold 类型、未来时间特征；出现日期不等于生效日期。",
+      "completion_evidence": "冻结特征审查与受控置换/缺日期控制。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-04",
+      "work_package": "N3",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "score(e,q)=sum w_d*r_hat(d,z_e,C_q)/c(e) 是成本启发式；r_hat 不表示事实真实性、充分性或最优保证。",
+      "completion_evidence": "公式到实现映射、共同 C_q 和成本定义、claim 边界。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-05",
+      "work_package": "N3",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "共同去重先行；单源有信号后才加集合互补特征，互补/重复分报，不做全历史 pairwise LLM。",
+      "completion_evidence": "单源与集合消融、共享去重、所有实际调用。",
+      "condition": "if_single_source_signal",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-06",
+      "work_package": "N2",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "可枚举合成问题先按原文验证 EC² 边切减/成本与 HEC 重叠区域；自然语言用共享近似结果模型/解释集合。",
+      "completion_evidence": "非 gold 理论小例核验与主 B4 规格、实际信息同等。",
+      "condition": "before_B4_admission",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-06-07",
+      "work_package": "N2",
+      "plan_sections": [
+        "06"
+      ],
+      "requirement": "缺观测概率则不可运行或注明 approximation，不能用 gold 补齐；相同元数据但正文交换的不可识别反例保留。",
+      "completion_evidence": "不可运行条件、反事实诊断结果和信息上界说明。",
+      "condition": "before_B4_admission",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-07-01",
+      "work_package": "N1",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "共同内容优先适配层完整装包，保留原候选顺序对照；正文受预算排除必须明确记遗漏。",
+      "completion_evidence": "实际 HTTP 证据正文/顺序/token 对账及预算压力控制。",
+      "condition": "before_G0_Read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Ordered-source complete-unit packer and omissions verified; B1/B2/B3/B4/M still need shared wiring."
+    },
+    {
+      "id": "V13_4-07-02",
+      "work_package": "N1",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "所有方法冻结 bank，禁止事实 mutation；查询前后事实版本与来源不变，日志增量单列。",
+      "completion_evidence": "真实 Store 前后快照/版本/hash 与只读查询断言，区分日志。",
+      "condition": "before_G0_Read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Actual8 N1 queries preserve3 raw sources and empty fact bank; nonempty history/exception guard tested offline. All comparison methods not implemented."
+    },
+    {
+      "id": "V13_4-07-03",
+      "work_package": "N1",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "复用 exact lookup/candidate/selected_snapshot；检验 owner、版本、hash、重启和失效，不放宽 guard。",
+      "completion_evidence": "当前版本的窄测试与 SDK 重开证据、失败原样保留。",
+      "condition": "before_G0_Read",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Existing source/read/candidate guards plus distinct research snapshot validated for owner/hash/version/restart; old public-turn snapshot semantics unchanged."
+    },
+    {
+      "id": "V13_4-07-04",
+      "work_package": "N1",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "G0-Read 以无业务副作用、冻结来源、真实可见材料、版本追溯、成本记录为准；N1/N2 足够推进，不等待完整 EDM/CEP。",
+      "completion_evidence": "独立只读准入记录，机械验收与模型实验许可分离。",
+      "condition": "before_readonly_experiments",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "N1 source-only G0-Read engineering controls passed scoped; T0 data/candidate/Chain/Temporal freeze still needed before T0 model calls."
+    },
+    {
+      "id": "V13_4-07-05",
+      "work_package": "N6",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "G0-Integrate 先满足原 normal24/E0、保存、来源支持、scope、恢复；v13.3 W2 稀疏更新/消费随后实测。",
+      "completion_evidence": "旧 48 项适用验收、no-op/真实更正/scope、持久化与恢复实证。",
+      "condition": "if_writes_actions_or_default_switch",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-07-06",
+      "work_package": "N6",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "复用真实业务 journal/观察；区分 captured 与 semantically committed；高风险动作不受假设授权，unknown 先查询。",
+      "completion_evidence": "公开操作回执、故障/恢复窗口实测与授权边界。",
+      "condition": "if_integration",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-07-07",
+      "work_package": "N1",
+      "plan_sections": [
+        "07"
+      ],
+      "requirement": "不增常驻审稿/纠错代理、第二真相库、巨大 ontology、自动业务重试、隐式分页或最终答案重写；配置改动逐项 manifest。",
+      "completion_evidence": "源码/配置差异清单、运行 trace 与实际启用配置。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-01",
+      "work_package": "N2",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "B1 Chain-RAG 使用相同普通检索、原始完整更正链与完整证据包装。",
+      "completion_evidence": "冻结 B1 实现、共同候选/链及实际请求正文。",
+      "condition": "before_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-02",
+      "work_package": "N2",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "B2 Temporal-RAG 使用相同候选与可见时间/scope 字段，区分 observed_at 与 valid_time。",
+      "completion_evidence": "冻结 B2 定义、时间字段来源及同预算执行。",
+      "condition": "before_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-03",
+      "work_package": "N2",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "B3 Slot-Retrieve 根据共同预测缺失维度选源，不依赖复杂解释后验。",
+      "completion_evidence": "冻结 B3 实现、共同 Q0/Q1 与信息权限。",
+      "condition": "before_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-04",
+      "work_package": "N2",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "B4 Generic-Active 在 N2 准入前固定一个主 EC²-style/信息增益实现；相同解释/predictor/cost，不能结果后挑弱版本。",
+      "completion_evidence": "预注册主实现/版本、共享信息 trace；不满足理论条件注明 approximation。",
+      "condition": "before_N2_admission",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-05",
+      "work_package": "N4",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "M 是待验证候选；B4 未就绪仅允许机械验证，不声称优于通用主动取证。",
+      "completion_evidence": "M 身份与 B4 状态、独立贡献比较及受限主张表。",
+      "condition": "before_T2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-06",
+      "work_package": "N5",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "BeliefMem 必须作为多候选/历史近邻；Zep/Graphiti 或 TSM 至少一个时态近邻，核对代码/依赖/prompt/后台调用/版本后小切片。",
+      "completion_evidence": "可接入性与许可审计、原生身份冻结、小切片真实结果和全成本；未接入保留缺口。",
+      "condition": "after_gates_before_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-07",
+      "work_package": "N5",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "自建时态对照仅名 Temporal-RAG，不冒称原系统复现；BeliefMem 保留其多候选、历史和联合呈现能力。",
+      "completion_evidence": "系统复现边界、原系统对照功能表、运行配置/trace。",
+      "condition": "before_nearest_neighbor_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-08",
+      "work_package": "N4",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "机制表共享 history/relation/metadata/candidate IDs/query head/权限/Reader/tokenizer/材料/读取预算；系统表允许原生表示差异且计形成成本。",
+      "completion_evidence": "两类表分列，所有共同输入 hash 与实际约束对照。",
+      "condition": "before_T2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-08-09",
+      "work_package": "N4",
+      "plan_sections": [
+        "08"
+      ],
+      "requirement": "FullArchive、随机、shuffle、oracle metadata/解释为诊断，不列可部署主成绩；B3/B4/M 同解释，强简单对照留主表。",
+      "completion_evidence": "实验条件登记、诊断分表和主结果表。",
+      "condition": "before_results",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-01",
+      "work_package": "N2",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "T0 建议 32 独立开发历史×4 自然查询；明确/无影响、单源、互补、不充分各 8；规模非功效保证。",
+      "completion_evidence": "经资格审计的来源分组清单与 T0 freeze；未满足数量明确缺口。",
+      "condition": "after_N0_and_G0_Read",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-02",
+      "work_package": "N2",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "旧 R9 仅回归不算新来源；真实公开历史保留原文并审计许可、重复、曝光。",
+      "completion_evidence": "旧源排除/开发标签、许可出处、联合组和读取记录。",
+      "condition": "before_any_new_content_read",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-03",
+      "work_package": "N2",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "先标可解性、兼容解释、约束、允许答案和最小充分集合；不可解不强造单一答案。",
+      "completion_evidence": "隔离的 evaluator 标注与证据充足性依据。",
+      "condition": "before_T0_Reader",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-04",
+      "work_package": "N2",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "两位独立标注者优先复核可解性与集合；缺第二人只能标单人开发审查。",
+      "completion_evidence": "真实人员/评审记录、独立性与分歧；无虚构评审。",
+      "condition": "before_T0_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-05",
+      "work_package": "N2",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "T0 B1/B2 同预算建议 2048；FullArchive 额外最多 128 Reader 且信息/成本不等；短史全证据控制不人为加噪声。",
+      "completion_evidence": "每条件计划分母、实际调用/预算、FullArchive 独立成本。",
+      "condition": "before_T0_Reader",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-06",
+      "work_package": "N6",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "T0 输出逐史最早断点：档案缺证/候选漏证/包装漏证/解释错误/关系遗漏；仅真实同预算缺口允许复杂 pilot。",
+      "completion_evidence": "逐历史原始结果与 G1 决策；扩审计不能按 M 胜负筛题。",
+      "condition": "after_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-09-07",
+      "work_package": "N6",
+      "plan_sections": [
+        "09"
+      ],
+      "requirement": "完整链已解决大多数问题则采用简单修复、收缩问题；T0 曝光材料不得称正式泛化。",
+      "completion_evidence": "Go/Simplify/Stop 记录、数据集用途与 claim 对照。",
+      "condition": "after_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-01",
+      "work_package": "N3",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "T1 不先跑完整 Agent；在 T0 开发历史按事件 cutoff 一次 query-free 形成并冻结真实 metadata，query 在历史后派生。",
+      "completion_evidence": "writer 真实输入/输出、身份与分组训练/验证 freeze。",
+      "condition": "after_G1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-02",
+      "work_package": "N3",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "T1 同时比较相关性/缺失维度、真实 writer+线性、边际分布保持 shuffle、oracle metadata/mask、同元数据换正文、互补/重复子集。",
+      "completion_evidence": "所有必要条件的预注册输入、真实预测及独立诊断表。",
+      "condition": "T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-03",
+      "work_package": "N2",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "共同已读 C 下将来源标为直接消歧/部分/无关/误导/重复，并保存多种最小充分集合族 E*(q)；不足标 unknown。",
+      "completion_evidence": "每 query 来源类别、集合标注与 C 身份，单源分数不能替代集合。",
+      "condition": "before_T1_evaluation",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-04",
+      "work_package": "N3",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "参数选择按来源组交叉验证，所有变体同组，关系抽取/query head 错误单列，不看测试 gold 决定维度。",
+      "completion_evidence": "split/训练访问日志、冻结参数与错误分析。",
+      "condition": "T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-05",
+      "work_package": "N3",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "比较 512/1024/2048 覆盖成本曲线；主预算与 G2 务实目标在 pilot 前冻结，5pp 仅建议不是既有结果。",
+      "completion_evidence": "前瞻预算/阈值 freeze、真实覆盖曲线与成本。",
+      "condition": "before_pilot",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-06",
+      "work_package": "N6",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "输出逐维预测质量、候选外漏失、metadata 费用、失败类型；真实 metadata 对 B3/shuffle 有信号且 oracle 差异可解释才 G2。",
+      "completion_evidence": "T1 完整计划分母、真实预测结果、oracle/shuffle 对照与 G2 决策。",
+      "condition": "after_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-10-07",
+      "work_package": "N6",
+      "plan_sections": [
+        "10"
+      ],
+      "requirement": "真实无信号但 oracle 有信号时至多两轮已曝光抽取修订；仍无效 Simplify/Stop，不进入复杂选择。",
+      "completion_evidence": "每轮事前断点/竞争解释/最小实验/停止条件与轮次账本。",
+      "condition": "if_T1_signal_failure",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-01",
+      "work_package": "N4",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "T2 仅 T1 可信信号后启动；24 个未参与 T0/T1 历史×4 query×5 臂=480 Reader，一个家族/主预算。",
+      "completion_evidence": "来源联合组无交集、G2、pilot freeze、计划分母和实际调用。",
+      "condition": "after_G2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-02",
+      "work_package": "N4",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "T2 用于成本、场景方差/功效估计，属于开发，不得回收为独立测试。",
+      "completion_evidence": "pilot 分析和后续来源排除；正式规模冻结依据。",
+      "condition": "after_T2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-03",
+      "work_package": "N5",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "T3 建议 96×4×5=1920，按 pilot 重定样本量并事前冻结，不宣称规模天然有功效。",
+      "completion_evidence": "正式预注册/冻结、功效或精度依据、完整运行和原始结果。",
+      "condition": "after_T2_method_and_analysis_freeze",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-04",
+      "work_package": "N5",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "第二家族建议 24×4×3=288，M/B3/B4；重新形成与只换 Reader 分开；无服务保持 NOT_VERIFIED，禁止假造。",
+      "completion_evidence": "真实第二家族可用性、独立冻结/调用/形成与 Reader 迁移分表。",
+      "condition": "if_second_family_available_after_freeze",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-05",
+      "work_package": "N5",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "公开迁移使用 LongMemEval/STALE 合格来源切片，数量按许可/曝光/适配审计，不预设每题关系歧义。",
+      "completion_evidence": "metadata-only 资格、分组/任务适配与版本审计通过后才读内容。",
+      "condition": "after_eligibility_and_research_gates",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-06",
+      "work_package": "N5",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "官方 scorer 与新增消歧标注分表，保留原始问题/来源/版本。",
+      "completion_evidence": "官方 scorer 身份与输出、新标注/结果、原始输入 hash。",
+      "condition": "if_public_transfer",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-07",
+      "work_package": "N5",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "至少保留一种未见关系组合或独立工作流；历史/模板成组，跨语言原版同组，UUID/改写/seed 不造独立样本。",
+      "completion_evidence": "联合组、未见组合/工作流预注册、组级结果。",
+      "condition": "before_T3",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-11-08",
+      "work_package": "N6",
+      "plan_sections": [
+        "11"
+      ],
+      "requirement": "主张限同候选信息与预算的查询选证，四类问题及无证据不确定性分报，不扩展为业务恢复/任意权限/通用生命周期。",
+      "completion_evidence": "任务分表、外推限制与论文标题/摘要/结论审查。",
+      "condition": "before_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-12-01",
+      "work_package": "N1",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "物理隔离 WriterView、SelectorView、EvaluatorView；writer 不能见未来问题/答案/回执，selector 不能见未选语义/gold，host 不导入 evaluator。",
+      "completion_evidence": "输入文件/模块边界、实际请求字节和污染负测试。",
+      "condition": "before_any_experiment",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "N1 source/query/evaluator files separated; query-free metadata WriterView and future-question cutoff formation not yet implemented."
+    },
+    {
+      "id": "V13_4-12-02",
+      "work_package": "N0",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "如 BM25/dense 使用全文建索引必须披露，选择时不得额外免费解析全部候选正文。",
+      "completion_evidence": "索引特征/形成成本声明、选择执行的文件与调用访问证据。",
+      "condition": "before_any_experiment",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "N1 declares full-source BM25 lexical scoring/index text scans; selector receives metadata/cost only; selected exact read logical I/O recorded."
+    },
+    {
+      "id": "V13_4-12-03",
+      "work_package": "N0",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "source_id、完整历史 hash、模板族、已知派生关系建立联合组，先分组再读测试内容。",
+      "completion_evidence": "内容访问前 source eligibility manifest、分组图与记录。",
+      "condition": "before_any_new_content_read",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-source-eligibility.json"
+      ],
+      "qualification": "Union grouping rules preregistered; concrete eligible32 history cohort not yet frozen."
+    },
+    {
+      "id": "V13_4-12-04",
+      "work_package": "N0",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "旧 R9/autoresearch/写过 prompt 或评分样本全计开发；预留重分配需未读/未用输出审计与前瞻修订，不删曝光记录。",
+      "completion_evidence": "历史曝光登记、旧池排除及任何重新分配 amendment。",
+      "condition": "before_source_reallocation",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-12-05",
+      "work_package": "N2",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "逐 query 保留答案模式、允许部分答案、残留不确定性及原因；多源任务存集合，档案不足只相对给定档案/cutoff。",
+      "completion_evidence": "annotation artifact、评分协议与标注一致性审查。",
+      "condition": "before_scoring",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-12-06",
+      "work_package": "N2",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "不可从合法材料推得的合成隐藏真值不计强制回答；真实自然历史与构造诊断分开。",
+      "completion_evidence": "可解性证据、自然/诊断标签、原始分母。",
+      "condition": "before_scoring",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-12-07",
+      "work_package": "N2",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "换正文/删日期/重复为诊断，不估自然发生率；保留真实约束差异，不加随机噪声，不按 M 表现筛样本。",
+      "completion_evidence": "构造规则、采样冻结和全部保留/排除理由。",
+      "condition": "before_data_selection",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-12-08",
+      "work_package": "N0",
+      "plan_sections": [
+        "12"
+      ],
+      "requirement": "不以新盲池修 prompts；标注/训练/开发选择/正式评分各存读取记录；正式揭示后只做预注册分析。",
+      "completion_evidence": "曝光日志、freeze 与结果揭示时点、方法变更记录。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-01",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "充分覆盖在可解 query 中以实际送达 S 包含任一 E*(q) 完整集合计，不可解 N/A；集合未知也保持 unknown。",
+      "completion_evidence": "逐 query S/E* 可追溯 scorer 输出、分母和 unknown/N/A 控制。",
+      "condition": "before_analysis",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-02",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "候选池必要证据覆盖、选中率、完整送达率、正确消费分别报告，不以覆盖替代 Reader 正确性。",
+      "completion_evidence": "逐层指标与失败归因、原请求对账、独立效用评分。",
+      "condition": "before_analysis",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-03",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "查询效用按当前/陈述历史/追溯/跨范围分开，保留部分正确/unknown，未经定义不合并总准确率。",
+      "completion_evidence": "预注册任务 rubric、四类表及完整分母。",
+      "condition": "before_analysis",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-04",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "报档案不足/无支持时的确定回答率及可解题过度拒答；报关系/假设覆盖和未枚举标记。",
+      "completion_evidence": "对应分母、原始答案及 evaluator 标注，不将少读/拒答当净益。",
+      "condition": "before_analysis",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-05",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "维护损伤测事实/范围/支持关系无依据变化；只读阶段应无变化，集成另实测。",
+      "completion_evidence": "查询前后事实快照与支持关系差异、日志单列。",
+      "condition": "before_results",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-06",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "完整计 C_ingest+metadata+index+select+read+answer+retry 与维护，Judge 另列。",
+      "completion_evidence": "连续实际 ledger 和角色明细，unknown usage 独立保留。",
+      "condition": "before_model_HTTP",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-07",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "主比较 M-B3 与 M-B4，按来源历史聚类配对 bootstrap，建议 10000 次并事前定义多重校正。",
+      "completion_evidence": "预注册统计配置、组级配对数据和区间；同模板/语言/问题同 cluster，seed 为重复测量。",
+      "condition": "before_formal_reveal",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-08",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "pilot 后正式揭示前定样本量及可答子集非劣界；-5pp 为待冻结建议，用 CI 支持，不以不显著代替。",
+      "completion_evidence": "冻结样本量/界值/方法、置信区间与不足精度限制。",
+      "condition": "before_formal_reveal",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-13-09",
+      "work_package": "N6",
+      "plan_sections": [
+        "13"
+      ],
+      "requirement": "费用耗尽、provider 故障、未运行、语义失败分别保存，计划分母不删除；样本不足报不确定。",
+      "completion_evidence": "计划到终态对账、失败/未知原始记录与报告。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N0 交付分支/实际配置、旧要求映射、来源资格、预算草案，沿用 contracts/harness 不运行模型。",
+      "completion_evidence": "N0 配置/来源清单与冻结文件，独立核验，不以本映射自动完成。",
+      "condition": "before_N1_N2",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-baseline-config-audit.json",
+        "data/manifests/v13-4-source-eligibility.json",
+        "data/manifests/v13-4-design-templates/study_plan.yaml"
+      ],
+      "qualification": "N0 inventory/budget draft exists with source eligibility0/32; source origin acquisition ongoing. No model requests in N0."
+    },
+    {
+      "id": "V13_4-14-02",
+      "work_package": "N1",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N1 交付精确快照、共享候选、正文装包、只读终态断言，复用 memory/service/grounded_memory，不声称 CEP。",
+      "completion_evidence": "最小入口源码、适用机械/SDK 验证与实际交付 trace。",
+      "condition": "before_G0_Read",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Four new opt-in modules,80 affected checks, package boundary/build and8 real source-reader requests. No CEP completion claim."
+    },
+    {
+      "id": "V13_4-14-03",
+      "work_package": "N2",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N2 交付 T0 标注、B1/B2/B3、锁定通用策略及结构验证，reader runner/evaluator 隔离。",
+      "completion_evidence": "相应方法身份、隔离合同、T0 数据与 B4 准入。",
+      "condition": "before_T0_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-04",
+      "work_package": "N3",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N3 交付 query-free metadata、Q0/Q1、低容量预测器和 T1，方法纯逻辑不耦合 provider。",
+      "completion_evidence": "模块/配置、真实形成与 T1 实证；不跨过 G1。",
+      "condition": "after_G1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-05",
+      "work_package": "N4",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N4 交付固定 predictor/selector 交叉对照与 T2，统一 benchmark_execution 和实际 trace。",
+      "completion_evidence": "同信息比较、端到端 pilot 实证；不跨过 G2。",
+      "condition": "after_G2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-06",
+      "work_package": "N5",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N5 交付条件性 T3、公开切片、最近邻和第二家族，独立评审缺口显式保留。",
+      "completion_evidence": "门禁后真实样本、来源许可/冻结、复现边界和缺口。",
+      "condition": "after_T2_freeze",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-07",
+      "work_package": "N6",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "N6 交付统计、负结果、论文主张表、复现包与退出决定；不预先实现反证传播平台。",
+      "completion_evidence": "全证据链、决策、失败/成本/限制与可复现命令环境。",
+      "condition": "after_mainline_decision",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-14-08",
+      "work_package": "N0",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "新增文件前检索复用入口，增量最少文件；contracts/methods/runners/scorers/tests 路径是设计建议不是既有实现。",
+      "completion_evidence": "复用清单与最小变更理由；现有职责边界审查。",
+      "condition": "before_implementation",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Static reuse audit preceded four minimal modules; dependency violation fixed by placing research adapter under methods, no rule relaxation."
+    },
+    {
+      "id": "V13_4-14-09",
+      "work_package": "N0",
+      "plan_sections": [
+        "14"
+      ],
+      "requirement": "一个方法负责人、另设评测/数据负责人，真实 generation/embedding 统一计费入口；不虚构协作者/模型或自动合并 PR79/80/main。",
+      "completion_evidence": "真实职责分工、唯一调用 owner/账本/冻结 branch，远端写入另按授权。",
+      "condition": "always",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "One source owner + separate requirements/source auditors; only Root real HTTP concurrency1; existing ledger and local branch, no remote merge."
+    },
+    {
+      "id": "V13_4-15-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "G0 先证明权限/cutoff/正文交付/成本/只读版本，失败修入口，不用质量掩盖泄漏。",
+      "completion_evidence": "明确准入证据与实际检查结果，未证明保持 NOT_VERIFIED。",
+      "condition": "before_model_experiments",
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n1-acceptance.json",
+        "data/manifests/v13-4-n1-r0-results.json",
+        "data/manifests/v13-4-n1-r1-results.json"
+      ],
+      "qualification": "Scoped N1 G0 engineering demonstrated before T0; interpretive failures retained, remaining baseline/source gates not waived."
+    },
+    {
+      "id": "V13_4-15-02",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "G1 仅真实证据存在且简单链/时态有预算内缺口；不通过则简单方案/收缩。",
+      "completion_evidence": "T0 断点与 G1 Go/Simplify/Stop 记录。",
+      "condition": "after_T0",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-03",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "G2 真实 metadata 超 B3/shuffle、oracle 差异可解释；失败最多两轮抽取修订后停复杂选择。",
+      "completion_evidence": "T1 预注册目标/结果/轮次和 G2 决策。",
+      "condition": "after_T1",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-04",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "G3 同信息 B4 对照，predictor/selector 至少一个独立有益；无则标等效/应用组合，不称新算法。",
+      "completion_evidence": "公平对照与交叉消融的真实净益、G3 决策。",
+      "condition": "after_T2",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-05",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "G4 需要正式配对区间、效用/确定性/成本、来源与外部限制；不足补独立证据或缩主张，不重标开发为测试。",
+      "completion_evidence": "正式结果/统计/来源/最近邻/独立性限制与 G4 决策。",
+      "condition": "after_T3_or_documented_exit",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-06",
+      "work_package": "N0",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "预算主值建议 2048、曲线 512/1024、K32/H4 在 pilot 前冻结，不从结果挑主预算；metadata 与正文共同预算。",
+      "completion_evidence": "统一 tokenizer/实际 tokens/约束及前瞻 freeze。",
+      "condition": "before_pilot",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-07",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "计 metadata 冷启动/生命周期成本；报 selector CPU、I/O、首次回答、完整结束延迟，缓存命中与预热分开。",
+      "completion_evidence": "真实时间戳/CPU/IO/token 记录、成本与延迟表。",
+      "condition": "before_results",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-08",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "无实际价格/GPU 计时不换美元/GPU 小时；借 writer 不算免费，全读后分类是独立有成本 baseline。",
+      "completion_evidence": "计价依据和测量来源；unknown 原样保留。",
+      "condition": "before_cost_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-09",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "每核心假设至多两轮已曝光开发修订；每轮预写最早断点、竞争解释、最小区分实验、停止条件。",
+      "completion_evidence": "按 H1/H2/H3 的不可擦除 revision ledger、事前记录与决定。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-10",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "接口错与语义失败分开；未知请求不退款/复用槽位；禁择优重试、评测后修答案。",
+      "completion_evidence": "统一 request/receipt/失败账本及原始答案完整性。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-15-11",
+      "work_package": "N6",
+      "plan_sections": [
+        "15"
+      ],
+      "requirement": "5pp G2 目标不是承诺收益；正式优势靠差值区间与效用非劣，负结果保留；任何研究门禁不等 Product 可发布。",
+      "completion_evidence": "预注册/结果/退出和 Product NO_GO 声明。",
+      "condition": "before_claims",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-16-01",
+      "work_package": "N6",
+      "plan_sections": [
+        "16"
+      ],
+      "requirement": "对无证据、metadata 错误、open_set、策略重命名、metadata 挤正文、正常任务退化分别保留反证与最小处置。",
+      "completion_evidence": "对应诊断与风险处置表，明确更正/无歧义控制和原文回退。",
+      "condition": "before_final_decision",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-16-02",
+      "work_package": "N6",
+      "plan_sections": [
+        "16"
+      ],
+      "requirement": "备选新反证维护仅主线 Go/Simplify/Stop 后考虑，按主体/属性/范围/时间找候选，召回与判定分开。",
+      "completion_evidence": "独立条件研究卡/准入决定；当前不先实现平台。",
+      "condition": "if_alternative_line_after_main_decision",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-16-03",
+      "work_package": "N6",
+      "plan_sections": [
+        "16"
+      ],
+      "requirement": "备选 unknown 进入检查，不称自然语言零漏修；先测候选减少率—漏修风险，近全量重算则停止优化。",
+      "completion_evidence": "备选成本风险曲线与停止记录；无集成门禁不得业务写入。",
+      "condition": "if_alternative_line_admitted",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-16-04",
+      "work_package": "N6",
+      "plan_sections": [
+        "16"
+      ],
+      "requirement": "首篇论文最小交付：问题/可解性协议、真实 query-free metadata、公平完整链/时态/补槽/主动对照、未见源主表、成本曲线、predictor/selector 消融、失败/许可。",
+      "completion_evidence": "逐项成品与原始实证；条件退出时明确未完成项而非凭代码宣称。",
+      "condition": "if_reportable_mainline",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-16-05",
+      "work_package": "N6",
+      "plan_sections": [
+        "16"
+      ],
+      "requirement": "无业务动作证据时标题/结论限查询选证；回答简单方案是否够、廉价 metadata 是否有信号、同信息成本是否值得。",
+      "completion_evidence": "证据到主张矩阵、Go/Simplify/Stop 与限制，非模块齐全即完成。",
+      "condition": "before_final_delivery",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-A-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "A"
+      ],
+      "requirement": "保留 R0-R4 固定仓库输入与 U0/U1 可访问性边界；报告记载、代码已有、合法引用、候选存在、单次正确、文档生成不等独立重现/启用/语义支持/送达/泛化/恢复。",
+      "completion_evidence": "来源/证据等级登记及全部结果表的限定陈述。",
+      "condition": "always",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-B-01",
+      "work_package": "N0",
+      "plan_sections": [
+        "B"
+      ],
+      "requirement": "实际使用 L1-L9 一手文献保存 URL/日期/版本/hash/可读资源；外部成绩不迁移成 MiLAi 成绩，TSM 版本另冻结。",
+      "completion_evidence": "文献 catalog 与本地可读材料/内容 hash，方法采用点可追溯。",
+      "condition": "before_using_external_design",
+      "status": "NOT_VERIFIED",
+      "evidence": []
+    },
+    {
+      "id": "V13_4-B-02",
+      "work_package": "N0",
+      "plan_sections": [
+        "B"
+      ],
+      "requirement": "核查 study_plan.yaml、freeze_manifest.json、annotation_template.json、requirements.json、decision_record.md、sources.json、SHA256SUMS.json 设计模板；缺失不冒充 CLI/结果。",
+      "completion_evidence": " companion search 清单；存在则身份/填写状态，缺失则明确并提供所需最小独立协议。",
+      "condition": "before_experiments",
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        "data/manifests/v13-4-design-templates/SHA256SUMS.json",
+        "data/manifests/v13-4-n0-identity-check.json"
+      ],
+      "qualification": "Named companions not located; seven new labeled design templates created/hashed, not executable evidence."
+    }
+  ],
+  "gates": [
+    {
+      "id": "G0-Read",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "权限/cutoff/evaluator 隔离",
+        "来源与快照冻结",
+        "实际完整正文与遗漏回执",
+        "连续完整成本",
+        "事实版本/来源无变化"
+      ],
+      "on_failure": "修研究入口，不用模型质量掩盖泄漏。",
+      "condition": "before_readonly_model_experiments",
+      "evidence": []
+    },
+    {
+      "id": "G0-Integrate",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "原 E0 normal24 与旧更新条件",
+        "来源直接支持/范围/保存",
+        "真实 journal 与故障恢复",
+        "稀疏更新 no-op/真实更正不漏"
+      ],
+      "on_failure": "不启用新持久写入、业务动作或默认行为。",
+      "condition": "if_writes_actions_or_default_switch",
+      "evidence": []
+    },
+    {
+      "id": "G1",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "T0 证据存在",
+        "B1/B2 同预算可重复缺口",
+        "最早断点归因"
+      ],
+      "on_failure": "采用简单方案，记录 Simplify/Stop；不强造任务。",
+      "condition": "after_T0",
+      "evidence": []
+    },
+    {
+      "id": "G2",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "T1 真实 metadata 对 B3 和 shuffle 有信号",
+        "oracle 差异可解释",
+        "pilot 目标事前冻结"
+      ],
+      "on_failure": "至多两轮抽取修订，仍无信号停复杂选择。",
+      "condition": "after_G1_and_T1",
+      "evidence": []
+    },
+    {
+      "id": "G3",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "B4 固定主实现且同信息成本",
+        "固定 predictor/selector 的独立贡献",
+        "效用/确定性/费用联合证据"
+      ],
+      "on_failure": "标记等效或应用组合，不称新算法。",
+      "condition": "after_G2_and_T2",
+      "evidence": []
+    },
+    {
+      "id": "G4",
+      "status": "NOT_VERIFIED",
+      "requires": [
+        "正式配对区间/效用非劣",
+        "四类效用/确定性/成本",
+        "来源与外部/独立评审限制",
+        "负结果与复现包"
+      ],
+      "on_failure": "补独立证据或收缩主张，不把旧开发重标测试。",
+      "condition": "after_formal_evidence_or_documented_exit",
+      "evidence": []
+    }
+  ],
+  "stages": [
+    {
+      "id": "T0",
+      "work_packages": [
+        "N0",
+        "N1",
+        "N2"
+      ],
+      "condition": "N0 身份/来源/预算冻结与 G0-Read；先审计问题，不以 EDM/CEP 全部完成为前提。",
+      "planned_histories": 32,
+      "queries_per_history": 4,
+      "main_arms": [
+        "B1",
+        "B2"
+      ],
+      "planned_reader_results": 256,
+      "full_archive_optional_additional_reader_results_max": 128,
+      "status": "NOT_VERIFIED",
+      "exit_gate": "G1"
+    },
+    {
+      "id": "T1",
+      "work_packages": [
+        "N3"
+      ],
+      "condition": "G1 有真实缺口后，T0 开发历史一次 query-free 形成；非完整 Agent。",
+      "histories": "T0 development only",
+      "conditions": [
+        "relevance/slot",
+        "real_metadata+linear",
+        "marginal_preserving_shuffle",
+        "oracle_metadata/query_mask_diagnostic",
+        "same_metadata_swapped_bodies_diagnostic",
+        "complementary/redundant_subsets"
+      ],
+      "status": "NOT_VERIFIED",
+      "exit_gate": "G2"
+    },
+    {
+      "id": "T2",
+      "work_packages": [
+        "N4"
+      ],
+      "condition": "G2 可信信号；24 个未参加 T0/T1 的历史；仍为开发。",
+      "planned_histories": 24,
+      "queries_per_history": 4,
+      "main_arms": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "M"
+      ],
+      "planned_reader_results": 480,
+      "status": "NOT_VERIFIED",
+      "exit_gate": "G3 and formal freeze"
+    },
+    {
+      "id": "T3",
+      "work_packages": [
+        "N5"
+      ],
+      "condition": "T2 后按方差/精度重新定样本量并冻结方法、预算、统计与来源；正式源未曝光。",
+      "initial_planned_histories": 96,
+      "queries_per_history": 4,
+      "main_arms": [
+        "B1",
+        "B2",
+        "B3",
+        "B4",
+        "M"
+      ],
+      "initial_planned_reader_results": 1920,
+      "power_guarantee": false,
+      "status": "NOT_VERIFIED",
+      "exit_gate": "G4"
+    },
+    {
+      "id": "SECOND_FAMILY",
+      "work_packages": [
+        "N5"
+      ],
+      "condition": "核心冻结后且真实第二家族可用；重新形成/只换 Reader 分开，缺服务保持 NOT_VERIFIED。",
+      "planned_histories": 24,
+      "queries_per_history": 4,
+      "main_arms": [
+        "M",
+        "B3",
+        "B4"
+      ],
+      "planned_reader_results": 288,
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "id": "PUBLIC_TRANSFER",
+      "work_packages": [
+        "N5"
+      ],
+      "condition": "LongMemEval/STALE 许可、曝光、任务适配、来源分组与研究门禁通过后才读合格切片。",
+      "planned_count": null,
+      "status": "NOT_VERIFIED"
+    },
+    {
+      "id": "ALTERNATIVE_COUNTEREVIDENCE",
+      "work_packages": [
+        "N6"
+      ],
+      "condition": "仅主线完成 Go/Simplify/Stop 后另行考虑；不默认实施，业务集成另过 G0-Integrate。",
+      "status": "NOT_VERIFIED"
+    }
+  ],
+  "prospective_budget": {
+    "status": "DRAFT_NOT_RUN_FREEZE",
+    "main_evidence_tokens_suggested": 2048,
+    "curve_evidence_tokens": [
+      512,
+      1024,
+      2048
+    ],
+    "candidate_cap_suggested": 32,
+    "diagnostic_hypothesis_cap_suggested": 4,
+    "new_query_planner_llm_calls_main_track": 0,
+    "reader_calls_per_query_main_track": 1,
+    "features_max": 12,
+    "metadata_counts_against_material_budget": true,
+    "G2_pilot_coverage_delta_suggested_pp": 5,
+    "answerable_utility_noninferiority_suggested_pp": -5,
+    "bootstrap_replicates_suggested": 10000,
+    "freeze_before_results_required": true,
+    "continuous_ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "ledger_verified_by_this_inventory": false,
+    "unknown_usage_policy": "retain; no refunds or slot reuse",
+    "actual_generation_calls_this_audit": 0,
+    "actual_embedding_calls_this_audit": 0
+  },
+  "development_revision_limit": {
+    "max_exposed_revisions_per_core_hypothesis": 2,
+    "hypotheses": [
+      "H1",
+      "H2",
+      "H3"
+    ],
+    "required_before_each_revision": [
+      "earliest_breakpoint",
+      "competing_explanation",
+      "one_minimal_discriminating_experiment",
+      "stop_condition"
+    ],
+    "current_revision_count_verified": false,
+    "unknown_or_historical_attempts": "由 Root 查证后登记，不由本静态清单推断为 0；不可删除/隐藏旧失败。"
+  },
+  "inheritance": {
+    "source_path": "data/manifests/v13-2-requirements.json",
+    "source_sha256": "bbdc93e31012b7b18837a64a555b5dd1fd84bed2288bb291bf5bc0d836dd7dd3",
+    "source_mutated": false,
+    "canonical_row_hash_format": "UTF-8 json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(comma, colon))",
+    "all_48_ids_requirements_statuses_conditions_preserved": true,
+    "historical_P0_P8_amendment": {
+      "P0": "D0/D5 source/environment grouping",
+      "P1": "E0 normal24 and D1 repairs",
+      "P2": "D1/D2 source and deterministic projection, old Field preserved",
+      "P3": "D4 common-capability four arms and key controls",
+      "P4": "conditional Type/Scope ablations",
+      "P5": "REC-01/02 recovery plus D4 two workflows",
+      "P6": "D5 new pilots/prospective amendments",
+      "P7": "D5 independent/formal/generalization",
+      "P8": "D5 statistics/reproduction/decision report"
+    },
+    "supplementary_mapping": [
+      {
+        "original_id": "D0-01",
+        "original_work_package": "D0",
+        "original_plan_sections": [
+          "1.2",
+          "15"
+        ],
+        "original_requirement": "冻结main、原计划bytes、旧cohort身份和当前连续账本。",
+        "original_status": "PASSED_SCOPED",
+        "original_condition": null,
+        "original_row_sha256": "b1e7d5d9d6f408979452737dd656cd2f930f22963cd40d5a8175d455931d9aa0",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/0",
+        "v13_4_plan_sections": [
+          "01",
+          "14",
+          "15",
+          "A",
+          "B"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11",
+          "V13_4-A-01",
+          "V13_4-B-01",
+          "V13_4-B-02"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D0-02",
+        "original_work_package": "D0",
+        "original_plan_sections": [
+          "1.2",
+          "9.1",
+          "15"
+        ],
+        "original_requirement": "逐条复核45旧尝试、30完整轨迹的目标/历史/副作用/答案，保留15中断和15未运行。",
+        "original_status": "PASSED_SCOPED",
+        "original_condition": null,
+        "original_row_sha256": "4fbbcc2167474c3c5bf55f0d6ecfa85739e772a1805554371f3ea406d15b3dce",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/1",
+        "v13_4_plan_sections": [
+          "01",
+          "09",
+          "12",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-09-01",
+          "V13_4-09-02",
+          "V13_4-09-03",
+          "V13_4-09-04",
+          "V13_4-09-05",
+          "V13_4-09-06",
+          "V13_4-09-07",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D0-03",
+        "original_work_package": "D0",
+        "original_plan_sections": [
+          "2.1",
+          "7.3",
+          "13.1"
+        ],
+        "original_requirement": "定位旧代码/预算差异、首断点和逐调用开销。",
+        "original_status": "PASSED_SCOPED",
+        "original_condition": null,
+        "original_row_sha256": "79517a9463711b22b31e748372ef54dd65f0a1f9a62abb0b74050f115feecafa",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/2",
+        "v13_4_plan_sections": [
+          "01",
+          "07",
+          "13",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D1-01",
+        "original_work_package": "D1",
+        "original_plan_sections": [
+          "0.2",
+          "6.3"
+        ],
+        "original_requirement": "真实事件来源绑定；多同角色与多角色引用保留歧义、角色和实际hash。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "ed7cbd3cea5fd1a56bf094487c1229c73189cc64ac60b2931287009e60aeaadd",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/3",
+        "v13_4_plan_sections": [
+          "04",
+          "07",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D1-02",
+        "original_work_package": "D1",
+        "original_plan_sections": [
+          "6.2"
+        ],
+        "original_requirement": "候选短句柄绑定owner/record/读取时revision/支持来源；更新仅使用已交付版本。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "88515887271207f8ae951e2d9c39cf3a22c3c395f1c97c4eb8e1a429fe2861ef",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/4",
+        "v13_4_plan_sections": [
+          "04",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D1-03",
+        "original_work_package": "D1",
+        "original_plan_sections": [
+          "7.2"
+        ],
+        "original_requirement": "Mem0 evidence-before-close与独立SDK重开；原生算法/carrier身份保留。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "b838a8fae6b30fa8126a36f47e735f4d1fa2394983af629ef86676781f128c71",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/5",
+        "v13_4_plan_sections": [
+          "01",
+          "08",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D1-04",
+        "original_work_package": "D1",
+        "original_plan_sections": [
+          "14.1"
+        ],
+        "original_requirement": "v13.2 opt-in，legacy optional/explicit_receipt_v1/Field/原source schema与默认路径不变。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "3a85a06acdffa2f47a94df28d8b24e46f910cc967b51ca5017a8a60a739ffddc",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/6",
+        "v13_4_plan_sections": [
+          "01",
+          "07",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D2-01",
+        "original_work_package": "D2",
+        "original_plan_sections": [
+          "4.1",
+          "4.2"
+        ],
+        "original_requirement": "公开profile声明对象/字段路径、类型、版本、完整性与效果；无benchmark/gold路由。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "678d3f2fce6186d25bbb2598bbf532d2e8c201af7b1a8be557a216af6e83b2f9",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/7",
+        "v13_4_plan_sections": [
+          "04",
+          "07",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D2-02",
+        "original_work_package": "D2",
+        "original_plan_sections": [
+          "4.2",
+          "4.3"
+        ],
+        "original_requirement": "同源多对象多字段的实际值派生，零新增LLM调用；注释与可信事实分离。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "800d4234f316ed3680d4f483cdafa76b5681f413c3893e7d296f50c3a9c870c0",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/8",
+        "v13_4_plan_sections": [
+          "04",
+          "05",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-05-01",
+          "V13_4-05-02",
+          "V13_4-05-03",
+          "V13_4-05-04",
+          "V13_4-05-05",
+          "V13_4-05-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D2-03",
+        "original_work_package": "D2",
+        "original_plan_sections": [
+          "4.4"
+        ],
+        "original_requirement": "部分/缺失字段不删除旧事实；可比较版本不被迟到观察回滚；不可比冲突保留。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "d7b4dbbedb2a29cea3773893a2a8740b277a2545cd2ed9064051122d83cc4a0b",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/9",
+        "v13_4_plan_sections": [
+          "02",
+          "04",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-02-01",
+          "V13_4-02-02",
+          "V13_4-02-03",
+          "V13_4-02-04",
+          "V13_4-02-05",
+          "V13_4-02-06",
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D2-04",
+        "original_work_package": "D2",
+        "original_plan_sections": [
+          "4.5",
+          "7.1"
+        ],
+        "original_requirement": "相同事件重放幂等，可重建；源已捕获但投影未提交时返回pending而非全部成功。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "d9c5dc7ff86afbfc717ed5b2b9a662ba2d2e790df51a90f35e010e26d28f2403",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/10",
+        "v13_4_plan_sections": [
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-01",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "5.1",
+          "5.2"
+        ],
+        "original_requirement": "prepare_context复用StrongRawRAG词法+dense，输入仅当前公开消息/真实owner/已发现ref。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "7e6d655b23f1f84fe3c518e4f846a916179ed5fdca516a4b4bb63ff2612386c2",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/11",
+        "v13_4_plan_sections": [
+          "05",
+          "08",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-05-01",
+          "V13_4-05-02",
+          "V13_4-05-03",
+          "V13_4-05-04",
+          "V13_4-05-05",
+          "V13_4-05-06",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-02",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "5.3"
+        ],
+        "original_requirement": "每用户回合最多一次公共预取；2048 tokens/最多6记录初值，全部元数据计预算。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "43f78b13849bc869beb8ffada93524f6c54cb7963a7a99e0e8cbf22fe5551ed1",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/12",
+        "v13_4_plan_sections": [
+          "04",
+          "05",
+          "08",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-05-01",
+          "V13_4-05-02",
+          "V13_4-05-03",
+          "V13_4-05-04",
+          "V13_4-05-05",
+          "V13_4-05-06",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-03",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "5.3",
+          "5.4"
+        ],
+        "original_requirement": "续接复用包，新观察/修订只刷新受影响条目；bank_revision/packet_hash防旧缓存。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "c27f8c7fef4875b854b0604cbbcb75f0f98362ffcd9b2997ab7be89c8fbca260",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/13",
+        "v13_4_plan_sections": [
+          "04",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-04",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "6.1"
+        ],
+        "original_requirement": "可重建source→record/revision反链，跨语言检索原源可发现所支持卡。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "c4b80eee0cdb5c9a774b0c3d2a8cf53b80977748d33a8cc270ca79e828f69792",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/14",
+        "v13_4_plan_sections": [
+          "04",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-05",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "6.3"
+        ],
+        "original_requirement": "小patch append/revise/supersede/no_change，保留未改metadata与历史。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "f9db9d0ff0e7a28a58689884c2b8f4806af71e8e239e170362ff4f1308f19adf",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/15",
+        "v13_4_plan_sections": [
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D3-06",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "6.4",
+          "7.4"
+        ],
+        "original_requirement": "工具事实无需writer重抄；一次边界语义batch，Host已提交则去重。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "078350da58fa0d48be40abaf63db7d2d8866dc4456651154807422906989d483",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/16",
+        "v13_4_plan_sections": [
+          "05",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-05-01",
+          "V13_4-05-02",
+          "V13_4-05-03",
+          "V13_4-05-04",
+          "V13_4-05-05",
+          "V13_4-05-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "E0-01",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "9.1"
+        ],
+        "original_requirement": "新配置固定24正常开发回归≥22/24，两旧更新失败均有直接修复证据。",
+        "original_status": "NOT_PASSED",
+        "original_condition": null,
+        "original_row_sha256": "8e141a01da32e3a7e08ab553faa8435c1d6d31e3d410533ed33636ef4408388e",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/17",
+        "v13_4_plan_sections": [
+          "01",
+          "07",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "E1-01",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "9.2"
+        ],
+        "original_requirement": "固定观察流与完整自由Agent各完成旧Field/新派生×自主/一次预取小型2×2。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "b78a5edc418c8a7ee4e3106dc639d5c9930f766a744138b2718b404778dcec4e",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/18",
+        "v13_4_plan_sections": [
+          "01",
+          "07",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "E2-01",
+        "original_work_package": "D3",
+        "original_plan_sections": [
+          "9.3"
+        ],
+        "original_requirement": "固定节奏与读入比较target_query、反链、反链+读时句柄patch。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "55b674454faff7f792dc49f804e88853dc1ff76552f35c1ba751f28ec773820b",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/19",
+        "v13_4_plan_sections": [
+          "01",
+          "07",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-01",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "8.1",
+          "8.2"
+        ],
+        "original_requirement": "四主臂B2+/B6+/Mem0-TraceEqual/M同公共预取/观察流/guard/发现/工具材料预算。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "4e9bba8d9bcfc5e7e39737775517a31ec2a159bbd003620ba5f98b8e9734d57e",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/20",
+        "v13_4_plan_sections": [
+          "07",
+          "08",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-02",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "8.1"
+        ],
+        "original_requirement": "B6+同确定性投影并补原文与简单语义摘要后备以支持偏好。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "2fca3ed682a4d8bfa8190c7a4f804ba878848bacbd560de3763700b9b2bbc193",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/21",
+        "v13_4_plan_sections": [
+          "07",
+          "08"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-03",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "8.2"
+        ],
+        "original_requirement": "同数量少量配置在开发集选择，完整系统/机制表分开。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "3dd287e67ccd971c5d41536489feb5c40530460366b4dcaf680f9eab7d6e4ae9",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/22",
+        "v13_4_plan_sections": [
+          "08",
+          "10",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-10-01",
+          "V13_4-10-02",
+          "V13_4-10-03",
+          "V13_4-10-04",
+          "V13_4-10-05",
+          "V13_4-10-06",
+          "V13_4-10-07",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-04",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "9.4",
+          "15"
+        ],
+        "original_requirement": "第二工作流原六曝光故事×四主臂24新冻结开发轨迹，必要预订回归。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "9bcb58c7ee7ee9c9b95b425d0f8fc842cc9bd43627091326ac5801ff31df771e",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/23",
+        "v13_4_plan_sections": [
+          "07",
+          "11"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-05",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "9.4"
+        ],
+        "original_requirement": "质量每消息24生成与共同12预算分别冻结采集，不和旧失败拼表。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "2a36f70df103c1161aaef5b96880e4ee45b4da3997f033187b557d110b5cc7d4",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/24",
+        "v13_4_plan_sections": [
+          "07",
+          "08",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-06",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "8.1"
+        ],
+        "original_requirement": "保留NoMemory/FullHistory/RollingSummary/Ordinary-Matched/Prompt-only和旧Field关键诊断。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "01d09fd30fc3856da0ba8e77e817d378ccb0786db58f74766d66bee7736a30a2",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/25",
+        "v13_4_plan_sections": [
+          "07",
+          "08",
+          "09"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-09-01",
+          "V13_4-09-02",
+          "V13_4-09-03",
+          "V13_4-09-04",
+          "V13_4-09-05",
+          "V13_4-09-06",
+          "V13_4-09-07"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D4-07",
+        "original_work_package": "D4",
+        "original_plan_sections": [
+          "8.1"
+        ],
+        "original_requirement": "已接入SimpleMem-Text合同/预算验收后公开主表或固定确认；近邻复现边界如实披露。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "dda03fff16a287f804b95a47aed4f400dd25162d7cc1441face76065e39c4293",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/26",
+        "v13_4_plan_sections": [
+          "03",
+          "08"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-03-01",
+          "V13_4-03-02",
+          "V13_4-03-03",
+          "V13_4-03-04",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-01",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "11.1",
+          "11.2"
+        ],
+        "original_requirement": "metadata-only来源组关联图和可用独立组数，任何pilot内容访问前amendment。",
+        "original_status": "PASSED_SCOPED",
+        "original_condition": null,
+        "original_row_sha256": "2c372677bd215c804854a9c669ed959053d3ddbea0f03e5f41588c8aa12bec64",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/27",
+        "v13_4_plan_sections": [
+          "09",
+          "11",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-09-01",
+          "V13_4-09-02",
+          "V13_4-09-03",
+          "V13_4-09-04",
+          "V13_4-09-05",
+          "V13_4-09-06",
+          "V13_4-09-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-02",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.4"
+        ],
+        "original_requirement": "新pilot建议12基础任务×2条件×4臂96，来源/结构独立且冻结前无内容选择。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "bad066a419e60804690b380c1a0bb21f078103393f3a6d833be650759b13b1d4",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/28",
+        "v13_4_plan_sections": [
+          "07",
+          "11",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-03",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.4",
+          "12.2"
+        ],
+        "original_requirement": "正式初始60基础任务×2条件×4臂480规划；样本数由pilot精度与变异事前决定。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "0bc3c1a95b9e1156fd16efccc982bd3dfda83000db0eaddcdcc9c1f6c4648b98",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/29",
+        "v13_4_plan_sections": [
+          "07",
+          "11",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-04",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.5"
+        ],
+        "original_requirement": "MERIT官方任务/工具/scorer独立锚点；18 pilot/90 formal为预算候选按领域难度完整arc。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "f8a08e40578985b6feda0b9a03a446e6b61e5130e30ab0f698c763a079e6559e",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/30",
+        "v13_4_plan_sections": [
+          "07",
+          "11",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-05",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.5",
+          "11.1"
+        ],
+        "original_requirement": "MemSyco源池修订后再新pilot，三个任务各报，增量/全历史形成匹配。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "fce7dc7600fffd173e80bf466c7c59eb9260730527185fb50d48fcb045ec4cad",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/31",
+        "v13_4_plan_sections": [
+          "07",
+          "11",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-06",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "11.3"
+        ],
+        "original_requirement": "确定性业务/副作用/版本评分独立于runtime，自由文本/scope独立盲评分。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "bdf09cc82bb37756af9b974b30bed31839294070fe9257009fa0dca00e36f3f9",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/32",
+        "v13_4_plan_sections": [
+          "09",
+          "12",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-09-01",
+          "V13_4-09-02",
+          "V13_4-09-03",
+          "V13_4-09-04",
+          "V13_4-09-05",
+          "V13_4-09-06",
+          "V13_4-09-07",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-07",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "12.1",
+          "12.2"
+        ],
+        "original_requirement": "分别报告完成性/事实/消费/维护/行动/效用/费用；M vs B6+主要，M vs B2+次要。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "3fcb84956bfab68f88dc871d4211e331b7b9ce5703330b73892b9c0a424005e4",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/33",
+        "v13_4_plan_sections": [
+          "08",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-08",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "12.2"
+        ],
+        "original_requirement": "按基础任务/源组配对cluster统计、效用成本联合报告，clean非劣5pp在正式结果前冻结。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "6608ff4a30ae02599d82753cb4c351275937bdebefb5f48e57a969fbf7630dc3",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/34",
+        "v13_4_plan_sections": [
+          "13",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-09",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "10.1"
+        ],
+        "original_requirement": "核心冻结后新工具schema/任务结构/双向语言验证；第二家族reader与端到端迁移。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": null,
+        "original_row_sha256": "e5a55c0434571dcb5244792766e983ba05a384f5523d6406f9b2543d1d65b57d",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/35",
+        "v13_4_plan_sections": [
+          "11",
+          "12"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-10",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "10.3",
+          "7.3"
+        ],
+        "original_requirement": "100/1000/10000可控事件索引扫描与p50/p95增长，测后再优化。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "a470226645d6d22a7f4c5f04a020c9d609e04fbb001d6fd3353bc7f326a325ce",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/36",
+        "v13_4_plan_sections": [
+          "07",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "D5-11",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "10.3"
+        ],
+        "original_requirement": "小型成立后自然长程两个owner各20–30session、15–25实际事项。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": "E1-E3 supporting small method validity and practical value",
+        "original_row_sha256": "92b3fb4258adc6cd6774758e2a8bc0996d3644ed019601dae05836b970ae7c2d",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/37",
+        "v13_4_plan_sections": [
+          "07",
+          "11",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-11-01",
+          "V13_4-11-02",
+          "V13_4-11-03",
+          "V13_4-11-04",
+          "V13_4-11-05",
+          "V13_4-11-06",
+          "V13_4-11-07",
+          "V13_4-11-08",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_ORIGINAL_CONDITIONAL_GATE",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "C-01",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.6"
+        ],
+        "original_requirement": "支持后才扩去反链/修订/B6+及Flat/Type×Scope2×2，按单机制与调用差异消融。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": "E1-E3 support continuation",
+        "original_row_sha256": "4293010855d783cf7b9b7264e3a85f09988c057e2ddd6ce34888f852bb079013",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/38",
+        "v13_4_plan_sections": [
+          "07",
+          "08",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-08-01",
+          "V13_4-08-02",
+          "V13_4-08-03",
+          "V13_4-08-04",
+          "V13_4-08-05",
+          "V13_4-08-06",
+          "V13_4-08-07",
+          "V13_4-08-08",
+          "V13_4-08-09",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_ORIGINAL_CONDITIONAL_GATE",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "C-02",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.6"
+        ],
+        "original_requirement": "State–Attention仅正确记忆到达且普通Q/W不足时可启动Q/W/A。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": "Correct delivered memory and ordinary Q/W insufficiency",
+        "original_row_sha256": "a0855ead15338ed6095edc9d96c5beca58dd61c7a94b207ccb3df5a7548100fc",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/39",
+        "v13_4_plan_sections": [
+          "07",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_ORIGINAL_CONDITIONAL_GATE",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "C-03",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "9.5"
+        ],
+        "original_requirement": "EAL-Bench仅自然支持可见授权历史时补；oracle source gate仅诊断。",
+        "original_status": "NOT_VERIFIED",
+        "original_condition": "Natural visible authorization history supported",
+        "original_row_sha256": "290040077234d7830daad91e56fd266c759c4d8b350c52646c9f79f55d7b481f",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/40",
+        "v13_4_plan_sections": [
+          "07",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_ORIGINAL_CONDITIONAL_GATE",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "REC-01",
+        "original_work_package": "D2-D4",
+        "original_plan_sections": [
+          "7.1"
+        ],
+        "original_requirement": "W1公开discovery unknown、W2源持久后投影重放、W3真实记忆提交后回执重放。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "fc13afe6bef28912adbdc50c3a2c2f43cff2042c95d3bc0ef84a4fe796392946",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/41",
+        "v13_4_plan_sections": [
+          "07",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "REC-02",
+        "original_work_package": "D2-D4",
+        "original_plan_sections": [
+          "7.1"
+        ],
+        "original_requirement": "旧W3要求UPDATE保持，不可达标N/A，新事实投影后故障独立语义。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "83f8579c5e8b04816b97ec3f9e0fca003f298f1c9c591aca3d082dc9e2f6e5c0",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/42",
+        "v13_4_plan_sections": [
+          "07",
+          "13"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09"
+        ],
+        "treatment": "PRESERVED_INTEGRATION_GATE_NOT_REPLACED_BY_G0_READ",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "INV-01",
+        "original_work_package": "D0-D5",
+        "original_plan_sections": [
+          "3.2",
+          "7.3",
+          "14.1"
+        ],
+        "original_requirement": "来源不放大、身份不猜测、时间不偷换、效果不重放；索引可重建非权威。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "ac25cd8588a71874e830b34855a4e7abe2202ecf546dd6bcc8bbe9c761575101",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/43",
+        "v13_4_plan_sections": [
+          "00",
+          "04",
+          "07"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-00-01",
+          "V13_4-00-02",
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "INV-02",
+        "original_work_package": "D0-D5",
+        "original_plan_sections": [
+          "10.2",
+          "13.2"
+        ],
+        "original_requirement": "既有职责增量Lab-only，无benchmarkcase/gold/私有SDK连接/Product依赖。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "91dd0382a8686868401924ca55b036961124022031ac549b1d9b167d4617da62",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/44",
+        "v13_4_plan_sections": [
+          "04",
+          "07",
+          "14"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-04-01",
+          "V13_4-04-02",
+          "V13_4-04-03",
+          "V13_4-04-04",
+          "V13_4-04-05",
+          "V13_4-04-06",
+          "V13_4-04-07",
+          "V13_4-04-08",
+          "V13_4-07-01",
+          "V13_4-07-02",
+          "V13_4-07-03",
+          "V13_4-07-04",
+          "V13_4-07-05",
+          "V13_4-07-06",
+          "V13_4-07-07",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "INV-03",
+        "original_work_package": "D0-D5",
+        "original_plan_sections": [
+          "14.2",
+          "14.3"
+        ],
+        "original_requirement": "每cohort一个manifest/逐轨迹表/来源预算摘要；源/SDK/模型route/工具/提示/时序/预算/scorer/停止规则齐。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "576e5e62064d5ffd2ff49539782b7ce261d9a11087d906f73cc4db8cbe551908",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/45",
+        "v13_4_plan_sections": [
+          "01",
+          "12",
+          "13",
+          "14",
+          "15"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-01-01",
+          "V13_4-01-02",
+          "V13_4-01-03",
+          "V13_4-01-04",
+          "V13_4-01-05",
+          "V13_4-01-06",
+          "V13_4-12-01",
+          "V13_4-12-02",
+          "V13_4-12-03",
+          "V13_4-12-04",
+          "V13_4-12-05",
+          "V13_4-12-06",
+          "V13_4-12-07",
+          "V13_4-12-08",
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "INV-04",
+        "original_work_package": "D0-D5",
+        "original_plan_sections": [
+          "12.3",
+          "15"
+        ],
+        "original_requirement": "按Go/Pivot/Stop作修复/收缩/相关运行停止，普通语义失败不停止独立安全工作。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "bf6d3735f2d621305eba59266c45b5b860e3c78f0b95ee70155c45a240a8095b",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/46",
+        "v13_4_plan_sections": [
+          "09",
+          "10",
+          "15",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-09-01",
+          "V13_4-09-02",
+          "V13_4-09-03",
+          "V13_4-09-04",
+          "V13_4-09-05",
+          "V13_4-09-06",
+          "V13_4-09-07",
+          "V13_4-10-01",
+          "V13_4-10-02",
+          "V13_4-10-03",
+          "V13_4-10-04",
+          "V13_4-10-05",
+          "V13_4-10-06",
+          "V13_4-10-07",
+          "V13_4-15-01",
+          "V13_4-15-02",
+          "V13_4-15-03",
+          "V13_4-15-04",
+          "V13_4-15-05",
+          "V13_4-15-06",
+          "V13_4-15-07",
+          "V13_4-15-08",
+          "V13_4-15-09",
+          "V13_4-15-10",
+          "V13_4-15-11",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      },
+      {
+        "original_id": "DEL-01",
+        "original_work_package": "D5",
+        "original_plan_sections": [
+          "13.1",
+          "14.2",
+          "15"
+        ],
+        "original_requirement": "首v13.2结果和完整复现收口回答首断点/正常效用/强简单独立价值/新成本与未解决失败。",
+        "original_status": "PARTIAL",
+        "original_condition": null,
+        "original_row_sha256": "18ea3aefc5d736160c0c1e0764676f3982cf21194a9640006bf3ce5e71c73042",
+        "original_evidence_pointer": "data/manifests/v13-2-requirements.json#/requirements/47",
+        "v13_4_plan_sections": [
+          "13",
+          "14",
+          "16"
+        ],
+        "v13_4_requirement_ids": [
+          "V13_4-13-01",
+          "V13_4-13-02",
+          "V13_4-13-03",
+          "V13_4-13-04",
+          "V13_4-13-05",
+          "V13_4-13-06",
+          "V13_4-13-07",
+          "V13_4-13-08",
+          "V13_4-13-09",
+          "V13_4-14-01",
+          "V13_4-14-02",
+          "V13_4-14-03",
+          "V13_4-14-04",
+          "V13_4-14-05",
+          "V13_4-14-06",
+          "V13_4-14-07",
+          "V13_4-14-08",
+          "V13_4-14-09",
+          "V13_4-16-01",
+          "V13_4-16-02",
+          "V13_4-16-03",
+          "V13_4-16-04",
+          "V13_4-16-05"
+        ],
+        "treatment": "PRESERVED_INHERITED_OBLIGATION_WITH_READONLY_SUPPLEMENT",
+        "v13_4_reverification_status": "NOT_VERIFIED",
+        "qualification": "原要求、状态、条件和全部原证据由原文件保留；本映射不以 v13.4 相似机制替代原臂/工作流/样本/验收，也不作状态升级。"
+      }
+    ],
+    "non_substitution": "v13.4 的 B1-B4/M、只读试验或公开切片不替代 v13.2 指定的四臂、两工作流、预算、恢复、正式/独立/条件义务；未执行部分仍保留未完成。"
+  },
+  "current_unresolved_evidence": [
+    "32 independent T0 histories final eligibility/annotations/E* families (39 metadata origins preregistered; acquisition ongoing)",
+    "B1/B2/B3 implementations and B4 structural controls; ordered_source is entry primitive only",
+    "query-free actual writer metadata/Q1/predictor/shuffle/oracle and T1 signal",
+    "T2/T3 with independent source splits, formal intervals and external transfer/nearest-neighbor execution",
+    "independent semantic annotations/Judge and second family",
+    "inherited48 write/integration obligations remain at historical status",
+    "R0 date overclaims and R1 scope regression preserved; R1 prompt not adopted"
+  ],
+  "inventory_validation": {
+    "performed": "JSON structure, unique IDs, all plan sections indexed, 48 exact copied requirement/status/condition fields, source file hash unchanged",
+    "runtime_tests_run": 0,
+    "sdk_checks_run": 0,
+    "model_results_verified": 0,
+    "does_not_satisfy_research_gates": true
+  },
+  "named_artifact_index": {
+    "suggested_implementation_paths": [
+      {
+        "plan_name": "contracts/correction_relation.py",
+        "candidate_path": "src/milai_lab/contracts/correction_relation.py",
+        "obligation": "研究注释与权限视图；实际增量位置可按复用审计决定",
+        "status": "NOT_VERIFIED"
+      },
+      {
+        "plan_name": "methods/correction_evidence.py",
+        "candidate_path": "src/milai_lab/methods/correction_evidence.py",
+        "obligation": "纯价值预测/选源，不耦合 provider",
+        "status": "NOT_VERIFIED"
+      },
+      {
+        "plan_name": "runners/correction_evidence_eval.py",
+        "candidate_path": "src/milai_lab/runners/correction_evidence_eval.py",
+        "obligation": "组合与真实调用/trace，不实现算法",
+        "status": "NOT_VERIFIED"
+      },
+      {
+        "plan_name": "scorers/correction_evidence.py",
+        "candidate_path": "src/milai_lab/scorers/correction_evidence.py",
+        "obligation": "隔离标注与评分",
+        "status": "NOT_VERIFIED"
+      },
+      {
+        "plan_name": "tests/.../test_correction_evidence.py",
+        "candidate_path": "tests/memory/test_correction_evidence.py",
+        "obligation": "合同与机械控制；实际组织可按最小复用决定",
+        "status": "NOT_VERIFIED"
+      }
+    ],
+    "design_templates": [
+      {
+        "name": "study_plan.yaml",
+        "path": "data/manifests/v13-4-design-templates/study_plan.yaml",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "freeze_manifest.json",
+        "path": "data/manifests/v13-4-design-templates/freeze_manifest.json",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "annotation_template.json",
+        "path": "data/manifests/v13-4-design-templates/annotation_template.json",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "requirements.json",
+        "path": "data/manifests/v13-4-design-templates/requirements.json",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "decision_record.md",
+        "path": "data/manifests/v13-4-design-templates/decision_record.md",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "sources.json",
+        "path": "data/manifests/v13-4-design-templates/sources.json",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      },
+      {
+        "name": "SHA256SUMS.json",
+        "path": "data/manifests/v13-4-design-templates/SHA256SUMS.json",
+        "presence_observed": true,
+        "status": "NOT_VERIFIED",
+        "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
+      }
+    ]
+  }
+}

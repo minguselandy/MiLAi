@@ -1,0 +1,75 @@
+{
+  "kind": "V13_4_N1_R1_DATE_CLARIFICATION_RESULTS",
+  "status": "TERMINAL_CANDIDATE_NOT_ADOPTED",
+  "source_commit": "57bfac58d90b316e10550872d584db9ef8d96b57",
+  "protocol": "data/manifests/v13-4-n1-r1-protocol.json",
+  "freeze_path": "artifacts/v13-4/n1-wiring-r1/freeze.json",
+  "freeze_sha256": "a7dcff579ce6f0875785d0c0aac7e021b82646022a9162379e2fd5b9450a4b21",
+  "planned_and_completed_queries": 4,
+  "complete_delivery_requests": 4,
+  "sources_per_request": 3,
+  "material_tokens": [
+    479,
+    479,
+    479,
+    479
+  ],
+  "fact_source_unchanged": true,
+  "prompt_tokenizer_errors": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "costs": {
+    "generation_requests": 4,
+    "known_tokens": 3125,
+    "charged_tokens": 3125,
+    "embedding_requests": 0,
+    "query_planning_calls": 0,
+    "writer_calls": 0
+  },
+  "semantic_root_diagnostic": {
+    "original_rubric_core": {
+      "scoped_correct": 3,
+      "failed": 1
+    },
+    "scope_failure_query": "q4",
+    "scope_failure": "States Cedar incident reports should be CSV despite full source explicitly saying their format is unspecified. Birch part remains correct.",
+    "observed_at_date_overclaims": {
+      "r0": 3,
+      "r1": 1,
+      "denominator_each": 4,
+      "remaining_query": "q4"
+    },
+    "independent_Judge": false,
+    "no_post_outcome_answer_rewrite": true
+  },
+  "decision": "Do not adopt R1 prompt. Retain R0 as initial common Reader control pending T0; no further wording search now. Evidence selection cannot be credited for a Reader interpretation failure when all evidence was already delivered.",
+  "comparison_limitations": [
+    "same3 source bodies and4 questions, fresh ingestion timestamps differ; not an exactly identical full-request causal comparison",
+    "one small exposed synthetic diagnostic group; no T0 count or generalization",
+    "Root diagnostic not independent semantic judgement"
+  ],
+  "continuous_ledger_after": {
+    "generation_requests": 9406,
+    "generation": {
+      "charged_tokens": 27043276,
+      "known_tokens": 27012889,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    },
+    "sha256": "41b46c9c32dd142f6f661083a9c53b5f214260dd5159149a8acfddae18b5fac9"
+  },
+  "v13_4_continuous_delta": {
+    "generation_requests": 8,
+    "known_and_charged_tokens": 6012,
+    "embedding_requests": 0,
+    "new_unknown": 0
+  },
+  "raw_trace": "artifacts/v13-4/n1-wiring-r1/reader-trace.jsonl"
+}

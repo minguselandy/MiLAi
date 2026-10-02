@@ -1,0 +1,1650 @@
+{
+  "kind": "V13_4_T0_DEVELOPMENT_ACQUISITION_FREEZE",
+  "status": "FROZEN_BEFORE_FIRST_SELECTED_BODY_READ",
+  "frozen_at_utc": "2026-10-02T16:48:56.561225+00:00",
+  "stage": "DEVELOPMENT",
+  "authorization": "Root explicitly authorized actual T0 development source acquisition on this turn after source-group preregistration; no holdout or model access.",
+  "shortlist_path": "data/manifests/v13-4-t0-origin-shortlist.json",
+  "shortlist_sha256": "ede223fbcc5ccfc0bb28b394c6bdc90a69173bfcaa75fb43dd46dea727948b93",
+  "candidate_metadata_sha256": "30a9522ef313c4adcaa156253f8b2c4b540b27a0b07d2dcc1e0a7a8fe8f05676",
+  "origins": [
+    {
+      "rank": 1,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9171",
+      "source_group_id": "rfc-wg-update-16f7852886dda31ae947",
+      "original_version_id": "RFC9171",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9171.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8043,
+          "version_id": "rfc-editor:erratum:8043",
+          "url": "https://errata.rfc-editor.org/eid8043/"
+        },
+        {
+          "errata_id": 8525,
+          "version_id": "rfc-editor:erratum:8525",
+          "url": "https://errata.rfc-editor.org/eid8525/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC6260",
+        "RFC7116",
+        "RFC9171",
+        "RFC9713",
+        "RFC9758"
+      ],
+      "conservative_group_members": [
+        "RFC6260",
+        "RFC7116",
+        "RFC9171",
+        "RFC9172",
+        "RFC9173",
+        "RFC9174",
+        "RFC9675",
+        "RFC9713",
+        "RFC9758"
+      ]
+    },
+    {
+      "rank": 2,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7469",
+      "source_group_id": "rfc-wg-update-979b2881564b4a00c642",
+      "original_version_id": "RFC7469",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7469.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4354,
+          "version_id": "rfc-editor:erratum:4354",
+          "url": "https://errata.rfc-editor.org/eid4354/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7469"
+      ],
+      "conservative_group_members": [
+        "RFC6454",
+        "RFC6797",
+        "RFC7034",
+        "RFC7469"
+      ]
+    },
+    {
+      "rank": 3,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9167",
+      "source_group_id": "rfc-wg-update-82c46e33a35f5273519c",
+      "original_version_id": "RFC9167",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9167.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7176,
+          "version_id": "rfc-editor:erratum:7176",
+          "url": "https://errata.rfc-editor.org/eid7176/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9167"
+      ],
+      "conservative_group_members": [
+        "RFC7480",
+        "RFC7481",
+        "RFC7482",
+        "RFC7483",
+        "RFC7484",
+        "RFC7485",
+        "RFC8056",
+        "RFC8063",
+        "RFC8334",
+        "RFC8495",
+        "RFC8521",
+        "RFC8543",
+        "RFC8544",
+        "RFC8590",
+        "RFC8748",
+        "RFC8807",
+        "RFC8909",
+        "RFC8977",
+        "RFC8982",
+        "RFC9022",
+        "RFC9038",
+        "RFC9082",
+        "RFC9083",
+        "RFC9154",
+        "RFC9167",
+        "RFC9224",
+        "RFC9536",
+        "RFC9537",
+        "RFC9560",
+        "RFC9803",
+        "RFC9873",
+        "RFC9874",
+        "RFC9877",
+        "RFC9910",
+        "RFC10037"
+      ]
+    },
+    {
+      "rank": 4,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9886",
+      "source_group_id": "rfc-wg-update-3222fff5ba297c51a4de",
+      "original_version_id": "RFC9886",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9886.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8822,
+          "version_id": "rfc-editor:erratum:8822",
+          "url": "https://errata.rfc-editor.org/eid8822/"
+        },
+        {
+          "errata_id": 8823,
+          "version_id": "rfc-editor:erratum:8823",
+          "url": "https://errata.rfc-editor.org/eid8823/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9886"
+      ],
+      "conservative_group_members": [
+        "RFC4423",
+        "RFC4843",
+        "RFC5201",
+        "RFC5202",
+        "RFC5203",
+        "RFC5204",
+        "RFC5205",
+        "RFC5206",
+        "RFC5338",
+        "RFC5770",
+        "RFC6028",
+        "RFC6078",
+        "RFC6079",
+        "RFC6253",
+        "RFC6261",
+        "RFC6317",
+        "RFC7086",
+        "RFC7343",
+        "RFC7401",
+        "RFC7402",
+        "RFC8002",
+        "RFC8003",
+        "RFC8004",
+        "RFC8005",
+        "RFC8046",
+        "RFC8047",
+        "RFC9028",
+        "RFC9063",
+        "RFC9153",
+        "RFC9374",
+        "RFC9434",
+        "RFC9575",
+        "RFC9886"
+      ]
+    },
+    {
+      "rank": 5,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8239",
+      "source_group_id": "rfc-wg-update-c1d66824b6d22e3f933d",
+      "original_version_id": "RFC8239",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8239.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5652,
+          "version_id": "rfc-editor:erratum:5652",
+          "url": "https://errata.rfc-editor.org/eid5652/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8239"
+      ],
+      "conservative_group_members": [
+        "RFC1242",
+        "RFC1944",
+        "RFC2285",
+        "RFC2432",
+        "RFC2544",
+        "RFC2647",
+        "RFC2761",
+        "RFC2889",
+        "RFC3116",
+        "RFC3133",
+        "RFC3134",
+        "RFC3222",
+        "RFC3511",
+        "RFC3918",
+        "RFC4061",
+        "RFC4062",
+        "RFC4063",
+        "RFC4098",
+        "RFC4689",
+        "RFC4814",
+        "RFC4883",
+        "RFC5180",
+        "RFC5695",
+        "RFC6201",
+        "RFC6412",
+        "RFC6413",
+        "RFC6414",
+        "RFC6645",
+        "RFC6815",
+        "RFC6894",
+        "RFC6985",
+        "RFC7501",
+        "RFC7502",
+        "RFC7640",
+        "RFC7654",
+        "RFC7747",
+        "RFC8161",
+        "RFC8172",
+        "RFC8204",
+        "RFC8219",
+        "RFC8238",
+        "RFC8239",
+        "RFC8455",
+        "RFC8456",
+        "RFC9004",
+        "RFC9411",
+        "RFC9693",
+        "RFC9971"
+      ]
+    },
+    {
+      "rank": 6,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9204",
+      "source_group_id": "rfc-wg-update-66b1248e688ce879cb3d",
+      "original_version_id": "RFC9204",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9204.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8410,
+          "version_id": "rfc-editor:erratum:8410",
+          "url": "https://errata.rfc-editor.org/eid8410/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9204"
+      ],
+      "conservative_group_members": [
+        "RFC8999",
+        "RFC9000",
+        "RFC9001",
+        "RFC9002",
+        "RFC9114",
+        "RFC9204",
+        "RFC9221",
+        "RFC9287",
+        "RFC9308",
+        "RFC9312",
+        "RFC9368",
+        "RFC9369"
+      ]
+    },
+    {
+      "rank": 7,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9622",
+      "source_group_id": "rfc-wg-update-2c7cf303e88e42780d20",
+      "original_version_id": "RFC9622",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9622.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8619,
+          "version_id": "rfc-editor:erratum:8619",
+          "url": "https://errata.rfc-editor.org/eid8619/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9622"
+      ],
+      "conservative_group_members": [
+        "RFC8095",
+        "RFC8303",
+        "RFC8304",
+        "RFC8922",
+        "RFC8923",
+        "RFC9621",
+        "RFC9622",
+        "RFC9623"
+      ]
+    },
+    {
+      "rank": 8,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9711",
+      "source_group_id": "rfc-wg-update-5471e686986d5137c1d2",
+      "original_version_id": "RFC9711",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9711.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8528,
+          "version_id": "rfc-editor:erratum:8528",
+          "url": "https://errata.rfc-editor.org/eid8528/"
+        },
+        {
+          "errata_id": 8771,
+          "version_id": "rfc-editor:erratum:8771",
+          "url": "https://errata.rfc-editor.org/eid8771/"
+        },
+        {
+          "errata_id": 8776,
+          "version_id": "rfc-editor:erratum:8776",
+          "url": "https://errata.rfc-editor.org/eid8776/"
+        },
+        {
+          "errata_id": 8782,
+          "version_id": "rfc-editor:erratum:8782",
+          "url": "https://errata.rfc-editor.org/eid8782/"
+        },
+        {
+          "errata_id": 8783,
+          "version_id": "rfc-editor:erratum:8783",
+          "url": "https://errata.rfc-editor.org/eid8783/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9711"
+      ],
+      "conservative_group_members": [
+        "RFC9334",
+        "RFC9683",
+        "RFC9684",
+        "RFC9711",
+        "RFC9781",
+        "RFC9782",
+        "RFC9999",
+        "RFC10013"
+      ]
+    },
+    {
+      "rank": 9,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8345",
+      "source_group_id": "rfc-wg-update-dc0a59baf7ce9d316e95",
+      "original_version_id": "RFC8345",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8345.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 6900,
+          "version_id": "rfc-editor:erratum:6900",
+          "url": "https://errata.rfc-editor.org/eid6900/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8345"
+      ],
+      "conservative_group_members": [
+        "RFC7920",
+        "RFC7921",
+        "RFC7922",
+        "RFC7923",
+        "RFC8241",
+        "RFC8242",
+        "RFC8345",
+        "RFC8346",
+        "RFC8430",
+        "RFC8431",
+        "RFC8542",
+        "RFC8944"
+      ]
+    },
+    {
+      "rank": 10,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8972",
+      "source_group_id": "rfc-wg-update-fd43eacb523354914444",
+      "original_version_id": "RFC8972",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8972.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8199,
+          "version_id": "rfc-editor:erratum:8199",
+          "url": "https://errata.rfc-editor.org/eid8199/"
+        },
+        {
+          "errata_id": 8339,
+          "version_id": "rfc-editor:erratum:8339",
+          "url": "https://errata.rfc-editor.org/eid8339/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8762",
+        "RFC8972"
+      ],
+      "conservative_group_members": [
+        "RFC2330",
+        "RFC2679",
+        "RFC2680",
+        "RFC2681",
+        "RFC3148",
+        "RFC3357",
+        "RFC3393",
+        "RFC3432",
+        "RFC3763",
+        "RFC4148",
+        "RFC4656",
+        "RFC4737",
+        "RFC5136",
+        "RFC5357",
+        "RFC5388",
+        "RFC5481",
+        "RFC5560",
+        "RFC5618",
+        "RFC5644",
+        "RFC5835",
+        "RFC5938",
+        "RFC6038",
+        "RFC6049",
+        "RFC6248",
+        "RFC6349",
+        "RFC6534",
+        "RFC6576",
+        "RFC6673",
+        "RFC6703",
+        "RFC6802",
+        "RFC6808",
+        "RFC7290",
+        "RFC7312",
+        "RFC7398",
+        "RFC7497",
+        "RFC7679",
+        "RFC7680",
+        "RFC7717",
+        "RFC7718",
+        "RFC7750",
+        "RFC7799",
+        "RFC7820",
+        "RFC8186",
+        "RFC8250",
+        "RFC8321",
+        "RFC8337",
+        "RFC8468",
+        "RFC8545",
+        "RFC8762",
+        "RFC8889",
+        "RFC8911",
+        "RFC8912",
+        "RFC8913",
+        "RFC8972",
+        "RFC9097",
+        "RFC9197",
+        "RFC9198",
+        "RFC9322",
+        "RFC9326",
+        "RFC9341",
+        "RFC9342",
+        "RFC9359",
+        "RFC9378",
+        "RFC9486",
+        "RFC9503",
+        "RFC9506",
+        "RFC9533",
+        "RFC9534",
+        "RFC9544",
+        "RFC9617",
+        "RFC9946",
+        "RFC10052"
+      ]
+    },
+    {
+      "rank": 11,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9793",
+      "source_group_id": "rfc-wg-update-d939fc2dde6fdd99eb5f",
+      "original_version_id": "RFC9793",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9793.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8463,
+          "version_id": "rfc-editor:erratum:8463",
+          "url": "https://errata.rfc-editor.org/eid8463/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9793"
+      ],
+      "conservative_group_members": [
+        "RFC8279",
+        "RFC8296",
+        "RFC8401",
+        "RFC8444",
+        "RFC8556",
+        "RFC9262",
+        "RFC9272",
+        "RFC9624",
+        "RFC9793",
+        "RFC9974"
+      ]
+    },
+    {
+      "rank": 12,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8949",
+      "source_group_id": "rfc-wg-update-df4989cfa9c1ef850be6",
+      "original_version_id": "RFC8949",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8949.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8589,
+          "version_id": "rfc-editor:erratum:8589",
+          "url": "https://errata.rfc-editor.org/eid8589/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7049",
+        "RFC8949"
+      ],
+      "conservative_group_members": [
+        "RFC7049",
+        "RFC8610",
+        "RFC8742",
+        "RFC8746",
+        "RFC8943",
+        "RFC8949",
+        "RFC9090",
+        "RFC9164",
+        "RFC9165",
+        "RFC9277",
+        "RFC9581",
+        "RFC9682",
+        "RFC9741"
+      ]
+    },
+    {
+      "rank": 13,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7644",
+      "source_group_id": "rfc-wg-update-643bcf2ca489466f4bbb",
+      "original_version_id": "RFC7644",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7644.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7916,
+          "version_id": "rfc-editor:erratum:7916",
+          "url": "https://errata.rfc-editor.org/eid7916/"
+        },
+        {
+          "errata_id": 8096,
+          "version_id": "rfc-editor:erratum:8096",
+          "url": "https://errata.rfc-editor.org/eid8096/"
+        },
+        {
+          "errata_id": 8365,
+          "version_id": "rfc-editor:erratum:8365",
+          "url": "https://errata.rfc-editor.org/eid8365/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7643",
+        "RFC7644",
+        "RFC9865",
+        "RFC9967"
+      ],
+      "conservative_group_members": [
+        "RFC7642",
+        "RFC7643",
+        "RFC7644",
+        "RFC9865",
+        "RFC9944",
+        "RFC9967"
+      ]
+    },
+    {
+      "rank": 14,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8765",
+      "source_group_id": "rfc-wg-update-e9059df934077d27f5a3",
+      "original_version_id": "RFC8765",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8765.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8560,
+          "version_id": "rfc-editor:erratum:8560",
+          "url": "https://errata.rfc-editor.org/eid8560/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8765"
+      ],
+      "conservative_group_members": [
+        "RFC7558",
+        "RFC8222",
+        "RFC8765",
+        "RFC8766",
+        "RFC8882",
+        "RFC9664",
+        "RFC9665",
+        "RFC10029"
+      ]
+    },
+    {
+      "rank": 15,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8995",
+      "source_group_id": "rfc-wg-update-228411d916c23ec8c433",
+      "original_version_id": "RFC8995",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8995.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 6716,
+          "version_id": "rfc-editor:erratum:6716",
+          "url": "https://errata.rfc-editor.org/eid6716/"
+        },
+        {
+          "errata_id": 6834,
+          "version_id": "rfc-editor:erratum:6834",
+          "url": "https://errata.rfc-editor.org/eid6834/"
+        },
+        {
+          "errata_id": 7576,
+          "version_id": "rfc-editor:erratum:7576",
+          "url": "https://errata.rfc-editor.org/eid7576/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8995"
+      ],
+      "conservative_group_members": [
+        "RFC8366",
+        "RFC8368",
+        "RFC8990",
+        "RFC8991",
+        "RFC8992",
+        "RFC8993",
+        "RFC8994",
+        "RFC8995",
+        "RFC9222",
+        "RFC9733"
+      ]
+    },
+    {
+      "rank": 16,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8259",
+      "source_group_id": "rfc-wg-update-248412b80c4891d9d1c1",
+      "original_version_id": "RFC8259",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7383,
+          "version_id": "rfc-editor:erratum:7383",
+          "url": "https://errata.rfc-editor.org/eid7383/"
+        },
+        {
+          "errata_id": 7600,
+          "version_id": "rfc-editor:erratum:7600",
+          "url": "https://errata.rfc-editor.org/eid7600/"
+        },
+        {
+          "errata_id": 7603,
+          "version_id": "rfc-editor:erratum:7603",
+          "url": "https://errata.rfc-editor.org/eid7603/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC4627",
+        "RFC7158",
+        "RFC7159",
+        "RFC8259"
+      ],
+      "conservative_group_members": [
+        "RFC4627",
+        "RFC7158",
+        "RFC7159",
+        "RFC7464",
+        "RFC7493",
+        "RFC8259"
+      ]
+    },
+    {
+      "rank": 17,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8620",
+      "source_group_id": "rfc-wg-update-5652b41a0716586e01d0",
+      "original_version_id": "RFC8620",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8620.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5791,
+          "version_id": "rfc-editor:erratum:5791",
+          "url": "https://errata.rfc-editor.org/eid5791/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8620",
+        "RFC9404",
+        "RFC9670"
+      ],
+      "conservative_group_members": [
+        "RFC5788",
+        "RFC8620",
+        "RFC8621",
+        "RFC8887",
+        "RFC9007",
+        "RFC9219",
+        "RFC9404",
+        "RFC9425",
+        "RFC9610",
+        "RFC9661",
+        "RFC9670",
+        "RFC9749"
+      ]
+    },
+    {
+      "rank": 18,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7940",
+      "source_group_id": "rfc-wg-update-622ee7a37a54e118caad",
+      "original_version_id": "RFC7940",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7940.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5986,
+          "version_id": "rfc-editor:erratum:5986",
+          "url": "https://errata.rfc-editor.org/eid5986/"
+        },
+        {
+          "errata_id": 8409,
+          "version_id": "rfc-editor:erratum:8409",
+          "url": "https://errata.rfc-editor.org/eid8409/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7940"
+      ],
+      "conservative_group_members": [
+        "RFC7940"
+      ]
+    },
+    {
+      "rank": 19,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8824",
+      "source_group_id": "rfc-wg-update-324654c82057f325a9ab",
+      "original_version_id": "RFC8824",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8824.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7389,
+          "version_id": "rfc-editor:erratum:7389",
+          "url": "https://errata.rfc-editor.org/eid7389/"
+        },
+        {
+          "errata_id": 7397,
+          "version_id": "rfc-editor:erratum:7397",
+          "url": "https://errata.rfc-editor.org/eid7397/"
+        },
+        {
+          "errata_id": 8270,
+          "version_id": "rfc-editor:erratum:8270",
+          "url": "https://errata.rfc-editor.org/eid8270/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8824"
+      ],
+      "conservative_group_members": [
+        "RFC8376",
+        "RFC8724",
+        "RFC8824",
+        "RFC9011",
+        "RFC9363",
+        "RFC9391",
+        "RFC9441",
+        "RFC9442"
+      ]
+    },
+    {
+      "rank": 20,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8360",
+      "source_group_id": "rfc-wg-update-2795c8af0172eb6ec4ec",
+      "original_version_id": "RFC8360",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8360.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5638,
+          "version_id": "rfc-editor:erratum:5638",
+          "url": "https://errata.rfc-editor.org/eid5638/"
+        },
+        {
+          "errata_id": 5870,
+          "version_id": "rfc-editor:erratum:5870",
+          "url": "https://errata.rfc-editor.org/eid5870/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8360"
+      ],
+      "conservative_group_members": [
+        "RFC2280",
+        "RFC2622",
+        "RFC2650",
+        "RFC2725",
+        "RFC2726",
+        "RFC2754",
+        "RFC2769",
+        "RFC4012",
+        "RFC6254",
+        "RFC6480",
+        "RFC6481",
+        "RFC6482",
+        "RFC6483",
+        "RFC6484",
+        "RFC6485",
+        "RFC6486",
+        "RFC6487",
+        "RFC6488",
+        "RFC6489",
+        "RFC6490",
+        "RFC6491",
+        "RFC6492",
+        "RFC6493",
+        "RFC6810",
+        "RFC6811",
+        "RFC6907",
+        "RFC6916",
+        "RFC6945",
+        "RFC7115",
+        "RFC7128",
+        "RFC7132",
+        "RFC7318",
+        "RFC7353",
+        "RFC7382",
+        "RFC7730",
+        "RFC7909",
+        "RFC7935",
+        "RFC8097",
+        "RFC8181",
+        "RFC8182",
+        "RFC8183",
+        "RFC8205",
+        "RFC8206",
+        "RFC8207",
+        "RFC8208",
+        "RFC8209",
+        "RFC8210",
+        "RFC8211",
+        "RFC8360",
+        "RFC8416",
+        "RFC8481",
+        "RFC8488",
+        "RFC8608",
+        "RFC8630",
+        "RFC8634",
+        "RFC8635",
+        "RFC8893",
+        "RFC8897",
+        "RFC9255",
+        "RFC9286",
+        "RFC9319",
+        "RFC9323",
+        "RFC9324",
+        "RFC9455",
+        "RFC9582",
+        "RFC9589",
+        "RFC9674",
+        "RFC9691",
+        "RFC9697",
+        "RFC9829",
+        "RFC9981"
+      ]
+    },
+    {
+      "rank": 21,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8466",
+      "source_group_id": "rfc-wg-update-92f1fe13e4901a89edd8",
+      "original_version_id": "RFC8466",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8466.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5615,
+          "version_id": "rfc-editor:erratum:5615",
+          "url": "https://errata.rfc-editor.org/eid5615/"
+        },
+        {
+          "errata_id": 6922,
+          "version_id": "rfc-editor:erratum:6922",
+          "url": "https://errata.rfc-editor.org/eid6922/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8466"
+      ],
+      "conservative_group_members": [
+        "RFC8466"
+      ]
+    },
+    {
+      "rank": 22,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9132",
+      "source_group_id": "rfc-wg-update-03ff5f0c4b877b32f47d",
+      "original_version_id": "RFC9132",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9132.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7058,
+          "version_id": "rfc-editor:erratum:7058",
+          "url": "https://errata.rfc-editor.org/eid7058/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8782",
+        "RFC9132"
+      ],
+      "conservative_group_members": [
+        "RFC8612",
+        "RFC8782",
+        "RFC8783",
+        "RFC8811",
+        "RFC8903",
+        "RFC8973",
+        "RFC9066",
+        "RFC9132",
+        "RFC9133",
+        "RFC9244",
+        "RFC9284",
+        "RFC9362",
+        "RFC9387"
+      ]
+    },
+    {
+      "rank": 23,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8794",
+      "source_group_id": "rfc-wg-update-5e808ddbdb7c281c801d",
+      "original_version_id": "RFC8794",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8794.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7189,
+          "version_id": "rfc-editor:erratum:7189",
+          "url": "https://errata.rfc-editor.org/eid7189/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8794",
+        "RFC9559"
+      ],
+      "conservative_group_members": [
+        "RFC8794",
+        "RFC9043",
+        "RFC9559",
+        "RFC9639"
+      ]
+    },
+    {
+      "rank": 24,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9493",
+      "source_group_id": "rfc-wg-update-a5b140887bfda16fc148",
+      "original_version_id": "RFC9493",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9493.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7727,
+          "version_id": "rfc-editor:erratum:7727",
+          "url": "https://errata.rfc-editor.org/eid7727/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9493"
+      ],
+      "conservative_group_members": [
+        "RFC8417",
+        "RFC8935",
+        "RFC8936",
+        "RFC9493"
+      ]
+    },
+    {
+      "rank": 25,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9115",
+      "source_group_id": "rfc-wg-update-17a12c274f3d3c30e554",
+      "original_version_id": "RFC9115",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9115.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7336,
+          "version_id": "rfc-editor:erratum:7336",
+          "url": "https://errata.rfc-editor.org/eid7336/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9115"
+      ],
+      "conservative_group_members": [
+        "RFC8555",
+        "RFC8657",
+        "RFC8737",
+        "RFC8738",
+        "RFC8739",
+        "RFC8823",
+        "RFC9115",
+        "RFC9444",
+        "RFC9447",
+        "RFC9448",
+        "RFC9773",
+        "RFC9799",
+        "RFC9891"
+      ]
+    },
+    {
+      "rank": 26,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7584",
+      "source_group_id": "rfc-wg-update-5fb32d973d4c81f7d9e6",
+      "original_version_id": "RFC7584",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7584.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4413,
+          "version_id": "rfc-editor:erratum:4413",
+          "url": "https://errata.rfc-editor.org/eid4413/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7584"
+      ],
+      "conservative_group_members": [
+        "RFC7092",
+        "RFC7332",
+        "RFC7403",
+        "RFC7584",
+        "RFC7879",
+        "RFC8079"
+      ]
+    },
+    {
+      "rank": 27,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9605",
+      "source_group_id": "rfc-wg-update-618d4d1e8a4c5bc5d34f",
+      "original_version_id": "RFC9605",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9605.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8321,
+          "version_id": "rfc-editor:erratum:8321",
+          "url": "https://errata.rfc-editor.org/eid8321/"
+        },
+        {
+          "errata_id": 8565,
+          "version_id": "rfc-editor:erratum:8565",
+          "url": "https://errata.rfc-editor.org/eid8565/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9605"
+      ],
+      "conservative_group_members": [
+        "RFC9605"
+      ]
+    },
+    {
+      "rank": 28,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7574",
+      "source_group_id": "rfc-wg-update-7fbfc2979f0b61fbc7df",
+      "original_version_id": "RFC7574",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7574.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4724,
+          "version_id": "rfc-editor:erratum:4724",
+          "url": "https://errata.rfc-editor.org/eid4724/"
+        },
+        {
+          "errata_id": 4725,
+          "version_id": "rfc-editor:erratum:4725",
+          "url": "https://errata.rfc-editor.org/eid4725/"
+        },
+        {
+          "errata_id": 4726,
+          "version_id": "rfc-editor:erratum:4726",
+          "url": "https://errata.rfc-editor.org/eid4726/"
+        },
+        {
+          "errata_id": 4880,
+          "version_id": "rfc-editor:erratum:4880",
+          "url": "https://errata.rfc-editor.org/eid4880/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7574"
+      ],
+      "conservative_group_members": [
+        "RFC6972",
+        "RFC7574",
+        "RFC7846"
+      ]
+    },
+    {
+      "rank": 29,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7788",
+      "source_group_id": "rfc-wg-update-6f75860d9f29958f1551",
+      "original_version_id": "RFC7788",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7788.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4677,
+          "version_id": "rfc-editor:erratum:4677",
+          "url": "https://errata.rfc-editor.org/eid4677/"
+        },
+        {
+          "errata_id": 5021,
+          "version_id": "rfc-editor:erratum:5021",
+          "url": "https://errata.rfc-editor.org/eid5021/"
+        },
+        {
+          "errata_id": 5113,
+          "version_id": "rfc-editor:erratum:5113",
+          "url": "https://errata.rfc-editor.org/eid5113/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7788",
+        "RFC8375"
+      ],
+      "conservative_group_members": [
+        "RFC7368",
+        "RFC7695",
+        "RFC7787",
+        "RFC7788",
+        "RFC8375",
+        "RFC9080",
+        "RFC9526",
+        "RFC9527"
+      ]
+    },
+    {
+      "rank": 30,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8678",
+      "source_group_id": "rfc-wg-update-f18522674cf0744d5c3f",
+      "original_version_id": "RFC8678",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8678.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8124,
+          "version_id": "rfc-editor:erratum:8124",
+          "url": "https://errata.rfc-editor.org/eid8124/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC8678"
+      ],
+      "conservative_group_members": [
+        "RFC2338",
+        "RFC2787",
+        "RFC3682",
+        "RFC3768",
+        "RFC3906",
+        "RFC5082",
+        "RFC5286",
+        "RFC5714",
+        "RFC5715",
+        "RFC5798",
+        "RFC6527",
+        "RFC6571",
+        "RFC6976",
+        "RFC6981",
+        "RFC7226",
+        "RFC7431",
+        "RFC7490",
+        "RFC7811",
+        "RFC7812",
+        "RFC7916",
+        "RFC7938",
+        "RFC8102",
+        "RFC8177",
+        "RFC8294",
+        "RFC8333",
+        "RFC8347",
+        "RFC8405",
+        "RFC8518",
+        "RFC8529",
+        "RFC8530",
+        "RFC8541",
+        "RFC8678",
+        "RFC8695",
+        "RFC9067",
+        "RFC9403",
+        "RFC9568",
+        "RFC9855"
+      ]
+    },
+    {
+      "rank": 31,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9303",
+      "source_group_id": "rfc-wg-update-f55d5e3009ad110f5c6e",
+      "original_version_id": "RFC9303",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9303.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7423,
+          "version_id": "rfc-editor:erratum:7423",
+          "url": "https://errata.rfc-editor.org/eid7423/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9303"
+      ],
+      "conservative_group_members": [
+        "RFC6830",
+        "RFC6831",
+        "RFC6832",
+        "RFC6833",
+        "RFC6834",
+        "RFC6835",
+        "RFC6836",
+        "RFC7052",
+        "RFC7215",
+        "RFC7834",
+        "RFC7835",
+        "RFC7954",
+        "RFC7955",
+        "RFC8060",
+        "RFC8061",
+        "RFC8111",
+        "RFC8113",
+        "RFC8378",
+        "RFC9299",
+        "RFC9300",
+        "RFC9301",
+        "RFC9302",
+        "RFC9303",
+        "RFC9304",
+        "RFC9305",
+        "RFC9306",
+        "RFC9437",
+        "RFC9735",
+        "RFC10040"
+      ]
+    },
+    {
+      "rank": 32,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC8881",
+      "source_group_id": "rfc-wg-update-08db0207c1e42e2ceebd",
+      "original_version_id": "RFC8881",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8881.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7386,
+          "version_id": "rfc-editor:erratum:7386",
+          "url": "https://errata.rfc-editor.org/eid7386/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC5661",
+        "RFC7862",
+        "RFC8178",
+        "RFC8434",
+        "RFC8881"
+      ],
+      "conservative_group_members": [
+        "RFC1831",
+        "RFC1832",
+        "RFC1833",
+        "RFC2203",
+        "RFC2623",
+        "RFC2624",
+        "RFC2695",
+        "RFC3010",
+        "RFC3530",
+        "RFC4506",
+        "RFC5403",
+        "RFC5531",
+        "RFC5532",
+        "RFC5661",
+        "RFC5662",
+        "RFC5663",
+        "RFC5664",
+        "RFC5665",
+        "RFC5666",
+        "RFC5667",
+        "RFC5716",
+        "RFC6641",
+        "RFC6688",
+        "RFC7204",
+        "RFC7530",
+        "RFC7531",
+        "RFC7532",
+        "RFC7533",
+        "RFC7569",
+        "RFC7861",
+        "RFC7862",
+        "RFC7863",
+        "RFC7931",
+        "RFC8000",
+        "RFC8154",
+        "RFC8166",
+        "RFC8167",
+        "RFC8178",
+        "RFC8267",
+        "RFC8275",
+        "RFC8276",
+        "RFC8434",
+        "RFC8435",
+        "RFC8587",
+        "RFC8797",
+        "RFC8881",
+        "RFC9289",
+        "RFC9561",
+        "RFC9737",
+        "RFC9754",
+        "RFC9766"
+      ]
+    },
+    {
+      "rank": 33,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7430",
+      "source_group_id": "rfc-wg-update-8ac879ae6818232953d2",
+      "original_version_id": "RFC7430",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7430.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4565,
+          "version_id": "rfc-editor:erratum:4565",
+          "url": "https://errata.rfc-editor.org/eid4565/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7430"
+      ],
+      "conservative_group_members": [
+        "RFC6181",
+        "RFC6182",
+        "RFC6356",
+        "RFC6824",
+        "RFC6897",
+        "RFC7430",
+        "RFC8041",
+        "RFC8684"
+      ]
+    },
+    {
+      "rank": 34,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9580",
+      "source_group_id": "rfc-wg-update-3a2ed38584d83568bf4f",
+      "original_version_id": "RFC9580",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9580.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8454,
+          "version_id": "rfc-editor:erratum:8454",
+          "url": "https://errata.rfc-editor.org/eid8454/"
+        },
+        {
+          "errata_id": 8465,
+          "version_id": "rfc-editor:erratum:8465",
+          "url": "https://errata.rfc-editor.org/eid8465/"
+        },
+        {
+          "errata_id": 8466,
+          "version_id": "rfc-editor:erratum:8466",
+          "url": "https://errata.rfc-editor.org/eid8466/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC1991",
+        "RFC2440",
+        "RFC4880",
+        "RFC5581",
+        "RFC6637",
+        "RFC9580"
+      ],
+      "conservative_group_members": [
+        "RFC1991",
+        "RFC2015",
+        "RFC2440",
+        "RFC3156",
+        "RFC4880",
+        "RFC5581",
+        "RFC6637",
+        "RFC9580",
+        "RFC9980"
+      ]
+    },
+    {
+      "rank": 35,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7970",
+      "source_group_id": "rfc-wg-update-3e3e52d049afbc2eadd6",
+      "original_version_id": "RFC7970",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7970.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 5351,
+          "version_id": "rfc-editor:erratum:5351",
+          "url": "https://errata.rfc-editor.org/eid5351/"
+        },
+        {
+          "errata_id": 5543,
+          "version_id": "rfc-editor:erratum:5543",
+          "url": "https://errata.rfc-editor.org/eid5543/"
+        },
+        {
+          "errata_id": 5544,
+          "version_id": "rfc-editor:erratum:5544",
+          "url": "https://errata.rfc-editor.org/eid5544/"
+        },
+        {
+          "errata_id": 5583,
+          "version_id": "rfc-editor:erratum:5583",
+          "url": "https://errata.rfc-editor.org/eid5583/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC5070",
+        "RFC6685",
+        "RFC7970"
+      ],
+      "conservative_group_members": [
+        "RFC5070",
+        "RFC6045",
+        "RFC6046",
+        "RFC6545",
+        "RFC6546",
+        "RFC6684",
+        "RFC6685",
+        "RFC7203",
+        "RFC7495",
+        "RFC7970",
+        "RFC8134",
+        "RFC8274",
+        "RFC8322",
+        "RFC8600",
+        "RFC8727"
+      ]
+    },
+    {
+      "rank": 36,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9562",
+      "source_group_id": "rfc-wg-update-b8d3e155e2f4bf016527",
+      "original_version_id": "RFC9562",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9562.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7929,
+          "version_id": "rfc-editor:erratum:7929",
+          "url": "https://errata.rfc-editor.org/eid7929/"
+        },
+        {
+          "errata_id": 7955,
+          "version_id": "rfc-editor:erratum:7955",
+          "url": "https://errata.rfc-editor.org/eid7955/"
+        },
+        {
+          "errata_id": 7958,
+          "version_id": "rfc-editor:erratum:7958",
+          "url": "https://errata.rfc-editor.org/eid7958/"
+        },
+        {
+          "errata_id": 8288,
+          "version_id": "rfc-editor:erratum:8288",
+          "url": "https://errata.rfc-editor.org/eid8288/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC4122",
+        "RFC9562"
+      ],
+      "conservative_group_members": [
+        "RFC4122",
+        "RFC9562"
+      ]
+    },
+    {
+      "rank": 37,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9463",
+      "source_group_id": "rfc-wg-update-0b02643ef800fc940ed1",
+      "original_version_id": "RFC9463",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9463.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 7804,
+          "version_id": "rfc-editor:erratum:7804",
+          "url": "https://errata.rfc-editor.org/eid7804/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9463"
+      ],
+      "conservative_group_members": [
+        "RFC9461",
+        "RFC9462",
+        "RFC9463",
+        "RFC9606",
+        "RFC9704"
+      ]
+    },
+    {
+      "rank": 38,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC7665",
+      "source_group_id": "rfc-wg-update-6ecca199aa155e72abda",
+      "original_version_id": "RFC7665",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7665.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 4528,
+          "version_id": "rfc-editor:erratum:4528",
+          "url": "https://errata.rfc-editor.org/eid4528/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC7665"
+      ],
+      "conservative_group_members": [
+        "RFC7498",
+        "RFC7665",
+        "RFC8300",
+        "RFC8393",
+        "RFC8459",
+        "RFC8924",
+        "RFC8979",
+        "RFC9145",
+        "RFC9263",
+        "RFC9451",
+        "RFC9452",
+        "RFC9516"
+      ]
+    },
+    {
+      "rank": 39,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "origin_id": "rfc-editor:RFC9815",
+      "source_group_id": "rfc-wg-update-2d497affc1a3f919125c",
+      "original_version_id": "RFC9815",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9815.txt",
+      "erratum_urls": [
+        {
+          "errata_id": 8835,
+          "version_id": "rfc-editor:erratum:8835",
+          "url": "https://errata.rfc-editor.org/eid8835/"
+        }
+      ],
+      "known_update_chain_ids": [
+        "RFC9815"
+      ],
+      "conservative_group_members": [
+        "RFC9815",
+        "RFC9816"
+      ]
+    }
+  ],
+  "primary_ids_in_order": [
+    "RFC9171",
+    "RFC7469",
+    "RFC9167",
+    "RFC9886",
+    "RFC8239",
+    "RFC9204",
+    "RFC9622",
+    "RFC9711",
+    "RFC8345",
+    "RFC8972",
+    "RFC9793",
+    "RFC8949",
+    "RFC7644",
+    "RFC8765",
+    "RFC8995",
+    "RFC8259",
+    "RFC8620",
+    "RFC7940",
+    "RFC8824",
+    "RFC8360",
+    "RFC8466",
+    "RFC9132",
+    "RFC8794",
+    "RFC9493",
+    "RFC9115",
+    "RFC7584",
+    "RFC9605",
+    "RFC7574",
+    "RFC7788",
+    "RFC8678",
+    "RFC9303",
+    "RFC8881"
+  ],
+  "backup_ids_in_order": [
+    "RFC7430",
+    "RFC9580",
+    "RFC7970",
+    "RFC9562",
+    "RFC9463",
+    "RFC7665",
+    "RFC9815"
+  ],
+  "primary_body_request_count": 88,
+  "group_rule": "Union all known update/obsolete edges across the complete RFC index, then all same actual working-group members, transitively. One origin per resulting component. Add any semantic/template/derivation equivalence discovered during later development curation; never split to hit32.",
+  "backup_rule": "Only ordered backups for a documented license failure, unavailable source or true history inapplicability, never model outcome or baseline success. Preserve primary failure and all exposures.",
+  "content_cutoff": "Only original RFC and exact official erratum URLs frozen here; later update-chain documents are metadata references, not acquired automatically. Snapshot retrieval time fixes current published erratum body/status, not historical verification time.",
+  "source_time_rule": "Publication/report dates are source metadata. observed_at is actual receipt. valid_time is unknown unless source text explicitly supports it. Verified status at receipt must not be assigned retroactively to report date.",
+  "read_log": "artifacts/v13-4/t0-acquisition/exposure.jsonl",
+  "artifact_root": "artifacts/v13-4/t0-acquisition",
+  "view_separation": {
+    "raw": "raw/<origin>/",
+    "acquisition_metadata": "receipts/",
+    "evaluator_fit": "evaluator/"
+  },
+  "new_model_http_allowed": false,
+  "source_and_config_changes_allowed": false,
+  "remote_writes_allowed": false,
+  "corpus_redistribution": "NOT_AUTHORIZED_BY_ACQUISITION; preserve per-source notices and unresolved erratum license scope",
+  "immutable_rule": "Never rewrite this freeze; any change requires a new append-only amendment before changed source access."
+}
