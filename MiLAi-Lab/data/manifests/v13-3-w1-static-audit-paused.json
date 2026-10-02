@@ -1,0 +1,110 @@
+{
+  "kind": "V13_3_W1_PARTIAL_STATIC_AUDIT_PAUSE",
+  "state": "PAUSED_HOLD",
+  "baseline_commit": "22addcbc378a75d7f854ddc4127eb80f45ca52fb",
+  "method_branch": "feat/lab-edm-cep-method-implementation-v13-3-20261002",
+  "source_original_report": "/cra/memory/mx_memory/MiLAi-worktrees/v13-3-edm-cep-method-implementation/MiLAi-Lab/artifacts/v13-3-method-engineering/w1-interface-audit/CURRENT_STATUS.md",
+  "source_original_report_sha256": "d057111d0410cccf9e2d7aeda106cb44321c76fce12eba5bc7a34a471c044332",
+  "public_report": "docs/V13_3_W1_STATIC_AUDIT_PAUSED.md",
+  "original_status_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-3-edm-cep-method-implementation/MiLAi-Lab/artifacts/v13-3-method-engineering/w1-interface-audit/paused-status.json",
+  "original_status_sha256": "e52001e0d8d060e1414760f585c2c3e8eceaf2d4ceff89787337ec0626a5e8aa",
+  "original_index_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-3-edm-cep-method-implementation/MiLAi-Lab/artifacts/v13-3-method-engineering/w1-interface-audit/paused-originals-index.json",
+  "original_index_sha256": "2a432cedb534ef5453fcfb9d2a3db9af798384d5ba7a2b4b063445d2b4b6533e",
+  "source_static_command_count": 26,
+  "failed_static_commands": [
+    {
+      "label": "primitive-inventory",
+      "argv": [
+        "rg",
+        "-n",
+        "event.processing|processed_event|processed_events|processing_state|unconsumed|consumption|semantic_receipts|def test_.*(reuse|replay|noop|no_op|no_change|stale|resume|reopen|pending|source|observation|admission|snapshot|cache)",
+        "src/milai_lab/memory",
+        "src/milai_lab/methods",
+        "src/milai_lab/contracts",
+        "tests/memory/test_v13_2_direct_support.py",
+        "tests/memory/test_v13_2_schema.py",
+        "tests/memory/test_v13_2_read_protocol.py",
+        "tests/unit/test_generation_admission.py",
+        "tests/memory/test_v13_1_p5_compare.py"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "18fe724860b72aaeac41f6dbcf8203270000b47732b2cbb2fe8e66a6be9a1e0f",
+      "stderr_sha256": "ff245d0b5414648089898db6d917fe7cfcf00b6631b069e70998ffbfc4061d70"
+    },
+    {
+      "label": "historical-primitives-discovery",
+      "argv": [
+        "rg",
+        "-n",
+        "^(class |def |    def )|pending|consum|processed|unchanged|no_change|revision|snapshot|alias",
+        "src/milai_lab/methods/contextual_memory/content_patch.py",
+        "src/milai_lab/methods/contextual_memory/write_contract.py",
+        "src/milai_lab/methods/contextual_memory/revision.py",
+        "src/milai_lab/methods/local_state_attention/writers.py",
+        "src/milai_lab/methods/local_state_attention/service.py",
+        "tests/unit/test_contextual_content_patch.py"
+      ],
+      "returncode": 2,
+      "stdout_sha256": "7e439b19d9ec4619ab205a902e71506b8401b90c12dca52d0ff4a38bc0c9b3da",
+      "stderr_sha256": "dbbd233b6c2a17639b6a7ad9a64ab7f6c509c610e76a2a0d9ed732647b0d33c7"
+    }
+  ],
+  "read_source_test_identities": {
+    "src/milai_lab/memory/service.py": "aa6b3013a3b51302f7d41b5f006c76526f7fb9d990bc152bff73aeb9a25864f3",
+    "src/milai_lab/contracts/read_protocol.py": "754a003afeaa357036cc443a6198fc964f7b51260829ca2a8f1799086bdbd62f",
+    "src/milai_lab/methods/grounded_memory.py": "c743c292c16a6ed6153a484b15978809932601ac349b962b1efe929ee80b8ec0",
+    "src/milai_lab/providers/generation_admission.py": "13fe9440733c0a3f3b54310d806cb3df75c1a9413a9bd49c11e34717fc7ee4bf",
+    "src/milai_lab/providers/chat_bridge.py": "c50e3e412ac5fb1d77af862e55213e569f68a27668349011b7acdba6301e7a53",
+    "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a",
+    "src/milai_lab/runners/v13_1_d0.py": "3cab6658ecf2d43e73dece416f5d260e91d086f3cc1d51abea922083b0195552",
+    "src/milai_lab/runners/v13_1_p5.py": "62696c7c2f652a0f49f49d5d385039921263ccbeb67551b001b283f0dcce149e",
+    "src/milai_lab/memory/service_tools.py": "7d21b394e2db3583d5cc5362254c7b7465fd822d3c86afb96cf44a9c1969b0a3",
+    "src/milai_lab/application/journal.py": "6b5ab1b478bf00158829e2a22898a04a77928f5812690f6ab0e6dd6c5485dad7",
+    "tests/memory/test_v13_2_schema.py": "c5e9eb29c87919a3e3a10625b34e3643ec71d37aa3d3fecacf3c09b8b59e7e62",
+    "src/milai_lab/runners/v13_1_p5_compare.py": "681074b1166910fa636c917ba709b872f60f3a70acc60628192b9cc6ff3869e1",
+    "src/milai_lab/contracts/common_boundary.py": "9d7470fc841eb4f1a40195eefb999a6fef19482204d5c6702a1a72cc43727c7c",
+    "tests/memory/test_v13_2_common_boundary.py": "d4fd86999e735633b8edd6bac6b405a85b7495bc9fefe9405abc16e004283b30",
+    "tests/memory/test_v13_2_read_protocol.py": "0c32df928122681759d25d7b0afcb51a86e1f35639b73c0e119726406acb0147",
+    "src/milai_lab/methods/contextual_memory/write_contract.py": "5ce2f4be7abdde608c93ed0470b8820dccffa4d6544cd209883646011ade9beb",
+    "src/milai_lab/methods/local_state_attention/writers.py": "e0297da8486ff09e0df7690c4ce43b18f9f146bcaac388ab3b8b80c0d5450cad",
+    "tests/memory/test_v13_2_direct_support.py": "0ba90ac21af11a0cf00832d608591eefe25926b77d612212083e4dfc9d9b5a36",
+    "tests/memory/test_v13_2_generation_admission.py": "7feb585a7be2df484f9290b077bd9d359e52d47e3c2943bb7e0396efdb7267e8",
+    "src/milai_lab/methods/local_state_attention/bank.py": "df459a2a0d63a0e82f0ee5afada5f233050e775f83cd2c85dfefc487534a6454"
+  },
+  "W1_acceptance": "NOT_COMPLETED",
+  "method_edits": 0,
+  "mechanism_runs": 0,
+  "pytest_runs": 0,
+  "SDK_runs": 0,
+  "actual_model_HTTP": 0,
+  "installed_SDK_identity": "NOT_CHECKED_IN_V13_3",
+  "limitations": [
+    "Read-only partial W1 audit; no completed acceptance or method quality claim.",
+    "No installed SDK/environment identity was inspected; only existing Lab pin constant and public checkout HEAD/method locations.",
+    "Existing synthetic test bodies were read, not executed.",
+    "No Root experiment/config/scoring/ledger/PR materials read.",
+    "Pause bookkeeping is separate from static audit; terminal log self-reference is not claimed."
+  ],
+  "original_index_is_pre_bookkeeping_snapshot": true,
+  "pre_bookkeeping_index_current_matches": 77,
+  "pre_bookkeeping_index_changes": [
+    {
+      "path": "commands.json",
+      "reason": "recorder appended final pause-status receipt after initial index; original 26 commands retained",
+      "before_sha256": "b4931ee2373270e73f07ce10394d08b3f0ce691f3a58437febcf272633092848",
+      "after_sha256": "a320aa04cfdfd2a1079d892affc57c56ed193fd8866385a921aba8dd82f6b634"
+    }
+  ],
+  "final_stable_index": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-3-edm-cep-method-implementation/MiLAi-Lab/artifacts/v13-3-method-engineering/w1-interface-audit/final-stable-index.json",
+    "sha256": "a3b136ebf28fc8d92c1c6fe68f9d28ebca8dc7164f4e2ec85e08126b27b5fcef",
+    "indexed_files": 84,
+    "total_regular_files": 85,
+    "self_excluded": true,
+    "Root_hash_issues": []
+  },
+  "index_timing_note": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-3-edm-cep-method-implementation/MiLAi-Lab/artifacts/v13-3-method-engineering/w1-interface-audit/INDEX_TIMING_NOTE.md",
+    "sha256": "3f2a492be2369f8cbfc141e23f53799787346e4e102ffb38ce402536766b5a3d"
+  }
+}
