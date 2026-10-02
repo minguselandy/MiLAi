@@ -1,0 +1,40 @@
+{
+  "kind": "V13_4_N1_READER_DATE_CLARIFICATION_R1",
+  "status": "FROZEN_BEFORE_REAL_REQUESTS",
+  "timestamp_utc": "2026-10-02T16:49:25.585877+00:00",
+  "development_revision": 1,
+  "purpose": "Interface/reader metadata semantics check, not H1/H2 efficacy revision",
+  "earliest_break": "3/4 first Reader responses attribute original correction/confirmation date from archive observed_at",
+  "competing_explanations": [
+    "Reader interprets ambiguous observed_at as utterance/publication date",
+    "Overstatement persists despite explicit general time-field semantics"
+  ],
+  "single_change": {
+    "field": "reader_system_prompt",
+    "appended_clause": " The observed_at field records when the archive received an event. It does not establish when the speaker originally made the statement or correction, when it was published, or when its contents became valid. Use explicit source content as the evidence for those dates.",
+    "old_config_sha256": "7029bbc97e9b1bf1026d4f7518cf51818a9cfc2dbce22b8736d81eef9afb822a",
+    "new_config_sha256": "b46abad78b456f094654faa34c5eaaacce79f05e64008ed247c4e54d4e2dfce7"
+  },
+  "kept_equal": [
+    "original3 source bodies",
+    "original4 questions",
+    "ordinary BM25 candidate algorithm/order",
+    "material schema",
+    "2048 evidence budget",
+    "candidate32",
+    "host/capacity/tokenizer",
+    "temperature0/thinkingfalse",
+    "single Reader/no writer/no planner",
+    "shared continuous ledger"
+  ],
+  "real_source_observation_times": "fresh diagnostic ingestion timestamps; this is a fresh wiring run, not an exact replay of identical full prompt bytes",
+  "planned_requests": 4,
+  "success_criteria": [
+    "All4 core expected answers retained under original rubric",
+    "No date attribution solely from observed_at",
+    "All complete-body/hash/readonly/cost/admission controls remain satisfied"
+  ],
+  "stop": "Retain first answers; on service or bank/instrumentation error stop, no automatic retry; no further wording search without a separately documented decision",
+  "scope": "synthetic exposed diagnostic; not T0 independent histories or generalization",
+  "source_code_changes": []
+}
