@@ -65,6 +65,7 @@ def ordered_source_plan(
 def chain_rag_plan(
     snapshot: ChainResearchSnapshot, *, evidence_budget: int,
     token_count: Callable[[str], int],
+    group_priority: tuple[str, ...] | None = None,
 ) -> ChainSelectionPlan:
     """Prefer whole actual relation components; preserve explicit partial-chain failures.
 
@@ -85,6 +86,12 @@ def chain_rag_plan(
         if group.group_id not in seen:
             groups.append(group)
             seen.add(group.group_id)
+    if group_priority is not None:
+        if (type(group_priority) is not tuple or len(group_priority) != len(groups)
+                or set(group_priority) != seen):
+            raise ValueError("CORRECTION_GROUP_PRIORITY_INVALID")
+        by_id = {group.group_id: group for group in groups}
+        groups = [by_id[group_id] for group_id in group_priority]
     selected: list[str] = []
     complete, incomplete = [], []
     decisions = []
@@ -206,5 +213,9 @@ def pack_complete(
             planning_estimated_tokens=plan.estimated_tokens,
             planning_minus_material_tokens=plan.estimated_tokens - tokens,
             packing_omitted_ids=tuple(key for key in plan.selected_ids
-                                      if key not in delivered_ids))
+                                      if key not in delivered_ids),
+            cost_scope=("per-span planning estimate; exact complete-unit packing; "
+                        "delta includes packing omissions" if plan.strategy == "slot_retrieve_v1"
+                        else "first group exact; later boundaries estimated; "
+                             "delta includes packing omissions"))
     return material, receipt

@@ -11,6 +11,7 @@ from typing import Any
 from milai_lab.contracts.correction_relation import (
     ChainResearchSnapshot,
     DeliveryReceipt,
+    MetadataChainSnapshot,
     QueryView,
     SelectionPlan,
     canonical,
@@ -20,6 +21,7 @@ from milai_lab.contracts.correction_relation import (
 )
 from milai_lab.harness.contextual_artifacts import current_http_budget
 from milai_lab.methods.correction_evidence import chain_rag_plan, ordered_source_plan, pack_complete
+from milai_lab.methods.correction_metadata import slot_retrieve_plan, temporal_scope_plan
 from milai_lab.methods.correction_reader import FrozenBankReader
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.generation_admission import DurableGenerationAdmission
@@ -123,13 +125,41 @@ def run_query(
 ) -> dict[str, Any]:
     """Injected readers are mechanical controls; only AccountedReader is a real-model path."""
     wall, cpu = time.perf_counter_ns(), time.process_time_ns()
-    if method not in {"ordered_source_v1", "chain_rag_v1"}:
+    if method not in {"ordered_source_v1", "chain_rag_v1", "temporal_scope_chain_v1",
+                      "slot_retrieve_v1"}:
         raise ValueError("CORRECTION_METHOD_UNAVAILABLE")
     with bank.guard(query):
         snapshot = bank.retrieve(query, limit=candidate_limit)
         select_wall, select_cpu = time.perf_counter_ns(), time.process_time_ns()
         plan: SelectionPlan
-        if method == "chain_rag_v1":
+        diagnostics: dict[str, Any] | None = None
+        metadata_measure: dict[str, Any] = {}
+        if isinstance(snapshot, MetadataChainSnapshot):
+            payload = canonical(asdict(snapshot))
+            cue_payload = canonical([asdict(cue) for cue in snapshot.cue_projections])
+            metadata_measure = {
+                "selector_input_logical_bytes": len(payload.encode()),
+                "selector_input_serialized_tokens": bank.token_count(payload),
+                "selector_cue_logical_bytes": len(cue_payload.encode()),
+                "selector_cue_serialized_tokens": bank.token_count(cue_payload),
+                "cost_scope": "serialized selector snapshot, including query; cue subset overlaps; "
+                              "metadata is not Reader material or provider usage",
+                "pool_projection_omission_cue_ids": tuple(
+                    cue.cue_id for cue in snapshot.cue_projections
+                    if len(cue.candidate_ids) < cue.total_projected_spans),
+                "quote_partial_projection": {cue.cue_id: cue.partial_quote_candidate_ids
+                    for cue in snapshot.cue_projections if cue.partial_quote_candidate_ids},
+                "ambiguous_quote_cue_ids": tuple(cue.cue_id for cue in snapshot.cue_projections
+                                                  if cue.quote_match_count > 1),
+            }
+        if method in {"temporal_scope_chain_v1", "slot_retrieve_v1"}:
+            if not isinstance(snapshot, MetadataChainSnapshot):
+                raise ValueError("CORRECTION_METADATA_SNAPSHOT_REQUIRED")
+            select = (temporal_scope_plan if method == "temporal_scope_chain_v1"
+                      else slot_retrieve_plan)
+            plan, diagnostics = select(snapshot, evidence_budget=evidence_budget,
+                                       token_count=bank.token_count)
+        elif method == "chain_rag_v1":
             if not isinstance(snapshot, ChainResearchSnapshot):
                 raise ValueError("CORRECTION_CHAIN_SNAPSHOT_REQUIRED")
             plan = chain_rag_plan(snapshot, evidence_budget=evidence_budget,
@@ -138,6 +168,8 @@ def run_query(
             plan = ordered_source_plan(snapshot, evidence_budget=evidence_budget,
                                        token_count=bank.token_count)
         bank.emit({"event": "correction_selection", "plan": asdict(plan),
+                   **({"metadata_accounting": metadata_measure, "diagnostics": diagnostics}
+                      if metadata_measure else {}),
                    "wall_ns": time.perf_counter_ns() - select_wall,
                    "cpu_ns": time.process_time_ns() - select_cpu})
         units = bank.read_selected(snapshot, plan.selected_ids)
@@ -159,7 +191,17 @@ def run_query(
                   "cpu_ns": time.process_time_ns() - cpu,
                   "scientific_status": ("B1_MECHANICAL_ONLY_NOT_T0_RESULT"
                                          if method == "chain_rag_v1"
+                                         else "N2_BASELINE_ENTRY_NOT_T0_RESULT"
+                                         if method in {"temporal_scope_chain_v1",
+                                                       "slot_retrieve_v1"}
                                          else "N1_ENTRY_ONLY_NOT_CHAIN_RAG_OR_T0_RESULT")}
+        if metadata_measure:
+            result.update(requested_method=method, effective_method=plan.strategy,
+                          selector_metadata_accounting=metadata_measure,
+                          reader_material_plus_selector_input_serialized_tokens=(
+                              delivery.material_tokens
+                              + metadata_measure["selector_input_serialized_tokens"]),
+                          selector_diagnostics=diagnostics)
         # Check JSON serializability before completing the guarded path.
         canonical(result)
     bank.emit({"event": "correction_readonly_result", **result})

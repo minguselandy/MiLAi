@@ -31,9 +31,9 @@
   "counts": {
     "v13_4_requirements": 122,
     "v13_4_statuses": {
-      "NOT_VERIFIED": 94,
+      "NOT_VERIFIED": 87,
       "PASSED_SCOPED": 12,
-      "PARTIAL": 16
+      "PARTIAL": 23
     },
     "original_requirements": 48,
     "original_statuses": {
@@ -546,8 +546,12 @@
       "requirement": "CorrectionRelation 保存旧句柄、新 Source、显式变化、未决维度及原文 span；非三选一且不能全枚举时 open_set。",
       "completion_evidence": "合同与多维/开放集合/错版本/错来源控制。",
       "condition": "before_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n2-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-chain-index-results.json"
+      ],
+      "qualification": "Bound SourceRelation spans and actual public descriptors preserve provenance/unknown; semantic correction interpretations and natural query validation remain pending."
     },
     {
       "id": "V13_4-04-03",
@@ -638,8 +642,12 @@
       "requirement": "共享候选池，池外遗漏单列；候选 K=32 与诊断解释 H=4 是待 pilot 前冻结参数，并保留未枚举标记。",
       "completion_evidence": "前瞻 freeze、所有方法候选 ID/约束一致、池外漏失报告。",
       "condition": "before_pilot",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n2-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-chain-index-results.json"
+      ],
+      "qualification": "B1 shared BM25 seed/relation closure implements K32 and explicit outside/unclosed members; cross-method natural query comparison and H4 interpretation use remain pending."
     },
     {
       "id": "V13_4-05-01",
@@ -790,8 +798,12 @@
       "requirement": "可枚举合成问题先按原文验证 EC² 边切减/成本与 HEC 重叠区域；自然语言用共享近似结果模型/解释集合。",
       "completion_evidence": "非 gold 理论小例核验与主 B4 规格、实际信息同等。",
       "condition": "before_B4_admission",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md",
+        "artifacts/v13-4/n2-b4-reference/freeze.json"
+      ],
+      "qualification": "Five finite EC2 and two HEC models pass210 exact rational assertions; natural shared result model and interpretations remain NOT_RUN."
     },
     {
       "id": "V13_4-06-07",
@@ -918,8 +930,12 @@
       "requirement": "B1 Chain-RAG 使用相同普通检索、原始完整更正链与完整证据包装。",
       "completion_evidence": "冻结 B1 实现、共同候选/链及实际请求正文。",
       "condition": "before_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "data/manifests/v13-4-n2-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-chain-index-results.json"
+      ],
+      "qualification": "B1 mechanical implementation101 affected tests, independent span/chain toy review, package exact bytes and32-history query-free index verified. No T0 Reader result yet."
     },
     {
       "id": "V13_4-08-02",
@@ -930,8 +946,13 @@
       "requirement": "B2 Temporal-RAG 使用相同候选与可见时间/scope 字段，区分 observed_at 与 valid_time。",
       "completion_evidence": "冻结 B2 定义、时间字段来源及同预算执行。",
       "condition": "before_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+        "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-metadata-index-results.json"
+      ],
+      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified."
     },
     {
       "id": "V13_4-08-03",
@@ -942,8 +963,13 @@
       "requirement": "B3 Slot-Retrieve 根据共同预测缺失维度选源，不依赖复杂解释后验。",
       "completion_evidence": "冻结 B3 实现、共同 Q0/Q1 与信息权限。",
       "condition": "before_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+        "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-metadata-index-results.json"
+      ],
+      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified."
     },
     {
       "id": "V13_4-08-04",
@@ -954,8 +980,12 @@
       "requirement": "B4 Generic-Active 在 N2 准入前固定一个主 EC²-style/信息增益实现；相同解释/predictor/cost，不能结果后挑弱版本。",
       "completion_evidence": "预注册主实现/版本、共享信息 trace；不满足理论条件注明 approximation。",
       "condition": "before_N2_admission",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md",
+        "artifacts/v13-4/n2-b4-reference/freeze.json"
+      ],
+      "qualification": "EC2-style expected cut divided by cost once is locked before natural questions; finite-world structure verified. Natural approximation is NOT_RUN without shared honest outcome/prior model."
     },
     {
       "id": "V13_4-08-05",
@@ -1549,9 +1579,12 @@
       "status": "PARTIAL",
       "evidence": [
         "docs/V13_4_N2_FORMATION_PROTOCOL.md",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        "data/manifests/v13-4-n2-mechanical-checkpoint.json",
+        "data/manifests/v13-4-n2-chain-index-results.json",
+        "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md"
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending. B1 implementation/query-free natural index and finite-world B4 controls are now verified mechanically; B2/B3 cue freeze and natural annotations/results remain pending."
     },
     {
       "id": "V13_4-14-04",

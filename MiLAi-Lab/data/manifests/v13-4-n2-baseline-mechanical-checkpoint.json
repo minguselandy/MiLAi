@@ -1,0 +1,73 @@
+{
+  "kind": "V13_4_N2_BASELINE_MECHANICAL_CHECKPOINT",
+  "frozen_at_utc": "2026-10-02T18:19:36.653573+00:00",
+  "status": "PASSED_SCOPED_B1_B2_B3_NO_NATURAL_QUERY_RESULT",
+  "checks": {
+    "affected_tests": 136,
+    "ruff": "PASS",
+    "mypy_modules": 7,
+    "active_package_boundary": "PASS",
+    "independent_metadata_tests": 35,
+    "independent_real_tokenizer_toy_controls": 7,
+    "cue_adapter_toy_groups": 10,
+    "B4_finite_reference_assertions": 210
+  },
+  "runtime_source_sha256": {
+    "src/milai_lab/contracts/correction_relation.py": "e2f0d294513607db001cfe0c9c6223e57ef1fb2348b3dbe0b2ce1380070e843b",
+    "src/milai_lab/methods/correction_reader.py": "ea1b1b38f28590ddb95b9c5136588592d28c99ae7c31f4c2bfecee7cb06f842c",
+    "src/milai_lab/methods/correction_evidence.py": "0c44fd6d34f95271402842f141aad63d272e5724c3e7a9f01e34144bc14b2ca4",
+    "src/milai_lab/methods/correction_spans.py": "222f9de1bbc01744ff723873f1ec02dcf450eed0517154a69374351f77911f62",
+    "src/milai_lab/methods/correction_chains.py": "f40cc5f1447c35753468ca85ffa04f84ad9cf3920824885b184af247caaa1253",
+    "src/milai_lab/methods/correction_metadata.py": "cfa719b27353d1024020af8eb6f0404559776dfbe29b64cf74b6e6fbdadf94e7",
+    "src/milai_lab/runners/correction_evidence_eval.py": "f1efe56ad78d7319e69df14cc178ab23c864f682a469bb3dd612c2fd48bf16a9"
+  },
+  "artifacts": {
+    "artifacts/v13-4/n2-b23-checks/summary.json": "50d73938bbc3e65af0805a014294dcfb2370c20973764e2e6a02931303a8a5a7",
+    "artifacts/v13-4/n2-b23-checks/package-byte-check.json": "06827550c423be461345cd64a6888ab6159bff24a43e84601385c52912358f68",
+    "artifacts/v13-4/n2-review/b23-review.json": "75ffb6f351d017acd81585a2f387b31c944867f95dc6fe145e98a9b71e6782c3",
+    "artifacts/v13-4/n2-cue-adapter/toy-mechanical-checks.json": "181cc1e4d10e2bf8f8999b0b017488fb4587ea7b62ea5a59814f290ae60baf89"
+  },
+  "package": {
+    "wheel": "artifacts/v13-4/dist-n2-baselines/milai_lab-0.1.0-py3-none-any.whl",
+    "wheel_sha256": "b53ced23c079248061248e1cfd2072690d9216349c7971c32b9d5811102dd779",
+    "sdist": "artifacts/v13-4/dist-n2-baselines/milai_lab-0.1.0.tar.gz",
+    "sdist_sha256": "dfb932ce96c8f9fb2b4f9623a358212268f5beef0d6a3eefd0e4d9930c18362a",
+    "all_seven_runtime_modules_byte_match": [
+      "src/milai_lab/contracts/correction_relation.py",
+      "src/milai_lab/methods/correction_reader.py",
+      "src/milai_lab/methods/correction_evidence.py",
+      "src/milai_lab/methods/correction_spans.py",
+      "src/milai_lab/methods/correction_chains.py",
+      "src/milai_lab/methods/correction_metadata.py",
+      "src/milai_lab/runners/correction_evidence_eval.py"
+    ],
+    "build": "uv build --offline --out-dir artifacts/v13-4/dist-n2-baselines",
+    "runtime_source_sha256": {
+      "src/milai_lab/contracts/correction_relation.py": "e2f0d294513607db001cfe0c9c6223e57ef1fb2348b3dbe0b2ce1380070e843b",
+      "src/milai_lab/methods/correction_reader.py": "ea1b1b38f28590ddb95b9c5136588592d28c99ae7c31f4c2bfecee7cb06f842c",
+      "src/milai_lab/methods/correction_evidence.py": "0c44fd6d34f95271402842f141aad63d272e5724c3e7a9f01e34144bc14b2ca4",
+      "src/milai_lab/methods/correction_spans.py": "222f9de1bbc01744ff723873f1ec02dcf450eed0517154a69374351f77911f62",
+      "src/milai_lab/methods/correction_chains.py": "f40cc5f1447c35753468ca85ffa04f84ad9cf3920824885b184af247caaa1253",
+      "src/milai_lab/methods/correction_metadata.py": "cfa719b27353d1024020af8eb6f0404559776dfbe29b64cf74b6e6fbdadf94e7",
+      "src/milai_lab/runners/correction_evidence_eval.py": "f1efe56ad78d7319e69df14cc178ab23c864f682a469bb3dd612c2fd48bf16a9"
+    },
+    "no_model_requests": true
+  },
+  "protocol": {
+    "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+    "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+  },
+  "actual_model_requests": 0,
+  "natural_query_reads_in_method_development": 0,
+  "T0_reader_runs": 0,
+  "limitations": [
+    "Mechanical provenance/projection/selection/fallback only, not verified semantic cue truth or G1.",
+    "2048 is Reader material only; common selector metadata scale and lifecycle costs are additional.",
+    "B2 conservative English axis/date and scope feature limits do not eliminate stronger native temporal systems.",
+    "B4 finite-world validation is not natural B4 admission."
+  ],
+  "earlier_failures": [
+    "Initial ruff line lengths/explicit Unicode escape and mypy receipt keyword typing corrected.",
+    "Independent review separated partial quote coverage from candidate-pool projection omission before final checks."
+  ]
+}

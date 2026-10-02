@@ -1,0 +1,57 @@
+{
+  "kind": "V13_4_N2_QUERY_FREE_CUE_FREEZE",
+  "frozen_at_utc": "2026-10-02T18:16:45.010368+00:00",
+  "status": "FROZEN_BEFORE_NATURAL_EXTRACTION",
+  "adapter": {
+    "path": "artifacts/v13-4/n2-cue-adapter/query_free_cue_adapter.py",
+    "sha256": "7056562254274f063b7ff1aa0c52be8d3f3cf88ddd86be3cd9ebf8fbf269086e"
+  },
+  "spec": {
+    "path": "artifacts/v13-4/n2-cue-adapter/input-spec.json",
+    "sha256": "311f524ae57a432e065cbfb36115c529042a2b7c085d27d18d11e791b46ab7b3"
+  },
+  "independent_root_review": "source read plus10 toy groups passed; no open findings",
+  "native_rules": "Explicit dt/dd public field labels and RFC first32-line header publication; no inferred effective time or Month-to-ISO conversion",
+  "writer_rule": "7 original shape/quote-valid records only;57 unknown unchanged; no response repair/reparse",
+  "selector_descriptor_fields": [
+    "dimension",
+    "value",
+    "quote_spans",
+    "provenance",
+    "time_axis"
+  ],
+  "source_body_quote_rule": "All exact overlapping occurrences on the same frozen Source/hash; only intersecting already frozen spans; partial/repeated association is not E* sufficiency",
+  "queries_created": 0,
+  "new_model_calls": 0,
+  "input_spec": {
+    "protocol": "v13.4-query-free-cue-adapter-v1",
+    "source_catalog": {
+      "path": "artifacts/v13-4/n2-formation/source-catalog.json",
+      "sha256": "16aa1128527b8f679c59d4e255c8bfe03517b455e216edf88a3dcbdb61e926c2"
+    },
+    "bank_before": {
+      "path": "artifacts/v13-4/n2-formation/bank-before.json",
+      "sha256": "a50efcc419fb4e751c272ff067fe842d75321b3604afcc7ff649bd7e449f2e1e"
+    },
+    "writer_terminal": {
+      "path": "artifacts/v13-4/n2-formation/terminal.json",
+      "sha256": "2aa0a3eedbde5b551f7b70988208b4b148b9048bae64403c347e865a0b8a8fa0"
+    },
+    "index_receipts_manifest": {
+      "path": "data/manifests/v13-4-n2-chain-index-results.json",
+      "sha256": "1029a6c4c091b1864efe74e2691474c283195028bf6ea6fff85bc67a8ac10e9e"
+    },
+    "capacity_config": {
+      "path": "configs/v13-4-n2-chain-index.json",
+      "sha256": "3c6b4c83a6724517d40122da4609e9b5ed795a8fb9b135ab25194e124c4cb72a"
+    },
+    "metadata_dir": "artifacts/v13-4/n2-formation/metadata",
+    "expected_writer_total": 64,
+    "expected_writer_valid": 7,
+    "expected_origins": 32
+  },
+  "outputs_planned": [
+    "artifacts/v13-4/n2-cue-adapter/natural-cues.json",
+    "artifacts/v13-4/n2-cue-adapter/natural-cues.json.cost.json"
+  ]
+}

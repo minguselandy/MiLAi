@@ -179,6 +179,50 @@ class SourceRelation:
 
 
 @dataclass(frozen=True)
+class FrozenEvidenceCue:
+    """A public field or frozen extraction hypothesis, never a verified semantic fact."""
+
+    dimension: str
+    value: str
+    quote_spans: tuple[BoundSourceSpan, ...]
+    provenance: str
+    time_axis: str | None = None
+
+    def __post_init__(self) -> None:
+        if (self.dimension not in {"time", "scope", "exception", "relation"}
+                or type(self.value) is not str or not self.value.strip()
+                or type(self.quote_spans) is not tuple or not self.quote_spans
+                or any(not isinstance(span, BoundSourceSpan) for span in self.quote_spans)
+                or self.provenance not in {"native_public", "frozen_writer"}
+                or self.time_axis not in {None, "publication", "report", "verification",
+                                          "effective"}
+                or (self.time_axis is not None and self.dimension != "time")
+                or (self.time_axis == "effective" and self.provenance != "frozen_writer")):
+            raise ValueError("CORRECTION_CUE_INVALID")
+        if len({(span.source_ref, span.source_sha256, span.body_text_sha256)
+                for span in self.quote_spans}) != 1:
+            raise ValueError("CORRECTION_CUE_REQUIRES_ONE_SOURCE")
+
+    @property
+    def cue_id(self) -> str:
+        return "cue-" + digest(asdict(self))
+
+
+@dataclass(frozen=True)
+class EvidenceCueView:
+    cue_id: str
+    dimension: str
+    value: str
+    provenance: str
+    time_axis: str | None
+    date_literals: tuple[str, ...]
+    candidate_ids: tuple[str, ...]
+    total_projected_spans: int
+    partial_quote_candidate_ids: tuple[str, ...]
+    quote_match_count: int
+
+
+@dataclass(frozen=True)
 class ChainGroup:
     group_id: str
     candidate_ids: tuple[str, ...]
@@ -217,6 +261,24 @@ class ChainResearchSnapshot(ResearchSnapshot):
     ordinary_seed_ids: tuple[str, ...]
     pool_omitted_ids: tuple[str, ...]
     unclosed_relation_ids: tuple[str, ...]
+
+
+@dataclass(frozen=True, kw_only=True)
+class MetadataChainSnapshot(ChainResearchSnapshot):
+    cue_projections: tuple[EvidenceCueView, ...]
+    metadata_sha256: str
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        check_sha(self.metadata_sha256)
+        pool = {candidate_identity(candidate) for candidate in self.candidates}
+        if (len({cue.cue_id for cue in self.cue_projections}) != len(self.cue_projections)
+                or any(not cue.candidate_ids or not set(cue.candidate_ids) <= pool
+                       or cue.total_projected_spans < len(cue.candidate_ids)
+                       or not set(cue.partial_quote_candidate_ids) <= set(cue.candidate_ids)
+                       or cue.quote_match_count < 1
+                       for cue in self.cue_projections)):
+            raise ValueError("CORRECTION_CUE_POOL_BINDING_CHANGED")
 
 
 @dataclass(frozen=True)

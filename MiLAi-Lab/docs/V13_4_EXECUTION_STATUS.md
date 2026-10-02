@@ -39,14 +39,24 @@ N1 新增四个opt-in模块：研究合同、冻结来源适配器、完整正�
 
 [64次形成全部终态](../data/manifests/v13-4-n2-formation-results.json)：64 HTTP 200，**115,463 tokens**，0 embedding、0重试、0新unknown请求。7份通过形状和逐字quote校验，55份含非逐字正文quote、2份JSON无效；按预注册整份unknown政策保留57份失败，不修输出、不补调用。7份校验通过也不证明语义正确。所有实际wire与冻结WriterView一致，prompt计数误差0，来源/事实前后逐字一致。准备CPU/物理I/O未测，不能写成零。
 
-v13.4累计现为 **72 generation / 121,475 known及charged tokens / 0 embedding**；连续账本9,470次生成、known 27,128,352、charged 27,158,739，历史unknown1保留。自然query仍为0，T0仍未准入。只读span入口已增加384正文token的无损query-free分段，并通过独立toy边界审查；实际关系构造及B1/B2共同候选/预算还在冻结实现中，尚不构成T0实证。
+v13.4累计现为 **72 generation / 121,475 known及charged tokens / 0 embedding**；连续账本9,470次生成、known 27,128,352、charged 27,158,739，历史unknown1保留。自然query仍为0，T0仍未准入。形成结果已在`92d768d`保存；后续B1及query-free索引检查点为`08f82d8`。
 
-下一步先冻结段落关系映射、B1/B2/B3共同信息与K32/装包规则、B4可枚举结构控制，再建立隔离的自然问题、允许部分答案和最小充分集合标注，完成现行冻结后才运行T0。不能把整篇长RFC作为不可拆单元制造预算失败，也不能把57份抽取失败当作廉价metadata已无预测信号的T1结论。
+[B1机械检查点](../data/manifests/v13-4-n2-mechanical-checkpoint.json)已通过101项受影响测试、独立span/chain toy复核、ruff/mypy、依赖边界及wheel/sdist逐字核对。384正文token的无损Unicode分段保留全部字符；K32候选按普通BM25 seed补实际关系闭包，按完整证据组原子装包，缺口显式记录。
+
+[自然索引](../data/manifests/v13-4-n2-chain-index-results.json)已在无query、无模型条件下覆盖32历史、96来源、4,650片段；冻结公开标签/逐字匹配adapter产生60条关系（47 exact_quote、3 ambiguous、10 quoted_only），4条因标签或TBD保持unknown。原件未定位或公开节号错误没有人工补入运行时。59个证据连通组中7个整体超过2048；整组超限不等于query的充分证据超限，不能直接计作G1缺口。索引wall45.55秒、CPU45.55秒，逻辑I/O保留，物理I/O未测，来源/事实不变。
+
+B4的[主定义](V13_4_GENERIC_ACTIVE_DEFINITION.md)已锁定EC²-style单次选择与成本仅除一次；有限世界5个EC²/2个HEC模型的210项精确算术检查通过。自然轨道共享结果模型/先验仍未就绪，B4保持NOT_RUN，不宣称优于它。
+
+[B2/B3共同规则](V13_4_N2_BASELINE_PROTOCOL.md)及实现已冻结：136项受影响测试、7模块ruff/mypy/边界通过；独立35窄测与7组真实tokenizer toy检查通过，最终wheel/sdist七模块逐字一致。无可用线索时直接回退B1；日期轴/合法粒度/否定比较/多日期歧义保守处理。原文引文的部分片段、K池外投影与重复位置分开记录。
+
+[实际cue形成](../data/manifests/v13-4-n2-cue-results.json)产生215个Source绑定cue：160条公开publication/report/verification字面日期与55条原冻结Writer线索；37个原生格式字段无法逐字对应正文，保持unknown。57份Writer失败仍未修复。没有effective日期cue，不能用其他日期替代。[共同metadata索引](../data/manifests/v13-4-n2-metadata-index-results.json)已复核全部32历史、60关系、215cue均消费一次，4,650片段和原B1关系逐项不变。Source/fact状态不变，0新模型请求；本轮索引wall42.41秒/CPU42.41秒。它只证明线索及投影出处，不是T1预测信号。
+
+本次Reader2048材料与选择器共同索引metadata明确分开计量；额外metadata的序列化规模、读取和形成费用不能称为免费或整pipeline只有2048。总freeze之后按[T0标注协议](V13_4_T0_ANNOTATION_PROTOCOL.md)建立隔离的128自然问题、允许部分答案和最小充分集合，再经实际预算/driver准入才运行T0。不能把整篇长RFC作为不可拆单元制造预算失败，也不能把57份抽取失败当作廉价metadata已无预测信号的T1结论。
 
 T1真实元数据、T2 pilot、T3正式/公开迁移、最近邻原生接入、独立标注/第二家族、正式统计与论文复现仍未完成，按G1/G2等条件推进；EDM/CEP及旧48项写入/恢复义务继续保留。[持续进度](../data/manifests/v13-4-progress.json)记录完整未完成范围。
 
 ## 可追溯限制与恢复
 
-所有原Provider日志、SQLite、构建包和文献原件保留在本工作树ignored `artifacts/v13-4/`；Git只存代码、协议、索引及紧凑结果。初次无隔离build缺hatchling后使用缓存离线构建成功；一次边界命令误扫整个Lab后以标准活动包入口重跑通过；一个摘要辅助脚本字段名过期引发KeyError，运行器自身的冻结校验独立通过，补充核验已完成且未重复模型请求。均未改写失败为成功。
+所有原Provider日志、SQLite、构建包和文献原件保留在本工作树ignored `artifacts/v13-4/`；Git只存代码、协议、索引及紧凑结果。初次无隔离build缺hatchling后使用缓存离线构建成功；一次边界命令误扫整个Lab后以标准活动包入口重跑通过；一个摘要辅助脚本字段名过期引发KeyError，运行器自身的冻结校验独立通过，补充核验已完成且未重复模型请求。均未改写失败为成功。metadata索引首轮Root直接比较tuple/list误报变化，序列化片段/关系实际一致；失败版driver/日志保留，在新R1目录以canonical比较完成，无方法/数据修订或模型重试。
 
 回滚基点`2319401b…`；本地源码检查点`9ec7c19…`，历史远端只作基点核对。全程无需新服务或模型部署，现有服务配置未改。

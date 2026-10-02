@@ -7,12 +7,14 @@
     "9ec7c19",
     "57bfac5",
     "18092f7",
-    "1cdf810"
+    "1cdf810",
+    "92d768d",
+    "08f82d8"
   ],
   "work_packages": {
     "N0": "PARTIAL_SOURCE_ELIGIBILITY_PENDING",
     "N1": "PASSED_SCOPED_SOURCE_READER",
-    "N2": "SOURCE_AUDIT_AND_PREFORMATION_DONE_BASELINES_AND_T0_ANNOTATIONS_PENDING",
+    "N2": "B1_B2_B3_METADATA_INDEX_FROZEN_T0_ANNOTATIONS_AND_ACTUAL_RESULTS_PENDING",
     "N3": "PARTIAL_FORMATION_SUBSTEP_MOVED_BEFORE_QUERY_OTHER_WORK_G1_REQUIRED",
     "N4": "NOT_STARTED_G2_REQUIRED",
     "N5": "NOT_STARTED_METHOD_AND_PILOT_FREEZE_REQUIRED",
@@ -21,9 +23,9 @@
   "requirements": {
     "v13_4_requirements": 122,
     "v13_4_statuses": {
-      "NOT_VERIFIED": 94,
+      "NOT_VERIFIED": 87,
       "PASSED_SCOPED": 12,
-      "PARTIAL": 16
+      "PARTIAL": 23
     },
     "original_requirements": 48,
     "original_statuses": {
@@ -42,8 +44,8 @@
   "current_reader_config": "configs/v13-4-readonly-q0.json",
   "rejected_reader_config": "configs/v13-4-readonly-q0-r1.json",
   "next_actions": [
-    "Freeze and validate query-free passage relation mapping and B1 common pool; original quote mismatch and public pointer errors stay unresolved in runtime",
-    "Freeze B2/B3 visible metadata/cost rules and B4 finite-world controls before query authorship",
+    "Create128 natural queries and evaluator annotations after total prequery freeze; no method result-based question selection",
+    "Verify exact evidence bindings and semantic solvability/alternatives, then freeze T0 runtime driver and256-slot budget admission",
     "Construct32-history T0 natural queries/solvability/allowed partial answers/E* with honest source-family and stratum gaps",
     "Run T0 B1/B2 only after current data/baseline/source/budget freeze; distinguish relation ambiguity from ordinary retrieval and Reader failures",
     "Use G1/G2 to decide conditional predictor/T1/T2/T3 and retain all original48 obligations"
@@ -84,5 +86,47 @@
     "semantic_quality": "NOT_EVALUATED",
     "queries_created": 0,
     "result": "data/manifests/v13-4-n2-formation-results.json"
+  },
+  "query_free_index": {
+    "origins": 32,
+    "sources": 96,
+    "lossless_spans": 4650,
+    "source_relations": 60,
+    "unresolved_public_relation_records": 4,
+    "queries_created": 0,
+    "model_calls": 0,
+    "result": "data/manifests/v13-4-n2-chain-index-results.json"
+  },
+  "B1_mechanical": {
+    "affected_tests_passed": 101,
+    "package_bytes_verified": true,
+    "independent_engineering_review": true,
+    "checkpoint": "data/manifests/v13-4-n2-mechanical-checkpoint.json"
+  },
+  "B4_reference": {
+    "exact_rational_assertions": 210,
+    "EC2_models": 5,
+    "HEC_models": 2,
+    "natural_status": "NOT_RUN",
+    "definition": "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md"
+  },
+  "baseline_mechanical": {
+    "affected_tests_passed": 136,
+    "independent_metadata_tests": 35,
+    "independent_real_tokenizer_toys": 7,
+    "package_modules_exact": 7,
+    "checkpoint": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json"
+  },
+  "shared_metadata_index": {
+    "origins": 32,
+    "spans": 4650,
+    "relations": 60,
+    "cues": 215,
+    "effective_date_cue_sources": 0,
+    "scope_cue_sources": 7,
+    "T1_signal": "NOT_EVALUATED",
+    "queries_created": 0,
+    "model_calls": 0,
+    "result": "data/manifests/v13-4-n2-metadata-index-results.json"
   }
 }

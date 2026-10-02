@@ -12,6 +12,8 @@ from milai_lab.contracts.correction_relation import (
     ChainResearchSnapshot,
     EvidenceCandidate,
     EvidenceSpanCandidate,
+    FrozenEvidenceCue,
+    MetadataChainSnapshot,
     QueryView,
     ResearchSnapshot,
     SegmentProfile,
@@ -32,6 +34,7 @@ from milai_lab.methods.correction_chains import (
     expand_candidate_pool,
 )
 from milai_lab.methods.correction_evidence import source_unit
+from milai_lab.methods.correction_metadata import CompiledEvidenceMetadata, compile_cues
 from milai_lab.methods.correction_spans import segment_body
 
 
@@ -49,6 +52,7 @@ class FrozenBankReader:
         emit: Callable[[dict[str, Any]], None] | None = None,
         segmentation: SegmentProfile | None = None,
         source_relations: tuple[SourceRelation, ...] | None = None,
+        source_cues: tuple[FrozenEvidenceCue, ...] | None = None,
     ) -> None:
         if (service.mutation_contract != "event_bound_v1"
                 or service.candidate_contract != "read_handle_v1"):
@@ -64,6 +68,11 @@ class FrozenBankReader:
             or any(not isinstance(relation, SourceRelation) for relation in source_relations)
         ):
             raise ValueError("CORRECTION_QUERY_FREE_RELATIONS_REQUIRE_SPANS")
+        if source_cues is not None and (
+            source_relations is None or type(source_cues) is not tuple
+            or any(not isinstance(cue, FrozenEvidenceCue) for cue in source_cues)
+        ):
+            raise ValueError("CORRECTION_CUES_REQUIRE_CHAIN_INDEX")
         self.service = service
         self.cutoff = cutoff
         self.config_sha256 = config_sha256
@@ -71,7 +80,9 @@ class FrozenBankReader:
         self.tokenizer_sha256 = digest(tokenizer_identity)
         self.segmentation = segmentation
         self.source_relations = source_relations
+        self.source_cues = source_cues
         self._chains: CompiledChains | None = None
+        self._metadata: CompiledEvidenceMetadata | None = None
         self.emit = emit or (lambda event: None)
         self._entries: list[IndexEntry] = []
         self._candidates: dict[str, EvidenceCandidate] = {}
@@ -240,6 +251,11 @@ class FrozenBankReader:
             self._chains = compile_chains(self.source_relations, [candidate for candidate in
                 span_candidates if isinstance(candidate, EvidenceSpanCandidate)],
                 eligible_sources, self.token_count)
+            if self.source_cues is not None:
+                self._metadata = compile_cues(self.source_cues, [candidate for candidate in
+                    span_candidates if isinstance(candidate, EvidenceSpanCandidate)],
+                    eligible_sources, self.token_count)
+                self.emit(self._metadata.receipt)
         after, _ = self._fact_state("freeze_after")
         if before != after:
             raise ValueError("CORRECTION_BANK_CHANGED_DURING_FREEZE")
@@ -254,6 +270,8 @@ class FrozenBankReader:
             **({"source_relations": [asdict(relation) for relation in self.source_relations],
                 "chain_groups": [asdict(group) for group in self._chains.groups]}
                if self.source_relations is not None and self._chains is not None else {}),
+            **({"metadata_sha256": self._metadata.metadata_sha256}
+               if self._metadata is not None else {}),
         })
         receipt = {"event": "correction_source_index", "query_free": True,
                    "index_sha256": self.index_sha256, "bank_sha256": before,
@@ -273,6 +291,10 @@ class FrozenBankReader:
             receipt.update(relation_count=len(self._chains.relation_members),
                            chain_groups=[asdict(group) for group in self._chains.groups],
                            relation_validation="literal span/hash binding; semantics unchecked")
+        if self._metadata is not None:
+            receipt.update(metadata_sha256=self._metadata.metadata_sha256,
+                           cue_projections=[asdict(cue) for cue in self._metadata.cues],
+                           cue_index=self._metadata.receipt)
         self.emit(receipt)
         return receipt
 
@@ -327,9 +349,20 @@ class FrozenBankReader:
             retrieval=("ordinary_bm25_span_closure_v1" if self._chains is not None
                        else "ordinary_bm25_span_v1" if self.segmentation is not None
                        else "ordinary_bm25_source_v1"))
-        snapshot = (ChainResearchSnapshot(**snapshot_args, **chain_fields)
-                    if self._chains is not None
-                    else ResearchSnapshot(**snapshot_args))
+        snapshot: ResearchSnapshot
+        if self._metadata is not None:
+            pool_ids = {self._entries[i].key for i in order}
+            cues = tuple(replace(cue, candidate_ids=tuple(
+                key for key in cue.candidate_ids if key in pool_ids),
+                partial_quote_candidate_ids=tuple(
+                    key for key in cue.partial_quote_candidate_ids if key in pool_ids))
+                for cue in self._metadata.cues if pool_ids.intersection(cue.candidate_ids))
+            snapshot = MetadataChainSnapshot(
+                **snapshot_args, **chain_fields, cue_projections=cues,
+                metadata_sha256=self._metadata.metadata_sha256)
+        else:
+            snapshot = (ChainResearchSnapshot(**snapshot_args, **chain_fields)
+                        if self._chains is not None else ResearchSnapshot(**snapshot_args))
         self._issued[snapshot.snapshot_sha256] = snapshot
         self.emit({"event": "correction_candidate_pool", "snapshot": asdict(snapshot),
                    "snapshot_sha256": snapshot.snapshot_sha256,
