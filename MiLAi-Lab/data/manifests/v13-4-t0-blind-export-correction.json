@@ -1,0 +1,29 @@
+{
+  "kind": "V13_4_T0_BLIND_EXPORT_MECHANICAL_CORRECTION",
+  "at_utc": "2026-10-02T19:08:25.173992+00:00",
+  "historical_checkpoint": {
+    "path": "data/manifests/v13-4-t0-evaluator-mechanical-checkpoint.json",
+    "sha256": "296d4fe7b183c01b23e6a490c51bc01b698edd89ddc0a81c59bd82c3de426bba"
+  },
+  "historical_export_source": {
+    "path": "artifacts/v13-4/t0-scoring/revision-r0/blind_export.py",
+    "sha256": "94f2501058a918ddcaa10b4e2326cd8d18f2d5cb701927ef3c6b8a5ee8ee2846"
+  },
+  "final_export_source": {
+    "path": "artifacts/v13-4/t0-scoring/blind_export.py",
+    "sha256": "d08b15a8bee1315e7d36b8171a90d2ea27775290c077f9fab64c333d2c714c57"
+  },
+  "checks": {
+    "path": "artifacts/v13-4/t0-scoring/summary-r1.json",
+    "sha256": "8b97ca57733da7291d2c91a524632820ccf01b37340bcf98a3dcbaa3d9120abf",
+    "toy_tests_passed": 19
+  },
+  "corrections": [
+    "Accept exact driver failure.json terminal and preserve all planned slots",
+    "Require result.requested_method matches frozen slot; effective B2 fallback remains legal"
+  ],
+  "scope": "Evaluator transport/blinding checks; methods, driver, questions, gold and score rules unchanged",
+  "Root_source_review": "r0 full source plus r1 exact diff reviewed before natural export/answer reading",
+  "naturally_exported_before_correction": false,
+  "natural_answers_read_by_tool_author_or_Root_before_correction": false
+}

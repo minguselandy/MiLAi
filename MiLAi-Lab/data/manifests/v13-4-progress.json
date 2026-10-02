@@ -12,12 +12,13 @@
     "08f82d8",
     "5230d02",
     "1c85c67",
-    "bbc1227"
+    "bbc1227",
+    "c5ceb44"
   ],
   "work_packages": {
     "N0": "PARTIAL_SOURCE_ELIGIBILITY_PENDING",
     "N1": "PASSED_SCOPED_SOURCE_READER",
-    "N2": "T0_256_READER_SLOTS_ADMITTED_RUNNING",
+    "N2": "T0_READER_COMPLETED_METHOD_BLIND_SCORING_IN_PROGRESS",
     "N3": "PARTIAL_FORMATION_SUBSTEP_MOVED_BEFORE_QUERY_OTHER_WORK_G1_REQUIRED",
     "N4": "NOT_STARTED_G2_REQUIRED",
     "N5": "NOT_STARTED_METHOD_AND_PILOT_FREEZE_REQUIRED",
@@ -38,8 +39,8 @@
       "NOT_VERIFIED": 16
     }
   },
-  "new_generation_requests": 72,
-  "new_known_and_charged_tokens": 121475,
+  "new_generation_requests": 328,
+  "new_known_and_charged_tokens": 685409,
   "new_embedding_requests": 0,
   "T0_scored_histories": 0,
   "T0_scored_queries": 0,
@@ -55,12 +56,12 @@
   "existing_blocker": "No terminal blocker; remaining work is authorized and in progress",
   "Product": "NO_GO",
   "remote_v13_4_published": false,
-  "ledger_current_sha256": "4cb03be89899b5ee9ab00ae5fdb62f8c7476c14667accfc6678421a14995ba93",
+  "ledger_current_sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
   "ledger_current": {
-    "generation_requests": 9470,
+    "generation_requests": 9726,
     "generation": {
-      "charged_tokens": 27158739,
-      "known_tokens": 27128352,
+      "charged_tokens": 27722673,
+      "known_tokens": 27692286,
       "unknown_usage": 1
     },
     "embedding": {
@@ -134,18 +135,19 @@
   },
   "T0_authoring": {
     "release": "data/manifests/v13-4-t0-authoring-freeze.json",
-    "status": "FROZEN_READER_RUNNING",
+    "status": "READER_COMPLETED_METHOD_BLIND_SCORING",
     "provenance_checked_draft_queries": 128,
     "semantic_review": "All128 reviewed; accepted scoped nonexhaustive E*; no independent Judge",
     "driver": "artifacts/v13-4/run_t0.py",
     "driver_sha256": "f843cceade0b94184b48aa3a749d302c69900d083460ea0c07130eebd2a2eaa8",
     "driver_toy_checks": 4,
     "natural_prepare_executed": true,
-    "actual_T0_Reader_calls": "IN_PROGRESS_SEE_DURABLE_RUN_AND_CONTINUOUS_LEDGER",
-    "last_updated_at_utc": "2026-10-02T19:03:11.657202+00:00",
+    "actual_T0_Reader_calls": 256,
+    "last_updated_at_utc": "2026-10-02T19:14:28.946709+00:00",
     "draft_queries_written": 128,
     "annotation_freeze": "data/manifests/v13-4-t0-annotation-freeze.json",
     "reader_admission": "data/manifests/v13-4-t0-reader-admission.json",
-    "reader_run": "artifacts/v13-4/t0-q0"
+    "reader_run": "artifacts/v13-4/t0-q0",
+    "reader_result": "data/manifests/v13-4-t0-reader-execution-results.json"
   }
 }
