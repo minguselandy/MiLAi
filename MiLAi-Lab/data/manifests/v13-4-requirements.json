@@ -2,7 +2,7 @@
   "kind": "V13_4_FULL_PLAN_REQUIREMENTS_AND_INHERITANCE",
   "schema_version": 1,
   "created_on": "2026-10-03",
-  "status": "ACTIVE_REQUIREMENTS_INVENTORY_NOT_ACCEPTANCE",
+  "status": "CLOSED_CONDITIONAL_SIMPLIFY_NOT_ALL_REQUIREMENTS_PASSED",
   "product": "NO_GO",
   "scope": "完整 v13.4 N0-N6、T0-T3 及条件分支；保留原 v13.2 48 项原要求/状态/条件，不用只读研究替代集成验收。",
   "authorization": {
@@ -31,9 +31,10 @@
   "counts": {
     "v13_4_requirements": 122,
     "v13_4_statuses": {
-      "NOT_VERIFIED": 87,
-      "PASSED_SCOPED": 12,
-      "PARTIAL": 23
+      "PARTIAL": 31,
+      "PASSED_SCOPED": 48,
+      "NOT_VERIFIED": 42,
+      "NOT_PASSED": 1
     },
     "original_requirements": 48,
     "original_statuses": {
@@ -291,8 +292,25 @@
       "requirement": "保留 Grounded Memory、Verified Object References、Semantic/Episodic Memory、Grounded Revision、Lifecycle Recovery 总方向与单一逻辑 MemoryService；研究解释不产生事实或授权。",
       "completion_evidence": "架构与权限边界审查、研究注释与公开事实隔离的实际测试。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "单一来源/事实边界复用，本批事实与Source状态不变；研究元数据未提升为授权。",
+      "closeout_limits": [
+        "仅只读prototype；持久业务状态和完整生命周期义务未重验。"
+      ]
     },
     {
       "id": "V13_4-00-02",
@@ -303,8 +321,25 @@
       "requirement": "按完整链/时态缺口→真实元数据信号→同信息独立贡献的顺序执行；不先建完整信念图、多世界复制、常驻 verifier 或全量 Agent 重构。",
       "completion_evidence": "阶段准入与 Go/Simplify/Stop 决策记录；实现范围与条件门禁一致。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "实际执行至T0，保留先G1再T1/复杂方法的顺序，未先建多世界/常驻verifier平台。",
+      "closeout_limits": [
+        "仅本批顺序合规；不等于H1/H2/H3通过。"
+      ]
     },
     {
       "id": "V13_4-01-01",
@@ -380,8 +415,21 @@
       "requirement": "只读研究独立准入；新增持久写入、业务动作和默认切换仍受原 E0/安全/恢复要求约束。",
       "completion_evidence": "G0-Read 与 G0-Integrate 两份独立判定及适用范围。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        }
+      ],
+      "closeout_evidence_statement": "只读入口独立准入，G0-Integrate/原E0/D4保持原未通过/未准入。",
+      "closeout_limits": [
+        "不授权新增持久写入、业务动作或默认切换。"
+      ]
     },
     {
       "id": "V13_4-01-06",
@@ -404,8 +452,21 @@
       "requirement": "更正可同时含变化、追溯纠正和局部覆盖；保留未决维度，明确当前 B 正常使用，不强迫三选一。",
       "completion_evidence": "混合关系/明确更正/无歧义的结构与真实查询结果。",
       "condition": "before_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "显式开放维度合同、当前更正与范围问题已执行。",
+      "closeout_limits": [
+        "混合潜在关系机制和解释集合覆盖未建立。"
+      ]
     },
     {
       "id": "V13_4-02-02",
@@ -416,8 +477,33 @@
       "requirement": "分别评价当前明确对象、陈述历史、追溯适用、跨时间/范围/对象四类自然问题。",
       "completion_evidence": "四类 query 的 evaluator 标注与逐类效用结果，保留不确定性。",
       "condition": "T0_through_T3",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "四类各32题/臂，按题型与可解性汇总256冻结语义效用。",
+      "closeout_limits": [
+        "单人开发审查；无混合准确率、正式泛化或独立Judge。"
+      ]
     },
     {
       "id": "V13_4-02-03",
@@ -445,8 +531,21 @@
       "requirement": "依次检验 H1 同预算简单方法有缺口、H2 真实 query-free 元数据在未见来源有信号、H3 同信息成本有独立净收益。",
       "completion_evidence": "H1/H2/H3 各自预注册比较、真实数据和决定；不互相替代。",
       "condition": "conditional_research_sequence",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "按H1门禁审查，未通过后Simplify。",
+      "closeout_limits": [
+        "H2/H3未准入，不能宣称真实元数据信号或算法收益。"
+      ]
     },
     {
       "id": "V13_4-02-05",
@@ -469,8 +568,29 @@
       "requirement": "不得免费让 LLM 对所有解释预回答；候选一致不证明解释集合覆盖真实解释。",
       "completion_evidence": "所有形成/推理调用账本、open_set/漏假设报告与 claims 审查。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        }
+      ],
+      "closeout_evidence_statement": "主运行仅事前Writer与每槽一次Reader，没有为全部解释另调查询规划LLM。",
+      "closeout_limits": [
+        "仅本批调用合同；开放解释覆盖仍未证明。"
+      ]
     },
     {
       "id": "V13_4-03-01",
@@ -562,8 +682,25 @@
       "requirement": "EvidenceMetadata 保存来源身份、主体/属性、时间/范围线索及出处，保留 unknown/conflict，不冒称语义真值。",
       "completion_evidence": "真实 writer 形成样本、来源绑定和缺失/冲突/错误标记。",
       "condition": "before_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-cue-results.json",
+          "sha256": "17c498457629c155f38d5efa445965933261512d651b454b6e8df015309f4ab2"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        }
+      ],
+      "closeout_evidence_statement": "实际EvidenceMetadata带来源/quote/provenance与unknown；7结构/逐字通过和57整份unknown原样保留。",
+      "closeout_limits": [
+        "形状与出处检查不证明语义真值；subjects/properties不用于本批选择器。"
+      ]
     },
     {
       "id": "V13_4-04-04",
@@ -578,9 +715,25 @@
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
       ],
-      "qualification": "N1 query/candidate/snapshot/selected/omitted costs exist; predicted mask and broader semantic relation contracts await N3."
+      "qualification": "N1 query/candidate/snapshot/selected/omitted costs exist; predicted mask and broader semantic relation contracts await N3.",
+      "closeout_evidence_statement": "本批QueryView只有自然问题及driver绑定权限/cutoff，Q0和选择/遗漏回执冻结。",
+      "closeout_limits": [
+        "Q1未训练；更完整预测mask与后续策略条件未验。"
+      ]
     },
     {
       "id": "V13_4-04-05",
@@ -591,13 +744,45 @@
       "requirement": "DeliveryReceipt 保存实际送达 span/版本/token/快照/read 事件；非空、选中、完整送达和 Reader 消费分开计量。",
       "completion_evidence": "实际 Reader 请求与 receipt 可逐 span 对账；消费由独立评分确认。",
       "condition": "before_G0_Read",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-evaluator-mechanical-checkpoint.json",
+          "sha256": "296d4fe7b183c01b23e6a490c51bc01b698edd89ddc0a81c59bd82c3de426bba"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
       ],
-      "qualification": "Source-only delivery spans/hash/token/wire receipts verified in8 requests. Nonempty record version guards tested offline; broader method version delivery and correct consumption remain unverified."
+      "qualification": "Source-only delivery spans/hash/token/wire receipts verified in8 requests. Nonempty record version guards tested offline; broader method version delivery and correct consumption remain unverified.",
+      "closeout_evidence_statement": "256实际HTTP材料/版本/span/token与prepared一一绑定；覆盖与效用分报。",
+      "closeout_limits": [
+        "限定冻结入口；覆盖不证明正确消费，保留7个full-E* Reader错误。"
+      ]
     },
     {
       "id": "V13_4-04-06",
@@ -612,9 +797,25 @@
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-cue-results.json",
+          "sha256": "17c498457629c155f38d5efa445965933261512d651b454b6e8df015309f4ab2"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        }
       ],
-      "qualification": "Storage time distinctions preserved and metadata validity unknown; Reader still confuses observation time with issuance in diagnostics. R1 not adopted."
+      "qualification": "Storage time distinctions preserved and metadata validity unknown; Reader still confuses observation time with issuance in diagnostics. R1 not adopted.",
+      "closeout_evidence_statement": "没有effective cue；原生publication/report/verification不能填valid_time，索引保留unknown。",
+      "closeout_limits": [
+        "Reader仍可能日期误归因；元数据机械轴绑定不是语义真值。"
+      ]
     },
     {
       "id": "V13_4-04-07",
@@ -645,9 +846,37 @@
       "status": "PARTIAL",
       "evidence": [
         "data/manifests/v13-4-n2-mechanical-checkpoint.json",
-        "data/manifests/v13-4-n2-chain-index-results.json"
+        "data/manifests/v13-4-n2-chain-index-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
       ],
-      "qualification": "B1 shared BM25 seed/relation closure implements K32 and explicit outside/unclosed members; cross-method natural query comparison and H4 interpretation use remain pending."
+      "qualification": "B1 shared BM25 seed/relation closure implements K32 and explicit outside/unclosed members; cross-method natural query comparison and H4 interpretation use remain pending.",
+      "closeout_evidence_statement": "K32共同池前瞻固定，123可解题K覆盖及2048完整单元见证通过。",
+      "closeout_limits": [
+        "E*非穷尽；自然解释H4覆盖未证明。"
+      ]
     },
     {
       "id": "V13_4-05-01",
@@ -658,12 +887,28 @@
       "requirement": "元数据仅在事件可见之后、未来问题出现之前 query-free 形成并冻结；不由 Reader 答案或检索注入文本形成新用户事实。",
       "completion_evidence": "每事件 WriterView cutoff/输入 hash、生成时间与 metadata hash；污染负控制。",
       "condition": "before_T1",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "docs/V13_4_N2_FORMATION_PROTOCOL.md",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending.",
+      "closeout_evidence_statement": "64次真实形成及cue/index冻结均先于128自然问题，Writer未见未来问题或答案。",
+      "closeout_limits": [
+        "仅该固定开发cohort；不能当未见来源T1信号。"
+      ]
     },
     {
       "id": "V13_4-05-02",
@@ -674,8 +919,29 @@
       "requirement": "已有 writer 输出的新增 token、存储、embedding 和解析失败全部计费；无 writer 的方案新增形成调用不算免费。",
       "completion_evidence": "共同账本的形成角色/增量成本、冷启动与生命周期报告。",
       "condition": "before_model_HTTP",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-cue-results.json",
+          "sha256": "17c498457629c155f38d5efa445965933261512d651b454b6e8df015309f4ab2"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "真实形成token、解析失败、metadata序列化规模和逻辑读取成本有记录；0 embedding据实。",
+      "closeout_limits": [
+        "准备CPU/物理I/O及完整生命周期实测仍不全，不能宣称成本为零或全测齐。"
+      ]
     },
     {
       "id": "V13_4-05-03",
@@ -686,8 +952,21 @@
       "requirement": "共同 Q0 使用所有未决维度；Q1 仅开发来源训练冻结的轻量 query head，不新调 LLM，仅自然问题与元数据特征。",
       "completion_evidence": "Q0/Q1 版本、group split、冻结参数、调用 trace 和逐维分类误差。",
       "condition": "before_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        }
+      ],
+      "closeout_evidence_statement": "共同Q0保守保留四维，不使用query_kind或新LLM规划。",
+      "closeout_limits": [
+        "Q1未实现/训练/验证。"
+      ]
     },
     {
       "id": "V13_4-05-04",
@@ -698,12 +977,28 @@
       "requirement": "缺失/无效元数据或不确定 query head 回退共同完整链/相关性，并报告原因；unknown 不当不相关证明。",
       "completion_evidence": "缺失、冲突、invalid、uncertain 回退控制及明确问题效用。",
       "condition": "before_T1",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "docs/V13_4_N2_FORMATION_PROTOCOL.md",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        }
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending.",
+      "closeout_evidence_statement": "无有效cue时回退B1合同与机械控制通过；实际B2有113槽fallback并记录。",
+      "closeout_limits": [
+        "fallback不证明证据无价值，更不排除强时态系统。"
+      ]
     },
     {
       "id": "V13_4-05-05",
@@ -714,8 +1009,25 @@
       "requirement": "主轨道一次性选源，新增独立查询规划 LLM 调用 0，最终 Reader 一次，保存原始答案。",
       "completion_evidence": "每 query 完整调用序列与账本、未重写原始输出。",
       "condition": "T0_through_T3",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "一次性选源，256槽各一次实际Reader，原始答案保存；无独立查询规划调用。",
+      "closeout_limits": [
+        "只读静态T0范围，不证明自适应方法。"
+      ]
     },
     {
       "id": "V13_4-05-06",
@@ -801,9 +1113,17 @@
       "status": "PARTIAL",
       "evidence": [
         "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md",
-        "artifacts/v13-4/n2-b4-reference/freeze.json"
+        "artifacts/v13-4/n2-b4-reference/freeze.json",
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        }
       ],
-      "qualification": "Five finite EC2 and two HEC models pass210 exact rational assertions; natural shared result model and interpretations remain NOT_RUN."
+      "qualification": "Five finite EC2 and two HEC models pass210 exact rational assertions; natural shared result model and interpretations remain NOT_RUN.",
+      "closeout_evidence_statement": "有限世界EC²/HEC参考有210项精确算术检查。",
+      "closeout_limits": [
+        "自然语言共享先验/结果模型未具备，B4自然NOT_RUN。"
+      ]
     },
     {
       "id": "V13_4-06-07",
@@ -814,8 +1134,21 @@
       "requirement": "缺观测概率则不可运行或注明 approximation，不能用 gold 补齐；相同元数据但正文交换的不可识别反例保留。",
       "completion_evidence": "不可运行条件、反事实诊断结果和信息上界说明。",
       "condition": "before_B4_admission",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        }
+      ],
+      "closeout_evidence_statement": "缺自然结果模型时B4保持NOT_RUN，未用gold补齐概率。",
+      "closeout_limits": [
+        "同metadata换正文等T1不可识别控制尚未执行。"
+      ]
     },
     {
       "id": "V13_4-07-01",
@@ -826,13 +1159,33 @@
       "requirement": "共同内容优先适配层完整装包，保留原候选顺序对照；正文受预算排除必须明确记遗漏。",
       "completion_evidence": "实际 HTTP 证据正文/顺序/token 对账及预算压力控制。",
       "condition": "before_G0_Read",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
       ],
-      "qualification": "Ordered-source complete-unit packer and omissions verified; B1/B2/B3/B4/M still need shared wiring."
+      "qualification": "Ordered-source complete-unit packer and omissions verified; B1/B2/B3/B4/M still need shared wiring.",
+      "closeout_evidence_statement": "内容优先完整公共单元装包与遗漏回执在本批真实请求中落地，实际材料不超过2048。",
+      "closeout_limits": [
+        "完整单元送达不是最小充分集合覆盖保证。"
+      ]
     },
     {
       "id": "V13_4-07-02",
@@ -843,13 +1196,29 @@
       "requirement": "所有方法冻结 bank，禁止事实 mutation；查询前后事实版本与来源不变，日志增量单列。",
       "completion_evidence": "真实 Store 前后快照/版本/hash 与只读查询断言，区分日志。",
       "condition": "before_G0_Read",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
       ],
-      "qualification": "Actual8 N1 queries preserve3 raw sources and empty fact bank; nonempty history/exception guard tested offline. All comparison methods not implemented."
+      "qualification": "Actual8 N1 queries preserve3 raw sources and empty fact bank; nonempty history/exception guard tested offline. All comparison methods not implemented.",
+      "closeout_evidence_statement": "形成/索引/T0前后Source与fact bank未改变，研究日志单列。",
+      "closeout_limits": [
+        "本批为空fact bank的只读实验；不等同非空业务集成恢复验收。"
+      ]
     },
     {
       "id": "V13_4-07-03",
@@ -877,13 +1246,29 @@
       "requirement": "G0-Read 以无业务副作用、冻结来源、真实可见材料、版本追溯、成本记录为准；N1/N2 足够推进，不等待完整 EDM/CEP。",
       "completion_evidence": "独立只读准入记录，机械验收与模型实验许可分离。",
       "condition": "before_readonly_experiments",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
       ],
-      "qualification": "N1 source-only G0-Read engineering controls passed scoped; T0 data/candidate/Chain/Temporal freeze still needed before T0 model calls."
+      "qualification": "N1 source-only G0-Read engineering controls passed scoped; T0 data/candidate/Chain/Temporal freeze still needed before T0 model calls.",
+      "closeout_evidence_statement": "本批G0-Read入口的隔离、冻结、可见正文、可追溯成本和只读终态有记录。",
+      "closeout_limits": [
+        "限定当前冻结入口；G0-Integrate/EDM/CEP未因此通过。"
+      ]
     },
     {
       "id": "V13_4-07-05",
@@ -918,8 +1303,29 @@
       "requirement": "不增常驻审稿/纠错代理、第二真相库、巨大 ontology、自动业务重试、隐式分页或最终答案重写；配置改动逐项 manifest。",
       "completion_evidence": "源码/配置差异清单、运行 trace 与实际启用配置。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "没有新增服务/常驻verifier/第二真相库或答案重写，配置与执行产物由freeze约束。",
+      "closeout_limits": [
+        "仅当前执行范围；不作为所有历史或未来操作的普遍安全证明。"
+      ]
     },
     {
       "id": "V13_4-08-01",
@@ -930,12 +1336,44 @@
       "requirement": "B1 Chain-RAG 使用相同普通检索、原始完整更正链与完整证据包装。",
       "completion_evidence": "冻结 B1 实现、共同候选/链及实际请求正文。",
       "condition": "before_T0",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n2-mechanical-checkpoint.json",
-        "data/manifests/v13-4-n2-chain-index-results.json"
+        "data/manifests/v13-4-n2-chain-index-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-chain-index-results.json",
+          "sha256": "1029a6c4c091b1864efe74e2691474c283195028bf6ea6fff85bc67a8ac10e9e"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
       ],
-      "qualification": "B1 mechanical implementation101 affected tests, independent span/chain toy review, package exact bytes and32-history query-free index verified. No T0 Reader result yet."
+      "qualification": "B1 mechanical implementation101 affected tests, independent span/chain toy review, package exact bytes and32-history query-free index verified. No T0 Reader result yet.",
+      "closeout_evidence_statement": "B1已实际运行128槽，记录完整关系组成本、显式遗漏及99/123枚举E*覆盖。",
+      "closeout_limits": [
+        "仅本地Chain-RAG；不代表所有完整链方法；不保证语义充分。"
+      ]
     },
     {
       "id": "V13_4-08-02",
@@ -946,13 +1384,33 @@
       "requirement": "B2 Temporal-RAG 使用相同候选与可见时间/scope 字段，区分 observed_at 与 valid_time。",
       "completion_evidence": "冻结 B2 定义、时间字段来源及同预算执行。",
       "condition": "before_T0",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "docs/V13_4_N2_BASELINE_PROTOCOL.md",
         "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
-        "data/manifests/v13-4-n2-metadata-index-results.json"
+        "data/manifests/v13-4-n2-metadata-index-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
       ],
-      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified."
+      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified.",
+      "closeout_evidence_statement": "自建B2使用共同候选及可见时间/scope字段，实际128槽完成。",
+      "closeout_limits": [
+        "113槽回退；无有效时间cue；不冒称原生Zep/TSM或排除更强时态方案。"
+      ]
     },
     {
       "id": "V13_4-08-03",
@@ -963,13 +1421,29 @@
       "requirement": "B3 Slot-Retrieve 根据共同预测缺失维度选源，不依赖复杂解释后验。",
       "completion_evidence": "冻结 B3 实现、共同 Q0/Q1 与信息权限。",
       "condition": "before_T1",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "docs/V13_4_N2_BASELINE_PROTOCOL.md",
         "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
-        "data/manifests/v13-4-n2-metadata-index-results.json"
+        "data/manifests/v13-4-n2-metadata-index-results.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
       ],
-      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified."
+      "qualification": "B2/B3 opt-in implementation,136 affected tests, independent35+7 toy controls, exact package bytes and shared query-free metadata index verified. Natural T0 performance and broader temporal-system equivalence remain unverified.",
+      "closeout_evidence_statement": "B3按共享Q0/cue的缺失维度选择规则已冻结，纳入1152离线组合。",
+      "closeout_limits": [
+        "无B3真实Reader主结果；不证明其质量或T1信号。"
+      ]
     },
     {
       "id": "V13_4-08-04",
@@ -983,9 +1457,25 @@
       "status": "PARTIAL",
       "evidence": [
         "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md",
-        "artifacts/v13-4/n2-b4-reference/freeze.json"
+        "artifacts/v13-4/n2-b4-reference/freeze.json",
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        }
       ],
-      "qualification": "EC2-style expected cut divided by cost once is locked before natural questions; finite-world structure verified. Natural approximation is NOT_RUN without shared honest outcome/prior model."
+      "qualification": "EC2-style expected cut divided by cost once is locked before natural questions; finite-world structure verified. Natural approximation is NOT_RUN without shared honest outcome/prior model.",
+      "closeout_evidence_statement": "B4主EC²-style定义事前锁定并通过有限世界结构控制。",
+      "closeout_limits": [
+        "自然输入的诚实共享模型缺失，不能升为可运行质量对照。"
+      ]
     },
     {
       "id": "V13_4-08-05",
@@ -1032,8 +1522,29 @@
       "requirement": "机制表共享 history/relation/metadata/candidate IDs/query head/权限/Reader/tokenizer/材料/读取预算；系统表允许原生表示差异且计形成成本。",
       "completion_evidence": "两类表分列，所有共同输入 hash 与实际约束对照。",
       "condition": "before_T2",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        }
+      ],
+      "closeout_evidence_statement": "本批B1/B2共享来源、候选、Reader、tokenizer、Q0、cue和材料预算，额外metadata规模单列。",
+      "closeout_limits": [
+        "2048仅Reader材料，不能当全pipeline总信息上限；自然B4/M及完整生命周期对照未做。"
+      ]
     },
     {
       "id": "V13_4-08-09",
@@ -1056,8 +1567,25 @@
       "requirement": "T0 建议 32 独立开发历史×4 自然查询；明确/无影响、单源、互补、不充分各 8；规模非功效保证。",
       "completion_evidence": "经资格审计的来源分组清单与 T0 freeze；未满足数量明确缺口。",
       "condition": "after_N0_and_G0_Read",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-acquisition.json",
+          "sha256": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        }
+      ],
+      "closeout_evidence_statement": "32实质RFC更正候选、每候选四类query，共128题。",
+      "closeout_limits": [
+        "未证明32历史相互独立；未满足/证明四种历史层各8；不能以32×4问题替代该分层。"
+      ]
     },
     {
       "id": "V13_4-09-02",
@@ -1068,8 +1596,21 @@
       "requirement": "旧 R9 仅回归不算新来源；真实公开历史保留原文并审计许可、重复、曝光。",
       "completion_evidence": "旧源排除/开发标签、许可出处、联合组和读取记录。",
       "condition": "before_any_new_content_read",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-acquisition.json",
+          "sha256": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6"
+        },
+        {
+          "path": "data/manifests/v13-4-n0-identity-check.json",
+          "sha256": "3d30a3ae1e2a578ad36aca2cef2ed9e299083c3635cddd283167ab37316b075c"
+        }
+      ],
+      "closeout_evidence_statement": "旧R9只保留历史/回归资格；真实RFC/erratum原件、许可限制、重复/曝光记录保留。",
+      "closeout_limits": [
+        "勘误再发布许可NOT_VERIFIED，pre5378仍适用；只限本批许可审查，不提供新发布授权。"
+      ]
     },
     {
       "id": "V13_4-09-03",
@@ -1080,8 +1621,21 @@
       "requirement": "先标可解性、兼容解释、约束、允许答案和最小充分集合；不可解不强造单一答案。",
       "completion_evidence": "隔离的 evaluator 标注与证据充足性依据。",
       "condition": "before_T0_Reader",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "docs/V13_4_T0_ANNOTATION_PROTOCOL.md",
+          "sha256": "fd73cfdc0874ba90c107e6a8d53e3642d15666b4768d980f3382c55dbe45d877"
+        }
+      ],
+      "closeout_evidence_statement": "问题前后隔离时序与逐题可解性/约束/允许答案/E*冻结完备：123可解、4部分可解、1档案不足。",
+      "closeout_limits": [
+        "单人开发审查，E*族非穷尽；未命中不能自动判语义漏证。"
+      ]
     },
     {
       "id": "V13_4-09-04",
@@ -1092,8 +1646,21 @@
       "requirement": "两位独立标注者优先复核可解性与集合；缺第二人只能标单人开发审查。",
       "completion_evidence": "真实人员/评审记录、独立性与分歧；无虚构评审。",
       "condition": "before_T0_claims",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        }
+      ],
+      "closeout_evidence_statement": "明确采用单人开发审查；同族工作代理和交叉检查不被称作独立人类/Judge/第二家族。",
+      "closeout_limits": [
+        "本建议只验收缺第二人时的诚实标注口径，独立语义复核仍缺。"
+      ]
     },
     {
       "id": "V13_4-09-05",
@@ -1104,8 +1671,33 @@
       "requirement": "T0 B1/B2 同预算建议 2048；FullArchive 额外最多 128 Reader 且信息/成本不等；短史全证据控制不人为加噪声。",
       "completion_evidence": "每条件计划分母、实际调用/预算、FullArchive 独立成本。",
       "condition": "before_T0_Reader",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "B1/B2同2048 Reader材料预算共256槽；无FullArchive调用或人为噪声。",
+      "closeout_limits": [
+        "短史全证据控制未单独证明；额外selector metadata计量不属于Reader材料上限。"
+      ]
     },
     {
       "id": "V13_4-09-06",
@@ -1116,8 +1708,29 @@
       "requirement": "T0 输出逐史最早断点：档案缺证/候选漏证/包装漏证/解释错误/关系遗漏；仅真实同预算缺口允许复杂 pilot。",
       "completion_evidence": "逐历史原始结果与 G1 决策；扩审计不能按 M 胜负筛题。",
       "condition": "after_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "32历史/256回答的最早已证明断点已逐项输出；严格按G1条件拒绝复杂pilot准入。",
+      "closeout_limits": [
+        "机械noncoverage不是语义失败；未穷尽替代集合。"
+      ]
     },
     {
       "id": "V13_4-09-07",
@@ -1128,8 +1741,29 @@
       "requirement": "完整链已解决大多数问题则采用简单修复、收缩问题；T0 曝光材料不得称正式泛化。",
       "completion_evidence": "Go/Simplify/Stop 记录、数据集用途与 claim 对照。",
       "condition": "after_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "G1 NOT_PASSED_SCOPED，采用opt-in简单B1入口并收缩主张，T0保持开发数据。",
+      "closeout_limits": [
+        "不是简单方案全面正确或全局H1被否定。"
+      ]
     },
     {
       "id": "V13_4-10-01",
@@ -1143,9 +1777,21 @@
       "status": "PARTIAL",
       "evidence": [
         "docs/V13_4_N2_FORMATION_PROTOCOL.md",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending.",
+      "closeout_evidence_statement": "一次query-free真实metadata已在未来问题前形成，前移形成步骤有前瞻协议。",
+      "closeout_limits": [
+        "没有启动T1预测/比较试验，不能据此完成N3或G2。"
+      ]
     },
     {
       "id": "V13_4-10-02",
@@ -1168,8 +1814,21 @@
       "requirement": "共同已读 C 下将来源标为直接消歧/部分/无关/误导/重复，并保存多种最小充分集合族 E*(q)；不足标 unknown。",
       "completion_evidence": "每 query 来源类别、集合标注与 C 身份，单源分数不能替代集合。",
       "condition": "before_T1_evaluation",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "docs/V13_4_T0_ANNOTATION_PROTOCOL.md",
+          "sha256": "fd73cfdc0874ba90c107e6a8d53e3642d15666b4768d980f3382c55dbe45d877"
+        }
+      ],
+      "closeout_evidence_statement": "逐query有来源支持与E*族标注、允许部分答案及unknown约定。",
+      "closeout_limits": [
+        "共同已读C下的T1来源帮助预测/替代集完备性未验。"
+      ]
     },
     {
       "id": "V13_4-10-04",
@@ -1192,8 +1851,21 @@
       "requirement": "比较 512/1024/2048 覆盖成本曲线；主预算与 G2 务实目标在 pilot 前冻结，5pp 仅建议不是既有结果。",
       "completion_evidence": "前瞻预算/阈值 freeze、真实覆盖曲线与成本。",
       "condition": "before_pilot",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
+      ],
+      "closeout_evidence_statement": "512/1024/2048离线预算曲线条件与2048主预算已在结果前固定，1152组合有固定分母。",
+      "closeout_limits": [
+        "这不是T1相对B3/shuffle信号曲线；G2阈值和正式推断未成立。"
+      ]
     },
     {
       "id": "V13_4-10-06",
@@ -1324,14 +1996,34 @@
       "requirement": "物理隔离 WriterView、SelectorView、EvaluatorView；writer 不能见未来问题/答案/回执，selector 不能见未选语义/gold，host 不导入 evaluator。",
       "completion_evidence": "输入文件/模块边界、实际请求字节和污染负测试。",
       "condition": "before_any_experiment",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
         "data/manifests/v13-4-n1-r1-results.json",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        }
       ],
-      "qualification": "N1 isolated source/query/rubric plus actual64 pre-query WriterView dispatches have no future question/evaluator and no fact writes. T0 Selector/annotation boundary and later formal evidence still pending."
+      "qualification": "N1 isolated source/query/rubric plus actual64 pre-query WriterView dispatches have no future question/evaluator and no fact writes. T0 Selector/annotation boundary and later formal evidence still pending.",
+      "closeout_evidence_statement": "本批Writer/Selector/Evaluator物理视图隔离，运行时不导入gold，Writer形成早于query。",
+      "closeout_limits": [
+        "只针对冻结driver/输入边界；不升格通用系统安全认证。"
+      ]
     },
     {
       "id": "V13_4-12-02",
@@ -1361,9 +2053,21 @@
       "condition": "before_any_new_content_read",
       "status": "PARTIAL",
       "evidence": [
-        "data/manifests/v13-4-source-eligibility.json"
+        "data/manifests/v13-4-source-eligibility.json",
+        {
+          "path": "data/manifests/v13-4-t0-acquisition.json",
+          "sha256": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        }
       ],
-      "qualification": "Union grouping rules preregistered; concrete eligible32 history cohort not yet frozen."
+      "qualification": "Union grouping rules preregistered; concrete eligible32 history cohort not yet frozen.",
+      "closeout_evidence_statement": "来源元数据预登记、正文曝光和已知RFC/宽依赖族记录保留。",
+      "closeout_limits": [
+        "工作组/updates组件和不同RFC编号不证明语义或模板独立。"
+      ]
     },
     {
       "id": "V13_4-12-04",
@@ -1386,8 +2090,21 @@
       "requirement": "逐 query 保留答案模式、允许部分答案、残留不确定性及原因；多源任务存集合，档案不足只相对给定档案/cutoff。",
       "completion_evidence": "annotation artifact、评分协议与标注一致性审查。",
       "condition": "before_scoring",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "docs/V13_4_T0_ANNOTATION_PROTOCOL.md",
+          "sha256": "fd73cfdc0874ba90c107e6a8d53e3642d15666b4768d980f3382c55dbe45d877"
+        }
+      ],
+      "closeout_evidence_statement": "逐题保存允许部分答案、剩余不确定性、档案cutoff和充分集合；123全题分母与5个N/A明确。",
+      "closeout_limits": [
+        "E*族非穷尽，档案不足不表示世界无信息。"
+      ]
     },
     {
       "id": "V13_4-12-06",
@@ -1398,8 +2115,25 @@
       "requirement": "不可从合法材料推得的合成隐藏真值不计强制回答；真实自然历史与构造诊断分开。",
       "completion_evidence": "可解性证据、自然/诊断标签、原始分母。",
       "condition": "before_scoring",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-acquisition.json",
+          "sha256": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        }
+      ],
+      "closeout_evidence_statement": "8次构造入口诊断与自然公开规范/勘误T0分开，不可答部分不强造答案。",
+      "closeout_limits": [
+        "自然技术更正不等于个人对话或多工作流泛化。"
+      ]
     },
     {
       "id": "V13_4-12-07",
@@ -1422,8 +2156,25 @@
       "requirement": "不以新盲池修 prompts；标注/训练/开发选择/正式评分各存读取记录；正式揭示后只做预注册分析。",
       "completion_evidence": "曝光日志、freeze 与结果揭示时点、方法变更记录。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        }
+      ],
+      "closeout_evidence_statement": "方法/metadata先冻结，评分方法盲化并在解盲前固定；原始评分与裁定留存。",
+      "closeout_limits": [
+        "全为开发材料；以后不能回收为未见测试，语义修订需声明迭代。"
+      ]
     },
     {
       "id": "V13_4-13-01",
@@ -1434,8 +2185,37 @@
       "requirement": "充分覆盖在可解 query 中以实际送达 S 包含任一 E*(q) 完整集合计，不可解 N/A；集合未知也保持 unknown。",
       "completion_evidence": "逐 query S/E* 可追溯 scorer 输出、分母和 unknown/N/A 控制。",
       "condition": "before_analysis",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-evaluator-mechanical-checkpoint.json",
+          "sha256": "296d4fe7b183c01b23e6a490c51bc01b698edd89ddc0a81c59bd82c3de426bba"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "123可解题实际送达枚举E*覆盖、五题全题N/A及四题部分支持分报。",
+      "closeout_limits": [
+        "E*非穷尽；只能报告NO_ENUMERATED_SET_COVERED。"
+      ]
     },
     {
       "id": "V13_4-13-02",
@@ -1446,8 +2226,21 @@
       "requirement": "候选池必要证据覆盖、选中率、完整送达率、正确消费分别报告，不以覆盖替代 Reader 正确性。",
       "completion_evidence": "逐层指标与失败归因、原请求对账、独立效用评分。",
       "condition": "before_analysis",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "共同K、实际选中/送达与Reader效用分层核验；123题有联合预算见证。",
+      "closeout_limits": [
+        "完整单元预算见证不证明贪心可选；无替代集合穷尽性。"
+      ]
     },
     {
       "id": "V13_4-13-03",
@@ -1458,8 +2251,29 @@
       "requirement": "查询效用按当前/陈述历史/追溯/跨范围分开，保留部分正确/unknown，未经定义不合并总准确率。",
       "completion_evidence": "预注册任务 rubric、四类表及完整分母。",
       "condition": "before_analysis",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "四题型及可解性效用、0/.5/1数量与配对差保存；不计算混合准确率。",
+      "closeout_limits": [
+        "描述性开发统计；没有正式区间或非劣结论。"
+      ]
     },
     {
       "id": "V13_4-13-04",
@@ -1470,8 +2284,17 @@
       "requirement": "报档案不足/无支持时的确定回答率及可解题过度拒答；报关系/假设覆盖和未枚举标记。",
       "completion_evidence": "对应分母、原始答案及 evaluator 标注，不将少读/拒答当净益。",
       "condition": "before_analysis",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        }
+      ],
+      "closeout_evidence_statement": "无依据确定性与过拒答分开保留bool/null，普通技术错误归material_error。",
+      "closeout_limits": [
+        "39个certainty null、12个overrefusal null保留；不能报告无过拒答或无不确定性的确定率。"
+      ]
     },
     {
       "id": "V13_4-13-05",
@@ -1482,8 +2305,25 @@
       "requirement": "维护损伤测事实/范围/支持关系无依据变化；只读阶段应无变化，集成另实测。",
       "completion_evidence": "查询前后事实快照与支持关系差异、日志单列。",
       "condition": "before_results",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "本只读形成/索引/回答范围内Source与fact状态不变。",
+      "closeout_limits": [
+        "真实持久业务维护损伤及恢复还需集成实验。"
+      ]
     },
     {
       "id": "V13_4-13-06",
@@ -1494,8 +2334,29 @@
       "requirement": "完整计 C_ingest+metadata+index+select+read+answer+retry 与维护，Judge 另列。",
       "completion_evidence": "连续实际 ledger 和角色明细，unknown usage 独立保留。",
       "condition": "before_model_HTTP",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-cue-results.json",
+          "sha256": "17c498457629c155f38d5efa445965933261512d651b454b6e8df015309f4ab2"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "累计328生成/685409 known及charged tokens、额外metadata规模/逻辑I/O以及阶段计时有实际记录。",
+      "closeout_limits": [
+        "准备CPU、部分物理I/O、真实价格/GPU时间及完整生命周期成本仍unknown；同族审查不是独立Judge费用样本。"
+      ]
     },
     {
       "id": "V13_4-13-07",
@@ -1530,8 +2391,25 @@
       "requirement": "费用耗尽、provider 故障、未运行、语义失败分别保存，计划分母不删除；样本不足报不确定。",
       "completion_evidence": "计划到终态对账、失败/未知原始记录与报告。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        }
+      ],
+      "closeout_evidence_statement": "256计划槽全部终态，0重试/0新增unknown，语义失败保留；旧unknown1费用不退。",
+      "closeout_limits": [
+        "没有本批provider故障不代表故障能力已验证；正式样本功效未建立。"
+      ]
     },
     {
       "id": "V13_4-14-01",
@@ -1542,13 +2420,33 @@
       "requirement": "N0 交付分支/实际配置、旧要求映射、来源资格、预算草案，沿用 contracts/harness 不运行模型。",
       "completion_evidence": "N0 配置/来源清单与冻结文件，独立核验，不以本映射自动完成。",
       "condition": "before_N1_N2",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-baseline-config-audit.json",
         "data/manifests/v13-4-source-eligibility.json",
-        "data/manifests/v13-4-design-templates/study_plan.yaml"
+        "data/manifests/v13-4-design-templates/study_plan.yaml",
+        {
+          "path": "data/manifests/v13-4-entry.json",
+          "sha256": "fe28dc87122b3d62360bda45b61bc3fb6a5c32f3436da235fbe6618e3ab90791"
+        },
+        {
+          "path": "data/manifests/v13-4-n0-identity-check.json",
+          "sha256": "3d30a3ae1e2a578ad36aca2cef2ed9e299083c3635cddd283167ab37316b075c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-acquisition.json",
+          "sha256": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        }
       ],
-      "qualification": "N0 inventory/budget draft and104 original receipts/32 candidate source-family audit exist; T0 admission remains0. No model requests in N0; later N1/N2 requests separately accounted."
+      "qualification": "N0 inventory/budget draft and104 original receipts/32 candidate source-family audit exist; T0 admission remains0. No model requests in N0; later N1/N2 requests separately accounted.",
+      "closeout_evidence_statement": "N0身份/实际配置、旧要求映射、来源资格与冻结预算在本批落地。",
+      "closeout_limits": [
+        "候选语义独立、8×4分层与勘误再发布资格并未全部满足。"
+      ]
     },
     {
       "id": "V13_4-14-02",
@@ -1582,9 +2480,33 @@
         "data/manifests/v13-4-n2-formation-results.json",
         "data/manifests/v13-4-n2-mechanical-checkpoint.json",
         "data/manifests/v13-4-n2-chain-index-results.json",
-        "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md"
+        "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md",
+        {
+          "path": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json",
+          "sha256": "12023e944f5c2e6389ca824a3422839d14844aacb878e376f2649adc744c19b7"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending. B1 implementation/query-free natural index and finite-world B4 controls are now verified mechanically; B2/B3 cue freeze and natural annotations/results remain pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending. B1 implementation/query-free natural index and finite-world B4 controls are now verified mechanically; B2/B3 cue freeze and natural annotations/results remain pending.",
+      "closeout_evidence_statement": "N2的标注、B1/B2/B3实现、B4主定义/结构控制与T0执行及评分已落地。",
+      "closeout_limits": [
+        "自然B4仍NOT_RUN；G1为NOT_PASSED_SCOPED并采用SIMPLIFY；不是完整研究验收。"
+      ]
     },
     {
       "id": "V13_4-14-04",
@@ -1598,9 +2520,21 @@
       "status": "PARTIAL",
       "evidence": [
         "docs/V13_4_N2_FORMATION_PROTOCOL.md",
-        "data/manifests/v13-4-n2-formation-results.json"
+        "data/manifests/v13-4-n2-formation-results.json",
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        }
       ],
-      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending.",
+      "closeout_evidence_statement": "N3仅完成前移的一次真实形成与共同Q0 metadata索引。",
+      "closeout_limits": [
+        "Q1、低容量预测器、shuffle/oracle及T1均未完成。"
+      ]
     },
     {
       "id": "V13_4-14-05",
@@ -1635,8 +2569,37 @@
       "requirement": "N6 交付统计、负结果、论文主张表、复现包与退出决定；不预先实现反证传播平台。",
       "completion_evidence": "全证据链、决策、失败/成本/限制与可复现命令环境。",
       "condition": "after_mainline_decision",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "N6统计、负结果、主张边界、离线hash复核包及Simplify退出交付完成。",
+      "closeout_limits": [
+        "仅条件退出收口；论文最小证据与正式泛化未完成。"
+      ]
     },
     {
       "id": "V13_4-14-08",
@@ -1681,13 +2644,29 @@
       "requirement": "G0 先证明权限/cutoff/正文交付/成本/只读版本，失败修入口，不用质量掩盖泄漏。",
       "completion_evidence": "明确准入证据与实际检查结果，未证明保持 NOT_VERIFIED。",
       "condition": "before_model_experiments",
-      "status": "PARTIAL",
+      "status": "PASSED_SCOPED",
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        {
+          "path": "data/manifests/v13-4-n1-acceptance.json",
+          "sha256": "bbf86a185d2f3c419390c0d18ad615423ef81544e0fdb3c016229ed683922e06"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
       ],
-      "qualification": "Scoped N1 G0 engineering demonstrated before T0; interpretive failures retained, remaining baseline/source gates not waived."
+      "qualification": "Scoped N1 G0 engineering demonstrated before T0; interpretive failures retained, remaining baseline/source gates not waived.",
+      "closeout_evidence_statement": "本冻结入口G0读取隔离、权限/cutoff、交付、成本与只读终态得到实际记录。",
+      "closeout_limits": [
+        "有限工程通过，非G0-Integrate或Product准入。"
+      ]
     },
     {
       "id": "V13_4-15-02",
@@ -1698,8 +2677,29 @@
       "requirement": "G1 仅真实证据存在且简单链/时态有预算内缺口；不通过则简单方案/收缩。",
       "completion_evidence": "T0 断点与 G1 Go/Simplify/Stop 记录。",
       "condition": "after_T0",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "NOT_PASSED",
+      "evidence": [
+        {
+          "path": "artifacts/v13-4/t0-closeout/g1-r0/decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "G1未建立跨历史重复的关系消歧缺口；按计划Simplify。",
+      "closeout_limits": [
+        "本cohort不足；不等于普遍H1否定。"
+      ]
     },
     {
       "id": "V13_4-15-03",
@@ -1746,8 +2746,29 @@
       "requirement": "预算主值建议 2048、曲线 512/1024、K32/H4 在 pilot 前冻结，不从结果挑主预算；metadata 与正文共同预算。",
       "completion_evidence": "统一 tokenizer/实际 tokens/约束及前瞻 freeze。",
       "condition": "before_pilot",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "docs/V13_4_N2_BASELINE_PROTOCOL.md",
+          "sha256": "5cc45012f678cf11b4796037d36bc5f3e7048e428172a4428fc709f0c2627952"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        }
+      ],
+      "closeout_evidence_statement": "2048主预算、512/1024曲线、K32事前冻结；Reader内metadata与正文同计。",
+      "closeout_limits": [
+        "选择器索引是额外信息；事前澄清不是整pipeline仅2048，H4/完整生命周期公平性未验。"
+      ]
     },
     {
       "id": "V13_4-15-07",
@@ -1758,8 +2779,29 @@
       "requirement": "计 metadata 冷启动/生命周期成本；报 selector CPU、I/O、首次回答、完整结束延迟，缓存命中与预热分开。",
       "completion_evidence": "真实时间戳/CPU/IO/token 记录、成本与延迟表。",
       "condition": "before_results",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-cue-results.json",
+          "sha256": "17c498457629c155f38d5efa445965933261512d651b454b6e8df015309f4ab2"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "形成/选择索引已记录provider token、序列化规模、逻辑I/O与部分CPU/wall。",
+      "closeout_limits": [
+        "准备CPU、物理I/O、首次回答/完整结束的完整可比时延和缓存条件未全测。"
+      ]
     },
     {
       "id": "V13_4-15-08",
@@ -1770,8 +2812,25 @@
       "requirement": "无实际价格/GPU 计时不换美元/GPU 小时；借 writer 不算免费，全读后分类是独立有成本 baseline。",
       "completion_evidence": "计价依据和测量来源；unknown 原样保留。",
       "condition": "before_cost_claims",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-n2-metadata-index-results.json",
+          "sha256": "364abd7602fa597c73278dea5bdca4abae36653ef669804f4188d0879495b365"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "没有实际价格/GPU计时则不换算；新增Writer115463 tokens和metadata额外规模明确计入。",
+      "closeout_limits": [
+        "只验收诚实成本口径，不等于所有成本均已测得。"
+      ]
     },
     {
       "id": "V13_4-15-09",
@@ -1782,8 +2841,21 @@
       "requirement": "每核心假设至多两轮已曝光开发修订；每轮预写最早断点、竞争解释、最小区分实验、停止条件。",
       "completion_evidence": "按 H1/H2/H3 的不可擦除 revision ledger、事前记录与决定。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "T0结果后无方法语义修订；N1仅R1一轮且未采用；形成无语义修订，H2/H3未运行。",
+      "closeout_limits": [
+        "仅v13.4本轮修订审计，不覆盖历史计划所有尝试。"
+      ]
     },
     {
       "id": "V13_4-15-10",
@@ -1794,8 +2866,29 @@
       "requirement": "接口错与语义失败分开；未知请求不退款/复用槽位；禁择优重试、评测后修答案。",
       "completion_evidence": "统一 request/receipt/失败账本及原始答案完整性。",
       "condition": "always",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-admission.json",
+          "sha256": "c8a89fed831835a7f154f42f44f70e329db2106cb01dc9f223666ffdf8817915"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        },
+        {
+          "path": "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json",
+          "sha256": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c"
+        }
+      ],
+      "closeout_evidence_statement": "真实Reader每槽一次，原答不改、无择优重试；原失败/费用和盲评分裁定保留。",
+      "closeout_limits": [
+        "解盲后不得重跑挑答案或静默改gold；该建议不授权后续调用。"
+      ]
     },
     {
       "id": "V13_4-15-11",
@@ -1806,8 +2899,21 @@
       "requirement": "5pp G2 目标不是承诺收益；正式优势靠差值区间与效用非劣，负结果保留；任何研究门禁不等 Product 可发布。",
       "completion_evidence": "预注册/结果/退出和 Product NO_GO 声明。",
       "condition": "before_claims",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "未将设计5pp变成承诺收益，保留失败与Product NO_GO。",
+      "closeout_limits": [
+        "G2及正式差值区间/非劣仍未测，不能宣称优势。"
+      ]
     },
     {
       "id": "V13_4-16-01",
@@ -1818,8 +2924,21 @@
       "requirement": "对无证据、metadata 错误、open_set、策略重命名、metadata 挤正文、正常任务退化分别保留反证与最小处置。",
       "completion_evidence": "对应诊断与风险处置表，明确更正/无歧义控制和原文回退。",
       "condition": "before_final_decision",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "保留档案不足、57形成unknown、预算遗漏、Reader错误和B2退化，按G1收缩。",
+      "closeout_limits": [
+        "未运行T1正文交换、shuffle/oracle与后续复杂风险控制。"
+      ]
     },
     {
       "id": "V13_4-16-02",
@@ -1830,8 +2949,21 @@
       "requirement": "备选新反证维护仅主线 Go/Simplify/Stop 后考虑，按主体/属性/范围/时间找候选，召回与判定分开。",
       "completion_evidence": "独立条件研究卡/准入决定；当前不先实现平台。",
       "condition": "if_alternative_line_after_main_decision",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PASSED_SCOPED",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "主线Simplify后备选线仅保留条件研究卡，未扩建维护平台。",
+      "closeout_limits": [
+        "没有备选召回/判定性能证据。"
+      ]
     },
     {
       "id": "V13_4-16-03",
@@ -1854,8 +2986,29 @@
       "requirement": "首篇论文最小交付：问题/可解性协议、真实 query-free metadata、公平完整链/时态/补槽/主动对照、未见源主表、成本曲线、predictor/selector 消融、失败/许可。",
       "completion_evidence": "逐项成品与原始实证；条件退出时明确未完成项而非凭代码宣称。",
       "condition": "if_reportable_mainline",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-n2-formation-results.json",
+          "sha256": "8dc9d025eab2078a82c182a9a2bf1f415dcb8c1abce546376efa62f3ba22c8de"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+          "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-analysis-preregistration.json",
+          "sha256": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-reader-execution-results.json",
+          "sha256": "99b1a601a928a71d58796eac52effa456b633d0fbd133b9e2a52ca1bd2ee2843"
+        }
+      ],
+      "closeout_evidence_statement": "已有问题/可解性协议、真实query-free metadata、B1/B2开发运行及成本/失败/许可记录。",
+      "closeout_limits": [
+        "缺未见来源主结果、自然B4/M、预测器/selector消融、独立语义和完整迁移，论文未完成。"
+      ]
     },
     {
       "id": "V13_4-16-05",
@@ -1866,8 +3019,21 @@
       "requirement": "无业务动作证据时标题/结论限查询选证；回答简单方案是否够、廉价 metadata 是否有信号、同信息成本是否值得。",
       "completion_evidence": "证据到主张矩阵、Go/Simplify/Stop 与限制，非模块齐全即完成。",
       "condition": "before_final_delivery",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        },
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        }
+      ],
+      "closeout_evidence_statement": "报告只限查询选证与已观察失败，收缩为简单入口和开发负结果。",
+      "closeout_limits": [
+        "廉价metadata信号及同信息净收益未检验。"
+      ]
     },
     {
       "id": "V13_4-A-01",
@@ -1913,7 +3079,7 @@
   "gates": [
     {
       "id": "G0-Read",
-      "status": "NOT_VERIFIED",
+      "status": "PASSED_SCOPED",
       "requires": [
         "权限/cutoff/evaluator 隔离",
         "来源与快照冻结",
@@ -1923,7 +3089,17 @@
       ],
       "on_failure": "修研究入口，不用模型质量掩盖泄漏。",
       "condition": "before_readonly_model_experiments",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "FROZEN_READONLY_ENTRY_ONLY"
     },
     {
       "id": "G0-Integrate",
@@ -1936,11 +3112,21 @@
       ],
       "on_failure": "不启用新持久写入、业务动作或默认行为。",
       "condition": "if_writes_actions_or_default_switch",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "NOT_ADMITTED"
     },
     {
       "id": "G1",
-      "status": "NOT_VERIFIED",
+      "status": "NOT_PASSED",
       "requires": [
         "T0 证据存在",
         "B1/B2 同预算可重复缺口",
@@ -1948,7 +3134,17 @@
       ],
       "on_failure": "采用简单方案，记录 Simplify/Stop；不强造任务。",
       "condition": "after_T0",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "NOT_PASSED_SCOPED_SIMPLIFY"
     },
     {
       "id": "G2",
@@ -1960,7 +3156,17 @@
       ],
       "on_failure": "至多两轮抽取修订，仍无信号停复杂选择。",
       "condition": "after_G1_and_T1",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "NOT_RUN_G1_NOT_ADMITTED"
     },
     {
       "id": "G3",
@@ -1972,11 +3178,21 @@
       ],
       "on_failure": "标记等效或应用组合，不称新算法。",
       "condition": "after_G2_and_T2",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "NOT_RUN_G1_NOT_ADMITTED"
     },
     {
       "id": "G4",
-      "status": "NOT_VERIFIED",
+      "status": "NOT_PASSED",
       "requires": [
         "正式配对区间/效用非劣",
         "四类效用/确定性/成本",
@@ -1985,7 +3201,17 @@
       ],
       "on_failure": "补独立证据或收缩主张，不把旧开发重标测试。",
       "condition": "after_formal_evidence_or_documented_exit",
-      "evidence": []
+      "evidence": [
+        {
+          "path": "data/manifests/v13-4-g1-decision.json",
+          "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+        },
+        {
+          "path": "data/manifests/v13-4-t0-final-results.json",
+          "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+        }
+      ],
+      "evaluation_status": "FORMAL_RESEARCH_NOT_PASSED_DOCUMENTED_EXIT_COMPLETE"
     }
   ],
   "stages": [
@@ -2005,8 +3231,14 @@
       ],
       "planned_reader_results": 256,
       "full_archive_optional_additional_reader_results_max": 128,
-      "status": "NOT_VERIFIED",
-      "exit_gate": "G1"
+      "status": "PARTIAL",
+      "exit_gate": "G1",
+      "execution_status": "COMPLETED_DEVELOPMENT_WITH_LIMITS",
+      "actual_reader_results": 256,
+      "limits": [
+        "Source independence and8x4 strata not established",
+        "G1 not passed"
+      ]
     },
     {
       "id": "T1",
@@ -2024,7 +3256,8 @@
         "complementary/redundant_subsets"
       ],
       "status": "NOT_VERIFIED",
-      "exit_gate": "G2"
+      "exit_gate": "G2",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     },
     {
       "id": "T2",
@@ -2043,7 +3276,8 @@
       ],
       "planned_reader_results": 480,
       "status": "NOT_VERIFIED",
-      "exit_gate": "G3 and formal freeze"
+      "exit_gate": "G3 and formal freeze",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     },
     {
       "id": "T3",
@@ -2063,7 +3297,8 @@
       "initial_planned_reader_results": 1920,
       "power_guarantee": false,
       "status": "NOT_VERIFIED",
-      "exit_gate": "G4"
+      "exit_gate": "G4",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     },
     {
       "id": "SECOND_FAMILY",
@@ -2079,7 +3314,8 @@
         "B4"
       ],
       "planned_reader_results": 288,
-      "status": "NOT_VERIFIED"
+      "status": "NOT_VERIFIED",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     },
     {
       "id": "PUBLIC_TRANSFER",
@@ -2088,7 +3324,8 @@
       ],
       "condition": "LongMemEval/STALE 许可、曝光、任务适配、来源分组与研究门禁通过后才读合格切片。",
       "planned_count": null,
-      "status": "NOT_VERIFIED"
+      "status": "NOT_VERIFIED",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     },
     {
       "id": "ALTERNATIVE_COUNTEREVIDENCE",
@@ -2096,7 +3333,8 @@
         "N6"
       ],
       "condition": "仅主线完成 Go/Simplify/Stop 后另行考虑；不默认实施，业务集成另过 G0-Integrate。",
-      "status": "NOT_VERIFIED"
+      "status": "NOT_VERIFIED",
+      "execution_status": "NOT_RUN_CONDITIONAL_EXIT"
     }
   ],
   "prospective_budget": {
@@ -2137,7 +3375,15 @@
       "stop_condition"
     ],
     "current_revision_count_verified": false,
-    "unknown_or_historical_attempts": "由 Root 查证后登记，不由本静态清单推断为 0；不可删除/隐藏旧失败。"
+    "unknown_or_historical_attempts": "由 Root 查证后登记，不由本静态清单推断为 0；不可删除/隐藏旧失败。",
+    "v13_4_execution_audit": {
+      "N1_exposed_reader_revisions": 1,
+      "N1_R1_adopted": false,
+      "T0_postoutcome_semantic_method_revisions": 0,
+      "formation_semantic_revisions": 0,
+      "H2_H3": "NOT_RUN",
+      "interface_failures_preserved": true
+    }
   },
   "inheritance": {
     "source_path": "data/manifests/v13-2-requirements.json",
@@ -4242,13 +5488,13 @@
     "non_substitution": "v13.4 的 B1-B4/M、只读试验或公开切片不替代 v13.2 指定的四臂、两工作流、预算、恢复、正式/独立/条件义务；未执行部分仍保留未完成。"
   },
   "current_unresolved_evidence": [
-    "32 independent T0 histories final eligibility/annotations/E* families (39 metadata origins preregistered; acquisition ongoing)",
-    "B1/B2/B3 implementations and B4 structural controls; ordered_source is entry primitive only",
-    "query-free actual writer metadata/Q1/predictor/shuffle/oracle and T1 signal",
-    "T2/T3 with independent source splits, formal intervals and external transfer/nearest-neighbor execution",
-    "independent semantic annotations/Judge and second family",
-    "inherited48 write/integration obligations remain at historical status",
-    "R0 date overclaims and R1 scope regression preserved; R1 prompt not adopted"
+    "32 origins are not proven independent; proposed8x4 history strata not met",
+    "Nonexhaustive E* and single-developer scoring;39 certainty/12 overrefusal unknown flags",
+    "Natural B4/M, Q1/predictor/T1/shuffle/oracle, T2/T3 and formal inference not run after G1 exit",
+    "Independent Judge/second family, native nearest neighbors and public transfer not verified",
+    "Original48 write/integration/recovery obligations unchanged;Product NO_GO",
+    "Additional selector metadata information/cost separate from2048 Reader limit;physical IO and some lifecycle costs unknown",
+    "Errata raw republication license NOT_VERIFIED;local evidence package only"
   ],
   "inventory_validation": {
     "performed": "JSON structure, unique IDs, all plan sections indexed, 48 exact copied requirement/status/condition fields, source file hash unchanged",
@@ -4341,5 +5587,23 @@
         "qualification": "Root 新建草案，非原附件恢复或可执行配置/验收"
       }
     ]
+  },
+  "closeout": {
+    "decision": "SIMPLIFY",
+    "completion_scope": "Conditionally closed execution, not122 scientific passes or paper/Product completion",
+    "report": "docs/V13_4_T0_RESULTS_AND_EXIT.md",
+    "result": {
+      "path": "data/manifests/v13-4-t0-final-results.json",
+      "sha256": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90"
+    },
+    "gate": {
+      "path": "data/manifests/v13-4-g1-decision.json",
+      "sha256": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14"
+    },
+    "proposal_path": "artifacts/v13-4/t0-closeout/requirements-update-proposal.json",
+    "proposal_sha256": "85c2975de536cba534b8f0f34bce1b31d31bb693b1b4521a77ac024a06b8214b",
+    "Root_reviewed_all_56_proposals": true,
+    "initial_inventory_validation_is_historical": true,
+    "Root_additional_G1_updates_reviewed": true
   }
 }

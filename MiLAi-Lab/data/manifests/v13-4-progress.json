@@ -1,7 +1,7 @@
 {
   "kind": "V13_4_PROGRESS",
-  "goal_status": "ACTIVE",
-  "full_goal_complete": false,
+  "goal_status": "COMPLETE",
+  "full_goal_complete": true,
   "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-4/MiLAi-Lab",
   "source_commits": [
     "9ec7c19",
@@ -13,23 +13,25 @@
     "5230d02",
     "1c85c67",
     "bbc1227",
-    "c5ceb44"
+    "c5ceb44",
+    "a6edc2f"
   ],
   "work_packages": {
-    "N0": "PARTIAL_SOURCE_ELIGIBILITY_PENDING",
+    "N0": "COMPLETED_SCOPED_ELIGIBILITY_AUDIT_LIMITS_RETAINED",
     "N1": "PASSED_SCOPED_SOURCE_READER",
-    "N2": "T0_READER_COMPLETED_METHOD_BLIND_SCORING_IN_PROGRESS",
-    "N3": "PARTIAL_FORMATION_SUBSTEP_MOVED_BEFORE_QUERY_OTHER_WORK_G1_REQUIRED",
-    "N4": "NOT_STARTED_G2_REQUIRED",
-    "N5": "NOT_STARTED_METHOD_AND_PILOT_FREEZE_REQUIRED",
-    "N6": "ONGOING_FAILURE_RETENTION_FULL_CLOSEOUT_PENDING"
+    "N2": "T0_COMPLETED_DEVELOPMENT_WITH_LIMITS",
+    "N3": "FORMATION_ONLY_T1_NOT_ADMITTED",
+    "N4": "NOT_RUN_G1_CONDITIONAL_EXIT",
+    "N5": "NOT_RUN_G1_CONDITIONAL_EXIT",
+    "N6": "COMPLETED_SCOPED_CONDITIONAL_EXIT"
   },
   "requirements": {
     "v13_4_requirements": 122,
     "v13_4_statuses": {
-      "NOT_VERIFIED": 87,
-      "PASSED_SCOPED": 12,
-      "PARTIAL": 23
+      "PARTIAL": 31,
+      "PASSED_SCOPED": 48,
+      "NOT_VERIFIED": 42,
+      "NOT_PASSED": 1
     },
     "original_requirements": 48,
     "original_statuses": {
@@ -42,18 +44,13 @@
   "new_generation_requests": 328,
   "new_known_and_charged_tokens": 685409,
   "new_embedding_requests": 0,
-  "T0_scored_histories": 0,
-  "T0_scored_queries": 0,
+  "T0_scored_histories": 32,
+  "T0_scored_queries": 128,
   "method_candidate_complex_platform_built": false,
   "current_reader_config": "configs/v13-4-readonly-q0.json",
   "rejected_reader_config": "configs/v13-4-readonly-q0-r1.json",
-  "next_actions": [
-    "Complete256 serialized no-retry Reader slots and verify terminal wire/bank/continuous cost",
-    "Export method-blinded answers and freeze single-developer semantic scores",
-    "Combine coverage/packing/Reader diagnosis and source-family sensitivity for G1",
-    "Close out conditional Go/Simplify/Stop without promoting unrun stages"
-  ],
-  "existing_blocker": "No terminal blocker; remaining work is authorized and in progress",
+  "next_actions": [],
+  "existing_blocker": null,
   "Product": "NO_GO",
   "remote_v13_4_published": false,
   "ledger_current_sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
@@ -76,7 +73,7 @@
     "successful_body_receipts": 104,
     "raw_bytes": 6803322,
     "substantive_candidates": 32,
-    "T0_admitted": 0,
+    "T0_admitted": 32,
     "queries_authored": 128,
     "independent_semantic_review": false,
     "manifest": "data/manifests/v13-4-t0-acquisition.json",
@@ -135,7 +132,7 @@
   },
   "T0_authoring": {
     "release": "data/manifests/v13-4-t0-authoring-freeze.json",
-    "status": "READER_COMPLETED_METHOD_BLIND_SCORING",
+    "status": "SCORED_FROZEN_UNBLINDED_ANALYZED_CONDITIONAL_EXIT",
     "provenance_checked_draft_queries": 128,
     "semantic_review": "All128 reviewed; accepted scoped nonexhaustive E*; no independent Judge",
     "driver": "artifacts/v13-4/run_t0.py",
@@ -148,6 +145,19 @@
     "annotation_freeze": "data/manifests/v13-4-t0-annotation-freeze.json",
     "reader_admission": "data/manifests/v13-4-t0-reader-admission.json",
     "reader_run": "artifacts/v13-4/t0-q0",
-    "reader_result": "data/manifests/v13-4-t0-reader-execution-results.json"
+    "reader_result": "data/manifests/v13-4-t0-reader-execution-results.json",
+    "final_results": "data/manifests/v13-4-t0-final-results.json"
+  },
+  "execution_status": "CLOSED_CONDITIONAL_SIMPLIFY",
+  "all_scientific_requirements_passed": false,
+  "T0_scored_responses": 256,
+  "closeout_report": "docs/V13_4_T0_RESULTS_AND_EXIT.md",
+  "G1": "NOT_PASSED_SCOPED",
+  "decision": "SIMPLIFY",
+  "completion_scope": "Plan-authorized conditional Simplify exit; not all scientific requirements passed",
+  "final_mechanical_audit": {
+    "path": "artifacts/v13-4/t0-closeout/final-audit.json",
+    "sha256": "7d4d55bda66919197a9b9bf456bc7bc5f6a6fbdfb9357740d5a924f942a2de5e",
+    "scope": "312 compact mechanical checks;not independent semantic Judge"
   }
 }

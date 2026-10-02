@@ -1,3 +1,15 @@
+# v13.4 conditional exit recorded
+
+The authorized v13.4 execution has reached its documented G1 Simplify exit.
+See docs/V13_4_T0_RESULTS_AND_EXIT.md and data/manifests/v13-4-n6-closeout.json.
+T0 is exposed development evidence. T1/T2/T3 were not admitted; no automatic
+continuation into a complex platform or rerunning frozen Reader slots.
+Preserve all raw evidence, score/gold freezes, the continuous ledger and original48.
+Product remains NO_GO. This closes this execution, not all scientific requirements.
+User instructions for future work take precedence over this checkpoint.
+
+---
+
 # MiLAi Lab v13.4 active execution
 
 The user explicitly requests full execution of docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md.

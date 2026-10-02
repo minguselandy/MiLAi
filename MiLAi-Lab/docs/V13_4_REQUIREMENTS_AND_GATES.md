@@ -1,5 +1,7 @@
 # v13.4 要求映射与门禁
 
+2026-10-03终态：**G1未通过，按Simplify条件退出，N6收口完成**。122项为48 PASSED_SCOPED／31 PARTIAL／1 NOT_PASSED／42 NOT_VERIFIED。T1–T3未准入，未运行项目不升为通过。以下初始映射说明保留，其“当前未完成”等阶段叙述以[T0终态报告](V13_4_T0_RESULTS_AND_EXIT.md)和机器清单覆盖；原48项不变。
+
 本清单依据完整 517 行 v13.4 原计划逐节建立，新增 **122 项**可核验要求，入口建立时全部为 `NOT_VERIFIED`；当前状态以机器清单和本轮证据为准。这是 N0 的验收索引，不是方法、SDK 或模型实验通过记录。用户当前“详细阅读并执行”指令恢复 v13.4 工作；旧暂停及计划成文时的文档交付范围保留为历史，研究门禁和数据约束继续适用。
 
 机器清单：[v13-4-requirements.json](../data/manifests/v13-4-requirements.json)。原计划 SHA-256：`3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4`。本地核对基点 `2319401bc0c6f29142cdf139a09b22576c0da1c5`，分支 `feat/lab-correction-evidence-v13-4-20261003`；当前远端、安装来源和配置已核对；N1两批实际冻结与结果见 [执行状态](V13_4_EXECUTION_STATUS.md)。
