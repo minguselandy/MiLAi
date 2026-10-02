@@ -1,0 +1,87 @@
+{
+  "kind": "V13_4_N2_PREQUERY_FORMATION_RESULT",
+  "status": "TERMINAL_FROZEN_WITH_REAL_EXTRACTION_FAILURES",
+  "formation_freeze": {
+    "path": "artifacts/v13-4/n2-formation/freeze.json",
+    "sha256": "f25e2408682dafc9f9af3227384cde40cb37fa5dc761ce9d9fbe8cce350b6099"
+  },
+  "terminal": {
+    "path": "artifacts/v13-4/n2-formation/terminal.json",
+    "sha256": "2aa0a3eedbde5b551f7b70988208b4b148b9048bae64403c347e865a0b8a8fa0"
+  },
+  "completed_at_utc": "2026-10-02T17:30:55.655118+00:00",
+  "planned_writer_slots": 64,
+  "actual_writer_calls": 64,
+  "actual_reader_calls": 0,
+  "embedding_calls": 0,
+  "retries": 0,
+  "new_unknown_requests": 0,
+  "http_200_receipts": 64,
+  "shape_quote_status_counts": {
+    "INVALID_UNKNOWN_NO_RETRY": 57,
+    "SHAPE_AND_QUOTES_VALID_SEMANTICS_UNVERIFIED": 7
+  },
+  "validator_error_types": {
+    "AssertionError": 55,
+    "none": 7,
+    "JSONDecodeError": 2
+  },
+  "validation_boundary": "7 shape/quote-valid outputs are extraction hypotheses, not verified semantics; 57 whole-record unknown fallbacks retained, without response repair or retry. No T1 signal analysis.",
+  "token_usage": {
+    "prompt_tokens": 60382,
+    "completion_tokens": 55081,
+    "total_tokens": 115463
+  },
+  "host_wire_prompt_token_error": [
+    0
+  ],
+  "source_origins": 32,
+  "raw_sources_in_formation_bank": 96,
+  "fact_rows": 0,
+  "source_fact_state_unchanged": true,
+  "queries_created": 0,
+  "query_authoring_unlocked": false,
+  "remaining_prerequisite": "Freeze common candidate/relations/K/packing and B1/B2/B3 definitions before future question creation; semantics/strata/independence admission still pending.",
+  "g1_status": "NOT_EVALUATED",
+  "artifacts": {
+    "artifacts/v13-4/n2-formation/writer-trace.jsonl": "39bddb3fe10b8669e1727288704da62a631dc61e2ea7b0e74041557c7b6a500e",
+    "artifacts/v13-4/n2-formation/writer-admissions.json": "443d4320cb58f9179e96e425554806d9a8318fa4d95af683464c4f5f086add6e",
+    "artifacts/v13-4/n2-formation/bank-after.json": "a50efcc419fb4e751c272ff067fe842d75321b3604afcc7ff649bd7e449f2e1e",
+    "artifacts/v13-4/n2-review/driver-review.json": "d2e04c6563c441880e059a16252f9c96d47155e3c2d1442c6fab7b7e9fec4b95",
+    "artifacts/v13-4/n2-formation/format-diagnostic.json": "7933b9a238414ef927d2d9f15204f30ba53ffa261af7ecf366e442d5185b0eec"
+  },
+  "ledger_after": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "4cb03be89899b5ee9ab00ae5fdb62f8c7476c14667accfc6678421a14995ba93",
+    "generation_requests": 9470,
+    "generation": {
+      "charged_tokens": 27158739,
+      "known_tokens": 27128352,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "v13_4_cumulative": {
+    "generation_requests": 72,
+    "known_tokens": 121475,
+    "charged_tokens": 121475,
+    "embedding_tokens": 0,
+    "new_unknown_requests": 0
+  },
+  "timing_scope": {
+    "http_wall_seconds_sum": 351.7930848011747,
+    "recorded_per_request_cpu_and_wall": "metadata/*.json; request only, excludes preparation and parsing",
+    "preparation_cpu_and_physical_io": "NOT_MEASURED; do not substitute zero",
+    "preparation_tool_wall_seconds": 3.941401144
+  },
+  "claims": "Prospective metadata formed before all natural questions, not usable predictor evidence, semantic independence or T0 completion. Existing services unchanged; Product NO_GO.",
+  "format_failure_breakdown": {
+    "nonverbatim_quote_in_body": 55,
+    "invalid_json": 2,
+    "all_or_unknown_frozen_policy": true
+  }
+}

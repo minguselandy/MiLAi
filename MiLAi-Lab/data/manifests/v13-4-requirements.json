@@ -31,9 +31,9 @@
   "counts": {
     "v13_4_requirements": 122,
     "v13_4_statuses": {
-      "NOT_VERIFIED": 99,
+      "NOT_VERIFIED": 94,
       "PASSED_SCOPED": 12,
-      "PARTIAL": 11
+      "PARTIAL": 16
     },
     "original_requirements": 48,
     "original_statuses": {
@@ -650,8 +650,12 @@
       "requirement": "元数据仅在事件可见之后、未来问题出现之前 query-free 形成并冻结；不由 Reader 答案或检索注入文本形成新用户事实。",
       "completion_evidence": "每事件 WriterView cutoff/输入 hash、生成时间与 metadata hash；污染负控制。",
       "condition": "before_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+        "data/manifests/v13-4-n2-formation-results.json"
+      ],
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
     },
     {
       "id": "V13_4-05-02",
@@ -686,8 +690,12 @@
       "requirement": "缺失/无效元数据或不确定 query head 回退共同完整链/相关性，并报告原因；unknown 不当不相关证明。",
       "completion_evidence": "缺失、冲突、invalid、uncertain 回退控制及明确问题效用。",
       "condition": "before_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+        "data/manifests/v13-4-n2-formation-results.json"
+      ],
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
     },
     {
       "id": "V13_4-05-05",
@@ -1102,8 +1110,12 @@
       "requirement": "T1 不先跑完整 Agent；在 T0 开发历史按事件 cutoff 一次 query-free 形成并冻结真实 metadata，query 在历史后派生。",
       "completion_evidence": "writer 真实输入/输出、身份与分组训练/验证 freeze。",
       "condition": "after_G1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+        "data/manifests/v13-4-n2-formation-results.json"
+      ],
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
     },
     {
       "id": "V13_4-10-02",
@@ -1286,9 +1298,10 @@
       "evidence": [
         "data/manifests/v13-4-n1-acceptance.json",
         "data/manifests/v13-4-n1-r0-results.json",
-        "data/manifests/v13-4-n1-r1-results.json"
+        "data/manifests/v13-4-n1-r1-results.json",
+        "data/manifests/v13-4-n2-formation-results.json"
       ],
-      "qualification": "N1 source/query/evaluator files separated; query-free metadata WriterView and future-question cutoff formation not yet implemented."
+      "qualification": "N1 isolated source/query/rubric plus actual64 pre-query WriterView dispatches have no future question/evaluator and no fact writes. T0 Selector/annotation boundary and later formal evidence still pending."
     },
     {
       "id": "V13_4-12-02",
@@ -1505,7 +1518,7 @@
         "data/manifests/v13-4-source-eligibility.json",
         "data/manifests/v13-4-design-templates/study_plan.yaml"
       ],
-      "qualification": "N0 inventory/budget draft exists with source eligibility0/32; source origin acquisition ongoing. No model requests in N0."
+      "qualification": "N0 inventory/budget draft and104 original receipts/32 candidate source-family audit exist; T0 admission remains0. No model requests in N0; later N1/N2 requests separately accounted."
     },
     {
       "id": "V13_4-14-02",
@@ -1533,8 +1546,12 @@
       "requirement": "N2 交付 T0 标注、B1/B2/B3、锁定通用策略及结构验证，reader runner/evaluator 隔离。",
       "completion_evidence": "相应方法身份、隔离合同、T0 数据与 B4 准入。",
       "condition": "before_T0_T1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+        "data/manifests/v13-4-n2-formation-results.json"
+      ],
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
     },
     {
       "id": "V13_4-14-04",
@@ -1545,8 +1562,12 @@
       "requirement": "N3 交付 query-free metadata、Q0/Q1、低容量预测器和 T1，方法纯逻辑不耦合 provider。",
       "completion_evidence": "模块/配置、真实形成与 T1 实证；不跨过 G1。",
       "condition": "after_G1",
-      "status": "NOT_VERIFIED",
-      "evidence": []
+      "status": "PARTIAL",
+      "evidence": [
+        "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+        "data/manifests/v13-4-n2-formation-results.json"
+      ],
+      "qualification": "Explicit amendment moved one prospective formation step before all natural queries:64 actual erratum calls,7 shape/quote valid and57 unknown retained. No predictor/query-head training, T1 signal analysis or G1 result; source independence/T0 annotations and baseline completion pending."
     },
     {
       "id": "V13_4-14-05",
