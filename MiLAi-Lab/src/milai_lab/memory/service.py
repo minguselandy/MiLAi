@@ -145,8 +145,18 @@ class MemoryService:
         tool_save_communication: str = "legacy",
         tool_parameter_contract: str = "legacy",
         observation_capture_feedback: str = "legacy",
+        functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
+        if functional_contract == "functional_v1":
+            mutation_contract = ("event_bound_v1" if mutation_contract == "legacy"
+                                 else mutation_contract)
+            candidate_contract = candidate_contract or "read_handle_v1"
+            support_contract = ("direct_support_v1" if support_contract == "legacy"
+                                else support_contract)
+            memory_read_protocol = ("selected_snapshot_v1" if memory_read_protocol == "legacy"
+                                    else memory_read_protocol)
+            source_backlinks = "enabled"
         if not isinstance(store, SqliteStore):
             raise TypeError("V13_MEMORY_REQUIRES_SQLITE_STORE")
         if mode not in {"ref_only", "field_grounded"} or not owner or not namespace:
@@ -171,6 +181,14 @@ class MemoryService:
         }:
             raise ValueError("V13_CANDIDATE_CONTRACT_INVALID")
         self.candidate_contract = candidate_contract
+        if functional_contract not in {"legacy", "functional_v1"}:
+            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_INVALID")
+        if functional_contract == "functional_v1" and (
+            self.mutation_contract != "event_bound_v1" or candidate_contract != "read_handle_v1"
+        ):
+            raise ValueError("V13_5_FUNCTIONAL_REQUIRES_BOUND_READ_HANDLE")
+        self.functional_contract = functional_contract
+        self._uncertain_captures: set[str] = set()
         if (type(support_contract) is not str
                 or support_contract not in {"legacy", "direct_support_v1"}):
             raise ValueError("V13_MEMORY_SUPPORT_CONTRACT_INVALID")
@@ -243,6 +261,10 @@ class MemoryService:
         with self._locked():
             for source_ref in source_refs:
                 event = self.source(source_ref)
+                if (event is None and self.functional_contract == "functional_v1"
+                        and source_ref == self.event_id(session, boundary_id, "user")
+                        and self.store.get(self.turns_namespace, _hash([session, boundary_id]))):
+                    event = self._source(source_ref, binding_only=True)
                 if event is None or event["session"] != session:
                     raise ValueError("V13_SOURCE_BOUNDARY_SCOPE_MISMATCH")
             prior_id, prior_refs = self._source_boundaries.get(session, ("", []))
@@ -264,6 +286,9 @@ class MemoryService:
             raise ValueError("V13_PUBLIC_TURN_BINDING_INVALID")
         with self._locked():
             source = self.source(source_ref)
+            if (source is None and self.functional_contract == "functional_v1"
+                    and self.store.get(self.turns_namespace, _hash([session, message_id]))):
+                source = self._source(source_ref, binding_only=True)
             if (source is None or source["session"] != session or source["role"] != "user"
                     or source_ref != self.event_id(session, message_id, "user")):
                 raise ValueError("V13_PUBLIC_TURN_SOURCE_MISMATCH")
@@ -294,12 +319,27 @@ class MemoryService:
         ):
             return None
         item = self.store.get(self.turns_namespace, _hash([session, bound["message_id"]]))
-        source = self.source(bound["source_ref"])
+        source = self._source(bound["source_ref"], binding_only=True)
         if (item is None or item.value.get("binding") != bound or source is None
                 or source["role"] != "user" or source["session"] != session
                 or source["content_sha256"] != bound["content_sha256"]):
             return None
         return cast(dict[str, Any], json.loads(_json(bound)))
+
+    def active_public_input(
+        self, session: str, message_id: str, config_sha256: str,
+    ) -> dict[str, Any] | None:
+        """Validate live input after visibility revocation; never a retrieval/fragment API."""
+        bound = self.public_turn(session, message_id=message_id, config_sha256=config_sha256)
+        if bound is None:
+            item = self.store.get(self.turns_namespace, _hash([session, message_id]))
+            if (item is None or item.value["binding"]["config_sha256"] != config_sha256
+                    or item.value["binding"]["source_ref"] != self.event_id(
+                        session, message_id, "user")):
+                return None
+            bound = self.bind_public_turn(session, message_id, item.value["binding"]["source_ref"],
+                                          config_sha256=config_sha256, phase="resume")
+        return self._source(bound["source_ref"], binding_only=True)
 
     def semantic_receipts_for_turn(self, session: str) -> list[dict[str, Any]]:
         """Actual successful Host semantic commits, not whole-turn coverage."""
@@ -414,6 +454,8 @@ class MemoryService:
         if (bound.get("owner") != self.owner or bound.get("namespace") != list(self.namespace)
                 or handle != "cand-" + _hash(bound)[:24]):
             return None
+        if self._functional_hidden(record_id=bound["record_id"]):
+            return None
         bindings = self._source_bindings([row["source_ref"] for row in bound["support_sources"]])
         if bindings is None or bindings != bound["support_sources"]:
             return None
@@ -513,6 +555,8 @@ class MemoryService:
         """Enumerate actual owner-bound stored revisions; this grants no write authority."""
         if type(limit) is not int or not 1 <= limit <= 6:
             raise ValueError("V13_HISTORY_INDEX_LIMIT_INVALID")
+        if self._functional_hidden(record_id=memory_id):
+            return {"ok": False, "status": "visibility_revoked", "id": memory_id}
         item = self.store.get(self.namespace, memory_id)
         metadata = item.value.get("_v13_1") if item is not None else None
         if item is None or (metadata is not None and metadata.get("owner") != self.owner):
@@ -522,6 +566,10 @@ class MemoryService:
                     "revision_count": None, "revisions": [], "omitted_count": None,
                     "content_verification": "unchecked"}
         versions = sorted(metadata["history"], key=lambda row: row["revision"])
+        if self.functional_contract == "functional_v1":
+            versions = [version for version in versions if not any(
+                self._functional_hidden(source_ref=ref)
+                for ref in self._version_source_refs(version))]
         source = self.source(source_ref) if source_ref is not None else None
         if source_ref is not None:
             if source is None:
@@ -619,6 +667,11 @@ class MemoryService:
                     "requested": requested}
         if self.support_contract == "direct_support_v1":
             proposal.update(field_support=field_support, trigger_binding=trigger_binding)
+        if (self.functional_contract == "functional_v1" and all(
+            _json(proposal[field]) == _json(version[field])
+            for field in ("content", "kind", "scope", "basis")
+        )):
+            proposal["patch_operation"] = "no_change"
         return self.commit(session, proposal_id, proposal)
 
     def _field_lineage(
@@ -816,6 +869,8 @@ class MemoryService:
     def projection_receipt(
         self, source_ref: str, profile: ObservationProfile
     ) -> dict[str, Any] | None:
+        if self._functional_hidden(source_ref=source_ref):
+            return None
         item = self.store.get(self.projections_namespace, self._projection_id(source_ref, profile))
         return item.value["receipt"] if item is not None else None
 
@@ -826,6 +881,8 @@ class MemoryService:
             for marker in self._rows(self.projections_namespace):
                 state = marker["value"]
                 if state["owner"] != self.owner:
+                    continue
+                if self._functional_hidden(source_ref=state["source_event_id"]):
                     continue
                 source = self.source(state["source_event_id"])
                 if source is None or source["content_sha256"] != state["source_hash"]:
@@ -899,6 +956,17 @@ class MemoryService:
         """Trusted actual assistant message; proposals/packets are never original messages."""
         if self.mutation_contract != "event_bound_v1":
             raise ValueError("V13_ASSISTANT_CAPTURE_REQUIRES_EVENT_BOUND")
+        if self.functional_contract == "functional_v1":
+            from milai_lab.memory.functional_state import namespace, note_exposure
+
+            bound = self.public_turn(session)
+            if bound is not None:
+                with self._locked():
+                    exposed = self.store.get(namespace(self), "exposure:" + bound["source_ref"])
+                    note_exposure(self, self.event_id(session, event_key, "assistant"),
+                                  [bound["source_ref"], *(
+                                      exposed.value["source_refs"] if exposed is not None else [])],
+                                  kind="assistant_output")
         return self._capture(
             session, event_key, "assistant", "public_assistant_message", content, None
         )
@@ -924,6 +992,17 @@ class MemoryService:
         object_ref: VerifiedObjectRef | None,
     ) -> dict[str, Any]:
         event_id = self.event_id(session, event_key, role)
+        if self._functional_hidden(source_ref=event_id):
+            actual = self._source(event_id, binding_only=True)
+            turn = self.store.get(self.turns_namespace, _hash([session, event_key]))
+            if (role == "user" and turn is not None and actual is not None
+                    and actual["content"] == json.loads(_json(content))):
+                return {"ok": True, "status": "raw_captured", "source_ref": event_id,
+                        "formation_status": "visibility_revoked", "effect": "none",
+                        "visibility": "current_live_input_only", "replayed": True}
+            if role != "assistant":
+                return {"ok": False, "status": "visibility_revoked", "source_ref": event_id,
+                        "effect": "none", "formation_status": "not_requested"}
         if object_ref is not None and (
             object_ref.owner != self.owner
             or object_ref.source_ref != event_id
@@ -958,7 +1037,31 @@ class MemoryService:
                     for version in record["value"].get("_v13_1", {}).get("history", [])
                 )
             else:
-                self.store.put(self.sources_namespace, event_id, dict(event), index=False)
+                try:
+                    self.store.put(self.sources_namespace, event_id, dict(event), index=False)
+                except Exception as error:
+                    if self.functional_contract != "functional_v1":
+                        raise
+                    self._uncertain_captures.add(event_id)
+                    return {"ok": False, "status": "outcome_unknown", "source_ref": event_id,
+                            "formation_status": "not_requested", "effect": "unconfirmed",
+                            "error_type": type(error).__name__}
+            if self.functional_contract == "functional_v1":
+                from milai_lab.memory.functional_state import namespace
+
+                # A Source put that raises after committing must not issue fragments.
+                # An explicit same-event capture on reopen verifies the original input
+                # before writing this confirmation; it never invents another event.
+                try:
+                    self.store.put(namespace(self), "capture:" + event_id,
+                                   {"source_ref": event_id, "event_sha256": _hash(event)},
+                                   index=False)
+                except Exception as error:
+                    self._uncertain_captures.add(event_id)
+                    return {"ok": False, "status": "outcome_unknown", "source_ref": event_id,
+                            "formation_status": "not_requested", "effect": "unconfirmed",
+                            "error_type": type(error).__name__}
+                self._uncertain_captures.discard(event_id)
         return {
             "ok": True,
             "status": "raw_captured",
@@ -966,16 +1069,172 @@ class MemoryService:
             "observed_at": event["observed_at"],
             "formation_status": "formed" if formed else "pending",
             "object_ref": event["object_ref"],
+            **({"visibility": "revoked"} if self._functional_hidden(source_ref=event_id) else {}),
         }
 
     def source(self, source_ref: str) -> dict[str, Any] | None:
+        return self._source(source_ref)
+
+    def _source(self, source_ref: str, *, binding_only: bool = False) -> dict[str, Any] | None:
+        if (source_ref in self._uncertain_captures
+                or (not binding_only and self._functional_hidden(source_ref=source_ref))):
+            return None
         item = self.store.get(self.sources_namespace, source_ref)
         if item is None or item.value.get("owner") != self.owner:
             return None
         event = item.value
+        if self.functional_contract == "functional_v1":
+            from milai_lab.memory.functional_state import namespace, validate_source
+
+            validate_source(source_ref, event, self.owner)
+            confirmation = self.store.get(namespace(self), "capture:" + source_ref)
+            if confirmation is None:
+                return None
+            if confirmation.value != {"source_ref": source_ref, "event_sha256": _hash(event)}:
+                raise ValueError("V13_5_SOURCE_CAPTURE_CONFIRMATION_CHANGED")
         if event.get("content_sha256") != _body_hash(event.get("content")):
             raise ValueError("V13_SOURCE_INTEGRITY_FAILED")
         return event
+
+    def _functional_hidden(
+        self, *, source_ref: str | None = None, record_id: str | None = None,
+    ) -> bool:
+        if self.functional_contract != "functional_v1":
+            return False
+        from milai_lab.memory.functional_state import visibility
+
+        state = visibility(self)
+        return (source_ref in state["sources"] if source_ref is not None
+                else record_id in state["records"])
+
+    def source_fragments(self, source_ref: str, *, max_chars: int = 1200) -> list[dict[str, Any]]:
+        """Issue actual original-text fragments; this is provenance, not semantic truth."""
+        if self.functional_contract != "functional_v1":
+            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
+        from milai_lab.memory.functional_state import issue_fragments
+
+        with self._locked():
+            return issue_fragments(self, source_ref, max_chars)
+
+    def source_fragment_range(self, source_ref: str, start: int, end: int) -> dict[str, Any]:
+        """Issue a trusted retriever's exact original range; no model-authored hash or quote."""
+        if self.functional_contract != "functional_v1":
+            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
+        from milai_lab.memory.functional_state import issue_fragment_range
+
+        with self._locked():
+            return issue_fragment_range(self, source_ref, start, end)
+
+    def source_fragment(self, handle: str) -> dict[str, Any]:
+        if self.functional_contract != "functional_v1":
+            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
+        from milai_lab.memory.functional_state import resolve_fragment
+
+        return resolve_fragment(self, handle)
+
+    def forgotten_source_refs(self) -> list[str]:
+        if self.functional_contract != "functional_v1":
+            return []
+        from milai_lab.memory.functional_state import visibility
+
+        return list(visibility(self)["sources"])
+
+    @property
+    def forget_epoch(self) -> int:
+        if self.functional_contract != "functional_v1":
+            return 0
+        from milai_lab.memory.functional_state import visibility
+
+        return int(visibility(self)["epoch"])
+
+    def forget(
+        self, session: str, operation_id: str, candidate_handle: str | None = None, *,
+        scope: str = "record_and_sources", fragment_handles: list[str] | None = None,
+        additional_fragment_handles: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """Revoke declared runtime visibility, never claim physical evidence erasure."""
+        if self.functional_contract != "functional_v1":
+            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
+        if not session or not operation_id or scope not in {"record", "record_and_sources"}:
+            raise ValueError("V13_5_FORGET_ARGUMENTS_INVALID")
+        from milai_lab.memory.functional_state import fragment_support, namespace, visibility
+
+        key = _hash([session, operation_id])
+        request = {"candidate_handle": candidate_handle, "scope": scope,
+                   "fragment_handles": fragment_handles,
+                   "additional_fragment_handles": additional_fragment_handles}
+        with self._locked():
+            state = visibility(self)
+            previous = state["operations"].get(key)
+            if previous is not None:
+                if previous["request"] != request:
+                    raise ValueError("V13_5_FORGET_OPERATION_CHANGED")
+                return {**previous["receipt"], "replayed": True}
+            if (candidate_handle is None) == (fragment_handles is None):
+                raise ValueError("V13_5_FORGET_EXACTLY_ONE_SELECTION_REQUIRED")
+            if candidate_handle is not None:
+                bound = self.candidate(candidate_handle)
+                if bound is None:
+                    return {"ok": False, "status": "rejected", "reason": "read_handle_invalid"}
+                item = self.store.get(self.namespace, bound["record_id"])
+                metadata = item.value["_v13_1"] if item is not None else None
+                if metadata is None or metadata["revision"] != bound["revision"]:
+                    return {"ok": False, "status": "rejected", "reason": "revision_conflict"}
+                refs = list(dict.fromkeys(ref for version in metadata["history"]
+                            for ref in self._version_source_refs(version)))
+                record_ids = [bound["record_id"]]
+            else:
+                if scope != "record_and_sources":
+                    raise ValueError("V13_5_SOURCE_FORGET_REQUIRES_SOURCE_SCOPE")
+                assert fragment_handles is not None
+                refs = fragment_support(self, fragment_handles)["source_refs"]
+                record_ids = [row["id"] for row in self._rows(self.namespace)
+                              if any(set(refs).intersection(self._version_source_refs(version))
+                                     for version in row["value"].get("_v13_1", {})
+                                     .get("history", []))]
+            if additional_fragment_handles is not None:
+                if candidate_handle is None or scope != "record_and_sources":
+                    raise ValueError("V13_5_ADDITIONAL_SOURCE_SCOPE_REQUIRES_RECORD_AND_SOURCES")
+                refs = list(dict.fromkeys([*refs,
+                    *fragment_support(self, additional_fragment_handles)["source_refs"]]))
+            revoked = refs if scope == "record_and_sources" else []
+            assistant_refs: list[str] = []
+            if scope == "record_and_sources":
+                trigger = self.public_turn(session)
+                revoked = list(dict.fromkeys([*revoked,
+                    *([trigger["source_ref"]] if trigger is not None else [])]))
+                # User inputs precede retrieval. Prefetch must never imply that
+                # an independent user statement derives from the delivered memory.
+                # Generated assistant outputs can actually contain delivered material.
+                exposures = [row["value"] for row in self._rows(namespace(self))
+                             if row["id"].startswith("exposure:")
+                             and row["value"].get("edge_kind") == "assistant_output"]
+                changed = True
+                while changed:
+                    prior_count = len(revoked)
+                    assistant_refs = [
+                        entry["public_source"] for entry in exposures
+                        if set(entry["source_refs"]).intersection(revoked)]
+                    revoked = list(dict.fromkeys([*revoked, *assistant_refs]))
+                    changed = len(revoked) != prior_count
+            receipt = {"ok": True, "status": "visibility_revoked", "effect": "visibility_only",
+                       "scope": scope, "revoked_ids": record_ids,
+                       "revoked_source_refs": revoked, "forget_epoch": state["epoch"] + 1,
+                       "source_visibility_scope": "selected_support_trigger_and_assistant_outputs",
+                       "exposure_semantics": "assistant_output_only_not_user_prefetch",
+                       "scope_counts": {"selected_records": len(record_ids),
+                                        "explicit_support_sources": len(refs),
+                                        "derived_assistant_sources": len(assistant_refs),
+                                        "revoked_sources": len(revoked)},
+                       "independent_input_copies": "require_explicit_fragment_selection",
+                       "physical_erasure": False, "raw_audit_retained": True}
+            state = {**state, "epoch": receipt["forget_epoch"],
+                     "records": list(dict.fromkeys([*state["records"], *record_ids])),
+                     "sources": list(dict.fromkeys([*state["sources"], *revoked])),
+                     "operations": {**state["operations"], key: {
+                         "request": request, "receipt": receipt}}}
+            self.store.put(namespace(self), "visibility", state, index=False)
+            return receipt
 
     def _rows(self, namespace: tuple[str, ...]) -> list[dict[str, Any]]:
         rows: list[dict[str, Any]] = []
@@ -1202,6 +1461,11 @@ class MemoryService:
                     identity + ":" + _hash(raw), raw, target, "proposal_id_conflict", None
                 )
             lineage: dict[str, Any] = {}
+            if (self.functional_contract == "functional_v1" and metadata is not None
+                    and raw.get("action") == "update" and not raw.get("binding_error")
+                    and raw.get("expected_revision") != metadata["revision"]):
+                assert prior is not None
+                return self._reject(identity, raw, target, "revision_conflict", prior.value)
             try:
                 reason, source = self._validate(raw)
                 if reason is None and self.support_contract == "direct_support_v1":
@@ -1223,10 +1487,32 @@ class MemoryService:
                 reason = "current_boundary_source_required"
             if reason is None and raw.get("id") is not None and prior is None:
                 reason = "record_not_found"
+            if reason is None and self._functional_hidden(record_id=target):
+                reason = "record_visibility_revoked"
             if reason is None and prior is not None and metadata is None:
                 reason = "legacy_record_requires_explicit_migration"
             if reason is None and metadata is not None and metadata["owner"] != self.owner:
                 reason = "record_not_found"
+            functional_support = None
+            if (reason is None and self.functional_contract == "functional_v1"
+                    and "functional_support" in raw):
+                from milai_lab.memory.functional_state import fragment_support, scope_leaves
+
+                requested_support = raw["functional_support"]
+                paths = {"content", "kind", "basis", *scope_leaves(raw["scope"])}
+                if not isinstance(requested_support, dict) or set(requested_support) != paths:
+                    reason = "functional_field_support_invalid"
+                else:
+                    try:
+                        functional_support = {
+                            path: fragment_support(self, handles)
+                            for path, handles in requested_support.items()
+                        }
+                        if any(not set(entry["source_refs"]) <= set(raw["source_refs"])
+                               for entry in functional_support.values()):
+                            reason = "functional_field_support_unselected"
+                    except ValueError:
+                        reason = "functional_fragment_invalid"
             revision = (metadata or {}).get("revision", 0)
             expected = raw.get("expected_revision")
             if reason is None and (type(expected) is not int or expected != revision):
@@ -1269,6 +1555,16 @@ class MemoryService:
                     "ok": True, "status": "no_change", "id": target, "revision": revision,
                     "effect": "none", "content_verification": "unchecked",
                 })
+            if (self.functional_contract == "functional_v1" and metadata is not None
+                    and raw.get("patch_operation") != "retract"
+                    and all(_json(raw.get(field)) == _json(metadata["current"].get(field))
+                            for field in ("content", "kind", "scope", "basis", "fields",
+                                          "object_ref"))):
+                return self._save_attempt(identity, raw, {
+                    "ok": True, "status": "no_change", "id": target, "revision": revision,
+                    "effect": "none", "content_verification": "unchecked",
+                    "support_preserved": True,
+                })
             version = {
                 "revision": revision + 1,
                 "content": raw["content"],
@@ -1300,6 +1596,17 @@ class MemoryService:
                 "effect": "memory_only",
                 "mode": self.mode,
             }
+            if self.functional_contract == "functional_v1":
+                version["retracted"] = raw.get("patch_operation") == "retract"
+                if "removed_field_support" in raw:
+                    from milai_lab.memory.functional_state import fragment_support
+
+                    version["removed_field_support"] = {
+                        path: fragment_support(self, handles)
+                        for path, handles in raw["removed_field_support"].items()}
+            if functional_support is not None:
+                version["functional_support"] = functional_support
+                receipt["fragment_provenance_verified"] = True
             if self.mutation_contract == "event_bound_v1":
                 bindings = self._source_bindings(raw["source_refs"])
                 version.update(source_refs=raw["source_refs"], source_bindings=bindings,
@@ -1390,6 +1697,8 @@ class MemoryService:
         return receipt
 
     def read(self, memory_id: str, revision: int | None = None) -> dict[str, Any]:
+        if self._functional_hidden(record_id=memory_id):
+            return {"ok": False, "status": "visibility_revoked", "id": memory_id}
         item = self.store.get(self.namespace, memory_id)
         if item is None:
             return {"ok": False, "status": "not_found", "id": memory_id}
@@ -1410,6 +1719,14 @@ class MemoryService:
             if revision is None
             else next((row for row in metadata["history"] if row["revision"] == revision), None)
         )
+        if (version is not None and self.functional_contract == "functional_v1"
+                and any(self._functional_hidden(source_ref=ref)
+                        for ref in self._version_source_refs(version))):
+            return {"ok": False, "status": "support_visibility_revoked", "id": memory_id}
+        if (self.functional_contract == "functional_v1" and revision is None
+                and version is not None and version.get("retracted")):
+            return {"ok": False, "status": "retracted", "id": memory_id,
+                    "revision": version["revision"], "history_available": True}
         result = {
             "ok": version is not None,
             "status": "found" if version else "revision_not_found",
@@ -1451,12 +1768,16 @@ class MemoryService:
         enumerate_bank = not query.strip()
         records = self.records()
         raw = self.sources() if include_raw else []
+        if self.functional_contract == "functional_v1":
+            raw = [event for event in raw if event["role"] != "assistant"]
         linked_text: dict[str, str] = {}
         relation: dict[str, Any] = {}
         if self.source_backlinks == "enabled" and tokens:
             all_sources = raw if include_raw else self.sources()
             matching_sources = [event for event in all_sources
-                                if any(token in set(_lexical_tokens(_json(event),
+                                if any(token in set(_lexical_tokens(_json(event) + (
+                                     " " + str(event["content"])
+                                     if self.functional_contract == "functional_v1" else ""),
                                      include_cjk_unigrams=True)) for token in tokens)]
             for event in matching_sources:
                 for record in self.backlink_candidates([event["event_id"]], limit=100):
@@ -1528,11 +1849,27 @@ class MemoryService:
 
         def rank(row: dict[str, Any]) -> int:
             text = _json(row)
+            if self.functional_contract == "functional_v1":
+                # JSON newline escapes must not turn the first original word
+                # after a line break into a different lexical token.
+                text += " " + str(row.get("value", row).get("content", ""))
             if row.get("id") in linked_text:
                 text += " " + linked_text[row["id"]]
             text_tokens = set(_lexical_tokens(text, include_cjk_unigrams=True))
             return sum(token in text_tokens for token in tokens)
 
+        withdrawals = []
+        if self.functional_contract == "functional_v1":
+            for row in records:
+                if row.get("status") != "retracted":
+                    continue
+                historical = self.read(row["id"], row["revision"])
+                if historical["ok"] and (enumerate_bank or rank(historical)):
+                    version = historical["value"]
+                    withdrawals.append({"record_id": row["id"], "revision": row["revision"],
+                        "version_sha256": _hash(version), "state": "withdrawn_not_current_fact",
+                        "source_refs": self._version_source_refs(version),
+                        "history_available": True, "body_visibility": "notice_only"})
         records = sorted(
             (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
             key=lambda row: (-rank(row), row["id"]),
@@ -1549,5 +1886,6 @@ class MemoryService:
             "degradation_reason": degradation,
             "records": records,
             "raw_events": raw,
+            **({"withdrawals": withdrawals} if self.functional_contract == "functional_v1" else {}),
             **({"source_relation": relation} if relation else {}),
         }

@@ -134,7 +134,8 @@ def _pytest_targets(job: str) -> set[str]:
     commands = re.findall(r"(?m)^\s*uv run --no-sync pytest[^\n]*", job)
     return set(
         re.findall(
-            r"tests/(?:unit|integration|integrations|contracts|architecture|memory)/test_[\w]+\.py",
+            r"tests/(?:unit|integration|integrations|contracts|architecture|application|memory)/"
+            r"test_[\w]+\.py",
             "\n".join(commands),
         )
     )

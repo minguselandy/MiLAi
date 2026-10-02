@@ -1,0 +1,236 @@
+{
+  "kind": "V13_5_F0_ENTRY_EVIDENCE",
+  "base_commit": "1d8cc7e414d0df728215c1ad5d0cbc82b0ac6398",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "plan": {
+    "path": "docs/MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md",
+    "sha256": "bd37592e9781728514a98e5d05e5e692bf4703042ee0298036fd2c39e295bc0e",
+    "lines": 866,
+    "read_complete": true
+  },
+  "baseline_tests": {
+    "passed": 184,
+    "failed": 0,
+    "scope": "prechange affected tests; not new functional acceptance"
+  },
+  "runtime": {
+    "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+    "version": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+    "modules": {
+      "milai_lab": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-5/MiLAi-Lab/src/milai_lab/__init__.py",
+      "milai_lab.memory.service": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-5/MiLAi-Lab/src/milai_lab/memory/service.py",
+      "milai_lab.providers.contextual_vllm": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-5/MiLAi-Lab/src/milai_lab/providers/contextual_vllm.py",
+      "langgraph.store.sqlite": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph/store/sqlite/__init__.py",
+      "langgraph.checkpoint.sqlite": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/lib/python3.11/site-packages/langgraph/checkpoint/sqlite/__init__.py"
+    },
+    "packages": {
+      "milai-lab": "0.1.0",
+      "langmem": "0.0.30",
+      "langgraph": "1.1.10",
+      "langgraph-checkpoint-sqlite": "2.0.11",
+      "mem0ai": "NOT_INSTALLED",
+      "transformers": "4.57.6",
+      "tokenizers": "0.22.2",
+      "httpx": "0.28.1",
+      "pytest": "8.4.2",
+      "ruff": "0.16.5"
+    },
+    "services": {
+      "7860": {
+        "http_status": 200,
+        "body": {
+          "object": "list",
+          "data": [
+            {
+              "id": "Qwen3.6-35B-A3B-FP8",
+              "object": "model",
+              "created": 1790975519,
+              "owned_by": "vllm",
+              "root": "/models",
+              "parent": null,
+              "max_model_len": 65536,
+              "permission": [
+                {
+                  "id": "modelperm-bc50bd43a32063ab",
+                  "object": "model_permission",
+                  "created": 1790975519,
+                  "allow_create_engine": false,
+                  "allow_sampling": true,
+                  "allow_logprobs": true,
+                  "allow_search_indices": false,
+                  "allow_view": true,
+                  "allow_fine_tuning": false,
+                  "organization": "*",
+                  "group": null,
+                  "is_blocking": false
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "7861": {
+        "http_status": 200,
+        "body": {
+          "object": "list",
+          "data": [
+            {
+              "id": "bge-m3",
+              "object": "model",
+              "created": 1790975519,
+              "owned_by": "vllm",
+              "root": "/data/models/embed",
+              "parent": null,
+              "max_model_len": 8192,
+              "permission": [
+                {
+                  "id": "modelperm-81fc536a0069405cb73499957577259d",
+                  "object": "model_permission",
+                  "created": 1790975519,
+                  "allow_create_engine": false,
+                  "allow_sampling": true,
+                  "allow_logprobs": true,
+                  "allow_search_indices": false,
+                  "allow_view": true,
+                  "allow_fine_tuning": false,
+                  "organization": "*",
+                  "group": null,
+                  "is_blocking": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "ledger": {
+      "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
+      "snapshot": {
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        },
+        "generation": {
+          "charged_tokens": 27722673,
+          "known_tokens": 27692286,
+          "unknown_usage": 1
+        },
+        "generation_requests": 9726,
+        "history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_history": {
+                "earlier_history": {
+                  "earlier_v15": {
+                    "embedding_tokens": 836,
+                    "generation_charged_tokens": 76737,
+                    "generation_known_tokens": 71846,
+                    "generation_requests": 108,
+                    "generation_unknown_reservation": 4891,
+                    "judge_requests": 0,
+                    "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                    "sealed": true,
+                    "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                    "unknown_usage": 1
+                  },
+                  "embedding_tokens": 443,
+                  "generation_charged_tokens": 40072,
+                  "generation_known_tokens": 40072,
+                  "generation_requests": 55,
+                  "judge_requests": 0,
+                  "ledger": "artifacts/langmem-provenance/v16-budget.json",
+                  "sealed": true,
+                  "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+                  "unknown_usage": 0
+                },
+                "embedding_tokens": 916,
+                "generation_charged_tokens": 101810,
+                "generation_known_tokens": 101810,
+                "generation_requests": 101,
+                "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+                "sealed": true,
+                "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+                "unknown_usage": 0
+              },
+              "embedding_tokens": 267,
+              "generation_charged_tokens": 19237,
+              "generation_known_tokens": 19237,
+              "generation_requests": 16,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+              "sealed": true,
+              "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+              "truncations": 1,
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 274,
+            "generation_requests": 20,
+            "generation_tokens": 20360,
+            "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+            "sealed": true,
+            "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+          },
+          "embedding_tokens": 808,
+          "generation_requests": 45,
+          "generation_tokens": 41457,
+          "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+          "sealed": true,
+          "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+        },
+        "limits": {
+          "arms": 3,
+          "embedding_tokens": null,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "questions": 12
+        }
+      }
+    },
+    "lock_sha256": "62b762bd2573d194d38677d6fcd9a74ff788cd5c6d64585987c1b2c79891c5d1",
+    "generation_requests_made": 0
+  },
+  "evidence": [
+    {
+      "path": "artifacts/v13-5/f0-runtime.json",
+      "sha256": "0e8297e4a925ddfff534c65741ee4cf3eff592e2c1a3632964a793fd5650f66f",
+      "bytes": 6609
+    },
+    {
+      "path": "artifacts/v13-5/f0-baseline-tests.xml",
+      "sha256": "450943ebac3f5d1c6805859e6f11e25370e2a1c77c2b59801ed3b3c3f941a542",
+      "bytes": 32975
+    },
+    {
+      "path": "artifacts/v13-5/f0-baseline-tests.log",
+      "sha256": "89d6a4f3c49973f151432761c23e89a1fbd2ef593c06982b3d65fbcddc7eb942",
+      "bytes": 2013
+    },
+    {
+      "path": "artifacts/v13-5/source-entry-audit.json",
+      "sha256": "036109d1fb63f83b40902bb25549cb809ad14605ea7253c8048f45b1d4c9a551",
+      "bytes": 23879
+    },
+    {
+      "path": "artifacts/v13-5/workflow-entry-audit.json",
+      "sha256": "96bab3b9944abdc0a9dc43c8f936a44018f807a83e8cc8e0381a72e57533b855",
+      "bytes": 10626
+    },
+    {
+      "path": "artifacts/v13-5/evaluator-entry-audit.json",
+      "sha256": "3dd3e31621f82feefd59284102c18b9bec1214f08544a8cd4a52eb0c580540e3",
+      "bytes": 185150
+    }
+  ],
+  "old_v13_4_closeout_reverification": {
+    "tracked": 19,
+    "local": 2452,
+    "pass": true,
+    "worktree": "development-experiment-v13-4",
+    "ledger_writes": 0
+  },
+  "new_generation_requests_at_entry": 0,
+  "new_embedding_requests_at_entry": 0,
+  "semantic_acceptance": "NOT_VERIFIED_AT_ENTRY"
+}

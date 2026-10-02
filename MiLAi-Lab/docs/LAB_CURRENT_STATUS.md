@@ -1,5 +1,12 @@
 # MiLAi Lab 当前状态
 
+当前更新：2026-10-03。用户已授权完整执行 [v13.5 功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)，并在完成后提交 GitHub。
+当前为实现与验证阶段，尚无完整功能验收结论；见[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
+[用户入口](V13_5_FUNCTIONAL_USAGE.md)与[逐项验收](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
+v13.4 的 Simplify 退出保留，未恢复 T1–T3。Product 仍为 **NO_GO**。
+
+以下为历史状态快照，旧 ACTIVE/paused、费用和分数仅说明其记录时点：
+
 更新日期：2026-10-01。此页提供当前导航；实际用户授权和 Goal 状态优先于历史文件中的 ACTIVE。
 
 | 范围 | 状态 | 依据 |

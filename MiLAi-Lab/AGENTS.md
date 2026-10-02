@@ -1,3 +1,31 @@
+# MiLAi Lab v13.5 active functional execution
+
+The user explicitly requests full execution of
+`docs/MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md`
+and GitHub submission after completion. This supersedes old phase scheduling,
+not the frozen v13.4 evidence or its Simplify result.
+Work in the v13.5 worktree/branch based on1d8cc7e414d0df728215c1ad5d0cbc82b0ac6398.
+Complete F0-F4 and L0-L4, FUNC01-16, with actual unified entry and persistence,
+revision, reading, forgetting and lifecycle evidence. F5 optimization is deferred.
+No claim of completion from isolated helpers, mocks, documents or aggregate score
+while a required critical capability remains unimplemented or unverified.
+Do not resume v13.4 T1-T3. Preserve original48 and old raw cohorts, scores and failures.
+Lab only; no Product/Archive changes, new services or model deployment. Old defaults stay.
+Root owns all real generation/embedding HTTP, concurrency1, frozen model queues,
+evaluator inputs and scoring, using the existing continuous ledger at
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Source modules may have separate owners, but one owner per file; never import gold
+or evaluator cases into runtime. No future holdout content access by method owners.
+Functional profile permits declared bounded format reproposals and explicit reads;
+unknown business mutations cannot be blindly retried. Preserve same-message budgets
+across restart. No source hash or memory receipt becomes business authorization.
+GitHub branch/PR publication is user-authorized after verified completion; no force
+push or merge is implied. Keep raw artifacts, credentials, DBs and model files ignored.
+
+---
+
+## Historical instructions and evidence (phase scheduling superseded)
+
 # v13.4 conditional exit recorded
 
 The authorized v13.4 execution has reached its documented G1 Simplify exit.

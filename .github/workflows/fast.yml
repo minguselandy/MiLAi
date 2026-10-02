@@ -216,7 +216,11 @@ jobs:
             --ignore=tests/unit/test_unified_benchmarks.py \
             --ignore=tests/unit/test_benchmark_memories.py \
             --ignore=tests/unit/test_merit_native.py \
-            --ignore=tests/unit/test_simplemem_native.py
+            --ignore=tests/unit/test_simplemem_native.py \
+            --ignore=tests/application/test_v13_5_workflows.py \
+            --ignore=tests/memory/test_v13_5_functional.py \
+            --ignore=tests/unit/test_v13_5_functional_integration.py \
+            --ignore=tests/application/test_v13_5_sdk_lifecycle.py
           uv run --no-sync python tools/check_legacy_archive.py
           uv build
 
@@ -273,6 +277,7 @@ jobs:
           uv run --no-sync mypy src/milai_lab
           uv run --no-sync mypy src/milai_lab/baselines/langmem_*.py src/milai_lab/baselines/benchmark_memories.py src/milai_lab/application/*.py src/milai_lab/methods/local_state_attention/*.py src/milai_lab/memory/*.py src/milai_lab/methods/milai_m1/*.py src/milai_lab/methods/on_demand_reconstruction/*.py src/milai_lab/providers/chat_bridge.py src/milai_lab/providers/request_pipeline.py src/milai_lab/methods/langmem_recipe.py src/milai_lab/providers/langmem_chat.py src/milai_lab/runners/langmem_*.py src/milai_lab/runners/frozen_action_continuation.py src/milai_lab/runners/writer_policy.py src/milai_lab/runners/state_update_probe.py src/milai_lab/runners/fixed_state_read.py src/milai_lab/runners/fixed_state_update.py src/milai_lab/runners/shared_record_use.py src/milai_lab/runners/persistent_memory.py src/milai_lab/datasets/merit.py src/milai_lab/providers/merit_metered.py src/milai_lab/runners/memsyco_native.py src/milai_lab/runners/merit_native.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_langmem_provenance.py tests/unit/test_freshness_projection.py tests/unit/test_milai_m1_v18.py tests/unit/test_milai_odr.py
+          uv run --no-sync pytest -q tests/application/test_v13_5_workflows.py tests/memory/test_v13_5_functional.py tests/unit/test_v13_5_functional_integration.py
 
   lab-external-fast:
     name: Lab locked external adapter fast gate
@@ -296,7 +301,7 @@ jobs:
           uv pip install --python .venv/bin/python -r data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt
           uv run --no-sync python tools/prepare_simplemem_text_source.py --prepare
           uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/simplemem_native.py src/milai_lab/integrations/memory/mem0.py src/milai_lab/integrations/memory/simplemem.py
-          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py tests/integrations/test_mem0_contracts.py tests/integrations/test_simplemem_contracts.py tests/integrations/test_external_interfaces.py
+          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py tests/integrations/test_mem0_contracts.py tests/integrations/test_simplemem_contracts.py tests/integrations/test_external_interfaces.py tests/application/test_v13_5_sdk_lifecycle.py
 
   archive-fast:
     name: Archive validation

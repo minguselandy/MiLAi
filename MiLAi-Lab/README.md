@@ -6,6 +6,7 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 
 ## 当前入口
 
+- [v13.5 功能入口](docs/V13_5_FUNCTIONAL_USAGE.md)：自然保存、修订、历史、遗忘及两工作流；[执行协议](docs/V13_5_EXECUTION_PROTOCOL.md)、[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 - [当前状态](docs/LAB_CURRENT_STATUS.md)：授权范围、暂停状态与未完成项。
 - [代码架构](docs/LAB_ARCHITECTURE.md)：职责、依赖方向及兼容入口。
 - [项目地图](docs/PROJECT_MAP.md)：从任务定位源码、配置、测试和证据。
@@ -16,9 +17,9 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-当前代码组织 Goal 正在执行 v12；阶段完成情况以执行记录为准。实验 Goal 保持 **paused**。
-R1 仅有标签输出的局部改善；R2 的实际错误事实持久化仍未解决。
-本次结构整理不改变实验结论、模型设置或工具行为，Product 仍为 **NO_GO**。
+当前用户授权执行 v13.5 功能开发与验证；进度以其执行协议和验收证据为准。
+v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
+`functional_v1`，旧默认不变；Product 仍为 **NO_GO**。
 
 ## Repository roles
 

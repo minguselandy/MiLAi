@@ -77,7 +77,10 @@
     "tests/memory/test_v13_1_p5.py",
     "tests/unit/test_v13_1_controls.py",
     "tests/memory/test_v13_1_p5_compare.py",
-    "tests/memory/test_v13_1_document_publication.py"
+    "tests/memory/test_v13_1_document_publication.py",
+    "tests/application/test_v13_5_workflows.py",
+    "tests/memory/test_v13_5_functional.py",
+    "tests/unit/test_v13_5_functional_integration.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -116,7 +119,11 @@
     "tests/memory/test_v13_1_p5.py",
     "tests/unit/test_v13_1_controls.py",
     "tests/memory/test_v13_1_p5_compare.py",
-    "tests/memory/test_v13_1_document_publication.py"
+    "tests/memory/test_v13_1_document_publication.py",
+    "tests/application/test_v13_5_workflows.py",
+    "tests/memory/test_v13_5_functional.py",
+    "tests/unit/test_v13_5_functional_integration.py",
+    "tests/application/test_v13_5_sdk_lifecycle.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
@@ -130,7 +137,8 @@
     "tests/unit/test_simplemem_native.py",
     "tests/integrations/test_mem0_contracts.py",
     "tests/integrations/test_simplemem_contracts.py",
-    "tests/integrations/test_external_interfaces.py"
+    "tests/integrations/test_external_interfaces.py",
+    "tests/application/test_v13_5_sdk_lifecycle.py"
   ],
   "local_artifact_tests": [
     "tests/unit/test_contextual_merit_adapter.py::test_v8_selection_requires_declared_config_and_matching_freeze",

@@ -8,4 +8,6 @@ APPLICATION_SOURCE_FILES = (
     "src/milai_lab/application/refs.py",
     "src/milai_lab/application/recovery.py",
     "src/milai_lab/application/document_publication.py",
+    "src/milai_lab/application/functional.py",
+    "src/milai_lab/application/native_journal.py",
 )
