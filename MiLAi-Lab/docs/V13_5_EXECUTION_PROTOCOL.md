@@ -93,3 +93,16 @@ GitHub publication follows verified completion and includes source, tests,
 configuration, user/recovery/rollback documentation and compact evidence. Raw
 databases, traces, copied corpora, model files and credentials remain excluded.
 Publication does not merge the branch or authorize a Product release.
+
+## r2 quality configuration amendment
+
+After r1 produced a save confirmation without a semantic tool call and a separate
+valid-JSON but unusable final answer, r2 enables the existing Qwen service's native
+thinking mode and reserves 8,192 output tokens. The running server already has
+`--reasoning-parser qwen3`; this changes request configuration only. The generic
+prompt explicitly requires actual commits for requested temporary/scoped saves.
+The model, endpoint, original fixtures/rubrics, ordinary 8,192-token material cap,
+three-read limit, 24-call limit, one format reproposal and finite queue limits stay
+at their declared values. Full-wire admission includes the increased output
+reservation. The combined intervention has no single-change causal attribution.
+Original r0/r1 attempts, failures and costs remain separate.
