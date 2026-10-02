@@ -1,0 +1,84 @@
+{
+  "kind": "V13_4_METADATA_BYTE_RECOVERY",
+  "rows": [
+    {
+      "url": "https://errata.rfc-editor.org/search/?status=verified&errata_type=technical&presentation=table",
+      "original_sha256": "d52fa6160c1ee858bdef82cbaef3f0229f4546d333df614b52ed7ab3208a7cc7",
+      "requested_at_utc": "2026-10-02T17:42:39.468572+00:00",
+      "http_status": 200,
+      "final_url": "https://errata.rfc-editor.org/search/?status=verified&errata_type=technical&presentation=table",
+      "path": "artifacts/v13-4/t0-metadata-recovery/00.raw",
+      "sha256": "d52fa6160c1ee858bdef82cbaef3f0229f4546d333df614b52ed7ab3208a7cc7",
+      "bytes": 963969,
+      "original_exact_bytes_recovered": true,
+      "completed_at_utc": "2026-10-02T17:42:43.665587+00:00"
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc-index.xml",
+      "original_sha256": "0e0321f330b8668d8ee860a918b8743af88743f4ee5a908535c57a87aa21e68c",
+      "requested_at_utc": "2026-10-02T17:42:39.470562+00:00",
+      "http_status": 200,
+      "final_url": "https://www.rfc-editor.org/rfc-index.xml",
+      "path": "artifacts/v13-4/t0-metadata-recovery/01.raw",
+      "sha256": "0e0321f330b8668d8ee860a918b8743af88743f4ee5a908535c57a87aa21e68c",
+      "bytes": 13724329,
+      "original_exact_bytes_recovered": true,
+      "completed_at_utc": "2026-10-02T17:42:44.048187+00:00"
+    },
+    {
+      "url": "https://www.rfc-editor.org/series/rfc-errata/",
+      "original_sha256": "abfc643aae2153a48ed029eab801debace0adf1fd0f3114cc70199d7dcd66068",
+      "requested_at_utc": "2026-10-02T17:42:39.471452+00:00",
+      "http_status": 200,
+      "final_url": "https://www.rfc-editor.org/series/rfc-errata/",
+      "path": "artifacts/v13-4/t0-metadata-recovery/02.raw",
+      "sha256": "abfc643aae2153a48ed029eab801debace0adf1fd0f3114cc70199d7dcd66068",
+      "bytes": 51166,
+      "original_exact_bytes_recovered": true,
+      "completed_at_utc": "2026-10-02T17:42:40.923308+00:00"
+    },
+    {
+      "url": "https://www.rfc-editor.org/series/rfc-use/",
+      "original_sha256": "8ee80729b4d3b52778c22e769e6efec3ae6f16297755882a3356744f291470e0",
+      "requested_at_utc": "2026-10-02T17:42:39.471879+00:00",
+      "http_status": 200,
+      "final_url": "https://www.rfc-editor.org/series/rfc-use/",
+      "path": "artifacts/v13-4/t0-metadata-recovery/03.raw",
+      "sha256": "8ee80729b4d3b52778c22e769e6efec3ae6f16297755882a3356744f291470e0",
+      "bytes": 38313,
+      "original_exact_bytes_recovered": true,
+      "completed_at_utc": "2026-10-02T17:42:40.717336+00:00"
+    },
+    {
+      "url": "https://trustee.ietf.org/documents/trust-legal-provisions/",
+      "original_sha256": "f00e4ed8971c69027f7bf133866f04a20e8123a44385df2cea72b6e1c2a7cffc",
+      "requested_at_utc": "2026-10-02T17:42:39.473557+00:00",
+      "http_status": 200,
+      "final_url": "https://trustee.ietf.org/documents/trust-legal-provisions/",
+      "path": "artifacts/v13-4/t0-metadata-recovery/04.raw",
+      "sha256": "beed2897b92f8e95ef693ed204b2df30a1b478f08520d213f4f46da4869a7e1e",
+      "bytes": 51332,
+      "original_exact_bytes_recovered": false,
+      "completed_at_utc": "2026-10-02T17:42:41.230404+00:00"
+    },
+    {
+      "url": "https://trustee.ietf.org/documents/trust-legal-provisions/tlp-5/",
+      "original_sha256": "c86491264f72ad5d0c16ecec441ad6e19ebac422259a5869400bf20f82399a39",
+      "requested_at_utc": "2026-10-02T17:42:39.474888+00:00",
+      "http_status": 200,
+      "final_url": "https://trustee.ietf.org/documents/trust-legal-provisions/tlp-5/",
+      "path": "artifacts/v13-4/t0-metadata-recovery/05.raw",
+      "sha256": "060b4d624a66b4a8720e7b4e41137db1e6fa4c2369570fa7febee7c15edd7bd1",
+      "bytes": 72616,
+      "original_exact_bytes_recovered": false,
+      "completed_at_utc": "2026-10-02T17:42:41.253301+00:00"
+    }
+  ],
+  "model_requests": 0,
+  "new_corpus_bodies": 0,
+  "new_grouping_or_candidate_decisions": 0,
+  "old_manifest_modified": false,
+  "exact_historical_bytes_recovered": 4,
+  "new_snapshot_only": 2,
+  "scope_note": "The table/index/errata-guidance/reuse-guidance bytes exactly match original frozen hashes. Trust index/TLP5 HTML differ and are new snapshots, never substitutes for missing historical bytes. Original selected records/freeze/exposure/32 candidate denominator are unchanged."
+}

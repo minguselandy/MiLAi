@@ -9,15 +9,17 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.contracts.correction_relation import (
+    ChainResearchSnapshot,
     DeliveryReceipt,
     QueryView,
+    SelectionPlan,
     canonical,
     check_sha,
     digest,
     text_sha256,
 )
 from milai_lab.harness.contextual_artifacts import current_http_budget
-from milai_lab.methods.correction_evidence import ordered_source_plan, pack_complete
+from milai_lab.methods.correction_evidence import chain_rag_plan, ordered_source_plan, pack_complete
 from milai_lab.methods.correction_reader import FrozenBankReader
 from milai_lab.providers.contextual_vllm import VLLMClient
 from milai_lab.providers.generation_admission import DurableGenerationAdmission
@@ -117,15 +119,24 @@ class AccountedReader:
 
 def run_query(
     bank: FrozenBankReader, query: QueryView, reader: Reader, *, evidence_budget: int = 2048,
-    candidate_limit: int = 32,
+    candidate_limit: int = 32, method: str = "ordered_source_v1",
 ) -> dict[str, Any]:
     """Injected readers are mechanical controls; only AccountedReader is a real-model path."""
     wall, cpu = time.perf_counter_ns(), time.process_time_ns()
+    if method not in {"ordered_source_v1", "chain_rag_v1"}:
+        raise ValueError("CORRECTION_METHOD_UNAVAILABLE")
     with bank.guard(query):
         snapshot = bank.retrieve(query, limit=candidate_limit)
         select_wall, select_cpu = time.perf_counter_ns(), time.process_time_ns()
-        plan = ordered_source_plan(snapshot, evidence_budget=evidence_budget,
-                                   token_count=bank.token_count)
+        plan: SelectionPlan
+        if method == "chain_rag_v1":
+            if not isinstance(snapshot, ChainResearchSnapshot):
+                raise ValueError("CORRECTION_CHAIN_SNAPSHOT_REQUIRED")
+            plan = chain_rag_plan(snapshot, evidence_budget=evidence_budget,
+                                  token_count=bank.token_count)
+        else:
+            plan = ordered_source_plan(snapshot, evidence_budget=evidence_budget,
+                                       token_count=bank.token_count)
         bank.emit({"event": "correction_selection", "plan": asdict(plan),
                    "wall_ns": time.perf_counter_ns() - select_wall,
                    "cpu_ns": time.process_time_ns() - select_cpu})
@@ -146,7 +157,9 @@ def run_query(
                   "query_planning_model_calls": 0,
                   "wall_ns": time.perf_counter_ns() - wall,
                   "cpu_ns": time.process_time_ns() - cpu,
-                  "scientific_status": "N1_ENTRY_ONLY_NOT_CHAIN_RAG_OR_T0_RESULT"}
+                  "scientific_status": ("B1_MECHANICAL_ONLY_NOT_T0_RESULT"
+                                         if method == "chain_rag_v1"
+                                         else "N1_ENTRY_ONLY_NOT_CHAIN_RAG_OR_T0_RESULT")}
         # Check JSON serializability before completing the guarded path.
         canonical(result)
     bank.emit({"event": "correction_readonly_result", **result})

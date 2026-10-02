@@ -9,18 +9,30 @@ from dataclasses import asdict, replace
 from typing import Any
 
 from milai_lab.contracts.correction_relation import (
+    ChainResearchSnapshot,
     EvidenceCandidate,
+    EvidenceSpanCandidate,
     QueryView,
     ResearchSnapshot,
+    SegmentProfile,
+    SourceRelation,
+    candidate_identity,
     canonical,
     check_sha,
     digest,
     instant,
+    span_identity,
     text_sha256,
 )
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.contextual_memory.retrieval import IndexEntry, _bm25_scores
+from milai_lab.methods.correction_chains import (
+    CompiledChains,
+    compile_chains,
+    expand_candidate_pool,
+)
 from milai_lab.methods.correction_evidence import source_unit
+from milai_lab.methods.correction_spans import segment_body
 
 
 class FrozenBankReader:
@@ -35,6 +47,8 @@ class FrozenBankReader:
         self, service: MemoryService, *, cutoff: str, config_sha256: str,
         token_count: Callable[[str], int], tokenizer_identity: dict[str, Any],
         emit: Callable[[dict[str, Any]], None] | None = None,
+        segmentation: SegmentProfile | None = None,
+        source_relations: tuple[SourceRelation, ...] | None = None,
     ) -> None:
         if (service.mutation_contract != "event_bound_v1"
                 or service.candidate_contract != "read_handle_v1"):
@@ -43,11 +57,21 @@ class FrozenBankReader:
         check_sha(config_sha256)
         if not tokenizer_identity:
             raise ValueError("CORRECTION_TOKENIZER_IDENTITY_REQUIRED")
+        if segmentation is not None and not isinstance(segmentation, SegmentProfile):
+            raise ValueError("CORRECTION_SEGMENT_PROFILE_INVALID")
+        if source_relations is not None and (
+            segmentation is None or type(source_relations) is not tuple
+            or any(not isinstance(relation, SourceRelation) for relation in source_relations)
+        ):
+            raise ValueError("CORRECTION_QUERY_FREE_RELATIONS_REQUIRE_SPANS")
         self.service = service
         self.cutoff = cutoff
         self.config_sha256 = config_sha256
         self.token_count = token_count
         self.tokenizer_sha256 = digest(tokenizer_identity)
+        self.segmentation = segmentation
+        self.source_relations = source_relations
+        self._chains: CompiledChains | None = None
         self.emit = emit or (lambda event: None)
         self._entries: list[IndexEntry] = []
         self._candidates: dict[str, EvidenceCandidate] = {}
@@ -142,7 +166,8 @@ class FrozenBankReader:
         wall, cpu = time.perf_counter_ns(), time.process_time_ns()
         before, rows = self._fact_state("freeze_before")
         sources = [row for row in rows if row["namespace"] == list(self.service.sources_namespace)]
-        excluded = []
+        excluded, empty_sources = [], []
+        eligible_sources: dict[str, dict[str, Any]] = {}
         source_reads, logical_bytes = 0, 0
         for row in sources:
             source = self._public_read("source", row["id"])
@@ -154,21 +179,41 @@ class FrozenBankReader:
             if instant(source["observed_at"]) > instant(self.cutoff):
                 excluded.append(row["id"])
                 continue
+            eligible_sources[row["id"]] = source
             # String bytes remain exact. Non-string content has a declared, stable text form.
             body = (source["content"] if type(source["content"]) is str
                     else canonical(source["content"]))
-            unit = source_unit(row["id"], source["role"], source["observed_at"], body)
-            candidate = EvidenceCandidate(
-                row["id"], source["role"], source["observed_at"], source["content_sha256"],
-                text_sha256(body), len(body), self.token_count(canonical(unit)) + 1,
-            )
-            self._candidates[row["id"]] = candidate
-            self._entries.append(IndexEntry(row["id"], row["id"], body))
+            body_sha = text_sha256(body)
+            ranges = (segment_body(body, token_count=self.token_count, profile=self.segmentation)
+                      if self.segmentation is not None else ((0, len(body)),))
+            if not ranges:
+                empty_sources.append(row["id"])
+            for start, end in ranges:
+                part = body[start:end]
+                candidate_id = (span_identity(row["id"], source["content_sha256"], body_sha,
+                                              start, end, text_sha256(part))
+                                if self.segmentation is not None else row["id"])
+                unit = source_unit(row["id"], source["role"], source["observed_at"], part,
+                                   start=start, candidate_id=candidate_id
+                                   if self.segmentation is not None else None)
+                common: dict[str, Any] = dict(
+                    source_ref=row["id"], role=source["role"], observed_at=source["observed_at"],
+                    source_sha256=source["content_sha256"], body_text_sha256=body_sha,
+                    codepoints=len(body), unit_tokens=self.token_count(canonical(unit)) + 1)
+                candidate = (EvidenceSpanCandidate(**common, candidate_id=candidate_id,
+                                                   start=start, end=end,
+                                                   span_sha256=text_sha256(part))
+                             if self.segmentation is not None else EvidenceCandidate(**common))
+                if candidate_id in self._candidates:
+                    raise ValueError("CORRECTION_SPAN_ID_COLLISION")
+                self._candidates[candidate_id] = candidate
+                self._entries.append(IndexEntry(candidate_id, row["id"], part))
         # Order by observed time, then deterministic Store-key order for equal times.
         # This is a common tie convention, not evidence of true arrival order or relevance.
         source_order = {row["id"]: position for position, row in enumerate(sources)}
         self._entries.sort(key=lambda entry: (
-            instant(self._candidates[entry.ref].observed_at), source_order[entry.ref]))
+            instant(self._candidates[entry.key].observed_at), source_order[entry.ref]))
+        eligible_refs = {candidate.source_ref for candidate in self._candidates.values()}
         for row in rows:
             if row["namespace"] != list(self.service.namespace):
                 continue
@@ -177,7 +222,7 @@ class FrozenBankReader:
                 continue
             for version in metadata.get("history", []):
                 refs = version.get("source_refs", [version.get("source_ref")])
-                if not refs or any(ref not in self._candidates for ref in refs):
+                if not refs or any(ref not in eligible_refs for ref in refs):
                     continue
                 read = self._public_read("read", row["id"], version["revision"])
                 handle = read.get("candidate_handle")
@@ -187,6 +232,14 @@ class FrozenBankReader:
                 frozen = {"handle": handle, "binding": binding}
                 for ref in refs:
                     self._handles.setdefault(ref, []).append(frozen)
+        if self.source_relations is not None:
+            span_candidates = [self._candidates[entry.key] for entry in self._entries]
+            if any(not isinstance(candidate, EvidenceSpanCandidate)
+                   for candidate in span_candidates):
+                raise ValueError("CORRECTION_CHAIN_SPAN_CANDIDATES_REQUIRED")
+            self._chains = compile_chains(self.source_relations, [candidate for candidate in
+                span_candidates if isinstance(candidate, EvidenceSpanCandidate)],
+                eligible_sources, self.token_count)
         after, _ = self._fact_state("freeze_after")
         if before != after:
             raise ValueError("CORRECTION_BANK_CHANGED_DURING_FREEZE")
@@ -194,12 +247,17 @@ class FrozenBankReader:
         self.index_sha256 = digest({
             "bank_sha256": before, "cutoff": self.cutoff, "config": self.config_sha256,
             "tokenizer": self.tokenizer_sha256,
-            "sources": [asdict(self._candidates[e.ref]) for e in self._entries],
+            "sources": [asdict(self._candidates[e.key]) for e in self._entries],
             "version_bindings": self._handles,
+            **({"segmentation": asdict(self.segmentation)}
+               if self.segmentation is not None else {}),
+            **({"source_relations": [asdict(relation) for relation in self.source_relations],
+                "chain_groups": [asdict(group) for group in self._chains.groups]}
+               if self.source_relations is not None and self._chains is not None else {}),
         })
         receipt = {"event": "correction_source_index", "query_free": True,
                    "index_sha256": self.index_sha256, "bank_sha256": before,
-                   "eligible_sources": len(self._entries), "excluded_after_cutoff": excluded,
+                   "eligible_sources": len(eligible_refs), "excluded_after_cutoff": excluded,
                    "source_exact_reads": source_reads, "logical_bytes": logical_bytes,
                    "wall_ns": time.perf_counter_ns() - wall,
                    "cpu_ns": time.process_time_ns() - cpu,
@@ -207,6 +265,14 @@ class FrozenBankReader:
                    "version_guard_io": "all exact Store gets counted in correction_store_reads",
                    "io_accounting": "index/selected source bytes overlap Store-get bytes",
                    "physical_io_bytes": None, "generation_requests": 0, "embedding_requests": 0}
+        if self.segmentation is not None:
+            receipt.update(segmentation=asdict(self.segmentation), indexed_spans=len(self._entries),
+                           excluded_empty_sources=empty_sources,
+                           span_index=[asdict(self._candidates[e.key]) for e in self._entries])
+        if self._chains is not None:
+            receipt.update(relation_count=len(self._chains.relation_members),
+                           chain_groups=[asdict(group) for group in self._chains.groups],
+                           relation_validation="literal span/hash binding; semantics unchecked")
         self.emit(receipt)
         return receipt
 
@@ -239,17 +305,38 @@ class FrozenBankReader:
             raise ValueError("CORRECTION_CANDIDATE_LIMIT_INVALID")
         wall, cpu = time.perf_counter_ns(), time.process_time_ns()
         scores = _bm25_scores(self._entries, query.question)
-        order = sorted((i for i, score in enumerate(scores) if score > 0),
-                       key=lambda i: (-scores[i], i))[:limit]
+        ranking = sorted((i for i, score in enumerate(scores) if score > 0),
+                         key=lambda i: (-scores[i], i))
+        order = ranking[:limit]
+        chain_fields: dict[str, Any] = {}
+        if self._chains is not None:
+            pool, seeds, omitted, unclosed = expand_candidate_pool(
+                self._chains, [self._entries[i].key for i in ranking], limit)
+            positions = {entry.key: i for i, entry in enumerate(self._entries)}
+            order = [positions[key] for key in pool]
+            chain_fields = dict(
+                groups=tuple(group for group in self._chains.groups
+                             if set(group.candidate_ids).intersection(pool)),
+                ordinary_seed_ids=seeds, pool_omitted_ids=omitted, unclosed_relation_ids=unclosed)
         assert self.bank_sha256 is not None and self.index_sha256 is not None
-        snapshot = ResearchSnapshot(query, self.bank_sha256, self.index_sha256,
-                                    self.tokenizer_sha256, tuple(replace(
-                                        self._candidates[self._entries[i].ref],
-                                        retrieval_score=scores[i]) for i in order))
+        snapshot_args: dict[str, Any] = dict(
+            query=query, bank_sha256=self.bank_sha256,
+            index_sha256=self.index_sha256, tokenizer_sha256=self.tokenizer_sha256,
+            candidates=tuple(replace(self._candidates[self._entries[i].key],
+                                     retrieval_score=scores[i]) for i in order),
+            retrieval=("ordinary_bm25_span_closure_v1" if self._chains is not None
+                       else "ordinary_bm25_span_v1" if self.segmentation is not None
+                       else "ordinary_bm25_source_v1"))
+        snapshot = (ChainResearchSnapshot(**snapshot_args, **chain_fields)
+                    if self._chains is not None
+                    else ResearchSnapshot(**snapshot_args))
         self._issued[snapshot.snapshot_sha256] = snapshot
         self.emit({"event": "correction_candidate_pool", "snapshot": asdict(snapshot),
                    "snapshot_sha256": snapshot.snapshot_sha256,
-                   "indexed_sources": len(self._entries), "returned_count": len(order),
+                   "indexed_sources": len({entry.ref for entry in self._entries}),
+                   **({"indexed_spans": len(self._entries)}
+                      if self.segmentation is not None else {}),
+                   "returned_count": len(order),
                    "wall_ns": time.perf_counter_ns() - wall,
                    "cpu_ns": time.process_time_ns() - cpu,
                    "index_text_bytes_scanned": sum(len(e.text.encode()) for e in self._entries),
@@ -262,14 +349,15 @@ class FrozenBankReader:
         self._check_query(snapshot.query)
         if self._issued.get(snapshot.snapshot_sha256) != snapshot:
             raise ValueError("CORRECTION_RESEARCH_SNAPSHOT_NOT_ISSUED")
-        pool = {c.source_ref: c for c in snapshot.candidates}
+        pool = {candidate_identity(c): c for c in snapshot.candidates}
         if (len(set(selected_ids)) != len(selected_ids)
                 or any(ref not in pool for ref in selected_ids)):
             raise ValueError("CORRECTION_UNSELECTED_SOURCE_READ")
         result = []
-        for ref in selected_ids:
+        for candidate_id in selected_ids:
             wall, cpu = time.perf_counter_ns(), time.process_time_ns()
-            candidate = pool[ref]
+            candidate = pool[candidate_id]
+            ref = candidate.source_ref
             source = self._public_read("source", ref)
             if source is None:
                 raise ValueError("CORRECTION_SOURCE_UNAVAILABLE")
@@ -290,11 +378,20 @@ class FrozenBankReader:
                 read = self._public_read("read", bound["record_id"], bound["revision"])
                 if not read["ok"] or digest(read["value"]) != bound["version_sha256"]:
                     raise ValueError("CORRECTION_VERSION_BINDING_CHANGED")
-            result.append(source_unit(ref, source["role"], source["observed_at"], body))
+            start, end = (0, len(body))
+            if isinstance(candidate, EvidenceSpanCandidate):
+                start, end = candidate.start, candidate.end
+                if text_sha256(body[start:end]) != candidate.span_sha256:
+                    raise ValueError("CORRECTION_SOURCE_SPAN_CHANGED")
+            result.append(source_unit(ref, source["role"], source["observed_at"], body[start:end],
+                                      start=start, candidate_id=candidate_id
+                                      if isinstance(candidate, EvidenceSpanCandidate) else None))
             self.emit({"event": "correction_selected_source_read", "source_ref": ref,
                        "source_sha256": candidate.source_sha256,
                        "body_text_sha256": candidate.body_text_sha256,
-                       "range": [0, len(body)], "logical_bytes": len(canonical(source).encode()),
+                       "range": [start, end], "logical_bytes": len(canonical(source).encode()),
+                       **({"candidate_id": candidate_id, "span_sha256": candidate.span_sha256}
+                          if isinstance(candidate, EvidenceSpanCandidate) else {}),
                        "wall_ns": time.perf_counter_ns() - wall,
                        "cpu_ns": time.process_time_ns() - cpu,
                        "version_guard_count": len(self._handles.get(ref, [])),

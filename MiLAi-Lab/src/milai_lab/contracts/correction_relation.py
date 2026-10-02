@@ -88,6 +88,105 @@ class EvidenceCandidate:
 
 
 @dataclass(frozen=True)
+class SegmentProfile:
+    """Query-free source partition; the tokenizer identity is bound by the bank index."""
+
+    max_body_tokens: int = 384
+    algorithm: str = "paragraph_line_whitespace_codepoint_v1"
+
+    def __post_init__(self) -> None:
+        if (type(self.max_body_tokens) is not int or self.max_body_tokens <= 0
+                or self.algorithm != "paragraph_line_whitespace_codepoint_v1"):
+            raise ValueError("CORRECTION_SEGMENT_PROFILE_INVALID")
+
+
+@dataclass(frozen=True, kw_only=True)
+class EvidenceSpanCandidate(EvidenceCandidate):
+    """One immutable original-body span; inherited codepoints describes the full body."""
+
+    candidate_id: str
+    start: int
+    end: int
+    span_sha256: str
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        check_sha(self.span_sha256)
+        if (type(self.start) is not int or type(self.end) is not int
+                or not 0 <= self.start < self.end <= self.codepoints
+                or self.candidate_id != span_identity(
+                    self.source_ref, self.source_sha256, self.body_text_sha256,
+                    self.start, self.end, self.span_sha256)):
+            raise ValueError("CORRECTION_SPAN_IDENTITY_INVALID")
+
+
+def span_identity(
+    source_ref: str, source_sha256: str, body_text_sha256: str,
+    start: int, end: int, span_sha256: str,
+) -> str:
+    return "span-" + digest(["evidence_span_v1", source_ref, source_sha256,
+                             body_text_sha256, start, end, span_sha256])
+
+
+def candidate_identity(candidate: EvidenceCandidate) -> str:
+    return (candidate.candidate_id if isinstance(candidate, EvidenceSpanCandidate)
+            else candidate.source_ref)
+
+
+@dataclass(frozen=True)
+class BoundSourceSpan:
+    source_ref: str
+    source_sha256: str
+    body_text_sha256: str
+    start: int
+    end: int
+    span_sha256: str
+    text_role: str = "source_text"
+
+    def __post_init__(self) -> None:
+        if (type(self.source_ref) is not str or not self.source_ref
+                or type(self.start) is not int or type(self.end) is not int
+                or not 0 <= self.start < self.end
+                or self.text_role not in {"source_text", "quoted_predecessor",
+                                         "correction_text", "relation_witness"}):
+            raise ValueError("CORRECTION_RELATION_SPAN_INVALID")
+        for value in (self.source_sha256, self.body_text_sha256, self.span_sha256):
+            check_sha(value)
+
+
+@dataclass(frozen=True)
+class SourceRelation:
+    """Public, query-free relation annotation; span binding does not verify semantics."""
+
+    predecessor_spans: tuple[BoundSourceSpan, ...]
+    successor_spans: tuple[BoundSourceSpan, ...]
+    witness_spans: tuple[BoundSourceSpan, ...]
+    location_status: str = "exact_quote"
+    relation_kind: str = "public_correction"
+
+    def __post_init__(self) -> None:
+        if (any(type(group) is not tuple or not group
+                or any(not isinstance(span, BoundSourceSpan) for span in group)
+                for group in (self.predecessor_spans, self.successor_spans, self.witness_spans))
+                or self.location_status not in {"exact_quote", "section_pointer", "ambiguous",
+                                                "quoted_only", "unknown"}
+                or self.relation_kind != "public_correction"):
+            raise ValueError("CORRECTION_RELATION_INVALID")
+
+    @property
+    def relation_id(self) -> str:
+        return "rel-" + digest(asdict(self))
+
+
+@dataclass(frozen=True)
+class ChainGroup:
+    group_id: str
+    candidate_ids: tuple[str, ...]
+    relation_ids: tuple[str, ...]
+    material_tokens: int
+
+
+@dataclass(frozen=True)
 class ResearchSnapshot:
     """Research identity, deliberately distinct from public-turn selected_snapshot_v1."""
 
@@ -102,7 +201,7 @@ class ResearchSnapshot:
         for value in (self.bank_sha256, self.index_sha256, self.tokenizer_sha256):
             check_sha(value)
         if (type(self.candidates) is not tuple or len(self.candidates) > 32
-                or len({c.source_ref for c in self.candidates}) != len(self.candidates)):
+                or len({candidate_identity(c) for c in self.candidates}) != len(self.candidates)):
             raise ValueError("CORRECTION_CANDIDATE_POOL_INVALID")
         if any(instant(c.observed_at) > instant(self.query.cutoff) for c in self.candidates):
             raise ValueError("CORRECTION_CANDIDATE_AFTER_CUTOFF")
@@ -110,6 +209,14 @@ class ResearchSnapshot:
     @property
     def snapshot_sha256(self) -> str:
         return digest(asdict(self))
+
+
+@dataclass(frozen=True, kw_only=True)
+class ChainResearchSnapshot(ResearchSnapshot):
+    groups: tuple[ChainGroup, ...]
+    ordinary_seed_ids: tuple[str, ...]
+    pool_omitted_ids: tuple[str, ...]
+    unclosed_relation_ids: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -122,6 +229,22 @@ class SelectionPlan:
     strategy: str = "ordered_source_v1"
 
 
+@dataclass(frozen=True, kw_only=True)
+class ChainSelectionPlan(SelectionPlan):
+    complete_group_ids: tuple[str, ...]
+    incomplete_group_ids: tuple[str, ...]
+    group_cost_decisions: tuple[ChainGroupCostDecision, ...]
+
+
+@dataclass(frozen=True)
+class ChainGroupCostDecision:
+    group_id: str
+    available_in_pool: bool
+    exact_group_material_tokens: int
+    estimated_combined_tokens: int
+    selected_as_complete: bool
+
+
 @dataclass(frozen=True)
 class DeliveredSpan:
     source_ref: str
@@ -130,6 +253,11 @@ class DeliveredSpan:
     start: int
     end: int
     content_sha256: str
+
+
+@dataclass(frozen=True, kw_only=True)
+class DeliveredEvidenceSpan(DeliveredSpan):
+    candidate_id: str
 
 
 @dataclass(frozen=True)
@@ -146,3 +274,16 @@ class DeliveryReceipt:
     body_serialization: str = "string_verbatim_else_json_sorted_utf8_v1"
     range_basis: str = "body_text_unicode_codepoints_half_open"
     consumption_status: str = "not_evaluated"
+
+
+@dataclass(frozen=True, kw_only=True)
+class ChainDeliveryReceipt(DeliveryReceipt):
+    complete_group_ids: tuple[str, ...]
+    incomplete_group_ids: tuple[str, ...]
+    unclosed_relation_ids: tuple[str, ...]
+    group_cost_decisions: tuple[ChainGroupCostDecision, ...]
+    planning_estimated_tokens: int
+    planning_minus_material_tokens: int
+    packing_omitted_ids: tuple[str, ...]
+    cost_scope: str = ("first group exact; later boundaries estimated; "
+                       "delta includes packing omissions")

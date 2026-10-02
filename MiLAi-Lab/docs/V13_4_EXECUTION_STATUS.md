@@ -31,6 +31,8 @@ N1 新增四个opt-in模块：研究合同、冻结来源适配器、完整正�
 
 [单人语义审查](../data/manifests/v13-4-t0-semantic-audit.json)已检查32候选：RFC7940一条勘误所称旧值与冻结TXT不一致，RFC7970一条勘误给错节号；错误公开值保留，人工找到的正确位置只留在evaluator。JSON/CBOR/CDDL宽依赖族涉及11候选，既不自动视作同一更正，也不能宣称完全独立。多条勘误本身已复述旧文/纠正文/注释，不能强制标成需要RFC加勘误的互补任务。
 
+早期shortlist只保留官方元数据响应hash。后续[原件补存](../data/manifests/v13-4-t0-metadata-recovery.json)取回6份响应，其中勘误表、完整RFC index、勘误说明、reuse说明4份与原hash逐字一致，故可恢复原始分组输入；两份Trust页面hash不同，只存为新快照，不能冒充旧版本。旧冻结与32候选未变。
+
 ## N2 问题生成之前的真实形成
 
 按[前瞻协议](V13_4_N2_FORMATION_PROTOCOL.md)，为满足“metadata先于未来问题”，仅将一次形成子步骤从N3前移；G1之前不训练预测器、不分析T1信号。协议/config在`1cdf810`提交，实际输入与driver另存hash冻结。32候选的96份来源经真实公开捕获入口入独立bank（32 RFC+64勘误、0事实行）；Writer每次只见一份勘误，没有未来问题/答案。原RFC语义metadata保持unknown，不广播勘误字段。
