@@ -106,3 +106,10 @@ three-read limit, 24-call limit, one format reproposal and finite queue limits s
 at their declared values. Full-wire admission includes the increased output
 reservation. The combined intervention has no single-change causal attribution.
 Original r0/r1 attempts, failures and costs remain separate.
+
+The r2 targeted stage completed four messages. It fixed the tested save/answer
+failures, but a current-state follow-up cited historical memory without a live
+query. R3 makes this F3 boundary explicit: checking current application state or
+continuing prior work first reads the public backend in the current message.
+R3 otherwise retains r2's configuration and leaves original rubric bytes intact.
+The four r2 messages remain a targeted cohort, not a completed normal24 run.
