@@ -129,3 +129,35 @@ ownership client identity in a new freeze. Source, prompt, thinking, 8,192 outpu
 ordinary material/read/message/queue bounds and original rubric remain unchanged.
 Native capacity includes actual tools and messages. A native reasoning-only final
 would still fail honestly; no automatic repair of semantic answers is introduced.
+
+## r5 read and operation evidence amendment (paused before model admission)
+
+R4 stopped after a raw-only search was followed by a false semantic-save claim.
+A separate revision selected the old value's original fragment for changed
+content: source identity checks passed, but direct semantic support did not.
+Both failures and all paid attempts remain retained under the original freeze.
+
+R5 distinguishes raw fragments from delivered semantic records in each read-only
+packet, with page-local record IDs and counts. This does not report the owner's
+entire bank or claim that a partial record body is complete. Read metadata is
+included in material capacity. Original snapshot contents and source handles
+remain immutable. Tool descriptions require selected fragments to directly
+support newly proposed content; the request trigger alone is not field evidence.
+
+Before each generation, the entry also supplies a body-free summary of paired
+memory call/results in the visible checkpoint of the current public message.
+It includes actual commit receipts, pending calls and unchanged/failed/unknown
+outcomes. This is derived from already delivered operation evidence, performs no
+retrieval and runs after forget projection. The complete wire, including this
+summary, remains capacity checked and charged. It does not classify user intent,
+verify prose against evidence or certify the assistant's final answer. Ordinary
+snapshots remain unchanged after writes; subsequent receipts establish effects.
+
+The r4 model, native endpoint, prompt, thinking, output and finite bounds remain
+unchanged in the new r5 configuration. The interface and dynamic operation
+summary are a combined intervention; no isolated causal attribution is claimed.
+
+The user paused the experiment before r5 input preparation or model admission.
+The candidate and completed mechanical checks are retained for the GitHub
+checkpoint; no new cohort or model validation is implied. The latest explicit
+instruction authorizes this paused publication before functional completion.

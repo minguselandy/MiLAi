@@ -1,4 +1,20 @@
-# MiLAi Lab v13.5 active functional execution
+# MiLAi Lab v13.5 PAUSED checkpoint
+
+On 2026-10-03 the user explicitly requested: "暂停当前实验提交到github上".
+The experiment Goal is PAUSED. Do not implement further methods, start model
+HTTP, prepare new experimental cohorts, author L4 or resume L1–L4 until the user
+explicitly resumes. Only finish the requested pause report, evidence collection,
+publication checks and GitHub branch/draft PR submission. Publication is expressly
+authorized now, before functional completion; no merge or Product release.
+R0–r4 are preserved failed/incomplete development cohorts. R5 has mechanical
+checks only, no input freeze and zero model calls. L2–L4 are NOT_RUN.
+See docs/V13_5_PAUSE_STATUS_20261003.md and
+data/manifests/v13-5-pause-summary-20261003.json. Preserve all earlier results,
+the continuous ledger, ignored raw artifacts and unchanged original48.
+
+---
+
+## Historical v13.5 activation (scheduling superseded by pause above)
 
 The user explicitly requests full execution of
 `docs/MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md`

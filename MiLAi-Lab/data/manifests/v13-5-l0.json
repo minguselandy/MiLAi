@@ -95,5 +95,25 @@
       "artifacts/v13-5/functional-checks/ci-visibility-replay-matrix.log": "a1bdf59b923b6f5cae542c22708e9e2d6b03f0b3f105b63c17d9383dfcf0f152"
     },
     "model_semantics": "Requires new cohort, not established by mechanical tests"
+  },
+  "r4_native_reuse": {
+    "passed": 24,
+    "skipped": 0,
+    "scope": "Existing native bridge, real installed SDK, pinned tokenizer/template, native tool schemas and overflow. Scripted provider, not semantic/model evidence.",
+    "source_changed": false,
+    "evidence": "artifacts/v13-5/native-reuse-r4-checks/summary.json",
+    "sha256": "c64568dfa1bedb3c1fdedee8a348311c4c038b9adc419518e2851473ec3e5ca0"
+  },
+  "r5_candidate_followup": {
+    "model_status": "NOT_RUN_NOT_FROZEN",
+    "memory_tests_passed": 25,
+    "whole_entry_and_visibility_tests_passed": 17,
+    "source_ruff_mypy": "PASS",
+    "semantic_acceptance": "NOT_ESTABLISHED",
+    "evidence_sha256": {
+      "artifacts/v13-5/read-effect-contract-r1/summary.json": "c7b6e8c41f502e159dc2277bb44c6981404bc5719c83d426c47cf4e5834cc51e",
+      "artifacts/v13-5/application-validation/memory-effects-r0/validation.json": "3224ecba4a5032a95a44b36599afeb0010a445bb23a1fc1278b1c9c0aa84f469"
+    },
+    "candidate_commit": "2020db8f7367c0d197034b6f30fd6962b4ebfc17"
   }
 }

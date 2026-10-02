@@ -1,6 +1,6 @@
 {
   "kind": "V13_5_COHORT_REGISTER",
-  "status": "DEVELOPMENT_IN_PROGRESS",
+  "status": "PAUSED_BY_USER",
   "cohorts": [
     {
       "id": "l1-r0",
@@ -38,9 +38,234 @@
         "artifacts/v13-5/l1-r0-manual-review/manual-grades.json": "235e9e376cb22b52bbc09a8ec653343a57b9d29e5aa50bf2e0155ade4ce6effb",
         "artifacts/v13-5/l1-r0-evaluator-final/summary.json": "f2a9f148fd5d77414ea9aaca58c53487ab607a1cb3bf4b1215a25f390a6dbb73"
       }
+    },
+    {
+      "id": "l1-r1",
+      "candidate_commit": "ac544f9",
+      "layer": "L1",
+      "state": "STOPPED_CORE_FALSE_SAVE_AND_ORDINARY_FINAL_FAILURE",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS": 16,
+        "FAIL": 2,
+        "NOT_RUN": 6
+      },
+      "semantic_counts_scope": "Frozen original E0 rubric; NOT_RUN cases are unknown, not failed unseen answers.",
+      "case_execution_counts": {
+        "COMPLETED": 17,
+        "INCOMPLETE": 1,
+        "NOT_RUN": 6
+      },
+      "message_counts": {
+        "COMPLETED": 35,
+        "NOT_RUN": 13
+      },
+      "cost_delta": {
+        "generation_requests": 59,
+        "generation.known_tokens": 264223,
+        "generation.charged_tokens": 264223,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "configuration": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tool_mode": "json_action",
+        "enable_thinking": false,
+        "max_tokens": 4096
+      },
+      "failures": [
+        "scope-2-m1: Explicit saved confirmation without save proposal, semantic record or mutation receipt.",
+        "object-continue-2-m1: Correct actual business and memory effects, but delivered final answer is only an opening brace. Valid action-envelope JSON and finish_reason stop; ordinary semantic failure, not format-reproposal evidence. Continuation NOT_RUN."
+      ],
+      "normal24_gate": "NOT_PASSED",
+      "v13_5_additional_findings": [],
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r1/input-freeze.json": "d38d9aa5dfaf9a678a0d182aea4d557f3731c7a47d53614259658d1357fb136b",
+        "artifacts/v13-5/l1-r1-manual-review/seal.json": "1edb11e7d5f2e910db56530c129c954375ddee7205ec545ab80bb0c4113263d7",
+        "artifacts/v13-5/l1-r1-manual-review/manual-grades.json": "cc96a3afc4485df6a8accf29adc0e1a63846482780592501c2753fde68a0ff42",
+        "artifacts/v13-5/l1-r1-evaluator-final/summary.json": "3b8f8951e1af37e3a1255925ffd2156b94d005185d7053b693f3a3922bf8b54f"
+      },
+      "targeted_prefix_cost_included_not_added_again": {
+        "messages": 6,
+        "generation_requests": 10,
+        "tokens": 48739
+      }
+    },
+    {
+      "id": "l1-r2",
+      "candidate_commit": "d6f03c7",
+      "layer": "L1",
+      "state": "TARGETED_ONLY_CURRENT_STATE_TASK_NOT_PASSED",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS": 2,
+        "FAIL": 0,
+        "NOT_RUN": 22
+      },
+      "semantic_counts_scope": "Frozen original E0 rubric; NOT_RUN cases are unknown, not failed unseen answers.",
+      "case_execution_counts": {
+        "COMPLETED": 2,
+        "NOT_RUN": 22
+      },
+      "message_counts": {
+        "NOT_RUN": 44,
+        "COMPLETED": 4
+      },
+      "cost_delta": {
+        "generation_requests": 7,
+        "generation.known_tokens": 36863,
+        "generation.charged_tokens": 36863,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "configuration": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tool_mode": "json_action",
+        "enable_thinking": true,
+        "max_tokens": 8192
+      },
+      "failures": [
+        "object-continue-2-m2: Correct reported existing receipt and unchanged World; no live get_reservation when the current user explicitly asks to check actual state. Original explicit rubric passes, while v13.5 F3/current-state task does not."
+      ],
+      "normal24_gate": "NOT_COMPLETED_TARGETED_ONLY",
+      "v13_5_additional_findings": [
+        {
+          "case_id": "object-continue-2",
+          "original_rubric": "PASS_EXPLICIT_CHECKS",
+          "additional_contract": "F3 current-state authority / actual live check",
+          "status": "NOT_PASSED",
+          "observation": "One generation, no live application query; historical receipt reported as existing record."
+        }
+      ],
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r2/input-freeze.json": "839775fdfb69d6869db1f43e13ef6d11c54a5c49be3c33819fd6c523d0fb3f98",
+        "artifacts/v13-5/l1-r2-manual-review/seal.json": "bca6b560cd854424b2681319749ebf978483d4ee5cc747dc5751521b4de54aa9",
+        "artifacts/v13-5/l1-r2-manual-review/manual-grades.json": "e62adf94c7f5810e19dbed007282d77151e2098fa8a64b52ff05d32bf4d21be7",
+        "artifacts/v13-5/l1-r2-evaluator-mechanical/summary.json": "585ef173778dcd99d3c0b27a9c5a0aeffd616caf7152018102517d0dd4b030b1"
+      },
+      "scope_note": "Only four targeted messages in two cases; this is not a completed normal24 run.",
+      "reasoning_usage": "Completion tokens already include provider-generated reasoning; no second reasoning charge is added."
+    },
+    {
+      "id": "l1-r3",
+      "candidate_commit": "18f0f8e",
+      "layer": "L1",
+      "state": "STOPPED_PROVIDER_FINAL_FORMAT_FAILURE",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS": 0,
+        "FAIL": 1,
+        "NOT_RUN": 23
+      },
+      "semantic_counts_scope": "Frozen original E0 rubric; NOT_RUN cases are unknown, not failed unseen answers.",
+      "case_execution_counts": {
+        "INCOMPLETE": 1,
+        "NOT_RUN": 23
+      },
+      "message_counts": {
+        "NOT_RUN": 47,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 4,
+        "generation.known_tokens": 23896,
+        "generation.charged_tokens": 23896,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "configuration": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tool_mode": "json_action",
+        "enable_thinking": true,
+        "max_tokens": 8192
+      },
+      "failures": [
+        "object-continue-2-m1: Real business and semantic-save effects remain, but last provider final content is null and only reasoning contains answer text. JSON_ACTION_MALFORMED; reasoning is not promoted to final."
+      ],
+      "normal24_gate": "NOT_PASSED",
+      "v13_5_additional_findings": [],
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r3/input-freeze.json": "6c66bc2587fec6338b0edcb94a6820839885f809e925723e06234f37f8179ab8",
+        "artifacts/v13-5/l1-r3-manual-review/seal.json": "807f5518ce405ca8d2f2a85945cb474b42314163a9239bc01e37756685648196",
+        "artifacts/v13-5/l1-r3-manual-review/manual-grades.json": "0d84a1d56d7df4aa2392546055131d51da02e5a438e1d249c39c39dec24a134e",
+        "artifacts/v13-5/l1-r3-evaluator-mechanical/summary.json": "4854c8488972380df876a013f759bacf604e29db100d0076b3da306f5a4e6cb2"
+      },
+      "business_and_memory_effects_retained": true,
+      "reasoning_promoted_to_final": false,
+      "reasoning_usage": "Completion tokens already include provider-generated reasoning; no second reasoning charge is added."
+    },
+    {
+      "id": "l1-r4",
+      "candidate_commit": "1295693",
+      "layer": "L1",
+      "state": "STOPPED_CORE_FALSE_SAVE_NOT_PASSED",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS": 12,
+        "FAIL": 1,
+        "NOT_RUN": 11
+      },
+      "semantic_counts_scope": "Frozen original E0 rubric; NOT_RUN cases are unknown, not failed unseen answers.",
+      "case_execution_counts": {
+        "COMPLETED": 13,
+        "NOT_RUN": 11
+      },
+      "message_counts": {
+        "COMPLETED": 25,
+        "NOT_RUN": 23
+      },
+      "cost_delta": {
+        "generation_requests": 50,
+        "generation.known_tokens": 269980,
+        "generation.charged_tokens": 269980,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "configuration": {
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "tool_mode": "native",
+        "enable_thinking": true,
+        "max_tokens": 8192
+      },
+      "failures": [
+        "recall-3-m1: Two searches over raw Source, zero save/update and zero semantic records, followed by an explicit saved confirmation. Later raw-Source recall does not repair durable_saved.",
+        "update-3-m2: Same-ID current/history contents satisfy the original rubric, but the new kilometres field directly cites only the old miles Source. The actual correction is merely trigger_binding; v13.5 direct-support fails."
+      ],
+      "normal24_gate": "NOT_PASSED",
+      "v13_5_additional_findings": [
+        {
+          "case_id": "update-3",
+          "original_rubric": "PASS_EXPLICIT_CHECKS",
+          "additional_contract": "New field direct semantic support",
+          "status": "NOT_PASSED",
+          "observation": "Changed content cites only the old contradictory Source; trigger identity does not substitute for evidence."
+        }
+      ],
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r4/input-freeze.json": "6bd8cf11e4d2bb63cd22b3c348faf319ac46ea66280a32f96a7327d14427fe93",
+        "artifacts/v13-5/l1-r4-manual-review/seal.json": "a04808627213a68b755f3ee4ddb0f92e8b4b8ebf1af90185ffc0ac8fee5e7cc0",
+        "artifacts/v13-5/l1-r4-manual-review/manual-grades.json": "604f3c2dc200e033c03c3397b7134a3cbf3aa82d6ee5c8093a7240ba4caa5a2e",
+        "artifacts/v13-5/l1-r4-evaluator-final/summary.json": "8647fe62cffce0b0ab974b06e848654968336bc2c87905b46c06f5563530d22d"
+      },
+      "reasoning_usage": "Completion tokens already include provider-generated reasoning; no second reasoning charge is added."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
   "prior_original_48_requirements": "unchanged",
-  "product": "NO_GO"
+  "product": "NO_GO",
+  "cross_cohort_interpretation": "Each development cohort retains its own full denominator and stop/failure. Passing cases from different configurations must not be combined into a synthetic normal24 pass.",
+  "cost_scope": "Unique actual request/attempt deltas per cohort. Targeted prefixes are included once in their cohort, not added again. No rerun or ledger reset is authorized by this register.",
+  "pause_report": "docs/V13_5_PAUSE_STATUS_20261003.md"
 }

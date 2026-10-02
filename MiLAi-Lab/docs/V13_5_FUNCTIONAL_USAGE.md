@@ -1,5 +1,10 @@
 # v13.5 functional profile
 
+**Paused on 2026-10-03 at the user's request.** These commands document the
+interface; they do not authorize resuming experiments. R0–r4 failed acceptance;
+r5 is a mechanically checked candidate with no model cohort yet. See
+[the pause report](V13_5_PAUSE_STATUS_20261003.md) before choosing a configuration.
+
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
 separately in `V13_5_REQUIREMENTS_AND_ACCEPTANCE.md`; the existence of this guide

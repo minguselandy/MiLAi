@@ -1,10 +1,13 @@
 # MiLAi Lab 当前状态
 
-当前更新：2026-10-03。用户已授权完整执行 [v13.5 功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)，并在完成后提交 GitHub。
-当前为实现与验证阶段，尚无完整功能验收结论；见[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
+当前更新：2026-10-03。按用户最新要求，**v13.5 实验已暂停，提交 GitHub 草稿检查点**。
+完整[功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)尚未完成；见[暂停总结](V13_5_PAUSE_STATUS_20261003.md)、[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
 [用户入口](V13_5_FUNCTIONAL_USAGE.md)与[逐项验收](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
-L1-r0 因核心修订错误停止：8 PASS、2 FAIL、14 未运行；17/48 条消息完成，
-36 次 generation、179,274 tokens。正在修复并准备独立 r1；L2–L4 尚未运行。
+L1-r0–r4 均保留为未通过的开发轮次。最近 r4 完成 25/48 条消息，原 rubric
+12 PASS、1 FAIL、11 案未运行；因虚假保存确认停止，另有修订内容的直接证据不足。
+r4 新增 50 次 generation、269,980 tokens。r5 已完成读取／回执接口修正及受影响机械检查，
+尚未冻结或调用模型。L2–L4 尚未运行，不能把历轮局部通过结果合并为完整通过。
+本阶段 r0–r4 共 156 次 generation、774,236 tokens；恢复需用户明确指令。
 机械检查与模型结果分别见 [L0 检查](../data/manifests/v13-5-l0.json) 和
 [cohort 记录](../data/manifests/v13-5-runs.json)。
 v13.4 的 Simplify 退出保留，未恢复 T1–T3。Product 仍为 **NO_GO**。
