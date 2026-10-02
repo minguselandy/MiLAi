@@ -113,3 +113,19 @@ query. R3 makes this F3 boundary explicit: checking current application state or
 continuing prior work first reads the public backend in the current message.
 R3 otherwise retains r2's configuration and leaves original rubric bytes intact.
 The four r2 messages remain a targeted cohort, not a completed normal24 run.
+
+## r4 native protocol amendment
+
+The first r3 message committed its reservation/label and semantic record, but
+the final provider response had null assistant content and nonempty reasoning;
+JSON-action decoding failed. Its four paid calls and already committed effects
+remain retained. Reasoning is not converted into a delivered final answer.
+
+R4 reuses the existing native-tool branch of the same chat bridge and the already
+running Qwen3.6-35B-A3B-FP8 endpoint at port 7862. Read-only model discovery confirms
+65,536 context tokens; the server already has native tool and reasoning parsers.
+No service is started or reconfigured. R4 changes the Host protocol and full HTTP
+ownership client identity in a new freeze. Source, prompt, thinking, 8,192 output,
+ordinary material/read/message/queue bounds and original rubric remain unchanged.
+Native capacity includes actual tools and messages. A native reasoning-only final
+would still fail honestly; no automatic repair of semantic answers is introduced.
