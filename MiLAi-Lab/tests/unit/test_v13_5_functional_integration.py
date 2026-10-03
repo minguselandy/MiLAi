@@ -37,6 +37,8 @@ def prepared(
     operation_mode_declaration: bool = False,
     inline_fragments: bool = False,
     reference_mode_declaration: bool = False,
+    receipt_units: bool = False,
+    failure_receipts: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -56,7 +58,9 @@ def prepared(
     write_json(budget_path, budget.state)
     settings = {
         "profile": "functional_v1", "host": asdict(host),
-        "source_selection": "inline_fragments_v1" if inline_fragments else "index_v1",
+        "source_selection": "inline_receipt_units_v2" if receipt_units else
+        "inline_fragments_v1" if inline_fragments else "index_v1",
+        "failure_delivery": "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
             "tokenizer_files_sha256": {
                 name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
@@ -946,13 +950,17 @@ def test_public_agent_catalog_carries_per_field_correction_selections(
         saved["records"][0]["value"]["functional_support"]["scope.project"])
 
 
-@pytest.mark.parametrize("workflow", ["reservation", "document"])
-@pytest.mark.parametrize('inline_fragments', [False, True])
+@pytest.mark.parametrize("workflow,document_body", [("reservation", "local body"),
+                        ("document", "local body"), ("document", "界" * 600)])
+@pytest.mark.parametrize('inline_fragments,receipt_units', [(False, False), (True, False),
+                                                          (True, True)])
 def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, workflow: str,
     inline_fragments: bool,
+    receipt_units: bool,
+    document_body: str,
 ) -> None:
-    root = prepared(tmp_path, inline_fragments=inline_fragments)
+    root = prepared(tmp_path, inline_fragments=inline_fragments, receipt_units=receipt_units)
 
     def evidence(result: dict[str, Any]) -> list[str]:
         fragments = result['source_fragment_index']
@@ -964,13 +972,19 @@ def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
             assert all(row['role'] == 'tool' and row['semantic_support'] == 'unchecked'
                        for row in fragments)
             assert 'not what actually happened' in result['memory_evidence_selection']
+            if receipt_units and len(body) <= 4096:
+                assert len(fragments) == 1
+                assert fragments[0]['start'] == 0 and fragments[0]['end'] == len(body)
+            elif receipt_units:
+                assert len(fragments) > 1
+                assert all(len(row['content']) <= 1200 for row in fragments)
         return [row['fragment_handle'] for row in fragments]
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if workflow == "document":
             if ordinal == 1:
                 return tool("create_or_update_draft", title="mechanical draft",
-                            content="local body", document_version=0, content_digest="")
+                            content=document_body, document_version=0, content_digest="")
             if ordinal in {2, 3}:
                 observed = actual_tool_receipt(wire)["receipt"]
                 bound = {k: observed[k] for k in ("title", "document_version", "content_digest")}
@@ -1496,10 +1510,13 @@ def test_document_receipt_response_reports_distinct_draft_approval_and_publicati
         'completed' if publication_available else 'partial')
 
 
+@pytest.mark.parametrize('failed_response', [False, True])
 def test_receipt_response_cannot_replay_revoked_business_source(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    failed_response: bool,
 ) -> None:
-    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True)
+    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True,
+                    failure_receipts=failed_response)
     private_item = 'RECEIPT_PRIVATE_ITEM'
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
@@ -1511,6 +1528,8 @@ def test_receipt_response_cannot_replay_revoked_business_source(
             return native_call('save_memory', 'save', content='Reserved ' + private_item,
                 fragment_handles=[r['fragment_handle'] for r in receipt['source_fragment_index']])
         if ordinal == 3:
+            if failed_response:
+                return {'role': 'assistant', 'content': None}
             return {'role': 'assistant', 'content': 'Execution done.'}
         if ordinal == 4:
             record = next(row for row in materials(wire)['items'] if row['type'] == 'record')
@@ -1521,7 +1540,8 @@ def test_receipt_response_cannot_replay_revoked_business_source(
 
     wires = scripted(monkeypatch, reply, native=True)
     first = message(root)
-    assert first['status'] == 'COMPLETED' and private_item in first['final_answer']
+    assert first['status'] == ('FAILED' if failed_response else 'COMPLETED')
+    assert private_item in first['final_answer']
     forgotten = functional.message(root, bank='mechanical-bank', owner='alice', session='session',
                                    message_id='forget', content='Forget the saved item.')
     assert forgotten['status'] == 'COMPLETED', forgotten
@@ -1672,3 +1692,34 @@ def test_readonly_declaration_retains_bound_negative_quote_without_granting_oper
     resumed = functional.message(root, **args, resume=True)
     assert resumed['status'] == 'COMPLETED' and resumed['request_mode'] == result['request_mode']
     assert len(wires) == 3
+
+
+@pytest.mark.parametrize('bad', ['null', 'truncated', 'unknown_tool'])
+def test_protocol_failure_delivers_receipts_without_repair_or_repeating_effects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str,
+) -> None:
+    root = prepared(tmp_path, native=True, receipt_response=True, failure_receipts=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'actual', item_key='receipt item',
+                               quantity=2, destination='local', packing='box')
+        assert ordinal == 2
+        if bad == 'unknown_tool':
+            return native_call('invented_tool', 'forbidden', value='MUST_NOT_EXECUTE')
+        return {'role': 'assistant', 'content': None,
+                '_test_finish_reason': 'length' if bad == 'truncated' else 'stop',
+                'reasoning_content': 'REASONING_MUST_NOT_BECOME_FINAL'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED' and result['error_category'] == 'provider_protocol'
+    assert result['final_delivery']['status'] == 'available'
+    assert '回答协议失败' in result['final_answer'] and 'receipt item' in result['final_answer']
+    assert '本轮语义记忆: 未提交' in result['final_answer']
+    assert 'REASONING_MUST_NOT_BECOME_FINAL' not in result['final_answer']
+    assert result['operation_status']['request_completion'] == 'unchecked'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['world']['world']['attempts']) == 1 and len(wires) == 2
+    replay = message(root)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == 2

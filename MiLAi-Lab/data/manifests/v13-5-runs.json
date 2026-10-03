@@ -2204,6 +2204,97 @@
         "full_run": 37099639704,
         "full_status": "skipped"
       }
+    },
+    {
+      "id": "l2-r23",
+      "layer": "L2",
+      "candidate_commit": "f27e6b783baa84b484af5c58c7a284b7c1f61de6",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r23.json",
+      "admission": "Full12/26 before outputs. Native v5 whole-input binding without copied quote; bounded ordinary reference resolution only for current continuation with empty operation set; strict operation mask unchanged. Same caps, fresh-query guard and inline source selection. Direct d05/d06/r05/d01 failures first.",
+      "mechanical_verification": "114 entry/privacy/workflow PASS; 2 production tokenizer/capacity reference/permission/quota/replay scripted variants PASS with0HTTP; ruff/affected mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 10983,
+        "generation": {
+          "charged_tokens": 34379116,
+          "known_tokens": 34348729,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r23/input-freeze.json": "1f7c960134dfafcff568b8ea3f61e29d491249ce0494a503ea383a390712c3da",
+        "configs/v13-5-functional-r23.json": "85c490a448f4591e70db3765a5a1c6926d4b40966199bc30776f919032b82bbf",
+        "artifacts/v13-5/r23-entry-privacy-workflows.log": "40ff272e5abd672d9b92447129e7d8dd07d07e98a500948fe99724bf2091113f",
+        "artifacts/v13-5/r23-production-contracts.json": "7d7a3784c2f0c8930eec9adb4942fa4d5f3d1a58198843b6500a5b45400b9b9f",
+        "artifacts/v13-5/r23-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r23-mypy-final.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r23-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/l2-r23/review.json": "ee4ae612a82bf31a1892f23d1cdca4ef8364565f7918081bf3a1a5c36ae26a73",
+        "artifacts/v13-5/l2-r23/seal.json": "5050ddd8eb328e8997645bbf0edf915ad46b6ed1a590cf90d773e84188dec10f",
+        "artifacts/v13-5/l2-r23-manual-grades.json": "ced7b34422eb7fda97b4d66da716b02cc7fc22987aafa49de7f3e98938275c2c",
+        "artifacts/v13-5/l2-r23-all-review.jsonl": "14a1b16f4c4d404eef20495895dfe17766debe7743820d8f35af8696ebcb73f3",
+        "artifacts/v13-5/l2-r23-evaluator/summary.json": "3bf5219daacd3873d8d103dd8176e66e2340ba6bfd3dc1bb7332d42e514100cd",
+        "artifacts/v13-5/r23-memory-queue-evaluator.log": "3e2bc2aa10742ec9507a85b95d0994fc9887a445a66b92c4a0584b848ce4a71a",
+        "artifacts/v13-5/r23-sdk-lifecycle.log": "47711f1a0592689668bb3b70c6082544413f371a50ab8e468368f5ba6139af29"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 10,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 21,
+        "UNKNOWN": 4,
+        "FAILED": 1
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 106,
+        "generation.known_tokens": 681827,
+        "generation.charged_tokens": 681827,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l2-r01": "Exact reservation and label, supported saved receipt; subsequent actual query, no repeat.",
+        "l2-r02": "Actual partial saved with its tool source; current query then only completes missing label.",
+        "l2-r03": "Supported partial; current query before single failed label attempt; final current query reports historical failed attempt and present state.",
+        "l2-r04": "W1 after-native applied; later actual query discovers completed reservation/label, no repeated mutation. Original UNKNOWN retained.",
+        "l2-r05": "W1 before-native applied; admitted current continuation resolved prior operation through bounded ordinary material. Actual query not_found then one exact reservation/label. Original UNKNOWN retained.",
+        "l2-r06": "Supported original partial; external label completion applied. Actual readonly query distinguishes old/current state without maintenance.",
+        "l2-d01": "Actual exact draft, approval, publication and semantic commit; final current query correct. Saved publication timestamp absent from selected first publication fragment, although visible elsewhere in tool response. Direct support FAIL.",
+        "l2-d02": "Supported saved partial; followup current query then only publication, original draft/approval preserved. Model then proposes unavailable save_memory; bridge rejects UNKNOWN_TOOL before dispatch. Final unavailable, real publication retained; no blind resume.",
+        "l2-d03": "Create/approve and supported record, next current query then one failed publication, final readonly current query includes last attempt.",
+        "l2-d04": "W1 after actual publication applied; fresh query discovers publication with no repeated mutation; original UNKNOWN retained.",
+        "l2-d05": "Actual creation/approval; W1 before publication applied. Followup current query then only publication, no repeated draft or approval.",
+        "l2-d06": "Actual creation/approval/publication and supported semantic record selects both current-query fragments including all event timestamps and operation history. External v2 edit applied; readonly current query reports invalidated approval and historic v1 publication."
+      },
+      "limitations": [
+        "Original UNKNOWN remains UNKNOWN; scoped recovery is reviewed at story level.",
+        "No model final on d02 continuation; actual publication preserved.",
+        "L1-r16 separate version; L3/L4 not run."
+      ],
+      "remote_ci": {
+        "commit": "f27e6b783baa84b484af5c58c7a284b7c1f61de6",
+        "fast": {
+          "run_id": 37100950707,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37100950648,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

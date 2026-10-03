@@ -285,8 +285,11 @@ def prepare(
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
     if settings.get("source_selection", "index_v1") not in {
-            "index_v1", "inline_fragments_v1"}:
+            "index_v1", "inline_fragments_v1", "inline_receipt_units_v2"}:
         raise ValueError("FUNCTIONAL_SOURCE_SELECTION_INVALID")
+    if settings.get("failure_delivery", "unavailable_v1") not in {
+            "unavailable_v1", "receipt_status_v1"}:
+        raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
@@ -1405,7 +1408,9 @@ def message(
             call_wrapper = app.call_wrapper(
                 service, session, message_id, trace, cfg, boundary_hook=faults.boundary,
                 inline_fragment_content=(settings.get("source_selection")
-                                         == "inline_fragments_v1"),
+                                         in {"inline_fragments_v1", "inline_receipt_units_v2"}),
+                complete_receipt_units=(settings.get("source_selection")
+                                        == "inline_receipt_units_v2"),
             )
 
             def dispatch(request: Any, execute: Any) -> Any:
@@ -1722,6 +1727,35 @@ def message(
             output, thread_id=cfg["configurable"]["thread_id"],
             execution_started=execution_started,
         )
+        if (settings.get("failure_delivery") == "receipt_status_v1"
+                and output.get("error_category") == "provider_protocol"
+                and output.get("messages") and "service" in locals()
+                and "checkpoint_snapshot_error" not in output
+                and "application_snapshot_error" not in output):
+            blocked = _visibility_replay(service, output, session=session, message_id=message_id)
+            if blocked is not None:
+                return blocked
+            # No model repair, tool dispatch, additional retrieval, or promotion
+            # to COMPLETED. Only already delivered, paired receipts are rendered.
+            evidence = agent.get_state(cfg).values.get("messages", [])
+            final = business_response(evidence, output["operation_status"], {})
+            output["final_answer"] = (
+                "回答协议失败, 执行已停止; 以下是已确认的操作状态。"
+                "未列出的请求完成情况仍未确认。\n\n" + str(final.content))
+            output["final_delivery"] = final_delivery(output["final_answer"])
+            output["failure_delivery"] = {
+                "protocol": "receipt_status_v1", "model_generation": False,
+                "execution_status_preserved": True, "additional_operations": 0}
+            trace({"event": "functional_failure_receipt_delivery",
+                   **output["failure_delivery"], "final_answer": output["final_answer"]})
+            try:
+                service.capture_assistant(session, message_id + ":failure-final",
+                                          output["final_answer"])
+                output["sources"] = service.sources()
+            except Exception as delivery_error:
+                output["failure_delivery_error"] = type(delivery_error).__name__
+                output["final_answer"] = None
+                output["final_delivery"] = final_delivery(None)
         if "faults" in locals() and evaluator_control:
             output["evaluator_control_state"] = faults.state
         output.update(

@@ -233,6 +233,7 @@ class FunctionalApplication:
         boundary_hook: Callable[[str, dict[str, Any]], None] | None = None,
         memory_mutation_names: Sequence[str] = ("save_memory", "update_memory", "forget_memory"),
         inline_fragment_content: bool = False,
+        complete_receipt_units: bool = False,
     ) -> FunctionalCallWrapper:
         """Wrap ToolNode calls before delivery, with no model/network calls here.
 
@@ -262,7 +263,7 @@ class FunctionalApplication:
             self.journal.bind_public_turn(session, turn_id, source)
         return FunctionalCallWrapper(self, service, session, turn_id, trace,
                                      boundary_hook, frozenset(memory_mutation_names),
-                                     inline_fragment_content)
+                                     inline_fragment_content, complete_receipt_units)
 
 
 class FunctionalCallWrapper:
@@ -272,6 +273,7 @@ class FunctionalCallWrapper:
         boundary_hook: Callable[[str, dict[str, Any]], None] | None,
         memory_mutation_names: frozenset[str],
         inline_fragment_content: bool = False,
+        complete_receipt_units: bool = False,
     ) -> None:
         if service.owner != app.owner or not session or not turn_id:
             raise ValueError("FUNCTIONAL_MEMORY_SCOPE_INVALID")
@@ -282,6 +284,7 @@ class FunctionalCallWrapper:
         self.boundary_hook = boundary_hook or (lambda window, event: None)
         self.memory_mutation_names = memory_mutation_names
         self.inline_fragment_content = inline_fragment_content
+        self.complete_receipt_units = complete_receipt_units
 
     def _source_fragment_index(self, source_ref: str) -> list[dict[str, Any]]:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
@@ -290,8 +293,15 @@ class FunctionalCallWrapper:
             "fragment_handle", "source_ref", "role", "origin", "start", "end",
             "source_total_codepoints", "range_basis",
         ) + (("content", "semantic_support") if self.inline_fragment_content else ())
-        return [{field: fragment[field] for field in fields}
-                for fragment in self.service.source_fragments(source_ref)]
+        source = self.service.source(source_ref) if self.complete_receipt_units else None
+        body = source.get("content") if source else None
+        # Small actual tool receipts are complete public units. Their content was
+        # already delivered: this changes selection boundaries, not material or
+        # context limits. Large receipts retain bounded, exhaustive fragments.
+        fragments = ([self.service.source_fragment_range(source_ref, 0, len(body))]
+                     if isinstance(body, str) and 0 < len(body) <= 4096
+                     else self.service.source_fragments(source_ref))
+        return [{field: fragment[field] for field in fields} for fragment in fragments]
 
     def note_delivered_sources(self, source_refs: list[str]) -> None:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
