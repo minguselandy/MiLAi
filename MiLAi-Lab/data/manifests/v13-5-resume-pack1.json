@@ -1,6 +1,6 @@
 {
   "kind": "V13_5_RESUMED_PACK1",
-  "status": "LOCAL_CHECKS_PASSED_REMOTE_CI_PENDING",
+  "status": "REMOTE_CI_REPAIR_PENDING",
   "user_instruction": "完成后续的全部开发实验",
   "base_commit": "f621093c39ee0af03c8b79ff33afcaeab3138585",
   "scope": [
@@ -59,5 +59,58 @@
   "new_embedding_calls": 0,
   "ledger_sha256": "b18fae7fa71c3862eb4e0fc336b0021fa5b4928d89275f71ce55b6ec92973edc",
   "remaining": "operation status/final answer contract, field-specific correction evidence, all model layers and full acceptance",
-  "remote_ci": "pending same-commit execution after push"
+  "remote_ci": {
+    "head": "0cf0b76d8a082195f5c6a0ee1e09dcf65e722511",
+    "run_id": 37081328529,
+    "status": "failure",
+    "layer_check": "PASS",
+    "core_job": {
+      "id": 111082355590,
+      "failure": "unowned optional tests imported LangGraph in core environment"
+    },
+    "foundation_job": {
+      "id": 111082355648,
+      "passed": 362,
+      "failed": 4,
+      "skipped": 5,
+      "failure": "scripted ComparisonRuntime bypassed constructor and omitted common configuration",
+      "later_commands_executed": false
+    }
+  },
+  "ci_followup": {
+    "runtime_source_changes": false,
+    "optional_files_added_to_foundation": 23,
+    "frozen_comparison_commit": "8b1fdf3c017477ee80a0284f08ca4a1f5f52e670",
+    "repairs": [
+      "23 optional dependency tests assigned to Foundation and excluded only from Core",
+      "scripted ComparisonRuntime initializes common profiles/boundary/recipe",
+      "projection crash synthetic provider receives a pinned synthetic tokenizer",
+      "historical comparison files reconstructed from exact Git objects with SHA256, no local cache dependency"
+    ],
+    "checks": {
+      "ci-repair1.log": {
+        "passed": 4,
+        "sha256": "5dc3737d4ee77cc7b6d21818c9af691bf51652f13359fb6a8f412e51aaa67bcb"
+      },
+      "ci-repair2.log": {
+        "passed": 94,
+        "sha256": "c70482b0c6b3f4bc9430773e40aba8948698cdadaa36d0390bbbcbf577c999e2"
+      }
+    },
+    "preserved_failed_checks": {
+      "foundation-added.log": {
+        "passed": 418,
+        "failed": 10,
+        "skipped": 3,
+        "causes": [
+          "synthetic tokenizer omitted (2)",
+          "unpublished historical source copies absent (8)"
+        ]
+      },
+      "core-tests.log": "missing optional dependency at collection; assigned test_read_protocol.py to Foundation"
+    },
+    "clean_core_full_run": "running in isolated uv --frozen --dev environment without LangGraph",
+    "full_mypy": "PASS 195 source files",
+    "next_remote": "pending push and same-commit execution"
+  }
 }

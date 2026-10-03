@@ -72,6 +72,11 @@ def opened(path: Path, *, guide="legacy", feedback="legacy", direct=True, observ
         )
 
 
+@pytest.fixture(autouse=True)
+def portable_frozen_sources(monkeypatch, frozen_pre_http_sources):
+    monkeypatch.setitem(globals(), "ROOT", frozen_pre_http_sources)
+
+
 def proof(path: Path, name: str, value: Any) -> None:
     target = path / name
     assert not target.exists()

@@ -21,6 +21,7 @@ from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
+from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 
 TARGET = {"item_key": "parcel", "quantity": 1, "destination": "desk", "packing": "box"}
@@ -161,6 +162,7 @@ def local_model(
         emit=trace,
         budget=budget,
         transport=httpx.MockTransport(forbidden),
+        capacity=HostCapacity(settings["capacity"]) if settings.get("capacity") else None,
     )
     return ScriptModel(
         client=client,

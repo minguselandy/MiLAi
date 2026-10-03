@@ -39,6 +39,11 @@ ROOT = LAB / "artifacts/v13-2-http-owner-implementation"
 ENGINEERING = runpy.run_path(str(LAB / "tests/memory/test_v13_2_read_protocol.py"))
 
 
+@pytest.fixture(autouse=True)
+def portable_frozen_sources(monkeypatch, frozen_pre_http_sources):
+    monkeypatch.setitem(globals(), "ROOT", frozen_pre_http_sources)
+
+
 def proof(path: Path, name: str, value: Any) -> None:
     p = path / name
     assert not p.exists(), p
