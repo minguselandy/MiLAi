@@ -3353,7 +3353,171 @@
       },
       "scope": "L0 communication only. Offline evaluator uses L4 generic mode because CLI has no L0 mode; not an L4 confirmation or full L1/L2.",
       "reviewer": "Root same-family development review",
-      "independent_review": false
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "53eda908e575f7e1f873f088308453919c7f450d",
+        "fast": {
+          "run_id": 37108046214,
+          "conclusion": "failure",
+          "reason": "Default required tool choice changed frozen provider contract; restored opt-in in bc0559d."
+        },
+        "full": {
+          "run_id": 37108046216,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "communication-r27",
+      "layer": "L0",
+      "candidate_commit": "bc0559d97918e634e18d8318584d5259e067c1da",
+      "state": "COMPLETE_COMMUNICATION_DELIVERY_SCOPED_WITH_EXECUTION_FAILURE",
+      "planned_cases": 4,
+      "planned_messages": 7,
+      "config": "configs/v13-5-functional-r27.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11902,
+        "generation": {
+          "charged_tokens": 39437608,
+          "known_tokens": 39407221,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r27/input-freeze.json": "39d015e9c110bb9811e47f494ec888c3d0aceadbf4c22ad4c82d69b3b9c25ea1",
+        "configs/v13-5-functional-r27.json": "0812581df300a8fc749cf9a3812c3a703ce5396f5f7d0a898b9a7e3dde5d7417",
+        "artifacts/v13-5/communication-r27/review.json": "07ca13ea4bef6cdd59bcea8a437230df0dbc9b89292812dd15639ac124f8421c",
+        "artifacts/v13-5/communication-r27/seal.json": "f9080588883ee7ade6b8742739e98e471f1f4aa1c34880b676f17ac0ada6dc66",
+        "artifacts/v13-5/communication-r27-evaluator/summary.json": "a546ddf66c27d2c8e1446df356f03f12cee6698c07a0a1d253b26047520c897f",
+        "artifacts/v13-5/communication-r27-grades.json": "7223c4bb4083b4d6125615e415dbee564d316acb51d4ba014012c639939cb75f",
+        "artifacts/v13-5/communication-r27-review.jsonl": "194999631efedf4f7fc5cacaee9adc5b6df4bf7fcf27155e822088e6b0ef62e5"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 4
+      },
+      "message_counts": {
+        "COMPLETED": 5,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 7,
+      "cost_delta": {
+        "generation_requests": 28,
+        "generation.known_tokens": 132569,
+        "generation.charged_tokens": 132569,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "case_review": {
+        "communication-answer": "Required native declaration and ordinary Chinese final, no effects.",
+        "communication-memory": "Actual search/save before delivered confirmation; exact selected current source, this exhibition and best-effort retained. Followup correctly denies global applicability, no write. No completion feedback triggered, so this run does not establish causal benefit of the fresh completion input.",
+        "communication-partial": "Supported original partial record; later actual live query and exactly one missing-label completion satisfy requested business work. Model then performs unnecessary reads and hits READ_LIMIT_EXHAUSTED; FAILED is retained, available program final reports confirmed effects and execution stop. Scoped business/delivery PASS, not clean execution PASS; no repeated effect or semantic mutation.",
+        "communication-recovery": "Actual W1 after native effect remains UNKNOWN. Fresh process queries actual completed object/label, no duplicate, semantic not_committed correctly reported."
+      },
+      "scope": "L0 delivery/business scoped validation; not clean full execution pass. Continue unaffected full functional stories with read-limit failure retained. Generic offline L4 evaluator mode is not an L4 confirmation.",
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "bc0559d97918e634e18d8318584d5259e067c1da",
+        "fast": {
+          "run_id": 37108732800,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37108732799,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "l4-r27",
+      "layer": "L4",
+      "candidate_commit": "bc0559d97918e634e18d8318584d5259e067c1da",
+      "state": "STOPPED_CRITICAL_REVOCATION_PENDING_AND_FALSE_ACKNOWLEDGEMENT",
+      "planned_cases": 12,
+      "planned_messages": 30,
+      "config": "configs/v13-5-functional-r27.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11930,
+        "generation": {
+          "charged_tokens": 39570177,
+          "known_tokens": 39539790,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r27/input-freeze.json": "7a573c8d77eaea1ae0f3e670176e580d38363f851843a102c0d0762b14058612",
+        "configs/v13-5-functional-r27.json": "0812581df300a8fc749cf9a3812c3a703ce5396f5f7d0a898b9a7e3dde5d7417",
+        "artifacts/v13-5/l4-r27/review.json": "7a9267b6fb5ce91fda4d9644f09a12ff148bddd796e20675b43b938706fac90e",
+        "artifacts/v13-5/l4-r27/seal.json": "1e634828c5f267a3c4a4ea878b360c743bdcb113aa6dd07319745d4937157b89",
+        "artifacts/v13-5/l4-r27-evaluator/summary.json": "c46f9834bed956293eeb31b9b12cefbc05d111dcfd3e31d1f38fd8d2c949556c",
+        "artifacts/v13-5/l4-r27-grades.json": "c733e3d9c70ea297d3654f7c1481ac40f3d3652d9ed338942f90d038a92b83ab",
+        "artifacts/v13-5/l4-r27-all-review.jsonl": "b72cc1a2448843f95be4572a1a371b200e10d5b503301a1905dc8e7f527bd9d7",
+        "artifacts/v13-5/l4-r27-review-notes.json": "afe4c646a66fefb8a323014e6944e2b7170d3359558ab677a9822ad241e3d91a"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 1,
+        "NOT_RUN": 9
+      },
+      "message_counts": {
+        "COMPLETED": 7,
+        "FAILED": 1,
+        "NOT_RUN": 22
+      },
+      "retained_attempts": 9,
+      "cost_delta": {
+        "generation_requests": 32,
+        "generation.known_tokens": 124625,
+        "generation.charged_tokens": 124625,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "case_review": {
+        "l4-n01": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual saved assertion retains best-effort ordinary short Chinese and optional detailed math; current exact source selected. Later query preserves both qualifications, no mutation. Initial confirmation offers detailed proof service, not a new unconditional stored preference."
+        },
+        "l4-n02": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Same-ID Fahrenheit-to-Celsius update uses actual current correction and preserves travel exclusion. Wrong inferred business continuation/draft permission remains, but no business action occurs; v2 conversational final answers both old and current unit. Later query correct; original history/source intact. No intent-classifier correctness claim."
+        },
+        "l4-n03": {
+          "provisional_semantic": "FAIL",
+          "critical_blocker": true,
+          "rationale": "Original save again drops this-instance-only qualifier. Both required native declarations return valid JSON perform with empty operations, rejected by v5 cross-field check before memory maintenance. Actual failure replies captured and delivered. Followup actually reads old active rev1 and still says arrangement was withdrawn without acknowledging failed commit. Core revocation and truthful maintenance explanation remain failed; stop affected L4, retain9not-run stories."
+        }
+      },
+      "exposure": "Exposed r24-authored stories, repeated after r25 failures; not independent new confirmation.",
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "bc0559d97918e634e18d8318584d5259e067c1da",
+        "fast": {
+          "run_id": 37108732800,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37108732799,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

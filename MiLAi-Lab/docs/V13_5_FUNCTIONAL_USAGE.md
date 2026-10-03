@@ -24,8 +24,8 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r27.json` with a new root for current candidate
-validation. R27 uses native v5 with required declaration tool choice and thinking disabled,
+Use `configs/v13-5-functional-r28.json` with a new root for current candidate
+validation. R28 uses native v6 with required declaration tool choice and thinking disabled,
 with unchanged capacity/call/read limits. Unknown top-level and capacity configuration keys
 are rejected before preparing a run.
 It requires a current same-object query before a new mutation of an earlier operated object,
@@ -34,6 +34,8 @@ R23 retains exact current-message save idempotency and first interprets the curr
 request without retrieved history. Only an explicitly interpreted continuation with an empty
 operation list may use the existing bounded ordinary material to resolve its prior-work reference;
 that stage cannot change memory, forgetting or action permissions and shares the original budgets.
+A v6 perform declaration with no concrete business operation grants zero business mutations
+and records unresolved business intent; it does not block a separately declared memory write.
 The whole input is bound by the program; no model-copied action quote is required. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,

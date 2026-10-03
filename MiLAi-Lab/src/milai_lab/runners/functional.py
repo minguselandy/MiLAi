@@ -322,6 +322,7 @@ def prepare(
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
         "current_request_native_v3", "current_request_native_v4",
         "current_request_native_v5",
+        "current_request_native_v6",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
@@ -526,6 +527,7 @@ def request_mode(
     operation_mode_declaration: bool = False,
     reference_mode_declaration: bool = False,
     declaration_tool_choice: str = "auto",
+    independent_capabilities: bool = False,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -545,7 +547,9 @@ def request_mode(
                     or (bool(operations) != (value.get("business_action_request") != "none")
                         and not (reference_mode_declaration and not operations
                                  and value.get("business_action_request")
-                                 == "continue_if_unfinished"))):
+                                 in ({"continue_if_unfinished", "perform"}
+                                     if independent_capabilities
+                                     else {"continue_if_unfinished"})))):
                 return False
         if write_mode_declaration:
             business_valid = (isinstance(value, dict)
@@ -627,14 +631,17 @@ def request_mode(
         "allow_memory_maintenance": decision["memory_write_request"] != "none",
         "requires_memory_result": decision["memory_write_request"] == "explicit",
         "allow_forgetting": decision["allow_forgetting"],
-        "allow_business_mutation": (decision["business_action_request"] != "none"
+        "allow_business_mutation": (bool(decision["business_operations"])
+                                    if independent_capabilities else
+                                    decision["business_action_request"] != "none"
                                     if action_mode_declaration
                                     else decision["allow_business_mutation"]),
         "memory_write_request": decision["memory_write_request"],
     } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_only",
-               "protocol": "native_reference_declaration_v5" if reference_mode_declaration else
+               "protocol": "native_independent_capabilities_v6" if independent_capabilities else
+               "native_reference_declaration_v5" if reference_mode_declaration else
                "native_operation_declaration_v4" if operation_mode_declaration else
                "native_action_declaration_v3" if action_mode_declaration else
                "native_write_declaration_v2" if write_mode_declaration else
@@ -647,6 +654,11 @@ def request_mode(
             summary["business_action_quote"] = decision["business_action_quote"]
     if operation_mode_declaration:
         summary["business_operations"] = decision["business_operations"]
+    if independent_capabilities:
+        summary["business_declaration_status"] = (
+            "concrete_operations" if decision["business_operations"] else
+            "none" if decision["business_action_request"] == "none" else
+            "unresolved_no_business_permission")
     trace({"event": "functional_request_mode", **summary,
            "decision_sha256": state["decision_sha256"]})
     return summary
@@ -717,6 +729,9 @@ def continuation_operations(
         "reference_resolution": {"attempts": state["attempts"],
             "material_sha256": bound["material_sha256"],
             "decision_sha256": state["decision_sha256"], "semantic_correctness": "unchecked"}}
+    if mode["protocol"] == "native_independent_capabilities_v6":
+        resolved.update(allow_business_mutation=True,
+                        business_declaration_status="resolved_concrete_operations")
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
 
@@ -1299,19 +1314,24 @@ def message(
                     native_declaration=settings["request_mode"] in {
                         "current_request_native_v1", "current_request_native_v2",
                         "current_request_native_v3", "current_request_native_v4",
-                        "current_request_native_v5"},
+                        "current_request_native_v5", "current_request_native_v6"},
                     write_mode_declaration=settings["request_mode"] in {
                         "current_request_native_v2", "current_request_native_v3",
-                        "current_request_native_v4", "current_request_native_v5"},
+                        "current_request_native_v4", "current_request_native_v5",
+                        "current_request_native_v6"},
                     action_mode_declaration=settings["request_mode"] in {
                         "current_request_native_v3", "current_request_native_v4",
-                        "current_request_native_v5"},
+                        "current_request_native_v5", "current_request_native_v6"},
                     operation_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v4", "current_request_native_v5"},
-                    reference_mode_declaration=settings["request_mode"]
-                        == "current_request_native_v5",
+                        "current_request_native_v4", "current_request_native_v5",
+                        "current_request_native_v6"},
+                    reference_mode_declaration=settings["request_mode"] in {
+                        "current_request_native_v5", "current_request_native_v6"},
+                    independent_capabilities=(settings["request_mode"]
+                                              == "current_request_native_v6"),
                     declaration_tool_choice=settings.get("declaration_tool_choice", "auto"))
-                if (settings["request_mode"] == "current_request_native_v5"
+                if (settings["request_mode"] in {
+                        "current_request_native_v5", "current_request_native_v6"}
                         and mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"]):
                     blocked = _visibility_replay(

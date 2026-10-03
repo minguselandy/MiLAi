@@ -43,6 +43,7 @@ def prepared(
     format_allowance: int = 1,
     current_delivery: bool = False,
     fresh_completion: bool = False,
+    independent_capabilities: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -84,7 +85,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v5" if reference_mode_declaration else
+        "request_mode": "current_request_native_v6" if independent_capabilities else
+        "current_request_native_v5" if reference_mode_declaration else
         "current_request_native_v4" if operation_mode_declaration else
         "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
@@ -1131,10 +1133,12 @@ def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_co
     assert status["operations"][0]["observed_effect"] == ("confirmed" if happened else "none")
 
 
+@pytest.mark.parametrize('independent', [False, True])
 def test_continuation_resolves_only_missing_reference_from_bounded_material_and_replays(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, independent: bool,
 ) -> None:
-    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True)
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True,
+                    independent_capabilities=independent)
     current = 'Continue the previously requested work for prior item only if unfinished.'
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
@@ -1956,3 +1960,45 @@ def test_completion_excludes_false_draft_but_retains_checkpoint_and_truthful_fai
     count = len(wires)
     replay = functional.message(root, **common)
     assert replay['final_answer'] == result['final_answer'] and len(wires) == count
+
+
+@pytest.mark.parametrize('variant', ['legacy', 'memory', 'readonly', 'wrong_none', 'unknown_op'])
+def test_empty_business_operations_grant_nothing_and_do_not_block_independent_memory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, variant: str,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True, independent_capabilities=variant != 'legacy')
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='none' if variant == 'readonly' else 'explicit',
+                allow_forgetting=False,
+                business_action_request='none' if variant == 'wrong_none' else 'perform',
+                business_operations=['reserve_and_label'] if variant == 'wrong_none' else
+                                    ['unavailable_operation'] if variant == 'unknown_op' else [])
+        assert variant in {'memory', 'readonly'}
+        if wire.get('tools'):
+            names = {t['function']['name'] for t in wire['tools']}
+            assert not names.intersection(functional.BUSINESS_MUTATIONS | {'forget_memory'})
+            assert bool(names.intersection({'save_memory', 'update_memory'})) == (
+                variant == 'memory')
+        if ordinal == 2 and variant == 'memory':
+            unit = next(u for u in materials(wire)['items'] if u['type'] == 'fragment')
+            return native_call('save_memory', 'supported-save', content='Prefer quiet rooms.',
+                               fragment_handles=[unit['fragment_handle']])
+        return {'role': 'assistant', 'content': 'Only the available memory result is reported.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='m',
+                                 content='Remember that I prefer quiet rooms.')
+    if variant in {'legacy', 'wrong_none', 'unknown_op'}:
+        assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID' and len(wires) == 1
+        assert not result['records']
+    else:
+        assert result['status'] == 'COMPLETED'
+        mode = result['request_mode']
+        assert not mode['allow_business_mutation'] and mode['business_operations'] == []
+        assert mode['business_declaration_status'] == 'unresolved_no_business_permission'
+        assert len(result['records']) == int(variant == 'memory')
+    assert not result['operation_status']['business']['operations']
