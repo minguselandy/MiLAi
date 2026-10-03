@@ -3616,6 +3616,74 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "l4-targeted-r29",
+      "layer": "L4",
+      "candidate_commit": "7bb5dc9b91ceacca4be59aed3c35100d8d3940b2",
+      "state": "ABORTED_ADMISSION_BEFORE_MODEL_HTTP",
+      "reason": "Root passed subset IDs to full-denominator admit script; rejected after prepare, before queue registration or model HTTP. Prepared root retained. A separate explicit three-story fixture will be authored before its own admission.",
+      "generation_requests": 0,
+      "planned_cases": 12,
+      "planned_messages": 30,
+      "all_messages": "NOT_RUN",
+      "model_http": 0,
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-targeted-r29/input-freeze.json": "e72da88b9f7814b3c7b5429fac4518bf05e5ce9998e9ab8d80989b20c8f2fba6",
+        "artifacts/v13-5/l4-targeted-r29/review.json": "75deeccfa0785e2b8e5125aa8479853fa193edd83a02a49c4738162c2b01c908",
+        "artifacts/v13-5/l4-targeted-r29/seal.json": "dd3787329509fe4ffa3592de70007d62739d3950c6acd6e78c3130d0bb66d397",
+        "artifacts/v13-5/l4-targeted-r29-orchestrator.log": "1aac43c078367f738fd840f43040cbac93250c8a02dd517152b1631bce67d92a"
+      }
+    },
+    {
+      "id": "focused-r29",
+      "layer": "L4_TARGETED",
+      "candidate_commit": "7bb5dc9b91ceacca4be59aed3c35100d8d3940b2",
+      "state": "COMPLETE_TARGETED_WITH_ABSENCE_INFERENCE_FAILURE",
+      "planned_cases": 3,
+      "planned_messages": 9,
+      "config": "configs/v13-5-functional-r29.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12087,
+        "generation": {
+          "charged_tokens": 40267742,
+          "known_tokens": 40237355,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/focused-r29/input-freeze.json": "689330abe13e19c738e51a28c63e95f504136723bc898d157430ba4971424f8d",
+        "configs/v13-5-functional-r29.json": "bbbbb674357bd6f0a7e9076890b8cf242ab5c175136ad3834ef7998c7914fc95",
+        "artifacts/v13-5/focused-r29/review.json": "4d89e471e13039859344cdfd289f63b21533169b64a4415353fd188a4dbe9ccd",
+        "artifacts/v13-5/focused-r29/seal.json": "1df90de839a0cd20168bde4c4463a12bf0e48f007999062c44722bda124afb05",
+        "artifacts/v13-5/focused-r29-grades.json": "5375968dc9dda7c43fb10a641a853117b7605d40bd6fe31da78a92e212f79020",
+        "artifacts/v13-5/focused-r29-evaluator/summary.json": "327f8bedf3d2ac7809b13a6ca9e45a21cc56d7435b09066de43fba7440605743",
+        "artifacts/v13-5/focused-r29-review.jsonl": "845ee683ac1b3fc5a13586502867a25b789aa346e64f1ce34fc540725a34fd03"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 9
+      },
+      "retained_attempts": 9,
+      "cost_delta": {
+        "generation_requests": 34,
+        "generation.known_tokens": 142910,
+        "generation.charged_tokens": 142910,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Three exposed prior L4 stories only, not full L4 or fresh confirmation. Root same-family review, no independent Judge."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
