@@ -1,15 +1,15 @@
 # v13.5 functional profile
 
-**R42 is a mechanical development candidate; no stable configuration is recommended.**
-The [current checkpoint](V13_5_CHECKPOINT_r42_20261003.md) records all latest outcomes.
-R40 completed full L1/L2 but new L4 again withdrew using only old affirmative support,
-a core failure. R41 selected actual cancellation evidence, then failed twice to provide
-a required empty `changes` field: 1 COMPLETED/1 FAILED/25 NOT_RUN out of 11 stories/27 messages.
-No withdrawal occurred. R42 permits an omitted empty withdrawal patch and renders truthful
-format-exhaustion status. It has no model input freeze or real model results yet.
-R40 L1 was original23/24, added contract19/24; L2 was7/12. R37 remains the latest complete
-L3: formation44/57 and reading24/30, with its own identity. Product remains NO_GO.
-The pause report is historical; the overall development goal remains incomplete.
+**R43 is a mechanical development candidate; no stable configuration is recommended.**
+R42 communication completed all11 stories/27 messages:9 scoped PASS/2 FAIL, with25
+COMPLETED/1 FAILED/1 injected W1 UNKNOWN. Both full withdrawals selected actual cancellation,
+committed the same ID and retained history. Existing-record confirmation still failed for
+lack of a maintenance receipt; another story lost its one-occurrence scope in initial formation.
+R43 requires one native tool proposal only at the start of already-authorized bounded memory
+completion. It has460 mechanical checks,12 actual tokenizer probes and4 SDK checks, but no
+model results yet. See the [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md).
+The [r42 checkpoint](V13_5_CHECKPOINT_r42_20261003.md) is a historical snapshot;
+see [progress](V13_5_PROGRESS.md) for the latest evidence. Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
@@ -18,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r42.json` is the current development candidate. Required
+`configs/v13-5-functional-r43.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -97,6 +97,13 @@ three-read limit. `receipt_status_v4` can deliver a program failure report, incl
 reproposal exhaustion, without another model call. A readable failure report does not turn the execution into COMPLETED. Successful
 business actions are not repeated to repair an unusable final response.
 
+`completion_tool_choice=required_once` applies only to the first proposal of a persisted
+missing-maintenance completion. It binds the actual restricted catalog; business mutations
+stay unavailable, forgetting is available only if already authorized, and an exact empty
+update can confirm an existing record without a new version. The phase survives reopen;
+following tool replies use auto again. There is no additional repair allowance. Requiring
+a proposal does not prove that its selected object, value or support satisfies the request.
+
 The renderer currently uses Chinese labels and reports listed operations only. Destination
 and packing are configurations; document publication is a local sandbox effect. Ordinary
 memory answers remain model text and can be wrong. Owner isolation, source visibility and
@@ -108,9 +115,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r42. Do not combine their successful cases into a new cohort score.
+results, not results for r43. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r42, development only)
+## Candidate example (r43, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -119,14 +126,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r42 \
-  --config configs/v13-5-functional-r42.json
+  --root artifacts/v13-5/personal-r43 \
+  --config configs/v13-5-functional-r43.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r42 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r42 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -244,7 +251,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r42
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r43
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

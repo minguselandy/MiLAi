@@ -151,6 +151,7 @@ def build_agent(
     benchmark_view_hook: Callable[..., Any] | None = None,
     tool_schema_communication: str | None = None,
     tool_save_communication: str | None = None,
+    model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -312,9 +313,14 @@ def build_agent(
             memory_boundaries.observe_receipt(result, model.memory_turn)
         return result
 
+    def select_model(state: dict[str, Any], runtime: Any) -> Any:
+        # Bind the exact executable catalog; the selector cannot grant tools.
+        assert model_tool_choice is not None
+        return model.bind_tools(tools, tool_choice=model_tool_choice(state["messages"]))
+
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
-        model,
+        select_model if model_tool_choice is not None else model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None
                 and local_state_controller is None and not full_history

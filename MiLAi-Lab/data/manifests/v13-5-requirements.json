@@ -5190,7 +5190,7 @@
     "runtime_gold_or_E_star": false,
     "unknown_mutation_blind_retry": false,
     "same_message_cap_survives_restart": true,
-    "L4_content_access": "Historical new-story cohorts including r40 were authored after their own method freezes; now exposed development regression. Root author/reviewer, not independent holdout. No r42 L4 authored or read."
+    "L4_content_access": "Historical new-story cohorts including r40 were authored after their own method freezes; now exposed development regression. Root author/reviewer, not independent holdout. No r43 L4 authored or read."
   },
   "acceptance": {
     "all_critical_requirements_must_be_evidenced": true,
@@ -5226,9 +5226,9 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r42 anchored_assertion_v3 / receipt_status_v4; mechanical candidate; zero model calls and no input freeze",
-    "scope": "Current checkpoint, not terminal acceptance. R40 new L4 core withdrawal support defect; r41 selected cancellation but failed required empty changes schema, no withdrawal. Detailed140 remain historical backfill, not current r42 pass counts.",
-    "report": "docs/V13_5_CHECKPOINT_r42_20261003.md",
+    "candidate": "r43 required_once completion; mechanical candidate, zero model HTTP yet",
+    "scope": "R42 complete communication9PASS2FAIL, two actual full withdrawals passed; existing confirmation missing receipt and initial one-occurrence loss remain. R43 common Agent binding/protocol repair to receive full same-version L1/L2/L3/newL4 evidence. Detailed140 historical, no terminal promotion.",
+    "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",
     "independent_review": false

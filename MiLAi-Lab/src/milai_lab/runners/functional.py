@@ -19,7 +19,7 @@ import unicodedata
 from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 import httpx
 from langchain_core.messages import (
@@ -290,6 +290,7 @@ def prepare(
         "formation_interface", "finalization", "read_exhaustion", "memory_completion",
         "source_selection", "failure_delivery", "business_completion",
         "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
+        "completion_tool_choice",
         "declaration_sampling",
         "capability_delivery",
     }
@@ -333,6 +334,12 @@ def prepare(
             "disabled", "observed_continuation_v1"}:
         raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
     host = VLLMConfig(**settings["host"])
+    if settings.get("completion_tool_choice", "auto") not in {"auto", "required_once"}:
+        raise ValueError("FUNCTIONAL_COMPLETION_TOOL_CHOICE_INVALID")
+    if settings.get("completion_tool_choice") == "required_once" and (
+            host.tool_mode != "native"
+            or settings.get("memory_completion") != "declared_operations_v3"):
+        raise ValueError("FUNCTIONAL_COMPLETION_TOOL_CHOICE_REQUIRES_NATIVE_OPERATIONS")
     if settings.get("reasoning_history") == "current_turn_native_v1" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
@@ -1346,7 +1353,8 @@ def message(
             )
             model = LangMemRecipeChatModel(
                 client=client,
-                allow_required_tool_choice=settings.get("declaration_tool_choice") == "required",
+                allow_required_tool_choice=(settings.get("declaration_tool_choice") == "required"
+                    or settings.get("completion_tool_choice") == "required_once"),
                 preserve_tool_reasoning=(
                     settings.get("reasoning_history") == "current_turn_native_v1"),
                 capacity_path=bank_root / "message-admission.json",
@@ -1569,6 +1577,15 @@ def message(
                 return {
                     "llm_input_messages": [
                         SystemMessage(
+                            # LangGraph projects llm_input_messages before resolving
+                            # a dynamic model. Preserve the program-owned phase in
+                            # this checkpointed ID; IDs do not enter provider text.
+                            id=(identity + ":required-memory-proposal"
+                                if not for_finalization and completion
+                                and settings.get("completion_tool_choice") == "required_once"
+                                and messages and isinstance(messages[-1], SystemMessage)
+                                and messages[-1].id == identity + ":required-memory-receipt"
+                                else None),
                             content=capability_text + settings["system_prompt"]
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
@@ -1603,6 +1620,18 @@ def message(
 
                 return call_wrapper(request, native)
 
+            def execution_tool_choice(current: list[Any]) -> Literal["auto", "required"]:
+                # The persisted feedback reserves the existing shared allowance.
+                # Require only its first proposal; after any tool reply ordinary
+                # choices resume. No new retry, permission, or tool is introduced.
+                if (completion and current and isinstance(current[0], SystemMessage)
+                        and current[0].id == identity + ":required-memory-proposal"):
+                    return "required"
+                return "auto"
+
+            choice_selector = (execution_tool_choice
+                               if settings.get("completion_tool_choice") == "required_once"
+                               else None)
             agent = build_agent(
                 model,
                 store,
@@ -1613,6 +1642,7 @@ def message(
                 benchmark_view_hook=context_hook,
                 tool_schema_communication="shape_feedback_v1",
                 business_call_wrapper=dispatch,
+                model_tool_choice=choice_selector,
             )
 
             def invoke_execution(value: Any) -> list[Any]:
@@ -1778,7 +1808,7 @@ def message(
                 agent = build_agent(model, store, saver, selected_business,
                     memory_tools=selected_memory, system_prompt=settings["system_prompt"],
                     benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
-                    business_call_wrapper=dispatch)
+                    business_call_wrapper=dispatch, model_tool_choice=choice_selector)
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})
                 expected = ("The current request explicitly asks for a memory result"

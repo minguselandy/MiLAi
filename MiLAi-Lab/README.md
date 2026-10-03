@@ -17,7 +17,7 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-用户已明确恢复 v13.5 全部后续开发与实验；最新整理见[r42 检查点](docs/V13_5_CHECKPOINT_r42_20261003.md)和[功能进度](docs/V13_5_PROGRESS.md)。
+用户已明确恢复 v13.5 全部后续开发与实验；最新整理见[r43 检查点](docs/V13_5_CHECKPOINT_r43_20261003.md)和[功能进度](docs/V13_5_PROGRESS.md)。
 完整功能尚未验收；[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)保留为历史检查点。
 v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
 `functional_v1`，旧默认不变；Product 仍为 **NO_GO**。

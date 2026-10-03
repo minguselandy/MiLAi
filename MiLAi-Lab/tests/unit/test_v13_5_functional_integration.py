@@ -56,6 +56,7 @@ def prepared(
     distinct_withdrawal: bool = False,
     optional_withdrawal: bool = False,
     format_failure_receipts: bool = False,
+    required_completion: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -83,6 +84,7 @@ def prepared(
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
+        "completion_tool_choice": "required_once" if required_completion else "auto",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -2758,3 +2760,135 @@ def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -
     assert '尚不能确认请求的全部内容' not in answer
     assert '未选择的独立副本不在本次确认范围内' in answer
     assert '未执行物理擦除' in answer
+
+
+@pytest.mark.parametrize('required,interrupted', [(False, False), (True, False), (True, True)])
+def test_existing_confirmation_uses_one_required_proposal_and_no_new_revision_after_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, required: bool, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=required)
+    generate = functional.LangMemRecipeChatModel._generate
+    faulted = False
+
+    def interrupt_once(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal faulted
+        if (interrupted and not faulted and kwargs.get('tool_choice') == 'required'
+                and len(kwargs.get('tools', [])) > 1):
+            faulted = True
+            raise OSError('before_first_completion_generation')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_once)
+    confirmation_calls = 7 if required else 6
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, confirmation_calls + 1}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request=('none' if ordinal == confirmation_calls + 1
+                                      else 'new_assertion'), allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        assert wire['temperature'] == 1 and wire['chat_template_kwargs']['enable_thinking']
+        if ordinal == confirmation_calls + 2:
+            assert wire['tool_choice'] == 'auto'
+            assert not {'save_memory', 'update_memory', 'forget_memory'}.intersection(
+                t['function']['name'] for t in wire['tools'])
+            return {'role': 'assistant', 'content': 'The existing order is author_title.'}
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Use author_title for notes.',
+                               fragment_handles=hs)
+        if ordinal in {3, 5}:
+            assert wire['tool_choice'] == 'auto'
+            return {'role': 'assistant', 'content': 'The existing record already has that order.'}
+        if ordinal == 6:
+            assert wire['tool_choice'] == ('required' if required else 'auto')
+            assert not functional.BUSINESS_MUTATIONS.intersection(
+                t['function']['name'] for t in wire['tools'])
+            assert 'forget_memory' not in {t['function']['name'] for t in wire['tools']}
+            if not required:
+                return {'role': 'assistant', 'content': 'Keep the existing record unchanged.'}
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'confirm-existing',
+                               read_handle=record['read_handle'], changes=[])
+        assert ordinal == 7 and wire['tool_choice'] == 'auto'
+        assert actual_tool_receipt(wire)['status'] == 'no_change'
+        return {'role': 'assistant',
+                'content': 'Already present; original ID and version unchanged.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember: use author_title for notes.')
+    args = dict(session='s2', message_id='confirm',
+                content='Confirm the same order; if it matches, keep the original ID and version.')
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert result['status'] == 'UNKNOWN' and faulted and len(wires) == 5
+        assert result['error_type'] == 'OSError'
+        assert result['records'] == saved['records']
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if required else 'FAILED'), result.get('error')
+    assert result['records'] == saved['records'] and len(wires) == (7 if required else 6)
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'no_change' if required else 'not_committed')
+    if required:
+        receipt = result['operation_status']['semantic_memory']['operations'][0]
+        assert receipt['revision'] == 1 and receipt['effect'] == 'none'
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1 and not feedback['business_mutations_available']
+    cached = functional.message(root, **common, **args)
+    assert cached['final_answer'] == result['final_answer'] and len(wires) == (7 if required else 6)
+    query = functional.message(root, **common, session='s3', message_id='query',
+                                content='What order is currently recorded? Just read it.')
+    assert query['status'] == 'COMPLETED' and query['records'] == saved['records']
+    assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert len(wires) == confirmation_calls + 2
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        state = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(state['history']) == 1 and state['current']['revision'] == 1
+
+
+def test_required_completion_cannot_repeat_business_and_exhausted_format_stays_failed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='perform', business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'actual', item_key='bounded item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Saved everything. FALSE_DRAFT_WITHHELD'}
+        assert ordinal == 4 and wire['tool_choice'] == 'required'
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        assert 'FALSE_DRAFT_WITHHELD' not in json.dumps(wire)
+        return native_call('save_memory', 'invalid', fragment_handles=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['world']['world']['attempts']) == 1
+    assert 'FALSE_DRAFT_WITHHELD' not in result['final_answer']
+    assert result['failure_delivery']['additional_operations'] == 0
+    replay = message(root, resume=True)
+    assert replay['status'] == 'FAILED' and len(wires) == 4
+    assert replay['world'] == result['world']
