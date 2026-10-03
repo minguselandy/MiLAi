@@ -1,0 +1,359 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_INCOMPLETE_CORE_SUPPORT_FAILURE",
+  "goal_status": "ACTIVE; checkpoint is neither final completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "pull_request_status": {
+    "open": true,
+    "draft": true,
+    "merged": false
+  },
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "main_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "candidate": "r45",
+  "candidate_commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+  "results_commit": "e60ff613e8628f573d770045facfaeaba21c4cb7",
+  "publication_identity": "The checkpoint commit contains this manifest; its exact SHA and CI are registered in PR81 after push. Earlier CI is not inherited.",
+  "report": "docs/V13_5_CHECKPOINT_r45_20261004.md",
+  "report_sha256": "d9fad8555ae61d82e3b212eee60b9b462a4f5f7343c57aa41fc48ba8b8de1531",
+  "source_sha256": {
+    "src/milai_lab/memory/functional.py": "fd6f9e8e87b338a844ae785bc9ea82d0afdd4cd370cedf1434856f96b845876e",
+    "src/milai_lab/runners/functional.py": "b4a9fd5be877a917542c229eece063fd7f0adb64a57519a456cde931fbb52961",
+    "src/milai_lab/baselines/langmem_agent.py": "0103ce4884e09cb9e31908e30947ea09e252333535cd5d325986de1964f3f57c",
+    "src/milai_lab/providers/chat_bridge.py": "0fc7271148de65c505568f1c59914c3481f95c6096f04e5dfa670661e7ebd32c",
+    "tests/memory/test_v13_5_functional.py": "db11ca9b29af86b8c64b5f65ce428d2673866788b3b876ad6b845a8e45568e11",
+    "tests/unit/test_v13_5_functional_integration.py": "3b5190461eb1be04925aecb7616637994d403067f844ad0e66afbaaf3ad061f2",
+    "configs/v13-5-functional-r45.json": "27531e2129697e7d8c6c31a94804ea9a6bd4d01d1ce29714e39f5915c082ef2f"
+  },
+  "runtime_queue_active": false,
+  "new_model_calls_for_checkpoint": 0,
+  "new_runtime_changes_for_checkpoint": false,
+  "current_candidate_acceptance": "Communication failed and sealed; same-version L1-L4 NOT_ADMITTED; no stable recommended configuration.",
+  "change_scope": "Lab checkpoint report, manifest and navigation only. No Product Schema/API/permission/Canonical or runtime changes.",
+  "r45_mechanical_evidence": {
+    "candidate": "r45",
+    "scope": "469 related/default/foundation tests PASS;18 production pinned tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy2modules,package/tools boundaries and verification matrix PASS. Zero actual model HTTP. Explicit confirmation delegates exact no_change, journals actual paired receipt, preserves ID/revision/support/history, rejects wrong owner/stale/withdrawn target and unbound reopen, requires explicit trusted rebind, and does not add maintenance tools to readonly requests. Old catalogs and bounded completion remain.",
+    "preserved_first_failure": "Initial pytest collection failed due parametrized argument also having a default. Two subsequent targeted runs6PASS1FAIL omitted required current-message rebind on standalone Store reopen; fresh read alone correctly did not authorize the message. Test now asserts unbound rejection, explicitly rebinds original message, and all7 targeted checks pass. First Ruff line length fixed. No authorization relaxation or runtime changes for these test errors.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r45-targeted.log": "9c6721aa6d290524ebcbd685e8d3b11716f9182d131b89b1146b12976aa5e8f8",
+      "artifacts/v13-5/r45-targeted-final.log": "cd2da7a7d27d1a2f0b54995fc5183d5a13c8272858fc7a6061cfd85b32ae1408",
+      "artifacts/v13-5/r45-targeted-corrected.log": "c0422c2a2139eb0114b4ad8d18df31c647e9b46ed96ead2c2bb1252f6e041b3f",
+      "artifacts/v13-5/r45-targeted-rebound.log": "19868e36cf5c77de2b65820c075c4e0b8b1324ab3e29bb56d4ee0b76cc64afbc",
+      "artifacts/v13-5/r45-regression.log": "5d71b39a2e97559cefcc9f87099e629d289ef1adddc1d7a908b8dfd41817a6d7",
+      "artifacts/v13-5/r45-production-contracts-probe.py": "58de56c71cece48226f54d03a0cff78fd8d38d35ff95245e2ca1b3b7d142ab70",
+      "artifacts/v13-5/r45-production-contracts.json": "d0ec135391aaf629377ddc72b24df3bf4bd23bae401dec352b15042b560d4012",
+      "artifacts/v13-5/r45-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r45-sdk-lifecycle.log": "82440842ba83d952a8ae429ece3e4338a1b3db84affa65d3e588b2bf6a9a25c7",
+      "artifacts/v13-5/r45-ruff.log": "44e8954697d8d09e1c83ad861b288aa82fcc5237ed284f0243b9ff9fc3606dc5",
+      "artifacts/v13-5/r45-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "artifacts/v13-5/r45-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "artifacts/v13-5/r45-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "artifacts/v13-5/r45-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "artifacts/v13-5/r45-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+    },
+    "remote_ci": {
+      "path": "artifacts/v13-5/r45-ci.json",
+      "sha256": "07783d520d7f826a670cffc40e9bccaeae942b96fde00519102d808e387ec13e",
+      "commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+      "fast": "SUCCESS run37136594883",
+      "full": "SKIPPED run37136594957; not a pass"
+    }
+  },
+  "results_commit_ci": {
+    "commit": "e60ff613e8628f573d770045facfaeaba21c4cb7",
+    "fast": {
+      "run_id": 37137278384,
+      "status": "SUCCESS"
+    },
+    "full": {
+      "run_id": 37137278411,
+      "status": "SKIPPED",
+      "counts_as_pass": false
+    },
+    "evidence_path": "artifacts/v13-5/checkpoint-r45-20261004-parent-ci.json",
+    "evidence_sha256": "8a7d5cbf08c58d79d5825a2efb34bd8b0009f9b0a0a743219412440f73b69ae9"
+  },
+  "checkpoint_verification": {
+    "r45_evidence_hashes_checked": 202,
+    "mismatches": 0,
+    "includes_sealed_raw_artifact_byte_identity": true,
+    "new_database_semantic_audit": false,
+    "new_model_regression": false
+  },
+  "latest_cohorts": [
+    {
+      "id": "communication-r43",
+      "candidate_commit": "adaa0d55882108b99f7691782dc64c82aba4ad9e",
+      "state": "STOPPED_EXISTING_CONFIRMATION_READ_WITHOUT_MAINTENANCE_RECEIPT",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "cost_delta": {
+        "generation_requests": 8,
+        "generation.known_tokens": 43524,
+        "generation.charged_tokens": 43524,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r43/review.json": "3d0088a130c9dc5e05300f9621c0de3479bd071b08c92458b4490affd87170cf",
+        "artifacts/v13-5/communication-r43/seal.json": "2ea9fd5c4e58865ef0bf886417a93e4aa65f33f74026a33d581489ed3041160f"
+      }
+    },
+    {
+      "id": "communication-r44",
+      "candidate_commit": "27ccefa578d98520bbd06eee2009d6962f885016",
+      "state": "STOPPED_EXISTING_CONFIRMATION_REPEATED_READS_EXHAUSTED",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "cost_delta": {
+        "generation_requests": 8,
+        "generation.known_tokens": 66515,
+        "generation.charged_tokens": 66515,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r44/review.json": "83e41ff76ef8de2b3193e0ae0a0ca8de90d9059375dc55c7609416d763e8f173",
+        "artifacts/v13-5/communication-r44/seal.json": "1154cd0b4733fab01bbc6811c8bb02fba8428d5a6c48dd3304ec652124fb0ccf"
+      }
+    },
+    {
+      "id": "communication-r45",
+      "candidate_commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+      "state": "STOPPED_CORE_CORRECTION_OLD_SUPPORT_AND_POST_LABEL_UNKNOWN_TOOL",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "semantic_counts": {
+        "PASS_SCOPED": 4,
+        "FAIL": 3,
+        "NOT_RUN": 4
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "FAILED": 1,
+        "NOT_RUN": 11
+      },
+      "cost_delta": {
+        "generation_requests": 51,
+        "generation.known_tokens": 284365,
+        "generation.charged_tokens": 284365,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r45/review.json": "8240b1080308748087a60087cc5a0f410068dd95b2f1d6e5719a54e5dd87fde7",
+        "artifacts/v13-5/communication-r45/seal.json": "dff310fd32f073d4eaa7a3855e74a697577ba2c6c62b87dffee5172f444ae61b"
+      }
+    },
+    {
+      "id": "l1-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "state": "COMPLETE_L1_WITH_ORDINARY_READ_AND_SUPPORT_FAILURES",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS_SCOPED": 19,
+        "FAIL": 5
+      },
+      "message_counts": {
+        "COMPLETED": 47,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 146,
+        "generation.known_tokens": 701550,
+        "generation.charged_tokens": 701550,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r40/review.json": "df8607f1cec14f78bdb5dbfcdfb4a6de6de296cc9a80d6f16de6e8189af69da8",
+        "artifacts/v13-5/l1-r40/seal.json": "dd83b36f9c8551ff5a7e7616e4380afd83698411229274be6c911678f363fbec"
+      }
+    },
+    {
+      "id": "l2-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "state": "COMPLETE_L2_WITH_MISSING_SAVE_AND_SUMMARY_SUPPORT_FAILURES",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "semantic_counts": {
+        "FAIL": 5,
+        "PASS_SCOPED": 7
+      },
+      "message_counts": {
+        "COMPLETED": 21,
+        "UNKNOWN": 4,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 108,
+        "generation.known_tokens": 766674,
+        "generation.charged_tokens": 766674,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r40/review.json": "d14f4dd1aea2fd4a76bae1741aa54edef6806ad3094cba46a05b500c3db815c5",
+        "artifacts/v13-5/l2-r40/seal.json": "6b95984f8506e9dfcc5792d946b09cd104db07e4810ee9d2d72578cc197c6c07"
+      }
+    },
+    {
+      "id": "l3-formation-r37",
+      "candidate_commit": "599163ef435873ca9b82cebc73c842e7961980cf",
+      "state": "COMPLETE_L3_FORMATION_WITH_SEMANTIC_FAILURES_AND_ONE_ANSWER_RECOVERY",
+      "planned_cases": 57,
+      "planned_messages": 57,
+      "semantic_counts": {
+        "PASS_SCOPED": 44,
+        "FAIL": 13
+      },
+      "message_counts": {
+        "COMPLETED": 57
+      },
+      "cost_delta": {
+        "generation_requests": 178,
+        "generation.known_tokens": 1149405,
+        "generation.charged_tokens": 1149405,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-formation-r37/review.json": "2ab905be0f049e58b65721ba8c306f04b5499ba38fcef69bb7ff1661cd470076",
+        "artifacts/v13-5/l3-formation-r37/seal.json": "ecacf1c6cf31e0818f7ef6a6797ce8764b1915d740880cbfb43378e178cdeaa2"
+      }
+    },
+    {
+      "id": "l3-reading-r37",
+      "candidate_commit": "599163ef435873ca9b82cebc73c842e7961980cf",
+      "state": "COMPLETE_L3_READING_WITH_SIX_SEMANTIC_FAILURES",
+      "planned_cases": 30,
+      "planned_messages": 30,
+      "semantic_counts": {
+        "PASS_SCOPED": 24,
+        "FAIL": 6
+      },
+      "message_counts": {
+        "COMPLETED": 30
+      },
+      "cost_delta": {
+        "generation_requests": 62,
+        "generation.known_tokens": 436805,
+        "generation.charged_tokens": 436805,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-reading-r37/review.json": "9ef7a6b4531d1ec95440bcba15ed74988d2cecb313a07adc881ce843c302a6f2",
+        "artifacts/v13-5/l3-reading-r37/seal.json": "13f021e9c9125177193ca001c389ea5f1cc502c47a1585ac34e0152e72401c4b"
+      }
+    },
+    {
+      "id": "l4-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "state": "STOPPED_CORE_WITHDRAWAL_ONLY_OLD_SUPPORT_DESPITE_LITERAL_CUE",
+      "planned_cases": 12,
+      "planned_messages": 31,
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 4,
+        "NOT_RUN": 6
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "FAILED": 1,
+        "NOT_RUN": 15
+      },
+      "cost_delta": {
+        "generation_requests": 47,
+        "generation.known_tokens": 229591,
+        "generation.charged_tokens": 229591,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r40/review.json": "12871d85071e8f0af574fa5162880f6ce3b0af442ed214b1bce88af2df237060",
+        "artifacts/v13-5/l4-r40/seal.json": "f5439d14f28130911b2c6c36dc7c3ed24ccc45aa752aef8ec62a15c1b174e552"
+      }
+    }
+  ],
+  "cost": {
+    "v13_5": {
+      "generation_requests": 4294,
+      "known_generation_tokens": 23219113
+    },
+    "resumed": {
+      "generation_requests": 4138,
+      "known_generation_tokens": 22444877
+    },
+    "continuous": {
+      "generation_requests": 14020,
+      "generation": {
+        "charged_tokens": 50941786,
+        "known_tokens": 50911399,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "historical_unknown_gap_tokens": 30387,
+    "includes_coding_agent_usage": false,
+    "ledger_snapshot_path": "artifacts/v13-5/checkpoint-r45-20261004-ledger.json",
+    "ledger_snapshot_sha256": "703849a92db20abe093c969c67f0d0c6ba53569a7a455cd26a2648e6a37013af"
+  },
+  "remaining_work": [
+    "Corrected field values must be supported by selected original evidence; legal provenance alone is insufficient.",
+    "Unavailable tool proposals after completed business effects need bounded protocol handling without replay.",
+    "Preserve scope, modality and supported final statements.",
+    "Same-version communication, L1 24/48, L2 12/26, full L3 formation57/reading30, then newly frozen L4 approximately12.",
+    "FUNC01-16 integrated acceptance, detailed140 terminal assessment and final development report remain incomplete; original48 unchanged."
+  ],
+  "reviewer": "Root same-family development review; not independent Judge",
+  "preservation": "Raw DBs, model requests, traces, logs and ledger snapshot remain local ignored. Historical cohorts, pause reports, original48 and plan bytes unchanged.",
+  "rollback_comparison_commits": [
+    "665869159df4fad53031c1fa2f719275ba6d66e0",
+    "e60ff613e8628f573d770045facfaeaba21c4cb7"
+  ]
+}

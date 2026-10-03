@@ -10,7 +10,9 @@ protocol delivery. The original11/27 was sealed as4 scoped PASS/3 FAIL/4 NOT_RUN
 COMPLETED/1 FAILED/11 unrun messages. Correct effects remain valid; no replay was performed.
 469 mechanical checks,18 production tokenizer probes and4 SDK checks do not replace these
 model results. Same-version L1–L4 have not been admitted. See [progress](V13_5_PROGRESS.md).
-The [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md) is historical. Product remains NO_GO.
+The [r45 checkpoint](V13_5_CHECKPOINT_r45_20261004.md) consolidates current results, CI,
+costs and remaining work; the [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md) is historical.
+Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
