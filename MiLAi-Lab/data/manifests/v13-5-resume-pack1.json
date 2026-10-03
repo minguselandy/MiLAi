@@ -1,6 +1,6 @@
 {
   "kind": "V13_5_RESUMED_PACK1",
-  "status": "REMOTE_CI_REPAIR_PENDING",
+  "status": "PASSED_LOCAL_AND_REMOTE_SAME_COMMIT",
   "user_instruction": "完成后续的全部开发实验",
   "base_commit": "f621093c39ee0af03c8b79ff33afcaeab3138585",
   "scope": [
@@ -171,5 +171,15 @@
       "31 production-Qwen material/cost cases keep real tokenizer and explicit local_artifacts ownership; no fallback tokenizer and no relaxed assertions"
     ],
     "full_explicit_mypy": "PASS 77 source files"
+  },
+  "remote_ci_final": {
+    "head": "c8cfa0a13e5dd007f86a3fdc66d61f94b9d3ff84",
+    "run_id": 37083577947,
+    "status": "success",
+    "core_job": 111089177640,
+    "foundation_job": 111089177565,
+    "external_job": 111089177649,
+    "aggregate_job": 111091037492,
+    "full_composition": "SKIPPED, not PASS"
   }
 }

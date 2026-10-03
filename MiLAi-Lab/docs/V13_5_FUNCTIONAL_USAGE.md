@@ -82,13 +82,29 @@ repeat a mutation whose outcome is unknown.
 
 | Outcome | Meaning and next step |
 | --- | --- |
-| `COMPLETED` | The public loop returned an answer; quality is evaluated separately. |
+| `COMPLETED` | The public loop returned text passing the minimal delivery check; meaning and task quality are evaluated separately. |
 | `FAILED` | A known input, format, capacity or runtime failure; inspect its category. |
 | `BUDGET_EXHAUSTED` | The message or frozen queue cannot admit more generation. |
 | `PROVIDER_ERROR` | The provider request failed; usage and the failed attempt remain recorded. |
 | `UNKNOWN` | A storage or business effect cannot be confirmed from its receipt. |
 | `NOT_RUN` | A preceding failure or queue stop prevented this step from running. |
 | `VISIBILITY_REVOKED` | A stored response depends on material later forgotten; live replay returns no archived body. Use a new message for a new request. |
+
+Current candidate responses include `operation_status`, computed from durable
+current-message receipts, separately from `final_answer`. It reports raw event
+capture, semantic writes, visibility changes, business mutations and observations.
+Each operation retains its receipt reference and affected record ID/version where
+available. A read is not a new write; one successful write cannot certify other
+requested changes. `request_completion` remains `unchecked`. Clients must use
+these fields for execution status rather than infer success from free prose.
+
+`final_delivery` checks for usable text presence only; it does not judge truth or
+relevance. Null provider content, blank text and punctuation-only output fail
+delivery without undoing confirmed effects or promoting reasoning to an answer.
+An explicit `--resume` can request one answer-only recovery, sharing the existing
+format-reproposal and generation budgets. That path has no tool catalog or
+dispatcher. Original attempts and checkpoint history remain evidence, and a
+successful recovery never changes the first attempt's failure score.
 
 On an unknown business result, discover current state through its public query
 before considering any remaining action. The original unknown receipt is retained

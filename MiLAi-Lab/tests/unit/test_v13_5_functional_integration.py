@@ -26,19 +26,20 @@ from milai_lab.providers.functional_queue import FunctionalVLLMClient
 from milai_lab.runners import functional
 
 
-def prepared(tmp_path: Path, *, queue_requests: int = 100) -> Path:
+def prepared(tmp_path: Path, *, queue_requests: int = 100, native: bool = False) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
-    native = PreTrainedTokenizerFast(tokenizer_object=tokenizer, unk_token="[UNK]")
-    native.chat_template = (
+    tokenizer_wrapper = PreTrainedTokenizerFast(tokenizer_object=tokenizer, unk_token="[UNK]")
+    tokenizer_wrapper.chat_template = (
         "{% for m in messages %}{{m.role}} {{m.content}} {% endfor %}"
         "{% if tools %}{{tools|tojson}}{% endif %} assistant "
     )
     directory = tmp_path / "mechanical-tokenizer"
-    native.save_pretrained(str(directory))
-    (directory / "chat_template.jinja").write_text(native.chat_template)
+    tokenizer_wrapper.save_pretrained(str(directory))
+    (directory / "chat_template.jinja").write_text(tokenizer_wrapper.chat_template)
     host = VLLMConfig(base_url="http://mechanical.invalid/v1/", model="mechanical-provider",
-                      max_tokens=4096, max_calls=24, enable_thinking=False)
+                      max_tokens=4096, max_calls=24, enable_thinking=False,
+                      tool_mode="native" if native else "json_action")
     budget_path = tmp_path / "isolated-mechanical-budget.json"
     budget = RunBudget(RunLimits(1, 1, 100, 2_000_000, 0), budget_path)
     write_json(budget_path, budget.state)
@@ -65,7 +66,9 @@ def prepared(tmp_path: Path, *, queue_requests: int = 100) -> Path:
     return root
 
 
-def scripted(monkeypatch: pytest.MonkeyPatch, respond: Any) -> list[dict[str, Any]]:
+def scripted(
+    monkeypatch: pytest.MonkeyPatch, respond: Any, *, native: bool = False,
+) -> list[dict[str, Any]]:
     wires: list[dict[str, Any]] = []
 
     def forbid(*args: Any, **kwargs: Any) -> Any:
@@ -79,9 +82,10 @@ def scripted(monkeypatch: pytest.MonkeyPatch, respond: Any) -> list[dict[str, An
         action = respond(wire, len(wires))
         if isinstance(action, Exception):
             raise action
+        payload = action if native else {"role": "assistant", "content": json.dumps(action)}
         return httpx.Response(200, json={"id": "mechanical-response-" + str(len(wires)),
-            "choices": [{"finish_reason": "stop", "message": {
-                "role": "assistant", "content": json.dumps(action)}}],
+            "choices": [{"finish_reason": "tool_calls" if payload.get("tool_calls") else "stop",
+                         "message": payload}],
             "usage": {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12}})
 
     class ScriptedClient(FunctionalVLLMClient):
@@ -146,6 +150,8 @@ def test_unified_save_commits_before_final_and_same_path_reopen(
     wires = scripted(monkeypatch, reply)
     first = message(root)
     assert first["status"] == "COMPLETED", first
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert first["operation_status"]["request_completion"] == "unchecked"
     assert len(first["records"]) == 1 and first["records"][0]["value"]["revision"] == 1
     assert first["snapshot_before_close"] is True
     assert first["memory_mutation_receipts"][0]["position"] < len(first["messages"]) - 1
@@ -181,16 +187,160 @@ def test_unified_provider_failure_resume_keeps_budget_and_one_semantic_commit(
     wires = scripted(monkeypatch, reply)
     first = message(root)
     assert first["status"] == "PROVIDER_ERROR", first
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert first["final_delivery"]["status"] == "unavailable"
     assert len(first["records"]) == 1
     resumed = message(root, resume=True)
     assert resumed["status"] == "COMPLETED", resumed
     assert resumed["records"] == first["records"]
+    assert resumed["operation_status"] == first["operation_status"]
     assert resumed["budget_after"]["generation_requests"] == len(wires) == 3
     assert resumed["budget_after"]["generation"]["unknown_usage"] == 1
     bank = next((root / "banks").iterdir())
     admission = read_json(bank / "message-admission.json")
     assert next(iter(admission["messages"].values()))["count"] == 3
     assert read_json(root / "queue-admission.json")["requests"] == 3
+
+
+def test_structured_outcome_does_not_turn_raw_search_or_prose_into_saving(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return tool("search_memory", query="local marker blue")
+        assert actual_tool_receipt(wire)["semantic_write_performed"] is False
+        return {"answer": "Saved the marker."}  # Deliberately false free prose.
+
+    scripted(monkeypatch, reply)
+    result = message(root)
+    status = result["operation_status"]
+    assert result["final_delivery"]["status"] == "available"
+    assert status["raw_event"]["status"] == "stored"
+    assert status["semantic_memory"] == {"status": "not_committed", "operations": []}
+    assert status["business"]["status"] == "not_executed"
+    assert status["request_completion"] == "unchecked" and not result["records"]
+
+
+def test_one_save_does_not_certify_other_requested_parts_or_later_reads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            handles = [r["fragment_handle"] for r in materials(wire)["items"]
+                       if r["type"] == "fragment"]
+            return tool("save_memory", content="A is blue.", fragment_handles=handles)
+        return {"answer": "Both A and B are saved."}  # Unproven whole-request claim.
+
+    wires = scripted(monkeypatch, reply)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember A is blue and B is round.")
+    status = saved["operation_status"]
+    assert len(status["semantic_memory"]["operations"]) == 1
+    assert status["semantic_memory"]["operations"][0]["id"] == saved["records"][0]["id"]
+    assert status["status_scope"] == "listed_current_message_operations_only"
+    assert status["successful_operation_proves_unattempted_request_parts"] is False
+    assert status["request_completion"] == "unchecked"
+    read = functional.message(root, **common, message_id="read", content="What is A's color?")
+    assert read["records"] == saved["records"] and len(wires) == 3
+    assert read["operation_status"]["semantic_memory"] == {
+        "status": "not_committed", "operations": []}
+
+
+@pytest.mark.parametrize("bad", [None, "", "{"])
+def test_native_bad_final_preserves_commit_and_resumes_without_repeating_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
+) -> None:
+    root = prepared(tmp_path, native=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            handles = [r["fragment_handle"] for r in materials(wire)["items"]
+                       if r["type"] == "fragment"]
+            return {"role": "assistant", "content": None, "tool_calls": [{
+                "type": "function", "id": "actual-native-save", "function": {
+                    "name": "save_memory", "arguments": json.dumps({
+                        "content": "The local marker is blue.", "fragment_handles": handles})}}]}
+        if ordinal == 2:
+            return {"role": "assistant", "content": bad,
+                    "reasoning_content": "REASONING_MUST_NOT_BECOME_FINAL"}
+        assert not wire.get("tools")  # Answer-only recovery cannot execute a tool.
+        return {"role": "assistant", "content": "The existing save is confirmed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED", first
+    assert first["error_category"] == ("provider_protocol" if bad is None else "final_delivery")
+    assert first["final_delivery"]["status"] == "unavailable"
+    assert first.get("final_answer") != "REASONING_MUST_NOT_BECOME_FINAL"
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert len(first["records"]) == 1 and first["records"][0]["value"]["revision"] == 1
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["final_delivery"]["status"] == "available"
+    assert resumed["records"] == first["records"] and len(wires) == 3
+    assert resumed["operation_status"] == first["operation_status"]
+    again = message(root, resume=True)
+    assert again["final_answer"] == resumed["final_answer"] and len(wires) == 3
+
+
+def test_final_text_recovery_uses_the_single_durable_format_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {"role": "assistant", "content": "{"},
+                     native=True)
+    first = message(root)
+    assert first["status"] == "FAILED"
+    second = message(root, resume=True)
+    assert second["status"] == "FAILED" and len(wires) == 2
+    third = message(root, resume=True)
+    assert third["status"] == "FAILED" and len(wires) == 2
+    assert third["error"] == "FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED"
+    assert third["operation_status"]["semantic_memory"]["status"] == "not_committed"
+
+
+@pytest.mark.parametrize("bad", [None, "{"])
+def test_answer_recovery_preserves_real_business_and_memory_commits(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
+) -> None:
+    root = prepared(tmp_path, native=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            name, args = "reserve_and_label", {
+                "item_key": "local parcel", "quantity": 1, "destination": "local", "packing": "box"}
+        elif ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            name, args = "save_memory", {
+                "content": "The local parcel was reserved and labeled.",
+                "fragment_handles": [r["fragment_handle"]
+                                     for r in receipt["source_fragment_index"]]}
+        elif ordinal == 3:
+            return {"role": "assistant", "content": bad}
+        else:
+            assert ordinal == 4 and not wire.get("tools")
+            return {"role": "assistant", "content": "The reservation and record are confirmed."}
+        return {"role": "assistant", "content": None, "tool_calls": [{
+            "type": "function", "id": "call-" + str(ordinal), "function": {
+                "name": name, "arguments": json.dumps(args)}}]}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED", first
+    assert first["operation_status"]["business"]["status"] == "completed"
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["records"] == first["records"]
+    assert resumed["world"]["world"] == first["world"]["world"]
+    assert len(resumed["world"]["world"]["attempts"]) == 1
+    assert resumed["operation_status"] == first["operation_status"]
+    assert len(wires) == 4
 
 
 def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_unknowns() -> None:
@@ -287,6 +437,8 @@ def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
     value = actual["records"][0]["value"]
     assert value["basis"] == "tool_observation"
     assert value["source_ref"] != actual["capture"]["source_ref"]
+    assert actual["operation_status"]["business"]["status"] == "completed"
+    assert actual["operation_status"]["semantic_memory"]["status"] == "committed"
 
 
 def test_disabled_profile_blocks_before_provider_or_budget_mutation(
@@ -362,6 +514,7 @@ def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_co
     assert first["status"] == "UNKNOWN", first
     assert first["evaluator_control_state"]["fault"]["applied"] is True
     assert len(first["sources"]) == 1
+    assert first["operation_status"]["business"]["status"] == "unknown"
     final = message(root, evaluator_control=control, resume=True)
     assert final["status"] == "COMPLETED", final
     assert len(wires) == 3
@@ -374,6 +527,12 @@ def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_co
     assert "result" not in pending[0]
     discoveries = [row for row in final["sources"] if row["origin"] == "get_reservation"]
     assert len(discoveries) == 1
+    status = final["operation_status"]["business"]
+    assert status["status"] == ("completed" if happened else "no_effect")
+    assert len(status["operations"]) == 1 and len(status["observations"]) == 1
+    assert status["operations"][0]["effect"] == "unknown"
+    assert status["operations"][0]["execution_receipt_status"] == "pending"
+    assert status["operations"][0]["observed_effect"] == ("confirmed" if happened else "none")
 
 
 def test_multiple_forgets_remove_intervening_revoked_tool_body_from_next_generation(

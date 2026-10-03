@@ -15,13 +15,20 @@ import json
 import os
 import subprocess
 import sys
+import unicodedata
 from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, cast
 
 import httpx
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.messages import (
+    AIMessage,
+    HumanMessage,
+    RemoveMessage,
+    SystemMessage,
+    ToolMessage,
+)
 from langchain_core.runnables import RunnableConfig
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
@@ -45,6 +52,7 @@ from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import visibility
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
+from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
@@ -178,6 +186,8 @@ def frozen(root: Path) -> dict[str, Any]:
 
 def _status(error: Exception) -> tuple[str, str]:
     text = str(error).upper()
+    if isinstance(error, IncompleteChatResponse):
+        return "FAILED", "provider_protocol"
     if isinstance(error, BudgetExceeded) or "GENERATION_CAPACITY_EXCEEDED" in text:
         return "BUDGET_EXHAUSTED", "budget"
     if isinstance(error, httpx.HTTPError):
@@ -187,6 +197,128 @@ def _status(error: Exception) -> tuple[str, str]:
     if "UNKNOWN" in text or isinstance(error, OSError):
         return "UNKNOWN", "storage_or_business_unknown"
     return "FAILED", "input_or_runtime"
+
+
+def final_delivery(content: Any) -> dict[str, Any]:
+    """Minimal delivery check, not a truth, relevance or task-completion judge."""
+    if not isinstance(content, str):
+        reason = "no_text_content"
+    elif not content.strip():
+        reason = "empty_content"
+    elif not any(c.isalnum() or unicodedata.category(c) == "So" for c in content):
+        reason = "no_answer_text"
+    else:
+        return {"status": "available", "structural_check": "text_present",
+                "semantic_quality": "unchecked"}
+    return {"status": "unavailable", "reason": reason, "semantic_quality": "unchecked"}
+
+
+def operation_status(
+    output: dict[str, Any], *, thread_id: str, execution_started: bool,
+) -> dict[str, Any]:
+    """Report durable receipts for this message independently of final prose.
+
+    The application snapshot is produced by the actual open facade, never model
+    text or memory retrieval. Counts describe listed operations only: saving A
+    cannot certify that an unattempted B or the whole user request was satisfied.
+    """
+    capture = output.get("capture", {})
+    raw = {"status": "stored" if capture.get("ok") else
+           "unknown" if output.get("capture_attempted") else "not_attempted"}
+    if capture.get("ok"):
+        raw["source_ref"] = capture["source_ref"]
+    snapshot = output.get("world")
+    if not isinstance(snapshot, dict):
+        status = "unknown" if execution_started else "not_executed"
+        return {"schema": "functional_operation_status_v1", "raw_event": raw,
+                "semantic_memory": {"status": status, "operations": []},
+                "business": {"status": status, "operations": [], "observations": []},
+                "request_completion": "unchecked", "receipt_snapshot_available": False}
+    memory: list[dict[str, Any]] = []
+    visibility_effects: list[dict[str, Any]] = []
+    expected = {"owner": output["owner"], "thread_id": thread_id,
+                "session": output["session"], "turn_id": output["message_id"]}
+    for row in snapshot.get("receipt_progress", {}).values():
+        identity = row.get("identity", {})
+        if any(identity.get(k) != v for k, v in expected.items()):
+            continue
+        name = identity.get("name")
+        if name not in {"save_memory", "update_memory", "forget_memory"}:
+            continue
+        receipt = row.get("semantic_maintenance")
+        if receipt is None and row.get("memory_response"):
+            try:
+                receipt = json.loads(row["memory_response"]["content"])
+            except (ValueError, TypeError, KeyError):
+                receipt = None
+        receipt = receipt if isinstance(receipt, dict) else {}
+        status = "unknown"
+        if receipt.get("ok") is True:
+            if (name == "forget_memory" and receipt.get("status") == "visibility_revoked"
+                    and receipt.get("effect") == "visibility_only"):
+                status = "visibility_revoked"
+            elif (name != "forget_memory" and isinstance(receipt.get("id"), str)
+                  and type(receipt.get("revision")) is int):
+                if receipt.get("status") == "committed" and receipt.get("effect") == "memory_only":
+                    status = "committed"
+                elif (receipt.get("status") == "no_change"
+                      and receipt.get("effect") in {"none", "memory_only"}):
+                    status = "no_change"
+            if (status == "no_change" and receipt.get("effect") == "memory_only"
+                    and receipt.get("replayed") is True
+                    and receipt.get("original_status") == "committed"):
+                status = "committed"
+        elif receipt.get("effect") == "none":
+            status = "not_committed"
+        operation = {"tool": name, "receipt_ref": identity["call_id"], "status": status,
+                     **{k: receipt[k] for k in ("id", "revision", "effect", "replayed",
+                                                "original_status", "phase", "error_type")
+                        if k in receipt}}
+        (visibility_effects if name == "forget_memory" else memory).append(operation)
+    semantic_states = {row["status"] for row in memory}
+    semantic = ("unknown" if "unknown" in semantic_states else
+                "partial" if "committed" in semantic_states and "not_committed" in semantic_states
+                else "committed" if "committed" in semantic_states else
+                "not_committed" if "not_committed" in semantic_states or not semantic_states
+                else "no_change")
+    business: list[dict[str, Any]] = []
+    observations: list[dict[str, Any]] = []
+    journal = snapshot.get("journal", {})
+    for key, row in journal.items():
+        if (not isinstance(row, dict) or row.get("thread_id") != thread_id
+                or row.get("owner") != output["owner"]
+                or row.get("public_turn", {}).get("session") != output["session"]
+                or row.get("public_turn", {}).get("turn_id") != output["message_id"]):
+            continue
+        query = row["name"] in {"get_reservation", "get_document_status"}
+        effect = row.get("effect", "unknown")
+        operation = {"tool": row["name"], "receipt_ref": row["call_id"],
+                     "journal_ref": key, "effect": effect,
+                     "execution_receipt_status": row.get("status", "unknown"),
+                     "executed": row.get("executed", False),
+                     "effect_basis": "original_receipt" if row.get("status") == "complete"
+                     else "public_read_contract" if query else "unconfirmed"}
+        recoveries = journal.get("_native_recoveries", {}).get(key, {})
+        if recoveries:
+            recovery = next(reversed(recoveries.values()))
+            operation.update(observed_effect=recovery["effect"],
+                             observation_receipt_ref=recovery["query_journal_key"],
+                             observation_basis=recovery["effect_source"])
+        (observations if query else business).append(operation)
+    effects = {row.get("observed_effect", row["effect"]) for row in business}
+    business_status = ("unknown" if "unknown" in effects else
+                       "partial" if "partial" in effects or {"confirmed", "none"} <= effects
+                       else "completed" if "confirmed" in effects else
+                       "no_effect" if effects else "not_executed")
+    return {"schema": "functional_operation_status_v1", "raw_event": raw,
+            "semantic_memory": {"status": semantic, "operations": memory},
+            "visibility": {"operations": visibility_effects},
+            "business": {"status": business_status, "operations": business,
+                         "observations": observations},
+            "receipt_snapshot_available": True, "request_completion": "unchecked",
+            "status_scope": "listed_current_message_operations_only",
+            "reads_are_new_writes": False,
+            "successful_operation_proves_unattempted_request_parts": False}
 
 
 def format_failures(messages: list[Any]) -> list[str]:
@@ -491,9 +623,11 @@ def message(
         "process_id": os.getpid(),
         "attempt": attempt,
         "status": "UNKNOWN",
+        "capture_attempted": False,
     }
+    execution_started = False
     scope = FoundationScope(freeze["run_id"], bank, owner, session + ":" + message_id)
-    cfg = scope.config()
+    cfg: RunnableConfig = cast(RunnableConfig, scope.config())
     cfg["configurable"].update(
         v13_session=session,
         v13_turn_id=message_id,
@@ -538,6 +672,7 @@ def message(
             )
             if seed_receipts:
                 output["source_import_receipts"] = seed_receipts
+            output["capture_attempted"] = True
             capture = service.capture_user(session, message_id, content)
             output["capture"] = capture
             trace({"event": "functional_capture", "receipt": capture})
@@ -732,11 +867,58 @@ def message(
                     # Preserve old attempts/checkpoints; deny before any recovery
                     # tool dispatch or new model request can receive their bodies.
                     return blocked
+            execution_started = True
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
-            if prior and not snapshot.next:
-                messages = prior
+            recovery_path = bank_root / f"{identity}-answer-recovery.json"
+            previous_result = read_json(result_path) if result_path.exists() else {}
+            invalid_provider_content = (
+                previous_result.get("error") == "VLLM_CHAT_INVALID_CONTENT"
+                and previous_result.get("error_category") == "provider_protocol"
+            )
+            pending_answer_repair = bool(snapshot.next) and (
+                invalid_provider_content or recovery_path.exists())
+            if prior and (not snapshot.next or (resume and pending_answer_repair)):
+                last = prior[-1]
+                bad_checkpoint_text = (isinstance(last, AIMessage) and not last.tool_calls
+                                       and final_delivery(last.content)["status"] == "unavailable")
+                if resume and (bad_checkpoint_text or pending_answer_repair):
+                    recovery = (read_json(recovery_path) if recovery_path.exists()
+                                else {"attempts": 0})
+                    if (recovery["attempts"] + len(format_failures(prior))
+                            >= settings["format_reproposals"]):
+                        raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED")
+                    # Explicit resume can repair delivery once. Reserve it before
+                    # dispatch; the shared generation/queue budgets apply too.
+                    # No tool catalog or dispatcher is available in this path.
+                    recovery.update(attempts=recovery["attempts"] + 1, status="attempted",
+                                    tools_available=False, prior_message_id=last.id)
+                    write_json(recovery_path, recovery)
+                    output["answer_recovery"] = recovery
+                    repair_history = prior[:-1] if bad_checkpoint_text else prior
+                    repair_input = context_hook({"messages": repair_history}, cfg)[
+                        "llm_input_messages"]
+                    repair_input.insert(1, SystemMessage(content=(
+                        "The preceding final response was unusable. Report the already observed "
+                        "operation results and any unfinished request parts. Tools are unavailable "
+                        "during this answer-only recovery; no new operations will be executed."
+                    )))
+                    repaired = model.invoke(repair_input, tools=[], tool_choice="none")
+                    if not isinstance(repaired, AIMessage) or repaired.tool_calls:
+                        raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_MUST_BE_TEXT")
+                    if bad_checkpoint_text and not last.id:
+                        raise ValueError("FUNCTIONAL_FINAL_ANSWER_CHECKPOINT_ID_REQUIRED")
+                    replacement = ([RemoveMessage(id=last.id), repaired]
+                                   if bad_checkpoint_text else [repaired])
+                    agent.update_state(cfg, {"messages": replacement}, as_node="agent")
+                    messages = agent.get_state(cfg).values["messages"]
+                    recovery.update(status="response_received", delivery=final_delivery(
+                        repaired.content))
+                    write_json(recovery_path, recovery)
+                    trace({"event": "functional_answer_only_recovery", **recovery})
+                else:
+                    messages = prior
             else:
                 result = agent.invoke(
                     None if prior else {"messages": [HumanMessage(content=content, id=message_id)]},
@@ -757,6 +939,11 @@ def message(
                 ),
                 generation_calls=model.calls_in_message,
             )
+            output["final_delivery"] = final_delivery(output["final_answer"])
+            if output["final_delivery"]["status"] != "available":
+                output.update(status="FAILED", error_category="final_delivery",
+                              error_type="FinalAnswerUnavailable",
+                              error=output["final_delivery"]["reason"])
             checkpointed_calls = {
                 row.tool_call_id for row in messages if isinstance(row, ToolMessage)
             }
@@ -783,7 +970,8 @@ def message(
                         }
                     )
             # Capture assistant speech as its real role, never as new user evidence.
-            service.capture_assistant(session, message_id + ":final", output["final_answer"] or "")
+            if output["final_delivery"]["status"] == "available":
+                service.capture_assistant(session, message_id + ":final", output["final_answer"])
             output.update(
                 records=service.records(),
                 sources=service.sources(),
@@ -843,6 +1031,11 @@ def message(
                     )
             if "model" in locals():
                 output["generation_calls"] = model.calls_in_message
+        output.setdefault("final_delivery", final_delivery(output.get("final_answer")))
+        output["operation_status"] = operation_status(
+            output, thread_id=cfg["configurable"]["thread_id"],
+            execution_started=execution_started,
+        )
         if "faults" in locals() and evaluator_control:
             output["evaluator_control_state"] = faults.state
         output.update(
