@@ -566,3 +566,26 @@ def test_query_attempt_history_preserves_unknown_and_filters_foreign_owner(tmp_p
         assert 'FOREIGN_PRIVATE_RESULT' not in json.dumps(current)
         original_after = read_json(app.journal.path)[original['journal_key']]
         assert original_after['status'] == 'pending' and original_after['effect'] == 'unknown'
+
+
+@pytest.mark.parametrize('available', [False, True])
+def test_publication_receipt_binds_attempted_audience_without_claiming_delivery(
+    tmp_path: Path, available: bool,
+) -> None:
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, 'document',
+            attempt_policy='single_phase_with_history_v2', initial_publication_available=available)
+        draft = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'draft'))
+        bound = {k: draft[k] for k in ['title', 'document_version', 'content_digest']}
+        call(wrapper, 'approve_document_version', bound, 'approve')
+        published = call(wrapper, 'publish_approved_document',
+                         {**bound, 'audience': 'local team'}, 'pub')
+        body = receipt(published)
+        assert body['attempted_audience'] == 'local team'
+        assert body['audience'] == ('local team' if available else '')
+        assert body['publication_status'] == ('published' if available else 'not_published')
+        source = service.source(json.loads(published.content)['source_ref'])
+        assert json.loads(source['content']) == body
+        entry = next(r for r in app.snapshot()['journal'].values() if r.get('call_id') == 'pub')
+        original = json.loads(entry['native_result']['content'])
+        assert 'attempted_audience' not in original and 'request_attempt_policy' not in original

@@ -174,6 +174,14 @@ class NativePublicActionJournal(BusinessActionJournal):
                 write_json(self.path, entries)
                 raise
             row["effect"] = self._receipt_effect({"tool": call["name"]}, response)
+            if self.include_attempt_history and call["name"] == "publish_approved_document":
+                # Failed publication has no published audience. Preserve the
+                # actual invoked audience separately so a selected receipt can
+                # support what was attempted without claiming successful delivery.
+                row["native_result"] = response.model_dump(mode="json")
+                body = json.loads(str(response.content))
+                body["attempted_audience"] = call["args"]["audience"]
+                response = response.model_copy(update={"content": json.dumps(body)})
             if self.include_attempt_history and self._is_query(call["name"]):
                 row["native_result"] = response.model_dump(mode="json")
                 body = json.loads(str(response.content))
@@ -184,7 +192,7 @@ class NativePublicActionJournal(BusinessActionJournal):
                 # so summaries need not infer retry limits from a failure code.
                 # Keep the backend response separately; policy is wrapper evidence,
                 # not an additional backend effect or a permanent prohibition.
-                row["native_result"] = response.model_dump(mode="json")
+                row.setdefault("native_result", response.model_dump(mode="json"))
                 body = json.loads(str(response.content))
                 body["request_attempt_policy"] = {
                     "scope": "current_public_message_only",

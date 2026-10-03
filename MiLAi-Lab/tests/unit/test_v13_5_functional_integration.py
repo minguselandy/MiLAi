@@ -34,6 +34,7 @@ def prepared(
     action_mode_declaration: bool = False,
     receipt_response: bool = False,
     declared_writes: bool = False,
+    operation_mode_declaration: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -66,7 +67,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v3" if action_mode_declaration else
+        "request_mode": "current_request_native_v4" if operation_mode_declaration else
+        "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
         "finalization": "receipt_business_response_v1" if receipt_response else
@@ -1461,3 +1463,72 @@ def test_declared_write_completion_requires_attempt_without_business_replay(
     second = message(root, resume=True)
     assert second['status'] == 'COMPLETED' and second['final_answer'] == first['final_answer']
     assert len(wires) == before == (3 if write_request == 'none' else 5)
+
+
+def test_publish_only_permission_prevents_status_summary_from_editing_document(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request='perform' if ordinal == 1
+                else 'continue_if_unfinished',
+                business_action_quote=wire['messages'][-1]['content'],
+                business_operations=['create_or_update_draft', 'approve_document_version']
+                if ordinal == 1 else ['publish_approved_document'])
+        if ordinal == 2:
+            return native_call('create_or_update_draft', 'draft', title='Stable document',
+                               content='Keep this original body.')
+        if ordinal == 3:
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('approve_document_version', 'approve', **{
+                k: receipt[k] for k in ['title', 'document_version', 'content_digest']})
+        if ordinal in {4, 9}:
+            return {'role': 'assistant', 'content': 'Actual operations reported.'}
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'publish_approved_document' in names and 'get_document_status' in names
+        assert not {'create_or_update_draft', 'approve_document_version', 'save_memory'} & names
+        if ordinal == 6:
+            return native_call('get_document_status', 'query', title='Stable document')
+        receipt = actual_tool_receipt(wire)['receipt']
+        bound = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+        if ordinal == 7:
+            return native_call('publish_approved_document', 'publish',
+                               audience='local group', **bound)
+        assert ordinal == 8
+        return native_call('create_or_update_draft', 'forbidden-edit',
+                           content='Wrong status summary instead of document body.', **bound)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {'bank': 'b', 'owner': 'alice', 'session': 's', 'workflow': 'document'}
+    first = functional.message(root, **common, message_id='draft', content='Create and approve.')
+    assert first['status'] == 'COMPLETED', first
+    second = functional.message(root, **common, message_id='publish', content='Only publish now.')
+    assert second['status'] == 'FAILED' and second['error'] == 'VLLM_CHAT_UNKNOWN_TOOL'
+    assert second['operation_status']['business']['status'] == 'completed'
+    world = second['world']['world']
+    assert len(world['documents']) == 1 and len(world['documents'][0]['versions']) == 1
+    assert world['documents'][0]['content'] == 'Keep this original body.'
+    assert world['documents'][0]['publication_status'] == 'published'
+    recovered = functional.message(root, **common, message_id='publish',
+                                   content='Only publish now.', resume=True)
+    assert recovered['status'] == 'COMPLETED', recovered
+    assert recovered['world']['world'] == world and len(wires) == 9
+    assert 'Wrong status summary' not in recovered['final_answer']
+
+
+@pytest.mark.parametrize('operations', [[], ['publish_approved_document'] * 2,
+                                       ['save_memory'], ['unknown_operation']])
+def test_operation_declaration_rejects_inconsistent_or_unknown_permissions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, operations: list[str],
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        'classify_current_request', 'intent', memory_write_request='none', allow_forgetting=False,
+        business_action_request='perform', business_action_quote=wire['messages'][-1]['content'],
+        business_operations=operations), native=True)
+    result = message(root)
+    assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+    assert not result['world']['world']['attempts'] and len(wires) == 1

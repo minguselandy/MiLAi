@@ -177,6 +177,29 @@ _action_parameters["properties"].update({
 })
 _action_parameters["required"] = list(_action_parameters["properties"])
 
+BUSINESS_MUTATIONS = {"reserve_and_label", "complete_label", "create_or_update_draft",
+                      "approve_document_version", "publish_approved_document"}
+REQUEST_OPERATION_MODE_PROMPT = REQUEST_ACTION_MODE_PROMPT + """
+Also list business_operations: ONLY the specific operations the CURRENT request
+permits, not every capability that exists in the workflow. Queries need no entries.
+- reserve_and_label: create a reservation and label; complete_label: label an existing reservation.
+- create_or_update_draft: create/edit the actual document body; this does NOT update memory.
+- approve_document_version: approve the actual current document version.
+- publish_approved_document: publish the already-approved current version.
+Preserving an existing draft/approval while continuing publication permits ONLY
+publication, not editing or reapproving. Never add document editing to maintain a
+semantic memory record or to write a status summary. Pure queries have an empty list.
+If a continuation's unfinished phase is not yet known, include only phases within
+the stated current authorization; execution must query state before choosing one.
+"""
+REQUEST_OPERATION_MODE_DECLARATION = json.loads(json.dumps(REQUEST_ACTION_MODE_DECLARATION))
+_operation_parameters = REQUEST_OPERATION_MODE_DECLARATION["function"]["parameters"]
+_operation_parameters["properties"]["business_operations"] = {
+    "type": "array", "uniqueItems": True, "items": {
+        "type": "string", "enum": sorted(BUSINESS_MUTATIONS)},
+    "description": "Only current-request-permitted operations; memory writing is separate."}
+_operation_parameters["required"].append("business_operations")
+
 
 class _ReadExecutionStopped(Exception):
     """A persisted non-retryable read-limit receipt ends execution, not its effects."""
@@ -230,7 +253,7 @@ def prepare(
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
-        "current_request_native_v3",
+        "current_request_native_v3", "current_request_native_v4",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
@@ -431,6 +454,7 @@ def request_mode(
     content: str, format_reproposals: int, trace: Trace, *, native_declaration: bool = False,
     write_mode_declaration: bool = False,
     action_mode_declaration: bool = False,
+    operation_mode_declaration: bool = False,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -441,6 +465,14 @@ def request_mode(
              "requires_memory_result"}
 
     def valid(value: Any) -> bool:
+        if operation_mode_declaration:
+            operations = value.get("business_operations") if isinstance(value, dict) else None
+            if (not isinstance(operations, list)
+                    or not all(isinstance(op, str) and op in BUSINESS_MUTATIONS
+                               for op in operations)
+                    or len(operations) != len(set(operations))
+                    or bool(operations) != (value.get("business_action_request") != "none")):
+                return False
         if write_mode_declaration:
             business_valid = (isinstance(value, dict)
                 and type(value.get("business_action_request")) is str
@@ -455,7 +487,9 @@ def request_mode(
                     and type(value.get("allow_business_mutation")) is bool)
             return (isinstance(value, dict) and set(value) == {
                 "memory_write_request", "allow_forgetting", *(
-                    ["business_action_request", "business_action_quote"] if action_mode_declaration
+                    ["business_action_request", "business_action_quote", *(
+                        ["business_operations"] if operation_mode_declaration else [])]
+                    if action_mode_declaration
                     else ["allow_business_mutation"])}
                 and type(value["memory_write_request"]) is str
                 and value["memory_write_request"] in {"none", "new_assertion", "explicit"}
@@ -480,7 +514,8 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
+        prompt = (REQUEST_OPERATION_MODE_PROMPT if operation_mode_declaration else
+                  REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
                   REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
         if state["attempts"] > 1:
@@ -489,7 +524,8 @@ def request_mode(
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
-            tools=[REQUEST_ACTION_MODE_DECLARATION if action_mode_declaration
+            tools=[REQUEST_OPERATION_MODE_DECLARATION if operation_mode_declaration
+                   else REQUEST_ACTION_MODE_DECLARATION if action_mode_declaration
                    else REQUEST_WRITE_MODE_DECLARATION if write_mode_declaration
                    else REQUEST_MODE_DECLARATION] if native_declaration else [],
             tool_choice="auto" if native_declaration else "none")
@@ -519,7 +555,8 @@ def request_mode(
     } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_only",
-               "protocol": "native_action_declaration_v3" if action_mode_declaration else
+               "protocol": "native_operation_declaration_v4" if operation_mode_declaration else
+               "native_action_declaration_v3" if action_mode_declaration else
                "native_write_declaration_v2" if write_mode_declaration else
                "native_declaration_v1" if native_declaration else "json_content_v1",
                "semantic_correctness": "unchecked",
@@ -527,6 +564,8 @@ def request_mode(
     if action_mode_declaration:
         summary.update({key: decision[key] for key in (
             "business_action_request", "business_action_quote")})
+    if operation_mode_declaration:
+        summary["business_operations"] = decision["business_operations"]
     trace({"event": "functional_request_mode", **summary,
            "decision_sha256": state["decision_sha256"]})
     return summary
@@ -1101,17 +1140,22 @@ def message(
                 }, content, settings["format_reproposals"], trace,
                     native_declaration=settings["request_mode"] in {
                         "current_request_native_v1", "current_request_native_v2",
-                        "current_request_native_v3"},
+                        "current_request_native_v3", "current_request_native_v4"},
                     write_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v2", "current_request_native_v3"},
-                    action_mode_declaration=settings["request_mode"] == "current_request_native_v3")
+                        "current_request_native_v2", "current_request_native_v3",
+                        "current_request_native_v4"},
+                    action_mode_declaration=settings["request_mode"] in {
+                        "current_request_native_v3", "current_request_native_v4"},
+                    operation_mode_declaration=(settings["request_mode"]
+                                                == "current_request_native_v4"))
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
-            selected_business = tuple(tool for tool in app.tools if mode is None or
-                                      mode["allow_business_mutation"] or tool.name in {
-                                          "get_reservation", "get_document_status"})
+            selected_business = tuple(tool for tool in app.tools if mode is None
+                or tool.name in {"get_reservation", "get_document_status"}
+                or (tool.name in mode["business_operations"] if "business_operations" in mode
+                    else mode["allow_business_mutation"]))
             allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
             mode_reproposals = mode["format_reproposals_used"] if mode else 0
             completion_path = bank_root / f"{identity}-completion-feedback.json"

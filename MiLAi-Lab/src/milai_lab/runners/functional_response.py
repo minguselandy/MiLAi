@@ -40,6 +40,7 @@ _FIELDS = {
     "title": "文档标题", "document_version": "文档版本", "content": "文档正文",
     "approval_status": "当前版本批准状态", "publication_status": "当前版本发布状态",
     "audience": "沙箱发布对象",
+    "attempted_audience": "本次尝试的沙箱受众 (不代表已发布)",
 }
 
 

@@ -1802,6 +1802,85 @@
         "full_run": 37095892756,
         "full_status": "skipped"
       }
+    },
+    {
+      "id": "l2-r18",
+      "layer": "L2",
+      "candidate_commit": "35371bf4d9e3fee09db6d8e4a071177888a0354e",
+      "state": "STOPPED_UNAUTHORIZED_DOCUMENT_EDIT",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r18.json",
+      "admission": "Full frozen two-workflow denominator. Start d02/d03 omitted writes and last-attempt explanation, then all remaining independent stories. Original queue/message limits unchanged.",
+      "mechanical_verification": "98 entry/privacy/workflow checks; 3 production tokenizer missing-write completion variants; ruff/mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 10710,
+        "generation": {
+          "charged_tokens": 32414303,
+          "known_tokens": 32383916,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r18/input-freeze.json": "d25fea8e456b5827d25058ef3a26bc58983dc4ac60d3f3b5a92ebeb63e84d08a",
+        "configs/v13-5-functional-r18.json": "74d7f1ce40808fad499510b0459572748a3ebf45f7394cfb5d2bbf7c37840c6b",
+        "artifacts/v13-5/r18-entry-privacy-workflows.log": "a1cacc9ffb9beed1de141dd63708ace385d73dc32f58722f97e4a96f6c236a3a",
+        "artifacts/v13-5/r18-production-contracts.json": "c01d4361c34f770e23386003d3959bf247073a73428c12da6909d84daa4a0b5c",
+        "artifacts/v13-5/r18-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r18-mypy.log": "049f51b850512be193c74d3fbb731e25fbc6374a66560d8ec0d6569d79c88ea6",
+        "artifacts/v13-5/r18-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/l2-r18/review.json": "b9a3c36feceb70710c87c2ca20ef9047843eb6d71c15477a12f95759261ac3af",
+        "artifacts/v13-5/l2-r18/seal.json": "75dec394c6158c3e20e9fe830fedfa21bef7a1676b7827d0c3bd3ca3715273b5",
+        "artifacts/v13-5/l2-r18-review.jsonl": "8cbbef413754a543de8d26c0a8d82ab475ba246fa7d2c6513b8eb42b197720ff",
+        "artifacts/v13-5/l2-r18-evaluator/summary.json": "30c75d81e1fdcc30e1a9a9faa1121f8eb0c3b15b9d398efdf324b5b7f2da133d"
+      },
+      "message_counts": {
+        "NOT_RUN": 22,
+        "COMPLETED": 4
+      },
+      "retained_attempts": 4,
+      "semantic_counts": {
+        "FAIL": 1,
+        "INCOMPLETE": 1,
+        "NOT_RUN": 10
+      },
+      "cost_delta": {
+        "generation_requests": 23,
+        "generation.known_tokens": 211009,
+        "generation.charged_tokens": 211009,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "case_verdicts": {
+        "l2-d02": "FAIL: after actual requested v1 publication, Agent uses create_or_update_draft to write a semantic status summary as unauthorized v2 body, invalidating approval. Subsequent old-version approval rejected. First saved summary also names attempted audience without that fact in selected return-only fragments.",
+        "l2-d03": "INCOMPLETE: initial actual draft/approval and supported semantic save correct, next live query and one failed publication correct. Final read-only message stopped."
+      },
+      "findings": [
+        "4 COMPLETED public messages, 22 NOT_RUN. No original results, effects or budgets rolled back.",
+        "All-business-write permission was too broad for a request allowing only remaining publication. Program report accurately shows the unwanted edit; truthful reporting does not make the action authorized.",
+        "Memory save omission repaired in both exposed prefixes, but this does not offset unauthorized business mutation or insufficient selected audience evidence.",
+        "Need per-operation current-request permission and actual attempted audience in the publication receipt, distinct from successful published audience."
+      ],
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "evidence": [
+        "../l2-r18-review.jsonl",
+        "../l2-r18-evaluator/summary.json"
+      ],
+      "remote_ci": {
+        "commit": "35371bf4d9e3fee09db6d8e4a071177888a0354e",
+        "fast_run": 37096871333,
+        "fast_status": "success",
+        "full_run": 37096871422,
+        "full_status": "skipped"
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
