@@ -5,6 +5,8 @@ all original 24 stories / 48 messages: 24 PASS on the frozen original rubric and
 scoped current-state/source/maintenance review. Exact-commit Fast CI passed.
 Full L2-r17 completed all12/26: 10 scoped PASS, 2 FAIL. L2-r18 then stopped after
 4 completed messages on an unauthorized document edit during publication continuation.
+L2-r19 preserved the original document and actual publication, but stopped on a bounded
+read failure and rejection of a literal negative quote in a read-only declaration.
 These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
 pending and no stable configuration is recommended. Earlier failures and scoped
 communication cohorts remain separate evidence; their scores are not pooled.
@@ -18,15 +20,17 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r19.json` with a new root for current candidate
+Use `configs/v13-5-functional-r20.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R19 retains exact current-message save idempotency and first interprets the current
+R20 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,
 and requires an exact current-request clause for an action. It also lists the specific
 public business operations permitted; the catalog and dispatcher enforce that list.
-Document editing is distinct from semantic memory maintenance. The literal check is not semantic
+Document editing is distinct from semantic memory maintenance. A read-only v4
+declaration may keep an exact current negative/query clause or an empty quote;
+its operation list remains empty and mutation tools remain unavailable. The literal check is not semantic
 authorization. The persisted interpretation separately controls
 memory maintenance, forgetting and business mutation tools. A read-only interpretation
 still permits live business queries. This is a model interpretation, not a proof of

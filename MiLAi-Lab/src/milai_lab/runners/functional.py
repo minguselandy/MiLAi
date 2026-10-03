@@ -179,7 +179,10 @@ _action_parameters["required"] = list(_action_parameters["properties"])
 
 BUSINESS_MUTATIONS = {"reserve_and_label", "complete_label", "create_or_update_draft",
                       "approve_document_version", "publish_approved_document"}
-REQUEST_OPERATION_MODE_PROMPT = REQUEST_ACTION_MODE_PROMPT + """
+REQUEST_OPERATION_MODE_PROMPT = REQUEST_ACTION_MODE_PROMPT.replace(
+    "For none, use an empty quote.",
+    "For none, use an empty quote or exact current words supporting the read-only decision.",
+) + """
 Also list business_operations: ONLY the specific operations the CURRENT request
 permits, not every capability that exists in the workflow. Queries need no entries.
 - reserve_and_label: create a reservation and label; complete_label: label an existing reservation.
@@ -194,6 +197,8 @@ the stated current authorization; execution must query state before choosing one
 """
 REQUEST_OPERATION_MODE_DECLARATION = json.loads(json.dumps(REQUEST_ACTION_MODE_DECLARATION))
 _operation_parameters = REQUEST_OPERATION_MODE_DECLARATION["function"]["parameters"]
+_operation_parameters["properties"]["business_action_quote"]["description"] = (
+    "Exact CURRENT clause supporting action or read-only decision; empty permitted for none.")
 _operation_parameters["properties"]["business_operations"] = {
     "type": "array", "uniqueItems": True, "items": {
         "type": "string", "enum": sorted(BUSINESS_MUTATIONS)},
@@ -479,7 +484,9 @@ def request_mode(
                 and value["business_action_request"] in {
                     "none", "perform", "continue_if_unfinished"}
                 and type(value.get("business_action_quote")) is str
-                and ((value["business_action_quote"] == "")
+                and ((value["business_action_quote"] == "" or (
+                    operation_mode_declaration and bool(value["business_action_quote"].strip())
+                    and value["business_action_quote"] in content))
                      if value["business_action_request"] == "none"
                      else bool(value["business_action_quote"].strip())
                      and value["business_action_quote"] in content)

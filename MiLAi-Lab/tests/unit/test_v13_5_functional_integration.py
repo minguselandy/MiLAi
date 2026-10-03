@@ -1532,3 +1532,36 @@ def test_operation_declaration_rejects_inconsistent_or_unknown_permissions(
     result = message(root)
     assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
     assert not result['world']['world']['attempts'] and len(wires) == 1
+
+
+@pytest.mark.parametrize('quote', ['', 'do not publish', 'Only view; do not publish.'])
+def test_readonly_declaration_retains_bound_negative_quote_without_granting_operations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, quote: str,
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request='none', business_action_quote=quote,
+                business_operations=[])
+        names = {t['function']['name'] for t in wire['tools']}
+        assert not names & functional.BUSINESS_MUTATIONS
+        assert 'get_document_status' in names and 'save_memory' not in names
+        if ordinal == 2:
+            return native_call('get_document_status', 'query', title='read-only object')
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'Read-only result.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', workflow='document',
+                message_id='query', content='Only view; do not publish.')
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result
+    assert result['request_mode']['business_action_quote'] == quote
+    assert result['request_mode']['business_operations'] == []
+    assert not result['request_mode']['allow_business_mutation']
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    resumed = functional.message(root, **args, resume=True)
+    assert resumed['status'] == 'COMPLETED' and resumed['request_mode'] == result['request_mode']
+    assert len(wires) == 3
