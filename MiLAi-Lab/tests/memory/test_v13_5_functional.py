@@ -557,9 +557,14 @@ def test_m04_handles_roles_and_source_identity_fail_closed(tmp_path: Path) -> No
             memory.service.source_fragment(handle)
 
 
-def test_m05_large_source_body_ranking_group_reachability_and_wrapper_limit(tmp_path: Path) -> None:
+@pytest.mark.parametrize("explicit", [False, True])
+def test_m05_large_source_body_ranking_group_reachability_and_wrapper_limit(
+    tmp_path: Path, explicit: bool,
+) -> None:
     text = ("unrelated paragraph " * 100 + "\n") * 9 + "needle exception final requirement\n"
-    with opened(tmp_path, fragment_chars=600, read_limit=40) as memory:
+    with opened(tmp_path, fragment_chars=600, read_limit=40,
+                read_interface="explicit_selectors_v1" if explicit
+                else "combined_selectors_v1") as memory:
         ref = memory.service.capture_user("archive", "large", text)["source_ref"]
         turn(memory, text="needle")
         page = memory.context("s", "u", SHA)
@@ -571,7 +576,8 @@ def test_m05_large_source_body_ranking_group_reachability_and_wrapper_limit(tmp_
         index = 0
         while result["next_cursor"]:
             index += 1
-            result = invoke(memory, "read_source", {"cursor": result["next_cursor"]}, str(index))
+            result = invoke(memory, "read_page" if explicit else "read_source",
+                            {"cursor": result["next_cursor"]}, str(index))
             assert len(canonical(result)) <= 8192
             delivered += result["items"]
         assert "".join(u["content"] for u in delivered) == text
@@ -1178,15 +1184,20 @@ def test_m13_save_commit_unknown_recovery_never_double_revision(
         assert memory.service.sources()[0]["formation_status"] == "formed"
 
 
-def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(tmp_path: Path) -> None:
-    with opened(tmp_path) as memory:
+@pytest.mark.parametrize("explicit", [False, True])
+def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(
+    tmp_path: Path, explicit: bool,
+) -> None:
+    with opened(tmp_path, read_interface="explicit_selectors_v1" if explicit
+                else "combined_selectors_v1") as memory:
+        read_tool = "read_fragment" if explicit else "read_source"
         ref = turn(memory, text="private preference")
         hs = handles(memory, ref)
         saved = memory.save(cfg(), "save", "private preference", hs)
         turn(memory, "u2", "forget private preference")
         cached = memory.context("s", "u2", SHA)
         row = memory.service.read(saved["id"])
-        explicit = invoke(memory, "read_source", {"fragment_handle": hs[0]}, "read", cfg("u2"))
+        explicit = invoke(memory, read_tool, {"fragment_handle": hs[0]}, "read", cfg("u2"))
         assert explicit["ok"]
         receipt = invoke(
             memory, "forget_memory", {"read_handle": row["candidate_handle"]}, "forget", cfg("u2")
@@ -1200,7 +1211,7 @@ def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(tmp_path: 
         with pytest.raises(ValueError, match="SOURCE_UNAVAILABLE"):
             memory.service.source_fragment(hs[0])
         with pytest.raises(ValueError, match="REPLAY_REVOKED"):
-            invoke(memory, "read_source", {"fragment_handle": hs[0]}, "read", cfg("u2"))
+            invoke(memory, read_tool, {"fragment_handle": hs[0]}, "read", cfg("u2"))
         assert all(r["event_id"] != ref for r in memory.service.search("private")["raw_events"])
         new = memory.context("s", "u2", SHA)
         assert new["snapshot_id"] != cached["snapshot_id"]
@@ -1211,8 +1222,13 @@ def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(tmp_path: 
         )
 
 
-def test_history_body_cursor_stays_on_issued_versions_after_later_update(tmp_path: Path) -> None:
-    with opened(tmp_path, material_limit=3500, fragment_chars=300, read_limit=20) as memory:
+@pytest.mark.parametrize("explicit", [False, True])
+def test_history_body_cursor_stays_on_issued_versions_after_later_update(
+    tmp_path: Path, explicit: bool,
+) -> None:
+    with opened(tmp_path, material_limit=3500, fragment_chars=300, read_limit=20,
+                read_interface="explicit_selectors_v1" if explicit
+                else "combined_selectors_v1") as memory:
         ref = turn(memory)
         hs = handles(memory, ref)
         saved = memory.save(cfg(), "save", "version1 " * 30, hs)
@@ -1227,7 +1243,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(tmp_pat
             )
             assert result["ok"]
         first = invoke(
-            memory, "read_memory", {"record_id": saved["id"], "history": True}, "history"
+            memory, "read_memory_history" if explicit else "read_memory",
+            {"record_id": saved["id"], **({} if explicit else {"history": True})}, "history"
         )
         assert first["items"] and first["next_cursor"]
         row = memory.service.read(saved["id"])
@@ -1243,7 +1260,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(tmp_pat
         index = 0
         while page["next_cursor"]:
             index += 1
-            page = invoke(memory, "read_memory", {"cursor": page["next_cursor"]}, f"page{index}")
+            page = invoke(memory, "read_page" if explicit else "read_memory",
+                          {"cursor": page["next_cursor"]}, f"page{index}")
             assert page["snapshot_id"] == first["snapshot_id"]
             units.extend(page["items"])
         assert {u["revision"] for u in units} == set(range(1, 9))
@@ -1703,3 +1721,68 @@ def test_formation_review_rejection_exposure_preserves_independent_input(
         assert forgotten['ok'] and memory.service.source(ref) is None
         assert memory.service.source(independent['source_ref']) is not None
         assert (memory.service.source(assistant['source_ref']) is None) is delivered
+
+
+@pytest.mark.parametrize(("name", "args"), [
+    ("read_memory", {"record_id": "issued", "revision": ""}),
+    ("read_memory_history", {"record_id": "issued", "revision": "None"}),
+    ("read_memory_revision", {"record_id": "issued", "revision": "1"}),
+    ("read_memory_revision", {"record_id": "issued", "revision": True}),
+    ("read_memory_revision", {"record_id": "issued", "revision": None}),
+    ("read_memory_revision", {"record_id": "issued", "revision": 0}),
+    ("read_source", {"source_ref": "issued", "fragment_handle": None}),
+    ("read_fragment", {"fragment_handle": None}),
+    ("read_page", {"cursor": ""}),
+    ("read_page", {"cursor": "issued", "record_id": "unused"}),
+])
+def test_explicit_read_selectors_reject_placeholders_and_extra_fields_before_execution(
+    tmp_path: Path, name: str, args: dict[str, Any],
+) -> None:
+    import jsonschema
+    from langchain_core.utils.function_calling import convert_to_openai_tool
+
+    with opened(tmp_path, read_interface="explicit_selectors_v1") as memory:
+        turn(memory)
+        tool = next(t for t in memory.tools() if t.name == name)
+        schema = convert_to_openai_tool(tool)['function']['parameters']
+        assert schema['additionalProperties'] is False
+        assert set(schema['required']) == set(schema['properties'])
+        with pytest.raises(jsonschema.ValidationError):
+            jsonschema.validate(args, schema)
+        with pytest.raises(ValidationError):
+            invoke(memory, name, args, 'bad')
+        assert memory.service.records() == []
+        assert not any(item.key.startswith('read-admission-')
+                       for item in memory.service.store.search(namespace(memory.service)))
+
+
+def test_explicit_read_shared_budget_identity_and_owner_survive_reopen(tmp_path: Path) -> None:
+    with opened(tmp_path, read_interface="explicit_selectors_v1") as memory:
+        ref = turn(memory, text='Personal record with original support.')
+        fragment = handles(memory, ref)[0]
+        saved = memory.save(cfg(), 'save', 'Personal record with original support.', [fragment])
+        current = memory.service.read(saved['id'])
+        original = invoke(memory, 'read_source', {'source_ref': ref}, 'first')
+        exact = invoke(memory, 'read_memory_revision',
+                       {'record_id': saved['id'], 'revision': 1}, 'second')
+        assert original['ok'] and exact['items'][0]['revision'] == 1
+        assert exact['items'][0]['version_view'] == 'historical_exact_revision'
+        with pytest.raises(FunctionalRejection, match='OWNER_MISMATCH'):
+            invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'wrong-owner',
+                   cfg(owner='bob'))
+        with pytest.raises(FunctionalRejection, match='READ_CALL_CHANGED'):
+            invoke(memory, 'read_memory', {'record_id': saved['id']}, 'second')
+    with opened(tmp_path, read_interface="explicit_selectors_v1") as memory:
+        memory.context('s', 'u', SHA)
+        assert invoke(memory, 'read_source', {'source_ref': ref}, 'first') == original
+        assert invoke(memory, 'read_fragment', {'fragment_handle': fragment}, 'third')['ok']
+        exhausted = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'fourth')
+        assert exhausted['status'] == 'read_limit_exhausted'
+        assert memory.service.read(saved['id'])['value'] == current['value']
+        assert memory.service.history_index(saved['id'])['revisions'] == [1]
+    with opened(tmp_path, owner='bob', read_interface="explicit_selectors_v1") as memory:
+        memory.service.capture_user('s', 'u', 'Unrelated user asks about history.')
+        memory.context('s', 'u', SHA)
+        result = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'foreign',
+                        cfg(owner='bob'))
+        assert not result['ok'] and 'Personal record' not in canonical(result)

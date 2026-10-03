@@ -489,7 +489,7 @@ def prepare(
         "completion_tool_choice",
         "existing_confirmation",
         "revision_support_review", "formation_support_review", "support_review_comparison",
-        "tool_catalog_errors",
+        "tool_catalog_errors", "read_interface",
         "declaration_sampling",
         "capability_delivery",
     }
@@ -565,6 +565,9 @@ def prepare(
             settings.get(key) == "selected_originals_v1"
             for key in ("formation_support_review", "revision_support_review")):
         raise ValueError("FUNCTIONAL_SUPPORT_REVIEW_COMPARISON_REQUIRES_REVIEW")
+    if settings.get("read_interface", "combined_selectors_v1") not in {
+            "combined_selectors_v1", "explicit_selectors_v1"}:
+        raise ValueError("FUNCTIONAL_READ_INTERFACE_INVALID")
     if settings.get("tool_catalog_errors", "legacy") not in {"legacy", "bounded_feedback_v1"}:
         raise ValueError("FUNCTIONAL_TOOL_CATALOG_ERRORS_INVALID")
     if settings.get("tool_catalog_errors") == "bounded_feedback_v1" and host.tool_mode != "native":
@@ -1546,6 +1549,7 @@ def message(
                 read_limit=settings["additional_reads"],
                 material_limit=settings["ordinary_material_tokens"],
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
+                read_interface=settings.get("read_interface", "combined_selectors_v1"),
                 recent_context=settings.get("recent_context", "disabled"),
                 existing_confirmation=(settings.get("existing_confirmation")
                                        == "explicit_no_change_v1"),
@@ -1744,8 +1748,8 @@ def message(
                 if (not for_finalization
                         and settings.get("read_exhaustion") == "stop_execution_v1"):
                     for row in messages:
-                        if (not isinstance(row, ToolMessage) or row.name not in {
-                                "read_memory", "read_source", "search_memory"}):
+                        if (not isinstance(row, ToolMessage)
+                                or row.name not in memory.read_tool_names):
                             continue
                         try:
                             receipt = json.loads(str(row.content))

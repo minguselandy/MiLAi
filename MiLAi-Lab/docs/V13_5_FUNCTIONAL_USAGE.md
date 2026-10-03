@@ -1,5 +1,7 @@
 # v13.5 functional profile
 
+**R49 is the current mechanically checked candidate: 586 regressions and 32 production tokenizer/prompt probes passed; no r49 model acceptance yet.** It separates required read selectors while reusing the existing read actions and durable allowances. Latest actual evidence remains the r48 failure below.
+
 **R48 actual communication failed: 4 scoped PASS, 2 FAIL and 5 NOT_RUN out of the frozen 11 cases / 27 messages.** There were 15 COMPLETED, 1 FAILED and 11 unrun messages. Historical reading encoded unused optional selectors as empty strings and then the string `"None"`, exhausting the one format reproposal; no read or new write executed. Another final answer inferred restoration of a default rule without explicit support. Comparison rejected actual omitted limits, but also overrejected a correct partial-business interpretation. These limitations remain open.
 
 The source/frozen commit is `3c4dc23`: Fast CI 37149580600 succeeded; Full 37149580597 was skipped. Its 578 mechanical regressions and 29 production tokenizer/prompt probes passed, separately from model acceptance. The cohort added 69 generations / 363,875 tokens. Same-version L1–L4 are not admitted. No stable configuration is recommended; see the [r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md).
@@ -38,7 +40,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r48.json` is the current development candidate. Required
+`configs/v13-5-functional-r49.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -57,6 +59,24 @@ promoted to semantic or integrated acceptance. No stable configuration is recomm
 Every functional read now explicitly states that missing visible evidence cannot prove
 never supplied, topic-specific forgetting or physical erasure. The reason remains unknown
 unless actual evidence establishes it; this is a tool contract, not a semantic validation.
+
+With `read_interface=explicit_selectors_v1`, use the actual issued selectors supplied
+in material. These tools share the same per-message explicit read allowance, including
+failed executed reads; provider-rejected formatting uses the existing format allowance.
+No empty-string or `"None"` placeholder is converted into a valid selector.
+
+| Tool | Required arguments | Read behavior |
+| --- | --- | --- |
+| `read_memory` | `record_id` | Current record state |
+| `read_memory_history` | `record_id` | Original stored versions, with frozen pagination |
+| `read_memory_revision` | `record_id`, integer `revision` | One exact historical revision |
+| `read_source` | `source_ref` | Full original source group across public boundaries |
+| `read_fragment` | `fragment_handle` | Exact original fragment |
+| `read_page` | `cursor` | Continue any issued next_cursor, including ordinary/search/history/source material |
+
+Extra parameters are rejected. All reads retain owner and visibility checks; old values
+stay historical and do not write facts. Search is unchanged. Without this opt-in, the
+old combined read selectors remain. An interface change needs a new frozen configuration.
 
 The candidate preserves these contracts; actual model choices still require evaluation:
 

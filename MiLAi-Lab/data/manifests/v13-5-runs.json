@@ -7591,6 +7591,28 @@
         "fast": "SUCCESS run37149580600",
         "full": "SKIPPED run37149580597; not a pass"
       }
+    },
+    {
+      "candidate": "r49",
+      "scope": "586 affected/default/functional entry/privacy/workflow/queue/evaluator/schema/read/admission/service/architecture checks PASS;32 pinned production Qwen tokenizer/full-prompt probes PASS;23 targeted checks included. Ruff,mypy2modules,package/tools boundaries,matrix PASS. Explicit required read selectors preserve exact historical bodies, frozen source/history pagination, owner separation, forgetting/replay and shared durable read limit; invalid/extra/placeholder arguments reject, actual native formatting feedback uses original allowance. New read_page exhaustion terminates execution with effects intact. Previous default catalog/read policy byte-equivalent in two profiles. Zero actual model HTTP; old adapter SDK evidence retained, not rerun.",
+      "preserved_first_failure": "Initial pytest collection rejected a parametrized test argument with a default; removed the default, original log retained. First executed batch12PASS11FAIL exposed SDK public schema losing extra=forbid, while direct tool validation rejected extras and produced a non-JSON ToolNode error. New selector tool exports its actual strict DTO excluding only the injected call ID; corrected23PASS. Initial Ruff2 line-length failures fixed without contract changes.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r49-targeted-initial.log": "c4f89f6a2f38bef2e1a2264df85c2e5d37c68801fef272b201730e73a1c3c500",
+        "artifacts/v13-5/r49-targeted-corrected.log": "84e456bf1932fad13902aa897de8e6ea7b44430acf3d88ff80f32c00c2312922",
+        "artifacts/v13-5/r49-targeted-schema-corrected.log": "2b10ed465edf7316537942390c1a72d00a7261e17753eb4f3aa23ae8f8018808",
+        "artifacts/v13-5/r49-regression.log": "b5d20765c0e94a4ffdc2f692573d87379aab69e29cb6ae1b047b08ae24c2f763",
+        "artifacts/v13-5/r49-ruff-initial.log": "f3756bb90fa4813600e18ad8024c0109332734aa931608141f7792dc91556bb3",
+        "artifacts/v13-5/r49-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r49-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r49-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r49-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r49-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be",
+        "artifacts/v13-5/r49-default-catalog-compatibility.json": "eb3319f68c539a193ea990f6a5f30e4be677714ebcc04c4b0b73acc17a3a4112",
+        "artifacts/v13-5/r49-production-contracts-probe.py": "4f6b1a99bb0ac508a34f9709ca5b5e610033f7b8895bf3b01970e41604a57205",
+        "artifacts/v13-5/r49-production-contracts.json": "73c1ede41aabe38eac3ab1a10a3dacb7acec844391ce9d7a58f31630732b198c",
+        "artifacts/v13-5/r49-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r49-regression-scope.json": "6dbdcaed2f53456c532376dd74addcb81060966c55e65dc3c6bcfda251946f05"
+      }
     }
   ],
   "current_checkpoint": "data/manifests/v13-5-checkpoint-r48-20261004.json"

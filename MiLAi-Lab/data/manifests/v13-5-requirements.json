@@ -5226,9 +5226,9 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r48 explicit source/proposal limit comparison; actual communication failed",
-    "scope": "R48 full frozen11/27 stopped:4PASS_SCOPED2FAIL5NOT_RUN;15COMPLETED1FAILED11NOT_RUN;69generation363875tokens. Actual omitted-limit and contradictory-supported rejections, current-source revisions and no_change observed; partial-business interpretation overrejected, final default-restoration inference unsupported, historical read optional strings exhaust format allowance. Six records/32 quote identities/current=latest intact. Mechanical578/production29 and exact-sourceFastCI pass; full composition skipped. Same-version L1-L4 not admitted; historical140/original48 unchanged; full development incomplete.",
-    "report": "docs/V13_5_CHECKPOINT_r48_20261004.md",
+    "candidate": "r49 explicit required read selectors; mechanically checked, no model acceptance",
+    "scope": "R49 586 regressions/32 pinned production probes/23 included direct checks pass. Strict public selector schema matches the DTO, shared read actions/allowance/snapshot/owner/visibility and default catalog preserved. SDK subset-schema loss observed and fixed; original failures retained. Latest actual r48 full11/27 remains4PASS_SCOPED2FAIL5NOT_RUN with unsupported final inference and historical optional-argument failure; partial-business interpretation overrejected. No r49 model freeze/results; same-version full L1-L4/FUNC terminal/final report incomplete. Historical140 and original48 unchanged.",
+    "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",
     "independent_review": false

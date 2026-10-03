@@ -91,6 +91,48 @@ class AnchoredChange(BaseModel):
         "not evidence for a different assertion."))
 
 
+class ReadSelector(BaseModel):
+    """Concrete read selectors reject unused parameters and implicit coercion."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    tool_call_id: Annotated[str, InjectedToolCallId]
+
+
+class RecordSelector(ReadSelector):
+    record_id: str = Field(min_length=1)
+
+
+class RevisionSelector(RecordSelector):
+    revision: int = Field(ge=1)
+
+
+class SourceSelector(ReadSelector):
+    source_ref: str = Field(min_length=1)
+
+
+class FragmentSelector(ReadSelector):
+    fragment_handle: str = Field(min_length=1)
+
+
+class PageSelector(ReadSelector):
+    cursor: str = Field(min_length=1)
+
+
+class ReadSelectorTool(StructuredTool):
+    """Preserve the selector model's constraints in the model-visible schema."""
+
+    @property
+    def tool_call_schema(self) -> dict[str, Any]:
+        # The SDK's subset model drops extra="forbid" when removing injected
+        # arguments. Export our actual strict DTO and remove only our injected ID,
+        # so provider validation and direct execution accept the same selectors.
+        assert isinstance(self.args_schema, type) and issubclass(self.args_schema, ReadSelector)
+        schema = self.args_schema.model_json_schema()
+        schema["properties"].pop("tool_call_id")
+        schema["required"] = [key for key in schema["required"] if key != "tool_call_id"]
+        return {**schema, "title": self.name, "description": self.description}
+
+
 class FunctionalMemory:
     def __init__(
         self,
@@ -102,6 +144,7 @@ class FunctionalMemory:
         fragment_chars: int = 1200,
         retrieval_candidates: list[dict[str, Any]] | None = None,
         formation_interface: str = "content_and_scope_v1",
+        read_interface: str = "combined_selectors_v1",
         recent_context: str = "disabled",
         existing_confirmation: bool = False,
         revision_support_review: Callable[[dict[str, Any], Callable[[], None]], None] | None = None,
@@ -120,6 +163,9 @@ class FunctionalMemory:
             "anchored_assertion_v2", "anchored_assertion_v3"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
+        if read_interface not in {"combined_selectors_v1", "explicit_selectors_v1"}:
+            raise FunctionalRejection("V13_5_READ_INTERFACE_INVALID")
+        self.read_interface = read_interface
         if type(existing_confirmation) is not bool:
             raise FunctionalRejection("V13_5_EXISTING_CONFIRMATION_INVALID")
         self.existing_confirmation = existing_confirmation
@@ -141,6 +187,8 @@ class FunctionalMemory:
         }
         if formation_interface != "content_and_scope_v1":
             self.policy["formation_interface"] = formation_interface
+        if read_interface != "combined_selectors_v1":
+            self.policy["read_interface"] = read_interface
         if recent_context != "disabled":
             self.policy["recent_context"] = recent_context
         if revision_support_review is not None:
@@ -164,6 +212,14 @@ class FunctionalMemory:
                     row["source_ref"], row["start"], row["end"])
                 if any(row[key] != fragment[key] for key in hashes.intersection(row)):
                     raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_HASH_MISMATCH")
+
+    @property
+    def read_tool_names(self) -> frozenset[str]:
+        names = {"search_memory", "read_memory", "read_source"}
+        if self.read_interface == "explicit_selectors_v1":
+            names.update({"read_memory_history", "read_memory_revision", "read_fragment",
+                          "read_page"})
+        return frozenset(names)
 
     @property
     def forget_epoch(self) -> int:
@@ -1176,25 +1232,12 @@ class FunctionalMemory:
                 ),
             )
 
-        def read_memory(
-            config: RunnableConfig,
-            *,
-            tool_call_id: Annotated[str, InjectedToolCallId],
-            record_id: str | None = None,
-            revision: int | None = None,
-            cursor: str | None = None,
-            history: bool = False,
-            history_cursor: str | None = None,
+        def record_read(
+            config: RunnableConfig, tool_call_id: str, request: dict[str, Any],
         ) -> ToolMessage:
-            """Read current/exact historical revision, or a previously issued cursor.
-
-            history=true reads original stored revision bodies with snapshot pagination.
-            History is read-only: do not save an old value as a new or current fact.
-            Reading a record or raw fragment performs no semantic write. Only an
-            actual successful save_memory/update_memory receipt confirms that effect.
-            A cursor always continues its original
-            ordinary/explicit snapshot; it never changes to latest results.
-            """
+            record_id, revision, cursor = (request.get(k) for k in
+                                           ("record_id", "revision", "cursor"))
+            history, history_cursor = request.get("history", False), request.get("history_cursor")
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 if cursor is not None:
@@ -1254,39 +1297,38 @@ class FunctionalMemory:
                     bound,
                 )
 
-            return message(
-                "read_memory",
-                tool_call_id,
-                self._read(
-                    config,
-                    tool_call_id,
-                    {
-                        "tool": "read_memory",
-                        "record_id": record_id,
-                        "revision": revision,
-                        "cursor": cursor,
-                        "history": history,
-                        "history_cursor": history_cursor,
-                    },
-                    action,
-                ),
-            )
+            return message(request["tool"], tool_call_id,
+                           self._read(config, tool_call_id, request, action))
 
-        def read_source(
+        def read_memory(
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
-            fragment_handle: str | None = None,
-            source_ref: str | None = None,
+            record_id: str | None = None,
+            revision: int | None = None,
             cursor: str | None = None,
+            history: bool = False,
+            history_cursor: str | None = None,
         ) -> ToolMessage:
-            """Read an issued exact fragment or a full public source group, continuing its cursor.
+            """Read current/exact historical revision, or a previously issued cursor.
 
-            Source groups split only at public original boundaries; each page states omissions.
-            Original capture/read is not semantic formation. This read never saves;
-            a semantic write needs a successful save_memory/update_memory receipt.
-            Every call, including a failed call, uses the explicit per-message read allowance.
+            history=true reads original stored revision bodies with snapshot pagination.
+            History is read-only: do not save an old value as a new or current fact.
+            Reading a record or raw fragment performs no semantic write. Only an
+            actual successful save_memory/update_memory receipt confirms that effect.
+            A cursor always continues its original
+            ordinary/explicit snapshot; it never changes to latest results.
             """
+
+            return record_read(config, tool_call_id, {
+                "tool": "read_memory", "record_id": record_id, "revision": revision,
+                "cursor": cursor, "history": history, "history_cursor": history_cursor})
+
+        def source_read(
+            config: RunnableConfig, tool_call_id: str, request: dict[str, Any],
+        ) -> ToolMessage:
+            fragment_handle, source_ref, cursor = (request.get(k) for k in
+                                                   ("fragment_handle", "source_ref", "cursor"))
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 if sum(x is not None for x in (fragment_handle, source_ref, cursor)) != 1:
@@ -1311,21 +1353,105 @@ class FunctionalMemory:
                     bound,
                 )
 
-            return message(
-                "read_source",
-                tool_call_id,
-                self._read(
-                    config,
-                    tool_call_id,
-                    {
-                        "tool": "read_source",
-                        "fragment_handle": fragment_handle,
-                        "source_ref": source_ref,
-                        "cursor": cursor,
-                    },
-                    action,
-                ),
-            )
+            return message(request["tool"], tool_call_id,
+                           self._read(config, tool_call_id, request, action))
+
+        def read_source(
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            fragment_handle: str | None = None,
+            source_ref: str | None = None,
+            cursor: str | None = None,
+        ) -> ToolMessage:
+            """Read an issued exact fragment or a full public source group, continuing its cursor.
+
+            Source groups split only at public original boundaries; each page states omissions.
+            Original capture/read is not semantic formation. This read never saves;
+            a semantic write needs a successful save_memory/update_memory receipt.
+            Every call, including a failed call, uses the explicit per-message read allowance.
+            """
+
+            return source_read(config, tool_call_id, {
+                "tool": "read_source", "fragment_handle": fragment_handle,
+                "source_ref": source_ref, "cursor": cursor})
+
+        def read_current_memory(
+            record_id: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Read the current version of an issued record ID, without changing it.
+
+            Supply only record_id. For earlier bodies use read_memory_history or
+            read_memory_revision. Continue any next_cursor with read_page.
+            Every read uses the shared explicit read allowance; it is not a save.
+            """
+            return record_read(config, tool_call_id,
+                               {"tool": "read_memory", "record_id": record_id})
+
+        def read_memory_history(
+            record_id: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Read original stored revision bodies for one issued record ID.
+
+            Supply only record_id. This freezes the visible history for pagination;
+            use read_page for next_cursor. Reading old values never makes them
+            current or saves them. Uses the shared explicit read allowance.
+            """
+            return record_read(config, tool_call_id,
+                {"tool": "read_memory_history", "record_id": record_id, "history": True})
+
+        def read_memory_revision(
+            record_id: str, revision: int, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Read one exact stored historical revision without making it current.
+
+            Supply record_id and the actual positive integer revision. To discover
+            earlier revisions use read_memory_history. Continue with read_page.
+            Uses the shared explicit read allowance; it never saves or updates.
+            """
+            return record_read(config, tool_call_id, {"tool": "read_memory_revision",
+                                                     "record_id": record_id, "revision": revision})
+
+        def read_source_group(
+            source_ref: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Read a full original source group using its issued source_ref.
+
+            Supply only source_ref; use read_fragment for a fragment_handle, or
+            read_page for next_cursor. Sources split at public original boundaries
+            and state omissions. Uses the shared read allowance, never a semantic save.
+            """
+            return source_read(config, tool_call_id,
+                               {"tool": "read_source", "source_ref": source_ref})
+
+        def read_fragment(
+            fragment_handle: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Read the exact original fragment identified by an issued fragment_handle.
+
+            Supply only fragment_handle. For the full source use read_source with
+            its source_ref; continue any next_cursor with read_page. Reading is not
+            semantic formation and uses the shared explicit read allowance.
+            """
+            return source_read(config, tool_call_id,
+                               {"tool": "read_fragment", "fragment_handle": fragment_handle})
+
+        def read_page(
+            cursor: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Continue an issued next_cursor from ordinary material or any explicit read.
+
+            Supply only cursor. It continues that exact source/search/record/history
+            snapshot, never fresh latest results. Visibility revocation still applies.
+            Uses the shared explicit read allowance and never writes semantic records.
+            """
+            return record_read(config, tool_call_id, {"tool": "read_page", "cursor": cursor})
 
         def forget_memory(
             config: RunnableConfig,
@@ -1555,12 +1681,17 @@ class FunctionalMemory:
                        else StructuredTool.from_function(update_memory))
         confirmation_tools = ((StructuredTool.from_function(confirm_existing_memory),)
                               if self.existing_confirmation else ())
-        return (save_tool, update_tool, *confirmation_tools, *tuple(
-            StructuredTool.from_function(function)
-            for function in (
-                search_memory,
-                read_memory,
-                read_source,
-                forget_memory,
-            )
-        ))
+        read_tools = (
+            ReadSelectorTool.from_function(read_current_memory, name="read_memory",
+                                         args_schema=RecordSelector),
+            ReadSelectorTool.from_function(read_memory_history, args_schema=RecordSelector),
+            ReadSelectorTool.from_function(read_memory_revision, args_schema=RevisionSelector),
+            ReadSelectorTool.from_function(read_source_group, name="read_source",
+                                         args_schema=SourceSelector),
+            ReadSelectorTool.from_function(read_fragment, args_schema=FragmentSelector),
+            ReadSelectorTool.from_function(read_page, args_schema=PageSelector),
+        ) if self.read_interface == "explicit_selectors_v1" else (
+            StructuredTool.from_function(read_memory), StructuredTool.from_function(read_source))
+        return (save_tool, update_tool, *confirmation_tools,
+                StructuredTool.from_function(search_memory), *read_tools,
+                StructuredTool.from_function(forget_memory))

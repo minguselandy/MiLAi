@@ -63,6 +63,7 @@ def prepared(
     formation_review: bool = False,
     support_comparison: bool = False,
     catalog_feedback: bool = False,
+    explicit_reads: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -97,6 +98,7 @@ def prepared(
         "formation_support_review": "selected_originals_v1" if formation_review else "disabled",
         "support_review_comparison": "explicit_dimensions_v1" if support_comparison else "disabled",
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
+        "read_interface": "explicit_selectors_v1" if explicit_reads else "combined_selectors_v1",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -3012,14 +3014,16 @@ def test_completion_read_does_not_replace_existing_confirmation_receipt(
         assert len(wires) == 10
 
 
-@pytest.mark.parametrize('exhaust_reads', [False, True])
+@pytest.mark.parametrize(('exhaust_reads', 'read_tool'), [
+    (False, 'search_memory'), (True, 'search_memory'), (True, 'read_page')])
 def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_bound(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, exhaust_reads: bool,
+    read_tool: str,
 ) -> None:
     root = prepared(tmp_path, native=True, independent_capabilities=True,
         current_delivery=True, operation_completion=True, direct_response=True,
         phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
-        receipt_completion=True, receipt_response=True)
+        receipt_completion=True, receipt_response=True, explicit_reads=read_tool == "read_page")
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal == 1:
@@ -3040,7 +3044,9 @@ def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_b
         assert wire['tool_choice'] == 'required'
         assert not memory_effects(wire)['mutation_receipts']
         if exhaust_reads:
-            return native_call('search_memory', f'read-{ordinal}', query='bounded item')
+            return native_call(read_tool, f'read-{ordinal}',
+                **({'query': 'bounded item'} if read_tool == 'search_memory'
+                   else {'cursor': 'unknown:1'}))
         return native_call('update_memory', 'rejected', read_handle='not-issued', changes=[])
 
     wires = scripted(monkeypatch, reply, native=True)
@@ -3518,3 +3524,76 @@ def test_support_comparison_invalid_detail_never_commits_or_retries(
             on_delivery=lambda: deliveries.append(True), comparison=True)
     assert len(calls) == 1 and deliveries == []
     assert read_json(path)['binding']['comparison'] == 'explicit_dimensions_v1'
+
+
+@pytest.mark.parametrize('malformed', [False, True])
+def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, malformed: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        explicit_reads=True, receipt_response=True, format_failure_receipts=True)
+    seen: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, 7}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal < 7 else 'none',
+                allow_forgetting=False, business_action_request='none', business_operations=[])
+        catalog = {t['function']['name']: t['function'] for t in wire['tools']}
+        assert set(catalog['read_memory']['parameters']['properties']) == {'record_id'}
+        assert set(catalog['read_memory_history']['parameters']['properties']) == {'record_id'}
+        if ordinal in {2, 5}:
+            packet = materials(wire)
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 2:
+                return native_call('save_memory', 'save',
+                    content='Only this workshop: try quiet seats.', fragment_handles=current)
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'withdraw', read_handle=record['read_handle'],
+                retract=True, evidence_for_withdrawal=[{'fragment_handle': current[0],
+                                                       'supporting_words': 'Withdraw'}])
+        if ordinal in {3, 6}:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['status'] == 'committed'
+            seen['id'] = receipt['id']
+            return {'role': 'assistant', 'content': 'The requested memory operation is committed.'}
+        assert 'save_memory' not in catalog and 'update_memory' not in catalog
+        if ordinal == 8 or (malformed and ordinal == 9):
+            if ordinal == 9:
+                assert actual_tool_receipt(wire)['status'] == 'error'
+            return native_call('read_memory_history', f'history-{ordinal}', record_id=seen['id'],
+                               **({'revision': 'None'} if malformed and ordinal == 8 else {}))
+        assert ordinal == (10 if malformed else 9)
+        receipt = actual_tool_receipt(wire)
+        assert {u['revision'] for u in receipt['items']} == {1, 2}
+        assert all(u['content'] == 'Only this workshop: try quiet seats.'
+                   for u in receipt['items'])
+        assert {u['revision'] for u in receipt['items'] if u['retracted']} == {2}
+        assert all(u['version_view'] == 'historical_exact_revision' for u in receipt['items'])
+        assert not memory_effects(wire)['mutation_receipts']
+        return {'role': 'assistant', 'content': (
+            'That temporary preference was withdrawn; its original text is preserved.')}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+        content='Remember: Only this workshop: try quiet seats.')
+    withdrawn = functional.message(root, **common, session='s2', message_id='withdraw',
+        content='Withdraw the workshop seating preference.')
+    args = dict(session='s3', message_id='history',
+                content='Is that still current? What was the original history?')
+    result = functional.message(root, **common, **args)
+    assert saved['status'] == withdrawn['status'] == result['status'] == 'COMPLETED', result
+    assert result['records'] == withdrawn['records']
+    assert result['records'][0]['status'] == 'retracted'
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    reads = [m for m in result['messages'] if m.get('type') == 'tool'
+             and m.get('name') == 'read_memory_history']
+    assert len(reads) == (2 if malformed else 1)
+    assert len(wires) == (10 if malformed else 9)
+    count = len(wires)
+    assert functional.message(root, **common, **args) == result
+    assert len(wires) == count
