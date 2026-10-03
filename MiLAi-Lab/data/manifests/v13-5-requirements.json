@@ -5226,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r45 explicit_no_change_v1 confirmation; mechanical verification, zero model HTTP yet",
-    "scope": "R44 existing confirmation failed by repeated searches in bounded completion; full11/27 preserved. R45 exposes explicit exact no_change through the same version/owner/actual-turn/replay contract. Full communication/L1/L2/L3/newL4 preregistered. Detailed140 remain historical, no terminal promotion.",
+    "candidate": "r45 explicit_no_change_v1; actual communication stopped for core correction support",
+    "scope": "Communication11/27 sealed:4PASS3FAIL4NOT_RUN,15COMPLETED1FAILED11NOT_RUN. Existing confirmation actual no_change passes; unit correction still cites old unit source, unsupported smooth-outcome prose and post-label unavailable update tool fail. Same-version L1–L4 not admitted. Detailed140 remain historical, no terminal promotion.",
     "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",

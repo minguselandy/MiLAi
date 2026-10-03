@@ -6710,6 +6710,137 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r45",
+      "layer": "communication",
+      "candidate_commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+      "state": "STOPPED_CORE_CORRECTION_OLD_SUPPORT_AND_POST_LABEL_UNKNOWN_TOOL",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r45.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13969,
+        "generation": {
+          "charged_tokens": 50657421,
+          "known_tokens": 50627034,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r45/input-freeze.json": "46c5c9efd85a9388bca7b8569987ee013c95e266c5e578c330376ddc63cd5975",
+        "configs/v13-5-functional-r45.json": "27531e2129697e7d8c6c31a94804ea9a6bd4d01d1ce29714e39f5915c082ef2f",
+        "artifacts/v13-5/communication-r45/review.json": "8240b1080308748087a60087cc5a0f410068dd95b2f1d6e5719a54e5dd87fde7",
+        "artifacts/v13-5/communication-r45/seal.json": "dff310fd32f073d4eaa7a3855e74a697577ba2c6c62b87dffee5172f444ae61b",
+        "artifacts/v13-5/communication-r45-manual-grades.json": "21fc8d834b86ca594621c8313702824db4ea2cdf550dff2d43622dc6ff6e3abf",
+        "artifacts/v13-5/communication-r45-review-notes.json": "60d60eea00c6753cc3397c1126edb1fafe1d9395e1b41781089d72c294b34c99",
+        "artifacts/v13-5/communication-r45-all-review.jsonl": "e2952117ba98d63570283ed7a18d8a857431e25fa624bcd771b6e35a35d0908a",
+        "artifacts/v13-5/communication-r45-evaluator/summary.json": "23a847162771cf2f91fff6fa7f11331d90843b903928f798a2e8338a1fad8dc5"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 4,
+        "FAIL": 3,
+        "NOT_RUN": 4
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "FAILED": 1,
+        "NOT_RUN": 11
+      },
+      "retained_attempts": 16,
+      "cost_delta": {
+        "generation_requests": 51,
+        "generation.known_tokens": 284365,
+        "generation.charged_tokens": 284365,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 16,
+      "independent_sqlite": {
+        "records": 6,
+        "exact_quote_identity_checks": 29,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-h06": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial actual save with original source. Followup proactively calls confirm_existing_memory on actual current read handle; actual paired no_change/effect none receipt keeps original ID/rev1, one history revision and support unchanged. Final says already recorded/unchanged, not newly saved; no extra read or completion loop. Direct previous r43/r44 usability failure closes on this frozen story."
+        },
+        "l4-h03": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial only-this-Saturday/best-effort rule preserved. Whole withdrawal selects actual current cancellation and literal cancellation words, omits empty changes legally, commits original ID/rev2 retracted with actual removed_field_support.record. Old content/support/history retained. Followup readonly answers inactive current state and exact original assertion from delivered raw history, no write or restored value."
+        },
+        "l4-g02": {
+          "status": "FAIL",
+          "reason": "Core direct-support failure: original-ID rev2 changes ounces to grams, but content support selects only old ounces affirmation and literal old-unit cue. Exact original bytes and current=latest pass; new value is not supported by selected source. Correct visible value and readonly answer do not repair this.",
+          "breakpoint": "new_unit_committed_with_only_old_unit_field_support",
+          "dimensions": {
+            "source_quote_support": false,
+            "post_maintenance_state": false,
+            "critical_blockers": {
+              "owner_exposure": false,
+              "false_save_claim": false,
+              "wrong_object_effect": false,
+              "duplicate_effect": false,
+              "unrecoverable_corruption": false,
+              "unresolved_core_revision_defect": true
+            }
+          }
+        },
+        "l4-g03": {
+          "status": "FAIL",
+          "reason": "Scoped withdrawal mechanics/source/history pass: actual cancellation cue, same ID rev2 retracted, original limited/best-effort content and support retained, final readonly history accurate. However withdrawal answer additionally asserts lecture ended smoothly (顺利结束), unsupported by user who only said it ended. Ordinary additional-answer error retained; it does not negate actual successful withdrawal.",
+          "breakpoint": "withdrawal_answer_adds_unsupported_smooth_outcome",
+          "dimensions": {
+            "answer_satisfies_request": false
+          }
+        },
+        "communication-answer": {
+          "status": "PASS_SCOPED",
+          "reason": "Usable one-sentence Chinese triangle definition; no memory or business mutation."
+        },
+        "communication-memory": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual semantic save selects original temporary request and preserves only-this-exhibition/best-effort restriction. Readonly followup correctly limits scope; original ID/rev1/support remain. No claim of new followup save."
+        },
+        "communication-partial": {
+          "status": "FAIL",
+          "reason": "Initial actual reservation succeeds with label failure; selected native receipt directly supports stored item/quantity/destination/packing/ID/partial outcome. After declared label restoration, new process live query then label-only continuation succeeds, one reservation and one label total. Agent then reads old semantic observation and proposes unavailable update_memory with obsolete args; provider rejects UNKNOWN_TOOL before dispatch. Final FAILED protocol status accurately preserves completed business and no semantic followup write; no replay. Business contract passes, communication/task completion fails.",
+          "breakpoint": "post_business_unavailable_memory_tool_proposal",
+          "dimensions": {
+            "answer_satisfies_request": false,
+            "business_effect_and_recovery": true
+          }
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after shared core source-support failure and actual queue stop on post-label provider protocol failure; full denominator retained."
+        },
+        "l4-n03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after shared core source-support failure and actual queue stop on post-label provider protocol failure; full denominator retained."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after shared core source-support failure and actual queue stop on post-label provider protocol failure; full denominator retained."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after shared core source-support failure and actual queue stop on post-label provider protocol failure; full denominator retained."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -6989,6 +7120,13 @@
         "artifacts/v13-5/r45-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "artifacts/v13-5/r45-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r45-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r45-ci.json",
+        "sha256": "07783d520d7f826a670cffc40e9bccaeae942b96fde00519102d808e387ec13e",
+        "commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+        "fast": "SUCCESS run37136594883",
+        "full": "SKIPPED run37136594957; not a pass"
       }
     }
   ],

@@ -1,15 +1,16 @@
 # v13.5 functional profile
 
-**R45 is a development candidate; no stable configuration is recommended.**
-R44 existing-record confirmation still failed: bounded completion repeatedly searched an
-already delivered record and exhausted its read allowance, preserving the original ID/revision.
-The original11/27 was sealed as1 failed story/10 not run. R45 exposes a dedicated
-confirm_existing_memory(read_handle) tool over the existing exact no_change path, so keeping
-an unchanged record has an explicit operation. It cannot change content, support or versions.
-The receipt does not certify that the chosen record satisfies every part of the request.
-R45 has469 related/default checks,18 production tokenizer probes and4 SDK checks; no model calls yet.
-See [progress](V13_5_PROGRESS.md) and the historical [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md).
-Product remains NO_GO.
+**R45 failed its communication regression; no stable configuration is recommended.**
+Its explicit confirm_existing_memory tool passed the actual existing-record story: real
+no_change/effect none, original ID/revision/history and truthful unchanged confirmation.
+However an ounces-to-grams correction selected only the old ounces source, a core support
+failure. Another withdrawal answer added an unsupported smooth-outcome claim; label-only
+continuation completed correctly but then proposed an unavailable update tool and failed
+protocol delivery. The original11/27 was sealed as4 scoped PASS/3 FAIL/4 NOT_RUN, with15
+COMPLETED/1 FAILED/11 unrun messages. Correct effects remain valid; no replay was performed.
+469 mechanical checks,18 production tokenizer probes and4 SDK checks do not replace these
+model results. Same-version L1–L4 have not been admitted. See [progress](V13_5_PROGRESS.md).
+The [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md) is historical. Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
