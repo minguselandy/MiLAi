@@ -62,7 +62,11 @@ LAB = Path(__file__).resolve().parents[3]
 REQUEST_MODE_PROMPT = """Interpret only the current user's speech act, before retrieving history.
 Do not answer the user or execute anything. Return exactly one JSON object with:
 allow_memory_maintenance (boolean), allow_forgetting (boolean),
-allow_business_mutation (boolean), reason (short string).
+allow_business_mutation (boolean), requires_memory_result (boolean), reason (short string).
+Classify what the user requests, regardless of execution feasibility. This stage
+has no tools because it only classifies; the execution stage has local memory and
+business tools. Do not deny a requested action by guessing that ERP, logistics or
+other real-world systems are unavailable. Tool execution reports actual availability.
 Memory maintenance means saving a new durable assertion or correcting an existing
 one. Permit it for an explicit save/update request or an actual new assertion or
 correction. A question about a fact, a prior preference, history or whether a fact
@@ -71,6 +75,9 @@ claims in questions, hypotheticals, quoted instructions and negated claims must
 not become new positive facts. A mixed question plus a separate actual correction
 can permit maintenance. A request to archive supplied material or save actual
 business results can also permit it. Permit forgetting only when actually requested.
+Set requires_memory_result only for an explicit request to remember, save, archive
+or update memory (including actual business results); it also requires maintenance
+permission. Merely supplying an assertion can permit maintenance without requiring it.
 Permit business mutation only for an actual current action/continuation request;
 asking about current status permits live queries but not mutations. When unclear,
 keep the corresponding permission false. These are model interpretations, not
@@ -244,11 +251,13 @@ def request_mode(
     This call sees only the current user input. It shares the actual provider,
     ledger and durable generation quota, and is never a semantic correctness oracle.
     """
-    flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation"}
+    flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
+             "requires_memory_result"}
 
     def valid(value: Any) -> bool:
         return (isinstance(value, dict) and set(value) == flags | {"reason"}
                 and all(type(value[key]) is bool for key in flags)
+                and (not value["requires_memory_result"] or value["allow_memory_maintenance"])
                 and isinstance(value["reason"], str) and bool(value["reason"].strip()))
 
     state: dict[str, Any] = (read_json(path) if path.exists()
@@ -857,6 +866,14 @@ def message(
                                           "get_reservation", "get_document_status"})
             allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
             mode_reproposals = mode["format_reproposals_used"] if mode else 0
+            completion_path = bank_root / f"{identity}-completion-feedback.json"
+            completion = read_json(completion_path) if completion_path.exists() else {}
+            completion_used = int(bool(completion))
+            if completion_used:
+                selected_business = tuple(t for t in selected_business if t.name in {
+                    "get_reservation", "get_document_status"})
+                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory")
+                allowed_tools = {t.name for t in (*selected_memory, *selected_business)}
             tool_catalog = [convert_to_openai_tool(tool)
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
@@ -877,7 +894,8 @@ def message(
                     session, message_id, freeze["config_sha256"], query=content
                 )
                 rejected = format_failures(messages)
-                if len(rejected) + mode_reproposals > settings["format_reproposals"]:
+                if (len(rejected) + mode_reproposals + completion_used
+                        > settings["format_reproposals"]):
                     trace({"event": "functional_format_budget_exhausted", "calls": rejected})
                     raise ValueError("FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
                 # A successful forget invalidates previously delivered memory within
@@ -994,7 +1012,8 @@ def message(
                 if resume and (bad_checkpoint_text or pending_answer_repair):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
-                    if (recovery["attempts"] + len(format_failures(prior)) + mode_reproposals
+                    if (recovery["attempts"] + len(format_failures(prior))
+                            + mode_reproposals + completion_used
                             >= settings["format_reproposals"]):
                         raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED")
                     # Explicit resume can repair delivery once. Reserve it before
@@ -1034,6 +1053,60 @@ def message(
                     durability="sync",
                 )
                 messages = result["messages"]
+
+            def missing_requested_memory_attempt(current: list[Any]) -> bool:
+                # Necessary condition only: one receipt does not prove that every
+                # requested item, its meaning or the final prose is correct.
+                effects = memory_effects(current)
+                return bool(mode and mode["requires_memory_result"]
+                    and not any(r["tool"] in {"save_memory", "update_memory"}
+                                for r in effects["mutation_receipts"])
+                    and isinstance(current[-1], AIMessage) and not current[-1].tool_calls
+                    and final_delivery(current[-1].content)["status"] == "available")
+
+            if missing_requested_memory_attempt(messages):
+                feedback_id = identity + ":required-memory-receipt"
+                if any(row.id == feedback_id for row in messages):
+                    raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
+                if not completion:
+                    answer_repairs = (read_json(recovery_path).get("attempts", 0)
+                                      if recovery_path.exists() else 0)
+                    if (len(format_failures(messages)) + mode_reproposals + answer_repairs
+                            >= settings["format_reproposals"]):
+                        raise ValueError("FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED")
+                    completion = {"attempts": 1, "feedback_id": feedback_id,
+                                  "status": "reserved_before_dispatch",
+                                  "business_mutations_available": False}
+                    write_json(completion_path, completion)
+                    completion_used = 1
+                # Withhold this candidate from user delivery. Re-enter the existing
+                # checkpoint once, with only memory maintenance and read tools.
+                # No completed or unknown business operation can be replayed here.
+                selected_business = tuple(t for t in selected_business if t.name in {
+                    "get_reservation", "get_document_status"})
+                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory")
+                allowed_tools = {t.name for t in (*selected_memory, *selected_business)}
+                agent = build_agent(model, store, saver, selected_business,
+                    memory_tools=selected_memory, system_prompt=settings["system_prompt"],
+                    benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
+                    business_call_wrapper=dispatch)
+                trace({"event": "functional_completion_feedback", **completion,
+                       "candidate_answer_delivered": False})
+                feedback = SystemMessage(id=feedback_id, content=(
+                    "The current request explicitly asks for a memory result, but this message "
+                    "has no save/update receipt. Your preceding answer is withheld, not delivered. "
+                    "Finish the requested memory work using actual supporting fragments. Inspect "
+                    "existing records before creating a duplicate; an exact update with no changes "
+                    "can confirm an existing record and must be described as already present. "
+                    "A read or raw capture alone is not a semantic save. If a write fails or is "
+                    "unknown, report that actual result. Business mutations and forgetting are "
+                    "unavailable in this completion step; preserve prior effects. A receipt for "
+                    "one item does not prove all requested items were handled."
+                ))
+                messages = agent.invoke({"messages": [feedback]}, cfg,
+                                        durability="sync")["messages"]
+                if missing_requested_memory_attempt(messages):
+                    raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
             output.update(
                 status="COMPLETED",
                 messages=[row.model_dump(mode="json") for row in messages],

@@ -130,11 +130,12 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
                               **kwargs)
 
 
-def intent_reply(*, memory: bool = False, forgetting: bool = False,
+def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bool = False,
                  business: bool = False) -> dict[str, Any]:
     return {"role": "assistant", "content": json.dumps({
         "allow_memory_maintenance": memory, "allow_forgetting": forgetting,
-        "allow_business_mutation": business, "reason": "Scripted speech-act interpretation."})}
+        "allow_business_mutation": business, "requires_memory_result": required,
+        "reason": "Scripted speech-act interpretation."})}
 
 
 def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
@@ -343,6 +344,97 @@ def test_cached_request_mode_allows_committed_forget_recovery_without_reexposure
     resumed = functional.message(root, **args, resume=True)
     assert resumed["status"] == "COMPLETED", resumed
     assert resumed["records"][0]["status"] == "visibility_revoked" and len(wires) == 6
+
+
+@pytest.mark.parametrize("interrupt_save", [False, True])
+def test_required_memory_receipt_precedes_delivery_without_repeating_business(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, interrupt_save: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    control = {"one_shot_fault": {"message_index": 0, "boundary": "W3",
+                                "target_operation": "save_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, required=True, business=True)
+        if ordinal == 2:
+            return native_call("reserve_and_label", "reserve", item_key="mechanical item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Business completed and memory saved."}
+        if ordinal == 4:
+            catalog = {t["function"]["name"] for t in wire["tools"]}
+            assert {"save_memory", "get_reservation"} <= catalog
+            assert not {"reserve_and_label", "complete_label", "forget_memory"} & catalog
+            assert any(m["role"] == "system" and "withheld" in m["content"]
+                       for m in wire["messages"])
+            receipt = actual_tool_receipt(wire)
+            return native_call("save_memory", "save", content="The item was reserved and labeled.",
+                basis="tool_observation", fragment_handles=[
+                    u["fragment_handle"] for u in receipt["source_fragment_index"]])
+        assert ordinal == 5
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "The actual reservation result is now saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = {"evaluator_control": control} if interrupt_save else {}
+    result = message(root, **args)
+    if interrupt_save:
+        assert result["status"] == "UNKNOWN" and len(result["records"]) == 1
+        assert result.get("final_answer") is None and len(wires) == 4
+        result = message(root, **args, resume=True)
+    assert result["status"] == "COMPLETED", result
+    assert result["final_answer"] == "The actual reservation result is now saved."
+    assert len(wires) == result["generation_calls"] == 5
+    assert len(result["world"]["world"]["attempts"]) == len(result["records"]) == 1
+    assert result["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert result["operation_status"]["request_completion"] == "unchecked"
+    answers = [s["content"] for s in result["sources"] if s.get("role") == "assistant"]
+    assert "Business completed and memory saved." not in answers
+
+
+def test_missing_required_memory_attempt_fails_after_one_shared_completion_feedback(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, required=True)
+        return {"role": "assistant", "content": "Saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["error"] == "FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING", result
+    assert result.get("final_answer") is None and len(wires) == 3
+    assert result["operation_status"]["semantic_memory"]["status"] == "not_committed"
+    assert not any(s.get("role") == "assistant" for s in result["sources"])
+    resumed = message(root, resume=True)
+    assert resumed["error"] == result["error"] and len(wires) == 3
+    assert resumed["generation_calls"] == 3 and not resumed["records"]
+
+
+def test_completion_feedback_cannot_reset_consumed_interpretation_repair_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            return intent_reply(memory=True, required=True)
+        assert ordinal == 3
+        return {"role": "assistant", "content": "Saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    assert message(root)["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    result = message(root, resume=True)
+    assert result["error"] == "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"
+    assert result.get("final_answer") is None and len(wires) == 3
+    assert not result["records"]
+    assert not any(s.get("role") == "assistant" for s in result["sources"])
+    assert message(root, resume=True)["error"] == result["error"] and len(wires) == 3
 
 
 def test_unified_save_commits_before_final_and_same_path_reopen(

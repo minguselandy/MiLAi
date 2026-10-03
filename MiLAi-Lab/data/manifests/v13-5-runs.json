@@ -818,9 +818,9 @@
     },
     {
       "id": "communication-r9",
-      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "candidate_commit": "8dbbc1acb44a9ad3932fccdb9d84df96e4d9223c",
       "layer": "communication_admission_and_exposed_query_regression",
-      "state": "ADMITTED_NOT_RUN",
+      "state": "STOPPED_FALSE_SAVE_AND_INTENT_CAPABILITY_CONFUSION",
       "planned_cases": 5,
       "planned_messages": 6,
       "execution_order": [
@@ -856,7 +856,11 @@
       },
       "evidence_sha256": {
         "artifacts/v13-5/evaluator-fixtures/communication-r9-runtime.json": "3132754920243e294ece5745882cd0aaf0acea3c9e0686ac6985519d7f15b470",
-        "artifacts/v13-5/evaluator-fixtures/communication-r9-controls.json": "7af06bceaa9f7809cdbcff06539d65882a370f716b00800399d71c7cf6986cc7"
+        "artifacts/v13-5/evaluator-fixtures/communication-r9-controls.json": "7af06bceaa9f7809cdbcff06539d65882a370f716b00800399d71c7cf6986cc7",
+        "artifacts/v13-5/communication-r9/input-freeze.json": "41e37c3f1a89885d1191522c459f1c24bd5947892174a7f208ebcbbfe4665377",
+        "artifacts/v13-5/communication-r9/review.json": "c45c7ba3be96a70006e61206e18ba5e5719cb7edc514e24e99370bc6c991aa90",
+        "artifacts/v13-5/communication-r9/operator-stop.json": "9869ee93d331db10633c161241629760a0e05b7ad128b2e56a4c7386577a9a1c",
+        "artifacts/v13-5/communication-r9/seal.json": "f5abcf9f89d6c50924966d6dd44dcb0726cac3bf7b95730fbbc8accc9f32668b"
       },
       "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
       "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
@@ -874,6 +878,83 @@
           "artifacts/v13-5/r9-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
         },
         "retained_failed_attempts": "r9-request-mode-first/second/third, r9-entry-privacy-queue/final, r9-full-ruff (incorrect archive scope), r9-request-mode-mypy-second (tests outside configured source scope). Test fixture/expectation corrections recorded; all raw logs retained."
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 2,
+        "NOT_RUN": 1
+      },
+      "message_counts": {
+        "COMPLETED": 4,
+        "NOT_RUN": 2
+      },
+      "cost_delta": {
+        "generation_requests": 13,
+        "generation.known_tokens": 44976,
+        "generation.charged_tokens": 44976,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "failures": [
+        "comm-tool-failure intent declines clear requested action due to imagined unavailable capabilities; comm-committed-resume actual business succeeds but 0 semantic records and false saved confirmation; W3 not reached. No resume admitted."
+      ]
+    },
+    {
+      "layer": "communication_admission_and_exposed_query_regression",
+      "planned_cases": 5,
+      "planned_messages": 6,
+      "execution_order": [
+        "comm-tool-failure",
+        "comm-committed-resume",
+        "scope-1",
+        "comm-plain",
+        "comm-save"
+      ],
+      "max_calls_per_message": 24,
+      "planned_call_bound": 144,
+      "explicit_resume": "comm-committed-resume same public message after W3; one shared-format repair only for protocol failure; no blind mutation retry",
+      "acceptance": [
+        "usable ordinary answer with no semantic/business mutations",
+        "actual semantic commit before save confirmation",
+        "truthful partial business receipt and usable answer",
+        "committed W3 recovery preserves one reservation and one semantic version",
+        "scope-1 query remains read-only, limited team-week scope retained, no unsupported personal assertion"
+      ],
+      "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
+      "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
+      "id": "communication-r10",
+      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "state": "ADMITTED_NOT_RUN",
+      "config_sha256": "c8b61fad9d40c94de5830626580ff4eab3e001cb2360740d7e48d6053c03919f",
+      "baseline_budget": {
+        "generation_requests": 9983,
+        "generation": {
+          "charged_tokens": 29083086,
+          "known_tokens": 29052699,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "mechanical_checks": {
+        "entry": "35 PASS plus 1 new shared-budget check (2-test subset overlaps)",
+        "ruff_active": "PASS",
+        "mypy_src": "195 files PASS",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/evaluator-fixtures/communication-r10-runtime.json": "3249783a18d4c9283bcda37975e2f76cf4bd224307267770a09cda8e0b5df316",
+        "artifacts/v13-5/evaluator-fixtures/communication-r10-controls.json": "7af06bceaa9f7809cdbcff06539d65882a370f716b00800399d71c7cf6986cc7",
+        "artifacts/v13-5/r10-completion-first.log": "44bca0b5543e08ae0d91d54ffffd9082b9fdf902830209a4889fd59bf3cd01ec",
+        "artifacts/v13-5/r10-shared-feedback.log": "697c1abb7c1987beecb48f6c6881d7f7963fa592d2511d44f399a1e9de89f604",
+        "artifacts/v13-5/r10-ruff-accepted.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r10-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r10-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],
