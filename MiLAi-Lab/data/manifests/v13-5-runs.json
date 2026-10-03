@@ -6962,6 +6962,118 @@
       "reviewer": "Root same-family development review",
       "independent_review": false,
       "interpretation": "Complete exposed communication, not full functional acceptance. Five same-model supported revision assessments; no actual unsupported-review or unavailable-tool-feedback branch triggered. Initial formation scope/modality and final historical quote failures remain; W1 semantic formation not completed."
+    },
+    {
+      "id": "communication-r47",
+      "layer": "communication",
+      "candidate_commit": "d2a39861b3df6d305146ce37f3eb4e1af0696d48",
+      "state": "STOPPED_FORMATION_SCOPE_REVIEW_FALSE_POSITIVE_AND_PROVIDER_TRUNCATION",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r47.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 14113,
+        "generation": {
+          "charged_tokens": 51425079,
+          "known_tokens": 51394692,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r47/input-freeze.json": "2d99eff670d29afcf3ce021a2e83d47f94cdc20d2f0fa3b255cc4a744bd04467",
+        "configs/v13-5-functional-r47.json": "a424bd749e475d797eeee854e2fa3552d4ad14dd0885296c96ede8d4108e1faa",
+        "artifacts/v13-5/communication-r47/review.json": "e1296d69c08752c8ff109c74c85e776d00d2978ed1990c957b9e96af79a7ae9e",
+        "artifacts/v13-5/communication-r47/seal.json": "cbd19d52bc430e9bf78f874ea405e8dda5fcf95a8de755a28c65ec7a3362cbda",
+        "artifacts/v13-5/communication-r47-manual-grades.json": "f951433ca7c922ef940ead2b059d6d62133b03308cfb34b2e0b125b82b3e5d24",
+        "artifacts/v13-5/communication-r47-review-notes.json": "84cdfb31945ed7dcdf5a6737387af7645af08019690f22cb4de7490e1c2af9eb",
+        "artifacts/v13-5/communication-r47-all-review.jsonl": "af1f466cef919375c7cec5d3d171f8061e8361b3b8ddcb697b1fa80a64de5014",
+        "artifacts/v13-5/communication-r47-evaluator/summary.json": "73952ec76f489e9b9ac1732645f51e388e573363a8d0fd398fa8ece5d490c092",
+        "artifacts/v13-5/communication-r47/targeted-review.json": "c4c27dde7833928fd9f78d7082adc55659c9c9e4caa2fee6ccb4019ac3703fc7",
+        "artifacts/v13-5/communication-r47-ledger-after.json": "2a1f0aced6c1f8dd6547a6ca814867e12445f0d046f433cf1ce1e5c7abf4102c"
+      },
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "retained_attempts": 2,
+      "cost_delta": {
+        "generation_requests": 7,
+        "generation.known_tokens": 39760,
+        "generation.charged_tokens": 39760,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 2,
+      "independent_sqlite": {
+        "records": 1,
+        "exact_quote_identity_checks": 3,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-n03": {
+          "status": "FAIL",
+          "reason": "First save and final omit only-this-occurrence and strengthen imagined arrangement into fixed rule. Actual selected original contains both qualifications, but the persisted same-model formation review falsely accepts supported. One real rev1 save, literal quotes/current=latest pass. Next withdrawal request fails VLLM_CHAT_TRUNCATED before any tool, content=null and8192 output tokens; raw stored, no semantic revision/business effect and original record remains. Program reports no semantic commit rather than success. Final query and other stories NOT_RUN after failed communication gate; full11/27 retained.",
+          "breakpoint": "formation_qualifiers_lost_despite_same_model_supported_review"
+        },
+        "communication-partial": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-g02": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-h06": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-h03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-g03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "communication-answer": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "communication-memory": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after formation review false positive and provider truncation in first communication story. Original11/27 denominator retained."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "interpretation": "Stopped full11/27 after first story: initial one-occurrence scope and imagined modality lost despite same-model supported verdict; next withdrawal truncates before tools, no revision or business action.1COMPLETED1FAILED25NOTRUN;1FAIL10NOTRUN. No source identity damage or false new-save receipt; source assessment is not semantic certification. No implicit retry or reasoning-to-answer promotion."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -7048,6 +7160,13 @@
       "sha256": "1b2811e2bf77cafbb326c912b3416f4af6a18fcb4db301a79878f2fade305799",
       "timing": "Before r47 model HTTP",
       "scope": "Full exposed11/27 formation-first communication, each public message reviewed before advancing; same-version original L1/L2/full L3/newL4 remain required. Actual scope/modality/outcome source support, no semantic certificate and unchanged allowances."
+    },
+    {
+      "candidate": "r48",
+      "path": "artifacts/v13-5/r48-regression-scope.json",
+      "sha256": "cf2cdc4a659a23afd0de58e3d54d66f6960bfa5546579eb770ec1759bc9b5e28",
+      "timing": "Before r48 model HTTP",
+      "scope": "Full exposed11/27 formation-first with per-message review; explicit comparison has no semantic certificate. Same-version full L1/L2/L3/newL4 required; same native execution and original allowances. No admitted r48 cohort yet."
     }
   ],
   "mechanical_checks": [
@@ -7325,6 +7444,24 @@
         "commit": "16e4f3b35ce88b1110940d2dca7b73650eeafeeb",
         "fast": "SUCCESS run37147450130",
         "full": "SKIPPED run37147450077; not a pass"
+      }
+    },
+    {
+      "candidate": "r48",
+      "scope": "578 affected/default/foundation/schema/durable-admission checks PASS;29 production pinned Qwen tokenizer/full-prompt probes PASS;30 direct checks included. Ruff,mypy runner module,package/tools boundaries and verification matrix PASS. Explicit source/proposal limit comparison rejects any reported unsupported differences despite a supported label; malformed detail does not deliver or silently retry; old/comparison cache identities cannot mix; business effects and independent budgets survive review failure/reopen. Zero actual model HTTP. Prior4 SDK checks from unchanged r47 adapter scope retained, not rerun or relabeled as r48 execution.",
+      "preserved_first_failure": "All30 direct checks passed first; initial Ruff4 line-length errors retained, corrected lint passes. No relaxed assertions or runtime contracts.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r48-targeted.log": "5a3cacfdf8df4949d0adf7645e54c1163ad0e01b7ac2b211401004aeaa2df30d",
+        "artifacts/v13-5/r48-ruff-initial.log": "8c6ef804a4477091446d365fc44957d378da3fa4817e3ae4a854f56469c3d123",
+        "artifacts/v13-5/r48-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r48-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+        "artifacts/v13-5/r48-regression.log": "d31708cb855ff2d468c8b7370e5dec34ba369a6d8a9a6c92d9dc7097b8b0e9aa",
+        "artifacts/v13-5/r48-production-contracts-probe.py": "925d3d15565dba7beb7678b08770bec0ac1830ddb3ec92c7f5b6f7c5d7e372c3",
+        "artifacts/v13-5/r48-production-contracts.json": "0b2e91b010ae4561c6371df965de1f84fd4edb1d8c88652df69126d3da1cc527",
+        "artifacts/v13-5/r48-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r48-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r48-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r48-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
       }
     }
   ],

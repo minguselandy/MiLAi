@@ -1,9 +1,11 @@
 # v13.5 functional profile
 
-**R47 is the current mechanically checked candidate; its model acceptance has not run.**
+**R48 passed 578 mechanical regressions and 29 production tokenizer/prompt probes; no model acceptance yet.** R47 stopped after its first story: an unsupported broader memory was accepted by its same-model review, then withdrawal generation truncated before tools. All11/27 remain in the denominator (1FAIL/10NOT_RUN). The comparison candidate below is not a stable recommendation.
+
+**Historical r47 mechanical evidence, superseded by its actual failed run above:**
 It extends selected-original assessment to new memory content and scope before commit,
 under the original allowances. 559 regressions, 26 production tokenizer/prompt probes
-and 4 installed SDK checks passed. R46 remains the latest actual model evidence below.
+and 4 installed SDK checks passed. R46 is the previous full communication cohort below.
 
 **R46 completed its full exposed communication cohort with 9 scoped PASS and 2 FAIL.**
 All 11 cases / 27 public messages were attempted: 26 COMPLETED and one actual injected
@@ -32,7 +34,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r47.json` is the current development candidate. Required
+`configs/v13-5-functional-r48.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -54,6 +56,8 @@ unless actual evidence establishes it; this is a tool contract, not a semantic v
 
 The candidate preserves these contracts; actual model choices still require evaluation:
 
+- `support_review_comparison=explicit_dimensions_v1` asks the same assessment call to compare source limits with proposed limits before its verdict. Any listed unsupported difference rejects before commit even alongside a supported label. This format binds the durable decision cache; malformed or unavailable results are not silently retried. The notes are model interpretations, not verified quotations or proof that every difference was found. Original execution protocol and allowances remain; the truncation and historical-answer issues are still unresolved.
+
 - With `formation_support_review=selected_originals_v1`, new content and scope fields
   are assessed against their actual selected originals before semantic commit. Temporary
   scope, exceptions, negation and modality must remain; a requested business action is
@@ -63,7 +67,7 @@ The candidate preserves these contracts; actual model choices still require eval
   assessment. Returned review exposure participates in forgetting while independent
   input remains. This uses the same model and original durable budgets; support stays
   `unchecked`. It does not certify semantics or repair the remaining historical-answer
-  quotation error, and currently has only mechanical evidence.
+  quotation error, and failed its first actual r47 scope test. The new comparison remains unverified by a model cohort.
 - With `revision_support_review=selected_originals_v1`, every nontrivial revision receives
   one separately framed same-model assessment of each changed field and its selected
   original fragments before commit. Unsupported/uncertain decisions leave the revision
@@ -177,14 +181,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r47 \
-  --config configs/v13-5-functional-r47.json
+  --root artifacts/v13-5/personal-r48 \
+  --config configs/v13-5-functional-r48.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r47 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r48 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r47 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r48 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -302,7 +306,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r47
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r48
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

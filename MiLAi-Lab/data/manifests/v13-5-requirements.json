@@ -5226,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r47 selected_originals_v1 formation review plus r46 revision review/catalog feedback; mechanically checked candidate",
-    "scope": "559 regressions/26 production full-prompt tokenizer probes/4 SDK checks PASS. No r47 input freeze/model calls. Latest actual r46 communication11/27 remains9 scopedPASS2FAIL with initial formation scope/modality loss and final historical quote drift; original and detailed140 states unpromoted. Same-version L1-L4 and final report remain required.",
+    "candidate": "r48 explicit source/proposal limit comparison; mechanically checked candidate",
+    "scope": "Latest actual r47 stopped full11/27:1FAIL10NOT_RUN,1COMPLETED1FAILED25NOT_RUN,7generation39760tokens. First formation loses occurrence/modality despite same-model supported review; subsequent withdrawal truncates before tools. R48 comparison 578 regressions/29 production probes/30 included direct checks pass. No r48 freeze/model calls. Historical140 and original48 unchanged; full same-version acceptance and final report incomplete.",
     "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",

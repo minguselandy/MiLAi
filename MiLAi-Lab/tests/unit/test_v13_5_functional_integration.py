@@ -61,6 +61,7 @@ def prepared(
     existing_confirmation: bool = False,
     support_review: bool = False,
     formation_review: bool = False,
+    support_comparison: bool = False,
     catalog_feedback: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
@@ -94,6 +95,7 @@ def prepared(
         "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
         "revision_support_review": "selected_originals_v1" if support_review else "disabled",
         "formation_support_review": "selected_originals_v1" if formation_review else "disabled",
+        "support_review_comparison": "explicit_dimensions_v1" if support_comparison else "disabled",
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
@@ -3138,8 +3140,9 @@ def test_selected_original_review_rejects_old_support_before_commit_then_uses_ne
 
 @pytest.mark.parametrize('assessment', ['supported', 'unsupported', 'uncertain'])
 @pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+@pytest.mark.parametrize('comparison', [False, True])
 def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
-    tmp_path: Path, assessment: str, review_kind: str,
+    tmp_path: Path, assessment: str, review_kind: str, comparison: bool,
 ) -> None:
     from milai_lab.memory.functional_state import FunctionalIntegrityError, FunctionalRejection
 
@@ -3148,36 +3151,42 @@ def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
     calls: list[Any] = []
     events: list[Any] = []
     review = getattr(functional, f'review_{review_kind}_support')
+    detail = {'source_limits': 'Only the stated occasion.',
+              'proposed_limits': 'Only the stated occasion.',
+              'unsupported_differences': []} if comparison else {}
 
     class Model:
         def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
             calls.append(messages)
             return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
                 'id': 'decision', 'args': {'field_results': [{'field': 'content',
-                    'assessment': assessment, 'reason': 'Scripted assessment.'}]}}])
+                    'assessment': assessment, 'reason': 'Scripted assessment.', **detail}]}}])
 
     path = tmp_path / 'review.json'
     for _ in range(2):
         if assessment == 'supported':
-            review(Model(), path, evidence, events.append)
+            review(Model(), path, evidence, events.append, comparison=comparison)
         else:
             with pytest.raises(FunctionalRejection, match='SUPPORT_REVIEW_REJECTED'):
-                review(Model(), path, evidence, events.append)
+                review(Model(), path, evidence, events.append, comparison=comparison)
     assert len(calls) == 1 and len(events) == 2
     assert all(e['semantic_support'] == 'unchecked' for e in events)
     with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
-        review(Model(), path, {**evidence, 'forget_epoch': 1}, events.append)
+        review(Model(), path, evidence, events.append, comparison=not comparison)
+    with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
+        review(Model(), path, {**evidence, 'forget_epoch': 1}, events.append, comparison=comparison)
     state = read_json(path)
     state['decision']['field_results'][0]['reason'] = 'Changed after recording.'
     write_json(path, state)
     with pytest.raises(FunctionalIntegrityError, match='DECISION_CHANGED'):
-        review(Model(), path, evidence, events.append)
+        review(Model(), path, evidence, events.append, comparison=comparison)
     assert len(calls) == 1
 
 
 @pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+@pytest.mark.parametrize('comparison', [False, True])
 def test_interrupted_support_review_reservation_is_not_silently_retried(
-    tmp_path: Path, review_kind: str,
+    tmp_path: Path, review_kind: str, comparison: bool,
 ) -> None:
     from milai_lab.memory.functional_state import FunctionalRejection
 
@@ -3192,9 +3201,9 @@ def test_interrupted_support_review_reservation_is_not_silently_retried(
     evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
     path = tmp_path / 'review.json'
     with pytest.raises(OSError):
-        review(Interrupted(), path, evidence, lambda event: None)
+        review(Interrupted(), path, evidence, lambda event: None, comparison=comparison)
     with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
-        review(Interrupted(), path, evidence, lambda event: None)
+        review(Interrupted(), path, evidence, lambda event: None, comparison=comparison)
     assert len(calls) == 1 and read_json(path)['attempts'] == 1
 
 
@@ -3300,13 +3309,15 @@ def test_invalid_support_review_never_marks_delivery_or_retries(
     assert len(calls) == 1 and deliveries == []
 
 
+@pytest.mark.parametrize('comparison', [False, True])
 def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, comparison: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, independent_capabilities=True,
         operation_completion=True, current_delivery=True, direct_response=True,
         phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
-        formation_review=True, support_review=True, catalog_feedback=True)
+        formation_review=True, support_review=True, support_comparison=comparison,
+        catalog_feedback=True)
     original = 'Only this workshop: try short sentences; supplier labels are excluded.'
     selected: list[str] = []
 
@@ -3329,10 +3340,20 @@ def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget
             assert change['after'] == ('Always use short sentences.' if ordinal == 3 else original)
             assert change['selected_original_fragments'][0]['source_role'] == 'user'
             assert original in change['selected_original_fragments'][0]['content']
+            detail = {}
+            if comparison:
+                fields = wire['tools'][0]['function']['parameters']['properties'][
+                    'field_results']['items']['properties']
+                assert list(fields).index('source_limits') < list(fields).index('assessment')
+                detail = {'source_limits': 'This workshop only; best effort; excludes suppliers.',
+                    'proposed_limits': 'Always, with no exclusions.' if ordinal == 3 else original,
+                    'unsupported_differences': ['Only this workshop and try were dropped.']
+                        if ordinal == 3 else []}
             return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
-                'field': 'content', 'assessment': 'unsupported' if ordinal == 3 else 'supported',
+                'field': 'content',
+                'assessment': 'unsupported' if ordinal == 3 and not comparison else 'supported',
                 'reason': 'Temporary scope and try were omitted.' if ordinal == 3
-                          else 'Original scope and modality preserved.'}])
+                          else 'Original scope and modality preserved.', **detail}])
         if ordinal == 2:
             selected.extend(u['fragment_handle'] for u in materials(wire)['items']
                             if u['type'] == 'fragment' and u['input_relation'] == 'current_request')
@@ -3342,6 +3363,8 @@ def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget
             receipt = actual_tool_receipt(wire)
             assert receipt['status'] == 'rejected' and receipt['effect'] == 'none'
             assert 'FORMATION_SUPPORT_REVIEW_REJECTED' in receipt['reason']
+            if comparison:
+                assert 'Only this workshop and try were dropped.' in receipt['reason']
             assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
             assert not any(u['type'] == 'record' for u in materials(wire)['items'])
             return native_call('save_memory', 'limited', content=original,
@@ -3368,14 +3391,15 @@ def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget
 
 
 @pytest.mark.parametrize('lost_review', [False, True])
+@pytest.mark.parametrize('comparison', [False, True])
 def test_formation_review_after_business_preserves_effects_and_requires_outcome_source(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_review: bool,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_review: bool, comparison: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, independent_capabilities=True,
         operation_completion=True, current_delivery=True, direct_response=True,
         phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
         receipt_units=True, formation_review=True, support_review=True,
-        catalog_feedback=True, format_failure_receipts=True)
+        support_comparison=comparison, catalog_feedback=True, format_failure_receipts=True)
     selected: dict[str, list[str]] = {}
 
     def reply(wire: dict[str, Any], ordinal: int) -> Any:
@@ -3404,10 +3428,15 @@ def test_formation_review_after_business_preserves_effects_and_requires_outcome_
             assert {q['source_role'] for q in quotes} == ({'user'} if ordinal == 4 else {'tool'})
             if lost_review:
                 return OSError('formation assessment response unavailable')
+            detail = {'source_limits': 'Requested action only.' if ordinal == 4
+                       else 'Confirmed native reserve and label.',
+                      'proposed_limits': 'Claims a completed reserve and label.',
+                      'unsupported_differences': ['Request became a completed outcome.']
+                       if ordinal == 4 else []} if comparison else {}
             return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
                 'field': 'content', 'assessment': 'unsupported' if ordinal == 4 else 'supported',
                 'reason': 'A request is not a result.' if ordinal == 4
-                          else 'Actual native outcome.'}])
+                          else 'Actual native outcome.', **detail}])
         if ordinal == 5:
             receipt = actual_tool_receipt(wire)
             if lost_review:
@@ -3453,3 +3482,39 @@ def test_formation_review_after_business_preserves_effects_and_requires_outcome_
     ledger = read_json(tmp_path / 'isolated-mechanical-budget.json')
     assert ledger['generation_requests'] == len(wires)
     assert ledger['generation']['unknown_usage'] == int(lost_review)
+
+
+@pytest.mark.parametrize('changed', [
+    {'source_limits': ''}, {'proposed_limits': ' '}, {'source_limits': 'x' * 1001},
+    {'unsupported_differences': {}}, {'unsupported_differences': [False]},
+    {'unsupported_differences': ['']}, {'unsupported_differences': ['x'] * 17},
+    {'extra': 'Not declared'},
+])
+def test_support_comparison_invalid_detail_never_commits_or_retries(
+    tmp_path: Path, changed: dict[str, Any],
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+    from milai_lab.providers.chat_bridge import IncompleteChatResponse
+
+    calls, deliveries = [], []
+
+    class Model:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': 'review_formation_support',
+                'id': 'comparison', 'args': {'field_results': [{'field': 'content',
+                    'source_limits': 'Only the stated occasion.',
+                    'proposed_limits': 'Only the stated occasion.',
+                    'unsupported_differences': [], 'reason': 'Matches.',
+                    'assessment': 'supported', **changed}]}}])
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'comparison.json'
+    with pytest.raises(IncompleteChatResponse, match='FORMATION_REVIEW_SCHEMA_INVALID'):
+        functional.review_formation_support(Model(), path, evidence, lambda event: None,
+            on_delivery=lambda: deliveries.append(True), comparison=True)
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        functional.review_formation_support(Model(), path, evidence, lambda event: None,
+            on_delivery=lambda: deliveries.append(True), comparison=True)
+    assert len(calls) == 1 and deliveries == []
+    assert read_json(path)['binding']['comparison'] == 'explicit_dimensions_v1'

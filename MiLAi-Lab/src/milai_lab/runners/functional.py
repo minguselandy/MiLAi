@@ -299,6 +299,38 @@ Explain the relevant original words briefly. Do not rewrite, select new sources 
 anything. This is a same-model assessment, not semantic certification or task authorization.
 """
 
+SUPPORT_COMPARISON_PROMPT = """
+Before choosing an assessment, explicitly compare the source's limits with the proposal's
+limits for EACH field. Fill source_limits and proposed_limits first, then list all
+unsupported_differences, and only then choose the assessment. These comparison notes are
+your interpretation, not program-verified quotations. A matching topic or numeric value
+is insufficient. Check applicability (which occurrence/person/time/context), modality
+(proposed/possible/typical/required/observed), exceptions, negation and event versus
+capture time. An omitted limit can broaden a claim even when its remaining words occur
+in the source. A planned/requested action is not an observed completed effect.
+For revisions, compare the actual change: unchanged facts can retain their old support;
+a limit explicitly removed by the selected correction is not an unsupported difference.
+Use an empty differences list only when you found no unsupported change or addition.
+Any listed unsupported difference prevents commit even if you label it supported.
+This comparison does not certify that all differences were found.
+"""
+
+
+def _support_comparison_declaration(declaration: dict[str, Any]) -> dict[str, Any]:
+    declaration = json.loads(json.dumps(declaration))
+    item = declaration["function"]["parameters"]["properties"]["field_results"]["items"]
+    old = item["properties"]
+    item["properties"] = {
+        "field": old["field"],
+        "source_limits": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "proposed_limits": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "unsupported_differences": {"type": "array", "maxItems": 16,
+            "items": {"type": "string", "minLength": 1, "maxLength": 400}},
+        "reason": old["reason"], "assessment": old["assessment"],
+    }
+    item["required"] = list(item["properties"])
+    return declaration
+
 
 class _ReadExecutionStopped(Exception):
     """A persisted non-retryable read-limit receipt ends execution, not its effects."""
@@ -312,42 +344,61 @@ def _hash(value: Any) -> str:
 
 def review_revision_support(
     model: LangMemRecipeChatModel, path: Path, evidence: dict[str, Any], trace: Trace,
-    *, on_delivery: Callable[[], None] | None = None,
+    *, on_delivery: Callable[[], None] | None = None, comparison: bool = False,
 ) -> None:
-    _review_selected_support(model, path, evidence, trace, on_delivery=on_delivery)
+    _review_selected_support(model, path, evidence, trace,
+                             on_delivery=on_delivery, comparison=comparison)
 
 
 def review_formation_support(
     model: LangMemRecipeChatModel, path: Path, evidence: dict[str, Any], trace: Trace,
-    *, on_delivery: Callable[[], None] | None = None,
+    *, on_delivery: Callable[[], None] | None = None, comparison: bool = False,
 ) -> None:
-    _review_selected_support(model, path, evidence, trace, on_delivery=on_delivery, formation=True)
+    _review_selected_support(model, path, evidence, trace,
+                             on_delivery=on_delivery, formation=True, comparison=comparison)
 
 
 def _review_selected_support(
     model: LangMemRecipeChatModel, path: Path, evidence: dict[str, Any], trace: Trace,
     *, on_delivery: Callable[[], None] | None = None, formation: bool = False,
+    comparison: bool = False,
 ) -> None:
     """One accounted assessment per exact proposal; no hidden retry or success claim."""
     stage = "formation" if formation else "revision"
     declaration = (FORMATION_SUPPORT_REVIEW_DECLARATION if formation
                    else REVISION_SUPPORT_REVIEW_DECLARATION)
     prompt = FORMATION_SUPPORT_REVIEW_PROMPT if formation else REVISION_SUPPORT_REVIEW_PROMPT
+    if comparison:
+        declaration = _support_comparison_declaration(declaration)
+        prompt += SUPPORT_COMPARISON_PROMPT
     fields = {row["field"] for row in evidence["changes"]}
+    comparison_fields = {"source_limits", "proposed_limits", "unsupported_differences"}
+
+    def valid_comparison(row: dict[str, Any]) -> bool:
+        return (all(isinstance(row[k], str) and row[k].strip() and len(row[k]) <= 1000
+                    for k in ("source_limits", "proposed_limits"))
+            and isinstance(row["unsupported_differences"], list)
+            and len(row["unsupported_differences"]) <= 16
+            and all(isinstance(x, str) and x.strip() and len(x) <= 400
+                    for x in row["unsupported_differences"]))
 
     def valid(value: Any) -> bool:
         return (isinstance(value, dict) and set(value) == {"field_results"}
             and isinstance(value["field_results"], list)
             and len(value["field_results"]) == len(fields)
-            and all(isinstance(row, dict) and set(row) == {"field", "assessment", "reason"}
+            and all(isinstance(row, dict) and set(row) == ({"field", "assessment", "reason"}
+                    | (comparison_fields if comparison else set()))
                 and isinstance(row["field"], str) and row["field"] in fields
                 and isinstance(row["assessment"], str)
                 and row["assessment"] in {"supported", "unsupported", "uncertain"}
                 and isinstance(row["reason"], str) and 0 < len(row["reason"]) <= 400
+                and (not comparison or valid_comparison(row))
                 for row in value["field_results"])
             and {row["field"] for row in value["field_results"]} == fields)
 
     binding = {"evidence_sha256": _hash(evidence), "protocol": "selected_originals_v1"}
+    if comparison:
+        binding["comparison"] = "explicit_dimensions_v1"
     state = read_json(path) if path.exists() else {"binding": binding, "attempts": 0}
     if not isinstance(state, dict) or state.get("binding") != binding:
         raise FunctionalIntegrityError(f"V13_5_{stage.upper()}_REVIEW_BINDING_CHANGED")
@@ -377,7 +428,8 @@ def _review_selected_support(
         "decision": state["decision"], "semantic_support": "unchecked",
         "assessment_kind": "same_model_judgment", "effect": "none"})
     declined = [row for row in state["decision"]["field_results"]
-                if row["assessment"] != "supported"]
+                if row["assessment"] != "supported"
+                or (comparison and row["unsupported_differences"])]
     if declined:
         raise FunctionalRejection(f"V13_5_{stage.upper()}_SUPPORT_REVIEW_REJECTED:" + json.dumps({
             "assessment_kind": "same_model_judgment", "changes": declined,
@@ -436,7 +488,8 @@ def prepare(
         "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
         "completion_tool_choice",
         "existing_confirmation",
-        "revision_support_review", "formation_support_review", "tool_catalog_errors",
+        "revision_support_review", "formation_support_review", "support_review_comparison",
+        "tool_catalog_errors",
         "declaration_sampling",
         "capability_delivery",
     }
@@ -505,6 +558,13 @@ def prepare(
     if settings.get("formation_support_review") == "selected_originals_v1" and (
             host.tool_mode != "native" or settings.get("declaration_tool_choice") != "required"):
         raise ValueError("FUNCTIONAL_FORMATION_SUPPORT_REVIEW_REQUIRES_NATIVE_DECLARATION")
+    if settings.get("support_review_comparison", "disabled") not in {
+            "disabled", "explicit_dimensions_v1"}:
+        raise ValueError("FUNCTIONAL_SUPPORT_REVIEW_COMPARISON_INVALID")
+    if settings.get("support_review_comparison") == "explicit_dimensions_v1" and not any(
+            settings.get(key) == "selected_originals_v1"
+            for key in ("formation_support_review", "revision_support_review")):
+        raise ValueError("FUNCTIONAL_SUPPORT_REVIEW_COMPARISON_REQUIRES_REVIEW")
     if settings.get("tool_catalog_errors", "legacy") not in {"legacy", "bounded_feedback_v1"}:
         raise ValueError("FUNCTIONAL_TOOL_CATALOG_ERRORS_INVALID")
     if settings.get("tool_catalog_errors") == "bounded_feedback_v1" and host.tool_mode != "native":
@@ -1470,11 +1530,15 @@ def message(
 
             def support_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
                 review_path = bank_root / f"{identity}-revision-review-{_hash(evidence)}.json"
-                review_revision_support(model, review_path, evidence, trace, on_delivery=delivered)
+                review_revision_support(model, review_path, evidence, trace, on_delivery=delivered,
+                    comparison=(settings.get("support_review_comparison")
+                                == "explicit_dimensions_v1"))
 
             def formation_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
                 review_path = bank_root / f"{identity}-formation-review-{_hash(evidence)}.json"
-                review_formation_support(model, review_path, evidence, trace, on_delivery=delivered)
+                review_formation_support(model, review_path, evidence, trace, on_delivery=delivered,
+                    comparison=(settings.get("support_review_comparison")
+                                == "explicit_dimensions_v1"))
 
             memory = FunctionalMemory(
                 service,
