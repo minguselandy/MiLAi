@@ -84,6 +84,41 @@ keep the corresponding permission false. These are model interpretations, not
 proof of user authorization or semantic truth; application permissions still apply.
 """
 
+REQUEST_MODE_NATIVE_PROMPT = """Classify only the current user request, before reading history.
+Call classify_current_request exactly once. This declaration executes no business or
+memory operation. Return the four booleans; no explanation or answer is needed.
+Classify requested actions, not their feasibility or whether they are already done.
+A pure question does not assert its presuppositions as new facts. Quoted instructions,
+hypotheticals and negations are not new positive assertions. A separate real assertion
+or correction in a mixed message can permit memory maintenance. Explicit requests to
+save/archive material or remember actual results require a memory result as well.
+Forgetting requires an explicit forgetting request.
+A request to do work, including checking status AND completing only unfinished work,
+permits business action. A pure status question with no requested action does not.
+The execution stage will query actual state and apply permissions and attempt limits.
+These flags describe a model interpretation, not verified intent or authorization.
+"""
+
+REQUEST_MODE_DECLARATION: dict[str, Any] = {
+    "type": "function", "function": {
+        "name": "classify_current_request",
+        "description": "Declare the current speech act only; executes no operation.",
+        "parameters": {"type": "object", "additionalProperties": False,
+            "properties": {
+                "allow_memory_maintenance": {"type": "boolean", "description":
+                    "Actual new durable assertion/correction or explicit save/archive request."},
+                "allow_forgetting": {"type": "boolean", "description":
+                    "User explicitly requests forgetting."},
+                "allow_business_mutation": {"type": "boolean", "description":
+                    "User requests any business action, including conditional continuation "
+                    "after a query. False for a pure query with no requested action."},
+                "requires_memory_result": {"type": "boolean", "description":
+                    "Explicit request to remember/save/archive/update memory or actual results; "
+                    "also set allow_memory_maintenance true."}},
+            "required": ["allow_memory_maintenance", "allow_forgetting",
+                         "allow_business_mutation", "requires_memory_result"]}}
+}
+
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(
@@ -131,9 +166,11 @@ def prepare(
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
     host = VLLMConfig(**settings["host"])
-    if settings.get("request_mode", "disabled") not in {"disabled", "current_request_v1"}:
+    if settings.get("request_mode", "disabled") not in {
+        "disabled", "current_request_v1", "current_request_native_v1",
+    }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
-    if settings.get("request_mode") == "current_request_v1" and host.tool_mode != "native":
+    if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
@@ -244,7 +281,7 @@ def final_delivery(content: Any) -> dict[str, Any]:
 
 def request_mode(
     model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any],
-    content: str, format_reproposals: int, trace: Trace,
+    content: str, format_reproposals: int, trace: Trace, *, native_declaration: bool = False,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -255,10 +292,12 @@ def request_mode(
              "requires_memory_result"}
 
     def valid(value: Any) -> bool:
-        return (isinstance(value, dict) and set(value) == flags | {"reason"}
+        return (isinstance(value, dict)
+                and set(value) == (flags if native_declaration else flags | {"reason"})
                 and all(type(value[key]) is bool for key in flags)
                 and (not value["requires_memory_result"] or value["allow_memory_maintenance"])
-                and isinstance(value["reason"], str) and bool(value["reason"].strip()))
+                and (native_declaration or (isinstance(value["reason"], str)
+                                           and bool(value["reason"].strip()))))
 
     state: dict[str, Any] = (read_json(path) if path.exists()
                              else {"binding": binding, "attempts": 0})
@@ -272,19 +311,32 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        response = model.invoke([
-            SystemMessage(content=REQUEST_MODE_PROMPT), HumanMessage(content=content),
-        ], tools=[], tool_choice="none")
+        prompt = REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT
+        if state["attempts"] > 1:
+            prompt += ("\nThe preceding response did not meet the declared schema. "
+                       "Use exactly the required fields and boolean types; no extra fields. "
+                       + ("Return one classify_current_request call." if native_declaration
+                          else "Return one valid JSON object."))
+        response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
+            tools=[REQUEST_MODE_DECLARATION] if native_declaration else [],
+            tool_choice="auto" if native_declaration else "none")
         try:
-            decision = json.loads(response.content) if isinstance(response.content, str) else None
+            if native_declaration:
+                decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
+                    and len(response.tool_calls) == 1 and not response.invalid_tool_calls
+                    and response.tool_calls[0]["name"] == "classify_current_request" else None)
+            else:
+                decision = (json.loads(response.content) if isinstance(response, AIMessage)
+                    and isinstance(response.content, str) and not response.tool_calls else None)
         except ValueError as error:
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
-        if not valid(decision) or not isinstance(response, AIMessage) or response.tool_calls:
+        if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
         state.update(decision=decision, decision_sha256=_hash(decision))
         write_json(path, state)
     summary = {**{key: state["decision"][key] for key in sorted(flags)},
                "interpretation": "same_host_model_current_request_only",
+               "protocol": "native_declaration_v1" if native_declaration else "json_content_v1",
                "semantic_correctness": "unchecked",
                "format_reproposals_used": max(0, state["attempts"] - 1)}
     trace({"event": "functional_request_mode", **summary,
@@ -843,7 +895,7 @@ def message(
             )
             mode: dict[str, Any] | None = None
             mode_path = bank_root / f"{identity}-request-mode.json"
-            if settings.get("request_mode", "disabled") == "current_request_v1":
+            if settings.get("request_mode", "disabled") != "disabled":
                 # Before any fresh interpretation HTTP, deny replay of a now
                 # revoked input. An accepted cached mode makes no HTTP; the graph
                 # then applies its existing precise forget-continuation checks.
@@ -857,7 +909,8 @@ def message(
                 mode = request_mode(model, mode_path, {
                     "source_ref": capture["source_ref"], "public_sha256": _hash(public),
                     "config_sha256": freeze["config_sha256"],
-                }, content, settings["format_reproposals"], trace)
+                }, content, settings["format_reproposals"], trace,
+                    native_declaration=settings["request_mode"] == "current_request_native_v1")
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}

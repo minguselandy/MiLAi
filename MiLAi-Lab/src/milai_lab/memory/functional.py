@@ -37,7 +37,10 @@ class FieldChange(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     field: str = Field(description="content/kind/basis or scope.KEY[.KEY]")
     op: Literal["set", "remove"]
-    value: Any = Field(default=None, description="Required for set; omit for remove")
+    value: Any = Field(default=None, description=(
+        "Required for set; omit for remove. Preserve the assertion's exact subject, "
+        "occurrence, time limits, negation and uncertainty. Scope values describe only "
+        "explicit applicability boundaries, not inferred project labels or summary categories."))
     fragment_handles: list[str] = Field(
         description="Issued fragments supporting this NEW value or removal; not its old value")
 
@@ -762,12 +765,20 @@ class FunctionalMemory:
                 }
 
         def save_memory(
-            content: str,
+            content: Annotated[str, Field(description=(
+                "Faithful assertion with all applicability limits, exceptions, negation and "
+                "uncertainty retained in the text itself. Keep source wording for restrictive "
+                "phrases; do not generalize one occurrence into a class or a lasting "
+                "preference."))],
             fragment_handles: list[str],
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
-            scope: dict[str, Any] | None = None,
+            scope: Annotated[dict[str, Any] | None, Field(description=(
+                "Only explicitly supported applicability boundaries. Preserve the particular "
+                "occurrence rather than merely its category. Do not invent project names or "
+                "use scope for summary labels. Omit absent boundaries; keep unknown dates unknown. "
+                "These fields must agree with the restrictions retained in content."))] = None,
         ) -> ToolMessage:
             """Save semantic memory using issued fragments; program extracts original quote/hash.
 

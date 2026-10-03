@@ -1,11 +1,11 @@
 # v13.5 functional profile
 
-**Development resumed by explicit user instruction on 2026-10-03.** No configuration
-has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
-r5 was not run; r6 failed communication admission. R7 passed scoped communication
-but failed L1 after a duplicate save. R8 stopped after a question was saved as a fact.
-R9 and R10 failed communication admission; R11 is the current candidate;
-there is no stable recommended configuration yet.
+**Development resumed by explicit user instruction on 2026-10-03.** R11 completed
+all original 24 stories / 48 messages and passed the scoped original 22/24 threshold
+with 23 PASS / 1 FAIL. The stricter functional review retains two scope/source defects
+and a mixed query/continuation interpretation limitation. Full functional acceptance
+is pending; R12 is the current candidate and no stable configuration is recommended.
+R0–r10 remain separate historical failed/incomplete or mechanical-only cohorts.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
@@ -16,9 +16,9 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r11.json` with a new root for current candidate
+Use `configs/v13-5-functional-r12.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R11 retains exact current-message save idempotency and first interprets the current
+R12 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. The persisted interpretation separately controls
 memory maintenance, forgetting and business mutation tools. A read-only interpretation
 still permits live business queries. This is a model interpretation, not a proof of
@@ -194,3 +194,13 @@ are distinct document phases. This bounds automatic retries; it does not infer u
 authorization or certify that the model chose the correct object. Legacy profiles
 keep their previous behavior. Completion feedback is folded into the leading system
 message for the actual provider template; the original checkpoint marker remains.
+
+
+R12 uses `current_request_native_v1`: the same host emits exactly one
+`classify_current_request` declaration with four boolean flags and no free explanation.
+This declaration executes nothing and is not an authorization or semantic oracle.
+A pure question differs from a request to query and then finish remaining work.
+Invalid declarations receive the original bounded schema reproposal; all attempts
+remain accounted. Save/update parameter descriptions require source-faithful
+restrictions in the actual content and explicit applicability limits in scope;
+they do not mechanically prove semantic support or eliminate model errors.

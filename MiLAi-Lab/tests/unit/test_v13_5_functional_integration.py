@@ -61,7 +61,7 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_v1" if request_interpretation else "disabled",
+        "request_mode": "current_request_native_v1" if request_interpretation else "disabled",
     }
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
@@ -132,10 +132,9 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
 
 def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bool = False,
                  business: bool = False) -> dict[str, Any]:
-    return {"role": "assistant", "content": json.dumps({
-        "allow_memory_maintenance": memory, "allow_forgetting": forgetting,
-        "allow_business_mutation": business, "requires_memory_result": required,
-        "reason": "Scripted speech-act interpretation."})}
+    return native_call("classify_current_request", "interpret",
+        allow_memory_maintenance=memory, allow_forgetting=forgetting,
+        allow_business_mutation=business, requires_memory_result=required)
 
 
 def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
@@ -153,7 +152,7 @@ def test_focused_request_mode_removes_mutations_and_survives_resume(
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal in {1, 4}:
-            assert not wire.get("tools")
+            assert [t["function"]["name"] for t in wire["tools"]] == ["classify_current_request"]
             users = [m["content"] for m in wire["messages"] if m["role"] == "user"]
             assert users == [first_text if ordinal == 1 else query]
             if ordinal == 4:
@@ -202,7 +201,7 @@ def test_request_mode_invalid_output_has_one_durable_reproposal_and_no_tools(
     root = prepared(tmp_path, native=True, request_interpretation=True)
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
-        assert not wire.get("tools")
+        assert [t["function"]["name"] for t in wire["tools"]] == ["classify_current_request"]
         return {"role": "assistant", "content": '{"allow_memory_maintenance": true}'}
 
     wires = scripted(monkeypatch, reply, native=True)
@@ -234,6 +233,37 @@ def test_request_mode_separately_controls_forgetting_and_business_tools(
     result = message(root)
     assert result["status"] == "COMPLETED" and len(wires) == 2
     assert result["operation_status"]["request_completion"] == "unchecked"
+
+
+@pytest.mark.parametrize("defect", ["string_boolean", "extra_reason", "missing_flag",
+                                    "inconsistent_required", "multiple_calls"])
+def test_native_request_declaration_rejects_invalid_flags_before_action(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, defect: str,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        flags: dict[str, Any] = {"allow_memory_maintenance": False, "allow_forgetting": False,
+            "allow_business_mutation": False, "requires_memory_result": False}
+        if defect == "string_boolean":
+            flags["allow_memory_maintenance"] = "true"
+        elif defect == "extra_reason":
+            flags["reason"] = "Unrequested explanation."
+        elif defect == "missing_flag":
+            flags.pop("allow_forgetting")
+        elif defect == "inconsistent_required":
+            flags["requires_memory_result"] = True
+        response = native_call("classify_current_request", "mode", **flags)
+        if defect == "multiple_calls":
+            response["tool_calls"].extend(
+                native_call("classify_current_request", "mode-2", **flags)["tool_calls"])
+        return response
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID", result
+    assert len(wires) == 1 and not result["records"]
+    assert result["operation_status"]["business"]["operations"] == []
 
 
 def test_request_mode_reproposal_cannot_redisclose_forgotten_input(

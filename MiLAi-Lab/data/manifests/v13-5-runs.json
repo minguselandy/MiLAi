@@ -1006,8 +1006,8 @@
       "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
       "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
       "id": "communication-r11",
-      "candidate_commit": "PENDING_SOURCE_COMMIT",
-      "state": "ADMITTED_NOT_RUN",
+      "candidate_commit": "6e8f69fc4c592ba7e24a5d0663c376b23bc72230",
+      "state": "PASS_SCOPED_COMMUNICATION_AND_QUERY_REGRESSION",
       "config_sha256": "ee8dabfec08a8d7532728ea5278c846e06758e3343500d0caa3b0b04b7dbada8",
       "baseline_budget": {
         "generation_requests": 9991,
@@ -1038,7 +1038,196 @@
         "artifacts/v13-5/r11-production-completion-probe.py": "d656ca23784f5eda888c61a9d13401022c314c8752859474fa4f5356a37def58",
         "artifacts/v13-5/r11-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r11-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r11-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r11-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r11/input-freeze.json": "b23335163c4dc39ded1a505fa61f3fde03e6299604f5153f518daf262c125d73",
+        "artifacts/v13-5/communication-r11/review.json": "ea28d26e065de2b286cfacf100fead5b4d65a0607283e48d2ec833b4156304e9",
+        "artifacts/v13-5/communication-r11/seal.json": "aad61100d12755fd042ed6dd1bb041d2f26027e01737365a67941bc74a5ffa50",
+        "artifacts/v13-5/communication-r11-readonly-review-evidence.jsonl": "3c2aebda5dffa16e47be7238e22a165039abd6173e891073f1cbca915e9578d3"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 5
+      },
+      "message_counts": {
+        "COMPLETED": 6
+      },
+      "cost_delta": {
+        "generation_requests": 20,
+        "generation.known_tokens": 76144,
+        "generation.charged_tokens": 76144,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "acceptance": "Original22/24 plus all critical blockers absent and direct support/live-query contracts",
+      "critical_stop": "Stop affected queue on false saves, source/history destruction, wrong/repeated effects, owner exposure",
+      "id": "l1-r11",
+      "candidate_commit": "6e8f69fc4c592ba7e24a5d0663c376b23bc72230",
+      "layer": "L1",
+      "state": "COMPLETE_ORIGINAL_GATE_SCOPED_FUNCTIONAL_NOT_ACCEPTED",
+      "config_sha256": "ee8dabfec08a8d7532728ea5278c846e06758e3343500d0caa3b0b04b7dbada8",
+      "communication": "communication-r11 PASS_SCOPED; same source/config and limits",
+      "baseline_budget": {
+        "generation_requests": 10011,
+        "generation": {
+          "charged_tokens": 29191426,
+          "known_tokens": 29161039,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "execution_order": [
+        "scope-1",
+        "recall-3",
+        "update-3",
+        "update-1",
+        "update-2",
+        "scope-2",
+        "object-continue-2",
+        "save-1",
+        "save-2",
+        "save-3",
+        "save-4",
+        "recall-1",
+        "recall-2",
+        "recall-4",
+        "update-4",
+        "scope-3",
+        "scope-4",
+        "object-continue-1",
+        "object-continue-3",
+        "object-continue-4",
+        "restart-1",
+        "restart-2",
+        "restart-3",
+        "restart-4"
+      ],
+      "evidence_sha256": {
+        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+        "artifacts/v13-5/l1-r11/input-freeze.json": "ab6a71499f6daf34c4bf32b6ec040cb4e0f8302751ea07fba598bd0fdfe4262f",
+        "artifacts/v13-5/l1-r11/review.json": "dd1895a4d37daf15d6a6d7823694a4741b2a807ac5c2d2f66473ea5c31ae335e",
+        "artifacts/v13-5/l1-r11/seal.json": "d4aaa1e7a2285509fefe7eebde6a982b650332a893808be4142b0f7a7e03643f",
+        "artifacts/v13-5/l1-r11-manual-grades.json": "7bfcd5e806d568dff8442fcaafcf37bc36e062075cb112dab6035efbe38d86ae",
+        "artifacts/v13-5/l1-r11-evaluator-final/summary.json": "17881a39e58ad7a3146ad4765020b18d39e1cf145a09d8f4446772ac7c269270",
+        "artifacts/v13-5/l1-r11-review-notes.json": "bef4eda519e2a0a8183c3c123f52777b9929c52a5aa915fbbc5e7fb731dfccf7"
+      },
+      "semantic_counts": {
+        "PASS": 23,
+        "FAIL": 1
+      },
+      "v13_5_contract_counts": {
+        "PASS_ACTUAL_STATE_SCOPED": 22,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempt_counts": {
+        "COMPLETED": 48,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 154,
+        "generation.known_tokens": 594146,
+        "generation.charged_tokens": 594146,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "limitations": [
+        "scope-2 broadens one occurrence into a class of short demonstrations",
+        "object-continue-3 invents a scope.project label not directly supported by Source",
+        "mixed query+continue request receives business permission false in several cases; fully complete current state masks this limitation",
+        "one invalid classifier JSON corrected by the declared single format resume, original failed attempt retained",
+        "automatic framework retrieval distinguished from explicit Host read tools; actual provider delivery audited"
+      ],
+      "original_gate": {
+        "status": "PASSED_SCOPED",
+        "minimum_pass": 22,
+        "denominator": 24,
+        "manual_pass_count": 23,
+        "blockers": [],
+        "unknown_cases": [],
+        "semantic_unknown_cases": [],
+        "scope": "Original normal24 gate only; all FUNC capabilities require their own evidence."
+      },
+      "remote_ci": {
+        "commit": "6e8f69fc4c592ba7e24a5d0663c376b23bc72230",
+        "fast_run": 37089380846,
+        "fast_conclusion": "success",
+        "full_composition_run": 37089380844,
+        "full_composition_conclusion": "skipped"
+      }
+    },
+    {
+      "id": "communication-r12",
+      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "layer": "communication_admission_and_exposed_regressions",
+      "state": "ADMITTED_NOT_RUN",
+      "planned_cases": 8,
+      "planned_messages": 12,
+      "execution_order": [
+        "scope-2",
+        "object-continue-3",
+        "l2-r02",
+        "comm-tool-failure",
+        "comm-committed-resume",
+        "scope-1",
+        "comm-plain",
+        "comm-save"
+      ],
+      "planned_call_bound": 288,
+      "max_calls_per_message": 24,
+      "explicit_resume": "comm-committed-resume W3; any protocol failure has at most one shared declared schema/answer/completion repair, no budget reset",
+      "config_sha256": "df4dae0cb0e5b83ad4cf595cc6de8f7d91eceb4f04719ba6eade2b7adfbce770",
+      "baseline_budget": {
+        "generation_requests": 10165,
+        "generation": {
+          "charged_tokens": 29785572,
+          "known_tokens": 29755185,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "acceptance": [
+        "all five original communication/scope stories usable and correct",
+        "scope-2 retains this occurrence in content and scope, no class generalization",
+        "object-continue-3 selects directly supported scope only, no inferred project label",
+        "l2-r02 actual partial then restored backend: query, complete only remaining label once, no new reservation; native intent permits conditional continuation"
+      ],
+      "exposure": "Existing exposed L1/communication stories plus existing authored L2 partial story; development admission, not unseen validation or full L1/L2. Scores never pooled.",
+      "critical_stop": "Stop affected/shared queue for false saves, wrong/repeated effects, owner or source-integrity breach; preserve ordinary semantic failures separately.",
+      "mechanical_checks": {
+        "memory_entry_privacy": "92 PASS",
+        "native_declaration_schema": "5 additional PASS",
+        "production_template": "2 scripted completion/recovery variants PASS; zero model HTTP",
+        "ruff_active": "PASS",
+        "mypy_src": "195 files PASS",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/evaluator-fixtures/communication-r12-runtime.json": "6e59b4a2ce7b30c72f5e51e0113f6d85e652b085242ca04b3d8ba756b66dad68",
+        "artifacts/v13-5/evaluator-fixtures/communication-r12-controls.json": "0f06722cb8a55bfb96463bc133fec12ff94e904e20a433689af5b630602f8837",
+        "artifacts/v13-5/r12-native-mode-first.log": "d31453e37367223dc2c419e6628dd4e3ba104f5f7f26a087f3d5fdfcf2dfdfb0",
+        "artifacts/v13-5/r12-declaration-contract.log": "497819415f1a8f17c4c23f2311f9a550ff1c1720e86bd89ab4a9eecf18d8e430",
+        "artifacts/v13-5/r12-production-completion.json": "5cd92d61c8e5763d33804c74cc61f53440c1f283c9fc112029d0034c422d1e66",
+        "artifacts/v13-5/r12-production-completion-probe.py": "a11ae49f8a76a862dbb71f367d4d0f05dcfa537af91c1202141ffff0c5bd8653",
+        "artifacts/v13-5/r12-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r12-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r12-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],
