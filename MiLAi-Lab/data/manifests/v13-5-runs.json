@@ -1545,8 +1545,8 @@
     {
       "id": "l1-r16",
       "layer": "L1",
-      "candidate_commit": "pending_commit_before_model_execution",
-      "state": "FROZEN_NOT_RUN",
+      "candidate_commit": "b9422c41f6d02afbfda64933953288103650483a",
+      "state": "COMPLETE_L1_PASSED_SCOPED",
       "planned_cases": 24,
       "planned_messages": 48,
       "config": "configs/v13-5-functional-r16.json",
@@ -1567,8 +1567,143 @@
         "artifacts/v13-5/r16-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
         "artifacts/v13-5/r16-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
-        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb"
+        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+        "artifacts/v13-5/l1-r16/review.json": "d6950d684c2e7b4a51aaaeb2c57ca92d7bfaf76e8866136cc7ff92e1fa0ad2af",
+        "artifacts/v13-5/l1-r16/seal.json": "24ab992ca2002eca302fca4c4e387f45b02ebd9de27ad4845747b4a2685eac11",
+        "artifacts/v13-5/l1-r16-manual-grades.json": "95ae7b014683daf51b78e90b8c644e621ab1a3c56379b1fcdac1e4483bf259d1",
+        "artifacts/v13-5/l1-r16-review-notes.json": "0d066b4761ee9032d316c7fc2b6ce9a3e46446b72e713dbc8e7ce91f2a0d8ead",
+        "artifacts/v13-5/l1-r16-evaluator-final/summary.json": "e6abc3a8f09dc009ad89cc53040851d6407726aa9fc64ec6e5eb754e775ebbe9"
+      },
+      "semantic_counts": {
+        "PASS": 24
+      },
+      "v13_5_core_contract_counts": {
+        "PASS_SCOPED": 24
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempts": 48,
+      "cost_delta": {
+        "generation_requests": 195,
+        "generation.known_tokens": 771314,
+        "generation.charged_tokens": 771314,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "original_gate": {
+        "status": "PASSED_SCOPED",
+        "minimum_pass": 22,
+        "denominator": 24,
+        "manual_pass_count": 24,
+        "blockers": [],
+        "unknown_cases": [],
+        "semantic_unknown_cases": [],
+        "scope": "Original normal24 gate only; all FUNC capabilities require their own evidence."
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "All original24/48, 48 distinct fresh process IDs, no orphan traces or ledger gaps.",
+        "Same ID corrections choose current correction fragments, old versions retained; history reads actually delivered.",
+        "Scoped/temporary/negative statements retained; all pure followups leave facts unchanged.",
+        "Four business continuations make actual live queries with no duplicate mutation; exact qualified item references.",
+        "One actual missing-maintenance completion feedback in object-continue-3 withholds draft, saves actual result, then finalizes with no business replay.",
+        "All48 native declarations structurally valid first attempt; final text available and task-relevant after fresh readonly framing."
+      ],
+      "limitations": [
+        "Several finals expose internal IDs/status jargon and are verbose; natural user input does not require IDs. No general semantic guarantee.",
+        "object-continue-2 final suggests logistics tracking as well as query; only the sandbox status-query capability is verified.",
+        "restart-1 first answer includes an unnecessary cooking example. This is not a validated feature or requested action.",
+        "Eight explicit memory requests were interpreted as new_assertion (maintenance allowed but required-write flag absent); actual requested writes still occurred. Intent interpretation is not semantically verified.",
+        "Full L2/L3/L4 are still required; this is scoped development evidence, not all FUNC acceptance or Product approval."
+      ],
+      "weaker_write_declarations": [
+        "scope-1-m1",
+        "restart-2-m1",
+        "scope-4-m1",
+        "recall-1-m1",
+        "recall-3-m1",
+        "save-4-m1",
+        "recall-2-m1",
+        "save-3-m1"
+      ],
+      "evidence": [
+        "../l1-r16-manual-grades.json",
+        "../l1-r16-review-notes.json",
+        "../l1-r16-evaluator-final/summary.json"
+      ],
+      "remote_ci": {
+        "commit": "b9422c41f6d02afbfda64933953288103650483a",
+        "fast_run": 37093564381,
+        "fast_status": "success",
+        "full_run": 37093564384,
+        "full_status": "skipped"
       }
+    },
+    {
+      "id": "l2-r16",
+      "layer": "L2",
+      "candidate_commit": "b9422c41f6d02afbfda64933953288103650483a",
+      "state": "STOPPED_SHARED_INTENT_AND_FALSE_EFFECT_REPORT",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r16.json",
+      "admission": "Same runtime/config as full L1-r16 24 PASS and exact-SHA Fast CI. Two actual local workflows, six lifecycle conditions each; four W1 faults must actually apply, no pooling with early communication slices.",
+      "control_binding": "FunctionalFaults uses real backend toggles/external changes and journal/native interruption boundaries; historical fixture preparation-status text is not a runtime gate. Controls remain evaluator-only.",
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r16/input-freeze.json": "ad49f66d97b1001b296e8a62a52277cbfc586fa54c1299cb7ba22812eb228a2a",
+        "configs/v13-5-functional-r16.json": "ef28a944142ddb16f1bf54447101be167e1e7f714ba29341da8acd2844a4de1f",
+        "artifacts/v13-5/evaluator-fixtures/l2-evaluator.json": "ca48bf061dd06430e9d3a1e5787d9430ac9159c46af8555a6c9859d1235cc99e",
+        "artifacts/v13-5/l2-r16/review.json": "10f90fe063c9bf1c7a40cda2579b2e1e410da2c11ed05374037d6e33e103591c",
+        "artifacts/v13-5/l2-r16/seal.json": "ba496ed30003ff11cabb290176658d4c32c4584601c788e30137dacaa63012f2",
+        "artifacts/v13-5/l2-r16-review.jsonl": "3abbdb648366d9c8daf4c1189b6cd1c95fcd0d0bab852465ad4637dbdb27fc5b"
+      },
+      "message_counts": {
+        "BUDGET_EXHAUSTED": 1,
+        "COMPLETED": 9,
+        "UNKNOWN": 2,
+        "NOT_RUN": 14
+      },
+      "retained_attempts": 12,
+      "semantic_counts": {
+        "PASS_SCOPED": 1,
+        "FAIL": 4,
+        "INCOMPLETE": 1,
+        "NOT_RUN": 6
+      },
+      "case_verdicts": {
+        "l2-r01": "PASS_SCOPED",
+        "l2-r02": "FAIL: conditional label request denied; read exhaustion loop and no final",
+        "l2-r03": "FAIL: requested known-no-effect label attempt never executed",
+        "l2-r04": "FAIL: correct unknown-effect discovery and no duplicate; final overclaims physical delivery and omits uncommitted prior memory request",
+        "l2-r05": "FAIL: actual query not_found and no mutation; final invents reservation, label and saved status",
+        "l2-r06": "INCOMPLETE: first partial and actual semantic record correct; next message stopped"
+      },
+      "cost_delta": {
+        "generation_requests": 71,
+        "generation.known_tokens": 474209,
+        "generation.charged_tokens": 474209,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "earliest_shared_breakpoint": "current_request interpretation denies explicitly requested conditional business action",
+      "findings": [
+        "r02/r03/r05 business permission incorrectly false; original user authorization is explicit.",
+        "r02 read_limit_exhausted repeats until generation limit24. No reset/resume.",
+        "r04/r05 W1 faults actually applied, original UNKNOWN retained. r04 live query finds exactly one completed reservation; r05 finds absence, no native mutation occurs.",
+        "r05 final hallucinated effects despite correct program operation_status; both business and semantic false claims are critical.",
+        "Four actual semantic records (r01/r02/r03/r06) preserve literal tool quote identity and accurate partial/complete outcomes. No observed duplicate native effects."
+      ],
+      "evidence": [
+        "../l2-r16-review.jsonl"
+      ]
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

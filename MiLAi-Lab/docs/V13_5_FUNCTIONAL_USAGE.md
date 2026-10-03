@@ -1,11 +1,11 @@
 # v13.5 functional profile
 
-**Development resumed by explicit user instruction on 2026-10-03.** R11 completed
-all original 24 stories / 48 messages and passed the scoped original 22/24 threshold
-with 23 PASS / 1 FAIL. The stricter functional review retains two scope/source defects
-and a mixed query/continuation interpretation limitation. Full functional acceptance
-is pending; R16 is the current candidate and no stable configuration is recommended.
-R0–r10 remain separate historical failed/incomplete or mechanical-only cohorts.
+**Development resumed by explicit user instruction on 2026-10-03.** R16 completed
+all original 24 stories / 48 messages: 24 PASS on the frozen original rubric and
+scoped current-state/source/maintenance review. Exact-commit Fast CI passed.
+Full L2-r16 stopped on conditional-action denial and false effect claims; L3/L4 remain unrun. Full functional acceptance is still
+pending and no stable configuration is recommended. Earlier failures and scoped
+communication cohorts remain separate evidence; their scores are not pooled.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
@@ -16,12 +16,14 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r16.json` with a new root for current candidate
+Use `configs/v13-5-functional-r17.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R16 retains exact current-message save idempotency and first interprets the current
+R17 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
-The persisted interpretation separately controls
+A separate business action declaration distinguishes none, perform and conditional continuation,
+and requires an exact current-request clause for an action. The literal check is not semantic
+authorization. The persisted interpretation separately controls
 memory maintenance, forgetting and business mutation tools. A read-only interpretation
 still permits live business queries. This is a model interpretation, not a proof of
 intent, authorization or semantic support; full functional acceptance is pending.
@@ -39,14 +41,24 @@ without unresolved critical functional defects.
 The candidate exposes `save_memory(content, fragment_handles)`: include the complete
 fact and its explicit applicability limits together in `content`. New saves have no
 separate free-form scope argument; existing scoped records remain editable.
-The declared `readonly_response_v1` stage has no tools and produces the user-facing
-answer after execution from a fresh request/evidence frame with actual tool results.
-Execution draft prose is excluded from that frame. Execution drafts remain in `messages` and
-`execution_candidate_answer`; `final_answer` is the response-stage result. Its
-reservation and response survive restart. One additional generation is charged
-within the original 24-call limit; a failed response can use only the remaining
-shared repair allowance on explicit resume. This is composition, not a semantic
-verifier. `operation_status` remains the program's independent receipt summary.
+The candidate `receipt_business_response_v1` policy renders the two business workflows
+from matched actual ToolMessages and current-message journal identities. It reports raw
+capture, semantic writes and business effects separately. Historical facts use only already
+delivered original tool fragments or public document-query history. Execution drafts cannot
+announce effects to the user. Destination/packing are configurations; publication is a local
+sandbox effect. Chinese receipt labels are currently supported. The renderer reports listed
+operations, not proof of complete user intent or correctness of saved semantic content.
+
+Ordinary memory answers retain the `readonly_response_v1` no-tool composition stage,
+with a fresh original-request/evidence frame excluding execution draft prose. Its reservation
+and response survive restart, and its generation shares the original 24-call limit. A failed
+response can use only the remaining shared repair allowance on explicit resume.
+`operation_status` remains the independent program receipt summary.
+
+A checkpointed `read_limit_exhausted` now ends execution in this candidate. The result is
+FAILED with an available outcome report and preserved effects, not a completed task. Resume
+on the same message encounters the same terminal receipt without resetting its allowance.
+
 
 The current `update_memory` catalog requires `fragment_handles` inside each
 `changes` item. Select support for the new value or removal, independently for
@@ -59,6 +71,9 @@ different content, scope, selected evidence or public-message identity remain
 distinct. The program does not decide that paraphrases describe the same matter.
 
 ## Historical reproduction example (r0, not an accepted configuration)
+
+Use the recorded original source commit for faithful historical reproduction.
+Running r0 parameters under current source is a new run, not a replay of r0 results.
 
 Run from `MiLAi-Lab`, with the repository's pinned Python environment and
 `PYTHONPATH=src`. The checked-in configuration names the existing local model,
@@ -161,8 +176,8 @@ stages failed. A stale memory read requires a fresh explicit read and new propos
 
 ## Bounds, visibility and rollback
 
-The initial profile permits 8,192 tokens of ordinary material, three explicit
-additional reads, 4,096 output tokens, 24 generation calls per public message,
+The current candidate permits 8,192 tokens of ordinary material, three explicit
+additional reads, 8,192 output tokens, 24 generation calls per public message,
 and at most one format reproposal. The full outgoing prompt, tool protocol,
 material, output reservation and safety margin must fit the pinned 65,536-token
 provider capacity. Message reservations survive restart. A frozen queue also has

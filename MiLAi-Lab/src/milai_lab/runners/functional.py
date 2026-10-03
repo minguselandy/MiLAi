@@ -56,6 +56,7 @@ from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
+from milai_lab.runners.functional_response import business_response
 
 LAB = Path(__file__).resolve().parents[3]
 
@@ -152,6 +153,34 @@ REQUEST_WRITE_MODE_DECLARATION: dict[str, Any] = {
             "required": ["memory_write_request", "allow_forgetting", "allow_business_mutation"]}}
 }
 
+REQUEST_ACTION_MODE_PROMPT = REQUEST_WRITE_MODE_PROMPT + """
+Declare business_action_request independently of memory_write_request:
+- none: no business action requested (including a purely informational status query).
+- perform: the user requests a new business action.
+- continue_if_unfinished: query actual state, then perform the authorized work still
+  missing. A condition on an action does NOT turn that action into a pure query.
+The execution stage, not this declaration, determines which work is unfinished.
+For perform/continue_if_unfinished, copy the exact current-request clause requesting
+the action into business_action_quote. For none, use an empty quote. Do not copy a
+historical request or infer permission from memory. This literal anchor does not
+prove semantic authorization; the application checks still apply.
+"""
+REQUEST_ACTION_MODE_DECLARATION = json.loads(json.dumps(REQUEST_WRITE_MODE_DECLARATION))
+_action_parameters = REQUEST_ACTION_MODE_DECLARATION["function"]["parameters"]
+del _action_parameters["properties"]["allow_business_mutation"]
+_action_parameters["properties"].update({
+    "business_action_request": {"type": "string", "enum": [
+        "none", "perform", "continue_if_unfinished"], "description":
+        "Choose the requested action separately from reading/memory writing."},
+    "business_action_quote": {"type": "string", "description":
+        "Exact action-request clause from CURRENT input; empty only for none."},
+})
+_action_parameters["required"] = list(_action_parameters["properties"])
+
+
+class _ReadExecutionStopped(Exception):
+    """A persisted non-retryable read-limit receipt ends execution, not its effects."""
+
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(
@@ -201,6 +230,7 @@ def prepare(
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
+        "current_request_native_v3",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
@@ -208,9 +238,11 @@ def prepare(
     if settings.get("formation_interface", "content_and_scope_v1") not in {
         "content_and_scope_v1", "unified_assertion_v1",
     } or settings.get("finalization", "agent_final_v1") not in {
-        "agent_final_v1", "readonly_response_v1",
+        "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
     }:
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
+    if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
+        raise ValueError("FUNCTIONAL_READ_EXHAUSTION_POLICY_INVALID")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
         for key in (
@@ -395,6 +427,7 @@ def request_mode(
     model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any],
     content: str, format_reproposals: int, trace: Trace, *, native_declaration: bool = False,
     write_mode_declaration: bool = False,
+    action_mode_declaration: bool = False,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -406,12 +439,25 @@ def request_mode(
 
     def valid(value: Any) -> bool:
         if write_mode_declaration:
+            business_valid = (isinstance(value, dict)
+                and type(value.get("business_action_request")) is str
+                and value["business_action_request"] in {
+                    "none", "perform", "continue_if_unfinished"}
+                and type(value.get("business_action_quote")) is str
+                and ((value["business_action_quote"] == "")
+                     if value["business_action_request"] == "none"
+                     else bool(value["business_action_quote"].strip())
+                     and value["business_action_quote"] in content)
+                ) if action_mode_declaration else (isinstance(value, dict)
+                    and type(value.get("allow_business_mutation")) is bool)
             return (isinstance(value, dict) and set(value) == {
-                "memory_write_request", "allow_forgetting", "allow_business_mutation"}
+                "memory_write_request", "allow_forgetting", *(
+                    ["business_action_request", "business_action_quote"] if action_mode_declaration
+                    else ["allow_business_mutation"])}
                 and type(value["memory_write_request"]) is str
                 and value["memory_write_request"] in {"none", "new_assertion", "explicit"}
                 and type(value["allow_forgetting"]) is bool
-                and type(value["allow_business_mutation"]) is bool)
+                and business_valid)
         return (isinstance(value, dict)
                 and set(value) == (flags if native_declaration else flags | {"reason"})
                 and all(type(value[key]) is bool for key in flags)
@@ -431,7 +477,8 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
+        prompt = (REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
+                  REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
         if state["attempts"] > 1:
             prompt += ("\nThe preceding response did not meet the declared schema. "
@@ -439,7 +486,8 @@ def request_mode(
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
-            tools=[REQUEST_WRITE_MODE_DECLARATION if write_mode_declaration
+            tools=[REQUEST_ACTION_MODE_DECLARATION if action_mode_declaration
+                   else REQUEST_WRITE_MODE_DECLARATION if write_mode_declaration
                    else REQUEST_MODE_DECLARATION] if native_declaration else [],
             tool_choice="auto" if native_declaration else "none")
         try:
@@ -461,15 +509,21 @@ def request_mode(
         "allow_memory_maintenance": decision["memory_write_request"] != "none",
         "requires_memory_result": decision["memory_write_request"] == "explicit",
         "allow_forgetting": decision["allow_forgetting"],
-        "allow_business_mutation": decision["allow_business_mutation"],
+        "allow_business_mutation": (decision["business_action_request"] != "none"
+                                    if action_mode_declaration
+                                    else decision["allow_business_mutation"]),
         "memory_write_request": decision["memory_write_request"],
     } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_only",
-               "protocol": "native_write_declaration_v2" if write_mode_declaration else
+               "protocol": "native_action_declaration_v3" if action_mode_declaration else
+               "native_write_declaration_v2" if write_mode_declaration else
                "native_declaration_v1" if native_declaration else "json_content_v1",
                "semantic_correctness": "unchecked",
                "format_reproposals_used": max(0, state["attempts"] - 1)}
+    if action_mode_declaration:
+        summary.update({key: decision[key] for key in (
+            "business_action_request", "business_action_quote")})
     trace({"event": "functional_request_mode", **summary,
            "decision_sha256": state["decision_sha256"]})
     return summary
@@ -1043,8 +1097,11 @@ def message(
                     "config_sha256": freeze["config_sha256"],
                 }, content, settings["format_reproposals"], trace,
                     native_declaration=settings["request_mode"] in {
-                        "current_request_native_v1", "current_request_native_v2"},
-                    write_mode_declaration=settings["request_mode"] == "current_request_native_v2")
+                        "current_request_native_v1", "current_request_native_v2",
+                        "current_request_native_v3"},
+                    write_mode_declaration=settings["request_mode"] in {
+                        "current_request_native_v2", "current_request_native_v3"},
+                    action_mode_declaration=settings["request_mode"] == "current_request_native_v3")
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}
@@ -1066,7 +1123,8 @@ def message(
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
 
-            def context_hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
+            def context_hook(state: dict[str, Any], config: RunnableConfig, *,
+                             for_finalization: bool = False) -> dict[str, Any]:
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -1078,6 +1136,24 @@ def message(
                     session=session, message_id=message_id,
                 ):
                     raise _VisibilityReplayRevoked(blocked)
+                if (not for_finalization
+                        and settings.get("read_exhaustion") == "stop_execution_v1"):
+                    for row in messages:
+                        if (not isinstance(row, ToolMessage) or row.name not in {
+                                "read_memory", "read_source", "search_memory"}):
+                            continue
+                        try:
+                            receipt = json.loads(str(row.content))
+                        except ValueError:
+                            continue
+                        if (isinstance(receipt, dict)
+                                and receipt.get("status") == "read_limit_exhausted"):
+                            output["execution_stop"] = {
+                                "reason": "read_limit_exhausted", "receipt_ref": row.tool_call_id,
+                                "retryable_in_same_message": False, "effects_preserved": True}
+                            trace({"event": "functional_execution_stopped",
+                                   **output["execution_stop"]})
+                            raise _ReadExecutionStopped()
                 material = memory.context(
                     session, message_id, freeze["config_sha256"], query=content
                 )
@@ -1168,6 +1244,16 @@ def message(
                 tool_schema_communication="shape_feedback_v1",
                 business_call_wrapper=dispatch,
             )
+
+            def invoke_execution(value: Any) -> list[Any]:
+                try:
+                    return cast(list[Any], agent.invoke(value, cfg, durability="sync")["messages"])
+                except _ReadExecutionStopped:
+                    # The read rejection is already checkpointed. Keep the graph
+                    # and all effects intact; an explicit resume meets the same
+                    # terminal receipt before it can dispatch or generate again.
+                    return cast(list[Any], agent.get_state(cfg).values["messages"])
+
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
             if prior:
@@ -1202,7 +1288,8 @@ def message(
                 bad_checkpoint_text = (isinstance(last, AIMessage) and not last.tool_calls
                                        and final_delivery(last.content)["status"] == "unavailable")
                 if resume and (pending_answer_repair or (bad_checkpoint_text
-                        and settings.get("finalization") != "readonly_response_v1")):
+                        and settings.get("finalization") not in {
+                            "readonly_response_v1", "receipt_business_response_v1"})):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
                     if (recovery["attempts"] + len(format_failures(prior))
@@ -1241,12 +1328,9 @@ def message(
                 else:
                     messages = prior
             else:
-                result = agent.invoke(
-                    None if prior else {"messages": [HumanMessage(content=content, id=message_id)]},
-                    cfg,
-                    durability="sync",
+                messages = invoke_execution(
+                    None if prior else {"messages": [HumanMessage(content=content, id=message_id)]}
                 )
-                messages = result["messages"]
 
             def missing_requested_memory_attempt(current: list[Any]) -> bool:
                 # Necessary condition only: one receipt does not prove that every
@@ -1297,23 +1381,36 @@ def message(
                     "unavailable in this completion step; preserve prior effects. A receipt for "
                     "one item does not prove all requested items were handled."
                 ))
-                messages = agent.invoke({"messages": [feedback]}, cfg,
-                                        durability="sync")["messages"]
+                messages = invoke_execution({"messages": [feedback]})
                 if missing_requested_memory_attempt(messages):
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
-            if settings.get("finalization") == "readonly_response_v1":
+            if settings.get("finalization") in {
+                    "readonly_response_v1", "receipt_business_response_v1"}:
                 answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                   if recovery_path.exists() else 0)
                 effects = operation_status({**output, "world": app.snapshot()},
                     thread_id=cfg["configurable"]["thread_id"], execution_started=True)
                 # Context hook applies visibility checks before any cached response
                 # can be reused. The model sees exactly the same bounded material.
-                response_input = context_hook({"messages": messages}, cfg)["llm_input_messages"]
-                final, output["finalization"] = finalize_response(
-                    model, bank_root / f"{identity}-finalization.json", response_input, effects,
-                    resume=resume, remaining_reproposals=settings["format_reproposals"]
-                    - len(format_failures(messages)) - mode_reproposals - completion_used
-                    - answer_repairs, trace=trace)
+                response_input = context_hook({"messages": messages}, cfg,
+                    for_finalization=True)["llm_input_messages"]
+                if settings.get("finalization") == "receipt_business_response_v1" and (
+                        effects["business"]["operations"] or effects["business"]["observations"]
+                        or (mode and mode["allow_business_mutation"])
+                        or output.get("execution_stop")):
+                    final = business_response(response_input, effects,
+                        json.loads(str(response_input[0].content).splitlines()[-1]),
+                        execution_stop=output.get("execution_stop"))
+                    output["finalization"] = {"status": "response_rendered", "attempts": 0,
+                        "tools_available": False, "execution_candidate_delivered": False,
+                        "protocol": "receipt_business_response_v1", "model_generation": False}
+                    trace({"event": "functional_receipt_finalization", **output["finalization"]})
+                else:
+                    final, output["finalization"] = finalize_response(
+                        model, bank_root / f"{identity}-finalization.json", response_input, effects,
+                        resume=resume, remaining_reproposals=settings["format_reproposals"]
+                        - len(format_failures(messages)) - mode_reproposals - completion_used
+                        - answer_repairs, trace=trace)
                 output["execution_candidate_answer"] = messages[-1].content
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
@@ -1332,6 +1429,10 @@ def message(
                 generation_calls=model.calls_in_message,
             )
             output["final_delivery"] = final_delivery(output["final_answer"])
+            if output.get("execution_stop"):
+                output.update(status="FAILED", error_category="execution_limit",
+                              error_type="ReadExecutionStopped",
+                              error="FUNCTIONAL_READ_LIMIT_EXHAUSTED")
             if output["final_delivery"]["status"] != "available":
                 output.update(status="FAILED", error_category="final_delivery",
                               error_type="FinalAnswerUnavailable",

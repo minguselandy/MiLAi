@@ -31,6 +31,8 @@ def prepared(
     request_interpretation: bool = False,
     readonly_finalization: bool = False,
     write_mode_declaration: bool = False,
+    action_mode_declaration: bool = False,
+    receipt_response: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -63,9 +65,12 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v2" if write_mode_declaration else
+        "request_mode": "current_request_native_v3" if action_mode_declaration else
+        "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
-        "finalization": "readonly_response_v1" if readonly_finalization else "agent_final_v1",
+        "finalization": "receipt_business_response_v1" if receipt_response else
+        "readonly_response_v1" if readonly_finalization else "agent_final_v1",
+        "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
         "formation_interface": "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
@@ -1229,3 +1234,186 @@ def test_forget_trims_other_arguments_from_the_same_tool_call_batch(
     assert all(row["status"] == "visibility_revoked" and "value" not in row
                for row in actual["records"])
     assert "MECHANICAL_SECRET_A" not in seen["post_forget_wire"]
+
+
+@pytest.mark.parametrize('action', ['none', 'perform', 'continue_if_unfinished'])
+def test_action_declaration_binds_current_clause_and_preserves_catalog_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, action: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            current = wire['messages'][-1]['content']
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request=action,
+                business_action_quote='' if action == 'none' else current)
+        if ordinal == 2:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert ('complete_label' in names) == (action != 'none')
+            assert 'save_memory' not in names
+            return native_call('get_reservation', 'query', item_key='empty shelf')
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'Fabricated reservation and memory saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'COMPLETED', result
+    assert result['request_mode']['business_action_request'] == action
+    assert result['request_mode']['semantic_correctness'] == 'unchecked'
+    assert result['finalization']['model_generation'] is False
+    assert 'Fabricated' not in result['final_answer']
+    assert '未查到对象' in result['final_answer']
+    assert '本轮语义记忆: 未提交' in result['final_answer']
+    assert not result['world']['world']['reservations'] and not result['records']
+    reopened = message(root, resume=True)
+    assert reopened['final_answer'] == result['final_answer'] and len(wires) == 3
+
+
+@pytest.mark.parametrize('action,quote', [('continue_if_unfinished', 'not in current input'),
+                                          ('none', 'unrequested permission'), ('bad', '')])
+def test_action_declaration_rejects_unbound_or_invalid_permission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, action: str, quote: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        'classify_current_request', 'intent', memory_write_request='none', allow_forgetting=False,
+        business_action_request=action, business_action_quote=quote), native=True)
+    for resume in [False, True]:
+        result = message(root, resume=resume)
+        assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+        assert not result['world']['world']['attempts']
+    assert message(root, resume=True)['error'] == 'FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == 2
+
+
+@pytest.mark.parametrize('interrupted', [False, True])
+def test_receipt_response_preserves_partial_and_save_effect_across_w3(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key='partial item',
+                               quantity=2, destination='local', packing='box')
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call('save_memory', 'save', content='Reservation done; label failed.',
+                fragment_handles=[r['fragment_handle'] for r in receipt['source_fragment_index']])
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'All business phases succeeded.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    kwargs = {'initial_world': {'label_available': False}}
+    if interrupted:
+        kwargs['evaluator_control'] = {'one_shot_fault': {
+            'message_index': 0, 'boundary': 'W3', 'target_operation': 'save_memory',
+            'occurrence': 1}}
+    first = message(root, **kwargs)
+    if interrupted:
+        assert first['status'] == 'UNKNOWN' and not first.get('final_answer')
+        first = message(root, **kwargs, resume=True)
+    assert first['status'] == 'COMPLETED', first
+    assert '预订成功, 标签制作失败' in first['final_answer']
+    assert '本轮语义记忆: 已提交' in first['final_answer']
+    assert 'All business phases succeeded' not in first['final_answer']
+    assert len(first['records']) == len(first['world']['world']['attempts']) == 1
+    assert message(root, **kwargs, resume=True)['final_answer'] == first['final_answer']
+    assert len(wires) == 3
+
+
+def test_exhausted_reads_end_execution_with_effects_and_cannot_reset_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key='retained item',
+                               quantity=1, destination='local', packing='box')
+        assert ordinal <= 5  # Three actual additional reads; fourth is rejected.
+        return native_call('search_memory', 'read-' + str(ordinal), query='retained item')
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == 'FAILED' and first['error'] == 'FUNCTIONAL_READ_LIMIT_EXHAUSTED'
+    assert first['final_delivery']['status'] == 'available'
+    assert first['operation_status']['business']['status'] == 'completed'
+    assert first['generation_calls'] == 5
+    assert '追加读取额度已用完' in first['final_answer']
+    assert first['operation_status']['semantic_memory']['status'] == 'not_committed'
+    second = message(root, resume=True)
+    assert second['status'] == 'FAILED' and second['final_answer'] == first['final_answer']
+    assert second['world']['world'] == first['world']['world'] and len(wires) == 5
+
+
+@pytest.mark.parametrize('publication_available', [True, False])
+def test_document_receipt_response_reports_distinct_draft_approval_and_publication(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, publication_available: bool,
+) -> None:
+    from milai_lab.application.document_publication import DOCUMENT_NAMES
+    from milai_lab.application.tools import BUSINESS_NAMES
+    from milai_lab.runners.functional_response import _TOOLS
+
+    assert set(_TOOLS) == set(DOCUMENT_NAMES) | set(BUSINESS_NAMES)
+    root = prepared(tmp_path, native=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('create_or_update_draft', 'draft', title='Local guide',
+                               content='Use the side entrance.')
+        if ordinal in {2, 3}:
+            receipt = actual_tool_receipt(wire)['receipt']
+            args = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+            if ordinal == 3:
+                args['audience'] = 'local review team'
+            return native_call('approve_document_version' if ordinal == 2
+                               else 'publish_approved_document', 'phase-' + str(ordinal), **args)
+        assert ordinal == 4
+        return {'role': 'assistant', 'content': 'Invented global distribution.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root, workflow='document',
+                     initial_world={'publication_available': publication_available})
+    assert result['status'] == 'COMPLETED', result
+    assert '草稿已创建' in result['final_answer'] and '文档已批准' in result['final_answer']
+    assert ('文档已发布到本地沙箱' in result['final_answer']) == publication_available
+    assert ('发布服务不可用' in result['final_answer']) != publication_available
+    assert 'Invented' not in result['final_answer'] and len(wires) == 4
+    assert result['operation_status']['business']['status'] == (
+        'completed' if publication_available else 'partial')
+
+
+def test_receipt_response_cannot_replay_revoked_business_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True)
+    private_item = 'RECEIPT_PRIVATE_ITEM'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key=private_item,
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call('save_memory', 'save', content='Reserved ' + private_item,
+                fragment_handles=[r['fragment_handle'] for r in receipt['source_fragment_index']])
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Execution done.'}
+        if ordinal == 4:
+            record = next(row for row in materials(wire)['items'] if row['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert ordinal in {5, 6}
+        assert private_item not in json.dumps(wire)
+        return {'role': 'assistant', 'content': 'Forgotten within the requested scope.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == 'COMPLETED' and private_item in first['final_answer']
+    forgotten = functional.message(root, bank='mechanical-bank', owner='alice', session='session',
+                                   message_id='forget', content='Forget the saved item.')
+    assert forgotten['status'] == 'COMPLETED', forgotten
+    reopened = message(root, resume=True)
+    assert reopened['status'] == 'VISIBILITY_REVOKED' and reopened['final_answer'] is None
+    assert private_item not in json.dumps(reopened) and len(wires) == 6
