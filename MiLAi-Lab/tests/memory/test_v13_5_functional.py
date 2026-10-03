@@ -765,7 +765,8 @@ def test_short_evidence_cue_rejects_wrong_fragment_and_keeps_actual_changed_supp
             assert query not in current["source_refs"]
 
 
-@pytest.mark.parametrize("profile", ["anchored_assertion_v1", "anchored_assertion_v2"])
+@pytest.mark.parametrize("profile", [
+    "anchored_assertion_v1", "anchored_assertion_v2", "anchored_assertion_v3"])
 def test_evidence_cue_keeps_same_source_reinterpretation_and_exact_no_change_legal(
     tmp_path: Path, profile: str,
 ) -> None:
@@ -789,10 +790,11 @@ def test_evidence_cue_keeps_same_source_reinterpretation_and_exact_no_change_leg
 
 @pytest.mark.parametrize("archived", [False, True])
 @pytest.mark.parametrize("alias", ["original", "subset", "union"])
+@pytest.mark.parametrize("profile", ["anchored_assertion_v2", "anchored_assertion_v3"])
 def test_withdrawal_cannot_reuse_only_affirmation_even_with_valid_literal_cue(
-    tmp_path: Path, archived: bool, alias: str,
+    tmp_path: Path, archived: bool, alias: str, profile: str,
 ) -> None:
-    with opened(tmp_path, formation_interface="anchored_assertion_v2") as memory:
+    with opened(tmp_path, formation_interface=profile) as memory:
         affirmation = "Only this trial: prefer window seats."
         old = turn(memory, text=affirmation)
         prior_handles = ([memory.service.source_fragment_range(old, start, end)["fragment_handle"]
@@ -810,6 +812,8 @@ def test_withdrawal_cannot_reuse_only_affirmation_even_with_valid_literal_cue(
         args = {"read_handle": before["candidate_handle"], "changes": [], "retract": True,
                 "evidence_for_withdrawal": [{"fragment_handle": old_handle,
                                              "supporting_words": "Only this trial"}]}
+        if profile == "anchored_assertion_v3":
+            args.pop("changes")
         refused = invoke(memory, "update_memory", args, "wrong-affirmation", cfg(message))
         assert refused["status"] == "rejected" and refused["effect"] == "none"
         assert "WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT" in refused["reason"]
@@ -822,6 +826,25 @@ def test_withdrawal_cannot_reuse_only_affirmation_even_with_valid_literal_cue(
         support = after["removed_field_support"]["record"]
         assert support["source_refs"] == [cancel] and support["semantic_support"] == "unchecked"
         assert memory.service.read(saved["id"], 1)["value"] == before["value"]
+
+
+def test_optional_withdrawal_patch_does_not_infer_an_ordinary_update_or_its_evidence(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="anchored_assertion_v3") as memory:
+        ref = turn(memory, text="Only this trial: favor blue markers.")
+        saved = memory.save(cfg(), "save", "Only this trial: favor blue markers.",
+                            handles(memory, ref), {})
+        before = memory.service.read(saved["id"])
+        args = {"read_handle": before["candidate_handle"]}
+        rejected = invoke(memory, "update_memory", args, "missing-patch")
+        assert rejected["status"] == "rejected" and rejected["effect"] == "none"
+        assert "NON_WITHDRAWAL_CHANGES_REQUIRED" in rejected["reason"]
+        missing_evidence = invoke(memory, "update_memory", {**args, "retract": True}, "no-proof")
+        assert missing_evidence["status"] == "rejected" and missing_evidence["effect"] == "none"
+        unchanged = invoke(memory, "update_memory", {**args, "changes": []}, "explicit-same")
+        assert unchanged["status"] == "no_change" and unchanged["revision"] == 1
+        assert memory.service.read(saved["id"])["value"] == before["value"]
 
 
 def test_withdrawal_accepts_distinct_span_in_same_archived_source_not_query_trigger(

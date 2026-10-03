@@ -326,7 +326,8 @@ def prepare(
             "index_v1", "inline_fragments_v1", "inline_receipt_units_v2"}:
         raise ValueError("FUNCTIONAL_SOURCE_SELECTION_INVALID")
     if settings.get("failure_delivery", "unavailable_v1") not in {
-            "unavailable_v1", "receipt_status_v1", "receipt_status_v2", "receipt_status_v3"}:
+            "unavailable_v1", "receipt_status_v1", "receipt_status_v2", "receipt_status_v3",
+            "receipt_status_v4"}:
         raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
     if settings.get("business_completion", "disabled") not in {
             "disabled", "observed_continuation_v1"}:
@@ -354,6 +355,7 @@ def prepare(
         "reviewed_assertion_v1",
         "anchored_assertion_v1",
         "anchored_assertion_v2",
+        "anchored_assertion_v3",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
         "receipt_business_response_v2", "receipt_business_response_v3",
@@ -1281,7 +1283,8 @@ def message(
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
-            if settings.get("failure_delivery") in {"receipt_status_v2", "receipt_status_v3"}:
+            if settings.get("failure_delivery") in {
+                    "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}:
                 # Bind the incoming event before classification, without retrieving
                 # anything. A pre-Agent failure delivery must inherit this input's
                 # visibility, never the preceding public turn's exposure.
@@ -1978,16 +1981,20 @@ def message(
             output, thread_id=cfg["configurable"]["thread_id"],
             execution_started=execution_started,
         )
-        known_incomplete = (settings.get("failure_delivery") == "receipt_status_v3"
+        known_incomplete = (settings.get("failure_delivery") in {
+                                "receipt_status_v3", "receipt_status_v4"}
                             and output.get("error") in {
                                 "FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING",
                                 "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"})
+        exhausted_format = (settings.get("failure_delivery") == "receipt_status_v4"
+                            and output.get("error") == "FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
         if (settings.get("failure_delivery") in {
-                "receipt_status_v1", "receipt_status_v2", "receipt_status_v3"}
-                and (output.get("error_category") == "provider_protocol" or known_incomplete)
+                "receipt_status_v1", "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}
+                and (output.get("error_category") == "provider_protocol"
+                     or known_incomplete or exhausted_format)
                 and (output.get("messages")
                      or settings.get("failure_delivery") in {
-                         "receipt_status_v2", "receipt_status_v3"})
+                         "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"})
                 and "service" in locals() and "snapshot_error" not in output
                 and "checkpoint_snapshot_error" not in output
                 and "application_snapshot_error" not in output):

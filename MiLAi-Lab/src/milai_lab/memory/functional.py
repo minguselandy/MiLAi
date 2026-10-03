@@ -112,7 +112,7 @@ class FunctionalMemory:
         if formation_interface not in {
             "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
             "unified_assertion_v3", "reviewed_assertion_v1", "anchored_assertion_v1",
-            "anchored_assertion_v2"}:
+            "anchored_assertion_v2", "anchored_assertion_v3"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -710,7 +710,7 @@ class FunctionalMemory:
                                 canonical(after[path])] + list(removed.values())
             if retract:
                 selected_changes.append(fragment_handles or [])
-                if self.formation_interface == "anchored_assertion_v2":
+                if self.formation_interface in {"anchored_assertion_v2", "anchored_assertion_v3"}:
                     self._require_distinct_withdrawal_support(old, fragment_handles or [])
             for selected in selected_changes:
                 fragment_support(self.service, selected)
@@ -1382,11 +1382,33 @@ class FunctionalMemory:
                                    retract=retract)
             return message("update_memory", tool_call_id, mutation(action))
 
+        def optional_withdrawal_patch(
+            read_handle: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            changes: list[AnchoredChange] | None = None, retract: bool = False,
+            evidence_for_withdrawal: list[FragmentCue] | None = None,
+        ) -> ToolMessage:
+            """Full withdrawal permits omitted changes; ordinary updates require explicit changes.
+
+            Omitted/null changes means an empty patch only when retract=true. For an
+            ordinary update supply changes, including [] for an explicit no_change check.
+            Withdrawal still requires actual selected cancellation evidence.
+            """
+            if changes is None and not retract:
+                def reject() -> dict[str, Any]:
+                    raise FunctionalRejection("V13_5_NON_WITHDRAWAL_CHANGES_REQUIRED")
+                return message("update_memory", tool_call_id, mutation(reject))
+            return anchored_assertion(
+                read_handle, [] if changes is None else changes, config,
+                tool_call_id=tool_call_id, retract=retract,
+                evidence_for_withdrawal=evidence_for_withdrawal)
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
             if self.formation_interface in {
                 "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3",
-                "reviewed_assertion_v1", "anchored_assertion_v1", "anchored_assertion_v2"}
+                "reviewed_assertion_v1", "anchored_assertion_v1", "anchored_assertion_v2",
+                "anchored_assertion_v3"}
             else StructuredTool.from_function(save_memory))
         withdrawal_description = (
             str(anchored_assertion.__doc__) + "\nFull-record withdrawal additionally "
@@ -1397,12 +1419,21 @@ class FunctionalMemory:
             "automatically evidence. If no such witness is available, do not "
             "claim withdrawal success. This restriction does not apply to ordinary "
             "same-source revisions or exact no_change."
-            if self.formation_interface == "anchored_assertion_v2" else None)
+            if self.formation_interface in {"anchored_assertion_v2", "anchored_assertion_v3"}
+            else None)
+        if self.formation_interface == "anchored_assertion_v3":
+            withdrawal_description = str(withdrawal_description).replace(
+                "retract=true, changes=[] and evidence_for_withdrawal with",
+                "retract=true (changes may be omitted/null, meaning []) and "
+                "evidence_for_withdrawal with") + "\n" + str(optional_withdrawal_patch.__doc__)
         update_tool = (StructuredTool.from_function(
-                           anchored_assertion, name="update_memory",
+                           optional_withdrawal_patch
+                           if self.formation_interface == "anchored_assertion_v3"
+                           else anchored_assertion, name="update_memory",
                            description=withdrawal_description)
                        if self.formation_interface in {
-                           "anchored_assertion_v1", "anchored_assertion_v2"}
+                           "anchored_assertion_v1", "anchored_assertion_v2",
+                           "anchored_assertion_v3"}
                        else StructuredTool.from_function(
                            reviewed_assertion, name="update_memory")
                        if self.formation_interface == "reviewed_assertion_v1"

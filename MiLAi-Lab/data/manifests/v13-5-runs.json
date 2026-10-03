@@ -6263,6 +6263,115 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r41",
+      "layer": "communication",
+      "candidate_commit": "abda7d3aa5c7acd5f5be46efd97e841715bed796",
+      "state": "STOPPED_WITHDRAWAL_MISSING_EMPTY_CHANGES_FORMAT_EXHAUSTED",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r41.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13859,
+        "generation": {
+          "charged_tokens": 50037616,
+          "known_tokens": 50007229,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r41/input-freeze.json": "438f636832e11cd3c0464658564b5bd536bcc8e24641d215e387a07033889d0f",
+        "configs/v13-5-functional-r41.json": "5fcc603a8e9ce54b119a2b3b8719700d2962df34f2261932d390fc57c9c3e14e",
+        "artifacts/v13-5/communication-r41/review.json": "08f4713539fe72a4196338acb8d30e4e61dd4c3c8a7d730bfb112a531fb5c074",
+        "artifacts/v13-5/communication-r41/seal.json": "dbf83fa8e3db167e850a3e4d30d52df464a4dd756c01c1ea74c1d9cef5ef82e6",
+        "artifacts/v13-5/communication-r41-manual-grades.json": "2012faea9f5547bb6342f4620239fb88c83479d6dfe690477a8a26ff677d6305",
+        "artifacts/v13-5/communication-r41-review-notes.json": "1b9755501b4d9c52a6368e9990752fb4f6404352cf25680d22f3ff0749b68f49",
+        "artifacts/v13-5/communication-r41-all-review.jsonl": "ae3b477ffaa1a627dae3618c2ecd3fdf474b3c03a5741b3faa61b774df592232",
+        "artifacts/v13-5/communication-r41-evaluator/summary.json": "b1ebdfecdcb106eac47b7a8843cb55ac65d3d2e2335d10b89ca6f28cadc8b25c"
+      },
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "retained_attempts": 2,
+      "cost_delta": {
+        "generation_requests": 7,
+        "generation.known_tokens": 36338,
+        "generation.charged_tokens": 36338,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 2,
+      "independent_sqlite": {
+        "records": 1,
+        "exact_quote_identity_checks": 3,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-h03": {
+          "status": "FAIL",
+          "reason": "Initial save correct. Current withdrawal selected actual cancellation fragment and matching words, but twice omitted required empty changes. Shared format reproposal exhausted; FAILED with no final text, no update dispatched, original ID/rev1 remains active. Withdrawal and later history query not completed. No wrong-source commit or false save delivered. Remaining 25/27 messages NOT_RUN; this is not a passed withdrawal regression.",
+          "breakpoint": "required_empty_changes_missing_format_exhausted"
+        },
+        "l4-h06": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "l4-g02": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "l4-g03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "communication-answer": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "communication-memory": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "communication-partial": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "l4-n03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after first story format failure; original full denominator retained."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -6404,7 +6513,33 @@
         "artifacts/v13-5/r41-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r41-regression.log": "f1391b946220c89cba306d9c6f625660b6091e44936da0776b6c2c0af78aff22",
         "artifacts/v13-5/r41-ruff.log": "38c16cf34059da89289ae73a3f305659bb4d9f7f0371e962a43fb5af57cf3d54"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r41-ci.json",
+        "sha256": "3bea903f418c914276428af966cefd247093b8616cd7af75bed35408299050ca",
+        "commit": "abda7d3aa5c7acd5f5be46efd97e841715bed796",
+        "fast": "SUCCESS run37129605754",
+        "full": "SKIPPED run37129605766; not a pass"
+      }
+    },
+    {
+      "candidate": "r42",
+      "scope": "410 related/default checks PASS;9 pinned production Qwen tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy2modules,package+tools boundary and verification matrix PASS. Zero real model HTTP. Optional empty full-withdrawal patch preserves distinct evidence requirement; ordinary missing patch rejected. Format-exhaustion failure delivery preserves none/memory/business effects and durable allowance on replay/resume. Old profiles retain behavior.",
+      "preserved_first_failure": "Targeted run25PASS3FAIL: old profile omits final_answer when unavailable; test used direct indexing. Test corrected to get(None), no runtime change for this fixture issue. First log retained; final410 includes all these checks.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r42-targeted.log": "be5b4349ee77fb38b9aa50a511ba304dee77ff8c2031b8f969294cef42b60c9e",
+        "artifacts/v13-5/r42-regression.log": "81cfb7ad489e261661f980c3d4610ea5616d48da6a12ad54bb9121b0f9e93fbd",
+        "artifacts/v13-5/r42-production-contracts-probe.py": "3f0368bf071c12a185511731b3cd62fa11e9248b287ecb94b0ec458730bbc4ce",
+        "artifacts/v13-5/r42-production-contracts.json": "ab3f175605fe83660c25fb602d76038853d15a48ff2ee325f374e39b61422bd8",
+        "artifacts/v13-5/r42-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r42-sdk-lifecycle.log": "49dc4a247c397fd93c42676cf9f1e5d8fddd159f714aa001e8c5e31cb985cc80",
+        "artifacts/v13-5/r42-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r42-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r42-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r42-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r42-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
       }
     }
-  ]
+  ],
+  "current_checkpoint": "data/manifests/v13-5-checkpoint-r42-20261003.json"
 }

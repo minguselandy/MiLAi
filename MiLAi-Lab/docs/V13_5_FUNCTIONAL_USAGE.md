@@ -1,16 +1,15 @@
 # v13.5 functional profile
 
-**Development is active; no stable configuration is recommended.** R40 completed
-communication and full L1/L2, but new L4 again withdrew a record using only its old
-affirmative support despite a valid literal cue. That core failure stopped L4:
-15 COMPLETED/1 FAILED/15 NOT_RUN, 2 scoped PASS/4 FAIL/6 unrun stories.
-R40 L1 original rubric was23 PASS/1 FAIL and added contract19/24; L2 was7/12.
-Both missing maintenance and unsupported summary/Reader details remain failures.
-R41 adds a precommit requirement for a withdrawal witness beyond the preserved
-record's existing support ranges; it is a mechanical candidate pending model validation.
-R37 remains the latest complete L3: formation44/57 and reading24/30, not current-version
-results. Product remains NO_GO. See [progress](V13_5_PROGRESS.md) and
-[requirements](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md). The pause report is historical.
+**R42 is a mechanical development candidate; no stable configuration is recommended.**
+The [current checkpoint](V13_5_CHECKPOINT_r42_20261003.md) records all latest outcomes.
+R40 completed full L1/L2 but new L4 again withdrew using only old affirmative support,
+a core failure. R41 selected actual cancellation evidence, then failed twice to provide
+a required empty `changes` field: 1 COMPLETED/1 FAILED/25 NOT_RUN out of 11 stories/27 messages.
+No withdrawal occurred. R42 permits an omitted empty withdrawal patch and renders truthful
+format-exhaustion status. It has no model input freeze or real model results yet.
+R40 L1 was original23/24, added contract19/24; L2 was7/12. R37 remains the latest complete
+L3: formation44/57 and reading24/30, with its own identity. Product remains NO_GO.
+The pause report is historical; the overall development goal remains incomplete.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
@@ -19,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r41.json` is the current development candidate. Required
+`configs/v13-5-functional-r42.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -48,23 +47,25 @@ The candidate preserves these contracts; actual model choices still require eval
 - `save_memory(content, fragment_handles)` takes one supported assertion with its limits
   retained in the text. `update_memory` requires a real read handle and separate selected
   fragments for each changed field. The program extracts quotes; literal identity does not
-  prove semantic support. For a full withdrawal, `retract=true` and `changes=[]` use
+  prove semantic support. For a full withdrawal, `retract=true` with optional `changes=[]` uses
   `evidence_for_withdrawal` containing actual cancellation evidence, separate from the old
   target and its affirmation. Current input is not automatically evidence.
-  The R41 `anchored_assertion_v2` interface selects each changed field's source using
+  The R42 `anchored_assertion_v3` interface selects each changed field's source using
   `{fragment_handle, supporting_words}` entries. `supporting_words` is a short exact
   phrase (1–160 characters) from that fragment expressing the new assertion or cancellation.
   The program rejects mismatched handle/cue pairs before commit and extracts the full quote.
   It neither substitutes a source nor certifies semantic support. Same-source legitimate
   reinterpretation and archived evidence remain allowed. Full withdrawal uses the same
   cue entries in `evidence_for_withdrawal`. The failed R39 preview profile is historical;
-  R41 does not require a review token.
+  R42 does not require a review token.
   R41 additionally refuses a full withdrawal supported only by intervals already
   covered by that record's affirmative support, including subset/union aliases.
   It requires at least one distinct evidence span; an archived event or another span
   in the same source remains eligible. It never auto-selects the current request.
   If a legitimate cancellation shares only already-used intervals, this profile
   requires a separately selected withdrawal witness; it will not silently retract.
+  R42 allows omitted/null changes only for full withdrawal. Ordinary updates must supply
+  changes, including [] for an explicit no_change check.
   Distinctness is a provenance constraint, not semantic validation, and does not
   apply to ordinary same-source revisions or exact no_change.
   Unchanged fields keep their values and support. Repeating the
@@ -92,8 +93,8 @@ The candidate preserves these contracts; actual model choices still require eval
 Interpretation repair, answer-only repair and missing-maintenance completion share one
 persistent allowance within the same 24-call limit. A checkpointed `read_limit_exhausted`
 ends execution as FAILED with preserved effects; resuming the message does not reset its
-three-read limit. `receipt_status_v3` can deliver a program failure report without another
-model call. A readable failure report does not turn the execution into COMPLETED. Successful
+three-read limit. `receipt_status_v4` can deliver a program failure report, including shared format
+reproposal exhaustion, without another model call. A readable failure report does not turn the execution into COMPLETED. Successful
 business actions are not repeated to repair an unusable final response.
 
 The renderer currently uses Chinese labels and reports listed operations only. Destination
@@ -107,9 +108,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r41. Do not combine their successful cases into a new cohort score.
+results, not results for r42. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r41, development only)
+## Candidate example (r42, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -118,14 +119,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r41 \
-  --config configs/v13-5-functional-r41.json
+  --root artifacts/v13-5/personal-r42 \
+  --config configs/v13-5-functional-r42.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r41 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r42 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r41 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r42 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -243,7 +244,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r41
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r42
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

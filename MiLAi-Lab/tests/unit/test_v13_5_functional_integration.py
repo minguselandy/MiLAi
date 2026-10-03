@@ -54,6 +54,8 @@ def prepared(
     reviewed_evidence: bool = False,
     anchored_evidence: bool = False,
     distinct_withdrawal: bool = False,
+    optional_withdrawal: bool = False,
+    format_failure_receipts: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -76,7 +78,8 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
-        "failure_delivery": "receipt_status_v3" if fresh_completion else
+        "failure_delivery": "receipt_status_v4" if format_failure_receipts else
+        "receipt_status_v3" if fresh_completion else
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
@@ -116,7 +119,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "anchored_assertion_v2" if distinct_withdrawal else
+        "formation_interface": "anchored_assertion_v3" if optional_withdrawal else
+        "anchored_assertion_v2" if distinct_withdrawal else
         "anchored_assertion_v1" if anchored_evidence else
         "reviewed_assertion_v1" if reviewed_evidence else
         "unified_assertion_v3" if withdrawal_evidence else
@@ -2615,12 +2619,12 @@ def test_revision_review_tool_shows_wrong_source_before_commit(
 
 
 @pytest.mark.parametrize("withdraw", [False, True])
-@pytest.mark.parametrize("distinct", [False, True])
+@pytest.mark.parametrize("distinct", [False, True, "optional"])
 def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool, distinct: bool,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool, distinct: bool | str,
 ) -> None:
     root = prepared(tmp_path, native=True, anchored_evidence=True,
-                    distinct_withdrawal=distinct,
+                    distinct_withdrawal=bool(distinct), optional_withdrawal=distinct == "optional",
                     direct_response=True, phase_thinking=True, actual_capabilities=True,
                     current_delivery=True)
     proposed: dict[str, Any] = {}
@@ -2647,6 +2651,8 @@ def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
                 'evidence_for_new_value': selected}])
             if withdraw:
                 proposed.update(retract=True, evidence_for_withdrawal=selected)
+                if distinct == "optional":
+                    proposed.pop('changes')
             return native_call('update_memory', 'wrong-cue', **proposed)
         assert ordinal == 4
         rejected = actual_tool_receipt(wire)
@@ -2685,6 +2691,51 @@ def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
                value['current']['functional_support']['content'])
     assert support['source_refs'] == [updated['capture']['source_ref']]
     assert support['semantic_support'] == 'unchecked'
+
+
+@pytest.mark.parametrize('effect', ['none', 'memory', 'business'])
+@pytest.mark.parametrize('new_profile', [False, True])
+def test_format_exhaustion_preserves_confirmed_effects_and_delivers_failure_without_http(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, effect: str, new_profile: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, fresh_completion=True,
+                    format_failure_receipts=new_profile)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1 and effect == 'business':
+            return native_call('reserve_and_label', 'actual', item_key='format item',
+                               quantity=2, destination='local', packing='box')
+        if ordinal == 1 and effect == 'memory':
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'actual', content='The marker is blue.',
+                               fragment_handles=hs)
+        return native_call('save_memory', 'missing-content-' + str(ordinal), fragment_handles=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == (2 if effect == 'none' else 3)
+    assert len(result['records']) == (1 if effect == 'memory' else 0)
+    assert len(result['world']['world']['attempts']) == (1 if effect == 'business' else 0)
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'committed' if effect == 'memory' else 'not_committed')
+    assert result['operation_status']['business']['status'] == (
+        'completed' if effect == 'business' else 'not_executed')
+    if new_profile:
+        assert result['final_delivery']['status'] == 'available'
+        assert '回答协议失败' in result['final_answer']
+        assert result['failure_delivery']['additional_operations'] == 0
+        assert result['failure_delivery']['model_generation'] is False
+    else:
+        assert result.get('final_answer') is None
+    for resume in [False, True]:
+        replay = message(root, resume=resume)
+        assert replay['status'] == 'FAILED' and replay['error'] == result['error']
+        assert replay['records'] == result['records']
+        assert replay['world'] == result['world']
+        assert len(wires) == (2 if effect == 'none' else 3)
 
 
 def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:
