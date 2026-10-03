@@ -67,6 +67,30 @@ class ReplacementChange(FieldChange):
         "The read_handle, not this evidence selection, identifies the old target."))
 
 
+class FragmentCue(BaseModel):
+    """A short literal selection cue, not a model-generated full quotation."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    fragment_handle: str
+    supporting_words: str = Field(min_length=1, max_length=160, description=(
+        "Short exact words from THIS original fragment that express the NEW fact, "
+        "correction or cancellation, not merely its topic or old value. Copy only this "
+        "short selection cue, not a whole quotation. The program checks exact occurrence "
+        "inside the selected fragment; a valid cue is not proof of semantic support."))
+
+
+class AnchoredChange(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True)
+    field: str = Field(description="content/kind/basis or scope.KEY[.KEY]")
+    op: Literal["set", "remove"]
+    value: Any = Field(default=None, description=(
+        "Required for set; omit for remove. New value with unchanged limits retained."))
+    evidence_for_new_value: list[FragmentCue] = Field(description=(
+        "Select original fragments and short literal words expressing THIS change. "
+        "The old record's read_handle identifies the target; its old affirmation is "
+        "not evidence for a different assertion."))
+
+
 class FunctionalMemory:
     def __init__(
         self,
@@ -87,7 +111,7 @@ class FunctionalMemory:
         self.service, self.token_count = service, token_count
         if formation_interface not in {
             "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
-            "unified_assertion_v3", "reviewed_assertion_v1"}:
+            "unified_assertion_v3", "reviewed_assertion_v1", "anchored_assertion_v1"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -792,6 +816,19 @@ class FunctionalMemory:
             note_exposure(self.service, bound["source_ref"], proposal["source_refs"])
         return result
 
+    def _cue_handles(self, cues: list[FragmentCue]) -> list[str]:
+        if not cues:
+            return []  # Only an exact no_change may omit selected evidence.
+        handles = [cue.fragment_handle for cue in cues]
+        selected = fragment_support(self.service, handles)
+        for cue, quote in zip(cues, selected["quotes"], strict=True):
+            if not cue.supporting_words.strip() or cue.supporting_words not in quote["content"]:
+                raise FunctionalRejection(
+                    "V13_5_EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT: " + cue.fragment_handle
+                    + "; select the original fragment containing your literal supporting_words; "
+                    "no source was substituted and no revision was committed")
+        return handles
+
     def _read(
         self,
         config: RunnableConfig,
@@ -1278,13 +1315,49 @@ class FunctionalMemory:
                 review_token=review_token,
             )))
 
+        def anchored_assertion(
+            read_handle: str, changes: list[AnchoredChange], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            evidence_for_withdrawal: list[FragmentCue] | None = None,
+        ) -> ToolMessage:
+            """Update the old target using short original words expressing each actual CHANGE.
+
+            For each change choose evidence_for_new_value entries with fragment_handle and
+            supporting_words. Those short verbatim words must express the new assertion
+            and occur in that selected fragment. A subject name or superseded statement
+            does not support a new value. Preserve unchanged scope, negation and uncertainty.
+            Full withdrawal uses retract=true, changes=[] and evidence_for_withdrawal with
+            actual cancellation words. Current input is not automatically evidence; archived
+            and same-source reinterpretation remain legal when their text supports the change.
+            The program extracts complete quotes and checks cue occurrence, not entailment.
+            No preview or confirmation token is needed. Same values/empty changes remain
+            exact no_change; no automatic replacement of your selected sources occurs.
+            """
+            def action() -> dict[str, Any]:
+                if evidence_for_withdrawal is not None and not retract:
+                    raise FunctionalRejection("V13_5_WITHDRAWAL_EVIDENCE_REQUIRES_RETRACT")
+                rows = []
+                for change in changes:
+                    row = change.model_dump(exclude_unset=True)
+                    row.pop("evidence_for_new_value")
+                    row["fragment_handles"] = self._cue_handles(change.evidence_for_new_value)
+                    rows.append(row)
+                withdrawal = (self._cue_handles(evidence_for_withdrawal)
+                              if evidence_for_withdrawal is not None else None)
+                return self.update(config, tool_call_id, read_handle, rows, withdrawal,
+                                   retract=retract)
+            return message("update_memory", tool_call_id, mutation(action))
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
             if self.formation_interface in {
                 "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3",
-                "reviewed_assertion_v1"}
+                "reviewed_assertion_v1", "anchored_assertion_v1"}
             else StructuredTool.from_function(save_memory))
         update_tool = (StructuredTool.from_function(
+                           anchored_assertion, name="update_memory")
+                       if self.formation_interface == "anchored_assertion_v1"
+                       else StructuredTool.from_function(
                            reviewed_assertion, name="update_memory")
                        if self.formation_interface == "reviewed_assertion_v1"
                        else StructuredTool.from_function(

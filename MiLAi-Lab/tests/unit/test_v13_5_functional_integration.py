@@ -52,6 +52,7 @@ def prepared(
     replacement_evidence: bool = False,
     withdrawal_evidence: bool = False,
     reviewed_evidence: bool = False,
+    anchored_evidence: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -114,7 +115,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "reviewed_assertion_v1" if reviewed_evidence else
+        "formation_interface": "anchored_assertion_v1" if anchored_evidence else
+        "reviewed_assertion_v1" if reviewed_evidence else
         "unified_assertion_v3" if withdrawal_evidence else
         "unified_assertion_v2" if replacement_evidence else
         "unified_assertion_v1" if readonly_finalization
@@ -2608,6 +2610,74 @@ def test_revision_review_tool_shows_wrong_source_before_commit(
                value['current']['functional_support']['content'])
     assert support['source_refs'] == [updated['capture']['source_ref']]
     assert value['current']['retracted'] is withdraw
+
+
+@pytest.mark.parametrize("withdraw", [False, True])
+def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, anchored_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+    proposed: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        current = [u['fragment_handle'] for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=current)
+        if ordinal in {2, 5}:
+            assert actual_tool_receipt(wire)['status'] == 'committed'
+            return {'role': 'assistant', 'content': 'The requested operation is committed.'}
+        cue = 'Withdraw' if withdraw else 'unit B'
+        if ordinal == 3:
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            old = next(u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            selected = [{'fragment_handle': old, 'supporting_words': cue}]
+            proposed.update(read_handle=record['read_handle'], changes=[] if withdraw else [{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': selected}])
+            if withdraw:
+                proposed.update(retract=True, evidence_for_withdrawal=selected)
+            return native_call('update_memory', 'wrong-cue', **proposed)
+        assert ordinal == 4
+        rejected = actual_tool_receipt(wire)
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        assert 'EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT' in rejected['reason']
+        assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+        selected = [{'fragment_handle': current[0], 'supporting_words': cue}]
+        if withdraw:
+            proposed['evidence_for_withdrawal'] = selected
+        else:
+            proposed['changes'][0]['evidence_for_new_value'] = selected
+        return native_call('update_memory', 'corrected-cue', **proposed)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    updated = functional.message(root, **common, message_id='correction', content=(
+        'Withdraw this sample preference; keep its history.' if withdraw else
+        'Change this same sample to unit B, with all limits unchanged.'))
+    assert saved['status'] == updated['status'] == 'COMPLETED', updated.get('error')
+    assert len(wires) == 5
+    operations = updated['operation_status']['semantic_memory']['operations']
+    assert [o['status'] for o in operations] == ['not_committed', 'committed']
+    assert operations[0]['effect'] == 'none' and operations[1]['effect'] == 'memory_only'
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        value = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(value['history']) == 2 and value['current']['revision'] == 2
+    support = (value['current']['removed_field_support']['record'] if withdraw else
+               value['current']['functional_support']['content'])
+    assert support['source_refs'] == [updated['capture']['source_ref']]
+    assert support['semantic_support'] == 'unchecked'
 
 
 def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:

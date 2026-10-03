@@ -5597,6 +5597,108 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r39",
+      "layer": "communication",
+      "candidate_commit": "52948dae6b0a23e26ec79555ded8f7986bdb7b1c",
+      "state": "STOPPED_CORE_OLD_SUPPORT_CONFIRMED_AFTER_PREVIEW",
+      "planned_cases": 9,
+      "planned_messages": 22,
+      "config": "configs/v13-5-functional-r39.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13452,
+        "generation": {
+          "charged_tokens": 47785468,
+          "known_tokens": 47755081,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r39/input-freeze.json": "8cf66b5367dd443545dca1d8ef6d4622d0c60a1fba27ad75376ad03c4aa5e5b3",
+        "configs/v13-5-functional-r39.json": "a4bec168680da49db44f928c5dc88f637a9765394eab3e41361a12d496acca13",
+        "artifacts/v13-5/communication-r39/review.json": "b9af77e4228968024ae84ee628c037f92ac68ffbf3048dcbf5dac20ccfecb2c2",
+        "artifacts/v13-5/communication-r39/seal.json": "460eee8819933f3f36870d3a3ee5576391eeb73dd92a698d37ede672b0134218",
+        "artifacts/v13-5/communication-r39-manual-grades.json": "84b999fd648ce0ef43bee99c0e1d63af0a82d5e4c75568fbbfce5cc20cebb006",
+        "artifacts/v13-5/communication-r39-review-notes.json": "403fbc1b7ed9cc723b21395ab59bfc47680446cfbc90bf87f1979a839e52cb60",
+        "artifacts/v13-5/communication-r39-all-review.jsonl": "ad89428289c8a7b0f25f6ec1b79f7fda4f65f13faf94573eb98d0bc58d79bae9",
+        "artifacts/v13-5/communication-r39-evaluator/summary.json": "f3b22a7c13fa695feda8a4c91e98a3375e9f8bf8cb276d70e519b16c82766d70"
+      },
+      "semantic_counts": {
+        "FAIL": 2,
+        "PASS_SCOPED": 2,
+        "NOT_RUN": 5
+      },
+      "message_counts": {
+        "COMPLETED": 10,
+        "NOT_RUN": 12
+      },
+      "retained_attempts": 10,
+      "cost_delta": {
+        "generation_requests": 37,
+        "generation.known_tokens": 204011,
+        "generation.charged_tokens": 204011,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 10,
+      "independent_sqlite": {
+        "records": 4,
+        "exact_quote_identity_checks": 19,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-g02": {
+          "status": "FAIL",
+          "reason": "Full current correction source was actually delivered. Agent selected old ounces source, then blindly confirmed its issued preview for grams. Same ID rev2 and later correct answer do not repair unsupported new content. Actual raw provider response confirms it treated the review token as successful validation.",
+          "breakpoint": "core_old_support_blindly_confirmed_after_preview"
+        },
+        "l4-g03": {
+          "status": "FAIL",
+          "reason": "Actual cancellation source was fully delivered, but Agent selected only old affirmative preference for withdrawal, first sent empty token (rejected no effect), then previewed/confirmed old evidence. Whole-record rev2 withdrawal/history/current visibility correct; removed_field_support.record does not support cancellation. Core source-selection failure.",
+          "breakpoint": "core_old_support_blindly_confirmed_after_preview"
+        },
+        "communication-answer": {
+          "status": "PASS_SCOPED",
+          "reason": "Usable ordinary triangle explanation, no memory/business mutation."
+        },
+        "communication-memory": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual save with exact current source preserves only-this-exhibition and best-effort. Next readonly recall retains limits, one ID/revision, no false new-write claim."
+        },
+        "communication-partial": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support queue stopped at next public message boundary after direct g02/g03 failure review. The first partial-business message completed and preserved native reservation/failed-label and supported memory; its continuation and remaining stories not run. No effects replayed to fill missing denominator."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support queue stopped at next public message boundary after direct g02/g03 failure review. The first partial-business message completed and preserved native reservation/failed-label and supported memory; its continuation and remaining stories not run. No effects replayed to fill missing denominator."
+        },
+        "l4-n03": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support queue stopped at next public message boundary after direct g02/g03 failure review. The first partial-business message completed and preserved native reservation/failed-label and supported memory; its continuation and remaining stories not run. No effects replayed to fill missing denominator."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support queue stopped at next public message boundary after direct g02/g03 failure review. The first partial-business message completed and preserved native reservation/failed-label and supported memory; its continuation and remaining stories not run. No effects replayed to fill missing denominator."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support queue stopped at next public message boundary after direct g02/g03 failure review. The first partial-business message completed and preserved native reservation/failed-label and supported memory; its continuation and remaining stories not run. No effects replayed to fill missing denominator."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -5626,6 +5728,13 @@
       "path": "artifacts/v13-5/r39-regression-scope.json",
       "sha256": "31dcd2177dcc4ec3d167604d18742e8df5a0e014eaf9aa6439a91cf784ed6024",
       "timing": "Before any r39 actual model HTTP",
+      "semantic_acceptance_unchanged": true
+    },
+    {
+      "candidate": "r40",
+      "path": "artifacts/v13-5/r40-regression-scope.json",
+      "sha256": "12440ebe521bc52059ce7173cc5f506c3649740ded6aca8373597e41deaf6037",
+      "timing": "Before any r40 real model HTTP",
       "semantic_acceptance_unchanged": true
     }
   ],
@@ -5679,6 +5788,27 @@
         "artifacts/v13-5/r39-mypy-final.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
         "artifacts/v13-5/r39-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "artifacts/v13-5/r39-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r39-ci.json",
+        "sha256": "9e7e63d8a4603318f71da97b633e59cfd38f69a90588b131fdf9470afeae52d3",
+        "fast": "SUCCESS37125503099",
+        "full": "SKIPPED37125503291"
+      }
+    },
+    {
+      "candidate": "r40",
+      "scope": "384 related/default regression checks,6 actual pinned Qwen tokenizer/template variants,4 installed SDK lifecycle checks,ruff/mypy2modules/package+tools boundaries PASS.0 real model HTTP. Literal cue/handle mismatch rejection is before fact commit; source full quote remains program extracted and semantic_support unchecked. Archived correction, same-source reinterpretation and exact no_change covered.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r40-regression.log": "ac4758df0fe9d989ab73769f524f5b46f7c3158d963a3605579ec9fa8a189759",
+        "artifacts/v13-5/r40-cue-targeted.log": "81b055c8dc7256cb0814a7989cea6793dc369f4bfd4e016391c361d57ce908fd",
+        "artifacts/v13-5/r40-entry-targeted.log": "6c6f6df00200f3feec1f95427ed1572321ea95f770afbf56eb61a725a21c3207",
+        "artifacts/v13-5/r40-production-contracts.json": "3513196d32fd7fc42c06ab38abd3b9f150b81a65582a68aa59c33dc7f04d07e0",
+        "artifacts/v13-5/r40-sdk-lifecycle.log": "17d6c4421be058f45fed08dfd4ed6626b293a81c00a6008772144a7c707a7a9c",
+        "artifacts/v13-5/r40-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r40-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r40-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r40-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
       }
     }
   ]

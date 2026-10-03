@@ -718,6 +718,74 @@ def test_revision_preview_allows_supported_archived_reinterpretation_without_cur
         assert query not in current["source_refs"]
 
 
+@pytest.mark.parametrize("withdraw", [False, True])
+@pytest.mark.parametrize("archived", [False, True])
+def test_short_evidence_cue_rejects_wrong_fragment_and_keeps_actual_changed_support(
+    tmp_path: Path, withdraw: bool, archived: bool,
+) -> None:
+    with opened(tmp_path, formation_interface="anchored_assertion_v1") as memory:
+        old = turn(memory, text="Only this sample uses ounces; labels unchanged.")
+        saved = memory.save(cfg(), "save", "Only this sample uses ounces; labels unchanged.",
+                            handles(memory, old), {})
+        before = memory.service.read(saved["id"])
+        new_text = ("Withdraw this sample rule; keep history." if withdraw else
+                    "Use grams for this sample; labels remain unchanged.")
+        new = turn(memory, "change", new_text)
+        message_id = "later" if archived else "change"
+        if archived:
+            query = turn(memory, "later", "Apply the previously stated change.")
+        cue = "Withdraw this sample rule" if withdraw else "Use grams"
+        wrong = {"fragment_handle": handles(memory, old)[0], "supporting_words": cue}
+        args: dict[str, Any] = {"read_handle": before["candidate_handle"], "changes": []}
+        if withdraw:
+            args.update(retract=True, evidence_for_withdrawal=[wrong])
+        else:
+            args["changes"] = [{"field": "content", "op": "set",
+                "value": "Only this sample uses grams; labels unchanged.",
+                "evidence_for_new_value": [wrong]}]
+        rejected = invoke(memory, "update_memory", args, "wrong", cfg(message_id))
+        assert rejected["status"] == "rejected" and rejected["effect"] == "none"
+        assert "EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT" in rejected["reason"]
+        assert memory.service.read(saved["id"])["value"] == before["value"]
+        selected = {"fragment_handle": handles(memory, new)[0], "supporting_words": cue}
+        if withdraw:
+            args["evidence_for_withdrawal"] = [selected]
+        else:
+            args["changes"][0]["evidence_for_new_value"] = [selected]
+        receipt = invoke(memory, "update_memory", args, "right", cfg(message_id))
+        assert receipt["ok"] and receipt["id"] == saved["id"] and receipt["revision"] == 2
+        current = memory.service.read(saved["id"], 2)["value"]
+        support = (current["removed_field_support"]["record"] if withdraw else
+                   current["functional_support"]["content"])
+        assert support["source_refs"] == [new]
+        assert support["quotes"][0]["content"] == new_text  # Full quote is program-extracted.
+        assert support["semantic_support"] == "unchecked"
+        assert memory.service.read(saved["id"], 1)["value"] == before["value"]
+        if archived:
+            assert query not in current["source_refs"]
+
+
+def test_evidence_cue_keeps_same_source_reinterpretation_and_exact_no_change_legal(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="anchored_assertion_v1") as memory:
+        ref = turn(memory, text="Work days only: favor short replies; weekends unrestricted.")
+        saved = memory.save(cfg(), "save", "Favor short replies on work days.",
+                            handles(memory, ref), {})
+        read = memory.service.read(saved["id"])
+        args = {"read_handle": read["candidate_handle"], "changes": [{
+            "field": "content", "op": "set",
+            "value": "Favor short replies on work days; weekends unrestricted.",
+            "evidence_for_new_value": [{"fragment_handle": handles(memory, ref)[0],
+                                       "supporting_words": "weekends unrestricted"}]}]}
+        receipt = invoke(memory, "update_memory", args, "reformulate")
+        assert receipt["ok"] and receipt["revision"] == 2
+        args["read_handle"] = memory.service.read(saved["id"])["candidate_handle"]
+        args["changes"][0]["evidence_for_new_value"] = []
+        no_change = invoke(memory, "update_memory", args, "same")
+        assert no_change["status"] == "no_change" and no_change["revision"] == 2
+
+
 def test_revision_preview_withdrawal_and_oversize_never_write_before_confirmation(
     tmp_path: Path,
 ) -> None:

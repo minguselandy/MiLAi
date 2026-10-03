@@ -5226,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r39 preview-before-commit mechanical candidate; r38 real regression stopped for core correction support failure",
-    "scope": "140 detailed statuses still pending final backfill. R38 L1 23/24 current (original24), L2 11/12; new L4 stopped15/31messages with2PASS/3FAIL/7NOT_RUN. G03 full withdrawal passed but G02 changed value selects only old source. R37 L3 retains its own identity. Original48 unchanged.",
+    "candidate": "r40 literal-cue selection mechanical candidate; r39 direct preview-confirmation regression failed",
+    "scope": "140 terminal statuses still pending. R39 communication9/22 stopped10completed/12notrun on direct content and withdrawal support failures; current evidence was actually delivered. R38 L1/L2 and r37 L3 retain their identities, not pooled. Original48 unchanged.",
     "reviewer": "Root",
     "independent_review": false
   }
