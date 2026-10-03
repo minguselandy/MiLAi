@@ -2110,7 +2110,100 @@
       "independent_review": false,
       "evidence": [
         "../l2-r21-evaluator/summary.json"
-      ]
+      ],
+      "remote_ci": {
+        "commit": "e1df9a3e0ef2c897160a7f60ec61f6e50dc6379a",
+        "fast_run": 37099463217,
+        "fast_status": "success",
+        "full_run": 37099463212,
+        "full_status": "skipped"
+      }
+    },
+    {
+      "id": "l2-r22",
+      "layer": "L2",
+      "candidate_commit": "aa8b2dcc8d5aac883f4d9ce8c2b55e0f7144a0ab",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r22.json",
+      "admission": "Full12/26 before outputs. Native v4 nonthinking restored after retained r21 protocol truncation; fresh-query guard and inline source fragments unchanged; original caps.",
+      "baseline": {
+        "generation_requests": 10878,
+        "generation": {
+          "charged_tokens": 33625663,
+          "known_tokens": 33595276,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r22/input-freeze.json": "944aea46f3cc6216ac4f5c4617cc5ebd03b0305153c658a171dbe4d1adc3c07b",
+        "configs/v13-5-functional-r22.json": "f753568247e3dc602c95e0b5fc4554c30803242fff063252f37c76dced1dfdd2",
+        "artifacts/v13-5/l2-r22/review.json": "08f04030de4264dd53a831a3cce36e44dce0260d180580b8c993de427c8ea3cd",
+        "artifacts/v13-5/l2-r22/seal.json": "f531ecc04e043442728f5858f7e976f07b3638f957eba9230014c95d43abf44b",
+        "artifacts/v13-5/l2-r22-evaluator/summary.json": "a033624f3969a31484d6872093311a8dba24b1a4eaebc0bf56959ef465455312",
+        "artifacts/v13-5/l2-r22-all-review.jsonl": "c59af5cfcd4eb0ef67a248d63110eafd650ad0088f97cb8e1e681f1b6e8e9ccd",
+        "artifacts/v13-5/l2-r22-manual-grades.json": "0aad164c34768cce80e75905ec9f15864af3db3c17c7084033b0652d6e81222e"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 7,
+        "FAIL": 5
+      },
+      "message_counts": {
+        "COMPLETED": 20,
+        "UNKNOWN": 3,
+        "FAILED": 3
+      },
+      "retained_attempts": 27,
+      "cost_delta": {
+        "generation_requests": 105,
+        "generation.known_tokens": 753453,
+        "generation.charged_tokens": 753453,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l2-r01": "Exact reservation/label and directly supported save. Later current public query, no repeat.",
+        "l2-r02": "Supported original partial; next message queries then only completes existing label. No new reservation or read exhaustion.",
+        "l2-r03": "Supported partial save. First attempted continuation blocked by current_public_query_required before native invocation; actual query then exactly one failed label attempt. Last readonly query shows previous failed attempt and current state.",
+        "l2-r04": "W1 after-native actually applied; later live query discovers completed object/label, no duplicate; original UNKNOWN and semantic not_committed retained.",
+        "l2-r05": "W1 before-native applied. Continuation native declaration returns continue_if_unfinished with empty operation list; original plus sole explicit resume rejected. No live query/final/current operation. Both failures retained, no third attempt.",
+        "l2-r06": "Supported original partial and actual external label completion. Readonly current query distinguishes old/current label, preserves original record.",
+        "l2-d01": "Exact draft/approval/publication occurred but no save even after one bounded completion feedback. REQUIRED_MEMORY_OPERATION_MISSING with no final; later fresh query correctly reports confirmed effects and no semantic write, no repeated mutation.",
+        "l2-d02": "Three separate actual stage observations saved and complete original tool fragments selected. Later only requested publication, original draft/approval preserved. One saved publication-attempt summary promotes Source capture observed_at to an exact attempted-at timestamp absent from selected receipt body; retain this narrower support/timing defect, do not claim full direct support.",
+        "l2-d03": "Create/approve and fully supported record; later one failed publish; final readonly actual current query returns prior attempt no-effect and current approved/unpublished state.",
+        "l2-d04": "W1 after publication applied, current query discovers published exact version/audience without repeat; original UNKNOWN and incomplete semantic save remain explicit.",
+        "l2-d05": "Initial native allowed operations omit requested create. No document created, approval of invented version/digest returns not_found; remembered proposed draft/status do not fulfill actual work and claim creation attempt without invocation. Intended W1 before publish NOT_APPLIED. Next query confirms absence, no completed workflow.",
+        "l2-d06": "Initial native allowed operations omit requested create; only query/approval-not_found/save. Saved summary calls it a creation attempt despite no create invocation. External evaluator edit correctly fails DOCUMENT_BACKEND_EDIT_TARGET_NOT_FOUND before next model call; stale condition not applied, not passed."
+      },
+      "findings": [
+        "All12/26 attempted; 3 actual W1 UNKNOWNs. d05 W1 and d06 external stale edit NOT_APPLIED because required document was not created.",
+        "Fresh-query precondition works on actual attempted unqueried continuation, without duplicate effect.",
+        "Per-operation request declaration remains incomplete for explicit draft creation and unresolved for a referential continuation; one explicit schema resume fails identically.",
+        "Actual observed_at must not be silently promoted to precise business action time. Missing required save remains FAILED after one feedback, with confirmed business effects retained.",
+        "All stored original quote identities and readonly SQLite current/latest histories match; no new unknown usage or ledger gaps."
+      ],
+      "evidence": [
+        "../l2-r22-all-review.jsonl",
+        "../l2-r22-manual-grades.json",
+        "../l2-r22-evaluator/summary.json"
+      ],
+      "remote_ci": {
+        "commit": "aa8b2dcc8d5aac883f4d9ce8c2b55e0f7144a0ab",
+        "fast_run": 37099639722,
+        "fast_status": "success",
+        "full_run": 37099639704,
+        "full_status": "skipped"
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

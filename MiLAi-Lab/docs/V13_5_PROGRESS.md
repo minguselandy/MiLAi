@@ -398,3 +398,30 @@ r21首条请求的native声明耗尽8192输出，VLLM_CHAT_TRUNCATED，无工具
 语义效果、无final。保留1 FAILED／25 NOT_RUN，1次生成9,422 tokens，无新增unknown
 usage。共享通信失败后停队封存，不加输出或重复重试。r22只将thinking恢复false，保留
 新的真实查询前置合同及inline片段；新分母重新冻结，其他上限不变。
+
+## r22 完整 L2 与 r23 当前请求／指代解析
+
+r22同aa8b2dcc完成12故事26消息的全部尝试：20 COMPLETED、3真实W1 UNKNOWN、3 FAILED，
+另保留一次r05声明显式恢复，共27次消息尝试，105次生成、753,453 tokens，账本连续，
+无新增unknown usage。限定7 PASS／5 FAIL。r03先尝试未查询的补标签，被程序拒绝后
+执行真实查询，再仅一次实际标签尝试；r02剩余标签也成功且未耗尽读取。d03完整来源
+选择与只读查询通过。r05两次声明均continue但operations为空；d05/d06声明漏create，
+故未创建文稿，d05 W1未触发、d06外部编辑无目标如实失败。d01真实发布已完成但一次
+限定反馈后仍未保存语义记录，保留FAILED/null final；后续查询确认效果且未重复。
+d02按三个实际阶段分别保存，所选正文齐全，但发布尝试时间使用Source observed_at，
+不等于精确业务事件时间，保留此更窄的来源／时间支持失败。
+r21 e1df9a3及r22 aa8b2dcc的Fast CI37099463217／37099639722通过，Full composition跳过。
+
+r23 native v5去掉模型重复抄写business_action_quote；程序原有source_ref、整个当前输入
+hash和config绑定仍保留。声明须考虑整个请求，具体操作集合仍在目录及dispatch强制。
+只有当前请求已解释为continue_if_unfinished且操作集合为空，才允许一次有界历史指代
+解析。它使用原ordinary材料，不读取完整checkpoint、evaluator world或隐藏状态；
+只能返回具体操作，不能改变memory／forget／action权限。纯查询永不进入此阶段。
+解释后仍须实际查询后决定剩余动作；合法结构不是语义授权证明。两阶段共享原24调用
+与1格式修复，重开缓存／签名和额度保留，空解析结果明确未解决，不自行补全权限。
+来源选择提示同时明确observed_at仅为捕获时间，业务时间须由所选回执字段支持。
+
+114项入口／隐私／两工作流检查通过；生产Qwen tokenizer、8192输出／8192材料／65536
+上下文下的两种脚本协议／重放／权限额度检查通过，均0真实HTTP。ruff、两源mypy、
+分层通过。首次新测试暴露测试块插入位置及没有对象标识的查询不命中旧材料；修正测试
+边界与恢复原断言后窄4项及全114项通过。首日志保留，未称模型效果。r23另立完整L2。

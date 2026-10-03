@@ -36,6 +36,7 @@ def prepared(
     declared_writes: bool = False,
     operation_mode_declaration: bool = False,
     inline_fragments: bool = False,
+    reference_mode_declaration: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -69,7 +70,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v4" if operation_mode_declaration else
+        "request_mode": "current_request_native_v5" if reference_mode_declaration else
+        "current_request_native_v4" if operation_mode_declaration else
         "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
@@ -1085,6 +1087,7 @@ def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_co
     final = message(root, evaluator_control=control, resume=True)
     assert final["status"] == "COMPLETED", final
     assert len(wires) == 3
+
     assert len(final["records"]) == 1
     assert final["records"][0]["value"]["basis"] == "tool_observation"
     assert len(final["world"]["world"]["attempts"]) == int(happened)
@@ -1100,6 +1103,96 @@ def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_co
     assert status["operations"][0]["effect"] == "unknown"
     assert status["operations"][0]["execution_receipt_status"] == "pending"
     assert status["operations"][0]["observed_effect"] == ("confirmed" if happened else "none")
+
+
+def test_continuation_resolves_only_missing_reference_from_bounded_material_and_replays(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True)
+    current = 'Continue the previously requested work for prior item only if unfinished.'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, 8}:
+            params = wire['tools'][0]['function']['parameters']
+            assert 'business_action_quote' not in params['properties']
+            text = wire['messages'][-1]['content']
+            if ordinal == 4:
+                assert text == current and 'original place' not in text
+            return native_call('classify_current_request', f'intent-{ordinal}',
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request=('perform' if ordinal == 1 else
+                                         'continue_if_unfinished' if ordinal == 4 else 'none'),
+                business_operations=['reserve_and_label'] if ordinal == 1 else [])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='prior item', quantity=2,
+                               destination='original place', packing='box')
+        if ordinal == 5:
+            assert len(wire['tools']) == 1
+            assert wire['tools'][0]['function']['name'] == 'resolve_continuation_operations'
+            frame = json.loads(wire['messages'][-1]['content'])
+            assert frame['current_request'] == current
+            assert not frame['accepted_current_mode']['allow_memory_maintenance']
+            material = frame['archived_reference_material']
+            assert 'prior item' in json.dumps(material)
+            assert 'original place' in json.dumps(material)
+            assert 'world' not in frame and 'checkpoint' not in frame
+            return native_call('resolve_continuation_operations', 'resolve',
+                business_operations=['reserve_and_label', 'complete_label'])
+        if ordinal in {6, 9}:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert 'save_memory' not in names and 'forget_memory' not in names
+            if ordinal == 9:
+                assert not names & functional.BUSINESS_MUTATIONS
+            return native_call('get_reservation', f'query-{ordinal}', item_key='prior item')
+        assert ordinal in {3, 7, 10}
+        return {'role': 'assistant', 'content': 'Observed the actual status.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='reference-bank', owner='alice', workflow='reservation')
+    first = functional.message(root, **args, session='s1', message_id='first',
+        content='Reserve two of prior item for original place, packed in a box, with a label.')
+    assert first['status'] == 'COMPLETED', first
+    second_args = dict(**args, session='s2', message_id='next', content=current)
+    second = functional.message(root, **second_args)
+    assert second['status'] == 'COMPLETED', second
+    assert second['request_mode']['reference_resolution']['attempts'] == 1
+    assert second['request_mode']['business_operations'] == ['reserve_and_label', 'complete_label']
+    assert second['operation_status']['business']['status'] == 'not_executed'
+    resumed = functional.message(root, **second_args, resume=True)
+    assert resumed['status'] == 'COMPLETED' and len(wires) == 7
+    pure = functional.message(root, **args, session='s3', message_id='query-only',
+                              content='Only query the current status; do not act.')
+    assert pure['status'] == 'COMPLETED' and len(wires) == 10
+    assert 'reference_resolution' not in pure['request_mode']
+    assert len(pure['world']['world']['attempts']) == 1
+
+
+def test_continuation_resolution_cannot_grant_other_permissions_or_reset_format_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 2}:
+            return native_call('classify_current_request', f'intent-{ordinal}',
+                memory_write_request='INVALID' if ordinal == 1 else 'none',
+                allow_forgetting=False, business_action_request='continue_if_unfinished',
+                business_operations=[])
+        assert ordinal == 3
+        return native_call('resolve_continuation_operations', 'bad-resolution',
+                           business_operations=['reserve_and_label'], allow_forgetting=True)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='continue',
+                content='Continue the earlier work if needed.')
+    first = functional.message(root, **args)
+    assert first['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+    second = functional.message(root, **args, resume=True)
+    assert second['error'] == 'FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID'
+    third = functional.message(root, **args, resume=True)
+    assert third['error'] == 'FUNCTIONAL_CONTINUATION_RESOLUTION_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == 3
+    assert not third['world']['world']['attempts'] and not third['records']
 
 
 def test_multiple_forgets_remove_intervening_revoked_tool_body_from_next_generation(

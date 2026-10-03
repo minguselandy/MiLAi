@@ -386,6 +386,8 @@ class FunctionalCallWrapper:
                     "fragment needed for the saved claims. A user request supports what was "
                     "requested, not what actually happened; use these actual tool observations "
                     "for outcome claims. Omit details unsupported by your selected fragments. "
+                    "Source observed_at is receipt capture time, not the exact business event "
+                    "time; event timestamps require their own selected receipt fields. "
                     "These handles require no extra read; semantic support remains unchecked.")
         delivery = response.model_copy(update={"content": json.dumps(content, ensure_ascii=False)})
         self.app.progress.record(key, "delivery_response", delivery.model_dump(mode="json"))

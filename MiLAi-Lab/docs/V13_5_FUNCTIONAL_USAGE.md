@@ -10,7 +10,7 @@ read failure and rejection of a literal negative quote in a read-only declaratio
 L2-r20 completed all12/26 with 6 scoped PASS and 6 FAIL: source selection, live-query omissions,
 operation declaration omissions and redundant read exhaustion remain. Its exact Fast CI passed.
 R21 thinking declaration exhausted all8192 output tokens before any business action; that
-cohort stopped with 1 FAILED/25 NOT_RUN. R22 retains its mechanical fixes with nonthinking.
+cohort stopped with 1 FAILED/25 NOT_RUN. R23 retains its mechanical fixes with nonthinking.
 These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
 pending and no stable configuration is recommended. Earlier failures and scoped
 communication cohorts remain separate evidence; their scores are not pooled.
@@ -24,12 +24,15 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r22.json` with a new root for current candidate
-validation. R22 uses native v4 with thinking disabled, with unchanged capacity/call/read limits.
+Use `configs/v13-5-functional-r23.json` with a new root for current candidate
+validation. R23 uses native v5 with thinking disabled, with unchanged capacity/call/read limits.
 It requires a current same-object query before a new mutation of an earlier operated object,
 and shows exact original content beside each business source fragment handle.
-R22 retains exact current-message save idempotency and first interprets the current
-request without retrieved history. A three-state memory-write declaration distinguishes queries, new assertions and
+R23 retains exact current-message save idempotency and first interprets the current
+request without retrieved history. Only an explicitly interpreted continuation with an empty
+operation list may use the existing bounded ordinary material to resolve its prior-work reference;
+that stage cannot change memory, forgetting or action permissions and shares the original budgets.
+The whole input is bound by the program; no model-copied action quote is required. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,
 and requires an exact current-request clause for an action. It also lists the specific
