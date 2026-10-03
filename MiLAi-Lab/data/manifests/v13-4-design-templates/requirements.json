@@ -1,0 +1,13 @@
+{
+  "kind": "REQUIREMENTS_TEMPLATE_POINTER",
+  "authoritative_requirement_mapping": "../v13-4-requirements.json",
+  "new_row": {
+    "id": null,
+    "plan_sections": [],
+    "requirement": null,
+    "completion_evidence": null,
+    "status": "NOT_VERIFIED",
+    "evidence": []
+  },
+  "rule": "preserve every original48 status; use direct current evidence for each promotion"
+}

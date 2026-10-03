@@ -1,0 +1,146 @@
+{
+  "kind": "V13_4_N2_QUERY_FREE_CUE_RESULTS",
+  "created_at_utc": "2026-10-02T18:17:37.432820+00:00",
+  "status": "COMPLETE_METADATA_ASSOCIATION_NOT_SEMANTIC_SIGNAL",
+  "freeze": {
+    "path": "data/manifests/v13-4-n2-cue-freeze.json",
+    "sha256": "f611cacb1d2b3f85ce2d75f8bfd385af5c6b87a0c77590e035db264eb2b3cbfe"
+  },
+  "output": {
+    "path": "artifacts/v13-4/n2-cue-adapter/natural-cues.json",
+    "sha256": "46b5c0847af0e786bfd99ac26bacd9c28132296d88024abd87de7760e2596ba0"
+  },
+  "cost_receipt": {
+    "path": "artifacts/v13-4/n2-cue-adapter/natural-cues.json.cost.json",
+    "sha256": "9ca4e39a72314a78fa121de7f282c2c64bbf7b14aa990554c0643f90cf5dbd93"
+  },
+  "source_count": 96,
+  "origin_count": 32,
+  "cue_count": 215,
+  "cue_counts": [
+    {
+      "provenance": "frozen_writer",
+      "dimension": "exception",
+      "time_axis": null,
+      "count": 6
+    },
+    {
+      "provenance": "frozen_writer",
+      "dimension": "relation",
+      "time_axis": null,
+      "count": 11
+    },
+    {
+      "provenance": "frozen_writer",
+      "dimension": "scope",
+      "time_axis": null,
+      "count": 17
+    },
+    {
+      "provenance": "frozen_writer",
+      "dimension": "time",
+      "time_axis": "publication",
+      "count": 7
+    },
+    {
+      "provenance": "frozen_writer",
+      "dimension": "time",
+      "time_axis": "report",
+      "count": 7
+    },
+    {
+      "provenance": "frozen_writer",
+      "dimension": "time",
+      "time_axis": "verification",
+      "count": 7
+    },
+    {
+      "provenance": "native_public",
+      "dimension": "time",
+      "time_axis": "publication",
+      "count": 32
+    },
+    {
+      "provenance": "native_public",
+      "dimension": "time",
+      "time_axis": "report",
+      "count": 64
+    },
+    {
+      "provenance": "native_public",
+      "dimension": "time",
+      "time_axis": "verification",
+      "count": 64
+    }
+  ],
+  "writer_original_status": {
+    "valid_shape_quotes": 7,
+    "unknown_unchanged": 57
+  },
+  "unknown_associations": 37,
+  "ambiguous_cues": 37,
+  "cues_with_partial_quote_projection": 0,
+  "input_hashes_all_passed": true,
+  "metadata_size_cost": {
+    "selector_descriptors": {
+      "logical_utf8_bytes": 428203,
+      "serialized_tokens": 295354
+    },
+    "projection_audit": {
+      "logical_utf8_bytes": 314325,
+      "serialized_tokens": 174873
+    },
+    "inventory": {
+      "logical_utf8_bytes": 543097,
+      "serialized_tokens": 344104
+    },
+    "writer_status_inventory": {
+      "logical_utf8_bytes": 12493,
+      "serialized_tokens": 5992
+    }
+  },
+  "processing_cost": {
+    "input_read_calls": 294,
+    "input_read_bytes": 23450389,
+    "unique_input_bytes": 23450389,
+    "wall_ns": 3764027127,
+    "cpu_ns": 6460172741,
+    "process_io_delta": {
+      "cancelled_write_bytes": 4096,
+      "read_bytes": 0,
+      "syscr": 7249,
+      "wchar": 351,
+      "write_bytes": 4096,
+      "syscw": 3,
+      "rchar": 141734232
+    },
+    "scope": "Input read/hash/parse, local tokenizer initialization/use, cue binding, index checks, projection and metadata token accounting. CLI cost receipt separately includes report serialization/write; counters include tokenizer I/O where exposed by OS."
+  },
+  "tokenizer_identity": {
+    "kind": "HostCapacity.text_tokens",
+    "capacity_identity": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "enable_thinking": false,
+      "tokenizer_path": "/cra/qwen36-35B",
+      "tokenizer_files_sha256": {
+        "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+        "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+        "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+      },
+      "capacity_policy_sha256": "886596bc29d14b19e47d9f3bb870ffc046a2de754f415968e0988c6183c8e6fc"
+    },
+    "capacity_identity_sha256": "94d2ee1618acd60444306fe9542cdb811b4e7e78a4ea3dff61c7b2779f326a4d"
+  },
+  "queries_created": 0,
+  "model_calls": 0,
+  "T0_admitted": false,
+  "G1": "NOT_EVALUATED",
+  "T1_signal": "NOT_EVALUATED",
+  "limits": [
+    "Native literal fields do not repair frozen Writer failures or supply effective time.",
+    "Repeated/partial Source-bound projections are not semantic E* coverage.",
+    "Local tokenizer warned serialization length295354 exceeds model max262144; this was offline counting only, never sent as a model request.",
+    "Process OS read_bytes0 means no newly charged disk bytes for this cached process, not zero logical read/input/metadata costs.",
+    "Compiler integration into shared baseline index is the next freeze step."
+  ]
+}

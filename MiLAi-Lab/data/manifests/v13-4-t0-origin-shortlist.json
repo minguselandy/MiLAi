@@ -1,0 +1,4048 @@
+{
+  "kind": "V13_4_T0_OFFICIAL_METADATA_ORIGIN_SHORTLIST",
+  "status": "CONCRETE_39_ORIGIN_PREREGISTRATION_BEFORE_SELECTED_BODY_ACCESS",
+  "recorded_at_utc": "2026-10-02T16:44:35.095847+00:00",
+  "target_independent_histories": 32,
+  "primary_candidates": 32,
+  "ordered_reserve_candidates": 7,
+  "candidate_count": 39,
+  "admitted_histories": 0,
+  "origin_workflow": "RFC specifications, separate technical errata, and named later RFC updates. This is a natural public technical workflow, not a conversational benchmark or personal-life natural-history sample.",
+  "authorization_boundary": "Delegated source-owner metadata shortlist. Root owns the exact acquisition/input freeze and all corpus reading/model execution. No selected document/erratum body was fetched for this shortlist.",
+  "metadata_sources": [
+    {
+      "url": "https://errata.rfc-editor.org/search/?status=verified&errata_type=technical&presentation=table",
+      "final_url": "https://errata.rfc-editor.org/search/?status=verified&errata_type=technical&presentation=table",
+      "retrieved_at_utc": "2026-10-02T16:44:20.439880+00:00",
+      "kind": "verified_technical_errata_summary_metadata",
+      "raw_response_sha256": "d52fa6160c1ee858bdef82cbaef3f0229f4546d333df614b52ed7ab3208a7cc7",
+      "raw_response_bytes": 963969,
+      "http_status": 200
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc-index.xml",
+      "final_url": "https://www.rfc-editor.org/rfc-index.xml",
+      "retrieved_at_utc": "2026-10-02T16:44:23.155470+00:00",
+      "kind": "official_document_index_metadata_with_abstracts_not_document_bodies",
+      "raw_response_sha256": "0e0321f330b8668d8ee860a918b8743af88743f4ee5a908535c57a87aa21e68c",
+      "raw_response_bytes": 13724329,
+      "http_status": 200
+    },
+    {
+      "url": "https://www.rfc-editor.org/series/rfc-errata/",
+      "final_url": "https://www.rfc-editor.org/series/rfc-errata/",
+      "retrieved_at_utc": "2026-10-02T16:44:28.583047+00:00",
+      "kind": "official_errata_status_documentation",
+      "raw_response_sha256": "abfc643aae2153a48ed029eab801debace0adf1fd0f3114cc70199d7dcd66068",
+      "raw_response_bytes": 51166,
+      "http_status": 200
+    },
+    {
+      "url": "https://www.rfc-editor.org/series/rfc-use/",
+      "final_url": "https://www.rfc-editor.org/series/rfc-use/",
+      "retrieved_at_utc": "2026-10-02T16:44:29.947642+00:00",
+      "kind": "official_rfc_reuse_documentation",
+      "raw_response_sha256": "8ee80729b4d3b52778c22e769e6efec3ae6f16297755882a3356744f291470e0",
+      "raw_response_bytes": 38313,
+      "http_status": 200
+    },
+    {
+      "url": "https://trustee.ietf.org/documents/trust-legal-provisions/",
+      "final_url": "https://trustee.ietf.org/documents/trust-legal-provisions/",
+      "retrieved_at_utc": "2026-10-02T16:44:32.049818+00:00",
+      "kind": "official_current_license_index",
+      "raw_response_sha256": "f00e4ed8971c69027f7bf133866f04a20e8123a44385df2cea72b6e1c2a7cffc",
+      "raw_response_bytes": 51335,
+      "http_status": 200
+    },
+    {
+      "url": "https://trustee.ietf.org/documents/trust-legal-provisions/tlp-5/",
+      "final_url": "https://trustee.ietf.org/documents/trust-legal-provisions/tlp-5/",
+      "retrieved_at_utc": "2026-10-02T16:44:33.649687+00:00",
+      "kind": "official_TLP5_license_text",
+      "raw_response_sha256": "c86491264f72ad5d0c16ecec441ad6e19ebac422259a5869400bf20f82399a39",
+      "raw_response_bytes": 72616,
+      "http_status": 200
+    }
+  ],
+  "metadata_retention": "Selected metadata records and exact origin/revision IDs are retained in this manifest. raw_response_sha256 hashes the fetched official metadata response; full response bytes were not added to the worktree. Original RFC/erratum body hashes remain null until Root freezes acquisition and actually obtains them.",
+  "universe_counts": {
+    "verified_technical_errata_summary_rows": 1984,
+    "unique_rfc_ids_in_errata_summary": 1080,
+    "rfc_index_entries": 9843,
+    "eligible_rfc_ids_after_filters": 61,
+    "eligible_groups_after_conservative_union": 39,
+    "selected_groups": 39
+  },
+  "preregistration": {
+    "id": "v13.4-t0-rfc-origin-shortlist-001",
+    "phase": "BEFORE_SELECTED_BODY_ACCESS",
+    "body_independent_filters": [
+      "Official errata Summary Table has Verified Technical record; status is metadata, not an evaluated method outcome.",
+      "Original publication April2015 through December2025 inclusive, after TLP5 effective date.",
+      "IETF stream and actual nonempty working-group acronym; exclude NON WORKING GROUP.",
+      "Exclude every conservative component touching incidental preview-exposed RFC identities."
+    ],
+    "group_policy": "Union all known update/obsolete edges across the complete RFC index, then all same actual working-group members, transitively. One origin per resulting component. Add any semantic/template/derivation equivalence discovered during later development curation; never split to hit32.",
+    "rank_rule": "Ascending hexadecimal SHA256(UTF8(milai-v13.4-rfc-origin-v1: + canonical RFC ID)), retaining first eligible origin per component. First32 are primary; remaining7 are ordered reserves. No corpus length, question, gold, model result or Ours-win criterion enters selection.",
+    "shortlist_candidates_sha256": "30a9522ef313c4adcaa156253f8b2c4b540b27a0b07d2dcc1e0a7a8fe8f05676",
+    "reservation_policy": "Every selected component and every known derivative is development-reserved before acquisition; preserve the reservation even if primary is not run. These sources cannot later be promoted to unseen T2/T3/transfer by changing IDs.",
+    "replacement_policy": "At most take the next reserve for a documented license failure, duplicate/derivation merge or true task-inapplicability discovered before running methods; retain the excluded source and reason in the log. Do not replace because B1/B2 succeeds, a desired8-per-stratum quota is difficult, or M loses. Exhaustion leaves32 target unmet and calls for a separately preregistered natural-source expansion or explicitly grouped diagnostic supplement.",
+    "no_body_access_on_this_task": true
+  },
+  "incidental_exposure": {
+    "search_query": "site:rfc-editor.org errata search table RFC index XML has_errata",
+    "exposed_rfc_ids": [
+      "RFC1035",
+      "RFC2026",
+      "RFC2392",
+      "RFC2822",
+      "RFC4194",
+      "RFC6120",
+      "RFC7230",
+      "RFC7991"
+    ],
+    "scope": "Search results unexpectedly included some concrete erratum text in previews. No linked erratum full record was opened. All eight identities and their conservative components were excluded prospectively from candidate selection.",
+    "excluded_conservative_groups": 4,
+    "license_page_observation": "TLP5 itself mentions correction of its license name. That licensing document is not a T0 candidate.",
+    "selected_body_exposure": false,
+    "prior_unrecorded_manual_or_pretraining_exposure": "UNKNOWN; no claim of model pretraining novelty or complete historical human exposure exclusion."
+  },
+  "license_and_provenance": {
+    "official_license_url": "https://trustee.ietf.org/documents/trust-legal-provisions/tlp-5/",
+    "version": "Corrected TLP5; effective2015-03-25; license-name correction2021-09-21",
+    "rfc_reuse_documentation_url": "https://www.rfc-editor.org/series/rfc-use/",
+    "basis": "Official reuse documentation permits unmodified copying/distribution under IETF Trust provisions; TLP5 describes attribution/notice conditions and limits modifications outside the IETF process. This is not an MIT/CC-BY claim.",
+    "planned_use": "Preserve unmodified originals with notice/author attribution; any research questions/annotations stored separately. Do not edit source RFC text or label a counterfactual as the original.",
+    "individual_rfc_notice": "PENDING_AFTER_ACQUISITION_FREEZE",
+    "erratum_specific_license_scope": "PENDING; do not infer independent blanket relicensing from RFC license alone. Keep source URLs and provenance; no corpus release until checked.",
+    "licensing_gate": "Metadata supports a concrete acquisition route, not final dataset redistribution approval."
+  },
+  "fit_assessment": {
+    "supported_by_metadata": [
+      "Actual historical public technical corrections have persistent RFC and erratum IDs.",
+      "Original RFCs stay unchanged; separate errata and later RFC versions permit testing statement history versus corrected specification content.",
+      "Some candidates have named later RFC changes; those are recorded without deciding semantic effective time."
+    ],
+    "not_proved": [
+      "A verified erratum always creates query-relevant relation ambiguity.",
+      "The four8-history T0 strata can all be filled.",
+      "32 candidates will remain independent after semantic derivation audit.",
+      "All original technical rules can be evaluated by the existing model/Reader.",
+      "All relevant evidence fits32 candidates or2048 tokens."
+    ],
+    "truth_boundary": "Use specification/document claims only. Do not infer deployed implementation behavior, retroactive business authorization, or real-world effective dates from publication/report dates.",
+    "time_boundary": "reported_at_date describes historical report metadata; current Verified status does not prove it was verified on that date. Actual observed_at is acquisition/ingestion time. Verification transition time and semantic valid_time are unknown unless later allowed source text explicitly supports them.",
+    "normal_control_policy": "Preserve explicit nonambiguous corrections and short histories; if full correction chains solve them, record that result and reconsider G1 rather than manufacturing ambiguity.",
+    "shared_workflow_limit": "All candidates share a standards-document/errata workflow and public editorial formatting. WG/update clustering reduces known provenance overlap; it does not establish cross-workflow generalization or independent scenario-template truth."
+  },
+  "root_next_acquisition_contract": [
+    "Freeze manifest identity/hash, selected32 primary components, use=development, source cutoff and allowed views before first body read.",
+    "Acquire only the named original RFC and selected erratum pages plus predeclared relevant update-chain documents, preserving raw bytes/hash/HTTP retrievalUTC and source IDs; log absent/changed metadata. Status and report-date metadata are not gold runtime labels.",
+    "Inspect individual copyright/notice and erratum source terms; preserve raw text and make research annotations separate. Record unresolved license scope without silently approving corpus redistribution.",
+    "Find actual subject/time/scope evidence from permitted original sections, preserve Unicode spans and full-source hashes. Record all discovered derivation/template links and merge source components before final cohort count.",
+    "Design four natural queries per admitted history only after source history formation boundary is fixed, keeping evaluator gold and evidence-set labels physically separate. Archive-insufficient labels require evidence-relative reasoning, not assumed hidden world truth.",
+    "Retain all audit failures and inapplicable sources; reserve substitutions follow the preregistered metadata order. Diagnostic supplements require independent-origin/template records and separate natural-incidence reporting.",
+    "Run no new method comparisons before N0/N1/G0-Read evidence is frozen and reviewed by Root."
+  ],
+  "candidates": [
+    {
+      "shortlist_rank": 1,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "0301b4a49111d969451ad55847f10c8c34ce0576f60c71a91f38028e92b42729",
+      "origin_id": "rfc-editor:RFC9171",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9171",
+        "title": "Bundle Protocol Version 7",
+        "publication_year": "2022",
+        "publication_month": "January",
+        "stream": "IETF",
+        "wg_acronym": "dtn",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "S. Burleigh",
+          "K. Fall",
+          "E. Birrane, III"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [
+            "RFC9713",
+            "RFC9758"
+          ],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9171",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9171",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9171.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8043,
+          "section": "4.3.1",
+          "type": "Technical",
+          "source_of_rfc": "dtn (int)",
+          "submitted_by": "John Huff",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-07-22",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8043",
+          "url": "https://errata.rfc-editor.org/eid8043/"
+        },
+        {
+          "errata_id": 8525,
+          "section": "6.1.1",
+          "type": "Technical",
+          "source_of_rfc": "dtn (int)",
+          "submitted_by": "Huiung Park",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-08-05",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8525",
+          "url": "https://errata.rfc-editor.org/eid8525/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC9713",
+          "publication_year": "2025",
+          "publication_month": "January",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9713.txt"
+        },
+        {
+          "rfc_id": "RFC9758",
+          "publication_year": "2025",
+          "publication_month": "May",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9758.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-16f7852886dda31ae947",
+      "known_update_chain_ids": [
+        "RFC6260",
+        "RFC7116",
+        "RFC9171",
+        "RFC9713",
+        "RFC9758"
+      ],
+      "conservative_group_members": [
+        "RFC6260",
+        "RFC7116",
+        "RFC9171",
+        "RFC9172",
+        "RFC9173",
+        "RFC9174",
+        "RFC9675",
+        "RFC9713",
+        "RFC9758"
+      ],
+      "group_working_groups": [
+        "dtn"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 2,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "07086d1bf1e59fa10d99c3effc658f180ff1a11414ace4817da6beba4b4edf60",
+      "origin_id": "rfc-editor:RFC7469",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7469",
+        "title": "Public Key Pinning Extension for HTTP",
+        "publication_year": "2015",
+        "publication_month": "April",
+        "stream": "IETF",
+        "wg_acronym": "websec",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "C. Evans",
+          "C. Palmer",
+          "R. Sleevi"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7469",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7469",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7469.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4354,
+          "section": "3",
+          "type": "Technical",
+          "source_of_rfc": "websec (app)",
+          "submitted_by": "Kirit Saelensminde",
+          "format": "TXT",
+          "reported_at_date": "2015-05-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4354",
+          "url": "https://errata.rfc-editor.org/eid4354/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-979b2881564b4a00c642",
+      "known_update_chain_ids": [
+        "RFC7469"
+      ],
+      "conservative_group_members": [
+        "RFC6454",
+        "RFC6797",
+        "RFC7034",
+        "RFC7469"
+      ],
+      "group_working_groups": [
+        "websec"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 3,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "0ba776349d3ea0e166b573c62d728eefb616005b630aad8c8e09c50082513d11",
+      "origin_id": "rfc-editor:RFC9167",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9167",
+        "title": "Registry Maintenance Notification for the Extensible Provisioning Protocol (EPP)",
+        "publication_year": "2021",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "regext",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "T. Sattler",
+          "R. Carney",
+          "J. Kolker"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9167",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9167",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9167.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7176,
+          "section": "5.1",
+          "type": "Technical",
+          "source_of_rfc": "regext (ops)",
+          "submitted_by": "Stéphane Bortzmeyer",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2022-10-21",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7176",
+          "url": "https://errata.rfc-editor.org/eid7176/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-82c46e33a35f5273519c",
+      "known_update_chain_ids": [
+        "RFC9167"
+      ],
+      "conservative_group_members": [
+        "RFC7480",
+        "RFC7481",
+        "RFC7482",
+        "RFC7483",
+        "RFC7484",
+        "RFC7485",
+        "RFC8056",
+        "RFC8063",
+        "RFC8334",
+        "RFC8495",
+        "RFC8521",
+        "RFC8543",
+        "RFC8544",
+        "RFC8590",
+        "RFC8748",
+        "RFC8807",
+        "RFC8909",
+        "RFC8977",
+        "RFC8982",
+        "RFC9022",
+        "RFC9038",
+        "RFC9082",
+        "RFC9083",
+        "RFC9154",
+        "RFC9167",
+        "RFC9224",
+        "RFC9536",
+        "RFC9537",
+        "RFC9560",
+        "RFC9803",
+        "RFC9873",
+        "RFC9874",
+        "RFC9877",
+        "RFC9910",
+        "RFC10037"
+      ],
+      "group_working_groups": [
+        "regext",
+        "weirds"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 4,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "138c0b86a2462d1a7f08e2368d8c584d43a3f8725d8f2253fb08a76125af7c23",
+      "origin_id": "rfc-editor:RFC9886",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9886",
+        "title": "DRIP Entity Tags (DETs) in the Domain Name System",
+        "publication_year": "2025",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "drip",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "A. Wiethuechter",
+          "J. Reid"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9886",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9886",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9886.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8822,
+          "section": "A.2.2, Figure 21",
+          "type": "Technical",
+          "source_of_rfc": "drip (int)",
+          "submitted_by": "Adam Wiethuechter",
+          "format": "TXT, HTML",
+          "reported_at_date": "2026-03-12",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8822",
+          "url": "https://errata.rfc-editor.org/eid8822/"
+        },
+        {
+          "errata_id": 8823,
+          "section": "A.2.2, Figure 18",
+          "type": "Technical",
+          "source_of_rfc": "drip (int)",
+          "submitted_by": "Adam Wiethuechter",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-03-12",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8823",
+          "url": "https://errata.rfc-editor.org/eid8823/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-3222fff5ba297c51a4de",
+      "known_update_chain_ids": [
+        "RFC9886"
+      ],
+      "conservative_group_members": [
+        "RFC4423",
+        "RFC4843",
+        "RFC5201",
+        "RFC5202",
+        "RFC5203",
+        "RFC5204",
+        "RFC5205",
+        "RFC5206",
+        "RFC5338",
+        "RFC5770",
+        "RFC6028",
+        "RFC6078",
+        "RFC6079",
+        "RFC6253",
+        "RFC6261",
+        "RFC6317",
+        "RFC7086",
+        "RFC7343",
+        "RFC7401",
+        "RFC7402",
+        "RFC8002",
+        "RFC8003",
+        "RFC8004",
+        "RFC8005",
+        "RFC8046",
+        "RFC8047",
+        "RFC9028",
+        "RFC9063",
+        "RFC9153",
+        "RFC9374",
+        "RFC9434",
+        "RFC9575",
+        "RFC9886"
+      ],
+      "group_working_groups": [
+        "drip",
+        "hip"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 5,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "1f70ea5b57334d01c2cf20ae2657f41a949836c6e5cfa435c64a886dbaf8ca9d",
+      "origin_id": "rfc-editor:RFC8239",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8239",
+        "title": "Data Center Benchmarking Methodology",
+        "publication_year": "2017",
+        "publication_month": "August",
+        "stream": "IETF",
+        "wg_acronym": "bmwg",
+        "current_status": "INFORMATIONAL",
+        "authors": [
+          "L. Avramov",
+          "J. Rapp"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8239",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8239",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8239.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5652,
+          "section": "3.2",
+          "type": "Technical",
+          "source_of_rfc": "bmwg (ops)",
+          "submitted_by": "Nikolai Malykh",
+          "format": "TXT",
+          "reported_at_date": "2019-03-12",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5652",
+          "url": "https://errata.rfc-editor.org/eid5652/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-c1d66824b6d22e3f933d",
+      "known_update_chain_ids": [
+        "RFC8239"
+      ],
+      "conservative_group_members": [
+        "RFC1242",
+        "RFC1944",
+        "RFC2285",
+        "RFC2432",
+        "RFC2544",
+        "RFC2647",
+        "RFC2761",
+        "RFC2889",
+        "RFC3116",
+        "RFC3133",
+        "RFC3134",
+        "RFC3222",
+        "RFC3511",
+        "RFC3918",
+        "RFC4061",
+        "RFC4062",
+        "RFC4063",
+        "RFC4098",
+        "RFC4689",
+        "RFC4814",
+        "RFC4883",
+        "RFC5180",
+        "RFC5695",
+        "RFC6201",
+        "RFC6412",
+        "RFC6413",
+        "RFC6414",
+        "RFC6645",
+        "RFC6815",
+        "RFC6894",
+        "RFC6985",
+        "RFC7501",
+        "RFC7502",
+        "RFC7640",
+        "RFC7654",
+        "RFC7747",
+        "RFC8161",
+        "RFC8172",
+        "RFC8204",
+        "RFC8219",
+        "RFC8238",
+        "RFC8239",
+        "RFC8455",
+        "RFC8456",
+        "RFC9004",
+        "RFC9411",
+        "RFC9693",
+        "RFC9971"
+      ],
+      "group_working_groups": [
+        "bmwg"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 6,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "216bed44a6f1bd4ce7dc74446c10d4592122ffb5d845031a60ff33c5e89c34af",
+      "origin_id": "rfc-editor:RFC9204",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9204",
+        "title": "QPACK: Field Compression for HTTP/3",
+        "publication_year": "2022",
+        "publication_month": "June",
+        "stream": "IETF",
+        "wg_acronym": "quic",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "C. Krasic",
+          "M. Bishop",
+          "A. Frindell"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9204",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9204",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9204.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8410,
+          "section": "Appendix C",
+          "type": "Technical",
+          "source_of_rfc": "quic (wit)",
+          "submitted_by": "Kazu Yamamoto",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-05-08",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8410",
+          "url": "https://errata.rfc-editor.org/eid8410/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-66b1248e688ce879cb3d",
+      "known_update_chain_ids": [
+        "RFC9204"
+      ],
+      "conservative_group_members": [
+        "RFC8999",
+        "RFC9000",
+        "RFC9001",
+        "RFC9002",
+        "RFC9114",
+        "RFC9204",
+        "RFC9221",
+        "RFC9287",
+        "RFC9308",
+        "RFC9312",
+        "RFC9368",
+        "RFC9369"
+      ],
+      "group_working_groups": [
+        "quic"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 7,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "2492e4b605f89f225720eb65deac18a0a79393760fee21d839eecb60fa499c46",
+      "origin_id": "rfc-editor:RFC9622",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9622",
+        "title": "An Abstract Application Programming Interface (API) for Transport Services",
+        "publication_year": "2025",
+        "publication_month": "January",
+        "stream": "IETF",
+        "wg_acronym": "taps",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "B. Trammell",
+          "M. Welzl",
+          "R. Enghardt",
+          "G. Fairhurst",
+          "M. Kühlewind",
+          "C. S. Perkins",
+          "P.S. Tiesel",
+          "T. Pauly"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9622",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9622",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9622.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8619,
+          "section": "6.1.5",
+          "type": "Technical",
+          "source_of_rfc": "taps (wit)",
+          "submitted_by": "Ingebrigt Hovind",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-10-30",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8619",
+          "url": "https://errata.rfc-editor.org/eid8619/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-2c7cf303e88e42780d20",
+      "known_update_chain_ids": [
+        "RFC9622"
+      ],
+      "conservative_group_members": [
+        "RFC8095",
+        "RFC8303",
+        "RFC8304",
+        "RFC8922",
+        "RFC8923",
+        "RFC9621",
+        "RFC9622",
+        "RFC9623"
+      ],
+      "group_working_groups": [
+        "taps"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 8,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "24fcd500afa7fdae879ec2eefffed65837cbd607b5689438e7dc2121af7d1beb",
+      "origin_id": "rfc-editor:RFC9711",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9711",
+        "title": "The Entity Attestation Token (EAT)",
+        "publication_year": "2025",
+        "publication_month": "April",
+        "stream": "IETF",
+        "wg_acronym": "rats",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "L. Lundblade",
+          "G. Mandyam",
+          "J. O'Donoghue",
+          "C. Wallace"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9711",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9711",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9711.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8528,
+          "section": "Appendix A",
+          "type": "Technical",
+          "source_of_rfc": "rats (sec)",
+          "submitted_by": "Steven Bellock",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-08-09",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8528",
+          "url": "https://errata.rfc-editor.org/eid8528/"
+        },
+        {
+          "errata_id": 8771,
+          "section": "A.1.7",
+          "type": "Technical",
+          "source_of_rfc": "rats (sec)",
+          "submitted_by": "Steven Bellock",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-02-19",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8771",
+          "url": "https://errata.rfc-editor.org/eid8771/"
+        },
+        {
+          "errata_id": 8776,
+          "section": "7.3.1",
+          "type": "Technical",
+          "source_of_rfc": "rats (sec)",
+          "submitted_by": "Steven Bellock",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-02-20",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8776",
+          "url": "https://errata.rfc-editor.org/eid8776/"
+        },
+        {
+          "errata_id": 8782,
+          "section": "A.1.7",
+          "type": "Technical",
+          "source_of_rfc": "rats (sec)",
+          "submitted_by": "Steven Bellock",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-02-25",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8782",
+          "url": "https://errata.rfc-editor.org/eid8782/"
+        },
+        {
+          "errata_id": 8783,
+          "section": "4.2.3",
+          "type": "Technical",
+          "source_of_rfc": "rats (sec)",
+          "submitted_by": "Steven Bellock",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-02-25",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8783",
+          "url": "https://errata.rfc-editor.org/eid8783/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-5471e686986d5137c1d2",
+      "known_update_chain_ids": [
+        "RFC9711"
+      ],
+      "conservative_group_members": [
+        "RFC9334",
+        "RFC9683",
+        "RFC9684",
+        "RFC9711",
+        "RFC9781",
+        "RFC9782",
+        "RFC9999",
+        "RFC10013"
+      ],
+      "group_working_groups": [
+        "rats"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 9,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "3067a91a96e6e1626f6f598d566a7e2fbbf1ac8d2f3f2170e0e29510a077d6f4",
+      "origin_id": "rfc-editor:RFC8345",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8345",
+        "title": "A YANG Data Model for Network Topologies",
+        "publication_year": "2018",
+        "publication_month": "March",
+        "stream": "IETF",
+        "wg_acronym": "i2rs",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "A. Clemm",
+          "J. Medved",
+          "R. Varga",
+          "N. Bahadur",
+          "H. Ananthakrishnan",
+          "X. Liu"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8345",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8345",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8345.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 6900,
+          "section": "Appendix C",
+          "type": "Technical",
+          "source_of_rfc": "i2rs (rtg)",
+          "submitted_by": "Mohamed Boucadair",
+          "format": "TXT",
+          "reported_at_date": "2022-03-29",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:6900",
+          "url": "https://errata.rfc-editor.org/eid6900/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-dc0a59baf7ce9d316e95",
+      "known_update_chain_ids": [
+        "RFC8345"
+      ],
+      "conservative_group_members": [
+        "RFC7920",
+        "RFC7921",
+        "RFC7922",
+        "RFC7923",
+        "RFC8241",
+        "RFC8242",
+        "RFC8345",
+        "RFC8346",
+        "RFC8430",
+        "RFC8431",
+        "RFC8542",
+        "RFC8944"
+      ],
+      "group_working_groups": [
+        "i2rs"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 10,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "354dcfebfedc20755724ebb078d7fdfa7589cc88ea4e10a6139adac63251755e",
+      "origin_id": "rfc-editor:RFC8972",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8972",
+        "title": "Simple Two-Way Active Measurement Protocol Optional Extensions",
+        "publication_year": "2021",
+        "publication_month": "January",
+        "stream": "IETF",
+        "wg_acronym": "ippm",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "G. Mirsky",
+          "X. Min",
+          "H. Nydell",
+          "R. Foote",
+          "A. Masputra",
+          "E. Ruffini"
+        ],
+        "relations": {
+          "updates": [
+            "RFC8762"
+          ],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8972",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8972",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8972.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8199,
+          "section": "4.4",
+          "type": "Technical",
+          "source_of_rfc": "ippm (ops)",
+          "submitted_by": "William Hawkins",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-12-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8199",
+          "url": "https://errata.rfc-editor.org/eid8199/"
+        },
+        {
+          "errata_id": 8339,
+          "section": "4.7",
+          "type": "Technical",
+          "source_of_rfc": "ippm (ops)",
+          "submitted_by": "William Hawkins",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-03-18",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8339",
+          "url": "https://errata.rfc-editor.org/eid8339/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC8762",
+          "publication_year": "2020",
+          "publication_month": "March",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc8762.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-fd43eacb523354914444",
+      "known_update_chain_ids": [
+        "RFC8762",
+        "RFC8972"
+      ],
+      "conservative_group_members": [
+        "RFC2330",
+        "RFC2679",
+        "RFC2680",
+        "RFC2681",
+        "RFC3148",
+        "RFC3357",
+        "RFC3393",
+        "RFC3432",
+        "RFC3763",
+        "RFC4148",
+        "RFC4656",
+        "RFC4737",
+        "RFC5136",
+        "RFC5357",
+        "RFC5388",
+        "RFC5481",
+        "RFC5560",
+        "RFC5618",
+        "RFC5644",
+        "RFC5835",
+        "RFC5938",
+        "RFC6038",
+        "RFC6049",
+        "RFC6248",
+        "RFC6349",
+        "RFC6534",
+        "RFC6576",
+        "RFC6673",
+        "RFC6703",
+        "RFC6802",
+        "RFC6808",
+        "RFC7290",
+        "RFC7312",
+        "RFC7398",
+        "RFC7497",
+        "RFC7679",
+        "RFC7680",
+        "RFC7717",
+        "RFC7718",
+        "RFC7750",
+        "RFC7799",
+        "RFC7820",
+        "RFC8186",
+        "RFC8250",
+        "RFC8321",
+        "RFC8337",
+        "RFC8468",
+        "RFC8545",
+        "RFC8762",
+        "RFC8889",
+        "RFC8911",
+        "RFC8912",
+        "RFC8913",
+        "RFC8972",
+        "RFC9097",
+        "RFC9197",
+        "RFC9198",
+        "RFC9322",
+        "RFC9326",
+        "RFC9341",
+        "RFC9342",
+        "RFC9359",
+        "RFC9378",
+        "RFC9486",
+        "RFC9503",
+        "RFC9506",
+        "RFC9533",
+        "RFC9534",
+        "RFC9544",
+        "RFC9617",
+        "RFC9946",
+        "RFC10052"
+      ],
+      "group_working_groups": [
+        "ippm"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 11,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "4c31bf27b8d19d398ad9831daddeff7634a28a4e198d2807fa3893256ed7a47a",
+      "origin_id": "rfc-editor:RFC9793",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9793",
+        "title": "BGP Extensions for Bit Index Explicit Replication (BIER)",
+        "publication_year": "2025",
+        "publication_month": "June",
+        "stream": "IETF",
+        "wg_acronym": "bier",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "X. Xu",
+          "M. Chen",
+          "K. Patel",
+          "IJ. Wijnands",
+          "T. Przygienda",
+          "Z. Zhang"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9793",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9793",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9793.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8463,
+          "section": "6",
+          "type": "Technical",
+          "source_of_rfc": "bier (rtg)",
+          "submitted_by": "Haibo Wang",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-06-17",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8463",
+          "url": "https://errata.rfc-editor.org/eid8463/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-d939fc2dde6fdd99eb5f",
+      "known_update_chain_ids": [
+        "RFC9793"
+      ],
+      "conservative_group_members": [
+        "RFC8279",
+        "RFC8296",
+        "RFC8401",
+        "RFC8444",
+        "RFC8556",
+        "RFC9262",
+        "RFC9272",
+        "RFC9624",
+        "RFC9793",
+        "RFC9974"
+      ],
+      "group_working_groups": [
+        "bier"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 12,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "4c50e675780841693b435da53870a5eeded085119805295ea7c055abfa33fc87",
+      "origin_id": "rfc-editor:RFC8949",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8949",
+        "title": "Concise Binary Object Representation (CBOR)",
+        "publication_year": "2020",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "cbor",
+        "current_status": "INTERNET STANDARD",
+        "authors": [
+          "C. Bormann",
+          "P. Hoffman"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC7049"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8949",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8949",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8949.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8589,
+          "section": "5.6.1",
+          "type": "Technical",
+          "source_of_rfc": "cbor (art)",
+          "submitted_by": "Joe Hildebrand",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-10-01",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8589",
+          "url": "https://errata.rfc-editor.org/eid8589/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC7049",
+          "publication_year": "2013",
+          "publication_month": "October",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc7049.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-df4989cfa9c1ef850be6",
+      "known_update_chain_ids": [
+        "RFC7049",
+        "RFC8949"
+      ],
+      "conservative_group_members": [
+        "RFC7049",
+        "RFC8610",
+        "RFC8742",
+        "RFC8746",
+        "RFC8943",
+        "RFC8949",
+        "RFC9090",
+        "RFC9164",
+        "RFC9165",
+        "RFC9277",
+        "RFC9581",
+        "RFC9682",
+        "RFC9741"
+      ],
+      "group_working_groups": [
+        "cbor"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 13,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "4e28debaed93a2fe8a204194d16f0a018b029bacec397fc58e65ae114204ee4b",
+      "origin_id": "rfc-editor:RFC7644",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7644",
+        "title": "System for Cross-domain Identity Management: Protocol",
+        "publication_year": "2015",
+        "publication_month": "September",
+        "stream": "IETF",
+        "wg_acronym": "scim",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "P. Hunt",
+          "K. Grizzle",
+          "M. Ansari",
+          "E. Wahlstroem",
+          "C. Mortimore"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [
+            "RFC9865",
+            "RFC9967"
+          ],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7644",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7644",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7644.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7916,
+          "section": "3.7.3",
+          "type": "Technical",
+          "source_of_rfc": "scim (sec)",
+          "submitted_by": "Francois LASNE",
+          "format": "TXT",
+          "reported_at_date": "2024-04-29",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7916",
+          "url": "https://errata.rfc-editor.org/eid7916/"
+        },
+        {
+          "errata_id": 8096,
+          "section": "3.5.2.1",
+          "type": "Technical",
+          "source_of_rfc": "scim (sec)",
+          "submitted_by": "Siqing Zheng",
+          "format": "TXT",
+          "reported_at_date": "2024-09-07",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8096",
+          "url": "https://errata.rfc-editor.org/eid8096/"
+        },
+        {
+          "errata_id": 8365,
+          "section": "4",
+          "type": "Technical",
+          "source_of_rfc": "scim (sec)",
+          "submitted_by": "Matthias Winter",
+          "format": "TXT",
+          "reported_at_date": "2025-04-01",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8365",
+          "url": "https://errata.rfc-editor.org/eid8365/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC9865",
+          "publication_year": "2025",
+          "publication_month": "October",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9865.txt"
+        },
+        {
+          "rfc_id": "RFC9967",
+          "publication_year": "2026",
+          "publication_month": "May",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9967.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-643bcf2ca489466f4bbb",
+      "known_update_chain_ids": [
+        "RFC7643",
+        "RFC7644",
+        "RFC9865",
+        "RFC9967"
+      ],
+      "conservative_group_members": [
+        "RFC7642",
+        "RFC7643",
+        "RFC7644",
+        "RFC9865",
+        "RFC9944",
+        "RFC9967"
+      ],
+      "group_working_groups": [
+        "scim"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 14,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "529bb6d18316aa974ada5f80b6b37c5aad47814593fcda95542bbf427614b6f9",
+      "origin_id": "rfc-editor:RFC8765",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8765",
+        "title": "DNS Push Notifications",
+        "publication_year": "2020",
+        "publication_month": "June",
+        "stream": "IETF",
+        "wg_acronym": "dnssd",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "T. Pusateri",
+          "S. Cheshire"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8765",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8765",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8765.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8560,
+          "section": "6.5",
+          "type": "Technical",
+          "source_of_rfc": "dnssd (int)",
+          "submitted_by": "Ilya Kulakov",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-08-31",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8560",
+          "url": "https://errata.rfc-editor.org/eid8560/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-e9059df934077d27f5a3",
+      "known_update_chain_ids": [
+        "RFC8765"
+      ],
+      "conservative_group_members": [
+        "RFC7558",
+        "RFC8222",
+        "RFC8765",
+        "RFC8766",
+        "RFC8882",
+        "RFC9664",
+        "RFC9665",
+        "RFC10029"
+      ],
+      "group_working_groups": [
+        "dnssd"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 15,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "62b3d3911462ccc4db17f8a6d008843876a2d5f3aec2efca5d7741e43d587ff1",
+      "origin_id": "rfc-editor:RFC8995",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8995",
+        "title": "Bootstrapping Remote Secure Key Infrastructure (BRSKI)",
+        "publication_year": "2021",
+        "publication_month": "May",
+        "stream": "IETF",
+        "wg_acronym": "anima",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "M. Pritikin",
+          "M. Richardson",
+          "T. Eckert",
+          "M. Behringer",
+          "K. Watsen"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8995",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8995",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8995.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 6716,
+          "section": "5.8.3",
+          "type": "Technical",
+          "source_of_rfc": "anima (ops)",
+          "submitted_by": "Max Pritikin",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2021-10-19",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:6716",
+          "url": "https://errata.rfc-editor.org/eid6716/"
+        },
+        {
+          "errata_id": 6834,
+          "section": "8.5",
+          "type": "Technical",
+          "source_of_rfc": "anima (ops)",
+          "submitted_by": "Esko Dijk",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2022-02-03",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:6834",
+          "url": "https://errata.rfc-editor.org/eid6834/"
+        },
+        {
+          "errata_id": 7576,
+          "section": "4.3",
+          "type": "Technical",
+          "source_of_rfc": "anima (ops)",
+          "submitted_by": "Michael Richardson",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2023-07-26",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7576",
+          "url": "https://errata.rfc-editor.org/eid7576/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-228411d916c23ec8c433",
+      "known_update_chain_ids": [
+        "RFC8995"
+      ],
+      "conservative_group_members": [
+        "RFC8366",
+        "RFC8368",
+        "RFC8990",
+        "RFC8991",
+        "RFC8992",
+        "RFC8993",
+        "RFC8994",
+        "RFC8995",
+        "RFC9222",
+        "RFC9733"
+      ],
+      "group_working_groups": [
+        "anima"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 16,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "647ccc0f35c3c568d91e98787793df27c3aac3108003537c9314234452c8d801",
+      "origin_id": "rfc-editor:RFC8259",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8259",
+        "title": "The JavaScript Object Notation (JSON) Data Interchange Format",
+        "publication_year": "2017",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "jsonbis",
+        "current_status": "INTERNET STANDARD",
+        "authors": [
+          "T. Bray"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC7159"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8259",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8259",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8259.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7383,
+          "section": "3. Values",
+          "type": "Technical",
+          "source_of_rfc": "jsonbis (art)",
+          "submitted_by": "Daniel Tegründe",
+          "format": "TXT",
+          "reported_at_date": "2023-03-12",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7383",
+          "url": "https://errata.rfc-editor.org/eid7383/"
+        },
+        {
+          "errata_id": 7600,
+          "section": "6",
+          "type": "Technical",
+          "source_of_rfc": "jsonbis (art)",
+          "submitted_by": "Guillaume Fortin-Debigaré",
+          "format": "TXT",
+          "reported_at_date": "2023-08-11",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7600",
+          "url": "https://errata.rfc-editor.org/eid7600/"
+        },
+        {
+          "errata_id": 7603,
+          "section": "1",
+          "type": "Technical",
+          "source_of_rfc": "jsonbis (art)",
+          "submitted_by": "Guillaume Fortin-Debigaré",
+          "format": "TXT",
+          "reported_at_date": "2023-08-13",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7603",
+          "url": "https://errata.rfc-editor.org/eid7603/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC7159",
+          "publication_year": "2014",
+          "publication_month": "March",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc7159.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-248412b80c4891d9d1c1",
+      "known_update_chain_ids": [
+        "RFC4627",
+        "RFC7158",
+        "RFC7159",
+        "RFC8259"
+      ],
+      "conservative_group_members": [
+        "RFC4627",
+        "RFC7158",
+        "RFC7159",
+        "RFC7464",
+        "RFC7493",
+        "RFC8259"
+      ],
+      "group_working_groups": [
+        "json",
+        "jsonbis"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 17,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "65bb382d17e9e57f1b1701cad985ff188125d1631be74397ae0fd428d8473dd3",
+      "origin_id": "rfc-editor:RFC8620",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8620",
+        "title": "The JSON Meta Application Protocol (JMAP)",
+        "publication_year": "2019",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "jmap",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "N. Jenkins",
+          "C. Newman"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [
+            "RFC9404",
+            "RFC9670"
+          ],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8620",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8620",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8620.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5791,
+          "section": "2.1",
+          "type": "Technical",
+          "source_of_rfc": "jmap (art)",
+          "submitted_by": "Neil Jhaveri",
+          "format": "TXT",
+          "reported_at_date": "2019-07-02",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5791",
+          "url": "https://errata.rfc-editor.org/eid5791/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC9404",
+          "publication_year": "2023",
+          "publication_month": "August",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9404.txt"
+        },
+        {
+          "rfc_id": "RFC9670",
+          "publication_year": "2024",
+          "publication_month": "November",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9670.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-5652b41a0716586e01d0",
+      "known_update_chain_ids": [
+        "RFC8620",
+        "RFC9404",
+        "RFC9670"
+      ],
+      "conservative_group_members": [
+        "RFC5788",
+        "RFC8620",
+        "RFC8621",
+        "RFC8887",
+        "RFC9007",
+        "RFC9219",
+        "RFC9404",
+        "RFC9425",
+        "RFC9610",
+        "RFC9661",
+        "RFC9670",
+        "RFC9749"
+      ],
+      "group_working_groups": [
+        "jmap"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 18,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "69a5fd63477a297a13bb5cb752961f3eea8385b04b09fa6741d09cbe93d1b40d",
+      "origin_id": "rfc-editor:RFC7940",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7940",
+        "title": "Representing Label Generation Rulesets Using XML",
+        "publication_year": "2016",
+        "publication_month": "August",
+        "stream": "IETF",
+        "wg_acronym": "lager",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "K. Davies",
+          "A. Freytag"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7940",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7940",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7940.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5986,
+          "section": "6.3.1",
+          "type": "Technical",
+          "source_of_rfc": "lager (art)",
+          "submitted_by": "KIM Kyongsok",
+          "format": "TXT",
+          "reported_at_date": "2020-02-22",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5986",
+          "url": "https://errata.rfc-editor.org/eid5986/"
+        },
+        {
+          "errata_id": 8409,
+          "section": "6.4.3.",
+          "type": "Technical",
+          "source_of_rfc": "lager (art)",
+          "submitted_by": "Julien Bernard",
+          "format": "TXT",
+          "reported_at_date": "2025-05-07",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8409",
+          "url": "https://errata.rfc-editor.org/eid8409/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-622ee7a37a54e118caad",
+      "known_update_chain_ids": [
+        "RFC7940"
+      ],
+      "conservative_group_members": [
+        "RFC7940"
+      ],
+      "group_working_groups": [
+        "lager"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 19,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "6d666fd010b83d3e1b39e52f72185708ad95deae36957f3a75e9233cc5f07ec5",
+      "origin_id": "rfc-editor:RFC8824",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8824",
+        "title": "Static Context Header Compression (SCHC) for the Constrained Application Protocol (CoAP)",
+        "publication_year": "2021",
+        "publication_month": "June",
+        "stream": "IETF",
+        "wg_acronym": "lpwan",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "A. Minaburo",
+          "L. Toutain",
+          "R. Andreasen"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8824",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8824",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8824.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7389,
+          "section": "3.1",
+          "type": "Technical",
+          "source_of_rfc": "lpwan (int)",
+          "submitted_by": "Marco Tiloca",
+          "format": "TXT, PDF",
+          "reported_at_date": "2023-03-19",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7389",
+          "url": "https://errata.rfc-editor.org/eid7389/"
+        },
+        {
+          "errata_id": 7397,
+          "section": "7.2",
+          "type": "Technical",
+          "source_of_rfc": "lpwan (int)",
+          "submitted_by": "Marco Tiloca",
+          "format": "TXT, PDF",
+          "reported_at_date": "2023-03-19",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7397",
+          "url": "https://errata.rfc-editor.org/eid7397/"
+        },
+        {
+          "errata_id": 8270,
+          "section": "7.3",
+          "type": "Technical",
+          "source_of_rfc": "lpwan (int)",
+          "submitted_by": "Marco Tiloca",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-01-29",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8270",
+          "url": "https://errata.rfc-editor.org/eid8270/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-324654c82057f325a9ab",
+      "known_update_chain_ids": [
+        "RFC8824"
+      ],
+      "conservative_group_members": [
+        "RFC8376",
+        "RFC8724",
+        "RFC8824",
+        "RFC9011",
+        "RFC9363",
+        "RFC9391",
+        "RFC9441",
+        "RFC9442"
+      ],
+      "group_working_groups": [
+        "lpwan"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 20,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "751cffbcd0109ba0223cc3829e0ae0035a4eebdf07377d541cebfd68b54d10ad",
+      "origin_id": "rfc-editor:RFC8360",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8360",
+        "title": "Resource Public Key Infrastructure (RPKI) Validation Reconsidered",
+        "publication_year": "2018",
+        "publication_month": "April",
+        "stream": "IETF",
+        "wg_acronym": "sidr",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "G. Huston",
+          "G. Michaelson",
+          "C. Martinez",
+          "T. Bruijnzeels",
+          "A. Newton",
+          "D. Shaw"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8360",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8360",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8360.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5638,
+          "section": "4.2.4.4",
+          "type": "Technical",
+          "source_of_rfc": "sidr (rtg)",
+          "submitted_by": "Alberto Leiva Popper",
+          "format": "TXT",
+          "reported_at_date": "2019-02-13",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5638",
+          "url": "https://errata.rfc-editor.org/eid5638/"
+        },
+        {
+          "errata_id": 5870,
+          "section": "4.2.3",
+          "type": "Technical",
+          "source_of_rfc": "sidr (rtg)",
+          "submitted_by": "Russ Housley",
+          "format": "TXT",
+          "reported_at_date": "2019-10-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5870",
+          "url": "https://errata.rfc-editor.org/eid5870/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-2795c8af0172eb6ec4ec",
+      "known_update_chain_ids": [
+        "RFC8360"
+      ],
+      "conservative_group_members": [
+        "RFC2280",
+        "RFC2622",
+        "RFC2650",
+        "RFC2725",
+        "RFC2726",
+        "RFC2754",
+        "RFC2769",
+        "RFC4012",
+        "RFC6254",
+        "RFC6480",
+        "RFC6481",
+        "RFC6482",
+        "RFC6483",
+        "RFC6484",
+        "RFC6485",
+        "RFC6486",
+        "RFC6487",
+        "RFC6488",
+        "RFC6489",
+        "RFC6490",
+        "RFC6491",
+        "RFC6492",
+        "RFC6493",
+        "RFC6810",
+        "RFC6811",
+        "RFC6907",
+        "RFC6916",
+        "RFC6945",
+        "RFC7115",
+        "RFC7128",
+        "RFC7132",
+        "RFC7318",
+        "RFC7353",
+        "RFC7382",
+        "RFC7730",
+        "RFC7909",
+        "RFC7935",
+        "RFC8097",
+        "RFC8181",
+        "RFC8182",
+        "RFC8183",
+        "RFC8205",
+        "RFC8206",
+        "RFC8207",
+        "RFC8208",
+        "RFC8209",
+        "RFC8210",
+        "RFC8211",
+        "RFC8360",
+        "RFC8416",
+        "RFC8481",
+        "RFC8488",
+        "RFC8608",
+        "RFC8630",
+        "RFC8634",
+        "RFC8635",
+        "RFC8893",
+        "RFC8897",
+        "RFC9255",
+        "RFC9286",
+        "RFC9319",
+        "RFC9323",
+        "RFC9324",
+        "RFC9455",
+        "RFC9582",
+        "RFC9589",
+        "RFC9674",
+        "RFC9691",
+        "RFC9697",
+        "RFC9829",
+        "RFC9981"
+      ],
+      "group_working_groups": [
+        "rps",
+        "sidr",
+        "sidrops"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 21,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "76d304855883f03a63d081eed72a586a0e98315dac11bf0ca7683a1a2143a88f",
+      "origin_id": "rfc-editor:RFC8466",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8466",
+        "title": "A YANG Data Model for Layer 2 Virtual Private Network (L2VPN) Service Delivery",
+        "publication_year": "2018",
+        "publication_month": "October",
+        "stream": "IETF",
+        "wg_acronym": "l2sm",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "B. Wen",
+          "G. Fioccola",
+          "C. Xie",
+          "L. Jalil"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8466",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8466",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8466.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5615,
+          "section": "5.10.1",
+          "type": "Technical",
+          "source_of_rfc": "l2sm (ops)",
+          "submitted_by": "Nikolai Malykh",
+          "format": "TXT",
+          "reported_at_date": "2019-01-28",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5615",
+          "url": "https://errata.rfc-editor.org/eid5615/"
+        },
+        {
+          "errata_id": 6922,
+          "section": "5.5.2.1",
+          "type": "Technical",
+          "source_of_rfc": "l2sm (ops)",
+          "submitted_by": "Mohamed Boucadair",
+          "format": "TXT",
+          "reported_at_date": "2022-04-05",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:6922",
+          "url": "https://errata.rfc-editor.org/eid6922/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-92f1fe13e4901a89edd8",
+      "known_update_chain_ids": [
+        "RFC8466"
+      ],
+      "conservative_group_members": [
+        "RFC8466"
+      ],
+      "group_working_groups": [
+        "l2sm"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 22,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "8250dcbd3b9a8fa272c72cce005de676ab2139a5f94b2e38c1bf36c10ce64d5b",
+      "origin_id": "rfc-editor:RFC9132",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9132",
+        "title": "Distributed Denial-of-Service Open Threat Signaling (DOTS) Signal Channel Specification",
+        "publication_year": "2021",
+        "publication_month": "September",
+        "stream": "IETF",
+        "wg_acronym": "dots",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "M. Boucadair",
+          "J. Shallow",
+          "T. Reddy.K"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC8782"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9132",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9132",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9132.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7058,
+          "section": "5.3",
+          "type": "Technical",
+          "source_of_rfc": "dots (sec)",
+          "submitted_by": "Jan Lindblad",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2022-07-29",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7058",
+          "url": "https://errata.rfc-editor.org/eid7058/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC8782",
+          "publication_year": "2020",
+          "publication_month": "May",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc8782.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-03ff5f0c4b877b32f47d",
+      "known_update_chain_ids": [
+        "RFC8782",
+        "RFC9132"
+      ],
+      "conservative_group_members": [
+        "RFC8612",
+        "RFC8782",
+        "RFC8783",
+        "RFC8811",
+        "RFC8903",
+        "RFC8973",
+        "RFC9066",
+        "RFC9132",
+        "RFC9133",
+        "RFC9244",
+        "RFC9284",
+        "RFC9362",
+        "RFC9387"
+      ],
+      "group_working_groups": [
+        "dots"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 23,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "82f88d5046d34c83fa1ae176d3a4dea485efbeab7a16a8cf496d4b62f90f82ad",
+      "origin_id": "rfc-editor:RFC8794",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8794",
+        "title": "Extensible Binary Meta Language",
+        "publication_year": "2020",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "cellar",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "S. Lhomme",
+          "D. Rice",
+          "M. Bunkus"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [
+            "RFC9559"
+          ],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8794",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8794",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8794.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7189,
+          "section": "17.1.",
+          "type": "Technical",
+          "source_of_rfc": "cellar (art)",
+          "submitted_by": "Steve Lhomme",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2022-10-30",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7189",
+          "url": "https://errata.rfc-editor.org/eid7189/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC9559",
+          "publication_year": "2024",
+          "publication_month": "October",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc9559.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-5e808ddbdb7c281c801d",
+      "known_update_chain_ids": [
+        "RFC8794",
+        "RFC9559"
+      ],
+      "conservative_group_members": [
+        "RFC8794",
+        "RFC9043",
+        "RFC9559",
+        "RFC9639"
+      ],
+      "group_working_groups": [
+        "cellar"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 24,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "835cf1d645f4bf4a2e72b2d901fb24a3c49de7625eb4b6038b5e9302feec5118",
+      "origin_id": "rfc-editor:RFC9493",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9493",
+        "title": "Subject Identifiers for Security Event Tokens",
+        "publication_year": "2023",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "secevent",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "A. Backman",
+          "M. Scurtescu",
+          "P. Jain"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9493",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9493",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9493.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7727,
+          "section": "GLOBAL",
+          "type": "Technical",
+          "source_of_rfc": "secevent (sec)",
+          "submitted_by": "Atul Tulshibagwale",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2023-12-11",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7727",
+          "url": "https://errata.rfc-editor.org/eid7727/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-a5b140887bfda16fc148",
+      "known_update_chain_ids": [
+        "RFC9493"
+      ],
+      "conservative_group_members": [
+        "RFC8417",
+        "RFC8935",
+        "RFC8936",
+        "RFC9493"
+      ],
+      "group_working_groups": [
+        "secevent"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 25,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "887f1dfe3adf60ce4da164e7c82cd5373ddaba833502ceec8441b2f7785dc7e8",
+      "origin_id": "rfc-editor:RFC9115",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9115",
+        "title": "An Automatic Certificate Management Environment (ACME) Profile for Generating Delegated Certificates",
+        "publication_year": "2021",
+        "publication_month": "September",
+        "stream": "IETF",
+        "wg_acronym": "acme",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "Y. Sheffer",
+          "D. López",
+          "A. Pastor Perales",
+          "T. Fossati"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9115",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9115",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9115.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7336,
+          "section": "Appendix A",
+          "type": "Technical",
+          "source_of_rfc": "acme (sec)",
+          "submitted_by": "Carsten Bormann",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2023-02-06",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7336",
+          "url": "https://errata.rfc-editor.org/eid7336/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-17a12c274f3d3c30e554",
+      "known_update_chain_ids": [
+        "RFC9115"
+      ],
+      "conservative_group_members": [
+        "RFC8555",
+        "RFC8657",
+        "RFC8737",
+        "RFC8738",
+        "RFC8739",
+        "RFC8823",
+        "RFC9115",
+        "RFC9444",
+        "RFC9447",
+        "RFC9448",
+        "RFC9773",
+        "RFC9799",
+        "RFC9891"
+      ],
+      "group_working_groups": [
+        "acme"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 26,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "8e780d378ee51860bfea7c3a88cc8b292c0642821fed76c77f1c8e93cce92cc4",
+      "origin_id": "rfc-editor:RFC7584",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7584",
+        "title": "Session Traversal Utilities for NAT (STUN) Message Handling for SIP Back-to-Back User Agents (B2BUAs)",
+        "publication_year": "2015",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "straw",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "R. Ravindranath",
+          "T. Reddy",
+          "G. Salgueiro"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7584",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7584",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7584.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4413,
+          "section": "4.4",
+          "type": "Technical",
+          "source_of_rfc": "straw (art)",
+          "submitted_by": "Brett Tate",
+          "format": "TXT",
+          "reported_at_date": "2015-07-10",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4413",
+          "url": "https://errata.rfc-editor.org/eid4413/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-5fb32d973d4c81f7d9e6",
+      "known_update_chain_ids": [
+        "RFC7584"
+      ],
+      "conservative_group_members": [
+        "RFC7092",
+        "RFC7332",
+        "RFC7403",
+        "RFC7584",
+        "RFC7879",
+        "RFC8079"
+      ],
+      "group_working_groups": [
+        "straw"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 27,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "8f16f64694242f8eaa2a69c90a19d90190a44af32bc6b56d384bc2274c1409d0",
+      "origin_id": "rfc-editor:RFC9605",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9605",
+        "title": "Secure Frame (SFrame): Lightweight Authenticated Encryption for Real-Time Media",
+        "publication_year": "2024",
+        "publication_month": "August",
+        "stream": "IETF",
+        "wg_acronym": "sframe",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "E. Omara",
+          "J. Uberti",
+          "S. G. Murillo",
+          "R. Barnes",
+          "Y. Fablet"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9605",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9605",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9605.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8321,
+          "section": "4.4.3",
+          "type": "Technical",
+          "source_of_rfc": "sframe (art)",
+          "submitted_by": "Rich Logan",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-03-03",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8321",
+          "url": "https://errata.rfc-editor.org/eid8321/"
+        },
+        {
+          "errata_id": 8565,
+          "section": "4.5.1",
+          "type": "Technical",
+          "source_of_rfc": "sframe (art)",
+          "submitted_by": "Richard Barnes",
+          "format": "TXT, HTML",
+          "reported_at_date": "2025-09-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8565",
+          "url": "https://errata.rfc-editor.org/eid8565/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-618d4d1e8a4c5bc5d34f",
+      "known_update_chain_ids": [
+        "RFC9605"
+      ],
+      "conservative_group_members": [
+        "RFC9605"
+      ],
+      "group_working_groups": [
+        "sframe"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 28,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "9537e3908e0a3f15e2c9993857b53c028f1d2290118bbca37d42bfe4a990df8c",
+      "origin_id": "rfc-editor:RFC7574",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7574",
+        "title": "Peer-to-Peer Streaming Peer Protocol (PPSPP)",
+        "publication_year": "2015",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "ppsp",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "A. Bakker",
+          "R. Petrocco",
+          "V. Grishchenko"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7574",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7574",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7574.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4724,
+          "section": "1.3",
+          "type": "Technical",
+          "source_of_rfc": "ppsp (tsv)",
+          "submitted_by": "Sung Hei Kim, Chang Kyu Lee",
+          "format": "TXT",
+          "reported_at_date": "2016-07-01",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4724",
+          "url": "https://errata.rfc-editor.org/eid4724/"
+        },
+        {
+          "errata_id": 4725,
+          "section": "5",
+          "type": "Technical",
+          "source_of_rfc": "ppsp (tsv)",
+          "submitted_by": "Sung Hei Kim, Chang Kyu Lee",
+          "format": "TXT",
+          "reported_at_date": "2016-07-01",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4725",
+          "url": "https://errata.rfc-editor.org/eid4725/"
+        },
+        {
+          "errata_id": 4726,
+          "section": "6.1",
+          "type": "Technical",
+          "source_of_rfc": "ppsp (tsv)",
+          "submitted_by": "Sung Hei Kim, Chang Kyu Lee",
+          "format": "TXT",
+          "reported_at_date": "2016-07-01",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4726",
+          "url": "https://errata.rfc-editor.org/eid4726/"
+        },
+        {
+          "errata_id": 4880,
+          "section": "7.5",
+          "type": "Technical",
+          "source_of_rfc": "ppsp (tsv)",
+          "submitted_by": "Sung Hei Kim, Chang Kyu Lee",
+          "format": "TXT",
+          "reported_at_date": "2016-12-07",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4880",
+          "url": "https://errata.rfc-editor.org/eid4880/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-7fbfc2979f0b61fbc7df",
+      "known_update_chain_ids": [
+        "RFC7574"
+      ],
+      "conservative_group_members": [
+        "RFC6972",
+        "RFC7574",
+        "RFC7846"
+      ],
+      "group_working_groups": [
+        "ppsp"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 29,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "a0fea09d2f53f33e7459384fc93130cbf1756376819ff5e9b2f81992316fe292",
+      "origin_id": "rfc-editor:RFC7788",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7788",
+        "title": "Home Networking Control Protocol",
+        "publication_year": "2016",
+        "publication_month": "April",
+        "stream": "IETF",
+        "wg_acronym": "homenet",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "M. Stenberg",
+          "S. Barth",
+          "P. Pfister"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [
+            "RFC8375"
+          ],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7788",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7788",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7788.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4677,
+          "section": "8",
+          "type": "Technical",
+          "source_of_rfc": "homenet (int)",
+          "submitted_by": "Tim Wicinski",
+          "format": "TXT",
+          "reported_at_date": "2016-04-26",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4677",
+          "url": "https://errata.rfc-editor.org/eid4677/"
+        },
+        {
+          "errata_id": 5021,
+          "section": "",
+          "type": "Technical",
+          "source_of_rfc": "homenet (int)",
+          "submitted_by": "Dirk Feytons",
+          "format": "TXT",
+          "reported_at_date": "2017-05-19",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5021",
+          "url": "https://errata.rfc-editor.org/eid5021/"
+        },
+        {
+          "errata_id": 5113,
+          "section": "10",
+          "type": "Technical",
+          "source_of_rfc": "homenet (int)",
+          "submitted_by": "Denis Ovsienko",
+          "format": "TXT",
+          "reported_at_date": "2017-09-13",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5113",
+          "url": "https://errata.rfc-editor.org/eid5113/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC8375",
+          "publication_year": "2018",
+          "publication_month": "May",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc8375.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-6f75860d9f29958f1551",
+      "known_update_chain_ids": [
+        "RFC7788",
+        "RFC8375"
+      ],
+      "conservative_group_members": [
+        "RFC7368",
+        "RFC7695",
+        "RFC7787",
+        "RFC7788",
+        "RFC8375",
+        "RFC9080",
+        "RFC9526",
+        "RFC9527"
+      ],
+      "group_working_groups": [
+        "homenet"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 30,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "a32650eeed3bae341d0ac66f0a58b063c44662b25a35a174c8ca7bfe66d0e870",
+      "origin_id": "rfc-editor:RFC8678",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8678",
+        "title": "Enterprise Multihoming using Provider-Assigned IPv6 Addresses without Network Prefix Translation: Requirements and Solutions",
+        "publication_year": "2019",
+        "publication_month": "December",
+        "stream": "IETF",
+        "wg_acronym": "rtgwg",
+        "current_status": "INFORMATIONAL",
+        "authors": [
+          "F. Baker",
+          "C. Bowers",
+          "J. Linkova"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8678",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8678",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8678.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8124,
+          "section": "6.3.2",
+          "type": "Technical",
+          "source_of_rfc": "rtgwg (rtg)",
+          "submitted_by": "Scott Shambarger",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-09-28",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8124",
+          "url": "https://errata.rfc-editor.org/eid8124/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-f18522674cf0744d5c3f",
+      "known_update_chain_ids": [
+        "RFC8678"
+      ],
+      "conservative_group_members": [
+        "RFC2338",
+        "RFC2787",
+        "RFC3682",
+        "RFC3768",
+        "RFC3906",
+        "RFC5082",
+        "RFC5286",
+        "RFC5714",
+        "RFC5715",
+        "RFC5798",
+        "RFC6527",
+        "RFC6571",
+        "RFC6976",
+        "RFC6981",
+        "RFC7226",
+        "RFC7431",
+        "RFC7490",
+        "RFC7811",
+        "RFC7812",
+        "RFC7916",
+        "RFC7938",
+        "RFC8102",
+        "RFC8177",
+        "RFC8294",
+        "RFC8333",
+        "RFC8347",
+        "RFC8405",
+        "RFC8518",
+        "RFC8529",
+        "RFC8530",
+        "RFC8541",
+        "RFC8678",
+        "RFC8695",
+        "RFC9067",
+        "RFC9403",
+        "RFC9568",
+        "RFC9855"
+      ],
+      "group_working_groups": [
+        "rtgwg",
+        "vrrp"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 31,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "a6767d2d46bcc4a24c65aa28aeb9f9365d238eceb5cb24c1c3df89171217ddf5",
+      "origin_id": "rfc-editor:RFC9303",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9303",
+        "title": "Locator/ID Separation Protocol Security (LISP-SEC)",
+        "publication_year": "2022",
+        "publication_month": "October",
+        "stream": "IETF",
+        "wg_acronym": "lisp",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "F. Maino",
+          "V. Ermagan",
+          "A. Cabellos",
+          "D. Saucez"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9303",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9303",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9303.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7423,
+          "section": "6.9",
+          "type": "Technical",
+          "source_of_rfc": "lisp (rtg)",
+          "submitted_by": "Nikolai Malykh",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2023-04-15",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7423",
+          "url": "https://errata.rfc-editor.org/eid7423/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-f55d5e3009ad110f5c6e",
+      "known_update_chain_ids": [
+        "RFC9303"
+      ],
+      "conservative_group_members": [
+        "RFC6830",
+        "RFC6831",
+        "RFC6832",
+        "RFC6833",
+        "RFC6834",
+        "RFC6835",
+        "RFC6836",
+        "RFC7052",
+        "RFC7215",
+        "RFC7834",
+        "RFC7835",
+        "RFC7954",
+        "RFC7955",
+        "RFC8060",
+        "RFC8061",
+        "RFC8111",
+        "RFC8113",
+        "RFC8378",
+        "RFC9299",
+        "RFC9300",
+        "RFC9301",
+        "RFC9302",
+        "RFC9303",
+        "RFC9304",
+        "RFC9305",
+        "RFC9306",
+        "RFC9437",
+        "RFC9735",
+        "RFC10040"
+      ],
+      "group_working_groups": [
+        "lisp"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 32,
+      "role": "T0_PRIMARY_METADATA_RESERVATION",
+      "selection_hash": "ada077ae0a9735f08f76d4c652fc8f161410c56e47722a7e884ce4a53d54d017",
+      "origin_id": "rfc-editor:RFC8881",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC8881",
+        "title": "Network File System (NFS) Version 4 Minor Version 1 Protocol",
+        "publication_year": "2020",
+        "publication_month": "August",
+        "stream": "IETF",
+        "wg_acronym": "nfsv4",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "D. Noveck",
+          "C. Lever"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC5661"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC8881",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc8881",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc8881.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7386,
+          "section": "18.46.3.",
+          "type": "Technical",
+          "source_of_rfc": "nfsv4 (wit)",
+          "submitted_by": "Pali Rohár",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2023-03-13",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7386",
+          "url": "https://errata.rfc-editor.org/eid7386/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC5661",
+          "publication_year": "2010",
+          "publication_month": "January",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc5661.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-08db0207c1e42e2ceebd",
+      "known_update_chain_ids": [
+        "RFC5661",
+        "RFC7862",
+        "RFC8178",
+        "RFC8434",
+        "RFC8881"
+      ],
+      "conservative_group_members": [
+        "RFC1831",
+        "RFC1832",
+        "RFC1833",
+        "RFC2203",
+        "RFC2623",
+        "RFC2624",
+        "RFC2695",
+        "RFC3010",
+        "RFC3530",
+        "RFC4506",
+        "RFC5403",
+        "RFC5531",
+        "RFC5532",
+        "RFC5661",
+        "RFC5662",
+        "RFC5663",
+        "RFC5664",
+        "RFC5665",
+        "RFC5666",
+        "RFC5667",
+        "RFC5716",
+        "RFC6641",
+        "RFC6688",
+        "RFC7204",
+        "RFC7530",
+        "RFC7531",
+        "RFC7532",
+        "RFC7533",
+        "RFC7569",
+        "RFC7861",
+        "RFC7862",
+        "RFC7863",
+        "RFC7931",
+        "RFC8000",
+        "RFC8154",
+        "RFC8166",
+        "RFC8167",
+        "RFC8178",
+        "RFC8267",
+        "RFC8275",
+        "RFC8276",
+        "RFC8434",
+        "RFC8435",
+        "RFC8587",
+        "RFC8797",
+        "RFC8881",
+        "RFC9289",
+        "RFC9561",
+        "RFC9737",
+        "RFC9754",
+        "RFC9766"
+      ],
+      "group_working_groups": [
+        "nfsv4",
+        "oncrpc"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 33,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "adba7a6b74ae7b832b86e3870ab1ead8c1aa321c26565a0b65e76699fadba59f",
+      "origin_id": "rfc-editor:RFC7430",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7430",
+        "title": "Analysis of Residual Threats and Possible Fixes for Multipath TCP (MPTCP)",
+        "publication_year": "2015",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "mptcp",
+        "current_status": "INFORMATIONAL",
+        "authors": [
+          "M. Bagnulo",
+          "C. Paasch",
+          "F. Gont",
+          "O. Bonaventure",
+          "C. Raiciu"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7430",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7430",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7430.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4565,
+          "section": "6",
+          "type": "Technical",
+          "source_of_rfc": "mptcp (tsv)",
+          "submitted_by": "Fabrizio Demaria",
+          "format": "TXT",
+          "reported_at_date": "2015-12-14",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4565",
+          "url": "https://errata.rfc-editor.org/eid4565/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-8ac879ae6818232953d2",
+      "known_update_chain_ids": [
+        "RFC7430"
+      ],
+      "conservative_group_members": [
+        "RFC6181",
+        "RFC6182",
+        "RFC6356",
+        "RFC6824",
+        "RFC6897",
+        "RFC7430",
+        "RFC8041",
+        "RFC8684"
+      ],
+      "group_working_groups": [
+        "mptcp"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 34,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "ae8ad6e83569ab8685a9fe32d794f6e5adfa44b27fa2ece5e229d86b9b74e4d8",
+      "origin_id": "rfc-editor:RFC9580",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9580",
+        "title": "OpenPGP",
+        "publication_year": "2024",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "openpgp",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "P. Wouters",
+          "D. Huigens",
+          "J. Winter",
+          "Y. Niibe"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC4880",
+            "RFC5581",
+            "RFC6637"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9580",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9580",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9580.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8454,
+          "section": "5.2.3",
+          "type": "Technical",
+          "source_of_rfc": "openpgp (sec)",
+          "submitted_by": "Tim Geiser",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-06-07",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8454",
+          "url": "https://errata.rfc-editor.org/eid8454/"
+        },
+        {
+          "errata_id": 8465,
+          "section": "5.5.3",
+          "type": "Technical",
+          "source_of_rfc": "openpgp (sec)",
+          "submitted_by": "Heiko Schaefer",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-06-18",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8465",
+          "url": "https://errata.rfc-editor.org/eid8465/"
+        },
+        {
+          "errata_id": 8466,
+          "section": "11.2",
+          "type": "Technical",
+          "source_of_rfc": "openpgp (sec)",
+          "submitted_by": "Heiko Schaefer",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-06-18",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8466",
+          "url": "https://errata.rfc-editor.org/eid8466/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC4880",
+          "publication_year": "2007",
+          "publication_month": "November",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc4880.txt"
+        },
+        {
+          "rfc_id": "RFC5581",
+          "publication_year": "2009",
+          "publication_month": "June",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc5581.txt"
+        },
+        {
+          "rfc_id": "RFC6637",
+          "publication_year": "2012",
+          "publication_month": "June",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc6637.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-3a2ed38584d83568bf4f",
+      "known_update_chain_ids": [
+        "RFC1991",
+        "RFC2440",
+        "RFC4880",
+        "RFC5581",
+        "RFC6637",
+        "RFC9580"
+      ],
+      "conservative_group_members": [
+        "RFC1991",
+        "RFC2015",
+        "RFC2440",
+        "RFC3156",
+        "RFC4880",
+        "RFC5581",
+        "RFC6637",
+        "RFC9580",
+        "RFC9980"
+      ],
+      "group_working_groups": [
+        "openpgp"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 35,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "bb2ceaa190ba0a2a9f3c63cf1513f5785c1910a785f49a59761cd873ee8c235d",
+      "origin_id": "rfc-editor:RFC7970",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7970",
+        "title": "The Incident Object Description Exchange Format Version 2",
+        "publication_year": "2016",
+        "publication_month": "November",
+        "stream": "IETF",
+        "wg_acronym": "mile",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "R. Danyliw"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC5070",
+            "RFC6685"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7970",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7970",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7970.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 5351,
+          "section": "2.16",
+          "type": "Technical",
+          "source_of_rfc": "mile (sec)",
+          "submitted_by": "Logan Widick",
+          "format": "TXT",
+          "reported_at_date": "2018-05-07",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5351",
+          "url": "https://errata.rfc-editor.org/eid5351/"
+        },
+        {
+          "errata_id": 5543,
+          "section": "8",
+          "type": "Technical",
+          "source_of_rfc": "mile (sec)",
+          "submitted_by": "Takeshi Takahashi",
+          "format": "TXT",
+          "reported_at_date": "2018-11-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5543",
+          "url": "https://errata.rfc-editor.org/eid5543/"
+        },
+        {
+          "errata_id": 5544,
+          "section": "8",
+          "type": "Technical",
+          "source_of_rfc": "mile (sec)",
+          "submitted_by": "Takeshi Takahashi",
+          "format": "TXT",
+          "reported_at_date": "2018-11-04",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5544",
+          "url": "https://errata.rfc-editor.org/eid5544/"
+        },
+        {
+          "errata_id": 5583,
+          "section": "8",
+          "type": "Technical",
+          "source_of_rfc": "mile (sec)",
+          "submitted_by": "Takeshi Takahashi",
+          "format": "TXT",
+          "reported_at_date": "2018-12-25",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:5583",
+          "url": "https://errata.rfc-editor.org/eid5583/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC5070",
+          "publication_year": "2007",
+          "publication_month": "December",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc5070.txt"
+        },
+        {
+          "rfc_id": "RFC6685",
+          "publication_year": "2012",
+          "publication_month": "July",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc6685.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-3e3e52d049afbc2eadd6",
+      "known_update_chain_ids": [
+        "RFC5070",
+        "RFC6685",
+        "RFC7970"
+      ],
+      "conservative_group_members": [
+        "RFC5070",
+        "RFC6045",
+        "RFC6046",
+        "RFC6545",
+        "RFC6546",
+        "RFC6684",
+        "RFC6685",
+        "RFC7203",
+        "RFC7495",
+        "RFC7970",
+        "RFC8134",
+        "RFC8274",
+        "RFC8322",
+        "RFC8600",
+        "RFC8727"
+      ],
+      "group_working_groups": [
+        "inch",
+        "mile"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 36,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "c615ae30f77d797babfbfe12f29d21ba82cae64e61f31cc9a24bbb973e363fff",
+      "origin_id": "rfc-editor:RFC9562",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9562",
+        "title": "Universally Unique IDentifiers (UUIDs)",
+        "publication_year": "2024",
+        "publication_month": "May",
+        "stream": "IETF",
+        "wg_acronym": "uuidrev",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "K. Davis",
+          "B. Peabody",
+          "P. Leach"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [
+            "RFC4122"
+          ],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9562",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9562",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9562.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7929,
+          "section": "B.2",
+          "type": "Technical",
+          "source_of_rfc": "uuidrev (art)",
+          "submitted_by": "KIM Jaesuck a.k.a. gim tcaesvk",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-05-09",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7929",
+          "url": "https://errata.rfc-editor.org/eid7929/"
+        },
+        {
+          "errata_id": 7955,
+          "section": "5.1",
+          "type": "Technical",
+          "source_of_rfc": "uuidrev (art)",
+          "submitted_by": "Gordon Garmaise",
+          "format": "PDF, HTML",
+          "reported_at_date": "2024-05-24",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7955",
+          "url": "https://errata.rfc-editor.org/eid7955/"
+        },
+        {
+          "errata_id": 7958,
+          "section": "4.1",
+          "type": "Technical",
+          "source_of_rfc": "uuidrev (art)",
+          "submitted_by": "Roman Donchenko",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-05-25",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7958",
+          "url": "https://errata.rfc-editor.org/eid7958/"
+        },
+        {
+          "errata_id": 8288,
+          "section": "6.1",
+          "type": "Technical",
+          "source_of_rfc": "uuidrev (art)",
+          "submitted_by": "Nathan McGarvey",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2025-02-08",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8288",
+          "url": "https://errata.rfc-editor.org/eid8288/"
+        }
+      ],
+      "related_publication_metadata": [
+        {
+          "rfc_id": "RFC4122",
+          "publication_year": "2005",
+          "publication_month": "July",
+          "raw_url": "https://www.rfc-editor.org/rfc/rfc4122.txt"
+        }
+      ],
+      "source_group_id": "rfc-wg-update-b8d3e155e2f4bf016527",
+      "known_update_chain_ids": [
+        "RFC4122",
+        "RFC9562"
+      ],
+      "conservative_group_members": [
+        "RFC4122",
+        "RFC9562"
+      ],
+      "group_working_groups": [
+        "uuidrev"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": true,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 37,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "c859fc1f958b9e0c6b1aedaabf84615819ad1140c9e4b9b0ae64190249d61bb5",
+      "origin_id": "rfc-editor:RFC9463",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9463",
+        "title": "DHCP and Router Advertisement Options for the Discovery of Network-designated Resolvers (DNR)",
+        "publication_year": "2023",
+        "publication_month": "November",
+        "stream": "IETF",
+        "wg_acronym": "add",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "M. Boucadair",
+          "T. Reddy.K",
+          "D. Wing",
+          "N. Cook",
+          "T. Jensen"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9463",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9463",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9463.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 7804,
+          "section": "6.1",
+          "type": "Technical",
+          "source_of_rfc": "add (int)",
+          "submitted_by": "David Härdeman",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2024-02-09",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:7804",
+          "url": "https://errata.rfc-editor.org/eid7804/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-0b02643ef800fc940ed1",
+      "known_update_chain_ids": [
+        "RFC9463"
+      ],
+      "conservative_group_members": [
+        "RFC9461",
+        "RFC9462",
+        "RFC9463",
+        "RFC9606",
+        "RFC9704"
+      ],
+      "group_working_groups": [
+        "add"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 38,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "db3b218abc6d71bff520ee8f8e2c16689e41e0bac9835e7101f6a9eb5367e7e8",
+      "origin_id": "rfc-editor:RFC7665",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC7665",
+        "title": "Service Function Chaining (SFC) Architecture",
+        "publication_year": "2015",
+        "publication_month": "October",
+        "stream": "IETF",
+        "wg_acronym": "sfc",
+        "current_status": "INFORMATIONAL",
+        "authors": [
+          "J. Halpern",
+          "C. Pignataro"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC7665",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc7665",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc7665.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 4528,
+          "section": "6",
+          "type": "Technical",
+          "source_of_rfc": "sfc (rtg)",
+          "submitted_by": "Igor Duarte Cardoso",
+          "format": "TXT",
+          "reported_at_date": "2015-11-09",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:4528",
+          "url": "https://errata.rfc-editor.org/eid4528/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-6ecca199aa155e72abda",
+      "known_update_chain_ids": [
+        "RFC7665"
+      ],
+      "conservative_group_members": [
+        "RFC7498",
+        "RFC7665",
+        "RFC8300",
+        "RFC8393",
+        "RFC8459",
+        "RFC8924",
+        "RFC8979",
+        "RFC9145",
+        "RFC9263",
+        "RFC9451",
+        "RFC9452",
+        "RFC9516"
+      ],
+      "group_working_groups": [
+        "sfc"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    },
+    {
+      "shortlist_rank": 39,
+      "role": "T0_ORDERED_RESERVE_METADATA_RESERVATION",
+      "selection_hash": "fdc967acb93fd427359502851754af483038b5a516f5640d0860f5242d10ca05",
+      "origin_id": "rfc-editor:RFC9815",
+      "origin_category": "original_public_natural_technical_specification_correction_history",
+      "original_metadata": {
+        "rfc_id": "RFC9815",
+        "title": "BGP Link State (BGP-LS) Shortest Path First (SPF) Routing",
+        "publication_year": "2025",
+        "publication_month": "July",
+        "stream": "IETF",
+        "wg_acronym": "lsvr",
+        "current_status": "PROPOSED STANDARD",
+        "authors": [
+          "K. Patel",
+          "A. Lindem",
+          "S. Zandi",
+          "W. Henderickx"
+        ],
+        "relations": {
+          "updates": [],
+          "updated-by": [],
+          "obsoletes": [],
+          "obsoleted-by": []
+        }
+      },
+      "original_version_id": "RFC9815",
+      "original_landing_url": "https://www.rfc-editor.org/info/rfc9815",
+      "original_raw_url": "https://www.rfc-editor.org/rfc/rfc9815.txt",
+      "original_raw_sha256": null,
+      "correction_events": [
+        {
+          "errata_id": 8835,
+          "section": "6.3",
+          "type": "Technical",
+          "source_of_rfc": "lsvr (rtg)",
+          "submitted_by": "Mrigank Pawagi",
+          "format": "TXT, PDF, HTML",
+          "reported_at_date": "2026-03-17",
+          "status_at_snapshot": "Verified",
+          "body_accessed": false,
+          "version_id": "rfc-editor:erratum:8835",
+          "url": "https://errata.rfc-editor.org/eid8835/"
+        }
+      ],
+      "related_publication_metadata": [],
+      "source_group_id": "rfc-wg-update-2d497affc1a3f919125c",
+      "known_update_chain_ids": [
+        "RFC9815"
+      ],
+      "conservative_group_members": [
+        "RFC9815",
+        "RFC9816"
+      ],
+      "group_working_groups": [
+        "lsvr"
+      ],
+      "grouping_basis": "Full-index transitive updates/updated-by/obsoletes/obsoleted-by union plus same nonempty IETF working-group identity.",
+      "license_basis": "IETF TLP5 applicable publication period; preserve original RFC bytes and attribution. Individual notice and erratum-specific scope audit pending.",
+      "possible_relation_signals": {
+        "verified_technical_correction_exists": true,
+        "named_related_rfc_publication_exists": false,
+        "scope_or_valid_time_evidence": "UNKNOWN_UNTIL_FROZEN_BODY_AUDIT"
+      },
+      "history_stratum": "UNASSIGNED_NO_BODY_BASED_LABELS",
+      "query_count": 0,
+      "body_read": false,
+      "joint_independence_status": "CANDIDATE_COMPONENT_ONLY_SEMANTIC_FAMILY_AUDIT_PENDING",
+      "t0_admission": "NOT_ADMITTED"
+    }
+  ],
+  "model_http_requests": 0,
+  "corpus_bodies_downloaded": 0,
+  "remote_writes": 0,
+  "completion_claim": "39 concrete metadata origins are shortlisted, including32 primary reservations. T0 histories/queries, original-body snapshots, admission, G1 and full v13.4 remain incomplete."
+}

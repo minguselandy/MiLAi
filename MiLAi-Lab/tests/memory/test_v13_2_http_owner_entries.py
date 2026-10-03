@@ -39,6 +39,11 @@ ROOT = LAB / "artifacts/v13-2-http-owner-implementation"
 ENGINEERING = runpy.run_path(str(LAB / "tests/memory/test_v13_2_read_protocol.py"))
 
 
+@pytest.fixture(autouse=True)
+def portable_frozen_sources(monkeypatch, frozen_pre_http_sources):
+    monkeypatch.setitem(globals(), "ROOT", frozen_pre_http_sources)
+
+
 def proof(path: Path, name: str, value: Any) -> None:
     p = path / name
     assert not p.exists(), p
@@ -482,7 +487,7 @@ def test_eight_actual_default_graph_wire_and_receipt_byte_pairs(
         # Scripted provider IDs and the explicit ToolMessage ID keep all original
         # receipt fields byte comparable. Only wall_seconds is excluded from events.
         stable_messages = messages
-        capacity = HostCapacity(ENGINEERING["capacity_config"]())
+        capacity = HostCapacity(ENGINEERING["capacity_config"](path))
         costs = [
             {
                 "actual_template_prompt_tokens": capacity.count_messages(
@@ -538,6 +543,7 @@ def test_eight_actual_default_graph_wire_and_receipt_byte_pairs(
 
 
 @pytest.mark.parametrize("material_profile", ["full_v1", "compact_v1"])
+@pytest.mark.local_artifacts
 def test_actual_qwen_material_source_prefix_and_owned_wire_cost(
     tmp_path: Path, material_profile: str
 ) -> None:

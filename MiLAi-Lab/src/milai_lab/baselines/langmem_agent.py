@@ -151,6 +151,7 @@ def build_agent(
     benchmark_view_hook: Callable[..., Any] | None = None,
     tool_schema_communication: str | None = None,
     tool_save_communication: str | None = None,
+    model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -272,6 +273,17 @@ def build_agent(
                 "max_concurrency"
             ) != 1:
                 raise ValueError("PROTOCOL_PROFILE_TOOL_CONCURRENCY_UNSUPPORTED")
+            if model.unknown_tool_feedback and call["name"] not in parameter_schemas:
+                # Intercept before ToolNode or the application can dispatch anything.
+                # This is a catalog rejection, not permission to execute the proposal.
+                return ToolMessage(content=json.dumps({
+                    "ok": False, "status": "rejected", "effect": "none",
+                    "operation_executed": False, "origin": "tool_catalog",
+                    "error_category": "schema", "reason": "tool_unavailable",
+                    "available_tools": sorted(parameter_schemas),
+                    "next_step": "Use the actual current catalog or answer from real receipts. "
+                    "Do not repeat completed actions. The existing format allowance applies.",
+                }), name=call["name"], tool_call_id=call["id"], status="error")
             if persistent_memory_arm == "C" and correction_marker([
                 row.model_dump(mode="json") for row in current.state["messages"]
             ], model.active_message_key or "") is not None and call["name"] not in CORRECTION_TOOLS:
@@ -312,9 +324,14 @@ def build_agent(
             memory_boundaries.observe_receipt(result, model.memory_turn)
         return result
 
+    def select_model(state: dict[str, Any], runtime: Any) -> Any:
+        # Bind the exact executable catalog; the selector cannot grant tools.
+        assert model_tool_choice is not None
+        return model.bind_tools(tools, tool_choice=model_tool_choice(state["messages"]))
+
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
-        model,
+        select_model if model_tool_choice is not None else model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None
                 and local_state_controller is None and not full_history

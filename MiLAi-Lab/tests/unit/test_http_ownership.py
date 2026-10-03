@@ -24,8 +24,6 @@ from milai_lab.harness.http_ownership import (
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 
 LAB = Path(__file__).resolve().parents[2]
-ROOT = LAB / "artifacts/v13-2-http-owner-implementation"
-PRIMARY = Path("/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab")
 
 
 def proof(path: Path, name: str, value: Any) -> None:
@@ -36,7 +34,9 @@ def proof(path: Path, name: str, value: Any) -> None:
 
 def maps() -> dict[str, Any]:
     result = {}
-    for tree, lab in [("primary", PRIMARY), ("isolated", LAB)]:
+    # The old engineering audit included a sibling worktree on its author's host.
+    # A portable regression records the checkout actually executing the test.
+    for tree, lab in [("checkout", LAB)]:
         result[tree] = {}
         for group, dirs, suffix in [
             ("runtime", ["src"], ".py"),

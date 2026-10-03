@@ -1,0 +1,22 @@
+{
+  "kind": "EVALUATOR_ONLY_NOT_RUNTIME",
+  "history_group_id": null,
+  "history_sha256": null,
+  "origin_license": null,
+  "template_family": null,
+  "known_derivations": [],
+  "natural_query": null,
+  "query_kind": null,
+  "archive_cutoff": null,
+  "solvability": "UNANNOTATED",
+  "compatible_interpretations": [],
+  "open_set": true,
+  "answer_mode": null,
+  "allowed_partial_answers": [],
+  "remaining_uncertainty": null,
+  "minimal_sufficient_source_sets": null,
+  "source_labels": [],
+  "annotators": [],
+  "independent_review_status": "NOT_VERIFIED",
+  "notes": "query_kind, interpretations, E* and labels must never enter WriterView/SelectorView. Unknown E* is null; unsolvable coverage is N/A, never0/1."
+}

@@ -139,6 +139,8 @@ class VLLMChatModel(BaseChatModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
 
+    allow_required_tool_choice: bool = Field(default=False, exclude=True)
+    preserve_tool_reasoning: bool = Field(default=False, exclude=True)
     client: VLLMClient
     max_calls_per_message: int = 12
     calls_in_message: int = 0
@@ -150,6 +152,7 @@ class VLLMChatModel(BaseChatModel):
     tool_schema_communication: Literal["legacy", "shape_feedback_v1"] = Field(
         default="legacy", frozen=True, exclude=True, repr=False
     )
+    unknown_tool_feedback: bool = Field(default=False, frozen=True, exclude=True, repr=False)
     tool_save_communication: Literal["legacy", "completed_receipt_v1"] = Field(
         default="legacy", frozen=True, exclude=True, repr=False
     )
@@ -230,6 +233,20 @@ class VLLMChatModel(BaseChatModel):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
         native = self.client.config.tool_mode == "native"
+        if self.preserve_tool_reasoning:
+            if not native:
+                raise ValueError("TOOL_REASONING_HISTORY_REQUIRES_NATIVE")
+            last_user = max((i for i, row in enumerate(wire_messages) if row["role"] == "user"),
+                            default=-1)
+            for index, (original, wire) in enumerate(zip(messages, wire_messages, strict=True)):
+                if (last_user < 0 or index <= last_user or not isinstance(original, AIMessage)
+                        or not original.tool_calls):
+                    continue
+                reasoning = original.additional_kwargs.get("reasoning_content")
+                if reasoning is not None:
+                    if not isinstance(reasoning, str):
+                        raise ValueError("VLLM_CHAT_INVALID_REASONING_HISTORY")
+                    wire["reasoning_content"] = reasoning
         selected_communication = communication_profile(self.tool_schema_communication)
         if native and selected_communication != "legacy":
             wire_messages = _protocol_messages(
@@ -244,7 +261,9 @@ class VLLMChatModel(BaseChatModel):
         if self.request_transform is not None:
             self.request_transform.validate(request)
         if native and (
-            kwargs.get("tool_choice") not in (None, "auto", "none")
+            kwargs.get("tool_choice") not in (None, "auto", "none", "required")
+            or (kwargs.get("tool_choice") == "required"
+                and (not self.allow_required_tool_choice or not tools))
             or self.client.config.response_format is not None
         ):
             raise ValueError("NATIVE_CHAT_PROTOCOL_UNSUPPORTED")
@@ -375,7 +394,9 @@ class VLLMChatModel(BaseChatModel):
                 if call["id"] in seen:
                     raise IncompleteChatResponse("VLLM_CHAT_DUPLICATE_TOOL_CALL_ID")
                 if function["name"] not in names:
-                    raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
+                    if (not self.unknown_tool_feedback or not names
+                            or kwargs.get("tool_choice") == "none" or not function["name"]):
+                        raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
                 seen.add(call["id"])
                 try:
                     args = json.loads(function["arguments"])
@@ -419,9 +440,19 @@ class VLLMChatModel(BaseChatModel):
         )
         self._notify_response(event)
         response_metadata.update(completion_metadata)
+        additional_kwargs: dict[str, Any] = {}
+        if self.preserve_tool_reasoning and native and calls:
+            fields = [wire_message[key] for key in ("reasoning", "reasoning_content")
+                      if wire_message.get(key) is not None]
+            if any(not isinstance(value, str) for value in fields) or (
+                    len(fields) == 2 and fields[0] != fields[1]):
+                raise IncompleteChatResponse("VLLM_CHAT_INVALID_REASONING_HISTORY")
+            if fields and fields[0]:
+                additional_kwargs["reasoning_content"] = fields[0]
         message = AIMessage(
             id=message_id,
             content=content,
+            additional_kwargs=additional_kwargs,
             tool_calls=calls,
             usage_metadata=usage_metadata,
             response_metadata=response_metadata,

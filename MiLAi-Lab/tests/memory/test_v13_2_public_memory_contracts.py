@@ -72,6 +72,11 @@ def opened(path: Path, *, guide="legacy", feedback="legacy", direct=True, observ
         )
 
 
+@pytest.fixture(autouse=True)
+def portable_frozen_sources(monkeypatch, frozen_pre_http_sources):
+    monkeypatch.setitem(globals(), "ROOT", frozen_pre_http_sources)
+
+
 def proof(path: Path, name: str, value: Any) -> None:
     target = path / name
     assert not target.exists()
@@ -515,6 +520,7 @@ def test_eight_default_memory_graph_wire_and_receipt_bytes(
 
 @pytest.mark.parametrize("scenario", ["sources", "history", "conflict"])
 @pytest.mark.parametrize("material_profile", ["compact_v1", "compact_exact_v1"])
+@pytest.mark.local_artifacts
 def test_qwen_exact_dictionary_same_selected_units_budget_and_delivery_limits(
     tmp_path: Path,
     scenario: str,
@@ -923,6 +929,7 @@ def test_unknown_profile_prepare_before_client_dispatch(
         runner.prepare(fp, cp, tmp_path / "run")
 
 
+@pytest.mark.local_artifacts
 def test_exact_display_selected_page_reopen_keeps_actual_members_and_paid_range(
     tmp_path: Path,
 ) -> None:
@@ -965,6 +972,7 @@ def test_exact_display_selected_page_reopen_keeps_actual_members_and_paid_range(
 @pytest.mark.parametrize(
     "guide,feedback", [(False, False), (True, False), (False, True), (True, True)]
 )
+@pytest.mark.local_artifacts
 def test_four_actual_profile_wire_compositions_pay_entire_catalog_feedback_request(
     tmp_path: Path,
     guide: bool,
@@ -1068,6 +1076,7 @@ def test_four_actual_profile_wire_compositions_pay_entire_catalog_feedback_reque
 
 
 @pytest.mark.parametrize("material_profile", ["full_v1", "compact_v1"])
+@pytest.mark.local_artifacts
 def test_nonempty_legacy_material_catalog_and_stored_cache_bytes(
     tmp_path: Path,
     material_profile: str,

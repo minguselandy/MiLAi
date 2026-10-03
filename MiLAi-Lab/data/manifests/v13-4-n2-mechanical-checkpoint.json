@@ -1,0 +1,53 @@
+{
+  "kind": "V13_4_N2_MECHANICAL_CHECKPOINT",
+  "status": "PASSED_SCOPED_SPAN_AND_CHAIN_B1",
+  "checks": {
+    "affected_tests": 101,
+    "final_test_only_order_addendum": 1,
+    "ruff": "PASS",
+    "mypy_modules": 6,
+    "active_package_boundary": "PASS",
+    "independent_span_review": "PASS_TOY_ONLY",
+    "independent_B1_review": "PASS_TOY_ONLY",
+    "B4_reference_rational_assertions": 210
+  },
+  "artifacts": {
+    "artifacts/v13-4/n2-b1-checks/summary.json": "49ddbe0793a255013b17d351b2b41ba2db03131847a786343f79254aece92012",
+    "artifacts/v13-4/n2-b1-checks/order-control-addendum.json": "7610c253bb4c4ff7014393a7edff56eabf0fe2f1311870aed3ec8313419c24bb",
+    "artifacts/v13-4/n2-review/span-review.json": "5fbbfd27fd1716a16dde4033fff41ffbd20066fff2476cdf280e68667d98c6b9",
+    "artifacts/v13-4/n2-review/b1-review.json": "f1f8976390e55a1420fb2062aff820b0f77e3f88e078eabade2a1fb9071235c1",
+    "artifacts/v13-4/n2-b4-reference/freeze.json": "039ff2ed136238e0a6bdf8c6a7bb6fa4438e49a3d67f04ef4a2c051f5be44bcd",
+    "artifacts/v13-4/n2-b4-reference/verification.json": "82de02e1c38561d44e8037d871040267c3652155cac9d1354b7c4fa221d4d07e"
+  },
+  "runtime_source_sha256": {
+    "src/milai_lab/contracts/correction_relation.py": "8bc2d89850f29af1804281295b9828a48e783f07f392a3cd38ab4ee60c693b5e",
+    "src/milai_lab/methods/correction_reader.py": "ecdd0d600ea293d95b7bfc39aba779f1fdb142aea2f66e2190e91ddf4b282a86",
+    "src/milai_lab/methods/correction_evidence.py": "d275a5eb256e84c33e6ebf200a633d12070bee78c2fe759b143b29da3dc4e17e",
+    "src/milai_lab/methods/correction_spans.py": "222f9de1bbc01744ff723873f1ec02dcf450eed0517154a69374351f77911f62",
+    "src/milai_lab/methods/correction_chains.py": "f40cc5f1447c35753468ca85ffa04f84ad9cf3920824885b184af247caaa1253",
+    "src/milai_lab/runners/correction_evidence_eval.py": "951dde2b9a05bda71637a3a44105750777e36ee095432fd1015777788560c976"
+  },
+  "actual_model_requests_in_these_checks": 0,
+  "natural_query_reads_in_method_development": 0,
+  "T0_reader_runs": 0,
+  "limitations": [
+    "Literal relation provenance and group delivery only; no validated semantic correction truth or G1.",
+    "First group exact query-free cost; later groups use explicit estimates with atomic packing omissions.",
+    "B2/B3 not yet implemented; finite EC²/HEC reference is not executable natural B4.",
+    "Natural raw relation adapter result is separate from toy method review."
+  ],
+  "package": {
+    "wheel": "artifacts/v13-4/dist-n2-b1/milai_lab-0.1.0-py3-none-any.whl",
+    "wheel_sha256": "88e79d4c2f42f108deffd56d6e1a0623ccc42c9c0b8962469aa2ee3a9d9bd5c9",
+    "sdist": "artifacts/v13-4/dist-n2-b1/milai_lab-0.1.0.tar.gz",
+    "sdist_sha256": "400b93189a4a54d261c36cd4dd215ba1b4501d4c369cd56cfccc1d7154205266",
+    "all_six_runtime_modules_byte_match": [
+      "src/milai_lab/contracts/correction_relation.py",
+      "src/milai_lab/methods/correction_reader.py",
+      "src/milai_lab/methods/correction_evidence.py",
+      "src/milai_lab/methods/correction_spans.py",
+      "src/milai_lab/methods/correction_chains.py",
+      "src/milai_lab/runners/correction_evidence_eval.py"
+    ]
+  }
+}

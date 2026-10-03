@@ -1,0 +1,42 @@
+{
+  "kind": "V13_5_RESUMED_PACK2_PACK3",
+  "status": "MECHANICAL_PASS_MODEL_NOT_RUN",
+  "operation_status": "durable current-message receipts; request completion unchecked",
+  "final_delivery": "minimal text check; explicit answer-only recovery in original durable format/generation quotas",
+  "correction_support": "required per-field selection in Agent catalog; semantic support unchecked",
+  "l3_inputs": "all 30 original fixed candidate pools validated with exact source/body/span hashes",
+  "tests": {
+    "entry_workflow_queue_evaluator": 62,
+    "external_sdk_separate_environment": 4,
+    "memory_entry_privacy": 71,
+    "additional_catalog_integration": 1,
+    "counts_overlap": true
+  },
+  "production_pagination": {
+    "material_limit": 8192,
+    "reads": 3,
+    "status": "PASS",
+    "packet_tokens": 739
+  },
+  "checks": {
+    "ruff": "PASS",
+    "mypy": "PASS 198 files",
+    "active_boundary": "PASS",
+    "tools_boundary": "PASS"
+  },
+  "evidence_sha256": {
+    "artifacts/v13-5/resume-pack2-final.log": "f0e592d8b6a3825f605ce5f1499c7c5aba5b28d10b27fae0e248d780c9d8b030",
+    "artifacts/v13-5/resume-pack2-sdk.log": "977ab65569e59ca6b0c2c61fd911ddc97026fc9d142443c1bc57f864cc8aba31",
+    "artifacts/v13-5/resume-pack3-second.log": "6e98ee4a3f4672dbea24f369b45a7a80949b3ec404a7f1bb8a430f990f99c0af",
+    "artifacts/v13-5/resume-pack3-catalog.log": "65ffddbb56a981d5a8d76982a60cb995da0c2de4d3a9ebf318eb1794b0964ffb",
+    "artifacts/v13-5/resume-pack3-real-input-contracts.json": "30a35600ad5930c8fcdcac8bc4d02a3379ee07a5c7b50d29a23ee4440593b1b7"
+  },
+  "failed_attempts_preserved": [
+    "resume-pack2-first.log",
+    "resume-pack2-final.log (four wrong-environment SDK failures)",
+    "resume-pack3-memory-first.log"
+  ],
+  "new_model_calls": 0,
+  "new_embedding_calls": 0,
+  "ledger_sha256": "b18fae7fa71c3862eb4e0fc336b0021fa5b4928d89275f71ce55b6ec92973edc"
+}

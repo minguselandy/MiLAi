@@ -1,0 +1,490 @@
+{
+  "kind": "V13_4_N0_SOURCE_ELIGIBILITY_AND_NEAREST_NEIGHBOR_AVAILABILITY",
+  "status": "METADATA_AUDIT_COMPLETE_T0_COHORT_NOT_ADMITTED",
+  "recorded_at_utc": "2026-10-02T16:32:57.429233+00:00",
+  "plan_path": "docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+  "plan_sha256": "3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4",
+  "scope": {
+    "new_benchmark_or_holdout_content_read": false,
+    "new_corpus_rows_read": 0,
+    "new_gold_read": false,
+    "model_http_requests": 0,
+    "remote_writes": 0,
+    "new_selected_histories": 0,
+    "benchmark_results_used": false,
+    "incidental_search_exposure": "Search previews and paper landing abstracts included aggregate performance claims/tables. No result files or benchmark examples were opened; these numbers were neither retained as study evidence nor used in eligibility or selection."
+  },
+  "local_metadata_evidence": [
+    {
+      "path": "data/manifests/v13-1-source-exposure.json",
+      "sha256": "ce9e9b8d499d441091e9050332e19dbdccf5af18ecefb875d845bc0ca5df2b44",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/v13-1-source-exposure-pilot-reservation.json",
+      "sha256": "88cdcf91e843a2485a7a59cc9af4d398333957375f008874101af5021397e46d",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/v13-1-memsyco-source-availability.json",
+      "sha256": "b6b28e3e79f3fcaceceff1b1db355ddeb5c182e9b02ad3658c4455b919f5eec8",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/v13-2-source-group-amendment.json",
+      "sha256": "aa4b2f820794917b5c0933366ddeeb3c08624af12f7c8d7ed74a9086c72cb30e",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/unified-v8-v9-exposure-20260928.json",
+      "sha256": "0c070c564f0598ec80555fdbb2909d1e4228a299e65b409f76a3ce7740a27910",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/repair-v10-exposure-registry.json",
+      "sha256": "3f44f97173056b459d20a182e8a5e1e9283ef21004cc8c5c6d17e375de21a22c",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/v13-2-source-scale-baseline-freeze.json",
+      "sha256": "ab0596d85ca4251c56bbd61b2198438340d2548296c02cc9e068bf45fc8998fa",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    },
+    {
+      "path": "data/manifests/v13-4-entry.json",
+      "sha256": "9957dd9b095ee6fbefbd1c73aef0db2df37bfc1d65eb101660641abb2003d97c",
+      "read_scope": "source/exposure/configuration metadata only; no referenced corpus or result payload opened"
+    }
+  ],
+  "t0_requirement": {
+    "target_independent_development_histories": 32,
+    "queries_per_history": 4,
+    "suggested_history_strata": {
+      "unambiguous_or_answer_invariant": 8,
+      "single_disambiguating_source": 8,
+      "complementary_source_set": 8,
+      "archive_insufficient": 8
+    },
+    "new_admitted_independent_histories": 0,
+    "new_admitted_natural_histories": 0,
+    "new_admitted_diagnostic_histories": 0,
+    "missing_target_histories": 32,
+    "note": "The target is preserved. Absence of admitted histories in this audit is not evidence that no eligible sources exist."
+  },
+  "inherited_pool": {
+    "source": "MemSyco metadata only",
+    "source_commit": "fd1f0f0270f35467aace1f9c0bf6a8bfb9b87221",
+    "components_total": 431,
+    "component_states": {
+      "UNRESERVED_METADATA_ONLY": 304,
+      "OLD_EXCLUDED": 80,
+      "PILOT_RESERVED": 47
+    },
+    "per_task_counts": {
+      "contextual_scope_control": {
+        "unreserved_rows": 250,
+        "independent_components": 250,
+        "old_nominal_formal100_proven": false,
+        "formal_selected": false
+      },
+      "valid_memory_selection": {
+        "unreserved_rows": 7,
+        "independent_components": 2,
+        "old_nominal_formal100_proven": false,
+        "formal_selected": false
+      },
+      "personalized_memory_use": {
+        "unreserved_rows": 54,
+        "independent_components": 53,
+        "old_nominal_formal100_proven": false,
+        "formal_selected": false
+      }
+    },
+    "per_task_counts_additive": false,
+    "reason_nonadditive": "A source/history component can span tasks; task counts sum to305 while unique unreserved components are304.",
+    "grouping_scope": "exact native source ID or complete dialogue hash, transitive union",
+    "template_family_edges_verified": false,
+    "natural_origin_verified": false,
+    "eligible_for_v13_4_without_new_freeze": false,
+    "v13_1_reserved_rows_kept_excluded": 117,
+    "v13_1_reserved_group_ids": 65,
+    "merit_reserved_seeds_excluded": "0..82 inclusive; new seeds do not establish new template families",
+    "legacy_r9": "development regression only; zero new histories counted"
+  },
+  "preregistered_source_group_policy": {
+    "policy_id": "v13.4-source-eligibility-policy-001",
+    "status": "REGISTERED_BEFORE_NEW_CORPUS_ACCESS_NOT_A_COHORT_FREEZE",
+    "owner": "Root must freeze exact origin identities, allowed views and purpose before corpus acquisition/reading",
+    "edges": [
+      "same original source_id or persistent upstream history identity",
+      "same canonical complete history SHA256",
+      "same originating document/thread/workflow with known derivatives",
+      "same template/generator family; seeds and UUIDs are repetitions",
+      "translation, paraphrase, counterfactual and truncation of the same original"
+    ],
+    "group_rule": "Transitive union over every known edge; an unknown template relationship cannot be certified independent merely from distinct IDs.",
+    "required_pre_read_metadata": [
+      "canonical upstream origin ID and URL",
+      "immutable version or bounded revision endpoints",
+      "origin_category natural/benchmark/constructed_diagnostic",
+      "license identifier and exact license evidence",
+      "prior exposure/reservation intersection",
+      "known template and derivation family",
+      "purpose development/transfer/formal",
+      "selection rule independent of Ours performance",
+      "UTC reservation and metadata-only read record"
+    ],
+    "required_after_acquisition_before_runtime": [
+      "original bytes/hash and canonical complete-history hash",
+      "observed chronology separated from explicitly supported valid_time",
+      "full derivation links and merged group identity",
+      "all content accesses logged as development/evaluation",
+      "four natural queries in evaluator-only view",
+      "archive-relative solvability and minimal sufficient evidence sets; unknown allowed",
+      "writer cutoff/input and selector/evaluator physical separation"
+    ],
+    "exclusion_rule": "Preserve the append-only union of exposed and reserved components; do not reclaim old reservations without the original plan permitted unread/output-unused audit and a prior explicit amendment.",
+    "partition_rule": "T0/T1 are development; new T2 histories disjoint from T0/T1; T3/formal and public-transfer roles frozen by joint source/template group before contents; no Ours-win filtering.",
+    "no_strengthening_by_variants": true,
+    "selection_quota_rule": "Aim for the four8-history strata but report natural-source scarcity and diagnostic supplementation separately. A quota is not a reason to fabricate independence, evidence, or world truth."
+  },
+  "origin_categories": [
+    {
+      "category": "original_public_natural_history",
+      "priority": 1,
+      "examples_of_origin_type": [
+        "permissively licensed official document revision history plus correction/erratum",
+        "public technical issue/decision history with explicit content reuse permission",
+        "public wiki history with preserved revision provenance and applicable content license"
+      ],
+      "status": "PREFERRED_NOT_ACQUIRED",
+      "admitted_histories": 0,
+      "eligibility": "Freeze document/thread family, version and actual content license first; preserve original event sequence. Technical edit logs count as technical histories, not personal-dialogue natural histories. Distinct documents can still share a correction template."
+    },
+    {
+      "category": "explicitly_authored_constructed_diagnostic",
+      "priority": 2,
+      "status": "ALLOWED_SUPPLEMENT_NOT_ACQUIRED",
+      "admitted_histories": 0,
+      "eligibility": "Predeclare independent scenario and template provenance; group every same-template variant. Body swap, omitted-date, duplicate and complementary-set diagnostics are labeled and excluded from natural-incidence estimates; do not synthesize32 variants and call them32 independent histories."
+    },
+    {
+      "category": "old_r9_and_other_exposed_development",
+      "priority": 3,
+      "status": "REGRESSION_ONLY",
+      "admitted_histories": 0,
+      "eligibility": "Retain original exposure; never count as new T0 or independent formal history."
+    },
+    {
+      "category": "inherited_memsyco_merit",
+      "priority": 4,
+      "status": "METADATA_CANDIDATE_ONLY_NO_CURRENT_ADMISSION",
+      "admitted_histories": 0,
+      "eligibility": "Exact source/hash and newseed counts lack template/provenance proof; original exclusions persist. Do not spend blind pools on prompts."
+    },
+    {
+      "category": "LongMemEval_STALE_external_benchmark",
+      "priority": 5,
+      "status": "N5_TRANSFER_CANDIDATES_UNSELECTED",
+      "admitted_histories": 0,
+      "eligibility": "Keep separate from preferred original natural T0 sources; lock version, data license, cross-benchmark derivations and exposure groups before dataset reading. T0 usage would mark that entire group development and require prior amendment."
+    }
+  ],
+  "nearest_neighbors": [
+    {
+      "name": "BeliefMem",
+      "paper": "https://arxiv.org/abs/2605.05583v2",
+      "candidate_repository": "https://github.com/junfeng1212/BeliefMem-main",
+      "commit": "623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+      "availability": "PLACEHOLDER_ONLY_NATIVE_METHOD_UNAVAILABLE_IN_CHECKED_REPOSITORY",
+      "root_files": [
+        "README.md"
+      ],
+      "readme_bytes": 35,
+      "code_license": "NOT_FOUND",
+      "authority_limit": "Coauthor homepage Code anchor is empty. Repository name/owner resembles first author but official linkage is not established by the inspected landing metadata.",
+      "native_small_slice": "NOT_RUN",
+      "required_next": "Obtain author-linked implementation/license or preserve explicit nearest-neighbor nonreproduction gap. A local inspired implementation cannot be labeled native BeliefMem."
+    },
+    {
+      "name": "Graphiti",
+      "repository": "https://github.com/getzep/graphiti",
+      "commit": "3c427640abf909f12f71f963fce15eb514a3c493",
+      "package_version": "0.30.2",
+      "license": "Apache-2.0",
+      "python": ">=3.10,<4",
+      "availability": "SOURCE_AND_PACKAGE_METADATA_AVAILABLE_NOT_EXECUTION_READY",
+      "declared_core_dependencies": [
+        "pydantic>=2.11.5",
+        "neo4j>=5.26.0",
+        "openai>=1.91.0",
+        "tenacity>=9.0.0",
+        "numpy>=1.0.0",
+        "python-dotenv>=1.0.1",
+        "posthog>=3.0.0"
+      ],
+      "native_small_slice": "NOT_RUN",
+      "code_prompts_background_calls_audited": false,
+      "required_next": "Audit pinned methods/prompts/provider calls and existing compatible backend, charge ingest/embed/read calls through root ledger, then frozen native small slice. No new service is authorized by this audit. Self-built baseline remains Temporal-RAG."
+    }
+  ],
+  "external_transfer": [
+    {
+      "name": "LongMemEval",
+      "paper_version": "2410.10813v2",
+      "repository": "https://github.com/xiaowu0162/LongMemEval",
+      "commit": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+      "repository_license": "MIT",
+      "dataset_metadata_url": "https://huggingface.co/api/datasets/xiaowu0162/longmemeval-cleaned/revision/98d7416c24c778c2fee6e6f3006e7a073259d48f",
+      "dataset_revision": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+      "dataset_declared_license": "MIT",
+      "availability": "METADATA_AND_LICENSE_AVAILABLE_CORPUS_UNREAD",
+      "selected_rows": 0,
+      "original_v1_not_silently_replaced_by_v2": true,
+      "fit_and_independence": "NOT_VERIFIED"
+    },
+    {
+      "name": "STALE",
+      "paper_version": "2605.06527v1",
+      "repository": "https://github.com/icedreamc/STALE",
+      "commit": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+      "repository_license": "MIT",
+      "license_copyright_holder": "2026 Hanxiang Chao",
+      "dataset_license": "NOT_SEPARATELY_VERIFIED",
+      "availability": "CODE_REPOSITORY_METADATA_AVAILABLE_CORPUS_UNREAD",
+      "selected_rows": 0,
+      "fit_and_independence": "NOT_VERIFIED",
+      "note": "Repository software license is not a proof of all embedded/originating dataset rights. Audit borrowed history provenance jointly with LongMemEval before transfer."
+    }
+  ],
+  "literature": {
+    "catalog_path": "artifacts/v13-4/literature/source-eligibility/catalog.json",
+    "catalog_sha256": "2fa7923e8be22bbd4a29c013dfd9d33b6b2c9ba2d8471f1f719c9143fd0a6442",
+    "resources": [
+      {
+        "id": "beliefmem-paper",
+        "url": "https://arxiv.org/abs/2605.05583v2",
+        "final_url": "https://arxiv.org/abs/2605.05583v2",
+        "retrieved_at_utc": "2026-10-02T16:30:28.154983+00:00",
+        "version": "2605.05583v2",
+        "resource_kind": "landing",
+        "path": "beliefmem-paper.html",
+        "sha256": "d3c870ce462ba10234f598a008be488d32d2744c27fb0c2b82ef9e545552204a",
+        "bytes": 43159,
+        "http_status": 200
+      },
+      {
+        "id": "stale-paper",
+        "url": "https://arxiv.org/abs/2605.06527v1",
+        "final_url": "https://arxiv.org/abs/2605.06527v1",
+        "retrieved_at_utc": "2026-10-02T16:30:28.764440+00:00",
+        "version": "2605.06527v1",
+        "resource_kind": "landing",
+        "path": "stale-paper.html",
+        "sha256": "8ebcd6edc865a8fb720741890e73142ed15bf47227b6d585570c0ae128ff338f",
+        "bytes": 42885,
+        "http_status": 200
+      },
+      {
+        "id": "longmemeval-paper",
+        "url": "https://arxiv.org/abs/2410.10813v2",
+        "final_url": "https://arxiv.org/abs/2410.10813v2",
+        "retrieved_at_utc": "2026-10-02T16:30:29.438521+00:00",
+        "version": "2410.10813v2",
+        "resource_kind": "landing",
+        "path": "longmemeval-paper.html",
+        "sha256": "5c7013c03f98d83062018d2c67464bc176a00196c77416210319f1b1f3fd4f6a",
+        "bytes": 43353,
+        "http_status": 200
+      },
+      {
+        "id": "beliefmem-author-page",
+        "url": "https://qizhouwang.github.io/homepage/",
+        "final_url": "https://qizhouwang.github.io/homepage/",
+        "retrieved_at_utc": "2026-10-02T16:30:29.805911+00:00",
+        "version": "retrieval snapshot",
+        "resource_kind": "author_homepage",
+        "path": "beliefmem-author-page.html",
+        "sha256": "28ca1863069357e357ca4451fda3533bbe83c9175122685981d905cdd9ba722e",
+        "bytes": 54857,
+        "http_status": 200
+      },
+      {
+        "id": "beliefmem-repository",
+        "url": "https://api.github.com/repos/junfeng1212/BeliefMem-main",
+        "final_url": "https://api.github.com/repos/junfeng1212/BeliefMem-main",
+        "retrieved_at_utc": "2026-10-02T16:30:30.277602+00:00",
+        "version": "623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+        "resource_kind": "repository_metadata",
+        "path": "beliefmem-repository.json",
+        "sha256": "1d8fbb8da0b29f8b878502b75e159870ebdcc249903e0ebb70daf08bcbb43907",
+        "bytes": 5409,
+        "http_status": 200
+      },
+      {
+        "id": "beliefmem-root",
+        "url": "https://api.github.com/repos/junfeng1212/BeliefMem-main/contents/?ref=623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+        "final_url": "https://api.github.com/repos/junfeng1212/BeliefMem-main/contents/?ref=623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+        "retrieved_at_utc": "2026-10-02T16:30:31.180119+00:00",
+        "version": "623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+        "resource_kind": "root_file_listing",
+        "path": "beliefmem-root.json",
+        "sha256": "bc5331253058880c43b65522a9ae91866de76377ef52520efac61c39101fdde0",
+        "bytes": 971,
+        "http_status": 200
+      },
+      {
+        "id": "beliefmem-readme",
+        "url": "https://raw.githubusercontent.com/junfeng1212/BeliefMem-main/623602e3b52a1ca9c5d106799c73ec80d053ac2a/README.md",
+        "final_url": "https://raw.githubusercontent.com/junfeng1212/BeliefMem-main/623602e3b52a1ca9c5d106799c73ec80d053ac2a/README.md",
+        "retrieved_at_utc": "2026-10-02T16:30:33.275401+00:00",
+        "version": "623602e3b52a1ca9c5d106799c73ec80d053ac2a",
+        "resource_kind": "placeholder_readme",
+        "path": "beliefmem-readme.md",
+        "sha256": "c80374eee197ca4bb96190e07b7adce04ae2b8737992f0f375a0f8a74dfacc5f",
+        "bytes": 35,
+        "http_status": 200
+      },
+      {
+        "id": "graphiti-repository",
+        "url": "https://api.github.com/repos/getzep/graphiti",
+        "final_url": "https://api.github.com/repos/getzep/graphiti",
+        "retrieved_at_utc": "2026-10-02T16:30:33.644857+00:00",
+        "version": "3c427640abf909f12f71f963fce15eb514a3c493",
+        "resource_kind": "repository_metadata",
+        "path": "graphiti-repository.json",
+        "sha256": "aa5fb013eaede2cf4114bfd051f5bc5ad310f3eeb37d3a366876677412d75919",
+        "bytes": 6094,
+        "http_status": 200
+      },
+      {
+        "id": "graphiti-root",
+        "url": "https://api.github.com/repos/getzep/graphiti/contents/?ref=3c427640abf909f12f71f963fce15eb514a3c493",
+        "final_url": "https://api.github.com/repos/getzep/graphiti/contents/?ref=3c427640abf909f12f71f963fce15eb514a3c493",
+        "retrieved_at_utc": "2026-10-02T16:30:34.272895+00:00",
+        "version": "3c427640abf909f12f71f963fce15eb514a3c493",
+        "resource_kind": "root_file_listing",
+        "path": "graphiti-root.json",
+        "sha256": "44d11cc60f349b3c20c38ab62cc46ea21a8508b83e88afef2b12e062ffa9d0fd",
+        "bytes": 26242,
+        "http_status": 200
+      },
+      {
+        "id": "graphiti-license",
+        "url": "https://raw.githubusercontent.com/getzep/graphiti/3c427640abf909f12f71f963fce15eb514a3c493/LICENSE",
+        "final_url": "https://raw.githubusercontent.com/getzep/graphiti/3c427640abf909f12f71f963fce15eb514a3c493/LICENSE",
+        "retrieved_at_utc": "2026-10-02T16:30:35.044416+00:00",
+        "version": "3c427640abf909f12f71f963fce15eb514a3c493",
+        "resource_kind": "license",
+        "path": "graphiti-license.txt",
+        "sha256": "2825300b20d7b951209835a4a331f29e24725a39d65168e4b831df53aa372650",
+        "bytes": 11325,
+        "http_status": 200
+      },
+      {
+        "id": "longmemeval-repository",
+        "url": "https://api.github.com/repos/xiaowu0162/LongMemEval",
+        "retrieved_at_utc": "2026-10-02T16:30:35.634307+00:00",
+        "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "resource_kind": "repository_metadata",
+        "status": "FETCH_FAILED",
+        "error": "HTTP Error 403: rate limit exceeded"
+      },
+      {
+        "id": "longmemeval-root",
+        "url": "https://api.github.com/repos/xiaowu0162/LongMemEval/contents/?ref=9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "retrieved_at_utc": "2026-10-02T16:30:36.031480+00:00",
+        "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "resource_kind": "root_file_listing",
+        "status": "FETCH_FAILED",
+        "error": "HTTP Error 403: rate limit exceeded"
+      },
+      {
+        "id": "longmemeval-license",
+        "url": "https://raw.githubusercontent.com/xiaowu0162/LongMemEval/9e0b455f4ef0e2ab8f2e582289761153549043fc/LICENSE",
+        "final_url": "https://raw.githubusercontent.com/xiaowu0162/LongMemEval/9e0b455f4ef0e2ab8f2e582289761153549043fc/LICENSE",
+        "retrieved_at_utc": "2026-10-02T16:30:36.366653+00:00",
+        "version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+        "resource_kind": "license",
+        "path": "longmemeval-license.txt",
+        "sha256": "d3c4b9aa54759df6ded337978a6f3b55b75615e5e4525c3b82d7e2627d4b9732",
+        "bytes": 1062,
+        "http_status": 200
+      },
+      {
+        "id": "stale-repository",
+        "url": "https://api.github.com/repos/icedreamc/STALE",
+        "retrieved_at_utc": "2026-10-02T16:30:37.025261+00:00",
+        "version": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "resource_kind": "repository_metadata",
+        "status": "FETCH_FAILED",
+        "error": "HTTP Error 403: rate limit exceeded"
+      },
+      {
+        "id": "stale-root",
+        "url": "https://api.github.com/repos/icedreamc/STALE/contents/?ref=ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "retrieved_at_utc": "2026-10-02T16:30:37.364819+00:00",
+        "version": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "resource_kind": "root_file_listing",
+        "status": "FETCH_FAILED",
+        "error": "HTTP Error 403: rate limit exceeded"
+      },
+      {
+        "id": "stale-license",
+        "url": "https://raw.githubusercontent.com/icedreamc/STALE/ea7d391103a151927cd29d2f01d87597a782bdcb/LICENSE",
+        "final_url": "https://raw.githubusercontent.com/icedreamc/STALE/ea7d391103a151927cd29d2f01d87597a782bdcb/LICENSE",
+        "retrieved_at_utc": "2026-10-02T16:30:37.662428+00:00",
+        "version": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "resource_kind": "license",
+        "path": "stale-license.txt",
+        "sha256": "0adcc27078a1b9a5f9905b7bba7b9b1a280d56828c2c00b6db17c872ee549bb6",
+        "bytes": 1069,
+        "http_status": 200
+      },
+      {
+        "id": "graphiti-pyproject",
+        "url": "https://raw.githubusercontent.com/getzep/graphiti/3c427640abf909f12f71f963fce15eb514a3c493/pyproject.toml",
+        "final_url": "https://raw.githubusercontent.com/getzep/graphiti/3c427640abf909f12f71f963fce15eb514a3c493/pyproject.toml",
+        "retrieved_at_utc": "2026-10-02T16:30:38.052435+00:00",
+        "version": "3c427640abf909f12f71f963fce15eb514a3c493",
+        "resource_kind": "package_metadata",
+        "path": "graphiti-pyproject.toml",
+        "sha256": "52b58f16f325fe923ec1d05e35f3157df458e36b5a460ccf4fc34b2623fba0ac",
+        "bytes": 2847,
+        "http_status": 200
+      },
+      {
+        "id": "stale-component-list",
+        "url": "https://api.github.com/repos/icedreamc/STALE/contents/STALE?ref=ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "retrieved_at_utc": "2026-10-02T16:30:38.442192+00:00",
+        "version": "ea7d391103a151927cd29d2f01d87597a782bdcb",
+        "resource_kind": "component_file_listing",
+        "status": "FETCH_FAILED",
+        "error": "HTTP Error 403: rate limit exceeded"
+      },
+      {
+        "id": "longmemeval-cleaned-dataset-metadata",
+        "url": "https://huggingface.co/api/datasets/xiaowu0162/longmemeval-cleaned/revision/98d7416c24c778c2fee6e6f3006e7a073259d48f",
+        "final_url": "https://huggingface.co/api/datasets/xiaowu0162/longmemeval-cleaned/revision/98d7416c24c778c2fee6e6f3006e7a073259d48f",
+        "retrieved_at_utc": "2026-10-02T16:30:38.952503+00:00",
+        "version": "98d7416c24c778c2fee6e6f3006e7a073259d48f",
+        "resource_kind": "dataset_metadata_no_rows",
+        "path": "longmemeval-cleaned-dataset-metadata.json",
+        "sha256": "7f0d6583bd4ca7135a77aa30d52770db412f3ed2a6bb60f34a7de950a479876e",
+        "bytes": 1128,
+        "http_status": 200
+      }
+    ],
+    "preservation_limit": "Five repeated GitHub API snapshot fetches returned rate-limit403 after successful metadata observations. Exact immutable license resources are preserved; failed capture rows are explicit, not fabricated. No dataset archive, example tasks or result files were downloaded."
+  },
+  "remaining_requirements": [
+    "32 jointly independent T0 histories with source/license/exposure proof are not selected or frozen.",
+    "Origin and template-family audit is missing for inherited pools; metadata component counts cannot fill this gap.",
+    "BeliefMem native source/license unavailable in checked placeholder; official repository linkage unproved.",
+    "Graphiti execution, prompts and background-call audit plus paid native small slice remain undone.",
+    "STALE dataset-license and cross-benchmark derivation audit remain undone.",
+    "Official scorer and added disambiguation labels must remain separate at transfer stage.",
+    "Independent second annotation/review has not occurred; root or same-family review cannot be relabeled independent."
+  ],
+  "completion_claim": "N0 metadata evidence only; not T0/G1 pass, not full v13.4 completion; Product remains NO_GO."
+}

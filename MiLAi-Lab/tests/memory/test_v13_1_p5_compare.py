@@ -1083,6 +1083,9 @@ if __name__ == "__main__":
         runtime.__dict__.update(context)
         runtime.settings, runtime.parameters = frozen["config"], frozen["comparison_parameters"]
         runtime.arm, runtime.pending, runtime.last_material = runtime.parameters["arm"], [], {}
+        runtime.common_profiles = compare.profiles(runtime.settings)
+        runtime.common = runtime.parameters.get("common_boundary", {})
+        runtime.recipe = None
         runtime.formation_namespace = (*runtime.service.namespace, "p5_compare_formation")
 
         def embedding(request: httpx.Request) -> httpx.Response:

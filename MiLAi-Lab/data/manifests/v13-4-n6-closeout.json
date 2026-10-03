@@ -1,0 +1,67 @@
+{
+  "kind": "V13_4_N6_CONDITIONAL_EXIT_CLOSEOUT",
+  "execution_status": "CLOSED_CONDITIONAL_SIMPLIFY",
+  "all_scientific_requirements_passed": false,
+  "decision": "SIMPLIFY",
+  "G1": "NOT_PASSED_SCOPED",
+  "Product": "NO_GO",
+  "branch": "feat/lab-correction-evidence-v13-4-20261003",
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "last_pre_closeout_commit": "a6edc2f",
+  "requirements_statuses": {
+    "PARTIAL": 31,
+    "PASSED_SCOPED": 48,
+    "NOT_VERIFIED": 42,
+    "NOT_PASSED": 1
+  },
+  "inherited_original48": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "local_inventory": {
+    "path": "artifacts/v13-4/t0-closeout/local-inventory.json",
+    "sha256": "035d47b499ef11f2a6859f1cc6f99219071eb06868ccb369d8e9a85a96895168",
+    "files": 2452
+  },
+  "tracked_inputs": {
+    "docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md": "3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4",
+    "data/manifests/v13-2-requirements.json": "bbdc93e31012b7b18837a64a555b5dd1fd84bed2288bb291bf5bc0d836dd7dd3",
+    "docs/V13_4_T0_RESULTS_AND_EXIT.md": "dbae22fa26c439fbb157e50cbf158a6fd596469bc73d58a1f8ef12bbe176d6d3",
+    "docs/V13_4_EXECUTION_STATUS.md": "77b98356cd957057615d1d6c9a98e879429d72108718f848d42bfc4f01868d87",
+    "docs/V13_4_REQUIREMENTS_AND_GATES.md": "677567fe5961b4437401bbacce86c1e0dcc84df2f8f317d736ba2365106c5200",
+    "data/manifests/v13-4-requirements.json": "a10da9b0be3a6ad588578d6f4c88c97f8ed7fce81e1f79f50aab63d0a1eff053",
+    "data/manifests/v13-4-t0-final-results.json": "d364eaceba6116414904069fda11714203e9621a0b909b8b2a75078d2b076a90",
+    "data/manifests/v13-4-g1-decision.json": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14",
+    "scripts/v13_4_verify_closeout.py": "06fbe647130b18cebb294d184a88e47e0b3543ff2f1f5c0d33fd092769f635c7",
+    "docs/figures/v13-4-t0-coverage.png": "6b443e2cd7acb0e0c970a67ec92bb590331e67063ece21a21371c48515c1ae27",
+    "src/milai_lab/runners/correction_evidence_eval.py": "f1efe56ad78d7319e69df14cc178ab23c864f682a469bb3dd612c2fd48bf16a9",
+    "src/milai_lab/contracts/correction_relation.py": "e2f0d294513607db001cfe0c9c6223e57ef1fb2348b3dbe0b2ce1380070e843b",
+    "src/milai_lab/methods/correction_spans.py": "222f9de1bbc01744ff723873f1ec02dcf450eed0517154a69374351f77911f62",
+    "src/milai_lab/methods/correction_metadata.py": "cfa719b27353d1024020af8eb6f0404559776dfbe29b64cf74b6e6fbdadf94e7",
+    "src/milai_lab/methods/correction_evidence.py": "0c44fd6d34f95271402842f141aad63d272e5724c3e7a9f01e34144bc14b2ca4",
+    "src/milai_lab/methods/correction_chains.py": "f40cc5f1447c35753468ca85ffa04f84ad9cf3920824885b184af247caaa1253",
+    "src/milai_lab/methods/correction_reader.py": "ea1b1b38f28590ddb95b9c5136588592d28c99ae7c31f4c2bfecee7cb06f842c",
+    "data/manifests/v13-4-progress.json": "991852f87e15ebc22abd62fdf46e11314597bfa6d68ff33d7516ae7de09d7203",
+    "AGENTS.md": "611b037dff1c6b2488cdaef34d22ee003e8105ee9e311f81a095a777fea9f937"
+  },
+  "verification": "python3 scripts/v13_4_verify_closeout.py --local",
+  "local_evidence_availability": "Ignored workspace files; raw source/license and provider artifacts are not portable Git data",
+  "no_new_model_calls_during_closeout": true,
+  "ledger_after_sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
+  "scope": "Plan-authorized Simplify exit and local research deliverables completed;T1-T3 unrun,formal paper and Product not complete",
+  "final_mechanical_audit": {
+    "path": "artifacts/v13-4/t0-closeout/final-audit.json",
+    "sha256": "7d4d55bda66919197a9b9bf456bc7bc5f6a6fbdfb9357740d5a924f942a2de5e",
+    "scope": "312 checks,17 pre-finalization tracked hashes;only progress and this linkage finalized afterward"
+  },
+  "verification_result": {
+    "status": "PASS",
+    "local_files": 2452,
+    "final_tracked_inputs": 19,
+    "source_tests": "Previously passed136 affected,35 independent metadata,7 tokenizer toys;runtime unchanged",
+    "new_verifier_static": "ruff PASS",
+    "git_diff_check": "PASS"
+  }
+}

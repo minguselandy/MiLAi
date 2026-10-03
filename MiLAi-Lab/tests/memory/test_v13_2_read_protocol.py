@@ -374,7 +374,18 @@ def test_actual_toolnode_observer_journal_keeps_completed_action_then_bad_read(
         sidecar.close()
 
 
-def capacity_config() -> dict[str, Any]:
+def capacity_config(root: Path | None = None) -> dict[str, Any]:
+    if root is not None:
+        # Protocol mechanics use a generated tokenizer; real Qwen cost tests
+        # explicitly call the no-argument branch and retain local_artifacts.
+        import runpy
+
+        helper = Path(__file__).parents[1] / "unit/test_v13_1_controls.py"
+        config = runpy.run_path(str(helper))["settings"](root)["capacity"]
+        return {**config, "model": "synthetic", "context_tokens": 131072,
+                "output_tokens": 4096, "safety_tokens": 64,
+                "batch_source_tokens": 4096, "related_reserve_tokens": 0,
+                "schema_reserve_tokens": 0, "source_message_overhead_tokens": 0}
     return {
         "model": "synthetic",
         "tokenizer_path": "/cra/qwen36-35B",
@@ -402,6 +413,7 @@ def synthetic_settings(root: Path) -> tuple[Path, Path, dict[str, Any]]:
 
     budget_path = root / "local-budget.json"
     write_json(budget_path, RunBudget(RunLimits(generation_requests=100), budget_path).state)
+    capacity = capacity_config(root)
     settings = {
         "host": {
             "base_url": "http://synthetic/v1",
@@ -409,7 +421,7 @@ def synthetic_settings(root: Path) -> tuple[Path, Path, dict[str, Any]]:
             "tool_mode": "json_action",
             "max_tokens": 4096,
         },
-        "capacity": capacity_config(),
+        "capacity": capacity,
         "budget_path": str(budget_path),
         "memory_mutation_contract": "event_bound_v1",
         "memory_candidate_contract": "read_handle_v1",
@@ -422,8 +434,8 @@ def synthetic_settings(root: Path) -> tuple[Path, Path, dict[str, Any]]:
         "tool_save_communication": "completed_receipt_v1",
         "embedding": {"base_url": "http://synthetic/v1", "model": "synthetic-embedding"},
         "embedding_capacity": {
-            "tokenizer_path": "/cra/qwen36-35B/tokenizer.json",
-            "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+            "tokenizer_path": str(Path(capacity["tokenizer_path"]) / "tokenizer.json"),
+            "tokenizer_sha256": capacity["tokenizer_files_sha256"]["tokenizer.json"],
             "context_tokens": 8192,
         },
         "embedding_dimension": 2,

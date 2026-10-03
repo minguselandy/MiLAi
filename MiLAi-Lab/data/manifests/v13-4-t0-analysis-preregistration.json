@@ -1,0 +1,54 @@
+{
+  "kind": "V13_4_T0_DEVELOPMENT_ANALYSIS_PREREGISTRATION",
+  "frozen_at_utc": "2026-10-02T18:30:39.357960+00:00",
+  "stage": "AFTER_METHOD_AND_METADATA_FREEZE_BEFORE_QUERY_COLLECTION_COMPLETE_OR_ANY_SELECTION_READER_RESULTS",
+  "authoring_freeze_sha256": "8647403da69d81603b1df68d4f6ad305c0ae4faf6939b1358359271b6c12a357",
+  "population": "All32 preselected development origins,4 evaluator query kinds each; no outcome-based replacement or stratum coercion",
+  "primary_arms": [
+    "chain_rag_v1",
+    "temporal_scope_chain_v1"
+  ],
+  "primary_evidence_budget": 2048,
+  "offline_curve_budgets": [
+    512,
+    1024,
+    2048
+  ],
+  "offline_curve_arms": [
+    "chain_rag_v1",
+    "temporal_scope_chain_v1",
+    "slot_retrieve_v1"
+  ],
+  "planned_real_reader_slots": 256,
+  "formal_inference_claims": false,
+  "coverage": {
+    "whole_question_denominator": "SOLVABLE with semantically reviewed E* family",
+    "partial": "PARTIALLY_SOLVABLE allowed-answer support coverage separate; whole-query N/A",
+    "insufficient_unknown": "Whole-question N/A; unknown annotation utility not fabricated",
+    "miss_label": "NO_ENUMERATED_SET_COVERED unless reviewed alternative-set completeness supports stronger interpretation",
+    "candidate_and_delivery": "Exact same-source/hash codepoint union; candidate IDs, plan selection and actual HTTP delivery separate"
+  },
+  "semantic_utility": {
+    "values": [
+      0,
+      0.5,
+      1
+    ],
+    "rubric": "Per-query frozen anchors; supported uncertainty can earn1; material unsupported certainty and excessive refusal separate",
+    "aggregation": "Report by four query kinds and solvability; no undefined overall mixed-task accuracy",
+    "review": "Single developer semantic review on method-hidden output copies, with limits explicit; no independent Judge claim"
+  },
+  "G1_query_conditions": [
+    "At least two source-compatible relation interpretations produce different answer constraints before relevant disambiguating evidence is consumed.",
+    "Frozen full archive contains semantically reviewed disambiguating evidence with supported answer constraints.",
+    "Evaluator can exhibit actual complete public units inside shared K32 covering an enumerated whole-query E* with common render/tokenizer cost<=2048.",
+    "B1 and B2 actual deliveries leave the relevant relation-disambiguation gap; mere missing primitive public edges, ordinary BM25 misses, oversized atomic chain packaging or technical reasoning errors are identified separately.",
+    "Reader errors when sufficient evidence was actually delivered do not count as a selector relation-disambiguation gap.",
+    "Missing/effective-unknown metadata or B2 fallback alone does not establish that strong temporal approaches have been eliminated."
+  ],
+  "G1_group_decision": "No automatic Go from an aggregate error rate. Report every qualifying query/history and source-family dependence; require recurrence across more than one distinguishable source history and a defensible relation mechanism. If source independence or alternatives remain unresolved, G1 remains insufficient rather than passed. Any expansion or Simplify/Stop decision must preserve all current cases/results and state its scope.",
+  "uncertainty": "T0 is descriptive development diagnosis, not a formal significance/generality claim. Multiple questions and repeats are nested within origin, with known derived-family sensitivity. Formal M-vs-B3/B4 inference remains gated and NOT_RUN.",
+  "model_retry_policy": "No repeated answer attempts, no answer rewriting, no automatic transport retries; capacity not admitted, budget failure, transport unknown and semantic wrong are different statuses.",
+  "B4": "Finite reference verified; natural shared outcome model unavailable, NOT_RUN; no superiority claim.",
+  "method_changes_after_revelation": "No reusing this T0 collection as unseen test. Interface corrections preserve failure artifacts and require explicit nonsemantic justification; semantic/ranking revisions consume a declared development iteration."
+}

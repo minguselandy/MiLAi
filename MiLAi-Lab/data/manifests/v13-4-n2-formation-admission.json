@@ -1,0 +1,37 @@
+{
+  "kind": "V13_4_N2_PREFORMATION_ADMISSION",
+  "status": "FROZEN_NOT_RUN",
+  "formation_freeze": {
+    "path": "artifacts/v13-4/n2-formation/freeze.json",
+    "sha256": "f25e2408682dafc9f9af3227384cde40cb37fa5dc761ce9d9fbe8cce350b6099"
+  },
+  "root_driver": {
+    "path": "artifacts/v13-4/run_n2_formation.py",
+    "sha256": "4f4bf5f1b0238128fcc8794c31ed098068a3adb42ec2a31fced763597681f165"
+  },
+  "protocol": {
+    "path": "docs/V13_4_N2_FORMATION_PROTOCOL.md",
+    "sha256": "6d475e27c82732fbee35ffd8214ac18f874b517ea33aedcbeeb7b7adcc73a36d"
+  },
+  "config": {
+    "path": "configs/v13-4-n2-formation-q0.json",
+    "sha256": "2ba44e61b32677e276688068242b57aa48ec2454a99d5841deb203162cc19316"
+  },
+  "preflight": {
+    "path": "artifacts/v13-4/n2-formation-preflight.json",
+    "sha256": "2d99773e9d539e2de068d47b1d73ba761bfcbfaba373c12a63dab9b843618f74"
+  },
+  "frozen_at_utc": "2026-10-02T17:24:11.805231+00:00",
+  "planned_writer_slots": 64,
+  "capacity_admitted": 64,
+  "source_origins": 32,
+  "source_count": 96,
+  "facts": 0,
+  "queries_created": 0,
+  "g1_status": "NOT_EVALUATED",
+  "input_and_ledger_before_start": "VERIFIED",
+  "source_semantic_independence": "NOT_VERIFIED",
+  "formation_scope": "only actual errata input; original RFC metadata unknown; all raw sources preserved",
+  "amendment": "one pre-query formation substep moved before T0; no predictor training/T1 signal analysis before G1",
+  "model_policy": "Root only; existing services; serial; continuous existing ledger; one request per source; no retries"
+}

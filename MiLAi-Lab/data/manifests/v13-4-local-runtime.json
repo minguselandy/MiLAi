@@ -1,0 +1,20 @@
+{
+  "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+  "python_version": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+  "modules": {
+    "milai_lab": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-4/MiLAi-Lab/src/milai_lab/__init__.py",
+    "milai_lab.memory.service": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-4/MiLAi-Lab/src/milai_lab/memory/service.py",
+    "milai_lab.providers.contextual_vllm": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-4/MiLAi-Lab/src/milai_lab/providers/contextual_vllm.py"
+  },
+  "packages": {
+    "milai-lab": "0.1.0",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "transformers": "4.57.6",
+    "tokenizers": "0.22.2",
+    "httpx": "0.28.1",
+    "pytest": "8.4.2",
+    "ruff": "0.16.5"
+  },
+  "execution_import_rule": "PYTHONPATH=worktree/src, verified origin; installed distribution version alone does not pin executing source",
+  "socket_requests": 0
+}

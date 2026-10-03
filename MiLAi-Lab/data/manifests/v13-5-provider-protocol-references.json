@@ -1,0 +1,50 @@
+{
+  "kind": "V13_5_PROVIDER_PROTOCOL_PRIMARY_REFERENCES",
+  "purpose": "Audit current-turn native tool reasoning transport after actual r31 truncation; no server/tokenizer/model deployment edits. Missing reasoning transport is established locally; whether it causes looping remains unproven. Sampling recommendations are recorded but not changed in r32.",
+  "references": [
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/raw/main/README.md",
+      "path": "artifacts/v13-5/protocol-research-r32/model-card.md",
+      "bytes": 64550,
+      "sha256": "c4ddaa065649ff6352648f64747a16eda31726f3e34add94ce04abb461c77b75",
+      "retrieved_utc": "2026-10-03T09:22:23.444486+00:00",
+      "version": "public main/latest snapshot, date/hash pinned; not model deployment"
+    },
+    {
+      "url": "https://docs.qwencloud.com/developer-guides/text-generation/thinking",
+      "path": "artifacts/v13-5/protocol-research-r32/thinking.html",
+      "bytes": 642521,
+      "sha256": "eaaa7dec87d1855a26168f7cdfd82acdd9a2f0c2146c8fdca8e1ff2476a78c06",
+      "retrieved_utc": "2026-10-03T09:22:25.739210+00:00",
+      "version": "public main/latest snapshot, date/hash pinned; not model deployment"
+    },
+    {
+      "original_path": "/cra/qwen36-35B/chat_template.jinja",
+      "path": "artifacts/v13-5/protocol-research-r32/chat_template.jinja",
+      "sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+      "bytes": 7764,
+      "version": "existing pinned tokenizer template or installed vLLM0.27.1; read only"
+    },
+    {
+      "original_path": "/proc/3766863/root/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/openai/chat_completion/protocol.py",
+      "path": "artifacts/v13-5/protocol-research-r32/protocol.py",
+      "sha256": "69ca76724ccb4a2e990814767c344226d47ead7d608213a4939584cd048637dd",
+      "bytes": 47397,
+      "version": "existing pinned tokenizer template or installed vLLM0.27.1; read only"
+    },
+    {
+      "original_path": "/proc/3766863/root/usr/local/lib/python3.12/dist-packages/vllm/entrypoints/chat_utils.py",
+      "path": "artifacts/v13-5/protocol-research-r32/chat_utils.py",
+      "sha256": "150f40b0a0ba87548b0feb86f002fea7d246f5a4d5f7bc2cecd3c3824098c851",
+      "bytes": 75244,
+      "version": "existing pinned tokenizer template or installed vLLM0.27.1; read only"
+    },
+    {
+      "original_path": "/cra/qwen36-35B/generation_config.json",
+      "path": "artifacts/v13-5/protocol-research-r32/generation_config.json",
+      "sha256": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "bytes": 202,
+      "version": "existing installed Qwen model generation configuration; read only; temperature1/top_p0.95/top_k20. R33 changes only explicit temperature request; other provider defaults are not mutated."
+    }
+  ]
+}

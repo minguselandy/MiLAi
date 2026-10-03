@@ -1,0 +1,17 @@
+{
+  "schema": "v13_5_l4_authorship_freeze_v1",
+  "method_commit": "c6c2e8b229ffbc1b2db02c95a2af7a641761d353",
+  "configuration": "configs/v13-5-functional-r24.json",
+  "author": "Root same-family development operator",
+  "independent_review": false,
+  "status": "INPUTS_FROZEN_BEFORE_ANY_L4_OUTPUT",
+  "stories": 12,
+  "messages": 30,
+  "exposure": "New Root-authored natural stories after method freeze; Host has not received them. Not an independent benchmark or a revival of T1-T3. Similarity to existing task classes acknowledged. No hidden rubric/control in method material.",
+  "files": {
+    "artifacts/v13-5/evaluator-fixtures/l4-r24-runtime.json": "040390772c3275485cb5cc90f5d3e8c51ef0715437bd125668b6015d61562d5f",
+    "artifacts/v13-5/evaluator-fixtures/l4-r24-rubric.json": "369c5c24a68461caef2cf65386ab95a43e6c0faee5cbae5d5e0e38d6f66b0ec4",
+    "artifacts/v13-5/evaluator-fixtures/l4-r24-controls.json": "184a1e33c871016a44285c6d3557c53531ba7c13b198384cc93c7b9fe1fb1241",
+    "configs/v13-5-functional-r24.json": "5ec748a19104e65b15e858ac48ec86580c8b6f49ad67204d3d1b81d7262ab302"
+  }
+}

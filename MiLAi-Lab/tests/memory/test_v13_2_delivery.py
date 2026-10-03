@@ -21,7 +21,7 @@ from milai_lab.runners import v13_1_p5 as runner
 
 
 def helper(name: str, filename: str) -> Any:
-    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(filename))
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).parent / filename)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module
@@ -38,7 +38,9 @@ def test_actual_projection_sigkill_reopens_without_repeating_business_mutation(
     tmp_path: Path, window: str
 ) -> None:
     old.prepared(tmp_path)
+    tokenizer_helpers = helper("delivery_tokenizer", "../unit/test_v13_1_controls.py")
     settings = read_json(tmp_path / "config.json")
+    settings["capacity"] = tokenizer_helpers.settings(tmp_path)["capacity"]
     settings.update(
         memory_mutation_contract="event_bound_v1", memory_observation_profile="reservation_v1"
     )
@@ -46,7 +48,7 @@ def test_actual_projection_sigkill_reopens_without_repeating_business_mutation(
     root = tmp_path / "projection-crash"
     frozen = runner.prepare(tmp_path / "public.json", tmp_path / "config.json", root)
     process, crash = old.child(root, window=window, attempt="actual-projection-crash")
-    assert process.returncode == -signal.SIGKILL, process.stderr
+    assert process.returncode == -signal.SIGKILL, (process.stderr, crash)
     assert crash["boundary"] == window and crash["status"] == "hard_exit_armed"
     assert crash["final_answer"] is None
     assert len(crash["world"]["attempts"]) == 1

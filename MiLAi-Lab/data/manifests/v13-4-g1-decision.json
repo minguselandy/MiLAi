@@ -1,0 +1,78 @@
+{
+  "kind": "V13_4_ROOT_G1_DEVELOPMENT_DECISION",
+  "decision": "SIMPLIFY",
+  "G1": "NOT_PASSED_SCOPED",
+  "G1_interpretation": "Required recurrent relation-disambiguation mechanism not established; not a universal falsification of H1.",
+  "scope": "All32 exposed development histories,128 queries,256 frozen B1/B2 responses; Q0,K32,2048 Reader material budget.",
+  "qualifying_queries": [],
+  "qualifying_distinct_histories": 0,
+  "all_solvable_K_covered_and_joint_2048_witness": 123,
+  "stage_counts": {
+    "NO_DEMONSTRATED_BREAKPOINT": 189,
+    "PLAN_PACKAGING_ENUMERATED_SET_MISS": 50,
+    "READER_INTERPRETATION_ERROR": 7,
+    "ARCHIVE_PARTIAL_OR_INSUFFICIENT": 10
+  },
+  "Root_review": "All26 deduplicated pre-Reader omission/alternative notes; all7 nonfull responses with enumerated sufficient evidence delivered, including actual material and answer.",
+  "reader_error_histories": [
+    "RFC8345",
+    "RFC9115",
+    "RFC9605"
+  ],
+  "archive_counterexample": "RFC7940 conflicting source witnesses do not establish publication/editing chronology. Missing evidence is not a latent relation hypothesis solvable from this archive.",
+  "ordinary_alternatives": "RFC9562 bit inference, RFC7430 attacker actions, RFC8824 alternate old/corrected table evidence and other memo cases do not demonstrate competing relation hypotheses.",
+  "conclusions_allowed": [
+    "Retain opt-in read-only B1 entry and explicit correction/source provenance.",
+    "Atomic-group size, ordering, ordinary Reader reasoning and formation quote fidelity are observed development limitations.",
+    "Keep frozen E* coverage and semantic utility separate; no post-result gold repair."
+  ],
+  "conclusions_not_allowed": [
+    "Simple methods solve all cases",
+    "B2 selector advantage from same-input answer differences",
+    "General relation ambiguity absent",
+    "B3/B4 superiority or G2 signal established",
+    "Independent Judge, unseen-source generalization, Product readiness"
+  ],
+  "conditional_work": {
+    "T1": "NOT_RUN_G1_NOT_ADMITTED",
+    "T2": "NOT_RUN_G1_NOT_ADMITTED",
+    "T3": "NOT_RUN_G1_NOT_ADMITTED",
+    "G2": "NOT_EVALUATED",
+    "G3": "NOT_EVALUATED",
+    "G4": "FORMAL_RESEARCH_NOT_PASSED",
+    "backup_counterevidence_platform": "NOT_STARTED_CONDITIONAL_RESEARCH_CARD_ONLY"
+  },
+  "auxiliary_flags": {
+    "unsupported_certainty": {
+      "False": 212,
+      "None": 39,
+      "True": 5
+    },
+    "overrefusal": {
+      "False": 244,
+      "None": 12
+    }
+  },
+  "auxiliary_limits": "Frozen flags are scoped development review;39 unsupported-certainty and12 Reader-overrefusal unknowns retained. No exhaustive factuality or zero-overrefusal claim.",
+  "mutations": {
+    "runtime": false,
+    "gold": false,
+    "scores": false,
+    "bank": false,
+    "new_model_calls": 0
+  },
+  "inputs": {
+    "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c",
+    "artifacts/v13-4/t0-scoring/blind-score-freeze/final-scores.json": "f2941efe3e4e0a7fa4e3fc2dd4d0f32ab28794f629acf3dd43bc37c7820cd6f4",
+    "artifacts/v13-4/t0-scoring/blind-r1/private-mapping.json": "6a8adc3fb00f3e0c5a631f6a6c552a86df0df07ca711ec968858a98f4085528b",
+    "artifacts/v13-4/t0-coverage/evaluation-r0/per-variant.json": "7bd922422dd3e1ee161d17a2d5cb4b00f4713bc839cc177ed4e3fcf1e3118719",
+    "artifacts/v13-4/t0-coverage/diagnostic-memo-r0/cases.json": "b2823cfa09fbff86c846a64a1923c172df5c69ce5e661b7c68156c7128ef0fdf",
+    "artifacts/v13-4/t0-coverage/diagnostic-memo-r0/exploratory-alternative-notes.json": "b7cfd6e6a6a2cda8bd618daeffa14767b8edeb4249208cf0a780f961b66ad659",
+    "data/manifests/v13-4-t0-analysis-preregistration.json": "adaf5f20131f82f6a4200fd0540d30ae0c75ff84e2940957b42c58e2fb1f7e9d"
+  },
+  "script_sha256": "962280fe49c9f7f79a9970384671d1995462a0c32d339af7e949a5f5b854b2b9",
+  "products": {
+    "per-response.json": "31873bb80441cee0d0a8871710b48d8a78bc67c3cf7a6f3e66cbca3d32bf58fa",
+    "per-history.json": "6912be9148c13afde6b69d77e41b1ba42f83c33e93658e5a955d8774d8ebd35b"
+  }
+}
