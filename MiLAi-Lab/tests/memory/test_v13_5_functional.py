@@ -278,11 +278,12 @@ def test_correction_fragment_selection_is_explicit_not_inferred_from_trigger(
         assert "Search never saves or updates" in descriptions["search_memory"]
 
 
-@pytest.mark.parametrize("interface", ["content_and_scope_v1", "unified_assertion_v2"])
+@pytest.mark.parametrize("interface", [
+    "content_and_scope_v1", "unified_assertion_v2", "unified_assertion_v3"])
 def test_public_update_selects_evidence_per_field_and_retains_unchanged_history(
     tmp_path: Path, interface: str,
 ) -> None:
-    evidence_key = ("evidence_for_new_value" if interface == "unified_assertion_v2"
+    evidence_key = ("evidence_for_new_value" if interface != "content_and_scope_v1"
                     else "fragment_handles")
     with opened(tmp_path, formation_interface=interface) as memory:
         initial = turn(memory, text="Distance in miles; project Alpha; weekdays only.")
@@ -593,6 +594,39 @@ def test_m08_m09_nested_patch_noop_history_and_unchanged_leaf_support(tmp_path: 
             memory.service.read(receipt["id"], 1)["value"]["scope"]["project"]["time"] == "Tuesday"
         )
         assert memory.service.history_index(receipt["id"])["revisions"] == [1, 2]
+
+
+@pytest.mark.parametrize("archived", [False, True])
+def test_withdrawal_selection_keeps_cancellation_separate_from_old_support(
+    tmp_path: Path, archived: bool,
+) -> None:
+    with opened(tmp_path, formation_interface="unified_assertion_v3") as memory:
+        old = turn(memory, text="Keep this preference for the local sample only.")
+        saved = memory.save(cfg(), "save", "Local sample preference.", handles(memory, old), {})
+        before = memory.service.read(saved["id"])
+        cancellation = turn(memory, "cancel", "Withdraw that local sample preference.")
+        selected = handles(memory, cancellation)
+        message_id = "query" if archived else "cancel"
+        if archived:
+            query = turn(memory, "query", "What is currently recorded?")
+        tool = next(t for t in memory.tools() if t.name == "update_memory")
+        properties = tool.tool_call_schema.model_json_schema()["properties"]
+        assert "evidence_for_withdrawal" in properties and "fragment_handles" not in properties
+        result = invoke(memory, "update_memory", {
+            "read_handle": before["candidate_handle"], "changes": [], "retract": True,
+            "evidence_for_withdrawal": selected,
+        }, "withdraw", cfg(message_id))
+        assert result["ok"] and result["id"] == saved["id"] and result["revision"] == 2
+        assert memory.service.read(saved["id"])["status"] == "retracted"
+        version = memory.service.read(saved["id"], 2)["value"]
+        assert version["functional_support"] == before["value"]["functional_support"]
+        withdrawal = version["removed_field_support"]["record"]
+        assert withdrawal["source_refs"] == [cancellation]
+        assert withdrawal["quotes"][0]["content"] == "Withdraw that local sample preference."
+        assert withdrawal["semantic_support"] == "unchecked"
+        assert memory.service.read(saved["id"], 1)["value"] == before["value"]
+        if archived:
+            assert query not in version["source_refs"]
 
 
 def test_m10_remove_null_absent_and_retract(tmp_path: Path) -> None:

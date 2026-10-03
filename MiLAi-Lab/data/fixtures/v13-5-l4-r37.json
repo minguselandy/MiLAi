@@ -1,0 +1,262 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "l4-f01",
+      "owner": "v13-5-l4-f01",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f01-m1",
+          "session_id": "visit-1",
+          "content": "以后帮我整理会议纪要时，尽量先列待办，再写讨论内容；逐字转录不受这条影响。请记住。"
+        },
+        {
+          "message_id": "l4-f01-m2",
+          "session_id": "visit-2",
+          "content": "我的会议纪要排版习惯已经有记录了吗？请告诉我原来的约定，不用另存一遍。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f02",
+      "owner": "v13-5-l4-f02",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f02-m1",
+          "session_id": "visit-1",
+          "content": "记一下：陶艺练习笔记中的窑温用华氏度标示；购买成品的收据不适用。"
+        },
+        {
+          "message_id": "l4-f02-m2",
+          "session_id": "visit-2",
+          "content": "之前陶艺练习笔记的窑温单位是什么？顺便更正为摄氏度，成品收据仍不受影响，请修改原记录。"
+        },
+        {
+          "message_id": "l4-f02-m3",
+          "session_id": "visit-3",
+          "content": "我再确认一下：现在陶艺练习笔记和成品收据各怎么处理？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f03",
+      "owner": "v13-5-l4-f03",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f03-m1",
+          "session_id": "visit-1",
+          "content": "请记住，仅这次市集摆摊，饮料区尽量用蓝色价签；其他摊位颜色不作规定。"
+        },
+        {
+          "message_id": "l4-f03-m2",
+          "session_id": "visit-2",
+          "content": "市集那条颜色偏好撤掉吧，这次饮料区也不要限定价签颜色了。请修改已有记录。"
+        },
+        {
+          "message_id": "l4-f03-m3",
+          "session_id": "visit-3",
+          "content": "现在饮料区还限定价签颜色吗？其他摊位呢？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f04",
+      "owner": "v13-5-l4-f04",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f04-m1",
+          "session_id": "visit-1",
+          "content": "记住我给读书会手册取的暂定标题是“沿河札记”。"
+        },
+        {
+          "message_id": "l4-f04-m2",
+          "session_id": "visit-2",
+          "content": "手册标题改成“岸边短笺”，请更新那一条。"
+        },
+        {
+          "message_id": "l4-f04-m3",
+          "session_id": "visit-3",
+          "content": "之前那个标题后来改成什么了？请把最初和现在的分别说清楚。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f05",
+      "owner": "v13-5-l4-f05",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f05-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的模型制作材料费上限是每月450元。"
+        },
+        {
+          "message_id": "l4-f05-m2",
+          "session_id": "visit-2",
+          "content": "材料费上限改为每月650元，请更新；我还没有决定从哪一个月开始执行。"
+        },
+        {
+          "message_id": "l4-f05-m3",
+          "session_id": "visit-3",
+          "content": "650元是从哪个月开始？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f06",
+      "owner": "v13-5-l4-f06",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f06-m1",
+          "session_id": "visit-1",
+          "content": "记住：我的摄影作品导出文件名按“日期_主题_序号”排列。"
+        },
+        {
+          "message_id": "l4-f06-m2",
+          "session_id": "visit-2",
+          "content": "请核对保存的摄影文件命名约定，仍然是“日期_主题_序号”，值相同就保留原记录，不要新建或增加版本。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f07",
+      "owner": "v13-5-l4-f07",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f07-m1",
+          "session_id": "visit-1",
+          "content": "以后帮我挑睡前读物时，先考虑散文，尽量避开悲剧结局；这不表示我不读悬疑。请记下来。"
+        },
+        {
+          "message_id": "l4-f07-m2",
+          "session_id": "visit-2",
+          "content": "我的睡前阅读偏好有哪些限制？悬疑是不是一律排除？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f08",
+      "owner": "v13-5-l4-f08",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f08-m1",
+          "session_id": "visit-1",
+          "content": "替我们的虚构寻宝游戏记住测试口令“灯塔纸鹤42”，只是游戏材料，不是任何账户的密码。"
+        },
+        {
+          "message_id": "l4-f08-m2",
+          "session_id": "visit-2",
+          "content": "把刚才寻宝游戏的测试口令忘掉，包括对应原话和你引用过它的回答。"
+        },
+        {
+          "message_id": "l4-f08-m3",
+          "session_id": "visit-3",
+          "content": "我现在还能从你这里查到那段游戏测试口令吗？如果查不到，只说明当前能查到什么。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f09",
+      "owner": "v13-5-l4-f09",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-f09-m1",
+          "session_id": "visit-1",
+          "content": "请为“亚麻桌旗-社区讲堂”预订3条，送到“二层布置间”，包装用“防潮纸套”，制作标签，并记下实际结果。"
+        },
+        {
+          "message_id": "l4-f09-m2",
+          "session_id": "visit-2",
+          "content": "先查亚麻桌旗-社区讲堂的当前状态，标签若还没好就补上，预订不要重复。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f10",
+      "owner": "v13-5-l4-f10",
+      "workflow": "document",
+      "initial_world": {
+        "publication_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-f10-m1",
+          "session_id": "visit-1",
+          "content": "建立文稿“展柜清洁约定”，正文“闭馆后用软布擦拭玻璃，禁止喷水。”，审批并发布到本地沙盒受众“陈列维护组”。请保存每个步骤实际做到哪里。"
+        },
+        {
+          "message_id": "l4-f10-m2",
+          "session_id": "visit-2",
+          "content": "请先查询展柜清洁约定，保留已完成的草稿和审批，只继续没有完成的发布，受众不变。"
+        },
+        {
+          "message_id": "l4-f10-m3",
+          "session_id": "visit-3",
+          "content": "现在只查询这份展柜清洁约定：内容和审批发布状态比我上次办理后有什么变化？不要替后来改动的版本重新审批或发布。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f11",
+      "owner": "v13-5-l4-f11",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": true
+      },
+      "messages": [
+        {
+          "message_id": "l4-f11-m1",
+          "session_id": "visit-1",
+          "content": "为“展示灯夹-东侧长廊”预订2件，目的地“布展台”，包装“软布袋”，并做好标签。"
+        },
+        {
+          "message_id": "l4-f11-m2",
+          "session_id": "visit-2",
+          "content": "刚才答复中断了。先查询展示灯夹-东侧长廊实际办到哪一步，做过的不要再做，告诉我查到的结果。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f12",
+      "owner": "v13-5-l4-f12",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-f12-m1",
+          "session_id": "visit-1",
+          "content": "Remember this for my audio editing notes: keep room tone and spoken dialogue on separate tracks; this does not apply to the final exported file."
+        },
+        {
+          "message_id": "l4-f12-m2",
+          "session_id": "visit-2",
+          "content": "音频剪辑笔记那条补充一下：环境音效也要独立成轨，房间底噪和对白仍各自分轨；最终导出文件仍不适用，请更新原记录。"
+        },
+        {
+          "message_id": "l4-f12-m3",
+          "session_id": "visit-3",
+          "content": "Which tracks should my audio editing notes distinguish now, and does this also constrain the exported file?"
+        }
+      ]
+    }
+  ]
+}

@@ -86,7 +86,8 @@ class FunctionalMemory:
             raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
         if formation_interface not in {
-            "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2"}:
+            "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
+            "unified_assertion_v3"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -1152,11 +1153,43 @@ class FunctionalMemory:
                 fragment_handles=fragment_handles,
             )
 
+        def update_assertion_withdrawal(
+            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            evidence_for_withdrawal: Annotated[list[str] | None, Field(description=(
+                "Only for retract=true: original fragments that state the WITHDRAWAL. "
+                "The old keep/save statement identifies what is withdrawn but cannot "
+                "support its withdrawal. The read_handle already identifies the target. "
+                "Select the actual withdrawal text, which may be current or archived; "
+                "the current request/trigger is not automatically evidence."))] = None,
+        ) -> ToolMessage:
+            """Revise or withdraw the OLD read target with evidence for the actual CHANGE.
+
+            For a revision, each changes item selects evidence_for_new_value whose
+            unchanged original text supports the replacement or explicit field removal.
+            Keep unchanged qualifications and support; a trigger alone is not evidence.
+            For a withdrawal, use retract=true, changes=[] and evidence_for_withdrawal
+            containing the actual cancellation. Old affirmation is not cancellation
+            evidence. Old content/support stay in history, separate from withdrawal support.
+            A directly supporting archived source remains valid; do not blindly choose
+            the current input when it is only a query. No value, source or current trigger
+            is substituted by the program. Same values/empty changes are no_change.
+            Quote verification proves source bytes only; semantic support is unchecked.
+            """
+            return update_assertion(
+                read_handle, changes, config, tool_call_id=tool_call_id, retract=retract,
+                fragment_handles=evidence_for_withdrawal,
+            )
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
-            if self.formation_interface in {"unified_assertion_v1", "unified_assertion_v2"}
+            if self.formation_interface in {
+                "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3"}
             else StructuredTool.from_function(save_memory))
-        update_tool = (StructuredTool.from_function(update_assertion, name="update_memory")
+        update_tool = (StructuredTool.from_function(
+                           update_assertion_withdrawal, name="update_memory")
+                       if self.formation_interface == "unified_assertion_v3"
+                       else StructuredTool.from_function(update_assertion, name="update_memory")
                        if self.formation_interface == "unified_assertion_v2"
                        else StructuredTool.from_function(update_memory))
         return (save_tool, update_tool, *tuple(

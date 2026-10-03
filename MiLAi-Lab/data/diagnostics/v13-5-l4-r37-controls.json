@@ -1,0 +1,47 @@
+{
+  "kind": "v13_5_evaluator_controls",
+  "runtime_prompt_readable": false,
+  "cases": [
+    {
+      "case_id": "l4-f09",
+      "before_message_events": [
+        {
+          "before_message_index": 1,
+          "operation": "reservation.set_label_available",
+          "event_id": "l4-f09-service-restored",
+          "available": true
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f10",
+      "before_message_events": [
+        {
+          "before_message_index": 1,
+          "operation": "document.set_publication_available",
+          "event_id": "l4-f10-service-restored",
+          "available": true
+        },
+        {
+          "before_message_index": 2,
+          "operation": "document.external_edit",
+          "event_id": "l4-f10-new-draft",
+          "owner_from_case": true,
+          "title": "展柜清洁约定",
+          "new_body": "闭馆后先检查玻璃，再用干软布擦拭。",
+          "public_backend_contract": "Edit creates a new version and invalidates current approval; old approval/publication remain historical."
+        }
+      ]
+    },
+    {
+      "case_id": "l4-f11",
+      "one_shot_fault": {
+        "message_index": 0,
+        "target_operation": "reserve_and_label",
+        "occurrence": 1,
+        "window": "W1",
+        "boundary": "after_native_before_journal_complete"
+      }
+    }
+  ]
+}

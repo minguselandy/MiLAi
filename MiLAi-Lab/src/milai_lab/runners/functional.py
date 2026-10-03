@@ -350,6 +350,7 @@ def prepare(
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
     if settings.get("formation_interface", "content_and_scope_v1") not in {
         "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
+        "unified_assertion_v3",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
         "receipt_business_response_v2", "receipt_business_response_v3",

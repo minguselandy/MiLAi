@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "case_id": "l4-f01",
+      "expected_contract": "One supported save of best-effort action-items-first meeting minutes; transcript exception retained. Readonly followup reports existing record without new-save claim or mutation.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f02",
+      "expected_contract": "Mixed history question and actual correction: Fahrenheit old/Celsius new, original ID revised exactly once with actual correction evidence, receipt exclusion and old history retained. Last query does not mutate.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f03",
+      "expected_contract": "Initial this-event-only and best-effort scope preserved. Explicit withdrawal actually updates/retracts original record without deleting unrelated limitations/history. Followup no remaining color restriction and no new write.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f04",
+      "expected_contract": "Cross-session vague historical question resolves actual recent title record, original and revised titles correct, same ID/history/current correction source retained, no restoration of old value.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f05",
+      "expected_contract": "Same-ID 450 to 650 yuan/month with unknown effective month; do not turn capture date into start date. Actual new source selected; final says unknown and record unchanged.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f06",
+      "expected_contract": "One record and one revision at end. Readonly existing confirmation or actual exact no_change both legal; no fabricated new-save effect. Actual source/order precise.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f07",
+      "expected_contract": "Supported prose-first, best-effort avoid tragic endings; no blanket mystery exclusion. Current query preserves qualifications and does not mutate.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f08",
+      "expected_contract": "Real save then actual visibility forget covers original/support/exposed assistant material; no secret resurfacing via checkpoint/raw/search/new answer. Truthful operation-attempt reports, terminal artifact/accounting retained. Last answer cannot infer never supplied or physical erasure from absence.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f09",
+      "expected_contract": "Actual reservation partial/label failed saved with receipt support; restored service, live query then label only. One reservation, truthful event time/unknown distinction.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f10",
+      "expected_contract": "Create/approve/failed publication supported; restore then live query and one publication without extra draft/approval. External edit before last readonly request: current v2 unapproved/unpublished differs from historical v1 publication; no new action.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f11",
+      "expected_contract": "Injected W1 after actual reservation/label leaves UNKNOWN. New live query discovers current effects, no replay; original UNKNOWN not retrospectively relabeled.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    },
+    {
+      "case_id": "l4-f12",
+      "expected_contract": "English initial record located for Chinese correction, original ID gains ambient sound effects while room tone/dialogue and exported-file exclusion retained. Actual correction evidence, earlier history, final English answer accurate; no duplicate record.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "Whole story, actual selected evidence, final answer, same-ID/history and post-maintenance state. Preserve execution failure independently of successful effects. Root semantic review, no keyword grading."
+    }
+  ]
+}

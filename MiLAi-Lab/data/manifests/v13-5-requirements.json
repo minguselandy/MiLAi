@@ -299,7 +299,7 @@
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
       "assessment": "Root item-by-item development review, not independent acceptance",
-      "latest_development_note": "r29定向跨语言同ID修复通过；r33观鸟同ID撤销、历史、原来源正确，完整同版仍待验收。"
+      "latest_development_note": "r37完整L1字段更正选源通过，但新L4-f03完整撤销仍选择旧肯定来源作为removed_field_support。新值/撤销证据不是同一通过结论；该核心阻断未解决，r38新接口待真实回归。"
     },
     {
       "id": "FUNC-08",
@@ -540,7 +540,7 @@
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
       "assessment": "Root item-by-item development review, not independent acceptance",
-      "latest_development_note": "最新r33通信3/6限定通过，完整L1-L4同版本尚未通过；不拼接历史分数。"
+      "latest_development_note": "r37同版完整L1当前23/24、L2 11/12、形成44/57、读取24/30、新L4 8/12，撤销来源核心阻断使集成未通过。所有失败和首次/恢复尝试分别保留。"
     },
     {
       "id": "FUNC-14",
@@ -5226,13 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r37 mechanical candidate; latest full L1 r36",
-    "scope": "140 statuses retained, not final acceptance. r36 communication3PASS_SCOPED/3FAIL; fullL1 original rubric24PASS, current contract22PASS_SCOPED/2FAIL with core correction-support blocker. Prior evidence snapshots and original48 unchanged.",
-    "evidence": {
-      "artifacts/v13-5/l1-r36/review.json": "fc5827944c413ef327b8b9fd2a32bcb702a36bef26569dba5f58c6948bb042c1",
-      "artifacts/v13-5/l1-r36-review-notes.json": "94f4aec3ce9606906ebf04bb1081ae7326309d06dc043527fcef5715fe0bf32f",
-      "artifacts/v13-5/l1-r36-retained-answer-evaluator/summary.json": "0fdda3e6a74f0a99730868804d40844bc2ab284e8d7532d207bf6ef503be9ad9"
-    },
+    "candidate": "r38 mechanical candidate; latest full real source/profile is r37",
+    "scope": "All r37 L1/L2/L3/L4 denominators executed and reviewed, core withdrawal evidence failure blocks integrated acceptance; 140 row statuses pending terminal backfill after repair regression. Original48 unchanged.",
     "reviewer": "Root",
     "independent_review": false
   }

@@ -50,6 +50,7 @@ def prepared(
     direct_response: bool = False,
     actual_capabilities: bool = False,
     replacement_evidence: bool = False,
+    withdrawal_evidence: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -112,7 +113,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "unified_assertion_v2" if replacement_evidence else
+        "formation_interface": "unified_assertion_v3" if withdrawal_evidence else
+        "unified_assertion_v2" if replacement_evidence else
         "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
@@ -2477,6 +2479,56 @@ def test_replacement_evidence_catalog_commits_new_support_on_original_id(
     assert support['content']['source_refs'] == [updated['capture']['source_ref']]
     assert support['content']['semantic_support'] == 'unchecked'
     assert support['basis'] == saved['records'][0]['value']['functional_support']['basis']
+
+
+def test_withdrawal_evidence_catalog_retains_original_and_cancellation_sources(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, withdrawal_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal in {1, 3}:
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 1:
+                return native_call('save_memory', 'save', content='Local sample preference.',
+                                   fragment_handles=current)
+            schema = next(t['function']['parameters'] for t in wire['tools']
+                          if t['function']['name'] == 'update_memory')
+            assert 'evidence_for_withdrawal' in schema['properties']
+            assert 'fragment_handles' not in schema['properties']
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'withdraw',
+                               read_handle=record['read_handle'], changes=[], retract=True,
+                               evidence_for_withdrawal=current)
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested operation is committed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: local sample preference.')
+    withdrawn = functional.message(root, **common, message_id='withdrawal',
+                                   content='Withdraw that local sample preference.')
+    assert saved['status'] == withdrawn['status'] == 'COMPLETED'
+    assert len(wires) == 4 and len(withdrawn['records']) == 1
+    assert withdrawn['records'][0]['status'] == 'retracted'
+    assert not withdrawn['records'][0]['ok']
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        stored = connection.execute('SELECT value FROM store WHERE key=?',
+                                    (saved['records'][0]['id'],)).fetchone()
+    history = json.loads(stored[0])['_v13_1']['history']
+    assert len(history) == 2
+    original, version = history
+    assert version['retracted'] and version['functional_support'] == original['functional_support']
+    assert version['removed_field_support']['record']['source_refs'] == [
+        withdrawn['capture']['source_ref']]
 
 
 def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:
