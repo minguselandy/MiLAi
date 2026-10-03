@@ -139,6 +139,7 @@ class VLLMChatModel(BaseChatModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
 
+    allow_required_tool_choice: bool = Field(default=False, exclude=True)
     client: VLLMClient
     max_calls_per_message: int = 12
     calls_in_message: int = 0
@@ -245,7 +246,8 @@ class VLLMChatModel(BaseChatModel):
             self.request_transform.validate(request)
         if native and (
             kwargs.get("tool_choice") not in (None, "auto", "none", "required")
-            or (kwargs.get("tool_choice") == "required" and not tools)
+            or (kwargs.get("tool_choice") == "required"
+                and (not self.allow_required_tool_choice or not tools))
             or self.client.config.response_format is not None
         ):
             raise ValueError("NATIVE_CHAT_PROTOCOL_UNSUPPORTED")

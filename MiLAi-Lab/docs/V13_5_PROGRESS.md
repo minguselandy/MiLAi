@@ -571,3 +571,10 @@ scope说明沿用了continuation探针文字；实际调用的两项测试为保
 
 累计恢复执行2,020生成、10,940,699 tokens；v13.5含旧轮合计2,176生成、11,714,935
 tokens。原历史unknown缺口不变，本轮新增unknown usage／embedding为0。
+
+r26 Fast CI37108046214失败于旧provider完整冻结合同：通用桥接默认开始接受required，
+改变了native_protocol_required原本应在HTTP前拒绝的行为。Lab普通fast及边界通过，
+foundation后续检查没有被视为通过。修复为默认关闭的显式模型能力开关，仅功能配置
+声明required时开启；不改旧golden文件。122项provider冻结合同与功能入口回归通过。
+r27首次实现提交84612df尚未启动真实队列；待兼容修复提交后冻结实际候选源码。
+新增FUNC01–16聚合视图，明确已实现、机械、模型及集成缺口；140项终态仍待最终回填。

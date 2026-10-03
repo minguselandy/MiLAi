@@ -1245,6 +1245,7 @@ def message(
             )
             model = LangMemRecipeChatModel(
                 client=client,
+                allow_required_tool_choice=settings.get("declaration_tool_choice") == "required",
                 capacity_path=bank_root / "message-admission.json",
                 max_calls_per_message=settings["max_calls_per_message"],
                 generation_admission_profile="durable_shared_v1",
