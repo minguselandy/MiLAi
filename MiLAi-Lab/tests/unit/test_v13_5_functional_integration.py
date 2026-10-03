@@ -735,7 +735,11 @@ def test_readonly_response_is_durable_bounded_and_preserves_actual_partial_effec
             return {"role": "assistant", "content": "Saved."}
         assert ordinal in {4, 5}
         assert not wire.get("tools") and wire.get("tool_choice", "none") == "none"
-        assert all(m["role"] != "system" for m in wire["messages"][1:])
+        assert [m["role"] for m in wire["messages"]] == ["system", "user"]
+        evidence = json.loads(wire["messages"][1]["content"])
+        assert evidence["delivered_material"]["schema"] == "functional_material_v1"
+        assert "Saved." not in wire["messages"][1]["content"]
+        assert any(e.get("name") == "reserve_and_label" for e in evidence["actual_tool_events"])
         assert '"status": "partial"' in wire["messages"][0]["content"]
         if ordinal == 4 and bad == "empty":
             return {"role": "assistant", "content": "{"}

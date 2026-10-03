@@ -1279,8 +1279,8 @@
     {
       "id": "communication-r13",
       "layer": "L0_communication_and_exposed_behavior_regression",
-      "candidate_commit": "pending_commit_before_model_execution",
-      "state": "FROZEN_NOT_RUN",
+      "candidate_commit": "50e70af5841cec70d1ec38ca96540ccd1ece9ebc",
+      "state": "STOPPED_RESPONSE_PROTOCOL_FAILURE",
       "planned_cases": 8,
       "planned_messages": 12,
       "config": "configs/v13-5-functional-r13.json",
@@ -1305,7 +1305,70 @@
         "artifacts/v13-5/r13-finalizer-second.log": "2d266375d79f823086f1c61fdf16cb68c2756eb64a431557386bb7a9f0abcf2c",
         "artifacts/v13-5/r13-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r13-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r13-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r13-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r13/review.json": "9c6b6c3f293f3fe3c65bf5953f6dbf2640c6360188e6af432700be1cd14012e9",
+        "artifacts/v13-5/communication-r13/seal.json": "f511348a42c06271f1413c0d8b94a34e128da3a4c0f172c2c2bfe953ca19c1f1",
+        "artifacts/v13-5/communication-r13-readonly-review.jsonl": "11dacbc0b1bdc9b5a8075ac52de1895286e98274c16bd1d083916dde01d490ba"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 1,
+        "FAIL": 2,
+        "NOT_RUN": 5
+      },
+      "message_counts": {
+        "COMPLETED": 5,
+        "FAILED": 1,
+        "NOT_RUN": 6
+      },
+      "retained_attempts": 7,
+      "cost_delta": {
+        "generation_requests": 29,
+        "generation.known_tokens": 148084,
+        "generation.charged_tokens": 148084,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "scope-2 retains this demonstration only in durable assertion; next query leaves record unchanged and recalls ordinary detailed preference correctly.",
+        "object-continue-3 effects and source support correct; final response after live query copies internal memory-effects JSON instead of answering.",
+        "l2-r02 first result still only confirms saving, omitting actual partial outcome. Second message queries actual state and completes remaining label, but finalization returns content=null twice including bounded explicit resume. Effects remain valid, no duplicate reservation."
+      ],
+      "failures": [
+        "readonly finalization follows terminal assistant text; actual provider echoes prior content/state or returns no text. Needs a fresh request/evidence frame."
+      ],
+      "evidence": "../communication-r13-readonly-review.jsonl",
+      "limitations": [
+        "Unrun five stories/six messages remain unverified; not full L1/L2.",
+        "Source-faithful single-assertion pass is scoped, not generalization proof."
+      ]
+    },
+    {
+      "id": "communication-r14",
+      "layer": "L0_communication_and_exposed_behavior_regression",
+      "candidate_commit": "pending_commit_before_model_execution",
+      "state": "FROZEN_NOT_RUN",
+      "planned_cases": 8,
+      "planned_messages": 12,
+      "config": "configs/v13-5-functional-r14.json",
+      "mechanical_verification": {
+        "affected_tests": "6 PASS readonly response, including replay and exhausted recovery",
+        "production_tokenizer": "5 PASS, scripted provider, zero actual HTTP",
+        "ruff": "PASS",
+        "mypy": "PASS 195 files",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "configs/v13-5-functional-r14.json": "2a54e9a18d277661719f0eb7b45e14315799c48db6e8fa7bca3ac965efd12296",
+        "artifacts/v13-5/communication-r14/input-freeze.json": "ff0ead7961a3ba7cbe67addedefc21bafe08d7ad656de93e29e281223947fe9f",
+        "artifacts/v13-5/r14-response-tests.log": "3e309d36055e2c2ba5454255eeeb67be29757fe28ea4a62eb66f639215f6ced9",
+        "artifacts/v13-5/r14-production-response.json": "14ddbd36efb37d16022121c4ecf73311b17a9e82c39ad5b555da67187c41cfa2",
+        "artifacts/v13-5/r14-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r14-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r14-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],
