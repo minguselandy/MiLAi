@@ -7162,8 +7162,15 @@
         "artifacts/v13-5/r46-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r46-verification-matrix.log": "b3b24deb1a96621f5ba8259124f9e1360e7e6c11243b991ec5d6e6937dd0e1ee",
         "artifacts/v13-5/r46-verification-matrix-corrected.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r46-ci.json",
+        "sha256": "1c980ae5c5eada2ba0a66f90b95cc406dcce1ab4a25d43860bef9f082b54a52a",
+        "commit": "81c8bc5c26742c95581035fe7bf3780f06d7f7ec",
+        "fast": "SUCCESS run37141214168",
+        "full": "SKIPPED run37141214049; not a pass"
       }
     }
   ],
-  "current_checkpoint": "data/manifests/v13-5-checkpoint-r45-20261004.json"
+  "current_checkpoint": "data/manifests/v13-5-checkpoint-r46-20261004.json"
 }

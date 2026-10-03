@@ -1,0 +1,184 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_R46_MECHANICAL_AND_SOURCE_CI_PASSED_MODEL_NOT_RUN",
+  "goal_status": "ACTIVE; full development remains incomplete; checkpoint is neither completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "pull_request_status": {
+    "open": true,
+    "draft": true,
+    "merged": false
+  },
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "main_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "candidate": "r46",
+  "candidate_commit": "81c8bc5c26742c95581035fe7bf3780f06d7f7ec",
+  "candidate_config": "configs/v13-5-functional-r46.json",
+  "publication_identity": "The checkpoint commit contains this manifest; its exact SHA and own CI are registered in PR81 after push. Source CI is not inherited.",
+  "report": "docs/V13_5_CHECKPOINT_r46_20261004.md",
+  "report_sha256": "dc8e429d4a316c88198acaba901b73623302d88993baebb6372e447a4bf84e66",
+  "previous_checkpoint": {
+    "commit": "08e22bfb776abad54feb920e32952f032cd24589",
+    "manifest": "data/manifests/v13-5-checkpoint-r45-20261004.json",
+    "sha256": "5035c9f2c94dc0f6cd75491f35c15823c38ec15cc733861fe3a1ceafa52747cd"
+  },
+  "source_sha256": {
+    "src/milai_lab/memory/functional.py": "d2497362a520e9e230340c4e80fc4ed50ed421d565681b28f3a994e9a9cd703d",
+    "src/milai_lab/runners/functional.py": "f786d8f24e7c2e0c7f46091811eb904cd47d5b0ec43fdad4e7572a284f7dd3e1",
+    "src/milai_lab/baselines/langmem_agent.py": "554d9182ed42dcfcaf9796c348752ab39c85870077da9dd5d75b72cfd8160df6",
+    "src/milai_lab/providers/chat_bridge.py": "d7b4af74e3133a5aacb512e269fe37ebee2966f7e936fc30878b767bef09b7b7",
+    "tests/memory/test_v13_5_functional.py": "7700aa28e0cc0cd7f5f363cbf38dd5ef13e6b1929ece714fb2a55add0765f171",
+    "tests/unit/test_v13_5_functional_integration.py": "d815879bab1b63c09cb3029e98c7d36ee7fad933074739b9cf7b2345ad573e16",
+    "tests/unit/test_langmem_foundation.py": "d2054ed716dcb445707dcc24970b0defa1a20c1aa2d83078c2478d2330872f65",
+    "configs/v13-5-functional-r46.json": "a244e466e24e6a198927fc31728154dc585ac2bb053c20d5dd30cc06efd50682"
+  },
+  "runtime_queue_active": false,
+  "new_model_calls_for_checkpoint": 0,
+  "new_runtime_changes_for_checkpoint": false,
+  "current_candidate_acceptance": {
+    "mechanical": "PASS_SCOPED",
+    "source_fast_ci": "SUCCESS",
+    "source_full_composition": "SKIPPED; not a pass",
+    "communication": "NOT_ADMITTED",
+    "input_freeze_exists": false,
+    "model_calls": 0,
+    "L1_L4": "NOT_ADMITTED for r46",
+    "stable_recommended_configuration": false
+  },
+  "change_scope": "Lab checkpoint report, manifest and navigation only. No runtime or Product Schema/API/permission/Canonical changes.",
+  "r46_mechanical_evidence": {
+    "candidate": "r46",
+    "scope": "546 affected/default/foundation/schema/durable-admission tests PASS;23 production pinned Qwen tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy4modules,package/tools boundaries and verification matrix PASS. Zero actual model HTTP. Scripted selected-source assessment gates changed fields before commit without changing same-source/no_change behavior; durable cache binds exact inputs and no hidden retry. Returned review exposure follows forgetting, independent inputs remain. Unavailable proposals do not dispatch and consume original shared format allowance; malformed batches and answer-only tools remain refused. Reopen preserves one business effect. No semantic certification claim.",
+    "preserved_first_failure": "Initial targeted6FAIL5PASS were incorrect test assertions: replay is no_change/replayed rather than byte-identical committed receipt; empty root scope has no leaf; business world is nested and labels are reservation status, not separate arrays. Corrected11PASS then privacy/invalid-decision additions16PASS. Initial Ruff formatting and matrix command without PYTHONPATH retained; corrected checks passed. First full541PASS then final privacy-aware546PASS.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r46-targeted-initial.log": "f76d06d82f4c803fa9a4cfe55536cf639b4f6d63530357a7caf31b33b629a335",
+      "artifacts/v13-5/r46-targeted-corrected.log": "86ce1980ea2133626800e437c4dac95e5a8efa7a6c97c0470322c817692f3b28",
+      "artifacts/v13-5/r46-targeted-privacy.log": "949c48f8ac8a6b8f80bc8bff0daf345e2ff3067cbdc4b08d991d64249315a9c0",
+      "artifacts/v13-5/r46-native-protocol.log": "27a3a1a84ab5262ae09f9a1a23a5ed026499333b9d7ed02c77c2c3e1cc875cea",
+      "artifacts/v13-5/r46-regression.log": "be98225384f58b3e1cdf4b92111e5f34aa684b247b9ae3577c3a580ab2077b8e",
+      "artifacts/v13-5/r46-regression-final.log": "c6ae0551cfec1687fa35a91fbc425963ff4ab0199942450f19ba2e3d19b2f894",
+      "artifacts/v13-5/r46-production-contracts-probe.py": "517614477b60af3cdcbae10c388faf33b460cd251de4d6f29aa6ee3274eaa93c",
+      "artifacts/v13-5/r46-production-contracts.json": "6c0206776eebf355764f9a5b878bc17e81ef576f5609729d2875f0b4734c889e",
+      "artifacts/v13-5/r46-production-contracts-final-probe.py": "99a7df718ed87cc390cb366e11ddd55f5fee2085dbc3b14e1b5eabf83b8f0eec",
+      "artifacts/v13-5/r46-production-contracts-final.json": "6c0206776eebf355764f9a5b878bc17e81ef576f5609729d2875f0b4734c889e",
+      "artifacts/v13-5/r46-production-contracts-final.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r46-sdk-lifecycle-final.log": "a2b40ca19f2d230dd647e1285540183a017e2d201dc00e2d891f23c069d62e41",
+      "artifacts/v13-5/r46-ruff-initial.log": "064c460e81a1c95e3943bc3c87171ab1d41becda64dfa80f8a26a26c09c51f03",
+      "artifacts/v13-5/r46-ruff-final.log": "4d1b4e0a2992aaaae2a540bd40879269508b717585b4e05399160225602178c4",
+      "artifacts/v13-5/r46-ruff-privacy.log": "fe60a3df5af5cd52b321d7ef77af8ce42899ef7dab6af484c2140eaf82dadcb7",
+      "artifacts/v13-5/r46-ruff-final-corrected.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "artifacts/v13-5/r46-mypy-final.log": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+      "artifacts/v13-5/r46-boundary-final.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "artifacts/v13-5/r46-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "artifacts/v13-5/r46-verification-matrix.log": "b3b24deb1a96621f5ba8259124f9e1360e7e6c11243b991ec5d6e6937dd0e1ee",
+      "artifacts/v13-5/r46-verification-matrix-corrected.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+    },
+    "remote_ci": {
+      "path": "artifacts/v13-5/r46-ci.json",
+      "sha256": "1c980ae5c5eada2ba0a66f90b95cc406dcce1ab4a25d43860bef9f082b54a52a",
+      "commit": "81c8bc5c26742c95581035fe7bf3780f06d7f7ec",
+      "fast": "SUCCESS run37141214168",
+      "full": "SKIPPED run37141214049; not a pass"
+    }
+  },
+  "checkpoint_verification": {
+    "r46_mechanical_evidence_hashes_checked": 21,
+    "r45_evidence_hashes_checked": 202,
+    "mismatches": 0,
+    "includes_sealed_raw_artifact_byte_identity": true,
+    "new_database_semantic_audit": false,
+    "new_model_regression": false,
+    "continuous_ledger_unchanged_since_r45": true
+  },
+  "planned_regression": {
+    "candidate": "r46",
+    "path": "artifacts/v13-5/r46-regression-scope.json",
+    "sha256": "b1d279e7f661740866bafa388598b6d500cd68fe934dac38556d8375f8b77e4d",
+    "timing": "Before r46 model HTTP",
+    "scope": "Full exposed communication11/27, mixed correction first then post-business protocol; one public message admitted at a time after actual review. Same-version L1 24/48,L2 12/26,L3 formation57/reading30,newL4 after method freeze. Same original limits, no semantic certification.",
+    "admitted": false,
+    "cases": 11,
+    "messages": 27,
+    "new_blind_holdout": false
+  },
+  "latest_actual_model_evidence": {
+    "cohort": "communication-r45",
+    "candidate_commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
+    "state": "STOPPED_CORE_CORRECTION_OLD_SUPPORT_AND_POST_LABEL_UNKNOWN_TOOL",
+    "planned_cases": 11,
+    "planned_messages": 27,
+    "semantic_counts": {
+      "PASS_SCOPED": 4,
+      "FAIL": 3,
+      "NOT_RUN": 4
+    },
+    "message_counts": {
+      "COMPLETED": 15,
+      "FAILED": 1,
+      "NOT_RUN": 11
+    },
+    "cost_delta": {
+      "generation_requests": 51,
+      "generation.known_tokens": 284365,
+      "generation.charged_tokens": 284365,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/communication-r45/input-freeze.json": "46c5c9efd85a9388bca7b8569987ee013c95e266c5e578c330376ddc63cd5975",
+      "configs/v13-5-functional-r45.json": "27531e2129697e7d8c6c31a94804ea9a6bd4d01d1ce29714e39f5915c082ef2f",
+      "artifacts/v13-5/communication-r45/review.json": "8240b1080308748087a60087cc5a0f410068dd95b2f1d6e5719a54e5dd87fde7",
+      "artifacts/v13-5/communication-r45/seal.json": "dff310fd32f073d4eaa7a3855e74a697577ba2c6c62b87dffee5172f444ae61b",
+      "artifacts/v13-5/communication-r45-manual-grades.json": "21fc8d834b86ca594621c8313702824db4ea2cdf550dff2d43622dc6ff6e3abf",
+      "artifacts/v13-5/communication-r45-review-notes.json": "60d60eea00c6753cc3397c1126edb1fafe1d9395e1b41781089d72c294b34c99",
+      "artifacts/v13-5/communication-r45-all-review.jsonl": "e2952117ba98d63570283ed7a18d8a857431e25fa624bcd771b6e35a35d0908a",
+      "artifacts/v13-5/communication-r45-evaluator/summary.json": "23a847162771cf2f91fff6fa7f11331d90843b903928f798a2e8338a1fad8dc5"
+    },
+    "historical_complete_results": "See unchanged previous r45 checkpoint and v13-5-runs.json. No cross-version score pooling."
+  },
+  "cost": {
+    "v13_5": {
+      "generation_requests": 4294,
+      "known_generation_tokens": 23219113
+    },
+    "resumed": {
+      "generation_requests": 4138,
+      "known_generation_tokens": 22444877
+    },
+    "continuous": {
+      "generation_requests": 14020,
+      "generation": {
+        "charged_tokens": 50941786,
+        "known_tokens": 50911399,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "historical_unknown_gap_tokens": 30387,
+    "includes_coding_agent_usage": false,
+    "ledger_snapshot_path": "artifacts/v13-5/checkpoint-r46-20261004-ledger.json",
+    "ledger_snapshot_sha256": "703849a92db20abe093c969c67f0d0c6ba53569a7a455cd26a2648e6a37013af"
+  },
+  "remaining_work": [
+    "Actual r46 communication11/27 with per-message review; selected evidence must support revisions and final explanations must match actual receipts.",
+    "Review unsupported final wording, scope and modality, unavailable tools after completed effects, and preservation of business/query/recovery contracts.",
+    "Same-version L1 24/48, L2 12/26, full L3 formation57/reading30, then new L4 approximately12 after method freeze.",
+    "FUNC01-16 integrated acceptance, detailed140 terminal assessment and final development report; original48 unchanged."
+  ],
+  "reviewer": "Root same-family development review; not independent Judge",
+  "preservation": "Raw DBs, model requests, traces, logs and ledger snapshot remain local ignored. Historical cohorts, pause reports, original48 and plan bytes unchanged.",
+  "rollback_comparison_commits": [
+    "08e22bfb776abad54feb920e32952f032cd24589",
+    "81c8bc5c26742c95581035fe7bf3780f06d7f7ec"
+  ]
+}

@@ -11,10 +11,12 @@ failure. Another withdrawal answer added an unsupported smooth-outcome claim; la
 continuation completed correctly but then proposed an unavailable update tool and failed
 protocol delivery. The original11/27 was sealed as4 scoped PASS/3 FAIL/4 NOT_RUN, with15
 COMPLETED/1 FAILED/11 unrun messages. Correct effects remain valid; no replay was performed.
-469 mechanical checks,18 production tokenizer probes and4 SDK checks do not replace these
+R45's 469 mechanical checks, 18 production tokenizer probes and 4 SDK checks do not replace these
 model results. Same-version L1–L4 have not been admitted. See [progress](V13_5_PROGRESS.md).
-The [r45 checkpoint](V13_5_CHECKPOINT_r45_20261004.md) consolidates current results, CI,
-costs and remaining work; the [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md) is historical.
+R46 has 546 passing regression checks, 23 production tokenizer probes and 4 installed SDK checks;
+its exact source commit `81c8bc5` passed Fast CI 37141214168, while Full 37141214049 was skipped.
+The [r46 checkpoint](V13_5_CHECKPOINT_r46_20261004.md) consolidates current results, CI,
+costs and remaining work; the [r45 checkpoint](V13_5_CHECKPOINT_r45_20261004.md) is historical.
 Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
