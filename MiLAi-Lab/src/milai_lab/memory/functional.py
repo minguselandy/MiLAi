@@ -17,6 +17,9 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
 
 from milai_lab.memory.functional_state import (
+    FunctionalIntegrityError,
+    FunctionalOperationError,
+    FunctionalRejection,
     canonical,
     digest,
     fragment_support,
@@ -39,9 +42,9 @@ class FunctionalMemory:
         retrieval_candidates: list[dict[str, Any]] | None = None,
     ) -> None:
         if service.functional_contract != "functional_v1":
-            raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
+            raise FunctionalRejection("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
         if any(type(v) is not int or v < 1 for v in (read_limit, material_limit, fragment_chars)):
-            raise ValueError("V13_5_FUNCTIONAL_LIMIT_INVALID")
+            raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
         self.read_limit, self.material_limit, self.fragment_chars = (
             read_limit,
@@ -62,7 +65,7 @@ class FunctionalMemory:
                     or type(row["retrieval_score"]) not in {int, float}
                     or not math.isfinite(row["retrieval_score"])
                 ):
-                    raise ValueError("V13_5_RETRIEVAL_CANDIDATE_INVALID")
+                    raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_INVALID")
                 service.source_fragment_range(row["source_ref"], row["start"], row["end"])
 
     @property
@@ -75,14 +78,14 @@ class FunctionalMemory:
     def _binding(self, config: RunnableConfig) -> dict[str, Any]:
         cfg = config.get("configurable", {})
         if cfg.get("user_id") != self.service.owner:
-            raise ValueError("V13_5_OWNER_MISMATCH")
+            raise FunctionalRejection("V13_5_OWNER_MISMATCH")
         bound = self.service.public_turn(
             str(cfg.get("v13_session", "")),
             message_id=cfg.get("v13_turn_id"),
             config_sha256=cfg.get("v13_support_config_sha256"),
         )
         if bound is None:
-            raise ValueError("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")
+            raise FunctionalRejection("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")
         return bound
 
     def _record_units(
@@ -150,7 +153,7 @@ class FunctionalMemory:
 
     def _search_units(self, query: str, current_ref: str | None = None) -> list[dict[str, Any]]:
         if digest(self.retrieval_candidates) != self.policy["retrieval_candidates_sha256"]:
-            raise ValueError("V13_5_RETRIEVAL_CANDIDATES_CHANGED")
+            raise FunctionalIntegrityError("V13_5_RETRIEVAL_CANDIDATES_CHANGED")
         current = (
             [
                 {"type": "fragment", **fragment}
@@ -221,7 +224,7 @@ class FunctionalMemory:
         key = "snapshot-" + digest(payload)
         prior = self.service.store.get(namespace(self.service), key)
         if prior is not None and prior.value != payload:
-            raise ValueError("V13_5_SNAPSHOT_COLLISION")
+            raise FunctionalIntegrityError("V13_5_SNAPSHOT_COLLISION")
         if prior is None:
             self.service.store.put(namespace(self.service), key, payload, index=False)
         return key
@@ -253,19 +256,22 @@ class FunctionalMemory:
 
     def _page(self, key: str, start: int, binding: dict[str, Any]) -> dict[str, Any]:
         stored = self.service.store.get(namespace(self.service), key)
-        if stored is None or key != "snapshot-" + digest(stored.value):
-            raise ValueError("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
+        if stored is None:
+            raise FunctionalRejection("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
+        if key != "snapshot-" + digest(stored.value):
+            raise FunctionalIntegrityError("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
         value = stored.value
         if (
             value["binding"] != binding
             or value["policy"] != self.policy
             or value["forget_epoch"] != self.forget_epoch
         ):
-            raise ValueError("V13_5_SNAPSHOT_BINDING_CHANGED_OR_REVOKED")
+            raise FunctionalIntegrityError("V13_5_SNAPSHOT_BINDING_CHANGED_OR_REVOKED")
         items = value["items"]
         if type(start) is not int or start < 0 or start > len(items):
-            raise ValueError("V13_5_CURSOR_RANGE_INVALID")
+            raise FunctionalRejection("V13_5_CURSOR_RANGE_INVALID")
         chosen: list[dict[str, Any]] = []
+        skipped: list[dict[str, Any]] = []
 
         def packet(end: int) -> dict[str, Any]:
             return {
@@ -277,14 +283,20 @@ class FunctionalMemory:
                 "start": start,
                 "delivered_units": len(chosen),
                 "total_units": len(items),
-                "omitted_units": len(items) - end,
+                "omitted_units": len(items) - end + len(skipped),
+                "skipped_units": skipped,
+                "examined_units": end - start,
+                "coverage_scope": "this_page_only_prior_page_omissions_remain",
                 "next_cursor": key + ":" + str(end) if end < len(items) else None,
                 "forget_epoch": self.forget_epoch,
                 "material_limit": self.material_limit,
                 "semantic_support": "unchecked",
                 "business_authority": False,
                 **self._read_only_metadata(chosen),
-                "delivery_status": "partial" if end < len(items) else "complete_snapshot",
+                "delivery_status": ("partial_with_omissions" if skipped else "partial")
+                if end < len(items) else ("snapshot_end_with_omissions"
+                                        if skipped else "complete_snapshot"),
+                **({"status": "advanced_with_explicit_omission"} if skipped else {}),
                 "source_groups": list(
                     {
                         u["source_ref"]: {
@@ -299,26 +311,40 @@ class FunctionalMemory:
                 ),
             }
 
-        for unit in items[start:]:
+        end = start
+        for index, unit in enumerate(items[start:], start):
             if unit["type"] == "fragment":
                 actual = self.service.source_fragment(unit["fragment_handle"])
                 if actual != {k: v for k, v in unit.items() if k != "type"}:
-                    raise ValueError("V13_5_SNAPSHOT_SOURCE_CHANGED")
+                    raise FunctionalIntegrityError("V13_5_SNAPSHOT_SOURCE_CHANGED")
             else:
                 row = self.service.read(unit["record_id"], unit["revision"])
                 if not row["ok"] or digest(row["value"]) != unit["version_sha256"]:
-                    raise ValueError("V13_5_SNAPSHOT_RECORD_UNAVAILABLE")
+                    raise FunctionalIntegrityError("V13_5_SNAPSHOT_RECORD_UNAVAILABLE")
             chosen.append(unit)
-            if self.token_count(canonical(packet(start + len(chosen)))) > self.material_limit:
+            required = self.token_count(canonical(packet(index + 1)))
+            if required > self.material_limit:
                 chosen.pop()
-                break
-        result = packet(start + len(chosen))
-        if not chosen and start < len(items):
-            result.update(
-                ok=False, status="unit_exceeds_material_limit", omitted_units=len(items) - start
-            )
+                if chosen or skipped:
+                    break
+                # Never return a cursor stuck at the same impossible unit. The
+                # original snapshot is unchanged and the omission is explicit.
+                alternate = ([unit["source_ref"]] if unit["type"] == "fragment"
+                             else unit.get("source_refs", []))
+                skipped.append({
+                    "unit_index": index, "type": unit["type"],
+                    "reason": "unit_exceeds_material_limit",
+                    "required_packet_tokens": required,
+                    "snapshot_body_delivered": False,
+                    "retry_same_unit_under_same_limit": False,
+                    "alternative": {"tool": "read_source", "source_ref": alternate[0],
+                                    "meaning": "original_support_not_semantic_record_body"}
+                    if alternate else None,
+                })
+            end = index + 1
+        result = packet(end)
         if self.token_count(canonical(result)) > self.material_limit:
-            raise ValueError("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+            raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         refs = [
             ref
             for unit in chosen
@@ -341,12 +367,12 @@ class FunctionalMemory:
         if event is None:
             event = self.service.active_public_input(session, turn_id, config_sha256)
         if event is None or event["role"] != "user":
-            raise ValueError("V13_5_CAPTURE_REQUIRED")
+            raise FunctionalRejection("V13_5_CAPTURE_REQUIRED")
         actual_query = (
             event["content"] if isinstance(event["content"], str) else canonical(event["content"])
         )
         if query is not None and query != actual_query:
-            raise ValueError("V13_5_PUBLIC_QUERY_CHANGED")
+            raise FunctionalRejection("V13_5_PUBLIC_QUERY_CHANGED")
         prior = self.service.store.get(self.service.turns_namespace, digest([session, turn_id]))
         bound = self.service.bind_public_turn(
             session, turn_id, ref, config_sha256=config_sha256, phase="resume" if prior else "start"
@@ -377,6 +403,12 @@ class FunctionalMemory:
             key: handles for key in ("content", "kind", "basis", *scope_leaves(version["scope"]))
         }
 
+    def _commit(self, session: str, operation_id: str, proposal: dict[str, Any]) -> dict[str, Any]:
+        try:
+            return self.service.commit(session, operation_id, proposal)
+        except Exception as error:
+            raise FunctionalOperationError("semantic_commit", error) from error
+
     def save(
         self,
         config: RunnableConfig,
@@ -396,7 +428,7 @@ class FunctionalMemory:
         if replay is not None:
             return replay
         if not isinstance(content, str) or not content.strip():
-            raise ValueError("V13_5_NONEMPTY_CONTENT_REQUIRED")
+            raise FunctionalRejection("V13_5_NONEMPTY_CONTENT_REQUIRED")
         scope = self._scope(scope or {})
         support = fragment_support(self.service, fragment_handles)
         refs = support["source_refs"]
@@ -430,7 +462,7 @@ class FunctionalMemory:
             "trigger_binding": bound,
             "requested": requested,
         }
-        return self.service.commit(bound["session"], operation_id, proposal)
+        return self._commit(bound["session"], operation_id, proposal)
 
     @staticmethod
     def _scope(scope: dict[str, Any]) -> dict[str, Any]:
@@ -461,15 +493,15 @@ class FunctionalMemory:
             return replay
         candidate = self.service.candidate(read_handle)
         if candidate is None:
-            raise ValueError("V13_5_READ_HANDLE_INVALID")
+            raise FunctionalRejection("V13_5_READ_HANDLE_INVALID")
         row = self.service.read(candidate["record_id"], candidate["revision"])
         if not row["ok"]:
-            raise ValueError("V13_5_RECORD_UNAVAILABLE")
+            raise FunctionalRejection("V13_5_RECORD_UNAVAILABLE")
         old = row["value"]
         value = copy.deepcopy({key: old[key] for key in ("content", "kind", "basis", "scope")})
         support = self._source_support(old)
         if not isinstance(changes, list) or type(retract) is not bool or (retract and changes):
-            raise ValueError("V13_5_CHANGES_LIST_REQUIRED_OR_RETRACT_CONFLICT")
+            raise FunctionalRejection("V13_5_CHANGES_LIST_REQUIRED_OR_RETRACT_CONFLICT")
         changed: set[str] = set()
         for change in changes:
             if (
@@ -478,18 +510,18 @@ class FunctionalMemory:
                 or change.get("op") not in {"set", "remove"}
                 or not isinstance(change.get("field"), str)
             ):
-                raise ValueError("V13_5_CHANGE_SCHEMA_INVALID")
+                raise FunctionalRejection("V13_5_CHANGE_SCHEMA_INVALID")
             field = change["field"]
             if any(
                 field == other or field.startswith(other + ".") or other.startswith(field + ".")
                 for other in changed
             ):
-                raise ValueError("V13_5_OVERLAPPING_CHANGE_FIELD")
+                raise FunctionalRejection("V13_5_OVERLAPPING_CHANGE_FIELD")
             changed.add(field)
             if change["op"] == "set" and "value" not in change:
-                raise ValueError("V13_5_SET_VALUE_REQUIRED")
+                raise FunctionalRejection("V13_5_SET_VALUE_REQUIRED")
             if change["op"] == "remove" and "value" in change:
-                raise ValueError("V13_5_REMOVE_MUST_OMIT_VALUE")
+                raise FunctionalRejection("V13_5_REMOVE_MUST_OMIT_VALUE")
             if field.startswith("scope.") and all(field.split(".")):
                 parts = field.split(".")[1:]
                 parent = value["scope"]
@@ -500,7 +532,7 @@ class FunctionalMemory:
                             break
                         parent[part] = {}
                     if not isinstance(parent[part], dict):
-                        raise ValueError("V13_5_SCOPE_PARENT_NOT_OBJECT")
+                        raise FunctionalRejection("V13_5_SCOPE_PARENT_NOT_OBJECT")
                     parent = parent[part]
                 if change["op"] == "remove":
                     parent.pop(parts[-1], None)
@@ -509,7 +541,7 @@ class FunctionalMemory:
             elif field in {"content", "kind", "basis"} and change["op"] == "set":
                 value[field] = change["value"]
             else:
-                raise ValueError("V13_5_CHANGE_FIELD_OR_OPERATION_INVALID")
+                raise FunctionalRejection("V13_5_CHANGE_FIELD_OR_OPERATION_INVALID")
         self._scope(value["scope"])
         equal = (not retract or old.get("retracted", False)) and all(
             canonical(value[field]) == canonical(old[field]) for field in value
@@ -565,7 +597,7 @@ class FunctionalMemory:
                 **removed,
                 **({"record": fragment_handles} if retract else {}),
             }
-        return self.service.commit(bound["session"], operation_id, proposal)
+        return self._commit(bound["session"], operation_id, proposal)
 
     def _read(
         self,
@@ -580,44 +612,59 @@ class FunctionalMemory:
             old = self.service.store.get(namespace(self.service), key)
             state = old.value if old else {"binding": bound, "policy": self.policy, "calls": {}}
             if state["binding"] != bound or state["policy"] != self.policy:
-                raise ValueError("V13_5_READ_ADMISSION_CHANGED")
+                raise FunctionalIntegrityError("V13_5_READ_ADMISSION_CHANGED")
             previous = state["calls"].get(call_id)
             if previous is not None:
                 if previous["arguments"] != arguments:
-                    raise ValueError("V13_5_READ_CALL_CHANGED")
+                    raise FunctionalRejection("V13_5_READ_CALL_CHANGED")
                 if previous["forget_epoch"] != self.forget_epoch:
-                    raise ValueError("V13_5_READ_REPLAY_REVOKED")
+                    raise FunctionalRejection("V13_5_READ_REPLAY_REVOKED")
                 if "result" in previous:
                     return cast(dict[str, Any], previous["result"])
-                raise ValueError("V13_5_READ_OUTCOME_UNKNOWN")
+                raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
                 exhausted = {"ok": False, "status": "read_limit_exhausted",
                              "limit": self.read_limit, **self._read_only_metadata([])}
                 if self.token_count(canonical(exhausted)) > self.material_limit:
-                    raise ValueError("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+                    raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
                 return exhausted
             state["calls"][call_id] = {"arguments": arguments, "forget_epoch": self.forget_epoch}
             self.service.store.put(namespace(self.service), key, state, index=False)
         try:
             result = action(bound)
-        except ValueError as error:
+        except FunctionalRejection as error:
             result = {
                 "ok": False,
                 "status": "read_rejected",
                 "reason": str(error),
                 "retryable": False,
+                "error_type": type(error).__name__,
+                "phase": "read_contract",
             }
+        except Exception as error:
+            result = {"ok": False, "status": "read_integrity_error"
+                      if isinstance(error, FunctionalIntegrityError) else "read_outcome_unknown",
+                      "error_type": type(error).__name__, "phase": "read_action",
+                      "read_state_effect": "unconfirmed", "retryable": False}
         if result.get("schema") != "functional_material_v1":
             # Failed reads delivered no items; zero is a delivery count, not a
             # claim that the owner has no records or that the lookup succeeded.
             result = {**result, **self._read_only_metadata([])}
             if self.token_count(canonical(result)) > self.material_limit:
-                raise ValueError("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
-        with self.service._locked():
-            current = self.service.store.get(namespace(self.service), key)
-            assert current is not None
-            current.value["calls"][call_id]["result"] = result
-            self.service.store.put(namespace(self.service), key, current.value, index=False)
+                raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+        try:
+            with self.service._locked():
+                current = self.service.store.get(namespace(self.service), key)
+                assert current is not None
+                current.value["calls"][call_id]["result"] = result
+                self.service.store.put(namespace(self.service), key, current.value, index=False)
+        except Exception as error:
+            result = {"ok": False, "status": "read_outcome_unknown",
+                      "error_type": type(error).__name__, "phase": "read_receipt_persistence",
+                      "read_state_effect": "unconfirmed", "retryable": False,
+                      **self._read_only_metadata([])}
+            if self.token_count(canonical(result)) > self.material_limit:
+                raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
         return result
 
     def tools(self) -> tuple[BaseTool, ...]:
@@ -632,23 +679,30 @@ class FunctionalMemory:
         def mutation(action: Callable[[], dict[str, Any]]) -> dict[str, Any]:
             try:
                 return action()
-            except ValueError as error:
+            except FunctionalRejection as error:
                 return {
                     "ok": False,
                     "status": "rejected",
                     "reason": str(error),
                     "effect": "none",
                     "formation_status": "pending",
+                    "error_type": type(error).__name__,
+                    "phase": "pre_mutation_contract",
                 }
             except Exception as error:
                 # A Store put can commit and then raise. Only the same durable
                 # operation identity may recover its actual receipt on replay.
+                cause = error.cause if isinstance(error, FunctionalOperationError) else error
                 return {
                     "ok": False,
                     "status": "outcome_unknown",
                     "effect": "unconfirmed",
                     "formation_status": "unknown",
-                    "error_type": type(error).__name__,
+                    "error_type": type(cause).__name__,
+                    "phase": error.phase if isinstance(error, FunctionalOperationError)
+                    else "mutation_preparation",
+                    "error_category": "integrity" if isinstance(cause, FunctionalIntegrityError)
+                    else "unconfirmed_effect",
                     "recovery": "same_operation_id_only",
                 }
 
@@ -766,20 +820,20 @@ class FunctionalMemory:
                         or history
                         or history_cursor is not None
                     ):
-                        raise ValueError("V13_5_CURSOR_ARGUMENTS_CONFLICT")
+                        raise FunctionalRejection("V13_5_CURSOR_ARGUMENTS_CONFLICT")
                     key, sep, offset = cursor.rpartition(":")
                     if sep != ":" or not offset.isdecimal():
-                        raise ValueError("V13_5_CURSOR_INVALID")
+                        raise FunctionalRejection("V13_5_CURSOR_INVALID")
                     return self._page(key, int(offset), bound)
                 if record_id is None:
-                    raise ValueError("V13_5_RECORD_ID_REQUIRED")
+                    raise FunctionalRejection("V13_5_RECORD_ID_REQUIRED")
                 if history:
                     if revision is not None:
-                        raise ValueError("V13_5_HISTORY_REVISION_CONFLICT")
+                        raise FunctionalRejection("V13_5_HISTORY_REVISION_CONFLICT")
                     if history_cursor is not None:
                         key, sep, offset = history_cursor.rpartition(":")
                         if sep != ":" or not offset.isdecimal():
-                            raise ValueError("V13_5_CURSOR_INVALID")
+                            raise FunctionalRejection("V13_5_CURSOR_INVALID")
                         return self._page(key, int(offset), bound)
                     index = self.service.history_index(record_id)
                     if not index["ok"]:
@@ -797,7 +851,7 @@ class FunctionalMemory:
                     ]
                     return self._page(self._snapshot(bound, units, "record_history"), 0, bound)
                 if history_cursor is not None:
-                    raise ValueError("V13_5_HISTORY_CURSOR_REQUIRES_HISTORY")
+                    raise FunctionalRejection("V13_5_HISTORY_CURSOR_REQUIRES_HISTORY")
                 row = self.service.read(record_id, revision)
                 if not row["ok"]:
                     return row
@@ -852,11 +906,11 @@ class FunctionalMemory:
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 if sum(x is not None for x in (fragment_handle, source_ref, cursor)) != 1:
-                    raise ValueError("V13_5_EXACTLY_ONE_SOURCE_SELECTOR_REQUIRED")
+                    raise FunctionalRejection("V13_5_EXACTLY_ONE_SOURCE_SELECTOR_REQUIRED")
                 if cursor is not None:
                     key, sep, offset = cursor.rpartition(":")
                     if sep != ":" or not offset.isdecimal():
-                        raise ValueError("V13_5_CURSOR_INVALID")
+                        raise FunctionalRejection("V13_5_CURSOR_INVALID")
                     return self._page(key, int(offset), bound)
                 fragments = (
                     [self.service.source_fragment(fragment_handle)]

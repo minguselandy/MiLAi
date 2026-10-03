@@ -1,5 +1,12 @@
 # MiLAi Lab 当前状态
 
+当前更新：2026-10-03，用户已明确要求完成后续全部开发与实验，Goal 恢复 **ACTIVE**。
+继续沿 PR81 修复；先通过分层、错误效果与分页边界的同提交机械检查和远端 CI，
+再完成执行状态／最终回答、更正证据及 L1–L4。简明验收表见[功能进度](V13_5_PROGRESS.md)。
+完整功能仍未通过，Product 仍 NO_GO。以下暂停读数保留为当时快照。
+
+---
+
 当前更新：2026-10-03。按用户最新要求，**v13.5 实验已暂停，提交 GitHub 草稿检查点**。
 完整[功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)尚未完成；见[暂停总结](V13_5_PAUSE_STATUS_20261003.md)、[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
 [用户入口](V13_5_FUNCTIONAL_USAGE.md)与[逐项验收](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。

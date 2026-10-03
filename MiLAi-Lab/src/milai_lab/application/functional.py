@@ -262,17 +262,7 @@ class FunctionalCallWrapper:
     def note_delivered_sources(self, source_refs: list[str]) -> None:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
             return
-        from milai_lab.memory.functional_state import note_exposure
-
-        with self.service._locked():
-            for ref in source_refs:
-                source = self.service.source(ref)
-                if source is None or source.get("role") != "tool":
-                    raise ValueError("FUNCTIONAL_VISIBLE_TOOL_SOURCE_REQUIRED")
-            # This is exposure for the future generated assistant, not a claim
-            # that the already-arrived user input derives from tool material.
-            note_exposure(self.service, self.service.event_id(self.session, self.turn_id, "user"),
-                          source_refs)
+        self.service.note_tool_delivery(self.session, self.turn_id, source_refs)
 
     def query_source_delivery(self, query_journal_key: str) -> dict[str, Any]:
         """Attach only the captured actual discovery source, never an original receipt."""

@@ -1,16 +1,17 @@
 # v13.5 functional profile
 
-**Paused on 2026-10-03 at the user's request.** These commands document the
-interface; they do not authorize resuming experiments. R0–r4 failed acceptance;
-r5 is a mechanically checked candidate with no model cohort yet. See
-[the pause report](V13_5_PAUSE_STATUS_20261003.md) before choosing a configuration.
+**Development resumed by explicit user instruction on 2026-10-03.** No configuration
+has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
+r5 is an unrun candidate. There is no stable recommended configuration yet.
+See [current functional progress](V13_5_PROGRESS.md); the
+[pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
 separately in `V13_5_REQUIREMENTS_AND_ACCEPTANCE.md`; the existence of this guide
 does not establish semantic correctness or a Product release decision.
 
-## Start and use a persistent bank
+## Historical reproduction example (r0, not an accepted configuration)
 
 Run from `MiLAi-Lab`, with the repository's pinned Python environment and
 `PYTHONPATH=src`. The checked-in configuration names the existing local model,
@@ -50,7 +51,8 @@ Natural requests use the same tool path:
 | Check business state | “先查询上次预订的实际状态，已经完成的不要再做。” |
 
 The assistant chooses real issued fragments and record read handles. A semantic
-card is committed before a save confirmation. Exact quotation extraction and
+card must be committed before a save confirmation; observed Host violations of
+that requirement are retained in the run register. Exact quotation extraction and
 version checks are program responsibilities; whether the proposed prose follows
 the evidence remains a semantic quality question. A rejected proposal is not a
 saved record. Current values, recorded history and raw source are distinct reads.

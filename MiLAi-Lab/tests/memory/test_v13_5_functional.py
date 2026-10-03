@@ -7,7 +7,7 @@ import os
 import socket
 import subprocess
 import sys
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
@@ -16,7 +16,7 @@ import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.functional import FunctionalMemory
-from milai_lab.memory.functional_state import canonical, namespace
+from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
 from milai_lab.memory.service import MemoryService
 
 SHA = "a" * 64
@@ -507,8 +507,134 @@ def test_m12_query_context_is_not_fact_commit_and_explicit_read_failure_counts(
         assert memory.service.records() == []
 
 
+def test_validation_refusal_and_read_storage_value_error_are_distinct(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory)
+        refused = invoke(memory, "save_memory", {"content": "", "fragment_handles": []}, "bad")
+        assert refused["status"] == "rejected" and refused["effect"] == "none"
+        assert refused["phase"] == "pre_mutation_contract"
+        assert memory.service.records() == []
+        fragment = handles(memory, ref)[0]
+        original = memory.service.store.get
+
+        def failed(ns: tuple[str, ...], key: str) -> Any:
+            if key == fragment:
+                raise ValueError("storage decoding failure, not caller validation")
+            return original(ns, key)
+
+        monkeypatch.setattr(memory.service.store, "get", failed)
+        result = invoke(memory, "read_source", {"fragment_handle": fragment}, "read")
+        assert result["status"] == "read_outcome_unknown"
+        assert result["error_type"] == "ValueError" and result["read_state_effect"] == "unconfirmed"
+        assert_read_delivery(result)
+        monkeypatch.setattr(memory.service.store, "get", original)
+        assert invoke(memory, "read_source", {"fragment_handle": fragment}, "read") == result
+
+
+def check_oversized_metadata_progress(root: Path, token_count: Callable[[str], int]) -> None:
+    """Shared mechanical probe; also run with the pinned provider tokenizer locally."""
+    with opened(root, material_limit=8192, read_limit=3) as memory:
+        memory.token_count = token_count
+        ref = turn(memory)
+        hs = handles(memory, ref)
+        big = memory.save(cfg(), "big", "Oversized scope record", hs,
+                          {"context": "public scope 0123456789 " * 10000})
+        small = memory.save(cfg(), "small", "Small reachable record", hs)
+        bound = memory._binding(cfg())
+        units = [*memory._record_units(memory.service.read(big["id"])),
+                 *memory._record_units(memory.service.read(small["id"]))]
+        key = memory._snapshot(bound, units, "explicit_oversize_probe")
+        page = memory._page(key, 0, bound)
+        assert page["skipped_units"][0]["unit_index"] == 0
+        assert page["skipped_units"][0]["reason"] == "unit_exceeds_material_limit"
+        assert page["skipped_units"][0]["required_packet_tokens"] > memory.material_limit
+        assert page["skipped_units"][0]["snapshot_body_delivered"] is False
+        delivered = list(page["items"])
+        for index in range(3):
+            assert token_count(canonical(page)) <= memory.material_limit
+            assert page["examined_units"] > 0
+            if page["next_cursor"] is None:
+                break
+            assert int(page["next_cursor"].rpartition(":")[2]) > page["start"]
+            page = invoke(memory, "read_memory", {"cursor": page["next_cursor"]}, f"p{index}")
+            delivered.extend(page["items"])
+        assert page["next_cursor"] is None
+        assert [unit["record_id"] for unit in delivered] == [small["id"]]
+        assert memory.service.store.get(namespace(memory.service), key).value["items"] == units
+        alone = memory._snapshot(bound, units[:1], "only_oversized_unit")
+        terminal = memory._page(alone, 0, bound)
+        assert terminal["next_cursor"] is None and terminal["items"] == []
+        assert terminal["delivery_status"] == "snapshot_end_with_omissions"
+        assert terminal["omitted_units"] == 1 and terminal["examined_units"] == 1
+        assert token_count(canonical(terminal)) <= memory.material_limit
+
+
+def test_oversized_first_unit_does_not_block_later_record(tmp_path: Path) -> None:
+    check_oversized_metadata_progress(tmp_path, len)
+
+
+@pytest.mark.parametrize("after_put", [False, True])
+def test_read_receipt_persistence_failure_keeps_unknown_and_actual_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, after_put: bool,
+) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory)
+        fragment = handles(memory, ref)[0]
+        original = memory.service.store.put
+
+        def failed(ns: tuple[str, ...], key: str, value: Any, **kwargs: Any) -> None:
+            receipt_write = key.startswith("read-admission-") and "result" in (
+                value["calls"].get("read", {}))
+            if receipt_write and not after_put:
+                raise ValueError("read receipt write not acknowledged")
+            original(ns, key, value, **kwargs)
+            if receipt_write:
+                raise ValueError("read receipt committed but acknowledgement lost")
+
+        monkeypatch.setattr(memory.service.store, "put", failed)
+        args = {"fragment_handle": fragment}
+        result = invoke(memory, "read_source", args, "read")
+        assert result["status"] == "read_outcome_unknown"
+        assert result["phase"] == "read_receipt_persistence"
+        assert result["delivered_raw_fragment_count"] == 0
+        monkeypatch.setattr(memory.service.store, "put", original)
+        if after_put:
+            actual = invoke(memory, "read_source", args, "read")
+            assert actual["ok"] and actual["items"][0]["fragment_handle"] == fragment
+        else:
+            with pytest.raises(ValueError, match="READ_OUTCOME_UNKNOWN"):
+                invoke(memory, "read_source", args, "read")
+
+
+def test_forget_value_error_after_visibility_commit_is_unknown_not_no_effect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory)
+        args = {"fragment_handles": handles(memory, ref)}
+        original = memory.service.store.put
+
+        def failed(ns: tuple[str, ...], key: str, value: Any, **kwargs: Any) -> None:
+            original(ns, key, value, **kwargs)
+            if key == "visibility":
+                raise ValueError("committed visibility state, lost acknowledgement")
+
+        monkeypatch.setattr(memory.service.store, "put", failed)
+        result = invoke(memory, "forget_memory", args, "forget")
+        assert result["status"] == "outcome_unknown" and result["effect"] == "unconfirmed"
+        assert result["phase"] == "visibility_commit" and memory.service.source(ref) is None
+        monkeypatch.setattr(memory.service.store, "put", original)
+        again = invoke(memory, "forget_memory", args, "forget")
+        assert again["ok"] and again["replayed"] and again["forget_epoch"] == 1
+
+
+@pytest.mark.parametrize("error_type", [OSError, ValueError, RuntimeError, FunctionalRejection])
+@pytest.mark.parametrize("after_put", [False, True])
 def test_m13_save_commit_unknown_recovery_never_double_revision(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    error_type: type[Exception], after_put: bool,
 ) -> None:
     with opened(tmp_path) as memory:
         ref = turn(memory)
@@ -516,16 +642,23 @@ def test_m13_save_commit_unknown_recovery_never_double_revision(
         original = memory.service.store.put
 
         def uncertain(ns: tuple[str, ...], key: str, value: Any, **kwargs: Any) -> None:
+            if ns == memory.service.namespace and not after_put:
+                raise error_type("before actual record write")
             original(ns, key, value, **kwargs)
             if ns == memory.service.namespace:
-                raise OSError("actual committed row, lost acknowledgement")
+                raise error_type("actual committed row, lost acknowledgement")
 
         monkeypatch.setattr(memory.service.store, "put", uncertain)
         args = {"content": "saved only after commit", "fragment_handles": handles(memory, ref)}
-        assert invoke(memory, "save_memory", args, "save")["status"] == "outcome_unknown"
+        unknown = invoke(memory, "save_memory", args, "save")
+        assert unknown["status"] == "outcome_unknown"
+        assert unknown["effect"] == "unconfirmed" and unknown["error_type"] == error_type.__name__
+        assert unknown["phase"] == "semantic_commit"
+        assert len(memory.service.records()) == int(after_put)
         monkeypatch.setattr(memory.service.store, "put", original)
         receipt = invoke(memory, "save_memory", args, "save")
-        assert receipt["ok"] and receipt["replayed"] and receipt["revision"] == 1
+        assert receipt["ok"] and receipt["revision"] == 1
+        assert bool(receipt.get("replayed")) is after_put
         assert len(memory.service.records()) == 1
         assert memory.service.sources()[0]["formation_status"] == "formed"
 

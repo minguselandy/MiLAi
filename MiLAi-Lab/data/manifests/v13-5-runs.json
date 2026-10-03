@@ -1,6 +1,6 @@
 {
   "kind": "V13_5_COHORT_REGISTER",
-  "status": "PAUSED_BY_USER",
+  "status": "ACTIVE_RESUMED_BY_USER",
   "cohorts": [
     {
       "id": "l1-r0",
@@ -267,5 +267,6 @@
   "product": "NO_GO",
   "cross_cohort_interpretation": "Each development cohort retains its own full denominator and stop/failure. Passing cases from different configurations must not be combined into a synthetic normal24 pass.",
   "cost_scope": "Unique actual request/attempt deltas per cohort. Targeted prefixes are included once in their cohort, not added again. No rerun or ledger reset is authorized by this register.",
-  "pause_report": "docs/V13_5_PAUSE_STATUS_20261003.md"
+  "pause_report": "docs/V13_5_PAUSE_STATUS_20261003.md",
+  "current_progress": "docs/V13_5_PROGRESS.md"
 }

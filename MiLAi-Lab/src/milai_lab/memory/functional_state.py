@@ -11,6 +11,22 @@ import json
 from typing import Any, cast
 
 
+class FunctionalRejection(ValueError):
+    """Explicit contract refusal before a semantic/visibility mutation is entered."""
+
+
+class FunctionalIntegrityError(ValueError):
+    """Stored identity or visibility integrity failed; not an ordinary input refusal."""
+
+
+class FunctionalOperationError(RuntimeError):
+    """A persistence boundary was entered; an exception cannot certify no effect."""
+
+    def __init__(self, phase: str, cause: Exception) -> None:
+        super().__init__(phase)
+        self.phase, self.cause = phase, cause
+
+
 def canonical(value: Any) -> str:
     return json.dumps(
         value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
@@ -55,7 +71,7 @@ def visibility(service: Any) -> dict[str, Any]:
         or not isinstance(value.get("sources"), list)
         or not isinstance(value.get("operations"), dict)
     ):
-        raise ValueError("V13_5_VISIBILITY_INTEGRITY_FAILED")
+        raise FunctionalIntegrityError("V13_5_VISIBILITY_INTEGRITY_FAILED")
     return cast(dict[str, Any], value)
 
 
@@ -76,11 +92,11 @@ def note_exposure(
 ) -> None:
     """Input precedes retrieval; only a generated assistant output can follow its exposure."""
     if kind not in {"input_context", "assistant_output"}:
-        raise ValueError("V13_5_EXPOSURE_KIND_INVALID")
+        raise FunctionalRejection("V13_5_EXPOSURE_KIND_INVALID")
     key = "exposure:" + public_source
     old = service.store.get(namespace(service), key)
     if old is not None and old.value.get("edge_kind") != kind:
-        raise ValueError("V13_5_EXPOSURE_KIND_CHANGED")
+        raise FunctionalIntegrityError("V13_5_EXPOSURE_KIND_CHANGED")
     value = {
         "owner": service.owner,
         "bank": list(service.namespace),
@@ -137,13 +153,13 @@ def validate_source(source_ref: str, event: dict[str, Any], owner: str) -> None:
             )
         )
     ):
-        raise ValueError("V13_5_SOURCE_IDENTITY_INVALID")
+        raise FunctionalIntegrityError("V13_5_SOURCE_IDENTITY_INVALID")
 
 
 def scope_leaves(scope: dict[str, Any], prefix: str = "scope") -> dict[str, Any]:
     """Explicit JSON scope; dots separate dictionary paths, arrays are literal leaves."""
     if not isinstance(scope, dict):
-        raise ValueError("V13_5_SCOPE_OBJECT_REQUIRED")
+        raise FunctionalRejection("V13_5_SCOPE_OBJECT_REQUIRED")
     result: dict[str, Any] = {}
     reserved = {
         "event_id",
@@ -159,13 +175,13 @@ def scope_leaves(scope: dict[str, Any], prefix: str = "scope") -> dict[str, Any]
     }
     for key, value in scope.items():
         if not isinstance(key, str) or not key or "." in key or key in reserved:
-            raise ValueError("V13_5_SCOPE_KEY_INVALID")
+            raise FunctionalRejection("V13_5_SCOPE_KEY_INVALID")
         path = prefix + "." + key
         if isinstance(value, dict) and value:
             result.update(scope_leaves(value, path))
         else:
             if isinstance(value, list) and any(isinstance(item, (list, dict)) for item in value):
-                raise ValueError("V13_5_SCOPE_ARRAY_LITERAL_VALUES_REQUIRED")
+                raise FunctionalRejection("V13_5_SCOPE_ARRAY_LITERAL_VALUES_REQUIRED")
             canonical(value)
             result[path] = value
     return result
@@ -174,10 +190,10 @@ def scope_leaves(scope: dict[str, Any], prefix: str = "scope") -> dict[str, Any]
 def issue_fragment_range(service: Any, source_ref: str, start: int, end: int) -> dict[str, Any]:
     event = service.source(source_ref)
     if event is None:
-        raise ValueError("V13_5_SOURCE_UNAVAILABLE")
+        raise FunctionalRejection("V13_5_SOURCE_UNAVAILABLE")
     body = body_text(event)
     if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(body):
-        raise ValueError("V13_5_FRAGMENT_RANGE_INVALID")
+        raise FunctionalRejection("V13_5_FRAGMENT_RANGE_INVALID")
     part = body[start:end]
     bound = {
         "owner": service.owner,
@@ -197,7 +213,7 @@ def issue_fragment_range(service: Any, source_ref: str, start: int, end: int) ->
     handle = "frag-" + digest(bound)
     prior = service.store.get(namespace(service), handle)
     if prior is not None and prior.value != bound:
-        raise ValueError("V13_5_FRAGMENT_COLLISION")
+        raise FunctionalIntegrityError("V13_5_FRAGMENT_COLLISION")
     if prior is None:
         service.store.put(namespace(service), handle, bound, index=False)
     return {"fragment_handle": handle, **bound, "content": part, "semantic_support": "unchecked"}
@@ -205,10 +221,10 @@ def issue_fragment_range(service: Any, source_ref: str, start: int, end: int) ->
 
 def issue_fragments(service: Any, source_ref: str, max_chars: int) -> list[dict[str, Any]]:
     if type(max_chars) is not int or not 1 <= max_chars <= 16000:
-        raise ValueError("V13_5_FRAGMENT_SIZE_INVALID")
+        raise FunctionalRejection("V13_5_FRAGMENT_SIZE_INVALID")
     event = service.source(source_ref)
     if event is None:
-        raise ValueError("V13_5_SOURCE_UNAVAILABLE")
+        raise FunctionalRejection("V13_5_SOURCE_UNAVAILABLE")
     body = body_text(event)
     result = []
     start = 0
@@ -226,20 +242,20 @@ def issue_fragments(service: Any, source_ref: str, max_chars: int) -> list[dict[
 
 def resolve_fragment(service: Any, handle: str) -> dict[str, Any]:
     if not isinstance(handle, str) or not handle.startswith("frag-"):
-        raise ValueError("V13_5_FRAGMENT_NOT_ISSUED")
+        raise FunctionalRejection("V13_5_FRAGMENT_NOT_ISSUED")
     item = service.store.get(namespace(service), handle)
     if item is None:
-        raise ValueError("V13_5_FRAGMENT_NOT_ISSUED")
+        raise FunctionalRejection("V13_5_FRAGMENT_NOT_ISSUED")
     bound = item.value
     if (
         handle != "frag-" + digest(bound)
         or bound.get("owner") != service.owner
         or bound.get("bank") != list(service.namespace)
     ):
-        raise ValueError("V13_5_FRAGMENT_BINDING_CHANGED")
+        raise FunctionalIntegrityError("V13_5_FRAGMENT_BINDING_CHANGED")
     event = service.source(bound["source_ref"])
     if event is None:
-        raise ValueError("V13_5_SOURCE_UNAVAILABLE")
+        raise FunctionalRejection("V13_5_SOURCE_UNAVAILABLE")
     body = body_text(event)
     start, end = bound["start"], bound["end"]
     if (
@@ -251,7 +267,7 @@ def resolve_fragment(service: Any, handle: str) -> dict[str, Any]:
         or text_hash(body[start:end]) != bound["span_sha256"]
         or any(event[k] != bound[k] for k in ("role", "origin", "observed_at"))
     ):
-        raise ValueError("V13_5_FRAGMENT_SOURCE_CHANGED")
+        raise FunctionalIntegrityError("V13_5_FRAGMENT_SOURCE_CHANGED")
     return {
         "fragment_handle": handle,
         **bound,
@@ -267,7 +283,7 @@ def fragment_support(service: Any, handles: list[str]) -> dict[str, Any]:
         or not all(isinstance(h, str) for h in handles)
         or len(set(handles)) != len(handles)
     ):
-        raise ValueError("V13_5_FRAGMENT_SELECTION_REQUIRED")
+        raise FunctionalRejection("V13_5_FRAGMENT_SELECTION_REQUIRED")
     fragments = [resolve_fragment(service, handle) for handle in handles]
     return {
         "fragment_handles": handles,

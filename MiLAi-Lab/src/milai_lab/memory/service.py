@@ -32,6 +32,11 @@ from milai_lab.contracts.memory import (
 )
 from milai_lab.contracts.public_memory_contracts import profile as public_profile
 from milai_lab.contracts.read_protocol import profile, reject
+from milai_lab.memory.functional_state import (
+    FunctionalIntegrityError,
+    FunctionalOperationError,
+    FunctionalRejection,
+)
 from milai_lab.memory.observation import (
     PROJECTOR_VERSION,
     ObservationError,
@@ -1091,8 +1096,10 @@ class MemoryService:
             if confirmation is None:
                 return None
             if confirmation.value != {"source_ref": source_ref, "event_sha256": _hash(event)}:
-                raise ValueError("V13_5_SOURCE_CAPTURE_CONFIRMATION_CHANGED")
+                raise FunctionalIntegrityError("V13_5_SOURCE_CAPTURE_CONFIRMATION_CHANGED")
         if event.get("content_sha256") != _body_hash(event.get("content")):
+            if self.functional_contract == "functional_v1":
+                raise FunctionalIntegrityError("V13_SOURCE_INTEGRITY_FAILED")
             raise ValueError("V13_SOURCE_INTEGRITY_FAILED")
         return event
 
@@ -1132,6 +1139,27 @@ class MemoryService:
 
         return resolve_fragment(self, handle)
 
+    def note_tool_delivery(self, session: str, message_id: str, source_refs: list[str]) -> None:
+        """Record actual tool delivery for future assistant output, not user derivation.
+
+        Called by trusted tool delivery after its receipt is captured. The public
+        input already existed before retrieval; it is only the exposure anchor.
+        """
+        if self.functional_contract != "functional_v1" or not session or not message_id:
+            raise ValueError("V13_5_TOOL_DELIVERY_CONTEXT_INVALID")
+        from milai_lab.memory.functional_state import note_exposure
+
+        with self._locked():
+            public_ref = self.event_id(session, message_id, "user")
+            public = self._source(public_ref, binding_only=True)
+            if public is None or public.get("role") != "user":
+                raise ValueError("V13_5_TOOL_DELIVERY_INPUT_REQUIRED")
+            for ref in source_refs:
+                source = self.source(ref)
+                if source is None or source.get("role") != "tool":
+                    raise ValueError("FUNCTIONAL_VISIBLE_TOOL_SOURCE_REQUIRED")
+            note_exposure(self, public_ref, source_refs)
+
     def forgotten_source_refs(self) -> list[str]:
         if self.functional_contract != "functional_v1":
             return []
@@ -1156,7 +1184,7 @@ class MemoryService:
         if self.functional_contract != "functional_v1":
             raise ValueError("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
         if not session or not operation_id or scope not in {"record", "record_and_sources"}:
-            raise ValueError("V13_5_FORGET_ARGUMENTS_INVALID")
+            raise FunctionalRejection("V13_5_FORGET_ARGUMENTS_INVALID")
         from milai_lab.memory.functional_state import fragment_support, namespace, visibility
 
         key = _hash([session, operation_id])
@@ -1168,10 +1196,10 @@ class MemoryService:
             previous = state["operations"].get(key)
             if previous is not None:
                 if previous["request"] != request:
-                    raise ValueError("V13_5_FORGET_OPERATION_CHANGED")
+                    raise FunctionalRejection("V13_5_FORGET_OPERATION_CHANGED")
                 return {**previous["receipt"], "replayed": True}
             if (candidate_handle is None) == (fragment_handles is None):
-                raise ValueError("V13_5_FORGET_EXACTLY_ONE_SELECTION_REQUIRED")
+                raise FunctionalRejection("V13_5_FORGET_EXACTLY_ONE_SELECTION_REQUIRED")
             if candidate_handle is not None:
                 bound = self.candidate(candidate_handle)
                 if bound is None:
@@ -1185,7 +1213,7 @@ class MemoryService:
                 record_ids = [bound["record_id"]]
             else:
                 if scope != "record_and_sources":
-                    raise ValueError("V13_5_SOURCE_FORGET_REQUIRES_SOURCE_SCOPE")
+                    raise FunctionalRejection("V13_5_SOURCE_FORGET_REQUIRES_SOURCE_SCOPE")
                 assert fragment_handles is not None
                 refs = fragment_support(self, fragment_handles)["source_refs"]
                 record_ids = [row["id"] for row in self._rows(self.namespace)
@@ -1194,7 +1222,8 @@ class MemoryService:
                                      .get("history", []))]
             if additional_fragment_handles is not None:
                 if candidate_handle is None or scope != "record_and_sources":
-                    raise ValueError("V13_5_ADDITIONAL_SOURCE_SCOPE_REQUIRES_RECORD_AND_SOURCES")
+                    raise FunctionalRejection(
+                        "V13_5_ADDITIONAL_SOURCE_SCOPE_REQUIRES_RECORD_AND_SOURCES")
                 refs = list(dict.fromkeys([*refs,
                     *fragment_support(self, additional_fragment_handles)["source_refs"]]))
             revoked = refs if scope == "record_and_sources" else []
@@ -1233,7 +1262,10 @@ class MemoryService:
                      "sources": list(dict.fromkeys([*state["sources"], *revoked])),
                      "operations": {**state["operations"], key: {
                          "request": request, "receipt": receipt}}}
-            self.store.put(namespace(self), "visibility", state, index=False)
+            try:
+                self.store.put(namespace(self), "visibility", state, index=False)
+            except Exception as error:
+                raise FunctionalOperationError("visibility_commit", error) from error
             return receipt
 
     def _rows(self, namespace: tuple[str, ...]) -> list[dict[str, Any]]:

@@ -1,4 +1,19 @@
-# MiLAi Lab v13.5 PAUSED checkpoint
+# MiLAi Lab v13.5 resumed execution
+
+On 2026-10-03 the user explicitly resumed all remaining development and experiments.
+Complete F0–F4 / L0–L4 / FUNC01–16 and update GitHub PR81. The pause checkpoint
+f621093 remains historical evidence. First fix layer boundaries, truthful exception
+effects and pagination progress and pass affected checks plus remote CI on the same
+commit. Then establish authoritative operation status and final-answer transport,
+field-specific correction evidence, and stable full L1/two-workflow/L3/L4 validation.
+Do not optimize costs, increase limits as a substitute for correctness, restart
+v13.4 T1–T3, rewrite old cohorts or merge the PR. Preserve the original continuous
+ledger and all failures. Root alone performs serial actual model HTTP. No new
+services or Product/Archive changes. Existing paused reports remain unmodified.
+
+---
+
+## Historical v13.5 PAUSED checkpoint (superseded by explicit resume above)
 
 On 2026-10-03 the user explicitly requested: "暂停当前实验提交到github上".
 The experiment Goal is PAUSED. Do not implement further methods, start model
