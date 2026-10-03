@@ -1,23 +1,24 @@
 # v13.5 functional profile
 
-**R46 is a mechanically checked development candidate; model acceptance has not run.**
-It adds selected-original revision review and bounded unavailable-tool feedback under the
-original allowances. Neither same-model approval nor valid provenance certifies semantic
-support. R45 failed its communication regression; no stable configuration is recommended.
-Its explicit confirm_existing_memory tool passed the actual existing-record story: real
-no_change/effect none, original ID/revision/history and truthful unchanged confirmation.
-However an ounces-to-grams correction selected only the old ounces source, a core support
-failure. Another withdrawal answer added an unsupported smooth-outcome claim; label-only
-continuation completed correctly but then proposed an unavailable update tool and failed
-protocol delivery. The original11/27 was sealed as4 scoped PASS/3 FAIL/4 NOT_RUN, with15
-COMPLETED/1 FAILED/11 unrun messages. Correct effects remain valid; no replay was performed.
-R45's 469 mechanical checks, 18 production tokenizer probes and 4 SDK checks do not replace these
-model results. Same-version L1–L4 have not been admitted. See [progress](V13_5_PROGRESS.md).
-R46 has 546 passing regression checks, 23 production tokenizer probes and 4 installed SDK checks;
-its exact source commit `81c8bc5` passed Fast CI 37141214168, while Full 37141214049 was skipped.
-The [r46 checkpoint](V13_5_CHECKPOINT_r46_20261004.md) consolidates current results, CI,
-costs and remaining work; the [r45 checkpoint](V13_5_CHECKPOINT_r45_20261004.md) is historical.
-Product remains NO_GO.
+**R46 completed its full exposed communication cohort with 9 scoped PASS and 2 FAIL.**
+All 11 cases / 27 public messages were attempted: 26 COMPLETED and one actual injected
+W1 UNKNOWN. Same-ID correction, whole/partial withdrawal, existing-record no_change,
+live label continuation and forgetting passed their scoped checks. Initial formation
+still dropped a this-occurrence limit and strengthened planning language; one historical
+answer added a word while claiming an original quotation. These failures remain open.
+
+Five actual precommit revision assessments used the selected correction/cancellation
+originals and returned supported. Same-model approval is not semantic certification.
+The model did not trigger unsupported-review rejection or unavailable-tool feedback in
+this cohort; their negative-path evidence remains mechanical. W1 recovery discovered
+completed business without replay, while explicitly reporting no semantic commit.
+
+The cohort added 93 generation calls / 483,293 tokens. R46's 546 mechanical regressions,
+23 production tokenizer probes and 4 installed SDK checks remain separate evidence.
+Its model-source checkout d1a2cfd passed Fast CI 37142700928; Full 37142701004 was skipped.
+Same-version L1–L4 have not been admitted. No stable configuration is recommended.
+See [progress](V13_5_PROGRESS.md); the [r46 pre-model checkpoint](V13_5_CHECKPOINT_r46_20261004.md)
+and all earlier failed cohorts retain their historical status. Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded

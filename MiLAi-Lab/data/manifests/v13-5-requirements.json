@@ -5226,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r46 selected_originals_v1 revision review and bounded_feedback_v1 catalog rejection; mechanical candidate",
-    "scope": "546 affected/default/schema/accounting checks,23 production tokenizer probes,4 installed SDK checks PASS. R46 no input freeze/model calls yet; communication11/27 then full same-version L1/L2/L3/newL4 remain required. R45 core wrong-source correction and protocol failures retained. Detailed140 historical and original48 unpromoted.",
+    "candidate": "r46 selected_originals_v1 revision review and bounded_feedback_v1; full communication sealed with ordinary failures",
+    "scope": "Full11/27:9 PASS_SCOPED/2 FAIL,26 COMPLETED/1 actual injected W1 UNKNOWN;93 generation/483293 tokens. Five current-source revisions, real no_change, live label continuation and no-replay discovery, visibility forgetting passed scoped checks. Initial save loses temporary scope/modality; final historical quote drifts. No actual unsupported-review rejection or unavailable-tool feedback in this cohort. Same-version L1-L4 not admitted; next repair extends selected-original review to formation. Detailed140 and original48 unpromoted.",
     "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",

@@ -6841,6 +6841,127 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r46",
+      "layer": "communication",
+      "candidate_commit": "d1a2cfd6c41c454726bc49dd7e5c0f2cd915467b",
+      "state": "COMPLETE_COMMUNICATION_WITH_FORMATION_SCOPE_AND_HISTORICAL_QUOTE_FAILURES",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r46.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 14020,
+        "generation": {
+          "charged_tokens": 50941786,
+          "known_tokens": 50911399,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r46/input-freeze.json": "71e9c37fea0d719f342eba717bd5b6615bc4000c19408d38a253fd57cc8de7e2",
+        "configs/v13-5-functional-r46.json": "a244e466e24e6a198927fc31728154dc585ac2bb053c20d5dd30cc06efd50682",
+        "artifacts/v13-5/communication-r46/review.json": "a213146d5fd03f051c3c915cbd6f8245e9fadb6140e9c5d92e1171cfcf9916ef",
+        "artifacts/v13-5/communication-r46/seal.json": "8928aeed75ab38f0f3fd9879b9cc75a483a7b559c2364536303b87b412619002",
+        "artifacts/v13-5/communication-r46-manual-grades.json": "ec1d973d14c100946d2814507dcc91857f9caf08fc7e1c7a317ddaaf9b2b681b",
+        "artifacts/v13-5/communication-r46-review-notes.json": "b5c97fde10ea568c96dc489ce2c445059ab002648b9c4b3b59741147e070f968",
+        "artifacts/v13-5/communication-r46-all-review.jsonl": "5f9e05a9660f26ce3975107656663b4b8c464cd798c578cab9b8209c7e1e8cd5",
+        "artifacts/v13-5/communication-r46-evaluator/summary.json": "0e76a5df7a412a420a05b9b2c0dc92d6a8a4b395635aca31914b3d013d5cdaf8",
+        "artifacts/v13-5/communication-r46/targeted-review.json": "7354dee794f43a7e36c72220d9d574aec256d3987d203ecf8d5a9106be4c5105",
+        "artifacts/v13-5/communication-r46-ledger-after.json": "3a4159bd86c6aa69f505ccc336bf7c5f4efefb92b4308d997d0c565c63e2427f"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 26,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 27,
+      "cost_delta": {
+        "generation_requests": 93,
+        "generation.known_tokens": 483293,
+        "generation.charged_tokens": 483293,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 27,
+      "independent_sqlite": {
+        "records": 9,
+        "exact_quote_identity_checks": 44,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-g02": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual original save and same-ID rev2 ounces-to-grams correction select the current correction original for content, preserving factory-label exclusion, untouched basis/kind supports and original history. One persisted same-model review returns supported; direct original supports the actual changed value. Final old/current answers are accurate, readonly followup does not write or assume a label unit. Exact quotes and current=latest pass. Current-request interpretation incorrectly suggests draft business continuation, but actual reservation catalog intersection grants no draft operation; no business call/effect occurred. This interpretation limitation is retained, not authority proof."
+        },
+        "communication-partial": {
+          "status": "PASS_SCOPED",
+          "reason": "First reservation commits one actual partial business effect and saves accurate native-receipt-supported partial state. New-process followup performs actual live get_reservation, then only complete_label on original reservation; world has one reserve and one label attempt. Program final distinguishes old receipt, current observation and completed label, and truthfully says no followup semantic commit. Historical partial memory remains unchanged, not presented as current reality. No unavailable proposal occurred here, so this result does not establish that new bounded-feedback branch was exercised by the model."
+        },
+        "l4-h06": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual original source save followed by confirm_existing_memory using actual current read handle. Paired no_change/effect none keeps same ID, rev1, one history and support; final correctly says unchanged, no new write. No revision review is needed or performed for exact no_change."
+        },
+        "l4-h03": {
+          "status": "FAIL",
+          "reason": "Scoped withdrawal mechanics pass: initial only-this-Saturday/best-effort preserved; actual current withdrawal original selected, independently framed same-model review supported; original ID rev2 retracted, history and old field supports retained with cancellation support. Readonly followup does not restore or change state and correctly says no active rule. However it labels a paraphrase as historical original quotation: user said 仅本周六手工小组活动, final quotes 仅在本周六手工小组活动, inserting 在. Original stored source quotes remain exact. Retain ordinary final historical-quote fidelity failure, not a source-store integrity failure.",
+          "breakpoint": "historical_answer_inserts_word_into_claimed_original_quote",
+          "dimensions": {
+            "answer_satisfies_request": false
+          }
+        },
+        "l4-g03": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial only-this-week public-lecture/best-effort rule preserved. Current cancellation fragment supports actual original-ID rev2 whole withdrawal, with old supports and history retained. Separate same-model record assessment persisted. Readonly followup actually reads historical record, accurately reports inactive rule and exact original assertion. No unsupported smoothly-ended claim or new write."
+        },
+        "communication-answer": {
+          "status": "PASS_SCOPED",
+          "reason": "Usable one-sentence Chinese triangle definition; no semantic memory or business mutation."
+        },
+        "communication-memory": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual source-supported save preserves only-this-exhibition and best-effort restriction. Readonly followup correctly says this is temporary and not all scenarios; original ID/rev1/support/history unchanged and no false new-save claim."
+        },
+        "communication-recovery": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual predeclared W1 fires after native reserve+label and before journal completion: initial public result remains UNKNOWN/null final, original journal pending, semantic memory not committed. New process searches history then performs actual get_reservation, sees original reservation and label already created, and executes no mutation. World retains one business attempt; query/source receipt persists, program final truthfully distinguishes old unknown receipt and current completed world, and explicitly reports no semantic commit. This is scoped W1 discovery/no-replay acceptance, not proof that interrupted semantic formation was completed."
+        },
+        "l4-n03": {
+          "status": "FAIL",
+          "reason": "Initial formation and confirmation drop the actual only-this-occurrence restriction 只在这次 and strengthen 设想为 into 设为. Source identity is valid but broader semantic content is not fully supported; new revision review does not cover saves. Subsequent original-ID rev2 correctly selects actual cancellation original, removes special reminder and preserves other activities ten minutes; readonly final and terminal state are correct. Later correction does not erase the initial ordinary formation/scope failure.",
+          "breakpoint": "initial_save_loses_this_occurrence_and_planning_modality",
+          "dimensions": {
+            "source_quote_support": false,
+            "answer_satisfies_request": false,
+            "semantic_formation": false,
+            "scope_time_negation": false
+          }
+        },
+        "l4-n08": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual save selects original synthetic secret. First forget proposal gives both read_handle and fragment_handles; exactly-one-selection contract rejects before mutation/effect none. Corrected explicit second proposal revokes record_and_sources, including derived assistant source. Program final reports both attempts, visibility-only scope and no physical erasure. Actual post-revocation provider request contains no secret; all three actual next-message provider requests and final omit it. Readonly followup queries current visible material, reports absence without asserting never-provided or specific forgetting reason, and does not guess. Forensic raw history remains in ignored audit storage as disclosed."
+        },
+        "l4-f03": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial this-market-only/best-effort blue-price-label preference and unrestricted other stalls preserved. Partial withdrawal selects actual current removal original for changed content, separately assessed supported; original ID rev2 retains this occurrence and unchanged unrestricted-other-stalls fact from old record/context. Original support/history remain available. Final explicitly read current record, accurately reports both areas unrestricted without mutation. New support is actual cancellation, not only old blue affirmation."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "interpretation": "Complete exposed communication, not full functional acceptance. Five same-model supported revision assessments; no actual unsupported-review or unavailable-tool-feedback branch triggered. Initial formation scope/modality and final historical quote failures remain; W1 semantic formation not completed."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
