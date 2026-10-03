@@ -146,6 +146,21 @@ class NativePublicActionJournal(BusinessActionJournal):
                 write_json(self.path, entries)
                 raise
             row["effect"] = self._receipt_effect({"tool": call["name"]}, response)
+            if self.single_phase_per_turn and not self._is_query(call["name"]):
+                # Report the actual public attempt contract beside this outcome,
+                # so summaries need not infer retry limits from a failure code.
+                # Keep the backend response separately; policy is wrapper evidence,
+                # not an additional backend effect or a permanent prohibition.
+                row["native_result"] = response.model_dump(mode="json")
+                body = json.loads(str(response.content))
+                body["request_attempt_policy"] = {
+                    "scope": "current_public_message_only",
+                    "closed_phases": sorted(self._attempt_phases(call["name"])),
+                    "further_attempts_in_this_message": False,
+                    "later_request": "query_current_state_and_check_current_authorization",
+                    "basis": "enforced_single_phase_per_public_turn_v1",
+                }
+                response = response.model_copy(update={"content": json.dumps(body)})
         row.update(status="complete", result=response.model_dump(mode="json"))
         write_json(self.path, entries)
         if row["executed"] and self._is_query(call["name"]):

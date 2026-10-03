@@ -1349,8 +1349,8 @@
     {
       "id": "communication-r14",
       "layer": "L0_communication_and_exposed_behavior_regression",
-      "candidate_commit": "pending_commit_before_model_execution",
-      "state": "FROZEN_NOT_RUN",
+      "candidate_commit": "80356aaf7ad9300b759ae189fe3d73322ff31228",
+      "state": "COMMUNICATION_PASSED_SCOPED_SOURCE_SELECTION_DEFECT_RETAINED",
       "planned_cases": 8,
       "planned_messages": 12,
       "config": "configs/v13-5-functional-r14.json",
@@ -1368,7 +1368,68 @@
         "artifacts/v13-5/r14-production-response.json": "14ddbd36efb37d16022121c4ecf73311b17a9e82c39ad5b555da67187c41cfa2",
         "artifacts/v13-5/r14-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r14-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r14-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r14-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r14/review.json": "fd8b4596aa3984c89eaa26e6d7e095b4f15fb2abeb273e8af349e5fe1f05874b",
+        "artifacts/v13-5/communication-r14/seal.json": "c38d73664e2d3413d124744ba647a38da82caca4306769aeeb3d21e3a6ecb73b",
+        "artifacts/v13-5/communication-r14-readonly-review.jsonl": "c5824b3991673979bb15ae3558882e4c789f22d32bc8b0c72483eee1f4e44163"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 7,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 12
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 54,
+        "generation.known_tokens": 223687,
+        "generation.charged_tokens": 223687,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "All 12 delivered finals are available and answer actual requests; partial first result, completed conditional continuation and live query are now reported.",
+        "scope-2 one occurrence and scope-1 team/week preserved, pure queries do not mutate facts.",
+        "object-continue-3 no invented scope, live query, one reservation and label.",
+        "W3 actual semantic commit and business effects survive explicit resume without repetition."
+      ],
+      "failures": [
+        "l2-r02 first record includes current-phase retry prohibition but selects only the reserved_label_failed fragment. The claim matches the actual additional guard/policy, but selected field support does not include that evidence. Direct support is incomplete; no false full semantic PASS."
+      ],
+      "limitations": [
+        "Current-request flags remain unchecked; scope-2 explicit save flagged requires_memory_result false, actual save still occurs.",
+        "Plain usage answer overstates automatic remembering as a general guarantee; no current-operation false save, but guide quality remains limited.",
+        "Remaining quoted tool observation records earlier partial state after new-message continuation; final current state uses the live query/action, not stale observation.",
+        "W3 resumed answer adds unsupported physical pickup advice; actual sandbox outcome remains correct, but this is an answer-quality limitation."
+      ],
+      "evidence": "../communication-r14-readonly-review.jsonl"
+    },
+    {
+      "id": "communication-r15",
+      "layer": "L0_targeted_public_policy_and_commit_recovery",
+      "candidate_commit": "pending_commit_before_model_execution",
+      "state": "FROZEN_NOT_RUN",
+      "planned_cases": 2,
+      "planned_messages": 3,
+      "config": "configs/v13-5-functional-r15.json",
+      "mechanical_verification": {
+        "affected_tests": "74 PASS; actual source includes public policy, original backend receipt retained, reopen and later-turn boundaries preserved",
+        "ruff": "PASS",
+        "mypy": "PASS 195 source files",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "configs/v13-5-functional-r15.json": "8f5f0c6914dcb6407f3de49aabbf81c7026dd18d67d6a151131901cf87f1805a",
+        "artifacts/v13-5/communication-r15/input-freeze.json": "ae95d9ba07fcc74f0cc3003648ec60065b4062cf2fb114f69d3674a70e1d2462",
+        "artifacts/v13-5/r15-workflows-entry.log": "38cb2c6d5d61fec232b71eb75ed3b4944de8d89a7cbdfd2a42a9f5a7869ef0ac",
+        "artifacts/v13-5/r15-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r15-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r15-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],

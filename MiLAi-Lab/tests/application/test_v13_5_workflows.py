@@ -120,6 +120,15 @@ def test_single_phase_policy_retains_failed_attempt_and_requires_new_public_turn
         assert json.loads(denied.content) == {
             "status": "business_phase_already_attempted_this_turn", "executed": False}
         source = service.source(json.loads(first.content)["source_ref"])
+        policy = receipt(first)["request_attempt_policy"]
+        assert policy["scope"] == "current_public_message_only"
+        assert policy["closed_phases"] == (["label", "reservation"]
+            if workflow == "reservation" else ["publish_approved_document"])
+        assert policy["further_attempts_in_this_message"] is False
+        assert json.loads(source["content"])["request_attempt_policy"] == policy
+        entries = app.snapshot()["journal"].values()
+        saved = next(r for r in entries if r.get("call_id") == first.tool_call_id)
+        assert "request_attempt_policy" not in json.loads(saved["native_result"]["content"])
 
     with ExitStack() as stack:
         app, service, wrapper = opened(stack, tmp_path, workflow, **options)
