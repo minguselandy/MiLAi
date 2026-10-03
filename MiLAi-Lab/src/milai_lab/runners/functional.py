@@ -874,7 +874,8 @@ def message(
             recovery_path = bank_root / f"{identity}-answer-recovery.json"
             previous_result = read_json(result_path) if result_path.exists() else {}
             invalid_provider_content = (
-                previous_result.get("error") == "VLLM_CHAT_INVALID_CONTENT"
+                previous_result.get("error") in {
+                    "VLLM_CHAT_INVALID_CONTENT", "VLLM_CHAT_TRUNCATED"}
                 and previous_result.get("error_category") == "provider_protocol"
             )
             pending_answer_repair = bool(snapshot.next) and (

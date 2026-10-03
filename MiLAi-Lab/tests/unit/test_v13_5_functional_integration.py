@@ -83,9 +83,10 @@ def scripted(
         if isinstance(action, Exception):
             raise action
         payload = action if native else {"role": "assistant", "content": json.dumps(action)}
+        finish = payload.pop("_test_finish_reason",
+                             "tool_calls" if payload.get("tool_calls") else "stop")
         return httpx.Response(200, json={"id": "mechanical-response-" + str(len(wires)),
-            "choices": [{"finish_reason": "tool_calls" if payload.get("tool_calls") else "stop",
-                         "message": payload}],
+            "choices": [{"finish_reason": finish, "message": payload}],
             "usage": {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12}})
 
     class ScriptedClient(FunctionalVLLMClient):
@@ -251,7 +252,7 @@ def test_one_save_does_not_certify_other_requested_parts_or_later_reads(
         "status": "not_committed", "operations": []}
 
 
-@pytest.mark.parametrize("bad", [None, "", "{"])
+@pytest.mark.parametrize("bad", [None, "", "{", "truncated"])
 def test_native_bad_final_preserves_commit_and_resumes_without_repeating_it(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
 ) -> None:
@@ -266,7 +267,8 @@ def test_native_bad_final_preserves_commit_and_resumes_without_repeating_it(
                     "name": "save_memory", "arguments": json.dumps({
                         "content": "The local marker is blue.", "fragment_handles": handles})}}]}
         if ordinal == 2:
-            return {"role": "assistant", "content": bad,
+            return {"role": "assistant", "content": None if bad == "truncated" else bad,
+                    "_test_finish_reason": "length" if bad == "truncated" else "stop",
                     "reasoning_content": "REASONING_MUST_NOT_BECOME_FINAL"}
         assert not wire.get("tools")  # Answer-only recovery cannot execute a tool.
         return {"role": "assistant", "content": "The existing save is confirmed."}
@@ -274,7 +276,8 @@ def test_native_bad_final_preserves_commit_and_resumes_without_repeating_it(
     wires = scripted(monkeypatch, reply, native=True)
     first = message(root)
     assert first["status"] == "FAILED", first
-    assert first["error_category"] == ("provider_protocol" if bad is None else "final_delivery")
+    assert first["error_category"] == (
+        "provider_protocol" if bad in {None, "truncated"} else "final_delivery")
     assert first["final_delivery"]["status"] == "unavailable"
     assert first.get("final_answer") != "REASONING_MUST_NOT_BECOME_FINAL"
     assert first["operation_status"]["semantic_memory"]["status"] == "committed"
@@ -304,7 +307,7 @@ def test_final_text_recovery_uses_the_single_durable_format_allowance(
     assert third["operation_status"]["semantic_memory"]["status"] == "not_committed"
 
 
-@pytest.mark.parametrize("bad", [None, "{"])
+@pytest.mark.parametrize("bad", [None, "{", "truncated"])
 def test_answer_recovery_preserves_real_business_and_memory_commits(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
 ) -> None:
@@ -321,7 +324,8 @@ def test_answer_recovery_preserves_real_business_and_memory_commits(
                 "fragment_handles": [r["fragment_handle"]
                                      for r in receipt["source_fragment_index"]]}
         elif ordinal == 3:
-            return {"role": "assistant", "content": bad}
+            return {"role": "assistant", "content": None if bad == "truncated" else bad,
+                    "_test_finish_reason": "length" if bad == "truncated" else "stop"}
         else:
             assert ordinal == 4 and not wire.get("tools")
             return {"role": "assistant", "content": "The reservation and record are confirmed."}

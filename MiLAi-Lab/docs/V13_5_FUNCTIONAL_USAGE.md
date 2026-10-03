@@ -2,7 +2,8 @@
 
 **Development resumed by explicit user instruction on 2026-10-03.** No configuration
 has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
-r5 was not run; r6 is the current candidate. There is no stable recommended configuration yet.
+r5 was not run; r6 failed communication admission. R7 is the current candidate;
+there is no stable recommended configuration yet.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
@@ -13,8 +14,10 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r6.json` with a new root for current candidate
-validation. It retains r5's provider, thinking mode and all capacity limits.
+Use `configs/v13-5-functional-r7.json` with a new root for current candidate
+validation. It retains r6's native provider and capacity limits, with thinking
+disabled after the observed reasoning-only truncation. This change has not yet
+established full functional acceptance.
 Historical roots freeze their original source/configuration and cannot be resumed
 under changed code. No configuration is listed as accepted until full L1 passes
 without unresolved critical functional defects.

@@ -61,6 +61,15 @@ r6 将固定 r5 的 native 提供方、thinking、8,192 输出、8,192 材料、
 业务和记忆提交后 W3 中断并显式恢复），总上限为 4 个持久消息预算共 96 次生成。
 null／空白／异常最终文本已在机械层故障注入；真实通信成绩不能替代完整 L1。
 
+r6 通信实际运行后未通过：普通答复 1 条完成；保存轨迹真实提交 revision 1 后，
+提供方在后续调用中仅生成反复的 reasoning，耗尽 8,192 输出 tokens，`content=null`、
+`finish_reason=length`。入口正确报告 provider_protocol 失败及 semantic committed，
+未将 reasoning 当答案。余下 2 个轨迹停止，L1 未准入。新增 3 次生成、24,837 tokens，
+无新 unknown usage；全部原始响应和封存清单保留。普通答复提到内部工具名，另记使用质量
+限制，不把通信范围通过说成整体可用性通过。
+r7 仅将同一 native 提供方 thinking 关闭，模型、原提示和各容量额度不变；新增截断后
+无工具答复恢复的机械覆盖。重新冻结相同 4 个通信轨迹，不拼接 r6 和 r7 成绩。
+
 ## L3 输入复现
 
 新增 `tools/v13_5_prepare_l3_public.py` 及公开清单，仅读取旧 bank-before、三字段公开
