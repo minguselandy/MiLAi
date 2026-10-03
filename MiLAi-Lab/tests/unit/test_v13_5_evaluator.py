@@ -120,6 +120,54 @@ def test_mechanical_success_never_assigns_semantic_pass(tmp_path: Path) -> None:
     assert before == {str(p): p.read_bytes() for p in root.rglob("*") if p.is_file()}
 
 
+@pytest.mark.parametrize("fault", ["none", "provider_text", "missing_http", "delivery_hash",
+                                  "missing_delivery", "checkpoint_text", "metadata", "policy"])
+def test_retained_agent_answer_requires_original_http_and_delivery(
+    tmp_path: Path, fault: str,
+) -> None:
+    root, bank, identity = setup_run(tmp_path)
+    row = attempt(bank, identity)
+    metadata = dict(status="agent_response_retained", attempts=0, tools_available=False,
+                    execution_candidate_delivered=True, protocol="agent_response_v1",
+                    model_generation=False)
+    row.update(finalization=metadata, messages=[dict(type="ai", content="Saved.")])
+    freeze = json.loads((root / "input-freeze.json").read_text())
+    freeze["config"]["finalization"] = "receipt_or_agent_response_v1"
+    freeze["config_sha256"] = EVAL.canonical_hash(freeze["config"])
+    trace = bank / f"{identity}-trace-0.jsonl"
+    events = [json.loads(line) for line in trace.read_text().splitlines()]
+    delivery = dict(event="functional_agent_finalization", **metadata,
+                    final_text_sha256=EVAL.text_hash("Saved."))
+    events.append(delivery)
+    if fault == "provider_text":
+        receipt = {"choices": [{"message": {"content": "Different actual response."}}]}
+        events[0].update(receipt=receipt, response_text=json.dumps(receipt))
+    elif fault == "missing_http":
+        events = [delivery]
+    elif fault == "delivery_hash":
+        delivery["final_text_sha256"] = "wrong"
+    elif fault == "missing_delivery":
+        events.pop()
+    elif fault == "checkpoint_text":
+        row["messages"][-1]["content"] = "Different checkpoint."
+    elif fault == "metadata":
+        row["finalization"] = {**metadata, "attempts": 1}
+    elif fault == "policy":
+        freeze["config"]["finalization"] = "agent_final_v1"
+        freeze["config_sha256"] = EVAL.canonical_hash(freeze["config"])
+    save(root / "input-freeze.json", freeze)
+    save(bank / f"{identity}-attempt-0.json", row)
+    save(bank / f"{identity}-result.json", row)
+    trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+    result = EVAL.evaluate(root, cohort="L2")
+    pack = result["case_packs"][0]
+    checks = pack["messages"][0]["attempts"][0]["checks"]
+    linkage = next(c for c in checks if c["name"] == "final_actual_http_link")
+    assert (linkage["status"] == "PASS") is (fault == "none")
+    assert pack["acceptance_evidence_complete"] is (fault == "none")
+    assert pack["semantic_verdict"] == "UNREVIEWED"
+
+
 def test_resumed_failure_is_retained_and_latest_not_double_charged(tmp_path: Path) -> None:
     root, bank, identity = setup_run(tmp_path)
     attempt(bank, identity, 0, status="FAILED")

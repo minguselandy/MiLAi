@@ -278,10 +278,13 @@ def test_correction_fragment_selection_is_explicit_not_inferred_from_trigger(
         assert "Search never saves or updates" in descriptions["search_memory"]
 
 
+@pytest.mark.parametrize("interface", ["content_and_scope_v1", "unified_assertion_v2"])
 def test_public_update_selects_evidence_per_field_and_retains_unchanged_history(
-    tmp_path: Path,
+    tmp_path: Path, interface: str,
 ) -> None:
-    with opened(tmp_path) as memory:
+    evidence_key = ("evidence_for_new_value" if interface == "unified_assertion_v2"
+                    else "fragment_handles")
+    with opened(tmp_path, formation_interface=interface) as memory:
         initial = turn(memory, text="Distance in miles; project Alpha; weekdays only.")
         original = handles(memory, initial)
         saved = memory.save(cfg(), "save", "Distance in miles.", original,
@@ -292,9 +295,9 @@ def test_public_update_selects_evidence_per_field_and_retains_unchanged_history(
         current = memory.service.read(saved["id"])
         changes = [
             {"field": "content", "op": "set", "value": "Distance in kilometers.",
-             "fragment_handles": corrected},
-            {"field": "scope.project", "op": "set", "value": "Beta", "fragment_handles": scoped},
-            {"field": "scope.nested.only", "op": "remove", "fragment_handles": corrected},
+             evidence_key: corrected},
+            {"field": "scope.project", "op": "set", "value": "Beta", evidence_key: scoped},
+            {"field": "scope.nested.only", "op": "remove", evidence_key: corrected},
         ]
         response = invoke(memory, "update_memory", {
             "read_handle": current["candidate_handle"], "changes": changes},
@@ -314,7 +317,7 @@ def test_public_update_selects_evidence_per_field_and_retains_unchanged_history(
         unchanged = invoke(memory, "update_memory", {
             "read_handle": read["candidate_handle"], "changes": [
                 {"field": "content", "op": "set", "value": value["content"],
-                 "fragment_handles": []}]}, "no-change", cfg("change"))
+                 evidence_key: []}]}, "no-change", cfg("change"))
         assert unchanged["status"] == "no_change" and unchanged["revision"] == 2
         assert memory.service.history_index(saved["id"])["revisions"] == [1, 2]
         packet = memory.context("s", "change", SHA)

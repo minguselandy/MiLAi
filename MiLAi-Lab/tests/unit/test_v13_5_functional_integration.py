@@ -49,6 +49,7 @@ def prepared(
     reasoning_history: bool = False,
     direct_response: bool = False,
     actual_capabilities: bool = False,
+    replacement_evidence: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -111,7 +112,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "unified_assertion_v1" if readonly_finalization
+        "formation_interface": "unified_assertion_v2" if replacement_evidence else
+        "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
     settings_path = tmp_path / "settings.json"
@@ -2434,3 +2436,66 @@ def test_actual_capability_contract_tracks_restricted_completion_catalog(
     assert result['operation_status']['semantic_memory']['status'] == 'committed'
     assert 'WITHHELD_NO_WRITE' not in result['final_answer']
     assert result['world']['world']['attempts'] == []
+
+
+def test_replacement_evidence_catalog_commits_new_support_on_original_id(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, replacement_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal in {1, 3}:
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 1:
+                return native_call('save_memory', 'save',
+                                   content='Only the local sample uses unit A.',
+                                   fragment_handles=current)
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'update',
+                               read_handle=record['read_handle'], changes=[{
+                'field': 'content', 'op': 'set', 'value': 'Only the local sample uses unit B.',
+                'evidence_for_new_value': current}])
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested memory change is saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only the local sample uses unit A.')
+    updated = functional.message(root, **common, message_id='replacement',
+                                 content='For that same local sample use unit B instead.')
+    assert saved['status'] == updated['status'] == 'COMPLETED'
+    assert len(wires) == 4 and len(updated['records']) == 1
+    assert updated['records'][0]['id'] == saved['records'][0]['id']
+    value = updated['records'][0]['value']
+    assert value['revision'] == 2 and value['content'] == 'Only the local sample uses unit B.'
+    support = value['functional_support']
+    assert support['content']['source_refs'] == [updated['capture']['source_ref']]
+    assert support['content']['semantic_support'] == 'unchecked'
+    assert support['basis'] == saved['records'][0]['value']['functional_support']['basis']
+
+
+def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:
+    from milai_lab.runners.functional_response import business_response
+
+    operations = [
+        dict(status='not_committed', effect='none', phase='pre_mutation_contract'),
+        dict(status='visibility_revoked', effect='visibility_only', scope='record_and_sources',
+             scope_counts={'selected_records': 1, 'revoked_sources': 2}),
+        dict(status='unknown', effect='unknown'),
+    ]
+    effects = dict(business=dict(status='not_executed', operations=[], observations=[]),
+                   semantic_memory=dict(status='not_committed', operations=[]),
+                   visibility=dict(operations=operations), raw_event=dict(status='stored'))
+    answer = str(business_response([], effects, {}).content)
+    assert '遗忘尝试 1: 未提交' in answer
+    assert '遗忘尝试 2: 已按实际回执撤销所选记忆及来源的可见性' in answer
+    assert '遗忘尝试 3: 未知' in answer
+    assert answer.index('遗忘尝试 1:') < answer.index('遗忘尝试 2:') < answer.index('遗忘尝试 3:')
+    assert '尚不能确认请求的全部内容' not in answer
+    assert '未选择的独立副本不在本次确认范围内' in answer
+    assert '未执行物理擦除' in answer

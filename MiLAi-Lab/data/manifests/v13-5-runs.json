@@ -4077,7 +4077,166 @@
       },
       "scope": "Exposed communication development, Root review, not acceptance. Actual unavailable tool was rejected before dispatch; successful label not replayed. Missing-evidence contract does not mechanically certify prose. Only untouched independent stories continued after partial follow-up failure.",
       "reviewer": "Root",
-      "independent_review": false
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "f2bad4eaa360c853eda0919d06018394b8575483",
+        "fast": {
+          "run_id": 37116054641,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37116054631,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "communication-r36",
+      "layer": "L0",
+      "candidate_commit": "297f5152f182fe303676ee872d3e84f8eb4641ce",
+      "state": "COMPLETE_TRANSPORT_WITH_SEMANTIC_AND_PRESENTATION_FAILURES",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r36.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12325,
+        "generation": {
+          "charged_tokens": 41401294,
+          "known_tokens": 41370907,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r36/input-freeze.json": "5d391029087978ad6e01236a1fc99b600709a1cb5d9667492b80268eb87d586c",
+        "configs/v13-5-functional-r36.json": "7468c71cb36334b555f0d0b80124d12a64e329f2c5860fec5dae45e80311f31d",
+        "artifacts/v13-5/communication-r36/review.json": "2141947083935cd99d21a4f4c402191090c5c91cc9d2a2a1c9450ad281afc55f",
+        "artifacts/v13-5/communication-r36/seal.json": "647cb5b5bafe63127369ee865be4f8d2ea6cec70d7e88b65600cdcedd7b7df34",
+        "artifacts/v13-5/communication-r36-review.jsonl": "1d5c803ad1e1788e5f237f8557b054e48540484a537756e4cdcb44f93fece816",
+        "artifacts/v13-5/communication-r36-review-notes.json": "5e89c0e782a36655bef2aaf5055c59d2f57a248e1a3ba26fd0a3143e21dce9d6",
+        "artifacts/v13-5/communication-r36-evaluator/summary.json": "42aaf828da31f51ea9d5206db1ada0ace11e100ee4ec20dc08ab4da104039233"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 3,
+        "FAIL": 3
+      },
+      "message_counts": {
+        "COMPLETED": 12,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 41,
+        "generation.known_tokens": 193588,
+        "generation.charged_tokens": 193588,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed Root review. Transport and critical-effect conditions satisfy pre-output r36 policy; ordinary semantic/presentation failures remain FAIL/open while full original L1 is collected. No overall functional acceptance. All effects/source identities/history checked against actual receipts and read-only SQLite.",
+      "reviewer": "Root",
+      "independent_review": false,
+      "L1_development_admission": "PASS_SCOPED_PER_PREDECLARED_R36_POLICY",
+      "remote_ci": {
+        "commit": "297f5152f182fe303676ee872d3e84f8eb4641ce",
+        "fast": {
+          "run_id": 37116664565,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37116664559,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "l1-r36",
+      "layer": "L1",
+      "candidate_commit": "297f5152f182fe303676ee872d3e84f8eb4641ce",
+      "state": "COMPLETE_L1_CORE_CORRECTION_SUPPORT_FAILURE",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "config": "configs/v13-5-functional-r36.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12366,
+        "generation": {
+          "charged_tokens": 41594882,
+          "known_tokens": 41564495,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r36/input-freeze.json": "981907dd0f6cc9aeb7068f04a3ec221158ed458dd553552a1564b43cc027a32d",
+        "configs/v13-5-functional-r36.json": "7468c71cb36334b555f0d0b80124d12a64e329f2c5860fec5dae45e80311f31d",
+        "artifacts/v13-5/l1-r36/review.json": "fc5827944c413ef327b8b9fd2a32bcb702a36bef26569dba5f58c6948bb042c1",
+        "artifacts/v13-5/l1-r36/seal.json": "a01ca5afcf1a06a6e86543a0105549363466bc60406aa33c725ca6832e3157c4",
+        "artifacts/v13-5/l1-r36-all-review.jsonl": "44cd9dd2d1d3b5b14f86c0efee89ae96a05f880f27a2ad809a2b598deab7ac01",
+        "artifacts/v13-5/l1-r36-review-notes.json": "94f4aec3ce9606906ebf04bb1081ae7326309d06dc043527fcef5715fe0bf32f",
+        "artifacts/v13-5/l1-r36-manual-grades.json": "6baa504b1cb295a64e259ed0c6210a59dad70da1a12f7f0963c2e48fb5b166c3",
+        "artifacts/v13-5/l1-r36-evaluator/summary.json": "083c3f44cf7700ce7e314705930bad74d2f71f0f2396e5d44b770c3ca4a672eb",
+        "artifacts/v13-5/l1-r36-retained-answer-evaluator/summary.json": "0fdda3e6a74f0a99730868804d40844bc2ab284e8d7532d207bf6ef503be9ad9"
+      },
+      "original_rubric_counts": {
+        "PASS": 24
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 22,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempts": 48,
+      "cost_delta": {
+        "generation_requests": 150,
+        "generation.known_tokens": 700006,
+        "generation.charged_tokens": 700006,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 48,
+      "independent_sqlite": {
+        "records": 24,
+        "exact_quote_identity_checks": 84,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "critical_acceptance_blockers": [
+        "update-3 unresolved_core_revision_defect: new value bound to old source"
+      ],
+      "scope": "Full original L1 completed, no score pooling. Original rubric passes but current functional gate blocked by correction support; object-continue-3 stored subject ambiguity separately FAIL.",
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "297f5152f182fe303676ee872d3e84f8eb4641ce",
+        "fast": {
+          "run_id": 37116664565,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37116664559,
+          "conclusion": "skipped"
+        }
+      },
+      "offline_reevaluation": {
+        "path": "artifacts/v13-5/l1-r36-retained-answer-evaluator/summary.json",
+        "reason": "r37 evaluator distinguishes retained actual Agent response from program rendering. Original evaluation retained; no new model calls or semantic grade changes. Original rubric24PASS, overall gate NOT_PASSED due correction-support blocker."
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -4094,6 +4253,19 @@
       "sha256": "a09ed159aeec3b2eca98fe9433f6596ee1d7e96f11d5544e33ab96de73d25e71",
       "timing": "before any r36 actual output",
       "semantic_acceptance_unchanged": true
+    }
+  ],
+  "mechanical_checks": [
+    {
+      "candidate": "r37",
+      "scope": "268 related regression checks and5 actual Qwen tokenizer variants,0 model HTTP; ruff,mypy3modules,both boundaries passed. Earlier test harness/profile/freeze failures retained. No semantic success claim.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r37-regression-corrected.log": "ee7fcdac2483f3aaa7ca95ce4c1d0db6d0c7126ce561af7edfe01a1fc1e81b26",
+        "artifacts/v13-5/r37-production-contracts-direct-profile.json": "7eaa3e21da3ab09ee0e391c0e389d1683b350b33a38013612eb2386714b2b7cb",
+        "artifacts/v13-5/r37-targeted-first.log": "1dc3868f21f8fd4fd398bc9c16874618c61520b721c392a5b793214cf7806a1d",
+        "artifacts/v13-5/r37-entry-first.log": "223d5fa22d44f49db5d3e258da32186c9762ede4fbc9330992556a45c68e70ab",
+        "artifacts/v13-5/r37-regression.log": "5e73799bd331c14685962492c86b1d736d862835b29c71ef5748b226181b587d"
+      }
     }
   ]
 }

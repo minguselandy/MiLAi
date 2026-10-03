@@ -56,6 +56,17 @@ class FieldChange(BaseModel):
         description="Issued fragments supporting this NEW value or removal; not its old value")
 
 
+class ReplacementChange(FieldChange):
+    """Public selection names distinguish replacement evidence from target identity."""
+
+    fragment_handles: list[str] = Field(alias="evidence_for_new_value", description=(
+        "Select original fragments whose unchanged text supports the replacement value "
+        "or explicit removal. A fragment supporting the old record does not acquire new "
+        "meaning when the user corrects it. Select the actual correction when it supplies "
+        "the new fact; older fragments remain eligible when they directly support it. "
+        "The read_handle, not this evidence selection, identifies the old target."))
+
+
 class FunctionalMemory:
     def __init__(
         self,
@@ -74,7 +85,8 @@ class FunctionalMemory:
         if any(type(v) is not int or v < 1 for v in (read_limit, material_limit, fragment_chars)):
             raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
-        if formation_interface not in {"content_and_scope_v1", "unified_assertion_v1"}:
+        if formation_interface not in {
+            "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -1113,14 +1125,43 @@ class FunctionalMemory:
                 ),
             )
 
+        def update_assertion(
+            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            fragment_handles: list[str] | None = None,
+        ) -> ToolMessage:
+            """Update the OLD read target using separately selected evidence for each NEW value.
+
+            read_handle identifies the exact old record/version, not evidence for a change.
+            Each changes item supplies field, op, value and evidence_for_new_value.
+            Read the selected fragment's ORIGINAL TEXT before choosing it: it must support
+            the proposed replacement as written, without mentally editing the source.
+            To apply a correction, select evidence containing that correction; citing only
+            the superseded statement does not support a changed assertion. Current input
+            is not automatically evidence, and a directly supporting older source is valid.
+            Preserve unchanged qualifications and select additional support if needed.
+            An omitted field retains its prior value/support; null is a value, not removal.
+            Only scope.KEY fields allow remove. Same values/empty changes are no_change.
+            retract=true with changes=[] uses top-level fragment_handles for withdrawal.
+            Quote verification proves original bytes only; semantic support is unchecked.
+            """
+            return update_memory(
+                read_handle,
+                [FieldChange.model_validate(c.model_dump(exclude_unset=True)) for c in changes],
+                config, tool_call_id=tool_call_id, retract=retract,
+                fragment_handles=fragment_handles,
+            )
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
-            if self.formation_interface == "unified_assertion_v1"
+            if self.formation_interface in {"unified_assertion_v1", "unified_assertion_v2"}
             else StructuredTool.from_function(save_memory))
-        return (save_tool, *tuple(
+        update_tool = (StructuredTool.from_function(update_assertion, name="update_memory")
+                       if self.formation_interface == "unified_assertion_v2"
+                       else StructuredTool.from_function(update_memory))
+        return (save_tool, update_tool, *tuple(
             StructuredTool.from_function(function)
             for function in (
-                update_memory,
                 search_memory,
                 read_memory,
                 read_source,

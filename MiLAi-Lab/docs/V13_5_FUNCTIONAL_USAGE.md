@@ -18,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r36.json` is the current communication candidate. Required
+`configs/v13-5-functional-r37.json` is the current communication candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -87,9 +87,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r36. Do not combine their successful cases into a new cohort score.
+results, not results for r37. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r36, development only)
+## Candidate example (r37, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -98,14 +98,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r36 \
-  --config configs/v13-5-functional-r36.json
+  --root artifacts/v13-5/personal-r37 \
+  --config configs/v13-5-functional-r37.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r36 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r37 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r36 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r37 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -223,7 +223,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r36
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r37
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

@@ -426,6 +426,33 @@ def program_final_linkage(
                           "semantics still require separate review. No model final HTTP expected."}
 
 
+def retained_agent_final_linkage(
+    row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+) -> dict[str, Any]:
+    """No new finalization generation still requires the actual Agent HTTP text."""
+    metadata = {"status": "agent_response_retained", "attempts": 0,
+                "tools_available": False, "execution_candidate_delivered": True,
+                "protocol": "agent_response_v1", "model_generation": False}
+    if (freeze.get("config", {}).get("finalization") != "receipt_or_agent_response_v1"
+            or row.get("finalization") != metadata):
+        return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
+    answer = row.get("final_answer")
+    if not isinstance(answer, str):
+        return {"status": "FAIL", "reason": "missing_agent_text"}
+    delivery = [e for e in events if e.get("event") == "functional_agent_finalization"]
+    messages = row.get("messages", [])
+    matched = (len(delivery) == 1
+               and all(delivery[0].get(k) == v for k, v in metadata.items())
+               and delivery[0].get("final_text_sha256") == text_hash(answer)
+               and bool(messages) and messages[-1].get("type") == "ai"
+               and messages[-1].get("content") == answer and not messages[-1].get("tool_calls"))
+    provider = final_linkage(answer, events)
+    return {"status": provider["status"] if matched else "FAIL",
+            "method": "retained_agent_actual_http_delivery", "actual_http": provider,
+            "limitation": "No additional finalization generation; original Agent response "
+                          "must match actual HTTP. This is provenance, not semantic acceptance."}
+
+
 def evaluate_attempt(
     reader: ArtifactReader, path: Path, expected: dict[str, Any], freeze: dict[str, Any],
 ) -> dict[str, Any]:
@@ -487,10 +514,15 @@ def evaluate_attempt(
             {"broken_lines": broken},
         )
     )
-    program = row.get("finalization", {}).get("model_generation") is False
-    linkage = (program_final_linkage(
-        row, events, freeze, hidden_program_capture(reader, path.parent, row)) if program
-               else final_linkage(row.get("final_answer"), events))
+    retained = row.get("finalization", {}).get("protocol") == "agent_response_v1"
+    program = row.get("finalization", {}).get("model_generation") is False and not retained
+    if retained:
+        linkage = retained_agent_final_linkage(row, events, freeze)
+    elif program:
+        linkage = program_final_linkage(
+            row, events, freeze, hidden_program_capture(reader, path.parent, row))
+    else:
+        linkage = final_linkage(row.get("final_answer"), events)
     if row.get("status") == "COMPLETED":
         checks.append(check("final_program_delivery_link" if program else "final_actual_http_link",
                             linkage["status"], "final_answer", linkage))
