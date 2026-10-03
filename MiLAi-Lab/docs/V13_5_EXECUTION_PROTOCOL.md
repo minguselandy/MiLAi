@@ -77,6 +77,15 @@ it never rewrites the original unknown execution receipt.
 
 ## Results and stopping
 
+For resumed r6, `COMPLETED` additionally requires a minimal final-text delivery
+check. Execution statuses remain separate from semantic correctness. Program
+`operation_status` reports current-message receipts, never whole-request success.
+Unusable final text or null provider content retains actual committed effects.
+An explicit answer-only recovery consumes the existing single format allowance
+and durable generation budget, exposes no tools, and preserves all first-attempt
+failures. Four separately registered communication trajectories precede full L1;
+their scores are never combined with original24 acceptance.
+
 Report answer quality, raw/source integrity, semantic formation, same-ID updates,
 scope/history, business effects, recovery and costs separately. `COMPLETED` means
 the loop returned, not that its answer is correct. Keep `FAILED`,

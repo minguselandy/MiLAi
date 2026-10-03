@@ -2,7 +2,7 @@
 
 **Development resumed by explicit user instruction on 2026-10-03.** No configuration
 has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
-r5 is an unrun candidate. There is no stable recommended configuration yet.
+r5 was not run; r6 is the current candidate. There is no stable recommended configuration yet.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
@@ -10,6 +10,20 @@ This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
 separately in `V13_5_REQUIREMENTS_AND_ACCEPTANCE.md`; the existence of this guide
 does not establish semantic correctness or a Product release decision.
+
+## Current candidate configuration
+
+Use `configs/v13-5-functional-r6.json` with a new root for current candidate
+validation. It retains r5's provider, thinking mode and all capacity limits.
+Historical roots freeze their original source/configuration and cannot be resumed
+under changed code. No configuration is listed as accepted until full L1 passes
+without unresolved critical functional defects.
+
+The current `update_memory` catalog requires `fragment_handles` inside each
+`changes` item. Select support for the new value or removal, independently for
+each changed field. Unchanged fields retain support; top-level handles are for
+whole-record retraction only. `input_relation` distinguishes current input from
+archived Sources but never makes either one semantically sufficient evidence.
 
 ## Historical reproduction example (r0, not an accepted configuration)
 

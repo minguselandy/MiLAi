@@ -15,6 +15,7 @@ from typing import Annotated, Any, Literal, cast
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
+from pydantic import BaseModel, ConfigDict, Field
 
 from milai_lab.memory.functional_state import (
     FunctionalIntegrityError,
@@ -28,6 +29,17 @@ from milai_lab.memory.functional_state import (
     scope_leaves,
 )
 from milai_lab.memory.service import MemoryService, _lexical_tokens
+
+
+class FieldChange(BaseModel):
+    """One proposed value and its explicitly selected evidence, not a semantic verdict."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    field: str = Field(description="content/kind/basis or scope.KEY[.KEY]")
+    op: Literal["set", "remove"]
+    value: Any = Field(default=None, description="Required for set; omit for remove")
+    fragment_handles: list[str] = Field(
+        description="Issued fragments supporting this NEW value or removal; not its old value")
 
 
 class FunctionalMemory:
@@ -60,13 +72,20 @@ class FunctionalMemory:
         self.retrieval_candidates = copy.deepcopy(retrieval_candidates)
         if retrieval_candidates is not None:
             for row in retrieval_candidates:
+                required = {"source_ref", "start", "end", "retrieval_score"}
+                hashes = {"source_sha256", "body_text_sha256", "span_sha256"}
                 if (
-                    set(row) != {"source_ref", "start", "end", "retrieval_score"}
+                    not isinstance(row, dict)
+                    or not required <= set(row)
+                    or set(row) - required - hashes
                     or type(row["retrieval_score"]) not in {int, float}
                     or not math.isfinite(row["retrieval_score"])
                 ):
                     raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_INVALID")
-                service.source_fragment_range(row["source_ref"], row["start"], row["end"])
+                fragment = service.source_fragment_range(
+                    row["source_ref"], row["start"], row["end"])
+                if any(row[key] != fragment[key] for key in hashes.intersection(row)):
+                    raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_HASH_MISMATCH")
 
     @property
     def forget_epoch(self) -> int:
@@ -214,6 +233,12 @@ class FunctionalMemory:
         return self._deduplicate(current + units)
 
     def _snapshot(self, binding: dict[str, Any], items: list[dict[str, Any]], kind: str) -> str:
+        items = [
+            {**unit, "input_relation": ("current_request" if unit["source_ref"] ==
+                                       binding["source_ref"] else "archived_source")}
+            if unit["type"] == "fragment" else unit
+            for unit in items
+        ]
         payload = {
             "binding": binding,
             "policy": self.policy,
@@ -251,6 +276,7 @@ class FunctionalMemory:
                 "fragment_verification": "exact_original_span_only_not_semantic_support",
                 "new_values": "must_be_directly_supported_by_selected_fragments",
                 "trigger_binding": "execution_attribution_not_field_evidence",
+                "input_relation": "timing_only_not_automatic_evidence",
             },
         }
 
@@ -315,7 +341,10 @@ class FunctionalMemory:
         for index, unit in enumerate(items[start:], start):
             if unit["type"] == "fragment":
                 actual = self.service.source_fragment(unit["fragment_handle"])
-                if actual != {k: v for k, v in unit.items() if k != "type"}:
+                expected = {"type": "fragment", **actual, "input_relation": (
+                    "current_request" if actual["source_ref"] == binding["source_ref"]
+                    else "archived_source")}
+                if expected != unit:
                     raise FunctionalIntegrityError("V13_5_SNAPSHOT_SOURCE_CHANGED")
             else:
                 row = self.service.read(unit["record_id"], unit["revision"])
@@ -476,7 +505,7 @@ class FunctionalMemory:
         operation_id: str,
         read_handle: str,
         changes: list[dict[str, Any]],
-        fragment_handles: list[str],
+        fragment_handles: list[str] | None = None,
         *,
         retract: bool = False,
     ) -> dict[str, Any]:
@@ -503,10 +532,11 @@ class FunctionalMemory:
         if not isinstance(changes, list) or type(retract) is not bool or (retract and changes):
             raise FunctionalRejection("V13_5_CHANGES_LIST_REQUIRED_OR_RETRACT_CONFLICT")
         changed: set[str] = set()
+        selections: dict[str, list[str]] = {}
         for change in changes:
             if (
                 not isinstance(change, dict)
-                or set(change) - {"field", "op", "value"}
+                or set(change) - {"field", "op", "value", "fragment_handles"}
                 or change.get("op") not in {"set", "remove"}
                 or not isinstance(change.get("field"), str)
             ):
@@ -518,6 +548,12 @@ class FunctionalMemory:
             ):
                 raise FunctionalRejection("V13_5_OVERLAPPING_CHANGE_FIELD")
             changed.add(field)
+            # Legacy direct Python callers can explicitly share a selection.
+            # The exposed Agent tool requires a separate selection per change.
+            selected = change.get("fragment_handles", fragment_handles)
+            if not isinstance(selected, list) or not all(isinstance(h, str) for h in selected):
+                raise FunctionalRejection("V13_5_FIELD_FRAGMENT_SELECTION_REQUIRED:" + field)
+            selections[field] = selected
             if change["op"] == "set" and "value" not in change:
                 raise FunctionalRejection("V13_5_SET_VALUE_REQUIRED")
             if change["op"] == "remove" and "value" in change:
@@ -551,12 +587,21 @@ class FunctionalMemory:
             **scope_leaves(value["scope"]),
             **{k: value[k] for k in ("content", "kind", "basis")},
         }
-        removed = {path: fragment_handles for path in before.keys() - after.keys()}
+
+        def selected_for(path: str) -> list[str]:
+            matching = [selected for field, selected in selections.items()
+                        if path == field or path.startswith(field + ".")
+                        or field.startswith(path + ".")]
+            if not matching:
+                raise FunctionalIntegrityError("V13_5_CHANGED_FIELD_SELECTION_MISSING:" + path)
+            return list(dict.fromkeys(handle for selected in matching for handle in selected))
+
+        removed = {path: selected_for(path) for path in before.keys() - after.keys()}
         support = {
             path: (
                 support[path]
                 if path in before and canonical(before[path]) == canonical(item)
-                else fragment_handles
+                else selected_for(path)
             )
             for path, item in after.items()
         }
@@ -564,7 +609,17 @@ class FunctionalMemory:
             refs = old.get("source_refs", [old["source_ref"]])
             lineage = None
         else:
-            new = fragment_support(self.service, fragment_handles)
+            # Validate each changed leaf independently, then form the source union.
+            # Shared provenance does not assert that all new values are supported.
+            selected_changes = [support[path] for path in after
+                                if path not in before or canonical(before[path]) !=
+                                canonical(after[path])] + list(removed.values())
+            if retract:
+                selected_changes.append(fragment_handles or [])
+            for selected in selected_changes:
+                fragment_support(self.service, selected)
+            new = fragment_support(self.service, list(dict.fromkeys(
+                handle for selected in selected_changes for handle in selected)))
             refs = list(
                 dict.fromkeys([*new["source_refs"], *old.get("source_refs", [old["source_ref"]])])
             )
@@ -732,40 +787,40 @@ class FunctionalMemory:
 
         def update_memory(
             read_handle: str,
-            changes: list[dict[str, Any]],
-            fragment_handles: list[str],
+            changes: list[FieldChange],
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             retract: bool = False,
+            fragment_handles: list[str] | None = None,
         ) -> ToolMessage:
             """Patch the exact read version using field, op=set/remove, and value for set.
 
             Fields are content/kind/basis or scope.KEY[.KEY]. Only scope paths support remove.
             If the corrected claim is in content, patch content itself. Scope holds
             applicability boundaries; it does not replace contradictory content.
-            Select fragments that directly support each NEW changed value, not
+            Each changes item requires its own fragment_handles. Select fragments
+            that directly support each NEW changed value, not
             merely the old value. The current correction is not automatically
             added as evidence: supply its issued fragment handles when it supports
             the change. A trigger binding only attributes the current execution.
             retract=true with changes=[] withdraws the fact and retains its history.
+            Only a retraction uses top-level fragment_handles; ordinary changes
+            select support inside each item. Empty per-item selections are allowed
+            only for exact no_change fields, never for a changed value.
             Omitted fields retain original support; null is a value, never removal.
             Empty changes or exact same values return no_change without a new version.
             """
-            return message(
-                "update_memory",
-                tool_call_id,
-                mutation(
-                    lambda: self.update(
-                        config,
-                        tool_call_id,
-                        read_handle,
-                        changes,
-                        fragment_handles,
-                        retract=retract,
-                    )
-                ),
-            )
+            def patch() -> dict[str, Any]:
+                if changes and fragment_handles is not None:
+                    raise FunctionalRejection("V13_5_SELECT_FRAGMENTS_INSIDE_EACH_CHANGE")
+                return self.update(
+                    config, tool_call_id, read_handle,
+                    [change.model_dump(exclude_unset=True) for change in changes],
+                    fragment_handles, retract=retract,
+                )
+
+            return message("update_memory", tool_call_id, mutation(patch))
 
         def search_memory(
             query: str, config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId]

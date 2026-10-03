@@ -14,6 +14,7 @@ from typing import Any
 
 import pytest
 from langgraph.store.sqlite import SqliteStore
+from pydantic import ValidationError
 
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
@@ -195,6 +196,99 @@ def test_correction_fragment_selection_is_explicit_not_inferred_from_trigger(
         assert "NEW changed value" in descriptions["update_memory"]
         assert "not automatically" in descriptions["update_memory"]
         assert "Search never saves or updates" in descriptions["search_memory"]
+
+
+def test_public_update_selects_evidence_per_field_and_retains_unchanged_history(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path) as memory:
+        initial = turn(memory, text="Distance in miles; project Alpha; weekdays only.")
+        original = handles(memory, initial)
+        saved = memory.save(cfg(), "save", "Distance in miles.", original,
+                            {"project": "Alpha", "days": "weekdays", "nested": {"only": "old"}})
+        correction = turn(memory, "change", "Use kilometers; remove the old nested limit.")
+        project = memory.service.capture_user("archive", "scope", "The project is now Beta.")
+        corrected, scoped = handles(memory, correction), handles(memory, project["source_ref"])
+        current = memory.service.read(saved["id"])
+        changes = [
+            {"field": "content", "op": "set", "value": "Distance in kilometers.",
+             "fragment_handles": corrected},
+            {"field": "scope.project", "op": "set", "value": "Beta", "fragment_handles": scoped},
+            {"field": "scope.nested.only", "op": "remove", "fragment_handles": corrected},
+        ]
+        response = invoke(memory, "update_memory", {
+            "read_handle": current["candidate_handle"], "changes": changes},
+            "update", cfg("change"))
+        assert response["ok"] and response["id"] == saved["id"] and response["revision"] == 2
+        value = memory.service.read(saved["id"])["value"]
+        supports = value["functional_support"]
+        assert supports["content"]["fragment_handles"] == corrected
+        assert supports["scope.project"]["fragment_handles"] == scoped
+        assert supports["scope.days"]["fragment_handles"] == original
+        assert supports["scope.nested"]["fragment_handles"] == corrected
+        assert value["scope"] == {"project": "Beta", "days": "weekdays", "nested": {}}
+        assert value["removed_field_support"]["scope.nested.only"]["fragment_handles"] == corrected
+        assert all(s["semantic_support"] == "unchecked" for s in supports.values())
+        assert memory.service.read(saved["id"], 1)["value"] == current["value"]
+        read = memory.service.read(saved["id"])
+        unchanged = invoke(memory, "update_memory", {
+            "read_handle": read["candidate_handle"], "changes": [
+                {"field": "content", "op": "set", "value": value["content"],
+                 "fragment_handles": []}]}, "no-change", cfg("change"))
+        assert unchanged["status"] == "no_change" and unchanged["revision"] == 2
+        assert memory.service.history_index(saved["id"])["revisions"] == [1, 2]
+        packet = memory.context("s", "change", SHA)
+        assert all(u["input_relation"] == ("current_request" if u["source_ref"] == correction
+                   else "archived_source") for u in packet["items"] if u["type"] == "fragment")
+
+
+@pytest.mark.parametrize("bad", ["missing", "empty", "unknown", "global"])
+def test_public_update_cannot_borrow_another_changes_evidence(tmp_path: Path, bad: str) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory)
+        hs = handles(memory, ref)
+        saved = memory.save(cfg(), "save", "old", hs, {"project": "Alpha"})
+        old = memory.service.read(saved["id"])
+        changes = [{"field": "content", "op": "set", "value": "new", "fragment_handles": hs},
+                   {"field": "scope.project", "op": "set", "value": "Beta"}]
+        if bad != "missing":
+            changes[1]["fragment_handles"] = [] if bad == "empty" else ["unknown"]
+        args = {"read_handle": old["candidate_handle"], "changes": changes}
+        if bad == "global":
+            args["fragment_handles"] = hs
+        if bad == "missing":
+            with pytest.raises(ValidationError, match="fragment_handles"):
+                invoke(memory, "update_memory", args, "bad")
+        else:
+            result = invoke(memory, "update_memory", args, "bad")
+            assert result["status"] == "rejected" and result["effect"] == "none"
+        assert memory.service.read(saved["id"])["value"] == old["value"]
+        assert memory.service.history_index(saved["id"])["revisions"] == [1]
+
+
+@pytest.mark.parametrize("corrupt", [None, "source_sha256", "body_text_sha256", "span_sha256"])
+def test_frozen_candidate_hash_metadata_binds_exact_body_range(
+    tmp_path: Path, corrupt: str | None,
+) -> None:
+    with opened(tmp_path) as base:
+        ref = base.service.capture_user("archive", "a", "prefix\r\n🙂literal body\r\nsuffix")[
+            "source_ref"]
+        fragment = base.service.source_fragment_range(ref, 8, 20)
+        candidate = {key: fragment[key] for key in (
+            "source_ref", "start", "end", "source_sha256", "body_text_sha256", "span_sha256")}
+        candidate["retrieval_score"] = 0.75
+        if corrupt:
+            candidate[corrupt] = "0" * 64
+            with pytest.raises(FunctionalRejection, match="CANDIDATE_HASH_MISMATCH"):
+                FunctionalMemory(base.service, len, retrieval_candidates=[candidate])
+            return
+        memory = FunctionalMemory(base.service, len, retrieval_candidates=[candidate])
+        turn(memory, text="Read the supplied material")
+        units = memory.context("s", "u", SHA)["items"]
+        selected = [u for u in units if u.get("source_ref") == ref]
+        assert len(selected) == 1 and selected[0]["content"] == fragment["content"]
+        assert (selected[0]["start"], selected[0]["end"]) == (8, 20)
+        assert memory.retrieval_candidates == [candidate]
 
 
 @pytest.mark.parametrize("after_put", [False, True])
@@ -476,10 +570,9 @@ def test_m11_cas_replay_and_atomic_failed_patch(
             {
                 "read_handle": current["candidate_handle"],
                 "changes": [
-                    {"field": "content", "op": "set", "value": "never"},
-                    {"field": "scope.new", "op": "set", "value": "never"},
+                    {"field": "content", "op": "set", "value": "never", "fragment_handles": hs},
+                    {"field": "scope.new", "op": "set", "value": "never", "fragment_handles": hs},
                 ],
-                "fragment_handles": hs,
             },
             "failed",
         )

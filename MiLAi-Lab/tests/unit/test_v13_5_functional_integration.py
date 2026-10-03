@@ -389,6 +389,46 @@ def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_
     assert secret not in json.dumps(final)
 
 
+def test_public_agent_catalog_carries_per_field_correction_selections(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal == 1:
+            return tool("save_memory", content="Distance uses miles.", scope={"project": "Alpha"},
+                        fragment_handles=[u["fragment_handle"] for u in packet["items"]
+                                          if u["type"] == "fragment"])
+        if ordinal == 3:
+            record = next(u for u in packet["items"] if u["type"] == "record")
+            correction = [u["fragment_handle"] for u in packet["items"]
+                          if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            return tool("update_memory", read_handle=record["read_handle"], changes=[{
+                "field": "content", "op": "set", "value": "Distance uses kilometers.",
+                "fragment_handles": correction}])
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"answer": "The actual memory change is confirmed."}
+
+    wires = scripted(monkeypatch, reply)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember that project Alpha uses miles for distance.")
+    assert saved["status"] == "COMPLETED", saved
+    revised = functional.message(
+        root, **common, message_id="correct",
+        content="Change distance to kilometers; project Alpha is unchanged.")
+    assert revised["status"] == "COMPLETED", revised
+    assert len(wires) == 4 and len(revised["records"]) == 1
+    assert revised["records"][0]["id"] == saved["records"][0]["id"]
+    value = revised["records"][0]["value"]
+    assert value["revision"] == 2 and value["content"] == "Distance uses kilometers."
+    assert value["functional_support"]["content"]["source_refs"] == [
+        revised["capture"]["source_ref"]]
+    assert value["functional_support"]["scope.project"] == (
+        saved["records"][0]["value"]["functional_support"]["scope.project"])
+
+
 @pytest.mark.parametrize("workflow", ["reservation", "document"])
 def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, workflow: str,
