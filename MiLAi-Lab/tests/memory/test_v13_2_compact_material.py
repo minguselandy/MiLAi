@@ -273,6 +273,7 @@ def pressure_receipt(
     return receipt
 
 
+@pytest.mark.local_artifacts
 def test_actual_bindings_are_lossless_and_default_payload_is_unchanged(
     tmp_path: Path, capacity: HostCapacity
 ) -> None:
@@ -309,6 +310,7 @@ def test_actual_bindings_are_lossless_and_default_payload_is_unchanged(
 @pytest.mark.parametrize(
     "body", ["brief historical note", "过去的简短记录", "nota histórica breve"]
 )
+@pytest.mark.local_artifacts
 def test_multiple_selected_bodies_share_budget_without_scope_or_source_loss(
     tmp_path: Path, capacity: HostCapacity, body: str
 ) -> None:
@@ -366,6 +368,7 @@ def test_multiple_selected_bodies_share_budget_without_scope_or_source_loss(
         )
 
 
+@pytest.mark.local_artifacts
 def test_long_history_discovery_is_bounded_and_never_adds_unselected_old_bodies(
     tmp_path: Path, capacity: HostCapacity
 ) -> None:
@@ -400,6 +403,7 @@ def test_long_history_discovery_is_bounded_and_never_adds_unselected_old_bodies(
         assert not any(unit["type"] == "historical_record" for unit in current_only)
 
 
+@pytest.mark.local_artifacts
 def test_oversized_scope_is_omitted_with_actual_pointer_and_source_range_is_unchanged(
     tmp_path: Path, capacity: HostCapacity
 ) -> None:
@@ -445,6 +449,7 @@ def public_turn_config(owner: str = "alice") -> dict[str, Any]:
     return {"configurable": {"user_id": owner, "v13_session": "s1", "v13_turn_id": "query"}}
 
 
+@pytest.mark.local_artifacts
 def test_same_query_equal_rank_cache_reopen_and_dirty_read_cas_are_preserved(
     tmp_path: Path, capacity: HostCapacity
 ) -> None:
@@ -497,6 +502,7 @@ def test_same_query_equal_rank_cache_reopen_and_dirty_read_cas_are_preserved(
         assert not bob.read(memory_id)["ok"]
 
 
+@pytest.mark.local_artifacts
 def test_actual_decoder_wire_counts_compact_table_and_recall_references(
     tmp_path: Path, capacity: HostCapacity
 ) -> None:
@@ -588,6 +594,7 @@ def test_opt_in_configuration_and_incompatible_same_turn_profile_fail_closed(
             ).prepare_context("PINE_TOKEN", owner="alice", session="s1", turn_id="query")
 
 
+@pytest.mark.local_artifacts
 def test_conflict_group_is_delivered_whole_or_omitted_with_actual_handle(
     tmp_path: Path,
     capacity: HostCapacity,
@@ -621,6 +628,7 @@ def test_conflict_group_is_delivered_whole_or_omitted_with_actual_handle(
         print(json.dumps({"conflict_delivery_counts": delivery_counts(units, chosen)}))
 
 
+@pytest.mark.local_artifacts
 def test_exact_scope_types_and_similar_values_are_not_merged(
     tmp_path: Path,
     capacity: HostCapacity,
@@ -642,6 +650,7 @@ def test_exact_scope_types_and_similar_values_are_not_merged(
         assert [type(scope["session"]) for scope in scopes] == [bool, int, str]
 
 
+@pytest.mark.local_artifacts
 def test_decoded_actual_ids_execute_paid_reads_and_writer_receives_exact_packet(
     tmp_path: Path,
     capacity: HostCapacity,

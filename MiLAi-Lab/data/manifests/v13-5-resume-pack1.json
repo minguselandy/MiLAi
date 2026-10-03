@@ -95,6 +95,31 @@
       "ci-repair2.log": {
         "passed": 94,
         "sha256": "c70482b0c6b3f4bc9430773e40aba8948698cdadaa36d0390bbbcbf577c999e2"
+      },
+      "core-tests-r1.log": {
+        "passed": 5678,
+        "skipped": 19,
+        "deselected": 14,
+        "sha256": "6cfe55d9e34f6226a9e4dd5b775349eda344557e5eb3e207c53ffc50426270d0"
+      },
+      "http-owner-portable.log": {
+        "passed": 39,
+        "sha256": "9819b922e1fba975ac7fae04bbef574dca3d84518ae9e910aa145cacbb898dc0"
+      },
+      "portable-foundation-final.log": {
+        "passed": 423,
+        "skipped": 3,
+        "deselected": 31,
+        "sha256": "9f0adccd1d11ed5fcde62630a569d6727b0b871c042e9bbb86977ff9d884c812"
+      },
+      "pinned-qwen-regressions.log": {
+        "passed": 31,
+        "deselected": 52,
+        "sha256": "60d7f9fe9d0165385f2b8868e6455fd7f8c84f8ebff0a05b2b7f5e8752bd5293"
+      },
+      "delivery-final.log": {
+        "passed": 4,
+        "sha256": "8ecaca2d3467edcda716cf98cc4e083184364fd18ee4c4759308c8a8a070dee5"
       }
     },
     "preserved_failed_checks": {
@@ -109,8 +134,42 @@
       },
       "core-tests.log": "missing optional dependency at collection; assigned test_read_protocol.py to Foundation"
     },
-    "clean_core_full_run": "running in isolated uv --frozen --dev environment without LangGraph",
+    "clean_core_full_run": {
+      "passed": 5678,
+      "skipped": 19,
+      "deselected": 14,
+      "environment": "isolated uv --frozen --dev; no LangGraph",
+      "scope": "aa02df6 before checkout-local HTTP audit follow-up; that affected family separately rerun"
+    },
     "full_mypy": "PASS 195 source files",
-    "next_remote": "pending push and same-commit execution"
+    "next_remote": "pending push and same-commit execution",
+    "remote_attempt2": {
+      "head": "aa02df609ffeb3f4d6a5026b1692f746fe550f84",
+      "run_id": 37082641916,
+      "status": "failure",
+      "core": {
+        "job": 111086379002,
+        "passed": 735,
+        "failed": 1,
+        "cause": "historical audit hardcoded an external sibling checkout"
+      },
+      "foundation": {
+        "job": 111086379051,
+        "cause": "newly collected historical tests implicitly depended on /cra/qwen36-35B",
+        "new_optional_command": {
+          "passed": 390,
+          "failed": 48,
+          "errors": 16,
+          "skipped": 3
+        },
+        "earlier_commands": "reached and passed all prior commands, including v13.5 affected tests"
+      }
+    },
+    "portable_repairs": [
+      "HTTP ownership audit hashes the actual current checkout",
+      "synthetic protocol entry configurations use generated tokenizer and hash-bound template",
+      "31 production-Qwen material/cost cases keep real tokenizer and explicit local_artifacts ownership; no fallback tokenizer and no relaxed assertions"
+    ],
+    "full_explicit_mypy": "PASS 77 source files"
   }
 }

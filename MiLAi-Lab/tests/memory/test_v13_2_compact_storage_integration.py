@@ -21,6 +21,7 @@ from milai_lab.runners import v13_1_d0 as runner
 
 @pytest.mark.parametrize("material", ["full_v1", "compact_v1"])
 @pytest.mark.parametrize("storage", ["bank_prefix", "owner_bank_v1"])
+@pytest.mark.local_artifacts
 def test_public_runner_retains_both_independent_options_and_default_policy(
     tmp_path: Path,
     capacity: HostCapacity,
@@ -66,6 +67,7 @@ def test_public_runner_retains_both_independent_options_and_default_policy(
         assert recipe.policy.get("raw_index_storage", "bank_prefix") == storage
 
 
+@pytest.mark.local_artifacts
 def test_compact_with_detached_store_has_identical_selection_packet_and_paid_cas(
     tmp_path: Path,
     capacity: HostCapacity,
