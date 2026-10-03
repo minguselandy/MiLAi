@@ -3959,6 +3959,60 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "communication-r34",
+      "layer": "L0",
+      "candidate_commit": "2274fe37a40a8b678abeaacbdab6269349044076",
+      "state": "COMPLETE_TRANSPORT_WITH_ABSENCE_INFERENCE_FAILURE",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r34.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12243,
+        "generation": {
+          "charged_tokens": 41019831,
+          "known_tokens": 40989444,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r34/input-freeze.json": "c479256c86ac3b369fb1ded5ff40b45bd5d17869c35e7bd5a637563ab2398909",
+        "configs/v13-5-functional-r34.json": "a72cfac90fadbd47dbf9ca362ee48ab0f3ad3c1100888e9f822700af342d1e2a",
+        "artifacts/v13-5/communication-r34/review.json": "feae8240cd90570c37177412b34d72433a3e888a6c7664786eca522e33fab2c6",
+        "artifacts/v13-5/communication-r34/seal.json": "f1bc847aa420b9fc5111bb2262db84c3bf672720a453eb96e40dee1f05a653c4",
+        "artifacts/v13-5/communication-r34-review.jsonl": "acedb994467af6ae04969d7ec9a826a6d5d7e1deb4e7ae10714bde224a5d8aa8",
+        "artifacts/v13-5/communication-r34-review-notes.json": "7733b1b361abcb2451ebfbf909814671328898e97467123753482007e5f0609b",
+        "artifacts/v13-5/communication-r34-evaluator/summary.json": "faad8030e5ce7ae2cdb920e3256364d4085b4e09b434ef0bd5a084d8ba465a90"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 5,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 12,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 40,
+        "generation.known_tokens": 182913,
+        "generation.charged_tokens": 182913,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "communication_transport": "PASS_SCOPED: all13 attempted,12 normal completed plus1expected actualW1; no truncation/format retry/effect replay. Not a semantic acceptance pass.",
+      "scope": "Exposed communication probe. Root same-family semantic review; no pooled full L1/L4 result. Current-topic forgetting cannot be inferred from empty visible results or generic forget_epoch.",
+      "reviewer": "Root",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

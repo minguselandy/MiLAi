@@ -303,6 +303,11 @@ class FunctionalMemory:
                 "new_values": "must_be_directly_supported_by_selected_fragments",
                 "trigger_binding": "execution_attribution_not_field_evidence",
                 "input_relation": "timing_only_not_automatic_evidence",
+                "missing_material": (
+                    "Only currently visible delivered evidence is shown. No match does not "
+                    "establish never supplied, forgotten, or physically erased. Report unknown "
+                    "history/reason for absence unless actual topic-bound evidence proves it."
+                ),
             },
         }
 

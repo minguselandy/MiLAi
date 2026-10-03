@@ -18,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r34.json` is the current communication candidate. Required
+`configs/v13-5-functional-r35.json` is the current communication candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -27,123 +27,92 @@ receipt responses. There is no separate semantic rewrite of an ordinary answer.
 Private checkpoints and diagnostic traces retain audit data; this is not physical erasure.
 R30/R31/R32 communication included truncation. R33 attempted all 6 stories/13 messages
 with 3 scoped PASS and 3 FAIL, including final-answer qualification drift and a mistaken
-forget declaration. R34 must pass its own probe before full L1 admission. None is stable.
+forget declaration. R34 completed communication with 5 scoped PASS/1 absence-inference FAIL. R35 adds an
+explicit missing-evidence contract and must pass its own probe before full L1 admission.
+Neither is a stable accepted configuration.
 
-The following r29 profile remains the latest completed targeted engineering regression
-(2 scoped PASS / 1 absence-inference FAIL, 3 stories / 9 messages), not stable acceptance.
+Every functional read now explicitly states that missing visible evidence cannot prove
+never supplied, topic-specific forgetting or physical erasure. The reason remains unknown
+unless actual evidence establishes it; this is a tool contract, not a semantic validation.
 
-Use `configs/v13-5-functional-r29.json` with a new root for current candidate
-validation. R29 uses native v6 with required declaration tool choice and thinking disabled,
-with unchanged capacity/call/read limits. It recognizes actual forgetting as maintenance,
-uses receipt-derived visibility confirmation, and includes at most four recent visible
-records and four public events in the same owner/bank within the existing material budget.
-Supplied fixed candidate pools receive no recency supplementation. Its completed targeted results are limited to those three stories. Unknown top-level and capacity configuration keys
-are rejected before preparing a run.
-It requires a current same-object query before a new mutation of an earlier operated object,
-and shows exact original content beside each business source fragment handle.
-R23 retains exact current-message save idempotency and first interprets the current
-request without retrieved history. Only an explicitly interpreted continuation with an empty
-operation list may use the existing bounded ordinary material to resolve its prior-work reference;
-that stage cannot change memory, forgetting or action permissions and shares the original budgets.
-A v6 perform declaration with no concrete business operation grants zero business mutations
-and records unresolved business intent; it does not block a separately declared memory write.
-The whole input is bound by the program; no model-copied action quote is required. A three-state memory-write declaration distinguishes queries, new assertions and
-explicit storage requests; reading a memory result is not a write request.
-A separate business action declaration distinguishes none, perform and conditional continuation,
-and lists the specific
-public business operations permitted; the catalog and dispatcher enforce that list.
-Document editing is distinct from semantic memory maintenance. A read-only v4
-declaration may keep an exact current negative/query clause or an empty quote;
-its operation list remains empty and mutation tools remain unavailable. The literal check is not semantic
-authorization. The persisted interpretation separately controls
-memory maintenance, forgetting and business mutation tools. A read-only interpretation
-still permits live business queries. This is a model interpretation, not a proof of
-intent, authorization or semantic support; full functional acceptance is pending.
-It uses the same accounted provider and durable 24-call message quota. Interpretation
-format repair, answer-only repair and missing-maintenance completion share the existing
-single reproposal allowance. For an admitted memory write (explicit request or actual new assertion/correction)
-with no actual save/update receipt, the candidate final answer is withheld and one memory-only completion step
-may run. It cannot replay business mutations or forgetting. All candidate answers
-remain in the audit; only the admitted final answer is delivered. A receipt for one
-item does not establish full request completion, semantic support or prose truth.
-Historical roots freeze their original source/configuration and cannot be resumed
-under changed code. No configuration is listed as accepted until full L1 passes
-without unresolved critical functional defects.
+The candidate preserves these contracts; actual model choices still require evaluation:
 
-The candidate exposes `save_memory(content, fragment_handles)`: include the complete
-fact and its explicit applicability limits together in `content`. New saves have no
-separate free-form scope argument; existing scoped records remain editable.
-The candidate `receipt_business_response_v2` policy renders the two business workflows
-from matched actual ToolMessages and current-message journal identities. It reports raw
-capture, semantic writes and business effects separately. Historical facts use only already
-delivered original tool fragments or public document-query history. Execution drafts cannot
-announce effects to the user. Destination/packing are configurations; publication is a local
-sandbox effect. Chinese receipt labels are currently supported. The renderer reports listed
-operations, not proof of complete user intent or correctness of saved semantic content.
-Without an actual business receipt, an inferred business mode does not select this renderer;
-the ordinary response stage can still answer a mixed memory question.
+- A current-request declaration controls memory maintenance, forgetting and the exact
+  business mutation catalog separately. Historical requests do not renew authorization.
+  An unresolved action grants no business mutation. Read-only requests still permit live
+  business queries. The declaration is a model interpretation, not proof of user intent.
+- `save_memory(content, fragment_handles)` takes one supported assertion with its limits
+  retained in the text. `update_memory` requires a real read handle and separate selected
+  fragments for each changed field. The program extracts quotes; literal identity does not
+  prove semantic support. Unchanged fields keep their values and support. Repeating the
+  exact same-message save returns `existing_record`/`no_change`, not a second write.
+- One actual write receipt is necessary for a requested save confirmation; it cannot prove
+  that every requested item was saved. Missing maintenance can use one bounded completion
+  within the original shared repair allowance. Previously permitted forgetting remains
+  available there only under the declared operation-completion policy; business mutations
+  cannot be replayed by that completion.
+- `operation_status` separately reports raw capture, listed semantic writes, visibility
+  changes and business effects from actual receipts. It does not certify the model's prose
+  or complete user intent. The `receipt_or_agent_response_v1` profile renders business and
+  forgetting results from receipts; ordinary usable Agent content is delivered without an
+  extra composition call. Legacy `readonly_response_v1` runs keep their separate stage.
+- `bank_recent_v2` supplies at most four recent visible records and four public events in
+  the same owner/bank within the existing material limit, across sessions. Current input
+  stays first. Explicit fixed candidate pools receive no supplementation or reordered
+  evidence. Old user requests, assistant speech and actual observations retain their roles.
+- `fresh_query_with_history_v3` requires a current same-object query before mutating a
+  previously operated business object. Live queries include up to sixteen original
+  operation receipt summaries with an omission count. Historical unknown results remain
+  unknown even when a current query establishes the present state. A semantic observation
+  timestamp is not automatically the business event's time.
 
-`session_events_v1` includes at most four recent visible user/assistant Source events from
-the same session in ordinary material. Current input stays first, the existing token cap and
-pagination remain in force, and supplied fixed candidate pools are unchanged. These events
-are evidence with their original roles; an earlier request is neither a fresh instruction nor
-proof that maintenance completed. `receipt_status_v3` also captures a program failure reply
-when declaration fails before the Agent starts, with current-input privacy lineage and no
-extra model call. The execution remains FAILED; a readable reply does not make it successful.
-The same receipt-only delivery covers explicit missing-memory-completion termination.
-`declared_writes_v2` excludes undelivered non-tool assistant drafts from the existing
-bounded completion input; actual calls/receipts and the original checkpoint remain intact.
+Interpretation repair, answer-only repair and missing-maintenance completion share one
+persistent allowance within the same 24-call limit. A checkpointed `read_limit_exhausted`
+ends execution as FAILED with preserved effects; resuming the message does not reset its
+three-read limit. `receipt_status_v3` can deliver a program failure report without another
+model call. A readable failure report does not turn the execution into COMPLETED. Successful
+business actions are not repeated to repair an unusable final response.
 
-Ordinary memory answers retain the `readonly_response_v1` no-tool composition stage,
-with a fresh original-request/evidence frame excluding execution draft prose. Its reservation
-and response survive restart, and its generation shares the original 24-call limit. A failed
-response can use only the remaining shared repair allowance on explicit resume.
-`operation_status` remains the independent program receipt summary.
-The `single_phase_with_history_v2` business policy includes the latest16 original
-owner/object operation receipt summaries in a live query, ordered with an explicit
-omission count. Original unknown outcomes remain unknown; current observed state is
-separate. Old request/document bodies are excluded from these summaries. Publication receipts
-also carry the actual `attempted_audience`, separately from successful publication
-`audience`, including known failed attempts. Original native responses remain preserved.
+The renderer currently uses Chinese labels and reports listed operations only. Destination
+and packing are configurations; document publication is a local sandbox effect. Ordinary
+memory answers remain model text and can be wrong. Owner isolation, source visibility and
+replay checks apply before delivery; the explicit diagnostic `world` sidecar retains audit
+history and is not material supplied to the Agent. Raw experiment artifacts are not a
+physically erased or remotely authenticated user store.
 
-A checkpointed `read_limit_exhausted` now ends execution in this candidate. The result is
-FAILED with an available outcome report and preserved effects, not a completed task. Resume
-on the same message encounters the same terminal receipt without resetting its allowance.
+## Accepted configuration
 
+None. Full same-version L1 and integration acceptance with no critical blocker is required.
+The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
+results, not results for r35. Do not combine their successful cases into a new cohort score.
 
-The current `update_memory` catalog requires `fragment_handles` inside each
-`changes` item. Select support for the new value or removal, independently for
-each changed field. Unchanged fields retain support; top-level handles are for
-whole-record retraction only. `input_relation` distinguishes current input from
-archived Sources but never makes either one semantically sufficient evidence.
-Repeating an identical save in the same public message returns `existing_record`,
-`no_change`, and `effect=none`; it does not count as a new write. Requests with
-different content, scope, selected evidence or public-message identity remain
-distinct. The program does not decide that paraphrases describe the same matter.
+## Candidate example (r35, development only)
 
-## Historical reproduction example (r0, not an accepted configuration)
-
-Use the recorded original source commit for faithful historical reproduction.
-Running r0 parameters under current source is a new run, not a replay of r0 results.
-
-Run from `MiLAi-Lab`, with the repository's pinned Python environment and
-`PYTHONPATH=src`. The checked-in configuration names the existing local model,
-tokenizer hashes and continuous cost ledger. It does not deploy a service.
+Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
+The checked-in configuration uses the existing local model, tokenizer hashes and continuous
+cost ledger. It does not deploy a service. Use an unused run root for each changed version.
 
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal \
-  --config configs/v13-5-functional-r0.json
+  --root artifacts/v13-5/personal-r35 \
+  --config configs/v13-5-functional-r35.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r35 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r35 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
+
+## Historical reproduction
+
+Use the original cohort's source commit and its recorded configuration, such as
+`configs/v13-5-functional-r0.json`. R0 parameters on current source constitute a new run,
+not a replay of r0. Existing frozen roots reject changed source/configuration. Historical
+pause files and sealed cohort outputs remain unchanged; see the run manifest for identity.
 
 Keep `root`, `bank` and `owner` unchanged to reuse long-term state. A different
 session starts with the same owner-visible Store; earlier conversation text is
@@ -251,7 +220,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r35
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`
@@ -265,7 +234,7 @@ SQLite backends. It is not a distributed exactly-once guarantee, automatic physi
 erasure, an independent Judge result, or a claim that arbitrary prose is correct.
 
 
-The current candidate opts into `single_phase_per_public_turn_v1`: for each exact
+The current `fresh_query_with_history_v3` candidate retains the single-attempt phase contract: for each exact
 business object, each phase has at most one actual attempt in a public request,
 including known failure/no-effect results. `reserve_and_label` includes the label
 phase. A new user request can continue unfinished work after a live query; reopening
@@ -276,11 +245,6 @@ keep their previous behavior. Completion feedback is folded into the leading sys
 message for the actual provider template; the original checkpoint marker remains.
 
 
-R12 uses `current_request_native_v1`: the same host emits exactly one
-`classify_current_request` declaration with four boolean flags and no free explanation.
-This declaration executes nothing and is not an authorization or semantic oracle.
-A pure question differs from a request to query and then finish remaining work.
-Invalid declarations receive the original bounded schema reproposal; all attempts
-remain accounted. Save/update parameter descriptions require source-faithful
-restrictions in the actual content and explicit applicability limits in scope;
-they do not mechanically prove semantic support or eliminate model errors.
+Historical R12 used `current_request_native_v1`; its boolean declaration and original
+results remain frozen in that cohort. The current candidate uses the v6 independent
+capability declaration described above. Neither is a semantic authorization oracle.
