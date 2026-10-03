@@ -1,5 +1,13 @@
 # Results index
 
+## Current development checkpoint — 2026-10-04
+
+[r47 checkpoint](V13_5_CHECKPOINT_r47_20261004.md): 559 mechanical regressions,
+26 production tokenizer/prompt probes and 4 installed SDK checks passed; no r47
+model cohort has run. Latest actual r46 communication is 9 scoped PASS / 2 FAIL
+over all 11 cases / 27 messages. Full development remains incomplete, Product NO_GO.
+See [current progress](V13_5_PROGRESS.md) for separate versioned results and remaining acceptance.
+
 ## Current results and execution status — 2026-09-29
 
 The repair-v10 experiment Goal is **paused**; the new user request authorizes code

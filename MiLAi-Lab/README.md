@@ -13,12 +13,12 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 - [v12 总体整理报告](docs/CODE_ARCHITECTURE_V12_RESULTS.md)：维护位置、兼容范围和工程证据。
 - [v12 整理进度](docs/CODE_ARCHITECTURE_V12_EXECUTION.md)：阶段提交、工程验收和剩余迁移。
 - [代码职责](docs/CODE_OWNERSHIP.md)、[依赖规则](docs/DEPENDENCY_RULES.md)、[历史入口](docs/HISTORICAL_CODE_INDEX.md)。
-- [r46 模型前检查点](docs/V13_5_CHECKPOINT_r46_20261004.md)：实现、CI及当时状态；后续完整通信结果见[功能进度](docs/V13_5_PROGRESS.md)。
+- [r47 开发检查点](docs/V13_5_CHECKPOINT_r47_20261004.md)：当前实现、机械检查、r46真实结果及剩余验收；[r46 模型前检查点](docs/V13_5_CHECKPOINT_r46_20261004.md)保留为历史记录。
 - [历史 v10 实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-用户已明确恢复 v13.5 全部后续开发与实验；r46完整通信为9限定通过/2失败，最新结果见[功能进度](docs/V13_5_PROGRESS.md)。
+用户已明确恢复 v13.5 全部后续开发与实验；r47完成机械检查、模型未运行；r46完整通信为9限定通过/2失败，见[功能进度](docs/V13_5_PROGRESS.md)。
 完整功能尚未验收；[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)保留为历史检查点。
 v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
 `functional_v1`，旧默认不变；Product 仍为 **NO_GO**。

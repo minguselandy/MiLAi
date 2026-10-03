@@ -7318,8 +7318,15 @@
         "artifacts/v13-5/r47-production-contracts.json": "40b02ab8c68c125ccceeaa4ad26e5396262e2eff16779f2c3006467cfaabd3c0",
         "artifacts/v13-5/r47-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
         "artifacts/v13-5/r47-sdk-lifecycle.log": "6741d882cee89f6180ab38cc1549f26da314462fdd7fc577873d3b4593e0129a"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r47-ci.json",
+        "sha256": "7132ad9b443c2a02b327e9e798eaca2aebca8d006a0075c714ae5ca9374c67d8",
+        "commit": "16e4f3b35ce88b1110940d2dca7b73650eeafeeb",
+        "fast": "SUCCESS run37147450130",
+        "full": "SKIPPED run37147450077; not a pass"
       }
     }
   ],
-  "current_checkpoint": "data/manifests/v13-5-checkpoint-r46-20261004.json"
+  "current_checkpoint": "data/manifests/v13-5-checkpoint-r47-20261004.json"
 }
