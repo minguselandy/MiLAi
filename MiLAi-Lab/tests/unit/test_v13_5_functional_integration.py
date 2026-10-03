@@ -26,7 +26,10 @@ from milai_lab.providers.functional_queue import FunctionalVLLMClient
 from milai_lab.runners import functional
 
 
-def prepared(tmp_path: Path, *, queue_requests: int = 100, native: bool = False) -> Path:
+def prepared(
+    tmp_path: Path, *, queue_requests: int = 100, native: bool = False,
+    request_interpretation: bool = False,
+) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
     tokenizer_wrapper = PreTrainedTokenizerFast(tokenizer_object=tokenizer, unk_token="[UNK]")
@@ -58,6 +61,7 @@ def prepared(tmp_path: Path, *, queue_requests: int = 100, native: bool = False)
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
+        "request_mode": "current_request_v1" if request_interpretation else "disabled",
     }
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
@@ -124,6 +128,221 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
     return functional.message(root, bank="mechanical-bank", owner="alice", session="session",
                               message_id="message", content="Remember the local marker is blue.",
                               **kwargs)
+
+
+def intent_reply(*, memory: bool = False, forgetting: bool = False,
+                 business: bool = False) -> dict[str, Any]:
+    return {"role": "assistant", "content": json.dumps({
+        "allow_memory_maintenance": memory, "allow_forgetting": forgetting,
+        "allow_business_mutation": business, "reason": "Scripted speech-act interpretation."})}
+
+
+def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
+    return {"role": "assistant", "content": None, "tool_calls": [{
+        "type": "function", "id": call_id, "function": {
+            "name": name, "arguments": json.dumps(args)}}]}
+
+
+def test_focused_request_mode_removes_mutations_and_survives_resume(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    first_text = "Remember the independent old marker is blue."
+    query = "Have I said that the marker is red?"
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            assert not wire.get("tools")
+            users = [m["content"] for m in wire["messages"] if m["role"] == "user"]
+            assert users == [first_text if ordinal == 1 else query]
+            if ordinal == 4:
+                assert first_text not in json.dumps(wire)
+            return intent_reply(memory=ordinal == 1)
+        catalog = {t["function"]["name"] for t in wire.get("tools", [])}
+        if ordinal == 2:
+            assert {"save_memory", "update_memory"} <= catalog
+            assert not {"forget_memory", "reserve_and_label"}.intersection(catalog)
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="The marker is blue.",
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved the blue marker."}
+        assert {"read_memory", "get_reservation"} <= catalog
+        assert not {"save_memory", "update_memory", "forget_memory", "reserve_and_label",
+                    "complete_label"}.intersection(catalog)
+        if ordinal == 5:
+            # A provider can still emit a forbidden name; no dispatcher executes it.
+            hs = [u["fragment_handle"] for u in materials(wire)["items"]
+                  if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            return native_call("save_memory", "forbidden", content="The marker is red.",
+                               fragment_handles=hs)
+        assert ordinal == 6
+        return {"role": "assistant", "content": "You previously said the marker is blue."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save", content=first_text)
+    assert saved["status"] == "COMPLETED", saved
+    denied = functional.message(root, **common, message_id="query", content=query)
+    assert denied["status"] == "FAILED" and denied["error"] == "VLLM_CHAT_UNKNOWN_TOOL"
+    assert denied["records"] == saved["records"]
+    assert denied["operation_status"]["semantic_memory"]["operations"] == []
+    restored = functional.message(root, **common, message_id="query", content=query, resume=True)
+    assert restored["status"] == "COMPLETED", restored
+    assert restored["records"] == saved["records"] and len(wires) == 6
+    assert restored["generation_calls"] == 3  # One interpretation, two Agent requests.
+    assert restored["request_mode"] == denied["request_mode"]
+    assert restored["request_mode"]["semantic_correctness"] == "unchecked"
+
+
+def test_request_mode_invalid_output_has_one_durable_reproposal_and_no_tools(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert not wire.get("tools")
+        return {"role": "assistant", "content": '{"allow_memory_maintenance": true}'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    second = message(root, resume=True)
+    third = message(root, resume=True)
+    assert first["error"] == second["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    assert third["error"] == "FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED"
+    assert len(wires) == 2 and not third["records"]
+    assert third["operation_status"]["semantic_memory"]["operations"] == []
+
+
+@pytest.mark.parametrize("forgetting", [False, True])
+def test_request_mode_separately_controls_forgetting_and_business_tools(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, forgetting: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(forgetting=forgetting, business=not forgetting)
+        catalog = {t["function"]["name"] for t in wire.get("tools", [])}
+        assert ("forget_memory" in catalog) is forgetting
+        assert ("reserve_and_label" in catalog) is not forgetting
+        assert not {"save_memory", "update_memory"}.intersection(catalog)
+        return {"role": "assistant", "content": "Scripted response with no operation."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["status"] == "COMPLETED" and len(wires) == 2
+    assert result["operation_status"]["request_completion"] == "unchecked"
+
+
+def test_request_mode_reproposal_cannot_redisclose_forgotten_input(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            assert "MECHANICAL_MODE_SECRET" not in json.dumps(wire)
+            return intent_reply(forgetting=True)
+        if ordinal == 3:
+            return native_call("search_memory", "search", query="MECHANICAL_MODE_SECRET")
+        if ordinal == 4:
+            hs = [u["fragment_handle"] for u in actual_tool_receipt(wire)["items"]
+                  if u["type"] == "fragment" and "MECHANICAL_MODE_SECRET" in u["content"]]
+            assert hs
+            return native_call("forget_memory", "forget", fragment_handles=hs)
+        assert ordinal == 5
+        assert "MECHANICAL_MODE_SECRET" not in json.dumps(wire)
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        return {"role": "assistant", "content": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    old = {"message_id": "old", "content": "Remember MECHANICAL_MODE_SECRET."}
+    failed = functional.message(root, **common, **old)
+    assert failed["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    forgotten = functional.message(root, **common, message_id="forget",
+                                   content="Forget my previous input.")
+    assert forgotten["status"] == "COMPLETED", forgotten
+    replay = functional.message(root, **common, **old, resume=True)
+    # Raw capture rejects this revoked original input even before mode admission.
+    assert replay["status"] == "FAILED", replay
+    assert replay["error"].startswith("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:")
+    assert replay["capture"]["status"] == "visibility_revoked"
+    assert replay.get("final_answer") is None and len(wires) == 5
+
+
+def test_request_mode_and_answer_recovery_share_one_format_reproposal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            return intent_reply(memory=True)
+        if ordinal == 3:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="The marker is blue.",
+                               fragment_handles=hs)
+        assert ordinal == 4
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "{"}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    bad_final = message(root, resume=True)
+    assert bad_final["status"] == "FAILED" and len(bad_final["records"]) == 1
+    exhausted = message(root, resume=True)
+    assert exhausted["error"] == "FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED"
+    assert exhausted["records"] == bad_final["records"] and len(wires) == 4
+    assert exhausted["generation_calls"] == 4
+    assert exhausted["operation_status"]["semantic_memory"]["status"] == "committed"
+
+
+def test_cached_request_mode_allows_committed_forget_recovery_without_reexposure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    control = {"one_shot_fault": {"message_index": 1, "boundary": "W3",
+                                "target_operation": "forget_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True)
+        if ordinal == 2:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="MECHANICAL_MODE_FORGET",
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved."}
+        if ordinal == 4:
+            assert "MECHANICAL_MODE_FORGET" not in json.dumps(wire)
+            return intent_reply(forgetting=True)
+        if ordinal == 5:
+            record = next(u for u in materials(wire)["items"] if u["type"] == "record")
+            return native_call("forget_memory", "forget", read_handle=record["read_handle"])
+        assert ordinal == 6
+        assert "MECHANICAL_MODE_FORGET" not in json.dumps(wire)
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        return {"role": "assistant", "content": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common: dict[str, Any] = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember MECHANICAL_MODE_FORGET.")
+    assert saved["status"] == "COMPLETED"
+    args: dict[str, Any] = {**common, "message_id": "forget", "content": "Forget the marker.",
+                           "message_index": 1, "evaluator_control": control}
+    interrupted = functional.message(root, **args)
+    assert interrupted["status"] == "UNKNOWN" and len(wires) == 5
+    resumed = functional.message(root, **args, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["records"][0]["status"] == "visibility_revoked" and len(wires) == 6
 
 
 def test_unified_save_commits_before_final_and_same_path_reopen(

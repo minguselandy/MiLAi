@@ -3,7 +3,8 @@
 **Development resumed by explicit user instruction on 2026-10-03.** No configuration
 has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
 r5 was not run; r6 failed communication admission. R7 passed scoped communication
-but failed L1 after a duplicate save. R8 is the current candidate;
+but failed L1 after a duplicate save. R8 stopped after a question was saved as a fact.
+R9 is the current candidate;
 there is no stable recommended configuration yet.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
@@ -15,10 +16,15 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r8.json` with a new root for current candidate
+Use `configs/v13-5-functional-r9.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R8 adds exact current-message save idempotency; full functional acceptance is
-still pending.
+R9 retains exact current-message save idempotency and first interprets the current
+request without retrieved history. The persisted interpretation separately controls
+memory maintenance, forgetting and business mutation tools. A read-only interpretation
+still permits live business queries. This is a model interpretation, not a proof of
+intent, authorization or semantic support; full functional acceptance is pending.
+It uses the same accounted provider and durable 24-call message quota. Interpretation
+format repair and answer-only repair share the existing single reproposal allowance.
 Historical roots freeze their original source/configuration and cannot be resumed
 under changed code. No configuration is listed as accepted until full L1 passes
 without unresolved critical functional defects.

@@ -659,6 +659,222 @@
         "embedding.charged_tokens": 0,
         "embedding.unknown_usage": 0
       }
+    },
+    {
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "execution_order": [
+        "recall-3",
+        "update-3",
+        "update-1",
+        "update-2",
+        "scope-2",
+        "object-continue-2",
+        "save-1",
+        "save-2",
+        "save-3",
+        "save-4",
+        "recall-1",
+        "recall-2",
+        "recall-4",
+        "update-4",
+        "scope-1",
+        "scope-3",
+        "scope-4",
+        "object-continue-1",
+        "object-continue-3",
+        "object-continue-4",
+        "restart-1",
+        "restart-2",
+        "restart-3",
+        "restart-4"
+      ],
+      "order_reason": "Known critical regressions first; all original IDs/messages/rubric remain unchanged",
+      "acceptance": "Original22/24 plus all critical blockers absent and direct support/live-query contracts",
+      "critical_stop": "Stop affected queue on false saves, source/history destruction, wrong/repeated effects, owner exposure",
+      "id": "l1-r8",
+      "candidate_commit": "99f8e0671ab0e6b77ccf4a6aecdc686489f0aceb",
+      "layer": "L1",
+      "state": "STOPPED_QUERY_MUTATION_AND_UNSUPPORTED_PERSONAL_FACT",
+      "config_sha256": "1bc048a45f08e02d00f4eb3b9f75756e3364d7affa7aa8995b266ee822b24ebe",
+      "semantic_counts": {
+        "PASS": 16,
+        "FAIL": 1,
+        "NOT_RUN": 7
+      },
+      "message_counts": {
+        "COMPLETED": 34,
+        "NOT_RUN": 14
+      },
+      "baseline_budget": {
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        },
+        "generation": {
+          "charged_tokens": 28604370,
+          "known_tokens": 28573983,
+          "unknown_usage": 1
+        },
+        "generation_requests": 9899,
+        "history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_history": {
+                "earlier_history": {
+                  "earlier_v15": {
+                    "embedding_tokens": 836,
+                    "generation_charged_tokens": 76737,
+                    "generation_known_tokens": 71846,
+                    "generation_requests": 108,
+                    "generation_unknown_reservation": 4891,
+                    "judge_requests": 0,
+                    "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                    "sealed": true,
+                    "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                    "unknown_usage": 1
+                  },
+                  "embedding_tokens": 443,
+                  "generation_charged_tokens": 40072,
+                  "generation_known_tokens": 40072,
+                  "generation_requests": 55,
+                  "judge_requests": 0,
+                  "ledger": "artifacts/langmem-provenance/v16-budget.json",
+                  "sealed": true,
+                  "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+                  "unknown_usage": 0
+                },
+                "embedding_tokens": 916,
+                "generation_charged_tokens": 101810,
+                "generation_known_tokens": 101810,
+                "generation_requests": 101,
+                "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+                "sealed": true,
+                "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+                "unknown_usage": 0
+              },
+              "embedding_tokens": 267,
+              "generation_charged_tokens": 19237,
+              "generation_known_tokens": 19237,
+              "generation_requests": 16,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+              "sealed": true,
+              "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+              "truncations": 1,
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 274,
+            "generation_requests": 20,
+            "generation_tokens": 20360,
+            "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+            "sealed": true,
+            "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+          },
+          "embedding_tokens": 808,
+          "generation_requests": 45,
+          "generation_tokens": 41457,
+          "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+          "sealed": true,
+          "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+        },
+        "limits": {
+          "arms": 3,
+          "embedding_tokens": null,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "questions": 12
+        }
+      },
+      "communication": "Exact provider/protocol/prompt/limits inherited from scoped communication-r7; source adds only generic exact-save idempotency and its truthful receipts. Full L1 starts anew.",
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r8/input-freeze.json": "843cb434eb8015a512659f1119456ad30d5ef3723c265db34876fd632dc412b7",
+        "artifacts/v13-5/l1-r8/seal.json": "4c9ca5c622757ddb69ef33d3c61f4a1ff56af8548668156e26d00da526c9047c",
+        "artifacts/v13-5/l1-r8-manual-grades.json": "b5646da980165f03af3d0f7e311716a7fe48b0964e444b207bacc4fda56249dc",
+        "artifacts/v13-5/l1-r8-evaluator-final/summary.json": "e60ba0e3c3b36fc096931a1dc611e86e0ab0a54c07649208b3f397ec194061e0",
+        "artifacts/v13-5/l1-r8-review-notes.json": "623b34edf2087874de4eba9a858f347c0c5e61008a14073118ca15ac3fa52969"
+      },
+      "cost_delta": {
+        "generation_requests": 71,
+        "generation.known_tokens": 433740,
+        "generation.charged_tokens": 433740,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "failures": [
+        "scope-1-m2 treated a pure question as a new personal long-term vegetarian assertion and committed unsupported semantic memory"
+      ],
+      "stop_observation": "scope-3 and scope-4 had already completed by the time the buffered batch output was reviewed; no new message was admitted after operator stop",
+      "remote_ci": {
+        "commit": "99f8e0671ab0e6b77ccf4a6aecdc686489f0aceb",
+        "fast_run": 37087350401,
+        "fast_conclusion": "success",
+        "full_composition_run": 37087350362,
+        "full_composition_conclusion": "skipped"
+      }
+    },
+    {
+      "id": "communication-r9",
+      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "layer": "communication_admission_and_exposed_query_regression",
+      "state": "ADMITTED_NOT_RUN",
+      "planned_cases": 5,
+      "planned_messages": 6,
+      "execution_order": [
+        "comm-plain",
+        "comm-save",
+        "comm-tool-failure",
+        "comm-committed-resume",
+        "scope-1"
+      ],
+      "max_calls_per_message": 24,
+      "planned_call_bound": 144,
+      "explicit_resume": "comm-committed-resume same public message after W3; one shared-format repair only for protocol failure; no blind mutation retry",
+      "acceptance": [
+        "usable ordinary answer with no semantic/business mutations",
+        "actual semantic commit before save confirmation",
+        "truthful partial business receipt and usable answer",
+        "committed W3 recovery preserves one reservation and one semantic version",
+        "scope-1 query remains read-only, limited team-week scope retained, no unsupported personal assertion"
+      ],
+      "config_sha256": "ad29aa3a60ae1e32187be32a2f5bc36606fce3556194eb0d534f5075f80ed2b6",
+      "baseline_budget": {
+        "generation_requests": 9970,
+        "generation": {
+          "charged_tokens": 29038110,
+          "known_tokens": 29007723,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/evaluator-fixtures/communication-r9-runtime.json": "3132754920243e294ece5745882cd0aaf0acea3c9e0686ac6985519d7f15b470",
+        "artifacts/v13-5/evaluator-fixtures/communication-r9-controls.json": "7af06bceaa9f7809cdbcff06539d65882a370f716b00800399d71c7cf6986cc7"
+      },
+      "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
+      "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
+      "mechanical_checks": {
+        "entry_privacy_queue": "39 PASS",
+        "ruff_active": "PASS",
+        "mypy_src": "195 source files PASS",
+        "boundary": "PASS",
+        "not_model_acceptance": true,
+        "evidence_sha256": {
+          "artifacts/v13-5/r9-entry-privacy-queue-accepted.log": "e55cf9e32ee9f817b125235b71c4bf8cf1497cb89d81c455b0d8ede2457162bb",
+          "artifacts/v13-5/r9-cached-forget.log": "df6569bc3419e59bca2575145b9bf5e4cf5562646a6dca3a78b6349599ae9364",
+          "artifacts/v13-5/r9-active-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+          "artifacts/v13-5/r9-full-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+          "artifacts/v13-5/r9-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        },
+        "retained_failed_attempts": "r9-request-mode-first/second/third, r9-entry-privacy-queue/final, r9-full-ruff (incorrect archive scope), r9-request-mode-mypy-second (tests outside configured source scope). Test fixture/expectation corrections recorded; all raw logs retained."
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

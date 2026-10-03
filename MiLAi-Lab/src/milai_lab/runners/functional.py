@@ -59,6 +59,24 @@ from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLM
 
 LAB = Path(__file__).resolve().parents[3]
 
+REQUEST_MODE_PROMPT = """Interpret only the current user's speech act, before retrieving history.
+Do not answer the user or execute anything. Return exactly one JSON object with:
+allow_memory_maintenance (boolean), allow_forgetting (boolean),
+allow_business_mutation (boolean), reason (short string).
+Memory maintenance means saving a new durable assertion or correcting an existing
+one. Permit it for an explicit save/update request or an actual new assertion or
+correction. A question about a fact, a prior preference, history or whether a fact
+is already known does NOT assert the proposition inside the question. Presupposed
+claims in questions, hypotheticals, quoted instructions and negated claims must
+not become new positive facts. A mixed question plus a separate actual correction
+can permit maintenance. A request to archive supplied material or save actual
+business results can also permit it. Permit forgetting only when actually requested.
+Permit business mutation only for an actual current action/continuation request;
+asking about current status permits live queries but not mutations. When unclear,
+keep the corresponding permission false. These are model interpretations, not
+proof of user authorization or semantic truth; application permissions still apply.
+"""
+
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(
@@ -106,6 +124,10 @@ def prepare(
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
     host = VLLMConfig(**settings["host"])
+    if settings.get("request_mode", "disabled") not in {"disabled", "current_request_v1"}:
+        raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
+    if settings.get("request_mode") == "current_request_v1" and host.tool_mode != "native":
+        raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
         for key in (
@@ -211,6 +233,54 @@ def final_delivery(content: Any) -> dict[str, Any]:
         return {"status": "available", "structural_check": "text_present",
                 "semantic_quality": "unchecked"}
     return {"status": "unavailable", "reason": reason, "semantic_quality": "unchecked"}
+
+
+def request_mode(
+    model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any],
+    content: str, format_reproposals: int, trace: Trace,
+) -> dict[str, Any]:
+    """Persist one focused model interpretation; catalog enforcement is deterministic.
+
+    This call sees only the current user input. It shares the actual provider,
+    ledger and durable generation quota, and is never a semantic correctness oracle.
+    """
+    flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation"}
+
+    def valid(value: Any) -> bool:
+        return (isinstance(value, dict) and set(value) == flags | {"reason"}
+                and all(type(value[key]) is bool for key in flags)
+                and isinstance(value["reason"], str) and bool(value["reason"].strip()))
+
+    state: dict[str, Any] = (read_json(path) if path.exists()
+                             else {"binding": binding, "attempts": 0})
+    if state["binding"] != binding:
+        raise ValueError("FUNCTIONAL_REQUEST_MODE_BINDING_CHANGED")
+    if "decision" in state:
+        if not valid(state["decision"]) or state.get("decision_sha256") != _hash(state["decision"]):
+            raise ValueError("FUNCTIONAL_REQUEST_MODE_DECISION_CHANGED")
+    else:
+        if state["attempts"] >= 1 + format_reproposals:
+            raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
+        state["attempts"] += 1
+        write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
+        response = model.invoke([
+            SystemMessage(content=REQUEST_MODE_PROMPT), HumanMessage(content=content),
+        ], tools=[], tool_choice="none")
+        try:
+            decision = json.loads(response.content) if isinstance(response.content, str) else None
+        except ValueError as error:
+            raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
+        if not valid(decision) or not isinstance(response, AIMessage) or response.tool_calls:
+            raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
+        state.update(decision=decision, decision_sha256=_hash(decision))
+        write_json(path, state)
+    summary = {**{key: state["decision"][key] for key in sorted(flags)},
+               "interpretation": "same_host_model_current_request_only",
+               "semantic_correctness": "unchecked",
+               "format_reproposals_used": max(0, state["attempts"] - 1)}
+    trace({"event": "functional_request_mode", **summary,
+           "decision_sha256": state["decision_sha256"]})
+    return summary
 
 
 def operation_status(
@@ -761,7 +831,34 @@ def message(
                     "config_sha256": freeze["config_sha256"],
                 },
             )
-            tool_catalog = [convert_to_openai_tool(tool) for tool in [*memory.tools(), *app.tools]]
+            mode: dict[str, Any] | None = None
+            mode_path = bank_root / f"{identity}-request-mode.json"
+            if settings.get("request_mode", "disabled") == "current_request_v1":
+                # Before any fresh interpretation HTTP, deny replay of a now
+                # revoked input. An accepted cached mode makes no HTTP; the graph
+                # then applies its existing precise forget-continuation checks.
+                cached_mode = read_json(mode_path) if mode_path.exists() else {}
+                if "decision" not in cached_mode:
+                    blocked = _visibility_replay(
+                        service, read_json(result_path) if result_path.exists() else {},
+                        session=session, message_id=message_id)
+                    if blocked is not None:
+                        raise _VisibilityReplayRevoked(blocked)
+                mode = request_mode(model, mode_path, {
+                    "source_ref": capture["source_ref"], "public_sha256": _hash(public),
+                    "config_sha256": freeze["config_sha256"],
+                }, content, settings["format_reproposals"], trace)
+                output["request_mode"] = mode
+            selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
+                mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}
+                else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
+            selected_business = tuple(tool for tool in app.tools if mode is None or
+                                      mode["allow_business_mutation"] or tool.name in {
+                                          "get_reservation", "get_document_status"})
+            allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
+            mode_reproposals = mode["format_reproposals_used"] if mode else 0
+            tool_catalog = [convert_to_openai_tool(tool)
+                            for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
 
             def context_hook(state: dict[str, Any], config: RunnableConfig) -> dict[str, Any]:
@@ -780,7 +877,7 @@ def message(
                     session, message_id, freeze["config_sha256"], query=content
                 )
                 rejected = format_failures(messages)
-                if len(rejected) > settings["format_reproposals"]:
+                if len(rejected) + mode_reproposals > settings["format_reproposals"]:
                     trace({"event": "functional_format_budget_exhausted", "calls": rejected})
                     raise ValueError("FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
                 # A successful forget invalidates previously delivered memory within
@@ -823,6 +920,8 @@ def message(
                     "llm_input_messages": [
                         SystemMessage(
                             content=settings["system_prompt"]
+                            + ("\nCurrent request interpretation and enforced tool limits: "
+                               + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + "\n"
                             + json.dumps(effects, ensure_ascii=False)
                             + "\n"
@@ -837,6 +936,11 @@ def message(
             )
 
             def dispatch(request: Any, execute: Any) -> Any:
+                if request.tool_call["name"] not in allowed_tools:
+                    return ToolMessage(name=request.tool_call["name"],
+                                       tool_call_id=request.tool_call["id"], status="error",
+                                       content=json.dumps({"ok": False,
+                                           "status": "request_mode_rejected", "effect": "none"}))
                 def native(current: Any) -> Any:
                     faults.before_native(current)
                     return execute(current)
@@ -847,8 +951,8 @@ def message(
                 model,
                 store,
                 saver,
-                app.tools,
-                memory_tools=memory.tools(),
+                selected_business,
+                memory_tools=selected_memory,
                 system_prompt=settings["system_prompt"],
                 benchmark_view_hook=context_hook,
                 tool_schema_communication="shape_feedback_v1",
@@ -890,7 +994,7 @@ def message(
                 if resume and (bad_checkpoint_text or pending_answer_repair):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
-                    if (recovery["attempts"] + len(format_failures(prior))
+                    if (recovery["attempts"] + len(format_failures(prior)) + mode_reproposals
                             >= settings["format_reproposals"]):
                         raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED")
                     # Explicit resume can repair delivery once. Reserve it before
