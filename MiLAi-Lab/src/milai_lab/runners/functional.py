@@ -291,6 +291,7 @@ def prepare(
         "source_selection", "failure_delivery", "business_completion",
         "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
         "declaration_sampling",
+        "capability_delivery",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -305,6 +306,8 @@ def prepare(
         raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
     if settings.get("reasoning_history", "discard") not in {"discard", "current_turn_native_v1"}:
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_INVALID")
+    if settings.get("capability_delivery", "legacy") not in {"legacy", "actual_catalog_v1"}:
+        raise ValueError("FUNCTIONAL_CAPABILITY_DELIVERY_INVALID")
     if settings.get("declaration_thinking", "inherit") not in {"inherit", "disabled"}:
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INVALID")
     if settings.get("declaration_sampling", "inherit") not in {"inherit", "greedy_v1"}:
@@ -1530,11 +1533,27 @@ def message(
                     # every rejected draft in the unchanged execution checkpoint.
                     wire_messages = [row for row in wire_messages
                                      if not isinstance(row, AIMessage) or row.tool_calls]
+                capability_text = ""
+                if settings.get("capability_delivery") == "actual_catalog_v1":
+                    active = [] if for_finalization else sorted(allowed_tools)
+                    capability_text = (
+                        "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
+                        "Only these tools are available in this phase. An earlier request or "
+                        "an earlier phase cannot enable a missing tool. "
+                    )
+                    if not {"save_memory", "update_memory"}.intersection(active):
+                        capability_text += (
+                            "Memory saving/updating is unavailable in this phase. Do not search "
+                            "or read repeatedly to try to enable it. Report the actually observed "
+                            "results; historical memory observations can remain historical. "
+                        )
+                    capability_text += "\n"
                 return {
                     "llm_input_messages": [
                         SystemMessage(
-                            content=settings["system_prompt"]
-                            + ("\nCurrent request interpretation and enforced tool limits: "
+                            content=capability_text + settings["system_prompt"]
+                            + (("\nPersisted current-request interpretation: " if capability_text
+                                else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
                             + "\n"
@@ -1638,7 +1657,9 @@ def message(
                     write_json(recovery_path, recovery)
                     output["answer_recovery"] = recovery
                     repair_history = prior[:-1] if bad_checkpoint_text else prior
-                    repair_input = context_hook({"messages": repair_history}, cfg)[
+                    repair_input = context_hook({"messages": repair_history}, cfg,
+                        for_finalization=(settings.get("capability_delivery")
+                                          == "actual_catalog_v1"))[
                         "llm_input_messages"]
                     repair_input[0] = SystemMessage(content=(
                         "The preceding final response was unusable. Report the already observed "

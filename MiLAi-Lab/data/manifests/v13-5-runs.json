@@ -4012,6 +4012,71 @@
       "communication_transport": "PASS_SCOPED: all13 attempted,12 normal completed plus1expected actualW1; no truncation/format retry/effect replay. Not a semantic acceptance pass.",
       "scope": "Exposed communication probe. Root same-family semantic review; no pooled full L1/L4 result. Current-topic forgetting cannot be inferred from empty visible results or generic forget_epoch.",
       "reviewer": "Root",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "2274fe37a40a8b678abeaacbdab6269349044076",
+        "fast": {
+          "run_id": 37115450624,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37115450629,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "communication-r35",
+      "layer": "L0",
+      "candidate_commit": "f2bad4eaa360c853eda0919d06018394b8575483",
+      "state": "COMPLETE_WITH_UNAVAILABLE_MAINTENANCE_AND_ABSENCE_WORDING_FAILURES",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r35.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12283,
+        "generation": {
+          "charged_tokens": 41202744,
+          "known_tokens": 41172357,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r35/input-freeze.json": "df03880b1aa81a4a3750d30eea2d74b40837bde692802ba5acd66a19cc368460",
+        "configs/v13-5-functional-r35.json": "9107966966c5d62c4a367e28f70817d1607c6e7140ceb1420fee65e4e2755bcf",
+        "artifacts/v13-5/communication-r35/review.json": "85c39a4fc5a51a53796ccc0de31ff3dde6c1962c7751292fbd2412a9e2bfeea1",
+        "artifacts/v13-5/communication-r35/seal.json": "f2043d6a2f8972fb517d9062646337aff8ce323bf143f3417dfe23b086e4e9bb",
+        "artifacts/v13-5/communication-r35-review.jsonl": "6267ad2f2dd7d244f1c9912c03a43605c824e29d3c2873fc02a129774160b338",
+        "artifacts/v13-5/communication-r35-review-notes.json": "acf3d84f102841d3ec83393c3281c6769393b1e5ea7d5edb56347a3b2fb8490e",
+        "artifacts/v13-5/communication-r35-evaluator/summary.json": "d518a7ddb159962681d67e1fc20b9efc9155a8930b4cc9d0b9f94cdda38d6d3c"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 4,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 11,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 42,
+        "generation.known_tokens": 198550,
+        "generation.charged_tokens": 198550,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed communication development, Root review, not acceptance. Actual unavailable tool was rejected before dispatch; successful label not replayed. Missing-evidence contract does not mechanically certify prose. Only untouched independent stories continued after partial follow-up failure.",
+      "reviewer": "Root",
       "independent_review": false
     }
   ],
@@ -4021,5 +4086,14 @@
   "cross_cohort_interpretation": "Each development cohort retains its own full denominator and stop/failure. Passing cases from different configurations must not be combined into a synthetic normal24 pass.",
   "cost_scope": "Unique actual request/attempt deltas per cohort. Targeted prefixes are included once in their cohort, not added again. No rerun or ledger reset is authorized by this register.",
   "pause_report": "docs/V13_5_PAUSE_STATUS_20261003.md",
-  "current_progress": "docs/V13_5_PROGRESS.md"
+  "current_progress": "docs/V13_5_PROGRESS.md",
+  "development_admission_policies": [
+    {
+      "candidate": "r36",
+      "path": "artifacts/v13-5/r36-admission-policy.json",
+      "sha256": "a09ed159aeec3b2eca98fe9433f6596ee1d7e96f11d5544e33ab96de73d25e71",
+      "timing": "before any r36 actual output",
+      "semantic_acceptance_unchanged": true
+    }
+  ]
 }

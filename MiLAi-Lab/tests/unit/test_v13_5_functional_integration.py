@@ -48,6 +48,7 @@ def prepared(
     phase_thinking: bool = False,
     reasoning_history: bool = False,
     direct_response: bool = False,
+    actual_capabilities: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -76,6 +77,7 @@ def prepared(
         "declaration_tool_choice": "required" if current_delivery else "auto",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
+        "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
         "reasoning_history": "current_turn_native_v1" if reasoning_history else "discard",
         "recent_context": "bank_recent_v2" if operation_completion else
         "session_events_v1" if current_delivery else "disabled",
@@ -2354,13 +2356,14 @@ def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_rece
 
 
 @pytest.mark.parametrize('unusable', [None, '{'])
+@pytest.mark.parametrize('actual_capabilities', [False, True])
 def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, unusable: Any,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, unusable: Any, actual_capabilities: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, readonly_finalization=True,
         independent_capabilities=True, current_delivery=True, fresh_completion=True,
         operation_completion=True, phase_thinking=True, reasoning_history=True,
-        direct_response=True)
+        direct_response=True, actual_capabilities=actual_capabilities)
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal == 1:
@@ -2373,6 +2376,10 @@ def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
         if ordinal == 3:
             return {'role': 'assistant', 'content': unusable, 'reasoning': 'Not an answer.'}
         assert ordinal == 4 and not wire.get('tools') and wire.get('tool_choice') != 'auto'
+        if actual_capabilities:
+            system = wire['messages'][0]['content']
+            assert 'CURRENT EXECUTION CAPABILITIES: []' in system
+            assert 'Memory saving/updating is unavailable in this phase.' in system
         return {'role': 'assistant', 'content': 'The marker was saved.'}
 
     wires = scripted(monkeypatch, reply, native=True)
@@ -2385,3 +2392,45 @@ def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
     assert recovered['status'] == 'COMPLETED' and len(wires) == 4
     assert recovered['final_answer'] == 'The marker was saved.'
     assert len(recovered['records']) == 1 and recovered['records'][0]['value']['revision'] == 1
+
+
+def test_actual_capability_contract_tracks_restricted_completion_catalog(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True, actual_capabilities=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        system = wire['messages'][0]['content']
+        encoded = system.split('CURRENT EXECUTION CAPABILITIES: ', 1)[1]
+        active, _ = json.JSONDecoder().raw_decode(encoded)
+        actual = sorted(t['function']['name'] for t in wire['tools'])
+        assert active == actual
+        assert 'Persisted current-request interpretation:' in system
+        assert 'save_memory' in active and 'forget_memory' not in active
+        if ordinal == 2:
+            assert 'reserve_and_label' in active
+            return {'role': 'assistant', 'content': 'WITHHELD_NO_WRITE'}
+        assert not set(active) & functional.BUSINESS_MUTATIONS
+        if ordinal == 3:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Prefer blue paper.',
+                               fragment_handles=hs)
+        assert ordinal == 4
+        return {'role': 'assistant', 'content': 'Preference saved; reservation not executed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='request',
+                                content='Remember I prefer blue paper, and reserve one local box.')
+    assert result['status'] == 'COMPLETED' and len(wires) == 4
+    assert result['request_mode']['allow_business_mutation'] is True
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    assert result['operation_status']['semantic_memory']['status'] == 'committed'
+    assert 'WITHHELD_NO_WRITE' not in result['final_answer']
+    assert result['world']['world']['attempts'] == []

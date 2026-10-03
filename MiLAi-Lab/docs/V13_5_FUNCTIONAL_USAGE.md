@@ -18,18 +18,21 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r35.json` is the current communication candidate. Required
+`configs/v13-5-functional-r36.json` is the current communication candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
 receipt responses. There is no separate semantic rewrite of an ordinary answer.
 
 Private checkpoints and diagnostic traces retain audit data; this is not physical erasure.
-R30/R31/R32 communication included truncation. R33 attempted all 6 stories/13 messages
-with 3 scoped PASS and 3 FAIL, including final-answer qualification drift and a mistaken
-forget declaration. R34 completed communication with 5 scoped PASS/1 absence-inference FAIL. R35 adds an
-explicit missing-evidence contract and must pass its own probe before full L1 admission.
-Neither is a stable accepted configuration.
+R30/R31/R32 communication included truncation. R34 completed with 5 scoped PASS/1
+absence-inference FAIL; R35 had 4 scoped PASS/2 FAIL, including an unavailable tool proposal.
+R36 adds the actual current-phase tool catalog beside the persisted intent interpretation,
+including its restrictions during completion and tool-free answer repair. Permissions do
+not expand. Full original L1 admission requires usable communication without unplanned
+protocol failures or critical effects/privacy/integrity faults. Ordinary semantic failures
+can remain explicitly open while collecting full regression under plan11.6; they are not
+promoted to semantic or integrated acceptance. No stable configuration is recommended.
 
 Every functional read now explicitly states that missing visible evidence cannot prove
 never supplied, topic-specific forgetting or physical erasure. The reason remains unknown
@@ -84,9 +87,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r35. Do not combine their successful cases into a new cohort score.
+results, not results for r36. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r35, development only)
+## Candidate example (r36, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -95,14 +98,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r35 \
-  --config configs/v13-5-functional-r35.json
+  --root artifacts/v13-5/personal-r36 \
+  --config configs/v13-5-functional-r36.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r35 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r36 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r35 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r36 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -220,7 +223,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r35
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r36
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`
