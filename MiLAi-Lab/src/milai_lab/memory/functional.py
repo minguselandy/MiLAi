@@ -103,6 +103,7 @@ class FunctionalMemory:
         retrieval_candidates: list[dict[str, Any]] | None = None,
         formation_interface: str = "content_and_scope_v1",
         recent_context: str = "disabled",
+        existing_confirmation: bool = False,
     ) -> None:
         if service.functional_contract != "functional_v1":
             raise FunctionalRejection("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
@@ -115,6 +116,9 @@ class FunctionalMemory:
             "anchored_assertion_v2", "anchored_assertion_v3"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
+        if type(existing_confirmation) is not bool:
+            raise FunctionalRejection("V13_5_EXISTING_CONFIRMATION_INVALID")
+        self.existing_confirmation = existing_confirmation
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
             raise FunctionalRejection("V13_5_RECENT_CONTEXT_INVALID")
         self.recent_context = recent_context
@@ -1403,6 +1407,23 @@ class FunctionalMemory:
                 tool_call_id=tool_call_id, retract=retract,
                 evidence_for_withdrawal=evidence_for_withdrawal)
 
+        def confirm_existing_memory(
+            read_handle: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Confirm an already matching current record WITHOUT changing it.
+
+            Use its actual read_handle when the user asks to keep the same record
+            and version. This performs the existing exact no_change check: no new
+            record, revision, field, source or history is written. A stale, revoked
+            or wrong-owner handle cannot confirm the current record. It cannot
+            save a new fact, apply a correction or prove the record satisfies the
+            whole request. Describe success as already present/unchanged, never
+            as a new save. For changed values use update_memory with real evidence.
+            """
+            return message("confirm_existing_memory", tool_call_id,
+                           mutation(lambda: self.update(config, tool_call_id, read_handle, [])))
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
             if self.formation_interface in {
@@ -1443,7 +1464,9 @@ class FunctionalMemory:
                        else StructuredTool.from_function(update_assertion, name="update_memory")
                        if self.formation_interface == "unified_assertion_v2"
                        else StructuredTool.from_function(update_memory))
-        return (save_tool, update_tool, *tuple(
+        confirmation_tools = ((StructuredTool.from_function(confirm_existing_memory),)
+                              if self.existing_confirmation else ())
+        return (save_tool, update_tool, *confirmation_tools, *tuple(
             StructuredTool.from_function(function)
             for function in (
                 search_memory,

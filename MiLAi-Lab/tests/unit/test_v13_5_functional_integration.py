@@ -58,6 +58,7 @@ def prepared(
     format_failure_receipts: bool = False,
     required_completion: bool = False,
     receipt_completion: bool = False,
+    existing_confirmation: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -87,6 +88,7 @@ def prepared(
         "declaration_tool_choice": "required" if current_delivery else "auto",
         "completion_tool_choice": "required_until_attempt_v1" if receipt_completion else
         "required_once" if required_completion else "auto",
+        "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -2896,16 +2898,19 @@ def test_required_completion_cannot_repeat_business_and_exhausted_format_stays_f
     assert replay['world'] == result['world']
 
 
-@pytest.mark.parametrize('until_attempt,interrupted',
-                         [(False, False), (True, False), (True, True)])
+@pytest.mark.parametrize('until_attempt,interrupted,explicit_confirmation',
+                         [(False, False, False), (True, False, False), (True, True, False),
+                          (True, False, True), (True, True, True)])
 def test_completion_read_does_not_replace_existing_confirmation_receipt(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
     until_attempt: bool, interrupted: bool,
+    explicit_confirmation: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, independent_capabilities=True,
         current_delivery=True, operation_completion=True, direct_response=True,
         phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
-        required_completion=True, receipt_completion=until_attempt)
+        required_completion=True, receipt_completion=until_attempt,
+        existing_confirmation=explicit_confirmation)
     generate = functional.LangMemRecipeChatModel._generate
     faulted = False
 
@@ -2920,6 +2925,15 @@ def test_completion_read_does_not_replace_existing_confirmation_receipt(
     monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_after_read)
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if explicit_confirmation and ordinal == 9:
+            return native_call('classify_current_request', 'query-mode',
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if explicit_confirmation and ordinal == 10:
+            assert wire['tool_choice'] == 'auto'
+            assert not {'save_memory', 'update_memory', 'confirm_existing_memory',
+                        'forget_memory'}.intersection(t['function']['name'] for t in wire['tools'])
+            return {'role': 'assistant', 'content': 'The existing order is author_title.'}
         if ordinal in {1, 4}:
             return native_call('classify_current_request', f'mode-{ordinal}',
                 memory_write_request='new_assertion', allow_forgetting=False,
@@ -2946,6 +2960,9 @@ def test_completion_read_does_not_replace_existing_confirmation_receipt(
                 return {'role': 'assistant', 'content': 'The record already matches.'}
             record = next(u for u in actual_tool_receipt(wire)['items']
                           if u['type'] == 'record')
+            if explicit_confirmation:
+                return native_call('confirm_existing_memory', 'confirm-existing',
+                                   read_handle=record['read_handle'])
             return native_call('update_memory', 'confirm-existing',
                                read_handle=record['read_handle'], changes=[])
         assert ordinal == 8 and wire['tool_choice'] == 'auto'
@@ -2966,6 +2983,10 @@ def test_completion_read_does_not_replace_existing_confirmation_receipt(
     assert result['records'] == saved['records']
     assert result['operation_status']['semantic_memory']['status'] == (
         'no_change' if until_attempt else 'not_committed')
+    if explicit_confirmation:
+        operation = result['operation_status']['semantic_memory']['operations'][0]
+        assert operation['tool'] == 'confirm_existing_memory' and operation['effect'] == 'none'
+        assert operation['revision'] == 1
     count = len(wires)
     assert count == (8 if until_attempt else 7)
     cached = functional.message(root, **common, **args)
@@ -2975,6 +2996,12 @@ def test_completion_read_does_not_replace_existing_confirmation_receipt(
     assert len(reads) == 1
     feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
     assert feedback['attempts'] == 1 and not feedback['business_mutations_available']
+    if explicit_confirmation:
+        query = functional.message(root, **common, session='s3', message_id='query',
+                                    content='Read the current order; do not maintain anything.')
+        assert query['status'] == 'COMPLETED' and query['records'] == saved['records']
+        assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+        assert len(wires) == 10
 
 
 @pytest.mark.parametrize('exhaust_reads', [False, True])

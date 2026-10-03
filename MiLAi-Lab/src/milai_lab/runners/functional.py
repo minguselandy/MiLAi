@@ -291,6 +291,7 @@ def prepare(
         "source_selection", "failure_delivery", "business_completion",
         "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
         "completion_tool_choice",
+        "existing_confirmation",
         "declaration_sampling",
         "capability_delivery",
     }
@@ -341,6 +342,12 @@ def prepare(
             host.tool_mode != "native"
             or settings.get("memory_completion") != "declared_operations_v3"):
         raise ValueError("FUNCTIONAL_COMPLETION_TOOL_CHOICE_REQUIRES_NATIVE_OPERATIONS")
+    if settings.get("existing_confirmation", "disabled") not in {
+            "disabled", "explicit_no_change_v1"}:
+        raise ValueError("FUNCTIONAL_EXISTING_CONFIRMATION_INVALID")
+    if (settings.get("existing_confirmation") == "explicit_no_change_v1"
+            and settings.get("memory_completion") != "declared_operations_v3"):
+        raise ValueError("FUNCTIONAL_EXISTING_CONFIRMATION_REQUIRES_OPERATIONS")
     if settings.get("reasoning_history") == "current_turn_native_v1" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
@@ -804,7 +811,7 @@ def operation_status(
         if any(identity.get(k) != v for k, v in expected.items()):
             continue
         name = identity.get("name")
-        if name not in {"save_memory", "update_memory", "forget_memory"}:
+        if name not in {"save_memory", "update_memory", "forget_memory", "confirm_existing_memory"}:
             continue
         receipt = row.get("semantic_maintenance")
         if receipt is None and row.get("memory_response"):
@@ -921,7 +928,7 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
     """
     start = next((i for i in range(len(messages) - 1, -1, -1)
                   if isinstance(messages[i], HumanMessage)), len(messages))
-    names = {"save_memory", "update_memory", "forget_memory"}
+    names = {"save_memory", "update_memory", "forget_memory", "confirm_existing_memory"}
     calls: dict[str, str] = {}
     receipts = []
     confirmed = []
@@ -1306,6 +1313,8 @@ def message(
                 material_limit=settings["ordinary_material_tokens"],
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
                 recent_context=settings.get("recent_context", "disabled"),
+                existing_confirmation=(settings.get("existing_confirmation")
+                                       == "explicit_no_change_v1"),
                 retrieval_candidates=[
                     {
                         **row,
@@ -1449,7 +1458,8 @@ def message(
                         declaration_tool_choice=settings.get("declaration_tool_choice", "auto"))
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
-                mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}
+                mode["allow_memory_maintenance"] if tool.name in {
+                    "save_memory", "update_memory", "confirm_existing_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
             selected_business = tuple(tool for tool in app.tools if mode is None
                 or tool.name in {"get_reservation", "get_document_status"}
@@ -1608,6 +1618,9 @@ def message(
 
             call_wrapper = app.call_wrapper(
                 service, session, message_id, trace, cfg, boundary_hook=faults.boundary,
+                memory_mutation_names=("save_memory", "update_memory", "forget_memory",
+                    *(("confirm_existing_memory",) if settings.get("existing_confirmation")
+                      == "explicit_no_change_v1" else ())),
                 inline_fragment_content=(settings.get("source_selection")
                                          in {"inline_fragments_v1", "inline_receipt_units_v2"}),
                 complete_receipt_units=(settings.get("source_selection")
@@ -1782,7 +1795,8 @@ def message(
                     settings.get("memory_completion") in {
                         "declared_writes_v1", "declared_writes_v2", "declared_operations_v3"}
                     and mode["allow_memory_maintenance"]))
-                    and not any(r["tool"] in ({"save_memory", "update_memory", "forget_memory"}
+                    and not any(r["tool"] in ({"save_memory", "update_memory", "forget_memory",
+                                              "confirm_existing_memory"}
                                 if settings.get("memory_completion") == "declared_operations_v3"
                                 else {"save_memory", "update_memory"})
                                 for r in effects["mutation_receipts"])
@@ -1829,8 +1843,12 @@ def message(
                     ", but this message has no save/update receipt. ") +
                     "Your preceding answer is withheld, not delivered. "
                     "Finish the requested memory work using actual supporting fragments. Inspect "
-                    "existing records before creating a duplicate; an exact update with no changes "
-                    "can confirm an existing record and must be described as already present. "
+                    "existing records before creating a duplicate; " + (
+                    "confirm_existing_memory checks an already matching record without changing "
+                    "its ID, version or history. Describe it as already present, not newly saved. "
+                    if settings.get("existing_confirmation") == "explicit_no_change_v1" else
+                    "an exact update with no changes can confirm an existing record and must "
+                    "be described as already present. ") +
                     "A read or raw capture alone is not a semantic save. If a write fails or is "
                     "unknown, report that actual result. " + (
                     "Business mutations are unavailable here. Use only the currently exposed "
@@ -1940,6 +1958,7 @@ def message(
                     "save_memory",
                     "update_memory",
                     "forget_memory",
+                    "confirm_existing_memory",
                 }:
                     mutation_receipts.append(
                         {

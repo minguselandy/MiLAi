@@ -83,6 +83,71 @@ def invoke(
     return json.loads(response.content)
 
 
+def test_explicit_existing_confirmation_preserves_version_support_and_owner_on_reopen(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, existing_confirmation=True) as memory:
+        ref = turn(memory, text='For this exhibition only, use quiet reminders.')
+        saved = memory.save(cfg(), 'save', 'For this exhibition only, use quiet reminders.',
+                            handles(memory, ref))
+        row = memory.service.read(saved['id'])
+        handle = row['candidate_handle']
+        tool = next(t for t in memory.tools() if t.name == 'confirm_existing_memory')
+        assert set(tool.tool_call_schema.model_fields) == {'read_handle'}
+        result = invoke(memory, 'confirm_existing_memory', {'read_handle': handle}, 'confirm')
+        assert result['status'] == 'no_change' and result['effect'] == 'none'
+        assert result['id'] == saved['id'] and result['revision'] == 1
+        assert memory.service.read(saved['id'])['value'] == row['value']
+        replay = invoke(memory, 'confirm_existing_memory', {'read_handle': handle}, 'confirm')
+        assert replay['status'] == 'no_change' and replay['revision'] == 1
+        ref2 = turn(memory, 'change', 'For this exhibition only, use written reminders.')
+        revised = memory.update(cfg('change'), 'revise', handle, [{'field': 'content',
+            'op': 'set', 'value': 'For this exhibition only, use written reminders.',
+            'fragment_handles': handles(memory, ref2)}])
+        assert revised['revision'] == 2
+        stale = invoke(memory, 'confirm_existing_memory', {'read_handle': handle}, 'stale',
+                       cfg('change'))
+        assert not stale['ok'] and stale['reason'] == 'revision_conflict'
+        current = memory.service.read(saved['id'])
+    with opened(tmp_path, existing_confirmation=True) as memory:
+        unbound = invoke(memory, 'confirm_existing_memory',
+                         {'read_handle': current['candidate_handle']}, 'unbound', cfg('change'))
+        assert unbound['reason'] == 'V13_5_ACTUAL_PUBLIC_TURN_REQUIRED'
+        memory.context('s', 'change', SHA)
+        reopened = memory.service.read(saved['id'])
+        result = invoke(memory, 'confirm_existing_memory',
+                        {'read_handle': reopened['candidate_handle']}, 'reopened', cfg('change'))
+        assert result['status'] == 'no_change' and result['revision'] == 2
+        assert memory.service.read(saved['id'])['value'] == current['value']
+        history = memory.service.history_index(saved['id'])
+        assert len(history['revisions']) == 2
+    with opened(tmp_path, owner='bob', existing_confirmation=True) as other:
+        turn(other)
+        wrong_owner = invoke(other, 'confirm_existing_memory',
+                             {'read_handle': current['candidate_handle']},
+                             'wrong', cfg(owner='bob'))
+        assert not wrong_owner['ok'] and wrong_owner['effect'] == 'none'
+    with opened(tmp_path) as old:
+        assert 'confirm_existing_memory' not in {t.name for t in old.tools()}
+
+
+def test_existing_confirmation_cannot_restore_a_withdrawn_record(tmp_path: Path) -> None:
+    with opened(tmp_path, existing_confirmation=True) as memory:
+        ref = turn(memory, text='For this workshop only, prefer the window seats.')
+        saved = memory.save(cfg(), 'save', 'For this workshop only, prefer the window seats.',
+                            handles(memory, ref))
+        original = memory.service.read(saved['id'])
+        cancel = turn(memory, 'cancel', 'The workshop is over; withdraw that seating preference.')
+        withdrawn = memory.update(cfg('cancel'), 'withdraw', original['candidate_handle'], [],
+                                  handles(memory, cancel), retract=True)
+        assert withdrawn['revision'] == 2
+        failed = invoke(memory, 'confirm_existing_memory',
+                        {'read_handle': original['candidate_handle']}, 'old', cfg('cancel'))
+        assert not failed['ok']
+        assert memory.service.read(saved['id'])['status'] == 'retracted'
+        assert len(memory.service.history_index(saved['id'])['revisions']) == 2
+
+
 def test_unified_assertion_rejects_split_scope_and_preserves_explicit_body_on_reopen(
     tmp_path: Path,
 ) -> None:

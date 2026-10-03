@@ -1,15 +1,15 @@
 # v13.5 functional profile
 
-**R44 is a mechanical development candidate; no stable configuration is recommended.**
-R43 communication failed its first existing-record confirmation: required_once selected a
-prerequisite read, then auto allowed an answer without a no_change receipt. Original11/27
-sealed as1 failed story/10 not run; the original ID/revision/history stayed intact.
-R44 keeps tool selection required within the already authorized bounded completion until
-one actual maintenance attempt has a paired receipt. Rejected/unknown attempts release this
-requirement too; success is never forced. No new permission, call, read or repair allowance.
-R42 had9 scoped PASS/2 FAIL including two actual full withdrawals; no pooled scores.
+**R45 is a development candidate; no stable configuration is recommended.**
+R44 existing-record confirmation still failed: bounded completion repeatedly searched an
+already delivered record and exhausted its read allowance, preserving the original ID/revision.
+The original11/27 was sealed as1 failed story/10 not run. R45 exposes a dedicated
+confirm_existing_memory(read_handle) tool over the existing exact no_change path, so keeping
+an unchanged record has an explicit operation. It cannot change content, support or versions.
+The receipt does not certify that the chosen record satisfies every part of the request.
+R45 has469 related/default checks,18 production tokenizer probes and4 SDK checks; no model calls yet.
 See [progress](V13_5_PROGRESS.md) and the historical [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md).
-R44 has no model results yet. Product remains NO_GO.
+Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
@@ -18,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r44.json` is the current development candidate. Required
+`configs/v13-5-functional-r45.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -70,6 +70,12 @@ The candidate preserves these contracts; actual model choices still require eval
   apply to ordinary same-source revisions or exact no_change.
   Unchanged fields keep their values and support. Repeating the
   exact same-message save returns `existing_record`/`no_change`, not a second write.
+- With `existing_confirmation=explicit_no_change_v1`, `confirm_existing_memory(read_handle)`
+  returns the original exact no_change receipt. It checks the issued current version and
+  owner under the actual bound message; stale/revoked/other-owner targets cannot confirm.
+  Describe it as already present, never as newly saved. It has no content or patch arguments
+  and does not validate semantic equivalence to the request. It is available only where
+  memory maintenance was already permitted; readonly queries do not gain a maintenance tool.
 - One actual write receipt is necessary for a requested save confirmation; it cannot prove
   that every requested item was saved. Missing maintenance can use one bounded completion
   within the original shared repair allowance. Previously permitted forgetting remains
@@ -133,7 +139,7 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
   --root artifacts/v13-5/personal-r43 \
-  --config configs/v13-5-functional-r44.json
+  --config configs/v13-5-functional-r45.json
 python tools/run_functional.py message \
   --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
   --session monday --message-id first \

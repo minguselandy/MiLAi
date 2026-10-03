@@ -6601,6 +6601,115 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r44",
+      "layer": "communication",
+      "candidate_commit": "27ccefa578d98520bbd06eee2009d6962f885016",
+      "state": "STOPPED_EXISTING_CONFIRMATION_REPEATED_READS_EXHAUSTED",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r44.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13961,
+        "generation": {
+          "charged_tokens": 50590906,
+          "known_tokens": 50560519,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r44/input-freeze.json": "8e03e790cf09a74bd48b3994416d70682038fc8eda1f4613cb30693b6b126291",
+        "configs/v13-5-functional-r44.json": "54564e2744361715b4ad7e63469073dc5a237f0380400ac65e104c9f8e2f91b7",
+        "artifacts/v13-5/communication-r44/review.json": "83e41ff76ef8de2b3193e0ae0a0ca8de90d9059375dc55c7609416d763e8f173",
+        "artifacts/v13-5/communication-r44/seal.json": "1154cd0b4733fab01bbc6811c8bb02fba8428d5a6c48dd3304ec652124fb0ccf",
+        "artifacts/v13-5/communication-r44-manual-grades.json": "1a8c174d177f23cf947656aea4dc0bd890602bfa7dbffdbd65aed066d6f37b8b",
+        "artifacts/v13-5/communication-r44-review-notes.json": "e69b7d5271385c8c15f59b3e2c88cb4eb85bb377ea94dcf741cfaa2eac2af8ff",
+        "artifacts/v13-5/communication-r44-all-review.jsonl": "231fac70059f05cfb720a7a349350f128e511ff7aaba68287620557a96d71d96",
+        "artifacts/v13-5/communication-r44-evaluator/summary.json": "ee1af260922c027cce136a80405acece46f8fb3fa548d054f9dfcec9d6f45b5a"
+      },
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "retained_attempts": 2,
+      "cost_delta": {
+        "generation_requests": 8,
+        "generation.known_tokens": 66515,
+        "generation.charged_tokens": 66515,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 2,
+      "independent_sqlite": {
+        "records": 1,
+        "exact_quote_identity_checks": 3,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-h06": {
+          "status": "FAIL",
+          "reason": "Initial actual save correct. Followup first answered existing record without maintenance receipt. During required_until_attempt completion, four repeated searches consumed the original3-read allowance and triggered FAILED READ_LIMIT_EXHAUSTED. Delivered record supported existing confirmation; no no_change call occurred. Original ID/rev1/history/support unchanged, no false saving or new effect. Stronger tool selection requirement alone did not make the unchanged-confirmation interface usable.",
+          "breakpoint": "completion_repeats_reads_instead_of_unchanged_confirmation"
+        },
+        "l4-h03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-g02": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-g03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-answer": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-memory": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-partial": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-n03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -6666,6 +6775,13 @@
       "sha256": "9441e454f6682bedba78a71edbaa6eebe0164777508615c5ae43f9302475ec47",
       "timing": "Before any r44 model HTTP",
       "scope": "Same full scope as r43: communication11/27, L1 24/48, L2 12/26, full exposed L3 formation57/reading30 and new L4 after method freeze. No pooling or exemption."
+    },
+    {
+      "candidate": "r45",
+      "path": "artifacts/v13-5/r45-regression-scope.json",
+      "sha256": "c025d3766ae2c921e188f91143f49c06aade259419fbc34bdda2253e2134a2b3",
+      "timing": "Before r45 model HTTP",
+      "scope": "Communication11/27, L1 24/48, L2 12/26, full exposed L3 formation57/reading30 and new L4 after method freeze. Explicit no_change tool cannot apply changes; original budgets retained."
     }
   ],
   "mechanical_checks": [
@@ -6844,6 +6960,35 @@
         "artifacts/v13-5/r44-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r44-verification-matrix-command-error.log": "b3b24deb1a96621f5ba8259124f9e1360e7e6c11243b991ec5d6e6937dd0e1ee",
         "artifacts/v13-5/r44-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r44-ci.json",
+        "sha256": "8ec273d948f1b61ec6b52748f5404d72c6fc6f61089db5211f141a3ab1a5129a",
+        "commit": "27ccefa578d98520bbd06eee2009d6962f885016",
+        "fast": "SUCCESS run37135526903",
+        "full": "SKIPPED run37135526897; not a pass"
+      }
+    },
+    {
+      "candidate": "r45",
+      "scope": "469 related/default/foundation tests PASS;18 production pinned tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy2modules,package/tools boundaries and verification matrix PASS. Zero actual model HTTP. Explicit confirmation delegates exact no_change, journals actual paired receipt, preserves ID/revision/support/history, rejects wrong owner/stale/withdrawn target and unbound reopen, requires explicit trusted rebind, and does not add maintenance tools to readonly requests. Old catalogs and bounded completion remain.",
+      "preserved_first_failure": "Initial pytest collection failed due parametrized argument also having a default. Two subsequent targeted runs6PASS1FAIL omitted required current-message rebind on standalone Store reopen; fresh read alone correctly did not authorize the message. Test now asserts unbound rejection, explicitly rebinds original message, and all7 targeted checks pass. First Ruff line length fixed. No authorization relaxation or runtime changes for these test errors.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r45-targeted.log": "9c6721aa6d290524ebcbd685e8d3b11716f9182d131b89b1146b12976aa5e8f8",
+        "artifacts/v13-5/r45-targeted-final.log": "cd2da7a7d27d1a2f0b54995fc5183d5a13c8272858fc7a6061cfd85b32ae1408",
+        "artifacts/v13-5/r45-targeted-corrected.log": "c0422c2a2139eb0114b4ad8d18df31c647e9b46ed96ead2c2bb1252f6e041b3f",
+        "artifacts/v13-5/r45-targeted-rebound.log": "19868e36cf5c77de2b65820c075c4e0b8b1324ab3e29bb56d4ee0b76cc64afbc",
+        "artifacts/v13-5/r45-regression.log": "5d71b39a2e97559cefcc9f87099e629d289ef1adddc1d7a908b8dfd41817a6d7",
+        "artifacts/v13-5/r45-production-contracts-probe.py": "58de56c71cece48226f54d03a0cff78fd8d38d35ff95245e2ca1b3b7d142ab70",
+        "artifacts/v13-5/r45-production-contracts.json": "d0ec135391aaf629377ddc72b24df3bf4bd23bae401dec352b15042b560d4012",
+        "artifacts/v13-5/r45-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r45-sdk-lifecycle.log": "82440842ba83d952a8ae429ece3e4338a1b3db84affa65d3e588b2bf6a9a25c7",
+        "artifacts/v13-5/r45-ruff.log": "44e8954697d8d09e1c83ad861b288aa82fcc5237ed284f0243b9ff9fc3606dc5",
+        "artifacts/v13-5/r45-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r45-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r45-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r45-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r45-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
       }
     }
   ],
