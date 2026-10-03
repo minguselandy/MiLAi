@@ -18,6 +18,15 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
+`configs/v13-5-functional-r31.json` is the current communication candidate: declarations
+use required native tools with thinking disabled; execution and final composition use
+thinking with unchanged limits. Each actual phase template is capacity-checked. R30
+all-phase thinking truncated during a declaration and remains failed. R31 must pass
+its six-story communication probe before any full L1 admission.
+
+The following r29 profile remains the latest completed targeted engineering regression
+(2 scoped PASS / 1 absence-inference FAIL, 3 stories / 9 messages), not stable acceptance.
+
 Use `configs/v13-5-functional-r29.json` with a new root for current candidate
 validation. R29 uses native v6 with required declaration tool choice and thinking disabled,
 with unchanged capacity/call/read limits. It recognizes actual forgetting as maintenance,

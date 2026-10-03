@@ -289,7 +289,7 @@ def prepare(
         "revision", "change_intent", "request_mode", "business_attempt_policy",
         "formation_interface", "finalization", "read_exhaustion", "memory_completion",
         "source_selection", "failure_delivery", "business_completion",
-        "declaration_tool_choice", "recent_context",
+        "declaration_tool_choice", "recent_context", "declaration_thinking",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -302,6 +302,8 @@ def prepare(
     }
     if set(settings.get("capacity", {})) - capacity_keys:
         raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
+    if settings.get("declaration_thinking", "inherit") not in {"inherit", "disabled"}:
+        raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INVALID")
     if settings.get("declaration_tool_choice", "auto") not in {"auto", "required"}:
         raise ValueError("FUNCTIONAL_DECLARATION_TOOL_CHOICE_INVALID")
     if settings.get("recent_context", "disabled") not in {
@@ -319,6 +321,11 @@ def prepare(
             "disabled", "observed_continuation_v1"}:
         raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
     host = VLLMConfig(**settings["host"])
+    if settings.get("declaration_thinking") == "disabled" and (
+            host.tool_mode != "native" or host.enable_thinking is not True
+            or settings.get("capacity", {}).get("enable_thinking") is not True
+            or settings.get("declaration_tool_choice") != "required"):
+        raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INCONSISTENT")
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
         "current_request_native_v3", "current_request_native_v4",
@@ -1270,6 +1277,11 @@ def message(
             client = FunctionalVLLMClient(
                 VLLMConfig(**settings["host"]), emit=trace, budget=budget, capacity=capacity
             )
+            if settings.get("declaration_thinking") == "disabled":
+                client.declaration_capacity = HostCapacity({
+                    **settings["capacity"], "enable_thinking": False})
+                client.declaration_tool_names = frozenset({
+                    "classify_current_request", "resolve_continuation_operations"})
             stack.enter_context(client)
             client.queue = FunctionalQueue(
                 root / "queue-admission.json", **settings["queue_limits"]

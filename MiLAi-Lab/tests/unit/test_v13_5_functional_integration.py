@@ -45,6 +45,7 @@ def prepared(
     fresh_completion: bool = False,
     independent_capabilities: bool = False,
     operation_completion: bool = False,
+    phase_thinking: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -57,7 +58,7 @@ def prepared(
     tokenizer_wrapper.save_pretrained(str(directory))
     (directory / "chat_template.jinja").write_text(tokenizer_wrapper.chat_template)
     host = VLLMConfig(base_url="http://mechanical.invalid/v1/", model="mechanical-provider",
-                      max_tokens=4096, max_calls=24, enable_thinking=False,
+                      max_tokens=4096, max_calls=24, enable_thinking=phase_thinking,
                       tool_mode="native" if native else "json_action")
     budget_path = tmp_path / "isolated-mechanical-budget.json"
     budget = RunBudget(RunLimits(1, 1, 100, 2_000_000, 0), budget_path)
@@ -70,6 +71,7 @@ def prepared(
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
+        "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "recent_context": "bank_recent_v2" if operation_completion else
         "session_events_v1" if current_delivery else "disabled",
         "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
@@ -78,7 +80,7 @@ def prepared(
                 name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
                 for name in ("tokenizer.json", "tokenizer_config.json", "chat_template.jinja")},
             "context_tokens": 32768, "output_tokens": 4096, "batch_source_tokens": 8192,
-            "enable_thinking": False},
+            "enable_thinking": phase_thinking},
         "budget_path": str(budget_path), "max_calls_per_message": 24,
         "ordinary_material_tokens": 8192, "additional_reads": 3,
         "format_reproposals": format_allowance,
@@ -2066,3 +2068,43 @@ def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accou
     attempts = [json.loads(p.read_text()) for p in root.glob('banks/*/*-attempt-*.json')]
     assert len(attempts) == 2 and attempts[-1] != {}
     assert any(a['message_id'] == 'forget' and a['status'] == result['status'] for a in attempts)
+
+
+def test_phase_thinking_uses_actual_templates_and_one_shared_admission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert wire['chat_template_kwargs']['enable_thinking'] is (ordinal != 1)
+        if ordinal == 1:
+            assert wire['tool_choice'] == 'required'
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='The local marker is blue.',
+                               fragment_handles=hs)
+        assert ordinal in {3, 4}
+        return {'role': 'assistant', 'content': 'Saved the local marker.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'COMPLETED', result
+    assert len(wires) == result['generation_calls'] == 4
+    queue = read_json(root / 'queue-admission.json')
+    assert queue['requests'] == 4
+    trace = next(root.glob('banks/*/*-trace-0.jsonl'))
+    events = [json.loads(line) for line in trace.read_text().splitlines()]
+    responses = [e for e in events if e.get('event') == 'vllm_response']
+    assert len(responses) == 4
+    for index, event in enumerate(responses):
+        thinking = index != 0
+        assert event['request']['chat_template_kwargs']['enable_thinking'] is thinking
+        assert event['capacity']['identity']['enable_thinking'] is thinking
+    assert result['budget_after']['generation_requests'] == 4
+    replay = message(root)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == 4

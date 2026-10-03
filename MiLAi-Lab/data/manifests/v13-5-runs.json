@@ -3664,7 +3664,9 @@
         "artifacts/v13-5/focused-r29/seal.json": "1df90de839a0cd20168bde4c4463a12bf0e48f007999062c44722bda124afb05",
         "artifacts/v13-5/focused-r29-grades.json": "5375968dc9dda7c43fb10a641a853117b7605d40bd6fe31da78a92e212f79020",
         "artifacts/v13-5/focused-r29-evaluator/summary.json": "327f8bedf3d2ac7809b13a6ca9e45a21cc56d7435b09066de43fba7440605743",
-        "artifacts/v13-5/focused-r29-review.jsonl": "845ee683ac1b3fc5a13586502867a25b789aa346e64f1ce34fc540725a34fd03"
+        "artifacts/v13-5/focused-r29-review.jsonl": "845ee683ac1b3fc5a13586502867a25b789aa346e64f1ce34fc540725a34fd03",
+        "artifacts/v13-5/focused-r29-hidden-final-capture.json": "57858912d3a8ec1efcd6d0dadbb90d19d82141f5a978a33293c57403baa820e3",
+        "artifacts/v13-5/focused-r29-hidden-capture-reevaluation/summary.json": "327f8bedf3d2ac7809b13a6ca9e45a21cc56d7435b09066de43fba7440605743"
       },
       "semantic_counts": {
         "PASS_SCOPED": 2,
@@ -3683,7 +3685,73 @@
         "embedding.charged_tokens": 0,
         "embedding.unknown_usage": 0
       },
-      "scope": "Three exposed prior L4 stories only, not full L4 or fresh confirmation. Root same-family review, no independent Judge."
+      "scope": "Three exposed prior L4 stories only, not full L4 or fresh confirmation. Root same-family review, no independent Judge.",
+      "remote_ci": {
+        "sha": "7bb5dc9b91ceacca4be59aed3c35100d8d3940b2",
+        "fast_run": 37111431129,
+        "fast_conclusion": "success",
+        "full_run": 37111431145,
+        "full_conclusion": "skipped"
+      },
+      "hidden_program_capture_reevaluation": {
+        "path": "artifacts/v13-5/focused-r29-hidden-capture-reevaluation/summary.json",
+        "scope": "Hidden captured confirmation provenance verified from readonly SQLite; original evaluator unchanged, overall story remains FAIL.",
+        "new_http": 0
+      }
+    },
+    {
+      "id": "communication-r30",
+      "layer": "L0",
+      "candidate_commit": "f43a6cbd3b02ddb7162dabc55b5defe793f6e73f",
+      "state": "STOPPED_THINKING_DECLARATION_TRUNCATION",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r30.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12121,
+        "generation": {
+          "charged_tokens": 40410652,
+          "known_tokens": 40380265,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r30/input-freeze.json": "96de55837358abf0b083e8f1caf8a5fb66bba74df29441a5e7b2e6208deab27e",
+        "configs/v13-5-functional-r30.json": "5c28eff06fe1789ad99194c924753a7ac3511f825e1340b628e14d5e3073acf0",
+        "artifacts/v13-5/communication-r30/review.json": "00f691fa9b935aaf2996fe35e563f7f458f2bad4f889dcce776850c127ff0154",
+        "artifacts/v13-5/communication-r30/seal.json": "70fa81633d3abff497eb21825a72ea104184439d0307f38b50d5a01131a943f9",
+        "artifacts/v13-5/communication-r30-review.jsonl": "8b05b7c19b9b45ddc44b3ab05105112686876d9324be895098a18527adc09afd",
+        "artifacts/v13-5/communication-r30-evaluator/summary.json": "03a3f75266b4752e47109cbba09efd3ef42c7c1afda53c6869af034d3c6ea970"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 1,
+        "NOT_RUN": 3
+      },
+      "message_counts": {
+        "COMPLETED": 3,
+        "FAILED": 1,
+        "NOT_RUN": 9
+      },
+      "retained_attempts": 4,
+      "cost_delta": {
+        "generation_requests": 11,
+        "generation.known_tokens": 47271,
+        "generation.charged_tokens": 47271,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed communication/qualification probe, generic L4 evaluator mode only. Root same-family review. Ordinary Chinese answer and actual temporary best-effort/this-task save plus query passed scoped. Partial workflow first declaration exhausted8192 output, one HTTP, no business/semantic effect; receipt failure response delivered. No retry or higher cap; remaining9messages not run.",
+      "reviewer": "Root",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

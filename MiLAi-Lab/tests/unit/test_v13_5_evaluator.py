@@ -326,7 +326,8 @@ def test_normal22_preserves_unknown_nonpasses_without_inventing_normal24_thresho
 
 @pytest.mark.parametrize('fault', ['none', 'text', 'role', 'session', 'source_id', 'hash',
                                   'render_hash', 'missing_render', 'missing_source', 'policy'])
-def test_program_final_requires_actual_bound_public_capture(fault: str) -> None:
+@pytest.mark.parametrize('hidden', [False, True])
+def test_program_final_requires_actual_bound_public_capture(fault: str, hidden: bool) -> None:
     import hashlib
     metadata = {'status': 'response_rendered', 'attempts': 0, 'tools_available': False,
                 'execution_candidate_delivered': False, 'protocol': 'receipt_business_response_v1',
@@ -356,7 +357,50 @@ def test_program_final_requires_actual_bound_public_capture(fault: str) -> None:
         row['sources'] = []
     elif fault == 'policy':
         freeze['config']['finalization'] = 'agent_final_v1'
-    result = EVAL.program_final_linkage(row, events, freeze)
+    hidden_source = None
+    if hidden:
+        hidden_source = source if fault != 'missing_source' else None
+        row['sources'] = []
+        row['final_capture'] = dict(ok=True, source_ref=ref, visibility='revoked')
+    result = EVAL.program_final_linkage(row, events, freeze, hidden_source)
     expected = 'PASS' if fault == 'none' else 'UNKNOWN' if fault == 'policy' else 'FAIL'
     assert result['status'] == expected
     assert 'semantic_verdict' not in result
+
+
+@pytest.mark.parametrize('fault', ['none', 'missing_event', 'missing_receipt', 'receipt_hash',
+                                  'event_changed', 'visible_capture', 'uncheckpointed_wal'])
+def test_hidden_program_capture_requires_actual_event_and_durable_confirmation(
+    tmp_path: Path, fault: str,
+) -> None:
+    import sqlite3
+    ref = 'src-actual'
+    event = {'event_id': ref, 'owner': 'alice', 'session': 's', 'role': 'assistant',
+             'origin': 'public_assistant_message', 'content': 'Selected visibility revoked.',
+             'content_sha256': EVAL.text_hash('Selected visibility revoked.')}
+    digest = EVAL.text_hash(json.dumps(event, ensure_ascii=False, sort_keys=True,
+                                      separators=(',', ':')))
+    capture = {'source_ref': ref, 'event_sha256': digest}
+    row = {'final_capture': {'ok': True, 'source_ref': ref, 'visibility': 'revoked'}}
+    if fault == 'receipt_hash':
+        capture['event_sha256'] = 'wrong'
+    if fault == 'event_changed':
+        event['content'] = 'Different output.'
+    if fault == 'visible_capture':
+        row['final_capture'].pop('visibility')
+    database = tmp_path / 'memory.sqlite'
+    with sqlite3.connect(database) as store:
+        store.execute('create table store (key text, value text)')
+        if fault != 'missing_event':
+            store.execute('insert into store values (?, ?)', (ref, json.dumps(event)))
+        if fault != 'missing_receipt':
+            store.execute('insert into store values (?, ?)',
+                          ('capture:' + ref, json.dumps(capture)))
+    if fault == 'uncheckpointed_wal':
+        (tmp_path / 'memory.sqlite-wal').write_bytes(b'not an immutable snapshot')
+    original = database.read_bytes()
+    reader = EVAL.ArtifactReader()
+    actual = EVAL.hidden_program_capture(reader, tmp_path, row)
+    assert (actual == event) if fault == 'none' else actual is None
+    assert database.read_bytes() == original
+    assert not (tmp_path / 'memory.sqlite-shm').exists()

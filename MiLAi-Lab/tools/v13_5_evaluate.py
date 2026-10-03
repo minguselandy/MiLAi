@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sqlite3
 from collections import Counter
 from itertools import pairwise
 from pathlib import Path
@@ -335,8 +336,42 @@ def review_slot(case_id: str) -> dict[str, Any]:
     }
 
 
+def hidden_program_capture(
+    reader: ArtifactReader, bank_root: Path, row: dict[str, Any],
+) -> dict[str, Any] | None:
+    """Audit a hidden confirmation from a closed SQLite snapshot, never redisclose it.
+
+    Visibility filtering deliberately omits this assistant Source from the public
+    snapshot. A capture receipt alone is insufficient: require its actual stored
+    event and durable capture hash. Uncheckpointed WAL is not an immutable snapshot.
+    """
+    capture = row.get("final_capture", {})
+    if capture.get("ok") is not True or capture.get("visibility") != "revoked":
+        return None
+    ref = capture.get("source_ref")
+    database = bank_root / "memory.sqlite"
+    wal = bank_root / "memory.sqlite-wal"
+    if not isinstance(ref, str) or not database.is_file() or (wal.exists() and wal.stat().st_size):
+        return None
+    reader.bytes(database)
+    with sqlite3.connect(database.resolve().as_uri() + "?mode=ro&immutable=1", uri=True) as store:
+        rows = store.execute("SELECT key, value FROM store WHERE key IN (?, ?)",
+                             (ref, "capture:" + ref)).fetchall()
+    reader.bytes(database)  # Reject evidence changed during the read.
+    events = [json.loads(value) for key, value in rows if key == ref]
+    captures = [json.loads(value) for key, value in rows if key == "capture:" + ref]
+    if len(events) != 1 or len(captures) != 1:
+        return None
+    event_hash = text_hash(json.dumps(events[0], ensure_ascii=False, sort_keys=True,
+                                     separators=(",", ":"), allow_nan=False))
+    if captures[0] != {"source_ref": ref, "event_sha256": event_hash}:
+        return None
+    return events[0]
+
+
 def program_final_linkage(
     row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+    captured_source: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Bind a program-rendered delivery to its captured public assistant event.
 
@@ -360,8 +395,13 @@ def program_final_linkage(
     source_ref = "src-" + text_hash(json.dumps(
         identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False))
     sources = [s for s in row.get("sources", []) if s.get("event_id") == source_ref]
+    hidden = not sources and captured_source is not None and (
+        row.get("final_capture", {}).get("visibility") == "revoked")
+    if hidden:
+        sources = [captured_source]
     matched = len(sources) == 1 and all(sources[0].get(k) == v for k, v in {
-        "owner": row.get("owner"), "session": row.get("session"), "role": "assistant",
+        "event_id": source_ref, "owner": row.get("owner"),
+        "session": row.get("session"), "role": "assistant",
         "origin": "public_assistant_message", "content": answer,
         "content_sha256": text_hash(answer),
     }.items())
@@ -378,6 +418,7 @@ def program_final_linkage(
         matched = matched and row["final_capture"].get("ok") is True and (
             row["final_capture"].get("source_ref") == source_ref)
     return {"status": yes_no(bool(matched)), "method": "captured_program_delivery",
+            "hidden_source_checked_in_readonly_sqlite": bool(hidden),
             "source_ref": source_ref, "render_text_hash_recorded": bool(
                 renders and "final_text_sha256" in renders[0]),
             "limitation": "Captured public delivery provenance only; effects/support/answer "
@@ -446,7 +487,8 @@ def evaluate_attempt(
         )
     )
     program = row.get("finalization", {}).get("model_generation") is False
-    linkage = (program_final_linkage(row, events, freeze) if program
+    linkage = (program_final_linkage(
+        row, events, freeze, hidden_program_capture(reader, path.parent, row)) if program
                else final_linkage(row.get("final_answer"), events))
     if row.get("status") == "COMPLETED":
         checks.append(check("final_program_delivery_link" if program else "final_actual_http_link",

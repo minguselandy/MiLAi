@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from milai_lab.harness.contextual_artifacts import BudgetExceeded
+from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 
@@ -103,6 +104,8 @@ class FunctionalVLLMClient(VLLMClient):
     """Use unchanged provider accounting, ownership and exact request capacity."""
 
     queue: FunctionalQueue
+    declaration_capacity: HostCapacity | None = None
+    declaration_tool_names: frozenset[str] = frozenset()
 
     def _post(
         self, path: str, request: dict[str, Any], *, capacity_receipt: dict[str, Any] | None = None
@@ -110,5 +113,17 @@ class FunctionalVLLMClient(VLLMClient):
         if path != "chat/completions" or capacity_receipt is None:
             raise ValueError("FUNCTIONAL_GENERATION_CAPACITY_REQUIRED")
         self._check_owner()
+        catalog = request.get("tools", [])
+        if (self.declaration_capacity is not None and request.get("tool_choice") == "required"
+                and len(catalog) == 1
+                and catalog[0].get("function", {}).get("name") in self.declaration_tool_names):
+            # Runner opts in exact public declaration phases. The initial host
+            # check remains conservative; recompute the actual final wire template
+            # before queue reservation, accounting or HTTP. No second model/cap.
+            if self.declaration_capacity.enable_thinking is not False:
+                raise ValueError("FUNCTIONAL_DECLARATION_CAPACITY_MUST_DISABLE_THINKING")
+            request = {**request, "chat_template_kwargs": {"enable_thinking": False}}
+            capacity_receipt = self.declaration_capacity.check(
+                request["messages"], self.config.max_tokens, catalog)
         self.queue.reserve(request, capacity_receipt)
         return super()._post(path, request, capacity_receipt=capacity_receipt)

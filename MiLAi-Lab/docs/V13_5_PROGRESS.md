@@ -650,3 +650,25 @@ r30只开启既有provider的thinking，保留r29源码、required原生v6声明
 普通答复、临时保存与查询、partial续办、实际W1恢复、仅本次限定/撤销、遗忘及后续缺失
 证据问答。它不是独立L4。生产thinking tokenizer下2项机械合同通过，0真实HTTP，尚无
 真实thinking成功证据。若出现协议共享失败则停止，不加额度掩盖截断。
+
+r30通信探针停止：6故事13消息分母，3 COMPLETED、1 FAILED、9 NOT_RUN，4保留尝试；
+11生成47,271 tokens，无新增unknown usage/embedding。普通答复及临时限定保存/查询
+限定通过；partial故事首条的声明再次耗尽8192输出，业务未执行、语义未提交，程序交付
+失败状态。没有使用续跑或增加额度补成功；其余场景未运行。
+
+r31明确区分公开协议阶段：required的当前请求声明与续办操作声明关闭thinking；执行
+Agent与最终响应保持thinking。单一客户端、原连续账本、持久共享message cap及队列均
+不重置；真正HTTP前按该阶段实际template重新验证容量并计入queue。原provider默认
+路径不变。首次机械检查发现prepare在构造host前引用host，已修正，原失败日志保留。
+174项入口/evaluator/queue/旧provider合同通过，生产Qwen tokenizer阶段切换检查通过
+（0真实HTTP），ruff/mypy/依赖边界通过。后续仍先跑同6/13通信探针。
+
+离线evaluator现可从关闭且无待checkpoint WAL的SQLite快照核查隐藏的程序确认：
+同时要求实际assistant事件、精确身份/正文hash、durable capture hash、渲染trace与最终
+消息一致。只读immutable连接不恢复可见性。r29遗忘确认的Source实际持久化后因输入
+遗忘血缘而隐藏，原聚合器只查可见sources导致误判；新增独立复核通过provenance检查，
+封存旧报告不改，故事仍因后续“未找到=从未提供”的语义错误而FAIL。隐藏/可见事件的
+篡改负例及缺回执、WAL拒绝均纳入上述检查。
+
+r29精确7bb5dc9的Fast CI37111431129成功，Full37111431145跳过。r30后恢复累计2,250
+生成、11,961,014 tokens；含暂停前旧轮v13.5为2,406生成、12,735,250 tokens。
