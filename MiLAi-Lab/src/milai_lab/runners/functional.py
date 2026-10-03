@@ -351,6 +351,7 @@ def prepare(
     if settings.get("formation_interface", "content_and_scope_v1") not in {
         "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
         "unified_assertion_v3",
+        "reviewed_assertion_v1",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
         "receipt_business_response_v2", "receipt_business_response_v3",
@@ -782,6 +783,7 @@ def operation_status(
                 "business": {"status": status, "operations": [], "observations": []},
                 "request_completion": "unchecked", "receipt_snapshot_available": False}
     memory: list[dict[str, Any]] = []
+    revision_previews: list[dict[str, Any]] = []
     visibility_effects: list[dict[str, Any]] = []
     expected = {"owner": output["owner"], "thread_id": thread_id,
                 "session": output["session"], "turn_id": output["message_id"]}
@@ -799,6 +801,15 @@ def operation_status(
             except (ValueError, TypeError, KeyError):
                 receipt = None
         receipt = receipt if isinstance(receipt, dict) else {}
+        if (name == "update_memory" and receipt.get("ok") is True
+                and receipt.get("status") == "revision_review_required"
+                and receipt.get("effect") == "none"
+                and receipt.get("semantic_write_performed") is False):
+            revision_previews.append({"tool": name, "receipt_ref": identity["call_id"],
+                "status": "review_required", "effect": "none",
+                "record_id": receipt.get("record_id"),
+                "read_revision": receipt.get("read_revision")})
+            continue
         status = "unknown"
         if receipt.get("ok") is True:
             if (name == "forget_memory" and receipt.get("status") == "visibility_revoked"
@@ -861,7 +872,8 @@ def operation_status(
                        else "completed" if "confirmed" in effects else
                        "no_effect" if effects else "not_executed")
     return {"schema": "functional_operation_status_v1", "raw_event": raw,
-            "semantic_memory": {"status": semantic, "operations": memory},
+            "semantic_memory": {"status": semantic, "operations": memory,
+                                **({"previews": revision_previews} if revision_previews else {})},
             "visibility": {"operations": visibility_effects},
             "business": {"status": business_status, "operations": business,
                          "observations": observations},

@@ -658,6 +658,93 @@ def test_m10_remove_null_absent_and_retract(tmp_path: Path) -> None:
         )
 
 
+def test_revision_preview_preserves_old_fact_and_binds_exact_evidence_across_reopen(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="reviewed_assertion_v1") as memory:
+        old = turn(memory, text="This sample uses ounces; keep commercial labels unchanged.")
+        saved = memory.save(cfg(), "save", "Sample uses ounces; labels unchanged.",
+                            handles(memory, old), {})
+        row = memory.service.read(saved["id"])
+        new = turn(memory, "correction", "Change this sample to grams; labels unchanged.")
+        args = {"read_handle": row["candidate_handle"], "changes": [{
+            "field": "content", "op": "set", "value": "Sample uses grams; labels unchanged.",
+            "evidence_for_new_value": handles(memory, old)}]}
+        wrong = invoke(memory, "update_memory", args, "preview-old", cfg("correction"))
+        assert wrong["status"] == "revision_review_required"
+        assert not wrong["semantic_write_performed"] and wrong["effect"] == "none"
+        assert memory.service.read(saved["id"])["value"] == row["value"]
+        change = wrong["proposed_changes"][0]
+        assert change["same_selection_as_prior_field_support"]
+        assert "ounces" in change["selected_original_fragments"][0]["content"]
+        args["changes"][0]["evidence_for_new_value"] = handles(memory, new)
+        rejected = invoke(memory, "update_memory", {
+            **args, "review_token": wrong["review_token"]}, "bad-confirm", cfg("correction"))
+        assert rejected["status"] == "rejected" and rejected["effect"] == "none"
+        preview = invoke(memory, "update_memory", args, "preview-new", cfg("correction"))
+        assert not preview["proposed_changes"][0]["same_selection_as_prior_field_support"]
+        assert memory.service.history_index(saved["id"])["revisions"] == [1]
+    with opened(tmp_path, formation_interface="reviewed_assertion_v1") as memory:
+        memory.context("s", "correction", SHA)
+        confirmed = {**args, "review_token": preview["review_token"]}
+        receipt = invoke(memory, "update_memory", confirmed, "commit", cfg("correction"))
+        assert receipt["ok"] and receipt["revision"] == 2, receipt
+        repeated = invoke(memory, "update_memory", confirmed, "commit", cfg("correction"))
+        assert repeated["id"] == receipt["id"] and repeated["revision"] == 2
+        current = memory.service.read(saved["id"])["value"]
+        assert current["functional_support"]["content"]["source_refs"] == [new]
+        assert memory.service.read(saved["id"], 1)["value"] == row["value"]
+
+
+def test_revision_preview_allows_supported_archived_reinterpretation_without_current_input(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="reviewed_assertion_v1") as memory:
+        source = turn(memory, text="Work days only: favor short answers; weekends unrestricted.")
+        saved = memory.save(cfg(), "save", "Work days only: short answers preferred.",
+                            handles(memory, source), {})
+        query = turn(memory, "later", "Clarify the stored wording using its original source.")
+        args = {"read_handle": memory.service.read(saved["id"])["candidate_handle"],
+                "changes": [{"field": "content", "op": "set",
+                    "value": "Favor short answers on work days; weekends unrestricted.",
+                    "evidence_for_new_value": handles(memory, source)}]}
+        preview = invoke(memory, "update_memory", args, "preview", cfg("later"))
+        assert preview["proposed_changes"][0]["same_selection_as_prior_field_support"]
+        receipt = invoke(memory, "update_memory", {**args, "review_token": preview["review_token"]},
+                         "commit", cfg("later"))
+        assert receipt["ok"] and receipt["revision"] == 2
+        current = memory.service.read(saved["id"])["value"]
+        assert current["functional_support"]["content"]["source_refs"] == [source]
+        assert query not in current["source_refs"]
+
+
+def test_revision_preview_withdrawal_and_oversize_never_write_before_confirmation(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="reviewed_assertion_v1") as memory:
+        old = turn(memory, text="Only this trial: prefer blue markers.")
+        saved = memory.save(cfg(), "save", "Only this trial: prefer blue markers.",
+                            handles(memory, old), {})
+        cancel = turn(memory, "cancel", "Withdraw the whole trial preference; keep its history.")
+        args = {"read_handle": memory.service.read(saved["id"])["candidate_handle"],
+                "changes": [], "retract": True,
+                "evidence_for_withdrawal": handles(memory, cancel)}
+        memory.material_limit = 20
+        too_big = invoke(memory, "update_memory", args, "oversize", cfg("cancel"))
+        assert too_big["status"] == "rejected"
+        assert memory.service.read(saved["id"])["ok"]
+        memory.material_limit = 8192
+        preview = invoke(memory, "update_memory", args, "preview", cfg("cancel"))
+        assert preview["proposed_changes"][0]["field"] == "record"
+        assert memory.service.read(saved["id"])["value"]["revision"] == 1
+        receipt = invoke(memory, "update_memory", {**args, "review_token": preview["review_token"]},
+                         "commit", cfg("cancel"))
+        assert receipt["ok"] and receipt["revision"] == 2
+        assert memory.service.read(saved["id"])["status"] == "retracted"
+        latest = memory.service.read(saved["id"], 2)["value"]
+        assert latest["removed_field_support"]["record"]["source_refs"] == [cancel]
+
+
 def test_m11_cas_replay_and_atomic_failed_patch(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

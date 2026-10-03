@@ -87,7 +87,7 @@ class FunctionalMemory:
         self.service, self.token_count = service, token_count
         if formation_interface not in {
             "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
-            "unified_assertion_v3"}:
+            "unified_assertion_v3", "reviewed_assertion_v1"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -575,6 +575,8 @@ class FunctionalMemory:
         fragment_handles: list[str] | None = None,
         *,
         retract: bool = False,
+        review_before_commit: bool = False,
+        review_token: str | None = None,
     ) -> dict[str, Any]:
         bound = self._binding(config)
         requested = {
@@ -719,7 +721,76 @@ class FunctionalMemory:
                 **removed,
                 **({"record": fragment_handles} if retract else {}),
             }
+        if review_before_commit and not equal:
+            preview = self._review_revision(bound, proposal, old, review_token)
+            if preview is not None:
+                return preview
         return self._commit(bound["session"], operation_id, proposal)
+
+    def _review_revision(
+        self, bound: dict[str, Any], proposal: dict[str, Any], old: dict[str, Any],
+        review_token: str | None,
+    ) -> dict[str, Any] | None:
+        """Expose the exact proposed diff and selected originals before any fact write.
+
+        The issued token binds a preview, not semantic truth. It never substitutes
+        evidence, grants business permission, or turns an old assertion into a correction.
+        """
+        identity = {"binding": bound, "proposal_sha256": digest(proposal),
+                    "policy": self.policy, "forget_epoch": self.forget_epoch}
+        token = "revision-review-" + digest(identity)
+        if review_token is not None:
+            issued = self.service.store.get(namespace(self.service), token)
+            if review_token != token or issued is None or issued.value != identity:
+                raise FunctionalRejection("V13_5_REVISION_REVIEW_NOT_ISSUED_OR_CHANGED")
+            return None
+        before = {**scope_leaves(old["scope"]),
+                  **{k: old[k] for k in ("content", "kind", "basis")}}
+        after = {**scope_leaves(proposal["scope"]),
+                 **{k: proposal[k] for k in ("content", "kind", "basis")}}
+        old_support = self._source_support(old)
+        rows = []
+        for field in sorted(before.keys() | after.keys()):
+            if field in before and field in after and canonical(before[field]) == canonical(
+                after[field]
+            ):
+                continue
+            selected = (proposal["functional_support"][field] if field in after
+                        else proposal["removed_field_support"][field])
+            rows.append({"field": field, "before": before.get(field),
+                         "after": after.get(field), "removed": field not in after,
+                         "selected_original_fragments": fragment_support(
+                             self.service, selected)["quotes"],
+                         "same_selection_as_prior_field_support":
+                             set(selected) == set(old_support.get(field, []))})
+        if proposal["patch_operation"] == "retract":
+            rows.append({"field": "record", "before": "active", "after": "withdrawn",
+                         "selected_original_fragments": fragment_support(
+                             self.service, proposal["removed_field_support"]["record"])["quotes"]})
+        result = {
+            "ok": True, "status": "revision_review_required", "effect": "none",
+            "semantic_write_performed": False, "formation_status": "pending",
+            "record_id": proposal["id"], "read_revision": old["revision"],
+            "old_content": old["content"], "old_scope": old["scope"],
+            "proposed_changes": rows, "review_token": token,
+            "semantic_support": "unchecked",
+            "next_step": (
+                "No revision has been committed. Compare EACH new value with its selected "
+                "ORIGINAL TEXT below. If it only states the superseded value, select actual "
+                "correction evidence and request a new preview without review_token. "
+                "Keep unchanged limits, exceptions and uncertainty. A matching prior "
+                "selection is a factual warning, not automatic rejection: the same source "
+                "can support a legitimate reinterpretation. If all proposed changes are "
+                "supported as written, call update_memory with exactly the same arguments "
+                "and this review_token to commit. Current input is not automatically evidence."
+            ),
+        }
+        if self.token_count(canonical(result)) > self.material_limit:
+            raise FunctionalRejection("V13_5_REVISION_REVIEW_EXCEEDS_MATERIAL_LIMIT")
+        with self.service._locked():
+            self.service.store.put(namespace(self.service), token, identity, index=False)
+            note_exposure(self.service, bound["source_ref"], proposal["source_refs"])
+        return result
 
     def _read(
         self,
@@ -1181,12 +1252,42 @@ class FunctionalMemory:
                 fragment_handles=evidence_for_withdrawal,
             )
 
+        def reviewed_assertion(
+            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            evidence_for_withdrawal: list[str] | None = None,
+            review_token: str | None = None,
+        ) -> ToolMessage:
+            """Preview a revision's old/new values and selected original evidence, then commit.
+
+            First omit review_token. No changed fact is written by that preview. Inspect
+            EVERY selected original text against its new value; keep unchanged limitations.
+            Correct a wrong selection by sending revised arguments without review_token.
+            Only when the preview is supported, repeat exactly those arguments with the
+            returned review_token. This explicit confirmation commits the revision.
+            Per-field evidence_for_new_value supports the new value, not target identity.
+            Full withdrawal uses retract=true, changes=[] and evidence_for_withdrawal
+            containing actual cancellation. Archived evidence can be valid; current input
+            is not automatically evidence. The program verifies bytes, not entailment.
+            Same values/empty changes yield exact no_change without a redundant preview.
+            """
+            return message("update_memory", tool_call_id, mutation(lambda: self.update(
+                config, tool_call_id, read_handle,
+                [c.model_dump(exclude_unset=True) for c in changes],
+                evidence_for_withdrawal, retract=retract, review_before_commit=True,
+                review_token=review_token,
+            )))
+
         save_tool = (StructuredTool.from_function(
             save_assertion, name="save_memory", args_schema=SavedAssertion)
             if self.formation_interface in {
-                "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3"}
+                "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3",
+                "reviewed_assertion_v1"}
             else StructuredTool.from_function(save_memory))
         update_tool = (StructuredTool.from_function(
+                           reviewed_assertion, name="update_memory")
+                       if self.formation_interface == "reviewed_assertion_v1"
+                       else StructuredTool.from_function(
                            update_assertion_withdrawal, name="update_memory")
                        if self.formation_interface == "unified_assertion_v3"
                        else StructuredTool.from_function(update_assertion, name="update_memory")

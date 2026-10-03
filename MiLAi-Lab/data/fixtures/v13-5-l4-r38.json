@@ -1,0 +1,262 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "l4-g01",
+      "owner": "v13-5-l4-g01",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g01-m1",
+          "session_id": "visit-1",
+          "content": "以后帮我列个人旅行行李清单时，尽量先写随身物品，再写托运行李；实验室器材清单不按这条处理。请记住。"
+        },
+        {
+          "message_id": "l4-g01-m2",
+          "session_id": "visit-2",
+          "content": "个人行李清单的顺序已经存过了吗？只核对原来的约定，不要再保存。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g02",
+      "owner": "v13-5-l4-g02",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g02-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的烘焙练习配方用盎司记录材料重量；包装厂商印的标签不在这个约定内。"
+        },
+        {
+          "message_id": "l4-g02-m2",
+          "session_id": "visit-2",
+          "content": "我原先用什么重量单位？现在把练习配方改用克，厂商标签仍不受影响，更新原来那条。"
+        },
+        {
+          "message_id": "l4-g02-m3",
+          "session_id": "visit-3",
+          "content": "现在练习配方和厂商标签分别按什么规则处理？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g03",
+      "owner": "v13-5-l4-g03",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g03-m1",
+          "session_id": "visit-1",
+          "content": "请记住：仅给本周公开讲座安排座位时，尽量给第一排留空。"
+        },
+        {
+          "message_id": "l4-g03-m2",
+          "session_id": "visit-2",
+          "content": "讲座结束了。请将刚才这整条临时偏好标为已撤销，不再作为当前规则；保留原话和历史供我查阅。"
+        },
+        {
+          "message_id": "l4-g03-m3",
+          "session_id": "visit-3",
+          "content": "目前还保留着现行的第一排留空要求吗？最初那条历史内容是什么？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g04",
+      "owner": "v13-5-l4-g04",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g04-m1",
+          "session_id": "visit-1",
+          "content": "记住，义卖小册子的暂定标题是“风中邮局”。"
+        },
+        {
+          "message_id": "l4-g04-m2",
+          "session_id": "visit-2",
+          "content": "小册子的标题改为“远山来信”，请更新原记录。"
+        },
+        {
+          "message_id": "l4-g04-m3",
+          "session_id": "visit-3",
+          "content": "之前那个标题最后换成哪个了？把最初和当前的都说一下。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g05",
+      "owner": "v13-5-l4-g05",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g05-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我给自己定的阅读练习目标是每周十五页。"
+        },
+        {
+          "message_id": "l4-g05-m2",
+          "session_id": "visit-2",
+          "content": "目标改成每周二十五页，请更新。不过从哪一周开始还没有定。"
+        },
+        {
+          "message_id": "l4-g05-m3",
+          "session_id": "visit-3",
+          "content": "二十五页这个目标从哪一周生效？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g06",
+      "owner": "v13-5-l4-g06",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g06-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的相册导出文件夹命名顺序是“日期_地点”。"
+        },
+        {
+          "message_id": "l4-g06-m2",
+          "session_id": "visit-2",
+          "content": "核对相册文件夹命名，仍然是“日期_地点”；如果原值一样就保持原记录和版本，不要新增。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g07",
+      "owner": "v13-5-l4-g07",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g07-m1",
+          "session_id": "visit-1",
+          "content": "帮我选开车听的音乐时，先考虑现场爵士，尽量避开很长的主持人串词；这不代表排除带歌声的曲目。请记住。"
+        },
+        {
+          "message_id": "l4-g07-m2",
+          "session_id": "visit-2",
+          "content": "我的驾驶音乐偏好是什么？带歌声的是否全部排除？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g08",
+      "owner": "v13-5-l4-g08",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g08-m1",
+          "session_id": "visit-1",
+          "content": "为虚构拼图游戏记下测试短语“纸舟银杏31”，它不是账户凭据。"
+        },
+        {
+          "message_id": "l4-g08-m2",
+          "session_id": "visit-2",
+          "content": "忘掉刚才拼图游戏的测试短语，包括原话及你引用过它的回答。"
+        },
+        {
+          "message_id": "l4-g08-m3",
+          "session_id": "visit-3",
+          "content": "现在还能查到那段拼图测试短语吗？没有可见资料就说明当前缺少资料。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g09",
+      "owner": "v13-5-l4-g09",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-g09-m1",
+          "session_id": "visit-1",
+          "content": "为“折叠指示牌-北馆入口”预订4件，送往“物资收发台”，用“毛毡套”包装并制作标签；请保存实际办理结果。"
+        },
+        {
+          "message_id": "l4-g09-m2",
+          "session_id": "visit-2",
+          "content": "先实时查折叠指示牌-北馆入口，只把没完成的标签补好，已预订的不要再订。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g10",
+      "owner": "v13-5-l4-g10",
+      "workflow": "document",
+      "initial_world": {
+        "publication_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-g10-m1",
+          "session_id": "visit-1",
+          "content": "建立文稿“楼梯清扫提示”，正文“闭馆后用干拖把清扫楼梯，禁止堆放工具。”，审批并发布到本地沙盒受众“楼层协作组”。请保存每个步骤的真实结果。"
+        },
+        {
+          "message_id": "l4-g10-m2",
+          "session_id": "visit-2",
+          "content": "先查询楼梯清扫提示，只继续未完成的发布；已办好的草稿和审批不重做，受众不变。"
+        },
+        {
+          "message_id": "l4-g10-m3",
+          "session_id": "visit-3",
+          "content": "现在只查询楼梯清扫提示，内容和审批发布状态与我上次办理后相比有什么变化？不要重新审批或发布后来修改的版本。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g11",
+      "owner": "v13-5-l4-g11",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": true
+      },
+      "messages": [
+        {
+          "message_id": "l4-g11-m1",
+          "session_id": "visit-1",
+          "content": "为“磁吸夹-西侧布告栏”预订5件，送到“值班台”，包装用“棉布袋”，做好标签。"
+        },
+        {
+          "message_id": "l4-g11-m2",
+          "session_id": "visit-2",
+          "content": "刚才答复中断了。先查询磁吸夹-西侧布告栏实际办到哪里；查不到就先别再次预订，只告诉我查到的状态。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-g12",
+      "owner": "v13-5-l4-g12",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-g12-m1",
+          "session_id": "visit-1",
+          "content": "Remember this for my measurement notebook: keep raw readings and calibrated readings in separate columns; the final presentation chart is outside this rule."
+        },
+        {
+          "message_id": "l4-g12-m2",
+          "session_id": "visit-2",
+          "content": "测量笔记那条补充：空白对照读数也单列，原始读数和校准读数仍分开；最终展示图仍不适用。更新已有记录。"
+        },
+        {
+          "message_id": "l4-g12-m3",
+          "session_id": "visit-3",
+          "content": "Which columns should the notebook distinguish now, and does that also restrict the presentation chart?"
+        }
+      ]
+    }
+  ]
+}

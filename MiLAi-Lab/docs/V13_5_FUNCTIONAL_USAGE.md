@@ -1,14 +1,14 @@
 # v13.5 functional profile
 
-**Development is active; no stable configuration is recommended.** Same-version r37
-completed full L1 (24/48, 23 scoped PASS/1 FAIL), L2 (12/26, 11 scoped PASS/1 FAIL),
-L3 formation (57, 44 scoped PASS/13 FAIL), L3 reading (30, 24 scoped PASS/6 FAIL),
-and newly authored L4 (12/31, 8 scoped PASS/4 FAIL). Original L1 rubric remains
-24 PASS. L4 exposed a core withdrawal-evidence failure: the target was withdrawn,
-but the selected cancellation support was its old affirmation. Other failures include
-qualification loss, unsupported time, unavailable tool proposal and exhausted reading.
-These results remain separate from r25/r28 and do not establish integrated acceptance.
-R38 is the mechanical candidate addressing withdrawal selection. Product remains NO_GO.
+**Development is active; no stable configuration is recommended.** R38 L1 completed
+24 stories/48 messages (original rubric24 PASS; current23 scoped PASS/1 unsupported-date
+FAIL), and L2 completed12/26 (11 scoped PASS/1 unsupported-business-start-time FAIL;
+22 COMPLETED/four planned actual W1 UNKNOWN). R38 new L4 stopped after a core replacement
+support failure: grams was stored with only old ounces evidence. Full-record withdrawal
+itself passed with actual cancellation support. L4 retains15 COMPLETED/16 NOT_RUN and
+2 scoped PASS/3 FAIL/7 incomplete or unrun stories. R37 remains the latest complete L3:
+formation44/57 and reading24/30; those are not R38 results. Product remains NO_GO.
+R39 is the new preview-before-commit mechanical candidate; real model validation is pending.
 See [current progress](V13_5_PROGRESS.md) and [requirements](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md).
 The [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
@@ -19,7 +19,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r38.json` is the current development candidate. Required
+`configs/v13-5-functional-r39.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -51,6 +51,12 @@ The candidate preserves these contracts; actual model choices still require eval
   prove semantic support. For a full withdrawal, `retract=true` and `changes=[]` use
   `evidence_for_withdrawal` containing actual cancellation evidence, separate from the old
   target and its affirmation. Current input is not automatically evidence.
+  The R39 `reviewed_assertion_v1` interface first returns a no-write preview pairing
+  old/new values with selected original text. Inspect it, change any wrong selection by
+  requesting another preview, then repeat identical arguments with its `review_token`.
+  The token binds that preview and visibility epoch, not semantic correctness. Preview
+  receipts are listed separately in `operation_status.semantic_memory.previews`; they
+  are not successful writes. Preview material obeys the existing material limit.
   Unchanged fields keep their values and support. Repeating the
   exact same-message save returns `existing_record`/`no_change`, not a second write.
 - One actual write receipt is necessary for a requested save confirmation; it cannot prove
@@ -91,9 +97,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r38. Do not combine their successful cases into a new cohort score.
+results, not results for r39. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r38, development only)
+## Candidate example (r39, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -102,14 +108,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r38 \
-  --config configs/v13-5-functional-r38.json
+  --root artifacts/v13-5/personal-r39 \
+  --config configs/v13-5-functional-r39.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r38 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r39 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r38 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r39 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -227,7 +233,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r38
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r39
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

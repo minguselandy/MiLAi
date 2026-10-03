@@ -5117,6 +5117,486 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r38",
+      "layer": "communication",
+      "candidate_commit": "f01bdb75caa56dc2563d59efdafee24e6e37ef4e",
+      "state": "COMPLETE_COMMUNICATION_WITH_TWO_ORDINARY_SEMANTIC_FAILURES",
+      "planned_cases": 7,
+      "planned_messages": 16,
+      "config": "configs/v13-5-functional-r38.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13106,
+        "generation": {
+          "charged_tokens": 45873232,
+          "known_tokens": 45842845,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r38/input-freeze.json": "f0003a9e2336463675ae67ffa076f81cca4937eaf1ab309ade9de7511710e807",
+        "configs/v13-5-functional-r38.json": "884a1a03b69726314945d2bf4c72bb1ad9f967b00b9ff04a21128309bc1884bb",
+        "artifacts/v13-5/communication-r38/review.json": "de2b4fbfe225392566240fdefd4e1ba3b33a2e92f7453f0e54ea2b7c5754f88c",
+        "artifacts/v13-5/communication-r38/seal.json": "1066076d4ba7005f2e06e2ca77f79068018f15847f97086c9bfb628e2dffb59e",
+        "artifacts/v13-5/communication-r38-manual-grades.json": "62fe9134ee252712d9061c1574acb6326951788b630275676d8d5edf382ce23f",
+        "artifacts/v13-5/communication-r38-review-notes.json": "ce06f44ec8a01dee4b3c17f2df861863a4a70ef8676c326cd8a0ee907df36c37",
+        "artifacts/v13-5/communication-r38-all-review.jsonl": "21c4a72d3ab99aa239e42e56a65441fe4bf1cecc98bba9c7ef8584cae61b3ff8",
+        "artifacts/v13-5/communication-r38-evaluator/summary.json": "0b44a98ae68e04fb866a83f196dd50ea9a0a76740fa5eea04e0871dfe27b44a1"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 5,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 16,
+      "cost_delta": {
+        "generation_requests": 49,
+        "generation.known_tokens": 234614,
+        "generation.charged_tokens": 234614,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 16,
+      "independent_sqlite": {
+        "records": 5,
+        "exact_quote_identity_checks": 22,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-f03": {
+          "status": "PASS_SCOPED",
+          "reason": "Same exposed natural request now uses same-ID content revision to no color restriction, selecting both original limits and actual cancellation. Original history/basis/kind retained; readonly followup read_memory accurate. This legally satisfies original update-or-retract task but did NOT exercise retract=true or evidence_for_withdrawal in actual model output; do not claim that new parameter is behaviorally validated or uniquely causal."
+        },
+        "communication-answer": {
+          "status": "PASS_SCOPED",
+          "reason": "Usable ordinary triangle answer correct; no semantic/business write."
+        },
+        "communication-memory": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual one save and readonly followup preserve this-exhibition-only and best-effort short sentences; correct stored source and no extra version."
+        },
+        "communication-partial": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual reservation partial, one supported semantic result with no invented event time. Next live query then label-only completion; world exactly one reservation and one label completion, program truthful receipt answer."
+        },
+        "communication-recovery": {
+          "status": "PASS_SCOPED",
+          "reason": "Original actual W1 after-native UNKNOWN preserved; next process only live get_reservation discovers already-completed reservation+label, no replay or fabricated semantic save. Requested original save was not reached before interruption and remains separate."
+        },
+        "l4-n03": {
+          "status": "FAIL",
+          "reason": "Initial save and answer drop this-occurrence-only qualification, generalizing birdwatching activity. Later same-ID content revision correctly selects actual cancellation and retains other-activity ten-minute rule/history; query accurate on main question but cannot repair initial scope failure. Ordinary semantic FAIL, not source identity corruption.",
+          "earliest_proven_breakpoint": "initial proposal occurrence scope loss"
+        },
+        "l4-n08": {
+          "status": "FAIL",
+          "reason": "Actual one save and one successful visibility forget cover original and exposed assistant source; no retained phrase in any followup trace and all terminals present. Last actual request sees no topic-specific forget receipt or original request, only absence, but final says therefore regarded as forgotten. Unsupported absence-to-cause inference, no redisclosure/physical erasure claim or false-save.",
+          "earliest_proven_breakpoint": "final absence inference"
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
+    },
+    {
+      "id": "l1-r38",
+      "layer": "L1",
+      "candidate_commit": "f01bdb75caa56dc2563d59efdafee24e6e37ef4e",
+      "state": "COMPLETE_L1_WITH_UNSUPPORTED_REQUEST_DATE",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "config": "configs/v13-5-functional-r38.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13155,
+        "generation": {
+          "charged_tokens": 46107846,
+          "known_tokens": 46077459,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r38/input-freeze.json": "6f2f24abae75b6fc98b920f755bcffcebae902c016e8510694170b2dbe672d12",
+        "configs/v13-5-functional-r38.json": "884a1a03b69726314945d2bf4c72bb1ad9f967b00b9ff04a21128309bc1884bb",
+        "artifacts/v13-5/l1-r38/review.json": "2523be467ff6abb549f9cb831ab15742cb02153b4e7b2c2450e565f965df5516",
+        "artifacts/v13-5/l1-r38/seal.json": "ebb5bb103e5a9acfbf4b0ff6f021ba1038ec2bfca7b1cbf36ed1697101e2bc44",
+        "artifacts/v13-5/l1-r38-manual-grades.json": "fe7c2e5d3b0a50be3657bf62f12420a0ce4ed4833a96e2809a6d3dbabc4973bd",
+        "artifacts/v13-5/l1-r38-review-notes.json": "e907a714ae7118a4b27ad8971d3bd2b19632b2c89f43ac9c4893523b2ece82c6",
+        "artifacts/v13-5/l1-r38-all-review.jsonl": "c99bcaf7bafd3bd05b4ca57a63cfa59df8b7ad7ee5d95de2308b115d703ae5be",
+        "artifacts/v13-5/l1-r38-evaluator/summary.json": "0a46568cde6f0a3cecc84443be4e902c1bc51e58c3b8f8c4a7ab4cbb68d056c1"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 23,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempts": 48,
+      "cost_delta": {
+        "generation_requests": 147,
+        "generation.known_tokens": 703622,
+        "generation.charged_tokens": 703622,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 48,
+      "independent_sqlite": {
+        "records": 24,
+        "exact_quote_identity_checks": 84,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "save-1": {
+          "status": "PASS_SCOPED",
+          "reason": "Short-answer preference actually saved once on original request source; truthful final confirmation, one revision, exact quote identity/current=latest verified. No business effects."
+        },
+        "save-2": {
+          "status": "PASS_SCOPED",
+          "reason": "Caffeine-free tea preference actually saved once on original request source; truthful final confirmation, one revision, exact quote identity/current=latest verified. No business effects."
+        },
+        "save-3": {
+          "status": "PASS_SCOPED",
+          "reason": "Vegetarian statement and meal-choice applicability actually saved once on original request source; truthful final confirmation, one revision, exact quote identity/current=latest verified. No business effects."
+        },
+        "save-4": {
+          "status": "PASS_SCOPED",
+          "reason": "Large reading font preference actually saved once on original request source; truthful final confirmation, one revision, exact quote identity/current=latest verified. No business effects."
+        },
+        "recall-1": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual one supported initial save and accurate readonly recall, one ID/revision unchanged. Commute/frequency/default scope retained in saved assertion; no raw-search-as-save claim. Exact quote identity/current=history verified."
+        },
+        "recall-2": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual one supported initial save and accurate readonly recall, one ID/revision unchanged. Commute/frequency/default scope retained in saved assertion; no raw-search-as-save claim. Exact quote identity/current=history verified."
+        },
+        "recall-3": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual one supported initial save and accurate readonly recall, one ID/revision unchanged. Commute/frequency/default scope retained in saved assertion; no raw-search-as-save claim. Exact quote identity/current=history verified."
+        },
+        "recall-4": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual one supported initial save; followup answers original preference from delivered material, remains readonly and revision1. Exact quoted source/current=history verified. Additional email organization details in recall-4 are explicitly suggestions, not invented saved preferences."
+        },
+        "update-1": {
+          "status": "PASS_SCOPED",
+          "reason": "Original ID revised exactly once to requested current value; actual correction selected for content, old basis/kind support and rev1 body retained. Current/history final accurate and query does not mutate. Old/current evidence in prefetch supports final without additional read."
+        },
+        "update-2": {
+          "status": "PASS_SCOPED",
+          "reason": "Original ID revised exactly once to requested current value; actual correction selected for content, old basis/kind support and rev1 body retained. Current/history final accurate and query does not mutate. Actual read_memory(history=true) delivered history."
+        },
+        "update-3": {
+          "status": "PASS_SCOPED",
+          "reason": "Original ID revised exactly once to requested current value; actual correction selected for content, old basis/kind support and rev1 body retained. Current/history final accurate and query does not mutate. Actual read_memory(history=true) delivered history."
+        },
+        "update-4": {
+          "status": "PASS_SCOPED",
+          "reason": "Original ID revised exactly once to requested current value; actual correction selected for content, old basis/kind support and rev1 body retained. Current/history final accurate and query does not mutate. Actual read_memory(history=true) delivered history."
+        },
+        "scope-1": {
+          "status": "PASS_SCOPED",
+          "reason": "This-week team-lunch vegetarian requirement only; personal absence of fixed vegetarian preference retained in supporting original and accurately answered, no long-term personal inference or query write. One committed rev1 with literal quote/current=history checks passed."
+        },
+        "scope-2": {
+          "status": "PASS_SCOPED",
+          "reason": "Only this demonstration and best-effort short answers retained; general detailed preference is present in original/support and accurately distinguished in final. User requested only special semantic save, so one special record is correct. One committed rev1 with literal quote/current=history checks passed."
+        },
+        "scope-3": {
+          "status": "PASS_SCOPED",
+          "reason": "Exact project nightly800 limit and explicit non-personal exception retained. Personal long-term amount unknown, final does not invent it, query readonly. One committed rev1 with literal quote/current=history checks passed."
+        },
+        "scope-4": {
+          "status": "PASS_SCOPED",
+          "reason": "Project-relative Friday with explicitly absent calendar anchor retained; final cannot determine date, no capture-date substitution or query write. One committed rev1 with literal quote/current=history checks passed."
+        },
+        "object-continue-1": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual same-object reserve/label succeeds once, semantic result fully supported by selected native receipt; all parameters and identity exact, no invented time. New process live get_reservation only, no repeat and no new semantic write; historical observation/current receipt separated."
+        },
+        "object-continue-2": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual same-object reserve/label succeeds once, semantic result fully supported by selected native receipt; all parameters and identity exact, no invented time. New process live get_reservation only, no repeat and no new semantic write; historical observation/current receipt separated."
+        },
+        "object-continue-3": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual same-object reserve/label succeeds once, semantic result fully supported by selected native receipt; all parameters and identity exact, no invented time. New process live get_reservation only, no repeat and no new semantic write; historical observation/current receipt separated."
+        },
+        "object-continue-4": {
+          "status": "FAIL",
+          "reason": "Actual reservation/label and later live get_reservation are correct with one effect, no duplicate or false-save. Saved summary adds 用户于2026年10月3日请求, but its only selected content support is the native reservation receipt with no request/event date; date appears only in external capture metadata, not the selected source body. Actual capture date is not directly supported request-occurrence evidence. Ordinary unsupported semantic time claim, exact quote identity and truthful program business answer do not cure it.",
+          "earliest_proven_breakpoint": "proposal adds request-occurrence date unsupported by selected receipt",
+          "critical_block": false
+        },
+        "restart-1": {
+          "status": "PASS_SCOPED",
+          "reason": "One actual source-supported save; separate process reads correct earlier preference, no new fact write or revision. Exact quotes/current=latest history and truthful existing-record language checked."
+        },
+        "restart-2": {
+          "status": "PASS_SCOPED",
+          "reason": "One actual source-supported save; separate process reads correct earlier preference, no new fact write or revision. Exact quotes/current=latest history and truthful existing-record language checked."
+        },
+        "restart-3": {
+          "status": "PASS_SCOPED",
+          "reason": "One actual source-supported save; separate process reads correct earlier preference, no new fact write or revision. Exact quotes/current=latest history and truthful existing-record language checked."
+        },
+        "restart-4": {
+          "status": "PASS_SCOPED",
+          "reason": "One actual source-supported save; separate process reads correct earlier preference, no new fact write or revision. Exact quotes/current=latest history and truthful existing-record language checked."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
+    },
+    {
+      "id": "l2-r38",
+      "layer": "L2",
+      "candidate_commit": "f01bdb75caa56dc2563d59efdafee24e6e37ef4e",
+      "state": "COMPLETE_L2_WITH_UNSUPPORTED_BUSINESS_START_TIME",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r38.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13302,
+        "generation": {
+          "charged_tokens": 46811468,
+          "known_tokens": 46781081,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r38/input-freeze.json": "e853751b4e4e810c92559589091861bc53670f7bffde2aab6e29928a2b7ba499",
+        "configs/v13-5-functional-r38.json": "884a1a03b69726314945d2bf4c72bb1ad9f967b00b9ff04a21128309bc1884bb",
+        "artifacts/v13-5/l2-r38/review.json": "7aac7e69a017b9d9e729a25574b6336304c5158d51b5b98a206c193a42f6b377",
+        "artifacts/v13-5/l2-r38/seal.json": "671824cbf2bd2c3379c04e5283dd83b9462498d588fb870513a3de810f37be13",
+        "artifacts/v13-5/l2-r38-manual-grades.json": "0aac8c52fea4caf7069a969d56837468ba9ca2134487d01b9cb2f85c85a4b6f0",
+        "artifacts/v13-5/l2-r38-review-notes.json": "8ff460da1d3986da43cb854afdf632a9d695419de1468d4b361cb78867e3dd48",
+        "artifacts/v13-5/l2-r38-all-review.jsonl": "e35084760428386d7fea1ed2f87aae68bbf9605e3ef1630b5cc39ceaf5dda414",
+        "artifacts/v13-5/l2-r38-evaluator/summary.json": "0a6d07906fb1a0e1ced0508f08dc4bd0f526f5418e6f6b497caa49d8943e9435"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 11,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "UNKNOWN": 4
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 108,
+        "generation.known_tokens": 766647,
+        "generation.charged_tokens": 766647,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 26,
+      "independent_sqlite": {
+        "records": 8,
+        "exact_quote_identity_checks": 51,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l2-d02": {
+          "status": "PASS_SCOPED",
+          "reason": "Same-exposed prior protocol failure now completes both messages without resume: draft/approve/failed-publish executed once each and one enumerated semantic summary preserves every stage with three actual native receipt supports, no invented time. Next process live query then publish only approved unchanged v1/exact audience; no unknown-tool proposal, repeated draft/approval or semantic rewrite. Program response usable and truthful; historical observation stays historical."
+        },
+        "l2-r01": {
+          "status": "PASS_SCOPED",
+          "reason": "One correct reservation+label and supported actual result save. Next session live query only, exact object/quantity/config and no repeated effect; historical observation unchanged."
+        },
+        "l2-r02": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual reservation succeeded/label failed, supported partial summary. Restored-service followup live query then complete_label only; one reservation/one label completion, accurate layered receipt response, no semantic rewrite."
+        },
+        "l2-r03": {
+          "status": "PASS_SCOPED",
+          "reason": "Partial reservation followed by one explicitly authorized failed label attempt known-no-effect. Last readonly message actually queries live state and reports earlier failed attempt/current label-not-created. No loop/re-reservation; semantic initial observation preserved and supported."
+        },
+        "l2-r04": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual after-native W1 UNKNOWN with one completed reservation/label; next process search then live query only, original UNKNOWN remains unknown, no replay or false semantic completion."
+        },
+        "l2-r05": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual before-native W1 UNKNOWN with zero original effect; next process live get_reservation reports not found, then one currently authorized reserve/label with exact parameters. Original UNKNOWN not retrospectively relabeled; one native reservation in final world, no blind replay."
+        },
+        "l2-r06": {
+          "status": "PASS_SCOPED",
+          "reason": "Native partial result supported in one historical semantic record. Private external label completion occurs before followup, which actually queries and distinguishes old failed label from current completed label. Agent performs no mutation; second world attempt is declared external event, not Agent duplicate."
+        },
+        "l2-d01": {
+          "status": "PASS_SCOPED",
+          "reason": "Created/approved/published exact v1 and requested sandbox audience once, then supported semantic result. Selected native receipt includes actual created_at/approved_at/published_at on 2026-10-03, so the saved date is supported (unlike reservation capture metadata). Followup performs two harmless live reads, no repeated mutation or history rewrite."
+        },
+        "l2-d03": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial draft and approval only, supported observation including actual created_at 12:44 from selected receipt. Followup live query then one explicitly authorized failed publication with known no new effect; final query/read only, no retry. Native versions/approval/publication history and current state agree."
+        },
+        "l2-d04": {
+          "status": "PASS_SCOPED",
+          "reason": "After-native publication interruption yields actual UNKNOWN while one publication persists. Next process live queries current version/approval/publication and original UNKNOWN history; no repeated publication, no fabricated semantic commit. Exact audience/digest preserved."
+        },
+        "l2-d05": {
+          "status": "PASS_SCOPED",
+          "reason": "Before-native publication interruption yields actual UNKNOWN and no publication. Next process live query discovers approved/unpublished v1 then one authorized publication exact digest/audience. Original UNKNOWN remains unknown; draft/approval not repeated."
+        },
+        "l2-d06": {
+          "status": "FAIL",
+          "reason": "Correct draft/approval/publication and later live query of externally edited v2 with invalidated approval/unpublished current state, no unauthorized mutation. However saved content begins 2026-10-03T12:45:48.553525+00:00 as business execution time, taken from capture metadata: selected initial not_found quote has no event time. Later 12:45:50 creation, 12:45:52 approval and 12:45:55 publication are supported by native receipt. Extra start-time assertion fails direct support; correct effects do not erase this ordinary semantic failure.",
+          "breakpoint": "formation_unsupported_business_start_time_from_capture_metadata"
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
+    },
+    {
+      "id": "l4-r38",
+      "layer": "L4",
+      "candidate_commit": "f01bdb75caa56dc2563d59efdafee24e6e37ef4e",
+      "state": "STOPPED_CORE_CORRECTION_SUPPORT_FAILURE",
+      "planned_cases": 12,
+      "planned_messages": 31,
+      "config": "configs/v13-5-functional-r38.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13410,
+        "generation": {
+          "charged_tokens": 47578115,
+          "known_tokens": 47547728,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r38/input-freeze.json": "b7f39052f42fe0988a869f9cbd9ecc20ed661a68e72f2a5a254f554e21b1acaa",
+        "configs/v13-5-functional-r38.json": "884a1a03b69726314945d2bf4c72bb1ad9f967b00b9ff04a21128309bc1884bb",
+        "artifacts/v13-5/l4-r38/review.json": "59b7c039f37ddae6a92a60eaabe05dc52363105a75b8a3bbef66a07db6a7060b",
+        "artifacts/v13-5/l4-r38/seal.json": "2637358fa12d0117a82375303e8d5564d730eed40801e02d4d5ffd63e58313bf",
+        "artifacts/v13-5/l4-r38-manual-grades.json": "6d8e82d17dc51612b02c7ccc745715582233a27f2caceb938100bd2204d6e562",
+        "artifacts/v13-5/l4-r38-review-notes.json": "1e709222d3c20c1a82450b763a02d2f40acf87bdf6aab79e458793539470453e",
+        "artifacts/v13-5/l4-r38-all-review.jsonl": "68b7641172b314f5c7b2c90836d0e7b2f8d625abe1df3e54bec819bd86305eb8",
+        "artifacts/v13-5/l4-r38-evaluator/summary.json": "47716e66589b8411bb892fdc1e6f06596f8142c4aa12982471d7b7d5f39c9cc6"
+      },
+      "semantic_counts": {
+        "FAIL": 3,
+        "PASS_SCOPED": 2,
+        "NOT_RUN": 7
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "NOT_RUN": 16
+      },
+      "retained_attempts": 15,
+      "cost_delta": {
+        "generation_requests": 42,
+        "generation.known_tokens": 207353,
+        "generation.charged_tokens": 207353,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 15,
+      "independent_sqlite": {
+        "records": 6,
+        "exact_quote_identity_checks": 31,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-g03": {
+          "status": "PASS_SCOPED",
+          "reason": "Actual update_memory(retract=true, changes=[]) uses evidence_for_withdrawal selecting the explicit cancellation, stored in removed_field_support.record. Original ID rev1→rev2, old content and support/history retained, retracted current not delivered as active fact. First save retains this-week/best-effort. Last readonly answer correctly distinguishes withdrawn current and exact original user text; lecture-ended statement is explicitly in actual cancellation input. No replacement negative preference or invented new write."
+        },
+        "l4-g01": {
+          "status": "FAIL",
+          "breakpoint": "formation_and_answer_qualification_loss",
+          "reason": "Actual save/read-only existing confirmation truthful, exclusion retained, but best-effort 尽量 omitted from saved ordering and final rule."
+        },
+        "l4-g02": {
+          "status": "FAIL",
+          "breakpoint": "core_content_revision_selected_only_old_affirmation",
+          "reason": "Same ID rev2 and grams new value persisted; evidence_for_new_value selects only the original ounces source, current grams correction occurs only as trigger. Exact quote identity holds but new value is unsupported. Core support failure; subsequent correct answers do not repair stored evidence."
+        },
+        "l4-g04": {
+          "status": "FAIL",
+          "breakpoint": "revision_and_answer_loss_of_tentative_qualification",
+          "reason": "Same ID and actual changed title source/history retained, but unchanged 暂定 qualifier dropped and last answer calls current title 最终 without supporting finalization."
+        },
+        "l4-g05": {
+          "status": "PASS_SCOPED",
+          "reason": "Original ID rev2 fifteen→twenty-five pages selects actual correction including unknown start week; final query states unknown and does not mutate. Old history and unmodified kind/basis support retained."
+        },
+        "l4-g06": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g07": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g08": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g09": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g10": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g11": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        },
+        "l4-g12": {
+          "status": "NOT_RUN",
+          "reason": "Shared correction-support gate stopped remaining queue after g02 failure was identified. First save completed for g06; its second message and all g07–g12 messages were not run. No full-story pass inferred."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -5132,6 +5612,20 @@
       "path": "artifacts/v13-5/r36-admission-policy.json",
       "sha256": "a09ed159aeec3b2eca98fe9433f6596ee1d7e96f11d5544e33ab96de73d25e71",
       "timing": "before any r36 actual output",
+      "semantic_acceptance_unchanged": true
+    },
+    {
+      "candidate": "r38",
+      "path": "artifacts/v13-5/r38-regression-scope.json",
+      "sha256": "be52f6a75083a0d16fe27097a261abb9eb4f61a3755af396dcef71c6dd4848cb",
+      "timing": "After mechanical checks and before any r38 L1/L2/L4 output; communication in progress.",
+      "semantic_acceptance_unchanged": true
+    },
+    {
+      "candidate": "r39",
+      "path": "artifacts/v13-5/r39-regression-scope.json",
+      "sha256": "31dcd2177dcc4ec3d167604d18742e8df5a0e014eaf9aa6439a91cf784ed6024",
+      "timing": "Before any r39 actual model HTTP",
       "semantic_acceptance_unchanged": true
     }
   ],
@@ -5162,6 +5656,29 @@
         "artifacts/v13-5/r38-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "artifacts/v13-5/r38-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r38-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r38-ci.json",
+        "sha256": "a87e6240cdcdf354d92123dca8a8686da066d6a410981e1dfb69a29e1d113b1f",
+        "fast": "SUCCESS37122520644",
+        "full": "SKIPPED37122520653"
+      }
+    },
+    {
+      "candidate": "r39",
+      "scope": "377 affected/default regression checks,6 actual pinned Qwen tokenizer/template variants,4 installed SDK lifecycle checks,ruff/mypy2modules/both boundaries PASS.0 real model HTTP. Original first failures retained: test missed trusted public-turn rebind on reopen; native integration exposed preview receipts classified unknown, now separately reported without pretending write success. Preview is a confirmation contract, not entailment validation.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r39-regression.log": "fcadefc17e97ee4be8fd000f69df25a56c6e69b29879b79b32bde6032b4ddc9b",
+        "artifacts/v13-5/r39-preview-first.log": "c583f9b1c43ac7bfde8c2463a8ec6d8b4f922d69131e2692d3e9905c0590c212",
+        "artifacts/v13-5/r39-preview-reopen-detail.log": "1d1fdb76c4e157e046ca25c6f5a3f71c7bfb2ff8221a57883775bbdb7b1fae01",
+        "artifacts/v13-5/r39-targeted.log": "edb1db88440774f0f02d91ffd9d89ade06b8f2d42aa3059fd4ac5ca0de5f6d27",
+        "artifacts/v13-5/r39-targeted-corrected.log": "917b9f7a48937a75def7889f07ed798311d316aea18705f16e425307b62d15d1",
+        "artifacts/v13-5/r39-production-contracts.json": "3513196d32fd7fc42c06ab38abd3b9f150b81a65582a68aa59c33dc7f04d07e0",
+        "artifacts/v13-5/r39-sdk-lifecycle.log": "49dc4a247c397fd93c42676cf9f1e5d8fddd159f714aa001e8c5e31cb985cc80",
+        "artifacts/v13-5/r39-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r39-mypy-final.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r39-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r39-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
       }
     }
   ]

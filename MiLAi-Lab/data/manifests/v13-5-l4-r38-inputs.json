@@ -1,0 +1,18 @@
+{
+  "schema": "v13_5_l4_authorship_freeze_v1",
+  "method_commit": "f01bdb75caa56dc2563d59efdafee24e6e37ef4e",
+  "configuration": "configs/v13-5-functional-r38.json",
+  "author": "Root same-family development operator",
+  "independent_review": false,
+  "status": "INPUTS_FROZEN_BEFORE_ANY_NEW_L4_OUTPUT",
+  "stories": 12,
+  "messages": 31,
+  "exposure": "New stories authored after immutable r38 method freeze and full communication review; no new L4 outputs exist. Root is method owner/author/reviewer; task templates and prior development failures inform coverage, not an independent benchmark. R37 L4 is exposed historical evidence, not relabeled fresh. Ordinary semantic limits remain open; explicit full-record withdrawal still needs actual model validation.",
+  "files": {
+    "data/fixtures/v13-5-l4-r38.json": "2001982202f433e8481abaf66e7551ef588c520876472c27f8c3339c725aae7f",
+    "data/diagnostics/v13-5-l4-r38-rubric.json": "94347cc9c7416f14e7382cc9765ddcb6c0497369651121efbd9922782cca3e5d",
+    "data/diagnostics/v13-5-l4-r38-controls.json": "69656bc52f55e08877d279953483f9167d7e7978bfe094e763735472df0a4c00",
+    "configs/v13-5-functional-r38.json": "884a1a03b69726314945d2bf4c72bb1ad9f967b00b9ff04a21128309bc1884bb"
+  },
+  "publication_scope": "Synthetic authored fixtures and private evaluator conditions only; no real private text/model outputs/databases/logs."
+}

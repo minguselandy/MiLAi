@@ -51,6 +51,7 @@ def prepared(
     actual_capabilities: bool = False,
     replacement_evidence: bool = False,
     withdrawal_evidence: bool = False,
+    reviewed_evidence: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -113,7 +114,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "unified_assertion_v3" if withdrawal_evidence else
+        "formation_interface": "reviewed_assertion_v1" if reviewed_evidence else
+        "unified_assertion_v3" if withdrawal_evidence else
         "unified_assertion_v2" if replacement_evidence else
         "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
@@ -2529,6 +2531,83 @@ def test_withdrawal_evidence_catalog_retains_original_and_cancellation_sources(
     assert version['retracted'] and version['functional_support'] == original['functional_support']
     assert version['removed_field_support']['record']['source_refs'] == [
         withdrawn['capture']['source_ref']]
+
+
+@pytest.mark.parametrize("withdraw", [False, True])
+def test_revision_review_tool_shows_wrong_source_before_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, reviewed_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+    proposal: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        current = [u['fragment_handle'] for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=current)
+        if ordinal == 2:
+            assert actual_tool_receipt(wire)['status'] == 'committed'
+            return {'role': 'assistant', 'content': 'Saved the sample preference.'}
+        if ordinal == 3:
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            old = next(u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            proposal.update(read_handle=record['read_handle'], changes=[] if withdraw else [{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': [old]}])
+            if withdraw:
+                proposal.update(retract=True, evidence_for_withdrawal=[old])
+            return native_call('update_memory', 'wrong-preview', **proposal)
+        if ordinal == 4:
+            preview = actual_tool_receipt(wire)
+            assert preview['status'] == 'revision_review_required'
+            assert 'unit A' in preview['proposed_changes'][0]['selected_original_fragments'][0][
+                'content']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            if withdraw:
+                proposal['evidence_for_withdrawal'] = current
+            else:
+                proposal['changes'][0]['evidence_for_new_value'] = current
+            return native_call('update_memory', 'corrected-preview', **proposal)
+        if ordinal == 5:
+            preview = actual_tool_receipt(wire)
+            assert preview['status'] == 'revision_review_required'
+            text = preview['proposed_changes'][0]['selected_original_fragments'][0]['content']
+            assert ('Withdraw' if withdraw else 'unit B') in text
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            return native_call('update_memory', 'commit', **proposal,
+                               review_token=preview['review_token'])
+        assert ordinal == 6 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Committed the requested change.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    updated = functional.message(root, **common, message_id='correction', content=(
+        'Withdraw this sample preference; keep its history.' if withdraw else
+        'Change this same sample to unit B, with all limits unchanged.'))
+    assert saved['status'] == updated['status'] == 'COMPLETED', updated.get('error')
+    assert len(wires) == 6
+    assert updated['operation_status']['semantic_memory']['status'] == 'committed'
+    assert len(updated['operation_status']['semantic_memory']['operations']) == 1
+    previews = updated['operation_status']['semantic_memory']['previews']
+    assert len(previews) == 2 and all(p['effect'] == 'none' for p in previews)
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        value = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(value['history']) == 2 and value['current']['revision'] == 2
+    support = (value['current']['removed_field_support']['record'] if withdraw else
+               value['current']['functional_support']['content'])
+    assert support['source_refs'] == [updated['capture']['source_ref']]
+    assert value['current']['retracted'] is withdraw
 
 
 def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:

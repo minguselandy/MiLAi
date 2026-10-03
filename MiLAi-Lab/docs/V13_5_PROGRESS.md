@@ -927,3 +927,25 @@ f02混合查询更正、f04模糊跨会话旧/新标题、f05未知生效月、f
 新增opt-in unified_assertion_v3，撤销的公开选择名为evidence_for_withdrawal，旧目标仍由read_handle确定，旧内容支持与撤销支持分存。逐字段更正仍用evidence_for_new_value。明确旧肯定文本不能支持撤销，当前输入不自动成为证据，历史直接撤销来源仍允许。程序不假装校验语义蕴含；不加额度、不换模型、不改变旧接口及排序。新增机械检查实际撤销支持/旧历史与当前或历史证据的区别，完整真实回归尚未开始。
 
 r38机械结果：372项相关/旧默认服务回归通过（141.80秒）；Qwen生产tokenizer 6变体、实际SDK生命周期4项通过，均0模型HTTP。Ruff、mypy两模块、两项边界通过。首轮新增测试错误地预期撤销后records为空，实际返回retracted状态条目正确，修正测试后6项针对检查通过；首失败日志保留。即将冻结7故事/16消息通信回归（原6/13加已曝光f03撤销案），不把它称为L1或新L4。
+
+r38精确方法提交f01bdb75caa56dc2563d59efdafee24e6e37ef4e已推送PR81。完整通信7/16已封存，15 COMPLETED/1实际W1 UNKNOWN，5 PASS_SCOPED/2普通语义FAIL（n03首存丢仅本次；n08未查到推成视为已遗忘）。49生成234,614 tokens，无新增unknown/embedding。5记录22处引文匹配。r37-f03原请求本次用同ID内容修订实现取消且选实际取消证据，未使用retract=true，因此不能称新撤销参数已获模型验证；新L4须补直接整条撤销。原UNKNOWN、保存未到达及全部费用保留。完整L1-r38现已准入24/48。
+
+r38回归范围在L1/L2/L4输出前冻结：同版完整正常24、两工作流12、新约12故事，核心撤销须实测；r37完整L3 57形成/30读取保留原版本身份和失败，不因单个撤销参数改动重跑不涉及该操作的公开大矩阵（计划11.6），也不将它们改称r38通过。相关更正/读取/旧默认机械回归已运行。详见r38-regression-scope.json的登记hash。
+
+r38完整L1已封存：24/48全部首尝试COMPLETED，147生成703,622 tokens，无新增unknown/embedding；原rubric24PASS/PASSED_SCOPED，当前合同23PASS_SCOPED/1FAIL。object-continue-4保存文字添加用户于2026年10月3日请求，但所选唯一业务回执无日期字段，Source捕获日期不能充当该引文的请求发生日期支持。实际预订/标签和四条后续实时查询均正确无重复，四更正同ID并选实际新来源，三条显式历史读取，范围和查询后状态正确。24记录84引文身份均通过，48独立进程/尝试完整。
+
+截至此处恢复累计3,420生成18,314,559 tokens；含暂停前3,576生成19,088,795 tokens。r38精确提交Fast37122520644成功，Full37122520653跳过。新L4已在r38冻结方法后创作12故事31消息，特别加入整条撤销/保留历史的明确自然请求，尚未运行；作者/模板相关性限制保留。L2-r38完整12/26准入，先运行已曝光d02原协议失败，再继续其余全部故事；顺序已在输出前固定。
+
+## r38 L2 sealed and new L4 admitted
+
+L2-r38 completed all 12 stories/26 messages on f01bdb75: 22 COMPLETED and four actual planned W1 UNKNOWN, no resumes/missing terminals/orphan traces. Root review: 11 PASS_SCOPED/1 FAIL (d06 extra business-start timestamp from capture metadata; later native creation/approval/publication times are supported). All live-query and continuation paths preserve actual effects, no blind replay. Eight records/51 exact quotes verified; 108 generation calls/766,647 tokens, no new unknown usage or embedding.
+
+New L4-r38 admits all 12 frozen stories/31 messages, with full-record withdrawal g03 first. That path actually uses the new evidence_for_withdrawal parameter, same ID rev2, actual cancellation in removed_field_support.record, old body/history intact and current inactive. All three g03 messages pass scoped manual review. Remaining cases running serially, source/config unchanged.
+
+## r38 L4 stopped for a core replacement-support failure; r39 preview repair
+
+L4-r38 stopped at the next message boundary after g02 was manually identified: changed ounces→grams on the original ID, but selected only the original ounces fragment. The current correction was only the trigger. g03 full-record withdrawal actually passed with its cancellation support; this does not excuse g02. All12/31 remain in the denominator: 15 COMPLETED/16 NOT_RUN, 2 PASS_SCOPED/3 FAIL/7 incomplete or unrun stories. g01 lost best-effort; g04 lost tentative title. g05 same-ID unknown-start correction passed. Six records/31 exact quotes match, including removed support; semantic support is separate. 42 generation calls/207,353 tokens, no new unknown usage/embedding; originals sealed.
+
+R39 adds optional reviewed_assertion_v1: a changed-value/retraction proposal first returns an exact old/new/selected-original preview with no semantic write, then requires its issued token for the same proposal. Changed selection requires a new preview; archived and same-source legitimate reinterpretation remain allowed, no automatic current-source insertion or semantic certification. Preview receipts are separately reported under semantic_memory.previews, not commits or unknown writes. Existing defaults unchanged. First mechanical test exposed a test missing trusted rebind after reopen; corrected. Native integration then exposed preview receipts being classified unknown; fixed by explicit preview reporting, preserving original failure logs. Five direct contract tests now pass; full affected suite/tokenizer/SDK/boundaries running. No r39 real model calls yet.
+
+R39 mechanical gate completed: 377 related/default checks (143.66s), six real pinned tokenizer/template variants and four actual SDK lifecycle checks (4.00s), ruff/mypy2modules/package+tools boundaries PASS; all model replies in these checks scripted,0 real HTTP. Communication9/22 freeze prepared including original7/16 plus exposed r38-g02/g03. No budget increase. Resumed ledger through sealed r38: 3,570 generations/19,288,559 known=charged tokens; all v13.5 including156prepause generations:3,726/20,062,795 tokens. Historical unknown usage remains1, no new unknown or embedding.
