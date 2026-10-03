@@ -1,0 +1,444 @@
+{
+  "schema": "v13_5_l3_public_rebuild_manifest_v1",
+  "purpose": "Rebuild already exposed development inputs only, without evaluator gold, old answers, scores or failure labels. Cohort membership is preselected and is not independently sampled.",
+  "input_files": {
+    "artifacts/v13-4/n2-formation/bank-before.json": "a50efcc419fb4e751c272ff067fe842d75321b3604afcc7ff649bd7e449f2e1e",
+    "artifacts/v13-4/t0-runtime/queries.json": "ce179924568d8ead65d294604fdc844ea059b0bc7d522da01d8aacfc98315259",
+    "artifacts/v13-4/t0-q0/prepare-trace.jsonl": "72676c11f533ebff35937a361805b887d6188b68311adf232355d1b9e77e99aa"
+  },
+  "original_bank_counts": {
+    "sources": 96,
+    "semantic_facts": 0
+  },
+  "formation_instruction": "Archive the supplied source as a supported memory; preserve qualifications and original scope.",
+  "formation_max_codepoints": 1200,
+  "formation_requests": [
+    {
+      "request_id": "RFC7430-eid4565",
+      "original_event_id": "src-84d1fff60fa837fd290ef2f17993b596b5cf7cb98adcd03af2e2773c0dad0094"
+    },
+    {
+      "request_id": "RFC7469-eid4354",
+      "original_event_id": "src-a097b7d6d8b3c3e597b25bbe831d512bd5513a2b6ff54f13280760627877439d"
+    },
+    {
+      "request_id": "RFC7574-eid4724",
+      "original_event_id": "src-47c06c25bfc8d7cef8a6a5d63a787eece7ef1d6605906446ebbd0a9dd02bd23b"
+    },
+    {
+      "request_id": "RFC7574-eid4725",
+      "original_event_id": "src-e9c357060795cb4ab83a2579bddd2ed8c1bdd108d9a533b77a6aac97270942c4"
+    },
+    {
+      "request_id": "RFC7574-eid4726",
+      "original_event_id": "src-039dc730c302909678eed3df6ed92cf200d0ba9cd0189223cbf1f138003dd35e"
+    },
+    {
+      "request_id": "RFC7574-eid4880",
+      "original_event_id": "src-a52e0b683ef739c1bb3734cb919b451d1da3a10f88e852524dc29f0f34800843"
+    },
+    {
+      "request_id": "RFC7644-eid7916",
+      "original_event_id": "src-bedfe74fe80e9c3234192ca625e32c3e6b914c88e7db819e62b072519b26701a"
+    },
+    {
+      "request_id": "RFC7644-eid8096",
+      "original_event_id": "src-c9b849dd054ed3bb9b09316aeddb8c89ec020b181dfa7ff91f4074c2edcb096c"
+    },
+    {
+      "request_id": "RFC7644-eid8365",
+      "original_event_id": "src-5c09c7d251261d926b005010be05c95bef2b60b039323321679c717f9dfe9919"
+    },
+    {
+      "request_id": "RFC7788-eid4677",
+      "original_event_id": "src-955012224f944ec7738b9b25a3f0c94b1028d6495ce3c60bd51252405625af5a"
+    },
+    {
+      "request_id": "RFC7788-eid5021",
+      "original_event_id": "src-7953d1d071997dd0746c553f832ff21fc3c13bbaecd2a75c86fff8283d2dd18b"
+    },
+    {
+      "request_id": "RFC7788-eid5113",
+      "original_event_id": "src-54a915f1515f4abf2a2624cd7cff9617c01f607a73e3cbd54ae9410e89a11a26"
+    },
+    {
+      "request_id": "RFC7940-eid5986",
+      "original_event_id": "src-4c86e765f0fc6d435955c8d2e09fefd88c39b823959e9ed7769c9a5cac2da945"
+    },
+    {
+      "request_id": "RFC7940-eid8409",
+      "original_event_id": "src-4e9d8fb5ef45ad3d7823a84140285ef0a35e6efd23c5d0fbe747517b7f62ebfb"
+    },
+    {
+      "request_id": "RFC7970-eid5543",
+      "original_event_id": "src-6e00299e43afa701b93b052da4ce89a1ca85100482936f4d9ebd116c4c738c41"
+    },
+    {
+      "request_id": "RFC7970-eid5544",
+      "original_event_id": "src-995d9606712c5c8e73024405ac579209a283ceb17a35a99e822414816153a592"
+    },
+    {
+      "request_id": "RFC7970-eid5583",
+      "original_event_id": "src-990835f32df06f0bd40e70986b50564dbb78916be27be12ecb1762e6b3c58f84"
+    },
+    {
+      "request_id": "RFC8239-eid5652",
+      "original_event_id": "src-34c7a8badefac62cdc3193b731249bbfd8099b3aa2c916d8932fcbca6331c705"
+    },
+    {
+      "request_id": "RFC8259-eid7383",
+      "original_event_id": "src-edbee59674282ed742a9168a86d171e858153ef73532380948ead91647d15a77"
+    },
+    {
+      "request_id": "RFC8259-eid7600",
+      "original_event_id": "src-8ac5e941d50835619022f0bb8fa30535cbf80edfbea5e12d4884d7fc0cfb6219"
+    },
+    {
+      "request_id": "RFC8259-eid7603",
+      "original_event_id": "src-7b321a9bf512240bbf33827489a28f2ade00a25bfa9f68dfa7ebe7760f34e520"
+    },
+    {
+      "request_id": "RFC8345-eid6900",
+      "original_event_id": "src-e49c084478db8779f4cb440c505b73251783e73a013be06d1fbcdccf4b1d8256"
+    },
+    {
+      "request_id": "RFC8360-eid5638",
+      "original_event_id": "src-dd345f6bf6aef64e61dfedcca8ec9d219fb29157ecd6357ce86dbfb5102be0cc"
+    },
+    {
+      "request_id": "RFC8360-eid5870",
+      "original_event_id": "src-19b3fad284aec1519764aa8e393ae806a5fe84fa339e8271f7544fefe157ba64"
+    },
+    {
+      "request_id": "RFC8466-eid5615",
+      "original_event_id": "src-f178d10f55e850d054a322c88fc170886d453a7dc3b20fcb02a955ccccafa66d"
+    },
+    {
+      "request_id": "RFC8466-eid6922",
+      "original_event_id": "src-49bade07091996c27838e3407443ee4c5c8273075dbb4119e754511f7b30f092"
+    },
+    {
+      "request_id": "RFC8678-eid8124",
+      "original_event_id": "src-2a6ceea3d33f3d8b6ac6e934f9bfc6217d227c5a47d99396f213b5def001b14e"
+    },
+    {
+      "request_id": "RFC8765-eid8560",
+      "original_event_id": "src-9ecea07212eac1ea470ba2b76f278bb1e4ade91d3d3c825e130644a11be66633"
+    },
+    {
+      "request_id": "RFC8794-eid7189",
+      "original_event_id": "src-110f7f293d3c0e937752c0bf7dbada09a814b18f8f9ec75b30fc94ae0e0269f9"
+    },
+    {
+      "request_id": "RFC8824-eid7389",
+      "original_event_id": "src-703f210dd62231fbe2668f351f1e56f5b8b2f31ed0b786be66c1833df993ab6a"
+    },
+    {
+      "request_id": "RFC8824-eid8270",
+      "original_event_id": "src-312640240e7386415ca91ac2267fd4da2556983ff77adb9c2c8024e579c8c2f5"
+    },
+    {
+      "request_id": "RFC8881-eid7386",
+      "original_event_id": "src-52cd8d91bd6df63ae3e72adb09fba073445e761a08c483ed4fa903e2d9167f00"
+    },
+    {
+      "request_id": "RFC8972-eid8199",
+      "original_event_id": "src-dfd85761aa4338500bd989e4043b920790c7b68fe8099b4945af7abe7345de89"
+    },
+    {
+      "request_id": "RFC8972-eid8339",
+      "original_event_id": "src-a72bb47f7b4b13a996cfca89d6f6a47efde5325e2e63731a739561caac2e7b93"
+    },
+    {
+      "request_id": "RFC8995-eid6716",
+      "original_event_id": "src-ff70bf18e116133652ced42fa13f2c623ac9ba655823454436d419d3019249c3"
+    },
+    {
+      "request_id": "RFC8995-eid6834",
+      "original_event_id": "src-bb7343252185ea991524ff965cf22d9d83ef937ae6b6fe8045a28f31e30bb73d"
+    },
+    {
+      "request_id": "RFC8995-eid7576",
+      "original_event_id": "src-b919e015cc7cea95f0da72b382c58f623cfadd46e516c572beb9c69e4ef9a86e"
+    },
+    {
+      "request_id": "RFC9115-eid7336",
+      "original_event_id": "src-1f6c85a6a06616caf6cc58c59e1a87cede6f8d0b42cbcbefd38929d60ba09b14"
+    },
+    {
+      "request_id": "RFC9171-eid8043",
+      "original_event_id": "src-e8c6e1c05a994bac94045814dd9417bb768b9a1e8b5a890f998f4fdb69d79d1d"
+    },
+    {
+      "request_id": "RFC9303-eid7423",
+      "original_event_id": "src-e9e731ca2dc233d6ad037c4fd716eddc3f4c047582f4aca662a61d58ab556078"
+    },
+    {
+      "request_id": "RFC9493-eid7727",
+      "original_event_id": "src-0ea0729828c6afe15ed2336334b10708e3c3c8aaa54f00670c8e171fbc4ec700"
+    },
+    {
+      "request_id": "RFC9562-eid7955",
+      "original_event_id": "src-1c1af5289afa9059b0b1e7e0589521665afbba6a91182e6e375758f0c2212342"
+    },
+    {
+      "request_id": "RFC9562-eid7958",
+      "original_event_id": "src-6b18d1ba4f8c32e2742e9ed10f7074c3034fc0c25282c5b80e45f579d35245dd"
+    },
+    {
+      "request_id": "RFC9562-eid8288",
+      "original_event_id": "src-560ad13cb52b43301bd3355f2def9481caae2daae0b046317e8da14e68300469"
+    },
+    {
+      "request_id": "RFC9580-eid8454",
+      "original_event_id": "src-ce41786db086abe23454d55e0e1585b5af3e127f206a2833fef19fd48722a841"
+    },
+    {
+      "request_id": "RFC9580-eid8465",
+      "original_event_id": "src-31b0be69405622ced6a451d50128ac35b32514d32c9d07eba4209c06b248f37d"
+    },
+    {
+      "request_id": "RFC9580-eid8466",
+      "original_event_id": "src-50f93248b007bf2e8d16130d50d9b4af617c4af2db3245bd269a99a6d2f86158"
+    },
+    {
+      "request_id": "RFC9605-eid8321",
+      "original_event_id": "src-cfafd60a38d5b47f9afa51dd7fac2283d437456a8904b649437b798d622788cd"
+    },
+    {
+      "request_id": "RFC9605-eid8565",
+      "original_event_id": "src-a1fad940c8c9d3f7adf9a53e4bbb4e40d8aa21494ba502bacd1cba12edb38dd2"
+    },
+    {
+      "request_id": "RFC9711-eid8528",
+      "original_event_id": "src-b153f9713c1780f8fa1a66f549039c2fea1e53db55717e9a52aa4b1fb3b6f8c3"
+    },
+    {
+      "request_id": "RFC9711-eid8771",
+      "original_event_id": "src-1c36de36bd78bad67b812430ee02193302df0b6be7f4266c9cbbdec02d11fed8"
+    },
+    {
+      "request_id": "RFC9711-eid8776",
+      "original_event_id": "src-a805d1129dcd34cd0a8655ac19e26a3ac0b6d1d23c42ffe03bde880b553bd7cc"
+    },
+    {
+      "request_id": "RFC9711-eid8782",
+      "original_event_id": "src-b9d793fbb4211eea1af8bc1c937af262677fc9fc20bbffa1b94aac0b40e86d9a"
+    },
+    {
+      "request_id": "RFC9711-eid8783",
+      "original_event_id": "src-a4455e70dc48cf7d88dbeb0ef7502a4c5c9e0832b143813624c0659909cdd5c1"
+    },
+    {
+      "request_id": "RFC9793-eid8463",
+      "original_event_id": "src-2d09499cc2ca8899cc52ccc5d6696c892f8cbca18caa2b48c55304377336c513"
+    },
+    {
+      "request_id": "RFC9886-eid8822",
+      "original_event_id": "src-a9c3540e6c0a417d2fdda8dea6ff402c1b0919b4cfa6c9256eeb145c9c57e0a4"
+    },
+    {
+      "request_id": "RFC9886-eid8823",
+      "original_event_id": "src-6ffe1ccfe94b847facdea5aa414b5eed938cd4f18c504cf1b25b294e2ac27616"
+    }
+  ],
+  "reading_queries": [
+    {
+      "query_id": "t0-031c3e8238595fff",
+      "origin_id": "RFC9605",
+      "snapshot_sha256": "fd43ba7df680aadf6c2063eb830a66dac025e7c748b001371a3ebc806984dfa0",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-181098e89b47832b",
+      "origin_id": "RFC9115",
+      "snapshot_sha256": "e5307ef1556cf2742456a3885a29f4037a1b3d0f692669ea4460c27ef70b6abd",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-21b6c95abab65d34",
+      "origin_id": "RFC8794",
+      "snapshot_sha256": "bff80de8bc707091f7922a2e1be75d708e2f102e2c4675ed54e43d67fbf981d8",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-2b8ed42f5509d180",
+      "origin_id": "RFC7574",
+      "snapshot_sha256": "188a67c540cd1c574184e06b1ac03ed798e31e15793255eba87226f8de62e5ae",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-3313ea14bed1a352",
+      "origin_id": "RFC9204",
+      "snapshot_sha256": "d19eadfe51f960eaece5364371326841839e6e2c71b2387654e2013c69ee6c8e",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-3ad8b997c0f064d8",
+      "origin_id": "RFC9493",
+      "snapshot_sha256": "244d2debbcdab1e5489d10418ea69264588fd4bbf080acf5b8af262931a533e9",
+      "candidate_count": 30
+    },
+    {
+      "query_id": "t0-3f78c0a6ae6d3b4d",
+      "origin_id": "RFC8794",
+      "snapshot_sha256": "f1582462da6063e7db26a70e6f5ba41bcb659c9857cdfcb511d6542d16a493ad",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-4eb6c86f369d13bb",
+      "origin_id": "RFC9493",
+      "snapshot_sha256": "4a72485f9168e1c909c575aa16659c6404ffb8a9a9a36b867776ce0ff4caf183",
+      "candidate_count": 30
+    },
+    {
+      "query_id": "t0-56d2d75945fc82ed",
+      "origin_id": "RFC9886",
+      "snapshot_sha256": "e9c5e0cabe717f515eafa54fb33ca1c39eb468d8f20eb0c30782dd0c293d9675",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-5f4dbb6831fcfa78",
+      "origin_id": "RFC9562",
+      "snapshot_sha256": "97bdda77e30a5fe76a21481adaea7409e20024d921f43abe7714e3bf30f28d92",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-61ba6ba955bb8abc",
+      "origin_id": "RFC7574",
+      "snapshot_sha256": "dac48537746f5d895a046d29e974ae43d015e1d6eac9240356e500f7a2f42240",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-6769ca0f13904c4c",
+      "origin_id": "RFC8794",
+      "snapshot_sha256": "9445e00da4937abc3e6d99e05423a79cebb21971de44bc5d70f285190f0bf965",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-6bd7ea3069a5a3f6",
+      "origin_id": "RFC7574",
+      "snapshot_sha256": "0af8e6c72583605da8f4b55f5919bdd11c60dd9ba18c69f04f35a1207f9054bd",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-737ad7d7189e710d",
+      "origin_id": "RFC9204",
+      "snapshot_sha256": "beb29392fb3666c838ed4c3405317ee7c9596fc8cdfc6292beaddab3111a7522",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-8797481b1f2cabfe",
+      "origin_id": "RFC8345",
+      "snapshot_sha256": "bd8b4d5bb51f1cbf805edbea0967f4d7227d3890ac6e40f67f361e5a36923f78",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-8ea652a1a9c005e1",
+      "origin_id": "RFC7430",
+      "snapshot_sha256": "1733e2262e7542914f04f2d6933ca5d31f8b3c20fa0aff9fcef5473c4caaf4fb",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-a0c725c212efae75",
+      "origin_id": "RFC9605",
+      "snapshot_sha256": "c7d049e09b807a707015f543307b63fa00d3a45c2d6c192cb08cce1ebfadcb8c",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-b318e27eb81ec145",
+      "origin_id": "RFC8678",
+      "snapshot_sha256": "de1a5f036a775c3145c141d0f94aed91b5d474bc2d2ed4e8d4607c7483119f8d",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-c7ddaea5265c6b8e",
+      "origin_id": "RFC7970",
+      "snapshot_sha256": "f4f650e80358e5de0e1eb4051444bd126c04614d66bfe4d2936065df4de6aa8a",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-ca61a29da8aed4a8",
+      "origin_id": "RFC9303",
+      "snapshot_sha256": "37c0c7ab7a784caebd3efe305ccf53f87f7a6583a613f2dd1e113b1d91715617",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-cb5be9b136526465",
+      "origin_id": "RFC9204",
+      "snapshot_sha256": "f619af123600a085cce30c2b3df25bb84d4614b9ffd1e881d63933e4f92be68a",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-e2b5ffd305b39073",
+      "origin_id": "RFC9886",
+      "snapshot_sha256": "0b7ff8743c673194b38a851052eefd140d10e68f2b27f3a7a1b1028942296526",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-e9c6da8cfc659661",
+      "origin_id": "RFC9580",
+      "snapshot_sha256": "6f1c8aa1fa335ebf84b38015a793f3c1eae72acda23c80ec60930923efdcc030",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-eaa95f9c68fa7bd7",
+      "origin_id": "RFC9303",
+      "snapshot_sha256": "a28854804ca4f14fb2c91f615ad4205fa816cbb0ae1857017a3900598b51999b",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-eba0d031c65ff246",
+      "origin_id": "RFC7940",
+      "snapshot_sha256": "4409098a64138d7087614feb21725a505cab640b681674d8ed2f61d1130b7572",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-ee47970fbb986788",
+      "origin_id": "RFC8824",
+      "snapshot_sha256": "27031ba79ed846e631283c87bb06d1e1497b75ca4778507b0532c2ca2836bd35",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-ef1b0e1734e9d0ed",
+      "origin_id": "RFC8824",
+      "snapshot_sha256": "2d5f17cafd2d3694d2aff8eefd7b481c07fda851ddf1380534ed62bcefe3dcbc",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-efe3b85de4af8a91",
+      "origin_id": "RFC9886",
+      "snapshot_sha256": "acc095b28f653c34bd85d32ecfcb51989961b1ddc7c6eb3dd272196c105179eb",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-f24d486ce83eb94b",
+      "origin_id": "RFC9204",
+      "snapshot_sha256": "3c7abad439e0ce4c561d3f8d1498f87221efacbb661356e5553c382e7c8473cd",
+      "candidate_count": 32
+    },
+    {
+      "query_id": "t0-f4c194686df589a6",
+      "origin_id": "RFC9886",
+      "snapshot_sha256": "f03a002c99c966395592325ec80fbd101cfbd623db1e976c97c7d0b7e012d24c",
+      "candidate_count": 32
+    }
+  ],
+  "expected_products": {
+    "l3-reading-functional.json": "65da9e7a36bb57cb09631ab67cbaf4114c7646c09d26d085c85cf95312218b68",
+    "l3-formation-functional.json": "030f75059fefb059a340c24fcca6614800774877d0cebd99bb10222e48e7cd83"
+  },
+  "source_boundary": "Read exact Source.content from original bank-before. Original source-ref lineage does not confer authority on new captures. No newline normalization.",
+  "formation_comparison": "Same 57 source boundaries; new declared query-free formation instruction, not identical original prompts.",
+  "reading_comparison": "Same 30 public questions, complete fixed candidate ranges and order, full original source groups with zero semantic records. Actual current method selection/delivery still requires separate execution evidence.",
+  "unit_denominators": "57 formation requests and 30 reading queries are different units; neither their sum nor query/source overlap is an independent sample count.",
+  "runtime_excludes": [
+    "gold",
+    "E_star",
+    "old_answers",
+    "old_scores",
+    "failure_labels"
+  ],
+  "new_model_calls": 0,
+  "new_http_calls": 0
+}

@@ -23,7 +23,7 @@
 Core 收集了未登记的可选依赖测试；Foundation 的脚本 ComparisonRuntime 漏初始化新字段。
 修复将 23 个测试文件归属 Foundation，保留全部测试及恢复断言；两个投影中断测试补齐
 合成 tokenizer，历史字节对照从固定 Git 提交及 SHA 重建，避免依赖未发布的本地缓存。
-4 项恢复检查和 94 项历史协议／投影检查通过；干净 Core 环境全量检查及新远端 CI 待完成。
+4 项恢复检查和 94 项历史协议／投影检查通过；当时干净 Core 全量检查及新远端 CI 待完成，后续结果见下文。
 新增发现与旧失败均保留于首包 manifest，不能将尚未到达的后续命令记为通过。
 
 aa02df6 的远端再运行暴露两种本机依赖：HTTP 审计写死 sibling checkout，普通协议
@@ -35,6 +35,23 @@ aa02df6 的远端再运行暴露两种本机依赖：HTTP 审计写死 sibling c
 
 首轮局部测试曾将未知游标错误归为完整性失败（52 PASS/1 FAIL）；已区分“未发行游标”
 与“存储快照被改变”，后续完整 83 项通过。原失败保留，不作为模型样本。
+
+## L3 输入复现
+
+新增 `tools/v13_5_prepare_l3_public.py` 及公开清单，仅读取旧 bank-before、三字段公开
+queries 和实际候选池 prepare-trace 三份固定哈希输入。57 个形成请求和 30 个读取问题
+分别复原到新目录，两个输出与原 L3 候选输入逐字节一致。输入变化和已存在输出目录
+均拒绝；0 HTTP。原来源角色、CRLF、候选顺序和区间不改，新的形成指令已在清单声明。
+这项结果证明可复现输入，不是 L3 功能成绩，也不把两类计量单位加成独立样本。
+
+```bash
+python tools/v13_5_prepare_l3_public.py \
+  --old-lab /path/to/preserved-v13-4/MiLAi-Lab \
+  --output artifacts/v13-5/new-l3-public-inputs
+```
+
+原始三份文件仍需保留；工具不会从评分、正确答案或报告文字补造缺失输入。
+实际复原回执：`artifacts/v13-5/l3-public-rebuild-resume1/rebuild-receipt.json`。
 
 ## FUNC-01–16 汇总
 
