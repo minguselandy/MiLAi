@@ -60,6 +60,7 @@ def prepared(
     receipt_completion: bool = False,
     existing_confirmation: bool = False,
     support_review: bool = False,
+    formation_review: bool = False,
     catalog_feedback: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
@@ -92,6 +93,7 @@ def prepared(
         "required_once" if required_completion else "auto",
         "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
         "revision_support_review": "selected_originals_v1" if support_review else "disabled",
+        "formation_support_review": "selected_originals_v1" if formation_review else "disabled",
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
@@ -3135,8 +3137,9 @@ def test_selected_original_review_rejects_old_support_before_commit_then_uses_ne
 
 
 @pytest.mark.parametrize('assessment', ['supported', 'unsupported', 'uncertain'])
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
 def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
-    tmp_path: Path, assessment: str,
+    tmp_path: Path, assessment: str, review_kind: str,
 ) -> None:
     from milai_lab.memory.functional_state import FunctionalIntegrityError, FunctionalRejection
 
@@ -3144,38 +3147,42 @@ def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
                 'forget_epoch': 0}
     calls: list[Any] = []
     events: list[Any] = []
+    review = getattr(functional, f'review_{review_kind}_support')
 
     class Model:
         def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
             calls.append(messages)
-            return AIMessage(content='', tool_calls=[{'name': 'review_revision_support',
+            return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
                 'id': 'decision', 'args': {'field_results': [{'field': 'content',
                     'assessment': assessment, 'reason': 'Scripted assessment.'}]}}])
 
     path = tmp_path / 'review.json'
     for _ in range(2):
         if assessment == 'supported':
-            functional.review_revision_support(Model(), path, evidence, events.append)
+            review(Model(), path, evidence, events.append)
         else:
             with pytest.raises(FunctionalRejection, match='SUPPORT_REVIEW_REJECTED'):
-                functional.review_revision_support(Model(), path, evidence, events.append)
+                review(Model(), path, evidence, events.append)
     assert len(calls) == 1 and len(events) == 2
     assert all(e['semantic_support'] == 'unchecked' for e in events)
     with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
-        functional.review_revision_support(Model(), path, {**evidence, 'forget_epoch': 1},
-                                           events.append)
+        review(Model(), path, {**evidence, 'forget_epoch': 1}, events.append)
     state = read_json(path)
     state['decision']['field_results'][0]['reason'] = 'Changed after recording.'
     write_json(path, state)
     with pytest.raises(FunctionalIntegrityError, match='DECISION_CHANGED'):
-        functional.review_revision_support(Model(), path, evidence, events.append)
+        review(Model(), path, evidence, events.append)
     assert len(calls) == 1
 
 
-def test_interrupted_support_review_reservation_is_not_silently_retried(tmp_path: Path) -> None:
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+def test_interrupted_support_review_reservation_is_not_silently_retried(
+    tmp_path: Path, review_kind: str,
+) -> None:
     from milai_lab.memory.functional_state import FunctionalRejection
 
     calls = []
+    review = getattr(functional, f'review_{review_kind}_support')
 
     class Interrupted:
         def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
@@ -3185,9 +3192,9 @@ def test_interrupted_support_review_reservation_is_not_silently_retried(tmp_path
     evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
     path = tmp_path / 'review.json'
     with pytest.raises(OSError):
-        functional.review_revision_support(Interrupted(), path, evidence, lambda event: None)
+        review(Interrupted(), path, evidence, lambda event: None)
     with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
-        functional.review_revision_support(Interrupted(), path, evidence, lambda event: None)
+        review(Interrupted(), path, evidence, lambda event: None)
     assert len(calls) == 1 and read_json(path)['attempts'] == 1
 
 
@@ -3265,26 +3272,184 @@ def test_unavailable_tool_feedback_preserves_completed_business_and_original_all
     {'field_results': [{'field': 'content', 'assessment': [], 'reason': 'Invalid scalar.'}]},
     {'field_results': [{'field': 'scope.unknown', 'assessment': 'supported', 'reason': 'Wrong.'}]},
 ])
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
 def test_invalid_support_review_never_marks_delivery_or_retries(
-    tmp_path: Path, decision: dict[str, Any],
+    tmp_path: Path, decision: dict[str, Any], review_kind: str,
 ) -> None:
     from milai_lab.memory.functional_state import FunctionalRejection
     from milai_lab.providers.chat_bridge import IncompleteChatResponse
 
     calls, deliveries = [], []
+    review = getattr(functional, f'review_{review_kind}_support')
 
     class Malformed:
         def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
             calls.append(messages)
-            return AIMessage(content='', tool_calls=[{'name': 'review_revision_support',
+            return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
                                                      'id': 'invalid', 'args': decision}])
 
     evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
     path = tmp_path / 'review.json'
-    with pytest.raises(IncompleteChatResponse, match='REVISION_REVIEW_SCHEMA_INVALID'):
-        functional.review_revision_support(Malformed(), path, evidence, lambda event: None,
-                                           on_delivery=lambda: deliveries.append(True))
+    with pytest.raises(IncompleteChatResponse,
+                       match=f'{review_kind.upper()}_REVIEW_SCHEMA_INVALID'):
+        review(Malformed(), path, evidence, lambda event: None,
+               on_delivery=lambda: deliveries.append(True))
     with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
-        functional.review_revision_support(Malformed(), path, evidence, lambda event: None,
-                                           on_delivery=lambda: deliveries.append(True))
+        review(Malformed(), path, evidence, lambda event: None,
+               on_delivery=lambda: deliveries.append(True))
     assert len(calls) == 1 and deliveries == []
+
+
+def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        formation_review=True, support_review=True, catalog_feedback=True)
+    original = 'Only this workshop: try short sentences; supplier labels are excluded.'
+    selected: list[str] = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='new_assertion', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal in {3, 5}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_formation_support']
+            assert wire['tool_choice'] == 'required' and wire['temperature'] == 0
+            assert wire['chat_template_kwargs']['enable_thinking'] is False
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert evidence['record_id'] is None and evidence['basis'] == 'user_statement'
+            assert len(evidence['changes']) == 1
+            change = evidence['changes'][0]
+            assert not change['before_present'] and change['after_present']
+            assert change['field'] == 'content'
+            assert change['after'] == ('Always use short sentences.' if ordinal == 3 else original)
+            assert change['selected_original_fragments'][0]['source_role'] == 'user'
+            assert original in change['selected_original_fragments'][0]['content']
+            return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content', 'assessment': 'unsupported' if ordinal == 3 else 'supported',
+                'reason': 'Temporary scope and try were omitted.' if ordinal == 3
+                          else 'Original scope and modality preserved.'}])
+        if ordinal == 2:
+            selected.extend(u['fragment_handle'] for u in materials(wire)['items']
+                            if u['type'] == 'fragment' and u['input_relation'] == 'current_request')
+            return native_call('save_memory', 'broad', content='Always use short sentences.',
+                               fragment_handles=selected)
+        if ordinal == 4:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['status'] == 'rejected' and receipt['effect'] == 'none'
+            assert 'FORMATION_SUPPORT_REVIEW_REJECTED' in receipt['reason']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            assert not any(u['type'] == 'record' for u in materials(wire)['items'])
+            return native_call('save_memory', 'limited', content=original,
+                               fragment_handles=selected)
+        assert ordinal == 6 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Saved the temporary best-effort requirement.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='remember',
+                content='Remember: ' + original)
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result.get('error')
+    assert result['generation_calls'] == len(wires) == 6
+    assert len(result['records']) == 1
+    value = result['records'][0]['value']
+    assert value['revision'] == 1 and value['content'] == original
+    assert value['functional_support']['content']['semantic_support'] == 'unchecked'
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    assessments = [read_json(p) for p in root.glob('banks/*/*-formation-review-*.json')]
+    assert len(assessments) == 2 and all(a['attempts'] == 1 for a in assessments)
+    assert not list(root.glob('banks/*/*-revision-review-*.json'))
+    assert functional.message(root, **args) == result and len(wires) == 6
+    assert read_json(tmp_path / 'isolated-mechanical-budget.json')['generation_requests'] == 6
+
+
+@pytest.mark.parametrize('lost_review', [False, True])
+def test_formation_review_after_business_preserves_effects_and_requires_outcome_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_review: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        receipt_units=True, formation_review=True, support_review=True,
+        catalog_feedback=True, format_failure_receipts=True)
+    selected: dict[str, list[str]] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> Any:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            selected['request'] = [u['fragment_handle'] for u in materials(wire)['items']
+                if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            return native_call('reserve_and_label', 'reserve', item_key='formation item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['receipt']['label_status'] == 'created'
+            selected['outcome'] = [u['fragment_handle'] for u in receipt['source_fragment_index']]
+            return native_call('save_memory', 'request-is-not-result',
+                content='The formation item was reserved and labeled.',
+                fragment_handles=selected['request'])
+        if ordinal in {4, 6}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_formation_support']
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert evidence['basis'] == ('user_statement' if ordinal == 4 else 'tool_observation')
+            quotes = evidence['changes'][0]['selected_original_fragments']
+            assert {q['source_role'] for q in quotes} == ({'user'} if ordinal == 4 else {'tool'})
+            if lost_review:
+                return OSError('formation assessment response unavailable')
+            return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content', 'assessment': 'unsupported' if ordinal == 4 else 'supported',
+                'reason': 'A request is not a result.' if ordinal == 4
+                          else 'Actual native outcome.'}])
+        if ordinal == 5:
+            receipt = actual_tool_receipt(wire)
+            if lost_review:
+                assert receipt['status'] == 'outcome_unknown' and receipt['effect'] == 'unconfirmed'
+                return {'role': 'assistant',
+                        'content': 'Business completed; memory is unconfirmed.'}
+            assert receipt['status'] == 'rejected' and receipt['effect'] == 'none'
+            return native_call('save_memory', 'actual-outcome',
+                content='The formation item was reserved and labeled.',
+                fragment_handles=selected['outcome'])
+        assert ordinal == 7 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Completed the business and recorded its outcome.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='operate',
+                content='Reserve and label one formation item for local delivery in a box. '
+                        'Save the actual outcome.')
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result.get('error')
+    assert len(result['world']['world']['attempts']) == 1
+    assert result['world']['world']['reservations'][0]['label_status'] == 'created'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['records']) == (0 if lost_review else 1)
+    if lost_review:
+        assert result['operation_status']['semantic_memory']['status'] == 'unknown'
+        assert '未知' in result['final_answer']
+        reviews = [read_json(p) for p in root.glob('banks/*/*-formation-review-*.json')]
+        assert len(reviews) == 1 and reviews[0]['attempts'] == 1 and 'decision' not in reviews[0]
+    else:
+        assert result['records'][0]['value']['basis'] == 'tool_observation'
+        status = result['operation_status']['semantic_memory']
+        assert status['status'] == 'partial'  # The first rejected attempt remains in the aggregate.
+        assert [r['status'] for r in status['operations']] == ['not_committed', 'committed']
+    assert len(wires) == (5 if lost_review else 7)
+    assert functional.message(root, **args) == result
+    resumed = functional.message(root, **args, resume=True)
+    for key in ['status', 'records', 'world', 'operation_status',
+                'final_answer', 'generation_calls']:
+        assert resumed[key] == result[key]
+    assert resumed['usage'] == [] and resumed['attempt'] == result['attempt'] + 1
+    assert resumed['budget_before'] == resumed['budget_after'] == result['budget_after']
+    assert len(wires) == (5 if lost_review else 7)
+    ledger = read_json(tmp_path / 'isolated-mechanical-budget.json')
+    assert ledger['generation_requests'] == len(wires)
+    assert ledger['generation']['unknown_usage'] == int(lost_review)

@@ -7041,6 +7041,13 @@
       "sha256": "b1d279e7f661740866bafa388598b6d500cd68fe934dac38556d8375f8b77e4d",
       "timing": "Before r46 model HTTP",
       "scope": "Full exposed communication11/27, mixed correction first then post-business protocol; one public message admitted at a time after actual review. Same-version L1 24/48,L2 12/26,L3 formation57/reading30,newL4 after method freeze. Same original limits, no semantic certification."
+    },
+    {
+      "candidate": "r47",
+      "path": "artifacts/v13-5/r47-regression-scope.json",
+      "sha256": "1b2811e2bf77cafbb326c912b3416f4af6a18fcb4db301a79878f2fade305799",
+      "timing": "Before r47 model HTTP",
+      "scope": "Full exposed11/27 formation-first communication, each public message reviewed before advancing; same-version original L1/L2/full L3/newL4 remain required. Actual scope/modality/outcome source support, no semantic certificate and unchanged allowances."
     }
   ],
   "mechanical_checks": [
@@ -7290,6 +7297,27 @@
         "commit": "81c8bc5c26742c95581035fe7bf3780f06d7f7ec",
         "fast": "SUCCESS run37141214168",
         "full": "SKIPPED run37141214049; not a pass"
+      }
+    },
+    {
+      "candidate": "r47",
+      "scope": "559 affected/default/foundation/schema/durable-admission regressions PASS;26 pinned production Qwen tokenizer/full candidate prompt probes PASS;4 installed SDK checks PASS. Ruff,mypy2modules,package/tools boundaries and verification matrix PASS. Formation content/scope review before commit reuses exact-input durable decisions and original budgets; tests reject lost temporary scope and user-request-as-outcome, then allow actual corrected assertion/native observation. Raw survives rejection, committed save replay skips assessment, review exposure respects forgetting/independent inputs, and lost review preserves business without replay or unaccounted retry. Semantic support remains unchecked; zero actual model HTTP.",
+      "preserved_first_failure": "Initial targeted23PASS2FAIL were test assumptions: operation aggregate retains first rejection plus later commit as partial, and explicit completed-message resume adds a zero-HTTP attempt with unchanged effects instead of byte-identical result. Corrected25PASS; full559PASS. Original Ruff8line errors then1line error retained, corrected check passes. No runtime contract relaxation.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r47-targeted-initial.log": "345b85c81e54cb5e3ea177f1159155cb5649d9a86bff9d683b4a7e1ccf6b7717",
+        "artifacts/v13-5/r47-targeted-corrected.log": "9500875731513abb7ebb8f140842f32fc34704f45f53d04108c3822a8944b02f",
+        "artifacts/v13-5/r47-regression.log": "56034f25c1fcf9043499f902de04d92b44c41dba910227608f25a4796de73378",
+        "artifacts/v13-5/r47-ruff-initial.log": "bf1238dddcae3e34cdafaceec9957fc60ac29e000d0f90633897feb9cf4bf5df",
+        "artifacts/v13-5/r47-ruff-corrected.log": "c1bdaa8cc518805007421c5ddae0fec0ffd9c7ddb4f2c3a55f2658115313a48d",
+        "artifacts/v13-5/r47-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r47-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r47-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r47-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r47-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be",
+        "artifacts/v13-5/r47-production-contracts-probe.py": "5675b2cff74f6788bc74d4103762551af9bbcb20b86782ab67b0989b1a3d06bb",
+        "artifacts/v13-5/r47-production-contracts.json": "40b02ab8c68c125ccceeaa4ad26e5396262e2eff16779f2c3006467cfaabd3c0",
+        "artifacts/v13-5/r47-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r47-sdk-lifecycle.log": "6741d882cee89f6180ab38cc1549f26da314462fdd7fc577873d3b4593e0129a"
       }
     }
   ],

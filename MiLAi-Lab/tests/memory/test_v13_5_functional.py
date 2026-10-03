@@ -1625,3 +1625,81 @@ def test_revision_review_delivery_forget_does_not_revoke_independent_input(
         assert memory.service.source(secret) is None
         assert memory.service.source(independent['source_ref']) is not None
         assert (memory.service.source(assistant['source_ref']) is None) is delivered
+
+
+def test_formation_review_rejection_preserves_raw_and_replay_skips_review(tmp_path: Path) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+        if len(reviewed) == 1:
+            raise FunctionalRejection('SCRIPTED_SCOPE_AND_MODALITY_REJECTION')
+
+    with opened(tmp_path, formation_support_review=review) as memory:
+        ref = turn(memory, text='Only for this trial, imagine an early reminder; labels unchanged.')
+        selected = handles(memory, ref)
+        rejected = invoke(memory, 'save_memory', {'content': 'An early reminder is set.',
+            'scope': {'activity': 'all'}, 'fragment_handles': selected}, 'wrong')
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        assert memory.service.records() == [] and memory.service.source(ref) is not None
+        evidence = reviewed[0]
+        assert evidence['record_id'] is None and evidence['basis'] == 'user_statement'
+        assert evidence['semantic_support'] == 'unchecked'
+        changes = {c['field']: c for c in evidence['changes']}
+        assert set(changes) == {'content', 'scope.activity'}
+        assert changes['scope.activity']['after'] == 'all'
+        assert all(not c['before_present'] and c['after_present'] for c in changes.values())
+        assert all(q['source_role'] == 'user' and q['source_ref'] == ref
+                   and 'Only for this trial' in q['content']
+                   for c in changes.values() for q in c['selected_original_fragments'])
+        args = {'content': 'Only this trial: imagine an early reminder; labels unchanged.',
+                'scope': {'activity': 'this trial'}, 'fragment_handles': selected}
+        saved = memory.save(cfg(), 'corrected', **args)
+        current = memory.service.read(saved['id'])['value']
+        assert saved['revision'] == 1 and len(memory.service.records()) == 1
+        assert current['functional_support']['content']['semantic_support'] == 'unchecked'
+        replay = memory.save(cfg(), 'corrected', **args)
+        assert replay['replayed'] and replay['status'] == 'no_change'
+        assert len(reviewed) == 2 and len(memory.service.records()) == 1
+
+
+@pytest.mark.parametrize('delivered', [False, True])
+def test_formation_review_rejection_exposure_preserves_independent_input(
+    tmp_path: Path, delivered: bool,
+) -> None:
+    count = 0
+
+    def review(evidence: dict[str, Any], report_delivery: Callable[[], None]) -> None:
+        nonlocal count
+        count += 1
+        if count == 1:
+            report_delivery()
+            return
+        if delivered:
+            report_delivery()
+        raise FunctionalRejection('SCRIPTED_FORMATION_DECLINED')
+
+    with opened(tmp_path, formation_support_review=review) as memory:
+        ref = turn(memory, 'old', 'MECHANICAL_FORMATION_PRIVATE is a temporary preference.')
+        saved = memory.save(cfg('old'), 'old-save', 'MECHANICAL_FORMATION_PRIVATE preference.',
+                            handles(memory, ref))
+        initial = memory.service.read(saved['id'])
+        independent = memory.service.capture_user('s', 'new', 'Independent new request.')
+        memory.service.bind_public_turn('s', 'new', independent['source_ref'],
+                                        config_sha256=SHA, phase='start')
+        anchor = 'exposure:' + independent['source_ref']
+        assert memory.service.store.get(namespace(memory.service), anchor) is None
+        rejected = invoke(memory, 'save_memory', {'content': 'A broader assertion.',
+            'fragment_handles': handles(memory, ref)}, 'new-save', cfg('new'))
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        assert len(memory.service.records()) == 1
+        assert bool(memory.service.store.get(namespace(memory.service), anchor)) is delivered
+        assistant = memory.service.capture_assistant('s', 'new:final',
+            'MECHANICAL_FORMATION_PRIVATE assessment declined.' if delivered else 'No review.')
+        turn(memory, 'forget', 'Forget the earlier private preference and sources.')
+        forgotten = invoke(memory, 'forget_memory', {'read_handle': initial['candidate_handle']},
+                           'forget', cfg('forget'))
+        assert forgotten['ok'] and memory.service.source(ref) is None
+        assert memory.service.source(independent['source_ref']) is not None
+        assert (memory.service.source(assistant['source_ref']) is None) is delivered

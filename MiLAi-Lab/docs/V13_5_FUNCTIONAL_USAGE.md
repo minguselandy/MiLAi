@@ -1,5 +1,10 @@
 # v13.5 functional profile
 
+**R47 is the current mechanically checked candidate; its model acceptance has not run.**
+It extends selected-original assessment to new memory content and scope before commit,
+under the original allowances. 559 regressions, 26 production tokenizer/prompt probes
+and 4 installed SDK checks passed. R46 remains the latest actual model evidence below.
+
 **R46 completed its full exposed communication cohort with 9 scoped PASS and 2 FAIL.**
 All 11 cases / 27 public messages were attempted: 26 COMPLETED and one actual injected
 W1 UNKNOWN. Same-ID correction, whole/partial withdrawal, existing-record no_change,
@@ -27,7 +32,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r46.json` is the current development candidate. Required
+`configs/v13-5-functional-r47.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -49,6 +54,16 @@ unless actual evidence establishes it; this is a tool contract, not a semantic v
 
 The candidate preserves these contracts; actual model choices still require evaluation:
 
+- With `formation_support_review=selected_originals_v1`, new content and scope fields
+  are assessed against their actual selected originals before semantic commit. Temporary
+  scope, exceptions, negation and modality must remain; a requested business action is
+  not an observed outcome. Unsupported/uncertain assessments reject before commit while
+  raw events and completed business effects remain. Valid decisions persist for exact
+  inputs; unavailable decisions are not silently retried. Committed save replay skips
+  assessment. Returned review exposure participates in forgetting while independent
+  input remains. This uses the same model and original durable budgets; support stays
+  `unchecked`. It does not certify semantics or repair the remaining historical-answer
+  quotation error, and currently has only mechanical evidence.
 - With `revision_support_review=selected_originals_v1`, every nontrivial revision receives
   one separately framed same-model assessment of each changed field and its selected
   original fragments before commit. Unsupported/uncertain decisions leave the revision
@@ -162,14 +177,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r43 \
-  --config configs/v13-5-functional-r46.json
+  --root artifacts/v13-5/personal-r47 \
+  --config configs/v13-5-functional-r47.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r47 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r47 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -287,7 +302,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r43
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r47
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`
