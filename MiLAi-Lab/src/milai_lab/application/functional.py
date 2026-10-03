@@ -109,7 +109,7 @@ class FunctionalApplication:
         if authorization_mode not in {"native_public_v1", "scripted_v1"}:
             raise ValueError("FUNCTIONAL_APPLICATION_AUTHORIZATION_MODE_INVALID")
         if attempt_policy not in {"legacy", "single_phase_per_public_turn_v1",
-                                  "single_phase_with_history_v2"}:
+                                  "single_phase_with_history_v2", "fresh_query_with_history_v3"}:
             raise ValueError("FUNCTIONAL_APPLICATION_ATTEMPT_POLICY_INVALID")
         if attempt_policy != "legacy" and authorization_mode != "native_public_v1":
             raise ValueError("FUNCTIONAL_ATTEMPT_POLICY_REQUIRES_NATIVE_MODE")
@@ -154,7 +154,8 @@ class FunctionalApplication:
                             "reserve_and_label already attempts both reservation and labeling. "
                             "Read current state or await a new user request before another attempt."
                         )
-                    elif attempt_policy == "single_phase_with_history_v2":
+                    elif attempt_policy in {"single_phase_with_history_v2",
+                                            "fresh_query_with_history_v3"}:
                         tool.description += (
                             " Also returns up to 16 original operation receipt summaries for "
                             "this exact owner/object in journal order, with an omission count. "
@@ -166,7 +167,9 @@ class FunctionalApplication:
                 app.root / "business-journal.json", app.tool_names,
                 **({"owner": owner, "world": app.world,
                     "single_phase_per_turn": attempt_policy != "legacy",
-                    "include_attempt_history": attempt_policy == "single_phase_with_history_v2"}
+                    "include_attempt_history": attempt_policy in {
+                        "single_phase_with_history_v2", "fresh_query_with_history_v3"},
+                    "require_fresh_query": attempt_policy == "fresh_query_with_history_v3"}
                    if authorization_mode == "native_public_v1"
                    else {"application_protection": True}),
                 response_hook=response_hook,
@@ -229,6 +232,7 @@ class FunctionalApplication:
         runtime_config: Mapping[str, Any] | None = None, *,
         boundary_hook: Callable[[str, dict[str, Any]], None] | None = None,
         memory_mutation_names: Sequence[str] = ("save_memory", "update_memory", "forget_memory"),
+        inline_fragment_content: bool = False,
     ) -> FunctionalCallWrapper:
         """Wrap ToolNode calls before delivery, with no model/network calls here.
 
@@ -257,7 +261,8 @@ class FunctionalApplication:
                 raise ValueError("FUNCTIONAL_ACTUAL_PUBLIC_SOURCE_REQUIRED")
             self.journal.bind_public_turn(session, turn_id, source)
         return FunctionalCallWrapper(self, service, session, turn_id, trace,
-                                     boundary_hook, frozenset(memory_mutation_names))
+                                     boundary_hook, frozenset(memory_mutation_names),
+                                     inline_fragment_content)
 
 
 class FunctionalCallWrapper:
@@ -266,6 +271,7 @@ class FunctionalCallWrapper:
         trace: Callable[[dict[str, Any]], None] | None,
         boundary_hook: Callable[[str, dict[str, Any]], None] | None,
         memory_mutation_names: frozenset[str],
+        inline_fragment_content: bool = False,
     ) -> None:
         if service.owner != app.owner or not session or not turn_id:
             raise ValueError("FUNCTIONAL_MEMORY_SCOPE_INVALID")
@@ -275,14 +281,17 @@ class FunctionalCallWrapper:
         self.trace = trace or (lambda event: None)
         self.boundary_hook = boundary_hook or (lambda window, event: None)
         self.memory_mutation_names = memory_mutation_names
+        self.inline_fragment_content = inline_fragment_content
 
     def _source_fragment_index(self, source_ref: str) -> list[dict[str, Any]]:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
             return []
-        return [{field: fragment[field] for field in (
+        fields = (
             "fragment_handle", "source_ref", "role", "origin", "start", "end",
             "source_total_codepoints", "range_basis",
-        )} for fragment in self.service.source_fragments(source_ref)]
+        ) + (("content", "semantic_support") if self.inline_fragment_content else ())
+        return [{field: fragment[field] for field in fields}
+                for fragment in self.service.source_fragments(source_ref)]
 
     def note_delivered_sources(self, source_refs: list[str]) -> None:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
@@ -371,6 +380,13 @@ class FunctionalCallWrapper:
             # above. Ordinary retrieval remains on its original fixed snapshot;
             # the Host need not spend another read just to obtain evidence handles.
             content["source_fragment_index"] = self._source_fragment_index(source_ref)
+            if self.inline_fragment_content:
+                content["memory_evidence_selection"] = (
+                    "Each handle covers only its adjacent original content. Select every "
+                    "fragment needed for the saved claims. A user request supports what was "
+                    "requested, not what actually happened; use these actual tool observations "
+                    "for outcome claims. Omit details unsupported by your selected fragments. "
+                    "These handles require no extra read; semantic support remains unchecked.")
         delivery = response.model_copy(update={"content": json.dumps(content, ensure_ascii=False)})
         self.app.progress.record(key, "delivery_response", delivery.model_dump(mode="json"))
         self.trace({"event": "functional_application_receipt_ready", "key": key,

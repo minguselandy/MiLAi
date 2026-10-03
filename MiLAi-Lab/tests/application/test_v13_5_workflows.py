@@ -64,6 +64,53 @@ def receipt(message: Any) -> dict[str, Any]:
     return json.loads(message.content)["receipt"]
 
 
+@pytest.mark.parametrize('workflow', ['reservation', 'document'])
+def test_old_object_requires_actual_current_target_query_before_remaining_mutation(
+    tmp_path: Path, workflow: str,
+) -> None:
+    options = {'attempt_policy': 'fresh_query_with_history_v3',
+               'initial_label_available' if workflow == 'reservation'
+               else 'initial_publication_available': False}
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow, **options)
+        if workflow == 'reservation':
+            first = receipt(call(wrapper, 'reserve_and_label', reserve_args(), 'original'))
+            name, args = 'complete_label', {'reservation_id': first['reservation_id']}
+            query, target = 'get_reservation', {'item_key': 'mechanical item'}
+        else:
+            first = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'original'))
+            bound = {k: first[k] for k in ('title', 'document_version', 'content_digest')}
+            receipt(call(wrapper, 'approve_document_version', bound, 'approve'))
+            name, args = 'publish_approved_document', {**bound, 'audience': 'local audience'}
+            receipt(call(wrapper, name, args, 'original-publish'))
+            query, target = 'get_document_status', {'title': 'mechanical draft'}
+        service.capture_user('session', 'next', 'Query before continuing the remaining work.')
+        wrapper = app.call_wrapper(service, 'session', 'next')
+        before = app.world.snapshot()
+        denied = json.loads(call(wrapper, name, args, 'no-current-query').content)
+        assert denied['status'] == 'current_public_query_required'
+        assert denied['query_tool'] == query and denied['query_args'] == target
+        assert denied['effect'] == 'none' and denied['executed'] is False
+        assert app.world.snapshot() == before
+        # A real query for another target cannot grant the required observation.
+        receipt(call(wrapper, query, {k: 'another object' for k in target}, 'other-query'))
+        assert json.loads(call(wrapper, name, args, 'wrong-target-query').content)[
+            'status'] == 'current_public_query_required'
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow, **options)
+        wrapper = app.call_wrapper(service, 'session', 'next')
+        assert json.loads(call(wrapper, name, args, 'after-reopen').content)[
+            'status'] == 'current_public_query_required'
+        receipt(call(wrapper, query, target, 'actual-current-query'))
+        result = receipt(call(wrapper, name, args, 'remaining-attempt'))
+        assert result['status'] == ('label_service_unavailable' if workflow == 'reservation'
+                                    else 'publish_service_unavailable')
+        assert call(wrapper, name, args, 'remaining-attempt').content
+        row = next(v for v in app.snapshot()['journal'].values()
+                   if isinstance(v, dict) and v.get('call_id') == 'remaining-attempt')
+        assert row['executed'] is True and row['effect'] == 'none'
+
+
 def test_native_reservation_partial_no_effect_remaining_step_and_stale_source(
     tmp_path: Path,
 ) -> None:

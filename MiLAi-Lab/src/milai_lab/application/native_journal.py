@@ -23,11 +23,13 @@ from milai_lab.harness.artifact_io import write_json
 class NativePublicActionJournal(BusinessActionJournal):
     def __init__(self, *args: Any, owner: str, world: Any,
                  single_phase_per_turn: bool = False, include_attempt_history: bool = False,
+                 require_fresh_query: bool = False,
                  **kwargs: Any) -> None:
         super().__init__(*args, application_protection=True, **kwargs)
         self.owner, self.world = owner, world
         self.single_phase_per_turn = single_phase_per_turn
         self.include_attempt_history = include_attempt_history
+        self.require_fresh_query = require_fresh_query
         self.public_turn: dict[str, Any] | None = None
         schemas = document_schemas() if self.document_workflow else BUSINESS_SCHEMAS
         self.parameter_schemas = {item["function"]["name"]: item["function"]["parameters"]
@@ -120,7 +122,19 @@ class NativePublicActionJournal(BusinessActionJournal):
         operation = self._hash([self.owner, call["name"], call["args"]])
         reason = None
         if not self._is_query(call["name"]):
+            relevant = [old for old in entries.values() if isinstance(old, dict)
+                        and old.get("owner") == self.owner and old.get("target") == target
+                        and old.get("executed")]
+            if (self.require_fresh_query
+                    and any(old.get("public_turn") != self.public_turn
+                            and not self._is_query(old.get("name", "")) for old in relevant)
+                    and not any(old.get("public_turn") == self.public_turn
+                                and old.get("status") == "complete"
+                                and self._is_query(old.get("name", "")) for old in relevant)):
+                reason = "current_public_query_required"
             for old in entries.values():
+                if reason:
+                    break
                 if (not isinstance(old, dict) or old.get("target") != target
                         or not old.get("executed") or self._is_query(old.get("name", ""))):
                     continue
@@ -155,8 +169,14 @@ class NativePublicActionJournal(BusinessActionJournal):
                    "application_recovery") else "host"}
         entries[key] = row
         if reason:
+            body: dict[str, Any] = {"status": reason, "executed": False}
+            if reason == "current_public_query_required":
+                body.update(effect="none", query_tool=("get_document_status"
+                    if self.document_workflow else "get_reservation"), query_args=target,
+                    explanation="Query this exact object now before choosing remaining work. "
+                    "Historical receipts do not establish current application state.")
             response = ToolMessage(name=call["name"], tool_call_id=call["id"], status="error",
-                                   content=json.dumps({"status": reason, "executed": False}))
+                                   content=json.dumps(body))
         else:
             # The fixed public read contract has no business mutation, even if
             # its response is lost. Response uncertainty remains status=pending.

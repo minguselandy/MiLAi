@@ -7,6 +7,8 @@ Full L2-r17 completed all12/26: 10 scoped PASS, 2 FAIL. L2-r18 then stopped afte
 4 completed messages on an unauthorized document edit during publication continuation.
 L2-r19 preserved the original document and actual publication, but stopped on a bounded
 read failure and rejection of a literal negative quote in a read-only declaration.
+L2-r20 completed all12/26 with 6 scoped PASS and 6 FAIL: source selection, live-query omissions,
+operation declaration omissions and redundant read exhaustion remain. Its exact Fast CI passed.
 These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
 pending and no stable configuration is recommended. Earlier failures and scoped
 communication cohorts remain separate evidence; their scores are not pooled.
@@ -20,9 +22,11 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r20.json` with a new root for current candidate
-validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R20 retains exact current-message save idempotency and first interprets the current
+Use `configs/v13-5-functional-r21.json` with a new root for current candidate
+validation. R21 uses native v4 with thinking enabled, with unchanged capacity/call/read limits.
+It requires a current same-object query before a new mutation of an earlier operated object,
+and shows exact original content beside each business source fragment handle.
+R21 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,

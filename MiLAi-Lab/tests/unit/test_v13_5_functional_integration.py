@@ -35,6 +35,7 @@ def prepared(
     receipt_response: bool = False,
     declared_writes: bool = False,
     operation_mode_declaration: bool = False,
+    inline_fragments: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -54,6 +55,7 @@ def prepared(
     write_json(budget_path, budget.state)
     settings = {
         "profile": "functional_v1", "host": asdict(host),
+        "source_selection": "inline_fragments_v1" if inline_fragments else "index_v1",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
             "tokenizer_files_sha256": {
                 name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
@@ -943,10 +945,24 @@ def test_public_agent_catalog_carries_per_field_correction_selections(
 
 
 @pytest.mark.parametrize("workflow", ["reservation", "document"])
+@pytest.mark.parametrize('inline_fragments', [False, True])
 def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, workflow: str,
+    inline_fragments: bool,
 ) -> None:
-    root = prepared(tmp_path)
+    root = prepared(tmp_path, inline_fragments=inline_fragments)
+
+    def evidence(result: dict[str, Any]) -> list[str]:
+        fragments = result['source_fragment_index']
+        assert all(('content' in row) == inline_fragments for row in fragments)
+        if inline_fragments:
+            body = ''.join(row['content'] for row in fragments)
+            assert json.loads(body) == result['receipt']
+            assert all(row['content'] == body[row['start']:row['end']] for row in fragments)
+            assert all(row['role'] == 'tool' and row['semantic_support'] == 'unchecked'
+                       for row in fragments)
+            assert 'not what actually happened' in result['memory_evidence_selection']
+        return [row['fragment_handle'] for row in fragments]
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if workflow == "document":
@@ -963,8 +979,7 @@ def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
                 result = actual_tool_receipt(wire)
                 assert result["receipt"]["publication_status"] == "published"
                 return tool("save_memory", content="The draft was approved and published locally.",
-                            fragment_handles=[row["fragment_handle"]
-                                              for row in result["source_fragment_index"]])
+                            fragment_handles=evidence(result))
             assert actual_tool_receipt(wire)["status"] == "committed"
             return {"answer": "The actual local publication is recorded."}
         if ordinal == 1:
@@ -974,8 +989,7 @@ def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
             result = actual_tool_receipt(wire)
             assert result["receipt"]["label_status"] == "created"
             return tool("save_memory", content="The mechanical item was reserved and labeled.",
-                        fragment_handles=[row["fragment_handle"]
-                                          for row in result["source_fragment_index"]])
+                        fragment_handles=evidence(result))
         assert actual_tool_receipt(wire)["status"] == "committed"
         return {"answer": "The actual reservation and label are recorded."}
 

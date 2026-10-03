@@ -1960,6 +1960,95 @@
         "full_run": 37097523704,
         "full_status": "skipped"
       }
+    },
+    {
+      "id": "l2-r20",
+      "layer": "L2",
+      "candidate_commit": "35c3e43a4e014769c4faaab1d75fde5aed715722",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r20.json",
+      "admission": "Full12/26 frozen before outputs; direct read-only negative-clause and partial publication regressions first. Same budget and per-operation permissions; no old-root resume.",
+      "mechanical_verification": "24 declaration/catalog/replay checks; 3 production tokenizer readonly variants; ruff/affected mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 10760,
+        "generation": {
+          "charged_tokens": 32867056,
+          "known_tokens": 32836669,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r20/input-freeze.json": "6115a16d66d6a70abb6780bc196c1c3b0e74d1451f08e195b7853ba99ed22cc9",
+        "configs/v13-5-functional-r20.json": "4765b7d51873052e70ce72e0827691f7e3744b9b19d2e7ae478c4f47dc8d06d3",
+        "artifacts/v13-5/r20-declaration-tests.log": "219cd9be194628e198b14182b2e55a0deac0ea3335e5e8d8304a9e4eb7489a42",
+        "artifacts/v13-5/r20-production-contracts.json": "dc12c49eaca66d9b628706090c27060a59e308b32fc186152756c049071fca45",
+        "artifacts/v13-5/l2-r20/review.json": "4b5b9291aa05dd85ce5212309886225b57c5bd88be5b86e78694d00ba42f4ffa",
+        "artifacts/v13-5/l2-r20/seal.json": "174e46a622e5cc12afde74225da92f3027791cfe78fef79bd00832e1f2dad471",
+        "artifacts/v13-5/l2-r20-evaluator/summary.json": "08cb87f39f983c50ed2c547301895cc37ba300c075cfd694db14307bb63c12c2",
+        "artifacts/v13-5/l2-r20-all-review.jsonl": "5429453c5cb2f1d747e2a741957f74823c3bf3048cb42b2874f25cb8e0269e89",
+        "artifacts/v13-5/l2-r20-manual-grades.json": "fd3ceb9a73b421512f99af679c6d46cb7360058d70da90d5dd54e97913d0de3c"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 6,
+        "FAIL": 6
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "FAILED": 1,
+        "UNKNOWN": 3
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 117,
+        "generation.known_tokens": 749185,
+        "generation.charged_tokens": 749185,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l2-r01": "Exact reservation/label and supported semantic save; follow-up live query only.",
+        "l2-r02": "Actual remaining label completed once after query. Agent then redundantly reads the old memory until read limit; FAILED with available truthful receipt answer. Initial record support correct.",
+        "l2-r03": "Initial partial and supported save correct. Second message skips requested live query before label attempt; third only answers old records without any current query, despite claiming current state.",
+        "l2-r04": "Actual W1 after native mutation; subsequent live query discovers completed reservation/label without duplicate. Original UNKNOWN retained; semantic work remains uncommitted and reported separately.",
+        "l2-r05": "Actual W1 before native mutation. Follow-up query returns not_found, but current operation declaration excludes reserve_and_label; Agent calls complete_label with item name as reservation ID. Authorized missing work remains undone; no false effect report.",
+        "l2-r06": "Supported original partial save; same-turn extra label attempt blocked before invocation. External actual completion and later read-only live query distinguish old missing label/current completed; original record retained.",
+        "l2-d01": "Exact draft, approval, sandbox audience publication and supported save. Selected actual fragments support saved body/date/status; follow-up live query only.",
+        "l2-d02": "Actual partial and later publication-only continuation preserve original body/version/approval. Saved result selects ONLY original user instruction, which cannot support actual approval or publication failure. Literal quote identity passes, semantic support fails.",
+        "l2-d03": "Create/approve and supported save; one requested failed publish; readonly last message executes current query and explicitly shows prior no-effect publication. Bound negative quote is accepted without mutation permission.",
+        "l2-d04": "Actual W1 after publication, later live query discovers completed approved/published version and no repeat. Original UNKNOWN and unfinished semantic maintenance retained.",
+        "l2-d05": "Initial operation declaration omits create_or_update_draft, so requested document never created, approval uses invented version/digest and returns not_found. Two records saved, second includes unsupported own memory receipt claim. Intended W1 before publication NOT_APPLIED; follow-up publication not_found, actual authorized work remains undone.",
+        "l2-d06": "Actual exact create/approve/publish and later external v2/current query correct. Saved summary adds publication timestamp, but selected first fragments of publication/query end before publications timestamp; those selected sources do not support this detail. Do not promote legitimate handles to semantic support."
+      },
+      "findings": [
+        "Full12/26 executed; 3 actual W1 UNKNOWNs retained. d05 intended W1 NOT_APPLIED because requested draft/publish path not reached.",
+        "Direct readonly negative quote regression passed; native intent decisions, live-query omissions and selected source support still fail.",
+        "r02 post-effect redundant reads stop honestly; no retry/reset or hidden rollback.",
+        "All actual stored quote spans/hash identities and readonly SQLite current/latest histories match. Identity does not establish support.",
+        "No runtime/config edits during cohort; continuous ledger and no new unknown usage."
+      ],
+      "evidence": [
+        "../l2-r20-manual-grades.json",
+        "../l2-r20-all-review.jsonl",
+        "../l2-r20-evaluator/summary.json"
+      ],
+      "remote_ci": {
+        "commit": "35c3e43a4e014769c4faaab1d75fde5aed715722",
+        "fast_run": 37098586720,
+        "fast_status": "success",
+        "full_run": 37098586688,
+        "full_status": "skipped"
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

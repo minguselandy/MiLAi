@@ -255,6 +255,9 @@ def prepare(
     settings = read_json(settings_path)
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
+    if settings.get("source_selection", "index_v1") not in {
+            "index_v1", "inline_fragments_v1"}:
+        raise ValueError("FUNCTIONAL_SOURCE_SELECTION_INVALID")
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
@@ -1272,7 +1275,9 @@ def message(
                 }
 
             call_wrapper = app.call_wrapper(
-                service, session, message_id, trace, cfg, boundary_hook=faults.boundary
+                service, session, message_id, trace, cfg, boundary_hook=faults.boundary,
+                inline_fragment_content=(settings.get("source_selection")
+                                         == "inline_fragments_v1"),
             )
 
             def dispatch(request: Any, execute: Any) -> Any:
