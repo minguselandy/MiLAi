@@ -67,6 +67,7 @@ class FunctionalMemory:
         fragment_chars: int = 1200,
         retrieval_candidates: list[dict[str, Any]] | None = None,
         formation_interface: str = "content_and_scope_v1",
+        recent_context: str = "disabled",
     ) -> None:
         if service.functional_contract != "functional_v1":
             raise FunctionalRejection("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
@@ -76,6 +77,9 @@ class FunctionalMemory:
         if formation_interface not in {"content_and_scope_v1", "unified_assertion_v1"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
+        if recent_context not in {"disabled", "session_events_v1"}:
+            raise FunctionalRejection("V13_5_RECENT_CONTEXT_INVALID")
+        self.recent_context = recent_context
         self.read_limit, self.material_limit, self.fragment_chars = (
             read_limit,
             material_limit,
@@ -89,6 +93,8 @@ class FunctionalMemory:
         }
         if formation_interface != "content_and_scope_v1":
             self.policy["formation_interface"] = formation_interface
+        if recent_context != "disabled":
+            self.policy["recent_context"] = recent_context
         self.retrieval_candidates = copy.deepcopy(retrieval_candidates)
         if retrieval_candidates is not None:
             for row in retrieval_candidates:
@@ -429,7 +435,21 @@ class FunctionalMemory:
         key = "ordinary-" + digest([bound, self.policy, self.forget_epoch])
         cached = self.service.store.get(namespace(self.service), key)
         if cached is None:
-            snapshot = self._snapshot(bound, self._search_units(actual_query, ref), "ordinary")
+            units = self._search_units(actual_query, ref)
+            if self.recent_context == "session_events_v1" and self.retrieval_candidates is None:
+                # Public captured events only, same owner/session, after visibility
+                # filtering. Fixed supplied candidate pools keep their exact order.
+                recent = sorted((source for source in self.service.sources(session)
+                                 if source["event_id"] != ref
+                                 and source["role"] in {"user", "assistant"}),
+                                key=lambda source: (source["observed_at"], source["event_id"]))[-4:]
+                fragments = [{"type": "fragment", **fragment}
+                             for source in recent
+                             for fragment in self.service.source_fragments(
+                                 source["event_id"], max_chars=self.fragment_chars)]
+                current = [unit for unit in units if unit.get("source_ref") == ref]
+                units = self._deduplicate(current + fragments + units)
+            snapshot = self._snapshot(bound, units, "ordinary")
             self.service.store.put(
                 namespace(self.service), key, {"snapshot": snapshot}, index=False
             )

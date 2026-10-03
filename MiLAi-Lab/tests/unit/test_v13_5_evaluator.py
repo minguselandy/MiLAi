@@ -322,3 +322,41 @@ def test_normal22_preserves_unknown_nonpasses_without_inventing_normal24_thresho
     assert gate["manual_pass_count"] == 22
     assert gate["semantic_unknown_cases"] == ["22", "23"]
     assert gate["denominator"] == 24
+
+
+@pytest.mark.parametrize('fault', ['none', 'text', 'role', 'session', 'source_id', 'hash',
+                                  'render_hash', 'missing_render', 'missing_source', 'policy'])
+def test_program_final_requires_actual_bound_public_capture(fault: str) -> None:
+    import hashlib
+    metadata = {'status': 'response_rendered', 'attempts': 0, 'tools_available': False,
+                'execution_candidate_delivered': False, 'protocol': 'receipt_business_response_v1',
+                'model_generation': False}
+    identity = [['functional', 'run', 'bank', 'alice'], 's', 'm:final', 'assistant']
+    ref = 'src-' + hashlib.sha256(json.dumps(
+        identity, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    text = 'Only listed receipt effects are confirmed.'
+    source = dict(event_id=ref, owner='alice', session='s', role='assistant',
+                  origin='public_assistant_message', content=text,
+                  content_sha256=EVAL.text_hash(text))
+    row = dict(bank='bank', owner='alice', session='s', message_id='m', final_answer=text,
+               finalization=metadata, sources=[source], messages=[dict(type='ai', content=text)])
+    event = dict(event='functional_receipt_finalization', **metadata,
+                 final_text_sha256=EVAL.text_hash(text))
+    freeze = dict(run_id='run', config=dict(finalization='receipt_business_response_v2'))
+    events = [event]
+    if fault in {'text', 'role', 'session', 'source_id', 'hash'}:
+        key = dict(text='content', role='role', session='session', source_id='event_id',
+                   hash='content_sha256')[fault]
+        source[key] = 'wrong'
+    elif fault == 'render_hash':
+        event['final_text_sha256'] = 'wrong'
+    elif fault == 'missing_render':
+        events = []
+    elif fault == 'missing_source':
+        row['sources'] = []
+    elif fault == 'policy':
+        freeze['config']['finalization'] = 'agent_final_v1'
+    result = EVAL.program_final_linkage(row, events, freeze)
+    expected = 'PASS' if fault == 'none' else 'UNKNOWN' if fault == 'policy' else 'FAIL'
+    assert result['status'] == expected
+    assert 'semantic_verdict' not in result

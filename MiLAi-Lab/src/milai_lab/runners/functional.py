@@ -282,13 +282,37 @@ def prepare(
     controls_path: Path | None = None,
 ) -> dict[str, Any]:
     settings = read_json(settings_path)
+    allowed = {
+        "profile", "host", "capacity", "budget_path", "max_calls_per_message",
+        "ordinary_material_tokens", "additional_reads", "format_reproposals", "queue_limits",
+        "http_ownership_profile", "http_ownership_domain", "system_prompt", "limitations",
+        "revision", "change_intent", "request_mode", "business_attempt_policy",
+        "formation_interface", "finalization", "read_exhaustion", "memory_completion",
+        "source_selection", "failure_delivery", "business_completion",
+        "declaration_tool_choice", "recent_context",
+    }
+    if set(settings) - allowed:
+        raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
+                         + ",".join(sorted(set(settings) - allowed)))
+    capacity_keys = {
+        "model", "tokenizer_path", "tokenizer_files_sha256", "context_tokens", "output_tokens",
+        "batch_source_tokens", "safety_tokens", "source_message_overhead_tokens",
+        "related_reserve_tokens", "schema_reserve_tokens", "enable_thinking",
+        "description", "notes",
+    }
+    if set(settings.get("capacity", {})) - capacity_keys:
+        raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
+    if settings.get("declaration_tool_choice", "auto") not in {"auto", "required"}:
+        raise ValueError("FUNCTIONAL_DECLARATION_TOOL_CHOICE_INVALID")
+    if settings.get("recent_context", "disabled") not in {"disabled", "session_events_v1"}:
+        raise ValueError("FUNCTIONAL_RECENT_CONTEXT_INVALID")
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
     if settings.get("source_selection", "index_v1") not in {
             "index_v1", "inline_fragments_v1", "inline_receipt_units_v2"}:
         raise ValueError("FUNCTIONAL_SOURCE_SELECTION_INVALID")
     if settings.get("failure_delivery", "unavailable_v1") not in {
-            "unavailable_v1", "receipt_status_v1"}:
+            "unavailable_v1", "receipt_status_v1", "receipt_status_v2"}:
         raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
     if settings.get("business_completion", "disabled") not in {
             "disabled", "observed_continuation_v1"}:
@@ -306,6 +330,7 @@ def prepare(
         "content_and_scope_v1", "unified_assertion_v1",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
+        "receipt_business_response_v2",
     }:
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
     if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
@@ -500,6 +525,7 @@ def request_mode(
     action_mode_declaration: bool = False,
     operation_mode_declaration: bool = False,
     reference_mode_declaration: bool = False,
+    declaration_tool_choice: str = "auto",
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -581,7 +607,7 @@ def request_mode(
                    else REQUEST_ACTION_MODE_DECLARATION if action_mode_declaration
                    else REQUEST_WRITE_MODE_DECLARATION if write_mode_declaration
                    else REQUEST_MODE_DECLARATION] if native_declaration else [],
-            tool_choice="auto" if native_declaration else "none")
+            tool_choice=declaration_tool_choice if native_declaration else "none")
         try:
             if native_declaration:
                 decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
@@ -629,6 +655,7 @@ def request_mode(
 def continuation_operations(
     model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any], content: str,
     mode: dict[str, Any], material: dict[str, Any], format_reproposals: int, trace: Trace,
+    *, declaration_tool_choice: str = "auto",
 ) -> dict[str, Any]:
     """Resolve references only after a current-only continuation decision.
 
@@ -674,7 +701,7 @@ def continuation_operations(
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=json.dumps({
             "current_request": content, "accepted_current_mode": mode,
             "archived_reference_material": material}, ensure_ascii=False))],
-            tools=[CONTINUATION_OPERATIONS_DECLARATION], tool_choice="auto")
+            tools=[CONTINUATION_OPERATIONS_DECLARATION], tool_choice=declaration_tool_choice)
         decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
             and len(response.tool_calls) == 1 and not response.invalid_tool_calls
             and response.tool_calls[0]["name"] == "resolve_continuation_operations" else None)
@@ -1163,6 +1190,12 @@ def message(
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
+            if settings.get("failure_delivery") == "receipt_status_v2":
+                # Bind the incoming event before classification, without retrieving
+                # anything. A pre-Agent failure delivery must inherit this input's
+                # visibility, never the preceding public turn's exposure.
+                service.bind_public_turn(session, message_id, capture["source_ref"],
+                                         config_sha256=freeze["config_sha256"], phase="start")
             capacity = HostCapacity(settings["capacity"])
             memory = FunctionalMemory(
                 service,
@@ -1170,6 +1203,7 @@ def message(
                 read_limit=settings["additional_reads"],
                 material_limit=settings["ordinary_material_tokens"],
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
+                recent_context=settings.get("recent_context", "disabled"),
                 retrieval_candidates=[
                     {
                         **row,
@@ -1274,7 +1308,8 @@ def message(
                     operation_mode_declaration=settings["request_mode"] in {
                         "current_request_native_v4", "current_request_native_v5"},
                     reference_mode_declaration=settings["request_mode"]
-                        == "current_request_native_v5")
+                        == "current_request_native_v5",
+                    declaration_tool_choice=settings.get("declaration_tool_choice", "auto"))
                 if (settings["request_mode"] == "current_request_native_v5"
                         and mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"]):
@@ -1291,7 +1326,8 @@ def message(
                         bank_root / f"{identity}-continuation-operations.json",
                         {"source_ref": capture["source_ref"], "public_sha256": _hash(public),
                          "config_sha256": freeze["config_sha256"]},
-                        content, mode, material, settings["format_reproposals"], trace)
+                        content, mode, material, settings["format_reproposals"], trace,
+                        declaration_tool_choice=settings.get("declaration_tool_choice", "auto"))
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}
@@ -1488,7 +1524,8 @@ def message(
                                        and final_delivery(last.content)["status"] == "unavailable")
                 if resume and (pending_answer_repair or (bad_checkpoint_text
                         and settings.get("finalization") not in {
-                            "readonly_response_v1", "receipt_business_response_v1"})):
+                            "readonly_response_v1", "receipt_business_response_v1",
+                            "receipt_business_response_v2"})):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
                     if (recovery["attempts"] + len(format_failures(prior))
@@ -1620,7 +1657,8 @@ def message(
                 if missing_requested_memory_attempt(messages):
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
             if settings.get("finalization") in {
-                    "readonly_response_v1", "receipt_business_response_v1"}:
+                    "readonly_response_v1", "receipt_business_response_v1",
+                    "receipt_business_response_v2"}:
                 answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                   if recovery_path.exists() else 0)
                 effects = operation_status({**output, "world": app.snapshot()},
@@ -1629,9 +1667,11 @@ def message(
                 # can be reused. The model sees exactly the same bounded material.
                 response_input = context_hook({"messages": messages}, cfg,
                     for_finalization=True)["llm_input_messages"]
-                if settings.get("finalization") == "receipt_business_response_v1" and (
+                if settings.get("finalization") in {
+                        "receipt_business_response_v1", "receipt_business_response_v2"} and (
                         effects["business"]["operations"] or effects["business"]["observations"]
-                        or (mode and mode["allow_business_mutation"])
+                        or (settings.get("finalization") == "receipt_business_response_v1"
+                            and mode and mode["allow_business_mutation"])
                         or output.get("execution_stop")):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
@@ -1639,7 +1679,10 @@ def message(
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}
-                    trace({"event": "functional_receipt_finalization", **output["finalization"]})
+                    trace({"event": "functional_receipt_finalization", **output["finalization"],
+                           "final_text_sha256": hashlib.sha256(
+                               str(final.content).encode()).hexdigest(),
+                           "operation_status_sha256": _hash(effects)})
                 else:
                     final, output["finalization"] = finalize_response(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
@@ -1699,7 +1742,10 @@ def message(
                     )
             # Capture assistant speech as its real role, never as new user evidence.
             if output["final_delivery"]["status"] == "available":
-                service.capture_assistant(session, message_id + ":final", output["final_answer"])
+                output["final_capture"] = service.capture_assistant(
+                    session, message_id + ":final", output["final_answer"])
+                if not output["final_capture"].get("ok"):
+                    raise ValueError("FUNCTIONAL_FINAL_CAPTURE_UNCONFIRMED")
             output.update(
                 records=service.records(),
                 sources=service.sources(),
@@ -1764,9 +1810,11 @@ def message(
             output, thread_id=cfg["configurable"]["thread_id"],
             execution_started=execution_started,
         )
-        if (settings.get("failure_delivery") == "receipt_status_v1"
+        if (settings.get("failure_delivery") in {"receipt_status_v1", "receipt_status_v2"}
                 and output.get("error_category") == "provider_protocol"
-                and output.get("messages") and "service" in locals()
+                and (output.get("messages")
+                     or settings.get("failure_delivery") == "receipt_status_v2")
+                and "service" in locals() and "snapshot_error" not in output
                 and "checkpoint_snapshot_error" not in output
                 and "application_snapshot_error" not in output):
             blocked = _visibility_replay(service, output, session=session, message_id=message_id)
@@ -1774,20 +1822,26 @@ def message(
                 return blocked
             # No model repair, tool dispatch, additional retrieval, or promotion
             # to COMPLETED. Only already delivered, paired receipts are rendered.
-            evidence = agent.get_state(cfg).values.get("messages", [])
+            evidence = (agent.get_state(cfg).values.get("messages", [])
+                        if "agent" in locals() else [])
             final = business_response(evidence, output["operation_status"], {})
             output["final_answer"] = (
                 "回答协议失败, 执行已停止; 以下是已确认的操作状态。"
                 "未列出的请求完成情况仍未确认。\n\n" + str(final.content))
             output["final_delivery"] = final_delivery(output["final_answer"])
             output["failure_delivery"] = {
-                "protocol": "receipt_status_v1", "model_generation": False,
+                "protocol": settings["failure_delivery"], "model_generation": False,
                 "execution_status_preserved": True, "additional_operations": 0}
             trace({"event": "functional_failure_receipt_delivery",
                    **output["failure_delivery"], "final_answer": output["final_answer"]})
             try:
-                service.capture_assistant(session, message_id + ":failure-final",
-                                          output["final_answer"])
+                output["final_capture"] = service.capture_assistant(
+                    session, message_id + ":failure-final" + (
+                        f":{attempt}" if settings["failure_delivery"] == "receipt_status_v2"
+                        else ""),
+                    output["final_answer"])
+                if not output["final_capture"].get("ok"):
+                    raise ValueError("FUNCTIONAL_FAILURE_CAPTURE_UNCONFIRMED")
                 output["sources"] = service.sources()
             except Exception as delivery_error:
                 output["failure_delivery_error"] = type(delivery_error).__name__

@@ -1072,3 +1072,49 @@ def test_known_independent_copy_requires_explicit_additional_fragment_selection(
         assert receipt["independent_input_copies"] == "require_explicit_fragment_selection"
         assert receipt["scope_counts"]["explicit_support_sources"] == 2
         assert memory.service.source(copy_ref) is None
+
+
+def test_recent_public_events_are_bounded_visible_and_fixed_pool_is_unchanged(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, recent_context='session_events_v1', material_limit=30000) as memory:
+        refs = []
+        for i in range(6):
+            refs.append(turn(memory, str(i), 'unrelated subject ' + str(i)))
+        memory.service.capture_user('different-session', 'x', 'OTHER_SESSION')
+        current = memory.service.capture_user('s', 'q', '那个呢?')['source_ref']
+        packet = memory.context('s', 'q', SHA)
+        delivered = [u['source_ref'] for u in packet['items'] if u['type'] == 'fragment']
+        assert delivered[:5] == [current, *refs[-4:]]
+        assert refs[0] not in delivered and refs[1] not in delivered
+        assert 'OTHER_SESSION' not in json.dumps(packet)
+        fixed = FunctionalMemory(memory.service, len, recent_context='session_events_v1',
+                                 material_limit=30000, retrieval_candidates=[])
+        fixed_packet = fixed.context('s', 'q', SHA)
+        assert [u['source_ref'] for u in fixed_packet['items']] == [current]
+
+
+@pytest.mark.parametrize('recent', ['disabled', 'session_events_v1'])
+def test_preagent_failure_lineage_forget_preserves_later_independent_input(
+    tmp_path: Path, recent: str,
+) -> None:
+    with opened(tmp_path, recent_context=recent, material_limit=30000) as memory:
+        secret = turn(memory, 'old', 'private marker for a canceled arrangement')
+        record = memory.save(cfg('old'), 'save', 'private marker arrangement',
+                             handles(memory, secret))
+        request = memory.service.capture_user('s', 'failed', 'cancel private marker arrangement')
+        memory.service.bind_public_turn('s', 'failed', request['source_ref'],
+                                        config_sha256=SHA, phase='start')
+        failure = memory.service.capture_assistant('s', 'failed:failure-final:0',
+                                                   'Processing failed; no semantic commit.')
+        independent = turn(memory, 'new', 'independent beta preference')
+        turn(memory, 'forget', 'Forget that old record and its cancellation request.')
+        receipt = invoke(memory, 'forget_memory', {
+            'read_handle': memory.service.read(record['id'])['candidate_handle'],
+            'additional_fragment_handles': handles(memory, request['source_ref']),
+        }, 'forget', cfg('forget'))
+        assert receipt['ok']
+        assert memory.service.source(failure['source_ref']) is None
+        assert memory.service.source(independent) is not None
+        turn(memory, 'later', 'private marker')
+        assert failure['source_ref'] not in json.dumps(memory.context('s', 'later', SHA))

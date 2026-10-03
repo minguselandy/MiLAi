@@ -24,8 +24,10 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r25.json` with a new root for current candidate
-validation. R25 uses native v5 with thinking disabled, with unchanged capacity/call/read limits.
+Use `configs/v13-5-functional-r26.json` with a new root for current candidate
+validation. R26 uses native v5 with required declaration tool choice and thinking disabled,
+with unchanged capacity/call/read limits. Unknown top-level and capacity configuration keys
+are rejected before preparing a run.
 It requires a current same-object query before a new mutation of an earlier operated object,
 and shows exact original content beside each business source fragment handle.
 R23 retains exact current-message save idempotency and first interprets the current
@@ -35,7 +37,7 @@ that stage cannot change memory, forgetting or action permissions and shares the
 The whole input is bound by the program; no model-copied action quote is required. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,
-and requires an exact current-request clause for an action. It also lists the specific
+and lists the specific
 public business operations permitted; the catalog and dispatcher enforce that list.
 Document editing is distinct from semantic memory maintenance. A read-only v4
 declaration may keep an exact current negative/query clause or an empty quote;
@@ -58,13 +60,23 @@ without unresolved critical functional defects.
 The candidate exposes `save_memory(content, fragment_handles)`: include the complete
 fact and its explicit applicability limits together in `content`. New saves have no
 separate free-form scope argument; existing scoped records remain editable.
-The candidate `receipt_business_response_v1` policy renders the two business workflows
+The candidate `receipt_business_response_v2` policy renders the two business workflows
 from matched actual ToolMessages and current-message journal identities. It reports raw
 capture, semantic writes and business effects separately. Historical facts use only already
 delivered original tool fragments or public document-query history. Execution drafts cannot
 announce effects to the user. Destination/packing are configurations; publication is a local
 sandbox effect. Chinese receipt labels are currently supported. The renderer reports listed
 operations, not proof of complete user intent or correctness of saved semantic content.
+Without an actual business receipt, an inferred business mode does not select this renderer;
+the ordinary response stage can still answer a mixed memory question.
+
+`session_events_v1` includes at most four recent visible user/assistant Source events from
+the same session in ordinary material. Current input stays first, the existing token cap and
+pagination remain in force, and supplied fixed candidate pools are unchanged. These events
+are evidence with their original roles; an earlier request is neither a fresh instruction nor
+proof that maintenance completed. `receipt_status_v2` also captures a program failure reply
+when declaration fails before the Agent starts, with current-input privacy lineage and no
+extra model call. The execution remains FAILED; a readable reply does not make it successful.
 
 Ordinary memory answers retain the `readonly_response_v1` no-tool composition stage,
 with a fresh original-request/evidence frame excluding execution draft prose. Its reservation

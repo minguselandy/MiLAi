@@ -244,7 +244,8 @@ class VLLMChatModel(BaseChatModel):
         if self.request_transform is not None:
             self.request_transform.validate(request)
         if native and (
-            kwargs.get("tool_choice") not in (None, "auto", "none")
+            kwargs.get("tool_choice") not in (None, "auto", "none", "required")
+            or (kwargs.get("tool_choice") == "required" and not tools)
             or self.client.config.response_format is not None
         ):
             raise ValueError("NATIVE_CHAT_PROTOCOL_UNSUPPORTED")

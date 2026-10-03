@@ -2383,6 +2383,917 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "l2-r25",
+      "layer": "L2",
+      "candidate_commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r25.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11195,
+        "generation": {
+          "charged_tokens": 35744539,
+          "known_tokens": 35714152,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r25/input-freeze.json": "9b4951bec7a5bc8d1c26ba2db5fb4dceadc41821e3e302accaf4a4c0f7ccef1d",
+        "configs/v13-5-functional-r25.json": "5fb59557fdfb6737271019a463298069a63ce02a64e5f8727387f02254d810d8",
+        "artifacts/v13-5/l2-r25/review.json": "4bd369f64d7394bce0e8c5b983f93942430e05fb4f42ac50b3d9d30b509b0e3a",
+        "artifacts/v13-5/l2-r25/seal.json": "998bcddd5e45f443844adebadf24c581e165402c394886a48286873615ba9412",
+        "artifacts/v13-5/l2-r25-manual-grades.json": "8d664af2d9e196c0589b03157deb6a49cd58dd7dd14b7235fe931cc499384774",
+        "artifacts/v13-5/l2-r25-all-review.jsonl": "3597f66395b892567e34d38fb2832c610a4e49472650e8dec65fa1dc30748cfd",
+        "artifacts/v13-5/l2-r25-evaluator/summary.json": "fb8c1389354aa396816d23a396cbe01725e147cef3e302d1c254291a7c9ecddf",
+        "artifacts/v13-5/r25-entry-privacy-workflows.log": "333ece9f8991b666eaf35417b3e3c9a7452f0254b304f848d1ec10571318b279",
+        "artifacts/v13-5/r25-memory-queue-evaluator.log": "ae85e52e38fbd5d5fe76f0f93f74adcf4ea24cf674fbbc88ac89c86806220ed7",
+        "artifacts/v13-5/r25-sdk-lifecycle.log": "485fdf1a95332713c813c9f5e1d2b3774f4edcfdcab5e2c0fe4421ff59b707c1",
+        "artifacts/v13-5/r25-production-contracts.json": "b673d383c4c22a8b910b54295b12351fbaafd3070f262606f72face1cdd3da01",
+        "artifacts/v13-5/r25-direct-recheck.log": "713f5f7326fe896e9ab8c91e34eb349faa8db05fb8e4b7e77d35b41f643fde02",
+        "artifacts/v13-5/r25-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r25-mypy-final.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r25-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r25-unknown-config-probe.json": "66c8d791d5070803bce08dc3fa3162837acdec9e3bb4984a020f04d9396bbb87"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 10,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "UNKNOWN": 4
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 111,
+        "generation.known_tokens": 778453,
+        "generation.charged_tokens": 778453,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l2-r01": "Exact reservation and label, supported saved receipt; subsequent actual query, no repeat.",
+        "l2-r02": "Actual partial saved with its tool source; current query then only completes missing label.",
+        "l2-r03": "Supported initial partial; prequery label proposal rejected before native, then actual query and one failed label attempt. Last readonly request asks whether reservation remains and CURRENT label status; no actual query/tool call, natural answer claims current validity/status from historical material and calls previous attempt automatic. FAIL despite correct coincidental backend status.",
+        "l2-r04": "W1 after-native applied; later actual query discovers completed reservation/label, no repeated mutation. Original UNKNOWN retained.",
+        "l2-r05": "W1 before-native applied; admitted current continuation resolved prior operation through bounded ordinary material. Actual query not_found then one exact reservation/label. Original UNKNOWN retained.",
+        "l2-r06": "Supported original partial; external label completion applied. Actual readonly query distinguishes old/current state without maintenance.",
+        "l2-d01": "Actual exact draft/approval/publication and semantic save with full selected receipt support; later actual current query; no duplicate.",
+        "l2-d02": "Actual stages saved as three separate observations; followup live query and only publication succeeded without rewriting original body/approval. However initial failed-publication summary again uses Source observed_at as exact attempted-at time absent from the selected receipt body. Other creation/approval times are actual receipt event fields. Narrow time/source-support FAIL. Continuation feedback did not trigger; no causal improvement attribution.",
+        "l2-d03": "Create/approve and supported record, next current query then one failed publication, final readonly current query includes last attempt.",
+        "l2-d04": "W1 after actual publication applied; fresh query discovers publication with no repeated mutation; original UNKNOWN retained.",
+        "l2-d05": "Actual creation/approval; W1 before publication applied. Followup current query then only publication, no repeated draft or approval.",
+        "l2-d06": "Actual exact draft/approval/publication/save with complete selected tool receipt units covering all timestamps; external v2 edit applied, live query distinguishes invalidated/current unpublished v2 and historical v1 publication."
+      },
+      "limitations": [
+        "Original UNKNOWN remains UNKNOWN; actual recovery reviewed per story.",
+        "d02 capture time vs event time support FAIL; r03 readonly current query omitted.",
+        "Ordinary semantic failures retained under plan11.6; continue independent L1/L3/L4 under same method before next repair.",
+        "No source identity/owner corruption, false save or unknown-effect replay observed."
+      ],
+      "remote_ci": {
+        "commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+        "fast": {
+          "run_id": 37102981563,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37102981582,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "l3-formation-r25",
+      "layer": "L3",
+      "candidate_commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+      "state": "COMPLETE_L3_FORMATION_NOT_PASSED",
+      "planned_cases": 57,
+      "planned_messages": 57,
+      "config": "configs/v13-5-functional-r25.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11306,
+        "generation": {
+          "charged_tokens": 36522992,
+          "known_tokens": 36492605,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-formation-r25/input-freeze.json": "0dc5fd7a697bacc7f2a2d80bde23a6b14f4136e544d30e0f47e8fb0e17912d1d",
+        "configs/v13-5-functional-r25.json": "5fb59557fdfb6737271019a463298069a63ce02a64e5f8727387f02254d810d8",
+        "artifacts/v13-5/l3-formation-r25/review.json": "ff7cb46317873320ac62fc9c17a1d0f17a32d810c2054bd2c39b0833fbc583e9",
+        "artifacts/v13-5/l3-formation-r25/seal.json": "26b5cd918f38ae5cb436eb35cfde6c8febc5d14b2f66459ed77c9161a542e96f",
+        "artifacts/v13-5/l3-formation-r25-manual-grades.json": "52c115d32d9b5a20e8749626cc680d3ae43fed22815af8b5802e6d6dadbb2f06",
+        "artifacts/v13-5/l3-formation-r25-all-review.jsonl": "7d2d4ce0829cd94c4146f0b2b5f5432f349ee1ddf16e2b4a27ce963e95daead9",
+        "artifacts/v13-5/l3-formation-r25-evaluator/summary.json": "0c5fc8f67c425b9ce073cbed093ab170574ecf5ef01796a416c9267e00a5c2c5",
+        "artifacts/v13-5/l3-formation-r25-review-notes.json": "9b40eb84ac271b3a49e69695e2e49f7055452737162458e469c31ea27971b3ec"
+      },
+      "unit": "formation_request",
+      "semantic_counts": {
+        "PASS_SCOPED": 45,
+        "FAIL": 12
+      },
+      "message_counts": {
+        "COMPLETED": 54,
+        "FAILED": 3
+      },
+      "retained_attempts": 61,
+      "cost_delta": {
+        "generation_requests": 226,
+        "generation.known_tokens": 1212934,
+        "generation.charged_tokens": 1212934,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "RFC7430-eid4565": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual semantic commit; both source fragments selected, correction eavesdropper to active attacker attributed to verified erratum, section/author/dates and capability qualifiers supported. Final save matches receipt."
+        },
+        "RFC7469-eid4354": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual semantic commit; source fragments include corrected double-quoted/backslash-escaped known-pin rule, original wrong alternative attributed to old text, metadata and example supported; final save truthful."
+        },
+        "RFC7574-eid4724": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Actual commit and complete source selection, corrected swarm-ID sentence preserved. However tentative note it seems that it is not mandatory becomes unqualified not mandatory per chapters5/6.1 in memory/final. Modality/support-strength failure, not quote identity failure."
+        },
+        "RFC7574-eid4725": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit selects all original and corrected source plus notes; explicitly distinguishes old MUST/MAY environment rules and new mandatory-to-implement clause. Final correctly says mandatory to implement. Summary tail frames notes as desired RFC wording, not current normative MUST-use; weaker note attribution retained as limitation."
+        },
+        "RFC7574-eid4726": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Actual commit selects full erratum but summary presents original Internet MUST/benign MAY as Section6.1 current statement and omits that corrected paragraph removes all those use/mandatory-implementation sentences. Final repeats old MUST. Core correction lost despite complete evidence."
+        },
+        "RFC7574-eid4880": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit and all source ranges selected. Method0 original No integrity protection distinguished from corrected Unassigned, peers MUST include method retained; verified metadata and final save truthful."
+        },
+        "RFC7644-eid7916": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit and full selected source. Specific missing brace/comma and removed201 line match SecAD summary. No invented corrected full JSON validity claim; metadata and final supported."
+        },
+        "RFC7644-eid8096": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit, whole source selected; missing closing value-object brace, containing emails/nickname before Operations close, correctly identified; dates/updated-by supported."
+        },
+        "RFC7644-eid8365": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit, full source selection; endpoint plural-to-singular correction and single-valued RFC7643 Section6 rationale correctly attributed with metadata."
+        },
+        "RFC7788-eid4677": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit and both full source fragments; old .home default separated from corrected MUST set a default/out-of-scope value and administrator MAY, notes uncertainty/AD future process retained. Final truthful."
+        },
+        "RFC7788-eid5021": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Whole source selected; 32-bit identifier preserved while byte-count constant corrected32 to4 and byte/bit distinction explicit. Actual save and final receipt agree."
+        },
+        "RFC7788-eid5113": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "All source selected; corrected DHCPv4=37/DHCPv6=38, section and verified implementation/registry references supported. Minor omission of likely before swapped by mistake; opposite old/new codes are directly shown, no technical scope/strength change."
+        },
+        "RFC7940-eid5986": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Whole source selected; count1 to1+ and one-or-more label characters correctly retained with verified erratum scope; actual save truthful."
+        },
+        "RFC7940-eid8409": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Whole source selected; specific japanese-in-label sc:Kata to sc:Kana correction supported, metadata and final receipt agree."
+        },
+        "RFC7970-eid5543": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit/full source; corrected float simpleContent preserved alongside rating numeric condition and otherwise MUST empty. Metadata and final supported."
+        },
+        "RFC7970-eid5544": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual commit/full source; remove minOccurs0 inside choice and retain conditional at-least-one DomainData/Address requirement. Default1 is direct XML schema interpretation consistent with supplied explanation; final supported."
+        },
+        "RFC7970-eid5583": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and sole explicit reproposal both return memory explicit plus business perform with empty concrete operations; schema rejects before Agent. Raw event stored, no semantic record/final, two paid attempts retained, no third retry."
+        },
+        "RFC8239-eid5652": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; last-iteration egress N to N-1 correction preserves1% recommended and same packet-size qualification; metadata and final truthful."
+        },
+        "RFC8259-eid7383": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Actual commit/whole source selected and uppercase hexadecimal spellings correct, but source note says should be capitalized; summary says RFC5234 requires capitalization and final calls it required. Unsupported normative strengthening beyond supplied note."
+        },
+        "RFC8259-eid7600": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both full fragments selected; restriction limited to integer component beyond units digit, allowed0.1/0.001 and exponent1E01 retained; metadata/final match."
+        },
+        "RFC8259-eid7603": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both full fragments; characters to code points correction, unpaired-surrogate ABNF permission and unescaped UTF8 incompatibility all preserved; ECMA exceptions and metadata supported."
+        },
+        "RFC8345-eid6900": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real commit selects complete source; corrected URI foo:otn-hc, implementation discretion, SHOULD consistency and MAY semantics retained; final matches actual write."
+        },
+        "RFC8360-eid5638": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Selected complete original/correction/notes; summary captures erroneous duplicate VRS-IP initialization and correction to VRS-AS extension. Mirroring described as correction within verified erratum, not a new protocol requirement. Exact conditional algorithm is preserved in selected source, summarized in body."
+        },
+        "RFC8360-eid5870": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete original selected; missing -v2 suffix and compile consequence directly supported, correct metadata and real commit/final."
+        },
+        "RFC8466-eid5615": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and single allowed explicit resume both fail pre-Agent declaration FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID; two real calls, no semantic record and no usable final. No third retry."
+        },
+        "RFC8466-eid6922": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "All three fragments selected including old/new LA1 and LA2 examples and notes. Correctly archives conditional required cos-id=10 example, not a universal required value. Real write and final agree."
+        },
+        "RFC8678-eid8124": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both fragments selected; LLA_B a020 to b020 prefix correction properly distinguished from unchanged LLA_A; metadata and committed final supported."
+        },
+        "RFC8765-eid8560": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; corrected MUST silently ignore restricted to other types of DNS server, unidirectional DSO qualification and no-response reason retained. Actual commit supports final."
+        },
+        "RFC8794-eid7189": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "All five fragments selected. Manually compared four allocation ranges, four reserved values/removals, all invalid ranges and policy split with corrected text; all agree. Summarized early-allocation guidance omitted rather than contradicted; full original remains selected and accessible."
+        },
+        "RFC8824-eid7389": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; original mandatory Uri-Path changed to optional request use and no response use, exact quotes/qualifications retained and real commit."
+        },
+        "RFC8824-eid8270": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Memory correctly stores RFC8824 erratum8270 MSB52 to44 with 48-bit length and4-bit sent context, both fragments selected. Final misidentifies the target as Section7.3 of RFC8270, despite opening identification being correct; final source/object attribution inconsistent."
+        },
+        "RFC8881-eid7386": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original plus one allowed schema resume fail before Agent; no semantic write or final. Failed declaration retained and independent cases continue."
+        },
+        "RFC8972-eid8199": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both source fragments selected; old DSCP2-only target corrected to DSCP2 and ECN respectively, packet/reflector scope and MUST strength unchanged. Metadata and minor-misstatement qualification supported; final committed status accurate."
+        },
+        "RFC8972-eid8339": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; Length validation target corrected from whole STAMP packet to included Follow-Up Telemetry TLV, MUST and packet scope retained; actual commit/final agree."
+        },
+        "RFC8995-eid6716": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; TPM expansion correctly changed to Trusted Platform Module. MAY override device history and RECOMMENDED only when hardware-assisted TPM NEA supported retained verbatim; real commit and final supported."
+        },
+        "RFC8995-eid6834": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Full source/actual commit, technical lowercase-key correction correct. Source says It seems final editing forgot Section8.5; saved body turns this into definite discrepancy was due to final editing oversight. Unsupported strengthening of causal certainty."
+        },
+        "RFC8995-eid7576": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; list-of-protocols removed and singular supported protocol kept, example EST-TLS remains example. Could mislead qualification retained, actual commit/final agree."
+        },
+        "RFC9115-eid7336": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; actual single/double backslash strings compared, oid fix and alternative [.] correct, regtext exception retained. Final business phase complete refers to sole archival task; no external action claim. Verifier name shortened, no normative effect."
+        },
+        "RFC9171-eid8043": {
+          "provisional_semantic": "FAIL",
+          "rationale": "All three source fragments and real commit; CRC value-only zeroization versus unchanged CBOR prefix correction accurate, final summary accurate. Stored final sentence grammatically attributes RFC9713/RFC9758 updates to the errata, whereas original Updated by applies to RFC9171. Narrow metadata/source-object attribution failure, not an invalid quote or failed commit."
+        },
+        "RFC9303-eid7423": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; EID HMAC ID corrected to EID HMAC target, MUST zero-before-computing rule unchanged, attribution and real commit correct."
+        },
+        "RFC9493-eid7727": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; registry name changed throughout document/Section8.1 to Subject Identifier Formats, subject fields versus whole-token scope preserved; final matches actual write."
+        },
+        "RFC9562-eid7955": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Full source selected; time_high least to most significant12 of60-bit timestamp, bit positions52-63/octets6-7 and duplicate/omitted-bit explanation correct; final actualcommit."
+        },
+        "RFC9562-eid7958": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both fragments selected; NCS variant1-7 to0-7 corrected, Nil UUID and fourzeroMSB explanation retained; real commit/final correct."
+        },
+        "RFC9562-eid8288": {
+          "provisional_semantic": "FAIL",
+          "rationale": "All four fragments selected and actualcommit; corrected5236AD UUIDv1/v6 and unchangedv7 correct. Source I believe bad-epoch cause becomes definite The error resulted; body also makes5235.38778807 directly yield March5236, omitting source separate1582.7890 date adjustment. Unsupported certainty and misleading calculation summary."
+        },
+        "RFC9580-eid8454": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; Ed25519/Ed448 native octet exception, zeroMPI and64/114lengths kept, earlier-algorithm distinction preserved. Save/final accurate."
+        },
+        "RFC9580-eid8465": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; notes archived as text should acknowledge native as well asMPI, no invented replacement quote or new technical rule. Source replacement remainsTBD; summary omits literalTBD but frames amendment as should, scoped limitation recorded."
+        },
+        "RFC9580-eid8466": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Complete source selected and realcommit. TBD replacement plus dkg proposed prefix becomes unqualified corrected text should be prefixed; seems-implied/missing remarks become definite, X25519/X448 scope also omitted. Final incorrectly expands AD confirmation to specific distinction/proposal. Semantic qualification/scope failure."
+        },
+        "RFC9605-eid8321": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Both complete source fragments selected and realsemanticcommit, but saved body and final REVERSE correction: actual original CTR must become encoded ctr; output says original ctr must become CTR and invents a code comment confirming the reversed intent. Clear source-entailment failure despite literalquoteidentity."
+        },
+        "RFC9605-eid8565": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; authenticated to unauthenticated AES-CTR correction and negative authentication qualification correct, source metadata and actualcommit/final align."
+        },
+        "RFC9711-eid8528": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Both source fragments selected; all seven CWT example labels eat_nonce toNonce, JWT-only oldname qualification retained. Numeric label10/noncevalues notchanged. Actual commit/final agree."
+        },
+        "RFC9711-eid8771": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; secboot tooemboot SectionA.1.7 correction and both historicalPRreferences/finalpublication omission supported. No stronger uncertainty claim; actualsave/final match."
+        },
+        "RFC9711-eid8776": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; optional heading retainsnumber and addsnull, stationaryentity qualification retained; realcommit/final correctlystatechange."
+        },
+        "RFC9711-eid8782": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; exactueidvalue withtwo trailing= removed, unpaddedbase64url/regex rationale preserved. Citation section2-5.2.1 copies URLanchor rather than independently resolving section numbering; limited citationpresentation caveat, core technical/save supported."
+        },
+        "RFC9711-eid8783": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; size24 to22 due removaloftwo paddingcharacters for16inputbytes, body/final consistent and actualsave."
+        },
+        "RFC9793-eid8463": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Complete source selected; BFR1 toBFER1 nexthopprefix correction with noBIERNexthop condition and receivingBFR2 retained; final scoped summary and actualcommit supported."
+        },
+        "RFC9886-eid8822": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "All four original fragments selected; uas_ids/auths missing innerarray markers corrected, Figure21 CDDL dependency/relatedFigure18erratum distinction preserved; actualcommit/final supported."
+        },
+        "RFC9886-eid8823": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "All four original fragments selected; Figure18 versusFigure21/erratum8822 dependency correctlyretained. Stored contiguous correctedbase64 compared byte-for-byte after whitespace removal with source corrected block: exact788characters. Actualcommit/final match."
+        }
+      },
+      "independent_sqlite_readonly_audit": {
+        "records": 54,
+        "literal_quote_checks": 297,
+        "all_literal_quotes_match": true,
+        "all_current_equal_latest_history": true,
+        "reviewer_independent": false
+      },
+      "orchestration_errors": [
+        {
+          "case_id": "RFC8239-eid5652",
+          "stage": "launcher_before_runtime",
+          "error": "Missing PYTHONPATH caused ModuleNotFoundError before provider or message attempt; logs renamed launch-error and retained. Corrected environment for first real execution.",
+          "model_calls": 0
+        }
+      ],
+      "limitations": [
+        "Three terminal declaration failures; four total single-resume episodes, including one successful recovery. All61 attempts retained (54 completed +7 failed).",
+        "Nine additional semantic failures in committed memory/final; literal identity does not establish semantic support.",
+        "Exact r25 source hashes unchanged. Full57 request denominator; not57 independent research samples or an unseen benchmark.",
+        "No observed false save, owner/source identity corruption, business side effect or blind unknown replay. Continue independent frozen reading/L1/L4 under plan11.6."
+      ],
+      "remote_ci": {
+        "commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+        "fast": {
+          "run_id": 37102981563,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37102981582,
+          "conclusion": "skipped"
+        }
+      },
+      "reporting_correction": "The sealed review prose says all60 attempts retained; evaluator and retained_attempts fields correctly count61 (54 completed +7 failed attempts). Preserve sealed bytes; use61. Four single-resume episodes include one successful recovery in addition to three terminal failures."
+    },
+    {
+      "id": "l3-reading-r25",
+      "layer": "L3",
+      "candidate_commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+      "state": "COMPLETE_L3_READING_NOT_PASSED",
+      "planned_cases": 30,
+      "planned_messages": 30,
+      "config": "configs/v13-5-functional-r25.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11532,
+        "generation": {
+          "charged_tokens": 37735926,
+          "known_tokens": 37705539,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-reading-r25/input-freeze.json": "45bdf7c4006e3a3740f4b77c6e0b1fe1cbb630e6715178cb2bc2e7d4da5250da",
+        "configs/v13-5-functional-r25.json": "5fb59557fdfb6737271019a463298069a63ce02a64e5f8727387f02254d810d8",
+        "artifacts/v13-5/l3-reading-r25/review.json": "159f4c794fdc25234948844b345aa24893afd1357a6850948b9613567bed0963",
+        "artifacts/v13-5/l3-reading-r25/seal.json": "37b58f6f4f31dd1721dbe128b26b219c6e96195d9ad608e1a0dd9843e8fdb520",
+        "artifacts/v13-5/l3-reading-r25-manual-grades.json": "fc27ad43cc2e67a184f6df3bc0d4dc0c0f605b33392f12a4d0ef624876305698",
+        "artifacts/v13-5/l3-reading-r25-all-review.jsonl": "778f58f91dbbedcae4aef4560003b265e6f2b46c20f85d1086fd123e1bbfd111",
+        "artifacts/v13-5/l3-reading-r25-evaluator-final/summary.json": "601b60b9fc54c87f2b2444e8a39071ccb7c30d31e9277f768e1bde94d72c7a1a",
+        "artifacts/v13-5/l3-reading-r25-delivery-audit.json": "2ca66b72a2fbcb5ded3a5c06865c8b4a9a97353b0103bdd87088d668b4801d0b",
+        "artifacts/v13-5/l3-reading-r25-review-notes.json": "10449021329f322912a974866a15e6cc908e71b6dcc195800cbc1543d3f39454"
+      },
+      "unit": "reading_query",
+      "semantic_counts": {
+        "PASS_SCOPED": 16,
+        "FAIL": 14
+      },
+      "message_counts": {
+        "COMPLETED": 23,
+        "FAILED": 7
+      },
+      "retained_attempts": 50,
+      "cost_delta": {
+        "generation_requests": 100,
+        "generation.known_tokens": 624220,
+        "generation.charged_tokens": 624220,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "t0-031c3e8238595fff": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctly changes nonce to encoded ctr while leaving header CTR unchanged; both required constraints and source-bounded comparison satisfied. Actual decryption excerpt delivery to be checked separately; no semantic mutation. Actual HTTP material checked: quoted decryption parse/encodedctr lines were delivered."
+        },
+        "t0-181098e89b47832b": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Core alternative [.] answer is correct, but final invents recommended editorial fix and describes already doubled escaping as original needing doubling. Source only offers an alternative, not a recommendation. New contract failure separate from old required-answer core."
+        },
+        "t0-21b6c95abab65d34": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Single allowed declaration resume recovers. Final distinguishes corrected0x80-0xFE allocation from unchanged Header/Global-only IANA scope, excludes Body-only IDs. Original failed hallucinated declaration remains failed/undelivered; no memory mutation."
+        },
+        "t0-2b8ed42f5509d180": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual explicit read_source and final correctly reports method0 Unassigned, contrasts old no-protection entry with corrected mandatorymethod rationale; no option-code confusion or semantic write."
+        },
+        "t0-3313ea14bed1a352": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and one allowed declaration resume fail before Agent; no final, no semantic write."
+        },
+        "t0-3ad8b997c0f064d8": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Recovered declaration; central answer correctly says nonSET use predates registry rename, with supported4.1claim/JSONgenerality. However final labels Section3 as Introduction (actualSection3 Subject Identifiers, introductionSection1), inaccurate source location/name. Narrow citation failure; no actual historicalJWT assertion or side effect."
+        },
+        "t0-3f78c0a6ae6d3b4d": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and single declaration resume fail; no actual reading answer, no semantic mutation."
+        },
+        "t0-4eb6c86f369d13bb": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correct original Security Event Identifier Formats name and direction of correction, reason supported; no mutation."
+        },
+        "t0-56d2d75945fc82ed": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctly distinguishes8822Figure21 readablearrays and8823Figure18encodedBRID dependency, bothcovered withoutgeneralizingactualDNSrecords; no mutation. Offline E*enumeration notcovered, but actual wire includes8822note explicitly stating anothererratumupdatesFigure18 plus8823identity. This alternative directlysupports question; nonexhaustive E*absence notautomaticsemanticFAIL."
+        },
+        "t0-5f4dbb6831fcfa78": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctedhexvariant0-7 includesNil/allzero; no shifttootherordinaryvariants. Apollo nomenclature checked in originalsource separately; no mutation."
+        },
+        "t0-61ba6ba955bb8abc": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Core current correction answer0Unassigned correct, no falseeffective date. Final says legacy no-protection setting was incorrect interpretation of original text, but original table explicitly assignedthat meaning. Confuses original historical wording with judgingitunder corrected requirement."
+        },
+        "t0-6769ca0f13904c4c": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Final incorrectly treats0x4000asreserved and attributesOLDlist to correctedtext, while correctlyclassifying0x407Einvalid. Bothareinvalid undercorrectedrange. Clear historical/current evidence conflict; no memory write."
+        },
+        "t0-6bd7ea3069a5a3f6": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Initial declaration schema failure, sole admitted format resume truncates at8192output tokens before Agent. Accidental second CLI resume rejected by durable allowance with0additionalHTTP; no final/memory effects. Three retained execution attempts, only two real calls."
+        },
+        "t0-737ad7d7189e710d": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctmax(0,0+1)=1 with original-versus-corrected algorithm comparison; no claimallhistoricalimplementations followedbuggycode; no semantic mutation."
+        },
+        "t0-8797481b1f2cabfe": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Correct foo: notmandatory and explicitquoteSHOULD consistency, but explanation and summary strengthen this to must ensure stable acrossall datastores. Direct forbiddennormativemodality strengthening despite quotingoriginalcorrectly; no semantic write."
+        },
+        "t0-8ea652a1a9c005e1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "After sole declarationresume, two actual explicit source reads; active partial-time on-path SYN/JOIN attacker classification correct, old eavesdropper clearlyhistorical, no extraeffects."
+        },
+        "t0-a0c725c212efae75": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Both declarationattempts schemafail beforeAgent; nofinal despitepublicsources available, noeffects."
+        },
+        "t0-b318e27eb81ec145": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and sole declarationresume fail beforeAgent; no currentreadinganswer ormutation."
+        },
+        "t0-c7ddaea5265c6b8e": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "After singledeclarationresume, correct REAL/xs:float content onlynumeric rating; high/othernonnumeric empty, numericalsemantics outside specification, no inventedscale. No memorymutation."
+        },
+        "t0-ca61a29da8aed4a8": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and single declarationresume fail beforeAgent; no final, no mutation."
+        },
+        "t0-cb5be9b136526465": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Recovered declaration; final limits RequiredInsertCount+1 to dynamicreferences and explicitlyexcludesstaticindices. Explainsallreferenced dynamicentries viaSection2.1.2 (includesdynamicnameuse), thoughdoesnotreproduce staticIndexfunctionline. Requiredtechnicaldistinction preserved, no mutation. Actualwire hasSection2.1.2one-larger-than-all-dynamicreferences and3.1fixedstaticindices, providingalternative directlyapplicablerules despite missing enumerated correctedcode snippets."
+        },
+        "t0-e2b5ffd305b39073": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctly saysoriginalFigure21 erroneouslyleftunalteredafterCDDLchange, describeslaterarraymarkerrepair withoutinventingeffectivedate; no mutation."
+        },
+        "t0-e9c6da8cfc659661": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correct algorithm-specificMPI-or-plainoctets rule, Ed25519/448zeroMPI64/114byteexceptions, otheralgorithmsMPI; no universalrequirementchange ormemorymutation."
+        },
+        "t0-eaa95f9c68fa7bd7": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Recovereddeclaration andactualsearch/read. Core HMACbounds LengththroughHMAC correct, but adds falseinstructiontozeroEID HMAC ID and inventedreason excludingalgorithmidentifier. Suppliedcorrectionzeros HMACvalue instead; extraneous technicalrule makesfinalunsafe/inaccurate."
+        },
+        "t0-eba0d031c65ff246": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Correct erratumoldquote count1, but falseclaimfrozenRFCitselfalso1; actualfrozenRFCexamplealready1+. Conflates twoarchivedwitnesses, no semanticmutation. Actualwire contains erratumold/newexample but not frozenRFC correspondingexample. Earliest demonstrated gap is actualdelivery; Agent didnotrequestmissingoriginal, thenoverclaimeditsvalue."
+        },
+        "t0-ee47970fbb986788": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctly identifieshistoricaloldrow MSB52 and separatelycurrentMSB44 with48-bit/4-bitsent explanation. No historyreplacement ormutation."
+        },
+        "t0-ef1b0e1734e9d0ed": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correct44mostsignificantbits for48bitvalue/4sent, old52 distinct, no modifiedlowbitcount ormutation."
+        },
+        "t0-efe3b85de4af8a91": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "CorrectdependentFigure18base64mustchange withFigure21structure, cites8822note aboutseparateerratum; limitsclaimto publishedexample not deployedBRIDrecords; no mutation."
+        },
+        "t0-f24d486ce83eb94b": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Original and sole declarationresume schemafail beforeAgent; no answer ormutation."
+        },
+        "t0-f4c194686df589a6": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Correctper-entry two-item nestedarrays underuas_ids/auths; missingopening/closingmarkers repairedforCDDLalignment, no flatteningorglobalprotocolchange; no mutation."
+        }
+      },
+      "actual_wire_coverage": {
+        "enumerated_set_delivered": 19,
+        "no_enumerated_set": 11,
+        "alternative_sufficient_evidence_manually_reviewed": 3,
+        "all_fragment_identity_checks": true,
+        "frozen_rfc_witness_missing_and_unread_case": "t0-eba0d031c65ff246",
+        "no_semantic_records_or_mutations": true
+      },
+      "orchestration_errors": [
+        {
+          "case_id": "t0-6bd7ea3069a5a3f6",
+          "error": "Root mistook second-attempt truncation for original failure and submitted redundant resume; durable allowance rejected beforeHTTP. Canonical original/first-resume attemptJSON and request traces remain unchanged. First-resume CLI convenience stdout/stderr copies were overwritten by redundant invocation; renamed resulting copy to budget-rejected-resume, no reconstruction or false byte-preservation claim.",
+          "additional_http_calls": 0
+        }
+      ],
+      "exposure": "Old exposed L3 development evidence, not holdout. Root reads frozen offline gold for evaluation only after method/cohort freeze; RFC9171 gold schema was inspected before that case output while preparing the evaluator. No gold enters runtime, no source/config edits within r25.",
+      "limitations": [
+        "Seven terminal protocol failures, seven completed answers fail current semantic contract; original answers unchanged.",
+        "Thirty originalqueries include26packing and4Reader failures, not30 independenthistories or a blindbenchmark.",
+        "Nineteen requests used one allowed schemaresume; one accidental additional CLIresume rejectedbeforeHTTP, canonicalattempts/tracespreserved; CLIcopy incident disclosed.",
+        "OrdinaryReadererrors and insufficient deliveredwitness retained; no automaticsemanticPASS fromwirecoverage.",
+        "No observedownerleak, false save, mutation, sourceidentitycorruption or unknown replay; continueunaffectedL1/L4."
+      ],
+      "remote_ci": {
+        "commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+        "fast": {
+          "run_id": 37102981563,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37102981582,
+          "conclusion": "skipped"
+        }
+      }
+    },
+    {
+      "id": "l1-r25",
+      "layer": "L1",
+      "candidate_commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+      "state": "COMPLETE_L1_ORIGINAL_PASS_CURRENT_CONTRACT_NOT_PASSED",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "config": "configs/v13-5-functional-r25.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11632,
+        "generation": {
+          "charged_tokens": 38360146,
+          "known_tokens": 38329759,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r25/input-freeze.json": "edcafbd4b95782e0032170343bdeb5424b762c6a5db37e02e272bf822227c187",
+        "configs/v13-5-functional-r25.json": "5fb59557fdfb6737271019a463298069a63ce02a64e5f8727387f02254d810d8",
+        "artifacts/v13-5/l1-r25/review.json": "0b550bdefb876fc4880d922eeeb231d93ed91abeb21b0a6c32a9ff9c3c2585e3",
+        "artifacts/v13-5/l1-r25/seal.json": "92b9033fa20d25ed615d602ebae44afbf76fb53943d044cba1d36d9ecd90071b",
+        "artifacts/v13-5/l1-r25-manual-grades.json": "c92469107a06edf0b5a1b159594775b7a5754163b9442a4ea8e0f8e497942f4f",
+        "artifacts/v13-5/l1-r25-all-review.jsonl": "62972fb443c3ee52a9bb9cee2ee38cfb52f66a72f7c517725fce07b9462467a8",
+        "artifacts/v13-5/l1-r25-evaluator/summary.json": "dac64614773c3e95d8a1c86fce04dde50356a0a46b01fef40a377a8a9b7ab424",
+        "artifacts/v13-5/l1-r25-review-notes.json": "69a38a520cb6aa1f917a2b8703e449783d3c0aaba6086c34b64977c2d4a12f19"
+      },
+      "original_rubric_counts": {
+        "PASS": 24
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 23,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempts": 48,
+      "cost_delta": {
+        "generation_requests": 189,
+        "generation.known_tokens": 753518,
+        "generation.charged_tokens": 753518,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 48,
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "save-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "One real semantic save of short-answer preference using exact current user fragment before confirmation; SQLite quote/history matches."
+        },
+        "save-2": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "One real save preserves caffeine-free tea restriction, exact current evidence and truthful final; no extra effect."
+        },
+        "save-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual search then one save of vegetarian identity and meal-selection scope; current user source supports both; final follows committed receipt."
+        },
+        "save-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Search then real save of reading-specific large-font preference; no global-scope expansion in record; supported final."
+        },
+        "recall-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Train commuting preference committed first; fresh-process actual read_memory returns original ID/revision/source; correct recall without maintenance."
+        },
+        "recall-2": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Python preference committed with actual user source; fresh-process search recalls correctly, record/revision/support unchanged."
+        },
+        "recall-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual search/save/read first message, cross-language summary preserves typically/morning; later ordinary delivery supports recall, no new mutation. Repairs original false-save failure in this cohort only."
+        },
+        "recall-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real save of outline-before-email-body order then fresh-process appropriate organization answer; record remains revision1 with original support, no query mutation."
+        },
+        "update-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Coffeev1 toTeav2 sameID through actualreadcandidate; changedcontent selects currentcorrection, untouchedbasis/kindsupport inherited. Laterquery correctlydistinguishesold/current fromdeliveredraw/current, no mutation. SQLitebothversions/source intact; no explicit historytool in thiscase."
+        },
+        "update-2": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Englishdefault toChinesedefault sameIDv2 with actualcurrentcorrectionquote, oldbasis/kind preserved. Laterquery identifiesboth rawstatements/currentrecord, noquerymutation; historicalv1 retained. Final calls preferenceupdate a businessstage but only claims actualpreferencechange, no externalobject effect; terminology limitation."
+        },
+        "update-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Milesv1 tokilometersv2 sameID, changedcontent selects actualcurrentkilometercorrection; oldbasis/kind unchanged. Thirdmessageactualhistoryread returnsold/current; querynomutation andSQLitebothversions intact."
+        },
+        "update-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Morningv1 toafternoonv2 sameID, typically qualifier retained; currentcorrection fragmentbindsnewcontent, oldfieldsupport inherited. Laterqueryold/currentcorrect, no mutation; originalv1history and exactquotes intact."
+        },
+        "scope-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "original_rubric": "PASS",
+          "rationale": "Actualsave retains thisweek/teamlunch scope. Laterquery explicitlyusesoriginalpersonalno-fixedvegetarianstatement, doesnotinferlifelongpersonalrestriction; noquerymaintenance, source/historyintact."
+        },
+        "scope-2": {
+          "provisional_semantic": "FAIL",
+          "original_rubric": "PASS",
+          "rationale": "Originalrubric core defaultdetailed versusonedemo exceptionansweredcorrectly, but storedEnglishsummary user requires short answers drops best-effort尽量 modifier from actualuserrequest. Narrow v13.5 qualification-strengthening failure; one-off scope retained and finalqueryaccurate, nofalse-save."
+        },
+        "scope-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "original_rubric": "PASS",
+          "rationale": "Actualsupportedrecord retainsproject-only800yuan/nightcap and explicitnotpersonal. Followup correctlyreportsunknownpersonalbudget andprojectrule; noforcedpersonalglobalpreference ormutation."
+        },
+        "scope-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actualrecordretains project-relativeFriday andexplicitunknownabsolutedate; lateranswers cannotresolve withoutanchor anddoesnotinventdate. Noquerymutation, history/sourceintact."
+        },
+        "object-continue-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actualexactblueglassreservation2/itemsdestinationpacking andlabel once; semanticbodyentirelysupportedbyselectedcompletebusinessreceipt. Followupactualcurrentget_reservation thenno mutation whenalreadydone; finalseparatescurrentquery/history/raw/semantic andno physicaldeliveryclaim."
+        },
+        "object-continue-2": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "ActualexactprojectBcasequantity1/destinationpacking andlabel once; real save usescompletebusinessreceipt. Followupactualsameobjectquery, no repeatedeffect/semanticmaintenance; final statusesagreewithworld."
+        },
+        "object-continue-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Exactcoldchainconsumablesquantity6/reservationlabel once, savedresult supportedbyselectedcompleteactualreceipt; freshprocessactualcurrentquery findslabelcreated anddoesnothingfurther; no physicalshipmentclaim or duplicate."
+        },
+        "object-continue-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "ExactChinesebrochuresquantity30/configuredgroupsoften/destination oneactualreservationlabel; supportedsemanticrecord and programfinal. Followupactualget_reservation,no repeatedbusiness/memoryeffect; SQLitehistoryandquotes intact."
+        },
+        "restart-1": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real formatpreference save beforeconfirmation; separateprocess/sessionactualread returnssteps-before-examples, unchangedID/revision/source."
+        },
+        "restart-2": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real quietmeetingroom preference saved, newprocess/sessionactualread correct with unchangedrecord andsupport."
+        },
+        "restart-3": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real less-chili preferencepreserved (notzerochili), separateprocess/sessionactualread correct, noquerymutation."
+        },
+        "restart-4": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real project-groupednotes preference saved; newprocess/sessionactualread correct. Currentmessage receiptdate2026-10-03 isfreshusercapturedate, no fabricatedbusiness/effectivedate; record unchanged."
+        }
+      },
+      "readonly_sqlite_audit": {
+        "records": 24,
+        "literal_quote_checks": 84,
+        "all_literal_quotes_match": true,
+        "all_current_equal_latest_history": true
+      },
+      "limitations": [
+        "Original24taskrubric passes; scope-2 currentqualificationcontract fails: 尽量 omitted in requires short answers translation. Do not call fullcurrentcontractpassed.",
+        "Allfourupdates sameID, actualcurrentcorrection supportsnewcontent; update-3actualhistoryread, otherthree historicalanswers fromdeliveredrawold/new andcurrentrecord.",
+        "Allfourbusinessfollowups querycurrentstate anddonotrepeatcompletedoperation.",
+        "L1doesnotreplace L2/L3/L4 or constituteProductGO."
+      ],
+      "remote_ci": {
+        "commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+        "fast": {
+          "run_id": 37102981563,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37102981582,
+          "conclusion": "skipped"
+        }
+      },
+      "evaluator_limitation": {
+        "status": "NOT_PASSED",
+        "manual_original_task_passes": 24,
+        "mechanically_admitted_passes": 20,
+        "reason": "Four object-continue cases have UNKNOWN final_actual_http_link: receipt_business_response_v1 generates final from actual paired receipts with model_generation=false, so a final HTTP content match is not expected. Existing evaluator lacks program-final provenance verification. All runtime checks/source hashes/SQLite quotations correct, manual final/world/operation comparison performed. Preserve original evaluator output; add generic program-delivery validation and negative tests before any new evaluation claim."
+      },
+      "program_delivery_reevaluation": {
+        "summary": "artifacts/v13-5/l1-r25-program-delivery-evaluator/summary.json",
+        "sha256": "b723fcc0a4cc0dd25ac953ba92685fda2d7fb9289ae559ba81f5567e45e3fb47",
+        "L1_gate": {
+          "status": "PASSED_SCOPED",
+          "minimum_pass": 22,
+          "denominator": 24,
+          "manual_pass_count": 24,
+          "blockers": [],
+          "unknown_cases": [],
+          "semantic_unknown_cases": [],
+          "scope": "Original normal24 gate only; all FUNC capabilities require their own evidence."
+        },
+        "scope": "New offline evaluator verifies exact bound assistant Source and render trace, not semantic truth. Original evaluator and cohort seal remain unchanged. Current qualification failure remains."
+      }
+    },
+    {
+      "id": "l4-r25",
+      "layer": "L4",
+      "candidate_commit": "9150ffbba8b5cc5f1516db3bf15a671d371f10a6",
+      "state": "STOPPED_CRITICAL_REVOCATION_CONFIRMATION_MISMATCH",
+      "planned_cases": 12,
+      "planned_messages": 30,
+      "config": "configs/v13-5-functional-r25.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11821,
+        "generation": {
+          "charged_tokens": 39113664,
+          "known_tokens": 39083277,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r25/input-freeze.json": "ccd1d13933fff5c922134e4b690592585e9856b1f672be9271d004b1ca6b319c",
+        "configs/v13-5-functional-r25.json": "5fb59557fdfb6737271019a463298069a63ce02a64e5f8727387f02254d810d8",
+        "artifacts/v13-5/l4-r25/review.json": "04a9616548ae067d592c4d2a8c16e154942cf78bc9ea1424aae108ee5d5707b0",
+        "artifacts/v13-5/l4-r25/seal.json": "0cdf2b232d19bda4ca51a77741166d93dbd528ddf8b61c9f383576b7e13a1c90",
+        "artifacts/v13-5/l4-r25-manual-grades.json": "cba9d97bcb27fdb3ef2e2fbfde85b28f84c53cb3bb32635a0b076181794169dc",
+        "artifacts/v13-5/l4-r25-all-review.jsonl": "1bb80b0cea80dcb969b3e9476636abfb864ebb50505eaa647cbb87149dade6f7",
+        "artifacts/v13-5/l4-r25-review-notes.json": "04f27ce0a87113525e06033ff1e7feaf3b8c4b6db8b24da3102edb1af8833bc1",
+        "artifacts/v13-5/l4-r25-evaluator/summary.json": "d5e9df2533eef3d3fe914a7356648676c869d0d86988ba0a2915d00caf313cef"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 3,
+        "NOT_RUN": 7
+      },
+      "message_counts": {
+        "COMPLETED": 13,
+        "FAILED": 1,
+        "NOT_RUN": 16
+      },
+      "retained_attempts": 15,
+      "cost_delta": {
+        "generation_requests": 57,
+        "generation.known_tokens": 232232,
+        "generation.charged_tokens": 232232,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l4-n01": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Real save preserves conciseChinese best-effort ordinary explanations and optionaldetailedproofs, actualcurrentuserfragment. Followup correctlyrecalls both qualifiers with unchangedrecord. Firstconfirmation offersdetailedproofs as intendedservice behavior, not rewriting savedoptionalqualification."
+        },
+        "l4-n02": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Mixedhistoryquery/correction correctlyreadsoldFahrenheit and updates sameIDtoCelsius preservingtourismexception with actualcurrentfragment. But mode wronglyadmits businesscontinue+create_or_update_draft (noactualbusinesscall), programfinalonlyreportscommit and fails to answer askedoldtemperatureunit. Latercurrentquery correct; missingm2answer notretroactivelyrepaired. Nofalsebusinesscompletion/duplicate/wrongobjecteffect."
+        },
+        "l4-n03": {
+          "provisional_semantic": "FAIL",
+          "critical_blocker": true,
+          "rationale": "Firstsave drops this-instance-only qualifier. Requested revocation m2 fails original+oneallowed declarationattempt, no semanticrevision/retraction. m3search-only answer says已撤销/不再执行 usinguserrequestascompletedmaintenance while SQLite activev1stillcontains20minuteexception; no pending/failure caveat. Current user intention can be reportedasintention, but persisted revocation isnotdone. SharedL4 stoppedatnextmessageboundary; originalfailedattempts retained."
+        },
+        "l4-n04": {
+          "provisional_semantic": "FAIL",
+          "rationale": "Actual same-ID Thursday-to-Saturday revision selects current correction; both exact supported versions persist. Third message searches generic dates, receives no record, calls history without ID, then falsely infers records do not exist. Retrieval/answer failure, not lost stored history."
+        },
+        "l4-n05": {
+          "provisional_semantic": "PASS_SCOPED",
+          "rationale": "Actual same-ID 6000-to-8000 revision selects current correction and preserves unknown effective date. Later answer correctly reports 8000 and cannot determine start date. No query mutation; exact historical support intact. Confirmation labels preference maintenance business but makes no external business effect claim."
+        }
+      },
+      "exposure": "Root-authored after r24 method freeze, before any L4 model outputs; r25 change followed observed L2 only but Root already knew L4 inputs. No blind/independent generalization claim.",
+      "readonly_sqlite_audit": {
+        "records": 5,
+        "literal_quote_checks": 24,
+        "all_literal_quotes_match": true,
+        "all_current_equal_latest_history": true
+      },
+      "limitations": [
+        "Full12/30 denominator retained; stopped at safe boundary after n03 critical failure; n06-n12 not run.",
+        "n02 commits correction but omits mixed history answer; n04 persists history but falsely infers absence from failed retrieval.",
+        "Program receipt final provenance remains UNKNOWN in legacy evaluator; no override or automatic semantic pass."
+      ]
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

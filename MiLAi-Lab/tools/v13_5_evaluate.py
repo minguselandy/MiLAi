@@ -335,8 +335,55 @@ def review_slot(case_id: str) -> dict[str, Any]:
     }
 
 
+def program_final_linkage(
+    row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+) -> dict[str, Any]:
+    """Bind a program-rendered delivery to its captured public assistant event.
+
+    This is provenance, not validation of task completion or the renderer's meaning.
+    Old cohorts have source capture but no explicit render text hash; retain that
+    narrower provenance scope instead of pretending there was a model response.
+    """
+    metadata = {"status": "response_rendered", "attempts": 0, "tools_available": False,
+                "execution_candidate_delivered": False,
+                "protocol": "receipt_business_response_v1", "model_generation": False}
+    policy = freeze.get("config", {}).get("finalization")
+    if (policy not in {"receipt_business_response_v1", "receipt_business_response_v2"}
+            or row.get("finalization") != metadata or not freeze.get("run_id")):
+        return {"status": "UNKNOWN", "reason": "unrecognized_program_final_contract"}
+    answer = row.get("final_answer")
+    if not isinstance(answer, str) or not answer.strip():
+        return {"status": "FAIL", "reason": "missing_program_text"}
+    identity = [["functional", freeze["run_id"], row.get("bank"), row.get("owner")],
+                row.get("session"), str(row.get("message_id")) + ":final", "assistant"]
+    source_ref = "src-" + text_hash(json.dumps(
+        identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False))
+    sources = [s for s in row.get("sources", []) if s.get("event_id") == source_ref]
+    matched = len(sources) == 1 and all(sources[0].get(k) == v for k, v in {
+        "owner": row.get("owner"), "session": row.get("session"), "role": "assistant",
+        "origin": "public_assistant_message", "content": answer,
+        "content_sha256": text_hash(answer),
+    }.items())
+    renders = [e for e in events if e.get("event") == "functional_receipt_finalization"]
+    matched = matched and len(renders) == 1 and all(
+        renders[0].get(k) == v for k, v in metadata.items())
+    if matched and ("final_text_sha256" in renders[0] or policy == "receipt_business_response_v2"):
+        matched = renders[0].get("final_text_sha256") == text_hash(answer)
+    messages = row.get("messages", [])
+    matched = matched and bool(messages) and messages[-1].get("type") == "ai" and (
+        messages[-1].get("content") == answer and not messages[-1].get("tool_calls"))
+    if "final_capture" in row:
+        matched = matched and row["final_capture"].get("ok") is True and (
+            row["final_capture"].get("source_ref") == source_ref)
+    return {"status": yes_no(bool(matched)), "method": "captured_program_delivery",
+            "source_ref": source_ref, "render_text_hash_recorded": bool(
+                renders and "final_text_sha256" in renders[0]),
+            "limitation": "Captured public delivery provenance only; effects/support/answer "
+                          "semantics still require separate review. No model final HTTP expected."}
+
+
 def evaluate_attempt(
-    reader: ArtifactReader, path: Path, expected: dict[str, Any]
+    reader: ArtifactReader, path: Path, expected: dict[str, Any], freeze: dict[str, Any],
 ) -> dict[str, Any]:
     row = reader.json(path)
     checks = []
@@ -396,9 +443,12 @@ def evaluate_attempt(
             {"broken_lines": broken},
         )
     )
-    linkage = final_linkage(row.get("final_answer"), events)
+    program = row.get("finalization", {}).get("model_generation") is False
+    linkage = (program_final_linkage(row, events, freeze) if program
+               else final_linkage(row.get("final_answer"), events))
     if row.get("status") == "COMPLETED":
-        checks.append(check("final_actual_http_link", linkage["status"], "final_answer", linkage))
+        checks.append(check("final_program_delivery_link" if program else "final_actual_http_link",
+                            linkage["status"], "final_answer", linkage))
     usage = trace_usage(events)
     delta = ledger_delta(row.get("budget_before", {}), row.get("budget_after", {}))
     for kind in ("generation", "embedding"):
@@ -649,7 +699,7 @@ def evaluate(
                 bank_root.glob(identity + "-attempt-*.json"),
                 key=lambda p: int(p.stem.rsplit("-", 1)[-1]),
             )
-            attempts = [evaluate_attempt(reader, path, expected) for path in paths]
+            attempts = [evaluate_attempt(reader, path, expected, freeze) for path in paths]
             all_attempts.extend(attempts)
             ordinals = [a["attempt"] for a in attempts]
             matched_traces = {Path(a["trace_path"]) for a in attempts}

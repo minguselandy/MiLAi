@@ -41,6 +41,7 @@ def prepared(
     failure_receipts: bool = False,
     business_feedback: bool = False,
     format_allowance: int = 1,
+    current_delivery: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -62,7 +63,10 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
-        "failure_delivery": "receipt_status_v1" if failure_receipts else "unavailable_v1",
+        "failure_delivery": "receipt_status_v2" if current_delivery else
+        "receipt_status_v1" if failure_receipts else "unavailable_v1",
+        "declaration_tool_choice": "required" if current_delivery else "auto",
+        "recent_context": "session_events_v1" if current_delivery else "disabled",
         "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
             "tokenizer_files_sha256": {
@@ -83,7 +87,8 @@ def prepared(
         "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
-        "finalization": "receipt_business_response_v1" if receipt_response else
+        "finalization": "receipt_business_response_v2" if current_delivery else
+        "receipt_business_response_v1" if receipt_response else
         "readonly_response_v1" if readonly_finalization else "agent_final_v1",
         "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
         "memory_completion": "declared_writes_v1" if declared_writes else "explicit_only_v1",
@@ -1820,3 +1825,83 @@ def test_continuation_observation_requires_current_paired_target_and_no_prior_at
     if gaps:
         assert gaps[0]['target'] == 'bound title' and gaps[0]['query_receipt_ref'] == 'q'
     assert unattempted_continuations(messages, effects, []) == []
+
+
+@pytest.mark.parametrize('section,key', [(None, 'ordinary_materal_tokens'),
+                                        ('capacity', 'context_token')])
+def test_prepare_rejects_unknown_configuration_before_runtime(
+    tmp_path: Path, section: str | None, key: str,
+) -> None:
+    prepared(tmp_path)
+    settings = read_json(tmp_path / 'settings.json')
+    target = settings if section is None else settings[section]
+    target[key] = 64
+    write_json(tmp_path / 'typo.json', settings)
+    with pytest.raises(ValueError, match='UNKNOWN_KEYS'):
+        functional.prepare(tmp_path / 'invalid-run', tmp_path / 'typo.json')
+    assert not (tmp_path / 'invalid-run' / 'input-freeze.json').exists()
+
+
+def test_preagent_protocol_failure_is_delivered_and_visible_after_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 2}:
+            assert wire['tool_choice'] == 'required'
+            assert len(wire['tools']) == 1
+        if ordinal == 1:
+            return {'role': 'assistant', 'content': 'Malformed declaration without a tool.'}
+        if ordinal == 2:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                               allow_forgetting=False, business_action_request='none',
+                               business_operations=[])
+        if ordinal == 3:
+            packet = materials(wire)
+            assert any(u.get('role') == 'assistant' and '回答协议失败' in u.get('content', '')
+                       for u in packet['items'])
+            assert any(u.get('role') == 'user' and u.get('content') == 'Withdraw the special rule.'
+                       for u in packet['items'])
+            return {'role': 'assistant', 'content': 'The earlier request did not commit.'}
+        assert ordinal == 4 and not wire.get('tools')
+        return {'role': 'assistant', 'content': 'The earlier request did not commit.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='mechanical-bank', owner='alice', session='s')
+    failed = functional.message(root, **common, message_id='withdraw',
+                                content='Withdraw the special rule.')
+    assert failed['status'] == 'FAILED' and failed['error_category'] == 'provider_protocol'
+    assert failed['final_delivery']['status'] == 'available'
+    assert failed['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert failed['operation_status']['business']['status'] == 'not_executed'
+    assert not failed.get('messages') and failed['final_capture']['ok']
+    later = functional.message(root, **common, message_id='later', content='Did it succeed?')
+    assert later['status'] == 'COMPLETED' and len(wires) == 4
+    assert not later['records'] and not later['operation_status']['business']['operations']
+
+
+def test_guessed_business_mode_without_receipts_keeps_conversational_answer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                               allow_forgetting=False, business_action_request='perform',
+                               business_operations=['create_or_update_draft'])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': 'Untrusted execution draft.'}
+        assert ordinal == 3 and not wire.get('tools')
+        assert 'Untrusted execution draft.' not in json.dumps(wire)
+        return {'role': 'assistant', 'content': 'No earlier unit is available in the material.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='m',
+                                 content='What unit did I use earlier?')
+    assert result['status'] == 'COMPLETED' and len(wires) == 3
+    assert result['final_answer'] == 'No earlier unit is available in the material.'
+    assert result['operation_status']['business']['status'] == 'not_executed'
