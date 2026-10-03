@@ -42,6 +42,7 @@ def prepared(
     business_feedback: bool = False,
     format_allowance: int = 1,
     current_delivery: bool = False,
+    fresh_completion: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -63,7 +64,8 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
-        "failure_delivery": "receipt_status_v2" if current_delivery else
+        "failure_delivery": "receipt_status_v3" if fresh_completion else
+        "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
         "recent_context": "session_events_v1" if current_delivery else "disabled",
@@ -91,7 +93,8 @@ def prepared(
         "receipt_business_response_v1" if receipt_response else
         "readonly_response_v1" if readonly_finalization else "agent_final_v1",
         "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
-        "memory_completion": "declared_writes_v1" if declared_writes else "explicit_only_v1",
+        "memory_completion": "declared_writes_v2" if fresh_completion else
+        "declared_writes_v1" if declared_writes else "explicit_only_v1",
         "formation_interface": "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
@@ -1905,3 +1908,51 @@ def test_guessed_business_mode_without_receipts_keeps_conversational_answer(
     assert result['status'] == 'COMPLETED' and len(wires) == 3
     assert result['final_answer'] == 'No earlier unit is available in the material.'
     assert result['operation_status']['business']['status'] == 'not_executed'
+
+
+@pytest.mark.parametrize('writes', [True, False])
+def test_completion_excludes_false_draft_but_retains_checkpoint_and_truthful_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, writes: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True, fresh_completion=True)
+    draft = 'FALSE_UNDELIVERED_CONFIRMATION'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                               allow_forgetting=False, business_action_request='none',
+                               business_operations=[])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': draft}
+        assert draft not in json.dumps(wire)
+        if ordinal == 3:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert 'save_memory' in names and not names.intersection(
+                {'reserve_and_label', 'complete_label', 'forget_memory'})
+            if writes:
+                unit = next(u for u in materials(wire)['items'] if u['type'] == 'fragment')
+                return native_call('save_memory', 'actual-save', content='Prefer quiet rooms.',
+                                   fragment_handles=[unit['fragment_handle']])
+            return {'role': 'assistant', 'content': 'SECOND_UNDELIVERED_CONFIRMATION'}
+        return {'role': 'assistant', 'content': 'Saved after the actual commit.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s', message_id='save',
+                  content='Remember that I prefer quiet rooms.')
+    result = functional.message(root, **common)
+    assert any(m.get('content') == draft for m in result['messages'])
+    assert draft not in result['final_answer']
+    assert result['status'] == ('COMPLETED' if writes else 'FAILED')
+    assert result['final_delivery']['status'] == 'available'
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'committed' if writes else 'not_committed')
+    assert len(result['records']) == int(writes)
+    if not writes:
+        assert '请求未完成' in result['final_answer']
+        assert '本轮语义记忆: 未提交' in result['final_answer']
+        assert 'SECOND_UNDELIVERED_CONFIRMATION' not in result['final_answer']
+        assert result['final_capture']['ok']
+    count = len(wires)
+    replay = functional.message(root, **common)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == count

@@ -312,7 +312,7 @@ def prepare(
             "index_v1", "inline_fragments_v1", "inline_receipt_units_v2"}:
         raise ValueError("FUNCTIONAL_SOURCE_SELECTION_INVALID")
     if settings.get("failure_delivery", "unavailable_v1") not in {
-            "unavailable_v1", "receipt_status_v1", "receipt_status_v2"}:
+            "unavailable_v1", "receipt_status_v1", "receipt_status_v2", "receipt_status_v3"}:
         raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
     if settings.get("business_completion", "disabled") not in {
             "disabled", "observed_continuation_v1"}:
@@ -336,7 +336,7 @@ def prepare(
     if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
         raise ValueError("FUNCTIONAL_READ_EXHAUSTION_POLICY_INVALID")
     if settings.get("memory_completion", "explicit_only_v1") not in {
-            "explicit_only_v1", "declared_writes_v1"}:
+            "explicit_only_v1", "declared_writes_v1", "declared_writes_v2"}:
         raise ValueError("FUNCTIONAL_MEMORY_COMPLETION_POLICY_INVALID")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
@@ -1190,7 +1190,7 @@ def message(
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
-            if settings.get("failure_delivery") == "receipt_status_v2":
+            if settings.get("failure_delivery") in {"receipt_status_v2", "receipt_status_v3"}:
                 # Bind the incoming event before classification, without retrieving
                 # anything. A pre-Agent failure delivery must inherit this input's
                 # visibility, never the preceding public turn's exposure.
@@ -1432,6 +1432,14 @@ def message(
                                        and row.id in {identity + ":required-memory-receipt",
                                                       identity + ":observed-continuation"}]
                 wire_messages = [row for row in messages if row not in completion_feedback]
+                if (settings.get("memory_completion") == "declared_writes_v2"
+                        and any(row.id == identity + ":required-memory-receipt"
+                                for row in completion_feedback)):
+                    # Withheld prose is not evidence that a write happened. Keep
+                    # actual calls/results and the public request, while preserving
+                    # every rejected draft in the unchanged execution checkpoint.
+                    wire_messages = [row for row in wire_messages
+                                     if not isinstance(row, AIMessage) or row.tool_calls]
                 return {
                     "llm_input_messages": [
                         SystemMessage(
@@ -1602,7 +1610,8 @@ def message(
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
                 return bool(mode and (mode["requires_memory_result"] or (
-                    settings.get("memory_completion") == "declared_writes_v1"
+                    settings.get("memory_completion") in {
+                        "declared_writes_v1", "declared_writes_v2"}
                     and mode["allow_memory_maintenance"]))
                     and not any(r["tool"] in {"save_memory", "update_memory"}
                                 for r in effects["mutation_receipts"])
@@ -1810,10 +1819,16 @@ def message(
             output, thread_id=cfg["configurable"]["thread_id"],
             execution_started=execution_started,
         )
-        if (settings.get("failure_delivery") in {"receipt_status_v1", "receipt_status_v2"}
-                and output.get("error_category") == "provider_protocol"
+        known_incomplete = (settings.get("failure_delivery") == "receipt_status_v3"
+                            and output.get("error") in {
+                                "FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING",
+                                "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"})
+        if (settings.get("failure_delivery") in {
+                "receipt_status_v1", "receipt_status_v2", "receipt_status_v3"}
+                and (output.get("error_category") == "provider_protocol" or known_incomplete)
                 and (output.get("messages")
-                     or settings.get("failure_delivery") == "receipt_status_v2")
+                     or settings.get("failure_delivery") in {
+                         "receipt_status_v2", "receipt_status_v3"})
                 and "service" in locals() and "snapshot_error" not in output
                 and "checkpoint_snapshot_error" not in output
                 and "application_snapshot_error" not in output):
@@ -1826,7 +1841,8 @@ def message(
                         if "agent" in locals() else [])
             final = business_response(evidence, output["operation_status"], {})
             output["final_answer"] = (
-                "回答协议失败, 执行已停止; 以下是已确认的操作状态。"
+                ("请求未完成, 执行已停止; 以下是已确认的操作状态。" if known_incomplete else
+                 "回答协议失败, 执行已停止; 以下是已确认的操作状态。") +
                 "未列出的请求完成情况仍未确认。\n\n" + str(final.content))
             output["final_delivery"] = final_delivery(output["final_answer"])
             output["failure_delivery"] = {
@@ -1837,7 +1853,7 @@ def message(
             try:
                 output["final_capture"] = service.capture_assistant(
                     session, message_id + ":failure-final" + (
-                        f":{attempt}" if settings["failure_delivery"] == "receipt_status_v2"
+                        f":{attempt}" if settings["failure_delivery"] != "receipt_status_v1"
                         else ""),
                     output["final_answer"])
                 if not output["final_capture"].get("ok"):

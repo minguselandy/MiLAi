@@ -24,8 +24,8 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r26.json` with a new root for current candidate
-validation. R26 uses native v5 with required declaration tool choice and thinking disabled,
+Use `configs/v13-5-functional-r27.json` with a new root for current candidate
+validation. R27 uses native v5 with required declaration tool choice and thinking disabled,
 with unchanged capacity/call/read limits. Unknown top-level and capacity configuration keys
 are rejected before preparing a run.
 It requires a current same-object query before a new mutation of an earlier operated object,
@@ -74,9 +74,12 @@ the ordinary response stage can still answer a mixed memory question.
 the same session in ordinary material. Current input stays first, the existing token cap and
 pagination remain in force, and supplied fixed candidate pools are unchanged. These events
 are evidence with their original roles; an earlier request is neither a fresh instruction nor
-proof that maintenance completed. `receipt_status_v2` also captures a program failure reply
+proof that maintenance completed. `receipt_status_v3` also captures a program failure reply
 when declaration fails before the Agent starts, with current-input privacy lineage and no
 extra model call. The execution remains FAILED; a readable reply does not make it successful.
+The same receipt-only delivery covers explicit missing-memory-completion termination.
+`declared_writes_v2` excludes undelivered non-tool assistant drafts from the existing
+bounded completion input; actual calls/receipts and the original checkpoint remain intact.
 
 Ordinary memory answers retain the `readonly_response_v1` no-tool composition stage,
 with a fresh original-request/evidence frame excluding execution draft prose. Its reservation

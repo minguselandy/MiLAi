@@ -3294,6 +3294,66 @@
         "n02 commits correction but omits mixed history answer; n04 persists history but falsely infers absence from failed retrieval.",
         "Program receipt final provenance remains UNKNOWN in legacy evaluator; no override or automatic semantic pass."
       ]
+    },
+    {
+      "id": "communication-r26",
+      "layer": "L0",
+      "candidate_commit": "53eda908e575f7e1f873f088308453919c7f450d",
+      "state": "COMPLETE_COMMUNICATION_PROBE_NOT_PASSED",
+      "planned_cases": 4,
+      "planned_messages": 7,
+      "config": "configs/v13-5-functional-r26.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11878,
+        "generation": {
+          "charged_tokens": 39345896,
+          "known_tokens": 39315509,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r26/input-freeze.json": "62589f968ce40b3b8f19ec96f32f067638637a8c096b4ae5ddcfdf393a4cdd80",
+        "configs/v13-5-functional-r26.json": "ed09b8b7b0885470e16a804bcadac9bed80cbebe5c55173541b1b1fe0c1d9b4e",
+        "artifacts/v13-5/communication-r26/review.json": "e461c611bbf444301f91ca9ebf7fa4e3f1f9772b462fd429b4fb2d29b3e71c45",
+        "artifacts/v13-5/communication-r26/seal.json": "f88bd57bc00ea727f33b784be951bfb308e1b62eb643c0faa12b8a1c3c107a5c",
+        "artifacts/v13-5/communication-r26-evaluator/summary.json": "98ebc6d854c182002bd0cafd8cea66ae345813f73bd37e2ae95d6e61a616f073",
+        "artifacts/v13-5/communication-r26-grades.json": "472d696f64afb5b6e6e65116536dd4603ee5bd15c26c6ca0984519c511c13b2b",
+        "artifacts/v13-5/communication-r26-review.jsonl": "a07861b0bb92422fe5bd41ec1acbaddafc2635a2620d19b292e66f6f9c83314f"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 3,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 5,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 7,
+      "cost_delta": {
+        "generation_requests": 24,
+        "generation.known_tokens": 91712,
+        "generation.charged_tokens": 91712,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "case_review": {
+        "communication-answer": "Required native declaration, ordinary Chinese final, no writes or business effects.",
+        "communication-memory": "FAIL: explicit temporary save twice yields undelivered false saved drafts but no write; deterministic guard withholds final, raw remains. Later recalls actual raw requirement with correct temporary/best-effort scope, no false new save. Declaration wrongly permits forgetting, but no forget occurs.",
+        "communication-partial": "Actual reservation partial then directly supported semantic record; next current query followed by only missing label, same object and no repeated reservation. Both finals agree with paired receipts; three SQLite quote checks pass.",
+        "communication-recovery": "Actual W1 after native effect produces UNKNOWN, no semantic record. Fresh process current query discovers completed reservation/label without any repeat; original unknown and semantic not_committed preserved."
+      },
+      "scope": "L0 communication only. Offline evaluator uses L4 generic mode because CLI has no L0 mode; not an L4 confirmation or full L1/L2.",
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
