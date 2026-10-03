@@ -1,10 +1,12 @@
 # v13.5 functional profile
 
-**R49 is the current mechanically checked candidate: 586 regressions and 32 production tokenizer/prompt probes passed; no r49 model acceptance yet.** It separates required read selectors while reusing the existing read actions and durable allowances. Latest actual evidence remains the r48 failure below.
+**R49 is a partial development checkpoint, not an accepted configuration.** The frozen 11 cases / 27 messages currently have 4 scoped PASS, 1 observed FAIL and 6 wholly NOT_RUN cases; 12 messages COMPLETED and 15 NOT_RUN. The failing h03 case completed only 2/3 messages. Withdrawal and stored originals are correct, but the final answer calls a paraphrase an original quotation. Its final history query was not run. Support-review overrejection remains open.
 
-**R48 actual communication failed: 4 scoped PASS, 2 FAIL and 5 NOT_RUN out of the frozen 11 cases / 27 messages.** There were 15 COMPLETED, 1 FAILED and 11 unrun messages. Historical reading encoded unused optional selectors as empty strings and then the string `"None"`, exhausting the one format reproposal; no read or new write executed. Another final answer inferred restoration of a default rule without explicit support. Comparison rejected actual omitted limits, but also overrejected a correct partial-business interpretation. These limitations remain open.
+The current-record and original-source selectors were used by the actual model. Dedicated history, revision, fragment and page selectors were not reached; r48's historical-read failure is not yet cleared by actual model evidence. The partial cohort was sealed at the user's checkpoint request, with no new protocol crash. Never append runs to sealed roots or pool their passing cases.
 
-The source/frozen commit is `3c4dc23`: Fast CI 37149580600 succeeded; Full 37149580597 was skipped. Its 578 mechanical regressions and 29 production tokenizer/prompt probes passed, separately from model acceptance. The cohort added 69 generations / 363,875 tokens. Same-version L1–L4 are not admitted. No stable configuration is recommended; see the [r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md).
+R49 source/freeze commit `a273615` passed Fast CI 37153912230; Full 37153912354 was skipped. Its 586 mechanical regressions and 32 production tokenizer/prompt probes passed separately. The actual partial cohort added 59 generations / 354,944 tokens; checkpoint preparation added zero experimental model calls. Same-version L1–L4 are not admitted. See the [r49 checkpoint](V13_5_CHECKPOINT_r49_20261004.md) and [current progress](V13_5_PROGRESS.md).
+
+Historical r48 remains 4 scoped PASS / 2 FAIL / 5 NOT_RUN (15 COMPLETED, 1 FAILED, 11 unrun messages), including historical-selector formatting failure and unsupported final inference. Its [checkpoint](V13_5_CHECKPOINT_r48_20261004.md) and all failures remain unchanged.
 
 R47 stopped after its first story: same-model review accepted broader formation, then withdrawal generation truncated before tools (1 FAIL / 10 NOT_RUN). R46 is the previous full communication cohort below; results are not pooled.
 
@@ -194,9 +196,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r43. Do not combine their successful cases into a new cohort score.
+results, not results for r49. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r43, development only)
+## Candidate example (r49, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -205,14 +207,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r48 \
-  --config configs/v13-5-functional-r48.json
+  --root artifacts/v13-5/personal-r49 \
+  --config configs/v13-5-functional-r49.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r48 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r49 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r48 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r49 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -330,7 +332,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r48
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r49
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

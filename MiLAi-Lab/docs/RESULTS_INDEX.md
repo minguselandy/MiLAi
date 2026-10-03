@@ -2,13 +2,15 @@
 
 ## Current development checkpoint — 2026-10-04
 
-[r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md): actual communication is 4 scoped PASS,
-2 FAIL and 5 NOT_RUN over the frozen 11 cases / 27 messages (15 COMPLETED, 1 FAILED,
-11 NOT_RUN). Historical-read argument formatting and an unsupported final inference remain.
-The source commit 3c4dc23 passed Fast CI; Full was skipped. Its 578 mechanical regressions
-and 29 production tokenizer/prompt probes remain separate evidence. Full development is
-incomplete, Product NO_GO. See [current progress](V13_5_PROGRESS.md) for versioned results.
-The [r47 pre-model checkpoint](V13_5_CHECKPOINT_r47_20261004.md) remains historical.
+[r49 checkpoint](V13_5_CHECKPOINT_r49_20261004.md): partial communication has 4 scoped PASS,
+1 observed FAIL and 6 wholly NOT_RUN cases over frozen 11/27; 12 COMPLETED, 15 NOT_RUN messages.
+The failing h03 case is only 2/3 executed: real withdrawal and stored sources are intact,
+but final quotation fidelity fails. Current/source selectors were used; dedicated historical
+selectors were not reached. User-requested checkpoint, not a new protocol crash.
+Source a273615 passed Fast CI; Full skipped. 586 mechanical regressions and 32 production
+probes pass separately. Full development remains incomplete, Product NO_GO.
+[Current progress](V13_5_PROGRESS.md) and the [r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md)
+retain separate versioned results and all failures.
 
 ## Current results and execution status — 2026-09-29
 
