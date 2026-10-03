@@ -364,6 +364,7 @@ def test_required_memory_receipt_precedes_delivery_without_repeating_business(
             return {"role": "assistant", "content": "Business completed and memory saved."}
         if ordinal == 4:
             catalog = {t["function"]["name"] for t in wire["tools"]}
+            assert all(m["role"] != "system" for m in wire["messages"][1:])
             assert {"save_memory", "get_reservation"} <= catalog
             assert not {"reserve_and_label", "complete_label", "forget_memory"} & catalog
             assert any(m["role"] == "system" and "withheld" in m["content"]

@@ -794,6 +794,7 @@ def message(
                     workflow,
                     owner,
                     response_hook=faults.after_native,
+                    attempt_policy=settings.get("business_attempt_policy", "legacy"),
                     **world_settings,
                 )
             )
@@ -934,18 +935,22 @@ def message(
                 trace({"event": "functional_material_delivery", "material": material})
                 effects = memory_effects(messages)
                 trace({"event": "functional_memory_effects", "effects": effects})
+                completion_feedback = [row for row in messages if isinstance(row, SystemMessage)
+                                       and row.id == identity + ":required-memory-receipt"]
+                wire_messages = [row for row in messages if row not in completion_feedback]
                 return {
                     "llm_input_messages": [
                         SystemMessage(
                             content=settings["system_prompt"]
                             + ("\nCurrent request interpretation and enforced tool limits: "
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
+                            + "".join("\n" + str(row.content) for row in completion_feedback)
                             + "\n"
                             + json.dumps(effects, ensure_ascii=False)
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
-                        *messages,
+                        *wire_messages,
                     ]
                 }
 

@@ -4,7 +4,7 @@
 has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
 r5 was not run; r6 failed communication admission. R7 passed scoped communication
 but failed L1 after a duplicate save. R8 stopped after a question was saved as a fact.
-R9 failed communication admission; R10 is the current candidate;
+R9 and R10 failed communication admission; R11 is the current candidate;
 there is no stable recommended configuration yet.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
@@ -16,9 +16,9 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r10.json` with a new root for current candidate
+Use `configs/v13-5-functional-r11.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R10 retains exact current-message save idempotency and first interprets the current
+R11 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. The persisted interpretation separately controls
 memory maintenance, forgetting and business mutation tools. A read-only interpretation
 still permits live business queries. This is a model interpretation, not a proof of
@@ -183,3 +183,14 @@ requires a new frozen run directory instead of rewriting an earlier cohort.
 The persistence guarantee covers cooperating serial processes and these tested
 SQLite backends. It is not a distributed exactly-once guarantee, automatic physical
 erasure, an independent Judge result, or a claim that arbitrary prose is correct.
+
+
+The current candidate opts into `single_phase_per_public_turn_v1`: for each exact
+business object, each phase has at most one actual attempt in a public request,
+including known failure/no-effect results. `reserve_and_label` includes the label
+phase. A new user request can continue unfinished work after a live query; reopening
+the same public request does not reset the allowance. Draft, approval and publication
+are distinct document phases. This bounds automatic retries; it does not infer user
+authorization or certify that the model chose the correct object. Legacy profiles
+keep their previous behavior. Completion feedback is folded into the leading system
+message for the actual provider template; the original checkpoint marker remains.

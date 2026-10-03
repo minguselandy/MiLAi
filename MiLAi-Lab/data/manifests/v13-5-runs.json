@@ -925,8 +925,8 @@
       "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
       "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
       "id": "communication-r10",
-      "candidate_commit": "PENDING_SOURCE_COMMIT",
-      "state": "ADMITTED_NOT_RUN",
+      "candidate_commit": "1965c13a0b89ddf3dee0d72f48e6bcfafce97125",
+      "state": "STOPPED_COMPLETION_TEMPLATE_PROTOCOL",
       "config_sha256": "c8b61fad9d40c94de5830626580ff4eab3e001cb2360740d7e48d6053c03919f",
       "baseline_budget": {
         "generation_requests": 9983,
@@ -954,7 +954,91 @@
         "artifacts/v13-5/r10-shared-feedback.log": "697c1abb7c1987beecb48f6c6881d7f7963fa592d2511d44f399a1e9de89f604",
         "artifacts/v13-5/r10-ruff-accepted.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r10-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r10-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r10-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r10/input-freeze.json": "d93c81aac96e40dd5214a508863b672b0b55a4f588edf9bb69a9556fff02d099",
+        "artifacts/v13-5/communication-r10/review.json": "fe611e82ddf618a25ffb9b9246f7161b623a996e2971052eb527de11600a5b0c",
+        "artifacts/v13-5/communication-r10/operator-stop.json": "fe611e82ddf618a25ffb9b9246f7161b623a996e2971052eb527de11600a5b0c",
+        "artifacts/v13-5/communication-r10/seal.json": "a4f7c17699eeab1deba6fa622e1de78e206bcda530826f599379b5427e3e50de"
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 4
+      },
+      "semantic_counts": {
+        "FAIL": 2,
+        "NOT_RUN": 3
+      },
+      "cost_delta": {
+        "generation_requests": 8,
+        "generation.known_tokens": 32196,
+        "generation.charged_tokens": 32196,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "failures": [
+        "comm-tool-failure executes reserve_and_label and an unauthorized additional complete_label despite requested one label attempt. Actual reservation partial, no extra successful effect. comm-committed-resume completes business, skips save; pre-delivery completion begins but actual tokenizer rejects System message must be at the beginning. No final delivered, no semantic commit, W3 not reached."
+      ]
+    },
+    {
+      "layer": "communication_admission_and_exposed_query_regression",
+      "planned_cases": 5,
+      "planned_messages": 6,
+      "execution_order": [
+        "comm-tool-failure",
+        "comm-committed-resume",
+        "scope-1",
+        "comm-plain",
+        "comm-save"
+      ],
+      "max_calls_per_message": 24,
+      "planned_call_bound": 144,
+      "explicit_resume": "comm-committed-resume same public message after W3; one shared-format repair only for protocol failure; no blind mutation retry",
+      "acceptance": [
+        "usable ordinary answer with no semantic/business mutations",
+        "actual semantic commit before save confirmation",
+        "truthful partial business receipt and usable answer",
+        "committed W3 recovery preserves one reservation and one semantic version",
+        "scope-1 query remains read-only, limited team-week scope retained, no unsupported personal assertion"
+      ],
+      "exposure": "Same four r7 stories plus original exposed scope-1; scoped admission only, not full L1 or unseen validation",
+      "critical_stop": "Stop shared queue on false saves, unsupported mutations, repeated/wrong effects or privacy breach",
+      "id": "communication-r11",
+      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "state": "ADMITTED_NOT_RUN",
+      "config_sha256": "ee8dabfec08a8d7532728ea5278c846e06758e3343500d0caa3b0b04b7dbada8",
+      "baseline_budget": {
+        "generation_requests": 9991,
+        "generation": {
+          "charged_tokens": 29115282,
+          "known_tokens": 29084895,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "mechanical_checks": {
+        "workflow_entry_privacy": "63 PASS",
+        "production_tokenizer_completion": "2 scripted variants PASS; 0 real HTTP",
+        "ruff_active": "PASS",
+        "mypy_src": "195 files PASS",
+        "boundary": "PASS",
+        "failed_probe_retained": "r11-production-completion.stderr.log (relative test path rejected before execution)"
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/evaluator-fixtures/communication-r11-runtime.json": "3bf27bb173bee6dea162cd3cb67b5c7cfd30e00e89c9ca81b47e7107a09d7828",
+        "artifacts/v13-5/evaluator-fixtures/communication-r11-controls.json": "7af06bceaa9f7809cdbcff06539d65882a370f716b00800399d71c7cf6986cc7",
+        "artifacts/v13-5/r11-workflow-entry-first.log": "f38099b6caf61b821c3cc190bdf2b633672aafe0a3c5a72c9012e88708164543",
+        "artifacts/v13-5/r11-production-completion-v2.json": "5cd92d61c8e5763d33804c74cc61f53440c1f283c9fc112029d0034c422d1e66",
+        "artifacts/v13-5/r11-production-completion-probe.py": "d656ca23784f5eda888c61a9d13401022c314c8752859474fa4f5356a37def58",
+        "artifacts/v13-5/r11-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r11-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r11-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],

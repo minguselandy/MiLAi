@@ -93,6 +93,57 @@ def test_native_reservation_partial_no_effect_remaining_step_and_stale_source(
         assert denied == {"status": "operation_already_completed", "executed": False}
 
 
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+def test_single_phase_policy_retains_failed_attempt_and_requires_new_public_turn(
+    tmp_path: Path, workflow: str,
+) -> None:
+    options = {"attempt_policy": "single_phase_per_public_turn_v1",
+               "initial_label_available" if workflow == "reservation"
+               else "initial_publication_available": False}
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow, **options)
+        if workflow == "reservation":
+            first = call(wrapper, "reserve_and_label", reserve_args(), "reserve")
+            original = receipt(first)
+            name, args = "complete_label", {"reservation_id": original["reservation_id"]}
+            # Another exact object has its own phase allowance.
+            other = call(wrapper, "reserve_and_label",
+                         {**reserve_args(), "item_key": "another item"}, "another")
+            assert receipt(other)["status"] == "reserved_label_failed"
+        else:
+            draft = receipt(call(wrapper, "create_or_update_draft", draft_args(), "draft"))
+            bound = {k: draft[k] for k in ("title", "document_version", "content_digest")}
+            assert receipt(call(wrapper, "approve_document_version", bound, "approve"))["ok"]
+            name, args = "publish_approved_document", {**bound, "audience": "local audience"}
+            first = call(wrapper, name, args, "publish")
+        denied = call(wrapper, name, args, "repeat")
+        assert json.loads(denied.content) == {
+            "status": "business_phase_already_attempted_this_turn", "executed": False}
+        source = service.source(json.loads(first.content)["source_ref"])
+
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow, **options)
+        # Reopen cannot refund the known failed phase.
+        assert json.loads(call(wrapper, name, args, "after-reopen").content)["executed"] is False
+        service.capture_user("session", "continue", "Query then try the remaining step once.")
+        wrapper = app.call_wrapper(service, "session", "continue")
+        query_name = "get_reservation" if workflow == "reservation" else "get_document_status"
+        query_args = {"item_key": "mechanical item"} if workflow == "reservation" else {
+            "title": "mechanical draft"}
+        assert receipt(call(wrapper, query_name, query_args, "live-query"))["ok"]
+        failed = call(wrapper, name, args, "new-turn-attempt")
+        assert receipt(failed)["ok"] is False
+        if workflow == "reservation":
+            app.world.set_label_available("backend-up", True)
+        else:
+            app.world.set_publication_available("backend-up", True)
+        assert json.loads(call(wrapper, name, args, "same-turn-again").content)["executed"] is False
+        service.capture_user("session", "continue-again", "Try the remaining step now.")
+        wrapper = app.call_wrapper(service, "session", "continue-again")
+        assert receipt(call(wrapper, name, args, "final-attempt"))["ok"]
+        assert service.source(json.loads(first.content)["source_ref"]) == source
+
+
 def test_native_document_version_approval_publish_and_stale_observation(tmp_path: Path) -> None:
     with ExitStack() as stack:
         app, service, wrapper = opened(

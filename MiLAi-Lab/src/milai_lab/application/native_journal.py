@@ -21,9 +21,11 @@ from milai_lab.harness.artifact_io import write_json
 
 
 class NativePublicActionJournal(BusinessActionJournal):
-    def __init__(self, *args: Any, owner: str, world: Any, **kwargs: Any) -> None:
+    def __init__(self, *args: Any, owner: str, world: Any,
+                 single_phase_per_turn: bool = False, **kwargs: Any) -> None:
         super().__init__(*args, application_protection=True, **kwargs)
         self.owner, self.world = owner, world
+        self.single_phase_per_turn = single_phase_per_turn
         self.public_turn: dict[str, Any] | None = None
         schemas = document_schemas() if self.document_workflow else BUSINESS_SCHEMAS
         self.parameter_schemas = {item["function"]["name"]: item["function"]["parameters"]
@@ -51,6 +53,14 @@ class NativePublicActionJournal(BusinessActionJournal):
 
     def _is_query(self, name: str) -> bool:
         return name == ("get_document_status" if self.document_workflow else "get_reservation")
+
+    @staticmethod
+    def _attempt_phases(name: str) -> set[str]:
+        if name == "reserve_and_label":
+            return {"reservation", "label"}
+        if name == "complete_label":
+            return {"label"}
+        return {name}
 
     def _protected_call(self, request: Any, execute: Callable[[Any], Any]) -> ToolMessage:
         call, generated = request.tool_call, request.state["messages"][-1]
@@ -99,6 +109,16 @@ class NativePublicActionJournal(BusinessActionJournal):
                         and old.get("public_turn") == self.public_turn
                         and old.get("effect") in {"confirmed", "partial"}):
                     reason = "operation_already_completed"
+                    break
+                if (self.single_phase_per_turn and old.get("status") == "complete"
+                        and old.get("public_turn") == self.public_turn
+                        and self._attempt_phases(old["name"]).intersection(
+                            self._attempt_phases(call["name"]))):
+                    # A known failed attempt is not authorization to keep trying.
+                    # The old receipt stays unchanged; a new public request may
+                    # continue after a live query. Unknown recovery still uses
+                    # the distinct original-call discovery contract above.
+                    reason = "business_phase_already_attempted_this_turn"
                     break
         row = {**identity, "journal_key": key, "target": target,
                "operation_key": operation, "status": "pending", "executed": False,
