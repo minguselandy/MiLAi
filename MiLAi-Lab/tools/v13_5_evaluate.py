@@ -348,7 +348,8 @@ def program_final_linkage(
                 "execution_candidate_delivered": False,
                 "protocol": "receipt_business_response_v1", "model_generation": False}
     policy = freeze.get("config", {}).get("finalization")
-    if (policy not in {"receipt_business_response_v1", "receipt_business_response_v2"}
+    if (policy not in {"receipt_business_response_v1", "receipt_business_response_v2",
+                      "receipt_business_response_v3"}
             or row.get("finalization") != metadata or not freeze.get("run_id")):
         return {"status": "UNKNOWN", "reason": "unrecognized_program_final_contract"}
     answer = row.get("final_answer")
@@ -367,7 +368,8 @@ def program_final_linkage(
     renders = [e for e in events if e.get("event") == "functional_receipt_finalization"]
     matched = matched and len(renders) == 1 and all(
         renders[0].get(k) == v for k, v in metadata.items())
-    if matched and ("final_text_sha256" in renders[0] or policy == "receipt_business_response_v2"):
+    if matched and ("final_text_sha256" in renders[0] or policy in {
+            "receipt_business_response_v2", "receipt_business_response_v3"}):
         matched = renders[0].get("final_text_sha256") == text_hash(answer)
     messages = row.get("messages", [])
     matched = matched and bool(messages) and messages[-1].get("type") == "ai" and (

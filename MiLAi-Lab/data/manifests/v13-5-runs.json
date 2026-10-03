@@ -3518,6 +3518,104 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "l4-r28",
+      "layer": "L4",
+      "candidate_commit": "2c822969c4b61b25e5c10338b7c19475c7384a18",
+      "state": "COMPLETE_EXPOSED_DEVELOPMENT_WITH_FUNCTIONAL_FAILURES",
+      "planned_cases": 12,
+      "planned_messages": 30,
+      "config": "configs/v13-5-functional-r28.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 11962,
+        "generation": {
+          "charged_tokens": 39694802,
+          "known_tokens": 39664415,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r28/input-freeze.json": "26bc470b95e3eca182c7a72321866adfee74d97dd8df8c546dad8679f7bdc805",
+        "configs/v13-5-functional-r28.json": "c28292c7073a1193682c12d8276d9ac35e2a78b8d733f59e1058e6505fe2b7ae",
+        "artifacts/v13-5/l4-r28/review.json": "f7d6324892f3d06f4452ccdd9703e9f73363b2aba4b7a8972c1b366d8e2ed109",
+        "artifacts/v13-5/l4-r28/seal.json": "2253029953a8218bd42118bcf5c81a3f6522e96df41db36bce4a5097b29cd09c",
+        "artifacts/v13-5/l4-r28-grades.json": "b5e3fbc4819cb03c8ec1e217a44da029fa311340a533fc6240b93c65a4118259",
+        "artifacts/v13-5/l4-r28-evaluator/summary.json": "7d22e54e6c945f9592f88dde0344a893be8c2526dc2ad664a7b390d54935be3b",
+        "artifacts/v13-5/l4-r28-review-notes.json": "9dd10843b740db139d147931672e129cbbfdc7710cd89a1cb023123fbd188df1",
+        "artifacts/v13-5/l4-r28-forget-final-review.jsonl": "c00f7a4104c21237accc37d57c25ea6460c1e7d347d062a373fad9dce6fea9e4"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 8,
+        "FAIL": 4
+      },
+      "message_counts": {
+        "COMPLETED": 28,
+        "UNKNOWN_W1": 1,
+        "VISIBILITY_REVOKED_NO_TERMINAL_ARTIFACT": 1
+      },
+      "retained_attempts": 29,
+      "orphan_trace_attempts": 1,
+      "cost_delta": {
+        "generation_requests": 125,
+        "generation.known_tokens": 572940,
+        "generation.charged_tokens": 572940,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "accounting": "Serial cohort ledger delta equals 29 retained attempt deltas plus four actual HTTP usage receipts in forget orphan trace. Generic evaluator correctly withholds aggregate accounting with an orphan. Supplement uses actual trace and known isolated serial ledger; no fabricated terminal attempt. All 30 public messages actually attempted.",
+      "retained_attempt_usage_sum": {
+        "requests": 121,
+        "tokens": 557440
+      },
+      "orphan_trace_usage": [
+        {
+          "prompt_tokens": 1055,
+          "total_tokens": 1126,
+          "completion_tokens": 71,
+          "prompt_tokens_details": null
+        },
+        {
+          "prompt_tokens": 5521,
+          "total_tokens": 5586,
+          "completion_tokens": 65,
+          "prompt_tokens_details": null
+        },
+        {
+          "prompt_tokens": 4461,
+          "total_tokens": 4485,
+          "completion_tokens": 24,
+          "prompt_tokens_details": null
+        },
+        {
+          "prompt_tokens": 4276,
+          "total_tokens": 4303,
+          "completion_tokens": 27,
+          "prompt_tokens_details": null
+        }
+      ],
+      "reviewer": "Root same-family exposed development review",
+      "independent_review": false,
+      "continuation": "Readonly post-forget and independent stories continued after conservative visibility redaction, never retried forget.",
+      "remote_ci": {
+        "sha": "2c822969c4b61b25e5c10338b7c19475c7384a18",
+        "fast": {
+          "run": 37109691374,
+          "conclusion": "success"
+        },
+        "full": {
+          "run": 37109703713,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

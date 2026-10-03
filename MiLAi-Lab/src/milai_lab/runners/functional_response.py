@@ -140,6 +140,15 @@ def business_response(
     for operation in semantic["operations"]:
         paragraphs.append("记忆操作: " + _text({k: operation[k] for k in (
             "tool", "id", "revision", "status") if k in operation}))
+    for operation in effects.get("visibility", {}).get("operations", []):
+        if operation["status"] == "visibility_revoked":
+            paragraphs.append("已按实际回执撤销所选记忆及来源的可见性。" +
+                "范围: " + _text(operation.get("scope")) +
+                "; 数量: " + _text(operation.get("scope_counts", {})) +
+                "。未执行物理擦除, 备份和实验审计轨迹仍保留。未选择的独立副本不在本次确认范围内。")
+        else:
+            paragraphs.append("遗忘操作状态: " + _text(operation["status"]) +
+                              "; 尚不能确认请求的全部内容已撤销可见性。")
     if effects["raw_event"]["status"] == "stored":
         paragraphs.append("本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。")
     if execution_stop:

@@ -1,21 +1,15 @@
 # v13.5 functional profile
 
-**Development resumed by explicit user instruction on 2026-10-03.** R16 completed
-all original 24 stories / 48 messages: 24 PASS on the frozen original rubric and
-scoped current-state/source/maintenance review. Exact-commit Fast CI passed.
-Full L2-r17 completed all12/26: 10 scoped PASS, 2 FAIL. L2-r18 then stopped after
-4 completed messages on an unauthorized document edit during publication continuation.
-L2-r19 preserved the original document and actual publication, but stopped on a bounded
-read failure and rejection of a literal negative quote in a read-only declaration.
-L2-r20 completed all12/26 with 6 scoped PASS and 6 FAIL: source selection, live-query omissions,
-operation declaration omissions and redundant read exhaustion remain. Its exact Fast CI passed.
-R21 thinking declaration exhausted all8192 output tokens before any business action; that
-cohort stopped with 1 FAILED/25 NOT_RUN. R23 retains its mechanical fixes with nonthinking.
-R23 completed12/26 with10 scoped PASS and2 FAIL: incomplete selected timestamp support and a missing final after an unavailable-tool proposal. R24 uses complete small receipt units and receipt-based failure delivery while retaining FAILED and actual effects. R24 then completed12/26 with11 scoped PASS and1 FAIL: one continuation only announced a plan without calling the remaining publication tool. R25 adds a single shared-allowance review of actual observed missing stages without granting new permissions. These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
-pending and no stable configuration is recommended. Earlier failures and scoped
-communication cohorts remain separate evidence; their scores are not pooled.
-See [current functional progress](V13_5_PROGRESS.md); the
-[pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
+**Development is active; no stable configuration is recommended.** L1-r25 completed
+24/48 with24 original-rubric PASS but23 scoped current-contract PASS/1FAIL. L2-r25
+completed12/26 with10 scoped PASS/2FAIL. L3-r25 formation57 scored45 scoped PASS/12FAIL;
+reading30 scored16 scoped PASS/14FAIL. L4-r28 attempted all12/30 with8 scoped PASS/4FAIL:
+qualification loss, cross-session history retrieval, forget completion/delivery and
+cross-language duplicate identity. Its selected business recovery paths passed.
+The r24-authored L4 stories are now exposed development regressions. Scores from
+separate versions are never pooled into acceptance; Product remains NO_GO.
+See [current progress](V13_5_PROGRESS.md) and [requirements](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md).
+The [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
@@ -24,9 +18,13 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r28.json` with a new root for current candidate
-validation. R28 uses native v6 with required declaration tool choice and thinking disabled,
-with unchanged capacity/call/read limits. Unknown top-level and capacity configuration keys
+Use `configs/v13-5-functional-r29.json` with a new root for current candidate
+validation. R29 uses native v6 with required declaration tool choice and thinking disabled,
+with unchanged capacity/call/read limits. It recognizes actual forgetting as maintenance,
+uses receipt-derived visibility confirmation, and includes at most four recent visible
+records and four public events in the same owner/bank within the existing material budget.
+Supplied fixed candidate pools receive no recency supplementation. This is a candidate
+with mechanical checks only until its own actual model cohorts finish. Unknown top-level and capacity configuration keys
 are rejected before preparing a run.
 It requires a current same-object query before a new mutation of an earlier operated object,
 and shows exact original content beside each business source fragment handle.

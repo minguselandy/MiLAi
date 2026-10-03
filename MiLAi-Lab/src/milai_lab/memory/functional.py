@@ -77,7 +77,7 @@ class FunctionalMemory:
         if formation_interface not in {"content_and_scope_v1", "unified_assertion_v1"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
-        if recent_context not in {"disabled", "session_events_v1"}:
+        if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
             raise FunctionalRejection("V13_5_RECENT_CONTEXT_INVALID")
         self.recent_context = recent_context
         self.read_limit, self.material_limit, self.fragment_chars = (
@@ -436,10 +436,11 @@ class FunctionalMemory:
         cached = self.service.store.get(namespace(self.service), key)
         if cached is None:
             units = self._search_units(actual_query, ref)
-            if self.recent_context == "session_events_v1" and self.retrieval_candidates is None:
-                # Public captured events only, same owner/session, after visibility
+            if self.recent_context != "disabled" and self.retrieval_candidates is None:
+                # Public captured events only, same owner/bank (v1 also session), after visibility
                 # filtering. Fixed supplied candidate pools keep their exact order.
-                recent = sorted((source for source in self.service.sources(session)
+                recent_session = session if self.recent_context == "session_events_v1" else None
+                recent = sorted((source for source in self.service.sources(recent_session)
                                  if source["event_id"] != ref
                                  and source["role"] in {"user", "assistant"}),
                                 key=lambda source: (source["observed_at"], source["event_id"]))[-4:]
@@ -448,7 +449,15 @@ class FunctionalMemory:
                              for fragment in self.service.source_fragments(
                                  source["event_id"], max_chars=self.fragment_chars)]
                 current = [unit for unit in units if unit.get("source_ref") == ref]
-                units = self._deduplicate(current + fragments + units)
+                recent_records = []
+                if self.recent_context == "bank_recent_v2":
+                    rows = sorted((row for row in self.service.records() if row.get("ok")),
+                        key=lambda row: (row["value"].get("committed_at", ""), row["id"]))[-4:]
+                    recent_records = [unit for row in reversed(rows)
+                                      for unit in self._record_units(row)]
+                recent_ids = {unit["record_id"] for unit in recent_records}
+                units = self._deduplicate(current + recent_records + fragments + [
+                    unit for unit in units if unit.get("record_id") not in recent_ids])
             snapshot = self._snapshot(bound, units, "ordinary")
             self.service.store.put(
                 namespace(self.service), key, {"snapshot": snapshot}, index=False

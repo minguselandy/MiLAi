@@ -44,6 +44,7 @@ def prepared(
     current_delivery: bool = False,
     fresh_completion: bool = False,
     independent_capabilities: bool = False,
+    operation_completion: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -69,7 +70,8 @@ def prepared(
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
-        "recent_context": "session_events_v1" if current_delivery else "disabled",
+        "recent_context": "bank_recent_v2" if operation_completion else
+        "session_events_v1" if current_delivery else "disabled",
         "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
             "tokenizer_files_sha256": {
@@ -91,11 +93,13 @@ def prepared(
         "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
-        "finalization": "receipt_business_response_v2" if current_delivery else
+        "finalization": "receipt_business_response_v3" if operation_completion else
+        "receipt_business_response_v2" if current_delivery else
         "receipt_business_response_v1" if receipt_response else
         "readonly_response_v1" if readonly_finalization else "agent_final_v1",
         "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
-        "memory_completion": "declared_writes_v2" if fresh_completion else
+        "memory_completion": "declared_operations_v3" if operation_completion else
+        "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
         "formation_interface": "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
@@ -2002,3 +2006,63 @@ def test_empty_business_operations_grant_nothing_and_do_not_block_independent_me
         assert mode['business_declaration_status'] == 'unresolved_no_business_permission'
         assert len(result['records']) == int(variant == 'memory')
     assert not result['operation_status']['business']['operations']
+
+
+@pytest.mark.parametrize('visibility_stop', [False, True])
+def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accounting(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, visibility_stop: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True)
+    secret = 'MECHANICAL_REVOKED_BODY'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit', allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment' and secret in u['content']]
+            return native_call('save_memory', 'save', content=secret, fragment_handles=hs)
+        if ordinal in {3, 4}:
+            return {'role': 'assistant', 'content': 'Saved the requested marker.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert ordinal == 7 and not visibility_stop
+        assert secret not in json.dumps(wire)
+        assert actual_tool_receipt(wire)['status'] == 'visibility_revoked'
+        return {'role': 'assistant', 'content': 'Overbroad draft: erased every backup forever.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    first = functional.message(root, **common, session='s1', message_id='save',
+                               content='Remember ' + secret)
+    assert first['status'] == 'COMPLETED'
+    if visibility_stop:
+        monkeypatch.setattr(functional, '_verified_forget_continuation', lambda *a, **kw: False)
+    result = functional.message(root, **common, session='s2', message_id='forget',
+                                content='Forget the previously saved marker and its sources.')
+    assert not list(root.glob('banks/*/*-completion-feedback.json'))
+    assert secret not in str(result.get('final_answer'))
+    if visibility_stop:
+        assert result['status'] == 'VISIBILITY_REVOKED'
+        assert result['terminal_snapshot'] == 'visibility_redacted'
+        assert result['budget_after']['generation_requests'] == len(wires) == 6
+        assert result['budget_after']['generation_requests'] - (
+            result['budget_before']['generation_requests']) == 2
+        assert result['messages'] == [] and 'content' not in result
+    else:
+        assert result['status'] == 'COMPLETED', result
+        assert len(wires) == 7  # No additional model generation for program confirmation.
+        assert result['final_capture']['ok']
+        assert '未执行物理擦除' in result['final_answer']
+        assert 'erased every backup' not in result['final_answer']
+        assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+        assert result['operation_status']['visibility']['operations'][0][
+            'status'] == 'visibility_revoked'
+    attempts = [json.loads(p.read_text()) for p in root.glob('banks/*/*-attempt-*.json')]
+    assert len(attempts) == 2 and attempts[-1] != {}
+    assert any(a['message_id'] == 'forget' and a['status'] == result['status'] for a in attempts)

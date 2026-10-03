@@ -304,7 +304,8 @@ def prepare(
         raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
     if settings.get("declaration_tool_choice", "auto") not in {"auto", "required"}:
         raise ValueError("FUNCTIONAL_DECLARATION_TOOL_CHOICE_INVALID")
-    if settings.get("recent_context", "disabled") not in {"disabled", "session_events_v1"}:
+    if settings.get("recent_context", "disabled") not in {
+            "disabled", "session_events_v1", "bank_recent_v2"}:
         raise ValueError("FUNCTIONAL_RECENT_CONTEXT_INVALID")
     if settings.get("profile") != "functional_v1":
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
@@ -331,13 +332,14 @@ def prepare(
         "content_and_scope_v1", "unified_assertion_v1",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
-        "receipt_business_response_v2",
+        "receipt_business_response_v2", "receipt_business_response_v3",
     }:
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
     if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
         raise ValueError("FUNCTIONAL_READ_EXHAUSTION_POLICY_INVALID")
     if settings.get("memory_completion", "explicit_only_v1") not in {
-            "explicit_only_v1", "declared_writes_v1", "declared_writes_v2"}:
+            "explicit_only_v1", "declared_writes_v1", "declared_writes_v2",
+            "declared_operations_v3"}:
         raise ValueError("FUNCTIONAL_MEMORY_COMPLETION_POLICY_INVALID")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
@@ -797,7 +799,8 @@ def operation_status(
                      **{k: receipt[k] for k in ("id", "revision", "effect", "replayed",
                                                 "original_status", "phase", "error_type",
                                                 "duplicate_request", "existing_record",
-                                                "duplicate_of_operation")
+                                                "duplicate_of_operation", "scope", "scope_counts",
+                                                "physical_erasure", "raw_audit_retained")
                         if k in receipt}}
         (visibility_effects if name == "forget_memory" else memory).append(operation)
     semantic_states = {row["status"] for row in memory}
@@ -1171,6 +1174,19 @@ def message(
             RunLimits(**freeze["budget_before"]["limits"]), Path(settings["budget_path"])
         )
         before = json.loads(json.dumps(budget.state))
+
+        def persist_visibility_stop(receipt: dict[str, Any]) -> dict[str, Any]:
+            if settings.get("memory_completion") != "declared_operations_v3":
+                return receipt
+            redacted = {**receipt, "bank": bank, "owner": owner, "session": session,
+                "message_id": message_id, "workflow": workflow, "attempt": attempt,
+                "process_id": os.getpid(), "final_delivery": final_delivery(None),
+                "usage": trace.usage, "budget_before": before,
+                "budget_after": json.loads(json.dumps(budget.state)),
+                "terminal_snapshot": "visibility_redacted", "content_retained": False}
+            write_json(bank_root / f"{identity}-attempt-{attempt}.json", redacted)
+            write_json(result_path, redacted)
+            return redacted
         try:
             store = stack.enter_context(
                 SqliteStore.from_conn_string(str(bank_root / "memory.sqlite"))
@@ -1368,7 +1384,8 @@ def message(
             if completion_used:
                 selected_business = tuple(t for t in selected_business if t.name in {
                     "get_reservation", "get_document_status"})
-                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory")
+                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory"
+                    or settings.get("memory_completion") == "declared_operations_v3")
                 allowed_tools = {t.name for t in (*selected_memory, *selected_business)}
             tool_catalog = [convert_to_openai_tool(tool)
                             for tool in (*selected_memory, *selected_business)]
@@ -1453,7 +1470,8 @@ def message(
                                        and row.id in {identity + ":required-memory-receipt",
                                                       identity + ":observed-continuation"}]
                 wire_messages = [row for row in messages if row not in completion_feedback]
-                if (settings.get("memory_completion") == "declared_writes_v2"
+                if (settings.get("memory_completion") in {
+                        "declared_writes_v2", "declared_operations_v3"}
                         and any(row.id == identity + ":required-memory-receipt"
                                 for row in completion_feedback)):
                     # Withheld prose is not evidence that a write happened. Keep
@@ -1533,7 +1551,7 @@ def message(
                     trace({"event": "functional_checkpoint_replay_visibility_revoked", **blocked})
                     # Preserve old attempts/checkpoints; deny before any recovery
                     # tool dispatch or new model request can receive their bodies.
-                    return blocked
+                    return persist_visibility_stop(blocked)
             execution_started = True
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
@@ -1554,7 +1572,7 @@ def message(
                 if resume and (pending_answer_repair or (bad_checkpoint_text
                         and settings.get("finalization") not in {
                             "readonly_response_v1", "receipt_business_response_v1",
-                            "receipt_business_response_v2"})):
+                            "receipt_business_response_v2", "receipt_business_response_v3"})):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
                     if (recovery["attempts"] + len(format_failures(prior))
@@ -1631,10 +1649,14 @@ def message(
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
                 return bool(mode and (mode["requires_memory_result"] or (
+                    settings.get("memory_completion") == "declared_operations_v3"
+                    and mode["allow_forgetting"]) or (
                     settings.get("memory_completion") in {
-                        "declared_writes_v1", "declared_writes_v2"}
+                        "declared_writes_v1", "declared_writes_v2", "declared_operations_v3"}
                     and mode["allow_memory_maintenance"]))
-                    and not any(r["tool"] in {"save_memory", "update_memory"}
+                    and not any(r["tool"] in ({"save_memory", "update_memory", "forget_memory"}
+                                if settings.get("memory_completion") == "declared_operations_v3"
+                                else {"save_memory", "update_memory"})
                                 for r in effects["mutation_receipts"])
                     and isinstance(current[-1], AIMessage) and not current[-1].tool_calls
                     and final_delivery(current[-1].content)["status"] == "available")
@@ -1660,7 +1682,8 @@ def message(
                 # No completed or unknown business operation can be replayed here.
                 selected_business = tuple(t for t in selected_business if t.name in {
                     "get_reservation", "get_document_status"})
-                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory")
+                selected_memory = tuple(t for t in selected_memory if t.name != "forget_memory"
+                    or settings.get("memory_completion") == "declared_operations_v3")
                 allowed_tools = {t.name for t in (*selected_memory, *selected_business)}
                 agent = build_agent(model, store, saver, selected_business,
                     memory_tools=selected_memory, system_prompt=settings["system_prompt"],
@@ -1673,14 +1696,21 @@ def message(
                     "The current request interpretation admits an actual assertion/correction "
                     "for memory maintenance")
                 feedback = SystemMessage(id=feedback_id, content=(
-                    expected + ", but this message has no save/update receipt. "
+                    expected + (", but this message has no memory-maintenance receipt. "
+                    if settings.get("memory_completion") == "declared_operations_v3" else
+                    ", but this message has no save/update receipt. ") +
                     "Your preceding answer is withheld, not delivered. "
                     "Finish the requested memory work using actual supporting fragments. Inspect "
                     "existing records before creating a duplicate; an exact update with no changes "
                     "can confirm an existing record and must be described as already present. "
                     "A read or raw capture alone is not a semantic save. If a write fails or is "
-                    "unknown, report that actual result. Business mutations and forgetting are "
-                    "unavailable in this completion step; preserve prior effects. A receipt for "
+                    "unknown, report that actual result. " + (
+                    "Business mutations are unavailable here. Use only the currently exposed "
+                    "and authorized memory tools, including forgetting only when requested "
+                    "and not already attempted. Preserve prior effects. A receipt for "
+                    if settings.get("memory_completion") == "declared_operations_v3" else
+                    "Business mutations and forgetting are unavailable in this completion step; "
+                    "preserve prior effects. A receipt for ") +
                     "one item does not prove all requested items were handled."
                 ))
                 messages = invoke_execution({"messages": [feedback]})
@@ -1688,7 +1718,7 @@ def message(
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
             if settings.get("finalization") in {
                     "readonly_response_v1", "receipt_business_response_v1",
-                    "receipt_business_response_v2"}:
+                    "receipt_business_response_v2", "receipt_business_response_v3"}:
                 answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                   if recovery_path.exists() else 0)
                 effects = operation_status({**output, "world": app.snapshot()},
@@ -1698,10 +1728,13 @@ def message(
                 response_input = context_hook({"messages": messages}, cfg,
                     for_finalization=True)["llm_input_messages"]
                 if settings.get("finalization") in {
-                        "receipt_business_response_v1", "receipt_business_response_v2"} and (
+                        "receipt_business_response_v1", "receipt_business_response_v2",
+                        "receipt_business_response_v3"} and (
                         effects["business"]["operations"] or effects["business"]["observations"]
                         or (settings.get("finalization") == "receipt_business_response_v1"
                             and mode and mode["allow_business_mutation"])
+                        or (settings.get("finalization") == "receipt_business_response_v3"
+                            and effects["visibility"]["operations"])
                         or output.get("execution_stop")):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
@@ -1786,7 +1819,7 @@ def message(
             )
         except _VisibilityReplayRevoked as revoked:
             trace({"event": "functional_pre_model_visibility_revoked", **revoked.receipt})
-            return revoked.receipt
+            return persist_visibility_stop(revoked.receipt)
         except Exception as error:
             status, category = _status(error)
             output.update(
@@ -1855,7 +1888,7 @@ def message(
                 and "application_snapshot_error" not in output):
             blocked = _visibility_replay(service, output, session=session, message_id=message_id)
             if blocked is not None:
-                return blocked
+                return persist_visibility_stop(blocked)
             # No model repair, tool dispatch, additional retrieval, or promotion
             # to COMPLETED. Only already delivered, paired receipts are rendered.
             evidence = (agent.get_state(cfg).values.get("messages", [])

@@ -1118,3 +1118,38 @@ def test_preagent_failure_lineage_forget_preserves_later_independent_input(
         assert memory.service.source(independent) is not None
         turn(memory, 'later', 'private marker')
         assert failure['source_ref'] not in json.dumps(memory.context('s', 'later', SHA))
+
+
+def test_bank_recent_context_resolves_cross_session_without_bypassing_visibility_or_fixed_pool(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, recent_context='bank_recent_v2', material_limit=50000) as memory:
+        ref = turn(memory, text='English field record: cobalt samples, only in this trial.')
+        saved = invoke(memory, 'save_memory', {'content': 'Only this trial uses cobalt samples.',
+            'fragment_handles': handles(memory, ref)}, 'save')
+        assert saved['ok']
+        memory.service.capture_user('other-session', 'query', '此前那条记录改一下。')
+        packet = memory.context('other-session', 'query', SHA)
+        rows = [u for u in packet['items'] if u['type'] == 'record']
+        assert len(rows) == 1 and rows[0]['record_id'] == saved['id']
+        assert rows[0]['version_view'] == 'current_at_snapshot'
+        assert any(u.get('source_ref') == ref for u in packet['items'])
+        # Trusted fixed candidate pools admit no recency supplementation.
+        controlled = FunctionalMemory(memory.service, len, recent_context='bank_recent_v2',
+                                      retrieval_candidates=[], material_limit=50000)
+        memory.service.capture_user('fixed', 'query', 'Unrelated controlled query.')
+        fixed = controlled.context('fixed', 'query', SHA)
+        assert not any(u['type'] == 'record' or u.get('source_ref') == ref for u in fixed['items'])
+        config = {'configurable': {'user_id': 'alice', 'v13_session': 'other-session',
+            'v13_turn_id': 'query', 'v13_support_config_sha256': SHA}}
+        forgotten = invoke(memory, 'forget_memory', {'read_handle': rows[0]['read_handle']},
+                           'forget', config)
+        assert forgotten['ok']
+        memory.service.capture_user('after-forget', 'query', '现在有什么记录?')
+        visible = memory.context('after-forget', 'query', SHA)
+        assert not any(u['type'] == 'record' or u.get('source_ref') == ref
+                       for u in visible['items'])
+    with opened(tmp_path, owner='bob', recent_context='bank_recent_v2') as other:
+        turn(other, text='Any recent records?')
+        assert not other.service.records()
+        assert 'cobalt' not in json.dumps(other.context('s', 'u', SHA))
