@@ -1,5 +1,7 @@
 # v13.5 functional profile
 
+**Current candidate r50 corrects only the stale combined-history instruction to the actual explicit historical tool signatures.** The old example was rejected by the actual public schema; both replacement examples and 32 production tokenizer/full-prompt probes pass. Runtime and all allowances are unchanged. No r50 model cohort is admitted yet; the latest actual evidence is the partial r49 checkpoint below.
+
 **R49 is a partial development checkpoint, not an accepted configuration.** The frozen 11 cases / 27 messages currently have 4 scoped PASS, 1 observed FAIL and 6 wholly NOT_RUN cases; 12 messages COMPLETED and 15 NOT_RUN. The failing h03 case completed only 2/3 messages. Withdrawal and stored originals are correct, but the final answer calls a paraphrase an original quotation. Its final history query was not run. Support-review overrejection remains open.
 
 The current-record and original-source selectors were used by the actual model. Dedicated history, revision, fragment and page selectors were not reached; r48's historical-read failure is not yet cleared by actual model evidence. The partial cohort was sealed at the user's checkpoint request, with no new protocol crash. Never append runs to sealed roots or pool their passing cases.
@@ -42,7 +44,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r49.json` is the current development candidate. Required
+`configs/v13-5-functional-r50.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -196,9 +198,9 @@ physically erased or remotely authenticated user store.
 
 None. Full same-version L1 and integration acceptance with no critical blocker is required.
 The exposed r29 targeted cohort was 2 scoped PASS/1 FAIL; L1-r25 and L4-r28 are also historical
-results, not results for r49. Do not combine their successful cases into a new cohort score.
+results, not results for r50. Do not combine their successful cases into a new cohort score.
 
-## Candidate example (r49, development only)
+## Candidate example (r50, development only)
 
 Run from `MiLAi-Lab` with the repository's pinned Python environment and `PYTHONPATH=src`.
 The checked-in configuration uses the existing local model, tokenizer hashes and continuous
@@ -207,14 +209,14 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 ```bash
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
-  --root artifacts/v13-5/personal-r49 \
-  --config configs/v13-5-functional-r49.json
+  --root artifacts/v13-5/personal-r50 \
+  --config configs/v13-5-functional-r50.json
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r49 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r50 --bank personal --owner alice \
   --session monday --message-id first \
   --text '请记住：工作日午餐我吃素，周末不作这个限制。'
 python tools/run_functional.py message \
-  --root artifacts/v13-5/personal-r49 --bank personal --owner alice \
+  --root artifacts/v13-5/personal-r50 --bank personal --owner alice \
   --session tuesday --message-id recall \
   --text '我工作日午餐有什么偏好？周末呢？'
 ```
@@ -332,7 +334,7 @@ contain the original source and should be handled accordingly.
 Disable the functional entry without deleting evidence:
 
 ```bash
-python tools/run_functional.py disable --root artifacts/v13-5/personal-r49
+python tools/run_functional.py disable --root artifacts/v13-5/personal-r50
 ```
 
 This blocks new functional messages before capture or model dispatch. `enable`

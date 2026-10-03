@@ -7410,6 +7410,13 @@
       "sha256": "cf2cdc4a659a23afd0de58e3d54d66f6960bfa5546579eb770ec1759bc9b5e28",
       "timing": "Before r48 model HTTP",
       "scope": "Full exposed11/27 formation-first with per-message review; explicit comparison has no semantic certificate. Same-version full L1/L2/L3/newL4 required; same native execution and original allowances. No admitted r48 cohort yet."
+    },
+    {
+      "candidate": "r50",
+      "path": "artifacts/v13-5/r50-regression-scope.json",
+      "sha256": "b8fff11e6b517f70998acddfc7eadd89713f9c434fabc890f6b866cff567198a",
+      "timing": "Before any r50 model HTTP; complete prior r49 checkpoint retained",
+      "scope": "Same complete11/27 and order; then same-version originalL1/L2/fullL3/newL4/FUNC terminal. Current candidate CI required before admission. No budget or acceptance relaxation."
     }
   ],
   "mechanical_checks": [
@@ -7742,6 +7749,28 @@
         "fast": "SUCCESS run37153912230",
         "full": "SKIPPED run37153912354; not a pass"
       }
+    },
+    {
+      "candidate": "r50",
+      "scope": "Configuration-only correction of stale history-read instruction. Actual strict tool schemas reject prior read_memory(history=true) example and accept both new required-selector examples.32 actual pinned Qwen tokenizer/full-prompt production probes PASS, including exact withdrawn history delivery, one original bounded schema reproposal, explicit-page exhaustion, source/revision support review and effect-preserving restart. Scripted responses and actual SQLite;0modelHTTP. Runtime/test source unchanged from r49; its586 checks and adapter evidence retained with prior identity, not rerun or relabeled.",
+      "preserved_first_failure": "r49 instruction example violates explicit read_memory schema (unexpected history and missing record_id); observed by pre-run inspection and reproduced mechanically. r49 final quote failure and partial cohort preserved.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r50-prompt-catalog-probe.py": "a2064b63db24fc726c6e982ff54024213dd5bd7bef2c283d13bd89264825a8eb",
+        "artifacts/v13-5/r50-prompt-catalog-probe.json": "a4c5093c80f122747cd4887fb493c278045dda5a99e0b18c9f80236d7506b835",
+        "artifacts/v13-5/r50-prompt-catalog-probe.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "artifacts/v13-5/r50-production-contracts-probe.py": "0579c3f19152baf315d6c723cec37653a387bcdcf166c56c35e4c025a80f80e1",
+        "artifacts/v13-5/r50-production-contracts.json": "73c1ede41aabe38eac3ab1a10a3dacb7acec844391ce9d7a58f31630732b198c",
+        "artifacts/v13-5/r50-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r50-regression-scope.json": "b8fff11e6b517f70998acddfc7eadd89713f9c434fabc890f6b866cff567198a"
+      },
+      "retained_runtime_ci": {
+        "path": "artifacts/v13-5/r49-checkpoint-ci.json",
+        "sha256": "6a3453badb6812eae9877a6e358953773edd4730783d7c6e5e27467fe934daff",
+        "commit": "e82f75c82b916ff6cd9b71416709a5ff0d7881f8",
+        "fast": "SUCCESS37155557626",
+        "full": "SKIPPED37155557643; not a pass"
+      },
+      "current_candidate_ci": "PENDING after push; no model admission yet"
     }
   ],
   "current_checkpoint": "data/manifests/v13-5-checkpoint-r49-20261004.json"

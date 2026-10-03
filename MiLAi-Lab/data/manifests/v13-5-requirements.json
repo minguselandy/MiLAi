@@ -5226,9 +5226,9 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r49 explicit required read selectors; partial actual communication checkpoint",
-    "scope": "R49 586 regressions/32 pinned production probes pass; source a273615 Fast CI success, Full skipped. Frozen11/27 partial results:4PASS_SCOPED1observedFAIL6whollyNOT_RUN;12COMPLETED15NOT_RUN. h03 only2/3 executed: actual current-source withdrawal/storage intact, final paraphrase mislabeled original quote. Current-record/source selectors used; dedicated history/revision/fragment/page selectors not reached. Review false-negative/overliteral limits retained. Five records/25 stored quote identities intact; no semantic certificate. User-requested checkpoint does not complete or pause the full active goal. Same-version L1-L4/FUNC terminal/final report incomplete; historical140 and original48 unchanged.",
-    "report": "docs/V13_5_CHECKPOINT_r49_20261004.md",
+    "candidate": "r50 configuration-only historical tool instruction correction; mechanical checks passed, model not admitted",
+    "scope": "R50 corrects stale read_memory(history=true) to actual explicit historical selectors. Actual schemas reproduce old mismatch and validate two corrected examples;32 production tokenizer/full-prompt probes pass. Runtime and every allowance unchanged; prior r49 586 checks retained, not rerun. R49 partial11/27 remains4PASS_SCOPED1observedFAIL6NOT_RUN,12COMPLETED15NOT_RUN; final quote drift, overstrict reviews and unrun historical/W1/forgetting checks remain. R50 needs exact commit CI then new full communication and same-version L1-L4/FUNC terminal. Historical140 and original48 unchanged.",
+    "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",
     "independent_review": false
