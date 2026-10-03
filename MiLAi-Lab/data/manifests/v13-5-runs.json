@@ -2049,6 +2049,68 @@
         "full_run": 37098586688,
         "full_status": "skipped"
       }
+    },
+    {
+      "id": "l2-r21",
+      "layer": "L2",
+      "candidate_commit": "e1df9a3e0ef2c897160a7f60ec61f6e50dc6379a",
+      "state": "STOPPED_PROVIDER_DECLARATION_TRUNCATION",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r21.json",
+      "admission": "Full12/26 before outputs. Native v4 thinking=true, fresh-query business guard, inline source fragments. Direct d02/r03/r05/d05 regressions first; original caps unchanged; old cohorts sealed.",
+      "mechanical_verification": "111 entry/privacy/workflow PASS, one new test expectation typo retained; both corrected fresh-query variants PASS. 3 production tokenizer/template scripted variants, ruff/mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 10877,
+        "generation": {
+          "charged_tokens": 33616241,
+          "known_tokens": 33585854,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r21/input-freeze.json": "2422f198eed9bc8850beff8acafdc9d7d656bbb361c73b38ae388f9b6b96b338",
+        "configs/v13-5-functional-r21.json": "e22eb05e638f4dd4ee15eab2ffdbf2a18b96d4542f014d9421fed912a6f249d5",
+        "artifacts/v13-5/r21-production-contracts.json": "2b6c37ec54bfb2a732c71814aa66be13a14cf3167d1cc50e06e0fd64a30e7751",
+        "artifacts/v13-5/r21-entry-privacy-workflows.log": "9ae02546ee3712bb02f4dc4fe342ecd59697e999c35e61ed532dfc15b18e7304",
+        "artifacts/v13-5/r21-fresh-query-tests.log": "c9d994fec90bccb1beca86846c35a9f67135e91bf5f45db55ef108e293ce91fd",
+        "artifacts/v13-5/l2-r21/review.json": "43f413db6ba6edb359e31d0699e411cf86d4937122c5de26391849e13c412c4a",
+        "artifacts/v13-5/l2-r21/seal.json": "f7393ffbddce4b84bafe214ba3474bf17f707131ad62dd5910e5b9f882482c1f",
+        "artifacts/v13-5/l2-r21-evaluator/summary.json": "f9268377fb4d62ec49b9ff452454f29a3974d58fe7cc5d723d5b1ead90c44680"
+      },
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 11
+      },
+      "message_counts": {
+        "NOT_RUN": 25,
+        "FAILED": 1
+      },
+      "retained_attempts": 1,
+      "cost_delta": {
+        "generation_requests": 1,
+        "generation.known_tokens": 9422,
+        "generation.charged_tokens": 9422,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "findings": [
+        "First native current-request declaration reaches all8192 output tokens and returns finish_reason=length; rejected VLLM_CHAT_TRUNCATED, no usable declaration/Agent/tool effect/final.",
+        "No retry and no output budget increase; stop shared protocol before other cases. Prior r20 is not retrospectively relabeled.",
+        "New fresh-query/inline-source code has mechanical evidence, no behavioral result from this first protocol failure."
+      ],
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "evidence": [
+        "../l2-r21-evaluator/summary.json"
+      ]
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

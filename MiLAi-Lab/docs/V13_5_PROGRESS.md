@@ -393,3 +393,8 @@ owner／对象，在新操作前有本消息真实完成的查询；无查询／
 112项入口／隐私／工作流检查中首跑111通过，1项新测试写错已公开失败状态名；修正
 测试期望为publish_service_unavailable后两工作流新检查通过。三种生产Qwen tokenizer
 脚本场景通过，0真实HTTP；ruff、受影响3源码mypy、分层通过。原首跑日志保留。
+
+r21首条请求的native声明耗尽8192输出，VLLM_CHAT_TRUNCATED，无工具调用、无业务或
+语义效果、无final。保留1 FAILED／25 NOT_RUN，1次生成9,422 tokens，无新增unknown
+usage。共享通信失败后停队封存，不加输出或重复重试。r22只将thinking恢复false，保留
+新的真实查询前置合同及inline片段；新分母重新冻结，其他上限不变。
