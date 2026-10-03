@@ -1,15 +1,15 @@
 # v13.5 functional profile
 
-**R43 is a mechanical development candidate; no stable configuration is recommended.**
-R42 communication completed all11 stories/27 messages:9 scoped PASS/2 FAIL, with25
-COMPLETED/1 FAILED/1 injected W1 UNKNOWN. Both full withdrawals selected actual cancellation,
-committed the same ID and retained history. Existing-record confirmation still failed for
-lack of a maintenance receipt; another story lost its one-occurrence scope in initial formation.
-R43 requires one native tool proposal only at the start of already-authorized bounded memory
-completion. It has460 mechanical checks,12 actual tokenizer probes and4 SDK checks, but no
-model results yet. See the [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md).
-The [r42 checkpoint](V13_5_CHECKPOINT_r42_20261003.md) is a historical snapshot;
-see [progress](V13_5_PROGRESS.md) for the latest evidence. Product remains NO_GO.
+**R44 is a mechanical development candidate; no stable configuration is recommended.**
+R43 communication failed its first existing-record confirmation: required_once selected a
+prerequisite read, then auto allowed an answer without a no_change receipt. Original11/27
+sealed as1 failed story/10 not run; the original ID/revision/history stayed intact.
+R44 keeps tool selection required within the already authorized bounded completion until
+one actual maintenance attempt has a paired receipt. Rejected/unknown attempts release this
+requirement too; success is never forced. No new permission, call, read or repair allowance.
+R42 had9 scoped PASS/2 FAIL including two actual full withdrawals; no pooled scores.
+See [progress](V13_5_PROGRESS.md) and the historical [r43 checkpoint](V13_5_CHECKPOINT_r43_20261003.md).
+R44 has no model results yet. Product remains NO_GO.
 
 This is an opt-in Lab entry over the existing public SQLite MemoryService,
 LangGraph Agent loop and accounted vLLM provider. Its acceptance status is recorded
@@ -18,7 +18,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r43.json` is the current development candidate. Required
+`configs/v13-5-functional-r44.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -97,7 +97,13 @@ three-read limit. `receipt_status_v4` can deliver a program failure report, incl
 reproposal exhaustion, without another model call. A readable failure report does not turn the execution into COMPLETED. Successful
 business actions are not repeated to repair an unusable final response.
 
-`completion_tool_choice=required_once` applies only to the first proposal of a persisted
+`completion_tool_choice=required_until_attempt_v1` keeps the existing completion's tool
+selection required after prerequisite reads until an actual save/update/forget receipt.
+Any attempted outcome, including rejection or unknown, releases the requirement; it does
+not require a successful write or authorize retries. The original read-exhaustion stop and
+shared generation/repair bounds still apply, including after checkpoint reopen.
+
+The historical `completion_tool_choice=required_once` applies only to the first proposal of a persisted
 missing-maintenance completion. It binds the actual restricted catalog; business mutations
 stay unavailable, forgetting is available only if already authorized, and an exact empty
 update can confirm an existing record without a new version. The phase survives reopen;
@@ -127,7 +133,7 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
   --root artifacts/v13-5/personal-r43 \
-  --config configs/v13-5-functional-r43.json
+  --config configs/v13-5-functional-r44.json
 python tools/run_functional.py message \
   --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
   --session monday --message-id first \

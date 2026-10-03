@@ -5226,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r43 required_once completion; mechanical candidate, zero model HTTP yet",
-    "scope": "R42 complete communication9PASS2FAIL, two actual full withdrawals passed; existing confirmation missing receipt and initial one-occurrence loss remain. R43 common Agent binding/protocol repair to receive full same-version L1/L2/L3/newL4 evidence. Detailed140 historical, no terminal promotion.",
+    "candidate": "r44 required_until_attempt_v1 completion; mechanical verification, zero model HTTP yet",
+    "scope": "R43 first communication existing confirmation failed after required read; full11/27 retained. R44 keeps required choice until paired maintenance attempt, including rejection/unknown; no extra allowance. Full communication/L1/L2/L3/newL4 preregistered. Detailed140 remain historical, no terminal promotion.",
     "report": "docs/V13_5_PROGRESS.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",

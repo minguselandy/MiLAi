@@ -57,6 +57,7 @@ def prepared(
     optional_withdrawal: bool = False,
     format_failure_receipts: bool = False,
     required_completion: bool = False,
+    receipt_completion: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -84,7 +85,8 @@ def prepared(
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
-        "completion_tool_choice": "required_once" if required_completion else "auto",
+        "completion_tool_choice": "required_until_attempt_v1" if receipt_completion else
+        "required_once" if required_completion else "auto",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -2892,3 +2894,134 @@ def test_required_completion_cannot_repeat_business_and_exhausted_format_stays_f
     replay = message(root, resume=True)
     assert replay['status'] == 'FAILED' and len(wires) == 4
     assert replay['world'] == result['world']
+
+
+@pytest.mark.parametrize('until_attempt,interrupted',
+                         [(False, False), (True, False), (True, True)])
+def test_completion_read_does_not_replace_existing_confirmation_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    until_attempt: bool, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=True, receipt_completion=until_attempt)
+    generate = functional.LangMemRecipeChatModel._generate
+    faulted = False
+
+    def interrupt_after_read(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal faulted
+        if interrupted and not faulted and len(wires) == 6:
+            assert kwargs.get('tool_choice') == 'required'
+            faulted = True
+            raise OSError('after_prerequisite_read_before_confirmation')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_after_read)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='new_assertion', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Use author_title for notes.',
+                               fragment_handles=hs)
+        if ordinal in {3, 5}:
+            assert wire['tool_choice'] == 'auto'
+            return {'role': 'assistant', 'content': 'The current order is author_title.'}
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        assert 'forget_memory' not in {t['function']['name'] for t in wire['tools']}
+        if ordinal == 6:
+            assert wire['tool_choice'] == 'required'
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('read_memory', 'prerequisite-read', record_id=record['record_id'])
+        if ordinal == 7:
+            assert wire['tool_choice'] == ('required' if until_attempt else 'auto')
+            assert not memory_effects(wire)['mutation_receipts']
+            if not until_attempt:
+                return {'role': 'assistant', 'content': 'The record already matches.'}
+            record = next(u for u in actual_tool_receipt(wire)['items']
+                          if u['type'] == 'record')
+            return native_call('update_memory', 'confirm-existing',
+                               read_handle=record['read_handle'], changes=[])
+        assert ordinal == 8 and wire['tool_choice'] == 'auto'
+        assert actual_tool_receipt(wire)['status'] == 'no_change'
+        return {'role': 'assistant', 'content': 'Already present; ID and version unchanged.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember: use author_title for notes.')
+    args = dict(session='s2', message_id='confirm',
+                content='Confirm the same order; keep the original ID and version if it matches.')
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert faulted and result['status'] == 'UNKNOWN' and len(wires) == 6
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if until_attempt else 'FAILED'), result.get('error')
+    assert result['records'] == saved['records']
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'no_change' if until_attempt else 'not_committed')
+    count = len(wires)
+    assert count == (8 if until_attempt else 7)
+    cached = functional.message(root, **common, **args)
+    assert cached['final_answer'] == result['final_answer'] and len(wires) == count
+    reads = [call for row in result['messages'] for call in row.get('tool_calls', [])
+             if call['name'] == 'read_memory']
+    assert len(reads) == 1
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1 and not feedback['business_mutations_available']
+
+
+@pytest.mark.parametrize('exhaust_reads', [False, True])
+def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_bound(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, exhaust_reads: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        receipt_completion=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='perform', business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'actual', item_key='bounded item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Saved it. WITHHELD_UNTRUE_DRAFT'}
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        if not exhaust_reads and ordinal == 5:
+            assert wire['tool_choice'] == 'auto'
+            assert memory_effects(wire)['mutation_receipts'][0]['status'] == 'rejected'
+            return {'role': 'assistant', 'content': 'The update was rejected; it was not saved.'}
+        assert wire['tool_choice'] == 'required'
+        assert not memory_effects(wire)['mutation_receipts']
+        if exhaust_reads:
+            return native_call('search_memory', f'read-{ordinal}', query='bounded item')
+        return native_call('update_memory', 'rejected', read_handle='not-issued', changes=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert len(result['world']['world']['attempts']) == 1
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert not result['records'] and 'WITHHELD_UNTRUE_DRAFT' not in result['final_answer']
+    if exhaust_reads:
+        assert result['status'] == 'FAILED' and len(wires) == 7
+        assert result['execution_stop']['reason'] == 'read_limit_exhausted'
+    else:
+        assert result['status'] == 'COMPLETED' and len(wires) == 5
+        assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+        operation = result['operation_status']['semantic_memory']['operations'][0]
+        assert operation['effect'] == 'none' and operation['phase'] == 'pre_mutation_contract'
+    before = len(wires)
+    replay = message(root, resume=True)
+    assert replay['world'] == result['world'] and len(wires) == before
+    assert replay['final_answer'] == result['final_answer']

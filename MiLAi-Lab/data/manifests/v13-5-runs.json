@@ -6492,6 +6492,115 @@
       },
       "reviewer": "Root same-family development review",
       "independent_review": false
+    },
+    {
+      "id": "communication-r43",
+      "layer": "communication",
+      "candidate_commit": "adaa0d55882108b99f7691782dc64c82aba4ad9e",
+      "state": "STOPPED_EXISTING_CONFIRMATION_READ_WITHOUT_MAINTENANCE_RECEIPT",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r43.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 13953,
+        "generation": {
+          "charged_tokens": 50547382,
+          "known_tokens": 50516995,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r43/input-freeze.json": "3922195b4e3120baf3ad10cf33f7a7943d52df15c635f0fb84630e708423983f",
+        "configs/v13-5-functional-r43.json": "b086869066485299c078ffb9e961a27fc95846d2e5a87f7df4894a691d337b5d",
+        "artifacts/v13-5/communication-r43/review.json": "3d0088a130c9dc5e05300f9621c0de3479bd071b08c92458b4490affd87170cf",
+        "artifacts/v13-5/communication-r43/seal.json": "2ea9fd5c4e58865ef0bf886417a93e4aa65f33f74026a33d581489ed3041160f",
+        "artifacts/v13-5/communication-r43-manual-grades.json": "8770f4b68528e8dd7f12c2738fea8c2a5a3b0cf4b465e02192649b98aa755f9c",
+        "artifacts/v13-5/communication-r43-review-notes.json": "7235106fad15d6311c47fe478e8e936db265a720da813b0bd468353a94f2a8c7",
+        "artifacts/v13-5/communication-r43-all-review.jsonl": "ea073464d4d49506d72a90a180b0035b2c39fefc92cc436d08e5846c5b1a8097",
+        "artifacts/v13-5/communication-r43-evaluator/summary.json": "b94268efdbbb20daa2fcc92f1f809f488befd6366d301af03f6a9d3ad175c337"
+      },
+      "semantic_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 10
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 25
+      },
+      "retained_attempts": 2,
+      "cost_delta": {
+        "generation_requests": 8,
+        "generation.known_tokens": 43524,
+        "generation.charged_tokens": 43524,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 2,
+      "independent_sqlite": {
+        "records": 1,
+        "exact_quote_identity_checks": 3,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-h06": {
+          "status": "FAIL",
+          "reason": "Initial actual save correct. Followup initially answers without maintenance; required_once completion makes one actual read_memory call, then auto allows final with no no_change receipt. Runner returns FAILED REQUIRED_MEMORY_OPERATION_MISSING with truthful status; original ID/rev1/history and support unchanged. Required first tool choice does not ensure an actual maintenance attempt after prerequisite reads.",
+          "breakpoint": "completion_returns_after_prerequisite_read_without_maintenance"
+        },
+        "l4-h03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-g02": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-g03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-answer": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-memory": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-partial": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-n03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after failed first communication story. Original11/27 denominator retained; no claim for these scenarios."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -6550,6 +6659,13 @@
       "sha256": "a5c683c285fa126fbdc69eb558d236685933d24d8fd97f405d38d7eff665bcf2",
       "timing": "Before any r43 model HTTP",
       "scope": "Direct11/27, originalL1 24/48, L2 12/26, full exposedL3 formation57+reading30, newL4 after frozen method; no pooling or semantic exemptions"
+    },
+    {
+      "candidate": "r44",
+      "path": "artifacts/v13-5/r44-regression-scope.json",
+      "sha256": "9441e454f6682bedba78a71edbaa6eebe0164777508615c5ae43f9302475ec47",
+      "timing": "Before any r44 model HTTP",
+      "scope": "Same full scope as r43: communication11/27, L1 24/48, L2 12/26, full exposed L3 formation57/reading30 and new L4 after method freeze. No pooling or exemption."
     }
   ],
   "mechanical_checks": [
@@ -6699,6 +6815,35 @@
         "artifacts/v13-5/r43-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "artifacts/v13-5/r43-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r43-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r43-ci.json",
+        "sha256": "fbce35b037710e4b672eb4579d2d5387d590e06eca946530beac3e94e39a61b3",
+        "commit": "adaa0d55882108b99f7691782dc64c82aba4ad9e",
+        "fast": "SUCCESS run37133970341",
+        "full": "SKIPPED run37133970328; not a pass"
+      }
+    },
+    {
+      "candidate": "r44",
+      "scope": "465 related/default/foundation tests PASS;16 pinned production tokenizer/template probes PASS;4 installed SDK lifecycle tests PASS;Ruff,mypy runner,package/tools boundaries and verification matrix PASS. Zero actual model HTTP. Required selection survives prerequisite read/reopen and releases on actual maintenance attempt rather than success. No extra allowance/permission; rejection and bounded read-stop preserve original business effects; old auto/required_once behavior retained.",
+      "preserved_first_failure": "Targeted first3PASS2FAIL: test omitted production read-stop profile so legacy hit existing24-call bound, and expected raw rejected instead of aggregate not_committed. Corrected test config/expectation, no runtime limit/classification change. Wrong test file path and missing PYTHONPATH separately exited before regression/matrix; corrected commands pass. All original logs retained.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r44-targeted.log": "db710ece1ce8d102fe1359fcdb427da3d95a20e682c716166787372f97a1d64b",
+        "artifacts/v13-5/r44-targeted-final.log": "342d23a0af9dfd083f4a5621894ea5752b28e1ac0ab29936eeaf3342702d51e5",
+        "artifacts/v13-5/r44-regression-command-error.log": "8a74f9b8991c7e370f2541b4a72583ab023684841cb8505e8ddb00d9bf9fed77",
+        "artifacts/v13-5/r44-regression.log": "58977c87e5bdd844ea074c198d42e1ee59796f17809c7b7a330c3d8d7702a1ec",
+        "artifacts/v13-5/r44-production-contracts-probe.py": "bbed5bb688fec6416bf8199bfa90a563cff5726d04f7f09137625996e9262f60",
+        "artifacts/v13-5/r44-production-contracts.json": "5ab2477a19f30f5845785fdc9640548928371588c6f85f0518eebedcc53e6b8b",
+        "artifacts/v13-5/r44-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r44-sdk-lifecycle.log": "287b198fe10d4468a9ce18287cd9f4bb64034c4a02b579f13042aef72aa98ae4",
+        "artifacts/v13-5/r44-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r44-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r44-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+        "artifacts/v13-5/r44-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r44-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r44-verification-matrix-command-error.log": "b3b24deb1a96621f5ba8259124f9e1360e7e6c11243b991ec5d6e6937dd0e1ee",
+        "artifacts/v13-5/r44-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
       }
     }
   ],

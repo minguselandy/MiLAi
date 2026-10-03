@@ -334,9 +334,10 @@ def prepare(
             "disabled", "observed_continuation_v1"}:
         raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
     host = VLLMConfig(**settings["host"])
-    if settings.get("completion_tool_choice", "auto") not in {"auto", "required_once"}:
+    if settings.get("completion_tool_choice", "auto") not in {
+            "auto", "required_once", "required_until_attempt_v1"}:
         raise ValueError("FUNCTIONAL_COMPLETION_TOOL_CHOICE_INVALID")
-    if settings.get("completion_tool_choice") == "required_once" and (
+    if settings.get("completion_tool_choice", "auto") != "auto" and (
             host.tool_mode != "native"
             or settings.get("memory_completion") != "declared_operations_v3"):
         raise ValueError("FUNCTIONAL_COMPLETION_TOOL_CHOICE_REQUIRES_NATIVE_OPERATIONS")
@@ -1354,7 +1355,8 @@ def message(
             model = LangMemRecipeChatModel(
                 client=client,
                 allow_required_tool_choice=(settings.get("declaration_tool_choice") == "required"
-                    or settings.get("completion_tool_choice") == "required_once"),
+                    or settings.get("completion_tool_choice") in {
+                        "required_once", "required_until_attempt_v1"}),
                 preserve_tool_reasoning=(
                     settings.get("reasoning_history") == "current_turn_native_v1"),
                 capacity_path=bank_root / "message-admission.json",
@@ -1574,6 +1576,14 @@ def message(
                             "results; historical memory observations can remain historical. "
                         )
                     capability_text += "\n"
+                require_proposal = bool(not for_finalization and completion and (
+                    (settings.get("completion_tool_choice") == "required_once"
+                     and messages and isinstance(messages[-1], SystemMessage)
+                     and messages[-1].id == identity + ":required-memory-receipt")
+                    or (settings.get("completion_tool_choice") == "required_until_attempt_v1"
+                        and any(row.id == identity + ":required-memory-receipt"
+                                for row in completion_feedback)
+                        and not effects["mutation_receipts"])))
                 return {
                     "llm_input_messages": [
                         SystemMessage(
@@ -1581,11 +1591,7 @@ def message(
                             # a dynamic model. Preserve the program-owned phase in
                             # this checkpointed ID; IDs do not enter provider text.
                             id=(identity + ":required-memory-proposal"
-                                if not for_finalization and completion
-                                and settings.get("completion_tool_choice") == "required_once"
-                                and messages and isinstance(messages[-1], SystemMessage)
-                                and messages[-1].id == identity + ":required-memory-receipt"
-                                else None),
+                                if require_proposal else None),
                             content=capability_text + settings["system_prompt"]
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
@@ -1622,15 +1628,17 @@ def message(
 
             def execution_tool_choice(current: list[Any]) -> Literal["auto", "required"]:
                 # The persisted feedback reserves the existing shared allowance.
-                # Require only its first proposal; after any tool reply ordinary
-                # choices resume. No new retry, permission, or tool is introduced.
+                # The projected marker follows the selected completion policy.
+                # An attempted mutation, including rejected/unknown, releases the
+                # until-attempt requirement; success is never required for release.
+                # Existing read/call/repair bounds and tool permissions still apply.
                 if (completion and current and isinstance(current[0], SystemMessage)
                         and current[0].id == identity + ":required-memory-proposal"):
                     return "required"
                 return "auto"
 
             choice_selector = (execution_tool_choice
-                               if settings.get("completion_tool_choice") == "required_once"
+                               if settings.get("completion_tool_choice", "auto") != "auto"
                                else None)
             agent = build_agent(
                 model,
