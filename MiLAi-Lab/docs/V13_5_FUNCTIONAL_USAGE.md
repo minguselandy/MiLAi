@@ -18,13 +18,17 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r32.json` is the current communication candidate. Required
+`configs/v13-5-functional-r33.json` is the current communication candidate. It changes
+explicit temperature from 0 to 1.0 and corrects audit-only visibility false positives;
+all prompts and call/material/output bounds remain fixed. Required
 native declarations disable thinking; execution and final composition retain it. Actual
 native tool-call reasoning is returned only within the current user turn and counted
 by the pinned template. It remains separate from public messages, answers and evidence.
 Private checkpoints and diagnostic traces retain audit data; this is not physical erasure.
-R30 declaration thinking and R31 post-tool thinking both truncated; their failed results
-remain recorded. R32 must pass its six-story communication probe before full L1 admission.
+R30 declaration, R31 post-tool and R32 final composition thinking truncated; the failed
+results remain recorded. R32 completed the full 6/13 communication probe with 2 scoped
+PASS and 4 FAIL, including qualification loss and unnecessary read exhaustion. R33 must
+pass its own communication probe before full L1 admission.
 
 The following r29 profile remains the latest completed targeted engineering regression
 (2 scoped PASS / 1 absence-inference FAIL, 3 stories / 9 messages), not stable acceptance.

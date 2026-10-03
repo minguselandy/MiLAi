@@ -38,6 +38,13 @@
       "sha256": "150f40b0a0ba87548b0feb86f002fea7d246f5a4d5f7bc2cecd3c3824098c851",
       "bytes": 75244,
       "version": "existing pinned tokenizer template or installed vLLM0.27.1; read only"
+    },
+    {
+      "original_path": "/cra/qwen36-35B/generation_config.json",
+      "path": "artifacts/v13-5/protocol-research-r32/generation_config.json",
+      "sha256": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "bytes": 202,
+      "version": "existing installed Qwen model generation configuration; read only; temperature1/top_p0.95/top_k20. R33 changes only explicit temperature request; other provider defaults are not mutated."
     }
   ]
 }

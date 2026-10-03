@@ -3828,6 +3828,72 @@
         },
         "commit": "d8281fea15a6e88cc83f2e8ad870a912bc8ae40a"
       }
+    },
+    {
+      "id": "communication-r32",
+      "layer": "L0",
+      "candidate_commit": "f0d1c2ec607432f62e8c82a0e74ee3a9d1533afb",
+      "state": "COMPLETE_COMMUNICATION_WITH_EXECUTION_AND_FINAL_FAILURES",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r32.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12138,
+        "generation": {
+          "charged_tokens": 40486095,
+          "known_tokens": 40455708,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r32/input-freeze.json": "47a1450267fb8a5e23edd11a89d396e46737a52b5c143b3c351d0deb37ec18ff",
+        "configs/v13-5-functional-r32.json": "f8171d5645b5b6fb75b01de0cd672c6a87b230be6d6849b440ba0f33e833da03",
+        "artifacts/v13-5/communication-r32/review.json": "8633c597b0ebb22f87822881da6071b4e5e4f948d82a968473d24593915e7eed",
+        "artifacts/v13-5/communication-r32/seal.json": "1f97000a3d6f23d349d0cc3b5f78e87d15688209e5515e8bd978ab6f8f86cd66",
+        "artifacts/v13-5/communication-r32-complete-review.jsonl": "bd69510b91373477ece53fae5f59fb0866091d7a2cae0ae6747401cc30f710d0",
+        "artifacts/v13-5/communication-r32-review-notes.json": "3056c0de8ede85c514d91a9bd99d9b7a3418b0700ab739216474dd6cf523b8bd",
+        "artifacts/v13-5/communication-r32-complete-evaluator/summary.json": "733b94a9774cf88e6d570fbb75fd3dee97bd112eb4efa5a6a609e6e158fc0660"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 4
+      },
+      "message_counts": {
+        "COMPLETED": 10,
+        "FAILED": 1,
+        "UNKNOWN": 1,
+        "VISIBILITY_REVOKED": 1
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 54,
+        "generation.known_tokens": 288935,
+        "generation.charged_tokens": 288935,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed6story13message communication probe, Root same-family review; not L4 acceptance. No reasoning promotion or effect replay. Continuation after noncritical read-limit failure ran only untouched independent stories. Program audit-only visibility false positive after finalization truncation requires fix.",
+      "reviewer": "Root",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "f0d1c2ec607432f62e8c82a0e74ee3a9d1533afb",
+        "fast": {
+          "run_id": 37113849369,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37113849416,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

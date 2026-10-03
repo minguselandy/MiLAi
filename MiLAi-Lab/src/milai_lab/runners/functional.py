@@ -1016,7 +1016,18 @@ def _visibility_replay(
     if not hidden and not hidden_records:
         return None
     public_ref = service.event_id(session, message_id, "user")
-    dependencies = _replay_evidence_ids(archived) | {
+    # world is the explicitly retained evaluator audit sidecar, not delivered
+    # evidence. Its all-turn journal can name revoked items even when this fresh
+    # response/checkpoint never received them. Actual messages, visible snapshots
+    # and recorded exposures remain checked, including on cached response replay.
+    delivered = {key: value for key, value in archived.items() if key != "world"}
+    if isinstance(delivered.get("records"), list):
+        # records() emits these exact body-free tombstones. They are evidence of
+        # a denied read, not evidence that the revoked record body was delivered.
+        delivered["records"] = [row for row in delivered["records"] if not (
+            isinstance(row, dict) and set(row) == {"ok", "status", "id"}
+            and row["ok"] is False and row["status"] == "visibility_revoked")]
+    dependencies = _replay_evidence_ids(delivered) | {
         public_ref, service.event_id(session, message_id + ":final", "assistant")}
     exposed = service.store.get(functional_namespace(service), "exposure:" + public_ref)
     if exposed is not None:
@@ -1204,6 +1215,10 @@ def message(
                 "usage": trace.usage, "budget_before": before,
                 "budget_after": json.loads(json.dumps(budget.state)),
                 "terminal_snapshot": "visibility_redacted", "content_retained": False}
+            redacted["generation_calls"] = output.get("generation_calls", len(trace.usage))
+            for key in ("error_type", "error_category"):
+                if key in output:
+                    redacted["original_" + key] = output[key]
             write_json(bank_root / f"{identity}-attempt-{attempt}.json", redacted)
             write_json(result_path, redacted)
             return redacted

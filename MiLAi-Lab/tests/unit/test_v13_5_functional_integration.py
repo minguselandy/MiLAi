@@ -2231,3 +2231,58 @@ def test_invalid_reasoning_fields_do_not_dispatch_native_tool(
     assert result['status'] == 'FAILED' and len(wires) == 1
     assert result['error'] == 'VLLM_CHAT_INVALID_REASONING_HISTORY'
     assert result['world']['receipt_progress'] == {} and result['records'] == []
+
+
+def test_retained_audit_does_not_block_fresh_safe_provider_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True)
+    secret = 'MECHANICAL_RETAINED_AUDIT_ONLY'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5, 8}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal == 1 else 'none',
+                allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content=secret, fragment_handles=hs)
+        if ordinal in {3, 4}:
+            return {'role': 'assistant', 'content': 'Saved the marker.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert secret not in json.dumps(wire)
+        if ordinal == 7:
+            return {'role': 'assistant', 'content': 'Visibility revoked.'}
+        if ordinal == 9:
+            return {'role': 'assistant', 'content': 'No available evidence for that marker.'}
+        assert ordinal == 10
+        return {'role': 'assistant', 'content': None, '_test_finish_reason': 'length'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    stored = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember the marker ' + secret)
+    assert stored['status'] == 'COMPLETED'
+    forgotten = functional.message(root, **common, session='s2', message_id='forget',
+                                    content='Forget the marker and its source.')
+    assert forgotten['status'] == 'COMPLETED'
+    args = dict(session='s3', message_id='query', content='What marker is available? Do not guess.')
+    failed = functional.message(root, **common, **args)
+    assert failed['status'] == 'FAILED' and failed['error'] == 'VLLM_CHAT_TRUNCATED'
+    assert failed['final_delivery']['status'] == 'available'
+    assert failed['generation_calls'] == 3 and len(wires) == 10
+    visible = {k: failed[k] for k in ('final_answer', 'messages', 'sources', 'records')}
+    assert secret not in json.dumps(visible)
+    assert secret in json.dumps(failed['world']['receipt_progress'])
+    assert functional.message(root, **common, **args) == failed
+    assert len(wires) == 10
+    # The original actually exposed answer is still blocked before any HTTP.
+    archived = functional.message(root, **common, session='s1', message_id='save',
+                                   content='Remember the marker ' + secret)
+    assert archived['status'] == 'VISIBILITY_REVOKED' and archived['final_answer'] is None
+    assert len(wires) == 10
