@@ -13,13 +13,14 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 - [v12 总体整理报告](docs/CODE_ARCHITECTURE_V12_RESULTS.md)：维护位置、兼容范围和工程证据。
 - [v12 整理进度](docs/CODE_ARCHITECTURE_V12_EXECUTION.md)：阶段提交、工程验收和剩余迁移。
 - [代码职责](docs/CODE_OWNERSHIP.md)、[依赖规则](docs/DEPENDENCY_RULES.md)、[历史入口](docs/HISTORICAL_CODE_INDEX.md)。
-- [r50 开发检查点](docs/V13_5_CHECKPOINT_r50_20261004.md)：当前实现、部分通信、机械检查、费用及剩余验收；[r49 检查点](docs/V13_5_CHECKPOINT_r49_20261004.md)保留历史原话引用失败。
+- [当前开发与合并交接](docs/V13_5_DEVELOPMENT_MERGE_20261004.md)：实现、完整通信、三项失败、费用及剩余验收；[r50 部分检查点](docs/V13_5_CHECKPOINT_r50_20261004.md)保留历史分母。
 - [历史 v10 实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-用户已恢复 v13.5 开发；r50 按用户请求封存部分通信：完整 11／27 中完成 11 条，4 案限定通过、1 案部分执行、6 案完全未运行，16 条消息 NOT_RUN。核对误拒和意图声明偏差保留，历史读取／W1／遗忘尚未到达；完整目标未完成，Product NO_GO。
-r50 修正历史读取提示与实际目录不一致，32 项生产探针和候选 Fast CI 通过，Full skipped；r49 的 586 项源码回归保留原身份。本次整理无新模型消息，当前无实验进程。详见[功能进度](docs/V13_5_PROGRESS.md)。
+当前 r50 完整通信独立执行 11 案／27 消息，8 案限定通过、3 案失败；26 COMPLETED、1 预设 W1 UNKNOWN，无未运行消息。
+真实历史读取、撤销和遗忘隔离有新证据；恢复后遗漏原保存请求及两类最终回答错误仍未修复。完整目标未完成，Product NO_GO。
+用户已明确授权整理并合并当前开发；本次整理无新实验或运行代码修改，历史失败与配置身份保留。详见[功能进度](docs/V13_5_PROGRESS.md)。
 完整功能尚未验收；[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)保留为历史检查点。
 v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
 `functional_v1`，旧默认不变；Product 仍为 **NO_GO**。

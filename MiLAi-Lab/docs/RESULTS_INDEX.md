@@ -1,16 +1,17 @@
 # Results index
 
-## Current development checkpoint — 2026-10-04
+## Current development and merge handoff — 2026-10-04
 
-[r50 checkpoint](V13_5_CHECKPOINT_r50_20261004.md): frozen 11/27 retains 4 scoped PASS,
-1 PARTIAL and 6 wholly NOT_RUN cases; 11 COMPLETED and 16 NOT_RUN messages.
-Only h03 initial save ran; withdrawal/history, W1 and forgetting were not reached.
-51 generations / 291,718 tokens, 141 sealed raw files, 5 records / 21 exact stored quotes.
-R50 corrected the stale historical-read instruction; 32 production probes and candidate
-Fast37156424019 passed, Full37156424020 skipped. Runtime is identical to r49.
-Review false-negatives and intent-declaration errors remain; full development is incomplete,
-Product NO_GO. [Current progress](V13_5_PROGRESS.md) and [r49](V13_5_CHECKPOINT_r49_20261004.md)
-retain prior failures and separate evidence identities. No new model message for checkpoint preparation.
+[Current handoff](V13_5_DEVELOPMENT_MERGE_20261004.md): independent communication-r50-full
+completed 11 cases / 27 messages, with 8 scoped PASS and 3 FAIL, 26 COMPLETED and one
+preregistered W1 UNKNOWN. 110 generations / 581,707 tokens, 318 sealed raw files,
+9 records / 44 exact stored quotes. Failures retain the missed prior save after business
+recovery, broadened label exemption, and false never-supplied inference after forgetting.
+The user authorized merging current Lab development; full functional acceptance remains
+incomplete and Product NO_GO. [Progress](V13_5_PROGRESS.md) and
+[machine handoff](../data/manifests/v13-5-development-merge-20261004.json) separate actual results,
+mechanical checks and publication. The [partial r50](V13_5_CHECKPOINT_r50_20261004.md) and
+[r49](V13_5_CHECKPOINT_r49_20261004.md) checkpoints retain their original identities.
 
 ## Current results and execution status — 2026-09-29
 

@@ -1,3 +1,17 @@
+# 2026-10-04 current development integration
+
+The latest user explicitly requested: “整理当前开发内容，提交合并到github上”.
+This authorizes publishing and merging current development, superseding older no-merge
+scheduling below. Preserve ancestor commits and all historical evidence; PR81 targets
+main for this integration. Verify exact-head CI and post-merge tree identity. Current
+communication-r50-full is sealed: 8 PASS_SCOPED / 3 FAIL, all 27 messages attempted.
+This merge is not completion of the full experiment Goal or Product acceptance.
+The original save request lost during W1 continuation and two Reader failures remain
+open; no r51 repair is included. No new model run is needed for this publication task.
+See docs/V13_5_DEVELOPMENT_MERGE_20261004.md and PR81 for actual publication identities.
+
+---
+
 # MiLAi Lab v13.5 resumed execution
 
 On 2026-10-03 the user explicitly resumed all remaining development and experiments.

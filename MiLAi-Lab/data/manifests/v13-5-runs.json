@@ -7434,6 +7434,166 @@
       "reviewer": "Root same-family development review",
       "independent_review": false,
       "interpretation": "User-requested partial checkpoint:4PASS_SCOPED1PARTIAL6NOT_RUN of frozen11/27;11COMPLETED16NOT_RUN. h03 only initial save completed, no whole-case pass. Same-ID current-source correction, scoped special-arrangement cancellation, real no_change and live partial continuation have bounded evidence. Review false-negatives and erroneous draft-action declaration preserved; no actual business mutator in that correction catalog. Dedicated historical reads, W1 and forgetting not reached; no full acceptance."
+    },
+    {
+      "id": "communication-r50-full",
+      "layer": "communication",
+      "candidate_commit": "d9e7c9e980f2817cb0bc63c34e79c5e6f3067da9",
+      "state": "COMPLETED_FULL_COMMUNICATION_WITH_TASK_AND_READER_FAILURES",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r50.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 14299,
+        "generation": {
+          "charged_tokens": 52475376,
+          "known_tokens": 52444989,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r50-full/input-freeze.json": "8104b24df2125515f2a84cc5eaa2ed09fc4ef69e52877ef053f6d61a0359b305",
+        "configs/v13-5-functional-r50.json": "a104ff0a5ca02e668f3b264d76f5e7eec5ced281e67cb0961232149b198bad74",
+        "artifacts/v13-5/communication-r50-full/review.json": "782875de12f96abd5c8fc8b4cb223d5507bec42ffabd13b9beee1d6a614f67b2",
+        "artifacts/v13-5/communication-r50-full/seal.json": "06589a2ac40b8d42170bdb06875ea2a038967a02367980b662d1e34a41834077",
+        "artifacts/v13-5/communication-r50-full-manual-grades.json": "98658a7b77f52b13d3da50929256b9590a46f38235e216b1b071c5850081571e",
+        "artifacts/v13-5/communication-r50-full-review-notes.json": "4ac4ad71c8bd6d667f9f2856ea0229a6b8b20e60b3699f9959ec33ef6ff93cb0",
+        "artifacts/v13-5/communication-r50-full-all-review.jsonl": "5ded75655d6838f8647eb13132de90cb20a6009a194f1a47eb1ad9982c48ccca",
+        "artifacts/v13-5/communication-r50-full-evaluator/summary.json": "9efb99e314a1c69c0aae75d5156697942c54d6ae9117bceace2698bfc8d45f0d",
+        "artifacts/v13-5/communication-r50-full-ledger-after.json": "b69436ee9b8f43a7729d4b6762b924b853c971a1110022edf8718eca811d3203",
+        "artifacts/v13-5/communication-r50-full/targeted-review.json": "b098cb80385ab5cd982a6a4e99e2bf94bc98364718732151713a494935f773b9"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 8,
+        "FAIL": 3
+      },
+      "message_counts": {
+        "COMPLETED": 26,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 27,
+      "cost_delta": {
+        "generation_requests": 110,
+        "generation.known_tokens": 581707,
+        "generation.charged_tokens": 581707,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 27,
+      "independent_sqlite": {
+        "records": 9,
+        "exact_quote_identity_checks": 44,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-n03": {
+          "status": "PASS_SCOPED",
+          "reason": "Full3/3 messages9/6/2calls. Two initial rejected proposals preserve first failures and overstrict literal-only review limitation; final rev1 retains only-this/imagined and ten-minute other activities. Actual current cancellation source supports sameIDrev2 after one rejected duration-bearing proposal; old support/history retained. Readonly final answers current ordinary ten minutes and cancelled special arrangement without default restoration inference.6exact storedquotes/current=latest; no business effect. Intent perform declaration unresolved and granted no business mutation.",
+          "dimensions": {
+            "actual_delivery_and_history": null
+          }
+        },
+        "communication-partial": {
+          "status": "PASS_SCOPED",
+          "reason": "Full2/2,9+4calls. Exactlyone reservation with first label unavailable; aftertwo rejected proposals one actual tool-source rev1 preserves native partial state/ID/labelnotcreated. Review incorrectly equated okfalse with failedreservation; broader request-phase closure correctly rejected. Live followup gets reservation then completesonlylabel; exactlyone reservation andtwo total worldattempts. Deterministic final distinguishes actualsuccess/historicalpartial and no newsemanticwrite.3quotes/current=latest; review/wording limitations retained.",
+          "dimensions": {
+            "actual_delivery_and_history": null
+          }
+        },
+        "l4-g02": {
+          "status": "FAIL",
+          "reason": "Full3/3 messages5/4/2calls. Stored initial personalounces/exclusion and current-source sameIDrevision tograms/history correct; final readonly current rule correct. First final nevertheless expands exemption into 不参考厂商标签, an unsupported ignore-label policy. Preserve ordinary final interpretation failure even though later messages correct. Correction classifier wrongly declares draftaction; actualexecutioncatalog hasonlyget_reservation businessread, no mutators, no actual business effect.6storedquotes/current=latest.",
+          "breakpoint": "initial_final_converts_unit_exemption_into_ignore_labels",
+          "critical_shared_stop": false,
+          "dimensions": {
+            "answer_satisfies_request": false,
+            "actual_delivery_and_history": null,
+            "scope_time_negation": false
+          }
+        },
+        "l4-h06": {
+          "status": "PASS_SCOPED",
+          "reason": "Full2/2,5+3calls. One source-backed initialrev1 followed by realconfirm_existing_memory/no_change/effectnone usingissuedreadhandle. SameID/revision/history preserved; final explicitlyexistingandunchanged,nofictionalnewwrite.3storedquotes/current=latest.",
+          "dimensions": {
+            "actual_delivery_and_history": null
+          }
+        },
+        "l4-h03": {
+          "status": "PASS_SCOPED",
+          "reason": "Full3/3,5+4+2calls. InitialonlySaturday/besteffort preference source-backed; sameIDrev2 wholewithdrawal usesactualcurrentcancellation and leaves original/historyintact. Final automaticmaterial carries exactoriginal and withdrawnnotice; answercorrectlyno currentrule and verbatimexcerpt, no newwrite or revival.7storedquotes/current=latest. Dedicatedhistory/source tool notcalled; no claim of thattoolpath coverage.",
+          "dimensions": {
+            "actual_delivery_and_history": true
+          }
+        },
+        "l4-g03": {
+          "status": "PASS_SCOPED",
+          "reason": "Full3/3,4+4+3calls. Initialonlythisweek/besteffort firstrow preserved; actualcurrentcancellation supports sameIDrev2wholewithdrawal with originalhistory. Followup explicitlycalls newread_memory_history(record_id), receivesboth exactversions withactualwithdrawnflags, answersrev1andcurrentwithdrawn accurately. No schemaformatretry/write/revival;7storedquotes/current=latest. This directly covers r48 historicalselector failure path under r50 config, while priorfailure remains.",
+          "dimensions": {
+            "actual_delivery_and_history": true
+          }
+        },
+        "communication-answer": {
+          "status": "PASS_SCOPED",
+          "reason": "One normalfinalmessage/2calls: valid singleChinese sentence explaining triangle, no tools/memorywrite/business effect or unusable content.",
+          "dimensions": {
+            "actual_delivery_and_history": null,
+            "scope_time_negation": null,
+            "post_maintenance_state": null
+          }
+        },
+        "communication-memory": {
+          "status": "PASS_SCOPED",
+          "reason": "Full2/2,8+2calls. Two initial rejectedproposals retained: firstlostbesteffort, secondoverrejected missingmemorydirective despite supportedassessment. Thirdcommits one actualsource-backedrev1 onlythisexhibition/besteffort. Accuratefinalsaveandreadonlyscopedrecall, no newwriteonquery.3quotes/current=latest; overstrict/contradictoryreview limitation remains.",
+          "dimensions": {
+            "actual_delivery_and_history": null
+          }
+        },
+        "communication-recovery": {
+          "status": "FAIL",
+          "reason": "Full2/2 attempted: intendedW1UNKNOWN2calls thenCOMPLETED4calls. Nativeeffecthappenedonce, nextprocessactuallyqueriescurrentstateanddoesnotrepeat; originalunknownjournalnotrewritten, finaltruthfullysayssemanticnotcommitted. Yet originalexplicit saveactualstate remainsunfulfilled/zerorecords because boundedcontinuation resolves onlybusinessoperations while memorymaintenancefalse. Business recoveryPASS_SCOPED, fulltaskFAIL; no false success/sourcecorruption/duplicateeffect, continue unaffectedcases.",
+          "breakpoint": "continuation_resolves_business_only_drops_prior_save_request",
+          "critical_shared_stop": false,
+          "dimensions": {
+            "semantic_formation": false,
+            "business_effect_and_recovery": true,
+            "answer_satisfies_request": false,
+            "post_maintenance_state": false,
+            "actual_delivery_and_history": null
+          }
+        },
+        "l4-n08": {
+          "status": "FAIL",
+          "reason": "Full3/3,4+4+3calls. Initialsavecorrect; firstforgetdualselection rejected thenrecord_and_sourcesrevokesvisibility. No forgottenphrase inpostforgetrequestor3followuprequests; currentrecordhidden/searchonlycurrentquestion/no resurrection. Finalquery falsely says neverprovided fromabsence, despiteunknownhistorycontract. PrivacypropagationPASS_SCOPED, ordinaryabsenceanswerFAIL. Logicalvisibilityonly,nophysicalerasure/auditsretained; failureandcostkept.",
+          "breakpoint": "final_equates_no_visible_match_with_never_supplied",
+          "critical_shared_stop": false,
+          "dimensions": {
+            "answer_satisfies_request": false,
+            "post_maintenance_state": true,
+            "actual_delivery_and_history": null,
+            "scope_time_negation": false
+          }
+        },
+        "l4-f03": {
+          "status": "PASS_SCOPED",
+          "reason": "Full3/3,4+4+2calls. Initialonlythismarket/besteffortblue preserved; actualcurrentcancellation supports sameIDrev2partialrevision, unchangedotherstalls andtemporalcontext/history kept. Correctreadonlyfinalno colorrestriction,nowrites.6storedquotes/current=latest. Classifieralsoallowedforgettingforwithdrawal butmodelonlyupdated,noactualvisibilityrevocation; declarationlimitation retained.",
+          "dimensions": {
+            "actual_delivery_and_history": null
+          }
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "interpretation": "Full11/27 retained:8PASS_SCOPED3FAIL,26COMPLETED1intendedW1UNKNOWN, noNOT_RUN.110generations581707tokens. Directhistorytool delivers exactrevisions and withdrawal/notcurrent correctly. Threefailures: g02 final broadens label exemption; W1 livequery/noduplicatebusiness but prior explicitsave unfinished; n08 privacyvisibility passes but final false neverprovided inference. Reviewfalse-negatives/contradictions/declarationlimits retained. Fulltask recovery gap requires repair before functionalacceptance; ordinaryReadererrors do not invalidate successful effects or justify overwriting outputs."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -7534,6 +7694,20 @@
       "sha256": "b8fff11e6b517f70998acddfc7eadd89713f9c434fabc890f6b866cff567198a",
       "timing": "Before any r50 model HTTP; complete prior r49 checkpoint retained",
       "scope": "Same complete11/27 and order; then same-version originalL1/L2/fullL3/newL4/FUNC terminal. Current candidate CI required before admission. No budget or acceptance relaxation."
+    },
+    {
+      "candidate": "r50 unchanged; communication-r50-full",
+      "path": "artifacts/v13-5/communication-r50-full-admission.json",
+      "sha256": "4e49e28e256e253306b76e6073fb38baeb0ed7b93273943c3640c5b3cce2a434",
+      "timing": "Before full cohort admission/HTTP; prior r50 partial sealed at user request",
+      "scope": "New complete11/27 under unchanged config/source/limits after checkpoint CI. No pooled scores; same plan11.6 stop/continue policy and full downstream L1-L4 requirements.",
+      "head_ci": {
+        "commit": "d9e7c9e980f2817cb0bc63c34e79c5e6f3067da9",
+        "fast": "SUCCESS37158744744",
+        "full": "SKIPPED37158744736; not a pass",
+        "path": "artifacts/v13-5/r50-checkpoint-ci.json",
+        "sha256": "98cf15ab28c5f944b208e8a4f4cba4619564b5acc17adac4396d49406dd463f3"
+      }
     }
   ],
   "mechanical_checks": [
@@ -7896,5 +8070,5 @@
       }
     }
   ],
-  "current_checkpoint": "data/manifests/v13-5-checkpoint-r50-20261004.json"
+  "current_checkpoint": "data/manifests/v13-5-development-merge-20261004.json"
 }
