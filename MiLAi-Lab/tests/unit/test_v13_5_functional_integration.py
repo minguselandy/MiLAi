@@ -59,6 +59,8 @@ def prepared(
     required_completion: bool = False,
     receipt_completion: bool = False,
     existing_confirmation: bool = False,
+    support_review: bool = False,
+    catalog_feedback: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -89,6 +91,8 @@ def prepared(
         "completion_tool_choice": "required_until_attempt_v1" if receipt_completion else
         "required_once" if required_completion else "auto",
         "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
+        "revision_support_review": "selected_originals_v1" if support_review else "disabled",
+        "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
         "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -3052,3 +3056,235 @@ def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_b
     replay = message(root, resume=True)
     assert replay['world'] == result['world'] and len(wires) == before
     assert replay['final_answer'] == result['final_answer']
+
+
+def test_selected_original_review_rejects_old_support_before_commit_then_uses_new_support(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, optional_withdrawal=True,
+        direct_response=True, phase_thinking=True, actual_capabilities=True,
+        current_delivery=True, support_review=True, catalog_feedback=True)
+    proposal: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {4, 6}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_revision_support']
+            assert wire['temperature'] == 0 and wire['tool_choice'] == 'required'
+            assert wire['chat_template_kwargs']['enable_thinking'] is False
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert len(evidence['changes']) == 1
+            change = evidence['changes'][0]
+            assert change['field'] == 'content' and 'unit B' in change['after']
+            assert 'unit A' in change['before']
+            quotes = change['selected_original_fragments']
+            assert len(quotes) == 1 and quotes[0]['source_role'] == 'user'
+            assert ('unit A' if ordinal == 4 else 'unit B') in quotes[0]['content']
+            if ordinal == 4:
+                assert 'unit B' not in quotes[0]['content']
+            return native_call('review_revision_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content', 'assessment': 'unsupported' if ordinal == 4 else 'supported',
+                'reason': 'Old-source refusal.' if ordinal == 4 else 'Selected correction.',
+            }])
+        packet = materials(wire)
+        current = [u for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=[u['fragment_handle'] for u in current])
+        if ordinal == 3:
+            old = next(u for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            proposal.update(read_handle=record['read_handle'], changes=[{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': [{'fragment_handle': old['fragment_handle'],
+                                            'supporting_words': 'unit A'}]}])
+            return native_call('update_memory', 'wrong-source', **proposal)
+        if ordinal == 5:
+            rejected = actual_tool_receipt(wire)
+            assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+            assert 'REVISION_SUPPORT_REVIEW_REJECTED' in rejected['reason']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            proposal['changes'][0]['evidence_for_new_value'] = [
+                {'fragment_handle': current[0]['fragment_handle'], 'supporting_words': 'unit B'}]
+            return native_call('update_memory', 'correct-source', **proposal)
+        assert ordinal in {2, 7}
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested change is saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    args = dict(message_id='correct', content='For that same sample use unit B instead.')
+    revised = functional.message(root, **common, **args)
+    assert saved['status'] == revised['status'] == 'COMPLETED'
+    assert len(wires) == 7 and revised['generation_calls'] == 5
+    record = revised['records'][0]
+    assert len(revised['records']) == 1 and record['id'] == saved['records'][0]['id']
+    assert record['value']['revision'] == 2
+    assert record['value']['functional_support']['content']['source_refs'] == [
+        revised['capture']['source_ref']]
+    assert record['value']['functional_support']['content']['semantic_support'] == 'unchecked'
+    reviews = [read_json(p) for p in root.glob('banks/*/*-revision-review-*.json')]
+    assert len(reviews) == 2 and all(r['attempts'] == 1 for r in reviews)
+    assert functional.message(root, **common, **args) == revised and len(wires) == 7
+    ledger = read_json(tmp_path / 'isolated-mechanical-budget.json')
+    assert ledger['generation_requests'] == 7
+
+
+@pytest.mark.parametrize('assessment', ['supported', 'unsupported', 'uncertain'])
+def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
+    tmp_path: Path, assessment: str,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalIntegrityError, FunctionalRejection
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'owner': 'alice', 'message': 'm'},
+                'forget_epoch': 0}
+    calls: list[Any] = []
+    events: list[Any] = []
+
+    class Model:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': 'review_revision_support',
+                'id': 'decision', 'args': {'field_results': [{'field': 'content',
+                    'assessment': assessment, 'reason': 'Scripted assessment.'}]}}])
+
+    path = tmp_path / 'review.json'
+    for _ in range(2):
+        if assessment == 'supported':
+            functional.review_revision_support(Model(), path, evidence, events.append)
+        else:
+            with pytest.raises(FunctionalRejection, match='SUPPORT_REVIEW_REJECTED'):
+                functional.review_revision_support(Model(), path, evidence, events.append)
+    assert len(calls) == 1 and len(events) == 2
+    assert all(e['semantic_support'] == 'unchecked' for e in events)
+    with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
+        functional.review_revision_support(Model(), path, {**evidence, 'forget_epoch': 1},
+                                           events.append)
+    state = read_json(path)
+    state['decision']['field_results'][0]['reason'] = 'Changed after recording.'
+    write_json(path, state)
+    with pytest.raises(FunctionalIntegrityError, match='DECISION_CHANGED'):
+        functional.review_revision_support(Model(), path, evidence, events.append)
+    assert len(calls) == 1
+
+
+def test_interrupted_support_review_reservation_is_not_silently_retried(tmp_path: Path) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+
+    calls = []
+
+    class Interrupted:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            raise OSError('review response lost before persistence')
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'review.json'
+    with pytest.raises(OSError):
+        functional.review_revision_support(Interrupted(), path, evidence, lambda event: None)
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        functional.review_revision_support(Interrupted(), path, evidence, lambda event: None)
+    assert len(calls) == 1 and read_json(path)['attempts'] == 1
+
+
+@pytest.mark.parametrize(('enabled', 'repeat', 'interrupt'), [
+    (False, False, False), (True, False, False), (True, True, False), (True, False, True),
+])
+def test_unavailable_tool_feedback_preserves_completed_business_and_original_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: bool, repeat: bool, interrupt: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, catalog_feedback=enabled,
+        format_failure_receipts=True, support_review=True)
+    generate = functional.LangMemRecipeChatModel._generate
+    interrupted = False
+
+    def interrupt_after_rejection(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal interrupted
+        rejected = any(isinstance(m, ToolMessage) and m.name == 'update_memory'
+                       for m in messages)
+        if interrupt and rejected and not interrupted:
+            interrupted = True
+            raise OSError('interrupted after catalog rejection was checkpointed')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_after_rejection)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='catalog-probe',
+                               quantity=1, destination='local', packing='box')
+        assert 'update_memory' not in {t['function']['name'] for t in wire['tools']}
+        if ordinal == 3 or repeat:
+            return native_call('update_memory', f'unavailable-{ordinal}',
+                               record_id='not-a-real-record', content='Never execute this.')
+        assert ordinal == 4
+        rejection = actual_tool_receipt(wire)
+        assert rejection['origin'] == 'tool_catalog' and rejection['effect'] == 'none'
+        assert rejection['operation_executed'] is False
+        assert 'update_memory' not in rejection['available_tools']
+        return {'role': 'assistant', 'content': 'Reservation and label completed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='operate',
+                content='Reserve and label one catalog-probe for local delivery.')
+    result = functional.message(root, **args)
+    if interrupt:
+        assert result['status'] == 'UNKNOWN' and len(wires) == 3
+        result = functional.message(root, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if enabled and not repeat else 'FAILED')
+    if not enabled:
+        assert result['error'] == 'VLLM_CHAT_UNKNOWN_TOOL' and len(wires) == 3
+    elif repeat:
+        assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+        assert len(wires) == 4
+    else:
+        assert len(wires) == 4
+    assert result['records'] == []
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    world = result['world']['world']
+    assert len(world['reservations']) == 1 and len(world['attempts']) == 1
+    assert world['reservations'][0]['label_status'] == 'created'
+    assert all(p['identity']['name'] != 'update_memory'
+               for p in result['world']['receipt_progress'].values())
+    assert functional.message(root, **args) == result
+    assert len(wires) == (3 if not enabled else 4)
+
+
+@pytest.mark.parametrize('decision', [
+    {'field_results': []},
+    {'field_results': [{'field': 'content', 'assessment': [], 'reason': 'Invalid scalar.'}]},
+    {'field_results': [{'field': 'scope.unknown', 'assessment': 'supported', 'reason': 'Wrong.'}]},
+])
+def test_invalid_support_review_never_marks_delivery_or_retries(
+    tmp_path: Path, decision: dict[str, Any],
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+    from milai_lab.providers.chat_bridge import IncompleteChatResponse
+
+    calls, deliveries = [], []
+
+    class Malformed:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': 'review_revision_support',
+                                                     'id': 'invalid', 'args': decision}])
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'review.json'
+    with pytest.raises(IncompleteChatResponse, match='REVISION_REVIEW_SCHEMA_INVALID'):
+        functional.review_revision_support(Malformed(), path, evidence, lambda event: None,
+                                           on_delivery=lambda: deliveries.append(True))
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        functional.review_revision_support(Malformed(), path, evidence, lambda event: None,
+                                           on_delivery=lambda: deliveries.append(True))
+    assert len(calls) == 1 and deliveries == []

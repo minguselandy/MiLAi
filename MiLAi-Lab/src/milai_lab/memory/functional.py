@@ -104,6 +104,7 @@ class FunctionalMemory:
         formation_interface: str = "content_and_scope_v1",
         recent_context: str = "disabled",
         existing_confirmation: bool = False,
+        revision_support_review: Callable[[dict[str, Any], Callable[[], None]], None] | None = None,
     ) -> None:
         if service.functional_contract != "functional_v1":
             raise FunctionalRejection("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
@@ -119,6 +120,7 @@ class FunctionalMemory:
         if type(existing_confirmation) is not bool:
             raise FunctionalRejection("V13_5_EXISTING_CONFIRMATION_INVALID")
         self.existing_confirmation = existing_confirmation
+        self.revision_support_review = revision_support_review
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
             raise FunctionalRejection("V13_5_RECENT_CONTEXT_INVALID")
         self.recent_context = recent_context
@@ -137,6 +139,8 @@ class FunctionalMemory:
             self.policy["formation_interface"] = formation_interface
         if recent_context != "disabled":
             self.policy["recent_context"] = recent_context
+        if revision_support_review is not None:
+            self.policy["revision_support_review"] = "selected_originals_v1"
         self.retrieval_candidates = copy.deepcopy(retrieval_candidates)
         if retrieval_candidates is not None:
             for row in retrieval_candidates:
@@ -756,7 +760,57 @@ class FunctionalMemory:
             preview = self._review_revision(bound, proposal, old, review_token)
             if preview is not None:
                 return preview
+        if self.revision_support_review is not None and not equal:
+            def note_review_delivery() -> None:
+                # A returned review can inform the final answer, including a refusal.
+                # The current independent user input remains only the exposure anchor.
+                with self.service._locked():
+                    note_exposure(self.service, bound["source_ref"], proposal["source_refs"])
+
+            self.revision_support_review(
+                self._revision_evidence(bound, proposal, old), note_review_delivery)
         return self._commit(bound["session"], operation_id, proposal)
+
+    def _revision_evidence(
+        self, bound: dict[str, Any], proposal: dict[str, Any], old: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Provide actual deltas and selected originals to an injected precommit review.
+
+        The trigger binds this request but is not silently added as field evidence.
+        A review is a model assessment, not a certificate attached to stored support.
+        """
+        before = {**scope_leaves(old["scope"]),
+                  **{k: old[k] for k in ("content", "kind", "basis")}}
+        after = {**scope_leaves(proposal["scope"]),
+                 **{k: proposal[k] for k in ("content", "kind", "basis")}}
+        changes = []
+        for field in sorted(before.keys() | after.keys()):
+            if field in before and field in after and canonical(before[field]) == canonical(
+                after[field]
+            ):
+                continue
+            selected = (proposal["functional_support"][field] if field in after
+                        else proposal["removed_field_support"][field])
+            changes.append({"field": field, "before": before.get(field),
+                "after": after.get(field), "before_present": field in before,
+                "after_present": field in after,
+                "selected_original_fragments": fragment_support(self.service, selected)["quotes"]})
+        if proposal["patch_operation"] == "retract":
+            changes.append({"field": "record", "before": "active", "after": "withdrawn",
+                "before_present": True, "after_present": True,
+                "selected_original_fragments": fragment_support(
+                    self.service, proposal["removed_field_support"]["record"])["quotes"]})
+        for change in changes:
+            for quote in change["selected_original_fragments"]:
+                source = self.service.source(quote["source_ref"])
+                if source is None:
+                    raise FunctionalRejection("V13_5_REVISION_REVIEW_SOURCE_UNAVAILABLE")
+                quote["source_role"] = source["role"]
+        return {"schema": "functional_revision_evidence_v1", "binding": bound,
+                "forget_epoch": self.forget_epoch, "record_id": proposal["id"],
+                "read_handle": proposal["candidate_handle"], "read_revision": old["revision"],
+                "old_content": old["content"], "old_scope": old["scope"],
+                "changes": changes, "semantic_support": "unchecked"}
 
     def _review_revision(
         self, bound: dict[str, Any], proposal: dict[str, Any], old: dict[str, Any],

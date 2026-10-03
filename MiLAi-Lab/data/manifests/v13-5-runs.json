@@ -6913,6 +6913,13 @@
       "sha256": "c025d3766ae2c921e188f91143f49c06aade259419fbc34bdda2253e2134a2b3",
       "timing": "Before r45 model HTTP",
       "scope": "Communication11/27, L1 24/48, L2 12/26, full exposed L3 formation57/reading30 and new L4 after method freeze. Explicit no_change tool cannot apply changes; original budgets retained."
+    },
+    {
+      "candidate": "r46",
+      "path": "artifacts/v13-5/r46-regression-scope.json",
+      "sha256": "b1d279e7f661740866bafa388598b6d500cd68fe934dac38556d8375f8b77e4d",
+      "timing": "Before r46 model HTTP",
+      "scope": "Full exposed communication11/27, mixed correction first then post-business protocol; one public message admitted at a time after actual review. Same-version L1 24/48,L2 12/26,L3 formation57/reading30,newL4 after method freeze. Same original limits, no semantic certification."
     }
   ],
   "mechanical_checks": [
@@ -7127,6 +7134,34 @@
         "commit": "665869159df4fad53031c1fa2f719275ba6d66e0",
         "fast": "SUCCESS run37136594883",
         "full": "SKIPPED run37136594957; not a pass"
+      }
+    },
+    {
+      "candidate": "r46",
+      "scope": "546 affected/default/foundation/schema/durable-admission tests PASS;23 production pinned Qwen tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy4modules,package/tools boundaries and verification matrix PASS. Zero actual model HTTP. Scripted selected-source assessment gates changed fields before commit without changing same-source/no_change behavior; durable cache binds exact inputs and no hidden retry. Returned review exposure follows forgetting, independent inputs remain. Unavailable proposals do not dispatch and consume original shared format allowance; malformed batches and answer-only tools remain refused. Reopen preserves one business effect. No semantic certification claim.",
+      "preserved_first_failure": "Initial targeted6FAIL5PASS were incorrect test assertions: replay is no_change/replayed rather than byte-identical committed receipt; empty root scope has no leaf; business world is nested and labels are reservation status, not separate arrays. Corrected11PASS then privacy/invalid-decision additions16PASS. Initial Ruff formatting and matrix command without PYTHONPATH retained; corrected checks passed. First full541PASS then final privacy-aware546PASS.",
+      "evidence_sha256": {
+        "artifacts/v13-5/r46-targeted-initial.log": "f76d06d82f4c803fa9a4cfe55536cf639b4f6d63530357a7caf31b33b629a335",
+        "artifacts/v13-5/r46-targeted-corrected.log": "86ce1980ea2133626800e437c4dac95e5a8efa7a6c97c0470322c817692f3b28",
+        "artifacts/v13-5/r46-targeted-privacy.log": "949c48f8ac8a6b8f80bc8bff0daf345e2ff3067cbdc4b08d991d64249315a9c0",
+        "artifacts/v13-5/r46-native-protocol.log": "27a3a1a84ab5262ae09f9a1a23a5ed026499333b9d7ed02c77c2c3e1cc875cea",
+        "artifacts/v13-5/r46-regression.log": "be98225384f58b3e1cdf4b92111e5f34aa684b247b9ae3577c3a580ab2077b8e",
+        "artifacts/v13-5/r46-regression-final.log": "c6ae0551cfec1687fa35a91fbc425963ff4ab0199942450f19ba2e3d19b2f894",
+        "artifacts/v13-5/r46-production-contracts-probe.py": "517614477b60af3cdcbae10c388faf33b460cd251de4d6f29aa6ee3274eaa93c",
+        "artifacts/v13-5/r46-production-contracts.json": "6c0206776eebf355764f9a5b878bc17e81ef576f5609729d2875f0b4734c889e",
+        "artifacts/v13-5/r46-production-contracts-final-probe.py": "99a7df718ed87cc390cb366e11ddd55f5fee2085dbc3b14e1b5eabf83b8f0eec",
+        "artifacts/v13-5/r46-production-contracts-final.json": "6c0206776eebf355764f9a5b878bc17e81ef576f5609729d2875f0b4734c889e",
+        "artifacts/v13-5/r46-production-contracts-final.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+        "artifacts/v13-5/r46-sdk-lifecycle-final.log": "a2b40ca19f2d230dd647e1285540183a017e2d201dc00e2d891f23c069d62e41",
+        "artifacts/v13-5/r46-ruff-initial.log": "064c460e81a1c95e3943bc3c87171ab1d41becda64dfa80f8a26a26c09c51f03",
+        "artifacts/v13-5/r46-ruff-final.log": "4d1b4e0a2992aaaae2a540bd40879269508b717585b4e05399160225602178c4",
+        "artifacts/v13-5/r46-ruff-privacy.log": "fe60a3df5af5cd52b321d7ef77af8ce42899ef7dab6af484c2140eaf82dadcb7",
+        "artifacts/v13-5/r46-ruff-final-corrected.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r46-mypy-final.log": "71144743c83babea384888a735db0c4daba3d4d7b7942b6839984bd5c21b52bb",
+        "artifacts/v13-5/r46-boundary-final.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/r46-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "artifacts/v13-5/r46-verification-matrix.log": "b3b24deb1a96621f5ba8259124f9e1360e7e6c11243b991ec5d6e6937dd0e1ee",
+        "artifacts/v13-5/r46-verification-matrix-corrected.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
       }
     }
   ],

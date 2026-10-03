@@ -1,6 +1,9 @@
 # v13.5 functional profile
 
-**R45 failed its communication regression; no stable configuration is recommended.**
+**R46 is a mechanically checked development candidate; model acceptance has not run.**
+It adds selected-original revision review and bounded unavailable-tool feedback under the
+original allowances. Neither same-model approval nor valid provenance certifies semantic
+support. R45 failed its communication regression; no stable configuration is recommended.
 Its explicit confirm_existing_memory tool passed the actual existing-record story: real
 no_change/effect none, original ID/revision/history and truthful unchanged confirmation.
 However an ounces-to-grams correction selected only the old ounces source, a core support
@@ -21,7 +24,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r45.json` is the current development candidate. Required
+`configs/v13-5-functional-r46.json` is the current development candidate. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program
@@ -42,6 +45,21 @@ never supplied, topic-specific forgetting or physical erasure. The reason remain
 unless actual evidence establishes it; this is a tool contract, not a semantic validation.
 
 The candidate preserves these contracts; actual model choices still require evaluation:
+
+- With `revision_support_review=selected_originals_v1`, every nontrivial revision receives
+  one separately framed same-model assessment of each changed field and its selected
+  original fragments before commit. Unsupported/uncertain decisions leave the revision
+  uncommitted. The old record supplies unchanged context; the trigger is not automatically
+  selected evidence. Legitimate same-source reinterpretation remains possible. This does
+  not review new saves or certify semantic truth: stored support remains `unchecked`.
+  Calls share the original durable per-message and queue budgets. Exact-input decisions
+  persist across reopen; no valid persisted decision after an attempted review means
+  pending, without a hidden retry. No_change and committed replay skip review. A returned
+  review's exposure participates in forgetting without making the earlier user input derived.
+- With `tool_catalog_errors=bounded_feedback_v1`, unavailable native tool names receive
+  explicit nonexecuted catalog feedback before dispatch, within the original shared format
+  allowance. No tool permission is added. Malformed batches and answer-only tool proposals
+  remain protocol failures; completed business effects are never replayed to repair them.
 
 - A current-request declaration controls memory maintenance, forgetting and the exact
   business mutation catalog separately. Historical requests do not renew authorization.
@@ -142,7 +160,7 @@ cost ledger. It does not deploy a service. Use an unused run root for each chang
 export PYTHONPATH=src
 python tools/run_functional.py prepare \
   --root artifacts/v13-5/personal-r43 \
-  --config configs/v13-5-functional-r45.json
+  --config configs/v13-5-functional-r46.json
 python tools/run_functional.py message \
   --root artifacts/v13-5/personal-r43 --bank personal --owner alice \
   --session monday --message-id first \

@@ -152,6 +152,7 @@ class VLLMChatModel(BaseChatModel):
     tool_schema_communication: Literal["legacy", "shape_feedback_v1"] = Field(
         default="legacy", frozen=True, exclude=True, repr=False
     )
+    unknown_tool_feedback: bool = Field(default=False, frozen=True, exclude=True, repr=False)
     tool_save_communication: Literal["legacy", "completed_receipt_v1"] = Field(
         default="legacy", frozen=True, exclude=True, repr=False
     )
@@ -393,7 +394,9 @@ class VLLMChatModel(BaseChatModel):
                 if call["id"] in seen:
                     raise IncompleteChatResponse("VLLM_CHAT_DUPLICATE_TOOL_CALL_ID")
                 if function["name"] not in names:
-                    raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
+                    if (not self.unknown_tool_feedback or not names
+                            or kwargs.get("tool_choice") == "none" or not function["name"]):
+                        raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
                 seen.add(call["id"])
                 try:
                     args = json.loads(function["arguments"])

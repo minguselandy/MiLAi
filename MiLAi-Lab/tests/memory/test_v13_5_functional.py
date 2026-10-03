@@ -1495,3 +1495,133 @@ def test_bank_recent_context_resolves_cross_session_without_bypassing_visibility
         turn(other, text='Any recent records?')
         assert not other.service.records()
         assert 'cobalt' not in json.dumps(other.context('s', 'u', SHA))
+
+
+def test_revision_support_hook_sees_selected_originals_and_rejection_preserves_history(
+    tmp_path: Path,
+) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+        if len(reviewed) == 1:
+            raise FunctionalRejection('SCRIPTED_SUPPORT_REJECTION')
+
+    with opened(tmp_path, revision_support_review=review) as memory:
+        old_ref = turn(memory, text='Only this sample uses unit A; supplier labels are excluded.')
+        saved = memory.save(cfg(), 'save', 'Only this sample uses unit A; labels excluded.',
+                            handles(memory, old_ref), scope={'sample': 'this one'})
+        initial = memory.service.read(saved['id'])
+        new_ref = turn(memory, 'correct', 'For that sample, use unit B instead; retain exclusions.')
+        changes = [{'field': 'content', 'op': 'set',
+                    'value': 'Only this sample uses unit B; labels excluded.',
+                    'fragment_handles': handles(memory, old_ref)}]
+        rejected = invoke(memory, 'update_memory', {
+            'read_handle': initial['candidate_handle'], 'changes': changes}, 'bad', cfg('correct'))
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        assert memory.service.read(saved['id'])['value'] == initial['value']
+        evidence = reviewed[0]
+        assert evidence['record_id'] == saved['id'] and evidence['read_revision'] == 1
+        assert evidence['old_scope'] == {'sample': 'this one'}
+        assert len(evidence['changes']) == 1
+        change = evidence['changes'][0]
+        assert change['field'] == 'content' and change['after_present']
+        assert change['before'] == initial['value']['content']
+        assert change['after'] == changes[0]['value']
+        quote = change['selected_original_fragments'][0]
+        assert quote['source_role'] == 'user' and quote['source_ref'] == old_ref
+        assert 'unit A' in quote['content'] and 'unit B' not in quote['content']
+        assert new_ref not in [q['source_ref'] for q in change['selected_original_fragments']]
+        changes[0]['fragment_handles'] = handles(memory, new_ref)
+        good = memory.update(cfg('correct'), 'good', initial['candidate_handle'], changes)
+        current = memory.service.read(saved['id'])['value']
+        assert good['revision'] == 2 and current['scope'] == initial['value']['scope']
+        assert current['functional_support']['scope.sample'] == initial['value'][
+            'functional_support']['scope.sample']
+        assert current['functional_support']['content']['source_refs'] == [new_ref]
+        assert current['functional_support']['content']['semantic_support'] == 'unchecked'
+        assert len(reviewed) == 2
+        replay = memory.update(cfg('correct'), 'good', initial['candidate_handle'], changes)
+        assert replay['status'] == 'no_change' and replay['replayed']
+        assert replay['original_status'] == 'committed' and replay['revision'] == 2
+        assert len(reviewed) == 2  # Durable commit replay does not run a new model review.
+        noop = memory.update(cfg('correct'), 'no-change',
+                             memory.service.read(saved['id'])['candidate_handle'], [])
+        assert noop['status'] == 'no_change' and len(reviewed) == 2
+
+
+def test_revision_support_hook_allows_same_source_reinterpretation_and_reviews_removals(
+    tmp_path: Path,
+) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+
+    with opened(tmp_path, revision_support_review=review) as memory:
+        ref = turn(memory, text='Use blue, not red. This applies without a project restriction.')
+        saved = memory.save(cfg(), 'save', 'Use red.', handles(memory, ref), scope={'project': 'A'})
+        handle = memory.service.read(saved['id'])['candidate_handle']
+        fixed = memory.update(cfg(), 'reinterpret', handle, [
+            {'field': 'content', 'op': 'set', 'value': 'Use blue.',
+             'fragment_handles': handles(memory, ref)},
+            {'field': 'scope.project', 'op': 'remove', 'fragment_handles': handles(memory, ref)},
+        ])
+        assert fixed['revision'] == 2
+        changes = {r['field']: r for r in reviewed[0]['changes']}
+        assert set(changes) == {'content', 'scope.project'}
+        assert changes['scope.project']['before_present']
+        assert not changes['scope.project']['after_present']
+        assert all(q['source_ref'] == ref for c in changes.values()
+                   for q in c['selected_original_fragments'])
+        # Withdrawing has its own selected evidence even when content is unchanged.
+        cancel = turn(memory, 'cancel', 'Withdraw that entire preference.')
+        withdrawn = memory.update(cfg('cancel'), 'withdraw',
+            memory.service.read(saved['id'])['candidate_handle'], [],
+            fragment_handles=handles(memory, cancel), retract=True)
+        assert withdrawn['revision'] == 3
+        change = reviewed[1]['changes'][0]
+        assert change['field'] == 'record' and change['after'] == 'withdrawn'
+        assert change['selected_original_fragments'][0]['source_ref'] == cancel
+
+
+@pytest.mark.parametrize('delivered', [False, True])
+def test_revision_review_delivery_forget_does_not_revoke_independent_input(
+    tmp_path: Path, delivered: bool,
+) -> None:
+    def review(evidence: dict[str, Any], report_delivery: Callable[[], None]) -> None:
+        if delivered:
+            report_delivery()
+        raise FunctionalRejection('SCRIPTED_REVIEW_DECLINED_BEFORE_COMMIT')
+
+    with opened(tmp_path, revision_support_review=review) as memory:
+        secret = turn(memory, 'old', 'MECHANICAL_REVIEW_PRIVATE preference.')
+        saved = memory.save(cfg('old'), 'save', 'MECHANICAL_REVIEW_PRIVATE preference.',
+                            handles(memory, secret))
+        original = memory.service.read(saved['id'])
+        independent = memory.service.capture_user('s', 'change', 'Independent replacement input.')
+        memory.service.bind_public_turn('s', 'change', independent['source_ref'],
+                                        config_sha256=SHA, phase='start')
+        # No ordinary retrieval: any exposure below must come from the review callback.
+        anchor = 'exposure:' + independent['source_ref']
+        assert memory.service.store.get(namespace(memory.service), anchor) is None
+        rejected = invoke(memory, 'update_memory', {'read_handle': original['candidate_handle'],
+            'changes': [{'field': 'content', 'op': 'set', 'value': 'Replacement preference.',
+                         'fragment_handles': handles(memory, secret)}]}, 'revise', cfg('change'))
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        assert memory.service.read(saved['id'])['value'] == original['value']
+        exposure = memory.service.store.get(namespace(memory.service), anchor)
+        assert bool(exposure) is delivered
+        if exposure is not None:
+            assert exposure.value['source_refs'] == [secret]
+        assistant = memory.service.capture_assistant('s', 'change:final',
+            'Review of MECHANICAL_REVIEW_PRIVATE was declined.' if delivered else 'No review sent.')
+        turn(memory, 'forget', 'Forget the old preference and its supporting input.')
+        removed = invoke(memory, 'forget_memory', {'read_handle': original['candidate_handle']},
+                         'forget', cfg('forget'))
+        assert removed['ok']
+        assert memory.service.source(secret) is None
+        assert memory.service.source(independent['source_ref']) is not None
+        assert (memory.service.source(assistant['source_ref']) is None) is delivered
