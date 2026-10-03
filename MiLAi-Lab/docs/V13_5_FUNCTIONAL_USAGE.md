@@ -4,7 +4,7 @@
 all original 24 stories / 48 messages and passed the scoped original 22/24 threshold
 with 23 PASS / 1 FAIL. The stricter functional review retains two scope/source defects
 and a mixed query/continuation interpretation limitation. Full functional acceptance
-is pending; R12 is the current candidate and no stable configuration is recommended.
+is pending; R13 is the current candidate and no stable configuration is recommended.
 R0–r10 remain separate historical failed/incomplete or mechanical-only cohorts.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
@@ -16,9 +16,9 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r12.json` with a new root for current candidate
+Use `configs/v13-5-functional-r13.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R12 retains exact current-message save idempotency and first interprets the current
+R13 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. The persisted interpretation separately controls
 memory maintenance, forgetting and business mutation tools. A read-only interpretation
 still permits live business queries. This is a model interpretation, not a proof of
@@ -33,6 +33,17 @@ item does not establish full request completion, semantic support or prose truth
 Historical roots freeze their original source/configuration and cannot be resumed
 under changed code. No configuration is listed as accepted until full L1 passes
 without unresolved critical functional defects.
+
+The candidate exposes `save_memory(content, fragment_handles)`: include the complete
+fact and its explicit applicability limits together in `content`. New saves have no
+separate free-form scope argument; existing scoped records remain editable.
+The declared `readonly_response_v1` stage has no tools and produces the user-facing
+answer after execution. Execution drafts remain in `messages` and
+`execution_candidate_answer`; `final_answer` is the response-stage result. Its
+reservation and response survive restart. One additional generation is charged
+within the original 24-call limit; a failed response can use only the remaining
+shared repair allowance on explicit resume. This is composition, not a semantic
+verifier. `operation_status` remains the program's independent receipt summary.
 
 The current `update_memory` catalog requires `fragment_handles` inside each
 `changes` item. Select support for the new value or removal, independently for

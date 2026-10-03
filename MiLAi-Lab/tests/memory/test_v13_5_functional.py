@@ -83,6 +83,24 @@ def invoke(
     return json.loads(response.content)
 
 
+def test_unified_assertion_rejects_split_scope_and_preserves_explicit_body_on_reopen(
+    tmp_path: Path,
+) -> None:
+    body = "Only during this particular review, use short answers; other meetings are unchanged."
+    with opened(tmp_path, formation_interface="unified_assertion_v1") as memory:
+        ref = turn(memory, text=body)
+        args = {"content": body, "fragment_handles": handles(memory, ref)}
+        with pytest.raises(ValidationError, match="Extra inputs"):
+            invoke(memory, "save_memory", {**args, "scope": {"context": "review"}}, "bad")
+        assert memory.service.records() == []
+        receipt = invoke(memory, "save_memory", args, "save")
+        assert receipt["status"] == "committed"
+    with opened(tmp_path, formation_interface="unified_assertion_v1") as memory:
+        row = memory.service.read(receipt["id"])
+        assert row["value"]["content"] == body and row["value"]["scope"] == {}
+        assert row["value"]["functional_support"]["content"]["quotes"][0]["content"] == body
+
+
 def assert_read_delivery(packet: dict[str, Any]) -> None:
     items = packet.get("items", [])
     ids = list(dict.fromkeys(u["record_id"] for u in items if u["type"] == "record"))

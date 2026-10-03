@@ -1170,9 +1170,9 @@
     },
     {
       "id": "communication-r12",
-      "candidate_commit": "PENDING_SOURCE_COMMIT",
+      "candidate_commit": "adb7038f878fde9d1cc033136bc8210f04ccc601",
       "layer": "communication_admission_and_exposed_regressions",
-      "state": "ADMITTED_NOT_RUN",
+      "state": "COMPLETE_ADMISSION_WITH_SCOPE_AND_FINAL_QUALITY_FAILURES",
       "planned_cases": 8,
       "planned_messages": 12,
       "execution_order": [
@@ -1227,7 +1227,85 @@
         "artifacts/v13-5/r12-production-completion-probe.py": "a11ae49f8a76a862dbb71f367d4d0f05dcfa537af91c1202141ffff0c5bd8653",
         "artifacts/v13-5/r12-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r12-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r12-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r12-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r12/input-freeze.json": "5253cb6b6a587e858b05b31ada42ec7860707993f1683ed43327aaa4cf3fec5e",
+        "artifacts/v13-5/communication-r12/review.json": "bfb85cd8f1d58933b822ae48c4ff3f442d2e530b8589aba1482aebdd57da1dcb",
+        "artifacts/v13-5/communication-r12/seal.json": "61e4aac2aaeaa318a6bc1d857496fffc563adc606fe7feebf72e6a8838f268a5",
+        "artifacts/v13-5/communication-r12-readonly-review.jsonl": "f4431bab3cbfe95b26258ba415b322129f6bb8a77898addcdd280068807c2967"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 6,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 12
+      },
+      "retained_attempts": 13,
+      "cost_delta": {
+        "generation_requests": 45,
+        "generation.known_tokens": 217193,
+        "generation.charged_tokens": 217193,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "evidence": "../communication-r12-readonly-review.jsonl",
+      "failures": [
+        "scope-2: one-time demonstration reduced to generic context; content omits the occurrence limit. The follow-up answer is correct but durable record is not.",
+        "l2-r02: actual partial outcome and direct semantic record correct; delivered first final only confirms saving and omits required partial business report. Detailed intermediate AI content accompanying a tool call is not delivered final."
+      ],
+      "findings": [
+        "object-continue-3: exact item, one reservation/label, live followup query, no invented project scope.",
+        "l2-r02 second message: live query before remaining label, one reservation total, same-ID revision2 with new actual tool support; completion feedback used once, no mutation retry.",
+        "W3 actual business and semantic commits resumed with one reservation and revision1 intact.",
+        "scope-1 pure query does not mutate original bounded team-week record.",
+        "plain, preference-save and one-attempt tool-failure reports pass scoped."
+      ],
+      "limitations": [
+        "Native intent flags remain unchecked: explicit scope-2 save classified requires_memory_result false; conditional l2 continuation permitted correctly.",
+        "Communication regression only; not full L1/L2 or independent evaluation."
+      ],
+      "remote_ci": {
+        "commit": "adb7038f878fde9d1cc033136bc8210f04ccc601",
+        "fast_run": 37090916845,
+        "fast_status": "success",
+        "full_run": 37090916812,
+        "full_status": "skipped"
+      }
+    },
+    {
+      "id": "communication-r13",
+      "layer": "L0_communication_and_exposed_behavior_regression",
+      "candidate_commit": "pending_commit_before_model_execution",
+      "state": "FROZEN_NOT_RUN",
+      "planned_cases": 8,
+      "planned_messages": 12,
+      "config": "configs/v13-5-functional-r13.json",
+      "changes": [
+        "unified assertion creation without parallel scope map",
+        "durable readonly response stage with original shared budgets"
+      ],
+      "mechanical_verification": {
+        "affected_tests": "104 PASS",
+        "production_tokenizer_scripted": "5 PASS; no actual HTTP",
+        "first_tests": "99 PASS / 4 FAIL due test expecting tool_choice key when no tool catalog; fixed assertion accepts absent choice",
+        "ruff": "PASS",
+        "mypy": "PASS 195 source files",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "configs/v13-5-functional-r13.json": "4d958ad133d0d248256dba4a4c515b6263fc5badbc5f09291b0f82dea8344f6c",
+        "artifacts/v13-5/communication-r13/input-freeze.json": "28cec1459c8c289c7660b5fcbffb1fff9eb168d0733a25eb4b953c6ae40f4145",
+        "artifacts/v13-5/r13-final.log": "4be75b90d683a11e4dca00056b976604ae4d84921abcbbe4056b20afcaacef85",
+        "artifacts/v13-5/r13-production-response.json": "14ddbd36efb37d16022121c4ecf73311b17a9e82c39ad5b555da67187c41cfa2",
+        "artifacts/v13-5/r13-first.log": "9438b55026af48222c4410ff8340feb011c9a74ab86fb389f2e3a376229b1d1f",
+        "artifacts/v13-5/r13-finalizer-second.log": "2d266375d79f823086f1c61fdf16cb68c2756eb64a431557386bb7a9f0abcf2c",
+        "artifacts/v13-5/r13-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r13-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r13-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
       }
     }
   ],

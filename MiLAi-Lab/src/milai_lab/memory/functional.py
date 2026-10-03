@@ -31,6 +31,17 @@ from milai_lab.memory.functional_state import (
 from milai_lab.memory.service import MemoryService, _lexical_tokens
 
 
+class SavedAssertion(BaseModel):
+    """One supported assertion, with its applicability expressed in the same body."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    content: str = Field(description=(
+        "Complete supported assertion, including who, which occurrence, time, conditions, "
+        "exceptions and uncertainty. Preserve restrictive source wording in this body."))
+    fragment_handles: list[str]
+    tool_call_id: Annotated[str, InjectedToolCallId]
+
+
 class FieldChange(BaseModel):
     """One proposed value and its explicitly selected evidence, not a semantic verdict."""
 
@@ -55,12 +66,16 @@ class FunctionalMemory:
         material_limit: int = 8192,
         fragment_chars: int = 1200,
         retrieval_candidates: list[dict[str, Any]] | None = None,
+        formation_interface: str = "content_and_scope_v1",
     ) -> None:
         if service.functional_contract != "functional_v1":
             raise FunctionalRejection("V13_5_FUNCTIONAL_CONTRACT_REQUIRED")
         if any(type(v) is not int or v < 1 for v in (read_limit, material_limit, fragment_chars)):
             raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
+        if formation_interface not in {"content_and_scope_v1", "unified_assertion_v1"}:
+            raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
+        self.formation_interface = formation_interface
         self.read_limit, self.material_limit, self.fragment_chars = (
             read_limit,
             material_limit,
@@ -72,6 +87,8 @@ class FunctionalMemory:
             "fragment_chars": fragment_chars,
             "retrieval_candidates_sha256": digest(retrieval_candidates),
         }
+        if formation_interface != "content_and_scope_v1":
+            self.policy["formation_interface"] = formation_interface
         self.retrieval_candidates = copy.deepcopy(retrieval_candidates)
         if retrieval_candidates is not None:
             for row in retrieval_candidates:
@@ -798,6 +815,23 @@ class FunctionalMemory:
                 mutation(lambda: self.save(config, tool_call_id, content, fragment_handles, scope)),
             )
 
+        def save_assertion(
+            content: str, fragment_handles: list[str], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Save one new supported assertion with all limits in its content.
+
+            Content is the complete memory: state the fact AND its explicit subject,
+            particular occurrence, time, conditions, exceptions and uncertainty together.
+            There is no separate scope map to carry omitted meaning. Prefer the source's
+            restrictive phrases to inferred category or project labels. Select actual
+            fragments supporting the assertion. The program extracts quotes; valid
+            quotes alone do not prove semantic support. For an existing matter use
+            update_memory on the actual read version instead of creating a duplicate.
+            Confirm saving only after an actual committed or no_change receipt.
+            """
+            return save_memory(content, fragment_handles, config, tool_call_id=tool_call_id)
+
         def update_memory(
             read_handle: str,
             changes: list[FieldChange],
@@ -1045,14 +1079,17 @@ class FunctionalMemory:
                 ),
             )
 
-        return tuple(
+        save_tool = (StructuredTool.from_function(
+            save_assertion, name="save_memory", args_schema=SavedAssertion)
+            if self.formation_interface == "unified_assertion_v1"
+            else StructuredTool.from_function(save_memory))
+        return (save_tool, *tuple(
             StructuredTool.from_function(function)
             for function in (
-                save_memory,
                 update_memory,
                 search_memory,
                 read_memory,
                 read_source,
                 forget_memory,
             )
-        )
+        ))

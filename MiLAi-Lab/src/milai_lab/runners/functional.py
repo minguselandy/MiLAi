@@ -172,6 +172,12 @@ def prepare(
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
+    if settings.get("formation_interface", "content_and_scope_v1") not in {
+        "content_and_scope_v1", "unified_assertion_v1",
+    } or settings.get("finalization", "agent_final_v1") not in {
+        "agent_final_v1", "readonly_response_v1",
+    }:
+        raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
         for key in (
@@ -277,6 +283,61 @@ def final_delivery(content: Any) -> dict[str, Any]:
         return {"status": "available", "structural_check": "text_present",
                 "semantic_quality": "unchecked"}
     return {"status": "unavailable", "reason": reason, "semantic_quality": "unchecked"}
+
+
+def finalize_response(
+    model: LangMemRecipeChatModel, path: Path, messages: list[Any],
+    effects: dict[str, Any], *, resume: bool, remaining_reproposals: int, trace: Trace,
+) -> tuple[AIMessage, dict[str, Any]]:
+    """One declared response stage, without tools; persist reservation and result.
+
+    The execution candidate remains evidence. This is the only delivered response
+    under this opt-in profile, not a post-delivery rewrite or a semantic judge.
+    """
+    prompt = list(messages)
+    directive = (
+        "Execution is finished. Only your NEW response will be delivered to the user; "
+        "earlier assistant text is an undelivered execution draft. Answer the original "
+        "current request completely in the user's language. Include the actual outcome "
+        "and remaining work for each requested business phase, then the actual memory "
+        "result if relevant. A saved record does not mean the business succeeded. "
+        "Distinguish partial, failed and unknown effects; reading an existing record "
+        "is not a new save. Preserve qualifications in recalled facts. Use the observed "
+        "receipts and supplied material; do not assume a draft's claims are true. "
+        "No tools are available and no further operation will run in this stage.\n"
+        "Program receipt summary (listed operations only, not full task verification): "
+        + json.dumps(effects, ensure_ascii=False) + "\n"
+    )
+    prompt[0] = SystemMessage(content=directive + str(prompt[0].content))
+    binding = _hash([row.model_dump(mode="json") for row in prompt])
+    state: dict[str, Any] = (read_json(path) if path.exists()
+                             else {"binding": binding, "attempts": 0})
+    if state["binding"] != binding:
+        raise ValueError("FUNCTIONAL_FINALIZATION_BINDING_CHANGED")
+    if "response" in state:
+        if state.get("response_sha256") != _hash(state["response"]):
+            raise ValueError("FUNCTIONAL_FINALIZATION_RESPONSE_CHANGED")
+        answer = AIMessage.model_validate(state["response"])
+    else:
+        if state["attempts"] and (not resume or state["attempts"] >= 1 + remaining_reproposals):
+            raise ValueError("FUNCTIONAL_FINALIZATION_REPAIR_BUDGET_EXHAUSTED")
+        state.update(attempts=state["attempts"] + 1, status="reserved_before_dispatch",
+                     tools_available=False, execution_candidate_delivered=False)
+        write_json(path, state)
+        answer = model.invoke(prompt, tools=[], tool_choice="none")
+        if (not isinstance(answer, AIMessage) or answer.tool_calls or answer.invalid_tool_calls
+                or final_delivery(answer.content)["status"] != "available"):
+            state.update(status="unusable_response",
+                         rejected_response=answer.model_dump(mode="json"))
+            write_json(path, state)
+            raise ValueError("FUNCTIONAL_FINALIZATION_RESPONSE_UNAVAILABLE")
+        state.update(status="response_received", response=answer.model_dump(mode="json"))
+        state["response_sha256"] = _hash(state["response"])
+        write_json(path, state)
+    summary = {key: state[key] for key in (
+        "status", "attempts", "tools_available", "execution_candidate_delivered")}
+    trace({"event": "functional_readonly_finalization", **summary})
+    return answer, summary
 
 
 def request_mode(
@@ -819,6 +880,7 @@ def message(
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
                 material_limit=settings["ordinary_material_tokens"],
+                formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
                 retrieval_candidates=[
                     {
                         **row,
@@ -1067,7 +1129,8 @@ def message(
                 last = prior[-1]
                 bad_checkpoint_text = (isinstance(last, AIMessage) and not last.tool_calls
                                        and final_delivery(last.content)["status"] == "unavailable")
-                if resume and (bad_checkpoint_text or pending_answer_repair):
+                if resume and (pending_answer_repair or (bad_checkpoint_text
+                        and settings.get("finalization") != "readonly_response_v1")):
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
                     if (recovery["attempts"] + len(format_failures(prior))
@@ -1084,11 +1147,12 @@ def message(
                     repair_history = prior[:-1] if bad_checkpoint_text else prior
                     repair_input = context_hook({"messages": repair_history}, cfg)[
                         "llm_input_messages"]
-                    repair_input.insert(1, SystemMessage(content=(
+                    repair_input[0] = SystemMessage(content=(
                         "The preceding final response was unusable. Report the already observed "
                         "operation results and any unfinished request parts. Tools are unavailable "
-                        "during this answer-only recovery; no new operations will be executed."
-                    )))
+                        "during this answer-only recovery; no new operations will be executed.\n"
+                        + str(repair_input[0].content)
+                    ))
                     repaired = model.invoke(repair_input, tools=[], tool_choice="none")
                     if not isinstance(repaired, AIMessage) or repaired.tool_calls:
                         raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_MUST_BE_TEXT")
@@ -1165,6 +1229,23 @@ def message(
                                         durability="sync")["messages"]
                 if missing_requested_memory_attempt(messages):
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
+            if settings.get("finalization") == "readonly_response_v1":
+                answer_repairs = (read_json(recovery_path).get("attempts", 0)
+                                  if recovery_path.exists() else 0)
+                effects = operation_status({**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                # Context hook applies visibility checks before any cached response
+                # can be reused. The model sees exactly the same bounded material.
+                response_input = context_hook({"messages": messages}, cfg)["llm_input_messages"]
+                final, output["finalization"] = finalize_response(
+                    model, bank_root / f"{identity}-finalization.json", response_input, effects,
+                    resume=resume, remaining_reproposals=settings["format_reproposals"]
+                    - len(format_failures(messages)) - mode_reproposals - completion_used
+                    - answer_repairs, trace=trace)
+                output["execution_candidate_answer"] = messages[-1].content
+                # Do not alter the completed execution checkpoint. The response has
+                # its own durable receipt, so restart cannot repeat business work.
+                messages = [*messages, final]
             output.update(
                 status="COMPLETED",
                 messages=[row.model_dump(mode="json") for row in messages],

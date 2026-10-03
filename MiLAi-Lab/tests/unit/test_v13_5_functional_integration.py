@@ -29,6 +29,7 @@ from milai_lab.runners import functional
 def prepared(
     tmp_path: Path, *, queue_requests: int = 100, native: bool = False,
     request_interpretation: bool = False,
+    readonly_finalization: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -62,6 +63,9 @@ def prepared(
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
         "request_mode": "current_request_native_v1" if request_interpretation else "disabled",
+        "finalization": "readonly_response_v1" if readonly_finalization else "agent_final_v1",
+        "formation_interface": "unified_assertion_v1" if readonly_finalization
+        else "content_and_scope_v1",
     }
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
@@ -711,6 +715,73 @@ def test_answer_recovery_preserves_real_business_and_memory_commits(
     assert len(resumed["world"]["world"]["attempts"]) == 1
     assert resumed["operation_status"] == first["operation_status"]
     assert len(wires) == 4
+
+
+@pytest.mark.parametrize("bad", ["none", "empty", "tools", "transport", "interruption"])
+def test_readonly_response_is_durable_bounded_and_preserves_actual_partial_effects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call("reserve_and_label", "reserve", item_key="partial item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call("save_memory", "save", content="Reservation done, label failed.",
+                fragment_handles=[r["fragment_handle"] for r in receipt["source_fragment_index"]])
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved."}
+        assert ordinal in {4, 5}
+        assert not wire.get("tools") and wire.get("tool_choice", "none") == "none"
+        assert all(m["role"] != "system" for m in wire["messages"][1:])
+        assert '"status": "partial"' in wire["messages"][0]["content"]
+        if ordinal == 4 and bad == "empty":
+            return {"role": "assistant", "content": "{"}
+        if ordinal == 4 and bad == "tools":
+            return native_call("reserve_and_label", "forbidden", item_key="another item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 4 and bad == "transport":
+            return {"role": "assistant", "content": None, "_test_finish_reason": "length"}
+        return {"role": "assistant", "content": "Reserved; label failed. Partial result saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = {"initial_world": {"label_available": False}}
+    if bad == "interruption":
+        args["evaluator_control"] = {"one_shot_fault": {
+            "message_index": 0, "boundary": "W3", "target_operation": "save_memory",
+            "occurrence": 1}}
+    result = message(root, **args)
+    if bad != "none":
+        assert result["status"] != "COMPLETED" and result.get("final_answer") is None
+        assert result["operation_status"]["business"]["status"] == "partial"
+        result = message(root, **args, resume=True)
+    assert result["status"] == "COMPLETED", result
+    assert result["execution_candidate_answer"] == "Saved."
+    assert result["final_answer"] == "Reserved; label failed. Partial result saved."
+    assert len(result["world"]["world"]["attempts"]) == len(result["records"]) == 1
+    assert all(s["content"] != "Saved." for s in result["sources"] if s["role"] == "assistant")
+    calls = len(wires)
+    resumed = message(root, **args, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert len(wires) == calls == (4 if bad in {"none", "interruption"} else 5)
+    assert resumed["world"]["world"] == result["world"]["world"]
+
+
+def test_readonly_response_does_not_reset_exhausted_retry_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {
+        "role": "assistant", "content": "Execution draft." if ordinal == 1 else "{"}, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED" and len(wires) == 2
+    second = message(root, resume=True)
+    assert second["status"] == "FAILED" and len(wires) == 3
+    third = message(root, resume=True)
+    assert third["status"] == "FAILED" and len(wires) == 3
+    assert third["error"] == "FUNCTIONAL_FINALIZATION_REPAIR_BUDGET_EXHAUSTED"
 
 
 def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_unknowns() -> None:
