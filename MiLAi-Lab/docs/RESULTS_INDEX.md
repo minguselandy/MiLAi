@@ -2,15 +2,15 @@
 
 ## Current development checkpoint — 2026-10-04
 
-[r49 checkpoint](V13_5_CHECKPOINT_r49_20261004.md): partial communication has 4 scoped PASS,
-1 observed FAIL and 6 wholly NOT_RUN cases over frozen 11/27; 12 COMPLETED, 15 NOT_RUN messages.
-The failing h03 case is only 2/3 executed: real withdrawal and stored sources are intact,
-but final quotation fidelity fails. Current/source selectors were used; dedicated historical
-selectors were not reached. User-requested checkpoint, not a new protocol crash.
-Source a273615 passed Fast CI; Full skipped. 586 mechanical regressions and 32 production
-probes pass separately. Full development remains incomplete, Product NO_GO.
-[Current progress](V13_5_PROGRESS.md) and the [r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md)
-retain separate versioned results and all failures.
+[r50 checkpoint](V13_5_CHECKPOINT_r50_20261004.md): frozen 11/27 retains 4 scoped PASS,
+1 PARTIAL and 6 wholly NOT_RUN cases; 11 COMPLETED and 16 NOT_RUN messages.
+Only h03 initial save ran; withdrawal/history, W1 and forgetting were not reached.
+51 generations / 291,718 tokens, 141 sealed raw files, 5 records / 21 exact stored quotes.
+R50 corrected the stale historical-read instruction; 32 production probes and candidate
+Fast37156424019 passed, Full37156424020 skipped. Runtime is identical to r49.
+Review false-negatives and intent-declaration errors remain; full development is incomplete,
+Product NO_GO. [Current progress](V13_5_PROGRESS.md) and [r49](V13_5_CHECKPOINT_r49_20261004.md)
+retain prior failures and separate evidence identities. No new model message for checkpoint preparation.
 
 ## Current results and execution status — 2026-09-29
 

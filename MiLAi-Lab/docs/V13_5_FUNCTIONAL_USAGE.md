@@ -1,6 +1,12 @@
 # v13.5 functional profile
 
-**Current candidate r50 corrects only the stale combined-history instruction to the actual explicit historical tool signatures.** The old example was rejected by the actual public schema; both replacement examples and 32 production tokenizer/full-prompt probes pass. Runtime and all allowances are unchanged. No r50 model cohort is admitted yet; the latest actual evidence is the partial r49 checkpoint below.
+**Current r50 is a partial development checkpoint, with no stable recommended configuration.** Frozen 11 cases / 27 messages have 4 scoped PASS, 1 PARTIAL and 6 wholly NOT_RUN cases; 11 messages COMPLETED, 16 NOT_RUN. The partial h03 case has only its initial save, with withdrawal/history unexecuted. Review false-negatives and an erroneous draft-action declaration remain; that correction's actual catalog had no business mutator and no business effect occurred.
+
+R50 only corrected the stale historical-read instruction. Actual schema checks and 32 production tokenizer/full-prompt probes passed. Candidate `e7822e9` passed Fast37156424019; Full37156424020 was skipped. Runtime and allowances are unchanged; r49's 586 mechanical tests retain their previous identity, without rerun. Actual r50 use covered read_memory(record_id); dedicated history/revision/source/fragment/page tools, W1 and forgetting were not reached. This does not resolve r48/r49 failures by model evidence.
+
+R50 added 51 generations / 291,718 tokens; checkpoint preparation started no new experimental message. The cohort is sealed (141 raw files); never append to its root or pool passing cases across versions. Same-version L1–L4 remain unadmitted, Product NO_GO. See the [r50 checkpoint](V13_5_CHECKPOINT_r50_20261004.md) and [current progress](V13_5_PROGRESS.md).
+
+The following r49 and earlier entries preserve historical identities:
 
 **R49 is a partial development checkpoint, not an accepted configuration.** The frozen 11 cases / 27 messages currently have 4 scoped PASS, 1 observed FAIL and 6 wholly NOT_RUN cases; 12 messages COMPLETED and 15 NOT_RUN. The failing h03 case completed only 2/3 messages. Withdrawal and stored originals are correct, but the final answer calls a paraphrase an original quotation. Its final history query was not run. Support-review overrejection remains open.
 

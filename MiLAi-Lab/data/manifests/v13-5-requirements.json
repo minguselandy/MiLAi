@@ -5226,9 +5226,9 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r50 configuration-only historical tool instruction correction; mechanical checks passed, model not admitted",
-    "scope": "R50 corrects stale read_memory(history=true) to actual explicit historical selectors. Actual schemas reproduce old mismatch and validate two corrected examples;32 production tokenizer/full-prompt probes pass. Runtime and every allowance unchanged; prior r49 586 checks retained, not rerun. R49 partial11/27 remains4PASS_SCOPED1observedFAIL6NOT_RUN,12COMPLETED15NOT_RUN; final quote drift, overstrict reviews and unrun historical/W1/forgetting checks remain. R50 needs exact commit CI then new full communication and same-version L1-L4/FUNC terminal. Historical140 and original48 unchanged.",
-    "report": "docs/V13_5_PROGRESS.md",
+    "candidate": "r50 partial communication checkpoint; full development incomplete",
+    "scope": "R50 corrected stale historical tool instruction; actual schemas and32 production probes pass, source e7822e9 Fast37156424019 SUCCESS/Full37156424020 SKIP. Frozen11/27:4PASS_SCOPED1PARTIAL6NOT_RUN;11COMPLETED16NOT_RUN. Current-source same-ID correction, actual no_change and live partial continuation have bounded evidence; review false-negatives and erroneous draft-action declaration retained with no actual business mutator/effect. h03 withdrawal/history, dedicated historical reads, W1 and forgetting not reached.51generations291718tokens;141 raw files sealed. Same-versionL1-L4/FUNC terminal incomplete; historical140 and original48 unchanged.",
+    "report": "docs/V13_5_CHECKPOINT_r50_20261004.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",
     "independent_review": false
