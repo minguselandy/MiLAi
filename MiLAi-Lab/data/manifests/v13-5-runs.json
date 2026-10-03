@@ -1344,7 +1344,14 @@
       "limitations": [
         "Unrun five stories/six messages remain unverified; not full L1/L2.",
         "Source-faithful single-assertion pass is scoped, not generalization proof."
-      ]
+      ],
+      "remote_ci": {
+        "commit": "50e70af5841cec70d1ec38ca96540ccd1ece9ebc",
+        "fast_run": 37092120369,
+        "fast_status": "success",
+        "full_run": 37092120385,
+        "full_status": "skipped"
+      }
     },
     {
       "id": "communication-r14",
@@ -1407,13 +1414,20 @@
         "Remaining quoted tool observation records earlier partial state after new-message continuation; final current state uses the live query/action, not stale observation.",
         "W3 resumed answer adds unsupported physical pickup advice; actual sandbox outcome remains correct, but this is an answer-quality limitation."
       ],
-      "evidence": "../communication-r14-readonly-review.jsonl"
+      "evidence": "../communication-r14-readonly-review.jsonl",
+      "remote_ci": {
+        "commit": "80356aaf7ad9300b759ae189fe3d73322ff31228",
+        "fast_run": 37092461222,
+        "fast_status": "success",
+        "full_run": 37092461213,
+        "full_status": "skipped"
+      }
     },
     {
       "id": "communication-r15",
       "layer": "L0_targeted_public_policy_and_commit_recovery",
-      "candidate_commit": "pending_commit_before_model_execution",
-      "state": "FROZEN_NOT_RUN",
+      "candidate_commit": "1b3f38e2604dcdb6b416cbee702cc6c8444732b9",
+      "state": "PASS_SCOPED_DIRECT_SUPPORT_AND_COMMIT_RECOVERY",
       "planned_cases": 2,
       "planned_messages": 3,
       "config": "configs/v13-5-functional-r15.json",
@@ -1429,7 +1443,131 @@
         "artifacts/v13-5/r15-workflows-entry.log": "38cb2c6d5d61fec232b71eb75ed3b4944de8d89a7cbdfd2a42a9f5a7869ef0ac",
         "artifacts/v13-5/r15-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
         "artifacts/v13-5/r15-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
-        "artifacts/v13-5/r15-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+        "artifacts/v13-5/r15-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/communication-r15/review.json": "bc315d287e6cd4e9998f661aba7ea0335d0d4f3e646b4a20bc635cd513e17741",
+        "artifacts/v13-5/communication-r15/seal.json": "b657e2e23e0d4ddc1c2b3a47af3c582f2ebdea549dbe7629d69209f7a3474c47",
+        "artifacts/v13-5/communication-r15-readonly-review.jsonl": "0fead5a1933ea58a66578cc2ae274ffbf471b39371ab13e6c2ef5704af412f2b"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2
+      },
+      "message_counts": {
+        "COMPLETED": 3
+      },
+      "retained_attempts": 4,
+      "cost_delta": {
+        "generation_requests": 17,
+        "generation.known_tokens": 97871,
+        "generation.charged_tokens": 97871,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "Actual first partial result reported in delivered final; memory exactly describes the selected business source, whose quote includes the real current-message attempt contract.",
+        "Later live query precedes one remaining label; same-ID revision2 selects actual successful label source. Old partial revision and exact quotes remain intact.",
+        "W3 commit resumes without another business mutation or semantic revision; actual receipts support final saving claim."
+      ],
+      "evidence": "../communication-r15-readonly-review.jsonl",
+      "limitations": [
+        "Two exposed stories only, not full L1/L2.",
+        "The direct policy clause is mechanically verified in actual delivered/selected source; this actual summary omits retry policy rather than directly paraphrasing it.",
+        "Some final prose is verbose; model intent and arbitrary semantic truth remain unchecked."
+      ],
+      "remote_ci": {
+        "commit": "1b3f38e2604dcdb6b416cbee702cc6c8444732b9",
+        "fast_run": 37092832045,
+        "fast_status": "success",
+        "full_run": 37092832041,
+        "full_status": "skipped"
+      }
+    },
+    {
+      "id": "l1-r15",
+      "layer": "L1",
+      "candidate_commit": "1b3f38e2604dcdb6b416cbee702cc6c8444732b9",
+      "state": "STOPPED_SHARED_INTENT_DECLARATION_CONFLICT",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "config": "configs/v13-5-functional-r15.json",
+      "admission": "r15 targeted actual partial/support and W3 passes; r14 full communication retained separately. Same final response framing, no budget changes.",
+      "grading": "Original rubric and additional direct source/scope/current-query/maintenance contracts scored separately. Original denominator retained, no pooling.",
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r15/input-freeze.json": "f9f332a9e3352942bfab1e19cf5396a1ef9631d07a1c3d89ed81815deb373188",
+        "configs/v13-5-functional-r15.json": "8f5f0c6914dcb6407f3de49aabbf81c7026dd18d67d6a151131901cf87f1805a",
+        "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+        "artifacts/v13-5/l1-r15/review.json": "03ffac8504d6a3427b63fb02bf9dc04be954b43d981076b5e5a072ff44ecf8d6",
+        "artifacts/v13-5/l1-r15/seal.json": "ee327c72698112fa8c983246176a8898c9c04a5e96125650275dff43b9926d5a",
+        "artifacts/v13-5/l1-r15-readonly-review.jsonl": "b13de8821bcbee31ed29f4fe0a2edb38930415c7b790a9940b6aeff70f35c239"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 2,
+        "NOT_RUN": 20
+      },
+      "message_counts": {
+        "COMPLETED": 7,
+        "FAILED": 2,
+        "NOT_RUN": 39
+      },
+      "retained_attempts": 10,
+      "cost_delta": {
+        "generation_requests": 31,
+        "generation.known_tokens": 110203,
+        "generation.charged_tokens": 110203,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "scope-1 team/week and scope-2 this demonstration retained; follow-up query no writes and correct answers.",
+        "update-3 same ID changed miles to kilometers with new correction source, preserves exact old history.",
+        "recall-3 explicit save committed before confirmation."
+      ],
+      "failures": [
+        "update-3 current/history query returns native flags maintenance=false and requires_memory_result=true twice including bounded resume. No Agent dispatch or usable answer.",
+        "recall-3 ordinary recall produces same contradictory flags. Shared interpretation defect confirmed; queue stopped before other 20 cases."
+      ],
+      "limitations": [
+        "Contradictory declaration rejected without inventing permission or mutating facts. The name requires_memory_result is interpreted as needing a read result, not necessarily a write.",
+        "Actual enum/flag semantics remain model interpretation; next repair removes redundant contradictory write-state encoding.",
+        "Original full24/48 denominator preserved; these are incomplete development failures, no L1 gate claim."
+      ],
+      "evidence": "../l1-r15-readonly-review.jsonl"
+    },
+    {
+      "id": "l1-r16",
+      "layer": "L1",
+      "candidate_commit": "pending_commit_before_model_execution",
+      "state": "FROZEN_NOT_RUN",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "config": "configs/v13-5-functional-r16.json",
+      "admission": "Changed only opt-in native intent declaration from redundant booleans to explicit write-state enum; existing response/tool communication retained. First batch directly checks failed recall/history and temporary scope. Full original denominator before outputs.",
+      "mechanical_verification": {
+        "entry_privacy_tests": "57 PASS including 6 new enum/permission/replay cases",
+        "production_tokenizer_scripted": "3 PASS; no actual HTTP",
+        "ruff": "PASS",
+        "mypy": "PASS 195 source files",
+        "boundary": "PASS"
+      },
+      "evidence_sha256": {
+        "configs/v13-5-functional-r16.json": "ef28a944142ddb16f1bf54447101be167e1e7f714ba29341da8acd2844a4de1f",
+        "artifacts/v13-5/l1-r16/input-freeze.json": "2c5f1c1c6eba9e56a80aa73311580a85eb2833028bf73ad31a3829e2351739d6",
+        "artifacts/v13-5/r16-entry-privacy.log": "3480b10cb30e517acf090f63d3168df8c4ec4444060ca5a2fe6c19b9cc8a39c6",
+        "artifacts/v13-5/r16-production-write-mode.json": "663e69866083abd80c8d7b61e13b8fcaa416e40db26f5ad05fd9f6459ce7e07d",
+        "artifacts/v13-5/r16-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r16-mypy.log": "a26123bd78884ea2ed677ffaab1876632f65611f63eae2bf70d9add013ad963f",
+        "artifacts/v13-5/r16-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "data/fixtures/v13-1-d0-normal.json": "5b2ef69fdcb36883faf476f6d0a2db63edc7c36e22e34178a6365d1a8066163c",
+        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb"
       }
     }
   ],

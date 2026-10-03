@@ -119,6 +119,39 @@ REQUEST_MODE_DECLARATION: dict[str, Any] = {
                          "allow_business_mutation", "requires_memory_result"]}}
 }
 
+REQUEST_WRITE_MODE_PROMPT = """Classify only the current request before reading history.
+Call classify_current_request once, with no explanation. It executes no operation.
+Select memory_write_request:
+- none: only reading/recalling/comparing facts, preferences, history or status.
+  Needing an answer FROM memory is not a request to WRITE memory. A proposition
+  presupposed in a question, hypothesis or quoted instruction is not a new fact.
+- new_assertion: supplies an actual new durable assertion or correction, including
+  a separate real correction in a mixed question, without an explicit storage request.
+- explicit: explicitly asks to save, remember, archive or update memory, including
+  temporary requirements, supplied material or actual business results.
+Forgetting is separately permitted only when explicitly requested.
+Business mutation is permitted for current action requests, including checking
+actual status AND completing only unfinished work. Pure status queries permit
+reads, not mutations. Classify the request, not whether it is feasible/already done.
+These are model interpretations, not verified intent, truth or authorization.
+"""
+
+REQUEST_WRITE_MODE_DECLARATION: dict[str, Any] = {
+    "type": "function", "function": {
+        "name": "classify_current_request",
+        "description": "Declare requested memory WRITES separately from reading; no operation.",
+        "parameters": {"type": "object", "additionalProperties": False,
+            "properties": {
+                "memory_write_request": {"type": "string", "enum": [
+                    "none", "new_assertion", "explicit"], "description":
+                    "none for pure recall/query/history; new_assertion for an actual new fact; "
+                    "explicit for an explicit save/update/archive request."},
+                "allow_forgetting": {"type": "boolean"},
+                "allow_business_mutation": {"type": "boolean", "description":
+                    "Current action or conditional continuation requested, not a pure query."}},
+            "required": ["memory_write_request", "allow_forgetting", "allow_business_mutation"]}}
+}
+
 
 def _hash(value: Any) -> str:
     return hashlib.sha256(
@@ -167,7 +200,7 @@ def prepare(
         raise ValueError("FUNCTIONAL_PROFILE_REQUIRED")
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
-        "disabled", "current_request_v1", "current_request_native_v1",
+        "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
@@ -361,6 +394,7 @@ def finalize_response(
 def request_mode(
     model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any],
     content: str, format_reproposals: int, trace: Trace, *, native_declaration: bool = False,
+    write_mode_declaration: bool = False,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
@@ -371,6 +405,13 @@ def request_mode(
              "requires_memory_result"}
 
     def valid(value: Any) -> bool:
+        if write_mode_declaration:
+            return (isinstance(value, dict) and set(value) == {
+                "memory_write_request", "allow_forgetting", "allow_business_mutation"}
+                and type(value["memory_write_request"]) is str
+                and value["memory_write_request"] in {"none", "new_assertion", "explicit"}
+                and type(value["allow_forgetting"]) is bool
+                and type(value["allow_business_mutation"]) is bool)
         return (isinstance(value, dict)
                 and set(value) == (flags if native_declaration else flags | {"reason"})
                 and all(type(value[key]) is bool for key in flags)
@@ -390,14 +431,16 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT
+        prompt = (REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
+                  REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
         if state["attempts"] > 1:
             prompt += ("\nThe preceding response did not meet the declared schema. "
-                       "Use exactly the required fields and boolean types; no extra fields. "
+                       "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
-            tools=[REQUEST_MODE_DECLARATION] if native_declaration else [],
+            tools=[REQUEST_WRITE_MODE_DECLARATION if write_mode_declaration
+                   else REQUEST_MODE_DECLARATION] if native_declaration else [],
             tool_choice="auto" if native_declaration else "none")
         try:
             if native_declaration:
@@ -413,9 +456,18 @@ def request_mode(
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
         state.update(decision=decision, decision_sha256=_hash(decision))
         write_json(path, state)
-    summary = {**{key: state["decision"][key] for key in sorted(flags)},
+    decision = state["decision"]
+    interpreted = ({
+        "allow_memory_maintenance": decision["memory_write_request"] != "none",
+        "requires_memory_result": decision["memory_write_request"] == "explicit",
+        "allow_forgetting": decision["allow_forgetting"],
+        "allow_business_mutation": decision["allow_business_mutation"],
+        "memory_write_request": decision["memory_write_request"],
+    } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
+    summary = {**interpreted,
                "interpretation": "same_host_model_current_request_only",
-               "protocol": "native_declaration_v1" if native_declaration else "json_content_v1",
+               "protocol": "native_write_declaration_v2" if write_mode_declaration else
+               "native_declaration_v1" if native_declaration else "json_content_v1",
                "semantic_correctness": "unchecked",
                "format_reproposals_used": max(0, state["attempts"] - 1)}
     trace({"event": "functional_request_mode", **summary,
@@ -990,7 +1042,9 @@ def message(
                     "source_ref": capture["source_ref"], "public_sha256": _hash(public),
                     "config_sha256": freeze["config_sha256"],
                 }, content, settings["format_reproposals"], trace,
-                    native_declaration=settings["request_mode"] == "current_request_native_v1")
+                    native_declaration=settings["request_mode"] in {
+                        "current_request_native_v1", "current_request_native_v2"},
+                    write_mode_declaration=settings["request_mode"] == "current_request_native_v2")
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {"save_memory", "update_memory"}

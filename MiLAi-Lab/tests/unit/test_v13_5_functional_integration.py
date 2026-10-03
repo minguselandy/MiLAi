@@ -30,6 +30,7 @@ def prepared(
     tmp_path: Path, *, queue_requests: int = 100, native: bool = False,
     request_interpretation: bool = False,
     readonly_finalization: bool = False,
+    write_mode_declaration: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -62,7 +63,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v1" if request_interpretation else "disabled",
+        "request_mode": "current_request_native_v2" if write_mode_declaration else
+        "current_request_native_v1" if request_interpretation else "disabled",
         "finalization": "readonly_response_v1" if readonly_finalization else "agent_final_v1",
         "formation_interface": "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
@@ -197,6 +199,63 @@ def test_focused_request_mode_removes_mutations_and_survives_resume(
     assert restored["generation_calls"] == 3  # One interpretation, two Agent requests.
     assert restored["request_mode"] == denied["request_mode"]
     assert restored["request_mode"]["semantic_correctness"] == "unchecked"
+
+
+@pytest.mark.parametrize("write_request", ["none", "new_assertion", "explicit"])
+def test_write_mode_declaration_derives_consistent_permissions_and_replays(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, write_request: str,
+) -> None:
+    root = prepared(tmp_path, native=True, write_mode_declaration=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            schema = wire["tools"][0]["function"]["parameters"]
+            assert set(schema["required"]) == {
+                "memory_write_request", "allow_forgetting", "allow_business_mutation"}
+            return native_call("classify_current_request", "mode",
+                memory_write_request=write_request, allow_forgetting=False,
+                allow_business_mutation=False)
+        if ordinal == 2:
+            catalog = {t["function"]["name"] for t in wire["tools"]}
+            assert ("save_memory" in catalog) == (write_request != "none")
+            if write_request != "none":
+                hs = [u["fragment_handle"] for u in materials(wire)["items"]
+                      if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+                return native_call("save_memory", "save", content="Mechanical preference.",
+                                   fragment_handles=hs)
+        return {"role": "assistant", "content": "No write requested." if write_request == "none"
+                else "Actual record saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "COMPLETED", first
+    mode = first["request_mode"]
+    assert mode["memory_write_request"] == write_request
+    assert mode["allow_memory_maintenance"] == (write_request != "none")
+    assert mode["requires_memory_result"] == (write_request == "explicit")
+    assert mode["protocol"] == "native_write_declaration_v2"
+    assert len(first["records"]) == (0 if write_request == "none" else 1)
+    count = len(wires)
+    replayed = message(root, resume=True)
+    assert replayed["status"] == "COMPLETED" and replayed["request_mode"] == mode
+    assert len(wires) == count
+
+
+@pytest.mark.parametrize("invalid", ["read", True, None])
+def test_write_mode_declaration_rejects_invalid_enum_without_permission_coercion(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, invalid: Any,
+) -> None:
+    root = prepared(tmp_path, native=True, write_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        "classify_current_request", "invalid", memory_write_request=invalid,
+        allow_forgetting=False, allow_business_mutation=False), native=True)
+    for resume in [False, True]:
+        result = message(root, resume=resume)
+        assert result["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+        assert not result["records"]
+    blocked = message(root, resume=True)
+    assert blocked["error"] == "FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED"
+    assert len(wires) == 2
 
 
 def test_request_mode_invalid_output_has_one_durable_reproposal_and_no_tools(
