@@ -327,7 +327,10 @@ def test_normal22_preserves_unknown_nonpasses_without_inventing_normal24_thresho
 @pytest.mark.parametrize('fault', ['none', 'text', 'role', 'session', 'source_id', 'hash',
                                   'render_hash', 'missing_render', 'missing_source', 'policy'])
 @pytest.mark.parametrize('hidden', [False, True])
-def test_program_final_requires_actual_bound_public_capture(fault: str, hidden: bool) -> None:
+@pytest.mark.parametrize('policy', ['receipt_business_response_v2', 'receipt_or_agent_response_v1'])
+def test_program_final_requires_actual_bound_public_capture(
+    fault: str, hidden: bool, policy: str,
+) -> None:
     import hashlib
     metadata = {'status': 'response_rendered', 'attempts': 0, 'tools_available': False,
                 'execution_candidate_delivered': False, 'protocol': 'receipt_business_response_v1',
@@ -343,7 +346,7 @@ def test_program_final_requires_actual_bound_public_capture(fault: str, hidden: 
                finalization=metadata, sources=[source], messages=[dict(type='ai', content=text)])
     event = dict(event='functional_receipt_finalization', **metadata,
                  final_text_sha256=EVAL.text_hash(text))
-    freeze = dict(run_id='run', config=dict(finalization='receipt_business_response_v2'))
+    freeze = dict(run_id='run', config=dict(finalization=policy))
     events = [event]
     if fault in {'text', 'role', 'session', 'source_id', 'hash'}:
         key = dict(text='content', role='role', session='session', source_id='event_id',

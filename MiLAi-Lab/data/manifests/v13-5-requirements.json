@@ -68,12 +68,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33安全失败状态正常交付；r32诊断误拦截原件保留，完整同版仍待复验。"
     },
     {
       "id": "FUNC-02",
@@ -138,12 +145,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33首次双声明拒绝后使用原一次格式修复，14尝试/13消息完整计账。"
     },
     {
       "id": "FUNC-04",
@@ -166,12 +180,19 @@
           "sha256": "a31e2315101e271ade31eff53c0868defe8b1582443a96c7360f87267715ed53",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-runs.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33保存均有真实回执；后续条件问句误触发维护并失败，没有虚构提交；不外推全部请求完成。"
     },
     {
       "id": "FUNC-05",
@@ -266,12 +287,19 @@
           "sha256": "a31e2315101e271ade31eff53c0868defe8b1582443a96c7360f87267715ed53",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-runs.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r29定向跨语言同ID修复通过；r33观鸟同ID撤销、历史、原来源正确，完整同版仍待验收。"
     },
     {
       "id": "FUNC-08",
@@ -295,12 +323,19 @@
           "sha256": "a31e2315101e271ade31eff53c0868defe8b1582443a96c7360f87267715ed53",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-runs.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33实际存储保留本次/尽量，但独立最终组织仍无依据强化，仍未通过。"
     },
     {
       "id": "FUNC-09",
@@ -329,12 +364,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33正常查询未改事实；遗忘后的条件查询误分类并以真实未完成终止，仍有行为缺口。"
     },
     {
       "id": "FUNC-10",
@@ -364,12 +406,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33遗忘实际撤销且未回流，保留审计不再拦截安全失败；后续条件问句意图错误使故事FAIL。"
     },
     {
       "id": "FUNC-11",
@@ -398,12 +447,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33partial真实查询后仅补标签，无重复；完整两工作流同版待复验。"
     },
     {
       "id": "FUNC-12",
@@ -434,12 +490,19 @@
           "sha256": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-l0.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "已有实现、真实回执/SQLite读回及限定机械证据；r28已跑完整L4但遗忘终态、历史检索、跨语言身份有失败。r29候选尚无完整同版模型验收，不能拼接旧轮次。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r33实际W1后实时查询，无重复效果；完整同版恢复仍待复验。"
     },
     {
       "id": "FUNC-13",
@@ -465,12 +528,19 @@
           "sha256": "a31e2315101e271ade31eff53c0868defe8b1582443a96c7360f87267715ed53",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-runs.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "假确认历史失败、跨语言重复记录、限定词/规范强度和Reader错误尚未形成同版无关键阻断闭环。r28撤销已实际同ID修订，不再沿用r27撤销未提交作当前证据。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "最新r33通信3/6限定通过，完整L1-L4同版本尚未通过；不拼接历史分数。"
     },
     {
       "id": "FUNC-14",
@@ -493,12 +563,19 @@
           "sha256": "a31e2315101e271ade31eff53c0868defe8b1582443a96c7360f87267715ed53",
           "scope": "development evidence as of r29 mechanical candidate; historical cohort identity retained",
           "snapshot_path": "artifacts/v13-5/requirements-r29-evidence/data/manifests/v13-5-runs.json"
+        },
+        {
+          "path": "artifacts/v13-5/communication-r33/review.json",
+          "snapshot_path": "artifacts/v13-5/communication-r33/review.json",
+          "sha256": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+          "scope": "sealed r33 communication only, actual terminal/cost and Root semantic review; no status promotion or cross-cohort pooling"
         }
       ],
       "limitations": [
         "连续账本及历史原件保留；r28遗忘提前返回缺终态，四次HTTP有原始trace和串行账本补充核对。r25读取一份CLI便捷副本覆盖已披露，不能声明所有轨迹字节完整。"
       ],
-      "assessment": "Root item-by-item development review, not independent acceptance"
+      "assessment": "Root item-by-item development review, not independent acceptance",
+      "latest_development_note": "r32/r33全部终态与连续计账保留、无新增unknown usage；旧r28终态缺口继续披露。"
     },
     {
       "id": "FUNC-15",
@@ -5149,8 +5226,8 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r29, model experiments not yet run",
-    "scope": "140 current evidence statuses, not terminal acceptance; original48 unchanged",
+    "candidate": "r34 mechanical candidate; latest sealed actual communication r33",
+    "scope": "140 scoped development statuses retained; r29 evidence snapshots remain historical. Actual r33 communication3PASS_SCOPED/3FAIL, not same-version full acceptance; original48 unchanged.",
     "reviewer": "Root",
     "independent_review": false
   }

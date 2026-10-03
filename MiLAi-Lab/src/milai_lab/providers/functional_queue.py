@@ -106,6 +106,7 @@ class FunctionalVLLMClient(VLLMClient):
     queue: FunctionalQueue
     declaration_capacity: HostCapacity | None = None
     declaration_tool_names: frozenset[str] = frozenset()
+    declaration_temperature: float | None = None
 
     def _post(
         self, path: str, request: dict[str, Any], *, capacity_receipt: dict[str, Any] | None = None
@@ -123,6 +124,8 @@ class FunctionalVLLMClient(VLLMClient):
             if self.declaration_capacity.enable_thinking is not False:
                 raise ValueError("FUNCTIONAL_DECLARATION_CAPACITY_MUST_DISABLE_THINKING")
             request = {**request, "chat_template_kwargs": {"enable_thinking": False}}
+            if self.declaration_temperature is not None:
+                request["temperature"] = self.declaration_temperature
             capacity_receipt = self.declaration_capacity.check(
                 request["messages"], self.config.max_tokens, catalog)
         self.queue.reserve(request, capacity_receipt)

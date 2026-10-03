@@ -3894,6 +3894,71 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "communication-r33",
+      "layer": "L0",
+      "candidate_commit": "e7d15d1c77baaf6662a523140a91a28166016297",
+      "state": "COMPLETE_COMMUNICATION_WITH_FINAL_SEMANTIC_AND_DECLARATION_FAILURES",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r33.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12192,
+        "generation": {
+          "charged_tokens": 40775030,
+          "known_tokens": 40744643,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r33/input-freeze.json": "4ea550d4f0e69ed8a8fdf4567a6f59a9d9ffc27a6f65c25c2a4e0b9147d06858",
+        "configs/v13-5-functional-r33.json": "f1c0cc6f0b7df6e1fad1546e724fa96e826b9c7f1d54f3429f64c3334d8d73b0",
+        "artifacts/v13-5/communication-r33/review.json": "d762bec90c6483cb578bc557df3406fdae01be8661bc3b0b884eb2f450cbb213",
+        "artifacts/v13-5/communication-r33/seal.json": "ed652bf51830d2adb462a838cda1bb02db093065b87bc086c360246683fa7704",
+        "artifacts/v13-5/communication-r33-review.jsonl": "f76403a57ec57de50aa9749c0fc30dc992c81aeaf13e53fd8e5d0684a1949ad7",
+        "artifacts/v13-5/communication-r33-review-notes.json": "6802f108b123db0c5ddb259739d102f26d9fa775719de08b4dfbb58d3f64cd26",
+        "artifacts/v13-5/communication-r33-evaluator/summary.json": "a368eca3ef9a28d53b2ea279e7e485523a8afd006fcc342c4be31c9db507e3c4"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 3,
+        "FAIL": 3
+      },
+      "message_counts": {
+        "COMPLETED": 11,
+        "UNKNOWN": 1,
+        "FAILED": 1
+      },
+      "retained_attempts": 14,
+      "cost_delta": {
+        "generation_requests": 51,
+        "generation.known_tokens": 244801,
+        "generation.charged_tokens": 244801,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed communication probe, not L4 acceptance. One bounded format resume retained. Private-audit failure delivery fix worked; ordinary answer composition and intent interpretation still fail. No output truncation this cohort, no effect replay.",
+      "reviewer": "Root",
+      "independent_review": false,
+      "remote_ci": {
+        "commit": "e7d15d1c77baaf6662a523140a91a28166016297",
+        "fast": {
+          "run_id": 37114652504,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37114652559,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

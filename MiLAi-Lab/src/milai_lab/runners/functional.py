@@ -290,6 +290,7 @@ def prepare(
         "formation_interface", "finalization", "read_exhaustion", "memory_completion",
         "source_selection", "failure_delivery", "business_completion",
         "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
+        "declaration_sampling",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -306,6 +307,11 @@ def prepare(
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_INVALID")
     if settings.get("declaration_thinking", "inherit") not in {"inherit", "disabled"}:
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INVALID")
+    if settings.get("declaration_sampling", "inherit") not in {"inherit", "greedy_v1"}:
+        raise ValueError("FUNCTIONAL_DECLARATION_SAMPLING_INVALID")
+    if (settings.get("declaration_sampling") == "greedy_v1"
+            and settings.get("declaration_thinking") != "disabled"):
+        raise ValueError("FUNCTIONAL_DECLARATION_SAMPLING_REQUIRES_EXPLICIT_PHASE")
     if settings.get("declaration_tool_choice", "auto") not in {"auto", "required"}:
         raise ValueError("FUNCTIONAL_DECLARATION_TOOL_CHOICE_INVALID")
     if settings.get("recent_context", "disabled") not in {
@@ -344,6 +350,7 @@ def prepare(
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
         "receipt_business_response_v2", "receipt_business_response_v3",
+        "receipt_or_agent_response_v1",
     }:
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
     if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
@@ -1310,6 +1317,8 @@ def message(
                     **settings["capacity"], "enable_thinking": False})
                 client.declaration_tool_names = frozenset({
                     "classify_current_request", "resolve_continuation_operations"})
+                if settings.get("declaration_sampling") == "greedy_v1":
+                    client.declaration_temperature = 0.0
             stack.enter_context(client)
             client.queue = FunctionalQueue(
                 root / "queue-admission.json", **settings["queue_limits"]
@@ -1760,7 +1769,8 @@ def message(
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
             if settings.get("finalization") in {
                     "readonly_response_v1", "receipt_business_response_v1",
-                    "receipt_business_response_v2", "receipt_business_response_v3"}:
+                    "receipt_business_response_v2", "receipt_business_response_v3",
+                    "receipt_or_agent_response_v1"}:
                 answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                   if recovery_path.exists() else 0)
                 effects = operation_status({**output, "world": app.snapshot()},
@@ -1771,11 +1781,12 @@ def message(
                     for_finalization=True)["llm_input_messages"]
                 if settings.get("finalization") in {
                         "receipt_business_response_v1", "receipt_business_response_v2",
-                        "receipt_business_response_v3"} and (
+                        "receipt_business_response_v3", "receipt_or_agent_response_v1"} and (
                         effects["business"]["operations"] or effects["business"]["observations"]
                         or (settings.get("finalization") == "receipt_business_response_v1"
                             and mode and mode["allow_business_mutation"])
-                        or (settings.get("finalization") == "receipt_business_response_v3"
+                        or (settings.get("finalization") in {
+                            "receipt_business_response_v3", "receipt_or_agent_response_v1"}
                             and effects["visibility"]["operations"])
                         or output.get("execution_stop")):
                     final = business_response(response_input, effects,
@@ -1788,6 +1799,21 @@ def message(
                            "final_text_sha256": hashlib.sha256(
                                str(final.content).encode()).hexdigest(),
                            "operation_status_sha256": _hash(effects)})
+                elif settings.get("finalization") == "receipt_or_agent_response_v1":
+                    # The Agent has already answered after the real tools. Retain
+                    # that checked text, without a second semantic rewrite. Its
+                    # operation status remains separately generated from receipts.
+                    final = messages[-1]
+                    if (not isinstance(final, AIMessage) or final.tool_calls
+                            or final_delivery(final.content)["status"] != "available"):
+                        raise IncompleteChatResponse("FUNCTIONAL_AGENT_FINAL_UNAVAILABLE")
+                    output["finalization"] = {
+                        "status": "agent_response_retained", "attempts": 0,
+                        "tools_available": False, "execution_candidate_delivered": True,
+                        "protocol": "agent_response_v1", "model_generation": False}
+                    trace({"event": "functional_agent_finalization", **output["finalization"],
+                           "final_text_sha256": hashlib.sha256(
+                               str(final.content).encode()).hexdigest()})
                 else:
                     final, output["finalization"] = finalize_response(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
@@ -1797,7 +1823,8 @@ def message(
                 output["execution_candidate_answer"] = messages[-1].content
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
-                messages = [*messages, final]
+                if final is not messages[-1]:
+                    messages = [*messages, final]
             output.update(
                 status="COMPLETED",
                 messages=[public_message_record(row) for row in messages],

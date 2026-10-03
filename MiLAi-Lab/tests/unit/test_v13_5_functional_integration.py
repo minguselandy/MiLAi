@@ -47,6 +47,7 @@ def prepared(
     operation_completion: bool = False,
     phase_thinking: bool = False,
     reasoning_history: bool = False,
+    direct_response: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -59,6 +60,7 @@ def prepared(
     tokenizer_wrapper.save_pretrained(str(directory))
     (directory / "chat_template.jinja").write_text(tokenizer_wrapper.chat_template)
     host = VLLMConfig(base_url="http://mechanical.invalid/v1/", model="mechanical-provider",
+                      temperature=1.0 if direct_response else 0,
                       max_tokens=4096, max_calls=24, enable_thinking=phase_thinking,
                       tool_mode="native" if native else "json_action")
     budget_path = tmp_path / "isolated-mechanical-budget.json"
@@ -73,6 +75,7 @@ def prepared(
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
+        "declaration_sampling": "greedy_v1" if direct_response else "inherit",
         "reasoning_history": "current_turn_native_v1" if reasoning_history else "discard",
         "recent_context": "bank_recent_v2" if operation_completion else
         "session_events_v1" if current_delivery else "disabled",
@@ -97,7 +100,8 @@ def prepared(
         "current_request_native_v3" if action_mode_declaration else
         "current_request_native_v2" if write_mode_declaration else
         "current_request_native_v1" if request_interpretation else "disabled",
-        "finalization": "receipt_business_response_v3" if operation_completion else
+        "finalization": "receipt_or_agent_response_v1" if direct_response else
+        "receipt_business_response_v3" if operation_completion else
         "receipt_business_response_v2" if current_delivery else
         "receipt_business_response_v1" if receipt_response else
         "readonly_response_v1" if readonly_finalization else "agent_final_v1",
@@ -2286,3 +2290,98 @@ def test_retained_audit_does_not_block_fresh_safe_provider_failure(
                                    content='Remember the marker ' + secret)
     assert archived['status'] == 'VISIBILITY_REVOKED' and archived['final_answer'] is None
     assert len(wires) == 10
+
+
+def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_receipt_checks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True)
+    answer = 'Saved: try short sentences only for this presentation.'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        declaration = ordinal in {1, 5, 7}
+        assert wire['temperature'] == (0 if declaration else 1)
+        assert wire['chat_template_kwargs']['enable_thinking'] is not declaration
+        if declaration:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal == 1 else 'none',
+                allow_forgetting=False,
+                business_action_request='perform' if ordinal == 7 else 'none',
+                business_operations=['reserve_and_label'] if ordinal == 7 else [])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': 'Saved without doing anything.'}
+        if ordinal == 3:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Try short sentences only here.',
+                               fragment_handles=hs)
+        if ordinal == 4:
+            return {'role': 'assistant', 'content': answer}
+        if ordinal == 6:
+            assert 'save_memory' not in {t['function']['name'] for t in wire['tools']}
+            return {'role': 'assistant', 'content': 'The stored limit applies only here.'}
+        if ordinal == 8:
+            return native_call('reserve_and_label', 'reserve', item_key='direct-response-item',
+                               quantity=1, destination='local', packing='box')
+        assert ordinal == 9
+        return {'role': 'assistant', 'content': 'DRAFT_FALSE_BUSINESS_NOT_DONE'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    args = dict(session='s1', message_id='save', content='Remember: try short sentences only here.')
+    saved = functional.message(root, **common, **args)
+    assert saved['status'] == 'COMPLETED' and saved['final_answer'] == answer
+    assert saved['operation_status']['semantic_memory']['status'] == 'committed'
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1
+    assert saved['finalization']['execution_candidate_delivered'] is True
+    assert len(wires) == 4 and len(saved['records']) == 1
+    assert sum(m.get('content') == answer for m in saved['messages']) == 1
+    assert functional.message(root, **common, **args) == saved and len(wires) == 4
+    query = functional.message(root, **common, session='s2', message_id='query',
+                               content='Does the stored limit apply everywhere?')
+    assert query['status'] == 'COMPLETED' and len(wires) == 6
+    assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+    operated = functional.message(root, **common, session='s3', message_id='reserve',
+                                  content='Reserve and label one direct-response-item.')
+    assert operated['status'] == 'COMPLETED' and len(wires) == 9
+    assert operated['operation_status']['business']['status'] == 'completed'
+    assert 'DRAFT_FALSE_BUSINESS_NOT_DONE' not in operated['final_answer']
+    assert 'direct-response-item' in operated['final_answer']
+    assert operated['finalization']['protocol'] == 'receipt_business_response_v1'
+
+
+@pytest.mark.parametrize('unusable', [None, '{'])
+def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, unusable: Any,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='The marker is blue.',
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': unusable, 'reasoning': 'Not an answer.'}
+        assert ordinal == 4 and not wire.get('tools') and wire.get('tool_choice') != 'auto'
+        return {'role': 'assistant', 'content': 'The marker was saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='save', content='Remember blue.')
+    failed = functional.message(root, **args)
+    assert failed['status'] == 'FAILED' and failed['final_delivery']['status'] == 'available'
+    assert failed['operation_status']['semantic_memory']['status'] == 'committed'
+    assert 'Not an answer.' not in failed['final_answer']
+    recovered = functional.message(root, **args, resume=True)
+    assert recovered['status'] == 'COMPLETED' and len(wires) == 4
+    assert recovered['final_answer'] == 'The marker was saved.'
+    assert len(recovered['records']) == 1 and recovered['records'][0]['value']['revision'] == 1
