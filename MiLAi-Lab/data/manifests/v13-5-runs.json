@@ -2295,6 +2295,94 @@
           "conclusion": "skipped"
         }
       }
+    },
+    {
+      "id": "l2-r24",
+      "layer": "L2",
+      "candidate_commit": "c6c2e8b229ffbc1b2db02c95a2af7a641761d353",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r24.json",
+      "admission": "Full12/26 before outputs; small complete receipt selection units and truthful failure status delivery, same caps/masks/query guard. Original protocol failures remain FAILED even if available receipt response; judge actual outcomes separately.",
+      "mechanical_verification": "119 entry/privacy/workflow PASS;6 production tokenizer scripted variants PASS;ruff/mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 11089,
+        "generation": {
+          "charged_tokens": 35060943,
+          "known_tokens": 35030556,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r24/input-freeze.json": "3919e5621cf71fab50cfbc3cf659e6503d92c71f94919a9ff887d79a9bde1af2",
+        "configs/v13-5-functional-r24.json": "5ec748a19104e65b15e858ac48ec86580c8b6f49ad67204d3d1b81d7262ab302",
+        "artifacts/v13-5/r24-entry-privacy-workflows.log": "211357bdd99e5bdb56bf962cb770735f21f0403270bc42bf8bf236fd800fec06",
+        "artifacts/v13-5/r24-production-contracts.json": "de95baa7bf98b98dcafc9deff8c723b2f3a5186e1ba6f306c4518f4cae22449a",
+        "artifacts/v13-5/r24-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r24-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r24-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/l2-r24/review.json": "51dfb6957242560c7b047b77edb5f3c57dc4bc5e7118a522fe0f1d8b3ac89a50",
+        "artifacts/v13-5/l2-r24/seal.json": "050c7c37990170f20d272c8a7b0268506f15f90aba558d4115ce1b8c7e8eba54",
+        "artifacts/v13-5/l2-r24-manual-grades.json": "cc9994e17841b7e13f8cfcecca8d0c1b0be2f38542a0fe30067a2b7dff621254",
+        "artifacts/v13-5/l2-r24-all-review.jsonl": "d4987d5b114648044eb8a35f6a4d35b4e7e644f6406d74605a1800b7021c262e",
+        "artifacts/v13-5/l2-r24-evaluator/summary.json": "ba59b6005780e9eca6659544e2b007d1ae3f54545e9fe122886c2d43fa1efb9d"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 11,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "UNKNOWN": 4
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 106,
+        "generation.known_tokens": 683596,
+        "generation.charged_tokens": 683596,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "case_review": {
+        "l2-r01": "Exact reservation and label, supported saved receipt; subsequent actual query, no repeat.",
+        "l2-r02": "Actual partial saved with its tool source; current query then only completes missing label.",
+        "l2-r03": "Supported partial; first pre-query label call refused before native; actual current query then one actual failed label attempt. Final actual readonly query returns prior failed attempt and present missing label.",
+        "l2-r04": "W1 after-native applied; later actual query discovers completed reservation/label, no repeated mutation. Original UNKNOWN retained.",
+        "l2-r05": "W1 before-native applied; admitted current continuation resolved prior operation through bounded ordinary material. Actual query not_found then one exact reservation/label. Original UNKNOWN retained.",
+        "l2-r06": "Supported original partial; external label completion applied. Actual readonly query distinguishes old/current state without maintenance.",
+        "l2-d01": "Actual exact draft/approval/publication and save; selected complete receipt units cover the approval and publication timestamps (summary to seconds); final actual readonly query. Direct previous support failure passed on this cohort.",
+        "l2-d02": "Actual stages and three distinct stage-observation records fully supported by selected complete tool receipts. Continuation actually queries approved/unpublished state; execution prose says it will publish but returns no tool call. Final renderer truthfully reports no new operation. Publication remains undone, semantic task FAIL despite COMPLETED.",
+        "l2-d03": "Create/approve and supported record, next current query then one failed publication, final readonly current query includes last attempt.",
+        "l2-d04": "W1 after actual publication applied; fresh query discovers publication with no repeated mutation; original UNKNOWN retained.",
+        "l2-d05": "Actual creation/approval; W1 before publication applied. Followup current query then only publication, no repeated draft or approval.",
+        "l2-d06": "Actual exact draft/approval/publication/save, selected complete actual receipt units and current-query source cover all summary details/timestamps. External v2 edit applied; live query distinguishes invalidated approval/current unpublished v2 and historical v1 publication."
+      },
+      "limitations": [
+        "Original UNKNOWN remains UNKNOWN, actual recovery reviewed per story.",
+        "d02 continuation only planned publication, did not call tool; not complete.",
+        "Same-version L1/L3/L4 not yet run."
+      ],
+      "remote_ci": {
+        "commit": "c6c2e8b229ffbc1b2db02c95a2af7a641761d353",
+        "fast": {
+          "run_id": 37102134345,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37102134358,
+          "conclusion": "skipped"
+        }
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

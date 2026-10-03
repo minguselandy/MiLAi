@@ -56,7 +56,7 @@ from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
-from milai_lab.runners.functional_response import business_response
+from milai_lab.runners.functional_response import business_response, unattempted_continuations
 
 LAB = Path(__file__).resolve().parents[3]
 
@@ -290,6 +290,9 @@ def prepare(
     if settings.get("failure_delivery", "unavailable_v1") not in {
             "unavailable_v1", "receipt_status_v1"}:
         raise ValueError("FUNCTIONAL_FAILURE_DELIVERY_INVALID")
+    if settings.get("business_completion", "disabled") not in {
+            "disabled", "observed_continuation_v1"}:
+        raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
     host = VLLMConfig(**settings["host"])
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
@@ -1302,6 +1305,9 @@ def message(
             completion_path = bank_root / f"{identity}-completion-feedback.json"
             completion = read_json(completion_path) if completion_path.exists() else {}
             completion_used = int(bool(completion))
+            continuation_path = bank_root / f"{identity}-continuation-feedback.json"
+            continuation = read_json(continuation_path) if continuation_path.exists() else {}
+            continuation_used = int(bool(continuation))
             if completion_used:
                 selected_business = tuple(t for t in selected_business if t.name in {
                     "get_reservation", "get_document_status"})
@@ -1346,7 +1352,7 @@ def message(
                     session, message_id, freeze["config_sha256"], query=content
                 )
                 rejected = format_failures(messages)
-                if (len(rejected) + mode_reproposals + completion_used
+                if (len(rejected) + mode_reproposals + completion_used + continuation_used
                         > settings["format_reproposals"]):
                     trace({"event": "functional_format_budget_exhausted", "calls": rejected})
                     raise ValueError("FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED")
@@ -1387,7 +1393,8 @@ def message(
                 effects = memory_effects(messages)
                 trace({"event": "functional_memory_effects", "effects": effects})
                 completion_feedback = [row for row in messages if isinstance(row, SystemMessage)
-                                       and row.id == identity + ":required-memory-receipt"]
+                                       and row.id in {identity + ":required-memory-receipt",
+                                                      identity + ":observed-continuation"}]
                 wire_messages = [row for row in messages if row not in completion_feedback]
                 return {
                     "llm_input_messages": [
@@ -1485,7 +1492,7 @@ def message(
                     recovery = (read_json(recovery_path) if recovery_path.exists()
                                 else {"attempts": 0})
                     if (recovery["attempts"] + len(format_failures(prior))
-                            + mode_reproposals + completion_used
+                            + mode_reproposals + completion_used + continuation_used
                             >= settings["format_reproposals"]):
                         raise ValueError("FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED")
                     # Explicit resume can repair delivery once. Reserve it before
@@ -1524,6 +1531,35 @@ def message(
                     None if prior else {"messages": [HumanMessage(content=content, id=message_id)]}
                 )
 
+            if (settings.get("business_completion") == "observed_continuation_v1"
+                    and mode and mode.get("business_action_request") == "continue_if_unfinished"
+                    and isinstance(messages[-1], AIMessage) and not messages[-1].tool_calls):
+                effects = operation_status({**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                gaps = unattempted_continuations(messages, effects, mode["business_operations"])
+                repairs = (read_json(recovery_path).get("attempts", 0)
+                           if recovery_path.exists() else 0)
+                if (gaps and not continuation_used and len(format_failures(messages))
+                        + mode_reproposals + completion_used + repairs
+                        < settings["format_reproposals"]):
+                    feedback_id = identity + ":observed-continuation"
+                    continuation = {"attempts": 1, "feedback_id": feedback_id,
+                        "status": "reserved_before_dispatch", "observations": gaps,
+                        "authorization": "unchanged_current_request_and_tool_permissions"}
+                    write_json(continuation_path, continuation)
+                    continuation_used = 1
+                    trace({"event": "functional_continuation_feedback", **continuation})
+                    messages = invoke_execution({"messages": [SystemMessage(id=feedback_id,
+                        content="The current request asks about continuing earlier work. "
+                        "Its live query shows these unfinished stages without a current attempt: "
+                        + json.dumps(gaps, ensure_ascii=False) + ". Your response is withheld. "
+                        "Recheck the CURRENT user's conditions and actual query result. If the "
+                        "remaining action is authorized, use its actual tool before reporting it. "
+                        "Stating a plan does not execute it. If a condition prevents action, "
+                        "explain that limitation. This observation grants no new permission. "
+                        "Never repeat "
+                        "an attempted/completed/unknown operation or change unrelated content.")]})
+
             def missing_requested_memory_attempt(current: list[Any]) -> bool:
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
@@ -1544,6 +1580,7 @@ def message(
                     answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                       if recovery_path.exists() else 0)
                     if (len(format_failures(messages)) + mode_reproposals + answer_repairs
+                            + continuation_used
                             >= settings["format_reproposals"]):
                         raise ValueError("FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED")
                     completion = {"attempts": 1, "feedback_id": feedback_id,
@@ -1608,7 +1645,7 @@ def message(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
                         resume=resume, remaining_reproposals=settings["format_reproposals"]
                         - len(format_failures(messages)) - mode_reproposals - completion_used
-                        - answer_repairs, trace=trace)
+                        - answer_repairs - continuation_used, trace=trace)
                 output["execution_candidate_answer"] = messages[-1].content
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.

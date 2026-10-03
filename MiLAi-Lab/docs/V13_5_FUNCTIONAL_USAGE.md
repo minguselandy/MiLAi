@@ -11,7 +11,7 @@ L2-r20 completed all12/26 with 6 scoped PASS and 6 FAIL: source selection, live-
 operation declaration omissions and redundant read exhaustion remain. Its exact Fast CI passed.
 R21 thinking declaration exhausted all8192 output tokens before any business action; that
 cohort stopped with 1 FAILED/25 NOT_RUN. R23 retains its mechanical fixes with nonthinking.
-R23 completed12/26 with10 scoped PASS and2 FAIL: incomplete selected timestamp support and a missing final after an unavailable-tool proposal. R24 uses complete small receipt units and receipt-based failure delivery while retaining FAILED and actual effects. These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
+R23 completed12/26 with10 scoped PASS and2 FAIL: incomplete selected timestamp support and a missing final after an unavailable-tool proposal. R24 uses complete small receipt units and receipt-based failure delivery while retaining FAILED and actual effects. R24 then completed12/26 with11 scoped PASS and1 FAIL: one continuation only announced a plan without calling the remaining publication tool. R25 adds a single shared-allowance review of actual observed missing stages without granting new permissions. These failures remain preserved. L3/L4 remain unrun. Full functional acceptance is still
 pending and no stable configuration is recommended. Earlier failures and scoped
 communication cohorts remain separate evidence; their scores are not pooled.
 See [current functional progress](V13_5_PROGRESS.md); the
@@ -24,8 +24,8 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r24.json` with a new root for current candidate
-validation. R24 uses native v5 with thinking disabled, with unchanged capacity/call/read limits.
+Use `configs/v13-5-functional-r25.json` with a new root for current candidate
+validation. R25 uses native v5 with thinking disabled, with unchanged capacity/call/read limits.
 It requires a current same-object query before a new mutation of an earlier operated object,
 and shows exact original content beside each business source fragment handle.
 R23 retains exact current-message save idempotency and first interprets the current

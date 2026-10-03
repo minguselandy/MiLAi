@@ -145,3 +145,62 @@ def business_response(
     if execution_stop:
         paragraphs.append("执行已停止: 追加读取额度已用完; 未继续办理剩余工作。已确认的效果保留。")
     return AIMessage(content="\n\n".join(paragraphs))
+
+
+def unattempted_continuations(
+    messages: list[Any], effects: dict[str, Any], allowed: list[str],
+) -> list[dict[str, Any]]:
+    """Identify literal missing stages from paired current public queries only.
+
+    This is feedback material, not authorization or proof an action is required.
+    Any current attempt, including none/unknown, prevents a retry suggestion.
+    """
+    business = effects["business"]
+    authorities = {r["receipt_ref"]: r for r in [
+        *business["operations"], *business["observations"]]}
+    calls: dict[str, str] = {}
+    attempted: set[tuple[str, str]] = set()
+    observed: dict[tuple[str, str], dict[str, Any]] = {}
+    target_fields = {"complete_label": "reservation_id", "publish_approved_document": "title"}
+    for message in messages:
+        if isinstance(message, AIMessage):
+            for call in message.tool_calls:
+                call_id = call.get("id")
+                if not isinstance(call_id, str):
+                    continue
+                calls[call_id] = call["name"]
+                name, args = call["name"], call["args"]
+                if (name in target_fields and authorities.get(call["id"], {}).get("tool") == name
+                        and isinstance(args.get(target_fields[name]), str)):
+                    attempted.add((name, args[target_fields[name]]))
+        elif isinstance(message, ToolMessage):
+            query_name = calls.get(message.tool_call_id)
+            authority = authorities.get(message.tool_call_id, {})
+            if (query_name != message.name
+                    or query_name not in {"get_reservation", "get_document_status"}
+                    or authority.get("tool") != query_name or not authority.get("executed")
+                    or authority.get("execution_receipt_status") != "complete"):
+                continue
+            try:
+                receipt = json.loads(str(message.content)).get("receipt")
+            except (ValueError, AttributeError):
+                continue
+            if not isinstance(receipt, dict) or receipt.get("status") != "found":
+                continue
+            operation = ("complete_label" if query_name == "get_reservation"
+                         else "publish_approved_document")
+            key = target_fields[operation]
+            if isinstance(receipt.get(key), str):
+                observed[(operation, receipt[key])] = {
+                    "receipt": receipt, "query_receipt_ref": message.tool_call_id}
+    result = []
+    for (operation, target), observation in observed.items():
+        receipt = observation["receipt"]
+        missing = (receipt.get("label_status") == "not_created" if operation == "complete_label"
+                   else receipt.get("approval_status") == "approved"
+                   and receipt.get("publication_status") == "not_published")
+        if operation in allowed and (operation, target) not in attempted and missing:
+            result.append({"operation": operation, "target_field": target_fields[operation],
+                           "target": target, "query_receipt_ref": observation["query_receipt_ref"],
+                           "interpretation": "observed_missing_stage_not_action_authorization"})
+    return result

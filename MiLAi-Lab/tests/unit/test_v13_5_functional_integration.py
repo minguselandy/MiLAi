@@ -39,6 +39,8 @@ def prepared(
     reference_mode_declaration: bool = False,
     receipt_units: bool = False,
     failure_receipts: bool = False,
+    business_feedback: bool = False,
+    format_allowance: int = 1,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -61,6 +63,7 @@ def prepared(
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v1" if failure_receipts else "unavailable_v1",
+        "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
             "tokenizer_files_sha256": {
                 name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
@@ -68,7 +71,8 @@ def prepared(
             "context_tokens": 32768, "output_tokens": 4096, "batch_source_tokens": 8192,
             "enable_thinking": False},
         "budget_path": str(budget_path), "max_calls_per_message": 24,
-        "ordinary_material_tokens": 8192, "additional_reads": 3, "format_reproposals": 1,
+        "ordinary_material_tokens": 8192, "additional_reads": 3,
+        "format_reproposals": format_allowance,
         "queue_limits": {"requests": queue_requests, "reserved_tokens": 2_000_000},
         "http_ownership_profile": "serialized_ledger_owner_v1",
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
@@ -1723,3 +1727,96 @@ def test_protocol_failure_delivers_receipts_without_repair_or_repeating_effects(
     assert len(result['world']['world']['attempts']) == 1 and len(wires) == 2
     replay = message(root)
     assert replay['final_answer'] == result['final_answer'] and len(wires) == 2
+
+
+@pytest.mark.parametrize('case', ['continue', 'readonly', 'condition_unmet', 'already_attempted',
+                                  'already_complete', 'allowance_exhausted'])
+def test_continuation_feedback_is_bounded_and_cannot_authorize_or_repeat_an_attempt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    receipt_response=True, business_feedback=True,
+                    format_allowance=0 if case == 'allowance_exhausted' else 1)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            action = 'perform' if ordinal == 1 else (
+                'none' if case == 'readonly' else 'continue_if_unfinished')
+            operations = ['reserve_and_label'] if ordinal == 1 else (
+                [] if case == 'readonly' else ['complete_label'])
+            return native_call('classify_current_request', 'mode'+str(ordinal),
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request=action, business_operations=operations)
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='feedback item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role':'assistant', 'content':'Partial reservation.'}
+        if ordinal == 5:
+            return native_call('get_reservation', 'query', item_key='feedback item')
+        if ordinal == 6 and case == 'already_attempted':
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('complete_label', 'once', reservation_id=receipt['reservation_id'])
+        if ordinal == 6 or case == 'already_attempted':
+            return {'role':'assistant', 'content':'I will continue next.'}
+        assert case != 'readonly'
+        assert 'observed_missing_stage_not_action_authorization' in wire['messages'][0]['content']
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'complete_label' in names and not names.intersection(
+            {'reserve_and_label', 'save_memory', 'update_memory', 'forget_memory'})
+        if ordinal == 7 and case == 'continue':
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('complete_label', 'continue-once',
+                               reservation_id=receipt['reservation_id'])
+        assert ordinal == (8 if case == 'continue' else 7)
+        return {'role':'assistant', 'content':'Current conditions prevent completion.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {'bank':'mechanical-bank','owner':'alice','session':'session'}
+    first = functional.message(root, **common, message_id='initial',
+        content='Reserve and label feedback item.',
+        initial_world={'label_available':case == 'already_complete'})
+    assert first['status'] == 'COMPLETED'
+    second_input = ('Check the current feedback item only.' if case == 'readonly' else
+                    'Check feedback item and continue its missing label if authorized.')
+    second = functional.message(root, **common, message_id='followup', content=second_input)
+    assert second['status'] == 'COMPLETED', second
+    feedbacks = list(root.glob('banks/*/*-continuation-feedback.json'))
+    assert bool(feedbacks) == (case in {'continue', 'condition_unmet'})
+    if feedbacks:
+        assert json.loads(feedbacks[0].read_text())['attempts'] == 1
+    business = second['operation_status']['business']
+    assert len(business['operations']) == int(case in {'continue','already_attempted'})
+    count = len(wires)
+    replay = functional.message(root, **common, message_id='followup', content=second_input,
+                                resume=True)
+    assert replay['final_answer'] == second['final_answer'] and len(wires) == count
+    assert len(replay['world']['world']['reservations']) == 1
+
+
+@pytest.mark.parametrize('mode', ['unknown_attempt', 'none_attempt', 'different_target',
+                                  'unpaired_query', 'missing_approval', 'eligible'])
+def test_continuation_observation_requires_current_paired_target_and_no_prior_attempt(
+    mode: str,
+) -> None:
+    from milai_lab.runners.functional_response import unattempted_continuations
+
+    query = {'name':'get_document_status','args':{'title':'bound title'},'id':'q'}
+    messages = [AIMessage(content='',tool_calls=[query]), ToolMessage(name='get_document_status',
+        tool_call_id='q', content=json.dumps({'receipt':{'status':'found','title':'bound title',
+            'approval_status':'not_approved' if mode == 'missing_approval' else 'approved',
+            'publication_status':'not_published'}}))]
+    effects = {'business':{'operations':[], 'observations':[] if mode == 'unpaired_query' else [
+        {'tool':'get_document_status','receipt_ref':'q','executed':True,
+         'execution_receipt_status':'complete'}]}}
+    if mode in {'unknown_attempt','none_attempt','different_target'}:
+        messages.append(AIMessage(content='',tool_calls=[{'name':'publish_approved_document',
+            'args':{'title':'other title' if mode == 'different_target' else 'bound title'},
+            'id':'mutation'}]))
+        effects['business']['operations'].append({'tool':'publish_approved_document',
+            'receipt_ref':'mutation','effect':'unknown' if mode=='unknown_attempt' else 'none'})
+    gaps = unattempted_continuations(messages, effects, ['publish_approved_document'])
+    assert bool(gaps) == (mode in {'eligible','different_target'})
+    if gaps:
+        assert gaps[0]['target'] == 'bound title' and gaps[0]['query_receipt_ref'] == 'q'
+    assert unattempted_continuations(messages, effects, []) == []
