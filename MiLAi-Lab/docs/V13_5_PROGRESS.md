@@ -672,3 +672,38 @@ Agent与最终响应保持thinking。单一客户端、原连续账本、持久�
 
 r29精确7bb5dc9的Fast CI37111431129成功，Full37111431145跳过。r30后恢复累计2,250
 生成、11,961,014 tokens；含暂停前旧轮v13.5为2,406生成、12,735,250 tokens。
+
+
+### r31真实截断与r32工具思考传输
+
+r31同6故事13消息通信停止：1 COMPLETED、1 FAILED、11 NOT_RUN，2保留尝试，
+6生成28,172 tokens。临时要求已实际保存且保留“仅本次”“尽量”限定，但工具返回后
+thinking再次耗尽8192输出，content为空。程序仍准确交付FAILED及语义已提交，没有
+重做保存，也没有把reasoning提升为答复。普通回答限定通过，其余故事未运行。
+
+r32修复独立确认的原生工具传输缺口：实际vLLM响应reasoning及reasoning_content别名
+归一保存在工具调用AI消息中，只在当前用户轮的后续工具续轮回传，并按实际template
+计入容量。默认关闭；旧轮、普通最终答案和独立最终组织输入不携带思考。W3重启保留
+真实调用的思考而不重做保存；遗忘后已暴露思考也从后续模型输入去除。思考不成为
+Source、引用、最终回答或公开messages字段；受保护checkpoint/provider审计仍保留。
+这不承诺物理擦除；实验world.receipt_progress本就是保留的评估审计侧录。
+
+依据为本地固定Qwen模板、已安装vLLM0.27.1源码及官方资料；记录于
+`data/manifests/v13-5-provider-protocol-references.json`。
+[Qwen模型卡](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)与
+[官方thinking工具续轮说明](https://docs.qwencloud.com/developer-guides/text-generation/thinking)
+支持保留当前轮工具思考；缺口已确认，但尚不能断言它是截断的充分原因，r30声明截断
+发生在工具历史存在之前。r32保持r31阶段策略、temperature0、prompt及所有限额不变，
+未启用跨用户轮preserve_thinking，也没有修改服务或tokenizer。
+
+145项入口/隐私/provider架构回归通过。最初新增测试误把整个诊断output（含既有保留
+审计侧录）当成已清除公开字段，产生4失败；改为分别核查最终答复/messages/可见来源
+和真实后续wire，并明确保留审计语义，原失败日志未覆盖。不是放宽Agent隐私过滤。
+后续先以同6/13曝光通信用例验证实际模型，机械通过不等于thinking稳定。
+
+r30 Fast CI37111788259与r31 Fast CI37112478193均成功，对应Full分别
+37111788261/37112478202跳过。恢复累计2,256生成、11,989,186 tokens；含旧轮
+v13.5合计2,412生成、12,763,422 tokens。没有新增unknown usage或embedding。
+
+r32生产Qwen tokenizer下4个工具思考/别名/W3恢复/遗忘变体通过（0真实HTTP），
+ruff、mypy、两项依赖边界通过；没有据此提升任何模型语义成绩。

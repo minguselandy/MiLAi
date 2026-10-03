@@ -46,6 +46,7 @@ def prepared(
     independent_capabilities: bool = False,
     operation_completion: bool = False,
     phase_thinking: bool = False,
+    reasoning_history: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -72,6 +73,7 @@ def prepared(
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
         "declaration_tool_choice": "required" if current_delivery else "auto",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
+        "reasoning_history": "current_turn_native_v1" if reasoning_history else "discard",
         "recent_context": "bank_recent_v2" if operation_completion else
         "session_events_v1" if current_delivery else "disabled",
         "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
@@ -2108,3 +2110,124 @@ def test_phase_thinking_uses_actual_templates_and_one_shared_admission(
     assert result['budget_after']['generation_requests'] == 4
     replay = message(root)
     assert replay['final_answer'] == result['final_answer'] and len(wires) == 4
+
+
+@pytest.mark.parametrize('field', ['reasoning', 'reasoning_content'])
+@pytest.mark.parametrize('interrupted', [False, True])
+def test_native_tool_reasoning_roundtrip_survives_reopen_and_is_removed_after_forget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, field: str, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True)
+    secret = 'MECHANICAL_REASONING_SECRET'
+    thought = 'The requested current value is ' + secret
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit', allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment' and secret in u['content']]
+            return {**native_call('save_memory', 'save', content=secret, fragment_handles=hs),
+                    field: thought}
+        if ordinal == 3:
+            assistant = next(m for m in wire['messages'] if m.get('tool_calls'))
+            assert assistant['reasoning_content'] == thought
+            assert actual_tool_receipt(wire)['status'] in {'committed', 'no_change'}
+            return {'role': 'assistant', 'content': 'Saved the requested marker.'}
+        if ordinal == 4:
+            assert 'reasoning_content' not in json.dumps(wire)
+            return {'role': 'assistant', 'content': 'The requested marker is saved.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return {**native_call('forget_memory', 'forget', read_handle=record['read_handle']),
+                    field: 'Forget this retrieved item: ' + secret}
+        assert ordinal == 7
+        assert secret not in json.dumps(wire)
+        assert not any('reasoning_content' in m for m in wire['messages'])
+        return {'role': 'assistant', 'content': 'Visibility revoked.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    args: dict[str, Any] = dict(session='s1', message_id='save', content='Remember ' + secret)
+    if interrupted:
+        args.update(evaluator_control={'one_shot_fault': {'message_index': 0, 'boundary': 'W3',
+            'target_operation': 'save_memory', 'occurrence': 1}}, message_index=0)
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert result['status'] == 'UNKNOWN' and len(wires) == 2
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == 'COMPLETED', result
+    assert len(wires) == 4 and len(result['records']) == 1
+    assert 'reasoning_content' not in json.dumps(result['messages'])
+    forgotten = functional.message(root, **common, session='s2', message_id='forget',
+                                   content='Forget the stored marker and its sources.')
+    assert forgotten['status'] == 'COMPLETED', forgotten
+    assert len(wires) == 7
+    visible = {key: forgotten[key] for key in ('final_answer', 'messages', 'records', 'sources')}
+    assert secret not in json.dumps(visible, ensure_ascii=False)
+    # The explicit evaluator sidecar is retained audit, never a Host tool/input.
+    # Visibility revocation does not physically erase operation journal artifacts.
+    assert secret in json.dumps(forgotten['world']['receipt_progress'])
+    assert all(r.get('status') == 'visibility_revoked' for r in forgotten['records'])
+
+
+@pytest.mark.parametrize('value', [None, '{'])
+def test_reasoning_never_replaces_unusable_final_content(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, value: Any,
+) -> None:
+    root = prepared(tmp_path, native=True, reasoning_history=True)
+    scripted(monkeypatch, lambda wire, ordinal: {
+        'role': 'assistant', 'content': value,
+        'reasoning': 'This is reasoning, not a final answer.'},
+        native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result.get('final_answer') != 'This is reasoning, not a final answer.'
+
+
+@pytest.mark.parametrize('enabled', [False, True])
+def test_native_reasoning_transport_is_current_turn_only_and_opt_in(enabled: bool) -> None:
+    from milai_lab.providers.chat_bridge import VLLMChatModel
+    from milai_lab.providers.contextual_vllm import VLLMClient
+    wires = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        return httpx.Response(200, json={'id': 'final', 'choices': [{'finish_reason': 'stop',
+            'message': {'role': 'assistant', 'content': 'Done.', 'reasoning': 'Not public.'}}]})
+
+    def reasoning_message(identity: str, thought: str) -> AIMessage:
+        return AIMessage(content='', additional_kwargs={'reasoning_content': thought},
+                         tool_calls=[{'id': identity, 'name': 'lookup', 'args': {}}])
+
+    messages = [HumanMessage(content='Old request.'), reasoning_message('old', 'OLD_THOUGHT'),
+        ToolMessage(tool_call_id='old', content='Old result.'),
+        HumanMessage(content='New request.'),
+        reasoning_message('new', 'CURRENT_THOUGHT'),
+        ToolMessage(tool_call_id='new', content='Current result.')]
+    with VLLMClient(VLLMConfig(base_url='http://mechanical.invalid/v1/', model='mechanical',
+        tool_mode='native'), transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client, preserve_tool_reasoning=enabled)
+        answer = model.invoke(messages, tools=[], tool_choice='none')
+    assert answer.content == 'Done.' and not answer.additional_kwargs
+    thoughts = [m['reasoning_content'] for m in wires[0]['messages'] if 'reasoning_content' in m]
+    assert thoughts == (['CURRENT_THOUGHT'] if enabled else [])
+    assert messages[1].additional_kwargs['reasoning_content'] == 'OLD_THOUGHT'
+
+
+@pytest.mark.parametrize('fields', [{'reasoning': ['invalid']},
+                                    {'reasoning': 'one', 'reasoning_content': 'another'}])
+def test_invalid_reasoning_fields_do_not_dispatch_native_tool(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fields: dict[str, Any],
+) -> None:
+    root = prepared(tmp_path, native=True, reasoning_history=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {
+        **native_call('search_memory', 'search', query='marker'), **fields}, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED' and len(wires) == 1
+    assert result['error'] == 'VLLM_CHAT_INVALID_REASONING_HISTORY'
+    assert result['world']['receipt_progress'] == {} and result['records'] == []

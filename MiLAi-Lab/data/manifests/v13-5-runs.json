@@ -3751,7 +3751,83 @@
       },
       "scope": "Exposed communication/qualification probe, generic L4 evaluator mode only. Root same-family review. Ordinary Chinese answer and actual temporary best-effort/this-task save plus query passed scoped. Partial workflow first declaration exhausted8192 output, one HTTP, no business/semantic effect; receipt failure response delivered. No retry or higher cap; remaining9messages not run.",
       "reviewer": "Root",
-      "independent_review": false
+      "independent_review": false,
+      "remote_ci": {
+        "fast": {
+          "run_id": 37111788259,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37111788261,
+          "conclusion": "skipped"
+        },
+        "commit": "f43a6cbd3b02ddb7162dabc55b5defe793f6e73f"
+      }
+    },
+    {
+      "id": "communication-r31",
+      "layer": "L0",
+      "candidate_commit": "d8281fea15a6e88cc83f2e8ad870a912bc8ae40a",
+      "state": "STOPPED_THINKING_POST_TOOL_TRUNCATION",
+      "planned_cases": 6,
+      "planned_messages": 13,
+      "config": "configs/v13-5-functional-r31.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 12132,
+        "generation": {
+          "charged_tokens": 40457923,
+          "known_tokens": 40427536,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r31/input-freeze.json": "b9ba26b89267b063fc9c8557ae2472d3522290d1eee04fb8de902b671bc84132",
+        "configs/v13-5-functional-r31.json": "64e1bb6dee4d30e706327c886ac24579753492503cb0cbbb5de3d89b05288f9e",
+        "artifacts/v13-5/communication-r31/review.json": "ce51eae2c7b9ccd1a646622a8a7d40688ea5aaa19be248e255a281d5a79e986a",
+        "artifacts/v13-5/communication-r31/seal.json": "1ad946091f9b7e3189824440e333b08fe8cb1974f847fe4ce95caffa99afbc93",
+        "artifacts/v13-5/communication-r31-review.jsonl": "25265d0712efe9589f2545aa898446e1632a9cc019f66f9ff87216c2c364007d",
+        "artifacts/v13-5/communication-r31-evaluator/summary.json": "dd41b5c924615a6a1769c7c1c8de918ea66e68012a0e86b78564993f32fb4433"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 1,
+        "FAIL_OR_INCOMPLETE": 1,
+        "NOT_RUN": 4
+      },
+      "message_counts": {
+        "COMPLETED": 1,
+        "FAILED": 1,
+        "NOT_RUN": 11
+      },
+      "retained_attempts": 2,
+      "cost_delta": {
+        "generation_requests": 6,
+        "generation.known_tokens": 28172,
+        "generation.charged_tokens": 28172,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "scope": "Exposed communication probe, generic L4 evaluator mode only. First ordinary answer succeeds. Temporary memory first message actually saves exact this-task and best-effort qualifications with real current source, then post-tool thinking loops and reaches8192 output. FAILED retained and truthful program status delivers semantic committed. No mutation replay or model resume, no reasoning promoted to final, other11messages not run.",
+      "reviewer": "Root",
+      "independent_review": false,
+      "remote_ci": {
+        "fast": {
+          "run_id": 37112478193,
+          "conclusion": "success"
+        },
+        "full": {
+          "run_id": 37112478202,
+          "conclusion": "skipped"
+        },
+        "commit": "d8281fea15a6e88cc83f2e8ad870a912bc8ae40a"
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

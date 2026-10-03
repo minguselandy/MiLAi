@@ -18,11 +18,13 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r31.json` is the current communication candidate: declarations
-use required native tools with thinking disabled; execution and final composition use
-thinking with unchanged limits. Each actual phase template is capacity-checked. R30
-all-phase thinking truncated during a declaration and remains failed. R31 must pass
-its six-story communication probe before any full L1 admission.
+`configs/v13-5-functional-r32.json` is the current communication candidate. Required
+native declarations disable thinking; execution and final composition retain it. Actual
+native tool-call reasoning is returned only within the current user turn and counted
+by the pinned template. It remains separate from public messages, answers and evidence.
+Private checkpoints and diagnostic traces retain audit data; this is not physical erasure.
+R30 declaration thinking and R31 post-tool thinking both truncated; their failed results
+remain recorded. R32 must pass its six-story communication probe before full L1 admission.
 
 The following r29 profile remains the latest completed targeted engineering regression
 (2 scoped PASS / 1 absence-inference FAIL, 3 stories / 9 messages), not stable acceptance.
@@ -32,8 +34,7 @@ validation. R29 uses native v6 with required declaration tool choice and thinkin
 with unchanged capacity/call/read limits. It recognizes actual forgetting as maintenance,
 uses receipt-derived visibility confirmation, and includes at most four recent visible
 records and four public events in the same owner/bank within the existing material budget.
-Supplied fixed candidate pools receive no recency supplementation. This is a candidate
-with mechanical checks only until its own actual model cohorts finish. Unknown top-level and capacity configuration keys
+Supplied fixed candidate pools receive no recency supplementation. Its completed targeted results are limited to those three stories. Unknown top-level and capacity configuration keys
 are rejected before preparing a run.
 It requires a current same-object query before a new mutation of an earlier operated object,
 and shows exact original content beside each business source fragment handle.

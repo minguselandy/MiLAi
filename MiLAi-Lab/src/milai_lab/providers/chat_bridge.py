@@ -140,6 +140,7 @@ class VLLMChatModel(BaseChatModel):
     model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
 
     allow_required_tool_choice: bool = Field(default=False, exclude=True)
+    preserve_tool_reasoning: bool = Field(default=False, exclude=True)
     client: VLLMClient
     max_calls_per_message: int = 12
     calls_in_message: int = 0
@@ -231,6 +232,20 @@ class VLLMChatModel(BaseChatModel):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
         native = self.client.config.tool_mode == "native"
+        if self.preserve_tool_reasoning:
+            if not native:
+                raise ValueError("TOOL_REASONING_HISTORY_REQUIRES_NATIVE")
+            last_user = max((i for i, row in enumerate(wire_messages) if row["role"] == "user"),
+                            default=-1)
+            for index, (original, wire) in enumerate(zip(messages, wire_messages, strict=True)):
+                if (last_user < 0 or index <= last_user or not isinstance(original, AIMessage)
+                        or not original.tool_calls):
+                    continue
+                reasoning = original.additional_kwargs.get("reasoning_content")
+                if reasoning is not None:
+                    if not isinstance(reasoning, str):
+                        raise ValueError("VLLM_CHAT_INVALID_REASONING_HISTORY")
+                    wire["reasoning_content"] = reasoning
         selected_communication = communication_profile(self.tool_schema_communication)
         if native and selected_communication != "legacy":
             wire_messages = _protocol_messages(
@@ -422,9 +437,19 @@ class VLLMChatModel(BaseChatModel):
         )
         self._notify_response(event)
         response_metadata.update(completion_metadata)
+        additional_kwargs: dict[str, Any] = {}
+        if self.preserve_tool_reasoning and native and calls:
+            fields = [wire_message[key] for key in ("reasoning", "reasoning_content")
+                      if wire_message.get(key) is not None]
+            if any(not isinstance(value, str) for value in fields) or (
+                    len(fields) == 2 and fields[0] != fields[1]):
+                raise IncompleteChatResponse("VLLM_CHAT_INVALID_REASONING_HISTORY")
+            if fields and fields[0]:
+                additional_kwargs["reasoning_content"] = fields[0]
         message = AIMessage(
             id=message_id,
             content=content,
+            additional_kwargs=additional_kwargs,
             tool_calls=calls,
             usage_metadata=usage_metadata,
             response_metadata=response_metadata,

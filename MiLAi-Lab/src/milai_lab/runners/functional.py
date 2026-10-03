@@ -289,7 +289,7 @@ def prepare(
         "revision", "change_intent", "request_mode", "business_attempt_policy",
         "formation_interface", "finalization", "read_exhaustion", "memory_completion",
         "source_selection", "failure_delivery", "business_completion",
-        "declaration_tool_choice", "recent_context", "declaration_thinking",
+        "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -302,6 +302,8 @@ def prepare(
     }
     if set(settings.get("capacity", {})) - capacity_keys:
         raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
+    if settings.get("reasoning_history", "discard") not in {"discard", "current_turn_native_v1"}:
+        raise ValueError("FUNCTIONAL_REASONING_HISTORY_INVALID")
     if settings.get("declaration_thinking", "inherit") not in {"inherit", "disabled"}:
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INVALID")
     if settings.get("declaration_tool_choice", "auto") not in {"auto", "required"}:
@@ -321,6 +323,8 @@ def prepare(
             "disabled", "observed_continuation_v1"}:
         raise ValueError("FUNCTIONAL_BUSINESS_COMPLETION_INVALID")
     host = VLLMConfig(**settings["host"])
+    if settings.get("reasoning_history") == "current_turn_native_v1" and host.tool_mode != "native":
+        raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
             host.tool_mode != "native" or host.enable_thinking is not True
             or settings.get("capacity", {}).get("enable_thinking") is not True
@@ -1098,6 +1102,15 @@ def _verified_forget_continuation(
                and row.tool_call_id in verified for row in messages)
 
 
+def public_message_record(message: Any) -> dict[str, Any]:
+    """Execution reasoning stays in the protected checkpoint/provider trace only."""
+    row = message.model_dump(mode="json")
+    if isinstance(message, AIMessage):
+        row["additional_kwargs"] = {key: value for key, value in row["additional_kwargs"].items()
+                                    if key not in {"reasoning", "reasoning_content"}}
+    return cast(dict[str, Any], row)
+
+
 def message(
     root: Path,
     *,
@@ -1289,6 +1302,8 @@ def message(
             model = LangMemRecipeChatModel(
                 client=client,
                 allow_required_tool_choice=settings.get("declaration_tool_choice") == "required",
+                preserve_tool_reasoning=(
+                    settings.get("reasoning_history") == "current_turn_native_v1"),
                 capacity_path=bank_root / "message-admission.json",
                 max_calls_per_message=settings["max_calls_per_message"],
                 generation_admission_profile="durable_shared_v1",
@@ -1770,7 +1785,7 @@ def message(
                 messages = [*messages, final]
             output.update(
                 status="COMPLETED",
-                messages=[row.model_dump(mode="json") for row in messages],
+                messages=[public_message_record(row) for row in messages],
                 final_answer=next(
                     (
                         row.content
@@ -1871,7 +1886,7 @@ def message(
                 try:
                     checkpoint = agent.get_state(cfg)
                     output["messages"] = [
-                        row.model_dump(mode="json") for row in checkpoint.values.get("messages", [])
+                        public_message_record(row) for row in checkpoint.values.get("messages", [])
                     ]
                     output["pending_nodes"] = list(checkpoint.next)
                 except Exception as checkpoint_error:
