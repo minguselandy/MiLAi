@@ -1,6 +1,10 @@
 # v13.5 functional profile
 
-**R48 passed 578 mechanical regressions and 29 production tokenizer/prompt probes; no model acceptance yet.** R47 stopped after its first story: an unsupported broader memory was accepted by its same-model review, then withdrawal generation truncated before tools. All11/27 remain in the denominator (1FAIL/10NOT_RUN). The comparison candidate below is not a stable recommendation.
+**R48 actual communication failed: 4 scoped PASS, 2 FAIL and 5 NOT_RUN out of the frozen 11 cases / 27 messages.** There were 15 COMPLETED, 1 FAILED and 11 unrun messages. Historical reading encoded unused optional selectors as empty strings and then the string `"None"`, exhausting the one format reproposal; no read or new write executed. Another final answer inferred restoration of a default rule without explicit support. Comparison rejected actual omitted limits, but also overrejected a correct partial-business interpretation. These limitations remain open.
+
+The source/frozen commit is `3c4dc23`: Fast CI 37149580600 succeeded; Full 37149580597 was skipped. Its 578 mechanical regressions and 29 production tokenizer/prompt probes passed, separately from model acceptance. The cohort added 69 generations / 363,875 tokens. Same-version L1–L4 are not admitted. No stable configuration is recommended; see the [r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md).
+
+R47 stopped after its first story: same-model review accepted broader formation, then withdrawal generation truncated before tools (1 FAIL / 10 NOT_RUN). R46 is the previous full communication cohort below; results are not pooled.
 
 **Historical r47 mechanical evidence, superseded by its actual failed run above:**
 It extends selected-original assessment to new memory content and scope before commit,

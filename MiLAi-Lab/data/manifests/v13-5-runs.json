@@ -7074,6 +7074,127 @@
       "reviewer": "Root same-family development review",
       "independent_review": false,
       "interpretation": "Stopped full11/27 after first story: initial one-occurrence scope and imagined modality lost despite same-model supported verdict; next withdrawal truncates before tools, no revision or business action.1COMPLETED1FAILED25NOTRUN;1FAIL10NOTRUN. No source identity damage or false new-save receipt; source assessment is not semantic certification. No implicit retry or reasoning-to-answer promotion."
+    },
+    {
+      "id": "communication-r48",
+      "layer": "communication",
+      "candidate_commit": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+      "state": "STOPPED_HISTORY_READ_OPTIONAL_ARGUMENT_FORMAT_FAILURE",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "config": "configs/v13-5-functional-r48.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 14120,
+        "generation": {
+          "charged_tokens": 51464839,
+          "known_tokens": 51434452,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r48/input-freeze.json": "ae88771583d521852f322126387b6b9307e0935fea824f3d3b424bb6acbe3f9e",
+        "configs/v13-5-functional-r48.json": "6557d9e0a2fc7be18aaca7e3d3cdf81325d31d948faad31376295b6d44212e29",
+        "artifacts/v13-5/communication-r48/review.json": "9f2d17cdc93b52f4b823dac985a1b3f406867b1a11953eed214ade20c105ecc7",
+        "artifacts/v13-5/communication-r48/seal.json": "edf7e2f62b9dc8e75283003a8eab49ca2d13606d9fd9a82e6e9543125d24ed17",
+        "artifacts/v13-5/communication-r48-manual-grades.json": "bf2fa96ff126f8046575287197f8072247c8b24f72032d9e48482a7e1e3e3570",
+        "artifacts/v13-5/communication-r48-review-notes.json": "600b577c478a423fd2b15137f2a009be700e939ed60e47d972606403dc8ec055",
+        "artifacts/v13-5/communication-r48-all-review.jsonl": "06dcdf965f321c1f535192abf96008519faba6e2cb598e3130dc08eceb5e8112",
+        "artifacts/v13-5/communication-r48-evaluator/summary.json": "06bdcb3b5f24fb152b6da38065884d8b6024d459e06c0fa679dfc43b293f9f5f",
+        "artifacts/v13-5/communication-r48-ledger-after.json": "8c2a304755b69f99b259c231a16e9daf4223118e3f0fb69f0c086de670397850",
+        "artifacts/v13-5/communication-r48/targeted-review.json": "8a0156e67625c42c199cf87dde43e96cbf8fcef41b96a4385dbe1787c60a95ea"
+      },
+      "semantic_counts": {
+        "FAIL": 2,
+        "PASS_SCOPED": 4,
+        "NOT_RUN": 5
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "FAILED": 1,
+        "NOT_RUN": 11
+      },
+      "retained_attempts": 16,
+      "cost_delta": {
+        "generation_requests": 69,
+        "generation.known_tokens": 363875,
+        "generation.charged_tokens": 363875,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 16,
+      "independent_sqlite": {
+        "records": 6,
+        "exact_quote_identity_checks": 32,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l4-n03": {
+          "status": "FAIL",
+          "reason": "Actual new formation rejects initial broadened scope, then commits one corrected rev1 preserving this occurrence and imagined modality. Actual current cancellation supports same-ID rev2, old history/support and other activities ten minutes preserved. Final readonly answers requested facts correctly but adds unqualified return-to-normal inference for birdwatching, which the source does not explicitly establish after ending/cancelling that arrangement. Retain ordinary answer-support failure despite successful formation/revision; no repeated effect, source corruption or false-save claim. Short internal record ID in first answer is an additional presentation limitation.",
+          "breakpoint": "final_adds_unqualified_default_restoration_after_cancellation",
+          "dimensions": {
+            "answer_satisfies_request": false
+          }
+        },
+        "communication-partial": {
+          "status": "PASS_SCOPED",
+          "reason": "One actual reservation with label unavailable; after two rejected save proposals, one rev1 record commits the actual native partial result and source. First review overrejects the valid reservation-success/label-failure interpretation of the known compound status; second returns supported with nonempty differences and is rejected deterministically. This false-negative/overliteral review limitation is retained; final stored result is accurate and both failed attempts remain partial aggregate. Followup performs live get_reservation before complete_label, only one reservation and one label effect; no new semantic write or unavailable proposal, historical partial record not passed off as current state. No replay or false success."
+        },
+        "l4-g02": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial native formation preserves personal baking practice and manufacturer-label exclusion. Mixed historical query/current correction uses actual current correction fragment for same-ID rev2 ounces-to-grams update; old basis/kind support and original revision retained. Final accurately answers previous/current units and unchanged exclusion. Readonly followup gives grams/exclusion without writes or assigning a manufacturer label unit. Quote identity/current=latest pass; no business effect."
+        },
+        "l4-h06": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial save proposal omits personal subject, comparison rejects; corrected personal assertion commits one rev1 record. Followup uses actual confirm_existing_memory and current read handle; paired no_change/effect none keeps same ID/rev1/history/support. Final says unchanged and does not claim a new save; no revision review for confirmation. Literal quote/current=latest pass."
+        },
+        "l4-h03": {
+          "status": "PASS_SCOPED",
+          "reason": "Initial only-this-Saturday/best-effort preference is accurately saved. Current cancellation fragment supports same-ID rev2 whole withdrawal; original content/support/history and cancellation support retained. Readonly final reports inactive rule and quotes original assertion exactly (no extra 在); no new tool/write or resurrection. Literal quotes/current=latest pass. Unnecessary record ID/status-code disclosure remains a presentation limitation, not a new storage claim."
+        },
+        "l4-g03": {
+          "status": "FAIL",
+          "reason": "Initial this-week/best-effort save and current-source same-ID rev2 whole withdrawal pass; old support/history remain. Final readonly historical query sends read_memory revision/cursors as empty strings, then string None after first format rejection, exhausting one format reproposal. Both are invalid arguments; no final historical answer delivered, no writes/revival. Original retracted record, source quotes and current=latest intact. First error and corrected-but-still-invalid proposal retained; remaining11 messages stopped.",
+          "breakpoint": "history_read_optional_controls_encoded_as_empty_or_None_strings",
+          "dimensions": {
+            "answer_satisfies_request": false,
+            "actual_delivery_and_history": false
+          }
+        },
+        "communication-answer": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+        },
+        "communication-memory": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+        },
+        "communication-recovery": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+        },
+        "l4-n08": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+        },
+        "l4-f03": {
+          "status": "NOT_RUN",
+          "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "interpretation": "Stopped full frozen11/27 after historical-read optional arguments were encoded as empty strings then string None, exhausting the one format allowance:4PASS_SCOPED2FAIL5NOT_RUN;15COMPLETED1FAILED11NOT_RUN. Actual comparison rejected omitted limits and supported-with-differences; one valid partial-business interpretation was overrejected. Formation and selected-source revisions succeeded in attempted stories, but ordinary final adds unsupported default-restoration inference. Six records/32 quote identities/current=latest intact; no repeated business or automatic retry. No same-version L1-L4 admission or semantic certification."
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -7462,8 +7583,15 @@
         "artifacts/v13-5/r48-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
         "artifacts/v13-5/r48-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
         "artifacts/v13-5/r48-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      },
+      "remote_ci": {
+        "path": "artifacts/v13-5/r48-ci.json",
+        "sha256": "f0199b6b51d70697a3168bda8620d66d71a147379beec066edcef4555a83574e",
+        "commit": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+        "fast": "SUCCESS run37149580600",
+        "full": "SKIPPED run37149580597; not a pass"
       }
     }
   ],
-  "current_checkpoint": "data/manifests/v13-5-checkpoint-r47-20261004.json"
+  "current_checkpoint": "data/manifests/v13-5-checkpoint-r48-20261004.json"
 }

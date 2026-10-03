@@ -2,11 +2,13 @@
 
 ## Current development checkpoint — 2026-10-04
 
-[r47 checkpoint](V13_5_CHECKPOINT_r47_20261004.md): 559 mechanical regressions,
-26 production tokenizer/prompt probes and 4 installed SDK checks passed; no r47
-model cohort has run. Latest actual r46 communication is 9 scoped PASS / 2 FAIL
-over all 11 cases / 27 messages. Full development remains incomplete, Product NO_GO.
-See [current progress](V13_5_PROGRESS.md) for separate versioned results and remaining acceptance.
+[r48 checkpoint](V13_5_CHECKPOINT_r48_20261004.md): actual communication is 4 scoped PASS,
+2 FAIL and 5 NOT_RUN over the frozen 11 cases / 27 messages (15 COMPLETED, 1 FAILED,
+11 NOT_RUN). Historical-read argument formatting and an unsupported final inference remain.
+The source commit 3c4dc23 passed Fast CI; Full was skipped. Its 578 mechanical regressions
+and 29 production tokenizer/prompt probes remain separate evidence. Full development is
+incomplete, Product NO_GO. See [current progress](V13_5_PROGRESS.md) for versioned results.
+The [r47 pre-model checkpoint](V13_5_CHECKPOINT_r47_20261004.md) remains historical.
 
 ## Current results and execution status — 2026-09-29
 
