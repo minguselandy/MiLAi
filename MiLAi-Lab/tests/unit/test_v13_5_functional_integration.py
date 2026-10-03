@@ -53,6 +53,7 @@ def prepared(
     withdrawal_evidence: bool = False,
     reviewed_evidence: bool = False,
     anchored_evidence: bool = False,
+    distinct_withdrawal: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -115,7 +116,8 @@ def prepared(
         "memory_completion": "declared_operations_v3" if operation_completion else
         "declared_writes_v2" if fresh_completion else
         "declared_writes_v1" if declared_writes else "explicit_only_v1",
-        "formation_interface": "anchored_assertion_v1" if anchored_evidence else
+        "formation_interface": "anchored_assertion_v2" if distinct_withdrawal else
+        "anchored_assertion_v1" if anchored_evidence else
         "reviewed_assertion_v1" if reviewed_evidence else
         "unified_assertion_v3" if withdrawal_evidence else
         "unified_assertion_v2" if replacement_evidence else
@@ -2613,10 +2615,12 @@ def test_revision_review_tool_shows_wrong_source_before_commit(
 
 
 @pytest.mark.parametrize("withdraw", [False, True])
+@pytest.mark.parametrize("distinct", [False, True])
 def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool, distinct: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, anchored_evidence=True,
+                    distinct_withdrawal=distinct,
                     direct_response=True, phase_thinking=True, actual_capabilities=True,
                     current_delivery=True)
     proposed: dict[str, Any] = {}
@@ -2636,7 +2640,8 @@ def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
             record = next(u for u in packet['items'] if u['type'] == 'record')
             old = next(u['fragment_handle'] for u in packet['items']
                        if u['type'] == 'fragment' and 'unit A' in u['content'])
-            selected = [{'fragment_handle': old, 'supporting_words': cue}]
+            selected = [{'fragment_handle': old, 'supporting_words':
+                         'unit A' if distinct and withdraw else cue}]
             proposed.update(read_handle=record['read_handle'], changes=[] if withdraw else [{
                 'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
                 'evidence_for_new_value': selected}])
@@ -2646,7 +2651,9 @@ def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
         assert ordinal == 4
         rejected = actual_tool_receipt(wire)
         assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
-        assert 'EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT' in rejected['reason']
+        expected_error = ('WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT' if distinct and withdraw else
+                          'EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT')
+        assert expected_error in rejected['reason']
         assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
         selected = [{'fragment_handle': current[0], 'supporting_words': cue}]
         if withdraw:

@@ -765,10 +765,11 @@ def test_short_evidence_cue_rejects_wrong_fragment_and_keeps_actual_changed_supp
             assert query not in current["source_refs"]
 
 
+@pytest.mark.parametrize("profile", ["anchored_assertion_v1", "anchored_assertion_v2"])
 def test_evidence_cue_keeps_same_source_reinterpretation_and_exact_no_change_legal(
-    tmp_path: Path,
+    tmp_path: Path, profile: str,
 ) -> None:
-    with opened(tmp_path, formation_interface="anchored_assertion_v1") as memory:
+    with opened(tmp_path, formation_interface=profile) as memory:
         ref = turn(memory, text="Work days only: favor short replies; weekends unrestricted.")
         saved = memory.save(cfg(), "save", "Favor short replies on work days.",
                             handles(memory, ref), {})
@@ -784,6 +785,67 @@ def test_evidence_cue_keeps_same_source_reinterpretation_and_exact_no_change_leg
         args["changes"][0]["evidence_for_new_value"] = []
         no_change = invoke(memory, "update_memory", args, "same")
         assert no_change["status"] == "no_change" and no_change["revision"] == 2
+
+
+@pytest.mark.parametrize("archived", [False, True])
+@pytest.mark.parametrize("alias", ["original", "subset", "union"])
+def test_withdrawal_cannot_reuse_only_affirmation_even_with_valid_literal_cue(
+    tmp_path: Path, archived: bool, alias: str,
+) -> None:
+    with opened(tmp_path, formation_interface="anchored_assertion_v2") as memory:
+        affirmation = "Only this trial: prefer window seats."
+        old = turn(memory, text=affirmation)
+        prior_handles = ([memory.service.source_fragment_range(old, start, end)["fragment_handle"]
+                          for start, end in [(0, 15), (15, len(affirmation))]] if alias == "union"
+                         else handles(memory, old))
+        saved = memory.save(cfg(), "save", "Only this trial: prefer window seats.",
+                            prior_handles, {})
+        before = memory.service.read(saved["id"])
+        cancel = turn(memory, "cancel", "Withdraw that entire preference; keep history.")
+        message = "later" if archived else "cancel"
+        if archived:
+            turn(memory, "later", "Apply the earlier cancellation, not a new fact.")
+        old_handle = (memory.service.source_fragment_range(old, 0, 15)["fragment_handle"]
+                      if alias == "subset" else handles(memory, old)[0])
+        args = {"read_handle": before["candidate_handle"], "changes": [], "retract": True,
+                "evidence_for_withdrawal": [{"fragment_handle": old_handle,
+                                             "supporting_words": "Only this trial"}]}
+        refused = invoke(memory, "update_memory", args, "wrong-affirmation", cfg(message))
+        assert refused["status"] == "rejected" and refused["effect"] == "none"
+        assert "WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT" in refused["reason"]
+        assert memory.service.read(saved["id"])["value"] == before["value"]
+        args["evidence_for_withdrawal"] = [{"fragment_handle": handles(memory, cancel)[0],
+                                          "supporting_words": "Withdraw that entire preference"}]
+        result = invoke(memory, "update_memory", args, "actual-cancellation", cfg(message))
+        assert result["ok"] and result["revision"] == 2
+        after = memory.service.read(saved["id"], 2)["value"]
+        support = after["removed_field_support"]["record"]
+        assert support["source_refs"] == [cancel] and support["semantic_support"] == "unchecked"
+        assert memory.service.read(saved["id"], 1)["value"] == before["value"]
+
+
+def test_withdrawal_accepts_distinct_span_in_same_archived_source_not_query_trigger(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, formation_interface="anchored_assertion_v2") as memory:
+        affirmation = "Use green markers."
+        cancellation = "Withdraw the marker preference."
+        ref = turn(memory, text=affirmation + "\n" + cancellation)
+        first = memory.service.source_fragment_range(ref, 0, len(affirmation))
+        second = memory.service.source_fragment_range(
+            ref, len(affirmation) + 1, len(affirmation) + 1 + len(cancellation))
+        saved = memory.save(cfg(), "save", affirmation, [first["fragment_handle"]], {})
+        query = turn(memory, "later", "Apply the cancellation already in the archive.")
+        args = {"read_handle": memory.service.read(saved["id"])["candidate_handle"],
+                "changes": [], "retract": True,
+                "evidence_for_withdrawal": [{"fragment_handle": second["fragment_handle"],
+                                             "supporting_words": "Withdraw the marker preference"}]}
+        receipt = invoke(memory, "update_memory", args, "withdraw", cfg("later"))
+        assert receipt["ok"] and receipt["revision"] == 2
+        current = memory.service.read(saved["id"], 2)["value"]
+        support = current["removed_field_support"]["record"]
+        assert support["source_refs"] == [ref] and query not in current["source_refs"]
+        assert support["quotes"][0]["content"] == cancellation
 
 
 def test_revision_preview_withdrawal_and_oversize_never_write_before_confirmation(

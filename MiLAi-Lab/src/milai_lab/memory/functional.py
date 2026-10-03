@@ -111,7 +111,8 @@ class FunctionalMemory:
         self.service, self.token_count = service, token_count
         if formation_interface not in {
             "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
-            "unified_assertion_v3", "reviewed_assertion_v1", "anchored_assertion_v1"}:
+            "unified_assertion_v3", "reviewed_assertion_v1", "anchored_assertion_v1",
+            "anchored_assertion_v2"}:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -709,6 +710,8 @@ class FunctionalMemory:
                                 canonical(after[path])] + list(removed.values())
             if retract:
                 selected_changes.append(fragment_handles or [])
+                if self.formation_interface == "anchored_assertion_v2":
+                    self._require_distinct_withdrawal_support(old, fragment_handles or [])
             for selected in selected_changes:
                 fragment_support(self.service, selected)
             new = fragment_support(self.service, list(dict.fromkeys(
@@ -815,6 +818,37 @@ class FunctionalMemory:
             self.service.store.put(namespace(self.service), token, identity, index=False)
             note_exposure(self.service, bound["source_ref"], proposal["source_refs"])
         return result
+
+    def _require_distinct_withdrawal_support(
+        self, old: dict[str, Any], handles: list[str],
+    ) -> None:
+        """A withdrawal needs a witness beyond the preserved affirmation's spans.
+
+        This is a provenance constraint, not an entailment test. An archived event
+        or another span in the same Source can qualify; current input is not added.
+        Ordinary revisions and exact no_change do not use this constraint.
+        """
+        selected = fragment_support(self.service, handles)
+        prior = [quote for support in old.get("functional_support", {}).values()
+                 for quote in support.get("quotes", [])]
+        if not prior:
+            raise FunctionalRejection("V13_5_WITHDRAWAL_PRIOR_SUPPORT_UNAVAILABLE")
+        identity = ("source_ref", "source_sha256", "body_text_sha256")
+        for quote in selected["quotes"]:
+            covered_until = quote["start"]
+            intervals = sorted((p["start"], p["end"]) for p in prior
+                               if all(p[key] == quote[key] for key in identity))
+            for start, end in intervals:
+                if start > covered_until:
+                    break
+                covered_until = max(covered_until, end)
+            if covered_until < quote["end"]:
+                return
+        raise FunctionalRejection(
+            "V13_5_WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT: select an actual cancellation "
+            "witness beyond the record's existing affirmative support ranges; an archived "
+            "event or a different span in the same Source is allowed. No source was added "
+            "or substituted and no withdrawal was committed. Distinctness does not verify meaning.")
 
     def _cue_handles(self, cues: list[FragmentCue]) -> list[str]:
         if not cues:
@@ -1352,11 +1386,23 @@ class FunctionalMemory:
             save_assertion, name="save_memory", args_schema=SavedAssertion)
             if self.formation_interface in {
                 "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3",
-                "reviewed_assertion_v1", "anchored_assertion_v1"}
+                "reviewed_assertion_v1", "anchored_assertion_v1", "anchored_assertion_v2"}
             else StructuredTool.from_function(save_memory))
+        withdrawal_description = (
+            str(anchored_assertion.__doc__) + "\nFull-record withdrawal additionally "
+            "requires at least one cancellation witness outside the preserved "
+            "record's existing support ranges. Repeating only its old affirmation "
+            "is rejected even when supporting_words match it. Archived events or "
+            "other spans in the same Source remain eligible; no current input is "
+            "automatically evidence. If no such witness is available, do not "
+            "claim withdrawal success. This restriction does not apply to ordinary "
+            "same-source revisions or exact no_change."
+            if self.formation_interface == "anchored_assertion_v2" else None)
         update_tool = (StructuredTool.from_function(
-                           anchored_assertion, name="update_memory")
-                       if self.formation_interface == "anchored_assertion_v1"
+                           anchored_assertion, name="update_memory",
+                           description=withdrawal_description)
+                       if self.formation_interface in {
+                           "anchored_assertion_v1", "anchored_assertion_v2"}
                        else StructuredTool.from_function(
                            reviewed_assertion, name="update_memory")
                        if self.formation_interface == "reviewed_assertion_v1"

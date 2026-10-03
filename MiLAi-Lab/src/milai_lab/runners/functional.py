@@ -353,6 +353,7 @@ def prepare(
         "unified_assertion_v3",
         "reviewed_assertion_v1",
         "anchored_assertion_v1",
+        "anchored_assertion_v2",
     } or settings.get("finalization", "agent_final_v1") not in {
         "agent_final_v1", "readonly_response_v1", "receipt_business_response_v1",
         "receipt_business_response_v2", "receipt_business_response_v3",

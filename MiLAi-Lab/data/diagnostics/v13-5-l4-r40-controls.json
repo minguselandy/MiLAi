@@ -1,0 +1,46 @@
+{
+  "kind": "v13_5_evaluator_controls",
+  "runtime_prompt_readable": false,
+  "cases": [
+    {
+      "case_id": "l4-h09",
+      "before_message_events": [
+        {
+          "before_message_index": 1,
+          "operation": "reservation.set_label_available",
+          "event_id": "l4-h09-service-restored",
+          "available": true
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h10",
+      "before_message_events": [
+        {
+          "before_message_index": 1,
+          "operation": "document.set_publication_available",
+          "event_id": "l4-h10-service-restored",
+          "available": true
+        },
+        {
+          "before_message_index": 2,
+          "operation": "document.external_edit",
+          "event_id": "l4-h10-new-draft",
+          "owner_from_case": true,
+          "title": "遮阳帘维护说明",
+          "new_body": "闭馆前检查拉绳和固定件，发现异常暂停使用。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h11",
+      "one_shot_fault": {
+        "message_index": 0,
+        "target_operation": "reserve_and_label",
+        "occurrence": 1,
+        "window": "W1",
+        "boundary": "after_native_before_journal_complete"
+      }
+    }
+  ]
+}
