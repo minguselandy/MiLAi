@@ -2,7 +2,8 @@
 
 **Development resumed by explicit user instruction on 2026-10-03.** No configuration
 has passed full L1 acceptance. R0–r4 are historical failed/incomplete cohorts;
-r5 was not run; r6 failed communication admission. R7 is the current candidate;
+r5 was not run; r6 failed communication admission. R7 passed scoped communication
+but failed L1 after a duplicate save. R8 is the current candidate;
 there is no stable recommended configuration yet.
 See [current functional progress](V13_5_PROGRESS.md); the
 [pause report](V13_5_PAUSE_STATUS_20261003.md) remains historical evidence.
@@ -14,10 +15,10 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r7.json` with a new root for current candidate
-validation. It retains r6's native provider and capacity limits, with thinking
-disabled after the observed reasoning-only truncation. This change has not yet
-established full functional acceptance.
+Use `configs/v13-5-functional-r8.json` with a new root for current candidate
+validation. It retains r7's fixed native nonthinking provider and capacity limits.
+R8 adds exact current-message save idempotency; full functional acceptance is
+still pending.
 Historical roots freeze their original source/configuration and cannot be resumed
 under changed code. No configuration is listed as accepted until full L1 passes
 without unresolved critical functional defects.
@@ -27,6 +28,10 @@ The current `update_memory` catalog requires `fragment_handles` inside each
 each changed field. Unchanged fields retain support; top-level handles are for
 whole-record retraction only. `input_relation` distinguishes current input from
 archived Sources but never makes either one semantically sufficient evidence.
+Repeating an identical save in the same public message returns `existing_record`,
+`no_change`, and `effect=none`; it does not count as a new write. Requests with
+different content, scope, selected evidence or public-message identity remain
+distinct. The program does not decide that paraphrases describe the same matter.
 
 ## Historical reproduction example (r0, not an accepted configuration)
 

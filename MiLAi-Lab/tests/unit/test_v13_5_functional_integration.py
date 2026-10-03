@@ -224,6 +224,30 @@ def test_structured_outcome_does_not_turn_raw_search_or_prose_into_saving(
     assert status["request_completion"] == "unchecked" and not result["records"]
 
 
+def test_duplicate_host_save_has_one_effect_and_separate_no_change_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal <= 2:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return tool("save_memory", content="The local marker is blue.", fragment_handles=hs)
+        receipt = actual_tool_receipt(wire)
+        assert receipt["status"] == "no_change" and receipt["effect"] == "none"
+        assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
+        return {"answer": "The preference is already saved."}
+
+    wires = scripted(monkeypatch, reply)
+    result = message(root)
+    assert result["status"] == "COMPLETED", result
+    assert len(wires) == 3 and len(result["records"]) == 1
+    statuses = result["operation_status"]["semantic_memory"]["operations"]
+    assert sorted(row["status"] for row in statuses) == ["committed", "no_change"]
+    assert len({row["id"] for row in statuses}) == 1
+    assert result["records"][0]["value"]["revision"] == 1
+
+
 def test_one_save_does_not_certify_other_requested_parts_or_later_reads(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

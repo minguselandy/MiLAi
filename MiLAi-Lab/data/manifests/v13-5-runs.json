@@ -385,6 +385,280 @@
         "provider thinking-only output exhausted 8192 output tokens after confirmed semantic save; final unavailable"
       ],
       "next_config": "native thinking=false; output/material/read/generation limits unchanged"
+    },
+    {
+      "id": "communication-r7",
+      "candidate_commit": "dbb7e34e6775d512030f01f95474bc8456ac53dc",
+      "layer": "COMMUNICATION_ADMISSION",
+      "state": "PASSED_SCOPED_COMMUNICATION",
+      "planned_cases": 4,
+      "planned_messages": 4,
+      "generation_cap": 96,
+      "configuration": {
+        "native": true,
+        "thinking": false,
+        "output_tokens": 8192,
+        "material_tokens": 8192,
+        "reads": 3,
+        "format_reproposals": 1,
+        "max_calls_per_message": 24
+      },
+      "config_sha256": "ea31600eee023df42b47d68d853464a7ef6689540c8746a3cc23bdb9dff0e6d6",
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r7/input-freeze.json": "f96470eb496613336b965430543bb3e76bc6f87faa184797d2a4b9319f882550",
+        "artifacts/v13-5/communication-r7/seal.json": "4a3dd13048cef8a9719d01ba6f0773f99cfc7d70aac2b39c8a30b6e9ac1bb3ed"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED_COMMUNICATION": 4
+      },
+      "baseline_budget": {
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        },
+        "generation": {
+          "charged_tokens": 28521746,
+          "known_tokens": 28491359,
+          "unknown_usage": 1
+        },
+        "generation_requests": 9885,
+        "history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_history": {
+                "earlier_history": {
+                  "earlier_v15": {
+                    "embedding_tokens": 836,
+                    "generation_charged_tokens": 76737,
+                    "generation_known_tokens": 71846,
+                    "generation_requests": 108,
+                    "generation_unknown_reservation": 4891,
+                    "judge_requests": 0,
+                    "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                    "sealed": true,
+                    "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                    "unknown_usage": 1
+                  },
+                  "embedding_tokens": 443,
+                  "generation_charged_tokens": 40072,
+                  "generation_known_tokens": 40072,
+                  "generation_requests": 55,
+                  "judge_requests": 0,
+                  "ledger": "artifacts/langmem-provenance/v16-budget.json",
+                  "sealed": true,
+                  "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+                  "unknown_usage": 0
+                },
+                "embedding_tokens": 916,
+                "generation_charged_tokens": 101810,
+                "generation_known_tokens": 101810,
+                "generation_requests": 101,
+                "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+                "sealed": true,
+                "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+                "unknown_usage": 0
+              },
+              "embedding_tokens": 267,
+              "generation_charged_tokens": 19237,
+              "generation_known_tokens": 19237,
+              "generation_requests": 16,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+              "sealed": true,
+              "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+              "truncations": 1,
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 274,
+            "generation_requests": 20,
+            "generation_tokens": 20360,
+            "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+            "sealed": true,
+            "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+          },
+          "embedding_tokens": 808,
+          "generation_requests": 45,
+          "generation_tokens": 41457,
+          "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+          "sealed": true,
+          "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+        },
+        "limits": {
+          "arms": 3,
+          "embedding_tokens": null,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "questions": 12
+        }
+      },
+      "comparison": "same four public trajectories and controls; r6 remains failed, scores not pooled",
+      "message_counts": {
+        "COMPLETED": 4
+      },
+      "attempt_counts": {
+        "COMPLETED": 4,
+        "EXPECTED_W3_UNKNOWN": 1
+      },
+      "cost_delta": {
+        "generation_requests": 9,
+        "generation.known_tokens": 51478,
+        "generation.charged_tokens": 51478,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l1-r7",
+      "candidate_commit": "dbb7e34e6775d512030f01f95474bc8456ac53dc",
+      "layer": "L1",
+      "state": "STOPPED_DUPLICATE_SEMANTIC_RECORD",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "execution_order": [
+        "recall-3",
+        "update-3",
+        "update-1",
+        "update-2",
+        "scope-2",
+        "object-continue-2",
+        "save-1",
+        "save-2",
+        "save-3",
+        "save-4",
+        "recall-1",
+        "recall-2",
+        "recall-4",
+        "update-4",
+        "scope-1",
+        "scope-3",
+        "scope-4",
+        "object-continue-1",
+        "object-continue-3",
+        "object-continue-4",
+        "restart-1",
+        "restart-2",
+        "restart-3",
+        "restart-4"
+      ],
+      "order_reason": "Known critical regressions first; all original IDs/messages/rubric remain unchanged",
+      "config_sha256": "ea31600eee023df42b47d68d853464a7ef6689540c8746a3cc23bdb9dff0e6d6",
+      "semantic_counts": {
+        "PASS_ORIGINAL_RUBRIC_ONLY": 1,
+        "NOT_RUN": 23
+      },
+      "message_counts": {
+        "COMPLETED": 2,
+        "NOT_RUN": 46
+      },
+      "acceptance": "Original22/24 plus all critical blockers absent and direct support/live-query contracts",
+      "critical_stop": "Stop affected queue on false saves, source/history destruction, wrong/repeated effects, owner exposure",
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r7/input-freeze.json": "fd7609648799860e42276dd79fd18ec7fa057f820def1b8bd0b5c8797caccffd",
+        "data/diagnostics/v13-1-d0-rubric.json": "0cd1be87c32dd442d72ad92be1cc32f6e62889b54bcb67b1069ed25bff165bfb",
+        "artifacts/v13-5/l1-r7/seal.json": "596aa317ddcd3420a04a84d7311e7a16ae47d36a653067c57947909e410e1e63",
+        "artifacts/v13-5/l1-r7-manual-grades.json": "d6ee67355b5d36d63fec8dbc27302f78e0797bcb7bf6bd8314fecf5cb3b7198b",
+        "artifacts/v13-5/l1-r7-evaluator-final/summary.json": "1642e91fe4ae993f16ddb23f59ff95758e9e88078bd03c01a105097cd34368f3"
+      },
+      "baseline_budget": {
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        },
+        "generation": {
+          "charged_tokens": 28573224,
+          "known_tokens": 28542837,
+          "unknown_usage": 1
+        },
+        "generation_requests": 9894,
+        "history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_history": {
+                "earlier_history": {
+                  "earlier_v15": {
+                    "embedding_tokens": 836,
+                    "generation_charged_tokens": 76737,
+                    "generation_known_tokens": 71846,
+                    "generation_requests": 108,
+                    "generation_unknown_reservation": 4891,
+                    "judge_requests": 0,
+                    "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                    "sealed": true,
+                    "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                    "unknown_usage": 1
+                  },
+                  "embedding_tokens": 443,
+                  "generation_charged_tokens": 40072,
+                  "generation_known_tokens": 40072,
+                  "generation_requests": 55,
+                  "judge_requests": 0,
+                  "ledger": "artifacts/langmem-provenance/v16-budget.json",
+                  "sealed": true,
+                  "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+                  "unknown_usage": 0
+                },
+                "embedding_tokens": 916,
+                "generation_charged_tokens": 101810,
+                "generation_known_tokens": 101810,
+                "generation_requests": 101,
+                "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+                "sealed": true,
+                "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+                "unknown_usage": 0
+              },
+              "embedding_tokens": 267,
+              "generation_charged_tokens": 19237,
+              "generation_known_tokens": 19237,
+              "generation_requests": 16,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+              "sealed": true,
+              "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+              "truncations": 1,
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 274,
+            "generation_requests": 20,
+            "generation_tokens": 20360,
+            "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+            "sealed": true,
+            "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+          },
+          "embedding_tokens": 808,
+          "generation_requests": 45,
+          "generation_tokens": 41457,
+          "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+          "sealed": true,
+          "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+        },
+        "limits": {
+          "arms": 3,
+          "embedding_tokens": null,
+          "generation_requests": null,
+          "generation_tokens": null,
+          "questions": 12
+        }
+      },
+      "v13_5_contract_counts": {
+        "FAIL": 1,
+        "NOT_RUN": 23
+      },
+      "failures": [
+        "same current public message repeated exact save arguments under different tool IDs; two distinct semantic records"
+      ],
+      "cost_delta": {
+        "generation_requests": 5,
+        "generation.known_tokens": 31146,
+        "generation.charged_tokens": 31146,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

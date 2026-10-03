@@ -773,6 +773,8 @@ class FunctionalMemory:
 
             Create a new matter. For an existing continuing matter, read its record
             and use update_memory; do not create a duplicate with save_memory.
+            An identical save in the same current message returns existing_record,
+            no_change and effect=none. It never creates a second record.
             Selected fragments must directly support the new content and scope.
             A verified fragment proves original bytes, not semantic support.
             The current request binding attributes execution; it is not field evidence.

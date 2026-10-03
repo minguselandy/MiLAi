@@ -1549,6 +1549,34 @@ class MemoryService:
             expected = raw.get("expected_revision")
             if reason is None and (type(expected) is not int or expected != revision):
                 reason = "revision_conflict"
+            if (reason is None and self.functional_contract == "functional_v1"
+                    and raw.get("action") == "create"
+                    and isinstance(raw.get("requested"), dict)
+                    and raw["requested"].get("operation") == "save"):
+                # The Agent may repeat an identical save with a new tool-call ID.
+                # Under the same public-turn binding this is the same request,
+                # not a second fact. Compare exact values/evidence, never similarity.
+                for row in self._rows(self.namespace):
+                    saved = row["value"].get("_v13_1", {})
+                    if saved.get("owner") != self.owner:
+                        continue
+                    for accepted_id, accepted in saved.get("proposals", {}).items():
+                        old = accepted["raw"]
+                        if (accepted["receipt"].get("status") != "committed"
+                                or not accepted["receipt"].get("ok")
+                                or old.get("action") != "create"
+                                or _json(old.get("requested")) != _json(raw["requested"])
+                                or old.get("trigger_binding") != raw.get("trigger_binding")):
+                            continue
+                        if (self._functional_hidden(record_id=row["id"])
+                                or saved["revision"] != accepted["receipt"]["revision"]):
+                            return self._reject(identity, raw, target,
+                                                "duplicate_save_target_changed_or_hidden", None)
+                        receipt = {**accepted["receipt"], "status": "no_change", "effect": "none",
+                                   "duplicate_request": True, "existing_record": True,
+                                   "duplicate_of_operation": accepted_id,
+                                   "original_status": "committed"}
+                        return self._save_attempt(identity, raw, receipt)
             # One tool receipt may support one record projection. Repeated consumption
             # cannot create a second fact or revise an old record again.
             if reason is None and source is not None and source["role"] == "tool":

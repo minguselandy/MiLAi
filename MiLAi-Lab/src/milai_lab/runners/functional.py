@@ -272,7 +272,9 @@ def operation_status(
             status = "not_committed"
         operation = {"tool": name, "receipt_ref": identity["call_id"], "status": status,
                      **{k: receipt[k] for k in ("id", "revision", "effect", "replayed",
-                                                "original_status", "phase", "error_type")
+                                                "original_status", "phase", "error_type",
+                                                "duplicate_request", "existing_record",
+                                                "duplicate_of_operation")
                         if k in receipt}}
         (visibility_effects if name == "forget_memory" else memory).append(operation)
     semantic_states = {row["status"] for row in memory}
@@ -369,7 +371,8 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
                 value = {"ok": False, "status": "receipt_unreadable", "effect": "unconfirmed"}
             receipt = {key: value[key] for key in (
                 "ok", "status", "effect", "formation_status", "id", "revision",
-                "replayed", "original_status", "content_verification",
+                "replayed", "original_status", "content_verification", "duplicate_request",
+                "existing_record", "duplicate_of_operation",
             ) if key in value}
             receipts.append({"tool": name, "receipt_ref": row.tool_call_id,
                              "transport_status": row.status, **receipt})

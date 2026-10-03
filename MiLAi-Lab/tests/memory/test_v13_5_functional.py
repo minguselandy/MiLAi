@@ -161,6 +161,68 @@ def test_read_delivery_metadata_is_budgeted_for_mixed_immutable_pages(tmp_path: 
         assert len(canonical(failed)) <= memory.material_limit
 
 
+def test_same_public_save_is_idempotent_across_tool_ids_and_reopen(tmp_path: Path) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory, text="Synthetic preference")
+        args = {"content": "Synthetic preference", "fragment_handles": handles(memory, ref),
+                "scope": {"project": "local"}}
+        first = invoke(memory, "save_memory", args, "call-one")
+    with opened(tmp_path) as memory:
+        memory.context("s", "u", SHA)
+        repeat = invoke(memory, "save_memory", args, "call-two")
+        assert repeat["status"] == "no_change" and repeat["effect"] == "none"
+        assert repeat["id"] == first["id"] and repeat["revision"] == 1
+        assert repeat["duplicate_request"] and repeat["existing_record"]
+        assert len(memory.service.records()) == 1
+        assert memory.service.history_index(first["id"])["revisions"] == [1]
+        replay = invoke(memory, "save_memory", args, "call-two")
+        assert replay["replayed"] and replay["effect"] == "none"
+        conflicting = invoke(memory, "save_memory", {**args, "content": "changed"}, "call-one")
+        assert conflicting["status"] == "rejected"
+        assert conflicting["reason"] == "proposal_id_conflict"
+
+
+@pytest.mark.parametrize("difference", ["content", "scope", "fragments", "public_turn"])
+def test_exact_save_guard_does_not_merge_different_requests(
+    tmp_path: Path, difference: str,
+) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory, text="Synthetic preference")
+        args = {"content": "Synthetic preference", "fragment_handles": handles(memory, ref),
+                "scope": {"project": "local"}}
+        first = invoke(memory, "save_memory", args, "call-one")
+        config = cfg()
+        if difference == "content":
+            args["content"] = "Different preference"
+        elif difference == "scope":
+            args["scope"] = {"project": "other"}
+        elif difference == "fragments":
+            other = memory.service.capture_user("archive", "other", "Synthetic preference")
+            args["fragment_handles"] = handles(memory, other["source_ref"])
+        else:
+            turn(memory, "another", "New independent request")
+            config = cfg("another")
+        second = invoke(memory, "save_memory", args, "call-two", config)
+        assert second["status"] == "committed" and second["id"] != first["id"]
+        assert len(memory.service.records()) == 2
+
+
+def test_duplicate_save_cannot_restore_an_old_value_after_update(tmp_path: Path) -> None:
+    with opened(tmp_path) as memory:
+        ref = turn(memory)
+        hs = handles(memory, ref)
+        args = {"content": "old", "fragment_handles": hs}
+        first = invoke(memory, "save_memory", args, "one")
+        read = memory.service.read(first["id"])
+        memory.update(cfg(), "update", read["candidate_handle"],
+                      [{"field": "content", "op": "set", "value": "new"}], hs)
+        repeated = invoke(memory, "save_memory", args, "two")
+        assert repeated["status"] == "rejected" and repeated["effect"] == "none"
+        assert repeated["reason"] == "duplicate_save_target_changed_or_hidden"
+        assert len(memory.service.records()) == 1
+        assert memory.service.read(first["id"])["value"]["content"] == "new"
+
+
 def test_correction_fragment_selection_is_explicit_not_inferred_from_trigger(
     tmp_path: Path,
 ) -> None:
