@@ -108,7 +108,8 @@ class FunctionalApplication:
             raise ValueError("FUNCTIONAL_APPLICATION_SCOPE_INVALID")
         if authorization_mode not in {"native_public_v1", "scripted_v1"}:
             raise ValueError("FUNCTIONAL_APPLICATION_AUTHORIZATION_MODE_INVALID")
-        if attempt_policy not in {"legacy", "single_phase_per_public_turn_v1"}:
+        if attempt_policy not in {"legacy", "single_phase_per_public_turn_v1",
+                                  "single_phase_with_history_v2"}:
             raise ValueError("FUNCTIONAL_APPLICATION_ATTEMPT_POLICY_INVALID")
         if attempt_policy != "legacy" and authorization_mode != "native_public_v1":
             raise ValueError("FUNCTIONAL_ATTEMPT_POLICY_REQUIRES_NATIVE_MODE")
@@ -153,12 +154,19 @@ class FunctionalApplication:
                             "reserve_and_label already attempts both reservation and labeling. "
                             "Read current state or await a new user request before another attempt."
                         )
+                    elif attempt_policy == "single_phase_with_history_v2":
+                        tool.description += (
+                            " Also returns up to 16 original operation receipt summaries for "
+                            "this exact owner/object in journal order, with an omission count. "
+                            "Past unknown receipts stay unknown; current state is separate."
+                        )
             journal_class = (NativePublicActionJournal if authorization_mode == "native_public_v1"
                              else BusinessActionJournal)
             app.journal = journal_class(
                 app.root / "business-journal.json", app.tool_names,
                 **({"owner": owner, "world": app.world,
-                    "single_phase_per_turn": attempt_policy != "legacy"}
+                    "single_phase_per_turn": attempt_policy != "legacy",
+                    "include_attempt_history": attempt_policy == "single_phase_with_history_v2"}
                    if authorization_mode == "native_public_v1"
                    else {"application_protection": True}),
                 response_hook=response_hook,

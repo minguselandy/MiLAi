@@ -3,7 +3,8 @@
 **Development resumed by explicit user instruction on 2026-10-03.** R16 completed
 all original 24 stories / 48 messages: 24 PASS on the frozen original rubric and
 scoped current-state/source/maintenance review. Exact-commit Fast CI passed.
-Full L2-r16 stopped on conditional-action denial and false effect claims; L3/L4 remain unrun. Full functional acceptance is still
+Full L2-r17 completed all12/26 with four retained injected UNKNOWNs: 10 scoped PASS,
+2 FAIL for omitted requested semantic saves. L3/L4 remain unrun. Full functional acceptance is still
 pending and no stable configuration is recommended. Earlier failures and scoped
 communication cohorts remain separate evidence; their scores are not pooled.
 See [current functional progress](V13_5_PROGRESS.md); the
@@ -16,9 +17,9 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-Use `configs/v13-5-functional-r17.json` with a new root for current candidate
+Use `configs/v13-5-functional-r18.json` with a new root for current candidate
 validation. It retains r7's fixed native nonthinking provider and capacity limits.
-R17 retains exact current-message save idempotency and first interprets the current
+R18 retains exact current-message save idempotency and first interprets the current
 request without retrieved history. A three-state memory-write declaration distinguishes queries, new assertions and
 explicit storage requests; reading a memory result is not a write request.
 A separate business action declaration distinguishes none, perform and conditional continuation,
@@ -29,8 +30,8 @@ still permits live business queries. This is a model interpretation, not a proof
 intent, authorization or semantic support; full functional acceptance is pending.
 It uses the same accounted provider and durable 24-call message quota. Interpretation
 format repair, answer-only repair and missing-maintenance completion share the existing
-single reproposal allowance. For an explicit memory request with no actual save/update
-receipt, the candidate final answer is withheld and one memory-only completion step
+single reproposal allowance. For an admitted memory write (explicit request or actual new assertion/correction)
+with no actual save/update receipt, the candidate final answer is withheld and one memory-only completion step
 may run. It cannot replay business mutations or forgetting. All candidate answers
 remain in the audit; only the admitted final answer is delivered. A receipt for one
 item does not establish full request completion, semantic support or prose truth.
@@ -54,6 +55,10 @@ with a fresh original-request/evidence frame excluding execution draft prose. It
 and response survive restart, and its generation shares the original 24-call limit. A failed
 response can use only the remaining shared repair allowance on explicit resume.
 `operation_status` remains the independent program receipt summary.
+The `single_phase_with_history_v2` business policy includes the latest16 original
+owner/object operation receipt summaries in a live query, ordered with an explicit
+omission count. Original unknown outcomes remain unknown; current observed state is
+separate. Old request/document bodies are excluded from these summaries.
 
 A checkpointed `read_limit_exhausted` now ends execution in this candidate. The result is
 FAILED with an available outcome report and preserved effects, not a completed task. Resume

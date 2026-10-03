@@ -1704,6 +1704,104 @@
       "evidence": [
         "../l2-r16-review.jsonl"
       ]
+    },
+    {
+      "id": "l2-r17",
+      "layer": "L2",
+      "candidate_commit": "7e178c445b00aea32688e405d083a54d3ebdf5f2",
+      "state": "COMPLETE_L2_NOT_PASSED",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "config": "configs/v13-5-functional-r17.json",
+      "admission": "Full two-workflow denominator frozen before outputs. Start conditional continuation and unknown-not-happened failures, then document workflow and remaining stories. Same budgets; no pooling with r16.",
+      "mechanical_verification": "91 related checks +1 receipt privacy check; 8 production tokenizer scripted variants; ruff/mypy/boundary PASS.",
+      "baseline": {
+        "generation_requests": 10607,
+        "generation": {
+          "charged_tokens": 31828133,
+          "known_tokens": 31797746,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r17/input-freeze.json": "944be4614df40d81486605cdb4b02994777a063f8b405cb47b1f99ce4d15a63c",
+        "configs/v13-5-functional-r17.json": "a77000011d1c4deb41d2af51c84e0c900f6fa1ff0f74111a5dc5e733036a7678",
+        "artifacts/v13-5/r17-entry-privacy-workflows-final.log": "06b1064218b8c1fe2fb31ab49119eca65cc76fb308870844bfef4ef087a743ed",
+        "artifacts/v13-5/r17-receipt-privacy.log": "94496e12a53f9aa869953e11ae104201f018a761024406cd38785e3124dee0c0",
+        "artifacts/v13-5/r17-production-contracts.json": "b6c72e67ffae7e5d1e7be94493d37652a90917118a4573ec74d379392c98bc28",
+        "artifacts/v13-5/r17-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "artifacts/v13-5/r17-mypy-final.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+        "artifacts/v13-5/r17-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "artifacts/v13-5/l2-r17/review.json": "2629e605484f7997c53d523cef5f737ebc9d5478db9748053ea9751ffc3cb7c6",
+        "artifacts/v13-5/l2-r17/seal.json": "f3f34777307308ce0d87c7fb0c1849ad21d580f40b7fffbbb4f15113ddbda8d9",
+        "artifacts/v13-5/l2-r17-manual-grades.json": "6d0ab1116460a4242d87fcd4f36e4367f675639eef7d179bfecb33cab3b2daa2",
+        "artifacts/v13-5/l2-r17-all-review.jsonl": "41003c50a17238df5ad44a14b40a0763334fc2ac7dbb341d6c5c8ef457654607",
+        "artifacts/v13-5/l2-r17-evaluator/summary.json": "b42964deb58f62e3236dc0fe4eb2e138d10c24f25cb0bb1d76d9aec018ec9619"
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 10,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "UNKNOWN": 4
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 103,
+        "generation.known_tokens": 586170,
+        "generation.charged_tokens": 586170,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "independent_review": false,
+      "reviewer": "Root same-family development review",
+      "findings": [
+        "All12/26 executed, four intended W1 interruptions retained and all later recoveries actually queried state.",
+        "Business effects and reports are aligned on both actual workflows; no observed duplicate/wrong-object/false-save effects.",
+        "Two explicit save-result requests omit formation after native classifier chooses new_assertion, which allows writes but did not require completion feedback.",
+        "Only6 actual semantic records; each independently reopened readonly with current==latest history and literal quotes matching original Sources.",
+        "No runtime/config mutation within this cohort; no ledger gaps or new unknown usage."
+      ],
+      "limitations": [
+        "Receipt answer is verbose/technical and Chinese-only. Listed results do not certify all requested parts.",
+        "r03 last answer exposes an earlier failure receipt, not the last label attempt body; r03 scoped pass covers actual attempt/current-state behavior with this history limitation.",
+        "d03 last answer does not explicitly explain the previous attempt outcome; preserve answer deficiency in its FAIL.",
+        "Interrupted original explicit memory work remains uncommitted until a legal maintenance request; no automatic background completion claimed."
+      ],
+      "case_review": {
+        "l2-r01": "Exact reservation/label once, actual semantic record before report; follow-up live query only.",
+        "l2-r02": "Initial partial accurately stored; current query precedes exactly one remaining label attempt on same ID. No new reservation. Latest semantic record remains explicitly prior observation; current report says no new semantic commit.",
+        "l2-r03": "One actual failed label attempt in second message, no repeated attempt; third current query preserves facts. Historical fragment delivered in third message is first failure, not the latest label receipt: report labels it historical and has no chronological claim; limited history presentation retained.",
+        "l2-r04": "W1 after-native applied. Follow-up actual query discovers completed object; no repeated business. Original UNKNOWN retained; report does not assert physical delivery or semantic save.",
+        "l2-r05": "W1 before-native applied. Follow-up public query returns absence before exactly one authorized reservation/label. Original UNKNOWN retained, no false semantic save.",
+        "l2-r06": "External actual label completion applied between messages. Follow-up only queries; report separates earlier label failure from current created label. Prior semantic observation retained.",
+        "l2-d01": "Actual exact draft/body, current version/digest approval and one sandbox publication to explicit audience. Selected original draft/approval/publication fragments support semantic record. Follow-up live query only.",
+        "l2-d02": "FAIL: actual draft and approval survive publication failure, later current query plus only publish correct; explicit per-step save request was classified new_assertion and no semantic write attempted. Report truthfully says not_committed, but task omitted requested formation.",
+        "l2-d03": "FAIL: actual create/approve only, subsequent one publish attempt known no effect, later query only. First explicit remember-result request classified new_assertion; no semantic record. Last response current unpublished/history-empty accurate, but does not explicitly explain previous attempt as requested.",
+        "l2-d04": "W1 after publication applied; later public query finds exact approved/published version and audience, no duplicate. Original UNKNOWN retained; report says semantic not_committed.",
+        "l2-d05": "W1 before publication applied; actual draft/approval persist. Later public query precedes one publication, exact audience/version/digest; original UNKNOWN retained.",
+        "l2-d06": "One exact initial publication and supported semantic record. Actual external edit creates v2/4pm and invalidates approval; query distinguishes v1/5pm approved/published history from v2 unapproved/unpublished. No agent mutations or record/history corruption on query."
+      },
+      "evidence": [
+        "../l2-r17-manual-grades.json",
+        "../l2-r17-all-review.jsonl",
+        "../l2-r17-evaluator/summary.json"
+      ],
+      "remote_ci": {
+        "commit": "7e178c445b00aea32688e405d083a54d3ebdf5f2",
+        "fast_run": 37095892753,
+        "fast_status": "success",
+        "full_run": 37095892756,
+        "full_status": "skipped"
+      }
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",

@@ -488,3 +488,81 @@ def test_only_delivered_tool_source_becomes_an_assistant_dependency(
 
 if __name__ == "__main__" and sys.argv[1] == "--worker":
     worker(Path(sys.argv[2]), sys.argv[3], sys.argv[4], sys.argv[5])
+
+
+@pytest.mark.parametrize('workflow', ['reservation', 'document'])
+def test_live_query_includes_bounded_owner_object_original_attempt_receipts(
+    tmp_path: Path, workflow: str,
+) -> None:
+    options = {'attempt_policy': 'single_phase_with_history_v2',
+               'initial_label_available' if workflow == 'reservation'
+               else 'initial_publication_available': False}
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow, **options)
+        if workflow == 'reservation':
+            first = receipt(call(wrapper, 'reserve_and_label', reserve_args(), 'reserve'))
+            name, args = 'complete_label', {'reservation_id': first['reservation_id']}
+            query, query_args = 'get_reservation', {'item_key': reserve_args()['item_key']}
+            expected = 'label_service_unavailable'
+            call(wrapper, 'reserve_and_label', {**reserve_args(), 'item_key': 'unrelated'}, 'other')
+        else:
+            first = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'draft'))
+            bound = {k: first[k] for k in ['title', 'document_version', 'content_digest']}
+            call(wrapper, 'approve_document_version', bound, 'approve')
+            name, args = 'publish_approved_document', {**bound, 'audience': 'local'}
+            query, query_args = 'get_document_status', {'title': first['title']}
+            expected = 'publish_service_unavailable'
+        for index in range(18):
+            turn = 'attempt-turn-' + str(index)
+            service.capture_user('session', turn, 'Query then try the remaining action once.')
+            wrapper = app.call_wrapper(service, 'session', turn)
+            assert receipt(call(wrapper, name, args, 'attempt-' + str(index)))['status'] == expected
+        service.capture_user('session', 'history', 'Show current and prior attempt state.')
+        wrapper = app.call_wrapper(service, 'session', 'history')
+        queried = call(wrapper, query, query_args, 'history-query')
+        history = receipt(queried)['operation_history']
+        assert len(history['items']) == 16
+        assert history['omitted_earlier_count'] == (3 if workflow == 'reservation' else 4)
+        assert all(r['operation'] == name and r['effect'] == 'none'
+                   and r['result_status'] == expected and not r['same_public_message']
+                   for r in history['items'])
+        assert 'unrelated' not in json.dumps(history)
+        assert not any('args' in r or 'content' in r for r in history['items'])
+        source = service.source(json.loads(queried.content)['source_ref'])
+        assert json.loads(source['content'])['operation_history'] == history
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow, **options)
+        service.capture_user('session', 'after-open', 'Show current state.')
+        wrapper = app.call_wrapper(service, 'session', 'after-open')
+        again = receipt(call(wrapper, query, query_args, 'query-after-open'))
+        assert again['operation_history'] == history
+
+
+def test_query_attempt_history_preserves_unknown_and_filters_foreign_owner(tmp_path: Path) -> None:
+    def lost(row: dict[str, Any], response: Any) -> None:
+        if row['name'] == 'reserve_and_label':
+            raise OSError('response lost after native effect')
+
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, 'reservation',
+            attempt_policy='single_phase_with_history_v2', response_hook=lost)
+        with pytest.raises(OSError):
+            call(wrapper, 'reserve_and_label', reserve_args(), 'unknown')
+        rows = read_json(app.journal.path)
+        original = next(r for r in rows.values() if r.get('call_id') == 'unknown')
+        rows['foreign'] = {**original, 'owner': 'bob', 'status': 'complete',
+                           'result': {'content': json.dumps({'status': 'FOREIGN_PRIVATE_RESULT'})}}
+        write_json(app.journal.path, rows)
+        service.capture_user('session', 'discover', 'Query actual state first.')
+        wrapper = app.call_wrapper(service, 'session', 'discover')
+        current = receipt(call(wrapper, 'get_reservation',
+            {'item_key': reserve_args()['item_key']}, 'discovery'))
+        assert current['label_status'] == 'created'
+        history = current['operation_history']
+        assert len(history['items']) == 1
+        assert history['items'][0]['effect'] == 'unknown'
+        assert history['items'][0]['receipt_status'] == 'pending'
+        assert 'result_status' not in history['items'][0]
+        assert 'FOREIGN_PRIVATE_RESULT' not in json.dumps(current)
+        original_after = read_json(app.journal.path)[original['journal_key']]
+        assert original_after['status'] == 'pending' and original_after['effect'] == 'unknown'

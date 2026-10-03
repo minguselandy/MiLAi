@@ -22,10 +22,12 @@ from milai_lab.harness.artifact_io import write_json
 
 class NativePublicActionJournal(BusinessActionJournal):
     def __init__(self, *args: Any, owner: str, world: Any,
-                 single_phase_per_turn: bool = False, **kwargs: Any) -> None:
+                 single_phase_per_turn: bool = False, include_attempt_history: bool = False,
+                 **kwargs: Any) -> None:
         super().__init__(*args, application_protection=True, **kwargs)
         self.owner, self.world = owner, world
         self.single_phase_per_turn = single_phase_per_turn
+        self.include_attempt_history = include_attempt_history
         self.public_turn: dict[str, Any] | None = None
         schemas = document_schemas() if self.document_workflow else BUSINESS_SCHEMAS
         self.parameter_schemas = {item["function"]["name"]: item["function"]["parameters"]
@@ -61,6 +63,32 @@ class NativePublicActionJournal(BusinessActionJournal):
         if name == "complete_label":
             return {"label"}
         return {name}
+
+    def _query_history(self, entries: dict[str, Any], target: dict[str, Any]) -> dict[str, Any]:
+        """Bounded original receipts for this owner/object, never hidden effect inference.
+
+        The cooperative journal preserves insertion order across reopen. Unknown
+        calls remain unknown even after a later discovery; no arguments, old
+        document bodies, request Sources or evaluator controls are redisclosed.
+        """
+        history = []
+        for old in entries.values():
+            if (not isinstance(old, dict) or old.get("owner") != self.owner
+                    or old.get("target") != target or self._is_query(old.get("name", ""))
+                    or old.get("name") not in self.parameter_schemas):
+                continue
+            row = {"operation": old["name"], "effect": old.get("effect", "unknown"),
+                   "receipt_status": old.get("status", "pending"),
+                   "dispatch_started": old.get("executed", False),
+                   "same_public_message": old.get("public_turn") == self.public_turn}
+            if old.get("status") == "complete":
+                result = json.loads(old["result"]["content"])
+                row["result_status"] = result.get("status")
+            history.append(row)
+        return {"basis": "original_owner_object_journal_receipts",
+                "order": "oldest_to_newest_within_latest_16", "items": history[-16:],
+                "omitted_earlier_count": max(0, len(history) - 16),
+                "original_unknowns_rewritten": False}
 
     def _protected_call(self, request: Any, execute: Callable[[Any], Any]) -> ToolMessage:
         call, generated = request.tool_call, request.state["messages"][-1]
@@ -146,6 +174,11 @@ class NativePublicActionJournal(BusinessActionJournal):
                 write_json(self.path, entries)
                 raise
             row["effect"] = self._receipt_effect({"tool": call["name"]}, response)
+            if self.include_attempt_history and self._is_query(call["name"]):
+                row["native_result"] = response.model_dump(mode="json")
+                body = json.loads(str(response.content))
+                body["operation_history"] = self._query_history(entries, target)
+                response = response.model_copy(update={"content": json.dumps(body)})
             if self.single_phase_per_turn and not self._is_query(call["name"]):
                 # Report the actual public attempt contract beside this outcome,
                 # so summaries need not infer retry limits from a failure code.

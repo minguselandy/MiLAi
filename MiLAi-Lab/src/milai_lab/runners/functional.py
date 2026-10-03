@@ -243,6 +243,9 @@ def prepare(
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
     if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
         raise ValueError("FUNCTIONAL_READ_EXHAUSTION_POLICY_INVALID")
+    if settings.get("memory_completion", "explicit_only_v1") not in {
+            "explicit_only_v1", "declared_writes_v1"}:
+        raise ValueError("FUNCTIONAL_MEMORY_COMPLETION_POLICY_INVALID")
     if any(
         type(settings.get(key)) is not int or settings[key] <= 0
         for key in (
@@ -1336,7 +1339,9 @@ def message(
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
-                return bool(mode and mode["requires_memory_result"]
+                return bool(mode and (mode["requires_memory_result"] or (
+                    settings.get("memory_completion") == "declared_writes_v1"
+                    and mode["allow_memory_maintenance"]))
                     and not any(r["tool"] in {"save_memory", "update_memory"}
                                 for r in effects["mutation_receipts"])
                     and isinstance(current[-1], AIMessage) and not current[-1].tool_calls
@@ -1370,9 +1375,13 @@ def message(
                     business_call_wrapper=dispatch)
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})
+                expected = ("The current request explicitly asks for a memory result"
+                    if mode and mode["requires_memory_result"] else
+                    "The current request interpretation admits an actual assertion/correction "
+                    "for memory maintenance")
                 feedback = SystemMessage(id=feedback_id, content=(
-                    "The current request explicitly asks for a memory result, but this message "
-                    "has no save/update receipt. Your preceding answer is withheld, not delivered. "
+                    expected + ", but this message has no save/update receipt. "
+                    "Your preceding answer is withheld, not delivered. "
                     "Finish the requested memory work using actual supporting fragments. Inspect "
                     "existing records before creating a duplicate; an exact update with no changes "
                     "can confirm an existing record and must be described as already present. "

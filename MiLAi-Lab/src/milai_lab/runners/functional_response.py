@@ -64,6 +64,17 @@ def _receipt_lines(receipt: dict[str, Any]) -> list[str]:
         if isinstance(publication, dict):
             lines.append("历史沙箱发布: " + _text({k: publication[k] for k in (
                 "document_version", "audience") if k in publication}))
+    history = receipt.get("operation_history", {})
+    for prior in history.get("items", []):
+        if prior.get("same_public_message"):
+            continue
+        name = _TOOLS.get(prior.get("operation"), str(prior.get("operation")))
+        effect = _STATUS.get(prior.get("effect"), str(prior.get("effect")))
+        result = prior.get("result_status")
+        status = _STATUS.get(result, _text(result)) if result else "原回执未知"
+        lines.append("先前操作回执: " + name + " / " + status + " / " + effect)
+    if history.get("omitted_earlier_count"):
+        lines.append("更早操作回执未列出数量: " + str(history["omitted_earlier_count"]))
     return lines
 
 

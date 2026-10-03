@@ -33,6 +33,7 @@ def prepared(
     write_mode_declaration: bool = False,
     action_mode_declaration: bool = False,
     receipt_response: bool = False,
+    declared_writes: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -71,6 +72,7 @@ def prepared(
         "finalization": "receipt_business_response_v1" if receipt_response else
         "readonly_response_v1" if readonly_finalization else "agent_final_v1",
         "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
+        "memory_completion": "declared_writes_v1" if declared_writes else "explicit_only_v1",
         "formation_interface": "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
@@ -1417,3 +1419,45 @@ def test_receipt_response_cannot_replay_revoked_business_source(
     reopened = message(root, resume=True)
     assert reopened['status'] == 'VISIBILITY_REVOKED' and reopened['final_answer'] is None
     assert private_item not in json.dumps(reopened) and len(wires) == 6
+
+
+@pytest.mark.parametrize('write_request', ['new_assertion', 'explicit', 'none'])
+def test_declared_write_completion_requires_attempt_without_business_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, write_request: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True,
+                    receipt_response=True, declared_writes=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'intent',
+                memory_write_request=write_request, allow_forgetting=False,
+                business_action_request='perform',
+                business_action_quote=wire['messages'][-1]['content'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='one real item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Execution draft omitted saving.'}
+        assert write_request != 'none'
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'reserve_and_label' not in names and 'forget_memory' not in names
+        assert 'save_memory' in names
+        if ordinal == 4:
+            assert 'withheld' in wire['messages'][0]['content']
+            event = next(json.loads(m['content']) for m in wire['messages']
+                         if m['role'] == 'tool' and 'source_fragment_index' in m['content'])
+            return native_call('save_memory', 'save', content='Reservation and label completed.',
+                fragment_handles=[u['fragment_handle'] for u in event['source_fragment_index']])
+        assert ordinal == 5
+        return {'role': 'assistant', 'content': 'Actual receipt received.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == 'COMPLETED', first
+    assert len(first['records']) == (0 if write_request == 'none' else 1)
+    assert len(first['world']['world']['attempts']) == 1
+    before = len(wires)
+    second = message(root, resume=True)
+    assert second['status'] == 'COMPLETED' and second['final_answer'] == first['final_answer']
+    assert len(wires) == before == (3 if write_request == 'none' else 5)
