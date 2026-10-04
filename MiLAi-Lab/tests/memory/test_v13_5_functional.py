@@ -1898,10 +1898,48 @@ def test_maintenance_approval_does_not_replay_unknown_commit_as_new_operation(
         else:
             assert prohibited['effect'] == 'none'
             assert 'ORIGINAL_OPERATION_ID' in prohibited['reason']
+            changed = invoke(memory, 'save_memory',
+                             {**args, 'content': 'Unit A is used only in this trial.'}, 'reworded')
+            assert changed['effect'] == 'none' and 'PRIOR_OUTCOME_UNCONFIRMED' in changed['reason']
+            assert changed['maintenance']['proposals_used'] == 1 and len(reviewed) == 1
         recovered = invoke(memory, 'save_memory', args, 'original')
         assert recovered['ok'] and len(reviewed) == 1
         assert recovered['status'] == ('no_change' if after_commit else 'committed')
         assert memory.service.read(recovered['id'])['value']['revision'] == 1
+
+
+def test_maintenance_create_then_revise_actual_record_keeps_original_allowance(
+    tmp_path: Path,
+) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Only sample A uses unit A; other samples are unknown.')
+        selected = handles(memory, ref)
+        saved = memory.save(cfg(), 'create', 'Sample A uses unit A.', selected)
+        row = memory.service.read(saved['id'])
+        revised = invoke(memory, 'update_memory', {'read_handle': row['candidate_handle'],
+            'changes': [{'field': 'content', 'op': 'set',
+                         'value': 'Only sample A uses unit A; other samples are unknown.',
+                         'fragment_handles': selected}]}, 'revision')
+        assert revised['ok'] and revised['id'] == saved['id'] and revised['revision'] == 2
+        assert len(reviewed) == 2
+    with opened(tmp_path, **options) as memory:
+        turn(memory, text='Only sample A uses unit A; other samples are unknown.')
+        row = memory.service.read(saved['id'])
+        limited = invoke(memory, 'update_memory', {'read_handle': row['candidate_handle'],
+            'changes': [{'field': 'content', 'op': 'set',
+                         'value': 'Unit A is used by sample A only; other samples remain unknown.',
+                         'fragment_handles': selected}]}, 'third')
+        assert limited['effect'] == 'none' and 'PROPOSAL_LIMIT' in limited['reason']
+        assert limited['maintenance']['proposals_used'] == 2 and len(reviewed) == 2
+        assert memory.service.read(saved['id'])['value'] == row['value']
 
 
 def test_formation_review_rejection_preserves_raw_and_replay_skips_review(tmp_path: Path) -> None:

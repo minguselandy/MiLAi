@@ -51,6 +51,10 @@ def prepare_probe(root: Path, config: Path, inputs: Path, labels: Path) -> dict[
         if set(row) != {'id', 'matter_id', 'stage', 'evidence'} or row['stage'] not in {
                 'formation', 'revision'}:
             raise ValueError('X1_MODEL_INPUT_MUST_EXCLUDE_LABELS_AND_REVIEW_REASONS')
+        expected = 'functional_' + row['stage'] + '_evidence_v1'
+        if (row['evidence'].get('schema') != expected or
+                bool(row['evidence'].get('record_id')) != (row['stage'] == 'revision')):
+            raise ValueError('X1_STAGE_DOES_NOT_MATCH_ACTUAL_EVIDENCE_SCHEMA')
     matters = {row['matter_id'] for row in cases}
     if len(matters) != 12 or any(sum(r['matter_id'] == m for r in cases) != 2 for m in matters):
         raise ValueError('X1_REQUIRES_12_PAIRED_MATTERS')

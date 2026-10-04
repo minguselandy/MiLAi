@@ -3527,6 +3527,9 @@ def test_fixed_proposal_probe_preserves_ledger_and_excludes_source_labels(
     cases = [{'id': f'm{i}-proposal-{j}', 'matter_id': f'm{i}',
               'stage': 'formation' if i % 2 else 'revision',
               'evidence': {'binding': {'owner': 'synthetic'}, 'forget_epoch': 0,
+                           'schema': 'functional_formation_evidence_v1' if i % 2
+                           else 'functional_revision_evidence_v1',
+                           'record_id': None if i % 2 else f'synthetic-record-{i}',
                            'changes': [{'field': 'content', 'before': None,
                                'after': f'Proposal {j}', 'selected_original_fragments': [
                                    {'source_role': 'user',
@@ -3565,6 +3568,10 @@ def test_fixed_proposal_probe_preserves_ledger_and_excludes_source_labels(
     with pytest.raises(ValueError, match='SOURCE_LABELS_CHANGED'):
         probe.run_probe(root)
     assert len(wires) == 48
+    cases[0]['stage'] = 'formation'
+    write_json(inputs, {'schema': 'post_r52_x1_inputs_v1', 'cases': cases})
+    with pytest.raises(ValueError, match='STAGE_DOES_NOT_MATCH'):
+        probe.prepare_probe(tmp_path / 'invalid-stage', tmp_path / 'settings.json', inputs, labels)
 
 
 def test_support_working_view_uses_actual_agent_read_then_save(

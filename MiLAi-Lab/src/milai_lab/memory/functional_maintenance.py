@@ -31,27 +31,58 @@ def bounded_support_review(
     """
     matter = {"owner": service.owner, "bank": list(service.namespace),
               "session": binding["session"], "request_source": binding["source_ref"],
-              "target": evidence.get("record_id", "request_new_memory"),
+              "target": evidence.get("record_id") or "request_new_memory",
               "policy": "maintenance_two_proposals_v1"}
+    if evidence.get('record_id'):
+        creation = {**matter, 'target': 'request_new_memory'}
+        with service._locked():
+            created = service.store.get(namespace(service), 'maintenance-' + digest(creation))
+            prior_creations = copy.deepcopy(created.value['proposals']) if created else []
+        for attempt in prior_creations:
+            receipt = service.replay_requested(
+                binding['session'], attempt['operation_id'], attempt['requested'])
+            if receipt is not None and receipt.get('ok') and receipt['id'] == evidence['record_id']:
+                matter = creation  # Same actual record, even after its first successful create.
+                break
     key = "maintenance-" + digest(matter)
     proposal_sha = digest(evidence)
     previous_operation: str | None = None
     with service._locked():
         stored = service.store.get(namespace(service), key)
+        checked_state = copy.deepcopy(stored.value) if stored else None
+    for attempt in (checked_state or {}).get('proposals', []):
+        if attempt['proposal_sha256'] == proposal_sha or attempt['status'] == 'rejected':
+            continue
+        receipt = service.replay_requested(
+            binding['session'], attempt['operation_id'], attempt['requested'])
+        if receipt is None:
+            assert checked_state is not None
+            raise FunctionalMaintenanceRejection(
+                'FUNCTIONAL_MAINTENANCE_PRIOR_OUTCOME_UNCONFIRMED: A different proposal cannot '
+                'bypass an unfinished attempt. Recover the original operation identity first.',
+                {'matter_id': key, 'proposal_limit': 2,
+                 'proposals_used': len(checked_state['proposals']),
+                 'prior_attempt_status': attempt['status'], 'prior_semantic_effect': 'unconfirmed',
+                 'formation_status': 'pending', 'target': matter['target']})
+    with service._locked():
+        stored = service.store.get(namespace(service), key)
+        if (stored.value if stored else None) != checked_state:
+            raise FunctionalIntegrityError('FUNCTIONAL_MAINTENANCE_CHANGED_DURING_PREFLIGHT')
         state: dict[str, Any] = copy.deepcopy(stored.value) if stored is not None else {
             "matter": matter, "proposals": []}
         if state.get("matter") != matter or not isinstance(state.get("proposals"), list):
             raise FunctionalIntegrityError("FUNCTIONAL_MAINTENANCE_BINDING_CHANGED")
         proposals: list[dict[str, Any]] = state["proposals"]
         if len(proposals) > 2 or any(not isinstance(p, dict)
-                or not {"proposal_sha256", "operation_id", "status", "read_revision"} <= p.keys()
+                or not {"proposal_sha256", "operation_id", "status", "read_revision",
+                        "requested"} <= p.keys()
                 or p['status'] not in {'attempted', 'rejected', 'review_allowed'}
                 or (p['status'] == 'rejected' and not isinstance(p.get('rejection'), dict))
                 for p in proposals):
             raise FunctionalIntegrityError("FUNCTIONAL_MAINTENANCE_PROPOSALS_INVALID")
         details = {"matter_id": key, "proposal_limit": 2, "proposals_used": len(proposals),
                    "target": matter["target"], "formation_status": "pending",
-                   "scope": "actual_record" if "record_id" in evidence
+                   "scope": "actual_record" if evidence.get("record_id")
                    else "conservative_request_creation"}
         prior = next((p for p in proposals if p["proposal_sha256"] == proposal_sha), None)
         if prior is not None:
@@ -75,7 +106,8 @@ def bounded_support_review(
                     "pending. A new explicit user request may start another checked attempt.",
                     details)
             prior = {"proposal_sha256": proposal_sha, "operation_id": operation_id,
-                     "read_revision": evidence.get("read_revision"), "status": "attempted"}
+                     "read_revision": evidence.get("read_revision"), "status": "attempted",
+                     "requested": copy.deepcopy(requested)}
             proposals.append(prior)
             service.store.put(namespace(service), key, state, index=False)
     if previous_operation is not None:
