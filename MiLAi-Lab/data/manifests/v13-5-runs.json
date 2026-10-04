@@ -7594,6 +7594,99 @@
       "reviewer": "Root same-family development review",
       "independent_review": false,
       "interpretation": "Full11/27 retained:8PASS_SCOPED3FAIL,26COMPLETED1intendedW1UNKNOWN, noNOT_RUN.110generations581707tokens. Directhistorytool delivers exactrevisions and withdrawal/notcurrent correctly. Threefailures: g02 final broadens label exemption; W1 livequery/noduplicatebusiness but prior explicitsave unfinished; n08 privacyvisibility passes but final false neverprovided inference. Reviewfalse-negatives/contradictions/declarationlimits retained. Fulltask recovery gap requires repair before functionalacceptance; ordinaryReadererrors do not invalidate successful effects or justify overwriting outputs."
+    },
+    {
+      "id": "continuation-r51",
+      "layer": "L0_direct_W1_continuation_regression",
+      "candidate_commit": "684f9dc765c24aedbbbd91c7cbb6161bd12726d8",
+      "state": "COMPLETED_DIRECT_REGRESSION_WITH_CONTINUATION_FAILURES",
+      "planned_cases": 2,
+      "planned_messages": 4,
+      "config": "configs/v13-5-functional-r51.json",
+      "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+      "baseline": {
+        "generation_requests": 14409,
+        "generation": {
+          "charged_tokens": 53057083,
+          "known_tokens": 53026696,
+          "unknown_usage": 1
+        },
+        "embedding": {
+          "charged_tokens": 964645,
+          "known_tokens": 964645,
+          "unknown_usage": 0
+        }
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/continuation-r51/input-freeze.json": "4576eae7a98e7b528aa365e5dfa44cb8594d88724e9f2ee65bc4df0c233c77c7",
+        "configs/v13-5-functional-r51.json": "0cd13b0aa0b99a5a93efd702635bf5b01f8a48738ece31d0ad960c623f0c59f3",
+        "artifacts/v13-5/continuation-r51/review.json": "9ef0311a225d925790a473a1ee753e22e21c8ddc54c1fd680fedd6376d140f74",
+        "artifacts/v13-5/continuation-r51/seal.json": "281d5adb8bb538b2d1bea691973fb2fd1b7772d7a0821e6682c7d52edd930d8a",
+        "artifacts/v13-5/continuation-r51-manual-grades.json": "6fb403094fc88eb8328cb0eb2e1148d4f361e7d100d0283a44ff0df3eaa04308",
+        "artifacts/v13-5/continuation-r51-review-notes.json": "2191868f90a0a091327aa1f5ec2b935bbe4b746f7ca623edff96e1761da6abdc",
+        "artifacts/v13-5/continuation-r51-all-review.jsonl": "a7ac403d5edc179a559479d87738f85656ffad68addeb4bf20c03754f759b3bc",
+        "artifacts/v13-5/continuation-r51-evaluator/summary.json": "d93b5119e89a403f17f1b1e53877ca48e3c4feac8a9381779c78663450f25ac8"
+      },
+      "semantic_counts": {
+        "FAIL": 2
+      },
+      "message_counts": {
+        "UNKNOWN": 2,
+        "FAILED": 1,
+        "COMPLETED": 1
+      },
+      "retained_attempts": 4,
+      "cost_delta": {
+        "generation_requests": 13,
+        "generation.known_tokens": 67405,
+        "generation.charged_tokens": 67405,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 4,
+      "independent_sqlite": {
+        "records": 0,
+        "exact_quote_identity_checks": 0,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "case_review": {
+        "l2-r04": {
+          "status": "FAIL",
+          "breakpoint": "bounded_continuation_resolution",
+          "reason": "2 calls. Current-only declaration correctly requests both bounded business reference resolution and prior explicit memory resolution. Full actual old user request delivered (2 fragments,0 omissions), but resolver returns both lists empty; FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED before any live query. No memory record, no new business effect, original reservation remains single/pending. Possible interface ambiguity: prompt says preserve already declared operations without distinguishing empty unresolved list; transient allow_memory_maintenance=false may also be mistaken for final denial. Root inference, not proven model reasoning. Preserve entire failed case. No privacy/integrity/false-save/replay critical blocker, so frozen document comparison remains admitted.",
+          "dimensions": {
+            "semantic_formation": false,
+            "source_quote_support": null,
+            "same_id_revision": null,
+            "scope_time_negation": null,
+            "actual_delivery_and_history": true,
+            "business_effect_and_recovery": false,
+            "answer_satisfies_request": false,
+            "post_maintenance_state": false
+          }
+        },
+        "l2-d04": {
+          "status": "FAIL",
+          "breakpoint": "bounded_continuation_resolution",
+          "reason": "4 calls. Current declaration allows prior explicit memory resolution and fixes publication-only business permission. Resolver sees full original save request but returns no memory fragments. Actual get_document_status confirms one version/approval/publication to correct audience; no new mutation and original publication journal remains pending. Final receipt truthfully says semantic not committed, yet original explicit save task remains unfulfilled. No false success/privacy/integrity/replay fault.",
+          "dimensions": {
+            "semantic_formation": false,
+            "source_quote_support": null,
+            "same_id_revision": null,
+            "scope_time_negation": null,
+            "actual_delivery_and_history": true,
+            "business_effect_and_recovery": true,
+            "answer_satisfies_request": false,
+            "post_maintenance_state": false
+          }
+        }
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false
     }
   ],
   "review_scope": "same inherited model family; developer semantic review, not independent Judge",
@@ -8070,5 +8163,5 @@
       }
     }
   ],
-  "current_checkpoint": "data/manifests/v13-5-development-merge-20261004.json"
+  "current_checkpoint": "data/manifests/v13-5-r52-continuation-scope.json"
 }

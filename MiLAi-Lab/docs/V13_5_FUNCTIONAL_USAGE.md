@@ -1,6 +1,6 @@
 # v13.5 functional profile
 
-Current r51 repairs continuation of prior explicit unfinished memory work after W1. Its 366 mechanical regressions and 10 production tokenizer probes passed; actual model acceptance is pending. PR81 has merged as `0359fc0`; subsequent development continues under the original plan. See the [r51 repair and constraints](V13_5_R51_CONTINUATION_REPAIR.md). No stable configuration is recommended.
+Current r52 makes continuation resolution scope explicit after r51 failed both direct W1 stories (all four messages attempted). R51 performed no duplicate business effects or false saves, but selected neither prior memory request; one continuation failed before live query. R52 has 34 direct mechanical regressions and 10 production tokenizer probes, with actual model acceptance pending. PR81 merged as `0359fc0`; PR82 continues the original plan. See the [r51/r52 repair and retained failures](V13_5_R51_CONTINUATION_REPAIR.md). No stable configuration is recommended.
 
 **Historical r50 completed its full communication cohort, with 8 scoped PASS and 3 FAIL. There is no stable recommended configuration.** All 11 cases / 27 messages were attempted: 26 COMPLETED and one preregistered W1 UNKNOWN. Same-ID maintenance, actual no_change, withdrawal and an explicit history read have scoped evidence. W1 business recovery avoided replay but dropped the original explicit save request. Two final-answer failures broaden a label exemption and infer never supplied from unavailable evidence.
 
@@ -52,7 +52,7 @@ does not establish semantic correctness or a Product release decision.
 
 ## Current candidate configuration
 
-`configs/v13-5-functional-r51.json` is the current development candidate; r50 is a historical reproduction configuration. Required
+`configs/v13-5-functional-r52.json` is the current development candidate; r50/r51 are historical reproduction configurations. Required
 native declarations use temperature 0 with thinking disabled; execution uses temperature 1
 and current-turn tool reasoning. Ordinary usable Agent answers are delivered directly after
 receipt, visibility and delivery checks. Business and visibility effects still use program

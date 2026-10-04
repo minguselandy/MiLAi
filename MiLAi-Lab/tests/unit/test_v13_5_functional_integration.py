@@ -1315,6 +1315,15 @@ def test_new_message_after_w1_resumes_prior_save_without_repeating_business(
                                destination='optics bench', packing='padding')
         if ordinal == 4 and continuation_scope != 'query':
             frame = json.loads(wire['messages'][-1]['content'])
+            if resume_memory:
+                assert frame['resolution_scope'] == {
+                    'business_operations': 'resolve_from_prior_request',
+                    'prior_memory_request_fragments': 'resolve_from_prior_request'
+                        if memory_enabled else 'empty_required'}
+                assert 'allow_memory_maintenance' not in frame['accepted_current_mode']
+                assert 'allow_business_mutation' not in frame['accepted_current_mode']
+            else:
+                assert 'resolution_scope' not in frame
             units = frame['archived_reference_material']['items']
             handles = [row['fragment_handle'] for row in units
                        if row['type'] == 'fragment' and row['role'] == 'user'
@@ -1406,6 +1415,9 @@ def test_document_w1_continues_memory_with_concrete_publish_permission_and_no_re
                                else 'publish_approved_document', f'phase-{ordinal}', **args)
         if ordinal == 6:
             frame = json.loads(wire['messages'][-1]['content'])
+            assert frame['resolution_scope'] == {
+                'business_operations': 'keep_current_list',
+                'prior_memory_request_fragments': 'resolve_from_prior_request'}
             assert frame['accepted_current_mode']['business_operations'] == [
                 'publish_approved_document']
             handles = [row['fragment_handle']
@@ -1573,6 +1585,10 @@ def test_continuation_respects_existing_records_without_treating_one_receipt_as_
             return {'role': 'assistant', 'content': 'Alpha has been saved.'}
         if ordinal == 5:
             frame = json.loads(wire['messages'][-1]['content'])
+            assert frame['resolution_scope'] == {
+                'business_operations': 'keep_current_list',
+                'prior_memory_request_fragments': 'resolve_from_prior_request'}
+            assert frame['accepted_current_mode']['business_operations'] == []
             items = frame['archived_reference_material']['items']
             assert any(row['type'] == 'record' and row['content'] == 'Alpha is blue.'
                        for row in items)

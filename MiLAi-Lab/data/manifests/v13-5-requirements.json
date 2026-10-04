@@ -5226,9 +5226,9 @@
   "evaluator_entry_audit": "artifacts/v13-5/evaluator-entry-audit.json",
   "updates_rule": "Evidence-backed scoped updates only after actual checks; preserve earlier failures and prior status history. All rows start NOT_VERIFIED; F5 scheduling is deferred, not implicitly passed.",
   "current_assessment": {
-    "candidate": "r50 full communication; current development integration, full acceptance incomplete",
-    "scope": "11cases/27messages all attempted;8PASS_SCOPED3FAIL,26COMPLETED1preregisteredW1UNKNOWN. Direct historical tool, same-ID maintenance and visibility forgetting have scoped evidence. Business recovery avoids replay but drops original explicit save; final label-exemption broadening and false never-supplied inference remain failures.110generations581707tokens;318sealedfiles;9records44quoteidentities. No r51 repair. Same-version L1-L4/FUNC terminal incomplete; historical140 and original48 unchanged. User explicitly authorized current-development merge; merge is not functional acceptance.",
-    "report": "docs/V13_5_DEVELOPMENT_MERGE_20261004.md",
+    "candidate": "r52 mechanical candidate; r51 full direct W1 regression failed",
+    "scope": "PR81 merged0359fc0; PR82 continuing original plan. r51 two cases/four messages all attempted,0PASS2FAIL,2preregisteredUNKNOWN1FAILED1COMPLETED. No duplicate effects/false saves, but prior explicit memory requests not selected despite complete old user source delivery.13generations67405tokens,55sealedfiles,zero semantic records. r52 explicit resolver scope has34direct mechanical and10production tokenizer probes; actual model not run. Same-version L1-L4/FUNC terminal incomplete; all historical140 detailed rows and original48 unchanged.",
+    "report": "docs/V13_5_R51_CONTINUATION_REPAIR.md",
     "func_summary": "docs/V13_5_PROGRESS.md",
     "reviewer": "Root",
     "independent_review": false

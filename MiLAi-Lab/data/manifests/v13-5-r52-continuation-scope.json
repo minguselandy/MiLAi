@@ -1,0 +1,56 @@
+{
+  "schema": "v13_5_candidate_repair_v1",
+  "candidate": "r52",
+  "previous_candidate": "684f9dc765c24aedbbbd91c7cbb6161bd12726d8",
+  "status": "MECHANICAL_PASS_MODEL_NOT_RUN",
+  "config": "configs/v13-5-functional-r52.json",
+  "config_sha256": "7a297138e98e08d0aa94b0c051ee558ead2a127f35de4f4dc0ec09f39db1435a",
+  "change": "Explicit per-field continuation resolution scope. Remove provisional pre-resolution allow flags from the v7 resolver frame; retain current declarations, current exclusions and fixed business list enforcement. No automatic semantic choice or authority from historical sources.",
+  "mechanical": {
+    "direct_regression": 34,
+    "production_tokenizer_scripted_variants": 10,
+    "real_model_http": 0,
+    "checks": "Affected Ruff, runner mypy and package boundary pass. 366 r51 local/remote regressions retain their earlier identity; r52 exact-head remote suite pending."
+  },
+  "evidence_sha256": {
+    "artifacts/v13-5/r52-direct-regression.log": "8fe49256a414e3fbc6c42492f56f0ca3a90d238c34eca9fe822f64f1ef556337",
+    "artifacts/v13-5/r52-production-contracts-probe.py": "dbbcea1655fe97cde912f055dac5433411f285a2254157055865232089006399",
+    "artifacts/v13-5/r52-production-contracts.jsonl": "908fca72d8a21d20ebb7249cdb2c29b8a0874375687ba9571aba88d70301fc58",
+    "artifacts/v13-5/r52-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "artifacts/v13-5/r52-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "artifacts/v13-5/r52-package-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+  },
+  "next_regression": {
+    "name": "continuation-r52",
+    "cases": 2,
+    "messages": 4,
+    "same_fixture_bytes_as": "continuation-r51",
+    "fixture_sha256": "8ab019f329385aa1f98737f025489cfcb8645745bc88306cb07dbe1f659d1629",
+    "controls_sha256": "fabfdb6b693faa0afa895f14e5c062fe4608228a0faa047aac3dc067e61b447b",
+    "after": "Own exact-source CI success; new frozen root and original ledger, serial real HTTP; no append to r51. Require live discovery, original requested memory outcome, true source support and no duplicate effects. Full L1/L2/L3/new L4 remain required."
+  },
+  "historical_r51": {
+    "cases": 2,
+    "messages": 4,
+    "pass": 0,
+    "fail": 2,
+    "generation_requests": 13,
+    "known_tokens": 67405,
+    "sealed_files": 55,
+    "report": "docs/V13_5_R51_CONTINUATION_REPAIR.md"
+  },
+  "ledger_before_model": {
+    "generation_requests": 14422,
+    "generation": {
+      "charged_tokens": 53124488,
+      "known_tokens": 53094101,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "product_status": "NO_GO"
+}
