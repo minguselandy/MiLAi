@@ -1,0 +1,155 @@
+{
+  "kind": "V13_3_PAUSE_SUMMARY",
+  "status": "PAUSED",
+  "recorded_at_utc": "2026-10-02T00:05:20.060423+00:00",
+  "user_request": "暂停当前实验，生成总结报告，提交到github上",
+  "goal_observed": "PAUSED",
+  "full_plan_complete": false,
+  "report": "docs/V13_3_PAUSE_STATUS_20261002.md",
+  "branch": "feat/lab-edm-cep-v13-3-20261002",
+  "baseline_commit": "22addcbc378a75d7f854ddc4127eb80f45ca52fb",
+  "publication_base_branch": "feat/lab-evidence-incremental-v13-2-20261001",
+  "historical_draft_PR": "https://github.com/minguselandy/MiLAi/pull/79",
+  "original_plan": {
+    "path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_3.md",
+    "sha256": "9de1d62920d681beda11520408c00ea67526074d217e0afc24fefafff7d39050",
+    "lines": 487,
+    "original_bytes_unchanged": true,
+    "entry_record": "data/manifests/v13-3-entry.json"
+  },
+  "work_packages": {
+    "W0": {
+      "status": "PARTIAL",
+      "remaining": "failure/effective-config matrix and per-original-row amendment not frozen"
+    },
+    "W1": {
+      "status": "PARTIAL_STATIC_ONLY",
+      "remaining": "interface freeze, mechanisms, current installed SDK and recovery controls not accepted"
+    },
+    "W2": {
+      "status": "NOT_STARTED"
+    },
+    "W3": {
+      "status": "NOT_STARTED"
+    },
+    "W4": {
+      "status": "NOT_STARTED"
+    },
+    "W5": {
+      "status": "NOT_STARTED"
+    },
+    "W6": {
+      "status": "NOT_STARTED"
+    }
+  },
+  "v13_3": {
+    "method_edits": 0,
+    "mechanism_test_runs": 0,
+    "SDK_runs": 0,
+    "actual_generation_HTTP": 0,
+    "actual_embedding_HTTP": 0,
+    "experiment_samples": 0,
+    "EDM": "NOT_IMPLEMENTED",
+    "CEP": "NOT_IMPLEMENTED",
+    "independent_Judge": "NOT_VERIFIED",
+    "second_model_family": "NOT_VERIFIED",
+    "formal_admission": "NOT_ADMITTED"
+  },
+  "inherited_48": {
+    "manifest": "data/manifests/v13-2-requirements.json",
+    "manifest_sha256": "bbdc93e31012b7b18837a64a555b5dd1fd84bed2288bb291bf5bc0d836dd7dd3",
+    "rows": 48,
+    "statuses": {
+      "PASSED_SCOPED": 4,
+      "PARTIAL": 27,
+      "NOT_PASSED": 1,
+      "NOT_VERIFIED": 16
+    },
+    "rows_sha256_as_historical_snapshot": "b535c235beb678eecea83673bd244423451099d1d7d115136cee9bf22e71da97",
+    "row_status_changes": 0,
+    "v13_3_per_row_amendment": "NOT_CREATED_BEFORE_PAUSE"
+  },
+  "research_states": {
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "inherited_R9": {
+    "result": "data/manifests/v13-2-e2-r9-results.json",
+    "result_sha256": "f1f0e04cc95061876db9ee1217b30500e0d83c4eb05aa58217aab3c9fe166cfd",
+    "trajectories": 15,
+    "public_messages": 45,
+    "Reader_root_diagnostic": {
+      "PASSED_SCOPED": 13,
+      "PARTIAL": 1,
+      "FAIL": 1
+    },
+    "query_formation": {
+      "unsupported_unnecessary_commits": 8,
+      "rejected_pending": 1,
+      "no_change": 6
+    },
+    "costs": {
+      "generation_requests": 148,
+      "generation_known_tokens": 899383,
+      "embedding_requests": 63,
+      "embedding_tokens": 24315,
+      "included_query_formation_requests": 15,
+      "included_query_formation_tokens": 60678
+    },
+    "support_read_actual_profile": "legacy",
+    "not_v13_3_results": true,
+    "not_independent_Judge": true
+  },
+  "canonical_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+    "byte_equal_to_entry": true,
+    "generation_requests": 9398,
+    "generation_known_tokens": 27006877,
+    "generation_charged_tokens": 27037264,
+    "embedding_known_and_charged_tokens": 964645,
+    "historical_generation_unknown_usage": 1,
+    "historical_conservative_charge": 30387,
+    "new_requests": 0
+  },
+  "W1_static_audit": "data/manifests/v13-3-w1-static-audit-paused.json",
+  "companion_reference": {
+    "status": "NOT_LOCATED_IN_SEARCHED_PATHS",
+    "plan_claimed_32_tests_reproduced": false,
+    "user_followup": "Search independently; if unavailable implement from plan, and decide/research later issues autonomously while preserving direction and generalization",
+    "followup_overrides_latest_pause": false
+  },
+  "old_experiment_and_literature_roots": "UNCHANGED",
+  "changed_runtime_tests_configs_Product_Archive_paths": [],
+  "resume_requires_explicit_user_instruction": true,
+  "publication_proof_destination": "artifacts/v13-3-pause-publication-20261002/",
+  "local_large_originals_remain_ignored": true,
+  "literature": {
+    "catalog": "data/manifests/v13-3-design-literature-catalog.json",
+    "catalog_sha256": "631a0847a8982a9fbecb068dad52f57b1fe4855f6e6b251ac311ff6b93164d1e",
+    "summary": "docs/V13_3_DESIGN_LITERATURE_PAUSED.md",
+    "summary_sha256": "fa2cbc23894ed46d5403b0aebc1a0cd08f29ddf2b6dd45638108768de084fa3a",
+    "sources": 10,
+    "papers": 9,
+    "standard": 1,
+    "new_projects": 0,
+    "valid_resources": 33,
+    "failed_response_count": 1,
+    "local_entry_links": 58,
+    "methodology_audit_completed": false,
+    "read_boundary_events": [
+      {
+        "kind": "INCIDENTAL_ILLUSTRATIVE_PARAGRAPH",
+        "source": "2609.01836",
+        "description": "Automatic extraction of the official paper method section included a running-example paragraph. No benchmark corpus or gold was opened. The paragraph was not used for method changes or experiments; unneeded long derived excerpts were removed. Full official original remains archived as requested."
+      },
+      {
+        "kind": "CATALOG_DISPLAY_SCOPE",
+        "source": "authorized v13.2 literature catalog",
+        "description": "Initial terminal display of the authorized catalog was overly broad and included non-identity metadata. No linked experiment reports/materials or ledger were opened. Subsequent comparison used a projection of identity, original URLs/paths and SHA only; experimental metadata was not used."
+      }
+    ]
+  },
+  "W1_static_audit_sha256": "ffccff1b204452da8beacb5b70ed9735cb0e2fde4e2e6ccdae63d3ccd53f586f"
+}

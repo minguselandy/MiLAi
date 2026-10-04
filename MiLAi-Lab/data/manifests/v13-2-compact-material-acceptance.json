@@ -1,0 +1,470 @@
+{
+  "kind": "V13_2_COMPACT_MATERIAL_SCOPED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_FOR_NEW_COHORT_PREPARATION_NOT_MODEL_SEMANTIC_PASS",
+  "accepted_at_utc": "2026-10-01T01:36:48.489527+00:00",
+  "source_original_commit": "930fbae6a624d2dcd64df59cb6eaeb2bf54d8b2d",
+  "source_combined_implementation_commit": "58e91de53e90df4a043a693d66255557a49d9af0",
+  "source_combined_test_commit": "b078cfd406c045c2fdcbbec2e718b0adc1b6a051",
+  "source_owner": "HOLD",
+  "runtime_source_file_count": 209,
+  "runtime_map_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+  "changed_files": {
+    "src/milai_lab/methods/compact_material.py": "c88554907bd76ca8d9c1055e0464dcdb6756da665e9fb3b3433d20cbbad249a8",
+    "src/milai_lab/methods/grounded_memory.py": "d52512ed2081007c52afbf18e3f2c80ea351ef60147b4c64e4ff3ce5b333e1af",
+    "src/milai_lab/runners/v13_1_d0.py": "36556ca107317d53bf2b19c99126ff0a93cbe11caecf46e7dd48b3ebfdb0390b",
+    "tests/memory/test_v13_2_compact_material.py": "7ab317269b70cce3a927c4af0ae4decb86617cb6c2323e2082cca3b04dd863cb",
+    "tests/memory/test_v13_2_compact_storage_integration.py": "5da2dabeac49d7ce02f1ef2346ae97d86e2d0ba0efaffc483f34303eb5b82461"
+  },
+  "combined_source_report": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/source-checks.json",
+    "sha256": "7b82650a91cd1a2edbc3445a2b1aea3de49877ddfbae1aa0c35a287dba118153"
+  },
+  "original_source_report": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-material/MiLAi-Lab/artifacts/v13-2-compact-material/source-checks.json",
+    "sha256": "83caefdffe24d59642fe93fca315458b323e150e74a12cdd81d5340a519707db",
+    "failures_relabelled": false,
+    "original_tree_modified": false
+  },
+  "root_original_handoff_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-compact-root-review/original-source-audit.json",
+    "sha256": "b7558bb7434dad7ba0ce179d17622708f7987e127184bc7f299e5f7aa96b89cd"
+  },
+  "root_archived_packet_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-compact-root-review/original-packets.json",
+    "sha256": "1dc55bb25c675f295a7a3aa29f4c4b537e5bb55037245f04b0ed13f30984d97f"
+  },
+  "commands": [
+    {
+      "label": "combined-add-intersection-tests",
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "test(lab): verify independent compact and index storage opt-ins"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-add-intersection-tests.log",
+        "sha256": "d2a3782550300547a5df4af226be4f7e996eedca357b43a2e2fb4d87f37251d0"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-add-intersection-tests.json",
+        "sha256": "60260166b671ad649a94f77f8d0d17e752c59911a545479056da1b0f5605000f"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-add-intersection-tests-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-add-intersection-tests-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-affected-default-dual-boundaries",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-compact-integration/zero_socket_pytest.py",
+        "tests/memory/test_v13_2_history_discovery.py",
+        "tests/memory/test_v13_2_packet.py",
+        "tests/contract/test_active_boundary.py",
+        "tests/contract/test_active_tools_boundary.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-affected-default-dual-boundaries.log",
+        "sha256": "a3f327bf54a935422895724898fb193b9cc785aec0811d3e81f102d53e51570a"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-affected-default-dual-boundaries.json",
+        "sha256": "020f7a5f2872ede1abfde0751ccb3fa7dda215a0ef85a9f0f23dbf3f56163d87"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-affected-default-dual-boundaries-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-affected-default-dual-boundaries-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-compact-storage-contracts",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-compact-integration/zero_socket_pytest.py",
+        "tests/memory/test_v13_2_compact_material.py",
+        "tests/memory/test_v13_2_derived_index.py",
+        "tests/memory/test_v13_2_compact_storage_integration.py",
+        "-q",
+        "-s"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-compact-storage-contracts.log",
+        "sha256": "3ccfe7eedce08da9751076c7dde62138c1a886831b50706af50b40d5df6cc19d"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-compact-storage-contracts.json",
+        "sha256": "79a025428f986f2377fd7d635900b5d9382bb1760501b76a876b17702e97c0af"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-compact-storage-contracts-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-compact-storage-contracts-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-default-byte-catalog-cache",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-compact-integration/default_compare.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-default-byte-catalog-cache.log",
+        "sha256": "ef4517d78d99631a6ef7f58dc9cb1077672b10afe837335f630c90c367c8ca7a"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-default-byte-catalog-cache.json",
+        "sha256": "4ad9d6f647ed48ed7e46d6e7521594e4cf9cbeeb4d70d241fbc25a8158a23992"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-default-byte-catalog-cache-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-default-byte-catalog-cache-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-mypy",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "mypy",
+        "src/milai_lab/methods/compact_material.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-mypy.log",
+        "sha256": "8228fcc5ce46d42d01caf3cd941f4e9c5f2bcc372bb5b147a2f0572d2dd675a8"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-mypy.json",
+        "sha256": "04cd3db98cd8e91678e89b55882a4f7f7df72e12f7806b4e8d81da58a2a765c0"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-mypy-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-mypy-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-preserved-methods",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "artifacts/v13-2-compact-integration/unchanged_methods.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-preserved-methods.log",
+        "sha256": "56b0b16af4916b730e3e0ed83ec1829c9645bd3a0d2ab6a6f2a445bdecaa2d8c"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-preserved-methods.json",
+        "sha256": "8369ae1e592865d1251a0de85fefcea8e1fca966713881096c481e4660605acf"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-preserved-methods-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-preserved-methods-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "combined-static-first",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "check",
+        "src/milai_lab/methods/compact_material.py",
+        "src/milai_lab/methods/grounded_memory.py",
+        "src/milai_lab/runners/v13_1_d0.py",
+        "tests/memory/test_v13_2_compact_material.py",
+        "tests/memory/test_v13_2_compact_storage_integration.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-static-first.log",
+        "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-static-first.json",
+        "sha256": "ccb9ce943187671e06cdc406c7de6e752d823f418d2bae822d17c958030824fa"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-static-first-before.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/combined-static-first-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "format-integration-tests",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+        "-m",
+        "ruff",
+        "format",
+        "tests/memory/test_v13_2_compact_storage_integration.py"
+      ],
+      "exit_code": 0,
+      "source_unchanged": false,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/format-integration-tests.log",
+        "sha256": "413a709001976657cb743636fd34e48fc41d8d302d665460d3f874b3313da127"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/format-integration-tests.json",
+        "sha256": "0f045f0d5adea224f70bb259bd1e579c4a1cf495056a36292ecb83bb631b9013"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/format-integration-tests-before.json",
+          "sha256": "4d6e0b505e583cf7dcb44ea47863678eaaf2fbbfb11c7d403b8325c3d994fa9a",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/format-integration-tests-after.json",
+          "sha256": "1ba5f8983163faf7b0449d8b38d6424a40c2e2e7844a2eec0d67f4eba24c5043",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    },
+    {
+      "label": "merge-original-compact",
+      "command": [
+        "git",
+        "cherry-pick",
+        "930fbae6a624d2dcd64df59cb6eaeb2bf54d8b2d"
+      ],
+      "exit_code": 1,
+      "source_unchanged": false,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-original-compact.log",
+        "sha256": "41cef1c70d6b174bdf40fd5c39d87fcd9e2eeaadda52f1156f468a10ab2b98e2"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-original-compact.json",
+        "sha256": "4356d4b166ae76b55ee38ae96189f2aaf349e0ea38ed5a9cfc452f5e0b0b2979"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-original-compact-before.json",
+          "sha256": "14f87b2c982f4eddd6578e9e6408346465a05553a343f4c6223456e059a79fbe",
+          "runtime_count": 208,
+          "runtime_compact_sha256": "255caa86b375041e82cec242b30a762f20d1630e95803635097854725feb9190"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-original-compact-after.json",
+          "sha256": "f41fd78a6339f9d37db85ac98b248cf3c7d6eef7e36a9b6f01c1fd3b39eba3bd",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "96bfd81c52588dc3163e85e14d944182eb19610423444db8e85a31ec986f4cff"
+        }
+      }
+    },
+    {
+      "label": "merge-resolved-commit",
+      "command": [
+        "git",
+        "-c",
+        "core.editor=true",
+        "cherry-pick",
+        "--continue"
+      ],
+      "exit_code": 0,
+      "source_unchanged": true,
+      "original_stdout_stderr_combined": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-resolved-commit.log",
+        "sha256": "239667303c8e1e46d35e4897e9fd7c98b4fd3757999d5ad4d1940529322ab6ac"
+      },
+      "receipt": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-resolved-commit.json",
+        "sha256": "175a0a2be99a3a93fd117755334507b0e59e6d962a786c97706cdfbd6cb4ebf6"
+      },
+      "full_maps": {
+        "before": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-resolved-commit-before.json",
+          "sha256": "da5484aa5899cd3c90b78d2aa7b7ded4129a546f6e930c2c1d3ec071cdf559a1",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        },
+        "after": {
+          "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-compact-integration/MiLAi-Lab/artifacts/v13-2-compact-integration/merge-resolved-commit-after.json",
+          "sha256": "da5484aa5899cd3c90b78d2aa7b7ded4129a546f6e930c2c1d3ec071cdf559a1",
+          "runtime_count": 209,
+          "runtime_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91"
+        }
+      }
+    }
+  ],
+  "validation": {
+    "compact_storage_integration": "32 PASS: original compact12 + accepted storage13 + new intersection7",
+    "related_defaults_and_dual_boundaries": "26 PASS",
+    "default_actual_byte_catalog_cache": "5 actual same-bank comparisons against Root697: full_v1/bank_prefix defaults, 4legacy mode/receipt plus event_bound, material byte-exact and catalogs/cache except wall_ns/cpu_ns equal",
+    "ruff": "5 files PASS final runtime identity",
+    "mypy": "3 sources PASS final runtime identity",
+    "both_enabled": "Public runner preserves all four combinations, opts do not overwrite each other; compact+owner_bank matches compact+bank_prefix selected/packet/material, preserves old inline index, actual complete detached envelope and paid-read candidate handle/cache",
+    "AST_preservation": "11 compact methods identical to930; 5 storage/retrieve methods identical to697; storage and compact helpers/test bytes unchanged",
+    "actual_network": "0 sockets and 0 actual model HTTP; global runner guard plus module guards, local real Qwen tokenizer and MockTransport only"
+  },
+  "failure_preservation": {
+    "integration_failures": [
+      "merge-original-compact"
+    ],
+    "merge_conflict": "Original cherry-pick content conflicts in constructor and runner options preserved with full before/after identities and original stderr; resolved by retaining both independent opt-in paths only.",
+    "original_failures": "All original34 receipts, including12failed commands, remain in prior immutable index; no old exploration rerun or success relabel.",
+    "root_decoder_failure": "Root's independent decoder initially raised KeyError for a misplaced binding assumption, then passed after fixing decoder. No confirmed runtime bug; Root preserves its own first failure and complete driver."
+  },
+  "original_failures": [
+    "compact-complete-before-prefix",
+    "compact-first-small",
+    "compact-identity-group-allocation",
+    "compact-invariants-first",
+    "compact-metadata-dictionaries",
+    "compact-mypy-first",
+    "compact-paid-writer-contract",
+    "compact-paid-writer-first",
+    "compact-remaining-contracts",
+    "compact-shared-discovery-defaults",
+    "compact-static-first",
+    "compact-version-bound-prefixes"
+  ],
+  "limitations": [
+    "No formal acceleration or model/semantic benefit measured. No runtime benchmark, gold, future question, language/case rules, query/ranking/threshold changes, new provider/Store/Arrow dependency or SDK upgrade.",
+    "Original unclocked pressure assertion failures remain failures at their executed source identities. The original two-old-body assertions remain in the test. Fixed synthetic timestamps make the current cases reproducible; they are not evidence of a universal two-body guarantee.",
+    "Final three pressure cases deliver one current prefix and both full old bodies, while omitting the second current unit and both Source units. They do not deliver all selected information.",
+    "Current 4-version metadata capsule variants have exact minimum costs 2245/2254/2257 >2048 with actual current Source index and all decoding metadata. This is a bound over the documented variants, not a mathematical lower bound for all possible layouts.",
+    "Long-history case selects current plus six actual historic bodies, delivers current plus two historic bodies, omits four historic and one Source unit. Unselected versions are never promoted from the discovery index.",
+    "Oversized Scope is not rewritten or clipped: both semantic units are omitted with exact handles, and an actual Source JSON range is delivered. Conflict candidate groups are not resolved by compression.",
+    "Reopen equality needs the same explicit trusted Source boundary re-established through the public API; boundaries are not inferred from old stored events. Initial missing-boundary fixture failure is retained.",
+    "Initial writer fixture failures assumed nonexistent historical/version_sha256 receipt fields; corrected assertions use actual revision/read_view and hash the actual receipt value. Runtime was unchanged for those corrections.",
+    "Early commands preserve complete source/test/config hash maps and stdout failures, rather than full historical WIP file blobs. Initial temporary SDK fixture databases were disposable; available original full units are archived in multibody-inspection, and final fixed fixtures have full JSON snapshots.",
+    "baseline-example.json was an early unwrapped exploration without per-command before/after attestation and is excluded from acceptance. Earlier inspect driver changed between its two commands; current driver SHA does not retroactively attest its first version. First inspection JSON was overwritten; both stdout cost sequences and per-command code maps remain.",
+    "Explicit read responses are separately paid (two actual public-tool reads, 920 Qwen tokens in the fixed fixture); they are not included as free ordinary content. Ordinary and writer candidate materials share 2048; the model may still omit reads.",
+    "source_refs_from_bindings may occur in record/shared_defaults while the complete source_bindings reside on the enclosing historical unit. Restore record.source_refs from that unit's actual full bindings; do not assume record has its own binding list. Existing legend and budgets unchanged.",
+    "Representation, duplicate generated record-body hash omission, identity grouping and actual body-cost allocation are joint opt-in factors. Ranking/selection/source/CAS/semantics/configs unchanged.",
+    "Fixed multilingual cases still deliver1current prefix+2full history and omit1current+2Source; costs2046/2048/2046. Four-version capsule variant minima2245/2254/2257 exceed2048, not a global mathematical layout lower bound. Original unclocked failures remain failures and no universal body-delivery guarantee is claimed.",
+    "No new paper/project fetched; no formal model benefit, speedup or scoring transferred from engineering. Root owns docs/config/freeze/acceptance/archive, actual HTTP and evaluation.",
+    "Original930 and perf82f63da trees and Root main untouched; performance run not restarted and no continuous-budget writes performed by this source task."
+  ],
+  "root_method_AST_verified": {
+    "original_compact": [
+      "_snapshot",
+      "_select",
+      "_units",
+      "_coverage",
+      "_packet",
+      "_fit",
+      "_fit_compact",
+      "_source_index",
+      "prepare_context",
+      "maintain",
+      "hook"
+    ],
+    "accepted_storage": [
+      "_index_binding",
+      "_previous_index",
+      "_index_pending",
+      "_index_complete",
+      "_retrieve"
+    ]
+  },
+  "primary_transfer_verified": true,
+  "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+  "actual_model_http": 0,
+  "actual_embedding_http": 0,
+  "new_test_runs_by_root": 0,
+  "independent_semantic_review": false,
+  "next_model_http": "Only after full840 original perf protocol terminates and strict unchanged-ledger audit, then a new209-source/config/route/rubric/driver freeze.",
+  "root_verifier_driver_sha256": "f08016b692ad57831fc431b50959cd94681d480450f514455028472e52c4e1e4",
+  "product": "NO_GO",
+  "primary_transfer_commit": "65140126aba52c826c74e6ecbdc94dae89bf1845",
+  "root_verifier_failures_preserved": [
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-compact-root-review/original-packet-audit-first-failure.json",
+      "sha256": "4c3824e9a9161039e3e1bb649a4d035e09f299ae80432dc9b1005b71cca8290d"
+    },
+    {
+      "file": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-compact-root-review/combined-auditor-first-failure.json",
+      "sha256": "25665c6fc7e36bcc06368798f424d0f5ede6572eda9cf30280eb343aec2a0f56"
+    }
+  ]
+}

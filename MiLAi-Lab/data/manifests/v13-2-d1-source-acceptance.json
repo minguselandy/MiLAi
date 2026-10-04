@@ -1,0 +1,83 @@
+{
+  "kind": "MILAI_V13_2_D1_SOURCE_CHECKS",
+  "captured_at": "2026-09-30T16:30:48.913819+00:00",
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2",
+  "commit_base": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "source_sha256_at_capture": {
+    "src/milai_lab/contracts/memory.py": "2c387f3fc9cc7f192bf5f7247f8311d6a3a097c0a8b32321ff1058258428e48a",
+    "src/milai_lab/memory/service.py": "cfdc60e08f901f66fa0a502e852bcddc13044a6a53d006837ba8de49e830d3de",
+    "src/milai_lab/memory/service_tools.py": "1ced70b9f1a3dbb86990c6fdb72ecdba9f4fe872b6a9227af1c1f51d4deeb6a7",
+    "src/milai_lab/runners/v13_1_d0.py": "d9b4fa09d5007c8aef9ce677ff6f3dc117f37b986b807277c470c6fca6c90876",
+    "src/milai_lab/runners/v13_1_p5.py": "663b47433a1b16cd7d532481d9dcf33773517f6d3f48c49fc1f1080a85ca4342",
+    "tests/memory/test_v13_2_service.py": "4be827cc002d1a791712fd952e5df6202906a24ea86abc8812a1c6b5237b5b7a"
+  },
+  "source_identity_note": "Final D1 audit snapshot; per-command execution hashes were not recorded. Stages above distinguish earlier checks. Later D2 edits must not be described as this D1 tested identity.",
+  "checks": [
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest tests/memory/test_v13_1_service.py tests/memory/test_v13_1_p5.py -q",
+      "exit_code": 0,
+      "stdout_summary": "87 passed, 3 warnings in 107.74s",
+      "stage": "before opt-in assistant capture; legacy defaults unchanged"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest tests/memory/test_v13_2_service.py -q",
+      "exit_code": 0,
+      "stdout_summary": "17 passed, 3 warnings in 4.45s",
+      "stage": "with actual assistant capture and runner boundary"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest tests/memory/test_v13_1_d0.py tests/memory/test_v13_1_document_publication.py -q -k \"optional_catalog_matches or prepare or existing_agent_loop\"",
+      "exit_code": 0,
+      "stdout_summary": "20 passed, 14 deselected, 10 warnings in 5.00s",
+      "stage": "before opt-in assistant capture; catalog unchanged"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest tests/memory/test_v13_1_p5_compare.py -q -k \"evidence_precedes_actual_mem0_sdk_close or actual_mem0_sdk_carrier_wire_preserves\"",
+      "exit_code": 0,
+      "stdout_summary": "4 passed, 20 deselected, 4 warnings in 5.81s",
+      "coverage": "Actual installed Mem0 Memory SDK, persistent Qdrant/SQLite, snapshot-before-close success/error; independent SDK reopen; observed_events_v1 carrier; socket connect forbidden and provider MockTransport"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi-worktrees/next-improvement/MiLAi-Lab/artifacts/next-improvement/envs/external/bin/python -m pytest tests/memory/test_v13_1_p5_compare.py -q -k actual_mem0_sdk_update_get_history_with_mock_embedding_and_persistent_reopen",
+      "exit_code": 0,
+      "stdout_summary": "1 passed, 23 deselected, 2 warnings in 5.65s",
+      "coverage": "Actual installed Memory update/get/history and separate reopened Memory facade on persistent Qdrant/SQLite; finite vector facade; native extraction/ranking not covered; socket connect forbidden"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m mypy src/milai_lab/memory/service.py src/milai_lab/memory/service_tools.py src/milai_lab/contracts/memory.py --follow-imports=silent",
+      "exit_code": 0,
+      "stdout_summary": "Success: no issues found in 3 source files"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m milai_lab.boundary",
+      "exit_code": 0,
+      "stdout_summary": "PASS active package DAG, pure facades, shared leaves and import paths"
+    },
+    {
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m milai_lab.tools_boundary",
+      "exit_code": 0,
+      "stdout_summary": "PASS active tools Product dependency inventory (11 files, 20 dependencies, 6 grandfathered private)"
+    },
+    {
+      "command": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/ruff check src/milai_lab/contracts/memory.py src/milai_lab/memory/service.py src/milai_lab/memory/service_tools.py src/milai_lab/runners/v13_1_d0.py src/milai_lab/runners/v13_1_p5.py tests/memory/test_v13_2_service.py",
+      "exit_code": 0,
+      "stdout_summary": "All checks passed!"
+    }
+  ],
+  "real_generation_calls": 0,
+  "real_embedding_calls": 0,
+  "limitations": [
+    "Fixed proposals and scripted Host checks prove mechanics only, not model quality.",
+    "No production/Product schema migration or release readiness.",
+    "Mem0 close/reopen check uses actual installed SDK with finite vector facade and offline provider; native extraction/ranking was not assessed.",
+    "Independent Judge and full D2-D5/E0-E4 remain outside D1 completion."
+  ],
+  "status": "ENGINEERING_CHECKS_PASSED_BY_STAGE_NOT_A_SHARED_EXECUTION_FREEZE",
+  "original_private_evidence": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-d1/source-checks.json",
+    "sha256": "6d0e203ee5836d0f927a6f282c8766a6e46c94b42cddf0380af2a256e74b1ffb"
+  },
+  "full_D1_real_new_cohort": "NOT_RUN",
+  "full_goal": "ACTIVE",
+  "product": "NO_GO"
+}

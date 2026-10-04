@@ -1,0 +1,694 @@
+{
+  "kind": "V13_2_R8_E1_CONTROLLED_ACTUAL_COMPLETE_ROOT_DIAGNOSTIC",
+  "status": "CONTROLLED_COMPLETE_WITH_ORIGINAL_PENDING_RETAINED_FREE_HOST_NOT_STARTED",
+  "observed_at_utc": "2026-10-01T17:45:02.330409+00:00",
+  "runtime_sha256": "bb4eddc9ff4216e036a8053b425c3b55bb3653428c9173906e08d7584bb8ef07",
+  "auditor_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/audit_r8_e1_controlled.py",
+  "auditor_sha256": "506e11319aa4fca3cf4fae59c48e30c292b874a8cf237b74919cdd3dac368a78",
+  "planned_boundaries": 16,
+  "attempted_boundaries": 16,
+  "execution_completed_boundaries": 16,
+  "formation_status_counts": {
+    "pending": 1,
+    "deterministic_observation_only": 8,
+    "committed": 3,
+    "no_change": 4
+  },
+  "field_initial_formation": {
+    "eligible_first_boundaries": 4,
+    "committed": 3,
+    "pending_effect_none": 1,
+    "not_a_four_of_four_pass": true
+  },
+  "field_followup": {
+    "boundaries": 4,
+    "no_change": 4,
+    "prior_failed_card_not_created": true
+  },
+  "derived": {
+    "boundaries": 8,
+    "semantic_generation_calls": 0,
+    "initial_literal_facts": 8,
+    "final_retained_original_and_lookup_facts": 16,
+    "current_state_verified": false
+  },
+  "free_host": {
+    "planned_trajectories": 8,
+    "planned_messages": 16,
+    "attempted": 0,
+    "status": "NOT_STARTED"
+  },
+  "costs": {
+    "generation_requests": 8,
+    "generation_known_tokens": 60695,
+    "embedding_known_tokens": 13780,
+    "generation_unknown_usage": 0,
+    "embedding_unknown_usage": 0
+  },
+  "actual_embedding_requests": 32,
+  "ledger_before_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "ledger_after_sha256": "63834ce20750972f022664b6aaa86f9d5c34d59d7db6a479b99ed02d6d9a4c61",
+  "final_ledger": {
+    "embedding": {
+      "charged_tokens": 934623,
+      "known_tokens": 934623,
+      "unknown_usage": 0
+    },
+    "generation": {
+      "charged_tokens": 25848440,
+      "known_tokens": 25818053,
+      "unknown_usage": 1
+    },
+    "generation_requests": 9208,
+    "history": {
+      "earlier_history": {
+        "earlier_history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_v15": {
+                "embedding_tokens": 836,
+                "generation_charged_tokens": 76737,
+                "generation_known_tokens": 71846,
+                "generation_requests": 108,
+                "generation_unknown_reservation": 4891,
+                "judge_requests": 0,
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sealed": true,
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "unknown_usage": 1
+              },
+              "embedding_tokens": 443,
+              "generation_charged_tokens": 40072,
+              "generation_known_tokens": 40072,
+              "generation_requests": 55,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sealed": true,
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 916,
+            "generation_charged_tokens": 101810,
+            "generation_known_tokens": 101810,
+            "generation_requests": 101,
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sealed": true,
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "unknown_usage": 0
+          },
+          "embedding_tokens": 267,
+          "generation_charged_tokens": 19237,
+          "generation_known_tokens": 19237,
+          "generation_requests": 16,
+          "judge_requests": 0,
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sealed": true,
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "truncations": 1,
+          "unknown_usage": 0
+        },
+        "embedding_tokens": 274,
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sealed": true,
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+      },
+      "embedding_tokens": 808,
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sealed": true,
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "sdk_reopen": {
+    "banks": 8,
+    "items": 175,
+    "semantic_records": 3,
+    "literal_observations": 16,
+    "sources": 32,
+    "all_database_hashes_unchanged": true,
+    "new_model_http": 0,
+    "banks_detail": [
+      {
+        "cell": "field_autonomous",
+        "stream_index": 0,
+        "items": 21,
+        "record_count": 0,
+        "observation_count": 0,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-04-original-sdk.json",
+        "sdk_original_sha256": "8b38d9136c6e28627fff0f53ad5c98c74a832a430699f88abe7220f9e4310902",
+        "database_unchanged": true
+      },
+      {
+        "cell": "derived_autonomous",
+        "stream_index": 0,
+        "items": 22,
+        "record_count": 0,
+        "observation_count": 4,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-05-original-sdk.json",
+        "sdk_original_sha256": "e3b29b772d0bbf62490a495de998157b4d8e5ba7fb4d6cc3a2c35ee47ef5e7ee",
+        "database_unchanged": true
+      },
+      {
+        "cell": "field_prefetch",
+        "stream_index": 0,
+        "items": 22,
+        "record_count": 1,
+        "observation_count": 0,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-06-original-sdk.json",
+        "sdk_original_sha256": "4711027e0aaeb585920361f07def6dab312e5397de7eda22894fdd9b1ab2a5a7",
+        "database_unchanged": true
+      },
+      {
+        "cell": "derived_prefetch",
+        "stream_index": 0,
+        "items": 22,
+        "record_count": 0,
+        "observation_count": 4,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-07-original-sdk.json",
+        "sdk_original_sha256": "ca8c82ff0cebf98dc1fc53fd0f4ab2c3952b644d3da928029d55a57dc501f209",
+        "database_unchanged": true
+      },
+      {
+        "cell": "field_autonomous",
+        "stream_index": 1,
+        "items": 22,
+        "record_count": 1,
+        "observation_count": 0,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-12-original-sdk.json",
+        "sdk_original_sha256": "f76de83cd281c380d2fa4a3c572a9c9fbe86bdc241087ba7eaa6b2e236625694",
+        "database_unchanged": true
+      },
+      {
+        "cell": "derived_autonomous",
+        "stream_index": 1,
+        "items": 22,
+        "record_count": 0,
+        "observation_count": 4,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-13-original-sdk.json",
+        "sdk_original_sha256": "b89d822e846f622e9d8a74babec312abdf019400b707eb75f8a7902d55ee7f04",
+        "database_unchanged": true
+      },
+      {
+        "cell": "field_prefetch",
+        "stream_index": 1,
+        "items": 22,
+        "record_count": 1,
+        "observation_count": 0,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-14-original-sdk.json",
+        "sdk_original_sha256": "a6625dab5b8ace5d05181fdc295dec206fd8b54ed9af5b456b6c6803f5339f86",
+        "database_unchanged": true
+      },
+      {
+        "cell": "derived_prefetch",
+        "stream_index": 1,
+        "items": 22,
+        "record_count": 0,
+        "observation_count": 4,
+        "source_count": 4,
+        "sdk_original_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/controlled-slice-audit-first/bank-15-original-sdk.json",
+        "sdk_original_sha256": "7a1e41f3bf5de766a856489e68dcc6923b1e6113e0bbf2c92a95019808436d6f",
+        "database_unchanged": true
+      }
+    ]
+  },
+  "rows": [
+    {
+      "index": 0,
+      "cell": "field_autonomous",
+      "stream_index": 0,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "pending",
+      "formation_effect": "none",
+      "record_count": 0,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "46a10fde1aa284471aa29e1edb7c4f3035307c7f9fdeb8b1122bfa3e80cb9d38",
+      "child_receipt_sha256": "e74a0895a833e3086a653e30e303426d37be5970fad67954cebb09ce5e94d39f",
+      "review_sha256": "e09ef1347e5d933fec946cfa72091fcdae724bf687a6ae257bd09076f834616c",
+      "inspection_sha256": "5a094bbf070e0ecade989c5ec5d77eda7f72f47a7c1dca2469d6d5edecc4b22f",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7991,
+        "embedding_known_tokens": 637,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4088666
+    },
+    {
+      "index": 1,
+      "cell": "derived_autonomous",
+      "stream_index": 0,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 2,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "c548ea120320511a53045f44eb6129353b81319b87c4631e908b8fa8b257e5cc",
+      "child_receipt_sha256": "ad21260ed3dd447e97b5f303a5b5aca838dd29f1756b5a847f7b6e181a7bc1b6",
+      "review_sha256": "615bf230b5a4866df97c1a113721529eddad9b6b69c8b1cb1a427260ee7886cb",
+      "inspection_sha256": "2fa2cc3734949c5c8f85cb9990a5b11954454e87c3addd1966b9a2cb914836de",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 626,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4104105
+    },
+    {
+      "index": 2,
+      "cell": "field_prefetch",
+      "stream_index": 0,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "committed",
+      "formation_effect": "memory_only",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "aeb677cd5e631cd7ccd65121cc1fb024dd8091434b35908f26a9cfe42669e3db",
+      "child_receipt_sha256": "4b11f37971512b4f2ed7be15df96f22e152c9106e80e3bcf502430d2bd976871",
+      "review_sha256": "ca914903e742a3f66e83b55a87c358a93f96dcacd6525a31f5f0c8b71f1d3a4f",
+      "inspection_sha256": "de8acae0ac09f04110a6f870441568902b95a391e4f3ea3ca9282d02c498e0ed",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7908,
+        "embedding_known_tokens": 625,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4132594
+    },
+    {
+      "index": 3,
+      "cell": "derived_prefetch",
+      "stream_index": 0,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 2,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "434fe8b4708cd8f828166c7f03b7d38d20f71654c33272104c1267f02b8c43ae",
+      "child_receipt_sha256": "9ecea0733bf05c6bb7ac6830320dcdf3b0eebffcfdac834879c5724bec2f8fb5",
+      "review_sha256": "e46dc2322a5dad8652776bdb07ad045a690bcd09f894d06da6c2d97702107e11",
+      "inspection_sha256": "0c44fb902dcfe0a1a6b55bd7c7a33685c9bb27c63913077ddbc475337c8400c2",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 638,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4154318
+    },
+    {
+      "index": 4,
+      "cell": "field_autonomous",
+      "stream_index": 0,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "no_change",
+      "formation_effect": "none",
+      "record_count": 0,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "907f8dbd199d6e4c9ee248e01095d7861c555ccb90ac45fe95e506af85868782",
+      "child_receipt_sha256": "bf29d5652f6b86a9f4261a862014e5d33218bc2ddda274981f6fd2bf807a4f17",
+      "review_sha256": "8eea70782ed870412888b02e4accda7a82426b4778ca2c54c71c9fa968d67ad5",
+      "inspection_sha256": "4144aca484d13ad7c5a3c4a6b4e650b54cc57078ad036a0ca6ed0420c97d0b65",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7261,
+        "embedding_known_tokens": 879,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4162031
+    },
+    {
+      "index": 5,
+      "cell": "derived_autonomous",
+      "stream_index": 0,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 4,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "d8046b356b062f213cdf584fbe8f89c302d0a466044bb1b47e6055afe283f978",
+      "child_receipt_sha256": "c157cdfe11b1b340bb698ff7f8b3ddf85889b5fc2f8cea3f6441714457dbce14",
+      "review_sha256": "3e2aee566bf107c0f9c4dc62a72a2e4a0b33daf193b62b33244248385119f1ad",
+      "inspection_sha256": "2c54b30929126e5159a36c5772e84aca4537fa48c317ef5b3bd7f9812f2515e7",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 859,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4166254
+    },
+    {
+      "index": 6,
+      "cell": "field_prefetch",
+      "stream_index": 0,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "no_change",
+      "formation_effect": "none",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "fce751a7b4d870201753467e5f7da6b5ac32b2655a0f06a797a3accdb7c0e2af",
+      "child_receipt_sha256": "710bf2965a88cadf168fed66177b61a078c0298c54bb8f22c45593aca7f0c164",
+      "review_sha256": "2254fc75cbaf9a294f7424c56a3f496bd6199488908506d1890c63d7aa3d0313",
+      "inspection_sha256": "b8affe0837bcf5346564aab83833ba2dad625b57bbede9323a4d44374852b90e",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7204,
+        "embedding_known_tokens": 1388,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 4186803
+    },
+    {
+      "index": 7,
+      "cell": "derived_prefetch",
+      "stream_index": 0,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 4,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "e51d0e95136036ed37f244a77e7400368797b6e5d68925b7599523c76462d354",
+      "child_receipt_sha256": "fc3d6ad4a8623b017e22c3f0c91c0c0ced4892bbd659e27f7a586f3f31354e29",
+      "review_sha256": "1985bbdd15cf040758c8137dc18e04dd8a123c5671808473b3160005cfbfc61a",
+      "inspection_sha256": "e88d4c93d68fbd0a25ce3649030a1131d6b5ae393c4295ce4bea4eef7456e790",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 875,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 9819
+    },
+    {
+      "index": 8,
+      "cell": "field_autonomous",
+      "stream_index": 1,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "committed",
+      "formation_effect": "memory_only",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "0172ad404a42ad6fe963dcb8f29a0b03c273820668afa36d0adc693d4d0069f5",
+      "child_receipt_sha256": "68f6394f5a39834b7773e9f12f40b91c7b1bc35a24a1d616ebbeae2e691033a6",
+      "review_sha256": "6e2710d2f9c50d3019442c6a6ee4d21aa2510129791954909ac2e1c629ecc8c2",
+      "inspection_sha256": "7403bfe86b94b341bf4c400108218effee94ae92c9e2d8af3b3c12c32bb140ea",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7888,
+        "embedding_known_tokens": 665,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 14168
+    },
+    {
+      "index": 9,
+      "cell": "derived_autonomous",
+      "stream_index": 1,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 2,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "c33fe8e2a1a5d24fa6391a15bf47f1a5d92d4f22c00bfba2239f3dcf6497d4d4",
+      "child_receipt_sha256": "8a9b17c8c6c029a79193ac759e31b1d4133463ec16277746b7b6001127220d10",
+      "review_sha256": "c1666ad78a8cf65a0023ba98e13f76864ccee461bf11380e4448930b022e25e2",
+      "inspection_sha256": "cf44e926022460c4a44920b6c0b69d727c39c5b8a7dc21f5d32a5f4e9e91c059",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 685,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 22470
+    },
+    {
+      "index": 10,
+      "cell": "field_prefetch",
+      "stream_index": 1,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "committed",
+      "formation_effect": "memory_only",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "9d1956da43b5205d12d309131423ee1a401818819e18475f4878573292a3572c",
+      "child_receipt_sha256": "4d418f1f42785846d21bf889b17af56150ab60ac058fae82da1b35cfd4f46acd",
+      "review_sha256": "504d6537c2f8f19a60a8ebe777a1fc4d508dc2decebdce35cfc584a190bd6450",
+      "inspection_sha256": "5cbb9c8052368472cd00be9942ff24d73c0434432b45014f98c087b9bae5a85b",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7933,
+        "embedding_known_tokens": 676,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 28565
+    },
+    {
+      "index": 11,
+      "cell": "derived_prefetch",
+      "stream_index": 1,
+      "boundary": 0,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 2,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "dc37414c79865b87fc1b8b4855beccabd82a079f49ecf31d1dd4c7891c8d94db",
+      "child_receipt_sha256": "69feec3c9c5d932c8b1c0d8b2dd7dad68e23ed2fdccc998621ec4b2f259a1b8c",
+      "review_sha256": "f7e4ec4b048f85f906196c1c1432d9a326356821ef78b477d0472795bc075dd2",
+      "inspection_sha256": "f20bb5b6c3ee2c7c5adbd88aae79b2d98deb6daee16318aba854e9253287b59b",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 668,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 33172
+    },
+    {
+      "index": 12,
+      "cell": "field_autonomous",
+      "stream_index": 1,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "no_change",
+      "formation_effect": "none",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "d67944c1e86f44d87098bc8f4bfb2a588ac915ff5da7be5bcf65f8ec43a64387",
+      "child_receipt_sha256": "4a58e983ab68630a2d41ffe041aa582442d512a6e3eba76d92607471b7035429",
+      "review_sha256": "e1edf65a375bb857e0b4776d68075665a7a950daec6ae100c417339005d51309",
+      "inspection_sha256": "6ac12e531472a308844475db78574257a2631138fa887126b763a086e46db3e3",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7290,
+        "embedding_known_tokens": 1420,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 39848
+    },
+    {
+      "index": 13,
+      "cell": "derived_autonomous",
+      "stream_index": 1,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 4,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "25933168fc974fd64cdf63e665b743b19ea1bc2bbb23345c70bd1746b02e58ea",
+      "child_receipt_sha256": "c53f6a3c3e56c5ab58a776d84e0536fe9586f946d0fc66d56cf2193b5b349d97",
+      "review_sha256": "6be52b795455e9c5faaa8b2278a866b8c9080e73f24bf623df2a702c173c9028",
+      "inspection_sha256": "92a82900b1c2eb14f09949c4e19a82c4ad882e645c6c76cdf47e88a6c65c15a7",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 862,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 66433
+    },
+    {
+      "index": 14,
+      "cell": "field_prefetch",
+      "stream_index": 1,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "no_change",
+      "formation_effect": "none",
+      "record_count": 1,
+      "literal_projection_count": 0,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "e1f18a340c0e426913f784d9f1df27c3fbafc6045aa0a713f4639b5e30cf3b07",
+      "child_receipt_sha256": "5521f05c83d99893d5706ae2f2e2ffa61d170d7e8c9d744555e0c6ded7eefceb",
+      "review_sha256": "b09fc8df9811fe145b9825093d4da3e520b3923ed22f394186991f097bc92e8c",
+      "inspection_sha256": "c1b4e52c082114f773e5f3b5208acd2ef082a9868d7bf346366415065924f1d9",
+      "costs": {
+        "generation_requests": 1,
+        "generation_known_tokens": 7220,
+        "embedding_known_tokens": 1401,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 68904
+    },
+    {
+      "index": 15,
+      "cell": "derived_prefetch",
+      "stream_index": 1,
+      "boundary": 1,
+      "status": "completed",
+      "formation_status": "deterministic_observation_only",
+      "formation_effect": null,
+      "record_count": 0,
+      "literal_projection_count": 4,
+      "actual_host_final": null,
+      "parent_receipt_sha256": "27a658e1a6d4a5b74412e6c614872715709d0dd80f23d3b789e858d6f59ee83b",
+      "child_receipt_sha256": "3f8f56ab71894ea87063fd620ed1297d95fe1ae26d6334d15b7cd03d54b42c64",
+      "review_sha256": "11ba6a83746602009a84169101817197ab97434f1521ac15ed542e6e851a90cb",
+      "inspection_sha256": "985e17c6388f102b80f81e07cf690be152bbbd29fa53fa31e0bf9fccefdc7541",
+      "costs": {
+        "generation_requests": 0,
+        "generation_known_tokens": 0,
+        "embedding_known_tokens": 876,
+        "generation_unknown_usage": 0,
+        "embedding_unknown_usage": 0
+      },
+      "first_attempt_only": true,
+      "process_id": 75569
+    }
+  ],
+  "executing_maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 394,
+      "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+    },
+    "configs": {
+      "count": 320,
+      "compact_sha256": "91f756422bd227fff74d0197cd71b701290e848b7628a34d3c30b275f21cecad"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "primary_archive": {
+    "paper_count": 19,
+    "project_reference_count": 20,
+    "verified_unique_files": 829,
+    "local_index_links": 176
+  },
+  "root_not_independent_judge": true,
+  "limitations": [
+    "Two already exposed scenes, fixed order, no unseen or independent/generalization inference",
+    "Common new opt-in engineering factors and original manual Field prompt/adapter differences are explicit, not a pure single-factor claim",
+    "Each bank has its own actual namespace/source identifiers/timestamps; same actual source content hash and shared business receipts are preserved, not byte-identical complete prompts",
+    "Both controlled ordinary entrances are activated; this does not establish free Host read propensity or task success",
+    "Pending first formation is not repaired or relabeled; SDK literal checks do not certify prose entailment",
+    "Guarded Source member mismatch is reported separately from natural receipt-field disagreement, zero model-proposed literal disagreements observed here",
+    "Only Root actual model HTTP, serial1, historical unknown1/30387 retained, no retry/refund or old-root replay"
+  ],
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "full_plan_completed": false,
+  "generic_candidate_not_applied": "Public source-set relation explanation, with original basis-role/hash/CAS constraints; separate future amended freeze only",
+  "local_originals_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8",
+  "original_audit_result_sha256": "138be1bf9b2f179ce23c1682360c7c3f2f2ad9d1b1b709d3c5616eae2840a8d5",
+  "original_before_after_full_maps_sha256": [
+    "73b4d171d3c03e549017469172aa42cbb030938139f763c9b2978e2961daab33",
+    "73b4d171d3c03e549017469172aa42cbb030938139f763c9b2978e2961daab33"
+  ],
+  "original_sdk_reopen_failures_retained": {
+    "68c7b1": "wrong record key prefix",
+    "121d50": "wrong read-only raw SQL column",
+    "ec1a83": "raw Store wrapper/current DTO mismatch and pre-child prior-review refusal",
+    "corrected_sdk_reopen_proof_sha256": "6cd1251a68de1c6e2623e36fd49b9844c9aa7ff695ef40c10fec8cdae093252c",
+    "missing_at_time_maps_not_backfilled": true
+  },
+  "archiver_original_failures_retained": {
+    "22375d": "existing candidate directory",
+    "9911c4": "final diagnostic print NameError after driver was written, recovery itself completed15c76f"
+  },
+  "public_rollback": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "no_original_requirement_status_upgrades": true
+}

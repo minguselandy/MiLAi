@@ -1,0 +1,201 @@
+{
+  "kind": "V13_2_HTTP_OWNER_FULL_PLAN_ENTRY_COVERAGE_AND_PRIMARY_REFLECTION",
+  "status": "STATIC_RECHECK_AND_ARCHIVE_VERIFIED_IMPLEMENTATION_NOT_ACCEPTED",
+  "recorded_at_utc": "2026-10-01T14:01:34.810493+00:00",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "scope_sha256_unchanged": "c31075de89ee19baaf319af32e7e2e7f7f7b30fe3a4bf8aa2b4a0f6973437183",
+  "root_static_actual_entry_audit": {
+    "result": "artifacts/v13-2-http-owner-root-preparation/plan-entry-coverage-first/result.json",
+    "sha256": "b1942cd7ecedb0af4726398e71baba4816d24f0f50565ab030bb94dd5bc1c0f3",
+    "actual_tool_chunk": "479b1f",
+    "returncode": 0,
+    "saved_source_files": 8,
+    "file_index_sha256": "51540f013cac941661f36c9bb7583d700eda3276ddc07d59e27e3cd12b6a42c4",
+    "coverage_finding": {
+      "path": "artifacts/v13-2-root-drivers/fixed_flow.py",
+      "sha256": "0054788ab1cd2a5ab9ca8e83a3d8bcb6a724b7d4fba0615cb3647dea2efc2adf",
+      "direct_budget_constructor": {
+        "line": 61,
+        "function": "RunBudget",
+        "positional_arguments": [
+          "RunLimits(**frozen['budget_limits'])",
+          "Path(settings['budget_path'])"
+        ],
+        "keyword_arguments": {}
+      },
+      "direct_transport_constructor": {
+        "line": 131,
+        "function": "VLLMClient",
+        "positional_arguments": [
+          "VLLMConfig(**settings['host'])"
+        ],
+        "keyword_arguments": {
+          "emit": "trace",
+          "budget": "budget",
+          "capacity": "HostCapacity(settings['capacity'])"
+        }
+      },
+      "outside_current_source_edit_scope_and_213_runtime_map": true,
+      "root_inference": "An opt-in owner cannot be inferred from importing D0 helpers. Existing controlled driver directly constructs default RunBudget without owner/profile argument. Root must separately integrate and verify the accepted owner API in a new driver before any new controlled model execution.",
+      "source_scope_expanded": false,
+      "old_driver_modified_or_replayed": false
+    },
+    "public_observation_builder": {
+      "path": "tools/build_v13_2_e1_observed_flow.py",
+      "sha256": "03e974d74b221eca8f78e80a83e0d73324f6b469b014ce13dc06108dabe1b043",
+      "no_direct_budget_or_vllm_constructor_in_ast": true,
+      "root_inference": "Builder generates actual public tool observations and must remain separate from formation and free Host. No model ownership execution inferred from AST absence."
+    },
+    "free_host_entry": {
+      "path": "artifacts/v13-2-root-drivers/run_e1_free.py",
+      "sha256": "96cba16f579c430496cd1cd0d456c5e3ac906f15eef6f85109d98772851a464e",
+      "actual_cli_path": "tools/run_v13_1_d0.py",
+      "root_inference": "Free Host uses D0 CLI covered by Source entry scope, but a new opt-in configuration/freeze and real final-byte owner checks are still required. Prior R0 does not prove current entry behavior."
+    },
+    "next_required_root_actions": [
+      "Finish Source final original handoff and independent scoped engineering acceptance first.",
+      "Create a separately named controlled formation driver after accepted owner API is known; preserve historical fixed_flow.py and root.",
+      "Independently prove lifetime acquisition-before-load/construction, durable accounting, final result closure and release under synthetic Mock controls for the new controlled driver.",
+      "Bind all paid formation/prefetch/free Host clients and deployment configurations to the same original canonical ledger owner; no new ledger or implicit profile.",
+      "New controlled/free Host E1 freezes keep 2x2 projection/delivery factors distinct; no attribution of joint communication/snapshot/ownership changes to the original single-mechanism comparison.",
+      "New E2 freezes keep one reader/formation cadence across three identity arms and retain all old negatives.",
+      "Use new original input/runtime/driver/GitHub prefirstHTTP identities and appropriate fixed-flow denominator/review gates; do not reuse frozen R0 roots or infer staged E0 parent supports a different denominator.",
+      "Do not infer D4 four-arm fairness, inclusive12/24, D5 resource availability or full-plan success from limited owner checks."
+    ],
+    "limits": "8 frozen primary/Root driver source files inspected by AST only. Active isolated Source implementation was not read or modified; current Source final bytes and execution remain unverified.",
+    "root_original_navigation_failure": {
+      "tool_chunk": "83fec4",
+      "returncode": 2,
+      "reason": "Guessed runners/v13_2* path did not exist; corrected by actual rg --files discovery before reading existing entry paths.",
+      "at_execution_full_maps": "not separately captured; not backfilled",
+      "corrected_discovery_tool_chunk": "687e08",
+      "source_change_required": false
+    }
+  },
+  "source_report_not_root_acceptance": {
+    "core": "Source reports first30 PASS, before later entry corrections/formatting; not independently accepted final-byte evidence.",
+    "first_actual_entry_controls": "Source reports first1 PASS/11 FAIL, preserved originals; wrong P5 wrapper scope, micro missing import and nominal fixture type mismatch, with corrected checks still in progress.",
+    "historical_driver_gap": "Same Source acknowledges Root driver outside current scope; no scope expansion requested or supplied."
+  },
+  "failure_primary_method_archive": {
+    "archive_job": "artifacts/v13-2-literature-audit/http-owner-lifetime-first/result.json",
+    "sha256": "0f9b03996a7c5ea338fcf9b585817cffc74e60d00cb26e621eb47c72b0f7aba4",
+    "actual_start_tool_chunk": "842b5e",
+    "actual_completion_tool_chunk": "25634b",
+    "returncode": 0,
+    "actual_resource_gets": 9,
+    "failed_resource_gets": 0,
+    "groups": [
+      {
+        "id": "CPython3.11.13 scoped ExitStack lifecycle reference",
+        "repo": "https://github.com/python/cpython",
+        "ref": "v3.11.13",
+        "commit": "498b971ea3673012a1d4b21860b229d55fc6e575",
+        "manifest_sha256": "4bf145e1f7bcaaca6bb8f14a3601a0910f761c4ab3f6884d5793113db9499fc3",
+        "installed_relevant_file_matches_fixed_bytes": true,
+        "not_full_project_reproduction": true
+      },
+      {
+        "id": "Pydantic2.13.5 nominal arbitrary type validation reference",
+        "repo": "https://github.com/pydantic/pydantic",
+        "ref": "v2.13.5",
+        "commit": "001dea020e0809844e5b17666432c9135a976f46",
+        "manifest_sha256": "13d660ca12b47cf12b7c261a315837467842934ecc6b873bf88f32787ca056ca",
+        "installed_relevant_file_matches_fixed_bytes": true,
+        "not_full_project_reproduction": true
+      }
+    ],
+    "official_docs_version_and_redirect": "CPython rolling3.11 docs display3.11.16 separately; Pydantic docs.pydantic.dev/latest/api/config/ redirects to pydantic.dev/docs/validation/latest/api/pydantic/config/. Fixed source and installed-file observations remain independent.",
+    "adopted_root_review_principles": [
+      "Actual outer owner lifetime through result closure",
+      "Reverse-order cleanup and partial initialization evidence",
+      "Real nominal class identities in baseline/current fixture comparison",
+      "Every pass linked to actual executing bytes; original failures retained"
+    ],
+    "no_direction_or_runtime_semantic_change": true,
+    "scope13_fixed_source_reference_hashes_unchanged": true,
+    "new_references_automatically_authorized_to_source": false,
+    "root_catalog_metadata_read_error": {
+      "tool_chunk": "f9bc76",
+      "returncode": 1,
+      "reason": "Guessed projects key; actual schema rows/project_count used by corrected archive.",
+      "at_execution_full_maps": "not separately captured; not backfilled"
+    }
+  },
+  "independent_archive_verification": {
+    "report": "artifacts/v13-2-literature-audit/current-archive.json",
+    "sha256": "cab3eaa1116c02ee64918b27bd27955027cd62d4a9b174cf3d872b255439339d",
+    "actual_tool_chunk": "e6ef31",
+    "returncode": 0,
+    "status": "PASS",
+    "papers": 17,
+    "project_reference_groups": 17,
+    "verified_unique_files": 768,
+    "local_index_links": 147,
+    "issues": [],
+    "catalog_sha256_at_audit": "8a7f7dc8ef2c51f276c27b78e7459be5d069e79b12d3a322e247666427f4596b",
+    "index_sha256": "cd46c4a51f122682867c370da41006d724035193824b77d1699979803ed79a11",
+    "upstream_code_executed": false
+  },
+  "primary_compact_maps_unchanged": {
+    "runtime": {
+      "count": 213,
+      "sha256": "dfa818dc9c67ea0c3856e98ff0bb28dab333892b33e21bba07eeac084438ffbd"
+    },
+    "tests": {
+      "count": 391,
+      "sha256": "d78ff9aa8d0f096548c85337d89be4f26952bb3e2b45e80fe4bad4f2c52613f1"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "continuous_ledger_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "requirement_status_counts_unchanged": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "actual_new_generation_http": 0,
+  "actual_new_embedding_http": 0,
+  "new_actual_config_or_cohort_created": false,
+  "historical_R0_E1_E2_driver_or_root_replayed_or_modified": false,
+  "source_implementation_accepted": false,
+  "global_http_owner_accepted": false,
+  "four_arm_fairness_or_inclusive12_24_or_quality_proven": false,
+  "full_plan": "ACTIVE",
+  "e0": "NOT_PASSED",
+  "d4": "NOT_ADMITTED",
+  "product": "NO_GO",
+  "source_capacity_recovery_observation": {
+    "observation": "artifacts/v13-2-http-owner-root-preparation/source-capacity-recovery-first/observation.json",
+    "sha256": "857c5def6ffd9dc419c1ea4485188a106716e0473e0debe7177f494d65cd8e47",
+    "actual_native_chunk": "04885d",
+    "observed_utc": "2026-10-01T14:08:27.396257+00:00",
+    "completed_run_receipts": 54,
+    "unfinished_run_dirs": [],
+    "active_matching_native_processes": [],
+    "handoff_exists_at_observation": false,
+    "terminal_agent_error": "Selected model is at capacity. Please try a different model.",
+    "agent_capacity_error_is_not_actual_model_http_failure": true,
+    "latest_receipt_metadata_only": {
+      "final-new-checks": 0,
+      "final-mypy": 0,
+      "final-ruff": 1
+    },
+    "same_existing_owner_followup_sent": true,
+    "owner_observed_running_by_actual_list_agents_after_followup": true,
+    "agent": "/root/v13_2_source_resume",
+    "model_switch_or_new_agent": false,
+    "final_implementation_accepted": false,
+    "previous_root_observation_attempt": {
+      "native_chunk_id": "81dad1",
+      "returncode": 127,
+      "stderr": "/bin/bash: line 1: python: command not found\n",
+      "no_snapshot_captured": true
+    },
+    "historical_prepared_source_report_preserved": true
+  }
+}

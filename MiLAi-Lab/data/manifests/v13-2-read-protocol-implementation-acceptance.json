@@ -1,0 +1,972 @@
+{
+  "kind": "V13_2_READ_PROTOCOL_IMPLEMENTATION_SCOPED_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_OFFLINE_FINAL_SOURCE_NOT_MODEL_QUALITY",
+  "recorded_at_utc": "2026-10-01T12:18:49.153592+00:00",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "documentation": {
+    "path": "docs/V13_2_READ_PROTOCOL_IMPLEMENTATION_ACCEPTANCE.md",
+    "sha256": "56693be42050bb94fd8f922488f2fcd5ce51347bf5174398d6b93cca4ba1206c"
+  },
+  "authorized_scope": {
+    "path": "data/manifests/v13-2-read-protocol-implementation-scope.json",
+    "sha256": "91c2b36f9dccd9e678c0e1f43e50dbdb30e60168cc5232132dd07aa5ecbc02ce"
+  },
+  "source_original_commit": "5c8aecbccc406a5971ea1ea08b54dcffc74ac6ca",
+  "source_exact_base": "7511ddf73691cdb75755e774e47a558391aa6aaf",
+  "root_exact_11_path_cherry_pick": "61456c6ad45db93523c962f691791af7be9f56da",
+  "source": {
+    "status": "READY_HOLD",
+    "indexed_files": 1764,
+    "physical_original_files": 1767,
+    "terminal_exclusions": [
+      "SEAL.json",
+      "file-index.json",
+      "manifest.json"
+    ],
+    "original_pytest_directory_links": 110,
+    "original_commands": 128,
+    "original_nonzero_commands": 13,
+    "all_original_failures_retained": [
+      {
+        "label": "finite-collection-corrected",
+        "returncode": 1,
+        "receipt_sha256": "554e4cded5b40b89181b5bef8afd855a0098b70d9b709d3dcd69884a8eb1d7d1",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/finite-collection-corrected"
+      },
+      {
+        "label": "finite-entry-corrected",
+        "returncode": 1,
+        "receipt_sha256": "07dedf726df5cd385c1d07e191f66a8a7594f5e5eb802f04f4db0b77c0a8b3bc",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/finite-entry-corrected"
+      },
+      {
+        "label": "finite-expanded",
+        "returncode": 1,
+        "receipt_sha256": "4f3c4df10550cba3ea7d2ae0f0ff2d7ae53a536f6bb5076d72dfa9b7a70df3d4",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/finite-expanded"
+      },
+      {
+        "label": "finite-final-candidate",
+        "returncode": 1,
+        "receipt_sha256": "609930f5fabe9b8e5725b08ce3fa08c7ed2dbc82bc66081f6e3f9fce8d3a960d",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/finite-final-candidate"
+      },
+      {
+        "label": "finite-first",
+        "returncode": 2,
+        "receipt_sha256": "aed87bde64a6e3fcd732dd7beee5f4a208bc4914803ec2fb1285518a132e0f2a",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/finite-first"
+      },
+      {
+        "label": "implement-grounded-snapshots",
+        "returncode": 1,
+        "receipt_sha256": "641e037230afe023343900ad3ab0d8afdf59740a0b606f19e7d6f8a8f018bd38",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/implement-grounded-snapshots"
+      },
+      {
+        "label": "initial-ruff",
+        "returncode": 1,
+        "receipt_sha256": "151e13d4486b5990a4f3c5aa7db3e2f1a9e3d07e2e4f45eb72f00a21918dc1a5",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/initial-ruff"
+      },
+      {
+        "label": "lifecycle-first",
+        "returncode": 1,
+        "receipt_sha256": "aed8a38237ad1c8304fdefd1a4aff1bcf7c60f75ec23ef73260cf523a778fd74",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/lifecycle-first"
+      },
+      {
+        "label": "observation-guards-first",
+        "returncode": 1,
+        "receipt_sha256": "c808e3822b2f7da7a6ea50a2189beb29dab07d9fdc91ee0d0da382f1db899952",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/observation-guards-first"
+      },
+      {
+        "label": "pressure-first",
+        "returncode": 1,
+        "receipt_sha256": "4a73b5692564536b44bc869625d23f518be90f26c0c87f3ba7670badb7c91d45",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/pressure-first"
+      },
+      {
+        "label": "ruff-final",
+        "returncode": 1,
+        "receipt_sha256": "fe58cb96a84ea2311e1f61e196c490100b670b2ab40e6ed78a0646b529e72433",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/ruff-final"
+      },
+      {
+        "label": "scoped-mypy-first",
+        "returncode": 1,
+        "receipt_sha256": "eff05c7e9332e635c027935619c96e498a8e59f03ac02cbfb7b95d1b4715ab0e",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/scoped-mypy-first"
+      },
+      {
+        "label": "scoped-style-json",
+        "returncode": 1,
+        "receipt_sha256": "15582c30030192d27b454493318e7c62741b7f08f888d662aeaf94ae708cfebe",
+        "original_directory": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-read-protocol-implementation/MiLAi-Lab/artifacts/v13-2-read-protocol-implementation/runs/scoped-style-json"
+      }
+    ],
+    "handoff": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/HANDOFF.md",
+      "sha256": "ba3740ff6e6b38766a5eda30e501ac7699671908e0d7d13c75954c8128aa3813"
+    },
+    "manifest": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/manifest.json",
+      "sha256": "5c8c8629b32c86924827a4824c30e5695670cb660a20f890ae4265b54a994f29"
+    },
+    "seal": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/SEAL.json",
+      "sha256": "470da6ec4bac41129564c4daf97957464737d69a49a51e095601c314d674ee5b"
+    },
+    "file_index": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/file-index.json",
+      "sha256": "ae30b9903131e6ae33bf43157da34fd2872b576073b13cab505001b0cc4e1516"
+    },
+    "source_checks": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/source-checks.json",
+      "sha256": "7c291407d0bb65242cbf02c817189e3007158b84881460b2db2fd6a755424aa3"
+    },
+    "validation_provenance": {
+      "path": "artifacts/v13-2-read-protocol-implementation-source/validation-provenance.json",
+      "sha256": "fb7c780c7e9a284baac1cfdfeb8e22fee608e9d14a24f885090e0fd3d9734b57"
+    },
+    "unrecorded_pwd": {
+      "original": {
+        "path": "artifacts/v13-2-read-protocol-implementation-source/unrecorded-pwd.json",
+        "sha256": "8d4a0f2b3e5ff3f95259dccbb55e48bdf88eb98144ae02dd860172544dd9426e"
+      },
+      "at_execution_maps": "unavailable; not backfilled"
+    },
+    "proposal_original_files_equal": 262,
+    "saved_primary_method_originals_equal": 8
+  },
+  "root_original_audit": {
+    "path": "artifacts/v13-2-read-protocol-root-audit-corrected-first/result.json",
+    "sha256": "522af43f720fa171222090d638b01b8d5983392f54340adc472c1f70c48ae1e0"
+  },
+  "root_final_verification": {
+    "path": "artifacts/v13-2-read-protocol-root-controls-first/root-final-verification.json",
+    "sha256": "3ed233c3d722d7dfafeb1fa51d52c163470146843aff77c1d6e042de0ad90362"
+  },
+  "final_source_test_paths": [
+    "src/milai_lab/baselines/langmem_agent.py",
+    "src/milai_lab/contracts/read_protocol.py",
+    "src/milai_lab/memory/service.py",
+    "src/milai_lab/memory/service_tools.py",
+    "src/milai_lab/methods/grounded_memory.py",
+    "src/milai_lab/methods/langmem_recipe.py",
+    "src/milai_lab/providers/chat_bridge.py",
+    "src/milai_lab/runners/v13_1_d0.py",
+    "src/milai_lab/runners/v13_1_p5.py",
+    "tests/memory/test_v13_2_read_protocol.py",
+    "tests/unit/test_read_protocol.py"
+  ],
+  "final_exact_maps": {
+    "runtime": {
+      "count": 213,
+      "sha256": "dfa818dc9c67ea0c3856e98ff0bb28dab333892b33e21bba07eeac084438ffbd"
+    },
+    "tests": {
+      "count": 391,
+      "sha256": "d78ff9aa8d0f096548c85337d89be4f26952bb3e2b45e80fe4bad4f2c52613f1"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "root_final_controls": {
+    "new_checks_passed": 75,
+    "affected_existing_passed": 91,
+    "affected_existing_deselected": 19,
+    "ruff_paths": 11,
+    "mypy_runtime_paths": 9,
+    "package_and_tools_boundaries_passed": 2,
+    "socket_guard_probe_passed": true,
+    "receipts": [
+      {
+        "label": "finite-final",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/unit/test_read_protocol.py",
+          "tests/memory/test_v13_2_read_protocol.py",
+          "-q",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "artifacts/v13-2-read-protocol-root-controls-first/pytest-new"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:10:30.520424+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "227adf6886fba490288725e95f861fb2fca74dfcb03964c3905cb2a5731fbe19",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "da0aa1795778b51d8eac2fd09f5a733c470565082e6467802dd29e450a67cb00",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/finite-final"
+      },
+      {
+        "label": "affected-legacy",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "pytest",
+          "tests/memory/test_v13_2_packet.py",
+          "tests/memory/test_v13_2_delivery.py",
+          "tests/memory/test_v13_2_history_discovery.py",
+          "tests/memory/test_v13_2_direct_support.py",
+          "tests/memory/test_v13_2_schema.py",
+          "tests/unit/test_tool_schema_communication.py",
+          "-q",
+          "-k",
+          "not actual_projection_sigkill and not actual_runner_binds_frozen and not actual_d0_entry and not communication_actual_entry_drift and not actual_p5_shape_feedback",
+          "-p",
+          "no:cacheprovider",
+          "--basetemp",
+          "artifacts/v13-2-read-protocol-root-controls-first/pytest-legacy"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:11:55.837525+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "da1eab94ae38ce1840244aec6afafc0f1107344ca68f73c4f3bd7687d91b3caf",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "4e4e0f41dc85471aaf3a9c15d9a4637dcd9ebe0b9866be5194eafa1e42bf4f77",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/affected-legacy"
+      },
+      {
+        "label": "pressure-recount",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "artifacts/v13-2-root-drivers/recount_read_protocol_pressure.py"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:10:55.749111+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "7fd63457e83d5796e12dd315f2db6163e1585d2376646868b30c8821efbd564a",
+        "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+        "receipt_sha256": "c9e84d9a36a8c5a4f400d74de8211b605af8c5d07fcf7d0c3418dbf519c14254",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/pressure-recount"
+      },
+      {
+        "label": "ruff",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "ruff",
+          "check",
+          "src/milai_lab/contracts/read_protocol.py",
+          "src/milai_lab/methods/grounded_memory.py",
+          "src/milai_lab/memory/service.py",
+          "src/milai_lab/memory/service_tools.py",
+          "src/milai_lab/providers/chat_bridge.py",
+          "src/milai_lab/methods/langmem_recipe.py",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/runners/v13_1_d0.py",
+          "src/milai_lab/runners/v13_1_p5.py",
+          "tests/unit/test_read_protocol.py",
+          "tests/memory/test_v13_2_read_protocol.py"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:11:29.713783+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "e1ec5501142be27ccd119712ed5be84b23ff5ac8ed94861babeaba40017efc8f",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/ruff"
+      },
+      {
+        "label": "mypy",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "mypy",
+          "src/milai_lab/contracts/read_protocol.py",
+          "src/milai_lab/methods/grounded_memory.py",
+          "src/milai_lab/memory/service.py",
+          "src/milai_lab/memory/service_tools.py",
+          "src/milai_lab/providers/chat_bridge.py",
+          "src/milai_lab/methods/langmem_recipe.py",
+          "src/milai_lab/baselines/langmem_agent.py",
+          "src/milai_lab/runners/v13_1_d0.py",
+          "src/milai_lab/runners/v13_1_p5.py",
+          "--follow-imports",
+          "silent",
+          "--cache-dir",
+          "artifacts/v13-2-read-protocol-root-controls-first/mypy-cache"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:12:14.138767+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "46984ca20bf69f7b14ec1fd9bd82101d56a4e109e68f016fd2a04f22481b09b3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "25a76614c12c1b55c5bbbfe0a14c725d63647800bef854039dc565a5bc774d81",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/mypy"
+      },
+      {
+        "label": "package-boundary",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "milai_lab.boundary"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:11:31.508766+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "23e495f8bd1cfdd7f1dc26ae3e063b24e1c09a4deb29fd48b1a07e6e4e75071c",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/package-boundary"
+      },
+      {
+        "label": "tools-boundary",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-m",
+          "milai_lab.tools_boundary"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:11:35.698140+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "4c1997e6662674951e51634085694b2e71aded1b2176d38da5b7e3300fcf7dcb",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/tools-boundary"
+      },
+      {
+        "label": "socket-guard",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "-c",
+          "import socket\ntry:\n socket.create_connection((\"synthetic.invalid\", 1))\nexcept RuntimeError as error:\n assert str(error)==\"ROOT_OFFLINE_SOCKET_DENIED\"\n print(\"PASS offline guard rejects before network dispatch\")\nelse:\n raise AssertionError(\"socket guard missing\")"
+        ],
+        "cwd": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab",
+        "recorded_at_utc": "2026-10-01T12:11:55.287195+00:00",
+        "returncode": 0,
+        "root_recorder_sha256": "c3cf287bba8cdf6f3d929c0ad6bfb85b7cb3cb594643587a60c4d0222cffadbb",
+        "socket_guard_sha256": "624d836eda4c02b082c9af67e07a7f46e5f31bccaf52edc6f62346f6a163f3af",
+        "before_after_equal": true,
+        "actual_model_http": 0,
+        "execution_domain": "socket_denied_local_engineering_control",
+        "before_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "after_sha256": "e21f0f07bf75f4cf5ccda558e6dfa27d716f0900f6f1fb7d9edf007150c917cb",
+        "stdout_sha256": "350cbed74003b205c453bec33fc7b75cb308cb24827684f8722a1a05167ed9d8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "receipt_sha256": "23f1fa4c2371f0b6cfba082b480b33c5da557c3b6f67d466dbbb295408ab39ec",
+        "path": "artifacts/v13-2-read-protocol-root-controls-first/socket-guard"
+      }
+    ],
+    "default_full_wire_original_compositions_equal": 8,
+    "baseline_original_modules_equals_real_git_base": 8
+  },
+  "independent_original_pressure_recount": {
+    "result": {
+      "path": "artifacts/v13-2-read-protocol-root-controls-first/pressure-recount/result.json",
+      "sha256": "861126c49634ccc20e2fe68cec1fb8c3b3ee7d6de00a0406759e3a9110cec948"
+    },
+    "packets": 10,
+    "pairs_selected_identity_hash_and_order_equal": 5,
+    "pressure": [
+      {
+        "case": "short",
+        "new_profiles": false,
+        "ordinary_tokens": 1340,
+        "whole_prompt_tokens": 3749,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 1,
+            "delivered": 1,
+            "full": 1,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          394
+        ],
+        "paid_pointer_page_tokens": [],
+        "snapshot_store_utf8_bytes": null
+      },
+      {
+        "case": "short",
+        "new_profiles": true,
+        "ordinary_tokens": 1517,
+        "whole_prompt_tokens": 4829,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 1,
+            "delivered": 1,
+            "full": 1,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          394
+        ],
+        "paid_pointer_page_tokens": [],
+        "snapshot_store_utf8_bytes": 3644
+      },
+      {
+        "case": "long-multiple",
+        "new_profiles": false,
+        "ordinary_tokens": 2047,
+        "whole_prompt_tokens": 4456,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 3,
+            "full": 0,
+            "prefix": 3,
+            "omitted": 3
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          178,
+          183,
+          210
+        ],
+        "paid_pointer_page_tokens": [
+          1169
+        ],
+        "snapshot_store_utf8_bytes": null
+      },
+      {
+        "case": "long-multiple",
+        "new_profiles": true,
+        "ordinary_tokens": 2048,
+        "whole_prompt_tokens": 5360,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 2,
+            "full": 0,
+            "prefix": 2,
+            "omitted": 4
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          672,
+          606
+        ],
+        "paid_pointer_page_tokens": [
+          1503
+        ],
+        "snapshot_store_utf8_bytes": 7826
+      },
+      {
+        "case": "history-backlinks",
+        "new_profiles": false,
+        "ordinary_tokens": 2047,
+        "whole_prompt_tokens": 4456,
+        "counts": {
+          "record": {
+            "selected": 2,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 1
+          },
+          "historical_record": {
+            "selected": 2,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 2
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 6
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          363
+        ],
+        "paid_pointer_page_tokens": [
+          2016
+        ],
+        "snapshot_store_utf8_bytes": null
+      },
+      {
+        "case": "history-backlinks",
+        "new_profiles": true,
+        "ordinary_tokens": 2033,
+        "whole_prompt_tokens": 5345,
+        "counts": {
+          "record": {
+            "selected": 2,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 2
+          },
+          "historical_record": {
+            "selected": 2,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 1
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 5
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          65,
+          0
+        ],
+        "paid_pointer_page_tokens": [
+          2016
+        ],
+        "snapshot_store_utf8_bytes": 11858
+      },
+      {
+        "case": "large-scope",
+        "new_profiles": false,
+        "ordinary_tokens": 2048,
+        "whole_prompt_tokens": 4457,
+        "counts": {
+          "record": {
+            "selected": 1,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 1,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 1
+          },
+          "source": {
+            "selected": 4,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 4
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          228
+        ],
+        "paid_pointer_page_tokens": [
+          1796
+        ],
+        "snapshot_store_utf8_bytes": null
+      },
+      {
+        "case": "large-scope",
+        "new_profiles": true,
+        "ordinary_tokens": 2035,
+        "whole_prompt_tokens": 5347,
+        "counts": {
+          "record": {
+            "selected": 1,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 1
+          },
+          "historical_record": {
+            "selected": 1,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 1
+          },
+          "source": {
+            "selected": 4,
+            "delivered": 3,
+            "full": 0,
+            "prefix": 3,
+            "omitted": 1
+          },
+          "observation_field": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          186,
+          38,
+          51
+        ],
+        "paid_pointer_page_tokens": [
+          1080
+        ],
+        "snapshot_store_utf8_bytes": 6682
+      },
+      {
+        "case": "conflicting-observation",
+        "new_profiles": false,
+        "ordinary_tokens": 2043,
+        "whole_prompt_tokens": 4452,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 2,
+            "full": 0,
+            "prefix": 2,
+            "omitted": 4
+          },
+          "observation_field": {
+            "selected": 1,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          0,
+          148,
+          129
+        ],
+        "paid_pointer_page_tokens": [
+          1528
+        ],
+        "snapshot_store_utf8_bytes": null
+      },
+      {
+        "case": "conflicting-observation",
+        "new_profiles": true,
+        "ordinary_tokens": 2047,
+        "whole_prompt_tokens": 5359,
+        "counts": {
+          "record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "historical_record": {
+            "selected": 0,
+            "delivered": 0,
+            "full": 0,
+            "prefix": 0,
+            "omitted": 0
+          },
+          "source": {
+            "selected": 6,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 5
+          },
+          "observation_field": {
+            "selected": 1,
+            "delivered": 1,
+            "full": 0,
+            "prefix": 1,
+            "omitted": 0
+          }
+        },
+        "chosen_prefix_codepoints": [
+          0,
+          499
+        ],
+        "paid_pointer_page_tokens": [
+          1863
+        ],
+        "snapshot_store_utf8_bytes": 8899
+      }
+    ],
+    "tokenizer_files_sha256": {
+      "tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+      "tokenizer_config.json": "5186f0defcd7f232382c7f0aebcd2252d073bb921ab240e407b7ae8745d2b29b",
+      "chat_template.jinja": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259"
+    },
+    "ordinary_max_tokens": 2048,
+    "max_candidate_identities": 6,
+    "whole_request_output_reserve": 4096,
+    "whole_request_safety": 64,
+    "body_allocation_degradations_preserved": true,
+    "conflict_pair": {
+      "selected_groups": 1,
+      "delivered_conflict_stubs": 1,
+      "distinct_original_candidates": 2,
+      "delivered_candidate_bodies": 0,
+      "both_candidates_omitted": true,
+      "paid_pages_source_pointers_only": true,
+      "paid_page_tokens_legacy_new": [
+        1528,
+        1863
+      ],
+      "read_search_delta": 0
+    },
+    "old_eight_full_selected_units_body_not_independently_saved": true,
+    "missing_original_body_not_reconstructed": true,
+    "semantic_reading_or_compression_gain_claim": false
+  },
+  "design": {
+    "profiles_default_legacy": {
+      "memory_read_protocol": "selected_snapshot_v1",
+      "tool_read_feedback": "typed_read_v1",
+      "tool_save_communication": "completed_receipt_v1"
+    },
+    "independent_factors_actual_eight_compositions": true,
+    "snapshot_store": "exact selected_snapshot:D, H/binding/menu/issuing packet hash/receipt hash; cooperating lock only, not backend CAS",
+    "typed_read_rejection_codes": 8,
+    "typed_feedback_max_utf8_bytes": 1024,
+    "retrieval_ranking_selected_order_unchanged": true,
+    "source_role_hash_owner_turn_and_read_time_version_guards_preserved": true,
+    "source_union_semantic_classifier_case_routing_automatic_retry_or_extra_paid_repair": false,
+    "save_guidance_is_communication_not_guarantee": true,
+    "snapshot_rows_persist_without_TTL_GC": true,
+    "closed_writer_generations": 1,
+    "closed_writer_repairs": 0,
+    "native_capability_fields_not_expanded": true
+  },
+  "preserved_root_failures": [
+    {
+      "tool_chunk": "f26563",
+      "returncode": 127,
+      "reason": "metadata read used unavailable python; corrected read used python3; at-time maps unavailable"
+    },
+    {
+      "tool_chunk": "588b68",
+      "returncode": 1,
+      "reason": "independent inventory incorrectly rejected pytest directory symlinks; failed original driver/stdout/stderr retained",
+      "failed_driver_sha256": "d3f33848be7fcf3a0b37a37da0b168e954890561ef7d7d679d86f83c550d2de9",
+      "stdout": {
+        "path": "artifacts/v13-2-development-r7/read-protocol-root-original-audit-first.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "artifacts/v13-2-development-r7/read-protocol-root-original-audit-first.stderr.log",
+        "sha256": "4c3958fb642ca2fffa277328b5d10e2bf6e0959b87a1453e1dd58701cf4fd892"
+      }
+    }
+  ],
+  "continuous_actual_ledger": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "before_after_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+    "generation_requests": 9200,
+    "generation_known_tokens": 25757358,
+    "generation_charged_tokens": 25787745,
+    "generation_historical_unknown": 1,
+    "embedding_tokens": 920843,
+    "embedding_unknown": 0
+  },
+  "new_actual_generation_http": 0,
+  "new_actual_embedding_http": 0,
+  "new_model_quality_samples": 0,
+  "new_independent_judge_reviews": 0,
+  "source_actual_ledger_access_authorized": false,
+  "global_http_owner_implemented": false,
+  "next_actual_cohort": "Requires separate global HTTP owner acceptance plus fresh Root runtime/config/input/route/wire/ledger freeze and exact GitHub verification before first HTTP; staged per-trajectory Root review, never replay R7.",
+  "literature": {
+    "catalog": {
+      "path": "data/manifests/v13-2-design-literature-catalog.json",
+      "sha256": "04a2ff7412feb03993632f5eec9216f7d855654a946e14c5d1769d19082a3bf2"
+    },
+    "paper_count": 17,
+    "project_reference_groups": 12,
+    "current_unique_verified_resource_files": 715,
+    "local_index_links": 114,
+    "new_retrieved_resources_this_phase": 0,
+    "delivery": "Raw PDF/HTML/fixed implementation snapshots in local ignored archive; URLs/version/hash/summaries in Git."
+  },
+  "all_48_requirements_statuses_unchanged": true,
+  "requirements_status_counts": {
+    "PASSED_SCOPED": 4,
+    "PARTIAL": 27,
+    "NOT_PASSED": 1,
+    "NOT_VERIFIED": 16
+  },
+  "full_plan": "ACTIVE",
+  "e0": "NOT_PASSED",
+  "d4": "NOT_ADMITTED",
+  "product": "NO_GO",
+  "not_run": [
+    "full test suite",
+    "build",
+    "remote CI",
+    "new actual model cohort",
+    "independent Judge",
+    "global HTTP owner closure"
+  ],
+  "rollback_pre_transfer": "6f952b6d52fba025568ace263a32d195e1e36423",
+  "rollback_original_main": "95bf708bfd8aac9f7855485166e3bf739928b949"
+}

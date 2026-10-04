@@ -1,0 +1,119 @@
+{
+  "kind": "V13_5_L0_CHECKPOINT",
+  "candidate_commit": "760e011",
+  "semantic_acceptance": "NOT_ESTABLISHED",
+  "mechanical_checks": {
+    "memory_affected": {
+      "passed": 287,
+      "includes_new_memory": 22,
+      "deselected_local_mcp": 1
+    },
+    "local_mcp_http": {
+      "passed": 1
+    },
+    "application_integration_architecture": {
+      "passed": 32,
+      "workflows": 17,
+      "whole_entry": 11,
+      "architecture": 4
+    },
+    "external_sdk_lifecycle": {
+      "passed": 4
+    },
+    "source_ownership": {
+      "passed": 10
+    },
+    "ci_functional_routing": {
+      "passed": 66,
+      "overlaps_prior_counts": true
+    },
+    "root_queue": {
+      "passed": 3,
+      "overlaps_ci_count": true
+    },
+    "verification_matrix": "PASS",
+    "root_ruff_mypy": "PASS"
+  },
+  "not_a_summed_test_denominator": true,
+  "model_http_calls": 0,
+  "mock_provider_integration": "actual Store/Saver/Agent/capacity/ledger; synthetic provider and local tokenizer; no semantic evidence",
+  "evidence": [
+    {
+      "path": "artifacts/v13-5/functional-checks/summary-r1.json",
+      "sha256": "fa4e361d82dc5ab50cf33d8210873cc3dffb076433cbda25105c20e33dc08db5",
+      "bytes": 9022
+    },
+    {
+      "path": "artifacts/v13-5/application-validation/integration-final-r1/validation.json",
+      "sha256": "4f729f843ef3eb56e8c4720caa66767c9e59009aa2a0984e458059d68e273ebe",
+      "bytes": 7322
+    },
+    {
+      "path": "artifacts/v13-5/functional-checks/ci-verification-matrix-final.log",
+      "sha256": "e77ed7f1f9cd4a218bb756c0fa60c24f2a2957b920dbf44539721d25a132b7f1",
+      "bytes": 416
+    },
+    {
+      "path": "artifacts/v13-5/functional-checks/ci-source-ownership-final.log",
+      "sha256": "a40ab2bc493585bdbf2ead0371f95dbacd6940bea25dd43121857e045048a9a2",
+      "bytes": 99
+    },
+    {
+      "path": "artifacts/v13-5/functional-checks/ci-functional-routing-stable.log",
+      "sha256": "776798297371c4b471543935d94555ba519a2f80f0dd88c4e31aa3096364f913",
+      "bytes": 1617
+    },
+    {
+      "path": "artifacts/v13-5/functional-checks/ci-sdk-lifecycle.log",
+      "sha256": "5c5101af30e24cbb50ccb2c3cdd2eac9310f6ac1bc1dec8f1b9088984cc05ae7",
+      "bytes": 830
+    },
+    {
+      "path": "artifacts/v13-5/functional-checks/local-mcp.log",
+      "sha256": "ef5c45f50e58515ef2021ac90abda1f12a11ec0d67fddbe06d00add47148ba59",
+      "bytes": 1333
+    }
+  ],
+  "r1_followup": {
+    "checks": {
+      "application_whole_entry_visibility_architecture_passed": 41,
+      "application_mypy": "PASS",
+      "runner_and_memory_static": "PASS",
+      "verification_matrix": "PASS"
+    },
+    "direct_repairs": [
+      "revoked-trigger W3 continuation",
+      "interrupted public discovery recovery",
+      "actual tool-delivery exposure",
+      "cached and completed/pending checkpoint visibility barriers"
+    ],
+    "evidence_sha256": {
+      "artifacts/v13-5/application-validation/integration-fixes-r1/suite.log": "86c09866c3e7b473a5e8da1858457fe5ad29c96d52a1bfd197f3317b1a9cb782",
+      "artifacts/v13-5/application-validation/integration-fixes-r1/mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "artifacts/v13-5/visibility-replay-r1/static-checks.json": "8645ee9f29d8d74468fb459f49a8fe1ef535a776ee54a6747fd87ee8162b4478",
+      "artifacts/v13-5/visibility-replay-r1/tool-description-contract.json": "57bbbf34c77e5a17de3240fce3fe78893e0c5d575ff75689421ca6b4ded33973",
+      "artifacts/v13-5/functional-checks/ci-visibility-replay-matrix.log": "a1bdf59b923b6f5cae542c22708e9e2d6b03f0b3f105b63c17d9383dfcf0f152"
+    },
+    "model_semantics": "Requires new cohort, not established by mechanical tests"
+  },
+  "r4_native_reuse": {
+    "passed": 24,
+    "skipped": 0,
+    "scope": "Existing native bridge, real installed SDK, pinned tokenizer/template, native tool schemas and overflow. Scripted provider, not semantic/model evidence.",
+    "source_changed": false,
+    "evidence": "artifacts/v13-5/native-reuse-r4-checks/summary.json",
+    "sha256": "c64568dfa1bedb3c1fdedee8a348311c4c038b9adc419518e2851473ec3e5ca0"
+  },
+  "r5_candidate_followup": {
+    "model_status": "NOT_RUN_NOT_FROZEN",
+    "memory_tests_passed": 25,
+    "whole_entry_and_visibility_tests_passed": 17,
+    "source_ruff_mypy": "PASS",
+    "semantic_acceptance": "NOT_ESTABLISHED",
+    "evidence_sha256": {
+      "artifacts/v13-5/read-effect-contract-r1/summary.json": "c7b6e8c41f502e159dc2277bb44c6981404bc5719c83d426c47cf4e5834cc51e",
+      "artifacts/v13-5/application-validation/memory-effects-r0/validation.json": "3224ecba4a5032a95a44b36599afeb0010a445bb23a1fc1278b1c9c0aa84f469"
+    },
+    "candidate_commit": "2020db8f7367c0d197034b6f30fd6962b4ebfc17"
+  }
+}

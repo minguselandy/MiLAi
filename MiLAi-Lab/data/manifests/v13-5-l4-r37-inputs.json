@@ -1,0 +1,33 @@
+{
+  "schema": "v13_5_l4_authorship_freeze_v1",
+  "method_commit": "599163ef435873ca9b82cebc73c842e7961980cf",
+  "configuration": "configs/v13-5-functional-r37.json",
+  "author": "Root same-family development operator",
+  "independent_review": false,
+  "status": "INPUTS_FROZEN_BEFORE_ANY_NEW_L4_OUTPUT",
+  "stories": 12,
+  "messages": 31,
+  "exposure": "Newly authored after r37 method freeze; no model outputs seen. Root also owns method and review, related task classes/template similarity acknowledged; not independent benchmark, not old L4 relabeling, not T1-T3. Existing L1 time-support and L2 protocol failures remain open; confirmation cannot erase them.",
+  "files": {
+    "artifacts/v13-5/evaluator-fixtures/l4-r37-runtime.json": "1e4c2a16659e9eb26d43363d39e520702141946207bc63753eed2740e0ef67e2",
+    "artifacts/v13-5/evaluator-fixtures/l4-r37-rubric.json": "3014a75cb1a985dbf3dcda02fe1b8f3082c2d5e8833b4ab95ac1e2da08a44e9e",
+    "artifacts/v13-5/evaluator-fixtures/l4-r37-controls.json": "1150e1fde83f18e1f849415515ac0f8627636e85cebf19911fffd2df258d9ceb",
+    "configs/v13-5-functional-r37.json": "cfd964c809566ddc90956c629e7f4113da98a17349717a6bc5f718fa13c3e689"
+  },
+  "pre_admission_correction": "Before prepare or any L4 model output, corrected private external-edit schema: new_body is the newly authored cleaning text, not inherited old fixture body; removed unused content key. Original authoring files retained under artifacts/v13-5/l4-r37-pre-admission-authoring-correction. Zero model calls.",
+  "reviewable_synthetic_input_copies": {
+    "data/fixtures/v13-5-l4-r37.json": {
+      "sha256": "1e4c2a16659e9eb26d43363d39e520702141946207bc63753eed2740e0ef67e2",
+      "same_bytes_as": "artifacts/v13-5/evaluator-fixtures/l4-r37-runtime.json"
+    },
+    "data/diagnostics/v13-5-l4-r37-rubric.json": {
+      "sha256": "3014a75cb1a985dbf3dcda02fe1b8f3082c2d5e8833b4ab95ac1e2da08a44e9e",
+      "same_bytes_as": "artifacts/v13-5/evaluator-fixtures/l4-r37-rubric.json"
+    },
+    "data/diagnostics/v13-5-l4-r37-controls.json": {
+      "sha256": "1150e1fde83f18e1f849415515ac0f8627636e85cebf19911fffd2df258d9ceb",
+      "same_bytes_as": "artifacts/v13-5/evaluator-fixtures/l4-r37-controls.json"
+    }
+  },
+  "publication_scope": "Synthetic newly authored stories and evaluator conditions only, no real private data, model outputs, database or raw run logs."
+}

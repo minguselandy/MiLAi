@@ -1,0 +1,269 @@
+{
+  "kind": "V13_2_COMMON_BOUNDARY_FINITE_ENGINEERING_CHECKPOINT",
+  "status": "FINITE_ENGINEERING_ACCEPTED_MODEL_EVALUATION_NOT_STARTED_PAUSED",
+  "recorded_at_utc": "2026-10-01T22:35:59.755989+00:00",
+  "source_commit": "1c9c7334394d8f3411d2da2f58ad1151aad54251",
+  "source_parent": "4e2f9098229db86df5cb9d0b8a940de2e8a63134",
+  "source_handoff": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/HANDOFF.md",
+    "sha256": "4f4d4bb6195a8abb480e2d40c25735eb6a64bdc521bec0d6236f0116d388238e",
+    "bytes": 4247
+  },
+  "source_seal": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/SEAL.json",
+    "sha256": "30e41f0bfd71145e4ffa3f001d14319e01408ce17dc3eb0b14e61a7ded4efea3",
+    "bytes": 2655
+  },
+  "source_file_index": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation/MiLAi-Lab/artifacts/v13-2-common-boundary-engineering/file-index.json",
+    "sha256": "c4f4ffa43f0398d87309b41a2a22b4cb2221f45120f5490d2b10362ebfd3834e",
+    "bytes": 1227306
+  },
+  "source_indexed_files": 6077,
+  "source_terminal_regular_files_total": 6095,
+  "source_original_nonzero": 27,
+  "source_finalized_commands": 148,
+  "source_symlink_metadata_observed_by_Root": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/source-audit-terminal-shape-recovery-first/source-53-symlink-metadata-readonly.json",
+    "sha256": "22e50bfe0aa0fd8e9f8814b5ec30297f52fa20ce9bc21036e974b67dc5b6991a",
+    "bytes": 15204
+  },
+  "Root_source_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/source-audit-terminal-shape-recovery-first/result.json",
+    "sha256": "ecddc0f5d62bee63982d64aa38182aaf5b8865d24695ab5573eb4225f19de1cb",
+    "bytes": 1120
+  },
+  "exact_transfer": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/exact-source-transfer-first/result.json",
+    "sha256": "b5e376c8d497c6a9f4a9b1697d4fd9e7c413e147674a1fba646bfacfff327769",
+    "bytes": 876
+  },
+  "implementation_paths": {
+    "src/milai_lab/baselines/v13_1_controls.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/src/milai_lab/baselines/v13_1_controls.py",
+      "sha256": "c52085429fca990002e9528c099ebc1867219024cbb9b5208b22ce08915d5a65",
+      "bytes": 32421
+    },
+    "src/milai_lab/contracts/common_boundary.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/src/milai_lab/contracts/common_boundary.py",
+      "sha256": "9d7470fc841eb4f1a40195eefb999a6fef19482204d5c6702a1a72cc43727c7c",
+      "bytes": 7076
+    },
+    "src/milai_lab/runners/v13_1_p5.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/src/milai_lab/runners/v13_1_p5.py",
+      "sha256": "62696c7c2f652a0f49f49d5d385039921263ccbeb67551b001b283f0dcce149e",
+      "bytes": 54031
+    },
+    "src/milai_lab/runners/v13_1_p5_compare.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/src/milai_lab/runners/v13_1_p5_compare.py",
+      "sha256": "681074b1166910fa636c917ba709b872f60f3a70acc60628192b9cc6ff3869e1",
+      "bytes": 59067
+    },
+    "tests/memory/test_v13_1_p5_compare.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tests/memory/test_v13_1_p5_compare.py",
+      "sha256": "7dece729cc411377e21ee6f54216d1f19571ce3fe8d392f34291a9cc06e5af43",
+      "bytes": 49013
+    },
+    "tests/memory/test_v13_2_common_boundary.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tests/memory/test_v13_2_common_boundary.py",
+      "sha256": "d4fd86999e735633b8edd6bac6b405a85b7495bc9fefe9405abc16e004283b30",
+      "bytes": 48485
+    },
+    "tests/unit/test_common_boundary.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/tests/unit/test_common_boundary.py",
+      "sha256": "775e1c0ff95ac58ac61924329eddf3db9ad3563b6e2f3d32546285c6540d4019",
+      "bytes": 3953
+    }
+  },
+  "profiles": {
+    "common_read_profile": "bounded_public_v1",
+    "common_formation_profile": "closed_host_v1",
+    "common_host_profile": "read_only_v1",
+    "common_semantic_fallback": "single_summary_v1"
+  },
+  "defaults": "legacy",
+  "Root_distinct_new_controls": 39,
+  "Root_distinct_related_old_controls": 24,
+  "Primary_main_SDK_repeated_controls": 36,
+  "repeated_controls_not_added_to_distinct_sample_count": true,
+  "Root_receipts": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/exact-seven-method-path-transfer-first/receipt.json",
+      "sha256": "f15c5d79b90fe7bef0aa1d7695da5fab6277a038f193c4b02d1986541ae81003",
+      "bytes": 1485,
+      "label": "exact-seven-method-path-transfer-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/paused-literature-delivery-verification-first/receipt.json",
+      "sha256": "a2414ab7932436911ddb45fd0d1c4d8f627f93f8acdc872f6499634114f5ba84",
+      "bytes": 1485,
+      "label": "paused-literature-delivery-verification-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-default-wire-independent-first/receipt.json",
+      "sha256": "d8e31eb430ea11b12b01568063482089b8a6adf97312be80f5c9f7f8c0f12daf",
+      "bytes": 1579,
+      "label": "primary-default-wire-independent-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-lab-sdk-36-finite-first/receipt.json",
+      "sha256": "4460c040ce271a3d08a60c82b2ae697fa59557189bfbefe3e37d1a61718d39ab",
+      "bytes": 1762,
+      "label": "primary-lab-sdk-36-finite-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-mypy-four-paths-first/receipt.json",
+      "sha256": "0959ad1729366787b71d42cf4e0ea01c42759f65b33eca2677caca06fada4f3b",
+      "bytes": 1738,
+      "label": "primary-mypy-four-paths-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-package-boundary-first/receipt.json",
+      "sha256": "6bb1bcaf6adbf53a8556c9883f6cafebf17f2945c7df4aca04a93176dc5d3fb3",
+      "bytes": 1440,
+      "label": "primary-package-boundary-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-package-build-first/receipt.json",
+      "sha256": "8f56bee1d4115f6a7392e866e6306d2620462b72b18d7843dbc9b99085d6c82e",
+      "bytes": 1565,
+      "label": "primary-package-build-first",
+      "returncode": 1
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-package-offline-cache-recovery-first/receipt.json",
+      "sha256": "1115f1dc791cdb3781f8781e275fb8bce7fe1636f284ce958551b5863b57d64e",
+      "bytes": 1546,
+      "label": "primary-package-offline-cache-recovery-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-qwen-pressure-independent-first/receipt.json",
+      "sha256": "454f703d860a9de7488b6f637ca6fde6695b0bfc94b8c212a8359908a861bd2f",
+      "bytes": 1511,
+      "label": "primary-qwen-pressure-independent-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-ruff-seven-paths-first/receipt.json",
+      "sha256": "c5b03309bca70869e0bdc581e4806bf0b385a45e92d346bb7193ed3e467ec817",
+      "bytes": 1851,
+      "label": "primary-ruff-seven-paths-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/primary-tools-boundary-first/receipt.json",
+      "sha256": "023000cf3761c8284b2f6c2406e771a0f3e6cd220b9002cf8a99de95e252d7f8",
+      "bytes": 1445,
+      "label": "primary-tools-boundary-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-closure-audit-first/receipt.json",
+      "sha256": "cb7ff13c58ec7d1653bad5cfc9fa4930f6443c93e1e5d572eea625f507a6e1d9",
+      "bytes": 1470,
+      "label": "source-closure-audit-first",
+      "returncode": 1
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-closure-terminal-shape-recovery-first/receipt.json",
+      "sha256": "75984f8d76f8892a1b3de716cd0f30f6adf6fa3bdf390a2280b0d7c726466963",
+      "bytes": 1512,
+      "label": "source-closure-terminal-shape-recovery-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-final-10-old-p5-first/receipt.json",
+      "sha256": "05794a6902cc1c220f6306395ad78255ddfd9a883ecc679d895275333c9e0579",
+      "bytes": 2101,
+      "label": "source-final-10-old-p5-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-final-14-old-controls-first/receipt.json",
+      "sha256": "f2a7f38b00f5d730700722fd52dc76188465c0017d41d558e6a4cb06313cac19",
+      "bytes": 2055,
+      "label": "source-final-14-old-controls-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-final-39-new-independent-first/receipt.json",
+      "sha256": "cfad9736348ba977d1b4d6ceea5602c08ea97bb238ffab2282b57ab78c5e535b",
+      "bytes": 1952,
+      "label": "source-final-39-new-independent-first",
+      "returncode": 0
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/runs/source-sdk-reference-archive-first/receipt.json",
+      "sha256": "333c3b310bc57211de17d94bdc111ba2e3ab2ccb50236eae4ac8179cc13a3013",
+      "bytes": 1482,
+      "label": "source-sdk-reference-archive-first",
+      "returncode": 0
+    }
+  ],
+  "Root_original_nonzero": 2,
+  "default_wire_pairs": 8,
+  "default_requests_per_version": 12,
+  "default_wire_originals": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/default-wire-independent-first/default-wire-results.json",
+    "sha256": "e33406a3967a99a9da4022ad8ccded7400b4ecb5e0dfaefe4864c4102cf941dc",
+    "bytes": 4933
+  },
+  "pressure_packets": 6,
+  "pressure_originals": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/pressure-independent-first/pressure-results.json",
+    "sha256": "141dc52adc019b6b1a6f47490aa0d2778944b29b8ff0cd56ffdd62a4577da5b7",
+    "bytes": 4496
+  },
+  "Root_archive": {
+    "file_index": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/pause-existing-evidence-closure-first/file-index.json",
+      "sha256": "770204bcbecd744b9bf2790bf969386d23658a638da770d6881bb94fddc4fd26",
+      "bytes": 479632
+    },
+    "seal": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/pause-existing-evidence-closure-first/SEAL.json",
+      "sha256": "f2b53fc0c0adfe11dfcf99aff5bb78b924b0cc4e15c3015a090be5fac6375cc9",
+      "bytes": 870
+    },
+    "indexed_files": 2338,
+    "symlink_metadata_entries": 36,
+    "closed": true
+  },
+  "literature_current_audit": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-common-boundary-root-acceptance/pause-existing-evidence-closure-first/literature-895-original.json",
+    "sha256": "af41486db149a425f98458d08232ade50a16739541a55edcd9cb584c69e51977",
+    "bytes": 234172
+  },
+  "actual_generation_embedding_HTTP": 0,
+  "canonical_ledger_sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+  "limitations": [
+    "Earlier python heredoc mutation stdin was not separately captured by the inherited recorder; actual command argv, pre/post full maps, executed source versions and original logs remain. Later stdin.original is exact. No missing original input or contemporaneous maps backfilled.",
+    "Bootstrap/controller unrecorded tool attempts and partial maps remain as stated in existing bootstrap/control artifacts; authoritative recorder maps are Source-only. Root/global ledger never accessed.",
+    "One early command overlapped a narrow Source mutation. Its before/after maps differ and evidence is not labeled final uniform execution; later affected controls pass with unchanged maps.",
+    "Default wire first three exploratory drivers retain failed parent subprocesses. Final stage-four 16 parent/current children save original stdout/stderr/rc and each full runtime/test/config before/after identity.",
+    "All new flags belong to the comparison CLI/composition using actual P5 prepare/step/resume. Plain D0/P5 or other future drivers are not independently enabled by these flags.",
+    "Common M freezes the delivered ordinary packet for the public turn, deferring dirty metadata/body changes to explicit reads or the next public turn. Existing ranking/selection/allocator/CAS remain unchanged. Repeated ordinary reference bodies are charged; if their total exceeds2048 the new profile rejects without extra retrieval or allocation changes.",
+    "Non-M bounded adapter retains actual returned order and first6 selected DTO IDs, but adds metadata/prefix allocation. Long bodies lose delivery. Metadata-only infeasibility rejects explicitly. Native/control returned-subset selection is not a full corpus or M selection equivalent.",
+    "B6 existing raw index includes tool events only; actual archived Human/final assistant feed the one optional summary. Literal projection remains the existing finite observation profile. Summary uses the frozen existing Host output maximum, not a modified client or extra repair.",
+    "Native public constructor and actual close/new-process same-path reopen passed with fixed f808 SDK, cached BM25/spacy, infer=True empty extraction; seeded notes explicitly infer=False fixtures. No semantic extraction, ranking or quality claim. __new__ controls are only local interface tests.",
+    "Native get_all default limit100 and search top_k20/threshold0.1/rerankFalse bound actual snapshots; get/history preserve real owner/IDs but do not provide corpus/history completeness, M version/read handle or CAS. Normal construction/close does not prove all partial initialization failure paths/resource closures.",
+    "Scripted transports only: local Qwen recount is actual tokenizer cost for saved synthetic wires, not actual model usage. Original mock charged usage and unknown reservations retained separately. No actual HTTP/SDK upgrade/benchmark/Root experimental content.",
+    "Old sealed public-parameter guidance says no automatic source selection; this must be read as presentation adding no filling. Legacy omitted source_refs singleton binding default still exists unchanged. Finding is documented here; old sealed profile/parser/guards are untouched.",
+    "Engineering evidence does not establish quality/generalization, D4/research gate or future experiment admission. HTTP owner core and old seals unchanged; Root exclusively transfers and runs real experiments.",
+    "Root audit initially assumed stdin existed for a script command; original rc1 retained and actual receipt-shape recovery verified.",
+    "Root primary build backend initially unavailable; original rc1 retained, uv offline cached wheel/sdist build passed without runtime SDK change.",
+    "Source file index excludes pytest directory alias metadata; 53 actual symlink aliases independently recorded by Root now.",
+    "No new four-arm model cohort or R9 semantic repair evidence. Original 48 row statuses, E0/D4/Product gates unchanged."
+  ],
+  "E0": "NOT_PASSED",
+  "D4": "NOT_ADMITTED",
+  "Product": "NO_GO",
+  "Root_is_independent_quality_Judge": false
+}

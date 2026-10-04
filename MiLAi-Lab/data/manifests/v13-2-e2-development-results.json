@@ -1,0 +1,1277 @@
+{
+  "kind": "V13_2_E2_IDENTITY_ACTUAL_DEVELOPMENT_RESULT",
+  "status": "ALL_PLANNED_ATTEMPTED_ROOT_REVIEW_ONLY",
+  "runtime_manifest_sha256": "73de4df5a690cdb444dc4167d7dcaae6b2e47d32ab3db235beb156600532c1fe",
+  "planned": 15,
+  "attempted": 15,
+  "completed": 13,
+  "interrupted": 2,
+  "planned_messages": 45,
+  "attempted_messages": 42,
+  "completed_messages": 40,
+  "interrupted_messages": 2,
+  "not_run_messages": 3,
+  "actual_http_finals_linked": 40,
+  "message_status_counts": {
+    "completed": 40,
+    "interrupted": 2,
+    "NOT_RUN": 3
+  },
+  "eligible_original_record_denominator": 14,
+  "root_review": {
+    "pass": 11,
+    "fail": 2,
+    "interrupted": 2,
+    "independent": false,
+    "allplanned_denominator": 15
+  },
+  "correct_original_revision_at_correction_boundary": 11,
+  "reader_final_current_former_scope_correct": 12,
+  "reader_completed_denominator": 13,
+  "initial_card_formation_failures": 1,
+  "bounded_packets_verified_in_actual_http": 40,
+  "unintended_duplicate_preference_cards": 0,
+  "unrequested_truthful_question_episode_cards": 1,
+  "explicit_supersessions": 0,
+  "wrong_merges_identified": 0,
+  "unrelated_item_eligible_opportunities": 2,
+  "natural_version_conflicts_observed": 0,
+  "natural_stale_write_opportunity_denominator": null,
+  "unsupported_changed_claim_revisions_preserved_in_history": [
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "language-reverse",
+      "id": "ce081a5d-eaa8-5816-b45e-3d1bf6813264",
+      "revision": 2,
+      "source_refs": [
+        "src-cb2e3703c061cf8e4ca65ad38a07662592b15561cad566f82d3b8cb8b562b0c5"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    },
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "same-name-different-projects",
+      "id": "48dc9aff-5cd1-55cc-a836-3815beb014b9",
+      "revision": 2,
+      "source_refs": [
+        "src-f33448d61a6dc39d1fd689e80002eb00bfc786c1ec8e9f841b09be6e0b41d6ff"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "update-2",
+      "id": "9ef973e9-79e0-5562-8ace-b3077fdf5869",
+      "revision": 2,
+      "source_refs": [
+        "src-f0fde3de2c13800c48dc1dc2e84b20636c842b11a995e52bac21a7b6549bf988"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "update-3",
+      "id": "581baa88-74ac-570c-879d-0f319f03b69c",
+      "revision": 2,
+      "source_refs": [
+        "src-b873345a42832cd6b23d86971f01faf2f12ac70c19cfb66042ab7782e807b554"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "language-reverse",
+      "id": "bdfb9635-8e49-513e-acd3-ccacd4a7007a",
+      "revision": 2,
+      "source_refs": [
+        "src-802d9e725efeaffeb91b2ccb2aa0da7bdb5502c280332a4e882dae473887e7f8"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "update-3",
+      "id": "c83d0fc5-e024-5f66-b68c-ef2d690d0c6a",
+      "revision": 2,
+      "source_refs": [
+        "src-8ed52dba23d31569fa9deebfb975e6e8d9dff9f43085a030c624ca05fff44096"
+      ],
+      "persisted_history_contains_unsupported_changed_claim": true
+    }
+  ],
+  "first_failures": [
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "correction-negation",
+      "message_index": 1,
+      "first_runtime_rejection": {
+        "status": "rejected",
+        "reason": "operational_fields_require_object_ref",
+        "id": "c53f8fdd-4247-5414-a5f9-b9bc028d81b3"
+      },
+      "actual_generation_requests": 12,
+      "error_type": "ValueError",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "receipt_sha256": "92428a8bd8bd2b9251453e84719fa70fe110ef7d17f7fbd961a9a26c3b0d2cf8",
+      "trace_sha256": "32b5a9e44d354618f3bc0dd923211130f3352d52599af2d7c09ba957098db2b6"
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "same-name-different-projects",
+      "message_index": 0,
+      "first_runtime_rejection": {
+        "status": "rejected",
+        "reason": "source_not_found_or_not_owned",
+        "id": "65a5032f-2184-5152-9ab1-b48094782d3d"
+      },
+      "actual_generation_requests": 12,
+      "error_type": "ValueError",
+      "error": "PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED",
+      "receipt_sha256": "47e5a8a1b685f5a27e8f92937f5037a54df897ddc356877712b2c03de30281f6",
+      "trace_sha256": "a2f5828cc35ff5f54720da29f565362b82bd20fc1592644698e78a9481ab1a50"
+    }
+  ],
+  "arms": [
+    {
+      "arm": "E2-old-target-query",
+      "planned": 5,
+      "attempted": 5,
+      "complete": 4,
+      "eligible_original_record_denominator": 5,
+      "root_review_pass": 3,
+      "root_review_fail": 1,
+      "interrupted": 1,
+      "correct_original_revision_at_correction_boundary": 3,
+      "trace_costs": {
+        "generation_requests": 42,
+        "generation_classified_requests": 36,
+        "generation_known_tokens": 144425,
+        "generation_classified_known_tokens": 125807,
+        "embedding_requests": 18,
+        "embedding_classified_requests": 18,
+        "embedding_known_tokens": 7008,
+        "embedding_classified_known_tokens": 7008,
+        "semantic_writer_classified_requests": 6,
+        "semantic_writer_classified_known_tokens": 18618
+      },
+      "private_audit_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E2-old-target-query/audit.json",
+      "private_audit_sha256": "0c2675cb5ae8a8ccfa5f8be4783a7bcc7308e7b8f09ea842142073c544793b90"
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "planned": 5,
+      "attempted": 5,
+      "complete": 4,
+      "eligible_original_record_denominator": 4,
+      "root_review_pass": 4,
+      "root_review_fail": 0,
+      "interrupted": 1,
+      "correct_original_revision_at_correction_boundary": 4,
+      "trace_costs": {
+        "generation_requests": 44,
+        "generation_classified_requests": 37,
+        "generation_known_tokens": 146049,
+        "generation_classified_known_tokens": 123901,
+        "embedding_requests": 16,
+        "embedding_classified_requests": 16,
+        "embedding_known_tokens": 5757,
+        "embedding_classified_known_tokens": 5757,
+        "semantic_writer_classified_requests": 7,
+        "semantic_writer_classified_known_tokens": 22148
+      },
+      "private_audit_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E2-source-backlinks/audit.json",
+      "private_audit_sha256": "ceadbfc4416cab366d043241db3c3187f1e8ebe2cf12e89e5161591828d29b62"
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "planned": 5,
+      "attempted": 5,
+      "complete": 5,
+      "eligible_original_record_denominator": 5,
+      "root_review_pass": 4,
+      "root_review_fail": 1,
+      "interrupted": 0,
+      "correct_original_revision_at_correction_boundary": 4,
+      "trace_costs": {
+        "generation_requests": 36,
+        "generation_classified_requests": 30,
+        "generation_known_tokens": 120407,
+        "generation_classified_known_tokens": 99199,
+        "embedding_requests": 20,
+        "embedding_classified_requests": 20,
+        "embedding_known_tokens": 7887,
+        "embedding_classified_known_tokens": 7887,
+        "semantic_writer_classified_requests": 6,
+        "semantic_writer_classified_known_tokens": 21208
+      },
+      "private_audit_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E2-source-backlinks-read-handles-patch/audit.json",
+      "private_audit_sha256": "34aaeaa2162afd0c1c49acb1bbf0989acf1ef38117455c8a4f408ee269b8945e"
+    }
+  ],
+  "rows": [
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "update-2",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "1fe76199e5e06c78309da8fe8dfbf316987c305e1548e5f5ca4159cce108c05d",
+          "trace_sha256": "995eb289a608c63c9030a79983d831848350eb7737578b19006fc8fc3b1050ad",
+          "process_id": 3132839,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a706d6477e7303b9",
+                "raw_response_sha256": "ea72bd09c6264b7df9c3e6f80a467366add09596a9b8f6bb40c50f3a5e456d6b"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "e2f9521678b0af528d7722d845e50b7a55b21d16316eada950f8acd929e72209",
+          "trace_sha256": "a791f94c6312f1451260b285d7f0fb1551ad7e135ea54d93dd691c560ca8ff5b",
+          "process_id": 3133331,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-8076df9e74cb90cc",
+                "raw_response_sha256": "59f63f8594c45156dfa6481c77208ddb3800046767277f577242e4788e2bc1aa"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "842c0f540e6de3ff91237c1a2dd26a5ea8bb7bb0df1706962e94c8034e776fa2",
+          "trace_sha256": "dcbe1ece0917f19ee7597793bf225f627d9e0ec45fe5c78b555f2e17ae6b78e2",
+          "process_id": 3133863,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-844fd6e803218ecb",
+                "raw_response_sha256": "bfce3670b42f4aca0c4b3b3359ea46fbafdb94bdf563f0c006a0d9c0a8cc7ade"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "update-3",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "2647791e3d51558fad705a20130bbcd5557061e9218fac37ecc60640615fce98",
+          "trace_sha256": "86797dfa6974ca4195495f72a35750d3d7c689c45c2e7b501c23c9b8472f05f6",
+          "process_id": 3139034,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b65ead8a9a53ecd9",
+                "raw_response_sha256": "e2b47beb4ca743b373a21988b8eace0d0bdb39967c6bcb0ff7680459568cbd65"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "a02ad1134a3ed5fd8a9773141ad657b72493475da5faff0bbbb0a7031c6da294",
+          "trace_sha256": "b8c6927099beb30bfc938d022fbaa8444e363f71dda292e2e47cef5667972bac",
+          "process_id": 3139499,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-8911b26f2fab72ea",
+                "raw_response_sha256": "4285e1cfb1b7c14207217d48829235bccce51b8d8fa33150a5905b5043accd1d"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "59dc78793ceac6c93045b35b3d8a524932ca9503cbb4e9a946bf183466144eb1",
+          "trace_sha256": "59bb7aedd1e5b291a7c508ab3a5fe97c12aa958f16d56df9f6c945343fe2a042",
+          "process_id": 3140061,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-865e9f88d90ff237",
+                "raw_response_sha256": "be9c5706795487a95c5a8dc771c340cfc0d73c04750b47ce5db4e916d39006b6"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "language-reverse",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "88401f0721da2a2e5d473ccc762caa64d3e35796fdaff7e439db1c1e6e9d1b7f",
+          "trace_sha256": "09fcd49567e8ae8bbba610dc57b0d885188604c816cdb3ef5a74a61edee6bb8b",
+          "process_id": 3145244,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-97b23c53b799e645",
+                "raw_response_sha256": "21e9b1ab962ca0340080dcc377238539bb1477c16793ee482996f59aa93e388d"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "88858560a7c5340afac4a8d28d8ec96d345df8f12ae892f1ecd2e23ac45b6803",
+          "trace_sha256": "67b666729c778dfa53f759f95a2f55c971bc9cc6a063b9eb873ce27b5df2e194",
+          "process_id": 3145797,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-b944ccc3dbb10ef3",
+                "raw_response_sha256": "d6c15d8f4e49b03d0ee1ad0c4c45ba1ddf8aff0a6c195443e2bbc1c90038ff5d"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "1e044e9cb57a2a55cca97e571021a377fb78d041d821b76d96c266dea460a763",
+          "trace_sha256": "0c5277e695498697a2ca09fc26caaf92906e8403ce1fef7e073f164ecf5a0b86",
+          "process_id": 3146511,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-88ec39b53b329686",
+                "raw_response_sha256": "f91cb19bc4cf89c85704f3f7eb80bf9b973f3f287017a176e4249c6b2aeb2631"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "same-name-different-projects",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "当前项目值正确且未改海风；更正边界原曙光卡r2仅引用旧叙述段落来源，下一提问边界才补为r3。最终回答称无历史格式，但独立SDK显示r1历史仍存在。更正边界维护与历史回答失败。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": false,
+      "correct_original_revision_at_correction_boundary": false,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": false,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "7447cc8730dadf44eab90a079bb36c0f93bb4be42f959fdc7436ee013057d6ef",
+          "trace_sha256": "45afbb93e4c7fec4526ec69d72a681dee08f836b1bb5a4b69c22e759fe29885c",
+          "process_id": 3151682,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a50c1d5503a820d4",
+                "raw_response_sha256": "40cbf18702fd3c7a3d055ec5047c703d67a66c6ceac066847554e69d1997c061"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "d80a08de315262a4dc8c144e7ed0b2c4e1ea249cb2e72cfba929e7a776f31aea",
+          "trace_sha256": "3c2640535fec72dd821ae6b0c04029507d954e68d6eacfc8ab7133da78a76001",
+          "process_id": 3152250,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-b43d7a26f28918ad",
+                "raw_response_sha256": "d3ae3cbd12238408ad66ab530f8762883f874db4c5883ac06e3ac3cc69e6072b"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "fe7a17bc95a67a5a0a2f554517d952b9ef66cd8f150fb688009c70d951cdfd8d",
+          "trace_sha256": "25ece9e9198ac71bb81b1a3bc03333c002b34d5d81b87e6e70ebc4108cc97358",
+          "process_id": 3153098,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-a78f5bfb049cc2e2",
+                "raw_response_sha256": "03f51daef7eab58fe2f833843b73d5ca150bd138140c9e7ea70612336f1c4e75"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-old-target-query",
+      "case_id": "correction-negation",
+      "status": "INTERRUPTED",
+      "root_development_verdict": "INTERRUPTED",
+      "independent": false,
+      "note": "第二消息在第一次operational_fields_require_object_ref拒绝后反复提交非公开有限回执字段，继而猜造object_ref，达到原定12调用上限。原卡r1保留，第三消息NOT_RUN。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": false,
+      "current_correction_source_in_final_boundary_revision": false,
+      "correct_original_revision_at_correction_boundary": false,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": null,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "7ab629dd6906daf83628493f7ffb7c0bffdee13934a1cf4b7a2ff6b27780c51d",
+          "trace_sha256": "c7f5ff7d7665f5e9b4092513d385238fdddf826992d2fafbf60bc891af5a0111",
+          "process_id": 3157911,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b2a17ecd072a0593",
+                "raw_response_sha256": "2bd04099d85e21b013ba7ce19d243e2f9ade2ef75e4cf5f00327466a230c8e9a"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "interrupted",
+          "receipt_sha256": "92428a8bd8bd2b9251453e84719fa70fe110ef7d17f7fbd961a9a26c3b0d2cf8",
+          "trace_sha256": "32b5a9e44d354618f3bc0dd923211130f3352d52599af2d7c09ba957098db2b6",
+          "process_id": 3158698,
+          "final_linkage": {
+            "status": "NO_FINAL",
+            "provider_id": null
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "update-2",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "d18364cb937e60008a175a6d3fef28fe07c3c618c223d11999a143d4ea3579cf",
+          "trace_sha256": "537af1cdf6ae2bdb4940fc9cad8905935f823e98174f4727b2f547d0f1ef0581",
+          "process_id": 3134751,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-bb6ea415dff52164",
+                "raw_response_sha256": "4235231ec2107617ab840003cbb4dddf5c9833647ab052c1e17ce4d005cc5e73"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "ccb239ddadb09d7d52ab2ce8c16df811bf1584a4c22f84c68f99cffdea60e21a",
+          "trace_sha256": "11583bed59da919e15d579b4526e67107d9f0848c5449b021c6f6b122e65e0dd",
+          "process_id": 3135342,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 15,
+                "provider_id": "chatcmpl-83a9b88778cc1ede",
+                "raw_response_sha256": "c381ec30d3e788e4f9e569706aa859433d3cc8859613eac1d4ffdcb16e03f4a3"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "06f4ffa86d14c8c27f8006d49a0086e9a93676a540716ff899e3655e4580f84a",
+          "trace_sha256": "3896b863656eab06aeba981c4df57b7b750e6dfc1883ccf275e755a1b7bbbf48",
+          "process_id": 3136100,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-93d9a8470e6f32c2",
+                "raw_response_sha256": "38fec5c22d8c174c0bfec328e411bbcfe4f5766f29bfe63ed4f9f2511085eab4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "update-3",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "d5d87fb374f5d77cd6e76748af50a29cbb97d4dc54a47d17be7638ca5640859d",
+          "trace_sha256": "eb8cb8fe60b2bbdd18dbcafcb5d9e1d82a7c71798dd05807070cb393c57b5f43",
+          "process_id": 3141074,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-aa453784ac0ee37c",
+                "raw_response_sha256": "52ccd88b51a8de508bed750dfc4708753a6e1ebf7ebc592dd115790d7832bcc0"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "0073d73a6efebd5023d974fc19859fc8b6f5c4eeba48b38bb448a1e05f18e703",
+          "trace_sha256": "ef992a9e373bdfff03316e7ba7bedc0378acf27a311c3691dae0cf320bc0a5ac",
+          "process_id": 3141538,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-bd41ee340e28ef6e",
+                "raw_response_sha256": "4abc02d3a570aaefe2e5599c962428c78813e1e27db56d94e1a03858791791bc"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "aa60d37ea8fb3ea3db0c7e78417ce96f560b8c881f3a92343562330650307197",
+          "trace_sha256": "dd82abcc2e39686e9912813f5fa9ba31fc7d49a0a1b807c7057eb422c02595bf",
+          "process_id": 3142149,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-bbbf2c72cc5b6fb8",
+                "raw_response_sha256": "c4ded26fb70a6735d8afecc3579da48ed4c22293af7588dfe48f4785c6fbae0e"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "language-reverse",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "22c9ef5b5e2d5f397becd31566130706b8890539c0f40446e72eec45a8db75a1",
+          "trace_sha256": "ab09c448ad1f172739c851a5a76e7e85537d191c36bc71a7e0001c0a4af19708",
+          "process_id": 3147289,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8364d417e42cd001",
+                "raw_response_sha256": "bed146817b1d6ec308e501d2d53297aa650524816468bb4dfdcab15b32b25f71"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "98d638f2ebec666decbfa2bacdfd6bfdd48aa35a0ee952faf77ab1cdc8c2070d",
+          "trace_sha256": "3ccb85146df16e5ccaf6fea751f64a380d8bb8ed17a1c77e8e34d83b770f3955",
+          "process_id": 3147843,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-a2d21c3c535dd4b7",
+                "raw_response_sha256": "152ee3a7f379577ee2fc06e02cde3181f6d823a426d6c6ae772d471a0fc950fd"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "7a1dadcd001ab787adc7e2f51a75504102cdd9dbb9e7152bec292816a8ac7bb9",
+          "trace_sha256": "8273c161bec37bc35cb921e64d423106ba57d8b2d8f9c7e566fff816fc730ff6",
+          "process_id": 3148720,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-83c0402175a111d9",
+                "raw_response_sha256": "8bb951f6747e44cd6b6cc4a98d214128e3363f44ab418dfcbb3c14d488471cf6"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "same-name-different-projects",
+      "status": "INTERRUPTED",
+      "root_development_verdict": "INTERRUPTED",
+      "independent": false,
+      "note": "第一消息造source_ref后收到source_not_found_or_not_owned，再把语义format放入业务fields并猜造object_ref；达到原定12调用上限。初卡未形成，原卡修订分母不适格；后两消息NOT_RUN。",
+      "initial_original_record_eligible": false,
+      "same_original_record_revised_at_correction_boundary": false,
+      "current_correction_source_in_final_boundary_revision": false,
+      "correct_original_revision_at_correction_boundary": false,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": null,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "interrupted",
+          "receipt_sha256": "47e5a8a1b685f5a27e8f92937f5037a54df897ddc356877712b2c03de30281f6",
+          "trace_sha256": "a2f5828cc35ff5f54720da29f565362b82bd20fc1592644698e78a9481ab1a50",
+          "process_id": 3153889,
+          "final_linkage": {
+            "status": "NO_FINAL",
+            "provider_id": null
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks",
+      "case_id": "correction-negation",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "c4c233f315eaf2e26a2e08f476a7387bbd9002fd722858674a9d1fb97dd685cd",
+          "trace_sha256": "39df685e5304980a95a96e787aa15b2b8c0afa869b87a6e9a9e7acca154d9c45",
+          "process_id": 3161380,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b5ac25d9acb6b50c",
+                "raw_response_sha256": "2c6f3f29f61b522265d6fd4aabe45e1a16eb4f8dae6a01542e80cbd6f7d6bce3"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "4cfeba47907c14eee15c615f7bd437e62ccc29ce85017a7e245000d539808681",
+          "trace_sha256": "3ac8b5938a0d8d164473c0ad207db2a89e1e6dd2863179a2af1650007373dd16",
+          "process_id": 3161866,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-bfb3a0c91ed6be12",
+                "raw_response_sha256": "91f7c754bb1b83fe82e37fc90663ab93e674f260207a49fb0ff44a574d68975e"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "0b44c1bd2acd69c7777bfad749288374d9431e582adf259cde1afc9b381e14c4",
+          "trace_sha256": "d99091c7cdac0167758b6a07cb23929b06eca5cd2e56000acc22ffac220738c1",
+          "process_id": 3162470,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-9a9d5860ca795f5d",
+                "raw_response_sha256": "65884d41c9b60b15a229bf767949d74b03690214dd59555762167273db19e88c"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "update-2",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [
+        "cand-445f9d4d136b0e5fa70ac507",
+        "cand-d86a125638323ebe47fb794b"
+      ],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 1,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "d1e002067c3d11abc5796ee3023eca5016f5bcb97bc8b7ceab385d82af5d64b3",
+          "trace_sha256": "a3aa932562b32089410b7dedc690e76e716f09e4ff07dc599c786ec3c7079e0b",
+          "process_id": 3137043,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-a25a3ea7665e0dec",
+                "raw_response_sha256": "783de1f4c857fc3753671b0ae67d2e87b97de8dfd4408867645d0f2475041419"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "7a37cb838ef496f28f69e732730e91f2d7283aa31c00e40ed5a790bcfff89893",
+          "trace_sha256": "70f55020bcbb4f6893432ae19e316119d314eda5b7982669919122a2f6a2385f",
+          "process_id": 3137520,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-80fc4b0096757465",
+                "raw_response_sha256": "e057ef1639f54e8a665031dd24c4bd5e210c358a1ae3ea3984cd496f8e7415c7"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "7577610ef129d2d0128051f4416da6811984a3181075e98bc9f204131b3390cd",
+          "trace_sha256": "aa657914df1af6b584533c673d5c9f85849eb802aa59b3fe2b7c1b2e99e8e9b0",
+          "process_id": 3138136,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-9f049e3d3ed1850f",
+                "raw_response_sha256": "f59714f034077ec01d4c74bc8e056c3618d428930f025be33fc00dbb636122f7"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "update-3",
+      "status": "COMPLETED",
+      "root_development_verdict": "FAIL",
+      "independent": false,
+      "note": "实际候选句柄可用且原卡同IDr1→r2，最终准确回忆英里/公里；新公里主张仅引用旧英里陈述。结构修订成立，语义来源支持失败。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": false,
+      "correct_original_revision_at_correction_boundary": false,
+      "actual_correction_handles_delivered": [
+        "cand-1bdaac9d4eeaa7f96d1651ca",
+        "cand-adfe6ed711df5c046e4ed7d3"
+      ],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "2ca2077b57923434c5d3658119b810f2c1bedae228370a74bee11e5e1d16c769",
+          "trace_sha256": "480555f13c4abd5f13051fd0b2e04332263e0a84815d7183b79c4510ec85da4b",
+          "process_id": 3143063,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-aab4e54b513a5d57",
+                "raw_response_sha256": "2a20e0b5af08db4387a9e9af057db56613d55daa6350b45aabbb222f996f8457"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "30617c1fb45755e5db19edd15f2aa7aad0bd8b8ad598496815436dd0de3315ad",
+          "trace_sha256": "59dd70622430502557caff04ee1a52b064fe40163bc787f826457cf142d1c8f7",
+          "process_id": 3143610,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-a0a827c4f5008110",
+                "raw_response_sha256": "7d6f59b9f84d394d071975e3df8c7e66cb9edd488156e85e7073992188946dfa"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "3e148dd9160253c04ac40c93a19381ba8a857830412783219a383ce8be88f6d6",
+          "trace_sha256": "9bb192ff532cd4ccc839779e8b19bf2e52cb0d96b1e5b4ea569b4080de7a8f8c",
+          "process_id": 3144305,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-aed838e170686503",
+                "raw_response_sha256": "b2845fcdb9e261e19dfeb63781188a293aca5521053415372cb7387e81759819"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "language-reverse",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [
+        "cand-2aa8ce0a20718dcd7f57476e",
+        "cand-e487f72dbf6229ad0d9215a0"
+      ],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "28fe4d328a2661cf4afe2c8155a459d8ea7345455ea3e7b32e0f6262fb0b376b",
+          "trace_sha256": "512165a6d412ef4d5c01c65f7de28f8dd8c3ac527db88f41239f8ea51a4096e2",
+          "process_id": 3149508,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-b66cebf8c389fb84",
+                "raw_response_sha256": "177d719f9af811270c2d8df249c5cc5cf4e4c8cfff1ed02e77be5afb28a981aa"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "f6de18e8d20431015fb4c11a39e9dbe7202fdc4bb136523f80a47042d5f06486",
+          "trace_sha256": "1c4349845d92b04a09fa379a0dd86469781bf212bc9123552e2192e835731f5f",
+          "process_id": 3150171,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 13,
+                "provider_id": "chatcmpl-99fec90cbbf86e9b",
+                "raw_response_sha256": "7bad5402e564a9e52f6403fc5709b671d980dd040f05ae09b20e3c56b1ecb59a"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "f96bbcc0f99d2de248dffb813861f3d9d91726f7f1f6e2de1fc5ea86ec38473b",
+          "trace_sha256": "a36933fd21ec4d0b5e89ba816660066eb2f6145b768f644bf17b77d2801cf887",
+          "process_id": 3150812,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-85c5505ae858391a",
+                "raw_response_sha256": "05e1efc6f817ea9fe8b47d455d1f68a4a09dc2247d384f185c08e59fd6501e01"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "same-name-different-projects",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [
+        "cand-45f470103a6702b139ba196b",
+        "cand-49ff9021570b1d2c5f563ad2",
+        "cand-45affcb29ef5aa60e3c24a4d"
+      ],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "ba6a1390714d30bc6fac6f8545a3af23a9dbba146c7f58067ab4f3f6c974b6fd",
+          "trace_sha256": "ba6a1f32a659071373844dce0aa4e1d3520620f5f52d653d6aa36a2c7b8038fe",
+          "process_id": 3155842,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-8fe0abae9d538135",
+                "raw_response_sha256": "2da02efd4506f76497ffbac6510875260f69e10679498faf04415e621a3f1abb"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "fa2d9e1ad62f972406f2861caed1ac4aecb59cb5689a980e233854424074b801",
+          "trace_sha256": "6d9cb72aaf0f62686b29e21d575b2f8630755eae689e3a72e9bc7b733cd0cd87",
+          "process_id": 3156411,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 9,
+                "provider_id": "chatcmpl-b997db127943cf00",
+                "raw_response_sha256": "a31ade55ec6bfce8af2562ffe2be6169c1af5f1e7e6e7c8f173dae9cf9882a6b"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "45ad0c875efec40a5d2f92c38e946f922fe42970a465c6e06f7baa61595c4d46",
+          "trace_sha256": "266a9716d3ae9ba9c9f6488a7bea6d250c0314fe03a8eaa6f03bf8aa6a6699dc",
+          "process_id": 3156985,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-bed2b4200018624f",
+                "raw_response_sha256": "b4976835ade7167279e398ebe3f4c389dadd405a5723264007c5d64761c74a5d"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "arm": "E2-source-backlinks-read-handles-patch",
+      "case_id": "correction-negation",
+      "status": "COMPLETED",
+      "root_development_verdict": "PASS",
+      "independent": false,
+      "note": "更正边界原记录同ID修订；最终版本有实际更正来源支持，原偏好历史保留，实际HTTP最终回答正确区分当前与以前及适用范围。",
+      "initial_original_record_eligible": true,
+      "same_original_record_revised_at_correction_boundary": true,
+      "current_correction_source_in_final_boundary_revision": true,
+      "correct_original_revision_at_correction_boundary": true,
+      "actual_correction_handles_delivered": [
+        "cand-e2e488741942c2bfb7652637",
+        "cand-526e00501e1a683722162b92"
+      ],
+      "reader_final_current_former_scope_correct": true,
+      "unintended_duplicate_preference_cards": 0,
+      "unrequested_truthful_question_episode_cards": 0,
+      "explicit_supersession": false,
+      "sdk_reopen_verified": true,
+      "evidence": [
+        {
+          "message_index": 0,
+          "status": "completed",
+          "receipt_sha256": "732470bd49e0c8022977b6c54e9ab879999daf6aad501439eec05c7c3acdd503",
+          "trace_sha256": "2d64ec1d56c838bcdd1e905238251c807cf5a609b32dc4b29961b0f9b194ffc4",
+          "process_id": 3163427,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 5,
+                "provider_id": "chatcmpl-ab8c906a24bb0a95",
+                "raw_response_sha256": "5e75fcd20b598a5b33d35773f6952c18324aa90da498630cdd60b6ec38fa0f4d"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 1,
+          "status": "completed",
+          "receipt_sha256": "7c5e21c4548c6ee9cc0b9114b958f210944644b94860b0130ed7809c878a1d8f",
+          "trace_sha256": "006f33aea68e8a3a36791250e289568a080608553986f9e381e2bc82f272f0fa",
+          "process_id": 3163902,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 11,
+                "provider_id": "chatcmpl-95d7e998f02f9610",
+                "raw_response_sha256": "a7d9286e70804abe3870f032df2b9c01833babd941e131d213936974e3267f64"
+              }
+            ]
+          }
+        },
+        {
+          "message_index": 2,
+          "status": "completed",
+          "receipt_sha256": "bada803741f295ae40bcc0de748a34b18d6585850b83adfe116c0cbd17b7537d",
+          "trace_sha256": "f9868208210b0e80a657eb5beaa1250e5672ef949a4fd9702fa536c473ca99ce",
+          "process_id": 3164507,
+          "final_linkage": {
+            "status": "LINKED_ACTUAL_HTTP",
+            "matches": [
+              {
+                "trace_ordinal": 7,
+                "provider_id": "chatcmpl-b0ceef1ef83f8aae",
+                "raw_response_sha256": "34d38d37c31acecd4903f4f5175ea9d01335f16a30a027223213ad4121c6c0b2"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "trace_costs": {
+    "generation_requests": 122,
+    "generation_classified_requests": 103,
+    "generation_known_tokens": 410881,
+    "generation_classified_known_tokens": 348907,
+    "embedding_requests": 54,
+    "embedding_classified_requests": 54,
+    "embedding_known_tokens": 20652,
+    "embedding_classified_known_tokens": 20652,
+    "semantic_writer_classified_requests": 19,
+    "semantic_writer_classified_known_tokens": 61974
+  },
+  "ledger_delta": {
+    "generation_requests": 122,
+    "generation": {
+      "charged_tokens": 410881,
+      "known_tokens": 410881,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 20652,
+      "known_tokens": 20652,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_snapshots": {
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E1-free.json": "4a6bf896631565fc48f253a5181fbdb6078f5b4a13e3a2e505a01ee41e05297b",
+    "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/ledger-after-E2-free.json": "c2f271973b807ccfd5c5fb808348339335df162045bf00b6f04a84373bce2d87"
+  },
+  "actual_sdk_reopen": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development/E1-E2-independent-sdk-reopen.json",
+    "sha256": "dd25e9296760a08b14d8424268f316caf70e3ba30740e3ab300a331aeaf4aeee",
+    "banks": 23,
+    "all_sdk_items_read": 455,
+    "new_mutations": 0,
+    "new_model_requests": 0
+  },
+  "root_review_driver_sha256": "537ce50b59f2206f96ff4ff5cbfe1e13dec5d6c53645ab7da07d5cd4bbb96e0a",
+  "qualifications": [
+    "All outcomes are original once-run R0 development evidence; source correction is a separate cohort. No independent semantic rating, unseen evaluation or statistical superiority.",
+    "Current source support at correction boundary and final revised head support are separate: a later writer repair cannot erase an unsupported intermediate revision.",
+    "Correct current/former answer from raw leaves does not pass original-card maintenance when changed claims cite contradictory old sources.",
+    "Historical legacy_query_v1 old-target arm may resolve a latest unique target under its disclosed old contract; this is a control, not read-time CAS promotion.",
+    "Redundant same-card revisions and paid writer calls remain in history/accounting. One truthful question-episode append is reported separately from duplicate preference cards."
+  ],
+  "product": "NO_GO"
+}

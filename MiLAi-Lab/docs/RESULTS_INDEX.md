@@ -1,5 +1,18 @@
 # Results index
 
+## Current development and merge handoff — 2026-10-04
+
+[Current handoff](V13_5_DEVELOPMENT_MERGE_20261004.md): independent communication-r50-full
+completed 11 cases / 27 messages, with 8 scoped PASS and 3 FAIL, 26 COMPLETED and one
+preregistered W1 UNKNOWN. 110 generations / 581,707 tokens, 318 sealed raw files,
+9 records / 44 exact stored quotes. Failures retain the missed prior save after business
+recovery, broadened label exemption, and false never-supplied inference after forgetting.
+The user authorized merging current Lab development; full functional acceptance remains
+incomplete and Product NO_GO. [Progress](V13_5_PROGRESS.md) and
+[machine handoff](../data/manifests/v13-5-development-merge-20261004.json) separate actual results,
+mechanical checks and publication. The [partial r50](V13_5_CHECKPOINT_r50_20261004.md) and
+[r49](V13_5_CHECKPOINT_r49_20261004.md) checkpoints retain their original identities.
+
 ## Current results and execution status — 2026-09-29
 
 The repair-v10 experiment Goal is **paused**; the new user request authorizes code

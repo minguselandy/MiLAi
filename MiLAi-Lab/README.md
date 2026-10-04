@@ -6,19 +6,24 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 
 ## 当前入口
 
+- [v13.5 功能入口](docs/V13_5_FUNCTIONAL_USAGE.md)：自然保存、修订、历史、遗忘及两工作流；[执行协议](docs/V13_5_EXECUTION_PROTOCOL.md)、[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 - [当前状态](docs/LAB_CURRENT_STATUS.md)：授权范围、暂停状态与未完成项。
 - [代码架构](docs/LAB_ARCHITECTURE.md)：职责、依赖方向及兼容入口。
 - [项目地图](docs/PROJECT_MAP.md)：从任务定位源码、配置、测试和证据。
 - [v12 总体整理报告](docs/CODE_ARCHITECTURE_V12_RESULTS.md)：维护位置、兼容范围和工程证据。
 - [v12 整理进度](docs/CODE_ARCHITECTURE_V12_EXECUTION.md)：阶段提交、工程验收和剩余迁移。
 - [代码职责](docs/CODE_OWNERSHIP.md)、[依赖规则](docs/DEPENDENCY_RULES.md)、[历史入口](docs/HISTORICAL_CODE_INDEX.md)。
-- [最新实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
+- [当前开发与合并交接](docs/V13_5_DEVELOPMENT_MERGE_20261004.md)：实现、完整通信、三项失败、费用及剩余验收；[r50 部分检查点](docs/V13_5_CHECKPOINT_r50_20261004.md)保留历史分母。
+- [历史 v10 实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-当前代码组织 Goal 正在执行 v12；阶段完成情况以执行记录为准。实验 Goal 保持 **paused**。
-R1 仅有标签输出的局部改善；R2 的实际错误事实持久化仍未解决。
-本次结构整理不改变实验结论、模型设置或工具行为，Product 仍为 **NO_GO**。
+当前 r50 完整通信独立执行 11 案／27 消息，8 案限定通过、3 案失败；26 COMPLETED、1 预设 W1 UNKNOWN，无未运行消息。
+真实历史读取、撤销和遗忘隔离有新证据；恢复后遗漏原保存请求及两类最终回答错误仍未修复。完整目标未完成，Product NO_GO。
+用户已明确授权整理并合并当前开发；本次整理无新实验或运行代码修改，历史失败与配置身份保留。详见[功能进度](docs/V13_5_PROGRESS.md)。
+完整功能尚未验收；[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)保留为历史检查点。
+v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
+`functional_v1`，旧默认不变；Product 仍为 **NO_GO**。
 
 ## Repository roles
 

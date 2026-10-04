@@ -1,0 +1,138 @@
+{
+  "kind": "V13_2_HTTP_OWNER_SCOPED_ROOT_ENGINEERING_ACCEPTANCE",
+  "status": "ACCEPTED_SCOPED_ENGINEERING_ONLY",
+  "recorded_at_utc": "2026-10-01T15:45:43.348934+00:00",
+  "source_commit": "02e619e3f2a4507bc80122c0c9f020621f7b7675",
+  "primary_transfer_commit": "28671c3e8641cbe455823033f5f8a1f24808be3e",
+  "primary_parent": "baf43cd48c6e136bf187dbf7b36a200d4c9ef939",
+  "allowed_paths": [
+    "src/milai_lab/harness/contextual_artifacts.py",
+    "src/milai_lab/harness/http_ownership.py",
+    "src/milai_lab/providers/contextual_vllm.py",
+    "src/milai_lab/runners/v13_1_baseline_micro.py",
+    "src/milai_lab/runners/v13_1_d0.py",
+    "src/milai_lab/runners/v13_1_p5.py",
+    "tests/memory/test_v13_2_http_owner_entries.py",
+    "tests/unit/test_http_ownership.py"
+  ],
+  "scope_sha256": "c31075de89ee19baaf319af32e7e2e7f7f7b30fe3a4bf8aa2b4a0f6973437183",
+  "scope_document_sha256": "778e867210aea4b670e4600c76322131a51a7afccb7e5d7df8b636402246be80",
+  "source_handoff_anchors": {
+    "HANDOFF.md": "01cdb17cb3a4f064c6019700e3ab23369e8d267a85fad0764f15bdbaf42b1e5f",
+    "file-index.json": "590340b24e1fa97d62874dfae311dfe4b63a3c05ca819a7dfc82e3b3452c91c9",
+    "source-checks.json": "8c61b0d035ad74061e0ad87be33dc6dafb1421d9d75e0423b0df173bceb6409c",
+    "manifest.json": "53f5a895ae687844e30be8790edefb1997d1481cf55f0173b49bf60fac05b97a",
+    "SEAL.json": "1f08c50209a8e4fa9cc75afd6c1a46a7581c786e70e486278a41d9565c4f3432"
+  },
+  "source_indexed_originals": 2083,
+  "source_archived_originals_with_anchors": 2088,
+  "source_commands": 115,
+  "source_original_nonzero_commands": 13,
+  "source_nested_subprocesses": 31,
+  "source_fork_controls": 5,
+  "source_symlinks_recorded": 122,
+  "source_cache_exclusions": 16,
+  "source_snapshot_checks": 9753,
+  "root_independent_protected_scopes": 5,
+  "root_independent_default_raw_pairs": 8,
+  "root_final_new_controls": 59,
+  "source_old79_controls": "prior provider stage; not relabeled final",
+  "root_checks": {
+    "cleanup_modes": 4,
+    "arithmetic_stages": 11,
+    "real_child_cut_exit": 77,
+    "client_fields": 9,
+    "nested_response_mutation": 1,
+    "usage_controls": 5,
+    "emit_span": true,
+    "fresh_process_exact_history": true,
+    "actual_fsync_replace_directory_fsync_order": true,
+    "final_ruff_files": 8,
+    "final_mypy_files": 6,
+    "sandbox_boundaries": 2,
+    "transferred_primary_boundaries": 2
+  },
+  "criterion_disposition": {
+    "reviewed": 42,
+    "scoped_finite": 41,
+    "partial_returned_client_only": 1,
+    "all42_unqualified_pass": false
+  },
+  "maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 393,
+      "compact_sha256": "30354eb3fb62faa3260b9bdef53a97d0664f874b5e3024d60f016f922388382f"
+    },
+    "configs": {
+      "count": 316,
+      "compact_sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "actual_continuous_ledger_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "actual_generation_embedding_http": 0,
+  "root_original_audit_failures": {
+    "count": 2,
+    "preserved": true,
+    "source_implementation_failures": false,
+    "missing_at_time_maps_not_backfilled": true
+  },
+  "local_proofs": {
+    "artifacts/v13-2-http-owner-root-preparation/final-handoff-audit-decorator-corrected-first": {
+      "result_sha256": "3e5881ed4995df7d6a0b8fb641639b3e0feb3cd396274a2a05358274303c7ba1",
+      "result_file": "result.json"
+    },
+    "artifacts/v13-2-http-owner-root-preparation/independent-final-controls-first": {
+      "result_sha256": "0ec5998eb5ddafe31e7981e463fbabc9402cc598e8a6609e8eb71103093a3726",
+      "result_file": "result.json"
+    },
+    "artifacts/v13-2-http-owner-root-preparation/independent-final-coverage-first": {
+      "result_sha256": "69fc95b4bc870aae4d3f43362acfbe51292cb7c70cdf26e65c8d4825dc4ed243",
+      "result_file": "receipt.json"
+    },
+    "artifacts/v13-2-http-owner-root-preparation/independent-final-usage-first": {
+      "result_sha256": "a2d1e0ba829d19e45441ba73eb6beb557f909f89ae3cd0f14886d55903a88bd9",
+      "result_file": "receipt.json"
+    }
+  },
+  "local_acceptance_artifact_directory": "artifacts/v13-2-http-owner-root-preparation/root-engineering-acceptance-first",
+  "literature": {
+    "papers": 17,
+    "project_reference_groups": 18,
+    "verified_files": 784,
+    "local_links": 152,
+    "index": "artifacts/v13-2-design-literature/index.html",
+    "catalog": "data/manifests/v13-2-design-literature-catalog.json",
+    "new_downloads_or_upstream_execution": 0
+  },
+  "limitations": [
+    "cooperating local Linux only; no noncooperating rollback, hardlink or distributed guarantee",
+    "SDK constructors failing before returning resources cannot be certified as internally cleaned",
+    "native callback/dependency seams are mocks; no complete native SDK or model quality proof",
+    "original Root fixed_flow.py is outside owner integration and is not rerun",
+    "new opt-in profile remains default-off; future Root fixed-flow needs a new owner-aware driver and fresh freeze",
+    "mutual exclusion does not establish common-capability four-arm inclusive12/24 admission"
+  ],
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO",
+    "requirement_rows": 48,
+    "requirement_status_counts": {
+      "PASSED_SCOPED": 4,
+      "PARTIAL": 27,
+      "NOT_PASSED": 1,
+      "NOT_VERIFIED": 16
+    }
+  },
+  "all_original_requirement_fields_unchanged": true,
+  "plan_bytes_unchanged": true,
+  "historical_cohorts_failures_and_costs_unchanged": true,
+  "new_actual_cohort_started": false,
+  "source_trees": "READY_HOLD",
+  "full_plan_completed": false
+}

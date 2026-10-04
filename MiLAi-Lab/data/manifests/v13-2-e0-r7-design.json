@@ -1,0 +1,77 @@
+{
+  "kind": "V13_2_R7_E0_PROSPECTIVE_COHORT_DESIGN",
+  "status": "ENGINEERING_ACCEPTED_CONFIG_PREPARED_NOT_RUNTIME_FROZEN",
+  "prepared_at_utc": "2026-10-01T08:21:47.748460+00:00",
+  "original_plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "scope_publication_commit": "8a9143f07f5a94656f9078a9f743c2d8922a8fd8",
+  "baseline": "Original exposed24 trajectories/48 public messages, immutable original task/rubric and base Host/writer instructions; all historical roots closed",
+  "config_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/configs/v13-2-e0-normal-r7.json",
+  "config_sha256": "ee8242cfa87e1b34a28d16cbe7d034c6124c849f7c1fb67668b9e62382a1627f",
+  "profile": "shape_feedback_v1",
+  "support_contract": "direct_support_v1",
+  "source_commit": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+  "primary_transfer_commit": "410e02f6cca2e3ff1df62c35866df35b3d2ee6b5",
+  "runtime_source_count": 212,
+  "runtime_source_map_sha256": "36338eb57ba458ceb5a02308c254d84615f1896535c6a1e1c0a802c369e798cf",
+  "source_owner": "HOLD",
+  "acceptance_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-schema-communication-acceptance.json",
+  "acceptance_sha256": "4326cfc8b5fb72fe8e515879bb1ed7e9bf50f66b4750f17ac2e21d209acf7664",
+  "combined_factors": [
+    "Generic actual public catalog parameter shape/descriptions",
+    "Safe faithful origin-specific structural error presentation",
+    "Trigger metadata versus actual Source body wording"
+  ],
+  "unchanged": {
+    "memory_support_contract": "direct_support_v1",
+    "memory_mutation_contract": "event_bound_v1",
+    "memory_candidate_contract": "read_handle_v1",
+    "memory_material_profile": "compact_v1",
+    "derived_index_storage": "bank_prefix",
+    "generation_admission_profile": "legacy",
+    "host_admissions_per_public_message": 12,
+    "ordinary_material_tokens": 2048,
+    "max_records": 6,
+    "writer_generations_per_closed_boundary": 1,
+    "repairs": 0,
+    "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+    "python_version": "3.11.13 (main, Jul 23 2025, 00:34:47) [Clang 20.1.4 ]",
+    "models": "Existing7860Qwen3.6-35B-A3B-FP8/7861bge-m3; fresh GET-only route verification only after accepted implementation",
+    "continuous_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "all_actual_http_root_owned_serial": true
+  },
+  "scoring": "Immutable full original assertion/scope/source/authorization policy and all24/48 denominator, separate task/old-update/source semantic gates and actual cost; Root is non-independent",
+  "offline_failure_policy": "Original SDK/wire/collector returns and artifacts retained; independent full-denominator collector still attempted after a check failure. Source/authority mutation stops immediately. No relabeling missing results as delivered or successful.",
+  "historical_r6_runtime_sha256": "7cfbbf2756668437a4a4b710ccf250f8fe4aca325b9dd5575efc0e08cd0a6688",
+  "historical_r6_results_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+  "wire_delivery_auditor": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/r7-wire/check_e0_wire_delivery.py",
+    "sha256": "15e25ff0fbfab8135de241fe19554a4942d97562f677b4e053985fe26b53b65e",
+    "decoder_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/r7-wire/review_compact_packets.py",
+    "decoder_sha256": "690f0364825bd763d65e96460e831456667e01de489d2128d7e9c078606e92d7"
+  },
+  "root_parent_controls": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r7-driver-checks/parent-guards.json",
+    "sha256": "f2c9a9b624ff595a56b6fd99616f1b5feaa5437534f1aff1a31cfb00b0bb9ae2",
+    "count": 11
+  },
+  "root_offline_failure_policy_controls": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r7-driver-checks/postcheck-policy.json",
+    "sha256": "0f8f5506ea567880e70ae895b5fc12a036539b2ecd1b4e62daa199298d27ff10",
+    "count": 8
+  },
+  "actual_entry": "tools/run_v13_1_d0.py; accepted shared opt-in presentation plumbing",
+  "original_ledger_sha256": "73c437acc68e2e6e7a04b0d9ecb9ff3353936769f0d9c7bec4d40566dcbd2df1",
+  "prospective_generation_requests": 0,
+  "prospective_embedding_requests": 0,
+  "all_actual_http_root_owned_serial": true,
+  "hard_stops": "Gold/future/scorer leakage, wrong-owner delivery or false durable success stops affected run; ordinary failed trajectories keep full24/48 denominator.",
+  "limitations": [
+    "Accepted implementation and config prepared; actual runtime/source/input freeze is still required.",
+    "No actual R7 generation/embedding HTTP or model quality samples at this stage.",
+    "No cap-observability implementation or provider grammar change",
+    "No independent/new pilot/generalization/causal improvement claim",
+    "No common four-arm admission or shared HTTP closure acceptance"
+  ],
+  "prospective_requirements_sha256": "83df9aac96ce4600863c080d67a4f31c01751c1011c0ebc0d328025f52fdbc52",
+  "product": "NO_GO"
+}

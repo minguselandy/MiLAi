@@ -1,0 +1,259 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_R50_PARTIAL_COMMUNICATION",
+  "goal_status": "ACTIVE; full development remains incomplete; checkpoint is neither completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "pull_request_status": {
+    "open": true,
+    "draft": true,
+    "merged": false
+  },
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "main_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "candidate": "r50",
+  "candidate_commit": "e7822e9f6c552e9e1b1a5f96074a6c56a60b0a4c",
+  "candidate_config": "configs/v13-5-functional-r50.json",
+  "candidate_config_file_sha256": "a104ff0a5ca02e668f3b264d76f5e7eec5ced281e67cb0961232149b198bad74",
+  "candidate_config_canonical_sha256": "4e6ff075f75ea821e3cef3c643dd1a13047cb1468789b804d9782e100a16f9ac",
+  "publication_identity": "This checkpoint commit contains this manifest; exact SHA, remote equality and own CI are registered in PR81 after push. Candidate CI is not inherited.",
+  "report": "docs/V13_5_CHECKPOINT_r50_20261004.md",
+  "report_sha256": "713361bc352e0c97c641406867c21bdec4651dc475d6174411e2c6383c1835e5",
+  "previous_checkpoint": {
+    "commit": "e82f75c82b916ff6cd9b71416709a5ff0d7881f8",
+    "manifest": "data/manifests/v13-5-checkpoint-r49-20261004.json",
+    "sha256": "e0641855a91815dba092549afaee56b1b21b29124e4a1026bc4bedfbc0084415"
+  },
+  "runtime_queue_active": false,
+  "new_model_calls_for_checkpoint": 0,
+  "newly_authored_runtime_changes_during_checkpoint": false,
+  "change_scope": "Lab documentation, navigation, acceptance summary and result metadata only. No new runtime/config, Product Schema/API/permission/Canonical, model/service or allowance changes. Historical reports, cohort rows and detailed140 preserved.",
+  "current_candidate_acceptance": {
+    "mechanical": "PASS_SCOPED",
+    "source_fast_ci": "SUCCESS37156424019",
+    "source_full_composition": "SKIPPED37156424020; not a pass",
+    "communication": "CHECKPOINTED_PARTIAL_AT_USER_REQUEST",
+    "input_freeze_exists": true,
+    "model_calls": 51,
+    "L1_L4": "NOT_ADMITTED for r50",
+    "stable_recommended_configuration": false
+  },
+  "checkpoint_verification": {
+    "registered_evidence_hashes_checked": 11,
+    "mechanical_evidence_hashes_checked": 7,
+    "frozen_runtime_source_hashes_checked": 232,
+    "sealed_raw_file_hashes_checked": 141,
+    "historical_cohort_rows_unchanged": 70,
+    "historical_requirement_rows_unchanged": 140,
+    "mismatches": 0,
+    "continuous_ledger_matches_baseline_plus_delta": true,
+    "new_database_semantic_audit": true,
+    "new_model_regression": false,
+    "local_document_links_checked": 165,
+    "changed_files": 10,
+    "only_lab_documentation_and_metadata": true,
+    "git_diff_check": "PASS",
+    "boundary_and_matrix_checks": {
+      "artifacts/v13-5/checkpoint-r50-boundary.log": {
+        "status": "PASS",
+        "sha256": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6"
+      },
+      "artifacts/v13-5/checkpoint-r50-tools-boundary.log": {
+        "status": "PASS",
+        "sha256": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b"
+      },
+      "artifacts/v13-5/checkpoint-r50-verification-matrix.log": {
+        "status": "PASS",
+        "sha256": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+      }
+    }
+  },
+  "latest_actual_model_evidence": {
+    "id": "communication-r50",
+    "layer": "communication",
+    "candidate_commit": "e7822e9f6c552e9e1b1a5f96074a6c56a60b0a4c",
+    "state": "CHECKPOINTED_PARTIAL_AT_USER_REQUEST",
+    "planned_cases": 11,
+    "planned_messages": 27,
+    "config": "configs/v13-5-functional-r50.json",
+    "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+    "baseline": {
+      "generation_requests": 14248,
+      "generation": {
+        "charged_tokens": 52183658,
+        "known_tokens": 52153271,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/communication-r50/input-freeze.json": "ed7706259ed8c041ba27483f4c93692386519c9ba74815371871baabfe241518",
+      "configs/v13-5-functional-r50.json": "a104ff0a5ca02e668f3b264d76f5e7eec5ced281e67cb0961232149b198bad74",
+      "artifacts/v13-5/communication-r50/review.json": "2c7b644e14f05a7dc59bf5e0764d34239801c7b98e77fd1e59c3e27f3f87ec9e",
+      "artifacts/v13-5/communication-r50/seal.json": "5d075463e264bc903d869e6559784726e571444dc26acb8705aaabc3de44c408",
+      "artifacts/v13-5/communication-r50-manual-grades.json": "54c72671a311a7dee9d6ed65ce56256fb84dec292196988dc488d39083c8e971",
+      "artifacts/v13-5/communication-r50-review-notes.json": "9cc9cd9724c8fe02939264efe50680d9f3064ecc8c4c810f5342f6284250fe72",
+      "artifacts/v13-5/communication-r50-all-review.jsonl": "131d01e9bf0ade243ce5623324d72f9835baf4292031319e5d203e64676de57e",
+      "artifacts/v13-5/communication-r50-evaluator/summary.json": "03400a10545de50dce6d3f259807ce428a4726edff29f8f719215e415ad67b89",
+      "artifacts/v13-5/communication-r50-ledger-after.json": "17deab038a09ff35db2e0646094b657e88f6d771804d19bc20eef92b2b96063c",
+      "artifacts/v13-5/communication-r50/targeted-review.json": "9e3f3ba37091910544719111b44ecdc9901d0140049752f1dc99a935c11f9499",
+      "artifacts/v13-5/communication-r50/operator-stop.json": "2a4c3c6cdadc73c93460145e04252ec818c71779d2016d5c7b9aeb3506cee0c5"
+    },
+    "semantic_counts": {
+      "PASS_SCOPED": 4,
+      "PARTIAL": 1,
+      "NOT_RUN": 6
+    },
+    "message_counts": {
+      "COMPLETED": 11,
+      "NOT_RUN": 16
+    },
+    "retained_attempts": 11,
+    "cost_delta": {
+      "generation_requests": 51,
+      "generation.known_tokens": 291718,
+      "generation.charged_tokens": 291718,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 11,
+    "independent_sqlite": {
+      "records": 5,
+      "exact_quote_identity_checks": 21,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "case_review": {
+      "l4-n03": {
+        "status": "PASS_SCOPED",
+        "reason": "All3 messages completed (9/6/2 calls). Formation eventually preserves only this occurrence and imagined modality after two rejected proposals; second review overreads a still-qualified paraphrase as confirmed fact, retained limitation. Current cancellation selected for same-ID rev2, other activities ten minutes and old support/history preserved. One rejected update then supported actual revision, final readonly answers ten minutes and cancelled special arrangement without default-restoration inference or write. Six stored quote identities/current=latest pass; no business effects."
+      },
+      "communication-partial": {
+        "status": "PASS_SCOPED",
+        "reason": "One actual reservation and initially unavailable label. Accurate compound-status interpretation overrejected; second literal native-result proposal commits one supported rev1, no copied request-policy metadata. Followup actually gets current reservation then only completes label; extra read_memory uses record_id only and performs no write. Exactly one reservation and one label effect. Program final separates historical partial from current created label and says no new semantic commit.3 stored quote identities/current=latest pass; review false-negative retained."
+      },
+      "l4-g02": {
+        "status": "PASS_SCOPED",
+        "reason": "Personal baking ounces saved; actual current correction source supports same-ID rev2 grams with manufacturer-label exclusion and old support/history retained. Final old/new units and readonly followup correct, no new write or inferred manufacturer unit.6 stored quote identities/current=latest pass. Classifier wrongly declared create_or_update_draft for correction; actual execution catalog had no business mutator/draft tool and no business effect. This intent-declaration limitation remains, not a semantic authorization certificate."
+      },
+      "l4-h06": {
+        "status": "PASS_SCOPED",
+        "reason": "Personal filename ordering saved once at rev1 using actual source. Followup directly invokes confirm_existing_memory with issued current handle and gets actual paired no_change/effect none; same ID/rev1/history/support. Final explicitly confirms unchanged and no new record, rather than fictional write.3 stored quote identities/current=latest pass."
+      },
+      "l4-h03": {
+        "status": "PARTIAL",
+        "reason": "Only initial message completed: one rev1 saves the actual only-this-Saturday best-effort preference with its real current source; final accurately confirms scoped save without claiming a literal original quotation. Three stored quote identities/current=latest pass. Whole withdrawal and final historical query NOT_RUN at checkpoint. No whole-case PASS and no claim that the r49 quotation failure has been repaired.",
+        "message_coverage": {
+          "completed": 1,
+          "planned": 3,
+          "not_run": 2
+        }
+      },
+      "l4-g03": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      },
+      "communication-answer": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      },
+      "communication-memory": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      },
+      "communication-recovery": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      },
+      "l4-n08": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      },
+      "l4-f03": {
+        "status": "NOT_RUN",
+        "reason": "Wholly NOT_RUN at user-requested checkpoint; frozen denominator retained. Unexecuted behavior has no pass or failure verdict."
+      }
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "interpretation": "User-requested partial checkpoint:4PASS_SCOPED1PARTIAL6NOT_RUN of frozen11/27;11COMPLETED16NOT_RUN. h03 only initial save completed, no whole-case pass. Same-ID current-source correction, scoped special-arrangement cancellation, real no_change and live partial continuation have bounded evidence. Review false-negatives and erroneous draft-action declaration preserved; no actual business mutator in that correction catalog. Dedicated historical reads, W1 and forgetting not reached; no full acceptance."
+  },
+  "r50_mechanical_evidence": {
+    "candidate": "r50",
+    "scope": "Configuration-only correction of stale history-read instruction. Actual strict tool schemas reject prior read_memory(history=true) example and accept both new required-selector examples.32 actual pinned Qwen tokenizer/full-prompt production probes PASS, including exact withdrawn history delivery, one original bounded schema reproposal, explicit-page exhaustion, source/revision support review and effect-preserving restart. Scripted responses and actual SQLite;0modelHTTP. Runtime/test source unchanged from r49; its586 checks and adapter evidence retained with prior identity, not rerun or relabeled.",
+    "preserved_first_failure": "r49 instruction example violates explicit read_memory schema (unexpected history and missing record_id); observed by pre-run inspection and reproduced mechanically. r49 final quote failure and partial cohort preserved.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r50-prompt-catalog-probe.py": "a2064b63db24fc726c6e982ff54024213dd5bd7bef2c283d13bd89264825a8eb",
+      "artifacts/v13-5/r50-prompt-catalog-probe.json": "a4c5093c80f122747cd4887fb493c278045dda5a99e0b18c9f80236d7506b835",
+      "artifacts/v13-5/r50-prompt-catalog-probe.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "artifacts/v13-5/r50-production-contracts-probe.py": "0579c3f19152baf315d6c723cec37653a387bcdcf166c56c35e4c025a80f80e1",
+      "artifacts/v13-5/r50-production-contracts.json": "73c1ede41aabe38eac3ab1a10a3dacb7acec844391ce9d7a58f31630732b198c",
+      "artifacts/v13-5/r50-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r50-regression-scope.json": "b8fff11e6b517f70998acddfc7eadd89713f9c434fabc890f6b866cff567198a"
+    },
+    "retained_runtime_ci": {
+      "path": "artifacts/v13-5/r49-checkpoint-ci.json",
+      "sha256": "6a3453badb6812eae9877a6e358953773edd4730783d7c6e5e27467fe934daff",
+      "commit": "e82f75c82b916ff6cd9b71416709a5ff0d7881f8",
+      "fast": "SUCCESS37155557626",
+      "full": "SKIPPED37155557643; not a pass"
+    },
+    "remote_ci": {
+      "path": "artifacts/v13-5/r50-ci.json",
+      "sha256": "cbcae3cfc445762b2b7b3a30484ddbd991dc84d413955c52eb9614ccf107a412",
+      "commit": "e7822e9f6c552e9e1b1a5f96074a6c56a60b0a4c",
+      "fast": "SUCCESS run37156424019",
+      "full": "SKIPPED run37156424020; not a pass"
+    }
+  },
+  "cost": {
+    "v13_5": {
+      "generation_requests": 4573,
+      "known_generation_tokens": 24752703
+    },
+    "resumed": {
+      "generation_requests": 4417,
+      "known_generation_tokens": 23978467
+    },
+    "continuous": {
+      "generation_requests": 14299,
+      "generation": {
+        "charged_tokens": 52475376,
+        "known_tokens": 52444989,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "historical_unknown_gap_tokens": 30387,
+    "includes_coding_agent_usage": false,
+    "ledger_snapshot_path": "artifacts/v13-5/communication-r50-ledger-after.json",
+    "ledger_snapshot_sha256": "17deab038a09ff35db2e0646094b657e88f6d771804d19bc20eef92b2b96063c"
+  },
+  "remaining_work": [
+    "Preserve review false-negative and intent-declaration limits, r49 quote drift, prior provider failures and incomplete post-W1 formation.",
+    "Separately identified admission after sealed partial cohort; complete full11/27 including history/withdrawal, W1 and forgetting. No pooled scores.",
+    "Same-version L1 24/48, L2 12/26, L3 formation57/reading30, then new L4 after method freeze.",
+    "FUNC01-16 integrated acceptance, detailed140 terminal update and final report; original48 and all historical failures unchanged."
+  ],
+  "rollback_or_comparison": {
+    "previous_checkpoint": "e82f75c82b916ff6cd9b71416709a5ff0d7881f8",
+    "current_candidate": "e7822e9f6c552e9e1b1a5f96074a6c56a60b0a4c",
+    "stable_configuration": false
+  },
+  "raw_artifacts_policy": "Databases, requests, logs, ledger snapshots remain locally ignored; summaries and hashes committed."
+}

@@ -1,0 +1,163 @@
+{
+  "kind": "V13_4_PROGRESS",
+  "goal_status": "COMPLETE",
+  "full_goal_complete": true,
+  "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-4/MiLAi-Lab",
+  "source_commits": [
+    "9ec7c19",
+    "57bfac5",
+    "18092f7",
+    "1cdf810",
+    "92d768d",
+    "08f82d8",
+    "5230d02",
+    "1c85c67",
+    "bbc1227",
+    "c5ceb44",
+    "a6edc2f"
+  ],
+  "work_packages": {
+    "N0": "COMPLETED_SCOPED_ELIGIBILITY_AUDIT_LIMITS_RETAINED",
+    "N1": "PASSED_SCOPED_SOURCE_READER",
+    "N2": "T0_COMPLETED_DEVELOPMENT_WITH_LIMITS",
+    "N3": "FORMATION_ONLY_T1_NOT_ADMITTED",
+    "N4": "NOT_RUN_G1_CONDITIONAL_EXIT",
+    "N5": "NOT_RUN_G1_CONDITIONAL_EXIT",
+    "N6": "COMPLETED_SCOPED_CONDITIONAL_EXIT"
+  },
+  "requirements": {
+    "v13_4_requirements": 122,
+    "v13_4_statuses": {
+      "PARTIAL": 31,
+      "PASSED_SCOPED": 48,
+      "NOT_VERIFIED": 42,
+      "NOT_PASSED": 1
+    },
+    "original_requirements": 48,
+    "original_statuses": {
+      "PASSED_SCOPED": 4,
+      "PARTIAL": 27,
+      "NOT_PASSED": 1,
+      "NOT_VERIFIED": 16
+    }
+  },
+  "new_generation_requests": 328,
+  "new_known_and_charged_tokens": 685409,
+  "new_embedding_requests": 0,
+  "T0_scored_histories": 32,
+  "T0_scored_queries": 128,
+  "method_candidate_complex_platform_built": false,
+  "current_reader_config": "configs/v13-4-readonly-q0.json",
+  "rejected_reader_config": "configs/v13-4-readonly-q0-r1.json",
+  "next_actions": [],
+  "existing_blocker": null,
+  "Product": "NO_GO",
+  "remote_v13_4_published": false,
+  "ledger_current_sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
+  "ledger_current": {
+    "generation_requests": 9726,
+    "generation": {
+      "charged_tokens": 27722673,
+      "known_tokens": 27692286,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "source_acquisition": {
+    "original_RFCs": 36,
+    "errata": 68,
+    "successful_body_receipts": 104,
+    "raw_bytes": 6803322,
+    "substantive_candidates": 32,
+    "T0_admitted": 32,
+    "queries_authored": 128,
+    "independent_semantic_review": false,
+    "manifest": "data/manifests/v13-4-t0-acquisition.json",
+    "semantic_audit": "data/manifests/v13-4-t0-semantic-audit.json",
+    "queries_status": "FROZEN_SINGLE_DEVELOPER_REVIEW"
+  },
+  "metadata_formation": {
+    "writer_calls": 64,
+    "shape_quote_valid": 7,
+    "unknown_fallback": 57,
+    "semantic_quality": "NOT_EVALUATED",
+    "queries_created": 0,
+    "result": "data/manifests/v13-4-n2-formation-results.json"
+  },
+  "query_free_index": {
+    "origins": 32,
+    "sources": 96,
+    "lossless_spans": 4650,
+    "source_relations": 60,
+    "unresolved_public_relation_records": 4,
+    "queries_created": 0,
+    "model_calls": 0,
+    "result": "data/manifests/v13-4-n2-chain-index-results.json"
+  },
+  "B1_mechanical": {
+    "affected_tests_passed": 101,
+    "package_bytes_verified": true,
+    "independent_engineering_review": true,
+    "checkpoint": "data/manifests/v13-4-n2-mechanical-checkpoint.json"
+  },
+  "B4_reference": {
+    "exact_rational_assertions": 210,
+    "EC2_models": 5,
+    "HEC_models": 2,
+    "natural_status": "NOT_RUN",
+    "definition": "docs/V13_4_GENERIC_ACTIVE_DEFINITION.md"
+  },
+  "baseline_mechanical": {
+    "affected_tests_passed": 136,
+    "independent_metadata_tests": 35,
+    "independent_real_tokenizer_toys": 7,
+    "package_modules_exact": 7,
+    "checkpoint": "data/manifests/v13-4-n2-baseline-mechanical-checkpoint.json"
+  },
+  "shared_metadata_index": {
+    "origins": 32,
+    "spans": 4650,
+    "relations": 60,
+    "cues": 215,
+    "effective_date_cue_sources": 0,
+    "scope_cue_sources": 7,
+    "T1_signal": "NOT_EVALUATED",
+    "queries_created": 0,
+    "model_calls": 0,
+    "result": "data/manifests/v13-4-n2-metadata-index-results.json"
+  },
+  "T0_authoring": {
+    "release": "data/manifests/v13-4-t0-authoring-freeze.json",
+    "status": "SCORED_FROZEN_UNBLINDED_ANALYZED_CONDITIONAL_EXIT",
+    "provenance_checked_draft_queries": 128,
+    "semantic_review": "All128 reviewed; accepted scoped nonexhaustive E*; no independent Judge",
+    "driver": "artifacts/v13-4/run_t0.py",
+    "driver_sha256": "f843cceade0b94184b48aa3a749d302c69900d083460ea0c07130eebd2a2eaa8",
+    "driver_toy_checks": 4,
+    "natural_prepare_executed": true,
+    "actual_T0_Reader_calls": 256,
+    "last_updated_at_utc": "2026-10-02T19:14:28.946709+00:00",
+    "draft_queries_written": 128,
+    "annotation_freeze": "data/manifests/v13-4-t0-annotation-freeze.json",
+    "reader_admission": "data/manifests/v13-4-t0-reader-admission.json",
+    "reader_run": "artifacts/v13-4/t0-q0",
+    "reader_result": "data/manifests/v13-4-t0-reader-execution-results.json",
+    "final_results": "data/manifests/v13-4-t0-final-results.json"
+  },
+  "execution_status": "CLOSED_CONDITIONAL_SIMPLIFY",
+  "all_scientific_requirements_passed": false,
+  "T0_scored_responses": 256,
+  "closeout_report": "docs/V13_4_T0_RESULTS_AND_EXIT.md",
+  "G1": "NOT_PASSED_SCOPED",
+  "decision": "SIMPLIFY",
+  "completion_scope": "Plan-authorized conditional Simplify exit; not all scientific requirements passed",
+  "final_mechanical_audit": {
+    "path": "artifacts/v13-4/t0-closeout/final-audit.json",
+    "sha256": "7d4d55bda66919197a9b9bf456bc7bc5f6a6fbdfb9357740d5a924f942a2de5e",
+    "scope": "312 compact mechanical checks;not independent semantic Judge"
+  }
+}

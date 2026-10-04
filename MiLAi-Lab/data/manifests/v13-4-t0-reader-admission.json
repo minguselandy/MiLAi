@@ -1,0 +1,146 @@
+{
+  "kind": "V13_4_T0_ROOT_READER_ADMISSION",
+  "at_utc": "2026-10-02T19:01:18.332168+00:00",
+  "status": "ADMITTED_256_FROZEN_SLOTS",
+  "prepare_freeze": {
+    "path": "artifacts/v13-4/t0-q0/freeze.json",
+    "sha256": "d6bd06343a1e7942ae331541e48e72c2ec0acbdc8494c5987578cb2d5c85a1f2"
+  },
+  "annotation_freeze": {
+    "path": "data/manifests/v13-4-t0-annotation-freeze.json",
+    "sha256": "add047d2561635eb09b812f48b5928df7a0329cc9269bdbb9d708e14e9ebd166"
+  },
+  "independent_preflight": {
+    "path": "artifacts/v13-4/t0-preflight-independent/report.json",
+    "sha256": "54cc1f30bae66d21e7bf883856c0650e4f22d7ed65cd7272df5f4627ffb8394a"
+  },
+  "budget_preflight": {
+    "planned_slots": 256,
+    "capacity_admitted_slots": 256,
+    "not_admitted_slots": 0,
+    "planned_worst_case_input_plus_output_tokens": 1573343,
+    "admitted_worst_case_input_plus_output_tokens": 1573343,
+    "output_tokens_per_call": 4096,
+    "finite_caps_sufficient": true,
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    },
+    "limits_questions_arms_are_historical_not_this_matrix": true
+  },
+  "ledger_before_sha256": "4cb03be89899b5ee9ab00ae5fdb62f8c7476c14667accfc6678421a14995ba93",
+  "ledger_before": {
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    },
+    "generation": {
+      "charged_tokens": 27158739,
+      "known_tokens": 27128352,
+      "unknown_usage": 1
+    },
+    "generation_requests": 9470,
+    "history": {
+      "earlier_history": {
+        "earlier_history": {
+          "earlier_history": {
+            "earlier_history": {
+              "earlier_v15": {
+                "embedding_tokens": 836,
+                "generation_charged_tokens": 76737,
+                "generation_known_tokens": 71846,
+                "generation_requests": 108,
+                "generation_unknown_reservation": 4891,
+                "judge_requests": 0,
+                "ledger": "artifacts/langmem-foundation/v15-budget.json",
+                "sealed": true,
+                "sha256": "0f7872a6bca176f317bdbb63c0f028d2c50b256a66b07bd55cd9d5cc849c8f95",
+                "unknown_usage": 1
+              },
+              "embedding_tokens": 443,
+              "generation_charged_tokens": 40072,
+              "generation_known_tokens": 40072,
+              "generation_requests": 55,
+              "judge_requests": 0,
+              "ledger": "artifacts/langmem-provenance/v16-budget.json",
+              "sealed": true,
+              "sha256": "5dd1e35fff8094eb483de9e954ddf8dc818191115ac49f499896f8a2119f9754",
+              "unknown_usage": 0
+            },
+            "embedding_tokens": 916,
+            "generation_charged_tokens": 101810,
+            "generation_known_tokens": 101810,
+            "generation_requests": 101,
+            "ledger": "artifacts/langmem-m1-v17/v17-budget.json",
+            "sealed": true,
+            "sha256": "413da2e77f5123d7a54bfa89469008e25fb52e5f05cf63e095c4adf559ce5cbd",
+            "unknown_usage": 0
+          },
+          "embedding_tokens": 267,
+          "generation_charged_tokens": 19237,
+          "generation_known_tokens": 19237,
+          "generation_requests": 16,
+          "judge_requests": 0,
+          "ledger": "artifacts/langmem-m1-v18/v18-budget.json",
+          "sealed": true,
+          "sha256": "126c901adb4ac0cef48fe373232e97ecf1d4e272c21c4aee120f71973dec6eac",
+          "truncations": 1,
+          "unknown_usage": 0
+        },
+        "embedding_tokens": 274,
+        "generation_requests": 20,
+        "generation_tokens": 20360,
+        "ledger": "artifacts/on-demand-reconstruction-v19/v19-budget.json",
+        "sealed": true,
+        "sha256": "9277c9c06e7768d07ea9d1696aff7ffcf53eb9f72f7d26061f5d6af24a174b50"
+      },
+      "embedding_tokens": 808,
+      "generation_requests": 45,
+      "generation_tokens": 41457,
+      "ledger": "artifacts/freshness-projection-v19-repair/budget.json",
+      "sealed": true,
+      "sha256": "0195997eb4fdbc38035efa8cdd718de5af782ed1e929b6dc6a509c3172c0d28c"
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "material_token_range": [
+    1583,
+    2047
+  ],
+  "prompt_token_range": [
+    1721,
+    2208
+  ],
+  "host_existing": {
+    "base_url": "http://127.0.0.1:7860/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "root_only_real_HTTP": true,
+  "concurrency": 1,
+  "retry_policy": "No retry/restart; any runtime failure stops remaining NOT_RUN slots",
+  "planned_denominator": 256,
+  "requested_methods": [
+    "chain_rag_v1",
+    "temporal_scope_chain_v1"
+  ],
+  "effective_B2_fallback_slots": 113,
+  "evaluator_imported_by_runtime": false,
+  "G1": "NOT_EVALUATED",
+  "new_services": false
+}

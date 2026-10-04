@@ -1,0 +1,152 @@
+{
+  "kind": "V13_2_SIMPLEMEM_TEXT_SCOPED_ENGINEERING_PREFLIGHT",
+  "status": "SCOPED_SDK_CALLBACK_CHECKS_COMPLETE_COMMON_DELIVERY_NOT_IMPLEMENTED",
+  "recorded_at_utc": "2026-10-01T01:17:45.053874+00:00",
+  "runtime_source_map_sha256": "255caa86b375041e82cec242b30a762f20d1630e95803635097854725feb9190",
+  "runtime_source_count": 208,
+  "source_commit": "db80b6a7c591e0ea730a058e9f5fc4eb06572299",
+  "packages": {
+    "lancedb": "0.25.3",
+    "pylance": "0.39.0",
+    "pyarrow": "22.0.0",
+    "dateparser": "1.2.2",
+    "tantivy": "0.26.2",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.5",
+    "openai": "3.19.2",
+    "httpx": "0.28.1",
+    "langgraph": "1.1.10",
+    "langgraph-checkpoint-sqlite": "2.0.11",
+    "transformers": "4.57.6"
+  },
+  "python": "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+  "driver_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/probe_simplemem_contract.py",
+  "driver_sha256": "c74d9cfc36126b762e49164bc97f9a291e9f80a65d6b42e993da2ad4ea94cfaf",
+  "freeze_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/freeze.json",
+  "freeze_sha256": "2dab9f529e49f7037828f6a60d149aba9a891ba05432a520cec83cd80640e5ae",
+  "process_results_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/process-results.json",
+  "process_results_sha256": "9eb846f1f4fddc6f2ecf08fa55fdf4ee9283aed3a294885d102d373636c33444",
+  "terminal_command_receipts": [
+    {
+      "phase": "write",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/probe_simplemem_contract.py",
+        "write",
+        "--root",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/storage-bank"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/write-stdout.log",
+      "stdout_sha256": "ab152c04b2d72e8068fce7dd0cad6f9d49b31f99eb7cdaa26f9decf42a0cf304",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/write-stderr.log",
+      "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "driver_sha256_after": "c74d9cfc36126b762e49164bc97f9a291e9f80a65d6b42e993da2ad4ea94cfaf"
+    },
+    {
+      "phase": "reopen",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/probe_simplemem_contract.py",
+        "reopen",
+        "--root",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/storage-bank"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/reopen-stdout.log",
+      "stdout_sha256": "1be1546425e10cd55b6acef4b1c452638c6bc092ba8b6be20c05311766174c38",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/reopen-stderr.log",
+      "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "driver_sha256_after": "c74d9cfc36126b762e49164bc97f9a291e9f80a65d6b42e993da2ad4ea94cfaf"
+    },
+    {
+      "phase": "unknown",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/probe_simplemem_contract.py",
+        "unknown",
+        "--root",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/unknown-bank"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/unknown-stdout.log",
+      "stdout_sha256": "cce49d13e02e5897cd1adb642a311a57e7c6335209818d4ae0bbd551425c034e",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/unknown-stderr.log",
+      "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "driver_sha256_after": "c74d9cfc36126b762e49164bc97f9a291e9f80a65d6b42e993da2ad4ea94cfaf"
+    },
+    {
+      "phase": "resume",
+      "command": [
+        "/cra/memory/mx_memory/MiLAi-worktrees/unified-v8-v9/MiLAi-Lab/artifacts/unified-v8-v9/envs/simplemem-text/foundation/bin/python",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/probe_simplemem_contract.py",
+        "resume",
+        "--root",
+        "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/unknown-bank"
+      ],
+      "returncode": 0,
+      "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/resume-stdout.log",
+      "stdout_sha256": "a3bbec74dc53e1532dba87fc9998fe609d5c00b832f32bdd73f673276b87505e",
+      "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011215/resume-stderr.log",
+      "stderr_sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50",
+      "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+      "driver_sha256_after": "c74d9cfc36126b762e49164bc97f9a291e9f80a65d6b42e993da2ad4ea94cfaf"
+    }
+  ],
+  "scope": {
+    "independent_native_sdk_reopen_entries": 25,
+    "reopen_after_prior_process_exit": true,
+    "snapshot_equal_to_actual_before_exit": true,
+    "native_close_method": "Adapter close is pass; prior process exit releases SDK handles",
+    "foreign_owner_snapshot": "Rejected by wrapper scope guard, not a native entry owner field",
+    "trace_equal_original_source_json": "Observed in native writer request before generation admission; zero-admission ingestion returns INCOMPLETE and keeps existing25 entries",
+    "shared_mock_host_native_generation_caps": [
+      {
+        "limit": 12,
+        "mock_dispatches": 12,
+        "extra_native_dispatch_rejected": true
+      },
+      {
+        "limit": 24,
+        "mock_dispatches": 24,
+        "extra_native_dispatch_rejected": true
+      }
+    ],
+    "unknown_transport": "One MockTransport dispatch reserves persisted count1; separate process resume rejects before dispatch at limit1",
+    "25_entry_converted_material_actual_qwen_tokens": 3091,
+    "common_ordinary_budget": 2048,
+    "common_ordinary_delivery_layer_implemented": false
+  },
+  "mock_transport_chat_dispatches": 37,
+  "mock_transport_embedding_dispatches": 1,
+  "new_actual_generation_http": 0,
+  "new_actual_embedding_http": 0,
+  "experimental_model_samples": 0,
+  "socket_connection_attempts": 0,
+  "ledger_sha256_before": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+  "ledger_sha256_after": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+  "source_and_ledger_unchanged": true,
+  "preserved_failures": [
+    {
+      "phase": "Initial SDK construction",
+      "returncode": 1,
+      "reason": "Inference .venv has no lancedb metadata; no native construction or model dispatch occurred",
+      "process_results_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-simplemem-contract/20261001T011004/process-results.json",
+      "process_results_sha256": "4dc6602103032d612ae8b0ade565fb70f87e6e6d2a52bb8d433d8c890ee3656c",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e674f123f8b724fda0c16023506eea1165e1144067aa77335a3cd50f90b417b6",
+      "resolution": "Used already existing declared SimpleMem foundation environment; no install/upgrade or change to inference/performance environment"
+    }
+  ],
+  "limitations": [
+    "Synthetic proposals/offline embeddings/MockTransport prove native persistence and callback mechanics only; no actual writer/reader semantic sample or original paper-score reproduction.",
+    "Shared12/24 callback checks cover alternating scripted Host/native calls, not complete new four-arm workflow, B6+ summary or M writer admission.",
+    "Actual source JSON at writer input does not add native source-event/owner/version/CAS fields to MemoryEntry.",
+    "25-entry material3091 tokens is a conversion stress observation; no claim an actual paid native retrieval returned that entire packet. Native search tool currently serializes its results and has no declared2048/6 ordinary delivery here.",
+    "Pinned text core retained; original planning/reflection/retry semantics not replaced or deployed. New native planning/retrieval effectiveness remains NOT_TESTED."
+  ],
+  "product": "NO_GO"
+}

@@ -863,6 +863,7 @@ def test_configured_common_reader_is_on_actual_wire_with_lawful_current_thread(
     runtime = compare.ComparisonRuntime.__new__(compare.ComparisonRuntime)
     runtime.scope = FoundationScope("r", "B2", "alice", "current-episode")
     runtime.settings, runtime.model = config, model
+    runtime.common_profiles = compare.profiles(config)
     runtime.parameters, runtime.arm = {"cadence": "t3_native"}, "B2"
     runtime.service = SimpleNamespace(sources=lambda: [])
     runtime.trace = lambda event: None
@@ -1082,6 +1083,9 @@ if __name__ == "__main__":
         runtime.__dict__.update(context)
         runtime.settings, runtime.parameters = frozen["config"], frozen["comparison_parameters"]
         runtime.arm, runtime.pending, runtime.last_material = runtime.parameters["arm"], [], {}
+        runtime.common_profiles = compare.profiles(runtime.settings)
+        runtime.common = runtime.parameters.get("common_boundary", {})
+        runtime.recipe = None
         runtime.formation_namespace = (*runtime.service.namespace, "p5_compare_formation")
 
         def embedding(request: httpx.Request) -> httpx.Response:

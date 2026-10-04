@@ -1,0 +1,200 @@
+{
+  "kind": "V13_2_E2_ROOT_OFFLINE_ADMISSIBILITY",
+  "status": "MECHANICAL_BASELINE_INTERFACE_LIMIT_CONFIRMED_NOT_MODEL_ADMITTED",
+  "observed_at_utc": "2026-10-01T19:20:57.859506+00:00",
+  "real_model_generation_requests": 0,
+  "real_model_embedding_requests": 0,
+  "actual_continuous_ledger_sha256": "8547f1ef8d32455ad121799e5c0132a3de24a992067408c4fbbb73d2fb199ca5",
+  "sdk_and_runtime_changes": false,
+  "original_baseline_configs_changed": false,
+  "original_fixture_sha256": "ad7ce85e26f0ded226a30431140cb2cdc041ad155f6ba64792071fe3f8c52935",
+  "original_mechanical_39_checks_returncode": 0,
+  "executing_maps": {
+    "runtime": {
+      "count": 214,
+      "compact_sha256": "e40d0681b59d715e34bd1c0c2db32ae809673110565636c4a93f176d8e73b99a"
+    },
+    "tests": {
+      "count": 394,
+      "compact_sha256": "45c6b9ef49e873d40dd2fa203767f39f7f1fcf2582b8a825014fc998aa66f061"
+    },
+    "configs": {
+      "count": 320,
+      "compact_sha256": "91f756422bd227fff74d0197cd71b701290e848b7628a34d3c30b275f21cecad"
+    },
+    "tools": {
+      "count": 539,
+      "compact_sha256": "cc405865c95a3640c4c6a8949d1f61a07ee8fb26ed31f1af0c4f7895e095f925"
+    }
+  },
+  "common_review_only_presentation": {
+    "memory_material_profile": "compact_v1",
+    "tool_schema_communication": "shape_feedback_v1",
+    "tool_read_feedback": "typed_read_v1",
+    "tool_save_communication": "completed_receipt_v1",
+    "http_ownership_profile": "serialized_ledger_owner_v1"
+  },
+  "common_exact_http_domain": {
+    "deployment_id": "milai-existing-qwen36-bgem3-continuous-ledger",
+    "clients": [
+      {
+        "base_url": "http://127.0.0.1:7860/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "response_format": null,
+        "enable_thinking": false
+      },
+      {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "response_format": null,
+        "enable_thinking": false
+      }
+    ]
+  },
+  "shared_support_contract": "legacy",
+  "shared_read_protocol": "legacy",
+  "declared_arm_differences": [
+    "memory_candidate_contract",
+    "memory_source_backlinks"
+  ],
+  "three_actual_sdk_interleaving_controls": [
+    {
+      "name": "old-target-query",
+      "candidate_contract": "legacy_query_v1",
+      "source_backlinks": "disabled",
+      "source_query_candidates": 0,
+      "second_old_read_proposal_status": "committed",
+      "second_old_read_proposal_reason": null,
+      "latest_revision": 3,
+      "semantic_record_count": 1,
+      "original_history_and_scope_preserved": true,
+      "sdk_reopen_database_hash_unchanged": true,
+      "model_http": 0
+    },
+    {
+      "name": "source-backlinks",
+      "candidate_contract": "id_revision_v1",
+      "source_backlinks": "enabled",
+      "source_query_candidates": 1,
+      "second_old_read_proposal_status": "rejected",
+      "second_old_read_proposal_reason": "revision_conflict",
+      "latest_revision": 2,
+      "semantic_record_count": 1,
+      "original_history_and_scope_preserved": true,
+      "sdk_reopen_database_hash_unchanged": true,
+      "model_http": 0
+    },
+    {
+      "name": "source-backlinks-read-handles-patch",
+      "candidate_contract": "read_handle_v1",
+      "source_backlinks": "enabled",
+      "source_query_candidates": 1,
+      "second_old_read_proposal_status": "rejected",
+      "second_old_read_proposal_reason": "revision_conflict",
+      "latest_revision": 2,
+      "semantic_record_count": 1,
+      "original_history_and_scope_preserved": true,
+      "sdk_reopen_database_hash_unchanged": true,
+      "model_http": 0
+    }
+  ],
+  "legacy_query_fills_latest_without_read_version_conflict": true,
+  "two_version_interfaces_reject_actual_revision_conflict": true,
+  "source_cross_language_control_is_synthetic_not_model_generation": true,
+  "Root_preparation_defects_retained": [
+    {
+      "kind": "unused_config_field",
+      "original_mechanical_result_preserved": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/first/result.json",
+        "sha256": "a8d9af2599c2911c32e4330c0815a1145c0cae27af1bd8bbbc9179621d141c60",
+        "bytes": 6050
+      },
+      "qualified_record": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/ownership-contract-recovery-first/original-root-preflight-defects-recorded-later.json",
+        "sha256": "639e294fb6964809c97da1ec4ee1003cdc1d558c9dd6fad51235b8299c28beac",
+        "bytes": 1231
+      },
+      "no_model_started": true
+    },
+    {
+      "kind": "Root_read_DTO_revision_wrong_level",
+      "original_process_returncode": 1,
+      "qualified_record": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/three-interface-interleaving-recovery-first/original-failure-recorded-later.json",
+        "sha256": "ca9dac94e5cfd4b7c1e3b4f1e62bc30bd035c8e05e09323cd2f273459432e534",
+        "bytes": 1199
+      },
+      "original_failed_database_unchanged": true,
+      "no_at_time_after_maps_originally_saved": true,
+      "recovery_clones_first_bank_and_keeps_the_first_created_card": true
+    }
+  ],
+  "original_evidence": {
+    "first_preparer": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/first/executing-preparer.py",
+      "sha256": "0511deef4cac7081e48bbb1b8b4d982b768ab7a06d49e4d532ecedc2238f9c5c",
+      "bytes": 6337
+    },
+    "first_pytest_process": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/first/pytest-original-process.json",
+      "sha256": "00079eb9d43371b396e03f656bc5a38c7bc45fdcfd3f79a04134a958ee46b00f",
+      "bytes": 833
+    },
+    "first_pytest_stdout": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/first/pytest-stdout.log",
+      "sha256": "67f3ab472cc1cfeb9853e20a09ac6da8d4d413edb416410c6411d7bc4f7439d4",
+      "bytes": 2077
+    },
+    "first_pytest_stderr": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/first/pytest-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "corrected_prepare": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/ownership-contract-recovery-first/result.json",
+      "sha256": "75830520370fb88c9bc7c653dceacb8a17f38ff15ce5a9a0d8399285095a326c",
+      "bytes": 4481
+    },
+    "interleaving": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/three-interface-interleaving-recovery-first/result.json",
+      "sha256": "08c5ca1ba4fe7fd1aa4e72f3d9562f40799c3c8ab11e2ea5ff437fceba539e22",
+      "bytes": 2011
+    }
+  },
+  "not_real_model_task_quality": true,
+  "not_independent_review": true,
+  "not_generalization": true,
+  "fresh_E2_model_execution_not_started": true,
+  "new_source_optional_engineering_not_applied": true,
+  "full_plan_completed": false,
+  "full_plan": "ACTIVE",
+  "E0": "NOT_PASSED",
+  "D4": "NOT_ADMITTED",
+  "Product": "NO_GO",
+  "original_archive": {
+    "file_index": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/public-result-and-prefix-first/file-index.json",
+      "sha256": "810ebaabad8028b325a421cbc991913e2502325d0b759f44687dc51395fb15e2",
+      "bytes": 41245
+    },
+    "seal": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-e2-admissibility-preparation/public-result-and-prefix-first/SEAL.json",
+      "sha256": "ba11375a38944a2dea3e078f99fe7989f7c2e553d1291981b7d1748dfeda3ce8",
+      "bytes": 548
+    },
+    "indexed_files": 182,
+    "symlink_entries": 26
+  },
+  "interleaving_update_entry_all_three": "manage_memory action=update",
+  "new_interleaving_does_not_claim_patch_specific_evidence": true
+}

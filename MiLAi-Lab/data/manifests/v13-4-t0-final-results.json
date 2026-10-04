@@ -1,0 +1,2330 @@
+{
+  "kind": "V13_4_T0_FROZEN_DEVELOPMENT_RESULTS",
+  "decision": "SIMPLIFY",
+  "G1": "NOT_PASSED_SCOPED",
+  "Product": "NO_GO",
+  "counts": {
+    "histories": 32,
+    "queries": 128,
+    "responses": 256,
+    "SOLVABLE": 123,
+    "PARTIALLY_SOLVABLE": 4,
+    "ARCHIVE_INSUFFICIENT": 1,
+    "offline_variants": 1152
+  },
+  "score_record_counts": {
+    "1": 211,
+    "0.5": 22,
+    "0": 23
+  },
+  "utility": {
+    "by_query_kind": {
+      "CROSS_SCOPE": {
+        "B1": {
+          "material_error": {
+            "false": 29,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.9375,
+          "overrefusal": {
+            "false": 31,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 29,
+            "null": 3,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 2,
+            "1": 29,
+            "null": 0
+          }
+        },
+        "B2": {
+          "material_error": {
+            "false": 28,
+            "null": 1,
+            "true": 3
+          },
+          "mean_utility_scored_only": 0.890625,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 28,
+            "null": 4,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 2,
+            "0.5": 3,
+            "1": 27,
+            "null": 0
+          }
+        }
+      },
+      "CURRENT_REQUIREMENT": {
+        "B1": {
+          "material_error": {
+            "false": 26,
+            "null": 0,
+            "true": 6
+          },
+          "mean_utility_scored_only": 0.8125,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 28,
+            "null": 4,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 5,
+            "0.5": 2,
+            "1": 25,
+            "null": 0
+          }
+        },
+        "B2": {
+          "material_error": {
+            "false": 26,
+            "null": 1,
+            "true": 5
+          },
+          "mean_utility_scored_only": 0.8125,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 5,
+            "0.5": 2,
+            "1": 25,
+            "null": 0
+          }
+        }
+      },
+      "RETROSPECTIVE_APPLICABILITY": {
+        "B1": {
+          "material_error": {
+            "false": 24,
+            "null": 1,
+            "true": 7
+          },
+          "mean_utility_scored_only": 0.84375,
+          "overrefusal": {
+            "false": 31,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 23,
+            "null": 8,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 2,
+            "0.5": 6,
+            "1": 24,
+            "null": 0
+          }
+        },
+        "B2": {
+          "material_error": {
+            "false": 25,
+            "null": 1,
+            "true": 6
+          },
+          "mean_utility_scored_only": 0.859375,
+          "overrefusal": {
+            "false": 32,
+            "null": 0,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 22,
+            "null": 9,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 2,
+            "0.5": 5,
+            "1": 25,
+            "null": 0
+          }
+        }
+      },
+      "STATEMENT_HISTORY": {
+        "B1": {
+          "material_error": {
+            "false": 29,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.890625,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 27,
+            "null": 4,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 3,
+            "0.5": 1,
+            "1": 28,
+            "null": 0
+          }
+        },
+        "B2": {
+          "material_error": {
+            "false": 29,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.890625,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 25,
+            "null": 5,
+            "true": 2
+          },
+          "utility_distribution": {
+            "0": 3,
+            "0.5": 1,
+            "1": 28,
+            "null": 0
+          }
+        }
+      }
+    },
+    "by_solvability_then_kind": {
+      "ARCHIVE_INSUFFICIENT": {
+        "CROSS_SCOPE": {
+          "B1": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 1,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "B1": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          }
+        }
+      },
+      "PARTIALLY_SOLVABLE": {
+        "CROSS_SCOPE": {
+          "B1": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": 1.0,
+            "overrefusal": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 1,
+            "scored_slots": 1,
+            "unsupported_certainty": {
+              "false": 1,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 1,
+              "null": 0
+            }
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 1
+            },
+            "mean_utility_scored_only": 0.75,
+            "overrefusal": {
+              "false": 2,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 2,
+            "scored_slots": 2,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 1,
+              "true": 1
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 1,
+              "1": 1,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 1,
+              "null": 0,
+              "true": 1
+            },
+            "mean_utility_scored_only": 0.75,
+            "overrefusal": {
+              "false": 2,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 2,
+            "scored_slots": 2,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 1,
+              "true": 1
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 1,
+              "1": 1,
+              "null": 0
+            }
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "B1": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "mean_utility_scored_only": null,
+            "overrefusal": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 0,
+            "scored_slots": 0,
+            "unsupported_certainty": {
+              "false": 0,
+              "null": 0,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 0,
+              "0.5": 0,
+              "1": 0,
+              "null": 0
+            }
+          }
+        }
+      },
+      "SOLVABLE": {
+        "CROSS_SCOPE": {
+          "B1": {
+            "material_error": {
+              "false": 28,
+              "null": 1,
+              "true": 2
+            },
+            "mean_utility_scored_only": 0.9354838709677419,
+            "overrefusal": {
+              "false": 30,
+              "null": 1,
+              "true": 0
+            },
+            "planned_slots": 31,
+            "scored_slots": 31,
+            "unsupported_certainty": {
+              "false": 28,
+              "null": 3,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 1,
+              "0.5": 2,
+              "1": 28,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 27,
+              "null": 1,
+              "true": 3
+            },
+            "mean_utility_scored_only": 0.8870967741935484,
+            "overrefusal": {
+              "false": 29,
+              "null": 2,
+              "true": 0
+            },
+            "planned_slots": 31,
+            "scored_slots": 31,
+            "unsupported_certainty": {
+              "false": 27,
+              "null": 4,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 2,
+              "0.5": 3,
+              "1": 26,
+              "null": 0
+            }
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1": {
+            "material_error": {
+              "false": 25,
+              "null": 0,
+              "true": 6
+            },
+            "mean_utility_scored_only": 0.8064516129032258,
+            "overrefusal": {
+              "false": 29,
+              "null": 2,
+              "true": 0
+            },
+            "planned_slots": 31,
+            "scored_slots": 31,
+            "unsupported_certainty": {
+              "false": 27,
+              "null": 4,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 5,
+              "0.5": 2,
+              "1": 24,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 25,
+              "null": 1,
+              "true": 5
+            },
+            "mean_utility_scored_only": 0.8064516129032258,
+            "overrefusal": {
+              "false": 29,
+              "null": 2,
+              "true": 0
+            },
+            "planned_slots": 31,
+            "scored_slots": 31,
+            "unsupported_certainty": {
+              "false": 29,
+              "null": 2,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 5,
+              "0.5": 2,
+              "1": 24,
+              "null": 0
+            }
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1": {
+            "material_error": {
+              "false": 22,
+              "null": 1,
+              "true": 6
+            },
+            "mean_utility_scored_only": 0.8448275862068966,
+            "overrefusal": {
+              "false": 28,
+              "null": 1,
+              "true": 0
+            },
+            "planned_slots": 29,
+            "scored_slots": 29,
+            "unsupported_certainty": {
+              "false": 23,
+              "null": 6,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 2,
+              "0.5": 5,
+              "1": 22,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 23,
+              "null": 1,
+              "true": 5
+            },
+            "mean_utility_scored_only": 0.8620689655172413,
+            "overrefusal": {
+              "false": 29,
+              "null": 0,
+              "true": 0
+            },
+            "planned_slots": 29,
+            "scored_slots": 29,
+            "unsupported_certainty": {
+              "false": 21,
+              "null": 8,
+              "true": 0
+            },
+            "utility_distribution": {
+              "0": 2,
+              "0.5": 4,
+              "1": 23,
+              "null": 0
+            }
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "B1": {
+            "material_error": {
+              "false": 29,
+              "null": 1,
+              "true": 2
+            },
+            "mean_utility_scored_only": 0.890625,
+            "overrefusal": {
+              "false": 30,
+              "null": 2,
+              "true": 0
+            },
+            "planned_slots": 32,
+            "scored_slots": 32,
+            "unsupported_certainty": {
+              "false": 27,
+              "null": 4,
+              "true": 1
+            },
+            "utility_distribution": {
+              "0": 3,
+              "0.5": 1,
+              "1": 28,
+              "null": 0
+            }
+          },
+          "B2": {
+            "material_error": {
+              "false": 29,
+              "null": 1,
+              "true": 2
+            },
+            "mean_utility_scored_only": 0.890625,
+            "overrefusal": {
+              "false": 30,
+              "null": 2,
+              "true": 0
+            },
+            "planned_slots": 32,
+            "scored_slots": 32,
+            "unsupported_certainty": {
+              "false": 25,
+              "null": 5,
+              "true": 2
+            },
+            "utility_distribution": {
+              "0": 3,
+              "0.5": 1,
+              "1": 28,
+              "null": 0
+            }
+          }
+        }
+      }
+    },
+    "overall_mixed_task_accuracy": "NOT_DEFINED",
+    "review_class": "single-developer same-family method-blind review"
+  },
+  "paired": {
+    "all_pairs": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "B1_mean_utility": 0.9375,
+          "B2_losses": 2,
+          "B2_mean_utility": 0.890625,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 28,
+          "different_utility_pairs": 2,
+          "mean_delta_B2_minus_B1": -0.046875,
+          "planned_pairs": 32,
+          "same_actual_input_pairs": 30,
+          "same_answer_hash_pairs": 2,
+          "scored_pairs": 32,
+          "ties": 30,
+          "unknown_pairs": 0
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1_mean_utility": 0.8125,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.8125,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 22,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 32,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 10,
+          "scored_pairs": 32,
+          "ties": 32,
+          "unknown_pairs": 0
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1_mean_utility": 0.84375,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.859375,
+          "B2_wins": 1,
+          "different_answer_hash_same_utility_pairs": 28,
+          "different_utility_pairs": 1,
+          "mean_delta_B2_minus_B1": 0.015625,
+          "planned_pairs": 32,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 3,
+          "scored_pairs": 32,
+          "ties": 31,
+          "unknown_pairs": 0
+        },
+        "STATEMENT_HISTORY": {
+          "B1_mean_utility": 0.890625,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.890625,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 23,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 32,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 9,
+          "scored_pairs": 32,
+          "ties": 32,
+          "unknown_pairs": 0
+        }
+      },
+      "counts_only_across_kinds": {
+        "B2_losses": 2,
+        "B2_wins": 1,
+        "different_answer_hash_same_utility_pairs": 101,
+        "different_utility_pairs": 3,
+        "mixed_query_kind_mean": "NOT_DEFINED_OR_REPORTED",
+        "planned_pairs": 128,
+        "same_actual_input_pairs": 123,
+        "same_answer_hash_pairs": 24,
+        "scored_pairs": 128,
+        "ties": 125,
+        "unknown_pairs": 0
+      }
+    },
+    "different_input_5_pairs": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "B1_mean_utility": 1.0,
+          "B2_losses": 2,
+          "B2_mean_utility": 0.25,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 0,
+          "different_utility_pairs": 2,
+          "mean_delta_B2_minus_B1": -0.75,
+          "planned_pairs": 2,
+          "same_actual_input_pairs": 0,
+          "same_answer_hash_pairs": 0,
+          "scored_pairs": 2,
+          "ties": 0,
+          "unknown_pairs": 0
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1_mean_utility": 1.0,
+          "B2_losses": 0,
+          "B2_mean_utility": 1.0,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 1,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 1,
+          "same_actual_input_pairs": 0,
+          "same_answer_hash_pairs": 0,
+          "scored_pairs": 1,
+          "ties": 1,
+          "unknown_pairs": 0
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1_mean_utility": 1.0,
+          "B2_losses": 0,
+          "B2_mean_utility": 1.0,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 1,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 1,
+          "same_actual_input_pairs": 0,
+          "same_answer_hash_pairs": 0,
+          "scored_pairs": 1,
+          "ties": 1,
+          "unknown_pairs": 0
+        },
+        "STATEMENT_HISTORY": {
+          "B1_mean_utility": 1.0,
+          "B2_losses": 0,
+          "B2_mean_utility": 1.0,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 1,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 1,
+          "same_actual_input_pairs": 0,
+          "same_answer_hash_pairs": 0,
+          "scored_pairs": 1,
+          "ties": 1,
+          "unknown_pairs": 0
+        }
+      },
+      "counts_only_across_kinds": {
+        "B2_losses": 2,
+        "B2_wins": 0,
+        "different_answer_hash_same_utility_pairs": 3,
+        "different_utility_pairs": 2,
+        "mixed_query_kind_mean": "NOT_DEFINED_OR_REPORTED",
+        "planned_pairs": 5,
+        "same_actual_input_pairs": 0,
+        "same_answer_hash_pairs": 0,
+        "scored_pairs": 5,
+        "ties": 3,
+        "unknown_pairs": 0
+      }
+    },
+    "same_input_123_pairs": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "B1_mean_utility": 0.9333333333333333,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.9333333333333333,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 28,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 30,
+          "same_actual_input_pairs": 30,
+          "same_answer_hash_pairs": 2,
+          "scored_pairs": 30,
+          "ties": 30,
+          "unknown_pairs": 0
+        },
+        "CURRENT_REQUIREMENT": {
+          "B1_mean_utility": 0.8064516129032258,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.8064516129032258,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 21,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 31,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 10,
+          "scored_pairs": 31,
+          "ties": 31,
+          "unknown_pairs": 0
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "B1_mean_utility": 0.8387096774193549,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.8548387096774194,
+          "B2_wins": 1,
+          "different_answer_hash_same_utility_pairs": 27,
+          "different_utility_pairs": 1,
+          "mean_delta_B2_minus_B1": 0.016129032258064516,
+          "planned_pairs": 31,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 3,
+          "scored_pairs": 31,
+          "ties": 30,
+          "unknown_pairs": 0
+        },
+        "STATEMENT_HISTORY": {
+          "B1_mean_utility": 0.8870967741935484,
+          "B2_losses": 0,
+          "B2_mean_utility": 0.8870967741935484,
+          "B2_wins": 0,
+          "different_answer_hash_same_utility_pairs": 22,
+          "different_utility_pairs": 0,
+          "mean_delta_B2_minus_B1": 0.0,
+          "planned_pairs": 31,
+          "same_actual_input_pairs": 31,
+          "same_answer_hash_pairs": 9,
+          "scored_pairs": 31,
+          "ties": 31,
+          "unknown_pairs": 0
+        }
+      },
+      "counts_only_across_kinds": {
+        "B2_losses": 0,
+        "B2_wins": 1,
+        "different_answer_hash_same_utility_pairs": 98,
+        "different_utility_pairs": 1,
+        "mixed_query_kind_mean": "NOT_DEFINED_OR_REPORTED",
+        "planned_pairs": 123,
+        "same_actual_input_pairs": 123,
+        "same_answer_hash_pairs": 24,
+        "scored_pairs": 123,
+        "ties": 122,
+        "unknown_pairs": 0
+      }
+    }
+  },
+  "effective_methods": {
+    "B1_requested__B1_effective": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "material_error": {
+            "false": 29,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.9375,
+          "overrefusal": {
+            "false": 31,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 29,
+            "null": 3,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 2,
+            "1": 29,
+            "null": 0
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "material_error": {
+            "false": 26,
+            "null": 0,
+            "true": 6
+          },
+          "mean_utility_scored_only": 0.8125,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 28,
+            "null": 4,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 5,
+            "0.5": 2,
+            "1": 25,
+            "null": 0
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "material_error": {
+            "false": 24,
+            "null": 1,
+            "true": 7
+          },
+          "mean_utility_scored_only": 0.84375,
+          "overrefusal": {
+            "false": 31,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 23,
+            "null": 8,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 2,
+            "0.5": 6,
+            "1": 24,
+            "null": 0
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "material_error": {
+            "false": 29,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.890625,
+          "overrefusal": {
+            "false": 30,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 32,
+          "scored_slots": 32,
+          "unsupported_certainty": {
+            "false": 27,
+            "null": 4,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 3,
+            "0.5": 1,
+            "1": 28,
+            "null": 0
+          }
+        }
+      },
+      "slots": 128
+    },
+    "B2_requested__B1_effective": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "material_error": {
+            "false": 25,
+            "null": 1,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.9285714285714286,
+          "overrefusal": {
+            "false": 27,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 28,
+          "scored_slots": 28,
+          "unsupported_certainty": {
+            "false": 25,
+            "null": 3,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 2,
+            "1": 25,
+            "null": 0
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "material_error": {
+            "false": 23,
+            "null": 1,
+            "true": 4
+          },
+          "mean_utility_scored_only": 0.8214285714285714,
+          "overrefusal": {
+            "false": 26,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 28,
+          "scored_slots": 28,
+          "unsupported_certainty": {
+            "false": 26,
+            "null": 2,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 4,
+            "0.5": 2,
+            "1": 22,
+            "null": 0
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "material_error": {
+            "false": 23,
+            "null": 1,
+            "true": 5
+          },
+          "mean_utility_scored_only": 0.8793103448275862,
+          "overrefusal": {
+            "false": 29,
+            "null": 0,
+            "true": 0
+          },
+          "planned_slots": 29,
+          "scored_slots": 29,
+          "unsupported_certainty": {
+            "false": 19,
+            "null": 9,
+            "true": 1
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 5,
+            "1": 23,
+            "null": 0
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "material_error": {
+            "false": 26,
+            "null": 0,
+            "true": 2
+          },
+          "mean_utility_scored_only": 0.875,
+          "overrefusal": {
+            "false": 26,
+            "null": 2,
+            "true": 0
+          },
+          "planned_slots": 28,
+          "scored_slots": 28,
+          "unsupported_certainty": {
+            "false": 23,
+            "null": 3,
+            "true": 2
+          },
+          "utility_distribution": {
+            "0": 3,
+            "0.5": 1,
+            "1": 24,
+            "null": 0
+          }
+        }
+      },
+      "slots": 113
+    },
+    "B2_requested__B2_effective": {
+      "by_query_kind": {
+        "CROSS_SCOPE": {
+          "material_error": {
+            "false": 3,
+            "null": 0,
+            "true": 1
+          },
+          "mean_utility_scored_only": 0.625,
+          "overrefusal": {
+            "false": 3,
+            "null": 1,
+            "true": 0
+          },
+          "planned_slots": 4,
+          "scored_slots": 4,
+          "unsupported_certainty": {
+            "false": 3,
+            "null": 1,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 1,
+            "1": 2,
+            "null": 0
+          }
+        },
+        "CURRENT_REQUIREMENT": {
+          "material_error": {
+            "false": 3,
+            "null": 0,
+            "true": 1
+          },
+          "mean_utility_scored_only": 0.75,
+          "overrefusal": {
+            "false": 4,
+            "null": 0,
+            "true": 0
+          },
+          "planned_slots": 4,
+          "scored_slots": 4,
+          "unsupported_certainty": {
+            "false": 4,
+            "null": 0,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 0,
+            "1": 3,
+            "null": 0
+          }
+        },
+        "RETROSPECTIVE_APPLICABILITY": {
+          "material_error": {
+            "false": 2,
+            "null": 0,
+            "true": 1
+          },
+          "mean_utility_scored_only": 0.6666666666666666,
+          "overrefusal": {
+            "false": 3,
+            "null": 0,
+            "true": 0
+          },
+          "planned_slots": 3,
+          "scored_slots": 3,
+          "unsupported_certainty": {
+            "false": 3,
+            "null": 0,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 1,
+            "0.5": 0,
+            "1": 2,
+            "null": 0
+          }
+        },
+        "STATEMENT_HISTORY": {
+          "material_error": {
+            "false": 3,
+            "null": 1,
+            "true": 0
+          },
+          "mean_utility_scored_only": 1.0,
+          "overrefusal": {
+            "false": 4,
+            "null": 0,
+            "true": 0
+          },
+          "planned_slots": 4,
+          "scored_slots": 4,
+          "unsupported_certainty": {
+            "false": 2,
+            "null": 2,
+            "true": 0
+          },
+          "utility_distribution": {
+            "0": 0,
+            "0.5": 0,
+            "1": 4,
+            "null": 0
+          }
+        }
+      },
+      "slots": 15
+    }
+  },
+  "coverage": {
+    "curves": [
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 23,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.18699186991869918,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 6,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.1935483870967742,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 9,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.28125,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 4,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.13793103448275862,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 4,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.12903225806451613,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 42,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.25,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.34146341463414637,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 10,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.3225806451612903,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 15,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.46875,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 6,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.20689655172413793,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 11,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.3548387096774194,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 99,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.75,
+        "partial_delivered_covered": 3,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.8048780487804879,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 24,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.7741935483870968,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 27,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.84375,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 22,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.5,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.7586206896551724,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 26,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B1",
+        "requested_method": "chain_rag_v1",
+        "whole_delivered_coverage_fraction": 0.8387096774193549,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 22,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.17886178861788618,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 5,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.16129032258064516,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 9,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.28125,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 4,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.13793103448275862,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 4,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.12903225806451613,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 41,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.25,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.3333333333333333,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 10,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.3225806451612903,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 15,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.46875,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 6,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.20689655172413793,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 10,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.3225806451612903,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 97,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.75,
+        "partial_delivered_covered": 3,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.7886178861788617,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 24,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.7741935483870968,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 26,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.8125,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 22,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.5,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.7586206896551724,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 25,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B2",
+        "requested_method": "temporal_scope_chain_v1",
+        "whole_delivered_coverage_fraction": 0.8064516129032258,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 21,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.17073170731707318,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 5,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.16129032258064516,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 7,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.21875,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 5,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.1724137931034483,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 512,
+        "delivered_enumerated_set_covered": 4,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.12903225806451613,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 38,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.3089430894308943,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 11,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.3548387096774194,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 11,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.34375,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 8,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.27586206896551724,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 1024,
+        "delivered_enumerated_set_covered": 8,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.25806451612903225,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 123,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 58,
+        "partial_K_covered": 4,
+        "partial_delivered_coverage_fraction": 0.25,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 4,
+        "planned_queries": 128,
+        "query_kind": "ALL",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.4715447154471545,
+        "whole_query_NA": 5,
+        "whole_query_denominator": 123
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 16,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CURRENT_REQUIREMENT",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.5161290322580645,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      },
+      {
+        "K_enumerated_set_covered": 32,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 15,
+        "partial_K_covered": 0,
+        "partial_delivered_coverage_fraction": null,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 0,
+        "planned_queries": 32,
+        "query_kind": "STATEMENT_HISTORY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.46875,
+        "whole_query_NA": 0,
+        "whole_query_denominator": 32
+      },
+      {
+        "K_enumerated_set_covered": 29,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 13,
+        "partial_K_covered": 2,
+        "partial_delivered_coverage_fraction": 0.0,
+        "partial_delivered_covered": 0,
+        "partial_support_query_denominator": 2,
+        "planned_queries": 32,
+        "query_kind": "RETROSPECTIVE_APPLICABILITY",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.4482758620689655,
+        "whole_query_NA": 3,
+        "whole_query_denominator": 29
+      },
+      {
+        "K_enumerated_set_covered": 31,
+        "budget": 2048,
+        "delivered_enumerated_set_covered": 14,
+        "partial_K_covered": 1,
+        "partial_delivered_coverage_fraction": 1.0,
+        "partial_delivered_covered": 1,
+        "partial_support_query_denominator": 1,
+        "planned_queries": 32,
+        "query_kind": "CROSS_SCOPE",
+        "requested_arm": "B3",
+        "requested_method": "slot_retrieve_v1",
+        "whole_delivered_coverage_fraction": 0.45161290322580644,
+        "whole_query_NA": 1,
+        "whole_query_denominator": 31
+      }
+    ],
+    "scope": "frozen enumerated evidence sets; no-match is not proof of semantic missing evidence"
+  },
+  "sensitivity": {
+    "membership": [
+      "RFC7469",
+      "RFC7644",
+      "RFC8259",
+      "RFC8949",
+      "RFC8995",
+      "RFC9115",
+      "RFC9132",
+      "RFC9171",
+      "RFC9493",
+      "RFC9711",
+      "RFC9886"
+    ],
+    "interpretation": "Equal descriptive weighting blocks, not demonstrated independent families; no query-level significance testing.",
+    "policy_provenance": "Protocol/preregistration requires source-dependence sensitivity; source-audit family membership predates queries/results. The three exact weighting contrasts were requested by Root at aggregation and are not claimed verbatim in the preregistration.",
+    "policies": {
+      "all_32_histories_equal": {
+        "blocks": 32,
+        "by_query_kind": {
+          "CROSS_SCOPE": {
+            "B1_weighted_mean_utility": 0.9375,
+            "B2_weighted_mean_utility": 0.890625,
+            "weighted_mean_delta_B2_minus_B1": -0.046875
+          },
+          "CURRENT_REQUIREMENT": {
+            "B1_weighted_mean_utility": 0.8125,
+            "B2_weighted_mean_utility": 0.8125,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          },
+          "RETROSPECTIVE_APPLICABILITY": {
+            "B1_weighted_mean_utility": 0.84375,
+            "B2_weighted_mean_utility": 0.859375,
+            "weighted_mean_delta_B2_minus_B1": 0.015625
+          },
+          "STATEMENT_HISTORY": {
+            "B1_weighted_mean_utility": 0.890625,
+            "B2_weighted_mean_utility": 0.890625,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          }
+        }
+      },
+      "broad_format_family_as_one_block_plus_21_equal_blocks": {
+        "blocks": 22,
+        "by_query_kind": {
+          "CROSS_SCOPE": {
+            "B1_weighted_mean_utility": 0.9090909090909091,
+            "B2_weighted_mean_utility": 0.8409090909090909,
+            "weighted_mean_delta_B2_minus_B1": -0.06818181818181818
+          },
+          "CURRENT_REQUIREMENT": {
+            "B1_weighted_mean_utility": 0.768595041322314,
+            "B2_weighted_mean_utility": 0.768595041322314,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          },
+          "RETROSPECTIVE_APPLICABILITY": {
+            "B1_weighted_mean_utility": 0.8140495867768596,
+            "B2_weighted_mean_utility": 0.8367768595041323,
+            "weighted_mean_delta_B2_minus_B1": 0.022727272727272728
+          },
+          "STATEMENT_HISTORY": {
+            "B1_weighted_mean_utility": 0.9235537190082646,
+            "B2_weighted_mean_utility": 0.9235537190082646,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          }
+        }
+      },
+      "exclude_broad_format_family_21_histories_equal": {
+        "blocks": 21,
+        "by_query_kind": {
+          "CROSS_SCOPE": {
+            "B1_weighted_mean_utility": 0.9047619047619048,
+            "B2_weighted_mean_utility": 0.8333333333333334,
+            "weighted_mean_delta_B2_minus_B1": -0.07142857142857142
+          },
+          "CURRENT_REQUIREMENT": {
+            "B1_weighted_mean_utility": 0.7619047619047619,
+            "B2_weighted_mean_utility": 0.7619047619047619,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          },
+          "RETROSPECTIVE_APPLICABILITY": {
+            "B1_weighted_mean_utility": 0.8095238095238095,
+            "B2_weighted_mean_utility": 0.8333333333333334,
+            "weighted_mean_delta_B2_minus_B1": 0.023809523809523808
+          },
+          "STATEMENT_HISTORY": {
+            "B1_weighted_mean_utility": 0.9285714285714286,
+            "B2_weighted_mean_utility": 0.9285714285714286,
+            "weighted_mean_delta_B2_minus_B1": 0.0
+          }
+        }
+      }
+    }
+  },
+  "earliest_breakpoints": {
+    "NO_DEMONSTRATED_BREAKPOINT": 189,
+    "PLAN_PACKAGING_ENUMERATED_SET_MISS": 50,
+    "READER_INTERPRETATION_ERROR": 7,
+    "ARCHIVE_PARTIAL_OR_INSUFFICIENT": 10
+  },
+  "auxiliary_flags": {
+    "unsupported_certainty": {
+      "False": 212,
+      "None": 39,
+      "True": 5
+    },
+    "overrefusal": {
+      "False": 244,
+      "None": 12
+    }
+  },
+  "auxiliary_limits": "Frozen flags are scoped development review;39 unsupported-certainty and12 Reader-overrefusal unknowns retained. No exhaustive factuality or zero-overrefusal claim.",
+  "costs": {
+    "v13_4_generation_requests": 328,
+    "v13_4_known_and_charged_tokens": 685409,
+    "v13_4_embedding": 0,
+    "T0_generation_requests": 256,
+    "T0_prompt_tokens": 524767,
+    "T0_completion_tokens": 39167,
+    "T0_total_tokens": 563934,
+    "metadata_formation_calls": 64,
+    "metadata_formation_tokens": 115463,
+    "new_unknown_usage": 0,
+    "existing_unknown_usage": 1,
+    "ledger_after_sha256": "19ab4dc8c98404a994644a868f16fd077c9033696f5dc8027f48e1ee827accc1",
+    "Reader_material_budget": 2048,
+    "selector_metadata_additional_information_separately_accounted": true,
+    "physical_IO_GPU_price": "UNKNOWN"
+  },
+  "evidence": {
+    "artifacts/v13-4/t0-analysis/output-r1/terminal.json": "90cd85d8081cb32bf7c71875e309f72da10b928f10bdeaffa37011b89ac8ecb4",
+    "artifacts/v13-4/t0-analysis/validation-r1.json": "abf3e9c18815391c48a5ddfae408d2ba004f3c0af0b5e93ca461de8e47dd29e8",
+    "artifacts/v13-4/t0-scoring/blind-score-freeze/freeze.json": "301f3724973a6405b1ef295f0f1866faf839bc0ef001cd7bd7efd602b293213c",
+    "artifacts/v13-4/t0-closeout/g1-r0/decision.json": "9a401593b0f8576c7e42681cf2f65a27f5b11a5f6ab8c9d238302293d7675e14",
+    "artifacts/v13-4/t0-closeout/g1-r0/per-history.json": "6912be9148c13afde6b69d77e41b1ba42f83c33e93658e5a955d8774d8ebd35b",
+    "artifacts/v13-4/t0-closeout/g1-r0/per-response.json": "31873bb80441cee0d0a8871710b48d8a78bc67c3cf7a6f3e66cbca3d32bf58fa"
+  },
+  "limitations": [
+    "Development only; not32 established independent histories;8x4 proposed history strata not met",
+    "Same-family single-developer scoring, not independent Judge",
+    "Nonexhaustive frozen E*; no-hit not semantic absence",
+    "T1/T2/T3 conditional not admitted; B3 utility/B4 natural/M/FullArchive not run",
+    "No post-result method/gold/utility repair; no selector attribution for identical inputs",
+    "No formal confidence intervals, superiority, noninferiority, unseen-source or Product claims"
+  ]
+}

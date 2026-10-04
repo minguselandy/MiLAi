@@ -1,0 +1,160 @@
+{
+  "kind": "V13_4_STUDY_PREREGISTRATION_DRAFT",
+  "status": "DRAFT_NOT_AN_EXECUTED_CLI_CONFIG",
+  "plan_sha256": "3410300294c94e7cc43ee425ab2dbc1bc1320a27b808e6f5da3a8679fd5a67e4",
+  "arm_kind": "RESEARCH_PROTOTYPE",
+  "sequence": [
+    "N0",
+    "N1",
+    "G0-Read",
+    "N2/T0",
+    "G1",
+    "N3/T1",
+    "G2",
+    "N4/T2",
+    "method_freeze",
+    "N5/T3",
+    "N6"
+  ],
+  "scope": "Query evidence selection only; all original48 inherited; write/business integration needs independent G0-Integrate.",
+  "budgets": {
+    "main_evidence_tokens": 2048,
+    "cost_curve_tokens": [
+      512,
+      1024,
+      2048
+    ],
+    "shared_candidate_limit": 32,
+    "diagnostic_hypothesis_limit": 4,
+    "independent_query_planning_LLM_calls": 0,
+    "reader_calls_per_query": 1,
+    "HTTP_concurrency": 1,
+    "tokenizer": "existing pinned Qwen config in configs/v13-4-readonly-q0.json",
+    "cost_phases": [
+      "ingest",
+      "metadata",
+      "index",
+      "select",
+      "read",
+      "answer",
+      "retry"
+    ],
+    "judge_costs": "separate",
+    "currency_or_GPU_hours": "not reported without actual price or timing"
+  },
+  "batches": {
+    "N1_wiring": {
+      "purpose": "mechanical controlled diagnostic; not new independent history or efficacy"
+    },
+    "T0": {
+      "independent_histories_target": 32,
+      "natural_queries_per_history": 4,
+      "strata_targets": {
+        "explicit_or_answer_invariant": 8,
+        "single_disambiguating_source": 8,
+        "complementary_evidence": 8,
+        "archive_insufficient": 8
+      },
+      "reader_arms": [
+        "B1_Chain_RAG",
+        "B2_Temporal_RAG"
+      ],
+      "reader_results_planned": 256,
+      "optional_FullArchive_reader_results_max": 128,
+      "eligibility": "source/origin/license/exposure/template group audit before admission; no result-based inclusion",
+      "label_review": "Root development review until truly independent review available"
+    },
+    "T1": {
+      "input": "T0 development groups only, no formal inference",
+      "formation": "query-free chronological event boundaries; questions/gold in separate file inaccessible to writer",
+      "conditions": [
+        "B3_slot",
+        "actual_metadata_linear",
+        "metadata_shuffle",
+        "oracle_metadata",
+        "oracle_query_mask",
+        "same_metadata_swapped_bodies",
+        "complementary_and_duplicate"
+      ],
+      "max_features": 12,
+      "CV": "grouped by source AND template AND known derivation union",
+      "pilot_target_coverage_gain_vs_B3_pp": 5,
+      "max_extraction_revisions": 2
+    },
+    "T2": {
+      "fresh_histories": 24,
+      "queries_per_history": 4,
+      "arms": 5,
+      "reader_results_planned": 480,
+      "status": "NOT_ADMITTED_BEFORE_G2"
+    },
+    "T3": {
+      "initial_histories": 96,
+      "queries_per_history": 4,
+      "arms": 5,
+      "initial_reader_results": 1920,
+      "size": "re-estimate and freeze from pilot before reading formal outcomes",
+      "second_family_histories": 24,
+      "second_family_arms": [
+        "M",
+        "B3",
+        "B4"
+      ],
+      "second_family_reader_results": 288,
+      "missing_second_family": "NOT_VERIFIED, no invented deployment"
+    }
+  },
+  "comparisons": {
+    "shared": [
+      "candidate IDs",
+      "source permissions",
+      "metadata",
+      "query head",
+      "reader",
+      "tokenizer",
+      "budget",
+      "read opportunities"
+    ],
+    "B1": "ordinary retrieval + actual correction chain complete units",
+    "B2": "same candidates, only visible temporal/scope metadata; observed_at never substitutes valid_time",
+    "B3": "conservative missing-dimension retrieval",
+    "B4": "lock main generic-active definition before N2 admission; exact enumerable control then static EC2-style approximation for natural language; no gold outcomes",
+    "M": "only after signal; freeze predictor to compare selectors or freeze selector to compare predictors",
+    "diagnostic_only": [
+      "FullArchive",
+      "random",
+      "shuffle",
+      "oracle"
+    ],
+    "query_profiles": {
+      "Q0": "all unresolved dimensions",
+      "Q1": "lightweight head trained only on development groups, no new LLM"
+    }
+  },
+  "statistics": {
+    "primary_comparisons": [
+      "M-B3",
+      "M-B4"
+    ],
+    "resampling_unit": "union source/history/template/derivation cluster",
+    "bootstrap_samples": 10000,
+    "comparison_correction": "Holm familywise alpha0.05; exact planned confidence interval construction frozen after pilot before formal read",
+    "answerable_utility_noninferiority_margin_candidate_pp": -5,
+    "margin_status": "pending pilot freeze; non-significance never substitutes noninferiority",
+    "seeds": "repeated measures, not independent samples"
+  },
+  "gate_decisions": {
+    "G1_fail": "Simplify to complete-chain/temporal baseline; do not force complex task",
+    "G2_fail": "at most2 exposed extraction revisions if oracle signal exists, otherwise Simplify/Stop",
+    "G3_fail": "report equivalence or application combination, no new-algorithm claim",
+    "G4_fail": "obtain independent evidence or narrow report claims; never relabel development as formal"
+  },
+  "remaining_before_T0": [
+    "eligible independent source manifest",
+    "fully annotated E* family/allowed partial answers",
+    "B1/B2 implementation and structural checks",
+    "B4 main definition lock",
+    "G0 actual wire acceptance",
+    "execution source/config/input/annotation freeze"
+  ]
+}

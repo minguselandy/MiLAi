@@ -1,0 +1,8 @@
+{
+  "kind": "SOURCE_TEMPLATE_POINTERS",
+  "baseline": "../v13-4-baseline-config-audit.json",
+  "eligibility": "../v13-4-source-eligibility.json",
+  "active_learning_methods": "../v13-4-active-learning-sources.json",
+  "original_plan": "../../../docs/MILAI_FOLLOWUP_RESEARCH_DEVELOPMENT_PLAN_v13_4.md",
+  "scope": "Template identities are not research acceptance evidence."
+}

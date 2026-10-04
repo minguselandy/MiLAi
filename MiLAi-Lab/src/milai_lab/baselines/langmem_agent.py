@@ -27,7 +27,15 @@ from langmem import (  # type: ignore[import-untyped]
 )
 
 from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
+from milai_lab.contracts.read_protocol import profile as read_profile
 from milai_lab.contracts.scope import FoundationScope as FoundationScope
+from milai_lab.contracts.tool_schema_communication import (
+    feedback_text,
+    jsonschema_feedback,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.memory.read_tools import create_memory_read_tool as create_memory_read_tool
 from milai_lab.memory.strict_tools import create_strict_manage_memory_tool
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel as VLLMChatModel
@@ -59,8 +67,6 @@ SYSTEM_PROMPT = (
     "memories with the provided tools."
 )
 MEMORY_NAMESPACE = ("langmem", "{foundation_run_id}", "{arm_id}", "{user_id}")
-
-
 
 
 class VLLMEmbeddings(Embeddings):
@@ -112,8 +118,6 @@ def create_history_read_tool(history: HistoryAccess | None) -> BaseTool:
     return read_history
 
 
-
-
 def build_agent(
     model: VLLMChatModel,
     store: BaseStore | None,
@@ -145,8 +149,26 @@ def build_agent(
     memory_boundaries: MemoryBoundaryView | None = None,
     memory_mcp: MemoryMCP | None = None,
     benchmark_view_hook: Callable[..., Any] | None = None,
+    tool_schema_communication: str | None = None,
+    tool_save_communication: str | None = None,
+    model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
+    selected_save = read_profile("tool_save_communication", model.tool_save_communication)
+    if tool_save_communication is not None and read_profile(
+        "tool_save_communication", tool_save_communication
+    ) != selected_save:
+        raise ValueError("V13_SAVE_COMMUNICATION_PROFILE_CONFLICT")
+    for memory_tool in memory_tools or ():
+        actual = (memory_tool.metadata or {}).get("read_protocol_profiles")
+        if actual is not None and actual.get("tool_save_communication") != selected_save:
+            raise ValueError("V13_SAVE_COMMUNICATION_SERVICE_CONFLICT")
+    selected_communication = communication_profile(model.tool_schema_communication)
+    if (
+        tool_schema_communication is not None
+        and communication_profile(tool_schema_communication) != selected_communication
+    ):
+        raise ValueError("TOOL_SCHEMA_COMMUNICATION_PROFILE_CONFLICT")
     if type(memory_contract) is not str or memory_contract not in {"native", "strict"}:
         raise ValueError("LANGMEM_MEMORY_CONTRACT_UNKNOWN")
     if benchmark_view_hook is not None and (
@@ -242,7 +264,8 @@ def build_agent(
     }
 
     def validate_then_execute(
-        request: Any, execute: Any,
+        request: Any,
+        execute: Any,
     ) -> Any:
         def original(current: Any) -> Any:
             call = current.tool_call
@@ -250,6 +273,17 @@ def build_agent(
                 "max_concurrency"
             ) != 1:
                 raise ValueError("PROTOCOL_PROFILE_TOOL_CONCURRENCY_UNSUPPORTED")
+            if model.unknown_tool_feedback and call["name"] not in parameter_schemas:
+                # Intercept before ToolNode or the application can dispatch anything.
+                # This is a catalog rejection, not permission to execute the proposal.
+                return ToolMessage(content=json.dumps({
+                    "ok": False, "status": "rejected", "effect": "none",
+                    "operation_executed": False, "origin": "tool_catalog",
+                    "error_category": "schema", "reason": "tool_unavailable",
+                    "available_tools": sorted(parameter_schemas),
+                    "next_step": "Use the actual current catalog or answer from real receipts. "
+                    "Do not repeat completed actions. The existing format allowance applies.",
+                }), name=call["name"], tool_call_id=call["id"], status="error")
             if persistent_memory_arm == "C" and correction_marker([
                 row.model_dump(mode="json") for row in current.state["messages"]
             ], model.active_message_key or "") is not None and call["name"] not in CORRECTION_TOOLS:
@@ -260,7 +294,11 @@ def build_agent(
                     validate(call["args"], schema)
                 except ValidationError as error:
                     return ToolMessage(
-                        content=f"Tool input validation error: {error.message}",
+                        content=(
+                            feedback_text(jsonschema_feedback(error, schema))
+                            if selected_communication != "legacy"
+                            else f"Tool input validation error: {error.message}"
+                        ),
                         name=call["name"],
                         tool_call_id=call["id"],
                         status="error",
@@ -279,15 +317,21 @@ def build_agent(
             if business_call_wrapper is not None:
                 return business_call_wrapper(current, execute)
             return execute(current)
+
         result = (observer.run_tool(request, original, business_call_wrapper)
                   if observer is not None else original(request))
         if memory_boundaries is not None and isinstance(result, ToolMessage):
             memory_boundaries.observe_receipt(result, model.memory_turn)
         return result
 
+    def select_model(state: dict[str, Any], runtime: Any) -> Any:
+        # Bind the exact executable catalog; the selector cannot grant tools.
+        assert model_tool_choice is not None
+        return model.bind_tools(tools, tool_choice=model_tool_choice(state["messages"]))
+
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
-        model,
+        select_model if model_tool_choice is not None else model,
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None
                 and local_state_controller is None and not full_history

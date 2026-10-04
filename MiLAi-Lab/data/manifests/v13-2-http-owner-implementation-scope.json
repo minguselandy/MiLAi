@@ -1,0 +1,239 @@
+{
+  "kind": "V13_2_HTTP_OWNER_SCOPED_IMPLEMENTATION_AUTHORITY",
+  "status": "FROZEN_SCOPE_PENDING_GITHUB_ROOT_SETUP_AND_EXPLICIT_START",
+  "recorded_at_utc": "2026-10-01T12:47:22.024376+00:00",
+  "base_commit": "8b1fdf3c017477ee80a0284f08ca4a1f5f52e670",
+  "source_owner": "/root/v13_2_source_resume",
+  "new_worktree": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-http-owner-implementation",
+  "new_branch": "feat/lab-http-owner-implementation-v13-2-20261001",
+  "new_tree_setup_owner": "Root after exact publication verification; no external Source bootstrap",
+  "all_existing_source_trees": "READY_HOLD",
+  "scope_document": "docs/V13_2_HTTP_OWNER_IMPLEMENTATION_SCOPE.md",
+  "scope_document_sha256": "778e867210aea4b670e4600c76322131a51a7afccb7e5d7df8b636402246be80",
+  "allowed_existing_runtime_edits": {
+    "src/milai_lab/harness/contextual_artifacts.py": "b8c864b483656eb29fb3967a01bd1d1c18db8e47f1955030f7fb2e6a887ad22d",
+    "src/milai_lab/providers/contextual_vllm.py": "a9f15fcbbcc0ead318f0871538269128eb904d6cbe13c2f3fbd7c23f5927809a",
+    "src/milai_lab/runners/v13_1_d0.py": "ef98cbc1e503f16a3b74329b8fffc5e83fc0c24b9fd2129bcf615f0a20533e42",
+    "src/milai_lab/runners/v13_1_p5.py": "8b3ec63e89fdec7f9eeb0b53aa7298a1657418bf015a99747d7ef0355ca05f0c",
+    "src/milai_lab/runners/v13_1_baseline_micro.py": "593282682bcbc55876a9a08b368b5f2eaabac08ad11ff396662b07eb813922cb"
+  },
+  "existing_edit_limits": {
+    "src/milai_lab/harness/contextual_artifacts.py": "RunBudget and its directly related ownership factory only; RunLimits/Trace/remaining identities unchanged",
+    "src/milai_lab/providers/contextual_vllm.py": "opt-in common owner binding before client construction/reserve through dispatch+finish/finally and truthful close, defaults original wire",
+    "entry_files": "D0/P5/baseline_micro owner lifecycle/freeze/start-resume only; input/profile/domain/config opt-in, original algorithms and evidence order preserved"
+  },
+  "allowed_new_runtime_files": [
+    "src/milai_lab/harness/http_ownership.py"
+  ],
+  "allowed_new_test_files": [
+    "tests/unit/test_http_ownership.py",
+    "tests/memory/test_v13_2_http_owner_entries.py"
+  ],
+  "allowed_readonly_runtime_content": {
+    "src/milai_lab/harness/artifact_io.py": "8f580877172d7ac876bedf0821dd43ed8c5c96c414ad0ef3e72511b115cda903",
+    "src/milai_lab/providers/contextual_capacity.py": "691daf0e1e52633f9c5f9c5db35b47db285718df8f5e1fbf984ac9b404c0cccc",
+    "src/milai_lab/providers/chat_bridge.py": "c50e3e412ac5fb1d77af862e55213e569f68a27668349011b7acdba6301e7a53",
+    "src/milai_lab/providers/request_pipeline.py": "d4dba709336aa1f17bb7896c7b7ae8c6bf88785616a72b5daf114939366c3de5",
+    "src/milai_lab/providers/generation_admission.py": "13fe9440733c0a3f3b54310d806cb3df75c1a9413a9bd49c11e34717fc7ee4bf",
+    "src/milai_lab/providers/embedding_capacity.py": "b8e26ec5b9bbe606e5520c8f3696c12f0c2c1df8673bbe2a199bfda0e9ca2857",
+    "src/milai_lab/memory/embeddings.py": "21592ca157bd2f96f904677ba6299f0a9b441bc9ca46cd8609b6a9bb89ffb28b",
+    "src/milai_lab/memory/service.py": "a77a5e06df3b14aa4dd219bc6c9cf70eaab31988113006c516204e3641b9d71d",
+    "src/milai_lab/memory/service_tools.py": "bc260664d78a3020eac396ac6fcd188872858843ee74bb03035659e1e465dde5",
+    "src/milai_lab/methods/grounded_memory.py": "b96fc3af783b0056cef84c89d12d396cdd4a2846b5fc83ced8f9c9906300d681",
+    "src/milai_lab/methods/langmem_recipe.py": "6813f122444e2c578686bc99e0998810e39eac820fc1d1a503f139743e331e2d",
+    "src/milai_lab/methods/local_state_attention/summary.py": "cbbd1be804e70e73f93ff60847937cb43871e88bcd237ad2f1c15179bc10a08a",
+    "src/milai_lab/baselines/langmem_agent.py": "ce44b823ac1bd05a087eef485ef7da0d6f13514fbb3f399cbd398082e5559981",
+    "src/milai_lab/baselines/langmem_instrumentation.py": "0fea97120ffd1b9a079584aab728c05ed88d0bcb28119355e8629b68f1e32555",
+    "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a",
+    "src/milai_lab/integrations/memory/simplemem.py": "6f3ed72d5881042e19b0c98320b71d7e53b2a240e6925eaab4bb840b4ef40bd9",
+    "src/milai_lab/runners/v13_1_p5_compare.py": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b",
+    "src/milai_lab/runners/v13_1_controls.py": "c15fca3c7cd44cb5629ba83b3b29735bc505eabc75a3e8c2cbc1b2a2586f61bd",
+    "src/milai_lab/application/journal.py": "6b5ab1b478bf00158829e2a22898a04a77928f5812690f6ab0e6dd6c5485dad7",
+    "src/milai_lab/application/tools.py": "3deef5847552e4a81c2ebaf383bd35124984110c66ebe71c6a0b9836a165bcfd",
+    "src/milai_lab/application/world.py": "ebbf128e85044f296c5be46ddee92ab3bca3efc36cb31e976d1073f89079ba12",
+    "src/milai_lab/application/document_publication.py": "29f39d2790bbe506299fe56d7049577acd0aa3a11cf063ce0ac21347c6e9fd15",
+    "src/milai_lab/application/refs.py": "dcd67392cff163761049473b5556f65111b08b1484a1194865b0549862007e2e",
+    "src/milai_lab/contracts/read_protocol.py": "754a003afeaa357036cc443a6198fc964f7b51260829ca2a8f1799086bdbd62f",
+    "src/milai_lab/contracts/scope.py": "68cc146e1a6487c17c4875b95f029486a3baf442f8694c786786551037bf2086",
+    "src/milai_lab/contracts/memory.py": "68985a64e8588e41202cae2d108ca30ed6f9fdebb98baa220aa0bae0ab7be9e7",
+    "src/milai_lab/contracts/protocol.py": "2400020757f754b86e2b53ed8d895d9f984495dc5c885101cdf51dd06206da06",
+    "src/milai_lab/contracts/tool_schema_communication.py": "fd9038fb929d8e01b6cf165027a552ce759fcd0cd3261952e85fa1fe6b1f647b",
+    "src/milai_lab/boundary.py": "bd356238373ae9c9be2b5459d9d3115fc95e25cd9f1820e26e668f8d3163a480",
+    "src/milai_lab/tools_boundary.py": "995ef838c767d96d4bcba48b5ec4892654203a4e4640014b39d2381ea62a9c1e",
+    "src/milai_lab/import_graph.py": "e7cd9b2211d767531ed2ab10f5fa059bcb7633f71c33a7f8b810c0612334e409",
+    "tools/run_v13_1_d0.py": "1e196ab1467f0e68b3f40a3187e422ea0f4d69ca5574479d513b5c31b2c420cb"
+  },
+  "allowed_existing_engineering_test_content_readonly": {
+    "tests/unit/test_contextual_budget.py": "f2e499d0b34ba42a1c1b822cc6003cb46932d6059a97da6032a822292db29447",
+    "tests/unit/test_read_protocol.py": "b2ae14866d818cbf8c3c03de64fa274fba76fa9210d41763d61dd77fb6de0f3c",
+    "tests/memory/test_v13_2_read_protocol.py": "0c32df928122681759d25d7b0afcb51a86e1f35639b73c0e119726406acb0147"
+  },
+  "allowed_saved_primary_method_content": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/Doc/library/fcntl.rst",
+      "sha256": "65dd2905512e3e0183ace9354488a3b5407bdec8edfb8bc2c20c08265334edb3",
+      "bytes": 8462
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/Doc/library/threading.rst",
+      "sha256": "d9cad97628fb1e87f978e093f6cadd20ee6dede5f9ee6fe5a94e7fcce2201d39",
+      "bytes": 44132
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/Doc/library/os.rst",
+      "sha256": "cf14baecc0cc28937f42df24ffe9ab93984bfe82daa431206662794bdb81f94d",
+      "bytes": 182336
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/Modules/fcntlmodule.c",
+      "sha256": "27647ba1b7300b7ba25a363af9d4878c4dd1f8a0b804639a2102d5d346156fa0",
+      "bytes": 21169
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/Lib/threading.py",
+      "sha256": "f8b8d9ebd040e1373d76e73c23c683f7c7c204add96bf9d8d9c21ac751cf5252",
+      "bytes": 58231
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/cpython-3.11.13-http-owner-reference/manifest.json",
+      "sha256": "f2b17b04cd5e455f71b8dee659ec1686863a679b414beaec812a870fe017510b",
+      "bytes": 34193
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/httpx/_client.py",
+      "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+      "bytes": 65714
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/docs/api.md",
+      "sha256": "125c23b40867cea7c40da59d129515e0964b4ea80e2994293e850f12fb067a6e",
+      "bytes": 4165
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/installed-observation/_client.py",
+      "sha256": "c43f941baefe58c91e96d00039e1868fe719d91453026d7db1647194563bff8d",
+      "bytes": 65714
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/official-docs/api.html",
+      "sha256": "6cc4f086e86915841582755139d5d52ff26afae13acbeba3a937c4e4ca2e0241",
+      "bytes": 98095
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/httpx-0.28.1-http-owner-reference/manifest.json",
+      "sha256": "efa41faa9439245c70616a31b7e38db264b6ef28ae2cc570c680b7acd69648ae",
+      "bytes": 20879
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/linux-man-pages-flock-http-owner-reference/official-docs/flock.2.html",
+      "sha256": "f46b6eb4cb7c9da8cbe5d7a425943323140da0d4b2b766b6e54d6bc436e6ba09",
+      "bytes": 17333
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/linux-man-pages-flock-http-owner-reference/manifest.json",
+      "sha256": "d2fc8a8c26c94b6c95173b6a6f82961f64d8ce7a478fa57887d077db90fe318d",
+      "bytes": 3094
+    }
+  ],
+  "metadata_only_full_maps": {
+    "runtime": "all src/**/*.py plus tools/run_v13_1_d0.py",
+    "tests": "all tests/**/*.py",
+    "configs": "all files under configs and data/configs, including non-JSON"
+  },
+  "baseline_map_identities": {
+    "runtime": {
+      "count": 213,
+      "sha256": "dfa818dc9c67ea0c3856e98ff0bb28dab333892b33e21bba07eeac084438ffbd"
+    },
+    "tests": {
+      "count": 391,
+      "sha256": "d78ff9aa8d0f096548c85337d89be4f26952bb3e2b45e80fe4bad4f2c52613f1"
+    },
+    "configs": {
+      "count": 316,
+      "sha256": "9b6fead193a50d8e0c8eeec06787cac63a743221f0c78c35a65f929a4145606f"
+    }
+  },
+  "existing_config_content_access": false,
+  "actual_experiment_or_ledger_content_access": false,
+  "actual_model_or_embedding_http_authorized": false,
+  "profile": {
+    "name": "http_ownership_profile",
+    "default": "legacy",
+    "opt_in": "serialized_ledger_owner_v1",
+    "domain_field": "http_ownership_domain",
+    "domain_contract": "explicit stable deployment ID + complete normalized allowed VLLM client configuration set, frozen at prepare and validated before budget/client/SDK construction and dispatch"
+  },
+  "lease": {
+    "key": "canonical already-existing ledger only; stable sidecar, never shard by root/cohort/arm/domain or delete lock file on close",
+    "acquisition": "EX|NB before ledger state load or client/SDK construction; second process immediate refusal",
+    "binding": "owning PID/open actual lease/canonical ledger/frozen deployment/client domain/exact one RunBudget",
+    "lifetime": "through native evidence-before-close, explicit SDK/client close, final persisted ledger and original entry receipt closure",
+    "fork": "before any inherited mutex blocking or LOCK_UN: reject child use; if cleanup, close child fd without unlocking parent original open-file-description",
+    "scope_limit": "cooperating local Linux processes only, not noncooperating tamper/rollback/network filesystem/distributed guarantee"
+  },
+  "request_mutex": {
+    "one_common_mutex": "every participating VLLMClient automatically adopts owner from same bound RunBudget",
+    "span": "before reserve through durable reservation/dispatch/original trace/finish/finally",
+    "reentry": "same-thread rejection before blocking; preserve distinct native outer callback lock",
+    "guard": "PID/open lease/domain/actual config+HTTP base URL/path+model/exact budget/stale disk state before reserve or dispatch"
+  },
+  "ledger": {
+    "actual_profile": "require original existing state, preserve same JSON schema/limits/history/costs/unknown; missing/malformed/stale refuses, no fresh0/replacement/refund/retry",
+    "opt_in_durability": "reservation flush/fsync, atomic replace and directory fsync before HTTP; existing artifact_io and legacy JSON writer unchanged",
+    "all_synthetic_controls": "isolated temporary state explicitly seeded before acquisition, never actual continuous ledger",
+    "failure": "actual partial/failing persistence and unknown bytes preserved; no completion inferred from response or intention"
+  },
+  "required_execution_environment": {
+    "python": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+    "python_version": "3.11.13",
+    "socket_denial_before_package_import": true,
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "HF_HUB_OFFLINE": "1",
+    "TRANSFORMERS_OFFLINE": "1",
+    "HF_DATASETS_OFFLINE": "1",
+    "PYTHONPATH": "new-tree ignored guard + its src",
+    "pytest_basetemp": "only inside new worktree ignored artifacts",
+    "no_package_model_sdk_downloads_or_upgrades": true
+  },
+  "offline_execution_authorized": true,
+  "permitted_narrow_checks": [
+    "two new synthetic test files",
+    "three listed readonly existing engineering test files only",
+    "ruff5+1+2",
+    "mypy5+1",
+    "existing package and tools boundary",
+    "stdlib source/AST/maps/provenance audit"
+  ],
+  "entry_closure": [
+    "actual D0 prepare/_execute_step",
+    "actual P5 prepare/step/start/resume including evidence-before-close",
+    "actual native baseline_micro entry with synthetic inputs and Mock providers"
+  ],
+  "planned_acceptance_matrix": [
+    "barrier several clients generation/embedding max_inflight1 and exact every terminal request counted",
+    "two-process EX|NB same canonical ledger incl alias/different root/arm/domain; reject before load/construction/dispatch",
+    "close/reentry/fork/PID/wrong budget/domain/client configuration/base URL/path/model/freeze/stale/missing before reserve/dispatch",
+    "503/timeout/unknown usage/reserve+finish persistence failures/process cut with original ledger bytes and fresh owner reopen",
+    "actual Host/M/native callback transfer and D0/P5/micro lifetime with all original logs, not helper-only claims",
+    "default8 absent/explicit legacy x native/json_action x bridge/recipe full original bytes; exclude only timings",
+    "new and listed readonly affected tests/style/types/unchanged original boundaries"
+  ],
+  "prohibited": [
+    "actual ledger read/write",
+    "actual cohort/fixture/rubric/scorer/gold/holdout/benchmark/future question contents",
+    "config contents except new synthetic files",
+    "runtime semantic classifier or case/language routing",
+    "Source/role/hash/read-time CAS/selection/ranking changes",
+    "prompt or grammar/parameter changes",
+    "automatic retries/rereads/repair/final rewrite",
+    "changes to Store/private SDK/observer/journal/old tests/Product/Archive/boundary rules",
+    "new services/SDK updates/upstream code execution",
+    "turning mutual exclusion into four-arm12/24 or semantic/model quality acceptance"
+  ],
+  "handoff": "one exact allowed-path local commit, no push; every actual original command/driver/stdout/stderr/rc/failed command and full primary/isolated maps/source snapshots; honest self-reference terminal exclusions and actual test-stage provenance; then READY_HOLD pending independent Root audit",
+  "next_actual_cohort": "not authorized by this scope; separate Root engineering acceptance/freeze/GitHub prefirstHTTP/staged trajectory review, never replayR7",
+  "full_plan": "ACTIVE",
+  "d4": "NOT_ADMITTED",
+  "product": "NO_GO"
+}

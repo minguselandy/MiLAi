@@ -1,0 +1,46 @@
+[
+  {
+    "url": "https://arxiv.org/abs/1010.3091v2",
+    "utc": "2026-10-02T16:29:28.068556+00:00",
+    "status": 200,
+    "path": "artifacts/v13-4/active-learning-literature/1010.3091v2-abs.html",
+    "sha256": "4d438a463bbb6f32516fd04fc118dfa34ec3d97860965bc72f3465d3054bb05a",
+    "version": "1010.3091v2",
+    "read_scope": "Abstract and algorithm section excerpts; automatic Algorithm1 excerpt also exposed beginning of published experiment description. No benchmark corpus or gold opened; examples/results not used for method choice or sample selection.",
+    "derived_text_path": "artifacts/v13-4/active-learning-literature/1010.3091v2-text.txt",
+    "derived_text_sha256": "d950a7de7974df6ab46ba880ccff6c1693707e71b21225662f6e471b0482469b"
+  },
+  {
+    "url": "https://arxiv.org/html/1010.3091v2",
+    "utc": "2026-10-02T16:29:28.910271+00:00",
+    "status": 200,
+    "path": "artifacts/v13-4/active-learning-literature/1010.3091v2-html.html",
+    "sha256": "1f592315a3731dd60dcb499e9451017c0db9c325ec35aae755f6b3cb05231182",
+    "version": "1010.3091v2",
+    "read_scope": "Abstract and algorithm section excerpts; automatic Algorithm1 excerpt also exposed beginning of published experiment description. No benchmark corpus or gold opened; examples/results not used for method choice or sample selection.",
+    "derived_text_path": "artifacts/v13-4/active-learning-literature/1010.3091v2-text.txt",
+    "derived_text_sha256": "d950a7de7974df6ab46ba880ccff6c1693707e71b21225662f6e471b0482469b"
+  },
+  {
+    "url": "https://arxiv.org/abs/1402.5886v1",
+    "utc": "2026-10-02T16:29:29.655691+00:00",
+    "status": 200,
+    "path": "artifacts/v13-4/active-learning-literature/1402.5886v1-abs.html",
+    "sha256": "97a3674395782778ddbd66b932f6384a99e456e3572ffb29cebd7a8fcb25a9f6",
+    "version": "1402.5886v1",
+    "read_scope": "Abstract and algorithm section excerpts; automatic Algorithm1 excerpt also exposed beginning of published experiment description. No benchmark corpus or gold opened; examples/results not used for method choice or sample selection.",
+    "derived_text_path": "artifacts/v13-4/active-learning-literature/1402.5886v1-text.txt",
+    "derived_text_sha256": "49e3ef2475f6db48ec3c959dd710fc6de82b0ddee8e3e31ab290557a53273ae3"
+  },
+  {
+    "url": "https://arxiv.org/html/1402.5886v1",
+    "utc": "2026-10-02T16:29:30.155965+00:00",
+    "status": 200,
+    "path": "artifacts/v13-4/active-learning-literature/1402.5886v1-html.html",
+    "sha256": "c5c7cc71e8fa80e5d84e0d276798ca1d3f861ab6d75ee66ea25dcb3ed369f9d7",
+    "version": "1402.5886v1",
+    "read_scope": "Abstract and algorithm section excerpts; automatic Algorithm1 excerpt also exposed beginning of published experiment description. No benchmark corpus or gold opened; examples/results not used for method choice or sample selection.",
+    "derived_text_path": "artifacts/v13-4/active-learning-literature/1402.5886v1-text.txt",
+    "derived_text_sha256": "49e3ef2475f6db48ec3c959dd710fc6de82b0ddee8e3e31ab290557a53273ae3"
+  }
+]

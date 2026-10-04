@@ -50,14 +50,58 @@ from milai_lab.application.world import ApplicationWorld
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.v13_1_controls import generation_cap
 from milai_lab.contracts.memory import GroundingMode
+from milai_lab.contracts.public_memory_contracts import (
+    capture_effect,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    check_frozen as check_public_frozen,
+)
+from milai_lab.contracts.public_memory_contracts import (
+    freeze_fields as public_freeze_fields,
+)
+from milai_lab.contracts.read_protocol import (
+    check_frozen as check_read_frozen,
+)
+from milai_lab.contracts.read_protocol import (
+    freeze_fields as read_freeze_fields,
+)
+from milai_lab.contracts.read_protocol import (
+    present_catalog as receipt_catalog,
+)
+from milai_lab.contracts.read_protocol import (
+    profiles as read_profiles,
+)
+from milai_lab.contracts.read_protocol import (
+    validate_settings as validate_read_settings,
+)
 from milai_lab.contracts.scope import FoundationScope
+from milai_lab.contracts.tool_schema_communication import (
+    check_frozen as check_communication_frozen,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    freeze_fields as communication_freeze_fields,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, Trace
+from milai_lab.harness.contextual_artifacts import (
+    RunBudget,
+    RunLimits,
+    Trace,
+    entry_budget,
+    http_budget_scope,
+)
+from milai_lab.harness.http_ownership import (
+    check_frozen as check_http_frozen,
+)
+from milai_lab.harness.http_ownership import (
+    freeze_fields as http_freeze_fields,
+)
 from milai_lab.memory.service import MemoryService
-from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, ownership_client_configs
 from milai_lab.runners import v13_1_d0 as d0
 
 LAB = d0.LAB
@@ -143,10 +187,21 @@ def business_schemas(settings: dict[str, Any]) -> list[dict[str, Any]]:
     return BUSINESS_SCHEMAS
 
 
+def _service_options(settings: dict[str, Any]) -> dict[str, Any]:
+    return d0._service_options(settings)
+
+
 def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[dict[str, Any]]:
+    communication_profile(settings.get("tool_schema_communication", "legacy"))
     contract = d0._receipt_contract(settings)
+    d0._observation_profile(settings)
+    mutation_contract = d0._mutation_contract(settings)
+    d0._recipe_settings(settings)
     if application_workflow(settings) == "reservation_v1":
-        return d0._catalog(root, mode, receipt_contract=contract)
+        return d0._catalog(root, mode, receipt_contract=contract,
+                           mutation_contract=mutation_contract,
+                           service_options=_service_options(settings),
+                           settings=settings)
     with SqliteStore.from_conn_string(":memory:") as store:
         service = MemoryService(
             store,
@@ -156,8 +211,11 @@ def _catalog(root: Path, mode: GroundingMode, settings: dict[str, Any]) -> list[
             mode=mode,
             receipt_contract=contract,
             receipt_profile="document_publication_v1",
+            mutation_contract=mutation_contract,
+            **_service_options(settings),
         )
-        return [*map(convert_to_openai_tool, create_service_tools(service)), *document_schemas()]
+        return receipt_catalog([*map(convert_to_openai_tool, d0._memory_tools(service, settings)),
+                *document_schemas()], settings.get("tool_save_communication", "legacy"))
 
 
 def prepare(
@@ -165,91 +223,117 @@ def prepare(
 ) -> dict[str, Any]:
     """Validate/freeze without constructing a model, client or optional native SDK."""
     fixture, settings = read_json(fixture_path), read_json(config_path)
-    if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
-        raise ValueError("V13_P5_PUBLIC_FIXTURE_REQUIRED")
-    if mode not in {"ref_only", "field_grounded"}:
-        raise ValueError("V13_P5_MODE_INVALID")
-    VLLMConfig(**settings["host"])
-    try:
-        cap = generation_cap(settings)
-    except ValueError:
-        if "generation_cap_profile" not in settings:
-            raise ValueError("V13_P5_GENERATION_CAP_INVALID") from None
-        raise
-    workflow = application_workflow(settings)
-    if not isinstance(settings.get("capacity"), dict):
-        raise ValueError("V13_P5_CAPACITY_REQUIRED")
-    budget_path = Path(settings["budget_path"])
-    if not budget_path.is_file():
-        raise ValueError("V13_P5_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
-    prompt = d0._system_prompt(settings)
-    contract = d0._receipt_contract(settings)
-    frozen: dict[str, Any] = {
-        "kind": "MILAI_V13_1_P5_RUNTIME_FREEZE",
-        "run_id": root.resolve().name,
-        "mode": mode,
-        "fixture": fixture,
-        "fixture_path": str(fixture_path.resolve()),
-        "fixture_sha256": d0._sha(fixture_path),
-        "config": settings,
-        "config_path": str(config_path.resolve()),
-        "config_sha256": d0._sha(config_path),
-        "source_sha256": _sources(),
-        "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
-        "memory_receipt_contract": contract,
-        "budget_limits": read_json(budget_path)["limits"],
-        "policy": POLICY,
-        "backend": "public_sdk_sqlite",
-        "memory_retrieval": "raw_keyword",
-        "semantic_evidence": False,
-        "runtime_sdk": _sdk(),
-        "tool_catalog": _catalog(root, mode, settings),
-    }
-    if workflow != "reservation_v1":
-        frozen["application_workflow"] = workflow
-        frozen["receipt_profile"] = workflow
-    if "generation_cap_profile" in settings:
-        frozen["generation_cap_profile"] = settings["generation_cap_profile"]
-        frozen["effective_generation_cap"] = cap
-    seen: set[str] = set()
-    with TemporaryDirectory() as temporary:
-        for case in fixture["cases"]:
-            if (
-                type(case.get("case_id")) is not str
-                or not case["case_id"]
-                or case["case_id"] in seen
-                or type(case.get("owner")) is not str
-                or not case["owner"]
-                or not case.get("messages")
-            ):
-                raise ValueError("V13_P5_CASE_IDENTITY_INVALID")
-            seen.add(case["case_id"])
-            journal = BusinessActionJournal(
-                Path(temporary) / (str(len(seen)) + ".json"),
-                DOCUMENT_NAMES if workflow == "document_publication_v1" else BUSINESS_NAMES,
-                application_protection=True,
-                application_workflow=workflow,
+    with http_budget_scope(settings, client_configs=ownership_client_configs(settings)):
+        communication_profile(settings.get("tool_schema_communication", "legacy"))
+        if fixture.get("kind") != "MILAI_V13_1_D0_NORMAL_USE" or not fixture.get("cases"):
+            raise ValueError("V13_P5_PUBLIC_FIXTURE_REQUIRED")
+        if mode not in {"ref_only", "field_grounded"}:
+            raise ValueError("V13_P5_MODE_INVALID")
+        VLLMConfig(**settings["host"])
+        try:
+            cap = generation_cap(settings)
+        except ValueError:
+            if "generation_cap_profile" not in settings:
+                raise ValueError("V13_P5_GENERATION_CAP_INVALID") from None
+            raise
+        workflow = application_workflow(settings)
+        if not isinstance(settings.get("capacity"), dict):
+            raise ValueError("V13_P5_CAPACITY_REQUIRED")
+        budget_path = Path(settings["budget_path"])
+        if not budget_path.is_file():
+            raise ValueError("V13_P5_EXISTING_CONTINUOUS_BUDGET_REQUIRED")
+        prompt = d0._system_prompt(settings)
+        contract = d0._receipt_contract(settings)
+        frozen: dict[str, Any] = {
+            "kind": "MILAI_V13_1_P5_RUNTIME_FREEZE",
+            "run_id": root.resolve().name,
+            "mode": mode,
+            "fixture": fixture,
+            "fixture_path": str(fixture_path.resolve()),
+            "fixture_sha256": d0._sha(fixture_path),
+            "config": settings,
+            "config_path": str(config_path.resolve()),
+            "config_sha256": d0._sha(config_path),
+            "source_sha256": _sources(),
+            "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
+            "memory_receipt_contract": contract,
+            "budget_limits": read_json(budget_path)["limits"],
+            "policy": POLICY,
+            "backend": "public_sdk_sqlite",
+            "memory_retrieval": "raw_keyword",
+            "semantic_evidence": False,
+            "runtime_sdk": _sdk(),
+            "tool_catalog": _catalog(root, mode, settings),
+        }
+        frozen.update(
+            communication_freeze_fields(
+                frozen["tool_catalog"], settings.get("tool_schema_communication", "legacy")
             )
-            message_ids: set[str] = set()
-            for index, public in enumerate(case["messages"]):
-                if not all(
-                    type(public.get(key)) is str and public[key]
-                    for key in ("message_id", "session_id", "content")
+        )
+        frozen.update(read_freeze_fields(settings, frozen["tool_catalog"]))
+        frozen.update(public_freeze_fields(settings, frozen["tool_catalog"]))
+        frozen.update(http_freeze_fields(settings))
+        if workflow != "reservation_v1":
+            frozen["application_workflow"] = workflow
+            frozen["receipt_profile"] = workflow
+        if "generation_cap_profile" in settings:
+            frozen["generation_cap_profile"] = settings["generation_cap_profile"]
+            frozen["effective_generation_cap"] = cap
+        if d0._mutation_contract(settings) != "legacy":
+            frozen["memory_mutation_contract"] = d0._mutation_contract(settings)
+        if settings.get("memory_support_contract", "legacy") != "legacy":
+            frozen["memory_support_contract"] = _service_options(settings)["support_contract"]
+        recipe_policy = d0._recipe_settings(settings)
+        if recipe_policy is not None:
+            frozen["memory_reader_policy"] = recipe_policy
+        if d0._observation_profile(settings) is not None:
+            frozen["policy"] = {
+                **frozen["policy"],
+                "windows": {
+                    **frozen["policy"]["windows"],
+                    "W2_projection": "actual_source_durable_before_projection_commit",
+                    "W3_projection": "projection_complete_marker_durable_before_delivery",
+                },
+            }
+        seen: set[str] = set()
+        with TemporaryDirectory() as temporary:
+            for case in fixture["cases"]:
+                if (
+                    type(case.get("case_id")) is not str
+                    or not case["case_id"]
+                    or case["case_id"] in seen
+                    or type(case.get("owner")) is not str
+                    or not case["owner"]
+                    or not case.get("messages")
                 ):
-                    raise ValueError("V13_P5_PUBLIC_MESSAGE_INVALID")
-                if public["message_id"] in message_ids:
-                    raise ValueError("V13_P5_MESSAGE_IDENTITY_DUPLICATE")
-                message_ids.add(public["message_id"])
-                journal.bind_request(_binding(frozen, case, index))
-    frozen["tool_catalog_sha256"] = hashlib.sha256(
-        json.dumps(frozen["tool_catalog"], sort_keys=True, ensure_ascii=False).encode()
-    ).hexdigest()
-    root.mkdir(parents=True, exist_ok=True)
-    target = root / "input-freeze.json"
-    if target.exists() and read_json(target) != frozen:
-        raise ValueError("V13_P5_INPUT_FREEZE_CHANGED")
-    write_json(target, frozen)
-    return frozen
+                    raise ValueError("V13_P5_CASE_IDENTITY_INVALID")
+                seen.add(case["case_id"])
+                journal = BusinessActionJournal(
+                    Path(temporary) / (str(len(seen)) + ".json"),
+                    DOCUMENT_NAMES if workflow == "document_publication_v1" else BUSINESS_NAMES,
+                    application_protection=True,
+                    application_workflow=workflow,
+                )
+                message_ids: set[str] = set()
+                for index, public in enumerate(case["messages"]):
+                    if not all(
+                        type(public.get(key)) is str and public[key]
+                        for key in ("message_id", "session_id", "content")
+                    ):
+                        raise ValueError("V13_P5_PUBLIC_MESSAGE_INVALID")
+                    if public["message_id"] in message_ids:
+                        raise ValueError("V13_P5_MESSAGE_IDENTITY_DUPLICATE")
+                    message_ids.add(public["message_id"])
+                    journal.bind_request(_binding(frozen, case, index))
+        frozen["tool_catalog_sha256"] = hashlib.sha256(
+            json.dumps(frozen["tool_catalog"], sort_keys=True, ensure_ascii=False).encode()
+        ).hexdigest()
+        root.mkdir(parents=True, exist_ok=True)
+        target = root / "input-freeze.json"
+        if target.exists() and read_json(target) != frozen:
+            raise ValueError("V13_P5_INPUT_FREEZE_CHANGED")
+        write_json(target, frozen)
+        return frozen
 
 
 def _frozen(root: Path) -> dict[str, Any]:
@@ -262,6 +346,10 @@ def _frozen(root: Path) -> dict[str, Any]:
         "config_sha256"
     ] != d0._sha(Path(frozen["config_path"])):
         raise ValueError("V13_P5_INPUT_CHANGED_AFTER_FREEZE")
+    check_communication_frozen(frozen)
+    check_read_frozen(frozen)
+    check_public_frozen(frozen)
+    check_http_frozen(frozen)
     return cast(dict[str, Any], frozen)
 
 
@@ -269,6 +357,10 @@ def make_model(
     settings: dict[str, Any], budget: RunBudget, trace: Trace, resource_root: Path
 ) -> LangMemRecipeChatModel:
     """Production uses exactly the existing accounted client/model bridge."""
+    validate_read_settings(settings)
+    selected_communication = communication_profile(
+        settings.get("tool_schema_communication", "legacy")
+    )
     client = VLLMClient(
         VLLMConfig(**settings["host"]),
         emit=trace,
@@ -279,6 +371,9 @@ def make_model(
         client=client,
         capacity_path=resource_root / "host-capacity.json",
         max_calls_per_message=settings.get("max_calls_per_message", 12),
+        generation_admission_profile=settings.get("generation_admission_profile", "legacy"),
+        tool_schema_communication=selected_communication,
+        tool_save_communication=cast(Any, read_profiles(settings)["tool_save_communication"]),
     )
 
 
@@ -399,6 +494,8 @@ def step(
                 bank=service._rows(service.namespace),
                 attempts=service._rows(service.attempts_namespace),
             )
+            if frozen["config"].get("memory_observation_profile") is not None:
+                output["observations"] = service.observations()
         if "comparison" in active:
             output["comparison"] = active["comparison"].snapshot()
         if "world" in active:
@@ -486,339 +583,501 @@ def step(
         finally:
             active["evidence_collected_before_close"] = True
 
-    try:
-        if phase not in {"start", "resume"} or window not in {"none", "W1", "W2", "W3"}:
-            raise ValueError("V13_P5_PHASE_OR_WINDOW_INVALID")
-        if type(hit) is not int or hit < 1 or (phase == "resume" and window != "none"):
-            raise ValueError("V13_P5_WINDOW_CONTROL_INVALID")
-        if (
-            publication_available is None
-            and document_edit is None
-            and (
-                (label_available is None) != (world_event_id is None)
-                or (
-                    label_available is not None
-                    and (
-                        type(label_available) is not bool
-                        or type(world_event_id) is not str
-                        or not world_event_id
+    with ExitStack() as http_stack:
+        try:
+            if phase not in {"start", "resume"} or window not in {
+                "none",
+                "W1",
+                "W2",
+                "W3",
+                "W2_projection",
+                "W3_projection",
+            }:
+                raise ValueError("V13_P5_PHASE_OR_WINDOW_INVALID")
+            if type(hit) is not int or hit < 1 or (phase == "resume" and window != "none"):
+                raise ValueError("V13_P5_WINDOW_CONTROL_INVALID")
+            if (
+                publication_available is None
+                and document_edit is None
+                and (
+                    (label_available is None) != (world_event_id is None)
+                    or (
+                        label_available is not None
+                        and (
+                            type(label_available) is not bool
+                            or type(world_event_id) is not str
+                            or not world_event_id
+                        )
                     )
                 )
-            )
-        ):
-            raise ValueError("V13_P5_WORLD_EVENT_INVALID")
-        frozen = _frozen(root) if composition is None else composition.frozen(root)
-        case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
-        if not 0 <= message_index < len(case["messages"]):
-            raise ValueError("V13_P5_MESSAGE_INDEX_INVALID")
-        public, settings = case["messages"][message_index], frozen["config"]
-        workflow = application_workflow(settings)
-        document_mode = workflow == "document_publication_v1"
-        names = DOCUMENT_NAMES if document_mode else BUSINESS_NAMES
-        if publication_available is not None or document_edit is not None:
-            if not document_mode or label_available is not None or not world_event_id:
-                raise ValueError("V13_P5_DOCUMENT_EVENT_INVALID")
-        if document_mode and label_available is not None:
-            raise ValueError("V13_P5_RESERVATION_EVENT_WRONG_WORKFLOW")
-        scope = FoundationScope(
-            frozen["run_id"],
-            frozen.get("scope_arm", frozen["mode"]),
-            case["owner"],
-            public["session_id"],
-        )
-        config = scope.config()
-        config["configurable"]["v13_session"] = scope.episode_id
-        active.update(config=config, thread_id=config["configurable"]["thread_id"])
-        output.update(
-            message_id=public["message_id"],
-            session=scope.episode_id,
-            owner=scope.user_id,
-            source_sha256=frozen["source_sha256"],
-            fixture_sha256=frozen["fixture_sha256"],
-        )
-        with ExitStack() as finalizers:
-            # Evidence owns the outer lifetime. All current and subsequently
-            # registered SDK/client/Store resources remain live for this one
-            # readback, including when initialization or execution raises.
-            stack = finalizers.enter_context(ExitStack())
-            finalizers.callback(evidence_before_close)
-            lock = stack.enter_context((root / "execution.lock").open("a+b"))
-            fcntl.flock(lock, fcntl.LOCK_EX)
-            budget = RunBudget(RunLimits(**frozen["budget_limits"]), Path(settings["budget_path"]))
-            active["budget"] = budget
-            store = stack.enter_context(
-                SqliteStore.from_conn_string(str(resource_root / "memory.sqlite"))
-            )
-            saver = stack.enter_context(
-                SqliteSaver.from_conn_string(str(resource_root / "checkpoints.sqlite"))
-            )
-            world = (
-                DocumentPublicationWorld(
-                    resource_root / "world.sqlite",
-                    case.get("initial_world", {}).get("publication_available", True),
-                )
-                if document_mode
-                else ApplicationWorld(
-                    resource_root / "world.sqlite",
-                    case.get("initial_world", {}).get("label_available", True),
+            ):
+                raise ValueError("V13_P5_WORLD_EVENT_INVALID")
+            frozen = _frozen(root) if composition is None else composition.frozen(root)
+            case = next(row for row in frozen["fixture"]["cases"] if row["case_id"] == case_id)
+            if not 0 <= message_index < len(case["messages"]):
+                raise ValueError("V13_P5_MESSAGE_INDEX_INVALID")
+            public, settings = case["messages"][message_index], frozen["config"]
+            check_http_frozen(frozen)
+            http_stack.enter_context(
+                http_budget_scope(
+                    settings,
+                    RunLimits(**frozen["budget_limits"]),
+                    client_configs=ownership_client_configs(settings),
                 )
             )
-            active["world"] = world
-            stack.callback(world.close)
-            if world_event_id is not None:
-                if document_mode:
-                    event = cast(DocumentPublicationWorld, world).apply_backend_event(
-                        world_event_id,
-                        available=publication_available,
-                        edit=document_edit,
-                        owner=scope.user_id,
+            if (
+                window in {"W2_projection", "W3_projection"}
+                and d0._observation_profile(settings) is None
+            ):
+                raise ValueError("V13_PROJECTION_WINDOW_REQUIRES_OPT_IN")
+            workflow = application_workflow(settings)
+            document_mode = workflow == "document_publication_v1"
+            names = DOCUMENT_NAMES if document_mode else BUSINESS_NAMES
+            if publication_available is not None or document_edit is not None:
+                if not document_mode or label_available is not None or not world_event_id:
+                    raise ValueError("V13_P5_DOCUMENT_EVENT_INVALID")
+            if document_mode and label_available is not None:
+                raise ValueError("V13_P5_RESERVATION_EVENT_WRONG_WORKFLOW")
+            scope = FoundationScope(
+                frozen["run_id"],
+                frozen.get("scope_arm", frozen["mode"]),
+                case["owner"],
+                public["session_id"],
+            )
+            config = scope.config()
+            config["configurable"]["v13_session"] = scope.episode_id
+            config["configurable"]["v13_turn_id"] = public["message_id"]
+            active.update(config=config, thread_id=config["configurable"]["thread_id"])
+            output.update(
+                message_id=public["message_id"],
+                session=scope.episode_id,
+                owner=scope.user_id,
+                source_sha256=frozen["source_sha256"],
+                fixture_sha256=frozen["fixture_sha256"],
+            )
+            with ExitStack() as finalizers:
+                # Evidence owns the outer lifetime. All current and subsequently
+                # registered SDK/client/Store resources remain live for this one
+                # readback, including when initialization or execution raises.
+                stack = finalizers.enter_context(ExitStack())
+                finalizers.callback(evidence_before_close)
+                lock = stack.enter_context((root / "execution.lock").open("a+b"))
+                fcntl.flock(lock, fcntl.LOCK_EX)
+                budget = entry_budget(
+                    RunLimits(**frozen["budget_limits"]), Path(settings["budget_path"])
+                )
+                active["budget"] = budget
+                store = stack.enter_context(
+                    SqliteStore.from_conn_string(str(resource_root / "memory.sqlite"))
+                )
+                saver = stack.enter_context(
+                    SqliteSaver.from_conn_string(str(resource_root / "checkpoints.sqlite"))
+                )
+                world = (
+                    DocumentPublicationWorld(
+                        resource_root / "world.sqlite",
+                        case.get("initial_world", {}).get("publication_available", True),
                     )
+                    if document_mode
+                    else ApplicationWorld(
+                        resource_root / "world.sqlite",
+                        case.get("initial_world", {}).get("label_available", True),
+                    )
+                )
+                active["world"] = world
+                stack.callback(world.close)
+                if world_event_id is not None:
+                    if document_mode:
+                        event = cast(DocumentPublicationWorld, world).apply_backend_event(
+                            world_event_id,
+                            available=publication_available,
+                            edit=document_edit,
+                            owner=scope.user_id,
+                        )
+                        trace(
+                            {
+                                "event": "v13_p5_backend_event",
+                                "event_id": world_event_id,
+                                "actual": event,
+                            }
+                        )
+                    else:
+                        world.set_label_available(world_event_id, cast(bool, label_available))
+                if world_event_id is not None and not document_mode:
                     trace(
                         {
                             "event": "v13_p5_backend_event",
                             "event_id": world_event_id,
-                            "actual": event,
+                            "label_available": label_available,
                         }
                     )
-                else:
-                    world.set_label_available(world_event_id, cast(bool, label_available))
-            if world_event_id is not None and not document_mode:
-                trace(
-                    {
-                        "event": "v13_p5_backend_event",
-                        "event_id": world_event_id,
-                        "label_available": label_available,
-                    }
+
+                def service_observer(event: dict[str, Any]) -> None:
+                    trace(event)
+                    if event.get("event") == "v13_observation_boundary":
+                        boundary = {
+                            "source_persisted": "W2_projection",
+                            "projection_committed": "W3_projection",
+                        }[event["phase"]]
+                        crash_at(boundary, "observe", event)
+
+                service = MemoryService(
+                    store,
+                    ("langmem", scope.run_id, scope.arm_id, scope.user_id),
+                    scope.user_id,
+                    resource_root / "memory.lock",
+                    mode=frozen["mode"],
+                    receipt_contract=d0._receipt_contract(settings),
+                    mutation_contract=d0._mutation_contract(settings),
+                    **_service_options(settings),
+                    observer=service_observer,
+                    **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
+                    **({} if composition is None else composition.service_options(frozen)),
                 )
-            service = MemoryService(
-                store,
-                ("langmem", scope.run_id, scope.arm_id, scope.user_id),
-                scope.user_id,
-                resource_root / "memory.lock",
-                mode=frozen["mode"],
-                receipt_contract=d0._receipt_contract(settings),
-                observer=trace,
-                **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
-                **({} if composition is None else composition.service_options(frozen)),
-            )
-            active["service"] = service
+                active["service"] = service
 
-            def response_hook(row: dict[str, Any], response: ToolMessage) -> None:
-                if row["name"] in (
-                    DOCUMENT_MUTATIONS if document_mode else {"reserve_and_label", "complete_label"}
-                ):
-                    crash_at(
-                        "W1",
-                        row["name"],
-                        {
-                            "journal_row": row,
-                            "actual_native_return": response.model_dump(mode="json"),
-                        },
-                    )
-
-            journal = BusinessActionJournal(
-                resource_root / "business-journal.json",
-                names,
-                application_protection=True,
-                response_hook=response_hook,
-                application_workflow=workflow,
-            )
-            active["journal"] = journal
-            journal.bind_request(_binding(frozen, case, message_index))
-
-            def capture(
-                request: ToolCallRequest, response: ToolMessage, *, wrap: bool = True
-            ) -> ToolMessage:
-                nonlocal captured
-                call, generating = request.tool_call, request.state["messages"][-1]
-                call_id = call["id"]
-                if not call_id or not generating.id:
-                    raise ValueError("V13_P5_TOOL_CALL_IDENTITY_MISSING")
-                row = journal.entry_for_call(active["thread_id"], generating.id, call_id)
-                if row is None or not row.get("executed") or row["status"] != "complete":
-                    return response
-                body = str(response.content)
-                identity = str(generating.id) + ":" + call_id
-                source_ref = service.event_id(scope.episode_id, identity, "tool")
-                binder = verified_document_ref if document_mode else verified_reservation_ref
-                ref = binder(world, scope.user_id, source_ref, call["name"], body, observer=trace)
-                receipt = service.capture_tool(scope.episode_id, identity, call["name"], body, ref)
-                if not receipt["ok"]:
-                    raise ValueError("V13_P5_TOOL_SOURCE_CAPTURE_REJECTED:" + receipt["status"])
-                captured = True
-                trace(
-                    {
-                        "event": "v13_source_capture",
-                        "receipt": receipt,
-                        "actual_tool_receipt": response.model_dump(mode="json"),
-                        "origin": row["origin"],
-                    }
-                )
-                if "comparison" in active:
-                    active["comparison"].observed(receipt["source_ref"])
-                if not wrap:
-                    return response
-                return response.model_copy(
-                    update={
-                        "content": json.dumps(
-                            {
-                                "receipt": json.loads(body),
-                                "source_ref": receipt["source_ref"],
-                                "object_ref": ref.id if ref else None,
-                                "observation_only": True,
-                            },
-                            ensure_ascii=False,
-                        )
-                    }
-                )
-
-            def wrapper(request: ToolCallRequest, execute: Any) -> ToolMessage | Command[Any]:
-                name = request.tool_call["name"]
-                if name == "manage_memory" and captured:
-                    crash_at("W2", name, {"requested_call": request.tool_call})
-                response = journal(request, execute)
-                if name in names and isinstance(response, ToolMessage):
-                    response = capture(request, response)
-                if name == "manage_memory" and isinstance(response, ToolMessage):
-                    receipt = json.loads(str(response.content))
-                    trace(
-                        {
-                            "event": "v13_p5_memory_receipt",
-                            "call": request.tool_call,
-                            "receipt": receipt,
-                        }
-                    )
-                    if (
-                        receipt.get("ok")
-                        and receipt.get("status") == "committed"
-                        and (
-                            composition is None
-                            or request.tool_call["args"].get("action") == "update"
-                        )
+                def response_hook(row: dict[str, Any], response: ToolMessage) -> None:
+                    if row["name"] in (
+                        DOCUMENT_MUTATIONS
+                        if document_mode
+                        else {"reserve_and_label", "complete_label"}
                     ):
                         crash_at(
-                            "W3", name, {"requested_call": request.tool_call, "receipt": receipt}
+                            "W1",
+                            row["name"],
+                            {
+                                "journal_row": row,
+                                "actual_native_return": response.model_dump(mode="json"),
+                            },
                         )
-                return response
 
-            model = make_model(settings, budget, trace, resource_root)
-            stack.callback(model.client.close)
-            comparison = None
-            if composition is not None:
-                comparison = active["comparison"] = composition.open(
-                    frozen=frozen,
-                    service=service,
-                    store=store,
-                    saver=saver,
-                    scope=scope,
-                    model=model,
-                    budget=budget,
-                    trace=trace,
-                    resource_root=resource_root,
-                    stack=stack,
-                    crash_at=crash_at,
-                    wrapper=wrapper,
-                )
-            agent = build_agent(
-                model,
-                store,
-                saver,
-                document_business_tools(world, scope.user_id)
-                if document_mode
-                else _business_tools(world, scope.user_id),
-                business_call_wrapper=wrapper,
-                memory_tools=(
-                    create_service_tools(service, replay_requested=True)
-                    if comparison is None
-                    else comparison.tools()
-                ),
-                system_prompt=d0._system_prompt(settings),
-                benchmark_view_hook=None if comparison is None else comparison.hook,
-            )
-            active["agent"] = agent
-            state = agent.get_state(config)
-            prior = state.values.get("messages", []) if state.values else []
-            already = any(
-                isinstance(m, HumanMessage) and m.id == public["message_id"] for m in prior
-            )
-            if phase == "resume" and not already:
-                raise ValueError("V13_P5_RESUME_CHECKPOINT_MISSING")
-            if phase == "start" and already:
-                raise ValueError("V13_P5_PUBLIC_MESSAGE_ALREADY_STARTED")
-            capture_receipt = service.capture_user(
-                scope.episode_id, public["message_id"], public["content"]
-            )
-            output["capture_receipt"] = capture_receipt
-            if not capture_receipt["ok"]:
-                raise ValueError("V13_P5_USER_SOURCE_CAPTURE_REJECTED")
-            trace(
-                {
-                    "event": "v13_public_input",
-                    "message_id": public["message_id"],
-                    "content": public["content"],
-                    "process_id": os.getpid(),
-                    "owner": scope.user_id,
-                    "session": scope.episode_id,
-                }
-            )
-            public_start = next(
-                (
-                    i
-                    for i, m in enumerate(prior)
-                    if isinstance(m, HumanMessage) and m.id == public["message_id"]
-                ),
-                -1,
-            )
-            checkpoint_calls = (
-                sum(isinstance(m, AIMessage) for m in prior[public_start + 1 :]) if already else 0
-            )
-            # Existing bridge admission file is written before client/provider dispatch.
-            # Unknown provider outcomes consume this same per-message key on every attempt.
-            model.begin_public_message(public["message_id"], checkpoint_calls=checkpoint_calls)
-            if phase == "resume":
-                recover_pending_application_call(
-                    agent,
-                    scope,
-                    journal,
-                    world,
-                    _RecoveryCapture(capture, trace),
+                journal = BusinessActionJournal(
+                    resource_root / "business-journal.json",
+                    names,
+                    application_protection=True,
+                    response_hook=response_hook,
                     application_workflow=workflow,
                 )
-                state = agent.get_state(config)
-                if comparison is not None:
-                    comparison.recovered(state.values.get("messages", []))
-            if phase == "start" or state.next:
-                agent.invoke(
-                    None
-                    if phase == "resume"
-                    else {
-                        "messages": [
-                            HumanMessage(content=public["content"], id=public["message_id"])
-                        ]
-                    },
-                    config=config,
-                    durability="sync",
+                active["journal"] = journal
+                journal.bind_request(_binding(frozen, case, message_index))
+
+                def capture(
+                    request: ToolCallRequest, response: ToolMessage, *, wrap: bool = True
+                ) -> ToolMessage:
+                    nonlocal captured
+                    call, generating = request.tool_call, request.state["messages"][-1]
+                    call_id = call["id"]
+                    if not call_id or not generating.id:
+                        raise ValueError("V13_P5_TOOL_CALL_IDENTITY_MISSING")
+                    row = journal.entry_for_call(active["thread_id"], generating.id, call_id)
+                    if row is None or not row.get("executed") or row["status"] != "complete":
+                        return response
+                    body = str(response.content)
+                    identity = str(generating.id) + ":" + call_id
+                    source_ref = service.event_id(scope.episode_id, identity, "tool")
+                    binder = verified_document_ref if document_mode else verified_reservation_ref
+                    ref = binder(
+                        world, scope.user_id, source_ref, call["name"], body, observer=trace
+                    )
+                    receipt = service.capture_tool(
+                        scope.episode_id, identity, call["name"], body, ref
+                    )
+                    service.bind_source_boundary(
+                        scope.episode_id, str(generating.id), [receipt["source_ref"]], append=True
+                    )
+                    projection = d0._observe_captured(
+                        service, receipt["source_ref"], settings, trace
+                    )
+                    if not receipt["ok"]:
+                        raise ValueError("V13_P5_TOOL_SOURCE_CAPTURE_REJECTED:" + receipt["status"])
+                    captured = True
+                    trace(
+                        {
+                            "event": "v13_source_capture",
+                            "receipt": receipt,
+                            "actual_tool_receipt": response.model_dump(mode="json"),
+                            "origin": row["origin"],
+                        }
+                    )
+                    if "comparison" in active:
+                        active["comparison"].observed(receipt["source_ref"])
+                    if not wrap:
+                        return response
+                    return response.model_copy(
+                        update={
+                            "content": json.dumps(
+                                {
+                                    "receipt": json.loads(body),
+                                    "source_ref": receipt["source_ref"],
+                                    "object_ref": ref.id if ref else None,
+                                    "observation_only": True,
+                                    **capture_effect(
+                                        receipt, projection, service.observation_capture_feedback
+                                    ),
+                                    **(
+                                        {"observation_capture": projection}
+                                        if projection is not None
+                                        else {}
+                                    ),
+                                },
+                                ensure_ascii=False,
+                            )
+                        }
+                    )
+
+                def wrapper(request: ToolCallRequest, execute: Any) -> ToolMessage | Command[Any]:
+                    name = request.tool_call["name"]
+                    if name == "manage_memory" and captured:
+                        crash_at("W2", name, {"requested_call": request.tool_call})
+                    response = journal(request, execute)
+                    if name in names and isinstance(response, ToolMessage):
+                        response = capture(request, response)
+                    if name == "manage_memory" and isinstance(response, ToolMessage):
+                        receipt = json.loads(str(response.content))
+                        trace(
+                            {
+                                "event": "v13_p5_memory_receipt",
+                                "call": request.tool_call,
+                                "receipt": receipt,
+                            }
+                        )
+                        if (
+                            receipt.get("ok")
+                            and receipt.get("status") == "committed"
+                            and (
+                                composition is None
+                                or request.tool_call["args"].get("action") == "update"
+                            )
+                        ):
+                            crash_at(
+                                "W3",
+                                name,
+                                {"requested_call": request.tool_call, "receipt": receipt},
+                            )
+                    return response
+
+                model = make_model(settings, budget, trace, resource_root)
+                stack.callback(model.client.close)
+                comparison_recipe = (composition is not None
+                    and getattr(composition, "owns_recipe", lambda frozen: False)(frozen))
+                recipe = (None if comparison_recipe else
+                          d0._make_recipe(service, settings, model, budget, trace, stack))
+                if recipe is not None and composition is not None:
+                    raise ValueError("V13_RECIPE_COMPARISON_HOOK_CONFLICT")
+                comparison = None
+                if composition is not None:
+                    comparison = active["comparison"] = composition.open(
+                        frozen=frozen,
+                        service=service,
+                        store=store,
+                        saver=saver,
+                        scope=scope,
+                        model=model,
+                        budget=budget,
+                        trace=trace,
+                        resource_root=resource_root,
+                        stack=stack,
+                        crash_at=crash_at,
+                        wrapper=wrapper,
+                    )
+                agent = build_agent(
+                    model,
+                    store,
+                    saver,
+                    document_business_tools(world, scope.user_id)
+                    if document_mode
+                    else _business_tools(world, scope.user_id),
+                    business_call_wrapper=wrapper,
+                    memory_tools=(
+                        d0._memory_tools(service, settings, replay_requested=True, recipe=recipe)
+                        if comparison is None
+                        else comparison.tools()
+                    ),
+                    system_prompt=d0._system_prompt(settings),
+                    tool_save_communication=cast(
+                        Any, read_profiles(settings)["tool_save_communication"]
+                    ),
+                    tool_schema_communication=communication_profile(
+                        settings.get("tool_schema_communication", "legacy")
+                    ),
+                    benchmark_view_hook=(
+                        recipe.hook(
+                            d0._system_prompt(settings),
+                            prefetch=bool(
+                                settings.get("memory_reader_policy")
+                                and settings.get("memory_prefetch", "enabled") == "enabled"
+                            ),
+                        )
+                        if recipe is not None
+                        else None
+                        if comparison is None
+                        else comparison.hook
+                    ),
                 )
-            if comparison is not None:
-                comparison.completed()
-            output["status"] = "completed"
-            if window != "none":
-                output["window_status"] = "NOT_REACHED"
-        if "evidence_error" in output:
-            raise RuntimeError("V13_P5_EVIDENCE_CAPTURE_FAILED:" + str(output["evidence_error"]))
-    except Exception as error:
-        output.update(status="interrupted", error_type=type(error).__name__, error=str(error))
-        first_path = resource_root / "first-error.json"
-        if not first_path.exists():
-            write_json(
-                first_path,
-                {"attempt_id": attempt_id, "error_type": type(error).__name__, "error": str(error)},
-            )
-        output["first_error"] = read_json(first_path)
-        if not active.get("evidence_collected_before_close"):
-            evidence_before_close()
-    write_json(receipt_path, output)
-    return output
+                active["agent"] = agent
+                state = agent.get_state(config)
+                prior = state.values.get("messages", []) if state.values else []
+                already = any(
+                    isinstance(m, HumanMessage) and m.id == public["message_id"] for m in prior
+                )
+                if phase == "resume" and not already:
+                    raise ValueError("V13_P5_RESUME_CHECKPOINT_MISSING")
+                if phase == "start" and already:
+                    raise ValueError("V13_P5_PUBLIC_MESSAGE_ALREADY_STARTED")
+                capture_receipt = service.capture_user(
+                    scope.episode_id, public["message_id"], public["content"]
+                )
+                service.bind_source_boundary(
+                    scope.episode_id, public["message_id"], [capture_receipt["source_ref"]]
+                )
+                output["capture_receipt"] = capture_receipt
+                if not capture_receipt["ok"]:
+                    raise ValueError("V13_P5_USER_SOURCE_CAPTURE_REJECTED")
+                if (
+                    service.support_contract == "direct_support_v1"
+                    or service.memory_read_protocol != "legacy"
+                ):
+                    service.bind_public_turn(
+                        scope.episode_id,
+                        public["message_id"],
+                        capture_receipt["source_ref"],
+                        config_sha256=frozen["config_sha256"],
+                        phase=phase,
+                    )
+                    config["configurable"]["v13_support_config_sha256"] = frozen["config_sha256"]
+                trace(
+                    {
+                        "event": "v13_public_input",
+                        "message_id": public["message_id"],
+                        "content": public["content"],
+                        "process_id": os.getpid(),
+                        "owner": scope.user_id,
+                        "session": scope.episode_id,
+                    }
+                )
+                public_start = next(
+                    (
+                        i
+                        for i, m in enumerate(prior)
+                        if isinstance(m, HumanMessage) and m.id == public["message_id"]
+                    ),
+                    -1,
+                )
+                checkpoint_calls = (
+                    sum(isinstance(m, AIMessage) for m in prior[public_start + 1 :])
+                    if already
+                    else 0
+                )
+                # Existing bridge admission file is written before client/provider dispatch.
+                # Unknown provider outcomes consume this same per-message key on every attempt.
+                if model.generation_admission_profile == "durable_shared_v1":
+                    public_source = service.source(capture_receipt["source_ref"])
+                    if public_source is None:
+                        raise ValueError("V13_P5_PUBLIC_SOURCE_IDENTITY_MISSING")
+                    model.begin_public_message(
+                        public["message_id"],
+                        checkpoint_calls=checkpoint_calls,
+                        admission_phase="resume" if already else "start",
+                        admission_scope={
+                            "owner": scope.user_id,
+                            "bank": list(service.namespace),
+                            "session": scope.episode_id,
+                            "request_ref": public_source["event_id"],
+                            "request_sha256": public_source["content_sha256"],
+                            "config_sha256": frozen["config_sha256"],
+                        },
+                    )
+                else:
+                    model.begin_public_message(
+                        public["message_id"], checkpoint_calls=checkpoint_calls
+                    )
+                if phase == "resume":
+                    recover_pending_application_call(
+                        agent,
+                        scope,
+                        journal,
+                        world,
+                        _RecoveryCapture(capture, trace),
+                        application_workflow=workflow,
+                    )
+                    state = agent.get_state(config)
+                    if comparison is not None:
+                        comparison.recovered(state.values.get("messages", []))
+                        if getattr(comparison, "common_profiles", {}).get(
+                            "common_read_profile", "legacy") != "legacy":
+                            comparison.resume_context(config)
+                if phase == "start" or state.next:
+                    agent.invoke(
+                        None
+                        if phase == "resume"
+                        else {
+                            "messages": [
+                                HumanMessage(content=public["content"], id=public["message_id"])
+                            ]
+                        },
+                        config=config,
+                        durability="sync",
+                    )
+                if service.mutation_contract == "event_bound_v1":
+                    final_state = agent.get_state(config)
+                    d0._capture_final_assistant(
+                        service,
+                        scope.episode_id,
+                        public["message_id"],
+                        final_state.values.get("messages", []) if final_state.values else [],
+                        trace,
+                    )
+                    maintenance = None if (comparison is not None
+                        and getattr(comparison, "common_profiles", {}).get(
+                            "common_formation_profile", "legacy") != "legacy"
+                    ) else d0._maintain_final(
+                        recipe,
+                        model,
+                        service,
+                        settings,
+                        scope.episode_id,
+                        public["message_id"],
+                        final_state.values.get("messages", []) if final_state.values else [],
+                        config,
+                        trace,
+                    )
+                    if maintenance is not None:
+                        output["semantic_maintenance"] = maintenance
+                if comparison is not None:
+                    if getattr(comparison, "common_profiles", {}).get(
+                        "common_formation_profile", "legacy") != "legacy":
+                        final_state = agent.get_state(config)
+                        closed_receipt = comparison.completed(
+                            final_state.values.get("messages", []) if final_state.values else [],
+                            config)
+                        if closed_receipt is not None:
+                            output["common_closed_formation"] = closed_receipt
+                    else:
+                        comparison.completed()
+                output["status"] = "completed"
+                if window != "none":
+                    output["window_status"] = "NOT_REACHED"
+            if "evidence_error" in output:
+                raise RuntimeError(
+                    "V13_P5_EVIDENCE_CAPTURE_FAILED:" + str(output["evidence_error"])
+                )
+        except Exception as error:
+            output.update(status="interrupted", error_type=type(error).__name__, error=str(error))
+            first_path = resource_root / "first-error.json"
+            if not first_path.exists():
+                write_json(
+                    first_path,
+                    {
+                        "attempt_id": attempt_id,
+                        "error_type": type(error).__name__,
+                        "error": str(error),
+                    },
+                )
+            output["first_error"] = read_json(first_path)
+            if not active.get("evidence_collected_before_close"):
+                evidence_before_close()
+        write_json(receipt_path, output)
+        return output
 
 
 def run(
@@ -922,7 +1181,9 @@ def main() -> None:
     parser.add_argument("--message-index", type=int)
     parser.add_argument("--phase", choices=("start", "resume"), default="start")
     parser.add_argument("--attempt-id", default="start")
-    parser.add_argument("--window", choices=("none", "W1", "W2", "W3"), default="none")
+    parser.add_argument("--window", choices=(
+        "none", "W1", "W2", "W3", "W2_projection", "W3_projection"
+    ), default="none")
     parser.add_argument("--window-tool", choices=(*BUSINESS_NAMES, "manage_memory"))
     parser.add_argument("--hit", type=int, default=1)
     parser.add_argument("--label-available", choices=("true", "false"))

@@ -1,0 +1,27 @@
+{
+  "kind": "V13_4_QUERY_FREE_PUBLIC_RELATION_ADAPTER_FREEZE",
+  "frozen_at_utc": "2026-10-02T17:47:09.715711+00:00",
+  "adapter": {
+    "path": "artifacts/v13-4/n2-relation-adapter/query_free_relation_adapter.py",
+    "sha256": "f284f4131cf6b320dcbbca2da0856828f3bb4352cf18659f23bc5336eb032bbb"
+  },
+  "catalog": {
+    "path": "artifacts/v13-4/n2-formation/source-catalog.json",
+    "sha256": "16aa1128527b8f679c59d4e255c8bfe03517b455e216edf88a3dcbdb61e926c2"
+  },
+  "bank_before": {
+    "path": "artifacts/v13-4/n2-formation/bank-before.json",
+    "sha256": "a50efcc419fb4e751c272ff067fe842d75321b3604afcc7ff649bd7e449f2e1e"
+  },
+  "planned_errata_records": 64,
+  "queries_created": 0,
+  "metadata_output_used": false,
+  "evaluator_input_used": false,
+  "rules": {
+    "public_role_labels_required": true,
+    "whole_erratum_witness": true,
+    "quote_matching": "case/punctuation preserving whitespace fold, all matches, no ellipsis matching or section fallback",
+    "invalid_or_tbd": "retain row, no invented resolved relation",
+    "semantic_truth_claim": false
+  }
+}

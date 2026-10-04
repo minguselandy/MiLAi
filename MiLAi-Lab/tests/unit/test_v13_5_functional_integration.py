@@ -1,0 +1,3599 @@
+"""Mechanical unified-entry checks: scripted wire replies, real SDK/state/accounting.
+
+These finite provider responses test integration, never semantic acceptance.
+All ledgers and tokenizer inputs are isolated under pytest's temporary path.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import socket
+from dataclasses import asdict
+from pathlib import Path
+from typing import Any
+
+import httpx
+import pytest
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage, messages_from_dict
+from tokenizers import Tokenizer, models, pre_tokenizers
+from transformers import PreTrainedTokenizerFast
+
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.providers.contextual_vllm import VLLMConfig
+from milai_lab.providers.functional_queue import FunctionalVLLMClient
+from milai_lab.runners import functional
+
+
+def prepared(
+    tmp_path: Path, *, queue_requests: int = 100, native: bool = False,
+    request_interpretation: bool = False,
+    readonly_finalization: bool = False,
+    write_mode_declaration: bool = False,
+    action_mode_declaration: bool = False,
+    receipt_response: bool = False,
+    declared_writes: bool = False,
+    operation_mode_declaration: bool = False,
+    inline_fragments: bool = False,
+    reference_mode_declaration: bool = False,
+    receipt_units: bool = False,
+    failure_receipts: bool = False,
+    business_feedback: bool = False,
+    format_allowance: int = 1,
+    current_delivery: bool = False,
+    fresh_completion: bool = False,
+    independent_capabilities: bool = False,
+    operation_completion: bool = False,
+    phase_thinking: bool = False,
+    reasoning_history: bool = False,
+    direct_response: bool = False,
+    actual_capabilities: bool = False,
+    replacement_evidence: bool = False,
+    withdrawal_evidence: bool = False,
+    reviewed_evidence: bool = False,
+    anchored_evidence: bool = False,
+    distinct_withdrawal: bool = False,
+    optional_withdrawal: bool = False,
+    format_failure_receipts: bool = False,
+    required_completion: bool = False,
+    receipt_completion: bool = False,
+    existing_confirmation: bool = False,
+    support_review: bool = False,
+    formation_review: bool = False,
+    support_comparison: bool = False,
+    catalog_feedback: bool = False,
+    explicit_reads: bool = False,
+) -> Path:
+    tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
+    tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
+    tokenizer_wrapper = PreTrainedTokenizerFast(tokenizer_object=tokenizer, unk_token="[UNK]")
+    tokenizer_wrapper.chat_template = (
+        "{% for m in messages %}{{m.role}} {{m.content}} {% endfor %}"
+        "{% if tools %}{{tools|tojson}}{% endif %} assistant "
+    )
+    directory = tmp_path / "mechanical-tokenizer"
+    tokenizer_wrapper.save_pretrained(str(directory))
+    (directory / "chat_template.jinja").write_text(tokenizer_wrapper.chat_template)
+    host = VLLMConfig(base_url="http://mechanical.invalid/v1/", model="mechanical-provider",
+                      temperature=1.0 if direct_response else 0,
+                      max_tokens=4096, max_calls=24, enable_thinking=phase_thinking,
+                      tool_mode="native" if native else "json_action")
+    budget_path = tmp_path / "isolated-mechanical-budget.json"
+    budget = RunBudget(RunLimits(1, 1, 100, 2_000_000, 0), budget_path)
+    write_json(budget_path, budget.state)
+    settings = {
+        "profile": "functional_v1", "host": asdict(host),
+        "source_selection": "inline_receipt_units_v2" if receipt_units else
+        "inline_fragments_v1" if inline_fragments else "index_v1",
+        "failure_delivery": "receipt_status_v4" if format_failure_receipts else
+        "receipt_status_v3" if fresh_completion else
+        "receipt_status_v2" if current_delivery else
+        "receipt_status_v1" if failure_receipts else "unavailable_v1",
+        "declaration_tool_choice": "required" if current_delivery else "auto",
+        "completion_tool_choice": "required_until_attempt_v1" if receipt_completion else
+        "required_once" if required_completion else "auto",
+        "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
+        "revision_support_review": "selected_originals_v1" if support_review else "disabled",
+        "formation_support_review": "selected_originals_v1" if formation_review else "disabled",
+        "support_review_comparison": "explicit_dimensions_v1" if support_comparison else "disabled",
+        "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
+        "read_interface": "explicit_selectors_v1" if explicit_reads else "combined_selectors_v1",
+        "declaration_thinking": "disabled" if phase_thinking else "inherit",
+        "declaration_sampling": "greedy_v1" if direct_response else "inherit",
+        "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
+        "reasoning_history": "current_turn_native_v1" if reasoning_history else "discard",
+        "recent_context": "bank_recent_v2" if operation_completion else
+        "session_events_v1" if current_delivery else "disabled",
+        "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
+        "capacity": {"model": host.model, "tokenizer_path": str(directory),
+            "tokenizer_files_sha256": {
+                name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
+                for name in ("tokenizer.json", "tokenizer_config.json", "chat_template.jinja")},
+            "context_tokens": 32768, "output_tokens": 4096, "batch_source_tokens": 8192,
+            "enable_thinking": phase_thinking},
+        "budget_path": str(budget_path), "max_calls_per_message": 24,
+        "ordinary_material_tokens": 8192, "additional_reads": 3,
+        "format_reproposals": format_allowance,
+        "queue_limits": {"requests": queue_requests, "reserved_tokens": 2_000_000},
+        "http_ownership_profile": "serialized_ledger_owner_v1",
+        "http_ownership_domain": {"deployment_id": "mechanical-local-test",
+                                   "clients": [asdict(host)]},
+        "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
+        "request_mode": "current_request_native_v6" if independent_capabilities else
+        "current_request_native_v5" if reference_mode_declaration else
+        "current_request_native_v4" if operation_mode_declaration else
+        "current_request_native_v3" if action_mode_declaration else
+        "current_request_native_v2" if write_mode_declaration else
+        "current_request_native_v1" if request_interpretation else "disabled",
+        "finalization": "receipt_or_agent_response_v1" if direct_response else
+        "receipt_business_response_v3" if operation_completion else
+        "receipt_business_response_v2" if current_delivery else
+        "receipt_business_response_v1" if receipt_response else
+        "readonly_response_v1" if readonly_finalization else "agent_final_v1",
+        "read_exhaustion": "stop_execution_v1" if receipt_response else "legacy",
+        "memory_completion": "declared_operations_v3" if operation_completion else
+        "declared_writes_v2" if fresh_completion else
+        "declared_writes_v1" if declared_writes else "explicit_only_v1",
+        "formation_interface": "anchored_assertion_v3" if optional_withdrawal else
+        "anchored_assertion_v2" if distinct_withdrawal else
+        "anchored_assertion_v1" if anchored_evidence else
+        "reviewed_assertion_v1" if reviewed_evidence else
+        "unified_assertion_v3" if withdrawal_evidence else
+        "unified_assertion_v2" if replacement_evidence else
+        "unified_assertion_v1" if readonly_finalization
+        else "content_and_scope_v1",
+    }
+    settings_path = tmp_path / "settings.json"
+    write_json(settings_path, settings)
+    root = tmp_path / "run"
+    functional.prepare(root, settings_path)
+    return root
+
+
+def scripted(
+    monkeypatch: pytest.MonkeyPatch, respond: Any, *, native: bool = False,
+) -> list[dict[str, Any]]:
+    wires: list[dict[str, Any]] = []
+
+    def forbid(*args: Any, **kwargs: Any) -> Any:
+        raise AssertionError("REAL_NETWORK_FORBIDDEN")
+
+    monkeypatch.setattr(socket.socket, "connect", forbid)
+
+    def response(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        wires.append(wire)
+        action = respond(wire, len(wires))
+        if isinstance(action, Exception):
+            raise action
+        payload = action if native else {"role": "assistant", "content": json.dumps(action)}
+        finish = payload.pop("_test_finish_reason",
+                             "tool_calls" if payload.get("tool_calls") else "stop")
+        return httpx.Response(200, json={"id": "mechanical-response-" + str(len(wires)),
+            "choices": [{"finish_reason": finish, "message": payload}],
+            "usage": {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12}})
+
+    class ScriptedClient(FunctionalVLLMClient):
+        def __init__(self, *args: Any, **kwargs: Any) -> None:
+            super().__init__(*args, **kwargs, transport=httpx.MockTransport(response))
+
+    monkeypatch.setattr(functional, "FunctionalVLLMClient", ScriptedClient)
+    return wires
+
+
+def tool(action: str, **args: Any) -> dict[str, Any]:
+    return {"calls": [{"name": action, "arguments": args}]}
+
+
+def materials(wire: dict[str, Any]) -> dict[str, Any]:
+    system = next(row["content"] for row in wire["messages"] if row["role"] == "system")
+    # The actual runtime material is the final JSON line after protocol/schema text.
+    return json.loads(system.splitlines()[-1])
+
+
+def actual_tool_receipt(wire: dict[str, Any]) -> dict[str, Any]:
+    return json.loads(next(row["content"] for row in reversed(wire["messages"])
+                           if row["role"] == "tool"))
+
+
+def memory_effects(wire: dict[str, Any]) -> dict[str, Any]:
+    system = next(row["content"] for row in wire["messages"] if row["role"] == "system")
+    summary = json.loads(system.splitlines()[-2])
+    assert summary["schema"] == "functional_memory_effects_v1"
+    assert summary["scope"] == "visible_checkpoint_of_current_public_message"
+    return summary
+
+
+def message(root: Path, **kwargs: Any) -> dict[str, Any]:
+    return functional.message(root, bank="mechanical-bank", owner="alice", session="session",
+                              message_id="message", content="Remember the local marker is blue.",
+                              **kwargs)
+
+
+def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bool = False,
+                 business: bool = False) -> dict[str, Any]:
+    return native_call("classify_current_request", "interpret",
+        allow_memory_maintenance=memory, allow_forgetting=forgetting,
+        allow_business_mutation=business, requires_memory_result=required)
+
+
+def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
+    return {"role": "assistant", "content": None, "tool_calls": [{
+        "type": "function", "id": call_id, "function": {
+            "name": name, "arguments": json.dumps(args)}}]}
+
+
+def test_focused_request_mode_removes_mutations_and_survives_resume(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    first_text = "Remember the independent old marker is blue."
+    query = "Have I said that the marker is red?"
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            assert [t["function"]["name"] for t in wire["tools"]] == ["classify_current_request"]
+            users = [m["content"] for m in wire["messages"] if m["role"] == "user"]
+            assert users == [first_text if ordinal == 1 else query]
+            if ordinal == 4:
+                assert first_text not in json.dumps(wire)
+            return intent_reply(memory=ordinal == 1)
+        catalog = {t["function"]["name"] for t in wire.get("tools", [])}
+        if ordinal == 2:
+            assert {"save_memory", "update_memory"} <= catalog
+            assert not {"forget_memory", "reserve_and_label"}.intersection(catalog)
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="The marker is blue.",
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved the blue marker."}
+        assert {"read_memory", "get_reservation"} <= catalog
+        assert not {"save_memory", "update_memory", "forget_memory", "reserve_and_label",
+                    "complete_label"}.intersection(catalog)
+        if ordinal == 5:
+            # A provider can still emit a forbidden name; no dispatcher executes it.
+            hs = [u["fragment_handle"] for u in materials(wire)["items"]
+                  if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            return native_call("save_memory", "forbidden", content="The marker is red.",
+                               fragment_handles=hs)
+        assert ordinal == 6
+        return {"role": "assistant", "content": "You previously said the marker is blue."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save", content=first_text)
+    assert saved["status"] == "COMPLETED", saved
+    denied = functional.message(root, **common, message_id="query", content=query)
+    assert denied["status"] == "FAILED" and denied["error"] == "VLLM_CHAT_UNKNOWN_TOOL"
+    assert denied["records"] == saved["records"]
+    assert denied["operation_status"]["semantic_memory"]["operations"] == []
+    restored = functional.message(root, **common, message_id="query", content=query, resume=True)
+    assert restored["status"] == "COMPLETED", restored
+    assert restored["records"] == saved["records"] and len(wires) == 6
+    assert restored["generation_calls"] == 3  # One interpretation, two Agent requests.
+    assert restored["request_mode"] == denied["request_mode"]
+    assert restored["request_mode"]["semantic_correctness"] == "unchecked"
+
+
+@pytest.mark.parametrize("write_request", ["none", "new_assertion", "explicit"])
+def test_write_mode_declaration_derives_consistent_permissions_and_replays(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, write_request: str,
+) -> None:
+    root = prepared(tmp_path, native=True, write_mode_declaration=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            schema = wire["tools"][0]["function"]["parameters"]
+            assert set(schema["required"]) == {
+                "memory_write_request", "allow_forgetting", "allow_business_mutation"}
+            return native_call("classify_current_request", "mode",
+                memory_write_request=write_request, allow_forgetting=False,
+                allow_business_mutation=False)
+        if ordinal == 2:
+            catalog = {t["function"]["name"] for t in wire["tools"]}
+            assert ("save_memory" in catalog) == (write_request != "none")
+            if write_request != "none":
+                hs = [u["fragment_handle"] for u in materials(wire)["items"]
+                      if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+                return native_call("save_memory", "save", content="Mechanical preference.",
+                                   fragment_handles=hs)
+        return {"role": "assistant", "content": "No write requested." if write_request == "none"
+                else "Actual record saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "COMPLETED", first
+    mode = first["request_mode"]
+    assert mode["memory_write_request"] == write_request
+    assert mode["allow_memory_maintenance"] == (write_request != "none")
+    assert mode["requires_memory_result"] == (write_request == "explicit")
+    assert mode["protocol"] == "native_write_declaration_v2"
+    assert len(first["records"]) == (0 if write_request == "none" else 1)
+    count = len(wires)
+    replayed = message(root, resume=True)
+    assert replayed["status"] == "COMPLETED" and replayed["request_mode"] == mode
+    assert len(wires) == count
+
+
+@pytest.mark.parametrize("invalid", ["read", True, None])
+def test_write_mode_declaration_rejects_invalid_enum_without_permission_coercion(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, invalid: Any,
+) -> None:
+    root = prepared(tmp_path, native=True, write_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        "classify_current_request", "invalid", memory_write_request=invalid,
+        allow_forgetting=False, allow_business_mutation=False), native=True)
+    for resume in [False, True]:
+        result = message(root, resume=resume)
+        assert result["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+        assert not result["records"]
+    blocked = message(root, resume=True)
+    assert blocked["error"] == "FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED"
+    assert len(wires) == 2
+
+
+def test_request_mode_invalid_output_has_one_durable_reproposal_and_no_tools(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert [t["function"]["name"] for t in wire["tools"]] == ["classify_current_request"]
+        return {"role": "assistant", "content": '{"allow_memory_maintenance": true}'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    second = message(root, resume=True)
+    third = message(root, resume=True)
+    assert first["error"] == second["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    assert third["error"] == "FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED"
+    assert len(wires) == 2 and not third["records"]
+    assert third["operation_status"]["semantic_memory"]["operations"] == []
+
+
+@pytest.mark.parametrize("forgetting", [False, True])
+def test_request_mode_separately_controls_forgetting_and_business_tools(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, forgetting: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(forgetting=forgetting, business=not forgetting)
+        catalog = {t["function"]["name"] for t in wire.get("tools", [])}
+        assert ("forget_memory" in catalog) is forgetting
+        assert ("reserve_and_label" in catalog) is not forgetting
+        assert not {"save_memory", "update_memory"}.intersection(catalog)
+        return {"role": "assistant", "content": "Scripted response with no operation."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["status"] == "COMPLETED" and len(wires) == 2
+    assert result["operation_status"]["request_completion"] == "unchecked"
+
+
+@pytest.mark.parametrize("defect", ["string_boolean", "extra_reason", "missing_flag",
+                                    "inconsistent_required", "multiple_calls"])
+def test_native_request_declaration_rejects_invalid_flags_before_action(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, defect: str,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        flags: dict[str, Any] = {"allow_memory_maintenance": False, "allow_forgetting": False,
+            "allow_business_mutation": False, "requires_memory_result": False}
+        if defect == "string_boolean":
+            flags["allow_memory_maintenance"] = "true"
+        elif defect == "extra_reason":
+            flags["reason"] = "Unrequested explanation."
+        elif defect == "missing_flag":
+            flags.pop("allow_forgetting")
+        elif defect == "inconsistent_required":
+            flags["requires_memory_result"] = True
+        response = native_call("classify_current_request", "mode", **flags)
+        if defect == "multiple_calls":
+            response["tool_calls"].extend(
+                native_call("classify_current_request", "mode-2", **flags)["tool_calls"])
+        return response
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID", result
+    assert len(wires) == 1 and not result["records"]
+    assert result["operation_status"]["business"]["operations"] == []
+
+
+def test_request_mode_reproposal_cannot_redisclose_forgotten_input(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            assert "MECHANICAL_MODE_SECRET" not in json.dumps(wire)
+            return intent_reply(forgetting=True)
+        if ordinal == 3:
+            return native_call("search_memory", "search", query="MECHANICAL_MODE_SECRET")
+        if ordinal == 4:
+            hs = [u["fragment_handle"] for u in actual_tool_receipt(wire)["items"]
+                  if u["type"] == "fragment" and "MECHANICAL_MODE_SECRET" in u["content"]]
+            assert hs
+            return native_call("forget_memory", "forget", fragment_handles=hs)
+        assert ordinal == 5
+        assert "MECHANICAL_MODE_SECRET" not in json.dumps(wire)
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        return {"role": "assistant", "content": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    old = {"message_id": "old", "content": "Remember MECHANICAL_MODE_SECRET."}
+    failed = functional.message(root, **common, **old)
+    assert failed["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    forgotten = functional.message(root, **common, message_id="forget",
+                                   content="Forget my previous input.")
+    assert forgotten["status"] == "COMPLETED", forgotten
+    replay = functional.message(root, **common, **old, resume=True)
+    # Raw capture rejects this revoked original input even before mode admission.
+    assert replay["status"] == "FAILED", replay
+    assert replay["error"].startswith("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:")
+    assert replay["capture"]["status"] == "visibility_revoked"
+    assert replay.get("final_answer") is None and len(wires) == 5
+
+
+def test_request_mode_and_answer_recovery_share_one_format_reproposal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            return intent_reply(memory=True)
+        if ordinal == 3:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="The marker is blue.",
+                               fragment_handles=hs)
+        assert ordinal == 4
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "{"}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    bad_final = message(root, resume=True)
+    assert bad_final["status"] == "FAILED" and len(bad_final["records"]) == 1
+    exhausted = message(root, resume=True)
+    assert exhausted["error"] == "FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED"
+    assert exhausted["records"] == bad_final["records"] and len(wires) == 4
+    assert exhausted["generation_calls"] == 4
+    assert exhausted["operation_status"]["semantic_memory"]["status"] == "committed"
+
+
+def test_cached_request_mode_allows_committed_forget_recovery_without_reexposure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    control = {"one_shot_fault": {"message_index": 1, "boundary": "W3",
+                                "target_operation": "forget_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True)
+        if ordinal == 2:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return native_call("save_memory", "save", content="MECHANICAL_MODE_FORGET",
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved."}
+        if ordinal == 4:
+            assert "MECHANICAL_MODE_FORGET" not in json.dumps(wire)
+            return intent_reply(forgetting=True)
+        if ordinal == 5:
+            record = next(u for u in materials(wire)["items"] if u["type"] == "record")
+            return native_call("forget_memory", "forget", read_handle=record["read_handle"])
+        assert ordinal == 6
+        assert "MECHANICAL_MODE_FORGET" not in json.dumps(wire)
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        return {"role": "assistant", "content": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common: dict[str, Any] = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember MECHANICAL_MODE_FORGET.")
+    assert saved["status"] == "COMPLETED"
+    args: dict[str, Any] = {**common, "message_id": "forget", "content": "Forget the marker.",
+                           "message_index": 1, "evaluator_control": control}
+    interrupted = functional.message(root, **args)
+    assert interrupted["status"] == "UNKNOWN" and len(wires) == 5
+    resumed = functional.message(root, **args, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["records"][0]["status"] == "visibility_revoked" and len(wires) == 6
+
+
+@pytest.mark.parametrize("interrupt_save", [False, True])
+def test_required_memory_receipt_precedes_delivery_without_repeating_business(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, interrupt_save: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+    control = {"one_shot_fault": {"message_index": 0, "boundary": "W3",
+                                "target_operation": "save_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, required=True, business=True)
+        if ordinal == 2:
+            return native_call("reserve_and_label", "reserve", item_key="mechanical item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Business completed and memory saved."}
+        if ordinal == 4:
+            catalog = {t["function"]["name"] for t in wire["tools"]}
+            assert all(m["role"] != "system" for m in wire["messages"][1:])
+            assert {"save_memory", "get_reservation"} <= catalog
+            assert not {"reserve_and_label", "complete_label", "forget_memory"} & catalog
+            assert any(m["role"] == "system" and "withheld" in m["content"]
+                       for m in wire["messages"])
+            receipt = actual_tool_receipt(wire)
+            return native_call("save_memory", "save", content="The item was reserved and labeled.",
+                basis="tool_observation", fragment_handles=[
+                    u["fragment_handle"] for u in receipt["source_fragment_index"]])
+        assert ordinal == 5
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "The actual reservation result is now saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = {"evaluator_control": control} if interrupt_save else {}
+    result = message(root, **args)
+    if interrupt_save:
+        assert result["status"] == "UNKNOWN" and len(result["records"]) == 1
+        assert result.get("final_answer") is None and len(wires) == 4
+        result = message(root, **args, resume=True)
+    assert result["status"] == "COMPLETED", result
+    assert result["final_answer"] == "The actual reservation result is now saved."
+    assert len(wires) == result["generation_calls"] == 5
+    assert len(result["world"]["world"]["attempts"]) == len(result["records"]) == 1
+    assert result["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert result["operation_status"]["request_completion"] == "unchecked"
+    answers = [s["content"] for s in result["sources"] if s.get("role") == "assistant"]
+    assert "Business completed and memory saved." not in answers
+
+
+def test_missing_required_memory_attempt_fails_after_one_shared_completion_feedback(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, required=True)
+        return {"role": "assistant", "content": "Saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["error"] == "FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING", result
+    assert result.get("final_answer") is None and len(wires) == 3
+    assert result["operation_status"]["semantic_memory"]["status"] == "not_committed"
+    assert not any(s.get("role") == "assistant" for s in result["sources"])
+    resumed = message(root, resume=True)
+    assert resumed["error"] == result["error"] and len(wires) == 3
+    assert resumed["generation_calls"] == 3 and not resumed["records"]
+
+
+def test_completion_feedback_cannot_reset_consumed_interpretation_repair_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": "invalid mode"}
+        if ordinal == 2:
+            return intent_reply(memory=True, required=True)
+        assert ordinal == 3
+        return {"role": "assistant", "content": "Saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    assert message(root)["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    result = message(root, resume=True)
+    assert result["error"] == "FUNCTIONAL_COMPLETION_FEEDBACK_BUDGET_EXHAUSTED"
+    assert result.get("final_answer") is None and len(wires) == 3
+    assert not result["records"]
+    assert not any(s.get("role") == "assistant" for s in result["sources"])
+    assert message(root, resume=True)["error"] == result["error"] and len(wires) == 3
+
+
+def test_unified_save_commits_before_final_and_same_path_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 0
+            fragments = [row["fragment_handle"] for row in materials(wire)["items"]
+                         if row["type"] == "fragment"]
+            return tool("save_memory", content="The local marker is blue.",
+                        fragment_handles=fragments)
+        receipt = actual_tool_receipt(wire)
+        assert receipt["ok"] and receipt["status"] == "committed"
+        summary = memory_effects(wire)
+        actual_ref = next(row["tool_call_id"] for row in reversed(wire["messages"])
+                          if row["role"] == "tool")
+        assert summary["confirmed_semantic_commit_count"] == 1
+        assert summary["confirmed_semantic_commit_receipt_refs"] == [actual_ref]
+        assert "The local marker is blue." not in json.dumps(summary)
+        return {"answer": "Saved the marker."}
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root)
+    assert first["status"] == "COMPLETED", first
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert first["operation_status"]["request_completion"] == "unchecked"
+    assert len(first["records"]) == 1 and first["records"][0]["value"]["revision"] == 1
+    assert first["snapshot_before_close"] is True
+    assert first["memory_mutation_receipts"][0]["position"] < len(first["messages"]) - 1
+    assert first["budget_after"]["generation_requests"] == len(wires) == 2
+    again = message(root, resume=True)
+    assert again["status"] == "COMPLETED", again
+    assert again["records"] == first["records"] and len(wires) == 2
+    assert again["budget_before"] == first["budget_after"] == again["budget_after"]
+    restored = messages_from_dict([{"type": row["type"], "data": row}
+                                   for row in again["messages"]])
+    assert functional.memory_effects(restored) == memory_effects(wires[-1])
+
+
+def test_unified_provider_failure_resume_keeps_budget_and_one_semantic_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> Any:
+        if ordinal == 1:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 0
+            handles = [row["fragment_handle"] for row in materials(wire)["items"]
+                       if row["type"] == "fragment"]
+            return tool("save_memory", content="The local marker is blue.",
+                        fragment_handles=handles)
+        if ordinal == 2:
+            assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
+            return httpx.ReadTimeout("mechanical response interruption")
+        assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
+        assert memory_effects(wire) == memory_effects(wires[1])
+        return {"answer": "The existing save is confirmed."}
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root)
+    assert first["status"] == "PROVIDER_ERROR", first
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert first["final_delivery"]["status"] == "unavailable"
+    assert len(first["records"]) == 1
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["records"] == first["records"]
+    assert resumed["operation_status"] == first["operation_status"]
+    assert resumed["budget_after"]["generation_requests"] == len(wires) == 3
+    assert resumed["budget_after"]["generation"]["unknown_usage"] == 1
+    bank = next((root / "banks").iterdir())
+    admission = read_json(bank / "message-admission.json")
+    assert next(iter(admission["messages"].values()))["count"] == 3
+    assert read_json(root / "queue-admission.json")["requests"] == 3
+
+
+def test_structured_outcome_does_not_turn_raw_search_or_prose_into_saving(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return tool("search_memory", query="local marker blue")
+        assert actual_tool_receipt(wire)["semantic_write_performed"] is False
+        return {"answer": "Saved the marker."}  # Deliberately false free prose.
+
+    scripted(monkeypatch, reply)
+    result = message(root)
+    status = result["operation_status"]
+    assert result["final_delivery"]["status"] == "available"
+    assert status["raw_event"]["status"] == "stored"
+    assert status["semantic_memory"] == {"status": "not_committed", "operations": []}
+    assert status["business"]["status"] == "not_executed"
+    assert status["request_completion"] == "unchecked" and not result["records"]
+
+
+def test_duplicate_host_save_has_one_effect_and_separate_no_change_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal <= 2:
+            hs = [u["fragment_handle"] for u in materials(wire)["items"] if u["type"] == "fragment"]
+            return tool("save_memory", content="The local marker is blue.", fragment_handles=hs)
+        receipt = actual_tool_receipt(wire)
+        assert receipt["status"] == "no_change" and receipt["effect"] == "none"
+        assert memory_effects(wire)["confirmed_semantic_commit_count"] == 1
+        return {"answer": "The preference is already saved."}
+
+    wires = scripted(monkeypatch, reply)
+    result = message(root)
+    assert result["status"] == "COMPLETED", result
+    assert len(wires) == 3 and len(result["records"]) == 1
+    statuses = result["operation_status"]["semantic_memory"]["operations"]
+    assert sorted(row["status"] for row in statuses) == ["committed", "no_change"]
+    assert len({row["id"] for row in statuses}) == 1
+    assert result["records"][0]["value"]["revision"] == 1
+
+
+def test_one_save_does_not_certify_other_requested_parts_or_later_reads(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            handles = [r["fragment_handle"] for r in materials(wire)["items"]
+                       if r["type"] == "fragment"]
+            return tool("save_memory", content="A is blue.", fragment_handles=handles)
+        return {"answer": "Both A and B are saved."}  # Unproven whole-request claim.
+
+    wires = scripted(monkeypatch, reply)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember A is blue and B is round.")
+    status = saved["operation_status"]
+    assert len(status["semantic_memory"]["operations"]) == 1
+    assert status["semantic_memory"]["operations"][0]["id"] == saved["records"][0]["id"]
+    assert status["status_scope"] == "listed_current_message_operations_only"
+    assert status["successful_operation_proves_unattempted_request_parts"] is False
+    assert status["request_completion"] == "unchecked"
+    read = functional.message(root, **common, message_id="read", content="What is A's color?")
+    assert read["records"] == saved["records"] and len(wires) == 3
+    assert read["operation_status"]["semantic_memory"] == {
+        "status": "not_committed", "operations": []}
+
+
+@pytest.mark.parametrize("bad", [None, "", "{", "truncated"])
+def test_native_bad_final_preserves_commit_and_resumes_without_repeating_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
+) -> None:
+    root = prepared(tmp_path, native=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            handles = [r["fragment_handle"] for r in materials(wire)["items"]
+                       if r["type"] == "fragment"]
+            return {"role": "assistant", "content": None, "tool_calls": [{
+                "type": "function", "id": "actual-native-save", "function": {
+                    "name": "save_memory", "arguments": json.dumps({
+                        "content": "The local marker is blue.", "fragment_handles": handles})}}]}
+        if ordinal == 2:
+            return {"role": "assistant", "content": None if bad == "truncated" else bad,
+                    "_test_finish_reason": "length" if bad == "truncated" else "stop",
+                    "reasoning_content": "REASONING_MUST_NOT_BECOME_FINAL"}
+        assert not wire.get("tools")  # Answer-only recovery cannot execute a tool.
+        return {"role": "assistant", "content": "The existing save is confirmed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED", first
+    assert first["error_category"] == (
+        "provider_protocol" if bad in {None, "truncated"} else "final_delivery")
+    assert first["final_delivery"]["status"] == "unavailable"
+    assert first.get("final_answer") != "REASONING_MUST_NOT_BECOME_FINAL"
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert len(first["records"]) == 1 and first["records"][0]["value"]["revision"] == 1
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["final_delivery"]["status"] == "available"
+    assert resumed["records"] == first["records"] and len(wires) == 3
+    assert resumed["operation_status"] == first["operation_status"]
+    again = message(root, resume=True)
+    assert again["final_answer"] == resumed["final_answer"] and len(wires) == 3
+
+
+def test_final_text_recovery_uses_the_single_durable_format_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {"role": "assistant", "content": "{"},
+                     native=True)
+    first = message(root)
+    assert first["status"] == "FAILED"
+    second = message(root, resume=True)
+    assert second["status"] == "FAILED" and len(wires) == 2
+    third = message(root, resume=True)
+    assert third["status"] == "FAILED" and len(wires) == 2
+    assert third["error"] == "FUNCTIONAL_FINAL_ANSWER_REPAIR_BUDGET_EXHAUSTED"
+    assert third["operation_status"]["semantic_memory"]["status"] == "not_committed"
+
+
+@pytest.mark.parametrize("bad", [None, "{", "truncated"])
+def test_answer_recovery_preserves_real_business_and_memory_commits(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str | None,
+) -> None:
+    root = prepared(tmp_path, native=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            name, args = "reserve_and_label", {
+                "item_key": "local parcel", "quantity": 1, "destination": "local", "packing": "box"}
+        elif ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            name, args = "save_memory", {
+                "content": "The local parcel was reserved and labeled.",
+                "fragment_handles": [r["fragment_handle"]
+                                     for r in receipt["source_fragment_index"]]}
+        elif ordinal == 3:
+            return {"role": "assistant", "content": None if bad == "truncated" else bad,
+                    "_test_finish_reason": "length" if bad == "truncated" else "stop"}
+        else:
+            assert ordinal == 4 and not wire.get("tools")
+            return {"role": "assistant", "content": "The reservation and record are confirmed."}
+        return {"role": "assistant", "content": None, "tool_calls": [{
+            "type": "function", "id": "call-" + str(ordinal), "function": {
+                "name": name, "arguments": json.dumps(args)}}]}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED", first
+    assert first["operation_status"]["business"]["status"] == "completed"
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert resumed["records"] == first["records"]
+    assert resumed["world"]["world"] == first["world"]["world"]
+    assert len(resumed["world"]["world"]["attempts"]) == 1
+    assert resumed["operation_status"] == first["operation_status"]
+    assert len(wires) == 4
+
+
+@pytest.mark.parametrize("bad", ["none", "empty", "tools", "transport", "interruption"])
+def test_readonly_response_is_durable_bounded_and_preserves_actual_partial_effects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call("reserve_and_label", "reserve", item_key="partial item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call("save_memory", "save", content="Reservation done, label failed.",
+                fragment_handles=[r["fragment_handle"] for r in receipt["source_fragment_index"]])
+        if ordinal == 3:
+            return {"role": "assistant", "content": "Saved."}
+        assert ordinal in {4, 5}
+        assert not wire.get("tools") and wire.get("tool_choice", "none") == "none"
+        assert [m["role"] for m in wire["messages"]] == ["system", "user"]
+        evidence = json.loads(wire["messages"][1]["content"])
+        assert evidence["delivered_material"]["schema"] == "functional_material_v1"
+        assert "Saved." not in wire["messages"][1]["content"]
+        assert any(e.get("name") == "reserve_and_label" for e in evidence["actual_tool_events"])
+        assert '"status": "partial"' in wire["messages"][0]["content"]
+        if ordinal == 4 and bad == "empty":
+            return {"role": "assistant", "content": "{"}
+        if ordinal == 4 and bad == "tools":
+            return native_call("reserve_and_label", "forbidden", item_key="another item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 4 and bad == "transport":
+            return {"role": "assistant", "content": None, "_test_finish_reason": "length"}
+        return {"role": "assistant", "content": "Reserved; label failed. Partial result saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = {"initial_world": {"label_available": False}}
+    if bad == "interruption":
+        args["evaluator_control"] = {"one_shot_fault": {
+            "message_index": 0, "boundary": "W3", "target_operation": "save_memory",
+            "occurrence": 1}}
+    result = message(root, **args)
+    if bad != "none":
+        assert result["status"] != "COMPLETED" and result.get("final_answer") is None
+        assert result["operation_status"]["business"]["status"] == "partial"
+        result = message(root, **args, resume=True)
+    assert result["status"] == "COMPLETED", result
+    assert result["execution_candidate_answer"] == "Saved."
+    assert result["final_answer"] == "Reserved; label failed. Partial result saved."
+    assert len(result["world"]["world"]["attempts"]) == len(result["records"]) == 1
+    assert all(s["content"] != "Saved." for s in result["sources"] if s["role"] == "assistant")
+    calls = len(wires)
+    resumed = message(root, **args, resume=True)
+    assert resumed["status"] == "COMPLETED", resumed
+    assert len(wires) == calls == (4 if bad in {"none", "interruption"} else 5)
+    assert resumed["world"]["world"] == result["world"]["world"]
+
+
+def test_readonly_response_does_not_reset_exhausted_retry_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {
+        "role": "assistant", "content": "Execution draft." if ordinal == 1 else "{"}, native=True)
+    first = message(root)
+    assert first["status"] == "FAILED" and len(wires) == 2
+    second = message(root, resume=True)
+    assert second["status"] == "FAILED" and len(wires) == 3
+    third = message(root, resume=True)
+    assert third["status"] == "FAILED" and len(wires) == 3
+    assert third["error"] == "FUNCTIONAL_FINALIZATION_REPAIR_BUDGET_EXHAUSTED"
+
+
+def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_unknowns() -> None:
+    secret = "MECHANICAL_BODY_MUST_NOT_APPEAR_IN_EFFECTS"
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1, "content": secret}
+
+    def call(name: str, ref: str) -> AIMessage:
+        return AIMessage(content=secret, id="generation-" + ref, tool_calls=[{
+            "name": name, "id": ref, "args": {"content": secret}}])
+
+    def receipt(name: str, ref: str, value: dict[str, Any], *, error: bool = False) -> ToolMessage:
+        return ToolMessage(name=name, tool_call_id=ref, content=json.dumps(value),
+                           status="error" if error else "success")
+
+    old = [HumanMessage(content="old request"), call("save_memory", "old"),
+           receipt("save_memory", "old", committed)]
+    current = [HumanMessage(content="current request"),
+        receipt("save_memory", "unpaired", committed),
+        call("save_memory", "wrong-name"), receipt("update_memory", "wrong-name", committed),
+        call("save_memory", "pending"),
+        call("save_memory", "unknown"), receipt("save_memory", "unknown", {
+            "ok": False, "status": "outcome_unknown", "effect": "unconfirmed", "reason": secret}),
+        call("save_memory", "failed"), receipt("save_memory", "failed", committed, error=True),
+        call("search_memory", "read"), receipt("search_memory", "read", committed),
+        call("update_memory", "unchanged"), receipt("update_memory", "unchanged", {
+            "ok": True, "status": "no_change", "effect": "none"}),
+        call("forget_memory", "forget"), receipt("forget_memory", "forget", {
+            "ok": True, "status": "visibility_revoked", "effect": "visibility_only"})]
+    zero = functional.memory_effects([*old, *current])
+    assert zero["confirmed_semantic_commit_count"] == 0
+    assert zero["confirmed_semantic_commit_receipt_refs"] == []
+    assert zero["pending_mutation_call_refs"] == ["pending"]
+    assert {row["receipt_ref"] for row in zero["mutation_receipts"]} == {
+        "unknown", "failed", "unchanged", "forget"}
+    assert secret not in json.dumps(zero)
+    final = functional.memory_effects([*old, *current,
+        call("save_memory", "actual"), receipt("save_memory", "actual", committed),
+        call("update_memory", "recovered"), receipt("update_memory", "recovered", {
+            **committed, "status": "no_change", "original_status": "committed", "replayed": True})])
+    assert final["confirmed_semantic_commit_count"] == 2
+    assert final["confirmed_semantic_commit_receipt_refs"] == ["actual", "recovered"]
+    assert final["semantic_completion"] == "unchecked"
+    assert final["raw_capture_is_semantic_save"] is False
+    assert final["reads_perform_semantic_writes"] is False
+    assert secret not in json.dumps(final)
+
+
+def test_public_agent_catalog_carries_per_field_correction_selections(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal == 1:
+            return tool("save_memory", content="Distance uses miles.", scope={"project": "Alpha"},
+                        fragment_handles=[u["fragment_handle"] for u in packet["items"]
+                                          if u["type"] == "fragment"])
+        if ordinal == 3:
+            record = next(u for u in packet["items"] if u["type"] == "record")
+            correction = [u["fragment_handle"] for u in packet["items"]
+                          if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            return tool("update_memory", read_handle=record["read_handle"], changes=[{
+                "field": "content", "op": "set", "value": "Distance uses kilometers.",
+                "fragment_handles": correction}])
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"answer": "The actual memory change is confirmed."}
+
+    wires = scripted(monkeypatch, reply)
+    common = {"bank": "b", "owner": "alice", "session": "s"}
+    saved = functional.message(root, **common, message_id="save",
+                               content="Remember that project Alpha uses miles for distance.")
+    assert saved["status"] == "COMPLETED", saved
+    revised = functional.message(
+        root, **common, message_id="correct",
+        content="Change distance to kilometers; project Alpha is unchanged.")
+    assert revised["status"] == "COMPLETED", revised
+    assert len(wires) == 4 and len(revised["records"]) == 1
+    assert revised["records"][0]["id"] == saved["records"][0]["id"]
+    value = revised["records"][0]["value"]
+    assert value["revision"] == 2 and value["content"] == "Distance uses kilometers."
+    assert value["functional_support"]["content"]["source_refs"] == [
+        revised["capture"]["source_ref"]]
+    assert value["functional_support"]["scope.project"] == (
+        saved["records"][0]["value"]["functional_support"]["scope.project"])
+
+
+@pytest.mark.parametrize("workflow,document_body", [("reservation", "local body"),
+                        ("document", "local body"), ("document", "界" * 600)])
+@pytest.mark.parametrize('inline_fragments,receipt_units', [(False, False), (True, False),
+                                                          (True, True)])
+def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, workflow: str,
+    inline_fragments: bool,
+    receipt_units: bool,
+    document_body: str,
+) -> None:
+    root = prepared(tmp_path, inline_fragments=inline_fragments, receipt_units=receipt_units)
+
+    def evidence(result: dict[str, Any]) -> list[str]:
+        fragments = result['source_fragment_index']
+        assert all(('content' in row) == inline_fragments for row in fragments)
+        if inline_fragments:
+            body = ''.join(row['content'] for row in fragments)
+            assert json.loads(body) == result['receipt']
+            assert all(row['content'] == body[row['start']:row['end']] for row in fragments)
+            assert all(row['role'] == 'tool' and row['semantic_support'] == 'unchecked'
+                       for row in fragments)
+            assert 'not what actually happened' in result['memory_evidence_selection']
+            if receipt_units and len(body) <= 4096:
+                assert len(fragments) == 1
+                assert fragments[0]['start'] == 0 and fragments[0]['end'] == len(body)
+            elif receipt_units:
+                assert len(fragments) > 1
+                assert all(len(row['content']) <= 1200 for row in fragments)
+        return [row['fragment_handle'] for row in fragments]
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if workflow == "document":
+            if ordinal == 1:
+                return tool("create_or_update_draft", title="mechanical draft",
+                            content=document_body, document_version=0, content_digest="")
+            if ordinal in {2, 3}:
+                observed = actual_tool_receipt(wire)["receipt"]
+                bound = {k: observed[k] for k in ("title", "document_version", "content_digest")}
+                if ordinal == 2:
+                    return tool("approve_document_version", **bound)
+                return tool("publish_approved_document", **bound, audience="local audience")
+            if ordinal == 4:
+                result = actual_tool_receipt(wire)
+                assert result["receipt"]["publication_status"] == "published"
+                return tool("save_memory", content="The draft was approved and published locally.",
+                            fragment_handles=evidence(result))
+            assert actual_tool_receipt(wire)["status"] == "committed"
+            return {"answer": "The actual local publication is recorded."}
+        if ordinal == 1:
+            return tool("reserve_and_label", item_key="mechanical item", quantity=1,
+                        destination="local", packing="box")
+        if ordinal == 2:
+            result = actual_tool_receipt(wire)
+            assert result["receipt"]["label_status"] == "created"
+            return tool("save_memory", content="The mechanical item was reserved and labeled.",
+                        fragment_handles=evidence(result))
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"answer": "The actual reservation and label are recorded."}
+
+    wires = scripted(monkeypatch, reply)
+    actual = message(root, workflow=workflow)
+    assert actual["status"] == "COMPLETED", actual
+    world = actual["world"]["world"]
+    if workflow == "document":
+        assert len(world["documents"][0]["publications"]) == 1 and len(wires) == 5
+    else:
+        assert len(world["attempts"]) == 1 and len(wires) == 3
+    value = actual["records"][0]["value"]
+    assert value["basis"] == "tool_observation"
+    assert value["source_ref"] != actual["capture"]["source_ref"]
+    assert actual["operation_status"]["business"]["status"] == "completed"
+    assert actual["operation_status"]["semantic_memory"]["status"] == "committed"
+
+
+def test_disabled_profile_blocks_before_provider_or_budget_mutation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    before = read_json(Path(functional.frozen(root)["config"]["budget_path"]))
+    wires = scripted(monkeypatch, lambda wire, ordinal: {"answer": "unreachable"})
+    write_json(root / "profile-state.json", {"disabled": True, "persistent_data_deleted": False})
+    with pytest.raises(ValueError, match="FUNCTIONAL_PROFILE_DISABLED"):
+        message(root)
+    assert wires == [] and not (root / "queue-admission.json").exists()
+    assert read_json(Path(functional.frozen(root)["config"]["budget_path"])) == before
+
+
+def test_queue_exhaustion_preserves_committed_memory_and_does_not_reset_on_resume(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, queue_requests=1)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert ordinal == 1
+        handles = [row["fragment_handle"] for row in materials(wire)["items"]
+                   if row["type"] == "fragment"]
+        return tool("save_memory", content="The local marker is blue.", fragment_handles=handles)
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root)
+    assert first["status"] == "BUDGET_EXHAUSTED", first
+    assert len(first["records"]) == 1 and len(wires) == 1
+    resumed = message(root, resume=True)
+    assert resumed["status"] == "BUDGET_EXHAUSTED", resumed
+    assert first["records"] == resumed["records"] and len(wires) == 1
+    assert resumed["budget_after"]["generation_requests"] == 1
+    assert read_json(root / "queue-admission.json")["requests"] == 1
+
+
+@pytest.mark.parametrize("boundary,happened", [
+    ("after_journal_intent_before_native", False),
+    ("after_native_before_journal_complete", True),
+])
+def test_unified_unknown_recovery_uses_actual_public_discovery_without_hidden_controls(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, boundary: str, happened: bool,
+) -> None:
+    root = prepared(tmp_path)
+    control = {"one_shot_fault": {"message_index": 0, "boundary": boundary,
+                                  "target_operation": "reserve_and_label", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert boundary not in json.dumps(wire)
+        assert "one_shot_fault" not in json.dumps(wire)
+        if ordinal == 1:
+            return tool("reserve_and_label", item_key="mechanical item", quantity=1,
+                        destination="local", packing="box")
+        if ordinal == 3:
+            assert actual_tool_receipt(wire)["status"] == "committed"
+            return {"answer": "The actual discovered state is recorded."}
+        observed = actual_tool_receipt(wire)
+        assert observed["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+        assert observed["original_receipt"] is None
+        assert observed["observed_effect"] == ("confirmed" if happened else "none")
+        query_source = observed["query_source"]
+        assert query_source["origin"] == "get_reservation"
+        assert all(row["source_ref"] == query_source["source_ref"]
+                   for row in query_source["source_fragment_index"])
+        return tool("save_memory", content=("The item is reserved and labeled." if happened else
+                                              "Public lookup found no reservation for the item."),
+                    fragment_handles=[row["fragment_handle"]
+                                      for row in query_source["source_fragment_index"]])
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root, evaluator_control=control)
+    assert first["status"] == "UNKNOWN", first
+    assert first["evaluator_control_state"]["fault"]["applied"] is True
+    assert len(first["sources"]) == 1
+    assert first["operation_status"]["business"]["status"] == "unknown"
+    final = message(root, evaluator_control=control, resume=True)
+    assert final["status"] == "COMPLETED", final
+    assert len(wires) == 3
+
+    assert len(final["records"]) == 1
+    assert final["records"][0]["value"]["basis"] == "tool_observation"
+    assert len(final["world"]["world"]["attempts"]) == int(happened)
+    pending = [row for row in final["world"]["journal"].values()
+               if row.get("name") == "reserve_and_label"]
+    assert len(pending) == 1 and pending[0]["status"] == "pending"
+    assert "result" not in pending[0]
+    discoveries = [row for row in final["sources"] if row["origin"] == "get_reservation"]
+    assert len(discoveries) == 1
+    status = final["operation_status"]["business"]
+    assert status["status"] == ("completed" if happened else "no_effect")
+    assert len(status["operations"]) == 1 and len(status["observations"]) == 1
+    assert status["operations"][0]["effect"] == "unknown"
+    assert status["operations"][0]["execution_receipt_status"] == "pending"
+    assert status["operations"][0]["observed_effect"] == ("confirmed" if happened else "none")
+
+
+@pytest.mark.parametrize('independent', [False, True])
+def test_continuation_resolves_only_missing_reference_from_bounded_material_and_replays(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, independent: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True,
+                    independent_capabilities=independent)
+    current = 'Continue the previously requested work for prior item only if unfinished.'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, 8}:
+            params = wire['tools'][0]['function']['parameters']
+            assert 'business_action_quote' not in params['properties']
+            text = wire['messages'][-1]['content']
+            if ordinal == 4:
+                assert text == current and 'original place' not in text
+            return native_call('classify_current_request', f'intent-{ordinal}',
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request=('perform' if ordinal == 1 else
+                                         'continue_if_unfinished' if ordinal == 4 else 'none'),
+                business_operations=['reserve_and_label'] if ordinal == 1 else [])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='prior item', quantity=2,
+                               destination='original place', packing='box')
+        if ordinal == 5:
+            assert len(wire['tools']) == 1
+            assert wire['tools'][0]['function']['name'] == 'resolve_continuation_operations'
+            frame = json.loads(wire['messages'][-1]['content'])
+            assert frame['current_request'] == current
+            assert not frame['accepted_current_mode']['allow_memory_maintenance']
+            material = frame['archived_reference_material']
+            assert 'prior item' in json.dumps(material)
+            assert 'original place' in json.dumps(material)
+            assert 'world' not in frame and 'checkpoint' not in frame
+            return native_call('resolve_continuation_operations', 'resolve',
+                business_operations=['reserve_and_label', 'complete_label'])
+        if ordinal in {6, 9}:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert 'save_memory' not in names and 'forget_memory' not in names
+            if ordinal == 9:
+                assert not names & functional.BUSINESS_MUTATIONS
+            return native_call('get_reservation', f'query-{ordinal}', item_key='prior item')
+        assert ordinal in {3, 7, 10}
+        return {'role': 'assistant', 'content': 'Observed the actual status.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='reference-bank', owner='alice', workflow='reservation')
+    first = functional.message(root, **args, session='s1', message_id='first',
+        content='Reserve two of prior item for original place, packed in a box, with a label.')
+    assert first['status'] == 'COMPLETED', first
+    second_args = dict(**args, session='s2', message_id='next', content=current)
+    second = functional.message(root, **second_args)
+    assert second['status'] == 'COMPLETED', second
+    assert second['request_mode']['reference_resolution']['attempts'] == 1
+    assert second['request_mode']['business_operations'] == ['reserve_and_label', 'complete_label']
+    assert second['operation_status']['business']['status'] == 'not_executed'
+    resumed = functional.message(root, **second_args, resume=True)
+    assert resumed['status'] == 'COMPLETED' and len(wires) == 7
+    pure = functional.message(root, **args, session='s3', message_id='query-only',
+                              content='Only query the current status; do not act.')
+    assert pure['status'] == 'COMPLETED' and len(wires) == 10
+    assert 'reference_resolution' not in pure['request_mode']
+    assert len(pure['world']['world']['attempts']) == 1
+
+
+def test_continuation_resolution_cannot_grant_other_permissions_or_reset_format_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 2}:
+            return native_call('classify_current_request', f'intent-{ordinal}',
+                memory_write_request='INVALID' if ordinal == 1 else 'none',
+                allow_forgetting=False, business_action_request='continue_if_unfinished',
+                business_operations=[])
+        assert ordinal == 3
+        return native_call('resolve_continuation_operations', 'bad-resolution',
+                           business_operations=['reserve_and_label'], allow_forgetting=True)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='continue',
+                content='Continue the earlier work if needed.')
+    first = functional.message(root, **args)
+    assert first['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+    second = functional.message(root, **args, resume=True)
+    assert second['error'] == 'FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID'
+    third = functional.message(root, **args, resume=True)
+    assert third['error'] == 'FUNCTIONAL_CONTINUATION_RESOLUTION_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == 3
+    assert not third['world']['world']['attempts'] and not third['records']
+
+
+def test_multiple_forgets_remove_intervening_revoked_tool_body_from_next_generation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    seen: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal in {1, 3}:
+            content = "MECHANICAL_SECRET_A" if ordinal == 1 else "MECHANICAL_SECRET_B"
+            if ordinal == 3:
+                # B's actual user input arrived before this retrieval of A.
+                # Co-exposure is not provenance: only B's own source is selected
+                # for saving B, and forgetting A must retain this independent fact.
+                assert "MECHANICAL_SECRET_A" in json.dumps(packet)
+            current = [row for row in packet["items"] if row["type"] == "fragment"
+                       and content in row["content"]]
+            return tool("save_memory", content="marker " + content,
+                        fragment_handles=[row["fragment_handle"] for row in current])
+        if ordinal in {2, 4}:
+            return {"answer": "Saved."}
+        if ordinal == 5:
+            records = {row["content"].split()[-1]: row for row in packet["items"]
+                       if row["type"] == "record"}
+            seen["second_id"] = records["MECHANICAL_SECRET_B"]["record_id"]
+            return tool("forget_memory", read_handle=records["MECHANICAL_SECRET_A"]["read_handle"])
+        if ordinal == 6:
+            return tool("read_memory", record_id=seen["second_id"])
+        if ordinal == 7:
+            actual = actual_tool_receipt(wire)
+            assert actual.get("ok"), "Forgetting A must preserve independently supplied B"
+            record = next(row for row in actual["items"] if row["type"] == "record")
+            assert record["content"] == "marker MECHANICAL_SECRET_B"
+            return tool("forget_memory", read_handle=record["read_handle"])
+        seen["post_forget_wire"] = json.dumps(wire, ensure_ascii=False)
+        return {"answer": "Both records are forgotten."}
+
+    wires = scripted(monkeypatch, reply)
+    for index, content in enumerate(("Remember marker MECHANICAL_SECRET_A.",
+                                     "Remember marker MECHANICAL_SECRET_B.",
+                                     "Forget both marker records.")):
+        actual = functional.message(root, bank="mechanical-bank", owner="alice", session="session",
+                                    message_id="m" + str(index), content=content)
+        assert actual["status"] == "COMPLETED", actual
+    assert len(wires) == 8
+    assert "MECHANICAL_SECRET_A" not in seen["post_forget_wire"]
+    assert "MECHANICAL_SECRET_B" not in seen["post_forget_wire"]
+
+
+def test_pending_public_read_resumes_with_a_distinct_real_query(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    control = {"one_shot_fault": {"message_index": 0,
+        "boundary": "after_native_before_journal_complete",
+        "target_operation": "get_reservation", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return tool("get_reservation", item_key="mechanical item")
+        discovery = actual_tool_receipt(wire)
+        assert discovery["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+        assert discovery["original_receipt"] is None and discovery["observed_effect"] == "none"
+        assert discovery["effect_source"] == "native_public_read_contract_no_business_mutation"
+        assert discovery["query_receipt"]["status"] == "not_found"
+        return {"answer": "The fresh public query found no item."}
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root, evaluator_control=control)
+    assert first["status"] == "UNKNOWN"
+    final = message(root, evaluator_control=control, resume=True)
+    assert final["status"] == "COMPLETED", final
+    assert len(wires) == 2 and final["world"]["world"]["attempts"] == []
+    calls = [row for row in final["world"]["journal"].values()
+             if row.get("name") == "get_reservation"]
+    assert sorted(row["status"] for row in calls) == ["complete", "pending"]
+
+
+def test_forget_w3_commit_reopens_same_input_without_restoring_visibility(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    control = {"one_shot_fault": {"message_index": 1, "boundary": "W3",
+        "target_operation": "forget_memory", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            fragments = [row["fragment_handle"] for row in materials(wire)["items"]
+                         if row["type"] == "fragment"]
+            return tool("save_memory", content="marker MECHANICAL_FORGET_RESUME",
+                        fragment_handles=fragments)
+        if ordinal == 2:
+            return {"answer": "Saved."}
+        if ordinal == 3:
+            record = next(row for row in materials(wire)["items"] if row["type"] == "record")
+            return tool("forget_memory", read_handle=record["read_handle"])
+        assert actual_tool_receipt(wire)["status"] == "visibility_revoked"
+        assert "MECHANICAL_FORGET_RESUME" not in json.dumps(wire)
+        assert not any(row["type"] == "fragment" for row in materials(wire)["items"])
+        return {"answer": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply)
+    first = functional.message(root, bank="mechanical-bank", owner="alice", session="session",
+        message_id="save", content="Remember marker MECHANICAL_FORGET_RESUME.")
+    assert first["status"] == "COMPLETED"
+    args = {"bank": "mechanical-bank", "owner": "alice", "session": "session",
+            "message_id": "forget", "content": "Forget the marker.",
+            "evaluator_control": control, "message_index": 1}
+    interrupted = functional.message(root, **args)
+    assert interrupted["status"] == "UNKNOWN"
+    assert interrupted["error_type"] == "InjectedInterruption"
+    assert len(wires) == 3
+    recovered = functional.message(root, **args, resume=True)
+    assert recovered["status"] == "COMPLETED", recovered
+    assert len(wires) == 4
+    assert len(recovered["records"]) == 1
+    assert recovered["records"][0]["status"] == "visibility_revoked"
+
+
+def test_forget_trims_other_arguments_from_the_same_tool_call_batch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path)
+    seen: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal == 1:
+            return tool("save_memory", content="marker MECHANICAL_SECRET_A", fragment_handles=[
+                row["fragment_handle"] for row in packet["items"] if row["type"] == "fragment"])
+        if ordinal == 2:
+            return {"answer": "Saved."}
+        if ordinal == 3:
+            record = next(row for row in packet["items"] if row["type"] == "record")
+            return {"calls": [
+                {"name": "search_memory", "arguments": {"query": "MECHANICAL_SECRET_A"}},
+                {"name": "forget_memory", "arguments": {"read_handle": record["read_handle"]}},
+            ]}
+        seen["post_forget_wire"] = json.dumps(wire, ensure_ascii=False)
+        return {"answer": "Forgotten."}
+
+    wires = scripted(monkeypatch, reply)
+    for index, content in enumerate(("Remember marker MECHANICAL_SECRET_A.", "Forget the marker.")):
+        actual = functional.message(root, bank="mechanical-bank", owner="alice", session="session",
+                                    message_id="m" + str(index), content=content)
+        assert actual["status"] == "COMPLETED", actual
+    assert len(wires) == 4
+    assert all(row["status"] == "visibility_revoked" and "value" not in row
+               for row in actual["records"])
+    assert "MECHANICAL_SECRET_A" not in seen["post_forget_wire"]
+
+
+@pytest.mark.parametrize('action', ['none', 'perform', 'continue_if_unfinished'])
+def test_action_declaration_binds_current_clause_and_preserves_catalog_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, action: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            current = wire['messages'][-1]['content']
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request=action,
+                business_action_quote='' if action == 'none' else current)
+        if ordinal == 2:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert ('complete_label' in names) == (action != 'none')
+            assert 'save_memory' not in names
+            return native_call('get_reservation', 'query', item_key='empty shelf')
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'Fabricated reservation and memory saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'COMPLETED', result
+    assert result['request_mode']['business_action_request'] == action
+    assert result['request_mode']['semantic_correctness'] == 'unchecked'
+    assert result['finalization']['model_generation'] is False
+    assert 'Fabricated' not in result['final_answer']
+    assert '未查到对象' in result['final_answer']
+    assert '本轮语义记忆: 未提交' in result['final_answer']
+    assert not result['world']['world']['reservations'] and not result['records']
+    reopened = message(root, resume=True)
+    assert reopened['final_answer'] == result['final_answer'] and len(wires) == 3
+
+
+@pytest.mark.parametrize('action,quote', [('continue_if_unfinished', 'not in current input'),
+                                          ('none', 'unrequested permission'), ('bad', '')])
+def test_action_declaration_rejects_unbound_or_invalid_permission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, action: str, quote: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        'classify_current_request', 'intent', memory_write_request='none', allow_forgetting=False,
+        business_action_request=action, business_action_quote=quote), native=True)
+    for resume in [False, True]:
+        result = message(root, resume=resume)
+        assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+        assert not result['world']['world']['attempts']
+    assert message(root, resume=True)['error'] == 'FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == 2
+
+
+@pytest.mark.parametrize('interrupted', [False, True])
+def test_receipt_response_preserves_partial_and_save_effect_across_w3(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key='partial item',
+                               quantity=2, destination='local', packing='box')
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call('save_memory', 'save', content='Reservation done; label failed.',
+                fragment_handles=[r['fragment_handle'] for r in receipt['source_fragment_index']])
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'All business phases succeeded.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    kwargs = {'initial_world': {'label_available': False}}
+    if interrupted:
+        kwargs['evaluator_control'] = {'one_shot_fault': {
+            'message_index': 0, 'boundary': 'W3', 'target_operation': 'save_memory',
+            'occurrence': 1}}
+    first = message(root, **kwargs)
+    if interrupted:
+        assert first['status'] == 'UNKNOWN' and not first.get('final_answer')
+        first = message(root, **kwargs, resume=True)
+    assert first['status'] == 'COMPLETED', first
+    assert '预订成功, 标签制作失败' in first['final_answer']
+    assert '本轮语义记忆: 已提交' in first['final_answer']
+    assert 'All business phases succeeded' not in first['final_answer']
+    assert len(first['records']) == len(first['world']['world']['attempts']) == 1
+    assert message(root, **kwargs, resume=True)['final_answer'] == first['final_answer']
+    assert len(wires) == 3
+
+
+def test_exhausted_reads_end_execution_with_effects_and_cannot_reset_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key='retained item',
+                               quantity=1, destination='local', packing='box')
+        assert ordinal <= 5  # Three actual additional reads; fourth is rejected.
+        return native_call('search_memory', 'read-' + str(ordinal), query='retained item')
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == 'FAILED' and first['error'] == 'FUNCTIONAL_READ_LIMIT_EXHAUSTED'
+    assert first['final_delivery']['status'] == 'available'
+    assert first['operation_status']['business']['status'] == 'completed'
+    assert first['generation_calls'] == 5
+    assert '追加读取额度已用完' in first['final_answer']
+    assert first['operation_status']['semantic_memory']['status'] == 'not_committed'
+    second = message(root, resume=True)
+    assert second['status'] == 'FAILED' and second['final_answer'] == first['final_answer']
+    assert second['world']['world'] == first['world']['world'] and len(wires) == 5
+
+
+@pytest.mark.parametrize('publication_available', [True, False])
+def test_document_receipt_response_reports_distinct_draft_approval_and_publication(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, publication_available: bool,
+) -> None:
+    from milai_lab.application.document_publication import DOCUMENT_NAMES
+    from milai_lab.application.tools import BUSINESS_NAMES
+    from milai_lab.runners.functional_response import _TOOLS
+
+    assert set(_TOOLS) == set(DOCUMENT_NAMES) | set(BUSINESS_NAMES)
+    root = prepared(tmp_path, native=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('create_or_update_draft', 'draft', title='Local guide',
+                               content='Use the side entrance.')
+        if ordinal in {2, 3}:
+            receipt = actual_tool_receipt(wire)['receipt']
+            args = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+            if ordinal == 3:
+                args['audience'] = 'local review team'
+            return native_call('approve_document_version' if ordinal == 2
+                               else 'publish_approved_document', 'phase-' + str(ordinal), **args)
+        assert ordinal == 4
+        return {'role': 'assistant', 'content': 'Invented global distribution.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root, workflow='document',
+                     initial_world={'publication_available': publication_available})
+    assert result['status'] == 'COMPLETED', result
+    assert '草稿已创建' in result['final_answer'] and '文档已批准' in result['final_answer']
+    assert ('文档已发布到本地沙箱' in result['final_answer']) == publication_available
+    assert ('发布服务不可用' in result['final_answer']) != publication_available
+    assert 'Invented' not in result['final_answer'] and len(wires) == 4
+    assert result['operation_status']['business']['status'] == (
+        'completed' if publication_available else 'partial')
+
+
+@pytest.mark.parametrize('failed_response', [False, True])
+def test_receipt_response_cannot_replay_revoked_business_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    failed_response: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True, receipt_response=True,
+                    failure_receipts=failed_response)
+    private_item = 'RECEIPT_PRIVATE_ITEM'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'reserve', item_key=private_item,
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            return native_call('save_memory', 'save', content='Reserved ' + private_item,
+                fragment_handles=[r['fragment_handle'] for r in receipt['source_fragment_index']])
+        if ordinal == 3:
+            if failed_response:
+                return {'role': 'assistant', 'content': None}
+            return {'role': 'assistant', 'content': 'Execution done.'}
+        if ordinal == 4:
+            record = next(row for row in materials(wire)['items'] if row['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert ordinal in {5, 6}
+        assert private_item not in json.dumps(wire)
+        return {'role': 'assistant', 'content': 'Forgotten within the requested scope.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == ('FAILED' if failed_response else 'COMPLETED')
+    assert private_item in first['final_answer']
+    forgotten = functional.message(root, bank='mechanical-bank', owner='alice', session='session',
+                                   message_id='forget', content='Forget the saved item.')
+    assert forgotten['status'] == 'COMPLETED', forgotten
+    reopened = message(root, resume=True)
+    assert reopened['status'] == 'VISIBILITY_REVOKED' and reopened['final_answer'] is None
+    assert private_item not in json.dumps(reopened) and len(wires) == 6
+
+
+@pytest.mark.parametrize('write_request', ['new_assertion', 'explicit', 'none'])
+def test_declared_write_completion_requires_attempt_without_business_replay(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, write_request: str,
+) -> None:
+    root = prepared(tmp_path, native=True, action_mode_declaration=True,
+                    receipt_response=True, declared_writes=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'intent',
+                memory_write_request=write_request, allow_forgetting=False,
+                business_action_request='perform',
+                business_action_quote=wire['messages'][-1]['content'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='one real item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Execution draft omitted saving.'}
+        assert write_request != 'none'
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'reserve_and_label' not in names and 'forget_memory' not in names
+        assert 'save_memory' in names
+        if ordinal == 4:
+            assert 'withheld' in wire['messages'][0]['content']
+            event = next(json.loads(m['content']) for m in wire['messages']
+                         if m['role'] == 'tool' and 'source_fragment_index' in m['content'])
+            return native_call('save_memory', 'save', content='Reservation and label completed.',
+                fragment_handles=[u['fragment_handle'] for u in event['source_fragment_index']])
+        assert ordinal == 5
+        return {'role': 'assistant', 'content': 'Actual receipt received.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first['status'] == 'COMPLETED', first
+    assert len(first['records']) == (0 if write_request == 'none' else 1)
+    assert len(first['world']['world']['attempts']) == 1
+    before = len(wires)
+    second = message(root, resume=True)
+    assert second['status'] == 'COMPLETED' and second['final_answer'] == first['final_answer']
+    assert len(wires) == before == (3 if write_request == 'none' else 5)
+
+
+def test_publish_only_permission_prevents_status_summary_from_editing_document(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request='perform' if ordinal == 1
+                else 'continue_if_unfinished',
+                business_action_quote=wire['messages'][-1]['content'],
+                business_operations=['create_or_update_draft', 'approve_document_version']
+                if ordinal == 1 else ['publish_approved_document'])
+        if ordinal == 2:
+            return native_call('create_or_update_draft', 'draft', title='Stable document',
+                               content='Keep this original body.')
+        if ordinal == 3:
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('approve_document_version', 'approve', **{
+                k: receipt[k] for k in ['title', 'document_version', 'content_digest']})
+        if ordinal in {4, 9}:
+            return {'role': 'assistant', 'content': 'Actual operations reported.'}
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'publish_approved_document' in names and 'get_document_status' in names
+        assert not {'create_or_update_draft', 'approve_document_version', 'save_memory'} & names
+        if ordinal == 6:
+            return native_call('get_document_status', 'query', title='Stable document')
+        receipt = actual_tool_receipt(wire)['receipt']
+        bound = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+        if ordinal == 7:
+            return native_call('publish_approved_document', 'publish',
+                               audience='local group', **bound)
+        assert ordinal == 8
+        return native_call('create_or_update_draft', 'forbidden-edit',
+                           content='Wrong status summary instead of document body.', **bound)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {'bank': 'b', 'owner': 'alice', 'session': 's', 'workflow': 'document'}
+    first = functional.message(root, **common, message_id='draft', content='Create and approve.')
+    assert first['status'] == 'COMPLETED', first
+    second = functional.message(root, **common, message_id='publish', content='Only publish now.')
+    assert second['status'] == 'FAILED' and second['error'] == 'VLLM_CHAT_UNKNOWN_TOOL'
+    assert second['operation_status']['business']['status'] == 'completed'
+    world = second['world']['world']
+    assert len(world['documents']) == 1 and len(world['documents'][0]['versions']) == 1
+    assert world['documents'][0]['content'] == 'Keep this original body.'
+    assert world['documents'][0]['publication_status'] == 'published'
+    recovered = functional.message(root, **common, message_id='publish',
+                                   content='Only publish now.', resume=True)
+    assert recovered['status'] == 'COMPLETED', recovered
+    assert recovered['world']['world'] == world and len(wires) == 9
+    assert 'Wrong status summary' not in recovered['final_answer']
+
+
+@pytest.mark.parametrize('operations', [[], ['publish_approved_document'] * 2,
+                                       ['save_memory'], ['unknown_operation']])
+def test_operation_declaration_rejects_inconsistent_or_unknown_permissions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, operations: list[str],
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: native_call(
+        'classify_current_request', 'intent', memory_write_request='none', allow_forgetting=False,
+        business_action_request='perform', business_action_quote=wire['messages'][-1]['content'],
+        business_operations=operations), native=True)
+    result = message(root)
+    assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID'
+    assert not result['world']['world']['attempts'] and len(wires) == 1
+
+
+@pytest.mark.parametrize('quote', ['', 'do not publish', 'Only view; do not publish.'])
+def test_readonly_declaration_retains_bound_negative_quote_without_granting_operations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, quote: str,
+) -> None:
+    root = prepared(tmp_path, native=True, operation_mode_declaration=True, receipt_response=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'intent', memory_write_request='none',
+                allow_forgetting=False, business_action_request='none', business_action_quote=quote,
+                business_operations=[])
+        names = {t['function']['name'] for t in wire['tools']}
+        assert not names & functional.BUSINESS_MUTATIONS
+        assert 'get_document_status' in names and 'save_memory' not in names
+        if ordinal == 2:
+            return native_call('get_document_status', 'query', title='read-only object')
+        assert ordinal == 3
+        return {'role': 'assistant', 'content': 'Read-only result.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', workflow='document',
+                message_id='query', content='Only view; do not publish.')
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result
+    assert result['request_mode']['business_action_quote'] == quote
+    assert result['request_mode']['business_operations'] == []
+    assert not result['request_mode']['allow_business_mutation']
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    resumed = functional.message(root, **args, resume=True)
+    assert resumed['status'] == 'COMPLETED' and resumed['request_mode'] == result['request_mode']
+    assert len(wires) == 3
+
+
+@pytest.mark.parametrize('bad', ['null', 'truncated', 'unknown_tool'])
+def test_protocol_failure_delivers_receipts_without_repair_or_repeating_effects(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, bad: str,
+) -> None:
+    root = prepared(tmp_path, native=True, receipt_response=True, failure_receipts=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('reserve_and_label', 'actual', item_key='receipt item',
+                               quantity=2, destination='local', packing='box')
+        assert ordinal == 2
+        if bad == 'unknown_tool':
+            return native_call('invented_tool', 'forbidden', value='MUST_NOT_EXECUTE')
+        return {'role': 'assistant', 'content': None,
+                '_test_finish_reason': 'length' if bad == 'truncated' else 'stop',
+                'reasoning_content': 'REASONING_MUST_NOT_BECOME_FINAL'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED' and result['error_category'] == 'provider_protocol'
+    assert result['final_delivery']['status'] == 'available'
+    assert '回答协议失败' in result['final_answer'] and 'receipt item' in result['final_answer']
+    assert '本轮语义记忆: 未提交' in result['final_answer']
+    assert 'REASONING_MUST_NOT_BECOME_FINAL' not in result['final_answer']
+    assert result['operation_status']['request_completion'] == 'unchecked'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['world']['world']['attempts']) == 1 and len(wires) == 2
+    replay = message(root)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == 2
+
+
+@pytest.mark.parametrize('case', ['continue', 'readonly', 'condition_unmet', 'already_attempted',
+                                  'already_complete', 'allowance_exhausted'])
+def test_continuation_feedback_is_bounded_and_cannot_authorize_or_repeat_an_attempt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    receipt_response=True, business_feedback=True,
+                    format_allowance=0 if case == 'allowance_exhausted' else 1)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            action = 'perform' if ordinal == 1 else (
+                'none' if case == 'readonly' else 'continue_if_unfinished')
+            operations = ['reserve_and_label'] if ordinal == 1 else (
+                [] if case == 'readonly' else ['complete_label'])
+            return native_call('classify_current_request', 'mode'+str(ordinal),
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request=action, business_operations=operations)
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='feedback item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role':'assistant', 'content':'Partial reservation.'}
+        if ordinal == 5:
+            return native_call('get_reservation', 'query', item_key='feedback item')
+        if ordinal == 6 and case == 'already_attempted':
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('complete_label', 'once', reservation_id=receipt['reservation_id'])
+        if ordinal == 6 or case == 'already_attempted':
+            return {'role':'assistant', 'content':'I will continue next.'}
+        assert case != 'readonly'
+        assert 'observed_missing_stage_not_action_authorization' in wire['messages'][0]['content']
+        names = {t['function']['name'] for t in wire['tools']}
+        assert 'complete_label' in names and not names.intersection(
+            {'reserve_and_label', 'save_memory', 'update_memory', 'forget_memory'})
+        if ordinal == 7 and case == 'continue':
+            receipt = actual_tool_receipt(wire)['receipt']
+            return native_call('complete_label', 'continue-once',
+                               reservation_id=receipt['reservation_id'])
+        assert ordinal == (8 if case == 'continue' else 7)
+        return {'role':'assistant', 'content':'Current conditions prevent completion.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {'bank':'mechanical-bank','owner':'alice','session':'session'}
+    first = functional.message(root, **common, message_id='initial',
+        content='Reserve and label feedback item.',
+        initial_world={'label_available':case == 'already_complete'})
+    assert first['status'] == 'COMPLETED'
+    second_input = ('Check the current feedback item only.' if case == 'readonly' else
+                    'Check feedback item and continue its missing label if authorized.')
+    second = functional.message(root, **common, message_id='followup', content=second_input)
+    assert second['status'] == 'COMPLETED', second
+    feedbacks = list(root.glob('banks/*/*-continuation-feedback.json'))
+    assert bool(feedbacks) == (case in {'continue', 'condition_unmet'})
+    if feedbacks:
+        assert json.loads(feedbacks[0].read_text())['attempts'] == 1
+    business = second['operation_status']['business']
+    assert len(business['operations']) == int(case in {'continue','already_attempted'})
+    count = len(wires)
+    replay = functional.message(root, **common, message_id='followup', content=second_input,
+                                resume=True)
+    assert replay['final_answer'] == second['final_answer'] and len(wires) == count
+    assert len(replay['world']['world']['reservations']) == 1
+
+
+@pytest.mark.parametrize('mode', ['unknown_attempt', 'none_attempt', 'different_target',
+                                  'unpaired_query', 'missing_approval', 'eligible'])
+def test_continuation_observation_requires_current_paired_target_and_no_prior_attempt(
+    mode: str,
+) -> None:
+    from milai_lab.runners.functional_response import unattempted_continuations
+
+    query = {'name':'get_document_status','args':{'title':'bound title'},'id':'q'}
+    messages = [AIMessage(content='',tool_calls=[query]), ToolMessage(name='get_document_status',
+        tool_call_id='q', content=json.dumps({'receipt':{'status':'found','title':'bound title',
+            'approval_status':'not_approved' if mode == 'missing_approval' else 'approved',
+            'publication_status':'not_published'}}))]
+    effects = {'business':{'operations':[], 'observations':[] if mode == 'unpaired_query' else [
+        {'tool':'get_document_status','receipt_ref':'q','executed':True,
+         'execution_receipt_status':'complete'}]}}
+    if mode in {'unknown_attempt','none_attempt','different_target'}:
+        messages.append(AIMessage(content='',tool_calls=[{'name':'publish_approved_document',
+            'args':{'title':'other title' if mode == 'different_target' else 'bound title'},
+            'id':'mutation'}]))
+        effects['business']['operations'].append({'tool':'publish_approved_document',
+            'receipt_ref':'mutation','effect':'unknown' if mode=='unknown_attempt' else 'none'})
+    gaps = unattempted_continuations(messages, effects, ['publish_approved_document'])
+    assert bool(gaps) == (mode in {'eligible','different_target'})
+    if gaps:
+        assert gaps[0]['target'] == 'bound title' and gaps[0]['query_receipt_ref'] == 'q'
+    assert unattempted_continuations(messages, effects, []) == []
+
+
+@pytest.mark.parametrize('section,key', [(None, 'ordinary_materal_tokens'),
+                                        ('capacity', 'context_token')])
+def test_prepare_rejects_unknown_configuration_before_runtime(
+    tmp_path: Path, section: str | None, key: str,
+) -> None:
+    prepared(tmp_path)
+    settings = read_json(tmp_path / 'settings.json')
+    target = settings if section is None else settings[section]
+    target[key] = 64
+    write_json(tmp_path / 'typo.json', settings)
+    with pytest.raises(ValueError, match='UNKNOWN_KEYS'):
+        functional.prepare(tmp_path / 'invalid-run', tmp_path / 'typo.json')
+    assert not (tmp_path / 'invalid-run' / 'input-freeze.json').exists()
+
+
+def test_preagent_protocol_failure_is_delivered_and_visible_after_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 2}:
+            assert wire['tool_choice'] == 'required'
+            assert len(wire['tools']) == 1
+        if ordinal == 1:
+            return {'role': 'assistant', 'content': 'Malformed declaration without a tool.'}
+        if ordinal == 2:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                               allow_forgetting=False, business_action_request='none',
+                               business_operations=[])
+        if ordinal == 3:
+            packet = materials(wire)
+            assert any(u.get('role') == 'assistant' and '回答协议失败' in u.get('content', '')
+                       for u in packet['items'])
+            assert any(u.get('role') == 'user' and u.get('content') == 'Withdraw the special rule.'
+                       for u in packet['items'])
+            return {'role': 'assistant', 'content': 'The earlier request did not commit.'}
+        assert ordinal == 4 and not wire.get('tools')
+        return {'role': 'assistant', 'content': 'The earlier request did not commit.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='mechanical-bank', owner='alice', session='s')
+    failed = functional.message(root, **common, message_id='withdraw',
+                                content='Withdraw the special rule.')
+    assert failed['status'] == 'FAILED' and failed['error_category'] == 'provider_protocol'
+    assert failed['final_delivery']['status'] == 'available'
+    assert failed['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert failed['operation_status']['business']['status'] == 'not_executed'
+    assert not failed.get('messages') and failed['final_capture']['ok']
+    later = functional.message(root, **common, message_id='later', content='Did it succeed?')
+    assert later['status'] == 'COMPLETED' and len(wires) == 4
+    assert not later['records'] and not later['operation_status']['business']['operations']
+
+
+def test_guessed_business_mode_without_receipts_keeps_conversational_answer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                               allow_forgetting=False, business_action_request='perform',
+                               business_operations=['create_or_update_draft'])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': 'Untrusted execution draft.'}
+        assert ordinal == 3 and not wire.get('tools')
+        assert 'Untrusted execution draft.' not in json.dumps(wire)
+        return {'role': 'assistant', 'content': 'No earlier unit is available in the material.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='m',
+                                 content='What unit did I use earlier?')
+    assert result['status'] == 'COMPLETED' and len(wires) == 3
+    assert result['final_answer'] == 'No earlier unit is available in the material.'
+    assert result['operation_status']['business']['status'] == 'not_executed'
+
+
+@pytest.mark.parametrize('writes', [True, False])
+def test_completion_excludes_false_draft_but_retains_checkpoint_and_truthful_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, writes: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True, fresh_completion=True)
+    draft = 'FALSE_UNDELIVERED_CONFIRMATION'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                               allow_forgetting=False, business_action_request='none',
+                               business_operations=[])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': draft}
+        assert draft not in json.dumps(wire)
+        if ordinal == 3:
+            names = {t['function']['name'] for t in wire['tools']}
+            assert 'save_memory' in names and not names.intersection(
+                {'reserve_and_label', 'complete_label', 'forget_memory'})
+            if writes:
+                unit = next(u for u in materials(wire)['items'] if u['type'] == 'fragment')
+                return native_call('save_memory', 'actual-save', content='Prefer quiet rooms.',
+                                   fragment_handles=[unit['fragment_handle']])
+            return {'role': 'assistant', 'content': 'SECOND_UNDELIVERED_CONFIRMATION'}
+        return {'role': 'assistant', 'content': 'Saved after the actual commit.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s', message_id='save',
+                  content='Remember that I prefer quiet rooms.')
+    result = functional.message(root, **common)
+    assert any(m.get('content') == draft for m in result['messages'])
+    assert draft not in result['final_answer']
+    assert result['status'] == ('COMPLETED' if writes else 'FAILED')
+    assert result['final_delivery']['status'] == 'available'
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'committed' if writes else 'not_committed')
+    assert len(result['records']) == int(writes)
+    if not writes:
+        assert '请求未完成' in result['final_answer']
+        assert '本轮语义记忆: 未提交' in result['final_answer']
+        assert 'SECOND_UNDELIVERED_CONFIRMATION' not in result['final_answer']
+        assert result['final_capture']['ok']
+    count = len(wires)
+    replay = functional.message(root, **common)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == count
+
+
+@pytest.mark.parametrize('variant', ['legacy', 'memory', 'readonly', 'wrong_none', 'unknown_op'])
+def test_empty_business_operations_grant_nothing_and_do_not_block_independent_memory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, variant: str,
+) -> None:
+    root = prepared(tmp_path, native=True, reference_mode_declaration=True,
+                    current_delivery=True, independent_capabilities=variant != 'legacy')
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='none' if variant == 'readonly' else 'explicit',
+                allow_forgetting=False,
+                business_action_request='none' if variant == 'wrong_none' else 'perform',
+                business_operations=['reserve_and_label'] if variant == 'wrong_none' else
+                                    ['unavailable_operation'] if variant == 'unknown_op' else [])
+        assert variant in {'memory', 'readonly'}
+        if wire.get('tools'):
+            names = {t['function']['name'] for t in wire['tools']}
+            assert not names.intersection(functional.BUSINESS_MUTATIONS | {'forget_memory'})
+            assert bool(names.intersection({'save_memory', 'update_memory'})) == (
+                variant == 'memory')
+        if ordinal == 2 and variant == 'memory':
+            unit = next(u for u in materials(wire)['items'] if u['type'] == 'fragment')
+            return native_call('save_memory', 'supported-save', content='Prefer quiet rooms.',
+                               fragment_handles=[unit['fragment_handle']])
+        return {'role': 'assistant', 'content': 'Only the available memory result is reported.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='m',
+                                 content='Remember that I prefer quiet rooms.')
+    if variant in {'legacy', 'wrong_none', 'unknown_op'}:
+        assert result['error'] == 'FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID' and len(wires) == 1
+        assert not result['records']
+    else:
+        assert result['status'] == 'COMPLETED'
+        mode = result['request_mode']
+        assert not mode['allow_business_mutation'] and mode['business_operations'] == []
+        assert mode['business_declaration_status'] == 'unresolved_no_business_permission'
+        assert len(result['records']) == int(variant == 'memory')
+    assert not result['operation_status']['business']['operations']
+
+
+@pytest.mark.parametrize('visibility_stop', [False, True])
+def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accounting(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, visibility_stop: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True)
+    secret = 'MECHANICAL_REVOKED_BODY'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit', allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment' and secret in u['content']]
+            return native_call('save_memory', 'save', content=secret, fragment_handles=hs)
+        if ordinal in {3, 4}:
+            return {'role': 'assistant', 'content': 'Saved the requested marker.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert ordinal == 7 and not visibility_stop
+        assert secret not in json.dumps(wire)
+        assert actual_tool_receipt(wire)['status'] == 'visibility_revoked'
+        return {'role': 'assistant', 'content': 'Overbroad draft: erased every backup forever.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    first = functional.message(root, **common, session='s1', message_id='save',
+                               content='Remember ' + secret)
+    assert first['status'] == 'COMPLETED'
+    if visibility_stop:
+        monkeypatch.setattr(functional, '_verified_forget_continuation', lambda *a, **kw: False)
+    result = functional.message(root, **common, session='s2', message_id='forget',
+                                content='Forget the previously saved marker and its sources.')
+    assert not list(root.glob('banks/*/*-completion-feedback.json'))
+    assert secret not in str(result.get('final_answer'))
+    if visibility_stop:
+        assert result['status'] == 'VISIBILITY_REVOKED'
+        assert result['terminal_snapshot'] == 'visibility_redacted'
+        assert result['budget_after']['generation_requests'] == len(wires) == 6
+        assert result['budget_after']['generation_requests'] - (
+            result['budget_before']['generation_requests']) == 2
+        assert result['messages'] == [] and 'content' not in result
+    else:
+        assert result['status'] == 'COMPLETED', result
+        assert len(wires) == 7  # No additional model generation for program confirmation.
+        assert result['final_capture']['ok']
+        assert '未执行物理擦除' in result['final_answer']
+        assert 'erased every backup' not in result['final_answer']
+        assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+        assert result['operation_status']['visibility']['operations'][0][
+            'status'] == 'visibility_revoked'
+    attempts = [json.loads(p.read_text()) for p in root.glob('banks/*/*-attempt-*.json')]
+    assert len(attempts) == 2 and attempts[-1] != {}
+    assert any(a['message_id'] == 'forget' and a['status'] == result['status'] for a in attempts)
+
+
+def test_phase_thinking_uses_actual_templates_and_one_shared_admission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert wire['chat_template_kwargs']['enable_thinking'] is (ordinal != 1)
+        if ordinal == 1:
+            assert wire['tool_choice'] == 'required'
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='The local marker is blue.',
+                               fragment_handles=hs)
+        assert ordinal in {3, 4}
+        return {'role': 'assistant', 'content': 'Saved the local marker.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'COMPLETED', result
+    assert len(wires) == result['generation_calls'] == 4
+    queue = read_json(root / 'queue-admission.json')
+    assert queue['requests'] == 4
+    trace = next(root.glob('banks/*/*-trace-0.jsonl'))
+    events = [json.loads(line) for line in trace.read_text().splitlines()]
+    responses = [e for e in events if e.get('event') == 'vllm_response']
+    assert len(responses) == 4
+    for index, event in enumerate(responses):
+        thinking = index != 0
+        assert event['request']['chat_template_kwargs']['enable_thinking'] is thinking
+        assert event['capacity']['identity']['enable_thinking'] is thinking
+    assert result['budget_after']['generation_requests'] == 4
+    replay = message(root)
+    assert replay['final_answer'] == result['final_answer'] and len(wires) == 4
+
+
+@pytest.mark.parametrize('field', ['reasoning', 'reasoning_content'])
+@pytest.mark.parametrize('interrupted', [False, True])
+def test_native_tool_reasoning_roundtrip_survives_reopen_and_is_removed_after_forget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, field: str, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True)
+    secret = 'MECHANICAL_REASONING_SECRET'
+    thought = 'The requested current value is ' + secret
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit', allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment' and secret in u['content']]
+            return {**native_call('save_memory', 'save', content=secret, fragment_handles=hs),
+                    field: thought}
+        if ordinal == 3:
+            assistant = next(m for m in wire['messages'] if m.get('tool_calls'))
+            assert assistant['reasoning_content'] == thought
+            assert actual_tool_receipt(wire)['status'] in {'committed', 'no_change'}
+            return {'role': 'assistant', 'content': 'Saved the requested marker.'}
+        if ordinal == 4:
+            assert 'reasoning_content' not in json.dumps(wire)
+            return {'role': 'assistant', 'content': 'The requested marker is saved.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return {**native_call('forget_memory', 'forget', read_handle=record['read_handle']),
+                    field: 'Forget this retrieved item: ' + secret}
+        assert ordinal == 7
+        assert secret not in json.dumps(wire)
+        assert not any('reasoning_content' in m for m in wire['messages'])
+        return {'role': 'assistant', 'content': 'Visibility revoked.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    args: dict[str, Any] = dict(session='s1', message_id='save', content='Remember ' + secret)
+    if interrupted:
+        args.update(evaluator_control={'one_shot_fault': {'message_index': 0, 'boundary': 'W3',
+            'target_operation': 'save_memory', 'occurrence': 1}}, message_index=0)
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert result['status'] == 'UNKNOWN' and len(wires) == 2
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == 'COMPLETED', result
+    assert len(wires) == 4 and len(result['records']) == 1
+    assert 'reasoning_content' not in json.dumps(result['messages'])
+    forgotten = functional.message(root, **common, session='s2', message_id='forget',
+                                   content='Forget the stored marker and its sources.')
+    assert forgotten['status'] == 'COMPLETED', forgotten
+    assert len(wires) == 7
+    visible = {key: forgotten[key] for key in ('final_answer', 'messages', 'records', 'sources')}
+    assert secret not in json.dumps(visible, ensure_ascii=False)
+    # The explicit evaluator sidecar is retained audit, never a Host tool/input.
+    # Visibility revocation does not physically erase operation journal artifacts.
+    assert secret in json.dumps(forgotten['world']['receipt_progress'])
+    assert all(r.get('status') == 'visibility_revoked' for r in forgotten['records'])
+
+
+@pytest.mark.parametrize('value', [None, '{'])
+def test_reasoning_never_replaces_unusable_final_content(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, value: Any,
+) -> None:
+    root = prepared(tmp_path, native=True, reasoning_history=True)
+    scripted(monkeypatch, lambda wire, ordinal: {
+        'role': 'assistant', 'content': value,
+        'reasoning': 'This is reasoning, not a final answer.'},
+        native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result.get('final_answer') != 'This is reasoning, not a final answer.'
+
+
+@pytest.mark.parametrize('enabled', [False, True])
+def test_native_reasoning_transport_is_current_turn_only_and_opt_in(enabled: bool) -> None:
+    from milai_lab.providers.chat_bridge import VLLMChatModel
+    from milai_lab.providers.contextual_vllm import VLLMClient
+    wires = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        wires.append(json.loads(request.read()))
+        return httpx.Response(200, json={'id': 'final', 'choices': [{'finish_reason': 'stop',
+            'message': {'role': 'assistant', 'content': 'Done.', 'reasoning': 'Not public.'}}]})
+
+    def reasoning_message(identity: str, thought: str) -> AIMessage:
+        return AIMessage(content='', additional_kwargs={'reasoning_content': thought},
+                         tool_calls=[{'id': identity, 'name': 'lookup', 'args': {}}])
+
+    messages = [HumanMessage(content='Old request.'), reasoning_message('old', 'OLD_THOUGHT'),
+        ToolMessage(tool_call_id='old', content='Old result.'),
+        HumanMessage(content='New request.'),
+        reasoning_message('new', 'CURRENT_THOUGHT'),
+        ToolMessage(tool_call_id='new', content='Current result.')]
+    with VLLMClient(VLLMConfig(base_url='http://mechanical.invalid/v1/', model='mechanical',
+        tool_mode='native'), transport=httpx.MockTransport(respond)) as client:
+        model = VLLMChatModel(client=client, preserve_tool_reasoning=enabled)
+        answer = model.invoke(messages, tools=[], tool_choice='none')
+    assert answer.content == 'Done.' and not answer.additional_kwargs
+    thoughts = [m['reasoning_content'] for m in wires[0]['messages'] if 'reasoning_content' in m]
+    assert thoughts == (['CURRENT_THOUGHT'] if enabled else [])
+    assert messages[1].additional_kwargs['reasoning_content'] == 'OLD_THOUGHT'
+
+
+@pytest.mark.parametrize('fields', [{'reasoning': ['invalid']},
+                                    {'reasoning': 'one', 'reasoning_content': 'another'}])
+def test_invalid_reasoning_fields_do_not_dispatch_native_tool(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fields: dict[str, Any],
+) -> None:
+    root = prepared(tmp_path, native=True, reasoning_history=True)
+    wires = scripted(monkeypatch, lambda wire, ordinal: {
+        **native_call('search_memory', 'search', query='marker'), **fields}, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED' and len(wires) == 1
+    assert result['error'] == 'VLLM_CHAT_INVALID_REASONING_HISTORY'
+    assert result['world']['receipt_progress'] == {} and result['records'] == []
+
+
+def test_retained_audit_does_not_block_fresh_safe_provider_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True)
+    secret = 'MECHANICAL_RETAINED_AUDIT_ONLY'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 5, 8}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal == 1 else 'none',
+                allow_forgetting=ordinal == 5,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content=secret, fragment_handles=hs)
+        if ordinal in {3, 4}:
+            return {'role': 'assistant', 'content': 'Saved the marker.'}
+        if ordinal == 6:
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('forget_memory', 'forget', read_handle=record['read_handle'])
+        assert secret not in json.dumps(wire)
+        if ordinal == 7:
+            return {'role': 'assistant', 'content': 'Visibility revoked.'}
+        if ordinal == 9:
+            return {'role': 'assistant', 'content': 'No available evidence for that marker.'}
+        assert ordinal == 10
+        return {'role': 'assistant', 'content': None, '_test_finish_reason': 'length'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    stored = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember the marker ' + secret)
+    assert stored['status'] == 'COMPLETED'
+    forgotten = functional.message(root, **common, session='s2', message_id='forget',
+                                    content='Forget the marker and its source.')
+    assert forgotten['status'] == 'COMPLETED'
+    args = dict(session='s3', message_id='query', content='What marker is available? Do not guess.')
+    failed = functional.message(root, **common, **args)
+    assert failed['status'] == 'FAILED' and failed['error'] == 'VLLM_CHAT_TRUNCATED'
+    assert failed['final_delivery']['status'] == 'available'
+    assert failed['generation_calls'] == 3 and len(wires) == 10
+    visible = {k: failed[k] for k in ('final_answer', 'messages', 'sources', 'records')}
+    assert secret not in json.dumps(visible)
+    assert secret in json.dumps(failed['world']['receipt_progress'])
+    assert functional.message(root, **common, **args) == failed
+    assert len(wires) == 10
+    # The original actually exposed answer is still blocked before any HTTP.
+    archived = functional.message(root, **common, session='s1', message_id='save',
+                                   content='Remember the marker ' + secret)
+    assert archived['status'] == 'VISIBILITY_REVOKED' and archived['final_answer'] is None
+    assert len(wires) == 10
+
+
+def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_receipt_checks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True)
+    answer = 'Saved: try short sentences only for this presentation.'
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        declaration = ordinal in {1, 5, 7}
+        assert wire['temperature'] == (0 if declaration else 1)
+        assert wire['chat_template_kwargs']['enable_thinking'] is not declaration
+        if declaration:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal == 1 else 'none',
+                allow_forgetting=False,
+                business_action_request='perform' if ordinal == 7 else 'none',
+                business_operations=['reserve_and_label'] if ordinal == 7 else [])
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': 'Saved without doing anything.'}
+        if ordinal == 3:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Try short sentences only here.',
+                               fragment_handles=hs)
+        if ordinal == 4:
+            return {'role': 'assistant', 'content': answer}
+        if ordinal == 6:
+            assert 'save_memory' not in {t['function']['name'] for t in wire['tools']}
+            return {'role': 'assistant', 'content': 'The stored limit applies only here.'}
+        if ordinal == 8:
+            return native_call('reserve_and_label', 'reserve', item_key='direct-response-item',
+                               quantity=1, destination='local', packing='box')
+        assert ordinal == 9
+        return {'role': 'assistant', 'content': 'DRAFT_FALSE_BUSINESS_NOT_DONE'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    args = dict(session='s1', message_id='save', content='Remember: try short sentences only here.')
+    saved = functional.message(root, **common, **args)
+    assert saved['status'] == 'COMPLETED' and saved['final_answer'] == answer
+    assert saved['operation_status']['semantic_memory']['status'] == 'committed'
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1
+    assert saved['finalization']['execution_candidate_delivered'] is True
+    assert len(wires) == 4 and len(saved['records']) == 1
+    assert sum(m.get('content') == answer for m in saved['messages']) == 1
+    assert functional.message(root, **common, **args) == saved and len(wires) == 4
+    query = functional.message(root, **common, session='s2', message_id='query',
+                               content='Does the stored limit apply everywhere?')
+    assert query['status'] == 'COMPLETED' and len(wires) == 6
+    assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+    operated = functional.message(root, **common, session='s3', message_id='reserve',
+                                  content='Reserve and label one direct-response-item.')
+    assert operated['status'] == 'COMPLETED' and len(wires) == 9
+    assert operated['operation_status']['business']['status'] == 'completed'
+    assert 'DRAFT_FALSE_BUSINESS_NOT_DONE' not in operated['final_answer']
+    assert 'direct-response-item' in operated['final_answer']
+    assert operated['finalization']['protocol'] == 'receipt_business_response_v1'
+
+
+@pytest.mark.parametrize('unusable', [None, '{'])
+@pytest.mark.parametrize('actual_capabilities', [False, True])
+def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, unusable: Any, actual_capabilities: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True, actual_capabilities=actual_capabilities)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='The marker is blue.',
+                               fragment_handles=hs)
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': unusable, 'reasoning': 'Not an answer.'}
+        assert ordinal == 4 and not wire.get('tools') and wire.get('tool_choice') != 'auto'
+        if actual_capabilities:
+            system = wire['messages'][0]['content']
+            assert 'CURRENT EXECUTION CAPABILITIES: []' in system
+            assert 'Memory saving/updating is unavailable in this phase.' in system
+        return {'role': 'assistant', 'content': 'The marker was saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='save', content='Remember blue.')
+    failed = functional.message(root, **args)
+    assert failed['status'] == 'FAILED' and failed['final_delivery']['status'] == 'available'
+    assert failed['operation_status']['semantic_memory']['status'] == 'committed'
+    assert 'Not an answer.' not in failed['final_answer']
+    recovered = functional.message(root, **args, resume=True)
+    assert recovered['status'] == 'COMPLETED' and len(wires) == 4
+    assert recovered['final_answer'] == 'The marker was saved.'
+    assert len(recovered['records']) == 1 and recovered['records'][0]['value']['revision'] == 1
+
+
+def test_actual_capability_contract_tracks_restricted_completion_catalog(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, fresh_completion=True,
+        operation_completion=True, phase_thinking=True, reasoning_history=True,
+        direct_response=True, actual_capabilities=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        system = wire['messages'][0]['content']
+        encoded = system.split('CURRENT EXECUTION CAPABILITIES: ', 1)[1]
+        active, _ = json.JSONDecoder().raw_decode(encoded)
+        actual = sorted(t['function']['name'] for t in wire['tools'])
+        assert active == actual
+        assert 'Persisted current-request interpretation:' in system
+        assert 'save_memory' in active and 'forget_memory' not in active
+        if ordinal == 2:
+            assert 'reserve_and_label' in active
+            return {'role': 'assistant', 'content': 'WITHHELD_NO_WRITE'}
+        assert not set(active) & functional.BUSINESS_MUTATIONS
+        if ordinal == 3:
+            hs = [u['fragment_handle'] for u in materials(wire)['items'] if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Prefer blue paper.',
+                               fragment_handles=hs)
+        assert ordinal == 4
+        return {'role': 'assistant', 'content': 'Preference saved; reservation not executed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='b', owner='alice', session='s', message_id='request',
+                                content='Remember I prefer blue paper, and reserve one local box.')
+    assert result['status'] == 'COMPLETED' and len(wires) == 4
+    assert result['request_mode']['allow_business_mutation'] is True
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    assert result['operation_status']['semantic_memory']['status'] == 'committed'
+    assert 'WITHHELD_NO_WRITE' not in result['final_answer']
+    assert result['world']['world']['attempts'] == []
+
+
+def test_replacement_evidence_catalog_commits_new_support_on_original_id(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, replacement_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal in {1, 3}:
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 1:
+                return native_call('save_memory', 'save',
+                                   content='Only the local sample uses unit A.',
+                                   fragment_handles=current)
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'update',
+                               read_handle=record['read_handle'], changes=[{
+                'field': 'content', 'op': 'set', 'value': 'Only the local sample uses unit B.',
+                'evidence_for_new_value': current}])
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested memory change is saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only the local sample uses unit A.')
+    updated = functional.message(root, **common, message_id='replacement',
+                                 content='For that same local sample use unit B instead.')
+    assert saved['status'] == updated['status'] == 'COMPLETED'
+    assert len(wires) == 4 and len(updated['records']) == 1
+    assert updated['records'][0]['id'] == saved['records'][0]['id']
+    value = updated['records'][0]['value']
+    assert value['revision'] == 2 and value['content'] == 'Only the local sample uses unit B.'
+    support = value['functional_support']
+    assert support['content']['source_refs'] == [updated['capture']['source_ref']]
+    assert support['content']['semantic_support'] == 'unchecked'
+    assert support['basis'] == saved['records'][0]['value']['functional_support']['basis']
+
+
+def test_withdrawal_evidence_catalog_retains_original_and_cancellation_sources(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, withdrawal_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        if ordinal in {1, 3}:
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 1:
+                return native_call('save_memory', 'save', content='Local sample preference.',
+                                   fragment_handles=current)
+            schema = next(t['function']['parameters'] for t in wire['tools']
+                          if t['function']['name'] == 'update_memory')
+            assert 'evidence_for_withdrawal' in schema['properties']
+            assert 'fragment_handles' not in schema['properties']
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'withdraw',
+                               read_handle=record['read_handle'], changes=[], retract=True,
+                               evidence_for_withdrawal=current)
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested operation is committed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: local sample preference.')
+    withdrawn = functional.message(root, **common, message_id='withdrawal',
+                                   content='Withdraw that local sample preference.')
+    assert saved['status'] == withdrawn['status'] == 'COMPLETED'
+    assert len(wires) == 4 and len(withdrawn['records']) == 1
+    assert withdrawn['records'][0]['status'] == 'retracted'
+    assert not withdrawn['records'][0]['ok']
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        stored = connection.execute('SELECT value FROM store WHERE key=?',
+                                    (saved['records'][0]['id'],)).fetchone()
+    history = json.loads(stored[0])['_v13_1']['history']
+    assert len(history) == 2
+    original, version = history
+    assert version['retracted'] and version['functional_support'] == original['functional_support']
+    assert version['removed_field_support']['record']['source_refs'] == [
+        withdrawn['capture']['source_ref']]
+
+
+@pytest.mark.parametrize("withdraw", [False, True])
+def test_revision_review_tool_shows_wrong_source_before_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, reviewed_evidence=True,
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+    proposal: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        current = [u['fragment_handle'] for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=current)
+        if ordinal == 2:
+            assert actual_tool_receipt(wire)['status'] == 'committed'
+            return {'role': 'assistant', 'content': 'Saved the sample preference.'}
+        if ordinal == 3:
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            old = next(u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            proposal.update(read_handle=record['read_handle'], changes=[] if withdraw else [{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': [old]}])
+            if withdraw:
+                proposal.update(retract=True, evidence_for_withdrawal=[old])
+            return native_call('update_memory', 'wrong-preview', **proposal)
+        if ordinal == 4:
+            preview = actual_tool_receipt(wire)
+            assert preview['status'] == 'revision_review_required'
+            assert 'unit A' in preview['proposed_changes'][0]['selected_original_fragments'][0][
+                'content']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            if withdraw:
+                proposal['evidence_for_withdrawal'] = current
+            else:
+                proposal['changes'][0]['evidence_for_new_value'] = current
+            return native_call('update_memory', 'corrected-preview', **proposal)
+        if ordinal == 5:
+            preview = actual_tool_receipt(wire)
+            assert preview['status'] == 'revision_review_required'
+            text = preview['proposed_changes'][0]['selected_original_fragments'][0]['content']
+            assert ('Withdraw' if withdraw else 'unit B') in text
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            return native_call('update_memory', 'commit', **proposal,
+                               review_token=preview['review_token'])
+        assert ordinal == 6 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Committed the requested change.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    updated = functional.message(root, **common, message_id='correction', content=(
+        'Withdraw this sample preference; keep its history.' if withdraw else
+        'Change this same sample to unit B, with all limits unchanged.'))
+    assert saved['status'] == updated['status'] == 'COMPLETED', updated.get('error')
+    assert len(wires) == 6
+    assert updated['operation_status']['semantic_memory']['status'] == 'committed'
+    assert len(updated['operation_status']['semantic_memory']['operations']) == 1
+    previews = updated['operation_status']['semantic_memory']['previews']
+    assert len(previews) == 2 and all(p['effect'] == 'none' for p in previews)
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        value = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(value['history']) == 2 and value['current']['revision'] == 2
+    support = (value['current']['removed_field_support']['record'] if withdraw else
+               value['current']['functional_support']['content'])
+    assert support['source_refs'] == [updated['capture']['source_ref']]
+    assert value['current']['retracted'] is withdraw
+
+
+@pytest.mark.parametrize("withdraw", [False, True])
+@pytest.mark.parametrize("distinct", [False, True, "optional"])
+def test_evidence_cue_tool_rejects_wrong_handle_without_replacing_it(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, withdraw: bool, distinct: bool | str,
+) -> None:
+    root = prepared(tmp_path, native=True, anchored_evidence=True,
+                    distinct_withdrawal=bool(distinct), optional_withdrawal=distinct == "optional",
+                    direct_response=True, phase_thinking=True, actual_capabilities=True,
+                    current_delivery=True)
+    proposed: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        packet = materials(wire)
+        current = [u['fragment_handle'] for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=current)
+        if ordinal in {2, 5}:
+            assert actual_tool_receipt(wire)['status'] == 'committed'
+            return {'role': 'assistant', 'content': 'The requested operation is committed.'}
+        cue = 'Withdraw' if withdraw else 'unit B'
+        if ordinal == 3:
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            old = next(u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            selected = [{'fragment_handle': old, 'supporting_words':
+                         'unit A' if distinct and withdraw else cue}]
+            proposed.update(read_handle=record['read_handle'], changes=[] if withdraw else [{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': selected}])
+            if withdraw:
+                proposed.update(retract=True, evidence_for_withdrawal=selected)
+                if distinct == "optional":
+                    proposed.pop('changes')
+            return native_call('update_memory', 'wrong-cue', **proposed)
+        assert ordinal == 4
+        rejected = actual_tool_receipt(wire)
+        assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+        expected_error = ('WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT' if distinct and withdraw else
+                          'EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT')
+        assert expected_error in rejected['reason']
+        assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+        selected = [{'fragment_handle': current[0], 'supporting_words': cue}]
+        if withdraw:
+            proposed['evidence_for_withdrawal'] = selected
+        else:
+            proposed['changes'][0]['evidence_for_new_value'] = selected
+        return native_call('update_memory', 'corrected-cue', **proposed)
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    updated = functional.message(root, **common, message_id='correction', content=(
+        'Withdraw this sample preference; keep its history.' if withdraw else
+        'Change this same sample to unit B, with all limits unchanged.'))
+    assert saved['status'] == updated['status'] == 'COMPLETED', updated.get('error')
+    assert len(wires) == 5
+    operations = updated['operation_status']['semantic_memory']['operations']
+    assert [o['status'] for o in operations] == ['not_committed', 'committed']
+    assert operations[0]['effect'] == 'none' and operations[1]['effect'] == 'memory_only'
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        value = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(value['history']) == 2 and value['current']['revision'] == 2
+    support = (value['current']['removed_field_support']['record'] if withdraw else
+               value['current']['functional_support']['content'])
+    assert support['source_refs'] == [updated['capture']['source_ref']]
+    assert support['semantic_support'] == 'unchecked'
+
+
+@pytest.mark.parametrize('effect', ['none', 'memory', 'business'])
+@pytest.mark.parametrize('new_profile', [False, True])
+def test_format_exhaustion_preserves_confirmed_effects_and_delivers_failure_without_http(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, effect: str, new_profile: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, fresh_completion=True,
+                    format_failure_receipts=new_profile)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1 and effect == 'business':
+            return native_call('reserve_and_label', 'actual', item_key='format item',
+                               quantity=2, destination='local', packing='box')
+        if ordinal == 1 and effect == 'memory':
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'actual', content='The marker is blue.',
+                               fragment_handles=hs)
+        return native_call('save_memory', 'missing-content-' + str(ordinal), fragment_handles=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+    assert len(wires) == (2 if effect == 'none' else 3)
+    assert len(result['records']) == (1 if effect == 'memory' else 0)
+    assert len(result['world']['world']['attempts']) == (1 if effect == 'business' else 0)
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'committed' if effect == 'memory' else 'not_committed')
+    assert result['operation_status']['business']['status'] == (
+        'completed' if effect == 'business' else 'not_executed')
+    if new_profile:
+        assert result['final_delivery']['status'] == 'available'
+        assert '回答协议失败' in result['final_answer']
+        assert result['failure_delivery']['additional_operations'] == 0
+        assert result['failure_delivery']['model_generation'] is False
+    else:
+        assert result.get('final_answer') is None
+    for resume in [False, True]:
+        replay = message(root, resume=resume)
+        assert replay['status'] == 'FAILED' and replay['error'] == result['error']
+        assert replay['records'] == result['records']
+        assert replay['world'] == result['world']
+        assert len(wires) == (2 if effect == 'none' else 3)
+
+
+def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -> None:
+    from milai_lab.runners.functional_response import business_response
+
+    operations = [
+        dict(status='not_committed', effect='none', phase='pre_mutation_contract'),
+        dict(status='visibility_revoked', effect='visibility_only', scope='record_and_sources',
+             scope_counts={'selected_records': 1, 'revoked_sources': 2}),
+        dict(status='unknown', effect='unknown'),
+    ]
+    effects = dict(business=dict(status='not_executed', operations=[], observations=[]),
+                   semantic_memory=dict(status='not_committed', operations=[]),
+                   visibility=dict(operations=operations), raw_event=dict(status='stored'))
+    answer = str(business_response([], effects, {}).content)
+    assert '遗忘尝试 1: 未提交' in answer
+    assert '遗忘尝试 2: 已按实际回执撤销所选记忆及来源的可见性' in answer
+    assert '遗忘尝试 3: 未知' in answer
+    assert answer.index('遗忘尝试 1:') < answer.index('遗忘尝试 2:') < answer.index('遗忘尝试 3:')
+    assert '尚不能确认请求的全部内容' not in answer
+    assert '未选择的独立副本不在本次确认范围内' in answer
+    assert '未执行物理擦除' in answer
+
+
+@pytest.mark.parametrize('required,interrupted', [(False, False), (True, False), (True, True)])
+def test_existing_confirmation_uses_one_required_proposal_and_no_new_revision_after_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, required: bool, interrupted: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=required)
+    generate = functional.LangMemRecipeChatModel._generate
+    faulted = False
+
+    def interrupt_once(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal faulted
+        if (interrupted and not faulted and kwargs.get('tool_choice') == 'required'
+                and len(kwargs.get('tools', [])) > 1):
+            faulted = True
+            raise OSError('before_first_completion_generation')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_once)
+    confirmation_calls = 7 if required else 6
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, confirmation_calls + 1}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request=('none' if ordinal == confirmation_calls + 1
+                                      else 'new_assertion'), allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        assert wire['temperature'] == 1 and wire['chat_template_kwargs']['enable_thinking']
+        if ordinal == confirmation_calls + 2:
+            assert wire['tool_choice'] == 'auto'
+            assert not {'save_memory', 'update_memory', 'forget_memory'}.intersection(
+                t['function']['name'] for t in wire['tools'])
+            return {'role': 'assistant', 'content': 'The existing order is author_title.'}
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Use author_title for notes.',
+                               fragment_handles=hs)
+        if ordinal in {3, 5}:
+            assert wire['tool_choice'] == 'auto'
+            return {'role': 'assistant', 'content': 'The existing record already has that order.'}
+        if ordinal == 6:
+            assert wire['tool_choice'] == ('required' if required else 'auto')
+            assert not functional.BUSINESS_MUTATIONS.intersection(
+                t['function']['name'] for t in wire['tools'])
+            assert 'forget_memory' not in {t['function']['name'] for t in wire['tools']}
+            if not required:
+                return {'role': 'assistant', 'content': 'Keep the existing record unchanged.'}
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'confirm-existing',
+                               read_handle=record['read_handle'], changes=[])
+        assert ordinal == 7 and wire['tool_choice'] == 'auto'
+        assert actual_tool_receipt(wire)['status'] == 'no_change'
+        return {'role': 'assistant',
+                'content': 'Already present; original ID and version unchanged.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember: use author_title for notes.')
+    args = dict(session='s2', message_id='confirm',
+                content='Confirm the same order; if it matches, keep the original ID and version.')
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert result['status'] == 'UNKNOWN' and faulted and len(wires) == 5
+        assert result['error_type'] == 'OSError'
+        assert result['records'] == saved['records']
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if required else 'FAILED'), result.get('error')
+    assert result['records'] == saved['records'] and len(wires) == (7 if required else 6)
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'no_change' if required else 'not_committed')
+    if required:
+        receipt = result['operation_status']['semantic_memory']['operations'][0]
+        assert receipt['revision'] == 1 and receipt['effect'] == 'none'
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1 and not feedback['business_mutations_available']
+    cached = functional.message(root, **common, **args)
+    assert cached['final_answer'] == result['final_answer'] and len(wires) == (7 if required else 6)
+    query = functional.message(root, **common, session='s3', message_id='query',
+                                content='What order is currently recorded? Just read it.')
+    assert query['status'] == 'COMPLETED' and query['records'] == saved['records']
+    assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert len(wires) == confirmation_calls + 2
+    import sqlite3
+
+    database = next(root.glob('banks/*/memory.sqlite'))
+    with sqlite3.connect(f'file:{database.resolve()}?mode=ro', uri=True) as connection:
+        state = json.loads(connection.execute('SELECT value FROM store WHERE key=?',
+            (saved['records'][0]['id'],)).fetchone()[0])['_v13_1']
+    assert len(state['history']) == 1 and state['current']['revision'] == 1
+
+
+def test_required_completion_cannot_repeat_business_and_exhausted_format_stays_failed(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=True)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='perform', business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'actual', item_key='bounded item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Saved everything. FALSE_DRAFT_WITHHELD'}
+        assert ordinal == 4 and wire['tool_choice'] == 'required'
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        assert 'FALSE_DRAFT_WITHHELD' not in json.dumps(wire)
+        return native_call('save_memory', 'invalid', fragment_handles=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result['status'] == 'FAILED'
+    assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['world']['world']['attempts']) == 1
+    assert 'FALSE_DRAFT_WITHHELD' not in result['final_answer']
+    assert result['failure_delivery']['additional_operations'] == 0
+    replay = message(root, resume=True)
+    assert replay['status'] == 'FAILED' and len(wires) == 4
+    assert replay['world'] == result['world']
+
+
+@pytest.mark.parametrize('until_attempt,interrupted,explicit_confirmation',
+                         [(False, False, False), (True, False, False), (True, True, False),
+                          (True, False, True), (True, True, True)])
+def test_completion_read_does_not_replace_existing_confirmation_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    until_attempt: bool, interrupted: bool,
+    explicit_confirmation: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        required_completion=True, receipt_completion=until_attempt,
+        existing_confirmation=explicit_confirmation)
+    generate = functional.LangMemRecipeChatModel._generate
+    faulted = False
+
+    def interrupt_after_read(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal faulted
+        if interrupted and not faulted and len(wires) == 6:
+            assert kwargs.get('tool_choice') == 'required'
+            faulted = True
+            raise OSError('after_prerequisite_read_before_confirmation')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_after_read)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if explicit_confirmation and ordinal == 9:
+            return native_call('classify_current_request', 'query-mode',
+                memory_write_request='none', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if explicit_confirmation and ordinal == 10:
+            assert wire['tool_choice'] == 'auto'
+            assert not {'save_memory', 'update_memory', 'confirm_existing_memory',
+                        'forget_memory'}.intersection(t['function']['name'] for t in wire['tools'])
+            return {'role': 'assistant', 'content': 'The existing order is author_title.'}
+        if ordinal in {1, 4}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='new_assertion', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            hs = [u['fragment_handle'] for u in materials(wire)['items']
+                  if u['type'] == 'fragment']
+            return native_call('save_memory', 'save', content='Use author_title for notes.',
+                               fragment_handles=hs)
+        if ordinal in {3, 5}:
+            assert wire['tool_choice'] == 'auto'
+            return {'role': 'assistant', 'content': 'The current order is author_title.'}
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        assert 'forget_memory' not in {t['function']['name'] for t in wire['tools']}
+        if ordinal == 6:
+            assert wire['tool_choice'] == 'required'
+            record = next(u for u in materials(wire)['items'] if u['type'] == 'record')
+            return native_call('read_memory', 'prerequisite-read', record_id=record['record_id'])
+        if ordinal == 7:
+            assert wire['tool_choice'] == ('required' if until_attempt else 'auto')
+            assert not memory_effects(wire)['mutation_receipts']
+            if not until_attempt:
+                return {'role': 'assistant', 'content': 'The record already matches.'}
+            record = next(u for u in actual_tool_receipt(wire)['items']
+                          if u['type'] == 'record')
+            if explicit_confirmation:
+                return native_call('confirm_existing_memory', 'confirm-existing',
+                                   read_handle=record['read_handle'])
+            return native_call('update_memory', 'confirm-existing',
+                               read_handle=record['read_handle'], changes=[])
+        assert ordinal == 8 and wire['tool_choice'] == 'auto'
+        assert actual_tool_receipt(wire)['status'] == 'no_change'
+        return {'role': 'assistant', 'content': 'Already present; ID and version unchanged.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+                                content='Remember: use author_title for notes.')
+    args = dict(session='s2', message_id='confirm',
+                content='Confirm the same order; keep the original ID and version if it matches.')
+    result = functional.message(root, **common, **args)
+    if interrupted:
+        assert faulted and result['status'] == 'UNKNOWN' and len(wires) == 6
+        result = functional.message(root, **common, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if until_attempt else 'FAILED'), result.get('error')
+    assert result['records'] == saved['records']
+    assert result['operation_status']['semantic_memory']['status'] == (
+        'no_change' if until_attempt else 'not_committed')
+    if explicit_confirmation:
+        operation = result['operation_status']['semantic_memory']['operations'][0]
+        assert operation['tool'] == 'confirm_existing_memory' and operation['effect'] == 'none'
+        assert operation['revision'] == 1
+    count = len(wires)
+    assert count == (8 if until_attempt else 7)
+    cached = functional.message(root, **common, **args)
+    assert cached['final_answer'] == result['final_answer'] and len(wires) == count
+    reads = [call for row in result['messages'] for call in row.get('tool_calls', [])
+             if call['name'] == 'read_memory']
+    assert len(reads) == 1
+    feedback = read_json(next(root.glob('banks/*/*-completion-feedback.json')))
+    assert feedback['attempts'] == 1 and not feedback['business_mutations_available']
+    if explicit_confirmation:
+        query = functional.message(root, **common, session='s3', message_id='query',
+                                    content='Read the current order; do not maintain anything.')
+        assert query['status'] == 'COMPLETED' and query['records'] == saved['records']
+        assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+        assert len(wires) == 10
+
+
+@pytest.mark.parametrize(('exhaust_reads', 'read_tool'), [
+    (False, 'search_memory'), (True, 'search_memory'), (True, 'read_page')])
+def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_bound(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, exhaust_reads: bool,
+    read_tool: str,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, optional_withdrawal=True, format_failure_receipts=True,
+        receipt_completion=True, receipt_response=True, explicit_reads=read_tool == "read_page")
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='perform', business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'actual', item_key='bounded item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            return {'role': 'assistant', 'content': 'Saved it. WITHHELD_UNTRUE_DRAFT'}
+        assert not functional.BUSINESS_MUTATIONS.intersection(
+            t['function']['name'] for t in wire['tools'])
+        if not exhaust_reads and ordinal == 5:
+            assert wire['tool_choice'] == 'auto'
+            assert memory_effects(wire)['mutation_receipts'][0]['status'] == 'rejected'
+            return {'role': 'assistant', 'content': 'The update was rejected; it was not saved.'}
+        assert wire['tool_choice'] == 'required'
+        assert not memory_effects(wire)['mutation_receipts']
+        if exhaust_reads:
+            return native_call(read_tool, f'read-{ordinal}',
+                **({'query': 'bounded item'} if read_tool == 'search_memory'
+                   else {'cursor': 'unknown:1'}))
+        return native_call('update_memory', 'rejected', read_handle='not-issued', changes=[])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert len(result['world']['world']['attempts']) == 1
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert not result['records'] and 'WITHHELD_UNTRUE_DRAFT' not in result['final_answer']
+    if exhaust_reads:
+        assert result['status'] == 'FAILED' and len(wires) == 7
+        assert result['execution_stop']['reason'] == 'read_limit_exhausted'
+    else:
+        assert result['status'] == 'COMPLETED' and len(wires) == 5
+        assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+        operation = result['operation_status']['semantic_memory']['operations'][0]
+        assert operation['effect'] == 'none' and operation['phase'] == 'pre_mutation_contract'
+    before = len(wires)
+    replay = message(root, resume=True)
+    assert replay['world'] == result['world'] and len(wires) == before
+    assert replay['final_answer'] == result['final_answer']
+
+
+def test_selected_original_review_rejects_old_support_before_commit_then_uses_new_support(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, optional_withdrawal=True,
+        direct_response=True, phase_thinking=True, actual_capabilities=True,
+        current_delivery=True, support_review=True, catalog_feedback=True)
+    proposal: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {4, 6}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_revision_support']
+            assert wire['temperature'] == 0 and wire['tool_choice'] == 'required'
+            assert wire['chat_template_kwargs']['enable_thinking'] is False
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert len(evidence['changes']) == 1
+            change = evidence['changes'][0]
+            assert change['field'] == 'content' and 'unit B' in change['after']
+            assert 'unit A' in change['before']
+            quotes = change['selected_original_fragments']
+            assert len(quotes) == 1 and quotes[0]['source_role'] == 'user'
+            assert ('unit A' if ordinal == 4 else 'unit B') in quotes[0]['content']
+            if ordinal == 4:
+                assert 'unit B' not in quotes[0]['content']
+            return native_call('review_revision_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content', 'assessment': 'unsupported' if ordinal == 4 else 'supported',
+                'reason': 'Old-source refusal.' if ordinal == 4 else 'Selected correction.',
+            }])
+        packet = materials(wire)
+        current = [u for u in packet['items']
+                   if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+        if ordinal == 1:
+            return native_call('save_memory', 'save', content='Only this sample uses unit A.',
+                               fragment_handles=[u['fragment_handle'] for u in current])
+        if ordinal == 3:
+            old = next(u for u in packet['items']
+                       if u['type'] == 'fragment' and 'unit A' in u['content'])
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            proposal.update(read_handle=record['read_handle'], changes=[{
+                'field': 'content', 'op': 'set', 'value': 'Only this sample uses unit B.',
+                'evidence_for_new_value': [{'fragment_handle': old['fragment_handle'],
+                                            'supporting_words': 'unit A'}]}])
+            return native_call('update_memory', 'wrong-source', **proposal)
+        if ordinal == 5:
+            rejected = actual_tool_receipt(wire)
+            assert rejected['status'] == 'rejected' and rejected['effect'] == 'none'
+            assert 'REVISION_SUPPORT_REVIEW_REJECTED' in rejected['reason']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            proposal['changes'][0]['evidence_for_new_value'] = [
+                {'fragment_handle': current[0]['fragment_handle'], 'supporting_words': 'unit B'}]
+            return native_call('update_memory', 'correct-source', **proposal)
+        assert ordinal in {2, 7}
+        assert actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'The requested change is saved.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice', session='s')
+    saved = functional.message(root, **common, message_id='initial',
+                               content='Remember: only this sample uses unit A.')
+    args = dict(message_id='correct', content='For that same sample use unit B instead.')
+    revised = functional.message(root, **common, **args)
+    assert saved['status'] == revised['status'] == 'COMPLETED'
+    assert len(wires) == 7 and revised['generation_calls'] == 5
+    record = revised['records'][0]
+    assert len(revised['records']) == 1 and record['id'] == saved['records'][0]['id']
+    assert record['value']['revision'] == 2
+    assert record['value']['functional_support']['content']['source_refs'] == [
+        revised['capture']['source_ref']]
+    assert record['value']['functional_support']['content']['semantic_support'] == 'unchecked'
+    reviews = [read_json(p) for p in root.glob('banks/*/*-revision-review-*.json')]
+    assert len(reviews) == 2 and all(r['attempts'] == 1 for r in reviews)
+    assert functional.message(root, **common, **args) == revised and len(wires) == 7
+    ledger = read_json(tmp_path / 'isolated-mechanical-budget.json')
+    assert ledger['generation_requests'] == 7
+
+
+@pytest.mark.parametrize('assessment', ['supported', 'unsupported', 'uncertain'])
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+@pytest.mark.parametrize('comparison', [False, True])
+def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
+    tmp_path: Path, assessment: str, review_kind: str, comparison: bool,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalIntegrityError, FunctionalRejection
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'owner': 'alice', 'message': 'm'},
+                'forget_epoch': 0}
+    calls: list[Any] = []
+    events: list[Any] = []
+    review = getattr(functional, f'review_{review_kind}_support')
+    detail = {'source_limits': 'Only the stated occasion.',
+              'proposed_limits': 'Only the stated occasion.',
+              'unsupported_differences': []} if comparison else {}
+
+    class Model:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
+                'id': 'decision', 'args': {'field_results': [{'field': 'content',
+                    'assessment': assessment, 'reason': 'Scripted assessment.', **detail}]}}])
+
+    path = tmp_path / 'review.json'
+    for _ in range(2):
+        if assessment == 'supported':
+            review(Model(), path, evidence, events.append, comparison=comparison)
+        else:
+            with pytest.raises(FunctionalRejection, match='SUPPORT_REVIEW_REJECTED'):
+                review(Model(), path, evidence, events.append, comparison=comparison)
+    assert len(calls) == 1 and len(events) == 2
+    assert all(e['semantic_support'] == 'unchecked' for e in events)
+    with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
+        review(Model(), path, evidence, events.append, comparison=not comparison)
+    with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
+        review(Model(), path, {**evidence, 'forget_epoch': 1}, events.append, comparison=comparison)
+    state = read_json(path)
+    state['decision']['field_results'][0]['reason'] = 'Changed after recording.'
+    write_json(path, state)
+    with pytest.raises(FunctionalIntegrityError, match='DECISION_CHANGED'):
+        review(Model(), path, evidence, events.append, comparison=comparison)
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+@pytest.mark.parametrize('comparison', [False, True])
+def test_interrupted_support_review_reservation_is_not_silently_retried(
+    tmp_path: Path, review_kind: str, comparison: bool,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+
+    calls = []
+    review = getattr(functional, f'review_{review_kind}_support')
+
+    class Interrupted:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            raise OSError('review response lost before persistence')
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'review.json'
+    with pytest.raises(OSError):
+        review(Interrupted(), path, evidence, lambda event: None, comparison=comparison)
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        review(Interrupted(), path, evidence, lambda event: None, comparison=comparison)
+    assert len(calls) == 1 and read_json(path)['attempts'] == 1
+
+
+@pytest.mark.parametrize(('enabled', 'repeat', 'interrupt'), [
+    (False, False, False), (True, False, False), (True, True, False), (True, False, True),
+])
+def test_unavailable_tool_feedback_preserves_completed_business_and_original_allowance(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: bool, repeat: bool, interrupt: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, catalog_feedback=enabled,
+        format_failure_receipts=True, support_review=True)
+    generate = functional.LangMemRecipeChatModel._generate
+    interrupted = False
+
+    def interrupt_after_rejection(self: Any, messages: Any, *args: Any, **kwargs: Any) -> Any:
+        nonlocal interrupted
+        rejected = any(isinstance(m, ToolMessage) and m.name == 'update_memory'
+                       for m in messages)
+        if interrupt and rejected and not interrupted:
+            interrupted = True
+            raise OSError('interrupted after catalog rejection was checkpointed')
+        return generate(self, messages, *args, **kwargs)
+
+    monkeypatch.setattr(functional.LangMemRecipeChatModel, '_generate', interrupt_after_rejection)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            return native_call('reserve_and_label', 'reserve', item_key='catalog-probe',
+                               quantity=1, destination='local', packing='box')
+        assert 'update_memory' not in {t['function']['name'] for t in wire['tools']}
+        if ordinal == 3 or repeat:
+            return native_call('update_memory', f'unavailable-{ordinal}',
+                               record_id='not-a-real-record', content='Never execute this.')
+        assert ordinal == 4
+        rejection = actual_tool_receipt(wire)
+        assert rejection['origin'] == 'tool_catalog' and rejection['effect'] == 'none'
+        assert rejection['operation_executed'] is False
+        assert 'update_memory' not in rejection['available_tools']
+        return {'role': 'assistant', 'content': 'Reservation and label completed.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='operate',
+                content='Reserve and label one catalog-probe for local delivery.')
+    result = functional.message(root, **args)
+    if interrupt:
+        assert result['status'] == 'UNKNOWN' and len(wires) == 3
+        result = functional.message(root, **args, resume=True)
+    assert result['status'] == ('COMPLETED' if enabled and not repeat else 'FAILED')
+    if not enabled:
+        assert result['error'] == 'VLLM_CHAT_UNKNOWN_TOOL' and len(wires) == 3
+    elif repeat:
+        assert result['error'] == 'FUNCTIONAL_FORMAT_REPROPOSAL_EXHAUSTED'
+        assert len(wires) == 4
+    else:
+        assert len(wires) == 4
+    assert result['records'] == []
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    world = result['world']['world']
+    assert len(world['reservations']) == 1 and len(world['attempts']) == 1
+    assert world['reservations'][0]['label_status'] == 'created'
+    assert all(p['identity']['name'] != 'update_memory'
+               for p in result['world']['receipt_progress'].values())
+    assert functional.message(root, **args) == result
+    assert len(wires) == (3 if not enabled else 4)
+
+
+@pytest.mark.parametrize('decision', [
+    {'field_results': []},
+    {'field_results': [{'field': 'content', 'assessment': [], 'reason': 'Invalid scalar.'}]},
+    {'field_results': [{'field': 'scope.unknown', 'assessment': 'supported', 'reason': 'Wrong.'}]},
+])
+@pytest.mark.parametrize('review_kind', ['revision', 'formation'])
+def test_invalid_support_review_never_marks_delivery_or_retries(
+    tmp_path: Path, decision: dict[str, Any], review_kind: str,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+    from milai_lab.providers.chat_bridge import IncompleteChatResponse
+
+    calls, deliveries = [], []
+    review = getattr(functional, f'review_{review_kind}_support')
+
+    class Malformed:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
+                                                     'id': 'invalid', 'args': decision}])
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'review.json'
+    with pytest.raises(IncompleteChatResponse,
+                       match=f'{review_kind.upper()}_REVIEW_SCHEMA_INVALID'):
+        review(Malformed(), path, evidence, lambda event: None,
+               on_delivery=lambda: deliveries.append(True))
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        review(Malformed(), path, evidence, lambda event: None,
+               on_delivery=lambda: deliveries.append(True))
+    assert len(calls) == 1 and deliveries == []
+
+
+@pytest.mark.parametrize('comparison', [False, True])
+def test_new_formation_review_rejects_scope_loss_before_commit_and_shares_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, comparison: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        formation_review=True, support_review=True, support_comparison=comparison,
+        catalog_feedback=True)
+    original = 'Only this workshop: try short sentences; supplier labels are excluded.'
+    selected: list[str] = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='new_assertion', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        if ordinal in {3, 5}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_formation_support']
+            assert wire['tool_choice'] == 'required' and wire['temperature'] == 0
+            assert wire['chat_template_kwargs']['enable_thinking'] is False
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert evidence['record_id'] is None and evidence['basis'] == 'user_statement'
+            assert len(evidence['changes']) == 1
+            change = evidence['changes'][0]
+            assert not change['before_present'] and change['after_present']
+            assert change['field'] == 'content'
+            assert change['after'] == ('Always use short sentences.' if ordinal == 3 else original)
+            assert change['selected_original_fragments'][0]['source_role'] == 'user'
+            assert original in change['selected_original_fragments'][0]['content']
+            detail = {}
+            if comparison:
+                fields = wire['tools'][0]['function']['parameters']['properties'][
+                    'field_results']['items']['properties']
+                assert list(fields).index('source_limits') < list(fields).index('assessment')
+                detail = {'source_limits': 'This workshop only; best effort; excludes suppliers.',
+                    'proposed_limits': 'Always, with no exclusions.' if ordinal == 3 else original,
+                    'unsupported_differences': ['Only this workshop and try were dropped.']
+                        if ordinal == 3 else []}
+            return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content',
+                'assessment': 'unsupported' if ordinal == 3 and not comparison else 'supported',
+                'reason': 'Temporary scope and try were omitted.' if ordinal == 3
+                          else 'Original scope and modality preserved.', **detail}])
+        if ordinal == 2:
+            selected.extend(u['fragment_handle'] for u in materials(wire)['items']
+                            if u['type'] == 'fragment' and u['input_relation'] == 'current_request')
+            return native_call('save_memory', 'broad', content='Always use short sentences.',
+                               fragment_handles=selected)
+        if ordinal == 4:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['status'] == 'rejected' and receipt['effect'] == 'none'
+            assert 'FORMATION_SUPPORT_REVIEW_REJECTED' in receipt['reason']
+            if comparison:
+                assert 'Only this workshop and try were dropped.' in receipt['reason']
+            assert memory_effects(wire)['confirmed_semantic_commit_count'] == 0
+            assert not any(u['type'] == 'record' for u in materials(wire)['items'])
+            return native_call('save_memory', 'limited', content=original,
+                               fragment_handles=selected)
+        assert ordinal == 6 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Saved the temporary best-effort requirement.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='remember',
+                content='Remember: ' + original)
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result.get('error')
+    assert result['generation_calls'] == len(wires) == 6
+    assert len(result['records']) == 1
+    value = result['records'][0]['value']
+    assert value['revision'] == 1 and value['content'] == original
+    assert value['functional_support']['content']['semantic_support'] == 'unchecked'
+    assert result['operation_status']['business']['status'] == 'not_executed'
+    assessments = [read_json(p) for p in root.glob('banks/*/*-formation-review-*.json')]
+    assert len(assessments) == 2 and all(a['attempts'] == 1 for a in assessments)
+    assert not list(root.glob('banks/*/*-revision-review-*.json'))
+    assert functional.message(root, **args) == result and len(wires) == 6
+    assert read_json(tmp_path / 'isolated-mechanical-budget.json')['generation_requests'] == 6
+
+
+@pytest.mark.parametrize('lost_review', [False, True])
+@pytest.mark.parametrize('comparison', [False, True])
+def test_formation_review_after_business_preserves_effects_and_requires_outcome_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_review: bool, comparison: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        receipt_units=True, formation_review=True, support_review=True,
+        support_comparison=comparison, catalog_feedback=True, format_failure_receipts=True)
+    selected: dict[str, list[str]] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> Any:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='explicit',
+                allow_forgetting=False, business_action_request='perform',
+                business_operations=['reserve_and_label'])
+        if ordinal == 2:
+            selected['request'] = [u['fragment_handle'] for u in materials(wire)['items']
+                if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            return native_call('reserve_and_label', 'reserve', item_key='formation item',
+                               quantity=1, destination='local', packing='box')
+        if ordinal == 3:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['receipt']['label_status'] == 'created'
+            selected['outcome'] = [u['fragment_handle'] for u in receipt['source_fragment_index']]
+            return native_call('save_memory', 'request-is-not-result',
+                content='The formation item was reserved and labeled.',
+                fragment_handles=selected['request'])
+        if ordinal in {4, 6}:
+            assert [t['function']['name'] for t in wire['tools']] == ['review_formation_support']
+            evidence = json.loads(next(m['content'] for m in wire['messages']
+                                       if m['role'] == 'user'))
+            assert evidence['basis'] == ('user_statement' if ordinal == 4 else 'tool_observation')
+            quotes = evidence['changes'][0]['selected_original_fragments']
+            assert {q['source_role'] for q in quotes} == ({'user'} if ordinal == 4 else {'tool'})
+            if lost_review:
+                return OSError('formation assessment response unavailable')
+            detail = {'source_limits': 'Requested action only.' if ordinal == 4
+                       else 'Confirmed native reserve and label.',
+                      'proposed_limits': 'Claims a completed reserve and label.',
+                      'unsupported_differences': ['Request became a completed outcome.']
+                       if ordinal == 4 else []} if comparison else {}
+            return native_call('review_formation_support', f'assess-{ordinal}', field_results=[{
+                'field': 'content', 'assessment': 'unsupported' if ordinal == 4 else 'supported',
+                'reason': 'A request is not a result.' if ordinal == 4
+                          else 'Actual native outcome.', **detail}])
+        if ordinal == 5:
+            receipt = actual_tool_receipt(wire)
+            if lost_review:
+                assert receipt['status'] == 'outcome_unknown' and receipt['effect'] == 'unconfirmed'
+                return {'role': 'assistant',
+                        'content': 'Business completed; memory is unconfirmed.'}
+            assert receipt['status'] == 'rejected' and receipt['effect'] == 'none'
+            return native_call('save_memory', 'actual-outcome',
+                content='The formation item was reserved and labeled.',
+                fragment_handles=selected['outcome'])
+        assert ordinal == 7 and actual_tool_receipt(wire)['status'] == 'committed'
+        return {'role': 'assistant', 'content': 'Completed the business and recorded its outcome.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank='b', owner='alice', session='s', message_id='operate',
+                content='Reserve and label one formation item for local delivery in a box. '
+                        'Save the actual outcome.')
+    result = functional.message(root, **args)
+    assert result['status'] == 'COMPLETED', result.get('error')
+    assert len(result['world']['world']['attempts']) == 1
+    assert result['world']['world']['reservations'][0]['label_status'] == 'created'
+    assert result['operation_status']['business']['status'] == 'completed'
+    assert len(result['records']) == (0 if lost_review else 1)
+    if lost_review:
+        assert result['operation_status']['semantic_memory']['status'] == 'unknown'
+        assert '未知' in result['final_answer']
+        reviews = [read_json(p) for p in root.glob('banks/*/*-formation-review-*.json')]
+        assert len(reviews) == 1 and reviews[0]['attempts'] == 1 and 'decision' not in reviews[0]
+    else:
+        assert result['records'][0]['value']['basis'] == 'tool_observation'
+        status = result['operation_status']['semantic_memory']
+        assert status['status'] == 'partial'  # The first rejected attempt remains in the aggregate.
+        assert [r['status'] for r in status['operations']] == ['not_committed', 'committed']
+    assert len(wires) == (5 if lost_review else 7)
+    assert functional.message(root, **args) == result
+    resumed = functional.message(root, **args, resume=True)
+    for key in ['status', 'records', 'world', 'operation_status',
+                'final_answer', 'generation_calls']:
+        assert resumed[key] == result[key]
+    assert resumed['usage'] == [] and resumed['attempt'] == result['attempt'] + 1
+    assert resumed['budget_before'] == resumed['budget_after'] == result['budget_after']
+    assert len(wires) == (5 if lost_review else 7)
+    ledger = read_json(tmp_path / 'isolated-mechanical-budget.json')
+    assert ledger['generation_requests'] == len(wires)
+    assert ledger['generation']['unknown_usage'] == int(lost_review)
+
+
+@pytest.mark.parametrize('changed', [
+    {'source_limits': ''}, {'proposed_limits': ' '}, {'source_limits': 'x' * 1001},
+    {'unsupported_differences': {}}, {'unsupported_differences': [False]},
+    {'unsupported_differences': ['']}, {'unsupported_differences': ['x'] * 17},
+    {'extra': 'Not declared'},
+])
+def test_support_comparison_invalid_detail_never_commits_or_retries(
+    tmp_path: Path, changed: dict[str, Any],
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalRejection
+    from milai_lab.providers.chat_bridge import IncompleteChatResponse
+
+    calls, deliveries = [], []
+
+    class Model:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            calls.append(messages)
+            return AIMessage(content='', tool_calls=[{'name': 'review_formation_support',
+                'id': 'comparison', 'args': {'field_results': [{'field': 'content',
+                    'source_limits': 'Only the stated occasion.',
+                    'proposed_limits': 'Only the stated occasion.',
+                    'unsupported_differences': [], 'reason': 'Matches.',
+                    'assessment': 'supported', **changed}]}}])
+
+    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    path = tmp_path / 'comparison.json'
+    with pytest.raises(IncompleteChatResponse, match='FORMATION_REVIEW_SCHEMA_INVALID'):
+        functional.review_formation_support(Model(), path, evidence, lambda event: None,
+            on_delivery=lambda: deliveries.append(True), comparison=True)
+    with pytest.raises(FunctionalRejection, match='OUTCOME_UNAVAILABLE_NO_COMMIT'):
+        functional.review_formation_support(Model(), path, evidence, lambda event: None,
+            on_delivery=lambda: deliveries.append(True), comparison=True)
+    assert len(calls) == 1 and deliveries == []
+    assert read_json(path)['binding']['comparison'] == 'explicit_dimensions_v1'
+
+
+@pytest.mark.parametrize('malformed', [False, True])
+def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, malformed: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        operation_completion=True, current_delivery=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True, optional_withdrawal=True,
+        explicit_reads=True, receipt_response=True, format_failure_receipts=True)
+    seen: dict[str, Any] = {}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4, 7}:
+            return native_call('classify_current_request', f'mode-{ordinal}',
+                memory_write_request='explicit' if ordinal < 7 else 'none',
+                allow_forgetting=False, business_action_request='none', business_operations=[])
+        catalog = {t['function']['name']: t['function'] for t in wire['tools']}
+        assert set(catalog['read_memory']['parameters']['properties']) == {'record_id'}
+        assert set(catalog['read_memory_history']['parameters']['properties']) == {'record_id'}
+        if ordinal in {2, 5}:
+            packet = materials(wire)
+            current = [u['fragment_handle'] for u in packet['items']
+                       if u['type'] == 'fragment' and u['input_relation'] == 'current_request']
+            if ordinal == 2:
+                return native_call('save_memory', 'save',
+                    content='Only this workshop: try quiet seats.', fragment_handles=current)
+            record = next(u for u in packet['items'] if u['type'] == 'record')
+            return native_call('update_memory', 'withdraw', read_handle=record['read_handle'],
+                retract=True, evidence_for_withdrawal=[{'fragment_handle': current[0],
+                                                       'supporting_words': 'Withdraw'}])
+        if ordinal in {3, 6}:
+            receipt = actual_tool_receipt(wire)
+            assert receipt['status'] == 'committed'
+            seen['id'] = receipt['id']
+            return {'role': 'assistant', 'content': 'The requested memory operation is committed.'}
+        assert 'save_memory' not in catalog and 'update_memory' not in catalog
+        if ordinal == 8 or (malformed and ordinal == 9):
+            if ordinal == 9:
+                assert actual_tool_receipt(wire)['status'] == 'error'
+            return native_call('read_memory_history', f'history-{ordinal}', record_id=seen['id'],
+                               **({'revision': 'None'} if malformed and ordinal == 8 else {}))
+        assert ordinal == (10 if malformed else 9)
+        receipt = actual_tool_receipt(wire)
+        assert {u['revision'] for u in receipt['items']} == {1, 2}
+        assert all(u['content'] == 'Only this workshop: try quiet seats.'
+                   for u in receipt['items'])
+        assert {u['revision'] for u in receipt['items'] if u['retracted']} == {2}
+        assert all(u['version_view'] == 'historical_exact_revision' for u in receipt['items'])
+        assert not memory_effects(wire)['mutation_receipts']
+        return {'role': 'assistant', 'content': (
+            'That temporary preference was withdrawn; its original text is preserved.')}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank='b', owner='alice')
+    saved = functional.message(root, **common, session='s1', message_id='save',
+        content='Remember: Only this workshop: try quiet seats.')
+    withdrawn = functional.message(root, **common, session='s2', message_id='withdraw',
+        content='Withdraw the workshop seating preference.')
+    args = dict(session='s3', message_id='history',
+                content='Is that still current? What was the original history?')
+    result = functional.message(root, **common, **args)
+    assert saved['status'] == withdrawn['status'] == result['status'] == 'COMPLETED', result
+    assert result['records'] == withdrawn['records']
+    assert result['records'][0]['status'] == 'retracted'
+    assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
+    reads = [m for m in result['messages'] if m.get('type') == 'tool'
+             and m.get('name') == 'read_memory_history']
+    assert len(reads) == (2 if malformed else 1)
+    assert len(wires) == (10 if malformed else 9)
+    count = len(wires)
+    assert functional.message(root, **common, **args) == result
+    assert len(wires) == count

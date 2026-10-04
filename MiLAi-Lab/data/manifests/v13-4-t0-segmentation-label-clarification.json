@@ -1,0 +1,16 @@
+{
+  "kind": "V13_4_T0_SEGMENTATION_LABEL_CLARIFICATION",
+  "recorded_at_utc": "2026-10-02T18:27:23.358223+00:00",
+  "status": "DOCUMENTATION_LABEL_MISMATCH_NO_METHOD_CHANGE",
+  "frozen_config_path": "configs/v13-4-t0-q0.json",
+  "frozen_config_sha256": "6bf7ab0222eceb840245e022597dac2a8d6a2e85f2ef4f58ef0afa2c3851edf9",
+  "config_descriptive_label": "paragraph_line_whitespace_prefix_v1",
+  "actual_frozen_segment_profile": {
+    "max_body_tokens": 384,
+    "algorithm": "paragraph_line_whitespace_codepoint_v1"
+  },
+  "scope": "Both historical index drivers explicitly instantiated SegmentProfile(384); generic config algorithm label was descriptive rather than consumed. All actual4,650 spans, source hashes, range partitions and package source bytes are already frozen and compared unchanged.",
+  "decision": "Preserve original config and freeze bytes. T0 driver must declare this specific historical label mismatch, validate actual profile/receipt and refuse any other unknown combination. No segmentation/ranking/prompt/budget or annotation behavior change.",
+  "query_creation_status": "Authorship already released; this is a pre-Reader engineering identity clarification, not an exposed method revision.",
+  "relevant_freeze": "data/manifests/v13-4-t0-authoring-freeze.json"
+}

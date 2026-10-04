@@ -1,0 +1,17 @@
+{
+  "kind": "V13_3_ACTIVE_ENTRY_FREEZE",
+  "recorded_at_utc": "2026-10-01T23:52:31.553824+00:00",
+  "goal": "ACTIVE",
+  "plan_path": "docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_v13_3.md",
+  "plan_sha256": "9de1d62920d681beda11520408c00ea67526074d217e0afc24fefafff7d39050",
+  "baseline_commit": "22addcbc378a75d7f854ddc4127eb80f45ca52fb",
+  "remote_main_observed": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "local_main_observed": "9515017a5dfaba6b6e306fa778fd20f4383b6e35",
+  "continuous_ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "continuous_ledger_sha256": "991a568c47d3cdb2ad23b658565729331b876cc1c33e837e1f7f89e0405c136a",
+  "inherited_requirements": 48,
+  "inherited_status": "PAUSED",
+  "reference_companions": "NOT_LOCATED_IN_PROVIDED_DOCUMENT_DIRECTORY",
+  "actual_model_HTTP": 0,
+  "old_experiment_artifacts_changed": false
+}

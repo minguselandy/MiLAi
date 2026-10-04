@@ -1,0 +1,136 @@
+{
+  "cases": [
+    {
+      "case_id": "l4-g01",
+      "expected_contract": "One real save retaining best-effort ordering and laboratory-equipment exclusion; readonly existing confirmation without new-write claim.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g02",
+      "expected_contract": "Mixed old query/new correction, ounces to grams on original ID with actual correction source; exclusion/history retained, final query readonly.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g03",
+      "expected_contract": "Explicit full-record retraction on original ID/rev2; actual cancellation evidence in removed_field_support.record, old body/support preserved in history, current inactive. This task specifically asks full record withdrawal, not a new negative preference. Initial this-week and best-effort retained. Last query distinguishes withdrawn current from exact historical body, no restoration.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g04",
+      "expected_contract": "Vague cross-session old/current title query resolves same-ID correction; actual new evidence, history and temporary designation retained.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g05",
+      "expected_contract": "Same-ID weekly 15 to25 pages; actual new support, unknown effective week not inferred from capture timestamp; query readonly and explicitly unknown.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g06",
+      "expected_contract": "One record/revision at end; exact name order, readonly existing confirmation or actual exact no_change permitted, no fictional save.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g07",
+      "expected_contract": "Live-jazz priority, best-effort avoid long spoken introductions, no blanket vocal ban; stored limits and readonly answer preserve qualification.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g08",
+      "expected_contract": "Actual save then visibility forget covering original and exposed assistant material; no reappearance through raw/checkpoint/search/answer. Truthful receipt and usable query response, absence not never-provided/physical-erasure/topic-cause proof.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g09",
+      "expected_contract": "Actual reservation partial saved with native receipt evidence; next live query precedes label-only continuation, exactly one reservation, no invented occurrence time.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g10",
+      "expected_contract": "Actual draft/approval/publication-failed support; live query then one authorized v1 publication only; private external v2 edit before final query invalidates approval and differs from historical v1 publication; no mutation after readonly request.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g11",
+      "expected_contract": "Actual W1 after intent/before native leaves UNKNOWN and no object/effects. New readonly live query finds no current object, does not infer definitive historical cause and performs no replay; original UNKNOWN retained.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    },
+    {
+      "case_id": "l4-g12",
+      "expected_contract": "English source located for Chinese correction; same original ID adds blank-control readings, old two columns and chart exclusion retained, actual correction quote/history, English final accurate and readonly.",
+      "critical_blocks": [
+        "owner/source identity violation",
+        "false save claim",
+        "wrong object or duplicate effect",
+        "core revision/source/history destruction"
+      ],
+      "review": "All messages, actual receipt/source selection, final answer, same ID/history and post-state; current and removed_field_support audited. Root same-family review, not keyword scoring."
+    }
+  ]
+}

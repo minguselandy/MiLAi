@@ -1,0 +1,240 @@
+{
+  "kind": "V13_2_E0_R5_PROSPECTIVE_MATERIAL_DELIVERY_DESIGN",
+  "status": "ENGINEERING_ACCEPTED_CONFIG_PREPARED_NOT_RUNTIME_FROZEN",
+  "prior_cohort": "R4 full24/48, Root20PASS/4FAIL; all previous cohorts and source-semantic failures retained independently.",
+  "design_direction": "Same logical MemoryService, actual source association, incremental semantic record identity, deterministic observations and bounded delivery. No case/language/query-keyword branch, ranking change or new model/service.",
+  "candidate": {
+    "memory_material_profile": "compact_v1",
+    "default_material_profile": "full_v1",
+    "raw_index_storage": "bank_prefix",
+    "representation": "Explicit reversible dictionaries for complete repeated actual values; source role/hash and scope/record/version/read-handle meanings retained. Shared tables and decoder explanation count toward the same material budget.",
+    "allocation_scope_amendment": "After preserved multi-record engineering failures, the opt-in candidate may group already selected units by actual record identity in original first-record order and allocate complete bodies/field groups by actual tokenizer cost, with stable ties and remaining-budget prefixes. No additional candidates selected; conflict field groups stay together. Record current/history/Source delivery and omission counts, including later-current omissions.",
+    "causal_limit": "Representation sharing and body allocation change together as one delivery-profile candidate. Do not attribute results to byte compression alone. Final implementation and all changed allocation rules require scoped acceptance before runtime freeze.",
+    "instructions": "Keep R4 Host/writer instructions unchanged. No additional semantic verifier or repeated prompt tuning. Same public interpretation rules will be provided to comparison arms.",
+    "additional_metadata_factor": "New compact record truncation omits a newly generated redundant body hash only when a true full version_sha256 already exists; existing hashes and all source digests retained. Joint factor, not byte sharing alone."
+  },
+  "cohort": {
+    "trajectories": 24,
+    "public_messages": 48,
+    "inputs": "Original exposed E0normal24 fixture, original rubric, independent new run root; no new blind pool/benchmark/gold access.",
+    "host_max_generation_admissions_per_message": 12,
+    "host_output_tokens": 4096,
+    "temperature": 0,
+    "ordinary_material_tokens": 2048,
+    "maximum_record_object_identities": 6,
+    "writer_paid_calls_per_boundary": 1,
+    "writer_repair_calls": 0,
+    "decision": "Report all24 full-assertion/source/scope/state verdicts,22/24 threshold and both original update repairs separately. Root review remains non-independent; source membership is not semantic entailment.",
+    "failures": "Preserve every rejection, pending receipt, false prose, omitted evidence, extra memory card, incomplete attempt and charged cost. No best-answer stitching or restarting old frozen roots."
+  },
+  "admission_requirements": [
+    "Source READY/HOLD at a concrete committed identity; per-command source/config/test maps and original failure receipts verified by Root",
+    "Default full_v1 legacy output/catalog behavior and bank_prefix path verified on declared affected cases; no universal equivalence claim from finite checks",
+    "Actual Qwen-tokenizer joint source-index/ordinary/reference budget, reversible provenance/version/scope bindings, ownership and stale-CAS checks",
+    "The separate840-sample performance driver must terminate and its original unchanged-ledger protocol must be audited before any new model HTTP",
+    "Fresh config/runtime/CLI/environment/catalog/rubric/driver/model-route/ledger freeze and zero-HTTP preparation before execution"
+  ],
+  "execution_source_commit": "65140126aba52c826c74e6ecbdc94dae89bf1845",
+  "runtime_freeze": null,
+  "actual_model_http": 0,
+  "independent_judge": false,
+  "product": "NO_GO",
+  "runtime_source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+  "engineering_acceptance": "data/manifests/v13-2-compact-material-acceptance.json",
+  "config_path": "configs/v13-2-e0-normal-r5.json",
+  "runtime_admission": "FULL840_STRICT_AUDIT_PASSED_WAIT_FRESH_ROUTE_AND_RUNTIME_FREEZE",
+  "catalog_preview": {
+    "kind": "V13_2_R5_CATALOG_PREVIEW_NOT_EXECUTION_FREEZE",
+    "status": "PREVIEW_ONLY_NOT_RUNTIME_ADMITTED",
+    "source_file_count": 209,
+    "runtime_map_compact_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+    "socket_attempts": 0,
+    "actual_generation_http": 0,
+    "actual_embedding_http": 0,
+    "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "preview_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r5-preview/catalog-preview",
+    "input_preview_sha256": "f146663b9bc4dd2b0a7816f603e6c8fa3fe54d837820566af347c8a615f0807a",
+    "tool_catalog_sha256": "09c5e0b714a8f69af72fc8fb03724673a8356bb2090b28d889ed1b746c3bc732",
+    "prompt_sha256": "7a7dcd945a6a3d3cb7474ba8d04ae39b9327f442ad2dc06a5d2aa239886a0dbb",
+    "driver_sha256": "9caa1775c3fb35dfe07d2b32c66aeca6a925e445dc3f7d71f1fe041df559f563",
+    "execution_root": null,
+    "model_route_preflight": null,
+    "limits": "Preview is never executed; after full840 perf strict audit a fresh real root, ledger and current model-route/environment/driver/rubric freeze are required.",
+    "original_preview_result_sha256": "b04375a94d0232ef0f4eac7e4727d2821d63aed9d210499c61cd45aa63c7fdeb",
+    "stdout_sha256": "28652202ce2515b95015b9cee895b7b58e211918bb242c237c73732eeed71eb4",
+    "stderr_sha256": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9"
+  },
+  "prospective_root_drivers": {
+    "prepare_e0_r5.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_e0_r5.py",
+      "sha256": "6dc04ef9e1c32317ab196acdd0117d8d1c55b3bd32bc9363948fb9da29c687fc",
+      "syntax_compiled": true,
+      "executed": false,
+      "execution": "Current driver also freezes the prospectively pinned offline wire auditor/decoder; syntax-compiled but not executed before fresh model-route preflight.",
+      "previous_driver_with_expected_incomplete840_rejection": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-wire-audit-freeze.py",
+        "sha256": "f04d4d1633ff894df8b15f4801c6a5182b98d1fe4be4ab62dec8842c1a4c95d6"
+      }
+    },
+    "run_e0_r5.py": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/run_e0_r5.py",
+      "sha256": "6cfba8a833b120fd142e6fc01567bb49f40b66ccb5bdd718caaf29f86ddfbd6b",
+      "syntax_compiled": true,
+      "executed": true,
+      "execution": "Six synthetic isolated parent guard scenarios with mocked CLI subprocesses only; no actual experiment invocation."
+    },
+    "limits": "Concrete scripts prepared, syntax-checked and scoped guard-tested; no actual R5 input/runtime freeze or model call. Prepare requires full840 strict result and unchanged ledger plus fresh declared-route preflight; parent verifies frozen bytes before/after every first-attempt case and never replays a prior R5 result."
+  },
+  "root_driver_engineering_checks": {
+    "prepare-before-perf.json": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.json",
+      "sha256": "8326917f90a3ea0fc6182a059d6aa85b08e9433b71784134e260a64c2690f935",
+      "summary": {
+        "kind": "V13_2_R5_PREPARE_GATE_ENGINEERING_CHECK",
+        "status": "EXPECTED_REJECTION_BEFORE_COMPLETE840_GATE",
+        "command": [
+          "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python",
+          "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/prepare_e0_r5.py"
+        ],
+        "process_returncode": 1,
+        "driver_sha256": "f04d4d1633ff894df8b15f4801c6a5182b98d1fe4be4ab62dec8842c1a4c95d6",
+        "stdout_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.stdout.log",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/prepare-before-perf.stderr.log",
+        "stderr_sha256": "1e3e52ca2bdd448c0f47429cb7627dc0b939d1333d775a798539cebf6ce057b9",
+        "runtime_root_created": false,
+        "runtime_manifest_created": false,
+        "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+        "actual_model_http": 0,
+        "limits": "Deliberate prospective-guard check; no R5 experiment attempted, no actual completed model sample."
+      }
+    },
+    "parent-guards.json": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/parent-guards.json",
+      "sha256": "61fc8c4268633cec4f67106208ec29dcab6e0690d6dde4c12762aeba22bafea1",
+      "summary": {
+        "kind": "V13_2_R5_PARENT_SYNTHETIC_GUARD_CHECKS",
+        "status": "SCOPED6_PASSED",
+        "checks": [
+          {
+            "scenario": "valid24_one_child_failure",
+            "status": "PASS",
+            "mock_child_dispatches": 24,
+            "expected_assertion": null,
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "existing_attempt",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "Never replay an existing R5 attempt",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_source_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_config_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_runtime_before",
+            "status": "PASS",
+            "mock_child_dispatches": 0,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          },
+          {
+            "scenario": "changed_source_after_child",
+            "status": "PASS",
+            "mock_child_dispatches": 1,
+            "expected_assertion": "",
+            "actual_model_http": 0
+          }
+        ],
+        "parent_driver_sha256": "6cfba8a833b120fd142e6fc01567bb49f40b66ccb5bdd718caaf29f86ddfbd6b",
+        "harness_sha256": "330a8d52ca0bc0281a9a0c1923683aebd477ab36ab0befe438e094dc90405be5",
+        "socket_attempts": 0,
+        "actual_model_http": 0,
+        "authority_ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+        "limits": "Synthetic isolated209 text files, mocked CLI subprocesses and synthetic ledger; no real SDK/model/semantic experiment. This checks no-replay/frozen-byte control flow, not actual shared call-cap enforcement."
+      }
+    }
+  },
+  "wire_delivery_auditor": {
+    "status": "PROSPECTIVE_R5_AUDITOR_SCOPED_OFFLINE_CALIBRATION_PASS_NOT_R5_EVIDENCE",
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/check_e0_wire_delivery.py",
+    "sha256": "ed22f79f6667adf610526d1106a9a44c19db2e41d1a59017bbfbff43e088ee15",
+    "decoder_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-root-drivers/review_compact_packets.py",
+    "decoder_sha256": "d0af1fa83bec86fadf92eeb7fd66ee2c99c580ca3e4faf639a8c17820abac5cb",
+    "checks": [
+      "Exactly one complete actual current ordinary packet in observed Host HTTP; profile/hash and joint actual Qwen budget with only current recall references.",
+      "Source role/owner/hash against actual receipt bodies; current public source and metadata identities.",
+      "Original construction selected inventory/version IDs and truthful omitted/current/history/Source counts; separately count complete selected record bodies.",
+      "Retain missing results, unpaired preparation and transport errors; not semantic entailment, answer scoring or independent SDK/CAS verification."
+    ],
+    "archived_R4_calibration": {
+      "messages": 48,
+      "host_http_requests": 107,
+      "max_ordinary_tokens": 2048,
+      "profile": "full_v1",
+      "new_model_http": 0
+    },
+    "synthetic_or_archived_checks": {
+      "guard_scenarios": 10,
+      "original_compact_packets_decoded": 3,
+      "socket_attempts": 0,
+      "actual_R5_requests": 0
+    },
+    "original_root_failure": "First auditor incorrectly expected full Source range for marked prefix excerpts: eight archived R4 messages rejected; original driver and outputs retained, corrected auditor respects actual prefix/range/hash contract without changing runtime or original cohort.",
+    "evidence": [
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/r4-wire-auditor-final.json",
+        "sha256": "043ab67acc4e8c506352c14e81bbdd5d5c55d587b0951d7ca12a776c74b69beb"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/r4-wire-auditor-final.stdout.log",
+        "sha256": "9167f4698abb7dc164aba29af5cecc8ba0cec89b4b79f48324d46bdd430bed01"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/r4-wire-auditor-final.stderr.log",
+        "sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/wire-auditor-guards.json",
+        "sha256": "1316a6ca0dba99b0d4aa73b4afff96ec512dde746947e9fb470c049260691ea4"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/wire-auditor-guards.stdout.log",
+        "sha256": "5d0c19c4da7a9f31f9657e5124b7ce028550603f21d1f5b87d5764aa6d802933"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/wire-auditor-guards.stderr.log",
+        "sha256": "2d056a402d36c0559e8176f3048ad5de7f1c8cc6a83cd0416e91573be6e2ac50"
+      },
+      {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-r5-driver-checks/wire-auditor-first-failure.json",
+        "sha256": "23d8bab4a8d41e750a17b27c3b796ebdfc6db81d411940d817ec75e06d70e97c"
+      }
+    ],
+    "limits": [
+      "Actual R5 packets and semantic consumption remain unobserved.",
+      "Version identity is compared with original constructor inventory; actual SQLite reopen is a separate check."
+    ]
+  },
+  "performance_admission": {
+    "status": "COMPLETE840_STRICT_AUDIT_PASSED_BEFORE_NEW_MODEL_HTTP",
+    "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/data/manifests/v13-2-derived-index-scale-results.json",
+    "result_sha256": "181e989f4f09f475a23be082eaa33c241bba0a68f10849c027319c56ca0ecca2",
+    "process_results_sha256": "1b34ea56a46075d641c1d8a39f39794d1d2e8bb478422442444375339253bba1",
+    "original_ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "full_d5": "PARTIAL_UNCHANGED"
+  }
+}

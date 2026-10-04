@@ -1,0 +1,50 @@
+{
+  "kind": "V13_4_T0_EVALUATOR_MECHANICAL_CHECKPOINT",
+  "at_utc": "2026-10-02T19:05:20.293993+00:00",
+  "artifacts": {
+    "coverage_core": {
+      "path": "artifacts/v13-4/t0-coverage/coverage_core.py",
+      "sha256": "26b08d1f0d04a4ec60f8c47507d441ab34dec1fb47d48b6226153323189076d6"
+    },
+    "coverage_core_checks": {
+      "path": "artifacts/v13-4/t0-coverage/summary-r1.json",
+      "sha256": "0cff9a7caa8cca5c4cc1577e05d22a232990029b776aba5ccab802a2ece25e16"
+    },
+    "coverage_outer": {
+      "path": "artifacts/v13-4/t0-coverage/evaluate_frozen_prepare.py",
+      "sha256": "5883640c7d71ef43efa4763287f190507843ac183ba99bb1b1eaf2ef97e2475a"
+    },
+    "coverage_terminal": {
+      "path": "artifacts/v13-4/t0-coverage/evaluation-r0/terminal.json",
+      "sha256": "5b1141a668f6cb5ab804a45d4b86d855afa57da7b473cf9f7345df91945aad75"
+    },
+    "blind_export": {
+      "path": "artifacts/v13-4/t0-scoring/blind_export.py",
+      "sha256": "94f2501058a918ddcaa10b4e2326cd8d18f2d5cb701927ef3c6b8a5ee8ee2846"
+    },
+    "blind_export_checks": {
+      "path": "artifacts/v13-4/t0-scoring/blind-export-checks.json",
+      "sha256": "27f8a5a92c75ea98205327a1468cfde05553a22c92e223c2bb56364318288103"
+    },
+    "independent_preflight": {
+      "path": "artifacts/v13-4/t0-preflight-independent/report.json",
+      "sha256": "54cc1f30bae66d21e7bf883856c0650e4f22d7ed65cd7272df5f4627ffb8394a"
+    }
+  },
+  "scope": "Evaluator-only exact coverage, whole-unit joint-render budget witnesses and method-blind export; no semantic correctness or G1 claim",
+  "toy_checks": {
+    "coverage_core": 11,
+    "blind_export": 13,
+    "independent_real_tokenizer_controls": 3
+  },
+  "input_boundary": "Runtime never imports annotation/gold/scoring helpers; evaluator may inspect full frozen sources",
+  "coverage_denominators": {
+    "whole_query": 123,
+    "whole_query_NA": 5,
+    "partial_only": 4
+  },
+  "witness_limit": "Jointly rendered complete units within K<=32, not proof that greedy packing admits the same set",
+  "no_hit_limit": "NO_ENUMERATED_SET_COVERED does not prove semantic failure; alternative sets nonexhaustive",
+  "blind_export_natural_executed": false,
+  "independent_semantic_judge": false
+}

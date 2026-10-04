@@ -1,0 +1,94 @@
+{
+  "kind": "V13_4_N1_R0_ACTUAL_READER_WIRING_RESULTS",
+  "status": "TERMINAL",
+  "source_commit": "9ec7c19d15a84ccbf6f40a5f53e627700a375a39",
+  "freeze_path": "artifacts/v13-4/n1-wiring/freeze.json",
+  "freeze_sha256": "8d495c7dd6b3b973f0e701e2830bf2dcdf80977b78631ccfc2fe1b67e0a8fb00",
+  "pre_registered_rubric": "data/diagnostics/v13-4-n1-rubric.json",
+  "planned_and_completed_queries": 4,
+  "body_delivery": {
+    "original_sources_per_request": 3,
+    "complete_delivery_requests": 4,
+    "evidence_tokens_per_request": [
+      479,
+      479,
+      479,
+      479
+    ],
+    "budget": 2048,
+    "prompt_tokenizer_errors": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "selected_read_delivered_distinct": true,
+    "reader_consumption": "Root assessment only, delivery does not prove understanding"
+  },
+  "fact_source_unchanged": true,
+  "baseline_bank_sha256": "5445038aa0314390b132a17d65a3960f701d8f6685253f701a728846936b815e",
+  "costs": {
+    "generation_requests": 4,
+    "generation_known_tokens": 2887,
+    "generation_charged_tokens": 2887,
+    "embedding_requests": 0,
+    "query_planning_calls": 0,
+    "writer_calls": 0,
+    "physical_IO": "UNKNOWN",
+    "logical_reads_recorded": true,
+    "nested_times_additive": false
+  },
+  "continuous_ledger_after": {
+    "generation_requests": 9402,
+    "generation": {
+      "charged_tokens": 27040151,
+      "known_tokens": 27009764,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    },
+    "sha256": "5bf9a9c75d13c5d4b5d39e2f35df5175e345ac462c836280809ae36c07e9debd"
+  },
+  "semantic_root_diagnostics": [
+    {
+      "query_id": "q1",
+      "core_expected_information": "PRESENT_ROOT_DEVELOPMENT_REVIEW",
+      "extra_observed_at_as_utterance_or_publication_date": true,
+      "quality": "SCOPED_CORE_WITH_DATE_OVERCLAIM",
+      "independent_Judge": false
+    },
+    {
+      "query_id": "q2",
+      "core_expected_information": "PRESENT_ROOT_DEVELOPMENT_REVIEW",
+      "extra_observed_at_as_utterance_or_publication_date": false,
+      "quality": "SCOPED_CORRECT",
+      "independent_Judge": false
+    },
+    {
+      "query_id": "q3",
+      "core_expected_information": "PRESENT_ROOT_DEVELOPMENT_REVIEW",
+      "extra_observed_at_as_utterance_or_publication_date": true,
+      "quality": "SCOPED_CORE_WITH_DATE_OVERCLAIM",
+      "independent_Judge": false
+    },
+    {
+      "query_id": "q4",
+      "core_expected_information": "PRESENT_ROOT_DEVELOPMENT_REVIEW",
+      "extra_observed_at_as_utterance_or_publication_date": true,
+      "quality": "SCOPED_CORE_WITH_DATE_OVERCLAIM",
+      "independent_Judge": false
+    }
+  ],
+  "earliest_remaining_issue": "Reader adds correction-issued/confirmed date from observed_at. observed_at is actual ingestion/observation time and is not evidence of original authoring/publication time. Preserve3 extra unsupported date attributions; do not label4 wholly faithful answers.",
+  "scope": "Root-authored synthetic mechanical diagnostic only; not32 T0 histories, not G1/G2/efficacy/generalization/independent review. No benchmark/gold input to Reader.",
+  "evidence": {
+    "trace": "artifacts/v13-4/n1-wiring/reader-trace.jsonl",
+    "terminal": "artifacts/v13-4/n1-wiring/terminal.json",
+    "source_checks": "artifacts/v13-4/n1-checks/summary.json",
+    "engineering_review": "artifacts/v13-4/n1-review/review.json"
+  },
+  "audit_helper_issue": "Separate post-package summary helper expected obsolete real_model_path field and raised KeyError; shell then launched authorized runner. Runner independently validated frozen source/config/bank/index/ledger before HTTP. Helper corrected using accounted_provider_path and all mechanical preparations rechecked post-run, no requests repeated."
+}

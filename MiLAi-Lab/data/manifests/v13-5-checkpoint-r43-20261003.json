@@ -1,0 +1,325 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-03",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_INCOMPLETE_MECHANICAL_CANDIDATE",
+  "goal_status": "ACTIVE; checkpoint is neither final completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "candidate": "r43",
+  "source_parent_commit": "4f3152d5afd30c06360dd79667879d45cc645026",
+  "source_identity": "Checkpoint commit containing these exact file hashes; no r43 model cohort source freeze yet.",
+  "source_sha256": {
+    "src/milai_lab/baselines/langmem_agent.py": "0103ce4884e09cb9e31908e30947ea09e252333535cd5d325986de1964f3f57c",
+    "src/milai_lab/runners/functional.py": "fcd02ab94f5d10c4f5237d87546d9cf48a0bc444ff9175b3716b78dc326c0ed3",
+    "tests/unit/test_v13_5_functional_integration.py": "ad5f66edd1b0cd7871772f587e7dfaf35fe2e830fab38c0fad7ddf1fe988c80d",
+    "configs/v13-5-functional-r43.json": "b086869066485299c078ffb9e961a27fc95846d2e5a87f7df4894a691d337b5d"
+  },
+  "runtime_queue_active": false,
+  "r43_model_calls": 0,
+  "r43_input_freeze": null,
+  "r43_functional_acceptance": "NOT_RUN",
+  "change_scope": "Opt-in required first native tool proposal for existing authorized bounded maintenance completion; phase preserved on reopen, unchanged catalog and allowance. No Product Schema/API/permissions/Canonical changes.",
+  "mechanical_checks": {
+    "candidate": "r43",
+    "scope": "460 related/default/foundation tests PASS;12 production Qwen tokenizer/template probes PASS;4 installed SDK lifecycle checks PASS;Ruff,mypy2modules,package/tools boundaries and verification matrix PASS. Zero real model HTTP. Required choice applies once to actual authorized missing-maintenance completion, supports no_change with one ID/revision/history, persists pre-generation interruption across reopen, never adds business/forget permission, cannot increase shared format allowance or replay effects. Default auto remains.",
+    "preserved_first_failure": "First targeted3PASS1FAIL expected FAILED for injected OSError after execution, but existing contract correctly reports UNKNOWN. Test corrected to UNKNOWN with effect/state checks;4 targeted final and460 full passed. First Ruff one line-length issue fixed, logs retained.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r43-targeted.log": "e7a0a488e547aaa7a6e448736a72915bfc4b0216b5cdfea00077827740aad4ba",
+      "artifacts/v13-5/r43-targeted-final.log": "40ce2925b3daee54ad56bf2d30b5b5d41b1d6065ae6772cc1a70f1cd68e1ebf0",
+      "artifacts/v13-5/r43-regression.log": "d1bedc74425bcff5790286de5a653aff1800e1cd1a4de45e102f162f141e099a",
+      "artifacts/v13-5/r43-production-contracts-probe.py": "ff1a532e71fe11d04084d539eb37e43ea71596c7762c1a69c46a39f934931979",
+      "artifacts/v13-5/r43-production-contracts.json": "d2a468d4fe8f3b519e4b7c621c3c5b667e960ecdcdb708b0caf48a888dc56a8b",
+      "artifacts/v13-5/r43-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r43-sdk-lifecycle.log": "935ef591477b19d2150cd75fec60bee08a4d61f096ad4c21e5956c299947d9d6",
+      "artifacts/v13-5/r43-ruff.log": "d957388282c76f9400ebfa15af7d1c68e58bd8491d230da5d35f69091c7e87ad",
+      "artifacts/v13-5/r43-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "artifacts/v13-5/r43-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "artifacts/v13-5/r43-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "artifacts/v13-5/r43-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "artifacts/v13-5/r43-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+    }
+  },
+  "latest_cohorts": [
+    {
+      "id": "communication-r42",
+      "candidate_commit": "4f3152d5afd30c06360dd79667879d45cc645026",
+      "planned_cases": 11,
+      "planned_messages": 27,
+      "state": "COMPLETE_COMMUNICATION_WITH_EXISTING_CONFIRMATION_AND_SCOPE_FAILURES",
+      "semantic_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 2
+      },
+      "message_counts": {
+        "COMPLETED": 25,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "cost_delta": {
+        "generation_requests": 87,
+        "generation.known_tokens": 473428,
+        "generation.charged_tokens": 473428,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/communication-r42/input-freeze.json": "31ab2a3854c29b992ddebd0c13981f6b2abda84553fb81cca12a4ac768ac86db",
+        "configs/v13-5-functional-r42.json": "7b7210f9d7582c742a1e0233234897fcdb8d095df61e8f13d1f5983ef954b5fa",
+        "artifacts/v13-5/communication-r42/review.json": "c23184ed7e63bb873d1931f5846dbd8981a931857487853c10154b81f574d05b",
+        "artifacts/v13-5/communication-r42/seal.json": "71a1df3bf0ed3b1388d0a80e267385e8951c5b69d886e44da75b4ebee8cf11a4",
+        "artifacts/v13-5/communication-r42-manual-grades.json": "aa35187fadd2db677c6a02d3d97bed5ca0e9f6a5766b97a846cd873e5ba25bf9",
+        "artifacts/v13-5/communication-r42-review-notes.json": "c4733820fff9871b44838980abed5bbdbf63703f12ed99f8fc82455f827af9d6",
+        "artifacts/v13-5/communication-r42-all-review.jsonl": "20fa625e326de77e487a846db71aff520cf323cb249db0a1050932a3e20af9ad",
+        "artifacts/v13-5/communication-r42-evaluator/summary.json": "dede348947f057f4a932279731dfc4b9083838ad143548b80bf5f578146e31cd",
+        "artifacts/v13-5/communication-r42-forget-provider-check.json": "d6847add35782a2b74413bf8bf569a1a3199decd9d13c0aa3e39e0c9ba29e49a"
+      }
+    },
+    {
+      "id": "l1-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "state": "COMPLETE_L1_WITH_ORDINARY_READ_AND_SUPPORT_FAILURES",
+      "semantic_counts": {
+        "PASS_SCOPED": 19,
+        "FAIL": 5
+      },
+      "message_counts": {
+        "COMPLETED": 47,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 146,
+        "generation.known_tokens": 701550,
+        "generation.charged_tokens": 701550,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r40/input-freeze.json": "f944b567fa87a8ab97002694fad90c5fa42400c99d5b3f0e9e91fe0f7b0b5d6f",
+        "configs/v13-5-functional-r40.json": "712aceb7c45adaf9ad0e8e63471d04ce394594b30211819e455786ceb0541a9b",
+        "artifacts/v13-5/l1-r40/review.json": "df8607f1cec14f78bdb5dbfcdfb4a6de6de296cc9a80d6f16de6e8189af69da8",
+        "artifacts/v13-5/l1-r40/seal.json": "dd83b36f9c8551ff5a7e7616e4380afd83698411229274be6c911678f363fbec",
+        "artifacts/v13-5/l1-r40-manual-grades.json": "5f105bd9d2f1bde9232680cfc9c865a43950de35547ec8bfaecced94484f9434",
+        "artifacts/v13-5/l1-r40-review-notes.json": "3403c3e94cb14c7510a0acadbd49e7513e67286f16ee714c19879c60a7e242a3",
+        "artifacts/v13-5/l1-r40-all-review.jsonl": "d852cb60935dc947761962fcb73da68faab965a3b63dd72952b525d63403f92e",
+        "artifacts/v13-5/l1-r40-evaluator/summary.json": "193aa7c4f8904e1560875192314594dc4348b0686bca218f9a8c7fb696db7248"
+      }
+    },
+    {
+      "id": "l2-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "state": "COMPLETE_L2_WITH_MISSING_SAVE_AND_SUMMARY_SUPPORT_FAILURES",
+      "semantic_counts": {
+        "FAIL": 5,
+        "PASS_SCOPED": 7
+      },
+      "message_counts": {
+        "COMPLETED": 21,
+        "UNKNOWN": 4,
+        "FAILED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 108,
+        "generation.known_tokens": 766674,
+        "generation.charged_tokens": 766674,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r40/input-freeze.json": "f63470b384a83f222a69dcc2f510ede6104e3e8854883f57942e30c611ed57f8",
+        "configs/v13-5-functional-r40.json": "712aceb7c45adaf9ad0e8e63471d04ce394594b30211819e455786ceb0541a9b",
+        "artifacts/v13-5/l2-r40/review.json": "d14f4dd1aea2fd4a76bae1741aa54edef6806ad3094cba46a05b500c3db815c5",
+        "artifacts/v13-5/l2-r40/seal.json": "6b95984f8506e9dfcc5792d946b09cd104db07e4810ee9d2d72578cc197c6c07",
+        "artifacts/v13-5/l2-r40-manual-grades.json": "d96ef7a83991f335654570c0ff1d4f41352df98cf433f84f1b7f9dd0c82f645c",
+        "artifacts/v13-5/l2-r40-review-notes.json": "592f6d6cde9f7702a91f95223864fa141a8c951abc9629f80df7ef90be791e35",
+        "artifacts/v13-5/l2-r40-all-review.jsonl": "9de8a4772632870949c218c227a3e4fa9c8c99779d3162ecbf4a6a3c7a9b6210",
+        "artifacts/v13-5/l2-r40-evaluator/summary.json": "e80c759230e56900a8b089478d40774239c7aca5ac7bd5f38fc0c9c5611c96fc"
+      }
+    },
+    {
+      "id": "l3-formation-r37",
+      "candidate_commit": "599163ef435873ca9b82cebc73c842e7961980cf",
+      "planned_cases": 57,
+      "planned_messages": 57,
+      "state": "COMPLETE_L3_FORMATION_WITH_SEMANTIC_FAILURES_AND_ONE_ANSWER_RECOVERY",
+      "semantic_counts": {
+        "PASS_SCOPED": 44,
+        "FAIL": 13
+      },
+      "message_counts": {
+        "COMPLETED": 57
+      },
+      "cost_delta": {
+        "generation_requests": 178,
+        "generation.known_tokens": 1149405,
+        "generation.charged_tokens": 1149405,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-formation-r37/input-freeze.json": "113c8f7d2560c82928dec75108af1582d5ba1f6ba4037b9e348b7b50b42566eb",
+        "configs/v13-5-functional-r37.json": "cfd964c809566ddc90956c629e7f4113da98a17349717a6bc5f718fa13c3e689",
+        "artifacts/v13-5/l3-formation-r37/review.json": "2ab905be0f049e58b65721ba8c306f04b5499ba38fcef69bb7ff1661cd470076",
+        "artifacts/v13-5/l3-formation-r37/seal.json": "ecacf1c6cf31e0818f7ef6a6797ce8764b1915d740880cbfb43378e178cdeaa2",
+        "artifacts/v13-5/l3-formation-r37-manual-grades.json": "68c0b0352003931bb8daf0bcf3dc91375192a389d02bc6869061532a27415f62",
+        "artifacts/v13-5/l3-formation-r37-review-notes.json": "80187560155354b91452194bd0beae4e099ac3579d0a9cb3b30795c286b8d8ba",
+        "artifacts/v13-5/l3-formation-r37-all-review.jsonl": "802477229690cd40807b8c0d4903ff773fdec80bbb3b908da7a07367a98a45ba",
+        "artifacts/v13-5/l3-formation-r37-evaluator/summary.json": "6f008b344fd402b94e37680f5fe288c8a9d286809f7a557b2a5e345e86113f8e"
+      }
+    },
+    {
+      "id": "l3-reading-r37",
+      "candidate_commit": "599163ef435873ca9b82cebc73c842e7961980cf",
+      "planned_cases": 30,
+      "planned_messages": 30,
+      "state": "COMPLETE_L3_READING_WITH_SIX_SEMANTIC_FAILURES",
+      "semantic_counts": {
+        "PASS_SCOPED": 24,
+        "FAIL": 6
+      },
+      "message_counts": {
+        "COMPLETED": 30
+      },
+      "cost_delta": {
+        "generation_requests": 62,
+        "generation.known_tokens": 436805,
+        "generation.charged_tokens": 436805,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-reading-r37/input-freeze.json": "455cd5e07a679bd25e26d0911d13e3a4ec80c9ebe9703d7276a6c03c882283c7",
+        "configs/v13-5-functional-r37.json": "cfd964c809566ddc90956c629e7f4113da98a17349717a6bc5f718fa13c3e689",
+        "artifacts/v13-5/l3-reading-r37/review.json": "9ef7a6b4531d1ec95440bcba15ed74988d2cecb313a07adc881ce843c302a6f2",
+        "artifacts/v13-5/l3-reading-r37/seal.json": "13f021e9c9125177193ca001c389ea5f1cc502c47a1585ac34e0152e72401c4b",
+        "artifacts/v13-5/l3-reading-r37-manual-grades.json": "a4d15f95fb0bbb2cf738fe0e75fded45518e7d8f2c09b091ce08a53fc72e7e04",
+        "artifacts/v13-5/l3-reading-r37-review-notes.json": "c3e7ec780a4db882c790c11f3626cf0e23c53169849ecc0395d77102c95fe32c",
+        "artifacts/v13-5/l3-reading-r37-all-review.jsonl": "88626be79d4e0fc702cbb2691d77b933745d119952d917416390a3ce19eec214",
+        "artifacts/v13-5/l3-reading-r37-evaluator/summary.json": "a82d9b4b91c24769524406feaec9a5db02a7703fffe0d4bf9d85b98e659452cb"
+      }
+    },
+    {
+      "id": "l4-r40",
+      "candidate_commit": "7764923e8082bca49526cbe6ed7aa9cd63fb3c28",
+      "planned_cases": 12,
+      "planned_messages": 31,
+      "state": "STOPPED_CORE_WITHDRAWAL_ONLY_OLD_SUPPORT_DESPITE_LITERAL_CUE",
+      "semantic_counts": {
+        "PASS_SCOPED": 2,
+        "FAIL": 4,
+        "NOT_RUN": 6
+      },
+      "message_counts": {
+        "COMPLETED": 15,
+        "FAILED": 1,
+        "NOT_RUN": 15
+      },
+      "cost_delta": {
+        "generation_requests": 47,
+        "generation.known_tokens": 229591,
+        "generation.charged_tokens": 229591,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r40/input-freeze.json": "ef2c19a6d3b05db9185cd749f1f7c8a2abab1476abdf9d54d2691d08f099ee78",
+        "configs/v13-5-functional-r40.json": "712aceb7c45adaf9ad0e8e63471d04ce394594b30211819e455786ceb0541a9b",
+        "artifacts/v13-5/l4-r40/review.json": "12871d85071e8f0af574fa5162880f6ce3b0af442ed214b1bce88af2df237060",
+        "artifacts/v13-5/l4-r40/seal.json": "f5439d14f28130911b2c6c36dc7c3ed24ccc45aa752aef8ec62a15c1b174e552",
+        "artifacts/v13-5/l4-r40-manual-grades.json": "05a000791e1164798d43cc1b29e07cef1479c5d0fbc48dfd6739e1fb7b76454f",
+        "artifacts/v13-5/l4-r40-review-notes.json": "3dd3329961821065c6b730b57673d5dd10fc6e80ae415899a3294dfe9b242478",
+        "artifacts/v13-5/l4-r40-all-review.jsonl": "b92fe21fc704a747832d096d96930eee7f95cec9c09aa49fcb806010273fcfd4",
+        "artifacts/v13-5/l4-r40-evaluator/summary.json": "0b945613af888c7730aeb8fa47bd0572816d8080afc78ef83eaabbe67277c774"
+      }
+    }
+  ],
+  "predeclared_next_regression": {
+    "candidate": "r43",
+    "path": "artifacts/v13-5/r43-regression-scope.json",
+    "sha256": "a5c683c285fa126fbdc69eb558d236685933d24d8fd97f405d38d7eff665bcf2",
+    "timing": "Before any r43 model HTTP",
+    "scope": "Direct11/27, originalL1 24/48, L2 12/26, full exposedL3 formation57+reading30, newL4 after frozen method; no pooling or semantic exemptions"
+  },
+  "accounting": {
+    "all_v13_5": {
+      "generation_requests": 4227,
+      "known_tokens": 22824709
+    },
+    "resumed_v13_5": {
+      "generation_requests": 4071,
+      "known_tokens": 22050473
+    },
+    "continuous_ledger": {
+      "generation_requests": 13953,
+      "generation": {
+        "charged_tokens": 50547382,
+        "known_tokens": 50516995,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "snapshot_path": "artifacts/v13-5/checkpoint-r43-20261003/continuous-ledger.json",
+    "snapshot_sha256": "95abfc925f99fd3731a173bd7fc0090cf81ca6446b08ca656b06c4523af8e603",
+    "new_unknown_usage": 0,
+    "r43_generation_requests": 0,
+    "agent_tokens_included": false
+  },
+  "known_remote_ci": {
+    "path": "artifacts/v13-5/r42-ci.json",
+    "sha256": "4dcac2eb6a13bd03dd5690841fa41de9e351645f3df07899b73f6c9f2893e2b3",
+    "commit": "4f3152d5afd30c06360dd79667879d45cc645026",
+    "fast": "SUCCESS run37131213216",
+    "full": "SKIPPED run37131213227; not a pass"
+  },
+  "remote_ci_scope": "Known CI is exact r42. New checkpoint r43 must be checked on its own PR head; publication result recorded in PR81. Full skip is not a pass.",
+  "requirements": "Current FUNC01–16 in progress; detailed140 historical, no terminal promotion. Original48 unchanged.",
+  "reviewer": "Root same-family development review; not independent Judge",
+  "remaining": [
+    "r43 frozen direct communication11/27, including existing confirmation and withdrawals",
+    "same-version L1 24/48 and L2 12/26 after required gate",
+    "same-version full exposed L3 formation57 and reading30",
+    "new L4 after frozen method; previously exposed stories are not new holdout",
+    "scope retention, source support and usable answer closure; final140 backfill and terminal report"
+  ],
+  "rollback_reference": "4f3152d5afd30c06360dd79667879d45cc645026 is previous checkpoint, not a stable configuration",
+  "preserved": [
+    "all previously sealed cohorts",
+    "original48 inheritance and all140 historical rows",
+    "continuous ledger",
+    "ignored raw DBs, provider traces and logs",
+    "previous r42 checkpoint"
+  ],
+  "verification": {
+    "historical_cohorts_unchanged": 62,
+    "latest_evidence_hashes_checked": 59,
+    "requirements_rows_unchanged": 140
+  },
+  "evidence_sha256": {
+    "artifacts/v13-5/checkpoint-r43-20261003/runs.json": "e1d972028e0b3e7ff9e113945bd12056d2583bf95f31a592104dabf21f10275b",
+    "artifacts/v13-5/checkpoint-r43-20261003/requirements.json": "d9ea1244b1aca3b3d60031313891a85e0b0609559aa4bfbe8e8999bb54f58aa1",
+    "docs/V13_5_CHECKPOINT_r43_20261003.md": "09eee0bfb056ccc3caf326f8ee42637b71ec73ab1801ee312dbfe98ba5d5efed",
+    "docs/V13_5_PROGRESS.md": "0e4c015c794b259e5bd266b0c83ed29d526cc041172004f4920541d092ce00da",
+    "docs/V13_5_FUNCTIONAL_USAGE.md": "52523857d25afa6fca013af12f1087b0ce3f337eb31354313e8dcebca149b7f9"
+  }
+}

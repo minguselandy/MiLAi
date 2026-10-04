@@ -1,0 +1,22 @@
+{
+  "kind": "V13_4_N1_DIAGNOSTIC_QUERY_VIEW",
+  "group_id": "n1-correction-retrospective-scope-diagnostic",
+  "queries": [
+    {
+      "query_id": "q1",
+      "question": "What format should the current Cedar weekly report use?"
+    },
+    {
+      "query_id": "q2",
+      "question": "What did I say at the April 2 planning meeting about the Cedar report format?"
+    },
+    {
+      "query_id": "q3",
+      "question": "Given my later correction, what format actually applied to Cedar weekly reports on April 2?"
+    },
+    {
+      "query_id": "q4",
+      "question": "What format should Birch reports and Cedar incident reports use?"
+    }
+  ]
+}

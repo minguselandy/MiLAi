@@ -1,0 +1,76 @@
+{
+  "kind": "EVALUATOR_ONLY_N1_WIRING",
+  "never_runtime": true,
+  "group_id": "n1-correction-retrospective-scope-diagnostic",
+  "review": "Root development diagnostic, not independent Judge",
+  "queries": [
+    {
+      "query_id": "q1",
+      "query_kind": "current",
+      "solvability": "answerable",
+      "required_constraints": [
+        "CSV",
+        "weekly Cedar scope"
+      ],
+      "minimal_sufficient_event_sets": [
+        [
+          "e2",
+          "e3"
+        ]
+      ]
+    },
+    {
+      "query_id": "q2",
+      "query_kind": "statement_history",
+      "solvability": "answerable",
+      "required_constraints": [
+        "original April2 statement said PDF",
+        "later correction does not rewrite the original utterance"
+      ],
+      "minimal_sufficient_event_sets": [
+        [
+          "e1"
+        ]
+      ]
+    },
+    {
+      "query_id": "q3",
+      "query_kind": "retrospective_applicability",
+      "solvability": "answerable",
+      "required_constraints": [
+        "CSV applied on April2",
+        "effective since April1",
+        "correction of mistake rather than later change"
+      ],
+      "minimal_sufficient_event_sets": [
+        [
+          "e2",
+          "e3"
+        ]
+      ]
+    },
+    {
+      "query_id": "q4",
+      "query_kind": "cross_scope",
+      "solvability": "partial_answer_only",
+      "required_constraints": [
+        "Birch plain text",
+        "Cedar incident format unspecified; do not generalize weekly CSV"
+      ],
+      "minimal_sufficient_event_sets": [
+        [
+          "e3"
+        ]
+      ]
+    }
+  ],
+  "wire_gate": [
+    "all selected original source bodies complete in exact vllm_request messages",
+    "source/body hashes and Unicode spans checked",
+    "material tokens <=2048 with frozen actual tokenizer",
+    "no fact/source mutation on success and error controls",
+    "exactly1 reader request per natural question,0 planner,0 writer,0 embedding",
+    "durable admissions prevent rerun; unknown costs retained"
+  ],
+  "semantic_gate": "Descriptive only; neither4/4 nor any answer licenses T0/G1/G2."
+}

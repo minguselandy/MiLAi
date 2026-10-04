@@ -5,19 +5,30 @@ from __future__ import annotations
 import json
 import uuid
 from contextlib import nullcontext
+from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from jsonschema import ValidationError, validate  # type: ignore[import-untyped]
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_core.messages import AIMessage, BaseMessage, convert_to_openai_messages
 from langchain_core.outputs import ChatGeneration, ChatResult
 from langchain_core.utils.function_calling import convert_to_openai_tool
-from pydantic import ConfigDict, Field
+from pydantic import ConfigDict, Field, PrivateAttr
 
+from milai_lab.contracts.read_protocol import present_catalog as receipt_catalog
+from milai_lab.contracts.read_protocol import profile, save_guidance
+from milai_lab.contracts.tool_schema_communication import (
+    present_catalog,
+    shape_guidance,
+)
+from milai_lab.contracts.tool_schema_communication import (
+    profile as communication_profile,
+)
 from milai_lab.harness.contextual_artifacts import read_json, write_json
 from milai_lab.memory.presentation import json_action_calls
 from milai_lab.providers.contextual_vllm import VLLMClient
+from milai_lab.providers.generation_admission import DurableGenerationAdmission
 from milai_lab.providers.request_pipeline import (
     ChatRequest,
     DeliveryObserver,
@@ -76,8 +87,12 @@ def _action_schema(
     }
 
 
-def _action_prompt(tools: list[dict[str, Any]]) -> str:
-    catalog = [item["function"] for item in tools]
+def _action_prompt(
+    tools: list[dict[str, Any]], *, tool_schema_communication: str = "legacy",
+    tool_save_communication: str = "legacy"
+) -> str:
+    catalog = [item["function"] for item in receipt_catalog(
+        present_catalog(tools, tool_schema_communication), tool_save_communication)]
     prompt = (
         'Reply as exactly one JSON object. For a final reply use {"answer":"..."}. '
         'To call tools use {"calls":[{"name":"...","arguments":{...}}]}. '
@@ -86,7 +101,10 @@ def _action_prompt(tools: list[dict[str, Any]]) -> str:
         "A tool result will be returned before your next reply.\n"
         + json.dumps(catalog, ensure_ascii=False, separators=(",", ":"))
     )
-    return prompt
+    return (
+        prompt + shape_guidance(tools, tool_schema_communication)
+        + save_guidance(tool_save_communication)
+    )
 
 
 def _json_action_history(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -121,11 +139,24 @@ class VLLMChatModel(BaseChatModel):
 
     model_config = ConfigDict(arbitrary_types_allowed=True, extra="forbid")
 
+    allow_required_tool_choice: bool = Field(default=False, exclude=True)
+    preserve_tool_reasoning: bool = Field(default=False, exclude=True)
     client: VLLMClient
     max_calls_per_message: int = 12
     calls_in_message: int = 0
     capacity_path: Path | None = None
     active_message_key: str | None = None
+    generation_admission_profile: Literal["legacy", "durable_shared_v1"] = Field(
+        default="legacy", frozen=True
+    )
+    tool_schema_communication: Literal["legacy", "shape_feedback_v1"] = Field(
+        default="legacy", frozen=True, exclude=True, repr=False
+    )
+    unknown_tool_feedback: bool = Field(default=False, frozen=True, exclude=True, repr=False)
+    tool_save_communication: Literal["legacy", "completed_receipt_v1"] = Field(
+        default="legacy", frozen=True, exclude=True, repr=False
+    )
+    _generation_admission: DurableGenerationAdmission | None = PrivateAttr(default=None)
     request_transform: RequestTransform | None = Field(default=None, exclude=True, repr=False)
     delivery_observer: DeliveryObserver | None = Field(default=None, exclude=True, repr=False)
     response_hook: ResponseHook | None = Field(default=None, exclude=True, repr=False)
@@ -134,7 +165,25 @@ class VLLMChatModel(BaseChatModel):
     def _llm_type(self) -> str:
         return f"milai_vllm_{self.client.config.tool_mode}"
 
-    def begin_public_message(self, key: str, checkpoint_calls: int = 0) -> None:
+    def begin_public_message(
+        self, key: str, checkpoint_calls: int = 0, *,
+        admission_phase: Literal["start", "resume"] | None = None,
+        admission_scope: dict[str, Any] | None = None,
+    ) -> None:
+        if self.generation_admission_profile == "durable_shared_v1":
+            self._generation_admission = None
+            self.active_message_key = None
+            self.calls_in_message = 0
+            if self.capacity_path is None or admission_phase is None or admission_scope is None:
+                raise ValueError("GENERATION_ADMISSION_EXPLICIT_CONTEXT_REQUIRED")
+            gate = DurableGenerationAdmission(
+                self.capacity_path, key, admission_scope, asdict(self.client.config),
+                self.max_calls_per_message, admission_phase, checkpoint_calls,
+            )
+            self._generation_admission = gate
+            self.active_message_key = key
+            self.calls_in_message = gate.count
+            return
         self.active_message_key = key
         if self.capacity_path is None:
             self.calls_in_message = checkpoint_calls
@@ -142,7 +191,16 @@ class VLLMChatModel(BaseChatModel):
         state = read_json(self.capacity_path) if self.capacity_path.exists() else {}
         self.calls_in_message = max(state.get(key, 0), checkpoint_calls)
 
-    def _reserve_request(self) -> None:
+    def _reserve_request(self, *, origin: str | None = None) -> None:
+        if self.generation_admission_profile == "durable_shared_v1":
+            if self._generation_admission is None:
+                raise ValueError("GENERATION_ADMISSION_NOT_STARTED")
+            if self.active_message_key != self._generation_admission.identity["public_message_id"]:
+                raise ValueError("GENERATION_ADMISSION_ACTIVE_MESSAGE_CHANGED")
+            self.calls_in_message = self._generation_admission.reserve(
+                asdict(self.client.config), self.max_calls_per_message, origin,
+            )
+            return
         if self.calls_in_message >= self.max_calls_per_message:
             raise ValueError("PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED")
         self.calls_in_message += 1
@@ -175,11 +233,37 @@ class VLLMChatModel(BaseChatModel):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
         native = self.client.config.tool_mode == "native"
+        if self.preserve_tool_reasoning:
+            if not native:
+                raise ValueError("TOOL_REASONING_HISTORY_REQUIRES_NATIVE")
+            last_user = max((i for i, row in enumerate(wire_messages) if row["role"] == "user"),
+                            default=-1)
+            for index, (original, wire) in enumerate(zip(messages, wire_messages, strict=True)):
+                if (last_user < 0 or index <= last_user or not isinstance(original, AIMessage)
+                        or not original.tool_calls):
+                    continue
+                reasoning = original.additional_kwargs.get("reasoning_content")
+                if reasoning is not None:
+                    if not isinstance(reasoning, str):
+                        raise ValueError("VLLM_CHAT_INVALID_REASONING_HISTORY")
+                    wire["reasoning_content"] = reasoning
+        selected_communication = communication_profile(self.tool_schema_communication)
+        if native and selected_communication != "legacy":
+            wire_messages = _protocol_messages(
+                wire_messages, shape_guidance(tools, selected_communication)
+            )
+            tools = present_catalog(tools, selected_communication)
+        selected_save = profile("tool_save_communication", self.tool_save_communication)
+        if native and selected_save != "legacy":
+            wire_messages = _protocol_messages(wire_messages, save_guidance(selected_save))
+            tools = receipt_catalog(tools, selected_save)
         request = ChatRequest(wire_messages, messages, tools, native, kwargs)
         if self.request_transform is not None:
             self.request_transform.validate(request)
         if native and (
-            kwargs.get("tool_choice") not in (None, "auto", "none")
+            kwargs.get("tool_choice") not in (None, "auto", "none", "required")
+            or (kwargs.get("tool_choice") == "required"
+                and (not self.allow_required_tool_choice or not tools))
             or self.client.config.response_format is not None
         ):
             raise ValueError("NATIVE_CHAT_PROTOCOL_UNSUPPORTED")
@@ -189,12 +273,19 @@ class VLLMChatModel(BaseChatModel):
             prepared = PreparedRequest(wire_messages, tools)
         else:
             prepared = PreparedRequest(
-                _protocol_messages(_json_action_history(wire_messages), _action_prompt(tools)),
+                _protocol_messages(
+                    _json_action_history(wire_messages),
+                    _action_prompt(tools, tool_schema_communication=selected_communication,
+                                   tool_save_communication=selected_save),
+                ),
                 tools,
                 _action_schema(tools, generation_only=True),
             )
         tools = prepared.tools
-        self._reserve_request()
+        if self.generation_admission_profile == "durable_shared_v1":
+            self._reserve_request(origin="model_invoke")
+        else:
+            self._reserve_request()
         scope = (
             self.delivery_observer.request_scope(prepared, self.calls_in_message)
             if self.delivery_observer is not None
@@ -303,7 +394,9 @@ class VLLMChatModel(BaseChatModel):
                 if call["id"] in seen:
                     raise IncompleteChatResponse("VLLM_CHAT_DUPLICATE_TOOL_CALL_ID")
                 if function["name"] not in names:
-                    raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
+                    if (not self.unknown_tool_feedback or not names
+                            or kwargs.get("tool_choice") == "none" or not function["name"]):
+                        raise IncompleteChatResponse("VLLM_CHAT_UNKNOWN_TOOL")
                 seen.add(call["id"])
                 try:
                     args = json.loads(function["arguments"])
@@ -347,9 +440,19 @@ class VLLMChatModel(BaseChatModel):
         )
         self._notify_response(event)
         response_metadata.update(completion_metadata)
+        additional_kwargs: dict[str, Any] = {}
+        if self.preserve_tool_reasoning and native and calls:
+            fields = [wire_message[key] for key in ("reasoning", "reasoning_content")
+                      if wire_message.get(key) is not None]
+            if any(not isinstance(value, str) for value in fields) or (
+                    len(fields) == 2 and fields[0] != fields[1]):
+                raise IncompleteChatResponse("VLLM_CHAT_INVALID_REASONING_HISTORY")
+            if fields and fields[0]:
+                additional_kwargs["reasoning_content"] = fields[0]
         message = AIMessage(
             id=message_id,
             content=content,
+            additional_kwargs=additional_kwargs,
             tool_calls=calls,
             usage_metadata=usage_metadata,
             response_metadata=response_metadata,

@@ -1,0 +1,19 @@
+{
+  "kind": "V13_4_PACKAGE_CHECK",
+  "status": "PASS",
+  "source_commit": "9ec7c19d15a84ccbf6f40a5f53e627700a375a39",
+  "command": "uv build --offline --out-dir artifacts/v13-4/dist-final",
+  "new_modules_byte_matched": [
+    "contracts/correction_relation.py",
+    "methods/correction_reader.py",
+    "methods/correction_evidence.py",
+    "runners/correction_evidence_eval.py"
+  ],
+  "artifacts": {
+    "artifacts/v13-4/dist-final/milai_lab-0.1.0-py3-none-any.whl": "18f40019d83909f58f3510322d13681641f15eea212550d3fb79f97974f8b7e6",
+    "artifacts/v13-4/dist-final/milai_lab-0.1.0.tar.gz": "1eafb55fa6d01059f03daae25a189bf0ec3075af32c04543e43772dff27dd1f0"
+  },
+  "scope": "wheel/sdist exact source bytes; separate helper KeyError disclosed in N1 R0 result",
+  "initial_build_failure": "shared runtime lacks hatchling; cached isolated uv build succeeds; no shared runtime installs",
+  "comment_revision_rebuild": "one required final rebuild after tie-order comment clarified"
+}

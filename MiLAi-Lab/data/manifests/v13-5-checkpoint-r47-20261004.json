@@ -1,0 +1,179 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_R47_MECHANICAL_AND_SOURCE_CI_PASSED_MODEL_NOT_RUN",
+  "goal_status": "ACTIVE; full development remains incomplete; checkpoint is neither completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "pull_request_status": {
+    "open": true,
+    "draft": true,
+    "merged": false
+  },
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "main_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "candidate": "r47",
+  "candidate_commit": "16e4f3b35ce88b1110940d2dca7b73650eeafeeb",
+  "candidate_config": "configs/v13-5-functional-r47.json",
+  "publication_identity": "The checkpoint commit contains this manifest; its exact SHA and own CI are registered in PR81 after push. Source CI is not inherited.",
+  "report": "docs/V13_5_CHECKPOINT_r47_20261004.md",
+  "report_sha256": "021d6f110aa3ecb4d2132bc2de8d6699cfb2e6ede741b6eb3d68c857add4bdc4",
+  "previous_checkpoint": {
+    "commit": "d1a2cfd6c41c454726bc49dd7e5c0f2cd915467b",
+    "manifest": "data/manifests/v13-5-checkpoint-r46-20261004.json",
+    "sha256": "c10cad82c2b4d9323e69bca04d20956a5a51dac4879a778ef4495e8745f3b64f"
+  },
+  "source_sha256": {
+    "src/milai_lab/memory/functional.py": "d723a31114b61b6622734af4ac8bb1071d9dd1321e2b761270ea4c090062930b",
+    "src/milai_lab/runners/functional.py": "33ee9c3bdc42ace636b037ddfa75cd325447443df60d8096fc71f2f6a7b6170c",
+    "tests/memory/test_v13_5_functional.py": "63ad77986635e425b914246873ee524e8731ebf966f95a51db45ab9d7dbf3b11",
+    "tests/unit/test_v13_5_functional_integration.py": "8ea6380c65d7b04ab6a3e23a0e8d5d34993bc88e137e879e6a910b3c6d42b02c",
+    "configs/v13-5-functional-r47.json": "a424bd749e475d797eeee854e2fa3552d4ad14dd0885296c96ede8d4108e1faa"
+  },
+  "runtime_queue_active": false,
+  "new_model_calls_for_checkpoint": 0,
+  "previously_prepared_runtime_changes_published": true,
+  "newly_authored_runtime_changes_during_checkpoint": false,
+  "current_candidate_acceptance": {
+    "mechanical": "PASS_SCOPED",
+    "source_fast_ci": "SUCCESS",
+    "source_full_composition": "SKIPPED; not a pass",
+    "communication": "NOT_ADMITTED",
+    "input_freeze_exists": false,
+    "model_calls": 0,
+    "L1_L4": "NOT_ADMITTED for r47",
+    "stable_recommended_configuration": false
+  },
+  "change_scope": "Publish prepared Lab runtime formation review, tests, candidate config, status and checkpoint. Optional behavior changes before semantic save; old default disabled. No Product Schema/API/permission/Canonical changes.",
+  "r47_mechanical_evidence": {
+    "candidate": "r47",
+    "scope": "559 affected/default/foundation/schema/durable-admission regressions PASS;26 pinned production Qwen tokenizer/full candidate prompt probes PASS;4 installed SDK checks PASS. Ruff,mypy2modules,package/tools boundaries and verification matrix PASS. Formation content/scope review before commit reuses exact-input durable decisions and original budgets; tests reject lost temporary scope and user-request-as-outcome, then allow actual corrected assertion/native observation. Raw survives rejection, committed save replay skips assessment, review exposure respects forgetting/independent inputs, and lost review preserves business without replay or unaccounted retry. Semantic support remains unchecked; zero actual model HTTP.",
+    "preserved_first_failure": "Initial targeted23PASS2FAIL were test assumptions: operation aggregate retains first rejection plus later commit as partial, and explicit completed-message resume adds a zero-HTTP attempt with unchanged effects instead of byte-identical result. Corrected25PASS; full559PASS. Original Ruff8line errors then1line error retained, corrected check passes. No runtime contract relaxation.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r47-targeted-initial.log": "345b85c81e54cb5e3ea177f1159155cb5649d9a86bff9d683b4a7e1ccf6b7717",
+      "artifacts/v13-5/r47-targeted-corrected.log": "9500875731513abb7ebb8f140842f32fc34704f45f53d04108c3822a8944b02f",
+      "artifacts/v13-5/r47-regression.log": "56034f25c1fcf9043499f902de04d92b44c41dba910227608f25a4796de73378",
+      "artifacts/v13-5/r47-ruff-initial.log": "bf1238dddcae3e34cdafaceec9957fc60ac29e000d0f90633897feb9cf4bf5df",
+      "artifacts/v13-5/r47-ruff-corrected.log": "c1bdaa8cc518805007421c5ddae0fec0ffd9c7ddb4f2c3a55f2658115313a48d",
+      "artifacts/v13-5/r47-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "artifacts/v13-5/r47-mypy.log": "f9b031e5c45aa702cd4fef028d465551cb20a2c4698e0913c7b00766b20ac4d8",
+      "artifacts/v13-5/r47-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "artifacts/v13-5/r47-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "artifacts/v13-5/r47-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be",
+      "artifacts/v13-5/r47-production-contracts-probe.py": "5675b2cff74f6788bc74d4103762551af9bbcb20b86782ab67b0989b1a3d06bb",
+      "artifacts/v13-5/r47-production-contracts.json": "40b02ab8c68c125ccceeaa4ad26e5396262e2eff16779f2c3006467cfaabd3c0",
+      "artifacts/v13-5/r47-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r47-sdk-lifecycle.log": "6741d882cee89f6180ab38cc1549f26da314462fdd7fc577873d3b4593e0129a"
+    },
+    "remote_ci": {
+      "path": "artifacts/v13-5/r47-ci.json",
+      "sha256": "7132ad9b443c2a02b327e9e798eaca2aebca8d006a0075c714ae5ca9374c67d8",
+      "commit": "16e4f3b35ce88b1110940d2dca7b73650eeafeeb",
+      "fast": "SUCCESS run37147450130",
+      "full": "SKIPPED run37147450077; not a pass"
+    }
+  },
+  "checkpoint_verification": {
+    "r47_mechanical_evidence_hashes_checked": 14,
+    "r46_registered_evidence_hashes_checked": 10,
+    "r46_sealed_raw_file_hashes_checked": 303,
+    "mismatches": 0,
+    "includes_sealed_raw_artifact_byte_identity": true,
+    "new_database_semantic_audit": false,
+    "new_model_regression": false,
+    "continuous_ledger_unchanged_since_r46": true
+  },
+  "planned_regression": {
+    "candidate": "r47",
+    "path": "artifacts/v13-5/r47-regression-scope.json",
+    "sha256": "1b2811e2bf77cafbb326c912b3416f4af6a18fcb4db301a79878f2fade305799",
+    "timing": "Before r47 model HTTP",
+    "scope": "Full exposed11/27 formation-first communication, each public message reviewed before advancing; same-version original L1/L2/full L3/newL4 remain required. Actual scope/modality/outcome source support, no semantic certificate and unchanged allowances.",
+    "admitted": false,
+    "cases": 11,
+    "messages": 27,
+    "new_blind_holdout": false
+  },
+  "latest_actual_model_evidence": {
+    "cohort": "communication-r46",
+    "source_commit": "81c8bc5c26742c95581035fe7bf3780f06d7f7ec",
+    "frozen_checkout": "d1a2cfd6c41c454726bc49dd7e5c0f2cd915467b",
+    "results_commit": "80b6a09bf443368c4f4debf0cf7ebca1d1daf3cb",
+    "state": "COMPLETE_COMMUNICATION_WITH_FORMATION_SCOPE_AND_HISTORICAL_QUOTE_FAILURES",
+    "planned_cases": 11,
+    "planned_messages": 27,
+    "semantic_counts": {
+      "PASS_SCOPED": 9,
+      "FAIL": 2
+    },
+    "message_counts": {
+      "COMPLETED": 26,
+      "UNKNOWN": 1
+    },
+    "cost_delta": {
+      "generation_requests": 93,
+      "generation.known_tokens": 483293,
+      "generation.charged_tokens": 483293,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/communication-r46/input-freeze.json": "71e9c37fea0d719f342eba717bd5b6615bc4000c19408d38a253fd57cc8de7e2",
+      "configs/v13-5-functional-r46.json": "a244e466e24e6a198927fc31728154dc585ac2bb053c20d5dd30cc06efd50682",
+      "artifacts/v13-5/communication-r46/review.json": "a213146d5fd03f051c3c915cbd6f8245e9fadb6140e9c5d92e1171cfcf9916ef",
+      "artifacts/v13-5/communication-r46/seal.json": "8928aeed75ab38f0f3fd9879b9cc75a483a7b559c2364536303b87b412619002",
+      "artifacts/v13-5/communication-r46-manual-grades.json": "ec1d973d14c100946d2814507dcc91857f9caf08fc7e1c7a317ddaaf9b2b681b",
+      "artifacts/v13-5/communication-r46-review-notes.json": "b5c97fde10ea568c96dc489ce2c445059ab002648b9c4b3b59741147e070f968",
+      "artifacts/v13-5/communication-r46-all-review.jsonl": "5f9e05a9660f26ce3975107656663b4b8c464cd798c578cab9b8209c7e1e8cd5",
+      "artifacts/v13-5/communication-r46-evaluator/summary.json": "0e76a5df7a412a420a05b9b2c0dc92d6a8a4b395635aca31914b3d013d5cdaf8",
+      "artifacts/v13-5/communication-r46/targeted-review.json": "7354dee794f43a7e36c72220d9d574aec256d3987d203ecf8d5a9106be4c5105",
+      "artifacts/v13-5/communication-r46-ledger-after.json": "3a4159bd86c6aa69f505ccc336bf7c5f4efefb92b4308d997d0c565c63e2427f"
+    },
+    "interpretation": "Complete exposed communication, not full functional acceptance. Five same-model supported revision assessments; no actual unsupported-review or unavailable-tool-feedback branch triggered. Initial formation scope/modality and final historical quote failures remain; W1 semantic formation not completed.",
+    "historical_complete_results": "r40 L1/L2 and r37 L3 remain separate; no cross-version pooling. See report and unchanged prior cohorts."
+  },
+  "cost": {
+    "v13_5": {
+      "generation_requests": 4387,
+      "known_generation_tokens": 23702406
+    },
+    "resumed": {
+      "generation_requests": 4231,
+      "known_generation_tokens": 22928170
+    },
+    "continuous": {
+      "generation_requests": 14113,
+      "generation": {
+        "charged_tokens": 51425079,
+        "known_tokens": 51394692,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "historical_unknown_gap_tokens": 30387,
+    "includes_coding_agent_usage": false,
+    "ledger_snapshot_path": "artifacts/v13-5/checkpoint-r47-20261004-ledger.json",
+    "ledger_snapshot_sha256": "3a4159bd86c6aa69f505ccc336bf7c5f4efefb92b4308d997d0c565c63e2427f"
+  },
+  "remaining_work": [
+    "Actual r47 communication11/27 with per-message review, scoped formation/modality/source support and honest final wording.",
+    "Historical final quote fidelity and incomplete interrupted semantic formation remain unresolved.",
+    "Same-version L1 24/48, L2 12/26, full L3 formation57/reading30, then new L4 approximately12 after method freeze.",
+    "FUNC01-16 integrated acceptance, detailed140 terminal assessment and final development report; original48 unchanged."
+  ],
+  "reviewer": "Root development review; not independent Judge",
+  "preservation": "Raw DBs, model requests, traces, logs and ledger snapshot remain local ignored. Historical cohorts, pause reports, original48 and plan bytes unchanged.",
+  "rollback_comparison_commits": [
+    "80b6a09bf443368c4f4debf0cf7ebca1d1daf3cb",
+    "16e4f3b35ce88b1110940d2dca7b73650eeafeeb"
+  ]
+}

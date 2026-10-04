@@ -1,0 +1,14 @@
+{
+  "status": "N2_SOURCE_AUDIT_COMPLETE_SINGLE_REVIEW_T0_UNADMITTED_PROVENANCE_AND_INDEPENDENCE_LIMITS",
+  "artifact_root": "artifacts/v13-4/t0-semantic-audit",
+  "sha256": {
+    "evaluator/semantic-audit.json": "e584bdb194d5e322913cb434a3f93ea6825971f8af1b125a6b74a4186111f635",
+    "evaluator/SEMANTIC_AUDIT.md": "48ec1d768d0044bc84372cc3515930e58182818ac793debc698629d8bf1f482d",
+    "evaluator/original-pointers-and-references.json": "17bb417e0b64f114ee4a4bc86e2f9d0b6283d1b2ca9aa203d9f917f4cbc4bcff",
+    "evaluator/quotation-provenance-audit.json": "27fc949ac84717325f6ee92625902286a062f8c5ce5b1878a0781ca8e4ee34fb",
+    "exposure.jsonl": "85e6f9754b4e0d5b5a0ebcb71c235127db6e65360310489625cf239bd84c595f",
+    "input_acquisition_manifest": "1c3f9e5a9588345a0f6c884e4017df50f69f158a2f61865bdc16fc7e6daebcb6",
+    "input_acquisition_freeze": "ee8db657a6228778c30655a52de259cb94d51e43dacd5404d3c1fbe86323ffcc"
+  },
+  "question_count": 0
+}

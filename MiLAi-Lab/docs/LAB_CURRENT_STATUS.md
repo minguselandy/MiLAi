@@ -1,9 +1,44 @@
 # MiLAi Lab 当前状态
 
-更新日期：2026-09-30。此页提供当前导航；实际用户授权和 Goal 状态优先于历史文件中的 ACTIVE。
+当前更新：2026-10-04。
+
+**最新完整 r50 通信已封存：11 案／27 消息全部尝试，8 案限定通过、3 案失败；26 COMPLETED、1 预设 W1 UNKNOWN、0 NOT_RUN。**
+实际同 ID 更正、no_change、撤销及专用历史读取取得限定证据；遗忘后材料隔离和业务实时查询／不重复执行通过相应检查。
+三项整案失败是：扩大厂商标签例外、W1 恢复后遗漏原保存请求、将不可见误报为从未提供。核对误拒与意图声明偏差仍保留。
+9 条记录／44 处存储引文身份一致，318 份原始文件封存；110 次生成／581,707 tokens。
+这是独立完整轮次，不与先前 r50 部分检查点拼接。
+
+2026-10-04 用户明确要求整理并合并当前开发。最新见 [开发整理与合并交接](V13_5_DEVELOPMENT_MERGE_20261004.md)
+及 [机器清单](../data/manifests/v13-5-development-merge-20261004.json)。PR81 将连同已有祖先提交合入 main，实际 merge SHA／CI 以 PR 回执为准。
+本次整理未新增模型消息或运行代码，未开始 r51 修复。完整目标仍未完成，Product NO_GO，无稳定推荐配置。
+同版 L1–L4、FUNC 终态仍待完成；历史轮次、原 48 项及 140 项详细行保持。
+
+r50 修正历史工具提示；32 项生产 tokenizer／完整提示探针通过，r49 的 586 项源码回归保留原身份。
+完整轮次准入提交 d9e7c9e 的 Fast37158744744 SUCCESS、Full37158744736 SKIPPED；本次新提交 CI 单独核对。
+
+---
+
+以下为 2026-10-03 的历史暂停快照，调度状态已由上方恢复开发记录取代。
+
+当前更新：2026-10-03。按用户最新要求，**v13.5 实验已暂停，提交 GitHub 草稿检查点**。
+完整[功能计划](MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md)尚未完成；见[暂停总结](V13_5_PAUSE_STATUS_20261003.md)、[执行协议](V13_5_EXECUTION_PROTOCOL.md)、
+[用户入口](V13_5_FUNCTIONAL_USAGE.md)与[逐项验收](V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
+L1-r0–r4 均保留为未通过的开发轮次。最近 r4 完成 25/48 条消息，原 rubric
+12 PASS、1 FAIL、11 案未运行；因虚假保存确认停止，另有修订内容的直接证据不足。
+r4 新增 50 次 generation、269,980 tokens。r5 已完成读取／回执接口修正及受影响机械检查，
+尚未冻结或调用模型。L2–L4 尚未运行，不能把历轮局部通过结果合并为完整通过。
+本阶段 r0–r4 共 156 次 generation、774,236 tokens；恢复需用户明确指令。
+机械检查与模型结果分别见 [L0 检查](../data/manifests/v13-5-l0.json) 和
+[cohort 记录](../data/manifests/v13-5-runs.json)。
+v13.4 的 Simplify 退出保留，未恢复 T1–T3。Product 仍为 **NO_GO**。
+
+以下为历史状态快照，旧 ACTIVE/paused、费用和分数仅说明其记录时点：
+
+更新日期：2026-10-01。此页提供当前导航；实际用户授权和 Goal 状态优先于历史文件中的 ACTIVE。
 
 | 范围 | 状态 | 依据 |
 |---|---|---|
+| v13.2 证据关联、增量维护与有界交付 | **ACTIVE**，GitHub草稿PR #79发布后继续；R4全部24/48完成，Root20通过/4失败、22/24未通过；同源码性能840/840完成且严格审计通过；紧凑材料限定工程验收通过，R5新24/48运行身份已冻结、准备串行执行；SimpleMem限定SDK/callback检查完成、共同交付及真实微型未完成；设计资料6篇论文/7组项目参考持续归档，四臂只读接口审计完成、共享admission恢复工程在隔离树推进，D4–D5未完成 | [R4完整结果](../data/manifests/v13-2-e0-r4-results.json)、[R5运行身份](../data/manifests/v13-2-e0-r5-runtime.json)、[阶段性能](V13_2_DERIVED_INDEX_SCALE.md)、[执行记录](V13_2_EXECUTION.md)、[完整验收映射](../data/manifests/v13-2-requirements.json) |
 | v13.1 可用性优先开发与实验 | **ACTIVE**，正常门槛22/24；等额配置开发48题对完成，生命周期45/60条尝试、30条完成消息；文稿实跑未开始，完整P0–P8未完成 | [当前实验总结](V13_1_EXPERIMENT_STATUS_20260930.md)；[执行记录](V13_1_EXECUTION.md)；[要求清单](../data/manifests/v13-1-requirements.json) |
 | v12 代码组织与 GitHub 发布 | 十五项工程验收完成，PR #76 已合并 | [执行记录](CODE_ARCHITECTURE_V12_EXECUTION.md)；[AGENTS](../AGENTS.md) |
 | repair v10 实验 Goal | **paused**，未完成 | [总体报告](MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md) |

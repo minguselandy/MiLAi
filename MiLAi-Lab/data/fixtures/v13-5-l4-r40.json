@@ -1,0 +1,262 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "l4-h01",
+      "owner": "v13-5-l4-h01",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h01-m1",
+          "session_id": "visit-1",
+          "content": "请记住，列我个人骑行的随身清单时，尽量先列车灯，再列修车工具；汽车应急箱的清单不按这条处理。"
+        },
+        {
+          "message_id": "l4-h01-m2",
+          "session_id": "visit-2",
+          "content": "骑行清单顺序的约定已经存过了吗？只核对，不要再存一遍。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h02",
+      "owner": "v13-5-l4-h02",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h02-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我给学校手工实验记长度时用英寸；海报上已经印好的尺寸不在这条约定内。"
+        },
+        {
+          "message_id": "l4-h02-m2",
+          "session_id": "visit-2",
+          "content": "之前长度用什么单位？现在把我的手工实验记录改为厘米，海报尺寸仍不受影响，请更新原来那条。"
+        },
+        {
+          "message_id": "l4-h02-m3",
+          "session_id": "visit-3",
+          "content": "现在实验记录和印好的海报尺寸分别按什么约定？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h03",
+      "owner": "v13-5-l4-h03",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h03-m1",
+          "session_id": "visit-1",
+          "content": "请记住，仅本周六手工小组活动安排座位时，尽量空出靠窗位置。"
+        },
+        {
+          "message_id": "l4-h03-m2",
+          "session_id": "visit-2",
+          "content": "活动结束了。请把刚才这整条临时偏好标为已撤销，不再当作当前规则；保留原话和历史供查询。"
+        },
+        {
+          "message_id": "l4-h03-m3",
+          "session_id": "visit-3",
+          "content": "现在还有靠窗位置必须空出的现行要求吗？当初的历史原话是什么？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h04",
+      "owner": "v13-5-l4-h04",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h04-m1",
+          "session_id": "visit-1",
+          "content": "记住，社区散步地图的暂定名称为“北风线”。"
+        },
+        {
+          "message_id": "l4-h04-m2",
+          "session_id": "visit-2",
+          "content": "地图的名称改成“暮光线”，请更新已有记录。"
+        },
+        {
+          "message_id": "l4-h04-m3",
+          "session_id": "visit-3",
+          "content": "那张地图最初叫什么，现在叫什么？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h05",
+      "owner": "v13-5-l4-h05",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h05-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的口语练习目标是每月两次。"
+        },
+        {
+          "message_id": "l4-h05-m2",
+          "session_id": "visit-2",
+          "content": "目标改为每月三次，更新原记录；但我还没决定从哪个月开始。"
+        },
+        {
+          "message_id": "l4-h05-m3",
+          "session_id": "visit-3",
+          "content": "每月三次究竟从哪个月起算？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h06",
+      "owner": "v13-5-l4-h06",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h06-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的读书摘录文件名顺序是“作者_书名”。"
+        },
+        {
+          "message_id": "l4-h06-m2",
+          "session_id": "visit-2",
+          "content": "确认一下，摘录文件名仍用“作者_书名”；相同就保持原记录和版本，不要新增。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h07",
+      "owner": "v13-5-l4-h07",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h07-m1",
+          "session_id": "visit-1",
+          "content": "帮我选有声内容时，优先科普，尽量避开持续背景音乐；这不代表不听访谈。请记住。"
+        },
+        {
+          "message_id": "l4-h07-m2",
+          "session_id": "visit-2",
+          "content": "我的有声内容偏好是什么？是否完全排除访谈？"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h08",
+      "owner": "v13-5-l4-h08",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h08-m1",
+          "session_id": "visit-1",
+          "content": "为虚构桌游保存测试短语“松塔纸鸢64”，不是任何真实账户口令。"
+        },
+        {
+          "message_id": "l4-h08-m2",
+          "session_id": "visit-2",
+          "content": "忘掉桌游测试短语，包括那条原话和你引用它的回答。"
+        },
+        {
+          "message_id": "l4-h08-m3",
+          "session_id": "visit-3",
+          "content": "目前还能找到那段桌游测试短语吗？若没有可见资料，请说明这一点。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h09",
+      "owner": "v13-5-l4-h09",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-h09-m1",
+          "session_id": "visit-1",
+          "content": "为“泡棉护角-西库货架”预订3件，送到“清点工作台”，用“透明袋”包装并制作标签；请保存真实办理结果。"
+        },
+        {
+          "message_id": "l4-h09-m2",
+          "session_id": "visit-2",
+          "content": "先实时查询泡棉护角-西库货架，只补做没完成的标签，不要再预订一次。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h10",
+      "owner": "v13-5-l4-h10",
+      "workflow": "document",
+      "initial_world": {
+        "publication_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-h10-m1",
+          "session_id": "visit-1",
+          "content": "建立文稿“遮阳帘维护说明”，正文“闭馆前检查拉绳，不要用力猛拉。”，审批后发布到本地沙盒受众“展厅值守组”。请保存各步骤的真实结果。"
+        },
+        {
+          "message_id": "l4-h10-m2",
+          "session_id": "visit-2",
+          "content": "请先查遮阳帘维护说明，只继续尚未完成的发布，受众保持原样；草稿和审批不要重复。"
+        },
+        {
+          "message_id": "l4-h10-m3",
+          "session_id": "visit-3",
+          "content": "现在只查询遮阳帘维护说明，比较当前内容、审批及发布与我上次办理后的状态。后来改过的版本不要自行审批发布。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h11",
+      "owner": "v13-5-l4-h11",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": true
+      },
+      "messages": [
+        {
+          "message_id": "l4-h11-m1",
+          "session_id": "visit-1",
+          "content": "为“卡片架-北侧接待台”预订2件，送到“接待储柜”，用“瓦楞隔板”包装并制作标签。"
+        },
+        {
+          "message_id": "l4-h11-m2",
+          "session_id": "visit-2",
+          "content": "上次答复中断了。这次只实时查询卡片架-北侧接待台的办理状态，不要补做或重新预订。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h12",
+      "owner": "v13-5-l4-h12",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h12-m1",
+          "session_id": "visit-1",
+          "content": "Remember this for my bird-count notebook: dawn counts and dusk counts go in separate columns; the final display poster is outside this rule."
+        },
+        {
+          "message_id": "l4-h12-m2",
+          "session_id": "visit-2",
+          "content": "鸟类计数笔记那条补充：天气备注也单独一栏，清晨和傍晚计数仍分开；最后的展示海报仍不适用。更新已有记录。"
+        },
+        {
+          "message_id": "l4-h12-m3",
+          "session_id": "visit-3",
+          "content": "What columns should my notebook distinguish now, and does that rule also cover the display poster?"
+        }
+      ]
+    }
+  ]
+}

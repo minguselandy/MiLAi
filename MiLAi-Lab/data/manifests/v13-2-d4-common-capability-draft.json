@@ -1,0 +1,470 @@
+{
+  "kind": "V13_2_D4_COMMON_CAPABILITY_DRAFT",
+  "status": "READ_ONLY_DESIGN_NOT_IMPLEMENTED",
+  "plan_sha256": "84c89a3e8dbb1f23ad4478e8a809f264c76c430b537b0ea1501671230681a79a",
+  "dependency": "D2-D3 scoped evidence and E0normal22/24 plus direct repairs of both original old updates. R0-R4 preserved separately; latest R4 full24 is20PASS/4FAIL and complete source-semantic gate unmet. D4 runtime not admitted; read-only common-capability/selection preparation continues.",
+  "main_comparison": "M vs B6+",
+  "secondary_comparison": "M vs B2+",
+  "arms": {
+    "B2+": {
+      "label": "StrongRawRAG+",
+      "representation": "Original actually observed source events with original roles/time/hash.",
+      "formation": "Capture original events only; no semantic generation.",
+      "reader": "Common lexical+dense public-query bounded reader; records from raw sources.",
+      "memory_mutations": "No unsupported CRUD placeholders."
+    },
+    "B6+": {
+      "label": "Receipt-RAG+",
+      "representation": "Same public deterministic profiles, original source leaves and simple semantic-summary fallback.",
+      "formation": "Actual observed boundary, projection0generation; at most1paid simple summary generation for useful semantic matter, retained literal source provenance and unchecked meaning.",
+      "reader": "Same raw retrieval, deterministic observations and summary units within common2048/6budget.",
+      "limitations": "Summary does not gain M candidate revision machinery; old B6 results keep original labels."
+    },
+    "X1": {
+      "label": "Mem0-TraceEqual",
+      "representation": "Observed_events_v1 actual event carrier through pinned native Memory SDK infer=True.",
+      "formation": "Same declared closed observed boundary; native internal calls fully charged.",
+      "reader": "Public native owner-filtered get_all/get/history snapshot plus raw leaves; same public-query bounded read and metadata budget.",
+      "lifecycle": "Snapshot before SDK/history/vector close; retain close errors; independent same-path SDK reopen verifies actual add-returned IDs through public get/history. Unconfirmed native add is not automatically repeated.",
+      "snapshot": "Pinned public get_all defaults top_k20. Explicit declared snapshot bound and possible_truncation required; no private Qdrant/SQLite reads to claim full bank.",
+      "limitations": "Native timestamp/history stay native; no invented MiLAi integer revision/CAS handle or per-card semantic provenance proof."
+    },
+    "M": {
+      "label": "MiLAi v13.2",
+      "representation": "Same deterministic observations plus original source leaves and semantic candidate identity/patch.",
+      "formation": "Same observed boundary, synchronous one paid batch≤6mutations/repair0; source-level dedup qualification retained.",
+      "reader": "Common raw lexical+dense retrieval/backlinks, actual read-time candidates and bounded metadata."
+    }
+  },
+  "common": {
+    "host": "Existing7860Qwen3.6-35B-A3B-FP8,temperature0,out4096; no deployment/model change.",
+    "business": "Same public reservation/document tools, guard, live discovery, inputs and lawful threads.",
+    "prefetch": "One current-public-input prepare_context per user turn, shared continuations; explicit search_memory(query) is an extra charged read.",
+    "ordinary_material": "Actual current source index, one ordinary packet, all current recall reference bodies and history/source/version/omission metadata jointly fit2048token/max6record initial budget. Explicit extra reads and retained earlier-turn packets are additionally charged.",
+    "historical_discovery": "All arms need truthful bounded discovery/read-more for their actual archived evidence and supported histories. Raw sources retain actual role/time/ref; native versions/timestamps remain native. M-only integer revision handles are not granted to baselines as fabricated native semantics. Missing visible ordinary material must not imply no historical source or no user preference.",
+    "scope": "No future/scorer/gold/hidden-world routing; actual source/owner/ref only.",
+    "public_hint": "The same generic observed-results/historical-status interpretation prompt for all arms.",
+    "recovery": "Common reachable W1/W2/W3; old actual-UPDATE W3 stays distinct/N_A if unreachable."
+  },
+  "candidate_policy": {
+    "status": "PROSPECTIVE_RULE_DEFINED_BEFORE_D4_OUTPUTS_RUNTIME_NOT_ADMITTED",
+    "equal_candidates_per_arm": 2,
+    "candidates": [
+      {
+        "name": "packet1024",
+        "material_tokens": 1024,
+        "max_records": 6
+      },
+      {
+        "name": "packet2048",
+        "material_tokens": 2048,
+        "max_records": 6
+      }
+    ],
+    "selection": {
+      "setting": "Quality24 inclusive generation admissions per public message, same original six exposed stories and both candidates for every arm. No new story/holdout access for selection.",
+      "planned_denominator_per_candidate": 6,
+      "primary": "Maximize number of confirmed full-arc clean successes among all six planned trajectories. A clean success requires the declared native task/goal, truthful final claims, supported provenance/scope and no unrequested/duplicate business effects. Root diagnosis is labeled non-independent.",
+      "lexicographic_ties": [
+        "More confirmed native-task successes over the same six planned trajectories",
+        "More completed full public-message arcs over the same six planned trajectories",
+        "Lower actual charged generation tokens including Host/native/formation/repair/failures/recovery",
+        "Lower actual charged embedding tokens",
+        "Prefer packet1024 when all previous fields tie"
+      ],
+      "missing": "Interrupted/unscorable/NOT_RUN cannot add confirmed successes; publish their counts and missing lower/upper bounds separately. All planned six remain in the selection denominator.",
+      "hard_contract_violation": "Gold/future/scorer leak, wrong-owner delivery, false durable success or broken ledger/freezes makes that candidate ineligible for promotion. Preserve all costs and failures; if neither candidate is eligible, that arm remains NOT_ADMITTED.",
+      "accounting": "Each arm has exactly two predeclared candidates. Development selection has48 planned arm-candidate-story trajectories; publish every candidate. The selected24-trajectory view reuses these already exposed development outputs and is not independent evaluation or an additional run. The separate12-admission condition uses a new24-trajectory frozen root after selection.",
+      "stopping": "No additional prompt/threshold/rank/candidate changes after these outputs. A new repair requires a separate version and preserves the previous selection/cohort."
+    }
+  },
+  "cohorts": {
+    "exposed_document": "Original six exposed stories×fourarms=24development trajectories per selected quality setting. Current documents are an already designed workflow, not unseen.",
+    "quality": "Per-message24total generation admission, native/Host/formation/repair costs all accounted; actual enforcement must be checked before run.",
+    "budget12": "Separate common12totalgeneration cohort, no stitching old interrupted outputs into new successes.",
+    "pilot": "Proposed12newbase×2conditions×4arms96 after valid core, source graph/template family freeze before content access.",
+    "formal": "Initial60base×2×4=480 proposal, final size/stopping precision based on pilot before formal outputs."
+  },
+  "public_task_references": [
+    "NoMemory",
+    "FullHistory",
+    "RollingSummary",
+    "Ordinary-Matched",
+    "Prompt-only",
+    "old Field key cost/repair slice",
+    "SimpleMem-Text bounded official-contract confirmation; exact existing source/SDK identity before run"
+  ],
+  "implementation_risks": [
+    "ComparisonRuntime recall currently executes per ReAct; needs an opt-in ordinary cache cadence.",
+    "matched_observation_v1 formation currently runs per tool and old multi-turn Field writer; preserve legacy and add a distinct closed-boundary opt-in.",
+    "Common backend reader comparison is not complete native ask/reflect reproduction.",
+    "Second family and independent scorer unavailable; related claims remain incomplete.",
+    "Pinned public native snapshot bound must be truthful, including complete versus possibly truncated."
+  ],
+  "product": "NO_GO",
+  "read_only_implementation_audit": {
+    "recorded_at_utc": "2026-10-01T00:51:03.748818+00:00",
+    "source_sha256": {
+      "src/milai_lab/runners/v13_1_p5_compare.py": "abb5aba70ea489c957fab978c7ea0bb7115738bb7f9a57a04e0453780940d55b",
+      "src/milai_lab/runners/v13_1_p5.py": "571d5b01c054daaae56b6dc16ee4dd8e7c4f0ee7c96ca54b264cdd4a6a2abcbd",
+      "src/milai_lab/providers/chat_bridge.py": "992674f2341285ea3456324cb7cd2a0b2568f1fbf9917f73282ef3caff535ddd",
+      "src/milai_lab/baselines/v13_1_controls.py": "de6c5105ef26dfe37e6bb9f45c90eb1e8e8391516404a7382300b8fdd22c7f3e",
+      "src/milai_lab/integrations/memory/mem0.py": "d7b0d359e21a107539cab6de2bcc932bde0be0f46772fc3b25c12f813a440d2a"
+    },
+    "findings": [
+      "ComparisonRuntime currently recalls per ReAct and can form per matched tool: old behavior cannot be relabeled as one cached ordinary delivery/closed boundary.",
+      "Current B6 ObservedControls ingests raw chunks and receipt_projection; it has no simple semantic-summary fallback. Existing B3 summary callback does not demonstrate B6+ fallback implementation.",
+      "Mem0 ComparisonRuntime explicitly passes host model._reserve_request into the native chat bridge, which reserves before client.chat. This static path is present; actual shared24/12 admission across native calls/restart remains unverified for new D4.",
+      "Host per-message admission state is persisted in host-capacity.json and begin_public_message takes checkpoint count. New baseline summary must use the same counter, and new checks must cover persistence after interrupted transport.",
+      "Current native reader uses public search_archive and get_all/history snapshots. A common backend comparison must retain native source/snapshot limits and cannot invent MiLAi revision semantics."
+    ],
+    "required_before_model_http": [
+      "Opt-in closed-boundary formation and one ordinary cached prepare per public turn for all arms",
+      "Same public D2 observation contract for B6+/M, with actual source association and truthful raw/summary/basis distinction",
+      "B6+ at most one paid simple semantic-summary call; no M candidate revision machinery",
+      "Actual Qwen tokenizer joint2048/6 delivery, source/history discovery, owner and omission checks",
+      "Shared per-public-message24 and12 inclusive admission tests across Host/native/summary/M writer, plus resumed persisted cap and unknown transport receipts",
+      "Installed native SDK snapshot before close, independent same-path reopen, frozen artifacts and original ledger accounting"
+    ],
+    "new_model_http": 0,
+    "runtime_admission": "NOT_ADMITTED",
+    "second_family": "UNAVAILABLE_UNCHANGED",
+    "independent_judge": "UNAVAILABLE_UNCHANGED"
+  },
+  "source_interface_audit": {
+    "status": "ROOT_VERIFIED_READ_ONLY_DESIGN_NO_RUNTIME_ADMISSION",
+    "base_commit": "8b38f2d76494d411fa1d4b4bec3db891e35243ab",
+    "runtime_source_count": 209,
+    "runtime_source_map_sha256": "676ad5dcc1415e30656b433c885804792a5377ecee6a3f4a83d91fb1a3e21e91",
+    "root_verification": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-d4-root-audit/read-only-source-verification.json",
+      "sha256": "34e108ef913ce47f31f2030058c7bc65eb8d35125fa235c4063bca4904684eb0"
+    },
+    "source_original_report": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/source-checks.json",
+      "sha256": "7d99b0b5d3e3247bd5a9b3141e9b7fe8a591328fc665382030869b52be022101"
+    },
+    "source_design": {
+      "json_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/design.json",
+      "json_sha256": "93d7cdbb63ff6ed24d414bfa6a22c90713e2f3f3ad60e52d725056aebf414773",
+      "readable_path": "/cra/memory/mx_memory/MiLAi-worktrees/v13-2-d4-interface-audit/MiLAi-Lab/artifacts/v13-2-d4-interface-audit/design.txt",
+      "readable_sha256": "b645e70763687f245566c5a5af5be015cf8def07ba100ed48a635b0fa643a07e"
+    },
+    "verified_command_count": 49,
+    "copied_source_artifacts": 240,
+    "nonzero_read_only_commands": 2,
+    "unwrapped_setup_failures": 4,
+    "installed_native_pin": "f8082a7345dadd9e042ebbc40b57b1498c8f6d63",
+    "installed_native_version": "2.1.0",
+    "native_reference_manifest": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-design-literature/projects/mem0-runtime-f808-reference/manifest.json",
+      "sha256": "87f7653a86cea24a7fdc2aabf62138367ae8dc6c48a58a9a2f71e394959f9b7f"
+    },
+    "exact_git_files_verified": 6,
+    "installed_module_hashes_verified": 148,
+    "findings": [
+      "Existing corrupt capacity JSON already raises; missing file/key instead falls back to0/max Host AI checkpoint lower bound. This is source reasoning, not executed destructive recovery fault evidence.",
+      "Host AI checkpoint messages do not reconstruct all native/direct summary callbacks; an expected resumed total must be trusted complete shared persisted admission or reject dispatch.",
+      "Common reader needs snapshot/refresh_selected/read_exact/history_menu with domain identities; native get/history lacks owner argument and needs actual owned-ID proof before delivery.",
+      "Native bounded get_all with expiration filtering cannot prove full-bank completeness even below top_k20; preserve truthful snapshot limits.",
+      "One ordinary public-query cadence, closed formation, actual B6 append-only summary and M-exclusive mutation strategy are proposed, not implemented."
+    ],
+    "new_actual_model_http": 0,
+    "sdk_constructions": 0,
+    "tests_executed": 0,
+    "ledger_before_after_sha256": "32265299c38f89796a543d850bb045c24a5049b8e5fbc5fff63c692a5fa48793",
+    "runtime_admission": "NOT_ADMITTED",
+    "limits": [
+      "Source inspection and artifact assembly only; no cap fault, actual generation, native SDK lifecycle or four-arm runtime acceptance occurred.",
+      "Corrupt counter JSON already raises in existing code; missing persisted file/key undercount is an inference, not a fault-run result.",
+      "No repeated32/26 checks or original34 compact explorations. No physical source/test implementation commit created.",
+      "Parent owns actual R5/D4 admission, ledger, public docs/config/freezes and GitHub publication."
+    ]
+  },
+  "next_engineering_scope": {
+    "status": "AUTHORIZED_ISOLATED_IMPLEMENTATION_NOT_ACCEPTED_OR_TRANSFERRED",
+    "mechanism": "Default-off durable shared per-public-message generation admission and fail-closed resume only.",
+    "base_commit": "8b38f2d76494d411fa1d4b4bec3db891e35243ab",
+    "primary_source": "HOLD_209_FOR_R5",
+    "performance_source": "HOLD_ORIGINAL_208",
+    "requirements": [
+      "Explicit actual start/resume signal and validated public-message/scope/config identity; existing checkpoint only a lower-bound cross-check.",
+      "Unknown uses persisted reservation; missing expected state/key or invalid/incompatible/undercounted state rejects before dispatch, never silently resets.",
+      "One reserve before scripted transport for existing Host/native/M paths and explicitly labeled planned-summary callback only; preserve actual failure and distinguish reserve from HTTP dispatch.",
+      "12/24 shared-boundary and isolated restart/persistence-cut checks with socket-denied synthetic ledger; no real model requests or global ledger mutation.",
+      "Legacy defaults and existing Source trees unchanged; save original failed commands and per-command source/test maps."
+    ],
+    "deferred": [
+      "B6 summary formation implementation",
+      "Common backend reader and ordinary cache cadence",
+      "Closed-boundary comparison coordinator",
+      "Host memory tool read-only strategy"
+    ],
+    "not_claimed": [
+      "Actual four-arm inclusive formation enforcement",
+      "D4 runtime admission",
+      "E0 repair gate",
+      "Semantic or unseen/generalization benefit"
+    ],
+    "product": "NO_GO"
+  },
+  "latest_e0_gate_review": {
+    "cohort": "R7",
+    "result_path": "data/manifests/v13-2-e0-r7-results.json",
+    "result_sha256": "73af977f03805765c4278d16e438b3bc9c08154ede58700767e573e61649f8fe",
+    "normal24_task_counts": {
+      "PASS": 21,
+      "FAIL": 3
+    },
+    "normal22": "NOT_PASSED_21_OF_24_AND_ONE_FALSE_DURABLE_SAVE",
+    "complete_old_update_gate": "PASSED_SCOPED_BOTH_ORIGINAL_CARDS_HISTORY_CURRENT_FORMER_AND_SUPPORT",
+    "supported_old_correction_gate": "PASSED_SCOPED_ACTUAL_CORRECTION_HUMAN_LEAVES",
+    "full_source_semantic_gate": "NOT_PASSED",
+    "direct_source_gap_cases": 2,
+    "direct_source_gap_versions": 2,
+    "actual_completed_messages": 46,
+    "interrupted_messages": 2,
+    "not_run_messages": 0,
+    "false_durable_saved_receipts": 1,
+    "unauthorized_completed_label_attempts": 0,
+    "new_executed_unauthorized_business_side_effects": 0,
+    "common_capability_gate": "INCOMPLETE",
+    "actual_d4_admission": "NOT_ADMITTED",
+    "independent_judge": false
+  },
+  "shared_admission_engineering_acceptance": {
+    "status": "ACCEPTED_DEFAULT_OFF_NOT_FOUR_ARM_RUNTIME_ADMISSION",
+    "manifest": {
+      "path": "data/manifests/v13-2-shared-admission-acceptance.json",
+      "sha256": "95bacb777f8b7573569b786606341639988bca22b84675623f17b34fb5e4d853"
+    },
+    "runtime_count": 210,
+    "runtime_map_sha256": "b010a1073fa61c240ad5db5eb31f94f057c06adf0909acd7206e76d9bacaddb9",
+    "root_affected_tests": 50,
+    "actual_experiment_profile_enabled": false,
+    "actual_d4_admission": "NOT_ADMITTED",
+    "not_implemented": [
+      "Common HTTP owner/mutex",
+      "B6 summary",
+      "Common reader/cache",
+      "Closed-boundary coordinator",
+      "Host write strategy"
+    ]
+  },
+  "serial_http_readonly_audit": {
+    "status": "READONLY_ACCEPTED_COMMON_HTTP_CLOSURE_NOT_IMPLEMENTED",
+    "manifest": {
+      "path": "data/manifests/v13-2-serial-http-audit-acceptance.json",
+      "sha256": "a5305f24b357ad49e4aabb8435898d1120f27097171fe6bed1b1c6eb3374606a"
+    },
+    "indexed_read_attempts": 58,
+    "actual_recorded_subprocesses": 57,
+    "pre_dispatch_helper_failure": 1,
+    "runtime_closure": "NOT_IMPLEMENTED",
+    "actual_d4_admission": "NOT_ADMITTED"
+  },
+  "direct_support_next_engineering_scope": {
+    "status": "ACCEPTED_DEFAULT_OFF_FOR_R6_PREPARATION_NOT_SEMANTIC_PASS",
+    "acceptance": {
+      "path": "data/manifests/v13-2-direct-support-design-acceptance.json",
+      "sha256": "c00dc01d11f2c3370a85ba84e5151326025032fc1455557353d7d4c7903c2bd7"
+    },
+    "base_commit": "87f74c6ca3f0cff0c17b07e86ad9869248270c6a",
+    "opt_in": "direct_support_v1",
+    "runtime_source": "ROOT_ACCEPTED_211_8c466_ACTUAL_R6_COMPLETED_DENOMINATOR_GATES_FAILED_NOT_D4_ADMITTED",
+    "combined_factors": [
+      "Trusted actual public-turn trigger separate from supporting leaves",
+      "Explicit whole-field exact reuse with actual read-time candidate/hash/current CAS",
+      "Host-success suppression by trusted trigger; explicit cadence factor",
+      "Literal companion string object ID from same actually captured Source DTO",
+      "Required generic bounded protocol presentation",
+      "New-profile reversible field-support indexes into complete binding/parent structures; unchanged selected IDs/order, all metadata counted in2048/6; consequent body allocation retained as a factor"
+    ],
+    "actual_d4_admission": "NOT_ADMITTED",
+    "not_claimed": [
+      "Semantic source-gate repair",
+      "R6 task results",
+      "Independent or unseen generalization",
+      "Single-factor causal improvement"
+    ],
+    "first_pressure_status": "Corrected actual material fits2048 but new metadata displaces current/Source; original full-state driver error and corrected first regression retained; initial fixtures lack true backlinks",
+    "representation_reference": "https://arrow.apache.org/docs/20.0/format/Columnar.html#dictionary-encoded-layout",
+    "implementation_acceptance": {
+      "path": "data/manifests/v13-2-direct-support-acceptance.json",
+      "sha256": "e086844c9ded9991207ca663d3aee0da6a9088ef1f4f4e3793e6e61cf776e9ee"
+    },
+    "source_commit": "33a72b3e43f27fbc74b80c4b33e568e691b26c8c",
+    "primary_transfer_commit": "2eeb7b74999bd7de5b513f66b9b498445648c727",
+    "post_acceptance_actual_r6": {
+      "cohort": "R6",
+      "result_path": "data/manifests/v13-2-e0-r6-results.json",
+      "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+      "normal24_task_counts": {
+        "PASS": 21,
+        "FAIL": 3
+      },
+      "normal22": "NOT_PASSED_21_OF_24_FULL_ASSERTION_AND_AUTHORIZATION",
+      "complete_old_update_gate": "NOT_PASSED",
+      "supported_old_correction_gate": "NOT_PASSED_BOTH_CORRECTIONS_CITE_OLD_LEAVES",
+      "full_source_semantic_gate": "NOT_PASSED",
+      "direct_source_gap_cases": 5,
+      "direct_source_gap_versions": 6,
+      "actual_completed_messages": 45,
+      "interrupted_messages": 1,
+      "not_run_messages": 2,
+      "unauthorized_completed_label_attempts": 1,
+      "new_executed_unauthorized_business_side_effects": 0,
+      "common_capability_gate": "INCOMPLETE",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "independent_judge": false
+    },
+    "runtime_source_at_engineering_acceptance": "ROOT_ACCEPTED_211_8c466_NOT_ACTUAL_R6_OR_D4_ADMITTED"
+  },
+  "previous_e0_gate_reviews": [
+    {
+      "cohort": "R5",
+      "result_path": "data/manifests/v13-2-e0-r5-results.json",
+      "result_sha256": "5990828a5d606dc48444bc875c4b13fd42b056c4668cfbea10c0a3974756537c",
+      "normal24_task_counts": {
+        "PASS": 24,
+        "FAIL": 0,
+        "UNKNOWN": 0
+      },
+      "normal22": "PASSED_SCOPED_DECLARED_TASK_CHECKS_ONLY",
+      "complete_old_update_gate": "NOT_PASSED_DIRECT_QUERY_SOURCE_GAPS",
+      "full_source_semantic_gate": "NOT_PASSED",
+      "direct_source_gap_cases": 7,
+      "common_capability_gate": "INCOMPLETE",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "independent_judge": false
+    },
+    {
+      "cohort": "R6",
+      "result_path": "data/manifests/v13-2-e0-r6-results.json",
+      "result_sha256": "90809225e5e0a6dfbc87e025ee32fd0b4cfe846fde49bff0ecc22d961a330838",
+      "normal24_task_counts": {
+        "PASS": 21,
+        "FAIL": 3
+      },
+      "normal22": "NOT_PASSED_21_OF_24_FULL_ASSERTION_AND_AUTHORIZATION",
+      "complete_old_update_gate": "NOT_PASSED",
+      "supported_old_correction_gate": "NOT_PASSED_BOTH_CORRECTIONS_CITE_OLD_LEAVES",
+      "full_source_semantic_gate": "NOT_PASSED",
+      "direct_source_gap_cases": 5,
+      "direct_source_gap_versions": 6,
+      "actual_completed_messages": 45,
+      "interrupted_messages": 1,
+      "not_run_messages": 2,
+      "unauthorized_completed_label_attempts": 1,
+      "new_executed_unauthorized_business_side_effects": 0,
+      "common_capability_gate": "INCOMPLETE",
+      "actual_d4_admission": "NOT_ADMITTED",
+      "independent_judge": false
+    }
+  ],
+  "schema_communication_next_engineering_scope": {
+    "status": "ENGINEERING_ACCEPTED_R7_ACTUAL_FULL24_COMPLETE_TASK_SOURCE_SAVE_GATES_FAILED",
+    "profile": "shape_feedback_v1",
+    "path": "data/manifests/v13-2-schema-communication-scope.json",
+    "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+    "combined_factors": [
+      "Generic actual public catalog parameter shape/descriptions",
+      "Safe faithful origin-specific structural error presentation",
+      "Trigger metadata versus actual Source body wording"
+    ],
+    "implementation_not_started": false,
+    "actual_model_samples": 24,
+    "semantic_gate": "NOT_PASSED_R7",
+    "d4_admission": "NOT_ADMITTED",
+    "historical_scope_publication_snapshot": {
+      "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+      "profile": "shape_feedback_v1",
+      "path": "data/manifests/v13-2-schema-communication-scope.json",
+      "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+      "combined_factors": [
+        "Generic actual public catalog parameter shape/descriptions",
+        "Safe faithful origin-specific structural error presentation",
+        "Trigger metadata versus actual Source body wording"
+      ],
+      "implementation_not_started": true,
+      "actual_model_samples": 0,
+      "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
+      "d4_admission": "NOT_ADMITTED"
+    },
+    "implementation_acceptance": {
+      "path": "data/manifests/v13-2-schema-communication-acceptance.json",
+      "sha256": "4326cfc8b5fb72fe8e515879bb1ed7e9bf50f66b4750f17ac2e21d209acf7664"
+    },
+    "source_commit": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+    "primary_transfer_commit": "410e02f6cca2e3ff1df62c35866df35b3d2ee6b5",
+    "runtime_source": "ROOT_ACCEPTED_212_36338_R7_FIRST_ACTUAL_COMPLETE_WITH_FAILURES",
+    "engineering_before_r7_snapshot": {
+      "status": "ACCEPTED_DEFAULT_OFF_FOR_R7_PREPARATION_NOT_SEMANTIC_PASS",
+      "profile": "shape_feedback_v1",
+      "path": "data/manifests/v13-2-schema-communication-scope.json",
+      "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+      "combined_factors": [
+        "Generic actual public catalog parameter shape/descriptions",
+        "Safe faithful origin-specific structural error presentation",
+        "Trigger metadata versus actual Source body wording"
+      ],
+      "implementation_not_started": false,
+      "actual_model_samples": 0,
+      "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
+      "d4_admission": "NOT_ADMITTED",
+      "historical_scope_publication_snapshot": {
+        "status": "AUTHORIZED_ONLY_AFTER_SCOPE_PUBLICATION_REMOTE_VERIFICATION_IMPLEMENTATION_NOT_STARTED",
+        "profile": "shape_feedback_v1",
+        "path": "data/manifests/v13-2-schema-communication-scope.json",
+        "sha256": "93eac10deedcf7f0fc85c7c4fa9d362f7fb58506d1544a217dfaa05ecc129f1c",
+        "combined_factors": [
+          "Generic actual public catalog parameter shape/descriptions",
+          "Safe faithful origin-specific structural error presentation",
+          "Trigger metadata versus actual Source body wording"
+        ],
+        "implementation_not_started": true,
+        "actual_model_samples": 0,
+        "semantic_gate": "NOT_PASSED_R6_UNCHANGED",
+        "d4_admission": "NOT_ADMITTED"
+      },
+      "implementation_acceptance": {
+        "path": "data/manifests/v13-2-schema-communication-acceptance.json",
+        "sha256": "4326cfc8b5fb72fe8e515879bb1ed7e9bf50f66b4750f17ac2e21d209acf7664"
+      },
+      "source_commit": "d6bb0a2ef497c94ce6c16e6fee21184264a72d1b",
+      "primary_transfer_commit": "410e02f6cca2e3ff1df62c35866df35b3d2ee6b5",
+      "runtime_source": "ROOT_ACCEPTED_212_36338_NOT_ACTUAL_R7_OR_D4_ADMITTED"
+    },
+    "actual_model_samples_definition": "All24 original planned development trajectories including2 incomplete;48 messages planned.",
+    "actual_generation_requests": 171
+  },
+  "read_protocol_next_read_only_scope": {
+    "status": "AUTHORIZED_ONLY_AFTER_SCOPE_REMOTE_VERIFICATION_READ_ONLY_NOT_IMPLEMENTATION",
+    "path": "data/manifests/v13-2-read-protocol-proposal-scope.json",
+    "sha256": "7e2f8d10bce661a10b3f319bfb19373d4d3f40c5182cf092edbdcfd2211169ff",
+    "scope": "Blind static ordinary/explicit result-set continuation, finite actual read error propagation and durable-save receipt timing",
+    "base_commit": "da33e6169c2745fbb50aee3f0a4370b9ceb1f02f",
+    "source_owner": "/root/v13_2_source_resume",
+    "implementation_authorized": false,
+    "actual_model_http_authorized": 0,
+    "source_semantic_gate": "NOT_PASSED_R7",
+    "d4_admission": "NOT_ADMITTED"
+  },
+  "read_protocol_static_proposal_and_next_implementation": {
+    "status": "STATIC_PROPOSAL_ACCEPTED_IMPLEMENTATION_NOT_YET_EXECUTED",
+    "proposal_acceptance": "data/manifests/v13-2-read-protocol-proposal-acceptance.json",
+    "implementation_scope": "data/manifests/v13-2-read-protocol-implementation-scope.json",
+    "factors": [
+      "selected_snapshot_v1",
+      "typed_read_v1",
+      "completed_receipt_v1"
+    ],
+    "default": "legacy",
+    "source_before_files": 212,
+    "original_source_tree": "READY_HOLD",
+    "next_new_tree": "Root setup then existing Source owner only after scope remote verification",
+    "actual_new_model_http": 0,
+    "quality_or_four_arm_admission_accepted": false,
+    "status_preservation": "Original requirements, R7 failures and D4 NOT_ADMITTED unchanged; read-only scope metadata preserved as historical."
+  }
+}

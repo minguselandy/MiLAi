@@ -4,12 +4,13 @@ from __future__ import annotations
 
 import time
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from typing import Any
 
 import httpx
 
-from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget
+from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, current_http_budget
+from milai_lab.harness.http_ownership import HttpOwnership, HttpOwnershipError, settings_profile
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
 
 Emit = Callable[[dict[str, Any]], None]
@@ -52,6 +53,15 @@ class VLLMConfig:
             raise ValueError("enable_thinking must be a boolean or None")
 
 
+def ownership_client_configs(settings: dict[str, Any]) -> list[dict[str, Any]] | None:
+    """Actual existing DTO defaults, checked before an entry loads its ledger."""
+    if settings_profile(settings) == "legacy":
+        return None
+    return [
+        asdict(VLLMConfig(**settings[name])) for name in ("host", "embedding") if name in settings
+    ]
+
+
 class VLLMClient:
     """Synchronous vLLM chat/completions and embeddings client with trace events."""
 
@@ -62,21 +72,50 @@ class VLLMClient:
         transport: httpx.BaseTransport | None = None,
         budget: RunBudget | None = None,
         capacity: HostCapacity | None = None,
+        http_owner: HttpOwnership | None = None,
     ) -> None:
-        if (capacity is not None and config.enable_thinking is not None
-                and config.enable_thinking != capacity.enable_thinking):
+        if (
+            capacity is not None
+            and config.enable_thinking is not None
+            and config.enable_thinking != capacity.enable_thinking
+        ):
             raise ValueError("HOST_CAPACITY_THINKING_MODE_MISMATCH")
+        active_budget = current_http_budget()
+        if active_budget is not None and budget is not active_budget:
+            raise HttpOwnershipError("HTTP_OWNER_EXACT_BUDGET_REQUIRED")
         self.config = config
         self.emit = emit
         self.budget = budget
         self.capacity = capacity
         self.generation_holdback_tokens = 0
         self.generation_holdback_requests = 0
-        self._client = httpx.Client(
-            base_url=config.base_url.rstrip("/"),
-            timeout=config.timeout,
-            transport=transport,
-        )
+        adopted = budget.http_owner if budget is not None else None
+        if http_owner is not None and adopted is not http_owner:
+            raise HttpOwnershipError("HTTP_OWNER_EXPLICIT_BUDGET_CONFLICT")
+        self._http_owner = adopted
+        if adopted is not None:
+            adopted.register_client(self, budget, asdict(config))
+        try:
+            self._client = httpx.Client(
+                base_url=config.base_url.rstrip("/"),
+                timeout=config.timeout,
+                transport=transport,
+            )
+            if adopted is not None:
+                adopted.assert_client(self, budget, asdict(config), str(self._client.base_url))
+        except BaseException as initialization_error:
+            if adopted is not None:
+                if hasattr(self, "_client"):
+                    try:
+                        self.close()
+                    except BaseException as cleanup_error:
+                        # Keep the original refusal and the actual cleanup failure.
+                        # closing_client retains registration/lease on any failure;
+                        # HTTPX's CLOSED flag alone cannot prove transport cleanup.
+                        raise initialization_error from cleanup_error
+                else:
+                    adopted.abort_client(self)
+            raise
 
     def __enter__(self) -> VLLMClient:
         return self
@@ -85,7 +124,21 @@ class VLLMClient:
         self.close()
 
     def close(self) -> None:
-        self._client.close()
+        if self._http_owner is None:
+            self._client.close()
+        else:
+            with self._http_owner.closing_client(self):
+                self._client.close()
+                if not self._client.is_closed:
+                    raise HttpOwnershipError("HTTP_OWNER_CLIENT_CLOSE_INCOMPLETE")
+
+    def _check_owner(self) -> None:
+        if self._http_owner is not None:
+            if self._client.timeout != httpx.Timeout(self.config.timeout):
+                raise HttpOwnershipError("HTTP_OWNER_CLIENT_TIMEOUT_CHANGED")
+            self._http_owner.assert_client(
+                self, self.budget, asdict(self.config), str(self._client.base_url)
+            )
 
     def chat(
         self,
@@ -96,14 +149,18 @@ class VLLMClient:
         response_format: dict[str, Any] | None = None,
         top_p: float | None = None,
     ) -> dict[str, Any]:
+        self._check_owner()
         request: dict[str, Any] = {
             "model": self.config.model,
             "messages": [dict(message) for message in messages],
             "temperature": self.config.temperature,
             "max_tokens": self.config.max_tokens,
         }
-        thinking = (self.capacity.enable_thinking
-                    if self.capacity is not None else self.config.enable_thinking)
+        thinking = (
+            self.capacity.enable_thinking
+            if self.capacity is not None
+            else self.config.enable_thinking
+        )
         if thinking is not None:
             request["chat_template_kwargs"] = {"enable_thinking": thinking}
         if tools:
@@ -120,15 +177,19 @@ class VLLMClient:
         if self.capacity is not None:
             try:
                 capacity_receipt = self.capacity.check(
-                    request["messages"], self.config.max_tokens,
+                    request["messages"],
+                    self.config.max_tokens,
                     request.get("tools"),
                 )
             except CapacityExceeded as error:
                 if self.emit:
-                    self.emit({
-                        "event": "vllm_capacity_rejected", "path": "chat/completions",
-                        "capacity": error.receipt,
-                    })
+                    self.emit(
+                        {
+                            "event": "vllm_capacity_rejected",
+                            "path": "chat/completions",
+                            "capacity": error.receipt,
+                        }
+                    )
                 raise
         return self._post("chat/completions", request, capacity_receipt=capacity_receipt)
 
@@ -136,6 +197,7 @@ class VLLMClient:
         self, texts: Sequence[str] | Sequence[Sequence[int]], model: str
     ) -> list[list[float]]:
         """Embed a batch in one API request and return vectors in response order."""
+        self._check_owner()
         if not texts:
             return []
         response = self._post("embeddings", {"model": model, "input": list(texts)})
@@ -143,13 +205,39 @@ class VLLMClient:
         return [list(item["embedding"]) for item in sorted(data, key=lambda item: item["index"])]
 
     def _post(
-        self, path: str, request: dict[str, Any], *,
+        self,
+        path: str,
+        request: dict[str, Any],
+        *,
+        capacity_receipt: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        if self._http_owner is None:
+            return self._post_request(path, request, capacity_receipt=capacity_receipt)
+        self._check_owner()
+        actual_url = str(self._client.build_request("POST", path).url)
+        with self._http_owner.request(
+            self,
+            self.budget,
+            asdict(self.config),
+            str(self._client.base_url),
+            path,
+            actual_url,
+            request.get("model"),
+        ):
+            return self._post_request(path, request, capacity_receipt=capacity_receipt)
+
+    def _post_request(
+        self,
+        path: str,
+        request: dict[str, Any],
+        *,
         capacity_receipt: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         try:
             reservation = (
                 self.budget.reserve(
-                    path, request,
+                    path,
+                    request,
                     generation_holdback_tokens=(
                         self.generation_holdback_tokens if path == "chat/completions" else 0
                     ),
@@ -158,14 +246,23 @@ class VLLMClient:
                     ),
                     generation_input_tokens=(
                         capacity_receipt["prompt_tokens"] + capacity_receipt.get("safety_tokens", 0)
-                        if path == "chat/completions" and capacity_receipt is not None else None
+                        if path == "chat/completions" and capacity_receipt is not None
+                        else None
                     ),
-                ) if self.budget else None
+                )
+                if self.budget
+                else None
             )
         except BudgetExceeded as error:
             if self.emit:
-                self.emit({"event": "vllm_budget_rejected", "path": path,
-                           "request_sent": False, "reason": str(error)})
+                self.emit(
+                    {
+                        "event": "vllm_budget_rejected",
+                        "path": path,
+                        "request_sent": False,
+                        "reason": str(error),
+                    }
+                )
             raise
         started = time.monotonic()
         event: dict[str, Any] = {"event": "vllm_request", "path": path, "request": request}
@@ -193,11 +290,13 @@ class VLLMClient:
                     ),
                     "prompt_estimate_error_tokens": (
                         actual_prompt - capacity_receipt["prompt_tokens"]
-                        if type(actual_prompt) is int else None
+                        if type(actual_prompt) is int
+                        else None
                     ),
                     "output_reserve_minus_actual_tokens": (
                         capacity_receipt["output_reserve_tokens"] - actual_completion
-                        if type(actual_completion) is int else None
+                        if type(actual_completion) is int
+                        else None
                     ),
                 }
             event["event"] = "vllm_response"

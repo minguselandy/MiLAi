@@ -1,0 +1,1287 @@
+{
+  "kind": "V13_2_SOURCE_SCALE_BASELINE_ACCEPTANCE",
+  "status": "SCOPED_MEASUREMENT_COMPLETE_D5_PARTIAL",
+  "freeze": "data/manifests/v13-2-source-scale-baseline-freeze.json",
+  "freeze_sha256": "ab0596d85ca4251c56bbd61b2198438340d2548296c02cc9e068bf45fc8998fa",
+  "source_commit": "fd1ce5965926bf636ed4c5af00332d03e925d6a9",
+  "source_map_sha256": "906d86f4a7ef8104bc49991f4a05ebf81325b08dcbb03454d9d894fa8674c07a",
+  "driver_sha256": "9eebe1a30d346db76e13a9bf57b48a245248ca873cedcde6c05336e8ded31967",
+  "audit_tool_sha256": "b43bd92af98a607099d46db427e00ac7792a058df39c1aa880a934fb67a46caa",
+  "profiles": [
+    {
+      "events_at_start": 100,
+      "events_at_end": 120,
+      "semantic_cards": 10,
+      "samples": 140,
+      "setup_wall_ms": 1115.97017,
+      "initial_raw_index_bytes": 408631,
+      "initial_sqlite_resource_bytes": 786432,
+      "final_sqlite_resource_bytes": 811008,
+      "phases": [
+        {
+          "phase": "ordinary_first_per_turn",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 406.2536315,
+              "p95": 554.76732785,
+              "min": 387.44777,
+              "max": 562.967307
+            },
+            "cpu_ms": {
+              "p50": 368.0035735,
+              "p95": 390.3576662500001,
+              "min": 357.063915,
+              "max": 524.87826
+            },
+            "sdk_search_returned_rows": {
+              "p50": 1268.0,
+              "p95": 1404.8,
+              "min": 1061,
+              "max": 1420
+            },
+            "sdk_get_calls": {
+              "p50": 288.0,
+              "p95": 288.0,
+              "min": 288,
+              "max": 288
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 1472.0,
+              "p95": 1582.0000000000005,
+              "min": 1448,
+              "max": 2152
+            },
+            "peak_process_rss_kib": {
+              "p50": 235516.0,
+              "p95": 235662.4,
+              "min": 235316,
+              "max": 235708
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 5760,
+            "get_returned_items": 5723,
+            "put_calls": 76,
+            "search_calls": 380,
+            "search_exact_namespace_rows": 3600,
+            "search_returned_rows": 25305
+          },
+          "offline_embedding_totals": {
+            "document_batches": 20,
+            "documents_encoded": 128,
+            "query_calls": 20
+          }
+        },
+        {
+          "phase": "ordinary_cached_reuse",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 29.275281,
+              "p95": 30.136938150000002,
+              "min": 28.678862,
+              "max": 30.159057
+            },
+            "cpu_ms": {
+              "p50": 29.277187499999997,
+              "p95": 30.1389276,
+              "min": 28.680043,
+              "max": 30.152144
+            },
+            "sdk_search_returned_rows": {
+              "p50": 434.0,
+              "p95": 434.0,
+              "min": 434,
+              "max": 434
+            },
+            "sdk_get_calls": {
+              "p50": 233.0,
+              "p95": 233.0,
+              "min": 233,
+              "max": 233
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 4660,
+            "get_returned_items": 4660,
+            "search_calls": 140,
+            "search_exact_namespace_rows": 2400,
+            "search_returned_rows": 8680
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "new_source_capture",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 9.8379615,
+              "p95": 13.3039568,
+              "min": 7.333271,
+              "max": 14.260033
+            },
+            "cpu_ms": {
+              "p50": 0.5129630000000001,
+              "p95": 0.6013751,
+              "min": 0.454569,
+              "max": 0.629307
+            },
+            "sdk_search_returned_rows": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 96.0,
+              "p95": 153.60000000000002,
+              "min": 88,
+              "max": 184
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 0,
+            "put_calls": 20
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "ordinary_dirty_refresh",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 294.679963,
+              "p95": 309.06328735,
+              "min": 291.534396,
+              "max": 365.204532
+            },
+            "cpu_ms": {
+              "p50": 274.32543599999997,
+              "p95": 283.6420988,
+              "min": 271.827147,
+              "max": 286.962953
+            },
+            "sdk_search_returned_rows": {
+              "p50": 465.5,
+              "p95": 491.15,
+              "min": 437,
+              "max": 494
+            },
+            "sdk_get_calls": {
+              "p50": 278.0,
+              "p95": 295.1,
+              "min": 259,
+              "max": 297
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 272.0,
+              "p95": 272.0,
+              "min": 272,
+              "max": 272
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 5560,
+            "get_returned_items": 5560,
+            "put_calls": 40,
+            "search_calls": 140,
+            "search_exact_namespace_rows": 2610,
+            "search_returned_rows": 9310
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "source_idempotent_replay",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 7.2784295,
+              "p95": 7.780720850000001,
+              "min": 7.197514,
+              "max": 8.553087
+            },
+            "cpu_ms": {
+              "p50": 7.279605500000001,
+              "p95": 7.78198155,
+              "min": 7.198859,
+              "max": 8.554608
+            },
+            "sdk_search_returned_rows": {
+              "p50": 187.0,
+              "p95": 187.0,
+              "min": 187,
+              "max": 187
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 20,
+            "search_calls": 40,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 3740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_validated_lookup",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 9.1761055,
+              "p95": 9.756561999999999,
+              "min": 9.077922,
+              "max": 9.815785
+            },
+            "cpu_ms": {
+              "p50": 9.177312,
+              "p95": 9.75775865,
+              "min": 9.079294,
+              "max": 9.816994
+            },
+            "sdk_search_returned_rows": {
+              "p50": 187.0,
+              "p95": 187.0,
+              "min": 187,
+              "max": 187
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 600,
+            "get_returned_items": 600,
+            "search_calls": 40,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 3740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_delete_and_rebuild",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 116.8270685,
+              "p95": 161.659052,
+              "min": 106.04574,
+              "max": 193.760996
+            },
+            "cpu_ms": {
+              "p50": 14.036111,
+              "p95": 18.820130300000052,
+              "min": 13.612727,
+              "max": 90.435677
+            },
+            "sdk_search_returned_rows": {
+              "p50": 181.0,
+              "p95": 181.0,
+              "min": 181,
+              "max": 181
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 1120.0,
+              "p95": 1120.0,
+              "min": 1072,
+              "max": 1120
+            },
+            "peak_process_rss_kib": {
+              "p50": 238056.0,
+              "p95": 238056.0,
+              "min": 238056,
+              "max": 238056
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "delete_calls": 120,
+            "get_calls": 600,
+            "get_returned_items": 480,
+            "put_calls": 120,
+            "search_calls": 40,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 3620
+          },
+          "offline_embedding_totals": {}
+        }
+      ],
+      "private_evidence": {
+        "result": "artifacts/v13-2-scale-fd1/n100/result.json",
+        "result_sha256": "746f0014c3c0e605b02d2c113a2a69cdac24a824fc4acda6446975e1979d1722",
+        "samples": "artifacts/v13-2-scale-fd1/n100/samples.jsonl",
+        "samples_sha256": "54e6dc4a1d02497a6462182f9f280fe8a4f4b7c9fdc73360e77a1bfb71512e76"
+      }
+    },
+    {
+      "events_at_start": 1000,
+      "events_at_end": 1020,
+      "semantic_cards": 10,
+      "samples": 140,
+      "setup_wall_ms": 10954.01298,
+      "initial_raw_index_bytes": 3762933,
+      "initial_sqlite_resource_bytes": 3915776,
+      "final_sqlite_resource_bytes": 3944448,
+      "phases": [
+        {
+          "phase": "ordinary_first_per_turn",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 2068.925089,
+              "p95": 2123.0791823,
+              "min": 2018.770645,
+              "max": 2227.006091
+            },
+            "cpu_ms": {
+              "p50": 1987.3405275,
+              "p95": 2043.7935075,
+              "min": 1869.13677,
+              "max": 2123.255564
+            },
+            "sdk_search_returned_rows": {
+              "p50": 9368.0,
+              "p95": 9504.8,
+              "min": 9161,
+              "max": 9520
+            },
+            "sdk_get_calls": {
+              "p50": 2088.0,
+              "p95": 2088.0,
+              "min": 2088,
+              "max": 2088
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 288344.0,
+              "p95": 314161.2,
+              "min": 195344,
+              "max": 315248
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 41760,
+            "get_returned_items": 41723,
+            "put_calls": 76,
+            "search_calls": 2000,
+            "search_exact_namespace_rows": 21600,
+            "search_returned_rows": 187305
+          },
+          "offline_embedding_totals": {
+            "document_batches": 20,
+            "documents_encoded": 1028,
+            "query_calls": 20
+          }
+        },
+        {
+          "phase": "ordinary_cached_reuse",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 446.7776195,
+              "p95": 468.85478470000004,
+              "min": 439.904967,
+              "max": 545.057243
+            },
+            "cpu_ms": {
+              "p50": 445.98720549999996,
+              "p95": 468.72885700000006,
+              "min": 439.878098,
+              "max": 544.965122
+            },
+            "sdk_search_returned_rows": {
+              "p50": 3134.0,
+              "p95": 3134.0,
+              "min": 3134,
+              "max": 3134
+            },
+            "sdk_get_calls": {
+              "p50": 2033.0,
+              "p95": 2033.0,
+              "min": 2033,
+              "max": 2033
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 76816.0,
+              "p95": 76816.0,
+              "min": 76816,
+              "max": 76816
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 40660,
+            "get_returned_items": 40660,
+            "search_calls": 680,
+            "search_exact_namespace_rows": 20400,
+            "search_returned_rows": 62680
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "new_source_capture",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 9.7298935,
+              "p95": 11.68227365,
+              "min": 7.467023,
+              "max": 13.800406
+            },
+            "cpu_ms": {
+              "p50": 0.5135460000000001,
+              "p95": 0.6442215500000003,
+              "min": 0.464028,
+              "max": 0.946978
+            },
+            "sdk_search_returned_rows": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 96.0,
+              "p95": 152.0,
+              "min": 88,
+              "max": 152
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 0,
+            "put_calls": 20
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "ordinary_dirty_refresh",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 732.1057075,
+              "p95": 749.74725185,
+              "min": 706.820323,
+              "max": 753.250488
+            },
+            "cpu_ms": {
+              "p50": 708.7562485000001,
+              "p95": 728.25505035,
+              "min": 686.085519,
+              "max": 735.269192
+            },
+            "sdk_search_returned_rows": {
+              "p50": 3165.5,
+              "p95": 3191.15,
+              "min": 3137,
+              "max": 3194
+            },
+            "sdk_get_calls": {
+              "p50": 2078.0,
+              "p95": 2095.1,
+              "min": 2059,
+              "max": 2097
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 77880.0,
+              "p95": 78592.0,
+              "min": 77296,
+              "max": 78592
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 41560,
+            "get_returned_items": 41560,
+            "put_calls": 40,
+            "search_calls": 680,
+            "search_exact_namespace_rows": 20610,
+            "search_returned_rows": 63310
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "source_idempotent_replay",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 156.213415,
+              "p95": 163.10385125,
+              "min": 154.862203,
+              "max": 165.935103
+            },
+            "cpu_ms": {
+              "p50": 156.17652049999998,
+              "p95": 159.24796980000002,
+              "min": 154.84177,
+              "max": 162.947817
+            },
+            "sdk_search_returned_rows": {
+              "p50": 1087.0,
+              "p95": 1087.0,
+              "min": 1087,
+              "max": 1087
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 39128.0,
+              "p95": 39128.0,
+              "min": 39128,
+              "max": 39128
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 20,
+            "search_calls": 220,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 21740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_validated_lookup",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 158.1240495,
+              "p95": 165.0039766,
+              "min": 157.19604,
+              "max": 167.768678
+            },
+            "cpu_ms": {
+              "p50": 158.0894605,
+              "p95": 164.98694665000002,
+              "min": 157.172441,
+              "max": 167.725733
+            },
+            "sdk_search_returned_rows": {
+              "p50": 1087.0,
+              "p95": 1087.0,
+              "min": 1087,
+              "max": 1087
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 39128.0,
+              "p95": 39128.0,
+              "min": 39128,
+              "max": 39128
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 600,
+            "get_returned_items": 600,
+            "search_calls": 220,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 21740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_delete_and_rebuild",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 288.694319,
+              "p95": 306.6405894,
+              "min": 272.254197,
+              "max": 310.731449
+            },
+            "cpu_ms": {
+              "p50": 171.55146150000002,
+              "p95": 177.90228334999998,
+              "min": 168.60091,
+              "max": 178.953788
+            },
+            "sdk_search_returned_rows": {
+              "p50": 1081.0,
+              "p95": 1081.0,
+              "min": 1081,
+              "max": 1081
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 40160.0,
+              "p95": 40160.0,
+              "min": 40064,
+              "max": 40160
+            },
+            "peak_process_rss_kib": {
+              "p50": 258668.0,
+              "p95": 258668.0,
+              "min": 258668,
+              "max": 258668
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "delete_calls": 120,
+            "get_calls": 600,
+            "get_returned_items": 480,
+            "put_calls": 120,
+            "search_calls": 220,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 21620
+          },
+          "offline_embedding_totals": {}
+        }
+      ],
+      "private_evidence": {
+        "result": "artifacts/v13-2-scale-fd1/n1000/result.json",
+        "result_sha256": "113ba56af275944e2a510b771910b76c240d05c74be86ca05c322c05d2157035",
+        "samples": "artifacts/v13-2-scale-fd1/n1000/samples.jsonl",
+        "samples_sha256": "13721a34a56e923022fe0bb1f9c677330d5b04957a1de09b59000aafe8f811ba"
+      }
+    },
+    {
+      "events_at_start": 10000,
+      "events_at_end": 10020,
+      "semantic_cards": 10,
+      "samples": 140,
+      "setup_wall_ms": 98410.001708,
+      "initial_raw_index_bytes": 37305935,
+      "initial_sqlite_resource_bytes": 35176448,
+      "final_sqlite_resource_bytes": 35196928,
+      "phases": [
+        {
+          "phase": "ordinary_first_per_turn",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 113997.656613,
+              "p95": 116676.68275985001,
+              "min": 107697.099583,
+              "max": 117272.409194
+            },
+            "cpu_ms": {
+              "p50": 113517.15819650001,
+              "p95": 116109.84076495,
+              "min": 107334.877886,
+              "max": 116337.84559
+            },
+            "sdk_search_returned_rows": {
+              "p50": 90368.0,
+              "p95": 90504.8,
+              "min": 90161,
+              "max": 90520
+            },
+            "sdk_get_calls": {
+              "p50": 20088.0,
+              "p95": 20088.0,
+              "min": 20088,
+              "max": 20088
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 47344672.0,
+              "p95": 47573534.4,
+              "min": 36962584,
+              "max": 47607552
+            },
+            "peak_process_rss_kib": {
+              "p50": 668876.0,
+              "p95": 675136.0,
+              "min": 591576,
+              "max": 675136
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 401760,
+            "get_returned_items": 401723,
+            "put_calls": 76,
+            "search_calls": 18200,
+            "search_exact_namespace_rows": 201600,
+            "search_returned_rows": 1807305
+          },
+          "offline_embedding_totals": {
+            "document_batches": 20,
+            "documents_encoded": 10028,
+            "query_calls": 20
+          }
+        },
+        {
+          "phase": "ordinary_cached_reuse",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 35644.38836,
+              "p95": 36812.594658400005,
+              "min": 34958.475296,
+              "max": 37049.653239
+            },
+            "cpu_ms": {
+              "p50": 35609.842758,
+              "p95": 36777.49620015,
+              "min": 34912.813879,
+              "max": 37034.83663
+            },
+            "sdk_search_returned_rows": {
+              "p50": 30134.0,
+              "p95": 30134.0,
+              "min": 30134,
+              "max": 30134
+            },
+            "sdk_get_calls": {
+              "p50": 20033.0,
+              "p95": 20033.0,
+              "min": 20033,
+              "max": 20033
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 12417508.0,
+              "p95": 12423894.4,
+              "min": 12412608,
+              "max": 12424168
+            },
+            "peak_process_rss_kib": {
+              "p50": 675612.0,
+              "p95": 675612.0,
+              "min": 675136,
+              "max": 675612
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 400660,
+            "get_returned_items": 400660,
+            "search_calls": 6080,
+            "search_exact_namespace_rows": 200400,
+            "search_returned_rows": 602680
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "new_source_capture",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 10.5401935,
+              "p95": 12.521070400000001,
+              "min": 7.626864,
+              "max": 14.317452
+            },
+            "cpu_ms": {
+              "p50": 0.5511334999999999,
+              "p95": 0.7855273500000002,
+              "min": 0.502165,
+              "max": 1.134355
+            },
+            "sdk_search_returned_rows": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 96.0,
+              "p95": 146.40000000000003,
+              "min": 88,
+              "max": 192
+            },
+            "peak_process_rss_kib": {
+              "p50": 679268.0,
+              "p95": 679268.0,
+              "min": 675612,
+              "max": 679268
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 0,
+            "put_calls": 20
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "ordinary_dirty_refresh",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 41534.5286105,
+              "p95": 43214.5217608,
+              "min": 35915.501061,
+              "max": 45669.450596
+            },
+            "cpu_ms": {
+              "p50": 41190.574657000005,
+              "p95": 43157.826094350006,
+              "min": 35735.536182,
+              "max": 45478.210962
+            },
+            "sdk_search_returned_rows": {
+              "p50": 30165.5,
+              "p95": 30191.15,
+              "min": 30137,
+              "max": 30194
+            },
+            "sdk_get_calls": {
+              "p50": 20078.0,
+              "p95": 20095.1,
+              "min": 20059,
+              "max": 20097
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 12428096.0,
+              "p95": 12436124.8,
+              "min": 12419664,
+              "max": 12437280
+            },
+            "peak_process_rss_kib": {
+              "p50": 679268.0,
+              "p95": 679268.0,
+              "min": 679104,
+              "max": 679268
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 401560,
+            "get_returned_items": 401560,
+            "put_calls": 40,
+            "search_calls": 6080,
+            "search_exact_namespace_rows": 200610,
+            "search_returned_rows": 603310
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "source_idempotent_replay",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 18276.375117,
+              "p95": 18518.20621525,
+              "min": 18123.074862,
+              "max": 18690.253975
+            },
+            "cpu_ms": {
+              "p50": 18192.585011,
+              "p95": 18506.35520565,
+              "min": 18103.689319,
+              "max": 18584.771581
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10087.0,
+              "p95": 10087.0,
+              "min": 10087,
+              "max": 10087
+            },
+            "sdk_get_calls": {
+              "p50": 1.0,
+              "p95": 1.0,
+              "min": 1,
+              "max": 1
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 5857064.0,
+              "p95": 5864096.4,
+              "min": 5856920,
+              "max": 5864712
+            },
+            "peak_process_rss_kib": {
+              "p50": 679268.0,
+              "p95": 679268.0,
+              "min": 679268,
+              "max": 679268
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 20,
+            "get_returned_items": 20,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_validated_lookup",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 18301.8689185,
+              "p95": 19116.94921035,
+              "min": 18090.166581,
+              "max": 21183.764296
+            },
+            "cpu_ms": {
+              "p50": 18291.636911499998,
+              "p95": 19041.03314075,
+              "min": 18086.368352,
+              "max": 21040.60655
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10087.0,
+              "p95": 10087.0,
+              "min": 10087,
+              "max": 10087
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 5859868.0,
+              "p95": 5862949.6,
+              "min": 5856944,
+              "max": 5865184
+            },
+            "peak_process_rss_kib": {
+              "p50": 679268.0,
+              "p95": 679268.0,
+              "min": 679268,
+              "max": 679268
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "get_calls": 600,
+            "get_returned_items": 600,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201740
+          },
+          "offline_embedding_totals": {}
+        },
+        {
+          "phase": "backlinks_delete_and_rebuild",
+          "samples": 20,
+          "metrics": {
+            "wall_ms": {
+              "p50": 19606.9895885,
+              "p95": 20850.43491725,
+              "min": 19366.498245,
+              "max": 23326.862204
+            },
+            "cpu_ms": {
+              "p50": 19460.613198,
+              "p95": 20737.348535400004,
+              "min": 19244.637322,
+              "max": 23135.025157
+            },
+            "sdk_search_returned_rows": {
+              "p50": 10081.0,
+              "p95": 10081.0,
+              "min": 10081,
+              "max": 10081
+            },
+            "sdk_get_calls": {
+              "p50": 30.0,
+              "p95": 30.0,
+              "min": 30,
+              "max": 30
+            },
+            "os_inblock_delta": {
+              "p50": 0.0,
+              "p95": 0.0,
+              "min": 0,
+              "max": 0
+            },
+            "os_outblock_delta": {
+              "p50": 5855944.0,
+              "p95": 5863888.4,
+              "min": 5855840,
+              "max": 5867544
+            },
+            "peak_process_rss_kib": {
+              "p50": 679268.0,
+              "p95": 679268.0,
+              "min": 679268,
+              "max": 679268
+            }
+          },
+          "sdk_call_and_row_totals": {
+            "delete_calls": 120,
+            "get_calls": 600,
+            "get_returned_items": 480,
+            "put_calls": 120,
+            "search_calls": 2020,
+            "search_exact_namespace_rows": 200,
+            "search_returned_rows": 201620
+          },
+          "offline_embedding_totals": {}
+        }
+      ],
+      "private_evidence": {
+        "result": "artifacts/v13-2-scale-fd1/n10000/result.json",
+        "result_sha256": "c9a080933a5eb7d348624a4b0a6055800c387ccfe4d03ed8ea7db7ea3dc84854",
+        "samples": "artifacts/v13-2-scale-fd1/n10000/samples.jsonl",
+        "samples_sha256": "eb63e901a6f324daccae13125cdd5cb226ad3a8d5b36f1ac530922f67a6e9433"
+      }
+    }
+  ],
+  "total_samples": 420,
+  "generation_requests": 0,
+  "embedding_http_requests": 0,
+  "ledger_sha256_before_and_after_each_run": "543572df0b51166e0a3a58cae061e3afb96ab53f999cccea544f05b782b6ffd5",
+  "host_context": {
+    "observed_after_sizes_100_1000_before_size10000_complete": true,
+    "platform": "Linux-5.15.0-86-generic-x86_64-with-glibc2.35",
+    "machine": "x86_64",
+    "logical_cpus_visible": 32,
+    "cpu_models": [
+      "Intel Xeon Processor (Skylake, IBRS)"
+    ],
+    "memory_total_kib": 264116560,
+    "qualification": "Shared execution host; no CPU affinity, frequency lock, machine-wide idle guarantee or filesystem cache reset. Process CPU/OS counters and wall timings are descriptive."
+  },
+  "host_context_sha256": "24fe6aca1880968c14297ec4f2a68e36965631cfe7c275fd504e769e3ad955ee",
+  "qualifications": [
+    "Actual public SQLite Store SDK, MemoryService, GroundedMemoryRecipe and frozen Qwen tokenizer; no private SQL connection or PRAGMA tuning.",
+    "Controlled Source assertions and ten semantic cards; no business-object projection/operation stream or natural long-range semantic task.",
+    "Offline deterministic 1024-dimensional one-hot vectors through the provider interface; no bge-m3 semantic/HTTP throughput claim. Integer vector serialization is smaller than typical real float-vector payloads.",
+    "Twenty descriptive samples per phase; first-per-turn combines one cold initial index and nineteen incremental-index queries. Same-turn reuse and dirty refresh preserve the original selected identities.",
+    "Logical SDK returned rows include prefix subnamespaces; these counts are not physical disk reads. Process OS block counters include filesystem effects and do not prove physical device bytes or causal attribution.",
+    "One serial measurement process per size on a shared host, with no machine-idle guarantee, CPU affinity, frequency lock or cache reset. Root read-only work and isolated Source engineering checks overlapped the 10000-event run; wall timing is descriptive.",
+    "Backlink reconstruction deletes only six derived indexes via public SDK, retaining primary events/cards. Source and authoritative continuous model ledger were checked unchanged by each frozen driver run.",
+    "All three planned sizes and all phases retained. No measured method speedup, semantic advantage, cost saving, independent review or D5 full completion follows from this scoped baseline."
+  ],
+  "product": "NO_GO"
+}

@@ -1,0 +1,247 @@
+{
+  "kind": "V13_5_DEVELOPMENT_CHECKPOINT",
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "user_request": "整理当前开发情况，提交到github上",
+  "status": "CHECKPOINT_R48_ACTUAL_COMMUNICATION_FAILED_AND_SEALED",
+  "goal_status": "ACTIVE; full development remains incomplete; checkpoint is neither completion nor a pause",
+  "product": "NO_GO",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "pull_request": "https://github.com/minguselandy/MiLAi/pull/81",
+  "pull_request_status": {
+    "open": true,
+    "draft": true,
+    "merged": false
+  },
+  "base_commit": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+  "main_commit": "95bf708bfd8aac9f7855485166e3bf739928b949",
+  "candidate": "r48",
+  "candidate_commit": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+  "candidate_config": "configs/v13-5-functional-r48.json",
+  "publication_identity": "This checkpoint commit contains this manifest; its exact SHA, remote equality and own CI are registered in PR81 after push. Source CI is not inherited.",
+  "report": "docs/V13_5_CHECKPOINT_r48_20261004.md",
+  "report_sha256": "8dbd824d209053d1ce75e3a528bfe876d3a5f591d3816f7f987bf0afb4a083d3",
+  "previous_checkpoint": {
+    "commit": "d2a39861b3df6d305146ce37f3eb4e1af0696d48",
+    "manifest": "data/manifests/v13-5-checkpoint-r47-20261004.json",
+    "sha256": "28aaa646d29eee4afaa487bd02a8e04a66dc2a85f5932f2545703a8d58fc2e47"
+  },
+  "source_sha256": {
+    "src/milai_lab/runners/functional.py": "7859d0a0c8b2a33cee102c6b698562da6896be3cc6a7ababace1891097f243fa",
+    "src/milai_lab/memory/functional.py": "d723a31114b61b6622734af4ac8bb1071d9dd1321e2b761270ea4c090062930b",
+    "tests/unit/test_v13_5_functional_integration.py": "9ef53a048f4823cfb9c329c1cf8da3ce43a00fdbf215e305cb8723d788159aac",
+    "tests/memory/test_v13_5_functional.py": "63ad77986635e425b914246873ee524e8731ebf966f95a51db45ab9d7dbf3b11",
+    "configs/v13-5-functional-r48.json": "6557d9e0a2fc7be18aaca7e3d3cdf81325d31d948faad31376295b6d44212e29"
+  },
+  "runtime_queue_active": false,
+  "new_model_calls_for_checkpoint": 0,
+  "newly_authored_runtime_changes_during_checkpoint": false,
+  "change_scope": "Lab result metadata, current navigation, progress, usage status and checkpoint only. No runtime, config, Schema/API/permission/Canonical changes; historical checkpoints and requirement rows preserved.",
+  "current_candidate_acceptance": {
+    "mechanical": "PASS_SCOPED",
+    "source_fast_ci": "SUCCESS",
+    "source_full_composition": "SKIPPED; not a pass",
+    "communication": "STOPPED_HISTORY_READ_OPTIONAL_ARGUMENT_FORMAT_FAILURE",
+    "input_freeze_exists": true,
+    "model_calls": 69,
+    "L1_L4": "NOT_ADMITTED for r48",
+    "stable_recommended_configuration": false
+  },
+  "r48_mechanical_evidence": {
+    "candidate": "r48",
+    "scope": "578 affected/default/foundation/schema/durable-admission checks PASS;29 production pinned Qwen tokenizer/full-prompt probes PASS;30 direct checks included. Ruff,mypy runner module,package/tools boundaries and verification matrix PASS. Explicit source/proposal limit comparison rejects any reported unsupported differences despite a supported label; malformed detail does not deliver or silently retry; old/comparison cache identities cannot mix; business effects and independent budgets survive review failure/reopen. Zero actual model HTTP. Prior4 SDK checks from unchanged r47 adapter scope retained, not rerun or relabeled as r48 execution.",
+    "preserved_first_failure": "All30 direct checks passed first; initial Ruff4 line-length errors retained, corrected lint passes. No relaxed assertions or runtime contracts.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r48-targeted.log": "5a3cacfdf8df4949d0adf7645e54c1163ad0e01b7ac2b211401004aeaa2df30d",
+      "artifacts/v13-5/r48-ruff-initial.log": "8c6ef804a4477091446d365fc44957d378da3fa4817e3ae4a854f56469c3d123",
+      "artifacts/v13-5/r48-ruff-final.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "artifacts/v13-5/r48-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+      "artifacts/v13-5/r48-regression.log": "d31708cb855ff2d468c8b7370e5dec34ba369a6d8a9a6c92d9dc7097b8b0e9aa",
+      "artifacts/v13-5/r48-production-contracts-probe.py": "925d3d15565dba7beb7678b08770bec0ac1830ddb3ec92c7f5b6f7c5d7e372c3",
+      "artifacts/v13-5/r48-production-contracts.json": "0b2e91b010ae4561c6371df965de1f84fd4edb1d8c88652df69126d3da1cc527",
+      "artifacts/v13-5/r48-production-contracts.stderr": "69f24b97cc0362c5b6d927daa1df002d6270b4bb7964fb8d000213fa13dc39f9",
+      "artifacts/v13-5/r48-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+      "artifacts/v13-5/r48-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+      "artifacts/v13-5/r48-verification-matrix.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be"
+    },
+    "remote_ci": {
+      "path": "artifacts/v13-5/r48-ci.json",
+      "sha256": "f0199b6b51d70697a3168bda8620d66d71a147379beec066edcef4555a83574e",
+      "commit": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+      "fast": "SUCCESS run37149580600",
+      "full": "SKIPPED run37149580597; not a pass"
+    }
+  },
+  "checkpoint_verification": {
+    "r48_mechanical_evidence_hashes_checked": 11,
+    "r48_registered_evidence_hashes_checked": 10,
+    "r48_sealed_raw_file_hashes_checked": 188,
+    "frozen_runtime_source_hashes_checked": 232,
+    "mismatches": 0,
+    "includes_sealed_raw_artifact_byte_identity": true,
+    "new_database_semantic_audit": false,
+    "new_model_regression": false,
+    "continuous_ledger_matches_r48_baseline_plus_delta": true
+  },
+  "latest_actual_model_evidence": {
+    "id": "communication-r48",
+    "layer": "communication",
+    "candidate_commit": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+    "state": "STOPPED_HISTORY_READ_OPTIONAL_ARGUMENT_FORMAT_FAILURE",
+    "planned_cases": 11,
+    "planned_messages": 27,
+    "config": "configs/v13-5-functional-r48.json",
+    "admission": "Full frozen denominator admitted before any outputs; serial original continuous ledger. No source/config changes while active. Failures, partial effects and unknowns retained. No automatic semantic PASS.",
+    "baseline": {
+      "generation_requests": 14120,
+      "generation": {
+        "charged_tokens": 51464839,
+        "known_tokens": 51434452,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/communication-r48/input-freeze.json": "ae88771583d521852f322126387b6b9307e0935fea824f3d3b424bb6acbe3f9e",
+      "configs/v13-5-functional-r48.json": "6557d9e0a2fc7be18aaca7e3d3cdf81325d31d948faad31376295b6d44212e29",
+      "artifacts/v13-5/communication-r48/review.json": "9f2d17cdc93b52f4b823dac985a1b3f406867b1a11953eed214ade20c105ecc7",
+      "artifacts/v13-5/communication-r48/seal.json": "edf7e2f62b9dc8e75283003a8eab49ca2d13606d9fd9a82e6e9543125d24ed17",
+      "artifacts/v13-5/communication-r48-manual-grades.json": "bf2fa96ff126f8046575287197f8072247c8b24f72032d9e48482a7e1e3e3570",
+      "artifacts/v13-5/communication-r48-review-notes.json": "600b577c478a423fd2b15137f2a009be700e939ed60e47d972606403dc8ec055",
+      "artifacts/v13-5/communication-r48-all-review.jsonl": "06dcdf965f321c1f535192abf96008519faba6e2cb598e3130dc08eceb5e8112",
+      "artifacts/v13-5/communication-r48-evaluator/summary.json": "06bdcb3b5f24fb152b6da38065884d8b6024d459e06c0fa679dfc43b293f9f5f",
+      "artifacts/v13-5/communication-r48-ledger-after.json": "8c2a304755b69f99b259c231a16e9daf4223118e3f0fb69f0c086de670397850",
+      "artifacts/v13-5/communication-r48/targeted-review.json": "8a0156e67625c42c199cf87dde43e96cbf8fcef41b96a4385dbe1787c60a95ea"
+    },
+    "semantic_counts": {
+      "FAIL": 2,
+      "PASS_SCOPED": 4,
+      "NOT_RUN": 5
+    },
+    "message_counts": {
+      "COMPLETED": 15,
+      "FAILED": 1,
+      "NOT_RUN": 11
+    },
+    "retained_attempts": 16,
+    "cost_delta": {
+      "generation_requests": 69,
+      "generation.known_tokens": 363875,
+      "generation.charged_tokens": 363875,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 16,
+    "independent_sqlite": {
+      "records": 6,
+      "exact_quote_identity_checks": 32,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "case_review": {
+      "l4-n03": {
+        "status": "FAIL",
+        "reason": "Actual new formation rejects initial broadened scope, then commits one corrected rev1 preserving this occurrence and imagined modality. Actual current cancellation supports same-ID rev2, old history/support and other activities ten minutes preserved. Final readonly answers requested facts correctly but adds unqualified return-to-normal inference for birdwatching, which the source does not explicitly establish after ending/cancelling that arrangement. Retain ordinary answer-support failure despite successful formation/revision; no repeated effect, source corruption or false-save claim. Short internal record ID in first answer is an additional presentation limitation.",
+        "breakpoint": "final_adds_unqualified_default_restoration_after_cancellation",
+        "dimensions": {
+          "answer_satisfies_request": false
+        }
+      },
+      "communication-partial": {
+        "status": "PASS_SCOPED",
+        "reason": "One actual reservation with label unavailable; after two rejected save proposals, one rev1 record commits the actual native partial result and source. First review overrejects the valid reservation-success/label-failure interpretation of the known compound status; second returns supported with nonempty differences and is rejected deterministically. This false-negative/overliteral review limitation is retained; final stored result is accurate and both failed attempts remain partial aggregate. Followup performs live get_reservation before complete_label, only one reservation and one label effect; no new semantic write or unavailable proposal, historical partial record not passed off as current state. No replay or false success."
+      },
+      "l4-g02": {
+        "status": "PASS_SCOPED",
+        "reason": "Initial native formation preserves personal baking practice and manufacturer-label exclusion. Mixed historical query/current correction uses actual current correction fragment for same-ID rev2 ounces-to-grams update; old basis/kind support and original revision retained. Final accurately answers previous/current units and unchanged exclusion. Readonly followup gives grams/exclusion without writes or assigning a manufacturer label unit. Quote identity/current=latest pass; no business effect."
+      },
+      "l4-h06": {
+        "status": "PASS_SCOPED",
+        "reason": "Initial save proposal omits personal subject, comparison rejects; corrected personal assertion commits one rev1 record. Followup uses actual confirm_existing_memory and current read handle; paired no_change/effect none keeps same ID/rev1/history/support. Final says unchanged and does not claim a new save; no revision review for confirmation. Literal quote/current=latest pass."
+      },
+      "l4-h03": {
+        "status": "PASS_SCOPED",
+        "reason": "Initial only-this-Saturday/best-effort preference is accurately saved. Current cancellation fragment supports same-ID rev2 whole withdrawal; original content/support/history and cancellation support retained. Readonly final reports inactive rule and quotes original assertion exactly (no extra 在); no new tool/write or resurrection. Literal quotes/current=latest pass. Unnecessary record ID/status-code disclosure remains a presentation limitation, not a new storage claim."
+      },
+      "l4-g03": {
+        "status": "FAIL",
+        "reason": "Initial this-week/best-effort save and current-source same-ID rev2 whole withdrawal pass; old support/history remain. Final readonly historical query sends read_memory revision/cursors as empty strings, then string None after first format rejection, exhausting one format reproposal. Both are invalid arguments; no final historical answer delivered, no writes/revival. Original retracted record, source quotes and current=latest intact. First error and corrected-but-still-invalid proposal retained; remaining11 messages stopped.",
+        "breakpoint": "history_read_optional_controls_encoded_as_empty_or_None_strings",
+        "dimensions": {
+          "answer_satisfies_request": false,
+          "actual_delivery_and_history": false
+        }
+      },
+      "communication-answer": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+      },
+      "communication-memory": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+      },
+      "communication-recovery": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+      },
+      "l4-n08": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+      },
+      "l4-f03": {
+        "status": "NOT_RUN",
+        "reason": "NOT_RUN after communication history-read format failure; original11/27 denominator retained."
+      }
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "interpretation": "Stopped full frozen11/27 after historical-read optional arguments were encoded as empty strings then string None, exhausting the one format allowance:4PASS_SCOPED2FAIL5NOT_RUN;15COMPLETED1FAILED11NOT_RUN. Actual comparison rejected omitted limits and supported-with-differences; one valid partial-business interpretation was overrejected. Formation and selected-source revisions succeeded in attempted stories, but ordinary final adds unsupported default-restoration inference. Six records/32 quote identities/current=latest intact; no repeated business or automatic retry. No same-version L1-L4 admission or semantic certification."
+  },
+  "cost": {
+    "v13_5": {
+      "generation_requests": 4463,
+      "known_generation_tokens": 24106041
+    },
+    "resumed": {
+      "generation_requests": 4307,
+      "known_generation_tokens": 23331805
+    },
+    "continuous": {
+      "generation_requests": 14189,
+      "generation": {
+        "charged_tokens": 51828714,
+        "known_tokens": 51798327,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "historical_unknown_gap_tokens": 30387,
+    "includes_coding_agent_usage": false,
+    "ledger_snapshot_path": "artifacts/v13-5/communication-r48-ledger-after.json",
+    "ledger_snapshot_sha256": "8c2a304755b69f99b259c231a16e9daf4223118e3f0fb69f0c086de670397850"
+  },
+  "remaining_work": [
+    "Improve read selector expression without null-string coercion, weakened owner/snapshot/visibility checks or increased allowances.",
+    "Retain and resolve unsupported final inference, partial-business review overrejection, prior provider truncation and incomplete post-interruption formation.",
+    "Affected mechanical and exact-source CI, then new full communication11/27; exposed development stories are not new blind evaluation.",
+    "Same-version L1 24/48, L2 12/26, L3 formation57/reading30, then new L4 after method freeze.",
+    "FUNC01-16 integrated acceptance, detailed140 terminal update, final report; original48 and all prior failures remain."
+  ],
+  "rollback_or_comparison": {
+    "prior_candidate_checkpoint": "d2a39861b3df6d305146ce37f3eb4e1af0696d48",
+    "current_candidate": "3c4dc230e63b4e9556471d630d3291e558759ef4",
+    "stable_configuration": false
+  },
+  "raw_artifacts_policy": "Full databases, requests, logs and ledger snapshots remain locally ignored; only summaries and hashes are committed."
+}

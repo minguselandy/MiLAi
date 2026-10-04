@@ -1,0 +1,28 @@
+{
+  "kind": "V13_4_CURRENT_CHECKPOINT_AUDIT",
+  "scope": "Checkpoint evidence only, full plan explicitly incomplete",
+  "acquisition_raw_hashes_verified": 104,
+  "source_view_hashes_verified": 36,
+  "received_exposure_events": 104,
+  "actual_method_requests": 8,
+  "actual_method_tokens": 6012,
+  "T0_admitted": 0,
+  "T0_queries": 0,
+  "requirements": {
+    "v13_4_requirements": 122,
+    "v13_4_statuses": {
+      "NOT_VERIFIED": 99,
+      "PASSED_SCOPED": 12,
+      "PARTIAL": 11
+    },
+    "original_requirements": 48,
+    "original_statuses": {
+      "PASSED_SCOPED": 4,
+      "PARTIAL": 27,
+      "NOT_PASSED": 1,
+      "NOT_VERIFIED": 16
+    }
+  },
+  "remaining_full_scope": "T0 annotations/baselines and hypothesis gates; all conditional T1/T2/T3/external/statistical/closeout requirements retained",
+  "goal_status": "ACTIVE"
+}

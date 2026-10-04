@@ -1013,3 +1013,63 @@ def test_strict_conflicts_with_external_memory_tools(tmp_path: Path) -> None:
             with pytest.raises(ValueError, match="LANGMEM_MCP_TOOLSET_CONFLICT"):
                 build_agent(model, InMemoryStore(), saver, memory_contract="strict",
                             memory_mcp=peer)
+
+
+@pytest.mark.parametrize(('change', 'reason'), [
+    ({'id': None}, 'INVALID_TOOL_CALL'),
+    ({'id': 'valid'}, 'DUPLICATE_TOOL_CALL_ID'),
+    ({'name': ''}, 'UNKNOWN_TOOL'),
+    ({'arguments': '['}, 'INVALID_TOOL_ARGUMENTS'),
+    ({'arguments': '[]'}, 'TOOL_ARGUMENTS_NOT_OBJECT'),
+    ({'finish_reason': 'length'}, 'TRUNCATED'),
+    ({'finish_reason': 'stop'}, 'TOOL_FINISH_MISMATCH'),
+])
+def test_catalog_feedback_keeps_malformed_native_batch_atomic(
+    tmp_path: Path, change: dict[str, Any], reason: str,
+) -> None:
+    effects = []
+
+    @tool
+    def action(value: int) -> str:
+        """Perform one synthetic effect."""
+        effects.append(value)
+        return 'done'
+
+    calls = [
+        {'id': 'valid', 'type': 'function', 'function': {
+            'name': 'action', 'arguments': '{"value":1}'}},
+        {'id': change.get('id', 'unavailable'), 'type': 'function', 'function': {
+            'name': change.get('name', 'not_in_catalog'),
+            'arguments': change.get('arguments', '{}')}},
+    ]
+    receipt = {'id': 'generation', 'choices': [{
+        'finish_reason': change.get('finish_reason', 'tool_calls'),
+        'message': {'role': 'assistant', 'content': None, 'tool_calls': calls}}]}
+    with VLLMClient(VLLMConfig(base_url='http://mock/v1/', model='mock', tool_mode='native'),
+            transport=httpx.MockTransport(
+                lambda request: httpx.Response(200, json=receipt))) as client:
+        model = VLLMChatModel(client=client, unknown_tool_feedback=True)
+        with SqliteSaver.from_conn_string(str(tmp_path / 'checkpoint.sqlite')) as saver:
+            agent = build_agent(model, InMemoryStore(), saver, [action], memory_tools=())
+            with pytest.raises(IncompleteChatResponse, match=reason):
+                invoke_public_message(agent, model,
+                    FoundationScope('run', 'arm', 'user', 'session'), 'Do it.')
+    assert effects == [] and model.calls_in_message == 1
+
+
+@pytest.mark.parametrize('empty_catalog', [False, True])
+def test_catalog_feedback_cannot_enable_tool_calls_in_answer_only_phase(
+    empty_catalog: bool,
+) -> None:
+    receipt = {'id': 'generation', 'choices': [{'finish_reason': 'tool_calls', 'message': {
+        'role': 'assistant', 'content': None, 'tool_calls': [{'id': 'bad', 'type': 'function',
+            'function': {'name': 'unavailable', 'arguments': '{}'}}]}}]}
+    with VLLMClient(VLLMConfig(base_url='http://mock/v1/', model='mock', tool_mode='native'),
+            transport=httpx.MockTransport(
+                lambda request: httpx.Response(200, json=receipt))) as client:
+        model = VLLMChatModel(client=client, unknown_tool_feedback=True)
+        tools = [] if empty_catalog else [{'type': 'function', 'function': {
+            'name': 'lookup', 'parameters': {'type': 'object', 'properties': {}}}}]
+        with pytest.raises(IncompleteChatResponse, match='UNKNOWN_TOOL'):
+            model.invoke([HumanMessage(content='Answer only.')], tools=tools,
+                         tool_choice='auto' if empty_catalog else 'none')

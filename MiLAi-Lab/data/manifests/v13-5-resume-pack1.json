@@ -1,0 +1,185 @@
+{
+  "kind": "V13_5_RESUMED_PACK1",
+  "status": "PASSED_LOCAL_AND_REMOTE_SAME_COMMIT",
+  "user_instruction": "完成后续的全部开发实验",
+  "base_commit": "f621093c39ee0af03c8b79ff33afcaeab3138585",
+  "scope": [
+    "public actual-tool-delivery interface; no layer rule relaxation",
+    "typed pre-mutation contract refusal vs unconfirmed persistence exceptions",
+    "read receipt persistence error classification",
+    "immutable pagination with explicit omission and monotone progress"
+  ],
+  "affected_tests": {
+    "passed": 83,
+    "log": "artifacts/v13-5/resume-pack1/affected-final.log",
+    "sha256": "284bc0cfec31c23030c0be1257682d8010898f7a38b7c94a4a637c7c627d5209",
+    "provider": "scripted or none; actual SQLite SDK"
+  },
+  "pinned_tokenizer_pagination": {
+    "path": "artifacts/v13-5/resume-pack1/actual-tokenizer-pagination-r1.json",
+    "sha256": "a097c7efa0461dfb8777abfaa1c58eb3f987839d19c38540c05a934978e26caf",
+    "material_limit": 8192,
+    "explicit_reads": 3,
+    "status": "PASS"
+  },
+  "static_checks": {
+    "ruff_src_tests_tools": "PASS",
+    "mypy_memory_application_runner": "PASS",
+    "active_boundary": "PASS",
+    "tools_boundary": "PASS",
+    "verification_matrix": "PASS"
+  },
+  "source_sha256": {
+    "src/milai_lab/application/functional.py": "b8a88cb61d5c914bfc7786ae4d37ae792dfbfc5bbd6b6270ff530063459b5a1b",
+    "src/milai_lab/memory/functional.py": "f466ea52dda02402c3d7cfea704991670d5bc7ac4efce66a4f9b5de04d842395",
+    "src/milai_lab/memory/functional_state.py": "3415cc5b1b534cc814dc6e314deb32f31ae7f4e34376f7090bae742a203bdef5",
+    "src/milai_lab/memory/service.py": "59633e28d3376254bc77d35972d6e5dbe6e2d1aefa78d41db05a1afbf0de7526",
+    "tests/memory/test_v13_5_functional.py": "78f5f19b5ba5e8218ab982592fae71b39b41e29f698e7ee464f2d0cf1ccfe511"
+  },
+  "prior_remote_ci": {
+    "head": "f621093c39ee0af03c8b79ff33afcaeab3138585",
+    "run_id": 37078342994,
+    "status": "failure",
+    "failed_layer_jobs": [
+      111073213173,
+      111073213177
+    ],
+    "later_commands_executed": false
+  },
+  "local_first_failure": {
+    "passed": 52,
+    "failed": 1,
+    "test": "test_m07_ordinary_and_explicit_cursor_do_not_switch_snapshot",
+    "expected": "read_rejected for a nonexistent cursor",
+    "observed": "read_integrity_error",
+    "repair": "distinguish unissued cursor from stored snapshot integrity failure",
+    "raw_pytest_directory": "/tmp/pytest-of-root/pytest-4433"
+  },
+  "new_model_calls": 0,
+  "new_embedding_calls": 0,
+  "ledger_sha256": "b18fae7fa71c3862eb4e0fc336b0021fa5b4928d89275f71ce55b6ec92973edc",
+  "remaining": "operation status/final answer contract, field-specific correction evidence, all model layers and full acceptance",
+  "remote_ci": {
+    "head": "0cf0b76d8a082195f5c6a0ee1e09dcf65e722511",
+    "run_id": 37081328529,
+    "status": "failure",
+    "layer_check": "PASS",
+    "core_job": {
+      "id": 111082355590,
+      "failure": "unowned optional tests imported LangGraph in core environment"
+    },
+    "foundation_job": {
+      "id": 111082355648,
+      "passed": 362,
+      "failed": 4,
+      "skipped": 5,
+      "failure": "scripted ComparisonRuntime bypassed constructor and omitted common configuration",
+      "later_commands_executed": false
+    }
+  },
+  "ci_followup": {
+    "runtime_source_changes": false,
+    "optional_files_added_to_foundation": 23,
+    "frozen_comparison_commit": "8b1fdf3c017477ee80a0284f08ca4a1f5f52e670",
+    "repairs": [
+      "23 optional dependency tests assigned to Foundation and excluded only from Core",
+      "scripted ComparisonRuntime initializes common profiles/boundary/recipe",
+      "projection crash synthetic provider receives a pinned synthetic tokenizer",
+      "historical comparison files reconstructed from exact Git objects with SHA256, no local cache dependency"
+    ],
+    "checks": {
+      "ci-repair1.log": {
+        "passed": 4,
+        "sha256": "5dc3737d4ee77cc7b6d21818c9af691bf51652f13359fb6a8f412e51aaa67bcb"
+      },
+      "ci-repair2.log": {
+        "passed": 94,
+        "sha256": "c70482b0c6b3f4bc9430773e40aba8948698cdadaa36d0390bbbcbf577c999e2"
+      },
+      "core-tests-r1.log": {
+        "passed": 5678,
+        "skipped": 19,
+        "deselected": 14,
+        "sha256": "6cfe55d9e34f6226a9e4dd5b775349eda344557e5eb3e207c53ffc50426270d0"
+      },
+      "http-owner-portable.log": {
+        "passed": 39,
+        "sha256": "9819b922e1fba975ac7fae04bbef574dca3d84518ae9e910aa145cacbb898dc0"
+      },
+      "portable-foundation-final.log": {
+        "passed": 423,
+        "skipped": 3,
+        "deselected": 31,
+        "sha256": "9f0adccd1d11ed5fcde62630a569d6727b0b871c042e9bbb86977ff9d884c812"
+      },
+      "pinned-qwen-regressions.log": {
+        "passed": 31,
+        "deselected": 52,
+        "sha256": "60d7f9fe9d0165385f2b8868e6455fd7f8c84f8ebff0a05b2b7f5e8752bd5293"
+      },
+      "delivery-final.log": {
+        "passed": 4,
+        "sha256": "8ecaca2d3467edcda716cf98cc4e083184364fd18ee4c4759308c8a8a070dee5"
+      }
+    },
+    "preserved_failed_checks": {
+      "foundation-added.log": {
+        "passed": 418,
+        "failed": 10,
+        "skipped": 3,
+        "causes": [
+          "synthetic tokenizer omitted (2)",
+          "unpublished historical source copies absent (8)"
+        ]
+      },
+      "core-tests.log": "missing optional dependency at collection; assigned test_read_protocol.py to Foundation"
+    },
+    "clean_core_full_run": {
+      "passed": 5678,
+      "skipped": 19,
+      "deselected": 14,
+      "environment": "isolated uv --frozen --dev; no LangGraph",
+      "scope": "aa02df6 before checkout-local HTTP audit follow-up; that affected family separately rerun"
+    },
+    "full_mypy": "PASS 195 source files",
+    "next_remote": "pending push and same-commit execution",
+    "remote_attempt2": {
+      "head": "aa02df609ffeb3f4d6a5026b1692f746fe550f84",
+      "run_id": 37082641916,
+      "status": "failure",
+      "core": {
+        "job": 111086379002,
+        "passed": 735,
+        "failed": 1,
+        "cause": "historical audit hardcoded an external sibling checkout"
+      },
+      "foundation": {
+        "job": 111086379051,
+        "cause": "newly collected historical tests implicitly depended on /cra/qwen36-35B",
+        "new_optional_command": {
+          "passed": 390,
+          "failed": 48,
+          "errors": 16,
+          "skipped": 3
+        },
+        "earlier_commands": "reached and passed all prior commands, including v13.5 affected tests"
+      }
+    },
+    "portable_repairs": [
+      "HTTP ownership audit hashes the actual current checkout",
+      "synthetic protocol entry configurations use generated tokenizer and hash-bound template",
+      "31 production-Qwen material/cost cases keep real tokenizer and explicit local_artifacts ownership; no fallback tokenizer and no relaxed assertions"
+    ],
+    "full_explicit_mypy": "PASS 77 source files"
+  },
+  "remote_ci_final": {
+    "head": "c8cfa0a13e5dd007f86a3fdc66d61f94b9d3ff84",
+    "run_id": 37083577947,
+    "status": "success",
+    "core_job": 111089177640,
+    "foundation_job": 111089177565,
+    "external_job": 111089177649,
+    "aggregate_job": 111091037492,
+    "full_composition": "SKIPPED, not PASS"
+  }
+}

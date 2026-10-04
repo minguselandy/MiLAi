@@ -1,0 +1,120 @@
+{
+  "kind": "V13_5_USER_PAUSE_CHECKPOINT",
+  "status": "PAUSED",
+  "user_instruction": "暂停当前实验提交到github上",
+  "recorded_at_utc": "2026-10-02T23:30:35.763452+00:00",
+  "branch": "feat/lab-functional-v13-5-20261003",
+  "last_committed_candidate": "1295693",
+  "base_before_v13_5": "1d8cc7e414d0df728215c1ad5d0cbc82b0ac6398",
+  "publication_base": {
+    "branch": "feat/lab-edm-cep-v13-3-20261002",
+    "sha": "2319401bc0c6f29142cdf139a09b22576c0da1c5",
+    "includes_unpublished_v13_4_history": true
+  },
+  "plan_completion": "INCOMPLETE",
+  "l1_gate": "NOT_PASSED",
+  "latest_executed_candidate": "r4",
+  "r5": {
+    "state": "MECHANICALLY_CHECKED_NOT_MODEL_VALIDATED",
+    "input_freeze_created": false,
+    "model_calls": 0,
+    "memory_tests_passed": 25,
+    "entry_privacy_tests_passed": 17,
+    "limitations": [
+      "Actual write evidence summary does not semantically validate free prose or selected support.",
+      "No new normal24 cohort or real failure repair proof."
+    ],
+    "candidate_commit": "2020db8f7367c0d197034b6f30fd6962b4ebfc17"
+  },
+  "remaining_layers": {
+    "L2": "PREPARED_NOT_RUN",
+    "L3": "PREPARED_NOT_RUN",
+    "L4": "NOT_AUTHORED_NOT_RUN"
+  },
+  "new_requirement_mapping": "140 initial rows retained; final per-row acceptance reconciliation incomplete",
+  "original48": "unchanged bytes and inherited statuses",
+  "cost_delta": {
+    "generation_requests": 156,
+    "generation.known_tokens": 774236,
+    "generation.charged_tokens": 774236,
+    "generation.unknown_usage": 0,
+    "embedding.known_tokens": 0,
+    "embedding.charged_tokens": 0,
+    "embedding.unknown_usage": 0
+  },
+  "ledger_at_pause": {
+    "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "sha256": "b18fae7fa71c3862eb4e0fc336b0021fa5b4928d89275f71ce55b6ec92973edc",
+    "generation_requests": 9882,
+    "generation": {
+      "charged_tokens": 28496909,
+      "known_tokens": 28466522,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    },
+    "historical_unknown_reservation": 30387
+  },
+  "cohort_seals": {
+    "artifacts/v13-5/l1-r0-manual-review/seal.json": "9c37c6a4b4d40ebab54eb21ffc1c6d03dc91ffeb0585643ecf506f4236740939",
+    "artifacts/v13-5/l1-r1-manual-review/seal.json": "1edb11e7d5f2e910db56530c129c954375ddee7205ec545ab80bb0c4113263d7",
+    "artifacts/v13-5/l1-r2-manual-review/seal.json": "bca6b560cd854424b2681319749ebf978483d4ee5cc747dc5751521b4de54aa9",
+    "artifacts/v13-5/l1-r3-manual-review/seal.json": "807f5518ce405ca8d2f2a85945cb474b42314163a9239bc01e37756685648196",
+    "artifacts/v13-5/l1-r4-manual-review/seal.json": "a04808627213a68b755f3ee4ddb0f92e8b4b8ebf1af90185ffc0ac8fee5e7cc0"
+  },
+  "evidence_sha256": {
+    "data/manifests/v13-5-entry.json": "6babbbcfc4c56ffa39e98ef7b42c236b4e99716cca0f2681ac269e5578c7f13c",
+    "data/manifests/v13-5-runs.json": "0ef236c2f691afa7a480be5cae20ccde5f2e3aa0f116003b583dc155d4d122dc",
+    "data/manifests/v13-5-l0.json": "dd71ba66d3be5a07d0f3b85d8436342d072b715f25bf2575d543d37a564891f4",
+    "data/manifests/v13-5-requirements.json": "af6b604e8cffb4f534fc8a053a796abe0a2ffdd5566fe94dc7c55bd862141f16",
+    "docs/MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md": "bd37592e9781728514a98e5d05e5e692bf4703042ee0298036fd2c39e295bc0e",
+    "configs/v13-5-functional-r5.json": "cb4b99a43c6c770cca12a04d41ecc739aff510aac4c1d693c75fa393221d26da",
+    "src/milai_lab/memory/functional.py": "86128291e0d1207dcdc257c79367fd9c37ad70d9aa3e22494239f9dcfd841d59",
+    "src/milai_lab/runners/functional.py": "76c49ffb97a81c6273a126dcd88c994b56178e59dd09ef8d869d7534e1f2d490",
+    "tests/memory/test_v13_5_functional.py": "8f96af6d7239b6c2860b7e9438a2f25f4b7a16dead122a932a42e58ee0896f0a",
+    "tests/unit/test_v13_5_functional_integration.py": "75e5846a164552249b69d165e911be09e80ea71687df4b8c365026b810cdeeb6"
+  },
+  "unfinished_public_builder": {
+    "state": "NOT_IMPLEMENTED_NOT_VALIDATED",
+    "draft_manifest": "artifacts/v13-5/pause-publication-20261003/unfinished/v13-5-l3-public-inputs.json",
+    "sha256": "fc6d8e5404728fb07624fbc298e8d908fcee41437dfa6edd8afef1d15bfebefa",
+    "included_in_git": false
+  },
+  "product": "NO_GO",
+  "research_independent_judge": false,
+  "raw_artifacts": "retained locally under ignored artifacts; no databases/traces/copied corpus publication",
+  "resume_requires": "explicit user instruction; then verify current source/SDK/ledger before a new freeze",
+  "publication": "branch and draft PR; no merge; remote head verification recorded separately",
+  "pause_report": "docs/V13_5_PAUSE_STATUS_20261003.md",
+  "publication_checks": {
+    "ruff_src_tests_tools": "PASS",
+    "changed_source_mypy": "PASS",
+    "verification_matrix": "PASS",
+    "lab_tools_boundary": "PASS",
+    "diffcheck": "PASS",
+    "lab_boundary": "NOT_PASSED",
+    "boundary_findings": [
+      "application/functional.py:265 LAYER_IMPORT milai_lab.memory.functional_state",
+      "application/functional.py:265 LAYER_IMPORT milai_lab.memory.functional_state.note_exposure"
+    ],
+    "boundary_debt": "Existing application-to-memory internal import retained at user pause; no rule relaxation or further runtime edits.",
+    "changed_json_parsed": 64,
+    "local_links_checked": 65,
+    "evidence_hashes_checked": 15,
+    "full_ci": "NOT_CLAIMED",
+    "logs": {
+      "artifacts/v13-5/pause-publication-20261003/checks.json": "4b6704453037a7c129c3daf94a5696cce1c9b34bee0fbc5237bb8db1e29b0068",
+      "artifacts/v13-5/pause-publication-20261003/publication-audit.json": "117942c5be6436f2361bd3e49b267ca6bfefebf1f93e157f0a4f0f056c8721d0"
+    }
+  }
+}

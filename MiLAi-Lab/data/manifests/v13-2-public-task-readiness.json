@@ -1,0 +1,112 @@
+{
+  "kind": "V13_2_MERIT_PINNED_EXPOSED_READONLY_READINESS",
+  "source_commit": "293933d96b1d1849e1f20d1bb324def5de9ed33f",
+  "external_root": "/cra/memory/mx_memory/reference-sources/contextual-v7/MERIT",
+  "upstream_tracked_worktree_clean": true,
+  "declared_source_sha256": {
+    "README.md": "9dfdc3cb8504e4d57c292a7ceeecd7fce719eac0db4e4a9a9e8c98fffe53bf3f",
+    "REPRODUCE.md": "85ce7f42cd0b3e5204a0f51dab49ca7f89227f5870b168bcaf4e9df535084e06",
+    "LICENSE": "4a7ca4582288f2e32792b0d61598878f85dd6fb1778ff9beb0536cc50830b608",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "scripts/run_pilot.py": "6cae6733aceede7400e090339fd433ef33a118262722ef0ac714b9d241459006",
+    "scripts/check_world_leaks.py": "0f17cce85751313751be88d1c2bbfa87dbc789fd6e682a1aadff3f4405c256e1"
+  },
+  "current_python_closure_sha256": {
+    "merit/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "merit/arcs.py": "da741f9d81dbfa4316b1938b432f9f8a552778ac25159a5c6ca023cad023fbee",
+    "merit/d2.py": "15f469f1e4075e51e95287cc43702711e4c2a553cafae615f300eb121644d2bc",
+    "merit/d3.py": "57f88b2f9c40cf6a9bd95214666cbbeca8191753dd1cc2f33778e1147a06f9db",
+    "merit/domains.py": "4e1a273e1025e839edc18c5b7cd3164c8a1afdbaf189987ab37603f8b7cef71f",
+    "merit/memory.py": "2d4b331b80b54484c137c35d7dc3ecae047d660afa076d8ee06946ad2d939f2a",
+    "merit/memory_llm.py": "cc29d65589cdc48fe1ec874e0f31ea0a8d2840a19792e2f0c0b5e128aedf678d",
+    "merit/metrics.py": "0eca1211e0cefbe485f2f87251242086f32255e547c2954afa4ac2dae2660c0d",
+    "merit/mockmodel.py": "05d669fffbef73862e5d5977ba9b652fb0050e8ff2d0b7ab75cd112be5c6aa03",
+    "merit/runner.py": "dff7942374924cbe401dee25970291cd5c1dec3773521a8a0bf188ce4ada6c7b",
+    "merit/tools.py": "9950470c607a95ca9d108f25017b510d7945f5249d6cc09b9c26ce8e08f5c78d",
+    "merit/user_sim.py": "939a700ab4804d828087e4803f900578b7fd229abdfab7ef32c50e5f6bde3e7a",
+    "merit/world.py": "d5ad8b566b62c87cdb90ef37c09c1f43cd5fb31b6929a9e7eccb80e19d975ed3"
+  },
+  "driver_sha256": "e12cece1dfb5ec1a8f88a321864636209c2549cff39412d84f9bc279b696ce94",
+  "lab_loader_sha256": "827cca3c0ee30e506330d2bddd62c91335f5b4f95d16d7822f58d9e6e58c08e2",
+  "selection_sha256": "0818363131c70ff4011a13fba588432caf029d49c23b01075b29c1ef031a9afa",
+  "already_exposed_base_seed": 0,
+  "episodes_regenerated": 5,
+  "messages": 7,
+  "original_arc_bytes_verified": true,
+  "original_initial_world_bytes_verified": true,
+  "official_precheck_results": [
+    {
+      "index": 0,
+      "checker": "check_message_sent",
+      "pre_satisfied": false
+    },
+    {
+      "index": 1,
+      "checker": "check_message_sent",
+      "pre_satisfied": false
+    },
+    {
+      "index": 2,
+      "checker": "check_refund_issued",
+      "pre_satisfied": false
+    },
+    {
+      "index": 3,
+      "checker": "check_refund_issued",
+      "pre_satisfied": false
+    },
+    {
+      "index": 4,
+      "checker": "check_refund_issued",
+      "pre_satisfied": false
+    }
+  ],
+  "world_unchanged_by_precheck": true,
+  "new_arcs_generated": 0,
+  "new_content_access": false,
+  "business_mutations": 0,
+  "generation_requests": 0,
+  "embedding_requests": 0,
+  "ledger_before_sha256": "543572df0b51166e0a3a58cae061e3afb96ab53f999cccea544f05b782b6ffd5",
+  "ledger_after_sha256": "543572df0b51166e0a3a58cae061e3afb96ab53f999cccea544f05b782b6ffd5",
+  "qualification": [
+    "Only already-exposed seed0 regenerated, original arc/world hashes matched; this is not a new task trajectory or scorer quality acceptance.",
+    "Official checkers tested only on original initial world; final success, excess actions, semantic fidelity and v13.2 common four-arm adaptation remain unverified.",
+    "No new pilot/gold/arc contents emitted to developer or models. Old and reserved seed exclusions remain in force."
+  ],
+  "lab_source_before_after_map_sha256": "906d86f4a7ef8104bc49991f4a05ebf81325b08dcbb03454d9d894fa8674c07a",
+  "lab_source_unchanged_before_after": true,
+  "actual_imported_loader_path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/src/milai_lab/datasets/merit.py",
+  "already_exposed_arcs_regenerated": 1,
+  "status": "PINNED_EXPOSED_REPRODUCTION_SCOPED_ONLY_NEW_RUN_NOT_ADMITTED",
+  "private_check_artifact": {
+    "path": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-public-task-readiness/merit-exposed-check.json",
+    "sha256": "c119014c3a5f486c67b4c31d2aa5bf40cf9f5e620ee0163c3fde614dad6b06e9"
+  },
+  "raw_log_sha256": "2470a0ec787494bb75f69eb65c144870970d8c6f4316274e5bf23109c8b59e09",
+  "new_runtime_admission": "NO",
+  "old_seeds_excluded": "0..64",
+  "reserved_seeds_excluded": "65..82",
+  "remaining": "New metadata-only allocation after valid core, exact common-capability adapter, new full arcs, official final checker and independent semantic ratings; formal/second-family evidence absent.",
+  "product": "NO_GO",
+  "engineering_attempts": [
+    {
+      "kind": "initial_exposed_readonly_regeneration",
+      "passed": true,
+      "identity_qualification": "Initial driver recorded loader SHA after execution; final verification additionally asserts actual import path and all208 source hashes before/after.",
+      "private_artifact_sha256": "da133f8c25831d85631a6bcd1afb6eae81a0231c6c84807fe5d13377328ee108"
+    },
+    {
+      "kind": "final_explicit_identity_regeneration",
+      "passed": true,
+      "lab_source_map_sha256": "906d86f4a7ef8104bc49991f4a05ebf81325b08dcbb03454d9d894fa8674c07a",
+      "new_experimental_samples": 0
+    }
+  ]
+}

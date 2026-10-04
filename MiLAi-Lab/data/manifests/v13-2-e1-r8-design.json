@@ -1,0 +1,133 @@
+{
+  "kind": "V13_2_R8_E1_PROSPECTIVE_DEVELOPMENT_DESIGN",
+  "status": "PREPARED_CONFIG_NOT_RUNTIME_FROZEN",
+  "created_at_utc": "2026-10-01T16:44:55.498040+00:00",
+  "base_published_checkpoint": "554e94fde1c67414ddf3a7332cbf2fa41a558de5",
+  "fixed_flow_acceptance_path": "data/manifests/v13-2-root-fixed-flow-owned-engineering-acceptance.json",
+  "fixed_flow_acceptance_sha256": "17b203dc4e774ecbfca550afdc94df4c715f3a6bb3acfc2627952044f859c98c",
+  "fixture_path": "data/fixtures/v13-2-e1-receipt-development.json",
+  "fixture_sha256": "a134f70e9c8c4d016dc01512c5b332f0952b78cc93806b3b5a78f0feacfa7509",
+  "offline_rubric_path": "data/diagnostics/v13-2-small-development-rubric.json",
+  "offline_rubric_sha256": "468c581243582906722820595381bc7563084fd8558d69e67a88fc0a861a5987",
+  "common_profiles": {
+    "memory_material_profile": "compact_v1",
+    "memory_support_contract": "direct_support_v1",
+    "tool_schema_communication": "shape_feedback_v1",
+    "memory_read_protocol": "selected_snapshot_v1",
+    "tool_read_feedback": "typed_read_v1",
+    "tool_save_communication": "completed_receipt_v1",
+    "http_ownership_profile": "serialized_ledger_owner_v1"
+  },
+  "cells": [
+    {
+      "cell": "field_autonomous",
+      "formation": "field",
+      "delivery": "autonomous",
+      "config_path": "configs/v13-2-e1-field-autonomous-r8.json",
+      "config_sha256": "2a6dcf780dc907b8ff7301344c1b6af58eef6126aa79288e7ed253aa82feeb12",
+      "original_config_path": "configs/v13-2-e1-field-autonomous.json",
+      "original_config_sha256": "6be7db25c370af7c1983672ef397e48c4a72454d0b084437bece4909bd253912",
+      "changed_settings": [
+        "experiment_contract",
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "memory_read_protocol",
+        "memory_support_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "controlled_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p0",
+      "free_host_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a0",
+      "trusted_labels_excluded_from_wire": true
+    },
+    {
+      "cell": "derived_autonomous",
+      "formation": "derived",
+      "delivery": "autonomous",
+      "config_path": "configs/v13-2-e1-derived-autonomous-r8.json",
+      "config_sha256": "845e8cf02d8a11af11b2051c487616a6443d644800ee264356fa2bd7a81a2e93",
+      "original_config_path": "configs/v13-2-e1-derived-autonomous.json",
+      "original_config_sha256": "d7d34e41791c33929422df63291d924939ffb8f90284ee7a7ab6a08e409dab36",
+      "changed_settings": [
+        "experiment_contract",
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "memory_read_protocol",
+        "memory_support_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "controlled_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p1",
+      "free_host_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a1",
+      "trusted_labels_excluded_from_wire": true
+    },
+    {
+      "cell": "field_prefetch",
+      "formation": "field",
+      "delivery": "prefetch",
+      "config_path": "configs/v13-2-e1-field-prefetch-r8.json",
+      "config_sha256": "5d0da2a388db11dff5ab1999af840b7822d053a2b3422d77f2984efc5a461360",
+      "original_config_path": "configs/v13-2-e1-field-prefetch.json",
+      "original_config_sha256": "eafa02b05e6cc52ede42a7a49aeb4b55043b8850fdd6403c25b1b4f0fdc35f3d",
+      "changed_settings": [
+        "experiment_contract",
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "memory_read_protocol",
+        "memory_support_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "controlled_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p2",
+      "free_host_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a2",
+      "trusted_labels_excluded_from_wire": true
+    },
+    {
+      "cell": "derived_prefetch",
+      "formation": "derived",
+      "delivery": "prefetch",
+      "config_path": "configs/v13-2-e1-derived-prefetch-r8.json",
+      "config_sha256": "c03fdf3efa49b3da3271e130fef5306c37140bc371ea631c68554cff0117d8af",
+      "original_config_path": "configs/v13-2-e1-derived-prefetch.json",
+      "original_config_sha256": "097826aa60fce5e56488fe50dafa11e03347308d5adddc2ee7e61fd965b3e2bd",
+      "changed_settings": [
+        "experiment_contract",
+        "http_ownership_domain",
+        "http_ownership_profile",
+        "memory_material_profile",
+        "memory_read_protocol",
+        "memory_support_contract",
+        "tool_read_feedback",
+        "tool_save_communication",
+        "tool_schema_communication"
+      ],
+      "controlled_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/p3",
+      "free_host_root": "/cra/memory/mx_memory/MiLAi-worktrees/development-experiment-v13-2/MiLAi-Lab/artifacts/v13-2-development-r8/a3",
+      "trusted_labels_excluded_from_wire": true
+    }
+  ],
+  "planned_controlled_boundaries": 16,
+  "planned_free_host_trajectories": 8,
+  "planned_free_host_messages": 16,
+  "actual_model_http": 0,
+  "concurrency": 1,
+  "sample_policy": "Every first boundary once; preserve attempted/pending/interrupted/unrun denominator. Inspect each actual controlled boundary before explicit next boundary. Source leak/false-save/gold hard stops affected runs. Free Host starts only after controlled rows disposed. Root is not independent Judge.",
+  "order": "stream0 boundary0 p0,p1,p2,p3, then boundary1 same; stream1 same. Fixed order is qualified, not randomized independent samples.",
+  "historical_cell_differences": "Field manual receipt Host+writer syntax, none formation/one controlled writer/no reservation projection; derived tool_only_v1/reservation_v1/no controlled writer. Base prompts remain per original cell; all costs/differences reported.",
+  "shared_stream": "Fresh actual public reserve_and_label/get_reservation actions on trusted worlds, current builder and full original receipts. Current boundary events only reach writer.",
+  "ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "ledger_before_sha256": "374fcef4dd8a3082d352e2e936f68601edd65ba142880655349cfc68e652b15f",
+  "research_states": {
+    "full_plan": "ACTIVE",
+    "E0": "NOT_PASSED",
+    "D4": "NOT_ADMITTED",
+    "Product": "NO_GO"
+  },
+  "remaining_full_plan": "E1 fixed then free/E2/E0 and D0-D5 conditional gates; slice is not completion."
+}
