@@ -261,5 +261,17 @@
   "ledger_sha256": "e8113aa1372d4131dd69766d081b5714b587c8a3b80cf265bfca226004c89dd6",
   "legacy_default": "unchanged; both candidates opt-in",
   "a2_admission": "conditional on X1 and A0/A1 explanation, NOT_ADMITTED",
-  "remaining": "X1-X5, W3-W5, full terminal review and M6 delivery remain required"
+  "remaining": "X1-X5, W3-W5, full terminal review and M6 delivery remain required",
+  "remote_ci_first_head": {
+    "commit": "f4502cdbedebdabd9b5465df6e61606185c834a3",
+    "fast": 37196040560,
+    "full": 37196040641,
+    "observed_failure": "UNRESOLVED_TOOL_IMPORT in production template probe; later steps not run",
+    "local_gap": "tools boundary was checked before this helper was added",
+    "repair": "static named test-module imports; no boundary relaxation"
+  },
+  "followup_checks": {
+    "artifacts/post-r52/x0-production-template-v3/report.json": "2aa3a04a26c01a58b1a81c0cffba7499ec80ff34878b17f5910c84b90131904a",
+    "artifacts/post-r52/w0/x1-driver-mechanical-final.log": "7941869fdd6334c06fbc1967d821e9a38e115a619e3cd65aa5eb1dd3559461f9"
+  }
 }

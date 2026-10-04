@@ -3511,6 +3511,62 @@ def test_selected_original_review_rejects_old_support_before_commit_then_uses_ne
     assert ledger['generation_requests'] == 7
 
 
+def test_fixed_proposal_probe_preserves_ledger_and_excludes_source_labels(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import importlib.util
+
+    path = functional.LAB / 'tools/post_r52_review_probe.py'
+    spec = importlib.util.spec_from_file_location('post_r52_review_probe', path)
+    assert spec is not None and spec.loader is not None
+    probe = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(probe)
+    prepared(tmp_path, native=True, current_delivery=True, phase_thinking=True,
+             direct_response=True, queue_requests=100)
+    inputs, labels = tmp_path / 'inputs.json', tmp_path / 'labels.json'
+    cases = [{'id': f'm{i}-proposal-{j}', 'matter_id': f'm{i}',
+              'stage': 'formation' if i % 2 else 'revision',
+              'evidence': {'binding': {'owner': 'synthetic'}, 'forget_epoch': 0,
+                           'changes': [{'field': 'content', 'before': None,
+                               'after': f'Proposal {j}', 'selected_original_fragments': [
+                                   {'source_role': 'user',
+                                    'content': 'Only this synthetic trial.'}]}]}}
+             for i in range(12) for j in range(2)]
+    write_json(inputs, {'schema': 'post_r52_x1_inputs_v1', 'cases': cases})
+    write_json(labels, {'evaluator_only': 'DO_NOT_DELIVER_SOURCE_LABELS'})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        assert 'DO_NOT_DELIVER_SOURCE_LABELS' not in json.dumps(wire)
+        assert wire['chat_template_kwargs']['enable_thinking'] is False
+        assert wire['temperature'] == 0
+        if ordinal == 2:
+            return {'role': 'assistant', 'content': ''}
+        function = wire['tools'][0]['function']
+        props = function['parameters']['properties']['field_results']['items']['properties']
+        row = {'field': 'content', 'assessment': 'supported', 'reason': 'Scripted structure only.',
+               'unsupported_differences': []}
+        if 'source_limits' in props:
+            row.update(source_limits='Only this trial.', proposed_limits='Only this trial.')
+        return native_call(function['name'], f'review-{ordinal}', field_results=[row])
+
+    wires = scripted(monkeypatch, reply, native=True)
+    monkeypatch.setattr(probe, 'FunctionalVLLMClient', functional.FunctionalVLLMClient)
+    root = tmp_path / 'fixed-proposal-probe'
+    freeze = probe.prepare_probe(root, tmp_path / 'settings.json', inputs, labels)
+    assert freeze['review_conditions'] == 48 and not freeze['business_store_connected']
+    results = probe.run_probe(root)
+    assert len(results) == len(wires) == 48
+    assert sum(r['operational_status'] == 'review_unavailable' for r in results) == 1
+    assert all(r['calls_in_condition'] == 1 for r in results)
+    assert not list(root.rglob('*.sqlite'))
+    assert probe.run_probe(root) == results and len(wires) == 48
+    assert read_json(tmp_path / 'isolated-mechanical-budget.json')['generation_requests'] == 48
+    write_json(labels, {'evaluator_only': 'changed'})
+    with pytest.raises(ValueError, match='SOURCE_LABELS_CHANGED'):
+        probe.run_probe(root)
+    assert len(wires) == 48
+
+
 def test_support_working_view_uses_actual_agent_read_then_save(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

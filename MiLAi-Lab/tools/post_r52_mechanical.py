@@ -3,27 +3,21 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import socket
+import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import pytest
+from langchain_core.runnables import RunnableConfig
 
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.memory.functional_state import canonical
 from milai_lab.providers.contextual_capacity import HostCapacity
 from milai_lab.runners import functional
 
 LAB = Path(__file__).resolve().parents[1]
-
-
-def load_probe(relative: str) -> Any:
-    spec = importlib.util.spec_from_file_location(Path(relative).stem, LAB / relative)
-    assert spec is not None and spec.loader is not None
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
 
 
 def main() -> None:
@@ -33,8 +27,10 @@ def main() -> None:
     args.root.mkdir(parents=True, exist_ok=False)
     baseline = read_json(LAB / 'configs/v13-5-functional-r52.json')
     capacity = HostCapacity(baseline['capacity'])
-    probes = load_probe('tests/unit/test_v13_5_functional_integration.py')
-    memory_probes = load_probe('tests/memory/test_v13_5_functional.py')
+    sys.path.insert(0, str(LAB))
+    from tests.memory import test_v13_5_functional as memory_probes
+    from tests.unit import test_v13_5_functional_integration as probes
+
     actual_prepare = functional.prepare
 
     def production_template_prepare(root: Path, path: Path, **kwargs: Any) -> Any:
@@ -91,7 +87,8 @@ def main() -> None:
         memory.token_count = capacity.text_tokens
         ref = memory_probes.turn(memory, text='Proposed three visits weekly; start date unknown.')
         selected = memory_probes.handles(memory, ref)
-        saved = memory.save(memory_probes.cfg(), 'save', 'Proposed three visits weekly.', selected,
+        saved = memory.save(cast(RunnableConfig, memory_probes.cfg()), 'save',
+                            'Proposed three visits weekly.', selected,
                             scope={'condition': 'public condition 0123456789 ' * 12000})
         before = memory.service.read(saved['id'])
         page = memory_probes.invoke(memory, 'read_support_context', {
@@ -99,7 +96,7 @@ def main() -> None:
         assert page['skipped_units'][0]['type'] == 'record'
         assert page['items'][0]['content'].endswith('start date unknown.')
         assert page['next_cursor'] is None and page['examined_units'] == 2
-        packet_tokens = capacity.text_tokens(memory_probes.canonical(page))
+        packet_tokens = capacity.text_tokens(canonical(page))
         assert packet_tokens <= 8192 and memory.service.read(saved['id']) == before
     report = {'schema': 'post_r52_production_template_mechanical_v1', 'status': 'PASS',
               'actual_model_http': 0, 'actual_embedding_http': 0,
