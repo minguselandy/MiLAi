@@ -1,0 +1,424 @@
+{
+  "schema": "v13_5_r52_development_terminal_evidence_v1",
+  "status": "ALL_PLANNED_COHORTS_SEALED_WITH_SCOPED_FAILURES",
+  "candidate_source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+  "config": {
+    "path": "configs/v13-5-functional-r52.json",
+    "file_sha256": "7a297138e98e08d0aa94b0c051ee558ead2a127f35de4f4dc0ec09f39db1435a",
+    "canonical_freeze_sha256": "38feae5eff1c5a55913236fae6407099be20fa35985914a17608428c065c5e82"
+  },
+  "plan": {
+    "path": "docs/MILAI_FUNCTIONAL_DEVELOPMENT_EXPERIMENT_PLAN_v13_5.md",
+    "sha256": "bd37592e9781728514a98e5d05e5e692bf4703042ee0298036fd2c39e295bc0e"
+  },
+  "implementation": "r51 current-request versus prior explicit memory continuation; r52 per-field resolution scopes and no provisional pre-resolution permissions in resolver. Existing effect/source/visibility/unknown/no-replay guards preserved. No runtime/config edits during r52 cohorts.",
+  "cohorts": [
+    {
+      "state": "COMPLETED_DIRECT_REGRESSION_WITH_CONTINUATION_FAILURES",
+      "planned_cases": 2,
+      "planned_messages": 4,
+      "semantic_counts": {
+        "FAIL": 2
+      },
+      "message_counts": {
+        "UNKNOWN": 2,
+        "FAILED": 1,
+        "COMPLETED": 1
+      },
+      "retained_attempts": 4,
+      "cost_delta": {
+        "generation_requests": 13,
+        "generation.known_tokens": 67405,
+        "generation.charged_tokens": 67405,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 4,
+      "independent_sqlite": {
+        "records": 0,
+        "exact_quote_identity_checks": 0,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "continuation-r51",
+      "source_commit": "684f9dc765c24aedbbbd91c7cbb6161bd12726d8",
+      "sealed_files": 55,
+      "evidence_sha256": {
+        "artifacts/v13-5/continuation-r51/input-freeze.json": "4576eae7a98e7b528aa365e5dfa44cb8594d88724e9f2ee65bc4df0c233c77c7",
+        "artifacts/v13-5/continuation-r51/review.json": "9ef0311a225d925790a473a1ee753e22e21c8ddc54c1fd680fedd6376d140f74",
+        "artifacts/v13-5/continuation-r51/seal.json": "281d5adb8bb538b2d1bea691973fb2fd1b7772d7a0821e6682c7d52edd930d8a",
+        "artifacts/v13-5/continuation-r51-manual-grades.json": "6fb403094fc88eb8328cb0eb2e1148d4f361e7d100d0283a44ff0df3eaa04308",
+        "artifacts/v13-5/continuation-r51-evaluator/summary.json": "d93b5119e89a403f17f1b1e53877ca48e3c4feac8a9381779c78663450f25ac8"
+      }
+    },
+    {
+      "state": "COMPLETED_DIRECT_W1_CONTINUATION_WITH_SCOPED_PASS",
+      "planned_cases": 2,
+      "planned_messages": 4,
+      "semantic_counts": {
+        "PASS_SCOPED": 2
+      },
+      "message_counts": {
+        "UNKNOWN": 2,
+        "COMPLETED": 2
+      },
+      "retained_attempts": 4,
+      "cost_delta": {
+        "generation_requests": 27,
+        "generation.known_tokens": 205721,
+        "generation.charged_tokens": 205721,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 4,
+      "independent_sqlite": {
+        "records": 2,
+        "exact_quote_identity_checks": 9,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "continuation-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 63,
+      "evidence_sha256": {
+        "artifacts/v13-5/continuation-r52/input-freeze.json": "1bf63f99da316dcf51bd7de9eaff133291979724212cab7d1034f42788fad638",
+        "artifacts/v13-5/continuation-r52/review.json": "be911302d59eb36e23fb0a33fccbf80f0a168ee547e073a6092e11e0be1379b6",
+        "artifacts/v13-5/continuation-r52/seal.json": "c11ce61b260521ce3682ee1b0e114e3be423cd8c309dc23f2b97a3145a6b9039",
+        "artifacts/v13-5/continuation-r52-manual-grades.json": "23fba5053a97b427fb16d16d04b509c704e998c2b9b15303614119711eb0dcc9",
+        "artifacts/v13-5/continuation-r52-evaluator/summary.json": "1f78fb5a6b66674698132594e58e5168acd23b45d4ab2edcfcaefaa69989e744"
+      }
+    },
+    {
+      "state": "COMPLETED_L1_ORIGINAL_GATE_WITH_READER_LIMITATION",
+      "planned_cases": 24,
+      "planned_messages": 48,
+      "semantic_counts": {
+        "PASS_SCOPED": 23,
+        "FAIL": 1
+      },
+      "message_counts": {
+        "COMPLETED": 48
+      },
+      "retained_attempts": 48,
+      "cost_delta": {
+        "generation_requests": 222,
+        "generation.known_tokens": 1230598,
+        "generation.charged_tokens": 1230598,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 48,
+      "independent_sqlite": {
+        "records": 24,
+        "exact_quote_identity_checks": 84,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "l1-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 612,
+      "evidence_sha256": {
+        "artifacts/v13-5/l1-r52/input-freeze.json": "241eafbb329eb8dbddcb328956567898517d0c2eeb9bfdaa5df451d21c9b38c9",
+        "artifacts/v13-5/l1-r52/review.json": "b48caddbadc453a1c3ebb1b9b3093acfe56975f8b142f22db4439522c7357bac",
+        "artifacts/v13-5/l1-r52/seal.json": "5c8603559cd831a1d828df02906e99678a480bb4144cad28623f14adffb81935",
+        "artifacts/v13-5/l1-r52-manual-grades.json": "865cf1cff5f676c586d0c13c757528a5961ac06910cfc6e057ec337fdacc14e6",
+        "artifacts/v13-5/l1-r52-evaluator/summary.json": "d84945e419ae769e7e49624b74c10ae5f54fbb82ed70ff456978eb5bfc3562e2"
+      }
+    },
+    {
+      "state": "COMPLETED_L2_WITH_GUARDED_ACTION_AND_FORMATION_LIMITATIONS",
+      "planned_cases": 12,
+      "planned_messages": 26,
+      "semantic_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 3
+      },
+      "message_counts": {
+        "COMPLETED": 22,
+        "UNKNOWN": 4
+      },
+      "retained_attempts": 26,
+      "cost_delta": {
+        "generation_requests": 167,
+        "generation.known_tokens": 1368243,
+        "generation.charged_tokens": 1368243,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 26,
+      "independent_sqlite": {
+        "records": 13,
+        "exact_quote_identity_checks": 60,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "l2-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 353,
+      "evidence_sha256": {
+        "artifacts/v13-5/l2-r52/input-freeze.json": "871171b569ec218b5e14573fff3995f2552be7c4e93b5533e69c5e8e40870dd5",
+        "artifacts/v13-5/l2-r52/review.json": "e7a3d94a450d09cd60805d8eb8281adab1dbf4f41a1fd9036661e226c60d9250",
+        "artifacts/v13-5/l2-r52/seal.json": "e5ed5989a59d98b14513d1c84644d9aea0d2a97eeb942a640614fe0bbb3a8451",
+        "artifacts/v13-5/l2-r52-manual-grades.json": "15ae87d604b8795850fa0a98975bc60d17f3ed766b05923f6f5082882193e7d0",
+        "artifacts/v13-5/l2-r52-evaluator/summary.json": "66cc7f7deec75f74705959aec77894b13eb8ea9704bf9738512bbd0cf1c63792"
+      }
+    },
+    {
+      "state": "COMPLETED_L3_FORMATION_WITH_SEMANTIC_PROVIDER_AND_BUDGET_FAILURES",
+      "planned_cases": 57,
+      "planned_messages": 57,
+      "semantic_counts": {
+        "PASS_SCOPED": 41,
+        "FAIL": 16
+      },
+      "message_counts": {
+        "COMPLETED": 56,
+        "BUDGET_EXHAUSTED": 1
+      },
+      "retained_attempts": 57,
+      "cost_delta": {
+        "generation_requests": 328,
+        "generation.known_tokens": 2338709,
+        "generation.charged_tokens": 2338709,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 57,
+      "independent_sqlite": {
+        "records": 52,
+        "exact_quote_identity_checks": 276,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "l3-formation-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 1075,
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-formation-r52/input-freeze.json": "52aa3b63b3113bd25a70f79e9cd3039257deef7a4c45803d88e523f03e88ac40",
+        "artifacts/v13-5/l3-formation-r52/review.json": "a61596161158a033b10f694e814c778850993ed7ef97b83190e1560e330f3c8f",
+        "artifacts/v13-5/l3-formation-r52/seal.json": "b538d5285a08c6ab6630c4986b06bd567f38e808de886501ccc21fe884e6b7ee",
+        "artifacts/v13-5/l3-formation-r52-manual-grades.json": "bd45194fdf58571f2f4c017be96ffcb1d9def12f229a1e3dbe039719d96af20e",
+        "artifacts/v13-5/l3-formation-r52-evaluator/summary.json": "75e2568f2330588f36ab6ef8e4116061b253c06b6ec8466aec6bc9e7ad799fe8"
+      }
+    },
+    {
+      "state": "COMPLETED_L3_READING_WITH_PACKING_AND_SEMANTIC_FAILURES",
+      "planned_cases": 30,
+      "planned_messages": 30,
+      "semantic_counts": {
+        "FAIL": 13,
+        "PASS_SCOPED": 17
+      },
+      "message_counts": {
+        "COMPLETED": 30
+      },
+      "retained_attempts": 30,
+      "cost_delta": {
+        "generation_requests": 65,
+        "generation.known_tokens": 538658,
+        "generation.charged_tokens": 538658,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 30,
+      "independent_sqlite": {
+        "records": 0,
+        "exact_quote_identity_checks": 0,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "l3-reading-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 485,
+      "evidence_sha256": {
+        "artifacts/v13-5/l3-reading-r52/input-freeze.json": "749732726f87460b96509e0d4b5d5e7be92623e28e278baa7994325455deb384",
+        "artifacts/v13-5/l3-reading-r52/review.json": "fd95df6445a36f112496ae7dc1bd80bc3a34c05692bd3cd057cd85c0d2487380",
+        "artifacts/v13-5/l3-reading-r52/seal.json": "49d8640f63c6e4e5cfa8aadb1736b68f8b3a1b9c245b25042c9f393f86b44b39",
+        "artifacts/v13-5/l3-reading-r52-manual-grades.json": "2b5ddc0942a0e5d7fd41119c13d62329aa6e97b8fd5fef61f5234de10dce5163",
+        "artifacts/v13-5/l3-reading-r52-evaluator/summary.json": "3aab94ae2690f7daf7d42bbba8eef71468d5740d156d37b59fc87c43058adb9c"
+      }
+    },
+    {
+      "state": "COMPLETED_L4_WITH_SUPPORT_TIME_AND_PROVIDER_FAILURES",
+      "planned_cases": 12,
+      "planned_messages": 31,
+      "semantic_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 3
+      },
+      "message_counts": {
+        "COMPLETED": 29,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "retained_attempts": 31,
+      "cost_delta": {
+        "generation_requests": 149,
+        "generation.known_tokens": 1040502,
+        "generation.charged_tokens": 1040502,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 31,
+      "independent_sqlite": {
+        "records": 12,
+        "exact_quote_identity_checks": 69,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "l4-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 369,
+      "evidence_sha256": {
+        "artifacts/v13-5/l4-r52/input-freeze.json": "e2fa83518d9db2c767686941407481f35524d37d05c703e00c30a02c6cedb870",
+        "artifacts/v13-5/l4-r52/review.json": "9cb8e89f63ced6fdf3f9bd72eaf44d0085f36ab8dae1b882699fb81d43e43f20",
+        "artifacts/v13-5/l4-r52/seal.json": "aeff52f24a27e055b33322e7d4fe1f1982d15dc1ec1845d2aa1cf426b7923f1d",
+        "artifacts/v13-5/l4-r52-manual-grades.json": "89b1f2d93b332bd7305ab5e6c63f44eaab7504b53dc12079b5b12ada0ebc1ed0",
+        "artifacts/v13-5/l4-r52-evaluator/summary.json": "8b8cb897d46860dcca847d8dceedcea62ddac7fe97fafb816d5ccf8c807e15d1"
+      }
+    },
+    {
+      "state": "COMPLETED_EXPOSED_FORGET_RECHECK_WITH_LIMITATIONS",
+      "planned_cases": 1,
+      "planned_messages": 3,
+      "semantic_counts": {
+        "PASS_SCOPED": 1
+      },
+      "message_counts": {
+        "VISIBILITY_REVOKED": 1,
+        "COMPLETED": 2
+      },
+      "retained_attempts": 5,
+      "cost_delta": {
+        "generation_requests": 10,
+        "generation.known_tokens": 47280,
+        "generation.charged_tokens": 47280,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      },
+      "distinct_processes": 5,
+      "independent_sqlite": {
+        "records": 1,
+        "exact_quote_identity_checks": 3,
+        "all_match": true,
+        "current_equals_latest_history": true,
+        "semantic_support": "separate_manual_review"
+      },
+      "reviewer": "Root same-family development review",
+      "independent_review": false,
+      "id": "forget-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "sealed_files": 40,
+      "evidence_sha256": {
+        "artifacts/v13-5/forget-r52/input-freeze.json": "eb24e1c3b4614767742a2a95be262a6bdbe176f42930ea8b002868d67c196398",
+        "artifacts/v13-5/forget-r52/review.json": "00099c6e9528e801e140754af973abff6aeda3571e2c883f407e3d27251957f8",
+        "artifacts/v13-5/forget-r52/seal.json": "a2de5b60c2bb16a16228aaed901d728b5a81c9fd96ae5a30a822cb3674b5c1a9",
+        "artifacts/v13-5/forget-r52-manual-grades.json": "4e3eec9d0e9a6b5d0c92e71983b584083cd541a94b1178bd53ca1f0b985aa9f8",
+        "artifacts/v13-5/forget-r52-evaluator/summary.json": "081ea75eabe93295b6ffea89d9a03ee2d69dcec6f4ff94ad074d2dab66ede745"
+      }
+    }
+  ],
+  "accounting": {
+    "r52_calls": 968,
+    "r52_known_and_charged_tokens": 6769711,
+    "post_PR81_merge_calls": 981,
+    "post_PR81_merge_known_and_charged_tokens": 6837116,
+    "v13_5_all_calls": 5664,
+    "v13_5_all_known_and_charged_tokens_delta": 32171526,
+    "global_generation_requests": 15390,
+    "global_generation": {
+      "charged_tokens": 59894199,
+      "known_tokens": 59863812,
+      "unknown_usage": 1
+    },
+    "global_embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    },
+    "new_unknown_usage": 0,
+    "new_embedding_tokens": 0,
+    "historical_unknown_charge_gap": 30387,
+    "ledger_snapshot": "artifacts/v13-5/r52-terminal-ledger.json",
+    "ledger_sha256": "e8113aa1372d4131dd69766d081b5714b587c8a3b80cf265bfca226004c89dd6",
+    "agent_development_tokens_included": false,
+    "dollar_cost": null,
+    "gpu_time": null,
+    "physical_io": null
+  },
+  "engineering": {
+    "r52_direct_regressions": 34,
+    "r52_production_tokenizer_full_prompt_probes": 10,
+    "source_fast_ci": {
+      "run_id": 37167346609,
+      "status": "SUCCESS",
+      "related_regressions": 366
+    },
+    "source_full_ci": {
+      "run_id": 37167346588,
+      "status": "SKIPPED"
+    },
+    "r51_related_regressions": 366,
+    "ruff_mypy_boundaries": "PASSED_SCOPED recorded source identities; unchanged method not retested solely for prose edits",
+    "evidence": [
+      "data/manifests/v13-5-r51-continuation-repair.json",
+      "artifacts/v13-5/r52-ci-admission.json",
+      "data/manifests/v13-5-resume-pack1.json",
+      "data/manifests/v13-5-l0.json"
+    ]
+  },
+  "functional_acceptance": "PARTIAL_NO_STABLE_RECOMMENDED_CONFIGURATION",
+  "Product": "NO_GO",
+  "independent_review": false,
+  "reviewer": "Root same-family development review",
+  "research": "No T1-T3 resumption or generalization/statistical advantage claim; L3 exposed and L4 Root-authored related stories.",
+  "limitations": [
+    "L1 ordinary unsupported answer; L2 two unnecessary guarded calls and one review truncation; L3 semantic formation/Reader/packing failures; L4 support qualifier, unknown-start qualification and provider truncation failures.",
+    "One declared same-profile exposed forget repetition scoped-pass adds execution evidence but does not fix provider instability or replace L4FAIL. Three original model messages plus two offline0HTTP visibility-revoked resume attempts.",
+    "Same-model support review can overreject correct text, accept unsupported qualifiers, loop within allowance or truncate. Current intent remains model interpretation, not authentication/full authorization proof.",
+    "Trusted local owner; local SQLite sandbox workflows, visibility revocation not physical deletion; no distributed exactly-once or real audience delivery claim.",
+    "Historical r28 one missing terminal/orphan trace and r25 convenient-output overwrite remain disclosed; current r52 original attempts complete, old history not reconstructed as perfect."
+  ],
+  "publication": {
+    "pull_request": "https://github.com/minguselandy/MiLAi/pull/82",
+    "prior_merge": "0359fc0a6930d67b4f97ab32a418234d9d01b02d",
+    "final_remote_verification": "Recorded on PR and final delivery after publication; no claim of post-publication CI here"
+  }
+}

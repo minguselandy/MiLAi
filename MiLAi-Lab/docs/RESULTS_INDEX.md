@@ -1,5 +1,7 @@
 # Results index
 
+- [v13.5 r52终态](V13_5_R52_TERMINAL_REPORT.md)：同版L1–L4完整执行、140项回填、普通失败和费用；完整功能仍PARTIAL，无稳定推荐配置。
+
 ## Current development and merge handoff — 2026-10-04
 
 [Current handoff](V13_5_DEVELOPMENT_MERGE_20261004.md): independent communication-r50-full

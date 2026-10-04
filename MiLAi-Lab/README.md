@@ -1,5 +1,7 @@
 # MiLAi Lab
 
+r52同版本开发实验与140项终态回填已完成，功能验收仍PARTIAL，没有稳定推荐配置，Product NO_GO。原L1为24/24 PASS；新增合同L1 23限定通过／1失败，L2 9／3，L3形成41／16、读取17／13，新L4 9／3。来源、时间范围、行动选择及提供方限制按原结果保留。详见[终态报告](docs/V13_5_R52_TERMINAL_REPORT.md)、[FUNC汇总](docs/V13_5_PROGRESS.md)及[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
+
 MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 [MiLAi-Product](../MiLAi-Product/)，跨目录规则见
 [Source of Truth](../SOURCE_OF_TRUTH.md)。Lab 不导入 Product 私有实现。
@@ -7,27 +9,22 @@ MiLAi 的研究、评测与实验代码位于本目录。可部署产品属于
 ## 当前入口
 
 - [v13.5 功能入口](docs/V13_5_FUNCTIONAL_USAGE.md)：自然保存、修订、历史、遗忘及两工作流；[执行协议](docs/V13_5_EXECUTION_PROTOCOL.md)、[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
-- [当前状态](docs/LAB_CURRENT_STATUS.md)：授权范围、暂停状态与未完成项。
+- [当前状态](docs/LAB_CURRENT_STATUS.md)：授权范围、候选证据与未完成项。
 - [代码架构](docs/LAB_ARCHITECTURE.md)：职责、依赖方向及兼容入口。
 - [项目地图](docs/PROJECT_MAP.md)：从任务定位源码、配置、测试和证据。
 - [v12 总体整理报告](docs/CODE_ARCHITECTURE_V12_RESULTS.md)：维护位置、兼容范围和工程证据。
 - [v12 整理进度](docs/CODE_ARCHITECTURE_V12_EXECUTION.md)：阶段提交、工程验收和剩余迁移。
 - [代码职责](docs/CODE_OWNERSHIP.md)、[依赖规则](docs/DEPENDENCY_RULES.md)、[历史入口](docs/HISTORICAL_CODE_INDEX.md)。
-- [当前开发与合并交接](docs/V13_5_DEVELOPMENT_MERGE_20261004.md)：实现、完整通信、三项失败、费用及剩余验收；[r50 部分检查点](docs/V13_5_CHECKPOINT_r50_20261004.md)保留历史分母。
+- [PR81历史开发与合并交接](docs/V13_5_DEVELOPMENT_MERGE_20261004.md)：实现、完整通信、三项失败、费用及剩余验收；[r50 部分检查点](docs/V13_5_CHECKPOINT_r50_20261004.md)保留历史分母。
 - [历史 v10 实验报告](docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)：v10 局部结果、R2 失败、成本和限制。
 - [结果索引](docs/RESULTS_INDEX.md)：当前与历史结果。
 - [贡献约束](AGENTS.md)：文件负责人、检查和发布边界。
 
-当前 r52 [续办解析修复](docs/V13_5_R51_CONTINUATION_REPAIR.md)通过 34 项直接回归和 10 项生产 tokenizer 探针，真实模型验收待执行。
-r51 两工作流 W1 实测 0 PASS／2 FAIL：4 条消息全数执行，原保存请求仍遗漏；原始失败已封存。
-PR81 已合并为 `0359fc0`；按用户要求继续原 v13.5 后续开发，完整目标仍未完成。
-
-历史 r50 完整通信独立执行 11 案／27 消息，8 案限定通过、3 案失败；26 COMPLETED、1 预设 W1 UNKNOWN，无未运行消息。
-真实历史读取、撤销和遗忘隔离有新证据；恢复后遗漏原保存请求及两类最终回答错误仍未修复。完整目标未完成，Product NO_GO。
-合并与功能验收分开；历史失败与配置身份保留。详见[功能进度](docs/V13_5_PROGRESS.md)。
-完整功能尚未验收；[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)保留为历史检查点。
-v13.4 的 Simplify 退出及更早实验的失败、暂停和分母保留。新入口显式选择
-`functional_v1`，旧默认不变；Product 仍为 **NO_GO**。
+PR81 已合并为 `0359fc0`；[PR82](https://github.com/minguselandy/MiLAi/pull/82)继续原计划。
+r52 源码 `2166cc7` 的 Fast CI 通过，Full composition 为 skipped；机械检查与模型验收分开记录。
+各轮分母和失败独立保留，见[功能进度](docs/V13_5_PROGRESS.md)。
+历史[暂停总结](docs/V13_5_PAUSE_STATUS_20261003.md)和 v13.4 Simplify 结论保持，未恢复 T1–T3。
+功能入口显式选择 `functional_v1`，旧默认不变。
 
 ## Repository roles
 
