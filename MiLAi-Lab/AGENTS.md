@@ -1,3 +1,20 @@
+# 2026-10-04 post-merge functional development
+
+The user explicitly requested continuing the original v13.5 plan after GitHub merge.
+PR81 merged to main as 0359fc0a6930d67b4f97ab32a418234d9d01b02d; exact-head Fast
+37162130877, Full37162130866 and main identity verification37164131663 succeeded.
+Continue on feat/lab-functional-v13-5-followup-20261004 from that merge. First repair
+the lost explicit memory request during natural W1 continuation, using existing
+services and bounded source delivery; preserve pure-query/current exclusion guards,
+owner/visibility, actual outcome support and no replay of unknown business effects.
+Then finish the original same-version L1/L2/L3/new L4 and FUNC terminal work. Keep
+ordinary Reader errors and all historical failures visible. No new service, model,
+budget increase, T1–T3, Product/Archive changes, or retrospective score replacement.
+Root alone owns serial actual model HTTP and the original continuous ledger.
+New source changes need affected mechanical checks and own CI before model admission.
+
+---
+
 # 2026-10-04 current development integration
 
 The latest user explicitly requested: “整理当前开发内容，提交合并到github上”.

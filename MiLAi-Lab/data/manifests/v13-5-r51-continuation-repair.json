@@ -1,0 +1,64 @@
+{
+  "schema": "v13_5_candidate_repair_v1",
+  "candidate": "r51",
+  "base_merge": "0359fc0a6930d67b4f97ab32a418234d9d01b02d",
+  "config": "configs/v13-5-functional-r51.json",
+  "config_sha256": "0cd13b0aa0b99a5a93efd702635bf5b01f8a48738ece31d0ad960c623f0c59f3",
+  "status": "MECHANICAL_PASS_MODEL_NOT_RUN",
+  "change": "Opt-in current_request_native_v7 resolves permitted unfinished prior explicit memory work from actually delivered archived user fragments through the public source validator. Existing business continuation and unknown journal remain separate.",
+  "mechanical": {
+    "functional_regression": 366,
+    "production_tokenizer_scripted_variants": 10,
+    "real_model_http": 0,
+    "checks": "Ruff full src/tests/tools; mypy196 sources plus explicit runner; package/tool/root boundaries and verification matrix passed. Old default behavior retains regression coverage."
+  },
+  "evidence_sha256": {
+    "artifacts/v13-5/r51-functional-regression.log": "fb3b27771774e56fb80cabb94fd1c2dc3cff7341f957cd4fea28662ad4c29dd4",
+    "artifacts/v13-5/r51-production-contracts-probe.py": "0bf209da9289b163e716d78de6fbf13e1c1f2df1cbc0a2a7c440def8a4994d64",
+    "artifacts/v13-5/r51-production-contracts.jsonl": "908fca72d8a21d20ebb7249cdb2c29b8a0874375687ba9571aba88d70301fc58",
+    "artifacts/v13-5/r51-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "artifacts/v13-5/r51-mypy.log": "e68384225475b8ffaf453fcfc08c86c711fade2401116583391b6e152aaa49f3",
+    "artifacts/v13-5/r51-runner-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "artifacts/v13-5/r51-package-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+    "artifacts/v13-5/r51-tools-boundary.log": "30fdd3d9bcd7ef3bb9aab70cf81990b7a45fbe3b7119911bdc4f1601413ae82b",
+    "artifacts/v13-5/r51-verification-matrix-r1.log": "33800309405a9333f2a3976fb6d3db1b73d08e6abb4d2ab5aadb10b37c67d6be",
+    "artifacts/v13-5/r51-root-boundary.log": "fd469a3879c6c53ca64bf6d5ab6201aba87e750a91074859f9a48e8dae7d2892"
+  },
+  "retained_failed_attempts": [
+    "r51-legacy-w1-reproduction.log",
+    "r51-document-and-source-guards.log",
+    "r51-document-and-source-guards-r1.log",
+    "r51-existing-and-partial-coverage.log",
+    "r51-existing-and-budget-r1.log",
+    "r51-direct-continuation-regression.log",
+    "r51-direct-continuation-regression-r1.log",
+    "r51-verification-matrix.log"
+  ],
+  "next_regression": {
+    "cases": 2,
+    "messages": 4,
+    "case_ids": [
+      "l2-r04",
+      "l2-d04"
+    ],
+    "fixture_sha256": "8ab019f329385aa1f98737f025489cfcb8645745bc88306cb07dbe1f659d1629",
+    "controls_sha256": "fabfdb6b693faa0afa895f14e5c062fe4608228a0faa047aac3dc067e61b447b",
+    "exposure": "Existing L2 development stories, not new holdout",
+    "admission": "After own exact-source CI success; new root, serial existing ledger. Require actual live query, requested memory outcome supported by query/tool source, truthful final receipt, one business effect and unchanged unknown original journal. Review all four messages and reopened SQLite.",
+    "remaining": "Same-version L1 24/48, L2 12/26, L3 formation57/reading30, new L4 after freeze, FUNC01–16 terminal. Ordinary r50 Reader failures remain open."
+  },
+  "ledger_before_model": {
+    "generation_requests": 14409,
+    "generation": {
+      "charged_tokens": 53057083,
+      "known_tokens": 53026696,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "product_status": "NO_GO"
+}
