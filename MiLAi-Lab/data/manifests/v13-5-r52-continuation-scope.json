@@ -1,0 +1,1189 @@
+{
+  "schema": "v13_5_candidate_repair_v1",
+  "candidate": "r52",
+  "previous_candidate": "684f9dc765c24aedbbbd91c7cbb6161bd12726d8",
+  "status": "SAME_VERSION_EXPERIMENTS_AND_TERMINAL_ASSESSMENT_COMPLETE_WITH_LIMITATIONS",
+  "config": "configs/v13-5-functional-r52.json",
+  "config_sha256": "7a297138e98e08d0aa94b0c051ee558ead2a127f35de4f4dc0ec09f39db1435a",
+  "change": "Explicit per-field continuation resolution scope. Remove provisional pre-resolution allow flags from the v7 resolver frame; retain current declarations, current exclusions and fixed business list enforcement. No automatic semantic choice or authority from historical sources.",
+  "mechanical": {
+    "direct_regression": 34,
+    "production_tokenizer_scripted_variants": 10,
+    "real_model_http": 0,
+    "checks": "34 local direct regressions/10 production-tokenizer scripted probes plus affected Ruff/mypy/package boundary passed. Exact-source2166 Fast37167346609 passed, including366 related remote regressions; Full37167346588 skipped."
+  },
+  "evidence_sha256": {
+    "artifacts/v13-5/r52-direct-regression.log": "8fe49256a414e3fbc6c42492f56f0ca3a90d238c34eca9fe822f64f1ef556337",
+    "artifacts/v13-5/r52-production-contracts-probe.py": "dbbcea1655fe97cde912f055dac5433411f285a2254157055865232089006399",
+    "artifacts/v13-5/r52-production-contracts.jsonl": "908fca72d8a21d20ebb7249cdb2c29b8a0874375687ba9571aba88d70301fc58",
+    "artifacts/v13-5/r52-ruff.log": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+    "artifacts/v13-5/r52-mypy.log": "5d4b6d285b77932e3d08212c3b4974d0a803f98ec60408ac6ccf6a063fa6c19e",
+    "artifacts/v13-5/r52-package-boundary.log": "1dc11f0734dae5e34cb2a11caa3bea43f807b48d40bd5c61b30dc8ab8b6686d6",
+    "artifacts/v13-5/r52-ci-admission.json": "136452c1dcfd0d2a3f7c0cd3f8b83f80a035846a94e6f072f8ba51e4018d40fe",
+    "artifacts/v13-5/continuation-r52/review.json": "be911302d59eb36e23fb0a33fccbf80f0a168ee547e073a6092e11e0be1379b6",
+    "artifacts/v13-5/continuation-r52/seal.json": "c11ce61b260521ce3682ee1b0e114e3be423cd8c309dc23f2b97a3145a6b9039",
+    "artifacts/v13-5/continuation-r52-step-notes.json": "8359eec2ca7cecf448164907ba92dde3fcaf2b7516ffa3a5272523a83ec751e0",
+    "artifacts/v13-5/continuation-r52-evaluator/summary.json": "1f78fb5a6b66674698132594e58e5168acd23b45d4ab2edcfcaefaa69989e744",
+    "artifacts/v13-5/r52-l1-admission.json": "dfc4f8326ae7c740da7c1305eb14561e34852b6b0ee6a9a8ce721879181ddd15",
+    "artifacts/v13-5/l1-r52/seal.json": "5c8603559cd831a1d828df02906e99678a480bb4144cad28623f14adffb81935",
+    "artifacts/v13-5/l1-r52/review.json": "b48caddbadc453a1c3ebb1b9b3093acfe56975f8b142f22db4439522c7357bac",
+    "artifacts/v13-5/l1-r52-step-notes.json": "26bd7ac0fd6780676f8d51aed16ef8acc994ff0139b90a21a61c8e47a44bb1c4",
+    "artifacts/v13-5/l1-r52-manual-grades.json": "865cf1cff5f676c586d0c13c757528a5961ac06910cfc6e057ec337fdacc14e6",
+    "artifacts/v13-5/l1-r52-evaluator/summary.json": "d84945e419ae769e7e49624b74c10ae5f54fbb82ed70ff456978eb5bfc3562e2",
+    "artifacts/v13-5/r52-l2-admission.json": "025aeeb45926ff691181fccbc50574ed7cccfd446cd4cdce6f8c84bc0102d319",
+    "artifacts/v13-5/l2-r52/review.json": "e7a3d94a450d09cd60805d8eb8281adab1dbf4f41a1fd9036661e226c60d9250",
+    "artifacts/v13-5/l2-r52/seal.json": "e5ed5989a59d98b14513d1c84644d9aea0d2a97eeb942a640614fe0bbb3a8451",
+    "artifacts/v13-5/l2-r52-step-notes.json": "9f80b98f0012717e8bb0bc4167f47110c56406d5a33cab54cd79e47985071a57",
+    "artifacts/v13-5/l2-r52-review-notes.json": "f30e87ae0335948990243bf2d4f2b7c1a3e2826ec4e38b15ad392618028bc9c9",
+    "artifacts/v13-5/l2-r52-manual-grades.json": "15ae87d604b8795850fa0a98975bc60d17f3ed766b05923f6f5082882193e7d0",
+    "artifacts/v13-5/l2-r52-terminal-audit.json": "8baeca7eafa6009a40b1f6b1397d7428ebb3af91245bb235d5ce0f5e5a011016",
+    "artifacts/v13-5/l2-r52-observed-limitations.json": "235bfecc5ed158428464764c98f5a79e3fd89d586c79813e4facc73c393932f8",
+    "artifacts/v13-5/l2-r52-all-review.jsonl": "808f301de039babd79a71b7db3b213924a3868477f333307725a9b11d754797d",
+    "artifacts/v13-5/l2-r52-evaluator/summary.json": "66cc7f7deec75f74705959aec77894b13eb8ea9704bf9738512bbd0cf1c63792",
+    "artifacts/v13-5/r52-l3-formation-admission.json": "db88ccf4fc1db43bde90a17fcd5e4f867a15e4e8021eca736b69a48a088d3c41",
+    "artifacts/v13-5/l3-formation-r52/input-freeze.json": "52aa3b63b3113bd25a70f79e9cd3039257deef7a4c45803d88e523f03e88ac40"
+  },
+  "next_regression": {
+    "name": "continuation-r52",
+    "cases": 2,
+    "messages": 4,
+    "same_fixture_bytes_as": "continuation-r51",
+    "fixture_sha256": "8ab019f329385aa1f98737f025489cfcb8645745bc88306cb07dbe1f659d1629",
+    "controls_sha256": "fabfdb6b693faa0afa895f14e5c062fe4608228a0faa047aac3dc067e61b447b",
+    "after": "Own exact-source CI success; new frozen root and original ledger, serial real HTTP; no append to r51. Require live discovery, original requested memory outcome, true source support and no duplicate effects. Full L1/L2/L3/new L4 remain required."
+  },
+  "historical_r51": {
+    "cases": 2,
+    "messages": 4,
+    "pass": 0,
+    "fail": 2,
+    "generation_requests": 13,
+    "known_tokens": 67405,
+    "sealed_files": 55,
+    "report": "docs/V13_5_R51_CONTINUATION_REPAIR.md"
+  },
+  "ledger_before_model": {
+    "generation_requests": 14422,
+    "generation": {
+      "charged_tokens": 53124488,
+      "known_tokens": 53094101,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "product_status": "NO_GO",
+  "actual_regression": {
+    "state": "COMPLETED_DIRECT_W1_CONTINUATION_WITH_SCOPED_PASS",
+    "planned_cases": 2,
+    "planned_messages": 4,
+    "semantic_counts": {
+      "PASS_SCOPED": 2
+    },
+    "message_counts": {
+      "UNKNOWN": 2,
+      "COMPLETED": 2
+    },
+    "retained_attempts": 4,
+    "cost_delta": {
+      "generation_requests": 27,
+      "generation.known_tokens": 205721,
+      "generation.charged_tokens": 205721,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 4,
+    "independent_sqlite": {
+      "records": 2,
+      "exact_quote_identity_checks": 9,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "case_review": {
+      "l2-r04": {
+        "status": "PASS_SCOPED",
+        "reason": "11 calls. Resolver now selects the actual prior explicit user save fragment; actual get_reservation confirms one reservation/created label. Two proposals rejected, third commits one rev1 supported only by actual query source;3 exact quotes/current=latest verified. Original world unchanged and reservation journal still pending without invented result. Final receipt preserves2 rejections plus1commit as partial aggregate, truthfully reports query and unknown original receipt. Intended prior outcome saved without repeat. Same-model support review remains overstrict and misreads dispatch_started as physical dispatch; second critique also confuses tool status/history. Resolver incorrectly includes draft operation, but actual reservation execution catalog never exposes create_or_update_draft and no such effect occurs; this remains intent-interpretation limitation, not authority proof.",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": true,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "scope_time_negation": true,
+          "actual_delivery_and_history": true,
+          "post_maintenance_state": true
+        }
+      },
+      "l2-d04": {
+        "status": "PASS_SCOPED",
+        "reason": "10 calls. Resolver keeps publication-only permission and selects actual prior explicit user save request. Actual get_document_status then raw search supplies both query fragments spanning full2239 characters. First formation rejected for unsupported sandbox claim from query alone and overstrict old-unknown/current-state reasoning. Second commits one rev1 with actual body/version/audience and exact source event timestamps;6 exact quotes/current=latest. Entire native world unchanged (one draft/approval/publication); old publication journal remains pending without result. Final receipt accurately lists live query, historical unknown and1rejection+1commit as partial aggregate. Stored outcome meets requested memory work, not proof of general review correctness.",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": true,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "scope_time_negation": true,
+          "actual_delivery_and_history": true,
+          "post_maintenance_state": true
+        }
+      }
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "sealed_files": 63,
+    "ci_run": 37167346609,
+    "ci_conclusion": "success",
+    "full_run": 37167346588,
+    "full_conclusion": "skipped"
+  },
+  "l1_regression": {
+    "state": "COMPLETED_L1_ORIGINAL_GATE_WITH_READER_LIMITATION",
+    "planned_cases": 24,
+    "planned_messages": 48,
+    "semantic_counts": {
+      "PASS_SCOPED": 23,
+      "FAIL": 1
+    },
+    "message_counts": {
+      "COMPLETED": 48
+    },
+    "retained_attempts": 48,
+    "cost_delta": {
+      "generation_requests": 222,
+      "generation.known_tokens": 1230598,
+      "generation.charged_tokens": 1230598,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 48,
+    "independent_sqlite": {
+      "records": 24,
+      "exact_quote_identity_checks": 84,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "original_gate": {
+      "status": "PASSED_SCOPED",
+      "minimum_pass": 22,
+      "denominator": 24,
+      "manual_pass_count": 24,
+      "blockers": [],
+      "unknown_cases": [],
+      "semantic_unknown_cases": [],
+      "scope": "Original normal24 gate only; all FUNC capabilities require their own evidence."
+    },
+    "sealed_files": 612,
+    "ordinary_failure": "restart-1 first final adds unsupported sleep-timing prediction; actual save and restart recall pass",
+    "limitations": [
+      "restart-1 unsolicited sleep-example timing prediction in first final; actual save/restart recall valid",
+      "same-model support-review false rejections and contradictory fields",
+      "explicit storage frequently classified new_assertion; update-1 unnecessary allow_forgetting declaration, no forget proposal/effect",
+      "Root same-family development review, no independent Judge/generalization/Product acceptance"
+    ]
+  },
+  "l2_regression": {
+    "state": "COMPLETED_L2_WITH_GUARDED_ACTION_AND_FORMATION_LIMITATIONS",
+    "planned_cases": 12,
+    "planned_messages": 26,
+    "semantic_counts": {
+      "PASS_SCOPED": 9,
+      "FAIL": 3
+    },
+    "message_counts": {
+      "COMPLETED": 22,
+      "UNKNOWN": 4
+    },
+    "retained_attempts": 26,
+    "cost_delta": {
+      "generation_requests": 167,
+      "generation.known_tokens": 1368243,
+      "generation.charged_tokens": 1368243,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 26,
+    "independent_sqlite": {
+      "records": 13,
+      "exact_quote_identity_checks": 60,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "sealed_files": 353,
+    "failed_cases": {
+      "l2-r04": {
+        "status": "FAIL",
+        "reason": "Intended W1 after actual single reservation/label reached; original unknown preserved. 10 calls; new process queries actual created label, then unnecessarily invokes complete_label despite only-unfinished condition. Native already_labeled guard returns known no effect; whole native world unchanged and original pending/unknown journal unchanged with separate query recovery. Original explicit save intent recovered; first overbroad complete-operation proposal rejected, second query/guard-supported rev1 commits,6 exact quotes/current=latest, truthful final. FAIL on action selection after sufficient live evidence, not blind unknown replay, duplicate side effect, false save or source corruption; shared queue may continue unchanged per11.6.",
+        "breakpoint": "UNNECESSARY_GUARDED_ACTION_AFTER_LIVE_COMPLETION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": false,
+          "answer_satisfies_request": true
+        }
+      },
+      "l2-r06": {
+        "status": "FAIL",
+        "reason": "12 calls; exact reservation once, label unavailable.3 overstrict formation rejections then actual partial receipt-supported rev1 with3 exact quotes/current=latest. After commit Host unnecessarily requests complete_label despite delivered phase closure/no further attempt contract; pre-native business_phase_already_attempted_this_turn guard blocks executed=false. No second native effect, final accurately partial and committed/rejected memory. Retain action-selection failure separately from successful guard/source/storage; ordinary guarded attempt, no critical replay/effect. 3 calls; hidden backend event enables/completes same existing label through actual lookup. Pure readonly mode, get_reservation exact receipt delivered; no Host mutation. Final clearly distinguishes now created from original reserved_label_failed/not_created and prior guard. Same original rev1/support and3 exact quotes preserved.",
+        "breakpoint": "UNNECESSARY_GUARDED_SAME_TURN_PHASE_RETRY",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": false,
+          "answer_satisfies_request": true
+        }
+      },
+      "l2-d04": {
+        "status": "FAIL",
+        "reason": "Intended after-publication W1 reached with one exact sandbox effect. 8 calls; old explicit save resumed, actual get_document_status verifies v1 already approved/published once to 温控巡检组; no business retry/world change and original unknown journal preserved with separate query recovery. First proposal rejected by review conflating current published state with historical pending receipt. Second support-review response truncates at8192 output/finish_reason length/tool arguments length2; wrapper returns IncompleteChatResponse mutation_preparation unknown, no semantic record in readonly SQLite. Final remains usable and truthfully says semantic unknown, not saved. FAIL formation transport/completion; provider known usage retained, no blind retry, false success or observed storage corruption; continue independent cases per11.6, no budget/source change.",
+        "breakpoint": "FORMATION_SUPPORT_REVIEW_PROVIDER_TRUNCATION",
+        "dimensions": {
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": true,
+          "answer_satisfies_request": true,
+          "post_maintenance_state": false
+        }
+      }
+    },
+    "terminal_audit": "artifacts/v13-5/l2-r52-terminal-audit.json",
+    "limitations": "artifacts/v13-5/l2-r52-observed-limitations.json"
+  },
+  "l3_formation": {
+    "state": "COMPLETED_L3_FORMATION_WITH_SEMANTIC_PROVIDER_AND_BUDGET_FAILURES",
+    "planned_cases": 57,
+    "planned_messages": 57,
+    "semantic_counts": {
+      "PASS_SCOPED": 41,
+      "FAIL": 16
+    },
+    "message_counts": {
+      "COMPLETED": 56,
+      "BUDGET_EXHAUSTED": 1
+    },
+    "retained_attempts": 57,
+    "cost_delta": {
+      "generation_requests": 328,
+      "generation.known_tokens": 2338709,
+      "generation.charged_tokens": 2338709,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 57,
+    "independent_sqlite": {
+      "records": 52,
+      "exact_quote_identity_checks": 276,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "root": "artifacts/v13-5/l3-formation-r52",
+    "sealed_files": 1075,
+    "terminal_audit": {
+      "schema": "v13_5_l3_formation_terminal_audit_v1",
+      "scope": "Read-only program identity/delivery audit. Semantic verdicts are separately authored Root notes.",
+      "planned_cases": 57,
+      "reviewed_cases": 57,
+      "execution_counts": {
+        "COMPLETED": 56,
+        "BUDGET_EXHAUSTED": 1
+      },
+      "manual_semantic_counts": {
+        "PASS_SCOPED": 41,
+        "FAIL": 16
+      },
+      "calls": 328,
+      "source_imports": 57,
+      "fragments": 167,
+      "tool_receipts": 115,
+      "supported_with_differences_fields": 24,
+      "records": 52,
+      "quote_checks": 276,
+      "all_source_identity_and_delivery_checks_pass": true,
+      "terminal_tool_receipt_delivery_gaps": [
+        {
+          "case_id": "RFC9580-eid8465",
+          "status": "BUDGET_EXHAUSTED",
+          "tools": [
+            "save_memory"
+          ]
+        }
+      ],
+      "all_identity_and_delivery_checks_pass": false,
+      "no_record_cases": [
+        "RFC7940-eid5986",
+        "RFC7970-eid5583",
+        "RFC8794-eid7189",
+        "RFC9115-eid7336",
+        "RFC9580-eid8465"
+      ],
+      "provider_truncation_cases": [
+        "RFC7940-eid5986",
+        "RFC7970-eid5583",
+        "RFC8466-eid6922",
+        "RFC9115-eid7336"
+      ],
+      "reviewer": "Root same-family development review",
+      "independent_review": false
+    },
+    "failed_cases": {
+      "RFC7574-eid4724": {
+        "status": "FAIL",
+        "reason": "7 calls, one same-model precommit rejection with contradictory supported/nonempty differences retained, then real rev1 commit/6 exact quotes and true final save. Correctly identifies verified proposal and corrected swarm-ID scope, but stored narrative strengthens source note \"it seems that it is not mandatory\" into \"is not mandatory\" without tentative qualifier; same-model review accepts this. Final also calls normalized/repunctuated wording exact. Formation semantic qualification failure, not quote identity corruption or false operation receipt; unchanged independent cases may continue per11.6.",
+        "breakpoint": "FORMATION_NORMATIVE_QUALIFICATION_STRENGTHENED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC7574-eid4726": {
+        "status": "FAIL",
+        "reason": "4 calls, real rev1/6 exact quotes/current=latest, all imported/delivered spans valid and truthful commit. Stored summary states Section6.1 MUST use the method over the Internet without clearly identifying that as original wording deleted by the supplied corrected text; describes removal of options generically but omits the actual corrected removal of MUST/MAY/mandatory sentences. Final repeats mandatory-use framing. Same-model review accepts it. Source qualification/current-vs-old normative meaning not reliably preserved; ordinary formation/Reader failure, not identity corruption or false save effect.",
+        "breakpoint": "FORMATION_OLD_AND_CORRECTED_NORMATIVE_TEXT_CONFLATED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC7788-eid4677": {
+        "status": "FAIL",
+        "reason": "4 calls, real rev1/6 exact quotes/current=latest and all source/delivery identities valid. Correct central change (default MUST exist but specific default out of scope, administrator MAY configure). However notes say it may appear that .home unofficially assigns registry status; committed prose makes unofficial assignment definite. Also drops as appropriate from planned work with other WGs. Same-model review misses these qualifications and final broadly claims preserved qualifications. Ordinary semantic broadening, not a false commit or source identity violation.",
+        "breakpoint": "FORMATION_TENTATIVE_EXPLANATION_STRENGTHENED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC7788-eid5113": {
+        "status": "FAIL",
+        "reason": "6 calls; first proposal reverses corrected DHCP mappings and is correctly rejected before commit. Second saves correct DHCPv6=38/DHCPv4=37, one rev1/9 exact quotes/current=latest with true final. However committed explanation removes likely from source likely swapped by mistake, making causal attribution definite. Same-model review accepts that remaining qualification loss. Correct mapping/receipt/source identities do not override qualified-summary failure; original rejection and bounded correction retained.",
+        "breakpoint": "PROPOSAL_REVERSED_CODES_REJECTED_THEN_CAUSAL_QUALIFIER_LOST",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC7940-eid5986": {
+        "status": "FAIL",
+        "reason": "5 calls. Valid source-backed count1 to1+ proposal reaches formation review, whose provider response truncates (finish_reason length) and returns IncompleteChatResponse/mutation_preparation unknown. Identical save retry gets cached outcome-unavailable no-commit rejection, no second reviewer completion. ReadonlySQLite0 records; source import/delivery correct. Final says no semantic commit, so no false save, but inaccurately abbreviates/misspells error and describes system-side constraint rather than explicit provider truncation. Task formation incomplete, all known usage/failed calls retained; independent cases continue unchanged per11.6.",
+        "breakpoint": "FORMATION_SUPPORT_REVIEW_PROVIDER_TRUNCATION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC7970-eid5583": {
+        "status": "FAIL",
+        "reason": "6 calls. Correct training-enumeration omission proposal and4 full-source fragments, but formation-review response truncates at provider output limit (length), returns IncompleteChatResponse/mutation_preparation unknown. Two identical retries receive cached no-commit rejection, no record in independent SQLite. Final accurately says unsaved but conflates provider truncation with two review rejections and misspells error. Source imports and actualHTTPspans intact; no false save or business effect. Retain provider failure and all attempts/usage, continue unchanged per11.6.",
+        "breakpoint": "FORMATION_SUPPORT_REVIEW_PROVIDER_TRUNCATION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC8259-eid7603": {
+        "status": "FAIL",
+        "reason": "4 calls, actual rev1/6 exact quotes/current=latest; central Unicode characters tocodepoints correction is right and original source fully delivered. However saved final clause attaches contradicting ECMA-404 section9 to allowed unescaped surrogate/UTF8 discussion. Source explicitly says original characters wording contradicts ECMA404, whose codepoint definition agrees with correction. Summary loses that relation and implies conflict of surrogate allowance withECMA; same-model review accepts it and final claims notes preserved. Ordinary semantic relation failure, not source identity or save-receipt failure.",
+        "breakpoint": "FORMATION_CONTRADICTION_RELATION_MISATTACHED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC8360-eid5638": {
+        "status": "FAIL",
+        "reason": "6 calls; first review wrongly claims the supplied correction sentence is absent despite full selected fragments. Second commits real rev1/6 exact quotes/current=latest, correctly initializes VRS-AS from AS extension only when present andx=1. But stored explanation makes source tentative seems-copy-paste and author belief about mirrored bullets definite. Same-model review accepts lost qualification; final repeats copy-paste fact. Ordinary source-support semantic failure, not corrupted source/receipt.",
+        "breakpoint": "FORMATION_TENTATIVE_CAUSAL_EXPLANATION_STRENGTHENED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC8466-eid5615": {
+        "status": "FAIL",
+        "reason": "4 calls, real rev1/6 exact quotes/current=latest and complete deliveredsource. Core Ethernet toIP DSCP correction is right, but saved content/final change can be assigned based on either IEEE802.1p C-tag orDSCP into is assigned based onDSCP. Drops legitimate alternative and strengthens possibility into fixed rule while claiming scope preserved; same-model review misses this. Ordinary formation scope/modality failure, no false commit or sourceidentity corruption.",
+        "breakpoint": "FORMATION_ALTERNATIVE_DROPPED_AND_CAN_STRENGTHENED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC8794-eid7189": {
+        "status": "FAIL",
+        "reason": "4 calls; full source8delivered fragments including current request, selected actual header0:368 plus corrected2948:5540 spans. Proposed one/two/three/four-octet ranges, reservedvalues and ASCII/all-octet/allocation policies match corrected source. Same-model review says supported/no unsupporteddifferences in reason yet lists four explicitly supported statements as differences, deterministically rejected before mutation. Model does not repeat unchanged proposal; SQLite0 records, final truthfully pending. Formation completion fails due overrejection, not source reachability or invalid quote; no false save.",
+        "breakpoint": "FORMATION_REVIEW_CONTRADICTORY_SUPPORTED_DIFFERENCES",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC8824-eid8270": {
+        "status": "FAIL",
+        "reason": "4 calls, actual rev1/6 exact quotes/current=latest; correct example48-bit kid, MSB52to44 and remaining4LSB. However stored content and final introduce expansion Match Order(MO), absent from selected source which only says MO and matching. This added technical term is not supported by supplied fragments; same-model review overlooks it. Sourceidentity/delivery/realcommit pass separately; ordinary semantic-support failure.",
+        "breakpoint": "FORMATION_UNSUPPORTED_ACRONYM_EXPANSION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC9115-eid7336": {
+        "status": "FAIL",
+        "reason": "7 calls, zero records. Two formation-review provider responses terminate at length (8192 each); identical repeat yields cached unavailable/no-commit rejection, changed proposal also unknown. Full source/owner/fragment spans/actual HTTP delivery pass, but no semantic commit. Proposed oid correction has correct doubled backslashes; first requires wording omits allowed [.] alternative, later should-correction is narrower. Neither proposal summarizes regtext exception; final accurately says not successfully saved/formation unconfirmed, retains unknown and technical rejection, but task incomplete. No business effects or false save.",
+        "breakpoint": "FORMATION_SUPPORT_REVIEW_PROVIDER_TRUNCATION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC9562-eid8288": {
+        "status": "FAIL",
+        "reason": "4 calls, actual rev1/9 exact quotes/current=latest; UUIDv1/v6 60-bit5623to5236 and v7 48-bit10889 correctly retained. Source explicitly says I believe the error is the result of a bad calculation; stored content states the error is the result and final due to without tentative attribution. Same-model review accepts strengthened causal claim. Full source owner/import/spans/actual HTTP and real commit pass separately; ordinary support/qualification failure, no sourceidentity corruption or false write receipt.",
+        "breakpoint": "FORMATION_TENTATIVE_CAUSAL_EXPLANATION_STRENGTHENED",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC9580-eid8465": {
+        "status": "FAIL",
+        "reason": "24 actual generations, outer BUDGET_EXHAUSTED/PUBLIC_MESSAGE_GENERATION_CAPACITY_EXCEEDED, zero records and no final content. 12 save proposals: 11 same-model review rejections then final review cannot reserve generation (ValueError, mutation_preparation unknown). Reviewer repeatedly claims native text truncated/absent although selected full source and proposals contain it, and mishandles TBD versus reporter notes; explicit TBD proposals also rejected. Some proposal quoting is clumsy but supplied meaning preserved in several attempts. All source imports/spans actually delivered; first11 rejection receipts enter HTTP, final local capacity receipt cannot enter a further request. This is bounded-but-excessive semantic reproposal/overrejection and answer-protocol failure, not provider length or source reachability. No mutation/no false-save/no business effect. Original24 limit not increased.",
+        "breakpoint": "FORMATION_REVIEW_OVERREJECTION_TO_PUBLIC_MESSAGE_CAP",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": null,
+          "scope_time_negation": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC9711-eid8783": {
+        "status": "FAIL",
+        "reason": "4 calls, actual rev1/3 exact quotes/current=latest. Core section4.2.3 .size24to22, 16input bytes and removal of two padding characters, dates correct. However stored prose adds definition in section 2-5.2.1: supplied source contains that string only as URL fragment #section-2-5.2.1, not a human-readable section designation. Converting a document anchor into an asserted section number is unsupported reference metadata; same-model review overlooks it. Final all qualifications preserved overstates support. Exact source identity/owner/import/spans/actual HTTP and real commit pass separately; failure limited to added section assertion, no claim core arithmetic is wrong.",
+        "breakpoint": "FORMATION_URL_ANCHOR_PROMOTED_TO_SECTION_NUMBER",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "RFC9793-eid8463": {
+        "status": "FAIL",
+        "reason": "6 calls. First proposal preserves absent-BIER-Nexthop condition but receives supported/nonempty overrejection. Second commits rev1/3 exact quotes/current=latest with correct BFR1-to-BFER1 prefix yet drops no-BIER-Nexthop premise and says route from BFER1 means BFR2 uses its prefix. Source conditions that behavior on the route not including BIER Nexthop. Final claims all qualifications preserved despite omission. Same-model review accepts the less qualified revision; full source/owner/import/spans/actual HTTP and real commit pass separately.",
+        "breakpoint": "FORMATION_NEXT_HOP_PRECONDITION_LOST_AFTER_OVERREJECTION",
+        "dimensions": {
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      }
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/l3-formation-r52/seal.json": "b538d5285a08c6ab6630c4986b06bd567f38e808de886501ccc21fe884e6b7ee",
+      "artifacts/v13-5/l3-formation-r52/review.json": "a61596161158a033b10f694e814c778850993ed7ef97b83190e1560e330f3c8f",
+      "artifacts/v13-5/l3-formation-r52/terminal-audit.json": "803cb612ef246a20b6ce51090f9259f29e12f332a4e4b1085350c0e5993b5d05",
+      "artifacts/v13-5/l3-formation-r52-manual-grades.json": "bd45194fdf58571f2f4c017be96ffcb1d9def12f229a1e3dbe039719d96af20e",
+      "artifacts/v13-5/l3-formation-r52-evaluator/summary.json": "75e2568f2330588f36ab6ef8e4116061b253c06b6ec8466aec6bc9e7ad799fe8"
+    }
+  },
+  "l3_reading": {
+    "state": "COMPLETED_L3_READING_WITH_PACKING_AND_SEMANTIC_FAILURES",
+    "planned_cases": 30,
+    "planned_messages": 30,
+    "semantic_counts": {
+      "FAIL": 13,
+      "PASS_SCOPED": 17
+    },
+    "message_counts": {
+      "COMPLETED": 30
+    },
+    "retained_attempts": 30,
+    "cost_delta": {
+      "generation_requests": 65,
+      "generation.known_tokens": 538658,
+      "generation.charged_tokens": 538658,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 30,
+    "independent_sqlite": {
+      "records": 0,
+      "exact_quote_identity_checks": 0,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "root": "artifacts/v13-5/l3-reading-r52",
+    "sealed_files": 485,
+    "terminal_audit": {
+      "schema": "v13_5_l3_reading_terminal_audit_v1",
+      "scope": "Actual source identity/delivery and query effects; semantics separately authored by Root.",
+      "planned_cases": 30,
+      "reviewed_cases": 30,
+      "execution_counts": {
+        "COMPLETED": 30
+      },
+      "manual_semantic_counts": {
+        "FAIL": 13,
+        "PASS_SCOPED": 17
+      },
+      "original_utility_counts": {
+        "1.0": 25,
+        "0.5": 4,
+        "0.0": 1
+      },
+      "calls": 65,
+      "source_imports": 88,
+      "fragments": 305,
+      "tool_receipts": 5,
+      "all_source_identity_and_delivery_checks_pass": true,
+      "all_query_no_mutation_checks_pass": true,
+      "all_nonempty_final": true,
+      "with_enumerated_set": 24,
+      "missing_enumerated_set_cases": [
+        "t0-56d2d75945fc82ed",
+        "t0-a0c725c212efae75",
+        "t0-ca61a29da8aed4a8",
+        "t0-cb5be9b136526465",
+        "t0-eba0d031c65ff246",
+        "t0-efe3b85de4af8a91"
+      ],
+      "provider_truncation_cases": [],
+      "reviewer": "Root same-family development review",
+      "independent_review": false
+    },
+    "failed_cases": {
+      "t0-031c3e8238595fff": {
+        "status": "FAIL",
+        "original_verdict": "PASS",
+        "reason": "2 calls, pure query with no public tool invocation or semantic/business writes. Actual HTTP includes corrected nonce ctr and unchanged header(CTR,KID), full enumerated support set, exact source imports/spans. Both original core constraints satisfied (utility1). Additional final explanation says errata note explicitly clarifies intended change, but note says which I believe is the intention; source explicitly corrects code yet only tentatively attributes intention. Preserve core-task success separately from v13.5 qualification failure in final explanation; not evidence delivery/nonce-rule failure.",
+        "breakpoint": "READER_TENTATIVE_AUTHOR_INTENT_STRENGTHENED",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        }
+      },
+      "t0-181098e89b47832b": {
+        "status": "FAIL",
+        "original_verdict": "PASS",
+        "reason": "2 calls, pure query/no tool or semantic/business write; full erratum and enumerated set actually delivered, imports/spans exact. Core question correctly allows [.] with correct literal-dot template and no unrestricted wildcard (original core utility1). Added explanation falsely requires another CDDL escaping layer (four backslashes instead of supplied doubled pair), and labels merely alternative fix preferred/recommended plus unsupported cleaner claim. Additional technical/modality errors fail v13.5 full-answer contract despite correct yes/template.",
+        "breakpoint": "READER_EXTRA_ESCAPING_LAYER_AND_PREFERENCE_INVENTED",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        }
+      },
+      "t0-3313ea14bed1a352": {
+        "status": "FAIL",
+        "original_verdict": "PASS",
+        "reason": "3 calls including one public read_source; complete erratum actually delivered with both max(current,dynamicIndex+1) and max(current,dynamicNameIndex+1), full enumerated set;2source imports/15fragments exact. Both original core formulas correct (utility1). Extra prose says index0 requires exactly1 inserted entry and that prefix signals decoder to insert; supplied correction establishes required-count accounting, not an exact total-table cardinality or insertion command. Same answer ends with at-least-one, so explanation internally inconsistent. Pure query leaves no semantic/business write; Reader expansion failure after sufficient evidence.",
+        "breakpoint": "READER_REQUIRED_COUNT_EXPANDED_TO_EXACT_CARDINALITY",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        }
+      },
+      "t0-6769ca0f13904c4c": {
+        "status": "FAIL",
+        "reason": "2 calls; both old and corrected two-octet classification, including corrected invalid0100-407E and sole reserved7FFF, actually delivered with complete enumerated evidence. Final wrongly retains old4000 RESERVED as corrected, while407E INVALID is correct: frozen original utility0.5. This is Reader old/current attribution failure after sufficient evidence, not missing material;2imports/9fragments exact. Query-only, zero semantic/business writes and unchanged empty semantic state.",
+        "breakpoint": "READER_OLD_RESERVED_VALUE_ATTRIBUTED_TO_CORRECTED_TEXT",
+        "dimensions": {
+          "utility": 0.5,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        }
+      },
+      "t0-737ad7d7189e710d": {
+        "status": "FAIL",
+        "original_verdict": "PASS",
+        "reason": "2 calls, query-only/no mutation;2imports/10fragments exact, full8410 erratum and both enumerated sets actually delivered. Correct requested max(0,0+1)=1 gives original utility1. Extra explanation says count signals encoder to insert at least one entry before encoding reference, misrepresenting an accounting correction for an already found dynamic entry as an insertion instruction; supplied notes only explain zero-based index vs count and wrong prefix.",
+        "breakpoint": "READER_COUNT_ACCOUNTING_EXPANDED_TO_ENCODER_INSERTION_INSTRUCTION",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        }
+      },
+      "t0-8797481b1f2cabfe": {
+        "status": "FAIL",
+        "reason": "2 calls, query-only/no mutation;2imports/10fragments exact, complete typedef/erratum and enumerated set delivered. Correct implementation freedom and quoted SHOULD/MAY, but explanation says must remain same and summary mandates identity stability, upgrading SHOULD to unconditional requirement. Explicit frozen forbidden claim caps original utility at0.5; sufficient material, Reader normative-strength failure.",
+        "dimensions": {
+          "utility": 0.5,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "READER_SHOULD_UPGRADED_TO_MANDATORY"
+      },
+      "t0-a0c725c212efae75": {
+        "status": "FAIL",
+        "reason": "2 calls, query-only/no mutations;3imports/10fragments exact. Final reverses correction and uses original integer CTR, original utility0. Actual delivered erratum940:1691 contains correct lowercase ctr code and tentative notes, but adjacent It should say boundary922:936 is absent, so enumerated support set incomplete. Old RFC uppercase CTR also delivered. Record packing attribution-boundary omission plus Reader old/current reversal; do not claim full evidence set delivered or infer specific causal weight. No additional read attempted.",
+        "dimensions": {
+          "utility": 0.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "PACKING_CORRECTION_BOUNDARY_OMITTED_AND_READER_REVERSAL"
+      },
+      "t0-b318e27eb81ec145": {
+        "status": "FAIL",
+        "reason": "2 calls, pure query/no mutation;2imports/10fragments exact, both lifetime scenarios and enumerated evidence delivered. Correct Router Lifetime0 vs PIO Preferred Lifetime0 satisfies original core constraints, utility1. However final reverses causal relation by saying R3 signals forwarding table to contain no entries; source says already-empty scoped table indicates R3 can signal hosts. Also broadens single-failure H61/RIO destination to ISP-B network generally and describes complete address nonuse despite delivered preferred-vs-valid distinction. Contract fails added technical explanation, not missing two required fields.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "READER_FORWARDING_STATE_AND_SIGNAL_CAUSALITY_REVERSED",
+        "original_verdict": "PASS"
+      },
+      "t0-c7ddaea5265c6b8e": {
+        "status": "FAIL",
+        "reason": "2 calls, query-only/no mutations;5imports/10fragments exact, full Confidence definition/schema and both enumerated alternatives delivered. Correct REAL content for numeric and empty content for high, no invented numeric scale: original utility1. Extra parenthetical says element only carries rating attribute; actual delivered definition and both schemas also permit optional ext-rating, with ext-value specifically using corresponding extension. Empty content does not mean only one attribute. Contract fails added schema restriction.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "READER_EMPTY_CONTENT_EXPANDED_TO_ATTRIBUTE_EXCLUSION",
+        "original_verdict": "PASS"
+      },
+      "t0-ca61a29da8aed4a8": {
+        "status": "FAIL",
+        "reason": "2 calls, query-only/no mutations;2imports/10fragments exact. Correct algorithm-ID versus zeroed HMAC value, original utility1. Actual wire contains original RFC algorithm definition, generator zero-HMAC rule and contradictory receiver zero-ID sentence, but no correction source; enumerated set incomplete. Final confidently calls receiver line known typographical reference instead of labeling contextual inference or retrieving correction. Correct result does not prove correction read or authoritative typo attribution; no extra read attempted.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "PACKING_CORRECTION_ABSENT_AND_INFERENCE_REPORTED_AS_KNOWN_TYPO",
+        "original_verdict": "PASS"
+      },
+      "t0-cb5be9b136526465": {
+        "status": "FAIL",
+        "reason": "2 calls, query-only/no mutations;2imports/10fragments exact. Actual HTTP carries general dynamic required-count rule and fixed static indices, but no8410 correction/pseudocode; enumerated set absent. Final correctly keeps static indices unchanged and general dynamic plus-one rule, yet never identifies dynamic-name accounting or actual unchanged static branch; original partial utility0.5 under frozen incomplete dynamic-name/index anchor. General rule is supported alternative for partial answer, not evidence all requested corrected branches were consumed. No extra read attempted.",
+        "dimensions": {
+          "utility": 0.5,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "PACKING_CORRECTION_BRANCHES_ABSENT_AND_READER_INCOMPLETE"
+      },
+      "t0-eaa95f9c68fa7bd7": {
+        "status": "FAIL",
+        "reason": "4 calls including search_memory then read_fragment;2imports/11fragments exact, both receipts actually delivered. Correct requested entire EID-AD Length through EID HMAC range gives original utility1. Actual HTTP also contains full7423 correction explicitly zeroing EID HMAC rather than ID, yet final adds old erroneous MUST zero-ID instruction as current. Full enumerated boundary support and correction delivered; Reader current/old failure, not missing evidence. Query-only/no mutation.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "READER_ADDS_SUPERSEDED_HMAC_ID_ZEROING_RULE",
+        "original_verdict": "PASS"
+      },
+      "t0-eba0d031c65ff246": {
+        "status": "FAIL",
+        "reason": "4 calls including two searches with changed query but same frozen snapshot/page,2exact delivered receipts;3imports/11fragments exact. Full5986 old1/corrected1+ delivered, corresponding frozen RFC example69173:69436 absent. Final correctly quotes erratum old1 but falsely claims frozen RFC also1, replacing missing witness with erratum old quote. One-witness partial utility0.5; central provenance comparison fails. Source identity intact, query-only/no mutation; no pagination/source read despite42+ omitted units.",
+        "dimensions": {
+          "utility": 0.5,
+          "semantic_formation": null,
+          "source_quote_support": null,
+          "same_id_revision": null,
+          "business_effect_and_recovery": null,
+          "scope_time_negation": false,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": true
+        },
+        "breakpoint": "PACKING_RFC_WITNESS_ABSENT_AND_READER_FALSE_ATTRIBUTION"
+      }
+    },
+    "evidence_sha256": {
+      "artifacts/v13-5/l3-reading-r52/input-freeze.json": "749732726f87460b96509e0d4b5d5e7be92623e28e278baa7994325455deb384",
+      "artifacts/v13-5/r52-l3-reading-admission.json": "a1b4ad368d2c5563903a639d62b108eb97c465b1b582e84965ad022d32abca92",
+      "artifacts/v13-5/l3-reading-r52/review.json": "fd95df6445a36f112496ae7dc1bd80bc3a34c05692bd3cd057cd85c0d2487380",
+      "artifacts/v13-5/l3-reading-r52/seal.json": "49d8640f63c6e4e5cfa8aadb1736b68f8b3a1b9c245b25042c9f393f86b44b39",
+      "artifacts/v13-5/l3-reading-r52/terminal-audit.json": "182cb96e9933855c883b62398289d82041733d137f8394b1bcac7f6a9d2d448f",
+      "artifacts/v13-5/l3-reading-r52-review-notes.json": "6113680adc59578c7ff019c992531e623c43d167595f8e03abf112146333bec8",
+      "artifacts/v13-5/l3-reading-r52-manual-grades.json": "2b5ddc0942a0e5d7fd41119c13d62329aa6e97b8fd5fef61f5234de10dce5163",
+      "artifacts/v13-5/l3-reading-r52-all-review.jsonl": "5f5e8a27382a1edf4605f7ac674017864e05fb706503b98795bd41e73f2305d4",
+      "artifacts/v13-5/l3-reading-r52-delivery-audit.json": "435946aaca18d32a5d39a1e8f51da817345c7db354df2553879ce8ef0a757d43",
+      "artifacts/v13-5/l3-reading-r52-evaluator/summary.json": "3aab94ae2690f7daf7d42bbba8eef71468d5740d156d37b59fc87c43058adb9c"
+    }
+  },
+  "l4": {
+    "state": "COMPLETED_L4_WITH_SUPPORT_TIME_AND_PROVIDER_FAILURES",
+    "root": "artifacts/v13-5/l4-r52",
+    "planned_cases": 12,
+    "planned_messages": 31,
+    "authoring": "New public stories after method2166 freeze, before any cohort outputs; Root author/reviewer, related contracts/templates, no independent-generalization claim.",
+    "evidence_sha256": {
+      "artifacts/v13-5/r52-l4-admission.json": "77d752a7c6c695463a197b2807fd8e877e6bef0827952b294a99b400e51f5bd8",
+      "artifacts/v13-5/l4-r52/input-freeze.json": "e2fa83518d9db2c767686941407481f35524d37d05c703e00c30a02c6cedb870",
+      "artifacts/v13-5/evaluator-fixtures/l4-r52-runtime.json": "feb08f7b02c6321986ebbf55e6494d5810b8ec23faee58b612e58dff1d3f4314",
+      "artifacts/v13-5/evaluator-fixtures/l4-r52-controls.json": "8a0aacad2fb323810aa61b926c1394fd1aedc01b6072437d95d02a8314210e3d",
+      "artifacts/v13-5/evaluator-fixtures/l4-r52-rubric.json": "bd3e24e90d63f2d6e82ab0390f2c1c6835622c4a85e64928952dc04e1db1b190",
+      "artifacts/v13-5/l4-r52/review.json": "9cb8e89f63ced6fdf3f9bd72eaf44d0085f36ab8dae1b882699fb81d43e43f20",
+      "artifacts/v13-5/l4-r52/terminal-audit.json": "13edb029777cc4ca8482c8adc64f2756649b01f4e8a0c4bbd05c20c87ff5d620",
+      "artifacts/v13-5/l4-r52/seal.json": "aeff52f24a27e055b33322e7d4fe1f1982d15dc1ec1845d2aa1cf426b7923f1d",
+      "artifacts/v13-5/l4-r52-review-notes.json": "a9a4e637555ccda289a022e9ef0851d862c9979ceb2902951847bd0ac41eddee",
+      "artifacts/v13-5/l4-r52-manual-grades.json": "89b1f2d93b332bd7305ab5e6c63f44eaab7504b53dc12079b5b12ada0ebc1ed0",
+      "artifacts/v13-5/l4-r52-all-review.jsonl": "d59817a7538f441871f1b01d06e6bb59986c2cb8a11bafc6cf0f141746e813f2",
+      "artifacts/v13-5/l4-r52-evaluator/summary.json": "8b8cb897d46860dcca847d8dceedcea62ddac7fe97fafb816d5ccf8c807e15d1"
+    },
+    "semantic_counts": {
+      "PASS_SCOPED": 9,
+      "FAIL": 3
+    },
+    "message_counts": {
+      "COMPLETED": 29,
+      "FAILED": 1,
+      "UNKNOWN": 1
+    },
+    "retained_attempts": 31,
+    "cost_delta": {
+      "generation_requests": 149,
+      "generation.known_tokens": 1040502,
+      "generation.charged_tokens": 1040502,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 31,
+    "independent_sqlite": {
+      "records": 12,
+      "exact_quote_identity_checks": 69,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "case_review": {
+      "l4-r52-02": {
+        "status": "PASS_SCOPED",
+        "reason": "All3messages14calls. Initial correct paraphrase overrejected then supported rev1; correction initially selects oldpsi source and is properly rejected, second selects actual currentbar evidence and commits original IDrev2. Manufacturer exception/history unchanged. Final purequery consumes actualold/new materials and keeps terminalstate. One record2versions/6exactquotes, no business effect; rejected proposals retained.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-03": {
+        "status": "PASS_SCOPED",
+        "reason": "All3messages13calls. Saves temporary/best-effort event-only arrangement, then actual full retract on originalID/current cancellation support, revision2/history preserved. Last purequery consumes withdrawalnotice and2historical revisions with0omissions and correctly distinguishes old/noncurrent rule. One record/2versions/7exactquotes,current=latest, no business effects. Verbose internalIDs/state terms retained as usability limit.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-11": {
+        "status": "FAIL",
+        "reason": "2messages11calls, first predefinedW1UNKNOWN then completedrecovery. Livequery/no repeat effect, prior explicit memory request recovered and actual tool-result-backedrev1 saved; originaljournalpendingunknown/resultabsent and query recovery separate. Stored local-experiment qualifier is only in unselected prior user source, absent sole selected query fragment. Direct support incomplete despite correct businessoutcome/finalreceipt; ordinary formation limitation. First overrejection retained; all3 stored quote identities pass.",
+        "breakpoint": "FORMATION_CONTEXT_QUALIFIER_FROM_UNSELECTED_USER_SOURCE",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "same_id_revision": null,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": true,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false
+        }
+      },
+      "l4-r52-09": {
+        "status": "PASS_SCOPED",
+        "reason": "All2messages18calls. One reservation/initial labelfailure then hiddenrestore, actualcurrentquery and one labelcompletion with no secondreservation. Actual initialrev1 then sameIDrev2 backed by corresponding newtoolresult; partialhistory preserved,6exactquotes/current=latest. Initial2overrejections and later mixedsupportreject retained; final lists actualquery/effects/history and paired writes honestly.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": true
+        }
+      },
+      "l4-r52-10": {
+        "status": "PASS_SCOPED",
+        "reason": "3messages21calls. Draft/approval v1 and known-none unavailable publication saved as rev1; live query then exactly one remaining publication, same memory ID rev2 tool-supported with partial history. Later external v2 edit observed by actual query, current approval invalidated/current unpublished distinguished from historical v1 publication; no query mutation. 16 exact quotes/current=latest. Initial unsupported local qualifier rejected; later malformed literal cue rejected, both recovered within frozen allowance.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": true
+        }
+      },
+      "l4-r52-01": {
+        "status": "PASS_SCOPED",
+        "reason": "2messages8calls. Supported rev1 saves best-effort ordering and incoming screenshot exception; actual search/read confirms existing record without save or revision. One record3exactquotes/current=latest. Initial explicit remember misclassified new_assertion with requires_memory_result false, but actual save/final correctly paired; limitation retained.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-04": {
+        "status": "PASS_SCOPED",
+        "reason": "3messages16calls. SameIDrev1 to2 updates south to east venue with actual current correction, keeps candidate/unconfirmed condition and old history. Final pure query consumes actual old/current texts, no mutation.6exactquotes/current=latest.4 repeated cached semantic rejections before successful paraphrase and new_assertion intent classification retained as limitations; no forged confirmation/date.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-05": {
+        "status": "FAIL",
+        "reason": "3messages11calls. SameIDrev1 to2 and actual current correction change2/week to3/week,6exactquotes/history intact. Rev2 says currently3/week and drops explicitly undecided starting week from body/scope. No numeric date fabricated, later query correctly answers unknown start from actual raw source, but does not repair stored temporal overstatement. Ordinary semantic scope/time error, no quote identity corruption or false write claim.",
+        "breakpoint": "REVISION_CURRENT_APPLICABILITY_OVERSTATED_UNKNOWN_START_OMITTED",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": false,
+          "source_quote_support": false,
+          "same_id_revision": true,
+          "scope_time_negation": false,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": true,
+          "post_maintenance_state": false
+        }
+      },
+      "l4-r52-06": {
+        "status": "PASS_SCOPED",
+        "reason": "2messages7calls. Actual firstsave one rev1 correctly orderedfolders, secondreadonly confirmation preserves same record/version/support and says existing unchanged.3exactquotes/current=latest,no business. This is existing-record confirmation, not an actual no_change tool invocation. Initial new_assertion classification limitation retained.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-07": {
+        "status": "PASS_SCOPED",
+        "reason": "2messages8calls. Saved soft duration/ad-avoidance preferences with explicit longer/interview exceptions; pure query preserves original meaning and no write.1recordrev1/3exactquotes,current=latest. First equivalent paraphrase overrejected despite supported assessment and nonempty differences; broad future wording and awkward priority explanation retained as usability limitations.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": null,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      },
+      "l4-r52-08": {
+        "status": "FAIL",
+        "reason": "3messages9calls,2COMPLETED/1FAILED. First save is correct; forget request accepted but Host response truncated at8192outputtokens before tool call (VLLM_CHAT_TRUNCATED). No forget receipt/effect, original record/source still visible. Final query honestly reports visible record, repeats code/internalIDs and offers imprecise complete clearing, no new mutation. This is not a leak of actually revoked material; required actual forgetting/no-redisclosure path remains untested in r52. One rev1/3exactquotes retained; no false forgotten success.",
+        "breakpoint": "PROVIDER_LENGTH_BEFORE_FORGET_TOOL_CALL",
+        "dimensions": {
+          "utility": 0.5,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": null,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null,
+          "answer_satisfies_request": false,
+          "post_maintenance_state": false,
+          "actual_delivery_and_history": true
+        }
+      },
+      "l4-r52-12": {
+        "status": "PASS_SCOPED",
+        "reason": "3messages13calls. Englishsave, Chinese additive patch, Englishrecall on sameIDrev1 to2; actual selected current+old sources support optionalaccessories addition and preserved tools/consumables/invitationexception. Final explicit read full201codepoint rev2/0omissions then correct answer/no write.7exactquotes/current=latest. Initial intentnew_assertion and unnecessary prior-request resolver retained limitations.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": true,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null
+        }
+      }
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "terminal_audit": {
+      "schema": "v13_5_l4_terminal_readonly_audit_v1",
+      "planned_cases": 12,
+      "planned_messages": 31,
+      "reviewed_cases": 12,
+      "reviewed_messages": 31,
+      "execution_counts": {
+        "COMPLETED": 29,
+        "FAILED": 1,
+        "UNKNOWN": 1
+      },
+      "semantic_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 3
+      },
+      "generation_calls": 149,
+      "distinct_processes": 31,
+      "tool_receipts": 57,
+      "undelivered_tool_receipts": [],
+      "hidden_control_markers_delivered": [],
+      "readonly_messages": 10,
+      "readonly_with_mutation_receipts": [],
+      "provider_length_responses": [
+        {
+          "message_id": "l4-r52-08-m2",
+          "finish_reason": "length",
+          "usage": {
+            "prompt_tokens": 7818,
+            "total_tokens": 16010,
+            "completion_tokens": 8192,
+            "prompt_tokens_details": null
+          }
+        }
+      ],
+      "completed_with_empty_final": [],
+      "persisted_records_including_hidden": 12,
+      "exact_quote_identity_checks": 69,
+      "all_quotes_match": true,
+      "all_current_equal_latest_history": true,
+      "semantic_grading": "separate explicit Root same-family review; mechanical checks do not grant semantic pass"
+    },
+    "sealed_file_count": 369
+  },
+  "forget_recheck": {
+    "state": "COMPLETED_EXPOSED_FORGET_RECHECK_WITH_LIMITATIONS",
+    "planned_cases": 1,
+    "planned_messages": 3,
+    "semantic_counts": {
+      "PASS_SCOPED": 1
+    },
+    "message_counts": {
+      "VISIBILITY_REVOKED": 1,
+      "COMPLETED": 2
+    },
+    "retained_attempts": 5,
+    "cost_delta": {
+      "generation_requests": 10,
+      "generation.known_tokens": 47280,
+      "generation.charged_tokens": 47280,
+      "generation.unknown_usage": 0,
+      "embedding.known_tokens": 0,
+      "embedding.charged_tokens": 0,
+      "embedding.unknown_usage": 0
+    },
+    "distinct_processes": 5,
+    "independent_sqlite": {
+      "records": 1,
+      "exact_quote_identity_checks": 3,
+      "all_match": true,
+      "current_equals_latest_history": true,
+      "semantic_support": "separate_manual_review"
+    },
+    "case_review": {
+      "forget-r52-01": {
+        "status": "PASS_SCOPED",
+        "reason": "One predeclared exposed same-profile repetition,3 model messages10calls allCOMPLETED. Actual one record/3source visibility forget; malformed first and redundant third forget proposals rejected, actual second succeeds. Four subsequent HTTP requests and both finals omit revoked phrase; current query remains visible, oldsource/assistant/history hidden. Originalrecord3quotes physically retained. Two additional offline explicit resumes0HTTP produce VISIBILITY_REVOKED terminal attempts; cached replay denies; original attempt0/checkpoint/Store values unchanged while latest convenience result becomes redacted by declared v3 contract. Initial audit expectation of latest-result immutability failed and was corrected by inspecting public contract; no runtime source change. Final absent-history possibilities are qualified, not categorical never-supplied; globalepoch is not topic-specific proof. No repair or independent/new-story claim; originalL4FAIL unchanged.",
+        "dimensions": {
+          "utility": 1.0,
+          "semantic_formation": true,
+          "source_quote_support": true,
+          "same_id_revision": null,
+          "scope_time_negation": true,
+          "business_effect_and_recovery": null,
+          "post_maintenance_state": true
+        }
+      }
+    },
+    "reviewer": "Root same-family development review",
+    "independent_review": false,
+    "exposure": "One exact-request repetition of failedL4story, not a fix or new independent story",
+    "original_model_execution_counts": {
+      "COMPLETED": 3
+    },
+    "offline_resume_attempts": {
+      "VISIBILITY_REVOKED": 2
+    },
+    "scope": "Actual forget and replay visibility; originalL4score unchanged",
+    "sealed_file_count": 40,
+    "evidence_sha256": {
+      "artifacts/v13-5/r52-forget-admission.json": "15825251e7b45d0f0622248ac3c70b6f31c0923472e28cdc52a4673ac9e95e5b",
+      "artifacts/v13-5/forget-r52/input-freeze.json": "eb24e1c3b4614767742a2a95be262a6bdbe176f42930ea8b002868d67c196398",
+      "artifacts/v13-5/forget-r52/replay-audit.json": "ac5b2d009273e1e6f02f7048b131175e38d4e87e954d6251b82ec09142ae38dd",
+      "artifacts/v13-5/forget-r52/review.json": "00099c6e9528e801e140754af973abff6aeda3571e2c883f407e3d27251957f8",
+      "artifacts/v13-5/forget-r52/seal.json": "a2de5b60c2bb16a16228aaed901d728b5a81c9fd96ae5a30a822cb3674b5c1a9",
+      "artifacts/v13-5/forget-r52-manual-grades.json": "4e3eec9d0e9a6b5d0c92e71983b584083cd541a94b1178bd53ca1f0b985aa9f8",
+      "artifacts/v13-5/forget-r52-evaluator/summary.json": "081ea75eabe93295b6ffea89d9a03ee2d69dcec6f4ff94ad074d2dab66ede745"
+    }
+  },
+  "functional_acceptance": "PARTIAL_NO_STABLE_CONFIGURATION",
+  "terminal_report": "docs/V13_5_R52_TERMINAL_REPORT.md",
+  "terminal_results": "data/manifests/v13-5-r52-terminal-results.json",
+  "requirements_terminal_counts": {
+    "PASSED_SCOPED": 106,
+    "PARTIAL": 29,
+    "NOT_PASSED": 5
+  }
+}
