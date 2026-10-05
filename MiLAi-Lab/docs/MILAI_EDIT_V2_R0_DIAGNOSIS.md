@@ -112,5 +112,54 @@ PYTHONPATH="$OLD_LAB/artifacts/milai-edit/evaluator-serial-v1-source/src" \
 ```
 
 `OLD_LAB` 指原 v1 工作树的 MiLAi-Lab 绝对路径；引用文件必须来自同臂
-实际拒绝原件。工具拒绝未封存臂，也不会覆盖已有报告。M 完成后仍需
-补齐自身历史输入诊断和四臂对照；本轮新增模型调用 0。
+实际拒绝原件。工具默认拒绝未封存臂，也不会覆盖已有报告。M 后来的实际
+失败终态及显式部分诊断见下文；本轮新增模型调用 0。
+
+## M 失败终态的部分诊断
+
+v1 M 以 FAILED 结束，完整评估 128/277、完整维护 129/277；其中一个维护
+完成会话的 QA 未完成，148 个会话尚未运行。它不再作为待完成的活动 v1
+进程，也不能补成完整 I0。新增显式 --allow-failed-partial 与 --no-selection
+只读模式，按原配置和开发用户元数据还原全 277 个会话分母。未运行／维护
+未完成行的正文、输入、提交与失败指标均为 null，不能当成零分。
+
+| M 用户 | 声明会话 | 完整维护 | 完整评估 | 未运行 | 实际批次 | 容量失败 | 首次失败的零基时间顺序位置 | 正文最大／实到末尾字符 | 正文下降批次 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2f1f897e | 65 | 65 | 65 | 0 | 66 | 2 | 55 | 10,390 / 10,390 | 2 |
+| 8ece194a | 77 | 64 | 63 | 13 | 65 | 48 | 16 | 12,244 / 12,244 | 0 |
+| 6106afc1 | 62 | 0 | 0 | 62 | — | — | — | — | — |
+| 5c005ed8 | 73 | 0 | 0 | 73 | — | — | — | — | — |
+
+实际有 131 个准备批次，不等于 129 个完整维护会话。81 次发出且有响应、
+79 次完整解析，50 次调用前容量失败和 2 次输出 length 截断；首尝试机会
+均保留，额外 Writer 尝试 0。19 次实际提交、54 个提案拒绝、接受 no_change
+为 0；无提案批次不补成形成成功。准备来源字符 1,722,484、确认响应对应
+交付 1,050,325；交付量不证明语义保持。
+
+完整模板输入 token 最小／中位／最大为 3,740 / 44,985 / 68,547。新来源、
+旧正文、结构与支持、历史证据、schema 的独立组件中位数为 13,640 / 1,606 /
+14,006 / 11,180 / 773；它们不可相加。使用保存的原 v1 指令、原日期和
+tokenizer 逐条重建 50 个容量失败，全部精确相符，差异 0。两个已运行用户
+分别存在 2 次／0 次正文下降，不据此判定语义损伤或单调性。
+
+54 个拒绝包含 22 次非法全量替代局部操作、26 次条件追加目标错误、5 次
+来源不可用、1 次 DTO 校验。来源不可用的实际引用逐提案去重：39 个填了
+packet 中的 source_ref，另 5 个不等于任何已展示 evidence_id。Root 对后者
+核对原件：五个引用的 source、revision、start/end 都各有一个实际 packet
+匹配，但复制的 bank/owner 字符串丢了用户 ID 的 d67f 部分。因此这些是长
+引用复制错误，不据此称历史来源未发行／已遗忘或语义来源幻觉。严格拒绝
+和原始提案保持不变。
+
+有效部分原件为 ignored 的
+`artifacts/milai-edit/v2-r0/failed-m-input-diagnosis-v2.json`；前一未含容量
+重建的 v1 诊断也保留。工具 Ruff、strict mypy、tools 边界和 243-source
+所有权检查通过。实际核对全分母、null 缺项、50 次 token 精确重建以及既定
+24 输入不变，没有 HTTP 或原状态变更。复现使用原封存包：
+
+```bash
+PYTHONPATH="$OLD_LAB/artifacts/milai-edit/evaluator-serial-v1-source/src" \
+  /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/diagnose_edit_v1_inputs.py "$OLD_LAB/artifacts/milai-edit/e1-dev-v1" \
+  artifacts/milai-edit/v2-r0/failed-m-input-diagnosis-new.json \
+  --arms M --no-selection --allow-failed-partial --verify-capacity
+```
