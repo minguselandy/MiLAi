@@ -78,7 +78,10 @@ class EditMemory:
                 "units. evidence uses only e# with its supplied body "
                 "in this request. keep_support selects h# EXISTING_SUPPORT_ONLY, never new proof. "
                 "New or changed claims and new relations need new e evidence. An unchanged unit "
-                "or relation may explicitly retain its own h support with evidence=[]. Do not move "
+                "or relation may explicitly retain its own h support with evidence=[]. For a unit "
+                "retained only via h, copy its exact delivered text and role. h is not semantic "
+                "approval for synonymous wording: changed text, including a paraphrase, needs "
+                "supporting new e. Do not move "
                 "another unit's support to an unrelated claim. A changed claim may retain "
                 "its prior h qualifiers alongside new e. Do not invent aliases or base revisions. "
                 "Every r/u/e/h alias must appear in the current delivered writer packet; "
@@ -87,6 +90,9 @@ class EditMemory:
                 "covers the fact, or the applicable existing-record action for a correction. "
                 "records=[] means no old record was delivered, not that new e evidence is absent. "
                 "Do not return an empty envelope merely because the memory bank is empty. "
+                "Capturing a new utterance does not mean it deserves semantic memory. Social "
+                "acknowledgments or ordinary queries with no new durable fact or actual correction "
+                "need no save; a query that also supplies a durable fact may still justify one. "
                 "If there is genuinely no justified creation or record change, return "
                 '{"proposals":[]}. Targeted no_change only confirms a delivered existing record. '
                 "If records=[], do not invent a target, including for no_change. "
@@ -218,14 +224,20 @@ class EditMemory:
                 + json.dumps({"proposals": [create]}, ensure_ascii=False, separators=(",", ":"))
                 + ". "
             )
-        examples += 'For no justified creation or record change, empty response: {"proposals":[]}. '
+        examples += (
+            "For an empty example, assume current e contains only social acknowledgment such as "
+            "'Thank you' or an ordinary query such as 'Could you look that up?', with no new "
+            "durable fact and no justified record change. Do not turn the occurrence of that "
+            'utterance into a semantic fact. empty response: {"proposals":[]}. '
+        )
         examples += (
             "For correction, assume the CURRENT packet actually delivers r1 with u1='Reminders "
             "are quiet.' and u2='Only during the exhibition.', h1/h2 retaining those units' own "
             "support, "
             + ("and h3 retaining their modifies relation, " if self.conditioned else "")
             + "and actual e1 says 'Reminders use a soft tone.' The old exhibition limit was not "
-            "restated or canceled: retain it; change the supported tone. If target references "
+            "restated or canceled: copy its delivered text and role exactly with h2, without "
+            "paraphrasing it; change the supported tone using e1. If target references "
             "are absent, this correction example does not apply. Correction response: "
             + json.dumps({"proposals": [correction]}, ensure_ascii=False, separators=(",", ":"))
             + ". Choose supported maintenance when justified; empty is only for no justified "

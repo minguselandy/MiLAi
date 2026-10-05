@@ -1,3 +1,26 @@
+# 2026-10-05 third real Stage A: formation restored, two remaining behavior failures
+
+Own-CI-approved b178ea7 completed 24 actual requests, 234687 known generation
+tokens and zero new unknown usage. All four normal formations committed; three
+corrections committed. B2 selected current e for the changed frequency but only h
+for a same-meaning rephrase of the other rule; the exact-text existing-support
+rule rejected the whole rewrite, leaving the old frequency. Current e also
+contained the reaffirmed rule, so this is structural rejection/missed maintenance,
+not unavailable evidence or successful prevention of semantic damage. B0/B1
+created semantic records for a social acknowledgement without durable facts.
+B2/M empty paths were correct; M's normal three events alone do not establish
+method superiority. All six I2 probes were nonempty/schema-valid/reference-valid,
+but never committed. Pilot remains NOT admitted. Preserve all three attempts;
+72 actual calls, 684106 known tokens, continuous generation unknown still 2.
+Source owner has minimally clarified durable-information selection, concretized the
+empty example, and use unchanged delivered text/role with h; new or rephrased
+claims need current e. No schema/decode/v1 change, keyword filter or audit agent.
+Affected checks passed 46 with 74 deselected; strict mypy on three sources and
+Ruff passed. These do not establish actual model recovery. The structural policy
+still does not certify semantic equivalence or accept h-only paraphrases.
+New own CI and actual positive/empty review remain required. Complete the same
+full plan after usable interface admission; no scope reduction or candidate yet.
+
 # 2026-10-05 second real Stage A omission regression and user review steering
 
 The second actual Stage A with own-CI-approved 82cd568 finished 24 requests,

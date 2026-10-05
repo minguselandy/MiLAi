@@ -377,7 +377,9 @@ def test_no_maintenance_example_empty_bank_and_guessed_target_remains_rejected(
     tmp_path, arm, profile, allow_create
 ):
     with opened(tmp_path, arm, profile) as (service, method):
-        view, _ = packet(service, method, "received", "Received.", [], allow_create)
+        view, _ = packet(
+            service, method, "received", "Thank you. Could you look that up?", [], allow_create
+        )
         assert view["packet"]["records"] == [] and view["packet"]["evidence"]
         instructions = method.instructions(allow_create=allow_create)
         example, _ = json.JSONDecoder().raw_decode(instructions.split("empty response: ", 1)[1])
@@ -453,6 +455,16 @@ def test_balanced_examples_form_correct_and_keep_unrestated_support(tmp_path, ar
         assert "Formation response:" not in instructions
         correction = example_envelope(instructions, "Correction")
         Draft202012Validator(method.envelope_schema(allow_create=False)).validate(correction)
+        if arm in {"B0", "B2"}:
+            retained = correction["proposals"][0]["units"][1]
+            original_unit = before["edit_state"]["units"][1]
+            assert retained["text"] == original_unit["text"]
+            assert retained["role"] == original_unit["role"] and retained["evidence"] == []
+            paraphrase = copy.deepcopy(correction["proposals"][0])
+            paraphrase["units"][1]["text"] = "During the exhibition only."
+            # Even a synonymous retention is not approved by h metadata alone.
+            with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE"):
+                method.decode_proposal(paraphrase, current["mapping"])
         updated = method.apply(
             "s",
             "correction-example",
