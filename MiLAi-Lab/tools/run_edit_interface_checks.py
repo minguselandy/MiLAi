@@ -46,7 +46,7 @@ def alias_errors(envelope: dict[str, Any], packet: dict[str, Any]) -> list[str]:
                     else units
                     if key == "target_unit"
                     else evidence
-                    if key == "evidence"
+                    if key in {"evidence", "withdrawal_evidence"}
                     else support
                     if key == "keep_support"
                     else units

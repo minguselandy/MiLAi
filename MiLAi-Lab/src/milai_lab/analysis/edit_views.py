@@ -73,6 +73,15 @@ def _delta(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any]:
             new_meanings[key] -= 1
         else:
             removed_relations.append(relation)
+    prior_context_ids = {
+        relation[endpoint]
+        for relation in removed_relations
+        for endpoint in ("source_unit", "target_unit")
+    }
+    prior_context_keys = {_unit_key(old_units[key]) for key in prior_context_ids}
+    changed_ids.update(
+        unit["unit_id"] for unit in current["units"] if _unit_key(unit) in prior_context_keys
+    )
     context_ids = set(changed_ids)
     # Existing one-level relations provide necessary scope, not unrelated bank text.
     for relation in current_relations:
@@ -89,6 +98,11 @@ def _delta(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any]:
         "removed_or_replaced_relations": copy.deepcopy(removed_relations),
         "necessary_current_context": [
             copy.deepcopy(unit) for unit in current["units"] if unit["unit_id"] in context_ids
+        ],
+        "removed_relation_previous_context": [
+            copy.deepcopy(unit)
+            for unit in prior["units"]
+            if unit["unit_id"] in prior_context_ids
         ],
         "unchanged_text_unit_count": len(unchanged),
         "old_target_present": old is not None,

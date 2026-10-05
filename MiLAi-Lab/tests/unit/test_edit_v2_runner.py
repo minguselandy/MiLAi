@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import runpy
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +30,24 @@ class Tokenizer:
 
     def apply_chat_template(self, messages: list[dict[str, str]], **kwargs: Any) -> list[int]:
         return [1] * (12 + sum(len(m["content"]) for m in messages))
+
+
+def test_stage_a_rejects_withdrawal_evidence_outside_actual_packet() -> None:
+    tool = Path(__file__).parents[2] / "tools/run_edit_interface_checks.py"
+    inspect = runpy.run_path(str(tool))["alias_errors"]
+    packet = {
+        "records": [{"id": "r1", "units": []}],
+        "evidence": [{"id": "e1"}],
+        "historical_support": [],
+    }
+    envelope = {
+        "proposals": [
+            {"action": "rewrite", "target": "r1", "units": [], "withdrawal_evidence": ["e2"]}
+        ]
+    }
+    assert inspect(envelope, packet) == ["withdrawal_evidence: e2"]
+    envelope["proposals"][0]["withdrawal_evidence"] = ["e1"]
+    assert inspect(envelope, packet) == []
 
 
 def execution(root: Path, arm: str) -> BenchmarkRun:

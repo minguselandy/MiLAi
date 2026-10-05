@@ -65,13 +65,16 @@ def test_relation_removal_is_visible_even_when_unit_texts_are_unchanged() -> Non
         {"unit_id": "claim", "role": "content", "text": "Two reviewers"},
     ]
     before = [row("qualified", 1, units)]
-    after = [row("separate", 2, units)]
+    current_units = [{**unit, "unit_id": "new-" + unit["unit_id"]} for unit in units]
+    after = [row("separate", 2, current_units)]
     after[0]["value"]["edit_state"]["relations"] = []
     view = maintenance_views(before, after, [{"ok": True, "id": "record"}], ["separate"], [])
     delta = view["delta_view"][0]
     assert delta["new_or_changed_units"] == []
     assert delta["new_or_changed_relations"] == []
     assert delta["removed_or_replaced_relations"] == before[0]["value"]["edit_state"]["relations"]
+    assert delta["necessary_current_context"] == current_units
+    assert delta["removed_relation_previous_context"] == units
 
 
 def test_rewritten_ids_do_not_duplicate_identical_text_as_new_claims() -> None:
