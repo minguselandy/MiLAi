@@ -59,6 +59,9 @@ def test_writer_and_phase_import_orders_have_no_cycle(first: str) -> None:
 
 
 def test_existing_writer_assertions_match_whole_deterministic_contract() -> None:
+    # The old synthetic callers have no persisted Host thread. Their full golden
+    # contract stays unchanged apart from this new, explicitly absent Scope field.
+    # Assert None rather than dropping the actual field or normalizing its value.
     code = (
         "import json,sys; from pathlib import Path; "
         f"sys.path.insert(0, {str(LAB / 'tests/architecture')!r}); "
@@ -68,7 +71,13 @@ def test_existing_writer_assertions_match_whole_deterministic_contract() -> None
         "assert status==0; "
         f"expected=json.loads((lab/'data/diagnostics/code-architecture-v12/"
         "writer-accounting-deterministic-golden.json').read_text())"
-        "['contracts']['writer_policies']; "
+        "['contracts']['writer_policies']\n"
+        "scope_events=[event for case in expected.values() for event in case['events'] "
+        "if event['stage']=='writer_turn.enter']\n"
+        "assert len(scope_events)==13\n"
+        "for event in scope_events:\n"
+        "    assert 'stored_thread_id' not in event['scope']\n"
+        "    event['scope']['stored_thread_id']=None\n"
         "actual=json.loads(json.dumps(cases,ensure_ascii=False).replace(temporary,'<TMP>')); "
         "assert actual==expected; "
         "assert all(Path(module.__file__).resolve().is_relative_to(lab/'src') "
