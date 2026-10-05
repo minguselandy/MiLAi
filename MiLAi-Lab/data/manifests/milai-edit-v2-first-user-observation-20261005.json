@@ -1,0 +1,199 @@
+{
+  "status": "FIRST_DEVELOPMENT_USER_B0_COMPLETE_HISTORY_WITH_GAPS_NOT_FULL_FOUR_ARM_RESULT",
+  "observed_at": "2026-10-05T13:45:44.165221+00:00",
+  "user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "interface": "I2",
+  "config_version": "milai-edit-common-v2-i2-durability",
+  "maintenance_sessions": 65,
+  "evaluation_sessions": 65,
+  "writer_requests": 66,
+  "known_failed_writer_requests": 29,
+  "failed_writer_actual_state_unchanged": 29,
+  "failed_writer_receipts": 0,
+  "additional_attempts": 0,
+  "session_terminals": {
+    "COMPLETE_WITH_GAPS": 47,
+    "COMPLETE_ATTEMPTS": 18
+  },
+  "receipt_statuses": {
+    "committed": 15,
+    "rejected": 19
+  },
+  "rejection_reasons": {
+    "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 6,
+    "current_boundary_source_required": 11,
+    "FunctionalRejection: EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE": 2
+  },
+  "distributions": {
+    "provider_prompt_tokens": {
+      "min": 3242,
+      "median": 34513.0,
+      "max": 40317
+    },
+    "provider_completion_tokens": {
+      "min": 8,
+      "median": 8103.0,
+      "max": 8192
+    },
+    "old_body_tokens": {
+      "min": 0,
+      "median": 5166.0,
+      "max": 5166
+    },
+    "units_delivered": {
+      "min": 0,
+      "median": 168.0,
+      "max": 168
+    },
+    "old_unit_listing": {
+      "min": 1,
+      "median": 9656.0,
+      "max": 9656
+    },
+    "historical_support": {
+      "min": 1,
+      "median": 10816.0,
+      "max": 10917
+    },
+    "current_evidence": {
+      "min": 611,
+      "median": 3763.0,
+      "max": 5989
+    },
+    "source_table": {
+      "min": 827,
+      "median": 9705.0,
+      "max": 12285
+    }
+  },
+  "coverage_totals": {
+    "original_characters": 910941,
+    "covered_characters": 910941,
+    "sent_core_characters_union": 910941,
+    "response_received_core_characters_union": 910941,
+    "complete_parsed_core_characters_union": 469073,
+    "sent_characters_including_repeats_and_context": 910941
+  },
+  "writer_actual_usage": {
+    "prompt_tokens": 1970772,
+    "completion_tokens": 391900,
+    "total_tokens": 2362672
+  },
+  "prompt_count_mismatches": 0,
+  "input_exceeds_context_minus_configured_output": 0,
+  "final_records": 1,
+  "final_units": 168,
+  "input_analysis": "full-i2-first-user-writer-input-analysis.json",
+  "new_model_calls_for_analysis": 0,
+  "candidate_selected": false,
+  "limits": [
+    "One complete development user in B0; three remaining users and all three other methods are still required.",
+    "All source characters were sent and responses received, but parsing and committed or semantically correct maintenance differ.",
+    "Independent component token summaries overlap; do not add them to complete-request tokens.",
+    "29 known Writer truncations made no commit and were not retried. Stored-state plateau is not long-history reliability proof.",
+    "Shared configuration, output reservation, partitions, scorer and original first attempts were not changed. No candidate or Product conclusion.",
+    "These are all observations of one B0 development user, not a four-arm comparison, final candidate, independent review, or semantic guarantee."
+  ],
+  "three_view_observation": {
+    "observed_at": "2026-10-05T13:59:07.890959+00:00",
+    "maintenance_sessions": 65,
+    "writer_batches": 66,
+    "batch_categories": {
+      "committed": 15,
+      "schema_or_operation_rejected": 18,
+      "writer_incomplete": 29,
+      "complete_empty_proposals": 4
+    },
+    "view_totals": {
+      "new_or_changed_units": 170,
+      "removed_or_replaced_units": 2,
+      "new_or_changed_relations": 0,
+      "removed_or_replaced_relations": 0,
+      "official_extracted_entries": 15,
+      "official_extracted_characters": 220513,
+      "delta_new_text_characters": 28119,
+      "committed_zero_text_delta": 2,
+      "unchanged_text_unit_occurrences_in_committed_states": 1090
+    },
+    "incomplete_writer_batches_with_zero_extracted_and_delta_and_unchanged_state": 29,
+    "rejected_batches_with_zero_extracted_and_delta_and_unchanged_state": 18,
+    "complete_empty_proposal_batches": [
+      {
+        "original_session": 29,
+        "batch": "batch-0000",
+        "state_unchanged": true
+      },
+      {
+        "original_session": 41,
+        "batch": "batch-0000",
+        "state_unchanged": true
+      },
+      {
+        "original_session": 43,
+        "batch": "batch-0000",
+        "state_unchanged": true
+      },
+      {
+        "original_session": 43,
+        "batch": "batch-0001",
+        "state_unchanged": true
+      }
+    ],
+    "model_calls_for_analysis": 0,
+    "scoring_scope": "Existing author extracted labels are unchanged. Actual delta and state are supplemental observations; no new model scoring was run.",
+    "semantic_limit": "No delta after a rejection/truncation is not successful maintenance. Support-only commits require Source/state review; exact text preservation is not semantic preservation."
+  },
+  "root_review_of_all_zero_text_commits": [
+    {
+      "original_session": 15,
+      "selection": "All committed batches with zero exact text/role/relation delta in this complete user history; no method success/failure selection.",
+      "prior_revision": 7,
+      "current_revision": 8,
+      "unit_count_before": 77,
+      "unit_count_after": 77,
+      "rendered_content_equal": true,
+      "added_support_bindings": 1,
+      "removed_support_bindings": 0,
+      "added_support_roles": {
+        "user": 1
+      },
+      "unit_ids_reassigned": 77,
+      "author_update_labels": [
+        {
+          "index": 2,
+          "label": "Correct"
+        },
+        {
+          "index": 3,
+          "label": "Omission"
+        }
+      ],
+      "root_source_review": "The current user considers early retirement because work is stressful; actual before and after retain the earlier job-change text but neither states the new retirement intention. One current user support is added to that earlier text. This is not empty maintenance.",
+      "independent_review": false
+    },
+    {
+      "original_session": 58,
+      "selection": "All committed batches with zero exact text/role/relation delta in this complete user history; no method success/failure selection.",
+      "prior_revision": 14,
+      "current_revision": 15,
+      "unit_count_before": 168,
+      "unit_count_after": 168,
+      "rendered_content_equal": true,
+      "added_support_bindings": 4,
+      "removed_support_bindings": 0,
+      "added_support_roles": {
+        "user": 4
+      },
+      "unit_ids_reassigned": 168,
+      "author_update_labels": [
+        {
+          "index": 1,
+          "label": "Omission"
+        }
+      ],
+      "root_source_review": "The current user prefers adding kombucha and matcha while still enjoying herbal teas. Actual before and after contain the earlier herbal-tea/smoothie/soda/green-tea text and omit kombucha and matcha. Four current user supports are added to the earlier unit. Textually unchanged state is a missed update here.",
+      "independent_review": false
+    }
+  ]
+}
