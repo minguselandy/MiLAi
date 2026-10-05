@@ -1,3 +1,24 @@
+# 2026-10-05 fourth Stage A reviewed; serial interface pilots now running
+
+Own-CI-approved 4357d46 completed 24 real calls, 237188 known tokens and no new
+unknown usage. All eight formation/correction opportunities committed; all four
+no-new-fact requests returned empty proposals with identical semantic state,
+version and support. Six I2 fixed probes were nonempty/schema-valid/reference-valid
+and never committed. Root inspected actual packet/proposal/receipt/before/after;
+pilot is now admitted for this limited interface evidence, not final method or
+long-history reliability. The unrelated rule was explicitly reaffirmed, so this
+is still not unmentioned-preservation evidence. All four attempts and failures
+remain: 96 calls/921294 known tokens; generation unknown still 2, embedding 0.
+Root started serial I1 then I2 at 09:09 UTC from the same frozen 4357d46 source,
+four fixed users' first eight chronological sessions, all four arms' own empty
+banks, working_sets=false and unchanged author scoring. Do not hot-edit prompts,
+method, schema, source partition, budget or scorer while this pilot runs. Review
+actual costs, delivery and structural/semantic failures, choose one common
+interface, then run the declared exposed R3 history before full 277x4 comparison.
+Source owner is idle/stable; no new source work unless actual evidence requires
+it. Root owns serial HTTP and all data/evaluation. Complete full R0-R5/E0-E5 and
+all six deliverables; no candidate or Product conclusion from this admission.
+
 # 2026-10-05 third real Stage A: formation restored, two remaining behavior failures
 
 Own-CI-approved b178ea7 completed 24 actual requests, 234687 known generation
