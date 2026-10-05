@@ -1,3 +1,24 @@
+# 2026-10-05 reviewed v1 failure and first v2 Stage A
+
+The original v1 E1 process exited with RemoteProtocolError on M's read-only
+natural QA request for development user 8ece194a, original session 63, QA index 1.
+M remains FAILED with 128 evaluation and 129 maintenance session checkpoints;
+149 evaluation sessions including the partial session remain incomplete.
+B0/B1/B2 remain sealed at 277/277. Preserve the original request without response,
+all source/bank/score bytes and failed terminal. Do not restart v1 or repeat that
+unconfirmed Reader request. Generation unknown usage increased from 1 to 2 and
+must remain; no reset, guessed zero usage or fabricated response.
+Root explicitly recorded the changed v1 ending under plan section 3 and inspected
+healthy existing service, no recoverable exact response and a free serial lease.
+The old Stage A watcher stopped before any v2 HTTP. Root started the first
+independent Stage A at the original unused output with approved 7885559 source
+and unchanged fixed inputs. See docs/MILAI_EDIT_V2_CHANGELOG.md. It does not
+resume the unknown call, copy ideal state or select a candidate. Review actual
+Stage A results before pilot; a new unknown outcome stops without blind replay.
+The complete v2 four-user/four-arm cohort, R0-R5, inherited E0-E5 and all six
+deliverables remain required. All earlier running-v1 instructions below now
+describe the historical period before this observed terminal failure.
+
 # 2026-10-05 MiLAi-Edit v2 follow-up execution
 
 The active user goal explicitly activates
