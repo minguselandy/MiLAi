@@ -1,0 +1,61 @@
+{
+  "status": "DECLARATION_FIXED_BEFORE_ACTUAL_R3_ATTEMPTS",
+  "story_clusters": 1,
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "source": "The original plan section 7.3 Project P developer history: frequency, unknown start, holiday pause, night scope, global conditions released, night exception withdrawn. Same exposed story cluster as the existing six-message branch; not an independent source.",
+  "initial_state": "each arm own empty semantic bank; all initial events actually generated and committed, no copied or ideal old state",
+  "writer_messages_per_arm": 5,
+  "reader_questions_per_arm": 4,
+  "expected_generation_calls": 36,
+  "actual_model_calls": 0,
+  "candidate_selected": false,
+  "allow_tuning_from_confirmation": false,
+  "events": [
+    {
+      "event_id": "form_general",
+      "date": "2030-03-01",
+      "observed_user_text": "项目P试运行每周两次，开始时间未定，遇节假日暂停。",
+      "evaluator_only_requirement": "Establish the stated general frequency and both qualifications from actual user evidence; no ideal-state injection.",
+      "reader_question": null
+    },
+    {
+      "event_id": "frequency_without_restatement",
+      "date": "2030-03-02",
+      "observed_user_text": "项目P试运行改为每周三次。",
+      "evaluator_only_requirement": "Change frequency to three per week while retaining the unmentioned pending start and holiday pause on actual old support. Missing initial formation is reported separately.",
+      "reader_question": "项目P的试运行频率、开始时间和节假日安排现在各是什么？"
+    },
+    {
+      "event_id": "night_scope",
+      "date": "2030-03-03",
+      "observed_user_text": "项目P夜班试运行改为每周四次；日班保持通用安排。",
+      "evaluator_only_requirement": "Night scope four; day/general scope three; unmentioned start and holiday qualifications remain. Do not extend the local override globally.",
+      "reader_question": "项目P的日班和夜班试运行分别每周几次？开始时间和节假日安排是什么？"
+    },
+    {
+      "event_id": "global_start_and_holiday_change",
+      "date": "2030-03-04",
+      "observed_user_text": "项目P试运行从下周一开始，节假日也照常。",
+      "evaluator_only_requirement": "Release the pending-start and holiday-pause conditions. The next-Monday start is anchored to this observed date. General/day frequency remains three; the active night exception remains four. Record structural rejection separately from semantic failure and do not preserve explicitly canceled limits.",
+      "reader_question": "项目P日班和夜班各每周几次？现在何时开始，节假日如何安排？"
+    },
+    {
+      "event_id": "withdraw_night_after_global_change",
+      "date": "2030-03-05",
+      "observed_user_text": "取消项目P夜班每周四次的例外，恢复通用安排。",
+      "evaluator_only_requirement": "Current day/night/general frequency three; old night-four remains historical only. Preserve the actually established next-Monday start and holiday-normal conditions; do not reinstate old uncertainty or holiday pause when withdrawing the local exception.",
+      "reader_question": "取消夜班例外后，项目P日班和夜班每周几次？开始时间和节假日安排是否仍是更正后的安排？"
+    }
+  ],
+  "limits": "This is the original declared R3 development mechanism, one exposed source shared with the unchanged six-message branch. It closes the plan requirement for releasing old global conditions while a local exception remains active; it creates no independent confirmation or new benchmark. Each variant/arm starts its own empty semantic memory and forms it through the real Writer. Questions and evaluator requirements never enter Writer. Run after the reviewed common I1/I2 interface and before full development comparison. The three-cluster/ten-history confirmation still follows final candidate/Writer freeze.",
+  "variant": "GLOBAL_CONDITION_CHANGE_WITH_ACTIVE_LOCAL_EXCEPTION",
+  "declared_before_first_r3_model_call": true,
+  "shared_source_cluster_with": "r3-development-behavior-inputs-v1.json",
+  "actual_results": "milai-edit-v2-r3-development-results-20261005.json",
+  "actual_model_calls_meaning": "Zero at declaration; completed calls are recorded separately in actual_results."
+}

@@ -1,0 +1,131 @@
+{
+  "status": "ROOT_REVIEWED_EXPOSED_R3_ACTUAL_STATES_AND_QA_MIXED_SEMANTIC_OUTCOMES",
+  "observed_at": "2026-10-05T11:25:40.432609+00:00",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "common_interface": "I2",
+  "branches": {
+    "r3-development-original-v2-durability": {
+      "terminal": {
+        "status": "COMPLETED_EXPOSED_R3_ATTEMPTS_AWAITING_ROOT_SEMANTIC_REVIEW",
+        "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+        "common_interface": "I2",
+        "completed_event_rows": 24,
+        "story_clusters": 1,
+        "variant": "UNRESTATED_PRESERVATION_AND_WITHDRAWAL",
+        "expected_generation_calls": 44,
+        "new_generation_requests": 44,
+        "new_known_tokens": 65275,
+        "new_generation_unknown_usage": 0,
+        "candidate_selected": false,
+        "independent_confirmation": false,
+        "updated_at": "2026-10-05T11:21:17.293594+00:00"
+      },
+      "all_arms_formed_from_empty": true,
+      "all_receipts_accepted": true,
+      "frequency_only_update_preserved_unrestated_qualifier_text_role_and_actual_old_support_all_arms": true,
+      "reader_did_not_modify_stored_records": true
+    },
+    "r3-development-global-condition-v2-durability": {
+      "terminal": {
+        "status": "COMPLETED_EXPOSED_R3_ATTEMPTS_AWAITING_ROOT_SEMANTIC_REVIEW",
+        "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+        "common_interface": "I2",
+        "completed_event_rows": 20,
+        "story_clusters": 1,
+        "variant": "GLOBAL_CONDITION_CHANGE_WITH_ACTIVE_LOCAL_EXCEPTION",
+        "expected_generation_calls": 36,
+        "new_generation_requests": 36,
+        "new_known_tokens": 55070,
+        "new_generation_unknown_usage": 0,
+        "candidate_selected": false,
+        "independent_confirmation": false,
+        "updated_at": "2026-10-05T11:22:56.882836+00:00"
+      },
+      "all_arms_formed_from_empty": true,
+      "all_receipts_accepted": true,
+      "frequency_only_update_preserved_unrestated_qualifier_text_role_and_actual_old_support_all_arms": true,
+      "reader_did_not_modify_stored_records": true
+    }
+  },
+  "new_generation_requests": 80,
+  "new_known_tokens": 120345,
+  "new_generation_unknown_usage": 0,
+  "story_clusters": 1,
+  "operation_counts": {
+    "r3-development-original-v2-durability:B0": {
+      "rewrite": 4,
+      "create": 1
+    },
+    "r3-development-original-v2-durability:B1": {
+      "edit": 4,
+      "replace": 4,
+      "create": 1,
+      "delete": 2
+    },
+    "r3-development-original-v2-durability:B2": {
+      "rewrite": 4,
+      "create": 1
+    },
+    "r3-development-original-v2-durability:M": {
+      "edit": 4,
+      "replace": 4,
+      "create": 1,
+      "retract": 2
+    },
+    "r3-development-global-condition-v2-durability:B0": {
+      "rewrite": 4,
+      "create": 1
+    },
+    "r3-development-global-condition-v2-durability:B1": {
+      "edit": 4,
+      "replace": 9,
+      "delete": 1,
+      "create": 1
+    },
+    "r3-development-global-condition-v2-durability:B2": {
+      "rewrite": 4,
+      "create": 1
+    },
+    "r3-development-global-condition-v2-durability:M": {
+      "edit": 4,
+      "replace": 4,
+      "create": 1,
+      "retract": 2
+    }
+  },
+  "semantic_findings": {
+    "unrestated_frequency_only_update": "All arms change two to three per week and retain pending start and holiday pause with actual original support. This limited positive is now actual, not a reassertion.",
+    "scoped_exception": "All arms lose explicit general three-per-week frequency. Original branch B1 and M also delete/retract both global qualifications; M emits replace plus two retracts, no override. Other arms preserve text but do not correctly keep its applicability to both scopes.",
+    "original_withdrawal": "Night four-per-week is removed/withdrawn in all arms, but restoration of general three-per-week fails because that actual prior content was already lost. B1/M global qualifications remain absent; B2 qualifications stay linked only to the remaining night content.",
+    "query": "All four original-branch query events return no proposals, preserving actual records, versions and support. This does not repair prior semantic damage.",
+    "reaffirmation": "All four commit newly supported text after omissions in their own states. Although the message adds no new requirements to the full history, it can repair lost facts in the actual state; do not label every such commit an unnecessary write. Reader still does not recover full day/night answers.",
+    "global_update": "B0/B2 keep obsolete pending-start/holiday-pause alongside the new contrary statement, and lose active night frequency. B1/M save new start/holiday statement but also drop previously valid frequency information.",
+    "global_withdrawal": "Active night four-per-week is already absent before this event, so removal itself cannot be independently counted successful. No arm recovers full three-per-week day/night state while retaining corrected global conditions. B0/B2 end with obsolete qualifiers; B1 drops new start; M drops both new global conditions.",
+    "reader_date_errors": "2030-03-04 is Monday; next Monday is 2030-03-11. Actual Readers that resolve next Monday to 2030-03-10 or invented weekdays have additional answer errors; Writer keeps the supported relative phrase."
+  },
+  "full_development_comparison_admitted": true,
+  "admission_reason": "Declared normal inputs are delivered, legal per-arm proposals execute, positive/empty paths and semantic failures are interpretable. Admission is not a claim that any arm passed all semantic requirements; unchanged source/config now permit the planned complete comparison.",
+  "candidate_selected": false,
+  "independent_confirmation": false,
+  "product": "NO_GO",
+  "limits": [
+    "Two variants of one exposed development source, not independent benchmark sources.",
+    "Root review is not an independent Judge.",
+    "Exact text delta is separated from supported semantic damage and actual QA.",
+    "No retuning from these attempts, no new review Agent or benchmark, no blind retry."
+  ],
+  "costs_by_role": {
+    "Reader": {
+      "requests": 36,
+      "prompt_tokens": 6659,
+      "completion_tokens": 3717,
+      "total_tokens": 10376
+    },
+    "Writer": {
+      "requests": 44,
+      "prompt_tokens": 101671,
+      "completion_tokens": 8298,
+      "total_tokens": 109969
+    }
+  }
+}
