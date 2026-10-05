@@ -1,0 +1,210 @@
+{
+  "status": "INTERFACE_PILOT_PARTIAL_CHECKPOINT_NOT_METHOD_COMPARISON",
+  "observed_at": "2026-10-05T09:50:35.332603+00:00",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "interface": "I1",
+  "arms": [
+    {
+      "arm": "B0",
+      "status": "COMPLETED_EXPERIMENT_PHASE",
+      "maintenance_sessions": 32,
+      "evaluation_sessions": 32,
+      "expected_sessions": 32,
+      "receipts": {
+        "committed": 22,
+        "rejected": 15,
+        "no_change": 1
+      },
+      "rejections": {
+        "current_boundary_source_required": 14,
+        "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 1
+      },
+      "sessions_with_unprocessed_gaps": 10,
+      "source_character_coverage": {
+        "original_characters": 300136,
+        "covered_characters": 300136,
+        "sent_core_characters_union": 300136,
+        "response_received_core_characters_union": 300136,
+        "complete_parsed_core_characters_union": 300136
+      },
+      "known_response_costs_by_role": {
+        "Writer": {
+          "requests": 33,
+          "prompt_tokens": 645772,
+          "completion_tokens": 36424,
+          "total_tokens": 682196
+        },
+        "Reader": {
+          "requests": 73,
+          "prompt_tokens": 63006,
+          "completion_tokens": 7013,
+          "total_tokens": 70019
+        },
+        "Judge": {
+          "requests": 511,
+          "prompt_tokens": 631508,
+          "completion_tokens": 69904,
+          "total_tokens": 701412
+        }
+      },
+      "terminal_requests": 617,
+      "terminal_known_tokens": 1453627
+    },
+    {
+      "arm": "B1",
+      "status": "COMPLETED_EXPERIMENT_PHASE",
+      "maintenance_sessions": 32,
+      "evaluation_sessions": 32,
+      "expected_sessions": 32,
+      "receipts": {
+        "committed": 26,
+        "rejected": 2
+      },
+      "rejections": {
+        "FunctionalRejection: EDIT_OVERLAPPING_TARGET": 1,
+        "FunctionalRejection: EDIT_DUPLICATE_TARGET_REQUEST": 1
+      },
+      "sessions_with_unprocessed_gaps": 2,
+      "source_character_coverage": {
+        "original_characters": 300136,
+        "covered_characters": 300136,
+        "sent_core_characters_union": 300136,
+        "response_received_core_characters_union": 300136,
+        "complete_parsed_core_characters_union": 300136
+      },
+      "known_response_costs_by_role": {
+        "Writer": {
+          "requests": 33,
+          "prompt_tokens": 615131,
+          "completion_tokens": 11464,
+          "total_tokens": 626595
+        },
+        "Reader": {
+          "requests": 73,
+          "prompt_tokens": 51367,
+          "completion_tokens": 5363,
+          "total_tokens": 56730
+        },
+        "Judge": {
+          "requests": 606,
+          "prompt_tokens": 681769,
+          "completion_tokens": 72048,
+          "total_tokens": 753817
+        }
+      },
+      "terminal_requests": 712,
+      "terminal_known_tokens": 1437142
+    },
+    {
+      "arm": "B2",
+      "status": "RUNNING",
+      "maintenance_sessions": 17,
+      "evaluation_sessions": 16,
+      "expected_sessions": 32,
+      "receipts": {
+        "committed": 14,
+        "rejected": 6,
+        "no_change": 1
+      },
+      "rejections": {
+        "current_boundary_source_required": 6
+      },
+      "sessions_with_unprocessed_gaps": 4,
+      "source_character_coverage": {
+        "original_characters": 146334,
+        "covered_characters": 146334,
+        "sent_core_characters_union": 146334,
+        "response_received_core_characters_union": 146334,
+        "complete_parsed_core_characters_union": 146334
+      },
+      "known_response_costs_by_role": {
+        "Writer": {
+          "requests": 17,
+          "prompt_tokens": 450819,
+          "completion_tokens": 23841,
+          "total_tokens": 474660
+        },
+        "Reader": {
+          "requests": 32,
+          "prompt_tokens": 134268,
+          "completion_tokens": 3287,
+          "total_tokens": 137555
+        },
+        "Judge": {
+          "requests": 298,
+          "prompt_tokens": 964536,
+          "completion_tokens": 44448,
+          "total_tokens": 1008984
+        }
+      },
+      "terminal_requests": null,
+      "terminal_known_tokens": null
+    },
+    {
+      "arm": "M",
+      "status": "NOT_STARTED",
+      "maintenance_sessions": 0,
+      "evaluation_sessions": 0,
+      "expected_sessions": 32,
+      "receipts": {},
+      "rejections": {},
+      "sessions_with_unprocessed_gaps": 0,
+      "source_character_coverage": {},
+      "known_response_costs_by_role": {},
+      "terminal_requests": null,
+      "terminal_known_tokens": null
+    }
+  ],
+  "i2_status": "NOT_STARTED",
+  "historical_generation_unknown_usage_at_pilot_start": 2,
+  "historical_embedding_unknown_usage_at_pilot_start": 0,
+  "live_ledger_generation_unknown_including_pending_reservations": 3,
+  "live_ledger_embedding_unknown_including_pending_reservations": 0,
+  "new_terminal_generation_unknown_usage": null,
+  "candidate_selected": false,
+  "common_interface_selected": false,
+  "product": "NO_GO",
+  "limits": [
+    "Timestamped snapshot; active arm counts may advance.",
+    "First-attempt rejection and unprocessed gaps are not successful maintenance.",
+    "Known costs of unfinished arms are response-prefix usage, not terminal usage.",
+    "Live unknown_usage includes in-flight reservations; it is not a terminal failure count.",
+    "Source-character coverage is not semantic correctness.",
+    "First eight sessions do not establish long-history capacity stability.",
+    "Writer, Reader and Judge use Qwen3.6; Judge is not independent.",
+    "Copied old text and support do not prove that the current conversation required no semantic update.",
+    "Some failed envelopes contain other commits; a gap does not mean all new facts were lost.",
+    "No I1/I2 paired conclusion or common interface selection before both actual conditions finish."
+  ],
+  "read_only_structural_inspection": {
+    "b0_current_boundary_rejected_proposals": 14,
+    "b0_exact_old_text_role_sequence_and_no_current_e": 14,
+    "b0_has_old_support_only": 14,
+    "b0_rejection_rows_with_other_committed_proposals": 5,
+    "b0_nonempty_rewrite_with_whole_record_withdrawal_evidence_rejected": 1,
+    "b0_withdrawal_failure_envelope_has_other_create_commit": true,
+    "b1_overlapping_target_rejection": {
+      "proposals": 1,
+      "replaces_of_one_original_unit": 29,
+      "whole_proposal_rejected": true
+    },
+    "b1_duplicate_record_target_rejection": {
+      "proposals": 1,
+      "previous_proposal_committed": true
+    },
+    "semantic_review_complete": false,
+    "actual_model_calls_for_inspection": 0,
+    "runtime_changed": false
+  },
+  "r3_development_declaration": {
+    "story_clusters": 1,
+    "variants": 2,
+    "original_branch_declared_generation_calls": 44,
+    "global_condition_branch_declared_generation_calls": 36,
+    "total_declared_generation_calls": 80,
+    "actual_model_calls": 0,
+    "initial_state": "each variant and arm own empty semantic bank; actual Writer formation; no copied old card",
+    "independent_confirmation": false,
+    "confirmation_still_after_final_candidate_and_writer_freeze": true
+  }
+}
