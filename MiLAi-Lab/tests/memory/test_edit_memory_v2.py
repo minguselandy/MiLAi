@@ -368,3 +368,49 @@ def test_v1_default_dto_and_prepare_do_not_gain_v2_fields(tmp_path):
         assert delivery["method_version"] == "milai_edit_v1"
         with pytest.raises(FunctionalRejection, match="V2_INTERFACE"):
             legacy.writer_view(delivery)
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("profile", ["I1", "I2"])
+@pytest.mark.parametrize("allow_create", [False, True])
+def test_no_maintenance_example_empty_bank_and_guessed_target_remains_rejected(
+    tmp_path, arm, profile, allow_create
+):
+    with opened(tmp_path, arm, profile) as (service, method):
+        view, _ = packet(service, method, "received", "Received.", [], allow_create)
+        assert view["packet"]["records"] == [] and view["packet"]["evidence"]
+        instructions = method.instructions(allow_create=allow_create)
+        example = json.loads(instructions.split("Example with no justified maintenance: ", 1)[1])
+        assert example == {"proposals": []}
+        Draft202012Validator(method.envelope_schema(allow_create=allow_create)).validate(example)
+        # An empty envelope schedules zero actions and does not form a semantic record.
+        before = service.records()
+        for proposal in example["proposals"]:
+            method.apply("s", "none", method.decode_proposal(proposal, view["mapping"]))
+        assert service.records() == before == []
+        guessed = {"action": "no_change", "target": "r1"}
+        with pytest.raises(FunctionalRejection, match="EDIT_SHORT_REFERENCE_UNAVAILABLE"):
+            method.decode_proposal(guessed, view["mapping"])
+        assert service.records() == []
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("profile", ["I1", "I2"])
+def test_targeted_no_change_confirms_only_record_in_current_delivery(tmp_path, arm, profile):
+    with opened(tmp_path, arm, profile) as (service, method):
+        first, _ = packet(service, method, "initial", "Quiet reminders.", [])
+        saved = formation(method, first)
+        delivered, _ = packet(
+            service, method, "read", "Read quiet reminders.", [service.read(saved["id"])]
+        )
+        confirmation = {"action": "no_change", "target": "r1"}
+        decoded = method.decode_proposal(confirmation, delivered["mapping"])
+        before = copy.deepcopy(service.read(saved["id"])["value"])
+        receipt = method.apply("s", "confirm", decoded)
+        assert receipt["status"] == "no_change" and receipt["id"] == saved["id"]
+        assert service.read(saved["id"])["value"] == before
+        omitted, _ = packet(service, method, "omitted", "Received.", [], False)
+        # The bank has a record and a previous packet had r1; neither grants a current alias.
+        with pytest.raises(FunctionalRejection, match="EDIT_SHORT_REFERENCE_UNAVAILABLE"):
+            method.decode_proposal(confirmation, omitted["mapping"])
+        assert service.read(saved["id"])["value"] == before

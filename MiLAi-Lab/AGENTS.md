@@ -1,3 +1,18 @@
+# 2026-10-05 first Stage A results and common no-maintenance correction
+
+The original Stage A finished 24 real generation requests with no new unknown
+usage. Six I2 fixed probes passed schema and reference checks; eight normal
+formation/correction opportunities committed. The unrelated rule was explicitly
+reaffirmed in the correction event, so do not call it an unseen preservation test.
+B1/M invented no_change target r1 when records=[]; both were rejected and remain
+failures. Pilot is not admitted by the first Stage A. Source owner corrected only
+common v2 instructions/examples and functional tool context: current delivered
+aliases only, no justified maintenance returns proposals=[], and no functional
+write tool call without maintenance. Schema, decode, v1 defaults and rejection
+remain unchanged. Root must verify the new commit's own CI before real recheck,
+regenerate the same fixed 24 inputs from that source, preserve the first outputs,
+and use separate banks. No model calls are admitted merely by mechanical tests.
+
 # 2026-10-05 reviewed v1 failure and first v2 Stage A
 
 The original v1 E1 process exited with RemoteProtocolError on M's read-only

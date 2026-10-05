@@ -103,6 +103,8 @@ class FunctionalEditMemory(FunctionalMemory):
     def instructions(self) -> str:
         if self.interface_version != "v1":
             return self.writer.instructions() + (
+                "Functional tool arguments replace the proposals envelope. If no maintenance "
+                "is justified, make no save_memory/update_memory tool call. "
                 "Functional save_memory takes proposal=create and optional scope. "
                 "update_memory takes proposal with target=r# from the latest writer packet. "
                 "Do not pass read_handle, persistent IDs, mapping IDs, or base_revision to these "
@@ -1130,5 +1132,9 @@ class FunctionalEditMemory(FunctionalMemory):
             "save_memory": StructuredTool.from_function(save_memory, args_schema=SaveInput),
             "update_memory": StructuredTool.from_function(update_memory, args_schema=UpdateInput),
         }
-        replacements["update_memory"].description = self.writer.instructions(allow_create=False)
+        replacements["update_memory"].description = self.writer.instructions(allow_create=False) + (
+            "Here the tool arguments replace the proposals envelope: proposal is one legal "
+            "maintenance action. With no justified maintenance, do not call this tool. "
+            "A targeted no_change needs an actual delivered r alias."
+        )
         return tuple(replacements.get(tool.name, tool) for tool in super().tools())

@@ -70,12 +70,6 @@ class EditMemory:
     def instructions(self, *, allow_create: bool = True) -> str:
         if self.interface_version != "v1":
             operations = ARM_OPERATIONS[self.arm]
-            example = (
-                '{"action":"create","units":[{"text":"Reminders remain optional.",'
-                '"evidence":["e1"]}]}'
-                if allow_create
-                else '{"action":"no_change","target":"r1"}'
-            )
             return (
                 "Return the supplied JSON envelope. Use only actual events and your prior state. "
                 "Preserve subjects, times, qualifications, uncertainty and source attribution. "
@@ -86,6 +80,10 @@ class EditMemory:
                 "or relation may explicitly retain its own h support with evidence=[]. Do not move "
                 "another unit's support to an unrelated claim. A changed claim may retain "
                 "its prior h qualifiers alongside new e. Do not invent aliases or base revisions. "
+                "Every r/u/e/h alias must appear in the current delivered writer packet; "
+                "numbering never implies availability. If no maintenance is justified, return "
+                '{"proposals":[]}. Targeted no_change only confirms a delivered existing record. '
+                "If records=[], do not invent a target, including for no_change. "
                 "Do not infer applicability from old support metadata. "
                 + (
                     "create is available. "
@@ -108,8 +106,7 @@ class EditMemory:
                     else "Use plain content units; keep conditions in their text. "
                 )
                 + "".join(OPERATION_INSTRUCTIONS[operation] for operation in operations)
-                + "no_change expresses no justified maintenance. Example: "
-                + example
+                + 'Example with no justified maintenance: {"proposals":[]}'
             )
         common = (
             "Maintain persistent memory using only supplied actual events "
