@@ -15,7 +15,7 @@ from typing import Annotated, Any
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
-from pydantic import ValidationError
+from pydantic import Field, ValidationError
 
 from milai_lab.memory.edit_units import (
     EditDTO,
@@ -26,6 +26,7 @@ from milai_lab.memory.edit_units import (
     apply_local,
     form_state,
     render_state,
+    writer_proposal_schema,
 )
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import (
@@ -35,9 +36,10 @@ from milai_lab.memory.functional_state import (
     canonical,
     fragment_support,
     namespace,
+    reference_key,
     scope_leaves,
 )
-from milai_lab.methods.edit_memory import METHOD_VERSION, Arm, EditMemory
+from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -62,14 +64,31 @@ class _WholeRewriteInput(EditDTO):
     tool_call_id: Annotated[str, InjectedToolCallId]
 
 
+class _WriterInput(EditDTO):
+    proposal: dict[str, Any]
+    tool_call_id: Annotated[str, InjectedToolCallId]
+
+
+class _WriterSaveInput(_WriterInput):
+    scope: dict[str, Any] | None = None
+
+
 class FunctionalEditMemory(FunctionalMemory):
     """Use an edit arm in the current flow; default FunctionalMemory is unchanged."""
 
-    def __init__(self, *args: Any, arm: Arm = "M", **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *args: Any,
+        arm: Arm = "M",
+        interface_version: InterfaceVersion = "v1",
+        **kwargs: Any,
+    ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
             raise ValueError("FUNCTIONAL_EDIT_ARM_INVALID")
         super().__init__(*args, **kwargs)
         self.arm = arm
+        self.writer = EditMemory(self.service, arm, interface_version=interface_version)
+        self.interface_version = interface_version
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
         self.memory_method = next(name for name, value in FUNCTIONAL_ARMS.items() if value == arm)
@@ -77,8 +96,22 @@ class FunctionalEditMemory(FunctionalMemory):
         self.policy["integration_version"] = (
             INTEGRATION_VERSION if arm == "M" else "functional_" + arm.lower() + "_v1"
         )
+        if interface_version != "v1":
+            self.policy["interface_version"] = interface_version
+            self.policy["integration_version"] = "functional_edit_v2"
 
     def instructions(self) -> str:
+        if self.interface_version != "v1":
+            return self.writer.instructions() + (
+                "Functional save_memory takes proposal=create and optional scope. "
+                "update_memory takes proposal with target=r# from the latest writer packet. "
+                "Do not pass read_handle, persistent IDs, mapping IDs, or base_revision to these "
+                "writer tools. Read/confirmation/history/forget still use the existing Reader "
+                "contracts. Record scope stays unchanged on updates. A partial record is "
+                "unprocessed until all its text units have actually been read; the Host never "
+                "completes a replacement using unseen text. Memory receipts prove no business "
+                "outcome. Support review remains an optional caller callback. "
+            )
         if not self.local:
             return EditMemory(self.service, self.arm).instructions() + (
                 "The functional tool signatures replace the proposal envelope: save_memory "
@@ -99,8 +132,8 @@ class FunctionalEditMemory(FunctionalMemory):
         targets = "target_unit/shared_conditions/attach_to" if self.conditioned else "target_unit"
         applicability = (
             "condition/override units express applicability within that scope. "
-            if self.conditioned else
-            "keep conditions and qualifications in the selected plain text units. "
+            if self.conditioned
+            else "keep conditions and qualifications in the selected plain text units. "
         )
         return EditMemory(self.service, self.arm).instructions() + (
             "The functional tool signatures replace the proposal envelope: use save_memory "
@@ -148,6 +181,28 @@ class FunctionalEditMemory(FunctionalMemory):
                     {"reference": reference, "delivery_binding": bound},
                     index=False,
                 )
+            if self.interface_version != "v1":
+                self._cache_writer_items(
+                    config,
+                    [
+                        {"type": "fragment", **self.service.source_fragment(handle)}
+                        for handle in dict.fromkeys(fragment_handles)
+                    ],
+                )
+
+    def _writer_key(self, config: RunnableConfig, prefix: str) -> str:
+        bound = self._binding(config)
+        return prefix + reference_key([bound, self.interface_version, self.arm, self.forget_epoch])
+
+    def _cache_writer_items(self, config: RunnableConfig, items: list[dict[str, Any]]) -> None:
+        """Accumulate only actual Reader pages and trusted visible ToolMessage spans."""
+        key = self._writer_key(config, "edit-writer-delivery:")
+        prior = self.service.store.get(namespace(self.service), key)
+        merged = copy.deepcopy(prior.value["items"]) if prior else []
+        for item in items:
+            if item not in merged:
+                merged.append(copy.deepcopy(item))
+        self.service.store.put(namespace(self.service), key, {"items": merged}, index=False)
 
     def _remember_page(self, config: RunnableConfig, result: dict[str, Any]) -> None:
         if result.get("ok"):
@@ -159,6 +214,191 @@ class FunctionalEditMemory(FunctionalMemory):
                     if unit.get("type") == "fragment"
                 ],
             )
+            if self.interface_version != "v1":
+                self._cache_writer_items(config, result.get("items", []))
+
+    def writer_context(
+        self, session: str, turn_id: str, config_version: str, *, query: str | None = None
+    ) -> dict[str, Any]:
+        """Public v2 packet from actually delivered Reader pages; original context is retained.
+
+        Incomplete record fragments are reported, never reconstructed by fetching
+        unseen body text. The caller invokes this before handing the packet to the
+        Agent. Its immutable map is server-side and operation-bound on first use.
+        """
+        if self.interface_version == "v1":
+            return self.context(session, turn_id, config_version, query=query)
+        page = self.context(session, turn_id, config_version, query=query)
+        config: RunnableConfig = {
+            "configurable": {
+                "user_id": self.service.owner,
+                "v13_session": session,
+                "v13_turn_id": turn_id,
+                "v13_config_version": config_version,
+            }
+        }
+        return self._writer_packet(config, page)
+
+    def _writer_packet(self, config: RunnableConfig, page: dict[str, Any]) -> dict[str, Any]:
+        stored = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-writer-delivery:")
+        )
+        items = stored.value["items"] if stored else []
+        sources: list[dict[str, Any]] = []
+        groups: dict[tuple[str, int], list[dict[str, Any]]] = {}
+        for item in items:
+            if item["type"] == "fragment":
+                try:
+                    fragment = self.service.source_fragment(item["fragment_handle"])
+                except FunctionalRejection:
+                    continue
+                sources.append(
+                    {
+                        **{
+                            key: fragment[key]
+                            for key in (
+                                "source_ref",
+                                "source_revision",
+                                "start",
+                                "end",
+                                "role",
+                                "observed_at",
+                            )
+                        },
+                        "evidence_id": fragment["fragment_handle"],
+                        "text": fragment["content"],
+                        "body_delivered": True,
+                    }
+                )
+            elif item["type"] == "record":
+                groups.setdefault((item["record_id"], item["revision"]), []).append(item)
+        records: list[dict[str, Any]] = []
+        unprocessed: list[dict[str, Any]] = []
+        for (record_id, revision), fragments in groups.items():
+            current = self.service.read(record_id)
+            if not current.get("ok") or current["value"]["revision"] != revision:
+                unprocessed.append({"reason": "read_revision_no_longer_current"})
+                continue
+            if "edit_representation" not in fragments[0]:
+                end, text = 0, ""
+                for chunk in sorted(fragments, key=lambda item: item["content_range"][0]):
+                    start, stop = chunk["content_range"]
+                    if stop <= end:
+                        continue
+                    if start != end:
+                        break
+                    text += chunk["content"]
+                    end = stop
+                if end == fragments[0]["content_total_codepoints"]:
+                    records.append(
+                        {
+                            "record_id": record_id,
+                            "revision": revision,
+                            "content": text,
+                            "edit_state": None,
+                            "scope": copy.deepcopy(fragments[0]["scope"]),
+                        }
+                    )
+                else:
+                    unprocessed.append({"reason": "complete_record_body_not_delivered"})
+                continue
+            by_unit: dict[str, list[dict[str, Any]]] = {}
+            for fragment in fragments:
+                if "edit_unit" in fragment:
+                    by_unit.setdefault(fragment["edit_unit"]["unit_id"], []).append(fragment)
+            state: dict[str, Any] = {
+                "representation": fragments[0].get("edit_representation"),
+                "units": [],
+                "relations": [],
+            }
+            complete = len(by_unit) == fragments[0].get("edit_unit_count")
+            for unit_id, chunks in by_unit.items():
+                chunks = sorted(chunks, key=lambda chunk: chunk["content_range"][0])
+                end, text = 0, ""
+                for chunk in chunks:
+                    start, stop = chunk["content_range"]
+                    if start < end and stop <= end:
+                        continue
+                    if start != end:
+                        complete = False
+                        break
+                    text += chunk["content"]
+                    end = stop
+                    for relation in chunk["edit_relations"]:
+                        if relation not in state["relations"]:
+                            state["relations"].append(copy.deepcopy(relation))
+                if end != chunks[0]["content_total_codepoints"]:
+                    complete = False
+                state["units"].append(
+                    {"unit_id": unit_id, "text": text, **copy.deepcopy(chunks[0]["edit_unit"])}
+                )
+            complete = complete and len(state["relations"]) == fragments[0].get(
+                "edit_relation_count", 0
+            )
+            if not complete:
+                unprocessed.append(
+                    {
+                        "reason": "complete_record_body_not_delivered",
+                        "delivered_units": len(by_unit),
+                    }
+                )
+                continue
+            # Ordering is metadata, not missing text. Every member above was delivered.
+            actual_state = current["value"]["edit_state"]
+            unit_order = {u["unit_id"]: index for index, u in enumerate(actual_state["units"])}
+            relation_order = {
+                r["relation_id"]: index for index, r in enumerate(actual_state["relations"])
+            }
+            state["units"].sort(key=lambda unit: unit_order[unit["unit_id"]])
+            state["relations"].sort(key=lambda relation: relation_order[relation["relation_id"]])
+            records.append(
+                {
+                    "record_id": record_id,
+                    "revision": revision,
+                    "content": render_state(state),
+                    "edit_state": state,
+                    "scope": copy.deepcopy(fragments[0]["scope"]),
+                }
+            )
+        delivery = {"sources": sources, "records": records}
+        preview = self.writer.preview_writer_view(delivery)["packet"]
+        result = {
+            "ok": True,
+            "schema": "functional_edit_writer_v2",
+            "writer_packet": preview,
+            "unprocessed_records": unprocessed,
+            "reader": {
+                key: copy.deepcopy(page[key])
+                for key in (
+                    "next_cursor",
+                    "delivery_status",
+                    "omitted_units",
+                    "skipped_units",
+                    "delivered_raw_fragment_count",
+                    "delivered_semantic_record_count",
+                )
+                if key in page
+            },
+        }
+        result["required_packet_tokens"] = self.token_count(canonical(result))
+        required = self.token_count(canonical(result))
+        if required > self.material_limit:
+            raise FunctionalRejection("FUNCTIONAL_EDIT_COMPLETE_WRITER_PACKET_EXCEEDS_LIMIT")
+        view = self.writer.writer_view(delivery)
+        self.service.store.put(
+            namespace(self.service),
+            self._writer_key(config, "edit-writer-active:"),
+            {"mapping_id": view["mapping"]["mapping_id"]},
+            index=False,
+        )
+        active = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-writer-active:")
+        )
+        if active is None or active.value != {"mapping_id": view["mapping"]["mapping_id"]}:
+            raise FunctionalIntegrityError("FUNCTIONAL_EDIT_ACTIVE_MAP_UNCONFIRMED")
+        result["writer_packet"] = view["packet"]
+        result["required_packet_tokens"] = required
+        return result
 
     def context(
         self, session: str, turn_id: str, config_version: str, *, query: str | None = None
@@ -212,6 +452,113 @@ class FunctionalEditMemory(FunctionalMemory):
             if issued is None or issued.value.get("reference") != expected:
                 raise FunctionalRejection("FUNCTIONAL_EDIT_ACTUALLY_DELIVERED_FRAGMENT_REQUIRED")
         return support
+
+    def _require_update_delivery(
+        self, handles: list[str], old: dict[str, Any], kept_support: list[str] | None
+    ) -> dict[str, Any]:
+        if not kept_support:
+            return self._require_delivered(handles)
+        if self.interface_version == "v1":
+            raise FunctionalRejection("FUNCTIONAL_EDIT_V2_SUPPORT_REQUIRED")
+        prior = {
+            ref["evidence_id"]
+            for item in [*old["edit_state"]["units"], *old["edit_state"]["relations"]]
+            for ref in item["evidence_refs"]
+        }
+        if not set(kept_support) <= prior or not set(kept_support) <= set(handles):
+            raise FunctionalRejection("FUNCTIONAL_EDIT_EXISTING_SUPPORT_BINDING_INVALID")
+        fresh = [handle for handle in handles if handle not in kept_support]
+        if fresh:
+            self._require_delivered(fresh)
+        return fragment_support(self.service, handles)
+
+    def apply_writer_proposal(
+        self,
+        config: RunnableConfig,
+        operation_id: str,
+        proposal: dict[str, Any],
+        *,
+        scope: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Operation-bound decoding before existing save/update/review/commit gates."""
+        if self.interface_version == "v1":
+            raise FunctionalRejection("FUNCTIONAL_EDIT_V2_INTERFACE_REQUIRED")
+        bound = self._binding(config)
+        key = "edit-writer-operation:" + reference_key([bound, operation_id])
+        requested = {
+            "proposal": proposal,
+            "scope": scope,
+            "arm": self.arm,
+            "interface_version": self.interface_version,
+        }
+        with self.service._locked():
+            prior = self.service.store.get(namespace(self.service), key)
+            if prior is not None:
+                if prior.value["requested"] != requested:
+                    raise FunctionalRejection("FUNCTIONAL_EDIT_OPERATION_INPUT_CHANGED")
+                decoded, read_handle, kept = (
+                    copy.deepcopy(prior.value[field])
+                    for field in ("decoded", "read_handle", "kept_support")
+                )
+            else:
+                active = self.service.store.get(
+                    namespace(self.service), self._writer_key(config, "edit-writer-active:")
+                )
+                if active is None:
+                    raise FunctionalRejection("FUNCTIONAL_EDIT_ACTUAL_WRITER_DELIVERY_REQUIRED")
+                mapping = self.writer.load_mapping(active.value["mapping_id"])
+                decoded = self.writer.decode_proposal(proposal, mapping)
+                target = proposal.get("target")
+                read_handle = mapping["records"][target]["candidate_handle"] if target else None
+                kept = list(
+                    dict.fromkeys(
+                        ref["evidence_id"]
+                        for item in [
+                            *proposal.get("units", []),
+                            *proposal.get("relations", []),
+                            *proposal.get("edits", []),
+                        ]
+                        for alias in item.get("keep_support", [])
+                        for ref in mapping["support"][alias]["evidence_refs"]
+                    )
+                )
+                operation_map = {
+                    "requested": requested,
+                    "mapping_id": mapping["mapping_id"],
+                    "decoded": decoded,
+                    "read_handle": read_handle,
+                    "kept_support": kept,
+                }
+                self.service.store.put(
+                    namespace(self.service),
+                    key,
+                    operation_map,
+                    index=False,
+                )
+                visible = self.service.store.get(namespace(self.service), key)
+                if visible is None or visible.value != operation_map:
+                    raise FunctionalIntegrityError("FUNCTIONAL_EDIT_OPERATION_MAP_UNCONFIRMED")
+        if decoded["action"] == "create":
+            return self.save_edit(
+                config, operation_id, decoded["units"], decoded.get("relations"), scope
+            )
+        if scope is not None:
+            raise FunctionalRejection("FUNCTIONAL_EDIT_SCOPE_UPDATE_NOT_EXPOSED")
+        if decoded["action"] == "no_change" and read_handle is None:
+            return self.service.record_no_change(bound["session"], operation_id, requested)
+        if decoded["action"] == "edit" or self.local:
+            return self.update_edit(
+                config, operation_id, read_handle, decoded.get("edits", []), _kept_support=kept
+            )
+        return self.rewrite_edit(
+            config,
+            operation_id,
+            read_handle,
+            decoded.get("units") if decoded["action"] == "rewrite" else None,
+            decoded.get("relations"),
+            decoded.get("withdrawal_evidence"),
+            _kept_support=kept,
+        )
 
     def _record_units(
         self, row: dict[str, Any], view: str = "current_at_snapshot"
@@ -314,7 +661,7 @@ class FunctionalEditMemory(FunctionalMemory):
             "requested": requested,
             "edit_state": state,
             "edit_operations": [],
-            "method_version": METHOD_VERSION,
+            "method_version": self.writer.method_version,
             "method_arm": self.arm,
             "patch_operation": "revise",
         }
@@ -334,6 +681,8 @@ class FunctionalEditMemory(FunctionalMemory):
         operation_id: str,
         read_handle: str,
         edits: list[dict[str, Any]],
+        *,
+        _kept_support: list[str] | None = None,
     ) -> dict[str, Any]:
         if not self.local:
             raise FunctionalRejection("FUNCTIONAL_EDIT_FULL_REWRITE_REQUIRED")
@@ -359,14 +708,16 @@ class FunctionalEditMemory(FunctionalMemory):
         representation = "conditioned_v1" if self.conditioned else "plain_v1"
         if not state or state["representation"] != representation:
             raise FunctionalRejection(f"FUNCTIONAL_EDIT_EXPLICIT_{self.arm}_FORMATION_REQUIRED")
-        operations = {"replace", "append", "override", "retract"} if self.conditioned else {
-            "replace", "insert", "delete"
-        }
+        operations = (
+            {"replace", "append", "override", "retract"}
+            if self.conditioned
+            else {"replace", "insert", "delete"}
+        )
         if any(edit.operation not in operations for edit in parsed.edits):
             raise FunctionalRejection(f"FUNCTIONAL_EDIT_{self.arm}_OPERATION_REQUIRED")
         changed_handles = list(dict.fromkeys(h for edit in parsed.edits for h in edit.evidence))
         if parsed.edits:
-            self._require_delivered(changed_handles)
+            self._require_update_delivery(changed_handles, old, _kept_support)
             state = apply_local(state, parsed.edits, self.service, conditioned=self.conditioned)
         content = render_state(state)
         equal = state == old["edit_state"] and content == old["content"]
@@ -416,7 +767,7 @@ class FunctionalEditMemory(FunctionalMemory):
             "requested": requested,
             "edit_state": state,
             "edit_operations": [e.model_dump() for e in parsed.edits],
-            "method_version": METHOD_VERSION,
+            "method_version": self.writer.method_version,
             "method_arm": self.arm,
             "patch_operation": "no_change" if equal else "retract" if retract else "revise",
         }
@@ -441,6 +792,8 @@ class FunctionalEditMemory(FunctionalMemory):
         units: list[dict[str, Any]] | None = None,
         relations: list[dict[str, Any]] | None = None,
         withdrawal_evidence: list[str] | None = None,
+        *,
+        _kept_support: list[str] | None = None,
     ) -> dict[str, Any]:
         """Replace the whole B0/B2 representation, confirm it, or withdraw with evidence.
 
@@ -493,20 +846,26 @@ class FunctionalEditMemory(FunctionalMemory):
         else:
             if withdrawal_evidence:
                 raise FunctionalRejection("FUNCTIONAL_EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
-            handles = list(dict.fromkeys(
-                [h for unit in parsed.units for h in unit.evidence]
-                + [h for relation in parsed.relations for h in relation.evidence]
-            ))
-            self._require_delivered(handles)
+            handles = list(
+                dict.fromkeys(
+                    [h for unit in parsed.units for h in unit.evidence]
+                    + [h for relation in parsed.relations for h in relation.evidence]
+                )
+            )
+            self._require_update_delivery(handles, old, _kept_support)
             state = form_state(parsed, self.service, conditioned=self.conditioned)
             if not any(unit["role"] == "content" for unit in state["units"]):
                 raise FunctionalRejection("FUNCTIONAL_EDIT_WITHDRAWAL_REQUIRES_EMPTY_UNITS")
         content = old["content"] if no_change else render_state(state)
         support = self._source_support(old)
-        refs = list(dict.fromkeys([
-            *(fragment_support(self.service, handles)["source_refs"] if handles else []),
-            *old.get("source_refs", [old["source_ref"]]),
-        ]))
+        refs = list(
+            dict.fromkeys(
+                [
+                    *(fragment_support(self.service, handles)["source_refs"] if handles else []),
+                    *old.get("source_refs", [old["source_ref"]]),
+                ]
+            )
+        )
         proposal = {
             "action": "update",
             "id": row["id"],
@@ -527,7 +886,7 @@ class FunctionalEditMemory(FunctionalMemory):
             "requested": requested,
             "edit_state": state,
             "edit_operations": [],
-            "method_version": METHOD_VERSION,
+            "method_version": self.writer.method_version,
             "method_arm": self.arm,
             "patch_operation": "no_change" if no_change else "retract" if retract else "revise",
         }
@@ -577,6 +936,9 @@ class FunctionalEditMemory(FunctionalMemory):
             }
 
     def tools(self) -> tuple[BaseTool, ...]:
+        if self.interface_version != "v1":
+            return self._writer_tools()
+
         def message(name: str, call_id: str, result: dict[str, Any]) -> ToolMessage:
             return ToolMessage(
                 name=name,
@@ -665,9 +1027,13 @@ class FunctionalEditMemory(FunctionalMemory):
             exact readable history and does not physically forget sources or records.
             """
             return message(
-                "update_memory", tool_call_id, self._mutation(
+                "update_memory",
+                tool_call_id,
+                self._mutation(
                     lambda: self.rewrite_edit(
-                        config, tool_call_id, read_handle,
+                        config,
+                        tool_call_id,
+                        read_handle,
                         [unit.model_dump() for unit in units] if units is not None else None,
                         [relation.model_dump() for relation in relations] if relations else [],
                         withdrawal_evidence,
@@ -677,7 +1043,8 @@ class FunctionalEditMemory(FunctionalMemory):
 
         replacements = {
             "save_memory": StructuredTool.from_function(save_memory),
-            "update_memory": StructuredTool.from_function(update_memory) if self.local
+            "update_memory": StructuredTool.from_function(update_memory)
+            if self.local
             else StructuredTool.from_function(
                 rewrite_memory, name="update_memory", args_schema=_WholeRewriteInput
             ),
@@ -692,9 +1059,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 "metadata. Saving is a memory-only effect and proves no business outcome."
             )
         elif self.arm == "B2":
-            replacements["save_memory"].description = (
-                replacements["save_memory"].description.replace("Save M", "Save B2", 1)
-            )
+            replacements["save_memory"].description = replacements[
+                "save_memory"
+            ].description.replace("Save M", "Save B2", 1)
         if self.arm == "B1":
             replacements["update_memory"].description = (
                 "Edit the actual read B1 record using replace/insert/delete. Copy target_unit "
@@ -704,4 +1071,64 @@ class FunctionalEditMemory(FunctionalMemory):
                 "conditions in plain text. Full withdrawal needs a new cancellation witness. "
                 "An empty edits list confirms exact no_change."
             )
+        return tuple(replacements.get(tool.name, tool) for tool in super().tools())
+
+    def _writer_tools(self) -> tuple[BaseTool, ...]:
+        """The same arm catalogue drives real SDK schemas and decoding."""
+        schema = writer_proposal_schema(self.arm)
+        create_schema = next(
+            item for item in schema["oneOf"] if item["properties"]["action"]["const"] == "create"
+        )
+        update_schema = writer_proposal_schema(self.arm, allow_create=False)
+
+        class SaveInput(_WriterSaveInput):
+            proposal: dict[str, Any] = Field(json_schema_extra=create_schema)
+
+        class UpdateInput(_WriterInput):
+            proposal: dict[str, Any] = Field(json_schema_extra=update_schema)
+
+        def save_memory(
+            proposal: dict[str, Any],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            scope: dict[str, Any] | None = None,
+        ) -> ToolMessage:
+            """Create using the current writer packet's e evidence. IDs are issued by the Host."""
+            return result_message("save_memory", config, tool_call_id, proposal, scope)
+
+        def update_memory(
+            proposal: dict[str, Any],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            """Maintain a current writer target r with its legal arm operation, or no_change."""
+            return result_message("update_memory", config, tool_call_id, proposal)
+
+        def result_message(
+            name: str,
+            config: RunnableConfig,
+            call_id: str,
+            proposal: dict[str, Any],
+            scope: dict[str, Any] | None = None,
+        ) -> ToolMessage:
+            def apply() -> dict[str, Any]:
+                if (name == "save_memory") != (proposal.get("action") == "create"):
+                    raise FunctionalRejection("FUNCTIONAL_EDIT_WRITER_TOOL_ACTION_INVALID")
+                return self.apply_writer_proposal(config, call_id, proposal, scope=scope)
+
+            result = self._mutation(apply)
+            return ToolMessage(
+                name=name,
+                tool_call_id=call_id,
+                content=canonical(result),
+                status="success" if result.get("ok") else "error",
+            )
+
+        replacements = {
+            "save_memory": StructuredTool.from_function(save_memory, args_schema=SaveInput),
+            "update_memory": StructuredTool.from_function(update_memory, args_schema=UpdateInput),
+        }
+        replacements["update_memory"].description = self.writer.instructions(allow_create=False)
         return tuple(replacements.get(tool.name, tool) for tool in super().tools())

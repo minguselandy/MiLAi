@@ -1,0 +1,102 @@
+# MiLAi-Edit v2 实验进度与复现入口
+
+本报告记录 2026-10-05 11:55 Asia/Shanghai 的工程检查点。起点为 PR84
+`c16e109c247c37cd84cfe779989d3815f380ddae`，新分支
+`feat/lab-milai-edit-v2-20261005`。完整跟进计划仍执行；本次发布不合并、不暂停实验，
+也不代表候选冻结、科学确认或 Product 就绪。
+
+## 当前进度
+
+| 工作 | 当前证据 | 尚待完成 |
+| --- | --- | --- |
+| v1 E1 历史四臂 | B0/B1 各 277/277 封存；B2 257/277；M 未开始。原进程及冻结方法不改 | B2/M 全部完成后的四用户配对比较及错误分析 |
+| R0 输入诊断 | B0/B1 各 277 个会话、共 560 个批次；153 次容量失败 token 精确复原；固定 24 原输入 | 真实 Writer 检查、最终 v2 队列完整输入统计 |
+| R1 分臂接口 | B0 create/rewrite/no_change，B1 create/edit，B2 条件全量重写，M 条件局部编辑；局部短引用及实际 schema 请求接线 | 真实服务的语法、空数组、多提案、引用与支持效果 |
+| R2 共用交付 | I1 保留重复呈现；I2 等信息去重；可选 I3 自然段核心、相邻条件及整记录工作集；预调用容量安排 | 固定前缀的 I1/I2 因果比较；仅必要时进入 I3 |
+| R3 支持语义 | 旧 h 仅保留已有支持，改变主张须新 e；未改单元支持保留；SDK、CAS、重启和 UNKNOWN 恢复检查 | 真实跨会话条件保持、override/retract 与损伤评估 |
+| R4 评估视图 | 原作者 extracted 原样保留；实际 delta（含删除关系）、state；固定类别分母；缺失旧正文标 UNKNOWN；参考引导只读评估 | 三视图真实评分、共同 Judge、所有方法人工成功/失败/分歧核对 |
+| R5 A/B | 已固定 24 输入；准备 12 个旧/新 Writer 探针及四臂各 3 次正常路径；四开发用户各前 8 个按时间排序会话配置 | CI 与 v1 通道释放后串行真实运行；当前 0 次 v2 模型 HTTP |
+| R5 C/D | 全量范围仍为 277×4 会话；32 个既定原生机会及全部 277 历史漂移 | 冻结一个共同配置，从各自空库开始；实际旧状态 NeverWrite/RetainAll 对照 |
+| R5 E/F | 既定 3 簇/10 受控变化、16 保留用户及 LongMemEval 28 问范围保留 | 候选冻结后确认；LongMemEval 1,354 次历史出现及 10 个完整答案审计、外部方法比较 |
+| R5 G 与交付 | 四臂正常 Host I2 已准备，权限/预算仍沿用 r52 | 同一最终候选的旧 135 案例实际回归，以及冻结后新故事；复现、归因、成本及贡献稿 |
+
+尚未开始的 v1 E2/漂移任务于 02:51 UTC 取消，后续调用数 0。v1 已有模型输出、
+失败和评分保持历史含义；后续机制与漂移须使用 v2 自身形成的状态。
+
+## 固定输入容量结果
+
+在看到任何 v2 输出之前，选定四用户、早中晚阶段的 24 个不同原输入：容量、
+非法动作、错误引用、正常对照各 6 个。全部投影保留完整旧记录、原始时间戳、
+来源正文/范围与关系；I1 保留重复旧正文与支持属性，I2 仅去除重复呈现。
+
+| 六个容量输入的实际模板 token | 最小 | 中位数 | 最大 |
+| --- | ---: | ---: | ---: |
+| 原始 v1 | 58,564 | 64,374.5 | 73,613 |
+| I1 | 33,126 | 37,615.5 | 39,964 |
+| I2 | 17,160 | 19,124 | 21,346 |
+
+I1/I2 各 24/24 在 65,536 上下文内保留 8,192 输出 token 和 512 余量。
+这些是容量结果，不是 Writer 语义成功率。分项 token 非可加统计。
+原型 `capacity-preflight-v1.json` 有时间戳丢失及 I1 过早去重，不作为等信息证据；
+有效产物为 `artifacts/milai-edit/v2-r0/capacity-preflight-v2.json`。
+详细拒绝、引用类别和非单调状态增长见 `MILAI_EDIT_V2_R0_DIAGNOSIS.md`。
+
+## 工程验证与行为边界
+
+受影响正常 Host、SDK、四臂方法、恢复、作者接线、外部接线及分析检查共
+**419 passed**。其中普通 Host 的业务成功/partial 路径已有 I2 参数化检查：
+真实公共沙箱和 SQLite 效果、请求局部 e 引用，以及重复调用不重放业务；模型响应
+为模拟值。后续定向复核覆盖未知 HTTP 停止和重启不重发、截断不提交、整记录容量
+缺口、四臂同 ID 更新、旧 v1 接线，以及只删关系的 delta，**24 passed**。
+集合重叠，不相加。四臂 I2 功能配置各完成一次 prepare 校验，零 HTTP，
+该准备校验不计作实际功能实验。
+
+严格类型检查 11 个改动源码/工具通过；Ruff、Lab DAG/tools/root 边界与
+243-source 所有权矩阵通过。完整原计划逐字节保留。远端新提交的 Fast/Full CI
+结果在草稿 PR 上核对并登记；核对完成前不准入 v2 真实模型。
+
+Lab 的 opt-in proposal schema 与 SDK 参数新增 v2 行为；原 v1 默认保持。
+短引用只在一次实际交付中有效，映射保存真实 ID 和读取版本；模型不填写 UUID 或
+base revision。h 是已有支持的限定保留，不是新证据。完整旧记录不够容量时显式
+记缺口，不拼接未交付正文；无新事实允许空 proposals。未知模型返回立即停止，
+既有请求不可盲目重发；已确认提交丢失响应通过原操作恢复。整个实验沿用现有
+连续账本和串行锁，未增加预算。交付字符覆盖率不等于事实维护成功率。
+
+没有 Product/Archive 源码、权限、Canonical 或部署变更。Product 保持 NO_GO。
+保留用户及未来问题不交给方法源码负责人；原始语料、数据库、请求和本地路径
+产物均 ignored。生成、Reader、Judge 只用现有 Qwen3.6，Judge 不独立，
+不形成跨家族推广结论。
+
+## 复现与后续准入
+
+以下命令从本分支 `MiLAi-Lab` 执行，使用已有环境。`OLD_SUITE` 指原 v1
+`artifacts/milai-edit/e1-dev-v1` 的绝对路径，`PYTHONPATH=src` 明确使用本分支。
+诊断 v1 时须按工具说明指向原封存 v1 evaluator 源码，避免换 schema。
+
+```bash
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/prepare_edit_v2_preflight.py --suite "$OLD_SUITE" \
+  --selection artifacts/milai-edit/v2-r0/fixed-input-diagnosis.json \
+  --output artifacts/milai-edit/v2-r0/capacity-preflight-new.json
+```
+
+真实命令须在本提交 CI 通过、v1 E1 完成并释放连续账本锁后执行，串行且使用
+新的独立空库；旧/新探针只读、不初始化正式库。工具缓存原请求及响应，遇未知
+结果停止，重启不得通过换输出目录盲目重复同一未确认请求。
+
+```bash
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/run_edit_interface_checks.py --config configs/milai-edit-v2-pilot-i2.json \
+  --preflight artifacts/milai-edit/v2-r0/capacity-preflight-v2.json \
+  --output artifacts/milai-edit/v2-stage-a-v1
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/run_edit_suite.py configs/milai-edit-v2-pilot-i1.json \
+  artifacts/milai-edit/v2-pilot-i1 --benchmark halumem
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/run_edit_suite.py configs/milai-edit-v2-pilot-i2.json \
+  artifacts/milai-edit/v2-pilot-i2 --benchmark halumem
+```
+
+前缀结果只用于按计划选择公共交付方案，不作为最终科学结论。全量配置、
+最终候选与 Writer 冻结分别在对应门槛处登记，当前尚未完成。回滚代码起点为
+`c16e109`；运行中的 v1 及历史产物另行保留，不因回滚代码自动重跑。

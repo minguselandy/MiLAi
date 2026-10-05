@@ -67,6 +67,7 @@ def prepared(
     explicit_reads: bool = False,
     memory_continuation: bool = False,
     memory_method: str = "functional_v1",
+    edit_interface_version: str = "v1",
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -147,6 +148,8 @@ def prepared(
         "unified_assertion_v1" if readonly_finalization
         else "content_and_scope_v1",
     }
+    if edit_interface_version != "v1":
+        settings["edit_interface_version"] = edit_interface_version
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
     root = tmp_path / "run"
@@ -228,6 +231,7 @@ def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
 
 
 @pytest.mark.parametrize("label_available", [True, False])
+@pytest.mark.parametrize("edit_interface_version", ["v1", "I2"])
 @pytest.mark.parametrize("arm,method,representation", [
     ("M", "milai_edit_m_v1", "conditioned_v1"),
     ("B1", "milai_edit_b1_v1", "plain_v1"),
@@ -236,10 +240,10 @@ def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
 ])
 def test_edit_uses_actual_business_delivery_on_the_normal_host(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, label_available: bool,
-    arm: str, method: str, representation: str,
+    arm: str, method: str, representation: str, edit_interface_version: str,
 ) -> None:
     root = prepared(tmp_path, native=True, request_interpretation=True,
-                    memory_method=method)
+                    memory_method=method, edit_interface_version=edit_interface_version)
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal == 1:
@@ -247,7 +251,8 @@ def test_edit_uses_actual_business_delivery_on_the_normal_host(
         if ordinal == 2:
             schema = next(t["function"]["parameters"] for t in wire["tools"]
                           if t["function"]["name"] == "save_memory")
-            assert "units" in schema["properties"]
+            field = "proposal" if edit_interface_version == "I2" else "units"
+            assert field in schema["properties"]
             return native_call("reserve_and_label", "reserve", item_key="edit receipt item",
                                quantity=1, destination="local", packing="box")
         if ordinal == 3:
@@ -256,6 +261,13 @@ def test_edit_uses_actual_business_delivery_on_the_normal_host(
             handles = [r["fragment_handle"] for r in observed["source_fragment_index"]]
             claim = ("The item is reserved and labeled." if label_available
                      else "The item is reserved; labeling failed.")
+            if edit_interface_version == "I2":
+                packet = materials(wire)["writer_packet"]
+                tool_sources = {s["id"] for s in packet["source_table"] if s["role"] == "tool"}
+                aliases = [e["id"] for e in packet["evidence"] if e["source"] in tool_sources]
+                assert aliases
+                return native_call("save_memory", "save", proposal={"action": "create", "units": [
+                    {"text": claim, "role": "content", "evidence": aliases}]})
             return native_call("save_memory", "save", units=[
                 {"text": claim, "role": "content", "evidence": handles}])
         assert ordinal == 4

@@ -653,6 +653,7 @@ def prepare(
         "declaration_sampling",
         "capability_delivery",
         "memory_method",
+        "edit_interface_version",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -660,6 +661,11 @@ def prepare(
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
+    edit_interface = settings.get("edit_interface_version", "v1")
+    if edit_interface not in {"v1", "I1", "I2"}:
+        raise ValueError("FUNCTIONAL_EDIT_INTERFACE_INVALID")
+    if edit_interface != "v1" and settings.get("memory_method") not in FUNCTIONAL_ARMS:
+        raise ValueError("FUNCTIONAL_EDIT_INTERFACE_REQUIRES_EDIT_METHOD")
     capacity_keys = {
         "model",
         "tokenizer_path",
@@ -1855,6 +1861,7 @@ def message(
             memory_options: dict[str, Any] = {}
             if memory_class is FunctionalEditMemory:
                 memory_options["arm"] = edit_arm
+                memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
             memory = memory_class(
                 service,
                 capacity.text_tokens,
@@ -2191,6 +2198,10 @@ def message(
                 capability_text = ""
                 if isinstance(memory, FunctionalEditMemory):
                     _note_edit_tool_delivery(memory, config, wire_messages)
+                    if memory.interface_version != "v1":
+                        material = memory.writer_context(
+                            session, message_id, freeze["config_version"], query=content
+                        )
                 if settings.get("capability_delivery") == "actual_catalog_v1":
                     active = [] if for_finalization else sorted(allowed_tools)
                     capability_text = (

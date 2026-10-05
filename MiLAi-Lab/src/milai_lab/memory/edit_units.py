@@ -374,3 +374,311 @@ def render_state(state: dict[str, Any]) -> str:
         if conditions:
             lines.append("  Applies under: " + "; ".join(conditions))
     return "\n".join(lines)
+
+
+# This directory is the single source for the opt-in writer interface. The v1 DTO
+# remains unchanged so archived callers retain their exact public contract.
+ARM_OPERATIONS: dict[str, tuple[str, ...]] = {
+    "B0": (),
+    "B1": ("replace", "insert", "delete"),
+    "B2": (),
+    "M": ("replace", "append", "override", "retract"),
+}
+OPERATION_INSTRUCTIONS = {
+    "replace": "replace changes only target_unit text/support; it retains that unit's role. ",
+    "insert": "insert follows target_unit, or appends when target_unit is omitted or null. ",
+    "delete": "delete removes target_unit; cancellation does not assert its opposite. ",
+    "append": "append adds a unit; a condition explicitly lists content targets in attach_to. ",
+    "override": "override needs condition text; shared_conditions explicitly selects retained "
+    "conditions, never automatically copying them to a new subject. ",
+    "retract": "retract removes target_unit and incident relations, preserving other scopes. ",
+}
+
+
+def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, Any]:
+    """Thin legal proposals: no model-issued persistent IDs or revisions."""
+    if arm not in ARM_OPERATIONS:
+        raise ValueError("EDIT_ARM_INVALID")
+    conditioned = arm in {"B2", "M"}
+
+    def obj(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": fields,
+            "required": required,
+            "additionalProperties": False,
+        }
+
+    def ref(prefix: str) -> dict[str, Any]:
+        return {"type": "string", "pattern": "^" + prefix + "[1-9][0-9]*$"}
+
+    def refs(prefix: str, minimum: int = 0) -> dict[str, Any]:
+        return {"type": "array", "items": ref(prefix), "minItems": minimum}
+
+    text = {"type": "string", "minLength": 1}
+    support = {"evidence": refs("e"), "keep_support": refs("h")}
+    role = {"type": "string", "enum": ["content", "condition"] if conditioned else ["content"]}
+
+    def units(create: bool) -> dict[str, Any]:
+        fields = {"text": text, "role": role, **support}
+        if create:
+            fields.pop("keep_support")
+            fields["evidence"] = refs("e", 1)
+        return {
+            "type": "array",
+            "items": obj(fields, ["text", "evidence"]),
+            "minItems": 1 if create else 0,
+        }
+
+    def relations(create: bool) -> dict[str, Any]:
+        index = {"type": "integer", "minimum": 0}
+        fields = {
+            "source": index,
+            "target": index,
+            "relation_type": {"enum": ["modifies", "overrides"], "type": "string"},
+            **support,
+        }
+        if create:
+            fields.pop("keep_support")
+            fields["evidence"] = refs("e", 1)
+        return {
+            "type": "array",
+            "items": obj(fields, ["source", "target", "relation_type", "evidence"]),
+        }
+
+    def state_fields(create: bool) -> dict[str, Any]:
+        fields = {"units": units(create)}
+        if conditioned:
+            fields["relations"] = relations(create)
+        return fields
+
+    variants = []
+    if allow_create:
+        variants.append(
+            obj({"action": {"const": "create"}, **state_fields(True)}, ["action", "units"])
+        )
+    if not ARM_OPERATIONS[arm]:
+        fields = {
+            "action": {"const": "rewrite"},
+            "target": ref("r"),
+            **state_fields(False),
+            "withdrawal_evidence": refs("e", 1),
+        }
+        variants.append(obj(fields, ["action", "target", "units"]))
+    else:
+        edits = []
+        for operation in ARM_OPERATIONS[arm]:
+            fields = {"operation": {"const": operation}, "evidence": refs("e", 1)}
+            required = ["operation", "evidence"]
+            if operation in {"replace", "delete", "retract", "override"}:
+                fields["target_unit"] = ref("u")
+                required.append("target_unit")
+            elif operation == "insert":
+                fields["target_unit"] = {"anyOf": [ref("u"), {"type": "null"}]}
+            if operation not in {"delete", "retract"}:
+                fields["text"] = text
+                required.append("text")
+            if operation == "replace":
+                fields.update(support)
+            if operation in {"insert", "append"}:
+                fields["role"] = role
+            if operation == "append":
+                fields["attach_to"] = refs("u")
+            if operation == "override":
+                fields["condition"] = text
+                fields["shared_conditions"] = refs("u")
+                required.append("condition")
+            edits.append(obj(fields, required))
+        variants.append(
+            obj(
+                {
+                    "action": {"const": "edit"},
+                    "target": ref("r"),
+                    "edits": {"type": "array", "minItems": 1, "items": {"oneOf": edits}},
+                },
+                ["action", "target", "edits"],
+            )
+        )
+    variants.append(obj({"action": {"const": "no_change"}, "target": ref("r")}, ["action"]))
+    return {"oneOf": variants}
+
+
+def writer_projection(
+    delivery: dict[str, Any], profile: str, arm: str, *, allow_create: bool
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Pure projection for request budgeting, including old immutable snapshots.
+
+    No Store reads, source resolution, fresh delivery claims, or persistence occur
+    here. Only EditMemory.writer_view can turn this draft into an executable map.
+    """
+    records: dict[str, Any] = {}
+    units: dict[str, Any] = {}
+    fresh: dict[str, Any] = {}
+    prior: dict[str, Any] = {}
+    sources: dict[tuple[str, int], str] = {}
+    attributes = []
+    public_evidence = []
+    public_records: list[dict[str, Any]] = []
+    public_support = []
+    source_rows = {row["source_ref"]: row for row in delivery.get("sources", [])}
+
+    def source_id(ref: dict[str, Any]) -> str:
+        key = (ref["source_ref"], ref["source_revision"])
+        if key not in sources:
+            alias = "s" + str(len(sources) + 1)
+            sources[key] = alias
+            row = source_rows.get(key[0], {})
+            attributes.append(
+                {
+                    "id": alias,
+                    "role": row.get("role", "not_redelivered"),
+                    "observed_at": row.get("observed_at"),
+                    "source_revision": key[1],
+                }
+            )
+            if "timestamp" in row:
+                attributes[-1]["timestamp"] = copy.deepcopy(row["timestamp"])
+        return sources[key]
+
+    for source in delivery.get("sources", []):
+        alias = "e" + str(len(fresh) + 1)
+        fresh[alias] = copy.deepcopy(source)
+        public_evidence.append(
+            {
+                "id": alias,
+                "source": source_id(source),
+                "range": [source["start"], source["end"]],
+                "text": source["text"],
+            }
+        )
+    for record in delivery.get("records", []):
+        record_alias = "r" + str(len(records) + 1)
+        records[record_alias] = copy.deepcopy(record)
+        state = record.get("edit_state")
+        public_units, public_relations = [], []
+        by_id = {}
+        if state:
+            for unit in state["units"]:
+                alias = "u" + str(len(units) + 1)
+                by_id[unit["unit_id"]] = alias
+                units[alias] = {"record": record_alias, **copy.deepcopy(unit)}
+                public_units.append({"id": alias, "role": unit["role"], "text": unit["text"]})
+
+            def support_id(
+                item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias
+            ) -> str:
+                alias = "h" + str(len(prior) + 1)
+                refs = copy.deepcopy(item["evidence_refs"])
+                prior[alias] = {"record": record_alias, "evidence_refs": refs, **binding}
+                public_support.append(
+                    {
+                        "id": alias,
+                        "use": "EXISTING_SUPPORT_ONLY",
+                        "record": record_alias,
+                        **binding,
+                        "ranges": [
+                            {"source": source_id(ref), "range": [ref["start"], ref["end"]]}
+                            for ref in refs
+                        ],
+                    }
+                )
+                return alias
+
+            for item, public in zip(state["units"], public_units, strict=True):
+                public["support"] = [support_id(item, {"unit": public["id"]})]
+            for relation in state["relations"]:
+                binding = {
+                    "source": by_id[relation["source_unit"]],
+                    "target": by_id[relation["target_unit"]],
+                    "relation_type": relation["relation_type"],
+                }
+                public_relations.append({**binding, "support": [support_id(relation, binding)]})
+        else:
+            # Legacy records stay readable; no invented unit formation or support.
+            public_units = [{"text": record["content"], "role": "legacy_unstructured"}]
+        public_record = {
+            "id": record_alias,
+            "representation": state["representation"] if state else "legacy_unstructured",
+            "units": public_units,
+            "relations": public_relations,
+        }
+        if "scope" in record:
+            public_record["scope"] = copy.deepcopy(record["scope"])
+        if profile == "I1":
+            # Preserve v1's repeated text view, but remove persistent identifiers.
+            repeated = (
+                {
+                    "representation": state["representation"],
+                    "units": public_units,
+                    "relations": public_relations,
+                }
+                if state
+                else None
+            )
+            if state and state["representation"] == "conditioned_v1":
+                renderable = copy.deepcopy(state)
+                for unit in renderable["units"]:
+                    unit["unit_id"] = by_id[unit["unit_id"]]
+                for relation in renderable["relations"]:
+                    relation["source_unit"] = by_id[relation["source_unit"]]
+                    relation["target_unit"] = by_id[relation["target_unit"]]
+                content = render_state(renderable)
+            else:
+                content = record["content"]
+            public_record["content"] = content
+            public_record["edit_state"] = repeated
+            public_record.pop("units")
+            public_record.pop("relations")
+        public_records.append(public_record)
+    packet = {
+        "interface_version": profile,
+        "arm": arm,
+        "allow_create": allow_create,
+        "records": public_records,
+        "evidence": public_evidence,
+        "historical_support": public_support,
+        "source_table": attributes,
+    }
+    if profile == "I1":
+        # I1 retains v1's repeated support metadata as well as its two text
+        # views. I2 factors these exact attributes into one global table.
+        by_source = {attribute["id"]: attribute for attribute in attributes}
+        by_support = {support["id"]: support for support in public_support}
+
+        def repeated_refs(support_ids: list[str]) -> list[dict[str, Any]]:
+            return [
+                {
+                    "support": support_id,
+                    **span,
+                    **{
+                        key: value
+                        for key, value in by_source[span["source"]].items()
+                        if key != "id"
+                    },
+                    "body_delivered": False,
+                }
+                for support_id in support_ids
+                for span in by_support[support_id]["ranges"]
+            ]
+
+        for public_record in public_records:
+            repeated = public_record["edit_state"]
+            if repeated:
+                for item in [*repeated["units"], *repeated["relations"]]:
+                    item["evidence_refs"] = repeated_refs(item["support"])
+        packet["historical_evidence"] = repeated_refs(list(by_support))
+        for evidence in public_evidence:
+            evidence.update(
+                {key: value for key, value in by_source[evidence["source"]].items() if key != "id"}
+            )
+            evidence["body_delivered"] = True
+    draft = {
+        "arm": arm,
+        "interface_version": profile,
+        "allow_create": allow_create,
+        "records": records,
+        "units": units,
+        "evidence": fresh,
+        "support": prior,
+    }
+    return packet, draft

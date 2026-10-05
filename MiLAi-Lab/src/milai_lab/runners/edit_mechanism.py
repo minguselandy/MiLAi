@@ -211,7 +211,15 @@ def grounded_ranges(
                 seen.add(identity)
                 source = service.source(ref["source_ref"])
                 if source is None or source["source_revision"] != ref["source_revision"]:
-                    raise ValueError("Actual old-state source binding unavailable")
+                    result.append(
+                        {
+                            "source_id": "old_source_" + str(len(result)),
+                            "status": "UNKNOWN",
+                            "body_delivered": False,
+                            "reason": "actual old-state source binding unavailable",
+                        }
+                    )
+                    continue
                 result.append(
                     {
                         "source_id": "old_source_" + str(len(result)),

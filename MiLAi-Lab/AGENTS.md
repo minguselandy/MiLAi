@@ -1,3 +1,25 @@
+# 2026-10-05 MiLAi-Edit v2 follow-up execution
+
+The active user goal explicitly activates
+docs/MILAI_EDIT_V2_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md in full.
+Complete R0–R5 and the inherited E0–E5/six deliverables; the v1 implementation and
+results remain historical evidence. Work only in development-milai-edit-v2 from
+c16e109; do not modify the running v1 E1 worktree or its frozen method sources.
+Let that E1 finish unchanged. Its unstarted v1 mechanism/drift queue was cancelled
+with zero follow-up model calls so that later evaluations use the v2 cohort.
+Root retains serial model HTTP, continuous accounting, splits and evaluation;
+the existing delegated edit_core source owner retains method/memory/SDK work.
+Never give that owner reference memories, scorer labels, future questions or
+reserved-source contents. One owner per file. Thin arm-specific schemas, exact
+request-local references, common compact views/working sets and explicit existing
+support belong in the shared four-arm interface, not benchmark-specific rules.
+Use existing services and Qwen3.6 only, as expressly instructed by the user.
+Keep all raw artifacts ignored; no Product/Archive changes or new deployment.
+Affected checks and own CI precede model admission. GitHub progress publication
+is authorized by the existing request; no merge is authorized for this work.
+
+---
+
 # 2026-10-04 MiLAi-Edit execution
 
 The current user activated docs/MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md in full.
