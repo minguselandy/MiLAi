@@ -231,6 +231,8 @@ def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
 @pytest.mark.parametrize("arm,method,representation", [
     ("M", "milai_edit_m_v1", "conditioned_v1"),
     ("B1", "milai_edit_b1_v1", "plain_v1"),
+    ("B0", "milai_edit_b0_v1", "plain_v1"),
+    ("B2", "milai_edit_b2_v1", "conditioned_v1"),
 ])
 def test_edit_uses_actual_business_delivery_on_the_normal_host(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, label_available: bool,
@@ -281,6 +283,7 @@ def test_edit_uses_actual_business_delivery_on_the_normal_host(
 ])
 @pytest.mark.parametrize("arm,method", [
     ("M", "milai_edit_m_v1"), ("B1", "milai_edit_b1_v1"),
+    ("B0", "milai_edit_b0_v1"), ("B2", "milai_edit_b2_v1"),
 ])
 def test_edit_recovery_supports_only_the_actual_discovery_body(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, boundary: str, happened: bool,
@@ -376,7 +379,86 @@ def test_edit_normal_host_replaces_on_same_id_and_preserves_other_support(
     assert functional.message(root, **common, **args) == updated and len(wires) == 4
 
 
-@pytest.mark.parametrize("method", ["milai_edit_m_v1", "milai_edit_b1_v1"])
+@pytest.mark.parametrize("arm,method", [
+    ("B0", "milai_edit_b0_v1"), ("B2", "milai_edit_b2_v1"),
+])
+def test_rewrite_normal_host_replaces_complete_state_then_confirms_without_revision(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, method: str,
+) -> None:
+    root = prepared(tmp_path, native=True, memory_method=method)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 3, 5}:
+            packet = materials(wire)
+            handles = [u["fragment_handle"] for u in packet["items"]
+                       if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            version = "A" if ordinal == 1 else "B"
+            units = [
+                {"text": f"Use unit {version}." if arm == "B2" else
+                         f"Use unit {version} only on weekdays.",
+                 "role": "content", "evidence": handles},
+                {"text": "Retain the weekly review.", "role": "content", "evidence": handles},
+            ]
+            relations: list[dict[str, Any]] = []
+            if arm == "B2":
+                units.append({"text": "Only on weekdays.", "role": "condition",
+                              "evidence": handles})
+                relations.append({"source": 2, "relation_type": "modifies", "target": 0,
+                                  "evidence": handles})
+            if ordinal == 1:
+                return native_call("save_memory", "save", units=units, relations=relations,
+                                   scope={"project": "local rewrite sample"})
+            target = next(u for u in packet["items"]
+                          if u["type"] == "record" and u["content"].startswith("Use unit"))
+            assert target["method_arm"] == arm
+            schema = next(t["function"]["parameters"] for t in wire["tools"]
+                          if t["function"]["name"] == "update_memory")
+            assert "units" in schema["properties"] and "edits" not in schema["properties"]
+            if ordinal == 5:
+                return native_call("update_memory", "confirm", read_handle=target["read_handle"])
+            return native_call("update_memory", "rewrite", read_handle=target["read_handle"],
+                               units=units, relations=relations)
+        assert ordinal in {2, 4, 6}
+        assert actual_tool_receipt(wire)["status"] == (
+            "no_change" if ordinal == 6 else "committed")
+        return {"role": "assistant", "content": "The actual memory operation is confirmed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="b", owner="alice", session="s")
+    saved = functional.message(root, **common, message_id="initial",
+        content="Remember: for the local rewrite sample use unit A only on weekdays; "
+                "retain the weekly review.")
+    updated = functional.message(root, **common, message_id="rewrite",
+        content="For that same local rewrite sample use unit B only on weekdays instead; "
+                "retain the weekly review.")
+    unchanged = functional.message(root, **common, message_id="confirm",
+        content="Confirm that the existing arrangement remains unchanged.")
+    assert saved["status"] == updated["status"] == unchanged["status"] == "COMPLETED"
+    assert len(wires) == 6 and len(unchanged["records"]) == 1
+    old = saved["records"][0]
+    current = updated["records"][0]
+    assert current["id"] == old["id"]
+    assert unchanged["records"] == updated["records"]
+    value = current["value"]
+    assert value["revision"] == 2 and value["scope"] == old["value"]["scope"]
+    state = value["edit_state"]
+    assert state["representation"] == ("conditioned_v1" if arm == "B2" else "plain_v1")
+    assert len(state["units"]) == (3 if arm == "B2" else 2)
+    assert len(state["relations"]) == int(arm == "B2")
+    assert state["units"][1]["text"] == old["value"]["edit_state"]["units"][1]["text"]
+    assert {u["unit_id"] for u in state["units"]}.isdisjoint(
+        u["unit_id"] for u in old["value"]["edit_state"]["units"])
+    assert {ref["source_ref"] for u in state["units"] for ref in u["evidence_refs"]} == {
+        updated["capture"]["source_ref"]}
+    if arm == "B2":
+        relation = state["relations"][0]
+        assert relation["source_unit"] == state["units"][2]["unit_id"]
+        assert relation["target_unit"] == state["units"][0]["unit_id"]
+
+
+@pytest.mark.parametrize("method", [
+    "milai_edit_m_v1", "milai_edit_b1_v1", "milai_edit_b0_v1", "milai_edit_b2_v1",
+])
 @pytest.mark.parametrize("business", [False, True])
 def test_current_host_outputs_reach_existing_offline_evaluator_without_digest_fields(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, method: str, business: bool,

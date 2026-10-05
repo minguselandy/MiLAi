@@ -152,11 +152,14 @@ independent order swap. It is separate from official and natural-user evidence:
 E5 uses the same final candidate through `tools/run_functional.py`, fresh banks and
 the historical public L1/L2/L3/old-L4 inputs. New functional stories are authored
 after candidate freeze. `configs/milai-edit-e5-functional-v1.json` is an unadmitted
-M integration configuration; `configs/milai-edit-e5-functional-b1-v1.json` is the
-matching B1 configuration. Both were validated with the actual local tokenizer and
-zero HTTP. Neither predetermines the final candidate; if B0 or B2 is selected,
-complete its matching functional adaptation before actual E5 admission. The
-availability of an adapter is not a selection criterion. Before actual E5 admission,
+M integration configuration. Matching B0, B1 and B2 configurations are
+`configs/milai-edit-e5-functional-b0-v1.json`,
+`configs/milai-edit-e5-functional-b1-v1.json` and
+`configs/milai-edit-e5-functional-b2-v1.json`. All four use the actual normal Host
+and the same MemoryService. B0/B2 regenerate complete representations; M/B1 retain
+their local operators. All four were validated with the actual local tokenizer
+and zero HTTP. None predetermines the final candidate. The availability of an
+adapter is not a selection criterion. Before actual E5 admission,
 copy the admitted source into its ignored run root, as done for E1; ordinary
 configuration/version metadata does not itself preserve those source bodies.
 The main functional configuration retains r52 sampling/material/call/queue bounds
@@ -183,13 +186,16 @@ sealed input; do not reinterpret these historical inputs as new unseen samples.
 
 Use the existing `tools/v13_5_evaluate.py` for read-only mechanical review packs.
 
-The offline public-input preflight report is
-`artifacts/milai-edit/e5-inputs/preflight-current-v2.json`, with its runner retained
-beside it. It checks these same 135 cases independently under M and B1: exact
+The latest offline public-input preflight report is
+`artifacts/milai-edit/e5-inputs/preflight-current-v3.json`, with its runner retained
+beside it. It checks the same 135 cases under B0, B1, B2 and M: 540 repeated
+interface compatibility checks, not 540 independent functional stories. Exact
 fixture freeze, actual Source import and candidate-range binding, and first-message
-ordinary material under the actual 8192-token bound. Later public messages remain
-in the input freeze. Temporary banks were removed and HTTP was prohibited; there
-are no semantic memory records or functional acceptance verdicts. The first v1
+ordinary material under the actual 8192-token bound are preserved. Each interface
+imports the same 145 raw Sources and validates the same 1064 candidate ranges;
+all 192 public messages remain in each input freeze. Temporary banks were removed
+and HTTP was prohibited; there are no semantic memory records or functional
+acceptance verdicts. The earlier M/B1 v2 report remains preserved. The first v1
 preflight/log retain a script namespace error; they are not model failure evidence.
 Reproduction uses fresh output names because the scripts refuse existing reports.
 

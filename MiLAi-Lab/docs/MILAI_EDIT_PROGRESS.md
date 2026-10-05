@@ -213,3 +213,39 @@ Only Qwen3.6 endpoints were found. The user subsequently instructed: “不接�
 计划按照一个模型家族来完成任务”. The original second-family requirement is explicitly
 superseded. Execute all remaining work with one family and limit the resulting
 generalization claim accordingly; no new endpoint or deployment is requested.
+
+### 2026-10-05 four-arm functional preparation
+
+Normal-entry adapters now cover B0/B1/B2/M, so scientific candidate selection is
+not constrained by the previously available M/B1 interfaces. B0/B2 use complete
+representation rewrites through the existing constructor and MemoryService;
+B0/B1 share `plain_v1`, and B2/M share `conditioned_v1`. M/B1 local operators and
+default M remain unchanged. B0/B2 reject extra local-edit tool arguments, confirm
+without a revision when units are omitted, and require actual new cancellation
+evidence for explicit empty-unit withdrawal. Same-ID scope/history/CAS, delivered
+Source support, partial/UNKNOWN effects, recovery and forgetting remain enforced.
+Scope-only updates and automatic legacy-representation conversion remain unsupported.
+
+The source-owner adapter suite passes 46 actual SDK checks; the complete normal
+Host suite passes 252. Its 26 focused checks are included in that total. Both changed
+source modules pass strict typing; Ruff, package/tools boundaries and the 242-source
+ownership matrix pass. A first adapter test run exposed a missing test import,
+which was corrected before rerunning the complete set. Source-owner work remained
+source-only, without HTTP or benchmark content access. All nine E1 source-copy
+files remain byte-identical.
+
+`preflight-current-v3.json` preserves the earlier v1/v2 reports and checks the same
+135 historical public cases under all four interfaces: 540 repeated compatibility
+checks, 192 messages/145 raw Sources/1064 ordered candidate ranges per interface.
+Only first-message material is delivered under the actual 8192-token bound, later
+messages remain frozen, temporary banks are removed, and no HTTP or semantic memory
+initialization occurs. All four prepared configurations preserve r52 host, sampling,
+capacity and call/queue bounds, with extra support review disabled in the main cohort.
+This is engineering preparation; E5 remains unadmitted, the final candidate is not
+frozen, new stories await that freeze, and E1 continues with its unchanged implementation.
+
+Root prepared a local serial continuation for completed-E1 analysis, E2 native
+mechanism scoring and E4 native drift. It uses a copied evaluator source and the
+same continuous ledger, waits for the existing E1 process, and invokes the existing
+all-arm completion check before any further model call. It does not restart E1,
+select a candidate or admit reserved/external, controlled or functional cohorts.

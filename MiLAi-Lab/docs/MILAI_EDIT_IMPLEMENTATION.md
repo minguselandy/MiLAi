@@ -85,14 +85,23 @@ length and structural failures consume the first opportunity without an addition
 semantic repair; unknown effects remain unresolved. A common Reader receives the
 current rendered memories. Reference memories and future QA are evaluator-only.
 
-The optional normal Host integrations are `memory_method=milai_edit_m_v1` and
-`memory_method=milai_edit_b1_v1`. Both use FunctionalEditMemory over the same
-service and Reader; its default is M and the B1 option uses `arm="B1"`.
-B1 stores `plain_v1` and accepts replace/insert/delete, without silently converting
-an existing conditioned or legacy record. This keeps candidate selection open rather
-than forcing M through the functional adapter. Tools retain their
-normal names; formation takes source-grounded units/relations and revisions take
-the current read handle plus local edits. Successfully delivered raw reads register
+The optional normal Host integrations are `memory_method=milai_edit_b0_v1`,
+`milai_edit_b1_v1`, `milai_edit_b2_v1` and `milai_edit_m_v1`. All use
+FunctionalEditMemory over the same service and Reader; its default remains M.
+B0/B1 store `plain_v1`; B2/M store the same `conditioned_v1`. B1 accepts
+replace/insert/delete, and M accepts replace/append/override/retract.
+B0/B2 regenerate every unit and relation through the original whole-state
+constructor, retaining the record ID and metadata scope. No arm silently converts
+an existing incompatible representation or legacy record. Tools retain their
+normal names; formation takes source-grounded units/relations. M/B1 revisions take
+the current read handle plus local edits; B0/B2 revisions take the current read
+handle plus the complete replacement units/relations. For B0/B2, omitted/null
+units confirms exact no_change; explicit empty units withdraws the whole record
+and requires actually delivered cancellation evidence beyond its old affirmative
+support ranges. Extra tool arguments, including local `edits`, are rejected rather
+than silently discarded as a no-change request. Whole withdrawal retains readable
+history and is distinct from forgetting. Adapter availability does not select a
+scientific candidate. Successfully delivered raw reads register
 their actual fragment handles. Business observations register only after the
 corresponding ToolMessage survives visibility and response filtering. A captured
 but undelivered source is not write evidence. Original UNKNOWN mutations remain
@@ -133,6 +142,19 @@ mechanics and compatibility, not additional independent model samples.
 The normal-schema offline evaluator's historical/SQLite/actual Host-linkage set
 passes 76 checks and strict typing. Scripted provider replies in those checks do
 not constitute actual-model functional acceptance.
+
+The 2026-10-05 four-arm normal-entry extension passes 46 actual SDK adapter checks
+and 252 complete normal Host checks. The 26 focused Host checks are part of that
+252-case set, not additional samples. New checks cover complete B0/B2 rewrites,
+B2 conditions/relations, pure confirmation, same-ID history/CAS, explicit rejection
+of local-edit arguments, actual partial/UNKNOWN business evidence, recovery across
+both Store put windows and Reader/forget after reopening. The source owner's first
+expanded test run exposed a missing test import; it was corrected and the complete
+46-case set rerun. Strict typing of both changed modules, Ruff, package/tools
+boundaries and the 242-source ownership matrix pass. All nine frozen E1 source
+copies and the original plan remain unchanged. Four-arm public-input preflight
+passes 540 repeated checks of 135 historical cases, with zero HTTP or semantic
+initialization. Source/effect compatibility remains separate from E5 model acceptance.
 
 These are engineering checks. They do not establish correct semantic scope
 selection, useful public-task outcomes, independent Judge validation, cross-family

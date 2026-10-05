@@ -56,8 +56,7 @@ from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.functional_edit_memory import (
-    FUNCTIONAL_B1_METHOD,
-    FUNCTIONAL_METHOD,
+    FUNCTIONAL_ARMS,
     FunctionalEditMemory,
 )
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
@@ -658,9 +657,8 @@ def prepare(
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
                          + ",".join(sorted(set(settings) - allowed)))
-    if settings.get("memory_method", "functional_v1") not in {
-        "functional_v1", FUNCTIONAL_METHOD, FUNCTIONAL_B1_METHOD
-    }:
+    if (settings.get("memory_method", "functional_v1") != "functional_v1"
+            and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
     capacity_keys = {
         "model",
@@ -1852,15 +1850,11 @@ def message(
                     comparison=(settings.get("support_review_comparison")
                                 == "explicit_dimensions_v1"))
 
-            memory_class = (FunctionalEditMemory
-                            if settings.get("memory_method") in {
-                                FUNCTIONAL_METHOD, FUNCTIONAL_B1_METHOD}
-                            else FunctionalMemory)
+            edit_arm = FUNCTIONAL_ARMS.get(settings.get("memory_method", "functional_v1"))
+            memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
             memory_options: dict[str, Any] = {}
             if memory_class is FunctionalEditMemory:
-                memory_options["arm"] = (
-                    "B1" if settings.get("memory_method") == FUNCTIONAL_B1_METHOD else "M"
-                )
+                memory_options["arm"] = edit_arm
             memory = memory_class(
                 service,
                 capacity.text_tokens,

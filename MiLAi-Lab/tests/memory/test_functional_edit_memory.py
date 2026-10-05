@@ -14,6 +14,7 @@ from typing import Any
 import pytest
 from langchain_core.messages import AIMessage, HumanMessage
 from langgraph.store.sqlite import SqliteStore
+from pydantic import ValidationError
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
@@ -21,7 +22,11 @@ from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, reference_key
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.functional_edit_memory import (
+    FUNCTIONAL_ARMS,
+    FUNCTIONAL_B0_METHOD,
     FUNCTIONAL_B1_METHOD,
+    FUNCTIONAL_B2_METHOD,
+    FUNCTIONAL_METHOD,
     FunctionalEditMemory,
 )
 
@@ -117,6 +122,37 @@ def plain_args(handles: list[str]) -> dict[str, Any]:
     }
 
 
+def whole_rewrite_args(
+    row: dict[str, Any], text: str, evidence: list[str]
+) -> dict[str, Any]:
+    state = row["value"]["edit_state"]
+    indexes = {unit["unit_id"]: i for i, unit in enumerate(state["units"])}
+    units = [
+        {"text": text if i == 0 else unit["text"], "role": unit["role"], "evidence": evidence}
+        for i, unit in enumerate(state["units"])
+    ]
+    return {
+        "read_handle": row["candidate_handle"],
+        "units": units,
+        "relations": [{
+            "source": indexes[relation["source_unit"]],
+            "target": indexes[relation["target_unit"]],
+            "relation_type": relation["relation_type"], "evidence": evidence,
+        } for relation in state["relations"]],
+    }
+
+
+def test_four_arm_public_mapping_retains_the_default_m_identity(tmp_path: Path) -> None:
+    assert FUNCTIONAL_ARMS == {
+        FUNCTIONAL_B0_METHOD: "B0", FUNCTIONAL_B1_METHOD: "B1",
+        FUNCTIONAL_B2_METHOD: "B2", FUNCTIONAL_METHOD: "M",
+    }
+    with opened(tmp_path) as memory:
+        assert memory.arm == "M" and memory.policy["memory_method"] == FUNCTIONAL_METHOD
+        assert memory.policy["integration_version"] == "functional_m_v1"
+        assert memory.formation_support_review is None and memory.revision_support_review is None
+
+
 def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_path: Path) -> None:
     with FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app:
         with opened(tmp_path) as memory:
@@ -177,7 +213,7 @@ def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_p
 
 
 @pytest.mark.parametrize("stage", ["formation", "revision"])
-@pytest.mark.parametrize("arm", ["M", "B1"])
+@pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revision(
     tmp_path: Path, stage: str, arm: str
 ) -> None:
@@ -193,7 +229,7 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
         content = next(c for c in evidence["changes"] if c["field"] == "content")
         assert content["after"] == proposal["content"]
         assert proposal["edit_state"]["representation"] == (
-            "conditioned_v1" if arm == "M" else "plain_v1"
+            "conditioned_v1" if arm in {"M", "B2"} else "plain_v1"
         )
         for change in evidence["changes"]:
             for quote in change["selected_original_fragments"]:
@@ -215,7 +251,8 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
         original = turn(memory, "u", "Use quiet reminders only during this exhibition.")
         saved = json.loads(
             invoke(
-                memory, "save_memory", save_args(original) if arm == "M" else plain_args(original),
+                memory, "save_memory",
+                save_args(original) if memory.conditioned else plain_args(original),
                 "initial",
                 wrapper=app.call_wrapper(memory.service, "s", "u"),
             ).content
@@ -246,6 +283,14 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
             }]}
             if arm == "M":
                 corrected_args["edits"][0]["condition"] = "Only on opening day"
+            if not memory.local:
+                rewrite = save_args(original) if memory.conditioned else plain_args(original)
+                args = {"read_handle": initial["candidate_handle"],
+                        "units": copy.deepcopy(rewrite["units"]),
+                        "relations": rewrite.get("relations", [])}
+                args["units"][0].update(text="Unsupported broad claim", evidence=correction)
+                corrected_args = copy.deepcopy(args)
+                corrected_args["units"][0]["text"] = "Only on opening day use written reminders"
         response = invoke(
             memory, name, args, "unsupported", "correction",
             app.call_wrapper(memory.service, "s", "correction"),
@@ -294,14 +339,27 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
                 assert current["value"]["edit_state"]["units"][:2] == (
                     initial["value"]["edit_state"]["units"]
                 )
-            else:
+            elif arm == "B1":
                 assert current["value"]["edit_state"]["units"][1:] == (
                     initial["value"]["edit_state"]["units"][1:]
                 )
-            replay = memory.update_edit(
-                cfg("correction"), "corrected", corrected_args["read_handle"],
-                corrected_args["edits"],
-            )
+            else:
+                assert [u["text"] for u in current["value"]["edit_state"]["units"]][1:] == (
+                    [u["text"] for u in initial["value"]["edit_state"]["units"]][1:]
+                )
+                assert not {u["unit_id"] for u in current["value"]["edit_state"]["units"]} & {
+                    u["unit_id"] for u in initial["value"]["edit_state"]["units"]
+                }
+            if memory.local:
+                replay = memory.update_edit(
+                    cfg("correction"), "corrected", corrected_args["read_handle"],
+                    corrected_args["edits"],
+                )
+            else:
+                replay = memory.rewrite_edit(
+                    cfg("correction"), "corrected", corrected_args["read_handle"],
+                    corrected_args["units"], corrected_args["relations"],
+                )
         else:
             assert accepted["id"] != saved["id"] and accepted["revision"] == 1
             replay = memory.save_edit(cfg("correction"), "corrected", corrected_args["units"])
@@ -440,6 +498,188 @@ def test_same_id_override_retract_history_reader_and_forget_after_reopen(tmp_pat
         assert not memory.service.read(saved["id"], 1)["ok"]
 
 
+@pytest.mark.parametrize("arm", ["B0", "B2"])
+def test_whole_rewrite_actual_sdk_reader_same_id_scope_relations_cas_and_reopen(
+    tmp_path: Path, arm: str,
+) -> None:
+    with (
+        FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app,
+        opened(tmp_path, arm=arm) as memory,
+    ):
+        original = turn(memory, "u", "Exhibition-only quiet reminders; supplier labels unchanged.")
+        formation_args = save_args(original) if memory.conditioned else plain_args(original)
+        saved = json.loads(invoke(
+            memory, "save_memory", formation_args, "save",
+            wrapper=app.call_wrapper(memory.service, "s", "u"),
+        ).content)
+        assert saved["ok"] and saved["revision"] == 1
+        initial = memory.service.read(saved["id"])
+        assert initial["value"]["method_arm"] == arm
+        before_world = app.world.snapshot()
+        evidence = turn(memory, "rewrite", "Exhibition-only written reminders; labels unchanged.")
+        args = whole_rewrite_args(initial, "Use written reminders", evidence)
+        wrapper = app.call_wrapper(memory.service, "s", "rewrite")
+        rewritten_message = invoke(memory, "update_memory", args, "rewrite", "rewrite", wrapper)
+        rewritten = json.loads(rewritten_message.content)
+        assert rewritten["ok"] and rewritten["id"] == saved["id"] and rewritten["revision"] == 2
+        current = memory.service.read(saved["id"])
+        state = current["value"]["edit_state"]
+        old_state = initial["value"]["edit_state"]
+        assert state["representation"] == ("conditioned_v1" if arm == "B2" else "plain_v1")
+        assert [u["text"] for u in state["units"]] == [u["text"] for u in args["units"]]
+        assert [u["role"] for u in state["units"]] == [u["role"] for u in old_state["units"]]
+        assert not {u["unit_id"] for u in state["units"]} & {
+            u["unit_id"] for u in old_state["units"]
+        }  # Whole rewrite reissues even retained units; it never applies a selected local patch.
+        for relation, expected in zip(state["relations"], args["relations"], strict=True):
+            assert relation["source_unit"] == state["units"][expected["source"]]["unit_id"]
+            assert relation["target_unit"] == state["units"][expected["target"]]["unit_id"]
+            assert relation["relation_type"] == expected["relation_type"]
+        assert current["value"]["scope"] == initial["value"]["scope"]
+        assert current["value"]["functional_support"]["scope.project"] == (
+            initial["value"]["functional_support"]["scope.project"]
+        )
+        assert memory.service.read(saved["id"], 1)["value"] == initial["value"]
+        page = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved["id"]}, "read", "rewrite").content)
+        assert {u["edit_unit"]["unit_id"] for u in page["items"]} == {
+            u["unit_id"] for u in state["units"]
+        }
+        assert {r["relation_id"] for u in page["items"] for r in u["edit_relations"]} == {
+            r["relation_id"] for r in state["relations"]
+        }
+        assert len(canonical(page)) <= memory.material_limit
+        no_change = json.loads(invoke(memory, "update_memory", {
+            "read_handle": current["candidate_handle"],
+        }, "no-change", "rewrite", wrapper).content)
+        assert no_change["status"] == "no_change" and no_change["effect"] == "none"
+        assert no_change["revision"] == 2
+        confirmed = json.loads(invoke(memory, "confirm_existing_memory", {
+            "read_handle": current["candidate_handle"],
+        }, "confirm", "rewrite", wrapper).content)
+        assert confirmed["status"] == "no_change" and confirmed["revision"] == 2
+        stale = json.loads(invoke(memory, "update_memory", {
+            "read_handle": initial["candidate_handle"],
+        }, "stale", "rewrite", wrapper).content)
+        assert stale["reason"] == "revision_conflict"
+        with pytest.raises(ValidationError):
+            invoke(memory, "update_memory", {
+                "read_handle": current["candidate_handle"], "edits": [],
+            }, "local-edits", "rewrite")
+        with pytest.raises(ValidationError):
+            invoke(memory, "update_memory", {
+                **args, "read_handle": current["candidate_handle"], "edits": [],
+            }, "rewrite-and-local-edits", "rewrite")
+        with pytest.raises(FunctionalRejection, match="FUNCTIONAL_EDIT_FULL_REWRITE_REQUIRED"):
+            memory.update_edit(cfg("rewrite"), "local-direct", current["candidate_handle"], [])
+        assert memory.service.read(saved["id"])["value"] == current["value"]
+        assert app.world.snapshot() == before_world
+    with opened(tmp_path, arm=arm) as memory:
+        assert memory.service.read(saved["id"])["value"] == current["value"]
+        assert memory.service.read(saved["id"], 1)["value"] == initial["value"]
+        assert not memory.service.read(saved["id"], 3)["ok"]
+
+
+@pytest.mark.parametrize("arm", ["B0", "B2"])
+@pytest.mark.parametrize("after_put", [False, True])
+def test_whole_rewrite_unknown_store_window_wrapper_recovery_never_recommits(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, after_put: bool,
+) -> None:
+    with (
+        FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app,
+        opened(tmp_path, arm=arm) as memory,
+    ):
+        original = turn(memory, "u", "Only the exhibition uses quiet reminders.")
+        initial_args = save_args(original) if memory.conditioned else plain_args(original)
+        saved = json.loads(invoke(memory, "save_memory", initial_args, "save").content)
+        initial = memory.service.read(saved["id"])
+        evidence = turn(memory, "rewrite", "Only the exhibition uses written reminders.")
+        args = whole_rewrite_args(initial, "Use written reminders", evidence)
+        real_put = memory.service.store.put
+        entered = 0
+
+        def failed(ns: tuple[str, ...], key: str, value: Any, **options: Any) -> None:
+            nonlocal entered
+            semantic = ns == memory.service.namespace and "_v13_1" in value
+            if semantic:
+                entered += 1
+                if not after_put:
+                    raise OSError("rewrite commit acknowledgement unavailable before put")
+            real_put(ns, key, value, **options)
+            if semantic:
+                raise OSError("rewrite commit acknowledgement lost after put")
+
+        monkeypatch.setattr(memory.service.store, "put", failed)
+        wrapper = app.call_wrapper(memory.service, "s", "rewrite")
+        response = invoke(memory, "update_memory", args, "rewrite", "rewrite", wrapper)
+        receipt = json.loads(response.content)
+        assert receipt["status"] == "outcome_unknown" and receipt["phase"] == "semantic_commit"
+        assert entered == 1
+        monkeypatch.setattr(memory.service.store, "put", real_put)
+        assert invoke(memory, "update_memory", args, "rewrite", "rewrite", wrapper) == response
+        assert memory.service.read(saved["id"])["value"]["revision"] == (2 if after_put else 1)
+    with (
+        FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app,
+        opened(tmp_path, arm=arm) as memory,
+    ):
+        memory.context("s", "rewrite", "functional-m-test-v1")
+        wrapper = app.call_wrapper(memory.service, "s", "rewrite")
+        assert invoke(memory, "update_memory", args, "rewrite", "rewrite", wrapper) == response
+        assert memory.service.read(saved["id"])["value"]["revision"] == (2 if after_put else 1)
+        assert memory.service.read(saved["id"], 1)["value"] == initial["value"]
+        assert not memory.service.read(saved["id"], 3)["ok"]
+        if after_put:
+            replay = memory.rewrite_edit(
+                cfg("rewrite"), "rewrite", args["read_handle"], args["units"], args["relations"]
+            )
+            assert replay["replayed"] and replay["revision"] == 2
+            assert replay["original_status"] == "committed"
+
+
+@pytest.mark.parametrize("arm", ["B0", "B2"])
+def test_whole_rewrite_rejects_undelivered_unit_or_relation_and_ambiguous_withdrawal(
+    tmp_path: Path, arm: str,
+) -> None:
+    with opened(tmp_path, arm=arm) as memory:
+        original = turn(memory, "u", "Exhibition-only quiet reminders.")
+        saved = json.loads(invoke(
+            memory, "save_memory",
+            save_args(original) if memory.conditioned else plain_args(original),
+            "save",
+        ).content)
+        row = memory.service.read(saved["id"])
+        unseen = memory.service.capture_user("archive", "unseen", "Undelivered rewrite")
+        handle = memory.service.source_fragments(unseen["source_ref"])[0]["fragment_handle"]
+        args = whole_rewrite_args(row, "Undelivered rewrite", [handle])
+        rejected = json.loads(invoke(memory, "update_memory", args, "unseen").content)
+        assert rejected["reason"] == "FUNCTIONAL_EDIT_ACTUALLY_DELIVERED_FRAGMENT_REQUIRED"
+        if memory.conditioned:
+            args = whole_rewrite_args(row, "Use quiet reminders", original)
+            args["relations"][0]["evidence"] = [handle]
+            rejected = json.loads(invoke(memory, "update_memory", args, "unseen-relation").content)
+            assert rejected["reason"] == "FUNCTIONAL_EDIT_ACTUALLY_DELIVERED_FRAGMENT_REQUIRED"
+        for ordinal, invalid in enumerate([
+            {"units": []}, {"units": None, "withdrawal_evidence": original},
+            {"units": [{"text": "Still asserted", "evidence": original}],
+             "withdrawal_evidence": original},
+        ]):
+            rejected = json.loads(invoke(memory, "update_memory", {
+                "read_handle": row["candidate_handle"], **invalid,
+            }, "ambiguous-" + str(ordinal)).content)
+            assert rejected["status"] == "rejected" and rejected["effect"] == "none"
+            assert memory.service.read(saved["id"])["value"] == row["value"]
+        if memory.conditioned:
+            rejected = json.loads(invoke(memory, "update_memory", {
+                "read_handle": row["candidate_handle"], "units": [{
+                    "text": "Only a dangling condition remains", "role": "condition",
+                    "evidence": original,
+                }],
+            }, "condition-only-withdrawal").content)
+            assert rejected["reason"] == "FUNCTIONAL_EDIT_WITHDRAWAL_REQUIRES_EMPTY_UNITS"
+        assert memory.service.read(saved["id"])["value"] == row["value"]
+        assert not memory.service.read(saved["id"], 2)["ok"]
+
+
 def test_b1_actual_wrapper_same_id_replace_insert_delete_reader_and_reopen(tmp_path: Path) -> None:
     versions: list[dict[str, Any]] = []
     with (
@@ -562,7 +802,7 @@ def test_b1_rejects_other_representations_and_conditioned_operations(tmp_path: P
         assert all(u["method_arm"] == "M" for u in page["items"])
 
 
-@pytest.mark.parametrize("arm", ["M", "B1"])
+@pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_reject_source_ref_unseen_fragment_and_foreign_owner(tmp_path: Path, arm: str) -> None:
     with opened(tmp_path, arm=arm) as memory:
         turn(memory, "u", "Remember the supplied material.")
@@ -610,7 +850,7 @@ def test_reject_source_ref_unseen_fragment_and_foreign_owner(tmp_path: Path, arm
 
 
 @pytest.mark.parametrize("after_put", [False, True])
-@pytest.mark.parametrize("arm", ["M", "B1"])
+@pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_actual_wrapper_unknown_commit_reopen_same_identity_no_second_revision(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -620,7 +860,7 @@ def test_actual_wrapper_unknown_commit_reopen_same_identity_no_second_revision(
     with FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app:
         with opened(tmp_path, arm=arm) as memory:
             hs = turn(memory, "u", "Use quiet reminders only during this exhibition.")
-            args = save_args(hs) if arm == "M" else plain_args(hs)
+            args = save_args(hs) if memory.conditioned else plain_args(hs)
             original = memory.service.store.put
 
             def failed(ns: tuple[str, ...], key: str, value: Any, **kwargs: Any) -> None:
@@ -725,7 +965,7 @@ def test_actual_partial_business_delivery_memory_only_and_unknown_business_no_re
 
 
 @pytest.mark.parametrize("after_put", [False, True])
-@pytest.mark.parametrize("arm", ["M", "B1"])
+@pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_read_receipt_unknown_does_not_mark_undelivered_body_as_evidence(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -768,7 +1008,7 @@ def test_read_receipt_unknown_does_not_mark_undelivered_body_as_evidence(
                 invoke(memory, "read_source", {"fragment_handle": handle}, "read")
 
 
-@pytest.mark.parametrize("arm", ["M", "B1"])
+@pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_reader_omitted_ranges_are_not_delivered_and_full_withdrawal_retains_history(
     tmp_path: Path, arm: str,
 ) -> None:
@@ -809,11 +1049,14 @@ def test_reader_omitted_ranges_are_not_delivered_and_full_withdrawal_retains_his
             invoke(
                 memory,
                 "update_memory",
-                {
+                ({
                     "read_handle": old["candidate_handle"],
                     "edits": [{"operation": "retract" if arm == "M" else "delete",
                                "target_unit": unit, "evidence": [handle]}],
-                },
+                } if memory.local else {
+                    "read_handle": old["candidate_handle"], "units": [],
+                    "withdrawal_evidence": [handle],
+                }),
                 "affirmation-only",
             ).content
         )
@@ -825,13 +1068,16 @@ def test_reader_omitted_ranges_are_not_delivered_and_full_withdrawal_retains_his
             invoke(
                 memory,
                 "update_memory",
-                {
+                ({
                     "read_handle": old["candidate_handle"],
                     "edits": [
                         {"operation": "retract" if arm == "M" else "delete",
                          "target_unit": unit, "evidence": cancellation}
                     ],
-                },
+                } if memory.local else {
+                    "read_handle": old["candidate_handle"], "units": [],
+                    "withdrawal_evidence": cancellation,
+                }),
                 "retract",
                 "cancel",
             ).content
@@ -841,3 +1087,21 @@ def test_reader_omitted_ranges_are_not_delivered_and_full_withdrawal_retains_his
         current = memory.service.read(saved["id"], 2)["value"]
         assert current["retracted"] and current["edit_state"]["units"] == []
         assert memory.service.read(saved["id"], 1)["value"] == old["value"]
+        history = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved["id"], "history": True,
+        }, "withdrawn-history", "cancel").content)
+        assert {u["revision"] for u in history["items"]} == {1, 2}
+        assert any(u["retracted"] for u in history["items"])
+    with opened(tmp_path, arm=arm) as memory:
+        turn(memory, "forget", "Forget the withdrawn record and its original sources.")
+        withdrawn = memory.service.read(saved["id"], 2)
+        assert withdrawn["ok"] and withdrawn["value"]["retracted"]
+        removed = json.loads(invoke(memory, "forget_memory", {
+            "read_handle": withdrawn["candidate_handle"],
+        }, "forget", "forget").content)
+        assert removed["ok"]
+        assert not memory.service.read(saved["id"], 1)["ok"]
+        assert not memory.service.read(saved["id"], 2)["ok"]
+        assert memory.service.source(ref) is None
+    with opened(tmp_path, arm=arm) as memory:
+        assert not memory.service.read(saved["id"], 1)["ok"]
