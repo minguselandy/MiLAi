@@ -233,6 +233,7 @@ jobs:
             --ignore=tests/unit/test_edit_mechanism.py \
             --ignore=tests/memory/test_edit_memory_v2.py \
             --ignore=tests/unit/test_edit_v2_runner.py \
+            --ignore=tests/unit/test_edit_development_history.py \
             --ignore=tests/unit/test_edit_views.py
           uv run --no-sync python tools/check_legacy_archive.py
           uv build
@@ -296,7 +297,7 @@ jobs:
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/integrations/test_amem_contracts.py
           uv run --no-sync pytest -q tests/memory/test_functional_edit_memory.py tests/unit/test_edit_external.py
           uv run --no-sync pytest -q tests/unit/test_edit_mechanism.py
-          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_views.py
+          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py
           uv run --no-sync python tools/prepare_sealed_regression.py --destination "$RUNNER_TEMP/milai-sealed-r52"
           (
             export PYTHONPATH="$RUNNER_TEMP/milai-sealed-r52/MiLAi-Lab/src"
