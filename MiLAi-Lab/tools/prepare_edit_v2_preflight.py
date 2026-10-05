@@ -11,6 +11,7 @@ from transformers import AutoTokenizer
 
 from milai_lab.datasets.edit_benchmarks import halumem_users
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import Arm, EditMemory
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
@@ -39,6 +40,7 @@ def prepare(suite: Path, selection: Path, output: Path) -> dict[str, Any]:
             method.arm = cast(Arm, sample["arm"])
             method.conditioned = sample["arm"] in {"B2", "M"}
             method.interface_version = cast(Any, interface)
+            method.features = EditFeatures()
             packet = method.preview_writer_view(delivery)["packet"]
             messages = execution._edit_messages(
                 method, packet, dates[(sample["user"], sample["session"])], allow_create=True
