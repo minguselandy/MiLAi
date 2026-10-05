@@ -1,3 +1,26 @@
+# 2026-10-05 latest review: next candidate alongside the frozen old queue
+
+The user explicitly directs the next candidate toward common matter-level records,
+direct scoped exception/withdrawal editing and preserved assertion/source attribution.
+Keep I2, B0/B1/B2/M and the Qwen3.6 family; no reviewer platform or deployment.
+The old full-history process and its continuation watcher remain on frozen 4357d46,
+unchanged configuration and outputs. Do not hot-edit or interrupt their requests.
+Root's offline inspection of all 29 first-user truncations found literal old-unit
+fragments accounted for 98.53% of output tokens in aggregate; incomplete tails
+remain unknown, never repaired or submitted. This is one-user failure diagnosis,
+not a four-arm method result or preservation success.
+
+The existing edit_core owner is reactivated for method/memory/SDK source work;
+Root owns runner integration, all HTTP/accounting, research data, evaluation and
+GitHub. Never pass that owner gold, future questions or raw/reserved artifacts.
+Five default-false edit_features make the new contract opt-in, leaving old
+interfaces reproducible. Next development configuration is PREPARED_NOT_RUN,
+with no candidate chosen; bind the actual Git source and own successful CI before
+real admission. Validate already exposed finite histories from each arm's own
+empty bank, then a fresh full comparison. Preserve every old failure and queue.
+No held-out access or new post-freeze functional stories until final candidate and
+Writer freeze. Full R0–R5/E0–E5 and all six deliverables remain active; Product NO_GO.
+
 # 2026-10-05 fourth Stage A reviewed; serial interface pilots now running
 
 Own-CI-approved 4357d46 completed 24 real calls, 237188 known tokens and no new

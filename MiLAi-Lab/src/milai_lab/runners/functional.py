@@ -30,6 +30,7 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.runnables import RunnableConfig
+from langchain_core.tools import BaseTool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.store.sqlite import SqliteStore
@@ -55,6 +56,7 @@ from milai_lab.memory.functional_state import (
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FunctionalEditMemory,
@@ -654,6 +656,7 @@ def prepare(
         "capability_delivery",
         "memory_method",
         "edit_interface_version",
+        "edit_features",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -666,6 +669,11 @@ def prepare(
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_INVALID")
     if edit_interface != "v1" and settings.get("memory_method") not in FUNCTIONAL_ARMS:
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_REQUIRES_EDIT_METHOD")
+    edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
+    if edit_features.enabled and (
+        edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
+    ):
+        raise ValueError("FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD")
     capacity_keys = {
         "model",
         "tokenizer_path",
@@ -1493,7 +1501,8 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
 
 
 def seed_sources(
-    service: MemoryService, rows: list[dict[str, Any]], path: Path
+    service: MemoryService, rows: list[dict[str, Any]], path: Path,
+    *, preserve_occurrence: bool = False,
 ) -> list[dict[str, Any]]:
     """Capture supplied events once; a later import cannot resurrect forgotten text."""
     if path.exists():
@@ -1504,9 +1513,19 @@ def seed_sources(
         if row.get("object_ref") is not None:
             raise ValueError("FUNCTIONAL_IMPORTED_OBJECT_AUTHORITY_FORBIDDEN")
         if row["role"] == "user":
-            capture = service.capture_user(row["session_id"], row["event_key"], row["content"])
+            capture = (
+                service.capture_user(row["session_id"], row["event_key"], row["content"],
+                                     occurred_at=row.get("occurred_at", row.get("timestamp")))
+                if preserve_occurrence else
+                service.capture_user(row["session_id"], row["event_key"], row["content"])
+            )
         elif row["role"] == "assistant":
-            capture = service.capture_assistant(row["session_id"], row["event_key"], row["content"])
+            capture = (
+                service.capture_assistant(row["session_id"], row["event_key"], row["content"],
+                                          occurred_at=row.get("occurred_at", row.get("timestamp")))
+                if preserve_occurrence else
+                service.capture_assistant(row["session_id"], row["event_key"], row["content"])
+            )
         elif row["role"] == "tool":
             capture = service.capture_tool(
                 row["session_id"], row["event_key"], row["origin"], row["content"], None
@@ -1686,6 +1705,7 @@ def message(
     session: str,
     message_id: str,
     content: str,
+    occurred_at: str | None = None,
     workflow: str = "reservation",
     initial_world: dict[str, Any] | None = None,
     initial_sources: list[dict[str, Any]] | None = None,
@@ -1704,6 +1724,7 @@ def message(
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
     settings = freeze["config"]
+    edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
     bank_id = _bank_reference(root, freeze["run_id"], bank, owner)
     bank_root = root / "banks" / bank_id
     bank_root.mkdir(parents=True, exist_ok=True)
@@ -1714,6 +1735,8 @@ def message(
         "content": content,
         "workflow": workflow,
     }
+    if occurred_at is not None:
+        public["occurred_at"] = occurred_at
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -1810,14 +1833,19 @@ def message(
                 observer=trace,
             )
             seed_receipts = (
-                seed_sources(service, initial_sources, bank_root / "source-imports.json")
+                seed_sources(service, initial_sources, bank_root / "source-imports.json",
+                             preserve_occurrence=edit_features.source_metadata)
                 if initial_sources
                 else []
             )
             if seed_receipts:
                 output["source_import_receipts"] = seed_receipts
             output["capture_attempted"] = True
-            capture = service.capture_user(session, message_id, content)
+            capture = (
+                service.capture_user(session, message_id, content, occurred_at=occurred_at)
+                if edit_features.source_metadata else
+                service.capture_user(session, message_id, content)
+            )
             output["capture"] = capture
             trace({"event": "functional_capture", "receipt": capture})
             if not capture.get("ok"):
@@ -1862,6 +1890,7 @@ def message(
             if memory_class is FunctionalEditMemory:
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
+                memory_options["features"] = edit_features
             memory = memory_class(
                 service,
                 capacity.text_tokens,
@@ -2285,6 +2314,17 @@ def message(
             choice_selector = (execution_tool_choice
                                if settings.get("completion_tool_choice", "auto") != "auto"
                                else None)
+
+            def current_tool_catalog(config: RunnableConfig) -> tuple[BaseTool, ...]:
+                if not isinstance(memory, FunctionalEditMemory):
+                    raise ValueError("FUNCTIONAL_EDIT_DYNAMIC_CATALOG_REQUIRES_EDIT_METHOD")
+                catalog = tuple(tool for tool in memory.writer_tools(config)
+                                if tool.name in allowed_tools) + selected_business
+                trace({"event": "functional_bound_tool_catalog",
+                       "tools": [convert_to_openai_tool(tool) for tool in catalog]})
+                return catalog
+
+            tools_provider = current_tool_catalog if edit_features.enabled else None
             agent = build_agent(
                 model,
                 store,
@@ -2296,6 +2336,7 @@ def message(
                 tool_schema_communication="shape_feedback_v1",
                 business_call_wrapper=dispatch,
                 model_tool_choice=choice_selector,
+                model_tools_provider=tools_provider,
             )
 
             def invoke_execution(value: Any) -> list[Any]:
@@ -2462,7 +2503,8 @@ def message(
                 agent = build_agent(model, store, saver, selected_business,
                     memory_tools=selected_memory, system_prompt=settings["system_prompt"],
                     benchmark_view_hook=context_hook, tool_schema_communication="shape_feedback_v1",
-                    business_call_wrapper=dispatch, model_tool_choice=choice_selector)
+                    business_call_wrapper=dispatch, model_tool_choice=choice_selector,
+                    model_tools_provider=tools_provider)
                 trace({"event": "functional_completion_feedback", **completion,
                        "candidate_answer_delivered": False})
                 expected = ("The current continuation includes prior explicit memory work"
@@ -2766,6 +2808,7 @@ def step(root: Path, case_id: str, index: int, *, resume: bool = False) -> dict[
         session=public["session_id"],
         message_id=public["message_id"],
         content=public["content"],
+        occurred_at=public.get("occurred_at", public.get("timestamp")),
         workflow=case.get("workflow", "reservation"),
         initial_world=case.get("initial_world"),
         initial_sources=case.get("initial_sources"),
@@ -2862,6 +2905,7 @@ def main() -> None:
     parser.add_argument("--session")
     parser.add_argument("--message-id")
     parser.add_argument("--text")
+    parser.add_argument("--occurred-at", help="Actual statement time, when supplied by the caller")
     parser.add_argument("--workflow", choices=("reservation", "document"), default="reservation")
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
@@ -2893,6 +2937,7 @@ def main() -> None:
             session=args.session,
             message_id=args.message_id,
             content=args.text,
+            occurred_at=args.occurred_at,
             workflow=args.workflow,
             resume=args.resume,
         )

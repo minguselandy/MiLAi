@@ -218,12 +218,17 @@ def apply_local(
     service: Any,
     *,
     conditioned: bool,
+    assertions: list[dict[str, Any] | None] | None = None,
+    mark_exceptions: bool = False,
 ) -> dict[str, Any]:
     state = copy.deepcopy(old)
     units, relations = state["units"], state["relations"]
     original_ids = {unit["unit_id"] for unit in units}
     targeted = set()
-    for edit in edits:
+    if assertions is not None and len(assertions) != len(edits):
+        raise FunctionalRejection("EDIT_ASSERTION_COMPILATION_INVALID")
+    for edit_index, edit in enumerate(edits):
+        assertion = assertions[edit_index] if assertions is not None else None
         if edit.operation not in (
             {"replace", "append", "override", "retract"}
             if conditioned
@@ -255,6 +260,8 @@ def apply_local(
         if edit.operation == "replace":
             assert target is not None
             target.update(text=edit.text, evidence_refs=evidence)
+            if assertions is not None:
+                target["assertion"] = copy.deepcopy(assertion)
             continue
         if edit.operation == "override":
             assert target is not None
@@ -265,18 +272,23 @@ def apply_local(
             ):
                 raise FunctionalRejection("EDIT_EXPLICIT_OVERRIDE_SCOPE_REQUIRED")
             # All generated IDs are issued by the service side, never model hashes.
-            scoped = {
+            scoped: dict[str, Any] = {
                 "unit_id": new_id("unit"),
                 "text": edit.text,
                 "role": "content",
                 "evidence_refs": evidence,
             }
-            scope = {
+            scope: dict[str, Any] = {
                 "unit_id": new_id("unit"),
                 "text": edit.condition,
                 "role": "condition",
                 "evidence_refs": evidence,
             }
+            if mark_exceptions:
+                scoped["local_exception"] = True
+            if assertions is not None:
+                scoped["assertion"] = copy.deepcopy(assertion)
+                scope["assertion"] = copy.deepcopy(assertion)
             units.extend([scoped, scope])
             relations.extend(
                 [
@@ -311,12 +323,14 @@ def apply_local(
                     }
                 )
             continue
-        inserted = {
+        inserted: dict[str, Any] = {
             "unit_id": new_id("unit"),
             "text": edit.text,
             "role": edit.role,
             "evidence_refs": evidence,
         }
+        if assertions is not None:
+            inserted["assertion"] = copy.deepcopy(assertion)
         if edit.operation == "insert" and target is not None:
             units.insert(units.index(target) + 1, inserted)
         else:
@@ -342,8 +356,29 @@ def apply_local(
 
 def render_state(state: dict[str, Any]) -> str:
     """One renderer shared by B2/M; explicit scoped alternatives guide the common Reader."""
+
+    def assertion_text(unit: dict[str, Any]) -> str:
+        assertion = unit.get("assertion")
+        if not assertion:
+            return ""
+        return str(
+            " [Assertion: "
+            + assertion["kind"]
+            + "; speaker="
+            + assertion["role"]
+            + ("; occurred_at=" + assertion["occurred_at"] if assertion.get("occurred_at") else "")
+            + "]"
+        )
+
+    matter = (
+        ["Matter: " + state["matter_description"]]
+        if state.get("matter_description") and state["units"]
+        else []
+    )
     if state["representation"] == "plain_v1":
-        return "\n".join(unit["text"] for unit in state["units"])
+        return "\n".join(
+            [*matter, *(unit["text"] + assertion_text(unit) for unit in state["units"])]
+        )
     units = {unit["unit_id"]: unit for unit in state["units"]}
     overrides = {
         r["source_unit"]: r["target_unit"]
@@ -351,12 +386,16 @@ def render_state(state: dict[str, Any]) -> str:
         if r["relation_type"] == "overrides"
     }
     modified = {r["source_unit"] for r in state["relations"] if r["relation_type"] == "modifies"}
-    lines = []
+    lines = matter
     for unit in state["units"]:
         unit_id = unit["unit_id"]
         if unit["role"] == "condition":
             if unit_id not in modified:
-                lines.append("Unbound condition (applicability unresolved): " + unit["text"])
+                lines.append(
+                    "Unbound condition (applicability unresolved): "
+                    + unit["text"]
+                    + assertion_text(unit)
+                )
             continue
         prefix = (
             "Scoped override of " + overrides[unit_id] + ": "
@@ -365,9 +404,9 @@ def render_state(state: dict[str, Any]) -> str:
             if unit_id in overrides.values()
             else "Content: "
         )
-        lines.append(unit_id + " — " + prefix + unit["text"])
+        lines.append(unit_id + " — " + prefix + unit["text"] + assertion_text(unit))
         conditions = [
-            units[r["source_unit"]]["text"]
+            units[r["source_unit"]]["text"] + assertion_text(units[r["source_unit"]])
             for r in state["relations"]
             if r["relation_type"] == "modifies" and r["target_unit"] == unit_id
         ]
@@ -504,7 +543,12 @@ def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, 
 
 
 def writer_projection(
-    delivery: dict[str, Any], profile: str, arm: str, *, allow_create: bool
+    delivery: dict[str, Any],
+    profile: str,
+    arm: str,
+    *,
+    allow_create: bool,
+    features: dict[str, bool] | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Pure projection for request budgeting, including old immutable snapshots.
 
@@ -521,6 +565,11 @@ def writer_projection(
     public_records: list[dict[str, Any]] = []
     public_support = []
     source_rows = {row["source_ref"]: row for row in delivery.get("sources", [])}
+    if features and features.get("source_metadata"):
+        source_rows.update(
+            {row["source_ref"]: row for row in delivery.get("source_attributes", [])}
+        )
+    delivered_sources = {row["source_ref"] for row in delivery.get("sources", [])}
 
     def source_id(ref: dict[str, Any]) -> str:
         key = (ref["source_ref"], ref["source_revision"])
@@ -538,6 +587,10 @@ def writer_projection(
             )
             if "timestamp" in row:
                 attributes[-1]["timestamp"] = copy.deepcopy(row["timestamp"])
+            if features and features.get("source_metadata"):
+                attributes[-1]["role"] = row.get("role", "unknown")
+                attributes[-1]["body_delivered"] = key[0] in delivered_sources
+                attributes[-1]["occurred_at"] = row.get("occurred_at")
         return sources[key]
 
     for source in delivery.get("sources", []):
@@ -563,6 +616,15 @@ def writer_projection(
                 by_id[unit["unit_id"]] = alias
                 units[alias] = {"record": record_alias, **copy.deepcopy(unit)}
                 public_units.append({"id": alias, "role": unit["role"], "text": unit["text"]})
+                if features and unit.get("local_exception"):
+                    public_units[-1]["local_exception"] = True
+                if features and features.get("source_metadata"):
+                    assertion = unit.get("assertion")
+                    public_units[-1]["assertion"] = (
+                        {"kind": assertion["kind"], "source": source_id(assertion)}
+                        if assertion and "source_ref" in assertion
+                        else {"kind": "legacy_unspecified", "source": None}
+                    )
 
             def support_id(
                 item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias
@@ -604,6 +666,8 @@ def writer_projection(
         }
         if "scope" in record:
             public_record["scope"] = copy.deepcopy(record["scope"])
+        if features and features.get("matter_organization"):
+            public_record["matter"] = state.get("matter_description") if state else None
         if profile == "I1":
             # Preserve v1's repeated text view, but remove persistent identifiers.
             repeated = (
@@ -681,4 +745,7 @@ def writer_projection(
         "evidence": fresh,
         "support": prior,
     }
+    if features and any(features.values()):
+        packet["edit_features"] = copy.deepcopy(features)
+        draft["edit_features"] = copy.deepcopy(features)
     return packet, draft

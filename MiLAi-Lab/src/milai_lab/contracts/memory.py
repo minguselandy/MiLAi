@@ -53,6 +53,7 @@ class SourceEvent(TypedDict):
     source_revision: int
     capture_key: NotRequired[str]
     observed_at: str
+    occurred_at: NotRequired[str]
     object_ref: dict[str, Any] | None
 
 

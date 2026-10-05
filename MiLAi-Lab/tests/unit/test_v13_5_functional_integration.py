@@ -68,6 +68,7 @@ def prepared(
     memory_continuation: bool = False,
     memory_method: str = "functional_v1",
     edit_interface_version: str = "v1",
+    edit_features: dict[str, bool] | None = None,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -150,6 +151,8 @@ def prepared(
     }
     if edit_interface_version != "v1":
         settings["edit_interface_version"] = edit_interface_version
+    if edit_features is not None:
+        settings["edit_features"] = edit_features
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
     root = tmp_path / "run"
@@ -215,6 +218,59 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
     return functional.message(root, bank="mechanical-bank", owner="alice", session="session",
                               message_id="message", content="Remember the local marker is blue.",
                               **kwargs)
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
+) -> None:
+    root = prepared(
+        tmp_path, native=True, request_interpretation=True,
+        memory_method="milai_edit_" + arm.lower() + "_v1", edit_interface_version="I2",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata",
+        )},
+    )
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, business=False)
+        if ordinal == 2:
+            packet = materials(wire)["writer_packet"]
+            evidence = packet["evidence"][0]["id"]
+            schemas = {t["function"]["name"]: t["function"]["parameters"] for t in wire["tools"]}
+            assert "update_memory" not in schemas
+            proposal_schema = schemas["save_memory"]["properties"]["proposal"]
+            unit_schema = proposal_schema["properties"]["units"]["items"]
+            assert unit_schema["properties"]["evidence"]["items"]["enum"] == [
+                e["id"] for e in packet["evidence"]
+            ]
+            assert "matter" in schemas["save_memory"]["properties"]["proposal"]["required"]
+            source = next(s for s in packet["source_table"]
+                          if s["id"] == packet["evidence"][0]["source"])
+            assert source["role"] == "user" and source["occurred_at"] == "2030-02-04T09:00:00Z"
+            return native_call("save_memory", "next-save", proposal={
+                "action": "create", "matter": "User's local marker",
+                "units": [{"text": "User reports the local marker is blue.", "role": "content",
+                           "evidence": [evidence],
+                           "assertion": {"source": evidence, "kind": "reported"}}],
+            })
+        assert ordinal == 3
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "Saved your reported marker."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root, occurred_at="2030-02-04T09:00:00Z")
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == 3
+    state = next(r["value"]["edit_state"] for r in result["records"]
+                 if r["value"].get("method_arm") == arm)
+    assert state["matter_description"] == "User's local marker"
+    assert state["units"][0]["assertion"]["role"] == "user"
+    assert state["units"][0]["assertion"]["occurred_at"] == "2030-02-04T09:00:00Z"
+    assert message(root, occurred_at="2030-02-04T09:00:00Z") == result
+    assert len(wires) == 3
 
 
 def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bool = False,

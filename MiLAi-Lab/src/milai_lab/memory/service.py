@@ -1322,11 +1322,23 @@ class MemoryService:
             self.store.put(ns, key, {"source_ref": source_ref}, index=False)
             return str(source_ref)
 
-    def capture_user(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
+    def capture_user(
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+    ) -> dict[str, Any]:
         """Capture an actual incoming user event, not a model-selected source body."""
-        return self._capture(session, event_key, "user", "public_user_message", content, None)
+        return self._capture(
+            session,
+            event_key,
+            "user",
+            "public_user_message",
+            content,
+            None,
+            occurred_at=occurred_at,
+        )
 
-    def capture_assistant(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
+    def capture_assistant(
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+    ) -> dict[str, Any]:
         """Trusted actual assistant message; proposals/packets are never original messages."""
         if self.mutation_contract != "event_bound_v1":
             raise ValueError("V13_ASSISTANT_CAPTURE_REQUIRES_EVENT_BOUND")
@@ -1347,7 +1359,13 @@ class MemoryService:
                         kind="assistant_output",
                     )
         return self._capture(
-            session, event_key, "assistant", "public_assistant_message", content, None
+            session,
+            event_key,
+            "assistant",
+            "public_assistant_message",
+            content,
+            None,
+            occurred_at=occurred_at,
         )
 
     def capture_tool(
@@ -1357,9 +1375,13 @@ class MemoryService:
         tool_name: str,
         content: str,
         object_ref: VerifiedObjectRef | None,
+        *,
+        occurred_at: str | None = None,
     ) -> dict[str, Any]:
         """Trusted application adapter only; this API is never a Host tool."""
-        return self._capture(session, event_key, "tool", tool_name, content, object_ref)
+        return self._capture(
+            session, event_key, "tool", tool_name, content, object_ref, occurred_at=occurred_at
+        )
 
     def _capture(
         self,
@@ -1369,7 +1391,13 @@ class MemoryService:
         origin: str,
         content: Any,
         object_ref: VerifiedObjectRef | None,
+        *,
+        occurred_at: str | None = None,
     ) -> dict[str, Any]:
+        if occurred_at is not None and (
+            not isinstance(occurred_at, str) or not occurred_at.strip()
+        ):
+            raise ValueError("V13_SOURCE_OCCURRENCE_TIME_INVALID")
         event_id = self.event_id(session, event_key, role)
         if self._functional_hidden(source_ref=event_id):
             actual = self._source(event_id, binding_only=True)
@@ -1416,10 +1444,14 @@ class MemoryService:
             "observed_at": datetime.now(UTC).isoformat(),
             "object_ref": asdict(object_ref) if object_ref is not None else None,
         }
+        if occurred_at is not None:
+            event["occurred_at"] = occurred_at
         with self._locked():
             prior = self.store.get(self.sources_namespace, event_id)
             formed = False
             if prior is not None:
+                if occurred_at is not None and prior.value.get("occurred_at") != occurred_at:
+                    raise ValueError("V13_SOURCE_OCCURRENCE_TIME_CHANGED")
                 comparable = {
                     key: dict(event)[key]
                     for key in (

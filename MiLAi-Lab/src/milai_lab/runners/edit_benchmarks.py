@@ -33,6 +33,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import Arm, EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, generation_schema
 
@@ -60,11 +61,22 @@ class UnconfirmedModelOutcome(RuntimeError):
     """A sent model request has no confirmed original response; never silently continue."""
 
 
-def parse_object(text: str) -> dict[str, Any]:
+def parse_object(text: str, *, reject_duplicate_keys: bool = False) -> dict[str, Any]:
     value = text.strip()
     if value.startswith("```"):
         value = value.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-    parsed = json.loads(value)
+    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        result: dict[str, Any] = {}
+        for key, item in pairs:
+            if key in result:
+                raise ValueError(f"Duplicate JSON object key: {key}")
+            result[key] = item
+        return result
+
+    parsed = (
+        json.loads(value, object_pairs_hook=unique_object)
+        if reject_duplicate_keys else json.loads(value)
+    )
     if not isinstance(parsed, dict):
         raise ValueError("Model response is not a JSON object")
     return parsed
@@ -588,8 +600,17 @@ class BenchmarkRun:
         return extracted
 
     def _edit_messages(
-        self, method: EditMemory, packet: dict[str, Any], date: str, *, allow_create: bool
+        self, method: EditMemory, packet: dict[str, Any], date: str, *, allow_create: bool,
+        schema: dict[str, Any] | None = None,
     ) -> list[dict[str, str]]:
+        response_schema = (
+            schema if schema is not None else method.envelope_schema(allow_create=allow_create)
+        )
+        empty_instruction = (
+            "An empty maintenance envelope means no maintenance, not a successful update."
+            if "records" in response_schema.get("properties", {})
+            else "An empty proposals list means no maintenance, not a successful update."
+        )
         return [
             {
                 "role": "system",
@@ -601,7 +622,7 @@ class BenchmarkRun:
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
                 "this request; combine dependent changes in that target's single proposal. "
-                "An empty proposals list means no maintenance, not a successful update.",
+                + empty_instruction,
             },
             {
                 "role": "user",
@@ -609,7 +630,7 @@ class BenchmarkRun:
                     {
                         "observed_date": date,
                         "delivery": packet,
-                        "response_schema": method.envelope_schema(allow_create=allow_create),
+                        "response_schema": response_schema,
                     },
                     ensure_ascii=False,
                 ),
@@ -636,15 +657,23 @@ class BenchmarkRun:
         if done.exists():
             return list(read_json(done)["extracted_memories"])
         folder.mkdir(parents=True, exist_ok=True)
+        features = EditFeatures.from_settings(self.settings.get("edit_features", {}))
         refs = []
         for ordinal, turn in enumerate(observed.turns):
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
-            receipt = capture(observed.session_id, f"turn:{ordinal}", turn["content"])
+            receipt = (
+                capture(observed.session_id, f"turn:{ordinal}", turn["content"],
+                        occurred_at=turn["timestamp"])
+                if features.source_metadata
+                else capture(observed.session_id, f"turn:{ordinal}", turn["content"])
+            )
             if not receipt["ok"]:
                 raise RuntimeError("Original source capture unconfirmed")
             refs.append(receipt["source_ref"])
         interface = self.settings["interface_version"]
-        method = EditMemory(service, cast(Arm, self.settings["arm"]), interface_version=interface)
+        method = EditMemory(
+            service, cast(Arm, self.settings["arm"]), interface_version=interface, features=features
+        )
         use_working_sets = bool(self.settings.get("working_sets", False))
         batches = (natural_source_batches if use_working_sets else source_batches)(
             observed, self.tokenizer, self.settings["source_tokens"]
@@ -736,9 +765,10 @@ class BenchmarkRun:
                 permit_create: bool = allow_create,
             ) -> list[dict[str, str]]:
                 subset = {**packet_delivery, "records": records}
-                packet = method.preview_writer_view(subset, allow_create=permit_create)["packet"]
+                request = method.preview_writer_request(subset, allow_create=permit_create)
                 return self._edit_messages(
-                    method, packet, observed.date, allow_create=permit_create
+                    method, request["packet"], observed.date, allow_create=permit_create,
+                    schema=request["schema"],
                 )
 
             selected = delivery["records"]
@@ -796,15 +826,22 @@ class BenchmarkRun:
                 if mapping_path.exists():
                     view = read_json(mapping_path)
                 else:
-                    view = method.writer_view(
+                    view = method.writer_request(
                         subset,
                         request_id=f"{key}:writer:{request_number}",
                         allow_create=allow_create,
                     )
                     write_json(mapping_path, view)
                     write_json(batch_folder / "delivery.json", subset)
+                response_schema = view.get("schema")
+                if response_schema is None:
+                    if features.enabled:
+                        raise ValueError("Next-candidate Writer request lacks its bound schema")
+                    # Previously sealed, unchanged legacy requests did not store a schema here.
+                    response_schema = method.envelope_schema(allow_create=allow_create)
                 messages = self._edit_messages(
-                    method, view["packet"], observed.date, allow_create=allow_create
+                    method, view["packet"], observed.date, allow_create=allow_create,
+                    schema=response_schema,
                 )
                 plan_path = batch_folder / "proposals.json"
                 failure = None
@@ -821,16 +858,16 @@ class BenchmarkRun:
                                     "type": "json_schema",
                                     "json_schema": {
                                         "name": "milai_edit_" + self.settings["arm"].lower(),
-                                        "schema": method.envelope_schema(allow_create=allow_create),
+                                        "schema": response_schema,
                                     },
                                 },
-                            )
+                            ),
+                            reject_duplicate_keys=features.enabled,
                         )
-                        proposals = envelope["proposals"]
-                        if not isinstance(proposals, list) or set(envelope) != {"proposals"}:
-                            raise ValueError("Writer envelope must contain only proposals list")
+                        write_json(batch_folder / "writer-envelope.json", envelope)
+                        proposals = method.envelope_proposals(envelope, view["mapping"])
                         write_json(plan_path, proposals)
-                except (ValueError, ValidationError) as error:
+                except (ValueError, ValidationError, FunctionalRejection) as error:
                     http_folder = self.root / "http" / key / "writer" / str(request_number)
                     if (http_folder / "request.json").exists() and not (
                         http_folder / "response.json"

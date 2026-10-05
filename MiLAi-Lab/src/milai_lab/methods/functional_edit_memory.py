@@ -26,7 +26,6 @@ from milai_lab.memory.edit_units import (
     apply_local,
     form_state,
     render_state,
-    writer_proposal_schema,
 )
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import (
@@ -39,6 +38,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
+from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
@@ -73,6 +73,21 @@ class _WriterSaveInput(_WriterInput):
     scope: dict[str, Any] | None = None
 
 
+class _ExplicitWriterTool(StructuredTool):
+    @property
+    def tool_call_schema(self) -> dict[str, Any]:
+        """Keep per-request nested JSON constraints across LangChain's subset view."""
+        if self.args_schema is None or isinstance(self.args_schema, dict):
+            raise FunctionalRejection("FUNCTIONAL_EDIT_WRITER_SCHEMA_UNAVAILABLE")
+        if not issubclass(self.args_schema, EditDTO):
+            raise FunctionalRejection("FUNCTIONAL_EDIT_WRITER_SCHEMA_UNAVAILABLE")
+        schema = copy.deepcopy(self.args_schema.model_json_schema())
+        schema["properties"].pop("tool_call_id", None)
+        schema["required"] = [field for field in schema["required"] if field != "tool_call_id"]
+        schema["description"] = self.description
+        return schema
+
+
 class FunctionalEditMemory(FunctionalMemory):
     """Use an edit arm in the current flow; default FunctionalMemory is unchanged."""
 
@@ -81,13 +96,17 @@ class FunctionalEditMemory(FunctionalMemory):
         *args: Any,
         arm: Arm = "M",
         interface_version: InterfaceVersion = "v1",
+        features: EditFeatures | None = None,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
             raise ValueError("FUNCTIONAL_EDIT_ARM_INVALID")
         super().__init__(*args, **kwargs)
         self.arm = arm
-        self.writer = EditMemory(self.service, arm, interface_version=interface_version)
+        self.writer = EditMemory(
+            self.service, arm, interface_version=interface_version, features=features
+        )
+        self.features = self.writer.features
         self.interface_version = interface_version
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
@@ -99,6 +118,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if interface_version != "v1":
             self.policy["interface_version"] = interface_version
             self.policy["integration_version"] = "functional_edit_v2"
+        if self.features.enabled:
+            self.policy["edit_features"] = canonical(self.features.settings())
 
     def instructions(self) -> str:
         if self.interface_version != "v1":
@@ -319,6 +340,8 @@ class FunctionalEditMemory(FunctionalMemory):
                 "units": [],
                 "relations": [],
             }
+            if "edit_matter_description" in fragments[0]:
+                state["matter_description"] = copy.deepcopy(fragments[0]["edit_matter_description"])
             complete = len(by_unit) == fragments[0].get("edit_unit_count")
             for unit_id, chunks in by_unit.items():
                 chunks = sorted(chunks, key=lambda chunk: chunk["content_range"][0])
@@ -369,6 +392,8 @@ class FunctionalEditMemory(FunctionalMemory):
                 }
             )
         delivery = {"sources": sources, "records": records}
+        if self.features.source_metadata:
+            self.writer._source_attributes(delivery)
         preview = self.writer.preview_writer_view(delivery)["packet"]
         result = {
             "ok": True,
@@ -493,12 +518,14 @@ class FunctionalEditMemory(FunctionalMemory):
             raise FunctionalRejection("FUNCTIONAL_EDIT_V2_INTERFACE_REQUIRED")
         bound = self._binding(config)
         key = "edit-writer-operation:" + reference_key([bound, operation_id])
-        requested = {
+        requested: dict[str, Any] = {
             "proposal": proposal,
             "scope": scope,
             "arm": self.arm,
             "interface_version": self.interface_version,
         }
+        if self.features.enabled:
+            requested["edit_features"] = self.features.settings()
         with self.service._locked():
             prior = self.service.store.get(namespace(self.service), key)
             if prior is not None:
@@ -546,9 +573,34 @@ class FunctionalEditMemory(FunctionalMemory):
                 visible = self.service.store.get(namespace(self.service), key)
                 if visible is None or visible.value != operation_map:
                     raise FunctionalIntegrityError("FUNCTIONAL_EDIT_OPERATION_MAP_UNCONFIRMED")
+            if self.features.single_record_changes and proposal.get("target"):
+                operation = self.service.store.get(namespace(self.service), key)
+                if operation is None:
+                    raise FunctionalIntegrityError("FUNCTIONAL_EDIT_OPERATION_MAP_UNCONFIRMED")
+                use_key = "edit-writer-record-use:" + reference_key(
+                    [operation.value["mapping_id"], proposal["target"]]
+                )
+                use = self.service.store.get(namespace(self.service), use_key)
+                if use is not None and use.value != {"operation_id": operation_id}:
+                    raise FunctionalRejection("EDIT_DUPLICATE_RECORD_CONTAINER")
+                if use is None:
+                    self.service.store.put(
+                        namespace(self.service),
+                        use_key,
+                        {"operation_id": operation_id},
+                        index=False,
+                    )
+                checked_use = self.service.store.get(namespace(self.service), use_key)
+                if checked_use is None or checked_use.value != {"operation_id": operation_id}:
+                    raise FunctionalIntegrityError("FUNCTIONAL_EDIT_RECORD_USE_UNCONFIRMED")
         if decoded["action"] == "create":
             return self.save_edit(
-                config, operation_id, decoded["units"], decoded.get("relations"), scope
+                config,
+                operation_id,
+                decoded["units"],
+                decoded.get("relations"),
+                scope,
+                _edit_metadata=decoded.get("_edit_metadata"),
             )
         if scope is not None:
             raise FunctionalRejection("FUNCTIONAL_EDIT_SCOPE_UPDATE_NOT_EXPOSED")
@@ -556,7 +608,12 @@ class FunctionalEditMemory(FunctionalMemory):
             return self.service.record_no_change(bound["session"], operation_id, requested)
         if decoded["action"] == "edit" or self.local:
             return self.update_edit(
-                config, operation_id, read_handle, decoded.get("edits", []), _kept_support=kept
+                config,
+                operation_id,
+                read_handle,
+                decoded.get("edits", []),
+                _kept_support=kept,
+                _edit_metadata=decoded.get("_edit_metadata"),
             )
         return self.rewrite_edit(
             config,
@@ -566,6 +623,7 @@ class FunctionalEditMemory(FunctionalMemory):
             decoded.get("relations"),
             decoded.get("withdrawal_evidence"),
             _kept_support=kept,
+            _edit_metadata=decoded.get("_edit_metadata"),
         )
 
     def _record_units(
@@ -601,6 +659,13 @@ class FunctionalEditMemory(FunctionalMemory):
                         "method_arm": row["value"].get("method_arm", self.arm),
                     }
                 )
+                if self.features.enabled:
+                    if "matter_description" in state:
+                        result[-1]["edit_matter_description"] = state["matter_description"]
+                    if "assertion" in unit:
+                        result[-1]["edit_unit"]["assertion"] = copy.deepcopy(unit["assertion"])
+                    if unit.get("local_exception"):
+                        result[-1]["edit_unit"]["local_exception"] = True
         return result or [
             {
                 **ordinary[0],
@@ -617,18 +682,23 @@ class FunctionalEditMemory(FunctionalMemory):
         units: list[dict[str, Any]],
         relations: list[dict[str, Any]] | None = None,
         scope: dict[str, Any] | None = None,
+        *,
+        _edit_metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         bound = self._binding(config)
         parsed = EditProposal.model_validate(
             {"action": "create", "units": units, "relations": relations or []}
         )
-        requested = {
+        requested: dict[str, Any] = {
             "operation": "save",
             "memory_method": self.memory_method,
             "units": [unit.model_dump() for unit in parsed.units],
             "relations": [relation.model_dump() for relation in parsed.relations],
             "scope": scope,
         }
+        if self.features.enabled:
+            requested["edit_features"] = self.features.settings()
+            requested["edit_metadata"] = _edit_metadata
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -640,6 +710,12 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         support = self._require_delivered(handles)
         state = form_state(parsed, self.service, conditioned=self.conditioned)
+        if self.features.enabled:
+            if _edit_metadata is None or (
+                self.features.matter_organization and not _edit_metadata.get("matter_description")
+            ):
+                raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
+            decorate_state(state, _edit_metadata)
         saved_scope = self._scope(scope or {})
         refs = support["source_refs"]
         roles = {self.service.source(ref)["role"] for ref in refs}  # type: ignore[index]
@@ -691,17 +767,21 @@ class FunctionalEditMemory(FunctionalMemory):
         edits: list[dict[str, Any]],
         *,
         _kept_support: list[str] | None = None,
+        _edit_metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         if not self.local:
             raise FunctionalRejection("FUNCTIONAL_EDIT_FULL_REWRITE_REQUIRED")
         bound = self._binding(config)
         parsed = EditProposal.model_validate({"action": "edit", "edits": edits})
-        requested = {
+        requested: dict[str, Any] = {
             "operation": "update",
             "memory_method": self.memory_method,
             "read_handle": read_handle,
             "edits": [edit.model_dump() for edit in parsed.edits],
         }
+        if self.features.enabled:
+            requested["edit_features"] = self.features.settings()
+            requested["edit_metadata"] = _edit_metadata
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -726,7 +806,18 @@ class FunctionalEditMemory(FunctionalMemory):
         changed_handles = list(dict.fromkeys(h for edit in parsed.edits for h in edit.evidence))
         if parsed.edits:
             self._require_update_delivery(changed_handles, old, _kept_support)
-            state = apply_local(state, parsed.edits, self.service, conditioned=self.conditioned)
+            state = apply_local(
+                state,
+                parsed.edits,
+                self.service,
+                conditioned=self.conditioned,
+                assertions=_edit_metadata.get("unit_assertions") if _edit_metadata else None,
+                mark_exceptions=self.conditioned and self.features.enabled,
+            )
+            if self.features.enabled:
+                if _edit_metadata is None:
+                    raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
+                decorate_state(state, _edit_metadata, old=old["edit_state"], edits=parsed.edits)
         content = render_state(state)
         equal = state == old["edit_state"] and content == old["content"]
         retract = not equal and not any(unit["role"] == "content" for unit in state["units"])
@@ -802,6 +893,7 @@ class FunctionalEditMemory(FunctionalMemory):
         withdrawal_evidence: list[str] | None = None,
         *,
         _kept_support: list[str] | None = None,
+        _edit_metadata: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Replace the whole B0/B2 representation, confirm it, or withdraw with evidence.
 
@@ -815,7 +907,7 @@ class FunctionalEditMemory(FunctionalMemory):
         parsed = EditProposal.model_validate(
             {"action": "rewrite", "units": units or [], "relations": relations or []}
         )
-        requested = {
+        requested: dict[str, Any] = {
             "operation": "rewrite",
             "memory_method": self.memory_method,
             "read_handle": read_handle,
@@ -823,6 +915,9 @@ class FunctionalEditMemory(FunctionalMemory):
             "relations": [relation.model_dump() for relation in parsed.relations],
             "withdrawal_evidence": withdrawal_evidence or [],
         }
+        if self.features.enabled:
+            requested["edit_features"] = self.features.settings()
+            requested["edit_metadata"] = _edit_metadata
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -864,6 +959,10 @@ class FunctionalEditMemory(FunctionalMemory):
             state = form_state(parsed, self.service, conditioned=self.conditioned)
             if not any(unit["role"] == "content" for unit in state["units"]):
                 raise FunctionalRejection("FUNCTIONAL_EDIT_WITHDRAWAL_REQUIRES_EMPTY_UNITS")
+        if self.features.enabled and not no_change:
+            if _edit_metadata is None:
+                raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
+            decorate_state(state, _edit_metadata, old=old_state)
         content = old["content"] if no_change else render_state(state)
         support = self._source_support(old)
         refs = list(
@@ -1081,16 +1180,38 @@ class FunctionalEditMemory(FunctionalMemory):
             )
         return tuple(replacements.get(tool.name, tool) for tool in super().tools())
 
-    def _writer_tools(self) -> tuple[BaseTool, ...]:
-        """The same arm catalogue drives real SDK schemas and decoding."""
-        schema = writer_proposal_schema(self.arm)
-        create_schema = next(
-            item for item in schema["oneOf"] if item["properties"]["action"]["const"] == "create"
+    def writer_tools(self, config: RunnableConfig) -> tuple[BaseTool, ...]:
+        """Actual per-request SDK tools after writer_context has delivered its map."""
+        if not self.features.enabled:
+            return self.tools()
+        active = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-writer-active:")
         )
-        update_schema = writer_proposal_schema(self.arm, allow_create=False)
+        mapping = self.writer.load_mapping(active.value["mapping_id"]) if active else {}
+        return self._writer_tools(mapping)
+
+    def _writer_tools(self, mapping: dict[str, Any] | None = None) -> tuple[BaseTool, ...]:
+        """The same arm catalogue drives real SDK schemas and decoding."""
+        if self.features.enabled and mapping is None:
+            # Static ToolNode functions parse dictionaries and execute the same
+            # operation-bound decoder. Only writer_tools(config) advertises the
+            # actual per-request schemas to the model.
+            create_schema: dict[str, Any] | None = {"type": "object"}
+            update_schema: dict[str, Any] = {"type": "object"}
+        else:
+            schema = self.writer.proposal_schema(mapping=mapping)
+            create_schema = next(
+                (
+                    item
+                    for item in schema.get("oneOf", [])
+                    if item["properties"]["action"]["const"] == "create"
+                ),
+                None,
+            )
+            update_schema = self.writer.proposal_schema(allow_create=False, mapping=mapping)
 
         class SaveInput(_WriterSaveInput):
-            proposal: dict[str, Any] = Field(json_schema_extra=create_schema)
+            proposal: dict[str, Any] = Field(json_schema_extra=create_schema or {})
 
         class UpdateInput(_WriterInput):
             proposal: dict[str, Any] = Field(json_schema_extra=update_schema)
@@ -1135,8 +1256,12 @@ class FunctionalEditMemory(FunctionalMemory):
             )
 
         replacements = {
-            "save_memory": StructuredTool.from_function(save_memory, args_schema=SaveInput),
-            "update_memory": StructuredTool.from_function(update_memory, args_schema=UpdateInput),
+            "save_memory": (
+                _ExplicitWriterTool if self.features.enabled else StructuredTool
+            ).from_function(save_memory, args_schema=SaveInput),
+            "update_memory": (
+                _ExplicitWriterTool if self.features.enabled else StructuredTool
+            ).from_function(update_memory, args_schema=UpdateInput),
         }
         replacements["update_memory"].description = self.writer.instructions(allow_create=False) + (
             "Here the tool arguments replace the proposals envelope: proposal is one legal "
@@ -1144,4 +1269,14 @@ class FunctionalEditMemory(FunctionalMemory):
             "With no justified maintenance, do not call this tool. "
             "A targeted no_change needs an actual delivered r alias."
         )
-        return tuple(replacements.get(tool.name, tool) for tool in super().tools())
+        return tuple(
+            replacements.get(tool.name, tool)
+            for tool in super().tools()
+            if not (tool.name == "save_memory" and create_schema is None)
+            and not (
+                tool.name == "update_memory"
+                and self.features.enabled
+                and mapping is not None
+                and "oneOf" not in update_schema
+            )
+        )

@@ -21,6 +21,7 @@ from milai_lab.application.journal import UnknownBusinessAction
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, reference_key
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FUNCTIONAL_B0_METHOD,
@@ -51,6 +52,223 @@ def cfg(turn: str = "u", owner: str = "alice") -> dict[str, Any]:
             "v13_config_version": "functional-m-test-v1",
         },
     }
+
+
+NEXT_FEATURES = EditFeatures(True, True, True, True, True)
+
+
+def next_sdk_create():
+    return {
+        "action": "create",
+        "matter": "User's reminder sound",
+        "units": [
+            {
+                "text": "User reports quiet reminders.",
+                "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }
+        ],
+    }
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, arm):
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user(
+                "s", "u", "Remember my quiet reminders.", occurred_at="2025-02-03T00:00:00Z"
+            )
+            context = memory.writer_context("s", "u", "functional-m-test-v1")
+            assert context["writer_packet"]["records"] == []
+            catalog = {t.name: t for t in memory.writer_tools(cfg())}
+            assert "save_memory" in catalog and "update_memory" not in catalog
+            raw = catalog["save_memory"].tool_call_schema
+            assert "matter" in json.dumps(raw)
+            assert raw["properties"]["proposal"]["properties"]["units"]["items"]["properties"][
+                "evidence"
+            ]["items"]["enum"] == [e["id"] for e in context["writer_packet"]["evidence"]]
+            before_world = app.world.snapshot()
+            wrapper = app.call_wrapper(memory.service, "s", "u")
+            args = {"proposal": next_sdk_create(), "scope": {"project": "gallery"}}
+            response = invoke(memory, "save_memory", args, "next-save", wrapper=wrapper)
+            receipt = json.loads(response.content)
+            assert receipt["ok"] and receipt["effect"] == "memory_only"
+            old = copy.deepcopy(memory.service.read(receipt["id"])["value"])
+            assert "Matter: User's reminder sound" in old["content"]
+            assert old["edit_state"]["units"][0]["assertion"]["role"] == "user"
+            assert invoke(memory, "save_memory", args, "next-save", wrapper=wrapper) == response
+            memory.service.capture_user("s", "u2", "Remember my soft reminder tone now.")
+            context = memory.writer_context("s", "u2", "functional-m-test-v1")
+            assert context["writer_packet"]["records"][0]["matter"] == "User's reminder sound"
+            new_unit = {
+                "text": "User reports a soft reminder tone.",
+                "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }
+            proposal = (
+                {"action": "rewrite", "target": "r1", "units": [new_unit]}
+                if not memory.local
+                else {
+                    "action": "edit",
+                    "target": "r1",
+                    "edits": [
+                        {
+                            **new_unit,
+                            "operation": "change_value" if arm == "M" else "replace",
+                            "target_unit": "u1",
+                        }
+                    ],
+                }
+            )
+            changed = json.loads(
+                invoke(
+                    memory,
+                    "update_memory",
+                    {"proposal": proposal},
+                    "next-update",
+                    "u2",
+                    app.call_wrapper(memory.service, "s", "u2"),
+                ).content
+            )
+            assert changed["ok"] and changed["id"] == receipt["id"] and changed["revision"] == 2
+            assert memory.service.read(receipt["id"], 1)["value"] == old
+            assert memory.service.read(receipt["id"])["value"]["scope"] == {"project": "gallery"}
+            assert app.world.snapshot() == before_world
+            memory.service.capture_user("s", "u3", "Keep the existing reminder memory unchanged.")
+            memory.writer_context("s", "u3", "functional-m-test-v1")
+            no_change = {"action": "no_change", "target": "r1"}
+            first_confirm = memory.apply_writer_proposal(cfg("u3"), "one-container", no_change)
+            assert first_confirm["ok"]
+            assert memory.apply_writer_proposal(cfg("u3"), "one-container", no_change)["replayed"]
+            with pytest.raises(FunctionalRejection, match="DUPLICATE_RECORD_CONTAINER"):
+                memory.apply_writer_proposal(cfg("u3"), "second-container", no_change)
+
+
+@pytest.mark.parametrize("after_put", [False, True])
+def test_next_sdk_unknown_first_commit_reopen_exact_operation(tmp_path, monkeypatch, after_put):
+    def lost_put(original):
+        def put(ns, key, value, **kw):
+            if isinstance(value, dict) and value.get("_v13_1") and not failed[0]:
+                failed[0] = True
+                if after_put:
+                    original(ns, key, value, **kw)
+                raise RuntimeError("SCRIPTED_COMMIT_WINDOW")
+            return original(ns, key, value, **kw)
+
+        return put
+
+    failed = [False]
+    args = {"proposal": next_sdk_create()}
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user("s", "u", "Remember my quiet reminders.")
+            memory.writer_context("s", "u", "functional-m-test-v1")
+            monkeypatch.setattr(memory.service.store, "put", lost_put(memory.service.store.put))
+            first = invoke(
+                memory,
+                "save_memory",
+                args,
+                "next-unknown",
+                wrapper=app.call_wrapper(memory.service, "s", "u"),
+            )
+            unknown = json.loads(first.content)
+            assert unknown["status"] == "outcome_unknown"
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.writer_context("s", "u", "functional-m-test-v1")
+            second = invoke(
+                memory,
+                "save_memory",
+                args,
+                "next-unknown",
+                wrapper=app.call_wrapper(memory.service, "s", "u"),
+            )
+            assert second == first
+            found = memory.service.search("reminders", limit=10, include_raw=False)["records"]
+            assert len(found) == int(after_put)
+
+
+@pytest.mark.parametrize("invalid", [False, True])
+def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp_path, invalid):
+    from langchain_core.language_models.fake_chat_models import FakeMessagesListChatModel
+    from langchain_core.utils.function_calling import convert_to_openai_tool
+    from langgraph.checkpoint.sqlite import SqliteSaver
+
+    from milai_lab.baselines.langmem_agent import build_agent
+
+    class ScriptModel(FakeMessagesListChatModel):
+        tool_save_communication: str = "legacy"
+        tool_schema_communication: str = "legacy"
+        research_profile: Any = None
+        unknown_tool_feedback: bool = False
+        bound: list[Any]
+
+        def bind_tools(self, tools, **kwargs):
+            self.bound.append([convert_to_openai_tool(tool) for tool in tools])
+            return self
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user("s", "u", "Remember my quiet reminders.")
+            proposal = next_sdk_create()
+            if invalid:
+                proposal["units"][0]["evidence"] = ["e99"]
+            model = ScriptModel(
+                bound=[],
+                responses=[
+                    AIMessage(
+                        content="",
+                        tool_calls=[
+                            {
+                                "name": "save_memory",
+                                "id": "scripted-save",
+                                "type": "tool_call",
+                                "args": {"proposal": proposal},
+                            }
+                        ],
+                    ),
+                    AIMessage(content="done"),
+                ]
+            )
+            hooks = []
+
+            def hook(state, config):
+                memory.writer_context("s", "u", "functional-m-test-v1")
+                hooks.append("actual_context")
+                return {"llm_input_messages": state["messages"]}
+
+            def catalog(config):
+                assert hooks
+                return memory.writer_tools(config)
+
+            before = app.world.snapshot()
+            with SqliteSaver.from_conn_string(str(tmp_path / "graph.sqlite")) as saver:
+                agent = build_agent(
+                    model,
+                    memory.service.store,
+                    saver,
+                    memory_tools=memory.tools(),
+                    benchmark_view_hook=hook,
+                    model_tools_provider=catalog,
+                    business_call_wrapper=app.call_wrapper(memory.service, "s", "u"),
+                )
+                final = agent.invoke(
+                    {"messages": [HumanMessage(content="Remember my quiet reminders.")]}, cfg()
+                )
+            first_catalog = {t["function"]["name"]: t for t in model.bound[0]}
+            assert "update_memory" not in first_catalog
+            assert '"enum"' in json.dumps(first_catalog["save_memory"])
+            assert '"e1"' in json.dumps(first_catalog["save_memory"])
+            result = next(
+                msg
+                for msg in final["messages"]
+                if getattr(msg, "tool_call_id", None) == "scripted-save"
+            )
+            assert result.status == ("error" if invalid else "success")
+            assert len(memory.service.search("reminders", include_raw=False)["records"]) == int(
+                not invalid
+            )
+            assert app.world.snapshot() == before
 
 
 @contextmanager

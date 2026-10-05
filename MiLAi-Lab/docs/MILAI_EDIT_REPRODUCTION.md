@@ -47,6 +47,48 @@ the [original plan](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md). The baseline 
 PR82 `fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1`. Preserve all older worktrees,
 historical cohorts and their original results. New experiments use separate roots.
 
+## Next candidate: opt-in I2 contracts, not yet model validated
+
+`configs/milai-edit-v2-next-development.json` prepares the same four exposed users'
+first eight chronological sessions and all four own-empty-bank arms. The five
+`edit_features` booleans enable matter organization, semantic operations,
+packet-bound references, one change container per record, and source/assertion
+metadata. All default to false; the old `4357d46` source, configuration and live
+results remain intact. These changes have no new algorithm name, model family,
+review agent, output repair or full-rewrite backfill.
+
+The template's `writer_source_commit=null` and `PREPARED_NOT_RUN` admission are
+intentional. Before real HTTP, record the actual ordinary Git source version and
+its own CI in a separate immutable run configuration. Do not copy the old
+`4357d46` source identity onto new code. The continuous accounting ledger and
+single HTTP owner are shared with the old queue. Start with the two already
+exposed R3 declarations above using the new bound configuration and new outputs;
+each arm still forms its actual history from its own empty bank. The existing
+`run_edit_development_history.py --prepare` only checks the declaration and
+prepares observations; it does not establish behavioral success. Review actual
+formation, unmentioned preservation, scoped exception creation/removal, common
+conditions, source attribution and read-only behavior before the prefix and a
+fresh complete four-arm comparison. Reserved users and new functional stories
+still follow final candidate/Writer freeze.
+
+The next Writer envelope is `{"creates": [...], "records": {"r1": {...}}}`. A record
+key has one change container, with dependent edits inside it; missing keys imply
+no maintenance for those records. The same actual packet schema is used for
+preflight and generation. Duplicate JSON object keys are rejected before parsing
+can silently replace an earlier change. Reference enums choose only delivered
+aliases; they do not establish semantic support. vLLM documents JSON Schema
+generation with enum fields in its [official structured-output example](https://docs.vllm.ai/en/stable/features/structured_outputs/#online-serving-openai-api);
+the specific installed service and new schema still require real verification.
+
+Normal Host accepts the same `edit_features` with `edit_interface_version="I2"` and
+an existing edit memory method. Its dynamic catalog follows `writer_context`,
+with the same executable tools and existing permission/recovery boundaries.
+`occurred_at`/`--occurred-at` accepts an actual caller-supplied statement time;
+missing time remains unknown and differs from the source capture clock.
+Imported user/assistant sources can supply `occurred_at` or `timestamp` explicitly.
+Assertion kind and actual source role/time are stored and rendered across all
+arms. This source path and synthetic checks are not E5 functional acceptance.
+
 ## Local environment and source material
 
 The active checkout is `MiLAi-worktrees/development-milai-edit/MiLAi-Lab`.

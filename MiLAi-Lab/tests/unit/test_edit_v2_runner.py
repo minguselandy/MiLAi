@@ -9,6 +9,7 @@ from typing import Any
 
 import httpx
 import pytest
+from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.datasets.edit_benchmarks import ObservedSession
@@ -21,6 +22,7 @@ from milai_lab.runners.edit_benchmarks import (
     BenchmarkRun,
     adjacent_source_context,
     natural_source_batches,
+    parse_object,
 )
 
 
@@ -30,6 +32,20 @@ class Tokenizer:
 
     def apply_chat_template(self, messages: list[dict[str, str]], **kwargs: Any) -> list[int]:
         return [1] * (12 + sum(len(m["content"]) for m in messages))
+
+
+def test_record_container_rejects_duplicate_keys_before_json_overwrites_intent() -> None:
+    text = (
+        '{"creates": [], "records": {"r1": {"action": "rewrite"}, '
+        '"r1": {"action": "retract_record"}}}'
+    )
+    with pytest.raises(ValueError, match="Duplicate JSON object key: r1"):
+        parse_object(text, reject_duplicate_keys=True)
+    # The opt-in contract must not retrospectively alter the old parser.
+    assert parse_object(text)["records"]["r1"] == {"action": "retract_record"}
+    assert parse_object('{"creates": [], "records": {}}', reject_duplicate_keys=True) == {
+        "creates": [], "records": {}
+    }
 
 
 def test_stage_a_rejects_withdrawal_evidence_outside_actual_packet() -> None:
@@ -159,6 +175,93 @@ def test_actual_four_arm_requests_use_schema_and_same_id_cas(tmp_path: Path, arm
     assert complete["unprocessed"] == []
     coverage = read_json(tmp_path / "maintenance/2/source-coverage.json")
     assert coverage["complete_parsed_core_characters_union"] == len("Project weekly Thursday")
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
+    tmp_path: Path, arm: str
+) -> None:
+    """A synthetic transport verifies wiring, never the model's semantic choices."""
+    requests = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        payload = json.loads(request.content)
+        material = json.loads(payload["messages"][1]["content"])
+        packet, schema = material["delivery"], material["response_schema"]
+        assert schema == payload["response_format"]["json_schema"]["schema"]
+        requests.append(packet)
+        evidence = packet["evidence"][0]["id"]
+        assertion = {"source": evidence, "kind": "reported"}
+        if not packet["records"]:
+            assert schema["properties"]["records"]["properties"] == {}
+            envelope = {
+                "creates": [
+                    {"action": "create", "matter": matter,
+                     "units": [{"text": text, "role": "content", "evidence": [evidence],
+                                "assertion": assertion}]}
+                    for matter, text in (("Project schedule", "Project schedule Monday"),
+                                         ("Tea preference", "Tea preference jasmine"))
+                ],
+                "records": {},
+            }
+        else:
+            record = next(r for r in packet["records"]
+                          if "Monday" in r["units"][0]["text"])
+            unit = record["units"][0]
+            assert record["matter"] == "Project schedule"
+            if arm in {"B0", "B2"}:
+                change = {"action": "rewrite", "units": [
+                    {"text": "Project schedule Thursday", "role": "content",
+                     "evidence": [evidence], "assertion": assertion}
+                ]}
+            else:
+                change = {"action": "edit", "edits": [
+                    {"operation": "change_value" if arm == "M" else "replace",
+                     "target_unit": unit["id"], "text": "Project schedule Thursday",
+                     "evidence": [evidence], "assertion": assertion}
+                ]}
+            envelope = {"creates": [], "records": {record["id"]: change}}
+        Draft202012Validator(schema).validate(envelope)
+        return httpx.Response(200, json={
+            "choices": [{"finish_reason": "stop", "message": {"content": json.dumps(envelope)}}],
+            "usage": {"total_tokens": 8},
+        })
+
+    run = execution(tmp_path, arm)
+    run.settings["edit_features"] = {name: True for name in (
+        "matter_organization", "semantic_operations", "bound_references",
+        "single_record_changes", "source_metadata",
+    )}
+    # This fake tokenizer counts characters; allow the actual bound schema too.
+    run.settings["context_tokens"] = 100000
+    with VLLMClient(
+        VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+        budget=RunBudget(RunLimits(), tmp_path / "budget.json"),
+        transport=httpx.MockTransport(provider),
+    ) as client:
+        run.client = client
+        with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+            service = MemoryService(
+                store, ("next-contract", arm, "owner"), "owner", tmp_path / "bank.lock",
+                mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+            )
+            run.maintain(service, observation("s1", "Project schedule Monday; tea jasmine"), "1")
+            old = {r["value"]["edit_state"]["matter_description"]: r for r in service.records()}
+            assert len(old) == 2
+            run.maintain(service, observation("s2", "Project schedule Thursday"), "2")
+            current = {r["value"]["edit_state"]["matter_description"]: r
+                       for r in service.records()}
+            assert current["Tea preference"] == old["Tea preference"]
+            project = current["Project schedule"]
+            assert project["id"] == old["Project schedule"]["id"]
+            assert project["value"]["revision"] == 2
+            assert "Thursday" in project["value"]["content"]
+            assert "reported" in project["value"]["content"]
+            assert all(source["occurred_at"] == "2030-01-01" for source in service.sources())
+    assert len(requests) == 2
+    complete = read_json(tmp_path / "maintenance/2/complete.json")
+    assert complete["unprocessed"] == []
+    assert read_json(tmp_path / "maintenance/2/batch-0000/writer-envelope.json")["records"]
 
 
 def test_truncated_response_has_no_commit_and_no_repeat_on_resume(tmp_path: Path) -> None:

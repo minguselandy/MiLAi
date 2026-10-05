@@ -14,6 +14,7 @@ from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import EditMemory
 
 
@@ -63,6 +64,420 @@ def formation(method, view, op="save"):
             {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
         ]
     return method.apply("s", op, method.decode_proposal(proposal, view["mapping"]))
+
+
+NEXT_FEATURES = EditFeatures(True, True, True, True, True)
+
+
+def test_default_envelope_retains_exact_legacy_structure_and_per_proposal_rejection(tmp_path):
+    with opened(tmp_path) as (service, method):
+        view, _ = packet(service, method, "legacy-envelope", "A synthetic source.", [])
+        for malformed in (
+            {},
+            {"other": []},
+            {"proposals": None},
+            {"proposals": "not a list"},
+            {"proposals": {}},
+            {"proposals": [], "unexpected": True},
+            [],
+        ):
+            with pytest.raises(ValueError, match="Writer did not return a proposals list"):
+                method.envelope_proposals(malformed, view["mapping"])
+        assert method.envelope_proposals({"proposals": []}, view["mapping"]) == []
+        mixed = {"proposals": [{"action": "no_change"}, {"action": "invalid"}]}
+        proposals = method.envelope_proposals(mixed, view["mapping"])
+        assert proposals == mixed["proposals"]
+        assert method.decode_proposal(proposals[0], view["mapping"]) == {"action": "no_change"}
+        with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
+            method.decode_proposal(proposals[1], view["mapping"])
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_contract_legacy_without_any_support_is_read_only_schema(tmp_path, arm):
+    with opened(tmp_path, arm) as (service, _):
+        method = EditMemory(service, arm, interface_version="I2", features=NEXT_FEATURES)
+        preview = method.preview_writer_request(
+            {
+                "sources": [],
+                "records": [
+                    {
+                        "record_id": "opaque-old-record",
+                        "revision": 1,
+                        "content": "Old legacy text.",
+                        "edit_state": None,
+                    }
+                ],
+            }
+        )
+        Draft202012Validator.check_schema(preview["schema"])
+        variants = preview["schema"]["properties"]["records"]["properties"]["r1"]["oneOf"]
+        assert [variant["properties"]["action"]["const"] for variant in variants] == ["no_change"]
+        assert preview["schema"]["properties"]["creates"]["maxItems"] == 0
+
+
+def test_next_contract_exception_cancel_never_restores_a_lost_general_rule(tmp_path):
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
+        saved, _ = next_save(service, method)
+        view, _ = next_request(
+            service, method, "add", "User reports a room exception.", [service.read(saved["id"])]
+        )
+        add = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {
+                    "operation": "add_exception",
+                    "target_unit": "u1",
+                    "text": "User reports silence.",
+                    "condition": "In the side room.",
+                    "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                }
+            ],
+        }
+        assert method.apply("s", "add", method.decode_proposal(add, view["mapping"]))["ok"]
+        view, _ = next_request(
+            service,
+            method,
+            "drop",
+            "User retracts the general report.",
+            [service.read(saved["id"])],
+        )
+        drop = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [{"operation": "retract", "target_unit": "u1", "evidence": ["e1"]}],
+        }
+        assert method.apply("s", "drop", method.decode_proposal(drop, view["mapping"]))["ok"]
+        view, _ = next_request(
+            service,
+            method,
+            "cancel",
+            "User cancels the local exception.",
+            [service.read(saved["id"])],
+        )
+        assert view["packet"]["records"][0]["units"][0]["local_exception"]
+        remove = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [{"operation": "remove_exception", "target_unit": "u1", "evidence": ["e1"]}],
+        }
+        assert method.apply("s", "cancel", method.decode_proposal(remove, view["mapping"]))["ok"]
+        assert service.read(saved["id"], 4)["value"]["edit_state"]["units"] == []
+        assert (
+            service.read(saved["id"], 1)["value"]["edit_state"]["units"][0]["text"]
+            == "User reports quiet reminders."
+        )
+
+
+def next_unit(text, evidence="e1", role="content", kind="reported"):
+    return {
+        "text": text,
+        "role": role,
+        "evidence": [evidence],
+        "assertion": {"source": evidence, "kind": kind},
+    }
+
+
+def next_request(service, method, key, text, rows=None, role="user", allow_create=True):
+    capture = service.capture_user if role == "user" else service.capture_assistant
+    ref = capture("s", key, text, occurred_at="2025-03-04T10:00:00Z")["source_ref"]
+    service.bind_source_boundary("s", key, [ref])
+    delivery = method.prepare([ref], text, selected_records=rows or [])
+    preview = method.preview_writer_request(delivery, allow_create=allow_create)
+    actual = method.writer_request(delivery, request_id=key, allow_create=allow_create)
+    assert preview["mapping"] is None
+    assert preview["packet"] == actual["packet"]
+    assert preview["schema"] == actual["schema"]
+    Draft202012Validator.check_schema(actual["schema"])
+    return actual, ref
+
+
+def next_save(service, method, key="first", conditioned=False):
+    view, ref = next_request(
+        service, method, key, "User reports quiet reminders during gallery hours."
+    )
+    units = [next_unit("User reports quiet reminders.")]
+    create = {"action": "create", "matter": "User's reminder sound", "units": units}
+    if conditioned:
+        units.append(next_unit("During gallery hours.", role="condition"))
+        create["relations"] = [
+            {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+        ]
+    saved = method.apply(
+        "s",
+        "save-" + key,
+        method.decode_envelope({"creates": [create], "records": {}}, view["mapping"])[0],
+    )
+    assert saved["ok"] and saved["status"] == "committed"
+    return saved, ref
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_contract_matter_assertion_whole_or_local_and_historical_metadata(tmp_path, arm):
+    with opened(tmp_path, arm) as (service, _):
+        method = EditMemory(service, arm, interface_version="I2", features=NEXT_FEATURES)
+        first, ref = next_save(service, method, conditioned=method.conditioned)
+        before = copy.deepcopy(service.read(first["id"])["value"])
+        view, _ = next_request(
+            service,
+            method,
+            "later",
+            "Assistant infers reminders use a soft tone.",
+            [service.read(first["id"])],
+            role="assistant",
+            allow_create=False,
+        )
+        historical = [s for s in view["packet"]["source_table"] if not s["body_delivered"]]
+        assert historical[0]["role"] == "user"
+        assert historical[0]["occurred_at"] == "2025-03-04T10:00:00Z"
+        assert "not_redelivered" not in json.dumps(view["packet"])
+        assert view["packet"]["records"][0]["matter"] == "User's reminder sound"
+        changed = next_unit("Assistant infers reminders use a soft tone.", kind="inferred")
+        if arm in {"B0", "B2"}:
+            # Deliberately generate ONLY one target unit. No omitted old condition
+            # is programmatically filled back into a whole-record rewrite.
+            public = {"action": "rewrite", "units": [changed]}
+        else:
+            changed.pop("role")
+            public = {
+                "action": "edit",
+                "edits": [
+                    {
+                        **changed,
+                        "operation": "change_value" if arm == "M" else "replace",
+                        "target_unit": "u1",
+                    }
+                ],
+            }
+        decoded = method.decode_envelope(
+            {"creates": [], "records": {"r1": public}}, view["mapping"]
+        )[0]
+        updated = method.apply("s", "update", decoded)
+        assert updated["id"] == first["id"] and updated["revision"] == 2
+        current = service.read(first["id"])["value"]
+        assert (
+            current["edit_state"]["matter_description"]
+            == before["edit_state"]["matter_description"]
+        )
+        assert current["edit_state"]["units"][0]["assertion"]["role"] == "assistant"
+        assert "speaker=assistant" in current["content"] and "inferred" in current["content"]
+        assert service.source(ref)["occurred_at"] == "2025-03-04T10:00:00Z"
+        assert service.read(first["id"], 1)["value"] == before
+        if arm in {"B1", "M"}:
+            assert (
+                current["edit_state"]["units"][0]["unit_id"]
+                == before["edit_state"]["units"][0]["unit_id"]
+            )
+        if arm == "M":
+            assert current["edit_state"]["units"][1] == before["edit_state"]["units"][1]
+        assert method.apply("s", "update", decoded)["replayed"]
+
+
+def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(tmp_path):
+    with opened(tmp_path) as (service, legacy):
+        method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
+        view, _ = next_request(service, method, "empty", "A source happened.")
+        schema_text = json.dumps(view["schema"])
+        assert '"edit"' not in schema_text and '"no_change"' not in schema_text
+        assert '"not"' not in schema_text
+        assert view["schema"]["properties"]["records"]["properties"] == {}
+        with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+            method.envelope_proposals(
+                {"creates": [], "records": {"r1": {"action": "no_change"}}}, view["mapping"]
+            )
+        with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
+            method.decode_proposal(
+                {
+                    "action": "create",
+                    "matter": "Undelivered",
+                    "units": [next_unit("Invented", "e99")],
+                },
+                view["mapping"],
+            )
+        no_sources = method.preview_writer_request({"sources": [], "records": []})
+        assert no_sources["schema"]["properties"]["creates"]["maxItems"] == 0
+        assert method.envelope_proposals({"creates": [], "records": {}}, view["mapping"]) == []
+        old, _ = packet(service, legacy, "legacy", "A legacy source.", [])
+        mixed = {"proposals": [{"action": "no_change"}, {"action": "illegal"}]}
+        assert legacy.envelope_proposals(mixed, old["mapping"]) == mixed["proposals"]
+
+
+def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path):
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
+        saved, _ = next_save(service, method, conditioned=True)
+        baseline = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        view, _ = next_request(
+            service,
+            method,
+            "exception",
+            "User changes hours and needs silence in the north room.",
+            [service.read(saved["id"])],
+        )
+        edit = {
+            "action": "edit",
+            "edits": [
+                {
+                    **next_unit("During afternoon gallery hours.", role="condition"),
+                    "operation": "change_condition",
+                    "target_unit": "u2",
+                },
+                {
+                    **next_unit("User reports silent reminders."),
+                    "operation": "add_exception",
+                    "target_unit": "u1",
+                    "condition": "In the north room.",
+                    "shared_conditions": ["u2"],
+                },
+            ],
+        }
+        # role is fixed by the actual selected existing unit in local operations.
+        edit["edits"][0].pop("role")
+        edit["edits"][1].pop("role")
+        decoded = method.decode_envelope({"creates": [], "records": {"r1": edit}}, view["mapping"])[
+            0
+        ]
+        revised = method.apply("s", "scope", decoded)
+        state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        assert revised["revision"] == 2 and state["units"][0] == baseline["units"][0]
+        assert state["units"][1]["unit_id"] == baseline["units"][1]["unit_id"]
+        assert len(state["units"]) == 4 and len(state["relations"]) == 4
+        view, _ = next_request(
+            service,
+            method,
+            "cancel",
+            "User cancels the north-room exception.",
+            [service.read(saved["id"])],
+        )
+        remove = {
+            "action": "edit",
+            "edits": [{"operation": "remove_exception", "target_unit": "u3", "evidence": ["e1"]}],
+        }
+        decoded = method.decode_envelope(
+            {"creates": [], "records": {"r1": remove}}, view["mapping"]
+        )[0]
+        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"]) == 2
+        receipt = method.apply("s", "remove", decoded)
+        now = service.read(saved["id"])["value"]["edit_state"]
+        assert receipt["revision"] == 3 and now["units"] == state["units"][:2]
+        assert now["relations"] == state["relations"][:1]
+        assert service.read(saved["id"], 2)["value"]["edit_state"] == state
+        # The old read revision cannot commit a second change after cancellation.
+        stale = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {
+                    **next_unit("Changed stale value."),
+                    "operation": "change_value",
+                    "target_unit": "u1",
+                }
+            ],
+        }
+        stale["edits"][0].pop("role")
+        rejected = method.apply("s", "stale", method.decode_proposal(stale, view["mapping"]))
+        assert not rejected["ok"] and service.read(saved["id"])["value"]["revision"] == 3
+
+
+def test_next_contract_b1_same_text_inserts_bind_assertion_at_allocation(tmp_path):
+    with opened(tmp_path, "B1") as (service, _):
+        method = EditMemory(service, "B1", interface_version="I2", features=NEXT_FEATURES)
+        saved, _ = next_save(service, method)
+        view, _ = next_request(
+            service, method, "insert", "User reports a supplement.", [service.read(saved["id"])]
+        )
+        supplemental = service.capture_assistant(
+            "s", "assistant", "Assistant infers a supplement."
+        )["source_ref"]
+        service.bind_source_boundary(
+            "s", "both", [view["mapping"]["evidence"]["e1"]["source_ref"], supplemental]
+        )
+        delivery = method.prepare(
+            [view["mapping"]["evidence"]["e1"]["source_ref"], supplemental],
+            "",
+            selected_records=[service.read(saved["id"])],
+        )
+        view = method.writer_request(delivery, request_id="both")
+        edits = [
+            {
+                **next_unit("Same words.", "e1", kind="reported"),
+                "operation": "insert",
+                "target_unit": "u1",
+            },
+            {
+                **next_unit("Same words.", "e2", kind="inferred"),
+                "operation": "insert",
+                "target_unit": "u1",
+            },
+        ]
+        for edit in edits:
+            edit.pop("role")
+        decoded = method.decode_envelope(
+            {"creates": [], "records": {"r1": {"action": "edit", "edits": edits}}}, view["mapping"]
+        )[0]
+        assert method.apply("s", "inserts", decoded)["ok"]
+        inserted = service.read(saved["id"])["value"]["edit_state"]["units"][1:]
+        assert [u["assertion"]["role"] for u in inserted] == ["assistant", "user"]
+        assert [u["assertion"]["kind"] for u in inserted] == ["inferred", "reported"]
+
+
+@pytest.mark.parametrize("arm", ["B0", "B2"])
+def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exact(tmp_path, arm):
+    with opened(tmp_path, arm) as (service, _):
+        method = EditMemory(service, arm, interface_version="I2", features=NEXT_FEATURES)
+        saved, _ = next_save(service, method)
+        view, _ = next_request(
+            service,
+            method,
+            "cancel",
+            "User withdraws the entire reminder report.",
+            [service.read(saved["id"])],
+        )
+        with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
+            method.decode_proposal(
+                {"action": "rewrite", "target": "r1", "units": []}, view["mapping"]
+            )
+        retained = {
+            "text": "User reports quiet reminders.",
+            "evidence": [],
+            "keep_support": ["h1"],
+            "assertion": {"keep": "h1"},
+        }
+        copied = method.decode_proposal(
+            {"action": "rewrite", "target": "r1", "units": [retained]}, view["mapping"]
+        )
+        assert copied["_edit_metadata"]["unit_assertions"][0]["role"] == "user"
+        retained["text"] = "Assistant infers quiet reminders."
+        retained["evidence"] = ["e1"]
+        with pytest.raises(FunctionalRejection, match="CHANGED_ASSERTION"):
+            method.decode_proposal(
+                {"action": "rewrite", "target": "r1", "units": [retained]}, view["mapping"]
+            )
+        withdrawal = method.decode_proposal(
+            {"action": "retract_record", "target": "r1", "evidence": ["e1"]}, view["mapping"]
+        )
+        receipt = method.apply("s", "withdraw", withdrawal)
+        assert receipt["ok"] and receipt["id"] == saved["id"]
+        assert service.read(saved["id"], 1)["value"]["edit_state"]["units"]
+        assert service.read(saved["id"], 2)["value"]["edit_state"]["units"] == []
+
+
+def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):
+    with opened(tmp_path) as (service, _):
+        ref = service.capture_user(
+            "s", "known", "Actual text.", occurred_at="2025-01-02T00:00:00Z"
+        )["source_ref"]
+        unknown = service.capture_assistant("s", "unknown", "An actual assistant assertion.")[
+            "source_ref"
+        ]
+    with opened(tmp_path) as (service, _):
+        assert service.source(ref)["occurred_at"] == "2025-01-02T00:00:00Z"
+        assert "occurred_at" not in service.source(unknown)
+        assert service.capture_user("s", "known", "Actual text.")["source_ref"] == ref
+        with pytest.raises(ValueError, match="OCCURRENCE_TIME_CHANGED"):
+            service.capture_user("s", "known", "Actual text.", occurred_at="2025-01-03T00:00:00Z")
 
 
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
