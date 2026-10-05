@@ -228,7 +228,29 @@ def test_existing_real_method_assertions_match_whole_frozen_contract() -> None:
         assert completed.returncode == 0, completed.stdout + completed.stderr
         observed = json.loads(output.read_text())
     expected = json.loads((GOLDEN / "provider-real-golden.json").read_text())["contracts"]
-    assert observed == expected
+    # P1 changes new journal keys to the complete caller-issued identity. Keep
+    # every old receipt, pending state and captured payload exactly as frozen;
+    # adapt only the six serialized single-call journal keys in expected values.
+    migrated_journals = 0
+    for case in expected.values():
+        for filename in ("business.json", "journal.json"):
+            if filename not in case["artifacts"]:
+                continue
+            journal = json.loads(case["artifacts"][filename])
+            assert len(journal) == 1
+            entry = next(iter(journal.values()))
+            caller_identity = [entry["thread_id"], entry["generation_id"], entry["call_id"]]
+            key = "call:" + json.dumps(caller_identity, ensure_ascii=False, separators=(",", ":"))
+            assert key not in journal
+            case["artifacts"][filename] = (
+                json.dumps({key: entry}, ensure_ascii=False, indent=2) + "\n"
+            )
+            migrated_journals += 1
+    assert migrated_journals == 6
+    # A failing full-trace repr can produce hundreds of thousands of CI lines.
+    # Keep the same exact comparison, reporting its boolean without that dump.
+    whole_contract_equal = observed == expected
+    assert whole_contract_equal, "Whole provider contract differs after the declared key migration"
     assert len(observed) == 44
     assert sum(len(names) for names in SELECTED.values()) == 20
 
