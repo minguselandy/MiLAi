@@ -1,5 +1,46 @@
 # MiLAi-Edit reproduction instructions
 
+Current v2 execution is described in
+[the v2 progress report](MILAI_EDIT_V2_PROGRESS_20261005.md). The v1 commands
+below retain their historical configuration and results. v1 M ended FAILED
+after a Reader disconnect; it is not an active queue awaiting completion.
+
+## Exposed v2 R3 development histories
+
+The public driver is `tools/run_edit_development_history.py`. The original six
+events/five questions declare 44 calls across four independently formed banks;
+the global-condition branch declares 36. Both branches share one exposed source.
+The actual first attempts used the archived Root driver and `4357d46` source:
+80 calls, 120,345 known tokens, no new unknown usage. Publishing this entry point
+does not add a new model trial or change the original results.
+
+Use `FROZEN_RUN` for the Lab source preserved at ordinary Git version `4357d46`,
+`V2_LAB` for this checkout containing the public driver/configuration/declarations,
+and `MILAI_EDIT_PY` for the installed interpreter described below. Outputs must
+be new declared runs. Never change an output path to repeat an unconfirmed request.
+The selected shared configuration remains `milai-edit-common-v2-i2-durability`.
+
+```bash
+PYTHONPATH="$FROZEN_RUN/src" "$MILAI_EDIT_PY" "$V2_LAB/tools/run_edit_development_history.py" \
+  --config "$V2_LAB/configs/milai-edit-v2-e1-i2.json" \
+  --inputs "$V2_LAB/data/manifests/milai-edit-v2-r3-development-behavior.json" \
+  --output "$R3_ORIGINAL_OUT" --source-version 4357d46
+PYTHONPATH="$FROZEN_RUN/src" "$MILAI_EDIT_PY" "$V2_LAB/tools/run_edit_development_history.py" \
+  --config "$V2_LAB/configs/milai-edit-v2-e1-i2.json" \
+  --inputs "$V2_LAB/data/manifests/milai-edit-v2-r3-development-global-condition.json" \
+  --output "$R3_GLOBAL_OUT" --source-version 4357d46
+```
+
+Adding `--prepare` validates the declaration and saves only actual Writer
+observations without constructing a model client or acquiring the HTTP lease.
+Preparation needs its own output directory. Actual execution uses the existing
+serial ledger/lease, semantic-only Reader and actual MemoryService. Evaluator
+requirements and questions do not enter Writer observations. A terminal completion
+means attempts completed, not semantic success; review `actual-behavior.json`,
+receipts, before/after states and answers. New unknown usage or an exception stops
+the driver without replay. This development driver is not the controlled final
+candidate confirmation; that remains after the eventual candidate/Writer freeze.
+
 Prepared during execution; this file does not claim completion of unrun stages.
 See [progress](MILAI_EDIT_PROGRESS.md), [analysis](MILAI_EDIT_ANALYSIS_SPEC.md) and
 the [original plan](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md). The baseline is
