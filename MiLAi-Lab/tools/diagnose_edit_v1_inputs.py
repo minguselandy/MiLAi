@@ -64,9 +64,14 @@ def frozen_samples(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return selected
 
 
-def diagnose(suite: Path, output: Path, arms: list[Arm]) -> dict[str, Any]:
+def diagnose(
+    suite: Path, output: Path, arms: list[Arm], *,
+    reference_diagnostic: Path | None = None, select_stage_a: bool = True,
+) -> dict[str, Any]:
     if output.exists():
         raise ValueError("Preserve prior diagnosis; select a fresh output")
+    if select_stage_a and arms != ["B0", "B1"]:
+        raise ValueError("Stage A selection is fixed to B0/B1; use --no-selection")
     config = read_json(suite / arms[0] / "actual-config.json")
     tokenizer = AutoTokenizer.from_pretrained(config["tokenizer_path"], local_files_only=True)  # type: ignore[no-untyped-call]
 
@@ -75,7 +80,9 @@ def diagnose(suite: Path, output: Path, arms: list[Arm]) -> dict[str, Any]:
             tokenizer.encode(json.dumps(value, ensure_ascii=False), add_special_tokens=False)
         )
 
-    reference = read_json(suite / "sealed-b0-b1-reference-diagnostic-v1.json")
+    reference = read_json(
+        reference_diagnostic or suite / "sealed-b0-b1-reference-diagnostic-v1.json"
+    )
     ref_rows = {
         str(Path(row["receipt"]).parent): row
         for arm in arms
@@ -238,9 +245,10 @@ def diagnose(suite: Path, output: Path, arms: list[Arm]) -> dict[str, Any]:
                         ),
                     }
                 )
-    samples = frozen_samples(rows)
+    samples = frozen_samples(rows) if select_stage_a else []
     result = {
-        "status": "R0_SEALED_V1_DIAGNOSIS_AND_FIXED_STAGE_A_SAMPLE",
+        "status": "R0_SEALED_V1_DIAGNOSIS_AND_FIXED_STAGE_A_SAMPLE"
+        if select_stage_a else "R0_SEALED_V1_DIAGNOSIS_ONLY",
         "actual_http_calls": 0,
         "candidate_selected": False,
         "arms": arms,
@@ -252,9 +260,9 @@ def diagnose(suite: Path, output: Path, arms: list[Arm]) -> dict[str, Any]:
         "selection_rule": (
             "Before v2 output: six per category, user/stage/arm rotation, lexical ties; "
             "no duplicate input or quota padding."
-        ),
+        ) if select_stage_a else "No new Stage A selection; preserve the existing fixed 24.",
         "limits": (
-            "Sealed B0/B1 only. Component token counts overlap and are not additive. "
+            "Listed sealed v1 arms only. Component token counts overlap and are not additive. "
             "Accepted/no_change is not semantic maintenance success. Missing packet IDs "
             "are not proven unissued or invisible. Samples are exposed development, "
             "not independent evaluation."
@@ -268,8 +276,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("suite", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--arms", nargs="+", choices=["B0", "B1", "B2", "M"],
+                        default=["B0", "B1"])
+    parser.add_argument("--reference-diagnostic", type=Path)
+    parser.add_argument("--no-selection", action="store_true")
     args = parser.parse_args()
-    report = diagnose(args.suite, args.output, ["B0", "B1"])
+    report = diagnose(
+        args.suite, args.output, args.arms,
+        reference_diagnostic=args.reference_diagnostic, select_stage_a=not args.no_selection,
+    )
     print(
         json.dumps(
             {

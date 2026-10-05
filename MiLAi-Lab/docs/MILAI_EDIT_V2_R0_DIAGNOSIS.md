@@ -64,3 +64,53 @@ I1 改 schema/短引用，I2 同时改展示，保留事实文本、关系、范
 四位用户首次原生 update 均在时间顺序第四会话；前八会话 update 数分别为
 19、15、20、18。I1、I2 各跑四臂；I0 复用 v1 原输出，禁止初始化成 v1 好状态。
 I3 仅在实际需要公共工作集时单列，完整 277 会话配置须在 pilot 后另行冻结。
+
+## B2 封存后的只读补充
+
+B2 的 277 个会话、280 个批次均已封存。此补充只扩展历史输入分析，
+Stage A 的原固定 24 项按原选择函数复核完全相同，没有重新抽样。
+
+| v1 臂 | 已准备 batch | 已发送 | 已收到 | 完整解析 | 容量失败 | 全请求 input token：最小/中位/最大 |
+|---|---:|---:|---:|---:|---:|---|
+| B2 | 280 | 213 | 213 | 211 | 67 | 2,461 / 31,181 / 70,059 |
+
+67 次调用前容量失败使用原 v1 方法、模板与实际 tokenizer 精确重建，
+token 差异 0。所有批次的非可加组成中位数为新 source 14,049、旧正文
+1,510、结构及支持 6,961、历史证据 5,302、schema 773 token。完整输入
+仍以实际 request 或容量失败记录为准，不能将这些分项相加。
+
+| v1 臂 | 用户前缀 | 会话数 | 首次容量失败：时间顺序第几会话 | 容量失败 batch | 最大/末尾库正文字符 | 正文下降次数 |
+|---|---|---:|---:|---:|---:|---:|
+| B2 | 2f1f897e | 65 | 37 | 23 | 18,400 / 18,400 | 3 |
+| B2 | 8ece194a | 77 | — | 0 | 5,710 / 2,413 | 8 |
+| B2 | 6106afc1 | 62 | 19 | 44 | 14,494 / 14,494 | 1 |
+| B2 | 5c005ed8 | 73 | — | 0 | 5,484 / 5,484 | 3 |
+
+正文下降为连续实际 batch 状态的大小比较，不代表正确撤销或损伤。
+B2 两位用户没有容量失败，另两位共 67 次，不能用一个总体平均值推定
+所有用户的长历史可用性。每 batch 单位长度中位数的用户内中位数分别为
+22、22.5、22、22 token；最大单位分别为 328、37、161、33。
+
+173 个拒绝提案包括 129 次非法局部操作、19 次来源不可用、23 次 DTO
+校验和 2 次 current-boundary-source 拒绝。19 次来源不可用均是把已展示
+的 source_ref 填入 evidence_id；共 189 次引用，逐提案去重后 108 次。
+这支持命名空间混用诊断，不是来源语义幻觉结论。实际接受数 49 包括
+46 次提交和 3 次 no_change，不视为 49 次正确形成。
+
+逐会话与输入组成原件位于 ignored 的
+`artifacts/milai-edit/v2-r0/sealed-b2-input-diagnosis-v1.json`；引用核对与
+容量重建另存同目录。复现本表时仍须使用保存的 v1 evaluator package：
+
+```bash
+PYTHONPATH="$OLD_LAB/artifacts/milai-edit/evaluator-serial-v1-source/src" \
+  /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  tools/diagnose_edit_v1_inputs.py "$OLD_LAB/artifacts/milai-edit/e1-dev-v1" \
+  artifacts/milai-edit/v2-r0/sealed-b2-input-diagnosis-new.json \
+  --arms B2 \
+  --reference-diagnostic artifacts/milai-edit/v2-r0/sealed-b2-reference-diagnostic-v1.json \
+  --no-selection
+```
+
+`OLD_LAB` 指原 v1 工作树的 MiLAi-Lab 绝对路径；引用文件必须来自同臂
+实际拒绝原件。工具拒绝未封存臂，也不会覆盖已有报告。M 完成后仍需
+补齐自身历史输入诊断和四臂对照；本轮新增模型调用 0。
