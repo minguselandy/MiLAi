@@ -235,7 +235,7 @@ class ExternalRun(BenchmarkRun):
             )
         observed = ObservedSession(source_session, observed.date, observed.turns)
         arm = self.settings["arm"]
-        if arm == "M":
+        if arm in {"B0", "B1", "B2", "M"}:
             return super().maintain(service, observed, key)
         if arm not in {"RawRAG", "RollingSummary", "A-MEM"}:
             raise ValueError("Unsupported external comparison arm")
@@ -368,7 +368,7 @@ class ExternalRun(BenchmarkRun):
 
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
         arm = self.settings["arm"]
-        if arm == "M":
+        if arm in {"B0", "B1", "B2", "M"}:
             return super().answer(service, question, date, key)
         path = self.root / "reader-delivery" / key / "memories.json"
         if path.exists():

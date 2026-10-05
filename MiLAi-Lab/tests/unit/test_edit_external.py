@@ -146,7 +146,7 @@ def test_control_reopen_after_state_commit_preserves_one_opportunity_and_full_so
         assert len(service.sources()) == 2
 
 
-@pytest.mark.parametrize("arm", ["RawRAG", "RollingSummary", "A-MEM", "M"])
+@pytest.mark.parametrize("arm", ["RawRAG", "RollingSummary", "A-MEM", "B0", "B1", "B2", "M"])
 def test_repeated_author_session_id_keeps_every_dated_occurrence_and_reopens(tmp_path, arm):
     execution = object.__new__(ExternalRun)
     execution.root = tmp_path / "run"
@@ -195,7 +195,7 @@ def test_repeated_author_session_id_keeps_every_dated_occurrence_and_reopens(tmp
             assert metadata["original_date"] == observed.date
             actual = service.sources(metadata["source_session_id"])
             assert len(actual) == 1 and actual[0]["content"] == observed.turns[0]["content"]
-            if arm != "M":
+            if arm not in {"B0", "B1", "B2", "M"}:
                 batches = read_json(execution.root / "maintenance" / key / "batches.json")
                 assert batches[0]["fragments"][0]["timestamp"] == observed.date
             else:
@@ -218,3 +218,53 @@ def test_repeated_author_session_id_keeps_every_dated_occurrence_and_reopens(tmp
             execution.maintain(service, observed, f"longmemeval/question/session/{ordinal}")
         assert len(service.sources()) == 3
         assert len(callbacks) == callback_count
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("interface", ["I1", "I2"])
+def test_external_selected_edit_candidate_forms_own_state_and_common_reader(
+    tmp_path, arm, interface
+):
+    execution = object.__new__(ExternalRun)
+    execution.root = tmp_path / "run"
+    execution.settings = {
+        "arm": arm, "interface_version": interface, "source_tokens": 1000,
+        "retrieval_limit": 10, "working_sets": False, "context_tokens": 65536,
+        "model": {"max_tokens": 8192},
+    }
+    execution.tokenizer = SimpleNamespace(encode=lambda text, **kwargs: list(text))
+    execution.input_tokens = lambda messages: 100
+    callbacks = []
+
+    def call(key, messages, *, structured, **kwargs):
+        callbacks.append(key)
+        body = json.loads(messages[-1]["content"])
+        if structured:
+            assert kwargs["response_format"]["type"] == "json_schema"
+            return json.dumps({"proposals": [{"action": "create", "units": [
+                {"text": "Harbor labels use lowercase.", "evidence": ["e1"]}
+            ]}]})
+        assert body["question"] == "What case do Harbor labels use?"
+        assert len(body["memories"]) == 1
+        assert "Harbor labels use lowercase." in body["memories"][0]["content"]
+        return "Lowercase."
+
+    execution.call = call
+    observed = ObservedSession("original-session", "2030-01-01", (
+        {"role": "user", "content": "Harbor labels use lowercase.", "timestamp": "2030-01-01"},
+    ))
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = MemoryService(
+            store, ("external", arm, "owner"), "owner", tmp_path / "lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+        )
+        assert service.records() == []
+        formed = execution.maintain(service, observed, "observed/0")
+        assert len(formed) == 1
+        assert service.records()[0]["value"]["method_arm"] == arm
+        assert service.records()[0]["value"]["method_version"] == "milai_edit_v2"
+        before = service.records()
+        assert execution.answer(service, "What case do Harbor labels use?", "2030-01-02", "qa/0") \
+            == "Lowercase."
+        assert service.records() == before
+        assert len(callbacks) == 2

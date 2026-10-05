@@ -103,7 +103,10 @@ class FunctionalEditMemory(FunctionalMemory):
     def instructions(self) -> str:
         if self.interface_version != "v1":
             return self.writer.instructions() + (
-                "Functional tool arguments replace the proposals envelope. If no maintenance "
+                "Functional tool arguments replace the proposals envelope. For a supported "
+                "durable new fact use save_memory when formation is warranted; for an actual "
+                "correction use update_memory with the applicable delivered target and evidence. "
+                "An empty records list is not absence of new evidence. If no maintenance "
                 "is justified, make no save_memory/update_memory tool call. "
                 "Functional save_memory takes proposal=create and optional scope. "
                 "update_memory takes proposal with target=r# from the latest writer packet. "
@@ -1134,7 +1137,8 @@ class FunctionalEditMemory(FunctionalMemory):
         }
         replacements["update_memory"].description = self.writer.instructions(allow_create=False) + (
             "Here the tool arguments replace the proposals envelope: proposal is one legal "
-            "maintenance action. With no justified maintenance, do not call this tool. "
+            "maintenance action. Apply a supported correction to an actual delivered target. "
+            "With no justified maintenance, do not call this tool. "
             "A targeted no_change needs an actual delivered r alias."
         )
         return tuple(replacements.get(tool.name, tool) for tool in super().tools())

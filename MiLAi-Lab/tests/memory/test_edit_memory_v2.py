@@ -380,7 +380,7 @@ def test_no_maintenance_example_empty_bank_and_guessed_target_remains_rejected(
         view, _ = packet(service, method, "received", "Received.", [], allow_create)
         assert view["packet"]["records"] == [] and view["packet"]["evidence"]
         instructions = method.instructions(allow_create=allow_create)
-        example = json.loads(instructions.split("Example with no justified maintenance: ", 1)[1])
+        example, _ = json.JSONDecoder().raw_decode(instructions.split("empty response: ", 1)[1])
         assert example == {"proposals": []}
         Draft202012Validator(method.envelope_schema(allow_create=allow_create)).validate(example)
         # An empty envelope schedules zero actions and does not form a semantic record.
@@ -414,3 +414,129 @@ def test_targeted_no_change_confirms_only_record_in_current_delivery(tmp_path, a
         with pytest.raises(FunctionalRejection, match="EDIT_SHORT_REFERENCE_UNAVAILABLE"):
             method.decode_proposal(confirmation, omitted["mapping"])
         assert service.read(saved["id"])["value"] == before
+
+
+def example_envelope(instructions, label):
+    return json.JSONDecoder().raw_decode(instructions.split(label + " response: ", 1)[1])[0]
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("profile", ["I1", "I2"])
+def test_balanced_examples_form_correct_and_keep_unrestated_support(tmp_path, arm, profile):
+    with opened(tmp_path, arm, profile) as (service, method):
+        create_instructions = method.instructions()
+        create = example_envelope(create_instructions, "Formation")
+        empty = example_envelope(create_instructions, "empty")
+        assert create["proposals"] and empty == {"proposals": []}
+        Draft202012Validator(method.envelope_schema()).validate(create)
+        first, _ = packet(
+            service, method, "new", "Reminders are quiet, only during the exhibition.", []
+        )
+        formed = method.apply(
+            "s", "form-example", method.decode_proposal(create["proposals"][0], first["mapping"])
+        )
+        assert formed["ok"] and formed["revision"] == 1
+        before = copy.deepcopy(service.read(formed["id"])["value"])
+        # The example's empty envelope schedules no write, including with an existing bank.
+        for proposal in empty["proposals"]:
+            method.apply("s", "empty-example", method.decode_proposal(proposal, first["mapping"]))
+        assert service.read(formed["id"])["value"] == before
+        current, _ = packet(
+            service,
+            method,
+            "change",
+            "Reminders use a soft tone.",
+            [service.read(formed["id"])],
+            False,
+        )
+        instructions = method.instructions(allow_create=False)
+        assert "Formation response:" not in instructions
+        correction = example_envelope(instructions, "Correction")
+        Draft202012Validator(method.envelope_schema(allow_create=False)).validate(correction)
+        updated = method.apply(
+            "s",
+            "correction-example",
+            method.decode_proposal(correction["proposals"][0], current["mapping"]),
+        )
+        assert updated["ok"] and updated["id"] == formed["id"] and updated["revision"] == 2
+        after = service.read(formed["id"])["value"]["edit_state"]
+        assert after["units"][0]["text"] == "Reminders use a soft tone."
+        assert after["units"][1]["text"] == before["edit_state"]["units"][1]["text"]
+        assert (
+            after["units"][1]["evidence_refs"] == before["edit_state"]["units"][1]["evidence_refs"]
+        )
+        if method.conditioned:
+            assert (
+                after["relations"][0]["evidence_refs"]
+                == before["edit_state"]["relations"][0]["evidence_refs"]
+            )
+        if arm in {"B1", "M"}:
+            assert after["units"][1:] == before["edit_state"]["units"][1:]
+            assert after["relations"] == before["edit_state"]["relations"]
+        assert service.read(formed["id"], 1)["value"] == before
+        omitted, _ = packet(service, method, "no-target", "Reminders use a soft tone.", [], False)
+        # Hypothetical r1 in the explanatory example grants no alias to this actual packet.
+        with pytest.raises(FunctionalRejection, match="SHORT_REFERENCE_UNAVAILABLE"):
+            method.decode_proposal(correction["proposals"][0], omitted["mapping"])
+
+
+@pytest.mark.parametrize("profile", ["I1", "I2"])
+def test_balanced_formation_then_local_exception_and_supported_cancel_keep_general_state(
+    tmp_path, profile
+):
+    with opened(tmp_path, "M", profile) as (service, method):
+        view, _ = packet(
+            service, method, "initial", "Reminders are quiet, only during the exhibition.", []
+        )
+        create = example_envelope(method.instructions(), "Formation")["proposals"][0]
+        saved = method.apply("s", "formation", method.decode_proposal(create, view["mapping"]))
+        assert saved["ok"]
+        original = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        view, _ = packet(
+            service, method, "scope", "Late shift uses a loud chime.", [service.read(saved["id"])]
+        )
+        override = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {
+                    "operation": "override",
+                    "target_unit": "u1",
+                    "text": "Reminders use a loud chime.",
+                    "condition": "Late shift.",
+                    "evidence": ["e1"],
+                }
+            ],
+        }
+        scoped = method.apply("s", "scope", method.decode_proposal(override, view["mapping"]))
+        assert scoped["ok"] and scoped["revision"] == 2
+        state = service.read(saved["id"])["value"]["edit_state"]
+        assert state["units"][:2] == original["units"]
+        assert state["relations"][0] == original["relations"][0]
+        # Retain unrestated conditions for the general arrangement, without copying to a new object.
+        assert not any(
+            r["source_unit"] == original["units"][1]["unit_id"]
+            and r["target_unit"] == state["units"][2]["unit_id"]
+            for r in state["relations"]
+        )
+        view, _ = packet(
+            service,
+            method,
+            "cancel",
+            "Cancel the late-shift exception.",
+            [service.read(saved["id"])],
+        )
+        cancellation = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {"operation": "retract", "target_unit": alias, "evidence": ["e1"]}
+                for alias in ("u3", "u4")
+            ],
+        }
+        canceled = method.apply(
+            "s", "cancel", method.decode_proposal(cancellation, view["mapping"])
+        )
+        assert canceled["ok"] and canceled["id"] == saved["id"] and canceled["revision"] == 3
+        assert service.read(saved["id"])["value"]["edit_state"] == original
+        assert service.read(saved["id"], 2)["value"]["edit_state"] == state

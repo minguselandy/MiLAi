@@ -1,3 +1,28 @@
+# 2026-10-05 second real Stage A omission regression and user review steering
+
+The second actual Stage A with own-CI-approved 82cd568 finished 24 requests,
+220359 known generation tokens and no new unknown usage; continuous generation
+unknown remains 2. All four no-new-fact events returned empty arrays, but all eight
+positive formation/correction opportunities also returned empty and committed
+nothing. Four missing correction targets follow the first formation omissions;
+they are not an isolated existing-state update experiment. Six I2 fixed probes
+were empty too. Schema/reference legality is not successful maintenance. Preserve
+both raw attempts; pilot is NOT admitted. Source owner has balanced the common
+positive/negative envelope examples, without schema/decode/v1 changes, data access,
+new review agents or per-event rules. New own CI and actual positive/empty review
+are required before pilot; do not run the prepared pilot wrapper on the failed
+second review. Root keeps serial model ownership, all raw evaluation and ledger.
+The balanced correction and generic external dispatch passed 152 affected tests
+(132 method checks included), strict mypy on four sources and Ruff. These are
+scripted mechanical checks, not actual model recovery or semantic confirmation.
+The user's PR85 review asks to continue this method, then I1/I2 prefixes and actual
+unmentioned qualification/local scope/valid withdrawal evidence before full
+development comparison. The declared six-message/five-QA Project P developer
+history is one exposed source, not held-out confirmation; each arm forms its own
+empty semantic bank. Existing three-cluster/ten-history confirmation still follows
+final candidate/Writer freeze. I0 M prefixes for users 3/4 are missing, not zeros.
+Complete R0-R5/E0-E5 and all six deliverables; no new total method or audit platform.
+
 # 2026-10-05 first Stage A results and common no-maintenance correction
 
 The original Stage A finished 24 real generation requests with no new unknown

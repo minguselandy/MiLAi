@@ -7,6 +7,7 @@ scorer, future question, model client, or second database belongs in this module
 from __future__ import annotations
 
 import copy
+import json
 from typing import Any, Literal
 
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
@@ -81,14 +82,20 @@ class EditMemory:
                 "another unit's support to an unrelated claim. A changed claim may retain "
                 "its prior h qualifiers alongside new e. Do not invent aliases or base revisions. "
                 "Every r/u/e/h alias must appear in the current delivered writer packet; "
-                "numbering never implies availability. If no maintenance is justified, return "
+                "numbering never implies availability. Maintain supported durable new facts and "
+                "actual corrections: choose create when allowed and no delivered record already "
+                "covers the fact, or the applicable existing-record action for a correction. "
+                "records=[] means no old record was delivered, not that new e evidence is absent. "
+                "Do not return an empty envelope merely because the memory bank is empty. "
+                "If there is genuinely no justified creation or record change, return "
                 '{"proposals":[]}. Targeted no_change only confirms a delivered existing record. '
                 "If records=[], do not invent a target, including for no_change. "
                 "Do not infer applicability from old support metadata. "
                 + (
                     "create is available. "
                     if allow_create
-                    else "create is unavailable in this group. "
+                    else "create is unavailable in this request. If records=[], no permitted "
+                    'target exists: return {"proposals":[]} even if e contains a new fact. '
                 )
                 + (
                     "For an existing record use edit; legal operations: "
@@ -106,7 +113,7 @@ class EditMemory:
                     else "Use plain content units; keep conditions in their text. "
                 )
                 + "".join(OPERATION_INSTRUCTIONS[operation] for operation in operations)
-                + 'Example with no justified maintenance: {"proposals":[]}'
+                + self._instruction_examples(allow_create=allow_create)
             )
         common = (
             "Maintain persistent memory using only supplied actual events "
@@ -152,6 +159,79 @@ class EditMemory:
             else "Use only content units with no relations. Keep conditions in the text. "
         )
         return common + operation + representation
+
+    def _instruction_examples(self, *, allow_create: bool) -> str:
+        """Illustrative valid envelopes, never extra evidence for the real request."""
+        units: list[dict[str, Any]] = [
+            {"text": "Reminders are quiet.", "role": "content", "evidence": ["e1"]},
+            {
+                "text": "Only during the exhibition.",
+                "role": "condition" if self.conditioned else "content",
+                "evidence": ["e1"],
+            },
+        ]
+        create: dict[str, Any] = {"action": "create", "units": units}
+        if self.conditioned:
+            create["relations"] = [
+                {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+            ]
+        if ARM_OPERATIONS[self.arm]:
+            correction: dict[str, Any] = {
+                "action": "edit",
+                "target": "r1",
+                "edits": [
+                    {
+                        "operation": "replace",
+                        "target_unit": "u1",
+                        "text": "Reminders use a soft tone.",
+                        "evidence": ["e1"],
+                        "keep_support": ["h1"],
+                    }
+                ],
+            }
+        else:
+            retained = copy.deepcopy(units)
+            retained[0].update(text="Reminders use a soft tone.", keep_support=["h1"])
+            retained[1].update(evidence=[], keep_support=["h2"])
+            correction = {"action": "rewrite", "target": "r1", "units": retained}
+            if self.conditioned:
+                correction["relations"] = [
+                    {
+                        "source": 1,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [],
+                        "keep_support": ["h3"],
+                    }
+                ]
+        examples = (
+            " Examples use hypothetical CURRENT deliveries and illustrate legal action shapes, "
+            "not facts, available aliases or required topics for your real request. Do not copy "
+            "example text as facts: generate actual memory from current e bodies and your own "
+            "delivered prior state, using only references that occur in your actual packet. "
+        )
+        if allow_create:
+            examples += (
+                "For formation, assume current records=[] and actual e1 says 'Reminders are "
+                "quiet, only during the exhibition.' That is supported new information even "
+                "with no old record. Formation response: "
+                + json.dumps({"proposals": [create]}, ensure_ascii=False, separators=(",", ":"))
+                + ". "
+            )
+        examples += 'For no justified creation or record change, empty response: {"proposals":[]}. '
+        examples += (
+            "For correction, assume the CURRENT packet actually delivers r1 with u1='Reminders "
+            "are quiet.' and u2='Only during the exhibition.', h1/h2 retaining those units' own "
+            "support, "
+            + ("and h3 retaining their modifies relation, " if self.conditioned else "")
+            + "and actual e1 says 'Reminders use a soft tone.' The old exhibition limit was not "
+            "restated or canceled: retain it; change the supported tone. If target references "
+            "are absent, this correction example does not apply. Correction response: "
+            + json.dumps({"proposals": [correction]}, ensure_ascii=False, separators=(",", ":"))
+            + ". Choose supported maintenance when justified; empty is only for no justified "
+            "permitted action."
+        )
+        return examples
 
     def prepare(
         self,

@@ -8,8 +8,9 @@
 最新状态：v1 B0/B1/B2 各 277/277 封存，M 因 Reader 连接断开以 FAILED
 结束，完整评估 128/277。首轮 v2 Stage A 的 24 次真实生成已经完成，六个
 I2 固定探针与八次形成／更正通过对应检查，但 B1/M 两次空维护引用失败，
-尚未准入 pilot。共用说明修正已通过机械检查，待自身 CI 与真实复核。下面的
-11:55 表格保留历史快照；详细新增结果见后文“首轮真实 Stage A”。
+尚未准入 pilot。第二轮真实复核解决了猜目标，但八个形成／更正正例全部
+漏写，不能算修复通过；共用说明正在恢复平衡的正负例。下面的 11:55 表格
+保留历史快照；详细新增结果见后文两个 Stage A 结果段。
 
 ## 当前进度
 
@@ -192,36 +193,91 @@ token 差异 0。未运行会话的输入／正文指标保持 null，不补零�
 与原固定投影相比增加共用说明的 41 token，不改样本、正文、范围或关系；
 首轮投影及全部真实响应保留。此结果仅为离线容量证据。
 
+## 第二轮真实 Stage A：空路径正确，正例漏写
+
+15:40，`82cd568` 在自身 Fast/Full CI 全部成功后完成第二轮真实复核：
+24 次生成、220,359 已知 token、新增未知用量 0，连续未知仍为 2。
+它使用新投影、原同一固定输入、独立空语义库；两个 Stage A 原件均保留。
+
+四臂无新事实请求均返回空 proposals，不再猜 r1。但四次初次形成也全部
+为空，四次后续更正同样为空，实际语义记录均未形成；原始 Sources 已捕获
+并交付，初次形成的 packet 有实际用户 e 且允许 create。四次更正缺少真实
+初始目标，是此前形成漏写的后果，不作为孤立的已有状态更新实验。
+
+六个 I2 固定探针全为空，虽然 schema 合法且短引用错误 0，仍不能称维护
+成功；同六个旧 v1 响应非空。这是一次共用正例回归，不能用空维护成功补偿
+八个漏写机会，也不能以程序的 COMPLETE_ATTEMPTS 视为科学通过。Root 已
+逐条核对实际提案、packet、before/after 和回执，pilot 明确未准入。
+
+源码负责人已修正共用说明的正负例平衡：持久新事实／实际更正应执行
+适用动作，空记录交付不等于没有新证据；同时保留真正无维护的空路径。
+schema、严格 decode、v1 默认及已冻结原件保持，不加入额外核对 Agent，
+不按个别事件关键词修复。尚未完成新版自己的 CI 或第三轮真实复核。
+
+新版包含形成、更正、空维护的完整示例，明确示例是假设交付而非实际事实或
+可用别名。三个方法相关检查 132 passed，连同外部入口检查的四组实际联合
+检查 152 passed；后者已包含前者，不相加。严格类型四源、Ruff 和 diff 通过。
+这些检查使用脚本提案与 SQLite，只验证示例可执行及旧支持保留的结构边界，
+不证明真实模型的未重述保持、例外或撤销能力。
+
+用户最新审查要求继续原方向，先实际复核该写入和该为空，再 I1/I2 前缀、
+未重述限定／局部例外／合法撤销开发行为，以及完整四臂比较。已复用原
+I0 前缀：B0/B1/B2 各 32 会话，M 仅两个用户的 16 会话，另外两个用户指标
+null，不复制 v1 理想状态。一个沿用既有 R3 Project P 示例的开发历史已经
+固定六条消息、五个 QA，四臂各自从空语义库形成，尚未运行；仅一个已暴露
+来源，问题／要求不进入 Writer。三簇十条受控确认仍在最终候选／Writer
+冻结后执行，不用该开发历史冒充确认完成。
+
+外部入口现已允许实际选定的 B0/B1/B2/M 使用共同 Writer 与 Reader。
+20 项相关机械检查通过，包括实际 SQLite 形成及只读回答、原出现 ID／日期
+保留和重开缓存；模型为脚本响应，没有外部真实调用。严格类型、Ruff、
+DAG/tools 边界通过。该后续接线不改变第二轮已冻结的 `82cd568` 源码。
+
+`82cd568` 的 Fast/Full 逐项核对为 8 成功/4 跳过、21/21 成功；R0 文档提交
+`37f573e` 自身的 Fast/Full 也全部成功、同样为 8/4 与 21/21。新共用说明
+修改需自己的工程门槛，不能借前两次绿色提前跑模型。完整 R0–R5、E0–E5、
+六项交付继续，尚无最终候选，保留／外部／功能确认均未完成。
+
 ## 复现与后续准入
 
-以下命令从本分支 `MiLAi-Lab` 执行，使用已有环境。`OLD_SUITE` 指原 v1
-`artifacts/milai-edit/e1-dev-v1` 的绝对路径，`PYTHONPATH=src` 明确使用本分支。
-诊断 v1 时须按工具说明指向原封存 v1 evaluator 源码，避免换 schema。
+以下是准入后的命令模板，使用已有环境。`OLD_SUITE` 指原 v1
+`artifacts/milai-edit/e1-dev-v1` 的绝对路径；`FROZEN_RUN` 指本次通过自身
+Fast/Full CI、与 Git 提交逐字节相同的独立运行包。投影和真实请求使用同一
+包的源码、工具与配置。`PREFLIGHT_OUT`、`STAGE_A_OUT`、`PILOT_I1_OUT`、
+`PILOT_I2_OUT` 必须指本次独立新产物；保留前两轮全部失败与原件。
+诊断 v1 仍指向原封存 v1 evaluator 源码，避免换 schema。
 
 ```bash
-PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
-  tools/prepare_edit_v2_preflight.py --suite "$OLD_SUITE" \
+PYTHONPATH="$FROZEN_RUN/src" /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  "$FROZEN_RUN/tools/prepare_edit_v2_preflight.py" --suite "$OLD_SUITE" \
   --selection artifacts/milai-edit/v2-r0/fixed-input-diagnosis.json \
-  --output artifacts/milai-edit/v2-r0/capacity-preflight-new.json
+  --output "$PREFLIGHT_OUT"
 ```
 
-真实命令须在本提交 CI 通过、v1 E1 完成并释放连续账本锁后执行，串行且使用
+v1 已以 FAILED／不完整历史结束；不得把它写成等待跑完的活动实验。
+真实 Stage A 须在本次源码自身 CI 通过并释放连续账本锁后执行，串行且使用
 新的独立空库；旧/新探针只读、不初始化正式库。工具缓存原请求及响应，遇未知
 结果停止，重启不得通过换输出目录盲目重复同一未确认请求。
 
 ```bash
-PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
-  tools/run_edit_interface_checks.py --config configs/milai-edit-v2-pilot-i2.json \
-  --preflight artifacts/milai-edit/v2-r0/capacity-preflight-v2.json \
-  --output artifacts/milai-edit/v2-stage-a-v1
-PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
-  tools/run_edit_suite.py configs/milai-edit-v2-pilot-i1.json \
-  artifacts/milai-edit/v2-pilot-i1 --benchmark halumem
-PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
-  tools/run_edit_suite.py configs/milai-edit-v2-pilot-i2.json \
-  artifacts/milai-edit/v2-pilot-i2 --benchmark halumem
+PYTHONPATH="$FROZEN_RUN/src" /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  "$FROZEN_RUN/tools/run_edit_interface_checks.py" \
+  --config "$FROZEN_RUN/configs/milai-edit-v2-pilot-i2.json" \
+  --preflight "$PREFLIGHT_OUT" --output "$STAGE_A_OUT"
+```
+
+只有 Root 核对实际形成、更正与空路径均正确后，才可执行以下 pilot；前两轮
+Root review 均未准入，不能跳过或改写为成功。
+
+```bash
+PYTHONPATH="$FROZEN_RUN/src" /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  "$FROZEN_RUN/tools/run_edit_suite.py" \
+  "$FROZEN_RUN/configs/milai-edit-v2-pilot-i1.json" "$PILOT_I1_OUT" --benchmark halumem
+PYTHONPATH="$FROZEN_RUN/src" /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python \
+  "$FROZEN_RUN/tools/run_edit_suite.py" \
+  "$FROZEN_RUN/configs/milai-edit-v2-pilot-i2.json" "$PILOT_I2_OUT" --benchmark halumem
 ```
 
 前缀结果只用于按计划选择公共交付方案，不作为最终科学结论。全量配置、
 最终候选与 Writer 冻结分别在对应门槛处登记，当前尚未完成。回滚代码起点为
-`c16e109`；运行中的 v1 及历史产物另行保留，不因回滚代码自动重跑。
+`c16e109`；已 FAILED 的 v1 及历史产物另行保留，不因回滚代码自动重跑。
