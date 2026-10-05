@@ -187,6 +187,35 @@ def test_truncated_response_has_no_commit_and_no_repeat_on_resume(tmp_path: Path
     assert budget.state["generation_requests"] == 1
 
 
+def test_capacity_failure_separates_prepared_sources_from_model_exposure(tmp_path: Path) -> None:
+    run = execution(tmp_path, "M")
+    run.settings.update(working_sets=False, context_tokens=700)
+    budget = RunBudget(RunLimits(), tmp_path / "budget.json")
+    requests = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        return response({})
+
+    with VLLMClient(
+        VLLMConfig("http://synthetic/v1", "test", max_tokens=100), budget=budget,
+        transport=httpx.MockTransport(provider),
+    ) as client:
+        run.client = client
+        with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+            service = MemoryService(
+                store, ("fixture", "owner"), "owner", tmp_path / "memory.lock",
+                mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+            )
+            assert run.maintain(service, observation("s1", "Actual source " * 30), "1") == []
+            assert service.records() == []
+    assert requests == [] and budget.state["generation_requests"] == 0
+    views = read_json(tmp_path / "maintenance/1/batch-0000/maintenance-views.json")
+    assert views["new_sources_in_prepared_packet"]
+    assert views["new_sources_actually_delivered"] == []
+    assert not any(views["writer_exposure"].values())
+
+
 def test_natural_core_and_adjacent_context_preserve_original_ranges() -> None:
     observed = observation("s", "On weekdays.\nThree reviewers.\nHolidays are paused.")
     batches = natural_source_batches(observed, Tokenizer(), 25)

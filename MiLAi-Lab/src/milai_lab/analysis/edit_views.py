@@ -116,6 +116,7 @@ def maintenance_views(
     receipts: list[dict[str, Any]],
     official_extracted: list[str],
     sources: list[dict[str, Any]],
+    *, writer_exposure: dict[str, bool] | None = None,
 ) -> dict[str, Any]:
     """Keep official compatibility exact, no-change explicit and own state intact."""
     old, new = record_index(before), record_index(after)
@@ -143,7 +144,10 @@ def maintenance_views(
         "rejected": rejected,
         "state_before": copy.deepcopy(before),
         "state_after": copy.deepcopy(after),
-        "new_sources_actually_delivered": copy.deepcopy(sources),
+        "new_sources_in_prepared_packet": copy.deepcopy(sources),
+        "new_sources_actually_delivered": copy.deepcopy(sources)
+        if writer_exposure is None or writer_exposure["response_confirmed"] else [],
+        "writer_exposure": copy.deepcopy(writer_exposure),
         "limit": (
             "Official extraction is unchanged. "
             "Delta/state are supplemental views, not author scores."

@@ -105,3 +105,14 @@ def test_missing_old_source_body_is_unknown_not_grounded_by_new_body() -> None:
     )
     assert payload["missing_old_support"] == [{"evidence_id": "old", "status": "UNKNOWN"}]
     assert payload["cited_bodies"][0]["text"] == "now"
+
+
+def test_prepared_but_unsent_input_is_not_confirmed_model_exposure() -> None:
+    sources = [{"role": "user", "text": "Actual observed source"}]
+    view = maintenance_views([], [], [], [], sources, writer_exposure={
+        "request_sent": False, "response_confirmed": False,
+        "complete_proposal_list_received": False,
+    })
+    assert view["new_sources_in_prepared_packet"] == sources
+    assert view["new_sources_actually_delivered"] == []
+    assert view["writer_exposure"]["request_sent"] is False

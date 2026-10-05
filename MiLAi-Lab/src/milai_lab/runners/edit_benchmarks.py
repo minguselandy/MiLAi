@@ -886,6 +886,13 @@ class BenchmarkRun:
                     receipts,
                     list(written.values()),
                     subset["sources"],
+                    writer_exposure={
+                        "request_sent": (self.root / "http" / key / "writer"
+                                         / str(request_number) / "request.json").exists(),
+                        "response_confirmed": (self.root / "http" / key / "writer"
+                                               / str(request_number) / "response.json").exists(),
+                        "complete_proposal_list_received": plan_path.exists(),
+                    },
                 )
                 write_json(batch_folder / "maintenance-views.json", views)
                 saved = {
