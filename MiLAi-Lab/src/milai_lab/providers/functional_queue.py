@@ -7,9 +7,9 @@ safety quota, not another usage ledger: actual usage stays in RunBudget.
 from __future__ import annotations
 
 import fcntl
-import hashlib
 import json
 import os
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -62,8 +62,7 @@ class FunctionalQueue:
                     or row.get("ordinal") != ordinal
                     or type(row.get("reserved_tokens")) is not int
                     or row["reserved_tokens"] <= 0
-                    or not isinstance(row.get("request_sha256"), str)
-                    or len(row["request_sha256"]) != 64
+                    or not isinstance(row.get("attempt_id", row.get("request_sha256")), str)
                 ):
                     raise ValueError("FUNCTIONAL_QUEUE_RESERVATION_INVALID")
             if (
@@ -82,9 +81,7 @@ class FunctionalQueue:
                 {
                     "ordinal": state["requests"],
                     "reserved_tokens": tokens,
-                    "request_sha256": hashlib.sha256(
-                        json.dumps(request, ensure_ascii=False, sort_keys=True).encode()
-                    ).hexdigest(),
+                    "attempt_id": str(uuid.uuid4()),
                 }
             )
             temporary = self.path.with_suffix(".tmp")
@@ -115,9 +112,12 @@ class FunctionalVLLMClient(VLLMClient):
             raise ValueError("FUNCTIONAL_GENERATION_CAPACITY_REQUIRED")
         self._check_owner()
         catalog = request.get("tools", [])
-        if (self.declaration_capacity is not None and request.get("tool_choice") == "required"
-                and len(catalog) == 1
-                and catalog[0].get("function", {}).get("name") in self.declaration_tool_names):
+        if (
+            self.declaration_capacity is not None
+            and request.get("tool_choice") == "required"
+            and len(catalog) == 1
+            and catalog[0].get("function", {}).get("name") in self.declaration_tool_names
+        ):
             # Runner opts in exact public declaration phases. The initial host
             # check remains conservative; recompute the actual final wire template
             # before queue reservation, accounting or HTTP. No second model/cap.
@@ -127,6 +127,7 @@ class FunctionalVLLMClient(VLLMClient):
             if self.declaration_temperature is not None:
                 request["temperature"] = self.declaration_temperature
             capacity_receipt = self.declaration_capacity.check(
-                request["messages"], self.config.max_tokens, catalog)
+                request["messages"], self.config.max_tokens, catalog
+            )
         self.queue.reserve(request, capacity_receipt)
         return super()._post(path, request, capacity_receipt=capacity_receipt)

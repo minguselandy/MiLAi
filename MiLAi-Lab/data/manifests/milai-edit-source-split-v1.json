@@ -1,0 +1,54 @@
+{
+  "version": "milai-edit-split-v1",
+  "selection_rule": "HaluMem file-order first four UUIDs development; remaining sixteen reserved. Metadata selection before semantic inspection.",
+  "halumem": {
+    "dev_users": [
+      "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "8ece194a-885c-8e0c-359e-93a97220252c",
+      "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+    ],
+    "reserved_users": [
+      "ed9b924b-6bc0-67f9-67a1-a36401dd1782",
+      "2f4b4206-20bc-19a5-a5ed-4d110f91f4db",
+      "ffccb278-6ad3-7c1b-e682-44543d5a12cb",
+      "dd27d8ab-7d2d-acbe-de11-9bc249ea3829",
+      "d850d98b-ba45-3fd5-e3fa-2104b6724e10",
+      "2e36c193-a605-8cc7-70ff-80b2336d4980",
+      "91b283d7-7236-3b83-abeb-f0a159564f45",
+      "d96baf54-00e3-afee-239c-1f3ef9054095",
+      "4fd09df4-d0df-ff7e-bb39-5f4faedfac2c",
+      "1b846c59-456e-9550-dffd-4d23f1eca81f",
+      "bde53a03-5db5-ec95-ed7a-37b16b358336",
+      "52e6d9cd-f63e-4065-cbaf-a20347590e07",
+      "348492a7-cfe4-ee1d-73c3-c276d6ba8277",
+      "42f702e3-750c-1acc-9101-051f1f75991e",
+      "6b005479-e3b6-02fc-e52d-3a41eb0cf288",
+      "9ca7c5ff-487c-ba5d-04f6-05f27d35ba2a"
+    ],
+    "unit": "user",
+    "variants_group_by": "uuid"
+  },
+  "longmemeval": {
+    "row_count": 500,
+    "history_component_count": 1,
+    "condition": "Entire S has connected shared histories and previous local exposure; descriptive development, never independent held-out confirmation.",
+    "pilot_questions": [
+      {
+        "question_id": "852ce960",
+        "question_type": "knowledge-update",
+        "sessions": 39
+      },
+      {
+        "question_id": "6613b389",
+        "question_type": "temporal-reasoning",
+        "sessions": 41
+      }
+    ]
+  },
+  "exposure": {
+    "HaluMem_dev": "metadata only before this manifest; E0 will expose first two dev users",
+    "HaluMem_reserved": "not opened for semantic analysis or model work",
+    "LongMemEval": "previous local development runs; all shared histories treated as development"
+  }
+}

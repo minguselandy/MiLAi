@@ -51,8 +51,9 @@ def test_independent_profiles_and_frozen_identity(enabled: tuple[bool, ...]) -> 
     frozen = {"config": settings, "tool_catalog": catalog, **freeze_fields(settings, catalog)}
     check_frozen(frozen)
     if any(enabled):
-        frozen["read_protocol_presentation"]["catalog_sha256"] = "0" * 64
-        with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+        assert frozen["read_protocol_presentation"]["catalog_version"] == "public_memory_v2"
+        frozen["config"]["tool_read_feedback"] = "unsupported-profile"
+        with pytest.raises(ValueError, match="PROFILE_INVALID"):
             check_frozen(frozen)
     else:
         assert freeze_fields(settings, catalog) == {}
@@ -97,7 +98,7 @@ def test_finite_rejection_is_not_string_matching_and_never_echoes_input() -> Non
     with pytest.raises(ValueError, match="CONTRACT_INVALID"):
         ReadProtocolRejected("V13_PACKET_OWNER_MISMATCH", "memory_tools")
     with pytest.raises(ValueError, match="KEY_INVALID"):
-        snapshot_key("x" * 24)
+        snapshot_key("")
 
 
 def test_generic_receipt_copy_and_legacy_action_bytes() -> None:

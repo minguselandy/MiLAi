@@ -41,8 +41,9 @@ def test_independent_profiles_freeze_and_drift(guide: bool, effect: bool) -> Non
     check_frozen(frozen)
     if guide or effect:
         changed = copy.deepcopy(frozen)
-        changed["public_memory_contract_presentation"]["catalog_sha256"] = "0" * 64
-        with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+        assert "catalog_version" in changed["public_memory_contract_presentation"]
+        changed["config"]["tool_parameter_contract"] = "unsupported-profile"
+        with pytest.raises(ValueError, match="PROFILE_INVALID"):
             check_frozen(changed)
     else:
         assert extra == freeze_fields({}, catalog) == {}
@@ -144,7 +145,15 @@ def test_dictionary_indices_are_strict_and_not_tool_argument_coercions(
 
 @pytest.mark.parametrize(
     "fault",
-    ["duplicate_key", "duplicate_layout", "duplicate_string", "width", "hash", "node", "nan"],
+    [
+        "duplicate_key",
+        "duplicate_layout",
+        "duplicate_string",
+        "width",
+        "extra_field",
+        "node",
+        "nan",
+    ],
 )
 def test_dictionary_corruption_never_silently_restores_an_approximate_dto(fault: str) -> None:
     frame = encode({"x": "repeated literal", "y": "repeated literal"})
@@ -156,8 +165,8 @@ def test_dictionary_corruption_never_silently_restores_an_approximate_dto(fault:
         frame["strings"].append(frame["strings"][0])
     elif fault == "width":
         frame["root"]["o"][1].pop()
-    elif fault == "hash":
-        frame["decoded_sha256"] = "0" * 64
+    elif fault == "extra_field":
+        frame["unexpected_field"] = "invalid structure"
     elif fault == "node":
         frame["root"] = {"unrecognized": 1}
     else:
@@ -183,8 +192,8 @@ def test_exact_material_factor_has_independent_frozen_codec_identity(
     assert frozen["memory_exact_presentation"]["format"] == "json_dictionary_v1"
     check_frozen(frozen)
     altered = copy.deepcopy(frozen)
-    altered["config"]["memory_material_profile"] = "compact_v1"
-    with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+    altered["config"]["tool_parameter_contract"] = "unsupported-profile"
+    with pytest.raises(ValueError, match="PROFILE_INVALID"):
         check_frozen(altered)
 
 

@@ -58,7 +58,7 @@ def test_current_boundary_never_selects_last_same_role_and_preserves_source_sche
             {
                 "source_ref": current,
                 "role": "user",
-                "content_sha256": source_before["content_sha256"],
+                "source_revision": source_before["source_revision"],
             }
         ]
         assert service.source(current) == source_before
@@ -77,7 +77,8 @@ def test_missing_boundary_preserves_pending_and_does_not_guess_from_history(tmp_
         attempt = service.store.search(service.attempts_namespace)[0].value
         assert attempt["raw"]["requested"]["content"] == "Unbound proposal"
         assert save(service, "Explicitly selected", "explicit", source_ref=source)["reason"] == (
-            "current_boundary_source_required")
+            "current_boundary_source_required"
+        )
         service.bind_source_boundary("s1", "actual-request", [source])
         assert save(service, "Explicitly selected", "bound", source_ref=source)["ok"]
 
@@ -149,7 +150,7 @@ def test_actual_assistant_suggestion_stays_assistant_and_unchecked(tmp_path: Pat
             legacy.capture_assistant("s1", "a2", "Cannot silently add legacy assistant source")
 
 
-def test_exact_sources_are_owner_bound_and_hash_checked(tmp_path: Path) -> None:
+def test_exact_sources_are_owner_bound_and_immutable_at_capture(tmp_path: Path) -> None:
     with opened(tmp_path, "bob") as other:
         foreign = user(other, "u1", "Private preference")
     with opened(tmp_path) as service:
@@ -163,10 +164,11 @@ def test_exact_sources_are_owner_bound_and_hash_checked(tmp_path: Path) -> None:
         with pytest.raises(ValueError, match="SOURCE_BOUNDARY_SCOPE_MISMATCH"):
             service.bind_source_boundary("different-session", "u1", [source])
         event = service.store.get(service.sources_namespace, source).value
-        event["content"] = "Tampered source"
+        event["owner"] = "bob"
         service.store.put(service.sources_namespace, source, event, index=False)
-        with pytest.raises(ValueError, match="SOURCE_INTEGRITY_FAILED"):
-            save(service, "Tampered evidence", "tampered", source_ref=source)
+        assert save(service, "Foreign evidence", "tampered", source_ref=source)["reason"] == (
+            "source_not_found_or_not_owned"
+        )
         assert service.records() == []
 
 
@@ -272,16 +274,15 @@ def test_handles_reopen_and_cannot_cross_owner_or_mutate_support(tmp_path: Path)
         assert reopened.candidate(handle) == bound
         changed = {
             **bound,
-            "support_sources": [{**bound["support_sources"][0], "content_sha256": "fake"}],
+            "support_sources": [{**bound["support_sources"][0], "source_revision": 2}],
         }
         reopened.store.put(reopened.candidates_namespace, handle, changed, index=False)
         assert reopened.candidate(handle) is None
         reopened.store.put(reopened.candidates_namespace, handle, bound, index=False)
         event = reopened.store.get(reopened.sources_namespace, source).value
-        event["content"] = "Changed after read"
+        event["source_revision"] = 2
         reopened.store.put(reopened.sources_namespace, source, event, index=False)
-        with pytest.raises(ValueError, match="SOURCE_INTEGRITY_FAILED"):
-            reopened.candidate(handle)
+        assert reopened.candidate(handle) is None
 
 
 @pytest.mark.parametrize("contract", [None, True, 1, [], {}, "event_bound_v2"])
@@ -338,6 +339,7 @@ def test_p5_actual_runner_binds_current_user_and_observed_tool_offline(
     assert frozen["memory_mutation_contract"] == "event_bound_v1"
     schema = frozen["tool_catalog"][0]["function"]["parameters"]
     assert "candidate_handle" in schema["properties"] and "source_refs" in schema["properties"]
+
     def local_model_with_capacity(*args: Any, **kwargs: Any) -> Any:
         from milai_lab.providers.contextual_capacity import HostCapacity
 
@@ -354,7 +356,7 @@ def test_p5_actual_runner_binds_current_user_and_observed_tool_offline(
     assert version["mutation_contract"] == "event_bound_v1"
     tool = next(row for row in result["sources"] if row["role"] == "tool")
     assert version["source_refs"] == [tool["event_id"]]
-    assert version["source_bindings"][0]["content_sha256"] == tool["content_sha256"]
+    assert version["source_bindings"][0]["source_revision"] == tool["source_revision"]
     assistant = next(row for row in result["sources"] if row["role"] == "assistant")
     assert assistant["content"] == result["final_answer"] == "Observed actual result."
     assert assistant["formation_status"] == "pending"

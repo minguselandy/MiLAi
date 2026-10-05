@@ -7,7 +7,6 @@ inclusive generation admission is supplied by this infrastructure contract.
 from __future__ import annotations
 
 import fcntl
-import hashlib
 import json
 import math
 import os
@@ -44,10 +43,6 @@ def canonical(value: Any) -> bytes:
     return json.dumps(
         value, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False
     ).encode()
-
-
-def sha(raw: bytes) -> str:
-    return hashlib.sha256(raw).hexdigest()
 
 
 def normalized_url(value: Any) -> str:
@@ -140,7 +135,7 @@ def freeze_fields(
         "http_ownership_domain": domain,
         "http_ownership_binding": {
             "canonical_ledger": str(Path(settings["budget_path"]).resolve()),
-            "domain_sha256": sha(canonical(domain)),
+            "deployment_id": domain["deployment_id"],
         },
     }
 
@@ -154,6 +149,8 @@ def check_frozen(frozen: dict[str, Any]) -> None:
 
 def validate_state(value: Any) -> dict[str, Any]:
     if type(value) is not dict or type(value.get("limits")) is not dict:
+        raise HttpOwnershipError("HTTP_OWNER_LEDGER_MALFORMED")
+    if type(value.get("ledger_revision", 0)) is not int or value.get("ledger_revision", 0) < 0:
         raise HttpOwnershipError("HTTP_OWNER_LEDGER_MALFORMED")
     limits = value["limits"]
     if set(limits) != {
@@ -236,8 +233,8 @@ class HttpOwnership:
             os.write(self._fd, self._lease_bytes)
             os.fsync(self._fd)
             raw = self._read_disk()
-            self._ledger_sha = sha(raw)
             self.initial_state = self._parse(raw)
+            self._ledger_revision = self.initial_state.get("ledger_revision", 0)
         except BaseException:
             os.close(self._fd)
             self._fd = None
@@ -303,9 +300,7 @@ class HttpOwnership:
             raise HttpOwnershipError("HTTP_OWNER_EXACT_BUDGET_REQUIRED")
         if disk:
             raw = self._read_disk()
-            if sha(raw) != self._ledger_sha or canonical(self._parse(raw)) != canonical(
-                budget.state
-            ):
+            if self._parse(raw).get("ledger_revision", 0) != self._ledger_revision:
                 raise HttpOwnershipError("HTTP_OWNER_LEDGER_STALE")
 
     def register_client(self, client: Any, budget: Any, config: dict[str, Any]) -> None:
@@ -395,8 +390,9 @@ class HttpOwnership:
         self.assert_budget(budget, disk=False)
         if self._active_thread != get_ident():
             raise HttpOwnershipError("HTTP_OWNER_RESERVATION_OUTSIDE_REQUEST")
-        if sha(self._read_disk()) != self._ledger_sha:
+        if self._parse(self._read_disk()).get("ledger_revision", 0) != self._ledger_revision:
             raise HttpOwnershipError("HTTP_OWNER_LEDGER_STALE")
+        budget.state["ledger_revision"] = self._ledger_revision + 1
         raw = (
             json.dumps(validate_state(budget.state), ensure_ascii=False, indent=2, allow_nan=False)
             + "\n"
@@ -419,7 +415,7 @@ class HttpOwnership:
                 os.fsync(directory)
             finally:
                 os.close(directory)
-            self._ledger_sha = sha(raw)
+            self._ledger_revision = budget.state["ledger_revision"]
         except BaseException:
             self.faulted = True
             raise  # Keep actual partial/temp bytes; no retry or refund.

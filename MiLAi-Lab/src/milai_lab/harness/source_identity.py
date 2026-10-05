@@ -18,6 +18,7 @@ CONTRACT_SOURCE_FILES = (
 )
 MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/__init__.py",
+    "src/milai_lab/memory/edit_units.py",
     "src/milai_lab/memory/embeddings.py",
     "src/milai_lab/memory/functional.py",
     "src/milai_lab/memory/functional_state.py",
@@ -39,6 +40,7 @@ MEMORY_FACADE_FILES = (
 INTEGRATION_SOURCE_FILES = (
     "src/milai_lab/integrations/__init__.py",
     "src/milai_lab/integrations/memory/__init__.py",
+    "src/milai_lab/integrations/memory/amem.py",
     "src/milai_lab/integrations/memory/mem0.py",
     "src/milai_lab/integrations/memory/simplemem.py",
 )

@@ -35,9 +35,9 @@ def test_exact_role_metadata_paging_owner_and_no_history_guess(tmp_path: Path) -
             for i in range(5)
         )
         source_bytes = [dict(service.source(ref)) for ref in refs]
-        service.bind_source_boundary("s1", "private-case-and-fault-marker", refs)
+        service.bind_source_boundary("s1", "current-public-turn", refs)
         first = service.source_boundary("s1")
-        assert "private-case-and-fault-marker" not in str(first)
+        assert first["boundary_ref"] == "current-public-turn"
         assert first["member_count"] == 7 and len(first["members"]) == 6
         assert first["omitted_count"] == 1 and first["next_cursor"]
         next_page = bound.invoke(
@@ -47,7 +47,7 @@ def test_exact_role_metadata_paging_owner_and_no_history_guess(tmp_path: Path) -
         assert [member["role"] for member in members] == ["user", "assistant", *["tool"] * 5]
         assert [member["source_ref"] for member in members] == refs
         for member, source in zip(members, source_bytes, strict=True):
-            assert member["content_sha256"] == source["content_sha256"]
+            assert member["source_revision"] == source["source_revision"]
             assert member["origin"] == source["origin"]
             assert member["observed_at"] == source["observed_at"]
             assert "content" not in member
@@ -174,7 +174,7 @@ def test_actual_two_recalls_wire_budget_and_business_boundary_refresh(
         refs = [
             row
             for row in wire["messages"]
-            if row["role"] == "tool" and "presented_packet_hash" in row["content"]
+            if row["role"] == "tool" and "presented_packet_id" in row["content"]
         ]
         total = capacity.text_tokens(HEADER + material) + sum(
             capacity.text_tokens(row["content"]) for row in refs
@@ -204,15 +204,15 @@ def test_actual_two_recalls_wire_budget_and_business_boundary_refresh(
             assert packet["items"] and len(refs) == 1
             assert set(json.loads(refs[0]["content"])) == {
                 "ok",
-                "packet_hash",
-                "presented_packet_hash",
+                "packet_id",
+                "presented_packet_id",
             }
             action = {"calls": [{"name": "recall_context", "arguments": {}}]}
         elif len(wires) == 3:
             assert packet["items"] and len(refs) == 2
             assert all(json.loads(ref["content"])["ok"] for ref in refs)
             assert all(
-                json.loads(ref["content"])["presented_packet_hash"] == packet["packet_hash"]
+                json.loads(ref["content"])["presented_packet_id"] == packet["packet_id"]
                 for ref in refs
             )
             assert capacity.text_tokens(HEADER + material) < 2048
@@ -267,7 +267,7 @@ def test_actual_two_recalls_wire_budget_and_business_boundary_refresh(
     current_source = next(row for row in receipt["sources"] if row["content"] == public_text)
     member = materials[0]["source_index"]["members"][0]
     assert member["source_ref"] == current_source["event_id"]
-    assert member["content_sha256"] == current_source["content_sha256"]
+    assert member["source_revision"] == current_source["source_revision"]
     assert [row["role"] for row in receipt["sources"]] == ["user", "user", "tool", "assistant"]
     # Public checkpoint API still holds both full original recall receipts.
     with SqliteSaver.from_conn_string(str(case_root / "checkpoints.sqlite")) as saver:
@@ -279,7 +279,7 @@ def test_actual_two_recalls_wire_budget_and_business_boundary_refresh(
             if isinstance(row, ToolMessage) and row.name == "recall_context"
         ]
         assert tool_rows and all(json.loads(row.content)["items"] for row in tool_rows)
-        assert all("presented_packet_hash" not in row.content for row in tool_rows)
+        assert all("presented_packet_id" not in row.content for row in tool_rows)
     assert "FUTURE_USER_MESSAGE" not in json.dumps(wires)
     assert "initial_world" not in json.dumps(wires) and "case_id" not in json.dumps(wires)
     (tmp_path / "actual-wires.json").write_text(json.dumps(wires, ensure_ascii=False))
@@ -378,7 +378,7 @@ def test_reused_call_ids_keep_past_packet_and_count_each_current_body(tmp_path: 
         refs = projected[4:6]
         assert len(refs) == 2 and all(row.tool_call_id == "reused" for row in refs)
         assert all(
-            set(json.loads(row.content)) == {"ok", "packet_hash", "presented_packet_hash"}
+            set(json.loads(row.content)) == {"ok", "packet_id", "presented_packet_id"}
             for row in refs
         )
         delivery = traces[-1]

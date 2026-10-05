@@ -1,0 +1,361 @@
+{
+  "version": "milai-edit-progress-20261005-v1",
+  "as_of": "2026-10-05T08:22:31+08:00",
+  "status": "ACTIVE_INCOMPLETE",
+  "baseline_commit": "fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1",
+  "branch": "feat/lab-milai-edit-20261004",
+  "model_family": "Qwen3.6",
+  "independent_judge": false,
+  "publication_pauses_experiment": false,
+  "completed_arms": [
+    "B0",
+    "B1"
+  ],
+  "expected_sessions_per_arm": 277,
+  "development_users": 4,
+  "arms": {
+    "B0": {
+      "status": "COMPLETED_EXPERIMENT_PHASE",
+      "counts": {
+        "official_completed_sessions": 277,
+        "prepared_sessions": 277,
+        "original_characters_in_prepared_sessions": 3782002,
+        "prepared_characters": 3782002,
+        "maintenance_completed_sessions": 277,
+        "upstream_extracted_outputs": 159,
+        "prepared_batches": 280,
+        "completed_batches": 280,
+        "recorded_writer_requests": 263,
+        "characters_in_recorded_requests": 3504466,
+        "confirmed_writer_responses": 263,
+        "characters_in_confirmed_responses": 3504466,
+        "writer_returned_proposal_list_batches": 259,
+        "writer_returned_empty_list_batches": 4,
+        "proposed_operations": 291,
+        "recorded_operation_receipts": 291,
+        "rejected_operations": 131,
+        "confirmed_committed_operations": 121,
+        "accepted_no_change_operations": 39,
+        "first_attempt_writer_failed_batches": 21,
+        "additional_writer_attempts": 0
+      },
+      "official_global_score": {
+        "memory_integrity": {
+          "recall(all)": 0.28051391862955033,
+          "recall(valid)": 0.28051391862955033,
+          "weighted_recall(all)": 0.3399357601713062,
+          "weighted_recall(valid)": 0.3399357601713062,
+          "memory_valid_importance_sum": 1401.0,
+          "memory_importance_sum": 1401.0,
+          "memory_valid_num": 1868,
+          "memory_num": 1868
+        },
+        "memory_accuracy": {
+          "interference_accuracy(all)": 0.9083820662768031,
+          "interference_accuracy(valid)": 0.9083820662768031,
+          "interference_memory_valid_num": 513,
+          "interference_memory_num": 513,
+          "target_accuracy(all)": 0.8571428571428571,
+          "target_accuracy(valid)": 0.8571428571428571,
+          "target_memory_valid_num": 21,
+          "target_memory_num": 21,
+          "weighted_accuracy(all)": 0.44654088050314467,
+          "weighted_accuracy(valid)": 0.44654088050314467,
+          "memory_valid_num": 159,
+          "memory_num": 159
+        },
+        "memory_extraction_f1": 0.4226942726539392,
+        "memory_update": {
+          "correct_update_memory_ratio(all)": 0.3129251700680272,
+          "correct_update_memory_ratio(valid)": 0.33212996389891697,
+          "hallucination_update_memory_ratio(all)": 0.01870748299319728,
+          "hallucination_update_memory_ratio(valid)": 0.019855595667870037,
+          "omission_update_memory_ratio(all)": 0.6105442176870748,
+          "omission_update_memory_ratio(valid)": 0.648014440433213,
+          "other_update_memory_ratio(all)": 0.0,
+          "other_update_memory_ratio(valid)": 0.0,
+          "update_memory_valid_num": 554,
+          "update_memory_num": 588
+        },
+        "question_answering": {
+          "correct_qa_ratio(all)": 0.26382978723404255,
+          "correct_qa_ratio(valid)": 0.2664756446991404,
+          "hallucination_qa_ratio(all)": 0.502127659574468,
+          "hallucination_qa_ratio(valid)": 0.5071633237822349,
+          "omission_qa_ratio(all)": 0.22411347517730495,
+          "omission_qa_ratio(valid)": 0.22636103151862463,
+          "qa_valid_num": 698,
+          "qa_num": 705
+        },
+        "memory_type_accuracy": {
+          "Event Memory": {
+            "memory_integrity_acc": 0.15342763873775844,
+            "memory_update_acc": 0.0544069640914037,
+            "total_num": 919,
+            "memory_acc": 0.20783460282916214
+          },
+          "Persona Memory": {
+            "memory_integrity_acc": 0.2052401746724891,
+            "memory_update_acc": 0.06550218340611354,
+            "total_num": 1832,
+            "memory_acc": 0.27074235807860264
+          },
+          "Relationship Memory": {
+            "memory_integrity_acc": 0.0963302752293578,
+            "memory_update_acc": 0.06422018348623854,
+            "total_num": 218,
+            "memory_acc": 0.16055045871559634
+          }
+        }
+      },
+      "official_denominators": {
+        "total_updates": 595,
+        "empty_update_retrieval": 7,
+        "scored_updates": 588,
+        "valid_scored_updates": 554,
+        "updates_missing_original": 0,
+        "judge_failures": 8,
+        "formed_sessions": 277,
+        "unscored_updates": 7,
+        "invalid_update_judgements": 34
+      },
+      "all_opportunity_metrics": {
+        "formation_recall_all": 0.28051391862955033,
+        "formed_memory_accuracy_all": 0.44654088050314467,
+        "update_correct_all_opportunities": 0.3092436974789916,
+        "update_correct_scored": 0.3129251700680272,
+        "update_correct_valid": 0.33212996389891697,
+        "qa_correct_all": 0.26382978723404255,
+        "qa_correct_valid": 0.2664756446991404,
+        "denominators": {
+          "total_updates": 595,
+          "empty_update_retrieval": 7,
+          "scored_updates": 588,
+          "valid_scored_updates": 554,
+          "updates_missing_original": 0,
+          "judge_failures": 8,
+          "formed_sessions": 277,
+          "unscored_updates": 7,
+          "invalid_update_judgements": 34,
+          "formation_reference_points": 1868,
+          "formation_valid_judgments": 1868,
+          "formed_memory_outputs": 159,
+          "formed_memory_valid_judgments": 159,
+          "update_scored_records": 588,
+          "update_valid_judgments": 554,
+          "update_unscored_opportunities": 7,
+          "qa_opportunities": 705,
+          "qa_valid_judgments": 698
+        },
+        "update_information_condition": "reference-guided read-only retrieval; separate from QA"
+      },
+      "sealed_generation_requests": 3575,
+      "sealed_known_generation_tokens": 14218872,
+      "writer_first_attempt_failures": {
+        "context_unavailable_before_http": 17,
+        "provider_output_incomplete": 4
+      },
+      "writer_rejection_reasons": {
+        "FunctionalRejection: EDIT_SOURCE_UNAVAILABLE": 16,
+        "FunctionalRejection: EDIT_LOCAL_OPERATIONS_REQUIRED": 99,
+        "ValidationError": 5,
+        "current_boundary_source_required": 11
+      }
+    },
+    "B1": {
+      "status": "COMPLETED_EXPERIMENT_PHASE",
+      "counts": {
+        "official_completed_sessions": 277,
+        "prepared_sessions": 277,
+        "original_characters_in_prepared_sessions": 3782002,
+        "prepared_characters": 3782002,
+        "maintenance_completed_sessions": 277,
+        "upstream_extracted_outputs": 39,
+        "prepared_batches": 280,
+        "completed_batches": 280,
+        "recorded_writer_requests": 144,
+        "characters_in_recorded_requests": 1832530,
+        "confirmed_writer_responses": 144,
+        "characters_in_confirmed_responses": 1832530,
+        "writer_returned_proposal_list_batches": 144,
+        "writer_returned_empty_list_batches": 4,
+        "proposed_operations": 146,
+        "recorded_operation_receipts": 146,
+        "rejected_operations": 106,
+        "confirmed_committed_operations": 40,
+        "first_attempt_writer_failed_batches": 136,
+        "additional_writer_attempts": 0
+      },
+      "official_global_score": {
+        "memory_integrity": {
+          "recall(all)": 0.053442465093885415,
+          "recall(valid)": 0.053442465093885415,
+          "weighted_recall(all)": 0.06349206349206349,
+          "weighted_recall(valid)": 0.06349206349206349,
+          "memory_valid_importance_sum": 1559.25,
+          "memory_importance_sum": 1559.25,
+          "memory_valid_num": 2077,
+          "memory_num": 2077
+        },
+        "memory_accuracy": {
+          "interference_accuracy(all)": 0.9512670565302144,
+          "interference_accuracy(valid)": 0.9512670565302144,
+          "interference_memory_valid_num": 513,
+          "interference_memory_num": 513,
+          "target_accuracy(all)": 0.75,
+          "target_accuracy(valid)": 0.75,
+          "target_memory_valid_num": 2,
+          "target_memory_num": 2,
+          "weighted_accuracy(all)": 0.24358974358974358,
+          "weighted_accuracy(valid)": 0.24358974358974358,
+          "memory_valid_num": 39,
+          "memory_num": 39
+        },
+        "memory_extraction_f1": 0.09977528089887641,
+        "memory_update": {
+          "correct_update_memory_ratio(all)": 0.1741424802110818,
+          "correct_update_memory_ratio(valid)": 0.17983651226158037,
+          "hallucination_update_memory_ratio(all)": 0.05013192612137203,
+          "hallucination_update_memory_ratio(valid)": 0.051771117166212535,
+          "omission_update_memory_ratio(all)": 0.7440633245382586,
+          "omission_update_memory_ratio(valid)": 0.7683923705722071,
+          "other_update_memory_ratio(all)": 0.0,
+          "other_update_memory_ratio(valid)": 0.0,
+          "update_memory_valid_num": 367,
+          "update_memory_num": 379
+        },
+        "question_answering": {
+          "correct_qa_ratio(all)": 0.2453900709219858,
+          "correct_qa_ratio(valid)": 0.24679029957203993,
+          "hallucination_qa_ratio(all)": 0.4921985815602837,
+          "hallucination_qa_ratio(valid)": 0.4950071326676177,
+          "omission_qa_ratio(all)": 0.25673758865248225,
+          "omission_qa_ratio(valid)": 0.2582025677603424,
+          "qa_valid_num": 701,
+          "qa_num": 705
+        },
+        "memory_type_accuracy": {
+          "Event Memory": {
+            "memory_integrity_acc": 0.05331882480957562,
+            "memory_update_acc": 0.020674646354733407,
+            "total_num": 919,
+            "memory_acc": 0.07399347116430903
+          },
+          "Persona Memory": {
+            "memory_integrity_acc": 0.03657205240174673,
+            "memory_update_acc": 0.024563318777292575,
+            "total_num": 1832,
+            "memory_acc": 0.061135371179039305
+          },
+          "Relationship Memory": {
+            "memory_integrity_acc": 0.027522935779816515,
+            "memory_update_acc": 0.009174311926605505,
+            "total_num": 218,
+            "memory_acc": 0.03669724770642202
+          }
+        }
+      },
+      "official_denominators": {
+        "total_updates": 595,
+        "empty_update_retrieval": 216,
+        "scored_updates": 379,
+        "valid_scored_updates": 367,
+        "updates_missing_original": 0,
+        "judge_failures": 3,
+        "formed_sessions": 277,
+        "unscored_updates": 216,
+        "invalid_update_judgements": 12
+      },
+      "all_opportunity_metrics": {
+        "formation_recall_all": 0.053442465093885415,
+        "formed_memory_accuracy_all": 0.24358974358974358,
+        "update_correct_all_opportunities": 0.11092436974789915,
+        "update_correct_scored": 0.1741424802110818,
+        "update_correct_valid": 0.17983651226158037,
+        "qa_correct_all": 0.2453900709219858,
+        "qa_correct_valid": 0.24679029957203993,
+        "denominators": {
+          "total_updates": 595,
+          "empty_update_retrieval": 216,
+          "scored_updates": 379,
+          "valid_scored_updates": 367,
+          "updates_missing_original": 0,
+          "judge_failures": 3,
+          "formed_sessions": 277,
+          "unscored_updates": 216,
+          "invalid_update_judgements": 12,
+          "formation_reference_points": 2077,
+          "formation_valid_judgments": 2077,
+          "formed_memory_outputs": 39,
+          "formed_memory_valid_judgments": 39,
+          "update_scored_records": 379,
+          "update_valid_judgments": 367,
+          "update_unscored_opportunities": 216,
+          "qa_opportunities": 705,
+          "qa_valid_judgments": 701
+        },
+        "update_information_condition": "reference-guided read-only retrieval; separate from QA"
+      },
+      "sealed_generation_requests": 2253,
+      "sealed_known_generation_tokens": 5748300,
+      "writer_first_attempt_failures": {
+        "context_unavailable_before_http": 136
+      },
+      "writer_rejection_reasons": {
+        "FunctionalRejection: EDIT_SOURCE_UNAVAILABLE": 105,
+        "FunctionalRejection: EDIT_OVERLAPPING_TARGET": 1
+      }
+    },
+    "B2": {
+      "status": "UNSEALED",
+      "counts": {
+        "official_completed_sessions": 46,
+        "prepared_sessions": 46,
+        "original_characters_in_prepared_sessions": 638499,
+        "prepared_characters": 638499,
+        "maintenance_completed_sessions": 46,
+        "upstream_extracted_outputs": 10,
+        "prepared_batches": 47,
+        "completed_batches": 47,
+        "recorded_writer_requests": 39,
+        "characters_in_recorded_requests": 503403,
+        "confirmed_writer_responses": 39,
+        "characters_in_confirmed_responses": 503403,
+        "writer_returned_proposal_list_batches": 38,
+        "writer_returned_empty_list_batches": 0,
+        "proposed_operations": 45,
+        "recorded_operation_receipts": 45,
+        "rejected_operations": 35,
+        "confirmed_committed_operations": 9,
+        "first_attempt_writer_failed_batches": 9,
+        "additional_writer_attempts": 0,
+        "accepted_no_change_operations": 1
+      }
+    },
+    "M": {
+      "status": "NOT_STARTED",
+      "counts": {}
+    }
+  },
+  "paired_effects": null,
+  "candidate_frozen": false,
+  "e2_e3_e4_e5_actual_model_status": "NOT_STARTED",
+  "remaining_deliverables": [
+    4,
+    5,
+    6
+  ],
+  "usage_since_e1_start": {
+    "generation_requests": 6354,
+    "known_generation_tokens": 22679529,
+    "unknown_generation_usage": 0,
+    "known_embedding_tokens": 0
+  },
+  "interpretation": [
+    "Counts summarize recorded opportunities and actual receipts, not semantic correctness.",
+    "Official scores use the same Qwen3.6 family as generation.",
+    "v1 extracted-output lists include accepted unchanged records; original scoring inputs are preserved.",
+    "Complete paired-user analysis waits for all four arms; QA and requests are not independent samples.",
+    "Raw corpora, SQLite banks and request logs stay local and ignored."
+  ]
+}

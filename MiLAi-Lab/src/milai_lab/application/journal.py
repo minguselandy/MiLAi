@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
+import uuid
 from collections.abc import Callable, Mapping, Sequence
 from pathlib import Path
 from typing import Any, cast
@@ -45,6 +45,8 @@ class BusinessActionJournal:
             raise ValueError("APPLICATION_WORKFLOW_INVALID")
         self.document_workflow = application_workflow == "document_publication_v1"
         self.binding: dict[str, Any] | None = None
+        self.binding_id: str | None = None
+        self.operation_identities: dict[str, str] = {}
         if response_hook is not None and not application_protection:
             raise ValueError("APPLICATION_RESPONSE_HOOK_REQUIRES_PROTECTION")
 
@@ -66,9 +68,8 @@ class BusinessActionJournal:
         if not isinstance(generating_message, AIMessage) or not generating_message.id:
             raise ValueError("BUSINESS_CALL_GENERATION_ID_MISSING")
         thread_id = request.runtime.config["configurable"]["thread_id"]
-        identity = [thread_id, generating_message.id, call["id"]]
-        key = hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode()).hexdigest()
         entries = self._entries()
+        key = self.call_key(entries, thread_id, generating_message.id, call["id"])
         prior = entries.get(key)
         if prior is not None:
             if prior["status"] != "complete":
@@ -94,25 +95,43 @@ class BusinessActionJournal:
     def calls_for_thread(self, thread_id: str) -> list[dict[str, Any]]:
         return [entry for entry in self._entries().values() if entry.get("thread_id") == thread_id]
 
-    def entry_for_call(self, thread_id: str, generation_id: str,
-                       call_id: str) -> dict[str, Any] | None:
-        identity = [thread_id, generation_id, call_id]
-        key = hashlib.sha256(json.dumps(identity, ensure_ascii=False).encode()).hexdigest()
-        return self._entries().get(key)
+    def entry_for_call(
+        self, thread_id: str, generation_id: str, call_id: str
+    ) -> dict[str, Any] | None:
+        entries = self._entries()
+        return entries.get(self.call_key(entries, thread_id, generation_id, call_id))
+
+    @staticmethod
+    def call_key(entries: dict[str, Any], thread: str, generation: str, call: str | None) -> str:
+        if not isinstance(call, str) or not call:
+            raise ValueError("BUSINESS_CALL_IDENTITY_REQUIRED")
+        # Existing legacy keys stay ordinary strings; find by their persisted identities.
+        for key, row in entries.items():
+            if isinstance(row, dict) and (
+                row.get("thread_id"),
+                row.get("generation_id"),
+                row.get("call_id"),
+            ) == (thread, generation, call):
+                return key
+        # Caller-issued generation and call IDs already identify this operation.
+        # Keep their complete identity; this also avoids conflating different
+        # calls when a deterministic fixture supplies repeated UUID values.
+        return "call:" + BusinessActionJournal._canonical([thread, generation, call])
 
     @staticmethod
     def _canonical(value: Any) -> str:
-        return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"),
-                          allow_nan=False)
-
-    @classmethod
-    def _hash(cls, value: Any) -> str:
-        return hashlib.sha256(cls._canonical(value).encode()).hexdigest()
+        return json.dumps(
+            value, sort_keys=True, ensure_ascii=False, separators=(",", ":"), allow_nan=False
+        )
 
     @staticmethod
     def _application(entries: dict[str, Any]) -> dict[str, Any]:
-        return cast(dict[str, Any], entries.setdefault(
-            "_application", {"bindings": {}, "operations": {}, "resolved": {}, "recoveries": {}}))
+        return cast(
+            dict[str, Any],
+            entries.setdefault(
+                "_application", {"bindings": {}, "operations": {}, "resolved": {}, "recoveries": {}}
+            ),
+        )
 
     def bind_request(self, binding: Mapping[str, Any]) -> None:
         """Bind a trusted application request; this never interprets public text."""
@@ -261,30 +280,64 @@ class BusinessActionJournal:
                 raise ValueError("APPLICATION_PRECONDITION_QUERY_INVALID")
         entries = self._entries()
         app = self._application(entries)
+        # Reopen old journals by persisted identity metadata. Legacy operation
+        # keys remain opaque, including their original outcomes and resolutions.
+        identities = dict(app.get("operation_identities", {}))
+        task_fields = ("run_id", "arm_id", "owner", "task_id")
+        for saved_key, saved in app["bindings"].items():
+            saved_binding = saved["binding"]
+            if any(saved_binding.get(k) != frozen[k] for k in task_fields):
+                continue
+            binding_ids = {saved_key, saved.get("binding_id"), saved.get("hash")}
+            for row in entries.values():
+                if not isinstance(row, dict) or (
+                    row.get("binding_id", row.get("binding_hash")) not in binding_ids
+                    or not isinstance(row.get("operation_id"), str)
+                    or not isinstance(row.get("operation_key"), str)
+                ):
+                    continue
+                identity_key = self._canonical(
+                    [frozen[k] for k in task_fields] + [row["operation_id"]]
+                )
+                old_key = row["operation_key"]
+                if identity_key in identities and identities[identity_key] != old_key:
+                    raise ValueError("APPLICATION_OPERATION_IDENTITY_AMBIGUOUS")
+                identities[identity_key] = old_key
+        self.operation_identities = identities
+        app["operation_identities"] = identities
         identity = {
             field: frozen[field]
             for field in ("run_id", "arm_id", "owner", "thread_id", "public_index", "message_id")
         }
-        binding_key, binding_hash = self._hash(identity), self._hash(frozen)
-        prior = app["bindings"].get(binding_key)
-        if prior is not None and prior["hash"] != binding_hash:
+        prior = next(
+            (
+                row
+                for row in app["bindings"].values()
+                if all(row["binding"].get(k) == v for k, v in identity.items())
+            ),
+            None,
+        )
+        if prior is not None and prior["binding"] != frozen:
             raise ValueError("APPLICATION_BINDING_CHANGED")
+        binding_key = prior.get("binding_id", prior.get("hash")) if prior else str(uuid.uuid4())
         for op in operations:
             key = self.operation_key(frozen, op["operation_id"])
             if key in app["operations"] and self._canonical(app["operations"][key]) != (
                 self._canonical(op)
             ):
                 raise ValueError("APPLICATION_OPERATION_CHANGED")
-        app["bindings"][binding_key] = {"hash": binding_hash, "binding": frozen}
+        app["bindings"][binding_key] = {"binding_id": binding_key, "binding": frozen}
         for op in operations:
             app["operations"][self.operation_key(frozen, op["operation_id"])] = op
         write_json(self.path, entries)
         self.binding = frozen
+        self.binding_id = binding_key
 
-    @classmethod
-    def operation_key(cls, binding: Mapping[str, Any], operation_id: str) -> str:
-        return cls._hash([binding[field] for field in (
-            "run_id", "arm_id", "owner", "task_id")] + [operation_id])
+    def operation_key(self, binding: Mapping[str, Any], operation_id: str) -> str:
+        identity = self._canonical(
+            [binding[field] for field in ("run_id", "arm_id", "owner", "task_id")] + [operation_id]
+        )
+        return self.operation_identities.get(identity, identity)
 
     def _op_entries(self, entries: dict[str, Any], operation_key: str) -> list[dict[str, Any]]:
         return [row for row in entries.values() if row.get("operation_key") == operation_key]
@@ -294,8 +347,8 @@ class BusinessActionJournal:
             # Compare the public function's actual defaults without changing the
             # requested/journal arguments or supplying any body or permission.
             if isinstance(left, dict) and isinstance(right, dict):
-                left = {"document_version": 0, "content_digest": "", **left}
-                right = {"document_version": 0, "content_digest": "", **right}
+                left = {"document_version": 0, **left}
+                right = {"document_version": 0, **right}
         return self._canonical(left) == self._canonical(right)
 
     def _effects(
@@ -448,7 +501,7 @@ class BusinessActionJournal:
                 )
                 and all(
                     observation.get(field) == prior["args"].get(field)
-                    for field in ("document_version", "content_digest")
+                    for field in ("document_version",)
                 )
                 and not publication_matches(observation, prior["args"])
             )
@@ -500,8 +553,6 @@ class BusinessActionJournal:
             and type(body.get("document_version")) is int
             and body["document_version"] > 0
             and type(body.get("content")) is str
-            and type(body.get("content_digest")) is str
-            and hashlib.sha256(body["content"].encode()).hexdigest() == body["content_digest"]
         )
         for op in affected:
             key = self.operation_key(self.binding, op["operation_id"])
@@ -509,19 +560,22 @@ class BusinessActionJournal:
                 resolved[key] = {
                     **op["args"],
                     "document_version": body["document_version"],
-                    "content_digest": body["content_digest"],
                 }
             else:
                 resolved.pop(key, None)
         return valid
 
-    def _bind_reservation(self, entries: dict[str, Any], query_op: dict[str, Any],
-                          response: ToolMessage) -> bool:
+    def _bind_reservation(
+        self, entries: dict[str, Any], query_op: dict[str, Any], response: ToolMessage
+    ) -> bool:
         assert self.binding is not None
         binding = self.binding
         resolved_bindings = self._application(entries)["resolved"]
-        label_ops = [op for op in self.binding["operations"]
-                     if op.get("reservation_from") == query_op["operation_id"]]
+        label_ops = [
+            op
+            for op in self.binding["operations"]
+            if op.get("reservation_from") == query_op["operation_id"]
+        ]
 
         def invalidate() -> bool:
             for op in label_ops:
@@ -533,12 +587,17 @@ class BusinessActionJournal:
         except ValueError:
             return invalidate()
         target = query_op["target"]
-        if (not isinstance(result, dict) or result.get("status") != "found"
-                or type(result.get("reservation_id")) is not str
-                or result.get("label_status") not in {"created", "not_created"}
-                or not result["reservation_id"] or any(self._canonical(result.get(field)) !=
-                    self._canonical(target[field]) for field in (
-                        "item_key", "quantity", "destination", "packing"))):
+        if (
+            not isinstance(result, dict)
+            or result.get("status") != "found"
+            or type(result.get("reservation_id")) is not str
+            or result.get("label_status") not in {"created", "not_created"}
+            or not result["reservation_id"]
+            or any(
+                self._canonical(result.get(field)) != self._canonical(target[field])
+                for field in ("item_key", "quantity", "destination", "packing")
+            )
+        ):
             return invalidate()
         for op in label_ops:
             key = self.operation_key(self.binding, op["operation_id"])
@@ -560,9 +619,6 @@ class BusinessActionJournal:
             raise ValueError("BUSINESS_CALL_GENERATION_ID_MISSING")
         config = request.runtime.config["configurable"]
         thread_id = config["thread_id"]
-        key = hashlib.sha256(
-            json.dumps([thread_id, generated.id, call["id"]], ensure_ascii=False).encode()
-        ).hexdigest()
         if self.binding is not None and (
             any(
                 config.get(field) != self.binding[bfield]
@@ -578,13 +634,14 @@ class BusinessActionJournal:
         ):
             raise ValueError("APPLICATION_CALL_SCOPE_CHANGED")
         entries = self._entries()
-        binding_hash = self._hash(self.binding) if self.binding is not None else None
+        key = self.call_key(entries, thread_id, generated.id, call["id"])
+        binding_hash = self.binding_id
         prior = entries.get(key)
         if prior is not None:
             if (
                 prior["name"] != call["name"]
                 or self._canonical(prior["args"]) != self._canonical(call["args"])
-                or prior.get("binding_hash") != binding_hash
+                or prior.get("binding_id", prior.get("binding_hash")) != binding_hash
             ):
                 raise ValueError("APPLICATION_CALL_IDENTITY_CHANGED")
             if prior["status"] != "complete":
@@ -604,7 +661,7 @@ class BusinessActionJournal:
             "name": call["name"],
             "args": call["args"],
             "journal_key": key,
-            "binding_hash": binding_hash,
+            "binding_id": binding_hash,
             "origin": origin,
             "decision": "authorized" if op is not None else "blocked",
             "reason": reason,
@@ -662,5 +719,7 @@ class BusinessActionJournal:
         write_json(self.path, entries)
 
     def recovery_for_call(self, original_key: str) -> dict[str, Any] | None:
-        return cast(dict[str, Any] | None,
-                    self._application(self._entries())["recoveries"].get(original_key))
+        return cast(
+            dict[str, Any] | None,
+            self._application(self._entries())["recoveries"].get(original_key),
+        )

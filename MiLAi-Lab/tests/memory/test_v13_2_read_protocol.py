@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -23,14 +22,13 @@ from milai_lab.baselines.langmem_instrumentation import ProvenanceObserver
 from milai_lab.contracts.read_protocol import (
     SAVE_GUIDANCE,
     ReadProtocolRejected,
-    digest,
     snapshot_key,
 )
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory import service as service_module
 from milai_lab.memory.revision_store import RevisionSidecar
-from milai_lab.memory.service import MemoryService
+from milai_lab.memory.service import MemoryService, reference_key
 from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.methods.grounded_memory import GroundedMemoryRecipe
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
@@ -127,11 +125,12 @@ def test_ordinary_and_two_explicit_snapshots_survive_overwrite_and_reopen(tmp_pa
         one = packet(recipe, query="archive multilingual evidence")
         repeat = packet(recipe, query="archive multilingual evidence")
         two = packet(recipe, query="evidence 演示")
-        assert repeat["retrieval_calls"] == 1 and repeat["packet_hash"] == one["packet_hash"]
+        assert repeat["retrieval_calls"] == 1 and repeat["packet_id"] != one["packet_id"]
+        assert repeat["selected"] == one["selected"]
         assert len({cursor(ordinary), cursor(one), cursor(two)}) == 3
         for state in [ordinary, one, two]:
             page = recipe.selected_page_tool(cursor(state), config)
-            assert page["selection_hash"] == state["selected_snapshot_hash"]
+            assert page["snapshot_id"] == state["selected_snapshot_id"]
             assert page["retrieval_calls"] == 0 and page["current_verified"] is False
         changed_budget = packet(recipe, budget=1400)
         assert cursor(changed_budget) != cursor(ordinary)
@@ -147,7 +146,7 @@ def test_ordinary_and_two_explicit_snapshots_survive_overwrite_and_reopen(tmp_pa
         assert recipe.selected_page_tool(preserved, config)["items"]
 
 
-@pytest.mark.parametrize("fault", ["missing", "revoked", "hash", "owner", "config", "turn"])
+@pytest.mark.parametrize("fault", ["missing", "revoked", "id", "owner", "config", "turn"])
 def test_snapshot_fail_closed_identity_and_missing(tmp_path: Path, fault: str) -> None:
     with opened(tmp_path) as service:
         seeded(service)
@@ -160,10 +159,8 @@ def test_snapshot_fail_closed_identity_and_missing(tmp_path: Path, fault: str) -
             service.store.delete(recipe.namespace, key)
         elif fault == "revoked":
             service.store.put(recipe.namespace, key, {**row, "status": "revoked"}, index=False)
-        elif fault == "hash":
-            service.store.put(
-                recipe.namespace, key, {**row, "snapshot_hash": "0" * 64}, index=False
-            )
+        elif fault == "id":
+            service.store.put(recipe.namespace, key, {**row, "snapshot_id": "0" * 64}, index=False)
         elif fault == "owner":
             config["configurable"]["user_id"] = "other"
         elif fault == "config":
@@ -176,7 +173,7 @@ def test_snapshot_fail_closed_identity_and_missing(tmp_path: Path, fault: str) -
         assert isinstance(caught.value, ReadProtocolRejected) == (fault in {"missing", "revoked"})
 
 
-def test_source_hash_unknown_store_and_collision_propagate(
+def test_immutable_snapshot_unknown_store_and_collision_propagate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     with opened(tmp_path) as service:
@@ -187,16 +184,16 @@ def test_source_hash_unknown_store_and_collision_propagate(
         token = cursor(state)
         key = snapshot_key(token.split(":")[0].removeprefix("selected-"))
         original = service.store.get(recipe.namespace, key).value
-        corrupted = {**original, "issuing_packet_sha256": "b" * 64}
+        corrupted = {**original, "issuing_packet_id": "b" * 64}
         service.store.put(recipe.namespace, key, corrupted, index=False)
         with pytest.raises(ValueError, match="COLLISION_OR_CHANGED"):
             recipe._persist_selection(
                 {
                     k: v
                     for k, v in original.items()
-                    if k not in {"issuing_packet_sha256", "receipt_sha256"}
+                    if k not in {"issuing_packet_id", "receipt_sha256"}
                 },
-                state["packet_hash"],
+                state["packet_id"],
             )
         assert service.store.get(recipe.namespace, key).value == corrupted
 
@@ -382,10 +379,17 @@ def capacity_config(root: Path | None = None) -> dict[str, Any]:
 
         helper = Path(__file__).parents[1] / "unit/test_v13_1_controls.py"
         config = runpy.run_path(str(helper))["settings"](root)["capacity"]
-        return {**config, "model": "synthetic", "context_tokens": 131072,
-                "output_tokens": 4096, "safety_tokens": 64,
-                "batch_source_tokens": 4096, "related_reserve_tokens": 0,
-                "schema_reserve_tokens": 0, "source_message_overhead_tokens": 0}
+        return {
+            **config,
+            "model": "synthetic",
+            "context_tokens": 131072,
+            "output_tokens": 4096,
+            "safety_tokens": 64,
+            "batch_source_tokens": 4096,
+            "related_reserve_tokens": 0,
+            "schema_reserve_tokens": 0,
+            "source_message_overhead_tokens": 0,
+        }
     return {
         "model": "synthetic",
         "tokenizer_path": "/cra/qwen36-35B",
@@ -512,7 +516,7 @@ def test_actual_prepare_step_start_resume_freeze_closure(
     frozen = runner.prepare(fp, cp, root)
     assert frozen["memory_read_protocol"] == "selected_snapshot_v1"
     assert frozen["tool_read_feedback"] == "typed_read_v1"
-    assert frozen["read_protocol_presentation"]["catalog_sha256"] == digest(frozen["tool_catalog"])
+    assert frozen["read_protocol_presentation"]["catalog_version"] == "public_memory_v2"
     execute = runner._execute_step if runner is d0 else runner.step
     result = execute(root, "synthetic-entry", 0)
     assert result["status"] == "completed", result
@@ -531,9 +535,9 @@ def test_actual_prepare_step_start_resume_freeze_closure(
     assert len(requests) == before
     frozen_path = root / "input-freeze.json"
     changed = read_json(frozen_path)
-    changed["tool_read_feedback"] = "legacy"
+    changed["config"]["tool_read_feedback"] = "unsupported-profile"
     write_json(frozen_path, changed)
-    with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+    with pytest.raises(ValueError, match="PROFILE_INVALID"):
         runner._frozen(root)
     assert len(requests) == before
 
@@ -693,17 +697,13 @@ def test_p5_actual_unknown_start_then_resume_and_bound_identity(
         )
         item = store.get(
             service.turns_namespace,
-            hashlib.sha256(
-                json.dumps(
-                    ["s", "u"], ensure_ascii=False, sort_keys=True, separators=(",", ":")
-                ).encode()
-            ).hexdigest(),
+            reference_key(["s", "u"]),
         )
         assert item.value["last_binding_phase"] == "resume"
-        assert item.value["binding"]["config_sha256"] == frozen["config_sha256"]
+        assert item.value["binding"]["config_version"] == frozen["config_sha256"]
 
 
-def test_same_short_key_collision_and_persistence_cut_never_overwrite(
+def test_issued_id_collision_and_persistence_cut_never_overwrite(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     from milai_lab.methods import grounded_memory as grounded
@@ -712,16 +712,16 @@ def test_same_short_key_collision_and_persistence_cut_never_overwrite(
         seeded(service)
         turn(service)
         recipe = GroundedMemoryRecipe(service, lambda s: len(s.encode()) // 4)
-        real_digest = grounded.digest
-        monkeypatch.setattr(grounded, "digest", lambda value: "0" * 24 + real_digest(value)[24:])
+        real_uuid4 = grounded.uuid.uuid4
+        monkeypatch.setattr(grounded.uuid, "uuid4", lambda: "same-issued-snapshot-id")
         first = packet(recipe, query="archive")
-        key = snapshot_key("0" * 24)
+        key = snapshot_key("same-issued-snapshot-id")
         original = service.store.get(recipe.namespace, key).value
         with pytest.raises(ValueError, match="COLLISION_OR_CHANGED"):
             packet(recipe, query="evidence")
         assert service.store.get(recipe.namespace, key).value == original
         assert first["retrieval_calls"] == 1
-        monkeypatch.setattr(grounded, "digest", real_digest)
+        monkeypatch.setattr(grounded.uuid, "uuid4", real_uuid4)
         real_put = service.store.put
 
         def interrupted(namespace: Any, key: str, value: Any, **kwargs: Any) -> None:
@@ -730,7 +730,7 @@ def test_same_short_key_collision_and_persistence_cut_never_overwrite(
             real_put(namespace, key, value, **kwargs)
 
         monkeypatch.setattr(service.store, "put", interrupted)
-        query_key = "query:" + digest(["s", "u", "distinct-query"])
+        query_key = "query:" + reference_key(["s", "u", "distinct-query"])
         assert service.store.get(recipe.namespace, query_key) is None
         with pytest.raises(RuntimeError, match="persistence cut"):
             packet(recipe, query="distinct-query")
@@ -785,8 +785,7 @@ def test_record_snapshot_reads_exact_history_after_dirty_current(tmp_path: Path)
         dirty = packet(recipe, budget=750)
         assert dirty["retrieval_calls"] == 0 and dirty["selected"] == state["selected"]
         assert (
-            recipe.selected_page_tool(token, config)["selection_hash"]
-            == state["selected_snapshot_hash"]
+            recipe.selected_page_tool(token, config)["snapshot_id"] == state["selected_snapshot_id"]
         )
 
 
@@ -941,12 +940,12 @@ def test_observation_snapshot_retains_exact_real_members_without_current_winner(
             {
                 "public_turn": trusted,
                 "query_kind": "ordinary_public",
-                "query_hash": digest("archive multilingual evidence"),
+                "query": "archive multilingual evidence",
                 "request_ref": recipe._request_ref("s", "u"),
                 "material_budget": 2048,
                 "bank_revision": "synthetic-exact-snapshot",
                 "source_index": None,
-                "source_index_sha256": digest(None),
+                "source_index_snapshot_id": None,
             }
         )
         try:
@@ -954,7 +953,7 @@ def test_observation_snapshot_retains_exact_real_members_without_current_winner(
             recipe._persist_selection(row, "a" * 64)
         finally:
             recipe._read_context.reset(token)
-        cursor = "selected-" + row["cursor_digest"] + ":0"
+        cursor = "selected-" + row["snapshot_id"] + ":0"
 
         def no_bank_view(*args: Any, **kwargs: Any) -> Any:
             raise AssertionError("continuation must exact-get selected members")
@@ -968,7 +967,7 @@ def test_observation_snapshot_retains_exact_real_members_without_current_winner(
         assert not isinstance(caught.value, ReadProtocolRejected)
 
 
-@pytest.mark.parametrize("fault", ["role", "hash", "missing"])
+@pytest.mark.parametrize("fault", ["role", "revision", "missing"])
 def test_selected_source_integrity_is_not_feedback(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str
 ) -> None:
@@ -989,7 +988,7 @@ def test_selected_source_integrity_is_not_feedback(
                 source = (
                     {**source, "role": "tool"}
                     if fault == "role"
-                    else {**source, "content_sha256": "b" * 64}
+                    else {**source, "source_revision": 2}
                 )
             return source
 
@@ -1087,7 +1086,7 @@ def test_exact_observation_member_fault_matrix(tmp_path: Path, fault: str) -> No
             service.store.put(
                 service.observations_namespace,
                 oid,
-                {**fact, "literal_value": "changed"},
+                {**fact, "source_revision": 2},
                 index=False,
             )
         elif fault == "marker_missing":
@@ -1107,7 +1106,7 @@ def test_exact_observation_member_fault_matrix(tmp_path: Path, fault: str) -> No
             service.store.put(
                 service.sources_namespace,
                 source_ref,
-                {**original, "content": "changed"},
+                {**original, "source_revision": 2},
                 index=False,
             )
         with pytest.raises(ValueError) as caught:

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from collections.abc import Iterator
 from contextlib import contextmanager
@@ -100,7 +99,9 @@ def test_single_real_event_supports_multiple_objects_fields_and_replay_reopen(
             "/objects/1/data/label",
             "/objects/1/data/enabled",
         }
-        assert all(row["source_hash"] == raw["content_sha256"] for row in original["observations"])
+        assert all(
+            row["source_revision"] == raw["source_revision"] for row in original["observations"]
+        )
         assert service.records() == [] and service.source(source) == raw
         assert service.observe(source, profile)["status"] == "no_change"
         assert service.observations() == original
@@ -188,7 +189,7 @@ def test_explicit_public_null_clear_only_and_additive_schema_mapping(tmp_path: P
         assert field_view(service, "extra")["literal_value"] == "unmapped"
 
 
-def test_profile_origin_owner_hash_and_same_version_mapping_are_bound(tmp_path: Path) -> None:
+def test_profile_origin_owner_revision_and_same_version_mapping_are_bound(tmp_path: Path) -> None:
     profile = synthetic_profile()
     with opened(tmp_path) as service:
         foreign = capture(
@@ -204,8 +205,7 @@ def test_profile_origin_owner_hash_and_same_version_mapping_are_bound(tmp_path: 
         changed = replace(profile, fields=(replace(profile.fields[0], path=("data", "other")),))
         assert service.observe(source, changed)["reason"] == "projection_binding_changed"
         event = service.store.get(service.sources_namespace, source).value
-        event["content"] = event["content"].replace('"x"', '"changed"')
-        event["content_sha256"] = hashlib.sha256(event["content"].encode()).hexdigest()
+        event["source_revision"] = 2
         service.store.put(service.sources_namespace, source, event, index=False)
         assert service.observe(source, profile)["reason"] == "projection_binding_changed"
         with pytest.raises(ValueError, match="OBSERVATION_SOURCE_CHANGED"):
@@ -301,13 +301,13 @@ def test_actual_document_content_version_does_not_order_approval_or_publication(
             before = capture(service, "draft", draft, "create_or_update_draft")
             service.observe(before, profile)
             approved = world.approve_document_version(
-                "alice", "Public note", body["document_version"], body["content_digest"]
+                "alice", "Public note", body["document_version"]
             )
             after = capture(service, "approval", approved, "approve_document_version")
             service.observe(after, profile)
             obj = service.observations()["objects"][0]
-            assert obj["fields"]["content_digest"]["status"] == "observed"
-            assert obj["fields"]["content_digest"]["selection"] == "comparable_latest"
+            assert obj["fields"]["document_version"]["status"] == "observed"
+            assert obj["fields"]["document_version"]["selection"] == "comparable_latest"
             assert obj["fields"]["approval_status"]["status"] == "conflict"
             assert obj["fields"]["approval_status"]["selection"] == "unordered_observations"
             edit = world.create_or_update_draft(
@@ -315,14 +315,13 @@ def test_actual_document_content_version_does_not_order_approval_or_publication(
                 "Public note",
                 "Changed draft",
                 body["document_version"],
-                body["content_digest"],
             )
             edit_source = capture(service, "edit", edit, "create_or_update_draft")
             service.observe(edit_source, profile)
             obj = service.observations()["objects"][0]
             assert (
-                obj["fields"]["content_digest"]["literal_value"]
-                == json.loads(edit)["content_digest"]
+                obj["fields"]["document_version"]["literal_value"]
+                == json.loads(edit)["document_version"]
             )
             assert obj["fields"]["document_version"]["literal_value"] == 2
             assert obj["fields"]["approval_status"]["status"] == "conflict"

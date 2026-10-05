@@ -22,34 +22,71 @@ from milai_lab.contracts.public_memory_contracts import CAPTURE_GUIDANCE, parame
 from milai_lab.contracts.read_protocol import ReadProtocolRejected, reject
 from milai_lab.memory.service import MemoryService
 
-SemanticPatch = Annotated[dict[str, Any], WithJsonSchema({
-    "type": "object",
-    "properties": {
-        "content": {"type": "string"},
-        "scope": {"type": "object", "additionalProperties": True},
-        "basis": {"type": "string", "enum": [
-            "user_statement", "tool_observation", "plan", "inference",
-        ]},
-        "kind": {"type": "string", "enum": ["semantic", "episodic"]},
-    },
-    "additionalProperties": False,
-})]
+SemanticPatch = Annotated[
+    dict[str, Any],
+    WithJsonSchema(
+        {
+            "type": "object",
+            "properties": {
+                "content": {"type": "string"},
+                "scope": {"type": "object", "additionalProperties": True},
+                "basis": {
+                    "type": "string",
+                    "enum": [
+                        "user_statement",
+                        "tool_observation",
+                        "plan",
+                        "inference",
+                    ],
+                },
+                "kind": {"type": "string", "enum": ["semantic", "episodic"]},
+            },
+            "additionalProperties": False,
+        }
+    ),
+]
 
-FieldSupport = Annotated[dict[str, Any], WithJsonSchema({
-    "type": "object",
-    "properties": {field: {"oneOf": [
-        {"type": "object", "properties": {"source_refs": {
-            "type": "array", "items": {"type": "string"}, "minItems": 1,
-        }}, "required": ["source_refs"], "additionalProperties": False},
-        {"type": "object", "properties": {"reuse_support_from": {"type": "string"}},
-         "required": ["reuse_support_from"], "additionalProperties": False},
-    ]} for field in ("content", "scope", "basis", "kind")},
-    "required": ["content", "scope", "basis", "kind"], "additionalProperties": False,
-})]
+FieldSupport = Annotated[
+    dict[str, Any],
+    WithJsonSchema(
+        {
+            "type": "object",
+            "properties": {
+                field: {
+                    "oneOf": [
+                        {
+                            "type": "object",
+                            "properties": {
+                                "source_refs": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "minItems": 1,
+                                }
+                            },
+                            "required": ["source_refs"],
+                            "additionalProperties": False,
+                        },
+                        {
+                            "type": "object",
+                            "properties": {"reuse_support_from": {"type": "string"}},
+                            "required": ["reuse_support_from"],
+                            "additionalProperties": False,
+                        },
+                    ]
+                }
+                for field in ("content", "scope", "basis", "kind")
+            },
+            "required": ["content", "scope", "basis", "kind"],
+            "additionalProperties": False,
+        }
+    ),
+]
 
 
 def create_service_tools(
-    service: MemoryService, *, replay_requested: bool = False,
+    service: MemoryService,
+    *,
+    replay_requested: bool = False,
     context_provider: Callable[[str, RunnableConfig], dict[str, Any]] | None = None,
     recall_provider: Callable[[RunnableConfig], dict[str, Any]] | None = None,
     source_index_provider: Callable[[str | None, RunnableConfig], dict[str, Any]] | None = None,
@@ -66,32 +103,46 @@ def create_service_tools(
 
     def trigger_for(config: RunnableConfig) -> dict[str, Any] | None:
         cfg = config.get("configurable", {})
-        if not cfg.get("v13_turn_id") or not cfg.get("v13_support_config_sha256"):
+        version = cfg.get("v13_config_version", cfg.get("v13_support_config_sha256"))
+        if not cfg.get("v13_turn_id") or not version:
             return None
         try:
-            return service.public_turn(session_for(config), message_id=str(cfg["v13_turn_id"]),
-                                       config_sha256=str(cfg["v13_support_config_sha256"]))
+            return service.public_turn(
+                session_for(config), message_id=str(cfg["v13_turn_id"]), config_version=str(version)
+            )
         except ValueError:
             return None
 
     def message(name: str, call_id: str, receipt: dict[str, Any]) -> ToolMessage:
-        if (service.mutation_contract == "event_bound_v1"
-                and service.candidate_contract != "read_handle_v1"):
+        if (
+            service.mutation_contract == "event_bound_v1"
+            and service.candidate_contract != "read_handle_v1"
+        ):
+
             def without_handles(value: Any) -> Any:
                 if isinstance(value, dict):
-                    return {key: without_handles(child) for key, child in value.items()
-                            if key != "candidate_handle"}
+                    return {
+                        key: without_handles(child)
+                        for key, child in value.items()
+                        if key != "candidate_handle"
+                    }
                 if isinstance(value, list):
                     return [without_handles(child) for child in value]
                 return value
+
             receipt = without_handles(receipt)
         return ToolMessage(
-            content=json.dumps(receipt, ensure_ascii=False,
-                               separators=(",", ":")
-                               if ((name == "search_memory" and context_provider)
-                                   or (name == "recall_context" and recall_provider)
-                                   or (name == "read_current_sources" and source_index_provider))
-                               else None),
+            content=json.dumps(
+                receipt,
+                ensure_ascii=False,
+                separators=(",", ":")
+                if (
+                    (name == "search_memory" and context_provider)
+                    or (name == "recall_context" and recall_provider)
+                    or (name == "read_current_sources" and source_index_provider)
+                )
+                else None,
+            ),
             name=name,
             tool_call_id=call_id,
             status="success" if receipt["ok"] else "error",
@@ -163,7 +214,8 @@ def create_service_tools(
                     binding_error = "source_selection_required"
                 else:
                     source_refs = (
-                        [source_ref] if source_ref is not None
+                        [source_ref]
+                        if source_ref is not None
                         else service.boundary_sources(session)
                     )
                     if len(source_refs) != 1:
@@ -172,8 +224,12 @@ def create_service_tools(
                 source_ref = source_refs[0] if source_refs else ""
             if action == "update":
                 if service.candidate_contract != "legacy_query_v1":
-                    if (service.candidate_contract == "id_revision_v1" and candidate_handle is None
-                            and id is not None and expected_revision is not None):
+                    if (
+                        service.candidate_contract == "id_revision_v1"
+                        and candidate_handle is None
+                        and id is not None
+                        and expected_revision is not None
+                    ):
                         candidate_handle = service.candidate_for_version(id, expected_revision)
                     try:
                         bound = service.candidate(candidate_handle)
@@ -183,10 +239,8 @@ def create_service_tools(
                         bound = None
                     if bound is None:
                         binding_error = "candidate_handle_required_or_invalid"
-                    elif (
-                        (id is not None and id != bound["record_id"])
-                        or (expected_revision is not None
-                            and expected_revision != bound["revision"])
+                    elif (id is not None and id != bound["record_id"]) or (
+                        expected_revision is not None and expected_revision != bound["revision"]
                     ):
                         binding_error = "candidate_binding_mismatch"
                     else:
@@ -238,11 +292,15 @@ def create_service_tools(
         if service.receipt_contract == "explicit_receipt_v1":
             proposal["content_format"] = content_format
         if exact:
-            proposal.update(source_refs=source_refs, candidate_handle=candidate_handle,
-                            binding_error=binding_error)
+            proposal.update(
+                source_refs=source_refs,
+                candidate_handle=candidate_handle,
+                binding_error=binding_error,
+            )
         if direct:
-            proposal.update(field_support=field_support,
-                            trigger_binding=requested["trigger_binding"])
+            proposal.update(
+                field_support=field_support, trigger_binding=requested["trigger_binding"]
+            )
         receipt = service.commit(session, tool_call_id, proposal)
         return message("manage_memory", tool_call_id, receipt)
 
@@ -303,9 +361,14 @@ def create_service_tools(
         return await anyio.to_thread.run_sync(lambda: read_memory(config=config, **arguments))
 
     def read_memory_history(
-        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
-        id: str | None = None, query: str | None = None, revision: int | None = None,
-        view: Literal["version", "history"] = "version", cursor: str | None = None,
+        config: RunnableConfig,
+        *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+        id: str | None = None,
+        query: str | None = None,
+        revision: int | None = None,
+        view: Literal["version", "history"] = "version",
+        cursor: str | None = None,
         max_revisions: Annotated[int, Field(ge=1, le=6)] = 6,
         source_ref: str | None = None,
     ) -> ToolMessage:
@@ -328,8 +391,9 @@ def create_service_tools(
                         "memory_tools",
                         service.tool_read_feedback,
                     )
-                receipt = service.history_index(id, cursor=cursor, limit=max_revisions,
-                                                source_ref=source_ref)
+                receipt = service.history_index(
+                    id, cursor=cursor, limit=max_revisions, source_ref=source_ref
+                )
                 return message("read_memory", tool_call_id, receipt)
             if cursor is not None or max_revisions != 6 or source_ref is not None:
                 reject(
@@ -337,8 +401,9 @@ def create_service_tools(
                     "memory_tools",
                     service.tool_read_feedback,
                 )
-            result = read_memory(config, tool_call_id=tool_call_id,
-                                 id=id, query=query, revision=revision)
+            result = read_memory(
+                config, tool_call_id=tool_call_id, id=id, query=query, revision=revision
+            )
             receipt = json.loads(str(result.content))
             if receipt["ok"]:
                 receipt["history_index"] = service.history_index(receipt["id"])
@@ -352,7 +417,8 @@ def create_service_tools(
 
     async def aread_memory_history(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
-            lambda: read_memory_history(config=config, **arguments))
+            lambda: read_memory_history(config=config, **arguments)
+        )
 
     def revise_memory(
         candidate_handle: str,
@@ -377,8 +443,12 @@ def create_service_tools(
         no_change writes no new revision. Conflicts do not create replacement cards.
         """
         session = session_for(config)
-        requested = {"candidate_handle": candidate_handle, "semantic_patch": semantic_patch,
-                     "source_refs": source_refs, "operation": operation}
+        requested = {
+            "candidate_handle": candidate_handle,
+            "semantic_patch": semantic_patch,
+            "source_refs": source_refs,
+            "operation": operation,
+        }
         direct = service.support_contract == "direct_support_v1"
         if direct:
             requested.update(field_support=field_support, trigger_binding=trigger_for(config))
@@ -388,18 +458,29 @@ def create_service_tools(
                 return message("revise_memory", tool_call_id, prior)
         support_args: dict[str, Any] = (
             {"field_support": field_support, "trigger_binding": requested["trigger_binding"]}
-            if direct else {})
-        return message("revise_memory", tool_call_id, service.revise(
-            session, tool_call_id, candidate_handle, semantic_patch, source_refs,
-            operation=operation,
-            **support_args,
-        ))
+            if direct
+            else {}
+        )
+        return message(
+            "revise_memory",
+            tool_call_id,
+            service.revise(
+                session,
+                tool_call_id,
+                candidate_handle,
+                semantic_patch,
+                source_refs,
+                operation=operation,
+                **support_args,
+            ),
+        )
 
     async def arevise_memory(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: revise_memory(config=config, **arguments))
 
-    def recall_context(config: RunnableConfig, *,
-                       tool_call_id: Annotated[str, InjectedToolCallId]) -> ToolMessage:
+    def recall_context(
+        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId]
+    ) -> ToolMessage:
         """Recall bounded historical evidence using the actual current public user request.
 
         This ordinary no-query read shares a fixed packet with prefetch and dirty refresh.
@@ -415,7 +496,9 @@ def create_service_tools(
         return await anyio.to_thread.run_sync(lambda: recall_context(config=config, **arguments))
 
     def recall_selected_context(
-        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+        config: RunnableConfig,
+        *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
         cursor: str | None = None,
     ) -> ToolMessage:
         """Recall the fixed ordinary public-query packet, or read its omitted-item menu.
@@ -441,10 +524,13 @@ def create_service_tools(
 
     async def arecall_selected_context(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
-            lambda: recall_selected_context(config=config, **arguments))
+            lambda: recall_selected_context(config=config, **arguments)
+        )
 
     def read_current_sources(
-        config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+        config: RunnableConfig,
+        *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
         cursor: str | None = None,
     ) -> ToolMessage:
         """List actual trusted current boundary source refs, roles and original hashes.
@@ -459,9 +545,12 @@ def create_service_tools(
             if source_index_provider is not None:
                 receipt = source_index_provider(cursor, config)
             else:
-                receipt = {"ok": True,
-                           "source_index": service.source_boundary(session, cursor=cursor),
-                           "historical_empty": True, "items": []}
+                receipt = {
+                    "ok": True,
+                    "source_index": service.source_boundary(session, cursor=cursor),
+                    "historical_empty": True,
+                    "items": [],
+                }
             return message("read_current_sources", tool_call_id, receipt)
 
         except ReadProtocolRejected as error:
@@ -471,34 +560,59 @@ def create_service_tools(
 
     async def aread_current_sources(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(
-            lambda: read_current_sources(config=config, **arguments))
+            lambda: read_current_sources(config=config, **arguments)
+        )
 
     def read_source(
-        source_ref: str, config: RunnableConfig, *,
-        tool_call_id: Annotated[str, InjectedToolCallId], start: int = 0, max_chars: int = 4096,
+        source_ref: str,
+        config: RunnableConfig,
+        *,
+        tool_call_id: Annotated[str, InjectedToolCallId],
+        start: int = 0,
+        max_chars: int = 4096,
     ) -> ToolMessage:
         """Read an original owner-bound source leaf; ranges refer to its original content text.
 
         This explicit escape preserves role/hash and does not assert semantic or current truth.
         """
         session_for(config)
-        if (type(start) is not int or start < 0 or type(max_chars) is not int
-                or not 1 <= max_chars <= 16000):
+        if (
+            type(start) is not int
+            or start < 0
+            or type(max_chars) is not int
+            or not 1 <= max_chars <= 16000
+        ):
             raise ValueError("V13_SOURCE_READ_RANGE_INVALID")
         source = service.source(source_ref)
         if source is None:
             return message("read_source", tool_call_id, {"ok": False, "status": "not_found"})
-        body = source["content"] if isinstance(source["content"], str) else json.dumps(
-            source["content"], ensure_ascii=False, sort_keys=True)
+        body = (
+            source["content"]
+            if isinstance(source["content"], str)
+            else json.dumps(source["content"], ensure_ascii=False, sort_keys=True)
+        )
         end = min(len(body), start + max_chars)
-        return message("read_source", tool_call_id, {"ok": True, "source_ref": source_ref,
-            "role": source["role"], "source_hash": source["content_sha256"],
-            "observed_at": source["observed_at"], "content": body[start:end],
-            "range": [start, end], "range_basis": "original_content_text",
-            "next_start": end if end < len(body) else None, "content_verification": "unchecked"})
+        return message(
+            "read_source",
+            tool_call_id,
+            {
+                "ok": True,
+                "source_ref": source_ref,
+                "role": source["role"],
+                "source_revision": source.get("source_revision", 1),
+                "observed_at": source["observed_at"],
+                "content": body[start:end],
+                "range": [start, end],
+                "range_basis": "original_content_text",
+                "next_start": end if end < len(body) else None,
+                "content_verification": "unchecked",
+            },
+        )
 
     def read_observations(
-        object_id: str, config: RunnableConfig, *,
+        object_id: str,
+        config: RunnableConfig,
+        *,
         tool_call_id: Annotated[str, InjectedToolCallId],
     ) -> ToolMessage:
         """Read all historical field candidates for an observed object, retaining conflicts.
@@ -507,10 +621,16 @@ def create_service_tools(
         Observation identity confers no business write permission or current verification.
         """
         session_for(config)
-        objects = [row for row in service.observations()["objects"]
-                   if object_id in {row["object_ref"]["id"], row["object_ref"]["external_id"]}]
-        return message("read_observations", tool_call_id,
-                       {"ok": bool(objects), "objects": objects, "current_verified": False})
+        objects = [
+            row
+            for row in service.observations()["objects"]
+            if object_id in {row["object_ref"]["id"], row["object_ref"]["external_id"]}
+        ]
+        return message(
+            "read_observations",
+            tool_call_id,
+            {"ok": bool(objects), "objects": objects, "current_verified": False},
+        )
 
     async def aread_source(config: RunnableConfig, **arguments: Any) -> ToolMessage:
         return await anyio.to_thread.run_sync(lambda: read_source(config=config, **arguments))
@@ -533,7 +653,9 @@ def create_service_tools(
         coroutine=amanage_memory,
         name="manage_memory",
         args_schema=create_schema_from_function(
-            "manage_memory", manage_memory, filter_args=hidden,
+            "manage_memory",
+            manage_memory,
+            filter_args=hidden,
         ),
     )
     if service.mutation_contract == "event_bound_v1":
@@ -614,16 +736,31 @@ def create_service_tools(
         assert isinstance(base_schema, type) and issubclass(base_schema, BaseModel)
         # Annotation metadata survives LangChain's public tool_call_schema subset.
         # Preserve dictionary DTOs and the existing runtime receipt checks.
-        field_type = (dict[str, Any] if service.receipt_profile == "document_publication_v1"
-                      else dict[str, str])
+        field_type = (
+            dict[str, Any]
+            if service.receipt_profile == "document_publication_v1"
+            else dict[str, str]
+        )
         manage_tool.args_schema = create_model(
-            "manage_memory", __base__=base_schema,
-            fields=(Annotated[field_type, WithJsonSchema({
-                "type": "object",
-                "properties": {key: {"type": dtype}
-                               for key, dtype in service.receipt_fields.items()},
-                "additionalProperties": False,
-            })] | None, None),
+            "manage_memory",
+            __base__=base_schema,
+            fields=(
+                Annotated[
+                    field_type,
+                    WithJsonSchema(
+                        {
+                            "type": "object",
+                            "properties": {
+                                key: {"type": dtype}
+                                for key, dtype in service.receipt_fields.items()
+                            },
+                            "additionalProperties": False,
+                        }
+                    ),
+                ]
+                | None,
+                None,
+            ),
         )
         manage_tool.description += (
             "\n\nfields contains only literal business receipt claims for this profile: "
@@ -634,16 +771,25 @@ def create_service_tools(
         manage_tool.description = manage_tool.description.replace(
             "Source/object refs are discovered internally when omitted.",
             "An object ref may be taken from the exactly selected actual source.",
-        ).replace("Refs are discovered internally.",
-                  "An object ref may be taken from the exactly selected actual source.")
+        ).replace(
+            "Refs are discovered internally.",
+            "An object ref may be taken from the exactly selected actual source.",
+        )
     revise_tool = None
-    if (service.mutation_contract == "event_bound_v1"
-            and service.candidate_contract == "read_handle_v1"):
+    if (
+        service.mutation_contract == "event_bound_v1"
+        and service.candidate_contract == "read_handle_v1"
+    ):
         revise_tool = StructuredTool.from_function(
-            revise_memory, coroutine=arevise_memory, name="revise_memory",
-            args_schema=create_schema_from_function("revise_memory", revise_memory,
+            revise_memory,
+            coroutine=arevise_memory,
+            name="revise_memory",
+            args_schema=create_schema_from_function(
+                "revise_memory",
+                revise_memory,
                 filter_args=["run_manager", "callbacks", "config"]
-                + (["field_support"] if service.support_contract == "legacy" else [])),
+                + (["field_support"] if service.support_contract == "legacy" else []),
+            ),
         )
     if service.support_contract == "direct_support_v1":
         support_description = (
@@ -667,8 +813,10 @@ def create_service_tools(
             "Rejected raw actions remain pending; never silently repair them."
         )
         manage_tool.description = support_description + (
-            "\n" + manage_tool.description[manage_tool.description.index("Explicit"):]
-            if explicit and "Explicit" in manage_tool.description else "")
+            "\n" + manage_tool.description[manage_tool.description.index("Explicit") :]
+            if explicit and "Explicit" in manage_tool.description
+            else ""
+        )
         if revise_tool is not None:
             revise_tool.description = support_description + (
                 " semantic_patch changes only content/scope/basis/kind; scope merges named keys. "
@@ -680,7 +828,8 @@ def create_service_tools(
                 "properties", {}
             )
             mutation_tool.description += "\n" + parameter_guidance(
-                properties, receipt_fields=service.receipt_fields,
+                properties,
+                receipt_fields=service.receipt_fields,
                 receipt_contract=service.receipt_contract,
                 support_contract=service.support_contract,
                 grounding_mode=service.mode,
@@ -691,29 +840,52 @@ def create_service_tools(
             revise_tool.description += "\n" + CAPTURE_GUIDANCE
     tools = (
         manage_tool,
-        *([StructuredTool.from_function(
-            recall_selected_context if service.mutation_contract == "event_bound_v1"
-            else recall_context,
-            coroutine=arecall_selected_context if service.mutation_contract == "event_bound_v1"
-            else arecall_context,
-                                        name="recall_context")]
-          if recall_provider is not None else []),
         *(
-            [StructuredTool.from_function(read_current_sources, coroutine=aread_current_sources,
-                                          name="read_current_sources"),
-             StructuredTool.from_function(read_source, coroutine=aread_source, name="read_source"),
-             StructuredTool.from_function(read_observations, coroutine=aread_observations,
-                                          name="read_observations")]
-            if service.mutation_contract == "event_bound_v1" else []
+            [
+                StructuredTool.from_function(
+                    recall_selected_context
+                    if service.mutation_contract == "event_bound_v1"
+                    else recall_context,
+                    coroutine=arecall_selected_context
+                    if service.mutation_contract == "event_bound_v1"
+                    else arecall_context,
+                    name="recall_context",
+                )
+            ]
+            if recall_provider is not None
+            else []
         ),
         *(
-            [revise_tool] if revise_tool is not None else []
+            [
+                StructuredTool.from_function(
+                    read_current_sources,
+                    coroutine=aread_current_sources,
+                    name="read_current_sources",
+                ),
+                StructuredTool.from_function(
+                    read_source, coroutine=aread_source, name="read_source"
+                ),
+                StructuredTool.from_function(
+                    read_observations, coroutine=aread_observations, name="read_observations"
+                ),
+            ]
+            if service.mutation_contract == "event_bound_v1"
+            else []
         ),
+        *([revise_tool] if revise_tool is not None else []),
         *(
-            StructuredTool.from_function(function, coroutine=coroutine, name=name,
-                args_schema=create_schema_from_function(name, function,
-                    filter_args=["run_manager", "callbacks", "config", "limit", "dense"])
-                if name == "search_memory" and context_provider else None)
+            StructuredTool.from_function(
+                function,
+                coroutine=coroutine,
+                name=name,
+                args_schema=create_schema_from_function(
+                    name,
+                    function,
+                    filter_args=["run_manager", "callbacks", "config", "limit", "dense"],
+                )
+                if name == "search_memory" and context_provider
+                else None,
+            )
             for name, function, coroutine in (
                 ("search_memory", search_memory, asearch_memory),
                 ("read_memory", read_memory_history, aread_memory_history)
@@ -732,13 +904,21 @@ def create_service_tools(
                 "bodies or a fresh query; metadata/prefixes do not establish full reading. "
                 "Unavailable selected members stay visibly unavailable; never repair a cursor."
             )
-    if any(value != "legacy" for value in (service.memory_read_protocol,
-                                           service.tool_read_feedback,
-                                           service.tool_save_communication)):
+    if any(
+        value != "legacy"
+        for value in (
+            service.memory_read_protocol,
+            service.tool_read_feedback,
+            service.tool_save_communication,
+        )
+    ):
         for tool in tools:
-            tool.metadata = {**(tool.metadata or {}), "read_protocol_profiles": {
-                "memory_read_protocol": service.memory_read_protocol,
-                "tool_read_feedback": service.tool_read_feedback,
-                "tool_save_communication": service.tool_save_communication,
-            }}
+            tool.metadata = {
+                **(tool.metadata or {}),
+                "read_protocol_profiles": {
+                    "memory_read_protocol": service.memory_read_protocol,
+                    "tool_read_feedback": service.tool_read_feedback,
+                    "tool_save_communication": service.tool_save_communication,
+                },
+            }
     return tools

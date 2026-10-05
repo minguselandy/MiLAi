@@ -13,7 +13,7 @@ import sqlite3
 from collections import Counter
 from itertools import pairwise
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 CRITICAL_BLOCKERS = (
     "owner_exposure",
@@ -37,6 +37,10 @@ STAGES = (
 TERMINALS = {"COMPLETED", "FAILED", "BUDGET_EXHAUSTED", "PROVIDER_ERROR", "UNKNOWN", "NOT_RUN"}
 
 
+def ordinary_inputs(freeze: dict[str, Any]) -> bool:
+    return freeze.get("schema") == "functional_run_inputs_v2"
+
+
 def canonical_hash(value: Any) -> str:
     """Match the runner freeze/hash contract, including its ordinary JSON separators."""
     return hashlib.sha256(
@@ -49,12 +53,20 @@ def text_hash(value: str) -> str:
 
 
 class ArtifactReader:
-    def __init__(self) -> None:
+    def __init__(self, *, ordinary: bool = False) -> None:
+        self.ordinary = ordinary
         self.inputs: dict[str, dict[str, Any]] = {}
+        self._read_bytes: dict[str, bytes] = {}
 
     def bytes(self, path: Path) -> bytes:
         data = path.read_bytes()
         key = str(path.resolve())
+        if self.ordinary:
+            if key in self._read_bytes and self._read_bytes[key] != data:
+                raise ValueError("ARTIFACT_CHANGED_DURING_READ:" + key)
+            self._read_bytes[key] = data
+            self.inputs.setdefault(key, {"input_ordinal": len(self.inputs), "bytes": len(data)})
+            return data
         identity = {"sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
         if key in self.inputs and self.inputs[key] != identity:
             raise ValueError("ARTIFACT_CHANGED_DURING_READ:" + key)
@@ -139,7 +151,9 @@ def trace_usage(events: list[dict[str, Any]]) -> dict[str, Any]:
     return result
 
 
-def final_linkage(answer: Any, events: list[dict[str, Any]]) -> dict[str, Any]:
+def final_linkage(
+    answer: Any, events: list[dict[str, Any]], *, ordinary: bool = False,
+) -> dict[str, Any]:
     matches, inconsistent = [], []
     for index, event in enumerate(events):
         if event.get("event") != "vllm_response" or event.get("http_status") != 200:
@@ -170,7 +184,7 @@ def final_linkage(answer: Any, events: list[dict[str, Any]]) -> dict[str, Any]:
                     {
                         "trace_ordinal": index,
                         "provider_id": receipt.get("id"),
-                        "raw_response_sha256": text_hash(raw),
+                        **({} if ordinary else {"raw_response_sha256": text_hash(raw)}),
                     }
                 )
     return {
@@ -182,7 +196,9 @@ def final_linkage(answer: Any, events: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def record_snapshot(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def record_snapshot(
+    records: list[dict[str, Any]], *, ordinary: bool = False,
+) -> list[dict[str, Any]]:
     result = []
     for row in records:
         value = row.get("value")
@@ -192,7 +208,7 @@ def record_snapshot(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "status": row.get("status"),
                 "ok": row.get("ok"),
                 "revision": value.get("revision") if isinstance(value, dict) else None,
-                "value_sha256": canonical_hash(value),
+                **({} if ordinary else {"value_sha256": canonical_hash(value)}),
                 "value": value,
             }
         )
@@ -226,12 +242,23 @@ def record_changes(
     return changes
 
 
-def source_checks(sources: list[dict[str, Any]], owner: str) -> list[dict[str, Any]]:
-    wrong, invalid, missing = [], [], []
+def source_checks(
+    sources: list[dict[str, Any]], owner: str, *, ordinary: bool = False,
+) -> list[dict[str, Any]]:
+    wrong: list[Any] = []
+    invalid: list[Any] = []
+    missing: list[Any] = []
     for source in sources:
         sid = source.get("event_id")
         if source.get("owner") != owner:
             wrong.append(sid)
+        if ordinary:
+            if not isinstance(sid, str) or type(source.get("source_revision")) is not int:
+                missing.append(sid)
+            elif (source["source_revision"] < 1
+                  or not isinstance(source.get("content"), (str, dict))):
+                invalid.append(sid)
+            continue
         content, digest = source.get("content"), source.get("content_sha256")
         if not isinstance(content, str) or not isinstance(digest, str):
             missing.append(sid)
@@ -240,7 +267,7 @@ def source_checks(sources: list[dict[str, Any]], owner: str) -> list[dict[str, A
     return [
         check("source_owner_binding", yes_no(not wrong), "source_event", wrong),
         check(
-            "source_content_hash",
+            "source_id_revision_recorded" if ordinary else "source_content_hash",
             "FAIL" if invalid else "UNKNOWN" if missing else "PASS",
             "source_event",
             {"invalid": invalid, "unverifiable": missing},
@@ -248,14 +275,34 @@ def source_checks(sources: list[dict[str, Any]], owner: str) -> list[dict[str, A
     ]
 
 
-def quote_checks(value: Any, sources: list[dict[str, Any]]) -> dict[str, Any]:
+def quote_checks(
+    value: Any, sources: list[dict[str, Any]], *, ordinary: bool = False,
+) -> dict[str, Any]:
     """Verify only explicitly serialized quote+source_ref bindings, never infer entailment."""
     bodies = {s.get("event_id"): s.get("content") for s in sources}
+    versions = {s.get("event_id"): s.get("source_revision") for s in sources}
     rows = []
 
     def visit(item: Any, pointer: str) -> None:
         if isinstance(item, dict):
-            if isinstance(item.get("quote"), str) and "source_ref" in item:
+            if ordinary and "source_ref" in item and "source_revision" in item:
+                body = bodies.get(item["source_ref"])
+                if isinstance(body, dict):
+                    body = json.dumps(body, ensure_ascii=False, sort_keys=True,
+                                      separators=(",", ":"), allow_nan=False)
+                start, end = item.get("start"), item.get("end")
+                ranged = any(k in item for k in ("start", "end", "quote"))
+                status = "UNKNOWN" if body is None else yes_no(
+                    versions[item["source_ref"]] == item["source_revision"]
+                    and (not ranged or (
+                        isinstance(body, str) and type(start) is int and type(end) is int
+                        and 0 <= start < end <= len(body)
+                        and ("quote" not in item or body[start:end] == item["quote"]))))
+                rows.append({"pointer": pointer, "source_ref": item["source_ref"],
+                             "source_revision": item["source_revision"],
+                             "reference_kind": "exact_range" if ranged else "source_revision",
+                             **({"start": start, "end": end} if ranged else {}), "status": status})
+            elif isinstance(item.get("quote"), str) and "source_ref" in item:
                 body, quote = bodies.get(item["source_ref"]), item["quote"]
                 status = "UNKNOWN"
                 if isinstance(body, str):
@@ -269,7 +316,7 @@ def quote_checks(value: Any, sources: list[dict[str, Any]]) -> dict[str, Any]:
                         "pointer": pointer,
                         "source_ref": item["source_ref"],
                         "status": status,
-                        "quote_sha256": text_hash(quote),
+                        **({} if ordinary else {"quote_sha256": text_hash(quote)}),
                     }
                 )
             for key, child in item.items():
@@ -362,16 +409,24 @@ def hidden_program_capture(
     captures = [json.loads(value) for key, value in rows if key == "capture:" + ref]
     if len(events) != 1 or len(captures) != 1:
         return None
-    event_hash = text_hash(json.dumps(events[0], ensure_ascii=False, sort_keys=True,
-                                     separators=(",", ":"), allow_nan=False))
-    if captures[0] != {"source_ref": ref, "event_sha256": event_hash}:
-        return None
-    return events[0]
+    if reader.ordinary:
+        version = events[0].get("source_revision")
+        if type(version) is not int or version < 1 or captures[0] != {
+            "source_ref": ref, "source_revision": version,
+        }:
+            return None
+    else:
+        event_hash = text_hash(json.dumps(events[0], ensure_ascii=False, sort_keys=True,
+                                         separators=(",", ":"), allow_nan=False))
+        if captures[0] != {"source_ref": ref, "event_sha256": event_hash}:
+            return None
+    return cast(dict[str, Any], events[0])
 
 
 def program_final_linkage(
     row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
     captured_source: dict[str, Any] | None = None,
+    *, response_id: str | None = None,
 ) -> dict[str, Any]:
     """Bind a program-rendered delivery to its captured public assistant event.
 
@@ -390,10 +445,16 @@ def program_final_linkage(
     answer = row.get("final_answer")
     if not isinstance(answer, str) or not answer.strip():
         return {"status": "FAIL", "reason": "missing_program_text"}
-    identity = [["functional", freeze["run_id"], row.get("bank"), row.get("owner")],
-                row.get("session"), str(row.get("message_id")) + ":final", "assistant"]
-    source_ref = "src-" + text_hash(json.dumps(
-        identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False))
+    ordinary = ordinary_inputs(freeze)
+    if ordinary:
+        source_ref = row.get("final_capture", {}).get("source_ref")
+        if not isinstance(source_ref, str):
+            return {"status": "FAIL", "reason": "missing_stored_final_capture_reference"}
+    else:
+        identity = [["functional", freeze["run_id"], row.get("bank"), row.get("owner")],
+                    row.get("session"), str(row.get("message_id")) + ":final", "assistant"]
+        source_ref = "src-" + text_hash(json.dumps(
+            identity, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False))
     sources = [s for s in row.get("sources", []) if s.get("event_id") == source_ref]
     hidden = not sources and captured_source is not None and (
         row.get("final_capture", {}).get("visibility") == "revoked")
@@ -403,12 +464,16 @@ def program_final_linkage(
         "event_id": source_ref, "owner": row.get("owner"),
         "session": row.get("session"), "role": "assistant",
         "origin": "public_assistant_message", "content": answer,
-        "content_sha256": text_hash(answer),
+        **({} if ordinary else {"content_sha256": text_hash(answer)}),
     }.items())
     renders = [e for e in events if e.get("event") == "functional_receipt_finalization"]
     matched = matched and len(renders) == 1 and all(
         renders[0].get(k) == v for k, v in metadata.items())
-    if matched and ("final_text_sha256" in renders[0] or policy in {
+    if matched and ordinary:
+        matched = (type(sources[0].get("source_revision")) is int
+                   and sources[0]["source_revision"] > 0
+                   and response_id is not None and renders[0].get("response_id") == response_id)
+    elif matched and ("final_text_sha256" in renders[0] or policy in {
             "receipt_business_response_v2", "receipt_business_response_v3",
             "receipt_or_agent_response_v1"}):
         matched = renders[0].get("final_text_sha256") == text_hash(answer)
@@ -428,6 +493,7 @@ def program_final_linkage(
 
 def retained_agent_final_linkage(
     row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+    *, response_id: str | None = None,
 ) -> dict[str, Any]:
     """No new finalization generation still requires the actual Agent HTTP text."""
     metadata = {"status": "agent_response_retained", "attempts": 0,
@@ -441,12 +507,14 @@ def retained_agent_final_linkage(
         return {"status": "FAIL", "reason": "missing_agent_text"}
     delivery = [e for e in events if e.get("event") == "functional_agent_finalization"]
     messages = row.get("messages", [])
+    ordinary = ordinary_inputs(freeze)
     matched = (len(delivery) == 1
                and all(delivery[0].get(k) == v for k, v in metadata.items())
-               and delivery[0].get("final_text_sha256") == text_hash(answer)
+               and (response_id is not None and delivery[0].get("response_id") == response_id
+                    if ordinary else delivery[0].get("final_text_sha256") == text_hash(answer))
                and bool(messages) and messages[-1].get("type") == "ai"
                and messages[-1].get("content") == answer and not messages[-1].get("tool_calls"))
-    provider = final_linkage(answer, events)
+    provider = final_linkage(answer, events, ordinary=ordinary)
     return {"status": provider["status"] if matched else "FAIL",
             "method": "retained_agent_actual_http_delivery", "actual_http": provider,
             "limitation": "No additional finalization generation; original Agent response "
@@ -491,7 +559,7 @@ def evaluate_attempt(
     )
     sources, records = row.get("sources"), row.get("records")
     if isinstance(sources, list) and isinstance(records, list):
-        checks.extend(source_checks(sources, expected["owner"]))
+        checks.extend(source_checks(sources, expected["owner"], ordinary=reader.ordinary))
     else:
         sources, records = [], []
         checks.append(
@@ -516,13 +584,15 @@ def evaluate_attempt(
     )
     retained = row.get("finalization", {}).get("protocol") == "agent_response_v1"
     program = row.get("finalization", {}).get("model_generation") is False and not retained
+    response_id = path.name.split("-attempt-", 1)[0]
     if retained:
-        linkage = retained_agent_final_linkage(row, events, freeze)
+        linkage = retained_agent_final_linkage(row, events, freeze, response_id=response_id)
     elif program:
         linkage = program_final_linkage(
-            row, events, freeze, hidden_program_capture(reader, path.parent, row))
+            row, events, freeze, hidden_program_capture(reader, path.parent, row),
+            response_id=response_id)
     else:
-        linkage = final_linkage(row.get("final_answer"), events)
+        linkage = final_linkage(row.get("final_answer"), events, ordinary=reader.ordinary)
     if row.get("status") == "COMPLETED":
         checks.append(check("final_program_delivery_link" if program else "final_actual_http_link",
                             linkage["status"], "final_answer", linkage))
@@ -550,16 +620,16 @@ def evaluate_attempt(
             {"delta": actual_calls, "trace": usage["generation"]["request_events"]},
         )
     )
-    material_by_hash: dict[str, dict[str, Any]] = {}
+    material_by_identity: dict[str, dict[str, Any]] = {}
     for index, event in enumerate(events):
         if event.get("event") != "functional_material_delivery":
             continue
         value = event.get("material")
-        key = canonical_hash(value)
-        entry = material_by_hash.setdefault(
+        key = f"delivery-{index}" if reader.ordinary else canonical_hash(value)
+        entry = material_by_identity.setdefault(
             key,
             {
-                "material_sha256": key,
+                "delivery_id" if reader.ordinary else "material_sha256": key,
                 "material": value,
                 "prepared_trace_ordinals": [],
                 "actual_http_request_ordinals": [],
@@ -585,7 +655,7 @@ def evaluate_attempt(
             if entry["actual_http_request_ordinals"]
             else "PREPARED_ONLY_UNVERIFIED_HTTP_INPUT"
         )
-    material = list(material_by_hash.values())
+    material = list(material_by_identity.values())
     messages = row.get("messages", [])
     tools = [
         {"position": i, **m}
@@ -603,7 +673,7 @@ def evaluate_attempt(
         "capture": row.get("capture"),
         "evaluator_control_state": row.get("evaluator_control_state"),
         "source_import_receipts": row.get("source_import_receipts", []),
-        "record_snapshot": record_snapshot(records),
+        "record_snapshot": record_snapshot(records, ordinary=reader.ordinary),
         "source_inventory": [
             {
                 k: s.get(k)
@@ -613,7 +683,7 @@ def evaluate_attempt(
                     "session",
                     "role",
                     "origin",
-                    "content_sha256",
+                    "source_revision" if reader.ordinary else "content_sha256",
                     "formation_status",
                 )
             }
@@ -624,7 +694,7 @@ def evaluate_attempt(
             }
             for s in sources
         ],
-        "quote_check": quote_checks(records, sources),
+        "quote_check": quote_checks(records, sources, ordinary=reader.ordinary),
         "world": compact_world(row.get("world")),
         "tool_messages": tools,
         "memory_mutation_receipts": row.get("memory_mutation_receipts", []),
@@ -640,7 +710,7 @@ def evaluate_attempt(
     }
 
 
-def l3_inputs(fixture: dict[str, Any]) -> dict[str, Any]:
+def l3_inputs(fixture: dict[str, Any], *, ordinary: bool = False) -> dict[str, Any]:
     rows = []
     for case in fixture["cases"]:
         originals = {s.get("original_event_id"): s for s in case.get("initial_sources", [])}
@@ -655,14 +725,17 @@ def l3_inputs(fixture: dict[str, Any]) -> dict[str, Any]:
                 and type(end) is int
                 and 0 <= start < end <= len(body)
             )
-            hashes = valid and all(
-                candidate.get(key) in (None, text_hash(body))
-                for key in ("source_sha256", "body_text_sha256")
-            )
-            span = valid and candidate.get("span_sha256") in (None, text_hash(body[start:end]))
-            checks.append(
-                {"ordinal": index, "range_and_hash_valid": bool(valid and hashes and span)}
-            )
+            if ordinary:
+                checks.append({"ordinal": index, "source_range_valid": bool(valid)})
+            else:
+                hashes = valid and all(
+                    candidate.get(key) in (None, text_hash(body))
+                    for key in ("source_sha256", "body_text_sha256")
+                )
+                span = valid and candidate.get("span_sha256") in (None, text_hash(body[start:end]))
+                checks.append(
+                    {"ordinal": index, "range_and_hash_valid": bool(valid and hashes and span)}
+                )
         rows.append(
             {
                 "case_id": case["case_id"],
@@ -683,6 +756,34 @@ def l3_inputs(fixture: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def stored_bank(reader: ArtifactReader, root: Path, case: dict[str, Any]) -> Path:
+    index = root / "bank-index.json"
+    entries = reader.json(index) if index.exists() else []
+    ids = [r["id"] for r in entries
+           if r.get("identity") == {"bank": case["case_id"], "owner": case["owner"]}]
+    if not ids:
+        ids = [folder.name for folder in (root / "banks").glob("*") if folder.is_dir()
+               and any(reader.json(p).get("bank") == case["case_id"]
+                       and reader.json(p).get("owner") == case["owner"]
+                       for p in folder.glob("*-attempt-*.json"))]
+    if len(ids) > 1:
+        raise ValueError("Ambiguous stored bank identity")
+    return root / "banks" / (str(ids[0]) if ids else ".not-recorded-bank")
+
+
+def stored_message(reader: ArtifactReader, bank: Path, message: dict[str, Any]) -> str:
+    identity = {"session": message["session_id"], "message_id": message["message_id"]}
+    index = bank / "message-index.json"
+    entries = reader.json(index) if index.exists() else []
+    ids = [r["id"] for r in entries if r.get("identity") == identity]
+    if not ids:
+        ids = [p.name.removesuffix("-input.json") for p in bank.glob("*-input.json")
+               if all(reader.json(p).get(k) == v for k, v in identity.items())]
+    if len(ids) > 1:
+        raise ValueError("Ambiguous stored message identity")
+    return str(ids[0]) if ids else ".not-recorded-message"
+
+
 def evaluate(
     root: Path,
     *,
@@ -691,7 +792,8 @@ def evaluate(
     grades_path: Path | None = None,
 ) -> dict[str, Any]:
     root = root.resolve()
-    reader = ArtifactReader()
+    metadata = json.loads((root / "input-freeze.json").read_bytes())
+    reader = ArtifactReader(ordinary=ordinary_inputs(metadata))
     freeze = reader.json(root / "input-freeze.json")
     fixture = freeze["fixture"]
     if not isinstance(fixture, dict) or not isinstance(fixture.get("cases"), list):
@@ -699,7 +801,19 @@ def evaluate(
     case_ids = [c["case_id"] for c in fixture["cases"]]
     if len(case_ids) != len(set(case_ids)):
         raise ValueError("Duplicate planned case IDs")
-    top = [
+    top = [check(
+        "recorded_input_versions",
+        yes_no(isinstance(freeze.get("config_version"), str)
+               and freeze["config_version"] == freeze["config"].get(
+                   "config_version",
+                   freeze["config"].get("revision", freeze["config"].get("profile")))
+               and isinstance(freeze.get("source_version"), dict)
+               and bool(freeze["source_version"].get("implementation_version"))),
+        "artifact_integrity",
+        {"config_version": freeze.get("config_version"),
+         "source_version": freeze.get("source_version"),
+         "scope": "Recorded configuration/source versions; no content fingerprint certification."},
+    )] if reader.ordinary else [
         check(
             "frozen_fixture_hash",
             yes_no(canonical_hash(fixture) == freeze["fixture_sha256"]),
@@ -728,7 +842,7 @@ def evaluate(
             )
         )
     controls = freeze.get("evaluator_controls")
-    if "evaluator_controls_sha256" in freeze:
+    if not reader.ordinary and "evaluator_controls_sha256" in freeze:
         top.append(
             check(
                 "frozen_evaluator_controls_hash",
@@ -757,13 +871,15 @@ def evaluate(
     orphan_trace_paths: list[str] = []
     missing_terminal_messages: list[str] = []
     for case in fixture["cases"]:
-        bank_root = root / "banks" / canonical_hash([case["case_id"], case["owner"]])[:24]
+        bank_root = (stored_bank(reader, root, case) if reader.ordinary else
+                     root / "banks" / canonical_hash([case["case_id"], case["owner"]])[:24])
         messages: list[dict[str, Any]] = []
         case_checks: list[dict[str, Any]] = []
         previous_records: list[dict[str, Any]] = []
         pids = []
         for index, message in enumerate(case["messages"]):
-            identity = canonical_hash([message["session_id"], message["message_id"]])
+            identity = (stored_message(reader, bank_root, message) if reader.ordinary else
+                        canonical_hash([message["session_id"], message["message_id"]]))
             expected = {
                 "owner": case["owner"],
                 "bank": case["case_id"],
@@ -1007,6 +1123,8 @@ def evaluate(
     )
     result = {
         "schema": "v13_5_readonly_evaluation_v1",
+        "identity_contract": "ordinary_stored_ids_and_source_versions" if reader.ordinary else
+        "historical_digest_contract",
         "cohort": cohort,
         "root": str(root),
         "new_model_calls": 0,
@@ -1038,7 +1156,7 @@ def evaluate(
             "Shared-ledger gaps may contain other calls; not assigned to cohort.",
         },
         "L1_gate": gate if cohort == "L1" else None,
-        "L3_input_audit": l3_inputs(fixture) if cohort == "L3" else None,
+        "L3_input_audit": l3_inputs(fixture, ordinary=reader.ordinary) if cohort == "L3" else None,
         "limitations": [
             "Snapshot-before-close is checked as recorded, not an independent reopen.",
             "No regex, keyword, HTTP status or source hash grants semantic PASS.",

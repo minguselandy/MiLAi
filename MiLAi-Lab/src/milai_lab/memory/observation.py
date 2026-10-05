@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-from dataclasses import asdict
 from typing import Any
 
 from milai_lab.contracts.memory import ObservationField, ObservationProfile
@@ -25,7 +23,7 @@ def _json(value: Any) -> str:
 
 
 def identity(value: Any) -> str:
-    return hashlib.sha256(_json(value).encode()).hexdigest()
+    return _json(value)
 
 
 def profile_identity(profile: ObservationProfile) -> str:
@@ -64,7 +62,7 @@ def profile_identity(profile: ObservationProfile) -> str:
         not isinstance(path, tuple) or not all(type(part) is str for part in path) for path in paths
     ):
         raise ObservationError("invalid_profile_path")
-    return identity(asdict(profile))
+    return profile.profile_id + ":" + profile.adapter_version
 
 
 def _get(body: Any, path: tuple[str, ...]) -> Any:
@@ -111,7 +109,7 @@ def derive_observations(
     source: dict[str, Any], profile: ObservationProfile
 ) -> tuple[list[dict[str, Any]], str]:
     """Missing fields produce no observation; no response status proves external effects."""
-    profile_hash = profile_identity(profile)
+    profile_version = profile_identity(profile)
     if source["role"] != "tool":
         raise ObservationError("projection_requires_tool_source")
     if source["origin"] not in profile.origins:
@@ -176,7 +174,7 @@ def derive_observations(
                 "observation_id": observation_id,
                 "owner": source["owner"],
                 "source_event_id": source["event_id"],
-                "source_hash": source["content_sha256"],
+                "source_revision": source.get("source_revision", 1),
                 "object_ref": object_ref,
                 "field": field.name,
                 "field_paths": [_pointer((*prefix, *field.path))],
@@ -189,7 +187,7 @@ def derive_observations(
                 "observed_at": source["observed_at"],
                 "adapter_id": profile.profile_id,
                 "adapter_version": profile.adapter_version,
-                "adapter_sha256": profile_hash,
+                "adapter_ref": profile_version,
                 "projector_version": PROJECTOR_VERSION,
                 "completeness": profile.completeness,
                 "verification": "actual_source_literal",
@@ -231,8 +229,9 @@ def observation_view(observations: list[dict[str, Any]]) -> list[dict[str, Any]]
                 )
 
             candidates = [row for row in history if not any(older(row, other) for other in history)]
-            values = {identity(row["literal_value"]) for row in candidates}
-            unique = len(values) == 1
+            unique = all(
+                row["literal_value"] == candidates[0]["literal_value"] for row in candidates
+            )
             comparable = (
                 all(
                     row["version_domain"] is not None

@@ -57,7 +57,7 @@ def reserve_args() -> dict[str, Any]:
 
 def draft_args() -> dict[str, Any]:
     return {"title": "mechanical draft", "content": "Original content",
-            "document_version": 0, "content_digest": ""}
+            "document_version": 0}
 
 
 def receipt(message: Any) -> dict[str, Any]:
@@ -79,7 +79,7 @@ def test_old_object_requires_actual_current_target_query_before_remaining_mutati
             query, target = 'get_reservation', {'item_key': 'mechanical item'}
         else:
             first = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'original'))
-            bound = {k: first[k] for k in ('title', 'document_version', 'content_digest')}
+            bound = {k: first[k] for k in ('title', 'document_version')}
             receipt(call(wrapper, 'approve_document_version', bound, 'approve'))
             name, args = 'publish_approved_document', {**bound, 'audience': 'local audience'}
             receipt(call(wrapper, name, args, 'original-publish'))
@@ -159,7 +159,7 @@ def test_single_phase_policy_retains_failed_attempt_and_requires_new_public_turn
             assert receipt(other)["status"] == "reserved_label_failed"
         else:
             draft = receipt(call(wrapper, "create_or_update_draft", draft_args(), "draft"))
-            bound = {k: draft[k] for k in ("title", "document_version", "content_digest")}
+            bound = {k: draft[k] for k in ("title", "document_version")}
             assert receipt(call(wrapper, "approve_document_version", bound, "approve"))["ok"]
             name, args = "publish_approved_document", {**bound, "audience": "local audience"}
             first = call(wrapper, name, args, "publish")
@@ -206,7 +206,7 @@ def test_native_document_version_approval_publish_and_stale_observation(tmp_path
             stack, tmp_path, "document", initial_publication_available=False
         )
         draft = receipt(call(wrapper, "create_or_update_draft", draft_args(), "create"))
-        bound = {k: draft[k] for k in ("title", "document_version", "content_digest")}
+        bound = {k: draft[k] for k in ("title", "document_version")}
         approval = call(wrapper, "approve_document_version", bound, "approve")
         assert receipt(approval)["approval_status"] == "approved"
         pubargs = {**bound, "audience": "local audience"}
@@ -295,7 +295,7 @@ def worker(root: Path, workflow: str, window: str, phase: str) -> None:
         saver = stack.enter_context(SqliteSaver.from_conn_string(str(root / "checkpoint.sqlite")))
         cfg = config()
         cfg["configurable"].update(v13_session="session", v13_turn_id="message",
-                                    v13_support_config_sha256="a" * 64)
+                                    v13_config_version="a" * 64)
         memory = FunctionalMemory(service, len)
         memory.context("session", "message", "a" * 64)
 
@@ -424,16 +424,16 @@ def test_revoked_current_input_binding_requires_exact_runtime_identity(tmp_path:
         assert service.source(ref) is None
         cfg = config()
         cfg["configurable"].update(v13_session="session", v13_turn_id="message",
-                                    v13_support_config_sha256="a" * 64)
+                                    v13_config_version="a" * 64)
         with pytest.raises(ValueError, match="ACTUAL_PUBLIC_SOURCE_REQUIRED"):
             app.call_wrapper(service, "session", "message")
         for changed in ({"v13_session": "other"}, {"v13_turn_id": "other"},
-                        {"v13_support_config_sha256": ""}):
+                        {"v13_config_version": ""}):
             invalid = {**cfg, "configurable": {**cfg["configurable"], **changed}}
             with pytest.raises(ValueError, match="PUBLIC_TURN_CONFIGURATION_INVALID"):
                 app.call_wrapper(service, "session", "message", runtime_config=invalid)
         invalid = {**cfg, "configurable": {**cfg["configurable"],
-                                           "v13_support_config_sha256": "b" * 64}}
+                                           "v13_config_version": "b" * 64}}
         with pytest.raises(ValueError, match="ACTUAL_PUBLIC_SOURCE_REQUIRED"):
             app.call_wrapper(service, "session", "message", runtime_config=invalid)
         assert app.call_wrapper(service, "session", "message", runtime_config=cfg)
@@ -554,7 +554,7 @@ def test_live_query_includes_bounded_owner_object_original_attempt_receipts(
             call(wrapper, 'reserve_and_label', {**reserve_args(), 'item_key': 'unrelated'}, 'other')
         else:
             first = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'draft'))
-            bound = {k: first[k] for k in ['title', 'document_version', 'content_digest']}
+            bound = {k: first[k] for k in ['title', 'document_version']}
             call(wrapper, 'approve_document_version', bound, 'approve')
             name, args = 'publish_approved_document', {**bound, 'audience': 'local'}
             query, query_args = 'get_document_status', {'title': first['title']}
@@ -623,7 +623,7 @@ def test_publication_receipt_binds_attempted_audience_without_claiming_delivery(
         app, service, wrapper = opened(stack, tmp_path, 'document',
             attempt_policy='single_phase_with_history_v2', initial_publication_available=available)
         draft = receipt(call(wrapper, 'create_or_update_draft', draft_args(), 'draft'))
-        bound = {k: draft[k] for k in ['title', 'document_version', 'content_digest']}
+        bound = {k: draft[k] for k in ['title', 'document_version']}
         call(wrapper, 'approve_document_version', bound, 'approve')
         published = call(wrapper, 'publish_approved_document',
                          {**bound, 'audience': 'local team'}, 'pub')

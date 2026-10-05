@@ -14,12 +14,20 @@ class FoundationScope:
     arm_id: str
     user_id: str
     episode_id: str
+    stored_thread_id: str | None = None
 
-    def config(self) -> dict[str, Any]:
+    def config(self, *, thread_id: str | None = None) -> dict[str, Any]:
         parts = [self.run_id, self.arm_id, self.user_id, self.episode_id]
         if not all(parts):
             raise ValueError("FOUNDATION_SCOPE_EMPTY_PART")
-        thread_id = hashlib.sha256(json.dumps(parts, ensure_ascii=False).encode()).hexdigest()
+        if thread_id is None:
+            thread_id = self.stored_thread_id
+        if thread_id is None:
+            # Retained only for archived callers whose checkpoint keys already
+            # use this shape. Current functional entry supplies a persisted ID.
+            thread_id = hashlib.sha256(json.dumps(parts, ensure_ascii=False).encode()).hexdigest()
+        elif type(thread_id) is not str or not thread_id:
+            raise ValueError("FOUNDATION_THREAD_ID_INVALID")
         return {
             "configurable": {
                 "thread_id": thread_id,

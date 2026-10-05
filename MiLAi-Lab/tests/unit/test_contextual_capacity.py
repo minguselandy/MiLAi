@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from copy import deepcopy
 from itertools import pairwise
@@ -28,14 +27,10 @@ TOKENIZER = Path("/cra/qwen36-35B")
 def capacity() -> HostCapacity:
     if not TOKENIZER.is_dir():
         pytest.skip("Pinned local Host tokenizer is unavailable")
-    files = ("tokenizer.json", "tokenizer_config.json", "chat_template.jinja")
     return HostCapacity({
         "model": "pinned-local-host",
         "tokenizer_path": str(TOKENIZER),
-        "tokenizer_files_sha256": {
-            name: hashlib.sha256((TOKENIZER / name).read_bytes()).hexdigest()
-            for name in files
-        },
+        "capacity_version": "synthetic-local-v1",
         "context_tokens": 512,
         "output_tokens": 24,
         "safety_tokens": 8,
@@ -65,16 +60,13 @@ def test_local_chat_template_capacity_and_identity(capacity: HostCapacity) -> No
     assert receipt["total_reserved_tokens"] == (
         len(expected) + 24 + 8 + 8 + 8
     )
-    assert receipt["identity"]["tokenizer_files_sha256"]["chat_template.jinja"]
+    assert receipt["identity"]["chat_template"] == capacity.tokenizer.chat_template
     with pytest.raises(CapacityExceeded) as error:
         capacity.check([{"role": "user", "content": "long history " * 300}])
     assert error.value.receipt["remaining_tokens"] < 0
     invalid = dict(capacity.config)
-    invalid["tokenizer_files_sha256"] = {
-        **invalid["tokenizer_files_sha256"], "chat_template.jinja": "0" * 64,
-    }
-    with pytest.raises(ValueError, match="TOKENIZER_IDENTITY_MISMATCH"):
-        HostCapacity(invalid)
+    invalid["tokenizer_files_sha256"] = {"chat_template.jinja": "obsolete-ignore-value"}
+    assert HostCapacity(invalid).count_messages(messages, tools) == len(expected)
 
 
 def test_explicit_thinking_mode_matches_tokenizer_and_wire(capacity: HostCapacity) -> None:
@@ -86,9 +78,7 @@ def test_explicit_thinking_mode_matches_tokenizer_and_wire(capacity: HostCapacit
     assert enabled.count_messages(messages) == len(expected)
     assert enabled.check(messages, output_tokens=24)["prompt_tokens"] == len(expected)
     assert enabled.identity["enable_thinking"] is True
-    assert enabled.identity["capacity_policy_sha256"] != capacity.identity[
-        "capacity_policy_sha256"
-    ]
+    assert capacity.identity["enable_thinking"] is False
     wires: list[dict[str, object]] = []
 
     def respond(request: httpx.Request) -> httpx.Response:

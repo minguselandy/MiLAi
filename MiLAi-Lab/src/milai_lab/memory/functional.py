@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import copy
 import math
+import uuid
 from collections.abc import Callable
 from typing import Annotated, Any, Literal, cast
 
@@ -22,10 +23,10 @@ from milai_lab.memory.functional_state import (
     FunctionalOperationError,
     FunctionalRejection,
     canonical,
-    digest,
     fragment_support,
     namespace,
     note_exposure,
+    reference_key,
     scope_leaves,
 )
 from milai_lab.memory.service import MemoryService, _lexical_tokens
@@ -35,9 +36,12 @@ class SavedAssertion(BaseModel):
     """One supported assertion, with its applicability expressed in the same body."""
 
     model_config = ConfigDict(extra="forbid", strict=True)
-    content: str = Field(description=(
-        "Complete supported assertion, including who, which occurrence, time, conditions, "
-        "exceptions and uncertainty. Preserve restrictive source wording in this body."))
+    content: str = Field(
+        description=(
+            "Complete supported assertion, including who, which occurrence, time, conditions, "
+            "exceptions and uncertainty. Preserve restrictive source wording in this body."
+        )
+    )
     fragment_handles: list[str]
     tool_call_id: Annotated[str, InjectedToolCallId]
 
@@ -48,23 +52,32 @@ class FieldChange(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     field: str = Field(description="content/kind/basis or scope.KEY[.KEY]")
     op: Literal["set", "remove"]
-    value: Any = Field(default=None, description=(
-        "Required for set; omit for remove. Preserve the assertion's exact subject, "
-        "occurrence, time limits, negation and uncertainty. Scope values describe only "
-        "explicit applicability boundaries, not inferred project labels or summary categories."))
+    value: Any = Field(
+        default=None,
+        description=(
+            "Required for set; omit for remove. Preserve the assertion's exact subject, "
+            "occurrence, time limits, negation and uncertainty. Scope values describe only "
+            "explicit applicability boundaries, not inferred project labels or summary categories."
+        ),
+    )
     fragment_handles: list[str] = Field(
-        description="Issued fragments supporting this NEW value or removal; not its old value")
+        description="Issued fragments supporting this NEW value or removal; not its old value"
+    )
 
 
 class ReplacementChange(FieldChange):
     """Public selection names distinguish replacement evidence from target identity."""
 
-    fragment_handles: list[str] = Field(alias="evidence_for_new_value", description=(
-        "Select original fragments whose unchanged text supports the replacement value "
-        "or explicit removal. A fragment supporting the old record does not acquire new "
-        "meaning when the user corrects it. Select the actual correction when it supplies "
-        "the new fact; older fragments remain eligible when they directly support it. "
-        "The read_handle, not this evidence selection, identifies the old target."))
+    fragment_handles: list[str] = Field(
+        alias="evidence_for_new_value",
+        description=(
+            "Select original fragments whose unchanged text supports the replacement value "
+            "or explicit removal. A fragment supporting the old record does not acquire new "
+            "meaning when the user corrects it. Select the actual correction when it supplies "
+            "the new fact; older fragments remain eligible when they directly support it. "
+            "The read_handle, not this evidence selection, identifies the old target."
+        ),
+    )
 
 
 class FragmentCue(BaseModel):
@@ -72,23 +85,35 @@ class FragmentCue(BaseModel):
 
     model_config = ConfigDict(extra="forbid", strict=True)
     fragment_handle: str
-    supporting_words: str = Field(min_length=1, max_length=160, description=(
-        "Short exact words from THIS original fragment that express the NEW fact, "
-        "correction or cancellation, not merely its topic or old value. Copy only this "
-        "short selection cue, not a whole quotation. The program checks exact occurrence "
-        "inside the selected fragment; a valid cue is not proof of semantic support."))
+    supporting_words: str = Field(
+        min_length=1,
+        max_length=160,
+        description=(
+            "Short exact words from THIS original fragment that express the NEW fact, "
+            "correction or cancellation, not merely its topic or old value. Copy only this "
+            "short selection cue, not a whole quotation. The program checks exact occurrence "
+            "inside the selected fragment; a valid cue is not proof of semantic support."
+        ),
+    )
 
 
 class AnchoredChange(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     field: str = Field(description="content/kind/basis or scope.KEY[.KEY]")
     op: Literal["set", "remove"]
-    value: Any = Field(default=None, description=(
-        "Required for set; omit for remove. New value with unchanged limits retained."))
-    evidence_for_new_value: list[FragmentCue] = Field(description=(
-        "Select original fragments and short literal words expressing THIS change. "
-        "The old record's read_handle identifies the target; its old affirmation is "
-        "not evidence for a different assertion."))
+    value: Any = Field(
+        default=None,
+        description=(
+            "Required for set; omit for remove. New value with unchanged limits retained."
+        ),
+    )
+    evidence_for_new_value: list[FragmentCue] = Field(
+        description=(
+            "Select original fragments and short literal words expressing THIS change. "
+            "The old record's read_handle identifies the target; its old affirmation is "
+            "not evidence for a different assertion."
+        )
+    )
 
 
 class ReadSelector(BaseModel):
@@ -158,9 +183,15 @@ class FunctionalMemory:
             raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
         if formation_interface not in {
-            "content_and_scope_v1", "unified_assertion_v1", "unified_assertion_v2",
-            "unified_assertion_v3", "reviewed_assertion_v1", "anchored_assertion_v1",
-            "anchored_assertion_v2", "anchored_assertion_v3"}:
+            "content_and_scope_v1",
+            "unified_assertion_v1",
+            "unified_assertion_v2",
+            "unified_assertion_v3",
+            "reviewed_assertion_v1",
+            "anchored_assertion_v1",
+            "anchored_assertion_v2",
+            "anchored_assertion_v3",
+        }:
             raise FunctionalRejection("V13_5_FORMATION_INTERFACE_INVALID")
         self.formation_interface = formation_interface
         if read_interface not in {"combined_selectors_v1", "explicit_selectors_v1"}:
@@ -183,7 +214,9 @@ class FunctionalMemory:
             "read_limit": read_limit,
             "material_limit": material_limit,
             "fragment_chars": fragment_chars,
-            "retrieval_candidates_sha256": digest(retrieval_candidates),
+            "retrieval_policy": "supplied_ranges"
+            if retrieval_candidates is not None
+            else "service_search",
         }
         if formation_interface != "content_and_scope_v1":
             self.policy["formation_interface"] = formation_interface
@@ -199,26 +232,28 @@ class FunctionalMemory:
         if retrieval_candidates is not None:
             for row in retrieval_candidates:
                 required = {"source_ref", "start", "end", "retrieval_score"}
-                hashes = {"source_sha256", "body_text_sha256", "span_sha256"}
+                references = {"source_revision"}
                 if (
                     not isinstance(row, dict)
                     or not required <= set(row)
-                    or set(row) - required - hashes
+                    or set(row) - required - references
                     or type(row["retrieval_score"]) not in {int, float}
                     or not math.isfinite(row["retrieval_score"])
                 ):
                     raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_INVALID")
                 fragment = service.source_fragment_range(
-                    row["source_ref"], row["start"], row["end"])
-                if any(row[key] != fragment[key] for key in hashes.intersection(row)):
-                    raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_HASH_MISMATCH")
+                    row["source_ref"], row["start"], row["end"]
+                )
+                if any(row[key] != fragment[key] for key in references.intersection(row)):
+                    raise FunctionalRejection("V13_5_RETRIEVAL_CANDIDATE_VERSION_MISMATCH")
 
     @property
     def read_tool_names(self) -> frozenset[str]:
         names = {"search_memory", "read_memory", "read_source"}
         if self.read_interface == "explicit_selectors_v1":
-            names.update({"read_memory_history", "read_memory_revision", "read_fragment",
-                          "read_page"})
+            names.update(
+                {"read_memory_history", "read_memory_revision", "read_fragment", "read_page"}
+            )
         return frozenset(names)
 
     @property
@@ -235,7 +270,7 @@ class FunctionalMemory:
         bound = self.service.public_turn(
             str(cfg.get("v13_session", "")),
             message_id=cfg.get("v13_turn_id"),
-            config_sha256=cfg.get("v13_support_config_sha256"),
+            config_version=cfg.get("v13_config_version", cfg.get("v13_support_config_sha256")),
         )
         if bound is None:
             raise FunctionalRejection("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")
@@ -256,7 +291,6 @@ class FunctionalMemory:
                 "record_id": row["id"],
                 "read_handle": row["candidate_handle"],
                 "revision": version["revision"],
-                "version_sha256": digest(version),
                 "kind": version["kind"],
                 "scope": version["scope"],
                 "basis": version["basis"],
@@ -273,15 +307,13 @@ class FunctionalMemory:
 
     def _deduplicate(self, units: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Subtract only already delivered intervals of this exact Source/body version."""
-        seen: dict[tuple[str, str, str], list[tuple[int, int]]] = {}
+        seen: dict[tuple[str, int], list[tuple[int, int]]] = {}
         result = []
         for unit in units:
             if unit["type"] != "fragment":
                 result.append(unit)
                 continue
-            identity = tuple(
-                unit[key] for key in ("source_ref", "source_sha256", "body_text_sha256")
-            )
+            identity = (unit["source_ref"], unit.get("source_revision", 1))
             previous = seen.setdefault(identity, [])
             residual = [(unit["start"], unit["end"])]
             for left, right in previous:
@@ -305,8 +337,6 @@ class FunctionalMemory:
         return result
 
     def _search_units(self, query: str, current_ref: str | None = None) -> list[dict[str, Any]]:
-        if digest(self.retrieval_candidates) != self.policy["retrieval_candidates_sha256"]:
-            raise FunctionalIntegrityError("V13_5_RETRIEVAL_CANDIDATES_CHANGED")
         current = (
             [
                 {"type": "fragment", **fragment}
@@ -368,9 +398,16 @@ class FunctionalMemory:
 
     def _snapshot(self, binding: dict[str, Any], items: list[dict[str, Any]], kind: str) -> str:
         items = [
-            {**unit, "input_relation": ("current_request" if unit["source_ref"] ==
-                                       binding["source_ref"] else "archived_source")}
-            if unit["type"] == "fragment" else unit
+            {
+                **unit,
+                "input_relation": (
+                    "current_request"
+                    if unit["source_ref"] == binding["source_ref"]
+                    else "archived_source"
+                ),
+            }
+            if unit["type"] == "fragment"
+            else unit
             for unit in items
         ]
         payload = {
@@ -380,7 +417,7 @@ class FunctionalMemory:
             "forget_epoch": self.forget_epoch,
             "items": items,
         }
-        key = "snapshot-" + digest(payload)
+        key = "snapshot-" + str(uuid.uuid4())
         prior = self.service.store.get(namespace(self.service), key)
         if prior is not None and prior.value != payload:
             raise FunctionalIntegrityError("V13_5_SNAPSHOT_COLLISION")
@@ -390,9 +427,9 @@ class FunctionalMemory:
 
     @staticmethod
     def _read_only_metadata(items: list[dict[str, Any]]) -> dict[str, Any]:
-        record_ids = list(dict.fromkeys(
-            unit["record_id"] for unit in items if unit["type"] == "record"
-        ))
+        record_ids = list(
+            dict.fromkeys(unit["record_id"] for unit in items if unit["type"] == "record")
+        )
         return {
             "operation_effect": "read_only",
             "semantic_write_performed": False,
@@ -423,8 +460,6 @@ class FunctionalMemory:
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
             raise FunctionalRejection("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
-        if key != "snapshot-" + digest(stored.value):
-            raise FunctionalIntegrityError("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
         value = stored.value
         if (
             value["binding"] != binding
@@ -459,8 +494,8 @@ class FunctionalMemory:
                 "business_authority": False,
                 **self._read_only_metadata(chosen),
                 "delivery_status": ("partial_with_omissions" if skipped else "partial")
-                if end < len(items) else ("snapshot_end_with_omissions"
-                                        if skipped else "complete_snapshot"),
+                if end < len(items)
+                else ("snapshot_end_with_omissions" if skipped else "complete_snapshot"),
                 **({"status": "advanced_with_explicit_omission"} if skipped else {}),
                 "source_groups": list(
                     {
@@ -480,14 +515,13 @@ class FunctionalMemory:
         for index, unit in enumerate(items[start:], start):
             if unit["type"] == "fragment":
                 actual = self.service.source_fragment(unit["fragment_handle"])
-                expected = {"type": "fragment", **actual, "input_relation": (
-                    "current_request" if actual["source_ref"] == binding["source_ref"]
-                    else "archived_source")}
-                if expected != unit:
+                if actual["source_ref"] != unit["source_ref"] or actual.get(
+                    "source_revision", 1
+                ) != unit.get("source_revision", 1):
                     raise FunctionalIntegrityError("V13_5_SNAPSHOT_SOURCE_CHANGED")
             else:
                 row = self.service.read(unit["record_id"], unit["revision"])
-                if not row["ok"] or digest(row["value"]) != unit["version_sha256"]:
+                if not row["ok"] or row["value"]["revision"] != unit["revision"]:
                     raise FunctionalIntegrityError("V13_5_SNAPSHOT_RECORD_UNAVAILABLE")
             chosen.append(unit)
             required = self.token_count(canonical(packet(index + 1)))
@@ -497,18 +531,28 @@ class FunctionalMemory:
                     break
                 # Never return a cursor stuck at the same impossible unit. The
                 # original snapshot is unchanged and the omission is explicit.
-                alternate = ([unit["source_ref"]] if unit["type"] == "fragment"
-                             else unit.get("source_refs", []))
-                skipped.append({
-                    "unit_index": index, "type": unit["type"],
-                    "reason": "unit_exceeds_material_limit",
-                    "required_packet_tokens": required,
-                    "snapshot_body_delivered": False,
-                    "retry_same_unit_under_same_limit": False,
-                    "alternative": {"tool": "read_source", "source_ref": alternate[0],
-                                    "meaning": "original_support_not_semantic_record_body"}
-                    if alternate else None,
-                })
+                alternate = (
+                    [unit["source_ref"]]
+                    if unit["type"] == "fragment"
+                    else unit.get("source_refs", [])
+                )
+                skipped.append(
+                    {
+                        "unit_index": index,
+                        "type": unit["type"],
+                        "reason": "unit_exceeds_material_limit",
+                        "required_packet_tokens": required,
+                        "snapshot_body_delivered": False,
+                        "retry_same_unit_under_same_limit": False,
+                        "alternative": {
+                            "tool": "read_source",
+                            "source_ref": alternate[0],
+                            "meaning": "original_support_not_semantic_record_body",
+                        }
+                        if alternate
+                        else None,
+                    }
+                )
             end = index + 1
         result = packet(end)
         if self.token_count(canonical(result)) > self.material_limit:
@@ -526,14 +570,14 @@ class FunctionalMemory:
         self,
         session: str,
         turn_id: str,
-        config_sha256: str,
+        config_version: str,
         *,
         query: str | None = None,
     ) -> dict[str, Any]:
         ref = self.service.event_id(session, turn_id, "user")
         event = self.service.source(ref)
         if event is None:
-            event = self.service.active_public_input(session, turn_id, config_sha256)
+            event = self.service.active_public_input(session, turn_id, config_version)
         if event is None or event["role"] != "user":
             raise FunctionalRejection("V13_5_CAPTURE_REQUIRED")
         actual_query = (
@@ -541,11 +585,17 @@ class FunctionalMemory:
         )
         if query is not None and query != actual_query:
             raise FunctionalRejection("V13_5_PUBLIC_QUERY_CHANGED")
-        prior = self.service.store.get(self.service.turns_namespace, digest([session, turn_id]))
-        bound = self.service.bind_public_turn(
-            session, turn_id, ref, config_sha256=config_sha256, phase="resume" if prior else "start"
+        prior = self.service.store.get(
+            self.service.turns_namespace, reference_key([session, turn_id])
         )
-        key = "ordinary-" + digest([bound, self.policy, self.forget_epoch])
+        bound = self.service.bind_public_turn(
+            session,
+            turn_id,
+            ref,
+            config_version=config_version,
+            phase="resume" if prior else "start",
+        )
+        key = "ordinary:" + reference_key([session, turn_id, self.forget_epoch])
         cached = self.service.store.get(namespace(self.service), key)
         if cached is None:
             units = self._search_units(actual_query, ref)
@@ -553,24 +603,38 @@ class FunctionalMemory:
                 # Public captured events only, same owner/bank (v1 also session), after visibility
                 # filtering. Fixed supplied candidate pools keep their exact order.
                 recent_session = session if self.recent_context == "session_events_v1" else None
-                recent = sorted((source for source in self.service.sources(recent_session)
-                                 if source["event_id"] != ref
-                                 and source["role"] in {"user", "assistant"}),
-                                key=lambda source: (source["observed_at"], source["event_id"]))[-4:]
-                fragments = [{"type": "fragment", **fragment}
-                             for source in recent
-                             for fragment in self.service.source_fragments(
-                                 source["event_id"], max_chars=self.fragment_chars)]
+                recent = sorted(
+                    (
+                        source
+                        for source in self.service.sources(recent_session)
+                        if source["event_id"] != ref and source["role"] in {"user", "assistant"}
+                    ),
+                    key=lambda source: (source["observed_at"], source["event_id"]),
+                )[-4:]
+                fragments = [
+                    {"type": "fragment", **fragment}
+                    for source in recent
+                    for fragment in self.service.source_fragments(
+                        source["event_id"], max_chars=self.fragment_chars
+                    )
+                ]
                 current = [unit for unit in units if unit.get("source_ref") == ref]
                 recent_records = []
                 if self.recent_context == "bank_recent_v2":
-                    rows = sorted((row for row in self.service.records() if row.get("ok")),
-                        key=lambda row: (row["value"].get("committed_at", ""), row["id"]))[-4:]
-                    recent_records = [unit for row in reversed(rows)
-                                      for unit in self._record_units(row)]
+                    rows = sorted(
+                        (row for row in self.service.records() if row.get("ok")),
+                        key=lambda row: (row["value"].get("committed_at", ""), row["id"]),
+                    )[-4:]
+                    recent_records = [
+                        unit for row in reversed(rows) for unit in self._record_units(row)
+                    ]
                 recent_ids = {unit["record_id"] for unit in recent_records}
-                units = self._deduplicate(current + recent_records + fragments + [
-                    unit for unit in units if unit.get("record_id") not in recent_ids])
+                units = self._deduplicate(
+                    current
+                    + recent_records
+                    + fragments
+                    + [unit for unit in units if unit.get("record_id") not in recent_ids]
+                )
             snapshot = self._snapshot(bound, units, "ordinary")
             self.service.store.put(
                 namespace(self.service), key, {"snapshot": snapshot}, index=False
@@ -654,8 +718,13 @@ class FunctionalMemory:
             "requested": requested,
         }
         if self.formation_support_review is not None:
-            self._run_support_review(self.formation_support_review,
-                self._formation_evidence(bound, proposal), bound, refs)
+            self.service.prepare_proposal(bound["session"], operation_id, proposal)
+            self._run_support_review(
+                self.formation_support_review,
+                self._formation_evidence(bound, proposal, operation_id),
+                bound,
+                refs,
+            )
         return self._commit(bound["session"], operation_id, proposal)
 
     @staticmethod
@@ -756,9 +825,11 @@ class FunctionalMemory:
         }
 
         def selected_for(path: str) -> list[str]:
-            matching = [selected for field, selected in selections.items()
-                        if path == field or path.startswith(field + ".")
-                        or field.startswith(path + ".")]
+            matching = [
+                selected
+                for field, selected in selections.items()
+                if path == field or path.startswith(field + ".") or field.startswith(path + ".")
+            ]
             if not matching:
                 raise FunctionalIntegrityError("V13_5_CHANGED_FIELD_SELECTION_MISSING:" + path)
             return list(dict.fromkeys(handle for selected in matching for handle in selected))
@@ -778,17 +849,21 @@ class FunctionalMemory:
         else:
             # Validate each changed leaf independently, then form the source union.
             # Shared provenance does not assert that all new values are supported.
-            selected_changes = [support[path] for path in after
-                                if path not in before or canonical(before[path]) !=
-                                canonical(after[path])] + list(removed.values())
+            selected_changes = [
+                support[path]
+                for path in after
+                if path not in before or canonical(before[path]) != canonical(after[path])
+            ] + list(removed.values())
             if retract:
                 selected_changes.append(fragment_handles or [])
                 if self.formation_interface in {"anchored_assertion_v2", "anchored_assertion_v3"}:
                     self._require_distinct_withdrawal_support(old, fragment_handles or [])
             for selected in selected_changes:
                 fragment_support(self.service, selected)
-            new = fragment_support(self.service, list(dict.fromkeys(
-                handle for selected in selected_changes for handle in selected)))
+            new = fragment_support(
+                self.service,
+                list(dict.fromkeys(handle for selected in selected_changes for handle in selected)),
+            )
             refs = list(
                 dict.fromkeys([*new["source_refs"], *old.get("source_refs", [old["source_ref"]])])
             )
@@ -826,13 +901,21 @@ class FunctionalMemory:
             if preview is not None:
                 return preview
         if self.revision_support_review is not None and not equal:
-            self._run_support_review(self.revision_support_review,
-                self._revision_evidence(bound, proposal, old), bound, proposal["source_refs"])
+            self.service.prepare_proposal(bound["session"], operation_id, proposal)
+            self._run_support_review(
+                self.revision_support_review,
+                self._revision_evidence(bound, proposal, old, operation_id),
+                bound,
+                proposal["source_refs"],
+            )
         return self._commit(bound["session"], operation_id, proposal)
 
     def _run_support_review(
-        self, review: Callable[[dict[str, Any], Callable[[], None]], None],
-        evidence: dict[str, Any], bound: dict[str, Any], source_refs: list[str],
+        self,
+        review: Callable[[dict[str, Any], Callable[[], None]], None],
+        evidence: dict[str, Any],
+        bound: dict[str, Any],
+        source_refs: list[str],
     ) -> None:
         def note_review_delivery() -> None:
             # A returned review can inform the final answer, including a refusal.
@@ -843,7 +926,10 @@ class FunctionalMemory:
         review(evidence, note_review_delivery)
 
     def _formation_evidence(
-        self, bound: dict[str, Any], proposal: dict[str, Any],
+        self,
+        bound: dict[str, Any],
+        proposal: dict[str, Any],
+        proposal_id: str,
     ) -> dict[str, Any]:
         """Review newly asserted content and scope using only actual selected sources."""
         fields = {"content": proposal["content"], **scope_leaves(proposal["scope"])}
@@ -855,56 +941,107 @@ class FunctionalMemory:
                 if source is None:
                     raise FunctionalRejection("V13_5_FORMATION_REVIEW_SOURCE_UNAVAILABLE")
                 quote["source_role"] = source["role"]
-            changes.append({"field": field, "before": None, "after": value,
-                "before_present": False, "after_present": True,
-                "selected_original_fragments": quotes})
-        return {"schema": "functional_formation_evidence_v1", "binding": bound,
-                "forget_epoch": self.forget_epoch, "record_id": None,
-                "basis": proposal["basis"], "changes": changes, "semantic_support": "unchecked"}
+            changes.append(
+                {
+                    "field": field,
+                    "before": None,
+                    "after": value,
+                    "before_present": False,
+                    "after_present": True,
+                    "selected_original_fragments": quotes,
+                }
+            )
+        return {
+            "schema": "functional_formation_evidence_v1",
+            "binding": bound,
+            "proposal_id": proposal_id,
+            "forget_epoch": self.forget_epoch,
+            "record_id": None,
+            "basis": proposal["basis"],
+            "changes": changes,
+            "semantic_support": "unchecked",
+        }
 
     def _revision_evidence(
-        self, bound: dict[str, Any], proposal: dict[str, Any], old: dict[str, Any],
+        self,
+        bound: dict[str, Any],
+        proposal: dict[str, Any],
+        old: dict[str, Any],
+        proposal_id: str,
     ) -> dict[str, Any]:
         """Provide actual deltas and selected originals to an injected precommit review.
 
         The trigger binds this request but is not silently added as field evidence.
         A review is a model assessment, not a certificate attached to stored support.
         """
-        before = {**scope_leaves(old["scope"]),
-                  **{k: old[k] for k in ("content", "kind", "basis")}}
-        after = {**scope_leaves(proposal["scope"]),
-                 **{k: proposal[k] for k in ("content", "kind", "basis")}}
+        before = {**scope_leaves(old["scope"]), **{k: old[k] for k in ("content", "kind", "basis")}}
+        after = {
+            **scope_leaves(proposal["scope"]),
+            **{k: proposal[k] for k in ("content", "kind", "basis")},
+        }
         changes = []
         for field in sorted(before.keys() | after.keys()):
-            if field in before and field in after and canonical(before[field]) == canonical(
-                after[field]
+            if (
+                field in before
+                and field in after
+                and canonical(before[field]) == canonical(after[field])
             ):
                 continue
-            selected = (proposal["functional_support"][field] if field in after
-                        else proposal["removed_field_support"][field])
-            changes.append({"field": field, "before": before.get(field),
-                "after": after.get(field), "before_present": field in before,
-                "after_present": field in after,
-                "selected_original_fragments": fragment_support(self.service, selected)["quotes"]})
+            selected = (
+                proposal["functional_support"][field]
+                if field in after
+                else proposal["removed_field_support"][field]
+            )
+            changes.append(
+                {
+                    "field": field,
+                    "before": before.get(field),
+                    "after": after.get(field),
+                    "before_present": field in before,
+                    "after_present": field in after,
+                    "selected_original_fragments": fragment_support(self.service, selected)[
+                        "quotes"
+                    ],
+                }
+            )
         if proposal["patch_operation"] == "retract":
-            changes.append({"field": "record", "before": "active", "after": "withdrawn",
-                "before_present": True, "after_present": True,
-                "selected_original_fragments": fragment_support(
-                    self.service, proposal["removed_field_support"]["record"])["quotes"]})
+            changes.append(
+                {
+                    "field": "record",
+                    "before": "active",
+                    "after": "withdrawn",
+                    "before_present": True,
+                    "after_present": True,
+                    "selected_original_fragments": fragment_support(
+                        self.service, proposal["removed_field_support"]["record"]
+                    )["quotes"],
+                }
+            )
         for change in changes:
             for quote in change["selected_original_fragments"]:
                 source = self.service.source(quote["source_ref"])
                 if source is None:
                     raise FunctionalRejection("V13_5_REVISION_REVIEW_SOURCE_UNAVAILABLE")
                 quote["source_role"] = source["role"]
-        return {"schema": "functional_revision_evidence_v1", "binding": bound,
-                "forget_epoch": self.forget_epoch, "record_id": proposal["id"],
-                "read_handle": proposal["candidate_handle"], "read_revision": old["revision"],
-                "old_content": old["content"], "old_scope": old["scope"],
-                "changes": changes, "semantic_support": "unchecked"}
+        return {
+            "schema": "functional_revision_evidence_v1",
+            "binding": bound,
+            "proposal_id": proposal_id,
+            "forget_epoch": self.forget_epoch,
+            "record_id": proposal["id"],
+            "read_handle": proposal["candidate_handle"],
+            "read_revision": old["revision"],
+            "old_content": old["content"],
+            "old_scope": old["scope"],
+            "changes": changes,
+            "semantic_support": "unchecked",
+        }
 
     def _review_revision(
-        self, bound: dict[str, Any], proposal: dict[str, Any], old: dict[str, Any],
+        self,
+        bound: dict[str, Any],
+        proposal: dict[str, Any],
+        old: dict[str, Any],
         review_token: str | None,
     ) -> dict[str, Any] | None:
         """Expose the exact proposed diff and selected originals before any fact write.
@@ -912,43 +1049,74 @@ class FunctionalMemory:
         The issued token binds a preview, not semantic truth. It never substitutes
         evidence, grants business permission, or turns an old assertion into a correction.
         """
-        identity = {"binding": bound, "proposal_sha256": digest(proposal),
-                    "policy": self.policy, "forget_epoch": self.forget_epoch}
-        token = "revision-review-" + digest(identity)
+        identity = {
+            "binding": bound,
+            "proposal": proposal,
+            "policy": self.policy,
+            "forget_epoch": self.forget_epoch,
+        }
         if review_token is not None:
-            issued = self.service.store.get(namespace(self.service), token)
-            if review_token != token or issued is None or issued.value != identity:
+            issued = self.service.store.get(namespace(self.service), review_token)
+            # Compare the supplied preview once at its mutation boundary.
+            if issued is None or issued.value != identity:
                 raise FunctionalRejection("V13_5_REVISION_REVIEW_NOT_ISSUED_OR_CHANGED")
             return None
-        before = {**scope_leaves(old["scope"]),
-                  **{k: old[k] for k in ("content", "kind", "basis")}}
-        after = {**scope_leaves(proposal["scope"]),
-                 **{k: proposal[k] for k in ("content", "kind", "basis")}}
+        token = "revision-review-" + str(uuid.uuid4())
+        before = {**scope_leaves(old["scope"]), **{k: old[k] for k in ("content", "kind", "basis")}}
+        after = {
+            **scope_leaves(proposal["scope"]),
+            **{k: proposal[k] for k in ("content", "kind", "basis")},
+        }
         old_support = self._source_support(old)
         rows = []
         for field in sorted(before.keys() | after.keys()):
-            if field in before and field in after and canonical(before[field]) == canonical(
-                after[field]
+            if (
+                field in before
+                and field in after
+                and canonical(before[field]) == canonical(after[field])
             ):
                 continue
-            selected = (proposal["functional_support"][field] if field in after
-                        else proposal["removed_field_support"][field])
-            rows.append({"field": field, "before": before.get(field),
-                         "after": after.get(field), "removed": field not in after,
-                         "selected_original_fragments": fragment_support(
-                             self.service, selected)["quotes"],
-                         "same_selection_as_prior_field_support":
-                             set(selected) == set(old_support.get(field, []))})
+            selected = (
+                proposal["functional_support"][field]
+                if field in after
+                else proposal["removed_field_support"][field]
+            )
+            rows.append(
+                {
+                    "field": field,
+                    "before": before.get(field),
+                    "after": after.get(field),
+                    "removed": field not in after,
+                    "selected_original_fragments": fragment_support(self.service, selected)[
+                        "quotes"
+                    ],
+                    "same_selection_as_prior_field_support": set(selected)
+                    == set(old_support.get(field, [])),
+                }
+            )
         if proposal["patch_operation"] == "retract":
-            rows.append({"field": "record", "before": "active", "after": "withdrawn",
-                         "selected_original_fragments": fragment_support(
-                             self.service, proposal["removed_field_support"]["record"])["quotes"]})
+            rows.append(
+                {
+                    "field": "record",
+                    "before": "active",
+                    "after": "withdrawn",
+                    "selected_original_fragments": fragment_support(
+                        self.service, proposal["removed_field_support"]["record"]
+                    )["quotes"],
+                }
+            )
         result = {
-            "ok": True, "status": "revision_review_required", "effect": "none",
-            "semantic_write_performed": False, "formation_status": "pending",
-            "record_id": proposal["id"], "read_revision": old["revision"],
-            "old_content": old["content"], "old_scope": old["scope"],
-            "proposed_changes": rows, "review_token": token,
+            "ok": True,
+            "status": "revision_review_required",
+            "effect": "none",
+            "semantic_write_performed": False,
+            "formation_status": "pending",
+            "record_id": proposal["id"],
+            "read_revision": old["revision"],
+            "old_content": old["content"],
+            "old_scope": old["scope"],
+            "proposed_changes": rows,
+            "review_token": token,
             "semantic_support": "unchecked",
             "next_step": (
                 "No revision has been committed. Compare EACH new value with its selected "
@@ -969,7 +1137,9 @@ class FunctionalMemory:
         return result
 
     def _require_distinct_withdrawal_support(
-        self, old: dict[str, Any], handles: list[str],
+        self,
+        old: dict[str, Any],
+        handles: list[str],
     ) -> None:
         """A withdrawal needs a witness beyond the preserved affirmation's spans.
 
@@ -978,15 +1148,21 @@ class FunctionalMemory:
         Ordinary revisions and exact no_change do not use this constraint.
         """
         selected = fragment_support(self.service, handles)
-        prior = [quote for support in old.get("functional_support", {}).values()
-                 for quote in support.get("quotes", [])]
+        prior = [
+            quote
+            for support in old.get("functional_support", {}).values()
+            for quote in support.get("quotes", [])
+        ]
         if not prior:
             raise FunctionalRejection("V13_5_WITHDRAWAL_PRIOR_SUPPORT_UNAVAILABLE")
-        identity = ("source_ref", "source_sha256", "body_text_sha256")
+        identity = ("source_ref", "source_revision")
         for quote in selected["quotes"]:
             covered_until = quote["start"]
-            intervals = sorted((p["start"], p["end"]) for p in prior
-                               if all(p[key] == quote[key] for key in identity))
+            intervals = sorted(
+                (p["start"], p["end"])
+                for p in prior
+                if all(p[key] == quote[key] for key in identity)
+            )
             for start, end in intervals:
                 if start > covered_until:
                     break
@@ -997,7 +1173,8 @@ class FunctionalMemory:
             "V13_5_WITHDRAWAL_REUSES_ONLY_PRIOR_SUPPORT: select an actual cancellation "
             "witness beyond the record's existing affirmative support ranges; an archived "
             "event or a different span in the same Source is allowed. No source was added "
-            "or substituted and no withdrawal was committed. Distinctness does not verify meaning.")
+            "or substituted and no withdrawal was committed. Distinctness does not verify meaning."
+        )
 
     def _cue_handles(self, cues: list[FragmentCue]) -> list[str]:
         if not cues:
@@ -1007,9 +1184,11 @@ class FunctionalMemory:
         for cue, quote in zip(cues, selected["quotes"], strict=True):
             if not cue.supporting_words.strip() or cue.supporting_words not in quote["content"]:
                 raise FunctionalRejection(
-                    "V13_5_EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT: " + cue.fragment_handle
+                    "V13_5_EVIDENCE_CUE_NOT_IN_SELECTED_FRAGMENT: "
+                    + cue.fragment_handle
                     + "; select the original fragment containing your literal supporting_words; "
-                    "no source was substituted and no revision was committed")
+                    "no source was substituted and no revision was committed"
+                )
         return handles
 
     def _read(
@@ -1020,7 +1199,7 @@ class FunctionalMemory:
         action: Callable[[dict[str, Any]], dict[str, Any]],
     ) -> dict[str, Any]:
         bound = self._binding(config)
-        key = "read-admission-" + digest(bound)
+        key = "read-admission:" + reference_key([bound["session"], bound["message_id"]])
         with self.service._locked():
             old = self.service.store.get(namespace(self.service), key)
             state = old.value if old else {"binding": bound, "policy": self.policy, "calls": {}}
@@ -1036,8 +1215,12 @@ class FunctionalMemory:
                     return cast(dict[str, Any], previous["result"])
                 raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
-                exhausted = {"ok": False, "status": "read_limit_exhausted",
-                             "limit": self.read_limit, **self._read_only_metadata([])}
+                exhausted = {
+                    "ok": False,
+                    "status": "read_limit_exhausted",
+                    "limit": self.read_limit,
+                    **self._read_only_metadata([]),
+                }
                 if self.token_count(canonical(exhausted)) > self.material_limit:
                     raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
                 return exhausted
@@ -1055,10 +1238,16 @@ class FunctionalMemory:
                 "phase": "read_contract",
             }
         except Exception as error:
-            result = {"ok": False, "status": "read_integrity_error"
-                      if isinstance(error, FunctionalIntegrityError) else "read_outcome_unknown",
-                      "error_type": type(error).__name__, "phase": "read_action",
-                      "read_state_effect": "unconfirmed", "retryable": False}
+            result = {
+                "ok": False,
+                "status": "read_integrity_error"
+                if isinstance(error, FunctionalIntegrityError)
+                else "read_outcome_unknown",
+                "error_type": type(error).__name__,
+                "phase": "read_action",
+                "read_state_effect": "unconfirmed",
+                "retryable": False,
+            }
         if result.get("schema") != "functional_material_v1":
             # Failed reads delivered no items; zero is a delivery count, not a
             # claim that the owner has no records or that the lookup succeeded.
@@ -1072,10 +1261,15 @@ class FunctionalMemory:
                 current.value["calls"][call_id]["result"] = result
                 self.service.store.put(namespace(self.service), key, current.value, index=False)
         except Exception as error:
-            result = {"ok": False, "status": "read_outcome_unknown",
-                      "error_type": type(error).__name__, "phase": "read_receipt_persistence",
-                      "read_state_effect": "unconfirmed", "retryable": False,
-                      **self._read_only_metadata([])}
+            result = {
+                "ok": False,
+                "status": "read_outcome_unknown",
+                "error_type": type(error).__name__,
+                "phase": "read_receipt_persistence",
+                "read_state_effect": "unconfirmed",
+                "retryable": False,
+                **self._read_only_metadata([]),
+            }
             if self.token_count(canonical(result)) > self.material_limit:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
         return result
@@ -1112,30 +1306,46 @@ class FunctionalMemory:
                     "effect": "unconfirmed",
                     "formation_status": "unknown",
                     "error_type": type(cause).__name__,
-                    "phase": error.phase if isinstance(error, FunctionalOperationError)
+                    "phase": error.phase
+                    if isinstance(error, FunctionalOperationError)
                     else "mutation_preparation",
-                    "error_category": "integrity" if isinstance(cause, FunctionalIntegrityError)
+                    "error_category": "integrity"
+                    if isinstance(cause, FunctionalIntegrityError)
                     else "unconfirmed_effect",
                     "recovery": "same_operation_id_only",
                 }
 
         def save_memory(
-            content: Annotated[str, Field(description=(
-                "Faithful assertion with all applicability limits, exceptions, negation and "
-                "uncertainty retained in the text itself. Keep source wording for restrictive "
-                "phrases; do not generalize one occurrence into a class or a lasting "
-                "preference."))],
+            content: Annotated[
+                str,
+                Field(
+                    description=(
+                        "Faithful assertion with all applicability limits, exceptions, "
+                        "negation and uncertainty retained in the text itself. "
+                        "Keep source wording for restrictive "
+                        "phrases; do not generalize one occurrence into a class or a lasting "
+                        "preference."
+                    )
+                ),
+            ],
             fragment_handles: list[str],
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
-            scope: Annotated[dict[str, Any] | None, Field(description=(
-                "Only explicitly supported applicability boundaries. Preserve the particular "
-                "occurrence rather than merely its category. Do not invent project names or "
-                "use scope for summary labels. Omit absent boundaries; keep unknown dates unknown. "
-                "These fields must agree with the restrictions retained in content."))] = None,
+            scope: Annotated[
+                dict[str, Any] | None,
+                Field(
+                    description=(
+                        "Only explicitly supported applicability boundaries. "
+                        "Preserve the particular occurrence rather than merely its category. "
+                        "Do not invent project names or use scope for summary labels. "
+                        "Omit absent boundaries; keep unknown dates unknown. "
+                        "These fields must agree with the restrictions retained in content."
+                    )
+                ),
+            ] = None,
         ) -> ToolMessage:
-            """Save semantic memory using issued fragments; program extracts original quote/hash.
+            """Save semantic memory using issued fragments and their original source/version/span.
 
             Create a new matter. For an existing continuing matter, read its record
             and use update_memory; do not create a duplicate with save_memory.
@@ -1154,7 +1364,10 @@ class FunctionalMemory:
             )
 
         def save_assertion(
-            content: str, fragment_handles: list[str], config: RunnableConfig, *,
+            content: str,
+            fragment_handles: list[str],
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Save one new supported assertion with all limits in its content.
@@ -1196,13 +1409,17 @@ class FunctionalMemory:
             Omitted fields retain original support; null is a value, never removal.
             Empty changes or exact same values return no_change without a new version.
             """
+
             def patch() -> dict[str, Any]:
                 if changes and fragment_handles is not None:
                     raise FunctionalRejection("V13_5_SELECT_FRAGMENTS_INSIDE_EACH_CHANGE")
                 return self.update(
-                    config, tool_call_id, read_handle,
+                    config,
+                    tool_call_id,
+                    read_handle,
                     [change.model_dump(exclude_unset=True) for change in changes],
-                    fragment_handles, retract=retract,
+                    fragment_handles,
+                    retract=retract,
                 )
 
             return message("update_memory", tool_call_id, mutation(patch))
@@ -1233,10 +1450,13 @@ class FunctionalMemory:
             )
 
         def record_read(
-            config: RunnableConfig, tool_call_id: str, request: dict[str, Any],
+            config: RunnableConfig,
+            tool_call_id: str,
+            request: dict[str, Any],
         ) -> ToolMessage:
-            record_id, revision, cursor = (request.get(k) for k in
-                                           ("record_id", "revision", "cursor"))
+            record_id, revision, cursor = (
+                request.get(k) for k in ("record_id", "revision", "cursor")
+            )
             history, history_cursor = request.get("history", False), request.get("history_cursor")
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
@@ -1297,8 +1517,9 @@ class FunctionalMemory:
                     bound,
                 )
 
-            return message(request["tool"], tool_call_id,
-                           self._read(config, tool_call_id, request, action))
+            return message(
+                request["tool"], tool_call_id, self._read(config, tool_call_id, request, action)
+            )
 
         def read_memory(
             config: RunnableConfig,
@@ -1320,15 +1541,27 @@ class FunctionalMemory:
             ordinary/explicit snapshot; it never changes to latest results.
             """
 
-            return record_read(config, tool_call_id, {
-                "tool": "read_memory", "record_id": record_id, "revision": revision,
-                "cursor": cursor, "history": history, "history_cursor": history_cursor})
+            return record_read(
+                config,
+                tool_call_id,
+                {
+                    "tool": "read_memory",
+                    "record_id": record_id,
+                    "revision": revision,
+                    "cursor": cursor,
+                    "history": history,
+                    "history_cursor": history_cursor,
+                },
+            )
 
         def source_read(
-            config: RunnableConfig, tool_call_id: str, request: dict[str, Any],
+            config: RunnableConfig,
+            tool_call_id: str,
+            request: dict[str, Any],
         ) -> ToolMessage:
-            fragment_handle, source_ref, cursor = (request.get(k) for k in
-                                                   ("fragment_handle", "source_ref", "cursor"))
+            fragment_handle, source_ref, cursor = (
+                request.get(k) for k in ("fragment_handle", "source_ref", "cursor")
+            )
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 if sum(x is not None for x in (fragment_handle, source_ref, cursor)) != 1:
@@ -1353,8 +1586,9 @@ class FunctionalMemory:
                     bound,
                 )
 
-            return message(request["tool"], tool_call_id,
-                           self._read(config, tool_call_id, request, action))
+            return message(
+                request["tool"], tool_call_id, self._read(config, tool_call_id, request, action)
+            )
 
         def read_source(
             config: RunnableConfig,
@@ -1372,12 +1606,21 @@ class FunctionalMemory:
             Every call, including a failed call, uses the explicit per-message read allowance.
             """
 
-            return source_read(config, tool_call_id, {
-                "tool": "read_source", "fragment_handle": fragment_handle,
-                "source_ref": source_ref, "cursor": cursor})
+            return source_read(
+                config,
+                tool_call_id,
+                {
+                    "tool": "read_source",
+                    "fragment_handle": fragment_handle,
+                    "source_ref": source_ref,
+                    "cursor": cursor,
+                },
+            )
 
         def read_current_memory(
-            record_id: str, config: RunnableConfig, *,
+            record_id: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Read the current version of an issued record ID, without changing it.
@@ -1386,11 +1629,14 @@ class FunctionalMemory:
             read_memory_revision. Continue any next_cursor with read_page.
             Every read uses the shared explicit read allowance; it is not a save.
             """
-            return record_read(config, tool_call_id,
-                               {"tool": "read_memory", "record_id": record_id})
+            return record_read(
+                config, tool_call_id, {"tool": "read_memory", "record_id": record_id}
+            )
 
         def read_memory_history(
-            record_id: str, config: RunnableConfig, *,
+            record_id: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Read original stored revision bodies for one issued record ID.
@@ -1399,11 +1645,17 @@ class FunctionalMemory:
             use read_page for next_cursor. Reading old values never makes them
             current or saves them. Uses the shared explicit read allowance.
             """
-            return record_read(config, tool_call_id,
-                {"tool": "read_memory_history", "record_id": record_id, "history": True})
+            return record_read(
+                config,
+                tool_call_id,
+                {"tool": "read_memory_history", "record_id": record_id, "history": True},
+            )
 
         def read_memory_revision(
-            record_id: str, revision: int, config: RunnableConfig, *,
+            record_id: str,
+            revision: int,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Read one exact stored historical revision without making it current.
@@ -1412,11 +1664,16 @@ class FunctionalMemory:
             earlier revisions use read_memory_history. Continue with read_page.
             Uses the shared explicit read allowance; it never saves or updates.
             """
-            return record_read(config, tool_call_id, {"tool": "read_memory_revision",
-                                                     "record_id": record_id, "revision": revision})
+            return record_read(
+                config,
+                tool_call_id,
+                {"tool": "read_memory_revision", "record_id": record_id, "revision": revision},
+            )
 
         def read_source_group(
-            source_ref: str, config: RunnableConfig, *,
+            source_ref: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Read a full original source group using its issued source_ref.
@@ -1425,11 +1682,14 @@ class FunctionalMemory:
             read_page for next_cursor. Sources split at public original boundaries
             and state omissions. Uses the shared read allowance, never a semantic save.
             """
-            return source_read(config, tool_call_id,
-                               {"tool": "read_source", "source_ref": source_ref})
+            return source_read(
+                config, tool_call_id, {"tool": "read_source", "source_ref": source_ref}
+            )
 
         def read_fragment(
-            fragment_handle: str, config: RunnableConfig, *,
+            fragment_handle: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Read the exact original fragment identified by an issued fragment_handle.
@@ -1438,11 +1698,14 @@ class FunctionalMemory:
             its source_ref; continue any next_cursor with read_page. Reading is not
             semantic formation and uses the shared explicit read allowance.
             """
-            return source_read(config, tool_call_id,
-                               {"tool": "read_fragment", "fragment_handle": fragment_handle})
+            return source_read(
+                config, tool_call_id, {"tool": "read_fragment", "fragment_handle": fragment_handle}
+            )
 
         def read_page(
-            cursor: str, config: RunnableConfig, *,
+            cursor: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Continue an issued next_cursor from ordinary material or any explicit read.
@@ -1488,8 +1751,12 @@ class FunctionalMemory:
             )
 
         def update_assertion(
-            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
-            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            read_handle: str,
+            changes: list[ReplacementChange],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            retract: bool = False,
             fragment_handles: list[str] | None = None,
         ) -> ToolMessage:
             """Update the OLD read target using separately selected evidence for each NEW value.
@@ -1510,19 +1777,31 @@ class FunctionalMemory:
             return update_memory(
                 read_handle,
                 [FieldChange.model_validate(c.model_dump(exclude_unset=True)) for c in changes],
-                config, tool_call_id=tool_call_id, retract=retract,
+                config,
+                tool_call_id=tool_call_id,
+                retract=retract,
                 fragment_handles=fragment_handles,
             )
 
         def update_assertion_withdrawal(
-            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
-            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
-            evidence_for_withdrawal: Annotated[list[str] | None, Field(description=(
-                "Only for retract=true: original fragments that state the WITHDRAWAL. "
-                "The old keep/save statement identifies what is withdrawn but cannot "
-                "support its withdrawal. The read_handle already identifies the target. "
-                "Select the actual withdrawal text, which may be current or archived; "
-                "the current request/trigger is not automatically evidence."))] = None,
+            read_handle: str,
+            changes: list[ReplacementChange],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            retract: bool = False,
+            evidence_for_withdrawal: Annotated[
+                list[str] | None,
+                Field(
+                    description=(
+                        "Only for retract=true: original fragments that state the WITHDRAWAL. "
+                        "The old keep/save statement identifies what is withdrawn but cannot "
+                        "support its withdrawal. The read_handle already identifies the target. "
+                        "Select the actual withdrawal text, which may be current or archived; "
+                        "the current request/trigger is not automatically evidence."
+                    )
+                ),
+            ] = None,
         ) -> ToolMessage:
             """Revise or withdraw the OLD read target with evidence for the actual CHANGE.
 
@@ -1538,13 +1817,21 @@ class FunctionalMemory:
             Quote verification proves source bytes only; semantic support is unchecked.
             """
             return update_assertion(
-                read_handle, changes, config, tool_call_id=tool_call_id, retract=retract,
+                read_handle,
+                changes,
+                config,
+                tool_call_id=tool_call_id,
+                retract=retract,
                 fragment_handles=evidence_for_withdrawal,
             )
 
         def reviewed_assertion(
-            read_handle: str, changes: list[ReplacementChange], config: RunnableConfig, *,
-            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            read_handle: str,
+            changes: list[ReplacementChange],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            retract: bool = False,
             evidence_for_withdrawal: list[str] | None = None,
             review_token: str | None = None,
         ) -> ToolMessage:
@@ -1561,16 +1848,30 @@ class FunctionalMemory:
             is not automatically evidence. The program verifies bytes, not entailment.
             Same values/empty changes yield exact no_change without a redundant preview.
             """
-            return message("update_memory", tool_call_id, mutation(lambda: self.update(
-                config, tool_call_id, read_handle,
-                [c.model_dump(exclude_unset=True) for c in changes],
-                evidence_for_withdrawal, retract=retract, review_before_commit=True,
-                review_token=review_token,
-            )))
+            return message(
+                "update_memory",
+                tool_call_id,
+                mutation(
+                    lambda: self.update(
+                        config,
+                        tool_call_id,
+                        read_handle,
+                        [c.model_dump(exclude_unset=True) for c in changes],
+                        evidence_for_withdrawal,
+                        retract=retract,
+                        review_before_commit=True,
+                        review_token=review_token,
+                    )
+                ),
+            )
 
         def anchored_assertion(
-            read_handle: str, changes: list[AnchoredChange], config: RunnableConfig, *,
-            tool_call_id: Annotated[str, InjectedToolCallId], retract: bool = False,
+            read_handle: str,
+            changes: list[AnchoredChange],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            retract: bool = False,
             evidence_for_withdrawal: list[FragmentCue] | None = None,
         ) -> ToolMessage:
             """Update the old target using short original words expressing each actual CHANGE.
@@ -1586,6 +1887,7 @@ class FunctionalMemory:
             No preview or confirmation token is needed. Same values/empty changes remain
             exact no_change; no automatic replacement of your selected sources occurs.
             """
+
             def action() -> dict[str, Any]:
                 if evidence_for_withdrawal is not None and not retract:
                     raise FunctionalRejection("V13_5_WITHDRAWAL_EVIDENCE_REQUIRES_RETRACT")
@@ -1595,16 +1897,24 @@ class FunctionalMemory:
                     row.pop("evidence_for_new_value")
                     row["fragment_handles"] = self._cue_handles(change.evidence_for_new_value)
                     rows.append(row)
-                withdrawal = (self._cue_handles(evidence_for_withdrawal)
-                              if evidence_for_withdrawal is not None else None)
-                return self.update(config, tool_call_id, read_handle, rows, withdrawal,
-                                   retract=retract)
+                withdrawal = (
+                    self._cue_handles(evidence_for_withdrawal)
+                    if evidence_for_withdrawal is not None
+                    else None
+                )
+                return self.update(
+                    config, tool_call_id, read_handle, rows, withdrawal, retract=retract
+                )
+
             return message("update_memory", tool_call_id, mutation(action))
 
         def optional_withdrawal_patch(
-            read_handle: str, config: RunnableConfig, *,
+            read_handle: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
-            changes: list[AnchoredChange] | None = None, retract: bool = False,
+            changes: list[AnchoredChange] | None = None,
+            retract: bool = False,
             evidence_for_withdrawal: list[FragmentCue] | None = None,
         ) -> ToolMessage:
             """Full withdrawal permits omitted changes; ordinary updates require explicit changes.
@@ -1614,16 +1924,24 @@ class FunctionalMemory:
             Withdrawal still requires actual selected cancellation evidence.
             """
             if changes is None and not retract:
+
                 def reject() -> dict[str, Any]:
                     raise FunctionalRejection("V13_5_NON_WITHDRAWAL_CHANGES_REQUIRED")
+
                 return message("update_memory", tool_call_id, mutation(reject))
             return anchored_assertion(
-                read_handle, [] if changes is None else changes, config,
-                tool_call_id=tool_call_id, retract=retract,
-                evidence_for_withdrawal=evidence_for_withdrawal)
+                read_handle,
+                [] if changes is None else changes,
+                config,
+                tool_call_id=tool_call_id,
+                retract=retract,
+                evidence_for_withdrawal=evidence_for_withdrawal,
+            )
 
         def confirm_existing_memory(
-            read_handle: str, config: RunnableConfig, *,
+            read_handle: str,
+            config: RunnableConfig,
+            *,
             tool_call_id: Annotated[str, InjectedToolCallId],
         ) -> ToolMessage:
             """Confirm an already matching current record WITHOUT changing it.
@@ -1636,16 +1954,28 @@ class FunctionalMemory:
             whole request. Describe success as already present/unchanged, never
             as a new save. For changed values use update_memory with real evidence.
             """
-            return message("confirm_existing_memory", tool_call_id,
-                           mutation(lambda: self.update(config, tool_call_id, read_handle, [])))
+            return message(
+                "confirm_existing_memory",
+                tool_call_id,
+                mutation(lambda: self.update(config, tool_call_id, read_handle, [])),
+            )
 
-        save_tool = (StructuredTool.from_function(
-            save_assertion, name="save_memory", args_schema=SavedAssertion)
-            if self.formation_interface in {
-                "unified_assertion_v1", "unified_assertion_v2", "unified_assertion_v3",
-                "reviewed_assertion_v1", "anchored_assertion_v1", "anchored_assertion_v2",
-                "anchored_assertion_v3"}
-            else StructuredTool.from_function(save_memory))
+        save_tool = (
+            StructuredTool.from_function(
+                save_assertion, name="save_memory", args_schema=SavedAssertion
+            )
+            if self.formation_interface
+            in {
+                "unified_assertion_v1",
+                "unified_assertion_v2",
+                "unified_assertion_v3",
+                "reviewed_assertion_v1",
+                "anchored_assertion_v1",
+                "anchored_assertion_v2",
+                "anchored_assertion_v3",
+            }
+            else StructuredTool.from_function(save_memory)
+        )
         withdrawal_description = (
             str(anchored_assertion.__doc__) + "\nFull-record withdrawal additionally "
             "requires at least one cancellation witness outside the preserved "
@@ -1656,42 +1986,65 @@ class FunctionalMemory:
             "claim withdrawal success. This restriction does not apply to ordinary "
             "same-source revisions or exact no_change."
             if self.formation_interface in {"anchored_assertion_v2", "anchored_assertion_v3"}
-            else None)
+            else None
+        )
         if self.formation_interface == "anchored_assertion_v3":
-            withdrawal_description = str(withdrawal_description).replace(
-                "retract=true, changes=[] and evidence_for_withdrawal with",
-                "retract=true (changes may be omitted/null, meaning []) and "
-                "evidence_for_withdrawal with") + "\n" + str(optional_withdrawal_patch.__doc__)
-        update_tool = (StructuredTool.from_function(
-                           optional_withdrawal_patch
-                           if self.formation_interface == "anchored_assertion_v3"
-                           else anchored_assertion, name="update_memory",
-                           description=withdrawal_description)
-                       if self.formation_interface in {
-                           "anchored_assertion_v1", "anchored_assertion_v2",
-                           "anchored_assertion_v3"}
-                       else StructuredTool.from_function(
-                           reviewed_assertion, name="update_memory")
-                       if self.formation_interface == "reviewed_assertion_v1"
-                       else StructuredTool.from_function(
-                           update_assertion_withdrawal, name="update_memory")
-                       if self.formation_interface == "unified_assertion_v3"
-                       else StructuredTool.from_function(update_assertion, name="update_memory")
-                       if self.formation_interface == "unified_assertion_v2"
-                       else StructuredTool.from_function(update_memory))
-        confirmation_tools = ((StructuredTool.from_function(confirm_existing_memory),)
-                              if self.existing_confirmation else ())
+            withdrawal_description = (
+                str(withdrawal_description).replace(
+                    "retract=true, changes=[] and evidence_for_withdrawal with",
+                    "retract=true (changes may be omitted/null, meaning []) and "
+                    "evidence_for_withdrawal with",
+                )
+                + "\n"
+                + str(optional_withdrawal_patch.__doc__)
+            )
+        update_tool = (
+            StructuredTool.from_function(
+                optional_withdrawal_patch
+                if self.formation_interface == "anchored_assertion_v3"
+                else anchored_assertion,
+                name="update_memory",
+                description=withdrawal_description,
+            )
+            if self.formation_interface
+            in {"anchored_assertion_v1", "anchored_assertion_v2", "anchored_assertion_v3"}
+            else StructuredTool.from_function(reviewed_assertion, name="update_memory")
+            if self.formation_interface == "reviewed_assertion_v1"
+            else StructuredTool.from_function(update_assertion_withdrawal, name="update_memory")
+            if self.formation_interface == "unified_assertion_v3"
+            else StructuredTool.from_function(update_assertion, name="update_memory")
+            if self.formation_interface == "unified_assertion_v2"
+            else StructuredTool.from_function(update_memory)
+        )
+        confirmation_tools = (
+            (StructuredTool.from_function(confirm_existing_memory),)
+            if self.existing_confirmation
+            else ()
+        )
         read_tools = (
-            ReadSelectorTool.from_function(read_current_memory, name="read_memory",
-                                         args_schema=RecordSelector),
-            ReadSelectorTool.from_function(read_memory_history, args_schema=RecordSelector),
-            ReadSelectorTool.from_function(read_memory_revision, args_schema=RevisionSelector),
-            ReadSelectorTool.from_function(read_source_group, name="read_source",
-                                         args_schema=SourceSelector),
-            ReadSelectorTool.from_function(read_fragment, args_schema=FragmentSelector),
-            ReadSelectorTool.from_function(read_page, args_schema=PageSelector),
-        ) if self.read_interface == "explicit_selectors_v1" else (
-            StructuredTool.from_function(read_memory), StructuredTool.from_function(read_source))
-        return (save_tool, update_tool, *confirmation_tools,
-                StructuredTool.from_function(search_memory), *read_tools,
-                StructuredTool.from_function(forget_memory))
+            (
+                ReadSelectorTool.from_function(
+                    read_current_memory, name="read_memory", args_schema=RecordSelector
+                ),
+                ReadSelectorTool.from_function(read_memory_history, args_schema=RecordSelector),
+                ReadSelectorTool.from_function(read_memory_revision, args_schema=RevisionSelector),
+                ReadSelectorTool.from_function(
+                    read_source_group, name="read_source", args_schema=SourceSelector
+                ),
+                ReadSelectorTool.from_function(read_fragment, args_schema=FragmentSelector),
+                ReadSelectorTool.from_function(read_page, args_schema=PageSelector),
+            )
+            if self.read_interface == "explicit_selectors_v1"
+            else (
+                StructuredTool.from_function(read_memory),
+                StructuredTool.from_function(read_source),
+            )
+        )
+        return (
+            save_tool,
+            update_tool,
+            *confirmation_tools,
+            StructuredTool.from_function(search_memory),
+            *read_tools,
+            StructuredTool.from_function(forget_memory),
+        )

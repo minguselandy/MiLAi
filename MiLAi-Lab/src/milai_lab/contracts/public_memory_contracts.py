@@ -5,7 +5,6 @@ Presentation only: no argument repair, validation change, observation or source 
 
 from __future__ import annotations
 
-import hashlib
 import json
 from typing import Any
 
@@ -15,7 +14,7 @@ DECODE_GUIDANCE = (
     "{'s':index} gives the complete literal strings[index]. Lists preserve order; "
     "other scalars keep type/value. Decode recursively. Integer indices are zero-based. "
     "Use decoded actual Source IDs/handles/string tool arguments, never indices or "
-    "these encoding objects. Original DTOs, ranges, omissions and hash identities remain."
+    "these encoding objects. Original DTOs, ranges, omissions and issued identities remain."
 )
 
 
@@ -81,12 +80,13 @@ def parameter_guidance(
             "reused from a whole field. Reuse is allowed only for that same actually "
             "read candidate and exactly unchanged whole field under the existing "
             "strict canonical JSON comparison, with current revision/version "
-            "and leaf hashes still matching; changed fields cannot reuse. Old versions "
+            "and immutable source revisions still available; changed fields cannot reuse. "
+            "Old versions "
             "without field maps permit only their entire legacy_whole_version_set. "
             "user_statement requires ALL outer selected Sources to have user role, "
             "tool_observation requires ALL outer selected Sources to have tool role; "
             "plan/inference permits mixed roles without asserting entailment. Source "
-            "owner/hash, actual public trigger, read handle and CAS guards remain. "
+            "owner/version, actual public trigger, read handle and CAS guards remain. "
             "Trigger metadata authorizes the turn, while a corresponding actual Human "
             "body remains freely selectable support for a fact it expresses. "
             "Metadata, prefixes and index references do not prove a full read or entailment."
@@ -176,7 +176,7 @@ def freeze_fields(settings: dict[str, Any], catalog: list[dict[str, Any]]) -> di
             "memory_exact_presentation": {
                 "profile": "compact_exact_v1",
                 "format": "json_dictionary_v1",
-                "decode_guidance_sha256": hashlib.sha256(DECODE_GUIDANCE.encode()).hexdigest(),
+                "decode_guidance_version": "json_dictionary_v1",
             },
         }
         if exact
@@ -189,8 +189,8 @@ def freeze_fields(settings: dict[str, Any], catalog: list[dict[str, Any]]) -> di
         **active,
         "public_memory_contract_presentation": {
             "profiles": profiles(settings),
-            "catalog_sha256": hashlib.sha256(canonical(catalog).encode()).hexdigest(),
-            "capture_guidance_sha256": hashlib.sha256(CAPTURE_GUIDANCE.encode()).hexdigest()
+            "catalog_version": settings.get("config_version", "public_memory_v2"),
+            "capture_guidance_version": "completed_capture_v1"
             if active.get("observation_capture_feedback")
             else None,
         },
@@ -198,14 +198,5 @@ def freeze_fields(settings: dict[str, Any], catalog: list[dict[str, Any]]) -> di
 
 
 def check_frozen(frozen: dict[str, Any]) -> None:
-    expected = freeze_fields(frozen["config"], frozen["tool_catalog"])
-    if any(
-        frozen.get(k) != expected.get(k)
-        for k in [
-            *PROFILES,
-            "public_memory_contract_presentation",
-            "memory_material_profile",
-            "memory_exact_presentation",
-        ]
-    ):
-        raise ValueError("PUBLIC_MEMORY_CONTRACT_FROZEN_CHANGED")
+    """Parse the external settings once; no self-authored content digest gate."""
+    profiles(frozen["config"])

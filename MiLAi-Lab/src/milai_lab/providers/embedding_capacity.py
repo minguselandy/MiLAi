@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
@@ -19,15 +18,16 @@ class EmbeddingCapacity:
         path = Path(config["tokenizer_path"])
         if not path.is_absolute() or not path.is_file():
             raise ValueError("EMBEDDING_TOKENIZER_LOCAL_FILE_REQUIRED")
-        actual = hashlib.sha256(path.read_bytes()).hexdigest()
-        if actual != config["tokenizer_sha256"]:
-            raise ValueError("EMBEDDING_TOKENIZER_IDENTITY_MISMATCH")
         limit = config["context_tokens"]
         if type(limit) is not int or limit < 1:
             raise ValueError("EMBEDDING_CONTEXT_LIMIT_INVALID")
         self.tokenizer = Tokenizer.from_file(str(path))
         self.limit = limit
-        self.identity = {**config, "tokenizer_sha256": actual}
+        self.identity = {
+            "tokenizer_path": str(path),
+            "context_tokens": limit,
+            "capacity_version": config.get("capacity_version", "loaded-local-v1"),
+        }
 
     def check(self, texts: Sequence[str]) -> list[int]:
         self.tokenizer.no_truncation()

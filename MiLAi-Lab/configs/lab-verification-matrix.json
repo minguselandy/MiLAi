@@ -104,7 +104,15 @@
     "tests/memory/test_v13_2_service.py",
     "tests/memory/test_v13_2_source_index.py",
     "tests/unit/test_tool_schema_communication.py",
-    "tests/unit/test_read_protocol.py"
+    "tests/unit/test_read_protocol.py",
+    "tests/unit/test_edit_benchmark_wiring.py",
+    "tests/memory/test_edit_foundation.py",
+    "tests/memory/test_edit_memory.py",
+    "tests/memory/test_edit_common_recovery.py",
+    "tests/integrations/test_amem_contracts.py",
+    "tests/memory/test_functional_edit_memory.py",
+    "tests/unit/test_edit_external.py",
+    "tests/unit/test_edit_mechanism.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -171,7 +179,15 @@
     "tests/memory/test_v13_2_service.py",
     "tests/memory/test_v13_2_source_index.py",
     "tests/unit/test_tool_schema_communication.py",
-    "tests/unit/test_read_protocol.py"
+    "tests/unit/test_read_protocol.py",
+    "tests/unit/test_edit_benchmark_wiring.py",
+    "tests/memory/test_edit_foundation.py",
+    "tests/memory/test_edit_memory.py",
+    "tests/memory/test_edit_common_recovery.py",
+    "tests/integrations/test_amem_contracts.py",
+    "tests/memory/test_functional_edit_memory.py",
+    "tests/unit/test_edit_external.py",
+    "tests/unit/test_edit_mechanism.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
@@ -217,10 +233,12 @@
     "tests/memory/test_v13_2_public_memory_contracts.py::test_qwen_exact_dictionary_same_selected_units_budget_and_delivery_limits",
     "tests/memory/test_v13_2_public_memory_contracts.py::test_exact_display_selected_page_reopen_keeps_actual_members_and_paid_range",
     "tests/memory/test_v13_2_public_memory_contracts.py::test_four_actual_profile_wire_compositions_pay_entire_catalog_feedback_request",
-    "tests/memory/test_v13_2_public_memory_contracts.py::test_nonempty_legacy_material_catalog_and_stored_cache_bytes"
+    "tests/memory/test_v13_2_public_memory_contracts.py::test_nonempty_current_default_material_catalog_and_stored_cache_bytes",
+    "tests/integrations/test_amem_contracts.py::test_author_formation_evolution_consolidation_expansion_and_exact_reopen",
+    "tests/integrations/test_amem_contracts.py::test_partial_embedding_failure_and_pending_reopen_never_repeat_callbacks"
   ],
-  "local_artifact_collected_nodes": 45,
-  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets; S3 exact SDK golden replay additionally requires the frozen existing Mem0 dependency/spaCy/BM25 cache cohort and pinned SimpleMem source/dependency cohort, with MockHTTP and temporary databases; v13.2 compact and exact material/HTTP cost checks explicitly retain the pinned Qwen tokenizer/template; portable entry mechanics use generated synthetic tokenizers.",
+  "local_artifact_collected_nodes": 47,
+  "local_artifact_owner": "preserved ignored v7 freeze, pinned local MERIT source and private arc/world; pinned local Qwen Host tokenizer/template for the native capacity test; run these tests only with those assets; S3 exact SDK golden replay additionally requires the frozen existing Mem0 dependency/spaCy/BM25 cache cohort and pinned SimpleMem source/dependency cohort, with MockHTTP and temporary databases; v13.2 compact and exact material/HTTP cost checks explicitly retain the pinned Qwen tokenizer/template; portable entry mechanics use generated synthetic tokenizers. A-MEM author algorithm checks require the pinned external author checkout and use synthetic callbacks only.",
   "integration_tests": [],
   "simplemem_source_prepare": "tools/prepare_simplemem_text_source.py --prepare",
   "simplemem_dependencies": "data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt",

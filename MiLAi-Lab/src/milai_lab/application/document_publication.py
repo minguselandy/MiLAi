@@ -2,12 +2,11 @@
 
 Publication is a durable audience-specific artifact, not a renamed label. A
 draft edit invalidates its approval; every mutation checks the actual current
-version/digest. Public history and discovery preserve older versions and effects.
+version. Public history and discovery preserve older versions and effects.
 """
 
 from __future__ import annotations
 
-import hashlib
 import json
 import sqlite3
 import uuid
@@ -60,10 +59,6 @@ DOCUMENT_EFFECTS = {
 }
 
 
-def content_digest(content: str) -> str:
-    return hashlib.sha256(content.encode()).hexdigest()
-
-
 def document_sources(op: dict[str, Any]) -> list[str]:
     value = op.get("document_from")
     return value if isinstance(value, list) else [value] if isinstance(value, str) else []
@@ -107,9 +102,12 @@ class DocumentPublicationWorld(ApplicationWorld):
             )
 
     def _document(self, owner: str, title: str) -> sqlite3.Row | None:
-        return cast(sqlite3.Row | None, self.conn.execute(
-            "SELECT * FROM documents WHERE user_id=? AND title=?", (owner, title)
-        ).fetchone())
+        return cast(
+            sqlite3.Row | None,
+            self.conn.execute(
+                "SELECT * FROM documents WHERE user_id=? AND title=?", (owner, title)
+            ).fetchone(),
+        )
 
     @contextmanager
     def _transaction(self) -> Iterator[None]:
@@ -146,40 +144,33 @@ class DocumentPublicationWorld(ApplicationWorld):
             )
         ]
         approval = next(
-            (
-                value
-                for value in approvals
-                if value["document_version"] == version
-                and value["content_digest"] == row["content_digest"]
-            ),
+            (value for value in approvals if value["document_version"] == version),
             None,
         )
-        current = [
-            value
-            for value in publications
-            if value["document_version"] == version
-            and value["content_digest"] == row["content_digest"]
-        ]
+        current = [value for value in publications if value["document_version"] == version]
         return {
             "document_id": document_id,
             "title": row["title"],
             "content": row["content"],
             "document_version": version,
-            "content_digest": row["content_digest"],
             "approval_status": "approved"
             if approval
             else "invalidated"
             if approvals
             else "not_approved",
-            "approved_digest": approval["content_digest"] if approval else "",
-            "approved_version": approval["document_version"] if approval else None,
+            "approved_version": approval["document_version"] if approval else 0,
             "publication_status": "published" if current else "not_published",
-            "published_digest": current[-1]["content_digest"] if current else "",
-            "published_version": current[-1]["document_version"] if current else None,
+            "published_version": current[-1]["document_version"] if current else 0,
             "audience": current[-1]["audience"] if current else "",
-            "versions": versions,
-            "approvals": approvals,
-            "publications": publications,
+            "versions": [
+                {k: v for k, v in item.items() if k != "content_digest"} for item in versions
+            ],
+            "approvals": [
+                {k: v for k, v in item.items() if k != "content_digest"} for item in approvals
+            ],
+            "publications": [
+                {k: v for k, v in item.items() if k != "content_digest"} for item in publications
+            ],
         }
 
     def _result(self, ok: bool, status: str, row: sqlite3.Row | None, **extra: Any) -> str:
@@ -189,7 +180,7 @@ class DocumentPublicationWorld(ApplicationWorld):
     def _version_error(row: sqlite3.Row, version: int, digest: str) -> str | None:
         if type(version) is not int or version != row["document_version"]:
             return "stale_document_version"
-        return "content_digest_conflict" if digest != row["content_digest"] else None
+        return None
 
     def create_or_update_draft(
         self,
@@ -209,12 +200,12 @@ class DocumentPublicationWorld(ApplicationWorld):
             return self._result(False, "invalid_arguments", None)
         row = self._document(owner, title)
         if row is None:
-            if type(version) is not int or version != 0 or digest != "":
+            if type(version) is not int or version != 0:
                 return self._result(False, "stale_document_version", None, title=title)
             document_id, next_version = "DOC-" + str(uuid.uuid4()), 1
             self.conn.execute(
                 "INSERT INTO documents VALUES(?,?,?,?,?,?)",
-                (document_id, owner, title, next_version, content, content_digest(content)),
+                (document_id, owner, title, next_version, content, ""),
             )
             status = "draft_created"
         else:
@@ -226,7 +217,7 @@ class DocumentPublicationWorld(ApplicationWorld):
             self.conn.execute(
                 "UPDATE documents SET document_version=?,content=?,content_digest=? "
                 "WHERE document_id=?",
-                (next_version, content, content_digest(content), document_id),
+                (next_version, content, "", document_id),
             )
             status = "draft_updated"
         self.conn.execute(
@@ -235,7 +226,7 @@ class DocumentPublicationWorld(ApplicationWorld):
                 document_id,
                 next_version,
                 content,
-                content_digest(content),
+                "",
                 origin,
                 datetime.now(UTC).isoformat(),
             ),
@@ -250,7 +241,7 @@ class DocumentPublicationWorld(ApplicationWorld):
             )
 
     def approve_document_version(
-        self, user_id: str, title: str, document_version: int, content_digest: str
+        self, user_id: str, title: str, document_version: int, content_digest: str = ""
     ) -> str:
         with self._transaction():
             row = self._document(user_id, title)
@@ -265,14 +256,19 @@ class DocumentPublicationWorld(ApplicationWorld):
                 (
                     row["document_id"],
                     document_version,
-                    content_digest,
+                    "",
                     datetime.now(UTC).isoformat(),
                 ),
             )
             return self._result(True, "document_approved", row)
 
     def publish_approved_document(
-        self, user_id: str, title: str, document_version: int, content_digest: str, audience: str
+        self,
+        user_id: str,
+        title: str,
+        document_version: int,
+        content_digest: str = "",
+        audience: str = "",
     ) -> str:
         with self._transaction():
             row = self._document(user_id, title)
@@ -288,9 +284,7 @@ class DocumentPublicationWorld(ApplicationWorld):
                     False, "stale_approval" if state["approvals"] else "approval_required", row
                 )
             if any(
-                value["document_version"] == document_version
-                and value["content_digest"] == content_digest
-                and value["audience"] == audience
+                value["document_version"] == document_version and value["audience"] == audience
                 for value in state["publications"]
             ):
                 return self._result(False, "already_published", row)
@@ -304,7 +298,7 @@ class DocumentPublicationWorld(ApplicationWorld):
                 (
                     row["document_id"],
                     document_version,
-                    content_digest,
+                    "",
                     audience,
                     row["content"],
                     datetime.now(UTC).isoformat(),
@@ -408,17 +402,11 @@ def document_schemas() -> list[dict[str, Any]]:
             }
             required.append("content")
         if name != "get_document_status":
-            properties.update(
-                document_version={"type": "integer", "minimum": 0},
-                content_digest={"type": "string"},
-            )
+            properties.update(document_version={"type": "integer", "minimum": 0})
             if name == "create_or_update_draft":
-                (
-                    properties["document_version"]["default"],
-                    properties["content_digest"]["default"],
-                ) = 0, ""
+                properties["document_version"]["default"] = 0
             else:
-                required.extend(["document_version", "content_digest"])
+                required.append("document_version")
         if name == "publish_approved_document":
             properties["audience"] = {
                 "type": "string",
@@ -427,19 +415,23 @@ def document_schemas() -> list[dict[str, Any]]:
             required.append("audience")
         descriptions = {
             "create_or_update_draft": (
-                "Save an actual draft. Create with version0/empty digest; edit using actual "
-                "observed current version/digest. Edits invalidate approval; unchanged body "
-                "has no new version."),
+                "Save an actual draft. Create with version0; edit using actual "
+                "observed current version. Edits invalidate approval; unchanged body "
+                "has no new version."
+            ),
             "approve_document_version": (
-                "Approve exactly the observed current document version/digest. Approval "
-                "does not publish. A stale version/digest is rejected."),
+                "Approve exactly the observed current document version. Approval "
+                "does not publish. A stale version is rejected."
+            ),
             "publish_approved_document": (
-                "Publish the approved current version/digest to the authorized audience. "
+                "Publish the approved current version to the authorized audience. "
                 "Stale/missing approval, unavailable publication or a duplicate returns no "
-                "effect; draft/approval may remain."),
+                "effect; draft/approval may remain."
+            ),
             "get_document_status": (
-                "Read actual current draft, digest, approval/publication and original "
-                "version/approval/audience publication history for this owner. No mutation."),
+                "Read actual current draft, approval/publication and original "
+                "version/approval/audience publication history for this owner. No mutation."
+            ),
         }
         result.append(
             {
@@ -484,19 +476,14 @@ def validate_document_operation(op: dict[str, Any]) -> None:
     if not sources and tool != "get_document_status":
         if tool != "create_or_update_draft":
             raise ValueError("DOCUMENT_MUTATION_REQUIRES_OBSERVATION")
-        keys |= {"document_version", "content_digest"}
-        if (
-            type(args.get("document_version")) is not int
-            or args["document_version"] != 0
-            or args.get("content_digest") != ""
-        ):
+        keys |= {"document_version"}
+        if type(args.get("document_version")) is not int or args["document_version"] != 0:
             raise ValueError("DOCUMENT_CREATE_REQUIRES_ZERO_VERSION")
     if (
         set(args) != keys
         or args.get("title") != target["title"]
         or any(
-            type(args.get(key)) is not str or not args[key]
-            for key in keys - {"document_version", "content_digest"}
+            type(args.get(key)) is not str or not args[key] for key in keys - {"document_version"}
         )
     ):
         raise ValueError("DOCUMENT_AUTHORITY_ARGUMENTS_INVALID")
@@ -517,10 +504,7 @@ def validate_document_operation(op: dict[str, Any]) -> None:
 
 def publication_matches(observation: dict[str, Any], args: dict[str, Any]) -> bool:
     return any(
-        all(
-            value.get(key) == args.get(key)
-            for key in ("document_version", "content_digest", "audience")
-        )
+        all(value.get(key) == args.get(key) for key in ("document_version", "audience"))
         for value in observation.get("publications", [])
     )
 
@@ -537,9 +521,7 @@ def document_recovery_effect(
     if observation.get("status") != "found" or not matched:
         return "unknown"
     args = original["args"]
-    same = all(
-        observation.get(key) == args.get(key) for key in ("document_version", "content_digest")
-    )
+    same = observation.get("document_version") == args.get("document_version")
     if original["name"] == "publish_approved_document":
         if publication_matches(observation, args):
             return "confirmed"
@@ -552,10 +534,9 @@ def document_recovery_effect(
         if same and observation.get("approval_status") == "approved":
             return "confirmed"
         return "none" if same and exclusive else "unknown"
-    wanted = content_digest(args["content"])
     if (
         observation.get("document_version") == args.get("document_version", 0) + 1
-        and observation.get("content_digest") == wanted
+        and observation.get("content") == args["content"]
     ):
         return "confirmed"
     return "none" if same and exclusive else "unknown"

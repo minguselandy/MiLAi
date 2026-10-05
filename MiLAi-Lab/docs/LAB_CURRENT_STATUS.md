@@ -1,5 +1,16 @@
 # MiLAi Lab 当前状态
 
+更新：2026-10-05。当前执行 [MiLAi-Edit 原计划](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md)，
+从 PR82 main `fc1c6c9` 隔离开发；按用户指令仅用现有 Qwen3.6 家族。
+08:22 的发布快照中 B0/B1 各完成 277 个会话，B2 完成 46/277，M 未开始。
+工程实现与准备工作已完成多项检查，四组配对分析、E2–E5 实际实验和最终贡献结论仍未完成。
+实验继续运行，发布不表示暂停或合并。完整指标、失败、消耗和后续工作见
+[本次进度报告](MILAI_EDIT_CHECKPOINT_20261005.md)、
+[结构化快照](../data/manifests/milai-edit-progress-20261005.json)与
+[执行记录](MILAI_EDIT_PROGRESS.md)。Product 仍为 NO_GO。
+
+## 封存的 r52 状态记录
+
 更新：2026-10-04。PR81合并后，原v13.5规定的同版本开发实验及140项终态回填已执行。**功能验收PARTIAL，无稳定推荐配置，Product NO_GO。** [终态报告](V13_5_R52_TERMINAL_REPORT.md)说明已验证路径和仍失败的语义／协议边界。
 
 | 范围 | 当前证据与限制 |

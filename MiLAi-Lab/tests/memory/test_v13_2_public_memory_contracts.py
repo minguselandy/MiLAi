@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import itertools
 import json
 import runpy
 from contextlib import contextmanager
@@ -351,9 +352,9 @@ def test_real_entry_profiles_start_writer_and_freeze_predispatch(
     assert any("json_dictionary_v1" in json.dumps(r) for r in generation)
     before = len(requests)
     drift = read_json(root / "input-freeze.json")
-    drift["observation_capture_feedback"] = "legacy"
+    drift["config"]["observation_capture_feedback"] = "unsupported-profile"
     write_json(root / "input-freeze.json", drift)
-    with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+    with pytest.raises(ValueError, match="PROFILE_INVALID"):
         runner._frozen(root)
     assert len(requests) == before
     proof(tmp_path, "actual-entry.json", {"freeze": frozen, "requests": requests, "result": result})
@@ -362,28 +363,30 @@ def test_real_entry_profiles_start_writer_and_freeze_predispatch(
 @pytest.mark.parametrize("mode", ["native", "json_action"])
 @pytest.mark.parametrize("model_class", [VLLMChatModel, LangMemRecipeChatModel])
 @pytest.mark.parametrize("explicit_legacy", [False, True])
-def test_eight_default_memory_graph_wire_and_receipt_bytes(
+def test_eight_default_and_explicit_legacy_graph_wire_and_receipt_bytes(
     tmp_path: Path,
     mode: str,
     model_class: Any,
     explicit_legacy: bool,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    old_factory = runpy.run_path(str(ROOT / "base-source/src/milai_lab/memory/service_tools.py"))[
-        "create_service_tools"
-    ]
-    old_recipe = runpy.run_path(str(ROOT / "base-source/src/milai_lab/methods/grounded_memory.py"))[
-        "GroundedMemoryRecipe"
-    ]
+    # Compare current defaults with their explicit legacy opt-outs. Historical
+    # source bundles require their own contracts and are not mixed into this run.
+    old_factory, old_recipe = create_service_tools, GroundedMemoryRecipe
     comparisons = []
     for identity, factory, recipe_type in [
         ("base", old_factory, old_recipe),
         ("current", create_service_tools, GroundedMemoryRecipe),
     ]:
+        ids = itertools.count(1)
+        monkeypatch.setattr(
+            service_module.uuid, "uuid4", lambda ids=ids: "issued-" + str(next(ids))
+        )
         path = tmp_path / identity
         path.mkdir()
         options = (
             {"tool_parameter_contract": "legacy", "observation_capture_feedback": "legacy"}
-            if explicit_legacy
+            if identity == "current" and explicit_legacy
             else {}
         )
         with SqliteStore.from_conn_string(str(path / "store.sqlite")) as store:
@@ -614,7 +617,7 @@ def test_qwen_exact_dictionary_same_selected_units_budget_and_delivery_limits(
             assert json.dumps(restored, ensure_ascii=False, separators=(",", ":")) == json.dumps(
                 state["packet"], ensure_ascii=False, separators=(",", ":")
             )
-            assert restored["packet_hash"] == state["packet_hash"]
+            assert restored["packet_id"] == state["packet_id"]
         originals = recipe._units(state["selected"], service.observations())
         if scenario == "conflict":
             fields = [u for u in originals if u["type"] == "observation_field"]
@@ -896,9 +899,9 @@ def test_actual_p5_profile_resume_preserves_unknown_and_frozen_identity(
         == 1
     )
     altered = read_json(root / "input-freeze.json")
-    altered["config"]["memory_material_profile"] = "compact_v1"
+    altered["config"]["tool_parameter_contract"] = "unsupported-profile"
     write_json(root / "input-freeze.json", altered)
-    with pytest.raises(ValueError, match="FROZEN_CHANGED"):
+    with pytest.raises(ValueError, match="PROFILE_INVALID"):
         p5._frozen(root)
     proof(
         tmp_path,
@@ -940,13 +943,17 @@ def test_exact_display_selected_page_reopen_keeps_actual_members_and_paid_range(
         recipe = GroundedMemoryRecipe(
             service, capacity.text_tokens, material_profile="compact_exact_v1"
         )
-        state = READ["packet"](recipe, budget=2048)
+        for delivery_budget in (1400, 1000, 800):
+            state = READ["packet"](recipe, budget=delivery_budget)
+            if state["packet"]["coverage"]["read_more"] is not None:
+                break
+        assert capacity.text_tokens(state["material"]) <= delivery_budget
         token = READ["cursor"](state)
         frame = json.loads(state["material"][state["material"].index("{") :])
         assert decode(frame) == state["packet"]
         page = recipe.selected_page_tool(token, config)
         assert page["retrieval_calls"] == 0 and page["current_verified"] is False
-        assert page["selection_hash"] == state["selected_snapshot_hash"]
+        assert page["snapshot_id"] == state["selected_snapshot_id"]
         proof(
             tmp_path,
             "exact-selected-page.json",
@@ -966,7 +973,10 @@ def test_exact_display_selected_page_reopen_keeps_actual_members_and_paid_range(
             AssertionError("no implicit retrieval")
         )
         resumed = recipe.selected_page_tool(token, config)
-        assert resumed == page
+        assert resumed["packet_id"] != page["packet_id"]
+        assert {key: value for key, value in resumed.items() if key != "packet_id"} == {
+            key: value for key, value in page.items() if key != "packet_id"
+        }
 
 
 @pytest.mark.parametrize(
@@ -1077,22 +1087,22 @@ def test_four_actual_profile_wire_compositions_pay_entire_catalog_feedback_reque
 
 @pytest.mark.parametrize("material_profile", ["full_v1", "compact_v1"])
 @pytest.mark.local_artifacts
-def test_nonempty_legacy_material_catalog_and_stored_cache_bytes(
+def test_nonempty_current_default_material_catalog_and_stored_cache_bytes(
     tmp_path: Path,
     material_profile: str,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    old_recipe = runpy.run_path(str(ROOT / "base-source/src/milai_lab/methods/grounded_memory.py"))[
-        "GroundedMemoryRecipe"
-    ]
-    old_factory = runpy.run_path(str(ROOT / "base-source/src/milai_lab/memory/service_tools.py"))[
-        "create_service_tools"
-    ]
+    old_recipe, old_factory = GroundedMemoryRecipe, create_service_tools
     capacity = HostCapacity(READ["capacity_config"]())
     pairs = []
     for name, recipe_type, factory in [
         ("base", old_recipe, old_factory),
         ("current", GroundedMemoryRecipe, create_service_tools),
     ]:
+        ids = itertools.count(1)
+        monkeypatch.setattr(
+            service_module.uuid, "uuid4", lambda ids=ids: "issued-" + str(next(ids))
+        )
         path = tmp_path / name
         path.mkdir()
         with READ["opened"](path, a=False, b=False) as service:
@@ -1104,7 +1114,7 @@ def test_nonempty_legacy_material_catalog_and_stored_cache_bytes(
             recipe = recipe_type(service, capacity.text_tokens, material_profile=material_profile)
             state = READ["packet"](recipe, budget=2048)
             assert state["material"] and state["packet"]["items"]
-            cache_key = "packet:" + service_module._hash(["s", "u"])
+            cache_key = "packet:" + service_module.reference_key(["s", "u"])
             cache = service.store.get(recipe.namespace, cache_key).value
             pairs.append(
                 {
@@ -1113,7 +1123,7 @@ def test_nonempty_legacy_material_catalog_and_stored_cache_bytes(
                     "catalog": [convert_to_openai_tool(t) for t in factory(service)],
                 }
             )
-    for key in ["material", "packet", "packet_hash", "selected", "selected_inventory"]:
+    for key in ["material", "packet", "packet_id", "selected", "selected_inventory"]:
         assert pairs[0]["state"][key] == pairs[1]["state"][key]
     stable_cache = [
         {k: v for k, v in item["cache"].items() if k not in {"cpu_ns", "wall_ns"}} for item in pairs

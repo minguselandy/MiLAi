@@ -1,3 +1,33 @@
+# 2026-10-04 MiLAi-Edit execution
+
+The current user activated docs/MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md in full.
+Execute P0-P5 and E0-E5 from PR82 main fc1c6c9 in this isolated worktree. The new
+plan supersedes historical phase scheduling and SHA/content-fingerprint gates for
+this work. Start with actual public benchmark predictions and official scoring;
+then remove self-authored digest gates from the shared normal path using immutable
+versions, ordinary IDs and existing transactions. Do not replace SHA with another
+fingerprint, duplicate MemoryService, add a review platform or weaken ownership,
+revision, actual-effect and recovery semantics. Preserve all historical results.
+Root owns serial actual model HTTP, continuous accounting, dataset splits and
+evaluation. Retain the existing delegated source-owner arrangement for memory and
+method changes; do not give that owner future questions, reference memories, gold,
+scorer labels or reserved-source contents. Use the existing services and installed
+environments; no new model deployment. Product/Archive and old worktrees stay intact.
+The user's subsequent explicit instruction is: do not connect another model family;
+complete the plan with one model family. Cross-family confirmation is therefore
+superseded by single-family confirmation and a stated limit on generalization.
+All six plan deliverables, attribution control B2, untuned-source confirmation,
+functional regressions and contribution draft remain required. An
+unavailable resource is reported precisely rather than silently dropping its scope.
+On 2026-10-05 the user explicitly requested: “整理当前实验进度，提交到github上”.
+Publish the current implementation and an accurate progress checkpoint to GitHub,
+with a reviewable draft PR and CI verification. This does not pause the experiment
+or authorize a merge. Keep serial E1 running and preserve its frozen source copy;
+raw corpora, databases, model files and request logs stay ignored. All remaining
+experiment and reporting requirements above remain active.
+
+---
+
 # 2026-10-04 post-merge functional development
 
 The user explicitly requested continuing the original v13.5 plan after GitHub merge.

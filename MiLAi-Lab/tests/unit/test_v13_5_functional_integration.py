@@ -6,7 +6,7 @@ All ledgers and tokenizer inputs are isolated under pytest's temporary path.
 
 from __future__ import annotations
 
-import hashlib
+import importlib.util
 import json
 import socket
 from dataclasses import asdict
@@ -66,6 +66,7 @@ def prepared(
     catalog_feedback: bool = False,
     explicit_reads: bool = False,
     memory_continuation: bool = False,
+    memory_method: str = "functional_v1",
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -86,6 +87,7 @@ def prepared(
     write_json(budget_path, budget.state)
     settings = {
         "profile": "functional_v1", "host": asdict(host),
+        "memory_method": memory_method,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v4" if format_failure_receipts else
@@ -109,9 +111,7 @@ def prepared(
         "session_events_v1" if current_delivery else "disabled",
         "business_completion": "observed_continuation_v1" if business_feedback else "disabled",
         "capacity": {"model": host.model, "tokenizer_path": str(directory),
-            "tokenizer_files_sha256": {
-                name: hashlib.sha256((directory / name).read_bytes()).hexdigest()
-                for name in ("tokenizer.json", "tokenizer_config.json", "chat_template.jinja")},
+            "capacity_version": "synthetic-integration-v1",
             "context_tokens": 32768, "output_tokens": 4096, "batch_source_tokens": 8192,
             "enable_thinking": phase_thinking},
         "budget_path": str(budget_path), "max_calls_per_message": 24,
@@ -225,6 +225,207 @@ def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
     return {"role": "assistant", "content": None, "tool_calls": [{
         "type": "function", "id": call_id, "function": {
             "name": name, "arguments": json.dumps(args)}}]}
+
+
+@pytest.mark.parametrize("label_available", [True, False])
+@pytest.mark.parametrize("arm,method,representation", [
+    ("M", "milai_edit_m_v1", "conditioned_v1"),
+    ("B1", "milai_edit_b1_v1", "plain_v1"),
+])
+def test_edit_uses_actual_business_delivery_on_the_normal_host(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, label_available: bool,
+    arm: str, method: str, representation: str,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+                    memory_method=method)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, business=True)
+        if ordinal == 2:
+            schema = next(t["function"]["parameters"] for t in wire["tools"]
+                          if t["function"]["name"] == "save_memory")
+            assert "units" in schema["properties"]
+            return native_call("reserve_and_label", "reserve", item_key="edit receipt item",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == 3:
+            observed = actual_tool_receipt(wire)
+            assert observed["business_outcome"] == ("confirmed" if label_available else "partial")
+            handles = [r["fragment_handle"] for r in observed["source_fragment_index"]]
+            claim = ("The item is reserved and labeled." if label_available
+                     else "The item is reserved; labeling failed.")
+            return native_call("save_memory", "save", units=[
+                {"text": claim, "role": "content", "evidence": handles}])
+        assert ordinal == 4
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "Saved the actual business result."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    kwargs = {"initial_world": {"label_available": label_available}}
+    result = message(root, **kwargs)
+    assert result["status"] == "COMPLETED", result
+    assert len(wires) == 4 and len(result["world"]["world"]["attempts"]) == 1
+    semantic = [r for r in result["records"] if r["value"].get("method_arm") == arm]
+    assert len(semantic) == 1
+    value = semantic[0]["value"]
+    assert value["basis"] == "tool_observation"
+    assert value["edit_state"]["representation"] == representation
+    assert all(ref["source_ref"] in value["source_refs"]
+               for unit in value["edit_state"]["units"] for ref in unit["evidence_refs"])
+    assert message(root, **kwargs) == result and len(wires) == 4
+
+
+@pytest.mark.parametrize("boundary,happened", [
+    ("after_journal_intent_before_native", False),
+    ("after_native_before_journal_complete", True),
+])
+@pytest.mark.parametrize("arm,method", [
+    ("M", "milai_edit_m_v1"), ("B1", "milai_edit_b1_v1"),
+])
+def test_edit_recovery_supports_only_the_actual_discovery_body(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, boundary: str, happened: bool,
+    arm: str, method: str,
+) -> None:
+    root = prepared(tmp_path, memory_method=method)
+    control = {"one_shot_fault": {"message_index": 0, "boundary": boundary,
+                                  "target_operation": "reserve_and_label", "occurrence": 1}}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return tool("reserve_and_label", item_key="edit recovery item", quantity=1,
+                        destination="local", packing="box")
+        if ordinal == 2:
+            receipt = actual_tool_receipt(wire)
+            assert receipt["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+            assert receipt["original_receipt"] is None
+            assert receipt["observed_effect"] == ("confirmed" if happened else "none")
+            query = receipt["query_source"]
+            return tool("save_memory", units=[{
+                "text": ("The item is reserved and labeled." if happened
+                         else "Lookup found no reservation for the item."),
+                "role": "content",
+                "evidence": [r["fragment_handle"] for r in query["source_fragment_index"]],
+            }])
+        assert ordinal == 3 and actual_tool_receipt(wire)["status"] == "committed"
+        return {"answer": "Saved the observed state."}
+
+    wires = scripted(monkeypatch, reply)
+    first = message(root, evaluator_control=control)
+    assert first["status"] == "UNKNOWN", first
+    final = message(root, evaluator_control=control, resume=True)
+    assert final["status"] == "COMPLETED", final
+    assert len(wires) == 3
+    assert len(final["world"]["world"]["attempts"]) == int(happened)
+    value = next(r["value"] for r in final["records"] if r["value"].get("method_arm") == arm)
+    discoveries = {s["event_id"] for s in final["sources"] if s["origin"] == "get_reservation"}
+    assert set(value["source_refs"]) == discoveries
+    pending = [r for r in final["world"]["journal"].values()
+               if r.get("name") == "reserve_and_label"]
+    assert len(pending) == 1 and pending[0]["status"] == "pending"
+    assert "result" not in pending[0]
+
+
+@pytest.mark.parametrize("arm,method", [
+    ("M", "milai_edit_m_v1"), ("B1", "milai_edit_b1_v1"),
+])
+def test_edit_normal_host_replaces_on_same_id_and_preserves_other_support(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, method: str,
+) -> None:
+    root = prepared(tmp_path, native=True, memory_method=method)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 3}:
+            packet = materials(wire)
+            current = [u["fragment_handle"] for u in packet["items"]
+                       if u["type"] == "fragment" and u["input_relation"] == "current_request"]
+            if ordinal == 1:
+                return native_call("save_memory", "save", units=[
+                    {"text": "Use unit A.", "role": "content", "evidence": current},
+                    {"text": "Retain the weekly review.", "role": "content", "evidence": current},
+                ], scope={"project": "local sample"})
+            target = next(u for u in packet["items"]
+                          if u["type"] == "record" and u["content"] == "Use unit A.")
+            assert target["method_arm"] == arm
+            return native_call("update_memory", "replace", read_handle=target["read_handle"],
+                               edits=[{"operation": "replace",
+                                       "target_unit": target["edit_unit"]["unit_id"],
+                                       "text": "Use unit B.", "evidence": current}])
+        assert ordinal in {2, 4} and actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "The requested memory change is saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="b", owner="alice", session="s")
+    saved = functional.message(root, **common, message_id="initial",
+        content="Remember: for the local sample use unit A and retain the weekly review.")
+    args = dict(message_id="replacement",
+                content="For that same local sample use unit B instead; keep the weekly review.")
+    updated = functional.message(root, **common, **args)
+    assert saved["status"] == updated["status"] == "COMPLETED", updated
+    assert len(wires) == 4 and len(updated["records"]) == 1
+    original = saved["records"][0]
+    current = updated["records"][0]
+    assert current["id"] == original["id"]
+    assert current["value"]["revision"] == 2
+    assert current["value"]["scope"] == original["value"]["scope"]
+    old_units = original["value"]["edit_state"]["units"]
+    units = current["value"]["edit_state"]["units"]
+    assert units[0]["unit_id"] == old_units[0]["unit_id"]
+    assert units[0]["text"] == "Use unit B." and units[1:] == old_units[1:]
+    assert {ref["source_ref"] for ref in units[0]["evidence_refs"]} == {
+        updated["capture"]["source_ref"]}
+    assert functional.message(root, **common, **args) == updated and len(wires) == 4
+
+
+@pytest.mark.parametrize("method", ["milai_edit_m_v1", "milai_edit_b1_v1"])
+@pytest.mark.parametrize("business", [False, True])
+def test_current_host_outputs_reach_existing_offline_evaluator_without_digest_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, method: str, business: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, memory_method=method,
+                    direct_response=True, phase_thinking=True, current_delivery=True)
+    content = ("Reserve the local box and save the actual result." if business else
+               "Remember: the local marker is blue.")
+    freeze = read_json(root / "input-freeze.json")
+    freeze["fixture"] = {"cases": [{"case_id": "b", "owner": "alice",
+        "messages": [{"session_id": "s", "message_id": "save", "content": content}]}]}
+    freeze["fixture_version"] = "mechanical-evaluator-integration-v1"
+    write_json(root / "input-freeze.json", freeze)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if business and ordinal == 1:
+            return native_call("reserve_and_label", "reserve", item_key="evaluator box",
+                               quantity=1, destination="local", packing="box")
+        if ordinal == (2 if business else 1):
+            handles = ([r["fragment_handle"]
+                        for r in actual_tool_receipt(wire)["source_fragment_index"]] if business
+                       else [u["fragment_handle"] for u in materials(wire)["items"]
+                             if u["type"] == "fragment"])
+            return native_call("save_memory", "save", units=[{
+                "text": "The box is reserved and labeled." if business else "The marker is blue.",
+                "role": "content", "evidence": handles}])
+        assert ordinal == (3 if business else 2)
+        assert actual_tool_receipt(wire)["status"] == "committed"
+        return {"role": "assistant", "content": "The actual result is saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    executed = functional.step(root, "b", 0)
+    assert executed["status"] == "COMPLETED", executed
+    assert executed["finalization"]["protocol"] == (
+        "receipt_business_response_v1" if business else "agent_response_v1")
+    specification = importlib.util.spec_from_file_location(
+        "current_functional_evaluator", Path(__file__).parents[2] / "tools/v13_5_evaluate.py")
+    assert specification is not None and specification.loader is not None
+    evaluator = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(evaluator)
+    result = evaluator.evaluate(root, cohort="L2")
+    pack = result["case_packs"][0]
+    assert pack["execution_status"] == "COMPLETED" and pack["acceptance_evidence_complete"]
+    assert pack["semantic_verdict"] == "UNREVIEWED"
+    attempt = pack["messages"][0]["attempts"][0]
+    assert attempt["actual_http_linkage"]["status"] == "PASS"
+    assert attempt["quote_check"]["status"] == "PASS"
+    assert result["attempt_ledger_delta_sum"]["generation.known_tokens"] == 12 * len(wires)
+    assert "sha256" not in json.dumps(result)
 
 
 def test_focused_request_mode_removes_mutations_and_survives_resume(
@@ -1045,10 +1246,10 @@ def test_unified_business_receipt_exposes_real_handles_for_immediate_save(
         if workflow == "document":
             if ordinal == 1:
                 return tool("create_or_update_draft", title="mechanical draft",
-                            content=document_body, document_version=0, content_digest="")
+                            content=document_body, document_version=0)
             if ordinal in {2, 3}:
                 observed = actual_tool_receipt(wire)["receipt"]
-                bound = {k: observed[k] for k in ("title", "document_version", "content_digest")}
+                bound = {k: observed[k] for k in ("title", "document_version")}
                 if ordinal == 2:
                     return tool("approve_document_version", **bound)
                 return tool("publish_approved_document", **bound, audience="local audience")
@@ -1404,11 +1605,10 @@ def test_document_w1_continues_memory_with_concrete_publish_permission_and_no_re
                     'publish_approved_document'] if ordinal == 1 else ['publish_approved_document'])
         if ordinal == 2:
             return native_call('create_or_update_draft', 'draft', title='local guide',
-                               content='Reviewed local instructions.', document_version=0,
-                               content_digest='')
+                               content='Reviewed local instructions.', document_version=0)
         if ordinal in {3, 4}:
             receipt = actual_tool_receipt(wire)['receipt']
-            args = {k: receipt[k] for k in ('title', 'document_version', 'content_digest')}
+            args = {k: receipt[k] for k in ('title', 'document_version')}
             if ordinal == 4:
                 args['audience'] = 'local audience'
             return native_call('approve_document_version' if ordinal == 3
@@ -1910,7 +2110,7 @@ def test_document_receipt_response_reports_distinct_draft_approval_and_publicati
                                content='Use the side entrance.')
         if ordinal in {2, 3}:
             receipt = actual_tool_receipt(wire)['receipt']
-            args = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+            args = {k: receipt[k] for k in ['title', 'document_version']}
             if ordinal == 3:
                 args['audience'] = 'local review team'
             return native_call('approve_document_version' if ordinal == 2
@@ -2031,7 +2231,7 @@ def test_publish_only_permission_prevents_status_summary_from_editing_document(
         if ordinal == 3:
             receipt = actual_tool_receipt(wire)['receipt']
             return native_call('approve_document_version', 'approve', **{
-                k: receipt[k] for k in ['title', 'document_version', 'content_digest']})
+                k: receipt[k] for k in ['title', 'document_version']})
         if ordinal in {4, 9}:
             return {'role': 'assistant', 'content': 'Actual operations reported.'}
         names = {t['function']['name'] for t in wire['tools']}
@@ -2040,7 +2240,7 @@ def test_publish_only_permission_prevents_status_summary_from_editing_document(
         if ordinal == 6:
             return native_call('get_document_status', 'query', title='Stable document')
         receipt = actual_tool_receipt(wire)['receipt']
-        bound = {k: receipt[k] for k in ['title', 'document_version', 'content_digest']}
+        bound = {k: receipt[k] for k in ['title', 'document_version']}
         if ordinal == 7:
             return native_call('publish_approved_document', 'publish',
                                audience='local group', **bound)
@@ -3512,7 +3712,8 @@ def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
 ) -> None:
     from milai_lab.memory.functional_state import FunctionalIntegrityError, FunctionalRejection
 
-    evidence = {'changes': [{'field': 'content'}], 'binding': {'owner': 'alice', 'message': 'm'},
+    evidence = {'proposal_id': 'synthetic-proposal-v1', 'changes': [{'field': 'content'}],
+                'binding': {'owner': 'alice', 'message': 'm'},
                 'forget_epoch': 0}
     calls: list[Any] = []
     events: list[Any] = []
@@ -3542,7 +3743,7 @@ def test_support_review_cache_is_bound_and_reopen_does_not_regenerate(
     with pytest.raises(FunctionalIntegrityError, match='BINDING_CHANGED'):
         review(Model(), path, {**evidence, 'forget_epoch': 1}, events.append, comparison=comparison)
     state = read_json(path)
-    state['decision']['field_results'][0]['reason'] = 'Changed after recording.'
+    state['decision']['field_results'][0]['assessment'] = 'invalid-enum'
     write_json(path, state)
     with pytest.raises(FunctionalIntegrityError, match='DECISION_CHANGED'):
         review(Model(), path, evidence, events.append, comparison=comparison)
@@ -3564,7 +3765,8 @@ def test_interrupted_support_review_reservation_is_not_silently_retried(
             calls.append(messages)
             raise OSError('review response lost before persistence')
 
-    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    evidence = {'proposal_id': 'synthetic-proposal-v1', 'changes': [{'field': 'content'}],
+                'binding': {'message': 'm'}}
     path = tmp_path / 'review.json'
     with pytest.raises(OSError):
         review(Interrupted(), path, evidence, lambda event: None, comparison=comparison)
@@ -3663,7 +3865,8 @@ def test_invalid_support_review_never_marks_delivery_or_retries(
             return AIMessage(content='', tool_calls=[{'name': f'review_{review_kind}_support',
                                                      'id': 'invalid', 'args': decision}])
 
-    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    evidence = {'proposal_id': 'synthetic-proposal-v1', 'changes': [{'field': 'content'}],
+                'binding': {'message': 'm'}}
     path = tmp_path / 'review.json'
     with pytest.raises(IncompleteChatResponse,
                        match=f'{review_kind.upper()}_REVIEW_SCHEMA_INVALID'):
@@ -3874,7 +4077,8 @@ def test_support_comparison_invalid_detail_never_commits_or_retries(
                     'unsupported_differences': [], 'reason': 'Matches.',
                     'assessment': 'supported', **changed}]}}])
 
-    evidence = {'changes': [{'field': 'content'}], 'binding': {'message': 'm'}}
+    evidence = {'proposal_id': 'synthetic-proposal-v1', 'changes': [{'field': 'content'}],
+                'binding': {'message': 'm'}}
     path = tmp_path / 'comparison.json'
     with pytest.raises(IncompleteChatResponse, match='FORMATION_REVIEW_SCHEMA_INVALID'):
         functional.review_formation_support(Model(), path, evidence, lambda event: None,

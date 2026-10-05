@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import time
+import uuid
 from collections.abc import Callable
 from contextvars import ContextVar
 from typing import Any
@@ -13,12 +13,10 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, Tool
 from langchain_core.runnables import RunnableConfig
 from pydantic import ValidationError as PydanticValidationError
 
-from milai_lab.baselines.benchmark_memories import raw_chunks, raw_index
 from milai_lab.contracts.public_memory_contracts import nonlegacy as public_nonlegacy
 from milai_lab.contracts.read_protocol import (
     SAVE_GUIDANCE,
     canonical,
-    digest,
     nonlegacy,
     reject,
     snapshot_key,
@@ -32,7 +30,7 @@ from milai_lab.contracts.tool_schema_communication import (
     profile as communication_profile,
 )
 from milai_lab.memory.embeddings import normalized
-from milai_lab.memory.service import MemoryService
+from milai_lab.memory.service import MemoryService, reference_key
 from milai_lab.memory.service_tools import create_service_tools
 from milai_lab.memory.support_display import encode_field_support
 from milai_lab.methods.compact_exact import decode as decode_exact
@@ -73,7 +71,7 @@ def _json(value: Any) -> str:
 
 
 def _hash(value: Any) -> str:
-    return hashlib.sha256(_json(value).encode()).hexdigest()
+    return reference_key(value)
 
 
 class GroundedMemoryRecipe:
@@ -109,6 +107,9 @@ class GroundedMemoryRecipe:
         self._read_context: ContextVar[dict[str, Any] | None] = ContextVar(
             "selected_read_context", default=None
         )
+        self._delivery_ids: ContextVar[dict[str, str] | None] = ContextVar(
+            "grounded_delivery_ids", default=None
+        )
         self.raw_index_storage = raw_index_storage
         self.index_namespace = self.namespace
         if raw_index_storage == "owner_bank_v1":
@@ -118,7 +119,11 @@ class GroundedMemoryRecipe:
             if leading in {"%", "_"}:
                 raise ValueError("V13_RAW_INDEX_BANK_PREFIX_REQUIRES_LITERAL")
             root = "derived-raw-index-v1" if leading != "d" else "separate-raw-index-v1"
-            self.index_namespace = (root, _hash([service.owner, service.namespace]), service.owner)
+            self.index_namespace = (
+                root,
+                reference_key([service.owner, service.namespace]),
+                service.owner,
+            )
         self.policy = {
             **POLICY,
             "representation": representation,
@@ -131,32 +136,45 @@ class GroundedMemoryRecipe:
             self.policy["raw_index_storage"] = raw_index_storage
 
         if material_profile != "full_v1":
-            self.policy.update(material_profile=material_profile,
-                               unit_order="existing selected record identity order; "
-                               "group already selected current/historical units; "
-                               "then fields/sources",
-                               allocation="metadata first; feasible complete bodies by incremental "
-                               "token cost (existing-order ties); remaining equal prefix shares; "
-                               "explicit whole-unit omissions; version-bound prose prefixes")
+            self.policy.update(
+                material_profile=material_profile,
+                unit_order="existing selected record identity order; "
+                "group already selected current/historical units; "
+                "then fields/sources",
+                allocation="metadata first; feasible complete bodies by incremental "
+                "token cost (existing-order ties); remaining equal prefix shares; "
+                "explicit whole-unit omissions; version-bound prose prefixes",
+            )
         if service.support_contract == "direct_support_v1":
             self.policy["support_contract"] = service.support_contract
         if self.tool_schema_communication != "legacy":
             self.policy["tool_schema_communication"] = self.tool_schema_communication
 
-        self.policy.update(public_nonlegacy({
-            "tool_parameter_contract": service.tool_parameter_contract,
-            "observation_capture_feedback": service.observation_capture_feedback,
-        }))
-        self.policy.update(nonlegacy({
-            "memory_read_protocol": service.memory_read_protocol,
-            "tool_read_feedback": service.tool_read_feedback,
-            "tool_save_communication": service.tool_save_communication,
-        }))
+        self.policy.update(
+            public_nonlegacy(
+                {
+                    "tool_parameter_contract": service.tool_parameter_contract,
+                    "observation_capture_feedback": service.observation_capture_feedback,
+                }
+            )
+        )
+        self.policy.update(
+            nonlegacy(
+                {
+                    "memory_read_protocol": service.memory_read_protocol,
+                    "tool_read_feedback": service.tool_read_feedback,
+                    "tool_save_communication": service.tool_save_communication,
+                }
+            )
+        )
 
     def _index_binding(self) -> dict[str, Any]:
-        return {"schema": "owner_bank_raw_index_v1", "owner": self.service.owner,
-                "bank_namespace": list(self.service.namespace),
-                "document_contract": "raw_chunks_current_record_v1:2048:1792"}
+        return {
+            "schema": "owner_bank_raw_index_v1",
+            "owner": self.service.owner,
+            "bank_namespace": list(self.service.namespace),
+            "document_contract": "raw_chunks_current_record_v1:2048:1792",
+        }
 
     def _previous_index(self) -> tuple[dict[str, Any] | None, str]:
         item = self.service.store.get(self.index_namespace, "raw_index")
@@ -171,37 +189,53 @@ class GroundedMemoryRecipe:
         if value.get("status") != "complete":
             return None, "pending_rebuild"
         index = value.get("index")
-        if (not isinstance(index, dict) or value.get("index_sha256") != _hash(index)):
-            return None, "hash_invalid_rebuild"
+        if not isinstance(index, dict):
+            return None, "invalid_index_rebuild"
         return index, "complete_reuse"
 
     def _index_pending(self, reason: str) -> None:
         if self.raw_index_storage != "bank_prefix":
             value = {**self._index_binding(), "status": "pending", "reason": reason}
             self.service.store.put(self.index_namespace, "raw_index", value, index=False)
-            self._emit({"event": "v13_derived_raw_index", **value,
-                        "index_namespace": list(self.index_namespace),
-                        "legacy_inline_removed": False})
+            self._emit(
+                {
+                    "event": "v13_derived_raw_index",
+                    **value,
+                    "index_namespace": list(self.index_namespace),
+                    "legacy_inline_removed": False,
+                }
+            )
 
     def _index_complete(self, index: dict[str, Any]) -> None:
         value = index
         if self.raw_index_storage != "bank_prefix":
-            value = {**self._index_binding(), "status": "complete", "index": index,
-                     "index_sha256": _hash(index)}
+            value = {
+                **self._index_binding(),
+                "status": "complete",
+                "index": index,
+                "index_version": "raw_ranges_v2",
+            }
         self.service.store.put(self.index_namespace, "raw_index", value, index=False)
         if self.raw_index_storage != "bank_prefix":
-            self._emit({"event": "v13_derived_raw_index", **self._index_binding(),
-                        "status": "complete", "index_sha256": value["index_sha256"],
-                        "index_namespace": list(self.index_namespace),
-                        "new_embedding_chunks": index["new_embedding_chunks"],
-                        "legacy_inline_removed": False})
+            self._emit(
+                {
+                    "event": "v13_derived_raw_index",
+                    **self._index_binding(),
+                    "status": "complete",
+                    "index_version": value["index_version"],
+                    "index_namespace": list(self.index_namespace),
+                    "new_embedding_chunks": index["new_embedding_chunks"],
+                    "legacy_inline_removed": False,
+                }
+            )
 
     def _emit(self, value: dict[str, Any]) -> None:
         if self.observer is not None:
             self.observer(value)
 
-    def _record(self, row: dict[str, Any], *, delivery: bool = False,
-                support_view: bool = False) -> dict[str, Any]:
+    def _record(
+        self, row: dict[str, Any], *, delivery: bool = False, support_view: bool = False
+    ) -> dict[str, Any]:
         version = row.get("value") or {}
         result = {
             "id": row["id"],
@@ -221,27 +255,44 @@ class GroundedMemoryRecipe:
             result["candidate_handle"] = row["candidate_handle"]
         if delivery and self.service.mutation_contract == "event_bound_v1":
             result["source_bindings"] = version.get("source_bindings")
-            result["read_more"] = {"tool": "read_memory", "id": row["id"],
-                                   "revision": version.get("revision")}
+            result["read_more"] = {
+                "tool": "read_memory",
+                "id": row["id"],
+                "revision": version.get("revision"),
+            }
             index = self.service.history_index(row["id"])
-            result["history_index"] = {key: index[key] for key in (
-                "status", "revision_count", "revisions", "omitted_count",
-                "index_hash", "next_cursor"
-            ) if key in index}
-            result["history_index"]["read_more"] = {"tool": "read_memory", "id": row["id"],
-                "view": "history", "cursor": result["history_index"].get("next_cursor")}
+            result["history_index"] = {
+                key: index[key]
+                for key in (
+                    "status",
+                    "revision_count",
+                    "revisions",
+                    "omitted_count",
+                    "snapshot_id",
+                    "next_cursor",
+                )
+                if key in index
+            }
+            result["history_index"]["read_more"] = {
+                "tool": "read_memory",
+                "id": row["id"],
+                "view": "history",
+                "cursor": result["history_index"].get("next_cursor"),
+            }
         if self.service.support_contract == "direct_support_v1" and (delivery or support_view):
             result["support_contract"] = self.service.support_contract
             result["source_bindings"] = version.get("source_bindings")
             result["field_support"] = None
             if version.get("field_support"):
-                encoded, parents = encode_field_support(version["field_support"],
-                                                        version["source_bindings"])
+                encoded, parents = encode_field_support(
+                    version["field_support"], version["source_bindings"]
+                )
                 result["field_support"] = encoded
                 if parents:
                     result["field_support_parents"] = parents
-            result["lineage_scope"] = "field_map" if version.get("field_support") else (
-                "legacy_whole_version_set")
+            result["lineage_scope"] = (
+                "field_map" if version.get("field_support") else ("legacy_whole_version_set")
+            )
             result["trigger_binding"] = version.get("trigger_binding")
         return result
 
@@ -252,15 +303,25 @@ class GroundedMemoryRecipe:
         observations = (
             self.service.observations() if self.representation != "raw" else {"objects": []}
         )
-        revision = _hash(
-            {
-                "sources": [(row["event_id"], row["content_sha256"]) for row in sources],
-                "records": [
-                    (row["id"], (row.get("value") or {}).get("revision")) for row in records
-                ],
-                "observations": observations,
-            }
-        )
+        members = [
+            [(row["event_id"], row.get("source_revision", 1)) for row in sources],
+            [(row["id"], (row.get("value") or {}).get("revision")) for row in records],
+            [fact["observation_id"] for fact in observations.get("observations", [])],
+        ]
+        members = json.loads(_json(members))
+        with self.service._locked():
+            old = self.service.store.get(self.namespace, "bank_revision")
+            if old is not None and old.value["members"] == members:
+                bank_revision = old.value["revision"]
+            else:
+                bank_revision = 1 if old is None else old.value["revision"] + 1
+                self.service.store.put(
+                    self.namespace,
+                    "bank_revision",
+                    {"revision": bank_revision, "members": members},
+                    index=False,
+                )
+        revision = "bank-" + str(bank_revision)
         documents = [row for row in sources if row["event_id"] != current_source]
         documents += [
             {
@@ -269,17 +330,67 @@ class GroundedMemoryRecipe:
                 "record_id": row["id"],
                 "owner": self.service.owner,
                 "content": self._record(row),
+                "source_revision": row["value"]["revision"],
             }
             for row in records
             if row["ok"]
         ]
         return documents, observations, revision
 
+    @staticmethod
+    def _chunks(documents: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        chunks = []
+        for document in documents:
+            source_id = document["event_id"]
+            revision = document.get("source_revision", 1)
+            text = json.dumps(document, ensure_ascii=False)
+            for start in range(0, len(text), POLICY["chunk_step"]):
+                end = min(start + POLICY["chunk_chars"], len(text))
+                chunks.append(
+                    {
+                        "id": reference_key([source_id, revision, start, end]),
+                        "source_id": source_id,
+                        "start": start,
+                        "end": end,
+                        "content": text[start:end],
+                    }
+                )
+                if end == len(text):
+                    break
+        return chunks
+
+    def _build_index(
+        self,
+        chunks: list[dict[str, Any]],
+        previous: dict[str, Any] | None,
+    ) -> dict[str, Any]:
+        retained = (
+            {
+                row["id"]: vector
+                for row, vector in zip(previous["chunks"], previous["vectors"], strict=True)
+            }
+            if previous
+            else {}
+        )
+        pending = [row for row in chunks if row["id"] not in retained]
+        added = (
+            self.embeddings.embed_documents([row["content"] for row in pending]) if pending else []
+        )
+        if len(added) != len(pending):
+            raise ValueError("BENCHMARK_RAW_VECTORS_INVALID")
+        retained.update({row["id"]: vector for row, vector in zip(pending, added, strict=True)})
+        return {
+            "chunks": chunks,
+            "vectors": [retained[row["id"]] for row in chunks],
+            "new_embedding_chunks": len(pending),
+            "index_version": "raw_ranges_v2",
+        }
+
     def _retrieve(
         self, documents: list[dict[str, Any]], query: str
     ) -> tuple[list[dict[str, Any]], str]:
         previous, index_state = self._previous_index()
-        chunks = [vars(row) for row in raw_chunks(documents)]
+        chunks = self._chunks(documents)
         if not chunks:
             return [], "empty"
         entries = [IndexEntry(row["id"], row["source_id"], row["content"]) for row in chunks]
@@ -288,11 +399,7 @@ class GroundedMemoryRecipe:
         if self.embeddings is not None:
             try:
                 self._index_pending(index_state)
-                index = raw_index(
-                    documents,
-                    self.embeddings.embed_documents,
-                    previous,
-                )
+                index = self._build_index(chunks, previous)
                 self._index_complete(index)
                 query_vector = self.embeddings.embed_query(query)
                 query_norm = normalized(query_vector, len(query_vector))
@@ -328,7 +435,9 @@ class GroundedMemoryRecipe:
         return [chunks[position] for position in order], degradation
 
     def _select(
-        self, ranked: list[dict[str, Any]], observations: dict[str, Any],
+        self,
+        ranked: list[dict[str, Any]],
+        observations: dict[str, Any],
         snapshot_versions: dict[str, int] | None = None,
     ) -> list[dict[str, Any]]:
         """Freeze identities at first query; dirty refresh cannot introduce unrelated records."""
@@ -352,19 +461,38 @@ class GroundedMemoryRecipe:
                 if ref.startswith("record:"):
                     revision = (snapshot_versions or {}).get(record["id"])
                     if revision is not None:
-                        matched_versions.append({"record_id": record["id"], "revision": revision,
-                                                 "matched_via": "actual_record_snapshot"})
+                        matched_versions.append(
+                            {
+                                "record_id": record["id"],
+                                "revision": revision,
+                                "matched_via": "actual_record_snapshot",
+                            }
+                        )
                 else:
                     for match in record.get("source_matches", []):
-                        source_matches.append({"record_id": record["id"],
-                            **{key: value for key, value in match.items()
-                               if key != "current_revision_at_read"},
-                            "current_revision_at_match_snapshot":
-                            match["current_revision_at_read"]})
-                        matched_versions.extend({"record_id": record["id"], "revision": revision,
-                            "matched_via": "actual_source_citation", "source_ref": ref,
-                            "source_hash": match["source_hash"]}
-                            for revision in match["matched_revisions"])
+                        source_matches.append(
+                            {
+                                "record_id": record["id"],
+                                **{
+                                    key: value
+                                    for key, value in match.items()
+                                    if key != "current_revision_at_read"
+                                },
+                                "current_revision_at_match_snapshot": match[
+                                    "current_revision_at_read"
+                                ],
+                            }
+                        )
+                        matched_versions.extend(
+                            {
+                                "record_id": record["id"],
+                                "revision": revision,
+                                "matched_via": "actual_source_citation",
+                                "source_ref": ref,
+                                "source_revision": match["source_revision"],
+                            }
+                            for revision in match["matched_revisions"]
+                        )
             fields = [
                 [obj["object_ref"]["id"], name]
                 for obj in observations["objects"]
@@ -382,9 +510,11 @@ class GroundedMemoryRecipe:
                     **row,
                     "record_ids": [record["id"] for record in records if record["ok"]],
                     "object_fields": fields,
-                    **({"matched_versions": bounded_matches,
-                        "source_matches": source_matches}
-                       if self.service.mutation_contract == "event_bound_v1" else {}),
+                    **(
+                        {"matched_versions": bounded_matches, "source_matches": source_matches}
+                        if self.service.mutation_contract == "event_bound_v1"
+                        else {}
+                    ),
                 }
             )
         return selected
@@ -408,7 +538,7 @@ class GroundedMemoryRecipe:
                         "type": "source",
                         "source_ref": ref,
                         "role": event["role"],
-                        "source_hash": event["content_sha256"],
+                        "source_revision": event.get("source_revision", 1),
                         "observed_at": event["observed_at"],
                         "excerpt": selected_row["content"],
                         "range": [selected_row["start"], selected_row["end"]],
@@ -417,59 +547,87 @@ class GroundedMemoryRecipe:
                     }
                 )
                 if self.service.support_contract == "direct_support_v1":
-                    units[-1]["tool_argument_ids"] = (
-                        self.service.argument_ids(event)["tool_argument_ids"])
+                    units[-1]["tool_argument_ids"] = self.service.argument_ids(event)[
+                        "tool_argument_ids"
+                    ]
             for memory_id in selected_row["record_ids"]:
-                if (memory_id in delivered_records
-                        and self.service.mutation_contract == "event_bound_v1"):
+                if (
+                    memory_id in delivered_records
+                    and self.service.mutation_contract == "event_bound_v1"
+                ):
                     continue
                 row = self.service.read(memory_id)
                 if row["ok"]:
                     delivered_records.add(memory_id)
                     record = self._record(row, delivery=len(delivered_records) <= 6)
-                    matches = [match for selected_match in selected
-                               for match in selected_match.get("matched_versions", [])
-                               if match["record_id"] == memory_id]
+                    matches = [
+                        match
+                        for selected_match in selected
+                        for match in selected_match.get("matched_versions", [])
+                        if match["record_id"] == memory_id
+                    ]
                     if self.service.mutation_contract == "event_bound_v1":
                         revisions = sorted({match["revision"] for match in matches})
                         record["matched_revisions"] = revisions[:6]
-                        match_map = {(_match["source_ref"], _match["record_id"]): _match
+                        match_map = {
+                            (_match["source_ref"], _match["record_id"]): _match
                             for selection in selected
                             for _match in selection.get("source_matches", [])
-                            if _match["record_id"] == memory_id}
-                        source_matches = [{**{key: match[key] for key in (
-                            "source_ref", "source_hash", "matched_revisions",
-                            "matched_revision_count", "matched_revision_set_hash",
-                            "omitted_matched_revision_count",
-                            "current_revision_at_match_snapshot")},
-                            **({"read_more": match["read_more"]}
-                               if match["omitted_matched_revision_count"] else {}),
-                            "current_revision_at_read": row["value"]["revision"],
-                            "current_version_cites_source": match["source_ref"] in
-                            (row["value"].get("source_refs", [row["value"].get("source_ref")]))}
-                            for match in match_map.values()]
+                            if _match["record_id"] == memory_id
+                        }
+                        source_matches = [
+                            {
+                                **{
+                                    key: match[key]
+                                    for key in (
+                                        "source_ref",
+                                        "source_revision",
+                                        "matched_revisions",
+                                        "matched_revision_count",
+                                        "omitted_matched_revision_count",
+                                        "current_revision_at_match_snapshot",
+                                    )
+                                },
+                                **(
+                                    {"read_more": match["read_more"]}
+                                    if match["omitted_matched_revision_count"]
+                                    else {}
+                                ),
+                                "current_revision_at_read": row["value"]["revision"],
+                                "current_version_cites_source": match["source_ref"]
+                                in (
+                                    row["value"].get(
+                                        "source_refs", [row["value"].get("source_ref")]
+                                    )
+                                ),
+                            }
+                            for match in match_map.values()
+                        ]
                         record["source_matches"] = source_matches[:6]
                         record["source_match_count"] = len(source_matches)
                         if len(source_matches) > 6:
-                            record["source_match_set_hash"] = _hash(source_matches)
                             record["omitted_source_match_count"] = len(source_matches) - 6
                             record["source_matches_read_more"] = {
-                                "tool": "read_memory", "id": memory_id, "view": "history"}
+                                "tool": "read_memory",
+                                "id": memory_id,
+                                "view": "history",
+                            }
                     units.append(
                         {
                             "unit_id": "record:" + memory_id,
                             "type": "record",
                             "record": record,
-                            **({"version_sha256": _hash(row["value"])}
-                               if self.service.mutation_contract == "event_bound_v1" else {}),
                         }
                     )
                     if self.service.mutation_contract == "event_bound_v1":
                         self._light_semantic(record)
                     for match in matches:
                         identity = (memory_id, match["revision"])
-                        if (identity in historical or match["revision"] == row["value"]["revision"]
-                                or len(historical) >= POLICY["max_records"]):
+                        if (
+                            identity in historical
+                            or match["revision"] == row["value"]["revision"]
+                            or len(historical) >= POLICY["max_records"]
+                        ):
                             continue
                         old = self.service.read(*identity)
                         if not old["ok"]:
@@ -478,14 +636,22 @@ class GroundedMemoryRecipe:
                         old_record = self._record(old, support_view=True)
                         old_record.pop("candidate_handle", None)
                         self._light_semantic(old_record)
-                        units.append({"unit_id": "history:" + memory_id + ":" + str(identity[1]),
-                            "type": "historical_record", "record": old_record,
-                            "source_bindings": old["value"].get("source_bindings"),
-                            "matched_via": match["matched_via"], "historical": True,
-                            "version_sha256": _hash(old["value"]),
-                            "current_verified": False,
-                            "read_more": {"tool": "read_memory", "id": memory_id,
-                                          "revision": identity[1]}})
+                        units.append(
+                            {
+                                "unit_id": "history:" + memory_id + ":" + str(identity[1]),
+                                "type": "historical_record",
+                                "record": old_record,
+                                "source_bindings": old["value"].get("source_bindings"),
+                                "matched_via": match["matched_via"],
+                                "historical": True,
+                                "current_verified": False,
+                                "read_more": {
+                                    "tool": "read_memory",
+                                    "id": memory_id,
+                                    "revision": identity[1],
+                                },
+                            }
+                        )
             for object_id, name in selected_row["object_fields"]:
                 obj = next(
                     (
@@ -504,7 +670,7 @@ class GroundedMemoryRecipe:
                         for key in (
                             "observation_id",
                             "source_event_id",
-                            "source_hash",
+                            "source_revision",
                             "field_paths",
                             "literal_value",
                             "resource_version",
@@ -540,106 +706,159 @@ class GroundedMemoryRecipe:
             record.pop("object_ref", None)
 
     def _descriptor(self, unit: dict[str, Any]) -> dict[str, Any]:
-        value = {"unit_id": unit["unit_id"], "type": unit["type"],
-                 "unit_snapshot_hash": _hash(unit), "content_verification": "unchecked"}
+        value = {
+            "unit_id": unit["unit_id"],
+            "type": unit["type"],
+            "content_verification": "unchecked",
+        }
         if unit["type"] in {"record", "historical_record"}:
             record = unit["record"]
-            value.update(id=record["id"], revision=record["revision"],
-                         view_at_snapshot="historical" if unit["type"] == "historical_record"
-                         else "current_at_snapshot", current_verified=False,
-                         version_sha256=unit.get("version_sha256"),
-                         read_more={"tool": "read_memory", "id": record["id"],
-                                    "revision": record["revision"]})
+            value.update(
+                id=record["id"],
+                revision=record["revision"],
+                view_at_snapshot="historical"
+                if unit["type"] == "historical_record"
+                else "current_at_snapshot",
+                current_verified=False,
+                read_more={
+                    "tool": "read_memory",
+                    "id": record["id"],
+                    "revision": record["revision"],
+                },
+            )
         elif unit["type"] == "source":
-            value.update(source_ref=unit["source_ref"], role=unit["role"],
-                         source_hash=unit["source_hash"], read_more=unit["read_more"])
+            value.update(
+                source_ref=unit["source_ref"],
+                role=unit["role"],
+                source_revision=unit["source_revision"],
+                read_more=unit["read_more"],
+            )
         else:
-            value.update(object_id=unit["object_ref"]["id"], field=unit["field"],
-                         read_more={"tool": "read_observations",
-                                    "object_id": unit["object_ref"]["id"]})
+            value.update(
+                object_id=unit["object_ref"]["id"],
+                field=unit["field"],
+                read_more={"tool": "read_observations", "object_id": unit["object_ref"]["id"]},
+            )
             if self.service.memory_read_protocol != "legacy":
                 value["observation_members"] = []
                 for candidate in unit["candidates"]:
                     source = self.service.source(candidate["source_event_id"])
-                    if source is None or source["content_sha256"] != candidate["source_hash"]:
+                    if (
+                        source is None
+                        or source.get("source_revision", 1) != candidate["source_revision"]
+                    ):
                         raise ValueError("V13_SELECTED_OBSERVATION_SOURCE_CHANGED")
                     fact = self.service.selected_observation_member(
                         candidate["observation_id"], unit["object_ref"]["id"], unit["field"]
                     )
-                    value["observation_members"].append({
-                        "observation_id": candidate["observation_id"],
-                        "projection_id": fact["projection_id"], "fact_sha256": _hash(fact),
-                        "source_ref": candidate["source_event_id"], "role": source["role"],
-                        "source_hash": candidate["source_hash"], "member_sha256": _hash(candidate),
-                    })
+                    value["observation_members"].append(
+                        {
+                            "observation_id": candidate["observation_id"],
+                            "projection_id": fact["projection_id"],
+                            "source_ref": candidate["source_event_id"],
+                            "role": source["role"],
+                            "source_revision": candidate["source_revision"],
+                        }
+                    )
         return value
 
     def _selection_snapshot(
-        self, menu: list[dict[str, Any]], units: list[dict[str, Any]],
-        chosen: list[dict[str, Any]], inventory: list[dict[str, Any]] | None,
+        self,
+        menu: list[dict[str, Any]],
+        units: list[dict[str, Any]],
+        chosen: list[dict[str, Any]],
+        inventory: list[dict[str, Any]] | None,
     ) -> dict[str, Any]:
         context = self._read_context.get()
         if context is None:
             raise ValueError("V13_SELECTED_SNAPSHOT_CONTEXT_REQUIRED")
-        binding = {**context, "owner": self.service.owner,
-                   "bank": list(self.service.namespace), "namespace": list(self.namespace),
-                   "policy": self.policy, "menu": menu,
-                   "selected_inventory": inventory or [],
-                   "selected_units_sha256": _hash(units),
-                   "delivered_units_sha256": _hash(chosen)}
-        full_hash = digest(binding)
-        return {"binding": binding, "snapshot_hash": full_hash,
-                "cursor_digest": full_hash[:24], "menu": menu, "status": "complete"}
+        binding = {
+            **context,
+            "owner": self.service.owner,
+            "bank": list(self.service.namespace),
+            "namespace": list(self.namespace),
+            "policy": self.policy,
+            "menu": menu,
+            "selected_inventory": inventory or [],
+        }
+        issued = self._delivery_ids.get()
+        snapshot_id = issued["snapshot_id"] if issued else str(uuid.uuid4())
+        return {"binding": binding, "snapshot_id": snapshot_id, "menu": menu, "status": "complete"}
 
-    def _persist_selection(self, row: dict[str, Any], packet_hash: str) -> None:
-        key = snapshot_key(row["cursor_digest"])
-        value = {**row, "issuing_packet_sha256": packet_hash,
-                 "receipt_sha256": digest([row["binding"], packet_hash])}
-        # Cooperative exact get/check/put; Store.put is not atomic backend CAS.
-        # Release before service.read(), which takes its own service lock.
+    def _persist_selection(self, row: dict[str, Any], packet_id: str) -> None:
+        key = snapshot_key(row["snapshot_id"])
+        value = {**row, "issuing_packet_id": packet_id}
         with self.service._locked():
-            previous = self.service.store.get(self.namespace, key)
-            if previous is not None:
-                if canonical(previous.value) != canonical(value):
-                    raise ValueError("V13_SELECTED_SNAPSHOT_COLLISION_OR_CHANGED")
-                return
-            self.service.store.put(self.namespace, key, value, index=False)
+            prior = self.service.store.get(self.namespace, key)
+            if prior is not None and prior.value != value:
+                raise ValueError("V13_SELECTED_SNAPSHOT_COLLISION_OR_CHANGED")
+            if prior is None:
+                self.service.store.put(self.namespace, key, value, index=False)
 
     def _coverage(
-        self, units: list[dict[str, Any]], chosen: list[dict[str, Any]],
-        *, request_ref: str | None = None,
-        inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
+        self,
+        units: list[dict[str, Any]],
+        chosen: list[dict[str, Any]],
+        *,
+        request_ref: str | None = None,
+        inventory: list[dict[str, Any]] | None = None,
+        selection_count: int = 0,
     ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
         available = {unit["unit_id"]: self._descriptor(unit) for unit in units}
-        descriptors = {row["unit_id"]: {**row, "availability": "unavailable"}
-                       for row in inventory or [] if row["unit_id"] not in available}
+        descriptors = {
+            row["unit_id"]: {**row, "availability": "unavailable"}
+            for row in inventory or []
+            if row["unit_id"] not in available
+        }
         unavailable = len(descriptors)
         descriptors.update(available)
         delivered = {unit["unit_id"] for unit in chosen}
         omitted = [value for key, value in descriptors.items() if key not in delivered]
-        truncated = sum(bool(unit.get("content_truncated") or unit.get("omitted_candidate_count")
-                             or unit.get("record", {}).get("content_truncated")) for unit in chosen)
-        digest = _hash([self.service.owner, self.namespace, request_ref, omitted])
+        truncated = sum(
+            bool(
+                unit.get("content_truncated")
+                or unit.get("omitted_candidate_count")
+                or unit.get("record", {}).get("content_truncated")
+            )
+            for unit in chosen
+        )
+        issued = self._delivery_ids.get()
+        snapshot_id = issued["snapshot_id"] if issued else str(uuid.uuid4())
         snapshot = None
         if self.service.memory_read_protocol != "legacy":
             snapshot = self._selection_snapshot(omitted, units, chosen, inventory)
-            digest = snapshot["snapshot_hash"]
-        status = ("no_matches" if not selection_count and not descriptors else
-                  "selected_unavailable" if not units else
-                  "partial_unavailable" if unavailable else "selected")
-        coverage = {"selection_status": status, "retrieved_selection_count": selection_count,
-                "selected_unit_count": len(descriptors), "delivered_unit_count": len(delivered),
-                "unavailable_unit_count": unavailable,
-                "omitted_unit_count": len(omitted), "omitted_set_hash": digest,
-                "truncated_unit_count": truncated, "bank_exhaustive": False,
-                "delivery_status": "partial" if omitted or truncated or unavailable
-                or (not units and selection_count)
-                else "complete_selection",
-                "read_more": {"tool": "recall_context", "cursor": "selected-" + digest[:24] + ":0"}
-                if omitted else None}
+            snapshot_id = snapshot["snapshot_id"]
+        status = (
+            "no_matches"
+            if not selection_count and not descriptors
+            else "selected_unavailable"
+            if not units
+            else "partial_unavailable"
+            if unavailable
+            else "selected"
+        )
+        coverage = {
+            "selection_status": status,
+            "retrieved_selection_count": selection_count,
+            "selected_unit_count": len(descriptors),
+            "delivered_unit_count": len(delivered),
+            "unavailable_unit_count": unavailable,
+            "omitted_unit_count": len(omitted),
+            "snapshot_id": snapshot_id,
+            "truncated_unit_count": truncated,
+            "bank_exhaustive": False,
+            "delivery_status": "partial"
+            if omitted or truncated or unavailable or (not units and selection_count)
+            else "complete_selection",
+            "read_more": {"tool": "recall_context", "cursor": "selected-" + snapshot_id + ":0"}
+            if omitted
+            else None,
+        }
         if snapshot is not None:
-            coverage.update(memory_read_protocol=self.service.memory_read_protocol,
-                            selected_snapshot_hash=snapshot["snapshot_hash"])
+            coverage.update(
+                memory_read_protocol=self.service.memory_read_protocol,
+                selected_snapshot_id=snapshot["snapshot_id"],
+            )
         return coverage, omitted
 
     def _packet(
@@ -661,15 +880,27 @@ class GroundedMemoryRecipe:
             "current_verified": False,
         }
         if source_index is not None:
-            packet.update(source_index=source_index, historical_empty=not units,
-                          request_ref=request_ref, query_kind=query_kind)
-            packet["coverage"] = coverage if coverage is not None else {
-                "selection_status": "not_retrieved", "selected_unit_count": None,
-                "delivered_unit_count": 0, "omitted_unit_count": None,
-                "bank_exhaustive": False, "read_more": None,
-            }
+            packet.update(
+                source_index=source_index,
+                historical_empty=not units,
+                request_ref=request_ref,
+                query_kind=query_kind,
+            )
+            packet["coverage"] = (
+                coverage
+                if coverage is not None
+                else {
+                    "selection_status": "not_retrieved",
+                    "selected_unit_count": None,
+                    "delivered_unit_count": 0,
+                    "omitted_unit_count": None,
+                    "bank_exhaustive": False,
+                    "read_more": None,
+                }
+            )
         identities = {
-            "record:" + unit["record"]["id"] for unit in units
+            "record:" + unit["record"]["id"]
+            for unit in units
             if unit["type"] in {"record", "historical_record"}
         }
         identities.update(
@@ -691,8 +922,10 @@ class GroundedMemoryRecipe:
                 "apply); reused_from_index selects its literal field_support_parents table. "
                 "Use decoded real Source IDs for tools, never indices.",
             }
-            if (self.tool_schema_communication != "legacy"
-                    or self.service.tool_parameter_contract != "legacy"):
+            if (
+                self.tool_schema_communication != "legacy"
+                or self.service.tool_parameter_contract != "legacy"
+            ):
                 support_policy["trigger"] = TRIGGER_BODY_GUIDANCE
             packet["support_contract"] = support_policy
         if self.tool_schema_communication != "legacy":
@@ -700,22 +933,27 @@ class GroundedMemoryRecipe:
         if self.material_profile in {"compact_v1", "compact_exact_v1"}:
             packet["items"], tables = compact_units(units)
             packet.update(tables)
-            packet.update(material_profile="compact_v1", binding_reference=
-                          "0-based *_index/indices select *_table; "
-                          "record_id_index->id; scope_index->scope; "
-                          "source_binding_indices->full source_bindings; "
-                          "source_binding_index restores source_ref/source_hash "
-                          "(content_sha256->source_hash), plus role only for source units; "
-                          "in read_more it restores source_ref only; "
-                          "source_refs_from_bindings restores ordered source_refs; "
-                          "shared_defaults record/history_index/source_match fills absent fields; "
-                          "absent unit_id: record:<id> or history:<id>:<revision>")
+            packet.update(
+                material_profile="compact_v1",
+                binding_reference="0-based *_index/indices select *_table; "
+                "record_id_index->id; scope_index->scope; "
+                "source_binding_indices->full source_bindings; "
+                "source_binding_index restores source_ref/"
+                "source_revision, plus role only for source units; "
+                "in read_more it restores source_ref only; "
+                "source_refs_from_bindings restores ordered source_refs; "
+                "shared_defaults record/history_index/source_match fills absent fields; "
+                "absent unit_id: record:<id> or history:<id>:<revision>",
+            )
         if self.service.tool_save_communication != "legacy":
-            packet["save_communication"] = {"profile": self.service.tool_save_communication,
-                                            "guidance": SAVE_GUIDANCE}
+            packet["save_communication"] = {
+                "profile": self.service.tool_save_communication,
+                "guidance": SAVE_GUIDANCE,
+            }
         if self.material_profile == "compact_exact_v1":
             packet["presentation_profile"] = "compact_exact_v1"
-        packet["packet_hash"] = _hash(packet)
+        issued = self._delivery_ids.get()
+        packet["packet_id"] = issued["packet_id"] if issued else "packet-" + str(uuid.uuid4())
         if self.material_profile == "compact_exact_v1":
             frame = encode_exact(packet)
             if decode_exact(frame) != packet:
@@ -724,27 +962,49 @@ class GroundedMemoryRecipe:
         return packet, HEADER + _json(packet)
 
     def _fit(
-        self, units: list[dict[str, Any]], revision: str,
-        source_index: dict[str, Any] | None = None, *,
-        request_ref: str | None = None, query_kind: str = "ordinary_public",
+        self,
+        units: list[dict[str, Any]],
+        revision: str,
+        source_index: dict[str, Any] | None = None,
+        *,
+        request_ref: str | None = None,
+        query_kind: str = "ordinary_public",
         material_budget: int = 2048,
-        inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
+        inventory: list[dict[str, Any]] | None = None,
+        selection_count: int = 0,
     ) -> tuple[list[dict[str, Any]], list[str]]:
         if self.material_profile in {"compact_v1", "compact_exact_v1"}:
-            return self._fit_compact(units, revision, source_index,
-                                     request_ref=request_ref, query_kind=query_kind,
-                                     material_budget=material_budget, inventory=inventory,
-                                     selection_count=selection_count)
+            return self._fit_compact(
+                units,
+                revision,
+                source_index,
+                request_ref=request_ref,
+                query_kind=query_kind,
+                material_budget=material_budget,
+                inventory=inventory,
+                selection_count=selection_count,
+            )
         chosen: list[dict[str, Any]] = []
         omitted, delivered = [], set()
         candidates: set[str] = set()
 
         def material(values: list[dict[str, Any]]) -> str:
-            return self._packet(values, revision, source_index, request_ref=request_ref,
-                                query_kind=query_kind,
-                                coverage=self._coverage(units, values, request_ref=request_ref,
-                                    inventory=inventory, selection_count=selection_count)[0]
-                                if source_index is not None else None)[1]
+            return self._packet(
+                values,
+                revision,
+                source_index,
+                request_ref=request_ref,
+                query_kind=query_kind,
+                coverage=self._coverage(
+                    units,
+                    values,
+                    request_ref=request_ref,
+                    inventory=inventory,
+                    selection_count=selection_count,
+                )[0]
+                if source_index is not None
+                else None,
+            )[1]
 
         for unit in units:
             key = unit["unit_id"]
@@ -769,7 +1029,7 @@ class GroundedMemoryRecipe:
                 # Candidate omission is explicit and never resolves a conflict by choosing a winner.
                 if value["type"] == "observation_field":
                     value["omitted_candidate_count"] = value["candidate_count"]
-                    value["candidate_set_hash"] = _hash(value["candidates"])
+                    value["candidate_set_id"] = "candidates-" + str(uuid.uuid4())
                     value["candidates"] = []
                     value["read_more"] = {
                         "tool": "read_observations",
@@ -781,14 +1041,10 @@ class GroundedMemoryRecipe:
                     body = target[field]
                     low, high = 0, len(body)
                     target["content_truncated"] = True
-                    target["full_content_sha256"] = hashlib.sha256(body.encode()).hexdigest()
                     while low < high:
                         middle = (low + high + 1) // 2
                         target[field] = body[:middle]
-                        if (
-                            self.token_count(material([*chosen, value]))
-                            <= material_budget
-                        ):
+                        if self.token_count(material([*chosen, value])) <= material_budget:
                             low = middle
                         else:
                             high = middle - 1
@@ -805,11 +1061,16 @@ class GroundedMemoryRecipe:
         return chosen, omitted
 
     def _fit_compact(
-        self, units: list[dict[str, Any]], revision: str,
-        source_index: dict[str, Any] | None = None, *,
-        request_ref: str | None = None, query_kind: str = "ordinary_public",
+        self,
+        units: list[dict[str, Any]],
+        revision: str,
+        source_index: dict[str, Any] | None = None,
+        *,
+        request_ref: str | None = None,
+        query_kind: str = "ordinary_public",
         material_budget: int = 2048,
-        inventory: list[dict[str, Any]] | None = None, selection_count: int = 0,
+        inventory: list[dict[str, Any]] | None = None,
+        selection_count: int = 0,
     ) -> tuple[list[dict[str, Any]], list[str]]:
         """Allocate within selected units; neither rank nor source/record selection changes."""
         chosen: list[dict[str, Any]] = []
@@ -819,11 +1080,23 @@ class GroundedMemoryRecipe:
         candidates: set[str] = set()
 
         def cost(values: list[dict[str, Any]]) -> int:
-            coverage = self._coverage(units, values, request_ref=request_ref,
-                                      inventory=inventory, selection_count=selection_count)[0]
-            return self.token_count(self._packet(values, revision, source_index,
-                                    request_ref=request_ref, query_kind=query_kind,
-                                    coverage=coverage if source_index is not None else None)[1])
+            coverage = self._coverage(
+                units,
+                values,
+                request_ref=request_ref,
+                inventory=inventory,
+                selection_count=selection_count,
+            )[0]
+            return self.token_count(
+                self._packet(
+                    values,
+                    revision,
+                    source_index,
+                    request_ref=request_ref,
+                    query_kind=query_kind,
+                    coverage=coverage if source_index is not None else None,
+                )[1]
+            )
 
         def prefix(unit: dict[str, Any], length: int) -> dict[str, Any]:
             value: dict[str, Any] = json.loads(_json(unit))
@@ -832,16 +1105,16 @@ class GroundedMemoryRecipe:
             if field in target and length < len(target[field]):
                 body = target[field]
                 target["content_truncated"] = True
-                if field == "excerpt" or not value.get("version_sha256"):
-                    target["full_content_sha256"] = hashlib.sha256(body.encode()).hexdigest()
                 target[field] = body[:length]
                 if field == "excerpt":
                     value["range"][1] = value["range"][0] + length
             if value["type"] == "observation_field":
-                value.update(omitted_candidate_count=value["candidate_count"],
-                             candidate_set_hash=_hash(value["candidates"]), candidates=[],
-                             read_more={"tool": "read_observations",
-                                        "object_id": value["object_ref"]["id"]})
+                value.update(
+                    omitted_candidate_count=value["candidate_count"],
+                    candidate_set_id="candidates-" + str(uuid.uuid4()),
+                    candidates=[],
+                    read_more={"tool": "read_observations", "object_id": value["object_ref"]["id"]},
+                )
             return value
 
         ordered: list[dict[str, Any]] = []
@@ -850,9 +1123,12 @@ class GroundedMemoryRecipe:
             if unit["type"] in {"record", "historical_record"}:
                 memory_id = unit["record"]["id"]
                 if memory_id not in grouped:
-                    ordered.extend(member for member in units
-                                   if member["type"] in {"record", "historical_record"}
-                                   and member["record"]["id"] == memory_id)
+                    ordered.extend(
+                        member
+                        for member in units
+                        if member["type"] in {"record", "historical_record"}
+                        and member["record"]["id"] == memory_id
+                    )
                     grouped.add(memory_id)
             else:
                 ordered.append(unit)
@@ -861,12 +1137,18 @@ class GroundedMemoryRecipe:
             key = unit["unit_id"]
             if key in delivered:
                 continue
-            identity = ("record:" + unit["record"]["id"]
-                        if unit["type"] in {"record", "historical_record"} else
-                        "object:" + unit["object_ref"]["id"]
-                        if unit["type"] == "observation_field" else None)
-            if (identity is not None and identity not in candidates
-                    and len(candidates) >= POLICY["max_records"]):
+            identity = (
+                "record:" + unit["record"]["id"]
+                if unit["type"] in {"record", "historical_record"}
+                else "object:" + unit["object_ref"]["id"]
+                if unit["type"] == "observation_field"
+                else None
+            )
+            if (
+                identity is not None
+                and identity not in candidates
+                and len(candidates) >= POLICY["max_records"]
+            ):
                 omitted.append(key)
                 continue
             value = prefix(unit, 0)
@@ -882,22 +1164,26 @@ class GroundedMemoryRecipe:
                 candidates.add(identity)
 
         def replace(position: int, value: dict[str, Any]) -> list[dict[str, Any]]:
-            return [*chosen[:position], value, *chosen[position + 1:]]
+            return [*chosen[:position], value, *chosen[position + 1 :]]
 
         while True:
             before = cost(chosen)
-            upgrades = [(cost(replace(position, unit)) - before, position)
-                        for position, unit in enumerate(originals)
-                        if chosen[position] != unit
-                        and cost(replace(position, unit)) <= material_budget]
+            upgrades = [
+                (cost(replace(position, unit)) - before, position)
+                for position, unit in enumerate(originals)
+                if chosen[position] != unit and cost(replace(position, unit)) <= material_budget
+            ]
             if not upgrades:
                 break
             _, position = min(upgrades)
             chosen[position] = json.loads(_json(originals[position]))
 
-        remaining = [position for position, unit in enumerate(originals)
-                     if chosen[position] != unit and (unit["type"] == "source"
-                     or "content" in unit.get("record", {}))]
+        remaining = [
+            position
+            for position, unit in enumerate(originals)
+            if chosen[position] != unit
+            and (unit["type"] == "source" or "content" in unit.get("record", {}))
+        ]
         for ordinal, position in enumerate(remaining):
             unit = originals[position]
             before = cost(chosen)
@@ -907,8 +1193,9 @@ class GroundedMemoryRecipe:
                 chosen[position] = json.loads(_json(unit))
                 continue
             field = "excerpt" if unit["type"] == "source" else "content"
-            body = (unit.get(field, "") if field == "excerpt"
-                    else unit.get("record", {}).get(field, ""))
+            body = (
+                unit.get(field, "") if field == "excerpt" else unit.get("record", {}).get(field, "")
+            )
             low, high = 0, len(body)
             while low < high:
                 middle = (low + high + 1) // 2
@@ -920,26 +1207,53 @@ class GroundedMemoryRecipe:
         return chosen, omitted
 
     def _request_ref(self, session: str, turn_id: str) -> str:
-        return "request-" + _hash([self.service.namespace, session, turn_id])[:24]
+        return "request:" + reference_key([session, turn_id])
 
     def _source_index(
-        self, session: str, *, cursor: str | None = None, request_ref: str | None = None,
-        revision: str | None = None, query_kind: str = "metadata_only",
+        self,
+        session: str,
+        *,
+        cursor: str | None = None,
+        request_ref: str | None = None,
+        revision: str | None = None,
+        query_kind: str = "metadata_only",
         material_budget: int = 2048,
     ) -> dict[str, Any]:
         for limit in range(POLICY["source_index_page_members"], 0, -1):
             index = self.service.source_boundary(session, cursor=cursor, limit=limit)
             if index["next_cursor"] is not None:
-                index["read_more"] = {"tool": "read_current_sources",
-                                      "cursor": index["next_cursor"]}
-            _, material = self._packet([], revision, index, request_ref=request_ref,
-                                       query_kind=query_kind)
+                index["read_more"] = {
+                    "tool": "read_current_sources",
+                    "cursor": index["next_cursor"],
+                }
+            if cursor is None:
+                key = "source_boundary_index:" + reference_key(
+                    [session, index["boundary_ref"], limit]
+                )
+                with self.service._locked():
+                    prior = self.service.store.get(self.namespace, key)
+                    metadata = {
+                        name: value
+                        for name, value in index.items()
+                        if name not in {"snapshot_id", "next_cursor", "read_more"}
+                    }
+                    if prior is not None and prior.value["metadata"] == metadata:
+                        index = prior.value["index"]
+                    else:
+                        self.service.store.put(
+                            self.namespace, key, {"metadata": metadata, "index": index}, index=False
+                        )
+            _, material = self._packet(
+                [], revision, index, request_ref=request_ref, query_kind=query_kind
+            )
             if self.token_count(material) <= material_budget:
                 return index
         raise ValueError("V13_SOURCE_INDEX_MEMBER_EXCEEDS_MATERIAL_BUDGET")
 
     def current_sources_tool(
-        self, cursor: str | None, config: RunnableConfig,
+        self,
+        cursor: str | None,
+        config: RunnableConfig,
     ) -> dict[str, Any]:
         cfg = config["configurable"]
         if cfg.get("user_id") != self.service.owner or not cfg.get("v13_session"):
@@ -948,25 +1262,75 @@ class GroundedMemoryRecipe:
         return self._packet([], None, index, query_kind="metadata_only")[0]
 
     def prepare_context(
-        self, public_request: str, *, owner: str, session: str, turn_id: str,
-        explicit_query: str | None = None, material_budget: int = 2048,
+        self,
+        public_request: str,
+        *,
+        owner: str,
+        session: str,
+        turn_id: str,
+        explicit_query: str | None = None,
+        material_budget: int = 2048,
+    ) -> dict[str, Any]:
+        token = self._delivery_ids.set(
+            {"packet_id": "packet-" + str(uuid.uuid4()), "snapshot_id": str(uuid.uuid4())}
+        )
+        try:
+            return self._prepare_bound_context(
+                public_request,
+                owner=owner,
+                session=session,
+                turn_id=turn_id,
+                explicit_query=explicit_query,
+                material_budget=material_budget,
+            )
+        finally:
+            self._delivery_ids.reset(token)
+
+    def _prepare_bound_context(
+        self,
+        public_request: str,
+        *,
+        owner: str,
+        session: str,
+        turn_id: str,
+        explicit_query: str | None = None,
+        material_budget: int = 2048,
     ) -> dict[str, Any]:
         if self.service.memory_read_protocol == "legacy":
-            return self._prepare_context(public_request, owner=owner, session=session,
-                turn_id=turn_id, explicit_query=explicit_query, material_budget=material_budget)
+            return self._prepare_context(
+                public_request,
+                owner=owner,
+                session=session,
+                turn_id=turn_id,
+                explicit_query=explicit_query,
+                material_budget=material_budget,
+            )
         if owner != self.service.owner:
             raise ValueError("V13_PACKET_OWNER_MISMATCH")
         trusted = self.service.public_turn(session, message_id=turn_id)
         if trusted is None:
             raise ValueError("V13_SELECTED_SNAPSHOT_TRUSTED_TURN_REQUIRED")
         query = public_request if explicit_query is None else explicit_query
-        token = self._read_context.set({"public_turn": trusted,
-            "query_kind": "ordinary_public" if explicit_query is None else "explicit_additional",
-            "query_hash": _hash(query), "request_ref": self._request_ref(session, turn_id),
-            "material_budget": material_budget})
+        token = self._read_context.set(
+            {
+                "public_turn": trusted,
+                "query_kind": "ordinary_public"
+                if explicit_query is None
+                else "explicit_additional",
+                "query": query,
+                "request_ref": self._request_ref(session, turn_id),
+                "material_budget": material_budget,
+            }
+        )
         try:
-            return self._prepare_context(public_request, owner=owner, session=session,
-                turn_id=turn_id, explicit_query=explicit_query, material_budget=material_budget)
+            return self._prepare_context(
+                public_request,
+                owner=owner,
+                session=session,
+                turn_id=turn_id,
+                explicit_query=explicit_query,
+                material_budget=material_budget,
+            )
         finally:
             self._read_context.reset(token)
 
@@ -993,66 +1357,105 @@ class GroundedMemoryRecipe:
         if not isinstance(query, str):
             raise ValueError("V13_PACKET_QUERY_INVALID")
         key = (
-            "packet:" + _hash([session, turn_id])
+            "packet:" + reference_key([session, turn_id])
             if explicit_query is None
-            else "query:" + _hash([session, turn_id, query])
+            else "query:" + reference_key([session, turn_id, query])
         )
         request_ref = self._request_ref(session, turn_id)
         query_kind = "ordinary_public" if explicit_query is None else "explicit_additional"
         cached = self.service.store.get(self.namespace, key)
         documents, observations, revision = self._snapshot(current_source)
-        source_index = (self._source_index(session, request_ref=request_ref, revision=revision,
-                                         query_kind=query_kind, material_budget=material_budget)
-                        if self.service.mutation_contract == "event_bound_v1" else None)
+        source_index = (
+            self._source_index(
+                session,
+                request_ref=request_ref,
+                revision=revision,
+                query_kind=query_kind,
+                material_budget=material_budget,
+            )
+            if self.service.mutation_contract == "event_bound_v1"
+            else None
+        )
         context = self._read_context.get()
         if context is not None:
-            self._read_context.set({**context, "bank_revision": revision,
-                                    "source_index": source_index,
-                                    "source_index_sha256": _hash(source_index)})
+            self._read_context.set(
+                {
+                    **context,
+                    "bank_revision": revision,
+                    "source_index": source_index,
+                    "source_index_snapshot_id": source_index.get("snapshot_id")
+                    if source_index
+                    else None,
+                }
+            )
         if cached is not None and explicit_query is None:
             state = cached.value
-            if state["query_hash"] != _hash(public_request) or state["policy"] != self.policy:
+            if state["query"] != public_request or state["policy"] != self.policy:
                 raise ValueError("V13_PACKET_TURN_CHANGED")
-            if (state["bank_revision"] == revision
-                    and state["packet"].get("source_index") == source_index
-                    and state.get("material_budget", POLICY["budget"]) == material_budget):
+            if (
+                state["bank_revision"] == revision
+                and state["packet"].get("source_index") == source_index
+                and state.get("material_budget", POLICY["budget"]) == material_budget
+            ):
                 result = {**state, "reused": True, "retrieval_calls": 0}
-                self._emit(
-                    {"event": "v13_evidence_packet_reused", "packet_hash": state["packet_hash"]}
-                )
+                self._emit({"event": "v13_evidence_packet_reused", "packet_id": state["packet_id"]})
                 return result
             selected, retrieval, calls = state["selected"], state["retrieval"], 0
         else:
             ranked, retrieval = self._retrieve(documents, query)
-            snapshot_versions = {row["record_id"]: row["content"]["revision"] for row in documents
-                                 if row.get("role") == "semantic_record"}
+            snapshot_versions = {
+                row["record_id"]: row["content"]["revision"]
+                for row in documents
+                if row.get("role") == "semantic_record"
+            }
             selected, calls = self._select(ranked, observations, snapshot_versions), 1
         units = self._units(selected, observations)
-        inventory = (cached.value.get("selected_inventory", [])
-                     if source_index is not None and cached is not None
-                     and explicit_query is None else None)
-        chosen, omitted = self._fit(units, revision, source_index,
-                                    request_ref=request_ref, query_kind=query_kind,
-                                    material_budget=material_budget, inventory=inventory,
-                                    selection_count=len(selected))
-        coverage, omitted_menu = (self._coverage(units, chosen, request_ref=request_ref,
-                                                inventory=inventory, selection_count=len(selected))
-                                 if source_index is not None else (None, []))
-        packet, material = self._packet(chosen, revision, source_index,
-                                        request_ref=request_ref, query_kind=query_kind,
-                                        coverage=coverage)
+        inventory = (
+            cached.value.get("selected_inventory", [])
+            if source_index is not None and cached is not None and explicit_query is None
+            else None
+        )
+        chosen, omitted = self._fit(
+            units,
+            revision,
+            source_index,
+            request_ref=request_ref,
+            query_kind=query_kind,
+            material_budget=material_budget,
+            inventory=inventory,
+            selection_count=len(selected),
+        )
+        coverage, omitted_menu = (
+            self._coverage(
+                units,
+                chosen,
+                request_ref=request_ref,
+                inventory=inventory,
+                selection_count=len(selected),
+            )
+            if source_index is not None
+            else (None, [])
+        )
+        packet, material = self._packet(
+            chosen,
+            revision,
+            source_index,
+            request_ref=request_ref,
+            query_kind=query_kind,
+            coverage=coverage,
+        )
         if not chosen and source_index is None:
             material = ""
         if self.token_count(material) > material_budget:
             raise ValueError("V13_PACKET_METADATA_EXCEEDS_MATERIAL_BUDGET")
         state = {
             "policy": self.policy,
-            "query_hash": _hash(query),
+            "query": query,
             "query_kind": query_kind,
-            "actual_public_request_hash": _hash(public_request),
+            "actual_public_request": public_request,
             "bank_revision": revision,
             "packet": packet,
-            "packet_hash": packet["packet_hash"],
+            "packet_id": packet["packet_id"],
             "material": material,
             "material_tokens": self.token_count(material),
             "material_budget": material_budget,
@@ -1064,78 +1467,100 @@ class GroundedMemoryRecipe:
             "wall_ns": time.perf_counter_ns() - wall,
             "cpu_ns": time.process_time_ns() - cpu,
             "measurement": "whole source/record/fact snapshot scans; Store IO not fully counted",
-            "recall_packet_hashes": (cached.value.get("recall_packet_hashes", [])
-                                     if cached is not None and explicit_query is None else []),
+            "recall_packet_ids": (
+                cached.value.get("recall_packet_ids", [])
+                if cached is not None and explicit_query is None
+                else []
+            ),
         }
         if source_index is not None:
             all_descriptors = {row["unit_id"]: row for row in inventory or []}
             all_descriptors.update({unit["unit_id"]: self._descriptor(unit) for unit in units})
-            state.update(omitted_menu=omitted_menu,
-                         selected_inventory=list(all_descriptors.values()))
+            state.update(
+                omitted_menu=omitted_menu, selected_inventory=list(all_descriptors.values())
+            )
+        if coverage is not None:
+            state["omitted_snapshot_id"] = coverage["snapshot_id"]
         if self.service.memory_read_protocol != "legacy":
             snapshot = self._selection_snapshot(omitted_menu, units, chosen, inventory)
-            self._persist_selection(snapshot, packet["packet_hash"])
-            state["selected_snapshot_hash"] = snapshot["snapshot_hash"]
+            if coverage is not None:
+                snapshot["snapshot_id"] = coverage["snapshot_id"]
+            self._persist_selection(snapshot, packet["packet_id"])
+            state["selected_snapshot_id"] = snapshot["snapshot_id"]
         self.service.store.put(self.namespace, key, state, index=False)
         self.service.store.put(
-            self.namespace, "last_packet:" + _hash([session, turn_id]), {"key": key}, index=False
+            self.namespace,
+            "last_packet:" + reference_key([session, turn_id]),
+            {"key": key},
+            index=False,
         )
         self._emit({"event": "v13_evidence_packet", **state})
         return state
 
     def _resolve_selected_snapshot(
-        self, cursor: str, cfg: dict[str, Any],
+        self,
+        cursor: str,
+        cfg: dict[str, Any],
     ) -> tuple[list[dict[str, Any]], str, int]:
         prefix, separator, offset = cursor.rpartition(":")
         short = prefix.removeprefix("selected-")
-        if (separator != ":" or prefix != "selected-" + short or len(short) != 24
-                or any(char not in "0123456789abcdef" for char in short)
-                or not offset.isdecimal()):
-            reject("V13_SELECTED_CURSOR_CHANGED_OR_INVALID", "grounded_reader",
-                   self.service.tool_read_feedback)
+        if separator != ":" or not prefix.startswith("selected-") or not offset.isdecimal():
+            reject(
+                "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
+                "grounded_reader",
+                self.service.tool_read_feedback,
+            )
         with self.service._locked():
             item = self.service.store.get(self.namespace, snapshot_key(short))
             row = json.loads(_json(item.value)) if item is not None else None
         if row is None:
-            reject("V13_SELECTED_SNAPSHOT_MISSING", "grounded_reader",
-                   self.service.tool_read_feedback)
+            reject(
+                "V13_SELECTED_SNAPSHOT_MISSING", "grounded_reader", self.service.tool_read_feedback
+            )
         assert row is not None
         binding = row.get("binding")
-        if (not isinstance(binding, dict) or digest(binding) != row.get("snapshot_hash")
-                or row["snapshot_hash"][:24] != short or row.get("cursor_digest") != short
-                or row.get("menu") != binding.get("menu")
-                or not isinstance(row.get("issuing_packet_sha256"), str)
-                or len(row["issuing_packet_sha256"]) != 64
-                or row.get("receipt_sha256") != digest([binding, row["issuing_packet_sha256"]])):
+        if not isinstance(binding, dict) or row.get("snapshot_id") != short:
             raise ValueError("V13_SELECTED_SNAPSHOT_INTEGRITY_INVALID")
-        trusted = self.service.public_turn(cfg["v13_session"], message_id=cfg["v13_turn_id"],
-                                          config_sha256=cfg.get("v13_support_config_sha256"))
-        if (trusted is None or canonical(trusted) != canonical(binding.get("public_turn"))
-                or binding.get("owner") != self.service.owner
-                or binding.get("bank") != list(self.service.namespace)
-                or binding.get("namespace") != list(self.namespace)
-                or canonical(binding.get("policy")) != canonical(self.policy)
-                or cfg.get("v13_support_config_sha256") != trusted["config_sha256"]):
+        trusted = self.service.public_turn(
+            cfg["v13_session"],
+            message_id=cfg["v13_turn_id"],
+            config_version=cfg.get("v13_config_version", cfg.get("v13_support_config_sha256")),
+        )
+        if (
+            trusted is None
+            or canonical(trusted) != canonical(binding.get("public_turn"))
+            or binding.get("owner") != self.service.owner
+            or binding.get("bank") != list(self.service.namespace)
+            or binding.get("namespace") != list(self.namespace)
+            or canonical(binding.get("policy")) != canonical(self.policy)
+            or cfg.get("v13_config_version", cfg.get("v13_support_config_sha256"))
+            != trusted["config_version"]
+        ):
             raise ValueError("V13_SELECTED_SNAPSHOT_BINDING_CHANGED")
         if row.get("status") == "revoked":
-            reject("V13_SELECTED_SNAPSHOT_REVOKED", "grounded_reader",
-                   self.service.tool_read_feedback)
+            reject(
+                "V13_SELECTED_SNAPSHOT_REVOKED", "grounded_reader", self.service.tool_read_feedback
+            )
         if row.get("status") != "complete":
             raise ValueError("V13_SELECTED_SNAPSHOT_INTEGRITY_INVALID")
         menu = row["menu"]
         if not 0 <= int(offset) < len(menu):
-            reject("V13_SELECTED_CURSOR_CHANGED_OR_INVALID", "grounded_reader",
-                   self.service.tool_read_feedback)
-        return menu, row["snapshot_hash"], int(offset)
+            reject(
+                "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
+                "grounded_reader",
+                self.service.tool_read_feedback,
+            )
+        return menu, row["snapshot_id"], int(offset)
 
     def selected_page_tool(self, cursor: str, config: RunnableConfig) -> dict[str, Any]:
         """Explicit paid pointer page over actual omitted selection; never retrieves again."""
         _, cfg = self._public_source(config)
         if self.service.memory_read_protocol != "legacy":
-            menu, digest, start = self._resolve_selected_snapshot(cursor, cfg)
+            menu, snapshot_id, start = self._resolve_selected_snapshot(cursor, cfg)
         else:
             cached = self.service.store.get(
-                self.namespace, "packet:" + _hash([cfg["v13_session"], cfg["v13_turn_id"]]))
+                self.namespace, "packet:" + reference_key([cfg["v13_session"], cfg["v13_turn_id"]])
+            )
             if cached is None:
                 reject(
                     "V13_SELECTED_PAGE_NOT_READY",
@@ -1143,11 +1568,14 @@ class GroundedMemoryRecipe:
                     self.service.tool_read_feedback,
                 )
             menu = cached.value.get("omitted_menu", [])
-            digest = _hash([self.service.owner, self.namespace,
-                           self._request_ref(cfg["v13_session"], cfg["v13_turn_id"]), menu])
+            snapshot_id = cached.value.get("omitted_snapshot_id", "")
             prefix, separator, offset = cursor.rpartition(":")
-            if (separator != ":" or prefix != "selected-" + digest[:24]
-                    or not offset.isdecimal() or not 0 <= int(offset) < len(menu)):
+            if (
+                separator != ":"
+                or prefix != "selected-" + snapshot_id
+                or not offset.isdecimal()
+                or not 0 <= int(offset) < len(menu)
+            ):
                 reject(
                     "V13_SELECTED_CURSOR_CHANGED_OR_INVALID",
                     "grounded_reader",
@@ -1159,14 +1587,24 @@ class GroundedMemoryRecipe:
 
         def packet() -> dict[str, Any]:
             end = start + len(chosen)
-            value = {"ok": True, "schema": "selected_evidence_menu_v1",
-                     "owner": self.service.owner, "query_kind": "explicit_selected_page",
-                     "selection_hash": digest, "items": chosen, "total_unit_count": len(menu),
-                     "start": start, "omitted_count": len(menu) - end,
-                     "next_cursor": "selected-" + digest[:24] + ":" + str(end)
-                     if end < len(menu) else None, "retrieval_calls": 0,
-                     "current_verified": False, "content_verification": "unchecked"}
-            value["packet_hash"] = _hash(value)
+            value = {
+                "ok": True,
+                "schema": "selected_evidence_menu_v1",
+                "owner": self.service.owner,
+                "query_kind": "explicit_selected_page",
+                "snapshot_id": snapshot_id,
+                "items": chosen,
+                "total_unit_count": len(menu),
+                "start": start,
+                "omitted_count": len(menu) - end,
+                "next_cursor": "selected-" + snapshot_id + ":" + str(end)
+                if end < len(menu)
+                else None,
+                "retrieval_calls": 0,
+                "current_verified": False,
+                "content_verification": "unchecked",
+            }
+            value["packet_id"] = "packet-" + str(uuid.uuid4())
             return value
 
         for row in menu[start:]:
@@ -1174,30 +1612,36 @@ class GroundedMemoryRecipe:
                 pass  # A pointer to unavailable selected material is never a successful read.
             elif row["type"] == "source":
                 source = self.service.source(row["source_ref"])
-                if (source is None or source["role"] != row["role"]
-                        or source["content_sha256"] != row["source_hash"]):
+                if (
+                    source is None
+                    or source["role"] != row["role"]
+                    or source.get("source_revision", 1) != row["source_revision"]
+                ):
                     raise ValueError("V13_SELECTED_SOURCE_CHANGED")
             elif row["type"] in {"record", "historical_record"}:
                 version = self.service.read(row["id"], row["revision"])
-                if (not version["ok"] or _hash(version["value"]) != row["version_sha256"]):
+                if not version["ok"] or version["value"]["revision"] != row["revision"]:
                     raise ValueError("V13_SELECTED_REVISION_UNAVAILABLE")
             elif self.service.memory_read_protocol != "legacy":
-                fields = ("observation_id", "source_event_id", "source_hash", "field_paths",
-                          "literal_value", "resource_version", "version_domain", "observed_at")
                 for member in row["observation_members"]:
                     fact = self.service.selected_observation_member(
                         member["observation_id"], row["object_id"], row["field"]
                     )
                     source = self.service.source(member["source_ref"])
-                    if (source is None or source["role"] != member["role"]
-                            or source["content_sha256"] != member["source_hash"]
-                            or fact["projection_id"] != member["projection_id"]
-                            or _hash(fact) != member["fact_sha256"]
-                            or _hash({key: fact[key] for key in fields})
-                            != member["member_sha256"]):
+                    if (
+                        source is None
+                        or source["role"] != member["role"]
+                        or source.get("source_revision", 1) != member["source_revision"]
+                        or fact["projection_id"] != member["projection_id"]
+                    ):
                         raise ValueError("V13_SELECTED_OBSERVATION_CHANGED")
-            identity = ("record:" + row["id"] if "id" in row else
-                        "object:" + row["object_id"] if "object_id" in row else None)
+            identity = (
+                "record:" + row["id"]
+                if "id" in row
+                else "object:" + row["object_id"]
+                if "object_id" in row
+                else None
+            )
             if identity is not None and identity not in identities and len(identities) >= 6:
                 break
             chosen.append(row)
@@ -1209,9 +1653,14 @@ class GroundedMemoryRecipe:
         if not chosen:
             raise ValueError("V13_SELECTED_MENU_MEMBER_EXCEEDS_BUDGET")
         result = packet()
-        self._emit({"event": "v13_explicit_selected_page", "material_tokens":
-                    self.token_count(_json(result)), "packet_hash": result["packet_hash"],
-                    "retrieval_calls": 0})
+        self._emit(
+            {
+                "event": "v13_explicit_selected_page",
+                "material_tokens": self.token_count(_json(result)),
+                "packet_id": result["packet_id"],
+                "retrieval_calls": 0,
+            }
+        )
         return result
 
     def _public_source(self, config: RunnableConfig) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -1238,12 +1687,16 @@ class GroundedMemoryRecipe:
             {
                 "event": "v13_autonomous_recall",
                 "query_policy": POLICY["query"],
-                "packet_hash": packet["packet_hash"],
+                "packet_id": packet["packet_id"],
             }
         )
-        key = "packet:" + _hash([cfg["v13_session"], cfg["v13_turn_id"]])
-        state = {**packet, "recall_packet_hashes": list(dict.fromkeys([
-            *packet.get("recall_packet_hashes", []), packet["packet_hash"]]))}
+        key = "packet:" + reference_key([cfg["v13_session"], cfg["v13_turn_id"]])
+        state = {
+            **packet,
+            "recall_packet_ids": list(
+                dict.fromkeys([*packet.get("recall_packet_ids", []), packet["packet_id"]])
+            ),
+        }
         self.service.store.put(self.namespace, key, state, index=False)
         return dict(packet["packet"])
 
@@ -1262,7 +1715,7 @@ class GroundedMemoryRecipe:
                 "event": "v13_explicit_additional_recall",
                 "requested_query": query,
                 "query_policy": "actual explicit query; separate paid retrieval",
-                "packet_hash": packet["packet_hash"],
+                "packet_id": packet["packet_id"],
             }
         )
         return dict(packet["packet"])
@@ -1280,44 +1733,58 @@ class GroundedMemoryRecipe:
                 raise ValueError("V13_PACKET_ACTUAL_PUBLIC_REQUEST_REQUIRED")
             request_ref = self._request_ref(cfg["v13_session"], str(human.id))
             ordinary = self.service.store.get(
-                self.namespace, "packet:" + _hash([cfg["v13_session"], str(human.id)])
+                self.namespace, "packet:" + reference_key([cfg["v13_session"], str(human.id)])
             )
-            current_start = max(index for index, row in enumerate(state["messages"])
-                                if row is human)
+            current_start = max(
+                index for index, row in enumerate(state["messages"]) if row is human
+            )
             recalls: dict[int, dict[str, Any]] = {}
-            for position, row in enumerate(state["messages"][current_start + 1:],
-                                           start=current_start + 1):
+            for position, row in enumerate(
+                state["messages"][current_start + 1 :], start=current_start + 1
+            ):
                 if not isinstance(row, ToolMessage) or row.name != "recall_context":
                     continue
                 try:
                     body = json.loads(str(row.content))
                 except (TypeError, ValueError):
                     continue
-                if (ordinary is not None and isinstance(body, dict) and body.get("ok") is True
-                        and row.status == "success" and body.get("schema") == "bounded_evidence_v1"
-                        and body.get("owner") == self.service.owner
-                        and body.get("request_ref") == request_ref
-                        and body.get("query_kind") == "ordinary_public"
-                        and body.get("packet_hash") in ordinary.value.get(
-                            "recall_packet_hashes", [])
-                        and body.get("packet_hash") == _hash({
-                            key: value for key, value in body.items() if key != "packet_hash"})):
+                if (
+                    ordinary is not None
+                    and isinstance(body, dict)
+                    and body.get("ok") is True
+                    and row.status == "success"
+                    and body.get("schema") == "bounded_evidence_v1"
+                    and body.get("owner") == self.service.owner
+                    and body.get("request_ref") == request_ref
+                    and body.get("query_kind") == "ordinary_public"
+                    and body.get("packet_id") in ordinary.value.get("recall_packet_ids", [])
+                ):
                     recalls[position] = body
             reference_bodies: dict[int, str] = {}
             if prefetch or recalls:
                 available = POLICY["budget"]
                 for _ in range(6):
                     context = self.prepare_context(
-                        str(human.content), owner=cfg["user_id"], session=cfg["v13_session"],
-                        turn_id=str(human.id), material_budget=available,
+                        str(human.content),
+                        owner=cfg["user_id"],
+                        session=cfg["v13_session"],
+                        turn_id=str(human.id),
+                        material_budget=available,
                     )
                     packet, material = context["packet"], context["material"]
-                    reference_bodies = {position: _json({
-                        "ok": body["ok"], "packet_hash": body["packet_hash"],
-                        "presented_packet_hash": packet["packet_hash"],
-                    }) for position, body in recalls.items()}
+                    reference_bodies = {
+                        position: _json(
+                            {
+                                "ok": body["ok"],
+                                "packet_id": body["packet_id"],
+                                "presented_packet_id": packet["packet_id"],
+                            }
+                        )
+                        for position, body in recalls.items()
+                    }
                     total = self.token_count(material) + sum(
-                        self.token_count(body) for body in reference_bodies.values())
+                        self.token_count(body) for body in reference_bodies.values()
+                    )
                     if total <= POLICY["budget"]:
                         break
                     # Same frozen selections, no new dense query. Leave a small margin
@@ -1327,34 +1794,42 @@ class GroundedMemoryRecipe:
                     raise ValueError("V13_ORDINARY_TOTAL_MATERIAL_BUDGET_EXCEEDED")
             else:
                 index = self._source_index(cfg["v13_session"], request_ref=request_ref)
-                packet, material = self._packet([], None, index, request_ref=request_ref,
-                                                query_kind="metadata_only")
+                packet, material = self._packet(
+                    [], None, index, request_ref=request_ref, query_kind="metadata_only"
+                )
             # Only this tool's actual current-turn packet is repeated in the System view.
             # The complete Graph/checkpoint receipt and all other tool bodies are unchanged.
-            projected = [row.model_copy(update={"content": reference_bodies[position]})
-                if position in recalls else row
-                for position, row in enumerate(state["messages"])]
-            self._emit({"event": "v13_current_source_delivery",
-                        "packet_hash": packet["packet_hash"],
-                        "source_index_hash": packet["source_index"]["source_index_hash"],
-                        "material": material, "material_tokens": self.token_count(material),
-                        "reference_tokens": sum(self.token_count(body)
-                                                for body in reference_bodies.values()),
-                        "ordinary_total_tokens": self.token_count(material) + sum(
-                            self.token_count(body) for body in reference_bodies.values()),
-                        "historical_empty": packet["historical_empty"],
-                        "projected_recall_ids": [state["messages"][position].tool_call_id
-                                                 for position in recalls],
-                        "projected_recall_positions": list(recalls),
-                        "budget_scope": "current index, one ordinary packet "
-                        "and recall reference bodies; "
-                        "chat envelope and explicit reads extra"})
+            projected = [
+                row.model_copy(update={"content": reference_bodies[position]})
+                if position in recalls
+                else row
+                for position, row in enumerate(state["messages"])
+            ]
+            self._emit(
+                {
+                    "event": "v13_current_source_delivery",
+                    "packet_id": packet["packet_id"],
+                    "source_index_snapshot_id": packet["source_index"]["snapshot_id"],
+                    "material": material,
+                    "material_tokens": self.token_count(material),
+                    "reference_tokens": sum(
+                        self.token_count(body) for body in reference_bodies.values()
+                    ),
+                    "ordinary_total_tokens": self.token_count(material)
+                    + sum(self.token_count(body) for body in reference_bodies.values()),
+                    "historical_empty": packet["historical_empty"],
+                    "projected_recall_ids": [
+                        state["messages"][position].tool_call_id for position in recalls
+                    ],
+                    "projected_recall_positions": list(recalls),
+                    "budget_scope": "current index, one ordinary packet "
+                    "and recall reference bodies; "
+                    "chat envelope and explicit reads extra",
+                }
+            )
             return {
                 "llm_input_messages": [
-                    SystemMessage(
-                        content=base_system
-                        + ("\n" + material if material else "")
-                    ),
+                    SystemMessage(content=base_system + ("\n" + material if material else "")),
                     *projected,
                 ]
             }
@@ -1379,25 +1854,35 @@ class GroundedMemoryRecipe:
             self.tool_schema_communication
         ):
             raise ValueError("TOOL_SCHEMA_COMMUNICATION_PROFILE_CONFLICT")
-        if (getattr(model, "tool_save_communication", "legacy")
-                != self.service.tool_save_communication):
+        if (
+            getattr(model, "tool_save_communication", "legacy")
+            != self.service.tool_save_communication
+        ):
             raise ValueError("V13_SAVE_COMMUNICATION_PROFILE_CONFLICT")
         user_ref = self.service.event_id(session, turn_id, "user")
         if user_ref not in source_refs or any(
             self.service.source(ref) is None for ref in source_refs
         ):
             raise ValueError("V13_WRITER_ACTUAL_BOUNDARY_REQUIRED")
-        key = "maintenance:" + _hash([session, turn_id])
+        key = "maintenance:" + reference_key([session, turn_id])
         direct = self.service.support_contract == "direct_support_v1"
         trigger = None
         if direct:
             cfg = config.get("configurable", {})
-            if (cfg.get("user_id") != self.service.owner or cfg.get("v13_session") != session
-                    or cfg.get("v13_turn_id") != turn_id
-                    or not cfg.get("v13_support_config_sha256")):
+            if (
+                cfg.get("user_id") != self.service.owner
+                or cfg.get("v13_session") != session
+                or cfg.get("v13_turn_id") != turn_id
+                or not cfg.get("v13_config_version", cfg.get("v13_support_config_sha256"))
+            ):
                 raise ValueError("V13_WRITER_PUBLIC_TRIGGER_REQUIRED")
-            trigger = self.service.public_turn(session, message_id=turn_id,
-                config_sha256=str(cfg["v13_support_config_sha256"]))
+            trigger = self.service.public_turn(
+                session,
+                message_id=turn_id,
+                config_version=str(
+                    cfg.get("v13_config_version", cfg.get("v13_support_config_sha256"))
+                ),
+            )
             if trigger is None:
                 raise ValueError("V13_WRITER_PUBLIC_TRIGGER_REQUIRED")
         old = self.service.store.get(self.namespace, key)
@@ -1406,8 +1891,11 @@ class GroundedMemoryRecipe:
                 raise ValueError("V13_WRITER_PUBLIC_TRIGGER_CHANGED")
             return {**old.value, "replayed": True}
         # A successful Host proposal sourced in this user message suppresses redundant maintenance.
-        accepted = (self.service.semantic_receipts_for_turn(session) if direct
-                    else self.service.semantic_receipts(user_ref))
+        accepted = (
+            self.service.semantic_receipts_for_turn(session)
+            if direct
+            else self.service.semantic_receipts(user_ref)
+        )
         if accepted:
             receipt = {
                 "status": "skipped_host_committed",
@@ -1430,8 +1918,9 @@ class GroundedMemoryRecipe:
             "receipts": [],
         }
         if direct:
-            pending.update(trigger_binding=trigger, whole_turn_coverage="unchecked",
-                           attempted_actions=[])
+            pending.update(
+                trigger_binding=trigger, whole_turn_coverage="unchecked", attempted_actions=[]
+            )
         self.service.store.put(self.namespace, key, pending, index=False)
         self.service.bind_source_boundary(session, turn_id + ":closed", source_refs)
         tools = [
@@ -1439,24 +1928,30 @@ class GroundedMemoryRecipe:
             for tool in create_service_tools(self.service, replay_requested=True)
             if tool.name in {"manage_memory", "revise_memory"}
         ]
-        last = self.service.store.get(self.namespace, "last_packet:" + _hash([session, turn_id]))
+        last = self.service.store.get(
+            self.namespace, "last_packet:" + reference_key([session, turn_id])
+        )
         existing_packet = self.service.store.get(
-            self.namespace, last.value["key"] if last else "packet:" + _hash([session, turn_id])
+            self.namespace,
+            last.value["key"] if last else "packet:" + reference_key([session, turn_id]),
         )
         request = {
             "actual_events": [self.service.source(ref) for ref in source_refs],
             "candidate_packet": existing_packet.value["packet"] if existing_packet else {},
         }
         if direct:
-            request.update(trigger_binding=trigger,
-                source_argument_ids=[self.service.argument_ids(event)
-                                     for event in request["actual_events"]],
+            request.update(
+                trigger_binding=trigger,
+                source_argument_ids=[
+                    self.service.argument_ids(event) for event in request["actual_events"]
+                ],
                 support_policy="Trigger is authorization, not support. Select actual direct leaves "
                 "for content/scope/basis/kind via field_support. Explicit reuse_support_from must "
                 "be the same candidate_handle and an exactly equal whole field; select all "
                 "original leaves. Changed fields need explicit leaf selection. "
                 "Prefix/metadata is not a full "
-                "read. Source.object_ref is evidence DTO; tool object_ref uses its string id.")
+                "read. Source.object_ref is evidence DTO; tool object_ref uses its string id.",
+            )
             if self.tool_schema_communication != "legacy":
                 request["support_policy"] = request["support_policy"].replace(
                     "Trigger is authorization, not support.", TRIGGER_BODY_GUIDANCE
@@ -1472,8 +1967,7 @@ class GroundedMemoryRecipe:
             ),
             HumanMessage(content=_json(request)),
         ]
-        rejected_fingerprints: set[str] = set()
-        accepted_fingerprints: dict[str, dict[str, Any]] = {}
+
         try:
             for attempt in range(1 + repairs):
                 # Admit durably before dispatch; unknown outcomes do not regenerate on reopen.
@@ -1494,46 +1988,12 @@ class GroundedMemoryRecipe:
                         "id": "boundary:" + key + ":" + str(attempt) + ":" + str(position),
                         "type": "tool_call",
                     }
-                    fingerprint = _hash([call["name"], call["args"]])
-                    if fingerprint in accepted_fingerprints:
-                        receipt = {
-                            **accepted_fingerprints[fingerprint],
-                            "status": "no_change",
-                            "effect": "none",
-                            "replayed": True,
-                            "dedup": "exact_request_within_boundary",
-                        }
-                        result = ToolMessage(
-                            content=_json(receipt),
-                            tool_call_id=call["id"],
-                            name=call["name"],
-                            status="success",
-                        )
-                    elif fingerprint in rejected_fingerprints:
-                        receipt = {
-                            "ok": False,
-                            "status": "rejected",
-                            "reason": "repeated_rejection",
-                            "effect": "none",
-                            "request_fingerprint": fingerprint,
-                        }
-                        result = ToolMessage(
-                            content=_json(receipt),
-                            tool_call_id=call["id"],
-                            name=call["name"],
-                            status="error",
-                        )
-                    else:
-                        tool = next(tool for tool in tools if tool.name == call["name"])
-                        if direct:
-                            pending["attempted_actions"].append(call)
-                            self.service.store.put(self.namespace, key, pending, index=False)
-                        result = tool.invoke(call, config=config)
-                        receipt = json.loads(result.content)
-                        if not receipt.get("ok"):
-                            rejected_fingerprints.add(fingerprint)
-                        else:
-                            accepted_fingerprints[fingerprint] = receipt
+                    tool = next(tool for tool in tools if tool.name == call["name"])
+                    if direct:
+                        pending["attempted_actions"].append(call)
+                        self.service.store.put(self.namespace, key, pending, index=False)
+                    result = tool.invoke(call, config=config)
+                    receipt = json.loads(result.content)
                     calls.append(call)
                     results.append(result)
                     attempt_receipts.append(receipt)

@@ -8,17 +8,16 @@ of an unaccounted conversation cache. Evaluation cases are caller inputs only.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import importlib.metadata
-import inspect
 import json
 import os
 import subprocess
 import sys
 import unicodedata
+import uuid
 from collections.abc import Callable
 from contextlib import ExitStack
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, Literal, cast
 
@@ -53,9 +52,14 @@ from milai_lab.memory.functional_state import (
     FunctionalRejection,
     visibility,
 )
-from milai_lab.memory.functional_state import digest as functional_digest
 from milai_lab.memory.functional_state import namespace as functional_namespace
+from milai_lab.memory.functional_state import reference_key as functional_reference_key
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.functional_edit_memory import (
+    FUNCTIONAL_B1_METHOD,
+    FUNCTIONAL_METHOD,
+    FunctionalEditMemory,
+)
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
@@ -368,10 +372,113 @@ class _ReadExecutionStopped(Exception):
     """A persisted non-retryable read-limit receipt ends execution, not its effects."""
 
 
-def _hash(value: Any) -> str:
-    return hashlib.sha256(
-        json.dumps(value, ensure_ascii=False, sort_keys=True).encode()
-    ).hexdigest()
+def _run_reference(path: Path, identity: dict[str, Any]) -> str:
+    """Allocate once for ordinary run metadata, never derive IDs from content."""
+    rows = read_json(path) if path.exists() else []
+    previous = next((row for row in rows if row["identity"] == identity), None)
+    if previous:
+        return str(previous["id"])
+    reference = str(uuid.uuid4())
+    rows.append({"identity": identity, "id": reference})
+    write_json(path, rows)
+    return reference
+
+
+def _bank_reference(root: Path, run_id: str, bank: str, owner: str) -> str:
+    """Discover existing banks through the public Store namespace without rehashing."""
+    index = root / "bank-index.json"
+    rows = read_json(index) if index.exists() else []
+    identity = {"bank": bank, "owner": owner}
+    previous = next((row for row in rows if row["identity"] == identity), None)
+    if previous:
+        return str(previous["id"])
+    namespace = ("functional", run_id, bank, owner)
+    for candidate in sorted((root / "banks").glob("*")):
+        database = candidate / "memory.sqlite"
+        if not database.is_file():
+            continue
+        with SqliteStore.from_conn_string(str(database)) as store:
+            found = store.list_namespaces(prefix=namespace, limit=1)
+        if found:
+            rows.append({"identity": identity, "id": candidate.name})
+            write_json(index, rows)
+            return candidate.name
+    return _run_reference(index, identity)
+
+
+def _message_reference(bank_root: Path, session: str, message_id: str) -> str:
+    """Retain archived filenames as opaque IDs when reopening a legacy bank."""
+    index = bank_root / "message-index.json"
+    rows = read_json(index) if index.exists() else []
+    identity = {"session": session, "message_id": message_id}
+    previous = next((row for row in rows if row["identity"] == identity), None)
+    if previous:
+        return str(previous["id"])
+    for path in sorted(bank_root.glob("*-input.json")):
+        observed = read_json(path)
+        if all(observed.get(name) == value for name, value in identity.items()):
+            reference = path.name.removesuffix("-input.json")
+            rows.append({"identity": identity, "id": reference})
+            write_json(index, rows)
+            return reference
+    return _run_reference(index, identity)
+
+
+def _thread_reference(
+    bank_root: Path, saver: SqliteSaver, config: RunnableConfig
+) -> str:
+    """Reuse a saved SDK thread by its public metadata, retaining opaque old IDs."""
+    index = bank_root / "thread-index.json"
+    rows = read_json(index) if index.exists() else []
+    identity = {
+        key: config["configurable"][key]
+        for key in ("foundation_run_id", "arm_id", "user_id", "v13_session", "v13_turn_id")
+    }
+    previous = next((row for row in rows if row["identity"] == identity), None)
+    if previous:
+        return str(previous["id"])
+    threads = {
+        checkpoint.config["configurable"]["thread_id"]
+        for checkpoint in saver.list(None, filter=identity)
+    }
+    if len(threads) > 1:
+        raise ValueError("FUNCTIONAL_PUBLIC_MESSAGE_CHECKPOINT_AMBIGUOUS")
+    reference = str(next(iter(threads), config["configurable"]["thread_id"]))
+    rows.append({"identity": identity, "id": reference})
+    write_json(index, rows)
+    return reference
+
+
+def _note_edit_tool_delivery(
+    memory: FunctionalEditMemory, config: RunnableConfig, messages: list[Any]
+) -> None:
+    """Register fragments only from actual business ToolMessages in the Host input."""
+    handles = []
+    for row in messages:
+        if not isinstance(row, ToolMessage):
+            continue
+        try:
+            body = json.loads(str(row.content))
+        except ValueError:
+            continue
+        if not isinstance(body, dict):
+            continue
+        delivered = []
+        capture = body.get("raw_capture")
+        if (isinstance(capture, dict) and capture.get("ok")
+                and body.get("business_outcome") in {
+                    "confirmed", "partial", "known_no_effect", "observed"}):
+            delivered.append(body)
+        query = body.get("query_source")
+        if (isinstance(query, dict)
+                and query.get("origin") in {"get_reservation", "get_document_status"}):
+            delivered.append(query)
+        for source in delivered:
+            for fragment in source.get("source_fragment_index", []):
+                if fragment.get("source_ref") != source.get("source_ref"):
+                    raise ValueError("FUNCTIONAL_EDIT_TOOL_DELIVERY_SOURCE_CHANGED")
+                handles.append(fragment["fragment_handle"])
+    memory.note_delivered_fragment_handles(config, handles)
 
 
 def review_revision_support(
@@ -391,8 +498,13 @@ def review_formation_support(
 
 
 def _review_selected_support(
-    model: LangMemRecipeChatModel, path: Path, evidence: dict[str, Any], trace: Trace,
-    *, on_delivery: Callable[[], None] | None = None, formation: bool = False,
+    model: LangMemRecipeChatModel,
+    path: Path,
+    evidence: dict[str, Any],
+    trace: Trace,
+    *,
+    on_delivery: Callable[[], None] | None = None,
+    formation: bool = False,
     comparison: bool = False,
 ) -> None:
     """One accounted assessment per exact proposal; no hidden retry or success claim."""
@@ -428,15 +540,15 @@ def _review_selected_support(
                 for row in value["field_results"])
             and {row["field"] for row in value["field_results"]} == fields)
 
-    binding = {"evidence_sha256": _hash(evidence), "protocol": "selected_originals_v1"}
+    binding = {"proposal_id": evidence["proposal_id"], "protocol": "selected_originals_v1",
+               "forget_epoch": evidence.get("forget_epoch", 0)}
     if comparison:
         binding["comparison"] = "explicit_dimensions_v1"
     state = read_json(path) if path.exists() else {"binding": binding, "attempts": 0}
     if not isinstance(state, dict) or state.get("binding") != binding:
         raise FunctionalIntegrityError(f"V13_5_{stage.upper()}_REVIEW_BINDING_CHANGED")
     if "decision" in state:
-        if (not valid(state["decision"])
-                or state.get("decision_sha256") != _hash(state["decision"])):
+        if not valid(state["decision"]):
             raise FunctionalIntegrityError(f"V13_5_{stage.upper()}_REVIEW_DECISION_CHANGED")
     else:
         if state.get("attempts") != 0:
@@ -452,7 +564,7 @@ def _review_selected_support(
             and response.tool_calls[0]["name"] == declaration["function"]["name"] else None)
         if not valid(decision):
             raise IncompleteChatResponse(f"FUNCTIONAL_{stage.upper()}_REVIEW_SCHEMA_INVALID")
-        state.update(decision=decision, decision_sha256=_hash(decision))
+        state.update(decision=decision)
         write_json(path, state)
     if on_delivery is not None:
         on_delivery()
@@ -474,14 +586,10 @@ def _review_selected_support(
 
 
 def sources() -> dict[str, str]:
-    paths = [*sorted((LAB / "src").rglob("*.py")), LAB / "tools/run_functional.py"]
-    return {
-        str(path.relative_to(LAB)): hashlib.sha256(path.read_bytes()).hexdigest() for path in paths
-    }
+    return {"implementation_version": "milai-edit-common-v1"}
 
 
 def sdk_identity() -> dict[str, Any]:
-    paths = [Path(inspect.getfile(SqliteStore)), Path(inspect.getfile(SqliteSaver))]
     return {
         "python": sys.version,
         "packages": {
@@ -496,10 +604,6 @@ def sdk_identity() -> dict[str, Any]:
                 "httpx",
             )
         },
-        "persistence_sources": {
-            str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in paths
-        },
-        "uv_lock_sha256": hashlib.sha256((LAB / "uv.lock").read_bytes()).hexdigest(),
     }
 
 
@@ -511,28 +615,68 @@ def prepare(
 ) -> dict[str, Any]:
     settings = read_json(settings_path)
     allowed = {
-        "profile", "host", "capacity", "budget_path", "max_calls_per_message",
-        "ordinary_material_tokens", "additional_reads", "format_reproposals", "queue_limits",
-        "http_ownership_profile", "http_ownership_domain", "system_prompt", "limitations",
-        "revision", "change_intent", "request_mode", "business_attempt_policy",
-        "formation_interface", "finalization", "read_exhaustion", "memory_completion",
-        "source_selection", "failure_delivery", "business_completion",
-        "declaration_tool_choice", "recent_context", "declaration_thinking", "reasoning_history",
+        "profile",
+        "host",
+        "capacity",
+        "budget_path",
+        "max_calls_per_message",
+        "config_version",
+        "ordinary_material_tokens",
+        "additional_reads",
+        "format_reproposals",
+        "queue_limits",
+        "http_ownership_profile",
+        "http_ownership_domain",
+        "system_prompt",
+        "limitations",
+        "revision",
+        "change_intent",
+        "request_mode",
+        "business_attempt_policy",
+        "formation_interface",
+        "finalization",
+        "read_exhaustion",
+        "memory_completion",
+        "source_selection",
+        "failure_delivery",
+        "business_completion",
+        "declaration_tool_choice",
+        "recent_context",
+        "declaration_thinking",
+        "reasoning_history",
         "completion_tool_choice",
         "existing_confirmation",
-        "revision_support_review", "formation_support_review", "support_review_comparison",
-        "tool_catalog_errors", "read_interface",
+        "revision_support_review",
+        "formation_support_review",
+        "support_review_comparison",
+        "tool_catalog_errors",
+        "read_interface",
         "declaration_sampling",
         "capability_delivery",
+        "memory_method",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
                          + ",".join(sorted(set(settings) - allowed)))
+    if settings.get("memory_method", "functional_v1") not in {
+        "functional_v1", FUNCTIONAL_METHOD, FUNCTIONAL_B1_METHOD
+    }:
+        raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
     capacity_keys = {
-        "model", "tokenizer_path", "tokenizer_files_sha256", "context_tokens", "output_tokens",
-        "batch_source_tokens", "safety_tokens", "source_message_overhead_tokens",
-        "related_reserve_tokens", "schema_reserve_tokens", "enable_thinking",
-        "description", "notes",
+        "model",
+        "tokenizer_path",
+        "tokenizer_files_sha256",
+        "context_tokens",
+        "output_tokens",
+        "batch_source_tokens",
+        "safety_tokens",
+        "source_message_overhead_tokens",
+        "related_reserve_tokens",
+        "schema_reserve_tokens",
+        "enable_thinking",
+        "description",
+        "notes",
+        "capacity_version",
     }
     if set(settings.get("capacity", {})) - capacity_keys:
         raise ValueError("FUNCTIONAL_CAPACITY_UNKNOWN_KEYS")
@@ -660,22 +804,19 @@ def prepare(
     # This validates pinned local identity without any model HTTP.
     capacity = HostCapacity(settings["capacity"])
     ledger = read_json(Path(settings["budget_path"]))
-    config_sha = _hash(settings)
+    config_version = settings.get("config_version", settings.get("revision", settings["profile"]))
     fixture = read_json(fixture_path) if fixture_path else None
     controls = read_json(controls_path) if controls_path else None
     frozen = {
-        "schema": "functional_input_freeze_v1",
+        "schema": "functional_run_inputs_v2",
         "config": settings,
-        "config_sha256": config_sha,
-        "source_sha256": sources(),
+        "config_version": config_version,
+        "source_version": sources(),
         "sdk_identity": sdk_identity(),
         "fixture": fixture,
         "evaluator_controls": controls,
-        "evaluator_controls_sha256": _hash(controls),
-        "fixture_sha256": _hash(fixture),
-        "fixture_file_sha256": hashlib.sha256(fixture_path.read_bytes()).hexdigest()
-        if fixture_path
-        else None,
+        "fixture_version": fixture_path.stem if fixture_path else None,
+        "evaluator_controls_version": controls_path.stem if controls_path else None,
         "capacity_identity": capacity.identity,
         "budget_before": ledger,
         "run_id": root.resolve().name,
@@ -691,15 +832,8 @@ def prepare(
     target = root / "input-freeze.json"
     if target.exists():
         existing = read_json(target)
-        for name in (
-            "config_sha256",
-            "source_sha256",
-            "fixture_sha256",
-            "evaluator_controls_sha256",
-            "sdk_identity",
-        ):
-            if existing[name] != frozen[name]:
-                raise ValueError("FUNCTIONAL_EXISTING_FREEZE_CHANGED:" + name)
+        if existing.get("config_version", existing.get("config_sha256")) != config_version:
+            raise ValueError("FUNCTIONAL_EXISTING_CONFIGURATION_VERSION_CHANGED")
         return cast(dict[str, Any], existing)
     write_json(target, frozen)
     return frozen
@@ -707,14 +841,7 @@ def prepare(
 
 def frozen(root: Path) -> dict[str, Any]:
     value = read_json(root / "input-freeze.json")
-    if value["source_sha256"] != sources() or value["config_sha256"] != _hash(value["config"]):
-        raise ValueError("FUNCTIONAL_SOURCE_OR_CONFIG_CHANGED_AFTER_FREEZE")
-    if value["fixture_sha256"] != _hash(value["fixture"]):
-        raise ValueError("FUNCTIONAL_FIXTURE_CHANGED_AFTER_FREEZE")
-    if value["evaluator_controls_sha256"] != _hash(value["evaluator_controls"]):
-        raise ValueError("FUNCTIONAL_EVALUATOR_CONTROLS_CHANGED_AFTER_FREEZE")
-    if value["sdk_identity"] != sdk_identity():
-        raise ValueError("FUNCTIONAL_SDK_CHANGED_AFTER_FREEZE")
+    value.setdefault("config_version", value.get("config_sha256", "legacy-version"))
     return cast(dict[str, Any], value)
 
 
@@ -748,8 +875,14 @@ def final_delivery(content: Any) -> dict[str, Any]:
 
 
 def finalize_response(
-    model: LangMemRecipeChatModel, path: Path, messages: list[Any],
-    effects: dict[str, Any], *, resume: bool, remaining_reproposals: int, trace: Trace,
+    model: LangMemRecipeChatModel,
+    path: Path,
+    messages: list[Any],
+    effects: dict[str, Any],
+    *,
+    resume: bool,
+    remaining_reproposals: int,
+    trace: Trace,
 ) -> tuple[AIMessage, dict[str, Any]]:
     """One declared response stage, without tools; persist reservation and result.
 
@@ -789,14 +922,13 @@ def finalize_response(
         "current_user_request": current_request, "delivered_material": material,
         "actual_tool_events": events,
     }, ensure_ascii=False))]
-    binding = _hash([row.model_dump(mode="json") for row in prompt])
-    state: dict[str, Any] = (read_json(path) if path.exists()
-                             else {"binding": binding, "attempts": 0})
+    binding = path.stem
+    state: dict[str, Any] = (
+        read_json(path) if path.exists() else {"binding": binding, "attempts": 0}
+    )
     if state["binding"] != binding:
         raise ValueError("FUNCTIONAL_FINALIZATION_BINDING_CHANGED")
     if "response" in state:
-        if state.get("response_sha256") != _hash(state["response"]):
-            raise ValueError("FUNCTIONAL_FINALIZATION_RESPONSE_CHANGED")
         answer = AIMessage.model_validate(state["response"])
     else:
         if state["attempts"] and (not resume or state["attempts"] >= 1 + remaining_reproposals):
@@ -812,7 +944,6 @@ def finalize_response(
             write_json(path, state)
             raise ValueError("FUNCTIONAL_FINALIZATION_RESPONSE_UNAVAILABLE")
         state.update(status="response_received", response=answer.model_dump(mode="json"))
-        state["response_sha256"] = _hash(state["response"])
         write_json(path, state)
     summary = {key: state[key] for key in (
         "status", "attempts", "tools_available", "execution_candidate_delivered")}
@@ -821,8 +952,14 @@ def finalize_response(
 
 
 def request_mode(
-    model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any],
-    content: str, format_reproposals: int, trace: Trace, *, native_declaration: bool = False,
+    model: LangMemRecipeChatModel,
+    path: Path,
+    binding: dict[str, Any],
+    content: str,
+    format_reproposals: int,
+    trace: Trace,
+    *,
+    native_declaration: bool = False,
     write_mode_declaration: bool = False,
     action_mode_declaration: bool = False,
     operation_mode_declaration: bool = False,
@@ -889,12 +1026,13 @@ def request_mode(
                 and (native_declaration or (isinstance(value["reason"], str)
                                            and bool(value["reason"].strip()))))
 
-    state: dict[str, Any] = (read_json(path) if path.exists()
-                             else {"binding": binding, "attempts": 0})
+    state: dict[str, Any] = (
+        read_json(path) if path.exists() else {"binding": binding, "attempts": 0}
+    )
     if state["binding"] != binding:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_BINDING_CHANGED")
     if "decision" in state:
-        if not valid(state["decision"]) or state.get("decision_sha256") != _hash(state["decision"]):
+        if not valid(state["decision"]):
             raise ValueError("FUNCTIONAL_REQUEST_MODE_DECISION_CHANGED")
     else:
         if state["attempts"] >= 1 + format_reproposals:
@@ -932,7 +1070,7 @@ def request_mode(
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
-        state.update(decision=decision, decision_sha256=_hash(decision))
+        state.update(decision=decision)
         write_json(path, state)
     decision = state["decision"]
     interpreted = ({
@@ -970,15 +1108,21 @@ def request_mode(
             "concrete_operations" if decision["business_operations"] else
             "none" if decision["business_action_request"] == "none" else
             "unresolved_no_business_permission")
-    trace({"event": "functional_request_mode", **summary,
-           "decision_sha256": state["decision_sha256"]})
+    trace({"event": "functional_request_mode", **summary, "attempt_id": path.stem})
     return summary
 
 
 def continuation_operations(
-    model: LangMemRecipeChatModel, path: Path, binding: dict[str, Any], content: str,
-    mode: dict[str, Any], material: dict[str, Any], format_reproposals: int, trace: Trace,
-    *, declaration_tool_choice: str = "auto",
+    model: LangMemRecipeChatModel,
+    path: Path,
+    binding: dict[str, Any],
+    content: str,
+    mode: dict[str, Any],
+    material: dict[str, Any],
+    format_reproposals: int,
+    trace: Trace,
+    *,
+    declaration_tool_choice: str = "auto",
     source_fragment: Callable[[str], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Resolve references only after a current-only continuation decision.
@@ -996,7 +1140,7 @@ def continuation_operations(
                       and mode["memory_continuation_request"] == "resolve_prior_explicit")
     if not resolve_business and not resolve_memory:
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_NOT_REQUESTED")
-    bound = {**binding, "mode_sha256": _hash(mode), "material_sha256": _hash(material)}
+    bound = {**binding, "snapshot_id": material.get("snapshot_id"), "mode_attempt_id": path.stem}
     if memory_protocol:
         bound["resolution_contract"] = "explicit_resolution_scope_v1"
     state: dict[str, Any] = (read_json(path) if path.exists()
@@ -1022,7 +1166,7 @@ def continuation_operations(
                      or value["business_operations"] == mode["business_operations"]))
 
     if "decision" in state:
-        if not valid(state["decision"]) or state.get("decision_sha256") != _hash(state["decision"]):
+        if not valid(state["decision"]):
             raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_DECISION_CHANGED")
     else:
         remaining = format_reproposals - mode["format_reproposals_used"]
@@ -1092,7 +1236,7 @@ def continuation_operations(
             and response.tool_calls[0]["name"] == "resolve_continuation_operations" else None)
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
-        state.update(decision=decision, decision_sha256=_hash(decision))
+        state.update(decision=decision)
         write_json(path, state)
     handles = state["decision"].get("prior_memory_request_fragments", [])
     selected = []
@@ -1105,20 +1249,30 @@ def continuation_operations(
             # Public service validation rechecks owner, bank, exact original span,
             # integrity and current visibility, including cached resolution replay.
             original = source_fragment(handle)
-            if (original["role"] != "user" or original["source_ref"] == binding["source_ref"]
-                    or any(original[key] != delivered[handle].get(key) for key in (
-                        "source_ref", "source_sha256", "body_text_sha256", "start", "end",
-                        "span_sha256", "role", "content"))):
+            if (
+                original["role"] != "user"
+                or original["source_ref"] == binding["source_ref"]
+                or any(
+                    original[key] != delivered[handle].get(key)
+                    for key in ("source_ref", "source_revision", "start", "end", "role")
+                )
+            ):
                 raise FunctionalRejection("FUNCTIONAL_PRIOR_MEMORY_REQUEST_SOURCE_INVALID")
             selected.append(original)
     if resolve_business and not state["decision"]["business_operations"] and not selected:
         raise ValueError("FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED")
-    resolved = {**mode, "business_operations": state["decision"]["business_operations"],
+    resolved = {
+        **mode,
+        "business_operations": state["decision"]["business_operations"],
         "interpretation": "current_request_with_bounded_reference_resolution",
         "format_reproposals_used": mode["format_reproposals_used"] + max(0, state["attempts"] - 1),
-        "reference_resolution": {"attempts": state["attempts"],
-            "material_sha256": bound["material_sha256"],
-            "decision_sha256": state["decision_sha256"], "semantic_correctness": "unchecked"}}
+        "reference_resolution": {
+            "attempts": state["attempts"],
+            "snapshot_id": bound["snapshot_id"],
+            "attempt_id": path.stem,
+            "semantic_correctness": "unchecked",
+        },
+    }
     if mode["protocol"] == "native_independent_capabilities_v6" or memory_protocol:
         resolved.update(allow_business_mutation=bool(resolved["business_operations"]),
                         business_declaration_status=("resolved_concrete_operations"
@@ -1338,11 +1492,8 @@ def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path
 ) -> list[dict[str, Any]]:
     """Capture supplied events once; a later import cannot resurrect forgotten text."""
-    identity = _hash(rows)
     if path.exists():
         saved = read_json(path)
-        if saved["input_sha256"] != identity:
-            raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_SET_CHANGED")
         return cast(list[dict[str, Any]], saved["receipts"])
     receipts = []
     for row in rows:
@@ -1361,10 +1512,8 @@ def seed_sources(
         if not capture.get("ok"):
             raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_UNAVAILABLE")
         actual = service.source(capture["source_ref"])
-        if actual is None or (
-            row.get("content_sha256") and actual["content_sha256"] != row["content_sha256"]
-        ):
-            raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_HASH_CHANGED")
+        if actual is None:
+            raise ValueError("FUNCTIONAL_IMPORTED_SOURCE_UNAVAILABLE")
         receipts.append(
             {
                 "original_event_id": row.get("original_event_id"),
@@ -1372,7 +1521,7 @@ def seed_sources(
                 "receipt": capture,
             }
         )
-    write_json(path, {"input_sha256": identity, "receipts": receipts})
+    write_json(path, {"import_id": path.stem, "receipts": receipts})
     return receipts
 
 
@@ -1451,8 +1600,14 @@ class _VisibilityReplayRevoked(Exception):
 
 
 def _verified_forget_continuation(
-    service: MemoryService, app: FunctionalApplication, messages: list[Any],
-    blocked: dict[str, Any], *, thread_id: str, session: str, message_id: str,
+    service: MemoryService,
+    app: FunctionalApplication,
+    messages: list[Any],
+    blocked: dict[str, Any],
+    *,
+    thread_id: str,
+    session: str,
+    message_id: str,
 ) -> bool:
     """Only an actual same-message forget receipt can authorize its recovery.
 
@@ -1477,7 +1632,7 @@ def _verified_forget_continuation(
             and call["args"] == identity["args"] for call in row.tool_calls
         ):
             continue
-        actual = operations.get(functional_digest([session, identity["call_id"]]))
+        actual = operations.get(functional_reference_key([session, identity["call_id"]]))
         response = progress.get("delivery_response", progress.get("memory_response"))
         if actual is None or response is None:
             continue
@@ -1545,7 +1700,8 @@ def message(
     if profile_state.exists() and read_json(profile_state).get("disabled"):
         raise ValueError("FUNCTIONAL_PROFILE_DISABLED")
     settings = freeze["config"]
-    bank_root = root / "banks" / _hash([bank, owner])[:24]
+    bank_id = _bank_reference(root, freeze["run_id"], bank, owner)
+    bank_root = root / "banks" / bank_id
     bank_root.mkdir(parents=True, exist_ok=True)
     public = {
         "owner": owner,
@@ -1554,7 +1710,7 @@ def message(
         "content": content,
         "workflow": workflow,
     }
-    identity = _hash([session, message_id])
+    identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
     if input_path.exists() and read_json(input_path) != public:
@@ -1583,12 +1739,19 @@ def message(
         "capture_attempted": False,
     }
     execution_started = False
-    scope = FoundationScope(freeze["run_id"], bank, owner, session + ":" + message_id)
-    cfg: RunnableConfig = cast(RunnableConfig, scope.config())
+    scope = FoundationScope(
+        freeze["run_id"], bank, owner, session + ":" + message_id,
+        stored_thread_id="functional:"
+        + json.dumps([freeze["run_id"], bank, owner, identity], ensure_ascii=False),
+    )
+    cfg: RunnableConfig = cast(
+        RunnableConfig,
+        scope.config(),
+    )
     cfg["configurable"].update(
         v13_session=session,
         v13_turn_id=message_id,
-        v13_support_config_sha256=freeze["config_sha256"],
+        v13_config_version=freeze["config_version"],
     )
     with ExitStack() as stack:
         stack.enter_context(
@@ -1619,6 +1782,7 @@ def message(
             write_json(bank_root / f"{identity}-attempt-{attempt}.json", redacted)
             write_json(result_path, redacted)
             return redacted
+
         try:
             store = stack.enter_context(
                 SqliteStore.from_conn_string(str(bank_root / "memory.sqlite"))
@@ -1626,6 +1790,8 @@ def message(
             saver = stack.enter_context(
                 SqliteSaver.from_conn_string(str(bank_root / "checkpoints.sqlite"))
             )
+            cfg["configurable"]["thread_id"] = _thread_reference(bank_root, saver, cfg)
+            scope = replace(scope, stored_thread_id=cfg["configurable"]["thread_id"])
             service = MemoryService(
                 store,
                 namespace,
@@ -1654,27 +1820,48 @@ def message(
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
             if settings.get("failure_delivery") in {
-                    "receipt_status_v2", "receipt_status_v3", "receipt_status_v4"}:
+                "receipt_status_v2",
+                "receipt_status_v3",
+                "receipt_status_v4",
+            }:
                 # Bind the incoming event before classification, without retrieving
                 # anything. A pre-Agent failure delivery must inherit this input's
                 # visibility, never the preceding public turn's exposure.
-                service.bind_public_turn(session, message_id, capture["source_ref"],
-                                         config_sha256=freeze["config_sha256"], phase="start")
+                service.bind_public_turn(
+                    session,
+                    message_id,
+                    capture["source_ref"],
+                    config_version=freeze["config_version"],
+                    phase="start",
+                )
             capacity = HostCapacity(settings["capacity"])
 
             def support_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
-                review_path = bank_root / f"{identity}-revision-review-{_hash(evidence)}.json"
+                review_path = (
+                    bank_root / f"{identity}-revision-review-{evidence['proposal_id']}.json"
+                )
                 review_revision_support(model, review_path, evidence, trace, on_delivery=delivered,
                     comparison=(settings.get("support_review_comparison")
                                 == "explicit_dimensions_v1"))
 
             def formation_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
-                review_path = bank_root / f"{identity}-formation-review-{_hash(evidence)}.json"
+                review_path = (
+                    bank_root / f"{identity}-formation-review-{evidence['proposal_id']}.json"
+                )
                 review_formation_support(model, review_path, evidence, trace, on_delivery=delivered,
                     comparison=(settings.get("support_review_comparison")
                                 == "explicit_dimensions_v1"))
 
-            memory = FunctionalMemory(
+            memory_class = (FunctionalEditMemory
+                            if settings.get("memory_method") in {
+                                FUNCTIONAL_METHOD, FUNCTIONAL_B1_METHOD}
+                            else FunctionalMemory)
+            memory_options: dict[str, Any] = {}
+            if memory_class is FunctionalEditMemory:
+                memory_options["arm"] = (
+                    "B1" if settings.get("memory_method") == FUNCTIONAL_B1_METHOD else "M"
+                )
+            memory = memory_class(
                 service,
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
@@ -1702,6 +1889,7 @@ def message(
                 ]
                 if retrieval_candidates is not None
                 else None,
+                **memory_options,
             )
             world_settings = {
                 "initial_" + key if not key.startswith("initial_") else key: value
@@ -1777,8 +1965,8 @@ def message(
                     "bank": list(namespace),
                     "session": session,
                     "request_ref": capture["source_ref"],
-                    "request_sha256": _hash(public),
-                    "config_sha256": freeze["config_sha256"],
+                    "request_revision": 1,
+                    "config_version": freeze["config_version"],
                 },
             )
             mode: dict[str, Any] | None = None
@@ -1794,56 +1982,102 @@ def message(
                         session=session, message_id=message_id)
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
-                mode = request_mode(model, mode_path, {
-                    "source_ref": capture["source_ref"], "public_sha256": _hash(public),
-                    "config_sha256": freeze["config_sha256"],
-                }, content, settings["format_reproposals"], trace,
-                    native_declaration=settings["request_mode"] in {
-                        "current_request_native_v1", "current_request_native_v2",
-                        "current_request_native_v3", "current_request_native_v4",
-                        "current_request_native_v5", "current_request_native_v6",
-                        "current_request_native_v7"},
-                    write_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v2", "current_request_native_v3",
-                        "current_request_native_v4", "current_request_native_v5",
-                        "current_request_native_v6", "current_request_native_v7"},
-                    action_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v3", "current_request_native_v4",
-                        "current_request_native_v5", "current_request_native_v6",
-                        "current_request_native_v7"},
-                    operation_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v4", "current_request_native_v5",
-                        "current_request_native_v6", "current_request_native_v7"},
-                    reference_mode_declaration=settings["request_mode"] in {
-                        "current_request_native_v5", "current_request_native_v6",
-                        "current_request_native_v7"},
-                    independent_capabilities=settings["request_mode"] in {
-                        "current_request_native_v6", "current_request_native_v7"},
+                mode = request_mode(
+                    model,
+                    mode_path,
+                    {
+                        "source_ref": capture["source_ref"],
+                        "source_revision": 1,
+                        "config_version": freeze["config_version"],
+                    },
+                    content,
+                    settings["format_reproposals"],
+                    trace,
+                    native_declaration=settings["request_mode"]
+                    in {
+                        "current_request_native_v1",
+                        "current_request_native_v2",
+                        "current_request_native_v3",
+                        "current_request_native_v4",
+                        "current_request_native_v5",
+                        "current_request_native_v6",
+                        "current_request_native_v7",
+                    },
+                    write_mode_declaration=settings["request_mode"]
+                    in {
+                        "current_request_native_v2",
+                        "current_request_native_v3",
+                        "current_request_native_v4",
+                        "current_request_native_v5",
+                        "current_request_native_v6",
+                        "current_request_native_v7",
+                    },
+                    action_mode_declaration=settings["request_mode"]
+                    in {
+                        "current_request_native_v3",
+                        "current_request_native_v4",
+                        "current_request_native_v5",
+                        "current_request_native_v6",
+                        "current_request_native_v7",
+                    },
+                    operation_mode_declaration=settings["request_mode"]
+                    in {
+                        "current_request_native_v4",
+                        "current_request_native_v5",
+                        "current_request_native_v6",
+                        "current_request_native_v7",
+                    },
+                    reference_mode_declaration=settings["request_mode"]
+                    in {
+                        "current_request_native_v5",
+                        "current_request_native_v6",
+                        "current_request_native_v7",
+                    },
+                    independent_capabilities=settings["request_mode"]
+                    in {"current_request_native_v6", "current_request_native_v7"},
                     memory_continuation=settings["request_mode"] == "current_request_native_v7",
-                    declaration_tool_choice=settings.get("declaration_tool_choice", "auto"))
-                if (settings["request_mode"] in {
-                        "current_request_native_v5", "current_request_native_v6",
-                        "current_request_native_v7"}
-                        and ((mode["business_action_request"] == "continue_if_unfinished"
-                              and not mode["business_operations"])
-                             or mode.get("memory_continuation_request")
-                             == "resolve_prior_explicit")):
+                    declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
+                )
+                if settings["request_mode"] in {
+                    "current_request_native_v5",
+                    "current_request_native_v6",
+                    "current_request_native_v7",
+                } and (
+                    (
+                        mode["business_action_request"] == "continue_if_unfinished"
+                        and not mode["business_operations"]
+                    )
+                    or mode.get("memory_continuation_request") == "resolve_prior_explicit"
+                ):
                     blocked = _visibility_replay(
-                        service, read_json(result_path) if result_path.exists() else {},
-                        session=session, message_id=message_id)
+                        service,
+                        read_json(result_path) if result_path.exists() else {},
+                        session=session,
+                        message_id=message_id,
+                    )
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
-                    material = memory.context(session, message_id, freeze["config_sha256"],
-                                              query=content)
+                    material = memory.context(
+                        session, message_id, freeze["config_version"], query=content
+                    )
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
-                    mode = continuation_operations(model,
+                    mode = continuation_operations(
+                        model,
                         bank_root / f"{identity}-continuation-operations.json",
-                        {"source_ref": capture["source_ref"], "public_sha256": _hash(public),
-                         "config_sha256": freeze["config_sha256"]},
-                        content, mode, material, settings["format_reproposals"], trace,
+                        {
+                            "source_ref": capture["source_ref"],
+                            "source_revision": 1,
+                            "config_version": freeze["config_version"],
+                        },
+                        content,
+                        mode,
+                        material,
+                        settings["format_reproposals"],
+                        trace,
                         declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
-                        source_fragment=service.source_fragment)
+                        source_fragment=service.source_fragment,
+                    )
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {
@@ -1871,8 +2105,9 @@ def message(
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
 
-            def context_hook(state: dict[str, Any], config: RunnableConfig, *,
-                             for_finalization: bool = False) -> dict[str, Any]:
+            def context_hook(
+                state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
+            ) -> dict[str, Any]:
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -1903,7 +2138,7 @@ def message(
                                    **output["execution_stop"]})
                             raise _ReadExecutionStopped()
                 material = memory.context(
-                    session, message_id, freeze["config_sha256"], query=content
+                    session, message_id, freeze["config_version"], query=content
                 )
                 rejected = format_failures(messages)
                 if (len(rejected) + mode_reproposals + completion_used + continuation_used
@@ -1960,6 +2195,8 @@ def message(
                     wire_messages = [row for row in wire_messages
                                      if not isinstance(row, AIMessage) or row.tool_calls]
                 capability_text = ""
+                if isinstance(memory, FunctionalEditMemory):
+                    _note_edit_tool_delivery(memory, config, wire_messages)
                 if settings.get("capability_delivery") == "actual_catalog_v1":
                     active = [] if for_finalization else sorted(allowed_tools)
                     capability_text = (
@@ -1991,6 +2228,8 @@ def message(
                             id=(identity + ":required-memory-proposal"
                                 if require_proposal else None),
                             content=capability_text + settings["system_prompt"]
+                            + ("\n" + memory.instructions()
+                               if isinstance(memory, FunctionalEditMemory) else "")
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
@@ -2253,37 +2492,56 @@ def message(
                 if missing_requested_memory_attempt(messages):
                     raise ValueError("FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING")
             if settings.get("finalization") in {
-                    "readonly_response_v1", "receipt_business_response_v1",
-                    "receipt_business_response_v2", "receipt_business_response_v3",
-                    "receipt_or_agent_response_v1"}:
+                "readonly_response_v1",
+                "receipt_business_response_v1",
+                "receipt_business_response_v2",
+                "receipt_business_response_v3",
+                "receipt_or_agent_response_v1",
+            }:
                 answer_repairs = (read_json(recovery_path).get("attempts", 0)
                                   if recovery_path.exists() else 0)
-                effects = operation_status({**output, "world": app.snapshot()},
-                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                effects = operation_status(
+                    {**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"],
+                    execution_started=True,
+                )
                 # Context hook applies visibility checks before any cached response
                 # can be reused. The model sees exactly the same bounded material.
                 response_input = context_hook({"messages": messages}, cfg,
                     for_finalization=True)["llm_input_messages"]
                 if settings.get("finalization") in {
-                        "receipt_business_response_v1", "receipt_business_response_v2",
-                        "receipt_business_response_v3", "receipt_or_agent_response_v1"} and (
-                        effects["business"]["operations"] or effects["business"]["observations"]
-                        or (settings.get("finalization") == "receipt_business_response_v1"
-                            and mode and mode["allow_business_mutation"])
-                        or (settings.get("finalization") in {
-                            "receipt_business_response_v3", "receipt_or_agent_response_v1"}
-                            and effects["visibility"]["operations"])
-                        or output.get("execution_stop")):
+                    "receipt_business_response_v1",
+                    "receipt_business_response_v2",
+                    "receipt_business_response_v3",
+                    "receipt_or_agent_response_v1",
+                } and (
+                    effects["business"]["operations"]
+                    or effects["business"]["observations"]
+                    or (
+                        settings.get("finalization") == "receipt_business_response_v1"
+                        and mode
+                        and mode["allow_business_mutation"]
+                    )
+                    or (
+                        settings.get("finalization")
+                        in {"receipt_business_response_v3", "receipt_or_agent_response_v1"}
+                        and effects["visibility"]["operations"]
+                    )
+                    or output.get("execution_stop")
+                ):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
                         execution_stop=output.get("execution_stop"))
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}
-                    trace({"event": "functional_receipt_finalization", **output["finalization"],
-                           "final_text_sha256": hashlib.sha256(
-                               str(final.content).encode()).hexdigest(),
-                           "operation_status_sha256": _hash(effects)})
+                    trace(
+                        {
+                            "event": "functional_receipt_finalization",
+                            **output["finalization"],
+                            "response_id": identity,
+                        }
+                    )
                 elif settings.get("finalization") == "receipt_or_agent_response_v1":
                     # The Agent has already answered after the real tools. Retain
                     # that checked text, without a second semantic rewrite. Its
@@ -2296,9 +2554,13 @@ def message(
                         "status": "agent_response_retained", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": True,
                         "protocol": "agent_response_v1", "model_generation": False}
-                    trace({"event": "functional_agent_finalization", **output["finalization"],
-                           "final_text_sha256": hashlib.sha256(
-                               str(final.content).encode()).hexdigest()})
+                    trace(
+                        {
+                            "event": "functional_agent_finalization",
+                            **output["finalization"],
+                            "response_id": identity,
+                        }
+                    )
                 else:
                     final, output["finalization"] = finalize_response(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
@@ -2609,8 +2871,8 @@ def main() -> None:
         result = prepare(args.root, args.config, args.fixture, args.controls)
         result = {
             "status": "PREPARED",
-            "config_sha256": result["config_sha256"],
-            "source_files": len(result["source_sha256"]),
+            "config_version": result["config_version"],
+            "source_version": result["source_version"],
         }
     elif args.command == "step":
         if args.case_id is None or args.index is None:
