@@ -1,3 +1,46 @@
+# 2026-10-06 19:24:35 UTC: both original R3 on baa closed; preserve opposite mechanism results
+
+Previous goal turn made publication progress2149886. This turn read post87c
+sections1-12 and inherited stages/six deliverables. Frozenbaa own Fast/Full
+success at19:03:50. First PID2821265 normal terminal19:04:51; Root24 states,
+23 parsed proposals+1 known truncation,20 complete answers and actual material
+reviewed;44generation245349known,54encoder1321known. Second admitted only
+after first terminal/missing PID/receipts/ledger/lease; PID2894453 normal
+terminal19:19:27. Root20states/proposals16completeanswers plus actual materials
+reviewed;36stop187719known,51encoder1544known. Both original events/questions/
+parameters, each4ownempty, no ideal cards/retry/unknown replay/hot changes.
+80generation433068known79stop1length,105encoding2865known;fixedReader2
+5262known separately closed. Source-stage82/438330;4operation rejects and
+5event gaps preserved,0Judge/capacity/newunknown/retry. All actual prompt
+usage/source dates/questions/current facts/retained records and receipts
+match, no independent source/DB/reasoning audit or official scores.
+7 actual formed qualifier controls keep text/role/support/assertion exact;
+firstB1 thinking truncates at32768 on1893input/empty bank/contentnull, so later
+qualifier formation is repair, not preservation or oversized-record proof.
+FirstM3content, no initialconditionlinks; actual change_value/add_exception/
+remove_exception keep actual old units exactly, peak1condition2links, query/
+reaffirm exactempty. Readerwithdraw/final incomplete despite real quote.
+SecondM3content, only5change_value; night replaces general3, cancellation
+narrative cannot restore it.0conditions/links/add_exception/change_condition.
+FirstB2 conditionlinks present;secondnone.4rejects notpreservation successes.
+Read-onlyactual earlierMrevision shows former General label/override graph
+available but absent from current Reader context; currentrender switches
+General toContent after last override removed. Observed material gap, not
+proven causal fix, no new model/state change. SecondB1 Reader miscalculates
+nextMonday and uses capturedate as report date; original answers unchanged.
+Next repair real semantic action-selection/revision delivery through existing
+entries, not more warning/example iterations or Judge. Not implemented by
+this report; no new prefix/finalcandidate. Publish6Labreports only with light
+JSON/links/receipt/count/diff; no repeated source tests. Original declaration/
+646results/all raw preserved. Current no liveHTTP, leasefree,closed ledger
+39542/151091320known151203035charged/embed973335/historicalunknown3. Limits
+unchanged, stage subsets already included. Full goal8/65/277/native/drift/
+ablation/tighterbudget/16reserved/external/Host/recovery/sixdeliverables intact.
+SingleQwen/BGE,ProductNO_GO,PR85draftunmerged, no delegation/platform/heldout.
+Product/API/permissions/Canonical/Archive/workflow unchanged; private outputs
+ignored;rollback2149886. New report ownCI queried separately. Goalactive.
+Lower dated blocks are original historical records.
+
 # 2026-10-06 18:58:18 UTC: user-requested execution summary; fixed Reader closed, new original R3 live
 
 User requests current execution situation submitted to GitHub. Actual frozen
