@@ -295,17 +295,17 @@ class BenchmarkRun:
             self.budget = RunBudget(RunLimits(**state["limits"]), Path(settings["budget_path"]))
             self.before = copy.deepcopy(self.budget.state)
             self.client = VLLMClient(VLLMConfig(**settings["model"]), budget=self.budget)
-            self.embedding_client: VLLMClient | None = None
-            self.embeddings: MeteredEmbeddings | None = None
+            self.retrieval_embedding_client: VLLMClient | None = None
+            self.retrieval_embeddings: MeteredEmbeddings | None = None
             self._embedding_serial = 0
-            if "embedding" in settings:
-                self.embedding_client = VLLMClient(
+            if "embedding_capacity" in settings:
+                self.retrieval_embedding_client = VLLMClient(
                     VLLMConfig(**settings["embedding"]),
                     emit=self._embedding_trace,
                     budget=self.budget,
                 )
-                self.embeddings = MeteredEmbeddings(
-                    self.embedding_client,
+                self.retrieval_embeddings = MeteredEmbeddings(
+                    self.retrieval_embedding_client,
                     settings["embedding"]["model"],
                     settings["embedding_capacity"],
                     dimension=settings["embedding_dimension"],
@@ -314,7 +314,7 @@ class BenchmarkRun:
             if not (root / "accounting-start.json").exists():
                 write_json(root / "accounting-start.json", self.before)
         except BaseException:
-            embedding_client = getattr(self, "embedding_client", None)
+            embedding_client = getattr(self, "retrieval_embedding_client", None)
             if embedding_client is not None:
                 embedding_client.close()
             if hasattr(self, "client"):
@@ -324,7 +324,7 @@ class BenchmarkRun:
 
     def close(self) -> None:
         write_json(self.root / "accounting-end.json", self.budget.state)
-        embedding_client = getattr(self, "embedding_client", None)
+        embedding_client = getattr(self, "retrieval_embedding_client", None)
         if embedding_client is not None:
             embedding_client.close()
         self.client.close()
@@ -352,10 +352,10 @@ class BenchmarkRun:
             write_json(folder / "failure.json", event)
 
     def _semantic_retriever(self) -> SemanticRetriever | None:
-        if getattr(self, "embeddings", None) is None:
+        if getattr(self, "retrieval_embeddings", None) is None:
             return None
-        assert self.embeddings is not None
-        return SemanticRetriever(self.embeddings, self.settings["embedding_dimension"])
+        assert self.retrieval_embeddings is not None
+        return SemanticRetriever(self.retrieval_embeddings, self.settings["embedding_dimension"])
 
     def input_tokens(self, messages: list[dict[str, str]]) -> int:
         return len(

@@ -721,6 +721,9 @@ def step(
                         }[event["phase"]]
                         crash_at(boundary, "observe", event)
 
+                receipt_options: dict[str, Any] = (
+                    {"receipt_profile": "document_publication_v1"} if document_mode else {}
+                )
                 service = MemoryService(
                     store,
                     ("langmem", scope.run_id, scope.arm_id, scope.user_id),
@@ -731,7 +734,7 @@ def step(
                     mutation_contract=d0._mutation_contract(settings),
                     **_service_options(settings),
                     observer=service_observer,
-                    **({"receipt_profile": "document_publication_v1"} if document_mode else {}),
+                    **receipt_options,
                     **({} if composition is None else composition.service_options(frozen)),
                 )
                 active["service"] = service

@@ -33,9 +33,9 @@
   "prior_actual_diagnostic": "milai-edit-post-b0-fixed-state-semantic-retrieval-results-20261006.json",
   "ranking_differs_from_prior_diagnostic": "Prior diagnosis kept all positive lexical results before cosine fill. This generic source interleaves them; prior Reader answers are not runtime validation of this new source.",
   "actual_model_calls_for_new_retrieval_source": 0,
-  "own_CI": "PENDING_PUBLICATION_BIND_OWN_FAST_BEFORE_FINITE_HTTP",
+  "own_CI": "20b_FAST_FAILED_CORRECTED_SOURCE_OWN_CI_PENDING_BIND_OWN_FAST_BEFORE_HTTP",
   "next_finite_real_check": {
-    "status": "DECLARED_NOT_ADMITTED_NOT_RUN",
+    "status": "DECLARED_NOT_ADMITTED_PENDING_FIXED_COMMIT_OWN_FAST_NOT_RUN",
     "normal_driver": "tools/run_edit_development_history.py",
     "arms": [
       "B0",
@@ -74,38 +74,8 @@
       "same_continuous_budget": true
     },
     "before_HTTP": "Prior finite process must exit normally; exact published source/declaration and own Fast success, immutable config/source and existing serial lease. Full required before full-prefix/candidate/merge.",
-    "failures": "Keep all first attempts; no replay, ideal old cards, repaired JSON, budget increase or cross-version score splicing."
-  },
-  "current_first_running_snapshot": {
-    "status": "RUNNING_FINITE_CURRENT_FIRST_B1_OWN_EMPTY_FIRST8",
-    "observed_at": "2026-10-06T15:35:47.648995+00:00",
-    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
-    "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
-    "scope": {
-      "arms": [
-        "B1"
-      ],
-      "development_user_position": 0,
-      "chronological_sessions": 8,
-      "updates": 19,
-      "QA": 20,
-      "initial_state": "OWN_EMPTY_BANK"
-    },
-    "maintenance_completed": 7,
-    "evaluation_completed": 7,
-    "HTTP_requests": 189,
-    "HTTP_responses": 188,
-    "pending_responses": 1,
-    "saved_known_tokens": 664689,
-    "saved_finish_reasons": {
-      "stop": 188
-    },
-    "final_update_score": null,
-    "final_QA_score": null,
-    "same_frozen_lexical_Reader_and_author_scoring": true,
-    "authoritative_process_handle_confirmed_live": true,
-    "no_hot_source_config_changes_or_restart": true,
-    "not_closed_cost_or_new_method_advantage": true
+    "failures": "Keep all first attempts; no replay, ideal old cards, repaired JSON, budget increase or cross-version score splicing.",
+    "source_binding": "Exact commit containing this declaration and CI compatibility correction; do not admit failed20b source"
   },
   "bounded_current_first_observations": [
     "Current-first A yields4 actual accepted edits,1 genuine empty batch and a real completed-role/health revision, not only more creates. No writer capacity failure or operation rejection in this finite8.",
@@ -147,5 +117,85 @@
         "unknown_usage": 0
       }
     }
+  },
+  "ci_compatibility_correction": {
+    "status": "CI_COMPATIBILITY_CORRECTION_LOCAL_CHECKS_PASS_OWN_FAST_PENDING_REAL_CHAIN_NOT_ADMITTED",
+    "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+    "source_commit_reference": "Bind exact commit containing correction and declaration before HTTP",
+    "observed_at": "2026-10-06T16:02:00+00:00",
+    "causes": [
+      "Existing memory source registration omitted retrieval.py",
+      "Optional base embedding_client collided with ExternalRun required transport and its existing configuration",
+      "Existing P5 conditional string kwargs needed explicit dict[str, Any] after adding an optional retriever dependency"
+    ],
+    "source_files": [
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "src/milai_lab/runners/v13_1_p5.py"
+    ],
+    "behavior": [
+      "Register the already implemented retrieval module",
+      "Create common retrieval embeddings only for the declared embedding_capacity configuration; keep distinct transport attributes from existing external baselines",
+      "Preserve existing P5 kwargs values and conditional behavior"
+    ],
+    "checks": {
+      "related_tests_passed": 39,
+      "new_necessary_external_configuration_regression": 1,
+      "Ruff_files": 4,
+      "mypy_source_files": 4,
+      "verification_matrix": "PASS_245_ACTIVE_SOURCES",
+      "package_boundary": "PASS",
+      "previous_313_tests_repeated": false
+    },
+    "new_real_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION",
+    "previous_source_CI": {
+      "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+      "observed_at": "2026-10-06T16:02:00+00:00",
+      "Fast": {
+        "run_id": 37490884803,
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      "Full": {
+        "run_id": 37490884560,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
+    },
+    "next_real_check": "Unchanged exposed global-condition5 events/all4 ownempty/36 Writer-Reader/0 Judge plus all billed embedding; own Fast success required",
+    "rollback_reference": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b"
+  },
+  "historical_current_first_running_snapshot_before_closure": {
+    "status": "RUNNING_FINITE_CURRENT_FIRST_B1_OWN_EMPTY_FIRST8",
+    "observed_at": "2026-10-06T15:35:47.648995+00:00",
+    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+    "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+    "scope": {
+      "arms": [
+        "B1"
+      ],
+      "development_user_position": 0,
+      "chronological_sessions": 8,
+      "updates": 19,
+      "QA": 20,
+      "initial_state": "OWN_EMPTY_BANK"
+    },
+    "maintenance_completed": 7,
+    "evaluation_completed": 7,
+    "HTTP_requests": 189,
+    "HTTP_responses": 188,
+    "pending_responses": 1,
+    "saved_known_tokens": 664689,
+    "saved_finish_reasons": {
+      "stop": 188
+    },
+    "final_update_score": null,
+    "final_QA_score": null,
+    "same_frozen_lexical_Reader_and_author_scoring": true,
+    "authoritative_process_handle_confirmed_live": true,
+    "no_hot_source_config_changes_or_restart": true,
+    "not_closed_cost_or_new_method_advantage": true
   }
 }

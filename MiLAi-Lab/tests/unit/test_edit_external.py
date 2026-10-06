@@ -7,9 +7,12 @@ from types import SimpleNamespace
 
 import pytest
 from langgraph.store.sqlite import SqliteStore
+from tokenizers import Tokenizer
+from tokenizers.models import WordLevel
 
 from milai_lab.datasets.edit_benchmarks import ObservedSession
-from milai_lab.harness.artifact_io import read_json
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.service import MemoryService
 from milai_lab.runners.edit_external import (
     EmbeddingTransport,
@@ -17,6 +20,38 @@ from milai_lab.runners.edit_external import (
     bound_author_context,
     reader_payload,
 )
+
+
+def test_external_embedding_configuration_keeps_its_original_transport(tmp_path, monkeypatch):
+    tokenizer = Tokenizer(WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
+    tokenizer_path = tmp_path / "tokenizer.json"
+    tokenizer.save(str(tokenizer_path))
+    monkeypatch.setattr(
+        "milai_lab.runners.edit_benchmarks.AutoTokenizer.from_pretrained",
+        lambda *args, **kwargs: SimpleNamespace(),
+    )
+    budget_path = tmp_path / "budget.json"
+    write_json(budget_path, RunBudget(RunLimits(), budget_path).state)
+    settings = {
+        "experiment_name": "synthetic-external",
+        "tokenizer_path": "synthetic",
+        "budget_path": str(budget_path),
+        "model": {"base_url": "http://synthetic.invalid/v1", "model": "synthetic"},
+        "embedding": {"base_url": "http://synthetic.invalid/v1", "model": "synthetic"},
+        "embedding_tokenizer_path": str(tokenizer_path),
+        "embedding_context_tokens": 128,
+        "embedding_batch_size": 2,
+    }
+    execution = ExternalRun(settings, tmp_path / "run")
+    try:
+        assert execution.embedding.execution is execution
+        assert execution.retrieval_embedding_client is None
+        assert execution._semantic_retriever() is None
+    finally:
+        execution.close()
+    assert read_json(tmp_path / "run/accounting-end.json") == read_json(
+        tmp_path / "run/accounting-start.json"
+    )
 
 
 def test_author_expansion_limit_retains_complete_occurrences_and_reports_omissions():

@@ -1,7 +1,7 @@
 {
-  "status": "CURRENT_FIRST_FINITE_CLOSED_MAINTENANCE_IMPROVED_COMMON_RETRIEVAL_SOURCE_READY_REAL_CHAIN_PENDING_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T15:44:04.817496+00:00",
-  "previous_report_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+  "status": "CI_COMPATIBILITY_CORRECTION_LOCAL_CHECKS_PASS_OWN_FAST_PENDING_REAL_CHAIN_NOT_ADMITTED",
+  "observed_at": "2026-10-06T16:02:00+00:00",
+  "previous_report_commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,7 +24,7 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
+    "status": "NOT_ADMITTED_PENDING_FIXED_SOURCE_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
     "detail_manifest": "milai-edit-post-b0-semantic-retrieval-development-20261006.json",
     "actual_model_calls": 0,
     "candidate_selected": false,
@@ -46,19 +46,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
-    "observed_at": "2026-10-06 14:40:41 UTC",
+    "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+    "observed_at": "2026-10-06T16:02:00+00:00",
     "Fast": {
-      "run_id": 37478256349,
+      "run_id": 37490884803,
       "status": "completed",
-      "conclusion": "success"
+      "conclusion": "failure"
     },
     "Full": {
-      "run_id": 37478256288,
+      "run_id": 37490884560,
       "status": "in_progress",
       "conclusion": null
     },
-    "new_source_CI_must_be_queried_separately": true
+    "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -373,7 +373,7 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 48,
+  "model_calls_since_previous_report": 0,
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -577,21 +577,21 @@
     "M_original_scope_withdrawal_failed": true,
     "final_Reader_incomplete_all_arms_both_branches": true
   },
-  "latest_checkpoint_document": "../../docs/MILAI_EDIT_CHECKPOINT_20261006.md",
+  "latest_checkpoint_document": "MILAI_EDIT_EXECUTION_STATUS_20261007.md",
   "current_method_source_ci": {
-    "commit": "7b82c60e04755f385e5f80658ed67e4067826093",
-    "observed_at": "2026-10-06 07:19:12 UTC",
+    "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+    "observed_at": "2026-10-06T16:02:00+00:00",
     "Fast": {
-      "run_id": 37426071277,
+      "run_id": 37490884803,
       "status": "completed",
-      "conclusion": "success"
+      "conclusion": "failure"
     },
     "Full": {
-      "run_id": 37426071235,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37490884560,
+      "status": "in_progress",
+      "conclusion": null
     },
-    "Full_before_prefix": true
+    "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
   },
   "normal_SDK_clause_support_collection": {
     "status": "ROOT_REVIEWED341_COMMITTED651_FAST_FULL_SUCCESS_NO_NEW_SDK_MODEL_COHORT",
@@ -972,11 +972,11 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_files": 13,
-    "source_files": 5,
+    "Lab_files": 11,
+    "source_files": 3,
     "test_files": 1,
+    "report_and_declaration_files": 7,
     "new_model_processes_started_for_publication": 0,
-    "active_old_process_frozen": true,
     "Product_Archive_workflow": "UNCHANGED"
   },
   "transport300_continuation_declaration": {
@@ -1644,8 +1644,8 @@
     "staged_diff": "PASS_SEVEN_REPORT_FILES_ONLY",
     "source_draft_excluded": true
   },
-  "latest_source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
-  "model_calls_since_previous_report_scope": "Since summaryd7f062c: remaining source-controls36 plus identity12; not new calls for publication.",
+  "latest_source_commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+  "model_calls_since_previous_report_scope": "Since20b979a: publication and CI compatibility correction only, no real model dispatch",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
@@ -1757,7 +1757,7 @@
     "scope": "Earlier dated development snapshots, not counts of the current48 new completed requests or original7cc141."
   },
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
-  "new_queue_live": true,
+  "new_queue_live": false,
   "stage_C_prefix_live": {
     "status": "CLOSED_NORMAL_EXIT",
     "observed_at": "2026-10-06T13:34:37.015448+00:00",
@@ -1961,29 +1961,16 @@
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "current_publication_checks": {
-    "status": "PASS_ACTUAL_RETRIEVAL_COUNTS_ANSWERS_COSTS_SOURCE_CONSERVATION_HISTORY_LINKS_BOUNDARY_SCOPE",
-    "public_files": 9,
-    "source_files": 2,
-    "new_source_model_calls": 0,
-    "publication_model_calls": 0,
-    "affected_existing_tests_passed": 99,
-    "Ruff_source_files_passed": 2,
-    "mypy_source_files_passed": 2,
-    "actual_read_only_HTTP_pairs": 4,
-    "complete_Reader_answers_matched": 3,
-    "existing_deliveries_compared": 8,
-    "new_capacity_projection_inputs": 0,
-    "existing37_projections_unchanged": true,
-    "old_four_arm_scores_unchanged": true,
-    "relative_links_checked": 127,
-    "historical_manifests_unchanged": 746,
-    "raw_payload_fields_published": 0,
-    "boundary": {
-      "status": "PASS",
-      "tracked_paths": 6463,
-      "findings": 0
-    },
-    "rollback": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
+    "related_tests_passed": 39,
+    "new_necessary_external_configuration_regression": 1,
+    "Ruff_files": 4,
+    "mypy_source_files": 4,
+    "verification_matrix": "PASS_245_ACTIVE_SOURCES",
+    "package_boundary": "PASS",
+    "previous_313_tests_repeated": false,
+    "new_real_model_calls": 0,
+    "old_scores_and_actual_execution_artifacts_unchanged": true,
+    "raw_payload_fields_published": 0
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -6017,9 +6004,9 @@
       "mypy_source_files": 2,
       "not_real_model_semantic_success": true
     },
-    "actual_model_calls": 0,
+    "actual_model_calls": 218,
     "finite_recheck": {
-      "status": "PREPARED_NOT_ADMITTED",
+      "status": "CLOSED_OWN_EMPTY_FIRST8_SEE_FINAL_RESULTS",
       "arms": [
         "B1"
       ],
@@ -6065,7 +6052,35 @@
     },
     "candidate_selected": false,
     "full_new_four_arm_prefix_admitted": false,
-    "latest_live_snapshot": {
+    "closed_result_manifest": "milai-edit-post-b0-current-first-finite-results-20261006.json",
+    "actual_Writer_calls": 8,
+    "actual_Reader_calls": 20,
+    "actual_Judge_calls": 190,
+    "final_results": {
+      "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
+      "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+      "updates_Correct": 10,
+      "updates_all": 19,
+      "updates_valid": 18,
+      "QA_Correct": 15,
+      "QA_all": 20,
+      "QA_valid": 18,
+      "known_tokens": 784726,
+      "accounting_end": {
+        "generation_requests": 39340,
+        "generation": {
+          "charged_tokens": 150249941,
+          "known_tokens": 150138226,
+          "unknown_usage": 3
+        },
+        "embedding": {
+          "charged_tokens": 965219,
+          "known_tokens": 965219,
+          "unknown_usage": 0
+        }
+      }
+    },
+    "historical_live_snapshot_before_closure": {
       "status": "RUNNING_FINITE_CURRENT_FIRST_B1_OWN_EMPTY_FIRST8",
       "observed_at": "2026-10-06T15:35:47.648995+00:00",
       "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
@@ -6095,34 +6110,6 @@
       "authoritative_process_handle_confirmed_live": true,
       "no_hot_source_config_changes_or_restart": true,
       "not_closed_cost_or_new_method_advantage": true
-    },
-    "closed_result_manifest": "milai-edit-post-b0-current-first-finite-results-20261006.json",
-    "actual_Writer_calls": 8,
-    "actual_Reader_calls": 20,
-    "actual_Judge_calls": 190,
-    "final_results": {
-      "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
-      "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
-      "updates_Correct": 10,
-      "updates_all": 19,
-      "updates_valid": 18,
-      "QA_Correct": 15,
-      "QA_all": 20,
-      "QA_valid": 18,
-      "known_tokens": 784726,
-      "accounting_end": {
-        "generation_requests": 39340,
-        "generation": {
-          "charged_tokens": 150249941,
-          "known_tokens": 150138226,
-          "unknown_usage": 3
-        },
-        "embedding": {
-          "charged_tokens": 965219,
-          "known_tokens": 965219,
-          "unknown_usage": 0
-        }
-      }
     }
   },
   "latest_actual_execution_since_previous_report": {
@@ -6205,6 +6192,135 @@
     "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
     "actual_model_calls": 0,
     "engineering_checks_passed": 313,
-    "own_CI": "QUERY_AFTER_PUBLICATION"
+    "own_CI": "20b_FAST_FAILED_CORRECTED_SOURCE_OWN_CI_PENDING",
+    "ci_correction_in_this_commit": true
+  },
+  "historical_before_ci_compatibility_repair": {
+    "status": "CURRENT_FIRST_FINITE_CLOSED_MAINTENANCE_IMPROVED_COMMON_RETRIEVAL_SOURCE_READY_REAL_CHAIN_PENDING_NO_FINAL_CANDIDATE",
+    "observed_at": "2026-10-06T15:44:04.817496+00:00",
+    "previous_report_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+    "previous_report_ci": {
+      "commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
+      "observed_at": "2026-10-06 14:40:41 UTC",
+      "Fast": {
+        "run_id": 37478256349,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37478256288,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_source_CI_must_be_queried_separately": true
+    },
+    "current_method_source_ci": {
+      "commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "observed_at": "2026-10-06 07:19:12 UTC",
+      "Fast": {
+        "run_id": 37426071277,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37426071235,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full_before_prefix": true
+    },
+    "model_calls_since_previous_report": 48,
+    "model_calls_since_previous_report_scope": "Since summaryd7f062c: remaining source-controls36 plus identity12; not new calls for publication.",
+    "publication_scope": {
+      "Lab_files": 13,
+      "source_files": 5,
+      "test_files": 1,
+      "new_model_processes_started_for_publication": 0,
+      "active_old_process_frozen": true,
+      "Product_Archive_workflow": "UNCHANGED"
+    },
+    "current_publication_checks": {
+      "status": "PASS_ACTUAL_RETRIEVAL_COUNTS_ANSWERS_COSTS_SOURCE_CONSERVATION_HISTORY_LINKS_BOUNDARY_SCOPE",
+      "public_files": 9,
+      "source_files": 2,
+      "new_source_model_calls": 0,
+      "publication_model_calls": 0,
+      "affected_existing_tests_passed": 99,
+      "Ruff_source_files_passed": 2,
+      "mypy_source_files_passed": 2,
+      "actual_read_only_HTTP_pairs": 4,
+      "complete_Reader_answers_matched": 3,
+      "existing_deliveries_compared": 8,
+      "new_capacity_projection_inputs": 0,
+      "existing37_projections_unchanged": true,
+      "old_four_arm_scores_unchanged": true,
+      "relative_links_checked": 127,
+      "historical_manifests_unchanged": 746,
+      "raw_payload_fields_published": 0,
+      "boundary": {
+        "status": "PASS",
+        "tracked_paths": 6463,
+        "findings": 0
+      },
+      "rollback": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
+    },
+    "common_semantic_retrieval_development": {
+      "detail_manifest": "milai-edit-post-b0-semantic-retrieval-development-20261006.json",
+      "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
+      "actual_model_calls": 0,
+      "engineering_checks_passed": 313,
+      "own_CI": "20b_FAST_FAILED_CORRECTED_SOURCE_OWN_CI_PENDING",
+      "ci_correction_in_this_commit": true
+    }
+  },
+  "latest_source_commit_scope": "Last published common retrieval source before this correction; executed four-arm prefix remains7b82c60 and finite check87c0f1f",
+  "ci_compatibility_correction": {
+    "status": "CI_COMPATIBILITY_CORRECTION_LOCAL_CHECKS_PASS_OWN_FAST_PENDING_REAL_CHAIN_NOT_ADMITTED",
+    "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+    "source_commit_reference": "Bind exact commit containing correction and declaration before HTTP",
+    "observed_at": "2026-10-06T16:02:00+00:00",
+    "causes": [
+      "Existing memory source registration omitted retrieval.py",
+      "Optional base embedding_client collided with ExternalRun required transport and its existing configuration",
+      "Existing P5 conditional string kwargs needed explicit dict[str, Any] after adding an optional retriever dependency"
+    ],
+    "source_files": [
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "src/milai_lab/runners/v13_1_p5.py"
+    ],
+    "behavior": [
+      "Register the already implemented retrieval module",
+      "Create common retrieval embeddings only for the declared embedding_capacity configuration; keep distinct transport attributes from existing external baselines",
+      "Preserve existing P5 kwargs values and conditional behavior"
+    ],
+    "checks": {
+      "related_tests_passed": 39,
+      "new_necessary_external_configuration_regression": 1,
+      "Ruff_files": 4,
+      "mypy_source_files": 4,
+      "verification_matrix": "PASS_245_ACTIVE_SOURCES",
+      "package_boundary": "PASS",
+      "previous_313_tests_repeated": false
+    },
+    "new_real_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION",
+    "previous_source_CI": {
+      "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+      "observed_at": "2026-10-06T16:02:00+00:00",
+      "Fast": {
+        "run_id": 37490884803,
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      "Full": {
+        "run_id": 37490884560,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
+    },
+    "next_real_check": "Unchanged exposed global-condition5 events/all4 ownempty/36 Writer-Reader/0 Judge plus all billed embedding; own Fast success required",
+    "rollback_reference": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b"
   }
 }

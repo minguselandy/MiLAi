@@ -1,3 +1,24 @@
+# 2026-10-06 16:02:00 UTC: user-requested execution summary and CI compatibility correction
+
+Full post87c goal remains active. This turn publishes current execution, starts0
+model processes. Closed7b all4 prefix and87c finite B1 ownempty first8 remain exact;
+87c10/19valid18 and15/20valid18,218stop/784726known,22create4edit1empty.
+Current model queue inactive, continuous ledger39340/150138226known/150249941charged,
+embedding965219,historicunknown3 unchanged. Existing live snapshots are history.
+20b ownFastfailure/Fullin_progress at16:02:00, source registry memory/retrieval missing
+and3 mypy errors. Root fixes3source files: register existing module, distinct optional
+retrieval embedding client activated by embedding_capacity so external original
+transport/config stays intact, type existing P5 conditional kwargs without value
+change.1 necessary regression added,39 related tests/Ruff4/mypy4/matrix/boundary pass;
+prior313 not repeated. New fixed ownCI queried after publication, not old success.
+Next original exposed global5-event ownempty all4 chain36W/R0Judge plus embeddings;
+freeze exact correction/declaration and immutable config, ownFast before HTTP.
+No new agent/model family/auditor/Attention/platform/budget/retry/hotchange/idealstate.
+Original65/277/native/drift/ablation/fixed tighterbudget/16reserved/external/Host/
+recovery/sixdeliverables stay unfinished; ProductNO_GO,PR85draft/unmerged.
+Product Schema/API/permissions/Canonical/Archive/workflow unchanged; raw/gold/HTTP/
+reasoning/DB/log/privateconfigs ignored. Rollback20b; lower blocks are history.
+
 # 2026-10-06T15:44:04.817496+00:00: finite current-first closed; common retrieval source ready
 
 Full original goal active. Current turn made progress: declared87c finite ownempty
