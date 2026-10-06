@@ -1,7 +1,7 @@
 {
-  "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
-  "observed_at": "2026-10-06T18:29:24.251694+00:00",
-  "previous_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+  "status": "FIXED_READER_CLOSED_INCOMPLETE_ORIGINAL_R3_RUNNING",
+  "observed_at": "2026-10-06T18:58:18.594474+00:00",
+  "previous_report_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -48,19 +48,20 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
-    "observed_at": "2026-10-06 18:27:41 UTC",
+    "commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "observed_at": "2026-10-06T18:58:18.594474+00:00",
     "Fast": {
-      "run_id": 37509525789,
+      "run_id": 37512197955,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37509525979,
+      "run_id": 37512197947,
       "status": "in_progress",
       "conclusion": null
     },
-    "new_source_own_CI_required": true
+    "source_own_Fast_verified_before_first_HTTP": true,
+    "new_report_CI_separate": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -375,7 +376,12 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 80,
+  "model_calls_since_previous_report": {
+    "closed_Reader": 2,
+    "received_live_R3_generation": 21,
+    "received_live_R3_embedding": 27,
+    "publication_only": 0
+  },
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -395,10 +401,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 39460,
+    "generation_requests": 39462,
     "generation": {
-      "charged_tokens": 150764705,
-      "known_tokens": 150652990,
+      "charged_tokens": 150769967,
+      "known_tokens": 150658252,
       "unknown_usage": 3
     },
     "embedding": {
@@ -634,7 +640,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "Closed after both R3 branches; overlapping subcohorts not added twice",
+  "continuous_accounting_snapshot_scope": "Fixed Reader2 reconciled. Excludes current in-flight R3 and its received responses; never label as current closed total. Do not sum cumulative totals and stage subsets.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -974,7 +980,7 @@
     "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
-  "publication_scope": "12 Lab files:5 source,2 existing test files,5 reports/status/declaration. No Product/Archive/workflow changes; no new model calls.",
+  "publication_scope": "5 Lab documentation/status files; no source, test, configuration, runtime or workflow edits; original declaration/results preserved.",
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
     "declared_at": "2026-10-06T05:51:11.524187+00:00",
@@ -1640,8 +1646,8 @@
     "staged_diff": "PASS_SEVEN_REPORT_FILES_ONLY",
     "source_draft_excluded": true
   },
-  "latest_source_commit": "CURRENT_PUBLICATION_COMMIT_BIND_BEFORE_HTTP",
-  "model_calls_since_previous_report_scope": "This R3 stage only:44 Writer/36 Reader/0Judge;107 encoder separately. No earlier subset repeated.",
+  "latest_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "model_calls_since_previous_report_scope": "Snapshot at observed_at; received responses are progress, not a terminal/reconciled complete stage.",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
@@ -1753,7 +1759,7 @@
     "scope": "Earlier dated development snapshots, not counts of the current48 new completed requests or original7cc141."
   },
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
-  "new_queue_live": false,
+  "new_queue_live": true,
   "stage_C_prefix_live": {
     "status": "CLOSED_NORMAL_EXIT",
     "observed_at": "2026-10-06T13:34:37.015448+00:00",
@@ -1958,24 +1964,17 @@
   },
   "current_publication_checks": {
     "status": "PASS",
-    "existing_pytest_distinct_passed": 23,
-    "changed_withdrawal_assertions_targeted_rerun_passed": 2,
-    "new_test_functions": 0,
-    "Ruff_files": 7,
-    "mypy_source_files": 5,
-    "package_boundary": "PASS",
-    "four_arm_hypothetical_correction_and_lifecycle": "PASS_ENGINEERING_ONLY",
-    "source_config_changes": true,
-    "Product_schema_API_permissions_Canonical_changed": false,
-    "Lab_version_read_metadata_addition": true,
-    "continuous_ledger_unchanged": true,
-    "new_generation_and_embedding_calls": 0,
-    "rollback_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
     "JSON_files_parsed": 2,
-    "local_links_checked": 5,
-    "changed_Lab_files": 12,
-    "diff_check_passed": true,
-    "model_transport_config_changed": false
+    "relative_links_checked": 87,
+    "snapshot_counts_and_fixed_Reader_receipt_accounting": "PASS",
+    "changed_Lab_report_files": 5,
+    "source_tests_repeated": false,
+    "source_config_runtime_workflow_changed": false,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "original_declaration_and_R3_results_preserved": true,
+    "publication_only_model_calls": 0,
+    "live_R3_final_accounting_not_claimed": true,
+    "diff_check_passed": true
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -6118,19 +6117,67 @@
     }
   },
   "latest_actual_execution_since_previous_report": {
-    "status": "REPORT_ONLY_NO_NEW_MODEL_EXECUTION",
-    "source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
-    "Writer_calls": 0,
-    "Reader_calls": 0,
-    "Judge_calls": 0,
-    "generation_requests": 0,
-    "generation_known_tokens": 0,
-    "embedding_requests": 0,
-    "embedding_inputs": 0,
-    "embedding_known_tokens": 0,
-    "new_unknown_usage": 0,
-    "retries": 0,
-    "prior_R3_detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json"
+    "detail_manifest": "milai-post87c-claim-revision-execution-20261007.json",
+    "fixed_actual_Reader": {
+      "status": "CLOSED_ROOT_REVIEWED_COMPLETE_ANSWERS_STILL_INCOMPLETE",
+      "source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+      "reviewed_at": "2026-10-06T18:47:44.978399+00:00",
+      "Reader_calls": 2,
+      "Writer_calls": 0,
+      "Judge_calls": 0,
+      "embedding_calls": 0,
+      "generation_known_tokens": 5262,
+      "finish_reasons": {
+        "stop": 2
+      },
+      "new_unknown": 0,
+      "state_changed": false,
+      "complete_task_answers": 0,
+      "questions": 2,
+      "actual_cancellation_fragment_delivered": true,
+      "cancellation_recognized": true,
+      "general_frequency_unresolved_start_and_holiday_preserved": true,
+      "day_night_applicability_completed": false,
+      "finding": "Actual revision evidence was received, but both answers still treated the general frequency as an aggregate and refused per-scope applicability. Delivery alone did not complete these unchanged-state tasks.",
+      "not_independent_source_model_family_or_official_score": true,
+      "original_answers_states_and_terminal_preserved": true,
+      "receipt_and_continuous_ledger_reconciliation": "PASS"
+    },
+    "original_R3": {
+      "status": "RUNNING_FIRST_ATTEMPTS_NOT_FINAL_RESULTS",
+      "source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+      "process_live": true,
+      "terminal_exists": false,
+      "closed_event_rows_by_arm": {
+        "B0": 6,
+        "B1": 5,
+        "B2": 0,
+        "M": 0
+      },
+      "planned_event_rows_per_arm": 6,
+      "planned_generation_calls": 44,
+      "received_Writer_responses": 12,
+      "received_Reader_responses": 9,
+      "received_generation_responses": 21,
+      "known_tokens_in_received_generation_responses": 126401,
+      "received_generation_finish_reasons": {
+        "stop": 20,
+        "length": 1
+      },
+      "received_embedding_responses": 27,
+      "known_tokens_in_received_embedding_responses": 666,
+      "known_Writer_truncation": {
+        "arm": "B1",
+        "event": 0,
+        "completion_tokens": 32768,
+        "status": "PRESERVED_FIRST_ATTEMPT_NOT_REPAIRED_OR_RETRIED"
+      },
+      "same_original_events_questions_and_parameters": true,
+      "each_arm_own_empty_bank": true,
+      "Judge_calls": 0,
+      "not_official_scores_or_completed_four_arm_comparison": true,
+      "live_accounting_not_finally_reconciled": true
+    }
   },
   "historical_before_common_semantic_retrieval_source": {
     "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
@@ -6259,7 +6306,7 @@
       "ci_correction_in_this_commit": true
     }
   },
-  "latest_source_commit_scope": "New common formation and revision-evidence source; not admitted to model recheck. Last closed actual experiment source remains646d9fa.",
+  "latest_source_commit_scope": "Frozen actual source for fixed Reader2 and live first R3. This publication changes reports only; report head is not a new algorithm.",
   "ci_compatibility_correction": {
     "status": "CORRECTION_INCLUDED_IN_PREPARED6e_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
     "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
@@ -6378,24 +6425,21 @@
     "scope_extension": "Three already-exposed original M events added to corrected9; all actual packets/states, no new Writer/Judge"
   },
   "latest_prepared_execution": {
-    "status": "NO_ACTIVE_MODEL_QUEUE_ORIGINAL_R3_CLOSED",
+    "status": "FIRST_ORIGINAL_R3_RUNNING_SECOND_PREPARED_NOT_RUN",
     "both_original_R3_branches": {
       "planned_generation_calls": [
         44,
         36
       ],
-      "actual_generation_calls": [
-        44,
-        36
-      ],
-      "actual_embedding_calls": [
-        56,
-        51
-      ],
-      "own_empty_banks": 8,
-      "status": "CLOSED_ROOT_REVIEW_COMPLETE"
+      "first_closed_event_rows_by_arm": {
+        "B0": 6,
+        "B1": 5,
+        "B2": 0,
+        "M": 0
+      },
+      "second_actual_generation_calls": 0
     },
-    "next": "Bind repair source own Fast, fixed actual Reader diagnosis and own-empty original R3 recheck",
+    "next": "Close first original R3 and review original receipts/state/answers/accounting before second serial admission",
     "candidate_selected": false
   },
   "historical_source_CI_before_common_D_R3": {
@@ -6477,36 +6521,29 @@
     }
   },
   "latest_experiment_source_ci": {
-    "commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
-    "observed_at": "2026-10-06 17:54:07 UTC",
+    "commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "observed_at": "2026-10-06T18:58:18.594474+00:00",
     "Fast": {
-      "run_id": 37502370558,
+      "run_id": 37512197955,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37502370395,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37512197947,
+      "status": "in_progress",
+      "conclusion": null
     },
     "source_own_Fast_verified_before_first_HTTP": true,
     "new_report_CI_separate": true
   },
   "latest_execution_summary": {
-    "observed_at": "2026-10-06T18:29:24.251694+00:00",
-    "previous_result_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
-    "actual_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
-    "active_model_queue": false,
-    "source_repair_status": "IMPLEMENTED_NARROW_ENGINEERING_PASS_MODEL_RECHECK_NOT_ADMITTED",
-    "next_work": [
-      "shared claim and qualification formation granularity",
-      "actual revision and source evidence delivery through existing MemoryService and normal Host"
-    ],
+    "observed_at": "2026-10-06T18:58:18.594474+00:00",
+    "actual_experiment_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "active_model_queue": true,
+    "source_repair_status": "FIXED_READER_EVIDENCE_DELIVERED_ANSWERS_INCOMPLETE_OWN_EMPTY_R3_RUNNING",
     "candidate_selected": false,
     "same_version_four_arm_prefix_admitted": false,
-    "generation_requests_since_previous_report": 0,
-    "embedding_requests_since_previous_report": 0,
-    "old_4357_counts_7b_prefix_and_646_R3_are_separate": true,
+    "old_4357_counts_7b_prefix_646_R3_and_baa_recheck_are_separate": true,
     "goal_complete": false
   },
   "historical_before_claim_revision_evidence_source": {
@@ -6568,10 +6605,150 @@
   "latest_closed_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
   "claim_revision_evidence_development": {
     "detail_manifest": "milai-post87c-claim-revision-evidence-development-20261007.json",
-    "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+    "execution_manifest": "milai-post87c-claim-revision-execution-20261007.json",
+    "status": "FIXED_READER_CLOSED_INCOMPLETE_ORIGINAL_R3_RUNNING",
     "all_four_arms_and_normal_Host": true,
-    "actual_new_generation": 0,
-    "actual_new_embedding": 0,
-    "current_source_own_CI_pending": true
+    "actual_new_fixed_Reader_generation": 2,
+    "actual_live_R3_generation_responses_at_snapshot": 21,
+    "source_own_Fast": "success",
+    "source_own_Full": "in_progress"
+  },
+  "historical_before_claim_revision_execution_snapshot": {
+    "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+    "observed_at": "2026-10-06T18:29:24.251694+00:00",
+    "previous_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+    "previous_report_ci": {
+      "commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+      "observed_at": "2026-10-06 18:27:41 UTC",
+      "Fast": {
+        "run_id": 37509525789,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37509525979,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_source_own_CI_required": true
+    },
+    "latest_source_commit": "CURRENT_PUBLICATION_COMMIT_BIND_BEFORE_HTTP",
+    "latest_source_commit_scope": "New common formation and revision-evidence source; not admitted to model recheck. Last closed actual experiment source remains646d9fa.",
+    "latest_execution_summary": {
+      "observed_at": "2026-10-06T18:29:24.251694+00:00",
+      "previous_result_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+      "actual_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "active_model_queue": false,
+      "source_repair_status": "IMPLEMENTED_NARROW_ENGINEERING_PASS_MODEL_RECHECK_NOT_ADMITTED",
+      "next_work": [
+        "shared claim and qualification formation granularity",
+        "actual revision and source evidence delivery through existing MemoryService and normal Host"
+      ],
+      "candidate_selected": false,
+      "same_version_four_arm_prefix_admitted": false,
+      "generation_requests_since_previous_report": 0,
+      "embedding_requests_since_previous_report": 0,
+      "old_4357_counts_7b_prefix_and_646_R3_are_separate": true,
+      "goal_complete": false
+    },
+    "latest_prepared_execution": {
+      "status": "NO_ACTIVE_MODEL_QUEUE_ORIGINAL_R3_CLOSED",
+      "both_original_R3_branches": {
+        "planned_generation_calls": [
+          44,
+          36
+        ],
+        "actual_generation_calls": [
+          44,
+          36
+        ],
+        "actual_embedding_calls": [
+          56,
+          51
+        ],
+        "own_empty_banks": 8,
+        "status": "CLOSED_ROOT_REVIEW_COMPLETE"
+      },
+      "next": "Bind repair source own Fast, fixed actual Reader diagnosis and own-empty original R3 recheck",
+      "candidate_selected": false
+    },
+    "latest_actual_execution_since_previous_report": {
+      "status": "REPORT_ONLY_NO_NEW_MODEL_EXECUTION",
+      "source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "Writer_calls": 0,
+      "Reader_calls": 0,
+      "Judge_calls": 0,
+      "generation_requests": 0,
+      "generation_known_tokens": 0,
+      "embedding_requests": 0,
+      "embedding_inputs": 0,
+      "embedding_known_tokens": 0,
+      "new_unknown_usage": 0,
+      "retries": 0,
+      "prior_R3_detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json"
+    },
+    "latest_experiment_source_ci": {
+      "commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "observed_at": "2026-10-06 17:54:07 UTC",
+      "Fast": {
+        "run_id": 37502370558,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37502370395,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "source_own_Fast_verified_before_first_HTTP": true,
+      "new_report_CI_separate": true
+    },
+    "claim_revision_evidence_development": {
+      "detail_manifest": "milai-post87c-claim-revision-evidence-development-20261007.json",
+      "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+      "all_four_arms_and_normal_Host": true,
+      "actual_new_generation": 0,
+      "actual_new_embedding": 0,
+      "current_source_own_CI_pending": true
+    },
+    "continuous_accounting_snapshot": {
+      "generation_requests": 39460,
+      "generation": {
+        "charged_tokens": 150764705,
+        "known_tokens": 150652990,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 970470,
+        "known_tokens": 970470,
+        "unknown_usage": 0
+      }
+    },
+    "continuous_accounting_snapshot_scope": "Closed after both R3 branches; overlapping subcohorts not added twice",
+    "current_publication_checks": {
+      "status": "PASS",
+      "existing_pytest_distinct_passed": 23,
+      "changed_withdrawal_assertions_targeted_rerun_passed": 2,
+      "new_test_functions": 0,
+      "Ruff_files": 7,
+      "mypy_source_files": 5,
+      "package_boundary": "PASS",
+      "four_arm_hypothetical_correction_and_lifecycle": "PASS_ENGINEERING_ONLY",
+      "source_config_changes": true,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Lab_version_read_metadata_addition": true,
+      "continuous_ledger_unchanged": true,
+      "new_generation_and_embedding_calls": 0,
+      "rollback_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+      "JSON_files_parsed": 2,
+      "local_links_checked": 5,
+      "changed_Lab_files": 12,
+      "diff_check_passed": true,
+      "model_transport_config_changed": false
+    },
+    "publication_scope": "12 Lab files:5 source,2 existing test files,5 reports/status/declaration. No Product/Archive/workflow changes; no new model calls.",
+    "model_calls_since_previous_report": 80,
+    "model_calls_since_previous_report_scope": "This R3 stage only:44 Writer/36 Reader/0Judge;107 encoder separately. No earlier subset repeated.",
+    "new_queue_live": false
   }
 }

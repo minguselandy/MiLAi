@@ -1,3 +1,34 @@
+# 2026-10-06 18:58:18 UTC: user-requested execution summary; fixed Reader closed, new original R3 live
+
+User requests current execution situation submitted to GitHub. Actual frozen
+source baa0e70 own Fast37512197955 success verified18:44:08 before new HTTP;
+Full37512197947 still in_progress at this snapshot. Report head is distinct.
+Fixed2 actual M post-withdrawal/final Readers closed normally:2stop/5262known,
+0Writer/Judge/encoding/writes/newunknown. Root reviewed complete answers,
+actual material and both receipts, continuous ledger reconciled. Exact cancel
+witness received and recognized, but both answers still refuse per-shift
+applicability of general frequency; complete task0/2. Not sole-source-cause
+proof, independent confirmation or method success. Preserve original states,
+answers/terminal/config/accounting; never retry these cases until passing.
+First original R3 on frozen baa source remains live with no terminal, four
+own-empty banks/original events/questions/parameters. Snapshot event rows
+B0=6/B1=5/B2=0/M=0 of6 each. Received12W/9R=21 of44,126401known,
+20stop/1length (B1 formation0,32768 output);27encoder responses666known.
+Progress only, not full semantic review or final receipt/ledger closure.
+Second original R3 prepared36,not admitted/called; close first and review
+receipts/unknown/lease before serial admission. Do not hot-edit running source.
+Last closed ledger after fixedReader39462requests/150658252known/
+150769967charged/embed970470/historyunknown3 EXCLUDES live R3. Limits unchanged.
+Publish5 Lab report/status files only; light JSON/links/counts/diff, no repeated
+source tests or new model calls for publication. Old declaration/results/raw
+remain intact. Own report CI query separately; no borrowing source CI.
+Full objective8/65/277/native/drift/ablation/tighterbudget/16reserved/external/
+Host/recovery/sixdeliverables remains unfinished. Single Qwen family/BGE,
+Product NO_GO,PR85open/draft/unmerged. Product/API/permissions/Canonical/
+Archive/workflow unchanged, private raw/configs/HTTP/DB/logs ignored. Rollback
+baa0e70. Lower dated entries are historical. No new delegation/platform/budget/
+reset/retry/unknown replay/ideal state/held-out reading. Goal remains active.
+
 # 2026-10-06 18:29:24 UTC: common formation and exact revision evidence implemented; models pending
 
 Previous turn published execution summary 06198a5; it made publication progress.

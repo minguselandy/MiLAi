@@ -1,0 +1,150 @@
+{
+  "version": "milai-post87c-claim-revision-execution-1.0",
+  "status": "FIXED_READER_CLOSED_INCOMPLETE_ORIGINAL_R3_RUNNING",
+  "observed_at": "2026-10-06T18:58:18.594474+00:00",
+  "previous_source_and_report_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "actual_experiment_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "source_own_CI": {
+    "commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "observed_at": "2026-10-06T18:58:18.594474+00:00",
+    "Fast": {
+      "run_id": 37512197955,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37512197947,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "source_own_Fast_verified_before_first_HTTP": true,
+    "new_report_CI_separate": true
+  },
+  "source_declaration": "milai-post87c-claim-revision-evidence-development-20261007.json",
+  "historical_R3_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+  "historical_R3_results": "milai-post87c-common-dense-r3-results-20261007.json",
+  "fixed_actual_Reader": {
+    "status": "CLOSED_ROOT_REVIEWED_COMPLETE_ANSWERS_STILL_INCOMPLETE",
+    "source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "reviewed_at": "2026-10-06T18:47:44.978399+00:00",
+    "Reader_calls": 2,
+    "Writer_calls": 0,
+    "Judge_calls": 0,
+    "embedding_calls": 0,
+    "generation_known_tokens": 5262,
+    "finish_reasons": {
+      "stop": 2
+    },
+    "new_unknown": 0,
+    "state_changed": false,
+    "complete_task_answers": 0,
+    "questions": 2,
+    "actual_cancellation_fragment_delivered": true,
+    "cancellation_recognized": true,
+    "general_frequency_unresolved_start_and_holiday_preserved": true,
+    "day_night_applicability_completed": false,
+    "finding": "Actual revision evidence was received, but both answers still treated the general frequency as an aggregate and refused per-scope applicability. Delivery alone did not complete these unchanged-state tasks.",
+    "not_independent_source_model_family_or_official_score": true,
+    "original_answers_states_and_terminal_preserved": true,
+    "receipt_and_continuous_ledger_reconciliation": "PASS"
+  },
+  "original_R3": {
+    "status": "RUNNING_FIRST_ATTEMPTS_NOT_FINAL_RESULTS",
+    "source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "process_live": true,
+    "terminal_exists": false,
+    "closed_event_rows_by_arm": {
+      "B0": 6,
+      "B1": 5,
+      "B2": 0,
+      "M": 0
+    },
+    "planned_event_rows_per_arm": 6,
+    "planned_generation_calls": 44,
+    "received_Writer_responses": 12,
+    "received_Reader_responses": 9,
+    "received_generation_responses": 21,
+    "known_tokens_in_received_generation_responses": 126401,
+    "received_generation_finish_reasons": {
+      "stop": 20,
+      "length": 1
+    },
+    "received_embedding_responses": 27,
+    "known_tokens_in_received_embedding_responses": 666,
+    "known_Writer_truncation": {
+      "arm": "B1",
+      "event": 0,
+      "completion_tokens": 32768,
+      "status": "PRESERVED_FIRST_ATTEMPT_NOT_REPAIRED_OR_RETRIED"
+    },
+    "same_original_events_questions_and_parameters": true,
+    "each_arm_own_empty_bank": true,
+    "Judge_calls": 0,
+    "not_official_scores_or_completed_four_arm_comparison": true,
+    "live_accounting_not_finally_reconciled": true
+  },
+  "global_condition_R3": {
+    "status": "PREPARED_NOT_ADMITTED_NOT_RUN",
+    "planned_generation_calls": 36,
+    "actual_generation_calls": 0,
+    "actual_output_exists": false,
+    "admission": "After first R3 closes, review receipts/ledger/unknown usage and existing serial lease; preserve original events and four own-empty banks."
+  },
+  "last_closed_accounting_before_live_R3": {
+    "generation_requests": 39462,
+    "generation": {
+      "charged_tokens": 150769967,
+      "known_tokens": 150658252,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 970470,
+      "known_tokens": 970470,
+      "unknown_usage": 0
+    }
+  },
+  "last_closed_accounting_scope": "Fixed Reader2 reconciled. Excludes current in-flight R3 and its received responses; never label as current closed total. Do not sum cumulative totals and stage subsets.",
+  "publication_only_model_calls": 0,
+  "existing_limits_unchanged": true,
+  "new_queue_hot_modified": false,
+  "sampling_and_capacity": {
+    "generation_family": "Qwen3.6 only",
+    "encoder": "existing BGE-m3",
+    "thinking": true,
+    "temperature": 1.0,
+    "context": 65536,
+    "output": 32768,
+    "margin": 512,
+    "input_limit": 32256,
+    "source_batch_tokens": 4096,
+    "old_body_target_tokens": 8192,
+    "retrieval": "common I2/dense cosine/K10"
+  },
+  "next_work": [
+    "Close and review both already-declared original R3 branches; preserve failures and separate storage from complete answers.",
+    "Resolve the earliest actual behavior break before admitting a new common prefix; own source Full success remains required.",
+    "Same-version four-arm own-empty prefix8/selected65/full277, native/drift, one M entry ablation and one fixed tighter-budget sensitivity.",
+    "16 reserved users after candidate freeze; external tasks/strong simple baselines; ordinary Host/new stories/forget/effects/recovery and six deliverables."
+  ],
+  "candidate_selected": false,
+  "stable_method_advantage_established": false,
+  "goal_complete": false,
+  "product_status": "NO_GO",
+  "publication_scope": "5 Lab documentation/status files; no source, test, configuration, runtime or workflow edits; original declaration/results preserved.",
+  "rollback_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "private_raw_HTTP_DB_gold_reasoning_configs_and_logs_ignored": true,
+  "checks": {
+    "status": "PASS",
+    "JSON_files_parsed": 2,
+    "relative_links_checked": 87,
+    "snapshot_counts_and_fixed_Reader_receipt_accounting": "PASS",
+    "changed_Lab_report_files": 5,
+    "source_tests_repeated": false,
+    "source_config_runtime_workflow_changed": false,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "original_declaration_and_R3_results_preserved": true,
+    "publication_only_model_calls": 0,
+    "live_R3_final_accounting_not_claimed": true,
+    "diff_check_passed": true
+  }
+}
