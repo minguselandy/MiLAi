@@ -1,3 +1,21 @@
+# 2026-10-06 11:41:47 UTC: user-requested progress review publication
+
+Publish7 Lab report/state files only, model0; preserve2 unstaged external source/test
+drafts. Frozen7b82 PID178764 continues unchanged: B0/B1 32/32, B2 26/26, M0.
+Root B1 all32 states/25 envelopes/73 answers; B2 first2 16 states/32 answers,
+second-user full proposals/source partial. No independent Judge/full audit.
+B2 reviewed subset0/34 updates15/32QA,9 preHTTPfailures; not full B2 result.
+ab8 offline17 actual failed inputs allfit, exact data/API schema, not semantics.
+Finite declared B1 firstuser8 CI-bound but notadmitted/models0; wait queue normalexit.
+Keep old failures, ownempty start, continuous ledger and version separation.
+7b723 ownFast/Full success queried11:42:31; this report ownCI separate.
+External template draft22 unit/Ruff/mypy/localtokenizer proof, syntheticonly; not
+cause of main failures, not published/admitted, ownCI and realrecheck pending.
+All original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/six
+deliverables remain active. OneQwen/no newagents/auditor/platform/deployment.
+ProductNO_GO/PR85draft/unmerged; Product/Archive/workflow/API/permissions unchanged.
+Raw/gold/HTTP/DB/reasoning/logs ignored. Lower blocks are dated history.
+
 # 2026-10-06 10:56:01 UTC: user-requested B1 four-user closure publication
 
 Publish7Lab report/state/result files, model0/source-test-config unchanged. Goalactive.
