@@ -1,3 +1,29 @@
+# 2026-10-06 12:34:28 Asia/Shanghai: publish Root-reviewed native80 checkpoint
+
+Latest user requests a current summary and GitHub submission. Publish seven Lab
+report/state files only; exclude existing owner's in-progress old-support delivery
+sources/tests. No model HTTP is needed for publication. Frozen497 native original44
+and global36 are complete and Root-reviewed:80calls/384395known,80stop,44events/
+36answers,80HTTP/prompt/usage pairs and actual old mappings matched. M global
+actually applies add_exception, two shared change_condition, remove_exception:
+actual graph preserves general rule and updated shared conditions. Limited Writer
+lifecycle positive, original M scope/withdrawal still fails, final Readers all
+incomplete. Do not call this method advantage or candidate/prefix admission.
+B1 global reattributes contradictory old limits to cancellation; B2 withdrawal
+copies unrelated reminder example, not wholly correct rewrite falsely rejected.
+
+Processes exited,ledger stable36366/139403612known/139455314charged,lease free,
+historicalunknown2/embed0 unchanged. Preserve first attempts, raw terminals/config/
+predeclarations. SDK651 committed/Root341checks reviewed, ownFast success/Full pending;
+not used by frozen497 cohort. Owner's common old raw delivery is handed back,
+148 related checks reported; not Root-reviewed/runner-wired/admitted. Root owns
+runner/budget/data/HTTP/GitHub. Current
+public turn boundary/old-h/origin/role-time/CAS/permissions cannot be loosened.
+Reader change has not been implemented. Complete useful authorized work; no more
+Writer warning/example iteration, new platform/deployment/family. Full plan and
+all deferred scopes remain active. PR85 stays draft/unmerged,Product NO_GO.
+All lower dated records retain their snapshot scopes.
+
 # 2026-10-06 SDK support collector Root-reviewed; frozen native global36 running
 
 Root independently executed the actual f9ab697 pre-fix method against the fresh

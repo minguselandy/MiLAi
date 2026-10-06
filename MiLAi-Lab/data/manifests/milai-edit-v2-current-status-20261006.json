@@ -1,7 +1,7 @@
 {
-  "status": "SDK_SUPPORT_COLLECTOR_ROOT_CHECKED_NATIVE_GLOBAL36_RUNNING",
-  "observed_at": "2026-10-06T04:19:51.038798+00:00",
-  "previous_report_commit": "f9ab697450fd009c218ccc246729a45bef40d8d0",
+  "status": "NATIVE80_ROOT_REVIEWED_M_GLOBAL_WRITER_POSITIVE_READER_INCOMPLETE_NO_CANDIDATE",
+  "observed_at": "2026-10-06T04:34:28.414849+00:00",
+  "previous_report_commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,7 +24,7 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "NATIVE_ORIGINAL44_REVIEWED_FAILED_GLOBAL36_DECLARED_NO_CANDIDATE",
+    "status": "NATIVE80_REVIEWED_M_GLOBAL_WRITER_POSITIVE_ORIGINAL_AND_READER_FAILURES_NO_CANDIDATE",
     "included_in_this_publication": false,
     "stable_source_delivered": true,
     "checks_completed_at_snapshot": true,
@@ -33,7 +33,7 @@
     "frozen_2335ea9_source_unchanged": true,
     "source_owner_checks_passed": 145,
     "Root_checks_passed": 295,
-    "detail_manifest": "milai-edit-post-b0-bound-clauses-results-20261006.json",
+    "detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
     "candidate_selected": false,
     "prefix_admitted": false,
     "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
@@ -49,10 +49,10 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "same frozen source/config declared global36 after completed Root review",
-      "Root-review bounded normal SDK support collector defect; no old-raw delivery or Reader hot change",
-      "complete source/Reader/scope behavior before usable common candidate, own Full CI and fresh prefix/preselected long smoke",
-      "complete same-version four-arm histories and full original remaining scope"
+      "Root-review bounded common old-support body redelivery under separate current-event boundary; workspace implementation is not admitted to a model cohort",
+      "review a common retained-state/source-date Reader contract in a new version, without changing frozen80 outputs",
+      "validate critical lifecycle, source and Reader behavior before fresh four-user prefix and preselected first-user long smoke",
+      "complete full R0-R5/E0-E5 and six deliverables, same-M ablation/tighter budget before holdout, and deferred old scope"
     ],
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
@@ -60,19 +60,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "f9ab697450fd009c218ccc246729a45bef40d8d0",
-    "observed_at": "2026-10-06T04:21:23+00:00",
+    "commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
+    "observed_at": "2026-10-06T04:35:28.558362+00:00",
     "Fast": {
-      "run_id": 37412308776,
+      "run_id": 37413376702,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37412308815,
+      "run_id": 37413376862,
       "status": "in_progress",
       "conclusion": null
     },
-    "does_not_establish_SDK_source_CI": true
+    "does_not_establish_new_report_CI": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -293,7 +293,7 @@
     "unsupported_assistant_strengthening_B1_M_promoted_to_user_report": true
   },
   "publication_checks": {
-    "status": "PASS_SDK_SOURCE_AND_LOCAL_REPORT_CHECKS",
+    "status": "PASS_BOUNDED_NATIVE80_REPORT_CHECKS",
     "Root_SDK_Host_tests": 341,
     "old_source_expected_wrapper_failure": "PASS",
     "Ruff": "PASS",
@@ -309,7 +309,11 @@
     "new_model_cohort_for_SDK_source": 0,
     "Product_schema_API_permissions_Canonical_changed": false,
     "JSON_counters_scopes": "PASS",
-    "staged_diff": "PASS"
+    "staged_diff": "PASS",
+    "paired_HTTP_prompt_usage_matches": 80,
+    "actual_old_state_mapping_matches": 44,
+    "actual_M_global_graph_lifecycle": "PASS_BOUNDED_WRITER_BRANCH_ONLY",
+    "local_links_checked": 65
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -383,8 +387,8 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 21,
-  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-bound-clauses-results-20261006.json",
+  "model_calls_since_previous_report": 15,
+  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
       "generation_calls": 80,
@@ -403,10 +407,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 36330,
+    "generation_requests": 36366,
     "generation": {
-      "charged_tokens": 139268707,
-      "known_tokens": 139217005,
+      "charged_tokens": 139455314,
+      "known_tokens": 139403612,
       "unknown_usage": 2
     },
     "embedding": {
@@ -488,11 +492,11 @@
     "Full_successful_jobs": 21
   },
   "historical_counter_scope": {
-    "new_model_calls_for_declared_real_rechecks": "132 calls in historical 8ed7826 nonthinking snapshot; current native capacity original44 is separate",
-    "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; current native capacity original44 is separate",
+    "new_model_calls_for_declared_real_rechecks": "132 calls in historical 8ed7826 nonthinking snapshot; completed native80 is reported separately",
+    "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; completed native80 is reported separately",
     "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately",
     "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
-    "model_calls_since_previous_report": "21 observed responses in predeclared native global36 after reportf9ab697, through12:19:51; no model cohort for SDK source fix"
+    "model_calls_since_previous_report": "15 responses after the previous recorded SDK snapshot at04:19:51 (21/36 global); snapshot difference, not Git commit-time calls. Declared global total36; publication-only0."
   },
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
@@ -507,8 +511,8 @@
     "global_actual_generation_calls": 36
   },
   "post_b0_development_generation_costs_all_sources_through_snapshot": {
-    "generation_calls": 480,
-    "known_tokens": 1153266,
+    "generation_calls": 516,
+    "known_tokens": 1339873,
     "nonthinking_three_prior_sources": {
       "generation_calls": 276,
       "known_tokens": 445407
@@ -526,24 +530,32 @@
       "generation_calls": 44,
       "known_tokens": 197788
     },
-    "closed_reviewed_sources_only_excludes_live_global36": true
+    "closed_reviewed_sources_only_excludes_live_global36": false,
+    "native_capacity_497b8d8_global": {
+      "generation_calls": 36,
+      "known_tokens": 186607
+    },
+    "closed_reviewed_sources_only_no_live_queue": true
   },
   "native_capacity_configuration_calibration": {
-    "status": "ORIGINAL44_REVIEWED_GLOBAL36_RUNNING_FROZEN497_SOURCE",
+    "status": "COMPLETED80_ROOT_REVIEWED_M_GLOBAL_WRITER_LIFECYCLE_POSITIVE_ORIGINAL_AND_FINAL_READER_FAILURES",
     "config_version": "milai-edit-post-b0-i2-native-capacity-v1",
     "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
     "declared_generation_calls": 80,
-    "actual_generation_calls": 65,
+    "actual_generation_calls": 80,
     "detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
     "candidate_selected": false,
     "prefix_admitted": false,
-    "known_tokens": 303834,
-    "global_actual_generation_calls": 21,
+    "known_tokens": 384395,
+    "global_actual_generation_calls": 36,
     "predeclaration_manifest": "milai-edit-post-b0-native-capacity-development-20261006.json",
-    "model_queue_live_at_snapshot": true,
-    "reviewed_generation_calls": 44,
-    "provisional_HTTP_response_counts_not_final_ledger_closure": true,
-    "global_response_counts_observed_at": "2026-10-06T04:19:51.038798+00:00"
+    "model_queue_live_at_snapshot": false,
+    "reviewed_generation_calls": 80,
+    "provisional_HTTP_response_counts_not_final_ledger_closure": false,
+    "global_response_counts_observed_at": "2026-10-06T04:34:28.414849+00:00",
+    "M_global_Writer_lifecycle_positive": true,
+    "M_original_scope_withdrawal_failed": true,
+    "final_Reader_incomplete_all_arms_both_branches": true
   },
   "latest_checkpoint_document": "../../docs/MILAI_EDIT_CHECKPOINT_20261006.md",
   "current_method_source_ci": {
@@ -566,14 +578,14 @@
         "success": 21
       }
     },
-    "does_not_establish_this_report_or_uncommitted_SDK_fix_CI": true
+    "does_not_establish_this_report_or_separate_SDK_source_CI": true
   },
   "normal_SDK_clause_support_collection": {
-    "status": "ROOT_REVIEWED_341_CHECKS_PASS_SOURCE_INCLUDED_OWN_CI_PENDING",
+    "status": "ROOT_REVIEWED341_COMMITTED651_FAST_SUCCESS_FULL_IN_PROGRESS_NO_MODEL_COHORT",
     "existing_module_tests_passed_reported_by_owner": 77,
     "real_SQLite_reopen_fixture_red_then_green_reported_by_owner": true,
     "Root_independent_review_completed": true,
-    "source_included_in_this_report": true,
+    "source_included_in_this_report": false,
     "used_in_frozen_native_experiment": false,
     "old_raw_redelivery_implemented": false,
     "Root_existing_SDK_and_Host_checks_passed": 341,
@@ -586,10 +598,39 @@
       "src/milai_lab/methods/functional_edit_memory.py",
       "tests/memory/test_functional_edit_memory.py"
     ],
-    "source_commit": null,
-    "own_CI_status": "PENDING_NEW_SOURCE_COMMIT",
+    "source_commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
+    "own_CI_status": "FAST_SUCCESS_FULL_IN_PROGRESS",
     "reviewed_at": "2026-10-06T04:19:51.038798+00:00",
-    "source_identity": "ordinary Git commit carrying this bounded SDK fix; no model cohort bound yet"
+    "source_identity": "committed651 source; uncommitted old-redelivery development is separate and excluded",
+    "source_already_published_in_previous_commit": true,
+    "own_ci": {
+      "commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
+      "observed_at": "2026-10-06T04:35:28.558362+00:00",
+      "Fast": {
+        "run_id": 37413376702,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37413376862,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "does_not_establish_new_report_CI": true
+    }
   },
-  "continuous_accounting_snapshot_scope": "last_closed_boundary_after_native_original44_before_live_global36; not live ledger"
+  "continuous_accounting_snapshot_scope": "closed native80 final boundary; stable actual live ledger, both processes exited and serial lease free",
+  "bounded_old_support_redelivery_development": {
+    "status": "SOURCE_OWNER_HANDED_BACK148_ROOT_REVIEW_AND_RUNNER_WIRING_PENDING_NOT_ADMITTED",
+    "source_included_in_this_report": false,
+    "actual_model_calls": 0,
+    "owner_reported_related_checks_passed": 148,
+    "owner_Ruff_five_files": "PASS",
+    "owner_strict_mypy_three_sources": "PASS",
+    "Root_independent_review_completed": false,
+    "runner_actual_delivery_and_budget_wired": false,
+    "separate_current_event_boundary_required": true,
+    "common_four_arm_delivery_and_budget_required": true,
+    "frozen_native80_unchanged": true
+  }
 }

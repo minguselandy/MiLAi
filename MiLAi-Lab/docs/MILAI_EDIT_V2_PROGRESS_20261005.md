@@ -1,5 +1,24 @@
 # MiLAi-Edit v2 实验进度与复现入口
 
+**2026-10-06 12:34:28 Asia/Shanghai：**冻结497b8d8共同原生配置完成两分支
+80次/384,395 known token（44 Writer/36 Reader），80 stop、零length；Root复核44事件/
+36回答，80对HTTP/prompt/usage及连续账本闭合。共同条件分支M实际add_exception→
+change_condition两次→remove_exception，节点/关系/支持核对确认一般规则和共享条件
+保持；中间Reader完整回答。但原分支M范围/撤销仍失败，四组两分支最终Reader均未
+完整，不能宣布稳定方法优势或选择候选。33提交/4拒绝/1no_change另六空envelope是
+操作计数。B1共同分支还把矛盾旧限定归到新撤销消息；B2撤销复制无关示例而被拒。
+
+SDK修复651a7b5已提交，Root341项回归及静态/依赖边界通过，自身Fast已success、Full仍in_progress，
+未用于冻结80。旧正文补交owner已交付并报告148项离线检查通过，Root复核与runner
+预算接线/提交/模型准入未完成，本次排除。
+账本36,366/139,403,612known/139,455,314charged，历史unknown2/embed0保持；进程退出，
+锁释放，无模型队列。各版本Post-B0已完成成本516次/1,339,873known，只累计成本。
+本次发布新增调用0、只更新七个Lab报告/状态文件，不改冻结方法/配置或Product边界。
+完整计划、旧延后范围与首次失败保留，无候选/前缀，Product NO_GO，PR85 draft未合并。
+[当前总结](MILAI_EDIT_CHECKPOINT_20261006.md) ·
+[原生80次结果](../data/manifests/milai-edit-post-b0-native-capacity-results-20261006.json)。
+以下为各自日期历史快照；其中未启动/运行中/actual0须按当时范围理解。
+
 **2026-10-06 12:19:51 Asia/Shanghai：**Root独立复现f9ab697原SDK方法拒绝合法的
 重启后旧条件支持；最小收集修复通过341项实际SDK/普通Host检查（77+264），Ruff、
 strict mypy和package/tools/root边界通过。只补实际clauses/条件/绑定等keep_support
