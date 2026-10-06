@@ -1,5 +1,13 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 00:47:36 北京时间／2026-10-06 16:47:36 UTC：当前执行汇总，修正旧目标交付归因。**
+
+四组`7b82c60`各32会话前缀、`ab8f475`及`87c0f1f`两次B1有限复核均已闭合；当前没有活动模型队列。最新准备源码`6e2f6ef`的自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37496831458)已success，[Full](https://github.com/minguselandy/MiLAi/actions/runs/37496831482)仍in_progress；本次报告提交的CI另查。
+复核`87c` ordinal4实际Writer请求后，更正九事件表：相关宠物旧卡存在，但未进入本次交付的10条旧记录。另建宠物卡不能归为“旧目标已送达却不修订”。ordinal6仍是相关旧目标和新信息均送达、真实空提案的不同病例；Reader检索改进也不能直接证明Writer目标定位已修复。原标签、原请求和状态不改。
+12对实际M状态/原问题已固定并冻结源码与只读驱动，7直接可答／1旧背景／4缺少所问事实；离线L和普通补齐检查完成，dense／交替H与相同Reader尚未真实执行。原R3两分支44／36已通过现有CLI的`--prepare`，无banks或HTTP，仅准备、未准入。下一步先选择共同检索，再跑两分支四组各自空库及同版65／277等完整范围。
+此次仅更新6个Lab报告/状态文件，新增模型调用0，账本仍39,340请求／150,138,226 known／150,249,941 charged、embedding965,219、历史unknown3。无最终候选或条件化编辑优势，Product NO_GO，PR85 draft未合并；仅现有Qwen3.6生成家族。
+[当前执行摘要](MILAI_EDIT_EXECUTION_STATUS_20261007.md) · [修正后的九事件表](../data/manifests/milai-post87c-maintenance-breakpoints-development-20261007.json) · [12对检索声明](../data/manifests/milai-post87c-fixed-state-retrieval12-development-20261007.json)。下方保留历史时点。
+
 **2026-10-06T16:34:41.738189+00:00：开发CLI测试替身补齐，9个实际维护断点已分列。**
 
 `68a3721`的Core/边界/外部adapter检查成功；foundation失败于旧UnknownRun/KnownRun测试替身缺少新增`_semantic_retriever`接口，尚未进入相应维护断言。仅补两处替身方法，不在运行时增加兜底。相应CLI4项及CI实际失败组98项均通过，Ruff通过；本提交自身CI另查。

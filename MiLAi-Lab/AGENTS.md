@@ -1,3 +1,24 @@
+# 2026-10-06 16:47:36 UTC: publish execution summary and correct actual target-delivery diagnosis
+
+User requests current execution summary committed to GitHub. Report-only6 Lab
+files; no source/tests/config/runtime/workflow changes or new model process.
+Closed7b four-arm32 prefixes and ab8/87c finite B1 checks stay separate; no scores
+spliced. Actual87c ordinal4 packet has10 old records but excludes existing pet
+matter: old_target_delivered corrected false, previous assessment retained in
+private correction note. Ordinal6 delivered targets/current facts still actual
+empty. Reader retrieval does not by itself repair Writer target selection.
+Prepared frozen source6e2f6ef ownFast37496831458 success at16:47:36, Full37496831482
+in_progress; new report CI separate. 12 fixed actual M query-state pairs7direct/
+1oldcontext/4missing, offline L/plainfill only; D/H/Reader0, notadmitted. Both original
+R3 branches44/36 --prepare verified, banks0/HTTP0, wait common retrieval choice.
+Lightweight JSON/link/count/packet/diff/boundary verification only, no repeat98/313.
+Continuous ledger39340/150138226known/150249941charged/embed965219/unknown3 unchanged.
+Goal remains unfinished65/277/native/drift/ablation/tighterbudget/16reserved/external/
+Host/recovery/sixdeliverables. One Qwen family, no newagent/platform/Attention/budget/
+retry/idealstate/hotchange. ProductNO_GO,PR85open/draft/unmerged; mergeunauthorized.
+Raw/gold/HTTP/DB/private configs/logs ignored, Product/API/permissions/Canonical/
+Archive/workflow unchanged. Rollback6e2f6ef. Lower dated blocks are historical.
+
 # 2026-10-06T16:34:41.738189+00:00: actual failed CLI group fixed, offline maintenance diagnosis prepared
 
 Goalactive. This turn isprogress, notblocked:68a Core/registry/boundary/externalpass;

@@ -1,6 +1,6 @@
 {
   "status": "ROOT_BOUNDED_NINE_ACTUAL_EVENTS_OFFLINE_ONLY",
-  "observed_at": "2026-10-06T16:34:41.738189+00:00",
+  "observed_at": "2026-10-06 16:47:36 UTC",
   "plan": "milai-post-87c-current-first-plan-1.0 section6.3",
   "events": [
     {
@@ -89,7 +89,7 @@
       "development_user_position": 0,
       "ordinal": 4,
       "old_target_exists": "RELATED_PET_MATTER_EXISTS_NO_EXPLICIT_WITHDRAWAL",
-      "old_target_delivered": true,
+      "old_target_delivered": false,
       "current_fact_delivered": true,
       "proposed_action": {
         "creates": 1,
@@ -101,7 +101,8 @@
         "semantic_damage": "UNKNOWN_OUTSIDE_BOUNDED_REVIEW",
         "zero_delta_is_not_successful_preservation": false
       },
-      "source_fidelity": "PARTIAL_SELECTED_EVIDENCE_DOES_NOT_COVER_ALL_CLAUSES"
+      "source_fidelity": "PARTIAL_SELECTED_EVIDENCE_DOES_NOT_COVER_ALL_CLAUSES",
+      "target_delivery_observation": "Related old pet matter exists in the actual before-state, but none of the 10 records in the actual Writer request delivers that matter. A second card was created; this event does not prove a delivered old target was ignored."
     },
     {
       "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
@@ -185,5 +186,15 @@
   "old_author_labels_and_raw_attempts": "UNCHANGED",
   "candidate_selected": false,
   "method_advantage_established": false,
-  "Product_status": "NO_GO"
+  "Product_status": "NO_GO",
+  "delivery_correction": {
+    "observed_at": "2026-10-06 16:47:36 UTC",
+    "event_ordinal": 4,
+    "previous_report_commit": "6e2f6efc2973f5ce5268a0428173b8586258f876",
+    "previous_old_target_delivered": true,
+    "corrected_old_target_delivered": false,
+    "evidence": "Actual before/after state and complete Writer request delivery.records; 21 old records remain exact, 10 delivered candidates exclude the related pet matter.",
+    "original_author_labels_raw_attempts_and_bank": "UNCHANGED",
+    "new_model_calls": 0
+  }
 }
