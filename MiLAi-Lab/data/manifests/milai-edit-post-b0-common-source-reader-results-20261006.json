@@ -1,0 +1,196 @@
+{
+  "version": "milai-edit-post-b0-common-source-reader-results-1.0",
+  "observed_at": "2026-10-06T05:09:08.886402+00:00",
+  "status": "COMPLETED9_ROOT_REVIEWED_FINAL_READER_FAILURES_LATER132_NOT_STARTED",
+  "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+  "config_version": "milai-edit-post-b0-common-source-reader-v1",
+  "predeclaration_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json",
+  "predeclaration_actual0_preserved": true,
+  "declared_generation_calls_total": 141,
+  "actual_generation_calls": 9,
+  "Writer_calls": 0,
+  "Reader_calls": 9,
+  "Judge_calls": 0,
+  "known_tokens": 22080,
+  "input_tokens": 3578,
+  "completion_tokens": 18502,
+  "finish_reasons": {
+    "stop": 9
+  },
+  "reasoning_responses": 9,
+  "reasoning_already_in_completion_not_added_twice": true,
+  "input_basis": "exact known-response memories, original question and date from frozen497 native80 own histories; no ideal state, new Writer or primary benchmark score",
+  "common_model_parameters": {
+    "enable_thinking": true,
+    "temperature": 1.0,
+    "max_tokens": 32768,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "source_body_tokens": 8192,
+    "retrieval_limit": 10,
+    "working_sets": false,
+    "other_sampling_parameters": "existing server defaults, not full vendor profile"
+  },
+  "completed_phase": {
+    "phase": "actual_state_Reader_diagnostic",
+    "actual_generation_calls": 9,
+    "final_answers": 8,
+    "M_middle_control_answers": 1,
+    "Root_final_answer_complete": {
+      "original": {
+        "B0": false,
+        "B1": false,
+        "B2": false,
+        "M": false
+      },
+      "global": {
+        "B0": false,
+        "B1": false,
+        "B2": false,
+        "M": false
+      }
+    },
+    "M_middle_control": {
+      "core_frequencies_and_relative_conditions_correct": true,
+      "complete_answer_pass": false,
+      "added_calendar_date_wrong": true,
+      "unsupported_hypothetical_updates_and_verification_caveats": true
+    },
+    "findings": [
+      "All eight final answers remain incomplete in this bounded Root review; not a public benchmark score or independent Judge result.",
+      "Original final Readers decline per-shift application of a retained general frequency; Writer history failures remain separately recorded.",
+      "Global B0/B1 retained state lacks general frequency; B1 attributes contradictory old start/holiday limits to a later cancellation message. New Reader cannot repair absent or misattributed Writer facts.",
+      "Global B2/M final Readers fail to use retained general frequency and updated shared conditions; M had actually preserved the rule and conditions through exception removal.",
+      "M middle control answers 3/4 and relative start/holiday conditions, but adds an incorrect calendar date and unsupported hypothetical future changes/verification caveats; complete-answer control does not pass."
+    ],
+    "relative_date_check": {
+      "reference_date": "2030-03-04",
+      "reference_weekday": "Monday",
+      "next_monday": "2030-03-11",
+      "model_added_date": "2030-03-10",
+      "model_added_weekday": "Sunday",
+      "incorrect_model_added_date": true
+    }
+  },
+  "remaining_predeclared_phases": [
+    {
+      "phase": "existing_R3_own_empty_histories",
+      "declared_generation_calls": 80,
+      "actual_generation_calls": 0,
+      "status": "NOT_STARTED_NOT_CANCELLED"
+    },
+    {
+      "phase": "existing_source_attribution_controls",
+      "declared_generation_calls": 52,
+      "actual_generation_calls": 0,
+      "status": "NOT_STARTED_NOT_CANCELLED"
+    }
+  ],
+  "Root_review": {
+    "answers_read": 9,
+    "HTTP_request_response_pairs_matched": 9,
+    "original_question_date_memories_matched": 9,
+    "prompt_projection_usage_matches": 9,
+    "actual_config_matches_declared_config": true,
+    "frozen_source_critical_files_match_git": 7,
+    "independent_Judge": false,
+    "independent_complete_database_audit": false
+  },
+  "engineering": {
+    "Root_source_SDK_Host_checks": 412,
+    "Root_runner_external_driver_checks": 52,
+    "total_distinct_affected_checks": 464,
+    "owner148_included_not_added": true,
+    "Ruff_files": 9,
+    "strict_mypy_sources": 5,
+    "default_without_body_budget_old_Writer_packets_schemas_messages_exact": 44,
+    "package_tools_root_boundaries": "PASS",
+    "new_Writer_redelivery_model_validation_completed": false,
+    "new_normal_SDK_model_validation_completed": false,
+    "new_external_baseline_model_trials": 0
+  },
+  "accounting_start": {
+    "generation_requests": 36366,
+    "generation": {
+      "charged_tokens": 139455314,
+      "known_tokens": 139403612,
+      "unknown_usage": 2
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 36375,
+    "generation": {
+      "charged_tokens": 139477394,
+      "known_tokens": 139425692,
+      "unknown_usage": 2
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "new_generation_unknown_usage": 0,
+  "new_embedding_usage": 0,
+  "process_exited": true,
+  "serial_lease_free": true,
+  "live_ledger_matches_accounting_end": true,
+  "own_ci_before_first_HTTP": {
+    "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "observed_at": "2026-10-06T04:58:16.555570+00:00",
+    "Fast": {
+      "run_id": 37415897766,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full": {
+      "run_id": 37415897714,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "affected_checks_passed": 464,
+    "finite_daily_check_per_plan7_2": true
+  },
+  "source_ci_at_publication_review": {
+    "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "observed_at": "2026-10-06T05:06:43+00:00",
+    "Fast": {
+      "run_id": 37415897766,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37415897714,
+      "status": "in_progress",
+      "conclusion": null
+    }
+  },
+  "Full_required_before_prefix_candidate_or_merge": true,
+  "prior_frozen_native80_preserved": true,
+  "first_attempts_raw_terminals_and_config_preserved": true,
+  "no_retry_or_truncation_repair": true,
+  "source_body_budget_unused_in_Reader_only_phase": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "reserved_users_accessed": false,
+  "single_Qwen_family": true,
+  "independent_confirmation": false,
+  "product_status": "NO_GO",
+  "publication_scope": "seven Lab report/state files only; no additional model HTTP, source/test/config/Product/Archive/workflow change",
+  "remaining_scope": "full R0-R5/E0-E5 and six deliverables remain incomplete; predeclared132, fresh prefix/first-user long history, four-arm full comparison, native/drift, ablation/tighter budget, reserved users, external tasks and Host/recovery remain",
+  "rollback_reference": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+  "publication_validation": {
+    "JSON_counts_costs_scopes": "PASS",
+    "local_links_checked": 73,
+    "root_boundary_tracked_paths": 6442,
+    "root_boundary_findings": 0,
+    "root_boundary_status": "PASS",
+    "staged_diff": "PASS_REPORT_SCOPE_ONLY",
+    "source_tests_repeated_for_documentation": false
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "status": "COMMON_OLD_SOURCE_AND_READER_INPUT_ROOT464_CHECKED_FINITE_RECHECK_PREDECLARED_ACTUAL0",
-  "observed_at": "2026-10-06T04:51:30.867318+00:00",
-  "previous_report_commit": "8f6d760640dd3c2f726983ade7269d20f97e4031",
+  "status": "COMPLETED9_ROOT_REVIEWED_FINAL_READER_FAILURES_LATER132_NOT_STARTED",
+  "observed_at": "2026-10-06T05:09:08.886402+00:00",
+  "previous_report_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,17 +24,18 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "ROOT464_CHECKED_SOURCE_INCLUDED_FINITE141_PREDECLARED_ACTUAL0_NOT_CANDIDATE",
+    "status": "SOURCE7CC_ROOT464_CHECKED_READER9_REVIEWED_FAILED_NOT_CANDIDATE",
     "description": "common bounded old support body redelivery and one retained-state/source-history Reader contract",
-    "source_commit": null,
-    "source_identity": "ordinary Git commit carrying this predeclaration and bounded input/Reader implementation; bind exact source and own CI before HTTP",
-    "included_in_this_publication": true,
-    "actual_model_calls": 0,
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "source_identity": "ordinary Git commit7cc1363 frozen archive/config bound before first HTTP",
+    "included_in_this_publication": false,
+    "actual_model_calls": 9,
     "stable_source_delivered": true,
     "Root_checks_passed": 464,
     "candidate_selected": false,
     "prefix_admitted": false,
-    "detail_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json"
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "source_already_published_in_7cc": true
   },
   "native_and_drift": {
     "actual_model_calls": 0,
@@ -46,9 +47,9 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "bind own new Git source/config/CI then finite9 actual-state Reader diagnostic",
-      "same-source own-empty original44/global36 and three source controls16/20/16 with Root review",
-      "after usable common behavior and own Full, fresh four-user prefix and preselected first-user long smoke",
+      "review actual scope/history information and bounded old-source delivery; no further warning/example iteration",
+      "pending same7cc own-empty original44/global36 and source controls16/20/16 remain declared; Root review before continuation, no hot method/config changes",
+      "after usable common behavior and own Full, fresh four-user prefix and preselected first-user full history",
       "complete full plan and deferred scope, same-M ablation and fixed tighter budget before reserved users"
     ],
     "before_holdout_required": [
@@ -57,19 +58,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "8f6d760640dd3c2f726983ade7269d20f97e4031",
-    "observed_at": "2026-10-06T04:52:00+00:00",
+    "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "observed_at": "2026-10-06T05:06:43+00:00",
     "Fast": {
-      "run_id": 37414476264,
+      "run_id": 37415897766,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37414476271,
+      "run_id": 37415897714,
       "status": "in_progress",
       "conclusion": null
     },
-    "does_not_establish_new_source_CI": true
+    "does_not_establish_new_report_CI": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -306,11 +307,11 @@
     "new_model_cohort_for_SDK_source": 0,
     "Product_schema_API_permissions_Canonical_changed": false,
     "JSON_counters_scopes": "PASS",
-    "staged_diff": "PASS_SOURCE_SCOPE_CHECK",
-    "paired_HTTP_prompt_usage_matches": 80,
+    "staged_diff": "PASS_REPORT_SCOPE_ONLY",
+    "paired_HTTP_prompt_usage_matches": 9,
     "actual_old_state_mapping_matches": 44,
-    "actual_M_global_graph_lifecycle": "PASS_BOUNDED_WRITER_BRANCH_ONLY",
-    "local_links_checked": 65,
+    "actual_M_global_graph_lifecycle": "prior frozen497 bounded Writer lifecycle, unchanged; new source7cc Writer0",
+    "local_links_checked": 73,
     "Root_source_SDK_Host_tests": 412,
     "Root_runner_external_driver_tests": 52,
     "total_distinct_affected_checks": 464,
@@ -318,7 +319,16 @@
     "strict_mypy_sources": 5,
     "old_actual_writer_packets_schemas_messages_unchanged": 44,
     "new_model_calls": 0,
-    "Lab_optional_delivery_API_and_Reader_payload_changed": true
+    "Lab_optional_delivery_API_and_Reader_payload_changed": false,
+    "new_model_calls_scope": "publication-only; Reader9 completed before summary",
+    "new_real_Reader_calls_since_7cc": 9,
+    "actual_old_question_date_memories_matches": 9,
+    "root_boundary_check": "PASS",
+    "source_tests_repeated_for_documentation": false,
+    "new_Lab_source_test_or_config_changes": false,
+    "root_boundary_tracked_paths": 6442,
+    "root_boundary_findings": 0,
+    "prior_source7cc_changed_Lab_optional_delivery_API_and_Reader_payload": true
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -392,8 +402,8 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 0,
-  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
+  "model_calls_since_previous_report": 9,
+  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
       "generation_calls": 80,
@@ -412,10 +422,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 36366,
+    "generation_requests": 36375,
     "generation": {
-      "charged_tokens": 139455314,
-      "known_tokens": 139403612,
+      "charged_tokens": 139477394,
+      "known_tokens": 139425692,
       "unknown_usage": 2
     },
     "embedding": {
@@ -501,7 +511,7 @@
     "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; completed native80 is reported separately",
     "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately",
     "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
-    "model_calls_since_previous_report": "0 new model calls after reviewed native80 report8f6d760; only bounded source/Reader development and offline tests"
+    "model_calls_since_previous_report": "9 Reader diagnostic calls after source7cc; old dated predeclaredactual0 remains unchanged"
   },
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
@@ -516,8 +526,8 @@
     "global_actual_generation_calls": 36
   },
   "post_b0_development_generation_costs_all_sources_through_snapshot": {
-    "generation_calls": 516,
-    "known_tokens": 1339873,
+    "generation_calls": 525,
+    "known_tokens": 1361953,
     "nonthinking_three_prior_sources": {
       "generation_calls": 276,
       "known_tokens": 445407
@@ -540,7 +550,13 @@
       "generation_calls": 36,
       "known_tokens": 186607
     },
-    "closed_reviewed_sources_only_no_live_queue": true
+    "closed_reviewed_sources_only_no_live_queue": true,
+    "common_source_reader_7cc1363": {
+      "generation_calls": 9,
+      "known_tokens": 22080,
+      "Writer_calls": 0,
+      "Reader_calls": 9
+    }
   },
   "native_capacity_configuration_calibration": {
     "status": "COMPLETED80_ROOT_REVIEWED_M_GLOBAL_WRITER_LIFECYCLE_POSITIVE_ORIGINAL_AND_FINAL_READER_FAILURES",
@@ -564,29 +580,22 @@
   },
   "latest_checkpoint_document": "../../docs/MILAI_EDIT_CHECKPOINT_20261006.md",
   "current_method_source_ci": {
-    "commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
-    "observed_at": "2026-10-06T03:59:05+00:00",
+    "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "observed_at": "2026-10-06T05:06:43+00:00",
     "Fast": {
-      "run_id": 37408624077,
+      "run_id": 37415897766,
       "status": "completed",
-      "conclusion": "success",
-      "job_conclusions": {
-        "success": 8,
-        "skipped": 4
-      }
+      "conclusion": "success"
     },
     "Full": {
-      "run_id": 37408624028,
-      "status": "completed",
-      "conclusion": "success",
-      "job_conclusions": {
-        "success": 21
-      }
+      "run_id": 37415897714,
+      "status": "in_progress",
+      "conclusion": null
     },
-    "does_not_establish_this_report_or_separate_SDK_source_CI": true
+    "does_not_establish_new_report_CI": true
   },
   "normal_SDK_clause_support_collection": {
-    "status": "ROOT_REVIEWED341_COMMITTED651_FAST_SUCCESS_FULL_IN_PROGRESS_NO_MODEL_COHORT",
+    "status": "ROOT_REVIEWED341_COMMITTED651_FAST_FULL_SUCCESS_NO_NEW_SDK_MODEL_COHORT",
     "existing_module_tests_passed_reported_by_owner": 77,
     "real_SQLite_reopen_fixture_red_then_green_reported_by_owner": true,
     "Root_independent_review_completed": true,
@@ -604,13 +613,13 @@
       "tests/memory/test_functional_edit_memory.py"
     ],
     "source_commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
-    "own_CI_status": "FAST_SUCCESS_FULL_IN_PROGRESS",
+    "own_CI_status": "FAST_FULL_SUCCESS",
     "reviewed_at": "2026-10-06T04:19:51.038798+00:00",
-    "source_identity": "committed651 source; uncommitted old-redelivery development is separate and excluded",
+    "source_identity": "committed651 support collector fix; later7cc common bounded delivery is separate; native497 experiment does not use either",
     "source_already_published_in_previous_commit": true,
     "own_ci": {
       "commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
-      "observed_at": "2026-10-06T04:35:28.558362+00:00",
+      "observed_at": "2026-10-06T05:06:43+00:00",
       "Fast": {
         "run_id": 37413376702,
         "status": "completed",
@@ -618,16 +627,15 @@
       },
       "Full": {
         "run_id": 37413376862,
-        "status": "in_progress",
-        "conclusion": null
-      },
-      "does_not_establish_new_report_CI": true
+        "status": "completed",
+        "conclusion": "success"
+      }
     }
   },
-  "continuous_accounting_snapshot_scope": "closed native80 final boundary; stable actual live ledger, both processes exited and serial lease free",
+  "continuous_accounting_snapshot_scope": "closed Reader9 boundary after native80; exact live ledger, exited PID and free serial lease",
   "bounded_old_support_redelivery_development": {
-    "status": "ROOT_REVIEWED412_SOURCE_SDK_HOST_AND52_RUNNER_CHECKS_WIRED_INCLUDED_NOT_MODEL_ADMITTED",
-    "source_included_in_this_report": true,
+    "status": "SOURCE7CC_ROOT464_CHECKED_WIRED_NO_REAL_WRITER_VALIDATION_YET",
+    "source_included_in_this_report": false,
     "actual_model_calls": 0,
     "owner_reported_related_checks_passed": 148,
     "owner_Ruff_five_files": "PASS",
@@ -640,14 +648,71 @@
     "source_body_tokens": 8192,
     "Root_SDK_and_Host_checks_passed": 412,
     "Root_runner_external_driver_checks_passed": 52,
-    "old_default_actual_Writer_requests_unchanged": 44
+    "old_default_actual_Writer_requests_unchanged": 44,
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "actual_model_calls_scope": "Writer/normal SDK delivery model validation only; separate common Reader diagnostic9 completed",
+    "actual_Writer_calls": 0,
+    "source_already_published_in_7cc": true
   },
   "common_Reader_material_view": {
-    "status": "IMPLEMENTED_ENGINEERING_CHECKED_PREDECLARED9_REAL_READERS_ACTUAL0",
+    "status": "SOURCE7CC_READER9_ROOT_REVIEWED_FINAL8_INCOMPLETE_M_CONTROL_WRONG_DATE",
     "same_prompt_for_milai_and_external_controls": true,
     "source_history_for_RawRAG": true,
     "retained_state_for_milai_summary_and_author_notes": true,
     "posthoc_answer_rewriter": false,
-    "old_native80_outputs_unchanged": true
+    "old_native80_outputs_unchanged": true,
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "actual_generation_calls": 9,
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "Writer_calls": 0,
+    "complete_answer_control_passed": false
+  },
+  "common_source_reader_finite_recheck": {
+    "status": "COMPLETED9_ROOT_REVIEWED_FINAL_READER_FAILURES_LATER132_NOT_STARTED",
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "config_version": "milai-edit-post-b0-common-source-reader-v1",
+    "predeclaration_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json",
+    "declared_generation_calls_total": 141,
+    "actual_generation_calls": 9,
+    "Writer_calls": 0,
+    "Reader_calls": 9,
+    "Judge_calls": 0,
+    "known_tokens": 22080,
+    "finish_reasons": {
+      "stop": 9
+    },
+    "remaining_predeclared_phases": [
+      {
+        "phase": "existing_R3_own_empty_histories",
+        "declared_generation_calls": 80,
+        "actual_generation_calls": 0,
+        "status": "NOT_STARTED_NOT_CANCELLED"
+      },
+      {
+        "phase": "existing_source_attribution_controls",
+        "declared_generation_calls": 52,
+        "actual_generation_calls": 0,
+        "status": "NOT_STARTED_NOT_CANCELLED"
+      }
+    ],
+    "candidate_selected": false,
+    "prefix_admitted": false,
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "Root_final_answers_complete": {
+      "original": {
+        "B0": false,
+        "B1": false,
+        "B2": false,
+        "M": false
+      },
+      "global": {
+        "B0": false,
+        "B1": false,
+        "B2": false,
+        "M": false
+      }
+    },
+    "M_middle_control_complete": false,
+    "new_Writer_redelivery_model_validation_completed": false
   }
 }

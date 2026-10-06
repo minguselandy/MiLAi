@@ -1,3 +1,27 @@
+# 2026-10-06 13:09:08 Asia/Shanghai: publish closed Reader9 and current experiment summary
+
+User asks for a current summary and GitHub submission. Publish seven Lab report/
+state files only; no additional model HTTP, source/test/config/Product/Archive/
+workflow edits. Source7cc common bounded old body/Reader change is committed;
+Root464 affected checks are prior engineering evidence, not new model success.
+Reader9 complete and Root reviewed all9 answers,9 HTTP/prompt/usage/original
+question-date-memories pairs, source/config match, ledger closed22080known.
+All8 final answers remain incomplete. M middle control has correct3/4 and relative
+conditions but wrong added calendar date2030-03-10 (nextMonday after03-04 is03-11),
+and unsupported hypothetical changes/verification; complete control does not pass.
+Writer0, so actual old-body/normal SDK model validation still pending. Declared141
+has9 closed and132 notstarted/notcancelled; preserve historical predeclareactual0
+and original terminal, never hotchange7cc or replay firstattempts.
+
+Process exited,ledger stable36375/139425692known/139477394charged,seriallease free,
+unknown2/embed0 unchanged,no queue live. Source7cc Fast success/Full in_progress
+at13:06:43; SDK651 ownFast/Full success; new report CI separate. Full still before
+prefix/candidate/merge. Old497 native80 and prior failures untouched. One Qwen
+family, no new warnings/auditor/store/deployment/platform. Root owns data/raw/
+HTTP/accounting/evaluation/GitHub; code owner has handed back. Full plan and all
+deferred scopes remain incomplete and active; no candidate/prefix/holdout/merge.
+PR85draft/unmerged, ProductNO_GO. Lower dated blocks remain historical snapshots.
+
 # 2026-10-06 12:51:30 Asia/Shanghai: bounded common old body and Reader input handed back
 
 Root completed independent412 memory/SDK/ordinaryHost checks and52 runner/external/
