@@ -1,3 +1,34 @@
+# 2026-10-06 Post-B0 execution priority
+
+The active user goal executes MILAI_POST_B0_DEVELOPMENT_EXPERIMENT_PLAN.md v1.0.
+Root adopts its sections 9/12.2 scheduling change: after offline diagnosis and
+existing-feature inspection, prioritize the finite 624d158 R3 before old native
+and full-drift scoring. At a verified complete session boundary, Root may stop
+the old serial CLI cleanly only with no in-flight or unconfirmed new request,
+matching saved state, and preserved source/config/output/accounting. This is an
+explicit scheduling decision; the experiment Goal remains active. Never hot-edit
+4357d46, discard old failures, reset the ledger or replay unknown effects.
+Unstarted old continuation watchers are superseded with zero model calls; retain
+their original files and record the actual switch separately. Remaining old full,
+native and drift work is deferred, not passed or removed from scope.
+
+The two exposed R3 branches have completed 80 calls from the own-CI-approved
+624d158 source and four arms' own empty banks; preserve their first failures.
+B2/M formed no condition links, M used only change_value, and scoped exception,
+withdrawal and B0/M empty-query behavior failed. Matter/assertion metadata did
+persist. Root has reviewed outputs, operations, before/after and Reader behavior;
+prefix is not admitted. The first minimal opt-in repair only supplies equivalent
+generic four-arm formation examples with explicit condition/modifies for B2/M.
+Its declared own-empty formation/value/query recheck is 20 calls, not run yet;
+bind the new source identity and own CI before actual admission. Mechanical
+checks and scheduling do not select a candidate.
+Only fix the earliest observed failure; retain first attempts, use balanced common
+examples if necessary, and stop to analyze after two minimal unsuccessful repairs.
+Same-M semantic-entry ablation and one tighter-budget sensitivity precede holdout.
+The existing source owner remains method/memory/SDK only, with no gold, scoring,
+future questions or raw/reserved data. Root owns all HTTP, research data and GitHub.
+Full R0–R5/E0–E5 and six deliverables remain; one Qwen3.6 family, Product NO_GO.
+
 # 2026-10-05 latest review: next candidate alongside the frozen old queue
 
 The user explicitly directs the next candidate toward common matter-level records,

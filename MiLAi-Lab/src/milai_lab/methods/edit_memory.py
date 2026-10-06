@@ -303,7 +303,31 @@ class EditMemory:
         unit: dict[str, Any] = {"text": "User reports reminders are quiet.", "evidence": ["e1"]}
         if self.features.source_metadata:
             unit["assertion"] = {"source": "e1", "kind": "reported"}
-        create: dict[str, Any] = {"action": "create", "units": [unit]}
+        formation_units: list[dict[str, Any]] = (
+            [
+                {"text": "User reports reminders use a soft tone.", "role": "content"},
+                {"text": "Only on weekdays.", "role": "condition"},
+                {"text": "Only before 18:00.", "role": "condition"},
+            ]
+            if self.conditioned
+            else [
+                {
+                    "text": "User reports reminders use a soft tone only on weekdays "
+                    "and before 18:00.",
+                    "role": "content",
+                }
+            ]
+        )
+        for formed_unit in formation_units:
+            formed_unit["evidence"] = ["e1"]
+            if self.features.source_metadata:
+                formed_unit["assertion"] = {"source": "e1", "kind": "reported"}
+        create: dict[str, Any] = {"action": "create", "units": formation_units}
+        if self.conditioned:
+            create["relations"] = [
+                {"source": source, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+                for source in (1, 2)
+            ]
         if self.features.matter_organization:
             create["matter"] = "User's reminder sound"
         change = copy.deepcopy(unit)
@@ -338,7 +362,8 @@ class EditMemory:
         )
         if allow_create:
             instruction += (
-                "Formation input: records=[]; user e1 reports quiet reminders. "
+                "Formation input: records=[]; user e1 reports reminders use a soft tone "
+                "only on weekdays and before 18:00. "
                 "Complete formation envelope: "
                 + json.dumps(envelope(create, created=True), separators=(",", ":"))
                 + ". "

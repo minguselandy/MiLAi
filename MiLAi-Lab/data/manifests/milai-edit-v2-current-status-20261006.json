@@ -1,9 +1,7 @@
 {
-  "status": "PARTIAL_DEVELOPMENT_PROGRESS_WITH_LIVE_OLD_QUEUE",
-  "observed_at": "2026-10-06T07:59:51.759346+08:00",
-  "previous_report_commit": "50fee9399e33c3d58f8e083ef55a7c5281fc5bd4",
-  "running_source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
-  "running_config_version": "milai-edit-common-v2-i2-durability",
+  "status": "PARTIAL_DEVELOPMENT_PROGRESS_FIRST_POST_B0_R3_REVIEWED",
+  "observed_at": "2026-10-06T08:37:11.247179+08:00",
+  "previous_report_commit": "8cd0371d01eee26407c87543593deca6c0d0ed63",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -11,8 +9,8 @@
       "evaluation": 277
     },
     "B1": {
-      "maintenance": 103,
-      "evaluation": 102
+      "maintenance": 108,
+      "evaluation": 108
     },
     "B2": {
       "maintenance": 0,
@@ -24,31 +22,35 @@
     }
   },
   "declared_sessions_per_arm": 277,
-  "old_queue_live": true,
+  "old_queue_live": false,
   "next_candidate": {
     "source_commit": "624d15870c021b779c418459588c6c4a2b7cd2b8",
-    "actual_model_calls": 0,
-    "prepared_r3_calls": [
+    "actual_model_calls": 80,
+    "completed_r3_calls": [
       44,
       36
     ],
+    "known_tokens": 112173,
     "candidate_selected": false,
-    "waiting_status": "WAITING_FOR_OLD_FULL_NATIVE_AND_DRIFT"
+    "prefix_admitted": false,
+    "status": "FIRST_R3_SEMANTIC_FAILURES_PRESERVED",
+    "formation_repair_actual_model_calls": 0,
+    "formation_repair_declared_recheck_calls": 20
   },
   "native_and_drift": {
     "actual_model_calls": 0,
-    "waiting_status": "WAITING_FOR_COMPLETED_FULL_277X4"
+    "status": "DEFERRED_NOT_PASSED",
+    "waiting_process_live": false
   },
   "post_b0_plan": {
     "version": "milai-edit-post-b0-plan-1.0",
     "read": true,
-    "scheduling_change_executed": false,
+    "scheduling_change_executed": true,
     "next_priority": [
-      "offline saved-result diagnosis",
-      "verify existing candidate wiring",
-      "real finite R3 from each arm own empty bank",
-      "fix earliest actual failure only",
-      "prefix and selected long-history smoke"
+      "minimal formation/value/query real recheck",
+      "earliest observed scoped exception failure only",
+      "prefix and selected long-history smoke",
+      "new full four-arm comparison while preserving old remaining scope"
     ],
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
@@ -56,9 +58,9 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "50fee9399e33c3d58f8e083ef55a7c5281fc5bd4",
+    "commit": "8cd0371d01eee26407c87543593deca6c0d0ed63",
     "Fast": {
-      "run_id": 37386945782,
+      "run_id": 37391847781,
       "conclusion": "success",
       "job_conclusions": {
         "success": 8,
@@ -66,7 +68,7 @@
       }
     },
     "Full": {
-      "run_id": 37386945871,
+      "run_id": 37391847792,
       "conclusion": "success",
       "job_conclusions": {
         "success": 21
@@ -192,27 +194,34 @@
     "status": "N/A_UNDEFINED_TARGET_PRECISION",
     "does_not_replace_saved_placeholder": true
   },
-  "pending_offline_reviews": {
+  "new_model_calls_for_this_publication_and_analysis": 0,
+  "product_status": "NO_GO",
+  "limits": [
+    "One exposed source with two branches; not independent confirmation or broad failure rates.",
+    "Root semantic review is not an independent Judge.",
+    "One Qwen3.6 family; no cross-family generalization.",
+    "Operation commits and unchanged failed states do not establish semantic success or preservation.",
+    "No raw text, gold, predictions, HTTP, databases or logs published.",
+    "B1 partial at 108/277 and B2/M unstarted; no complete long-history four-arm comparison.",
+    "Saved labels and supplemental original formulas are not a completed official aggregate.",
+    "Why all 76 target flags are false remains unreviewed.",
+    "Minimal formation repair has mechanical evidence only; its real recheck is not run."
+  ],
+  "frozen_old_source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "frozen_old_config_version": "milai-edit-common-v2-i2-durability",
+  "completed_offline_reviews": {
     "invalid_update_labels": {
       "Omitted": 42,
       "None": 1
     },
-    "raw_label_response_attribution_complete": false,
+    "raw_label_response_attribution_complete": true,
     "fourth_user_zero_text_delta_original_sessions": [
       23,
       32
     ],
-    "fourth_user_zero_text_delta_semantic_review_complete": false,
-    "all_original_formulas_supplemented": false
+    "fourth_user_zero_text_delta_semantic_review_complete": true,
+    "all_original_formulas_supplemented": true
   },
-  "new_model_calls_for_this_publication_and_analysis": 0,
-  "product_status": "NO_GO",
-  "limits": [
-    "B1 is a live partial cohort, B2/M unstarted; not a complete four-arm comparison.",
-    "Saved labels and supplemental original-formula ratios are not a completed official aggregate.",
-    "Why all 76 target flags are false remains unreviewed; no semantic certification.",
-    "Scheduling proposal is recorded, not executed; no process pause or new model run in this publication.",
-    "Same Qwen3.6 family Writer/Reader/Judge; no independent or cross-family confirmation.",
-    "No raw text, predictions, HTTP, databases or logs are published."
-  ]
+  "post_b0_detail_manifest": "milai-edit-post-b0-stage-a-and-first-r3-20261006.json",
+  "model_calls_in_new_r3_since_previous_report": 80
 }
