@@ -1,3 +1,33 @@
+# 2026-10-06T17:58:15.900983+00:00: original common dense R3 closed, repair actual formation and reading before prefix
+
+Previous turn published646 and verified all10 remote files/PRbody. This turn read
+post87c full sections1-12 and inherited postB0 phases/six deliverables. Own646 Fast
+success before first HTTP; now Fast37502370558/Full37502370395 bothsuccess. Frozen
+646 source/config original44/36 branches serial, each4ownempty, original events/
+questions unchanged. PIDs2512191/2561788 missing after normal terminal;80stop/
+372639known (44Writer36Reader0Judge),107embedding inputs107 tokens2530,0newunknown/
+retry/capacityfailure. Root44pairs/envelopes/36answers/actual deliveries plus80/
+107receipt accounting reviewed; original terminations/raw/author data unchanged.
+First M1content2conditions2relations forms;change_value/add_exception/remove_exception
+preserve actual general/shared units/support/attribution/edges, peak6edges. Root
+mechanical preservation exact. Reader postwithdraw/final incomplete. Second M
+initialcompound/no condition edges; loses unmentioned qualifiers, separate creates
+night/start, ordinaryretract exitsnight;0add_exception/change_condition. Reader
+wrong nextMonday calendar and scope refusal. B2both0conditionedges. H-only omission
+rejects firstB0/secondB2 current_boundary_source_required; interface/examples already
+support currente plusoldh, not proven missing API. FirstB2 conditionh split rejects
+though actualolde2delivered. Need actual formation granularity and existing latest
+operation/source delivery, not newwarnings/auditor/Judge. Reader current passes
+onlycontent/scope/revision; latest cancellation evidence exists in edit_operations.
+No cause claim before recheck. B notautoenabled. No newsource change this turn.
+Publish7 Labreports inclsanitized R3result; light JSON/links/count/diff, no repeated
+tests. New reportCI distinct; no activeHTTP. Ledger39460/150652990known150764705charged,
+embedding970470 historicunknown3. Fullgoal remains4arm sameversionprefix65/277/
+native/drift/ablation/fixedtighterbudget/16reserved/external/Host/recovery/sixdeliverables.
+OneQwen/BGE, ProductNO_GO PR85draftunmerged, no newagents/platform/Attention/hashgate/
+budget/reset/retry/hotchange/idealstate. Product/API/permissions/Canonical/Archive/
+workflow unchanged, raw/privateconfigs/HTTP/DB ignored; rollback646. Lowerblocks history.
+
 # 2026-10-06T17:13:45.113578+00:00: retrieval12 closed, choose simple common D and continue original R3
 
 Previous goal turn made progress: d9 summary published6files and corrected actual

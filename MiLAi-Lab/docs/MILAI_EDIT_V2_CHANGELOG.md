@@ -1,5 +1,28 @@
 # MiLAi-Edit v2 跟进记录
 
+**2026-10-06T17:58:15.900983+00:00：共同 dense 的原 R3 两分支已真实闭合；机制有正例，形成和读取仍不稳定。**
+
+冻结 `646d9fa`，原事件、问题与顺序不变，四组每分支从自己的空库形成，串行执行原44／36范围。
+44 Writer／36 Reader共80响应全部stop、372,639 known；107次BGE／107输入／2,530 token；0Judge、容量失败、新unknown或重试。
+Root读完44前后状态、44完整提案、36完整回答和实际交付，80生成／107编码回执与账本一致；不是独立来源／数据库审计或官方benchmark评分。
+
+第一分支M形成1content／2condition／2关联，实际使用change_value、add_exception、remove_exception。
+频率更正保留未重述条件；增加例外保留一般三次及旧支持，撤销只删除例外与独占条件；终态共享条件与关联仍在，纯查询／重述状态、版本和支持均不变。
+但撤销后及末次Reader未完整回答日夜班频率。第二分支M初始仍为复合content、0条件关联，更正丢失限定，随后分建夜班和开始事项，未使用add_exception／change_condition；普通retract退出夜班而保留三次和新安排，Reader仍拒答部分并算错相对日期。
+B2两分支均未形成条件关联。B0/B2各一次h-only省略撤销被current_boundary_source_required拒绝；另一次B2改变条件却只保留h被拒，旧原文e2实际已送达。
+复合正文的局部替换可删掉未重述频率或限定，也可抹平旧事实日期。零拒绝与少改动均不能替代语义完成。
+
+Reader实际收到保留正文，现入口却只交付content／scope／revision，未交付记录中已有的本次撤销操作依据；补交付的因果作用尚未验证。
+按计划7.2回到局部修复：先处理独立主张／限定的形成粒度，再复用已有修订与来源读取，验证受影响行为及成功／空维护控制，不增加审核、警告循环或Judge。
+不能将同一已曝光来源的两分支称为独立确认，不能归因稳定优势；各组实际初始状态不同，B2与M本次也没有相同的实际条件结构。
+
+源码自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37502370558)／[Full](https://github.com/minguselandy/MiLAi/actions/runs/37502370395)均success（2026-10-06 17:54:07 UTC核实）；新文档提交CI另查。
+当前无活动模型队列；闭合累计39,460请求／150,652,990 known／150,764,705 charged，embedding970,470，历史unknown3不变。
+同版四组前8／65／277、原生／漂移、入口消融／固定较紧预算、16保留、外部、Host／恢复及六项交付仍未完成。
+本次仅7个Lab报告／状态文件，轻量JSON／相对链接／计数／差异核查；不重复源码测试或模型。
+Product NO_GO，无最终候选；PR85仍open／draft／未合并。Product Schema/API/权限/Canonical、Archive、workflow不变，raw／gold／HTTP／DB／私有配置保持ignored，回滚646d9fa。
+[原R3真实结果](../data/manifests/milai-post87c-common-dense-r3-results-20261007.json)。下方是各自时点的历史记录。
+
 **2026-10-06T17:13:45.113578+00:00：12对检索真实诊断闭合，选择简单dense，原R3两分支待执行。**
 
 固定四个曝光用户各3对实际M状态/原问题，48条件结果对应40次实际Reader响应，全部stop；142,125 known。22次BGE编码/60输入/2,721 token；无新unknown、重试、Writer/Judge或记忆写入，12个原状态不变。Root读完全部48回答/40对HTTP及22编码回执，材料与原问题/日期、实际prompt usage一致；非独立Judge或原始来源/数据库完整审计。
