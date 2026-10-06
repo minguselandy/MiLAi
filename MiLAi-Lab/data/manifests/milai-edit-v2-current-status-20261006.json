@@ -1,7 +1,7 @@
 {
   "status": "RUNNING_STAGE_C_FOUR_ARM_DEVELOPMENT_PREFIX_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T07:39:40.170174+00:00",
-  "previous_report_commit": "d7f062c2625d17207ca63d2c2964181d75b89706",
+  "observed_at": "2026-10-06T07:52:28.930169+00:00",
+  "previous_report_commit": "00ac3e497fc268ff4f6f5abc555ec64a32369c9a",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -55,18 +55,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "d7f062c2625d17207ca63d2c2964181d75b89706",
+    "commit": "00ac3e497fc268ff4f6f5abc555ec64a32369c9a",
+    "observed_at": "2026-10-06 07:49 UTC",
     "Fast": {
-      "run_id": 37424891419,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37431523652,
+      "status": "in_progress",
+      "conclusion": null
     },
     "Full": {
-      "run_id": 37424891412,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37431523615,
+      "status": "in_progress",
+      "conclusion": null
     },
-    "new_report_CI_separate": true
+    "scope": "Documentation commit; source7b82 own Fast/Full success is separately recorded."
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -980,13 +981,14 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_report_and_state_files": 9,
-    "new_model_calls": 0,
+    "Lab_report_and_state_files": 5,
+    "new_model_calls_started": 0,
+    "existing_frozen_queue_continues_naturally": true,
     "source_tests_repeated": false,
     "source_test_config_changes": false,
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
-    "rollback_reference": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "rollback_reference": "00ac3e497fc268ff4f6f5abc555ec64a32369c9a",
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "transport300_continuation_declaration": {
@@ -1769,11 +1771,10 @@
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
   "new_queue_live": true,
   "stage_C_prefix_live": {
-    "observed_at": "2026-10-06T07:39:40.170174+00:00",
+    "observed_at": "2026-10-06T07:52:28.930169+00:00",
     "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
     "PID": 178764,
     "PID_and_exact_frozen_command_verified_live": true,
-    "shared_HTTP_lease_held": true,
     "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
     "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
     "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
@@ -1783,12 +1784,17 @@
     "per_arm_planned_QA": 73,
     "arms": {
       "B0": {
-        "maintenance_complete": 3,
-        "evaluation_complete": 2,
-        "requests": 129,
-        "saved_response_files": 128,
+        "maintenance_complete": 8,
+        "evaluation_complete": 8,
+        "requests": 201,
+        "saved_response_files": 200,
         "pending_HTTP_count": 1,
         "failure_files": 0,
+        "maintenance_with_unprocessed": 0,
+        "receipt_statuses": {
+          "committed": 16,
+          "no_change": 10
+        },
         "terminal_status": null
       },
       "B1": {
@@ -1798,6 +1804,8 @@
         "saved_response_files": 0,
         "pending_HTTP_count": 0,
         "failure_files": 0,
+        "maintenance_with_unprocessed": 0,
+        "receipt_statuses": {},
         "terminal_status": null
       },
       "B2": {
@@ -1807,6 +1815,8 @@
         "saved_response_files": 0,
         "pending_HTTP_count": 0,
         "failure_files": 0,
+        "maintenance_with_unprocessed": 0,
+        "receipt_statuses": {},
         "terminal_status": null
       },
       "M": {
@@ -1816,20 +1826,22 @@
         "saved_response_files": 0,
         "pending_HTTP_count": 0,
         "failure_files": 0,
+        "maintenance_with_unprocessed": 0,
+        "receipt_statuses": {},
         "terminal_status": null
       }
     },
-    "request_artifacts": 129,
+    "request_artifacts": 201,
     "saved_response_roles": {
-      "Writer": 3,
-      "Reader": 6,
-      "Judge": 119
+      "Writer": 8,
+      "Reader": 20,
+      "Judge": 172
     },
-    "saved_response_count": 128,
+    "saved_response_count": 200,
     "saved_response_finish_reasons": {
-      "stop": 128
+      "stop": 200
     },
-    "known_tokens_from_saved_responses": 383249,
+    "known_tokens_from_saved_responses": 784060,
     "not_final_accounting": true,
     "pending_budget_unknown_reservation_is_not_terminal_failure": true,
     "observational_partial_JSON_reads": 0,
@@ -1842,7 +1854,14 @@
     "Root_first_B0_QA_additional_support_limit": "Third answer correctly distinguishes goal from accomplishment but categorical did-not-occur exceeds available completion evidence; original Correct label unchanged.",
     "candidate_selected": false,
     "method_advantage_established": false,
-    "long_smoke_actual_model_calls": 0
+    "long_smoke_actual_model_calls": 0,
+    "shared_HTTP_lease_held_scope": "Verified in prior live check; not re-probed for this publication.",
+    "input_tokens_from_saved_responses": 528391,
+    "completion_tokens_from_saved_responses": 255669,
+    "first_user_B0_prefix_maintenance_complete": 8,
+    "first_user_B0_prefix_evaluation_complete": 8,
+    "Root_natural_session_review_scope": "First B0 session only; remaining saved natural sessions not yet semantically reviewed by Root.",
+    "session_checkpoint_count_scope": "maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; excludes nested batch completion artifacts."
   },
   "required_controls_offline_preparation": {
     "status": "OFFLINE_FIXED_NOT_ADMITTED_MODEL0",
@@ -1861,5 +1880,32 @@
     "prefix_actual_state_not_ideal_state": true,
     "other_user_Judge_caches_not_copied": true,
     "not_a_model_success_or_complete_recovery_claim": true
+  },
+  "historical_publication_scope_complete141_identity12": {
+    "Lab_report_and_state_files": 9,
+    "new_model_calls": 0,
+    "source_tests_repeated": false,
+    "source_test_config_changes": false,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_workflow_changed": false,
+    "rollback_reference": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "historical_raw_results_and_predeclarations_unchanged": true
+  },
+  "current_publication_checks": {
+    "status": "PASS",
+    "files": 5,
+    "local_links_checked": 93,
+    "JSON_counts_and_token_sums": "PASS",
+    "closed_accounting_excludes_live_queue": "PASS",
+    "source_config_and_historical_manifests_unchanged": "PASS",
+    "raw_HTTP_SQLite_logs_config_ignored": "PASS",
+    "new_source_tests": 0,
+    "new_model_calls_started": 0,
+    "repo_boundary": {
+      "status": "PASS",
+      "tracked_paths": 6449,
+      "findings": 0
+    },
+    "diff": "PASS_FIVE_LAB_REPORT_STATE_FILES_ONLY"
   }
 }
