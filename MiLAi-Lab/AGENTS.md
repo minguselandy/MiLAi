@@ -1,3 +1,27 @@
+# 2026-10-06 23:52 UTC: B0 all4 first8 closed/reviewed; original suite continues B1
+
+Previous999 summary publication is progress. ActualB0 terminalCOMPLETED_PHASE,
+32maint/eval72updates73QA, author27/72valid64 and49/73valid68. Original invalid
+labels preserved; pure offline aggregation succeeds0HTTP. Root fourth9Writer
+batches19fullQA read, cumulative32sessions73answers. Fourth1/18valid13 QA14/19.
+776stop3497828known=33Writer73Reader670Judge;200encoder72967,75create11rewrite
+86commits,75matters349content/max39.0capacity/trunc/reject/gap/newunknown/retry,
+6empty sessions; fourth3 has2source batches. Fourthinputmax32256 at ceiling.
+3 usesUserpromotion/income vsconflictingAssistant,2oldfullunits retained.
+4health/5network deliveredempty;7empty leaveshealthmissing; laterQA refuseshealth
+or usesJanuary for earlierDecember. Original incomeHalluc/temporalCorrect kept.
+6 createsstyle/plans/experience, not proof priorrevisions completed.
+Snapshot23:52:23 B1maint1/eval0,B2Munreached;session68500/PID3476759 LIVE,
+no suite terminal. B0closedboundary40358/154825220known154936935charged/embed
+1047799/history3. Live40384/154904331known155056943charged/embed1048182/unknown4
+includes1pending;802requests801stop3576939known,204encoder73350,ledger exact.
+c86 ownFastFullsuccess but conditional B modelcalls0/notadmitted/Hostnot switched,
+wait WHOLEsuite.
+999ownFastsuccess/Fullrunning23:51:31; newreportCI separate.5Labreports only,
+lightchecks/privateignored/oldblocks retained/rollback999;0source/modelcalls.
+Full65/277/native/drift/ablation/budget/reserved/external/Host/recovery and six
+deliverables ACTIVE/incomplete. ProductNO_GO PR85draft, oneQwen+BGE/no agents.
+
 # 2026-10-06 23:34 UTC: user-requested execution summary, original queue remains live
 
 User requests current execution summary published to GitHub. Snapshot23:34:16
