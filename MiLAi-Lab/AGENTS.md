@@ -1,3 +1,29 @@
+# 2026-10-06 18:29:24 UTC: common formation and exact revision evidence implemented; models pending
+
+Previous turn published execution summary 06198a5; it made publication progress.
+This turn read current worktree and post87c plan sections 1–12. Root changed five
+Lab source files: independently revisable claim/qualification examples shared
+by four arms; actual selected e handles retained on committed versions; exact
+ranges/roles/dates delivered through one read helper to benchmark and normal
+Host. Kept h bodies are not redelivered. Old local versions can use their actual
+edit_operations witnesses; missing old whole-rewrite witnesses stay missing.
+No new platform, semantic guard relaxation, ideal state or additional feature.
+Three existing test functions in two files strengthened; 23 distinct tests pass,
+two rerun after adding whole-withdrawal assertions; Ruff7/mypy5/boundary pass.
+Four-arm hypothetical lifecycle and correction apply on real empty SQLite banks,
+including exact qualifiers/support/attribution and selected revision ranges.
+Engineering only; new model/embedding0. Existing R3/results/ledger unchanged.
+061 own Fast success / Full in_progress at18:27:41; new source own CI required.
+Publish12 Lab files (5 source/2 existing tests/5 reports). Bind exact published
+source and own Fast before at-most2 fixed actual Reader calls, then both original
+R3 branches once, four arms each own empty, unchanged events/questions/config.
+Own Full before new prefix/candidate/merge. Full goal remains8/65/277/native/drift/
+ablation/tighter budget/16 reserved/external/Host/recovery/six deliverables.
+One Qwen family and existing BGE, Product NO_GO, PR85 open/draft/unmerged. No new
+agents/budget/reset/retry/unknown replay/hot edit. Raw/configs/DB/HTTP ignored;
+Product/API/permissions/Canonical/Archive/workflow unchanged; rollback061.
+Lower dated entries describe their original historical state.
+
 # 2026-10-06 18:09:58 UTC: publish current execution summary without claiming pending repairs
 
 User requests current execution situation submitted to GitHub. d66f11e result

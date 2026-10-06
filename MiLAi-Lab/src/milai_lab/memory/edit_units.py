@@ -91,6 +91,33 @@ def source_evidence(service: Any, evidence_ids: list[str]) -> list[dict[str, Any
     return evidence
 
 
+def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[str, Any]]:
+    """Read only the exact original ranges selected for this committed revision.
+
+    Older local revisions retain their actual witnesses in edit_operations.
+    Missing whole-rewrite witnesses are not reconstructed from a source ID.
+    """
+    handles = version.get("revision_evidence")
+    if handles is None:
+        handles = [
+            handle
+            for edit in version.get("edit_operations", [])
+            for handle in edit["evidence"]
+        ]
+    result = []
+    for handle in dict.fromkeys(handles):
+        fragment = resolve_fragment(service, handle)
+        source = service.source(fragment["source_ref"])
+        result.append({
+            **{key: fragment[key] for key in (
+                "source_ref", "source_revision", "start", "end", "content", "role", "observed_at"
+            )},
+            "occurred_at": source.get("occurred_at"),
+            "semantic_support": "unchecked",
+        })
+    return result
+
+
 def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
     """Validate representation references at the service's commit boundary."""
     if (

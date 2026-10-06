@@ -12,7 +12,7 @@ import pytest
 from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.memory.edit_units import clause_proposal
+from milai_lab.memory.edit_units import clause_proposal, read_revision_evidence
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
@@ -783,6 +783,13 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         assert receipt["revision"] == 3 and now["units"] == state["units"][:2]
         assert now["relations"] == state["relations"][:1]
         assert service.read(saved["id"], 2)["value"]["edit_state"] == state
+        actual = service.read(saved["id"])["value"]
+        evidence = read_revision_evidence(service, actual)
+        assert [part["content"] for part in evidence] == ["User cancels the north-room exception."]
+        assert evidence[0]["role"] == "user" and evidence[0]["semantic_support"] == "unchecked"
+        # Old local versions use their stored operation witnesses without reconstructing a source.
+        legacy = {key: value for key, value in actual.items() if key != "revision_evidence"}
+        assert read_revision_evidence(service, legacy) == evidence
         # The old read revision cannot commit a second change after cancellation.
         stale = {
             "action": "edit",
@@ -886,6 +893,11 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             {"action": "retract_record", "target": "r1", "evidence": ["e1"]}, view["mapping"]
         )
         receipt = method.apply("s", "withdraw", withdrawal)
+        evidence = read_revision_evidence(service, service.read(saved["id"])["value"])
+        assert [part["content"] for part in evidence] == [
+            "User withdraws the entire reminder report."
+        ]
+        assert evidence[0]["role"] == "user"
         assert receipt["ok"] and receipt["id"] == saved["id"]
         assert service.read(saved["id"], 1)["value"]["edit_state"]["units"]
         assert service.read(saved["id"], 2)["value"]["edit_state"]["units"] == []

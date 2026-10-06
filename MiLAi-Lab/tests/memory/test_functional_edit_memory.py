@@ -479,6 +479,12 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
             assert changed["ok"] and changed["id"] == receipt["id"] and changed["revision"] == 2
             assert memory.service.read(receipt["id"], 1)["value"] == old
             assert memory.service.read(receipt["id"])["value"]["scope"] == {"project": "gallery"}
+            page = json.loads(invoke(
+                memory, "read_memory", {"record_id": receipt["id"]}, "revision-read", "u2"
+            ).content)
+            evidence = page["items"][0]["revision_evidence"]
+            assert [part["content"] for part in evidence] == ["Remember my soft reminder tone now."]
+            assert evidence[0]["role"] == "user"
             assert app.world.snapshot() == before_world
             memory.service.capture_user("s", "u3", "Keep the existing reminder memory unchanged.")
             memory.writer_context("s", "u3", "functional-m-test-v1")

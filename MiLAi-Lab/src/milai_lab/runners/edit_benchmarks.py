@@ -31,6 +31,7 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.memory.edit_units import read_revision_evidence
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
@@ -55,6 +56,8 @@ memories or future questions are available. You need not invent missing facts.
 READER_PROMPT = """Answer the current question using only the delivered memories.
 The memory_view identifies the material: retained_state is the method's latest
 retained assertions; source_history is observed speech to interpret in chronology.
+revision_evidence contains original fragments selected for the stored revision;
+interpret their changes in chronology alongside the retained assertions.
 Neither certifies truth. Preserve each claim's speaker, report or inference status,
 subject, conditions, dates and uncertainty. A source occurrence date dates its
 report; applicability depends on the claim's time limits, corrections and active
@@ -1210,6 +1213,7 @@ class BenchmarkRun:
                     "content": row["value"]["content"],
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
+                    "revision_evidence": read_revision_evidence(service, row["value"]),
                 }
                 for row in records
             ]

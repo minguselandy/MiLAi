@@ -25,6 +25,7 @@ from milai_lab.memory.edit_units import (
     UnitEdit,
     apply_local,
     form_state,
+    read_revision_evidence,
     render_state,
 )
 from milai_lab.memory.functional import FunctionalMemory
@@ -705,7 +706,7 @@ class FunctionalEditMemory(FunctionalMemory):
                         result[-1]["edit_unit"]["assertion"] = copy.deepcopy(unit["assertion"])
                     if unit.get("local_exception"):
                         result[-1]["edit_unit"]["local_exception"] = True
-        return result or [
+        result = result or [
             {
                 **ordinary[0],
                 "edit_representation": state["representation"],
@@ -713,6 +714,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 "edit_relation_count": 0,
             }
         ]
+        if self.features.enabled:
+            result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
+        return result
 
     def save_edit(
         self,
@@ -788,6 +792,8 @@ class FunctionalEditMemory(FunctionalMemory):
             "method_arm": self.arm,
             "patch_operation": "revise",
         }
+        if _edit_metadata is not None and "revision_evidence" in _edit_metadata:
+            proposal["revision_evidence"] = _edit_metadata["revision_evidence"]
         if self.formation_support_review is not None:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
             self._run_support_review(
@@ -909,6 +915,8 @@ class FunctionalEditMemory(FunctionalMemory):
             "method_arm": self.arm,
             "patch_operation": "no_change" if equal else "retract" if retract else "revise",
         }
+        if _edit_metadata is not None and "revision_evidence" in _edit_metadata:
+            proposal["revision_evidence"] = _edit_metadata["revision_evidence"]
         if not equal:
             proposal["functional_support"] = support
             proposal["removed_field_support"] = {"record": changed_handles} if retract else {}
@@ -1036,6 +1044,8 @@ class FunctionalEditMemory(FunctionalMemory):
             "method_arm": self.arm,
             "patch_operation": "no_change" if no_change else "retract" if retract else "revise",
         }
+        if _edit_metadata is not None and "revision_evidence" in _edit_metadata:
+            proposal["revision_evidence"] = _edit_metadata["revision_evidence"]
         if not no_change:
             support["content"] = handles
             proposal["functional_support"] = support

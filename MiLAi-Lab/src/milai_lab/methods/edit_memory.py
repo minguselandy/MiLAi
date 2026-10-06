@@ -235,7 +235,9 @@ class EditMemory:
             "Copy retained text and role exactly when using only its own h. Changed claims and "
             "new relations require new e. Applicability and entailment are your decision, not "
             "certified by a source ID. Preserve subject, time, negation, "
-            "qualification and uncertainty. "
+            "qualification and uncertainty. Use one independently revisable assertion per "
+            "clause. Separate the value from independently changeable qualifications; a "
+            "single sentence in the source need not become a single memory unit. "
         )
         if self.features.matter_organization:
             instruction += (
@@ -294,14 +296,19 @@ class EditMemory:
             )
         if self.conditioned:
             instruction += (
-                "Each content clause explicitly lists conditions with their own support and a "
+                "Keep the value in content and express explicit applicability, limits and "
+                "unresolved qualifications as conditions. Each content clause explicitly lists "
+                "its conditions with their own support and a "
                 "binding with its separate relation support. A reuse integer references an earlier "
                 "condition declaration in this response; an override target indexes generated "
                 "clauses. Existing views use actual u aliases for shared-condition reuse and "
                 "override targets. Unresolved old conditions remain unresolved. "
             )
         else:
-            instruction += "Use plain clauses and express their conditions in the complete text. "
+            instruction += (
+                "Use content clauses without relations. Give each qualification its own "
+                "complete clause naming the matter and scope it limits. "
+            )
         if self.features.single_record_changes:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
@@ -323,10 +330,11 @@ class EditMemory:
             if self.conditioned
             else [
                 {
-                    "text": "User reports reminders use a soft tone only on weekdays "
-                    "and before 18:00.",
+                    "text": "User reports reminders normally use a soft tone.",
                     "role": "content",
-                }
+                },
+                {"text": "User reports reminders occur only on weekdays.", "role": "content"},
+                {"text": "User reports reminders occur only before 18:00.", "role": "content"},
             ]
         )
         for formed_unit in formation_units:
@@ -344,7 +352,7 @@ class EditMemory:
         change: dict[str, Any] = {
             "text": "User reports reminders use a bright tone."
             if self.conditioned
-            else "User reports reminders use a bright tone only on weekdays and before 18:00.",
+            else "User reports reminders normally use a bright tone.",
             "evidence": ["e1"],
             "keep_support": ["h1"],
         }
@@ -358,16 +366,17 @@ class EditMemory:
             if self.conditioned:
                 correction["units"][0].pop("keep_support")
                 correction["units"][0]["from_unit"] = "u1"
-                for index, condition in enumerate(formation_units[1:], start=2):
-                    retained: dict[str, Any] = {
-                        "text": condition["text"],
-                        "role": "condition",
-                        "evidence": [],
-                        "keep_support": [f"h{index}"],
-                    }
-                    if self.features.source_metadata:
-                        retained["assertion"] = {"keep": f"h{index}"}
-                    correction["units"].append(retained)
+            for index, condition in enumerate(formation_units[1:], start=2):
+                retained: dict[str, Any] = {
+                    "text": condition["text"],
+                    "role": condition["role"],
+                    "evidence": [],
+                    "keep_support": [f"h{index}"],
+                }
+                if self.features.source_metadata:
+                    retained["assertion"] = {"keep": f"h{index}"}
+                correction["units"].append(retained)
+            if self.conditioned:
                 correction["relations"] = [
                     {
                         "source": source,
@@ -422,8 +431,10 @@ class EditMemory:
             "u2='Only on weekdays.', u3='Only before 18:00.'; h1/h2/h3 are their respective "
             "unit supports and old attributions; h4/h5 support modifies(u2->u1)/modifies(u3->u1). "
             if self.conditioned
-            else "Correction input: CURRENT r1/u1 holds 'User reports reminders use a soft tone "
-            "only on weekdays and before 18:00.'; h1 is its own prior-unit support. "
+            else "Correction input: CURRENT r1 contains u1='User reports reminders normally "
+            "use a soft tone.', u2='User reports reminders occur only on weekdays.', "
+            "u3='User reports reminders occur only before 18:00.'; h1/h2/h3 are their "
+            "respective unit supports and old attributions. "
         )
         instruction += (
             correction_input
@@ -474,51 +485,63 @@ class EditMemory:
                 "target_unit": target,
             }
 
-        def plain_general(cutoff: str) -> str:
-            return f"User reports reminders use a soft tone only on weekdays and before {cutoff}."
-
-        def plain_exception(cutoff: str) -> str:
-            return (
-                "User reports reminders use a bright tone instead of the general soft tone "
-                f"only on Tuesdays, on weekdays and before {cutoff}."
-            )
-
         add: dict[str, Any]
         shared: dict[str, Any]
         cancel: dict[str, Any]
         if self.arm in {"B0", "B1"}:
-            general = example_unit(
-                plain_general("18:00"), support="h1", new_evidence=False, keep_attribution=True
+            retained_plain = [
+                example_unit(
+                    unit["text"], support=f"h{index}",
+                    new_evidence=False, keep_attribution=True,
+                )
+                for index, unit in enumerate(formation_units, start=1)
+            ]
+            alternative = example_unit(
+                "User reports Tuesday reminders use a bright tone instead of the general "
+                "soft tone, under the same reminder schedule."
             )
-            alternative = example_unit(plain_exception("18:00"))
-            changed_general = example_unit(plain_general("17:00"), support="h1")
-            changed_alternative = example_unit(plain_exception("17:00"), support="h2")
+            changed_cutoff = example_unit(
+                "User reports reminders occur only before 17:00.", support="h3"
+            )
             if self.arm == "B0":
-                add = {"action": "rewrite", "units": [general, alternative]}
-                shared = {"action": "rewrite", "units": [changed_general, changed_alternative]}
+                add = {"action": "rewrite", "units": [*retained_plain, alternative]}
+                shared = {
+                    "action": "rewrite",
+                    "units": [
+                        *retained_plain[:2], changed_cutoff,
+                        example_unit(
+                            alternative["text"], support="h4", new_evidence=False,
+                            keep_attribution=True,
+                        ),
+                    ],
+                }
                 cancel = {
                     "action": "rewrite",
                     "units": [
-                        example_unit(plain_general("17:00"), support="h1", keep_attribution=True)
+                        example_unit(
+                            formation_units[0]["text"], support="h1", keep_attribution=True
+                        ),
+                        retained_plain[1],
+                        example_unit(
+                            changed_cutoff["text"], support="h3", new_evidence=False,
+                            keep_attribution=True,
+                        ),
                     ],
                 }
             else:
-                add = {"action": "edit", "edits": [example_edit(alternative, "insert", "u1")]}
+                add = {"action": "edit", "edits": [example_edit(alternative, "insert", "u3")]}
                 shared = {
                     "action": "edit",
-                    "edits": [
-                        example_edit(changed_general, "replace", "u1"),
-                        example_edit(changed_alternative, "replace", "u2"),
-                    ],
+                    "edits": [example_edit(changed_cutoff, "replace", "u3")],
                 }
                 cancel = {
                     "action": "edit",
-                    "edits": [{"operation": "delete", "target_unit": "u2", "evidence": ["e1"]}],
+                    "edits": [{"operation": "delete", "target_unit": "u4", "evidence": ["e1"]}],
                 }
             shared_state = (
-                "CURRENT r1 has u1 as the complete general soft-tone rule and u2 as the "
-                "complete Tuesday bright-tone exception, both with weekday/before-18:00 limits; "
-                "h1/h2 are their respective unit supports. "
+                "CURRENT r1 has u1 as the general soft-tone rule, u2 as the reminder weekday "
+                "limit, u3 as the reminder before-18:00 limit and u4 as the Tuesday bright-tone "
+                "exception under that same schedule; h1/h2/h3/h4 are their respective supports. "
             )
         else:
             bright = example_unit("User reports reminders use a bright tone.")
@@ -1148,6 +1171,8 @@ class EditMemory:
                 # Visibility can be revoked since the delivery; never bypass forget.
                 resolve_fragment(self.service, evidence["evidence_id"])
                 handles.append(evidence["evidence_id"])
+                if self.features.enabled:
+                    metadata.setdefault("revision_evidence", []).append(evidence["evidence_id"])
             for alias in dict.fromkeys(item.get("keep_support", [])):
                 support = bound["support"].get(alias)
                 if support is None or support["record"] != target:
@@ -1280,6 +1305,9 @@ class EditMemory:
         elif proposal.get("withdrawal_evidence"):
             raise FunctionalRejection("EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
         if self.features.enabled:
+            metadata["revision_evidence"] = list(
+                dict.fromkeys(metadata.get("revision_evidence", []))
+            )
             decoded["_edit_metadata"] = metadata
         return decoded
 
@@ -1444,6 +1472,8 @@ class EditMemory:
                 field: {"source_refs": refs} for field in ("content", "scope", "basis", "kind")
             }
             raw["trigger_binding"] = self.service.public_turn(session)
+        if self.features.enabled and metadata is not None and "revision_evidence" in metadata:
+            raw["revision_evidence"] = metadata["revision_evidence"]
         return self.service.commit(session, proposal_id, raw)
 
     @staticmethod

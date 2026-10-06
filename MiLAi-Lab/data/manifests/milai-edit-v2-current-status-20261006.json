@@ -1,7 +1,7 @@
 {
-  "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
-  "observed_at": "2026-10-06T18:09:58+00:00",
-  "previous_report_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+  "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+  "observed_at": "2026-10-06T18:29:24.251694+00:00",
+  "previous_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,13 +24,13 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "LOCAL_REPAIR_REQUIRED_AFTER_COMMON_D_R3",
-    "detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json",
-    "actual_model_calls": 80,
-    "actual_model_calls_scope": "Only both R3 branches, generation; encoder107 separate",
+    "status": "SOURCE_IMPLEMENTED_REAL_RECHECK_REQUIRED",
+    "detail_manifest": "milai-post87c-claim-revision-evidence-development-20261007.json",
+    "actual_model_calls": 0,
+    "actual_model_calls_scope": "New repair source, generation; new encoding also0",
     "candidate_selected": false,
     "prefix_admitted": false,
-    "source_commit_reference": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845"
+    "source_commit_reference": "CURRENT_PUBLICATION_COMMIT_BIND_BEFORE_HTTP"
   },
   "native_and_drift": {
     "actual_model_calls": 0,
@@ -41,26 +41,26 @@
     "version": "milai-edit-post-b0-plan-1.0",
     "read": true,
     "scheduling_change_executed": true,
-    "next_priority": "Local formation/qualification granularity and actual revision evidence in common Reader; affected own-state controls before new prefix",
+    "next_priority": "Bind published repair source and own Fast; fixed actual Reader diagnosis at most2 calls, then both unchanged original R3 branches all4 own empty. New prefix only after own Full and semantic review.",
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
       "one fixed tighter-budget sensitivity"
     ]
   },
   "previous_report_ci": {
-    "commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
-    "observed_at": "2026-10-06 18:09:58 UTC",
+    "commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+    "observed_at": "2026-10-06 18:27:41 UTC",
     "Fast": {
-      "run_id": 37508205128,
-      "status": "in_progress",
-      "conclusion": null
+      "run_id": 37509525789,
+      "status": "completed",
+      "conclusion": "success"
     },
     "Full": {
-      "run_id": 37508205087,
+      "run_id": 37509525979,
       "status": "in_progress",
       "conclusion": null
     },
-    "new_report_CI_separate": true
+    "new_source_own_CI_required": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -974,7 +974,7 @@
     "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
-  "publication_scope": "4 Lab documentation/status files; no source/tests/config/workflow or Product changes; no new model calls for publication",
+  "publication_scope": "12 Lab files:5 source,2 existing test files,5 reports/status/declaration. No Product/Archive/workflow changes; no new model calls.",
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
     "declared_at": "2026-10-06T05:51:11.524187+00:00",
@@ -1640,7 +1640,7 @@
     "staged_diff": "PASS_SEVEN_REPORT_FILES_ONLY",
     "source_draft_excluded": true
   },
-  "latest_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+  "latest_source_commit": "CURRENT_PUBLICATION_COMMIT_BIND_BEFORE_HTTP",
   "model_calls_since_previous_report_scope": "This R3 stage only:44 Writer/36 Reader/0Judge;107 encoder separately. No earlier subset repeated.",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
@@ -1958,19 +1958,24 @@
   },
   "current_publication_checks": {
     "status": "PASS",
-    "source_tests_repeated": false,
-    "source_config_changes": false,
+    "existing_pytest_distinct_passed": 23,
+    "changed_withdrawal_assertions_targeted_rerun_passed": 2,
+    "new_test_functions": 0,
+    "Ruff_files": 7,
+    "mypy_source_files": 5,
+    "package_boundary": "PASS",
+    "four_arm_hypothetical_correction_and_lifecycle": "PASS_ENGINEERING_ONLY",
+    "source_config_changes": true,
     "Product_schema_API_permissions_Canonical_changed": false,
-    "original_terminals_raw_configs_author_labels_preserved": true,
+    "Lab_version_read_metadata_addition": true,
     "continuous_ledger_unchanged": true,
-    "closed_R3_processes_missing": true,
     "new_generation_and_embedding_calls": 0,
-    "rollback_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
-    "JSON_files_parsed": 1,
-    "local_links_checked": 4,
-    "changed_report_files": 4,
-    "historical_results_preserved": true,
-    "diff_check_passed": true
+    "rollback_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+    "JSON_files_parsed": 2,
+    "local_links_checked": 5,
+    "changed_Lab_files": 12,
+    "diff_check_passed": true,
+    "model_transport_config_changed": false
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -6254,7 +6259,7 @@
       "ci_correction_in_this_commit": true
     }
   },
-  "latest_source_commit_scope": "Frozen runtime/declaration for closed two-branch R3; this publication changes reports only",
+  "latest_source_commit_scope": "New common formation and revision-evidence source; not admitted to model recheck. Last closed actual experiment source remains646d9fa.",
   "ci_compatibility_correction": {
     "status": "CORRECTION_INCLUDED_IN_PREPARED6e_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
     "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
@@ -6390,7 +6395,7 @@
       "own_empty_banks": 8,
       "status": "CLOSED_ROOT_REVIEW_COMPLETE"
     },
-    "next": "Actual formation and Reader provenance repair before new prefix",
+    "next": "Bind repair source own Fast, fixed actual Reader diagnosis and own-empty original R3 recheck",
     "candidate_selected": false
   },
   "historical_source_CI_before_common_D_R3": {
@@ -6488,11 +6493,11 @@
     "new_report_CI_separate": true
   },
   "latest_execution_summary": {
-    "observed_at": "2026-10-06T18:09:58+00:00",
-    "previous_result_report_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+    "observed_at": "2026-10-06T18:29:24.251694+00:00",
+    "previous_result_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
     "actual_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
     "active_model_queue": false,
-    "source_repair_status": "EXISTING_INTERFACE_READ_ONLY_NOT_IMPLEMENTED_OR_MODEL_RECHECKED",
+    "source_repair_status": "IMPLEMENTED_NARROW_ENGINEERING_PASS_MODEL_RECHECK_NOT_ADMITTED",
     "next_work": [
       "shared claim and qualification formation granularity",
       "actual revision and source evidence delivery through existing MemoryService and normal Host"
@@ -6503,5 +6508,70 @@
     "embedding_requests_since_previous_report": 0,
     "old_4357_counts_7b_prefix_and_646_R3_are_separate": true,
     "goal_complete": false
+  },
+  "historical_before_claim_revision_evidence_source": {
+    "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
+    "observed_at": "2026-10-06T18:09:58+00:00",
+    "previous_report_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+    "previous_report_ci": {
+      "commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+      "observed_at": "2026-10-06 18:09:58 UTC",
+      "Fast": {
+        "run_id": 37508205128,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "Full": {
+        "run_id": 37508205087,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_report_CI_separate": true
+    },
+    "latest_execution_summary": {
+      "observed_at": "2026-10-06T18:29:24.251694+00:00",
+      "previous_result_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+      "actual_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "active_model_queue": false,
+      "source_repair_status": "IMPLEMENTED_NARROW_ENGINEERING_PASS_MODEL_RECHECK_NOT_ADMITTED",
+      "next_work": [
+        "shared claim and qualification formation granularity",
+        "actual revision and source evidence delivery through existing MemoryService and normal Host"
+      ],
+      "candidate_selected": false,
+      "same_version_four_arm_prefix_admitted": false,
+      "generation_requests_since_previous_report": 0,
+      "embedding_requests_since_previous_report": 0,
+      "old_4357_counts_7b_prefix_and_646_R3_are_separate": true,
+      "goal_complete": false
+    },
+    "publication_scope": "4 Lab documentation/status files; no source/tests/config/workflow or Product changes; no new model calls for publication",
+    "current_publication_checks": {
+      "status": "PASS",
+      "source_tests_repeated": false,
+      "source_config_changes": false,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "original_terminals_raw_configs_author_labels_preserved": true,
+      "continuous_ledger_unchanged": true,
+      "closed_R3_processes_missing": true,
+      "new_generation_and_embedding_calls": 0,
+      "rollback_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+      "JSON_files_parsed": 1,
+      "local_links_checked": 4,
+      "changed_report_files": 4,
+      "historical_results_preserved": true,
+      "diff_check_passed": true
+    },
+    "latest_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+    "latest_source_commit_scope": "Frozen runtime/declaration for closed two-branch R3; this publication changes reports only"
+  },
+  "latest_closed_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+  "claim_revision_evidence_development": {
+    "detail_manifest": "milai-post87c-claim-revision-evidence-development-20261007.json",
+    "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+    "all_four_arms_and_normal_Host": true,
+    "actual_new_generation": 0,
+    "actual_new_embedding": 0,
+    "current_source_own_CI_pending": true
   }
 }

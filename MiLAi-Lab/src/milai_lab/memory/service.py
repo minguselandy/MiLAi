@@ -2330,6 +2330,8 @@ class MemoryService:
                     method_version=raw.get("method_version"),
                     method_arm=raw.get("method_arm"),
                 )
+                if "revision_evidence" in raw:
+                    version["revision_evidence"] = raw["revision_evidence"]
                 version["retracted"] = raw.get("patch_operation") == "retract"
             if functional_support is not None:
                 version["functional_support"] = functional_support
