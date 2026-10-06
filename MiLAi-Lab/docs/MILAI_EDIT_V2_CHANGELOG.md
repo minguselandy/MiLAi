@@ -1,5 +1,26 @@
 # MiLAi-Edit v2 跟进记录
 
+**2026-10-06 14:36:53 Asia/Shanghai：**按用户要求发布当前总结。冻结7cc/共同timeout300配置已完成
+原分支续行14、共同条件36、助手准确重述16，共66次/311,090 known，全部stop。
+Root复核36事件/31回答及66对HTTP/usage、实际旧支持交付与连续账本；无新增unknown。
+原未知B2 Writer不重发，实际revision3备份继续未尝试任务，不注入正确旧卡。
+
+M保留一般三次与部分共同限定，但夜班使用独立create或append，撤销用retract；没有实际
+add_exception/remove_exception或override，最终生命周期Reader仍不完整。B2共同分支普通
+频率新值正确，却因变化节点缺少原单元对应而拒绝旧绑定支持；另两次拒绝也有语义错误。
+准确重述四组状态/版本/支持不变，8回答正确保留用户陈述及归属；不能外推冲突补充处理。
+
+原141已105尝试/104响应/465,083 known，用户确认20和无依据强化16尚未启动、未取消。
+跨timeout只累计成本；原180秒失败、actual=null/60,013保守收费及预声明actual0原样保留。
+本地三文件from_unit源码/测试草稿未提交、未用于模型，SDK/Host等验证与自身CI仍待完成。
+此前7cc源码与4bfa声明Fast/Full均success，新报告CI另查；不把工程通过称为语义通过。
+账本36,471/139,868,695 known/139,980,410 charged，unknown3/embed0保持；进程退出、锁释放。
+Post-B0累计621尝试/1,804,956 known只作成本。发布新增调用0、只更新七个Lab报告/状态文件；
+Product/Archive/workflow不改。完整计划、四组同版比较、保留用户、外部/Host任务及延后范围
+继续，无候选/前缀/方法优势，Product NO_GO，PR85保持draft未合并。
+[当前总结](MILAI_EDIT_CHECKPOINT_20261006.md) · [66次结果](../data/manifests/milai-edit-post-b0-transport300-results-20261006.json)。
+以下按各自日期保留历史快照，不代表当前实时队列。
+
 **2026-10-06 13:51:11 Asia/Shanghai：**完整计划继续，已声明原141请求中仍未尝试的102次：
 原分支14、共同36、来源控制52。仅传输timeout180→300，方法/输入/Reader/评分及其他生成
 参数不改；旧超时结果、未知用量60,013保守收费和确认未提交记忆均保留，不重发未知Writer。

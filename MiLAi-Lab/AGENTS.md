@@ -1,3 +1,26 @@
+# 2026-10-06 14:36:53 Asia/Shanghai: publish reviewed66 transport continuation checkpoint
+
+User requests current summary submitted to GitHub. Publish seven Lab report/state
+files only, zero new model calls. Frozen7cc transport300 closes14+36+16=66 calls,
+311090known, allstop; Root36events/31answers/66HTTP/usage and actual old bodies
+reviewed. Original141 now105attempts/104responses/465083known,36unattempted source
+controls20+16, not cancelled. Originalunknown Writer never replayed, known no commit,
+actualnull/conservative60013 and historical declarations/terminals unchanged.
+M retains some general/shared facts via create/append/retract, no add/remove_exception
+or override in this cohort; final lifecycle Readers incomplete. Accurate restatement
+8answers pass with actual User assertion/support/date/version unchanged, bounded only.
+B2 ordinary newvalue correct but old binding/node identity coupled; other rejects
+have semantic errors too. Three existing source/test from_unit draft files remain
+uncommitted and excluded, not used by frozen models. Complete remaining SDK/Host/
+static/default-off checks, own source CI and actual recheck before source admission.
+Live ledger36471/139868695known/139980410charged,unknown3/embed0 unchanged; no live
+queue, lease free. Source7cc and declaration4bfa ownFast/Full success; new report CI
+separate. Root owns data/raw/HTTP/accounting/evaluation/GitHub, no new delegation.
+FullR0-R5/E0-E5/six deliverables and deferred scopes remain active. Keep one Qwen
+family/I2/fourarms, no auditor/platform/deployment/Product/Archive/workflow changes.
+No candidate/prefix/reserved/merge admission,PR85draft,ProductNO_GO. Lower dated
+blocks retain historical snapshot scopes, not current running claims.
+
 # 2026-10-06 13:51:11 Asia/Shanghai: full plan continues with distinct unattempted transport300 cohort
 
 Previous goal turn made progress by publishing26e3607 actual stopped30 results.
