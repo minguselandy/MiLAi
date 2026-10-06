@@ -1,3 +1,30 @@
+# 2026-10-06 10:58:17 Asia/Shanghai: publish reviewed original44; representation implementation in progress
+
+The latest user requests a current summary and GitHub submission. Publish only
+Lab report/state files, no model HTTP is required. Frozen2335ea9 original44 is
+complete and Root reviewed actual 24 events/20 answers:184643known,39stop/5length,
+13committed/1rejected/1no_change and4legitimateemptyqueries. Five known failed
+length generations are distinct from empty queries; no retries or JSON repair.
+M actually applies add_exception/remove_exception and preserves its present
+general rule. Initial formation failed length, so absent limits are not successful
+preservation; withdrawal/final Reader scope answers remain incomplete. No candidate
+or prefix. Global36 is prepared and unstarted, not cancelled. Ledger stable,
+process exited, serial lease free; no model queue currently live. Unknown2/embed0.
+
+Existing edit_core owner is implementing explicit clause/condition bindings and
+an actual-graph grouped Writer view within method/memory/SDK only. It has no raw,
+gold/future/reserved data or HTTP authority. This is IMPLEMENTATION_IN_PROGRESS,
+not stable or validated, and its unstaged source changes are excluded from the
+report commit. Do not mix them into frozen2335ea9. Preserve existing support,
+origin, reference sets, CAS/permissions, exact full rewrite and five default-off
+switches; equivalent B2/M conditioned and B0/B1 qualified plain contracts.
+
+2335ea9 Fast/Full both succeed (Full21/21). 8ed7826 Fast/Full now both succeed;
+report CI is separate. Full precedes prefix/candidate/merge. Root owns all data,
+HTTP/accounting/review/GitHub. Preserve original runtime terminal and all raw
+first attempts. Full plan and deferred old queue remain active, one Qwen family,
+Product NO_GO, PR85 draft/unmerged. Below are historical dated instructions.
+
 # 2026-10-06 finite native model-mode diagnostic
 
 After two minimal prompt repairs failed, Root verified actual instructions/state/

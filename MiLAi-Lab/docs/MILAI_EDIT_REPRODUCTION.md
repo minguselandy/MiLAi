@@ -5,7 +5,37 @@ Current v2 execution is described in
 below retain their historical configuration and results. v1 M ended FAILED
 after a Reader disconnect; it is not an active queue awaiting completion.
 
-## Latest Post-B0 checkpoint (2026-10-06)
+## Latest model-mode checkpoint (2026-10-06 10:58:17 Asia/Shanghai)
+
+Frozen Git source `2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e` follows the configured thinking mode
+for prompt token projection. Writer/method/schema/operators remain those of
+`8ed7826`. Configuration `milai-edit-post-b0-i2-thinking-mode-diagnostic-v1`
+changes only enable_thinking=true for all four arms' Writer/Reader; temperature0,
+max_tokens8192 and other budgets remain fixed. Actual original44 is complete:
+24 Writer/20 Reader, 184643 known tokens (including reasoning once), 39 stop/5
+length, no new unknown usage. Global36 is prepared but unstarted. The published
+[predeclaration](../data/manifests/milai-edit-post-b0-model-mode-diagnostic-20261006.json)
+retains its before-first-call zero; use the [reviewed result](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json)
+for the current state. Original runtime terminal remains awaiting-review as written
+at process exit; the dated Root review is later and does not alter raw attempts.
+
+All four queries are empty and exact-state unchanged. M applies add_exception
+and remove_exception while retaining its actual general rule; its initial
+formation length failure leaves shared limits absent, and final Reader scope
+answers remain incomplete. No candidate/prefix admission or independent Judge.
+This fixed-profile mode diagnostic does not establish conditional-edit advantage
+or vendor-optimal thinking behavior. No truncated response repair or retries.
+
+The active working-tree clause/binding/grouped-view change is still implementation
+in progress, unvalidated and excluded from this report. Never reproduce the frozen
+mode run using that dirty tree. Use the recorded ordinary Git archive, bound
+configuration, declared inputs and a newly declared output, never overwrite raw
+results or repeat unknown effects. No model calls are needed for this publication.
+Remaining old/new full/native/drift/reserved/external/Host scope remains incomplete.
+
+The following 132-call checkpoint is historical, not the latest mode result.
+
+## Published nonthinking checkpoint (10:20, 2026-10-06)
 
 The actual final minimal-example recheck and source controls both used ordinary
 Git source `8ed7826b845e2d019a40c7534e92ea792f435f03`, not the subsequent report

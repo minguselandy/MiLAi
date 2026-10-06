@@ -1,0 +1,273 @@
+{
+  "status": "ORIGINAL44_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES_GLOBAL36_NOT_STARTED",
+  "observed_at": "2026-10-06T10:58:17+08:00",
+  "source_commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
+  "unchanged_writer_method_source": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+  "config_version": "milai-edit-post-b0-i2-thinking-mode-diagnostic-v1",
+  "predeclaration_manifest": "milai-edit-post-b0-model-mode-diagnostic-20261006.json",
+  "predeclaration_actual_zero_is_historical_before_first_call": true,
+  "interface": "I2",
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "model_enable_thinking": true,
+  "single_Qwen_family": true,
+  "mode_changed_for_all_arms_Writer_and_Reader": true,
+  "only_changed_model_parameter": "enable_thinking false to true",
+  "unchanged_parameters": {
+    "temperature": 0,
+    "max_tokens": 8192,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "retrieval_limit": 10,
+    "working_sets": false
+  },
+  "vendor_recommended_sampling_profile_not_adopted": true,
+  "no_claim_about_vendor_optimal_thinking_configuration": true,
+  "declared_generation_calls": 80,
+  "actual_generation_calls": 44,
+  "Writer_calls": 24,
+  "Reader_calls": 20,
+  "Judge_calls": 0,
+  "known_tokens": 184643,
+  "prompt_tokens": 76249,
+  "completion_tokens_including_reasoning": 108394,
+  "reasoning_counted_once_in_provider_usage": true,
+  "responses_with_native_reasoning_field": 44,
+  "request_response_pairs": 44,
+  "projected_prompt_usage_matches": 44,
+  "finish_reasons": {
+    "stop": 39,
+    "length": 5
+  },
+  "proposal_receipts": {
+    "committed": 13,
+    "rejected": 1,
+    "no_change": 1
+  },
+  "receipt_counts_are_not_a_partition_of_Writer_calls": true,
+  "legitimate_empty_maintenance_envelopes": 4,
+  "known_length_failed_generations": 5,
+  "rejected_maintenance_events": 1,
+  "events_with_unprocessed_gaps": 6,
+  "arms": {
+    "B0": {
+      "Writer_calls": 6,
+      "Reader_calls": 5,
+      "prompt_tokens": 15485,
+      "completion_tokens": 30186,
+      "known_tokens": 45671,
+      "length_responses": 2
+    },
+    "B1": {
+      "Writer_calls": 6,
+      "Reader_calls": 5,
+      "prompt_tokens": 16821,
+      "completion_tokens": 25411,
+      "known_tokens": 42232,
+      "length_responses": 1
+    },
+    "B2": {
+      "Writer_calls": 6,
+      "Reader_calls": 5,
+      "prompt_tokens": 24459,
+      "completion_tokens": 25335,
+      "known_tokens": 49794,
+      "length_responses": 1
+    },
+    "M": {
+      "Writer_calls": 6,
+      "Reader_calls": 5,
+      "prompt_tokens": 19484,
+      "completion_tokens": 27462,
+      "known_tokens": 46946,
+      "length_responses": 1
+    }
+  },
+  "length_failures": [
+    {
+      "arm": "B0",
+      "event_id": "exact_reaffirmation",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "B0",
+      "event_id": "withdraw_night_exception",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "B1",
+      "event_id": "withdraw_night_exception",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "B2",
+      "event_id": "night_scope",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "M",
+      "event_id": "form_general",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    }
+  ],
+  "global_condition_branch": {
+    "status": "PREPARED_NOT_STARTED",
+    "declared_generation_calls": 36,
+    "actual_generation_calls": 0,
+    "not_cancelled": true
+  },
+  "new_thinking_source_controls": {
+    "actual_generation_calls": 0,
+    "not_admitted": true
+  },
+  "Root_review": {
+    "actual_envelopes_receipts_before_after_rows_read": 24,
+    "Reader_answers_read": 20,
+    "independent_Judge": false,
+    "official_benchmark_score": false,
+    "all_four_query_envelopes_empty": true,
+    "all_four_query_state_versions_support_unchanged": true,
+    "M_add_exception_attempted_and_applied": 1,
+    "M_remove_exception_attempted_and_applied": 1,
+    "M_exception_has_modifies_and_overrides_relations": true,
+    "M_general_frequency_present_before_scope": true,
+    "M_general_frequency_preserved_after_scope": true,
+    "M_general_frequency_preserved_after_withdrawal": true,
+    "M_initial_formation_failed_length": true,
+    "M_initial_shared_conditions_present_before_scope": false,
+    "M_unrestated_shared_condition_preservation_success": null,
+    "absent_targets_not_credited_as_preservation": true,
+    "M_withdrawal_Reader_complete": false,
+    "M_reaffirmation_restores_conditions_with_links": true,
+    "M_final_Reader_scope_answer_complete": false,
+    "B0_B1_scoped_update_lost_explicit_general_frequency_and_old_limits": true,
+    "B2_frequency_update_rejection": "EDIT_RELATION_SUPPORT_BINDING_INVALID",
+    "B2_scope_update_failed_length": true,
+    "B2_no_change_withdrawal_has_no_actual_exception_target": true,
+    "B2_missing_exception_not_credited_as_successful_withdrawal": true,
+    "all_four_final_complete_arrangement_answers": false
+  },
+  "matched_nonthinking_original44": {
+    "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "generation_calls": 44,
+    "known_tokens": 79642,
+    "thinking_to_nonthinking_known_token_ratio": 2.3184,
+    "not_a_four_user_method_comparison": true,
+    "source_difference_is_runner_mode_projection_only": true
+  },
+  "accounting": {
+    "start": {
+      "generation_requests": 36126,
+      "generation": {
+        "charged_tokens": 138560848,
+        "known_tokens": 138509146,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "end": {
+      "generation_requests": 36170,
+      "generation": {
+        "charged_tokens": 138745491,
+        "known_tokens": 138693789,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "ledger_delta_matches_all_provider_usage": true,
+    "new_generation_unknown_usage": 0,
+    "new_embedding_unknown_usage": 0,
+    "historical_generation_unknown_usage": 2,
+    "historical_embedding_unknown_usage": 0,
+    "new_embedding_tokens": 0,
+    "ledger_stable_at_publication_review": true,
+    "http_lease_free": true,
+    "original_process_exited": true
+  },
+  "source_ci": {
+    "commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
+    "observed_at": "2026-10-06T02:59:48+00:00",
+    "Fast": {
+      "run_id": 37404675057,
+      "status": "completed",
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 8,
+        "skipped": 4
+      }
+    },
+    "Full": {
+      "run_id": 37404675051,
+      "status": "completed",
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 21
+      }
+    },
+    "does_not_establish_new_report_ci": true
+  },
+  "own_empty_banks_per_arm": true,
+  "ideal_state_injected": false,
+  "one_exposed_lifecycle_source": true,
+  "no_retry_or_truncation_repair": true,
+  "model_mode_diagnostic_not_M_method_contribution": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "product_status": "NO_GO",
+  "next_representation_change": {
+    "status": "IMPLEMENTATION_IN_PROGRESS",
+    "included_in_this_publication": false,
+    "stable_source_delivered": false,
+    "checks_completed_at_snapshot": false,
+    "actual_model_calls": 0,
+    "description": "Explicit clause-to-condition bindings and actual-graph grouped Writer view; equal conditioned contract for B2/M and qualified plain clauses for B0/B1",
+    "frozen_2335ea9_source_unchanged": true
+  },
+  "stage_C_long_smoke": {
+    "status": "PRESELECTED_NOT_ADMITTED",
+    "selection_rule": "first user in the frozen development order, fixed before fresh prefix outcomes",
+    "development_user_position": 0,
+    "prefix_sessions_per_development_user": 8,
+    "all_four_arms": true,
+    "own_candidate_prefix_state_then_full_history": true,
+    "actual_model_calls": 0
+  },
+  "publication_only_model_calls": 0,
+  "limits": [
+    "Only one exposed lifecycle source; partial mode diagnostic, not independent confirmation or method advantage.",
+    "Missing old conditions and unchanged failed states do not count as successful preservation.",
+    "No new source controls, prefix, held-out, external or Host model trials were run for publication.",
+    "Root reviewed actual recorded states and outputs, not an independent complete database audit.",
+    "Raw HTTP, reasoning, database, logs, source bodies and gold remain ignored."
+  ],
+  "publication_checks": {
+    "json_counts_costs_source_and_prompt_usage": "PASS",
+    "local_links": "PASS",
+    "dependency_boundary": {
+      "status": "PASS",
+      "tracked_paths": 6435,
+      "findings": 0
+    },
+    "diff": "PASS",
+    "runtime_tests": "NOT_RERUN_FOR_REPORT_ONLY_CHANGE",
+    "schema_API_permissions_Canonical_changed": false,
+    "rollback_reference": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e"
+  }
+}

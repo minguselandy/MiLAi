@@ -1,23 +1,22 @@
 # MiLAi Lab 当前状态
 
-更新：**2026-10-06 10:20:45 Asia/Shanghai**。当前执行
-[MiLAi-Edit v2 跟进计划](MILAI_EDIT_V2_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md)及
-已激活的 Post-B0 计划 v1.0，保留 I2、B0/B1/B2/M
-和现有 Qwen3.6 家族。最新固定 `8ed7826` 完成 80 次生命周期复核和 52 次来源
-控制，共 132 次/236,165 已知 token，全部有响应、零截断、零新未知用量。
-普通更正和有限空查询改善；局部例外、撤销与助手断言归属仍失败。两次最小修正
-已用尽，后续分析实际输入和表示；尚无前缀准入、最终候选或方法优势结论。
+更新：**2026-10-06 10:58:17 Asia/Shanghai**。继续 I2、B0/B1/B2/M 和现有 Qwen3.6 家族。
+最新固定 `2335ea9` 的思考模式原分支完成 **44 次/184,643 known token**，39 stop/
+5 length；共同条件分支 **0/36，未启动**。M 实际增加/撤销例外并保留已存在的一般
+规则，但初始形成截断、旧限定缺失、最终 Reader 不完整，尚无可用候选或方法优势。
+四组空查询正确返回空维护并保持实际状态、版本和支持。**Product NO_GO。**
 
-旧 `4357d46` B0 完成 277/277 维护与评估；B1 在 115/277 完整会话边界收尾，
-B2/M 未开始。当前无模型队列运行，剩余完整历史、原生/漂移、保留用户、外部任务
-及 Host 功能仍未完成，完整计划未暂停或收口。**Product NO_GO**。本次只发布
-已有结果，没有改方法源码或启动新模型调用；PR85 仍为 draft、未合并。
+此前 `8ed7826` 非思考复核/来源控制 132 次/236,165 token 的失败全部保留。
+新表示的显式条件绑定与分组视图正在实施，源码未稳定、检查未完成，未纳入本次报告。
+旧 `4357d46` B0 277/277、B1 115/277 完整边界收尾、B2/M 未开始；当前无模型队列
+运行。剩余完整历史、原生/漂移、保留用户、外部任务和 Host 功能未完成，完整计划
+仍在执行。发布新增模型调用 0；PR85 保持 draft、未合并。
 
-当前结果与限制见 [v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md)、
-[当前状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json)、
-[132 次真实结果聚合](../data/manifests/milai-edit-post-b0-final-repair-and-source-controls-20261006.json)
-及 [复现入口](MILAI_EDIT_REPRODUCTION.md)。源码提交 CI 和报告提交 CI 分开记录。
-v1 M 已以 Reader 连接中断结束；旧 v1 快照不表示当前仍在等待完成。
+`2335ea9` 自身 Fast/Full 均已成功（Full 21/21）；此前 `8ed7826` 自身 Fast/Full 成功。
+新报告自身 CI 单独核对。当前结果见 [v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md)、
+[状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json)、
+[44 次模式诊断聚合](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json)及
+[复现入口](MILAI_EDIT_REPRODUCTION.md)。v1 M 已 FAILED 收口，历史快照不代表等待跑完。
 
 ## 2026-10-05 v1 历史快照
 

@@ -1,5 +1,25 @@
 # MiLAi-Edit v2 跟进记录
 
+2026-10-06 10:58:17 Asia/Shanghai，按用户要求总结并发布最新状态，新增模型调用 0。
+冻结 `2335ea9` 原生思考模式原分支已完成 44/80 次、184,643 known token，
+24 Writer/20 Reader/0 Judge、39 stop/5 length，无新 unknown 或 embedding。
+Root 阅读全部 24 个事件与 20 个回答，重核配对 HTTP/usage/投影及账本；原进程
+退出、锁释放，共同条件 0/36 未启动。五个 length 是已知失败，不算正确空维护；
+四组查询均正确空 envelope，实际状态/版本/支持不变。
+
+M 确实应用 add_exception/remove_exception，保留实际一般规则，但初始形成截断，
+未入库旧限定不计保持，最终 Reader 仍不完整。B0/B1 例外损坏旧安排，B2 普通更正
+支持绑定拒绝和例外截断保留。没有候选/前缀准入；此模式诊断不算 M 方法贡献。
+此前 132 次非思考结果保持独立。新表示简化 IMPLEMENTATION_IN_PROGRESS，
+未纳入报告提交，也未完成检查或模型复核。旧队列和完整计划范围保留。
+
+发布前 `2335ea9` Fast/Full 均成功（Full 21/21），`8ed7826` Fast/Full 也成功；
+报告自身 CI 另核对。本次只含七个 Lab 报告/状态文件，不改源码/配置/Product
+Schema/API/权限/Canonical，回滚参考 `2335ea9`，不回滚原件。原始正文、gold、
+HTTP、reasoning、数据库与日志 ignored，单一 Qwen3.6，Product NO_GO，PR85 draft。
+
+以下是此前逐时点记录；其中“实际零次”等仅表示原声明时点。
+
 2026-10-06，停止提示迭代后检查原生模型模式，发现实验 runner 输入 token 投影
 固定非思考，与可配置 transport 不一致。修为实际配置模式，31 项受影响检查、
 Ruff、runner mypy 通过，原有 132 次实际非思考 token 投影不变。声明同 Qwen、
