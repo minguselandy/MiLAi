@@ -1,3 +1,41 @@
+# 2026-10-06 22:19 UTC: B0 first user first8 closed; frozen four-arm prefix continues
+
+User asks summarize/publish execution. Actual source072 unchanged; report parent
+7ee2710. First declared B0 user original0–7 now maintenance8/evaluation8 closed.
+Author offline aggregation succeeded0HTTP: updateCorrect5/all19/valid18 with raw
+invalid Correct Update1 retained; QA15/all20/valid20. Root read all8 actual
+states/proposals/deliveries and20 complete answers; no official Root rescore or
+independent audit. 211stop=8Writer20Reader183Judge/887277known,52encoder19026.
+20creates4rewrites24commits/20matters68content/max5unit perrecord, no capacity,
+truncation/rejection/unprocessed/newunknown/retry. Two real emptyenvelopes3&6
+omit delivered new facts with oldtargets delivered; 7 oldemployment matter
+exists but not Writer top10, even though newrole is saved. 4 retains3 oldclauses
+fullsupport/attribution but changed composite claim support coverage is limited.
+Historical income-source versus salary-task and partial preference responses
+are separate from author labels. Do not rewrite labels or credit empty success.
+
+Parent snapshot22:19:13 B0maintenance10/eval9 of32, otherarms unreached, notzero.
+245stop997298known/246requests1pending,57encoder19819. Firstuserincludedonce.
+Original session68500/PID3476759 live, no restart/hotedit/replay/newmodelrunner.
+Live39828/152324690known152473616charged/encoder994651 unknown4 includes pending;
+lastclosed39582/151327392known151439107charged/encoder974832 unknownhistory3.
+No inferred closedglobal ledger from oneuser; limits unchanged.
+
+Plan conditionalB now justified by empty3&6 plus locating7; bounded actual
+before/current-source comparison3/6/7 and control4 is next, NOT implemented,
+admitted or run. No idealcards/gold/futureQA/verifier/morepromptwarnings or
+perfectR3untilpass gate. If adopted, commonflow forallarms; frozenbaseline
+continues unchanged and changedversion needs its own prefix, no suffixsplice.
+
+Publication6Lab docs/status/sanitizedresults;0source/tests/workflow/publication
+modelcalls. Lightchecks only, keep raw/gold/HTTP/reasoning/DB/config/log ignored.
+Rollback7ee2710; ownnewreportCI remote verified separately from own072success.
+Product/API/permissions/Canonical/Archive unchanged, NO_GO PR85draftunmerged.
+Goalactive/full8/65/277/native/drift/ablation/tighterbudget/16reserved/external/
+Host135/192/freshstories/forget/effects/recovery/sixdeliverables unfinished.
+OneQwen generation family/BGE, no newagents/platform; lower historical blocks
+retain original timestamps and incomplete scope.
+
 # 2026-10-06 21:45:22 UTC: own Full success; same-version four-arm prefix running
 
 Previous goal turn closed two072 Writer checks and pushedae, authoritative
