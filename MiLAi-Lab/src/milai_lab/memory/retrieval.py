@@ -1,4 +1,4 @@
-"""Ordinary semantic and lexical retrieval over visible current memory records."""
+"""Ordinary dense retrieval over visible current memory records."""
 
 from __future__ import annotations
 
@@ -22,9 +22,9 @@ def semantic_text(value: dict[str, Any]) -> str:
 class SemanticRetriever:
     """A disposable vector cache; the service remains the only memory authority.
 
-    Alternate positive lexical and cosine ranks so a full lexical page cannot
-    exclude all semantic-only matches. No threshold, tuned weights, query rewrite
-    or source/gold lookup. Each service instance has its own owner-scoped cache.
+    Rank literal current bodies by cosine. The fixed-state development comparison
+    found no added necessary evidence from lexical interleaving. No threshold,
+    weights, query rewrite or source/gold lookup. Each service owns its cache.
     """
 
     def __init__(self, embeddings: Embeddings, dimension: int) -> None:
@@ -35,7 +35,6 @@ class SemanticRetriever:
         self,
         query: str,
         records: list[dict[str, Any]],
-        lexical: list[dict[str, Any]],
         limit: int,
     ) -> list[dict[str, Any]]:
         if not records:
@@ -52,19 +51,10 @@ class SemanticRetriever:
             for key, vector in zip(changed, vectors, strict=True):
                 self._vectors[key] = (bodies[key], normalized(vector, self.dimension))
         query_vector = normalized(self.embeddings.embed_query(query), self.dimension)
-        dense = sorted(
+        return sorted(
             records,
             key=lambda row: (
                 -sum(a * b for a, b in zip(query_vector, self._vectors[row["id"]][1], strict=True)),
                 row["id"],
             ),
-        )
-        selected: dict[str, dict[str, Any]] = {}
-        for ordinal in range(max(len(lexical), len(dense))):
-            for ranking in (lexical, dense):
-                if ordinal < len(ranking):
-                    row = ranking[ordinal]
-                    selected.setdefault(row["id"], row)
-                    if len(selected) == limit:
-                        return list(selected.values())
-        return list(selected.values())
+        )[:limit]

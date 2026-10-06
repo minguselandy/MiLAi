@@ -1,6 +1,6 @@
 {
-  "status": "ROOT_BOUNDED_NINE_ACTUAL_EVENTS_OFFLINE_ONLY",
-  "observed_at": "2026-10-06 16:47:36 UTC",
+  "status": "ROOT_BOUNDED_TWELVE_ACTUAL_EVENTS_OFFLINE_ONLY",
+  "observed_at": "2026-10-06T17:00:42.903721+00:00",
   "plan": "milai-post-87c-current-first-plan-1.0 section6.3",
   "events": [
     {
@@ -175,6 +175,72 @@
       "current_requirement_met": "PASS_LEGITIMATE_NO_WRITE",
       "non_target_damage": "EXACT_STATE_VERSION_SUPPORT_UNCHANGED",
       "source_fidelity": "NO_NEW_ASSERTION"
+    },
+    {
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "arm": "M",
+      "development_user_position": 1,
+      "ordinal": 3,
+      "old_target_exists": "RELATED_HOSPITALITY_GOALS_EXIST_BUT_EMPLOYMENT_MATTER_NOT_FORMED",
+      "old_target_delivered": true,
+      "current_fact_delivered": true,
+      "proposed_action": {
+        "creates": 0,
+        "modified_record_containers": 0
+      },
+      "current_requirement_met": "FAIL_DELIVERED_RECOGNITION_AND_NEW_PLANS_OMITTED",
+      "non_target_damage": {
+        "exact_unchanged_old_records": 12,
+        "semantic_damage": "UNKNOWN_OUTSIDE_BOUNDED_REVIEW",
+        "zero_delta_is_not_successful_preservation": true
+      },
+      "source_fidelity": "NO_NEW_CLAIM_NOT_A_FIDELITY_SUCCESS",
+      "target_delivery_observation": "Related life goals delivered, but no employment card in the actual before-state. The actual promotion/recognition and new plans require formation or maintenance; empty is omission, not a refusal to revise a nonexistent employment card.",
+      "Root_review_scope": "Actual before/after, complete envelope, complete request metadata and all current User fragments; Assistant source context selective, not independent audit."
+    },
+    {
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "arm": "M",
+      "development_user_position": 2,
+      "ordinal": 5,
+      "old_target_exists": "AFFECTED_EMPLOYMENT_AND_HEALTH_EXIST",
+      "old_target_delivered": true,
+      "current_fact_delivered": true,
+      "proposed_action": {
+        "creates": 0,
+        "modified_record_containers": 0
+      },
+      "current_requirement_met": "FAIL_DELIVERED_RETIREMENT_AND_HEALTH_CHANGES_OMITTED",
+      "non_target_damage": {
+        "exact_unchanged_old_records": 15,
+        "semantic_damage": "UNKNOWN_OUTSIDE_BOUNDED_REVIEW",
+        "zero_delta_is_not_successful_preservation": true
+      },
+      "source_fidelity": "NO_NEW_CLAIM_NOT_A_FIDELITY_SUCCESS",
+      "target_delivery_observation": "Actual current User report says retired and describes exercise/mindfulness and health improvement. Old employment/health are delivered but complete envelope is empty; dated employment history and unrelated finances should not be blindly deleted.",
+      "Root_review_scope": "Actual before/after, complete envelope, complete request metadata and all current User fragments; Assistant source context selective, not independent audit."
+    },
+    {
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "arm": "M",
+      "development_user_position": 2,
+      "ordinal": 6,
+      "old_target_exists": "AFFECTED_EMPLOYMENT_EXISTS",
+      "old_target_delivered": true,
+      "current_fact_delivered": true,
+      "proposed_action": {
+        "creates": 3,
+        "modified_record_containers": 0
+      },
+      "current_requirement_met": "PARTIAL_NEW_RETIREMENT_MATTERS_SAVED_OLD_EMPLOYMENT_APPLICABILITY_UNRESOLVED",
+      "non_target_damage": {
+        "exact_unchanged_old_records": 15,
+        "semantic_damage": "UNKNOWN_OUTSIDE_BOUNDED_REVIEW",
+        "zero_delta_is_not_successful_preservation": false
+      },
+      "source_fidelity": "UNKNOWN_SELECTED_SOURCE_REVIEW_ONLY",
+      "target_delivery_observation": "New retirement/community activities are formed, while delivered old employment record is unchanged. Preserve dated historical employment and finances; current applicability has not been explicitly revised. This is not proof the historical record must be deleted.",
+      "Root_review_scope": "Actual before/after, complete envelope, complete request metadata and all current User fragments; Assistant source context selective, not independent audit."
     }
   ],
   "source_review": "Root prior full actual proposals/states/answers with selected source context, and one complete historical query event; not independent source/database audit. Unknown remains unknown.",
@@ -196,5 +262,18 @@
     "evidence": "Actual before/after state and complete Writer request delivery.records; 21 old records remain exact, 10 delivered candidates exclude the related pet matter.",
     "original_author_labels_raw_attempts_and_bank": "UNCHANGED",
     "new_model_calls": 0
+  },
+  "scope_extension": {
+    "previous_report_commit": "d9fb8ac02c9bc09171819de9615cb1028b2fda4c",
+    "original_events": 9,
+    "additional_existing_M_events": 3,
+    "actual_events": 12,
+    "HaluMem_development_user_positions": [
+      0,
+      1,
+      2
+    ],
+    "new_model_calls": 0,
+    "reason": "Plan6.3 asks for multiple matters and users; add actual already-exposed delivered omission and new-without-revision cases without new model runs, evaluator routing, invented prior states or denominator changes."
   }
 }

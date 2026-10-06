@@ -1,0 +1,241 @@
+{
+  "status": "ROOT_COMPLETE_RETRIEVAL12_DIAGNOSIS_CLOSED",
+  "observed_at": "2026-10-06T17:07:59.778234+00:00",
+  "source_commit": "6e2f6efc2973f5ce5268a0428173b8586258f876",
+  "complete_answers_read": 48,
+  "unique_actual_Reader_HTTP_pairs_read": 40,
+  "embedding_HTTP_pairs_read": 22,
+  "conditions": {
+    "L": {
+      "direct_required_record_delivered": 6,
+      "direct_fact_denominator": 7,
+      "Root_saved_report_used": 6,
+      "old_context_record_delivered": false,
+      "old_context_answers_requested_new_change": false,
+      "missing_fact_controls": 4,
+      "Root_missing_fact_abstentions": 4,
+      "actual_HTTP_requests": 12,
+      "Reader_condition_rows": 12,
+      "record_count_min_median_max": [
+        1,
+        4.0,
+        9
+      ],
+      "material_tokens_min_median_max": [
+        129,
+        1276.0,
+        1968
+      ],
+      "prompt_tokens_min_median_max": [
+        368,
+        1513.5,
+        2203
+      ]
+    },
+    "L_plain_fill": {
+      "direct_required_record_delivered": 7,
+      "direct_fact_denominator": 7,
+      "Root_saved_report_used": 7,
+      "old_context_record_delivered": false,
+      "old_context_answers_requested_new_change": false,
+      "missing_fact_controls": 4,
+      "Root_missing_fact_abstentions": 4,
+      "actual_HTTP_requests": 8,
+      "Reader_condition_rows": 12,
+      "record_count_min_median_max": [
+        4,
+        8.0,
+        10
+      ],
+      "material_tokens_min_median_max": [
+        1096,
+        1905.0,
+        2399
+      ],
+      "prompt_tokens_min_median_max": [
+        1333,
+        2140.5,
+        2641
+      ]
+    },
+    "D": {
+      "direct_required_record_delivered": 7,
+      "direct_fact_denominator": 7,
+      "Root_saved_report_used": 7,
+      "old_context_record_delivered": true,
+      "old_context_answers_requested_new_change": false,
+      "missing_fact_controls": 4,
+      "Root_missing_fact_abstentions": 4,
+      "actual_HTTP_requests": 12,
+      "Reader_condition_rows": 12,
+      "record_count_min_median_max": [
+        4,
+        8.0,
+        10
+      ],
+      "material_tokens_min_median_max": [
+        1096,
+        1853.5,
+        2315
+      ],
+      "prompt_tokens_min_median_max": [
+        1333,
+        2088.5,
+        2557
+      ]
+    },
+    "H": {
+      "direct_required_record_delivered": 7,
+      "direct_fact_denominator": 7,
+      "Root_saved_report_used": 7,
+      "old_context_record_delivered": true,
+      "old_context_answers_requested_new_change": false,
+      "missing_fact_controls": 4,
+      "Root_missing_fact_abstentions": 4,
+      "actual_HTTP_requests": 8,
+      "Reader_condition_rows": 12,
+      "record_count_min_median_max": [
+        4,
+        8.0,
+        10
+      ],
+      "material_tokens_min_median_max": [
+        1096,
+        1853.5,
+        2315
+      ],
+      "prompt_tokens_min_median_max": [
+        1333,
+        2088.5,
+        2557
+      ]
+    }
+  },
+  "new_generation_requests": 40,
+  "new_generation_known_tokens": 142125,
+  "new_embedding_requests": 22,
+  "new_embedding_inputs": 60,
+  "new_embedding_known_tokens": 2721,
+  "new_unknown_usage": 0,
+  "Writer_calls": 0,
+  "Judge_calls": 0,
+  "bank_writes": 0,
+  "decision": {
+    "common_retrieval": "D_DENSE_COSINE",
+    "reason": "D and fixed-interleave H both deliver all7 directly answerable necessary cards and the old culinary context; all4 missing-fact controls appropriately abstain. No additional necessary evidence or resolved question from H is observed. Choose the simpler D for common development, not a general superiority or final candidate claim.",
+    "Reader_retrieval_does_not_establish_Writer_target_recall": true,
+    "next": "Implement minimal common D, own source/declaration CI, then both unchanged R3 branches on each arm own empty bank."
+  },
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "Product_status": "NO_GO",
+  "actual_state_source": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "scope": {
+    "users": 4,
+    "actual_query_state_pairs": 12,
+    "pairs_per_user": 3,
+    "Root_pre_ranking_availability": {
+      "direct_answer": 7,
+      "old_context_only": 1,
+      "missing_queried_fact": 4
+    }
+  },
+  "source_and_declaration_commit": "6e2f6efc2973f5ce5268a0428173b8586258f876",
+  "report_parent_commit": "d9fb8ac02c9bc09171819de9615cb1028b2fda4c",
+  "predeclared_manifest": "milai-post87c-fixed-state-retrieval12-development-20261007.json",
+  "all_48_conditions_preserved": true,
+  "byte_identical_shared_condition_rows": 8,
+  "shared_results_not_independent_HTTP": true,
+  "shared_cost_not_method_efficiency_comparison": true,
+  "actual_Reader_finish_reasons": {
+    "stop": 40
+  },
+  "all_actual_prompt_usage_tokens_match": true,
+  "all_selected_complete_material_fits": true,
+  "original_snapshots_and_author_labels_unchanged": true,
+  "continuous_accounting": {
+    "generation_requests": 39380,
+    "generation": {
+      "charged_tokens": 150392066,
+      "known_tokens": 150280351,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 967940,
+      "known_tokens": 967940,
+      "unknown_usage": 0
+    }
+  },
+  "limitations": [
+    "Four exposed development users and12 fixed pairs; not a held-out or full benchmark score.",
+    "Root whole-answer review is not independent Judge or exhaustive source/database audit.",
+    "Old-context retrieval does not supply a current change never saved.",
+    "The employment-role query uses a prior-day report with date qualifications; not verification of all real-world roles at a later date.",
+    "Single Qwen3.6 generation family; prior single-case lexical-first hybrid remains separate.",
+    "All raw queries, banks, predictions, vectors, HTTP and runtime configs remain ignored."
+  ],
+  "common_D_implementation": {
+    "status": "LOCAL_EXISTING_CHECKS_PASS_NOT_YET_REAL_R3",
+    "source_reference": "Bind exact commit containing this choice and unchanged original R3 declaration before HTTP",
+    "runtime_files": [
+      "src/milai_lab/memory/retrieval.py",
+      "src/milai_lab/memory/service.py"
+    ],
+    "behavior": "Visible literal bodies ranked only by normalized BGE-m3 cosine; remove lexical interleave, unused lexical rank argument and configured-path lexical pre-ranking. Blank bank enumeration and no-embedding default paths remain.",
+    "checks": {
+      "existing_wiring_tests_passed": 16,
+      "Ruff_files": 3,
+      "mypy_source_files": 2,
+      "same12_actual_D_rank_implementation_match": "PASS_USING_ALREADY_CONFIRMED_22_EMBEDDING_RECEIPTS_NO_NEW_HTTP",
+      "new_tests": 0
+    },
+    "new_runtime_model_calls": 0
+  },
+  "next_real_check": {
+    "status": "PREPARED_NOT_ADMITTED",
+    "source_reference": "Exact common D commit and own Fast success required; Full before complete prefix/candidate/merge",
+    "original_R3_branches": [
+      {
+        "variant": "original-preservation-withdrawal",
+        "events": 6,
+        "original_expected_generation_calls": 44
+      },
+      {
+        "variant": "global-condition-change",
+        "events": 5,
+        "original_expected_generation_calls": 36
+      }
+    ],
+    "arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "initial_state": "EACH_ARM_OWN_EMPTY_BANK_FOR_EACH_BRANCH",
+    "event_order_questions_and_evaluation_only_requirements": "UNCHANGED_FROM_ORIGINAL_EXPOSED_INPUTS",
+    "common_retrieval": "D_DENSE_COSINE_K10",
+    "model": {
+      "family": "Qwen3.6",
+      "thinking": true,
+      "temperature": 1.0,
+      "context_tokens": 65536,
+      "max_tokens": 32768,
+      "input_limit": 32256,
+      "safety_tokens": 512,
+      "timeout_seconds": 300
+    },
+    "source_tokens": 4096,
+    "old_body_tokens": 8192,
+    "working_sets": false,
+    "interface": "I2",
+    "features": "Same existing matter organization, semantic operations, actual bound references, one record container and source metadata for all4",
+    "Reader": "Same original Reader prompt/material, actual questions only after maintenance",
+    "Judge_calls": 0,
+    "extra_embedding": "Existing BGE-m3, all actual calls billed on same continuous ledger",
+    "first_attempts_only": true,
+    "ideal_prior_state_injected": false,
+    "hot_changes_retries_or_budget_increase": false,
+    "common_D_chosen_for_development_not_final_method_candidate": true
+  }
+}

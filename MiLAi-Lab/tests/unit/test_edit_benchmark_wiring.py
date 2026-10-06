@@ -302,7 +302,7 @@ class Vectors(Embeddings):
         return [[1.0, 0.0] if "tea" in text else [0.0, 1.0] for text in texts]
 
     def embed_query(self, text: str) -> list[float]:
-        return [1.0, 0.0]
+        return [0.0, 1.0] if "2030" in text else [1.0, 0.0]
 
 
 def seed(service: MemoryService, key: str, body: str, *, render: str = "") -> None:
@@ -335,6 +335,7 @@ def test_metadata_misses_and_full_lexical_page_use_the_same_visible_bank(tmp_pat
         assert [row["id"] for row in frozen] == ["travel"]
         service.semantic_retriever = SemanticRetriever(vectors, 2)
         result = service.search("14 refreshment", limit=1, include_raw=False)
+        assert result["retrieval"] == "dense_cosine"
         assert [row["id"] for row in result["records"]] == ["food"]
         assert vectors.documents == ["\nGreen tea is preferred.", "\nAirplane travel."]
         assert service.records() == before

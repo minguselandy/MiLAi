@@ -2656,12 +2656,13 @@ class MemoryService:
                         }
                     )
         visible_records = [row for row in records if row["ok"]]
-        records = sorted(
-            (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
-            key=lambda row: (-rank(row), row["id"]),
-        )[:limit]
-        if self.semantic_retriever is not None and tokens:
-            records = self.semantic_retriever.rank(query, visible_records, records, limit)
+        if self.semantic_retriever is not None and not enumerate_bank:
+            records = self.semantic_retriever.rank(query, visible_records, limit)
+        else:
+            records = sorted(
+                (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
+                key=lambda row: (-rank(row), row["id"]),
+            )[:limit]
         raw = sorted(
             (row for row in raw if enumerate_bank or rank(row)),
             key=lambda row: (-rank(row), row["event_id"]),
@@ -2670,7 +2671,7 @@ class MemoryService:
             "ok": True,
             "status": "found" if records or raw else "no_results",
             "retrieval": (
-                "semantic_plus_lexical" if self.semantic_retriever is not None else "raw_keyword"
+                "dense_cosine" if self.semantic_retriever is not None else "raw_keyword"
             ),
             "degraded": degradation is not None,
             "degradation_reason": degradation,

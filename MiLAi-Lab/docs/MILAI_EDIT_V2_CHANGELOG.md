@@ -1,5 +1,13 @@
 # MiLAi-Edit v2 跟进记录
 
+**2026-10-06T17:13:45.113578+00:00：12对检索真实诊断闭合，选择简单dense，原R3两分支待执行。**
+
+固定四个曝光用户各3对实际M状态/原问题，48条件结果对应40次实际Reader响应，全部stop；142,125 known。22次BGE编码/60输入/2,721 token；无新unknown、重试、Writer/Judge或记忆写入，12个原状态不变。Root读完全部48回答/40对HTTP及22编码回执，材料与原问题/日期、实际prompt usage一致；非独立Judge或原始来源/数据库完整审计。
+必要直接材料L6/7、普通补齐7/7、D7/7、H7/7；D/H另取回旧饮食背景，两者都不补出未保存的新变化。四个缺事实控制各策略均恰当弃答。H未增加必要材料或解决额外问题，本轮选择更简单D作共同开发底座，不是方法优势或最终候选。移除交替与配置检索路径无用词排名，不新增开关。16项已有wiring、Ruff3文件/mypy2源码通过，新D与既有12份实际D排名用已计费向量逐项相同，无新HTTP；不重复98/313。
+维护断点表补入3个已有M事件，合计12次/3个曝光用户：旧就业未形成、送达后空提案、退休新建而旧就业适用性未修订分开；已更正宠物旧目标未交付。unknown不判成功、不强制删有效历史。
+下一步原R3两分支44/36、四组各自空库，原事件与问题不改；新D自身CI/配置绑定后运行，当前仅准备、模型0。完整前缀/65/277、原生/漂移/消融/较紧预算/16保留/外部/Host/恢复/六交付继续。闭合累计39,380请求/150,280,351 known/150,392,066 charged、embedding967,940、历史unknown3；子集与共享结果不重复计费。Product NO_GO，PR85 draft未合并。
+[12对真实结果及原R3声明](../data/manifests/milai-post87c-fixed-state-retrieval12-results-20261007.json) · [12个实际维护事件](../data/manifests/milai-post87c-maintenance-breakpoints-development-20261007.json)。下方保留历史时点。
+
 **2026-10-07 00:47:36 北京时间／2026-10-06 16:47:36 UTC：当前执行汇总，修正旧目标交付归因。**
 
 四组`7b82c60`各32会话前缀、`ab8f475`及`87c0f1f`两次B1有限复核均已闭合；当前没有活动模型队列。最新准备源码`6e2f6ef`的自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37496831458)已success，[Full](https://github.com/minguselandy/MiLAi/actions/runs/37496831482)仍in_progress；本次报告提交的CI另查。
