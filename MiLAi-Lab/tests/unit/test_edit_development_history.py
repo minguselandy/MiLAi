@@ -103,3 +103,112 @@ def test_unknown_maintenance_stops_without_retry_or_other_arm_and_keeps_accounti
     assert len(calls) == 2 and calls[1] == "observed/B0/0" and calls[0].closed
     assert {path.name for path in (output / "banks").iterdir()} == {"B0"}
     assert read_json(output / "failure.json")["message"] == "Unconfirmed test outcome"
+
+
+def test_role_preserving_preparation_excludes_evaluation_and_keeps_unknown_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = tool()
+
+    def denied(*args, **kwargs):
+        raise AssertionError("Preparation must not open a model client")
+
+    monkeypatch.setattr(module, "BenchmarkRun", denied)
+    config, inputs = declaration(tmp_path)
+    declared = read_json(inputs)
+    event = declared["events"][0]
+    event.pop("observed_user_text")
+    event.pop("reader_question")
+    event["observed_dialogue"] = [
+        {"role": "user", "content": "Keep reminders quiet.", "timestamp": "2030-02-28"},
+        {"role": "assistant", "content": "You requested quiet reminders."},
+    ]
+    event["reader_questions"] = ["READER_ONLY_ONE", "READER_ONLY_TWO"]
+    declared["expected_generation_calls"] = 12
+    write_json(inputs, declared)
+    output = tmp_path / "roles-prepared"
+    result = module.run_history(config, inputs, output, "recorded-version", prepare=True)
+    assert result["actual_model_calls"] == 0 and result["expected_generation_calls"] == 12
+    observations = read_json(output / "writer-observations.json")
+    for arm in declared["arms"]:
+        assert observations[arm][0]["turns"] == [
+            event["observed_dialogue"][0], {**event["observed_dialogue"][1], "timestamp": None},
+        ]
+    assert "READER_ONLY" not in str(observations)
+    assert "REVIEW_ONLY_SECRET" not in str(observations)
+    assert not (output / "banks").exists()
+    event["observed_dialogue"][1]["role"] = "tool"
+    write_json(inputs, declared)
+    with pytest.raises(ValueError, match="user and assistant observations only"):
+        module.run_history(config, inputs, tmp_path / "unsupported-role", "version", prepare=True)
+
+
+def test_multiple_readers_follow_role_preserving_maintenance_on_real_empty_banks(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = tool()
+    calls = []
+
+    class KnownRun:
+        def __init__(self, settings, root):
+            self.settings, self.root = settings, root
+            self.budget = SimpleNamespace(state={
+                "generation_requests": 10,
+                "generation": {"unknown_usage": 2, "known_tokens": 100},
+                "embedding": {"unknown_usage": 0},
+            })
+            self.closed = False
+            root.mkdir()
+            calls.append(self)
+
+        def maintain(self, service, observed, key):
+            assert service.records() == []
+            assert observed.turns == (
+                {"role": "assistant", "content": "A restatement.", "timestamp": None},
+            )
+            assert "READER_ONLY" not in str(observed.turns)
+            captured = service.capture_assistant(
+                observed.session_id, "actual-role", observed.turns[0]["content"],
+                occurred_at=observed.turns[0]["timestamp"],
+            )
+            actual_source = service.source(captured["source_ref"])
+            assert actual_source["role"] == "assistant" and "occurred_at" not in actual_source
+            calls.append(("writer", key))
+            write_json(self.root / "maintenance" / key / "complete.json", {})
+            self.budget.state["generation_requests"] += 1
+
+        def answer(self, service, question, date, key):
+            assert service.records() == []
+            calls.append(("reader", key, question))
+            self.budget.state["generation_requests"] += 1
+            return "Saved test answer: " + question
+
+        def close(self):
+            self.closed = True
+
+    monkeypatch.setattr(module, "BenchmarkRun", KnownRun)
+    config, inputs = declaration(tmp_path)
+    declared = read_json(inputs)
+    event = declared["events"][0]
+    event.pop("observed_user_text")
+    event.pop("reader_question")
+    event["observed_dialogue"] = [{"role": "assistant", "content": "A restatement."}]
+    event["reader_questions"] = ["READER_ONLY_ONE", "READER_ONLY_TWO"]
+    declared["expected_generation_calls"] = 12
+    write_json(inputs, declared)
+    output = tmp_path / "role-attempted"
+    terminal = module.run_history(config, inputs, output, "recorded-version")
+    assert terminal["new_generation_requests"] == 12
+    assert terminal["completed_event_rows"] == 4 and calls[0].closed
+    assert calls[1:] == [
+        item for arm in declared["arms"] for item in [
+            ("writer", f"observed/{arm}/0"),
+            ("reader", f"qa/{arm}/0/0", "READER_ONLY_ONE"),
+            ("reader", f"qa/{arm}/0/1", "READER_ONLY_TWO"),
+        ]
+    ]
+    rows = read_json(output / "actual-behavior.json")
+    assert all(row["before"] == row["after"] == [] for row in rows)
+    assert all(row["reader_answer"] is None for row in rows)
+    assert all([item["question"] for item in row["reader_answers"]]
+               == event["reader_questions"] for row in rows)

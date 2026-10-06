@@ -19,11 +19,27 @@ from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 def observation(arm: str, ordinal: int, event: dict[str, Any]) -> ObservedSession:
     """Only observed speech and its date enter the Writer."""
-    return ObservedSession(
-        f"r3-development:{arm}:{ordinal}", event["date"],
-        ({"role": "user", "content": event["observed_user_text"],
-          "timestamp": event["date"]},),
+    turns = (
+        tuple({"role": turn["role"], "content": turn["content"],
+               "timestamp": turn.get("timestamp")}
+              for turn in event["observed_dialogue"])
+        if "observed_dialogue" in event
+        else ({"role": "user", "content": event["observed_user_text"],
+               "timestamp": event["date"]},)
     )
+    if any(turn["role"] not in {"user", "assistant"} for turn in turns):
+        raise ValueError("This dialogue driver supports user and assistant observations only")
+    return ObservedSession(
+        f"r3-development:{arm}:{ordinal}", event["date"], turns,
+    )
+
+
+def reader_questions(event: dict[str, Any]) -> list[str]:
+    """Questions are evaluated after maintenance, never included in observations."""
+    if "reader_questions" in event:
+        return list(event["reader_questions"])
+    question = event.get("reader_question")
+    return [] if question is None else [question]
 
 
 def run_history(
@@ -41,7 +57,7 @@ def run_history(
         raise ValueError("This is four-arm development, not final candidate confirmation")
     expected = len(arms) * (
         len(declared["events"])
-        + sum(event["reader_question"] is not None for event in declared["events"])
+        + sum(len(reader_questions(event)) for event in declared["events"])
     )
     if expected != declared["expected_generation_calls"]:
         raise ValueError("Declared Writer and Reader counts differ")
@@ -94,19 +110,30 @@ def run_history(
                     old_state = copy.deepcopy(service.records())
                     run.maintain(service, observation(arm, ordinal, event), key)
                     current_state = copy.deepcopy(service.records())
-                    answer = None
-                    if event["reader_question"] is not None:
-                        answer = run.answer(
-                            service, event["reader_question"], event["date"], f"qa/{arm}/{ordinal}"
-                        )
+                    questions = reader_questions(event)
+                    answers = []
+                    for question_index, question in enumerate(questions):
+                        qa_key = f"qa/{arm}/{ordinal}"
+                        if len(questions) > 1:
+                            qa_key += f"/{question_index}"
+                        answers.append(run.answer(
+                            service, question, event["date"], qa_key
+                        ))
                         if service.records() != current_state:
                             raise RuntimeError("Reader changed stored records")
-                    rows.append({
+                    row = {
                         "arm": arm, "event": ordinal, "event_id": event["event_id"],
                         "before": old_state, "after": current_state,
                         "maintenance": read_json(output / "maintenance" / key / "complete.json"),
-                        "reader_answer": answer, "reader_state_unchanged": True,
-                    })
+                        "reader_answer": answers[0] if len(answers) == 1 else None,
+                        "reader_state_unchanged": True,
+                    }
+                    if len(questions) > 1:
+                        row["reader_answers"] = [
+                            {"question": question, "answer": answer}
+                            for question, answer in zip(questions, answers, strict=True)
+                        ]
+                    rows.append(row)
                     write_json(output / "actual-behavior.json", rows)
                     state = run.budget.state
                     unknown_now = (

@@ -300,9 +300,6 @@ class EditMemory:
             "there is no permitted target, so return " + empty + ". "
         )
         # Complete examples, explicitly hypothetical. They supply no real aliases/facts.
-        unit: dict[str, Any] = {"text": "User reports reminders are quiet.", "evidence": ["e1"]}
-        if self.features.source_metadata:
-            unit["assertion"] = {"source": "e1", "kind": "reported"}
         formation_units: list[dict[str, Any]] = (
             [
                 {"text": "User reports reminders use a soft tone.", "role": "content"},
@@ -330,10 +327,41 @@ class EditMemory:
             ]
         if self.features.matter_organization:
             create["matter"] = "User's reminder sound"
-        change = copy.deepcopy(unit)
-        change["text"] = "User reports reminders now use a soft tone."
+        change: dict[str, Any] = {
+            "text": "User reports reminders use a bright tone."
+            if self.conditioned
+            else "User reports reminders use a bright tone only on weekdays and before 18:00.",
+            "evidence": ["e1"],
+            "keep_support": ["h1"],
+        }
+        if self.features.source_metadata:
+            change["assertion"] = {"source": "e1", "kind": "reported"}
         if self.arm in {"B0", "B2"}:
-            correction: dict[str, Any] = {"action": "rewrite", "units": [change]}
+            correction: dict[str, Any] = {
+                "action": "rewrite",
+                "units": [{**change, "role": "content"}],
+            }
+            if self.conditioned:
+                for index, condition in enumerate(formation_units[1:], start=2):
+                    retained: dict[str, Any] = {
+                        "text": condition["text"],
+                        "role": "condition",
+                        "evidence": [],
+                        "keep_support": [f"h{index}"],
+                    }
+                    if self.features.source_metadata:
+                        retained["assertion"] = {"keep": f"h{index}"}
+                    correction["units"].append(retained)
+                correction["relations"] = [
+                    {
+                        "source": source,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [],
+                        "keep_support": [f"h{source + 3}"],
+                    }
+                    for source in (1, 2)
+                ]
         else:
             correction = {
                 "action": "edit",
@@ -372,11 +400,247 @@ class EditMemory:
             "Empty input: e body only thanks or asks a question, "
             "no new durable fact and no justified change. Complete empty envelope: " + empty + ". "
         )
+        correction_input = (
+            "Correction input: CURRENT r1 contains u1='User reports reminders use a soft tone.', "
+            "u2='Only on weekdays.', u3='Only before 18:00.'; h1/h2/h3 are their respective "
+            "unit supports and old attributions; h4/h5 support modifies(u2->u1)/modifies(u3->u1). "
+            if self.conditioned
+            else "Correction input: CURRENT r1/u1 holds 'User reports reminders use a soft tone "
+            "only on weekdays and before 18:00.'; h1 is its own prior-unit support. "
+        )
         instruction += (
-            "Correction input: CURRENT r1/u1 actually holds the user's quiet-reminder report; "
-            "CURRENT user e1 reports the soft tone. This example is unavailable when those "
-            "aliases are absent. Complete correction envelope: "
+            correction_input
+            + "CURRENT user e1 changes only the tone to bright. This example is unavailable "
+            "when those aliases are absent. Complete correction envelope: "
             + json.dumps(envelope(correction, created=False), separators=(",", ":"))
+            + "."
+        )
+
+        def example_unit(
+            text: str,
+            role: str = "content",
+            support: str | None = None,
+            *,
+            new_evidence: bool = True,
+            keep_attribution: bool = False,
+        ) -> dict[str, Any]:
+            result: dict[str, Any] = {
+                "text": text,
+                "role": role,
+                "evidence": ["e1"] if new_evidence else [],
+            }
+            if support:
+                result["keep_support"] = [support]
+            if self.features.source_metadata:
+                result["assertion"] = (
+                    {"keep": support} if keep_attribution else {"source": "e1", "kind": "reported"}
+                )
+            return result
+
+        def example_relation(
+            source: int, target: int, kind: str = "modifies", support: str | None = None
+        ) -> dict[str, Any]:
+            result: dict[str, Any] = {
+                "source": source,
+                "target": target,
+                "relation_type": kind,
+                "evidence": [] if support else ["e1"],
+            }
+            if support:
+                result["keep_support"] = [support]
+            return result
+
+        def example_edit(unit: dict[str, Any], operation: str, target: str) -> dict[str, Any]:
+            return {
+                **{key: value for key, value in unit.items() if key != "role"},
+                "operation": operation,
+                "target_unit": target,
+            }
+
+        def plain_general(cutoff: str) -> str:
+            return f"User reports reminders use a soft tone only on weekdays and before {cutoff}."
+
+        def plain_exception(cutoff: str) -> str:
+            return (
+                "User reports reminders use a bright tone instead of the general soft tone "
+                f"only on Tuesdays, on weekdays and before {cutoff}."
+            )
+
+        add: dict[str, Any]
+        shared: dict[str, Any]
+        cancel: dict[str, Any]
+        if self.arm in {"B0", "B1"}:
+            general = example_unit(
+                plain_general("18:00"), support="h1", new_evidence=False, keep_attribution=True
+            )
+            alternative = example_unit(plain_exception("18:00"))
+            changed_general = example_unit(plain_general("17:00"), support="h1")
+            changed_alternative = example_unit(plain_exception("17:00"), support="h2")
+            if self.arm == "B0":
+                add = {"action": "rewrite", "units": [general, alternative]}
+                shared = {"action": "rewrite", "units": [changed_general, changed_alternative]}
+                cancel = {
+                    "action": "rewrite",
+                    "units": [
+                        example_unit(plain_general("17:00"), support="h1", keep_attribution=True)
+                    ],
+                }
+            else:
+                add = {"action": "edit", "edits": [example_edit(alternative, "insert", "u1")]}
+                shared = {
+                    "action": "edit",
+                    "edits": [
+                        example_edit(changed_general, "replace", "u1"),
+                        example_edit(changed_alternative, "replace", "u2"),
+                    ],
+                }
+                cancel = {
+                    "action": "edit",
+                    "edits": [{"operation": "delete", "target_unit": "u2", "evidence": ["e1"]}],
+                }
+            shared_state = (
+                "CURRENT r1 has u1 as the complete general soft-tone rule and u2 as the "
+                "complete Tuesday bright-tone exception, both with weekday/before-18:00 limits; "
+                "h1/h2 are their respective unit supports. "
+            )
+        else:
+            bright = example_unit("User reports reminders use a bright tone.")
+            cutoff = example_unit("Only before 17:00.", "condition", "h3")
+            if self.arm == "B2":
+                retained_units = [
+                    example_unit(
+                        item["text"],
+                        item["role"],
+                        f"h{index}",
+                        new_evidence=False,
+                        keep_attribution=True,
+                    )
+                    for index, item in enumerate(formation_units, start=1)
+                ]
+                edges = [
+                    (1, 0, "modifies"),
+                    (2, 0, "modifies"),
+                    (4, 3, "modifies"),
+                    (3, 0, "overrides"),
+                    (1, 3, "modifies"),
+                    (2, 3, "modifies"),
+                ]
+                add = {
+                    "action": "rewrite",
+                    "units": [
+                        *retained_units,
+                        bright,
+                        example_unit("Only on Tuesdays.", "condition"),
+                    ],
+                    "relations": [
+                        example_relation(
+                            source, target, kind, f"h{index + 4}" if index < 2 else None
+                        )
+                        for index, (source, target, kind) in enumerate(edges)
+                    ],
+                }
+                full_units = [
+                    *formation_units,
+                    {"text": bright["text"], "role": "content"},
+                    {"text": "Only on Tuesdays.", "role": "condition"},
+                ]
+                shared = {
+                    "action": "rewrite",
+                    "units": [
+                        cutoff
+                        if index == 3
+                        else example_unit(
+                            item["text"],
+                            item["role"],
+                            f"h{index}",
+                            new_evidence=False,
+                            keep_attribution=True,
+                        )
+                        for index, item in enumerate(full_units, start=1)
+                    ],
+                    "relations": [
+                        example_relation(source, target, kind, f"h{index + 6}")
+                        for index, (source, target, kind) in enumerate(edges)
+                    ],
+                }
+                cancel = {
+                    "action": "rewrite",
+                    "units": [
+                        example_unit(
+                            formation_units[0]["text"], support="h1", keep_attribution=True
+                        ),
+                        retained_units[1],
+                        example_unit(
+                            "Only before 17:00.",
+                            "condition",
+                            "h3",
+                            new_evidence=False,
+                            keep_attribution=True,
+                        ),
+                    ],
+                    "relations": [
+                        example_relation(1, 0, support="h6"),
+                        example_relation(2, 0, support="h7"),
+                    ],
+                }
+            else:
+                add_edit = example_edit(
+                    bright,
+                    "add_exception" if self.features.semantic_operations else "override",
+                    "u1",
+                )
+                add_edit.update(condition="Only on Tuesdays.", shared_conditions=["u2", "u3"])
+                add = {"action": "edit", "edits": [add_edit]}
+                shared = {
+                    "action": "edit",
+                    "edits": [
+                        example_edit(
+                            cutoff,
+                            "change_condition" if self.features.semantic_operations else "replace",
+                            "u3",
+                        )
+                    ],
+                }
+                cancel = {
+                    "action": "edit",
+                    "edits": [
+                        {
+                            "operation": "remove_exception"
+                            if self.features.semantic_operations
+                            else "retract",
+                            "target_unit": "u4",
+                            "evidence": ["e1"],
+                        }
+                    ],
+                }
+                if not self.features.semantic_operations:
+                    cancel["edits"].append(
+                        {"operation": "retract", "target_unit": "u5", "evidence": ["e1"]}
+                    )
+            shared_state = (
+                "CURRENT r1 has u1 general soft-tone content, u2 weekdays, u3 before 18:00, "
+                "u4 Tuesday bright-tone content and u5 Tuesdays, with respective supports "
+                "h1/h2/h3/h4/h5. Its relations are modifies(u2->u1), modifies(u3->u1), "
+                "modifies(u5->u4), overrides(u4->u1), modifies(u2->u4), modifies(u3->u4), "
+                "with respective supports h6/h7/h8/h9/h10/h11. "
+            )
+        instruction += (
+            " Independent lifecycle examples start from the original soft-tone state in "
+            "Correction input, independently of its bright-tone correction. "
+            "Exception input: CURRENT r1 has that original state and supports; CURRENT user e1 "
+            "reports Tuesday reminders use a bright tone instead, under the same weekday and "
+            "before-18:00 limits. Complete exception envelope: "
+            + json.dumps(envelope(add, created=False), separators=(",", ":"))
+            + ". Shared-condition input: "
+            + shared_state
+            + "CURRENT user e1 changes only the common cutoff to 17:00 for both general and "
+            "Tuesday reminders. Complete shared-condition envelope: "
+            + json.dumps(envelope(shared, created=False), separators=(",", ":"))
+            + ". Exception-withdrawal input: CURRENT r1 is the preceding shared-condition "
+            "state with its 17:00 cutoff and the same alias/support layout; CURRENT user e1 "
+            "withdraws only the Tuesday bright-tone exception. "
+            "Complete exception-withdrawal envelope: "
+            + json.dumps(envelope(cancel, created=False), separators=(",", ":"))
             + "."
         )
         return instruction

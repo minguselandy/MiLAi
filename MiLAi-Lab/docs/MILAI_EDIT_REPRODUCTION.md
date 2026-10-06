@@ -41,6 +41,18 @@ receipts, before/after states and answers. New unknown usage or an exception sto
 the driver without replay. This development driver is not the controlled final
 candidate confirmation; that remains after the eventual candidate/Writer freeze.
 
+The same driver accepts an event's `observed_dialogue` instead of
+`observed_user_text`, preserving actual user/assistant messages' `role`, `content`
+and optional `timestamp`. An absent message timestamp is represented as null and
+remains unknown; the event date does not become its statement time. Other role
+types use their existing functional tool-observation path, not this dialogue
+driver. `reader_questions` supports several questions
+after that event's maintenance, with distinct saved calls and answers. These
+questions and evaluator requirements remain outside Writer observations. Original
+single-user/single-question declarations retain their inputs, call counts and
+saved paths. Source-attribution controls use separate own-empty-bank runs per
+scenario; declaring or preparing them is not actual model validation.
+
 Prepared during execution; this file does not claim completion of unrun stages.
 See [progress](MILAI_EDIT_PROGRESS.md), [analysis](MILAI_EDIT_ANALYSIS_SPEC.md) and
 the [original plan](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md). The baseline is
