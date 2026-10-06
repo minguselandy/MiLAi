@@ -1,7 +1,7 @@
 {
-  "status": "STAGE_C_B0_CLOSED_B1_RUNNING_WITH_PRE_HTTP_CAPACITY_FAILURES_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T10:06:12.696558+00:00",
-  "previous_report_commit": "26c0ba353276d96a053329d54629c571e19bcf73",
+  "status": "STAGE_C_B0_B1_PREFIX_CLOSED_B2_RUNNING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T10:56:01.460214+00:00",
+  "previous_report_commit": "7add8259a1a81133d6bb69efad5893909472aa16",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -55,17 +55,17 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "26c0ba353276d96a053329d54629c571e19bcf73",
-    "observed_at": "2026-10-06 09:52:17 UTC",
+    "commit": "7add8259a1a81133d6bb69efad5893909472aa16",
+    "observed_at": "2026-10-06 10:57:13 UTC",
     "Fast": {
-      "run_id": 37442562298,
+      "run_id": 37448157226,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37442562296,
-      "status": "in_progress",
-      "conclusion": null
+      "run_id": 37448157201,
+      "status": "completed",
+      "conclusion": "success"
     },
     "new_report_CI_must_be_queried_separately": true
   },
@@ -402,10 +402,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 37215,
+    "generation_requests": 37877,
     "generation": {
-      "charged_tokens": 142798660,
-      "known_tokens": 142686945,
+      "charged_tokens": 145072137,
+      "known_tokens": 144960422,
       "unknown_usage": 3
     },
     "embedding": {
@@ -640,7 +640,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "CLOSED through source7b82 StageC B0 arm accounting-end:37215 requests. Includes B0 exactly once; excludes still-live B1 and pending reservations. Earlier36519 ledger retained in historical snapshot.",
+  "continuous_accounting_snapshot_scope": "Closed through B1 end. Count B0 and B1 once; exclude live B2, pending reservations and separately reported user subsets.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -981,16 +981,13 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_report_and_state_files": 6,
-    "source_commit_separate": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "Lab_files": 7,
     "new_model_calls_started": 0,
-    "existing_frozen_queue_continues_naturally": true,
-    "new_actual_source_validation_completed": true,
-    "source_draft_files_remaining": 0,
+    "source_test_config_changes": false,
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
-    "rollback_reference": "0681e5ec410b2b25ad07a5b1d4eea320495c77d4",
-    "historical_raw_results_and_predeclarations_unchanged": true
+    "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+    "rollback_reference": "7add8259a1a81133d6bb69efad5893909472aa16"
   },
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
@@ -1772,8 +1769,8 @@
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
   "new_queue_live": true,
   "stage_C_prefix_live": {
-    "observed_at": "2026-10-06T09:49:44.168203+00:00",
-    "observation_started_at": "2026-10-06T09:49:44.060042+00:00",
+    "observed_at": "2026-10-06T10:56:01.460214+00:00",
+    "observation_started_at": "2026-10-06T10:56:01.305999+00:00",
     "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
     "PID": 178764,
     "PID_and_exact_frozen_command_verified_live": true,
@@ -1795,20 +1792,20 @@
         "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
       },
       "B1": {
-        "maintenance_complete": 14,
-        "evaluation_complete": 13,
-        "requests": 298,
-        "saved_response_files": 297,
-        "pending_HTTP_count": 1,
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 662,
+        "saved_response_files": 662,
+        "pending_HTTP_count": 0,
         "failure_files": 0,
-        "terminal_status": null
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
       },
       "B2": {
-        "maintenance_complete": 0,
-        "evaluation_complete": 0,
-        "requests": 0,
-        "saved_response_files": 0,
-        "pending_HTTP_count": 0,
+        "maintenance_complete": 7,
+        "evaluation_complete": 6,
+        "requests": 64,
+        "saved_response_files": 63,
+        "pending_HTTP_count": 1,
         "failure_files": 0,
         "terminal_status": null
       },
@@ -1853,25 +1850,25 @@
         },
         {
           "development_user_position": 1,
-          "maintenance_complete": 6,
-          "evaluation_complete": 5
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         },
         {
           "development_user_position": 2,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         },
         {
           "development_user_position": 3,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         }
       ],
       "B2": [
         {
           "development_user_position": 0,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 7,
+          "evaluation_complete": 6
         },
         {
           "development_user_position": 1,
@@ -1912,29 +1909,27 @@
         }
       ]
     },
-    "request_artifacts": 994,
+    "request_artifacts": 1422,
     "saved_response_roles": {
-      "Writer": 43,
-      "Reader": 104,
-      "Judge": 846
+      "Writer": 63,
+      "Reader": 158,
+      "Judge": 1200
     },
-    "saved_response_count": 993,
+    "saved_response_count": 1421,
     "saved_response_finish_reasons": {
-      "stop": 993
+      "stop": 1421
     },
-    "known_tokens_from_saved_responses": 3628985,
-    "input_tokens_from_saved_responses": 2344370,
-    "completion_tokens_from_saved_responses": 1284615,
+    "known_tokens_from_saved_responses": 5173072,
+    "input_tokens_from_saved_responses": 3307113,
+    "completion_tokens_from_saved_responses": 1865959,
     "not_final_accounting": true,
     "pending_budget_unknown_reservation_is_not_terminal_failure": true,
     "candidate_selected": false,
     "method_advantage_established": false,
     "long_smoke_actual_model_calls": 0,
     "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
-    "Root_closed_user_review_scope": "All four B0 first8 and first B1 user first8 reviewed; selected source context only, not independent Judge or full database audit.",
-    "no_new_model_process_started_for_publication": true,
-    "pre_HTTP_Writer_capacity_failures_in_closed_first_B1_user": 3,
-    "HTTP_failure_files_are_not_all_Writer_failures": true
+    "Root_closed_user_review_scope": "B0 all32 before/after pairs and73 complete Reader answers reviewed. B1 first3 users:24 before/after pairs,20 actual Writer envelopes,4 pre-HTTP failures and54 complete Reader answers reviewed. B1 fourth user mechanical closure only;19 answers not yet reviewed. Selected source context only; not independent Judge or exhaustive database/source audit.",
+    "no_new_model_process_started_for_publication": true
   },
   "required_controls_offline_preparation": {
     "status": "OFFLINE_FIXED_NOT_ADMITTED_MODEL0",
@@ -1996,22 +1991,21 @@
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "current_publication_checks": {
-    "status": "PASS_OFFLINE_COUNTS_HISTORICAL_REPORTS_AND_LINKS",
-    "relative_links_checked": 114,
-    "actual_source_real_request_projections": 8,
-    "exact_all_arm_schema_expansions": 32,
-    "exact_default_off_message_controls": 24,
-    "runner_checks": 17,
-    "wiring_checks": 11,
-    "Ruff_files": 3,
-    "strict_mypy_source_files": 2,
-    "actual_model_calls": 0,
-    "boundary": "PASS",
-    "tracked_paths": 6454,
-    "boundary_findings": 0,
-    "source_archive_Git_files_exact": 806,
-    "source_archive_ignored": true,
-    "staged_scope": "SIX_LAB_DECLARATION_REPORT_STATE_FILES_ONLY"
+    "status": "PASS_SAVED_RESULT_COUNTS_ACCOUNTING_LINKS_BOUNDARY_STAGED_SCOPE",
+    "B1_HTTP_prompt_usage_pairs": 662,
+    "B1_session_actual_views": 32,
+    "original_author_reaggregation_exact": true,
+    "new_model_calls": 0,
+    "source_tests_repeated_for_documentation": false,
+    "historical_manifests_and_document_suffixes_unchanged": true,
+    "relative_links_checked": 135,
+    "historical_manifests_unchanged": 739,
+    "repo_boundary": {
+      "status": "PASS",
+      "tracked_paths": 6455,
+      "findings": 0
+    },
+    "staged_scope": "SEVEN_LAB_REPORT_STATE_RESULT_FILES_ONLY"
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -2690,7 +2684,7 @@
     }
   },
   "shared_prompt_choice_source_draft": {
-    "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_FINITE_REAL_RECHECK_PREPARED_NOT_ADMITTED_NOT_RUN",
+    "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_OWN_FAST_FULL_SUCCESS_FINITE_RECHECK_PREPARED_NOT_ADMITTED_NOT_RUN",
     "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
     "detail_manifest": "milai-edit-post-b0-schema-shared-choices-development-20261006.json",
     "engineering": {
@@ -2783,18 +2777,19 @@
       "all_arm_mapping_scope": "Schema mechanics on actual B1 mappings; not cross-arm actual states or performance."
     },
     "own_source_CI": {
-      "observed_at": "2026-10-06 10:06:46 UTC",
+      "commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+      "observed_at": "2026-10-06 10:57:13 UTC",
       "Fast": {
         "run_id": 37447258302,
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
       "Full": {
         "run_id": 37447258296,
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       },
-      "must_query_actual_status_before_HTTP": true
+      "new_report_CI_must_be_queried_separately": true
     },
     "finite_real_recheck": {
       "status": "PREPARED_NOT_ADMITTED_NOT_RUN",
@@ -2978,5 +2973,261 @@
     "Archive_workflow_changed": false,
     "rollback_reference": "26c0ba353276d96a053329d54629c571e19bcf73",
     "historical_raw_results_and_predeclarations_unchanged": true
+  },
+  "historical_publication_before_B1_four_user_closure": {
+    "status": "STAGE_C_B0_CLOSED_B1_RUNNING_WITH_PRE_HTTP_CAPACITY_FAILURES_NO_FINAL_CANDIDATE",
+    "observed_at": "2026-10-06T10:06:12.696558+00:00",
+    "previous_report_commit": "26c0ba353276d96a053329d54629c571e19bcf73",
+    "previous_report_ci": {
+      "commit": "26c0ba353276d96a053329d54629c571e19bcf73",
+      "observed_at": "2026-10-06 09:52:17 UTC",
+      "Fast": {
+        "run_id": 37442562298,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37442562296,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_report_CI_must_be_queried_separately": true
+    },
+    "stage_C_prefix_live": {
+      "observed_at": "2026-10-06T09:49:44.168203+00:00",
+      "observation_started_at": "2026-10-06T09:49:44.060042+00:00",
+      "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+      "PID": 178764,
+      "PID_and_exact_frozen_command_verified_live": true,
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+      "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+      "started_at": "2026-10-06T07:23:06.705004+00:00",
+      "per_arm_planned_sessions": 32,
+      "per_arm_planned_updates": 72,
+      "per_arm_planned_QA": 73,
+      "arms": {
+        "B0": {
+          "maintenance_complete": 32,
+          "evaluation_complete": 32,
+          "requests": 696,
+          "saved_response_files": 696,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+        },
+        "B1": {
+          "maintenance_complete": 14,
+          "evaluation_complete": 13,
+          "requests": 298,
+          "saved_response_files": 297,
+          "pending_HTTP_count": 1,
+          "failure_files": 0,
+          "terminal_status": null
+        },
+        "B2": {
+          "maintenance_complete": 0,
+          "evaluation_complete": 0,
+          "requests": 0,
+          "saved_response_files": 0,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": null
+        },
+        "M": {
+          "maintenance_complete": 0,
+          "evaluation_complete": 0,
+          "requests": 0,
+          "saved_response_files": 0,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": null
+        }
+      },
+      "per_user_checkpoints": {
+        "B0": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          }
+        ],
+        "B1": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 6,
+            "evaluation_complete": 5
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ],
+        "B2": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ],
+        "M": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ]
+      },
+      "request_artifacts": 994,
+      "saved_response_roles": {
+        "Writer": 43,
+        "Reader": 104,
+        "Judge": 846
+      },
+      "saved_response_count": 993,
+      "saved_response_finish_reasons": {
+        "stop": 993
+      },
+      "known_tokens_from_saved_responses": 3628985,
+      "input_tokens_from_saved_responses": 2344370,
+      "completion_tokens_from_saved_responses": 1284615,
+      "not_final_accounting": true,
+      "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+      "candidate_selected": false,
+      "method_advantage_established": false,
+      "long_smoke_actual_model_calls": 0,
+      "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+      "Root_closed_user_review_scope": "All four B0 first8 and first B1 user first8 reviewed; selected source context only, not independent Judge or full database audit.",
+      "no_new_model_process_started_for_publication": true,
+      "pre_HTTP_Writer_capacity_failures_in_closed_first_B1_user": 3,
+      "HTTP_failure_files_are_not_all_Writer_failures": true
+    },
+    "continuous_accounting_snapshot": {
+      "generation_requests": 37215,
+      "generation": {
+        "charged_tokens": 142798660,
+        "known_tokens": 142686945,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "continuous_accounting_snapshot_scope": "CLOSED through source7b82 StageC B0 arm accounting-end:37215 requests. Includes B0 exactly once; excludes still-live B1 and pending reservations. Earlier36519 ledger retained in historical snapshot.",
+    "publication_scope": {
+      "Lab_report_and_state_files": 6,
+      "source_commit_separate": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+      "new_model_calls_started": 0,
+      "existing_frozen_queue_continues_naturally": true,
+      "new_actual_source_validation_completed": true,
+      "source_draft_files_remaining": 0,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Archive_workflow_changed": false,
+      "rollback_reference": "0681e5ec410b2b25ad07a5b1d4eea320495c77d4",
+      "historical_raw_results_and_predeclarations_unchanged": true
+    },
+    "current_publication_checks": {
+      "status": "PASS_OFFLINE_COUNTS_HISTORICAL_REPORTS_AND_LINKS",
+      "relative_links_checked": 114,
+      "actual_source_real_request_projections": 8,
+      "exact_all_arm_schema_expansions": 32,
+      "exact_default_off_message_controls": 24,
+      "runner_checks": 17,
+      "wiring_checks": 11,
+      "Ruff_files": 3,
+      "strict_mypy_source_files": 2,
+      "actual_model_calls": 0,
+      "boundary": "PASS",
+      "tracked_paths": 6454,
+      "boundary_findings": 0,
+      "source_archive_Git_files_exact": 806,
+      "source_archive_ignored": true,
+      "staged_scope": "SIX_LAB_DECLARATION_REPORT_STATE_FILES_ONLY"
+    }
+  },
+  "stage_C_B1_four_user_closed_scope": {
+    "detail_manifest": "milai-edit-post-b0-stage-c-b1-four-user-prefix-results-20261006.json",
+    "status": "B1_FOUR_DEVELOPMENT_USERS_FIRST8_CLOSED_NOT_FOUR_ARM_COMPARISON",
+    "sessions": 32,
+    "updates_Correct": 5,
+    "updates_all": 72,
+    "updates_valid": 60,
+    "QA_Correct": 36,
+    "QA_all": 73,
+    "QA_valid": 69,
+    "requests": 662,
+    "known_tokens": 2273477,
+    "pre_HTTP_capacity_failures": 8,
+    "unprocessed_sessions": 9,
+    "Root_review_scope": {
+      "B1_before_after_pairs_semantically_reviewed": 24,
+      "B1_actual_Writer_envelopes_reviewed": 20,
+      "B1_pre_HTTP_failures_reviewed_in_first3_users": 4,
+      "B1_complete_Reader_answers_reviewed": 54,
+      "B1_HTTP_usage_pairs_checked_for_closure": 662,
+      "fourth_user_complete_Reader_answers_reviewed": 0,
+      "selected_source_context_only": true,
+      "independent_Judge_or_full_source_database_audit": false
+    },
+    "subset_of_current_queue_not_double_counted": true,
+    "original_author_reaggregation_exact_match": true
   }
 }
