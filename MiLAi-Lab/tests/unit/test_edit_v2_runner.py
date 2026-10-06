@@ -300,6 +300,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         "matter_organization", "semantic_operations", "bound_references",
         "single_record_changes", "source_metadata",
     )}
+    run.settings["source_body_tokens"] = 4096
     # This fake tokenizer counts characters; allow the actual bound schema too.
     run.settings["context_tokens"] = 100000
     with VLLMClient(
@@ -327,9 +328,98 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
             assert "reported" in project["value"]["content"]
             assert all(source["occurred_at"] == "2030-01-01" for source in service.sources())
     assert len(requests) == 2
+    assert [e["delivery_kind"] for e in requests[0]["evidence"]] == ["current"]
+    assert [e["delivery_kind"] for e in requests[1]["evidence"]] == [
+        "current", "redelivered_support"
+    ]
+    assert requests[1]["evidence"][1]["text"] == "Project schedule Monday; tea jasmine"
+    old_plan = read_json(tmp_path / "maintenance/2/batch-0000/old-support-delivery-plan.json")
+    assert len(old_plan["selected_ranges"]) == 1 and old_plan["omitted_ranges"] == []
+    assert old_plan["current_body_tokens"] + old_plan["selected_old_body_tokens"] <= 4096
     complete = read_json(tmp_path / "maintenance/2/complete.json")
     assert complete["unprocessed"] == []
     assert read_json(tmp_path / "maintenance/2/batch-0000/writer-envelope.json")["records"]
+
+
+def test_old_support_preflight_omits_unaffordable_ranges_without_store_writes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from milai_lab.methods.edit_features import EditFeatures
+
+    run = execution(tmp_path, "B0")
+    features = EditFeatures.from_settings({name: True for name in (
+        "matter_organization", "semantic_operations", "bound_references",
+        "single_record_changes", "source_metadata",
+    )})
+    old_text, current_text = "Quiet reminders only on weekdays.", "Now use bright reminders."
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = MemoryService(
+            store, ("old-support-budget", "owner"), "owner", tmp_path / "bank.lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+        )
+        method = EditMemory(service, "B0", interface_version="I2", features=features)
+        old_ref = service.capture_user(
+            "s0", "old", old_text, occurred_at="2030-01-01"
+        )["source_ref"]
+        service.bind_source_boundary("s0", "old", [old_ref])
+        old_view = method.writer_request(method.prepare([old_ref], "reminders"), request_id="old")
+        saved = method.apply("s0", "form", method.decode_proposal({
+            "action": "create", "matter": "Reminder tone", "clauses": [{
+                "text": old_text, "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }],
+        }, old_view["mapping"]))
+        assert saved["ok"]
+        current_ref = service.capture_user(
+            "s1", "new", current_text, occurred_at="2030-01-02"
+        )["source_ref"]
+        service.bind_source_boundary("s1", "new", [current_ref])
+        rows = [service.read(saved["id"])]
+        delivery = method.prepare(
+            [current_ref], "reminders", selected_records=rows, redelivered_ranges=[]
+        )
+        boundary = dict(service._source_boundaries)
+        before = service.records()
+
+        def denied(*args: Any, **kwargs: Any) -> None:
+            raise AssertionError("PREFLIGHT_GRANTED_DELIVERY_OR_MUTATED_STORE")
+
+        def plan() -> tuple[dict[str, Any], dict[str, Any]]:
+            with monkeypatch.context() as scoped:
+                scoped.setattr(service.store, "put", denied)
+                return run._old_support_plan(
+                    method, delivery, delivery["records"], "2030-01-02", allow_create=True
+                )
+
+        run.settings["source_body_tokens"] = len(current_text) + len(old_text) - 1
+        run.settings["context_tokens"] = 100000
+        subset, metadata = plan()
+        assert subset["redelivered_sources"] == [] and metadata["selected_ranges"] == []
+        assert metadata["omitted_ranges"][0]["reason"] == "shared_source_body_budget"
+        assert len(method.preview_writer_request(subset)["packet"]["evidence"]) == 1
+
+        run.settings["source_body_tokens"] = 4096
+        preview = method.preview_writer_request(subset)
+        base_messages = run._edit_messages(
+            method, preview["packet"], "2030-01-02", allow_create=True, schema=preview["schema"]
+        )
+        run.settings["context_tokens"] = run.input_tokens(base_messages) + 100 + 512
+        subset, metadata = plan()
+        assert subset["redelivered_sources"] == []
+        assert metadata["omitted_ranges"][0]["reason"] == "complete_request_capacity"
+
+        run.settings["context_tokens"] = 100000
+        subset, metadata = plan()
+        assert len(metadata["selected_ranges"]) == 1
+        assert subset["redelivered_sources"][0]["text"] == old_text
+        assert metadata["omitted_ranges"] == []
+        executable = method.prepare(
+            [current_ref], "reminders", selected_records=rows,
+            redelivered_ranges=metadata["selected_ranges"],
+        )
+        assert method.preview_writer_request(subset) == method.preview_writer_request(executable)
+        assert service._source_boundaries == boundary
+        assert service.records() == before
 
 
 def test_truncated_response_has_no_commit_and_no_repeat_on_resume(tmp_path: Path) -> None:

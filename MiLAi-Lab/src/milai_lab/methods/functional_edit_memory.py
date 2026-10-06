@@ -178,7 +178,11 @@ class FunctionalEditMemory(FunctionalMemory):
         )
 
     def note_delivered_fragment_handles(
-        self, config: RunnableConfig, fragment_handles: list[str]
+        self,
+        config: RunnableConfig,
+        fragment_handles: list[str],
+        *,
+        redelivered: bool = False,
     ) -> None:
         """Trusted delivery callback, never an Agent tool or semantic authorization.
 
@@ -217,20 +221,31 @@ class FunctionalEditMemory(FunctionalMemory):
                         {"type": "fragment", **self.service.source_fragment(handle)}
                         for handle in dict.fromkeys(fragment_handles)
                     ],
+                    redelivered=redelivered,
                 )
 
     def _writer_key(self, config: RunnableConfig, prefix: str) -> str:
         bound = self._binding(config)
         return prefix + reference_key([bound, self.interface_version, self.arm, self.forget_epoch])
 
-    def _cache_writer_items(self, config: RunnableConfig, items: list[dict[str, Any]]) -> None:
+    def _cache_writer_items(
+        self,
+        config: RunnableConfig,
+        items: list[dict[str, Any]],
+        *,
+        redelivered: bool = False,
+    ) -> None:
         """Accumulate only actual Reader pages and trusted visible ToolMessage spans."""
         key = self._writer_key(config, "edit-writer-delivery:")
         prior = self.service.store.get(namespace(self.service), key)
         merged = copy.deepcopy(prior.value["items"]) if prior else []
+        current_ref = self._binding(config)["source_ref"]
         for item in items:
-            if item not in merged:
-                merged.append(copy.deepcopy(item))
+            delivered = copy.deepcopy(item)
+            if redelivered and item.get("type") == "fragment" and item["source_ref"] != current_ref:
+                delivered["delivery_kind"] = "redelivered_support"
+            if delivered not in merged:
+                merged.append(delivered)
         self.service.store.put(namespace(self.service), key, {"items": merged}, index=False)
 
     def _remember_page(self, config: RunnableConfig, result: dict[str, Any]) -> None:
@@ -242,9 +257,10 @@ class FunctionalEditMemory(FunctionalMemory):
                     for unit in result.get("items", [])
                     if unit.get("type") == "fragment"
                 ],
+                redelivered=True,
             )
             if self.interface_version != "v1":
-                self._cache_writer_items(config, result.get("items", []))
+                self._cache_writer_items(config, result.get("items", []), redelivered=True)
 
     def writer_context(
         self, session: str, turn_id: str, config_version: str, *, query: str | None = None
@@ -274,6 +290,12 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         items = stored.value["items"] if stored else []
         sources: list[dict[str, Any]] = []
+        redelivered: list[dict[str, Any]] = []
+        redelivered_handles = {
+            item["fragment_handle"]
+            for item in items
+            if item.get("delivery_kind") == "redelivered_support"
+        }
         groups: dict[tuple[str, int], list[dict[str, Any]]] = {}
         for item in items:
             if item["type"] == "fragment":
@@ -281,7 +303,10 @@ class FunctionalEditMemory(FunctionalMemory):
                     fragment = self.service.source_fragment(item["fragment_handle"])
                 except FunctionalRejection:
                     continue
-                sources.append(
+                destination = (
+                    redelivered if fragment["fragment_handle"] in redelivered_handles else sources
+                )
+                destination.append(
                     {
                         **{
                             key: fragment[key]
@@ -392,6 +417,13 @@ class FunctionalEditMemory(FunctionalMemory):
                 }
             )
         delivery = {"sources": sources, "records": records}
+        if redelivered:
+            delivery["redelivered_sources"] = redelivered
+            for source in [*sources, *redelivered]:
+                actual = self.service.source(source["source_ref"])
+                if actual is None:
+                    raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+                source["occurred_at"] = actual.get("occurred_at")
         if self.features.source_metadata:
             self.writer._source_attributes(delivery)
         preview = self.writer.preview_writer_view(delivery)["packet"]

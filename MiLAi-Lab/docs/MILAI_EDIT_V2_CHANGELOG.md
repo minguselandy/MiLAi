@@ -1,5 +1,24 @@
 # MiLAi-Edit v2 跟进记录
 
+**2026-10-06 12:51:30 Asia/Shanghai：**完成共同旧正文补交与Reader材料合同的有限修改，
+真实模型调用仍0。Root独立412项记忆/SDK/普通Host回归与52项runner/外部/驱动检查通过，
+9文件Ruff、5源码strict mypy、package/tools/root边界通过。未声明正文预算时44个已封存
+Writer packet/schema/messages逐字不变。工程数量不重复累加owner148或旧SDK341。
+
+只从选中记录实际支持范围列出旧正文，完整范围按稳定顺序在当前+旧正文共8192token和
+完整请求容量内选择；当前source_batch仍4096，实际旧e与当前e分开，未选范围明确记录。
+SDK复用真正成功的read_source页，不改变原public turn/current boundary；h、assertion.keep、
+origin、CAS/权限不放宽。普通benchmark使用原范围解析，未调用仅限functional SDK的入口。
+Reader共同区分retained_state与source_history，来源日期是报告时间、实际适用条件决定
+是否仍有效；RawRAG、Rolling Summary和A-MEM共用该Reader，自己的更新机制不改。
+
+[有限复核预声明](../data/manifests/milai-edit-post-b0-common-source-reader-development-20261006.json)：
+先9次实际旧状态Reader诊断（四组两分支最终题+M中间成功控制），Root复核后同版空库
+原44/共同36及来源控制16/20/16。共141次已声明但actual0，不是新的主基准成绩。
+工程通过不代表语义通过，当前无候选/前缀/保留用户准入。实际新source/config/自身CI
+在HTTP前绑定；计划7.2有限日常复核允许Full运行中，Full仍在前缀/候选/合并前完成。
+冻结497原生80的正例和失败、旧结果/账本原样保留，完整目标及延后范围继续，NO_GO。
+
 **2026-10-06 12:34:28 Asia/Shanghai：**冻结497b8d8共同原生配置完成两分支
 80次/384,395 known token（44 Writer/36 Reader），80 stop、零length；Root复核44事件/
 36回答，80对HTTP/prompt/usage及连续账本闭合。共同条件分支M实际add_exception→

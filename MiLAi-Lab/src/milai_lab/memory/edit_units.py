@@ -722,12 +722,22 @@ def writer_projection(
     public_evidence = []
     public_records: list[dict[str, Any]] = []
     public_support = []
-    source_rows = {row["source_ref"]: row for row in delivery.get("sources", [])}
+    delivered = [
+        (row, "current") for row in delivery.get("sources", [])
+    ] + [(row, "redelivered_support") for row in delivery.get("redelivered_sources", [])]
+    classify_delivery = "redelivered_sources" in delivery
+    delivery_kinds: dict[tuple[str, int], list[str]] = {}
+    if classify_delivery:
+        for row, kind in delivered:
+            kinds = delivery_kinds.setdefault((row["source_ref"], row["source_revision"]), [])
+            if kind not in kinds:
+                kinds.append(kind)
+    source_rows = {row["source_ref"]: row for row, _ in delivered}
     if features and features.get("source_metadata"):
         source_rows.update(
             {row["source_ref"]: row for row in delivery.get("source_attributes", [])}
         )
-    delivered_sources = {row["source_ref"] for row in delivery.get("sources", [])}
+    delivered_sources = {row["source_ref"] for row, _ in delivered}
 
     def source_id(ref: dict[str, Any]) -> str:
         key = (ref["source_ref"], ref["source_revision"])
@@ -749,9 +759,13 @@ def writer_projection(
                 attributes[-1]["role"] = row.get("role", "unknown")
                 attributes[-1]["body_delivered"] = key[0] in delivered_sources
                 attributes[-1]["occurred_at"] = row.get("occurred_at")
+            if classify_delivery:
+                attributes[-1]["delivery_kinds"] = delivery_kinds.get(key, []).copy()
+                attributes[-1]["body_delivered"] = bool(attributes[-1]["delivery_kinds"])
+                attributes[-1]["occurred_at"] = row.get("occurred_at")
         return sources[key]
 
-    for source in delivery.get("sources", []):
+    for source, kind in delivered:
         alias = "e" + str(len(fresh) + 1)
         fresh[alias] = copy.deepcopy(source)
         public_evidence.append(
@@ -762,6 +776,9 @@ def writer_projection(
                 "text": source["text"],
             }
         )
+        if classify_delivery:
+            fresh[alias]["delivery_kind"] = kind
+            public_evidence[-1]["delivery_kind"] = kind
     for record in delivery.get("records", []):
         record_alias = "r" + str(len(records) + 1)
         records[record_alias] = copy.deepcopy(record)

@@ -47,6 +47,7 @@ def test_author_expansion_limit_retains_complete_occurrences_and_reports_omissio
     assert payload == {
         "question": "Actual question",
         "date": "T1",
+        "memory_view": "retained_state",
         "memories": [{"revision": 1, "scope": {}, "content": "actual text"}],
     }
 

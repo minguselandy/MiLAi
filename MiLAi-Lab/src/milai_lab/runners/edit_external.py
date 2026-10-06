@@ -18,9 +18,9 @@ from milai_lab.methods.contextual_memory.retrieval import IndexEntry, hybrid_ord
 from milai_lab.providers.contextual_embeddings import embed_texts_windowed
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.edit_benchmarks import (
-    READER_PROMPT,
     BenchmarkRun,
     parse_object,
+    reader_messages,
     source_batches,
 )
 
@@ -33,24 +33,16 @@ not authorize business actions. Do not add unsupported facts. Return JSON with
 one string field 'summary'. No future questions or reference memories are supplied."""
 
 
-def reader_payload(question: str, date: str, records: list[dict[str, Any]]) -> list[dict[str, str]]:
-    return [
-        {"role": "system", "content": READER_PROMPT},
-        {
-            "role": "user",
-            "content": json.dumps(
-                {
-                    "question": question,
-                    "date": date,
-                    "memories": [
-                        {field: record[field] for field in ("content", "scope", "revision")}
-                        for record in records
-                    ],
-                },
-                ensure_ascii=False,
-            ),
-        },
-    ]
+def reader_payload(
+    question: str, date: str, records: list[dict[str, Any]], *,
+    memory_view: str = "retained_state",
+) -> list[dict[str, str]]:
+    return reader_messages(
+        question, date,
+        [{field: record[field] for field in ("content", "scope", "revision")}
+         for record in records],
+        memory_view=memory_view,
+    )
 
 
 def bound_author_context(result: dict[str, Any], limit: int) -> dict[str, Any]:
@@ -423,7 +415,11 @@ class ExternalRun(BenchmarkRun):
                 raise ValueError("Unsupported external comparison arm")
             write_json(path, delivery)
         return self.call(
-            key + "/reader", reader_payload(question, date, delivery["records"]), structured=False
+            key + "/reader", reader_payload(
+                question, date, delivery["records"],
+                memory_view="source_history" if self.settings["arm"] == "RawRAG"
+                else "retained_state",
+            ), structured=False
         )
 
 

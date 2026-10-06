@@ -243,6 +243,104 @@ def test_next_sdk_reopened_clause_support_enters_wrapper_without_old_source_deli
             assert app.world.snapshot() == before
 
 
+def test_sdk_real_old_source_page_becomes_e_without_rebinding_current_turn(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        old_ref = memory.service.capture_user(
+            "s", "u", "Remember quiet reminders, on weekdays before 18:00.",
+            occurred_at="2025-02-03T00:00:00Z",
+        )["source_ref"]
+        memory.writer_context("s", "u", "functional-m-test-v1")
+        units = [
+            {
+                "text": text,
+                "role": role,
+                "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }
+            for text, role in (
+                ("Quiet reminders.", "content"), ("On weekdays before 18:00.", "condition")
+            )
+        ]
+        create = clause_proposal(
+            {
+                "action": "create", "matter": "Reminder tone", "units": units,
+                "relations": [
+                    {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+                ],
+            },
+            conditioned=True,
+        )
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": create}, "save").content)
+        assert saved["ok"]
+        old = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        handle = old["edit_state"]["units"][1]["evidence_refs"][0]["evidence_id"]
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            current_ref = memory.service.capture_user(
+                "s", "u2", "Remember bright reminders now.", occurred_at="2025-02-04T00:00:00Z"
+            )["source_ref"]
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            invoke(memory, "read_memory", {"record_id": saved["id"]}, "record", "u2")
+            before = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            assert before["evidence"] and all(
+                e["text"] == "Remember bright reminders now." for e in before["evidence"]
+            )
+            assert "delivery_kind" not in canonical(before)
+            binding = copy.deepcopy(memory.service.public_turn("s"))
+            boundary = copy.deepcopy(memory.service._source_boundaries)
+            page = json.loads(
+                invoke(memory, "read_source", {"fragment_handle": handle}, "source", "u2").content
+            )
+            assert page["ok"] and page["items"][0]["source_ref"] == old_ref
+            packet = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            by_kind = {
+                kind: next(e["id"] for e in packet["evidence"] if e["delivery_kind"] == kind)
+                for kind in ("current", "redelivered_support")
+            }
+            old_source = next(
+                s for s in packet["source_table"] if "redelivered_support" in s["delivery_kinds"]
+            )
+            assert old_source["role"] == "user"
+            assert old_source["occurred_at"] == "2025-02-03T00:00:00Z"
+            assert memory.service.public_turn("s") == binding
+            assert binding["source_ref"] == current_ref
+            assert memory.service._source_boundaries == boundary
+            clause = packet["records"][0]["clauses"][0]
+            condition = clause["conditions"][0]
+            rewrite = {
+                "action": "rewrite", "target": "r1", "clauses": [
+                    {
+                        "text": "Bright reminders.",
+                        "evidence": [by_kind["current"]], "keep_support": clause["support"],
+                        "assertion": {"source": by_kind["current"], "kind": "reported"},
+                        "conditions": [
+                            {
+                                "text": "Weekdays, earlier than 18:00.",
+                                "evidence": [by_kind["redelivered_support"]],
+                                "keep_support": condition["support"],
+                                "assertion": {
+                                    "source": by_kind["redelivered_support"], "kind": "reported"
+                                },
+                                "binding": {
+                                    "evidence": [], "keep_support": condition["binding"]["support"]
+                                },
+                            }
+                        ],
+                    }
+                ],
+            }
+            updated = json.loads(invoke(
+                memory, "update_memory", {"proposal": rewrite}, "rewrite", "u2",
+                app.call_wrapper(memory.service, "s", "u2"),
+            ).content)
+            assert updated["ok"] and updated["id"] == saved["id"] and updated["revision"] == 2
+            assert memory.service.read(saved["id"], 1)["value"] == old
+
+
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
 def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, arm):
     with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:

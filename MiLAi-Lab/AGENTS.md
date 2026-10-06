@@ -1,3 +1,29 @@
+# 2026-10-06 12:51:30 Asia/Shanghai: bounded common old body and Reader input handed back
+
+Root completed independent412 memory/SDK/ordinaryHost checks and52 runner/external/
+driver checks,464distinct. Ruff9files,strictmypy5sources,package/tools/root boundaries
+pass. Default44actual frozen Writer packets/schemas/messages exactly match without
+source_body_tokens. With explicit shared8192body budget, only actual supports of
+selected records may be resent, full-range first-order choice also respects full
+request capacity; omitted ranges remain h-only. Current cores4096/current source
+boundary unchanged; preflight reads never grant delivery, finalprepare handles only
+chosen old ranges. SDK uses actual successful Reader pages without public turn
+rebind. h/origin/assertion.keep/CAS/permissions unchanged. One common Reader now
+distinguishes retained state and observed source history; source dates do not alone
+expire claims, actual conditions/corrections/active scopes decide. Baselines share
+same Reader, RawRAG actual material kind differs truthfully.
+
+Predeclare finite9actual-state Reader probes first, then same-source own-empty
+original44/global36 and source controls16/20/16,Root review between phases/branches.
+Declared141,actual0. This is affected behavior verification,not candidate or new
+benchmark score. Bind actual new Git source/config/ownCI beforeHTTP,finite daily
+calibration allowed by plan7.2 after checks;Full before prefix/candidate/merge.
+Old497native80/all first failures/config/terminals preserved,no modelqueue live.
+Root owns HTTP/data/raw/eval/GitHub;owner handed back,no further edits needed.
+No extraWriter warnings/examples,auditplatform,newstore/deployment/family.
+Full plan and deferred old scopes active,PR85draft/unmerged,ProductNO_GO.
+All lower dated blocks are historical snapshots.
+
 # 2026-10-06 12:34:28 Asia/Shanghai: publish Root-reviewed native80 checkpoint
 
 Latest user requests a current summary and GitHub submission. Publish seven Lab

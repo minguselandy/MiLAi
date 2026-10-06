@@ -218,6 +218,161 @@ def next_save(service, method, key="first", conditioned=False):
     return saved, ref
 
 
+def test_old_support_redelivery_rephrases_with_actual_e_without_changing_current_boundary(
+    tmp_path, monkeypatch
+):
+    with opened(tmp_path, "B2") as (service, _):
+        method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)
+        view, old_ref = next_request(
+            service,
+            method,
+            "old",
+            "Use a soft tone, only on weekdays before 18:00.",
+            role="assistant",
+        )
+        saved = method.apply(
+            "s",
+            "form",
+            method.decode_proposal(
+                clause_proposal(
+                    {
+                        "action": "create",
+                        "matter": "Reminder tone",
+                        "units": [
+                            next_unit("Use a soft tone."),
+                            next_unit("Only on weekdays before 18:00.", role="condition"),
+                        ],
+                        "relations": [
+                            {
+                                "source": 1,
+                                "target": 0,
+                                "relation_type": "modifies",
+                                "evidence": ["e1"],
+                            }
+                        ],
+                    },
+                    conditioned=True,
+                ),
+                view["mapping"],
+            ),
+        )
+        assert saved["ok"]
+        initial = copy.deepcopy(service.read(saved["id"], 1)["value"])
+
+    with opened(tmp_path, "B2") as (service, _):
+        method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)
+        rows = [service.read(saved["id"])]
+
+        def denied(*args, **kwargs):
+            raise AssertionError("PURE_SUPPORT_PROJECTION_READ_OR_WRITE")
+
+        with monkeypatch.context() as local:
+            local.setattr(service.store, "get", denied)
+            local.setattr(service.store, "put", denied)
+            ranges = method.target_support_ranges(rows)
+        assert ranges == [
+            {
+                "source_ref": old_ref,
+                "source_revision": service.source(old_ref)["source_revision"],
+                "start": 0,
+                "end": len("Use a soft tone, only on weekdays before 18:00."),
+            }
+        ]
+        ref = service.capture_user(
+            "s", "new", "Use a bright tone.", occurred_at="2025-03-05T10:00:00Z"
+        )["source_ref"]
+        service.bind_source_boundary("s", "new", [ref])
+        default = method.prepare([ref], "tone", selected_records=rows)
+        assert "redelivered_sources" not in default
+        unavailable = method.writer_request(default, request_id="no-old-body")
+        assert set(unavailable["mapping"]["evidence"]) == {"e1"}
+        assert "delivery_kind" not in json.dumps(unavailable["packet"])
+        delivery = method.prepare(
+            [ref], "tone", selected_records=rows, redelivered_ranges=ranges
+        )
+        assert [source["source_ref"] for source in delivery["sources"]] == [ref]
+        assert [source["source_ref"] for source in delivery["redelivered_sources"]] == [old_ref]
+        with monkeypatch.context() as local:
+            local.setattr(service.store, "get", denied)
+            local.setattr(service.store, "put", denied)
+            preview = method.preview_writer_request(delivery)
+        view = method.writer_request(delivery, request_id="old-body")
+        assert preview["mapping"] is None and preview["packet"] == view["packet"]
+        assert [e["delivery_kind"] for e in view["packet"]["evidence"]] == [
+            "current", "redelivered_support"
+        ]
+        old_source = view["packet"]["source_table"][1]
+        assert old_source["role"] == "assistant"
+        assert old_source["occurred_at"] == "2025-03-04T10:00:00Z"
+        assert old_source["delivery_kinds"] == ["redelivered_support"]
+        # Optional redelivery also preserves actual times with the five features
+        # disabled, and its pure budget packet matches the executable packet.
+        ordinary = EditMemory(service, "B2", interface_version="I2")
+        old_body = ordinary.prepare([ref], "tone", selected_records=rows, redelivered_ranges=ranges)
+        ordinary_preview = ordinary.preview_writer_request(old_body)
+        ordinary_actual = ordinary.writer_request(old_body, request_id="old-body-features-off")
+        assert ordinary_preview["packet"] == ordinary_actual["packet"]
+        assert ordinary_actual["packet"]["source_table"][0]["occurred_at"] == "2025-03-05T10:00:00Z"
+
+        def rewrite(text, evidence):
+            return clause_proposal(
+                {
+                    "action": "rewrite",
+                    "target": "r1",
+                    "units": [
+                        {**next_unit(text, evidence), "keep_support": ["h1"]},
+                        {
+                            **next_unit("Only on weekdays.", "e2", role="condition"),
+                            "keep_support": ["h2"],
+                        },
+                        {
+                            **next_unit("Only before 18:00.", "e2", role="condition"),
+                            "keep_support": ["h2"],
+                        },
+                    ],
+                    "relations": [
+                        {
+                            "source": i,
+                            "target": 0,
+                            "relation_type": "modifies",
+                            "evidence": [],
+                            "keep_support": ["h3"],
+                        }
+                        for i in (1, 2)
+                    ],
+                },
+                conditioned=True,
+            )
+
+        change = rewrite("Use a bright tone.", "e1")
+        with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+            method.decode_proposal(change, unavailable["mapping"])
+        tampered = copy.deepcopy(delivery)
+        tampered["redelivered_sources"][0]["text"] = "Invented old body."
+        with pytest.raises(FunctionalRejection, match="ACTUAL_DELIVERY_REQUIRED"):
+            method.writer_view(tampered)
+        wrong_range = [{**ranges[0], "end": ranges[0]["end"] - 1}]
+        with pytest.raises(FunctionalRejection, match="SUPPORT_RANGE_UNAVAILABLE"):
+            method.prepare([ref], "tone", selected_records=rows, redelivered_ranges=wrong_range)
+        old_only = method.apply(
+            "s",
+            "old-only",
+            method.decode_proposal(rewrite("Choose a soft tone.", "e2"), view["mapping"]),
+        )
+        assert not old_only["ok"] and old_only["reason"] == "current_boundary_source_required"
+        assert service.read(saved["id"])["value"] == initial
+        assert service._source_boundaries["s"] == ("new", [ref])
+        committed = method.apply("s", "rewrite", method.decode_proposal(change, view["mapping"]))
+        assert committed["ok"] and committed["id"] == saved["id"]
+        current = service.read(saved["id"])["value"]
+        assert current["revision"] == 2
+        assert [u["text"] for u in current["edit_state"]["units"]] == [
+            "Use a bright tone.", "Only on weekdays.", "Only before 18:00."
+        ]
+        assert current["edit_state"]["units"][1]["assertion"]["role"] == "assistant"
+        assert service.read(saved["id"], 1)["value"] == initial
+
+
 def test_next_bound_clauses_share_only_declared_conditions_and_keep_binding_origins(tmp_path):
     with opened(tmp_path, "B2") as (service, _):
         method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)

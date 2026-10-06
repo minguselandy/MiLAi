@@ -1,7 +1,7 @@
 {
-  "status": "NATIVE80_ROOT_REVIEWED_M_GLOBAL_WRITER_POSITIVE_READER_INCOMPLETE_NO_CANDIDATE",
-  "observed_at": "2026-10-06T04:34:28.414849+00:00",
-  "previous_report_commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
+  "status": "COMMON_OLD_SOURCE_AND_READER_INPUT_ROOT464_CHECKED_FINITE_RECHECK_PREDECLARED_ACTUAL0",
+  "observed_at": "2026-10-06T04:51:30.867318+00:00",
+  "previous_report_commit": "8f6d760640dd3c2f726983ade7269d20f97e4031",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,20 +24,17 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "NATIVE80_REVIEWED_M_GLOBAL_WRITER_POSITIVE_ORIGINAL_AND_READER_FAILURES_NO_CANDIDATE",
-    "included_in_this_publication": false,
+    "status": "ROOT464_CHECKED_SOURCE_INCLUDED_FINITE141_PREDECLARED_ACTUAL0_NOT_CANDIDATE",
+    "description": "common bounded old support body redelivery and one retained-state/source-history Reader contract",
+    "source_commit": null,
+    "source_identity": "ordinary Git commit carrying this predeclaration and bounded input/Reader implementation; bind exact source and own CI before HTTP",
+    "included_in_this_publication": true,
+    "actual_model_calls": 0,
     "stable_source_delivered": true,
-    "checks_completed_at_snapshot": true,
-    "actual_model_calls": 80,
-    "description": "Explicit clause-to-condition bindings and actual-graph grouped Writer view; equal conditioned contract for B2/M and qualified plain clauses for B0/B1",
-    "frozen_2335ea9_source_unchanged": true,
-    "source_owner_checks_passed": 145,
-    "Root_checks_passed": 295,
-    "detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
+    "Root_checks_passed": 464,
     "candidate_selected": false,
     "prefix_admitted": false,
-    "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
-    "source_already_published_in_previous_commit": true
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json"
   },
   "native_and_drift": {
     "actual_model_calls": 0,
@@ -49,10 +46,10 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "Root-review bounded common old-support body redelivery under separate current-event boundary; workspace implementation is not admitted to a model cohort",
-      "review a common retained-state/source-date Reader contract in a new version, without changing frozen80 outputs",
-      "validate critical lifecycle, source and Reader behavior before fresh four-user prefix and preselected first-user long smoke",
-      "complete full R0-R5/E0-E5 and six deliverables, same-M ablation/tighter budget before holdout, and deferred old scope"
+      "bind own new Git source/config/CI then finite9 actual-state Reader diagnostic",
+      "same-source own-empty original44/global36 and three source controls16/20/16 with Root review",
+      "after usable common behavior and own Full, fresh four-user prefix and preselected first-user long smoke",
+      "complete full plan and deferred scope, same-M ablation and fixed tighter budget before reserved users"
     ],
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
@@ -60,19 +57,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "651a7b558b862809d07150bb83bcb6a2dd623407",
-    "observed_at": "2026-10-06T04:35:28.558362+00:00",
+    "commit": "8f6d760640dd3c2f726983ade7269d20f97e4031",
+    "observed_at": "2026-10-06T04:52:00+00:00",
     "Fast": {
-      "run_id": 37413376702,
+      "run_id": 37414476264,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37413376862,
+      "run_id": 37414476271,
       "status": "in_progress",
       "conclusion": null
     },
-    "does_not_establish_new_report_CI": true
+    "does_not_establish_new_source_CI": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -293,7 +290,7 @@
     "unsupported_assistant_strengthening_B1_M_promoted_to_user_report": true
   },
   "publication_checks": {
-    "status": "PASS_BOUNDED_NATIVE80_REPORT_CHECKS",
+    "status": "PASS_BOUNDED_SOURCE_AND_READER_ENGINEERING_CHECKS",
     "Root_SDK_Host_tests": 341,
     "old_source_expected_wrapper_failure": "PASS",
     "Ruff": "PASS",
@@ -309,11 +306,19 @@
     "new_model_cohort_for_SDK_source": 0,
     "Product_schema_API_permissions_Canonical_changed": false,
     "JSON_counters_scopes": "PASS",
-    "staged_diff": "PASS",
+    "staged_diff": "PASS_SOURCE_SCOPE_CHECK",
     "paired_HTTP_prompt_usage_matches": 80,
     "actual_old_state_mapping_matches": 44,
     "actual_M_global_graph_lifecycle": "PASS_BOUNDED_WRITER_BRANCH_ONLY",
-    "local_links_checked": 65
+    "local_links_checked": 65,
+    "Root_source_SDK_Host_tests": 412,
+    "Root_runner_external_driver_tests": 52,
+    "total_distinct_affected_checks": 464,
+    "Ruff_files": 9,
+    "strict_mypy_sources": 5,
+    "old_actual_writer_packets_schemas_messages_unchanged": 44,
+    "new_model_calls": 0,
+    "Lab_optional_delivery_API_and_Reader_payload_changed": true
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -387,7 +392,7 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 15,
+  "model_calls_since_previous_report": 0,
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-native-capacity-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -496,7 +501,7 @@
     "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; completed native80 is reported separately",
     "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately",
     "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
-    "model_calls_since_previous_report": "15 responses after the previous recorded SDK snapshot at04:19:51 (21/36 global); snapshot difference, not Git commit-time calls. Declared global total36; publication-only0."
+    "model_calls_since_previous_report": "0 new model calls after reviewed native80 report8f6d760; only bounded source/Reader development and offline tests"
   },
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
@@ -621,16 +626,28 @@
   },
   "continuous_accounting_snapshot_scope": "closed native80 final boundary; stable actual live ledger, both processes exited and serial lease free",
   "bounded_old_support_redelivery_development": {
-    "status": "SOURCE_OWNER_HANDED_BACK148_ROOT_REVIEW_AND_RUNNER_WIRING_PENDING_NOT_ADMITTED",
-    "source_included_in_this_report": false,
+    "status": "ROOT_REVIEWED412_SOURCE_SDK_HOST_AND52_RUNNER_CHECKS_WIRED_INCLUDED_NOT_MODEL_ADMITTED",
+    "source_included_in_this_report": true,
     "actual_model_calls": 0,
     "owner_reported_related_checks_passed": 148,
     "owner_Ruff_five_files": "PASS",
     "owner_strict_mypy_three_sources": "PASS",
-    "Root_independent_review_completed": false,
-    "runner_actual_delivery_and_budget_wired": false,
+    "Root_independent_review_completed": true,
+    "runner_actual_delivery_and_budget_wired": true,
     "separate_current_event_boundary_required": true,
     "common_four_arm_delivery_and_budget_required": true,
-    "frozen_native80_unchanged": true
+    "frozen_native80_unchanged": true,
+    "source_body_tokens": 8192,
+    "Root_SDK_and_Host_checks_passed": 412,
+    "Root_runner_external_driver_checks_passed": 52,
+    "old_default_actual_Writer_requests_unchanged": 44
+  },
+  "common_Reader_material_view": {
+    "status": "IMPLEMENTED_ENGINEERING_CHECKED_PREDECLARED9_REAL_READERS_ACTUAL0",
+    "same_prompt_for_milai_and_external_controls": true,
+    "source_history_for_RawRAG": true,
+    "retained_state_for_milai_summary_and_author_notes": true,
+    "posthoc_answer_rewriter": false,
+    "old_native80_outputs_unchanged": true
   }
 }

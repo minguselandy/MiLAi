@@ -730,6 +730,27 @@ class EditMemory:
         )
         return examples
 
+    @staticmethod
+    def target_support_ranges(selected_records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        """Pure, ordered range inventory from only the supplied record versions.
+
+        No body is read or delivered here. The caller chooses the exact ranges
+        it can send; a legacy record without structured supports adds no range.
+        """
+        ranges: dict[tuple[str, int, int, int], dict[str, Any]] = {}
+        for row in selected_records:
+            if not row.get("ok") or not isinstance(row.get("value"), dict):
+                raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
+            state = row["value"].get("edit_state") or {}
+            for item in [*state.get("units", []), *state.get("relations", [])]:
+                for ref in item["evidence_refs"]:
+                    part = {
+                        key: ref[key] for key in ("source_ref", "source_revision", "start", "end")
+                    }
+                    key = (part["source_ref"], part["source_revision"], part["start"], part["end"])
+                    ranges.setdefault(key, part)
+        return list(ranges.values())
+
     def prepare(
         self,
         actual_source_refs: list[str],
@@ -738,6 +759,7 @@ class EditMemory:
         limit: int = 6,
         source_ranges: list[dict[str, Any]] | None = None,
         selected_records: list[dict[str, Any]] | None = None,
+        redelivered_ranges: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Shared retrieval from already occurred events; the caller bounds delivery equally."""
         selected = (
@@ -773,11 +795,34 @@ class EditMemory:
                     "semantic_support": "unchecked",
                 }
             )
-            if self.features.source_metadata:
+            if self.features.source_metadata or redelivered_ranges is not None:
                 sources[-1]["occurred_at"] = source.get("occurred_at")
+        redelivered = []
+        if redelivered_ranges is not None:
+            available = self.target_support_ranges(selected)
+            for part in redelivered_ranges:
+                if part not in available:
+                    raise FunctionalRejection("EDIT_SUPPORT_RANGE_UNAVAILABLE")
+                source = self.service.source(part["source_ref"])
+                if source is None or source["source_revision"] != part["source_revision"]:
+                    raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+                evidence = issue_evidence(
+                    self.service, part["source_ref"], part["start"], part["end"]
+                )
+                redelivered.append(
+                    {
+                        **evidence,
+                        "role": source["role"],
+                        "observed_at": source["observed_at"],
+                        "occurred_at": source.get("occurred_at"),
+                        "text": body_text(source)[part["start"] : part["end"]],
+                        "body_delivered": True,
+                        "semantic_support": "unchecked",
+                    }
+                )
         records = []
         historical_evidence: dict[str, dict[str, Any]] = {}
-        delivered_ids = {source["evidence_id"] for source in sources}
+        delivered_ids = {source["evidence_id"] for source in [*sources, *redelivered]}
         for row in selected:
             if not row.get("ok") or not isinstance(row.get("value"), dict):
                 raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
@@ -821,12 +866,17 @@ class EditMemory:
             "records": records,
             "historical_evidence": list(historical_evidence.values()),
         }
+        if redelivered_ranges is not None:
+            delivery["redelivered_sources"] = redelivered
         if self.features.source_metadata:
             self._source_attributes(delivery)
         return delivery
 
     def _source_attributes(self, delivery: dict[str, Any]) -> None:
-        refs = [source["source_ref"] for source in delivery.get("sources", [])]
+        refs = [
+            source["source_ref"]
+            for source in [*delivery.get("sources", []), *delivery.get("redelivered_sources", [])]
+        ]
         for record in delivery.get("records", []):
             state = record.get("edit_state") or {}
             for item in [*state.get("units", []), *state.get("relations", [])]:
@@ -918,7 +968,7 @@ class EditMemory:
         checked = copy.deepcopy(delivery)
         if self.features.source_metadata:
             self._source_attributes(checked)
-        for source in checked.get("sources", []):
+        for source in [*checked.get("sources", []), *checked.get("redelivered_sources", [])]:
             fragment = resolve_fragment(self.service, source["evidence_id"])
             if (
                 not source.get("body_delivered")
@@ -929,10 +979,12 @@ class EditMemory:
                 )
             ):
                 raise FunctionalRejection("EDIT_ACTUAL_DELIVERY_REQUIRED")
-            if self.features.source_metadata:
+            if self.features.source_metadata or "redelivered_sources" in checked:
                 actual_source = self.service.source(source["source_ref"])
                 if actual_source is None or source.get("role") != actual_source["role"]:
                     raise FunctionalRejection("EDIT_ACTUAL_SOURCE_ROLE_REQUIRED")
+                if "redelivered_sources" in checked:
+                    source["observed_at"] = actual_source["observed_at"]
                 source["occurred_at"] = actual_source.get("occurred_at")
         for record in checked.get("records", []):
             actual = self.service.read(record["record_id"], record["revision"])
