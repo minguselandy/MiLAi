@@ -12,6 +12,7 @@ import pytest
 from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
+from milai_lab.memory.edit_units import clause_proposal
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
@@ -157,7 +158,7 @@ def test_next_contract_exception_cancel_never_restores_a_lost_general_rule(tmp_p
             "User cancels the local exception.",
             [service.read(saved["id"])],
         )
-        assert view["packet"]["records"][0]["units"][0]["local_exception"]
+        assert view["packet"]["records"][0]["clauses"][0]["local_exception"]
         remove = {
             "action": "edit",
             "target": "r1",
@@ -208,10 +209,185 @@ def next_save(service, method, key="first", conditioned=False):
     saved = method.apply(
         "s",
         "save-" + key,
-        method.decode_envelope({"creates": [create], "records": {}}, view["mapping"])[0],
+        method.decode_envelope(
+            {"creates": [clause_proposal(create, conditioned=method.conditioned)], "records": {}},
+            view["mapping"],
+        )[0],
     )
     assert saved["ok"] and saved["status"] == "committed"
     return saved, ref
+
+
+def test_next_bound_clauses_share_only_declared_conditions_and_keep_binding_origins(tmp_path):
+    with opened(tmp_path, "B2") as (service, _):
+        method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)
+        view, _ = next_request(service, method, "form", "A user reports qualified reminder rules.")
+
+        def condition(text):
+            body = next_unit(text)
+            body.pop("role")
+            return {**body, "binding": {"evidence": ["e1"]}}
+
+        create = {
+            "action": "create",
+            "matter": "Reminder tones",
+            "clauses": [
+                {
+                    **condition("Use a soft tone."),
+                    "conditions": [condition("On weekdays."), condition("Before 18:00.")],
+                },
+                {
+                    **condition("Use a bright tone."),
+                    "conditions": [
+                        condition("On Tuesday."),
+                        {"reuse": 0, "binding": {"evidence": ["e1"]}},
+                        {"reuse": 1, "binding": {"evidence": ["e1"]}},
+                    ],
+                    "overrides": [{"target": 0, "evidence": ["e1"]}],
+                },
+            ],
+        }
+        for clause in create["clauses"]:
+            clause.pop("binding")
+        saved = method.apply("s", "form", method.decode_proposal(create, view["mapping"]))
+        assert saved["ok"]
+        old = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        assert len(old["units"]) == 5 and len(old["relations"]) == 6
+        view, _ = next_request(
+            service, method, "change", "The general tone is now clear.", [service.read(saved["id"])]
+        )
+        public = view["packet"]["records"][0]
+        assert "units" not in public and "relations" not in public
+        clauses = public["clauses"]
+        assert clauses[0]["conditions"][0]["id"] == "u2"
+        assert (
+            clauses[0]["conditions"][0]["support"]
+            != clauses[0]["conditions"][0]["binding"]["support"]
+        )
+        assert clauses[1]["conditions"][1]["reuse"] == "u2"
+        assert clauses[1]["overrides"][0]["target"] == "u1"
+        assert json.dumps(public).count('"text": "On weekdays."') == 1
+
+        def retained(item):
+            return {
+                "text": item["text"],
+                "evidence": [],
+                "keep_support": item["support"],
+                "assertion": {"keep": item["support"][0]},
+            }
+
+        rewrite = {
+            "action": "rewrite",
+            "target": "r1",
+            "clauses": [
+                {
+                    **retained(clauses[0]),
+                    "conditions": [
+                        {
+                            **retained(c),
+                            "binding": {"evidence": [], "keep_support": c["binding"]["support"]},
+                        }
+                        for c in clauses[0]["conditions"]
+                    ],
+                },
+                {
+                    **retained(clauses[1]),
+                    "conditions": [
+                        {
+                            **retained(clauses[1]["conditions"][0]),
+                            "binding": {
+                                "evidence": [],
+                                "keep_support": clauses[1]["conditions"][0]["binding"]["support"],
+                            },
+                        },
+                        *[
+                            {
+                                "reuse": index,
+                                "binding": {
+                                    "evidence": [],
+                                    "keep_support": c["binding"]["support"],
+                                },
+                            }
+                            for index, c in enumerate(clauses[1]["conditions"][1:])
+                        ],
+                    ],
+                    "overrides": [
+                        {
+                            "target": 0,
+                            "evidence": [],
+                            "keep_support": clauses[1]["overrides"][0]["support"],
+                        }
+                    ],
+                },
+            ],
+        }
+        rewrite["clauses"][0].update(
+            text="Use a clear tone.",
+            evidence=["e1"],
+            assertion={"source": "e1", "kind": "reported"},
+        )
+        missing_origin = copy.deepcopy(rewrite)
+        missing_origin["clauses"][0].pop("keep_support")
+        with pytest.raises(FunctionalRejection, match="RELATION_SUPPORT_BINDING_INVALID"):
+            method.decode_proposal(missing_origin, view["mapping"])
+        missing_binding = copy.deepcopy(rewrite)
+        missing_binding["clauses"][0]["conditions"][0]["binding"].pop("keep_support")
+        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
+            method.decode_proposal(missing_binding, view["mapping"])
+        decoded = method.decode_proposal(rewrite, view["mapping"])
+        revised = method.apply("s", "rewrite", decoded)
+        assert revised["id"] == saved["id"] and revised["revision"] == 2
+        assert service.read(saved["id"], 1)["value"]["edit_state"] == old
+        assert method.apply("s", "rewrite", decoded)["replayed"]
+        legacy = EditMemory(service, "B2", interface_version="I2")
+        legacy_view, _ = packet(service, legacy, "legacy-orphan", "An older rule was recorded.", [])
+        orphan = legacy.apply(
+            "s",
+            "orphan",
+            legacy.decode_proposal(
+                {
+                    "action": "create",
+                    "units": [
+                        {"text": "An older general rule.", "evidence": ["e1"]},
+                        {
+                            "text": "An unconnected qualification.",
+                            "role": "condition",
+                            "evidence": ["e1"],
+                        },
+                    ],
+                },
+                legacy_view["mapping"],
+            ),
+        )
+        view, _ = next_request(
+            service,
+            method,
+            "retain-orphan",
+            "The older general rule is now revised.",
+            [service.read(orphan["id"])],
+            allow_create=False,
+        )
+        public = view["packet"]["records"][0]
+        assert public["clauses"][0]["conditions"] == []
+        assert public["unresolved_conditions"][0]["id"] == "u2"
+        retained_orphan = {
+            "action": "rewrite",
+            "target": "r1",
+            "clauses": [
+                {**retained(public["clauses"][0]), "conditions": []},
+            ],
+            "unresolved_conditions": [retained(public["unresolved_conditions"][0])],
+        }
+        retained_orphan["clauses"][0].update(
+            text="A revised general rule.",
+            evidence=["e1"],
+            assertion={"source": "e1", "kind": "reported"},
+        )
+        copied = method.apply(
+            "s", "retain-orphan", method.decode_proposal(retained_orphan, view["mapping"])
+        )
+        assert copied["ok"], copied.get("reason", copied.get("status"))
+        assert service.read(orphan["id"])["value"]["edit_state"]["relations"] == []
 
 
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
@@ -252,7 +428,11 @@ def test_next_contract_matter_assertion_whole_or_local_and_historical_metadata(t
                 ],
             }
         decoded = method.decode_envelope(
-            {"creates": [], "records": {"r1": public}}, view["mapping"]
+            {
+                "creates": [],
+                "records": {"r1": clause_proposal(public, conditioned=method.conditioned)},
+            },
+            view["mapping"],
         )[0]
         updated = method.apply("s", "update", decoded)
         assert updated["id"] == first["id"] and updated["revision"] == 2
@@ -289,11 +469,14 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
             )
         with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
             method.decode_proposal(
-                {
-                    "action": "create",
-                    "matter": "Undelivered",
-                    "units": [next_unit("Invented", "e99")],
-                },
+                clause_proposal(
+                    {
+                        "action": "create",
+                        "matter": "Undelivered",
+                        "units": [next_unit("Invented", "e99")],
+                    },
+                    conditioned=method.conditioned,
+                ),
                 view["mapping"],
             )
         no_sources = method.preview_writer_request({"sources": [], "records": []})
@@ -437,7 +620,7 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         )
         with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
             method.decode_proposal(
-                {"action": "rewrite", "target": "r1", "units": []}, view["mapping"]
+                {"action": "rewrite", "target": "r1", "clauses": []}, view["mapping"]
             )
         retained = {
             "text": "User reports quiet reminders.",
@@ -446,14 +629,22 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             "assertion": {"keep": "h1"},
         }
         copied = method.decode_proposal(
-            {"action": "rewrite", "target": "r1", "units": [retained]}, view["mapping"]
+            clause_proposal(
+                {"action": "rewrite", "target": "r1", "units": [retained]},
+                conditioned=method.conditioned,
+            ),
+            view["mapping"],
         )
         assert copied["_edit_metadata"]["unit_assertions"][0]["role"] == "user"
         retained["text"] = "Assistant infers quiet reminders."
         retained["evidence"] = ["e1"]
         with pytest.raises(FunctionalRejection, match="CHANGED_ASSERTION"):
             method.decode_proposal(
-                {"action": "rewrite", "target": "r1", "units": [retained]}, view["mapping"]
+                clause_proposal(
+                    {"action": "rewrite", "target": "r1", "units": [retained]},
+                    conditioned=method.conditioned,
+                ),
+                view["mapping"],
             )
         withdrawal = method.decode_proposal(
             {"action": "retract_record", "target": "r1", "evidence": ["e1"]}, view["mapping"]

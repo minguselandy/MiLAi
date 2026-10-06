@@ -1,7 +1,7 @@
 {
-  "status": "ORIGINAL44_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES_GLOBAL36_NOT_STARTED",
-  "observed_at": "2026-10-06T10:58:17+08:00",
-  "previous_report_commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
+  "status": "MODE80_REVIEWED_NEW_BOUND_CLAUSES_SOURCE_DELIVERED_NOT_RUN",
+  "observed_at": "2026-10-06T11:19:23+08:00",
+  "previous_report_commit": "8870bc894b7af3bd117d9c851fcf87868f5c57cc",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,13 +24,16 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "IMPLEMENTATION_IN_PROGRESS",
+    "status": "SOURCE_DELIVERED_AFFECTED_CHECKS_PASSED_NOT_MODEL_RUN",
     "included_in_this_publication": false,
-    "stable_source_delivered": false,
-    "checks_completed_at_snapshot": false,
+    "stable_source_delivered": true,
+    "checks_completed_at_snapshot": true,
     "actual_model_calls": 0,
     "description": "Explicit clause-to-condition bindings and actual-graph grouped Writer view; equal conditioned contract for B2/M and qualified plain clauses for B0/B1",
     "frozen_2335ea9_source_unchanged": true,
+    "source_owner_checks_passed": 145,
+    "Root_checks_passed": 295,
+    "detail_manifest": "milai-edit-post-b0-bound-clauses-development-20261006.json",
     "candidate_selected": false,
     "prefix_admitted": false,
     "source_commit": null
@@ -296,21 +299,22 @@
     "unsupported_assistant_strengthening_B1_M_promoted_to_user_report": true
   },
   "publication_checks": {
-    "json_counts_costs_source_and_prompt_usage": "PASS",
-    "local_links": "PASS",
+    "affected_tests_passed": 440,
+    "source_owner_tests": 145,
+    "Root_tests": 295,
+    "ruff_seven_files": "PASS",
+    "strict_mypy_four_method_sources": "PASS",
+    "default_off_instructions_schemas_unchanged": 24,
+    "package_and_tools_boundaries": "PASS",
     "dependency_boundary": {
       "status": "PASS",
-      "tracked_paths": 6435,
+      "tracked_paths": 6436,
       "findings": 0
     },
     "diff": "PASS",
-    "runtime_tests": "NOT_RERUN_FOR_REPORT_ONLY_CHANGE",
-    "schema_API_permissions_Canonical_changed": false,
-    "rollback_reference": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
-    "method_sources_changed": false,
-    "driver_change": "NONE_REPORT_ONLY",
-    "new_report_ci": "RECORDED_SEPARATELY_IN_PR",
-    "source_changes_in_working_tree_excluded": true
+    "local_links": "PASS",
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Lab_opt_in_Writer_proposal_contract_changed": true
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -384,7 +388,7 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 44,
+  "model_calls_since_previous_report": 36,
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -404,10 +408,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 36170,
+    "generation_requests": 36206,
     "generation": {
-      "charged_tokens": 138745491,
-      "known_tokens": 138693789,
+      "charged_tokens": 138908851,
+      "known_tokens": 138857149,
       "unknown_usage": 2
     },
     "embedding": {
@@ -417,27 +421,41 @@
     }
   },
   "model_mode_diagnostic": {
-    "status": "ORIGINAL44_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES_GLOBAL36_NOT_STARTED",
+    "status": "COMPLETED80_ROOT_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES",
     "source_commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
     "config_version": "milai-edit-post-b0-i2-thinking-mode-diagnostic-v1",
     "declared_generation_calls": 80,
-    "actual_generation_calls": 44,
-    "Writer_calls": 24,
-    "Reader_calls": 20,
+    "actual_generation_calls": 80,
+    "Writer_calls": 44,
+    "Reader_calls": 36,
     "Judge_calls": 0,
-    "known_tokens": 184643,
+    "known_tokens": 348003,
     "finish_reasons": {
-      "stop": 39,
-      "length": 5
+      "stop": 71,
+      "length": 9
     },
     "candidate_selected": false,
     "prefix_admitted": false,
     "detail_manifest": "milai-edit-post-b0-model-mode-results-20261006.json",
     "global_condition_branch": {
-      "status": "PREPARED_NOT_STARTED",
+      "status": "COMPLETED36_ROOT_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES",
       "declared_generation_calls": 36,
-      "actual_generation_calls": 0,
-      "not_cancelled": true
+      "actual_generation_calls": 36,
+      "known_tokens": 163360,
+      "finish_reasons": {
+        "stop": 32,
+        "length": 4
+      },
+      "proposal_receipts": {
+        "committed": 16
+      },
+      "M_actual_add_exception": 1,
+      "M_actual_remove_exception": 1,
+      "M_initial_formation_length": true,
+      "M_prior_shared_conditions_missing_not_credited_as_replacement": true,
+      "M_global_arrangement_Reader_complete_as_reported": true,
+      "M_final_Reader_arrangement_complete": false,
+      "new_common_conditions_saved_as_separate_content_record": true
     }
   },
   "historical_first_post_b0_r3_and_first_repair": {
@@ -478,5 +496,13 @@
     "new_model_calls_for_declared_real_rechecks": "132 calls in prior 8ed7826 nonthinking snapshot, not current thinking calls",
     "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot",
     "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately"
+  },
+  "new_representation_development": {
+    "status": "PREDECLARED_NOT_RUN",
+    "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
+    "declared_generation_calls": 80,
+    "actual_generation_calls": 0,
+    "model_enable_thinking": false,
+    "detail_manifest": "milai-edit-post-b0-bound-clauses-development-20261006.json"
   }
 }

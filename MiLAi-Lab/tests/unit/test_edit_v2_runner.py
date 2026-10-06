@@ -263,8 +263,9 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
             envelope = {
                 "creates": [
                     {"action": "create", "matter": matter,
-                     "units": [{"text": text, "role": "content", "evidence": [evidence],
-                                "assertion": assertion}]}
+                     "clauses": [{"text": text, "evidence": [evidence],
+                                  "assertion": assertion,
+                                  **({"conditions": []} if arm in {"B2", "M"} else {})}]}
                     for matter, text in (("Project schedule", "Project schedule Monday"),
                                          ("Tea preference", "Tea preference jasmine"))
                 ],
@@ -272,13 +273,14 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
             }
         else:
             record = next(r for r in packet["records"]
-                          if "Monday" in r["units"][0]["text"])
-            unit = record["units"][0]
+                          if "Monday" in r["clauses"][0]["text"])
+            unit = record["clauses"][0]
             assert record["matter"] == "Project schedule"
             if arm in {"B0", "B2"}:
-                change = {"action": "rewrite", "units": [
-                    {"text": "Project schedule Thursday", "role": "content",
-                     "evidence": [evidence], "assertion": assertion}
+                change = {"action": "rewrite", "clauses": [
+                    {"text": "Project schedule Thursday",
+                     "evidence": [evidence], "assertion": assertion,
+                     **({"conditions": []} if arm == "B2" else {})}
                 ]}
             else:
                 change = {"action": "edit", "edits": [

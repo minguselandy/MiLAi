@@ -1,0 +1,78 @@
+{
+  "status": "PREDECLARED_BOUND_CLAUSES_DEVELOPMENT_NOT_RUN",
+  "declared_at": "2026-10-06T03:13:10.086507+00:00",
+  "source_commit": "BIND_ACTUAL_GIT_VERSION_BEFORE_MODEL_HTTP",
+  "previous_report_commit": "8870bc894b7af3bd117d9c851fcf87868f5c57cc",
+  "comparison_nonthinking_method_source": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+  "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
+  "interface": "I2",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "single_Qwen_family": true,
+  "model_enable_thinking": false,
+  "unchanged_model_parameters": {
+    "temperature": 0,
+    "max_tokens": 8192,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "retrieval_limit": 10,
+    "working_sets": false
+  },
+  "all_five_existing_opt_in_features": true,
+  "new_feature_flags": 0,
+  "change": "Shared opt-in clause contract and explicit own-condition versus relation-binding supports; Writer groups only actual existing graph edges",
+  "B2_M_same_formation_representation": true,
+  "B0_B1_equivalent_qualified_plain_clauses": true,
+  "low_level_M_same_formation_representation": true,
+  "schema_decoder_origin_CAS_permissions_not_weakened": true,
+  "default_off_instructions_and_schemas_unchanged_combinations": 24,
+  "no_inferred_orphan_binding": true,
+  "no_omitted_full_rewrite_body_backfill": true,
+  "Reader_and_scorer_unchanged": true,
+  "branches": [
+    {
+      "variant": "original",
+      "inputs": "milai-edit-v2-r3-development-behavior.json",
+      "declared_generation_calls": 44,
+      "Writer_calls": 24,
+      "Reader_calls": 20
+    },
+    {
+      "variant": "global",
+      "inputs": "milai-edit-v2-r3-development-global-condition.json",
+      "declared_generation_calls": 36,
+      "Writer_calls": 20,
+      "Reader_calls": 16
+    }
+  ],
+  "declared_generation_calls": 80,
+  "actual_generation_calls": 0,
+  "one_exposed_source": true,
+  "own_empty_banks_per_arm_and_branch": true,
+  "no_ideal_state_injection": true,
+  "Root_review_between_branches": true,
+  "no_retry_or_truncation_repair": true,
+  "new_unknown_stops": true,
+  "source_controls_not_admitted_by_this_declaration": true,
+  "prefix_or_reserved_work_not_admitted_by_this_declaration": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "affected_checks": {
+    "source_owner_existing_memory_and_SDK_tests_passed": 145,
+    "Root_runner_development_and_normal_Host_tests_passed": 295,
+    "Root_total_distinct_test_cases": 440,
+    "Root_ruff_seven_changed_files": "PASS",
+    "Root_strict_mypy_four_method_sources": "PASS",
+    "Root_default_off_instruction_schema_pairs": 24,
+    "Root_AST_only_feature_instruction_changed": true,
+    "B2_M_low_level_M_formation_schema_equal": true
+  },
+  "daily_finite_check_per_activated_plan_7_2": true,
+  "Full_CI_required_before_prefix_candidate_merge": true,
+  "product_status": "NO_GO"
+}

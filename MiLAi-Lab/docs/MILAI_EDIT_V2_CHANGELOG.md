@@ -1,5 +1,20 @@
 # MiLAi-Edit v2 跟进记录
 
+2026-10-06 11:15:35 Asia/Shanghai，完成限定表示修改，尚无新版本模型调用。开启已有五项功能时，
+create/rewrite 使用 clauses，B2/M 显式声明条件自身依据与关系绑定依据；共同条件
+只声明一次，其他规则显式 reuse，override 指向生成 clause。B0/B1 保持完整限定
+文本。Writer 按实际旧关系分组，未连接条件保留 unresolved，不自动补边或补回全量
+重写遗漏。存储、Reader、评分器和实际 r/u/e/h、支持、CAS/权限未改，默认关闭
+路径保留原合同。没有新增开关或提示警告。
+
+145 源码/SDK 检查与 Root 295 运行器/开发/普通 Host 检查通过；Ruff 七文件、
+strict mypy 四方法源、24 份实际默认说明/schema 比较及 B2/M/低层 M 形成 schema
+相同比较通过，package/tools 边界通过。原44/global36非思考复核已预声明、实际0，
+源码/配置/自身CI待绑定；按计划7.2执行有限真实轨迹，Full仍在候选/前缀/合并前要求。
+这些机械结果不证明语义恢复。冻结2335ea9思考两分支现已完成80次/348,003 token、
+71 stop/9 length；Root 阅读44事件/36回答并核对全部usage/账本。M 两次例外增加/
+撤销生效，形成与最终读取仍失败。原进程退出、锁释放，来源与配置分开。
+
 2026-10-06 10:58:17 Asia/Shanghai，按用户要求总结并发布最新状态，新增模型调用 0。
 冻结 `2335ea9` 原生思考模式原分支已完成 44/80 次、184,643 known token，
 24 Writer/20 Reader/0 Judge、39 stop/5 length，无新 unknown 或 embedding。

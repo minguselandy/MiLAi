@@ -18,6 +18,7 @@ from pydantic import ValidationError
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
+from milai_lab.memory.edit_units import clause_proposal
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, reference_key
 from milai_lab.memory.service import MemoryService
@@ -58,17 +59,20 @@ NEXT_FEATURES = EditFeatures(True, True, True, True, True)
 
 
 def next_sdk_create():
-    return {
-        "action": "create",
-        "matter": "User's reminder sound",
-        "units": [
-            {
-                "text": "User reports quiet reminders.",
-                "evidence": ["e1"],
-                "assertion": {"source": "e1", "kind": "reported"},
-            }
-        ],
-    }
+    return clause_proposal(
+        {
+            "action": "create",
+            "matter": "User's reminder sound",
+            "units": [
+                {
+                    "text": "User reports quiet reminders.",
+                    "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                }
+            ],
+        },
+        conditioned=True,
+    )
 
 
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
@@ -84,12 +88,14 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
             assert "save_memory" in catalog and "update_memory" not in catalog
             raw = catalog["save_memory"].tool_call_schema
             assert "matter" in json.dumps(raw)
-            assert raw["properties"]["proposal"]["properties"]["units"]["items"]["properties"][
+            assert raw["properties"]["proposal"]["properties"]["clauses"]["items"]["properties"][
                 "evidence"
             ]["items"]["enum"] == [e["id"] for e in context["writer_packet"]["evidence"]]
             before_world = app.world.snapshot()
             wrapper = app.call_wrapper(memory.service, "s", "u")
             args = {"proposal": next_sdk_create(), "scope": {"project": "gallery"}}
+            if not memory.conditioned:
+                args["proposal"]["clauses"][0].pop("conditions")
             response = invoke(memory, "save_memory", args, "next-save", wrapper=wrapper)
             receipt = json.loads(response.content)
             assert receipt["ok"] and receipt["effect"] == "memory_only"
@@ -124,7 +130,7 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
                 invoke(
                     memory,
                     "update_memory",
-                    {"proposal": proposal},
+                    {"proposal": clause_proposal(proposal, conditioned=memory.conditioned)},
                     "next-update",
                     "u2",
                     app.call_wrapper(memory.service, "s", "u2"),
@@ -212,7 +218,7 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
             memory.service.capture_user("s", "u", "Remember my quiet reminders.")
             proposal = next_sdk_create()
             if invalid:
-                proposal["units"][0]["evidence"] = ["e99"]
+                proposal["clauses"][0]["evidence"] = ["e99"]
             model = ScriptModel(
                 bound=[],
                 responses=[
@@ -259,6 +265,10 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
             assert "update_memory" not in first_catalog
             assert '"enum"' in json.dumps(first_catalog["save_memory"])
             assert '"e1"' in json.dumps(first_catalog["save_memory"])
+            clause_schema = first_catalog["save_memory"]["function"]["parameters"]["properties"][
+                "proposal"
+            ]["properties"]["clauses"]["items"]["properties"]
+            assert "binding" in clause_schema["conditions"]["items"]["oneOf"][0]["properties"]
             result = next(
                 msg
                 for msg in final["messages"]

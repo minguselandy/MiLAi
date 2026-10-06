@@ -17,6 +17,7 @@ from milai_lab.memory.edit_units import (
     OPERATION_INSTRUCTIONS,
     EditProposal,
     apply_local,
+    clause_proposal,
     form_state,
     issue_evidence,
     new_id,
@@ -257,10 +258,11 @@ class EditMemory:
             )
         if self.arm in {"B0", "B2"}:
             instruction += (
-                "Rewrite the WHOLE selected matter, generating its complete nonempty target units "
-                "and relations, including retained exact text/support/attribution. No hidden body "
-                "is filled in. retract_record is a separate entire-record withdrawal with new "
-                "actual e evidence and no replacement body. No local edits are available. "
+                "Rewrite the WHOLE selected matter, generating its complete nonempty target "
+                "clauses and bindings, including retained exact text/support/attribution. "
+                "No hidden body is filled in. retract_record is a separate entire-record "
+                "withdrawal with new actual e evidence and no replacement body. "
+                "No local edits are available. "
             )
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
@@ -283,11 +285,14 @@ class EditMemory:
             )
         if self.conditioned:
             instruction += (
-                "Use content/condition and one-layer modifies/overrides; "
-                "relation indexes point into the generated complete units. "
+                "Each content clause explicitly lists conditions with their own support and a "
+                "binding with its separate relation support. A reuse integer references an earlier "
+                "condition declaration in this response; an override target indexes generated "
+                "clauses. Existing views use actual u aliases for shared-condition reuse and "
+                "override targets. Unresolved old conditions remain unresolved. "
             )
         else:
-            instruction += "Use plain content units and express their conditions in text. "
+            instruction += "Use plain clauses and express their conditions in the complete text. "
         if self.features.single_record_changes:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
@@ -377,6 +382,7 @@ class EditMemory:
             }
 
         def envelope(proposal: dict[str, Any], *, created: bool) -> dict[str, Any]:
+            proposal = clause_proposal(proposal, conditioned=self.conditioned)
             if self.features.single_record_changes:
                 return {
                     "creates": [proposal] if created else [],

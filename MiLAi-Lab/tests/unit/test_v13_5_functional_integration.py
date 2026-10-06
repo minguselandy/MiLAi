@@ -242,8 +242,8 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
             schemas = {t["function"]["name"]: t["function"]["parameters"] for t in wire["tools"]}
             assert "update_memory" not in schemas
             proposal_schema = schemas["save_memory"]["properties"]["proposal"]
-            unit_schema = proposal_schema["properties"]["units"]["items"]
-            assert unit_schema["properties"]["evidence"]["items"]["enum"] == [
+            clause_schema = proposal_schema["properties"]["clauses"]["items"]
+            assert clause_schema["properties"]["evidence"]["items"]["enum"] == [
                 e["id"] for e in packet["evidence"]
             ]
             assert "matter" in schemas["save_memory"]["properties"]["proposal"]["required"]
@@ -252,9 +252,10 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
             assert source["role"] == "user" and source["occurred_at"] == "2030-02-04T09:00:00Z"
             return native_call("save_memory", "next-save", proposal={
                 "action": "create", "matter": "User's local marker",
-                "units": [{"text": "User reports the local marker is blue.", "role": "content",
-                           "evidence": [evidence],
-                           "assertion": {"source": evidence, "kind": "reported"}}],
+                "clauses": [{"text": "User reports the local marker is blue.",
+                             "evidence": [evidence],
+                             "assertion": {"source": evidence, "kind": "reported"},
+                             **({"conditions": []} if arm in {"B2", "M"} else {})}],
             })
         assert ordinal == 3
         assert actual_tool_receipt(wire)["status"] == "committed"

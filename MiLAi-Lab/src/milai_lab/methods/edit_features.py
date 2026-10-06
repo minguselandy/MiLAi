@@ -6,7 +6,7 @@ import copy
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from milai_lab.memory.edit_units import writer_proposal_schema
+from milai_lab.memory.edit_units import compile_clause_proposal, writer_proposal_schema
 from milai_lab.memory.functional_state import FunctionalRejection
 
 
@@ -243,6 +243,89 @@ def feature_proposal_schema(
                                 v for v in assertion["oneOf"] if "source" in v["properties"]
                             )
                         item["required"].append("assertion")
+    for variant in variants:
+        fields = variant["properties"]
+        if "units" not in fields:
+            continue
+        unit = fields.pop("units")
+        clause = copy.deepcopy(unit["items"])
+        clause["properties"].pop("role")
+        fields["clauses"] = {**unit, "items": clause}
+        variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
+        if arm not in {"B2", "M"}:
+            continue
+        relation = fields.pop("relations")["items"]
+        binding = _object(
+            {
+                key: value
+                for key, value in relation["properties"].items()
+                if key not in {"source", "target", "relation_type"}
+            },
+            ["evidence"],
+        )
+        condition = copy.deepcopy(clause)
+        condition["properties"]["binding"] = copy.deepcopy(binding)
+        condition["required"].append("binding")
+        clause["properties"]["conditions"] = {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    condition,
+                    _object(
+                        {
+                            "reuse": {"type": "integer", "minimum": 0},
+                            "binding": copy.deepcopy(binding),
+                        },
+                        ["reuse", "binding"],
+                    ),
+                ]
+            },
+        }
+        clause["required"].append("conditions")
+        clause["properties"]["overrides"] = {
+            "type": "array",
+            "items": _object(
+                {
+                    "target": {"type": "integer", "minimum": 0},
+                    **copy.deepcopy(binding["properties"]),
+                },
+                ["target", "evidence"],
+            ),
+        }
+        if fields["action"]["const"] == "rewrite":
+            orphan_support = []
+            for alias in refs["h"]:
+                support = mapping["support"][alias]
+                selected = mapping["units"].get(support.get("unit"))
+                if selected is None or selected["role"] != "condition":
+                    continue
+                state = mapping["records"][selected["record"]]["edit_state"]
+                if not any(
+                    edge["relation_type"] == "modifies"
+                    and edge["source_unit"] == selected["unit_id"]
+                    for edge in state["relations"]
+                ):
+                    orphan_support.append(alias)
+            orphan = copy.deepcopy(condition)
+            orphan["properties"].pop("binding")
+            orphan["required"].remove("binding")
+            orphan["properties"]["evidence"]["maxItems"] = 0
+            orphan["properties"]["keep_support"] = {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 1,
+                "items": reference("h", orphan_support),
+            }
+            orphan["required"].append("keep_support")
+            if features.source_metadata:
+                orphan["properties"]["assertion"] = _object(
+                    {"keep": reference("h", orphan_support)}, ["keep"]
+                )
+            fields["unresolved_conditions"] = {
+                "type": "array",
+                "items": orphan,
+                **({"maxItems": 0} if not orphan_support else {}),
+            }
     return (
         schema if variants else {"type": "object", "properties": {}, "additionalProperties": False}
     )
@@ -295,7 +378,7 @@ def compile_semantic_operations(
     proposal: dict[str, Any], mapping: dict[str, Any]
 ) -> dict[str, Any]:
     """Structural compilation only. The model chooses meaning and applicability."""
-    result = copy.deepcopy(proposal)
+    result = compile_clause_proposal(proposal)
     if result["action"] == "retract_record":
         return {
             "action": "rewrite",

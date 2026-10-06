@@ -1,21 +1,27 @@
 # MiLAi Lab 当前状态
 
-更新：**2026-10-06 10:58:17 Asia/Shanghai**。继续 I2、B0/B1/B2/M 和现有 Qwen3.6 家族。
-最新固定 `2335ea9` 的思考模式原分支完成 **44 次/184,643 known token**，39 stop/
-5 length；共同条件分支 **0/36，未启动**。M 实际增加/撤销例外并保留已存在的一般
-规则，但初始形成截断、旧限定缺失、最终 Reader 不完整，尚无可用候选或方法优势。
-四组空查询正确返回空维护并保持实际状态、版本和支持。**Product NO_GO。**
+更新：**2026-10-06 11:20:34 Asia/Shanghai**。I2、B0/B1/B2/M、单一 Qwen3.6 不变。
+新条件绑定源码已交付：已有功能开启时采用 clause/condition 的明确支持绑定，
+Writer 按实际关系分组，B2/M 共享条件合同，B0/B1 完整限定文本。145 源码/SDK
+与 Root 295 运行器/普通 Host 检查通过，默认关闭说明/schema 24 份保持一致；
+新版本真实复核 **0/80**，仍需普通 Git 源码/配置/自身 CI 绑定和实际空库轨迹。
+没有前缀准入或最终候选，**Product NO_GO**。
 
-此前 `8ed7826` 非思考复核/来源控制 132 次/236,165 token 的失败全部保留。
-新表示的显式条件绑定与分组视图正在实施，源码未稳定、检查未完成，未纳入本次报告。
-旧 `4357d46` B0 277/277、B1 115/277 完整边界收尾、B2/M 未开始；当前无模型队列
-运行。剩余完整历史、原生/漂移、保留用户、外部任务和 Host 功能未完成，完整计划
-仍在执行。发布新增模型调用 0；PR85 保持 draft、未合并。
+冻结 `2335ea9` 思考模式诊断完成两分支 **80 次/348,003 known token**，71 stop/
+9 length。M 两次实际增加/撤销例外并保留已有一般规则；两次初始形成均截断，
+最终 Reader 仍不完整，不能计缺失旧条件保持成功。四组空查询正确，完整失败保留。
+无新 unknown/embedding，进程退出、账本稳定、串行锁释放，当前无模型队列运行。
+之前 `8ed7826` 非思考 132 次/236,165 token 与旧 `4357d46` 队列原样保留：
+B0 277/277、B1 115/277 收尾、B2/M 未开始。剩余完整计划仍在执行。
 
-`2335ea9` 自身 Fast/Full 均已成功（Full 21/21）；此前 `8ed7826` 自身 Fast/Full 成功。
-新报告自身 CI 单独核对。当前结果见 [v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md)、
-[状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json)、
-[44 次模式诊断聚合](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json)及
+此源码改变 Lab 可选 Writer 提案合同，Product Schema/API/权限/Canonical、存储、
+Reader、评分器未改。报告/实验身份分开，新源码自身 CI 在 PR85 单独核对；日常
+有限检查按计划7.2，Full仍须在前缀/候选/合并前成功。PR85 draft、未合并。
+
+[v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md) ·
+[状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json) ·
+[80 次模式结果](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json) ·
+[新表示复核声明](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json) ·
 [复现入口](MILAI_EDIT_REPRODUCTION.md)。v1 M 已 FAILED 收口，历史快照不代表等待跑完。
 
 ## 2026-10-05 v1 历史快照

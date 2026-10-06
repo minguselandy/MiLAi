@@ -5,6 +5,33 @@ Current v2 execution is described in
 below retain their historical configuration and results. v1 M ended FAILED
 after a Reader disconnect; it is not an active queue awaiting completion.
 
+## Bound-clause development source (prepared, not model-run)
+
+The five existing opt-in features now expose create/rewrite as clauses: conditioned
+B2/M clauses declare condition bodies, separate binding supports and explicit
+shared reuse/override targets; plain B0/B1 clauses contain full qualified text.
+The Writer's old-state view groups actual existing edges only. Storage, Reader,
+scorer, reference/origin/CAS checks and default-off contracts stay unchanged.
+No full-rewrite omissions or orphan links are filled in.
+
+145 existing source/SDK tests and 295 Root runner/normal-Host tests pass, along
+with Ruff, strict method mypy, 24 actual default-off instruction/schema pairs and
+identical B2/M/low-level-M formation schemas. The finite original44/global36
+[declaration](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json)
+is actual0: freeze ordinary source/config and record own CI before new HTTP.
+The prepared configuration is milai-edit-post-b0-i2-bound-clauses-v1, matching
+8ed7826's nonthinking/temp0/output8192/budgets and common I2/five enabled features.
+Use the existing public next-development config as the parameter base; Root's
+run binding records the final ordinary version/config without modifying old runs.
+
+The separate frozen2335ea9 thinking diagnostic is now fully closed:80calls,
+348003known tokens,71stop/9length, no new unknown or embedding. Both M formations
+fail length; add/remove each applies twice but final Reader remains incomplete.
+Root reviewed all44event rows/36answers. The next source has no real result yet.
+These are different source/config cohorts, never one method score table.
+
+The following original44 checkpoint remains the historical pre-global snapshot.
+
 ## Latest model-mode checkpoint (2026-10-06 10:58:17 Asia/Shanghai)
 
 Frozen Git source `2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e` follows the configured thinking mode

@@ -1,6 +1,6 @@
 {
-  "status": "ORIGINAL44_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES_GLOBAL36_NOT_STARTED",
-  "observed_at": "2026-10-06T10:58:17+08:00",
+  "status": "COMPLETED80_ROOT_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES",
+  "observed_at": "2026-10-06T11:19:23+08:00",
   "source_commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
   "unchanged_writer_method_source": "8ed7826b845e2d019a40c7534e92ea792f435f03",
   "config_version": "milai-edit-post-b0-i2-thinking-mode-diagnostic-v1",
@@ -23,63 +23,63 @@
   "vendor_recommended_sampling_profile_not_adopted": true,
   "no_claim_about_vendor_optimal_thinking_configuration": true,
   "declared_generation_calls": 80,
-  "actual_generation_calls": 44,
-  "Writer_calls": 24,
-  "Reader_calls": 20,
+  "actual_generation_calls": 80,
+  "Writer_calls": 44,
+  "Reader_calls": 36,
   "Judge_calls": 0,
-  "known_tokens": 184643,
-  "prompt_tokens": 76249,
-  "completion_tokens_including_reasoning": 108394,
+  "known_tokens": 348003,
+  "prompt_tokens": 142051,
+  "completion_tokens_including_reasoning": 205952,
   "reasoning_counted_once_in_provider_usage": true,
-  "responses_with_native_reasoning_field": 44,
-  "request_response_pairs": 44,
-  "projected_prompt_usage_matches": 44,
+  "responses_with_native_reasoning_field": 80,
+  "request_response_pairs": 80,
+  "projected_prompt_usage_matches": 80,
   "finish_reasons": {
-    "stop": 39,
-    "length": 5
+    "stop": 71,
+    "length": 9
   },
   "proposal_receipts": {
-    "committed": 13,
+    "committed": 29,
     "rejected": 1,
     "no_change": 1
   },
   "receipt_counts_are_not_a_partition_of_Writer_calls": true,
   "legitimate_empty_maintenance_envelopes": 4,
-  "known_length_failed_generations": 5,
+  "known_length_failed_generations": 9,
   "rejected_maintenance_events": 1,
-  "events_with_unprocessed_gaps": 6,
+  "events_with_unprocessed_gaps": 10,
   "arms": {
     "B0": {
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "prompt_tokens": 15485,
-      "completion_tokens": 30186,
-      "known_tokens": 45671,
-      "length_responses": 2
+      "Writer_calls": 11,
+      "Reader_calls": 9,
+      "prompt_tokens": 28483,
+      "completion_tokens": 52916,
+      "known_tokens": 81399,
+      "length_responses": 3
     },
     "B1": {
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "prompt_tokens": 16821,
-      "completion_tokens": 25411,
-      "known_tokens": 42232,
-      "length_responses": 1
+      "Writer_calls": 11,
+      "Reader_calls": 9,
+      "prompt_tokens": 30540,
+      "completion_tokens": 50905,
+      "known_tokens": 81445,
+      "length_responses": 2
     },
     "B2": {
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "prompt_tokens": 24459,
-      "completion_tokens": 25335,
-      "known_tokens": 49794,
-      "length_responses": 1
+      "Writer_calls": 11,
+      "Reader_calls": 9,
+      "prompt_tokens": 44973,
+      "completion_tokens": 50352,
+      "known_tokens": 95325,
+      "length_responses": 2
     },
     "M": {
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "prompt_tokens": 19484,
-      "completion_tokens": 27462,
-      "known_tokens": 46946,
-      "length_responses": 1
+      "Writer_calls": 11,
+      "Reader_calls": 9,
+      "prompt_tokens": 38055,
+      "completion_tokens": 51779,
+      "known_tokens": 89834,
+      "length_responses": 2
     }
   },
   "length_failures": [
@@ -88,25 +88,53 @@
       "event_id": "exact_reaffirmation",
       "completion_tokens": 8192,
       "final_content_characters": 0,
-      "committed": false
+      "committed": false,
+      "branch": "original"
     },
     {
       "arm": "B0",
       "event_id": "withdraw_night_exception",
       "completion_tokens": 8192,
       "final_content_characters": 0,
-      "committed": false
+      "committed": false,
+      "branch": "original"
     },
     {
       "arm": "B1",
       "event_id": "withdraw_night_exception",
       "completion_tokens": 8192,
       "final_content_characters": 0,
-      "committed": false
+      "committed": false,
+      "branch": "original"
     },
     {
       "arm": "B2",
       "event_id": "night_scope",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false,
+      "branch": "original"
+    },
+    {
+      "arm": "M",
+      "event_id": "form_general",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false,
+      "branch": "original"
+    },
+    {
+      "arm": "B2",
+      "event_id": "global_start_and_holiday_change",
+      "branch": "global",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "B0",
+      "event_id": "form_general",
+      "branch": "global",
       "completion_tokens": 8192,
       "final_content_characters": 0,
       "committed": false
@@ -114,47 +142,57 @@
     {
       "arm": "M",
       "event_id": "form_general",
+      "branch": "global",
+      "completion_tokens": 8192,
+      "final_content_characters": 0,
+      "committed": false
+    },
+    {
+      "arm": "B1",
+      "event_id": "night_scope",
+      "branch": "global",
       "completion_tokens": 8192,
       "final_content_characters": 0,
       "committed": false
     }
   ],
   "global_condition_branch": {
-    "status": "PREPARED_NOT_STARTED",
+    "status": "COMPLETED36_ROOT_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES",
     "declared_generation_calls": 36,
-    "actual_generation_calls": 0,
-    "not_cancelled": true
+    "actual_generation_calls": 36,
+    "known_tokens": 163360,
+    "finish_reasons": {
+      "stop": 32,
+      "length": 4
+    },
+    "proposal_receipts": {
+      "committed": 16
+    },
+    "M_actual_add_exception": 1,
+    "M_actual_remove_exception": 1,
+    "M_initial_formation_length": true,
+    "M_prior_shared_conditions_missing_not_credited_as_replacement": true,
+    "M_global_arrangement_Reader_complete_as_reported": true,
+    "M_final_Reader_arrangement_complete": false,
+    "new_common_conditions_saved_as_separate_content_record": true
   },
   "new_thinking_source_controls": {
     "actual_generation_calls": 0,
     "not_admitted": true
   },
   "Root_review": {
-    "actual_envelopes_receipts_before_after_rows_read": 24,
-    "Reader_answers_read": 20,
+    "actual_envelopes_receipts_before_after_rows_read": 44,
+    "Reader_answers_read": 36,
     "independent_Judge": false,
     "official_benchmark_score": false,
-    "all_four_query_envelopes_empty": true,
-    "all_four_query_state_versions_support_unchanged": true,
-    "M_add_exception_attempted_and_applied": 1,
-    "M_remove_exception_attempted_and_applied": 1,
-    "M_exception_has_modifies_and_overrides_relations": true,
-    "M_general_frequency_present_before_scope": true,
-    "M_general_frequency_preserved_after_scope": true,
-    "M_general_frequency_preserved_after_withdrawal": true,
-    "M_initial_formation_failed_length": true,
-    "M_initial_shared_conditions_present_before_scope": false,
-    "M_unrestated_shared_condition_preservation_success": null,
-    "absent_targets_not_credited_as_preservation": true,
-    "M_withdrawal_Reader_complete": false,
-    "M_reaffirmation_restores_conditions_with_links": true,
-    "M_final_Reader_scope_answer_complete": false,
-    "B0_B1_scoped_update_lost_explicit_general_frequency_and_old_limits": true,
-    "B2_frequency_update_rejection": "EDIT_RELATION_SUPPORT_BINDING_INVALID",
-    "B2_scope_update_failed_length": true,
-    "B2_no_change_withdrawal_has_no_actual_exception_target": true,
-    "B2_missing_exception_not_credited_as_successful_withdrawal": true,
-    "all_four_final_complete_arrangement_answers": false
+    "M_add_exception_attempted_and_applied": 2,
+    "M_remove_exception_attempted_and_applied": 2,
+    "both_M_initial_formations_failed_length": true,
+    "M_general_frequency_present_then_preserved_in_both_branches": true,
+    "M_missing_old_shared_conditions_not_credited_as_preservation": true,
+    "all_four_original_query_envelopes_empty_and_exact_state_unchanged": true,
+    "both_branches_all_four_final_Reader_arrangements_incomplete": true,
+    "branch_specific_findings_kept_separate": true
   },
   "matched_nonthinking_original44": {
     "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
@@ -179,10 +217,10 @@
       }
     },
     "end": {
-      "generation_requests": 36170,
+      "generation_requests": 36206,
       "generation": {
-        "charged_tokens": 138745491,
-        "known_tokens": 138693789,
+        "charged_tokens": 138908851,
+        "known_tokens": 138857149,
         "unknown_usage": 2
       },
       "embedding": {
@@ -199,7 +237,20 @@
     "new_embedding_tokens": 0,
     "ledger_stable_at_publication_review": true,
     "http_lease_free": true,
-    "original_process_exited": true
+    "original_process_exited": true,
+    "original_end": {
+      "generation_requests": 36170,
+      "generation": {
+        "charged_tokens": 138745491,
+        "known_tokens": 138693789,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    }
   },
   "source_ci": {
     "commit": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e",
@@ -232,13 +283,16 @@
   "prefix_admitted": false,
   "product_status": "NO_GO",
   "next_representation_change": {
-    "status": "IMPLEMENTATION_IN_PROGRESS",
-    "included_in_this_publication": false,
-    "stable_source_delivered": false,
-    "checks_completed_at_snapshot": false,
+    "status": "SOURCE_DELIVERED_AFFECTED_CHECKS_PASSED_NOT_MODEL_RUN",
+    "included_in_this_publication": true,
+    "stable_source_delivered": true,
+    "checks_completed_at_snapshot": true,
     "actual_model_calls": 0,
     "description": "Explicit clause-to-condition bindings and actual-graph grouped Writer view; equal conditioned contract for B2/M and qualified plain clauses for B0/B1",
-    "frozen_2335ea9_source_unchanged": true
+    "frozen_2335ea9_source_unchanged": true,
+    "source_owner_checks_passed": 145,
+    "Root_checks_passed": 295,
+    "detail_manifest": "milai-edit-post-b0-bound-clauses-development-20261006.json"
   },
   "stage_C_long_smoke": {
     "status": "PRESELECTED_NOT_ADMITTED",
@@ -262,12 +316,73 @@
     "local_links": "PASS",
     "dependency_boundary": {
       "status": "PASS",
-      "tracked_paths": 6435,
+      "tracked_paths": 6436,
       "findings": 0
     },
     "diff": "PASS",
-    "runtime_tests": "NOT_RERUN_FOR_REPORT_ONLY_CHANGE",
+    "runtime_tests": "145_SOURCE_OWNER_AND295_ROOT_AFFECTED_CHECKS_PASS",
     "schema_API_permissions_Canonical_changed": false,
     "rollback_reference": "2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e"
+  },
+  "original_lifecycle_branch": {
+    "actual_generation_calls": 44,
+    "Writer_calls": 24,
+    "Reader_calls": 20,
+    "known_tokens": 184643,
+    "finish_reasons": {
+      "stop": 39,
+      "length": 5
+    },
+    "proposal_receipts": {
+      "committed": 13,
+      "rejected": 1,
+      "no_change": 1
+    },
+    "accounting_end": {
+      "generation_requests": 36170,
+      "generation": {
+        "charged_tokens": 138745491,
+        "known_tokens": 138693789,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "Root_review": {
+      "actual_envelopes_receipts_before_after_rows_read": 24,
+      "Reader_answers_read": 20,
+      "independent_Judge": false,
+      "official_benchmark_score": false,
+      "all_four_query_envelopes_empty": true,
+      "all_four_query_state_versions_support_unchanged": true,
+      "M_add_exception_attempted_and_applied": 1,
+      "M_remove_exception_attempted_and_applied": 1,
+      "M_exception_has_modifies_and_overrides_relations": true,
+      "M_general_frequency_present_before_scope": true,
+      "M_general_frequency_preserved_after_scope": true,
+      "M_general_frequency_preserved_after_withdrawal": true,
+      "M_initial_formation_failed_length": true,
+      "M_initial_shared_conditions_present_before_scope": false,
+      "M_unrestated_shared_condition_preservation_success": null,
+      "absent_targets_not_credited_as_preservation": true,
+      "M_withdrawal_Reader_complete": false,
+      "M_reaffirmation_restores_conditions_with_links": true,
+      "M_final_Reader_scope_answer_complete": false,
+      "B0_B1_scoped_update_lost_explicit_general_frequency_and_old_limits": true,
+      "B2_frequency_update_rejection": "EDIT_RELATION_SUPPORT_BINDING_INVALID",
+      "B2_scope_update_failed_length": true,
+      "B2_no_change_withdrawal_has_no_actual_exception_target": true,
+      "B2_missing_exception_not_credited_as_successful_withdrawal": true,
+      "all_four_final_complete_arrangement_answers": false
+    }
+  },
+  "matched_nonthinking_two_branches80": {
+    "generation_calls": 80,
+    "known_tokens": 153106,
+    "thinking_to_nonthinking_known_token_ratio": 2.273,
+    "not_a_four_user_method_comparison": true
   }
 }

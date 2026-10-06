@@ -434,6 +434,164 @@ OPERATION_INSTRUCTIONS = {
 }
 
 
+def _group_clauses(
+    units: list[dict[str, Any]], relations: list[dict[str, Any]], *, view: bool
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Group only explicit edges; declare each shared condition body once."""
+    keys = [unit["id"] if view else index for index, unit in enumerate(units)]
+    by_key = dict(zip(keys, units, strict=True))
+    contents = [key for key in keys if by_key[key].get("role", "content") == "content"]
+    declared: dict[Any, int] = {}
+    clauses = []
+    for key in contents:
+        clause = copy.deepcopy(by_key[key])
+        clause.pop("role", None)
+        if view or any(unit.get("role") == "condition" for unit in units) or relations:
+            clause["conditions"] = []
+        for relation in relations:
+            if relation["target"] != key or relation["relation_type"] != "modifies":
+                continue
+            source = relation["source"]
+            binding = {
+                k: copy.deepcopy(v)
+                for k, v in relation.items()
+                if k not in {"source", "target", "relation_type"}
+            }
+            if source in declared:
+                condition = {"reuse": source if view else declared[source]}
+            else:
+                declared[source] = len(declared)
+                condition = copy.deepcopy(by_key[source])
+                condition.pop("role", None)
+            condition["binding"] = binding
+            clause.setdefault("conditions", []).append(condition)
+        overrides = []
+        for relation in relations:
+            if relation["source"] == key and relation["relation_type"] == "overrides":
+                overrides.append(
+                    {
+                        "target": relation["target"]
+                        if view
+                        else contents.index(relation["target"]),
+                        **{
+                            k: copy.deepcopy(v)
+                            for k, v in relation.items()
+                            if k not in {"source", "target", "relation_type"}
+                        },
+                    }
+                )
+        if overrides:
+            clause["overrides"] = overrides
+        clauses.append(clause)
+    unresolved = [
+        {k: copy.deepcopy(v) for k, v in by_key[key].items() if k != "role"}
+        for key in keys
+        if by_key[key].get("role") == "condition" and key not in declared
+    ]
+    return clauses, unresolved
+
+
+def clause_proposal(proposal: dict[str, Any], *, conditioned: bool) -> dict[str, Any]:
+    """Serialize an explicit flat proposal into the opt-in clause contract."""
+    result = copy.deepcopy(proposal)
+    if result.get("action") not in {"create", "rewrite"} or "units" not in result:
+        return result
+    clauses, unresolved = _group_clauses(
+        result.pop("units"), result.pop("relations", []), view=False
+    )
+    if conditioned:
+        for clause in clauses:
+            clause.setdefault("conditions", [])
+    else:
+        for clause in clauses:
+            clause.pop("conditions", None)
+    result["clauses"] = clauses
+    if unresolved:
+        result["unresolved_conditions"] = unresolved
+    return result
+
+
+def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
+    """Expand declared bindings, without selecting supports or reading old bodies."""
+    result = copy.deepcopy(proposal)
+    if "clauses" not in result:
+        return result
+    clauses = result.pop("clauses")
+    units: list[dict[str, Any]] = []
+    relations: list[dict[str, Any]] = []
+    declarations: list[int] = []
+    content_indexes: list[int] = []
+    relation_groups: list[tuple[list[dict[str, Any]], list[dict[str, Any]]]] = []
+    for clause in clauses:
+        declared_links: list[dict[str, Any]] = []
+        reused_links: list[dict[str, Any]] = []
+        content_index = len(units)
+        content_indexes.append(content_index)
+        units.append(
+            {k: v for k, v in clause.items() if k not in {"conditions", "overrides"}}
+            | {"role": "content"}
+        )
+        for condition in clause.get("conditions", []):
+            if "reuse" in condition:
+                reuse = condition["reuse"]
+                if type(reuse) is not int or not 0 <= reuse < len(declarations):
+                    raise FunctionalRejection("EDIT_DECLARED_CONDITION_UNAVAILABLE")
+                source_index = declarations[reuse]
+            else:
+                source_index = len(units)
+                declarations.append(source_index)
+                units.append(
+                    {k: v for k, v in condition.items() if k != "binding"} | {"role": "condition"}
+                )
+            link = {
+                "source": source_index,
+                "target": content_index,
+                "relation_type": "modifies",
+                **condition["binding"],
+            }
+            (reused_links if "reuse" in condition else declared_links).append(link)
+        relation_groups.append((declared_links, reused_links))
+    for clause, source_index, (declared_links, reused_links) in zip(
+        clauses, content_indexes, relation_groups, strict=True
+    ):
+        relations.extend(declared_links)
+        for override in clause.get("overrides", []):
+            target = override["target"]
+            if type(target) is not int or not 0 <= target < len(content_indexes):
+                raise FunctionalRejection("EDIT_FORMATION_RELATION_INDEX_INVALID")
+            relations.append(
+                {
+                    "source": source_index,
+                    "target": content_indexes[target],
+                    "relation_type": "overrides",
+                    **{k: v for k, v in override.items() if k != "target"},
+                }
+            )
+        relations.extend(reused_links)
+    units.extend({**unit, "role": "condition"} for unit in result.pop("unresolved_conditions", []))
+    result.update(units=units, relations=relations)
+    return result
+
+
+def clause_record_view(record: dict[str, Any]) -> None:
+    """Replace flat public state with actual grouped rules, preserving aliases."""
+    state = record.get("edit_state", record)
+    if not state or "units" not in state:
+        return
+    units = state.pop("units")
+    if any(unit.get("role") == "legacy_unstructured" for unit in units):
+        state["clauses"] = units
+        state.pop("relations", None)
+        return
+    clauses, unresolved = _group_clauses(units, state.pop("relations", []), view=True)
+    if record["representation"] == "plain_v1":
+        for clause in clauses:
+            clause.pop("conditions", None)
+    state["clauses"] = clauses
+    if unresolved:
+        state["unresolved_conditions"] = unresolved
+
+
 def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, Any]:
     """Thin legal proposals: no model-issued persistent IDs or revisions."""
     if arm not in ARM_OPERATIONS:
@@ -736,6 +894,9 @@ def writer_projection(
                 {key: value for key, value in by_source[evidence["source"]].items() if key != "id"}
             )
             evidence["body_delivered"] = True
+    if features and any(features.values()):
+        for public_record in public_records:
+            clause_record_view(public_record)
     draft = {
         "arm": arm,
         "interface_version": profile,
