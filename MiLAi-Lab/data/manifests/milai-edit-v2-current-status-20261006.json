@@ -1,7 +1,7 @@
 {
-  "status": "COMPLETED9_ROOT_REVIEWED_FINAL_READER_FAILURES_LATER132_NOT_STARTED",
-  "observed_at": "2026-10-06T05:09:08.886402+00:00",
-  "previous_report_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+  "status": "STOPPED_ORIGINAL30_ROOT_REVIEWED_39_TOTAL_ATTEMPTS_102_NOT_ATTEMPTED",
+  "observed_at": "2026-10-06T05:44:49.870900+00:00",
+  "previous_report_commit": "8c80445c68c1023854da3c397211f05741239c61",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,17 +24,17 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "SOURCE7CC_ROOT464_CHECKED_READER9_REVIEWED_FAILED_NOT_CANDIDATE",
+    "status": "SOURCE7CC_ROOT464_CHECKED_ORIGINAL30_STOPPED_NOT_CANDIDATE",
     "description": "common bounded old support body redelivery and one retained-state/source-history Reader contract",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
     "source_identity": "ordinary Git commit7cc1363 frozen archive/config bound before first HTTP",
     "included_in_this_publication": false,
-    "actual_model_calls": 9,
+    "actual_model_calls": 39,
     "stable_source_delivered": true,
     "Root_checks_passed": 464,
     "candidate_selected": false,
     "prefix_admitted": false,
-    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-original-results-20261006.json",
     "source_already_published_in_7cc": true
   },
   "native_and_drift": {
@@ -47,10 +47,10 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "review actual scope/history information and bounded old-source delivery; no further warning/example iteration",
-      "pending same7cc own-empty original44/global36 and source controls16/20/16 remain declared; Root review before continuation, no hot method/config changes",
-      "after usable common behavior and own Full, fresh four-user prefix and preselected first-user full history",
-      "complete full plan and deferred scope, same-M ablation and fixed tighter budget before reserved users"
+      "bind separate common timeout300 transport configuration before only the102 unattempted distinct requests; never replay unknown Writer; preserve180second outcome",
+      "continue original14 from actual B2 state and own-empty M, then Root review; global36 and source controls52 from own empty banks with Root review between phases",
+      "investigate actual retained general role, necessary cancellation history and source fidelity without more warning/example iteration or silent semantic/system protocol mixing",
+      "after usable common behavior and own Full, fresh four-user prefix and preselected first-user full history; complete full plan and deferred scopes including same-M ablation and fixed tighter budget before reserved users"
     ],
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
@@ -58,15 +58,15 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
-    "observed_at": "2026-10-06T05:06:43+00:00",
+    "commit": "8c80445c68c1023854da3c397211f05741239c61",
+    "observed_at": "2026-10-06T05:40:25+00:00",
     "Fast": {
-      "run_id": 37415897766,
+      "run_id": 37417295798,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37415897714,
+      "run_id": 37417295792,
       "status": "in_progress",
       "conclusion": null
     },
@@ -291,7 +291,7 @@
     "unsupported_assistant_strengthening_B1_M_promoted_to_user_report": true
   },
   "publication_checks": {
-    "status": "PASS_BOUNDED_SOURCE_AND_READER_ENGINEERING_CHECKS",
+    "status": "PASS_REPORT_JSON_COUNTS_COST_LEDGER_80_LINKS_BOUNDARY_DIFF",
     "Root_SDK_Host_tests": 341,
     "old_source_expected_wrapper_failure": "PASS",
     "Ruff": "PASS",
@@ -300,7 +300,7 @@
     "tools_boundary": "PASS",
     "repo_boundary": {
       "status": "PASS",
-      "tracked_paths": 6440,
+      "tracked_paths": 6443,
       "findings": 0
     },
     "frozen_497_native_archive_unchanged": true,
@@ -308,10 +308,10 @@
     "Product_schema_API_permissions_Canonical_changed": false,
     "JSON_counters_scopes": "PASS",
     "staged_diff": "PASS_REPORT_SCOPE_ONLY",
-    "paired_HTTP_prompt_usage_matches": 9,
+    "paired_HTTP_prompt_usage_matches": 29,
     "actual_old_state_mapping_matches": 44,
-    "actual_M_global_graph_lifecycle": "prior frozen497 bounded Writer lifecycle, unchanged; new source7cc Writer0",
-    "local_links_checked": 73,
+    "actual_M_global_graph_lifecycle": "Prior frozen497 bounded Writer lifecycle unchanged; new7cc original M unattempted",
+    "local_links_checked": 80,
     "Root_source_SDK_Host_tests": 412,
     "Root_runner_external_driver_tests": 52,
     "total_distinct_affected_checks": 464,
@@ -320,15 +320,17 @@
     "old_actual_writer_packets_schemas_messages_unchanged": 44,
     "new_model_calls": 0,
     "Lab_optional_delivery_API_and_Reader_payload_changed": false,
-    "new_model_calls_scope": "publication-only; Reader9 completed before summary",
-    "new_real_Reader_calls_since_7cc": 9,
+    "new_model_calls_scope": "Publication-only; original30 stopped and Root-reviewed before summary",
+    "new_real_Reader_calls_since_7cc": 22,
     "actual_old_question_date_memories_matches": 9,
     "root_boundary_check": "PASS",
     "source_tests_repeated_for_documentation": false,
     "new_Lab_source_test_or_config_changes": false,
-    "root_boundary_tracked_paths": 6442,
+    "root_boundary_tracked_paths": 6443,
     "root_boundary_findings": 0,
-    "prior_source7cc_changed_Lab_optional_delivery_API_and_Reader_payload": true
+    "prior_source7cc_changed_Lab_optional_delivery_API_and_Reader_payload": true,
+    "new_real_Writer_attempts_since_7cc": 17,
+    "original_SQLite_unknown_effect_verified_no_commit": true
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -402,8 +404,8 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 9,
-  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+  "model_calls_since_previous_report": 30,
+  "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-common-source-reader-original-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
       "generation_calls": 80,
@@ -422,11 +424,11 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 36375,
+    "generation_requests": 36405,
     "generation": {
-      "charged_tokens": 139477394,
-      "known_tokens": 139425692,
-      "unknown_usage": 2
+      "charged_tokens": 139669320,
+      "known_tokens": 139557605,
+      "unknown_usage": 3
     },
     "embedding": {
       "charged_tokens": 964645,
@@ -511,7 +513,7 @@
     "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; completed native80 is reported separately",
     "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately",
     "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
-    "model_calls_since_previous_report": "9 Reader diagnostic calls after source7cc; old dated predeclaredactual0 remains unchanged"
+    "model_calls_since_previous_report": "Current30 original attempts since8c report; Reader9 historical manifest unchanged."
   },
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
@@ -526,8 +528,8 @@
     "global_actual_generation_calls": 36
   },
   "post_b0_development_generation_costs_all_sources_through_snapshot": {
-    "generation_calls": 525,
-    "known_tokens": 1361953,
+    "generation_calls": 555,
+    "known_tokens": 1493866,
     "nonthinking_three_prior_sources": {
       "generation_calls": 276,
       "known_tokens": 445407
@@ -552,11 +554,16 @@
     },
     "closed_reviewed_sources_only_no_live_queue": true,
     "common_source_reader_7cc1363": {
-      "generation_calls": 9,
-      "known_tokens": 22080,
-      "Writer_calls": 0,
-      "Reader_calls": 9
-    }
+      "generation_calls": 39,
+      "known_tokens": 153993,
+      "Writer_calls": 17,
+      "Reader_calls": 22,
+      "confirmed_responses": 38,
+      "Writer_confirmed_responses": 16,
+      "new_generation_unknown_usage": 1,
+      "conservative_unknown_charge_tokens": 60013
+    },
+    "generation_calls_are_attempts_not_all_confirmed": true
   },
   "native_capacity_configuration_calibration": {
     "status": "COMPLETED80_ROOT_REVIEWED_M_GLOBAL_WRITER_LIFECYCLE_POSITIVE_ORIGINAL_AND_FINAL_READER_FAILURES",
@@ -581,7 +588,7 @@
   "latest_checkpoint_document": "../../docs/MILAI_EDIT_CHECKPOINT_20261006.md",
   "current_method_source_ci": {
     "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
-    "observed_at": "2026-10-06T05:06:43+00:00",
+    "observed_at": "2026-10-06T05:40:25+00:00",
     "Fast": {
       "run_id": 37415897766,
       "status": "completed",
@@ -589,8 +596,9 @@
     },
     "Full": {
       "run_id": 37415897714,
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success",
+      "successful_jobs": 21
     },
     "does_not_establish_new_report_CI": true
   },
@@ -632,11 +640,11 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "closed Reader9 boundary after native80; exact live ledger, exited PID and free serial lease",
+  "continuous_accounting_snapshot_scope": "Original30 stopped, Root reviewed; actual live ledger matched, process exited and serial lease free. One new unknown generation charge retained, known no memory commit.",
   "bounded_old_support_redelivery_development": {
-    "status": "SOURCE7CC_ROOT464_CHECKED_WIRED_NO_REAL_WRITER_VALIDATION_YET",
+    "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
-    "actual_model_calls": 0,
+    "actual_model_calls": 17,
     "owner_reported_related_checks_passed": 148,
     "owner_Ruff_five_files": "PASS",
     "owner_strict_mypy_three_sources": "PASS",
@@ -650,54 +658,72 @@
     "Root_runner_external_driver_checks_passed": 52,
     "old_default_actual_Writer_requests_unchanged": 44,
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
-    "actual_model_calls_scope": "Writer/normal SDK delivery model validation only; separate common Reader diagnostic9 completed",
-    "actual_Writer_calls": 0,
-    "source_already_published_in_7cc": true
+    "actual_model_calls_scope": "Actual runner Writer17 attempts/16 responses; normal SDK model tasks still pending",
+    "actual_Writer_calls": 17,
+    "source_already_published_in_7cc": true,
+    "confirmed_Writer_responses": 16,
+    "old_body_HTTP_packets": 14,
+    "old_body_ranges": 24,
+    "old_body_token_occurrences": 284,
+    "exact_actual_support_body_role_time_matched": true,
+    "specific_h_only_legal_paraphrase_recovery_demonstrated": false
   },
   "common_Reader_material_view": {
-    "status": "SOURCE7CC_READER9_ROOT_REVIEWED_FINAL8_INCOMPLETE_M_CONTROL_WRONG_DATE",
+    "status": "SOURCE7CC_READER9_FAILURES_PLUS13_ORIGINAL_READERS_ROOT_REVIEWED",
     "same_prompt_for_milai_and_external_controls": true,
     "source_history_for_RawRAG": true,
     "retained_state_for_milai_summary_and_author_notes": true,
     "posthoc_answer_rewriter": false,
     "old_native80_outputs_unchanged": true,
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
-    "actual_generation_calls": 9,
-    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "actual_generation_calls": 22,
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-original-results-20261006.json",
     "Writer_calls": 0,
-    "complete_answer_control_passed": false
+    "complete_answer_control_passed": false,
+    "Reader9_historical_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json"
   },
   "common_source_reader_finite_recheck": {
-    "status": "COMPLETED9_ROOT_REVIEWED_FINAL_READER_FAILURES_LATER132_NOT_STARTED",
+    "status": "STOPPED_ORIGINAL30_ROOT_REVIEWED_39_TOTAL_ATTEMPTS_102_NOT_ATTEMPTED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
     "config_version": "milai-edit-post-b0-common-source-reader-v1",
     "predeclaration_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json",
     "declared_generation_calls_total": 141,
-    "actual_generation_calls": 9,
-    "Writer_calls": 0,
-    "Reader_calls": 9,
+    "actual_generation_calls": 39,
+    "Writer_calls": 17,
+    "Reader_calls": 22,
     "Judge_calls": 0,
-    "known_tokens": 22080,
+    "known_tokens": 153993,
     "finish_reasons": {
-      "stop": 9
+      "stop": 38
     },
     "remaining_predeclared_phases": [
       {
-        "phase": "existing_R3_own_empty_histories",
-        "declared_generation_calls": 80,
-        "actual_generation_calls": 0,
+        "phase": "original_unattempted_suffix",
+        "generation_calls": 14,
+        "Writer_calls": 7,
+        "Reader_calls": 7,
+        "status": "NOT_ATTEMPTED_NOT_CANCELLED",
+        "details": "B2 event4 Reader only; B2 event5 Writer/Reader; M all6 Writer/5 Reader from own empty bank. Unknown B2 event4 Writer is excluded, never replayed."
+      },
+      {
+        "phase": "global_condition_branch",
+        "generation_calls": 36,
         "status": "NOT_STARTED_NOT_CANCELLED"
       },
       {
-        "phase": "existing_source_attribution_controls",
-        "declared_generation_calls": 52,
-        "actual_generation_calls": 0,
+        "phase": "source_attribution_controls",
+        "generation_calls": 52,
+        "scenario_calls": [
+          16,
+          20,
+          16
+        ],
         "status": "NOT_STARTED_NOT_CANCELLED"
       }
     ],
     "candidate_selected": false,
     "prefix_admitted": false,
-    "detail_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json",
+    "detail_manifest": "milai-edit-post-b0-common-source-reader-original-results-20261006.json",
     "Root_final_answers_complete": {
       "original": {
         "B0": false,
@@ -713,6 +739,285 @@
       }
     },
     "M_middle_control_complete": false,
-    "new_Writer_redelivery_model_validation_completed": false
+    "new_Writer_redelivery_model_validation_completed": "PARTIAL_STOPPED30_ACTUAL_DELIVERY_AUDITED_SEMANTIC_FAILURES",
+    "confirmed_responses": 38,
+    "confirmed_Writer_responses": 16,
+    "new_generation_unknown_usage": 1,
+    "continuation_proposal": {
+      "status": "PLANNED_NOT_STARTED_NO_NEW_CONFIG_PUBLISHED",
+      "transport_timeout_seconds": 300,
+      "only_unattempted_distinct_requests": true,
+      "method_generation_Reader_scoring_unchanged": true,
+      "original_failed_run_preserved": true,
+      "own_actual_B2_state_readonly_backup_not_ideal_injection": true,
+      "M_and_future_branches_own_empty": true,
+      "fresh_transport_binding_required_before_HTTP": true,
+      "old_and_new_transport_outcomes_reported_separately": true
+    },
+    "Root_final_answers_complete_scope": "Historical Reader9 actual-state diagnostic. In new original branch B0/B1 final fail; B2/M final unattempted, null in current result."
+  },
+  "original30_stopped_recheck": {
+    "status": "STOPPED30_29_RESPONSES_ONE_GENERATION_UNKNOWN_ROOT_REVIEWED_NOT_REPLAYED",
+    "observed_at": "2026-10-06T05:44:49.870900+00:00",
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "config_version": "milai-edit-post-b0-common-source-reader-v1",
+    "interface": "I2",
+    "model_family": "Qwen3.6 only",
+    "predeclaration_manifest": "milai-edit-post-b0-common-source-reader-development-20261006.json",
+    "original_declared_generation_calls": 44,
+    "actual_generation_requests": 30,
+    "confirmed_responses": 29,
+    "confirmed_Writer_responses": 16,
+    "attempted_Writer_requests": 17,
+    "Reader_responses": 13,
+    "Judge_calls": 0,
+    "finish_reasons_confirmed_only": {
+      "stop": 29
+    },
+    "completed_event_rows": 16,
+    "arms": {
+      "B0": {
+        "attempted_requests": 11,
+        "confirmed_responses": 11,
+        "completed_events": 6,
+        "final_Reader_complete": false
+      },
+      "B1": {
+        "attempted_requests": 11,
+        "confirmed_responses": 11,
+        "completed_events": 6,
+        "final_Reader_complete": false
+      },
+      "B2": {
+        "attempted_requests": 8,
+        "confirmed_responses": 7,
+        "completed_events": 4,
+        "final_Reader_complete": null,
+        "final_Reader_status": "NOT_ATTEMPTED"
+      },
+      "M": {
+        "attempted_requests": 0,
+        "confirmed_responses": 0,
+        "completed_events": 0,
+        "final_Reader_complete": null,
+        "status": "NOT_STARTED_NOT_ZERO_SCORE"
+      }
+    },
+    "generation_configuration": {
+      "thinking": true,
+      "temperature": 1,
+      "max_tokens": 32768,
+      "context_tokens": 65536,
+      "current_source_tokens": 4096,
+      "current_plus_old_source_body_tokens": 8192,
+      "timeout_seconds": 180,
+      "unchanged_during_run": true
+    },
+    "tokens": {
+      "input": 53703,
+      "completion": 78210,
+      "known": 131913
+    },
+    "reasoning_in_completion_counted_once": true,
+    "unknown": {
+      "requests": 1,
+      "role": "Writer",
+      "arm": "B2",
+      "event_index": 4,
+      "event_kind": "query_without_new_facts",
+      "client_outcome": "ReadTimeout at180 seconds; no response or proposal",
+      "actual_tokens": null,
+      "conservative_charge_tokens": 60013,
+      "charge_is_not_actual_usage": true,
+      "charge_formula_independently_matched": true,
+      "semantic_commit_unknown": false,
+      "memory_commit": "KNOWN_NOT_COMMITTED",
+      "readonly_SQLite_current_equals_before": true,
+      "actual_revision": 3,
+      "proposal_absent": true,
+      "no_replay": true
+    },
+    "operation_receipts": {
+      "committed": 12,
+      "no_change": 1,
+      "rejected": 2
+    },
+    "empty_envelopes": 1,
+    "receipts_are_not_semantic_scores": true,
+    "old_source_delivery_audit": {
+      "Writer_packets_checked": 17,
+      "HTTP_packets_with_old_body": 14,
+      "old_ranges": 24,
+      "old_body_token_occurrences": 284,
+      "actual_selected_record_supports_only": true,
+      "exact_prior_source_body_role_time_matched": true,
+      "current_plus_old_body_and_complete_request_capacity_matched": true,
+      "old_source_delivery_does_not_prove_entailment": true,
+      "specific_legal_h_only_split_or_paraphrase_recovery_demonstrated": false,
+      "normal_SDK_real_model_task_validation_completed": false
+    },
+    "Root_review": {
+      "event_rows": 16,
+      "Reader_answers": 13,
+      "paired_HTTP_usage_responses": 29,
+      "all_request_projections": 30,
+      "actual_SQLite_unknown_effect_checked_readonly": true,
+      "all_Reader_states_unchanged": true,
+      "independent_Judge": false,
+      "complete_independent_database_audit": false
+    },
+    "semantic_findings": {
+      "ordinary_value_correction": "B0/B1/B2 preserve text of unmentioned start and holidays; M not attempted. B1 omits original qualifier support on compound replacement, separate provenance limitation.",
+      "B0_scope": "Commits only night4/daygeneral and loses explicit general3/start/holidays; withdrawal does not reconstruct them. Reaffirmation restores generic parameters later but final per-shift Reader incomplete.",
+      "B1_scope": "Compound text preserves general3, night4, limits; current source assertion reattributes whole compound.",
+      "B1_withdrawal": "Only old e3 frequency selected, omits current cancellation and deletes limits; rejection is not a wholly correct update falsely rejected. Reaffirmation retains stale night4, final Reader repeats it.",
+      "B2_scope": "Wrong old binding supports attached to new night clause; also omits explicit general3. Relation rejection is not wholly correct semantic update falsely rejected.",
+      "B2_withdrawal": "Night exception never formed. Rewrite keeps limits but replaces general3 with cancellation/generic wording, loses usable frequency.",
+      "Reader": "All13 actual answers read; final B0/B1 incomplete/wrong, B2 final and all M unrun, not zero.",
+      "h_only_legal_paraphrase": "Old actual support bodies really delivered but finite results do not yet demonstrate the specific old h-only split/paraphrase false rejection resolved."
+    },
+    "Reader_input_diagnosis": {
+      "status": "OFFLINE_DIAGNOSIS_NOT_NEW_MODEL_RESULT",
+      "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+      "actual_M_global_general_and_conditions_retained": true,
+      "general_role_rendering_lost_after_active_override_removal": true,
+      "latest_cancellation_source_and_actual_retracts_exist_in_store": true,
+      "Reader_receives_content_scope_revision_only": true,
+      "latest_cancellation_observation_not_delivered_to_Reader": true,
+      "causal_effect_of_fix_not_tested": true,
+      "no_source_enabled_system_results_silently_mixed_into_pure_semantic_protocol": true
+    },
+    "accounting_start": {
+      "generation_requests": 36375,
+      "generation": {
+        "charged_tokens": 139477394,
+        "known_tokens": 139425692,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "accounting_end": {
+      "generation_requests": 36405,
+      "generation": {
+        "charged_tokens": 139669320,
+        "known_tokens": 139557605,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "phase_charged_token_delta": 191926,
+    "new_generation_unknown_usage": 1,
+    "new_embedding_unknown_usage": 0,
+    "process_exited": true,
+    "serial_lease_free": true,
+    "backend_generation_idle_after_disconnect": true,
+    "source_own_ci_at_original_first_HTTP": {
+      "Fast": "success",
+      "Full": "in_progress",
+      "finite_daily_check_under_plan_7_2": true
+    },
+    "source_own_ci_latest": {
+      "commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+      "observed_at": "2026-10-06T05:40:25+00:00",
+      "Fast": {
+        "run_id": 37415897766,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37415897714,
+        "status": "completed",
+        "conclusion": "success",
+        "successful_jobs": 21
+      },
+      "does_not_establish_new_report_CI": true
+    },
+    "previous_report_ci": {
+      "commit": "8c80445c68c1023854da3c397211f05741239c61",
+      "observed_at": "2026-10-06T05:40:25+00:00",
+      "Fast": {
+        "run_id": 37417295798,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37417295792,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "does_not_establish_new_report_CI": true
+    },
+    "same7cc_total": {
+      "declared_requests": 141,
+      "attempted_requests": 39,
+      "confirmed_responses": 38,
+      "known_tokens": 153993,
+      "new_unknown_usage": 1,
+      "not_attempted_requests": 102,
+      "Reader9_manifest": "milai-edit-post-b0-common-source-reader-results-20261006.json"
+    },
+    "remaining_predeclared_phases": [
+      {
+        "phase": "original_unattempted_suffix",
+        "generation_calls": 14,
+        "Writer_calls": 7,
+        "Reader_calls": 7,
+        "status": "NOT_ATTEMPTED_NOT_CANCELLED",
+        "details": "B2 event4 Reader only; B2 event5 Writer/Reader; M all6 Writer/5 Reader from own empty bank. Unknown B2 event4 Writer is excluded, never replayed."
+      },
+      {
+        "phase": "global_condition_branch",
+        "generation_calls": 36,
+        "status": "NOT_STARTED_NOT_CANCELLED"
+      },
+      {
+        "phase": "source_attribution_controls",
+        "generation_calls": 52,
+        "scenario_calls": [
+          16,
+          20,
+          16
+        ],
+        "status": "NOT_STARTED_NOT_CANCELLED"
+      }
+    ],
+    "continuation_proposal": {
+      "status": "PLANNED_NOT_STARTED_NO_NEW_CONFIG_PUBLISHED",
+      "transport_timeout_seconds": 300,
+      "only_unattempted_distinct_requests": true,
+      "method_generation_Reader_scoring_unchanged": true,
+      "original_failed_run_preserved": true,
+      "own_actual_B2_state_readonly_backup_not_ideal_injection": true,
+      "M_and_future_branches_own_empty": true,
+      "fresh_transport_binding_required_before_HTTP": true,
+      "old_and_new_transport_outcomes_reported_separately": true
+    },
+    "candidate_selected": false,
+    "prefix_admitted": false,
+    "method_advantage_established": false,
+    "product_status": "NO_GO",
+    "new_model_calls_for_publication": 0,
+    "raw_gold_HTTP_reasoning_database_logs_published": false,
+    "original_results_predeclarations_configs_and_first_failures_preserved": true,
+    "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
+    "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
+  },
+  "publication_scope": {
+    "Lab_report_and_state_files": 7,
+    "new_model_calls": 0,
+    "source_tests_repeated": false,
+    "source_test_config_changes": false,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_workflow_changed": false,
+    "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61",
+    "historical_raw_results_and_predeclarations_unchanged": true
   }
 }

@@ -1,3 +1,40 @@
+# 2026-10-06 13:44:49 Asia/Shanghai: publish stopped original30 and current summary
+
+Latest user requests current situation summarized and submitted to GitHub. Publish
+seven Lab report/state files only; no new model HTTP/source/test/config changes.
+Frozen7cc original44 stopped at30 attempts,29stop,131913known,newunknown1. B2
+event4 Writer ReadTimeout180: no response/proposal, read-only actual SQLite current
+equals before, revision3, no event4 proposal. Known no memory commit; actual usage
+null, conservative charge60013, never replay. Root reviewed16events/13answers,
+29HTTP/usage/all30requests, actual selected old supports14packets/24ranges/284tokens.
+Delivery works, semantic scope/withdrawal/provenance still fail; M not started.
+Keep oldReader9 date/final failures and native497 bounded Writer positive intact.
+Source7cc ownFast/Full success,Full21jobs; reportCI separate. Ledger36405/
+139557605known/139669320charged/unknown3/embed0, process exited,lease free.
+141declared has39attempts/38responses and102unattempted: original14+global36+controls52.
+300second transport-only continuation is planned, not bound/published/started;
+no replay, ideal old card or same-config splicing. Root owns artifacts/HTTP/raw/
+evaluation/GitHub, no new delegation or owner edits. FullR0-R5/E0-E5/sixdeliverables
+and deferred scopes stay active; no candidate/prefix/holdout,PR85draft,ProductNO_GO.
+All lower dated blocks preserve historical snapshots, not current running claims.
+
+# 2026-10-06 13:15:52 CST: continue declared7cc original44 after Root Reader9 review
+
+Active full Post-B0 plan resumed. Previous turn closed/published Reader9 via8c80445,
+progress, not goal completion. Current authorized next step is predeclared own-empty
+original44 under exact7cc archive/config; process3884746 started. Global36 and
+source-controls52 remain declared/unstarted; Root review between phases. Reader9
+final8/control date failures remain intact, no further warnings or hotmethod/config
+changes. Shared old support body delivery is affected behavior needing real Writer
+validation per plan5.4. SourceFast success/Full in_progress before HTTP; Root464
+checks passed, finite daily trajectory allowed by7.2, Full before prefix/candidate/
+merge. Current public report snapshot predates this live run; do not call it closed.
+Root owns HTTP/data/accounting/semantic review/GitHub. No owner edits/model access.
+Firstattempt failure, unknown/no replay, actual old/current boundaries, h/origin/
+permissions/CAS preserved; no Product/Archive/workflow/deployment/family changes.
+Keep entire R0-R5/E0-E5/six deliverables/deferred scopes active. No candidate/holdout.
+All lower dated blocks are historical snapshots.
+
 # 2026-10-06 13:09:08 Asia/Shanghai: publish closed Reader9 and current experiment summary
 
 User asks for a current summary and GitHub submission. Publish seven Lab report/

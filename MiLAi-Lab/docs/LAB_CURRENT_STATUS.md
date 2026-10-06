@@ -1,5 +1,35 @@
 # MiLAi Lab 当前状态
 
+**2026-10-06 13:44:49 Asia/Shanghai：**冻结`7cc1363`原分支44次声明已在第30次停止：
+29响应全部stop，16 Writer/13 Reader，131,913 known（53,703 input+78,210 completion）。
+第30次是B2无新事实查询的Writer，180秒ReadTimeout、没有响应或提案。Root只读复核实际
+SQLite：current与发送前逐项相同、revision3、无本次proposal，确认记忆未提交。
+生成用量仍未知，actual=null，保守收费60,013 token，禁止重发；不是语义提交未知。
+
+Root复核16事件、13回答、29对HTTP/usage与全部30请求投影。14个HTTP实际携带24段旧
+支持正文，284 token occurrences；正文/角色/时间、实际选中支持、共同预算与完整容量均
+匹配。证明交付已发生，不证明语义支持正确或旧h-only合法改写问题已解决。
+B0范围变化丢一般频率/限定；B1普通更正保留限定文字却丢直接原支持，撤销又只选旧来源
+并删限定而被拒，重申后仍保留旧夜班例外；B2错用旧绑定支持而拒绝，随后丢一般频率。
+两次拒绝均不是完整正确更新遭误拒。M本分支未启动，不能计失败或零分。
+
+7cc合计39次尝试/38响应（包括Reader9），153,993 known；141声明中102仍未尝试：
+原分支剩14、共同分支36、来源控制52，未取消。拟仅为未尝试请求另声明300秒传输配置，
+冻结原180秒结果，不重发未知Writer、不拼接同配置分数；该配置尚未发布或启动。
+Reader旧状态离线诊断发现：撤销后一般规则标签消失，最新撤销观察未进入Reader；
+这是真实输入差异，补历史能否解决仍未验证，不将任意content都标为一般规则。
+
+源码7cc自身Fast/Full均success，Full21/21；此前报告8c自身Fast success、Full in_progress
+（13:40:25查询），本次报告CI另查。保留首次失败、旧终态/预声明/配置；本次无新HTTP、
+源码/测试/运行配置/Product/Archive/workflow改动。工程464项通过是既有结果，未重跑。
+账本36,405请求/139,557,605 known/139,669,320 charged，generation unknown由2增至3，
+embedding不变。进程退出、账本匹配、串行锁可获取，当前无队列。Post-B0累计555次尝试/
+1,493,866 known，只累计成本，不拼跨版本方法成绩。没有候选/前缀/优势，Product NO_GO；
+完整计划及延后范围继续，PR85 open/draft未合并。
+[当前总结](MILAI_EDIT_CHECKPOINT_20261006.md) ·
+[原分支30次结果](../data/manifests/milai-edit-post-b0-common-source-reader-original-results-20261006.json)。
+以下为各自日期历史快照。
+
 **2026-10-06 13:09:08 Asia/Shanghai：**源码`7cc1363`的9次实际旧状态Reader诊断已完成并经Root复核，
 9 stop、22,080 known token（3,578 input+18,502 completion），0 Writer/0 Judge。
 9对HTTP、原问题/日期/记忆、投影/usage及实际源码/配置一致，原native80结果未改。
