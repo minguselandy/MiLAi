@@ -1,5 +1,26 @@
 # MiLAi Lab 当前状态
 
+更新：**2026-10-06 10:20:45 Asia/Shanghai**。当前执行
+[MiLAi-Edit v2 跟进计划](MILAI_EDIT_V2_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md)及
+已激活的 Post-B0 计划 v1.0，保留 I2、B0/B1/B2/M
+和现有 Qwen3.6 家族。最新固定 `8ed7826` 完成 80 次生命周期复核和 52 次来源
+控制，共 132 次/236,165 已知 token，全部有响应、零截断、零新未知用量。
+普通更正和有限空查询改善；局部例外、撤销与助手断言归属仍失败。两次最小修正
+已用尽，后续分析实际输入和表示；尚无前缀准入、最终候选或方法优势结论。
+
+旧 `4357d46` B0 完成 277/277 维护与评估；B1 在 115/277 完整会话边界收尾，
+B2/M 未开始。当前无模型队列运行，剩余完整历史、原生/漂移、保留用户、外部任务
+及 Host 功能仍未完成，完整计划未暂停或收口。**Product NO_GO**。本次只发布
+已有结果，没有改方法源码或启动新模型调用；PR85 仍为 draft、未合并。
+
+当前结果与限制见 [v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md)、
+[当前状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json)、
+[132 次真实结果聚合](../data/manifests/milai-edit-post-b0-final-repair-and-source-controls-20261006.json)
+及 [复现入口](MILAI_EDIT_REPRODUCTION.md)。源码提交 CI 和报告提交 CI 分开记录。
+v1 M 已以 Reader 连接中断结束；旧 v1 快照不表示当前仍在等待完成。
+
+## 2026-10-05 v1 历史快照
+
 更新：2026-10-05。当前执行 [MiLAi-Edit 原计划](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md)，
 从 PR82 main `fc1c6c9` 隔离开发；按用户指令仅用现有 Qwen3.6 家族。
 08:22 的发布快照中 B0/B1 各完成 277 个会话，B2 完成 46/277，M 未开始。

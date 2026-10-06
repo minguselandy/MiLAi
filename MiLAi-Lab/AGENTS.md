@@ -1,38 +1,42 @@
-# 2026-10-06 first minimal repair reviewed; final common example repair
+# 2026-10-06 final minimal repair and source controls reviewed; publication
 
-Root completed frozen 4c90f15's declared 20-call formation/value/query review and
-44-call original forward history, 97069 known tokens, no new unknown usage.
-B2/M now form a holiday condition/link; M retains old limits on same-scope change.
-Text groups still lose limits; B2's kept relation support requires actual old-unit
-correspondence, and its first rejections remain. All arms lose a general rule on
-scoped exception; M still chooses change_value and retracts a valid condition on
-withdrawal. Limited query controls pass but damaged-state B1 query overwrites.
-No prefix or candidate is admitted. Keep all 144 new-version development calls
-and earlier cohorts, exact source/config and actual results separately.
-Old B1 resumed segment closed at verified 115/115, 1666 paired requests/responses,
-102 resumed calls/808360 tokens. Its total received cost is 7691805, excluding new
-R3 intervals. Old PID exited, actual state matched, ledger unchanged and HTTP lease
-free. Remaining old full/native/drift scope is deferred, not removed or passed.
+Frozen 8ed7826 completed original44/global36 and three source controls16/20/16:
+132 real calls, 236165 known tokens, 72 Writer/60 Reader/0 Judge. All responses
+received, stop only, no new unknown usage or embeddings. Root reviewed actual
+operations, before/after and Reader behavior and matched paired HTTP/cost/ledger.
+Ordinary corrections retain unmentioned limits and original-branch queries leave
+exact state unchanged; all scoped updates lose general rule, withdrawal remains
+incomplete. M original formation has conditions without relations; linked global
+formation still does not yield add_exception. Global change_condition is attempted
+but two change_value on the same content target reject the whole transaction;
+withdrawal retracts valid shared conditions. No prefix or candidate is admitted.
 
-The existing source owner completed the second, final minimal opt-in example repair:
-four-arm equivalent retained-limit correction plus generic exception/shared cutoff/
-withdrawal lifecycle examples. Affected mechanical checks passed; real model calls
-remain zero. No schema/decoder/operator changes or more warnings.
-Root's existing short-history driver preserves actual user/assistant roles and
-unknown occurrence times and supports several Reader-only questions; no evaluator
-material enters Writer. Three source-control scenarios totaling 52 calls are
-prepared, not admitted. Plan section 7.2 applies to this daily repair: bind actual source/config, affected
-checks then finite real exposed histories; record actual own-CI status. Existing
-full CI remains required before prefix/candidate/merge. This supersedes the older
-20-call-only exception for the next affected finite 80-call two-branch recheck.
-If two minimal repairs still lack critical capability, stop prompt iteration and
-analyze actual input/representation. Do not consume reserved users or pick a final
-candidate on mechanical evidence. Root owns serial HTTP/data/evaluation/GitHub;
-source owner has no gold, future questions, raw/reserved access. Goal remains active,
-full R0–R5/E0–E5 and six deliverables continue, single Qwen3.6, Product NO_GO.
-The latest user requests a current summary and GitHub submission. Complete that
-publication with current source/driver checks and exact remote-head verification;
-no additional model calls are needed for publication and no merge is authorized.
+All 28 source-control Writer projections preserve actual roles and known times.
+Accurate restatement and later-confirmed final answers pass, but intermediate
+attribution damage persists. Unsupported assistant strengthening becomes a user
+report in B1/M despite assistant assertion metadata; Readers also misattribute it.
+B0/B2 rejected unchanged rewrites leave correct old facts but do not complete
+maintenance. Root's 20/24 final answers are constructed-control observations,
+not official scoring or independent Judge results.
+
+Two minimal unsuccessful repairs are exhausted. Stop further warning/example
+iteration; analyze actual input/representation, condition binding, per-unit edit
+structure and assertion expression. No grouped-state-view, new binding contract
+or model-mode diagnostic has been implemented/admitted. Do not treat missing old
+targets or rejected unchanged state as successful preservation. Keep exact old
+and new source/config/output/accounting and all first attempts separately.
+Old 4357d46 remains B0 277/277, B1 clean boundary115/277, B2/M unstarted. Remaining
+old full/native/drift scope is deferred, not passed or removed; no model queue is
+currently live. Full R0–R5/E0–E5 and all six deliverables remain active, including
+same-M ablation/tighter budget before reserved users. Single Qwen3.6, Product NO_GO.
+
+The latest user requests a current summary and GitHub submission. Publish existing
+results with report/aggregate consistency and boundaries, update PR85 and verify
+remote head. No extra model calls are needed for publication; no merge authorized.
+Method/driver source is unchanged by this report. 8ed7826 Fast has succeeded; Full
+is still in progress at the recorded snapshot. Record report CI separately; Full
+still precedes prefix/candidate/merge. Root owns all HTTP/data/evaluation/GitHub;
+the existing source owner receives no gold, future questions, raw/reserved data.
 
 # 2026-10-06 Post-B0 execution priority
 

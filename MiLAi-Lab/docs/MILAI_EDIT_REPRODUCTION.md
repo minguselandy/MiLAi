@@ -5,6 +5,33 @@ Current v2 execution is described in
 below retain their historical configuration and results. v1 M ended FAILED
 after a Reader disconnect; it is not an active queue awaiting completion.
 
+## Latest Post-B0 checkpoint (2026-10-06)
+
+The actual final minimal-example recheck and source controls both used ordinary
+Git source `8ed7826b845e2d019a40c7534e92ea792f435f03`, not the subsequent report
+commit. Configurations were `milai-edit-post-b0-i2-final-examples-8ed7826` and
+`milai-edit-post-b0-i2-source-controls-8ed7826`: I2, all five opt-in features,
+Qwen3.6-35B-A3B-FP8, temperature=0, enable_thinking=false, context=65536,
+max_tokens=8192, source_tokens=4096, retrieval_limit=10, working_sets=false.
+The original44/global36 and constructed source16/20/16 scenarios used separate
+own-empty-bank histories, no ideal starting cards and no Judge. All 132 calls
+returned stop, costing 236165 known tokens; raw inputs, HTTP and banks remain
+ignored. [The safe aggregate](../data/manifests/milai-edit-post-b0-final-repair-and-source-controls-20261006.json)
+records counts, costs, actual attempted/applied operations and limits.
+
+These are reviewed critical failures, not successful candidate admission.
+Ordinary preservation and limited empty-query controls improved; scoped updates
+still destroy the general rule, withdrawal fails, and unsupported assistant
+statements become user claims in B1/M. Two minimal repairs are exhausted; further
+warning/example iterations are not admitted. No model-mode comparison or new
+representation contract has run. The original runtime terminal's awaiting-review
+marker is an execution snapshot; the dated Root review supplies the later semantic
+conclusion. Reproduction never overwrites an old output or replays unknown calls.
+
+Old 4357d46 is closed B0=277/277, B1=115/277 at a verified complete boundary,
+B2/M unstarted; no model queue is currently live. Remaining original and new
+full-history/native/drift/held-out/external/Host work remains incomplete.
+
 ## Exposed v2 R3 development histories
 
 The public driver is `tools/run_edit_development_history.py`. The original six
@@ -59,13 +86,13 @@ the [original plan](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md). The baseline 
 PR82 `fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1`. Preserve all older worktrees,
 historical cohorts and their original results. New experiments use separate roots.
 
-## Next candidate: opt-in I2 contracts, not yet model validated
+## Opt-in I2 contracts: real development failures, no candidate selected
 
 `configs/milai-edit-v2-next-development.json` prepares the same four exposed users'
 first eight chronological sessions and all four own-empty-bank arms. The five
 `edit_features` booleans enable matter organization, semantic operations,
 packet-bound references, one change container per record, and source/assertion
-metadata. All default to false; the old `4357d46` source, configuration and live
+metadata. All default to false; the old `4357d46` source, configuration and saved
 results remain intact. These changes have no new algorithm name, model family,
 review agent, output repair or full-rewrite backfill.
 
