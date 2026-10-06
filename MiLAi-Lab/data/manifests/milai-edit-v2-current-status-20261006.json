@@ -1,6 +1,6 @@
 {
   "status": "STAGE_C_B0_CLOSED_B1_RUNNING_WITH_PRE_HTTP_CAPACITY_FAILURES_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T09:49:44.168203+00:00",
+  "observed_at": "2026-10-06T10:06:12.696558+00:00",
   "previous_report_commit": "26c0ba353276d96a053329d54629c571e19bcf73",
   "interface": "I2",
   "completed_session_checkpoints": {
@@ -982,15 +982,14 @@
   },
   "publication_scope": {
     "Lab_report_and_state_files": 6,
+    "source_commit_separate": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
     "new_model_calls_started": 0,
-    "new_model_calls_for_offline_analysis": 0,
     "existing_frozen_queue_continues_naturally": true,
-    "source_tests_repeated_for_summary": false,
-    "source_test_config_changes_committed": false,
-    "uncommitted_source_draft_files_preserved": 3,
+    "new_actual_source_validation_completed": true,
+    "source_draft_files_remaining": 0,
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
-    "rollback_reference": "26c0ba353276d96a053329d54629c571e19bcf73",
+    "rollback_reference": "0681e5ec410b2b25ad07a5b1d4eea320495c77d4",
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "transport300_continuation_declaration": {
@@ -1997,23 +1996,22 @@
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "current_publication_checks": {
-    "status": "PASS",
-    "files": 6,
-    "new_model_calls": 0,
-    "source_tests_repeated_for_summary": false,
-    "closed_first_B1_user_HTTP_usage_pairs_checked": 180,
-    "pre_HTTP_failures_are_not_empty_model_responses": true,
-    "uncommitted_source_draft_not_published_or_used_by_frozen_queue": true,
-    "closed_arm_ledger_still_excludes_live_B1": true,
-    "relative_links_checked": 111,
-    "JSON_counters_cost_scope": "PASS",
-    "historical_markdown_preserved": true,
-    "source_drafts_unchanged": true,
-    "repo_boundary": "PASS",
-    "tracked_paths": 6453,
+    "status": "PASS_OFFLINE_COUNTS_HISTORICAL_REPORTS_AND_LINKS",
+    "relative_links_checked": 114,
+    "actual_source_real_request_projections": 8,
+    "exact_all_arm_schema_expansions": 32,
+    "exact_default_off_message_controls": 24,
+    "runner_checks": 17,
+    "wiring_checks": 11,
+    "Ruff_files": 3,
+    "strict_mypy_source_files": 2,
+    "actual_model_calls": 0,
+    "boundary": "PASS",
+    "tracked_paths": 6454,
     "boundary_findings": 0,
-    "staged_diff": "PASS_SIX_LAB_DOC_STATE_SUMMARY_FILES_ONLY",
-    "sanitized_summary_only": "PASS"
+    "source_archive_Git_files_exact": 806,
+    "source_archive_ignored": true,
+    "staged_scope": "SIX_LAB_DECLARATION_REPORT_STATE_FILES_ONLY"
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -2692,6 +2690,185 @@
     }
   },
   "shared_prompt_choice_source_draft": {
+    "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_FINITE_REAL_RECHECK_PREPARED_NOT_ADMITTED_NOT_RUN",
+    "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "detail_manifest": "milai-edit-post-b0-schema-shared-choices-development-20261006.json",
+    "engineering": {
+      "runner_checks_passed": 17,
+      "wiring_checks_passed": 11,
+      "Ruff_files_passed": 3,
+      "strict_mypy_source_files_passed": 2
+    },
+    "offline_projection": {
+      "status": "CURRENT_SOURCE_PASS",
+      "sessions": [
+        {
+          "ordinal": 0,
+          "original_input_tokens": 3775,
+          "new_source_input_tokens": 3746,
+          "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 1,
+          "original_input_tokens": 9582,
+          "new_source_input_tokens": 8198,
+          "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 2,
+          "original_input_tokens": 23504,
+          "new_source_input_tokens": 15775,
+          "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 3,
+          "original_input_tokens": 37672,
+          "new_source_input_tokens": 22953,
+          "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 4,
+          "original_input_tokens": 34439,
+          "new_source_input_tokens": 21760,
+          "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 5,
+          "original_input_tokens": 28643,
+          "new_source_input_tokens": 19024,
+          "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 6,
+          "original_input_tokens": 28971,
+          "new_source_input_tokens": 19352,
+          "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        },
+        {
+          "ordinal": 7,
+          "original_input_tokens": 37039,
+          "new_source_input_tokens": 22320,
+          "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+          "fits_without_losing_data": true,
+          "schema_expands_exactly": true,
+          "API_generation_schema_unchanged": true
+        }
+      ],
+      "all_arm_exact_expansions": 32,
+      "default_off_exact_message_controls": 24,
+      "actual_model_calls": 0,
+      "bank_writes": 0,
+      "budget_or_lease_acquisitions": 0,
+      "all_arm_mapping_scope": "Schema mechanics on actual B1 mappings; not cross-arm actual states or performance."
+    },
+    "own_source_CI": {
+      "observed_at": "2026-10-06 10:06:46 UTC",
+      "Fast": {
+        "run_id": 37447258302,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "Full": {
+        "run_id": 37447258296,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "must_query_actual_status_before_HTTP": true
+    },
+    "finite_real_recheck": {
+      "status": "PREPARED_NOT_ADMITTED_NOT_RUN",
+      "arms": [
+        "B1"
+      ],
+      "development_user_position": 0,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "maintenance_sessions": 8,
+      "author_update_opportunities": 19,
+      "natural_QA_opportunities": 20,
+      "Writer_call_count": "Actual source batches and successful input admission; do not assume8 HTTP requests.",
+      "Judge_call_count": "Actual unmodified official scoring traversal; not a fixed denominator or extra memory reviewer.",
+      "initial_state": "OWN_EMPTY_BANK_NO_COPY_OR_IDEAL_STATE",
+      "same_model_resources_Reader_and_original_author_scoring_as_frozen_main": true,
+      "model": {
+        "name": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "enable_thinking": true,
+        "max_tokens": 32768,
+        "context_tokens": 65536,
+        "timeout": 300
+      },
+      "input_limit": 32256,
+      "source_tokens": 4096,
+      "source_body_tokens": 8192,
+      "working_sets": false,
+      "preserve_first_attempt_failures_and_invalid_labels": true,
+      "retry_or_truncated_JSON_repair": false,
+      "old_failed_ordinals_to_inspect": [
+        3,
+        4,
+        7
+      ],
+      "formation_and_empty_envelope_controls": [
+        0,
+        1,
+        2,
+        5,
+        6
+      ],
+      "questions": [
+        "Does the model correctly use the compact prompt contract while the original generation contract stays enforced?",
+        "Do actual own-history requests fit, including the old failure ordinals; how does new state growth affect capacity?",
+        "Do formation, updates, attribution, preservation and natural answers succeed or fail in the actual saved results?"
+      ],
+      "before_HTTP": [
+        "Existing7b82 serial queue has exited authoritatively and no unconfirmed effects are present; do not stop, restart or hot-edit it.",
+        "Bind published source, published declaration and immutable admitted configuration with actual own-source CI status.",
+        "Affected checks passed. Plan7.2 permits finite daily check while Full is pending; require Full success before full prefix/candidate/merge.",
+        "Use existing normal frozen driver and continuous ledger, one concurrent generation client; preserve every first attempt."
+      ],
+      "actual_model_calls": 0,
+      "candidate_selected": false,
+      "full_new_four_arm_prefix_admitted": false,
+      "limits": [
+        "Exposed first user only, same Qwen family, not independent confirmation.",
+        "B1-only finite repair check cannot establish four-arm method superiority.",
+        "New source results stay separate from7b82; do not replace old capacity failures or splice scores."
+      ]
+    },
+    "actual_model_calls": 0,
+    "default_off_and_generation_contract_unchanged": true
+  },
+  "historical_shared_prompt_choice_uncommitted_draft": {
     "status": "UNCOMMITTED_NOT_USED_BY_FROZEN_QUEUE_NOT_MODEL_VERIFIED",
     "files": [
       "src/milai_lab/methods/edit_features.py",
@@ -2786,5 +2963,20 @@
         }
       ]
     }
+  },
+  "latest_repair_source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+  "source_repair_does_not_change_frozen_running_source": true,
+  "historical_publication_scope_before_schema_repair_declaration": {
+    "Lab_report_and_state_files": 6,
+    "new_model_calls_started": 0,
+    "new_model_calls_for_offline_analysis": 0,
+    "existing_frozen_queue_continues_naturally": true,
+    "source_tests_repeated_for_summary": false,
+    "source_test_config_changes_committed": false,
+    "uncommitted_source_draft_files_preserved": 3,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_workflow_changed": false,
+    "rollback_reference": "26c0ba353276d96a053329d54629c571e19bcf73",
+    "historical_raw_results_and_predeclarations_unchanged": true
   }
 }

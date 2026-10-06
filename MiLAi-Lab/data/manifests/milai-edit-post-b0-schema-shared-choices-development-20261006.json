@@ -1,0 +1,213 @@
+{
+  "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_FINITE_REAL_RECHECK_PREPARED_NOT_ADMITTED_NOT_RUN",
+  "observed_at": "2026-10-06T10:06:12.696558+00:00",
+  "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+  "previous_source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-schema-shared-choices-affected-first-user-v1",
+  "interface": "I2",
+  "common_features_unchanged": {
+    "matter_organization": true,
+    "semantic_operations": true,
+    "bound_references": true,
+    "single_record_changes": true,
+    "source_metadata": true
+  },
+  "change": "Share identical repeated string enums through local definitions in the Writer explanatory schema; keep original expanded response_format schema, packet, mapping, system instructions and decoder.",
+  "scope": {
+    "default_off": "UNCHANGED",
+    "Product_Schema_API_permissions_Canonical": "UNCHANGED",
+    "SDK_generation_contract": "UNCHANGED",
+    "Reader_retrieval_scorer": "UNCHANGED",
+    "old_support_and_current_boundary": "UNCHANGED"
+  },
+  "engineering": {
+    "runner_checks_passed": 17,
+    "wiring_checks_passed": 11,
+    "Ruff_files_passed": 3,
+    "strict_mypy_source_files_passed": 2
+  },
+  "offline_projection": {
+    "status": "CURRENT_SOURCE_PASS",
+    "sessions": [
+      {
+        "ordinal": 0,
+        "original_input_tokens": 3775,
+        "new_source_input_tokens": 3746,
+        "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 1,
+        "original_input_tokens": 9582,
+        "new_source_input_tokens": 8198,
+        "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 2,
+        "original_input_tokens": 23504,
+        "new_source_input_tokens": 15775,
+        "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 3,
+        "original_input_tokens": 37672,
+        "new_source_input_tokens": 22953,
+        "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 4,
+        "original_input_tokens": 34439,
+        "new_source_input_tokens": 21760,
+        "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 5,
+        "original_input_tokens": 28643,
+        "new_source_input_tokens": 19024,
+        "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 6,
+        "original_input_tokens": 28971,
+        "new_source_input_tokens": 19352,
+        "original_evidence": "EXACT_SAVED_HTTP_REQUEST_AND_USAGE",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      },
+      {
+        "ordinal": 7,
+        "original_input_tokens": 37039,
+        "new_source_input_tokens": 22320,
+        "original_evidence": "EXACT_PRE_HTTP_FAILURE_INPUT_COUNT",
+        "fits_without_losing_data": true,
+        "schema_expands_exactly": true,
+        "API_generation_schema_unchanged": true
+      }
+    ],
+    "all_arm_exact_expansions": 32,
+    "default_off_exact_message_controls": 24,
+    "actual_model_calls": 0,
+    "bank_writes": 0,
+    "budget_or_lease_acquisitions": 0,
+    "all_arm_mapping_scope": "Schema mechanics on actual B1 mappings; not cross-arm actual states or performance."
+  },
+  "own_source_CI": {
+    "observed_at": "2026-10-06 10:06:46 UTC",
+    "Fast": {
+      "run_id": 37447258302,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full": {
+      "run_id": 37447258296,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "must_query_actual_status_before_HTTP": true
+  },
+  "finite_real_recheck": {
+    "status": "PREPARED_NOT_ADMITTED_NOT_RUN",
+    "arms": [
+      "B1"
+    ],
+    "development_user_position": 0,
+    "chronological_original_ordinals": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "maintenance_sessions": 8,
+    "author_update_opportunities": 19,
+    "natural_QA_opportunities": 20,
+    "Writer_call_count": "Actual source batches and successful input admission; do not assume8 HTTP requests.",
+    "Judge_call_count": "Actual unmodified official scoring traversal; not a fixed denominator or extra memory reviewer.",
+    "initial_state": "OWN_EMPTY_BANK_NO_COPY_OR_IDEAL_STATE",
+    "same_model_resources_Reader_and_original_author_scoring_as_frozen_main": true,
+    "model": {
+      "name": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "enable_thinking": true,
+      "max_tokens": 32768,
+      "context_tokens": 65536,
+      "timeout": 300
+    },
+    "input_limit": 32256,
+    "source_tokens": 4096,
+    "source_body_tokens": 8192,
+    "working_sets": false,
+    "preserve_first_attempt_failures_and_invalid_labels": true,
+    "retry_or_truncated_JSON_repair": false,
+    "old_failed_ordinals_to_inspect": [
+      3,
+      4,
+      7
+    ],
+    "formation_and_empty_envelope_controls": [
+      0,
+      1,
+      2,
+      5,
+      6
+    ],
+    "questions": [
+      "Does the model correctly use the compact prompt contract while the original generation contract stays enforced?",
+      "Do actual own-history requests fit, including the old failure ordinals; how does new state growth affect capacity?",
+      "Do formation, updates, attribution, preservation and natural answers succeed or fail in the actual saved results?"
+    ],
+    "before_HTTP": [
+      "Existing7b82 serial queue has exited authoritatively and no unconfirmed effects are present; do not stop, restart or hot-edit it.",
+      "Bind published source, published declaration and immutable admitted configuration with actual own-source CI status.",
+      "Affected checks passed. Plan7.2 permits finite daily check while Full is pending; require Full success before full prefix/candidate/merge.",
+      "Use existing normal frozen driver and continuous ledger, one concurrent generation client; preserve every first attempt."
+    ],
+    "actual_model_calls": 0,
+    "candidate_selected": false,
+    "full_new_four_arm_prefix_admitted": false,
+    "limits": [
+      "Exposed first user only, same Qwen family, not independent confirmation.",
+      "B1-only finite repair check cannot establish four-arm method superiority.",
+      "New source results stay separate from7b82; do not replace old capacity failures or splice scores."
+    ]
+  },
+  "frozen_queue": {
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "PID": 178764,
+    "configuration_results_and_original_declaration_unchanged": true,
+    "serial_resource_not_taken_by_preparation": true
+  },
+  "remaining_original_plan": [
+    "Frozen four-arm first8 prefix",
+    "Preselected first-user own-state65 and same-version full277 four-arm comparison",
+    "same-M low-level/semantic entry ablation and one fixed tighter budget",
+    "native32/12/4 and full277 drift",
+    "16 reserved users after freeze, LongMemEval28/1354/10 and strong external baselines",
+    "ordinary Host135/192 plus new post-freeze functional stories and recovery",
+    "fullR0-R5/E0-E5/six deliverables"
+  ],
+  "new_model_calls_for_preparation": 0,
+  "method_advantage_established": false,
+  "product_status": "NO_GO"
+}
