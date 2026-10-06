@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 import runpy
 from pathlib import Path
@@ -254,7 +255,8 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         payload = json.loads(request.content)
         material = json.loads(payload["messages"][1]["content"])
         packet, schema = material["delivery"], material["response_schema"]
-        assert schema == payload["response_format"]["json_schema"]["schema"]
+        generation_contract = payload["response_format"]["json_schema"]["schema"]
+        assert "$defs" not in generation_contract
         requests.append(packet)
         evidence = packet["evidence"][0]["id"]
         assertion = {"source": evidence, "kind": "reported"}
@@ -290,6 +292,19 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
                 ]}
             envelope = {"creates": [], "records": {record["id"]: change}}
         Draft202012Validator(schema).validate(envelope)
+        Draft202012Validator(generation_contract).validate(envelope)
+        invalid = copy.deepcopy(envelope)
+        if not packet["records"]:
+            clause = invalid["creates"][0]["clauses"][0]
+        elif arm in {"B0", "B2"}:
+            clause = next(iter(invalid["records"].values()))["clauses"][0]
+        else:
+            clause = next(iter(invalid["records"].values()))["edits"][0]
+        clause["evidence"] = ["e999"]
+        assert not Draft202012Validator(schema).is_valid(invalid)
+        assert not Draft202012Validator(generation_contract).is_valid(invalid)
+        if "$defs" in schema:
+            assert len(json.dumps(schema)) < len(json.dumps(generation_contract))
         return httpx.Response(200, json={
             "choices": [{"finish_reason": "stop", "message": {"content": json.dumps(envelope)}}],
             "usage": {"total_tokens": 8},

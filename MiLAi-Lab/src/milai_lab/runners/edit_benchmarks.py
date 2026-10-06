@@ -33,7 +33,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.service import MemoryService
-from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_features import EditFeatures, compact_prompt_schema
 from milai_lab.methods.edit_memory import Arm, EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, generation_schema
 
@@ -633,6 +633,8 @@ class BenchmarkRun:
         response_schema = (
             schema if schema is not None else method.envelope_schema(allow_create=allow_create)
         )
+        if method.features.bound_references:
+            response_schema = compact_prompt_schema(response_schema)
         empty_instruction = (
             "An empty maintenance envelope means no maintenance, not a successful update."
             if "records" in response_schema.get("properties", {})

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import copy
+import json
+from collections import Counter
 from dataclasses import asdict, dataclass
 from typing import Any
 
@@ -40,6 +42,64 @@ def _object(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
         "properties": fields,
         "required": required,
     }
+
+
+def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
+    """Share repeated string choices in the Writer's explanatory schema only.
+
+    The original bound schema still controls generation and decoding. Referencing
+    the same enum through $defs changes its presentation, not its allowed values.
+    Existing schemas with definitions retain their original reference locations.
+    """
+    if "$defs" in schema:
+        return copy.deepcopy(schema)
+    counts: Counter[tuple[str, ...]] = Counter()
+
+    def choices(value: dict[str, Any]) -> tuple[str, ...] | None:
+        if (
+            set(value) == {"type", "enum"} and value["type"] == "string"
+            and len(value["enum"]) > 1 and all(isinstance(v, str) for v in value["enum"])
+        ):
+            return tuple(value["enum"])
+        return None
+
+    def collect(value: Any) -> None:
+        if isinstance(value, dict):
+            candidate = choices(value)
+            if candidate is not None:
+                counts[candidate] += 1
+            for child in value.values():
+                collect(child)
+        elif isinstance(value, list):
+            for child in value:
+                collect(child)
+
+    collect(schema)
+    names = {
+        values: f"choices_{i}"
+        for i, (values, count) in enumerate(counts.items()) if count > 1
+    }
+
+    def project(value: Any) -> Any:
+        if isinstance(value, dict):
+            candidate = choices(value)
+            if candidate is not None and candidate in names:
+                return {"$ref": "#/$defs/" + names[candidate]}
+            return {key: project(child) for key, child in value.items()}
+        if isinstance(value, list):
+            return [project(child) for child in value]
+        return copy.deepcopy(value)
+
+    result: dict[str, Any] = project(schema)
+    if names:
+        result["$defs"] = {
+            name: {"type": "string", "enum": list(values)} for values, name in names.items()
+        }
+    return (
+        result
+        if len(json.dumps(result, ensure_ascii=False)) < len(json.dumps(schema, ensure_ascii=False))
+        else copy.deepcopy(schema)
+    )
 
 
 def feature_proposal_schema(
