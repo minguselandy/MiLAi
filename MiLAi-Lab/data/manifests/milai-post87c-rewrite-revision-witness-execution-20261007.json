@@ -1,0 +1,133 @@
+{
+  "version": "milai-post87c-rewrite-revision-witness-execution-v1",
+  "status": "CLOSED_ROOT_REVIEWED_INTERFACE_USED_WITH_MIXED_SEMANTIC_RESULTS",
+  "observed_at": "2026-10-06T21:18:35Z",
+  "source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "previous_report_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "pre_HTTP_declaration": "milai-post87c-rewrite-revision-witness-development-20261007.json",
+  "scope": "Two original B2 global-condition event ordinals3/4; independent read-only SQLite copies of actual own-formed before states, original complete source/record delivery and dates. No successful case3 state supplied to case4, ideal record or original result replacement.",
+  "configuration": {
+    "interface": "I2",
+    "Qwen_family": "Qwen3.6 only",
+    "thinking": true,
+    "temperature": 1.0,
+    "context": 65536,
+    "max_output": 32768,
+    "margin": 512,
+    "retrieval_rerun": false,
+    "actual_embedding_calls": 0
+  },
+  "own_source_ci": {
+    "observed_at": "2026-10-06T21:18:35Z",
+    "Fast": {
+      "run_id": 37531198186,
+      "conclusion": "success",
+      "verified_before_HTTP_at": "2026-10-06T21:15:11Z"
+    },
+    "Full": {
+      "run_id": 37531198051,
+      "status": "in_progress",
+      "required_before_prefix": true
+    }
+  },
+  "actual_counts": {
+    "Writer": 2,
+    "Reader": 0,
+    "Judge": 0,
+    "embedding": 0,
+    "stop": 2,
+    "length": 0,
+    "known_generation_tokens": 23055,
+    "committed": 2,
+    "rejected": 0,
+    "new_unknown": 0,
+    "retry": 0
+  },
+  "cases": [
+    {
+      "event_ordinal": 3,
+      "stop": true,
+      "committed": true,
+      "whole_revision_witness_selected": [
+        "e1",
+        "e4"
+      ],
+      "input_tokens": 7143,
+      "known_tokens": 13407,
+      "retained_units_exact_except_fullrewrite_IDs": 0,
+      "before_units": 4,
+      "after_units": 2,
+      "condition_units_after": 0,
+      "relations_after": 0,
+      "general_frequency_present": false
+    },
+    {
+      "event_ordinal": 4,
+      "stop": true,
+      "committed": true,
+      "whole_revision_witness_selected": [
+        "e1"
+      ],
+      "input_tokens": 7144,
+      "known_tokens": 9648,
+      "retained_units_exact_except_fullrewrite_IDs": 3,
+      "before_units": 4,
+      "after_units": 3,
+      "condition_units_after": 2,
+      "relations_after": 2,
+      "general_frequency_present": true
+    }
+  ],
+  "semantic_findings": {
+    "event3_current_qualifier_change": "Both start and holiday change stored with actual new source/date. General frequency not restated but removed; both conditions converted to combined content, all five old relations omitted. This is non-target damage, not whole maintenance success.",
+    "event4_exception_withdrawal": "Current cancellation witness selected separately; night clause and override removed. Three actual general/qualifier units and support/role/assertion exact except regenerated fullrewrite IDs, two modifies retained. Old qualifiers remain because previous global-condition update failed in original history; this does not repair missing earlier change.",
+    "interface": "Both free Writer outputs select revision_evidence and commit; removes missing witness-path obstacle on these two inputs. Reference validity and commit acceptance do not imply semantic correctness.",
+    "comparison_limit": "Same exposed source, matched actual before, one stochastic output each; not natural-history method confirmation, independent Judge, official score or stable causal effect.",
+    "Reader": "No new Reader call or source/material change; scope/calendar errors remain open."
+  },
+  "Root_review": "Two complete proposals, before/after/support/assertions/relations, actual current packet/date and receipts/usage; no independent raw-source/database audit or full reasoning review.",
+  "reconciliation": {
+    "both_new_packets_and_dates_exact_original": true,
+    "input_tokens_old": [
+      7071,
+      7072
+    ],
+    "input_tokens_new": [
+      7143,
+      7144
+    ],
+    "actual_prompt_usage_matches_projection": true,
+    "two_receipts_total_matches_ledger_delta": true,
+    "generation_known_and_charged_delta": 23055,
+    "embedding_unchanged": true,
+    "original_results_and_pre_HTTP_declaration_preserved": true,
+    "original_process_normal_exit": true,
+    "current_serial_lease_free": true,
+    "offline_preparation_first_failure": "Helper supplied whole config to feature-settings parser; 0HTTP, failed private preparation preserved, helper corrected without frozen-source edit."
+  },
+  "continuous_accounting_snapshot": {
+    "generation_requests": 39582,
+    "generation": {
+      "charged_tokens": 151439107,
+      "known_tokens": 151327392,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 974832,
+      "known_tokens": 974832,
+      "unknown_usage": 0
+    }
+  },
+  "next_action": "Use the same frozen source for the declared four-arm own-empty prefix after its own Full and this closed review; retain semantic failures, no same-case prompt iteration. Prefix is bounded end-to-end development, not final candidate or perfect R3 gate.",
+  "next_declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+  "next_prefix_status": "PREPARED_NOT_ADMITTED_OR_RUN",
+  "goal_complete": false,
+  "candidate_selected": false,
+  "Product_status": "NO_GO",
+  "reserved_16_users_reviewed": false,
+  "publication_only_HTTP_calls": 0,
+  "new_tests_or_broad_suite_for_docs": 0,
+  "source_runtime_or_workflow_changes_for_this_result": false,
+  "rollback_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "private_raw_gold_HTTP_reasoning_DB_config_logs_ignored": true
+}

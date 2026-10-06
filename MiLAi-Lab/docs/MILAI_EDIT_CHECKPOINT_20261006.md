@@ -1,5 +1,13 @@
 # MiLAi-Edit 当前实验检查点
 
+**2026-10-06 21:18:35 UTC：072两次真实B2 Writer闭合，接口已用、语义结果相反；同版四组前缀已准备。**
+
+两次分别用原事件3／4的实际状态与完整原材料、独立副本，2stop／23,055 known／2提交，0Reader／Judge／编码／新unknown／重试。共同限定更正保存新安排却删掉一般三次、清空条件图；撤销例外保留3个真实旧单元及支持／归属、2条modifies，未补此前失败的新限定，不算完整链修复。
+072自身Fast在HTTP前成功，Full仍运行；Root两完整提案／前后状态／实际交付／回执与账本已核对。进程正常结束、租约空闲；只用一次首次输出，旧978原结果与声明不改。
+同版四组各自空库、四已曝光用户前8配置已准备，每组32会话／72更新／73QA；原I2／dense K10与参数共用，需072自身Full后准入，前缀HTTP0。65／277续接不重跑前缀；不再把同例完美通过作为扩大检查点的理由。
+闭合累计39,582请求／151,327,392 known／151,439,107 charged／编码974,832／历史unknown3。完整比较、机制／漂移／消融／预算／16保留／外部／Host／恢复／六交付继续，Product NO_GO。仅7Lab报告文件、0源码／测试／workflow改动，轻量核对，回滚072；新报告自身CI另查。
+[执行摘要](MILAI_EDIT_EXECUTION_STATUS_20261007.md) · [真实Writer结果](../data/manifests/milai-post87c-rewrite-revision-witness-execution-20261007.json) · [共同前缀声明](../data/manifests/milai-post87c-common-dense-prefix-development-20261007.json)。下方为原时点。
+
 **2026-10-06 20:51 UTC后：978共同条件分支已闭合；完整重写修订依据入口已实现，自由Writer未复核。**
 
 原978自身Fast／Full成功，36stop／207,619 known，20维护事件、2拒绝／2缺口；50编码／1,497 known。固定2Reader另5,398 known、0/2，阶段38生成／213,017 known；回执与闭合账本一致，无新unknown／重试。

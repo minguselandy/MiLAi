@@ -1,3 +1,40 @@
+# 2026-10-06 21:18:35 UTC: two072 Writer diagnostics closed; prepare same-version prefix
+
+Previous goal turn pushed072 and updated PR85, verified exact remote head/body and
+three file bytes, making progress. Root read post87c1–12 and follow-up9. Source072
+frozen from Git archive. Prepare helper initially passed whole config to feature
+parser: known offline failure0HTTP preserved, corrected helper only. Original
+B2 event3/4 banks independently copied read-only; original before/packet/date
+exact,7143/7144 input versus7071/7072. OwnFast37531198186 succeeded and verified
+21:15:11 beforeHTTP; ownFull37531198051 still running21:18:35.
+
+Session40091 PID3380888 normalexit0: twoWriter stop23055known, two commits,
+zeroReader/Judge/encoder/retry/newunknown. Root reviewed both full proposals,
+actual before/after units/support/assertion/relations, original packet/date,
+actual prompt usage and receipts; ledger reconciled, PID gone and lease free.
+Both free outputs select revision_evidence. Event3 saves new qualifiers but
+removes unmentioned general frequency and all5links, becoming2content. Event4
+removes exception/override and retains3units exactly except fullrewriteIDs and
+2modifies. Original failed global change is not reconstructed; independent clones,
+not new complete-chain success. Original978/preHTTP declaration untouched.
+
+Prepare frozen072 commonI2/denseK10/Qwenthinking1 fourarms ownempty fourexposed
+users first8:32sessions/72updates/73QA each. Source ownFull plus closedreview
+before prefixHTTP; current prefix0/notadmitted. No perfect-R3-until-pass gate,
+more same-case warnings, verifier or ideal state. Reader scope/calendar and B2
+semantic failures remain limitations to measure. Existing actual-prefix isolated
+user continuation checked; preserve namespace/ordinals and separate Judge serials,
+no duplicated first8 costs. First65 and full277 remain same-source subset/scopes.
+
+Closedledger39582/151327392known151439107charged/embed974832/historyunknown3,
+limits unchanged. Publication7Lab docs/status/result/declaration only, zero
+source/test/workflow and publicationmodelcalls; lightJSON/link/count/ledger/diff,
+no repeated source suites. Rollback072; privateDB/HTTP/config/helper ignored.
+Keep goalactive/full8/65/277/native/drift/ablation/tighterbudget/16reserved/external/
+Host/newstories/forget/effects/recovery/sixdeliverables incomplete, ProductNO_GO.
+OneQwen generation family/BGE, no agents/platform/heldout review/PR85merge. Verify
+new report ownCI/remote separately. Lower blocks retain original historical state.
+
 # 2026-10-06 after 20:51 UTC: global R3 closed; rewrite revision witnesses implemented
 
 The previous turn published the 59ce execution snapshot, making authoritative
