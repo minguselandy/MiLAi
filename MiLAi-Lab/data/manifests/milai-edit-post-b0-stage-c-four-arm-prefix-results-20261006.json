@@ -1,0 +1,1072 @@
+{
+  "status": "ALL_FOUR_DEVELOPMENT_PREFIXES_CLOSED_FINITE_INPUT_REPAIR_RUNNING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T13:47:09.646690+00:00",
+  "main_closure_review_observed_at": "2026-10-06T13:34:37.015448+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6 only",
+  "scope": {
+    "development_user_positions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "sessions_per_arm": 32,
+    "updates_per_arm": 72,
+    "QA_per_arm": 73,
+    "initial_state": "OWN_EMPTY_BANK_PER_ARM_AND_USER",
+    "reserved_users_used": false
+  },
+  "closed_four_arm_prefix": {
+    "B0": {
+      "sessions": 32,
+      "updates_all": 72,
+      "updates_Correct": 6,
+      "updates_valid": 58,
+      "QA_all": 73,
+      "QA_Correct": 42,
+      "QA_valid": 73,
+      "author_update_labels": {
+        "Omission": 51,
+        "Correct": 6,
+        "None": 10,
+        "Omitted": 4,
+        "Hallucination": 1
+      },
+      "author_QA_labels": {
+        "Correct": 42,
+        "Hallucination": 17,
+        "Omission": 14
+      },
+      "requests_and_responses": 696,
+      "known_tokens": 2630787,
+      "role_usage": {
+        "Reader": {
+          "calls": 73,
+          "input_tokens": 92863,
+          "completion_tokens": 111689,
+          "known_tokens": 204552
+        },
+        "Writer": {
+          "calls": 33,
+          "input_tokens": 687033,
+          "completion_tokens": 110592,
+          "known_tokens": 797625
+        },
+        "Judge": {
+          "calls": 590,
+          "input_tokens": 939269,
+          "completion_tokens": 689341,
+          "known_tokens": 1628610
+        }
+      },
+      "finish_reasons": {
+        "stop": 696
+      },
+      "known_incomplete_responses": [],
+      "unconfirmed_requests": 0,
+      "all_original_labels_gold_and_first_attempts_preserved": true
+    },
+    "B1": {
+      "sessions": 32,
+      "updates_all": 72,
+      "updates_Correct": 5,
+      "updates_valid": 60,
+      "QA_all": 73,
+      "QA_Correct": 36,
+      "QA_valid": 69,
+      "author_update_labels": {
+        "Omission": 54,
+        "None": 7,
+        "Correct": 5,
+        "Omitted Update": 1,
+        "Omitted": 4,
+        "Hallucination": 1
+      },
+      "author_QA_labels": {
+        "Correct": 36,
+        "None": 4,
+        "Hallucination": 14,
+        "Omission": 19
+      },
+      "requests_and_responses": 662,
+      "known_tokens": 2273477,
+      "role_usage": {
+        "Reader": {
+          "calls": 73,
+          "input_tokens": 82989,
+          "completion_tokens": 115555,
+          "known_tokens": 198544
+        },
+        "Writer": {
+          "calls": 25,
+          "input_tokens": 507574,
+          "completion_tokens": 87721,
+          "known_tokens": 595295
+        },
+        "Judge": {
+          "calls": 564,
+          "input_tokens": 814523,
+          "completion_tokens": 665115,
+          "known_tokens": 1479638
+        }
+      },
+      "finish_reasons": {
+        "stop": 662
+      },
+      "known_incomplete_responses": [],
+      "unconfirmed_requests": 0,
+      "all_original_labels_gold_and_first_attempts_preserved": true
+    },
+    "B2": {
+      "sessions": 32,
+      "updates_all": 72,
+      "updates_Correct": 0,
+      "updates_valid": 61,
+      "QA_all": 73,
+      "QA_Correct": 32,
+      "QA_valid": 68,
+      "author_update_labels": {
+        "None": 6,
+        "Omission": 60,
+        "Hallucination": 1,
+        "Omitted": 5
+      },
+      "author_QA_labels": {
+        "Correct": 32,
+        "Hallucination": 16,
+        "Omission": 20,
+        "None": 5
+      },
+      "requests_and_responses": 418,
+      "known_tokens": 1418066,
+      "role_usage": {
+        "Reader": {
+          "calls": 73,
+          "input_tokens": 111901,
+          "completion_tokens": 106862,
+          "known_tokens": 218763
+        },
+        "Writer": {
+          "calls": 15,
+          "input_tokens": 277030,
+          "completion_tokens": 59649,
+          "known_tokens": 336679
+        },
+        "Judge": {
+          "calls": 330,
+          "input_tokens": 470762,
+          "completion_tokens": 391862,
+          "known_tokens": 862624
+        }
+      },
+      "finish_reasons": {
+        "stop": 418
+      },
+      "known_incomplete_responses": [],
+      "unconfirmed_requests": 0,
+      "all_original_labels_gold_and_first_attempts_preserved": true
+    },
+    "M": {
+      "sessions": 32,
+      "updates_all": 72,
+      "updates_Correct": 7,
+      "updates_valid": 62,
+      "QA_all": 73,
+      "QA_Correct": 41,
+      "QA_valid": 69,
+      "author_update_labels": {
+        "Omission": 54,
+        "Omitted": 8,
+        "Correct": 7,
+        "None": 2,
+        "Hallucination": 1
+      },
+      "author_QA_labels": {
+        "Correct": 41,
+        "Omission": 18,
+        "Hallucination": 10,
+        "None": 4
+      },
+      "requests_and_responses": 636,
+      "known_tokens": 2328291,
+      "role_usage": {
+        "Reader": {
+          "calls": 73,
+          "input_tokens": 143381,
+          "completion_tokens": 116964,
+          "known_tokens": 260345
+        },
+        "Writer": {
+          "calls": 22,
+          "input_tokens": 453243,
+          "completion_tokens": 102168,
+          "known_tokens": 555411
+        },
+        "Judge": {
+          "calls": 541,
+          "input_tokens": 865605,
+          "completion_tokens": 646930,
+          "known_tokens": 1512535
+        }
+      },
+      "finish_reasons": {
+        "stop": 635,
+        "length": 1
+      },
+      "known_incomplete_responses": [
+        {
+          "role": "Judge",
+          "serial": 512,
+          "saved_response_and_usage_available": true,
+          "unknown_outcome": false,
+          "type": "ValueError",
+          "message": "Provider output incomplete: length"
+        }
+      ],
+      "unconfirmed_requests": 0,
+      "all_original_labels_gold_and_first_attempts_preserved": true
+    }
+  },
+  "M_four_user_detail": {
+    "sessions": 32,
+    "updates_all": 72,
+    "updates_Correct": 7,
+    "updates_valid": 62,
+    "QA_all": 73,
+    "QA_Correct": 41,
+    "QA_valid": 69,
+    "author_update_labels": {
+      "Omission": 54,
+      "Omitted": 8,
+      "Correct": 7,
+      "None": 2,
+      "Hallucination": 1
+    },
+    "author_QA_labels": {
+      "Correct": 41,
+      "Omission": 18,
+      "Hallucination": 10,
+      "None": 4
+    },
+    "requests_and_responses": 636,
+    "known_tokens": 2328291,
+    "role_usage": {
+      "Reader": {
+        "calls": 73,
+        "input_tokens": 143381,
+        "completion_tokens": 116964,
+        "known_tokens": 260345
+      },
+      "Writer": {
+        "calls": 22,
+        "input_tokens": 453243,
+        "completion_tokens": 102168,
+        "known_tokens": 555411
+      },
+      "Judge": {
+        "calls": 541,
+        "input_tokens": 865605,
+        "completion_tokens": 646930,
+        "known_tokens": 1512535
+      }
+    },
+    "finish_reasons": {
+      "stop": 635,
+      "length": 1
+    },
+    "known_incomplete_responses": [
+      {
+        "role": "Judge",
+        "serial": 512,
+        "saved_response_and_usage_available": true,
+        "unknown_outcome": false,
+        "type": "ValueError",
+        "message": "Provider output incomplete: length"
+      }
+    ],
+    "unconfirmed_requests": 0,
+    "all_original_labels_gold_and_first_attempts_preserved": true,
+    "per_user": [
+      {
+        "development_user_position": 0,
+        "Root_review_observed_at": "2026-10-06T12:22:01.012767+00:00",
+        "sessions": 8,
+        "initial_state": "OWN_EMPTY_BANK",
+        "author_update_labels": {
+          "Omission": 16,
+          "Omitted": 1,
+          "Correct": 2
+        },
+        "author_QA_labels": {
+          "Correct": 14,
+          "Omission": 5,
+          "Hallucination": 1
+        },
+        "updates_Correct": 2,
+        "updates_all": 19,
+        "updates_valid": 18,
+        "QA_Correct": 14,
+        "QA_all": 20,
+        "QA_valid": 20,
+        "original_author_aggregation_succeeded": true,
+        "labels_gold_banks_source_and_ledger_unchanged": true,
+        "requests_and_responses": 186,
+        "known_tokens": 578939,
+        "role_usage": {
+          "Writer": {
+            "calls": 6,
+            "input_tokens": 112005,
+            "completion_tokens": 28046,
+            "known_tokens": 140051
+          },
+          "Reader": {
+            "calls": 20,
+            "input_tokens": 35113,
+            "completion_tokens": 34142,
+            "known_tokens": 69255
+          },
+          "Judge": {
+            "calls": 160,
+            "input_tokens": 205188,
+            "completion_tokens": 164445,
+            "known_tokens": 369633
+          }
+        },
+        "Judge_serial_interval": [
+          1,
+          160
+        ],
+        "maintenance": {
+          "pre_HTTP_capacity_failures": 2,
+          "failed_original_ordinals": [
+            3,
+            7
+          ],
+          "unprocessed_sessions": 2,
+          "actual_empty_envelopes": 1,
+          "committed_actions": {
+            "create": 6,
+            "edit": 1
+          },
+          "actual_local_operations": {
+            "change_value": 1
+          },
+          "operation_rejections": 0,
+          "additional_attempts": 0,
+          "complete_state_version_support_unchanged_sessions": 3
+        },
+        "final_state_counts": {
+          "records": 6,
+          "content_units": 22,
+          "condition_units": 0,
+          "relations": 0
+        },
+        "Root_review_scope": {
+          "before_after_pairs": 8,
+          "complete_actual_Writer_envelopes": 6,
+          "complete_Reader_answers": 20,
+          "HTTP_usage_pairs": 186,
+          "selected_source_context_only": true,
+          "independent_Judge_or_exhaustive_source_database_audit": false
+        }
+      },
+      {
+        "development_user_position": 1,
+        "Root_review_observed_at": "2026-10-06T12:46:32.460378+00:00",
+        "sessions": 8,
+        "initial_state": "OWN_EMPTY_BANK",
+        "author_update_labels": {
+          "Omission": 10,
+          "Omitted": 4,
+          "None": 1
+        },
+        "author_QA_labels": {
+          "Correct": 7,
+          "Omission": 3,
+          "None": 1,
+          "Hallucination": 1
+        },
+        "updates_Correct": 0,
+        "updates_all": 15,
+        "updates_valid": 10,
+        "QA_Correct": 7,
+        "QA_all": 12,
+        "QA_valid": 11,
+        "original_author_aggregation_succeeded": true,
+        "labels_gold_banks_source_and_ledger_unchanged": true,
+        "requests_and_responses": 127,
+        "known_tokens": 519647,
+        "role_usage": {
+          "Writer": {
+            "calls": 6,
+            "input_tokens": 136837,
+            "completion_tokens": 30407,
+            "known_tokens": 167244
+          },
+          "Reader": {
+            "calls": 12,
+            "input_tokens": 23660,
+            "completion_tokens": 17606,
+            "known_tokens": 41266
+          },
+          "Judge": {
+            "calls": 109,
+            "input_tokens": 191723,
+            "completion_tokens": 119414,
+            "known_tokens": 311137
+          }
+        },
+        "Judge_serial_interval": [
+          161,
+          269
+        ],
+        "maintenance": {
+          "pre_HTTP_capacity_failures": 2,
+          "failed_original_ordinals": [
+            4,
+            5
+          ],
+          "unprocessed_sessions": 2,
+          "actual_empty_envelopes": 4,
+          "committed_actions": {
+            "create": 12
+          },
+          "actual_local_operations": {},
+          "operation_rejections": 0,
+          "additional_attempts": 0,
+          "complete_state_version_support_unchanged_sessions": 6
+        },
+        "final_state_counts": {
+          "records": 12,
+          "content_units": 25,
+          "condition_units": 0,
+          "relations": 0
+        },
+        "Root_review_scope": {
+          "before_after_pairs": 8,
+          "complete_actual_Writer_envelopes": 6,
+          "complete_Reader_answers": 12,
+          "HTTP_usage_pairs": 127,
+          "selected_source_context_only": true,
+          "independent_Judge_or_exhaustive_source_database_audit": false
+        }
+      },
+      {
+        "development_user_position": 2,
+        "Root_review_observed_at": "2026-10-06T13:03:25.816704+00:00",
+        "sessions": 8,
+        "initial_state": "OWN_EMPTY_BANK",
+        "author_update_labels": {
+          "Omission": 14,
+          "Hallucination": 1,
+          "Correct": 5
+        },
+        "author_QA_labels": {
+          "Correct": 13,
+          "None": 1,
+          "Omission": 6,
+          "Hallucination": 2
+        },
+        "updates_Correct": 5,
+        "updates_all": 20,
+        "updates_valid": 20,
+        "QA_Correct": 13,
+        "QA_all": 22,
+        "QA_valid": 21,
+        "original_author_aggregation_succeeded": true,
+        "labels_gold_banks_source_and_ledger_unchanged": true,
+        "requests_and_responses": 174,
+        "known_tokens": 637922,
+        "role_usage": {
+          "Reader": {
+            "calls": 22,
+            "input_tokens": 42906,
+            "completion_tokens": 37299,
+            "known_tokens": 80205
+          },
+          "Writer": {
+            "calls": 5,
+            "input_tokens": 110438,
+            "completion_tokens": 26164,
+            "known_tokens": 136602
+          },
+          "Judge": {
+            "calls": 147,
+            "input_tokens": 245840,
+            "completion_tokens": 175275,
+            "known_tokens": 421115
+          }
+        },
+        "Judge_serial_interval": [
+          270,
+          416
+        ],
+        "maintenance": {
+          "pre_HTTP_capacity_failures": 3,
+          "failed_original_ordinals": [
+            3,
+            4,
+            7
+          ],
+          "unprocessed_sessions": 3,
+          "actual_empty_envelopes": 1,
+          "committed_actions": {
+            "create": 18
+          },
+          "actual_local_operations": {},
+          "operation_rejections": 0,
+          "additional_attempts": 0,
+          "complete_state_version_support_unchanged_sessions": 4
+        },
+        "final_state_counts": {
+          "records": 18,
+          "content_units": 35,
+          "condition_units": 0,
+          "relations": 0
+        },
+        "Root_review_scope": {
+          "before_after_pairs": 8,
+          "complete_actual_Writer_envelopes": 5,
+          "complete_Reader_answers": 22,
+          "HTTP_usage_pairs": 174,
+          "selected_source_context_only": true,
+          "independent_Judge_or_exhaustive_source_database_audit": false
+        }
+      },
+      {
+        "development_user_position": 3,
+        "Root_review_observed_at": "2026-10-06T13:31:12.772307+00:00",
+        "sessions": 8,
+        "initial_state": "OWN_EMPTY_BANK",
+        "author_update_labels": {
+          "Omission": 14,
+          "Omitted": 3,
+          "None": 1
+        },
+        "author_QA_labels": {
+          "Correct": 7,
+          "Omission": 4,
+          "None": 2,
+          "Hallucination": 6
+        },
+        "updates_Correct": 0,
+        "updates_all": 18,
+        "updates_valid": 14,
+        "QA_Correct": 7,
+        "QA_all": 19,
+        "QA_valid": 17,
+        "original_author_aggregation_succeeded": true,
+        "labels_gold_banks_source_and_ledger_unchanged": true,
+        "requests_and_responses": 149,
+        "known_tokens": 591783,
+        "role_usage": {
+          "Writer": {
+            "calls": 5,
+            "input_tokens": 93963,
+            "completion_tokens": 17551,
+            "known_tokens": 111514
+          },
+          "Reader": {
+            "calls": 19,
+            "input_tokens": 41702,
+            "completion_tokens": 27917,
+            "known_tokens": 69619
+          },
+          "Judge": {
+            "calls": 125,
+            "input_tokens": 222854,
+            "completion_tokens": 187796,
+            "known_tokens": 410650
+          }
+        },
+        "Judge_serial_interval": [
+          417,
+          541
+        ],
+        "finish_reasons": {
+          "stop": 148,
+          "length": 1
+        },
+        "maintenance": {
+          "pre_HTTP_capacity_failures": 4,
+          "failed_original_ordinals": [
+            3,
+            4,
+            6,
+            7
+          ],
+          "unprocessed_sessions": 4,
+          "actual_empty_envelopes": 3,
+          "committed_actions": {
+            "create": 12
+          },
+          "actual_local_operations": {},
+          "operation_rejections": 0,
+          "additional_attempts": 0,
+          "complete_state_version_support_unchanged_sessions": 6
+        },
+        "final_state_counts": {
+          "records": 12,
+          "content_units": 25,
+          "condition_units": 0,
+          "relations": 0
+        },
+        "Root_review_scope": {
+          "before_after_pairs": 8,
+          "complete_actual_Writer_envelopes": 5,
+          "complete_Reader_answers": 19,
+          "HTTP_usage_pairs": 149,
+          "selected_source_context_only": true,
+          "independent_Judge_or_exhaustive_source_database_audit": false
+        }
+      }
+    ],
+    "maintenance": {
+      "pre_HTTP_capacity_failures": 11,
+      "unprocessed_sessions": 11,
+      "additional_attempts": 0,
+      "actual_empty_envelopes": 9,
+      "operation_rejections": 0,
+      "committed_actions": {
+        "create": 48,
+        "edit": 1
+      },
+      "actual_local_operations": {
+        "change_value": 1
+      },
+      "complete_state_version_support_unchanged_sessions": 19
+    },
+    "final_state_counts_across_separate_banks": {
+      "records": 48,
+      "content_units": 107,
+      "condition_units": 0,
+      "relations": 0
+    },
+    "original_author_global_aggregation_succeeded": true,
+    "checkpoint_records_after_original_author_is_valid_augmentation_exactly_match_final_results": true,
+    "Root_review_scope": {
+      "before_after_pairs": 32,
+      "complete_actual_Writer_envelopes": 22,
+      "complete_Reader_answers": 73,
+      "HTTP_usage_pairs": 636,
+      "selected_source_context_only": true,
+      "independent_Judge_or_exhaustive_source_database_audit": false
+    }
+  },
+  "queue_normal_exit": {
+    "original_PID_handle_missing": true,
+    "all_four_terminals_complete": true,
+    "suite_completed_arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "no_unconfirmed_saved_HTTP_requests": true,
+    "new_unknown_usage": 0
+  },
+  "closed_prefix_HTTP": {
+    "requests": 2412,
+    "responses": 2412,
+    "known_tokens": 8650621,
+    "finish_reasons": {
+      "stop": 2411,
+      "length": 1
+    },
+    "known_incomplete_Judge_responses": 1,
+    "unconfirmed_requests": 0,
+    "new_unknown_usage": 0
+  },
+  "closed_accounting_start": {
+    "generation_requests": 36519,
+    "generation": {
+      "charged_tokens": 140167873,
+      "known_tokens": 140056158,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "closed_accounting_end": {
+    "generation_requests": 38931,
+    "generation": {
+      "charged_tokens": 148818494,
+      "known_tokens": 148706779,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "closed_accounting_scope": "All four7b82 prefix arms counted once. Live ab8 calls and overlapping per-user or three-user reviews are excluded.",
+  "actual_old_target_delivery_diagnosis": [
+    {
+      "development_user_position": 2,
+      "ordinal": 5,
+      "old_employment_record_exists": true,
+      "old_health_record_exists": true,
+      "old_employment_and_health_in_actual_Writer_HTTP": true,
+      "actual_packet_exactly_matches_saved_view": true,
+      "candidate_records_delivered": 10,
+      "allow_create": true,
+      "actual_response_complete": true,
+      "actual_create_count": 0,
+      "actual_existing_target_containers": 0,
+      "old_target_values_revision_support_and_assertion_unchanged": true,
+      "old_User_assertion_retains_original_occurrence_time": true,
+      "interpretation": "Delivered-target maintenance decision and temporal applicability require diagnosis; this is not an absent-candidate case. Retained original dated employment can remain historical evidence. Do not delete unaffected financial content or equate unchanged history with current-state correctness.",
+      "new_model_calls": 0,
+      "bank_source_budget_writes": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 6,
+      "old_employment_record_exists": true,
+      "old_health_record_exists": true,
+      "old_employment_and_health_in_actual_Writer_HTTP": true,
+      "actual_packet_exactly_matches_saved_view": true,
+      "candidate_records_delivered": 10,
+      "allow_create": true,
+      "actual_response_complete": true,
+      "actual_create_count": 3,
+      "actual_existing_target_containers": 0,
+      "old_target_values_revision_support_and_assertion_unchanged": true,
+      "old_User_assertion_retains_original_occurrence_time": true,
+      "interpretation": "Delivered-target maintenance decision and temporal applicability require diagnosis; this is not an absent-candidate case. Retained original dated employment can remain historical evidence. Do not delete unaffected financial content or equate unchanged history with current-state correctness.",
+      "new_model_calls": 0,
+      "bank_source_budget_writes": 0
+    }
+  ],
+  "bounded_semantic_observations": [
+    "M forms48 matters and107 content units, but has only one ordinary change_value and no condition units or relations. This does not establish conditional representation or exception-operator benefit.",
+    "All22 M Writer and73 Reader responses are complete. Eleven pre-HTTP capacity failures never deliver their prepared facts, while nine actual empty envelopes are decisions after delivered input. Keep these failure types separate.",
+    "Third-user retirement events at ordinals5 and6 actually deliver the old employment and health records. One returns empty, the other creates three matters with fourteen clauses and no existing-target changes. Investigate maintenance choice and temporal applicability, not missing candidates for these two cases.",
+    "The old employment assertion retains its original User occurrence time and may remain valid historical evidence. Whether it is still incorrectly used as current status requires temporal analysis. Do not delete the whole financial record or treat retained history itself as damage.",
+    "Fourth user creates12 matters in the first and third sessions but never edits an old record. Three actual empty batches omit delivered new facts. The User income correction never reaches Writer due to capacity failure; the separate Assistant batch returns empty. Neither competing new value is stored, so this is not an overwrite case.",
+    "One Judge response reaches length at the declared32768 output limit, with actual response and usage saved. Preserve its invalid scoring label; this is a known incomplete response, not an unknown transport outcome or grounds for retry.",
+    "Nineteen unchanged M state/version/support sessions include input failures and actual empty decisions; they are not automatically successful preservation. Correct labels, source fidelity, current-state maintenance and actual retrieval remain separate."
+  ],
+  "read_only_retrieval_diagnosis": {
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "development_user_position": 2,
+    "ordinal": 4,
+    "question_position": 0,
+    "actual_original_query_and_historical_state": true,
+    "wire_exactly_reproduced": true,
+    "existing_relevant_record_rank": 0,
+    "irrelevant_record_matches_numeric_date_metadata_only": true,
+    "removing_metadata_alone_does_not_prove_relevant_retrieval": true,
+    "new_model_calls": 0,
+    "source_bank_or_budget_writes": 0,
+    "retrieval_method_or_candidate_changed": false,
+    "raw_query_records_and_answers_published": false
+  },
+  "retrieval_next_comparison": {
+    "status": "NOT_RUN_OR_ADMITTED",
+    "fixed_actual_state_and_original_query": true,
+    "conditions": [
+      "frozen lexical baseline",
+      "matter descriptions, body and semantic qualifiers only lexical",
+      "ordinary semantic plus lexical if lexical mismatch remains"
+    ],
+    "exclude_display_IDs_labels_and_unrelated_ingestion_metadata": true,
+    "preserve_factual_dates": true,
+    "common_to_all_four_arms": true,
+    "same_Reader": true,
+    "new_model_calls_for_comparison": 0
+  },
+  "lossless_capacity_projection": {
+    "projected_source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "cumulative_failed_inputs_projected": 37,
+    "scope": "All8 B1,18 B2 and11 M frozen-prefix pre-HTTP failures. Fourth M projections were prepared before the latest user steering; do not expand projection sampling.",
+    "new_rows_from_M_fourth_user": [
+      {
+        "arm": "M",
+        "development_user_position": 3,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 48353,
+        "projected_input_tokens": 27429,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "M",
+        "development_user_position": 3,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 44474,
+        "projected_input_tokens": 25458,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "M",
+        "development_user_position": 3,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 48420,
+        "projected_input_tokens": 26368,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "M",
+        "development_user_position": 3,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 48526,
+        "projected_input_tokens": 26474,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      }
+    ],
+    "previous33_detail_manifest": "milai-edit-post-b0-stage-c-m-first-three-user-prefix-results-20261006.json",
+    "all_fit_input_limit": true,
+    "input_limit": 32256,
+    "projected_min_tokens": 21201,
+    "projected_max_tokens": 27762,
+    "schema_expansion_exact": true,
+    "original_packet_mapping_system_date_and_API_schema_unchanged": true,
+    "actual_model_calls_for_projections": 0,
+    "does_not_establish_new_own_history_or_semantic_success": true
+  },
+  "finite_input_repair_snapshot": {
+    "status": "RUNNING_FINITE_PREDECLARED_B1_FIRST_USER_FIRST8_OWN_EMPTY",
+    "observed_at": "2026-10-06T13:47:09.646690+00:00",
+    "started_at": "2026-10-06T13:36:08.623361+00:00",
+    "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "predeclaration_commit": "7add8259a1a81133d6bb69efad5893909472aa16",
+    "config_version": "milai-edit-post-b0-schema-shared-choices-affected-first-user-v1",
+    "PID": 1628748,
+    "PID_and_exact_frozen_command_verified_live": true,
+    "scope": {
+      "arms": [
+        "B1"
+      ],
+      "development_user_position": 0,
+      "chronological_sessions": 8,
+      "update_opportunities": 19,
+      "QA_opportunities": 20,
+      "initial_state": "OWN_EMPTY_BANK"
+    },
+    "own_source_and_declaration_CI_before_HTTP": {
+      "observed_at": "2026-10-06 13:26:57 UTC",
+      "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+      "predeclaration_commit": "7add8259a1a81133d6bb69efad5893909472aa16",
+      "source_CI": [
+        {
+          "id": 37447258302,
+          "name": "MiLAi fast verification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 37447258296,
+          "name": "MiLAi full composition verification",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "predeclaration_CI": [
+        {
+          "id": 37448157226,
+          "name": "MiLAi fast verification",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 37448157201,
+          "name": "MiLAi full composition verification",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "maintenance_complete": 3,
+    "evaluation_complete": 2,
+    "request_artifacts": 78,
+    "saved_response_count": 77,
+    "requests_without_saved_response_at_snapshot": 1,
+    "saved_response_finish_reasons": {
+      "stop": 77
+    },
+    "role_usage_from_saved_responses": {
+      "Reader": {
+        "calls": 6,
+        "input_tokens": 5330,
+        "completion_tokens": 10504,
+        "known_tokens": 15834
+      },
+      "Writer": {
+        "calls": 3,
+        "input_tokens": 27875,
+        "completion_tokens": 13658,
+        "known_tokens": 41533
+      },
+      "Judge": {
+        "calls": 68,
+        "input_tokens": 81437,
+        "completion_tokens": 73971,
+        "known_tokens": 155408
+      }
+    },
+    "known_tokens_from_saved_responses": 212775,
+    "final_scores": null,
+    "not_final_accounting": true,
+    "candidate_selected": false,
+    "full_new_four_arm_prefix_admitted": false,
+    "model_budget_Reader_and_original_author_scoring_unchanged": true,
+    "no_new_model_process_started_for_this_publication": true,
+    "first_attempt_failures_and_versions_not_replaced_or_spliced": true
+  },
+  "finite_recheck_final_result": null,
+  "existing_native_prefix_capacity_preparation": {
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "original_selected_opportunities": 32,
+    "available_selected_opportunities": 31,
+    "distinct_source_sessions": 11,
+    "unrun_opportunity": {
+      "selection_index": 1,
+      "development_user_position": 0,
+      "original_session": 16,
+      "semantic_scores": null
+    },
+    "per_arm": {
+      "B0": {
+        "observed_at": "2026-10-06T09:29:47.242214+00:00",
+        "available_selected_opportunities": 31,
+        "distinct_source_sessions": 11,
+        "summary": {
+          "transition": {
+            "requests": 93,
+            "fits": 93,
+            "input_tokens": {
+              "min": 9280,
+              "median": 11343,
+              "max": 15622
+            },
+            "unknown_prior_range_occurrences": 0
+          },
+          "delta": {
+            "requests": 7,
+            "fits": 7,
+            "input_tokens": {
+              "min": 8283,
+              "median": 10663,
+              "max": 14982
+            },
+            "unknown_prior_range_occurrences": 0
+          }
+        },
+        "no_evaluable_text_delta_opportunities": 24,
+        "semantic_scores": null,
+        "actual_model_calls": 0
+      },
+      "B1": {
+        "observed_at": "2026-10-06T12:48:52.225817+00:00",
+        "available_selected_opportunities": 31,
+        "distinct_source_sessions": 11,
+        "summary": {
+          "transition": {
+            "requests": 93,
+            "fits": 93,
+            "input_tokens": {
+              "min": 9557,
+              "median": 10874,
+              "max": 14754
+            },
+            "unknown_prior_range_occurrences": 0
+          },
+          "delta": {
+            "requests": 5,
+            "fits": 5,
+            "input_tokens": {
+              "min": 8592,
+              "median": 8599,
+              "max": 12258
+            },
+            "unknown_prior_range_occurrences": 0
+          }
+        },
+        "no_evaluable_text_delta_opportunities": 26,
+        "semantic_scores": null,
+        "actual_model_calls": 0
+      },
+      "B2": {
+        "observed_at": "2026-10-06T12:48:51.176086+00:00",
+        "available_selected_opportunities": 31,
+        "distinct_source_sessions": 11,
+        "summary": {
+          "transition": {
+            "requests": 93,
+            "fits": 93,
+            "input_tokens": {
+              "min": 6877,
+              "median": 9107,
+              "max": 12602
+            },
+            "unknown_prior_range_occurrences": 0
+          },
+          "delta": {
+            "requests": 0,
+            "fits": 0,
+            "input_tokens": null,
+            "unknown_prior_range_occurrences": 0
+          }
+        },
+        "no_evaluable_text_delta_opportunities": 31,
+        "semantic_scores": null,
+        "actual_model_calls": 0
+      }
+    },
+    "M_preparation_pending_complete_prefix": false,
+    "actual_model_calls": 0,
+    "native_configuration_admitted": false,
+    "text_delta_absence_not_preservation": true,
+    "full277_drift_scope_retained": true,
+    "M_preparation_status": "PREFIX_CLOSED_CAPACITY_PREPARATION_NOT_YET_RUN"
+  },
+  "previous_report_CI": {
+    "commit": "9abe7612e2c4eb0b0bfd147c8bc2d911747d7e45",
+    "observed_at": "2026-10-06 13:42:20 UTC",
+    "Fast": {
+      "run_id": 37469601335,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37469601229,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "new_report_CI_must_be_queried_separately": true
+  },
+  "next_priority": [
+    "Close the already declared finite input repair real recheck without changing its budget or scope.",
+    "Using saved actual states, distinguish missing old targets, delivered-input omissions and creation without needed revision; preserve history and unrelated facts.",
+    "Compare common retrieval on fixed existing state and original queries, then verify an own-state formation/correction/exception/withdrawal/query chain."
+  ],
+  "remaining_original_plan": "Choose a common version after finite review; retain own-state65/277, native32/12/4 and full drift, semantic-entry ablation and fixed tighter budget,16 reserved users, external baselines, ordinary Host/new stories/recovery and all six deliverables.",
+  "new_model_calls_started_for_publication": 0,
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "Product_status": "NO_GO",
+  "publication_limits": [
+    "Qwen3.6 generation family only; same-family Judge and selected-source Root review, not independent confirmation.",
+    "The running B1 finite repair is separate from the frozen four-arm scores; its final scores remain null.",
+    "Raw source bodies, gold, predictions, HTTP, reasoning, databases, credentials and logs stay ignored."
+  ]
+}

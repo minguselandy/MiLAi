@@ -1,3 +1,27 @@
+# 2026-10-06 13:47:09 UTC: four-arm prefix closed; declared finite repair runs separately
+
+User requests current summary published to GitHub. Publish8 Lab report/state files,
+start0 new model processes; existing finite PID1628748 stays frozen. Main7b82/I2
+PID178764 normal exit, all4arms32/32,2412 responses/8650621known,2411stop/1Judge length.
+M7/72 updatesvalid62 QA41/73valid69,636HTTP/2328291known;48create1edit,48records107content
+0conditions-relations,11preHTTP failures9actualempty19unchanged not preservation.
+Root32states22envelopes73answers636HTTP selectedsource review, not independentaudit.
+Mthird ord5/6 actually deliver old employment/health; empty then3create14clauses,
+no old revisions. Diagnose maintenance and temporal applicability, preserve dated
+history and unrelated financial facts; do not delete historical employment blindly.
+ab8 source+7add declaration ownFastFullsuccess13:26:57, finite B1 ownempty first8
+started13:36:08 after normal old exit. Snapshot maint3/eval2,78req77resp212775known1pending;
+final scoresnull, no version splicing.37fixedfailedinputs fit/exact, prepared before
+latest user steering, no more projection expansion. Same32768output65536context/input32256.
+Closed ledger38931/148706779known/148818494charged excludes liveab8 and subsets;
+unknown3/embed964645 unchanged. Close finite first, diagnose target/decision, common
+fixedstate originalquery retrieval then ownstate full lifecycle chain. No added
+reviewer/platform/Attention/family/budget/hotchange/retry/idealstate/heldout exposure.
+Original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/sixdeliverables
+stay active. ProductNO_GO,PR85open/draft/unmerged. Product/Archive/workflow/API/
+permissions/Canonical unchanged; raw/HTTP/DB/config/logs ignored. rollback9abe761,
+ownreportCI separate; prior dated blocks preserve historical scope.
+
 # 2026-10-06 13:09:44 UTC: publish M first-three-user subset; frozen queue continues
 
 Publish8 Lab report/state files only, model0. Frozen7b82/I2/PID178764 unchanged;

@@ -1,5 +1,18 @@
 # MiLAi-Edit reproduction instructions
 
+**2026-10-06 13:47:09 UTC：冻结四组前缀已闭合；ab8有限真实复核已绑定原声明启动。**
+
+四组实际源码`7b82c60`、配置`milai-edit-post-b0-unit-correspondence-main-v1`、共同I2和各自空库，均32会话/72更新/73QA。
+实际响应及用量逐对核对：2,412响应/8,650,621 known，M Judge512唯一已知length，原响应/usage/无效评分保留。M原作者离线聚合成功、原checkpoint处理后与保存结果精确一致，不重跑模型或修补JSON。
+输入修复源码`ab8f475`及事前声明`7add825`自身Fast/Full在13:26:57 UTC成功；旧队列正常退出后，13:36:08 UTC使用冻结ab8归档中的正常`tools/run_edit_suite.py`启动有限B1首位开发用户前8，从自己的空库形成19更新机会/20QA。
+沿用现有Qwen3.6/thinking=true/temp1/max32768/context65536/512余量/input32256/timeout300、原Reader/官方评分和连续账本；不扩大范围、提高预算、注入旧状态或覆盖7b82失败。
+2026-10-06 13:47:09 UTC快照维护3/评估2、78请求/77响应/212,775 known/1待响应；PID1628748及实际冻结命令匹配，最终分数null。报告提交不替换运行源码，活动费用不混入旧队列闭合账本。
+已有37固定失败输入投影保持原packet/mapping/系统/日期/API schema；不是新历史或语义验证，不扩充投影采样。
+第三用户ordinal5/6实际HTTP包含旧就业/健康，完整响应分别为空和3create/14条款，无旧目标变化；原User发生时间保留，历史有效性与当前适用性分开。
+固定状态/原查询的共同词匹配与语义检索比较尚未运行；原冻结检索/模型输出不改。真实时间保留，展示元数据的相关性作用单独检验。
+复核仅Root选择性来源和同家族Judge；raw/gold/HTTP/reasoning/DB/config/log/Root助手保持ignored。
+[四组结果、实际目标诊断与有限运行快照](../data/manifests/milai-edit-post-b0-stage-c-four-arm-prefix-results-20261006.json)；原65/277和其余完整计划仍保留，下方为原日期复现历史。
+
 ## Latest M three-user subset (2026-10-06 13:09:44 UTC)
 
 Frozen7b82/I2 has closed B0/B1/B2 four-user first8; M first3 users are Root-reviewed,
