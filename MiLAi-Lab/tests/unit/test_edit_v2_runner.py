@@ -82,6 +82,72 @@ def execution(root: Path, arm: str) -> BenchmarkRun:
     return run
 
 
+def test_context_admission_matches_transported_thinking_mode(tmp_path: Path) -> None:
+    from tokenizers import Tokenizer as FastTokenizer
+    from tokenizers.models import WordLevel
+    from tokenizers.pre_tokenizers import Whitespace
+    from transformers import PreTrainedTokenizerFast
+
+    core = FastTokenizer(WordLevel(
+        {"[UNK]": 0, "input": 1, "assistant": 2, "think": 3, "closed": 4},
+        unk_token="[UNK]",
+    ))
+    core.pre_tokenizer = Whitespace()
+    tokenizer = PreTrainedTokenizerFast(tokenizer_object=core, unk_token="[UNK]")
+    tokenizer.chat_template = (
+        "{% for message in messages %}{{ message.content }} {% endfor %}"
+        "{% if add_generation_prompt %}assistant think "
+        "{% if enable_thinking is defined and enable_thinking is false %}closed{% endif %}"
+        "{% endif %}"
+    )
+    messages = [{"role": "user", "content": "input"}]
+    thinking_count = len(tokenizer.apply_chat_template(
+        messages, tokenize=True, add_generation_prompt=True, enable_thinking=True,
+    ))
+    nonthinking_count = len(tokenizer.apply_chat_template(
+        messages, tokenize=True, add_generation_prompt=True, enable_thinking=False,
+    ))
+    assert nonthinking_count > thinking_count
+    sent: list[dict[str, Any]] = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        payload = json.loads(request.content)
+        sent.append(payload)
+        tokens = len(tokenizer.apply_chat_template(
+            payload["messages"], tokenize=True, add_generation_prompt=True,
+            **payload.get("chat_template_kwargs", {}),
+        ))
+        return httpx.Response(200, json={
+            "choices": [{"finish_reason": "stop", "message": {"content": "answer"}}],
+            "usage": {"prompt_tokens": tokens, "completion_tokens": 1,
+                      "total_tokens": tokens + 1},
+        })
+
+    run = execution(tmp_path, "M")
+    run.tokenizer = tokenizer
+    run.settings["context_tokens"] = thinking_count + 1 + 512
+    for mode in (False, True, None):
+        run.settings["model"] = {"max_tokens": 1, "enable_thinking": mode}
+        with VLLMClient(
+            VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=1,
+                       enable_thinking=mode),
+            transport=httpx.MockTransport(provider),
+        ) as client:
+            run.client = client
+            if mode is False:
+                assert not run._fits(messages)
+                with pytest.raises(ValueError, match="Context unavailable without loss"):
+                    run.call("nonthinking", messages, structured=False)
+                assert sent == []
+            else:
+                assert run._fits(messages)
+                key = "thinking" if mode else "provider-default"
+                assert run.call(key, messages, structured=False) == "answer"
+                saved = read_json(tmp_path / "http" / key / "request.json")
+                response = read_json(tmp_path / "http" / key / "response.json")
+                assert saved["prompt_tokens"] == response["usage"]["prompt_tokens"]
+
+
 def observation(session: str, text: str) -> ObservedSession:
     return ObservedSession(
         session, "2030-01-01", ({"role": "user", "content": text, "timestamp": "2030-01-01"},)

@@ -1,3 +1,24 @@
+# 2026-10-06 finite native model-mode diagnostic
+
+After two minimal prompt repairs failed, Root verified actual instructions/state/
+current evidence and usable semantic choices were delivered. Existing Qwen service
+supports native thinking; all current experiments explicitly disable it. Runner
+input_tokens was hardcoded false despite transport supporting model configuration.
+The one-line fix follows the actual model option; method/schema/decoder/operators
+are unchanged. 31 affected checks, Ruff and runner mypy pass; all previous132 actual
+nonthinking token projections remain exact, thinking prefix is two tokens shorter.
+
+Declare one finite original44/global36 mode diagnostic from four own-empty banks,
+unchanged Writer, examples, temperature0, max_tokens8192 and all other budgets,
+using enable_thinking=true for all arms' Writer/Reader. Bind actual Git source and
+own CI before HTTP; existing plan7.2 permits this affected-check-approved daily
+finite diagnostic while Full runs. Full still precedes prefix/candidate/merge.
+Count provider completion including reasoning once; preserve length and unknown
+failures, no retry or JSON repair. This is a model-mode/input diagnostic, not an
+M method contribution. No new source controls, prefix or reserved work is admitted
+by preparation. No further warning/example iteration. Root owns all HTTP/data/
+accounting/GitHub; source owner has no raw/gold/future/reserved access.
+
 # 2026-10-06 final minimal repair and source controls reviewed; publication
 
 Frozen 8ed7826 completed original44/global36 and three source controls16/20/16:

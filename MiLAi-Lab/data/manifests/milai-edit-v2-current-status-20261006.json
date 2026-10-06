@@ -420,5 +420,14 @@
       "known_tokens": 964645,
       "unknown_usage": 0
     }
+  },
+  "model_mode_diagnostic": {
+    "status": "PREDECLARED_INPUT_MODE_DIAGNOSTIC_NOT_RUN",
+    "declared_generation_calls": 80,
+    "actual_generation_calls": 0,
+    "model_enable_thinking": true,
+    "detail_manifest": "milai-edit-post-b0-model-mode-diagnostic-20261006.json",
+    "candidate_selected": false,
+    "prefix_admitted": false
   }
 }

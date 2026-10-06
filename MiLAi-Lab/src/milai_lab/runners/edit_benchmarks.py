@@ -284,7 +284,7 @@ class BenchmarkRun:
                 messages,
                 tokenize=True,
                 add_generation_prompt=True,
-                enable_thinking=False,
+                enable_thinking=self.settings["model"].get("enable_thinking"),
             )
         )
 
