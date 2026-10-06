@@ -151,11 +151,7 @@ class ExternalRun(BenchmarkRun):
             return self.completed_content(read_json(cached))
         if (folder / "request.json").exists():
             raise RuntimeError("Unconfirmed author model request; do not blindly repeat")
-        tokens = len(
-            self.tokenizer.apply_chat_template(
-                messages, tokenize=True, add_generation_prompt=True, enable_thinking=False
-            )
-        )
+        tokens = self.input_tokens(messages)
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
             raise ValueError("Author context unavailable without loss")
         write_json(

@@ -52,6 +52,49 @@ def test_author_expansion_limit_retains_complete_occurrences_and_reports_omissio
     }
 
 
+@pytest.mark.parametrize("thinking", [False, True])
+def test_author_request_uses_configured_template_and_exact_context_boundary(tmp_path, thinking):
+    execution = object.__new__(ExternalRun)
+    execution.root = tmp_path
+    tokens = 32 if thinking else 34
+    execution.settings = {
+        "model": {"enable_thinking": thinking, "max_tokens": 8192},
+        "context_tokens": tokens + 8192 + 512,
+    }
+    execution.completion_key, execution.completion_serial = "formation", 0
+    template_modes = []
+
+    def apply_template(messages, *, tokenize, add_generation_prompt, enable_thinking):
+        assert tokenize and add_generation_prompt
+        template_modes.append(enable_thinking)
+        return list(range(32 if enable_thinking else 34))
+
+    execution.tokenizer = SimpleNamespace(apply_chat_template=apply_template)
+    calls = []
+
+    def chat(messages, *, response_format):
+        calls.append((messages, response_format))
+        return {
+            "choices": [{"finish_reason": "stop", "message": {"content": '{"label":"blue"}'}}],
+            "usage": {"prompt_tokens": tokens, "completion_tokens": 5, "total_tokens": tokens + 5},
+        }
+
+    execution.client = SimpleNamespace(chat=chat)
+    schema = {"type": "object", "properties": {"label": {"type": "string"}}}
+    assert execution._completion("Give the note a short label.", schema) == '{"label":"blue"}'
+    folder = tmp_path / "http/formation/author/1"
+    request, response = read_json(folder / "request.json"), read_json(folder / "response.json")
+    assert request["prompt_tokens"] == response["usage"]["prompt_tokens"] == tokens
+    assert request["messages"] == calls[0][0]
+    assert calls[0][1]["json_schema"]["schema"] == schema
+    execution.settings["context_tokens"] -= 1
+    with pytest.raises(ValueError, match="Author context unavailable"):
+        execution._completion("Give the note a short label.", schema)
+    assert len(calls) == 1
+    assert template_modes == [thinking, thinking]
+    assert not (tmp_path / "http/formation/author/2/request.json").exists()
+
+
 @pytest.mark.parametrize("unknown", [False, True])
 def test_embedding_resume_uses_confirmed_vectors_and_never_repeats_unknown_dispatch(
     tmp_path, unknown
