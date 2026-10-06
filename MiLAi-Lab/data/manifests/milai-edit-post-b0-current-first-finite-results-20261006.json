@@ -1,0 +1,314 @@
+{
+  "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
+  "observed_at": "2026-10-06T15:44:04.817496+00:00",
+  "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+  "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+  "arm": "B1",
+  "development_user_position": 0,
+  "author_update_labels": {
+    "Omission": 8,
+    "Correct": 10,
+    "None": 1
+  },
+  "author_QA_labels": {
+    "Correct": 15,
+    "None": 2,
+    "Hallucination": 2,
+    "Omission": 1
+  },
+  "updates_Correct": 10,
+  "updates_all": 19,
+  "updates_valid": 18,
+  "QA_Correct": 15,
+  "QA_all": 20,
+  "QA_valid": 18,
+  "role_usage": {
+    "Writer": {
+      "calls": 8,
+      "input_tokens": 145473,
+      "completion_tokens": 37992,
+      "known_tokens": 183465
+    },
+    "Reader": {
+      "calls": 20,
+      "input_tokens": 21911,
+      "completion_tokens": 34965,
+      "known_tokens": 56876
+    },
+    "Judge": {
+      "calls": 190,
+      "input_tokens": 282889,
+      "completion_tokens": 261496,
+      "known_tokens": 544385
+    }
+  },
+  "known_tokens": 784726,
+  "final_records": 22,
+  "final_units": 22,
+  "unit_roles": {
+    "content": 22
+  },
+  "relation_types": {},
+  "session_effects": [
+    {
+      "ordinal": 0,
+      "state_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 1,
+      "state_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 2,
+      "state_unchanged": false,
+      "new_records": 8,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 3,
+      "state_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 4,
+      "state_unchanged": false,
+      "new_records": 1,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 5,
+      "state_unchanged": false,
+      "new_records": 0,
+      "changed_existing_records": 2,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 6,
+      "state_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": true
+        }
+      ],
+      "unprocessed_count": 0
+    },
+    {
+      "ordinal": 7,
+      "state_unchanged": false,
+      "new_records": 0,
+      "changed_existing_records": 2,
+      "first_attempt_failures": [],
+      "actual_envelopes": [
+        {
+          "empty": false
+        }
+      ],
+      "unprocessed_count": 0
+    }
+  ],
+  "writer_operations": {
+    "expected_sessions": 8,
+    "counts": {
+      "official_completed_sessions": 8,
+      "prepared_sessions": 8,
+      "original_characters_in_prepared_sessions": 80537,
+      "prepared_characters": 80537,
+      "maintenance_completed_sessions": 8,
+      "upstream_extracted_outputs": 26,
+      "prepared_batches": 8,
+      "completed_batches": 8,
+      "recorded_writer_requests": 8,
+      "characters_in_recorded_requests": 80537,
+      "confirmed_writer_responses": 8,
+      "characters_in_confirmed_responses": 80537,
+      "writer_returned_proposal_list_batches": 8,
+      "writer_returned_empty_list_batches": 1,
+      "proposed_operations": 26,
+      "recorded_operation_receipts": 26,
+      "confirmed_committed_operations": 26
+    },
+    "not_yet_prepared_sessions": 0,
+    "pending_prepared_sessions": 0,
+    "pending_prepared_batches": 0,
+    "requests_without_confirmed_responses": 0,
+    "first_attempt_writer_failures": {},
+    "receipt_statuses": {
+      "committed": 26
+    },
+    "rejection_reasons": {},
+    "proposed_actions": {
+      "create": 22,
+      "edit": 4
+    },
+    "committed_actions": {
+      "create": 22,
+      "edit": 4
+    },
+    "proposed_local_operations": {
+      "replace": 4
+    },
+    "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+  },
+  "actual_Writer_inputs": [
+    {
+      "ordinal": 0,
+      "input_tokens": 3793,
+      "output_tokens": 4062,
+      "finish_reason": "stop",
+      "delivered_old_records": 0,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 1,
+      "input_tokens": 8285,
+      "output_tokens": 3935,
+      "finish_reason": "stop",
+      "delivered_old_records": 5,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 2,
+      "input_tokens": 15915,
+      "output_tokens": 4153,
+      "finish_reason": "stop",
+      "delivered_old_records": 8,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 3,
+      "input_tokens": 23803,
+      "output_tokens": 6718,
+      "finish_reason": "stop",
+      "delivered_old_records": 10,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 4,
+      "input_tokens": 25136,
+      "output_tokens": 3609,
+      "finish_reason": "stop",
+      "delivered_old_records": 10,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 5,
+      "input_tokens": 20838,
+      "output_tokens": 6921,
+      "finish_reason": "stop",
+      "delivered_old_records": 10,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 6,
+      "input_tokens": 21644,
+      "output_tokens": 3005,
+      "finish_reason": "stop",
+      "delivered_old_records": 10,
+      "actual_packet_matches_view": true
+    },
+    {
+      "ordinal": 7,
+      "input_tokens": 26059,
+      "output_tokens": 5589,
+      "finish_reason": "stop",
+      "delivered_old_records": 10,
+      "actual_packet_matches_view": true
+    }
+  ],
+  "accounting_start": {
+    "generation_requests": 39122,
+    "generation": {
+      "charged_tokens": 149465215,
+      "known_tokens": 149353500,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 965219,
+      "known_tokens": 965219,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 39340,
+    "generation": {
+      "charged_tokens": 150249941,
+      "known_tokens": 150138226,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 965219,
+      "known_tokens": 965219,
+      "unknown_usage": 0
+    }
+  },
+  "new_unknown_usage": 0,
+  "unconfirmed_requests": 0,
+  "Root_before_after_pairs_read": 8,
+  "Root_actual_Writer_envelopes_read": 8,
+  "Root_complete_Reader_answers_read": 20,
+  "original_author_augmented_records_match_final_saved_results": true,
+  "complete_answers_exactly_match_HTTP": 20,
+  "independent_Judge_or_exhaustive_source_database_audit": false,
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "real_check_not_spliced_into_old_scores": true,
+  "bounded_semantic_findings": [
+    "Current-first A yields4 actual accepted edits,1 genuine empty batch and a real completed-role/health revision, not only more creates. No writer capacity failure or operation rejection in this finite8.",
+    "Career plans and a new pet preference are saved where ab8 returned empty, but the original dated career-change motivation is still not saved; later revisions cannot supply that missing historical report.",
+    "Planned exercise/mindfulness scheduling becomes present integrates wording. A same-topic second pet record and insufficient selected evidence remain; actual dialogue coverage is distinct from selected-reference adequacy.",
+    "The new-role revision retains original employment and financial facts as previous history and updates health while retaining old support. Reader gets the old income value right but wrongly dates its report to the new-role assertion date. The scalar assertion date of a compound unit can flatten older fact provenance.",
+    "One later interviews/offers/networking event is delivered with relevant old records but remains empty. All20 answers read; unanswered historical motivation and colleagues influence remain alongside correct unknown-detail abstentions.",
+    "This is one exposed B1 user and one stochastic first attempt, not a causal effect estimate, all4 confirmation, condition-operator advantage or65/277 capacity proof. B remains unused; test actual shared retrieval/condition chain next."
+  ],
+  "Product_status": "NO_GO",
+  "remaining_original_plan": "65/277, own-state chain/native/drift/ablation/fixed tighter budget/16 reserved/external/Host/recovery/six deliverables remain."
+}

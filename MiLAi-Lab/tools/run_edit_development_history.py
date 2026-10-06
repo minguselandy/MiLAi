@@ -102,6 +102,7 @@ def run_history(
                 service = MemoryService(
                     store, ("r3-development", arm, "owner"), "owner", root / "memory.lock",
                     mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+                    semantic_retriever=run._semantic_retriever(),
                 )
                 if service.records():
                     raise ValueError("Each arm must form its own initial state")

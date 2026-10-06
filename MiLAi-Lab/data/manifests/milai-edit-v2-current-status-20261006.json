@@ -1,7 +1,7 @@
 {
-  "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06 14:43:48 UTC",
-  "previous_report_commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
+  "status": "CURRENT_FIRST_FINITE_CLOSED_MAINTENANCE_IMPROVED_COMMON_RETRIEVAL_SOURCE_READY_REAL_CHAIN_PENDING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T15:44:04.817496+00:00",
+  "previous_report_commit": "87c0f1f76ea899bb293be84830447130834fed36",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,15 +24,11 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "SOURCE7B82_STAGE_C_PREFIX_RUNNING_NO_FINAL_CANDIDATE",
-    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
-    "config_version": "milai-edit-post-b0-unit-correspondence-v1",
-    "actual_model_calls": 12,
-    "Root_checks_passed": 294,
-    "detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
+    "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
+    "detail_manifest": "milai-edit-post-b0-semantic-retrieval-development-20261006.json",
+    "actual_model_calls": 0,
     "candidate_selected": false,
-    "prefix_admitted": true,
-    "source_fix_committed": true
+    "prefix_admitted": false
   },
   "native_and_drift": {
     "actual_model_calls": 0,
@@ -397,10 +393,10 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 39122,
+    "generation_requests": 39340,
     "generation": {
-      "charged_tokens": 149465215,
-      "known_tokens": 149353500,
+      "charged_tokens": 150249941,
+      "known_tokens": 150138226,
       "unknown_usage": 3
     },
     "embedding": {
@@ -635,7 +631,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "Closed four-arm7b82 plus finiteab8 plus one read-only fixed-state3Reader/1embedding diagnostic, each counted once.",
+  "continuous_accounting_snapshot_scope": "Closed through current-first finite218; no duplicated user subsets or future retrieval costs.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -976,17 +972,12 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_files": 9,
-    "new_model_calls_started": 0,
-    "source_test_config_changes": true,
-    "source_files": 2,
-    "new_test_files": 0,
-    "public_config_files": 0,
-    "finite_source_calls": 0,
-    "Product_schema_API_permissions_Canonical_changed": false,
-    "Archive_workflow_changed": false,
-    "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
-    "rollback_reference": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
+    "Lab_files": 13,
+    "source_files": 5,
+    "test_files": 1,
+    "new_model_processes_started_for_publication": 0,
+    "active_old_process_frozen": true,
+    "Product_Archive_workflow": "UNCHANGED"
   },
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
@@ -6003,9 +5994,9 @@
   },
   "current_first_maintenance_development": {
     "detail_manifest": "milai-edit-post-b0-current-first-development-20261006.json",
-    "status": "CURRENT_FIRST_SOURCE_PREPARED_MECHANICAL_PASS_FINITE_REAL_RECHECK_NOT_ADMITTED_NOT_RUN",
+    "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
     "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
-    "source_commit": null,
+    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
     "source_base": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
     "engineering": {
       "status": "PASS_EXISTING8_ACTUAL_DELIVERIES_INFORMATION_MAPPING_GENERATION_SCHEMA_AND_DEFAULTS_PRESERVED",
@@ -6073,15 +6064,147 @@
       ]
     },
     "candidate_selected": false,
-    "full_new_four_arm_prefix_admitted": false
+    "full_new_four_arm_prefix_admitted": false,
+    "latest_live_snapshot": {
+      "status": "RUNNING_FINITE_CURRENT_FIRST_B1_OWN_EMPTY_FIRST8",
+      "observed_at": "2026-10-06T15:35:47.648995+00:00",
+      "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+      "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+      "scope": {
+        "arms": [
+          "B1"
+        ],
+        "development_user_position": 0,
+        "chronological_sessions": 8,
+        "updates": 19,
+        "QA": 20,
+        "initial_state": "OWN_EMPTY_BANK"
+      },
+      "maintenance_completed": 7,
+      "evaluation_completed": 7,
+      "HTTP_requests": 189,
+      "HTTP_responses": 188,
+      "pending_responses": 1,
+      "saved_known_tokens": 664689,
+      "saved_finish_reasons": {
+        "stop": 188
+      },
+      "final_update_score": null,
+      "final_QA_score": null,
+      "same_frozen_lexical_Reader_and_author_scoring": true,
+      "authoritative_process_handle_confirmed_live": true,
+      "no_hot_source_config_changes_or_restart": true,
+      "not_closed_cost_or_new_method_advantage": true
+    },
+    "closed_result_manifest": "milai-edit-post-b0-current-first-finite-results-20261006.json",
+    "actual_Writer_calls": 8,
+    "actual_Reader_calls": 20,
+    "actual_Judge_calls": 190,
+    "final_results": {
+      "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
+      "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+      "updates_Correct": 10,
+      "updates_all": 19,
+      "updates_valid": 18,
+      "QA_Correct": 15,
+      "QA_all": 20,
+      "QA_valid": 18,
+      "known_tokens": 784726,
+      "accounting_end": {
+        "generation_requests": 39340,
+        "generation": {
+          "charged_tokens": 150249941,
+          "known_tokens": 150138226,
+          "unknown_usage": 3
+        },
+        "embedding": {
+          "charged_tokens": 965219,
+          "known_tokens": 965219,
+          "unknown_usage": 0
+        }
+      }
+    }
   },
   "latest_actual_execution_since_previous_report": {
-    "generation_Reader_calls": 3,
-    "generation_known_tokens": 7300,
-    "embedding_calls": 1,
-    "embedding_known_tokens": 574,
-    "new_unknown_usage": 0,
-    "new_source_model_calls": 0,
-    "publication_model_calls": 0
+    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+    "role_usage": {
+      "Writer": {
+        "calls": 8,
+        "input_tokens": 145473,
+        "completion_tokens": 37992,
+        "known_tokens": 183465
+      },
+      "Reader": {
+        "calls": 20,
+        "input_tokens": 21911,
+        "completion_tokens": 34965,
+        "known_tokens": 56876
+      },
+      "Judge": {
+        "calls": 190,
+        "input_tokens": 282889,
+        "completion_tokens": 261496,
+        "known_tokens": 544385
+      }
+    },
+    "known_tokens": 784726,
+    "accounting_end": {
+      "generation_requests": 39340,
+      "generation": {
+        "charged_tokens": 150249941,
+        "known_tokens": 150138226,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 965219,
+        "known_tokens": 965219,
+        "unknown_usage": 0
+      }
+    },
+    "new_unknown_usage": 0
+  },
+  "historical_before_common_semantic_retrieval_source": {
+    "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
+    "observed_at": "2026-10-06 14:43:48 UTC",
+    "next_candidate": {
+      "status": "SOURCE7B82_STAGE_C_PREFIX_RUNNING_NO_FINAL_CANDIDATE",
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "config_version": "milai-edit-post-b0-unit-correspondence-v1",
+      "actual_model_calls": 12,
+      "Root_checks_passed": 294,
+      "detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
+      "candidate_selected": false,
+      "prefix_admitted": true,
+      "source_fix_committed": true
+    },
+    "latest_actual_execution_since_previous_report": {
+      "generation_Reader_calls": 3,
+      "generation_known_tokens": 7300,
+      "embedding_calls": 1,
+      "embedding_known_tokens": 574,
+      "new_unknown_usage": 0,
+      "new_source_model_calls": 0,
+      "publication_model_calls": 0
+    },
+    "publication_scope": {
+      "Lab_files": 9,
+      "new_model_calls_started": 0,
+      "source_test_config_changes": true,
+      "source_files": 2,
+      "new_test_files": 0,
+      "public_config_files": 0,
+      "finite_source_calls": 0,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Archive_workflow_changed": false,
+      "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+      "rollback_reference": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
+    }
+  },
+  "common_semantic_retrieval_development": {
+    "detail_manifest": "milai-edit-post-b0-semantic-retrieval-development-20261006.json",
+    "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
+    "actual_model_calls": 0,
+    "engineering_checks_passed": 313,
+    "own_CI": "QUERY_AFTER_PUBLICATION"
   }
 }

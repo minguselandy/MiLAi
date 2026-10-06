@@ -46,6 +46,7 @@ from milai_lab.memory.observation import (
 from milai_lab.memory.observation import (
     observation_view as field_observation_view,
 )
+from milai_lab.memory.retrieval import SemanticRetriever, semantic_text
 
 
 def _json(value: Any) -> str:
@@ -149,6 +150,7 @@ class MemoryService:
         observation_capture_feedback: str = "legacy",
         functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
+        semantic_retriever: SemanticRetriever | None = None,
     ) -> None:
         if functional_contract == "functional_v1":
             mutation_contract = (
@@ -169,6 +171,7 @@ class MemoryService:
         if namespace[-1] != owner:
             raise ValueError("V13_MEMORY_OWNER_NAMESPACE_MISMATCH")
         self.store, self.namespace, self.owner = store, namespace, owner
+        self.semantic_retriever = semantic_retriever
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
         self.mode, self.lock_path = mode, lock_path.resolve()
@@ -2496,7 +2499,7 @@ class MemoryService:
         if not 1 <= limit <= 100:
             raise ValueError("V13_SEARCH_LIMIT_INVALID")
         degradation = None
-        if dense:
+        if dense and self.semantic_retriever is None:
             try:
                 page = self.store.search(self.namespace, query=query, limit=limit)
                 rows = [self.read(item.key) for item in page if item.namespace == self.namespace]
@@ -2524,6 +2527,8 @@ class MemoryService:
             # Readable provenance IDs may contain public event keys or bank names.
             # Those keys are identities, never additional semantic search terms.
             value = row.get("value", row)
+            if self.semantic_retriever is not None:
+                return semantic_text(value)
             keys = (
                 ("content", "kind", "scope", "basis", "fields")
                 if "value" in row
@@ -2650,10 +2655,13 @@ class MemoryService:
                             "body_visibility": "notice_only",
                         }
                     )
+        visible_records = [row for row in records if row["ok"]]
         records = sorted(
             (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
             key=lambda row: (-rank(row), row["id"]),
         )[:limit]
+        if self.semantic_retriever is not None and tokens:
+            records = self.semantic_retriever.rank(query, visible_records, records, limit)
         raw = sorted(
             (row for row in raw if enumerate_bank or rank(row)),
             key=lambda row: (-rank(row), row["event_id"]),
@@ -2661,7 +2669,9 @@ class MemoryService:
         return {
             "ok": True,
             "status": "found" if records or raw else "no_results",
-            "retrieval": "raw_keyword",
+            "retrieval": (
+                "semantic_plus_lexical" if self.semantic_retriever is not None else "raw_keyword"
+            ),
             "degraded": degradation is not None,
             "degradation_reason": degradation,
             "records": records,
