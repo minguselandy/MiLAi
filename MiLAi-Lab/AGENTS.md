@@ -1,3 +1,25 @@
+# 2026-10-06T16:18:02.827415+00:00: foundation test ownership fixed, plan6.2 actual-state cohort prepared
+
+Previous turn made progress:47aa published11 files, ownCI revalidated this turn.
+Core actual registry/boundary/Ruff/mypy passes; new standalone optional retrieval
+check incorrectly collected without langchain_core inCore. Move5 unchangedchecks
+into existing foundation test_edit_benchmark_wiring;16 tests/Ruff/matrix pass,
+no workflow/dependency/runtime change or skip. Root only; no agent delegation.
+Read full post87c plan1-12 this turn. Following9 order, fixed12 M actual7b query-state
+pairs3 per exposeduser before newranks,7 direct/1oldcontext/4missing fact; private
+cohort and configs immutableprepared, model0. Publish declarationL/plainIDfill/D/
+fixedinterleaveH K10/material8192, atmost48Reader0W/J; withinpairidenticalrequests
+share completedfirstattempt includingfailures; allcost recorded. No gold to ranking
+orReader, no sources injected, noidealoldcards. Source ownFast then freezeadmit
+ordinaryserialledger; R3 globalconfig preparednotrun untilcommonretrievalchoice.
+OriginalR3both44/36, ownemptyfourprefix65/277/native/drift/ablation/tighterbudget/
+16reserved/external/Host/recovery/sixdeliverables stay required. CurrentAclosed87c
+10/19valid18 QA15/20valid18,218stop784726known; originalresults unchanged.
+Ledger39340/150138226known150249941charged,embedding965219,historicunknown3,
+no modelprocessactive/no newHTTP. No newSHA/platform/auditor/Attention/loop/budget.
+ProductNO_GO PR85draftunmerged. Raw/gold/cohort/HTTP/DB/privatecfg ignored;
+Product/Archive/workflow/API/permissions/Canonical unchanged. Lowerblocks historical.
+
 # 2026-10-06 16:02:00 UTC: user-requested execution summary and CI compatibility correction
 
 Full post87c goal remains active. This turn publishes current execution, starts0

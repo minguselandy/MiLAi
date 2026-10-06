@@ -1,7 +1,7 @@
 {
-  "status": "CI_COMPATIBILITY_CORRECTION_LOCAL_CHECKS_PASS_OWN_FAST_PENDING_REAL_CHAIN_NOT_ADMITTED",
-  "observed_at": "2026-10-06T16:02:00+00:00",
-  "previous_report_commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+  "status": "FOUNDATION_TEST_PLACEMENT_FIXED_RETRIEVAL12_PREPARED_OWN_FAST_PENDING_NO_CANDIDATE",
+  "observed_at": "2026-10-06T16:18:50.018210+00:00",
+  "previous_report_commit": "47aa6a9eed1c14847f50ae91937fa1b00d70c9f2",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,8 +24,8 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "NOT_ADMITTED_PENDING_FIXED_SOURCE_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
-    "detail_manifest": "milai-edit-post-b0-semantic-retrieval-development-20261006.json",
+    "status": "RETRIEVAL12_PREPARED_NOT_ADMITTED_PENDING_OWN_FAST",
+    "detail_manifest": "milai-post87c-fixed-state-retrieval12-development-20261007.json",
     "actual_model_calls": 0,
     "candidate_selected": false,
     "prefix_admitted": false
@@ -972,10 +972,10 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_files": 11,
-    "source_files": 3,
-    "test_files": 1,
-    "report_and_declaration_files": 7,
+    "Lab_files": 7,
+    "source_files": 0,
+    "test_files": 2,
+    "report_and_declaration_files": 5,
     "new_model_processes_started_for_publication": 0,
     "Product_Archive_workflow": "UNCHANGED"
   },
@@ -1645,7 +1645,7 @@
     "source_draft_excluded": true
   },
   "latest_source_commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
-  "model_calls_since_previous_report_scope": "Since20b979a: publication and CI compatibility correction only, no real model dispatch",
+  "model_calls_since_previous_report_scope": "Since47aa6a9: unchanged optional tests relocated and actual-state diagnosis prepared; no real model dispatch",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
@@ -6192,7 +6192,7 @@
     "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
     "actual_model_calls": 0,
     "engineering_checks_passed": 313,
-    "own_CI": "20b_FAST_FAILED_CORRECTED_SOURCE_OWN_CI_PENDING",
+    "own_CI": "47aa_CORE_COLLECTION_FAILURE_FIXED_BY_EXISTING_FOUNDATION_TARGET_OWN_CI_PENDING",
     "ci_correction_in_this_commit": true
   },
   "historical_before_ci_compatibility_repair": {
@@ -6322,5 +6322,14 @@
     },
     "next_real_check": "Unchanged exposed global-condition5 events/all4 ownempty/36 Writer-Reader/0 Judge plus all billed embedding; own Fast success required",
     "rollback_reference": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b"
+  },
+  "foundation_test_placement": {
+    "existing_foundation_target": "tests/unit/test_edit_benchmark_wiring.py",
+    "tests_passed": 16,
+    "five_moved_tests_AST_exact": true,
+    "Ruff_files": 1,
+    "verification_matrix": "PASS",
+    "runtime_workflow_dependency_changes": false,
+    "new_real_model_calls": 0
   }
 }

@@ -33,7 +33,7 @@
   "prior_actual_diagnostic": "milai-edit-post-b0-fixed-state-semantic-retrieval-results-20261006.json",
   "ranking_differs_from_prior_diagnostic": "Prior diagnosis kept all positive lexical results before cosine fill. This generic source interleaves them; prior Reader answers are not runtime validation of this new source.",
   "actual_model_calls_for_new_retrieval_source": 0,
-  "own_CI": "20b_FAST_FAILED_CORRECTED_SOURCE_OWN_CI_PENDING_BIND_OWN_FAST_BEFORE_HTTP",
+  "own_CI": "47aa_CORE_COLLECTION_FAILURE_CORRECTED_FOUNDATION_PLACEMENT_OWN_CI_PENDING",
   "next_finite_real_check": {
     "status": "DECLARED_NOT_ADMITTED_PENDING_FIXED_COMMIT_OWN_FAST_NOT_RUN",
     "normal_driver": "tools/run_edit_development_history.py",
@@ -197,5 +197,21 @@
     "authoritative_process_handle_confirmed_live": true,
     "no_hot_source_config_changes_or_restart": true,
     "not_closed_cost_or_new_method_advantage": true
-  }
+  },
+  "foundation_test_placement": {
+    "status": "EXISTING_FOUNDATION_TARGET_16_PASS_NO_RUNTIME_SOURCE_CHANGE",
+    "source_base": "47aa6a9eed1c14847f50ae91937fa1b00d70c9f2",
+    "reason": "Core job112370442935 collected the new optional-dependency test without langchain_core; existing source registration/boundaries/Ruff/mypy all passed.",
+    "removed_standalone_test": "tests/memory/test_semantic_retrieval.py",
+    "unchanged5_checks_in": "tests/unit/test_edit_benchmark_wiring.py",
+    "workflow_dependency_changes": false,
+    "new_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION"
+  },
+  "next_execution_order": [
+    "Plan6.2 preselected12 actual query-state L/plain-fill/D/fixed-interleaveH diagnostic, ownFast-bound",
+    "Select common retrieval from actual full-answer and delivery evidence",
+    "Original R3 ownempty global5 and originalbranch; unchanged exposed sources, then same-version prefix65/277"
+  ],
+  "fixed_state_diagnostic_declaration": "milai-post87c-fixed-state-retrieval12-development-20261007.json"
 }

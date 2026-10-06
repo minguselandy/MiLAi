@@ -1,5 +1,12 @@
 # MiLAi Lab 当前状态
 
+**2026-10-06T16:18:02.827415+00:00：修复可选测试归属，准备计划6.2的12对检索对照。**
+
+`47aa6a9` Core实际已通过登记/边界/Ruff/mypy，但新检索测试在无可选依赖的Core组收集失败（langchain_core缺失）。五项行为原样移入已有foundation的`test_edit_benchmark_wiring.py`，现有16项通过，Ruff和verification matrix通过；不改workflow、依赖或用skip代替执行。
+按新计划顺序，先完成12个实际M状态/原问题的L／普通补齐／D／固定交替H诊断，每曝光用户3对。Root排序前判定7直接可答、1仅旧背景、4缺少所问事实；最多48 Reader、0 Writer/Judge，所有embedding和实际请求计费，完全相同请求共享已完成首次结果。原旧混合规则诊断单列。
+实际HTTP仍0/未准入，需本提交自身Fast；R3自己的空库配置仅准备，待共同检索选择后执行，原44/36两分支和65/277完整范围不取消。账本不变，Product NO_GO。
+[12对检索诊断声明](../data/manifests/milai-post87c-fixed-state-retrieval12-development-20261007.json)。下方保留各自时点历史。
+
 **2026-10-07 00:02:00 北京时间／2026-10-06 16:02:00 UTC：执行摘要与共同检索CI接线修复。**
 
 四组`7b82c60`前缀已全部闭合；`87c0f1f` B1自己的空库前8也已正常闭合，更新10/19（valid18）、QA15/20（valid18），218响应全stop/784,726 known。当前没有活动模型队列，共同检索真实变化链仍0/未准入。
