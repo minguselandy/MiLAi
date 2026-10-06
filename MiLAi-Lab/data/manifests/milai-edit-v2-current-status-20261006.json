@@ -1,7 +1,7 @@
 {
-  "status": "PAIRED_B2_WRITER_CLOSED_MIXED_SEMANTICS_COMMON_PREFIX_PREPARED_FULL_PENDING",
-  "observed_at": "2026-10-06T21:18:35Z",
-  "previous_report_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "status": "ADMITTED_SOURCE_OWN_FULL_PASSED_SAME_VERSION_FOUR_ARM_PREFIX_RUNNING",
+  "observed_at": "2026-10-06T21:45:22.438483+00:00",
+  "previous_report_commit": "ae2a0eb0e1cb114371c72fb21ffdbee40c1fcef8",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,12 +24,12 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "SAME_VERSION_FOUR_ARM_PREFIX_PREPARED_SOURCE_FULL_PENDING",
+    "status": "SAME_VERSION_FOUR_ARM_PREFIX_ADMITTED_RUNNING_NO_FINAL_CANDIDATE",
     "source_commit_reference": "072af2e38507ad8593afab66c10e3400591534d0",
-    "detail_manifest": "milai-post87c-common-dense-prefix-development-20261007.json",
+    "detail_manifest": "milai-post87c-common-dense-prefix-execution-snapshot-20261007.json",
     "candidate_selected": false,
-    "prefix_admitted": false,
-    "actual_new_model_calls": 0
+    "prefix_admitted": true,
+    "actual_new_model_calls": 30
   },
   "native_and_drift": {
     "actual_model_calls": 0,
@@ -374,7 +374,7 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 2,
+  "model_calls_since_previous_report": 30,
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -635,7 +635,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "Closed after two072 Writer receipts, cumulative includes all earlier sources once; new pending requests0.",
+  "continuous_accounting_snapshot_scope": "Last closed after two072 Writer, before live prefix; current live cumulative snapshot separately reports pending reservation.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -1642,7 +1642,7 @@
     "source_draft_excluded": true
   },
   "latest_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
-  "model_calls_since_previous_report_scope": "Two072 B2 matched-before Writer calls only; zero Reader/Judge/embedding, known23055, original978 remains earlier ledger subset.",
+  "model_calls_since_previous_report_scope": "Live prefix30requests/29confirmed/1pending at dated snapshot, not terminal accounting.",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
@@ -1754,7 +1754,7 @@
     "scope": "Earlier dated development snapshots, not counts of the current48 new completed requests or original7cc141."
   },
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
-  "new_queue_live": false,
+  "new_queue_live": true,
   "stage_C_prefix_live": {
     "status": "CLOSED_NORMAL_EXIT",
     "observed_at": "2026-10-06T13:34:37.015448+00:00",
@@ -1959,13 +1959,14 @@
   },
   "current_publication_checks": {
     "status": "PASS_LIGHTWEIGHT_PUBLICATION_CHECKS",
-    "changed_Lab_files": 7,
+    "changed_Lab_files": 6,
     "source_or_test_files": 0,
-    "JSON_files_parsed": 3,
-    "relative_links_checked": 161,
+    "JSON_files_parsed": 2,
+    "relative_links_checked": 168,
     "original_public_manifests_preserved": 5,
     "private_artifact_paths_ignored": 5,
-    "closed_receipts_and_ledger_reconciled": true,
+    "snapshot_receipts_and_ledger_deltas_reconciled": true,
+    "last_closed_and_live_pending_accounting_separate": true,
     "source_tests_repeated_for_docs": false,
     "broad_tests_repeated": false,
     "new_model_calls_for_publication": 0,
@@ -6112,15 +6113,68 @@
     }
   },
   "latest_actual_execution_since_previous_report": {
-    "detail_manifest": "milai-post87c-rewrite-revision-witness-execution-20261007.json",
-    "Writer": 2,
-    "Reader_Judge_embedding": 0,
-    "known_generation_tokens": 23055,
-    "stop": 2,
-    "committed": 2,
-    "semantics": "event3 damages unmentioned general frequency; event4 cancels exception preserving actual remaining state; independent clones, no repaired natural chain",
-    "Root_review_complete": true,
-    "new_unknown_or_retry": 0
+    "detail_manifest": "milai-post87c-common-dense-prefix-execution-snapshot-20261007.json",
+    "status": "LIVE_NOT_TERMINAL_OR_FINAL_SCORE",
+    "per_arm": {
+      "B0": {
+        "maintenance_events": 2,
+        "evaluation_events": 1,
+        "generation_requests": 30,
+        "generation_responses": 29,
+        "committed_operations": 8,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "B1": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      }
+    },
+    "confirmed_generation": {
+      "Writer": 2,
+      "Reader": 3,
+      "Judge": 24,
+      "responses": 29,
+      "known_tokens": 93925,
+      "finish_reasons": {
+        "stop": 29
+      },
+      "requests": 30,
+      "not_yet_confirmed_requests": 1
+    },
+    "confirmed_encoding": {
+      "requests": 5,
+      "responses": 5,
+      "known_tokens": 738
+    },
+    "complete_semantic_review": false
   },
   "historical_before_common_semantic_retrieval_source": {
     "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
@@ -6249,7 +6303,7 @@
       "ci_correction_in_this_commit": true
     }
   },
-  "latest_source_commit_scope": "Actual frozen072 Writer2 closed; report publication separate; common four-arm prefix prepared, source own Full pending.",
+  "latest_source_commit_scope": "Actual frozen072 remains unchanged; same-version prefix now live after own Fast/Full. Latest closed model result is the two matched-before Writer checks; report identity separate.",
   "ci_compatibility_correction": {
     "status": "CORRECTION_INCLUDED_IN_PREPARED6e_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
     "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
@@ -6368,21 +6422,62 @@
     "scope_extension": "Three already-exposed original M events added to corrected9; all actual packets/states, no new Writer/Judge"
   },
   "latest_prepared_execution": {
-    "status": "PREPARED_NOT_ADMITTED_OR_RUN",
-    "detail_manifest": "milai-post87c-common-dense-prefix-development-20261007.json",
+    "status": "ADMITTED_AND_RUNNING",
     "source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+    "declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+    "snapshot": "milai-post87c-common-dense-prefix-execution-snapshot-20261007.json",
     "arms": [
       "B0",
       "B1",
       "B2",
       "M"
     ],
-    "users": 4,
-    "sessions_per_user": 8,
-    "sessions_per_arm": 32,
-    "source_own_Full_required": true,
+    "own_Fast_Full_success": true,
     "paired_Writer_review_complete": true,
-    "actual_prefix_HTTP": 0,
+    "session_id": 68500,
+    "PID_live": true,
+    "per_arm_snapshot": {
+      "B0": {
+        "maintenance_events": 2,
+        "evaluation_events": 1,
+        "generation_requests": 30,
+        "generation_responses": 29,
+        "committed_operations": 8,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "B1": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance_events": 0,
+        "evaluation_events": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "committed_operations": 0,
+        "rejected_operations": 0,
+        "events_with_unprocessed": 0,
+        "terminal": false
+      }
+    },
     "candidate_selected": false
   },
   "historical_source_CI_before_common_D_R3": {
@@ -6465,29 +6560,29 @@
   },
   "latest_experiment_source_ci": {
     "commit": "072af2e38507ad8593afab66c10e3400591534d0",
-    "observed_at": "2026-10-06T21:18:35Z",
     "Fast": {
       "run_id": 37531198186,
-      "conclusion": "success",
-      "verified_before_HTTP_at": "2026-10-06T21:15:11Z"
+      "conclusion": "success"
     },
     "Full": {
       "run_id": 37531198051,
-      "status": "in_progress",
-      "required_before_prefix": true
-    }
+      "conclusion": "success"
+    },
+    "verified_before_prefix_HTTP_at": "2026-10-06T21:40:25Z",
+    "observed_at": "2026-10-06T21:40:25Z"
   },
   "latest_execution_summary": {
-    "observed_at": "2026-10-06T21:18:35Z",
+    "observed_at": "2026-10-06T21:45:22.438483+00:00",
     "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
-    "active_model_queue": false,
-    "source_repair_status": "FREE_WRITER_USED_TWO_COMMITTED_SEMANTICS_MIXED",
-    "Writer_calls": 2,
-    "generation_known_tokens": 23055,
-    "same_version_four_arm_prefix_admitted": false,
+    "active_model_queue": true,
+    "source_own_Fast_Full_success": true,
+    "same_version_four_arm_prefix_admitted": true,
+    "confirmed_generation_responses": 29,
+    "known_generation_tokens": 93925,
+    "complete_semantic_review": false,
+    "candidate_selected": false,
     "stable_method_advantage_established": false,
-    "goal_complete": false,
-    "candidate_selected": false
+    "goal_complete": false
   },
   "historical_before_claim_revision_evidence_source": {
     "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
@@ -6872,13 +6967,13 @@
     "new_queue_live": true
   },
   "latest_publication_verification": {
-    "observed_at": "2026-10-06T21:18:35Z",
+    "observed_at": "2026-10-06T21:45:22.438483+00:00",
     "source_contains_changes": false,
-    "closed_experiment_source": "072af2e38507ad8593afab66c10e3400591534d0",
-    "closed_results_manifest": "milai-post87c-rewrite-revision-witness-execution-20261007.json",
-    "original_declaration_and_results_preserved": true,
-    "active_model_queue": false,
-    "rollback_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+    "actual_experiment_source": "072af2e38507ad8593afab66c10e3400591534d0",
+    "execution_snapshot": "milai-post87c-common-dense-prefix-execution-snapshot-20261007.json",
+    "original_declarations_and_results_preserved": true,
+    "active_model_queue": true,
+    "rollback_commit": "ae2a0eb0e1cb114371c72fb21ffdbee40c1fcef8",
     "candidate_selected": false,
     "reserved_16_users_read": false,
     "goal_complete": false
@@ -6893,7 +6988,7 @@
     "own_Fast_before_HTTP_verified": true,
     "own_Full_before_prefix_required": true
   },
-  "latest_actual_execution_since_previous_report_scope": "Only two declared B2 matched-before diagnostics. Previous97838 and originalR3 remain separate sources/ranges; no extra publication HTTP.",
+  "latest_actual_execution_since_previous_report_scope": "Only current prefix confirmed/live attempts since ae report. The prior2Writer and old97838 already in last closed cumulative total, not additional current prefix samples.",
   "historical_before_scope_contract_execution_snapshot": {
     "status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
     "observed_at": "2026-10-06T20:07:09+00:00",
@@ -7685,5 +7780,90 @@
     "known_tokens": 23055,
     "event3_non_target_general_frequency_lost": true,
     "event4_actual_old_units_exact_except_IDs": 3
+  },
+  "historical_before_common_prefix_admission_snapshot": {
+    "status": "PAIRED_B2_WRITER_CLOSED_MIXED_SEMANTICS_COMMON_PREFIX_PREPARED_FULL_PENDING",
+    "observed_at": "2026-10-06T21:18:35Z",
+    "latest_prepared_execution": {
+      "status": "PREPARED_NOT_ADMITTED_OR_RUN",
+      "detail_manifest": "milai-post87c-common-dense-prefix-development-20261007.json",
+      "source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "arms": [
+        "B0",
+        "B1",
+        "B2",
+        "M"
+      ],
+      "users": 4,
+      "sessions_per_user": 8,
+      "sessions_per_arm": 32,
+      "source_own_Full_required": true,
+      "paired_Writer_review_complete": true,
+      "actual_prefix_HTTP": 0,
+      "candidate_selected": false
+    },
+    "latest_actual_execution_since_previous_report": {
+      "detail_manifest": "milai-post87c-rewrite-revision-witness-execution-20261007.json",
+      "Writer": 2,
+      "Reader_Judge_embedding": 0,
+      "known_generation_tokens": 23055,
+      "stop": 2,
+      "committed": 2,
+      "semantics": "event3 damages unmentioned general frequency; event4 cancels exception preserving actual remaining state; independent clones, no repaired natural chain",
+      "Root_review_complete": true,
+      "new_unknown_or_retry": 0
+    },
+    "latest_actual_execution_since_previous_report_scope": "Only two declared B2 matched-before diagnostics. Previous97838 and originalR3 remain separate sources/ranges; no extra publication HTTP.",
+    "latest_execution_summary": {
+      "observed_at": "2026-10-06T21:18:35Z",
+      "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "active_model_queue": false,
+      "source_repair_status": "FREE_WRITER_USED_TWO_COMMITTED_SEMANTICS_MIXED",
+      "Writer_calls": 2,
+      "generation_known_tokens": 23055,
+      "same_version_four_arm_prefix_admitted": false,
+      "stable_method_advantage_established": false,
+      "goal_complete": false,
+      "candidate_selected": false
+    },
+    "latest_publication_verification": {
+      "observed_at": "2026-10-06T21:18:35Z",
+      "source_contains_changes": false,
+      "closed_experiment_source": "072af2e38507ad8593afab66c10e3400591534d0",
+      "closed_results_manifest": "milai-post87c-rewrite-revision-witness-execution-20261007.json",
+      "original_declaration_and_results_preserved": true,
+      "active_model_queue": false,
+      "rollback_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "candidate_selected": false,
+      "reserved_16_users_read": false,
+      "goal_complete": false
+    },
+    "current_publication_checks": {
+      "status": "PASS_LIGHTWEIGHT_PUBLICATION_CHECKS",
+      "changed_Lab_files": 7,
+      "source_or_test_files": 0,
+      "JSON_files_parsed": 3,
+      "relative_links_checked": 161,
+      "original_public_manifests_preserved": 5,
+      "private_artifact_paths_ignored": 5,
+      "closed_receipts_and_ledger_reconciled": true,
+      "source_tests_repeated_for_docs": false,
+      "broad_tests_repeated": false,
+      "new_model_calls_for_publication": 0,
+      "Product_API_permissions_Canonical_Archive_workflow_changed": false
+    }
+  },
+  "current_live_accounting_snapshot": {
+    "generation_requests": 39612,
+    "generation": {
+      "charged_tokens": 151570370,
+      "known_tokens": 151421317,
+      "unknown_usage": 4
+    },
+    "embedding": {
+      "charged_tokens": 975570,
+      "known_tokens": 975570,
+      "unknown_usage": 0
+    }
   }
 }
