@@ -1,3 +1,40 @@
+# 2026-10-06 20:30:37 UTC: execution summary; fixed Reader failed, original global R3 live
+
+The user requests a current execution summary submitted to GitHub. Frozen source
+978bc65 is unchanged. Its Fast 37524225408 succeeded and was verified at 20:19:13
+before HTTP; Full 37524225437 is still in progress at 20:33:16. Two fixed actual
+baa first-M withdrawal/final Reader calls closed: 2 stop, 5,398 known tokens,
+no Writer, Judge, embedding, writes or new unknown. Root reviewed both complete
+answers, actual material and receipts; accounting matches. Actual previous rule
+role was received, but full tasks remain 0/2; the final answer misreads four times
+as Thursday. Preserve failures; do not repeat the same cases until they pass.
+
+Original global R3 session 17760, PID 3191346 remains live on frozen 978, four
+own-empty banks and original events/questions/config. At 20:30:37 the event rows
+are B0 5/5, B1 3/5, B2/M 0/5; 8 Writer + 6 Reader responses, 14 stop and 66,762
+known tokens; 21 encoder responses and 673 known tokens, one generation pending.
+Written maintenance has zero rejects/gaps. No terminal, full semantic review or
+final score. Keep the existing process; no hot edits, restart or extra model
+process for publication. The unaffected first 44-call branch is not repeated.
+
+The last closed ledger after fixed Reader is 39,544 requests, 151,096,718 known,
+151,208,433 charged, embedding 973,335, historical unknown 3. The live snapshot
+is 39,559 requests, 151,163,480 known, 151,325,863 charged, embedding 974,008;
+unknown 4 includes one in-flight reservation, not a new closed transport failure.
+Confirmed known receipts match; subsets are already in cumulative totals. No
+budget reset/increase, unknown replay or JSON repair.
+
+Publish six Lab docs/status/result files only. The new execution snapshot is
+separate from the immutable pre-HTTP declaration and old baa results. No source,
+test, active config or workflow changes, extra HTTP or repeated 15 source checks.
+Use light JSON/link/count/ledger/diff checks and verify exact remote report head
+and its own CI. Rollback is 978bc65. The full 8/65/277, native, drift, ablation,
+tighter budget, 16 reserved users, external tasks, normal Host, forgetting,
+recovery and six deliverables remain active and unfinished. One Qwen family and
+existing BGE; no delegation, reserved reading or platform. Product NO_GO; PR85
+open/draft/unmerged. Product/API/permissions/Canonical/Archive unchanged; raw,
+gold, HTTP, reasoning, DB, configs and logs ignored. Lower blocks are historical.
+
 # 2026-10-06 20:07:09 UTC: scope contract and one-predecessor roles implemented; finite real checks prepared
 
 Previous goal turn publication e4f made progress; root revalidated clean worktree,
