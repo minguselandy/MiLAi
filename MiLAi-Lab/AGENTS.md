@@ -1,3 +1,56 @@
+# 2026-10-06 after 20:51 UTC: global R3 closed; rewrite revision witnesses implemented
+
+The previous turn published the 59ce execution snapshot, making authoritative
+progress. Root read post87c sections 1–12 and revalidated session 17760 and PID
+3191346; no restart. Frozen 978 global R3 closed normally at 20:38:17. Root
+reviewed 20 states/proposals, 16 complete answers, 20 current messages/dates,
+16 old records, actual delivered materials, 36 generation and 50 encoder receipts.
+36 stop, 207,619 known; encoding 1,497 known; two B2 rejects and two gaps, no
+capacity failure, new unknown or retry. Fixed Reader 2 separately closed with
+5,398 known, tasks 0/2. Source stage total 38 and 213,017 known. Own 978 Fast and
+Full succeeded. Original states, answers, requests and running snapshot preserved.
+
+M add_exception/remove_exception retain general and qualifiers. Shared qualifier
+changes use change_value on content, not change_condition on shared nodes. B1
+ordinary operations also retain the general rule. Reader still refuses after
+withdrawal and computes next Monday incorrectly; B2 describes a rejected
+withdrawal as completed. Root complete answers 6/16, not official, independent
+or stable method evidence. Original process exited; serial lease is free.
+
+Root changed three Lab source files. Optional nonempty rewrite revision_evidence
+selects actual e for removing clauses/bindings independently of retained h
+support and attribution. Reuse stored revision_evidence, decoding, delivery,
+commit and normal Host. No new flag, store, auditor or hidden full-rewrite fill;
+changed text still needs its own e. Full withdrawal and legacy defaults unchanged.
+Two existing test functions strengthened, eight distinct affected checks pass.
+The first two failed on resolving an empty witness list; resolve only when
+selected, and rerun only those two. Ruff five files, mypy three sources and the
+existing package boundary pass; no broad suite or prior 15 checks repeated.
+
+An actual rejected B2 ordinal 4 proposal was applied on a private DB copy after
+adding only revision_evidence. It removes the exception/override while retaining
+three units, support, attribution and two bindings. First clone setup lacked the
+transient source boundary and rejected; bind the exact original event and use a
+distinct offline operation, preserving that failure. No model retry, original
+mutation, ideal state or reconstruction of the failed previous global change.
+
+Publish twelve Lab files: three source, two existing tests, seven docs/status/
+results/declaration. New source actual model and encoder calls remain zero.
+Declare at most two B2 Writer diagnostics on original actual before/packet for
+global events 3/4, independent clones; no Reader, Judge or embedding. Bind new
+published source and own Fast before HTTP; Full before prefix/candidate. Reader
+scope/calendar repair remains open. No new prefix or final candidate.
+
+Closed ledger: 39,580 requests, 151,304,337 known, 151,416,052 charged, embedding
+974,832, historical unknown three; no new pending request, limits unchanged.
+Subsets are already included once. One Qwen family and existing BGE, no new
+agents, reserved reading or platform. Full 8/65/277, native, drift, ablation,
+tighter budget, 16 reserved users, external tasks, Host, forgetting, recovery and
+six deliverables remain active and incomplete. Product NO_GO; PR85 open/draft/
+unmerged. Product/API/permissions/Canonical/Archive/workflow unchanged; private
+raw, gold, HTTP, reasoning, DB, configs and logs ignored. Rollback 59ce. Verify
+new own CI and exact remote head separately. Lower blocks are historical.
+
 # 2026-10-06 20:30:37 UTC: execution summary; fixed Reader failed, original global R3 live
 
 The user requests a current execution summary submitted to GitHub. Frozen source

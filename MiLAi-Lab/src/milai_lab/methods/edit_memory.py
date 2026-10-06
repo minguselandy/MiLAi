@@ -266,6 +266,9 @@ class EditMemory:
             instruction += (
                 "Rewrite the WHOLE selected matter, generating its complete nonempty target "
                 "clauses and bindings, including retained exact text/support/attribution. "
+                "revision_evidence selects actual e for the whole revision, including "
+                "removing an old clause or binding; retained clauses keep their own h support "
+                "and attribution. Revision evidence does not support changed clause text. "
                 "No hidden body is filled in. retract_record is a separate entire-record "
                 "withdrawal with new actual e evidence and no replacement body. "
                 "No local edits are available. "
@@ -1304,6 +1307,8 @@ class EditMemory:
             decoded["withdrawal_evidence"] = supports({"evidence": witnesses})[0]
         elif proposal.get("withdrawal_evidence"):
             raise FunctionalRejection("EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
+        if proposal.get("revision_evidence"):
+            supports({"evidence": proposal["revision_evidence"]})
         if self.features.enabled:
             metadata["revision_evidence"] = list(
                 dict.fromkeys(metadata.get("revision_evidence", []))
@@ -1440,6 +1445,11 @@ class EditMemory:
             cancellation_refs.extend(
                 ref["source_ref"] for ref in source_evidence(self.service, withdrawal)
             ) if withdrawal else None
+            if self.features.enabled and metadata is not None and metadata.get("revision_evidence"):
+                cancellation_refs.extend(
+                    ref["source_ref"]
+                    for ref in source_evidence(self.service, metadata.get("revision_evidence", []))
+                )
             refs = list(dict.fromkeys([*cancellation_refs, *refs]))
             content = render_state(state)
         refs = list(dict.fromkeys([*refs, *((old or {}).get("source_refs", []))]))

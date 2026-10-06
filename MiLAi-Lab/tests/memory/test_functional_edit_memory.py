@@ -420,7 +420,8 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
     with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
         with opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES) as memory:
             memory.service.capture_user(
-                "s", "u", "Remember my quiet reminders.", occurred_at="2025-02-03T00:00:00Z"
+                "s", "u", "Remember my quiet reminders and bright Tuesday reminders.",
+                occurred_at="2025-02-03T00:00:00Z"
             )
             context = memory.writer_context("s", "u", "functional-m-test-v1")
             assert context["writer_packet"]["records"] == []
@@ -437,8 +438,13 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
             before_world = app.world.snapshot()
             wrapper = app.call_wrapper(memory.service, "s", "u")
             args = {"proposal": next_sdk_create(), "scope": {"project": "gallery"}}
+            if not memory.local:
+                extra = copy.deepcopy(args["proposal"]["clauses"][0])
+                extra["text"] = "User reports bright Tuesday reminders."
+                args["proposal"]["clauses"].append(extra)
             if not memory.conditioned:
-                args["proposal"]["clauses"][0].pop("conditions")
+                for clause in args["proposal"]["clauses"]:
+                    clause.pop("conditions")
             response = invoke(memory, "save_memory", args, "next-save", wrapper=wrapper)
             receipt = json.loads(response.content)
             assert receipt["ok"] and receipt["effect"] == "memory_only"
@@ -455,7 +461,11 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
                 "assertion": {"source": "e1", "kind": "reported"},
             }
             proposal = (
-                {"action": "rewrite", "target": "r1", "units": [new_unit]}
+                {"action": "rewrite", "target": "r1", "units": [
+                    new_unit,
+                    {"text": "User reports bright Tuesday reminders.", "evidence": [],
+                     "keep_support": ["h2"], "assertion": {"keep": "h2"}},
+                ]}
                 if not memory.local
                 else {
                     "action": "edit",
@@ -489,14 +499,48 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
             assert [part["content"] for part in evidence] == ["Remember my soft reminder tone now."]
             assert evidence[0]["role"] == "user"
             assert app.world.snapshot() == before_world
-            memory.service.capture_user("s", "u3", "Keep the existing reminder memory unchanged.")
-            memory.writer_context("s", "u3", "functional-m-test-v1")
+            if not memory.local:
+                memory.service.capture_user(
+                    "s", "u3", "Withdraw bright Tuesday reminders; use the general soft tone."
+                )
+                context = memory.writer_context("s", "u3", "functional-m-test-v1")
+                current = copy.deepcopy(memory.service.read(receipt["id"])["value"])
+                partial = clause_proposal(
+                    {"action": "rewrite", "target": "r1", "revision_evidence": ["e1"],
+                     "units": [{"text": "User reports a soft reminder tone.", "evidence": [],
+                                "keep_support": ["h1"], "assertion": {"keep": "h1"}}]},
+                    conditioned=memory.conditioned,
+                )
+                wrapper = app.call_wrapper(memory.service, "s", "u3")
+                response = invoke(
+                    memory, "update_memory", {"proposal": partial}, "remove-local", "u3", wrapper
+                )
+                assert json.loads(response.content)["revision"] == 3
+                assert invoke(
+                    memory, "update_memory", {"proposal": partial}, "remove-local", "u3", wrapper
+                ) == response
+                kept = memory.service.read(receipt["id"])["value"]
+                assert len(kept["edit_state"]["units"]) == 1
+                assert {
+                    k: v for k, v in kept["edit_state"]["units"][0].items() if k != "unit_id"
+                } == {
+                    k: v for k, v in current["edit_state"]["units"][0].items() if k != "unit_id"
+                }
+                page = json.loads(invoke(
+                    memory, "read_memory", {"record_id": receipt["id"]}, "cancel-read", "u3"
+                ).content)
+                assert [part["content"] for part in page["items"][0]["revision_evidence"]] == [
+                    "Withdraw bright Tuesday reminders; use the general soft tone."
+                ]
+                assert app.world.snapshot() == before_world
+            memory.service.capture_user("s", "u4", "Keep the existing reminder memory unchanged.")
+            memory.writer_context("s", "u4", "functional-m-test-v1")
             no_change = {"action": "no_change", "target": "r1"}
-            first_confirm = memory.apply_writer_proposal(cfg("u3"), "one-container", no_change)
+            first_confirm = memory.apply_writer_proposal(cfg("u4"), "one-container", no_change)
             assert first_confirm["ok"]
-            assert memory.apply_writer_proposal(cfg("u3"), "one-container", no_change)["replayed"]
+            assert memory.apply_writer_proposal(cfg("u4"), "one-container", no_change)["replayed"]
             with pytest.raises(FunctionalRejection, match="DUPLICATE_RECORD_CONTAINER"):
-                memory.apply_writer_proposal(cfg("u3"), "second-container", no_change)
+                memory.apply_writer_proposal(cfg("u4"), "second-container", no_change)
 
 
 @pytest.mark.parametrize("after_put", [False, True])

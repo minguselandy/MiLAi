@@ -165,6 +165,11 @@ def feature_proposal_schema(
         if action == "rewrite" and features.enabled:
             variant["properties"]["units"]["minItems"] = 1
             variant["properties"].pop("withdrawal_evidence")
+            variant["properties"]["revision_evidence"] = {
+                "type": "array",
+                "minItems": 1,
+                "items": reference("e"),
+            }
     if not refs["e"] and not refs["h"]:
         variants[:] = [
             v for v in variants if v["properties"]["action"]["const"] not in {"create", "rewrite"}

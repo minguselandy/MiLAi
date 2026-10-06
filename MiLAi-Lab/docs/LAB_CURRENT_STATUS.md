@@ -1,5 +1,14 @@
 # MiLAi Lab 当前状态
 
+**2026-10-06 20:51 UTC后：978共同条件分支已闭合；完整重写修订依据入口已实现，自由Writer未复核。**
+
+原978自身Fast／Full成功，36stop／207,619 known，20维护事件、2拒绝／2缺口；50编码／1,497 known。固定2Reader另5,398 known、0/2，阶段38生成／213,017 known；回执与闭合账本一致，无新unknown／重试。
+M这次实际增撤例外、保持一般与新限定；B1普通编辑也保持一般规则。M撤销后仍拒答、相对日期算错，Root完整回答6/16（非官方），不是稳定方法优势。
+新3源码复用revision_evidence支持非空完整重写的独立省略依据，保留条款支持／归属不改；正常Host共享路径。8现有窄检查、Ruff5／mypy3／包边界通过，0新测试函数。原B2拒绝提案只加依据在副本执行通过，属于离线结构证据，不改旧结果。
+最多2次原B2实际before Writer诊断已声明但0／未准入，需新源码自身Fast；Reader范围／日期失败未修复。累计39,580请求／151,304,337 known／151,416,052 charged／编码974,832／历史unknown3，原进程正常结束、租约空闲。
+本阶段12Lab文件，回滚59ce；无最终候选，Product NO_GO、PR85 draft未合并，完整8／65／277与机制／保留／外部／Host／恢复／六交付不缩减。
+[最新执行摘要](MILAI_EDIT_EXECUTION_STATUS_20261007.md) · [978闭合结果](../data/manifests/milai-post87c-scope-contract-execution-results-20261007.json) · [新接口声明](../data/manifests/milai-post87c-rewrite-revision-witness-development-20261007.json)。下方保留原时点。
+
 **2026-10-06 20:30:37 UTC／北京时间04:30:37：978真实复核已开始，固定Reader闭合失败，共同条件四组仍在运行。**
 
 冻结源码`978bc65`自身Fast成功，首个HTTP前已核实；Full仍in_progress，报告CI另查。固定实际M Reader两次均stop／5,398 known，收到真实前版一般角色后完整范围回答仍0/2，末次还误读“四次”为“周四”。0写库／Judge／编码／新unknown，不继续重试。

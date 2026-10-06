@@ -871,7 +871,59 @@ def test_next_contract_b1_same_text_inserts_bind_assertion_at_allocation(tmp_pat
 def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exact(tmp_path, arm):
     with opened(tmp_path, arm) as (service, _):
         method = EditMemory(service, arm, interface_version="I2", features=NEXT_FEATURES)
-        saved, _ = next_save(service, method)
+        formed, _ = next_request(
+            service, method, "first", "User reports quiet reminders and bright Tuesday reminders."
+        )
+        create = {
+            "action": "create", "matter": "User's reminder sound",
+            "units": [
+                next_unit("User reports quiet reminders."),
+                next_unit("User reports bright Tuesday reminders."),
+            ],
+        }
+        saved = method.apply(
+            "s", "save-first",
+            method.decode_proposal(
+                clause_proposal(create, conditioned=method.conditioned), formed["mapping"]
+            ),
+        )
+        original = copy.deepcopy(service.read(saved["id"])["value"])
+        partial, cancellation = next_request(
+            service, method, "cancel-local", "Tuesday reminders use the general quiet tone again.",
+            [service.read(saved["id"])],
+        )
+        retained = {
+            "text": "User reports quiet reminders.", "evidence": [],
+            "keep_support": ["h1"], "assertion": {"keep": "h1"},
+        }
+        public = clause_proposal(
+            {"action": "rewrite", "target": "r1", "units": [retained]},
+            conditioned=method.conditioned,
+        )
+        rejected = method.apply(
+            "s", "missing-revision-witness", method.decode_proposal(public, partial["mapping"])
+        )
+        assert not rejected["ok"] and rejected["reason"] == "current_boundary_source_required"
+        assert service.read(saved["id"])["value"] == original
+        public["revision_evidence"] = ["e1"]
+        changed = copy.deepcopy(public)
+        changed["clauses"][0]["text"] = "User reports loud reminders."
+        with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
+            method.decode_proposal(changed, partial["mapping"])
+        decoded = method.decode_proposal(public, partial["mapping"])
+        receipt = method.apply("s", "remove-local", decoded)
+        assert receipt["ok"] and receipt["revision"] == 2
+        assert method.apply("s", "remove-local", decoded)["replayed"]
+        current = service.read(saved["id"])["value"]
+        assert len(current["edit_state"]["units"]) == 1
+        assert {
+            k: v for k, v in current["edit_state"]["units"][0].items() if k != "unit_id"
+        } == {
+            k: v for k, v in original["edit_state"]["units"][0].items() if k != "unit_id"
+        }
+        evidence = read_revision_evidence(service, current)
+        assert [part["source_ref"] for part in evidence] == [cancellation]
+        assert service.read(saved["id"], 1)["value"] == original
         view, _ = next_request(
             service,
             method,
@@ -918,7 +970,8 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         assert evidence[0]["role"] == "user"
         assert receipt["ok"] and receipt["id"] == saved["id"]
         assert service.read(saved["id"], 1)["value"]["edit_state"]["units"]
-        assert service.read(saved["id"], 2)["value"]["edit_state"]["units"] == []
+        assert service.read(saved["id"], 2)["value"]["edit_state"]["units"]
+        assert service.read(saved["id"], 3)["value"]["edit_state"]["units"] == []
 
 
 def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):

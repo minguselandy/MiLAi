@@ -1007,6 +1007,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 dict.fromkeys(
                     [h for unit in parsed.units for h in unit.evidence]
                     + [h for relation in parsed.relations for h in relation.evidence]
+                    + (_edit_metadata.get("revision_evidence", []) if _edit_metadata else [])
                 )
             )
             self._require_update_delivery(handles, old, _kept_support)
