@@ -1,3 +1,18 @@
+# 2026-10-06 23:34 UTC: user-requested execution summary, original queue remains live
+
+User requests current execution summary published to GitHub. Snapshot23:34:16
+B0maintenance/evaluation27/32, fourth user0–2 closed; B1/B2/M unreached,
+PID3476759 live/no suite or arm terminal. 708stop3005753known,1pending,
+165encoder59788; ledger deltas match and limits unchanged. First3 B0 users
+closed24sessions/54fullQA reviewed; original updates5/19,8/15,13/20 and
+QA15/20,10/12,10/22 retained. Partial fourth scores not finalized/reviewed.
+c86 ownFast/Full success23:34:29; Bprepared4actualcases0calls/notadmitted,
+Hostnot switched. Wait WHOLE original suite terminal/PIDexit/resourcefree.
+31e report ownFast/Full still running at query; newreport CI separate.
+Only5Lab report/status/sanitizedsnapshot files;0source/tests/workflow/config
+or publication modelcalls. Private ignored, rollback31e5bb9; oldblocks retained.
+Full plan ACTIVE/incomplete, oneQwen+BGE/no agents, ProductNO_GO/PR85draft.
+
 # 2026-10-06 23:19 UTC: third B0 first8 closed/reviewed; original queue live
 
 Previous turn a48 publication is progress. Root read actual third user0–7 and
