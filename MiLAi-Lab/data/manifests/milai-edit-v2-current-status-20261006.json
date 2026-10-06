@@ -24,14 +24,14 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "SOURCE7B82_AFFECTED12_REVIEWED_NO_FINAL_CANDIDATE_PREFIX_MODEL0",
+    "status": "SOURCE7B82_STAGE_C_DEVELOPMENT_ADMITTED_NOT_STARTED_NOT_FINAL_CANDIDATE",
     "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
     "config_version": "milai-edit-post-b0-unit-correspondence-v1",
     "actual_model_calls": 12,
     "Root_checks_passed": 294,
     "detail_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
     "candidate_selected": false,
-    "prefix_admitted": false,
+    "prefix_admitted": true,
     "source_fix_committed": true
   },
   "native_and_drift": {
@@ -307,7 +307,8 @@
       "tracked_paths": 6448,
       "findings": 0
     },
-    "staged_diff": "PASS_NINE_LAB_REPORT_STATE_RESULT_FILES_ONLY"
+    "staged_diff": "PASS_NINE_LAB_REPORT_STATE_RESULT_FILES_ONLY",
+    "scope": "c6a70d7 report checks retained; current StageC declaration has separate publication check."
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -465,7 +466,7 @@
     "formation_repair_declared_recheck_calls": 20
   },
   "stage_C_long_smoke": {
-    "status": "OFFLINE_SELECTION_AND_CONFIG_PREPARED_NOT_ADMITTED_NOT_STARTED",
+    "status": "ADMITTED_PREDECLARED_NOT_STARTED",
     "selection_rule": "first user in the frozen development order, fixed before fresh prefix outcomes",
     "development_user_position": 0,
     "prefix_sessions_per_development_user": 8,
@@ -484,7 +485,12 @@
     },
     "selection_fixed_before_prefix_at": "2026-10-06T02:39:25.742802+00:00",
     "reserved_sources_used": false,
-    "requires_source_own_Full_success_before_HTTP": true
+    "requires_source_own_Full_success_before_HTTP": true,
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "manifest": "milai-edit-post-b0-prefix-and-long-smoke-development-20261006.json",
+    "prefix_admitted": true,
+    "source_own_Full_success": true
   },
   "prior_nonthinking_snapshot": {
     "report_commit": "478d7530eb3942909792e4d66f59d13a4b4a1705",
@@ -581,7 +587,7 @@
   "latest_checkpoint_document": "../../docs/MILAI_EDIT_CHECKPOINT_20261006.md",
   "current_method_source_ci": {
     "commit": "7b82c60e04755f385e5f80658ed67e4067826093",
-    "observed_at": "2026-10-06 07:06:50 UTC",
+    "observed_at": "2026-10-06 07:19:12 UTC",
     "Fast": {
       "run_id": 37426071277,
       "status": "completed",
@@ -589,10 +595,10 @@
     },
     "Full": {
       "run_id": 37426071235,
-      "status": "in_progress",
-      "conclusion": null
+      "status": "completed",
+      "conclusion": "success"
     },
-    "does_not_establish_new_report_CI": true
+    "Full_before_prefix": true
   },
   "normal_SDK_clause_support_collection": {
     "status": "ROOT_REVIEWED341_COMMITTED651_FAST_FULL_SUCCESS_NO_NEW_SDK_MODEL_COHORT",
@@ -1758,5 +1764,6 @@
     "model_calls_in_new_r3_since_previous_report": 80,
     "new_model_calls_for_declared_real_rechecks": 132,
     "scope": "Earlier dated development snapshots, not counts of the current48 new completed requests or original7cc141."
-  }
+  },
+  "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00"
 }

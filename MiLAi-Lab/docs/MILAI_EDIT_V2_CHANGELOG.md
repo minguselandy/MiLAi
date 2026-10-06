@@ -1,5 +1,15 @@
 # MiLAi-Edit v2 跟进记录
 
+**2026-10-06 15:20:52 UTC／Stage C事前声明：**源码7b82自身Fast/Full均已成功，
+294项受影响工程检查及12次真实复核已完成。进入原计划四用户各前8会话：每组32会话/72更新机会/
+73QA，四组自空库。第一用户完整65会话已在新前缀结果前固定，续接各组真实同版状态；实际调用0。
+共同I2、现有Qwen家族、32768输出/300秒/65536上下文、当前4096/当前+旧正文8192和作者评分不变。
+普通语义失败保留，来源损失/Reader不足不被工程成功抹掉，不新增全部R3成功门槛。
+后续按用户分开续接实际SQLite备份和已完成检查点，只复用该用户实际Judge序号区间，避免旧全局
+Judge缓存与新调用碰撞；范围扩展另绑定，不覆盖旧actual-config、不重复前缀收费、不注入正确旧卡。
+原同版四组277/595/705及原生/漂移/保留/外部/Host/六项交付继续，Product NO_GO，PR85仍draft未合并。
+[Stage C声明](../data/manifests/milai-edit-post-b0-prefix-and-long-smoke-development-20261006.json)。下方为各自时间快照。
+
 ## 2026-10-06 15:06:50 Asia/Shanghai — source controls closed and identity repair model-reviewed
 
 - 完成冻结7cc剩余用户确认20与无依据强化16；原141全部入账，141尝试/140响应/604,072 known。
