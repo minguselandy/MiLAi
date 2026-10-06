@@ -1,7 +1,7 @@
 {
   "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
-  "observed_at": "2026-10-06T17:58:15.900983+00:00",
-  "previous_report_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+  "observed_at": "2026-10-06T18:09:58+00:00",
+  "previous_report_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -48,19 +48,18 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
-    "observed_at": "2026-10-06 17:54:07 UTC",
+    "commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+    "observed_at": "2026-10-06 18:09:58 UTC",
     "Fast": {
-      "run_id": 37502370558,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37508205128,
+      "status": "in_progress",
+      "conclusion": null
     },
     "Full": {
-      "run_id": 37502370395,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37508205087,
+      "status": "in_progress",
+      "conclusion": null
     },
-    "source_own_Fast_verified_before_first_HTTP": true,
     "new_report_CI_separate": true
   },
   "b0_original_aggregation_replay": {
@@ -975,7 +974,7 @@
     "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
-  "publication_scope": "7 Lab report/status files; no source/tests/config/workflow or Product changes; no new model calls for publication",
+  "publication_scope": "4 Lab documentation/status files; no source/tests/config/workflow or Product changes; no new model calls for publication",
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
     "declared_at": "2026-10-06T05:51:11.524187+00:00",
@@ -1961,17 +1960,17 @@
     "status": "PASS",
     "source_tests_repeated": false,
     "source_config_changes": false,
-    "Root_new_before_after_pairs": 44,
-    "Root_new_complete_answers": 36,
-    "generation_receipts": 80,
-    "embedding_receipts": 107,
     "Product_schema_API_permissions_Canonical_changed": false,
     "original_terminals_raw_configs_author_labels_preserved": true,
-    "local_links_checked": 7,
-    "all_retained_records_delivered_for_36_Reader_requests": true,
-    "continuous_ledger_and_all_stage_receipts_match": true,
-    "serial_lease_free": true,
-    "normal_process_handles_missing": true
+    "continuous_ledger_unchanged": true,
+    "closed_R3_processes_missing": true,
+    "new_generation_and_embedding_calls": 0,
+    "rollback_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+    "JSON_files_parsed": 1,
+    "local_links_checked": 4,
+    "changed_report_files": 4,
+    "historical_results_preserved": true,
+    "diff_check_passed": true
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -6114,20 +6113,19 @@
     }
   },
   "latest_actual_execution_since_previous_report": {
-    "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
-    "detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json",
+    "status": "REPORT_ONLY_NO_NEW_MODEL_EXECUTION",
     "source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
-    "Writer_calls": 44,
-    "Reader_calls": 36,
+    "Writer_calls": 0,
+    "Reader_calls": 0,
     "Judge_calls": 0,
-    "generation_requests": 80,
-    "generation_known_tokens": 372639,
-    "embedding_requests": 107,
-    "embedding_inputs": 107,
-    "embedding_known_tokens": 2530,
+    "generation_requests": 0,
+    "generation_known_tokens": 0,
+    "embedding_requests": 0,
+    "embedding_inputs": 0,
+    "embedding_known_tokens": 0,
     "new_unknown_usage": 0,
     "retries": 0,
-    "new_model_calls_for_publication_only": 0
+    "prior_R3_detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json"
   },
   "historical_before_common_semantic_retrieval_source": {
     "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
@@ -6419,5 +6417,91 @@
     "M_second_branch_condition_relations": 0,
     "Reader_task_chain_incomplete": true,
     "stable_method_advantage_established": false
+  },
+  "historical_before_execution_status_publication_20261007": {
+    "observed_at": "2026-10-06T17:58:15.900983+00:00",
+    "previous_report_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+    "previous_report_ci": {
+      "commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "observed_at": "2026-10-06 17:54:07 UTC",
+      "Fast": {
+        "run_id": 37502370558,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37502370395,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "source_own_Fast_verified_before_first_HTTP": true,
+      "new_report_CI_separate": true
+    },
+    "latest_actual_execution_since_previous_report": {
+      "status": "CLOSED_ORIGINAL_R3_TWO_BRANCHES_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
+      "detail_manifest": "milai-post87c-common-dense-r3-results-20261007.json",
+      "source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+      "Writer_calls": 44,
+      "Reader_calls": 36,
+      "Judge_calls": 0,
+      "generation_requests": 80,
+      "generation_known_tokens": 372639,
+      "embedding_requests": 107,
+      "embedding_inputs": 107,
+      "embedding_known_tokens": 2530,
+      "new_unknown_usage": 0,
+      "retries": 0,
+      "new_model_calls_for_publication_only": 0
+    },
+    "publication_scope": "7 Lab report/status files; no source/tests/config/workflow or Product changes; no new model calls for publication",
+    "current_publication_checks": {
+      "status": "PASS",
+      "source_tests_repeated": false,
+      "source_config_changes": false,
+      "Root_new_before_after_pairs": 44,
+      "Root_new_complete_answers": 36,
+      "generation_receipts": 80,
+      "embedding_receipts": 107,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "original_terminals_raw_configs_author_labels_preserved": true,
+      "local_links_checked": 7,
+      "all_retained_records_delivered_for_36_Reader_requests": true,
+      "continuous_ledger_and_all_stage_receipts_match": true,
+      "serial_lease_free": true,
+      "normal_process_handles_missing": true
+    }
+  },
+  "latest_experiment_source_ci": {
+    "commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+    "observed_at": "2026-10-06 17:54:07 UTC",
+    "Fast": {
+      "run_id": 37502370558,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37502370395,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "source_own_Fast_verified_before_first_HTTP": true,
+    "new_report_CI_separate": true
+  },
+  "latest_execution_summary": {
+    "observed_at": "2026-10-06T18:09:58+00:00",
+    "previous_result_report_commit": "d66f11e2a64ecf0c2d0a30e0db5d682128c9aafe",
+    "actual_experiment_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+    "active_model_queue": false,
+    "source_repair_status": "EXISTING_INTERFACE_READ_ONLY_NOT_IMPLEMENTED_OR_MODEL_RECHECKED",
+    "next_work": [
+      "shared claim and qualification formation granularity",
+      "actual revision and source evidence delivery through existing MemoryService and normal Host"
+    ],
+    "candidate_selected": false,
+    "same_version_four_arm_prefix_admitted": false,
+    "generation_requests_since_previous_report": 0,
+    "embedding_requests_since_previous_report": 0,
+    "old_4357_counts_7b_prefix_and_646_R3_are_separate": true,
+    "goal_complete": false
   }
 }
