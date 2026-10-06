@@ -1,7 +1,7 @@
 {
-  "status": "STAGE_C_B0_PREFIX_CLOSED_B1_RUNNING_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T09:17:39.148935+00:00",
-  "previous_report_commit": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
+  "status": "STAGE_C_B0_CLOSED_B1_RUNNING_WITH_PRE_HTTP_CAPACITY_FAILURES_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T09:49:44.168203+00:00",
+  "previous_report_commit": "26c0ba353276d96a053329d54629c571e19bcf73",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -44,7 +44,7 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "Finish the already admitted frozen four-user chronological first8 prefix in B1/B2/M; B0 closed and reviewed. Preserve ordinary semantic failures, no perfect-R3 gate or hot configuration changes.",
+      "Finish frozen four-user first8 prefix in B1/B2/M; preserve first-attempt capacity and semantic failures. Validate the separate lossless schema-presentation draft offline and through its own source CI and finite real recheck before new-source admission; never hot-edit7b82.",
       "Continue preselected first user full65 from each arm actual same-version prefix state; compare matter grain/output truncation, condition/operator usage, attribution and QA.",
       "Complete same-version main four-arm comparison, native/drift, same-M entry ablation and one fixed tighter budget before reserved users; preserve ordinary semantic failures.",
       "Complete16 reserved users, LongMemEval/external baselines and ordinary Host/recovery plus full R0-R5/E0-E5/six deliverables; source/Reader/date failures remain limitations."
@@ -55,17 +55,17 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
-    "observed_at": "2026-10-06T09:20:29.170959+00:00",
+    "commit": "26c0ba353276d96a053329d54629c571e19bcf73",
+    "observed_at": "2026-10-06 09:52:17 UTC",
     "Fast": {
-      "run_id": 37437294933,
+      "run_id": 37442562298,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37437294916,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37442562296,
+      "status": "in_progress",
+      "conclusion": null
     },
     "new_report_CI_must_be_queried_separately": true
   },
@@ -985,11 +985,12 @@
     "new_model_calls_started": 0,
     "new_model_calls_for_offline_analysis": 0,
     "existing_frozen_queue_continues_naturally": true,
-    "source_tests_repeated": false,
-    "source_test_config_changes": false,
+    "source_tests_repeated_for_summary": false,
+    "source_test_config_changes_committed": false,
+    "uncommitted_source_draft_files_preserved": 3,
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
-    "rollback_reference": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
+    "rollback_reference": "26c0ba353276d96a053329d54629c571e19bcf73",
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "transport300_continuation_declaration": {
@@ -1772,8 +1773,8 @@
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
   "new_queue_live": true,
   "stage_C_prefix_live": {
-    "observed_at": "2026-10-06T09:17:39.148935+00:00",
-    "observation_started_at": "2026-10-06T09:17:39.069271+00:00",
+    "observed_at": "2026-10-06T09:49:44.168203+00:00",
+    "observation_started_at": "2026-10-06T09:49:44.060042+00:00",
     "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
     "PID": 178764,
     "PID_and_exact_frozen_command_verified_live": true,
@@ -1795,10 +1796,10 @@
         "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
       },
       "B1": {
-        "maintenance_complete": 3,
-        "evaluation_complete": 2,
-        "requests": 67,
-        "saved_response_files": 66,
+        "maintenance_complete": 14,
+        "evaluation_complete": 13,
+        "requests": 298,
+        "saved_response_files": 297,
         "pending_HTTP_count": 1,
         "failure_files": 0,
         "terminal_status": null
@@ -1848,13 +1849,13 @@
       "B1": [
         {
           "development_user_position": 0,
-          "maintenance_complete": 3,
-          "evaluation_complete": 2
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         },
         {
           "development_user_position": 1,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 6,
+          "evaluation_complete": 5
         },
         {
           "development_user_position": 2,
@@ -1912,27 +1913,29 @@
         }
       ]
     },
-    "request_artifacts": 763,
+    "request_artifacts": 994,
     "saved_response_roles": {
-      "Writer": 36,
-      "Reader": 79,
-      "Judge": 647
+      "Writer": 43,
+      "Reader": 104,
+      "Judge": 846
     },
-    "saved_response_count": 762,
+    "saved_response_count": 993,
     "saved_response_finish_reasons": {
-      "stop": 762
+      "stop": 993
     },
-    "known_tokens_from_saved_responses": 2841036,
-    "input_tokens_from_saved_responses": 1836849,
-    "completion_tokens_from_saved_responses": 1004187,
+    "known_tokens_from_saved_responses": 3628985,
+    "input_tokens_from_saved_responses": 2344370,
+    "completion_tokens_from_saved_responses": 1284615,
     "not_final_accounting": true,
     "pending_budget_unknown_reservation_is_not_terminal_failure": true,
     "candidate_selected": false,
     "method_advantage_established": false,
     "long_smoke_actual_model_calls": 0,
     "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
-    "Root_closed_user_review_scope": "First, second and third B0 users first8 reviewed offline; fourth user/other arms not fully reviewed, Assistant context partial, not independent Judge or full source/database audit.",
-    "no_new_model_process_started_for_publication": true
+    "Root_closed_user_review_scope": "All four B0 first8 and first B1 user first8 reviewed; selected source context only, not independent Judge or full database audit.",
+    "no_new_model_process_started_for_publication": true,
+    "pre_HTTP_Writer_capacity_failures_in_closed_first_B1_user": 3,
+    "HTTP_failure_files_are_not_all_Writer_failures": true
   },
   "required_controls_offline_preparation": {
     "status": "OFFLINE_FIXED_NOT_ADMITTED_MODEL0",
@@ -1942,7 +1945,38 @@
     "actual_model_calls": 0,
     "heldout_sources_read": false,
     "controls_actual_formation_envelope_and_input_headroom_checked": true,
-    "no_change_to_running_main_configuration": true
+    "no_change_to_running_main_configuration": true,
+    "B0_existing_native_prefix_capacity": {
+      "selected_opportunities": 32,
+      "available_opportunities": 31,
+      "distinct_source_sessions": 11,
+      "summary": {
+        "transition": {
+          "requests": 93,
+          "fits": 93,
+          "input_tokens": {
+            "min": 9280,
+            "median": 11343,
+            "max": 15622
+          },
+          "unknown_prior_range_occurrences": 0
+        },
+        "delta": {
+          "requests": 7,
+          "fits": 7,
+          "input_tokens": {
+            "min": 8283,
+            "median": 10663,
+            "max": 14982
+          },
+          "unknown_prior_range_occurrences": 0
+        }
+      },
+      "unrun_opportunities": 1,
+      "semantic_scores": null,
+      "actual_model_calls": 0,
+      "no_native_model_configuration_admitted": true
+    }
   },
   "actual_user_continuation_preparation": {
     "status": "ROOT_PRIVATE_HELPER_PREPARED_NOT_ACTUALLY_USED",
@@ -1965,18 +1999,21 @@
   "current_publication_checks": {
     "status": "PASS",
     "files": 6,
-    "relative_links_checked": 104,
-    "JSON_counts_role_usage_original_author_reaggregation_and_actual_state": "PASS",
-    "closed_accounting_delta_includes_B0_once_excludes_live_B1": "PASS",
-    "historical_markdown_snapshots_preserved_exactly": true,
-    "sanitized_summary_only": "PASS",
-    "closed_B0_HTTP_prompt_usage_pairs": 696,
-    "source_tests_repeated": false,
     "new_model_calls": 0,
+    "source_tests_repeated_for_summary": false,
+    "closed_first_B1_user_HTTP_usage_pairs_checked": 180,
+    "pre_HTTP_failures_are_not_empty_model_responses": true,
+    "uncommitted_source_draft_not_published_or_used_by_frozen_queue": true,
+    "closed_arm_ledger_still_excludes_live_B1": true,
+    "relative_links_checked": 111,
+    "JSON_counters_cost_scope": "PASS",
+    "historical_markdown_preserved": true,
+    "source_drafts_unchanged": true,
     "repo_boundary": "PASS",
-    "tracked_paths": 6452,
+    "tracked_paths": 6453,
     "boundary_findings": 0,
-    "staged_diff": "PASS_SIX_LAB_DOC_STATE_SUMMARY_FILES_ONLY"
+    "staged_diff": "PASS_SIX_LAB_DOC_STATE_SUMMARY_FILES_ONLY",
+    "sanitized_summary_only": "PASS"
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -2403,6 +2440,351 @@
       "retrieval_diagnostic_new_model_calls": 0,
       "native_retirement_control_model_scores": null,
       "B0_condition_relation_counts_are_expected_for_text_arm": true
+    }
+  },
+  "historical_publication_before_B1_capacity_summary": {
+    "status": "STAGE_C_B0_PREFIX_CLOSED_B1_RUNNING_NO_FINAL_CANDIDATE",
+    "observed_at": "2026-10-06T09:17:39.148935+00:00",
+    "previous_report_commit": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
+    "previous_report_ci": {
+      "commit": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
+      "observed_at": "2026-10-06T09:20:29.170959+00:00",
+      "Fast": {
+        "run_id": 37437294933,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37437294916,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "new_report_CI_must_be_queried_separately": true
+    },
+    "stage_C_prefix_live": {
+      "observed_at": "2026-10-06T09:17:39.148935+00:00",
+      "observation_started_at": "2026-10-06T09:17:39.069271+00:00",
+      "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+      "PID": 178764,
+      "PID_and_exact_frozen_command_verified_live": true,
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+      "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+      "started_at": "2026-10-06T07:23:06.705004+00:00",
+      "per_arm_planned_sessions": 32,
+      "per_arm_planned_updates": 72,
+      "per_arm_planned_QA": 73,
+      "arms": {
+        "B0": {
+          "maintenance_complete": 32,
+          "evaluation_complete": 32,
+          "requests": 696,
+          "saved_response_files": 696,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+        },
+        "B1": {
+          "maintenance_complete": 3,
+          "evaluation_complete": 2,
+          "requests": 67,
+          "saved_response_files": 66,
+          "pending_HTTP_count": 1,
+          "failure_files": 0,
+          "terminal_status": null
+        },
+        "B2": {
+          "maintenance_complete": 0,
+          "evaluation_complete": 0,
+          "requests": 0,
+          "saved_response_files": 0,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": null
+        },
+        "M": {
+          "maintenance_complete": 0,
+          "evaluation_complete": 0,
+          "requests": 0,
+          "saved_response_files": 0,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": null
+        }
+      },
+      "per_user_checkpoints": {
+        "B0": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          }
+        ],
+        "B1": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 3,
+            "evaluation_complete": 2
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ],
+        "B2": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ],
+        "M": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ]
+      },
+      "request_artifacts": 763,
+      "saved_response_roles": {
+        "Writer": 36,
+        "Reader": 79,
+        "Judge": 647
+      },
+      "saved_response_count": 762,
+      "saved_response_finish_reasons": {
+        "stop": 762
+      },
+      "known_tokens_from_saved_responses": 2841036,
+      "input_tokens_from_saved_responses": 1836849,
+      "completion_tokens_from_saved_responses": 1004187,
+      "not_final_accounting": true,
+      "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+      "candidate_selected": false,
+      "method_advantage_established": false,
+      "long_smoke_actual_model_calls": 0,
+      "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+      "Root_closed_user_review_scope": "First, second and third B0 users first8 reviewed offline; fourth user/other arms not fully reviewed, Assistant context partial, not independent Judge or full source/database audit.",
+      "no_new_model_process_started_for_publication": true
+    },
+    "publication_scope": {
+      "Lab_report_and_state_files": 6,
+      "new_model_calls_started": 0,
+      "new_model_calls_for_offline_analysis": 0,
+      "existing_frozen_queue_continues_naturally": true,
+      "source_tests_repeated": false,
+      "source_test_config_changes": false,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Archive_workflow_changed": false,
+      "rollback_reference": "a1ca1bdd93bf435f5cdc8c22e7d9c40c2356e7d3",
+      "historical_raw_results_and_predeclarations_unchanged": true
+    },
+    "current_publication_checks": {
+      "status": "PASS",
+      "files": 6,
+      "relative_links_checked": 104,
+      "JSON_counts_role_usage_original_author_reaggregation_and_actual_state": "PASS",
+      "closed_accounting_delta_includes_B0_once_excludes_live_B1": "PASS",
+      "historical_markdown_snapshots_preserved_exactly": true,
+      "sanitized_summary_only": "PASS",
+      "closed_B0_HTTP_prompt_usage_pairs": 696,
+      "source_tests_repeated": false,
+      "new_model_calls": 0,
+      "repo_boundary": "PASS",
+      "tracked_paths": 6452,
+      "boundary_findings": 0,
+      "staged_diff": "PASS_SIX_LAB_DOC_STATE_SUMMARY_FILES_ONLY"
+    }
+  },
+  "stage_C_first_user_B1_review": {
+    "status": "CLOSED_FIRST_B1_USER_NOT_FOUR_USER_OR_FOUR_ARM_RESULTS",
+    "detail_manifest": "milai-edit-post-b0-stage-c-first-user-b1-capacity-results-20261006.json",
+    "author_update_labels": {
+      "Omission": 16,
+      "None": 1,
+      "Correct": 1,
+      "Omitted Update": 1
+    },
+    "author_QA_labels": {
+      "Correct": 11,
+      "None": 2,
+      "Hallucination": 4,
+      "Omission": 3
+    },
+    "HTTP_requests_and_responses": 180,
+    "known_tokens": 619360,
+    "pre_HTTP_capacity_failed_sessions": [
+      3,
+      4,
+      7
+    ],
+    "actual_empty_envelope_sessions": [
+      5,
+      6
+    ],
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "Root_review": {
+      "before_after_session_pairs": 8,
+      "actual_Writer_responses": 5,
+      "pre_HTTP_failed_attempts": 3,
+      "complete_Reader_answers": 20,
+      "HTTP_usage_pairs_checked": 180,
+      "source_context": "PARTIAL_EXPOSED_CURRENT_USER_AND_SELECTED_ASSISTANT_CONTENT",
+      "independent_Judge": false,
+      "independent_complete_source_database_audit": false
+    }
+  },
+  "shared_prompt_choice_source_draft": {
+    "status": "UNCOMMITTED_NOT_USED_BY_FROZEN_QUEUE_NOT_MODEL_VERIFIED",
+    "files": [
+      "src/milai_lab/methods/edit_features.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "tests/unit/test_edit_v2_runner.py"
+    ],
+    "scope": "Only Writer explanatory schema shares repeated enum choices; original API generation schema and decoding remain unchanged.",
+    "mechanical_checks": {
+      "runner_checks_passed": 17,
+      "wiring_checks_passed": 11
+    },
+    "actual_new_source_projection_and_default_off_checks_complete": false,
+    "own_source_CI": "NOT_COMMITTED_NOT_RUN",
+    "actual_model_recheck_calls": 0,
+    "offline_prototype": {
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "status": "OFFLINE_PROTOTYPE_ONLY_NOT_ADMITTED",
+      "new_model_calls": 0,
+      "API_generation_schema_unchanged_in_proposed_presentation": "Expanded original schema stays in response_format; only repeated in-prompt enums shared.",
+      "sessions": [
+        {
+          "ordinal": 0,
+          "original_input_tokens": 3775,
+          "shared_choice_input_tokens": 3746,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": true
+        },
+        {
+          "ordinal": 1,
+          "original_input_tokens": 9582,
+          "shared_choice_input_tokens": 8198,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": true
+        },
+        {
+          "ordinal": 2,
+          "original_input_tokens": 23504,
+          "shared_choice_input_tokens": 15775,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": true
+        },
+        {
+          "ordinal": 3,
+          "original_input_tokens": 37672,
+          "shared_choice_input_tokens": 22953,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": false
+        },
+        {
+          "ordinal": 4,
+          "original_input_tokens": 34439,
+          "shared_choice_input_tokens": 21760,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": false
+        },
+        {
+          "ordinal": 5,
+          "original_input_tokens": 28643,
+          "shared_choice_input_tokens": 19024,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": true
+        },
+        {
+          "ordinal": 6,
+          "original_input_tokens": 28971,
+          "shared_choice_input_tokens": 19352,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": true
+        },
+        {
+          "ordinal": 7,
+          "original_input_tokens": 37039,
+          "shared_choice_input_tokens": 22320,
+          "short_schema_definitions": 1,
+          "fits_without_losing_candidates": true,
+          "schema_expands_exactly_to_original": true,
+          "actual_Writer_HTTP_sent": false
+        }
+      ]
     }
   }
 }

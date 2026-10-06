@@ -1,3 +1,26 @@
+# 2026-10-06 09:49:44 UTC: user-requested B1 capacity summary; frozen queue continues
+
+Publish six Lab doc/state/summary files only; model0. Preserve3 existing uncommitted
+source/test drafts; do not publish or use them in frozen7b82 PID178764.
+B0 closed32/32; B1 firstuser8/8 reviewed: update1/19valid17, QA11/20valid18,
+180HTTP/619360known allstop (5Writer/20Reader/155Judge). InvalidNone/Omitted Update
+retained. ord3/4/7 fail preHTTP at37672/34439/37039>32256, no Writer/envelope;
+ord5/6 actualempty responses. First3 create16 records, next5 fullstate unchanged.
+Prototype sharedenum projections22953/21760/22320 exactchoices; model0/notadmitted.
+Draft28 engineering checks pass, actualimplementation/defaultoff/ownCI/realrecheck
+pending. Frozen source/config/results unchanged; do not splice fixed successes.
+B0 existingnative31/32opps11sessions,93transition+7delta fits/unknownranges0;
+remainingfutureopportunity unrun/null, no scoring or native admission.
+Snapshot B1 14maintenance/13evaluation of32, B2/M notstarted. HTTP0failure
+does not mean Writer0failure. Live costs distinct from closed B0 ledger37215/
+142686945known; firstB1user is subset, not added twice. Old failures preserved.
+Full plan remains active, ProductNO_GO, no finalcandidate/Madvantage. OneQwen
+family, no newagents/auditor/platform/deployment/Product/Archive/workflow.
+Continue frozen prefix and separate draft validation, actualstate65/full277,
+native/drift/ablation/budget/holdout/external/Host/sixdeliverables. Raw/HTTP/DB ignored.
+26c0 Fastsuccess/Fullinprogress at09:52:17 UTC; new report CI separate.
+Lower dated blocks retain historical scope.
+
 # 2026-10-06 09:17:39 UTC: user-requested B0 four-user prefix closure summary
 
 Publish six Lab doc/state/summary files only; new model calls0, source/config/tests unchanged.
