@@ -1,3 +1,22 @@
+# 2026-10-06 12:03:58 UTC: closed B2 review and separate external counter source
+
+Publish8 Lab report/state files only, model0. Prior source d547 commits2 external
+source/test files;22 unit/Ruff2/mypy1/localtokenizer synthetic proof pass. Source
+ownFast/Full in_progress12:04:28, no external model/admission; not main capacity cause.
+Frozen7b82 PID178764 unchanged: B0/B1/B2 32/32; M3maintenance/2evaluation at snapshot.
+B2 update0/72valid61 QA32/73valid68; original aggregate/checkpoint match,418allstop,
+1418066known,18preHTTPfailures,18gaps,7actualempty,30create/0old updates.30records/
+66content units/0conditions-relations;24unchanged states not semantic passes.
+Root32states/15fullenvelopes/73fullanswers reviewed, sources selective/no independent
+Judge or exhaustive audit.26 real B1/B2 failed input ab8 projections allfit/exact;
+finiteB1 firstuser8 CI-bound/notadmitted/model0 still waits normal frozenqueue exit.
+Closed ledger38295/146378488known/146490203charged, unknown3/embed964645 unchanged,
+excludes liveM/user subsets. No hotchange/replay/idealstate/budgetincrease/score splice.
+Full original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/six
+deliverables stay active. OneQwen/no newagents/auditor/platform/deployment.
+ProductNO_GO/PR85draft/unmerged. Raw/gold/HTTP/DB/reasoning/logs ignored. Product/
+Archive/workflow/API/permissions unchanged. Lower dated blocks retain history.
+
 # 2026-10-06 11:41:47 UTC: user-requested progress review publication
 
 Publish7 Lab report/state files only, model0; preserve2 unstaged external source/test

@@ -1,5 +1,32 @@
 # MiLAi-Edit reproduction instructions
 
+## Current frozen prefix and external counter source (2026-10-06 12:03:58 UTC)
+
+See [current results](MILAI_EDIT_CHECKPOINT_20261006.md),
+[prefix/long-smoke declaration](../data/manifests/milai-edit-post-b0-prefix-and-long-smoke-development-20261006.json),
+and [closed B2 results](../data/manifests/milai-edit-post-b0-stage-c-b2-four-user-prefix-results-20261006.json).
+Frozen7b82/I2 first8 runs have closed B0/B1/B2; M is still live. Reproduce that
+experiment using its exact7b82 source and declared parameters, not current HEAD.
+The normal tools/run_edit_suite.py and BenchmarkRun remain the execution path.
+Original first failures, own-empty formation and accounting must be retained.
+
+Separate ab8 compact explanatory schema preserves the original API generation
+contract.26 actual failed inputs fit offline; its declared finite B1 first-user8
+real check remains CI-bound but unadmitted until current queue normal exit.
+Do not silently use d547 or another source for the ab8 declaration.
+
+External callback source d5476bd790a315480436a7bfbb1b258514483c84 reuses common
+input_tokens(messages), so configured thinking and provider prompt counting
+agree. Explicit legacy false requests are unchanged.22 existing external tests,
+Ruff2/mypy1 and real local tokenizer with synthetic completions pass; source own
+Fast/Full are pending as of12:04:28. External actual model calls0/not admitted.
+This does not change original A-MEM operations/prompt/schema, reader budgets,
+no-replay, main frozen source, or the finite ab8 protocol. It is not a semantic
+result, final candidate, or explanation for main B1/B2 capacity failures.
+
+The following sections retain their dated historical scopes.
+
+
 ## Current source-control and identity-repair checkpoint (2026-10-06 15:06:50)
 
 Use [the current checkpoint](MILAI_EDIT_CHECKPOINT_20261006.md) and the separate
