@@ -1,0 +1,135 @@
+{
+  "status": "COMPLETED12_ROOT_REVIEWED_B2_EXPLICIT_ORIGIN_CONDITION_UPDATE_BOUNDED_POSITIVE",
+  "reviewed_at": "2026-10-06T06:58:57.497356+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-v1",
+  "actual_calls": 12,
+  "confirmed_responses": 12,
+  "finish_reasons": {
+    "stop": 12
+  },
+  "tokens": {
+    "input": 25289,
+    "completion": 23185,
+    "known": 48474
+  },
+  "new_unconfirmed_conservative_charge": 0,
+  "event_rows": 8,
+  "old_body_HTTP_packets": 4,
+  "old_body_ranges": 4,
+  "old_body_token_occurrences": 68,
+  "current_old_total_body_and_full_request_capacity_matched": true,
+  "old_body_from_actual_selected_supports_and_prior_actual_body": true,
+  "old_body_actual_roles_times_preserved": true,
+  "proposal_receipts": {
+    "committed": 8
+  },
+  "empty_envelopes": 0,
+  "accounting_start": {
+    "generation_requests": 36507,
+    "generation": {
+      "charged_tokens": 140119399,
+      "known_tokens": 140007684,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 36519,
+    "generation": {
+      "charged_tokens": 140167873,
+      "known_tokens": 140056158,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "process_exited": true,
+  "new_unknown": 0,
+  "embedding_unchanged": true,
+  "Reader_memory_state_unchanged_all_events": true,
+  "first_attempts_and_raw_terminal_preserved": true,
+  "semantic_success_not_inferred_from_receipts_or_empty_delta": true,
+  "Root_semantic_event_rows_reviewed": 8,
+  "Root_Reader_answers_reviewed": 4,
+  "Root_semantic_review_closed_at": "2026-10-06T07:04:23.065225+00:00",
+  "own_empty_banks_all_four_verified": true,
+  "final_Reader_core_complete": {
+    "B0": true,
+    "B1": true,
+    "B2": true,
+    "M": true
+  },
+  "B2_actual_from_unit_aliases": [
+    "u1",
+    "u2",
+    "u3"
+  ],
+  "B2_changed_condition_current_evidence_only": true,
+  "B2_unaffected_text_assertion_support_and_relation_semantics_preserved": true,
+  "semantic_findings": {
+    "B0": "Whole compound rewrite changes18to20 and keeps old h1 plus current e1; unchangedquiet/weekdays remain.",
+    "B1": "Local compound replace preserves quiet/weekdays text but drops its old direct unit support and reattributes whole unit to current cutoff report. Core QA correct, provenance limitation remains.",
+    "B2": "Actual full rewrite uses from_unitu1/u2/u3; unchanged content/weekdays keep old assertion/support, changedtime uses currente only; retained binding h5 accepted with actual prior node origin. Threeunits/twomodifies persist and coreQA complete.",
+    "M": "Actual change_conditionu3 preserves content/weekdays/oldrelations and updates cutoff with currente plus oldh3 context; coreQA complete.",
+    "limit": "One exposed constructed ordinary-correction control. No exception lifecycle, long-history stability, method advantage or ordinary Host model acceptance established."
+  },
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "live_ledger_matches": true,
+  "serial_lease_free": true,
+  "version": "milai-edit-post-b0-whole-rewrite-identity-results-v1",
+  "observed_at": "2026-10-06T07:06:50.083872+00:00",
+  "interface": "I2",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "model_family": "Qwen3.6 only",
+  "predeclaration_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "predeclaration_manifest": "milai-edit-post-b0-whole-rewrite-identity-development-20261006.json",
+  "role_counts": {
+    "Writer": 8,
+    "Reader": 4,
+    "Judge": 0
+  },
+  "source_own_ci_at_first_HTTP": {
+    "commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "observed_at": "2026-10-06T06:54:30.292049+00:00",
+    "Fast": {
+      "run_id": 37426071277,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full": {
+      "run_id": 37426071235,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full_before_prefix_candidate_merge": true,
+    "finite_daily_after_affected_checks_per_plan7_2": true
+  },
+  "affected_engineering_checks": {
+    "distinct_tests_passed": 294,
+    "Ruff_files": 4,
+    "strict_mypy_sources": 2,
+    "default_off_actual_contract_comparisons": 24,
+    "frozen7cc_same_SDK_fixture_expected_failure": true,
+    "new_real_SQLite_SDK_reopen_fixture_passed": true
+  },
+  "source_exposure": "Additional exposed constructed ordinary-correction control; not a natural benchmark or unseen confirmation.",
+  "full_before_prefix_candidate_merge": true,
+  "normal_Host_model_acceptance_completed": false,
+  "method_advantage_established": false,
+  "product_status": "NO_GO",
+  "new_model_calls_for_publication": 0
+}

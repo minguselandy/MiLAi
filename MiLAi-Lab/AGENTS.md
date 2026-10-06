@@ -1,3 +1,23 @@
+# 2026-10-06 15:06:50 Asia/Shanghai: publish complete source controls and affected identity recheck
+
+Latest user requests current summary submitted to GitHub. Publish nine Lab report/
+state/result files only; publication model0, no source/test/config changes. Frozen7cc
+all141 slots accounted:141attempts140responses604072known, unknown Writer never replayed,
+actualnull/conservative60013/known-no-memory-commit preserved. Transport102 allstop,
+450079known; all source controls closed. Confirmation B0/B2 claimant-role conflicts,
+B1/B2 Reader misses; strengthening B1/B2/M destroy old User statement, B0 retains.
+Source7b82 affected12 closed Root8events4answers/12HTTP48474known; B2 actually uses
+from_unit and retained bindings, all4coreQA complete, B1 old unit support loss remains.
+Prior294checks/default-off24/SDKreopen are engineering evidence. No method advantage.
+Source ownFast success/Full in_progress at15:06:50; report CI separate. Ledger36519/
+140056158known/140167873charged,unknown3/embed0 unchanged; no live queue, lease free.
+StageC offline selection/config prepared, model0; next original32prefix perarm and
+preselected firstuser65full from own actual state, after ownFull and pre-HTTP binding.
+No perfect-R3 prerequisite; preserve ordinary failures. FullR0-R5/E0-E5/sixdeliverables
+and deferred scopes active. Root owns HTTP/raw/DB/evaluation/accounting/GitHub,
+no new delegation/family/platform/deployment/Product/Archive/workflow. PR85draft,
+ProductNO_GO. Lower dated blocks retain their own historical snapshot scopes.
+
 # 2026-10-06 14:50:18 Asia/Shanghai: Root identity/source decoupling fix and finite affected recheck
 
 Previous goal turn published reviewed66 actual results via d7f062c: progress.

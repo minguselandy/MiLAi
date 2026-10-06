@@ -1,5 +1,41 @@
 # MiLAi-Edit reproduction instructions
 
+## Current source-control and identity-repair checkpoint (2026-10-06 15:06:50)
+
+Use [the current checkpoint](MILAI_EDIT_CHECKPOINT_20261006.md) and the separate
+[complete7cc results](../data/manifests/milai-edit-post-b0-common-source-reader-complete-results-20261006.json)
+and [7b82 affected12 results](../data/manifests/milai-edit-post-b0-whole-rewrite-identity-results-20261006.json).
+All original7cc141 slots are accounted:141 attempts/140 responses/604072 known.
+Transport300 executes only102 originally unattempted tasks;180second unknown
+Writer is not replayed. The historical66 result/predeclarations/raw terminals
+remain unchanged. These counts span transport configs and are cost accounting.
+
+New frozen source7b82c60e04755f385e5f80658ed67e4067826093 adds opt-in from_unit
+correspondence on whole-rewrite content/conditions, separate from factual support.
+The existing public tools/run_edit_development_history.py with ordinary
+BenchmarkRun/MemoryService ran the predeclared neutral two-event history from
+four own-empty banks:8Writer4Reader/48474known/allstop. B2 actually emitted
+from_unitu1/u2/u3, retained original condition bindings and used current evidence
+for the changed cutoff; four core answers complete. B1 old direct unit support
+was lost. This ordinary correction control does not test exception lifecycle.
+Do not reproduce frozen7cc with7b82, inject ideal prior state, repair truncated
+JSON or merge configuration scores. Model/gold/source controls are not Host tasks.
+
+The common affected profile is I2/Qwen3.6 only, thinking=true, temperature1,
+max_tokens32768, timeout300, context65536, current_source_tokens4096,
+current+old_body8192, retrieval_limit10, working_sets=false. Writer/Reader/scorer
+and method source identities remain bound separately from documentation commits.
+Source ownFast success/Full in_progress at15:06:50; prefix/candidate/merge require
+own Full success. First finite12 was daily development under plan7.2 after294
+checks with ownCI bound, both in_progress at firstHTTP; that fact is preserved.
+
+StageC is offline-prepared, not started/admitted: perarm four development users'
+chronological first8 (32sessions/72update opportunities/73QA), then preselected
+first user full65 (142updates/164QA) from each own actual same-version prefix.
+Publish and bind its full protocol before any newHTTP; no extra perfect-R3 gate.
+All deferred full/native/drift/reserved/external/ordinaryHost scopes remain.
+The following headings and running/not-started claims retain their dated history.
+
 Current v2 execution is described in
 [the v2 progress report](MILAI_EDIT_V2_PROGRESS_20261005.md). The v1 commands
 below retain their historical configuration and results. v1 M ended FAILED

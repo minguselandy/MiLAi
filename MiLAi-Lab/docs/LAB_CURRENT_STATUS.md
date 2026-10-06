@@ -1,5 +1,28 @@
 # MiLAi Lab 当前状态
 
+**2026-10-06 15:06:50 Asia/Shanghai：**冻结7cc原141任务全部入账：141尝试/140响应/
+604,072 known，原超时确认未提交、actual=null/保守收费60,013、不重发。传输续行102已完成
+450,079 known，全部stop；准确重述16、用户确认20、无依据强化16均完成Root复核。
+用户确认时M有限正例，B0/B2陈述者与角色冲突、B1/B2问答漏确认；无依据强化时B1/B2/M丢
+旧用户事实，B0保留。最终生命周期Reader失败、旧497图结构有限正例与各首次失败不改。
+
+修复源码7b82已提交。294项工程检查、Ruff4/mypy2/default-off24及边界通过；真实受影响复核
+12次/48,474 known完成，8维护提交、4核心回答完整。B2实际from_unitu1/u2/u3保留旧条件关系，
+新时间只引用新e；B1保留文本却丢旧直接支持。是有限普通更正证据，不是例外或方法优势。
+Root复核新增28事件/20回答/48HTTP；账本36,519/140,056,158 known/140,167,873 charged，
+unknown3/embed0不变，进程退出、锁释放，无当前模型队列。Post-B0累计669尝试/1,992,419 known
+只累计成本。7b82自身Fast success/Full in_progress（15:06:50查询），报告CI另核。
+
+Stage C仅离线准备：每组32会话/72更新机会/73题，事前固定第一用户完整65会话；实际0，
+需源码自身Full成功及事前绑定后执行，普通语义失败保留，不新增全部R3成功门槛。
+完整同版四组比较、消融/较紧预算、原生/漂移、16保留用户、外部/普通Host/恢复及六项交付
+继续；没有最终候选/稳定方法优势，Product NO_GO，PR85 draft未合并。一Qwen家族/I2/四组不变。
+本次九个Lab报告/状态/结果文件，发布新增调用0，不改源码/配置/Product/Archive/workflow，
+raw/HTTP/数据库/日志保持ignored。下方actual0/未启动/草稿/运行中均为各自日期的历史快照。
+[当前总结](MILAI_EDIT_CHECKPOINT_20261006.md) ·
+[完整141结果](../data/manifests/milai-edit-post-b0-common-source-reader-complete-results-20261006.json) ·
+[修复12结果](../data/manifests/milai-edit-post-b0-whole-rewrite-identity-results-20261006.json)。
+
 **2026-10-06 14:36:53 Asia/Shanghai：**按用户要求发布当前总结。冻结7cc/共同timeout300配置已完成
 原分支续行14、共同条件36、助手准确重述16，共66次/311,090 known，全部stop。
 Root复核36事件/31回答及66对HTTP/usage、实际旧支持交付与连续账本；无新增unknown。
