@@ -1,7 +1,7 @@
 {
-  "status": "FOUR_ARM_PREFIX_AND_FINITE_INPUT_REPAIR_CLOSED_CURRENT_MAINTENANCE_AND_RETRIEVAL_GAPS_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06 14:10:30 UTC",
-  "previous_report_commit": "ca4be6cc61b6f6991919673df2799f2ba0a3eb6d",
+  "status": "FIXED_STATE_RETRIEVAL_READER_DIAGNOSIS_CLOSED_CURRENT_FIRST_SOURCE_PREPARED_REAL_RECHECK_PENDING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06 14:43:48 UTC",
+  "previous_report_commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -43,26 +43,26 @@
     "version": "milai-edit-post-b0-plan-1.0",
     "read": true,
     "scheduling_change_executed": true,
-    "next_priority": "Finiteab8 closed. Current-first maintenance and common semantic/lexical retrieval require finite actual comparison, then own-state complete lifecycle; retain all original scopes.",
+    "next_priority": "Bind current-first source and finite own-empty behavior recheck, then choose common semantic/lexical retrieval and actual own-state full lifecycle; keep all original scopes.",
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
       "one fixed tighter-budget sensitivity"
     ]
   },
   "previous_report_ci": {
-    "commit": "ca4be6cc61b6f6991919673df2799f2ba0a3eb6d",
-    "observed_at": "2026-10-06 14:10:30 UTC",
+    "commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
+    "observed_at": "2026-10-06 14:40:41 UTC",
     "Fast": {
-      "run_id": 37474522541,
+      "run_id": 37478256349,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37474522621,
+      "run_id": 37478256288,
       "status": "in_progress",
       "conclusion": null
     },
-    "new_report_CI_must_be_queried_separately": true
+    "new_source_CI_must_be_queried_separately": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -397,15 +397,15 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 39119,
+    "generation_requests": 39122,
     "generation": {
-      "charged_tokens": 149457915,
-      "known_tokens": 149346200,
+      "charged_tokens": 149465215,
+      "known_tokens": 149353500,
       "unknown_usage": 3
     },
     "embedding": {
-      "charged_tokens": 964645,
-      "known_tokens": 964645,
+      "charged_tokens": 965219,
+      "known_tokens": 965219,
       "unknown_usage": 0
     }
   },
@@ -499,7 +499,7 @@
     "Full_run_id": 37401712125,
     "Full_successful_jobs": 21
   },
-  "historical_counter_scope": "Top-level latest fields and complete141/identity12 blocks are current. Other dated development blocks, historical* blocks and manifests retain their own snapshots; do not add overlapping counters or treat old actual0/running statements as live. Latest M first-user review is an8-session subset; full M result remains null. External counter ownCI is now successful; previous pending snapshots retain their dates. Latest M first-three-user review is an overlapping24-session subset, not additional accounting; full M result remains null.33 fixed failed inputs are projected, fourth M user excluded. Prior snapshots keep their dates. Latest four-arm7b82 closure is2412 calls/8650621 known, counted once; M636 overlaps prior user subsets. Finiteab8 is a separate dated live snapshot, never spliced into7b82 scores. Lower blocks retain their original scope. Latest finiteab8 closes188/639421 after7b82; prior78-request live snapshot overlaps. No new projections beyond37. Old four-arm scores remain unchanged; current-first and semantic retrieval comparisons pending.",
+  "historical_counter_scope": "Top-level latest fields and complete141/identity12 blocks are current. Other dated development blocks, historical* blocks and manifests retain their own snapshots; do not add overlapping counters or treat old actual0/running statements as live. Latest M first-user review is an8-session subset; full M result remains null. External counter ownCI is now successful; previous pending snapshots retain their dates. Latest M first-three-user review is an overlapping24-session subset, not additional accounting; full M result remains null.33 fixed failed inputs are projected, fourth M user excluded. Prior snapshots keep their dates. Latest four-arm7b82 closure is2412 calls/8650621 known, counted once; M636 overlaps prior user subsets. Finiteab8 is a separate dated live snapshot, never spliced into7b82 scores. Lower blocks retain their original scope. Latest finiteab8 closes188/639421 after7b82; prior78-request live snapshot overlaps. No new projections beyond37. Old four-arm scores remain unchanged; current-first and semantic retrieval comparisons pending. Latest read-only retrieval3Reader/7300known plus embedding574 is counted once; it changes no old scores. New current-first source actual0 awaits own CI/admission.",
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
     "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
@@ -635,7 +635,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "Closed7b82 four-arm prefix plus separately closed finiteab8 recheck, counted once; no live calls.",
+  "continuous_accounting_snapshot_scope": "Closed four-arm7b82 plus finiteab8 plus one read-only fixed-state3Reader/1embedding diagnostic, each counted once.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -976,13 +976,17 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_files": 8,
+    "Lab_files": 9,
     "new_model_calls_started": 0,
-    "source_test_config_changes": false,
+    "source_test_config_changes": true,
+    "source_files": 2,
+    "new_test_files": 0,
+    "public_config_files": 0,
+    "finite_source_calls": 0,
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
     "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
-    "rollback_reference": "ca4be6cc61b6f6991919673df2799f2ba0a3eb6d"
+    "rollback_reference": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
   },
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
@@ -1966,26 +1970,29 @@
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "current_publication_checks": {
-    "status": "PASS_FINITE_COUNTS_LABELS_ANSWERS_COSTS_RETRIEVAL_HISTORY_LINKS_BOUNDARY_STAGED_SCOPE",
-    "public_files": 8,
-    "HTTP_usage_pairs": 188,
-    "complete_answers_matched_to_HTTP": 20,
-    "actual_Writer_inputs_matched": 8,
-    "fixed_state_lexical_records_compared": 15,
-    "new_projection_samples": 0,
-    "existing37_projection_rows_unchanged": true,
+    "status": "PASS_ACTUAL_RETRIEVAL_COUNTS_ANSWERS_COSTS_SOURCE_CONSERVATION_HISTORY_LINKS_BOUNDARY_SCOPE",
+    "public_files": 9,
+    "source_files": 2,
+    "new_source_model_calls": 0,
+    "publication_model_calls": 0,
+    "affected_existing_tests_passed": 99,
+    "Ruff_source_files_passed": 2,
+    "mypy_source_files_passed": 2,
+    "actual_read_only_HTTP_pairs": 4,
+    "complete_Reader_answers_matched": 3,
+    "existing_deliveries_compared": 8,
+    "new_capacity_projection_inputs": 0,
+    "existing37_projections_unchanged": true,
     "old_four_arm_scores_unchanged": true,
-    "historical_manifests_unchanged": 745,
-    "relative_links_checked": 205,
-    "new_model_calls": 0,
-    "source_tests_repeated_for_report": false,
+    "relative_links_checked": 127,
+    "historical_manifests_unchanged": 746,
     "raw_payload_fields_published": 0,
     "boundary": {
       "status": "PASS",
-      "tracked_paths": 6461,
+      "tracked_paths": 6463,
       "findings": 0
     },
-    "staged_scope": "EIGHT_LAB_REPORT_STATE_FILES_ONLY"
+    "rollback": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
   },
   "stage_C_first_user_B0_review": {
     "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
@@ -5824,5 +5831,257 @@
     "same_Reader_answer_comparison": "NOT_RUN",
     "all_four_arms_to_share_any_future_retrieval_change": true,
     "interpretation": "Metadata removal eliminates the false travel match but the existing food record still has no lexical overlap. Semantic retrieval and actual Reader effects remain to verify."
+  },
+  "historical_before_current_first_preparation": {
+    "report_commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
+    "observed_at": "2026-10-06 14:10:30 UTC",
+    "status": "FOUR_ARM_PREFIX_AND_FINITE_INPUT_REPAIR_CLOSED_CURRENT_MAINTENANCE_AND_RETRIEVAL_GAPS_NO_FINAL_CANDIDATE",
+    "continuous_accounting_snapshot": {
+      "generation_requests": 39119,
+      "generation": {
+        "charged_tokens": 149457915,
+        "known_tokens": 149346200,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "current_publication_checks": {
+      "status": "PASS_FINITE_COUNTS_LABELS_ANSWERS_COSTS_RETRIEVAL_HISTORY_LINKS_BOUNDARY_STAGED_SCOPE",
+      "public_files": 8,
+      "HTTP_usage_pairs": 188,
+      "complete_answers_matched_to_HTTP": 20,
+      "actual_Writer_inputs_matched": 8,
+      "fixed_state_lexical_records_compared": 15,
+      "new_projection_samples": 0,
+      "existing37_projection_rows_unchanged": true,
+      "old_four_arm_scores_unchanged": true,
+      "historical_manifests_unchanged": 745,
+      "relative_links_checked": 205,
+      "new_model_calls": 0,
+      "source_tests_repeated_for_report": false,
+      "raw_payload_fields_published": 0,
+      "boundary": {
+        "status": "PASS",
+        "tracked_paths": 6461,
+        "findings": 0
+      },
+      "staged_scope": "EIGHT_LAB_REPORT_STATE_FILES_ONLY"
+    },
+    "previous_report_ci": {
+      "commit": "ca4be6cc61b6f6991919673df2799f2ba0a3eb6d",
+      "observed_at": "2026-10-06 14:10:30 UTC",
+      "Fast": {
+        "run_id": 37474522541,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37474522621,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_report_CI_must_be_queried_separately": true
+    },
+    "publication_scope": {
+      "Lab_files": 8,
+      "new_model_calls_started": 0,
+      "source_test_config_changes": false,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Archive_workflow_changed": false,
+      "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+      "rollback_reference": "ca4be6cc61b6f6991919673df2799f2ba0a3eb6d"
+    }
+  },
+  "read_only_semantic_retrieval_Reader_comparison": {
+    "detail_manifest": "milai-edit-post-b0-fixed-state-semantic-retrieval-results-20261006.json",
+    "status": "ROOT_REVIEWED_FIXED_STATE_RETRIEVAL_RECOVERS_OLD_FOOD_BUT_NEW_CHANGE_NOT_STORED",
+    "observed_at": "2026-10-06T14:33:41.861117+00:00",
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "scope": {
+      "development_user_position": 2,
+      "ordinal": 4,
+      "question_position": 0,
+      "records": 15,
+      "new_Writer_calls": 0,
+      "new_Reader_calls": 3,
+      "new_Judge_calls": 0,
+      "embedding_requests": 1,
+      "embedding_inputs": 16
+    },
+    "actual_state_records": 15,
+    "complete_Reader_answers_reviewed": 3,
+    "HTTP_pairs_reviewed": 4,
+    "dense_food_record_rank": 2,
+    "food_delivered_by_condition": {
+      "frozen_lexical": false,
+      "semantic_text_lexical": false,
+      "semantic_plus_lexical": true
+    },
+    "generation_requests": 3,
+    "generation_known_tokens": 7300,
+    "embedding_requests": 1,
+    "embedding_known_tokens": 574,
+    "new_unknown_usage": 0,
+    "actual_usage": [
+      {
+        "condition": "frozen_lexical",
+        "prompt_tokens": 480,
+        "total_tokens": 2290,
+        "completion_tokens": 1810,
+        "prompt_tokens_details": null,
+        "finish_reason": "stop",
+        "delivered_records": 2
+      },
+      {
+        "condition": "semantic_text_lexical",
+        "prompt_tokens": 368,
+        "total_tokens": 1996,
+        "completion_tokens": 1628,
+        "prompt_tokens_details": null,
+        "finish_reason": "stop",
+        "delivered_records": 1
+      },
+      {
+        "condition": "semantic_plus_lexical",
+        "prompt_tokens": 1519,
+        "total_tokens": 3014,
+        "completion_tokens": 1495,
+        "prompt_tokens_details": null,
+        "finish_reason": "stop",
+        "delivered_records": 10
+      }
+    ],
+    "accounting_start": {
+      "generation_requests": 39119,
+      "generation": {
+        "charged_tokens": 149457915,
+        "known_tokens": 149346200,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "accounting_end": {
+      "generation_requests": 39122,
+      "generation": {
+        "charged_tokens": 149465215,
+        "known_tokens": 149353500,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 965219,
+        "known_tokens": 965219,
+        "unknown_usage": 0
+      }
+    },
+    "original_state_and_benchmark_results_unchanged": true,
+    "Writer_or_Judge_calls": 0,
+    "ordinary_runtime_retrieval_source_changed": false,
+    "not_method_comparison_or_new_author_score": true,
+    "future_retrieval_change_common_to_all_arms": true,
+    "Root_not_independent_audit": true,
+    "Reader_model_prompt_and_material_format_unchanged": true,
+    "retrieval_limit": 10,
+    "semantic_text": "Actual matter description and literal clauses including conditions and factual dates; rendered IDs/labels/collection metadata excluded.",
+    "hybrid": "Positive semantic-text lexical hits first, then unseen normalized BGE-m3 cosine results until limit10; no threshold, tuned weights or query rewrite.",
+    "outcomes": [
+      "Frozen lexical delivers2 records, semantic-text lexical1, hybrid10. Food record absent in both lexical conditions and present in hybrid.",
+      "Same Reader accurately recites the older User food report and its date after hybrid retrieval, but still cannot determine later new culinary choices.",
+      "The actual new food preference/openness and Assistant suggestion were never committed because that original event failed before Writer HTTP. Retrieval alone cannot supply this missing change."
+    ],
+    "limitations": [
+      "One exposed actual M state and3 Reader calls are diagnostic only, not a new benchmark score or runtime deployment.",
+      "Larger actual hybrid prompt is accounted; future chosen retrieval must be common to all four arms."
+    ]
+  },
+  "current_first_maintenance_development": {
+    "detail_manifest": "milai-edit-post-b0-current-first-development-20261006.json",
+    "status": "CURRENT_FIRST_SOURCE_PREPARED_MECHANICAL_PASS_FINITE_REAL_RECHECK_NOT_ADMITTED_NOT_RUN",
+    "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+    "source_commit": null,
+    "source_base": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "engineering": {
+      "status": "PASS_EXISTING8_ACTUAL_DELIVERIES_INFORMATION_MAPPING_GENERATION_SCHEMA_AND_DEFAULTS_PRESERVED",
+      "observed_at": "2026-10-06T14:37:09.285924+00:00",
+      "source_base": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+      "actual_existing_delivery_packets_compared": 8,
+      "packet_information_unchanged": true,
+      "alias_mapping_unchanged": true,
+      "API_generation_schema_unchanged": true,
+      "default_off_packet_wire_unchanged": true,
+      "default_off_four_arm_instructions_unchanged": true,
+      "enabled_evidence_precedes_old_records": true,
+      "new_capacity_projection_inputs": 0,
+      "new_model_calls": 0,
+      "bank_writes": 0,
+      "affected_existing_tests_passed": 99,
+      "Ruff_source_files": 2,
+      "mypy_source_files": 2,
+      "not_real_model_semantic_success": true
+    },
+    "actual_model_calls": 0,
+    "finite_recheck": {
+      "status": "PREPARED_NOT_ADMITTED",
+      "arms": [
+        "B1"
+      ],
+      "development_user_position": 0,
+      "chronological_sessions": 8,
+      "update_opportunities": 19,
+      "QA_opportunities": 20,
+      "initial_state": "OWN_EMPTY_BANK",
+      "normal_driver": "tools/run_edit_suite.py --benchmark halumem",
+      "model": {
+        "base_url": "http://127.0.0.1:7862/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 32768,
+        "timeout": 300,
+        "enable_thinking": true
+      },
+      "context_tokens": 65536,
+      "input_limit": 32256,
+      "safety_tokens": 512,
+      "source_tokens": 4096,
+      "old_body_tokens": 8192,
+      "retrieval_limit": 10,
+      "common_features": {
+        "matter_organization": true,
+        "semantic_operations": true,
+        "bound_references": true,
+        "single_record_changes": true,
+        "source_metadata": true
+      },
+      "Reader_retrieval_author_scoring_unchanged": true,
+      "requests_and_Judge_cost": "All actual first attempts recorded, ordinary dynamic author calls billed; no fixed request-count promise.",
+      "requirements_before_HTTP": [
+        "Passed affected mechanical checks and exact source publication.",
+        "Bind source/declaration commit and actual own Fast success; plan7.2 permits finite daily recheck with Full pending, Full success remains required before full-prefix/candidate/merge.",
+        "Bind immutable admitted config/frozen normal driver and acquire existing serial ledger lease; no restart or unknown replay."
+      ],
+      "checks_after_run": [
+        "Root read actual before/after states, complete Writer envelopes and Reader answers.",
+        "Separate old target absence, delivered input omission, create without revision, current/history applicability and source ownership.",
+        "Keep all failures and original author labels/all-valid denominators; no score splicing or ideal old-card injection."
+      ]
+    },
+    "candidate_selected": false,
+    "full_new_four_arm_prefix_admitted": false
+  },
+  "latest_actual_execution_since_previous_report": {
+    "generation_Reader_calls": 3,
+    "generation_known_tokens": 7300,
+    "embedding_calls": 1,
+    "embedding_known_tokens": 574,
+    "new_unknown_usage": 0,
+    "new_source_model_calls": 0,
+    "publication_model_calls": 0
   }
 }

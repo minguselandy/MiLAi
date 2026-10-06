@@ -869,12 +869,18 @@ def writer_projection(
             public_record.pop("units")
             public_record.pop("relations")
         public_records.append(public_record)
+    # The opt-in matter workflow starts with the actual dialogue; old matters
+    # follow as revision targets. Keep the information, aliases and default view.
+    material = (
+        {"evidence": public_evidence, "records": public_records}
+        if features and any(features.values())
+        else {"records": public_records, "evidence": public_evidence}
+    )
     packet = {
         "interface_version": profile,
         "arm": arm,
         "allow_create": allow_create,
-        "records": public_records,
-        "evidence": public_evidence,
+        **material,
         "historical_support": public_support,
         "source_table": attributes,
     }

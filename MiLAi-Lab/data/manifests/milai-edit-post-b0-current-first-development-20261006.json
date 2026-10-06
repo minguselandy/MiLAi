@@ -1,0 +1,119 @@
+{
+  "status": "CURRENT_FIRST_SOURCE_PREPARED_MECHANICAL_PASS_FINITE_REAL_RECHECK_NOT_ADMITTED_NOT_RUN",
+  "observed_at": "2026-10-06 14:40:41 UTC",
+  "source_commit_reference": "Exact commit containing this source/declaration must be bound before HTTP",
+  "previous_source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+  "previous_report_commit": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0",
+  "plan": "milai-edit-post-b0-plan-1.0 section5.5 A",
+  "interface": "I2",
+  "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+  "evidence_for_change": "Finite ab8 actual current facts and relevant old targets were delivered but Writer returned3 empty envelopes; old-state catalog matching did not complete the changes.",
+  "change": [
+    "For the existing opt-in matter workflow, present current evidence before old records in the same packet; no delivered content is removed or duplicated.",
+    "Start the common Writer task with current supported changes, affected old matters and distinct new matters; preserve history, qualifications and reported plans/status."
+  ],
+  "source_files": [
+    "src/milai_lab/memory/edit_units.py",
+    "src/milai_lab/methods/edit_memory.py"
+  ],
+  "common_to_all_four_arms": true,
+  "new_feature_switches": 0,
+  "extraction_first_B": "NOT_IMPLEMENTED_OR_RUN_USE_ONLY_IF_A_REMAINS_INSUFFICIENT",
+  "engineering": {
+    "status": "PASS_EXISTING8_ACTUAL_DELIVERIES_INFORMATION_MAPPING_GENERATION_SCHEMA_AND_DEFAULTS_PRESERVED",
+    "observed_at": "2026-10-06T14:37:09.285924+00:00",
+    "source_base": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "actual_existing_delivery_packets_compared": 8,
+    "packet_information_unchanged": true,
+    "alias_mapping_unchanged": true,
+    "API_generation_schema_unchanged": true,
+    "default_off_packet_wire_unchanged": true,
+    "default_off_four_arm_instructions_unchanged": true,
+    "enabled_evidence_precedes_old_records": true,
+    "new_capacity_projection_inputs": 0,
+    "new_model_calls": 0,
+    "bank_writes": 0,
+    "affected_existing_tests_passed": 99,
+    "Ruff_source_files": 2,
+    "mypy_source_files": 2,
+    "not_real_model_semantic_success": true
+  },
+  "actual_model_calls_for_new_source": 0,
+  "finite_recheck": {
+    "status": "PREPARED_NOT_ADMITTED",
+    "arms": [
+      "B1"
+    ],
+    "development_user_position": 0,
+    "chronological_sessions": 8,
+    "update_opportunities": 19,
+    "QA_opportunities": 20,
+    "initial_state": "OWN_EMPTY_BANK",
+    "normal_driver": "tools/run_edit_suite.py --benchmark halumem",
+    "model": {
+      "base_url": "http://127.0.0.1:7862/v1",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "max_tokens": 32768,
+      "timeout": 300,
+      "enable_thinking": true
+    },
+    "context_tokens": 65536,
+    "input_limit": 32256,
+    "safety_tokens": 512,
+    "source_tokens": 4096,
+    "old_body_tokens": 8192,
+    "retrieval_limit": 10,
+    "common_features": {
+      "matter_organization": true,
+      "semantic_operations": true,
+      "bound_references": true,
+      "single_record_changes": true,
+      "source_metadata": true
+    },
+    "Reader_retrieval_author_scoring_unchanged": true,
+    "requests_and_Judge_cost": "All actual first attempts recorded, ordinary dynamic author calls billed; no fixed request-count promise.",
+    "requirements_before_HTTP": [
+      "Passed affected mechanical checks and exact source publication.",
+      "Bind source/declaration commit and actual own Fast success; plan7.2 permits finite daily recheck with Full pending, Full success remains required before full-prefix/candidate/merge.",
+      "Bind immutable admitted config/frozen normal driver and acquire existing serial ledger lease; no restart or unknown replay."
+    ],
+    "checks_after_run": [
+      "Root read actual before/after states, complete Writer envelopes and Reader answers.",
+      "Separate old target absence, delivered input omission, create without revision, current/history applicability and source ownership.",
+      "Keep all failures and original author labels/all-valid denominators; no score splicing or ideal old-card injection."
+    ]
+  },
+  "contract_boundary": {
+    "default_off": "BYTE_UNCHANGED_IN_CHECKED_DELIVERIES_AND_ALL4_INSTRUCTIONS",
+    "API_generation_schema": "UNCHANGED",
+    "alias_mapping": "UNCHANGED",
+    "source_support_current_boundary": "UNCHANGED",
+    "Reader_retrieval_scoring": "UNCHANGED",
+    "Product_Schema_API_permissions_Canonical": "UNCHANGED",
+    "Archive_workflow": "UNCHANGED"
+  },
+  "closed_retrieval_detail_manifest": "milai-edit-post-b0-fixed-state-semantic-retrieval-results-20261006.json",
+  "closed_accounting": {
+    "generation_requests": 39122,
+    "generation": {
+      "charged_tokens": 149465215,
+      "known_tokens": 149353500,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 965219,
+      "known_tokens": 965219,
+      "unknown_usage": 0
+    }
+  },
+  "existing_fixed_capacity_projection_inputs": 37,
+  "additional_capacity_projection_inputs": 0,
+  "own_source_CI": "PENDING_PUBLICATION_NOT_YET_ADMITTED",
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "Product_status": "NO_GO",
+  "remaining_original_plan": "Common65/277, own-state formation/correction/exception/withdrawal/query, native/drift, ablation/fixed tighter budget,16 reserved users, external tasks/baselines, Host/recovery and six deliverables remain active.",
+  "raw_source_questions_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+  "rollback_reference": "e50a3bb584a55d51c086932fed0e4dd4bce0cbb0"
+}

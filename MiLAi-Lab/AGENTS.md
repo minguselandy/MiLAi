@@ -1,3 +1,31 @@
+# 2026-10-06 14:43:48 UTC: current-first source prepared after actual retrieval diagnosis
+
+Full post-B0 goal remains active. Previous goal turn made progress: fixed actual
+state retrieval comparison closed with3 Reader/7300 known and1 BGE embedding/574,
+no new unknown or bank writes. Hybrid delivered old food card; Reader accurately
+used that report but could not recover a current change never committed.
+This is one exposed state, not method advantage or deployed retrieval repair.
+Root owns this two-file common current-first source change and data/HTTP/GitHub;
+no new agent work. Existing feature workflow starts with current evidence before
+old records and current supported changes. Default-off information/wire/schema,
+aliases/support and API/permissions/Canonical unchanged; no new switches/platform.
+99 existing affected tests and Ruff/mypy2 files passed;8 existing deliveries match
+exactly apart from opt-in field order. This is not real semantic success.
+Prepare only B1 exposed first-user8 own-empty/19update/20QA with same normal driver,
+I2/model/thinking/temp/output/context/source budget/Reader/frozen lexical/scorer.
+Bind exact source/declaration and own Fast before HTTP, existing serial lease and
+continuous ledger, immutable admitted cfg and frozen source. Plan7.2 allows finite
+with Full pending; full-prefix/candidate/merge still needs Full success.
+The user now requests current execution published. Complete this nine-file source
+and report publication without starting a new model process for publication.
+Do not inject ideal old state, hotchange, retry/unknown replay, splice versions or
+increase/reset budget. All4 share future task/retrieval changes; B remains unused.
+Closed ledger39122/149353500known/149465215charged, embedding965219, unknown3.
+Keep37 prior projections unchanged, raw/gold/HTTP/reasoning/DB/logs ignored.
+Original65/277/native/drift/ablation/fixedbudget/reserved/external/Host/recovery and
+six deliverables remain. SingleQwen only, ProductNO_GO, PR85draft/unmerged.
+Product/Archive/workflow unchanged; rollbacke50a3bb. Lower dated blocks are history.
+
 # 2026-10-06 14:10:30 UTC: finite input repair closed; maintenance and retrieval remain incomplete
 
 User requests current execution summary submitted to GitHub. Publish8 Lab

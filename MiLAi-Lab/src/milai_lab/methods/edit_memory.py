@@ -220,9 +220,13 @@ class EditMemory:
             else '{"proposals":[]}'
         )
         instruction = (
-            "Return the supplied JSON envelope. Maintain durable supported information or actual "
-            "corrections; a captured utterance is not automatically a semantic fact. Social "
-            "acknowledgments and ordinary queries with no durable fact need no maintenance: "
+            "Maintain the supported changes in the current dialogue. Read current evidence first "
+            "and use the delivered old matters to locate what needs revision. One event can revise "
+            "related old matters and create distinct new matters. Preserve still-valid history "
+            "and qualifications. Preferences, intentions and plans remain attributed reports "
+            "with their time and status. Redelivered support supplies old context. "
+            "Return the supplied JSON envelope. When the current dialogue adds no supported "
+            "information or revision, return "
             + empty
             + ". "
             "Every r/u/e/h must be a candidate in THIS request. "
