@@ -1,3 +1,21 @@
+# 2026-10-06 09:17:39 UTC: user-requested B0 four-user prefix closure summary
+
+Publish six Lab doc/state/summary files only; new model calls0, source/config/tests unchanged.
+Frozen7b82 queue PID178764 continues: B0 closed32/32, B1 running, B2/M not started.
+B0 original author reaggregation and augmented checkpoint records exactly match saved results;
+updates6/72 valid58, QA42/73, invalidNone10/Omitted4 preserved.696HTTP allstop,
+2630787known,33Writer/73Reader/590Judge, no failures/rejects/unprocessed.60creates,
+1rewrite,15no_change;18 unchanged sessions include actual new-fact omissions.
+Root retirement rewrite loses non-restated savings; exact historical retrieval reproduces
+plural/singular word-filter miss, model0. Source/author-target differences kept separate.
+Closed ledger37215/142686945known/142798660charged, unknown3/embed964645 unchanged,
+B0 counted once, liveB1 excluded. Four-arm comparison and method advantage unestablished.
+Finish frozen prefix then actual-state preselected65/full277 and original controls,
+holdout/external/Host/six deliverables; no perfect-R3 gate, ideal state or hotfix.
+One Qwen family, no new agents/auditor/platform/deployment/Product/Archive/workflow.
+Raw/HTTP/DB ignored. Source7b82 and previous a1ca ownFast/Full success, new CI separate.
+ProductNO_GO, PR85 open/draft/unmerged. Prior blocks are dated historical snapshots.
+
 # 2026-10-06 08:32:59 UTC: user-requested summary, two closed B0 users, frozen queue continues
 
 User requests current summary submitted to GitHub. Publish6Lab doc/state/result
