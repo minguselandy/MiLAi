@@ -1019,5 +1019,17 @@
     "Archive_workflow_changed": false,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61",
     "historical_raw_results_and_predeclarations_unchanged": true
+  },
+  "transport300_continuation_declaration": {
+    "status": "PREDECLARED102_DISTINCT_UNATTEMPTED_TRANSPORT_ONLY_NOT_CANDIDATE",
+    "declared_at": "2026-10-06T05:51:11.524187+00:00",
+    "manifest": "milai-edit-post-b0-transport300-continuation-development-20261006.json",
+    "config_version": "milai-edit-post-b0-common-source-reader-transport300-v2",
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "declared_generation_calls": 102,
+    "actual_generation_calls": 0,
+    "first_phase": 14,
+    "no_replay_unknown_writer": true,
+    "method_input_Reader_scoring_unchanged": true
   }
 }

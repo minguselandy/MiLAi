@@ -1,5 +1,12 @@
 # MiLAi-Edit v2 实验进度与复现入口
 
+**2026-10-06 13:51:11 Asia/Shanghai：**完整计划继续，已声明原141请求中仍未尝试的102次：
+原分支14、共同36、来源控制52。仅传输timeout180→300，方法/输入/Reader/评分及其他生成
+参数不改；旧超时结果、未知用量60,013保守收费和确认未提交记忆均保留，不重发未知Writer。
+B2用实际库只读备份继续未尝试事件，M及后续分支各自空库；Root分阶段复核。源码7cc自身
+Fast/Full已success。声明actual0，不代表已运行或候选准入；不会拼接两个传输配置的成绩。
+[102次传输续行声明](../data/manifests/milai-edit-post-b0-transport300-continuation-development-20261006.json)。
+
 **2026-10-06 13:44:49 Asia/Shanghai：**冻结`7cc1363`原分支44次声明已在第30次停止：
 29响应全部stop，16 Writer/13 Reader，131,913 known（53,703 input+78,210 completion）。
 第30次是B2无新事实查询的Writer，180秒ReadTimeout、没有响应或提案。Root只读复核实际
