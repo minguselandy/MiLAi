@@ -1,3 +1,34 @@
+# 2026-10-06 23:19 UTC: third B0 first8 closed/reviewed; original queue live
+
+Previous turn a48 publication is progress. Root read actual third user0–7 and
+all22 fullQA (lastsession10, not inferred9), authoroffline0HTTP succeeds:
+update13/all20/valid19 Omission6/Omitted Update1; QA10/all22/valid19 Omission5/
+Hallucination4/null3 preserved. 200stop969382known=8Writer22Reader170Judge;
+57encoder17737. 16creates5rewrites21commits,16matters100content/max39, no
+capacity/trunc/reject/gap/newunknown/retry/empty. 3 delivered employment revised,
+3oldclauses fullretain;4 preference revised4oldretain;5 health deliveredr3 but
+onlyplanr1 appended, missinghealth causes3 later refusalanswers.6/7 plan9→21→39,
+all9/21oldunits retained; later assertions used/dated as earlier in answers.
+Reader coordination/operation completion are not semantic/source/time proof.
+
+Snapshot23:19:17 B0maintenance25/eval24 of32,othersunreached,605stop2625626known,
+1pending,152encoder52628. Live40188/153953018known154105243charged/embed1027460
+unknown4includespending; lastclosed39582/151327392known151439107charged/embed974832
+history3. Original session68500/PID3476759 LIVE/no suite terminal; no restart.
+Use actual arm terminal.json, session-onlycounts, preserve original ledgerlimits.
+c86 and a48 ownFastsuccess/Fullrunning23:17:16; ownreportCI/remote verify separately.
+B remains4actualbefore prepared0calls/notadmitted/notadopted/Hostnot switched.
+WaitWHOLEoriginalsuite actualterminal+PIDexit+serialrelease then declaredfiniteB.
+Read existing isolateduser continuation: exactsource/ns, no first8HTTP repeat,
+per-user Judge roots avoid cross-user collision; no newbank/runadmitted.
+
+Publication5Lab reportfiles only, detailedcheckpoint in existingexecutiondoc;
+no duplicatecheckpoint block/newsource/test/workflow/modelcall. Private ignored,
+rollbacka48ccbe, oldresults/declarations/docblocks retained. Full8/65/277/native/
+drift/ablation/tighterbudget/16reserved/external/Host/recovery/sixdeliverables
+ACTIVE/incomplete, ProductNO_GO PR85draftunmerged, oneQwen+BGE, no agents/platform/
+auditor/budget/idealstate/replay/perfectR3 gate. Lowerblocks historical.
+
 # 2026-10-06 23:00 UTC: B0 second user first8 closed; frozen four-arm suite stays live
 
 User asks summarize/publish current execution. Root closed/reviewed original B0
