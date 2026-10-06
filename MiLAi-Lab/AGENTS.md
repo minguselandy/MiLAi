@@ -1,3 +1,22 @@
+# 2026-10-06 13:09:44 UTC: publish M first-three-user subset; frozen queue continues
+
+Publish8 Lab report/state files only, model0. Frozen7b82/I2/PID178764 unchanged;
+B0/B1/B2 closed32/32, M27maintenance/26evaluation at dated snapshot.
+Root M first3:24 pairs17 full envelopes54 full answers487 HTTP; selected sources,
+same-family Judge, no independent audit. Subset updates7/54valid48 QA34/54valid52;
+7 pre-HTTP failures6 actual empties36 creates1 edit0 condition links.
+New records do not prove old employment revised. Exact historical lexical retrieval
+reproduces date-metadata-only irrelevant match; no query/rank/source repair.
+ab8 cumulative33 fixed failed-input projections fit/exact, not new-history success.
+Finite B1 first-user8 still CI-bound/notadmitted/model0 until queue normal exit.
+Native B0/B1/B2 capacity only31/32 opportunities11 sessions, semanticnull/model0;
+future session16 unrun, no-delta not preservation. ab8/declaration/d547 ownFast/Full
+success 2026-10-06 13:10:09 UTC; new report CI separate. Closed ledger throughB2 only.
+Original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/six deliverables
+remain active. No hotchange/retry/idealstate/budgetincrease/score splice/newfamily/
+auditor/platform/deployment. ProductNO_GO/PR85draft/unmerged. Raw/HTTP/DB ignored,
+Product/Archive/workflow/API/permissions unchanged; rollback042a526. Keep history.
+
 # 2026-10-06 12:34:04 UTC: publish M first-user review; frozen queue continues
 
 User requests current summary submitted to GitHub. Publish8 Lab report/state

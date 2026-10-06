@@ -1,5 +1,22 @@
 # MiLAi-Edit reproduction instructions
 
+## Latest M three-user subset (2026-10-06 13:09:44 UTC)
+
+Frozen7b82/I2 has closed B0/B1/B2 four-user first8; M first3 users are Root-reviewed,
+fourth user remains running. [The24-session M subset](../data/manifests/milai-edit-post-b0-stage-c-m-first-three-user-prefix-results-20261006.json)
+is not a full M score. Reproduce from exact7b82 source and its immutable normal
+driver configuration; do not substitute current report HEAD or repaired sources.
+All33 fixed failed-input ab8 projections fit offline; finite B1 first-user8 own-empty
+check remains unadmitted/model0 pending normal queue exit and actual admission binding.
+Exact frozen retrieval diagnosis uses original query and actual historical state,
+without changing outputs. Native B0/B1/B2 capacity preparation has31/32 available
+opportunities,11 sessions, model0/semanticnull; original session16 and full277 drift
+remain outstanding. No-delta counts are not preservation scores.
+ab8 source/declaration and external d547 ownFast/Full success queried 2026-10-06 13:10:09 UTC;
+external actual calls0/not admitted. Preserve original labels/gold, first failures,
+actual states, continuous ledger and version-separated configurations/results.
+This publication starts no model calls. The following sections retain dated scopes.
+
 ## Latest M subset and source-own CI (2026-10-06 12:34:04 UTC)
 
 Frozen7b82/I2 four-user first8 has closed B0/B1/B2; M is still running.

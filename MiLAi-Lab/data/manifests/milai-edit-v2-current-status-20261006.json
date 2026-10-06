@@ -1,7 +1,7 @@
 {
-  "status": "B0_B1_B2_CLOSED_M_FIRST_USER_REVIEWED_MAIN_QUEUE_RUNNING_NO_FINAL_CANDIDATE",
-  "observed_at": "2026-10-06T12:34:04.616644+00:00",
-  "previous_report_commit": "f432e794922b354da996c66bd73ca7299b9235d9",
+  "status": "B0_B1_B2_CLOSED_M_FIRST_THREE_USERS_REVIEWED_MAIN_QUEUE_RUNNING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T13:09:44.933125+00:00",
+  "previous_report_commit": "042a52650c62504333849db8b635b45b5fc42199",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -55,15 +55,15 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "f432e794922b354da996c66bd73ca7299b9235d9",
-    "observed_at": "2026-10-06 12:35:01 UTC",
+    "commit": "042a52650c62504333849db8b635b45b5fc42199",
+    "observed_at": "2026-10-06 13:11:12 UTC",
     "Fast": {
-      "run_id": 37461344466,
+      "run_id": 37465017625,
       "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37461344604,
+      "run_id": 37465017648,
       "status": "in_progress",
       "conclusion": null
     },
@@ -504,7 +504,7 @@
     "Full_run_id": 37401712125,
     "Full_successful_jobs": 21
   },
-  "historical_counter_scope": "Top-level latest fields and complete141/identity12 blocks are current. Other dated development blocks, historical* blocks and manifests retain their own snapshots; do not add overlapping counters or treat old actual0/running statements as live. Latest M first-user review is an8-session subset; full M result remains null. External counter ownCI is now successful; previous pending snapshots retain their dates.",
+  "historical_counter_scope": "Top-level latest fields and complete141/identity12 blocks are current. Other dated development blocks, historical* blocks and manifests retain their own snapshots; do not add overlapping counters or treat old actual0/running statements as live. Latest M first-user review is an8-session subset; full M result remains null. External counter ownCI is now successful; previous pending snapshots retain their dates. Latest M first-three-user review is an overlapping24-session subset, not additional accounting; full M result remains null.33 fixed failed inputs are projected, fourth M user excluded. Prior snapshots keep their dates.",
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
     "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
@@ -987,7 +987,7 @@
     "Product_schema_API_permissions_Canonical_changed": false,
     "Archive_workflow_changed": false,
     "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
-    "rollback_reference": "f432e794922b354da996c66bd73ca7299b9235d9"
+    "rollback_reference": "042a52650c62504333849db8b635b45b5fc42199"
   },
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
@@ -1769,8 +1769,8 @@
   "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
   "new_queue_live": true,
   "stage_C_prefix_live": {
-    "observed_at": "2026-10-06T12:34:04.616644+00:00",
-    "observation_started_at": "2026-10-06T12:34:04.422817+00:00",
+    "observed_at": "2026-10-06T13:09:44.933125+00:00",
+    "observation_started_at": "2026-10-06T13:09:44.712556+00:00",
     "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
     "PID": 178764,
     "PID_and_exact_frozen_command_verified_live": true,
@@ -1810,10 +1810,10 @@
         "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
       },
       "M": {
-        "maintenance_complete": 15,
-        "evaluation_complete": 14,
-        "requests": 307,
-        "saved_response_files": 306,
+        "maintenance_complete": 27,
+        "evaluation_complete": 26,
+        "requests": 534,
+        "saved_response_files": 533,
         "pending_HTTP_count": 1,
         "failure_files": 0,
         "terminal_status": null
@@ -1894,41 +1894,41 @@
         },
         {
           "development_user_position": 1,
-          "maintenance_complete": 7,
-          "evaluation_complete": 6
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         },
         {
           "development_user_position": 2,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
         },
         {
           "development_user_position": 3,
-          "maintenance_complete": 0,
-          "evaluation_complete": 0
+          "maintenance_complete": 3,
+          "evaluation_complete": 2
         }
       ]
     },
-    "request_artifacts": 2083,
+    "request_artifacts": 2310,
     "saved_response_roles": {
-      "Writer": 84,
-      "Reader": 251,
-      "Judge": 1747
+      "Writer": 93,
+      "Reader": 279,
+      "Judge": 1937
     },
-    "saved_response_count": 2082,
+    "saved_response_count": 2309,
     "saved_response_finish_reasons": {
-      "stop": 2082
+      "stop": 2309
     },
-    "known_tokens_from_saved_responses": 7366474,
-    "input_tokens_from_saved_responses": 4641411,
-    "completion_tokens_from_saved_responses": 2725063,
+    "known_tokens_from_saved_responses": 8239747,
+    "input_tokens_from_saved_responses": 5202563,
+    "completion_tokens_from_saved_responses": 3037184,
     "not_final_accounting": true,
     "pending_budget_unknown_reservation_is_not_terminal_failure": true,
     "candidate_selected": false,
     "method_advantage_established": false,
     "long_smoke_actual_model_calls": 0,
     "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
-    "Root_closed_user_review_scope": "B0, B1 and B2 all32 before/after pairs and73 complete Reader answers per arm reviewed. B2 all15 complete actual Writer envelopes read, including second-user additional2. M first-user8 before/after pairs,6 complete actual Writer envelopes and20 complete Reader answers reviewed. Selected source context only; not independent Judge or exhaustive source/database audit.",
+    "Root_closed_user_review_scope": "B0, B1 and B2 all32 before/after pairs and73 complete Reader answers per arm reviewed. B2 all15 complete actual Writer envelopes read, including second-user additional2. M first3 users24 before/after pairs,17 complete actual Writer envelopes and54 complete Reader answers reviewed. Selected source context only; not independent Judge or exhaustive source/database audit.",
     "no_new_model_process_started_for_publication": true
   },
   "required_controls_offline_preparation": {
@@ -1970,6 +1970,111 @@
       "semantic_scores": null,
       "actual_model_calls": 0,
       "no_native_model_configuration_admitted": true
+    },
+    "B0_B1_B2_existing_native_prefix_capacity": {
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "original_selected_opportunities": 32,
+      "available_selected_opportunities": 31,
+      "distinct_source_sessions": 11,
+      "unrun_opportunity": {
+        "selection_index": 1,
+        "development_user_position": 0,
+        "original_session": 16,
+        "semantic_scores": null
+      },
+      "per_arm": {
+        "B0": {
+          "observed_at": "2026-10-06T09:29:47.242214+00:00",
+          "available_selected_opportunities": 31,
+          "distinct_source_sessions": 11,
+          "summary": {
+            "transition": {
+              "requests": 93,
+              "fits": 93,
+              "input_tokens": {
+                "min": 9280,
+                "median": 11343,
+                "max": 15622
+              },
+              "unknown_prior_range_occurrences": 0
+            },
+            "delta": {
+              "requests": 7,
+              "fits": 7,
+              "input_tokens": {
+                "min": 8283,
+                "median": 10663,
+                "max": 14982
+              },
+              "unknown_prior_range_occurrences": 0
+            }
+          },
+          "no_evaluable_text_delta_opportunities": 24,
+          "semantic_scores": null,
+          "actual_model_calls": 0
+        },
+        "B1": {
+          "observed_at": "2026-10-06T12:48:52.225817+00:00",
+          "available_selected_opportunities": 31,
+          "distinct_source_sessions": 11,
+          "summary": {
+            "transition": {
+              "requests": 93,
+              "fits": 93,
+              "input_tokens": {
+                "min": 9557,
+                "median": 10874,
+                "max": 14754
+              },
+              "unknown_prior_range_occurrences": 0
+            },
+            "delta": {
+              "requests": 5,
+              "fits": 5,
+              "input_tokens": {
+                "min": 8592,
+                "median": 8599,
+                "max": 12258
+              },
+              "unknown_prior_range_occurrences": 0
+            }
+          },
+          "no_evaluable_text_delta_opportunities": 26,
+          "semantic_scores": null,
+          "actual_model_calls": 0
+        },
+        "B2": {
+          "observed_at": "2026-10-06T12:48:51.176086+00:00",
+          "available_selected_opportunities": 31,
+          "distinct_source_sessions": 11,
+          "summary": {
+            "transition": {
+              "requests": 93,
+              "fits": 93,
+              "input_tokens": {
+                "min": 6877,
+                "median": 9107,
+                "max": 12602
+              },
+              "unknown_prior_range_occurrences": 0
+            },
+            "delta": {
+              "requests": 0,
+              "fits": 0,
+              "input_tokens": null,
+              "unknown_prior_range_occurrences": 0
+            }
+          },
+          "no_evaluable_text_delta_opportunities": 31,
+          "semantic_scores": null,
+          "actual_model_calls": 0
+        }
+      },
+      "M_preparation_pending_complete_prefix": true,
+      "actual_model_calls": 0,
+      "native_configuration_admitted": false,
+      "text_delta_absence_not_preservation": true,
+      "full277_drift_scope_retained": true
     }
   },
   "actual_user_continuation_preparation": {
@@ -1993,16 +2098,17 @@
   "current_publication_checks": {
     "status": "PASS_COUNTS_COSTS_SAVED_LABELS_HISTORY_LINKS_BOUNDARY_STAGED_SCOPE",
     "public_files": 8,
-    "relative_links_checked": 180,
-    "historical_manifests_unchanged": 742,
-    "M_first_user_HTTP_usage_pairs": 186,
-    "actual_complete_answers_matched_to_HTTP": 20,
+    "relative_links_checked": 189,
+    "historical_manifests_unchanged": 743,
+    "M_first_three_user_HTTP_usage_pairs": 487,
+    "actual_complete_answers_matched_to_HTTP": 54,
+    "failed_input_projections_checked": 33,
     "new_model_calls": 0,
     "source_tests_repeated_for_report": false,
     "raw_payload_fields_published": 0,
     "boundary": {
       "status": "PASS",
-      "tracked_paths": 6458,
+      "tracked_paths": 6459,
       "findings": 0
     },
     "staged_scope": "EIGHT_LAB_REPORT_STATE_FILES_ONLY"
@@ -2778,7 +2884,7 @@
     },
     "own_source_CI": {
       "commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
-      "observed_at": "2026-10-06 10:57:13 UTC",
+      "observed_at": "2026-10-06 13:10:09 UTC",
       "Fast": {
         "run_id": 37447258302,
         "status": "completed",
@@ -2788,8 +2894,7 @@
         "run_id": 37447258296,
         "status": "completed",
         "conclusion": "success"
-      },
-      "new_report_CI_must_be_queried_separately": true
+      }
     },
     "finite_real_recheck": {
       "status": "PREPARED_CI_BOUND_WAITING_FROZEN_QUEUE_NORMAL_EXIT_NOT_ADMITTED",
@@ -2866,7 +2971,7 @@
       "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
       "B1_actual_failed_inputs": 8,
       "B2_actual_failed_inputs": 18,
-      "actual_failed_inputs": 28,
+      "actual_failed_inputs": 33,
       "rows": [
         {
           "arm": "B1",
@@ -3175,6 +3280,61 @@
           "fits_new_source_without_data_loss": true,
           "schema_expands_exactly": true,
           "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 1,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 35511,
+          "projected_input_tokens": 21879,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 1,
+          "ordinal": 5,
+          "batch": 0,
+          "original_input_tokens": 43992,
+          "projected_input_tokens": 25040,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 2,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 35353,
+          "projected_input_tokens": 21753,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 2,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 39111,
+          "projected_input_tokens": 23227,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 2,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 42226,
+          "projected_input_tokens": 26225,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
         }
       ],
       "projected_min_tokens": 21201,
@@ -3187,8 +3347,24 @@
       "finite_recheck_status": "PREPARED_CI_BOUND_WAITING_FROZEN_QUEUE_NORMAL_EXIT_NOT_ADMITTED",
       "historical26_detail_manifest": "milai-edit-post-b0-stage-c-b2-four-user-prefix-results-20261006.json",
       "M_first_user_actual_failed_inputs": 2,
-      "remaining_M_users_excluded": true,
-      "latest_detail_manifest": "milai-edit-post-b0-stage-c-first-user-m-prefix-results-20261006.json"
+      "latest_detail_manifest": "milai-edit-post-b0-stage-c-m-first-three-user-prefix-results-20261006.json",
+      "M_second_user_actual_failed_inputs": 2,
+      "M_third_user_actual_failed_inputs": 3,
+      "M_fourth_user_excluded": true
+    },
+    "latest_declaration_CI_observation": {
+      "commit": "7add8259a1a81133d6bb69efad5893909472aa16",
+      "observed_at": "2026-10-06 13:10:09 UTC",
+      "Fast": {
+        "run_id": 37448157226,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37448157201,
+        "status": "completed",
+        "conclusion": "success"
+      }
     }
   },
   "historical_shared_prompt_choice_uncommitted_draft": {
@@ -4117,7 +4293,7 @@
     "source_commit": "d5476bd790a315480436a7bfbb1b258514483c84",
     "own_CI": {
       "commit": "d5476bd790a315480436a7bfbb1b258514483c84",
-      "observed_at": "2026-10-06 12:35:01 UTC",
+      "observed_at": "2026-10-06 13:10:09 UTC",
       "Fast": {
         "run_id": 37459592051,
         "status": "completed",
@@ -4388,6 +4564,592 @@
       "complete_actual_Writer_envelopes": 6,
       "complete_Reader_answers": 20,
       "HTTP_usage_pairs": 186,
+      "selected_source_context_only": true,
+      "independent_Judge_or_exhaustive_source_database_audit": false
+    },
+    "full_M_arm_score": null,
+    "subset_cost_not_double_counted": true
+  },
+  "historical_publication_before_M_first_three_user_summary": {
+    "status": "B0_B1_B2_CLOSED_M_FIRST_USER_REVIEWED_MAIN_QUEUE_RUNNING_NO_FINAL_CANDIDATE",
+    "observed_at": "2026-10-06T12:34:04.616644+00:00",
+    "previous_report_commit": "f432e794922b354da996c66bd73ca7299b9235d9",
+    "previous_report_ci": {
+      "commit": "f432e794922b354da996c66bd73ca7299b9235d9",
+      "observed_at": "2026-10-06 12:35:01 UTC",
+      "Fast": {
+        "run_id": 37461344466,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37461344604,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "new_report_CI_must_be_queried_separately": true
+    },
+    "stage_C_prefix_live": {
+      "observed_at": "2026-10-06T12:34:04.616644+00:00",
+      "observation_started_at": "2026-10-06T12:34:04.422817+00:00",
+      "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+      "PID": 178764,
+      "PID_and_exact_frozen_command_verified_live": true,
+      "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+      "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+      "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+      "started_at": "2026-10-06T07:23:06.705004+00:00",
+      "per_arm_planned_sessions": 32,
+      "per_arm_planned_updates": 72,
+      "per_arm_planned_QA": 73,
+      "arms": {
+        "B0": {
+          "maintenance_complete": 32,
+          "evaluation_complete": 32,
+          "requests": 696,
+          "saved_response_files": 696,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+        },
+        "B1": {
+          "maintenance_complete": 32,
+          "evaluation_complete": 32,
+          "requests": 662,
+          "saved_response_files": 662,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+        },
+        "B2": {
+          "maintenance_complete": 32,
+          "evaluation_complete": 32,
+          "requests": 418,
+          "saved_response_files": 418,
+          "pending_HTTP_count": 0,
+          "failure_files": 0,
+          "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+        },
+        "M": {
+          "maintenance_complete": 15,
+          "evaluation_complete": 14,
+          "requests": 307,
+          "saved_response_files": 306,
+          "pending_HTTP_count": 1,
+          "failure_files": 0,
+          "terminal_status": null
+        }
+      },
+      "per_user_checkpoints": {
+        "B0": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          }
+        ],
+        "B1": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          }
+        ],
+        "B2": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          }
+        ],
+        "M": [
+          {
+            "development_user_position": 0,
+            "maintenance_complete": 8,
+            "evaluation_complete": 8
+          },
+          {
+            "development_user_position": 1,
+            "maintenance_complete": 7,
+            "evaluation_complete": 6
+          },
+          {
+            "development_user_position": 2,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          },
+          {
+            "development_user_position": 3,
+            "maintenance_complete": 0,
+            "evaluation_complete": 0
+          }
+        ]
+      },
+      "request_artifacts": 2083,
+      "saved_response_roles": {
+        "Writer": 84,
+        "Reader": 251,
+        "Judge": 1747
+      },
+      "saved_response_count": 2082,
+      "saved_response_finish_reasons": {
+        "stop": 2082
+      },
+      "known_tokens_from_saved_responses": 7366474,
+      "input_tokens_from_saved_responses": 4641411,
+      "completion_tokens_from_saved_responses": 2725063,
+      "not_final_accounting": true,
+      "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+      "candidate_selected": false,
+      "method_advantage_established": false,
+      "long_smoke_actual_model_calls": 0,
+      "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+      "Root_closed_user_review_scope": "B0, B1 and B2 all32 before/after pairs and73 complete Reader answers per arm reviewed. B2 all15 complete actual Writer envelopes read, including second-user additional2. M first-user8 before/after pairs,6 complete actual Writer envelopes and20 complete Reader answers reviewed. Selected source context only; not independent Judge or exhaustive source/database audit.",
+      "no_new_model_process_started_for_publication": true
+    },
+    "publication_scope": {
+      "Lab_files": 8,
+      "new_model_calls_started": 0,
+      "source_test_config_changes": false,
+      "Product_schema_API_permissions_Canonical_changed": false,
+      "Archive_workflow_changed": false,
+      "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+      "rollback_reference": "f432e794922b354da996c66bd73ca7299b9235d9"
+    },
+    "current_publication_checks": {
+      "status": "PASS_COUNTS_COSTS_SAVED_LABELS_HISTORY_LINKS_BOUNDARY_STAGED_SCOPE",
+      "public_files": 8,
+      "relative_links_checked": 180,
+      "historical_manifests_unchanged": 742,
+      "M_first_user_HTTP_usage_pairs": 186,
+      "actual_complete_answers_matched_to_HTTP": 20,
+      "new_model_calls": 0,
+      "source_tests_repeated_for_report": false,
+      "raw_payload_fields_published": 0,
+      "boundary": {
+        "status": "PASS",
+        "tracked_paths": 6458,
+        "findings": 0
+      },
+      "staged_scope": "EIGHT_LAB_REPORT_STATE_FILES_ONLY"
+    },
+    "external_template_counter_repair": {
+      "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_OWN_FAST_FULL_SUCCESS_NOT_ADMITTED",
+      "source_commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+      "own_CI": {
+        "commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+        "observed_at": "2026-10-06 12:35:01 UTC",
+        "Fast": {
+          "run_id": 37459592051,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "Full": {
+          "run_id": 37459592057,
+          "status": "completed",
+          "conclusion": "success"
+        }
+      },
+      "affected_external_unit_tests_already_passed": 22,
+      "Ruff_files_passed": 2,
+      "strict_mypy_source_files_passed": 1,
+      "real_local_Qwen_tokenizer_synthetic_callback_verified": true,
+      "old_true_mode_regression_fails_as_expected": true,
+      "legacy_false_request_unchanged": true,
+      "actual_model_calls": 0,
+      "not_explanation_for_main_capacity_failures": true,
+      "frozen_main_and_ab8_finite_source_unchanged": true
+    },
+    "all_saved_failed_input_projections": {
+      "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+      "B1_actual_failed_inputs": 8,
+      "B2_actual_failed_inputs": 18,
+      "actual_failed_inputs": 28,
+      "rows": [
+        {
+          "arm": "B1",
+          "development_user_position": 0,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 37672,
+          "projected_input_tokens": 22953,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 0,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 34439,
+          "projected_input_tokens": 21760,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 0,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 37039,
+          "projected_input_tokens": 22320,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 1,
+          "ordinal": 5,
+          "batch": 0,
+          "original_input_tokens": 33939,
+          "projected_input_tokens": 21260,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 3,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 37181,
+          "projected_input_tokens": 23227,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 3,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 34169,
+          "projected_input_tokens": 21490,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 3,
+          "ordinal": 6,
+          "batch": 0,
+          "original_input_tokens": 37097,
+          "projected_input_tokens": 22378,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B1",
+          "development_user_position": 3,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 37218,
+          "projected_input_tokens": 22499,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 0,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 37256,
+          "projected_input_tokens": 22414,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 0,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 34003,
+          "projected_input_tokens": 21201,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 0,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 36586,
+          "projected_input_tokens": 21744,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 2,
+          "batch": 0,
+          "original_input_tokens": 33149,
+          "projected_input_tokens": 22443,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 35390,
+          "projected_input_tokens": 23904,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 39207,
+          "projected_input_tokens": 24601,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 5,
+          "batch": 0,
+          "original_input_tokens": 47828,
+          "projected_input_tokens": 27762,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 6,
+          "batch": 0,
+          "original_input_tokens": 34783,
+          "projected_input_tokens": 23297,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 1,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 34507,
+          "projected_input_tokens": 23021,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 2,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 39385,
+          "projected_input_tokens": 23727,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 2,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 43465,
+          "projected_input_tokens": 25197,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 2,
+          "ordinal": 5,
+          "batch": 0,
+          "original_input_tokens": 34494,
+          "projected_input_tokens": 22316,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 2,
+          "ordinal": 6,
+          "batch": 0,
+          "original_input_tokens": 34454,
+          "projected_input_tokens": 22282,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 2,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 43696,
+          "projected_input_tokens": 25428,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 3,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 48095,
+          "projected_input_tokens": 26743,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 3,
+          "ordinal": 4,
+          "batch": 0,
+          "original_input_tokens": 44166,
+          "projected_input_tokens": 24764,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 3,
+          "ordinal": 6,
+          "batch": 0,
+          "original_input_tokens": 48192,
+          "projected_input_tokens": 25670,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "B2",
+          "development_user_position": 3,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 48298,
+          "projected_input_tokens": 25776,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 0,
+          "ordinal": 3,
+          "batch": 0,
+          "original_input_tokens": 33628,
+          "projected_input_tokens": 21659,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        },
+        {
+          "arm": "M",
+          "development_user_position": 0,
+          "ordinal": 7,
+          "batch": 0,
+          "original_input_tokens": 36357,
+          "projected_input_tokens": 22359,
+          "fits_new_source_without_data_loss": true,
+          "schema_expands_exactly": true,
+          "packet_mapping_system_date_and_original_API_schema_unchanged": true
+        }
+      ],
+      "projected_min_tokens": 21201,
+      "projected_max_tokens": 27762,
+      "input_limit": 32256,
+      "exact_data_and_original_generation_contract_preserved": true,
+      "actual_model_calls": 0,
+      "new_own_histories_not_projected": true,
+      "finite_recheck_scope": "B1 first exposed user first8 own-empty only",
+      "finite_recheck_status": "PREPARED_CI_BOUND_WAITING_FROZEN_QUEUE_NORMAL_EXIT_NOT_ADMITTED",
+      "historical26_detail_manifest": "milai-edit-post-b0-stage-c-b2-four-user-prefix-results-20261006.json",
+      "M_first_user_actual_failed_inputs": 2,
+      "remaining_M_users_excluded": true,
+      "latest_detail_manifest": "milai-edit-post-b0-stage-c-first-user-m-prefix-results-20261006.json"
+    }
+  },
+  "stage_C_M_first_three_user_closed_scope": {
+    "detail_manifest": "milai-edit-post-b0-stage-c-m-first-three-user-prefix-results-20261006.json",
+    "sessions": 24,
+    "updates_Correct": 7,
+    "updates_all": 54,
+    "updates_valid": 48,
+    "QA_Correct": 34,
+    "QA_all": 54,
+    "QA_valid": 52,
+    "requests": 487,
+    "known_tokens": 1736508,
+    "Root_review_scope": {
+      "before_after_pairs": 24,
+      "complete_actual_Writer_envelopes": 17,
+      "complete_Reader_answers": 54,
+      "HTTP_usage_pairs": 487,
       "selected_source_context_only": true,
       "independent_Judge_or_exhaustive_source_database_audit": false
     },
