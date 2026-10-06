@@ -1,5 +1,21 @@
 # MiLAi-Edit v2 实验进度与复现入口
 
+**2026-10-06 12:05:32 Asia/Shanghai：**按用户要求发布
+[当前简明总结](MILAI_EDIT_CHECKPOINT_20261006.md)。冻结497b8d8的共同原生配置
+原分支完成44次/197,788 known token，24 Writer/20 Reader、全部stop；Root复核
+24事件/20回答及44对HTTP/usage/账本。15提交/2拒绝/1no_change另六空envelope。
+B1 插入/删除例外保留一般频率及旧限定是有限 Writer 正例；M仍覆盖一般频率并误删
+节假日条件，重申才以add_exception修复节假日。没有remove_exception，最终Reader
+均未完整。不能把零截断或后续修复计为方法优势。共同条件0/36已声明未启动。
+
+497自身Fast/Full现均success，Full21/21；22f4b84报告Fast success/Full仍in_progress，
+新报告CI按新head单独查。SDK新clauses旧支持遗漏已复现，owner修复77项通过，
+Root复核/CI尚未完成，两源码/fixture文件不纳入报告或冻结队列。账本36,330/
+139,217,005 known，历史unknown2/embed0不变；进程退出、锁释放，无模型队列。
+完整计划与旧延后范围不减，无候选/前缀，Product NO_GO。
+[原生配置结果](../data/manifests/milai-edit-post-b0-native-capacity-results-20261006.json)。
+以下保留各发布时点，不代表当前实时状态。
+
 **2026-10-06 11:45 Asia/Shanghai：**冻结 `497b8d8` 的共同条件分支已完成36次/
 75,623 token，原44与共同条件36合计 **80次/162,068 token、全部stop**。
 Root复核44事件/36回答及80对HTTP/usage：35提交、4拒绝、1no_change，另四空

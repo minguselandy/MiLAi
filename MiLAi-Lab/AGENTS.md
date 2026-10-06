@@ -1,3 +1,27 @@
+# 2026-10-06 12:05:32 Asia/Shanghai: publish reviewed native original44 checkpoint
+
+Latest user requests current summary and GitHub submission. Publish only seven
+Lab report/state files; no model HTTP is needed for publication. Frozen497b8d8
+native common configuration completed original44/197788known,allstop. Root read
+24actual events/20answers and matched44HTTP/prompt/usage,actual old-state mapping
+and ledger.15committed/2rejected/1no_change plus6emptyenvelopes are not semantic
+success counts. B1 inserts/deletes the night exception preserving general frequency
+and both limits; limited Writer positive, final Reader still incomplete. M changes
+general content to night frequency and retracts the active holiday condition;
+late reaffirmation add_exception repairs holidays, not correct night lifecycle.
+No remove_exception. No candidate/prefix. Global36 declared/unstarted, not cancelled.
+
+Process exited,ledger stable36330/139217005known,lease free,unknown2/embed0 unchanged.
+Preserve raw terminal/config/first failures. Continue declared global36 later with
+the same frozen archive/config after this Root review; never mix workspace SDK
+changes. Source497 ownFast/Full succeed,Full21/21; report CI separate. Existing
+edit_core owner handed back bounded SDK support collection fix and real reopen
+fixture,77checks passed by owner. Root review/CI pending; two source/test files
+are excluded from this report and not admitted to a new model cohort. No old-raw
+redelivery, Reader or unit-container implementation yet. Product NO_GO,oneQwen
+family,PR85 open/draft/unmerged. Full R0-R5/E0-E5/six deliverables and deferred
+old scope remain active. All following blocks are dated historical snapshots.
+
 # 2026-10-06 bound-clause80 closed; finite common native capacity calibration declared
 
 The resumed user goal continues the full Post-B0 plan. Frozen497b8d8 completed

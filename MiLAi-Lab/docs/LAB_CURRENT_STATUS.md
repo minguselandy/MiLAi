@@ -1,5 +1,20 @@
 # MiLAi Lab 当前状态
 
+更新：**2026-10-06 12:05:32 Asia/Shanghai**。冻结 `497b8d8` 条件绑定的非思考
+80 次已完成复核；同源码共同原生配置原分支也完成 **44 次 / 197,788 known token、
+全部 stop**，Root 复核24事件/20回答、44对HTTP/usage/账本。充足输出没有解决
+M 范围/撤销：覆盖一般频率、删节假日条件；B1 插入/删除例外保留旧规则是有限
+Writer 正例，最终 Reader 仍未完整。共同条件 **0/36，已声明未启动**。
+
+源码自身 Fast/Full 均成功（Full21/21），报告提交自身 CI 单列。SDK clause 旧支持
+收集遗漏已复现，owner 最小修复77项通过，Root复核/CI待完成；该源码/fixture未纳入
+本次报告，不用于冻结队列。进程退出、账本稳定36,330/139,217,005 known，unknown2/
+embed0未变、锁释放，当前无模型队列。没有候选/前缀、优势或 Product 可用结论，NO_GO。
+
+[本次简明总结](MILAI_EDIT_CHECKPOINT_20261006.md) ·
+[原生配置结果](../data/manifests/milai-edit-post-b0-native-capacity-results-20261006.json)。
+以下均是各自日期的历史快照，其中 actual0/运行中/未启动须按当时范围理解。
+
 更新：**2026-10-06 11:45 Asia/Shanghai**。冻结497b8d8新表示两分支完成80次/
 162,068 known token，全部stop；Root阅读44事件/36回答，核对80对HTTP及账本。
 条件关系实际形成、普通更正保持改善，但范围/共同条件更正/撤销仍失败，M共同

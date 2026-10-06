@@ -1,5 +1,17 @@
 # MiLAi-Edit v2 跟进记录
 
+2026-10-06 12:05:32 Asia/Shanghai，按用户要求总结并提交GitHub。共同原生配置
+仍固定497b8d8，原分支44次/197,788 token、44stop已完成，Root阅读24事件/20回答，
+核对HTTP/投影/usage/账本；15提交/2拒绝/1no_change另六空envelope。B1 Writer保留
+一般频率及旧限定、增加/删除独立夜班例外；M覆盖一般频率、撤销节假日条件，
+晚期add_exception修复不抵消首失败。最终Reader均未完整；共同36未启动，无候选。
+账本36,330/139,217,005 known、unknown2/embed0不变，进程退出/锁释放。
+
+497自身Fast/Full成功（Full21/21）；新报告CI独立核对。普通SDK旧支持收集遗漏
+已复现，owner最小修复77项通过，Root复核/CI未完成，源代码/fixture排除于报告。
+本次报告未启动HTTP、未改冻结方法/配置或Product边界；旧原件、预声明和失败保留。
+[当前总结](MILAI_EDIT_CHECKPOINT_20261006.md)与安全聚合记录完整剩余范围。
+
 2026-10-06 11:45 Asia/Shanghai，冻结497b8d8共同条件36次完成、Root复核：75,623
 token、36stop、18提交/2拒绝。加原44共80次/162,068 token、80stop、35提交/
 4拒绝/1no_change另四空envelope；44事件/36回答与80对HTTP/usage已核对。

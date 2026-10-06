@@ -1,0 +1,226 @@
+{
+  "status": "ORIGINAL44_ROOT_REVIEWED_CRITICAL_SCOPE_WITHDRAWAL_FAILURES_GLOBAL36_NOT_STARTED",
+  "observed_at": "2026-10-06T04:05:32+00:00",
+  "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+  "previous_report_commit": "22f4b84e24a7993339419f491127732df52a784b",
+  "config_version": "milai-edit-post-b0-i2-native-capacity-v1",
+  "predeclaration_manifest": "milai-edit-post-b0-native-capacity-development-20261006.json",
+  "predeclaration_actual_zero_is_historical_before_first_call": true,
+  "interface": "I2",
+  "single_Qwen_family": true,
+  "model_parameters": {
+    "enable_thinking": true,
+    "temperature": 1.0,
+    "max_tokens": 32768,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "retrieval_limit": 10,
+    "working_sets": false,
+    "other_sampling_parameters": "existing_server_defaults_not_full_vendor_profile"
+  },
+  "all_four_arms_Writer_Reader_same_model_configuration": true,
+  "declared_generation_calls": 80,
+  "actual_generation_calls": 44,
+  "Writer_calls": 24,
+  "Reader_calls": 20,
+  "Judge_calls": 0,
+  "known_tokens": 197788,
+  "prompt_tokens": 84716,
+  "completion_tokens": 113072,
+  "reasoning_in_completion_counted_once": true,
+  "responses_with_nonempty_native_reasoning": 44,
+  "request_response_pairs": 44,
+  "projected_prompt_usage_matches": 44,
+  "finish_reasons": {
+    "stop": 44,
+    "length": 0
+  },
+  "proposal_receipts": {
+    "committed": 15,
+    "rejected": 2,
+    "no_change": 1
+  },
+  "receipt_counts_are_not_semantic_success_counts": true,
+  "empty_maintenance_envelopes": 6,
+  "empty_envelopes_by_event": [
+    [
+      "B0",
+      "query_without_new_fact"
+    ],
+    [
+      "B1",
+      "query_without_new_fact"
+    ],
+    [
+      "B1",
+      "exact_reaffirmation"
+    ],
+    [
+      "B2",
+      "query_without_new_fact"
+    ],
+    [
+      "B2",
+      "exact_reaffirmation"
+    ],
+    [
+      "M",
+      "query_without_new_fact"
+    ]
+  ],
+  "query_state_version_and_support_unchanged_arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "events_with_unprocessed_gaps": 2,
+  "rejected_events": [
+    {
+      "arm": "B0",
+      "event": "frequency_without_restatement",
+      "reason": "EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE",
+      "finding": "New frequency has current evidence; old compound limits split into an h-only clause fail exact old-unit text check. No update committed."
+    },
+    {
+      "arm": "B2",
+      "event": "night_scope",
+      "reason": "EDIT_RELATION_SUPPORT_BINDING_INVALID",
+      "finding": "Proposed rewrite replaces general frequency with night frequency and reuses old binding support. Rejection does not complete scope update."
+    }
+  ],
+  "formation_graph_counts": {
+    "B0": {
+      "condition_units": 0,
+      "content_units": 1,
+      "relations": 0
+    },
+    "B1": {
+      "condition_units": 0,
+      "content_units": 1,
+      "relations": 0
+    },
+    "B2": {
+      "condition_units": 2,
+      "content_units": 1,
+      "relations": 2
+    },
+    "M": {
+      "condition_units": 1,
+      "content_units": 2,
+      "relations": 1
+    }
+  },
+  "Root_review": {
+    "actual_events_read": 24,
+    "Reader_answers_read": 20,
+    "actual_writer_packets_reviewed": 24,
+    "actual_old_state_mapping_matches": 24,
+    "independent_Judge": false,
+    "independent_full_database_audit": false,
+    "only_one_exposed_source": true,
+    "findings": [
+      "B1/B2/M ordinary correction commits and preserves unmentioned limits; B0 ordinary correction rejects and remains old frequency.",
+      "B1 inserts the night exception and then deletes that distinct unit; actual general frequency and shared limits survive both. This is a limited Writer positive, not complete Reader or method confirmation.",
+      "M night event uses change_value on the general content; general frequency is lost. M withdrawal retracts the active holiday condition and leaves night frequency unchanged.",
+      "M add_exception occurs only during later reaffirmation to reintroduce holiday suspension. It is not the needed night exception update or withdrawal; remove_exception is never used.",
+      "B2 no_change withdrawal follows an exception that was never committed, not successful cancellation of a formed exception.",
+      "All four final arrangement answers omit explicit per-shift frequencies. Writer damage and Reader inability to apply surviving general rules are distinct.",
+      "Reaffirmation can repair actual damaged state; B1/B2 empty reaffirmation matches their actual current state. Earlier failures remain."
+    ]
+  },
+  "M_actual_operations": {
+    "change_value": 3,
+    "retract": 1,
+    "add_exception": 1,
+    "remove_exception": 0,
+    "change_condition": 0
+  },
+  "global_condition_branch": {
+    "status": "DECLARED_NOT_STARTED_AWAITING_SAME_FROZEN_CONFIGURATION_CONTINUATION",
+    "declared_generation_calls": 36,
+    "actual_generation_calls": 0,
+    "Root_review_required_between_branches": true
+  },
+  "accounting": {
+    "start": {
+      "generation_requests": 36286,
+      "generation": {
+        "charged_tokens": 139070919,
+        "known_tokens": 139019217,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "end": {
+      "generation_requests": 36330,
+      "generation": {
+        "charged_tokens": 139268707,
+        "known_tokens": 139217005,
+        "unknown_usage": 2
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      }
+    },
+    "generation_request_delta": 44,
+    "known_token_delta": 197788,
+    "new_generation_unknown_usage": 0,
+    "new_embedding_unknown_usage": 0,
+    "historical_generation_unknown_usage": 2,
+    "historical_embedding_unknown_usage": 0
+  },
+  "runtime_terminal_preserved": true,
+  "original_pid_exited": true,
+  "continuous_ledger_stable": true,
+  "serial_lease_free": true,
+  "model_queue_live_at_snapshot": false,
+  "config_exact_normalized_match": true,
+  "frozen_archive_matches_declared_git_source": true,
+  "source_ci": {
+    "commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+    "observed_at": "2026-10-06T03:59:05+00:00",
+    "Fast": {
+      "run_id": 37408624077,
+      "status": "completed",
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 8,
+        "skipped": 4
+      }
+    },
+    "Full": {
+      "run_id": 37408624028,
+      "status": "completed",
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 21
+      }
+    },
+    "does_not_establish_this_report_or_uncommitted_SDK_fix_CI": true
+  },
+  "own_empty_banks_per_arm": true,
+  "ideal_state_injected": false,
+  "independent_confirmation": false,
+  "no_retry_or_truncation_repair": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "new_source_controls_admitted": false,
+  "reserved_users_accessed_for_this_cohort": false,
+  "publication_only_model_calls": 0,
+  "method_runner_configuration_changed_by_this_report": false,
+  "uncommitted_SDK_fix_used_in_frozen_experiment": false,
+  "product_status": "NO_GO",
+  "next_work": [
+    "continue declared global36 with same frozen source/config after Root review",
+    "Root-review bounded normal-SDK support collector fix before separate source freeze/CI",
+    "resolve actual scope/withdrawal and Reader/source behavior before fresh prefix/preselected long smoke",
+    "complete full R0-R5/E0-E5 and six deliverables; deferred old scope remains required"
+  ]
+}
