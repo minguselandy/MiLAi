@@ -1,5 +1,24 @@
 # MiLAi-Edit v2 跟进记录
 
+2026-10-06 11:31:00 Asia/Shanghai，按用户要求汇总当前情况并提交 GitHub。
+本次七个 Lab 报告/状态文件，新增模型调用0，方法、runner、测试和配置未改。
+冻结 `497b8d8` / `milai-edit-post-b0-i2-bound-clauses-v1` 原分支完成44次/86,445 token，
+24 Writer/20 Reader，全部stop；Root阅读24事件/20回答，核对44对HTTP与账本。
+17 committed/2 rejected/1 no_change另有四空envelope，不视为语义成功率。
+B2/M初始各形成两条件两modifies，四组普通更正保留未重述限定与旧支持；
+范围/撤销仍失败。M用change_value覆盖一般规则，撤销两个仍有效限定，重申漏写。
+B2两个拒绝后的正确旧状态不算完成例外或撤销。四组查询实际状态完全不变；
+M是合法no_change而非空提案，B2额外重申空提案与实际已匹配状态分别解释。
+
+共同条件0/36已声明未启动，不取消；原终态、配置与首失败保留。配置继承的旧
+own_ci ID不代表实际新源码CI，调用前绑定已记录497b8d8自己的Fast/Full，截至11:34:13
+Fast已success（8成功/4跳过），Full仍in_progress；报告自身CI另核对。账本36,206→36,250、known138,857,149→
+138,943,594，历史unknown2/embed0不变，进程退出、锁释放，当前无模型队列。
+默认关闭和Product Schema/API/权限/Canonical不变，回滚参考497b8d8，不回滚原件。
+完整计划继续，单一Qwen3.6，无候选/前缀或优势结论，Product NO_GO，PR85 draft。
+
+以下保留原时点快照；源码发布前actual0与当前44次结果分开记录。
+
 2026-10-06 11:15:35 Asia/Shanghai，完成限定表示修改，尚无新版本模型调用。开启已有五项功能时，
 create/rewrite 使用 clauses，B2/M 显式声明条件自身依据与关系绑定依据；共同条件
 只声明一次，其他规则显式 reuse，override 指向生成 clause。B0/B1 保持完整限定

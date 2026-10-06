@@ -5,7 +5,7 @@ Current v2 execution is described in
 below retain their historical configuration and results. v1 M ended FAILED
 after a Reader disconnect; it is not an active queue awaiting completion.
 
-## Bound-clause development source (prepared, not model-run)
+## Bound-clause development checkpoint (original44 reviewed; global36 unstarted)
 
 The five existing opt-in features now expose create/rewrite as clauses: conditioned
 B2/M clauses declare condition bodies, separate binding supports and explicit
@@ -18,16 +18,40 @@ No full-rewrite omissions or orphan links are filled in.
 with Ruff, strict method mypy, 24 actual default-off instruction/schema pairs and
 identical B2/M/low-level-M formation schemas. The finite original44/global36
 [declaration](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json)
-is actual0: freeze ordinary source/config and record own CI before new HTTP.
-The prepared configuration is milai-edit-post-b0-i2-bound-clauses-v1, matching
+retains its historical before-call actual0. Actual source/config/own CI were
+bound before HTTP: source `497b8d89f37ebe795e1e79f8791fe5ddd9289ed9`, configuration
+`milai-edit-post-b0-i2-bound-clauses-v1`, matching
 8ed7826's nonthinking/temp0/output8192/budgets and common I2/five enabled features.
 Use the existing public next-development config as the parameter base; Root's
 run binding records the final ordinary version/config without modifying old runs.
 
+At 2026-10-06 11:31:00 Asia/Shanghai original44 is complete and Root reviewed:
+24 Writer/20 Reader/0 Judge, 86445 known tokens (82875 prompt/3570 completion),
+44 stop/no length. B2/M actually form two conditions/two modifies edges each;
+all four ordinary corrections preserve unmentioned limits and old body supports.
+Scope and withdrawal still fail. M changes the general value, retracts valid
+shared limits and later misses newly restated limits; no add/remove exception.
+Two B2 rejections leave old state unchanged without completing maintenance.
+All four queries leave exact state unchanged; M uses valid targeted no_change.
+17 committed/2 rejected/1 no_change and four empty envelopes are operation counts,
+not semantic scores. [Reviewed results](../data/manifests/milai-edit-post-b0-bound-clauses-results-20261006.json)
+distinguish those outcomes; raw terminal and first attempts remain unchanged.
+
+Global36 is declared but unstarted, not cancelled. Continue it only with the same
+ordinary source archive/config and its own empty banks; this report launches no
+model calls. No new source controls/prefix/reserved trial is admitted. Source
+Fast37408624077 succeeded (8 success/4 scoped skips) at 11:34:13;
+Full37408624028 remains in progress. Require own
+Full success before candidate/prefix/merge. Frozen config description own_ci IDs
+were inherited from 8ed7826, while the actual497 own CI was recorded separately
+in the pre-HTTP run binding. Preserve that original config and use the result's
+provenance note; inherited IDs do not establish new-source CI success.
+
 The separate frozen2335ea9 thinking diagnostic is now fully closed:80calls,
 348003known tokens,71stop/9length, no new unknown or embedding. Both M formations
 fail length; add/remove each applies twice but final Reader remains incomplete.
-Root reviewed all44event rows/36answers. The next source has no real result yet.
+Root reviewed all44event rows/36answers. Its source/mode and the new 497b8d8
+nonthinking original44 are separate cohorts with separate results.
 These are different source/config cohorts, never one method score table.
 
 The following original44 checkpoint remains the historical pre-global snapshot.

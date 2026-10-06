@@ -1,3 +1,28 @@
+# 2026-10-06 11:31:00 Asia/Shanghai: publish reviewed bound-clause original44 checkpoint
+
+Latest user requests a current summary and GitHub submission. Publish seven Lab
+report/state files and update PR85, with no additional model HTTP for publication.
+Method/runner/tests/config stay frozen497b8d8. Original44 is complete and Root
+reviewed24events/20answers:86445known,44stop,17committed/2rejected/1no_change plus
+four empty envelopes. B2/M actually form two conditions/two modifies each; all
+ordinary corrections retain unmentioned limits and old body supports. Scope and
+withdrawal still fail: M changes present general frequency/retracts valid shared
+conditions and misses reaffirmed limits. No add/remove exception in this branch.
+B2 rejected unchanged old state is not successful maintenance. Four queries keep
+exact state/version/support; M uses legal no_change. No candidate/prefix admission.
+
+Global36 is declared but unstarted, not cancelled, and must retain the same actual
+497b8d8 source/config when continued. Preserve raw runtime terminal/config/first
+attempts; Root review and process/binding closure are separate. Config description
+inherited old own_ci IDs; actual497 own CI is separately recorded before firstHTTP
+and disclosed in the result. At11:34:13 Fast37408624077 succeeds (8jobs/4scope skips),
+Full37408624028 remains in progress; report CI is distinct. Full still precedes prefix/candidate/merge.
+Original process exited, continuous ledger stable36250/138943594known, lease free,
+historicalunknown2/embed0 unchanged, no queue live. No model calls for this report,
+no Product/Archive/schema/API/permissions/Canonical changes or merge. Complete
+full R0-R5/E0-E5/six deliverables and deferred old scope; one Qwen family, NO_GO.
+Below are dated historical snapshots, not current zero-call/live-process claims.
+
 # 2026-10-06 11:15:35 Asia/Shanghai: bounded clause contract delivered; finite own-empty R3 declared
 
 The active user goal continues the full Post-B0 plan. Source owner has handed

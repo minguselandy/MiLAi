@@ -1,26 +1,34 @@
 # MiLAi Lab 当前状态
 
-更新：**2026-10-06 11:20:34 Asia/Shanghai**。I2、B0/B1/B2/M、单一 Qwen3.6 不变。
-新条件绑定源码已交付：已有功能开启时采用 clause/condition 的明确支持绑定，
-Writer 按实际关系分组，B2/M 共享条件合同，B0/B1 完整限定文本。145 源码/SDK
-与 Root 295 运行器/普通 Host 检查通过，默认关闭说明/schema 24 份保持一致；
-新版本真实复核 **0/80**，仍需普通 Git 源码/配置/自身 CI 绑定和实际空库轨迹。
-没有前缀准入或最终候选，**Product NO_GO**。
+更新：**2026-10-06 11:31:00 Asia/Shanghai**。I2、B0/B1/B2/M、单一 Qwen3.6 不变。
+冻结 `497b8d8` 新条件绑定源码已完成原分支 **44/80 次、86,445 known token**，
+24 Writer/20 Reader，全部 stop，无新增 unknown 或 embedding。B2/M 各自空库形成
+两条条件及两条实际关系；四组普通更正保留未重述限定和旧支持。但局部例外、撤销
+仍失败，M 未使用增加/撤销例外，重申还漏写明确限定。17 提交、2 拒绝、1 no_change
+不等于语义成功数。共同条件 **0/36，已声明未启动**。没有前缀准入或候选，**Product NO_GO**。
+
+四组无新事实查询保持状态/版本/支持不变，M 使用合法 no_change；拒绝后状态未变
+不算成功维护。Root 阅读24事件/20回答并核对44对HTTP、usage与连续账本；不是
+独立 Judge 或完整数据库独立审计。当前进程退出、账本稳定、锁释放，无模型队列。
+本次仅更新七个 Lab 报告/状态文件，新增模型调用0，方法/runner/配置不变。
 
 冻结 `2335ea9` 思考模式诊断完成两分支 **80 次/348,003 known token**，71 stop/
 9 length。M 两次实际增加/撤销例外并保留已有一般规则；两次初始形成均截断，
 最终 Reader 仍不完整，不能计缺失旧条件保持成功。四组空查询正确，完整失败保留。
-无新 unknown/embedding，进程退出、账本稳定、串行锁释放，当前无模型队列运行。
+无新 unknown/embedding，原进程退出、账本与 HTTP 记录闭合。
 之前 `8ed7826` 非思考 132 次/236,165 token 与旧 `4357d46` 队列原样保留：
 B0 277/277、B1 115/277 收尾、B2/M 未开始。剩余完整计划仍在执行。
 
-此源码改变 Lab 可选 Writer 提案合同，Product Schema/API/权限/Canonical、存储、
-Reader、评分器未改。报告/实验身份分开，新源码自身 CI 在 PR85 单独核对；日常
-有限检查按计划7.2，Full仍须在前缀/候选/合并前成功。PR85 draft、未合并。
+该源码改变 Lab 可选 Writer 提案合同；440 受影响检查与24份默认关闭合同检查通过，
+Product Schema/API/权限/Canonical、存储、Reader、评分器未改。截至11:34:13源码自身 Fast 已 success，Full
+仍 in_progress，报告自身 CI 在 PR85 单独核对。配置继承的旧CI说明
+与实际调用前绑定分开披露。按计划7.2完成有限检查，Full仍须在前缀/候选/合并前成功。
+完整 R0–R5/E0–E5、六项交付与旧延后范围未完成；PR85 draft、未合并。
 
 [v2 进度](MILAI_EDIT_V2_PROGRESS_20261005.md) ·
 [状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json) ·
 [80 次模式结果](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json) ·
+[44 次新表示结果](../data/manifests/milai-edit-post-b0-bound-clauses-results-20261006.json) ·
 [新表示复核声明](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json) ·
 [复现入口](MILAI_EDIT_REPRODUCTION.md)。v1 M 已 FAILED 收口，历史快照不代表等待跑完。
 

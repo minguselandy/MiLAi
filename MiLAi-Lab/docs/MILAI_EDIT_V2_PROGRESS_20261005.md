@@ -1,5 +1,77 @@
 # MiLAi-Edit v2 实验进度与复现入口
 
+**截至 2026-10-06 11:31:00 Asia/Shanghai：**新表示源码 `497b8d8` 的原生命周期
+分支已完成并经 Root 复核，**44/80 次调用、86,445 已知 token**。B2/M 从各自空库
+实际形成两条条件及两条 `modifies` 关系，四组普通更正都保留未重述限定及旧正文支持。
+但是局部例外仍损坏一般规则，撤销仍不正确，M 重申时还漏写本次明确提供的限定。
+**没有前缀准入、最终候选或条件化局部编辑优势结论；Product NO_GO。**
+
+本次按用户要求发布进度快照，新增模型调用 **0**，不改方法、runner、测试或配置。
+实际实验固定 `497b8d89f37ebe795e1e79f8791fe5ddd9289ed9` /
+`milai-edit-post-b0-i2-bound-clauses-v1`；本次文档提交不是新算法版本。
+保留 I2、B0/B1/B2/M 和现有 Qwen3.6 家族，五项已有功能开启，
+enable_thinking=false、temperature=0、max_tokens=8,192、context=65,536、
+source_tokens=4,096、retrieval_limit=10、working_sets=false。Reader 与评分器未改。
+
+| 当前范围 | 调用与结果 | 能支持的结论 |
+| --- | --- | --- |
+| `497b8d8` 原生命周期 | 24 Writer / 20 Reader / 0 Judge；44 stop，零 length | 条件绑定实际形成；范围、撤销和新要求落实仍失败 |
+| `497b8d8` 共同条件 | 0/36，已声明、尚未启动 | 待在相同冻结源码/配置下继续，不是已通过或已取消 |
+| `2335ea9` 原生思考诊断 | 80 次 / 348,003 token；71 stop、9 length | M 有实际增加/撤销例外，但形成截断和最终读取仍失败 |
+| `8ed7826` 非思考及来源控制 | 132 次 / 236,165 token；全部 stop | 普通更正改善；例外、撤销和助手断言归属仍失败 |
+| 旧 `4357d46` 完整历史 | B0 277/277；B1 115/277；B2/M 各 0/277 | 保留失败及未运行范围，尚无四组完整比较 |
+
+原生命周期有 **17 committed / 2 rejected / 1 no_change**，按提案计数，
+不当作语义成功率；另外四个空 envelope 中，三个是无新事实查询，一个是 B2
+对已经匹配实际状态的重申。四组查询均保持实际状态、版本和支持不变，M 返回
+合法的定向 `no_change`，不能写成“四组都返回空提案”。
+
+| 方法 | 局部例外 | 撤销与后续重申 |
+| --- | --- | --- |
+| B0 | 丢失明确一般频率和开始时间 | 只剩笼统一般安排；重申后补回正文，Reader 仍未完整落实班次范围 |
+| B1 | 丢失一般频率及两个共同限定 | 删除整条活动复合记录；重申重新形成，不能抵消此前损坏 |
+| B2 | 提议把夜班值扩为一般值，并保留改变前的 assertion；遭支持检查拒绝 | 又提议创建无显式范围条件的新例外，遭 `EDIT_OVERRIDE_SCOPE_REQUIRED` 拒绝；状态未变不算维护成功 |
+| M | 使用 `change_value` 将仍存在的一般频率覆盖为夜班值；保留共同条件 | 使用 `retract` 撤销两个仍有效共同条件，留下错误频率；重申只改频率，没有恢复明确的新限定 |
+
+本分支 M 没有尝试 `add_exception/remove_exception`，也没有应用 `override`。
+这次最初条件与关系确实存在，不能再将其范围错误归因于“条件尚未形成”。
+B2 在撤销前从未成功形成例外，不能据其拒绝后旧状态正确宣称撤销成功。
+Root 阅读 24 个事件的实际提案、回执、前后状态及 20 个回答；不是独立 Judge，
+也未进行独立的完整数据库审计。只有一个已曝光开发来源，未访问保留用户。
+
+44 对 HTTP 请求/响应的 prompt 投影与 usage 一致：82,875 input + 3,570 output
+= **86,445 token**。连续账本 36,206 → 36,250 请求、138,857,149 → 138,943,594
+known token，generation charged 为 138,995,296；历史 generation unknown=2、
+embedding unknown=0 保持，无新增 embedding。进程已退出、账本稳定、串行锁释放，
+当前没有模型队列运行。原终态和首尝试失败不改写，不重试或修补 JSON。
+
+源码的 **440 项受影响检查**、Ruff、strict mypy、24 份默认关闭合同、同 B2/M/低层 M
+形成 schema 与依赖边界已通过，与语义失败分别报告。`497b8d8` 自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37408624077) /
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37408624028) 截至 11:34:13，Fast 已 success（8 成功、4 按范围跳过），Full 仍
+in_progress；冻结 `2335ea9` 的成功 CI 不替代它。本报告提交自身 CI 在 PR85 另核对。
+配置说明中继承的 `own_ci` 两个 ID 仍指向 `8ed7826`；实际 `497b8d8` 的 CI 已在
+首次 HTTP 前单独绑定。该说明元数据不影响实际源码/模型参数，原配置保留，复现时
+须同时阅读绑定记录和下述结果说明，不能借旧 ID 宣称新源码通过。
+
+下一步仍是相同冻结 `497b8d8` 的已声明共同条件 36 次，复核后处理真实范围、撤销及
+漏写问题；不追加提示警告，不热改队列。关键短历史和自身 Full CI 满足后才进入新
+前缀与事前选定长历史。旧剩余完整历史、原生机制/漂移、同 M 消融/较紧预算、
+16 保留用户、外部任务和 Host 功能/恢复仍属完整 R0–R5/E0–E5 及六项交付。
+本报告不改变 Product Schema/API/权限/Canonical，回滚参考 `497b8d8`，不回滚实验原件。
+PR85 继续 open/draft、未合并。原始正文、gold、HTTP、reasoning、数据库与日志保持 ignored。
+本次报告的 JSON/计数/成本核对、53 个本地链接、6,437 tracked paths 依赖边界
+（零 findings）与 staged diff 检查通过；源码字节与 `497b8d8` 一致，未重复运行源码测试。
+
+[44 次新表示结果](../data/manifests/milai-edit-post-b0-bound-clauses-results-20261006.json) ·
+[当前状态清单](../data/manifests/milai-edit-v2-current-status-20261006.json) ·
+[预声明](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json) ·
+[复现入口](MILAI_EDIT_REPRODUCTION.md)。预声明的 actual0 保留为调用前历史快照。
+
+## 11:15 新源码发布前快照
+
+以下各节保留发布时点；“实际零次”“尚未交付”等不代表上面的当前状态。
+
 **2026-10-06 11:15:35 Asia/Shanghai 新源码检查点：**显式 clause/condition 绑定与实际关系分组视图已稳定交付，
 145 源码/SDK 回归及 Root 295 运行器/普通 Host 检查通过。只改变已有功能开启的
 Writer 形成/重写合同与旧状态视图；默认关闭、存储、Reader、评分器和权限未变。
