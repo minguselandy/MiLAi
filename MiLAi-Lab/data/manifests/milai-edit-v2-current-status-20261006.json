@@ -1,7 +1,7 @@
 {
-  "status": "ORIGINAL44_ROOT_REVIEWED_CRITICAL_SCOPE_WITHDRAWAL_FAILURES_GLOBAL36_NOT_STARTED",
-  "observed_at": "2026-10-06T11:31:00+08:00",
-  "previous_report_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+  "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
+  "observed_at": "2026-10-06T03:46:08.871488+00:00",
+  "previous_report_commit": "08a49843467841266b2e7455ecb3a56b61747965",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -24,11 +24,11 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "BOUND_CLAUSES_ORIGINAL44_REVIEWED_FAILED_GLOBAL36_NOT_STARTED",
+    "status": "BOUND_CLAUSES80_REVIEWED_FAILED_NATIVE_CONFIGURATION_CALIBRATION_PREDECLARED",
     "included_in_this_publication": false,
     "stable_source_delivered": true,
     "checks_completed_at_snapshot": true,
-    "actual_model_calls": 44,
+    "actual_model_calls": 80,
     "description": "Explicit clause-to-condition bindings and actual-graph grouped Writer view; equal conditioned contract for B2/M and qualified plain clauses for B0/B1",
     "frozen_2335ea9_source_unchanged": true,
     "source_owner_checks_passed": 145,
@@ -49,10 +49,10 @@
     "read": true,
     "scheduling_change_executed": true,
     "next_priority": [
-      "review declared global36 using unchanged frozen497b8d8 source/config",
-      "resolve actual scope/withdrawal and missed-new-requirement failures without further warning/example iteration",
-      "usable common candidate and own Full CI then fresh prefix/preselected long smoke",
-      "complete new same-version four-arm histories while retaining deferred old full/native/drift scope"
+      "same-source common native mode and adequate output finite recheck; no more warning/examples",
+      "review actual target completion, non-target damage and source attribution before candidate selection",
+      "usable common candidate plus own Full CI then prefix/preselected long smoke",
+      "complete same-version four-arm histories and full original remaining scope"
     ],
     "before_holdout_required": [
       "same-M low-level versus semantic-entry ablation",
@@ -297,21 +297,18 @@
     "unsupported_assistant_strengthening_B1_M_promoted_to_user_report": true
   },
   "publication_checks": {
-    "status": "PASS",
-    "report_only_files": 7,
-    "JSON_counts_usage_and_ledger": "PASS",
+    "status": "PASS_LOCAL_REPORT_CHECKS",
+    "JSON_counts_ledger_costs": "PASS",
     "local_links": "PASS",
-    "local_links_checked": 53,
-    "source_tests_rerun_for_report": false,
-    "source_runner_tests_configs_unchanged_from_497b8d8": true,
-    "previous_440_affected_checks_not_reclassified_as_semantic_results": true,
-    "predeclaration_and_prior_mode_results_unchanged": true,
-    "raw_terminal_preserved": true,
-    "raw_outputs_Root_review_ignored": true,
+    "local_links_checked": 58,
+    "same_497b8d8_source_test_runner_config_bytes": "PASS",
+    "same_source_native_mode_capacity_preflight_80_prior_requests": "PASS",
+    "new_HTTP_for_preparation": 0,
+    "prior_440_affected_checks_remain_source_evidence": true,
     "Product_schema_API_permissions_Canonical_changed": false,
     "dependency_boundary": {
       "status": "PASS",
-      "tracked_paths": 6437,
+      "tracked_paths": 6438,
       "findings": 0
     },
     "staged_diff": "PASS"
@@ -388,7 +385,7 @@
     },
     "does_not_establish_new_report_ci": true
   },
-  "model_calls_since_previous_report": 44,
+  "model_calls_since_previous_report": 36,
   "post_b0_latest_real_recheck_detail_manifest": "milai-edit-post-b0-bound-clauses-results-20261006.json",
   "post_b0_distinct_source_development_costs": {
     "624d158": {
@@ -408,17 +405,17 @@
     "not_a_same_version_method_comparison": true
   },
   "continuous_accounting_snapshot": {
-    "generation_requests": 36250,
     "generation": {
-      "charged_tokens": 138995296,
-      "known_tokens": 138943594,
+      "charged_tokens": 139070919,
+      "known_tokens": 139019217,
       "unknown_usage": 2
     },
     "embedding": {
       "charged_tokens": 964645,
       "known_tokens": 964645,
       "unknown_usage": 0
-    }
+    },
+    "generation_requests": 36286
   },
   "model_mode_diagnostic": {
     "status": "COMPLETED80_ROOT_REVIEWED_PARTIAL_MECHANISM_CRITICAL_FAILURES",
@@ -499,20 +496,20 @@
     "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json"
   },
   "new_representation_development": {
-    "status": "ORIGINAL44_ROOT_REVIEWED_CRITICAL_SCOPE_WITHDRAWAL_FAILURES_GLOBAL36_NOT_STARTED",
+    "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
     "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
     "declared_generation_calls": 80,
-    "actual_generation_calls": 44,
+    "actual_generation_calls": 80,
     "model_enable_thinking": false,
     "detail_manifest": "milai-edit-post-b0-bound-clauses-results-20261006.json",
     "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
-    "known_tokens": 86445,
+    "known_tokens": 162068,
     "predeclaration_manifest": "milai-edit-post-b0-bound-clauses-development-20261006.json",
-    "global_actual_generation_calls": 0
+    "global_actual_generation_calls": 36
   },
   "post_b0_development_generation_costs_all_sources_through_snapshot": {
-    "generation_calls": 400,
-    "known_tokens": 879855,
+    "generation_calls": 436,
+    "known_tokens": 955478,
     "nonthinking_three_prior_sources": {
       "generation_calls": 276,
       "known_tokens": 445407
@@ -521,10 +518,20 @@
       "generation_calls": 80,
       "known_tokens": 348003
     },
-    "bound_clauses_497b8d8_original_only": {
-      "generation_calls": 44,
-      "known_tokens": 86445
-    },
-    "cost_accounting_only_not_a_same_version_method_comparison": true
+    "cost_accounting_only_not_a_same_version_method_comparison": true,
+    "bound_clauses_497b8d8": {
+      "generation_calls": 80,
+      "known_tokens": 162068
+    }
+  },
+  "native_capacity_configuration_calibration": {
+    "status": "PREDECLARED_NATIVE_CAPACITY_DEVELOPMENT_NOT_RUN",
+    "config_version": "milai-edit-post-b0-i2-native-capacity-v1",
+    "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+    "declared_generation_calls": 80,
+    "actual_generation_calls": 0,
+    "detail_manifest": "milai-edit-post-b0-native-capacity-development-20261006.json",
+    "candidate_selected": false,
+    "prefix_admitted": false
   }
 }

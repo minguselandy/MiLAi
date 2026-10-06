@@ -1,3 +1,31 @@
+# 2026-10-06 bound-clause80 closed; finite common native capacity calibration declared
+
+The resumed user goal continues the full Post-B0 plan. Frozen497b8d8 completed
+both declared branches,80calls/162068known,allstop,35committed/4rejected/1no_change
+plus4emptyenvelopes. Root reviewed44actual events/36answers and allHTTP/usage.
+Initial B2/M condition bodies and edges are present in both branches, ordinary
+corrections preserve unmentioned limits; scope/global update/withdrawal still fail.
+Global M repeats the same content target with incorrect daily frequency and old
+start, causing EDIT_OVERLAPPING_TARGET; rejected state is not successful upkeep.
+No candidate/prefix, no source control or held-out admission. Processes exited,
+ledger stable36286/139019217known,lease free,unknown2/embed0 unchanged.
+
+Existing source owner completed read-only method analysis, no edits or HTTP:
+per-unit containers can remove repeated direct targets but cannot certify scope;
+all necessary semantic choices are already delivered. Do not add more warnings
+or examples. Previous frozen2335ea9 thinking selected add/remove but failed both
+M formations at8192. Now declare one finite same497 source/config-family
+calibration from four own-empty banks per branch: native thinking,true;
+temperature1;max_tokens32768 for all Writer/Reader,other parameters unchanged.
+Official Qwen card supports these general-mode/output choices; other sampling
+settings remain current server defaults, not a full vendor-optimal profile.
+This is common generation configuration, not M contribution. Bind actual source,
+config and own CI before HTTP; finite daily check per plan7.2,ownFull success still
+precedes prefix/candidate/merge. Original44 then Root review then global36. Source
+and Reader/scorer/contracts unchanged; no new platform/flag/deployment/family.
+Source controls/prefix/reserved/Host trials are not admitted by this declaration.
+All original R0-R5/E0-E5/six deliverables and deferred old scope remain active.
+
 # 2026-10-06 11:31:00 Asia/Shanghai: publish reviewed bound-clause original44 checkpoint
 
 Latest user requests a current summary and GitHub submission. Publish seven Lab

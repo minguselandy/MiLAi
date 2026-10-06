@@ -5,7 +5,27 @@ Current v2 execution is described in
 below retain their historical configuration and results. v1 M ended FAILED
 after a Reader disconnect; it is not an active queue awaiting completion.
 
-## Bound-clause development checkpoint (original44 reviewed; global36 unstarted)
+## Current bound-clause and native-capacity checkpoints
+
+Frozen497b8d8 now completed original44/global36:80calls/162068known,allstop,
+35committed/4rejected/1no_change plus4empty envelopes. Root reviewed44events/
+36answers and80pairedHTTP/usage. Both B2/M formations create actual conditions
+and edges; ordinary changes retain unmentioned limits, but scope/global changes/
+withdrawal still fail. No candidate/prefix. Keep the original44 snapshot below
+and raw runtime terminals/configs unchanged.
+
+The next [finite native-capacity declaration](../data/manifests/milai-edit-post-b0-native-capacity-development-20261006.json)
+uses the same source/archive/instructions/schema/Reader/scorer, same arms and
+own-empty input branches, with thinking=true,temperature1,max_tokens32768 for all
+Writer/Reader. Context65536/source4096/retrieval10/working_sets=false remain.
+Only supported existing transport options change; other sampling defaults are
+not the full vendor-recommended profile. No new code, warning examples, model,
+source-control/prefix/reserved admission or replay. Actual0 before new HTTP;
+bind the new config/source and own CI, review original44 before global36. Full
+success remains required before prefix/candidate/merge. Model configuration
+effects do not establish M method advantage.
+
+## Historical bound-clause original44 snapshot (11:31)
 
 The five existing opt-in features now expose create/rewrite as clauses: conditioned
 B2/M clauses declare condition bodies, separate binding supports and explicit

@@ -1,5 +1,20 @@
 # MiLAi Lab 当前状态
 
+更新：**2026-10-06 11:45 Asia/Shanghai**。冻结497b8d8新表示两分支完成80次/
+162,068 known token，全部stop；Root阅读44事件/36回答，核对80对HTTP及账本。
+条件关系实际形成、普通更正保持改善，但范围/共同条件更正/撤销仍失败，M共同
+条件更新还因重复同一内容目标拒绝。没有候选/前缀，Product NO_GO。进程退出、
+账本稳定36,286/139,019,217 known，unknown2/embed0不变，当前无模型队列。
+
+有限共同原生配置验证已预声明：相同497b8d8方法/Reader/评分器，各组空库，
+thinking=true、temperature1、max_tokens32768，其他预算不变，实际0/80。
+不追加警告/示例或扩建平台，不把模型配置收益归为M。原生配置不是完整厂商采样
+配置；Full CI仍在候选/前缀/合并前要求，完整计划未完成，PR85 draft未合并。
+
+[80次表示结果](../data/manifests/milai-edit-post-b0-bound-clauses-results-20261006.json) ·
+[原生额度声明](../data/manifests/milai-edit-post-b0-native-capacity-development-20261006.json)。
+下列11:31记录是已发布的原44快照。
+
 更新：**2026-10-06 11:31:00 Asia/Shanghai**。I2、B0/B1/B2/M、单一 Qwen3.6 不变。
 冻结 `497b8d8` 新条件绑定源码已完成原分支 **44/80 次、86,445 known token**，
 24 Writer/20 Reader，全部 stop，无新增 unknown 或 embedding。B2/M 各自空库形成

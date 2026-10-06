@@ -1,6 +1,6 @@
 {
-  "status": "ORIGINAL44_ROOT_REVIEWED_CRITICAL_SCOPE_WITHDRAWAL_FAILURES_GLOBAL36_NOT_STARTED",
-  "observed_at": "2026-10-06T11:31:00+08:00",
+  "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
+  "observed_at": "2026-10-06T03:46:08.871488+00:00",
   "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
   "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
   "predeclaration_manifest": "milai-edit-post-b0-bound-clauses-development-20261006.json",
@@ -19,21 +19,21 @@
   },
   "all_five_existing_opt_in_features": true,
   "declared_generation_calls": 80,
-  "actual_generation_calls": 44,
-  "Writer_calls": 24,
-  "Reader_calls": 20,
+  "actual_generation_calls": 80,
+  "Writer_calls": 44,
+  "Reader_calls": 36,
   "Judge_calls": 0,
-  "known_tokens": 86445,
-  "prompt_tokens": 82875,
-  "completion_tokens": 3570,
-  "request_response_pairs": 44,
-  "projected_prompt_usage_matches": 44,
+  "known_tokens": 162068,
+  "prompt_tokens": 154392,
+  "completion_tokens": 7676,
+  "request_response_pairs": 80,
+  "projected_prompt_usage_matches": 80,
   "finish_reasons": {
-    "stop": 44
+    "stop": 80
   },
   "proposal_receipts": {
-    "committed": 17,
-    "rejected": 2,
+    "committed": 35,
+    "rejected": 4,
     "no_change": 1
   },
   "receipt_counts_are_not_semantic_success_counts": true,
@@ -55,7 +55,7 @@
     "M"
   ],
   "M_query_valid_targeted_no_change": true,
-  "events_with_unprocessed_gaps": 2,
+  "events_with_unprocessed_gaps": 4,
   "rejected_events": [
     {
       "arm": "B2",
@@ -66,53 +66,98 @@
       "arm": "B2",
       "event": "withdraw_night_exception",
       "reason": "EDIT_OVERRIDE_SCOPE_REQUIRED"
+    },
+    {
+      "arm": "B2",
+      "event": "withdraw_night_after_global_change",
+      "reason": "current_boundary_source_required"
+    },
+    {
+      "arm": "M",
+      "event": "global_start_and_holiday_change",
+      "reason": "EDIT_OVERLAPPING_TARGET"
     }
   ],
   "Root_review": {
-    "actual_event_rows_read": 24,
-    "actual_Reader_answers_read": 20,
-    "actual_envelopes_receipts_before_after_reviewed": true,
-    "independent_Judge": false,
-    "independent_full_database_audit": false,
-    "all_four_formations_committed": true,
-    "B2_M_initial_condition_units_each": 2,
-    "B2_M_initial_modifies_relations_each": 2,
-    "all_four_ordinary_corrections_preserve_unrestated_limits_and_old_body_supports": true,
-    "B0_scope_lost_explicit_general_frequency_and_start_time": true,
-    "B1_scope_lost_explicit_general_frequency_and_both_shared_limits": true,
-    "B2_scope_rejected_generalized_night_frequency_and_retained_changed_assertion_origin": true,
-    "B2_rejected_unchanged_state_not_counted_as_successful_scope_maintenance": true,
-    "M_scope_change_value_overwrote_present_general_frequency": true,
-    "M_scope_shared_conditions_preserved": true,
+    "actual_event_rows_read": 44,
+    "actual_Reader_answers_read": 36,
+    "actual_input_envelopes_receipts_before_after_reviewed": true,
+    "all_eight_ordinary_corrections_preserve_unrestated_limits": true,
+    "B2_M_both_branches_initial_conditions_each": 2,
+    "B2_M_both_branches_initial_modifies_each": 2,
     "M_add_exception_attempted": 0,
     "M_remove_exception_attempted": 0,
-    "M_applied_override_relations": 0,
-    "M_withdrawal_retracted_two_present_valid_shared_conditions": true,
-    "M_withdrawal_wrong_general_frequency_retained": true,
-    "B1_withdrawal_deleted_whole_active_compound_record": true,
-    "B2_withdrawal_attempted_new_exception_with_no_explicit_scope_condition": true,
-    "B2_actual_exception_missing_before_withdrawal_not_counted_as_successful_removal": true,
-    "B2_reaffirmation_empty_on_already_matching_actual_state": true,
-    "M_reaffirmation_changed_frequency_but_failed_to_restore_currently_stated_limits": true,
-    "all_four_final_arrangement_answers_complete": false,
-    "no_semantic_success_inferred_from_commits_or_unchanged_failed_attempts": true
+    "all_four_final_arrangement_answers_complete_in_either_branch": false,
+    "missing_old_target_and_rejected_unchanged_not_credited_as_maintenance_success": true,
+    "independent_Judge": false,
+    "independent_full_database_audit": false
   },
   "global_condition_branch": {
-    "status": "DECLARED_NOT_STARTED_NOT_CANCELLED",
-    "declared_generation_calls": 36,
-    "actual_generation_calls": 0,
-    "Writer_calls": 0,
-    "Reader_calls": 0,
-    "known_tokens": 0,
-    "Root_review_between_branches": true,
-    "same_frozen_source_and_configuration_required": true
+    "status": "GLOBAL36_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
+    "reviewed_at": "2026-10-06T03:43:41.899724+00:00",
+    "source_commit": "497b8d89f37ebe795e1e79f8791fe5ddd9289ed9",
+    "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
+    "actual_generation_calls": 36,
+    "Writer_calls": 20,
+    "Reader_calls": 16,
+    "Judge_calls": 0,
+    "known_tokens": 75623,
+    "prompt_tokens": 71517,
+    "completion_tokens": 4106,
+    "finish_reasons": {
+      "stop": 36
+    },
+    "proposal_receipts": {
+      "committed": 18,
+      "rejected": 2
+    },
+    "events_with_unprocessed_gaps": 2,
+    "empty_maintenance_envelopes": 0,
+    "actual_event_inputs_envelopes_receipts_before_after_read": 20,
+    "actual_Reader_answers_read": 16,
+    "projected_prompt_usage_matches": 36,
+    "M_semantic_operations_attempted": {
+      "change_value": 4,
+      "change_condition": 2,
+      "retract": 1
+    },
+    "all_four_formations_committed": true,
+    "all_four_ordinary_corrections_preserve_unmentioned_limits": true,
+    "B2_M_initial_conditions_each": 2,
+    "B2_M_initial_modifies_each": 2,
+    "M_old_condition_targets_present_before_global_event": true,
+    "M_global_condition_operations_attempted": 2,
+    "M_global_condition_operations_applied": 0,
+    "M_global_repeated_content_target_reject": true,
+    "M_global_rejected_proposal_also_invents_daily_frequency_and_keeps_old_start": true,
+    "M_add_exception_attempted": 0,
+    "M_remove_exception_attempted": 0,
+    "M_scope_overwrites_present_general_frequency": true,
+    "M_withdrawal_retracts_present_valid_start_condition": true,
+    "B0_global_retains_contradictory_old_limits": true,
+    "B1_global_loses_existing_frequency": true,
+    "B2_global_changes_holiday_but_misses_current_start_requirement": true,
+    "B2_withdrawal_unchanged_old_rewrite_no_current_evidence_rejected": true,
+    "B1_final_reader_misreads_cancelled_frequency_as_current": true,
+    "all_four_final_arrangement_answers_complete": false,
+    "independent_confirmation": false,
+    "independent_full_database_audit": false,
+    "candidate_selected": false,
+    "prefix_admitted": false,
+    "new_unknown_usage": 0,
+    "new_embedding_tokens": 0,
+    "raw_runtime_terminal_preserved": true,
+    "no_retry_or_truncation_repair": true,
+    "original_process_exited": true,
+    "ledger_stable": true,
+    "serial_lease_free": true
   },
   "accounting": {
     "start_generation_requests": 36206,
-    "end_generation_requests": 36250,
+    "end_generation_requests": 36286,
     "start_generation_known_tokens": 138857149,
-    "end_generation_known_tokens": 138943594,
-    "end_generation_charged_tokens": 138995296,
+    "end_generation_known_tokens": 139019217,
+    "end_generation_charged_tokens": 139070919,
     "historical_generation_unknown_usage": 2,
     "historical_embedding_unknown_usage": 0,
     "new_generation_unknown_usage": 0,
@@ -166,62 +211,133 @@
   "method_runner_configuration_changed_by_this_report": false,
   "product_status": "NO_GO",
   "limits": [
-    "One exposed development lifecycle; no independent method comparison or held-out confirmation",
-    "44-call original branch complete; 36-call global branch unstarted",
-    "Conditional graph formation is actual evidence; scope and withdrawal still fail",
-    "440 affected engineering checks are separate from real semantic outcomes",
-    "Native-thinking 2335ea9 and nonthinking 8ed7826 remain separate source/config cohorts"
+    "One exposed source, two branches from each arm own empty bank, no held-out confirmation",
+    "80 calls complete, all stop; correct graph formation does not establish semantic editing advantage",
+    "Current nonthinking temperature0/output8192 still fails scope, shared-condition update and withdrawal",
+    "440 engineering checks are distinct from actual semantics",
+    "Native-thinking2335ea9 and nonthinking8ed7826 remain separate source/config cohorts"
   ],
   "next_work": [
-    "Review the declared global36 on the same frozen 497b8d8 source/config without hot edits",
-    "Resolve actual semantic scope, withdrawal and missed-current-requirement failures before prefix admission",
-    "Require own Full CI success before candidate/prefix/merge",
-    "Continue the full original R0-R5/E0-E5 and six deliverables including deferred old scope"
+    "Finite same-source shared native-thinking/adequate-output calibration before additional interface or warning changes",
+    "Retain all first attempts and semantic failures; no retries or JSON backfill",
+    "Usable current candidate plus own Full CI before prefix/candidate/merge",
+    "Complete all original R0-R5/E0-E5/six deliverables and deferred old scope"
   ],
-  "arm_receipts": {
-    "B0": {
-      "event_rows": 6,
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "proposal_receipts": {
-        "committed": 5
-      },
-      "events_with_unprocessed_gaps": 0
-    },
-    "B1": {
-      "event_rows": 6,
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "proposal_receipts": {
-        "committed": 5
-      },
-      "events_with_unprocessed_gaps": 0
-    },
-    "B2": {
-      "event_rows": 6,
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "proposal_receipts": {
-        "committed": 2,
-        "rejected": 2
-      },
-      "events_with_unprocessed_gaps": 2
-    },
-    "M": {
-      "event_rows": 6,
-      "Writer_calls": 6,
-      "Reader_calls": 5,
-      "proposal_receipts": {
-        "committed": 5,
-        "no_change": 1
-      },
-      "events_with_unprocessed_gaps": 0
-    }
-  },
   "arms": [
     "B0",
     "B1",
     "B2",
     "M"
-  ]
+  ],
+  "original_lifecycle_branch": {
+    "actual_generation_calls": 44,
+    "Writer_calls": 24,
+    "Reader_calls": 20,
+    "Judge_calls": 0,
+    "known_tokens": 86445,
+    "prompt_tokens": 82875,
+    "completion_tokens": 3570,
+    "finish_reasons": {
+      "stop": 44
+    },
+    "proposal_receipts": {
+      "committed": 17,
+      "rejected": 2,
+      "no_change": 1
+    },
+    "empty_maintenance_envelopes": 4,
+    "empty_envelopes_by_event": {
+      "query_without_new_fact": [
+        "B0",
+        "B1",
+        "B2"
+      ],
+      "exact_reaffirmation": [
+        "B2"
+      ]
+    },
+    "events_with_unprocessed_gaps": 2,
+    "rejected_events": [
+      {
+        "arm": "B2",
+        "event": "night_scope",
+        "reason": "EDIT_CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE"
+      },
+      {
+        "arm": "B2",
+        "event": "withdraw_night_exception",
+        "reason": "EDIT_OVERRIDE_SCOPE_REQUIRED"
+      }
+    ],
+    "arm_receipts": {
+      "B0": {
+        "event_rows": 6,
+        "Writer_calls": 6,
+        "Reader_calls": 5,
+        "proposal_receipts": {
+          "committed": 5
+        },
+        "events_with_unprocessed_gaps": 0
+      },
+      "B1": {
+        "event_rows": 6,
+        "Writer_calls": 6,
+        "Reader_calls": 5,
+        "proposal_receipts": {
+          "committed": 5
+        },
+        "events_with_unprocessed_gaps": 0
+      },
+      "B2": {
+        "event_rows": 6,
+        "Writer_calls": 6,
+        "Reader_calls": 5,
+        "proposal_receipts": {
+          "committed": 2,
+          "rejected": 2
+        },
+        "events_with_unprocessed_gaps": 2
+      },
+      "M": {
+        "event_rows": 6,
+        "Writer_calls": 6,
+        "Reader_calls": 5,
+        "proposal_receipts": {
+          "committed": 5,
+          "no_change": 1
+        },
+        "events_with_unprocessed_gaps": 0
+      }
+    },
+    "Root_review": {
+      "actual_event_rows_read": 24,
+      "actual_Reader_answers_read": 20,
+      "actual_envelopes_receipts_before_after_reviewed": true,
+      "independent_Judge": false,
+      "independent_full_database_audit": false,
+      "all_four_formations_committed": true,
+      "B2_M_initial_condition_units_each": 2,
+      "B2_M_initial_modifies_relations_each": 2,
+      "all_four_ordinary_corrections_preserve_unrestated_limits_and_old_body_supports": true,
+      "B0_scope_lost_explicit_general_frequency_and_start_time": true,
+      "B1_scope_lost_explicit_general_frequency_and_both_shared_limits": true,
+      "B2_scope_rejected_generalized_night_frequency_and_retained_changed_assertion_origin": true,
+      "B2_rejected_unchanged_state_not_counted_as_successful_scope_maintenance": true,
+      "M_scope_change_value_overwrote_present_general_frequency": true,
+      "M_scope_shared_conditions_preserved": true,
+      "M_add_exception_attempted": 0,
+      "M_remove_exception_attempted": 0,
+      "M_applied_override_relations": 0,
+      "M_withdrawal_retracted_two_present_valid_shared_conditions": true,
+      "M_withdrawal_wrong_general_frequency_retained": true,
+      "B1_withdrawal_deleted_whole_active_compound_record": true,
+      "B2_withdrawal_attempted_new_exception_with_no_explicit_scope_condition": true,
+      "B2_actual_exception_missing_before_withdrawal_not_counted_as_successful_removal": true,
+      "B2_reaffirmation_empty_on_already_matching_actual_state": true,
+      "M_reaffirmation_changed_frequency_but_failed_to_restore_currently_stated_limits": true,
+      "all_four_final_arrangement_answers_complete": false,
+      "no_semantic_success_inferred_from_commits_or_unchanged_failed_attempts": true
+    },
+    "status": "ORIGINAL44_ROOT_REVIEWED_CRITICAL_SCOPE_WITHDRAWAL_FAILURES"
+  }
 }
