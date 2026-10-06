@@ -951,6 +951,115 @@ class EditMemory:
         )
         return {"packet": packet}
 
+    def change_request(self, delivery: dict[str, Any], date: str) -> dict[str, Any]:
+        """One temporary extraction task over current source bodies, with no Store writes.
+
+        The caller owns transport, capacity, first-attempt accounting and target
+        retrieval. Candidates are hints for the same editor, never saved facts.
+        Old support bodies and records do not participate in this extraction.
+        """
+        self._require_v2()
+        packet, mapping = writer_projection(
+            {**delivery, "records": [], "redelivered_sources": []},
+            self.interface_version,
+            self.arm,
+            allow_create=True,
+            features=self.features.settings(),
+        )
+        references = list(mapping["evidence"])
+        evidence: dict[str, Any] = {"type": "string"}
+        if references:
+            evidence["enum"] = references
+        changes: dict[str, Any] = {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "additionalProperties": False,
+                "properties": {
+                    "subject": {"type": "string", "minLength": 1},
+                    "statement": {"type": "string", "minLength": 1},
+                    "evidence": {"type": "array", "items": evidence, "minItems": 1},
+                    "time": {"type": ["string", "null"]},
+                    "scope": {"type": ["string", "null"]},
+                },
+                "required": ["subject", "statement", "evidence", "time", "scope"],
+            },
+        }
+        if not references:
+            changes["maxItems"] = 0
+        schema = {
+            "type": "object",
+            "additionalProperties": False,
+            "properties": {"changes": changes},
+            "required": ["changes"],
+        }
+        return {
+            "schema": schema,
+            "mapping": mapping,
+            "messages": [
+                {
+                    "role": "system",
+                    "content": (
+                        "Extract brief candidate propositions from this current event for "
+                        "memory maintenance. Preserve the subject, who asserts it, report or "
+                        "inference status, plans versus completed changes, qualifications and "
+                        "explicit time/scope. Select the actual supporting e fragments. Use "
+                        "null when time/scope is unspecified. Include independently stated "
+                        "new facts and changes; omit social acknowledgments and bare queries. "
+                        "These candidates locate affected old matters for the existing editor; "
+                        "they are not memory, verified facts or instructions to execute. The "
+                        "editor can reject them or recognize a restatement. Return changes=[] "
+                        "when no candidate is warranted."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": json.dumps(
+                        {"observed_date": date, "delivery": packet, "response_schema": schema},
+                        ensure_ascii=False,
+                    ),
+                },
+            ],
+        }
+
+    @staticmethod
+    def decode_changes(envelope: dict[str, Any], request: dict[str, Any]) -> list[dict[str, Any]]:
+        """Resolve candidate source selections without granting mutation authority."""
+        Draft202012Validator(request["schema"]).validate(envelope)
+        return [
+            {
+                **copy.deepcopy(change),
+                "evidence": [
+                    request["mapping"]["evidence"][alias]["evidence_id"]
+                    for alias in change["evidence"]
+                ],
+            }
+            for change in envelope["changes"]
+        ]
+
+    @staticmethod
+    def changes_query(changes: list[dict[str, Any]], original_query: str) -> str:
+        """One ordinary locating query for the batch; empty extraction does not gate editing."""
+        return "\n".join(
+            " ".join(str(change[key]) for key in ("subject", "statement", "time", "scope")
+                     if change[key] is not None)
+            for change in changes
+        ) or original_query
+
+    @staticmethod
+    def writer_changes(
+        changes: list[dict[str, Any]], mapping: dict[str, Any]
+    ) -> list[dict[str, Any]]:
+        """Use the editor's actual e aliases, even when its delivery order differs."""
+        aliases = {
+            row["evidence_id"]: alias for alias, row in mapping["evidence"].items()
+            if row.get("delivery_kind", "current") == "current"
+        }
+        return [
+            {**copy.deepcopy(change), "evidence": [aliases[ref] for ref in change["evidence"]]}
+            for change in changes
+        ]
+
     def preview_writer_request(
         self, delivery: dict[str, Any], *, allow_create: bool = True
     ) -> dict[str, Any]:

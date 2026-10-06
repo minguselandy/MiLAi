@@ -17,6 +17,7 @@ from milai_lab.datasets.edit_benchmarks import ObservedSession
 from milai_lab.harness.artifact_io import read_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.edit_benchmarks import (
@@ -81,6 +82,129 @@ def execution(root: Path, arm: str) -> BenchmarkRun:
         "model": {"max_tokens": 100},
     }
     return run
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_temporary_changes_locate_then_use_existing_editor_without_becoming_memory(
+    tmp_path: Path, arm: str
+) -> None:
+    """Real SQLite and accounted synthetic HTTP; no model semantic-success claim."""
+    calls = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        calls.append(payload)
+        packet = payload["delivery"]
+        if len(calls) == 1:
+            assert packet["records"] == [] and packet["historical_support"] == []
+            assert [e["delivery_kind"] for e in packet["evidence"]] == ["current", "current"]
+            envelope = {"changes": [
+                {"subject": "Review schedule", "statement": "User reports review Thursday.",
+                 "evidence": ["e1"], "time": None, "scope": None},
+                {"subject": "Ceramics plan", "statement": "User plans ceramics Friday.",
+                 "evidence": ["e1"], "time": "Friday", "scope": None},
+            ]}
+        else:
+            # Delivery order changed: User evidence is now e2, not extraction e1.
+            assert all(c["evidence"] == ["e2"] for c in payload["change_candidates"])
+            assert packet["evidence"][1]["text"].startswith("Review Thursday")
+            record = next(r for r in packet["records"] if r["matter"] == "Review schedule")
+            clause = {"text": "User reports review Thursday.", "evidence": ["e2"],
+                      "assertion": {"source": "e2", "kind": "reported"}}
+            if arm in {"B0", "B2"}:
+                change = {"action": "rewrite", "clauses": [
+                    {**clause, **({"conditions": []} if arm == "B2" else {})}
+                ]}
+            else:
+                change = {"action": "edit", "edits": [{
+                    **clause, "operation": "change_value" if arm == "M" else "replace",
+                    "target_unit": record["clauses"][0]["id"],
+                }]}
+            envelope = {"creates": [{
+                "action": "create", "matter": "Ceramics plan", "clauses": [{
+                    "text": "User plans ceramics Friday.", "evidence": ["e2"],
+                    "assertion": {"source": "e2", "kind": "reported"},
+                    **({"conditions": []} if arm in {"B2", "M"} else {}),
+                }],
+            }], "records": {record["id"]: change}}
+        Draft202012Validator(wire["response_format"]["json_schema"]["schema"]).validate(envelope)
+        return httpx.Response(200, json={
+            "choices": [{"finish_reason": "stop", "message": {"content": json.dumps(envelope)}}],
+            "usage": {"total_tokens": 8},
+        })
+
+    run = execution(tmp_path, arm)
+    run.settings["context_tokens"] = 100000
+    budget = RunBudget(RunLimits(), tmp_path / "budget.json")
+    with VLLMClient(
+        VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+        budget=budget, transport=httpx.MockTransport(provider),
+    ) as client, SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        run.client = client
+        service = MemoryService(
+            store, ("changes", arm, "owner"), "owner", tmp_path / "bank.lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+        )
+        method = EditMemory(service, arm, interface_version="I2",
+                            features=EditFeatures(True, True, True, True, True))
+        seed = service.capture_user("old", "u", "Review Monday; tea jasmine.")["source_ref"]
+        service.bind_source_boundary("old", "seed", [seed])
+        initial = method.writer_request(method.prepare([seed], "", selected_records=[]))
+        for i, (matter, text) in enumerate((
+            ("Review schedule", "User reports review Monday."),
+            ("Tea preference", "User reports tea jasmine."),
+        )):
+            create = {"action": "create", "matter": matter, "clauses": [{
+                "text": text, "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+                **({"conditions": []} if arm in {"B2", "M"} else {}),
+            }]}
+            assert method.apply("old", f"seed:{i}",
+                                method.decode_proposal(create, initial["mapping"]))["ok"]
+        before = {r["value"]["edit_state"]["matter_description"]: r for r in service.records()}
+        user = service.capture_user("new", "u", "Review Thursday; I plan ceramics Friday.",
+                                    occurred_at="2030-01-02")["source_ref"]
+        assistant = service.capture_assistant("new", "a", "An unconfirmed extra suggestion.",
+                                             occurred_at="2030-01-02")["source_ref"]
+        service.bind_source_boundary("new", "event", [user, assistant])
+        raw = method.prepare([user, assistant], "", selected_records=[], redelivered_ranges=[])
+        extraction = method.change_request(raw, "2030-01-02")
+        result = run.call("changes", extraction["messages"], structured=True,
+                          response_format={"type": "json_schema", "json_schema": {
+                              "name": "milai_changes", "schema": extraction["schema"],
+                          }})
+        changes = method.decode_changes(parse_object(result), extraction)
+        assert service.records() == list(before.values())
+        assert changes[0]["evidence"] == [raw["sources"][0]["evidence_id"]]
+        query = method.changes_query(changes, "original event")
+        selected = service.search(query, limit=10, include_raw=False)["records"]
+        assert before["Review schedule"]["id"] in [r["id"] for r in selected]
+        delivery = method.prepare([assistant, user], query, selected_records=selected,
+                                  redelivered_ranges=[])
+        view = method.writer_request(delivery)
+        hints = method.writer_changes(changes, view["mapping"])
+        messages = run._edit_messages(method, view["packet"], "2030-01-02", allow_create=True,
+                                     schema=view["schema"], change_candidates=hints)
+        result = run.call("writer", messages, structured=True,
+                          response_format={"type": "json_schema", "json_schema": {
+                              "name": "milai_edit", "schema": view["schema"],
+                          }})
+        for i, decoded in enumerate(method.decode_envelope(parse_object(result), view["mapping"])):
+            assert method.apply("new", f"change:{i}", decoded)["ok"]
+        after = {r["value"]["edit_state"]["matter_description"]: r for r in service.records()}
+        assert len(after) == 3
+        assert after["Tea preference"] == before["Tea preference"]
+        assert after["Review schedule"]["id"] == before["Review schedule"]["id"]
+        assert after["Review schedule"]["value"]["revision"] == 2
+        assert "Thursday" in after["Review schedule"]["value"]["content"]
+        assert "plans" in after["Ceramics plan"]["value"]["content"]
+        assert method.decode_changes({"changes": []}, extraction) == []
+        assert method.changes_query([], "original event") == "original event"
+        # Even nonempty candidates are not a compulsory write or an executable proposal.
+        assert method.decode_envelope({"creates": [], "records": {}}, view["mapping"]) == []
+        assert service.records() == list(after.values())
+    assert len(calls) == budget.state["generation_requests"] == 2
 
 
 def test_context_admission_matches_transported_thinking_mode(tmp_path: Path) -> None:

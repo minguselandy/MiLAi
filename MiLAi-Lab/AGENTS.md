@@ -1,3 +1,50 @@
+# 2026-10-06 22:41 UTC: conditional B prototype implemented/prepared, no new HTTP
+
+Previous goal turn pushed7ab firstB0user closure and remote verified; progress.
+Root reread full post87c plan1–12. Current/frozen072 baseline unchanged, session
+68500/PID3476759 live. Snapshot B0maintenance16/eval16 of32, others unreached;
+384stop1589479known/385requests1pending,93encoder34557. Session-level count only;
+initial private nested-batch overcount corrected before publication, keptprivate.
+Live39967/152916871known153079247charged/embed1009389 unknown4 withpending;
+lastclosed39582/151327392known151439107charged/embed974832 unknownhistory3.
+Do not add firstuser costs again, infer terminal ledger or reset limits.
+
+Plan5.2/6.3 now supports once-limited B after deliveredempty3&6 and locating7.
+Root changed2sources: EditMemory source-only transient extraction request,
+actual-ref decode, one batch query, remap actual editor refs. Optional editor
+hint payload; default4actual message lists exactly unchanged. No new flags,
+model clients, Store/verifier/domainrouting/budget. Existing full rewrite/local
+ops/current-source/commit contracts unchanged. Functional writer shares class,
+but Host two-stage orchestration NOT switched and B NOT adopted ascommonflow.
+
+9distinct affected checks pass (1newfunction x4arms +4defaultcontrols+1unknown),
+Ruff3/mypy2/packageboundarypass. Initialpytest collection lacked PYTHONPATH and
+usedoldcheckout; corrected invocationonly, no codefix/HTTP. Source9files stage
+has2source1existingtest6docs-status-declaration. Avoid more broad/redundanttests.
+
+Private pairedhelper prepared4independent actualbefore copies originalB0first
+user3/6/7/4,16/20/20/16records exact; futureactivecreations/revisions/proposals
+removed fromcopies. Originalbank read-only backup, noideal/gold/futureQA to
+maintenance. Extraction input12066/6876/11396/10853fit, not semantic proof.
+Actual later target/capacity pending extraction output; maximum4extract4editor
+11originalReader,0Judge, actual0HTTP. Originalquestions onlyaftermaintenance,
+old baseline responses notreplayed; no retries or truncatedJSONrepair.
+Preparedprivate: post87c-change-pairs-prepared-20261007 and config; helper
+post87c-change-pairs.py. Originalsuite ownsserialresource; waitACTUALterminal
+andPIDexit, then prototypeownFast plus frozennewsource/runtimecommit admission
+before modelcalls. OwnFull beforecommonprefix/candidate. Unknown staysSTOPPED,
+no blindreplay. Preserve failedoutcomes and original072 declarations/results.
+
+Next complete originalprefix and review actualnextusers/arms while prototype
+CI/resources advance. Execute one predeclared pairset when admitted, decideB
+by finalstate/QA/source, not candidatescore. If adopted integrate allarms+Host
+and ownemptynewprefix; no differentversion suffixsplice. Full8/65/277/native/
+drift/ablation/tighterbudget/16reserved/external/Host135/192/newstories/forget/
+effects/recovery/sixdeliverables active/incomplete. OneQwen+BGE,no newagents.
+ProductNO_GO PR85draftunmerged; Product/API/permissions/Canonical/Archive/workflow
+unchanged. PrivateDB/HTTP/raw/gold/reasoning/config/log ignored, rollback7ab13ed.
+Newcommit/ownCI/remote mustverify separately; lowerblocks historicalexact.
+
 # 2026-10-06 22:19 UTC: B0 first user first8 closed; frozen four-arm prefix continues
 
 User asks summarize/publish execution. Actual source072 unchanged; report parent

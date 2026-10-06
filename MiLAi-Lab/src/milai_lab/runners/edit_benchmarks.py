@@ -684,6 +684,7 @@ class BenchmarkRun:
     def _edit_messages(
         self, method: EditMemory, packet: dict[str, Any], date: str, *, allow_create: bool,
         schema: dict[str, Any] | None = None,
+        change_candidates: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
         response_schema = (
             schema if schema is not None else method.envelope_schema(allow_create=allow_create)
@@ -695,6 +696,17 @@ class BenchmarkRun:
             if "records" in response_schema.get("properties", {})
             else "An empty proposals list means no maintenance, not a successful update."
         )
+        payload: dict[str, Any] = {
+            "observed_date": date,
+            "delivery": packet,
+            "response_schema": response_schema,
+        }
+        if change_candidates is not None:
+            payload["change_candidates"] = change_candidates
+            empty_instruction += (
+                " change_candidates are temporary locating hints; decide what to persist "
+                "from the original delivered sources and actual old state."
+            )
         return [
             {
                 "role": "system",
@@ -711,11 +723,7 @@ class BenchmarkRun:
             {
                 "role": "user",
                 "content": json.dumps(
-                    {
-                        "observed_date": date,
-                        "delivery": packet,
-                        "response_schema": response_schema,
-                    },
+                    payload,
                     ensure_ascii=False,
                 ),
             },
