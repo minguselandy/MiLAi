@@ -1,5 +1,19 @@
 # MiLAi-Edit reproduction instructions
 
+## Latest M subset and source-own CI (2026-10-06 12:34:04 UTC)
+
+Frozen7b82/I2 four-user first8 has closed B0/B1/B2; M is still running.
+[M first-user8 results](../data/manifests/milai-edit-post-b0-stage-c-first-user-m-prefix-results-20261006.json) are a closed subset,
+not a full M score. Reproduce with exact7b82 source and its immutable config.
+All28 fixed failed-input ab8 projections fit offline; its declared finite B1
+first-user8 own-empty real check remains unadmitted/model0 until queue exit.
+External source d547 ownFast/Full success queried 2026-10-06 12:35:01 UTC; existing22
+unit tests and synthetic tokenizer proof are engineering evidence, external
+actual calls0/not admitted. Do not substitute it into the ab8 declaration.
+Original author labels/gold, first failures, budget ledger and all historical
+configs/results are retained. No new model calls are needed for publication.
+The following sections retain their dated scopes and CI observations.
+
 ## Current frozen prefix and external counter source (2026-10-06 12:03:58 UTC)
 
 See [current results](MILAI_EDIT_CHECKPOINT_20261006.md),

@@ -1,3 +1,23 @@
+# 2026-10-06 12:34:04 UTC: publish M first-user review; frozen queue continues
+
+User requests current summary submitted to GitHub. Publish8 Lab report/state
+files only, model0. Frozen7b82/I2/PID178764 stays unchanged: B0/B1/B2 32/32;
+M15maintenance/14evaluation at snapshot, firstuser8/8 Root-reviewed.
+M subset updates2/19valid18 QA14/20;186allstop/578939known,2preHTTP failures,
+6create1edit/1actualempty,6records22content/0conditions-relations. Ordinary
+change_value preserves3other units; not conditional advantage or fullMscore.
+Root8statepairs6fullenvelopes20answers/sourcepartial; no independentaudit.
+ab8 cumulative28 fixedfailedinput projections allfit/exact, not newhistory.
+Finite B1firstuser8 CI-bound/notadmitted/model0 waits normal frozenqueue exit.
+d547 externalcounter ownFast/Fullsuccess 2026-10-06 12:35:01 UTC;22unit/Ruff/mypy and
+synthetic proof retained, actualexternal0/notadmitted, not maincapacitycause.
+Closedledger throughB2 unchanged; exclude liveM and overlapping usersubsets.
+Full original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/six
+deliverables remain active. No retry/hotchange/idealstate/budgetincrease/score
+splice/newagents/family/auditor/platform/deployment. ProductNO_GO/PR85draft.
+Product/Archive/workflow/API/permissions unchanged; raw/gold/HTTP/DB ignored.
+Lower dated blocks retain history; rollbackf432e79, newreportCI separate.
+
 # 2026-10-06 12:03:58 UTC: closed B2 review and separate external counter source
 
 Publish8 Lab report/state files only, model0. Prior source d547 commits2 external
