@@ -263,6 +263,11 @@ class EditMemory:
                 "No hidden body is filled in. retract_record is a separate entire-record "
                 "withdrawal with new actual e evidence and no replacement body. "
                 "No local edits are available. "
+                "In a rewrite, from_unit=u# identifies which delivered unit the generated "
+                "clause or condition continues, independently of evidence. Each prior unit "
+                "has at most one such continuation, with the same role. It permits retaining "
+                "the existing binding after a supported value change; it retains no old text "
+                "or support by itself. Changed text still selects actual e evidence. "
             )
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
@@ -347,6 +352,8 @@ class EditMemory:
                 "units": [{**change, "role": "content"}],
             }
             if self.conditioned:
+                correction["units"][0].pop("keep_support")
+                correction["units"][0]["from_unit"] = "u1"
                 for index, condition in enumerate(formation_units[1:], start=2):
                     retained: dict[str, Any] = {
                         "text": condition["text"],
@@ -1184,11 +1191,24 @@ class EditMemory:
             )
 
         origins: list[set[str]] = []
+        explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:
                 raise FunctionalRejection("EDIT_UNIT_SUPPORT_BINDING_INVALID")
+            if "from_unit" in item:
+                alias = item["from_unit"]
+                prior_unit = alias_unit(alias)
+                if (
+                    proposal["action"] != "rewrite"
+                    or prior_unit["role"] != item.get("role", "content")
+                    or (origin and origin != {alias})
+                    or alias in explicit_origins
+                ):
+                    raise FunctionalRejection("EDIT_UNIT_SUPPORT_BINDING_INVALID")
+                explicit_origins.add(alias)
+                origin.add(alias)
             if not item.get("evidence") and not any(
                 alias_unit(alias)["text"] == item["text"]
                 and alias_unit(alias)["role"] == item.get("role", "content")

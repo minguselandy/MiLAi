@@ -490,13 +490,7 @@
     "Full_run_id": 37401712125,
     "Full_successful_jobs": 21
   },
-  "historical_counter_scope": {
-    "new_model_calls_for_declared_real_rechecks": "132 calls in historical 8ed7826 nonthinking snapshot; completed native80 is reported separately",
-    "model_calls_in_new_r3_since_previous_report": "80 calls in the historical first post-B0 R3 snapshot; completed native80 is reported separately",
-    "post_b0_distinct_source_development_costs": "276 nonthinking calls from three distinct sources through 8ed7826; thinking diagnostic is reported separately",
-    "prior_post_b0_latest_real_recheck_detail_manifest": "8ed7826 final repair/source controls remain in milai-edit-post-b0-final-repair-and-source-controls-20261006.json",
-    "model_calls_since_previous_report": "Current30 original attempts since8c report; Reader9 historical manifest unchanged."
-  },
+  "historical_counter_scope": "Fields outside these latest development blocks retain d7f062c reviewed66 snapshot. Live strengthening16 excluded from closed accounting until Root closure.",
   "new_representation_development": {
     "status": "COMPLETED80_ROOT_REVIEWED_CRITICAL_SCOPE_CONDITION_WITHDRAWAL_FAILURES",
     "config_version": "milai-edit-post-b0-i2-bound-clauses-v1",
@@ -1582,9 +1576,42 @@
     "full_R0_R5_E0_E5_six_deliverables_and_deferred_scopes_remain_active": true
   },
   "workspace_from_unit_draft": {
-    "from_unit_whole_rewrite_identity_correspondence": "UNCOMMITTED_NOT_INCLUDED_NOT_MODEL_VALIDATED",
-    "source_and_test_files": 3,
-    "not_used_by_any_reported_model_cohort": true,
-    "remaining_verification": "relevant SDK/Host and static/default-off checks, source commit and own CI, affected actual model recheck"
+    "status": "INCLUDED_IN_THIS_SOURCE_COMMIT_NOT_MODEL_VALIDATED",
+    "source_and_test_files": 4,
+    "not_used_by_any_prior_frozen_model_cohort": true,
+    "remaining_verification": "Bind actual Git source/config/own CI; finite affected actual model recheck; Full before original prefix/candidate."
+  },
+  "whole_rewrite_identity_development": {
+    "status": "ROOT294_CHECKED_SOURCE_COMMIT_AND_CI_PENDING_MODEL0",
+    "manifest": "milai-edit-post-b0-whole-rewrite-identity-development-20261006.json",
+    "changed_Lab_opt_in_Writer_schema": true,
+    "default_off24_actual_contracts_unchanged": true,
+    "affected_tests_passed": 294,
+    "actual_model_calls": 0,
+    "declared_recheck_calls": 12,
+    "candidate_selected": false,
+    "prefix_admitted": false
+  },
+  "confirmation20_latest_closed": {
+    "status": "COMPLETED20_ROOT_REVIEWED_ATTRIBUTION_AND_CONFIRMATION_FAILURES_PRESERVED",
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "config_version": "milai-edit-post-b0-common-source-reader-transport300-v2",
+    "calls": 20,
+    "known_tokens": 83920,
+    "Root_events_reviewed": 12,
+    "Root_answers_reviewed": 8,
+    "unsupported_initial_user_promotion": false,
+    "final_Reader_complete": {
+      "B0": false,
+      "B1": false,
+      "B2": false,
+      "M": true
+    }
+  },
+  "live_strengthening16": {
+    "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+    "config_version": "milai-edit-post-b0-common-source-reader-transport300-v2",
+    "status": "RUNNING_DISTINCT_PREDECLARED_REQUESTS_NOT_FINAL_RESULTS",
+    "does_not_use_current_source_fix": true
   }
 }

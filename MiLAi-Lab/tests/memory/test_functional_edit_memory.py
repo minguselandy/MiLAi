@@ -243,6 +243,80 @@ def test_next_sdk_reopened_clause_support_enters_wrapper_without_old_source_deli
             assert app.world.snapshot() == before
 
 
+def test_sdk_reopened_rewrite_changes_condition_and_retains_its_existing_link(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        old_ref = memory.service.capture_user(
+            "s", "u", "Use quiet reminders during gallery hours."
+        )["source_ref"]
+        memory.writer_context("s", "u", "functional-m-test-v1")
+        create = {
+            "action": "create", "matter": "Reminder sound", "clauses": [{
+                "text": "Use quiet reminders.", "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+                "conditions": [{
+                    "text": "During gallery hours.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                    "binding": {"evidence": ["e1"]},
+                }],
+            }],
+        }
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": create}, "save").content)
+        assert saved["ok"]
+        original = copy.deepcopy(memory.service.read(saved["id"], 1)["value"])
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            new_ref = memory.service.capture_user(
+                "s", "u2", "The reminder rule now applies during evening hours."
+            )["source_ref"]
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            page = json.loads(
+                invoke(memory, "read_memory", {"record_id": saved["id"]}, "record", "u2").content
+            )
+            assert page["ok"]
+            packet = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            clause = packet["records"][0]["clauses"][0]
+            condition = clause["conditions"][0]
+            rewrite = {
+                "action": "rewrite", "target": "r1", "clauses": [{
+                    "text": clause["text"], "evidence": [],
+                    "keep_support": clause["support"],
+                    "assertion": {"keep": clause["support"][0]},
+                    "conditions": [{
+                        "from_unit": condition["id"], "text": "During evening hours.",
+                        "evidence": ["e1"],
+                        "assertion": {"source": "e1", "kind": "reported"},
+                        "binding": {
+                            "evidence": [], "keep_support": condition["binding"]["support"]
+                        },
+                    }],
+                }],
+            }
+            binding = copy.deepcopy(memory.service.public_turn("s"))
+            boundary = copy.deepcopy(memory.service._source_boundaries)
+            world = app.world.snapshot()
+            result = json.loads(invoke(
+                memory, "update_memory", {"proposal": rewrite}, "change-hours", "u2",
+                app.call_wrapper(memory.service, "s", "u2"),
+            ).content)
+            assert result["ok"] and result["revision"] == 2, result.get("reason", result)
+            state = memory.service.read(saved["id"])["value"]["edit_state"]
+            assert [u["text"] for u in state["units"]] == [
+                "Use quiet reminders.", "During evening hours."
+            ]
+            assert {e["source_ref"] for e in state["units"][1]["evidence_refs"]} == {new_ref}
+            assert {e["source_ref"] for e in state["relations"][0]["evidence_refs"]} == {old_ref}
+            assert memory.service.read(saved["id"], 1)["value"] == original
+            assert memory.service.public_turn("s") == binding
+            assert memory.service._source_boundaries == boundary
+            assert app.world.snapshot() == world
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        assert memory.service.read(saved["id"])["value"]["edit_state"] == state
+
+
 def test_sdk_real_old_source_page_becomes_e_without_rebinding_current_turn(tmp_path):
     with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
         old_ref = memory.service.capture_user(

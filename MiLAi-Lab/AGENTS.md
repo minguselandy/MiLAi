@@ -1,3 +1,27 @@
+# 2026-10-06 14:50:18 Asia/Shanghai: Root identity/source decoupling fix and finite affected recheck
+
+Previous goal turn published reviewed66 actual results via d7f062c: progress.
+Full Post-B0 goal continues. Root completed293 existing affected memory/SDK/Host/
+runner checks plus one new real SDK reopen fixture,294distinct; Ruff4,mypy2,
+default-off24 instructions/proposal/envelope exactly match frozen7cc,repo boundary
+PASS. Frozen7cc same SDK fixture fails on unavailable from_unit; current source
+passes real form/reopen/read/update/reopen, preserving old edge/new condition
+support/current boundary/public turn/world. Only opt-in Lab rewrite contract adds
+from_unit actual same-record/same-role correspondence, independent of evidence.
+No default/Product/Store/permission/Canonical/Reader/scorer/runtime strategy change.
+Publish four source/test files plus progress/declaration; actual model fix recheck0.
+Declare finite12 ownempty fourarm common neutral condition-correction/control,
+8Writer4Reader, source/config/ownCI bound beforeHTTP,Full before prefix/candidate.
+Do not repeat80 or add perfect100percent R3 prerequisite. Advance original prefix/
+preselected firstuser full-history and full scope after reviewed affected behavior.
+Frozen7cc confirmation20 closed Root12events/8answers/20HTTP/usage,83920known,allstop,
+no newunknown. Unconfirmed estimate never promoted; laterB0/B2 textual speaker/
+role conflict andB1/B2Reader failures, M bounded source/answer positive. Strengthening16
+runs independently on frozen7cc; do not hotedit, replay or launch concurrent HTTP.
+Root owns all raw/HTTP/evaluation/accounting/GitHub,no delegation. Keep one Qwen
+family/I2/fourarms/fullR0-R5/E0-E5/sixdeliverables/deferred scopes. ProductNO_GO,
+PR85draft/unmerged. Lower dated blocks preserve their snapshot scopes.
+
 # 2026-10-06 14:36:53 Asia/Shanghai: publish reviewed66 transport continuation checkpoint
 
 User requests current summary submitted to GitHub. Publish seven Lab report/state

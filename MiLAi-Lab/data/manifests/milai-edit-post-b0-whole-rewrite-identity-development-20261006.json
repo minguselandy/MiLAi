@@ -1,0 +1,75 @@
+{
+  "version": "milai-edit-post-b0-whole-rewrite-identity-development-v1",
+  "declared_at": "2026-10-06T06:50:18.363005+00:00",
+  "status": "PREDECLARED_AFFECTED_COMMON_RECHECK_NOT_RUN",
+  "actual_generation_calls": 0,
+  "implementation_identity": "The Git source commit containing this declaration; exact source/config/own CI must be bound before first HTTP.",
+  "previous_source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
+  "config_version": "milai-edit-post-b0-unit-correspondence-v1",
+  "interface": "I2",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "model_family": "Qwen3.6 only",
+  "change": "Optional from_unit for whole-rewrite content/condition identity, separate from factual evidence. Existing scope/role/current source/h guards unchanged.",
+  "ordinary_default_off_exactly_unchanged": true,
+  "affected_engineering_checks": {
+    "distinct_existing_and_new_SDK_tests_passed": 294,
+    "current_new_SQLite_SDK_reopen_case_passed": true,
+    "frozen7cc_same_SDK_case_failed_as_expected": true,
+    "Ruff_files": 4,
+    "strict_mypy_sources": 2,
+    "actual_default_off_instruction_and_schema_comparisons": 24,
+    "repo_boundary": "PASS_6445_TRACKED_PATHS_ZERO_FINDINGS"
+  },
+  "cohort": {
+    "declared_generation_calls": 12,
+    "Writer_calls": 8,
+    "Reader_calls": 4,
+    "own_empty_banks_per_arm": true,
+    "events": 2,
+    "observed_material": [
+      {
+        "date": "2031-02-03",
+        "role": "user",
+        "content": "For museum visits, use quiet reminders on weekdays before 18:00."
+      },
+      {
+        "date": "2031-02-04",
+        "role": "user",
+        "content": "For museum visits, the time cutoff is now 20:00."
+      }
+    ],
+    "Reader_after_actual_update": "What is the current reminder rule for museum visits, including its day and time limits?",
+    "evaluator_requirements_not_in_Writer_input": [
+      "Quiet reminders and weekdays remain; time cutoff becomes20:00.",
+      "Changed condition uses actual current evidence; unchanged claim and relation keep their original supports where appropriate.",
+      "Check actual from_unit usage in whole arms; local arms are same-source success controls."
+    ],
+    "source_exposure": "Additional exposed constructed development expression, not a natural benchmark or independent source confirmation.",
+    "driver": "existing tools/run_edit_development_history.py; ordinary BenchmarkRun/MemoryService; no injected old card or gold routing"
+  },
+  "shared_generation_parameters": {
+    "enable_thinking": true,
+    "temperature": 1,
+    "max_tokens": 32768,
+    "timeout": 300,
+    "context_tokens": 65536,
+    "current_source_tokens": 4096,
+    "current_plus_old_body_tokens": 8192,
+    "retrieval_limit": 10,
+    "working_sets": false
+  },
+  "first_attempts_only_no_retry_or_JSON_repair": true,
+  "new_unknown_outcome": "Stop affected work, audit actual effect and preserve actual tokens=null; no replay.",
+  "source_own_CI": "Bind before HTTP; full source CI before prefix/candidate/merge.",
+  "new_Reader_scoring_retrieval_or_Product_changes": false,
+  "after_recheck": "Use first-attempt evidence to advance to the originally declared four-user prefix and preselected first-user full history; ordinary semantic failures remain in results, no new perfect-R3 admission condition.",
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "full_plan_and_deferred_scopes_remain_active": true,
+  "product_status": "NO_GO"
+}

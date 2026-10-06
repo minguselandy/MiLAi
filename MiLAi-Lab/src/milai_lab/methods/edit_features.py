@@ -250,6 +250,12 @@ def feature_proposal_schema(
         unit = fields.pop("units")
         clause = copy.deepcopy(unit["items"])
         clause["properties"].pop("role")
+        if fields["action"]["const"] == "rewrite":
+            prior_contents = [
+                alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"
+            ]
+            if prior_contents:
+                clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
@@ -264,6 +270,13 @@ def feature_proposal_schema(
             ["evidence"],
         )
         condition = copy.deepcopy(clause)
+        condition["properties"].pop("from_unit", None)
+        if fields["action"]["const"] == "rewrite":
+            prior_conditions = [
+                alias for alias in refs["u"] if mapping["units"][alias]["role"] == "condition"
+            ]
+            if prior_conditions:
+                condition["properties"]["from_unit"] = reference("u", prior_conditions)
         condition["properties"]["binding"] = copy.deepcopy(binding)
         condition["required"].append("binding")
         clause["properties"]["conditions"] = {
