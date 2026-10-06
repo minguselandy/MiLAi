@@ -1,6 +1,6 @@
 {
-  "status": "ALL141_SOURCE_CONTROLS_AND_IDENTITY12_ROOT_REVIEWED_PREFIX_NOT_STARTED",
-  "observed_at": "2026-10-06T07:06:50.083872+00:00",
+  "status": "RUNNING_STAGE_C_FOUR_ARM_DEVELOPMENT_PREFIX_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T07:39:40.170174+00:00",
   "previous_report_commit": "d7f062c2625d17207ca63d2c2964181d75b89706",
   "interface": "I2",
   "completed_session_checkpoints": {
@@ -24,7 +24,7 @@
   "declared_sessions_per_arm": 277,
   "old_queue_live": false,
   "next_candidate": {
-    "status": "SOURCE7B82_STAGE_C_DEVELOPMENT_ADMITTED_NOT_STARTED_NOT_FINAL_CANDIDATE",
+    "status": "SOURCE7B82_STAGE_C_PREFIX_RUNNING_NO_FINAL_CANDIDATE",
     "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
     "config_version": "milai-edit-post-b0-unit-correspondence-v1",
     "actual_model_calls": 12,
@@ -308,7 +308,7 @@
       "findings": 0
     },
     "staged_diff": "PASS_NINE_LAB_REPORT_STATE_RESULT_FILES_ONLY",
-    "scope": "c6a70d7 report checks retained; current StageC declaration has separate publication check."
+    "scope": "c6a70d7 closed-report checks retained; f410 stage declaration passed5files/53links/6449boundary. Current live snapshot has separate narrow doc validation."
   },
   "old_B1_closed_resumed_segment": {
     "maintenance": 115,
@@ -466,7 +466,7 @@
     "formation_repair_declared_recheck_calls": 20
   },
   "stage_C_long_smoke": {
-    "status": "ADMITTED_PREDECLARED_NOT_STARTED",
+    "status": "PRESELECTED_LONG_SMOKE_NOT_STARTED_PREFIX_RUNNING",
     "selection_rule": "first user in the frozen development order, fixed before fresh prefix outcomes",
     "development_user_position": 0,
     "prefix_sessions_per_development_user": 8,
@@ -541,7 +541,7 @@
       "generation_calls": 36,
       "known_tokens": 186607
     },
-    "closed_reviewed_sources_only_no_live_queue": true,
+    "closed_reviewed_sources_only_no_live_queue": false,
     "common_source_reader_7cc1363": {
       "generation_calls": 141,
       "known_tokens": 604072,
@@ -562,7 +562,8 @@
       "Writer_calls": 8,
       "Reader_calls": 4,
       "confirmed_responses": 12
-    }
+    },
+    "excludes_running_StageC_costs": true
   },
   "native_capacity_configuration_calibration": {
     "status": "COMPLETED80_ROOT_REVIEWED_M_GLOBAL_WRITER_LIFECYCLE_POSITIVE_ORIGINAL_AND_FINAL_READER_FAILURES",
@@ -638,7 +639,7 @@
       }
     }
   },
-  "continuous_accounting_snapshot_scope": "All sealed141 plus separate source7b82 affected12 accounted. No live queue; serial lease free; unknown3/embed0 unchanged.",
+  "continuous_accounting_snapshot_scope": "Last CLOSED accounting through complete7cc141 and separate source7b82 affected12 at36519 requests. Excludes live StageC; do not treat pending unknown reservation as final unknown failure. Live HTTP evidence is in stage_C_prefix_live.",
   "bounded_old_support_redelivery_development": {
     "status": "SOURCE7CC_REAL_OLD_BODY_DELIVERY_AUDITED_ORIGINAL30_SEMANTIC_FAILURES",
     "source_included_in_this_report": false,
@@ -1765,5 +1766,100 @@
     "new_model_calls_for_declared_real_rechecks": 132,
     "scope": "Earlier dated development snapshots, not counts of the current48 new completed requests or original7cc141."
   },
-  "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00"
+  "stage_C_declaration_observed_at": "2026-10-06T07:20:52.374486+00:00",
+  "new_queue_live": true,
+  "stage_C_prefix_live": {
+    "observed_at": "2026-10-06T07:39:40.170174+00:00",
+    "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+    "PID": 178764,
+    "PID_and_exact_frozen_command_verified_live": true,
+    "shared_HTTP_lease_held": true,
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+    "started_at": "2026-10-06T07:23:06.705004+00:00",
+    "per_arm_planned_sessions": 32,
+    "per_arm_planned_updates": 72,
+    "per_arm_planned_QA": 73,
+    "arms": {
+      "B0": {
+        "maintenance_complete": 3,
+        "evaluation_complete": 2,
+        "requests": 129,
+        "saved_response_files": 128,
+        "pending_HTTP_count": 1,
+        "failure_files": 0,
+        "terminal_status": null
+      },
+      "B1": {
+        "maintenance_complete": 0,
+        "evaluation_complete": 0,
+        "requests": 0,
+        "saved_response_files": 0,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": null
+      },
+      "B2": {
+        "maintenance_complete": 0,
+        "evaluation_complete": 0,
+        "requests": 0,
+        "saved_response_files": 0,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": null
+      },
+      "M": {
+        "maintenance_complete": 0,
+        "evaluation_complete": 0,
+        "requests": 0,
+        "saved_response_files": 0,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": null
+      }
+    },
+    "request_artifacts": 129,
+    "saved_response_roles": {
+      "Writer": 3,
+      "Reader": 6,
+      "Judge": 119
+    },
+    "saved_response_count": 128,
+    "saved_response_finish_reasons": {
+      "stop": 128
+    },
+    "known_tokens_from_saved_responses": 383249,
+    "not_final_accounting": true,
+    "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+    "observational_partial_JSON_reads": 0,
+    "first_B0_formation_records": 5,
+    "first_B0_QA_author_labels": [
+      "Correct",
+      "Correct",
+      "Correct"
+    ],
+    "Root_first_B0_QA_additional_support_limit": "Third answer correctly distinguishes goal from accomplishment but categorical did-not-occur exceeds available completion evidence; original Correct label unchanged.",
+    "candidate_selected": false,
+    "method_advantage_established": false,
+    "long_smoke_actual_model_calls": 0
+  },
+  "required_controls_offline_preparation": {
+    "status": "OFFLINE_FIXED_NOT_ADMITTED_MODEL0",
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "M_entry_ablation": "Same M conditioned formation envelope under actual mapping; only semantic_operations=false changes edit entry.",
+    "fixed_tighter_budget": "output16384/context49152 keeps input headroom32768 and common source4096/body8192/retrieval10; all four arms; no tuning by holdout.",
+    "actual_model_calls": 0,
+    "heldout_sources_read": false,
+    "controls_actual_formation_envelope_and_input_headroom_checked": true,
+    "no_change_to_running_main_configuration": true
+  },
+  "actual_user_continuation_preparation": {
+    "status": "ROOT_PRIVATE_HELPER_PREPARED_NOT_ACTUALLY_USED",
+    "readiness_probe_against_live_incomplete_prefix": "EXPECTED_REJECTION_BEFORE_ANY_OUTPUT_BANK_WRITE",
+    "actual_model_calls": 0,
+    "prefix_actual_state_not_ideal_state": true,
+    "other_user_Judge_caches_not_copied": true,
+    "not_a_model_success_or_complete_recovery_claim": true
+  }
 }

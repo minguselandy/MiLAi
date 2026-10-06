@@ -1,3 +1,22 @@
+# 2026-10-06T07:39:40.170174+00:00: Stage C actually running, inspect exact live process, no restart
+
+Previous c6 summary and f410 pre-HTTP declaration are progress. Source7b82 ownFast/
+Full success. Frozen normal run_edit_suite PID178764 started07:23:06UTC; live command
+and sharedHTTPlease verified. B0 currently3maintenance/2evaluation, 128savedresponses/
+129requests/383249known across current queue; active snapshot, not final accounting.
+Do not treat ledger pending unknown reservation as final model failure. Poll exactPID/
+rawterminal/HTTP on continuation; no replay or restart on observation timeout.
+FirstB0 forms5matters/3authorCorrectQA, Root finds unsupported categorical nonoccurrence
+in third answer, label unchanged. Main config/source frozen. Ordinary failures retained.
+Required same-M entry and one tighter profile fixed offline model0, not admitted; input
+headroom32768 remains, maxoutput16384/context49152. Root continuation preparation helper
+only, readiness guard rejects incomplete prefix without newbank writes; not yet used.
+After full prefix closure/review, actual per-user SQLbackup/checkpoint/Judge-interval
+continuation for preselected firstuser65/all4arms, then originalfull/native/drift/holdout/
+external/Host/ablation/tighter scopes and sixdeliverables. No newdelegation/family/store/
+platform/deployment/Product/Archive/workflow. Goalactive, ProductNO_GO,PR85draft.
+Lower dated blocks retain snapshots; declarationsactual0 and rawresults unchanged.
+
 # 2026-10-06 Stage C admitted with source-own Full success, pre-HTTP declaration
 
 Previous goal turn closed/published complete141 and affected12 via c6a70d7: progress.
