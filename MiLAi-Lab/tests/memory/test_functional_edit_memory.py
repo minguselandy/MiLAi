@@ -18,11 +18,16 @@ from pydantic import ValidationError
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
-from milai_lab.memory.edit_units import clause_proposal
+from milai_lab.memory.edit_units import EditProposal, clause_proposal, form_state, render_state
 from milai_lab.memory.functional import FunctionalMemory
-from milai_lab.memory.functional_state import FunctionalRejection, canonical, reference_key
+from milai_lab.memory.functional_state import (
+    FunctionalRejection,
+    canonical,
+    namespace,
+    reference_key,
+)
 from milai_lab.memory.service import MemoryService
-from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FUNCTIONAL_B0_METHOD,
@@ -73,6 +78,169 @@ def next_sdk_create():
         },
         conditioned=True,
     )
+
+
+def test_next_sdk_reopened_clause_support_enters_wrapper_without_old_source_delivery(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        text = "Use quiet reminders.\nOnly on weekdays.\nOnly before 18:00."
+        ref = memory.service.capture_user("s", "u", text)["source_ref"]
+        source = memory.service.source(ref)
+        bound = memory.service.bind_public_turn(
+            "s", "u", ref, config_version="functional-m-test-v1", phase="start"
+        )
+        first, second = text.index("\n"), text.rindex("\n")
+        handles = [
+            memory.service.source_fragment_range(ref, start, end)["fragment_handle"]
+            for start, end in (
+                (0, first),
+                (first + 1, second),
+                (second + 1, len(text)),
+                (0, second),
+                (0, len(text)),
+            )
+        ]
+        parsed = EditProposal.model_validate(
+            {
+                "action": "create",
+                "units": [
+                    {"text": "Use quiet reminders.", "evidence": [handles[0]]},
+                    {"text": "Only on weekdays.", "role": "condition", "evidence": [handles[1]]},
+                    {"text": "Only before 18:00.", "role": "condition", "evidence": [handles[2]]},
+                ],
+                "relations": [
+                    {
+                        "source": 1,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [handles[3]],
+                    },
+                    {
+                        "source": 2,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [handles[4]],
+                    },
+                ],
+            }
+        )
+        state = form_state(parsed, memory.service, conditioned=True)
+        decorate_state(
+            state,
+            {
+                "matter_description": "Reminder tone",
+                "unit_assertions": [
+                    {
+                        "kind": "reported",
+                        "source_ref": ref,
+                        "source_revision": source["source_revision"],
+                        "role": source["role"],
+                        "observed_at": source["observed_at"],
+                        "occurred_at": None,
+                    }
+                    for _ in parsed.units
+                ],
+            },
+        )
+        # A trusted Service import has real source/version support, without an SDK
+        # source-read receipt. This avoids previous global delivery masking the bug.
+        saved = memory.service.commit(
+            "s",
+            "import",
+            {
+                "action": "create",
+                "id": None,
+                "expected_revision": 0,
+                "content": render_state(state),
+                "kind": "semantic",
+                "basis": "user_statement",
+                "scope": {},
+                "fields": {},
+                "object_ref": None,
+                "source_ref": ref,
+                "source_refs": [ref],
+                "edit_state": state,
+                "field_support": {
+                    field: {"source_refs": [ref]} for field in ("content", "scope", "basis", "kind")
+                },
+                "functional_support": {field: handles for field in ("content", "kind", "basis")},
+                "trigger_binding": bound,
+                "requested": {"operation": "synthetic_import"},
+            },
+        )
+        assert saved["ok"], saved
+        old = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        assert all(
+            memory.service.store.get(namespace(memory.service), "edit-delivered:" + h) is None
+            for h in handles
+        )
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path,
+            arm="B2",
+            interface_version="I2",
+            features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            memory.service.capture_user("s", "u2", "Now use written reminders; retain the limits.")
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            page = json.loads(
+                invoke(memory, "read_memory", {"record_id": saved["id"]}, "read-old", "u2").content
+            )
+            assert page["ok"] and all(item["type"] == "record" for item in page["items"])
+            context = memory.writer_context("s", "u2", "functional-m-test-v1")
+            record = context["writer_packet"]["records"][0]
+            assert all(
+                memory.service.store.get(namespace(memory.service), "edit-delivered:" + h) is None
+                for h in handles
+            )
+            proposal = {
+                "action": "rewrite",
+                "target": "r1",
+                "clauses": [
+                    {
+                        "text": "Use written reminders.",
+                        "evidence": ["e1"],
+                        "keep_support": record["clauses"][0]["support"],
+                        "assertion": {"source": "e1", "kind": "reported"},
+                        "conditions": [
+                            {
+                                "text": c["text"],
+                                "evidence": [],
+                                "keep_support": c["support"],
+                                "assertion": {"keep": c["support"][0]},
+                                "binding": {
+                                    "evidence": [],
+                                    "keep_support": c["binding"]["support"],
+                                },
+                            }
+                            for c in record["clauses"][0]["conditions"]
+                        ],
+                    }
+                ],
+            }
+            before = app.world.snapshot()
+            updated = json.loads(
+                invoke(
+                    memory,
+                    "update_memory",
+                    {"proposal": proposal},
+                    "rewrite-nested",
+                    "u2",
+                    app.call_wrapper(memory.service, "s", "u2"),
+                ).content
+            )
+            assert updated["ok"], updated.get("reason", updated)
+            assert updated["id"] == saved["id"] and updated["revision"] == 2
+            op = memory.service.store.get(
+                namespace(memory.service),
+                "edit-writer-operation:"
+                + reference_key([memory._binding(cfg("u2")), "rewrite-nested"]),
+            )
+            assert set(op.value["kept_support"]) == set(handles)
+            candidate = memory.service.candidate(op.value["read_handle"])
+            assert candidate["record_id"] == saved["id"] and candidate["revision"] == 1
+            assert memory.service.read(saved["id"], 1)["value"] == old
+            assert app.world.snapshot() == before
 
 
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])

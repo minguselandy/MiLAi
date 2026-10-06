@@ -545,14 +545,21 @@ class FunctionalEditMemory(FunctionalMemory):
                 decoded = self.writer.decode_proposal(proposal, mapping)
                 target = proposal.get("target")
                 read_handle = mapping["records"][target]["candidate_handle"] if target else None
+                support_items = [
+                    *proposal.get("units", []),
+                    *proposal.get("relations", []),
+                    *proposal.get("edits", []),
+                    *proposal.get("unresolved_conditions", []),
+                ]
+                for clause in proposal.get("clauses", []):
+                    support_items.append(clause)
+                    for condition in clause.get("conditions", []):
+                        support_items.extend((condition, condition["binding"]))
+                    support_items.extend(clause.get("overrides", []))
                 kept = list(
                     dict.fromkeys(
                         ref["evidence_id"]
-                        for item in [
-                            *proposal.get("units", []),
-                            *proposal.get("relations", []),
-                            *proposal.get("edits", []),
-                        ]
+                        for item in support_items
                         for alias in item.get("keep_support", [])
                         for ref in mapping["support"][alias]["evidence_refs"]
                     )

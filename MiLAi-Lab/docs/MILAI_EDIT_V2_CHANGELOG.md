@@ -1,5 +1,12 @@
 # MiLAi-Edit v2 跟进记录
 
+2026-10-06 12:19:51 Asia/Shanghai，Root复核普通SDK嵌套旧支持收集修复。
+实际f9ab697旧函数在真实SQLite重开wrapper用例中拒绝，新实现341项SDK/Host检查
+通过，Ruff/strict mypy/package/tools/root边界通过。两源码/测试文件单列版本，
+无schema、来源边界、h、origin、权限/CAS或默认关闭变更，未做新模型实验。
+预声明的原生共同36用冻结497源码运行，21响应均stop，不能替新SDK证明语义。
+必要旧正文独立重发仅完成静态落点核查，未实现。旧失败与完整计划保持。
+
 2026-10-06 12:05:32 Asia/Shanghai，按用户要求总结并提交GitHub。共同原生配置
 仍固定497b8d8，原分支44次/197,788 token、44stop已完成，Root阅读24事件/20回答，
 核对HTTP/投影/usage/账本；15提交/2拒绝/1no_change另六空envelope。B1 Writer保留

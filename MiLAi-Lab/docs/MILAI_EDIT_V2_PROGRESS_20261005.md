@@ -1,5 +1,14 @@
 # MiLAi-Edit v2 实验进度与复现入口
 
+**2026-10-06 12:19:51 Asia/Shanghai：**Root独立复现f9ab697原SDK方法拒绝合法的
+重启后旧条件支持；最小收集修复通过341项实际SDK/普通Host检查（77+264），Ruff、
+strict mypy和package/tools/root边界通过。只补实际clauses/条件/绑定等keep_support
+收集，不改来源、origin、h字面保持、CAS/权限或默认关闭合同；源码自身CI待新提交。
+当前冻结497原生共同条件分支已启动，21/36响应、12事件、全部stop（非终态），
+不使用此SDK源码。完整HTTP/账本/语义复核须在终态完成，未知请求不重发。
+正常SDK已能实际read_source旧正文并交付e；benchmark独立旧正文入口仍未实现。
+没有候选/前缀或Product结论，完整计划继续。下列报告是各自历史检查点。
+
 **2026-10-06 12:05:32 Asia/Shanghai：**按用户要求发布
 [当前简明总结](MILAI_EDIT_CHECKPOINT_20261006.md)。冻结497b8d8的共同原生配置
 原分支完成44次/197,788 known token，24 Writer/20 Reader、全部stop；Root复核

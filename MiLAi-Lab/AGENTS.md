@@ -1,3 +1,25 @@
+# 2026-10-06 SDK support collector Root-reviewed; frozen native global36 running
+
+Root independently executed the actual f9ab697 pre-fix method against the fresh
+SQLite reopen fixture: expected ACTUALLY_DELIVERED_FRAGMENT_REQUIRED reproduced.
+New method passes341existing SDK/ordinary Host checks (77+264),Ruff,strict mypy,
+package/tools/root boundaries. Collect selected keep_support from actual nested
+clauses/conditions/bindings/overrides/unresolved fields into existing wrapper;
+source/old-h/current-boundary/origin/CAS/permissions/default-off/schema unchanged.
+Commit two source/test files plus bounded progress records, own CI still pending.
+No model cohort uses this SDK fix yet. Existing source owner is read-only now.
+
+Declared native global36 started PID3638579 from frozen497 archive/config only,
+after reviewed original44, actual sourceFast/Full success,stable ledger and free
+lease. At12:19:51,21responses/12events,allstop; not final accounting/semantic
+closure. Re-poll exact live process; no restart/replay on observation timeout.
+Never mix working-tree SDK/input changes into this cohort. Normal SDK already
+supports actual old read_source→e and preserves public-turn binding. Benchmark
+prepare lacks separate old-redelivery input; a bounded common delivery design is
+under read-only review per plan5.4, not implemented. No new prompts/Reader/store/
+platform/deployment/family. Full goal remains active, no candidate/prefix/merge.
+All lower dated records preserve their snapshot scopes.
+
 # 2026-10-06 12:05:32 Asia/Shanghai: publish reviewed native original44 checkpoint
 
 Latest user requests current summary and GitHub submission. Publish only seven
