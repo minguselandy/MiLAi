@@ -399,6 +399,14 @@ def feature_proposal_schema(
                 "items": orphan,
                 **({"maxItems": 0} if not orphan_support else {}),
             }
+        scoped = copy.deepcopy(clause)
+        scoped["properties"]["conditions"]["minItems"] = 1
+        scoped["properties"]["overrides"]["minItems"] = 1
+        scoped["required"].append("overrides")
+        clause["properties"]["overrides"]["maxItems"] = 0
+        # An override must bind an actual scope to this clause. Ordinary claims
+        # may stay unqualified; declared/reused conditions share the same path.
+        fields["clauses"]["items"] = {"oneOf": [clause, scoped]}
     return (
         schema if variants else {"type": "object", "properties": {}, "additionalProperties": False}
     )

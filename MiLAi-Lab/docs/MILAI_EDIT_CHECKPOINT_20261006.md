@@ -1,5 +1,14 @@
 # MiLAi-Edit 当前实验检查点
 
+**2026-10-06 20:07:09 UTC：新的范围合同／前版角色读取已实现；实际模型结果仍停在baa闭合阶段。**
+
+非空overrides带真实范围条件，普通条款保持简单；一个实际前版的关系角色只附于当前逐字保留单元，benchmark与普通Host共用。
+15项现有检查、Ruff7／mypy4／包边界通过；最多2次固定实际Reader＋原共同条件四组自有空库36范围已准备，尚未准入。
+新源码自身Fast先于HTTP、Full先于新前缀／候选；不借用e4f或baa的CI。旧声明／结果／原件不改，本阶段模型／编码0。
+完整计划8／65／277及保留／外部／Host／机制／消融／预算／恢复／六交付仍未完成，Product NO_GO。
+回滚e4f1a54。[最新执行摘要](MILAI_EDIT_EXECUTION_STATUS_20261007.md) ·
+[本源码声明](../data/manifests/milai-post87c-scope-contract-revision-read-development-20261007.json)。下方保留原时点记录。
+
 **2026-10-06 19:24:35 UTC：源码baa的两条原R3已闭合；条款粒度有效改善保持，方法与Reader仍未确认。**
 
 冻结`baa0e70`自身Fast／Full均success，四组每分支各自空库，原事件／问题／采样／预算不改。

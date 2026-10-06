@@ -31,7 +31,7 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
-from milai_lab.memory.edit_units import read_revision_evidence
+from milai_lab.memory.edit_units import read_revision_evidence, read_revision_scope
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
@@ -1214,6 +1214,8 @@ class BenchmarkRun:
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
+                    **({"revision_scope": read_revision_scope(service, row["id"], row["value"])}
+                       if any(self.settings.get("edit_features", {}).values()) else {}),
                 }
                 for row in records
             ]

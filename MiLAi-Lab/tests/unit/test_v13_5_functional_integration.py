@@ -243,9 +243,11 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
             assert "update_memory" not in schemas
             proposal_schema = schemas["save_memory"]["properties"]["proposal"]
             clause_schema = proposal_schema["properties"]["clauses"]["items"]
-            assert clause_schema["properties"]["evidence"]["items"]["enum"] == [
-                e["id"] for e in packet["evidence"]
-            ]
+            variants = clause_schema["oneOf"] if arm in {"B2", "M"} else [clause_schema]
+            for variant in variants:
+                assert variant["properties"]["evidence"]["items"]["enum"] == [
+                    e["id"] for e in packet["evidence"]
+                ]
             assert "matter" in schemas["save_memory"]["properties"]["proposal"]["required"]
             source = next(s for s in packet["source_table"]
                           if s["id"] == packet["evidence"][0]["source"])

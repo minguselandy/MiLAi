@@ -428,9 +428,12 @@ def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, ar
             assert "save_memory" in catalog and "update_memory" not in catalog
             raw = catalog["save_memory"].tool_call_schema
             assert "matter" in json.dumps(raw)
-            assert raw["properties"]["proposal"]["properties"]["clauses"]["items"]["properties"][
-                "evidence"
-            ]["items"]["enum"] == [e["id"] for e in context["writer_packet"]["evidence"]]
+            clause_schema = raw["properties"]["proposal"]["properties"]["clauses"]["items"]
+            variants = clause_schema["oneOf"] if memory.conditioned else [clause_schema]
+            for variant in variants:
+                assert variant["properties"]["evidence"]["items"]["enum"] == [
+                    e["id"] for e in context["writer_packet"]["evidence"]
+                ]
             before_world = app.world.snapshot()
             wrapper = app.call_wrapper(memory.service, "s", "u")
             args = {"proposal": next_sdk_create(), "scope": {"project": "gallery"}}
@@ -613,8 +616,11 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
             assert '"e1"' in json.dumps(first_catalog["save_memory"])
             clause_schema = first_catalog["save_memory"]["function"]["parameters"]["properties"][
                 "proposal"
-            ]["properties"]["clauses"]["items"]["properties"]
-            assert "binding" in clause_schema["conditions"]["items"]["oneOf"][0]["properties"]
+            ]["properties"]["clauses"]["items"]
+            for variant in clause_schema["oneOf"]:
+                assert "binding" in variant["properties"]["conditions"]["items"]["oneOf"][0][
+                    "properties"
+                ]
             result = next(
                 msg
                 for msg in final["messages"]
@@ -1054,6 +1060,19 @@ def test_same_id_override_retract_history_reader_and_forget_after_reopen(tmp_pat
         surviving = memory.service.read(saved["id"])["value"]["edit_state"]
         assert surviving["units"][:2] == old_state["units"]
         assert not any(r["relation_type"] == "overrides" for r in surviving["relations"])
+        reader = FunctionalEditMemory(
+            memory.service, len, interface_version="I2", features=NEXT_FEATURES,
+            material_limit=memory.material_limit, read_limit=memory.read_limit,
+        )
+        page = json.loads(invoke(
+            reader, "read_memory", {"record_id": saved["id"]}, "read-after-cancel", "cancel"
+        ).content)
+        prior_scope = [item["revision_scope"] for item in page["items"] if "revision_scope" in item]
+        assert len(prior_scope) == 1
+        assert prior_scope[0]["current_unit_id"] == old_state["units"][0]["unit_id"]
+        assert prior_scope[0]["previous_revision"] == 2
+        assert len(canonical(page)) <= reader.material_limit
+        assert memory.service.read(saved["id"])["value"]["edit_state"] == surviving
     with opened(tmp_path) as memory:
         turn(memory, "forget", "Forget the exhibition memory and its supporting sources.")
         current = memory.service.read(saved["id"])

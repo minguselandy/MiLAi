@@ -1,3 +1,30 @@
+# 2026-10-06 20:07:09 UTC: scope contract and one-predecessor roles implemented; finite real checks prepared
+
+Previous goal turn publication e4f made progress; root revalidated clean worktree,
+read full post87c plan1-12 and actual schema/MemoryService/normalHost before edits.
+4 Lab source files now require scope conditions on declared overrides and share
+read_revision_scope: one real predecessor, exact current-unit retention ignoring
+ID reallocation, only historical role/scope IDs, no removed facts or old bodies.
+Host attaches context to first fragment of corresponding actual retained unit;
+benchmark opt-in shares helper. No new prompt/example, flag, store or auditor.
+Seven existing test functions strengthened;15 distinct affected checks pass after
+correcting2 SDK tests' old flat-schema assumption, onlythose2 rerun. Ruff7/mypy4/
+existing packageboundary pass. Engineering only, no free-model semantic result.
+Two fixed actual baa M withdrawal/final cases prepared, exact oldstate/questions/
+answers, onlyscopefieldadded;634->742/628->736input. Original DB read-only backup,
+old artifacts unchanged. Then originalglobalbranch36 prepared all4ownempty,
+unchanged events/questions/sampling/budgets,0Judge. Do not rerun unaffected first44.
+Bind new exact source/own Fast success before HTTP, own Full before prefix or
+candidate/merge. No new calls now; ledger39542/151091320known151203035charged/
+embedding973335/historyunknown3 unchanged. Only existing serial lease/budget.
+Publish13Labfiles4source3existingtests6docs/status/declaration with lightchecks.
+Latest closed model results stillbaa, no splicing/candidate/methodconfirmation.
+Full goal8/65/277/native/drift/ablation/tighterbudget/16reserved/external/Host/
+forget/recovery/sixdeliverables unfinished and active. OneQwen/BGE; no delegation
+or reserved reading, ProductNO_GO PR85draftunmerged. Lab generatedschema/read
+metadata changed;Product/API/permissions/Canonical/Archive/workflow unchanged.
+Private raw/configs/HTTP/DB/logs ignored;rollbacke4f. Lowerblocks historical.
+
 # 2026-10-06 19:38:50 UTC: user-requested current execution summary publication
 
 Current request is summary and GitHub publication. Worktree/head d839 initially

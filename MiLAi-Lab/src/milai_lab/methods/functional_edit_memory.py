@@ -26,6 +26,7 @@ from milai_lab.memory.edit_units import (
     apply_local,
     form_state,
     read_revision_evidence,
+    read_revision_scope,
     render_state,
 )
 from milai_lab.memory.functional import FunctionalMemory
@@ -673,6 +674,10 @@ class FunctionalEditMemory(FunctionalMemory):
         state = row.get("value", {}).get("edit_state")
         if not ordinary or not state:
             return ordinary
+        revision_scope = {
+            item["current_unit_id"]: item
+            for item in read_revision_scope(self.service, row["id"], row["value"])
+        } if self.features.enabled else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -706,6 +711,8 @@ class FunctionalEditMemory(FunctionalMemory):
                         result[-1]["edit_unit"]["assertion"] = copy.deepcopy(unit["assertion"])
                     if unit.get("local_exception"):
                         result[-1]["edit_unit"]["local_exception"] = True
+                    if start == 0 and unit["unit_id"] in revision_scope:
+                        result[-1]["revision_scope"] = revision_scope[unit["unit_id"]]
         result = result or [
             {
                 **ordinary[0],

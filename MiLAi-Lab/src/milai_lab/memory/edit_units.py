@@ -118,6 +118,54 @@ def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[s
     return result
 
 
+def read_revision_scope(
+    service: Any, record_id: str, version: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Show previous override roles only for literally retained current units.
+
+    Read one existing predecessor, not the full history. Removed facts are not
+    delivered or reconstructed, and prior scope handles remain historical.
+    """
+    state = version.get("edit_state")
+    if not state or version["revision"] <= 1:
+        return []
+    previous = service.read(record_id, version["revision"] - 1)
+    if not previous["ok"]:
+        return []
+    prior = previous["value"].get("edit_state")
+    if not prior:
+        return []
+    result = []
+    for old in prior["units"]:
+        overrides = [
+            edge for edge in prior["relations"]
+            if edge["relation_type"] == "overrides" and edge["target_unit"] == old["unit_id"]
+        ]
+        if not overrides:
+            continue
+        kept = [
+            unit for unit in state["units"]
+            if {k: v for k, v in unit.items() if k != "unit_id"}
+            == {k: v for k, v in old.items() if k != "unit_id"}
+        ]
+        if len(kept) != 1:
+            continue
+        for unit in kept:
+            result.append({
+                "current_unit_id": unit["unit_id"],
+                "previous_revision": previous["value"]["revision"],
+                "previous_role": "general_rule_outside_explicit_override_scopes",
+                "previous_scope_units": list(dict.fromkeys(
+                    edge["source_unit"] for edge in prior["relations"]
+                    if edge["relation_type"] == "modifies"
+                    and any(
+                        edge["target_unit"] == override["source_unit"] for override in overrides
+                    )
+                )),
+            })
+    return result
+
+
 def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
     """Validate representation references at the service's commit boundary."""
     if (

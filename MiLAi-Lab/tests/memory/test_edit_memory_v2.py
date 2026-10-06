@@ -12,7 +12,7 @@ import pytest
 from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.memory.edit_units import clause_proposal, read_revision_evidence
+from milai_lab.memory.edit_units import clause_proposal, read_revision_evidence, read_revision_scope
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
@@ -166,6 +166,7 @@ def test_next_contract_exception_cancel_never_restores_a_lost_general_rule(tmp_p
         }
         assert method.apply("s", "cancel", method.decode_proposal(remove, view["mapping"]))["ok"]
         assert service.read(saved["id"], 4)["value"]["edit_state"]["units"] == []
+        assert read_revision_scope(service, saved["id"], service.read(saved["id"])["value"]) == []
         assert (
             service.read(saved["id"], 1)["value"]["edit_state"]["units"][0]["text"]
             == "User reports quiet reminders."
@@ -404,6 +405,10 @@ def test_next_bound_clauses_share_only_declared_conditions_and_keep_binding_orig
         }
         for clause in create["clauses"]:
             clause.pop("binding")
+        unscoped_override = copy.deepcopy(create)
+        unscoped_override["clauses"][1]["conditions"] = []
+        with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
+            method.decode_proposal(unscoped_override, view["mapping"])
         saved = method.apply("s", "form", method.decode_proposal(create, view["mapping"]))
         assert saved["ok"]
         old = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
@@ -481,6 +486,10 @@ def test_next_bound_clauses_share_only_declared_conditions_and_keep_binding_orig
             evidence=["e1"],
             assertion={"source": "e1", "kind": "reported"},
         )
+        unscoped_override = copy.deepcopy(rewrite)
+        unscoped_override["clauses"][1]["conditions"] = []
+        with pytest.raises(FunctionalRejection, match="PROPOSAL_INVALID"):
+            method.decode_proposal(unscoped_override, view["mapping"])
         missing_origin = copy.deepcopy(rewrite)
         missing_origin["clauses"][0].pop("keep_support")
         with pytest.raises(FunctionalRejection, match="RELATION_SUPPORT_BINDING_INVALID"):
@@ -728,6 +737,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
         saved, _ = next_save(service, method, conditioned=True)
         baseline = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        assert read_revision_scope(service, saved["id"], service.read(saved["id"])["value"]) == []
         view, _ = next_request(
             service,
             method,
@@ -784,6 +794,14 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         assert now["relations"] == state["relations"][:1]
         assert service.read(saved["id"], 2)["value"]["edit_state"] == state
         actual = service.read(saved["id"])["value"]
+        scope = read_revision_scope(service, saved["id"], actual)
+        assert len(scope) == 1 and scope[0]["current_unit_id"] == baseline["units"][0]["unit_id"]
+        assert scope[0]["previous_revision"] == 2
+        assert scope[0]["previous_role"] == "general_rule_outside_explicit_override_scopes"
+        assert set(scope[0]["previous_scope_units"]) == {
+            state["units"][1]["unit_id"], state["units"][3]["unit_id"]
+        }
+        assert service.read(saved["id"])["value"] == actual
         evidence = read_revision_evidence(service, actual)
         assert [part["content"] for part in evidence] == ["User cancels the north-room exception."]
         assert evidence[0]["role"] == "user" and evidence[0]["semantic_support"] == "unchecked"

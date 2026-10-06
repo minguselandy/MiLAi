@@ -1,0 +1,101 @@
+{
+  "version": "milai-post87c-scope-contract-revision-read-development-1.0",
+  "status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+  "observed_at": "2026-10-06T20:07:09+00:00",
+  "previous_report_commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
+  "closed_model_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "closed_results_manifest": "milai-post87c-claim-revision-execution-20261007.json",
+  "source_identity": "Bind this exact publication commit and its own Fast success to frozen configs before HTTP.",
+  "implementation": {
+    "generated_scope_contract": "B2/M create and rewrite clauses have disjoint ordinary/scoped branches. Only nonempty overrides require at least one declared or reused condition; ordinary facts can remain unqualified.",
+    "revision_scope": "Read only one actual predecessor through MemoryService. Show the prior general-target role and historical scope-unit IDs only for a unique literally retained current unit; ID reallocation alone does not drop continuity.",
+    "normal_Host": "Same helper on corresponding current-unit first fragment, under existing visibility/pagination/material limits. Historical pointers issue no Writer e alias.",
+    "benchmark_Reader": "Same opt-in helper added beside unchanged current content and selected revision evidence; Reader prompt unchanged.",
+    "no_removed_fact_reconstruction": true,
+    "no_old_body_or_removed_exception_value_delivery": true,
+    "new_prompt_or_feature_flag_or_platform": false,
+    "Lab_generated_schema_and_read_metadata_changed": true,
+    "Product_schema_API_permissions_Canonical_Archive_workflow_changed": false
+  },
+  "engineering": {
+    "pytest_distinct_passed": 15,
+    "existing_test_functions_strengthened": 7,
+    "new_test_functions": 0,
+    "targeted_SDK_rerun_passed": 2,
+    "Ruff_files": 7,
+    "mypy_source_files": 4,
+    "package_boundary": "PASS active package DAG, pure facades, shared leaves and import paths",
+    "actual_SQLite_cases": "Legal scoped rewrite and reused conditions; M shared-condition/exception cancellation; lost general rule stays absent; normal Host read and forget/reopen unchanged.",
+    "local_corrections": [
+      "Two SDK tests assumed a flat clause schema; assert actual reference enums in both generated branches instead. No runtime fallback.",
+      "One long line wrapped."
+    ],
+    "not_free_model_semantic_confirmation": true,
+    "additional_affected_checks": "Six existing LangGraph/normal Host checks after locating two more flat-schema assumptions; no full-suite repetition."
+  },
+  "finite_recheck": {
+    "status": "PREPARED_NOT_ADMITTED",
+    "first": "At most2 fixed actual baa M post-withdrawal/final Reader calls; same actual state, original questions/dates/answers, only revision_scope added.",
+    "fixed_Reader_old_new_input_tokens": [
+      [
+        634,
+        742
+      ],
+      [
+        628,
+        736
+      ]
+    ],
+    "original_database_read_only_backup_preserved": true,
+    "then": "Original global-condition R3 once: all4 arms own empty banks, 5 events/20Writer/16Reader original scope, no changed events/questions.",
+    "planned_generation_scope": 38,
+    "Judge_calls": 0,
+    "unaffected_first_44_call_branch_not_repeated": true,
+    "model": "Existing Qwen3.6 family, thinking=true, temperature1.0",
+    "capacity": {
+      "context_tokens": 65536,
+      "output_tokens": 32768,
+      "margin_tokens": 512,
+      "input_limit_tokens": 32256
+    },
+    "common_interface_retrieval": "I2, dense cosine, K10, existing BGE-m3; all real embeddings metered.",
+    "admission": "Exact source own Fast success before HTTP; own Full success before new four-user prefix/candidate/merge.",
+    "recovery": "First attempts preserved, existing serial lease and continuous ledger, no hot edit/retry/unknown replay/JSON repair/ideal old cards.",
+    "not_independent_source_or_Judge_confirmation": true
+  },
+  "actual_new_calls": {
+    "Writer": 0,
+    "Reader": 0,
+    "Judge": 0,
+    "embedding_requests": 0
+  },
+  "continuous_accounting_snapshot": {
+    "generation_requests": 39542,
+    "generation": {
+      "charged_tokens": 151203035,
+      "known_tokens": 151091320,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 973335,
+      "known_tokens": 973335,
+      "unknown_usage": 0
+    }
+  },
+  "full_goal_remaining": [
+    "Choose usable common maintenance; same-version4arm own-empty8/selected65/full277",
+    "Native32opportunities12sessions4users and actual full-history drift",
+    "OneMentry ablation and onefixed tighter-budget sensitivity",
+    "16reserved users after candidate freeze",
+    "LongMemEval28/1354history appearances/10full reviews plus RawRAG/RollingSummary/authorA-MEM",
+    "OrdinaryHost135cases192messages/newstories/forget/actualeffects/recovery",
+    "Sixdeliverables and reproducible supported/unsupported contributions"
+  ],
+  "candidate_selected": false,
+  "stable_method_advantage_established": false,
+  "product_status": "NO_GO",
+  "goal_complete": false,
+  "publication_scope": "13Labfiles:4source/3existingtests/6docs-status-declaration. No Product/Archive/workflow changes.",
+  "rollback_commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
+  "private_raw_HTTP_DB_gold_reasoning_configs_and_logs_ignored": true
+}

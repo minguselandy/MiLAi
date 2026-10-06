@@ -1,7 +1,7 @@
 {
-  "status": "CLOSED_BOTH_ORIGINAL_R3_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
-  "observed_at": "2026-10-06T19:38:50+00:00",
-  "previous_report_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
+  "status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+  "observed_at": "2026-10-06T20:07:09+00:00",
+  "previous_report_commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -48,19 +48,19 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
-    "observed_at": "2026-10-06T19:38:50+00:00",
+    "commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
+    "observed_at": "2026-10-06 19:59 UTC",
     "Fast": {
-      "run_id": 37519233519,
-      "status": "in_progress",
-      "conclusion": null
+      "run_id": 37520873722,
+      "status": "completed",
+      "conclusion": "success"
     },
     "Full": {
-      "run_id": 37519233620,
+      "run_id": 37520873738,
       "status": "in_progress",
       "conclusion": null
     },
-    "new_report_CI_separate": true
+    "new_source_CI_separate": true
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -978,7 +978,7 @@
     "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
-  "publication_scope": "4 Lab documentation/status files; no source/tests/config/runtime/workflow edits or new generation/embedding calls. Closed experiment results and source declaration unchanged.",
+  "publication_scope": "13Labfiles:4source/3existingtests/6docs-status-declaration. No Product/Archive/workflow changes.",
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
     "declared_at": "2026-10-06T05:51:11.524187+00:00",
@@ -1644,7 +1644,7 @@
     "staged_diff": "PASS_SEVEN_REPORT_FILES_ONLY",
     "source_draft_excluded": true
   },
-  "latest_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+  "latest_source_commit": "CURRENT_PUBLICATION_COMMIT_BIND_ON_FREEZE",
   "model_calls_since_previous_report_scope": "Fixed Reader2 plus both original R3. Stage began before previous snapshot publication214; not new costs solely after214 and not added again to cumulative ledger.",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
@@ -1961,20 +1961,19 @@
     "historical_raw_results_and_predeclarations_unchanged": true
   },
   "current_publication_checks": {
-    "status": "PASS",
-    "changed_Lab_documentation_status_files": 4,
-    "source_tests_repeated": false,
+    "status": "PASS_LIGHTWEIGHT_PUBLICATION_CHECKS",
+    "source_engineering_detail_manifest": "milai-post87c-scope-contract-revision-read-development-20261007.json",
+    "source_checks_passed": true,
+    "broad_tests_repeated": false,
     "new_model_calls_for_publication": 0,
-    "source_config_runtime_workflow_changed": false,
     "Product_schema_API_permissions_Canonical_changed": false,
     "closed_results_and_original_declaration_preserved": true,
     "continuous_accounting_unchanged": true,
-    "new_report_CI_separate": true,
+    "new_source_CI_separate": true,
     "JSON_files_parsed": 2,
-    "relative_links_checked": 94,
-    "closed_counts_and_continuous_ledger_match": true,
-    "serial_lease_free": true,
-    "known_closed_process_handles_missing": true,
+    "relative_links_checked": 138,
+    "changed_Lab_files": 13,
+    "private_preparation_ignored": true,
     "diff_check_passed": true
   },
   "stage_C_first_user_B0_review": {
@@ -6273,7 +6272,7 @@
       "ci_correction_in_this_commit": true
     }
   },
-  "latest_source_commit_scope": "Frozenbaa source for closed fixed Reader2 and both original R3; current report changes documentation only. Next semantic action/revision context repair not implemented.",
+  "latest_source_commit_scope": "This source publication. Exact Git identity will be bound to frozen config and own CI before HTTP; latest closed model source remains baa.",
   "ci_compatibility_correction": {
     "status": "CORRECTION_INCLUDED_IN_PREPARED6e_OWN_FAST_SUCCESS_REAL_CHAIN_NOT_RUN",
     "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
@@ -6392,17 +6391,12 @@
     "scope_extension": "Three already-exposed original M events added to corrected9; all actual packets/states, no new Writer/Judge"
   },
   "latest_prepared_execution": {
-    "status": "NO_ACTIVE_QUEUE_FIXED_READER_AND_BOTH_ORIGINAL_R3_CLOSED",
-    "original_R3_planned_and_actual_generation_calls": [
-      44,
-      36
-    ],
-    "actual_embedding_requests": [
-      54,
-      51
-    ],
+    "status": "FIXED_READER2_AND_ORIGINAL_GLOBAL_R3_36_PREPARED_NOT_ADMITTED",
+    "detail_manifest": "milai-post87c-scope-contract-revision-read-development-20261007.json",
     "candidate_selected": false,
-    "next": "Fix actual semantic action selection and revision context through existing entries before new common prefix; no new warning/Judge platform."
+    "actual_generation_calls": 0,
+    "actual_embedding_requests": 0,
+    "own_source_CI_required_before_HTTP": true
   },
   "historical_source_CI_before_common_D_R3": {
     "commit": "68a3721ae19927a516706ddcf2431fe6762c65fc",
@@ -6499,10 +6493,10 @@
     "new_report_CI_separate": true
   },
   "latest_execution_summary": {
-    "observed_at": "2026-10-06T19:24:35.981247+00:00",
+    "observed_at": "2026-10-06T20:07:09+00:00",
     "actual_experiment_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
     "active_model_queue": false,
-    "source_repair_status": "CLOSED_BOTH_ORIGINAL_R3_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
+    "source_repair_status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
     "candidate_selected": false,
     "same_version_four_arm_prefix_admitted": false,
     "stable_method_advantage_established": false,
@@ -6892,9 +6886,9 @@
     "new_queue_live": true
   },
   "latest_publication_verification": {
-    "observed_at": "2026-10-06T19:38:50+00:00",
+    "observed_at": "2026-10-06T20:07:09+00:00",
     "summary_document": "docs/MILAI_EDIT_EXECUTION_STATUS_20261007.md",
-    "previous_report_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
+    "previous_report_commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
     "actual_experiment_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
     "closed_results_manifest": "milai-post87c-claim-revision-execution-20261007.json",
     "closed_results_changed": false,
@@ -6905,10 +6899,10 @@
     "existing_serial_lease_free": true,
     "continuous_accounting_unchanged": true,
     "static_contract_observation": {
-      "feature_schema_allows_overrides_with_empty_conditions": true,
+      "feature_schema_allows_overrides_with_empty_conditions": false,
       "executor_requires_override_scope_relation": true,
       "related_observed_rejection": "EDIT_OVERRIDE_SCOPE_REQUIRED",
-      "source_repair_implemented": false,
+      "source_repair_implemented": true,
       "real_model_recheck_completed": false
     },
     "same_version_four_arm_prefix_started": false,
@@ -6916,6 +6910,16 @@
     "stable_method_advantage_established": false,
     "reserved_16_users_read": false,
     "goal_complete": false,
-    "rollback_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4"
-  }
+    "rollback_commit": "e4f1a54ef9cbc23560b36a90d23e2566ed6ffe0d",
+    "publication_contains_source_changes": true
+  },
+  "scope_contract_revision_read_development": {
+    "detail_manifest": "milai-post87c-scope-contract-revision-read-development-20261007.json",
+    "status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+    "new_model_calls": 0,
+    "new_embedding_requests": 0,
+    "own_Fast_before_HTTP_required": true,
+    "own_Full_before_prefix_required": true
+  },
+  "latest_actual_execution_since_previous_report_scope": "Last closed baa stage retained as historical evidence; this source preparation adds0 calls and is not a new run of those results."
 }
