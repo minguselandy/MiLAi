@@ -1,5 +1,12 @@
 # MiLAi Lab 当前状态
 
+**2026-10-06T16:34:41.738189+00:00：开发CLI测试替身补齐，9个实际维护断点已分列。**
+
+`68a3721`的Core/边界/外部adapter检查成功；foundation失败于旧UnknownRun/KnownRun测试替身缺少新增`_semantic_retriever`接口，尚未进入相应维护断言。仅补两处替身方法，不在运行时增加兜底。相应CLI4项及CI实际失败组98项均通过，Ruff通过；本提交自身CI另查。
+已整理计划6.3的9事件表：8个闭合87c事件加1个历史真实纯查询控制，分开旧目标存在/交付、当前事实、实际动作、要求完成、非目标损伤与来源忠实性。未知不判成功，送达后空提案不同于合法不写，保留财务数值也不同于保留其发生时间。不新增运行时字段、评分模型或修改旧标签。
+12对固定状态L/普通补齐/D/H及原R3自己的空库配置已准备，真实调用仍0，先完成检索选择再跑原R3两分支和同版四组65/277；全部原范围保持。
+[维护断点9事件](../data/manifests/milai-post87c-maintenance-breakpoints-development-20261007.json) · [12对检索声明](../data/manifests/milai-post87c-fixed-state-retrieval12-development-20261007.json)。下方保留历史时点。
+
 **2026-10-06T16:18:02.827415+00:00：修复可选测试归属，准备计划6.2的12对检索对照。**
 
 `47aa6a9` Core实际已通过登记/边界/Ruff/mypy，但新检索测试在无可选依赖的Core组收集失败（langchain_core缺失）。五项行为原样移入已有foundation的`test_edit_benchmark_wiring.py`，现有16项通过，Ruff和verification matrix通过；不改workflow、依赖或用skip代替执行。

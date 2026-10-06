@@ -1,3 +1,25 @@
+# 2026-10-06T16:34:41.738189+00:00: actual failed CLI group fixed, offline maintenance diagnosis prepared
+
+Goalactive. This turn isprogress, notblocked:68a Core/registry/boundary/externalpass;
+foundation failed only2 stale CLI testdoubles lackingnew _semantic_retriever method.
+Add method returningNone toUnknownRun/KnownRun tests; no productionfallback/source
+orworkflow/dependency change. CLI4 and actual failed CI group98/Ruffpass, no broad
+localrepetition. Publish5 Lab files:1test/4reports including9 actual maintenance
+rows (8closed87c plus1historical7cc B1 purequery), unknowns retained, no newscore.
+12 actual query-statecohort fixed, configs and thin Root SDK-helper prepared;
+L/plainfill offline shows petcard foundbyquantity but foodstillabsent.7direct/
+1oldcontext/4missingfact. Freeze/admit newexactcommit afterownFast; prior68source
+archive unusedmodel0, do notalter it. Readermax48/coalesceexactsamewithinpair,
+embeddingsallmeteredexistingledger, no W/J/bankwrites. OriginalR3two44/36branches
+waitcommonchoice thenall4ownempty. Fullbeforeprefix/candidate/merge.
+Ledger39340/150138226known150249941charged,embed965219,historicunknown3;0newcalls,
+endpointIDs Qwen3.6-35B-A3B-FP8/bge-m3 verifiedGET andserialleaseavailable16:25.
+Actualstates Rootnotesselectedsource/notindependentaudit; nooracle/goldrouting.
+Original65/277/native/drift/ablation/tighterbudget/16reserved/external/Host/recovery/
+sixdeliverables remain, ProductNO_GO PR85draftunmerged. No agent/modelfamily/
+platform/Attention/budget/retry/hotchange/idealstate/hashgates. Raw/privateconfigs/
+cohort/HTTP/DB ignored, Product/Archive/workflow/API/permissions/Canonical unchanged.
+
 # 2026-10-06T16:18:02.827415+00:00: foundation test ownership fixed, plan6.2 actual-state cohort prepared
 
 Previous turn made progress:47aa published11 files, ownCI revalidated this turn.

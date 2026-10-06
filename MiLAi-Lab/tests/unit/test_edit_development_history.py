@@ -78,6 +78,9 @@ def test_unknown_maintenance_stops_without_retry_or_other_arm_and_keeps_accounti
             root.mkdir()
             calls.append(self)
 
+        def _semantic_retriever(self):
+            return None
+
         def maintain(self, service, observed, key):
             assert service.records() == []
             assert "REVIEW_ONLY_SECRET" not in str(observed.turns)
@@ -160,6 +163,9 @@ def test_multiple_readers_follow_role_preserving_maintenance_on_real_empty_banks
             self.closed = False
             root.mkdir()
             calls.append(self)
+
+        def _semantic_retriever(self):
+            return None
 
         def maintain(self, service, observed, key):
             assert service.records() == []

@@ -1,7 +1,7 @@
 {
-  "status": "FOUNDATION_TEST_PLACEMENT_FIXED_RETRIEVAL12_PREPARED_OWN_FAST_PENDING_NO_CANDIDATE",
-  "observed_at": "2026-10-06T16:18:50.018210+00:00",
-  "previous_report_commit": "47aa6a9eed1c14847f50ae91937fa1b00d70c9f2",
+  "status": "CLI_TEST_DOUBLES_FIXED_RETRIEVAL12_PREPARED_NINE_EVENT_DIAGNOSIS_OWN_FAST_PENDING",
+  "observed_at": "2026-10-06T16:34:41.738189+00:00",
+  "previous_report_commit": "68a3721ae19927a516706ddcf2431fe6762c65fc",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -579,19 +579,20 @@
   },
   "latest_checkpoint_document": "MILAI_EDIT_EXECUTION_STATUS_20261007.md",
   "current_method_source_ci": {
-    "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
-    "observed_at": "2026-10-06T16:02:00+00:00",
+    "commit": "68a3721ae19927a516706ddcf2431fe6762c65fc",
+    "observed_at": "2026-10-06 16:30:56 UTC",
     "Fast": {
-      "run_id": 37490884803,
+      "run_id": 37494741480,
       "status": "completed",
       "conclusion": "failure"
     },
     "Full": {
-      "run_id": 37490884560,
+      "run_id": 37494741493,
       "status": "in_progress",
       "conclusion": null
     },
-    "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
+    "Core": "success",
+    "foundation_failure": "2 stale CLI test doubles; now corrected in this commit, own CI pending"
   },
   "normal_SDK_clause_support_collection": {
     "status": "ROOT_REVIEWED341_COMMITTED651_FAST_FULL_SUCCESS_NO_NEW_SDK_MODEL_COHORT",
@@ -972,10 +973,10 @@
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
   "publication_scope": {
-    "Lab_files": 7,
+    "Lab_files": 5,
     "source_files": 0,
-    "test_files": 2,
-    "report_and_declaration_files": 5,
+    "test_files": 1,
+    "report_and_declaration_files": 4,
     "new_model_processes_started_for_publication": 0,
     "Product_Archive_workflow": "UNCHANGED"
   },
@@ -1645,7 +1646,7 @@
     "source_draft_excluded": true
   },
   "latest_source_commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
-  "model_calls_since_previous_report_scope": "Since47aa6a9: unchanged optional tests relocated and actual-state diagnosis prepared; no real model dispatch",
+  "model_calls_since_previous_report_scope": "Since68a3721: CLI test double correction and existing-state maintenance diagnosis; no real model dispatch",
   "transport300_reviewed_results": {
     "status": "ALL102_COMPLETED_ROOT_REVIEWED",
     "source_commit": "7cc1363977a5ebc74ea1d43064d40fe7a329e1b5",
@@ -6331,5 +6332,19 @@
     "verification_matrix": "PASS",
     "runtime_workflow_dependency_changes": false,
     "new_real_model_calls": 0
+  },
+  "CLI_test_double_correction": {
+    "production_source_unchanged": true,
+    "failed_group_tests_passed": 98,
+    "CLI_tests_passed": 4,
+    "Ruff_files": 1,
+    "new_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION"
+  },
+  "maintenance_breakpoint_diagnosis": {
+    "detail_manifest": "milai-post87c-maintenance-breakpoints-development-20261007.json",
+    "actual_events": 9,
+    "model_calls": 0,
+    "not_independent_audit_or_method_score": true
   }
 }
