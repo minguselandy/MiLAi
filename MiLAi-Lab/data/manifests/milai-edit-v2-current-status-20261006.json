@@ -1,7 +1,7 @@
 {
   "status": "CLOSED_BOTH_ORIGINAL_R3_ROOT_REVIEWED_NOT_METHOD_CONFIRMATION",
-  "observed_at": "2026-10-06T19:24:35.981247+00:00",
-  "previous_report_commit": "2149886575d30ece51d4319d3536246bef1c4af7",
+  "observed_at": "2026-10-06T19:38:50+00:00",
+  "previous_report_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -48,15 +48,15 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "2149886575d30ece51d4319d3536246bef1c4af7",
-    "observed_at": "2026-10-06 19:23:28 UTC",
+    "commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
+    "observed_at": "2026-10-06T19:38:50+00:00",
     "Fast": {
-      "run_id": 37515840660,
-      "status": "completed",
-      "conclusion": "success"
+      "run_id": 37519233519,
+      "status": "in_progress",
+      "conclusion": null
     },
     "Full": {
-      "run_id": 37515840671,
+      "run_id": 37519233620,
       "status": "in_progress",
       "conclusion": null
     },
@@ -978,7 +978,7 @@
     "complete_R0_R5_E0_E5_and_six_deliverables_remain_incomplete": true,
     "rollback_reference": "8c80445c68c1023854da3c397211f05741239c61"
   },
-  "publication_scope": "6 Lab report/status files; no source/tests/config/runtime/workflow edits or repeated model calls for publication. Original source declaration and old results preserved.",
+  "publication_scope": "4 Lab documentation/status files; no source/tests/config/runtime/workflow edits or new generation/embedding calls. Closed experiment results and source declaration unchanged.",
   "transport300_continuation_declaration": {
     "status": "PREDECLARED102_COMPLETED66_REMAINING36_ROOT_REVIEWED",
     "declared_at": "2026-10-06T05:51:11.524187+00:00",
@@ -1962,24 +1962,19 @@
   },
   "current_publication_checks": {
     "status": "PASS",
-    "JSON_files_parsed": 2,
-    "relative_links_checked": 130,
-    "Root_actual_state_rows": 44,
-    "Root_R3_complete_answers": 36,
-    "R3_generation_receipts": 80,
-    "embedding_receipts": 105,
-    "fixed_Reader_receipts": 2,
-    "continuous_ledger_all_stage_receipts_exact": true,
-    "operation_rejections": 4,
-    "unprocessed_event_gaps": 5,
+    "changed_Lab_documentation_status_files": 4,
     "source_tests_repeated": false,
+    "new_model_calls_for_publication": 0,
     "source_config_runtime_workflow_changed": false,
     "Product_schema_API_permissions_Canonical_changed": false,
-    "original_declaration_646_results_and_1858_snapshot_preserved": true,
+    "closed_results_and_original_declaration_preserved": true,
+    "continuous_accounting_unchanged": true,
+    "new_report_CI_separate": true,
+    "JSON_files_parsed": 2,
+    "relative_links_checked": 94,
+    "closed_counts_and_continuous_ledger_match": true,
     "serial_lease_free": true,
-    "normal_process_handles_missing": true,
-    "new_model_calls_for_publication": 0,
-    "changed_Lab_report_files": 6,
+    "known_closed_process_handles_missing": true,
     "diff_check_passed": true
   },
   "stage_C_first_user_B0_review": {
@@ -6489,7 +6484,7 @@
   },
   "latest_experiment_source_ci": {
     "commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
-    "observed_at": "2026-10-06 19:03:50 UTC",
+    "observed_at": "2026-10-06T19:38:50+00:00",
     "Fast": {
       "run_id": 37512197955,
       "status": "completed",
@@ -6895,5 +6890,32 @@
     },
     "model_calls_since_previous_report_scope": "Snapshot at observed_at; received responses are progress, not a terminal/reconciled complete stage.",
     "new_queue_live": true
+  },
+  "latest_publication_verification": {
+    "observed_at": "2026-10-06T19:38:50+00:00",
+    "summary_document": "docs/MILAI_EDIT_EXECUTION_STATUS_20261007.md",
+    "previous_report_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4",
+    "actual_experiment_source_commit": "baa0e70a8458fcce84722e72403ced8ce87c82ef",
+    "closed_results_manifest": "milai-post87c-claim-revision-execution-20261007.json",
+    "closed_results_changed": false,
+    "new_generation_calls": 0,
+    "new_embedding_requests": 0,
+    "active_model_queue": false,
+    "known_closed_process_handles_missing": true,
+    "existing_serial_lease_free": true,
+    "continuous_accounting_unchanged": true,
+    "static_contract_observation": {
+      "feature_schema_allows_overrides_with_empty_conditions": true,
+      "executor_requires_override_scope_relation": true,
+      "related_observed_rejection": "EDIT_OVERRIDE_SCOPE_REQUIRED",
+      "source_repair_implemented": false,
+      "real_model_recheck_completed": false
+    },
+    "same_version_four_arm_prefix_started": false,
+    "candidate_selected": false,
+    "stable_method_advantage_established": false,
+    "reserved_16_users_read": false,
+    "goal_complete": false,
+    "rollback_commit": "d8394aeaf8a9619930a87e05bd0b3f8476cf47d4"
   }
 }

@@ -1,3 +1,23 @@
+# 2026-10-06 19:38:50 UTC: user-requested current execution summary publication
+
+Current request is summary and GitHub publication. Worktree/head d839 initially
+clean and remote PR85 open/draft/unmerged; frozen experiment source remains baa,
+own Fast/Full success, d839 own Fast/Full still running at this verification.
+Closed ledger39542/151091320known151203035charged/embed973335/unknown3 unchanged;
+three known experiment PIDs missing, existing serial lease free. No new model,
+embedding, source/test/config/workflow changes or delegation for publication.
+Keep closed R3 results and declaration unchanged; first M preservation positive,
+second M general rule lost and scope answers incomplete, no final candidate.
+Static reading confirms overrides with empty conditions allowed by feature schema
+but rejected by executor. Repair NOT implemented/rechecked by this report.
+Publish only4 Lab documentation/status files with JSON/link/count/ledger/diff
+checks; no repeated source tests. Verify new own report CI and exact remote head.
+Rollbackd839; Product/API/permissions/Canonical/Archive/workflow unchanged,
+private artifacts ignored. Full goal remains active and unfinished, including
+8/65/277/native/drift/ablation/tighterbudget/16reserved/external/Host/recovery/
+sixdeliverables. Single Qwen generation family/BGE; no PR85 merge authorized.
+Lower dated entries preserve their original historical states.
+
 # 2026-10-06 19:24:35 UTC: both original R3 on baa closed; preserve opposite mechanism results
 
 Previous goal turn made publication progress2149886. This turn read post87c
