@@ -1,17 +1,15 @@
 # MiLAi Lab 当前状态
 
-**2026-10-06 07:52:28 UTC（北京时间15:52:28）：**Stage C保持冻结源码7b82与I2/Qwen3.6共同配置运行。
-B0首位用户前8会话的维护/评估检查点均已保存：整体8/32、8/32，B1/B2/M尚未启动。
-活动快照201请求/200响应，8 Writer/20 Reader/172 Judge，200 stop、784,060 known，
-1待响应、0 HTTP失败文件；不是最终成本或语义通过。8维护有16 committed/10 no_change、
-无unprocessed；首会话第三QA仍有无依据“未发生”断言，作者Correct标签保留。
-源码自身Fast/Full成功，上一文档00ac的CI查询时仍运行中，新报告CI另查。
-12次身份修复只是有限更正正例；来源/生命周期失败不改，没有M优势或最终候选。
-65会话续接、消融与较紧预算尚未执行；完整四组/原生/漂移/保留/外部/Host/六项交付仍待完成。
-本次只整理5个Lab文档/状态文件，未启动新调用，冻结队列继续自然执行；不改源码/配置。
-Product NO_GO、PR85 draft未合并，原始HTTP/数据库/日志保持ignored。
-[最新总结](MILAI_EDIT_CHECKPOINT_20261006.md) ·
-[当前状态](../data/manifests/milai-edit-v2-current-status-20261006.json)。下方为各自时间历史快照。
+**2026-10-06 08:12:27 UTC／首位B0开发前缀复核完成，主队列继续。**
+作者更新2/19 Correct（有效16）、QA12/20；两个None来自空JSON，一次Omitted为实际无效标签，原样保留。
+原作者聚合离线成功。前3会话形成16事项、后5state/版本/支持不变，漏掉换岗目标、偏好确认和实际换岗；
+不能奖励未写入的“保持”。最后10个no_change被输出为作者兼容extracted，实际delta0，三视图分开。
+该用户200对HTTP/usage、8提案/状态、20回答已复核；8次真实输入与模板/usage一致，当前80,537字符
+完整发送解析，仍非事实完成。ordinal3/7仅余176/252输入token；schema/来源元数据负担仍大。
+Root不是独立Judge/全源审计。B0整体14维护/13评估（各32），其他组未开始；活动333请求/332响应、
+1,245,795 known/1待响应/0HTTP失败文件，不作闭合成本。PID178764仍活，源码7b82/配置冻结。
+源码自身Fast/Full成功，94b3报告Fast success/Full运行中，本报告CI另查。继续原完整计划；Product NO_GO。
+[本次结果](../data/manifests/milai-edit-post-b0-stage-c-first-user-b0-prefix-results-20261006.json) · [完整检查点](MILAI_EDIT_CHECKPOINT_20261006.md)。以下为历史快照。
 
 **2026-10-06 15:06:50 Asia/Shanghai：**冻结7cc原141任务全部入账：141尝试/140响应/
 604,072 known，原超时确认未提交、actual=null/保守收费60,013、不重发。传输续行102已完成

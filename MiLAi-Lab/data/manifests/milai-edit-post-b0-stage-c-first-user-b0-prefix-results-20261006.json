@@ -1,0 +1,595 @@
+{
+  "version": "milai-edit-post-b0-stage-c-first-user-b0-prefix-results-v1",
+  "status": "ROOT_REVIEWED_FIRST_USER_FIRST8_ONLY_MAIN_PREFIX_STILL_RUNNING",
+  "observed_at": "2026-10-06T08:08:28.191525+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "experiment_name": "milai-edit-post-b0-unit-correspondence-prefix-v1",
+  "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+  "interface": "I2",
+  "model_family": "Qwen3.6 only",
+  "arm": "B0",
+  "development_user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+  "original_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "own_empty_start": true,
+  "sessions": 8,
+  "update_opportunities": 19,
+  "QA_opportunities": 20,
+  "author_checkout_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+  "saved_author_labels": {
+    "updates": {
+      "Correct": 2,
+      "Omission": 14,
+      "None": 2,
+      "Omitted": 1
+    },
+    "QA": {
+      "Correct": 12,
+      "Hallucination": 7,
+      "Omission": 1
+    },
+    "update_valid_denominator": 16,
+    "update_all_denominator": 19,
+    "QA_valid_denominator": 20,
+    "QA_all_denominator": 20,
+    "labels_unchanged": true
+  },
+  "original_author_aggregate": {
+    "execution": "SUCCESS_OFFLINE_ON_ACTUAL_PINNED_CHECKOUT_SAVED_RECORDS",
+    "exception": null,
+    "overall_score": {
+      "memory_integrity": {
+        "recall(all)": 0.6639344262295082,
+        "recall(valid)": 0.7570093457943925,
+        "weighted_recall(all)": 0.6844262295081968,
+        "weighted_recall(valid)": 0.780373831775701,
+        "memory_valid_importance_sum": 80.25,
+        "memory_importance_sum": 91.5,
+        "memory_valid_num": 107,
+        "memory_num": 122
+      },
+      "memory_accuracy": {
+        "interference_accuracy(all)": 1.0,
+        "interference_accuracy(valid)": 1.0,
+        "interference_memory_valid_num": 7,
+        "interference_memory_num": 7,
+        "target_accuracy(all)": 1.0,
+        "target_accuracy(valid)": 1.0,
+        "target_memory_valid_num": 12,
+        "target_memory_num": 12,
+        "weighted_accuracy(all)": 0.5,
+        "weighted_accuracy(valid)": 0.65,
+        "memory_valid_num": 20,
+        "memory_num": 26
+      },
+      "memory_extraction_f1": 0.7980295566502463,
+      "memory_update": {
+        "correct_update_memory_ratio(all)": 0.10526315789473684,
+        "correct_update_memory_ratio(valid)": 0.125,
+        "hallucination_update_memory_ratio(all)": 0.0,
+        "hallucination_update_memory_ratio(valid)": 0.0,
+        "omission_update_memory_ratio(all)": 0.7368421052631579,
+        "omission_update_memory_ratio(valid)": 0.875,
+        "other_update_memory_ratio(all)": 0.0,
+        "other_update_memory_ratio(valid)": 0.0,
+        "update_memory_valid_num": 16,
+        "update_memory_num": 19
+      },
+      "question_answering": {
+        "correct_qa_ratio(all)": 0.6,
+        "correct_qa_ratio(valid)": 0.6,
+        "hallucination_qa_ratio(all)": 0.35,
+        "hallucination_qa_ratio(valid)": 0.35,
+        "omission_qa_ratio(all)": 0.05,
+        "omission_qa_ratio(valid)": 0.05,
+        "qa_valid_num": 20,
+        "qa_num": 20
+      },
+      "memory_type_accuracy": {
+        "Relationship Memory": {
+          "memory_integrity_acc": 0.0,
+          "memory_update_acc": 0.0,
+          "total_num": 8,
+          "memory_acc": 0.0
+        },
+        "Event Memory": {
+          "memory_integrity_acc": 0.05263157894736842,
+          "memory_update_acc": 0.0,
+          "total_num": 19,
+          "memory_acc": 0.05263157894736842
+        },
+        "Persona Memory": {
+          "memory_integrity_acc": 0.6611570247933884,
+          "memory_update_acc": 0.01652892561983471,
+          "total_num": 121,
+          "memory_acc": 0.6776859504132231
+        }
+      }
+    },
+    "not_full_four_user_or_four_arm_aggregate": true
+  },
+  "supplemental_per_user_metrics": {
+    "formation_recall_all": 0.6639344262295082,
+    "formed_memory_accuracy_all": 0.5,
+    "update_correct_all_opportunities": 0.10526315789473684,
+    "update_correct_scored": 0.10526315789473684,
+    "update_correct_valid": 0.125,
+    "qa_correct_all": 0.6,
+    "qa_correct_valid": 0.6,
+    "denominators": {
+      "total_updates": 19,
+      "empty_update_retrieval": 0,
+      "scored_updates": 19,
+      "valid_scored_updates": 16,
+      "updates_missing_original": 0,
+      "judge_failures": 0,
+      "formed_sessions": 8,
+      "formation_reference_points": 122,
+      "formation_valid_judgments": 107,
+      "formed_memory_outputs": 26,
+      "formed_memory_valid_judgments": 20,
+      "update_scored_records": 19,
+      "update_valid_judgments": 16,
+      "update_unscored_opportunities": 0,
+      "qa_opportunities": 20,
+      "qa_valid_judgments": 20
+    },
+    "update_information_condition": "reference-guided read-only retrieval; separate from QA"
+  },
+  "actual_generation": {
+    "requests": 200,
+    "confirmed_responses": 200,
+    "finish_reasons": {
+      "stop": 200
+    },
+    "unknown_generation_outcomes_in_this_scope": 0,
+    "cost": {
+      "input_tokens": 528391,
+      "completion_tokens": 255669,
+      "known_tokens": 784060
+    },
+    "roles": {
+      "Writer": {
+        "calls": 8,
+        "input_tokens": 170543,
+        "completion_tokens": 25358,
+        "known_tokens": 195901
+      },
+      "Reader": {
+        "calls": 20,
+        "input_tokens": 28054,
+        "completion_tokens": 30466,
+        "known_tokens": 58520
+      },
+      "Judge": {
+        "calls": 172,
+        "input_tokens": 329794,
+        "completion_tokens": 199845,
+        "known_tokens": 529639
+      }
+    },
+    "Judge_serial_interval": [
+      1,
+      172
+    ],
+    "only_first_user_first8_not_entire_live_phase": true,
+    "reasoning_tokens_counted_once_in_completion": true
+  },
+  "source_coverage": {
+    "per_session": [
+      {
+        "session": 0,
+        "original_characters": 1632,
+        "covered_characters": 1632,
+        "sent_core_characters_union": 1632,
+        "response_received_core_characters_union": 1632,
+        "complete_parsed_core_characters_union": 1632
+      },
+      {
+        "session": 1,
+        "original_characters": 2017,
+        "covered_characters": 2017,
+        "sent_core_characters_union": 2017,
+        "response_received_core_characters_union": 2017,
+        "complete_parsed_core_characters_union": 2017
+      },
+      {
+        "session": 2,
+        "original_characters": 7045,
+        "covered_characters": 7045,
+        "sent_core_characters_union": 7045,
+        "response_received_core_characters_union": 7045,
+        "complete_parsed_core_characters_union": 7045
+      },
+      {
+        "session": 3,
+        "original_characters": 17224,
+        "covered_characters": 17224,
+        "sent_core_characters_union": 17224,
+        "response_received_core_characters_union": 17224,
+        "complete_parsed_core_characters_union": 17224
+      },
+      {
+        "session": 4,
+        "original_characters": 16976,
+        "covered_characters": 16976,
+        "sent_core_characters_union": 16976,
+        "response_received_core_characters_union": 16976,
+        "complete_parsed_core_characters_union": 16976
+      },
+      {
+        "session": 5,
+        "original_characters": 10697,
+        "covered_characters": 10697,
+        "sent_core_characters_union": 10697,
+        "response_received_core_characters_union": 10697,
+        "complete_parsed_core_characters_union": 10697
+      },
+      {
+        "session": 6,
+        "original_characters": 12377,
+        "covered_characters": 12377,
+        "sent_core_characters_union": 12377,
+        "response_received_core_characters_union": 12377,
+        "complete_parsed_core_characters_union": 12377
+      },
+      {
+        "session": 7,
+        "original_characters": 12569,
+        "covered_characters": 12569,
+        "sent_core_characters_union": 12569,
+        "response_received_core_characters_union": 12569,
+        "complete_parsed_core_characters_union": 12569
+      }
+    ],
+    "total_current_characters": 80537,
+    "character_delivery_is_not_fact_completion": true
+  },
+  "actual_maintenance": {
+    "created_records": 16,
+    "rewrite_commits": 0,
+    "no_change_receipts": 10,
+    "rejected_receipts": 0,
+    "unprocessed_sessions": 0,
+    "state_record_counts": [
+      5,
+      8,
+      16,
+      16,
+      16,
+      16,
+      16,
+      16
+    ],
+    "final_records": 16,
+    "final_units": 16,
+    "final_record_revisions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "maximum_record_units": 1,
+    "maximum_record_content_characters": 859,
+    "unchanged_complete_state_sessions": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "actual_matter_organization_is_early_observation_not_long_history_success": true
+  },
+  "three_views": {
+    "outputs": 26,
+    "actual_new_records": 16,
+    "no_change_existing_records_in_official_extracted": 10,
+    "final_session_delta_records": 0,
+    "final_session_official_extracted_records": 10,
+    "old_accepted_body_is_not_newly_formed_current_session_content": true
+  },
+  "invalid_update_label_diagnosis": [
+    {
+      "session": 3,
+      "author_Judge_serial": 132,
+      "saved_label": null,
+      "actual_response_JSON": {},
+      "parse_succeeded": true,
+      "cause": "No evaluation_result in a parsed empty JSON object."
+    },
+    {
+      "session": 6,
+      "author_Judge_serial": 143,
+      "saved_label": null,
+      "actual_response_JSON": {},
+      "parse_succeeded": true,
+      "cause": "No evaluation_result in a parsed empty JSON object."
+    },
+    {
+      "session": 7,
+      "author_Judge_serial": 153,
+      "saved_label": "Omitted",
+      "parse_succeeded": true,
+      "cause": "Actual emitted label outside the original update vocabulary; not silently mapped."
+    }
+  ],
+  "wire_capacity_diagnosis": {
+    "effective_input_limit_after_output_and_512_safety": 32256,
+    "all8_saved_prompt_counts_match_actual_usage_and_local_template": true,
+    "packet_and_schema_exactly_match_actual_HTTP": true,
+    "separate_token_counts_nonadditive": true,
+    "sessions": [
+      {
+        "session": 0,
+        "whole_request_input_tokens": 3907,
+        "known_completion_tokens": 4387,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 28349,
+        "independent_section_token_counts": {
+          "records": 1,
+          "evidence": 786,
+          "historical_support": 1,
+          "source_table": 1228,
+          "response_schema": 374,
+          "current_plain_body": 363,
+          "redelivered_plain_body": 0
+        },
+        "full_current_chars_sent": 1632,
+        "records_after": 5,
+        "units_after": 5,
+        "max_record_units": 1,
+        "max_record_characters": 516,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 1,
+        "whole_request_input_tokens": 8055,
+        "known_completion_tokens": 3571,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 24201,
+        "independent_section_token_counts": {
+          "records": 604,
+          "evidence": 1111,
+          "historical_support": 265,
+          "source_table": 1346,
+          "response_schema": 3214,
+          "current_plain_body": 380,
+          "redelivered_plain_body": 253
+        },
+        "full_current_chars_sent": 2017,
+        "records_after": 8,
+        "units_after": 8,
+        "max_record_units": 1,
+        "max_record_characters": 516,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 2,
+        "whole_request_input_tokens": 18807,
+        "known_completion_tokens": 7763,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 13449,
+        "independent_section_token_counts": {
+          "records": 953,
+          "evidence": 3356,
+          "historical_support": 425,
+          "source_table": 4136,
+          "response_schema": 8422,
+          "current_plain_body": 1337,
+          "redelivered_plain_body": 538
+        },
+        "full_current_chars_sent": 7045,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 3,
+        "whole_request_input_tokens": 32080,
+        "known_completion_tokens": 1365,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 176,
+        "independent_section_token_counts": {
+          "records": 1600,
+          "evidence": 6360,
+          "historical_support": 535,
+          "source_table": 7222,
+          "response_schema": 14848,
+          "current_plain_body": 3007,
+          "redelivered_plain_body": 827
+        },
+        "full_current_chars_sent": 17224,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 4,
+        "whole_request_input_tokens": 30291,
+        "known_completion_tokens": 1186,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 1965,
+        "independent_section_token_counts": {
+          "records": 1685,
+          "evidence": 6260,
+          "historical_support": 535,
+          "source_table": 6408,
+          "response_schema": 13888,
+          "current_plain_body": 2977,
+          "redelivered_plain_body": 996
+        },
+        "full_current_chars_sent": 16976,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 5,
+        "whole_request_input_tokens": 22514,
+        "known_completion_tokens": 1716,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 9742,
+        "independent_section_token_counts": {
+          "records": 1579,
+          "evidence": 4375,
+          "historical_support": 535,
+          "source_table": 4142,
+          "response_schema": 10368,
+          "current_plain_body": 1908,
+          "redelivered_plain_body": 971
+        },
+        "full_current_chars_sent": 10697,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 6,
+        "whole_request_input_tokens": 22885,
+        "known_completion_tokens": 2204,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 9371,
+        "independent_section_token_counts": {
+          "records": 1652,
+          "evidence": 4673,
+          "historical_support": 535,
+          "source_table": 4142,
+          "response_schema": 10368,
+          "current_plain_body": 2167,
+          "redelivered_plain_body": 1010
+        },
+        "full_current_chars_sent": 12377,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      },
+      {
+        "session": 7,
+        "whole_request_input_tokens": 32004,
+        "known_completion_tokens": 3166,
+        "finish_reason": "stop",
+        "remaining_input_capacity_with_output_and_safety": 252,
+        "independent_section_token_counts": {
+          "records": 1611,
+          "evidence": 5943,
+          "historical_support": 535,
+          "source_table": 7232,
+          "response_schema": 15168,
+          "current_plain_body": 2362,
+          "redelivered_plain_body": 1000
+        },
+        "full_current_chars_sent": 12569,
+        "records_after": 16,
+        "units_after": 16,
+        "max_record_units": 1,
+        "max_record_characters": 859,
+        "actual_create_allowed": true,
+        "wire_packet_and_schema_exactly_match_saved": true
+      }
+    ],
+    "implication": "Short records reduce rewritten body size, but bound-schema presentation and source metadata still occupy large input. Sessions3/7 have176/252 input tokens left; these received complete responses, not input rejections."
+  },
+  "Root_review": {
+    "Writer_packets_and_state_pairs": 8,
+    "HTTP_usage_pairs": 200,
+    "Reader_answers_read": 20,
+    "current_User_statements_read": true,
+    "assistant_context_scope": "Partial semantic reading, including session1 and first30 turns of session3; no all-source or independent full DB audit.",
+    "findings": [
+      {
+        "session": 0,
+        "kind": "unsupported_answer_strengthening",
+        "finding": "Global initiative remains a goal. Correct core distinction does not support categorical did-not-occur assertion; original author Correct unchanged."
+      },
+      {
+        "session": 1,
+        "kind": "Reader_temporal_overqualification",
+        "finding": "Director report retained, but nurse premise response ends undetermined rather than directly using current retained job; author Hallucination preserved."
+      },
+      {
+        "session": 3,
+        "kind": "missed_durable_new_goals",
+        "finding": "Actual current user reports considering career change due to mental health, humanitarian goals and next steps; allow_create true; Writer empty, complete state unchanged."
+      },
+      {
+        "session": 4,
+        "kind": "source_sensitive_preference_omission",
+        "finding": "Initial Golden Retriever shift is interpreted by assistant and user acknowledges new preference; do not infer exclusive replacement from first utterance alone. Entire session and later explicit user Golden Retriever preference nevertheless remain unwritten."
+      },
+      {
+        "session": 5,
+        "kind": "missed_confirmation_and_plan",
+        "finding": "User explicitly mentions own Golden Retriever preference and exploring nonprofit roles/network/mentorship. Writer empty, no state repair."
+      },
+      {
+        "session": 6,
+        "kind": "missed_new_network_and_offer_context",
+        "finding": "User reports interviews/job offers and social support during transition. Writer empty; existing static social traits remain, new transition context absent."
+      },
+      {
+        "session": 7,
+        "kind": "missed_completed_change",
+        "finding": "Actual current user clearly reports transitioned to a new role and improved mental health. Ten no_change receipts preserve old September state, omit the new role; no successful preservation credit."
+      },
+      {
+        "session": 7,
+        "kind": "source_supported_answer_vs_author_label",
+        "finding": "Historical monthly income is supplied by actual old user report. Author gold says salary unknown and saved label Hallucination; source-supported income report and author scoring remain separate, no gold/label rewrite."
+      }
+    ],
+    "self_explanation_limit": "Observed model reasoning treats new career dialogue as filler and compares old redeliveries; diagnostic output, not causal proof.",
+    "no_new_semantic_scoring_platform": true
+  },
+  "conclusion": "Matter granularity has improved in this one prefix, but all five later state updates are absent despite clear new goals, confirmed preference and completed role change. No successful-preservation credit from unchanged failed updates; no M advantage or long-history stability claim.",
+  "next_action": "Continue exact frozen four-arm prefix, then preselected actual-state first-user65. Compare across arms before selecting common configuration; preserve original plan5.5 conditional current-facts-first alternative without admitting or running it now.",
+  "scope_limits": [
+    "One already-exposed development user first8, not held-out confirmation.",
+    "M/B1/B2 prefix not yet executed at the live snapshot.",
+    "Official extracted and original scoring remain unchanged; no_change old bodies are not net new state.",
+    "Root and author Judge are not independent model-family confirmation.",
+    "Source-supported historical answer and author Unknown label can disagree; original gold and labels retained."
+  ],
+  "new_model_calls_for_this_analysis_or_publication": 0,
+  "method_advantage_established": false,
+  "candidate_selected": false,
+  "product_status": "NO_GO",
+  "original_raw_responses_terminals_predeclarations_and_configs_unchanged": true
+}
