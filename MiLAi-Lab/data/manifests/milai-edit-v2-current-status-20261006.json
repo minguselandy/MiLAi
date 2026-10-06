@@ -1,7 +1,7 @@
 {
-  "status": "PARTIAL_DEVELOPMENT_PROGRESS_FIRST_POST_B0_R3_REVIEWED",
-  "observed_at": "2026-10-06T08:37:11.247179+08:00",
-  "previous_report_commit": "8cd0371d01eee26407c87543593deca6c0d0ed63",
+  "status": "PARTIAL_DEVELOPMENT_PROGRESS_OLD_QUEUE_RESUMED_RECHECK_PREPARED",
+  "observed_at": "2026-10-06T09:10:39.590604+08:00",
+  "previous_report_commit": "4c90f155e30803e11f4083a2731f1d410bf21725",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -9,8 +9,8 @@
       "evaluation": 277
     },
     "B1": {
-      "maintenance": 108,
-      "evaluation": 108
+      "maintenance": 113,
+      "evaluation": 112
     },
     "B2": {
       "maintenance": 0,
@@ -22,7 +22,7 @@
     }
   },
   "declared_sessions_per_arm": 277,
-  "old_queue_live": false,
+  "old_queue_live": true,
   "next_candidate": {
     "source_commit": "624d15870c021b779c418459588c6c4a2b7cd2b8",
     "actual_model_calls": 80,
@@ -58,9 +58,9 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "8cd0371d01eee26407c87543593deca6c0d0ed63",
+    "commit": "4c90f155e30803e11f4083a2731f1d410bf21725",
     "Fast": {
-      "run_id": 37391847781,
+      "run_id": 37395187602,
       "conclusion": "success",
       "job_conclusions": {
         "success": 8,
@@ -68,7 +68,7 @@
       }
     },
     "Full": {
-      "run_id": 37391847792,
+      "run_id": 37395187970,
       "conclusion": "success",
       "job_conclusions": {
         "success": 21
@@ -202,10 +202,12 @@
     "One Qwen3.6 family; no cross-family generalization.",
     "Operation commits and unchanged failed states do not establish semantic success or preservation.",
     "No raw text, gold, predictions, HTTP, databases or logs published.",
-    "B1 partial at 108/277 and B2/M unstarted; no complete long-history four-arm comparison.",
     "Saved labels and supplemental original formulas are not a completed official aggregate.",
-    "Why all 76 target flags are false remains unreviewed.",
-    "Minimal formation repair has mechanical evidence only; its real recheck is not run."
+    "Minimal formation repair has mechanical evidence only; its real recheck is not run.",
+    "B1 partial at 113 maintenance / 112 evaluation and B2/M unstarted; old queue live at snapshot, not a completed four-arm comparison.",
+    "All 76 raw target flags attributed; only two Root semantic cases read, not all-76 semantic or independent audit.",
+    "Running response cost excludes pending request and is not terminal accounting.",
+    "Declared 52-call source controls are not run or admitted."
   ],
   "frozen_old_source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
   "frozen_old_config_version": "milai-edit-common-v2-i2-durability",
@@ -220,8 +222,99 @@
       32
     ],
     "fourth_user_zero_text_delta_semantic_review_complete": true,
-    "all_original_formulas_supplemented": true
+    "all_original_formulas_supplemented": true,
+    "accuracy_target_raw_attribution": {
+      "records": 76,
+      "raw_flags": {
+        "false": 76
+      },
+      "finish_reasons": {
+        "stop": 76
+      },
+      "all_actual_prompts_and_session_intervals_matched": true,
+      "all_saved_flags_equal_raw": true,
+      "parser_default_explanation_excluded": true,
+      "author_inclusion_rule": "Every atomic candidate field must occur in current-session gold; field coverage is distinct from truth support.",
+      "root_semantic_cases_read": 2,
+      "initial_case_dialogue_supported_fields_absent_from_gold": true,
+      "next_case_retained_prior_unit_texts": 17,
+      "next_case_complete_card_scored_against_current_session_only": true,
+      "all_76_semantic_audit_completed": false,
+      "labels_or_official_outputs_changed": false,
+      "new_model_calls": 0
+    }
   },
   "post_b0_detail_manifest": "milai-edit-post-b0-stage-a-and-first-r3-20261006.json",
-  "model_calls_in_new_r3_since_previous_report": 80
+  "model_calls_in_new_r3_since_previous_report": 0,
+  "old_B1_running_snapshot": {
+    "requests": 1635,
+    "responses": 1634,
+    "known_tokens_from_received_responses": 7437475,
+    "cost_status": "RUNNING_LOWER_BOUND_NOT_TERMINAL",
+    "pending_request_at_snapshot": 1,
+    "first_closed_interval": {
+      "responses": 1564,
+      "known_tokens": 6883445
+    },
+    "resumed_interval_at_snapshot": {
+      "received_responses": 70,
+      "known_tokens": 554030
+    },
+    "intervening_new_R3_known_tokens_excluded": 112173,
+    "resumed_at": "2026-10-06T08:47:38.924817+08:00",
+    "remaining_arms": [
+      "B1",
+      "B2",
+      "M"
+    ],
+    "closed_B0_skipped": true,
+    "no_hot_edits_or_request_interruption": true,
+    "historical_terminal_generation_unknown_usage": 2,
+    "active_reservation_at_snapshot": 1,
+    "active_reservation_is_not_terminal_unknown_failure": true
+  },
+  "formation_recheck": {
+    "source_commit": "4c90f155e30803e11f4083a2731f1d410bf21725",
+    "config_version": "milai-edit-post-b0-i2-formation-4c90f15",
+    "status": "OWN_CI_VERIFIED_AWAITING_OLD_CONFIRMED_BOUNDARY",
+    "declared_generation_calls": 20,
+    "actual_generation_calls": 0,
+    "events": [
+      "formation",
+      "same_scope_value_change_without_restatement",
+      "query_without_new_fact"
+    ],
+    "own_empty_banks": true,
+    "candidate_selected": false,
+    "prefix_admitted": false
+  },
+  "source_attribution_controls": {
+    "status": "DECLARED_NOT_RUN_NOT_ADMITTED",
+    "scenarios": [
+      "assistant_accurate_restatement",
+      "later_user_confirmation",
+      "assistant_unsupported_strengthening"
+    ],
+    "declared_generation_calls": 52,
+    "writer_calls": 28,
+    "reader_calls": 24,
+    "judge_calls": 0,
+    "actual_generation_calls": 0,
+    "own_empty_banks_per_arm_and_scenario": true,
+    "source_exposure": "Constructed exposed development controls; not independent or reserved-source confirmation",
+    "actual_role_and_time_required": true,
+    "source_and_config_bound": false
+  },
+  "publication_checks": {
+    "json_snapshot_and_cost_consistency": "PASS",
+    "dependency_boundary": {
+      "tracked_paths": 6431,
+      "findings": 0,
+      "status": "PASS"
+    },
+    "diff_check": "PASS",
+    "method_sources_changed": false,
+    "new_runtime_tests": "NOT_RERUN_FOR_DOCUMENTATION_ONLY_CHANGE",
+    "new_report_ci": "RECORDED_SEPARATELY_IN_PR"
+  }
 }

@@ -19,9 +19,15 @@ withdrawal and B0/M empty-query behavior failed. Matter/assertion metadata did
 persist. Root has reviewed outputs, operations, before/after and Reader behavior;
 prefix is not admitted. The first minimal opt-in repair only supplies equivalent
 generic four-arm formation examples with explicit condition/modifies for B2/M.
-Its declared own-empty formation/value/query recheck is 20 calls, not run yet;
-bind the new source identity and own CI before actual admission. Mechanical
-checks and scheduling do not select a candidate.
+Its declared own-empty formation/value/query recheck is 20 calls. The activated
+Post-B0 plan section 7.2 governs this daily minimal repair: affected checks then
+the finite real short trajectory; full existing CI before candidate/merge.
+Root binds the repaired source, records affected checks and actual own-CI status,
+and may run this limited recheck while Full remains in progress. Full success is
+still required for prefix/candidate admission; do not describe pending CI as
+passed. This explicit user-plan scheduling rule supersedes older blanket own-CI
+requirements for this finite daily recheck only. Mechanical checks do not select
+a candidate.
 Only fix the earliest observed failure; retain first attempts, use balanced common
 examples if necessary, and stop to analyze after two minimal unsuccessful repairs.
 Same-M semantic-entry ablation and one tighter-budget sensitivity precede holdout.
