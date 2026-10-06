@@ -1,3 +1,35 @@
+# 2026-10-06 23:00 UTC: B0 second user first8 closed; frozen four-arm suite stays live
+
+User asks summarize/publish current execution. Root closed/reviewed original B0
+second user0–7: update8/all15/valid14, QA10/all12/valid10. Raw Omitted1/nullQA2
+remain; pure author offline aggregation succeeds0HTTP. 173stop702202known=
+8Writer12Reader153Judge;41encoder15531. 21create1rewrite22commits,21matters84
+content/max12;0capacity/truncation/rejection/gap/newunknown/retry,empty4.
+Root read actual delivered sources/proposals/state changes and all12 fullanswers.
+3 retains2 oldclauses fully sansID but precise amounts first appear inAssistant,
+selectedUser only says increased; financialCorrect labels unchanged. 4 oldhealth
+and newfacts deliveredempty. 5 old opposing preference deliveredr2 unchanged,
+newmatter and correctQA do not complete current/history revision. 6/7 creates
+not automatically wrong; repeatedplans and plan/completion/date issues separate.
+
+Snapshot23:00:08 B0maintenance20/eval20 of32,othersunreached,517stop2088756known,
+113encoder43027. Session68500/PID3476759 live,no suite terminal. Snapshot has
+zero pending andunknown3; betweenrequests is not terminal. Live40099/153416148
+known153527863charged/embed1017859; lastclosed39582/151327392known151439107
+charged/embed974832/history3. Counts are session-level, no batch doublecount or
+subsetcostaddition; ledger deltas match, limits unchanged.
+c86 prototype ownFast37542861434success/Full37542861507running23:00:43. Prepared
+4actualbefore cases and0modelcalls remain; waitWHOLEoriginalsuite actualterminal,
+PIDexit and serialresourcefree before B admission. No Hostswitch/adoption yet.
+
+Publication6Lab docs/status/sanitizedresult only;0source/test/workflow/newHTTP.
+Original declaration/results/docs retained, private ignored, rollbackc86a5ea.
+Source072actual frozenunchanged; own reportCI/remote separately verify. Goal
+active/full8/65/277/native/drift/ablation/tighterbudget/16reserved/external/Host/
+recovery/sixdeliverables incomplete. ProductNO_GO PR85draftunmerged,oneQwen+BGE,
+no newagents/modelrunner/auditor/platform/budget/idealstate/unknownreplay. Follow
+full original plan, not a permanent perfect-R3 gate. Lower blocks historical.
+
 # 2026-10-06 22:41 UTC: conditional B prototype implemented/prepared, no new HTTP
 
 Previous goal turn pushed7ab firstB0user closure and remote verified; progress.

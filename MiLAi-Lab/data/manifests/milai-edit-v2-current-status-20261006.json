@@ -1,7 +1,7 @@
 {
-  "status": "FROZEN_FOUR_ARM_PREFIX_RUNNING_CONDITIONAL_B_PROTOTYPE_PREPARED_NOT_ADMITTED",
-  "observed_at": "2026-10-06T22:41:20.453419+00:00",
-  "previous_report_commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+  "status": "FROZEN_FOUR_ARM_PREFIX_RUNNING_B0_FIRST_TWO_USERS_CLOSED_B_PROTOTYPE_NOT_ADMITTED",
+  "observed_at": "2026-10-06T23:00:08.577490+00:00",
+  "previous_report_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
   "interface": "I2",
   "completed_session_checkpoints": {
     "B0": {
@@ -47,18 +47,18 @@
     ]
   },
   "previous_report_ci": {
-    "commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
-    "observed_at": "2026-10-06 22:42:16 UTC",
+    "commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "observed_at": "2026-10-06T23:00:43Z",
     "Fast": {
-      "run_id": 37540645454,
+      "run_id": 37542861434,
+      "status": "completed",
       "conclusion": "success"
     },
     "Full": {
-      "run_id": 37540645482,
+      "run_id": 37542861507,
       "status": "in_progress",
       "conclusion": null
-    },
-    "prototype_source_own_CI_separate": true
+    }
   },
   "b0_original_aggregation_replay": {
     "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
@@ -6118,16 +6118,16 @@
     }
   },
   "latest_actual_execution_since_previous_report": {
-    "detail_manifest": "milai-post87c-change-extraction-paired-development-20261007.json",
-    "status": "BASELINE_PARENT_QUEUE_LIVE_PROTOTYPE_MODEL_CALLS_ZERO",
+    "detail_manifest": "milai-post87c-common-dense-B0-second-user-prefix-results-20261007.json",
+    "status": "CLOSED_B0_SECOND_USER_FIRST8_PARENT_FOUR_ARM_PREFIX_RUNNING",
     "snapshot": {
-      "observed_at": "2026-10-06T22:41:20.453419+00:00",
+      "observed_at": "2026-10-06T23:00:08.577490+00:00",
       "per_arm": {
         "B0": {
-          "maintenance": 16,
-          "evaluation": 16,
-          "generation_requests": 385,
-          "generation_responses": 384,
+          "maintenance": 20,
+          "evaluation": 20,
+          "generation_requests": 517,
+          "generation_responses": 517,
           "terminal": false
         },
         "B1": {
@@ -6152,23 +6152,23 @@
           "terminal": false
         }
       },
-      "generation_responses": 384,
-      "generation_known_tokens": 1589479,
+      "generation_responses": 517,
+      "generation_known_tokens": 2088756,
       "finish_reasons": {
-        "stop": 384
+        "stop": 517
       },
-      "encoding_responses": 93,
-      "embedding_known_tokens": 34557,
+      "encoding_responses": 113,
+      "embedding_known_tokens": 43027,
       "ledger": {
-        "generation_requests": 39967,
+        "generation_requests": 40099,
         "generation": {
-          "charged_tokens": 153079247,
-          "known_tokens": 152916871,
-          "unknown_usage": 4
+          "charged_tokens": 153527863,
+          "known_tokens": 153416148,
+          "unknown_usage": 3
         },
         "embedding": {
-          "charged_tokens": 1009389,
-          "known_tokens": 1009389,
+          "charged_tokens": 1017859,
+          "known_tokens": 1017859,
           "unknown_usage": 0
         },
         "limits": {
@@ -6184,7 +6184,7 @@
       "original_PID_live": true,
       "suite_terminal_exists": false,
       "new_prototype_model_calls": 0,
-      "maintenance_count_rule": "Session-level completion only; batch completion is a nested subscope, not another maintenance event."
+      "maintenance_count_rule": "Session-level completion only; nested batch completions are not additional maintenance sessions."
     },
     "prototype_known_extra_calls": 0,
     "closed_subsets_not_added_again": true
@@ -6438,7 +6438,7 @@
     "status": "PROTOTYPE_IMPLEMENTED_LOCAL_CHECKS_PASS_FOUR_ACTUAL_BEFORE_PREPARED_NOT_ADMITTED_OR_RUN",
     "declaration": "milai-post87c-change-extraction-paired-development-20261007.json",
     "baseline_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
-    "implementation_source": "Commit containing this declaration; precise identity recorded in runtime config before admission.",
+    "implementation_source": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
     "actual_before_cases": 4,
     "engineering_checks": {
       "distinct_affected_checks_passed": 9,
@@ -6452,10 +6452,24 @@
       "broad_suite_repeated": false,
       "initial_pytest_collection_error": "Existing venv imported another checkout without PYTHONPATH; rerun scoped command with PYTHONPATH=src, no code change or model HTTP."
     },
-    "own_Fast_not_yet_verified": true,
+    "own_Fast_not_yet_verified": false,
     "original_model_queue_live": true,
     "new_model_calls": 0,
-    "candidate_selected": false
+    "candidate_selected": false,
+    "own_ci": {
+      "commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+      "observed_at": "2026-10-06T23:00:43Z",
+      "Fast": {
+        "run_id": 37542861434,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37542861507,
+        "status": "in_progress",
+        "conclusion": null
+      }
+    }
   },
   "historical_source_CI_before_common_D_R3": {
     "commit": "68a3721ae19927a516706ddcf2431fe6762c65fc",
@@ -6549,17 +6563,17 @@
     "observed_at": "2026-10-06T21:40:25Z"
   },
   "latest_execution_summary": {
-    "observed_at": "2026-10-06T22:41:20.453419+00:00",
+    "observed_at": "2026-10-06T23:00:08.577490+00:00",
     "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
     "active_model_queue": true,
     "source_own_Fast_Full_success": true,
     "same_version_four_arm_prefix_admitted": true,
     "current_prefix_maintenance_evaluation": {
       "B0": {
-        "maintenance": 16,
-        "evaluation": 16,
-        "generation_requests": 385,
-        "generation_responses": 384,
+        "maintenance": 20,
+        "evaluation": 20,
+        "generation_requests": 517,
+        "generation_responses": 517,
         "terminal": false
       },
       "B1": {
@@ -6584,9 +6598,19 @@
         "terminal": false
       }
     },
-    "confirmed_generation_responses": 384,
-    "known_generation_tokens": 1589479,
+    "confirmed_generation_responses": 517,
+    "known_generation_tokens": 2088756,
     "closed_first_user_review_remains": "B0 update5/19 valid18; QA15/20 valid20, original result preserved",
+    "closed_second_user_review": {
+      "detail_manifest": "milai-post87c-common-dense-B0-second-user-prefix-results-20261007.json",
+      "update_correct": 8,
+      "update_all": 15,
+      "update_valid": 14,
+      "QA_correct": 10,
+      "QA_all": 12,
+      "QA_valid": 10,
+      "Root_complete_answers_read": 12
+    },
     "new_conditional_B_prototype_implemented": true,
     "new_conditional_B_prepared_actual_cases": 4,
     "new_conditional_B_admitted": false,
@@ -6979,18 +7003,19 @@
     "new_queue_live": true
   },
   "latest_publication_verification": {
-    "observed_at": "2026-10-06T22:41:20.453419+00:00",
-    "source_contains_changes": true,
-    "source_files": 2,
+    "observed_at": "2026-10-06T23:00:08.577490+00:00",
+    "source_contains_changes": false,
+    "source_files": 0,
     "actual_running_source": "072af2e38507ad8593afab66c10e3400591534d0",
     "frozen_runtime_or_config_changed": false,
     "prototype_model_calls": 0,
     "original_declarations_and_results_preserved": true,
     "active_model_queue": true,
-    "rollback_commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+    "rollback_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
     "candidate_selected": false,
     "reserved_16_users_read": false,
-    "goal_complete": false
+    "goal_complete": false,
+    "scope": "Six Lab documentation/status/sanitized-result files; lightweight JSON/link/count/history/ignored/diff checks only."
   },
   "scope_contract_revision_read_development": {
     "detail_manifest": "milai-post87c-scope-contract-revision-read-development-20261007.json",
@@ -7868,15 +7893,15 @@
     }
   },
   "current_live_accounting_snapshot": {
-    "generation_requests": 39967,
+    "generation_requests": 40099,
     "generation": {
-      "charged_tokens": 153079247,
-      "known_tokens": 152916871,
-      "unknown_usage": 4
+      "charged_tokens": 153527863,
+      "known_tokens": 153416148,
+      "unknown_usage": 3
     },
     "embedding": {
-      "charged_tokens": 1009389,
-      "known_tokens": 1009389,
+      "charged_tokens": 1017859,
+      "known_tokens": 1017859,
       "unknown_usage": 0
     },
     "limits": {
@@ -8360,6 +8385,217 @@
       4
     ],
     "admitted": false,
-    "model_calls": 0
+    "model_calls": 0,
+    "source_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "own_ci": {
+      "commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+      "observed_at": "2026-10-06T23:00:43Z",
+      "Fast": {
+        "run_id": 37542861434,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37542861507,
+        "status": "in_progress",
+        "conclusion": null
+      }
+    }
+  },
+  "historical_before_072_B0_second_user_closure": {
+    "status": "FROZEN_FOUR_ARM_PREFIX_RUNNING_CONDITIONAL_B_PROTOTYPE_PREPARED_NOT_ADMITTED",
+    "observed_at": "2026-10-06T22:41:20.453419+00:00",
+    "previous_report_commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+    "previous_report_ci": {
+      "commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+      "observed_at": "2026-10-06 22:42:16 UTC",
+      "Fast": {
+        "run_id": 37540645454,
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37540645482,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "prototype_source_own_CI_separate": true
+    },
+    "latest_execution_summary": {
+      "observed_at": "2026-10-06T22:41:20.453419+00:00",
+      "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "active_model_queue": true,
+      "source_own_Fast_Full_success": true,
+      "same_version_four_arm_prefix_admitted": true,
+      "current_prefix_maintenance_evaluation": {
+        "B0": {
+          "maintenance": 16,
+          "evaluation": 16,
+          "generation_requests": 385,
+          "generation_responses": 384,
+          "terminal": false
+        },
+        "B1": {
+          "maintenance": 0,
+          "evaluation": 0,
+          "generation_requests": 0,
+          "generation_responses": 0,
+          "terminal": false
+        },
+        "B2": {
+          "maintenance": 0,
+          "evaluation": 0,
+          "generation_requests": 0,
+          "generation_responses": 0,
+          "terminal": false
+        },
+        "M": {
+          "maintenance": 0,
+          "evaluation": 0,
+          "generation_requests": 0,
+          "generation_responses": 0,
+          "terminal": false
+        }
+      },
+      "confirmed_generation_responses": 384,
+      "known_generation_tokens": 1589479,
+      "closed_first_user_review_remains": "B0 update5/19 valid18; QA15/20 valid20, original result preserved",
+      "new_conditional_B_prototype_implemented": true,
+      "new_conditional_B_prepared_actual_cases": 4,
+      "new_conditional_B_admitted": false,
+      "new_conditional_B_model_calls": 0,
+      "complete_four_arm_review": false,
+      "candidate_selected": false,
+      "stable_method_advantage_established": false,
+      "goal_complete": false
+    },
+    "latest_actual_execution_since_previous_report": {
+      "detail_manifest": "milai-post87c-change-extraction-paired-development-20261007.json",
+      "status": "BASELINE_PARENT_QUEUE_LIVE_PROTOTYPE_MODEL_CALLS_ZERO",
+      "snapshot": {
+        "observed_at": "2026-10-06T22:41:20.453419+00:00",
+        "per_arm": {
+          "B0": {
+            "maintenance": 16,
+            "evaluation": 16,
+            "generation_requests": 385,
+            "generation_responses": 384,
+            "terminal": false
+          },
+          "B1": {
+            "maintenance": 0,
+            "evaluation": 0,
+            "generation_requests": 0,
+            "generation_responses": 0,
+            "terminal": false
+          },
+          "B2": {
+            "maintenance": 0,
+            "evaluation": 0,
+            "generation_requests": 0,
+            "generation_responses": 0,
+            "terminal": false
+          },
+          "M": {
+            "maintenance": 0,
+            "evaluation": 0,
+            "generation_requests": 0,
+            "generation_responses": 0,
+            "terminal": false
+          }
+        },
+        "generation_responses": 384,
+        "generation_known_tokens": 1589479,
+        "finish_reasons": {
+          "stop": 384
+        },
+        "encoding_responses": 93,
+        "embedding_known_tokens": 34557,
+        "ledger": {
+          "generation_requests": 39967,
+          "generation": {
+            "charged_tokens": 153079247,
+            "known_tokens": 152916871,
+            "unknown_usage": 4
+          },
+          "embedding": {
+            "charged_tokens": 1009389,
+            "known_tokens": 1009389,
+            "unknown_usage": 0
+          },
+          "limits": {
+            "arms": 3,
+            "embedding_tokens": null,
+            "generation_requests": null,
+            "generation_tokens": null,
+            "questions": 12
+          }
+        },
+        "ledger_stable_during_read": true,
+        "receipt_deltas_match": true,
+        "original_PID_live": true,
+        "suite_terminal_exists": false,
+        "new_prototype_model_calls": 0,
+        "maintenance_count_rule": "Session-level completion only; batch completion is a nested subscope, not another maintenance event."
+      },
+      "prototype_known_extra_calls": 0,
+      "closed_subsets_not_added_again": true
+    },
+    "latest_prepared_execution": {
+      "status": "PROTOTYPE_IMPLEMENTED_LOCAL_CHECKS_PASS_FOUR_ACTUAL_BEFORE_PREPARED_NOT_ADMITTED_OR_RUN",
+      "declaration": "milai-post87c-change-extraction-paired-development-20261007.json",
+      "baseline_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "implementation_source": "Commit containing this declaration; precise identity recorded in runtime config before admission.",
+      "actual_before_cases": 4,
+      "engineering_checks": {
+        "distinct_affected_checks_passed": 9,
+        "new_test_functions": 1,
+        "new_parametrized_checks": 4,
+        "existing_controls": 5,
+        "Ruff_files": 3,
+        "mypy_source_files": 2,
+        "active_package_boundary": "PASS",
+        "default_messages_equal_original_actual_cases": 4,
+        "broad_suite_repeated": false,
+        "initial_pytest_collection_error": "Existing venv imported another checkout without PYTHONPATH; rerun scoped command with PYTHONPATH=src, no code change or model HTTP."
+      },
+      "own_Fast_not_yet_verified": true,
+      "original_model_queue_live": true,
+      "new_model_calls": 0,
+      "candidate_selected": false
+    },
+    "latest_publication_verification": {
+      "observed_at": "2026-10-06T22:41:20.453419+00:00",
+      "source_contains_changes": true,
+      "source_files": 2,
+      "actual_running_source": "072af2e38507ad8593afab66c10e3400591534d0",
+      "frozen_runtime_or_config_changed": false,
+      "prototype_model_calls": 0,
+      "original_declarations_and_results_preserved": true,
+      "active_model_queue": true,
+      "rollback_commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+      "candidate_selected": false,
+      "reserved_16_users_read": false,
+      "goal_complete": false
+    },
+    "current_live_accounting_snapshot": {
+      "generation_requests": 39967,
+      "generation": {
+        "charged_tokens": 153079247,
+        "known_tokens": 152916871,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 1009389,
+        "known_tokens": 1009389,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    }
   }
 }
