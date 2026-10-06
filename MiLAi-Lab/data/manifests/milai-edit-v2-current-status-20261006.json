@@ -1,0 +1,218 @@
+{
+  "status": "PARTIAL_DEVELOPMENT_PROGRESS_WITH_LIVE_OLD_QUEUE",
+  "observed_at": "2026-10-06T07:59:51.759346+08:00",
+  "previous_report_commit": "50fee9399e33c3d58f8e083ef55a7c5281fc5bd4",
+  "running_source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "running_config_version": "milai-edit-common-v2-i2-durability",
+  "interface": "I2",
+  "completed_session_checkpoints": {
+    "B0": {
+      "maintenance": 277,
+      "evaluation": 277
+    },
+    "B1": {
+      "maintenance": 103,
+      "evaluation": 102
+    },
+    "B2": {
+      "maintenance": 0,
+      "evaluation": 0
+    },
+    "M": {
+      "maintenance": 0,
+      "evaluation": 0
+    }
+  },
+  "declared_sessions_per_arm": 277,
+  "old_queue_live": true,
+  "next_candidate": {
+    "source_commit": "624d15870c021b779c418459588c6c4a2b7cd2b8",
+    "actual_model_calls": 0,
+    "prepared_r3_calls": [
+      44,
+      36
+    ],
+    "candidate_selected": false,
+    "waiting_status": "WAITING_FOR_OLD_FULL_NATIVE_AND_DRIFT"
+  },
+  "native_and_drift": {
+    "actual_model_calls": 0,
+    "waiting_status": "WAITING_FOR_COMPLETED_FULL_277X4"
+  },
+  "post_b0_plan": {
+    "version": "milai-edit-post-b0-plan-1.0",
+    "read": true,
+    "scheduling_change_executed": false,
+    "next_priority": [
+      "offline saved-result diagnosis",
+      "verify existing candidate wiring",
+      "real finite R3 from each arm own empty bank",
+      "fix earliest actual failure only",
+      "prefix and selected long-history smoke"
+    ],
+    "before_holdout_required": [
+      "same-M low-level versus semantic-entry ablation",
+      "one fixed tighter-budget sensitivity"
+    ]
+  },
+  "previous_report_ci": {
+    "commit": "50fee9399e33c3d58f8e083ef55a7c5281fc5bd4",
+    "Fast": {
+      "run_id": 37386945782,
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 8,
+        "skipped": 4
+      }
+    },
+    "Full": {
+      "run_id": 37386945871,
+      "conclusion": "success",
+      "job_conclusions": {
+        "success": 21
+      }
+    },
+    "does_not_establish_new_report_ci": true
+  },
+  "b0_original_aggregation_replay": {
+    "author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+    "exception": "ZeroDivisionError",
+    "message": "division by zero",
+    "file": "eval/evaluation.py",
+    "line": 279,
+    "function": "aggregate_eval_results",
+    "expression": "target_memory_accuracy_scores / target_memory_accuracy_num",
+    "record_counts": {
+      "memory_integrity_records": 2374,
+      "memory_accuracy_records": 76,
+      "memory_update_records": 595,
+      "question_answering_records": 705
+    },
+    "saved_accuracy_target_flags": {
+      "false": 76
+    },
+    "target_memory_accuracy_num": 0,
+    "target_memory_accuracy_valid_num": 0,
+    "target_memory_accuracy_scores": 0,
+    "original_aggregation_output_preserved": true,
+    "record_copy_used": true,
+    "author_function_changed": false,
+    "label_or_response_changed": false,
+    "saved_error_wrapper_text": "ZeroDivisionError: absent prefix denominator",
+    "wrapper_text_does_not_identify_actual_denominator": true
+  },
+  "b0_supplemental_metrics": {
+    "memory_integrity.recall(all)": {
+      "numerator": 521,
+      "denominator": 1861,
+      "value": 0.2799570123589468,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_integrity.recall(valid)": {
+      "numerator": 521,
+      "denominator": 1861,
+      "value": 0.2799570123589468,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_integrity.weighted_recall(all)": {
+      "numerator": 420.375,
+      "denominator": 1395.75,
+      "value": 0.30118216012896293,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_integrity.weighted_recall(valid)": {
+      "numerator": 420.375,
+      "denominator": 1395.75,
+      "value": 0.30118216012896293,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_accuracy.interference_accuracy(all)": {
+      "numerator": 480,
+      "denominator": 513,
+      "value": 0.935672514619883,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_accuracy.interference_accuracy(valid)": {
+      "numerator": 480,
+      "denominator": 513,
+      "value": 0.935672514619883,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_accuracy.target_accuracy(all)": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null,
+      "status": "N/A_ZERO_DENOMINATOR"
+    },
+    "memory_accuracy.target_accuracy(valid)": {
+      "numerator": 0,
+      "denominator": 0,
+      "value": null,
+      "status": "N/A_ZERO_DENOMINATOR"
+    },
+    "memory_accuracy.weighted_accuracy(all)": {
+      "numerator": 7.0,
+      "denominator": 76,
+      "value": 0.09210526315789473,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_accuracy.weighted_accuracy(valid)": {
+      "numerator": 7.0,
+      "denominator": 76,
+      "value": 0.09210526315789473,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_update.correct_update_memory_ratio(all)": {
+      "numerator": 147,
+      "denominator": 595,
+      "value": 0.24705882352941178,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "memory_update.correct_update_memory_ratio(valid)": {
+      "numerator": 147,
+      "denominator": 552,
+      "value": 0.266304347826087,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "question_answering.correct_qa_ratio(all)": {
+      "numerator": 165,
+      "denominator": 705,
+      "value": 0.23404255319148937,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    },
+    "question_answering.correct_qa_ratio(valid)": {
+      "numerator": 165,
+      "denominator": 701,
+      "value": 0.23537803138373753,
+      "status": "DEFINED_SUPPLEMENTAL_ORIGINAL_FORMULA"
+    }
+  },
+  "b0_supplemental_extraction_f1": {
+    "value": null,
+    "status": "N/A_UNDEFINED_TARGET_PRECISION",
+    "does_not_replace_saved_placeholder": true
+  },
+  "pending_offline_reviews": {
+    "invalid_update_labels": {
+      "Omitted": 42,
+      "None": 1
+    },
+    "raw_label_response_attribution_complete": false,
+    "fourth_user_zero_text_delta_original_sessions": [
+      23,
+      32
+    ],
+    "fourth_user_zero_text_delta_semantic_review_complete": false,
+    "all_original_formulas_supplemented": false
+  },
+  "new_model_calls_for_this_publication_and_analysis": 0,
+  "product_status": "NO_GO",
+  "limits": [
+    "B1 is a live partial cohort, B2/M unstarted; not a complete four-arm comparison.",
+    "Saved labels and supplemental original-formula ratios are not a completed official aggregate.",
+    "Why all 76 target flags are false remains unreviewed; no semantic certification.",
+    "Scheduling proposal is recorded, not executed; no process pause or new model run in this publication.",
+    "Same Qwen3.6 family Writer/Reader/Judge; no independent or cross-family confirmation.",
+    "No raw text, predictions, HTTP, databases or logs are published."
+  ]
+}
