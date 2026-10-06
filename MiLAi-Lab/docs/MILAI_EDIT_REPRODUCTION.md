@@ -1,5 +1,16 @@
 # MiLAi-Edit reproduction instructions
 
+**2026-10-06 14:10:30 UTC：ab8有限真实复核已正常结束。**
+
+源码`ab8f475`、事前声明`7add825`、配置`milai-edit-post-b0-schema-shared-choices-affected-first-user-v1`，使用冻结正常driver，B1第一开发用户自己的空库前8，19更新机会/20QA。
+实际维护8/评估8，188响应全stop/639,421 known；8 Writer/20 Reader/160原作者Judge。说明schema共享定义实际出现，packet与实际HTTP逐一相同；8输入均<32256，原失败ordinal3/4/7均送达，首尝试不重试。
+原模型/thinking/temp1/max32768/context65536/512余量/300秒与Reader/评分保持；保留None1、Omitted Update2、QA null2。原作者离线聚合成功，记录和完整回答分别匹配保存结果和HTTP。
+Root读完8前后状态/8实际提案/20回答，来源选择性。3实际空提案、1旧证据编辑拒绝与4状态不变单列，不能用容量通过、合法格式或不修改代替语义成功。
+固定历史状态/原始饮食问题的只读正文词匹配对照沿用冻结词元和排序，事实日期原样保留；旅行误命中消失，饮食卡仍零匹配。无embedding/Reader调用或存储/排名修改，普通语义＋词匹配和同Reader效果仍待验证。
+连续闭合账本39119/149346200known/149457915charged，unknown3/embed964645保持；有限188与旧活动78快照重叠，不再次计费。与7b82四组分数分开，不能续接旧前缀伪造同版65/277。
+raw/gold/预测/HTTP/reasoning/数据库/私有配置/日志和Root助手保持ignored。
+[有限终态与检索比较](../data/manifests/milai-edit-post-b0-schema-shared-choices-finite-results-20261006.json)；原完整计划范围不变，下方保留历史复现。
+
 **2026-10-06 13:47:09 UTC：冻结四组前缀已闭合；ab8有限真实复核已绑定原声明启动。**
 
 四组实际源码`7b82c60`、配置`milai-edit-post-b0-unit-correspondence-main-v1`、共同I2和各自空库，均32会话/72更新/73QA。

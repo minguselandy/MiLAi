@@ -1,3 +1,27 @@
+# 2026-10-06 14:10:30 UTC: finite input repair closed; maintenance and retrieval remain incomplete
+
+User requests current execution summary submitted to GitHub. Publish8 Lab
+report/state files only; no new model process/source/test/config changes.
+Finiteab8 B1 ownempty firstuser8 completed normally,188stop/639421known:
+8Writer20Reader160Judge, update6/19valid16 QA9/20valid18. All8 own-history inputs fit,
+former3/4/7 failures delivered, compact definitions real. No retry/unknown replay.
+3actualempty1old-evidence rejection,17create1edit/17records17content0graph;
+4unchanged states not preservation. Completed role transition delivered but empty;
+keep original dated employment history while diagnosing current applicability.
+Root8states8envelopes20answers188HTTP reviewed, sourcepartial/not independent.
+Fixed15-record originalquery semantictext-only lexical removes date-metadata travel
+match but relevantfood still0; no embedding/Reader call or retrievalsource change.
+Current-first task simplification/plan5.5 ifwarranted, common semantic+lexical and
+sameReader comparison, then ownstate formation/correction/exception/withdrawal/query.
+Do not expand37existing projections, stack warnings or add auditor/Attention/platform.
+Closed ledger39119/149346200known/149457915charged, unknown3/embed964645 unchanged,
+newunknown0. Prior live78snapshot overlaps finite188,7b82four-arm scores unchanged.
+Original65/277/native/drift/ablation/fixedbudget/holdout/external/Host/sixdeliverables
+remain active. SingleQwen generationfamily, no candidate/conditional advantage,
+ProductNO_GO,PR85open/draft/unmerged. Raw/gold/HTTP/reasoning/DB/logs ignored;
+Product/Archive/workflow/API/permissions/Canonical unchanged. rollbackca4be6c,
+previousFastsuccess/Fullin_progress at14:10:30; newreportCI separate. Keep history.
+
 # 2026-10-06 13:47:09 UTC: four-arm prefix closed; declared finite repair runs separately
 
 User requests current summary published to GitHub. Publish8 Lab report/state files,
