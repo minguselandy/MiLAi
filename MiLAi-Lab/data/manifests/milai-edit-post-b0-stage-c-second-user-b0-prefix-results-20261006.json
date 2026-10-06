@@ -1,0 +1,440 @@
+{
+  "schema_version": "milai-edit-stage-c-closed-user-prefix-summary-v1",
+  "observed_at": "2026-10-06T08:32:59.048553+00:00",
+  "status": "SECOND_B0_USER_FIRST8_CLOSED_ROOT_REVIEW_MAIN_PREFIX_STILL_RUNNING",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6",
+  "development_user_position": 1,
+  "chronological_original_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "scope": {
+    "arm": "B0",
+    "sessions": 8,
+    "update_opportunities": 15,
+    "QA": 12,
+    "starts_from_own_empty_bank": true,
+    "reserved_users_used": false
+  },
+  "official_author_checkout": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+  "author_update_labels": {
+    "Omission": 11,
+    "Correct": 3,
+    "None": 1
+  },
+  "author_QA_labels": {
+    "Correct": 8,
+    "Hallucination": 2,
+    "Omission": 2
+  },
+  "official_offline_metrics": {
+    "formation_recall_all": 0.6666666666666666,
+    "formed_memory_accuracy_all": 0.75,
+    "update_correct_all_opportunities": 0.2,
+    "update_correct_scored": 0.2,
+    "update_correct_valid": 0.21428571428571427,
+    "qa_correct_all": 0.6666666666666666,
+    "qa_correct_valid": 0.6666666666666666,
+    "denominators": {
+      "total_updates": 15,
+      "empty_update_retrieval": 0,
+      "scored_updates": 15,
+      "valid_scored_updates": 14,
+      "updates_missing_original": 0,
+      "judge_failures": 0,
+      "formed_sessions": 8,
+      "formation_reference_points": 102,
+      "formation_valid_judgments": 94,
+      "formed_memory_outputs": 16,
+      "formed_memory_valid_judgments": 12,
+      "update_scored_records": 15,
+      "update_valid_judgments": 14,
+      "update_unscored_opportunities": 0,
+      "qa_opportunities": 12,
+      "qa_valid_judgments": 12
+    },
+    "update_information_condition": "reference-guided read-only retrieval; separate from QA"
+  },
+  "official_original_overall_score": {
+    "memory_integrity": {
+      "recall(all)": 0.6666666666666666,
+      "recall(valid)": 0.723404255319149,
+      "weighted_recall(all)": 0.6862745098039216,
+      "weighted_recall(valid)": 0.7446808510638298,
+      "memory_valid_importance_sum": 70.5,
+      "memory_importance_sum": 76.5,
+      "memory_valid_num": 94,
+      "memory_num": 102
+    },
+    "memory_accuracy": {
+      "interference_accuracy(all)": 1.0,
+      "interference_accuracy(valid)": 1.0,
+      "interference_memory_valid_num": 7,
+      "interference_memory_num": 7,
+      "target_accuracy(all)": 1.0,
+      "target_accuracy(valid)": 1.0,
+      "target_memory_valid_num": 8,
+      "target_memory_num": 8,
+      "weighted_accuracy(all)": 0.75,
+      "weighted_accuracy(valid)": 1.0,
+      "memory_valid_num": 12,
+      "memory_num": 16
+    },
+    "memory_extraction_f1": 0.8,
+    "memory_update": {
+      "correct_update_memory_ratio(all)": 0.2,
+      "correct_update_memory_ratio(valid)": 0.21428571428571427,
+      "hallucination_update_memory_ratio(all)": 0.0,
+      "hallucination_update_memory_ratio(valid)": 0.0,
+      "omission_update_memory_ratio(all)": 0.7333333333333333,
+      "omission_update_memory_ratio(valid)": 0.7857142857142857,
+      "other_update_memory_ratio(all)": 0.0,
+      "other_update_memory_ratio(valid)": 0.0,
+      "update_memory_valid_num": 14,
+      "update_memory_num": 15
+    },
+    "question_answering": {
+      "correct_qa_ratio(all)": 0.6666666666666666,
+      "correct_qa_ratio(valid)": 0.6666666666666666,
+      "hallucination_qa_ratio(all)": 0.16666666666666666,
+      "hallucination_qa_ratio(valid)": 0.16666666666666666,
+      "omission_qa_ratio(all)": 0.16666666666666666,
+      "omission_qa_ratio(valid)": 0.16666666666666666,
+      "qa_valid_num": 12,
+      "qa_num": 12
+    },
+    "memory_type_accuracy": {
+      "Event Memory": {
+        "memory_integrity_acc": 0.2631578947368421,
+        "memory_update_acc": 0.05263157894736842,
+        "total_num": 19,
+        "memory_acc": 0.3157894736842105
+      },
+      "Persona Memory": {
+        "memory_integrity_acc": 0.6363636363636364,
+        "memory_update_acc": 0.020202020202020204,
+        "total_num": 99,
+        "memory_acc": 0.6565656565656566
+      },
+      "Relationship Memory": {
+        "memory_integrity_acc": 0.0,
+        "memory_update_acc": 0.0,
+        "total_num": 6,
+        "memory_acc": 0.0
+      }
+    }
+  },
+  "official_aggregation_error": null,
+  "original_gold_labels_and_first_attempts_unchanged": true,
+  "invalid_update_label": {
+    "count": 1,
+    "saved_label": null,
+    "actual_parsed_Judge_output": {},
+    "Judge_serial": 296,
+    "transport_and_JSON_parse_succeeded": true,
+    "not_remapped_or_rejudged": true
+  },
+  "HTTP": {
+    "requests": 146,
+    "responses": 146,
+    "role_usage": {
+      "Judge": {
+        "calls": 126,
+        "input_tokens": 189094,
+        "completion_tokens": 148660,
+        "known_tokens": 337754
+      },
+      "Reader": {
+        "calls": 12,
+        "input_tokens": 12592,
+        "completion_tokens": 16074,
+        "known_tokens": 28666
+      },
+      "Writer": {
+        "calls": 8,
+        "input_tokens": 167613,
+        "completion_tokens": 30165,
+        "known_tokens": 197778
+      }
+    },
+    "finish_reasons": {
+      "stop": 146
+    },
+    "known_tokens": 564198,
+    "saved_prompt_usage_pairs_matched": 146,
+    "new_calls_for_review": 0,
+    "scope_is_part_of_live_queue_not_additional_cost": true,
+    "Judge_serial_interval_inclusive": [
+      173,
+      298
+    ]
+  },
+  "source_character_coverage": {
+    "original_characters": 63988,
+    "covered_characters": 63988,
+    "sent_core_characters_union": 63988,
+    "response_received_core_characters_union": 63988,
+    "complete_parsed_core_characters_union": 63988
+  },
+  "session_state_and_operations": [
+    {
+      "original_ordinal": 0,
+      "current_characters": 1925,
+      "creates_proposed": 4,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {
+        "committed": 4
+      },
+      "unprocessed": 0,
+      "full_record_values_unchanged": false,
+      "new_record_count": 4,
+      "changed_existing_record_count": 0,
+      "final_records": 4,
+      "final_units": 5,
+      "max_record_units": 2,
+      "max_record_characters": 539,
+      "compatibility_extracted_outputs": 4,
+      "update_labels": {},
+      "QA_labels": {
+        "Correct": 3
+      },
+      "judge_serial_end": 194
+    },
+    {
+      "original_ordinal": 1,
+      "current_characters": 1996,
+      "creates_proposed": 0,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {},
+      "unprocessed": 0,
+      "full_record_values_unchanged": true,
+      "new_record_count": 0,
+      "changed_existing_record_count": 0,
+      "final_records": 4,
+      "final_units": 5,
+      "max_record_units": 2,
+      "max_record_characters": 539,
+      "compatibility_extracted_outputs": 0,
+      "update_labels": {},
+      "QA_labels": {
+        "Hallucination": 1,
+        "Omission": 1,
+        "Correct": 1
+      },
+      "judge_serial_end": 197
+    },
+    {
+      "original_ordinal": 2,
+      "current_characters": 5372,
+      "creates_proposed": 7,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {
+        "committed": 7
+      },
+      "unprocessed": 0,
+      "full_record_values_unchanged": false,
+      "new_record_count": 7,
+      "changed_existing_record_count": 0,
+      "final_records": 11,
+      "final_units": 12,
+      "max_record_units": 2,
+      "max_record_characters": 539,
+      "compatibility_extracted_outputs": 7,
+      "update_labels": {},
+      "QA_labels": {
+        "Hallucination": 1,
+        "Correct": 2
+      },
+      "judge_serial_end": 262
+    },
+    {
+      "original_ordinal": 3,
+      "current_characters": 13031,
+      "creates_proposed": 0,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {},
+      "unprocessed": 0,
+      "full_record_values_unchanged": true,
+      "new_record_count": 0,
+      "changed_existing_record_count": 0,
+      "final_records": 11,
+      "final_units": 12,
+      "max_record_units": 2,
+      "max_record_characters": 539,
+      "compatibility_extracted_outputs": 0,
+      "update_labels": {
+        "Omission": 4
+      },
+      "QA_labels": {},
+      "judge_serial_end": 266
+    },
+    {
+      "original_ordinal": 4,
+      "current_characters": 9547,
+      "creates_proposed": 4,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {
+        "committed": 4
+      },
+      "unprocessed": 0,
+      "full_record_values_unchanged": false,
+      "new_record_count": 4,
+      "changed_existing_record_count": 0,
+      "final_records": 15,
+      "final_units": 27,
+      "max_record_units": 5,
+      "max_record_characters": 919,
+      "compatibility_extracted_outputs": 4,
+      "update_labels": {
+        "Omission": 2,
+        "Correct": 1
+      },
+      "QA_labels": {},
+      "judge_serial_end": 278
+    },
+    {
+      "original_ordinal": 5,
+      "current_characters": 15740,
+      "creates_proposed": 1,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {
+        "committed": 1
+      },
+      "unprocessed": 0,
+      "full_record_values_unchanged": false,
+      "new_record_count": 1,
+      "changed_existing_record_count": 0,
+      "final_records": 16,
+      "final_units": 29,
+      "max_record_units": 5,
+      "max_record_characters": 919,
+      "compatibility_extracted_outputs": 1,
+      "update_labels": {
+        "Correct": 2
+      },
+      "QA_labels": {
+        "Omission": 1,
+        "Correct": 2
+      },
+      "judge_serial_end": 292
+    },
+    {
+      "original_ordinal": 6,
+      "current_characters": 8973,
+      "creates_proposed": 0,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {},
+      "unprocessed": 0,
+      "full_record_values_unchanged": true,
+      "new_record_count": 0,
+      "changed_existing_record_count": 0,
+      "final_records": 16,
+      "final_units": 29,
+      "max_record_units": 5,
+      "max_record_characters": 919,
+      "compatibility_extracted_outputs": 0,
+      "update_labels": {
+        "Omission": 1
+      },
+      "QA_labels": {},
+      "judge_serial_end": 293
+    },
+    {
+      "original_ordinal": 7,
+      "current_characters": 7404,
+      "creates_proposed": 0,
+      "old_record_modifications_proposed": 0,
+      "receipt_statuses": {},
+      "unprocessed": 0,
+      "full_record_values_unchanged": true,
+      "new_record_count": 0,
+      "changed_existing_record_count": 0,
+      "final_records": 16,
+      "final_units": 29,
+      "max_record_units": 5,
+      "max_record_characters": 919,
+      "compatibility_extracted_outputs": 0,
+      "update_labels": {
+        "Omission": 4,
+        "None": 1
+      },
+      "QA_labels": {},
+      "judge_serial_end": 298
+    }
+  ],
+  "actual_maintenance_summary": {
+    "create_commits": 16,
+    "old_record_modification_proposals": 0,
+    "changed_existing_records": 0,
+    "no_change_receipts": 0,
+    "unprocessed_sessions": 0,
+    "fully_unchanged_sessions": [
+      1,
+      3,
+      6,
+      7
+    ],
+    "final_records": 16,
+    "final_units": 29,
+    "max_record_units": 5,
+    "max_record_characters": 919,
+    "all_final_record_revisions": 1,
+    "conditions_or_relations": 0
+  },
+  "Root_semantic_observations": [
+    {
+      "type": "formation_omission",
+      "scope": "ordinal1 and later empty updates",
+      "finding": "Explicit current work, finance, health and social statements were not formed in ordinal1. Later recognition, finance increase, community/business progress and service updates have substantive omissions; empty proposals are not successful preservation."
+    },
+    {
+      "type": "formation_positive",
+      "scope": "ordinals2,4,5",
+      "finding": "Seven preference matters, four health/business/leadership matters and a changed-attitude matter were actually created. The method does not skip all later input."
+    },
+    {
+      "type": "retrieval_miss",
+      "scope": "ordinal2 QA0",
+      "finding": "Pet preferences exist in actual retained state, but the Reader request delivers only demographics. Its abstention is not evidence that the Writer failed to form that matter; saved author Hallucination label is preserved."
+    },
+    {
+      "type": "unreconciled_old_and_new_assertions",
+      "scope": "ordinal5",
+      "finding": "Writer receives the existing pet record but creates a separate changed-attitude record. The old negative attitude remains active with identical content, revision and support. Correct author update labels and the subsequent answer do not prove old-state reconciliation."
+    },
+    {
+      "type": "source_qualification_loss",
+      "scope": "ordinal5 QA0",
+      "finding": "Current User explicitly describes a local seminar; the new memory omits local and the Reader says it cannot verify local. Event year/report-time interpretation is recorded separately, not automatically certified by occurrence time."
+    },
+    {
+      "type": "source_gold_divergence",
+      "scope": "finance and health update targets",
+      "finding": "Specific new income/saving values and categorical health grades occur in Assistant text; User explicitly reports increase/improvement without those exact values/categories. An original finance target also labels old amounts in a currency different from the actual User statement. Original labels/gold are unchanged; these are not proven User-confirmed numeric or categorical updates."
+    },
+    {
+      "type": "date_target_divergence",
+      "scope": "ordinal7 service update",
+      "finding": "The gold asks for an earlier specific event date while the current User report is later and describes recent services without explicitly correcting to that date. New service/feedback/collaboration facts are still omitted; the specific gold date is not silently promoted to source truth."
+    }
+  ],
+  "Root_review_limits": {
+    "proposals_and_full_before_after_pairs": 8,
+    "complete_Reader_answers": 12,
+    "current_User_statements": "Substantive statements inspected; not an independent full source/database audit.",
+    "Assistant_context": "Selected source claims inspected for numeric/category/date attribution, not exhaustive assistant review.",
+    "independent_Judge": false,
+    "method_advantage_established": false,
+    "long_history_stability_established": false
+  },
+  "remaining_work": "Finish frozen four-arm/four-user first8, then preselected actual-state 65-session continuation and the original full comparisons/controls/holdout/external/Host/six deliverables."
+}

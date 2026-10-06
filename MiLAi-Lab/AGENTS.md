@@ -1,3 +1,23 @@
+# 2026-10-06 08:32:59 UTC: user-requested summary, two closed B0 users, frozen queue continues
+
+User requests current summary submitted to GitHub. Publish6Lab doc/state/result
+files only, no newHTTP/source/config/tests. Source7b82 ownFast/Full success; PID178764
+exact command live, B0maint21/eval20of32, others0/notcancelled;480requests479stop/
+1765229known/1pending/0HTTPfailures is dated live scope, not closed ledger.
+First and second B0 users each8 closed; saved author updates2/19valid16 and3/15valid14,
+QA12/20 and8/12; both pinned-author offline aggregates succeed. Second user146HTTP/
+564198known,8before-after/envelopes12answers reviewed, source context partial.
+Second16createcommits/0old-record changes; states1/3/6/7unchanged with real omissions.
+Pet fact exists but Reader retrieval misses it; changed attitude created separately
+while old negative remains active, local qualifier lost. Assistant numeric/category
+and gold currency/date divergences are separate from unchanged author scores.
+Neither unchanged state nor Correct update label proves semantic revision success.
+No new family/delegation/auditor/platform/deployment/Product/Archive/workflow or
+hotfix. Full original plan/deferred scopes/sixdeliverables stay active; after prefix
+review proceed own actual-state65, not ideal cards. Plan5.5 alternative conditional,
+unadmitted. Raw/HTTP/DB/logs ignored. ProductNO_GO,PR85open/draft/unmerged.
+Prior dated observations below remain historical snapshots with their own scope.
+
 # 2026-10-06 08:12:27 UTC: Root first-user B0 prefix diagnosis complete, frozen queue continues
 
 Previous goal turn published94b3e64 summary and independently verified all5remote blobs:
