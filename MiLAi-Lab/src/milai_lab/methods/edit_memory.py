@@ -222,7 +222,7 @@ class EditMemory:
 
     def _feature_instructions(self, *, allow_create: bool) -> str:
         empty = (
-            '{"creates":[],"records":{}}'
+            '{}'
             if self.features.single_record_changes
             else '{"proposals":[]}'
         )
@@ -245,6 +245,9 @@ class EditMemory:
             "qualification and uncertainty. Use one independently revisable assertion per "
             "clause. Separate the value from independently changeable qualifications; a "
             "single sentence in the source need not become a single memory unit. "
+            "Delivered unit roles are read-only. Do not echo them into output clauses or "
+            "conditions; their position declares the role. A new append or insert may select "
+            "its role as allowed by the schema. "
         )
         if self.features.matter_organization:
             instruction += (
@@ -316,6 +319,12 @@ class EditMemory:
                 "change_condition keeps actual linked units and edges. append/retract remain "
                 "available for other local formation/removal. Dependent changes to delivered units "
                 "belong in the same ordered edits list; the record commits once. "
+                "Use the actual delivered role: change_value selects content, change_condition "
+                "selects condition, and shared_conditions selects only existing condition units. "
+                "A content clause mentioning a prerequisite has no condition binding. Do not "
+                "select it as a shared condition. With supporting new e, append a condition "
+                "with explicit attach_to targets and retract the obsolete clause when justified; "
+                "the service never infers this change from its wording. "
             )
         else:
             instruction += (
@@ -332,6 +341,10 @@ class EditMemory:
                 "condition declaration in this response; an override target indexes generated "
                 "clauses. Existing views use actual u aliases for shared-condition reuse and "
                 "override targets. Unresolved old conditions remain unresolved. "
+                "When a source states a common prerequisite, declare it in the affected "
+                "clause's conditions with a binding; do not save a separate content clause "
+                "merely saying that a common prerequisite exists. The delivered role is actual "
+                "stored structure; its wording cannot change it. "
             )
         else:
             instruction += (
@@ -342,6 +355,8 @@ class EditMemory:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
                 "Never repeat a record or split its dependent changes across containers. "
+                "Omit creates or records when empty. An existing change always names its r key "
+                "in records, even when only one record was delivered; never return a bare edit. "
             )
         instruction += (
             "create is allowed in this request. "
@@ -433,10 +448,7 @@ class EditMemory:
         def envelope(proposal: dict[str, Any], *, created: bool) -> dict[str, Any]:
             proposal = clause_proposal(proposal, conditioned=self.conditioned)
             if self.features.single_record_changes:
-                return {
-                    "creates": [proposal] if created else [],
-                    "records": {} if created else {"r1": proposal},
-                }
+                return {"creates": [proposal]} if created else {"records": {"r1": proposal}}
             return {"proposals": [proposal if created else {**proposal, "target": "r1"}]}
 
         instruction += (
@@ -1312,12 +1324,13 @@ class EditMemory:
                 if len(targets) != len(set(targets)):
                     raise FunctionalRejection("EDIT_DUPLICATE_RECORD_CONTAINER")
             return proposals  # type: ignore[no-any-return]
+        selected_records = envelope.get("records", {})
         return [
-            *copy.deepcopy(envelope["creates"]),
+            *copy.deepcopy(envelope.get("creates", [])),
             *(
-                {**copy.deepcopy(envelope["records"][target]), "target": target}
+                {**copy.deepcopy(selected_records[target]), "target": target}
                 for target in bound["records"]
-                if target in envelope["records"]
+                if target in selected_records
             ),
         ]
 

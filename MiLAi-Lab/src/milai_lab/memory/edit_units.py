@@ -817,7 +817,8 @@ def _group_clauses(
     clauses = []
     for key in contents:
         clause = copy.deepcopy(by_key[key])
-        clause.pop("role", None)
+        if not view:
+            clause.pop("role", None)
         if view or any(unit.get("role") == "condition" for unit in units) or relations:
             clause["conditions"] = []
         for relation in relations:
@@ -834,7 +835,8 @@ def _group_clauses(
             else:
                 declared[source] = len(declared)
                 condition = copy.deepcopy(by_key[source])
-                condition.pop("role", None)
+                if not view:
+                    condition.pop("role", None)
             condition["binding"] = binding
             clause.setdefault("conditions", []).append(condition)
         overrides = []
@@ -856,7 +858,7 @@ def _group_clauses(
             clause["overrides"] = overrides
         clauses.append(clause)
     unresolved = [
-        {k: copy.deepcopy(v) for k, v in by_key[key].items() if k != "role"}
+        {k: copy.deepcopy(v) for k, v in by_key[key].items() if view or k != "role"}
         for key in keys
         if by_key[key].get("role") == "condition" and key not in declared
     ]
@@ -946,7 +948,7 @@ def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
 
 
 def clause_record_view(record: dict[str, Any]) -> None:
-    """Replace flat public state with actual grouped rules, preserving aliases."""
+    """Group actual rules while preserving aliases and service-owned unit roles."""
     state = record.get("edit_state", record)
     if not state or "units" not in state:
         return

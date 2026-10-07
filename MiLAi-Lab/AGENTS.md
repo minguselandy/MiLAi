@@ -1,3 +1,35 @@
+# 2026-10-07: mixed-source followup and serial focused Host
+
+Use docs/MILAI_UNIFIED_MEMORY_USAGE.md for fixed v4/v5 execution, semantics and
+cost boundaries.4b5963f v5 is closed18COMPLETED, not18semantic passes; explicit
+consolidation closed empty/nochange and same-request replay0HTTP. f30722f fixes
+normal adapter aggregate basis; it does not repair model claims. Root alone runs
+new empty-bank host-partial-result-v6 from frozenf30722f, started08:46:12UTC.
+Do not hotedit or launch preparedprefix8-v5 until actual closure/serial release.
+PR83/84/85 merged; PR86 followup pending ownCI/merge. Original full goal remains
+active/incomplete,16reserved unused,ProductNO_GO. All older blocks are historical.
+
+# 2026-10-07 08:15:52 UTC: merged PRs and first unified Host closed
+
+PR83/84/85 are merged; main7141340 tree equals tested613c992. Main integration
+worktree clean; original checkout's untracked user plans retained. Frozen613c992
+host-five-flows-v4 exited0 with12COMPLETED/2FAILED/4NOT_RUN across18 messages,
+65generation/525410known,42embedding/1926,0Judge/newunknown. Root read all14
+attempted delivered answers and separate business natural candidates. Aggregate
+to-member inference, invented historical exception, role/empty-field refusals,
+Reader length and post-forget Episode failure remain evidence, not semantic passes.
+Business SQLite has exactly1reserve+1complete_label; tool semantic edit rejected
+source_role_mismatch. Forget hid the chosen trigger and record, not every original.
+
+1847ade retains actual grouped roles/optional empty fields;4b5963f keeps hidden
+assistant audit without readable Episode.236edit checks and16visibility wiring
+checks/examples pass; originalPython3.11 affected4-source mypy passes. New real
+fix run still0 at this fixed observation. Freeze fresh source/new empty banks with
+same inputs/budgets; never rewrite613 results or replay oldunknown397. Continuous
+41734requests/162076191known/162267679charged/embed1122384/unknown5 unchanged
+after closure. Original full plan remains active/incomplete,16reserved unused,
+ProductNO_GO. Earlier blocks are historical; Root alone controls real model HTTP.
+
 # 2026-10-07: user-requested GitHub integration
 
 The user explicitly requests processing and merging related GitHub pull requests.

@@ -1643,6 +1643,119 @@ def test_actual_partial_business_delivery_memory_only_and_unknown_business_no_re
             assert len(app.world.snapshot()["attempts"]) == 1 and not memory.service.records()
 
 
+@pytest.mark.parametrize("arm", ["M", "B2"])
+def test_user_plan_accepts_actual_tool_result_and_keeps_user_condition(tmp_path, arm):
+    """Mixed record provenance does not relabel either original assertion."""
+    condition = "Notify me only after the label has been completed."
+    request = "Reserve this synthetic item; remember the actual result. " + condition
+    args = {"item_key": "synthetic", "quantity": 1, "destination": "desk", "packing": "box"}
+    with (
+        FunctionalApplication.open(
+            tmp_path / "app", "reservation", "alice", initial_label_available=False
+        ) as app,
+        opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES) as memory,
+    ):
+        writer_turn(memory, "u", request)
+        user_ref = memory._binding(cfg())["source_ref"]
+        initial = memory.writer.prepare([user_ref], "", selected_records=[], redelivered_ranges=[])
+        created = memory.maintain_delivery(
+            cfg(), initial, request_id="user-plan", date="2026-10-07", recipe="single_pass",
+            allowed=True, model_call=lambda stage, messages, schema: {
+                "creates": [{"action": "create", "matter": "Reservation result", "clauses": [{
+                    "text": "User requests a reservation and its actual result.",
+                    "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
+                    "conditions": [{
+                        "text": condition, "evidence": ["e1"],
+                        "assertion": {"source": "e1", "kind": "reported"},
+                        "binding": {"evidence": ["e1"]},
+                    }],
+                }]}], "records": {},
+            },
+        )
+        assert created["status"] == "completed", created
+        record_id = created["receipts"][0]["id"]
+        before = copy.deepcopy(memory.service.read(record_id)["value"])
+        assert before["basis"] == "user_statement"
+        wrapper = app.call_wrapper(memory.service, "s", "u")
+        delivered = json.loads(business(wrapper, "reserve_and_label", args, "reserve").content)
+        assert delivered["business_outcome"] == "partial"
+        fragments = delivered["source_fragment_index"]
+        memory.note_delivered_fragment_handles(cfg(), [f["fragment_handle"] for f in fragments])
+        tool_ref = fragments[0]["source_ref"]
+        delivery = memory.writer.prepare([tool_ref], "", selected_records=[], redelivered_ranges=[])
+        actual_text = "The tool reports a reservation exists; label completion is unconfirmed."
+
+        def no_change(stage, messages, schema):
+            return {"creates": [], "records": {"r1": {"action": "no_change"}}}
+
+        unchanged = memory.maintain_delivery(
+            cfg(), delivery, request_id="before-result-no-change", date="2026-10-07",
+            recipe="single_pass", model_call=no_change, allowed=True,
+        )
+        assert unchanged["status"] == "completed", unchanged
+        assert memory.service.read(record_id)["value"] == before
+
+        def edit(stage, messages, schema):
+            packet = json.loads(messages[1]["content"])["delivery"]
+            assert packet["source_table"][0]["role"] == "tool"
+            assert packet["source_table"][1]["role"] == "user"
+            if arm == "M":
+                proposal = {"action": "edit", "edits": [{
+                    "operation": "change_value", "target_unit": "u1", "text": actual_text,
+                    "evidence": ["e1"], "assertion": {"source": "e1", "kind": "observed"},
+                }]}
+            else:
+                proposal = {"action": "rewrite", "revision_evidence": ["e1"], "clauses": [{
+                    "text": actual_text, "evidence": ["e1"], "from_unit": "u1",
+                    "assertion": {"source": "e1", "kind": "observed"},
+                    "conditions": [{
+                        "text": condition, "evidence": [], "keep_support": ["h2"],
+                        "from_unit": "u2",
+                        "assertion": {"keep": "h2"},
+                        "binding": {"evidence": [], "keep_support": ["h3"]},
+                    }],
+                }]}
+            return {"creates": [], "records": {"r1": proposal}}
+
+        world = copy.deepcopy(app.world.snapshot())
+        changed = memory.maintain_delivery(
+            cfg(), delivery, request_id="actual-tool-result", date="2026-10-07",
+            recipe="single_pass", model_call=edit, allowed=True,
+        )
+        assert changed["status"] == "completed", [r.get("reason") for r in changed["receipts"]]
+        assert app.world.snapshot() == world and len(world["attempts"]) == 1
+        current = memory.service.read(record_id)["value"]
+        assert current["revision"] == 2 and current["basis"] == "inference"
+        assert set(current["source_refs"]) == {user_ref, tool_ref}
+        assert current["scope"] == before["scope"]
+        assert current["fields"] == before["fields"]
+        assert current["object_ref"] == before["object_ref"]
+        actual, retained = current["edit_state"]["units"]
+        assert actual["text"] == actual_text
+        assert actual["assertion"]["kind"] == "observed"
+        assert actual["assertion"]["role"] == "tool"
+        assert actual["assertion"]["source_ref"] == tool_ref
+        old_condition = before["edit_state"]["units"][1]
+        assert {k: v for k, v in retained.items() if k != "unit_id"} == {
+            k: v for k, v in old_condition.items() if k != "unit_id"
+        }
+        assert retained["assertion"]["kind"] == "reported"
+        assert retained["assertion"]["source_ref"] == user_ref
+        assert memory.service.read(record_id, 1)["value"] == before
+        basis_refs = {memory.service.source_fragment(handle)["source_ref"]
+                      for handle in current["functional_support"]["basis"]["fragment_handles"]}
+        assert basis_refs == {user_ref, tool_ref}
+        confirmed = memory.maintain_delivery(
+            cfg(), delivery, request_id="after-result-no-change", date="2026-10-07",
+            recipe="single_pass", model_call=no_change, allowed=True,
+        )
+        assert confirmed["status"] == "completed", confirmed
+        assert memory.service.read(record_id)["value"] == current
+    with opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES) as memory:
+        assert memory.service.read(record_id)["value"] == current
+        assert memory.service.read(record_id, 1)["value"] == before
+
+
 @pytest.mark.parametrize("after_put", [False, True])
 @pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
 def test_read_receipt_unknown_does_not_mark_undelivered_body_as_evidence(

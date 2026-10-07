@@ -958,6 +958,14 @@ class FunctionalEditMemory(FunctionalMemory):
             )
         return result
 
+    def _record_basis(self, source_refs: list[str]) -> str:
+        """Aggregate actual record provenance; unit assertions retain their own roles."""
+        roles = {self.service.source(ref)["role"] for ref in source_refs}  # type: ignore[index]
+        return (
+            "user_statement" if roles == {"user"} else
+            "tool_observation" if roles == {"tool"} else "inference"
+        )
+
     def save_edit(
         self,
         config: RunnableConfig,
@@ -1001,7 +1009,6 @@ class FunctionalEditMemory(FunctionalMemory):
             decorate_state(state, _edit_metadata)
         saved_scope = self._scope(scope or {})
         refs = support["source_refs"]
-        roles = {self.service.source(ref)["role"] for ref in refs}  # type: ignore[index]
         proposal = {
             "action": "create",
             "id": None,
@@ -1009,11 +1016,7 @@ class FunctionalEditMemory(FunctionalMemory):
             "content": render_state(state),
             "scope": saved_scope,
             "kind": "semantic",
-            "basis": "user_statement"
-            if roles == {"user"}
-            else "tool_observation"
-            if roles == {"tool"}
-            else "inference",
+            "basis": self._record_basis(refs),
             "fields": {},
             "object_ref": None,
             "source_ref": refs[0],
@@ -1135,19 +1138,24 @@ class FunctionalEditMemory(FunctionalMemory):
                 ]
             )
         )
+        basis = old["basis"] if equal else self._record_basis(refs)
+        if basis != old["basis"]:
+            support["basis"] = list(dict.fromkeys([*support.get("basis", []), *handles]))
+        updated = {"content": content, "basis": basis}
         proposal = {
             "action": "update",
             "id": row["id"],
             "expected_revision": old["revision"],
             "candidate_handle": read_handle,
             "content": content,
-            **{key: copy.deepcopy(old[key]) for key in ("kind", "basis", "scope", "fields")},
+            **{key: copy.deepcopy(old[key]) for key in ("kind", "scope", "fields")},
+            "basis": basis,
             "object_ref": old.get("object_ref"),
             "source_ref": refs[0],
             "source_refs": refs,
             "field_support": {
                 field: {"reuse_support_from": read_handle}
-                if canonical(old[field]) == canonical(content if field == "content" else old[field])
+                if canonical(old[field]) == canonical(updated.get(field, old[field]))
                 else {"source_refs": refs}
                 for field in ("content", "scope", "basis", "kind")
             },
@@ -1269,19 +1277,24 @@ class FunctionalEditMemory(FunctionalMemory):
                 ]
             )
         )
+        basis = old["basis"] if no_change else self._record_basis(refs)
+        if basis != old["basis"]:
+            support["basis"] = list(dict.fromkeys([*support.get("basis", []), *handles]))
+        updated = {"content": content, "basis": basis}
         proposal = {
             "action": "update",
             "id": row["id"],
             "expected_revision": old["revision"],
             "candidate_handle": read_handle,
             "content": content,
-            **{key: copy.deepcopy(old[key]) for key in ("kind", "basis", "scope", "fields")},
+            **{key: copy.deepcopy(old[key]) for key in ("kind", "scope", "fields")},
+            "basis": basis,
             "object_ref": old.get("object_ref"),
             "source_ref": refs[0],
             "source_refs": refs,
             "field_support": {
                 field: {"reuse_support_from": read_handle}
-                if canonical(old[field]) == canonical(content if field == "content" else old[field])
+                if canonical(old[field]) == canonical(updated.get(field, old[field]))
                 else {"source_refs": refs}
                 for field in ("content", "scope", "basis", "kind")
             },
