@@ -1,5 +1,23 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 08:15:52 UTC／北京时间16:15:52：相关PR已合并，首轮统一Host已闭合。**
+
+PR83／84／85均merged，main为7141340，与已通过自身Fast／Full21项的613c992源码树一致；
+不借用该CI声称合并提交自身CI运行。独立integration工作区干净，原checkout用户计划保留。
+冻结613c992五个空库18消息：12COMPLETED、2FAILED、4NOT_RUN，进程退出0；65生成／
+525410known、42编码／1926token、Judge0／新增unknown0。Root读完全部14条实际答复；
+当前／历史推断、共同限制角色、空字段、Reader截断及遗忘索引问题分别保留，非12语义通过。
+实际业务仅一笔预订／一次补标签；工具语义修订未提交，不能合并成保存成功。
+
+后续1847ade公开实际角色并允许省略空字段，4b5963f修复隐藏最终答复的Episode索引；
+编辑相关236项、遗忘／可见性16项、示例及受影响Python3.11类型检查通过，真实复测尚0。
+连续账本41,734请求、known162,076,191／charged162,267,679、embedding1,122,384、unknown5。
+新候选待同输入新空库复测及集中评分，原dffc评分仍18/32中断且397未确认。
+详情见[统一使用及首轮证据](MILAI_UNIFIED_MEMORY_USAGE.md)与[同一问题表](MILAI_BUILD_FIRST_ISSUES.md)。
+正式对照、长历史、保留／外部、完整Host与六交付未完，Product NO_GO。下方保留原时点。
+
+---
+
 **2026-10-07：按用户要求整合GitHub相关开发PR。**
 
 PR84已合并到main（`eb5695b`）。PR83的post-r52实现与PR85统一候选在独立worktree合流，

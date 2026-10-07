@@ -3,13 +3,51 @@
 本轮按[多Agent任务卡](MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md)及用户提供的
 [配套规划](MILAI_UNIFIED_MEMORY_ARCHITECTURE_AND_BUILD_PLAN.md)开发。
 五个模块已合流到同一MemoryService，父版本为`5c36b28`；本提交加入中央Host、
-benchmark、配置及显式整理／完整请求恢复入口。它是待测功能候选，尚无本候选的
-真实模型效果、最终方法选择或Product准入。原[build-first完整任务](
+benchmark、配置及显式整理／完整请求恢复入口。首轮真实Host结果及后续修复分列如下；
+尚无最终方法选择或Product准入。原[build-first完整任务](
 MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 
 2026-10-07用户要求合并相关GitHub开发内容；PR83的可选来源工作视图和提案额度接入本候选，
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
+
+## 首轮真实Host与修复版本
+
+固定观察：2026-10-07 08:15:52 UTC／北京时间16:15:52。PR83、84、85均已合并，
+main为`7141340`；其源码树与已通过自身Fast及Full（21项）的`613c992`相同。
+这不等于合并提交7141340自身CI已经运行。
+
+真实运行冻结于`613c992`，产物`artifacts/unified/host-five-flows-v4`，同一Qwen3.6及
+BGE-m3、原Host预算、五个独立空库、18条消息，每条以新进程打开原bank。进程退出0，
+18条中12条执行COMPLETED、2条FAILED、4条因前序失败NOT_RUN。Root读完14条实际执行的
+完整送达答复，另分别阅读业务自然候选；没有Judge或另造数值重评分。
+
+| 实际观察 | 最早断点及边界 |
+|---|---|
+| 保存后跨进程只读能读到规则及例外，旧值保持 | 首轮已执行；弱限定的保存仍须语义复核，不能用提交次数代替 |
+| 首个学校手工规则已提交，最终Reader失败 | Reader的8,192输出token全耗尽，finish_reason=length、content为空；不是编辑前容量失败 |
+| 新增局部例外未提交 | 原共同限制实际存为content，编辑却将其选作shared condition；首次stop提案被正常拒绝 |
+| 修改共同限制的首次提案未提交 | 合法records.r1编辑仅因缺少空creates被拒绝；后续独立事件才提交两天，不能追记前次成功 |
+| 当前／历史回答仍有语义错误 | 总体频率无依据分配给子组，答复声称历史存在从未提交的例外；旧状态和首次输出均保留 |
+| 遗忘已撤销一事项及所选来源，最终流程仍报错 | 当次选择的是撤销请求来源，不能声称原偏好原话和所有副本都已撤销；隐藏的最终答复继续建Episode导致EPISODE_SOURCE_UNAVAILABLE |
+| 部分预订后实时查询再补标签 | 实际业务SQLite仅一笔reserve_and_label及一次complete_label；首先误用记忆ID查询失败后改用实际物品。语义工具结果提案因source_role_mismatch未提交，原用户请求不能证明办理结果 |
+
+成本：65次生成、525,410 known tokens（31 tool_calls、33 stop、1 length），42次编码、
+1,926 tokens，Judge0、新增已闭合unknown0；请求、响应与连续账本差额相等。连续账本
+41,734请求，known162,076,191／charged162,267,679，embedding1,122,384，unknown5沿用
+历史4及旧397未确认，不重置。退出0和12个COMPLETED均不表示12条语义通过。
+
+后续开发源码`1847ade`在同一既有编辑边界保留实际content／condition角色，允许省略空
+creates／records，编辑仍必须显式选records.r#；原content冒充shared condition仍拒绝。
+有新证据时可用原append(condition, attach_to=实际目标)及retract修正表示，无自动迁移。
+`4b5963f`使已隐藏的最终答复只保留原审计捕获，不生成可读Episode；不会恢复隐藏来源。
+236项编辑相关检查、16项遗忘／可见性接线检查、SQLite示例及Ruff通过；原Python3.11
+环境的四个受影响源模块mypy通过。另一隔离环境的NumPy类型语法与3.11冲突单列，
+其3.12全包检查不能替代3.11支持。上述修复尚无真实模型复测；原613c992结果不变。
+
+下一次使用新冻结源码、新空库和同一批输入，预算、模型、recipe及Reader不变。
+随后集中预测与独立评分，再按原完整计划执行同版对照、长历史、保留／外部及完整Host。
+旧dffc232评分仍中断18/32、396响应、397未确认；不能重发未知请求或补称闭合。
 
 ## 实现及证据边界
 

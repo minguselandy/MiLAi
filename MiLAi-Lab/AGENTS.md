@@ -1,3 +1,24 @@
+# 2026-10-07 08:15:52 UTC: merged PRs and first unified Host closed
+
+PR83/84/85 are merged; main7141340 tree equals tested613c992. Main integration
+worktree clean; original checkout's untracked user plans retained. Frozen613c992
+host-five-flows-v4 exited0 with12COMPLETED/2FAILED/4NOT_RUN across18 messages,
+65generation/525410known,42embedding/1926,0Judge/newunknown. Root read all14
+attempted delivered answers and separate business natural candidates. Aggregate
+to-member inference, invented historical exception, role/empty-field refusals,
+Reader length and post-forget Episode failure remain evidence, not semantic passes.
+Business SQLite has exactly1reserve+1complete_label; tool semantic edit rejected
+source_role_mismatch. Forget hid the chosen trigger and record, not every original.
+
+1847ade retains actual grouped roles/optional empty fields;4b5963f keeps hidden
+assistant audit without readable Episode.236edit checks and16visibility wiring
+checks/examples pass; originalPython3.11 affected4-source mypy passes. New real
+fix run still0 at this fixed observation. Freeze fresh source/new empty banks with
+same inputs/budgets; never rewrite613 results or replay oldunknown397. Continuous
+41734requests/162076191known/162267679charged/embed1122384/unknown5 unchanged
+after closure. Original full plan remains active/incomplete,16reserved unused,
+ProductNO_GO. Earlier blocks are historical; Root alone controls real model HTTP.
+
 # 2026-10-07: user-requested GitHub integration
 
 The user explicitly requests processing and merging related GitHub pull requests.
