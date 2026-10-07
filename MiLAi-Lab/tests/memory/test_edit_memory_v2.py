@@ -70,6 +70,54 @@ def formation(method, view, op="save"):
 NEXT_FEATURES = EditFeatures(True, True, True, True, True)
 
 
+def test_compact_prompt_schema_keeps_ordered_definitions_and_literal_data_independent():
+    literal = {
+        "properties": {"items": [1, {"default": ["ordinary data"]}]},
+        "oneOf": [False, {"type": "not a schema"}],
+    }
+    child = {
+        "description": "An ordinary nested value. " * 8,
+        "type": "object",
+        "properties": {"payload": {"const": literal}},
+        "required": ["payload"],
+        "additionalProperties": False,
+    }
+    schema = {
+        "title": "Literal-bearing synthetic contract",
+        "properties": {"left": child, "right": copy.deepcopy(child)},
+        "type": "object",
+        "required": ["left", "right"],
+        "default": {"properties": literal},
+        "additionalProperties": False,
+    }
+    before = copy.deepcopy(schema)
+    expected = {
+        **schema,
+        "properties": {
+            "left": {"$ref": "#/$defs/shared_0"},
+            "right": {"$ref": "#/$defs/shared_0"},
+        },
+        "$defs": {
+            "shared_0": {**child, "properties": {"payload": {"$ref": "#/$defs/shared_1"}}},
+            "shared_1": {"const": literal},
+        },
+    }
+    compact = compact_prompt_schema(schema)
+    assert json.dumps(compact, ensure_ascii=False) == json.dumps(expected, ensure_ascii=False)
+    value = {"left": {"payload": literal}, "right": {"payload": literal}}
+    invalid = {"left": {"payload": {}}, "right": {"payload": literal}}
+    for original in (schema, compact):
+        Draft202012Validator.check_schema(original)
+        validator = Draft202012Validator(original)
+        assert validator.is_valid(value) and not validator.is_valid(invalid)
+    compact["default"]["properties"]["properties"]["items"].append("changed")
+    compact["$defs"]["shared_1"]["const"]["oneOf"].append("changed")
+    assert schema == before
+    already_shared = compact_prompt_schema(compact)
+    already_shared["$defs"]["shared_1"]["const"]["oneOf"].append("copy changed")
+    assert already_shared != compact
+
+
 def test_default_envelope_retains_exact_legacy_structure_and_per_proposal_rejection(tmp_path):
     with opened(tmp_path) as (service, method):
         view, _ = packet(service, method, "legacy-envelope", "A synthetic source.", [])
