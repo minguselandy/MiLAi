@@ -829,7 +829,8 @@ def test_host_stage_links_are_durable_before_dispatch_and_resume_only_remaining_
         }], save_result=False))
         adapter = app.adapter(service, "new-session", "continue", allowed_operations=(remaining,))
         resumed = HostRequestProgress(app, adapter, service, host_binding(
-            service, "new-session", "continue"), {}, narrowed, [request_id])
+            service, "new-session", "continue"), {
+                "business_action_request": "continue_if_unfinished"}, narrowed, [request_id])
         assert resumed.request_ids == [request_id, service.event_id(
             "new-session", "continue", "user") + ":application:1"] and resumed.dirty
         assert resumed.rows()[0][1]["requirements"] == plans[0]
@@ -861,6 +862,108 @@ def test_host_stage_links_are_durable_before_dispatch_and_resume_only_remaining_
         else:
             doc = finished["documents"][0]
             assert len(doc["versions"]) == len(doc["approvals"]) == len(doc["publications"]) == 1
+
+
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+@pytest.mark.parametrize("action_request", ["perform", "continue_if_unfinished"])
+def test_host_same_target_changed_intent_registers_only_explicit_new_perform_request(
+    tmp_path: Path, workflow: str, action_request: str,
+) -> None:
+    reservation = workflow == "reservation"
+    target = {"item_key": "mechanical item"} if reservation else {"title": "mechanical draft"}
+    operation = "reserve_and_label" if reservation else "create_or_update_draft"
+    original_arguments = ({"quantity": 1, "destination": "local", "packing": "box"}
+                          if reservation else {"content": "Original content"})
+    extra_actions = [] if reservation else [
+        {"operation": "approve_document_version", "arguments": {}},
+        {"operation": "publish_approved_document", "arguments": {"audience": "local team"}},
+    ]
+    original = compile_application_requests(workflow, [{"target": target, "actions": [{
+        "operation": operation, "arguments": original_arguments,
+    }, *extra_actions]}], save_result=False, feedback=False)
+    changed_arguments = {**original_arguments,
+                         **({"quantity": 2} if reservation else {"content": "Revised content"})}
+    changed = compile_application_requests(workflow, [{"target": target, "actions": [{
+        "operation": operation, "arguments": changed_arguments,
+    }, *extra_actions]}], save_result=False, feedback=False)
+    operations = tuple(step["operation"] for step in original[0]["steps"])
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow)
+        adapter = app.adapter(service, "session", "message", allowed_operations=operations)
+        tracker = HostRequestProgress(app, adapter, service, host_binding(service),
+                                      {"business_action_request": "perform"}, original, [])
+        first_args = reserve_args() if reservation else draft_args()
+        first, history = host_call(tracker, operation, first_args, "first", [])
+        assert receipt(first)["ok"]
+        if not reservation:
+            bound = {field: receipt(first)[field] for field in ("title", "document_version")}
+            _, history = host_call(tracker, "approve_document_version", bound, "approve", history)
+            published, _ = host_call(tracker, "publish_approved_document", {
+                **bound, "audience": "local team"}, "publish", history)
+            assert receipt(published)["ok"]
+        assert tracker.snapshot()[0]["complete"]
+        request_id = tracker.request_ids[0]
+        _, prior = app.progress.request_state("alice", request_id, None)
+        before = app.world.snapshot()
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow)
+        content = ("Reserve quantity 2 for the same mechanical item." if reservation else
+                   "Replace the mechanical draft with Revised content.") if (
+                       action_request == "perform") else "Continue the prior unfinished work only."
+        service.capture_user("new-session", "current", content)
+        binding = host_binding(service, "new-session", "current")
+        adapter = app.adapter(service, "new-session", "current", allowed_operations=operations)
+        current = HostRequestProgress(app, adapter, service, binding,
+                                      {"business_action_request": action_request}, changed,
+                                      [request_id])
+        _, original_row = app.progress.request_state("alice", request_id, None)
+        assert original_row == prior and app.world.snapshot() == before
+        same_plan = HostRequestProgress(app, adapter, service, binding,
+                                        {"business_action_request": "perform"}, original,
+                                        [request_id])
+        assert same_plan.request_ids == [request_id]
+        if action_request == "continue_if_unfinished":
+            assert current.request_ids == [request_id]
+            assert current.rows()[0][1]["requirements"] == original[0]
+            changed_call = {**target, **changed_arguments,
+                            **({} if reservation else {"document_version": 1})}
+            denied, _ = host_call(current, operation, changed_call, "undeclared-change", [])
+            assert json.loads(denied.content)["status"] == "request_plan_not_registered"
+            assert app.world.snapshot() == before
+        else:
+            new_id = binding["source_ref"] + ":application:0"
+            assert current.request_ids == [request_id, new_id]
+            _, registered = app.progress.request_state("alice", new_id, None)
+            assert registered["requirements"] == changed[0]
+            assert registered["binding"] == {**binding, "workflow": app.workflow}
+            assert all(stage["status"] == "pending" and stage["attempts"] == []
+                       for stage in registered["request_progress"]["business"]["steps"])
+            query = "get_reservation" if reservation else "get_document_status"
+            observed, history = host_call(current, query, target, "actual-current", [])
+            changed_call = {**target, **changed_arguments,
+                            **({} if reservation else {"document_version":
+                                                      receipt(observed)["document_version"]})}
+            result, history = host_call(current, operation, changed_call, "changed-action", history)
+            if reservation:
+                assert receipt(result)["status"] == "duplicate_reservation_attempt"
+                assert receipt(result)["quantity"] == 1
+                assert current.snapshot()[1]["business"]["steps"][0]["status"] == "incomplete"
+            else:
+                assert receipt(result)["content"] == "Revised content"
+                assert receipt(result)["document_version"] == 2
+                bound = {field: receipt(result)[field] for field in ("title", "document_version")}
+                approved, history = host_call(current, "approve_document_version", bound,
+                                              "changed-approve", history)
+                published, _ = host_call(current, "publish_approved_document", {
+                    **bound, "audience": "local team"}, "changed-publish", history)
+                assert receipt(approved)["ok"] and receipt(published)["ok"]
+                document = app.world.snapshot()["documents"][0]
+                assert len(document["versions"]) == len(document["approvals"]) == len(
+                    document["publications"]) == 2
+                assert current.snapshot()[1]["complete"]
+            _, original_row = app.progress.request_state("alice", request_id, None)
+            assert original_row == prior
 
 
 def test_host_unknown_call_keeps_original_attempt_and_requires_actual_discovery(

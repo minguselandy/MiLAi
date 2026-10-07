@@ -78,16 +78,22 @@ class HostRequestProgress:
         self.app, self.adapter, self.service = app, adapter, service
         self.binding, self.mode = deepcopy(dict(binding)), deepcopy(dict(mode))
         self.request_ids: list[str] = []
-        original_targets = []
+        original_plans = []
         for request_id in prior_request_ids:
             _, row = self.app.progress.request_state(app.owner, request_id, None)
             if not _visible_request(app, service, row):
                 raise ValueError("HOST_PRIOR_APPLICATION_REQUEST_UNAVAILABLE")
             if request_id not in self.request_ids:
                 self.request_ids.append(request_id)
-                original_targets.append(row["requirements"]["target"])
+                original_plans.append(row["requirements"])
         for index, plan in enumerate(requirements):
-            if plan["target"] in original_targets:
+            prior_plans = [old for old in original_plans if old["target"] == plan["target"]]
+            if prior_plans and (
+                self.mode.get("business_action_request") != "perform"
+                or any(all(step in old["steps"] for step in plan["steps"]) for old in prior_plans)
+            ):
+                # Continuation keeps the complete original request. An explicit
+                # new action with changed arguments has its own current binding.
                 continue
             request_id = str(binding["source_ref"]) + ":application:" + str(index)
             self.app.progress.request_state(
@@ -208,9 +214,21 @@ class HostRequestProgress:
         identity, target = self._identity(request), self._target(request)
         selected: dict[str, dict[str, Any]] = {}
         matched: list[tuple[str, int]] = []
-        for key, row in self.rows():
+        rows = self.rows()
+        current_targets = [
+            row["requirements"]["target"]
+            for _, row in rows
+            if row["binding"]["source_ref"] == self.binding["source_ref"]
+        ]
+        for key, row in rows:
             plan = row["requirements"]
             if plan["target"] != target:
+                continue
+            if (
+                self.mode.get("business_action_request") == "perform"
+                and target in current_targets
+                and row["binding"]["source_ref"] != self.binding["source_ref"]
+            ):
                 continue
             for index, step in enumerate(plan["steps"]):
                 if step["operation"] != name or not all(
