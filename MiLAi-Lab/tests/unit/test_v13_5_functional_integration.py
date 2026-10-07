@@ -302,10 +302,12 @@ def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bo
         allow_business_mutation=business, requires_memory_result=required)
 
 
+@pytest.mark.parametrize("lost_memory_response", [False, True])
 def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual_result(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_memory_response: bool,
 ) -> None:
     from milai_lab.application.functional import FunctionalApplication
+    from milai_lab.application.recovery import UnknownSemanticCommit
     from milai_lab.runners import memory_operations
 
     root = prepared(
@@ -376,10 +378,35 @@ def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual
     with FunctionalApplication.open(bank_root / "applications" / "reservation",
                                     "reservation", "alice") as app:
         app.world.set_label_available("restore-label-service", True)
+    maintain_delivery = functional.FunctionalEditMemory.maintain_delivery
+    interrupted = []
+
+    def lose_committed_reply(memory: Any, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        outcome = maintain_delivery(memory, *args, **kwargs)
+        if (lost_memory_response and not interrupted and kwargs.get("execute", True)
+                and kwargs["request_id"].startswith("original-request:memory:")):
+            interrupted.append(outcome)
+            raise UnknownSemanticCommit("Actual semantic commit completed; callback reply lost")
+        return outcome
+
+    monkeypatch.setattr(functional.FunctionalEditMemory, "maintain_delivery", lose_committed_reply)
     completed = memory_operations.run(
         root, **common, request_id="finish", text="Finish the label and save the actual outcome.",
         allowed_operations=["complete_label"],
     )
+    if lost_memory_response:
+        assert not completed["complete"] and completed["memory"]["status"] == "semantic_unknown"
+        original_attempt = completed["memory"]["attempts"][0]
+        assert original_attempt["binding"]["session"] == "session"
+        assert original_attempt["binding"]["turn_id"] == "finish"
+        assert interrupted[0]["semantic_write_performed"]
+        completed = memory_operations.run(
+            root, **{**common, "session": "later-session"}, request_id="reconcile-only",
+            text="Only inspect the earlier committed save; no save or business actions.",
+            readonly=True, allow_memory=False,
+        )
+        assert completed["memory"]["attempts"] == [original_attempt]
+        assert completed["memory"]["reconciliation"]["status"] == "committed"
     assert completed["complete"], completed
     assert completed["memory"]["status"] == "committed"
     assert completed["feedback"]["attempts"][-1]["receipt"]["host_seen"] is False
@@ -4887,3 +4914,77 @@ def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch, m
     result = message(root)
     assert result["status"] == "COMPLETED", result
     assert result["records"] == [] and result["maintenance"] == [] and len(wires) == 2
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+@pytest.mark.parametrize("no_save", [False, True])
+def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, no_save: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, memory_continuation=True, operation_completion=True,
+                    inline_fragments=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe=recipe,
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata", "temporal_scope")})
+    prior = "Save the actual outcome of the earlier reservation when it can be observed."
+    imported = [{"role": "user", "session_id": "old-session", "event_key": "old-request",
+                 "content": prior, "occurred_at": "2030-02-01T09:00:00Z"}]
+    imported.extend({"role": "user", "session_id": "old-session", "event_key": f"later-{n}",
+                     "content": f"Unrelated later user event {n}.",
+                     "occurred_at": f"2030-02-02T09:00:0{n}Z"} for n in range(6))
+    selected: list[dict[str, Any]] = []
+    stages: list[str] = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call("classify_current_request", "intent",
+                memory_write_request="none", allow_forgetting=False,
+                business_action_request="none", business_operations=[],
+                memory_continuation_request="none" if no_save else "resolve_prior_explicit")
+        if ordinal == 2 and not no_save:
+            frame = json.loads(wire["messages"][-1]["content"])
+            selected.extend(row for row in frame["archived_reference_material"]["items"]
+                            if row.get("type") == "fragment" and row["content"] == prior)
+            assert selected
+            return native_call("resolve_continuation_operations", "resolve",
+                business_operations=[], prior_memory_request_fragments=[
+                    row["fragment_handle"] for row in selected])
+        if not wire.get("tools") and any("response_schema" in row["content"]
+                                         for row in wire["messages"]):
+            assert not no_save
+            packet = json.loads(wire["messages"][-1]["content"])
+            delivery = packet["delivery"]
+            context = packet["prior_context"]
+            original = next(row for row in context if row["text"] == prior)
+            assert original["role"] == selected[0]["role"] == "user"
+            assert original["occurred_at"] == "2030-02-01T09:00:00Z"
+            assert prior not in json.dumps(delivery)
+            if "Extract brief candidate propositions" in wire["messages"][0]["content"]:
+                stages.append("extract")
+                return {"role": "assistant", "content": json.dumps({"changes": []})}
+            stages.append("edit")
+            return {"role": "assistant", "content": json.dumps({"creates": [], "records": {}})}
+        return {"role": "assistant", "content": "No observed outcome has been saved."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="resume-context", owner="alice", workflow="reservation",
+                session="current-session", message_id="continue",
+                content="Only read; do not save." if no_save else
+                        "Continue saving the actual outcome requested earlier.",
+                initial_sources=imported, occurred_at="2030-02-03T09:00:00Z")
+    result = functional.message(root, **args)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["records"] == []  # Context delivery and empty proposals do not prove a save.
+    assert stages == ([] if no_save else ["extract", "edit"]
+                      if recipe == "extract_then_edit" else ["edit"])
+    if no_save:
+        assert result["maintenance"] == [] and len(wires) == 3
+    else:
+        assert result["request_mode"]["resumed_memory_request"]["completion"] == (
+            "not_proven_by_resolution")
+        assert not any(row["semantic_write_performed"] for row in result["maintenance"])
+    calls = len(wires)
+    repeated = functional.message(root, **args, resume=True)
+    assert repeated["status"] == "COMPLETED" and repeated["records"] == []
+    assert len(wires) == calls
