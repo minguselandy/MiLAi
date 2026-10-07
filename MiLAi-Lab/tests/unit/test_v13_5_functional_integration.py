@@ -2886,12 +2886,14 @@ def test_empty_business_operations_grant_nothing_and_do_not_block_independent_me
 
 
 @pytest.mark.parametrize('visibility_stop', [False, True])
+@pytest.mark.parametrize('memory_profile', ['ordinary', 'unified_v1'])
 def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accounting(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, visibility_stop: bool,
+    memory_profile: str,
 ) -> None:
     root = prepared(tmp_path, native=True, readonly_finalization=True,
         independent_capabilities=True, current_delivery=True, fresh_completion=True,
-        operation_completion=True)
+        operation_completion=True, memory_profile=memory_profile)
     secret = 'MECHANICAL_REVOKED_BODY'
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
@@ -2940,6 +2942,15 @@ def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accou
         assert result['operation_status']['semantic_memory']['status'] == 'not_committed'
         assert result['operation_status']['visibility']['operations'][0][
             'status'] == 'visibility_revoked'
+        exported = functional.memory_data(root, **common, operation='export')
+        assert secret not in json.dumps(exported)
+        assert result['final_capture']['source_ref'] not in {
+            source['event_id'] for source in exported['sources']}
+        if memory_profile == 'unified_v1':
+            assert result['final_capture']['visibility'] == 'revoked'
+            indexed = functional.memory_data(root, **common, operation='index-episodes')
+            assert indexed['episode_ids'] == []
+            assert functional.memory_data(root, **common, operation='episodes') == {'episodes': []}
     attempts = [json.loads(p.read_text()) for p in root.glob('banks/*/*-attempt-*.json')]
     assert len(attempts) == 2 and attempts[-1] != {}
     assert any(a['message_id'] == 'forget' and a['status'] == result['status'] for a in attempts)

@@ -1531,7 +1531,9 @@ class MemoryService:
                     }
                 self._uncertain_captures.discard(event_id)
         episode_id = event.get("episode_id")
-        if self.memory_profile == "unified_v1":
+        # A final assistant receipt may be captured for audit after forgetting
+        # withdrew its exposed sources. It must not become a readable episode.
+        if self.memory_profile == "unified_v1" and not self._functional_hidden(source_ref=event_id):
             from milai_lab.memory.episodes import EpisodeIndex
 
             episode_id = episode_id or reference_key([session, event_key, role])
