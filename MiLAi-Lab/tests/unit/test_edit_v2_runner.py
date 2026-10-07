@@ -984,3 +984,106 @@ def test_append_control_preserves_prior_facts_and_uses_common_source_pipeline(tm
                 method.apply("later", "forbidden", {"action": "rewrite"})
             assert run.maintain(service, later, "later") and edited == ["blue", "red"]
             assert service.records() == records
+
+
+def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchanged(
+    tmp_path, monkeypatch
+):
+    from milai_lab.harness.artifact_io import write_json
+
+    driver = runpy.run_path(str(Path(__file__).parents[2] / "tools/run_edit_change_pairs.py"))
+    compare = driver["compare_recipes"]
+    prepared = tmp_path / "prepared"
+    features = EditFeatures(True, True, True, True, True)
+    cases, originals = [], {}
+    for ordinal in driver["ORDINALS"]:
+        folder = prepared / str(ordinal)
+        folder.mkdir(parents=True)
+        with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
+            service = driver["service_for"](store, folder, "owner")
+            method = EditMemory(service, "B0", interface_version="I2", features=features)
+            old = service.capture_user("old", "save", "The marker is blue. The poster is small.")[
+                "source_ref"]
+            service.bind_source_boundary("old", "save", [old])
+            view = method.writer_request(method.prepare([old], "", selected_records=[]))
+            proposals = method.decode_envelope({"creates": [
+                {"action": "create", "matter": matter, "clauses": [{
+                    "text": text, "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"}}]}
+                for matter, text in [("Marker", "The marker is blue."),
+                                     ("Poster", "The poster is small.")]
+            ], "records": {}}, view["mapping"])
+            for index, proposal in enumerate(proposals):
+                assert method.apply("old", f"save:{index}", proposal)["ok"]
+            current = service.capture_user("new", "change", "The marker is now red.")["source_ref"]
+            delivery = method.prepare([current], "", selected_records=[], redelivered_ranges=[])
+            write_json(folder / "before.json", service.records())
+            cases.append({"ordinal": ordinal, "owner": "owner", "session": "new",
+                          "date": "2030-01-02", "delivery": delivery,
+                          "questions": ["What color is the marker?"]})
+        originals[ordinal] = (folder / "memory.sqlite").read_bytes()
+    write_json(prepared / "inputs.json", {"cases": cases})
+    settings = execution(tmp_path, "B0").settings
+    settings.update(edit_features=features.settings(),
+                    provenance={"original_source_commit": "fixture"})
+    config = tmp_path / "config.json"
+    write_json(config, settings)
+    calls = []
+    budget = RunBudget(RunLimits(), tmp_path / "synthetic-budget.json")
+
+    def provider(request):
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        if wire["messages"][0]["content"].startswith("Answer the current question"):
+            calls.append("reader")
+            assert "The marker is red." in json.dumps(payload["memories"])
+            content = "Red."
+        elif "changes" in payload["response_schema"]["properties"]:
+            calls.append("extract")
+            content = json.dumps({"changes": [{
+                "subject": "Marker", "statement": "The marker is now red.",
+                "evidence": ["e1"], "time": None, "scope": None}]})
+        else:
+            calls.append("edit")
+            packet = payload["delivery"]
+            record = next(row for row in packet["records"] if row["matter"] == "Marker")
+            assert record["clauses"][0]["text"] == "The marker is blue."
+            content = json.dumps({"creates": [], "records": {record["id"]: {
+                "action": "rewrite", "clauses": [{
+                    "from_unit": record["clauses"][0]["id"], "text": "The marker is red.",
+                    "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"}}]}}})
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+            "content": content}}], "usage": {"total_tokens": 8}})
+
+    def factory(settings, root):
+        run = execution(root, "B0")
+        run.settings, run.budget, run.before = settings, budget, copy.deepcopy(budget.state)
+        run.client = VLLMClient(
+            VLLMConfig("http://synthetic.invalid/v1", "synthetic", max_tokens=100),
+            budget=budget, transport=httpx.MockTransport(provider))
+        write_json(root / "actual-config.json", settings)
+
+        def close():
+            run.client.close()
+            write_json(root / "accounting-end.json", budget.state)
+
+        run.close = close
+        return run
+
+    monkeypatch.setitem(compare.__globals__, "BenchmarkRun", factory)
+    output = tmp_path / "comparison"
+    compare(prepared, config, output, "fixture-only")
+    assert calls.count("extract") == 4 and calls.count("edit") == calls.count("reader") == 8
+    for ordinal in driver["ORDINALS"]:
+        assert (prepared / str(ordinal) / "memory.sqlite").read_bytes() == originals[ordinal]
+        left, right = [read_json(output / recipe / "cases" / str(ordinal) / "result.json")
+                       for recipe in ("single_pass", "extract_then_edit")]
+        assert left["before"] == right["before"]
+        for result in [left, right]:
+            assert result["maintenance"]["status"] == "completed"
+            before = {r["id"]: r["value"] for r in result["before"]}
+            after = {r["id"]: r["value"] for r in result["after"]}
+            poster = next(k for k, v in before.items() if v["edit_state"]["matter_description"]
+                          == "Poster")
+            assert before[poster] == after[poster]
+            assert result["answers"][0]["answer"] == "Red."

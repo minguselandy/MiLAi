@@ -1,10 +1,10 @@
 # Build-first 开发候选
 
-执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D已形成可运行候选，五条初轮真实冒烟已结束并暴露语义及反馈问题，定向修复复测已结束，集中开发集预测运行中，Product仍为NO_GO。
+执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D已形成可运行候选，五条初轮真实冒烟已结束并暴露语义及反馈问题，定向修复复测已结束，集中开发集预测已闭合、作者评分运行中，Product仍为NO_GO。
 
 ## 实现
 
-`methods/edit_maintenance.py`提供一个来源批次的共同编排：当前原文→可选一次提取→普通dense K10定位→一次既有编辑器→实际提交。普通Host和benchmark调用同一实现，配对CLI仍仅用于原配对复现。`maintenance_recipe`可选`single_pass`或`extract_then_edit`；没有配置此字段的历史入口保持原流程。
+`methods/edit_maintenance.py`提供一个来源批次的共同编排：当前原文→可选一次提取→普通dense K10定位→一次既有编辑器→实际提交。普通Host、benchmark及配对比较调用同一实现。`maintenance_recipe`可选`single_pass`或`extract_then_edit`；没有配置此字段的历史入口保持原流程。
 
 普通Host继续先捕获用户来源，再按当前请求权限调用维护；实际工具来源分别处理。启用recipe后不再向Host提供另一套save/update工具。编辑提交仍走`FunctionalEditMemory.apply_writer_proposal`、现有版本和事务。结果单列在`maintenance`及`operation_status.semantic_memory`，空提案不表示事实已保存。普通Host现可复用现有`SemanticRetriever`、BGE-m3和编码计账。
 
@@ -59,6 +59,20 @@ python tools/run_functional.py run --root artifacts/build-first/functional-v2-fi
 ```
 
 外部对照沿用`tools/run_edit_external.py --config ... --output ...`，现在也接受`--phase predict|score|all`，并可选择B0/B1/B2/M／Append-only及已有RawRAG、RollingSummary、A-MEM适配。两阶段使用同一冻结配置和产物目录，阶段终态、进度及结束账本分别保存；评分阶段复用已保存的LongMemEval答案，不重做形成、检索或回答。原默认`all`入口保留。已用脚本响应和实际SQLite验证RawRAG预测后重开评分，以及Append-only经外部入口形成状态并调用共同Reader；尚未启动本轮28题真实外部比较，旧外部配置不代表当前候选的冻结配置。
+
+## 同前态recipe比较
+
+现有配对CLI增加`compare`，使用原B0首用户已曝光的原3／6／7／4四份实际前态，记录数16／20／20／16；每种recipe分别复制准备库，使用相同当前原文、B0编辑器、普通dense K10、输入预算及Reader。候选由各自recipe正常检索，不保证两组检索结果相同；不使用理想旧卡或把旧072答案当作当前源码的单轮结果。
+
+```bash
+python tools/run_edit_change_pairs.py compare \
+  /absolute/path/to/prepared-inputs /absolute/path/to/private-config.json \
+  artifacts/build-first/recipe-pairs-v1 --source-version COMMIT
+```
+
+`prepared-inputs`为原`prepare`输出，包含`inputs.json`和四份SQLite库；在冻结源码目录运行时使用绝对输入路径。`compare`分别保存实际前后状态、共同维护结果、每个原问题的完整回答及每组成本终态。最多4次单轮编辑、4次抽取、4次两阶段编辑、22次Reader，共34次生成，Judge0；容量失败可能减少调用。没有自动重试，未知传输结果停止执行；输出目录必须是新的，原准备库和旧运行保留。
+
+入口已用脚本响应和实际SQLite验证两组初态相同、真实修改后可读、无关事项保持、准备库未改；这不是模型效果证据。四例仍是已曝光诊断，不是独立确认。当前真实比较调用为0，原作者评分占用串行资源，结束后再运行。原`execute`保留历史配对协议，不能将本次`compare`与其结果混写。
 
 ## 五条初轮真实观察
 
