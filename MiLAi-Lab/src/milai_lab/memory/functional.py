@@ -502,18 +502,14 @@ class FunctionalMemory:
                 "trigger_binding": "execution_attribution_not_field_evidence",
                 "input_relation": "timing_only_not_automatic_evidence",
                 "stored_history": (
-                    "current_at_snapshot is only the shown saved revision, not past saved content. "
-                    "For what was saved before, use its stored_history.read entry or an exact "
-                    "stored revision. historical_exact_revision never makes that content current. "
-                    "committed_at is the storage clock, not reported or effective time. "
-                    "History body pages use that read's next_cursor, not index_next_cursor. "
-                    "Captured source text is not a saved revision."
+                    "Current absence does not prove never saved. For past saves use "
+                    "stored_history.read or an exact revision. Historical reads are not current. "
+                    "committed_at is storage time, not reported/effective time. "
+                    "Body next_cursor is not index_next_cursor."
                 ),
                 "missing_material": (
-                    "Only currently visible delivered evidence is shown. No match does not "
-                    "establish never supplied, forgotten, or physically erased. Follow available "
-                    "stored-history reads for past saved content. Remaining unavailable material "
-                    "has unknown reason unless actual topic-bound evidence proves it."
+                    "Visible evidence only. A missing match cannot establish never supplied, "
+                    "forgotten or erased. Absence reason is unknown without topic-bound evidence."
                 ),
             },
         }
