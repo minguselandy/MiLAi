@@ -898,3 +898,59 @@ def test_longmemeval_deferred_score_uses_saved_hypothesis(tmp_path, monkeypatch)
     assert run.longmemeval("score")[0]["autoeval_label"] is True
     assert calls == ["maintain", "answer", "author_loaded", "judge"]
     assert snapshot.read_bytes() == original
+
+
+def test_append_control_preserves_prior_facts_and_uses_common_source_pipeline(tmp_path):
+    from milai_lab.memory.functional_state import FunctionalRejection
+    from milai_lab.methods.append_memory import AppendMemory
+
+    run = execution(tmp_path, "Append-only")
+    run.settings.update(maintenance_recipe="extract_then_edit", edit_features={
+        name: True for name in ("matter_organization", "semantic_operations",
+                               "bound_references", "single_record_changes", "source_metadata")})
+    edited = []
+
+    def provider(request):
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        if wire["messages"][0]["content"].startswith("Extract brief candidate"):
+            content = {"changes": []}
+        else:
+            assert wire["messages"][0]["content"].startswith("Maintain factual append-only")
+            assert payload["response_schema"]["properties"]["records"]["properties"] == {}
+            packet = payload["delivery"]
+            if edited:
+                assert packet["records"] and "blue" in json.dumps(packet["records"])
+            color = "red" if edited else "blue"
+            edited.append(color)
+            evidence = packet["evidence"][0]["id"]
+            content = {"creates": [{"action": "create", "matter": "Marker color report",
+                "clauses": [{"text": f"User reports the marker is {color}.",
+                    "evidence": [evidence], "assertion": {"source": evidence, "kind": "reported"}}]
+            }], "records": {}}
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"content": json.dumps(content)}}], "usage": {"total_tokens": 8}})
+
+    with VLLMClient(VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client:
+        run.client = client
+        with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+            service = MemoryService(store, ("append", "alice"), "alice", tmp_path / "memory.lock")
+            run.maintain(service, observation("first", "The marker is blue."), "first")
+            original = service.records()[0]
+            later = ObservedSession("later", "2030-01-02", ({"role": "user",
+                "content": "The marker changed to red.", "timestamp": "2030-01-02"},))
+            run.maintain(service, later, "later")
+            records = service.records()
+            assert len(records) == 2 and service.read(original["id"])["value"] == original["value"]
+            assert {row["value"]["method_arm"] for row in records} == {"Append-only"}
+            assert {row["value"]["method_version"] for row in records} == {"milai_fact_append_v1"}
+            assert {row["value"]["revision"] for row in records} == {1}
+            assert {row["value"]["edit_state"]["units"][0]["assertion"]["occurred_at"]
+                    for row in records} == {"2030-01-01", "2030-01-02"}
+            method = AppendMemory(service, features=EditFeatures.from_settings(run.settings[
+                "edit_features"]))
+            with pytest.raises(FunctionalRejection, match="APPEND_ONLY_CREATE_REQUIRED"):
+                method.apply("later", "forbidden", {"action": "rewrite"})
+            assert run.maintain(service, later, "later") and edited == ["blue", "red"]
+            assert service.records() == records

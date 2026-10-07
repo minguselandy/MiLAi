@@ -39,6 +39,7 @@ from milai_lab.memory.edit_units import (
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event
 from milai_lab.methods.edit_maintenance import parse_object as parse_object
@@ -419,6 +420,8 @@ class BenchmarkRun:
         return str(choice["message"]["content"])
 
     def maintain(self, service: MemoryService, observed: ObservedSession, key: str) -> list[str]:
+        if self.settings.get("arm") == "Append-only":
+            return self.maintain_recipe(service, observed, key)
         if self.settings.get("arm") in {"B0", "B1", "B2", "M"}:
             if self.settings.get("interface_version", "v1") != "v1":
                 if "maintenance_recipe" in self.settings:
@@ -787,8 +790,14 @@ class BenchmarkRun:
         if done.exists():
             return list(read_json(done)["extracted_memories"])
         features = EditFeatures.from_settings(self.settings.get("edit_features", {}))
-        method = EditMemory(service, cast(Arm, self.settings["arm"]),
-                            interface_version=self.settings["interface_version"], features=features)
+        method = (
+            AppendMemory(service, features=features)
+            if self.settings["arm"] == "Append-only"
+            else EditMemory(
+                service, cast(Arm, self.settings["arm"]),
+                interface_version=self.settings["interface_version"], features=features,
+            )
+        )
         refs = []
         for index, turn in enumerate(observed.turns):
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant

@@ -12,6 +12,8 @@
 
 旧语境使用现有可见近期来源，与当前证据分开交付，不成为本次新事实。只读呈现展开实际`modifies/overrides`关系及其原有条件与断言元数据；未保存的一般规则明确缺失。撤销后的当前状态与历史读取沿用原版本机制，不由程序推导子组频次。
 
+`methods/append_memory.py`提供主比较所需的`Append-only`事实追加对照。它复用共同recipe、普通表示、来源／时间字段、dense检索、Reader及MemoryService，只允许创建事实事项；更正、撤销和计划变化作为新的带来源陈述保存，旧记录保持。旧候选仍交付以识别重复陈述，原文与提取提示的证据地位与其他组相同。现有suite的`arms`可选择`Append-only`，实验配置须同时选择共同`maintenance_recipe`和I2；当前公开首轮配置仍只运行M。脚本响应下验证了两次真实SQLite提交、旧值保持、日期归属及重开不重复写入，尚无Append-only真实模型结果，不以其没有UPDATE判失败。
+
 ## 使用现有入口
 
 在Lab目录使用已有包含LangGraph依赖的Python环境，设置`PYTHONPATH=src`。以下命令会使用配置中的现有本地服务；`message`与benchmark运行会产生真实调用，需保持串行。配置中的本机服务、tokenizer及账本路径按当前环境填写，不创建新服务或预算。

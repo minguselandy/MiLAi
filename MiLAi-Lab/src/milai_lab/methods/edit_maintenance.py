@@ -75,7 +75,7 @@ def maintain_event(
     ns = (*service.namespace, "edit_maintenance")
     key = json.dumps([session, request_id], ensure_ascii=False)
     binding = {
-        "recipe": recipe, "arm": method.arm, "interface": method.interface_version,
+        "recipe": recipe, "arm": method.method_name, "interface": method.interface_version,
         "features": method.features.settings(),
         "sources": [{k: s[k] for k in ("source_ref", "source_revision", "start", "end")}
                     for s in sources],

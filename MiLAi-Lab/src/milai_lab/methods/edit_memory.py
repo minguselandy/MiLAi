@@ -66,6 +66,10 @@ class EditMemory:
             raise ValueError("EDIT_FEATURES_REQUIRE_V2_INTERFACE")
         self.method_version = METHOD_VERSION if interface_version == "v1" else V2_METHOD_VERSION
 
+    @property
+    def method_name(self) -> str:
+        return self.arm
+
     def proposal_schema(
         self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
     ) -> dict[str, Any]:
@@ -1514,7 +1518,7 @@ class EditMemory:
             k: v for k, v in proposal.items() if k not in {"withdrawal_evidence", "_edit_metadata"}
         }
         parsed = EditProposal.model_validate(internal)
-        requested = {"method": self.method_version, "arm": self.arm, "proposal": proposal}
+        requested = {"method": self.method_version, "arm": self.method_name, "proposal": proposal}
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
         replay = self.service.replay_requested(session, proposal_id, requested)
@@ -1653,7 +1657,7 @@ class EditMemory:
             "edit_state": state,
             "edit_operations": [edit.model_dump() for edit in parsed.edits],
             "method_version": self.method_version,
-            "method_arm": self.arm,
+            "method_arm": self.method_name,
             "patch_operation": "no_change"
             if parsed.action == "no_change"
             else "retract"
