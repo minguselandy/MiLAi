@@ -1732,6 +1732,58 @@ class _MemoryUseDelivery:
         self.inner.after_delivery(request, request_index)
 
 
+def _new_result_maintenance(
+    app: FunctionalApplication, service: MemoryService, row: dict[str, Any],
+    binding: dict[str, Any], thread_id: str, batches: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Link new maintenance to actual calls for this request's observed owner object.
+
+    The source, call receipt and verified object retain their original identities.
+    Previously attempted sources and operations stay with their existing attempts.
+    """
+    attempts = row["request_progress"]["memory"]["attempts"]
+    prior = [batch for attempt in attempts
+             for batch in attempt.get("binding", {}).get("maintenance", [])]
+    used_ids = {batch["request_id"] for batch in prior}
+    used_refs = {ref for batch in prior for ref in batch.get("source_refs", [])}
+    candidates = [batch for batch in batches if batch["request_id"] not in used_ids]
+    refs = {ref for batch in candidates for ref in batch.get("source_refs", [])} - used_refs
+    observed = row["request_progress"]["business"].get("observation", {}).get("object_ref")
+    if not refs or not observed:
+        return []
+    related = set()
+    target = row["requirements"]["target"]
+    for call in app.progress.snapshot().values():
+        identity = call["identity"]
+        if (identity.get("owner"), identity.get("session"), identity.get("turn_id"),
+            identity.get("thread_id")) != (
+                app.owner, binding["session"], binding["turn_id"], thread_id):
+            continue
+        ref = call.get("raw_capture", {}).get("source_ref")
+        if ref not in refs:
+            continue
+        source = service.source(ref)
+        issued = source.get("object_ref") if source else None
+        actual_call = app.journal.entry_for_call(
+            thread_id, identity["generation_id"], identity["call_id"])
+        if (source is None or source["role"] != "tool" or not issued
+            or source["origin"] != identity["name"] or actual_call is None
+            or not actual_call.get("executed") or actual_call["status"] != "complete"
+            or actual_call["result"] != call.get("business_receipt")
+            or source["content"] != actual_call["result"]["content"]
+            or any(issued[field] != observed[field]
+                   for field in ("owner", "application", "external_id"))):
+            continue
+        actual = json.loads(source["content"])
+        if not all(actual.get(field) == value for field, value in target.items()):
+            continue
+        if not (all(identity["args"].get(field) == value for field, value in target.items())
+                or identity["args"].get("reservation_id") == issued["external_id"]):
+            continue
+        related.add(ref)
+    return [batch for batch in candidates if related.intersection(batch.get("source_refs", []))]
+
+
 def message(
     root: Path,
     *,
@@ -2531,10 +2583,20 @@ def message(
                 for _, row in tracker.rows():
                     request_id = row["identity"]["call_id"]
                     old_attempts = row["request_progress"]["memory"]["attempts"]
+                    # Register new actual Tool batches before their shared Writer.
+                    # Earlier failed or unknown attempts retain their own bindings.
+                    new_batches = (_new_result_maintenance(app, service, row, request_binding,
+                        cfg["configurable"]["thread_id"], batches)
+                        if perform_maintenance
+                        and row["request_progress"]["memory"]["status"] == "failed"
+                        and mode["allow_memory_maintenance"] and mode["requires_memory_result"]
+                        else [])
+                    batch_ids = {batch["request_id"] for batch in new_batches}
 
                     def save_result(
                         operation_id: str, progress: dict[str, Any],
                         bound_row: dict[str, Any] = row,
+                        scoped_ids: set[str] = batch_ids,
                     ) -> dict[str, Any]:
                         nonlocal maintenance_dispatched
                         if perform_maintenance and not maintenance_dispatched:
@@ -2547,8 +2609,11 @@ def message(
                                        for b in output["maintenance"]):
                                     raise UnknownModelRequest(str(error)) from error
                                 raise
-                        return scoped_memory_receipt(service, bound_row["requirements"],
-                                                     output.get("maintenance", []))
+                        results = output.get("maintenance", [])
+                        if scoped_ids:
+                            results = [batch for batch in results
+                                       if batch["request_id"] in scoped_ids]
+                        return scoped_memory_receipt(service, bound_row["requirements"], results)
 
                     def reconcile(
                         operation_id: str, bound_row: dict[str, Any] = row,
@@ -2568,14 +2633,15 @@ def message(
                                  and not mode["allow_business_mutation"],
                                  "allow_memory": mode["allow_memory_maintenance"],
                                  "allow_feedback": True,
-                                 "new_semantic_attempt": bool(old_attempts
+                                 "new_semantic_attempt": bool(new_batches or (old_attempts
                                      and old_attempts[-1].get("binding", {}).get("source_ref")
                                      != capture["source_ref"]
                                      and mode.get("current_memory_write_request",
-                                         mode["memory_write_request"]) == "explicit")},
+                                         mode["memory_write_request"]) == "explicit"))},
                         save_result=save_result, reconcile_memory=reconcile,
                         feedback=feedback if acknowledged_messages is not None else None,
-                        semantic_attempt_binding={**request_binding, "maintenance": batches})
+                        semantic_attempt_binding={**request_binding,
+                                                  "maintenance": new_batches or batches})
                     result["semantic_coverage"] = "unchecked"
                     request_progress.append(result)
                 tracker.dirty = False

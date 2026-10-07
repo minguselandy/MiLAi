@@ -3732,6 +3732,84 @@ def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -
     assert '未执行物理擦除' in answer
 
 
+def test_receipt_response_reports_read_saved_content_without_a_new_write(tmp_path: Path) -> None:
+    from milai_lab.memory.functional import FunctionalMemory
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.runners.functional_response import business_response
+
+    version = 'stored-response-example-v1'
+
+    def config(turn: str) -> dict[str, Any]:
+        return {'configurable': {'user_id': 'alice', 'v13_session': 's',
+                                'v13_turn_id': turn, 'v13_config_version': version}}
+
+    def source(memory: FunctionalMemory, turn: str, text: str) -> list[str]:
+        ref = memory.service.capture_user('s', turn, text)['source_ref']
+        memory.context('s', turn, version)
+        return [row['fragment_handle'] for row in memory.service.source_fragments(ref)]
+
+    db = str(tmp_path / 'stored-response.sqlite')
+    body = '预订已登记; 目的地配置为工作室; 标签已创建。'
+    with SqliteStore.from_conn_string(db) as store:
+        service = MemoryService(store, ('stored-response', 'alice'), 'alice',
+                                tmp_path / 'lock', functional_contract='functional_v1')
+        memory = FunctionalMemory(service, len, retrieval_candidates=[])
+        handles = source(memory, 'save', '预订已登记; 标签尚未创建。')
+        saved = memory.save(config('save'), 'save', '预订已登记; 标签尚未创建。', handles)
+        assert saved['ok'] and saved['revision'] == 1
+        handles = source(memory, 'update', body)
+        revised = memory.update(config('update'), 'update',
+            service.read(saved['id'])['candidate_handle'],
+            [{'field': 'content', 'op': 'set', 'value': body, 'fragment_handles': handles}])
+        assert revised['ok'] and revised['revision'] == 2
+        source(memory, 'read', '之前保存了什么内容?')
+
+    with SqliteStore.from_conn_string(db) as store:
+        service = MemoryService(store, ('stored-response', 'alice'), 'alice',
+                                tmp_path / 'lock', functional_contract='functional_v1')
+        memory = FunctionalMemory(service, len, retrieval_candidates=[])
+        material = memory.context('s', 'read', version)
+        call = {'name': 'read_memory', 'args': {'record_id': saved['id']},
+                'id': 'read-saved', 'type': 'tool_call'}
+        read_tool = next(tool for tool in memory.tools() if tool.name == 'read_memory')
+        receipt = read_tool.invoke(call, config=config('read'))
+        packet = json.loads(receipt.content)
+        assert packet['ok'] and not packet['semantic_write_performed']
+        before = service.read(saved['id'])['value']
+        effects = dict(business=dict(status='not_executed', operations=[], observations=[]),
+                       semantic_memory=dict(status='not_committed', operations=[]),
+                       visibility=dict(operations=[]), raw_event=dict(status='stored'),
+                       application_requests=[])
+        messages = [AIMessage(content='模型声称已完成全部事项。', tool_calls=[call]), receipt]
+        answer = str(business_response(messages, effects, material).content)
+        assert '已读取的保存内容 (版本 2): ' + json.dumps(body, ensure_ascii=False) in answer
+        assert '本轮语义记忆: 未提交' in answer
+        assert '原请求是否已全部完成尚未核对。' in answer
+        assert '模型声称' not in answer and saved['id'] not in answer
+        assert 'unchecked' not in answer and 'read_memory' not in answer
+        assert service.read(saved['id'])['value'] == before
+        assert effects['semantic_memory']['operations'] == []
+        duplicated = str(business_response(messages, effects, packet).content)
+        assert duplicated.count(body) == 1
+        context_only = str(business_response([], effects, packet).content)
+        assert body in context_only
+        unpaired = str(business_response([receipt], effects, material).content)
+        assert body not in unpaired
+        mismatched = ToolMessage(name='search_memory', tool_call_id='read-saved',
+                                 content=receipt.content)
+        assert body not in str(business_response(
+            [messages[0], mismatched], effects, material).content)
+        failed = ToolMessage(name='read_memory', tool_call_id='read-saved',
+                            content=receipt.content, status='error')
+        assert body not in str(business_response([messages[0], failed], effects, material).content)
+        raw = {'items': [{'type': 'fragment', 'content': body}]}
+        assert body not in str(business_response([], effects, raw).content)
+        bounded = json.loads(receipt.content)
+        bounded['items'][0]['content'] = '保存的说明' * 300
+        excerpt = str(business_response([], effects, bounded).content)
+        assert '引用已截断' in excerpt and bounded['items'][0]['content'] not in excerpt
+
+
 @pytest.mark.parametrize('required,interrupted', [(False, False), (True, False), (True, True)])
 def test_existing_confirmation_uses_one_required_proposal_and_no_new_revision_after_reopen(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, required: bool, interrupted: bool,
@@ -5303,3 +5381,161 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
     assert second["records"] == first["records"] and second["maintenance"] == []
     assert len(second["world"]["world"]["attempts"]) == 1
     assert len(wires) - count == 3  # declaration, bounded reference, actual Host response
+
+
+def test_host_save_continuation_registers_new_tool_batch_after_known_writer_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.application.functional import FunctionalApplication
+    from milai_lab.application.recovery import resume_request
+    from milai_lab.contracts.memory import VerifiedObjectRef
+
+    root = prepared(tmp_path, native=True, complete_requests=True,
+        direct_response=True, phase_thinking=True, current_delivery=True,
+        memory_profile="unified_v1",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        maintenance_recipe="single_pass", edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    freeze = functional.frozen(root)
+    bank_root = root / "banks" / functional._bank_reference(
+        root, freeze["run_id"], "save-bank", "alice")
+    bank_root.mkdir(parents=True)
+    arguments = {"item_key": "amber pack", "quantity": 1,
+                 "destination": "local", "packing": "box"}
+    requirements = functional.compile_application_requests("reservation_v1", [{
+        "target": {"item_key": "amber pack"}, "actions": [{
+            "operation": "reserve_and_label", "arguments": {
+                key: value for key, value in arguments.items() if key != "item_key"}}],
+    }], save_result=True)[0]
+    with SqliteStore.from_conn_string(str(bank_root / "memory.sqlite")) as store:
+        service = functional.MemoryService(store,
+            ("functional", freeze["run_id"], "save-bank", "alice"), "alice",
+            bank_root / "memory.lock", functional_contract="functional_v1",
+            memory_profile="unified_v1")
+        captured = service.capture_user("original", "request",
+            "Reserve and label the amber pack, and save the actual outcome.")
+        original_id = captured["source_ref"] + ":application:0"
+        binding = {"session": "original", "turn_id": "request",
+                   "source_ref": captured["source_ref"], "config_version": freeze["config_version"]}
+        service.bind_public_turn("original", "request", captured["source_ref"],
+                                config_version=freeze["config_version"], phase="start")
+        with FunctionalApplication.open(bank_root / "applications" / "reservation",
+            "reservation", "alice", initial_label_available=False) as app:
+            app.progress.request_state("alice", original_id, requirements,
+                binding={**binding, "workflow": app.workflow})
+            adapter = app.adapter(service, "original", "request",
+                                  allowed_operations=["reserve_and_label", "complete_label"])
+            reserved = adapter.execute("reserve_and_label", arguments, attempt_id="reserve-once")
+            assert reserved["business_effect"] == "partial"
+            app.world.set_label_available("restore-label", True)
+            observed = adapter.discover(requirements["target"], attempt_id="before-label")
+            labeled = adapter.execute("complete_label", {}, attempt_id="label-once",
+                                      ref=VerifiedObjectRef(**observed["object_ref"]))
+            assert labeled["receipt"]["label_status"] == "created"
+            progress = resume_request(app, adapter, original_id,
+                current={"readonly": True, "allow_memory": False}, execute_business=False)
+            assert progress["business"]["status"] == "completed"
+            assert progress["memory"]["status"] == "pending"
+            assert progress["memory"]["attempts"] == []
+            original_world = app.world.snapshot()
+    save_text = "Only continue saving the earlier actual result. Query, but do not redo business."
+    read_text = "Only inspect the original request and saved state. Do not act or save."
+    failed: list[dict[str, Any]] = []
+    editor_roles: list[str] = []
+    commit_attempts: list[str] = []
+    apply = functional.FunctionalEditMemory.apply_writer_proposal
+
+    def request_row() -> dict[str, Any]:
+        return next(row for row in read_json(
+            bank_root / "applications/reservation/receipt-progress.json").values()
+            if row["identity"].get("call_id") == original_id)
+
+    def commit_after_registration(memory, config, operation_id, proposal):
+        attempts = request_row()["request_progress"]["memory"]["attempts"]
+        assert [a["status"] for a in attempts] == ["failed", "semantic_unknown"]
+        assert attempts[0] == failed[0]
+        bound = attempts[1]["binding"]
+        assert bound["source_ref"] == attempts[0]["binding"]["source_ref"]
+        assert len(bound["maintenance"]) == 1
+        batch = bound["maintenance"][0]
+        assert len(batch["source_refs"]) == 1
+        source = memory.service.source(batch["source_refs"][0])
+        assert source is not None and source["origin"] == "get_reservation"
+        assert source["object_ref"]["external_id"] == observed["object_ref"]["external_id"]
+        assert batch["request_id"] not in {
+            b["request_id"] for b in attempts[0]["binding"]["maintenance"]}
+        commit_attempts.append(attempts[1]["operation_id"])
+        return apply(memory, config, operation_id, proposal)
+
+    monkeypatch.setattr(functional.FunctionalEditMemory, "apply_writer_proposal",
+                        commit_after_registration)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            readonly = wire["messages"][-1]["content"] == read_text
+            return native_call("classify_current_request", "mode-" + str(ordinal),
+                memory_write_request="none" if readonly else "explicit", allow_forgetting=False,
+                business_action_request="none", business_operations=[], application_requests=[],
+                memory_continuation_request="none" if readonly else "resolve_prior_explicit",
+                application_continuation_request="resolve_prior_request")
+        if names == {"resolve_continuation_operations"}:
+            frame = json.loads(wire["messages"][-1]["content"])
+            card = frame["archived_reference_material"]["registered_application_requests"][0]
+            assert card["request_id"] == original_id
+            return native_call("resolve_continuation_operations", "resolve-" + str(ordinal),
+                business_operations=[], prior_request_ids=[original_id],
+                prior_memory_request_fragments=[p["fragment_handle"]
+                                                for p in card["user_fragments"]]
+                if frame["current_request"] == save_text else [])
+        if not names:
+            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            role = packet["source_table"][0]["role"]
+            editor_roles.append(role)
+            if role == "user":
+                assert editor_roles == ["user"]
+                return {"role": "assistant", "content": "{", "_test_finish_reason": "length"}
+            assert role == "tool" and editor_roles == ["user", "tool"]
+            evidence = packet["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Amber pack outcome", "clauses": [{
+                    "text": "The amber pack was reserved and its label created.",
+                    "evidence": [evidence], "conditions": [],
+                    "assertion": {"source": evidence, "kind": "observed"}}]}], "records": {}})}
+        assert not {"reserve_and_label", "complete_label"}.intersection(names)
+        tools = [m for m in wire["messages"] if m["role"] == "tool"]
+        if not tools:
+            current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+            if current == save_text:
+                attempt = request_row()["request_progress"]["memory"]["attempts"][0]
+                assert attempt["status"] == "failed"
+                assert attempt["receipt"]["status"] == "result_save_unconfirmed"
+                failed.append(json.loads(json.dumps(attempt)))
+            return native_call("get_reservation", "query-" + str(ordinal), item_key="amber pack")
+        return {"role": "assistant", "content": "Reported actual business and memory receipts."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="save-bank", owner="alice")
+    saved = functional.message(root, **common, session="save-only", message_id="save",
+                               content=save_text)
+    assert saved["status"] == "COMPLETED", saved.get("error")
+    result = saved["application_requests"][0]
+    assert result["request_id"] == original_id and result["complete"]
+    assert [a["status"] for a in result["memory"]["attempts"]] == ["failed", "committed"]
+    assert result["memory"]["attempts"][0] == failed[0]
+    assert commit_attempts == [original_id + ":memory:2"]
+    assert result["semantic_coverage"] == "unchecked"
+    assert len(saved["records"]) == 1 and saved["records"][0]["value"]["revision"] == 1
+    assert saved["world"]["world"] == original_world
+    count = len(wires)
+    readonly = functional.message(root, **common, session="inspect-only", message_id="inspect",
+                                  content=read_text)
+    assert readonly["status"] == "COMPLETED", readonly.get("error")
+    assert not readonly["request_mode"]["allow_memory_maintenance"]
+    assert not readonly["request_mode"]["allow_business_mutation"]
+    assert readonly["maintenance"] == [] and editor_roles == ["user", "tool"]
+    assert readonly["application_requests"][0]["memory"]["attempts"] == (
+        result["memory"]["attempts"])
+    assert readonly["records"] == saved["records"] and readonly["world"]["world"] == original_world
+    assert len(wires) - count == 4  # declaration, reference, query and response; no Writer

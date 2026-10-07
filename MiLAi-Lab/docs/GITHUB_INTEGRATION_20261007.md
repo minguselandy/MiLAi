@@ -4,6 +4,17 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 21:58:44 UTC：PR83至98已合并，main为1af2585
+
+远端main与本地整合基础均为`1af2585012990e0df21d18b54df68c1b87bf0d8a`。
+PR95发布原23份评分／17:12固定报告，PR96修复重复schema复制成本，PR97缩短解释定义，
+PR98修复显式保留unit的冗余支持要求。[PR98](https://github.com/minguselandy/MiLAi/pull/98)
+自身[Full337](https://github.com/minguselandy/MiLAi/actions/runs/37683448942)成功21/21，
+21:15:47 UTC普通merge；本次只读open列表为空。各原冻结源码和运行未热改。
+发布前新Reader／保存续办／读取反馈整合c2a5900尚待自己的远端CI，不借用main或PR98成功；
+[固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)分别记录505五臂部分失败、1af Host及1f Reader
+实际诊断。完整目标继续active，16保留未用，Product NO_GO；以下为历史整合记录。
+
 ## 16:45:09 UTC：PR94已合并
 
 [PR94](https://github.com/minguselandy/MiLAi/pull/94)头505cefa自身
