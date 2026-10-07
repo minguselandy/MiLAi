@@ -11,10 +11,12 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any
+from typing import Any, cast
 
+from langchain_core.runnables import RunnableConfig
 from langgraph.store.sqlite import SqliteStore
 
+from milai_lab.application.document_publication import DocumentPublicationWorld
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
 from milai_lab.contracts.memory import VerifiedObjectRef
@@ -27,7 +29,7 @@ def opened(
     root: Path,
     workflow: str,
     turn: str,
-) -> Iterator[tuple[FunctionalApplication, FunctionalMemory, dict[str, Any]]]:
+) -> Iterator[tuple[FunctionalApplication, FunctionalMemory, RunnableConfig]]:
     with SqliteStore.from_conn_string(str(root / "memory.sqlite")) as store:
         service = MemoryService(
             store,
@@ -42,7 +44,7 @@ def opened(
             "example", turn, "Continue the requested work and save its actual result."
         )
         memory.context("example", turn, "recovery_example_v1")
-        config = {
+        config: RunnableConfig = {
             "configurable": {
                 "user_id": "alice",
                 "v13_session": "example",
@@ -60,7 +62,7 @@ def opened(
             yield app, memory, config
 
 
-def save_actual_result(memory: FunctionalMemory, config: dict[str, Any]) -> Any:
+def save_actual_result(memory: FunctionalMemory, config: RunnableConfig) -> Any:
     def save(operation_id: str, progress: dict[str, Any]) -> dict[str, Any]:
         # Only an actual currently visible receipt supports this example's text.
         result = progress["business"]["observation"]
@@ -163,7 +165,9 @@ def reservation(root: Path) -> dict[str, Any]:
     with opened(root, "reservation_v1", "status-only") as (app, memory, _config):
         readonly = app.adapter(memory.service, "example", "status-only")
         observed = resume_request(app, readonly, "reservation", current={"readonly": True})
-        assert observed["business"]["status"] == "observed_only"
+        assert observed["business"]["status"] == "partial"
+        assert observed["business"]["execution"]["status"] == "observed_only"
+        assert not observed["business"]["execution"]["can_execute"]
         assert len(app.world.snapshot()["attempts"]) == 1 and not memory.service.records()
         denied = readonly.execute("complete_label", {}, attempt_id="denied", ref=old_ref)
         assert denied["status"] == "operation_not_authorized_current_request"
@@ -273,7 +277,8 @@ def document(root: Path) -> dict[str, Any]:
         ]
 
     with opened(root, "document_publication_v1", "continue") as (app, memory, _config):
-        app.world.set_publication_available("publication-back", True)
+        cast(DocumentPublicationWorld, app.world).set_publication_available(
+            "publication-back", True)
         adapter = app.adapter(
             memory.service, "example", "continue", allowed_operations=("publish_approved_document",)
         )

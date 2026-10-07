@@ -145,14 +145,23 @@ def business_response(
             "completed": "完成", "pending_host_execution": "仍有待办",
             "observed_only": "只查询", "not_authorized_current_request": "当前未获允许",
             "current_state_changed": "当前状态已变化", "business_unknown": "效果待查询",
+            "partial": "部分完成", "incomplete": "尚未完成",
+            "attempted": "已尝试", "outcome_unknown": "效果未知",
+            "observation_unknown": "查询结果未知", "not_needed": "无需办理",
+            "access_revoked": "访问已撤销",
+            "not_evaluated": "尚未核对",
+            "missing_observed_arguments": "尚缺办理参数",
+            "business_phase_already_attempted_this_turn": "已尝试该步骤",
             "pending": "尚未确认", "committed": "提交已确认", "failed": "未确认成功",
             "not_requested": "未要求", "delivered": "Host已收到进度",
             "semantic_unknown": "提交结果未知", "model_unknown": "模型响应未知",
         }
         business_status = request["business"]["status"]
+        execution_status = request["business"]["execution"]["status"]
         memory_status = request["memory"].get("current_permission", request["memory"]["status"])
         feedback_status = request["feedback"]["status"]
         paragraphs.append("原请求进度: 业务" + labels.get(business_status, business_status)
+            + "; 本次执行" + labels.get(execution_status, execution_status)
             + "; 实际结果保存" + labels.get(memory_status, memory_status)
             + "; 反馈" + labels.get(feedback_status, feedback_status)
             + "。回执进度与语义正确性分别记录。")
