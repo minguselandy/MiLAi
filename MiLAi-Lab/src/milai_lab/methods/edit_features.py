@@ -237,7 +237,12 @@ def feature_proposal_schema(
                 fields["keep_support"] = {"type": "array", "items": reference("h")}
             if operation == "add_exception":
                 fields["condition"] = {"type": "string", "minLength": 1}
-                fields["shared_conditions"] = {"type": "array", "items": reference("u", conditions)}
+                fields["shared_conditions"] = {
+                    "type": "array",
+                    "items": reference("u", conditions),
+                    "description": "Explicitly selected existing condition units in this record. "
+                    "A content clause is not a condition, even if its text describes a limit.",
+                }
                 if not conditions:
                     fields["shared_conditions"]["maxItems"] = 0
                 required.append("condition")
@@ -361,6 +366,7 @@ def feature_proposal_schema(
             },
             ["evidence"],
         )
+        binding["description"] = "Evidence for applying this condition to the containing clause."
         condition = copy.deepcopy(clause)
         condition["properties"].pop("from_unit", None)
         if fields["action"]["const"] == "rewrite":
@@ -373,6 +379,9 @@ def feature_proposal_schema(
         condition["required"].append("binding")
         clause["properties"]["conditions"] = {
             "type": "array",
+            "description": "Independently revisable prerequisites, limits and scopes applying "
+            "to this clause. Declare each with its own support and binding; reuse an earlier "
+            "declaration when the same condition applies to another clause.",
             "items": {
                 "oneOf": [
                     condition,
@@ -478,12 +487,19 @@ def feature_envelope_schema(
         {
             "creates": {
                 "type": "array",
+                "description": "New matters only. Omit when there are none.",
+                "default": [],
                 "items": create[0] if create else False,
                 **({"maxItems": 0} if not create else {}),
             },
-            "records": _object(containers, []),
+            "records": {
+                **_object(containers, []),
+                "description": "Existing matters keyed by their explicit delivered r alias. "
+                "Omit when there are no existing-matter changes.",
+                "default": {},
+            },
         },
-        ["creates", "records"],
+        [],
     )
 
 

@@ -727,6 +727,12 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         no_sources = method.preview_writer_request({"sources": [], "records": []})
         assert no_sources["schema"]["properties"]["creates"]["maxItems"] == 0
         assert method.envelope_proposals({"creates": [], "records": {}}, view["mapping"]) == []
+        assert method.envelope_proposals({}, view["mapping"]) == []
+        assert method.envelope_proposals({"creates": []}, view["mapping"]) == []
+        assert method.envelope_proposals({"records": {}}, view["mapping"]) == []
+        for malformed in ({"records": None}, {"creates": None}, {"action": "edit", "edits": []}):
+            with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+                method.envelope_proposals(malformed, view["mapping"])
         old, _ = packet(service, legacy, "legacy", "A legacy source.", [])
         mixed = {"proposals": [{"action": "no_change"}, {"action": "illegal"}]}
         assert legacy.envelope_proposals(mixed, old["mapping"]) == mixed["proposals"]
@@ -765,9 +771,14 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         # role is fixed by the actual selected existing unit in local operations.
         edit["edits"][0].pop("role")
         edit["edits"][1].pop("role")
-        decoded = method.decode_envelope({"creates": [], "records": {"r1": edit}}, view["mapping"])[
-            0
-        ]
+        clause = view["packet"]["records"][0]["clauses"][0]
+        assert clause["role"] == "content"
+        assert clause["conditions"][0]["role"] == "condition"
+        wrong_role = copy.deepcopy(edit)
+        wrong_role["edits"][1]["shared_conditions"] = ["u1"]
+        with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+            method.decode_envelope({"records": {"r1": wrong_role}}, view["mapping"])
+        decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
         revised = method.apply("s", "scope", decoded)
         state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
         assert revised["revision"] == 2 and state["units"][0] == baseline["units"][0]

@@ -45,8 +45,8 @@ def event(
         method.prepare([ref], text, selected_records=rows), request_id=key
     )
     envelope = (
-        {"creates": [proposal], "records": {}}
-        if record_id is None else {"creates": [], "records": {"r1": proposal}}
+        {"creates": [proposal]}
+        if record_id is None else {"records": {"r1": proposal}}
     )
     decoded = method.decode_envelope(envelope, request["mapping"])[0]
     receipt = method.apply("example", "commit-" + key, decoded)
