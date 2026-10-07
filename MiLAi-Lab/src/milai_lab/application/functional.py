@@ -12,6 +12,7 @@ import fcntl
 import json
 import uuid
 from collections.abc import Callable, Mapping, Sequence
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, BinaryIO, Self
 
@@ -21,7 +22,10 @@ from langchain_core.tools import BaseTool
 from milai_lab.application.document_publication import DOCUMENT_NAMES, DocumentPublicationWorld
 from milai_lab.application.journal import BusinessActionJournal
 from milai_lab.application.native_journal import NativePublicActionJournal, recover_native_pending
-from milai_lab.application.recovery import recover_pending_application_call
+from milai_lab.application.recovery import (
+    initial_request_progress,
+    recover_pending_application_call,
+)
 from milai_lab.application.refs import (
     observation_profile,
     verified_document_ref,
@@ -82,8 +86,14 @@ class ReceiptProgressJournal:
         owner: str,
         request_id: str,
         requirements: dict[str, Any] | None,
+        *,
+        binding: Mapping[str, Any] | None = None,
     ) -> tuple[str, dict[str, Any]]:
-        """The full request uses this existing journal, beside individual receipts."""
+        """Register the original request before effects, beside individual receipts.
+
+        Requirements and the optional real input binding are immutable. Legacy
+        rows without a binding stay unchanged; a later input cannot backfill it.
+        """
         rows = self.snapshot()
         for key, row in rows.items():
             identity = row["identity"]
@@ -93,6 +103,8 @@ class ReceiptProgressJournal:
             ) == (owner, request_id):
                 if requirements is not None and row["requirements"] != requirements:
                     raise ValueError("APPLICATION_REQUEST_REQUIREMENTS_CHANGED")
+                if binding is not None and row.get("binding") != dict(binding):
+                    raise ValueError("APPLICATION_REQUEST_BINDING_CHANGED")
                 return key, row
         if requirements is None:
             raise ValueError("APPLICATION_REQUEST_REQUIREMENTS_REQUIRED")
@@ -107,8 +119,11 @@ class ReceiptProgressJournal:
                 "args": {},
             },
             "delivery": "pending",
-            "requirements": requirements,
+            "requirements": deepcopy(requirements),
         }
+        if binding is not None:
+            rows[key]["binding"] = deepcopy(dict(binding))
+            rows[key]["request_progress"] = initial_request_progress(requirements)
         write_json(self.path, rows)
         return key, rows[key]
 

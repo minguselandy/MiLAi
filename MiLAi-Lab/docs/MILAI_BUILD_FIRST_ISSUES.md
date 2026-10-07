@@ -2,6 +2,12 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+2026-10-07 11:02:46 UTC：PR83至88均已合并，main2e1dac6；b5992e3自身Fast511／Full326
+21/21成功。普通Host v8完整请求接线源码752862b的461项相关检查、Ruff、七源mypy及边界
+通过，0真实HTTP；结构完成、Host收到与语义覆盖分别记录。冻结34fa容量预测仍31/32、
+无终态，132请求／131响应／2,068,177known，183编码／70,306；12真实空提案，Root读63答复。
+新源码不在旧运行中；[固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)保留版本、在途成本及全部未完范围。
+
 2026-10-07 10:06:37 UTC：PR83至87均已合并，main354807f；34fa5c9自身Fast／Full21成功。
 f307第一用户保存8份score闭合：更新7/19valid18、QA12/20valid17，167Judge／495237known；
 第二保存5份score也COMPLETED／退出0：更新3/7valid7、QA6/9valid7，126Judge／493202known；
@@ -35,6 +41,10 @@ Root复核全部14条实际送达答复，未重评分；新源码4b5963f的修�
 
 | 案例／运行标识 | 用户任务与失败现象 | 最早断点 | 计划修改的一个机制 | 复测结果／仍未解决部分 |
 |---|---|---|---|---|
+| 普通Host v8／完整请求与新要求 | 旧v7只有单调用journal；同target新内容又可能被旧完整计划吞掉 | 首次dispatch前缺完整登记及当前计划选择 | 原User绑定登记requirements；实际ToolNode回执链接阶段，明确新perform单独登记 | 752862b的461项相关检查通过，两个sandbox、两recipe及重开零重复；0真实模型，语义覆盖与用户收到未确认 |
+| 普通Host v8／旧保存响应丢失 | 保存实际提交但响应丢失，回执查询暂不可用 | 原语义attempt必须在共同Writer前保存实际batch绑定 | 原操作execute=False核对，仅匹配请求完成字段的实际Tool来源 | 两recipe跨会话只读核对为committed，原unknown/error保持；无重复保存／业务，不盲重发unknown模型 |
+| 普通Host v8／memory-only新增要求 | 原请求未要求保存，后续仅新增保存旧结果要求 | 原requirements不可变，not_requested不代表新保存 | 保持新memory-only维护与独立回执，不retrofit或借用旧complete | 此扩展未纳入C新request API，不能宣称旧原请求完整状态证明当前新要求完成 |
+| prefix8-v6／冻结34fa5c9 | 31保存预测仍出现身份缺失及姓名／User关联不一致 | 首用户原0／1候选及User证据已送达，editor却真实返回{} | 先闭合原冻结诊断与作者score，保留空输出与实际状态再比较维护机制 | 33抽取／33editor确认stop，12真实空提案；65Reader响应、63完整答复Root已读，未数值重评分；无完整成绩或语义优势 |
 | 普通Host共同维护／选定旧请求 | v7解析旧保存请求，但最近四来源限制可能使其未送到Writer | 中央maintain_sources未传选定旧范围 | 重新读取解析句柄，作为prior_context保留原范围及时间，当前no-save优先 | 9abc783接线及SQLite检查通过，M／Append与两recipe适配仍共用；0真实模型，不将旧语境升级为本轮支持 |
 | 公共resume／跨会话旧语义未知 | 旧实际提交响应丢失，新session用当前会话查原operation_id会漏掉 | C原attempt未存绑定，CLI核对用当前session／公共轮次 | callback前保存原session／turn／config／source，按原绑定execute=False核对 | 跨会话只读实际SQLite检查闭合旧commit，原错误与attempt保持，0重复保存／业务；无新权限或unknown重试 |
 | 普通Host／完整请求登记 | 实际调用journal只记录单次业务／记忆，不能自动证明旧请求全部项完成 | v7首次dispatch前没有C的完整requirements／request_state | 后续接通实际请求解释与既有完整进度，ToolNode与C不能重复业务 | 仍待开发及真实验证；选定片段接线、CLI完整requirements示例、一次maintenance均不等于普通Host完整恢复闭合 |

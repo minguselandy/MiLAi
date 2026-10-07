@@ -34,6 +34,22 @@ class UnknownSemanticCommit(RuntimeError):
     """An issued semantic operation needs reconciliation by its original ID."""
 
 
+def initial_request_progress(requirements: Mapping[str, Any]) -> dict[str, Any]:
+    """Initialize existing request items without discovery, effects or callbacks."""
+    return {
+        "business": {
+            "status": "pending",
+            "steps": [{"id": step["id"], "status": "pending", "attempts": []}
+                      for step in requirements["steps"]],
+        },
+        "memory": {"status": "pending" if requirements.get("save_result") else "not_requested",
+                   "attempts": []},
+        "feedback": {"status": "pending" if requirements.get("feedback", True)
+                     else "not_requested", "attempts": []},
+        "discoveries": [],
+    }
+
+
 def resume_request(
     app: FunctionalApplication,
     adapter: ApplicationAdapter,
@@ -45,6 +61,7 @@ def resume_request(
     reconcile_memory: Callable[[str], dict[str, Any] | None] | None = None,
     semantic_attempt_binding: Mapping[str, Any] | None = None,
     feedback: Callable[[str, dict[str, Any]], dict[str, Any]] | None = None,
+    execute_business: bool = True,
 ) -> dict[str, Any]:
     """Continue full request requirements using the existing receipt progress.
 
@@ -60,6 +77,9 @@ def resume_request(
     Semantic attempt binding records the caller's actual session/turn/source
     context before dispatch; it identifies the original attempt, not permission.
     A later caller's binding never changes an earlier attempt's binding.
+    With execute_business=False, the Host ToolNode owns business dispatch. This
+    function still observes real state and current permissions, and leaves an
+    authorized unfinished step pending without invoking adapter.execute.
     """
     controls = dict(current or {})
     if not request_id or adapter.owner != app.owner:
@@ -72,24 +92,7 @@ def resume_request(
             raise ValueError("APPLICATION_RESUME_STEPS_INVALID")
     key, row = app.progress.request_state(app.owner, request_id, requirements)
     requirements = row["requirements"]
-    state = row.get("request_progress") or {
-        "business": {
-            "status": "pending",
-            "steps": [
-                {"id": step["id"], "status": "pending", "attempts": []}
-                for step in requirements["steps"]
-            ],
-        },
-        "memory": {
-            "status": "pending" if requirements.get("save_result") else "not_requested",
-            "attempts": [],
-        },
-        "feedback": {
-            "status": "pending" if requirements.get("feedback", True) else "not_requested",
-            "attempts": [],
-        },
-        "discoveries": [],
-    }
+    state = row.get("request_progress") or initial_request_progress(requirements)
 
     def persist() -> None:
         app.progress.save_request_state(key, state)
@@ -149,11 +152,24 @@ def resume_request(
         if step["operation"] not in adapter.allowed_operations:
             business["status"] = "not_authorized_current_request"
             break
+        if not execute_business:
+            business["status"] = "pending_host_execution"
+            break
+        missing = [
+            argument
+            for argument, field in step.get("arguments_from_state", {}).items()
+            if field not in actual and argument not in step.get("arguments", {})
+        ]
+        if missing:
+            business["status"] = "incomplete"
+            progress.update(status="incomplete", missing_observed_arguments=missing)
+            break
         arguments = {
             **step.get("arguments", {}),
             **{
                 argument: actual[field]
                 for argument, field in step.get("arguments_from_state", {}).items()
+                if field in actual
             },
         }
         attempt_id = request_id + ":" + step["id"] + ":" + str(len(progress["attempts"]) + 1)
