@@ -54,7 +54,8 @@
         "timeout": 180,
         "tool_mode": "json_action",
         "max_calls": 12,
-        "enable_thinking": false
+        "enable_thinking": false,
+        "response_format": null
       }
     ]
   },
@@ -66,7 +67,7 @@
     "Receipt business response currently uses Chinese labels and reports listed effects/observations; it is not a general conversational answer or proof that all user intents were fulfilled.",
     "Shared recipe is a development candidate; real functional and semantic evaluation remain incomplete."
   ],
-  "revision": "milai-build-first-functional-v1",
+  "revision": "milai-build-first-functional-v2",
   "change_intent": "Development candidate: shared extraction, dense locating and editor; actual receipts and existing Host recovery. Not a final method selection.",
   "request_mode": "current_request_native_v7",
   "business_attempt_policy": "fresh_query_with_history_v3",
@@ -90,7 +91,7 @@
   "formation_support_review": "disabled",
   "support_review_comparison": "disabled",
   "read_interface": "explicit_selectors_v1",
-  "config_version": "milai-build-first-functional-v1",
+  "config_version": "milai-build-first-functional-v2",
   "memory_method": "milai_edit_m_v1",
   "edit_interface_version": "I2",
   "embedding": {

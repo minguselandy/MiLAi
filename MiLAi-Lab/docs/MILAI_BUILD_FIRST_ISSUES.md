@@ -10,6 +10,7 @@
 | build-first包C | 实际部分业务、取消保存及遗忘后恢复未完成同候选验证 | 新编排与既有生命周期的组合 | 复用实际回执和现有恢复路径 | 已验证当前只读权限、提交后中断和未知抽取；故障返回补齐已有维护回执，实际业务与遗忘流程待五条冒烟 |
 | build-first包D | 需要将预测与作者评分分开执行 | benchmark运行／评分调用 | 保存预测后独立执行现有作者评分 | 两套基准已支持predict／score；离线验证评分复用原答案与诊断、保留无效标签；未启动新开发集或主比较 |
 | build-first父提交43f5ff7 | Fast全包mypy失败 | 解析函数迁移后的隐式重导出 | 显式保留原入口的parse_object导出 | 受影响类型检查通过；新提交CI另行核对 |
+| functional-v1-five-flows | 五条冒烟首消息调用前退出，其余未运行；新增生成／编码0 | HTTP_OWNER_COMPLETE_CLIENT_CONFIG_REQUIRED | 补全编码客户端域声明并复用VLLMConfig默认值 | 原失败保留；v2配置新目录待重试，不扩预算 |
 | post87c-common-dense-072af2e-four-arm-prefix8-actual | 四组旧队列未完成 | B1维护27／评估26后进程已不存在 | 保留原结果并查明中断状态 | B0完成；无B1/suite终态；未重启，原因未确认 |
 
 后续按[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)推进集中测试与单因素优化；本表不会替代长历史、保留用户、外部验证及完整功能回归。

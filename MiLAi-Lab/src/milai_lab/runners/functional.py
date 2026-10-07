@@ -1815,7 +1815,8 @@ def message(
                 settings,
                 RunLimits(**freeze["budget_before"]["limits"]),
                 client_configs=[asdict(VLLMConfig(**settings["host"])),
-                                *([settings["embedding"]] if "embedding" in settings else [])],
+                                *([asdict(VLLMConfig(**settings["embedding"]))]
+                                  if "embedding" in settings else [])],
             )
         )
         budget = entry_budget(

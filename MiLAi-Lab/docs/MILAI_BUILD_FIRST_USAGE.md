@@ -1,6 +1,6 @@
 # Build-first 开发候选
 
-执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D的候选代码已接通，五条真实冒烟尚未执行，Product仍为NO_GO。
+执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D的候选代码已接通，首次启动发生调用前配置失败，修复后五条真实冒烟待继续，Product仍为NO_GO。
 
 ## 实现
 
@@ -49,11 +49,11 @@ python tools/run_edit_suite.py \
 
 ```bash
 python tools/run_functional.py prepare \
-  --root artifacts/build-first/functional-v1-five-flows \
+  --root artifacts/build-first/functional-v2-five-flows \
   --config configs/milai-build-first-functional-v1.json \
   --fixture data/fixtures/milai-build-first-smoke-v1.json \
   --controls data/diagnostics/milai-build-first-smoke-v1-controls.json
-python tools/run_functional.py run --root artifacts/build-first/functional-v1-five-flows
+python tools/run_functional.py run --root artifacts/build-first/functional-v2-five-flows
 ```
 
 ## 本次验证与边界
@@ -67,3 +67,5 @@ python tools/run_functional.py run --root artifacts/build-first/functional-v1-fi
 原冻结072队列独立保留：本次核对PID3476759不存在、串行资源锁可取得；B0维护/评估32/32，B1为27/26，B1及suite没有终态，B2/M未启动。原因尚未确认，不能记作完成或将未运行组记零分。没有重启或覆盖旧队列，账本原unknown=4保留。
 
 当前未完事项集中在[问题表](MILAI_BUILD_FIRST_ISSUES.md)。
+
+首次启动记录：`functional-v1-five-flows`使用45596d8，在计账作用域创建前缺失编码客户端的可选配置默认字段，五个首消息均未进入模型；后续消息未运行。生成／编码新增均0，原unknown=4不变。修复域声明并按VLLMConfig展开默认值，使用同一公开配置文件的v2版本及新目录继续，不覆盖失败产物。
