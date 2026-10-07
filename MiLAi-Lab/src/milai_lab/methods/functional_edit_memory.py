@@ -111,6 +111,8 @@ class FunctionalEditMemory(FunctionalMemory):
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
+        query_time: str | None = None,
+        query_calendar_context: str | None = None,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -129,6 +131,8 @@ class FunctionalEditMemory(FunctionalMemory):
         self.features = self.writer.features
         self.interface_version = interface_version
         self.maintenance_recipe = maintenance_recipe
+        self.query_time = query_time
+        self.query_calendar_context = query_calendar_context
         if maintenance_recipe is not None:
             self.policy["maintenance_recipe"] = maintenance_recipe
         self.conditioned = arm in {"B2", "M"}
@@ -904,9 +908,13 @@ class FunctionalEditMemory(FunctionalMemory):
             item["current_unit_id"]: item
             for item in read_revision_scope(self.service, row["id"], row["value"])
         } if self.features.enabled else {}
+        query_time = (
+            self.query_time if self.query_time is not None else self.service.clock().isoformat()
+        ) if self.features.temporal_scope else None
         applicability = read_applicability(
             state,
-            query_time=self.service.clock().isoformat() if self.features.temporal_scope else None,
+            query_time=query_time,
+            query_calendar_context=self.query_calendar_context,
             version_time=row["value"].get("committed_at") if self.features.temporal_scope else None,
             include_temporal=self.features.temporal_scope,
         ) if self.maintenance_recipe else {}
@@ -962,7 +970,8 @@ class FunctionalEditMemory(FunctionalMemory):
             result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
         if self.features.temporal_scope:
             result[0]["revision_view"] = self.writer.revision_view(
-                row["value"], query_time=self.service.clock().isoformat()
+                row["value"], query_time=query_time,
+                query_calendar_context=self.query_calendar_context,
             )
         return result
 
