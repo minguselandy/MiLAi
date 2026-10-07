@@ -6,6 +6,7 @@ import copy
 import fcntl
 import json
 import re
+from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -83,15 +84,43 @@ def reader_messages(
     memory_view: str = "retained_state",
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
+    delivered = copy.deepcopy(memories)
+    metadata = [
+        (unit, field, json.dumps(unit[field], ensure_ascii=False, separators=(",", ":")))
+        for memory in delivered
+        for unit in (memory.get("applicability") or {}).get("units", [])
+        for field in ("assertion", "temporal")
+        if unit.get(field)
+    ]
+    counts = Counter((field, encoded) for _, field, encoded in metadata)
+    shared: dict[str, Any] = {}
+    references: dict[tuple[str, str], str] = {}
+    for unit, field, encoded in metadata:
+        key = (field, encoded)
+        if counts[key] <= 1:
+            continue
+        if key not in references:
+            references[key] = f"{field}_{len(shared)}"
+            shared[references[key]] = unit[field]
+        unit[field] = {"$ref": "#/shared_metadata/" + references[key]}
+    payload = {
+        "question": question, "date": date, "memory_view": memory_view,
+        "memories": delivered,
+        **({"shared_metadata": shared} if shared else {}),
+    }
+    instructions = READER_PROMPT
+    if shared:
+        instructions += (
+            "\nShared metadata stores exact repeated assertion and temporal values. "
+            "A sole $ref points to the JSON value at that path in this message; "
+            "interpret it as that complete value in each referenced field. "
+            "Sharing does not add evidence or authority."
+        )
     return [
-        {"role": "system", "content": READER_PROMPT},
+        {"role": "system", "content": instructions},
         {
             "role": "user",
-            "content": json.dumps(
-                {"question": question, "date": date, "memory_view": memory_view,
-                 "memories": memories},
-                ensure_ascii=False,
-            ),
+            "content": json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
         },
     ]
 

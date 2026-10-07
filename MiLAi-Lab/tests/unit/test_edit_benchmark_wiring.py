@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 from typing import Any
@@ -26,7 +27,57 @@ from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
-from milai_lab.runners.edit_benchmarks import BenchmarkRun, source_batches
+from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages, source_batches
+
+
+def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
+    def unit(key: str, role: str, end: str | None) -> dict[str, Any]:
+        return {
+            "unit_id": key, "text": "Same words, independently scoped.",
+            "assertion": {"source_ref": "actual-source", "source_revision": 1,
+                          "role": role, "kind": "reported", "occurred_at": "2026-01-01"},
+            "temporal": {"effective_until": end, "query_time": "2026-02-01",
+                         "status": "expired" if end else "effective_limits_unspecified"},
+            "applies_under": ["condition-1"],
+        }
+
+    memories = [{
+        "record_id": "actual-record", "revision": 2, "content": "Original retained text",
+        "revision_evidence": [{"role": "assistant", "content": "Original witness"}],
+        "applicability": {"units": [unit("u1", "user", None), unit("u2", "user", None),
+                                    unit("u3", "assistant", "2026-01-31")],
+                          "relations": [{"source_unit": "condition-1", "target_unit": "u1"}]},
+    }]
+    before = copy.deepcopy(memories)
+    messages = reader_messages("Current and historical?", "2026-02-01", memories)
+    payload = json.loads(messages[1]["content"])
+
+    def expand(value: Any) -> Any:
+        if isinstance(value, dict):
+            if set(value) == {"$ref"}:
+                name = value["$ref"].removeprefix("#/shared_metadata/")
+                return expand(payload["shared_metadata"][name])
+            return {key: expand(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [expand(item) for item in value]
+        return value
+
+    assert expand(payload["memories"]) == before
+    assert memories == before
+    delivered = payload["memories"][0]["applicability"]["units"]
+    assert "$ref" in delivered[0]["assertion"]
+    assert delivered[0]["assertion"] == delivered[1]["assertion"]
+    assert delivered[2]["assertion"]["role"] == "assistant"
+    assert delivered[2]["temporal"]["status"] == "expired"
+
+
+def test_source_history_reader_retains_original_messages_without_metadata_refs() -> None:
+    memories = [{"content": "Actual archived speech", "role": "assistant", "revision": 1}]
+    payload = json.loads(reader_messages(
+        "Who said this?", "2026-02-01", memories, memory_view="source_history",
+    )[1]["content"])
+    assert payload == {"question": "Who said this?", "date": "2026-02-01",
+                       "memory_view": "source_history", "memories": memories}
 
 
 def test_observed_input_excludes_reference_and_future_material() -> None:
