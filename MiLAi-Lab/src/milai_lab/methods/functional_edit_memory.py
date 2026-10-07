@@ -43,7 +43,12 @@ from milai_lab.memory.functional_state import (
 )
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
-from milai_lab.methods.edit_maintenance import MaintenanceRecipe, ModelCall, maintain_event
+from milai_lab.methods.edit_maintenance import (
+    MaintenanceRecipe,
+    ModelCall,
+    maintain_event,
+    resume_maintenance,
+)
 from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
@@ -280,6 +285,139 @@ class FunctionalEditMemory(FunctionalMemory):
             if self.interface_version != "v1":
                 self._cache_writer_items(config, result.get("items", []), redelivered=True)
 
+    @staticmethod
+    def _progress_identity(item: dict[str, Any]) -> list[Any]:
+        if item["type"] == "fragment":
+            return ["source", item["source_ref"], item.get("source_revision", 1),
+                    None, [item["start"], item["end"]]]
+        return [item["type"], item.get("record_id"), item.get("revision"),
+                item.get("edit_unit", {}).get("unit_id"), item.get("content_range")]
+
+    @staticmethod
+    def _new_range(identity: list[Any], previous: list[list[Any]]) -> bool:
+        if identity[-1] is None or identity[-1][0] == identity[-1][1]:
+            return identity not in previous
+        remaining = [identity[-1]]
+        for old in previous:
+            if old[:-1] == identity[:-1] and old[-1] is not None:
+                left, right = old[-1]
+                remaining = [
+                    [a, b] for start, end in remaining
+                    for a, b in ((start, min(end, left)), (max(start, right), end)) if a < b
+                ]
+        return bool(remaining)
+
+    def _note_read_progress(
+        self, config: RunnableConfig, result: dict[str, Any], *, from_tool: bool
+    ) -> None:
+        if self.service.memory_profile != "unified_v1":
+            return
+        key = self._writer_key(config, "edit-read-progress:")
+        prior = self.service.store.get(namespace(self.service), key)
+        state = copy.deepcopy(prior.value) if prior else {"units": [], "pages": []}
+        identities = [self._progress_identity(item) for item in result.get("items", [])]
+        fresh = []
+        for identity in identities:
+            if self._new_range(identity, state["units"]):
+                fresh.append(identity)
+                state["units"].append(identity)
+        page = [result.get("snapshot_id"), result.get("start")]
+        new_page = page not in state["pages"] and result.get("snapshot_id") is not None
+        if new_page:
+            state["pages"].append(page)
+        progress = {
+            "new_units": len(fresh), "delivered_units_total": len(state["units"]),
+            "new_snapshot_page": new_page, "next_cursor": result.get("next_cursor"),
+            "status": "new_evidence" if fresh else "no_new_evidence",
+            "continuation": "read_missing_object_revision_or_next_cursor" if fresh else
+            "use_delivered_material_or_report_insufficient",
+            "history_absence_not_established": True,
+        }
+        if from_tool:
+            state["last_tool"] = progress
+        self.service.store.put(namespace(self.service), key, state, index=False)
+        # The page planner already enforces the public material allowance. Avoid
+        # overflowing it merely to repeat auxiliary progress metadata; callers
+        # can always inspect read_progress after the actual read.
+        annotated = {**result, "read_progress": progress}
+        if self.token_count(canonical(annotated)) <= self.material_limit:
+            result["read_progress"] = progress
+
+    def read_progress(self, config: RunnableConfig) -> dict[str, Any]:
+        """Inspect this turn's delivered object/version/range and page progress."""
+        prior = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-read-progress:")
+        )
+        if prior is None:
+            return {"delivered_units_total": 0, "last_tool": None}
+        return {
+            "delivered_units_total": len(prior.value["units"]),
+            "delivered_snapshot_pages": len(prior.value["pages"]),
+            "delivered_identities": copy.deepcopy(prior.value["units"]),
+            "snapshot_pages": copy.deepcopy(prior.value["pages"]),
+            "last_tool": copy.deepcopy(prior.value.get("last_tool")),
+        }
+
+    def maintain_delivery(
+        self,
+        config: RunnableConfig,
+        delivery: dict[str, Any],
+        *,
+        request_id: str,
+        date: str,
+        recipe: MaintenanceRecipe,
+        model_call: ModelCall,
+        allowed: bool,
+        execute: bool = True,
+        selected_record_ids: list[str] | None = None,
+        fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+        prior_request_id: str | None = None,
+        new_attempt_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Bind a current event or explicit consolidation to the ordinary Host commits."""
+        if not allowed:
+            return {"status": "not_permitted", "phase": "permission", "receipts": [],
+                    "unprocessed": [], "semantic_write_performed": False}
+        bound = self._binding(config)
+
+        def commit(
+            operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
+        ) -> dict[str, Any]:
+            self.service.store.put(
+                namespace(self.service), self._writer_key(config, "edit-writer-active:"),
+                {"mapping_id": mapping["mapping_id"]}, index=False,
+            )
+            self.note_delivered_fragment_handles(
+                config, [row["evidence_id"] for row in mapping["evidence"].values()],
+                redelivered=delivery.get("replay", False),
+            )
+            receipt = self.apply_writer_proposal(config, operation_id, proposal)
+            if receipt.get("ok") and (receipt.get("status") == "committed"
+                                     or receipt.get("original_status") == "committed"):
+                self.service.store.delete(
+                    namespace(self.service), "ordinary:" + reference_key(
+                        [bound["session"], bound["message_id"], self.forget_epoch]
+                    ),
+                )
+            return receipt
+
+        options: dict[str, Any] = {
+            "session": bound["session"], "date": date, "recipe": recipe,
+            "model_call": model_call, "commit": commit, "selected_record_ids": selected_record_ids,
+            "fit": fit, "prepare_delivery": prepare_delivery,
+        }
+        if prior_request_id is not None:
+            return resume_maintenance(
+                self.writer, delivery, prior_request_id=prior_request_id,
+                new_attempt_id=new_attempt_id if execute else None, **options,
+            )
+        if new_attempt_id is not None:
+            raise FunctionalRejection("EDIT_MAINTENANCE_PRIOR_REQUEST_REQUIRED")
+        return maintain_event(
+            self.writer, delivery, request_id=request_id, execute=execute, **options
+        )
+
     def maintain_sources(
         self,
         config: RunnableConfig,
@@ -288,6 +426,7 @@ class FunctionalEditMemory(FunctionalMemory):
         model_call: ModelCall,
         allowed: bool,
         execute: bool = True,
+        fit: Callable[[list[dict[str, str]]], bool] | None = None,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
@@ -334,32 +473,10 @@ class FunctionalEditMemory(FunctionalMemory):
                 [bound["session"], bound["message_id"], bound["config_version"], ref]
             )
 
-            def commit(
-                operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
-            ) -> dict[str, Any]:
-                self.service.store.put(
-                    namespace(self.service), self._writer_key(config, "edit-writer-active:"),
-                    {"mapping_id": mapping["mapping_id"]}, index=False,
-                )
-                self.note_delivered_fragment_handles(
-                    config, [row["evidence_id"] for row in mapping["evidence"].values()]
-                )
-                receipt = self.apply_writer_proposal(config, operation_id, proposal)
-                if receipt.get("ok") and (receipt.get("status") == "committed"
-                                         or receipt.get("original_status") == "committed"):
-                    # The existing immutable read snapshots remain historical.
-                    # Rebuild only this turn's ordinary view after an actual write.
-                    self.service.store.delete(
-                        namespace(self.service), "ordinary:" + reference_key(
-                            [bound["session"], bound["message_id"], self.forget_epoch]
-                        ),
-                    )
-                return receipt
-
-            results.append(maintain_event(
-                self.writer, delivery, session=bound["session"], request_id=request_id,
+            results.append(self.maintain_delivery(
+                config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
-                model_call=model_call, commit=commit, execute=execute,
+                model_call=model_call, allowed=allowed, execute=execute, fit=fit,
             ))
         return results
 
@@ -570,17 +687,16 @@ class FunctionalEditMemory(FunctionalMemory):
         self, session: str, turn_id: str, config_version: str, *, query: str | None = None
     ) -> dict[str, Any]:
         result = super().context(session, turn_id, config_version, query=query)
-        self._remember_page(
-            {
+        config: RunnableConfig = {
                 "configurable": {
                     "user_id": self.service.owner,
                     "v13_session": session,
                     "v13_turn_id": turn_id,
                     "v13_config_version": config_version,
                 }
-            },
-            result,
-        )
+            }
+        self._remember_page(config, result)
+        self._note_read_progress(config, result, from_tool=False)
         return result
 
     def _read(
@@ -593,6 +709,7 @@ class FunctionalEditMemory(FunctionalMemory):
         result = super()._read(config, call_id, arguments, action)
         try:
             self._remember_page(config, result)
+            self._note_read_progress(config, result, from_tool=True)
         except Exception as error:
             return {
                 "ok": False,
@@ -779,7 +896,12 @@ class FunctionalEditMemory(FunctionalMemory):
             item["current_unit_id"]: item
             for item in read_revision_scope(self.service, row["id"], row["value"])
         } if self.features.enabled else {}
-        applicability = read_applicability(state) if self.maintenance_recipe else {}
+        applicability = read_applicability(
+            state,
+            query_time=self.service.clock().isoformat() if self.features.temporal_scope else None,
+            version_time=row["value"].get("committed_at") if self.features.temporal_scope else None,
+            include_temporal=self.features.temporal_scope,
+        ) if self.maintenance_recipe else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -830,6 +952,10 @@ class FunctionalEditMemory(FunctionalMemory):
         ]
         if self.features.enabled:
             result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
+        if self.features.temporal_scope:
+            result[0]["revision_view"] = self.writer.revision_view(
+                row["value"], query_time=self.service.clock().isoformat()
+            )
         return result
 
     def save_edit(
