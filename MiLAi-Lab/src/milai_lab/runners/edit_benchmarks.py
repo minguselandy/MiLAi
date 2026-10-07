@@ -457,11 +457,6 @@ class BenchmarkRun:
                 {
                     "id": row["id"],
                     "revision": row["value"]["revision"],
-                    **({"applicability": {
-                        "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
-                        "statements": list(read_applicability(row["value"]["edit_state"]).values()),
-                    }} if self.settings.get("maintenance_recipe")
-                       and row["value"].get("edit_state") else {}),
                     "content": row["value"]["content"],
                     "scope": row["value"]["scope"],
                 }
@@ -757,10 +752,14 @@ class BenchmarkRun:
                 "body_delivered": True, "semantic_support": "unchecked",
             }
             trial = {**subset, "redelivered_sources": [*subset["redelivered_sources"], candidate]}
-            request = method.preview_writer_request(trial, allow_create=allow_create)
-            messages = self._edit_messages(
-                method, request["packet"], observed_date, allow_create=allow_create,
+            request = method.preview_writer_request(
+                trial, allow_create=allow_create, changes=delivery.get("candidate_changes")
+            )
+            messages = method.edit_messages(
+                request["packet"], observed_date, allow_create=allow_create,
                 schema=request["schema"],
+                change_candidates=request.get("change_candidates"),
+                prior_context=delivery.get("prior_context"),
             )
             if not self._fits(messages):
                 omitted.append({**part, "reason": "complete_request_capacity", "tokens": cost})
@@ -1273,6 +1272,11 @@ class BenchmarkRun:
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
+                    **({"applicability": {
+                        "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
+                        "statements": list(read_applicability(row["value"]["edit_state"]).values()),
+                    }} if self.settings.get("maintenance_recipe")
+                       and row["value"].get("edit_state") else {}),
                     **({"revision_scope": read_revision_scope(service, row["id"], row["value"])}
                        if any(self.settings.get("edit_features", {}).values()) else {}),
                 }

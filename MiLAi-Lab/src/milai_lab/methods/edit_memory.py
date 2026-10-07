@@ -1003,6 +1003,7 @@ class EditMemory:
                 "content": json.dumps(
                     payload,
                     ensure_ascii=False,
+                    separators=(",", ":"),
                 ),
             },
         ]
@@ -1131,7 +1132,8 @@ class EditMemory:
         ]
 
     def preview_writer_request(
-        self, delivery: dict[str, Any], *, allow_create: bool = True
+        self, delivery: dict[str, Any], *, allow_create: bool = True,
+        changes: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         self._require_v2()
         packet, draft = writer_projection(
@@ -1145,6 +1147,8 @@ class EditMemory:
             "packet": packet,
             "schema": self.envelope_schema(allow_create=allow_create, mapping=draft),
             "mapping": None,
+            **({"change_candidates": self.writer_changes(changes, draft)}
+               if changes is not None else {}),
         }
 
     def writer_request(

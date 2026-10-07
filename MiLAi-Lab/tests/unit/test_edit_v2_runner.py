@@ -184,6 +184,8 @@ def test_temporary_changes_locate_then_use_existing_editor_without_becoming_memo
                                   redelivered_ranges=[])
         view = method.writer_request(delivery)
         hints = method.writer_changes(changes, view["mapping"])
+        preview = method.preview_writer_request(delivery, changes=changes)
+        assert preview["mapping"] is None and preview["change_candidates"] == hints
         messages = run._edit_messages(method, view["packet"], "2030-01-02", allow_create=True,
                                      schema=view["schema"], change_candidates=hints)
         result = run.call("writer", messages, structured=True,
@@ -557,6 +559,19 @@ def test_old_support_preflight_omits_unaffordable_ranges_without_store_writes(
             redelivered_ranges=metadata["selected_ranges"],
         )
         assert method.preview_writer_request(subset) == method.preview_writer_request(executable)
+        complete = method.preview_writer_request(subset)
+        messages = method.edit_messages(complete["packet"], "2030-01-02", allow_create=True,
+                                       schema=complete["schema"])
+        run.settings["context_tokens"] = run.input_tokens(messages) + 100 + 512
+        delivery["prior_context"] = [{"text": old_text, "role": "user"}]
+        delivery["candidate_changes"] = [{
+            "subject": "Reminder tone", "statement": "Bright reminders " * 20,
+            "scope": None, "time": None,
+            "evidence": [delivery["sources"][0]["evidence_id"]],
+        }]
+        exact_subset, exact_metadata = plan()
+        assert exact_subset["redelivered_sources"] == []
+        assert exact_metadata["omitted_ranges"][0]["reason"] == "complete_request_capacity"
         assert service._source_boundaries == boundary
         assert service.records() == before
 
@@ -803,6 +818,9 @@ def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_pa
     def provider(request):
         wire = json.loads(request.content)
         if wire["messages"][0]["content"].startswith("Answer the current question"):
+            delivered = json.loads(wire["messages"][1]["content"])["memories"]
+            assert delivered[0]["applicability"]["basis"] == "stored_direct_relations_only"
+            assert delivered[0]["applicability"]["statements"][0]["text"] == "The marker is blue."
             content = "The marker is blue."
         elif wire["messages"][0]["content"].startswith("Extract brief candidate"):
             content = json.dumps({"changes": []})

@@ -89,3 +89,7 @@ python tools/run_functional.py run --root artifacts/build-first/functional-v2-fi
 首次启动记录：`functional-v1-five-flows`使用45596d8，在计账作用域创建前缺失编码客户端的可选配置默认字段，五个首消息均未进入模型；后续消息未运行。生成／编码新增均0，原unknown=4不变。修复域声明并按VLLMConfig展开默认值，使用同一公开配置文件的v2版本及新目录继续，不覆盖失败产物。
 
 候选源码dffc232自身Fast37563832351成功，Full37563832443查询时仍运行；这不证明语义效果。集中预测开始前原账本为41140生成请求／158,573,083 known／158,723,856 charged／unknown4，编码1,105,190；这是两个已闭合冒烟范围之后的边界，不包括在途开发集调用。
+
+运行中诊断补正：检查dffc232实际代码与Reader输入后发现，新applicability投影此前误接在旧维护分支，benchmark回答仍仅使用已有content／revision evidence。普通Host的投影已生效；不能将本轮benchmark说成验证了新视图。开发工作区已移到实际answer路径，传输测试验证字段真正送达，不热改正在运行的源码或答案。
+
+首用户原3／4／7编辑输入分别36,528／38,240／33,042 tokens，超过32,256上限，三次均未调用编辑器且保留incomplete。新补丁仅去除编辑JSON的结构空格，在同一完整payload上变为29,931／31,165／27,209；原文、十候选、schema与预算都保留。旧来源预览也计入真实旧语境和候选提示，预览依旧不发行写权限。受影响Ruff、mypy和既有接口／runner回归通过；未为补丁新开模型调用，实际效果待新的固定候选验证。

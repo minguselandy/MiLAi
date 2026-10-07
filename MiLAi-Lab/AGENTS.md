@@ -1,3 +1,19 @@
+# 2026-10-07: diagnostic input/Reader wiring fixes prepared offline
+
+Live prefix8-v1 remains fixed dffc232/PID501262/session88573. First user
+original3/4/7 had pre-edit capacity failures, no editor HTTP or mutation; do not
+call them successful empty proposals. JSON formatting alone reduces those exact
+full inputs36528/38240/33042 to29931/31165/27209 within existing32256. New code
+uses compact editor JSON and exact old-support preflight including prior context
+and candidate hints; no fields, original source, top10 candidates or budget removed.
+Also fixed misplaced applicability field: dffc benchmark answer lacked it; new
+answer now receives it, Host already did. Current diagnostic is NOT evidence for
+that new Reader view. Affected lint/types and existing interface/runner tests pass.
+No new HTTP for these fixes. Let fixed prediction finish, score saved outputs,
+then choose one main next optimization/candidate; never hotedit or overwrite.
+Full build-first goal remains active; Append-only/main matrix/long/held-out/external
+and full functional evaluation still required. Do not spawn agents.
+
 # 2026-10-07: five real smoke flows closed; concentrated prediction active
 
 Frozen1a8079b five-flow run plus its distinct post-forget query:18 messages,

@@ -150,6 +150,7 @@ def maintain_event(
             # Keep original source bodies and their metadata in both recipes.
             located["sources"] = copy.deepcopy(sources)
             located["prior_context"] = state.get("prior_context", [])
+            located["candidate_changes"] = state["changes"]
             if prepare_delivery is not None:
                 located = prepare_delivery(located)
             view = method.writer_request(located, request_id=request_id)
