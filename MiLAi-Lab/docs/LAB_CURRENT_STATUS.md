@@ -1,5 +1,28 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 13:06:36 UTC／北京时间21:06:36：后续修复已集成，自己的远端CI待发布。**
+
+最新源码4a2d7ba承接402业务进度／当前执行分列，另只澄清editor日期字段应位于assertion。
+85项既有编辑器检查、7文件Ruff、5源3.11mypy及SQLite日期示例通过，0真实HTTP；尚无
+新prompt真实效果。下面12:58运行／成本保持固定，原失败不替换，完整目标继续、Product NO_GO。
+
+**2026-10-07 12:58:48 UTC／北京时间20:58:48：PR83至90合并，34fa评分及两组Host执行闭合。**
+
+PR90头16f自身Fast519／520与Full329成功21/21，12:51:28合并main e0abb07；integration
+快进、干净。新402d7d5分列实际business进度和当次execution许可，47应用／10Host／包与工具
+边界、Ruff、3.11mypy及两应用SQLite示例通过；自己的远端CI尚未请求，不借父版CI。
+
+同34fa prefix8-v6 score12:19:34退出0、COMPLETED，32/32；原作者更新20/72valid66、
+QA29/73valid66，formation439/410、formed53/43，原无效保留。507Judge／1,900,646known；
+predict+score共646生成／4,063,434known、198编码／70,668，Root全73已读，无重预测／重评分。
+冻结1f两应用5执行闭合：业务恰1reserve＋1补标签、1文档审批＋1发布；预订结果维护拒绝，
+原保存仍pending，非5语义通过。402日期4执行闭合：首次非法属性位置拒绝，后两次提交及
+只读历史实际保留，但没有结构化生效限；非4语义通过。原结果／来源／unknown分别保留。
+详见[实际版本、完整分母、成本与缺口](MILAI_UNIFIED_MEMORY_USAGE.md)。原完整目标继续，
+16保留未读，single_verdict_v1未准入，Product NO_GO；下面各观察保留原时点。
+
+---
+
 **2026-10-07 12:13:17 UTC／北京时间20:13:17：PR83至89已合并，新日历入口未真实验证。**
 
 PR89头1f22097自身Fast516／Full328成功21/21，11:50:47合并main88a101f；integration

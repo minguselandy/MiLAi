@@ -4,6 +4,24 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+13:06:36 UTC：独立后续分支集成业务进度／执行许可分列及4a2d7ba日期prompt澄清；本地
+受影响检查通过。自己的远端CI尚未请求，未借PR90成功宣称后续修复已验证。
+
+## 12:51:28 UTC：PR90已合并
+
+[PR90](https://github.com/minguselandy/MiLAi/pull/90)实际头16f3083的自身
+[Fast519](https://github.com/minguselandy/MiLAi/actions/runs/37620097357)、
+[Fast520](https://github.com/minguselandy/MiLAi/actions/runs/37620147498)及
+[Full329](https://github.com/minguselandy/MiLAi/actions/runs/37620147442)全部success，Full21/21。
+Root核对头与mergeable，按既有用户合并授权转ready、普通merge为main e0abb07；远端
+closed／merged及12:51:28时间已核验，integration快进、干净且源码树与16f相同。
+PR83至90均merged；没有借其他提交CI、改workflow、强推或删除原计划／结果。
+
+新402d7d5业务实际进度／当前许可分列在独立后续分支，其本地检查通过，不冒称自己的
+远端CI成功。34fa32会话评分、1f两应用5消息及402日期4消息的实际闭合分别记录于
+[版本、结果与成本](MILAI_UNIFIED_MEMORY_USAGE.md)，不归给同一方法。原完整研究／功能
+目标继续，16保留未读，Product NO_GO；早期合并与当时open列表保留原观察时点。
+
 ## 11:50:47 UTC：PR89已合并
 
 [PR89](https://github.com/minguselandy/MiLAi/pull/89)头1f22097的自身

@@ -5,6 +5,23 @@ The user activates [the task cards](MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md) and
 Both source documents have been read and copied into this worktree unchanged.
 This extends the existing build-first candidate and retains its full validation scope.
 
+## Actual request progress and current execution (402d7d5)
+
+The same request journal now keeps business.status as the observed aggregate of
+its required steps (incomplete/partial/completed/unknown/current-state-changed).
+Current dispatch status, can_execute, allowed_operations and readonly live in
+business.execution. Initial or unevaluated snapshots explicitly say not_evaluated;
+that view never grants an adapter capability. A readonly check of a partly completed
+request preserves its completed effects and shows partial alongside observed_only.
+Ordinary receipt presentation renders both fields, leaving original attempts,
+unknowns, semantic-save receipts and Host feedback checkpoints separate. This is
+execution state, not a semantic fact or authorization from memory text.
+
+The follow-up editor prompt (4a2d7ba, from 743c2ded) locates applicability inside
+the owning assertion and gives a hypothetical conditioned date example. It does
+not move malformed output, change the public schema or infer effective dates
+from Source report metadata. Its real-model effect remains untested.
+
 ## Shared calls and ownership
 
 | Capability | Existing authority and implementation seam | Owner |

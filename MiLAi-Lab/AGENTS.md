@@ -1,3 +1,18 @@
+# Current handoff: 2026-10-07 13:06 UTC
+
+PR83–90 merged; main/integration e0abb07 clean, PR90 own16f Fast519/520/Full32921 passed.
+New402d7d5 separates actual business progress from current execution permission;
+47application/10Host plus boundaries/types/lint/SQLite example pass; own remoteCI not requested.
+New4a2d7ba integrates743c2ded prompt-only applicability placement:85existing edit checks,
+5-source mypy/Ruff/SQLite date example pass,0realHTTP; own remoteCI not requested.
+Frozen34fa prefix8-v6 predict/score closed32: update20/72valid66,QA29/73valid66;
+646generation/4063434known,198embedding70668. Root73 fullanswers read, no rescore.
+Native8 frozen1f closed5executions; reservation original save still pending. Calendar402
+closed4executions, first schema reject, later literal conditions not structured effective limits.
+All real runner PIDs exited0; Root alone realHTTP/unchanged ledger, no hotedit or old397 retry.
+See docs/MILAI_UNIFIED_MEMORY_USAGE.md for fixed12:58 results. Full goal incomplete,16reserved unused,
+single_verdict_v1 not admitted,ProductNO_GO. Earlier timed blocks are historical.
+
 # Current handoff: 2026-10-07 12:13 UTC
 
 PR83–89 merged; main88a101f/integration clean, PR89 own1f Fast516/Full32821 passed.
