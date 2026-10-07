@@ -2407,3 +2407,100 @@ def test_shared_extraction_context_is_old_visible_speech_not_current_evidence(tm
                                           model_call=call, allowed=True)
         assert len(seen) == 2 and results[0]["status"] == "completed"
         assert memory.service.records() == []
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+@pytest.mark.parametrize("arm", ["M", "Append-only"])
+def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_sources(
+    tmp_path, recipe, arm,
+):
+    selected_text = "Save the actual outcome, including any unfinished label work."
+    original = "Unselected preface.\n" + selected_text + "\nUnselected closing remark."
+    current = "Continue the authorized unfinished prior work."
+    with opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES,
+                maintenance_recipe=recipe, recent_context="bank_recent_v2") as memory:
+        prior_ref = memory.service.capture_user(
+            "s", "old-request", original, occurred_at="2026-10-06T08:00:00Z",
+        )["source_ref"]
+        start = original.index(selected_text)
+        selected = memory.service.source_fragment_range(
+            prior_ref, start, start + len(selected_text),
+        )
+        recent = []
+        for index in range(6):
+            ref = memory.service.capture_user("s", f"recent-{index}", f"Recent context {index}.")[
+                "source_ref"]
+            recent.append(memory.service.source_fragments(ref)[0])
+        turn(memory, "u", current)
+        current_ref = memory._binding(cfg())["source_ref"]
+        # These actual archived spans were delivered to the caller's resolver.
+        memory.note_delivered_fragment_handles(
+            cfg(), [selected["fragment_handle"], *(f["fragment_handle"] for f in recent)],
+        )
+        before_sources = memory.service.sources()
+        calls, previews = [], []
+
+        def inspect(messages):
+            payload = json.loads(messages[1]["content"])
+            context = payload["prior_context"]
+            requested = [row for row in context if row["text"] == selected_text]
+            assert len(requested) == 1
+            assert requested[0]["kind"] == "prior_context" and requested[0]["role"] == "user"
+            assert requested[0]["occurred_at"] == "2026-10-06T08:00:00Z"
+            assert all("Unselected" not in row["text"] for row in context)
+            assert {row["text"] for row in context if row["text"].startswith("Recent context")} == {
+                f"Recent context {index}." for index in range(2, 6)
+            }
+            assert all(row["text"] == current for row in payload["delivery"]["evidence"])
+            assert len(payload["delivery"]["source_table"]) == 1
+
+        def fit(messages):
+            inspect(messages)
+            previews.append(messages)
+            return True
+
+        def call(stage, messages, schema):
+            inspect(messages)
+            calls.append(stage)
+            if stage == "extract":
+                return {"changes": []}
+            clause = {"text": current, "evidence": ["e1"],
+                      "assertion": {"source": "e1", "kind": "reported"}}
+            if arm == "M":
+                clause["conditions"] = []
+            return {"creates": [{"action": "create", "matter": "Current continuation",
+                                  "clauses": [clause]}], "records": {}}
+
+        args = dict(recipe=recipe, model_call=call, allowed=True, fit=fit,
+                    prior_request_fragments=[selected, selected])
+        inspected = memory.maintain_sources(cfg(), execute=False, **args)
+        assert inspected[0]["status"] == "incomplete" and not calls and not previews
+        result = memory.maintain_sources(cfg(), **args)
+        assert result[0]["status"] == "completed", result
+        assert calls == (["extract", "edit"] if recipe == "extract_then_edit" else ["edit"])
+        after_sources = memory.service.sources()
+        assert previews and [row["event_id"] for row in after_sources] == [
+            row["event_id"] for row in before_sources
+        ]
+        assert [row for row in after_sources if row["event_id"] != current_ref] == [
+            row for row in before_sources if row["event_id"] != current_ref
+        ]
+        saved = memory.service.records()[0]["value"]
+        assert saved["source_refs"] == [current_ref]
+        assert saved["edit_state"]["units"][0]["assertion"]["source_ref"] == current_ref
+        state = memory.service.store.get(
+            (*memory.service.namespace, "edit_maintenance"),
+            json.dumps(["s", result[0]["request_id"]], ensure_ascii=False),
+        ).value
+        retained = next(row for row in state["prior_context"] if row["source_ref"] == prior_ref)
+        assert (retained["start"], retained["end"], retained["text"]) == (
+            selected["start"], selected["end"], selected_text,
+        )
+        before = copy.deepcopy(memory.service.records())
+        count = len(calls), len(previews)
+        assert memory.maintain_sources(cfg(), **args) == result
+        assert (len(calls), len(previews)) == count and memory.service.records() == before
+        turn(memory, "status-only", "Only query status; do not save or perform any action.")
+        args["allowed"] = False
+        assert memory.maintain_sources(cfg("status-only"), **args) == []
+        assert (len(calls), len(previews)) == count and memory.service.records() == before

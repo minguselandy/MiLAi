@@ -427,11 +427,14 @@ class FunctionalEditMemory(FunctionalMemory):
         allowed: bool,
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        prior_request_fragments: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
         Current Host permission is authoritative. Old context and assistant prose
         never become a fresh event just because they occur in the Reader cache.
+        Explicitly selected old request ranges join prior context without the
+        recent-source limit; they do not enter the current evidence table.
         """
         if not allowed:
             return []
@@ -464,9 +467,14 @@ class FunctionalEditMemory(FunctionalMemory):
             )[-4:]
             ranges = [{"source_ref": key[0], "start": key[1], "end": key[2]}
                       for key in old if key[0] in recent_refs]
+            for fragment in prior_request_fragments or []:
+                part = {key: fragment[key] for key in ("source_ref", "start", "end")}
+                if part not in ranges:
+                    ranges.append(part)
             if ranges:
                 delivery["prior_context"] = self.writer.prepare(
-                    recent_refs, "", selected_records=[], source_ranges=ranges,
+                    list(dict.fromkeys(part["source_ref"] for part in ranges)), "",
+                    selected_records=[], source_ranges=ranges,
                     redelivered_ranges=[],
                 )["sources"]
             request_id = "maintenance:" + canonical(
