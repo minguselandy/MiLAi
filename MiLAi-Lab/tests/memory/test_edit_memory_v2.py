@@ -15,7 +15,7 @@ from langgraph.store.sqlite import SqliteStore
 from milai_lab.memory.edit_units import clause_proposal, read_revision_evidence, read_revision_scope
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
-from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_features import EditFeatures, compact_prompt_schema
 from milai_lab.methods.edit_memory import EditMemory
 
 
@@ -730,6 +730,8 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert method.envelope_proposals({}, view["mapping"]) == []
         assert method.envelope_proposals({"creates": []}, view["mapping"]) == []
         assert method.envelope_proposals({"records": {}}, view["mapping"]) == []
+        already_shared = {"$defs": {"item": {"type": "string"}}, "$ref": "#/$defs/item"}
+        assert compact_prompt_schema(already_shared) == already_shared
         for malformed in ({"records": None}, {"creates": None}, {"action": "edit", "edits": []}):
             with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
                 method.envelope_proposals(malformed, view["mapping"])
@@ -774,10 +776,25 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         clause = view["packet"]["records"][0]["clauses"][0]
         assert clause["role"] == "content"
         assert clause["conditions"][0]["role"] == "condition"
+        compact = compact_prompt_schema(view["schema"])
+        validator = Draft202012Validator(compact)
+        Draft202012Validator.check_schema(compact)
+        assert validator.is_valid({"records": {"r1": edit}})
+        assert compact_prompt_schema(compact) == compact
         wrong_role = copy.deepcopy(edit)
         wrong_role["edits"][1]["shared_conditions"] = ["u1"]
+        assert not validator.is_valid({"records": {"r1": wrong_role}})
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_role}}, view["mapping"])
+        wrong_target = copy.deepcopy(edit)
+        wrong_target["edits"][0]["target_unit"] = "u999"
+        assert not validator.is_valid({"records": {"r1": wrong_target}})
+        with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+            method.decode_envelope({"records": {"r1": wrong_target}}, view["mapping"])
+        wrong_support = copy.deepcopy(edit)
+        wrong_support["edits"][0]["keep_support"] = ["h1"]
+        with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
+            method.decode_envelope({"records": {"r1": wrong_support}}, view["mapping"])
         decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
         revised = method.apply("s", "scope", decoded)
         state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])

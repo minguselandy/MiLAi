@@ -54,59 +54,62 @@ def _object(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
 
 
 def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
-    """Share repeated string choices in the Writer's explanatory schema only.
+    """Share repeated sub-schemas in the Writer's explanatory schema only.
 
     The original bound schema still controls generation and decoding. Referencing
-    the same enum through $defs changes its presentation, not its allowed values.
+    an identical sub-schema through $defs preserves every constraint and annotation.
     Existing schemas with definitions retain their original reference locations.
     """
     if "$defs" in schema:
         return copy.deepcopy(schema)
-    counts: Counter[tuple[str, ...]] = Counter()
+    counts: Counter[str] = Counter()
+    originals: dict[str, dict[str, Any]] = {}
+    names: dict[str, str] = {}
 
-    def choices(value: dict[str, Any]) -> tuple[str, ...] | None:
-        if (
-            set(value) == {"type", "enum"} and value["type"] == "string"
-            and len(value["enum"]) > 1 and all(isinstance(v, str) for v in value["enum"])
-        ):
-            return tuple(value["enum"])
-        return None
+    def key(value: dict[str, Any]) -> str:
+        return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
 
-    def collect(value: Any) -> None:
-        if isinstance(value, dict):
-            candidate = choices(value)
-            if candidate is not None:
-                counts[candidate] += 1
-            for child in value.values():
-                collect(child)
-        elif isinstance(value, list):
-            for child in value:
-                collect(child)
+    def project(value: Any, *, collect: bool = False, definition: bool = False) -> Any:
+        if not isinstance(value, dict):
+            return copy.deepcopy(value)
+        candidate = key(value)
+        if collect:
+            counts[candidate] += 1
+            originals.setdefault(candidate, value)
+        elif candidate in names and not definition:
+            return {"$ref": "#/$defs/" + names[candidate]}
+        result = copy.deepcopy(value)
+        # Only schema positions are traversed: enum/const/default values are data.
+        for field in ("properties", "patternProperties", "dependentSchemas"):
+            if field in value:
+                result[field] = {
+                    name: project(child, collect=collect) for name, child in value[field].items()
+                }
+        for field in ("items", "additionalProperties", "contains", "propertyNames", "not",
+                      "if", "then", "else"):
+            if field in value:
+                result[field] = project(value[field], collect=collect)
+        for field in ("oneOf", "anyOf", "allOf", "prefixItems"):
+            if field in value:
+                result[field] = [project(child, collect=collect) for child in value[field]]
+        return result
 
-    collect(schema)
-    names = {
-        values: f"choices_{i}"
-        for i, (values, count) in enumerate(counts.items()) if count > 1
-    }
-
-    def project(value: Any) -> Any:
-        if isinstance(value, dict):
-            candidate = choices(value)
-            if candidate is not None and candidate in names:
-                return {"$ref": "#/$defs/" + names[candidate]}
-            return {key: project(child) for key, child in value.items()}
-        if isinstance(value, list):
-            return [project(child) for child in value]
-        return copy.deepcopy(value)
-
+    project(schema, collect=True)
+    for candidate, count in counts.items():
+        name = f"shared_{len(names)}"
+        reference = {"$ref": "#/$defs/" + name}
+        overhead = count * len(key(reference)) + len(name) + 4
+        if count > 1 and (count - 1) * len(candidate) > overhead:
+            names[candidate] = name
     result: dict[str, Any] = project(schema)
     if names:
         result["$defs"] = {
-            name: {"type": "string", "enum": list(values)} for values, name in names.items()
+            name: project(originals[candidate], definition=True)
+            for candidate, name in names.items()
         }
     return (
         result
-        if len(json.dumps(result, ensure_ascii=False)) < len(json.dumps(schema, ensure_ascii=False))
+        if len(key(result)) < len(key(schema))
         else copy.deepcopy(schema)
     )
 
