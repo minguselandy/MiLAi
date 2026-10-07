@@ -1,3 +1,16 @@
+# 2026-10-07: unified multi-agent development authorized
+
+The current user explicitly activates MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md and
+requests multi-agent development without defensive programming or SHA checks.
+This supersedes earlier no-agent scheduling. Root integrates shared contracts,
+MemoryService, central runners and configurations; each worker owns a separate
+worktree and only its assigned files. Root alone schedules real model HTTP and
+uses the unchanged continuous ledger. No SHA/content fingerprint gates, new
+model services, reviewers, Product/Archive edits or rewriting frozen results.
+Current dffc scoring is interrupted:18/32 checkpoints,396 saved Judge responses,
+request397 unconfirmed, no score terminal; never blindly replay that request.
+The original build-first validation scope remains required and incomplete.
+
 # 2026-10-07 04:29 UTC: user-requested detailed publication; scoring continues
 
 User asks to summarize current progress and make a complete detailed commit.
