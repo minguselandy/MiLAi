@@ -1,8 +1,8 @@
 # Unified memory implementation contract
 
-The user activates `/cra/memory/mx_memory/MiLAi-Lab/docs/MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md`.
-Its companion architecture plan has not been found locally or in the connected repository.
-The explicit task cards govern implementation; missing companion details are not invented.
+The user activates [the task cards](MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md) and
+[the companion architecture plan](MILAI_UNIFIED_MEMORY_ARCHITECTURE_AND_BUILD_PLAN.md).
+Both source documents have been read and copied into this worktree unchanged.
 This extends the existing build-first candidate and retains its full validation scope.
 
 ## Shared calls and ownership
@@ -30,7 +30,7 @@ and synthetic SQLite only; no real model HTTP or private benchmark data.
 
 - Episodes reference actual `source_refs` in the same owner Store. Episode identity
   is explicit, source content stays at the source authority, and every read checks
-  visibility. Reported, observed and inferred descriptions remain distinguishable.
+  visibility. Reported, observed, inferred and uncertain descriptions remain distinguishable.
   Consolidation takes a caller callback using current visible sources and records;
   replay never captures a fresh event or becomes independent support.
 - Revision rendering takes actual state and an optional explicit query time. It

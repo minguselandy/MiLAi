@@ -661,11 +661,14 @@ def prepare(
         "edit_interface_version",
         "edit_features",
         "maintenance_recipe",
+        "memory_profile",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
                          + ",".join(sorted(set(settings) - allowed)))
+    if settings.get("memory_profile", "ordinary") not in {"ordinary", "unified_v1"}:
+        raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
@@ -1873,6 +1876,7 @@ def message(
                 ),
                 observer=trace,
                 semantic_retriever=retriever,
+                memory_profile=settings.get("memory_profile", "ordinary"),
             )
             seed_receipts = (
                 seed_sources(service, initial_sources, bank_root / "source-imports.json",

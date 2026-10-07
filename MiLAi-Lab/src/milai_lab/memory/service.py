@@ -151,6 +151,8 @@ class MemoryService:
         functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
         semantic_retriever: SemanticRetriever | None = None,
+        memory_profile: str = "ordinary",
+        clock: Callable[[], datetime] | None = None,
     ) -> None:
         if functional_contract == "functional_v1":
             mutation_contract = (
@@ -174,6 +176,8 @@ class MemoryService:
         self.semantic_retriever = semantic_retriever
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
+        self.memory_profile = memory_profile
+        self.clock = clock or (lambda: datetime.now(UTC))
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
         self.mutation_contract = self.validate_mutation_contract(mutation_contract)
@@ -1444,11 +1448,13 @@ class MemoryService:
             "content": body,
             "source_revision": 1,
             "capture_key": event_key,
-            "observed_at": datetime.now(UTC).isoformat(),
+            "observed_at": self.clock().isoformat(),
             "object_ref": asdict(object_ref) if object_ref is not None else None,
         }
         if occurred_at is not None:
             event["occurred_at"] = occurred_at
+        if self.memory_profile == "unified_v1":
+            event["episode_id"] = reference_key([session, event_key, role])
         with self._locked():
             prior = self.store.get(self.sources_namespace, event_id)
             formed = False
@@ -1520,6 +1526,11 @@ class MemoryService:
                         "error_type": type(error).__name__,
                     }
                 self._uncertain_captures.discard(event_id)
+        episode_id = event.get("episode_id")
+        if episode_id is not None and self.memory_profile == "unified_v1":
+            from milai_lab.memory.episodes import EpisodeIndex
+
+            EpisodeIndex(self).register(episode_id, [event_id])
         return {
             "ok": True,
             "status": "raw_captured",
@@ -1527,6 +1538,7 @@ class MemoryService:
             "observed_at": event["observed_at"],
             "formation_status": "formed" if formed else "pending",
             "object_ref": event["object_ref"],
+            **({"episode_id": episode_id} if episode_id is not None else {}),
             **({"visibility": "revoked"} if self._functional_hidden(source_ref=event_id) else {}),
         }
 
@@ -1801,6 +1813,16 @@ class MemoryService:
                 )
                 result.append({**event, "formation_status": "formed" if formed else "pending"})
             return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
+
+    def episodes(
+        self, *, episode_ids: list[str] | None = None, pending_only: bool = False, limit: int = 20
+    ) -> list[dict[str, Any]]:
+        """Visible source-backed episodes in this same owner's Store."""
+        from milai_lab.memory.episodes import EpisodeIndex
+
+        return EpisodeIndex(self).select(
+            episode_ids=episode_ids, pending_only=pending_only, limit=limit
+        )
 
     def _uses_explicit_receipt(self, proposal: dict[str, Any], source: dict[str, Any]) -> bool:
         ref = source.get("object_ref")
@@ -2299,7 +2321,7 @@ class MemoryService:
                 if self.mode == "field_grounded" and raw["fields"]
                 else "unchecked",
                 "observed_at": source["observed_at"],
-                "committed_at": datetime.now(UTC).isoformat(),
+                "committed_at": self.clock().isoformat(),
                 "session": session,
             }
             receipt = {

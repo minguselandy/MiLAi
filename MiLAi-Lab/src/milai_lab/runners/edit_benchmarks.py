@@ -1354,6 +1354,7 @@ class BenchmarkRun:
                     mutation_contract="event_bound_v1",
                     candidate_contract="read_handle_v1",
                     semantic_retriever=self._semantic_retriever(),
+                    memory_profile=self.settings.get("memory_profile", "ordinary"),
                 )
                 previous_time = None
                 prefix = selection.get("session_prefix")
@@ -1653,6 +1654,7 @@ class BenchmarkRun:
                     mutation_contract="event_bound_v1",
                     candidate_contract="read_handle_v1",
                     semantic_retriever=self._semantic_retriever(),
+                    memory_profile=self.settings.get("memory_profile", "ordinary"),
                 )
                 history = longmemeval_history(case)
                 prediction_path = self.root / "predictions/longmemeval" / owner / "complete.json"
