@@ -11,6 +11,106 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 15:24:02 UTC：整理中断回执核对接入，集中预测保持原冻结版本
+
+本节固定于2026-10-07 15:24:02 UTC／北京时间23:24:02。本次源码为`188c80a`，
+整理层`bb4c7a9`来自C的`2e0d4cf`，基于main`7f755bac`；自己的远端CI尚待发布。
+下面仍在运行的五组预测冻结`ec37d38`，不含这项修复，15:04固定成本也不改成实时成本。
+
+**实际复现并修复整理层中断窗口。**既有SQLite示例先经共同维护真实提交一条记忆，
+在外层保存结果前中断，留下`maintenance_pending`；关闭并重开后，同一请求仅核对原
+维护身份和已有回执，更新外层完成状态及Episode整理标记。核对前仍检查原选择、来源和
+指定记录的可见性；正常completed不再次核对，缺失收尾标记可补齐。unknown或没有确认
+结果时保持未完成，不调用原生成回调、不重发HTTP、不提交新提案或新增独立来源。
+
+普通`tools/run_memory_operations.py`的consolidate入口复用原session/request维护绑定，
+通过既有`maintain_delivery(..., execute=False, new_attempt_id=None)`核对，不重新组成
+编辑材料。既有CLI集成用例的两个参数分支也复现内层完成后丢回包，再用同命令重开；
+合成transport调用数、实际记录及Source集合均不增加。此入口验证的是同session/request
+重开，不据此宣称跨session的任意整理续办已完成，也不替代原业务结果保存pending的续办。
+
+Root串行合流检查：上述2项CLI检查、跨重开SQLite示例、四文件Ruff、三源Python3.11
+mypy、包DAG与工具依赖边界、diff检查通过；0真实模型／编码调用。示例同时验证未知
+模型结果不重生成、选择变化及记录／来源撤回优先，正常偏好撤销保留会议历史。
+公共schema、业务权限、模型配置、实验冻结源及既有预算不改；工程闭合不证明语义正确。
+
+**开发重心收敛到完整用户链路。**五条主线已基本贯通，当前重点是已识别变化的落实、
+未改限定保持、三种历史的正确选择，以及业务／保存／反馈分别闭合。依据实际断点参考
+[方法核对](MILAI_EDIT_RELATED_WORK.md)，只采用能接入现有维护器的有限改动；
+保持空提案与Append-only的合法性，用实际后续任务判断，不以更多UPDATE证明成功。
+
+此时PID3237374仍存在，B0维护及预测均14/32（8／6／0／0），其余四组尚未开始；
+无预测终态、进程退出或score。Root已读当前B0首用户20个完整答案，原8会话的真实空提案
+及记录缺口保留；完整来源审计未完成，无数值重评分。同版集中预测及评分继续，原完整
+验证范围仍未完成；16保留用户未用于开发，single_verdict_v1未准入，Product NO_GO。
+
+## 15:04:41 UTC：PR92合并，同前态比较闭合，五组预测开始
+
+本节固定于2026-10-07 15:04:41 UTC／北京时间23:04:41。报告版本以所在提交为准；
+实际Host复测、recipe比较及新五组队列均冻结`ec37d38`，实现为`4b3501b`。
+main为`7f755bac`，与该已验证头的源码内容一致；下面14:16及更早观察保留原时点。
+
+**PR83至92均已合并。**[PR92](https://github.com/minguselandy/MiLAi/pull/92)自身
+[Fast527](https://github.com/minguselandy/MiLAi/actions/runs/37635708699)、
+[Fast528](https://github.com/minguselandy/MiLAi/actions/runs/37635725210)及
+[Full331](https://github.com/minguselandy/MiLAi/actions/runs/37635725032)成功，Full21/21。
+14:52:37普通merge为main7f755bac；其
+[push检查](https://github.com/minguselandy/MiLAi/actions/runs/37640400728)也成功。
+main检查复用已测试PR内容，部分测试job按原workflow跳过，不声称全部重跑。
+integration快进、干净；14:52远端open列表为空是当时观察。
+
+**新历史入口真实复测已闭合。**同一已曝光日期故事采用独立空库，14:30:57至14:34:11
+退出0，4次执行COMPLETED、3次实际提交r1／r2／r3。只读核对历史与各次实际保存逐值相同，
+r3恢复原状态，最后只读消息没有维护或业务动作。Agent在撤销时调用既有history及exact-r2
+工具，收到已提交的绿色例外；最后只读消息没有再调历史工具。末答能区别当前已过期与过去
+曾保存绿色，但把绿色称为initial save，且混淆原Source与修订正文；撤销答复仍暴露内部标识。
+Root已读4个完整答复，不记4条语义通过。r1仅原条件带typed applicability，r2绿色的一日
+限定仍为文字；随机生成的表示差异不能全部归因于历史入口。18生成／184,931known，
+16编码／597token，Judge0、新unknown0；不把Agent finish子集当成全部生成均stop。
+
+**同一实际旧状态的两recipe首次完整比较已闭合。**14:37:49至14:48:26退出0，两条recipe
+各4case；before均逐值等于保存的原实际B0库，事项数16／20／20／16。独立SQLite副本中的
+旧未来授权冲突未再出现；原962首次失败、原输入和旧库均保留。
+
+| 原case | single_pass实际结果 | extract_then_edit实际结果 |
+|---|---|---|
+| 3 | 真实空提案，原16事项不变 | 新建5事项，原16值不变；选定复合子句引用范围过窄 |
+| 6 | 真实空提案，20事项不变 | 抽取8候选后editor返回{}，20事项不变 |
+| 7 | 修订3事项，Reader得到新职业变化；部分措辞强化、支持事实遗漏 | 抽取4候选后editor返回{}，20事项不变，Reader遗漏新事件 |
+| 4 | 修订1事项，保留无关旧内容但丢比较方向 | 修订1事项，保留明确比较方向及无关旧内容 |
+
+原6新来源明确报告已获得面试／工作邀请，实际before全部事项都没有该进展；两组空提案
+不能由“状态不变”判成功。原7两组实际top10都送达相关职业／健康事项，空提案发生在
+抽取和检索之后，不是容量失败。原3部分新子句合并不同User轮次，却只引用一个较窄片段；
+这属于引用范围观察，不把所有跨句事实自动判为虚构。Root读完22个完整自然答案及全部8个
+editor输出，核对实际前后状态与选定来源；完整原文审计仍未完成，未另造数值评分或Judge。
+
+single_pass为15生成／215,346known、23编码／17,977token；extract_then_edit为
+19生成／274,878known、22编码／6,165token。合计34生成均stop／490,224known、
+45编码／24,142token，Judge0、新unknown0，与连续账本差额一致。上述Host＋比较合计
+52生成／675,155known、61编码／24,739token，子集不重复相加。比较只有4个已曝光前态，
+同一随机模型首次输出不同，不能得出整体recipe优势或独立确认。
+
+**同版五组集中预测已经启动。**14:59:07从冻结ec37d38启动PID3237374，依次B0／B1／
+B2／M／Append-only；各组、各用户从独立空库开始。共同extract_then_edit、I2、dense cosine
+K10、Reader、Qwen3.6 thinking／temperature1及既有预算；32会话、72更新机会、73QA每组。
+从公开模板`configs/milai-unified-prefix8-v2.json`复制本地配置，只声明五arms与本次普通
+版本／运行标识；服务及数据路径仍按本地环境保存，实际配置保持ignored。
+CLI沿用`tools/run_edit_suite.py CONFIG NEW_OUTPUT --benchmark halumem --phase predict`，
+预测完整闭合后同配置、同输出`--phase score`，不重新运行Writer／Reader／encoder。
+
+本快照B0维护3／32、预测3／32、16个生成响应、17个编码响应；无B0预测终态或suite终态，
+其余四组未开始，不能记零分。Root仅已读首两会话6个完整答复，未评分。本阶段Judge0。
+启动前闭合账本42980请求／170783228known／170974716charged／embedding1275643／
+unknown5；本快照42997请求／170983787known／171355536charged／embedding1282888／
+unknown6含一个在途reservation，不是新增已闭合失败。limits未改、预算未重置。
+
+原完整目标继续：当前五组预测与评分、同版长历史65／277、native32／drift／recovery、
+必要入口与认知消融及固定更紧预算、最终冻结后16保留用户、LongMemEval28题／1354历史及
+原10完整答案、RawRAG／RollingSummary／实际A-MEM callback、最终同候选Host135case／
+192message及新增实质故事、六项最终交付尚未完成。16保留用户未用于开发；无最终方法
+选择、稳定优势或独立确认，single_verdict_v1未准入，Product仍为NO_GO。
+
 ## 14:16 UTC：PR91合并，真实历史答复错误与配对分支失败已保留
 
 本节固定于2026-10-07 14:16 UTC／北京时间22:16。报告版本以本节所在提交为准；

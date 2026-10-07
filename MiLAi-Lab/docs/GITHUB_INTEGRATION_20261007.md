@@ -4,6 +4,29 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 15:24:02 UTC：整理回执核对合流，待自身CI
+
+新源码188c80a基于main7f755bac，承接C的2e0d4cf（集成bb4c7a9），Root接普通CLI并扩展
+既有两参数集成用例。内层维护已完成而外层仍pending时，仅按原身份核对已有回执，
+不生成、重试、重放业务或放宽权限。窄检查、真实SQLite示例、类型／格式／依赖边界通过；
+自己的远端CI尚待发布。完整范围与冻结ec五组运行分列于
+[15:24:02固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)，不借用PR92的CI或实验成绩。
+
+## 14:52:37 UTC：PR92已合并
+
+[PR92](https://github.com/minguselandy/MiLAi/pull/92)实际头ec37d38自己的
+[Fast527](https://github.com/minguselandy/MiLAi/actions/runs/37635708699)、
+[Fast528](https://github.com/minguselandy/MiLAi/actions/runs/37635725210)及
+[Full331](https://github.com/minguselandy/MiLAi/actions/runs/37635725032)均成功，Full21/21。
+Root按既有用户授权普通merge为main7f755bac，integration快进／干净，内容与测试头相同；
+[main push](https://github.com/minguselandy/MiLAi/actions/runs/37640400728)也success。
+main现有workflow核对已测试PR内容并跳过部分重复测试，不声称全部测试重新执行。
+PR83至92的merged状态已核对，14:52 open列表为空；没有改workflow、权限或冻结源码。
+
+同ec真实日期复测和recipe比较均已退出0，实际语义缺口、Root复核范围与成本见
+[15:04:41固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)。其后五组集中预测仍冻结ec，
+本次仅发布派生事实及报告，不热改、重置预算或覆盖首尝试。完整目标仍未完成。
+
 ## 13:41:39 UTC：PR91已合并
 
 [PR91](https://github.com/minguselandy/MiLAi/pull/91)最终头962beaa自己的
