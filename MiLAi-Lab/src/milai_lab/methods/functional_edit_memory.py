@@ -904,6 +904,7 @@ class FunctionalEditMemory(FunctionalMemory):
         state = row.get("value", {}).get("edit_state")
         if not ordinary or not state:
             return ordinary
+        record = {key: value for key, value in ordinary[0].items() if key != "stored_history"}
         revision_scope = {
             item["current_unit_id"]: item
             for item in read_revision_scope(self.service, row["id"], row["value"])
@@ -929,7 +930,7 @@ class FunctionalEditMemory(FunctionalMemory):
             for start in range(0, max(1, len(text)), self.fragment_chars):
                 result.append(
                     {
-                        **ordinary[0],
+                        **record,
                         "content": text[start : start + self.fragment_chars],
                         "content_range": [start, min(start + self.fragment_chars, len(text))],
                         "content_total_codepoints": len(text),
@@ -960,12 +961,14 @@ class FunctionalEditMemory(FunctionalMemory):
                     }
         result = result or [
             {
-                **ordinary[0],
+                **record,
                 "edit_representation": state["representation"],
                 "edit_unit_count": 0,
                 "edit_relation_count": 0,
             }
         ]
+        if "stored_history" in ordinary[0]:
+            result[0]["stored_history"] = ordinary[0]["stored_history"]
         if self.features.enabled:
             result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
         if self.features.temporal_scope:

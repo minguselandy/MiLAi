@@ -374,8 +374,19 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
                     source.backup(destination)
                 with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
                     service = service_for(store, folder, case["owner"], run._semantic_retriever())
-                    before = service.records()
                     expected = read_json(prepared / str(ordinal) / "before.json")
+                    revisions = {row["id"]: row["value"]["revision"] for row in expected}
+                    # The prepared history was rewound to the actual before, but
+                    # its copied read handles can still name later baseline
+                    # revisions. Those future grants belong to the old trajectory,
+                    # not this independent branch. Keep actual past handles.
+                    for candidate in service._rows(service.candidates_namespace):
+                        bound = candidate["value"]
+                        if bound["record_id"] not in revisions or (
+                            bound["revision"] > revisions[bound["record_id"]]
+                        ):
+                            store.delete(service.candidates_namespace, candidate["id"])
+                    before = service.records()
                     if {r["id"]: r["value"] for r in before} != {
                         r["id"]: r["value"] for r in expected
                     }:
@@ -410,9 +421,13 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
                         prepare_delivery=prepare_delivery,
                     )
                     row: dict[str, Any] = {
-                        "ordinal": ordinal, "before": before, "after": service.records(),
+                        "ordinal": ordinal, "before": before,
                         "maintenance": result, "answers": [],
                     }
+                    # Retain the actual first maintenance outcome even if a later
+                    # observation or Reader fails. Do not repeat its model call.
+                    write_json(folder / "result.json", row)
+                    row["after"] = service.records()
                     write_json(folder / "result.json", row)
                     for index, question in enumerate(case["questions"]):
                         try:

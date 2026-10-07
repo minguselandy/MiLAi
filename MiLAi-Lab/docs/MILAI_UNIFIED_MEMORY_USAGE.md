@@ -11,6 +11,65 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 14:16 UTC：PR91合并，真实历史答复错误与配对分支失败已保留
+
+本节固定于2026-10-07 14:16 UTC／北京时间22:16。报告版本以本节所在提交为准；
+最新实现为`4b3501b`，普通历史入口`bd4bf51`来自D的`fd69ae8`，说明压缩`8cc4def`
+来自`3a66662`。下面两条真实运行都冻结`962beaa`（实现`4a2d7ba`），没有采用这些新修复。
+
+**PR83至91已合并。**[PR91](https://github.com/minguselandy/MiLAi/pull/91)实际头962beaa的
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37627853728)与
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37626176881)成功，Full21/21；
+13:41:39普通merge为main`2cf0c739`。其
+[main push检查](https://github.com/minguselandy/MiLAi/actions/runs/37630543098)也成功，
+integration快进、干净，源码树与已检查PR头相同。14:03只读观察时open PR为空。
+本次新4b源码自己的远端CI尚未请求，不能借962的CI证明其通过。
+
+**962日期复测执行闭合，历史答复仍错。**同一已曝光开发故事采用新独立空库，
+13:45:19启动、13:48:25退出0，4次COMPLETED、3次实际维护提交r1／r2／r3；
+不是4条语义通过。r1的原内容与条件都实际带有assertion.applicability，原User来源、
+报告时刻和名义日历保留；物理时区未知。r2保留原两unit并追加两unit的一日绿色例外，
+其限定仅为文字，没有新typed applicability；r3撤销例外，原两unit和关系值不变。
+
+Root读完4个完整自然答案，并只读核对真实SQLite：历史r1／r2／r3逐值等于各次保存结果，
+当前为r3，只读消息没有维护／业务调用且记录不变。最后答复正确识别查询日在原区间外，
+却称过去只实际保存了蓝色，未读取已提交r2中的绿色例外。Agent已有历史工具但未调用，
+原Source请求不能替代已提交修订；这是当前撤销与过去保存内容的混淆。前三次自然答复
+与对应实际保存／撤销相符，仍有暴露内部operation／revision名称的表达限制。
+17生成响应／150,654known、17编码响应／720token、Judge0、新unknown0。
+仅Agent消息可核对4stop＋3tool_calls，不把这一子集说成全部生成均stop。
+
+**首次真实recipe比较在第三case提交后观察失败。**仍从原B0实际旧库复制，
+14:05:28启动、14:07:32退出1。single_pass原3真实空提案／无修改，原6新建1事项；
+原7实际修订2事项后，service.records遇到V13_CANDIDATE_HANDLE_COLLISION。
+原准备恢复了旧值／历史，但复制库还含旧轨迹的未来读取授权；新分支同一修订号的
+真实支持与该未来句柄冲突。已保存2个完整case行，第三个部分case的实际提交留在DB，
+0自然答案；原4及extract_then_edit未运行，不能记零分或做流程优势结论。
+3生成stop／71,290known、8编码／12,755token、Judge0、新unknown0；首次HTTP、失败、
+DB和原准备输入保留，未重试未知请求。新4b驱动只在各独立runtime副本移除超出实际
+before修订或不存在事项的读取授权，保留实际过去授权；维护结果先保存，再做after观察。
+新完整比较实际调用仍0，须新源码及新输出，不覆盖这条失败轨迹。
+
+**普通读取接通实际保存历史。**当前record片段增加实际committed_at及一次有界
+stored_history入口，最多显示既有6个修订ID、真实总数／遗漏数量、索引游标和既有工具参数。
+历史正文仍经原history／exact-revision工具按额度分页读取，标为historical_exact_revision；
+提交钟不代替报告或生效时刻，索引cursor不冒充正文cursor。所有者、可见性、显式遗忘和
+既有读取额度保持。最初新增说明使原2600额度的首正文页2827而为空；仅压缩说明后2518，
+原100字符正文及55个遗漏单元仍送达，原预算／正文／测试不改。
+
+Root完整受影响检查247通过（两份adapter218、runner29），7文件Ruff、三个源码／示例
+Python3.11mypy、包DAG和工具依赖边界通过；重开SQLite的保存→例外→撤销→普通历史读取
+及显式遗忘示例通过，均0真实HTTP。驱动单独严格mypy仍有5项既有错误，已对照父main2cf
+相同的缺第三方stub／未标注调用／Optional访问／冗余cast；不宣称该驱动全量类型通过。
+实际Agent选择工具和正确回答仍须新真实验证，这些工程检查不表示方法效果。
+
+两条新运行合计20生成响应／221,944known、25编码／13,475token；分别与连续账本差额
+一致，不重复计入旧402、Native8或34fa结果。14:07闭合账本42,928生成请求、known170,108,073、
+charged170,299,561、embedding1,250,904、unknown5，limits未改变，旧397未重试。
+此固定观察时真实资源已释放；未来进程以实际PID和终态检查为准。原同版五方法、65／277
+连续历史、native／drift／消融／更紧预算、最终冻结后16保留用户、外部、同候选Host135／192
+及冻结后新故事和六交付仍未完成；16未用于开发，无最终候选，Product NO_GO。
+
 ## 13:06:36 UTC：日期输出位置澄清已集成，真实效果待验证
 
 最新开发源码`4a2d7ba`在402d7d5上集成B的`743c2ded`，仅向既有editor prompt补14行：

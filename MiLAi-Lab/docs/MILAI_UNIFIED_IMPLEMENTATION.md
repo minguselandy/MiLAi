@@ -5,6 +5,33 @@ The user activates [the task cards](MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md) and
 Both source documents have been read and copied into this worktree unchanged.
 This extends the existing build-first candidate and retains its full validation scope.
 
+## Ordinary stored-history reading and independent recipe branches (4b3501b)
+
+Current record fragments expose actual committed_at and one bounded stored_history
+index per record: the existing six-revision window, actual total/omitted counts,
+index cursor and existing history/revision tool entries. The index contains revision
+identities, not historical bodies. Body reads retain owner/visibility checks, the
+explicit read allowance and original snapshot pagination; historical_exact_revision
+does not make old content current. Storage time is not reported or effective time,
+and the service index cursor is distinct from the functional body cursor. Explicit
+forget still revokes old history entries and original source visibility.
+
+The normal SQLite example now saves r1, adds an exception in r2, withdraws it in r3,
+reopens, reads actual r2 through ordinary tools and then forgets. Reads do not mutate
+the record. Initial metadata prose exceeded an existing 2600-character packet;
+compact wording restores its original full 100-character first fragment without
+changing the budget or omitted material. Real Agent tool selection remains untested.
+
+The recipe comparison clones each actual prepared bank. Before issuing its views,
+it removes copied read grants for absent records or revisions beyond the actual
+before, keeping past grants. Actual stored values and prepared originals are unchanged.
+It saves the first maintenance result before observing after or calling the Reader.
+This fixes the frozen962 comparison's post-commit future-grant collision; its first
+failure remains preserved. No Runtime handle collision check is weakened, no new
+retry or content fingerprint is introduced. Full affected checks total247; core
+three-source/example mypy passes, while the tool's separate strict type check still
+has the same five pre-existing errors as main2cf. New real comparisons remain0.
+
 ## Actual request progress and current execution (402d7d5)
 
 The same request journal now keeps business.status as the observed aggregate of

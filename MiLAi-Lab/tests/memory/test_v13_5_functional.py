@@ -1293,6 +1293,8 @@ def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(
         saved = memory.save(cfg(), "save", "private preference", hs)
         turn(memory, "u2", "forget private preference")
         cached = memory.context("s", "u2", CONFIG_VERSION)
+        history_entry = next(u["stored_history"] for u in cached["items"]
+                             if u["type"] == "record" and "stored_history" in u)["read"]
         row = memory.service.read(saved["id"])
         explicit = invoke(memory, read_tool, {"fragment_handle": hs[0]}, "read", cfg("u2"))
         assert explicit["ok"]
@@ -1313,6 +1315,10 @@ def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(
         new = memory.context("s", "u2", CONFIG_VERSION)
         assert new["snapshot_id"] != cached["snapshot_id"]
         assert all(u.get("source_ref") != ref for u in new["items"])
+        hidden_history = invoke(memory, history_entry["tool"], history_entry["arguments"],
+                                "hidden-history", cfg("u2"))
+        assert hidden_history["status"] == "visibility_revoked"
+        assert "private preference" not in canonical(hidden_history)
         assert memory.service.store.get(memory.service.sources_namespace, ref) is not None
         assert (
             memory.service.store.get(namespace(memory.service), cached["snapshot_id"]) is not None
@@ -1339,9 +1345,22 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
                 hs,
             )
             assert result["ok"]
+        current = invoke(memory, "read_memory", {"record_id": saved["id"]}, "current")
+        entry = current["items"][0]["stored_history"]
+        assert entry["current_revision_at_index"] == entry["revision_count"] == 8
+        assert entry["revisions"] == list(range(1, 7)) and entry["omitted_count"] == 2
+        assert entry["index_next_cursor"] and entry["body_page_tool"] == (
+            "read_page" if explicit else "read_memory"
+        )
+        assert current["items"][0]["committed_at"] == (
+            memory.service.read(saved["id"])["value"]["committed_at"]
+        )
+        assert all(u["revision"] == 8 for u in current["items"])
+        assert sum("stored_history" in u for u in current["items"]) == 1
+        assert "version1" not in canonical(current)
+        assert len(canonical(current)) <= memory.material_limit
         first = invoke(
-            memory, "read_memory_history" if explicit else "read_memory",
-            {"record_id": saved["id"], **({} if explicit else {"history": True})}, "history"
+            memory, entry["read"]["tool"], entry["read"]["arguments"], "history"
         )
         assert first["items"] and first["next_cursor"]
         row = memory.service.read(saved["id"])
@@ -1363,6 +1382,7 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
             units.extend(page["items"])
         assert {u["revision"] for u in units} == set(range(1, 9))
         assert all(u["version_view"] == "historical_exact_revision" for u in units)
+        assert all("stored_history" not in u and u["committed_at"] for u in units)
         assert "version1" in units[0]["content"]
 
 

@@ -1,4 +1,4 @@
-"""One employment/health correction through Host and common predict maintenance.
+"""Common maintenance and explicit stored-history reading on ordinary memory.
 
 Uses scripted transport, local embeddings and reopened SQLite. This observes
 engineering behavior, not model accuracy or benchmark advantage. Run with
@@ -239,12 +239,133 @@ def run(root: Path, *, host: bool) -> dict[str, Any]:
             "ordinary_snapshot_units": len(page["items"])}
 
 
+def run_history(root: Path) -> dict[str, Any]:
+    """Save, add an exception, withdraw it, then read its actual saved revision."""
+    bank = root / "memory.sqlite"
+    commits, calls = [], []
+    with SqliteStore.from_conn_string(str(bank)) as store:
+        memory = adapter(store, root)
+        for index, (turn, text) in enumerate([
+            ("save", "Save quiet meeting reminders throughout this quarter."),
+            ("exception", "For Wednesday meetings only, save a chime reminder instead."),
+            ("withdraw", "Withdraw the Wednesday exception; keep the quiet meeting rule."),
+        ]):
+            memory.service.capture_user(SESSION, turn, text)
+            memory.context(SESSION, turn, VERSION)
+
+            def transport(
+                stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                *, phase: int = index, original: str = text,
+            ) -> dict[str, Any]:
+                calls.append(stage)
+                if stage == "extract":
+                    return {"changes": [{"subject": "meeting reminders", "statement": original,
+                        "evidence": ["e1"], "time": None, "scope": None}]}
+                packet = json.loads(messages[1]["content"])["delivery"]
+                if phase == 0:
+                    return {"creates": [{"action": "create", "matter": "Meeting reminders",
+                        "clauses": [{**statement("Use quiet meeting reminders."), "conditions": [
+                            {**statement("Throughout this quarter."),
+                             "binding": {"evidence": ["e1"]}},
+                        ]}]}], "records": {}}
+                record = packet["records"][0]
+                selected = record["clauses"][0] if phase == 1 else next(
+                    clause for clause in record["clauses"] if clause.get("local_exception")
+                )
+                edit = {
+                    **statement("Use a chime meeting reminder."),
+                    "operation": "add_exception", "target_unit": selected["id"],
+                    "condition": "Wednesday meetings only.",
+                } if phase == 1 else {
+                    "operation": "remove_exception", "target_unit": selected["id"],
+                    "evidence": ["e1"],
+                }
+                return {"creates": [], "records": {
+                    record["id"]: {"action": "edit", "edits": [edit]},
+                }}
+
+            result = memory.maintain_sources(
+                config(turn), recipe="extract_then_edit", model_call=transport, allowed=True,
+                fit=lambda messages: sum(len(m["content"]) for m in messages) <= 65000,
+            )[0]
+            assert result["status"] == "completed", result
+            assert len(result["receipts"]) == 1 and result["receipts"][0]["ok"]
+            commits.append(result["receipts"][0])
+        assert [receipt["revision"] for receipt in commits] == [1, 2, 3]
+        record_id = commits[0]["id"]
+        assert all(receipt["id"] == record_id for receipt in commits)
+
+    with SqliteStore.from_conn_string(str(bank)) as store:
+        memory = adapter(store, root)
+        memory.service.capture_user(
+            SESSION, "history-question",
+            "Read only: what is current, and what did the stored history previously contain?",
+        )
+        page = memory.context(SESSION, "history-question", VERSION)
+        current = [unit for unit in page["items"] if unit["type"] == "record"]
+        entry = next(unit["stored_history"] for unit in current if "stored_history" in unit)
+        assert entry["revisions"] == [1, 2, 3] and entry["revision_count"] == 3
+        assert all(unit["revision"] == 3 and unit["version_view"] == "current_at_snapshot"
+                   for unit in current)
+        assert all("chime" not in unit["content"] for unit in current)
+        before = store.get(memory.service.namespace, record_id)
+        assert before is not None
+
+        def read(tool_name: str, arguments: dict[str, Any], call_id: str) -> dict[str, Any]:
+            tool = next(tool for tool in memory.tools() if tool.name == tool_name)
+            result = tool.invoke({"type": "tool_call", "name": tool_name, "id": call_id,
+                                  "args": arguments}, config=config("history-question"))
+            packet: dict[str, Any] = json.loads(str(result.content))
+            return packet
+
+        history = read(entry["read"]["tool"], entry["read"]["arguments"], "history")
+        assert history["ok"] and {unit["revision"] for unit in history["items"]} == {1, 2, 3}
+        revision2 = read(entry["revision_tool"], {"record_id": record_id, "revision": 2}, "r2")
+        assert revision2["ok"]
+        assert any("chime" in unit["content"] for unit in revision2["items"])
+        assert all(unit["revision"] == 2
+                   and unit["version_view"] == "historical_exact_revision"
+                   and unit["committed_at"] == memory.service.read(record_id, 2)["value"][
+                       "committed_at"] for unit in revision2["items"])
+        assert all(packet["semantic_write_performed"] is False for packet in (page, history,
+                                                                              revision2))
+        after = store.get(memory.service.namespace, record_id)
+        assert after is not None and after.value == before.value
+        # A new explicit forget request remains a separate visibility mutation.
+        # The old history entry cannot expose any revoked body or original source.
+        memory.service.capture_user(
+            SESSION, "forget-history", "Forget the meeting memory and sources.",
+        )
+        memory.context(SESSION, "forget-history", VERSION)
+        tool = next(tool for tool in memory.tools() if tool.name == "forget_memory")
+        forgotten = json.loads(str(tool.invoke({"type": "tool_call", "name": "forget_memory",
+            "id": "forget", "args": {
+                "read_handle": memory.service.read(record_id)["candidate_handle"],
+            }}, config=config("forget-history")).content))
+        assert forgotten["ok"] and forgotten["effect"] == "visibility_only"
+        memory.service.capture_user(SESSION, "after-forget", "Read only: is that history visible?")
+        memory.context(SESSION, "after-forget", VERSION)
+        tool = next(tool for tool in memory.tools() if tool.name == entry["read"]["tool"])
+        hidden = json.loads(str(tool.invoke({"type": "tool_call", "name": tool.name,
+            "id": "hidden-history", "args": entry["read"]["arguments"]},
+            config=config("after-forget")).content))
+        assert hidden["status"] == "visibility_revoked" and "chime" not in json.dumps(hidden)
+        assert all(memory.service.source(ref) is None for ref in forgotten["revoked_source_refs"])
+    return {"entry": "ordinary stored-history read", "scripted_calls": calls,
+            "actual_commit_revisions": [receipt["revision"] for receipt in commits],
+            "current_revision": 3, "read_history_revisions": [1, 2, 3],
+            "read_exact_revision": 2, "read_semantic_mutation": False,
+            "history_after_forget": hidden["status"]}
+
+
 if __name__ == "__main__":
     with TemporaryDirectory(prefix="milai-maintenance-example-") as temporary:
         root = Path(temporary)
         (root / "host").mkdir()
         (root / "predict").mkdir()
+        (root / "history").mkdir()
         observed = [run(root / "host", host=True), run(root / "predict", host=False)]
         assert sorted(view["units"][0]["text"] for view in observed[0]["current_views"]) == \
             sorted(view["units"][0]["text"] for view in observed[1]["current_views"])
+        observed.append(run_history(root / "history"))
         print(json.dumps(observed, ensure_ascii=False, indent=2))
