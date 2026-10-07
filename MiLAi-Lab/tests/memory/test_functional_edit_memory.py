@@ -7,6 +7,7 @@ import json
 import socket
 from collections.abc import Callable
 from contextlib import contextmanager
+from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -2385,6 +2386,67 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         current = memory._record_units(memory.service.read(saved["id"]))
         assert all(not u["applicability"].get("exceptions") for u in current)
         assert current[0]["applicability"]["text"] == general["text"]
+
+
+@pytest.mark.parametrize("query_time,calendar_context,expected", [
+    ("Oct 07, 2025, 10:00:00", "team-calendar", "within_explicit_limits"),
+    ("Oct 09, 2025, 10:00:00", "team-calendar", "expired"),
+    ("Oct 07, 2025, 10:00:00", None, "time_context_unresolved"),
+    ("Oct 07, 2025, 10:00:00", "different-calendar", "time_context_unresolved"),
+    (None, None, "time_context_unresolved"),
+])
+def test_reader_uses_one_explicit_query_clock_and_only_declared_calendar(
+    tmp_path, monkeypatch, query_time, calendar_context, expected,
+):
+    features = EditFeatures(True, True, True, True, True, temporal_scope=True)
+    options = dict(arm="M", interface_version="I2", features=features,
+                   maintenance_recipe="single_pass", query_time=query_time,
+                   query_calendar_context=calendar_context)
+    with opened(tmp_path, **options) as memory:
+        source = memory.service.capture_user(
+            "s", "u", "Quiet reminders apply from October 1 until October 8, 2025.",
+            occurred_at="Oct 10, 2025, 12:00:00", calendar_context="team-calendar",
+        )["source_ref"]
+        memory.writer_context("s", "u", "functional-m-test-v1")
+        proposal = clause_proposal({
+            "action": "create", "matter": "Temporary reminder preference", "units": [{
+                "text": "Quiet reminders apply only during the stated interval.",
+                "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported",
+                    "applicability": {"effective_from": "2025-10-01",
+                                      "effective_until": "2025-10-08"}},
+            }],
+        }, conditioned=True)
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "save").content)
+        assert saved["ok"], saved
+        row = memory.service.read(saved["id"])
+        before = copy.deepcopy(row["value"])
+        calls = []
+        physical = datetime.fromisoformat("2025-10-07T10:00:00+00:00")
+
+        def clock():
+            calls.append(True)
+            return physical
+
+        monkeypatch.setattr(memory.service, "clock", clock)
+        for view in ("current_at_snapshot", "historical_exact_revision"):
+            units = memory._record_units(row, view)
+            temporal = units[0]["applicability"]["temporal"]
+            revision = units[0]["revision_view"]
+            actual_time = query_time if query_time is not None else physical.isoformat()
+            assert temporal["query_time"] == revision["query_time"] == actual_time
+            assert temporal["query_calendar_context"] == revision["query_calendar_context"] == (
+                calendar_context
+            )
+            assert temporal["status"] == revision["units"][0]["temporal"]["status"] == expected
+            assert temporal["reported_at"] == "Oct 10, 2025, 12:00:00"
+            assert revision["source_table"][source]["calendar_context"] == "team-calendar"
+            assert temporal["time_values"]["query_time"]["timezone_known"] == (
+                query_time is None
+            )
+        assert len(calls) == (2 if query_time is None else 0)
+        assert memory.service.read(saved["id"])["value"] == before
+    with opened(tmp_path, **options) as memory:
+        assert memory.service.read(saved["id"], 1)["value"] == before
 
 
 def test_shared_extraction_context_is_old_visible_speech_not_current_evidence(tmp_path):

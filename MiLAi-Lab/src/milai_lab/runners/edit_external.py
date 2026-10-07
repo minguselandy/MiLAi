@@ -235,7 +235,13 @@ class ExternalRun(BenchmarkRun):
         sources = []
         for ordinal, turn in enumerate(observed.turns):
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
-            receipt = capture(observed.session_id, f"turn:{ordinal}", turn["content"])
+            receipt = (
+                capture(observed.session_id, f"turn:{ordinal}", turn["content"],
+                        occurred_at=turn["timestamp"],
+                        calendar_context=self.settings["calendar_context"])
+                if self.settings.get("calendar_context") is not None else
+                capture(observed.session_id, f"turn:{ordinal}", turn["content"])
+            )
             if not receipt["ok"]:
                 raise RuntimeError("Original source capture unconfirmed")
             sources.append({"source_ref": receipt["source_ref"], **turn})

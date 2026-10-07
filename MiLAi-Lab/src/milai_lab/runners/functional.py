@@ -1508,20 +1508,25 @@ def seed_sources(
         if row["role"] == "user":
             capture = (
                 service.capture_user(row["session_id"], row["event_key"], row["content"],
-                                     occurred_at=row.get("occurred_at", row.get("timestamp")))
-                if preserve_occurrence else
+                                     occurred_at=row.get("occurred_at", row.get("timestamp")),
+                                     calendar_context=row.get("calendar_context"))
+                if preserve_occurrence or row.get("calendar_context") is not None else
                 service.capture_user(row["session_id"], row["event_key"], row["content"])
             )
         elif row["role"] == "assistant":
             capture = (
                 service.capture_assistant(row["session_id"], row["event_key"], row["content"],
-                                          occurred_at=row.get("occurred_at", row.get("timestamp")))
-                if preserve_occurrence else
+                                          occurred_at=row.get("occurred_at", row.get("timestamp")),
+                                          calendar_context=row.get("calendar_context"))
+                if preserve_occurrence or row.get("calendar_context") is not None else
                 service.capture_assistant(row["session_id"], row["event_key"], row["content"])
             )
         elif row["role"] == "tool":
             capture = service.capture_tool(
-                row["session_id"], row["event_key"], row["origin"], row["content"], None
+                row["session_id"], row["event_key"], row["origin"], row["content"], None,
+                calendar_context=row.get("calendar_context"),
+                **({"occurred_at": row.get("occurred_at", row.get("timestamp"))}
+                   if preserve_occurrence or row.get("calendar_context") is not None else {}),
             )
         else:
             raise ValueError("FUNCTIONAL_IMPORTED_ROLE_INVALID")
@@ -1736,6 +1741,9 @@ def message(
     message_id: str,
     content: str,
     occurred_at: str | None = None,
+    calendar_context: str | None = None,
+    query_time: str | None = None,
+    query_calendar_context: str | None = None,
     workflow: str = "reservation",
     initial_world: dict[str, Any] | None = None,
     initial_sources: list[dict[str, Any]] | None = None,
@@ -1767,6 +1775,12 @@ def message(
     }
     if occurred_at is not None:
         public["occurred_at"] = occurred_at
+    if calendar_context is not None:
+        public["calendar_context"] = calendar_context
+    if query_time is not None:
+        public["query_time"] = query_time
+    if query_calendar_context is not None:
+        public["query_calendar_context"] = query_calendar_context
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -1887,8 +1901,9 @@ def message(
                 output["source_import_receipts"] = seed_receipts
             output["capture_attempted"] = True
             capture = (
-                service.capture_user(session, message_id, content, occurred_at=occurred_at)
-                if edit_features.source_metadata else
+                service.capture_user(session, message_id, content, occurred_at=occurred_at,
+                                     calendar_context=calendar_context)
+                if edit_features.source_metadata or calendar_context is not None else
                 service.capture_user(session, message_id, content)
             )
             output["capture"] = capture
@@ -1939,6 +1954,8 @@ def message(
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
                 memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
+                memory_options["query_time"] = query_time
+                memory_options["query_calendar_context"] = query_calendar_context
             memory = memory_class(
                 service,
                 capacity.text_tokens,
@@ -3145,6 +3162,9 @@ def step(root: Path, case_id: str, index: int, *, resume: bool = False) -> dict[
         message_id=public["message_id"],
         content=public["content"],
         occurred_at=public.get("occurred_at", public.get("timestamp")),
+        calendar_context=public.get("calendar_context"),
+        query_time=public.get("query_time"),
+        query_calendar_context=public.get("query_calendar_context"),
         workflow=case.get("workflow", "reservation"),
         initial_world=case.get("initial_world"),
         initial_sources=case.get("initial_sources"),
@@ -3274,6 +3294,13 @@ def main() -> None:
     parser.add_argument("--message-id")
     parser.add_argument("--text")
     parser.add_argument("--occurred-at", help="Actual statement time, when supplied by the caller")
+    parser.add_argument(
+        "--calendar-context", help="Caller-declared nominal calendar, not a timezone"
+    )
+    parser.add_argument("--query-time", help="Reader target time, separate from statement time")
+    parser.add_argument(
+        "--query-calendar-context", help="Caller-declared calendar for the Reader target time"
+    )
     parser.add_argument("--workflow", choices=("reservation", "document"), default="reservation")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--episode-id", action="append")
@@ -3310,6 +3337,9 @@ def main() -> None:
             message_id=args.message_id,
             content=args.text,
             occurred_at=args.occurred_at,
+            calendar_context=args.calendar_context,
+            query_time=args.query_time,
+            query_calendar_context=args.query_calendar_context,
             workflow=args.workflow,
             resume=args.resume,
         )

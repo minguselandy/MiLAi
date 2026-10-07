@@ -1018,6 +1018,126 @@ def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):
             service.capture_user("s", "known", "Actual text.", occurred_at="2025-01-03T00:00:00Z")
 
 
+def test_revision_calendar_context_actual_metadata_current_and_history(tmp_path):
+    with opened(tmp_path, "B2") as (service, _):
+        method = EditMemory(service, "B2", interface_version="I2", features=EditFeatures(
+            matter_organization=True, semantic_operations=True, bound_references=True,
+            single_record_changes=True, source_metadata=True, temporal_scope=True,
+        ))
+        source = service.capture_user(
+            "s", "total", "User reports three joint team visits for October 1-3 in total.",
+            occurred_at="Oct 10, 2025, 12:00:00", calendar_context="team-calendar",
+        )["source_ref"]
+        service.bind_source_boundary("s", "total", [source])
+        delivery = method.prepare([source], "joint visits", selected_records=[])
+        delivery["sources"][0]["calendar_context"] = "caller-forged-calendar"
+        view = method.writer_request(delivery, request_id="total")
+        assert view["packet"]["source_table"][0]["calendar_context"] == "team-calendar"
+        clause = next_unit("User reports three joint visits for the whole team in total.")
+        clause["assertion"].update(
+            applicability={"event_at": "October 03, 2025, 09:00:00", "effective_from": "2025-10-01",
+                           "effective_until": "2025-10-08", "quantity_scope": "overall"},
+            evidence_links={"supports": ["e1"]},
+        )
+        proposal = {"action": "create", "matter": "Team joint visits", "units": [clause]}
+        saved = method.apply("s", "save-total", method.decode_envelope(
+            {"creates": [clause_proposal(proposal, conditioned=True)]}, view["mapping"]
+        )[0])
+        old = copy.deepcopy(service.read(saved["id"])["value"])
+        assertion = old["edit_state"]["units"][0]["assertion"]
+        assert assertion["calendar_context"] == "team-calendar"
+        assert assertion["occurred_at"] == "Oct 10, 2025, 12:00:00"
+        assert assertion["evidence_links"]["supports"][0]["calendar_context"] == "team-calendar"
+        current = method.revision_view(old, query_time="Oct 07, 2025, 10:00:00",
+                                       query_calendar_context="team-calendar")
+        total = current["units"][0]
+        temporal = total["temporal"]
+        assert temporal["status"] == "within_explicit_limits"
+        assert temporal["comparison_basis"]["effective_limits"] == "shared_floating_calendar"
+        assert temporal["time_values"]["effective_from"] == {
+            "value": "2025-10-01", "precision": "day", "timezone_known": False,
+            "calendar_context": "team-calendar",
+        }
+        assert current["source_table"][source]["time_values"]["reported_at"][
+            "precision"
+        ] == "second"
+        assert not current["time_values"]["query_time"]["timezone_known"]
+        assert temporal["retrospective"] and temporal["reported_after_query"]
+        assert total["member_quantities"] == "not_implied_by_overall_total"
+        assert method.revision_view(old, query_time="Oct 09, 2025, 10:00:00",
+                                    query_calendar_context="team-calendar")[
+            "historical_units"
+        ] == [total["unit_id"]]
+        for date, context in (("Oct 07, 2025, 10:00:00", None),
+                              ("Oct 07, 2025, 10:00:00", "different-calendar"),
+                              ("2025-10-07T10:00:00Z", "team-calendar")):
+            unknown = method.revision_view(old, query_time=date, query_calendar_context=context)
+            assert unknown["units"][0]["temporal"]["status"] == "time_context_unresolved"
+            assert unknown["units"][0]["temporal"]["reported_after_query"] is None
+        # A later delivery without a coordinate cannot retag the kept assertion.
+        request, _ = next_request(service, method, "retain", "Keep the recorded total.",
+                                  [service.read(saved["id"])])
+        assert all("calendar_context" not in row for row in request["packet"]["source_table"]
+                   if row["body_delivered"])
+        retained = {"action": "rewrite", "target": "r1", "revision_evidence": ["e1"],
+                    "clauses": [{
+                        "text": clause["text"], "evidence": [], "keep_support": ["h1"],
+                        "assertion": {"keep": "h1"}, "conditions": [],
+                    }]}
+        result = method.apply("s", "retain-total", method.decode_proposal(
+            retained, request["mapping"]
+        ))
+        assert result["ok"]
+        kept = service.read(saved["id"])["value"]["edit_state"]["units"][0]["assertion"]
+        assert kept == assertion
+        assert service.read(saved["id"], 1)["value"] == old
+
+
+def test_revision_day_precision_and_explicit_offsets_remain_separate():
+    version = {"content": "Synthetic event.", "edit_state": {
+        "representation": "plain_v1", "relations": [], "units": [{
+            "unit_id": "total", "role": "content", "text": "A reported event.",
+            "evidence_refs": [], "assertion": {
+                "calendar_context": "example-calendar", "occurred_at": "Sep 04, 2025, 18:42:18",
+                "applicability": {"event_at": "2025-09-04"},
+            },
+        }],
+    }}
+    before = copy.deepcopy(version)
+    temporal = EditMemory.revision_view(version, query_time="Sep 04, 2025, 20:00:00",
+                                        query_calendar_context="example-calendar")[
+        "units"
+    ][0]["temporal"]
+    assert temporal["status"] == "effective_limits_unspecified"
+    assert temporal["retrospective"] is None  # Same day is not proof of an earlier instant.
+    assert temporal["reported_after_query"] is False
+    assert version == before
+    version["edit_state"]["units"][0]["assertion"]["applicability"].update(
+        effective_from="Sep 04, 2025, 12:00:00", effective_until="2025-09-05",
+    )
+    projected = EditMemory.revision_view(version, query_time="2025-09-04",
+                                        query_calendar_context="example-calendar")
+    temporal = projected["units"][0]["temporal"]
+    assert temporal["status"] == "query_time_precision_unresolved"
+    assert projected["time_values"]["query_time"]["precision"] == "day"
+    legacy = copy.deepcopy(version)
+    legacy["edit_state"]["units"][0]["assertion"].pop("calendar_context")
+    assert EditMemory.revision_view(legacy, query_time="Sep 04, 2025, 18:42:18",
+                                    query_calendar_context="example-calendar")[
+        "units"
+    ][0]["temporal"]["status"] == "time_context_unresolved"
+    version["edit_state"]["units"][0]["assertion"]["applicability"].update(
+        effective_from="2025-09-04T20:00:00+08:00", effective_until="2025-09-05T00:00:00+08:00",
+    )
+    temporal = EditMemory.revision_view(version, query_time="2025-09-04T12:00:00Z")[
+        "units"
+    ][0]["temporal"]
+    assert temporal["status"] == "within_explicit_limits"
+    assert temporal["comparison_basis"]["effective_limits"] == "absolute_offsets"
+    assert temporal["time_values"]["effective_from"]["timezone_known"]
+    assert temporal["reported_after_query"] is None  # Report remains floating.
+
+
 @pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
 @pytest.mark.parametrize("profile", ["I1", "I2"])
 def test_arm_schema_mapping_restart_same_id_actual_revision(tmp_path, arm, profile):

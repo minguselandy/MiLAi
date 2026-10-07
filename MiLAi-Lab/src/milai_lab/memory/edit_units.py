@@ -7,8 +7,10 @@ scope applicability, business permission, or whether an edit is justified.
 from __future__ import annotations
 
 import copy
+import re
 import uuid
-from datetime import UTC, datetime
+from dataclasses import dataclass
+from datetime import UTC, date, datetime, time, timedelta
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -114,6 +116,8 @@ def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[s
                 "source_ref", "source_revision", "start", "end", "content", "role", "observed_at"
             )},
             "occurred_at": source.get("occurred_at"),
+            **({"calendar_context": source["calendar_context"]}
+               if "calendar_context" in source else {}),
             "semantic_support": "unchecked",
         })
     return result
@@ -430,29 +434,127 @@ def apply_local(
     return state
 
 
-def _declared_time(value: str | None) -> datetime | None:
-    """Read explicit ISO dates (midnight UTC) or timestamps with their offset."""
+@dataclass(frozen=True)
+class _DeclaredTime:
+    value: datetime
+    precision: str
+    calendar_context: str | None
+
+    @property
+    def timezone_known(self) -> bool:
+        return self.value.utcoffset() is not None
+
+    def describe(self) -> dict[str, Any]:
+        return {
+            "value": self.value.date().isoformat() if self.precision == "day"
+            else self.value.isoformat(timespec={
+                "hour": "hours", "minute": "minutes", "second": "seconds",
+            }.get(self.precision, "auto")),
+            "precision": self.precision,
+            "timezone_known": self.timezone_known,
+            "calendar_context": self.calendar_context,
+        }
+
+
+def _declared_time(
+    value: str | None, *, calendar_context: str | None = None
+) -> _DeclaredTime | None:
+    """Parse stated calendar values, preserving precision and absent timezone.
+
+    A date's internal lower boundary is not an event instant. Effective day
+    limits bound the day; an event or query expressed as a date covers the day.
+    Calendar context is a framework declaration, never inferred from the text.
+    """
     if value is None:
         return None
     try:
+        day = date.fromisoformat(value)
+    except ValueError:
+        pass
+    else:
+        return _DeclaredTime(datetime.combine(day, time()), "day", calendar_context or None)
+    try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
+        english = re.fullmatch(r"([A-Za-z]+) (\d{1,2}), (\d{4}), (\d{2}):(\d{2}):(\d{2})", value)
+        months = (
+            "January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December",
+        )
+        if english is None:
+            return None
+        month = next((i for i, name in enumerate(months, 1)
+                      if english[1].lower() in {name.lower(), name[:3].lower()}), None)
+        if month is None:
+            return None
+        try:
+            parsed = datetime(int(english[3]), month, int(english[2]),
+                              int(english[4]), int(english[5]), int(english[6]))
+        except ValueError:
+            return None
+        precision = "second"
+    else:
+        clock = re.search(r"[Tt ](\d{2}(?::?\d{2}){0,2})([.,]\d+)?", value)
+        precision = "subsecond" if clock and clock[2] else {
+            2: "hour", 4: "minute", 6: "second"
+        }.get(len(clock[1].replace(":", "")) if clock else 6, "second")
+    return _DeclaredTime(parsed, precision, calendar_context or None)
+
+
+def _comparison_basis(left: _DeclaredTime, right: _DeclaredTime) -> str | None:
+    if left.timezone_known and right.timezone_known:
+        return "absolute_offsets"
+    if (not left.timezone_known and not right.timezone_known
+            and left.calendar_context is not None
+            and left.calendar_context == right.calendar_context):
+        return "shared_floating_calendar"
+    return None
+
+
+def _clock_value(value: _DeclaredTime) -> datetime:
+    return value.value.astimezone(UTC) if value.timezone_known else value.value
+
+
+def _time_order(
+    left: _DeclaredTime | None, right: _DeclaredTime | None
+) -> tuple[int | None, str | None]:
+    """Order only with explicit offsets or a shared declared nominal coordinate."""
+    if left is None or right is None:
+        return None, None
+    basis = _comparison_basis(left, right)
+    if basis is None:
+        return None, None
+    a, b = _clock_value(left), _clock_value(right)
+    if left.precision == "day" or right.precision == "day":
+        a_end = a + timedelta(days=1) if left.precision == "day" else a
+        b_end = b + timedelta(days=1) if right.precision == "day" else b
+        if a < b and a_end <= b:
+            return -1, basis
+        if a > b and a >= b_end:
+            return 1, basis
+        return None, basis
+    return (a > b) - (a < b), basis
+
+
+def _combined_limit(values: list[_DeclaredTime], *, latest: bool) -> _DeclaredTime | None:
+    if not values or any(_comparison_basis(values[0], item) is None for item in values[1:]):
         return None
-    if len(value) == 10:
-        return parsed.replace(tzinfo=UTC)
-    return parsed if parsed.tzinfo is not None else None
+    return (max if latest else min)(values, key=_clock_value)
 
 
-def validate_applicability(applicability: dict[str, Any]) -> None:
+def validate_applicability(
+    applicability: dict[str, Any], *, calendar_context: str | None = None
+) -> None:
     """Validate generated semantic dates once, when decoding the public proposal."""
     times = {}
     for key in ("event_at", "effective_from", "effective_until"):
         if key in applicability:
-            times[key] = _declared_time(applicability[key])
+            times[key] = _declared_time(applicability[key], calendar_context=calendar_context)
             if times[key] is None:
-                raise FunctionalRejection("EDIT_EXPLICIT_ISO_TIME_REQUIRED")
+                raise FunctionalRejection("EDIT_EXPLICIT_TIME_REQUIRED")
     start, end = times.get("effective_from"), times.get("effective_until")
-    if start is not None and end is not None and start >= end:
+    if (start is not None and end is not None and _comparison_basis(start, end) is not None
+            and _clock_value(start) >= _clock_value(end)):
         raise FunctionalRejection("EDIT_EFFECTIVE_INTERVAL_INVALID")
 
 
@@ -470,42 +572,82 @@ def _temporal_view(
     conditions: list[dict[str, Any]],
     query_time: str | None,
     version_time: str | None,
+    query_calendar_context: str | None,
 ) -> dict[str, Any]:
     assertion = unit.get("assertion") or {}
     applicability = assertion.get("applicability") or {}
     limits = []
-    starts, ends = [], []
+    starts: list[_DeclaredTime] = []
+    ends: list[_DeclaredTime] = []
+    unresolved_limit = False
     for item in [unit, *conditions]:
-        declared = (item.get("assertion") or {}).get("applicability") or {}
+        origin = item.get("assertion") or {}
+        declared = origin.get("applicability") or {}
+        context = origin.get("calendar_context")
         start, end = declared.get("effective_from"), declared.get("effective_until")
+        parsed_start = _declared_time(start, calendar_context=context)
+        parsed_end = _declared_time(end, calendar_context=context)
         if start is not None or end is not None:
-            limits.append({"unit_id": item["unit_id"], "from": start, "until": end})
-        parsed_start, parsed_end = _declared_time(start), _declared_time(end)
+            limits.append({
+                "unit_id": item["unit_id"], "from": start, "until": end,
+                "calendar_context": context,
+                "from_time": parsed_start.describe() if parsed_start else None,
+                "until_time": parsed_end.describe() if parsed_end else None,
+            })
+            unresolved_limit |= ((start is not None and parsed_start is None)
+                                 or (end is not None and parsed_end is None))
         if parsed_start is not None:
             starts.append(parsed_start)
         if parsed_end is not None:
             ends.append(parsed_end)
-    start_at, end_at = max(starts, default=None), min(ends, default=None)
-    queried_at = _declared_time(query_time)
-    if start_at is not None and end_at is not None and start_at >= end_at:
+    start_at = _combined_limit(starts, latest=True)
+    end_at = _combined_limit(ends, latest=False)
+    queried_at = _declared_time(query_time, calendar_context=query_calendar_context)
+    basis = None
+    if any(_comparison_basis(start, end) is not None
+           and _clock_value(start) >= _clock_value(end) for start in starts for end in ends):
         status = "inconsistent_explicit_limits"
     elif query_time is None:
         status = "query_time_unspecified"
     elif queried_at is None:
         status = "query_time_unresolved"
-    elif start_at is not None and queried_at < start_at:
-        status = "before_explicit_start"
-    elif end_at is not None and queried_at >= end_at:
-        status = "expired"
-    elif limits:
-        status = "within_explicit_limits"
+    elif unresolved_limit:
+        status = "explicit_time_unresolved"
+    elif any(_comparison_basis(queried_at, bound) is None for bound in [*starts, *ends]):
+        status = "time_context_unresolved"
+    elif starts or ends:
+        basis = _comparison_basis(queried_at, (starts or ends)[0])
+        lower = _clock_value(queried_at)
+        upper = lower + timedelta(days=1) if queried_at.precision == "day" else lower
+        if any((upper <= _clock_value(start) if queried_at.precision == "day"
+                else lower < _clock_value(start)) for start in starts):
+            status = "before_explicit_start"
+        elif any(lower >= _clock_value(end) for end in ends):
+            status = "expired"
+        elif (any(lower < _clock_value(start) for start in starts)
+              or any(upper > _clock_value(end) for end in ends)):
+            status = "query_time_precision_unresolved"
+        else:
+            status = "within_explicit_limits"
     else:
         status = "effective_limits_unspecified"
     reported_at = assertion.get("occurred_at")
-    reported = _declared_time(reported_at)
-    explicit_past = _declared_time(applicability.get("event_at")) or _declared_time(
-        applicability.get("effective_from")
-    )
+    context = assertion.get("calendar_context")
+    reported = _declared_time(reported_at, calendar_context=context)
+    event_at = _declared_time(applicability.get("event_at"), calendar_context=context)
+    effective_from = _declared_time(applicability.get("effective_from"), calendar_context=context)
+    retrospective, retrospective_basis = _time_order(event_at or effective_from, reported)
+    after_query, reported_basis = _time_order(reported, queried_at)
+    parsed_times = {
+        "reported_at": reported,
+        "captured_at": _declared_time(assertion.get("observed_at")),
+        "event_at": event_at,
+        "effective_from": effective_from,
+        "effective_until": _declared_time(applicability.get("effective_until"),
+                                           calendar_context=context),
+        "version_time": _declared_time(version_time),
+        "query_time": queried_at,
+    }
     return {
         "reported_at": reported_at,
         "captured_at": assertion.get("observed_at"),
@@ -513,16 +655,19 @@ def _temporal_view(
         "effective_from": applicability.get("effective_from"),
         "effective_until": applicability.get("effective_until"),
         "bound_effective_limits": limits,
-        "combined_effective_from": start_at.isoformat() if start_at is not None else None,
-        "combined_effective_until": end_at.isoformat() if end_at is not None else None,
+        "combined_effective_from": start_at.describe()["value"] if start_at else None,
+        "combined_effective_until": end_at.describe()["value"] if end_at else None,
         "version_time": version_time,
         "query_time": query_time,
+        "query_calendar_context": query_calendar_context,
+        "time_values": {key: parsed.describe() for key, parsed in parsed_times.items()
+                        if parsed is not None},
         "status": status,
-        "interval_convention": "[from, until); date boundaries are midnight UTC",
-        "retrospective": explicit_past < reported
-        if explicit_past is not None and reported is not None else None,
-        "reported_after_query": reported > queried_at
-        if reported is not None and queried_at is not None else None,
+        "interval_convention": "[from, until); date limits bound the declared day, without UTC",
+        "comparison_basis": {"effective_limits": basis, "retrospective": retrospective_basis,
+                             "reported_after_query": reported_basis},
+        "retrospective": retrospective < 0 if retrospective is not None else None,
+        "reported_after_query": after_query > 0 if after_query is not None else None,
     }
 
 
@@ -531,6 +676,7 @@ def read_applicability(
     *,
     query_time: str | None = None,
     version_time: str | None = None,
+    query_calendar_context: str | None = None,
     include_temporal: bool = False,
 ) -> dict[str, dict[str, Any]]:
     """Project actual relations and explicit limits, without resolving natural scope.
@@ -572,7 +718,8 @@ def read_applicability(
         if project_time:
             declared = (unit.get("assertion") or {}).get("applicability") or {}
             result.update(
-                temporal=_temporal_view(unit, bound, query_time, version_time),
+                temporal=_temporal_view(unit, bound, query_time, version_time,
+                                        query_calendar_context),
                 declared_scope=declared.get("scope"),
                 scope_status="requires_source_interpretation" if bound or declared.get("scope")
                 else "not_declared",
@@ -609,6 +756,7 @@ def render_revision_view(
     *,
     query_time: str | None = None,
     version_time: str | None = None,
+    query_calendar_context: str | None = None,
 ) -> dict[str, Any]:
     """One deterministic current/history view for ordinary Host and benchmark readers.
 
@@ -617,7 +765,8 @@ def render_revision_view(
     edges and cannot alter an expired general rule's independently stored limit.
     """
     projected = read_applicability(
-        state, query_time=query_time, version_time=version_time, include_temporal=True
+        state, query_time=query_time, version_time=version_time,
+        query_calendar_context=query_calendar_context, include_temporal=True,
     )
     units = {unit["unit_id"]: unit for unit in state["units"]}
     ineligible = {"expired", "before_explicit_start", "inconsistent_explicit_limits"}
@@ -658,6 +807,25 @@ def render_revision_view(
                     "source_revision", "role", "occurred_at", "observed_at"
                 )
             }
+            if "calendar_context" in source:
+                source_table[source["source_ref"]]["calendar_context"] = source["calendar_context"]
+            clocks = {
+                "reported_at": _declared_time(source.get("occurred_at"),
+                                               calendar_context=source.get("calendar_context")),
+                "captured_at": _declared_time(source.get("observed_at")),
+            }
+            source_table[source["source_ref"]]["time_values"] = {
+                key: parsed.describe() for key, parsed in clocks.items() if parsed is not None
+            }
+        # Shared clock descriptions appear once; semantic event/limit precision
+        # stays on the unit. Raw legacy temporal fields retain their public shape.
+        clocks = compact["temporal"]["time_values"]
+        for key in ("query_time", "version_time", *(
+            ("reported_at", "captured_at") if "source_ref" in assertion else ()
+        )):
+            clocks.pop(key, None)
+        if not clocks:
+            compact["temporal"].pop("time_values")
         if "evidence_links" in assertion:
             assertion["evidence_links"] = {
                 stance: [{key: ref[key] for key in
@@ -666,11 +834,17 @@ def render_revision_view(
                 for stance, linked in assertion["evidence_links"].items()
             }
         compact_units.append(compact)
+    clocks = {"query_time": _declared_time(query_time, calendar_context=query_calendar_context),
+              "version_time": _declared_time(version_time)}
     return {
         "representation": state["representation"],
         "matter": state.get("matter_description"),
         "query_time": query_time,
+        "query_calendar_context": query_calendar_context,
+        "calendar_context_semantics": "nominal_coordinate_only; does_not_establish_timezone",
         "version_time": version_time,
+        "time_values": {key: parsed.describe() for key, parsed in clocks.items()
+                        if parsed is not None},
         "units": compact_units,
         "source_table": source_table,
         "relations": relations,
@@ -691,6 +865,8 @@ def render_revision_view(
             or item.get("temporal", {}).get("status") in {
                 "effective_limits_unspecified", "query_time_unresolved", "query_time_unspecified",
                 "inconsistent_explicit_limits",
+                "time_context_unresolved", "query_time_precision_unresolved",
+                "explicit_time_unresolved",
             }
         ],
         "selection_policy": "actual_relations_and_explicit_limits; no last_report_wins",
@@ -704,6 +880,7 @@ def render_state(
     *,
     query_time: str | None = None,
     version_time: str | None = None,
+    query_calendar_context: str | None = None,
 ) -> str:
     """One renderer shared by B2/M; explicit scoped alternatives guide the common Reader."""
 
@@ -728,7 +905,10 @@ def render_state(
             + semantic + "]"
         )
 
-    applicability = read_applicability(state, query_time=query_time, version_time=version_time)
+    applicability = read_applicability(
+        state, query_time=query_time, version_time=version_time,
+        query_calendar_context=query_calendar_context,
+    )
 
     def temporal_text(unit: dict[str, Any]) -> str:
         if query_time is None:
@@ -1133,6 +1313,8 @@ def writer_projection(
                 attributes[-1]["role"] = row.get("role", "unknown")
                 attributes[-1]["body_delivered"] = key[0] in delivered_sources
                 attributes[-1]["occurred_at"] = row.get("occurred_at")
+                if "calendar_context" in row:
+                    attributes[-1]["calendar_context"] = row["calendar_context"]
             if classify_delivery:
                 attributes[-1]["delivery_kinds"] = delivery_kinds.get(key, []).copy()
                 attributes[-1]["body_delivered"] = bool(attributes[-1]["delivery_kinds"])

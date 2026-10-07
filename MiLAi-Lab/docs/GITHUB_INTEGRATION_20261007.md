@@ -4,6 +4,21 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 11:50:47 UTC：PR89已合并
+
+[PR89](https://github.com/minguselandy/MiLAi/pull/89)头1f22097的自身
+[Fast516](https://github.com/minguselandy/MiLAi/actions/runs/37612639082)与
+[Full328](https://github.com/minguselandy/MiLAi/actions/runs/37612639101)成功，Full21/21。
+Root核对实际头，依用户授权转ready并普通merge为main88a101f；独立integration快进、
+干净，源码树与1f相同。PR83至89均merged，随后open列表为空是当时观察，不是开发结束。
+原31e67e0的Full327因两application模块未登记失败，1f只补已有所有权列表；原失败保留。
+没有改变CI流程、预算、业务权限或Product内容，不宣称main自身CI全部成功。
+
+1f实际Host验证仍0；冻结该源的两既有应用2case／5message已准备但没有抢占真实HTTP。
+新日历源码e07644e在独立分支；实际prefix8-v6预测／评分仍34fa，不热改或归属到1f/e076。
+原完整研究和功能任务继续，Product NO_GO。最新固定状态见[实际版本与成本](
+MILAI_UNIFIED_MEMORY_USAGE.md)。
+
 ## 10:51:41 UTC：PR88已合并
 
 [PR88](https://github.com/minguselandy/MiLAi/pull/88)头b5992e3的自身

@@ -28,6 +28,27 @@ and synthetic SQLite only; no real model HTTP or private benchmark data.
 
 ## Small module seams
 
+- Optional `SourceEvent.calendar_context` is a caller-declared nominal coordinate,
+  not a physical timezone. Capture retains it immutably; old sources without it
+  cannot be backfilled. `occurred_at` is statement time and `observed_at` remains
+  the actual UTC capture clock. ISO and English-month values retain precision;
+  a date denotes a whole day. Floating values compare only within the same
+  explicitly declared calendar; offset-aware values compare by their offsets.
+  Missing, different or mixed contexts stay unresolved.
+- Ordinary Host `message` and CLI separately accept `calendar_context`,
+  `query_time` and `query_calendar_context`. Both functional read projections
+  use the same Reader target time; omission retains the service-clock default.
+  Statement time does not become the query target or the assertion's onset.
+  Benchmark `calendar_context` explicitly declares the nominal source/query
+  frame; [predict v2](../configs/milai-unified-prefix8-v2.json) demonstrates it
+  with unchanged model, dense K10 and budget. This is a new-run declaration,
+  never metadata inferred from a dataset name or added to old results.
+- Reader transport shares exact repeated descriptions, clock strings and issued
+  references with the existing JSON `$ref` format. Expansion preserves the full
+  actual view; it does not alter persistent values or give references new authority.
+  The [SQLite revision example](../tools/example_unified_revision.py) covers
+  current/history, expiry, retrospective reports and unresolved coordinates.
+
 - Episodes reference actual `source_refs` in the same owner Store. Episode identity
   is explicit, source content stays at the source authority, and every read checks
   visibility. Reported, observed, inferred and uncertain descriptions remain distinguishable.

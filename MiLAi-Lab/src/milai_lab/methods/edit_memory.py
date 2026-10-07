@@ -276,8 +276,12 @@ class EditMemory:
             instruction += (
                 "Optional assertion.applicability selects explicit event_at/effective_from/"
                 "effective_until/scope/quantity_scope from its new e; omit unknown fields. "
-                "Intervals are [from,until); ISO dates mean midnight UTC, timestamps retain "
-                "their stated offset. Report/capture/version clocks are service metadata, "
+                "Intervals are [from,until); ISO or English-month datetimes retain their "
+                "stated precision and offset. A date denotes a day, without an inferred "
+                "timezone. Date limits bound that calendar day. Only a framework-declared "
+                "shared calendar_context permits nominal ordering of timezone-unknown values; "
+                "it does not supply a physical timezone. Do not generate calendar_context. "
+                "Report/capture/version clocks are service metadata, "
                 "never inferred onset. Explicit retrospective reports may explain the past; "
                 "unspecified dates stay unknown and a plan's date does not prove completion. "
                 "Keep independently changeable limits/scopes as separate conditions with "
@@ -872,6 +876,8 @@ class EditMemory:
             )
             if self.features.source_metadata or redelivered_ranges is not None:
                 sources[-1]["occurred_at"] = source.get("occurred_at")
+                if "calendar_context" in source:
+                    sources[-1]["calendar_context"] = source["calendar_context"]
         redelivered = []
         if redelivered_ranges is not None:
             available = self.target_support_ranges(selected)
@@ -890,6 +896,8 @@ class EditMemory:
                         "role": source["role"],
                         "observed_at": source["observed_at"],
                         "occurred_at": source.get("occurred_at"),
+                        **({"calendar_context": source["calendar_context"]}
+                           if "calendar_context" in source else {}),
                         "text": body_text(source)[part["start"] : part["end"]],
                         "body_delivered": True,
                         "semantic_support": "unchecked",
@@ -973,6 +981,8 @@ class EditMemory:
                     "role": actual["role"],
                     "observed_at": actual["observed_at"],
                     "occurred_at": actual.get("occurred_at"),
+                    **({"calendar_context": actual["calendar_context"]}
+                       if "calendar_context" in actual else {}),
                 }
             )
         delivery["source_attributes"] = attributes
@@ -1051,7 +1061,9 @@ class EditMemory:
     def context_projection(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
         return [
             {"kind": "prior_context", **{key: source.get(key) for key in (
-                "text", "role", "observed_at", "occurred_at")}}
+                "text", "role", "observed_at", "occurred_at")},
+             **({"calendar_context": source["calendar_context"]}
+                if "calendar_context" in source else {})}
             for source in sources
         ]
 
@@ -1245,6 +1257,10 @@ class EditMemory:
                 if "redelivered_sources" in checked:
                     source["observed_at"] = actual_source["observed_at"]
                 source["occurred_at"] = actual_source.get("occurred_at")
+                if "calendar_context" in actual_source:
+                    source["calendar_context"] = actual_source["calendar_context"]
+                else:
+                    source.pop("calendar_context", None)
         for record in checked.get("records", []):
             actual = self.service.read(record["record_id"], record["revision"])
             if not actual.get("ok") or any(
@@ -1426,9 +1442,12 @@ class EditMemory:
                     "role": actual["role"],
                     "occurred_at": actual.get("occurred_at"),
                     "observed_at": actual["observed_at"],
+                    **({"calendar_context": actual["calendar_context"]}
+                       if "calendar_context" in actual else {}),
                 }
                 if self.features.temporal_scope and "applicability" in selected:
-                    validate_applicability(selected["applicability"])
+                    validate_applicability(selected["applicability"],
+                                           calendar_context=actual.get("calendar_context"))
                     result["applicability"] = copy.deepcopy(selected["applicability"])
                 if self.features.temporal_scope and "evidence_links" in selected:
                     links = {}
@@ -1442,6 +1461,8 @@ class EditMemory:
                                 "evidence_id", "source_ref", "source_revision", "start", "end",
                                 "role", "occurred_at", "observed_at",
                             )})
+                            if "calendar_context" in original:
+                                linked[-1]["calendar_context"] = original["calendar_context"]
                         links[stance] = linked
                     result["evidence_links"] = links
                 return result
@@ -1728,22 +1749,33 @@ class EditMemory:
         return self.service.commit(session, proposal_id, raw)
 
     @staticmethod
-    def render(version: dict[str, Any], *, query_time: str | None = None) -> str:
+    def render(
+        version: dict[str, Any], *, query_time: str | None = None,
+        query_calendar_context: str | None = None,
+    ) -> str:
         return (
             render_state(
                 version["edit_state"], query_time=query_time,
                 version_time=version.get("committed_at") if query_time is not None else None,
+                query_calendar_context=query_calendar_context,
             ) if version.get("edit_state") else version["content"]
         )
 
     @staticmethod
     def revision_view(
-        version: dict[str, Any], *, query_time: str | None = None
+        version: dict[str, Any], *, query_time: str | None = None,
+        query_calendar_context: str | None = None,
     ) -> dict[str, Any]:
-        """Use the same actual state/commit clock for current and explicit history reads."""
+        """Read actual current/history state; calendar context is explicitly caller-declared.
+
+        The declaration permits nominal ordering only; it neither supplies a
+        timezone nor changes missing coordinates in already stored assertions.
+        """
         if not version.get("edit_state"):
             return {"content": version["content"], "semantic_support": "unchecked",
-                    "query_time": query_time, "version_time": version.get("committed_at")}
+                    "query_time": query_time, "query_calendar_context": query_calendar_context,
+                    "version_time": version.get("committed_at")}
         return render_revision_view(
-            version["edit_state"], query_time=query_time, version_time=version.get("committed_at")
+            version["edit_state"], query_time=query_time, version_time=version.get("committed_at"),
+            query_calendar_context=query_calendar_context,
         )

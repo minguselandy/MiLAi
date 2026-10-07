@@ -304,6 +304,58 @@ def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bo
         allow_business_mutation=business, requires_memory_result=required)
 
 
+def test_normal_host_keeps_statement_calendar_separate_from_reader_target(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(
+        tmp_path, native=True, request_interpretation=True,
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        maintenance_recipe="single_pass", edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope",
+        )},
+    )
+    text = "The marker is blue from February 4 inclusive to February 6 exclusive."
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True)
+        if ordinal == 2:
+            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            source = packet["source_table"][0]
+            assert source["occurred_at"] == "Feb 04, 2030, 09:00:00"
+            assert source["calendar_context"] == "marker-calendar"
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Marker color",
+                "clauses": [{"text": text, "evidence": ["e1"], "conditions": [],
+                             "assertion": {"source": "e1", "kind": "reported",
+                                 "applicability": {"effective_from": "2030-02-04",
+                                                   "effective_until": "2030-02-06"}}}],
+            }], "records": {}})}
+        assert ordinal == 3
+        items = materials(wire)["items"]
+        view = next(row["revision_view"] for row in items if row.get("revision_view"))
+        assert view["query_time"] == "Feb 05, 2030, 10:00:00"
+        assert view["query_calendar_context"] == "marker-calendar"
+        assert view["time_values"]["query_time"]["timezone_known"] is False
+        assert view["units"][0]["temporal"]["status"] == "within_explicit_limits"
+        return {"role": "assistant", "content": "Saved the stated period."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="calendar-bank", owner="alice", session="session", message_id="dated",
+                content=text, occurred_at="Feb 04, 2030, 09:00:00",
+                calendar_context="marker-calendar", query_time="Feb 05, 2030, 10:00:00",
+                query_calendar_context="marker-calendar")
+    result = functional.message(root, **args)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == 3
+    unit = result["records"][0]["value"]["edit_state"]["units"][0]
+    assert unit["assertion"]["occurred_at"] == args["occurred_at"]
+    assert unit["assertion"]["calendar_context"] == args["calendar_context"]
+    assert functional.message(root, **args) == result
+    assert len(wires) == 3
+
+
 @pytest.mark.parametrize("lost_memory_response", [False, True])
 def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual_result(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, lost_memory_response: bool,

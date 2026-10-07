@@ -822,6 +822,51 @@ def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tm
     assert summary["requests_without_confirmed_responses"] == 0
 
 
+def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_path):
+    run = execution(tmp_path, "M")
+    run.settings.update(
+        maintenance_recipe="single_pass", calendar_context="example-history",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope",
+        )},
+    )
+    calls = []
+    text = "The marker is blue from September 4 inclusive to September 6 exclusive."
+
+    def call(key, messages, *, structured, **kwargs):
+        payload = json.loads(messages[1]["content"])
+        calls.append(payload)
+        if structured:
+            source = payload["delivery"]["source_table"][0]
+            assert source["occurred_at"] == "Sep 04, 2025, 18:42:18"
+            assert source["calendar_context"] == "example-history"
+            return json.dumps({"creates": [{"action": "create", "matter": "Marker color",
+                "clauses": [{"text": text, "evidence": ["e1"], "conditions": [],
+                             "assertion": {"source": "e1", "kind": "reported",
+                                "applicability": {"effective_from": "2025-09-04",
+                                                  "effective_until": "2025-09-06"}}}],
+            }], "records": {}})
+        view = payload["memories"][0]["applicability"]
+        assert view["time_values"]["query_time"]["timezone_known"] is False
+        assert view["query_calendar_context"] == "example-history"
+        assert view["units"][0]["temporal"]["status"] == "within_explicit_limits"
+        return "Blue during the stated period."
+
+    run.call = call
+    with SqliteStore.from_conn_string(str(tmp_path / "calendar.sqlite")) as store:
+        service = MemoryService(store, ("calendar", "alice"), "alice", tmp_path / "lock")
+        observed = ObservedSession("s", "Sep 04, 2025, 18:42:18", ({
+            "role": "user", "content": text, "timestamp": "Sep 04, 2025, 18:42:18",
+        },))
+        assert run.maintain(service, observed, "halumem/alice/0")
+        assert run.answer(service, "Marker color?", "Sep 05, 2025, 10:00:00", "qa")
+        assert len(calls) == 2
+        assertion = service.records()[0]["value"]["edit_state"]["units"][0]["assertion"]
+        assert assertion["calendar_context"] == "example-history"
+        assert assertion["occurred_at"] == "Sep 04, 2025, 18:42:18"
+
+
 
 def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_path, monkeypatch):
     from milai_lab.runners import edit_benchmarks
