@@ -8,10 +8,10 @@ Actual calls use the same business journal, source capture and projection as Hos
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from dataclasses import asdict
 from types import SimpleNamespace
-from typing import TYPE_CHECKING, Any, Protocol
+from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from langchain_core.messages import AIMessage, ToolMessage
 
@@ -102,6 +102,110 @@ class SandboxApplicationAdapter:
         if not self.can_read:
             return self._denied("access_revoked")
         return self._call(self.query, target, attempt_id)
+
+    def wrap_tool_call(
+        self,
+        request: Any,
+        execute: Callable[[Any], Any],
+    ) -> ToolMessage:
+        """Normal Host call path, preserving the original call/journal identity.
+
+        The caller may install its existing FunctionalCallWrapper as ``wrapper``
+        to retain its trace, delivery settings and fault hooks. No request,
+        generation ID, tool-call ID, runtime config or arguments are rewritten.
+        Existing objects require a reference from an actually delivered tool
+        source, rather than a correct-looking external ID in memory prose.
+        """
+        call = request.tool_call
+        name, arguments = call["name"], call["args"]
+        reason = None
+        if name in self.app.tool_names:
+            if not self.can_read:
+                reason = "access_revoked"
+            elif name != self.query and name not in self.allowed_operations:
+                reason = "operation_not_authorized_current_request"
+            elif name in {
+                "complete_label",
+                "approve_document_version",
+                "publish_approved_document",
+            } or (name == "create_or_update_draft" and arguments.get("document_version", 0) != 0):
+                if self._delivered_ref(request.state["messages"], name, arguments) is None:
+                    reason = "verified_object_reference_required"
+        if reason is not None:
+            denial = self._denied(reason)
+            if reason == "verified_object_reference_required":
+                denial["next_step"] = {
+                    "tool": self.query,
+                    "arguments": self._query_target(name, arguments),
+                    "instruction": "Read the exact current owner object, then use its actual "
+                    "returned identity and observed version for the remaining operation.",
+                }
+            return ToolMessage(
+                name=name,
+                tool_call_id=call["id"],
+                status="error",
+                content=json.dumps(denial, ensure_ascii=False),
+            )
+        return cast(ToolMessage, self.wrapper(request, execute))
+
+    def _delivered_ref(
+        self,
+        messages: Sequence[Any],
+        operation: str,
+        arguments: Mapping[str, Any],
+    ) -> VerifiedObjectRef | None:
+        for message in reversed(messages):
+            if not isinstance(message, ToolMessage) or message.name not in self.app.tool_names:
+                continue
+            try:
+                delivery = json.loads(str(message.content))
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(delivery, dict):
+                continue
+            if delivery.get(
+                "status"
+            ) == "ORIGINAL_CALL_OUTCOME_UNKNOWN" and message.additional_kwargs.get(
+                "application_recovery"
+            ):
+                source_ref = delivery.get("query_source", {}).get("source_ref")
+                origin = self.query
+            else:
+                source_ref = delivery.get("source_ref")
+                origin = message.name
+            source = self.service.source(source_ref) if source_ref else None
+            if (
+                source is None
+                or source.get("role") != "tool"
+                or source.get("origin") != origin
+                or not source.get("object_ref")
+            ):
+                continue
+            resolved = self._target_for_ref(VerifiedObjectRef(**source["object_ref"]))
+            if resolved is None:
+                continue
+            issued, target = resolved
+            if operation == "complete_label":
+                if arguments.get("reservation_id") == issued.external_id:
+                    return issued
+            elif arguments.get("title") == target["title"] and (
+                arguments.get("document_version") == issued.fields["document_version"]
+            ):
+                return issued
+        return None
+
+    def _query_target(self, operation: str, arguments: Mapping[str, Any]) -> dict[str, Any] | None:
+        if self.app.workflow == "document_publication_v1":
+            return {"title": arguments["title"]}
+        if operation != "complete_label":
+            return {"item_key": arguments["item_key"]}
+        # A query hint uses actual owner-scoped identity, not a guessed exact key.
+        with self.app.world.tool_lock:
+            row = self.app.world.conn.execute(
+                "SELECT item_key FROM reservations WHERE user_id=? AND reservation_id=?",
+                (self.owner, arguments["reservation_id"]),
+            ).fetchone()
+        return {"item_key": row["item_key"]} if row is not None else None
 
     def execute(
         self,
