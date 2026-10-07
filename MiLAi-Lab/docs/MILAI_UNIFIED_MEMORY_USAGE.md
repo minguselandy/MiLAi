@@ -11,6 +11,85 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 12:13:17 UTC：PR89已合并、日历入口与保存评分观察
+
+本节固定于2026-10-07 12:13:17 UTC／北京时间20:13:17。开发源码为`e07644e`，
+报告版本以本节所在提交为准；实际prefix8-v6预测及评分仍冻结`34fa5c9`。
+代码、工程检查、原作者标签及Root开发复核分别记录，原完整任务继续。
+
+**PR83至89均已合并。**[PR89](https://github.com/minguselandy/MiLAi/pull/89)
+头`1f22097`自身[Fast516](https://github.com/minguselandy/MiLAi/actions/runs/37612639082)
+及[Full328](https://github.com/minguselandy/MiLAi/actions/runs/37612639101)成功，Full21/21；
+11:50:47普通merge为main`88a101f`，integration快进、干净且源码树与1f22097相同。
+原31e67e0的Full327因application源码登记缺两模块失败，修复只补既有所有权列表；
+不删除原失败或借其他提交CI。合并不表示真实Host验证通过，两个应用的2case／5message
+原输入已用冻结1f22097准备，实际调用仍0，不称为最终冻结后的新故事。
+
+**日历是调用方声明的坐标，未知时区保持未知。**`613a97d`在原SourceEvent增加可选
+calendar_context；capture原始occurred_at不改，observed_at继续为实际UTC捕获时钟。
+旧来源缺字段时不回填，重开及幂等重放保留原声明，变化声明被原捕获边界拒绝。
+`cf198f9`识别ISO和英文月份时间，保存精度；日期表示整日，报告时间不能填充生效限。
+明确offset之间按实际offset比较；无时区值只在双方明确同一日历时名义比较。
+缺失／不同日历或混合有无offset都保持time_context_unresolved，不默认UTC。
+
+`71ab2e0`与e07644e接通[普通Host配置v2](../configs/milai-unified-functional-v2.json)
+的正常message／fixture／CLI入口：报告calendar_context与Reader query_time／
+query_calendar_context分开；两种只读投影使用同一查询时刻。未提供查询时间时沿用服务时钟，
+不自动使用报告时间。共同benchmark及external入口保留实际来源时间；[predict配置v2](
+../configs/milai-unified-prefix8-v2.json)只增加显式history-calendar及实验／配置名称，
+Qwen3.6、BGE-m3、thinking、temperature、dense K10与原预算全部不变。该配置声明仅用于
+新运行，不重解释旧来源，也不代表已运行的34fa具备这些修正。
+
+Source实际SQLite72项、editor85项、adapter6项检查通过；正常Host及共同recipe的13项窄
+接线检查通过，相关八源Python3.11mypy、Ruff、CLI及真实SQLite重开示例通过，全部0真实HTTP。
+包／工具边界检查通过；扩大检查及本次头的远端CI另核对，不据局部检查宣布语义通过。
+Lab可选字段和调用参数改变，Product Schema/API/权限/Canonical、workflow及预算不变。
+代码回滚参考1f22097；回滚不撤销实际业务、来源或成本账本。
+
+后续扩大Host／benchmark检查为386通过、1失败：SQLite同时间行的encoder输入次序与
+测试假定的插入次序不同。实际dense返回目标正确，双方完整正文都恰编码一次，库值不变。
+只修测试为核对完整正文multiset，保留实际返回排名、数量、owner隔离与状态断言；74项
+benchmark／external复测通过。原失败保留，不用窄复测冒称原扩大检查全部通过。
+
+新时间描述最初使73份实际保存Reader投影中8份超过32256，最大35193；该失败采样保留。
+e07644e只用既有共享metadata格式压缩逐值相同的来源／时间／实际引用；73份展开均与
+完整新视图相等，最大31532，全部可容纳。不删来源、正文、字段或top10，不扩大预算，
+实际旧来源的calendar字段仍缺失。以上是0HTTP容量检查，不是新Reader效果或名义日历声明
+在真实模型中的验证。原输入、输出和中间失败保持ignored，未上传原文或HTTP。
+
+**冻结34fa预测已实际闭合。**11:04:45预测退出0，terminal-predict为
+COMPLETED_EXPERIMENT_PHASE；32维护记录、32预测、33来源batch、73完整自然答案。
+33extract／33editor／73Reader，共139个生成响应均stop；known分别380156／730900／
+1051732，合计2162788。编码198次／70668 tokens，Judge0、新闭合unknown0。
+12个真实空提案；53个实际提交（45新建／8修订）、2个EDIT_OVERLAPPING_TARGET拒绝、
+4个no_change；这些均不表示语义成功。四独立终态合计45事项、174content、0condition，
+未生成直接关系；限定可能保留于文字，不能只据role计数判断语义。Root已读全部73个完整
+自然答案，保留姓名归属、真实空维护及同目标重叠提案等缺口，没有额外数值重评分。
+
+**作者score仍在运行。**11:09:00从同一34fa、保存预测及author retrieval启动；
+固定观察27/32，按用户8／8／8／3。467个Judge请求／466个已确认stop响应，known1773040；
+尚无terminal-score或process-exit，不重启Writer／Reader／encoder、不盲重试旧未知397。
+前三个8会话的保存标签按原作者纯汇总，0新增模型：
+
+| 用户顺序 | 更新Correct／全部；valid | QACorrect／全部；valid | formation reference／valid | formed outputs／valid |
+|---|---|---|---|---|
+| 第一 | 9/19；18 | 9/20；18 | 122/115 | 14/12 |
+| 第二 | 5/15；15 | 5/12；11 | 102/90 | 16/12 |
+| 第三 | 4/20；18 | 11/22；20 | 100/93 | 16/13 |
+
+原无效Omitted／None及其他作者标签保留，不转为有效判断；没有完整M终态成绩、同版
+方法排名或优势结论。同家族Judge及Root开发复核均不算独立确认。前三用户Judge响应
+151／131／147，known649033／483416／539950，是当前score的子集，不再另加成本。
+
+prefix8-v6截至固定观察共606生成请求／605确认响应，known3935828；编码仍198次／70668。
+连续账本42810请求、known169147219／charged169403762、embedding1232360，unknown6
+为历史5加当前1在途reservation，不能直接记成新已闭合失败。实际响应与账本known／request
+差额核对一致，limits未变。这是12:13固定成本，不是随后实时成本。
+
+原同前态recipe、同版五方法、65／277历史、native／drift／消融／更紧预算、最终冻结后
+16保留用户、外部、Host135case／192message与新故事及六项交付仍未完成。保留16未用于
+开发，尚无最终候选，Product仍NO_GO。下面各固定报告和旧失败保留原时点。
+
 ## 11:02:46 UTC：PR88已合并、普通Host完整请求接线与容量运行
 
 本节固定于2026-10-07 11:02:46 UTC／北京时间19:02:46。最新开发源码为`752862b`，

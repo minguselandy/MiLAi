@@ -1,3 +1,14 @@
+# Current handoff: 2026-10-07 12:13 UTC
+
+PR83–89 merged; main88a101f/integration clean, PR89 own1f Fast516/Full32821 passed.
+Newe07644e adds explicit source/query calendars; unknown timezone stays unknown,
+old source absence not backfilled.73Reader offline projections expand exactly,
+max31532/0realHTTP. Actual34fa prefix8-v6 predict closed32/73answers/139stop;
+score27/32(8/8/8/3),466Judge responses/no terminal or exit. Native8 source1f
+two-app2case/5message prepared0. Root alone realHTTP; no hotedit/retry/budget reset.
+Use docs/MILAI_UNIFIED_MEMORY_USAGE.md; full goal incomplete,16reserved unused,
+ProductNO_GO. Earlier timed blocks are historical.
+
 # Current handoff: 2026-10-07 11:02 UTC
 
 PR83–88 merged; main2e1dac6, integration clean. Development752862b adds nativev8
