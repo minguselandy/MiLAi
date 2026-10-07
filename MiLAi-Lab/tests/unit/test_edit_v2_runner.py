@@ -890,6 +890,53 @@ def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_pa
         assert result["supplemental_denominators"]["invalid_update_judgements"] == 1
 
 
+def test_unified_source_subbatches_keep_distinct_http_results_and_cache_once(tmp_path):
+    from milai_lab.analysis.edit_results import writer_operations
+    from milai_lab.harness.artifact_io import write_json
+
+    run = execution(tmp_path, "B1")
+    run.settings.update(maintenance_recipe="single_pass", memory_profile="unified_v1")
+    write_json(tmp_path / "actual-config.json", run.settings)
+    bank = tmp_path / "banks/alice/memory.sqlite"
+    bank.parent.mkdir(parents=True)
+    original = "First fact.\n\nSecond fact.\n\nThird fact."
+    delivered = []
+
+    def fit(messages):
+        packet = json.loads(messages[1]["content"])["delivery"]
+        return sum(len(row["text"]) for row in packet["evidence"]) <= 15
+
+    run._fits = fit
+
+    def provider(request):
+        packet = json.loads(json.loads(request.content)["messages"][1]["content"])["delivery"]
+        delivered.append("".join(row["text"] for row in packet["evidence"]))
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+            "content": '{"proposals":[]}'}}], "usage": {"total_tokens": 8}})
+
+    with VLLMClient(VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client:
+        run.client = client
+        with SqliteStore.from_conn_string(str(bank)) as store:
+            service = MemoryService(store, ("shared", "alice"), "alice", tmp_path / "bank.lock",
+                                    memory_profile="unified_v1")
+            event = observation("s", original)
+            assert run.maintain(service, event, "halumem/alice/0") == []
+            assert len(delivered) == 3 and "".join(delivered) == original
+            calls = read_json(tmp_path / "maintenance/halumem/alice/0/batch-0-calls.json")
+            assert len({row["http_key"] for row in calls}) == 3
+            assert all(row["response_saved"] for row in calls)
+            assert len(list((tmp_path / "http").rglob("response.json"))) == 3
+            before = copy.deepcopy(service.sources())
+            assert run.maintain(service, event, "halumem/alice/0") == []
+            assert service.sources() == before and len(delivered) == 3
+    counts = writer_operations(tmp_path, "alice", [0])["counts"]
+    assert counts["prepared_batches"] == counts["confirmed_writer_responses"] == 3
+    assert counts["prepared_characters"] == len(original)
+    assert counts["writer_returned_empty_list_batches"] == 3
+    assert counts["batch_containers"] == 1
+
+
 def test_longmemeval_deferred_score_uses_saved_hypothesis(tmp_path, monkeypatch):
     from milai_lab.runners import edit_benchmarks
 

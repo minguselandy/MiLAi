@@ -1,0 +1,124 @@
+{
+  "profile": "functional_v1",
+  "host": {
+    "base_url": "http://127.0.0.1:7862/v1/",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1,
+    "max_tokens": 8192,
+    "timeout": 180,
+    "tool_mode": "native",
+    "max_calls": 24,
+    "enable_thinking": true
+  },
+  "capacity": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "context_tokens": 65536,
+    "output_tokens": 8192,
+    "batch_source_tokens": 6000,
+    "safety_tokens": 512,
+    "source_message_overhead_tokens": 32,
+    "related_reserve_tokens": 0,
+    "schema_reserve_tokens": 0,
+    "enable_thinking": true
+  },
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "max_calls_per_message": 24,
+  "ordinary_material_tokens": 8192,
+  "additional_reads": 3,
+  "format_reproposals": 1,
+  "queue_limits": {
+    "requests": 600,
+    "reserved_tokens": 8000000
+  },
+  "http_ownership_profile": "serialized_ledger_owner_v1",
+  "http_ownership_domain": {
+    "deployment_id": "existing-local-qwen36-native-functional-v13-5",
+    "clients": [
+      {
+        "base_url": "http://127.0.0.1:7862/v1/",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1,
+        "max_tokens": 8192,
+        "timeout": 180,
+        "tool_mode": "native",
+        "max_calls": 24,
+        "enable_thinking": true,
+        "response_format": null
+      },
+      {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": false,
+        "response_format": null
+      }
+    ]
+  },
+  "system_prompt": "You are a persistent assistant. Use the current request, visible memory and actual tool receipts to carry out the user's task and answer directly. The shared maintenance recipe has already handled the available current source batches. Its receipts distinguish committed semantic memory, no change and unfinished maintenance; storing the raw event alone does not mean semantic memory was saved. A receipt for one item does not prove the whole task is complete.\n\nRead necessary evidence before answering. Preserve the speaker, subject, report time, explicit effective time and scope. Distinguish historical reports, current arrangements, future plans and unknown information. An overall frequency does not establish that frequency for every subgroup. Use available read/history/source tools for missing material within the existing read allowance; do not fabricate missing history.\n\nFor business work, use the actual current tools and object references. When asked to check current state or continue earlier work, query the live application before deciding what remains. Perform dependent actions in order and use their actual receipts. Preserve completed effects across partial failure and restart. Query unknown effects before further action. Memory text and a user's request do not establish a completed business effect. Report actual partial results and unfinished work.\n\nFor forgetting, use the actual forget tool and visible target references, then respect revoked visibility. Report the scope of the actual receipt. Follow current execution capabilities; previous requests cannot restore a permission that is absent now.\n\nUse reported episode descriptions as interpretations of the named original sources. A captured episode is not evidence of a completed event or a saved semantic assertion. Supported and opposed links describe the recorded interpretation and never grant business permission. If repeated reads deliver no new object/version/cursor, use delivered material or state what is missing.",
+  "limitations": [
+    "cooperating serial SQLite writers; no cross-system exactly-once",
+    "semantic output requires evaluation; structured acceptance is not truth verification",
+    "same inherited model family; no independent Judge claim",
+    "Receipt business response currently uses Chinese labels and reports listed effects/observations; it is not a general conversational answer or proof that all user intents were fulfilled.",
+    "Shared recipe is a development candidate; real functional and semantic evaluation remain incomplete."
+  ],
+  "revision": "milai-unified-functional-v1",
+  "change_intent": "Unified development candidate: source episodes, grounded time and scope, shared maintenance, actual application recovery, explicit consolidation and isolated simulation; effect validation remains separate.",
+  "request_mode": "current_request_native_v7",
+  "business_attempt_policy": "fresh_query_with_history_v3",
+  "formation_interface": "anchored_assertion_v3",
+  "finalization": "receipt_or_agent_response_v1",
+  "read_exhaustion": "answer_from_delivered_v1",
+  "memory_completion": "declared_operations_v3",
+  "source_selection": "inline_receipt_units_v2",
+  "failure_delivery": "receipt_status_v4",
+  "business_completion": "observed_continuation_v1",
+  "declaration_tool_choice": "required",
+  "recent_context": "bank_recent_v2",
+  "declaration_thinking": "disabled",
+  "reasoning_history": "current_turn_native_v1",
+  "declaration_sampling": "greedy_v1",
+  "capability_delivery": "actual_catalog_v1",
+  "completion_tool_choice": "required_until_attempt_v1",
+  "existing_confirmation": "explicit_no_change_v1",
+  "revision_support_review": "disabled",
+  "tool_catalog_errors": "bounded_feedback_v1",
+  "formation_support_review": "disabled",
+  "support_review_comparison": "disabled",
+  "read_interface": "explicit_selectors_v1",
+  "config_version": "milai-unified-functional-v1",
+  "memory_method": "milai_edit_m_v1",
+  "edit_interface_version": "I2",
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "embedding_capacity": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "context_tokens": 8192
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch_size": 16,
+  "edit_features": {
+    "matter_organization": true,
+    "semantic_operations": true,
+    "bound_references": true,
+    "single_record_changes": true,
+    "source_metadata": true,
+    "temporal_scope": true
+  },
+  "maintenance_recipe": "extract_then_edit",
+  "memory_profile": "unified_v1",
+  "memory_ranking": "dense"
+}

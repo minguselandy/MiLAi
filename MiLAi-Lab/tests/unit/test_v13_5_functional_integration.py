@@ -70,6 +70,8 @@ def prepared(
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
     maintenance_recipe: str | None = None,
+    read_exhaustion: str | None = None,
+    memory_profile: str = "ordinary",
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -91,6 +93,7 @@ def prepared(
     settings = {
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
+        "memory_profile": memory_profile,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v4" if format_failure_receipts else
@@ -156,6 +159,8 @@ def prepared(
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:
         settings["maintenance_recipe"] = maintenance_recipe
+    if read_exhaustion is not None:
+        settings["read_exhaustion"] = read_exhaustion
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
     root = tmp_path / "run"
@@ -223,12 +228,16 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
                               **kwargs)
 
 
-@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("arm,memory_profile", [
+    ("B0", "ordinary"), ("B1", "ordinary"), ("B2", "ordinary"), ("M", "ordinary"),
+    ("M", "unified_v1"),
+])
 def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, memory_profile: str,
 ) -> None:
     root = prepared(
         tmp_path, native=True, request_interpretation=True,
+        memory_profile=memory_profile,
         memory_method="milai_edit_" + arm.lower() + "_v1", edit_interface_version="I2",
         edit_features={name: True for name in (
             "matter_organization", "semantic_operations", "bound_references",
@@ -284,6 +293,111 @@ def intent_reply(*, memory: bool = False, required: bool = False, forgetting: bo
     return native_call("classify_current_request", "interpret",
         allow_memory_maintenance=memory, allow_forgetting=forgetting,
         allow_business_mutation=business, requires_memory_result=required)
+
+
+def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual_result(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.application.functional import FunctionalApplication
+    from milai_lab.runners import memory_operations
+
+    root = prepared(
+        tmp_path, native=True, request_interpretation=True, memory_profile="unified_v1",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        maintenance_recipe="single_pass", edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope",
+        )},
+    )
+    arguments = {"item_key": "paper pack", "quantity": 1,
+                 "destination": "local", "packing": "box"}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(business=True)
+        if ordinal == 2:
+            return native_call("reserve_and_label", "reserve", **arguments)
+        if ordinal == 3:
+            assert actual_tool_receipt(wire)["business_outcome"] == "partial"
+            return {"role": "assistant", "content": "Reserved; the label is still unavailable."}
+        assert not wire.get("tools")
+        packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+        if ordinal == 4:
+            tool_source = [source["id"] for source in packet["source_table"]
+                           if source["role"] == "tool"][-1]
+            evidence = next(row["id"] for row in packet["evidence"]
+                            if row["source"] == tool_source)
+            assert "created" in json.dumps(packet)
+            clause = {"text": "The paper pack is reserved and its label was created.",
+                      "evidence": [evidence], "conditions": [],
+                      "assertion": {"source": evidence, "kind": "observed"}}
+            envelope = {"creates": [{"action": "create", "matter": "Paper pack outcome",
+                                     "clauses": [clause]}], "records": {}}
+        else:
+            assert ordinal == 5
+            envelope = {"creates": [], "records": {}}
+        return {"role": "assistant", "content": json.dumps(envelope)}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    monkeypatch.setattr(memory_operations, "FunctionalVLLMClient", functional.FunctionalVLLMClient)
+    first = message(root, initial_world={"initial_label_available": False})
+    assert first["status"] == "COMPLETED", first.get("error")
+    assert len(first["world"]["world"]["attempts"]) == 1
+    requirements = {
+        "target": {"item_key": arguments["item_key"]},
+        "steps": [
+            {"id": "reserve", "operation": "reserve_and_label", "arguments": arguments,
+             "completed": arguments},
+            {"id": "label", "operation": "complete_label", "arguments": {},
+             "arguments_from_state": {"reservation_id": "reservation_id"},
+             "completed": {"label_status": "created"}},
+        ], "save_result": True, "feedback": True,
+    }
+    common = {"bank": "mechanical-bank", "owner": "alice", "session": "session",
+              "operation": "resume", "resume_request_id": "original-request"}
+    readonly = memory_operations.run(
+        root, **common, request_id="check-only", text="Only inspect the pending result.",
+        requirements=requirements, readonly=True,
+    )
+    assert readonly["business"]["status"] == "observed_only"
+    assert readonly["memory"]["current_permission"] == "not_authorized_current_request"
+    assert len(readonly["application_snapshot"]["attempts"]) == 1 and len(wires) == 3
+    freeze = functional.frozen(root)
+    bank_root = root / "banks" / functional._bank_reference(
+        root, freeze["run_id"], "mechanical-bank", "alice"
+    )
+    with FunctionalApplication.open(bank_root / "applications" / "reservation",
+                                    "reservation", "alice") as app:
+        app.world.set_label_available("restore-label-service", True)
+    completed = memory_operations.run(
+        root, **common, request_id="finish", text="Finish the label and save the actual outcome.",
+        allowed_operations=["complete_label"],
+    )
+    assert completed["complete"], completed
+    assert completed["memory"]["status"] == "committed"
+    assert completed["feedback"]["attempts"][-1]["receipt"]["host_seen"] is False
+    assert len(completed["application_snapshot"]["attempts"]) == 2 and len(wires) == 4
+    repeated = memory_operations.run(
+        root, **common, request_id="finish", text="Finish the label and save the actual outcome.",
+        allowed_operations=["complete_label"],
+    )
+    assert repeated["complete"] and repeated["repeated_command_observation_only"]
+    assert len(repeated["application_snapshot"]["attempts"]) == 2 and len(wires) == 4
+    exported = functional.memory_data(root, bank="mechanical-bank", owner="alice",
+                                      operation="export")
+    episode_ids = [row["episode_id"] for row in exported["episodes"]]
+    consolidated = memory_operations.run(
+        root, bank="mechanical-bank", owner="alice", session="session",
+        request_id="organize", text="Organize the selected visible history.",
+        episode_ids=episode_ids,
+    )
+    assert consolidated["status"] == "completed", consolidated
+    assert consolidated["business_operations_executed"] == 0 and len(wires) == 5
+    after = functional.memory_data(root, bank="mechanical-bank", owner="alice", operation="export")
+    assert len(after["records"]) == 1
+    assert {source["event_id"] for source in exported["sources"]} < {
+        source["event_id"] for source in after["sources"]
+    }
 
 
 def native_call(name: str, call_id: str, **args: Any) -> dict[str, Any]:
@@ -3782,6 +3896,59 @@ def test_completion_attempt_requirement_releases_on_rejection_or_stops_at_read_b
     replay = message(root, resume=True)
     assert replay['world'] == result['world'] and len(wires) == before
     assert replay['final_answer'] == result['final_answer']
+
+
+def test_read_exhaustion_answers_from_delivery_and_preserves_business_effect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(
+        tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, operation_completion=True, direct_response=True,
+        phase_thinking=True, actual_capabilities=True,
+        read_exhaustion="answer_from_delivered_v1",
+    )
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 4}:
+            return native_call(
+                "classify_current_request", f"mode-{ordinal}",
+                memory_write_request="none", allow_forgetting=False,
+                business_action_request="perform" if ordinal == 1 else "none",
+                business_operations=["reserve_and_label"] if ordinal == 1 else [],
+            )
+        if ordinal == 2:
+            return native_call(
+                "reserve_and_label", "reserve", item_key="delivered item",
+                quantity=1, destination="local", packing="box",
+            )
+        if ordinal == 3:
+            return {"role": "assistant", "content": "The reservation and label are complete."}
+        if ordinal < 9:
+            return native_call("search_memory", f"read-{ordinal}", query="delivered item")
+        assert ordinal == 9 and wire["tool_choice"] == "auto"
+        assert not {
+            "search_memory", "read_memory", "read_page", "read_source", "read_history",
+        }.intersection(
+            tool["function"]["name"] for tool in wire.get("tools", [])
+        )
+        assert "already delivered" in json.dumps(wire["messages"])
+        return {"role": "assistant", "content": "The prior receipt confirms the reservation. "
+                "There is no evidence here for a middle name."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="b", owner="alice", session="s")
+    first = functional.message(
+        root, **common, message_id="reserve", content="Reserve and label the delivered item.",
+    )
+    result = functional.message(
+        root, **common, message_id="read", content="Read the prior receipt and my middle name.",
+    )
+    assert first["status"] == result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == 9 and "execution_stop" not in result
+    assert result["read_completion"]["next_step"] == "answer_from_delivered_material"
+    assert len(result["world"]["world"]["attempts"]) == 1
+    assert result["records"] == []
+    assert "no evidence" in result["final_answer"]
 
 
 def test_selected_original_review_rejects_old_support_before_commit_then_uses_new_support(

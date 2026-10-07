@@ -152,6 +152,7 @@ class MemoryService:
         observer: Callable[[dict[str, Any]], None] | None = None,
         semantic_retriever: SemanticRetriever | None = None,
         memory_profile: str = "ordinary",
+        memory_ranking: str = "dense",
         clock: Callable[[], datetime] | None = None,
     ) -> None:
         if functional_contract == "functional_v1":
@@ -177,6 +178,9 @@ class MemoryService:
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
         self.memory_profile = memory_profile
+        if memory_ranking not in {"dense", "activation"}:
+            raise ValueError("MEMORY_RANKING_INVALID")
+        self.memory_ranking = memory_ranking
         self.clock = clock or (lambda: datetime.now(UTC))
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
@@ -1867,6 +1871,7 @@ class MemoryService:
             "owner": self.owner,
             "namespace": list(self.namespace),
             "memory_profile": self.memory_profile,
+            "memory_ranking": self.memory_ranking,
             "sources": self.sources(),
             "records": records,
             "history": history,
@@ -2748,7 +2753,23 @@ class MemoryService:
                     )
         visible_records = [row for row in records if row["ok"]]
         if self.semantic_retriever is not None and not enumerate_bank:
-            records = self.semantic_retriever.rank(query, visible_records, limit)
+            if self.memory_ranking == "activation":
+                from milai_lab.memory.activation import ActivationIndex, rank_candidates
+
+                index = ActivationIndex(self)
+                candidates = self.semantic_retriever.rank(
+                    query, visible_records, len(visible_records), include_scores=True,
+                )
+                ranked = []
+                for candidate in candidates:
+                    activation = index.describe(candidate["id"])
+                    if activation is not None:
+                        ranked.append({**candidate, "activation": activation["activation"],
+                                       "utility": activation["utility"], "visible": True,
+                                       "allowed": True})
+                records = rank_candidates(ranked, limit=limit)
+            else:
+                records = self.semantic_retriever.rank(query, visible_records, limit)
         else:
             records = sorted(
                 (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
@@ -2762,6 +2783,8 @@ class MemoryService:
             "ok": True,
             "status": "found" if records or raw else "no_results",
             "retrieval": (
+                "dense_activation_v1" if self.semantic_retriever is not None
+                and self.memory_ranking == "activation" else
                 "dense_cosine" if self.semantic_retriever is not None else "raw_keyword"
             ),
             "degraded": degradation is not None,

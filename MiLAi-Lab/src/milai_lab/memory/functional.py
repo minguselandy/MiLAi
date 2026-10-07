@@ -270,7 +270,7 @@ class FunctionalMemory:
         bound = self.service.public_turn(
             str(cfg.get("v13_session", "")),
             message_id=cfg.get("v13_turn_id"),
-            config_version=cfg.get("v13_config_version", cfg.get("v13_support_config_sha256")),
+            config_version=cfg.get("v13_config_version"),
         )
         if bound is None:
             raise FunctionalRejection("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")

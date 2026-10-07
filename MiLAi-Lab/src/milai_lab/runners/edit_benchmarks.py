@@ -841,11 +841,37 @@ class BenchmarkRun:
                 stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
                 batch_index: int = index,
             ) -> dict[str, Any]:
+                http_folder = f"maintenance/{key}/batch-{batch_index}"
+                active_request_id = f"{key}:batch:{batch_index}"
+                calls_path = folder / f"batch-{batch_index}-calls.json"
+                calls: list[dict[str, Any]] = []
+                if service.memory_profile == "unified_v1":
+                    while True:
+                        checkpoint = service.store.get(
+                            (*service.namespace, "edit_maintenance"),
+                            json.dumps(
+                                [observed.session_id, active_request_id], ensure_ascii=False
+                            ),
+                        )
+                        assert checkpoint is not None
+                        if checkpoint.value["phase"] != "batches":
+                            break
+                        child_index = checkpoint.value["next_batch"]
+                        active_request_id += f":batch:{child_index}"
+                        http_folder += f"/subbatch-{child_index}"
+                    calls = read_json(calls_path) if calls_path.exists() else []
+                    calls.append({"request_id": active_request_id, "stage": stage,
+                                  "http_key": http_folder + "/" + stage,
+                                  "response_saved": False})
+                    write_json(calls_path, calls)
                 response = self.call(
-                    f"maintenance/{key}/batch-{batch_index}/{stage}", messages, structured=True,
+                    http_folder + "/" + stage, messages, structured=True,
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "milai_" + stage, "schema": schema}},
                 )
+                if calls:
+                    calls[-1]["response_saved"] = True
+                    write_json(calls_path, calls)
                 return parse_object(response, reject_duplicate_keys=True)
 
             result = maintain_event(
@@ -1281,10 +1307,18 @@ class BenchmarkRun:
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
-                    **({"applicability": {
-                        "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
-                        "statements": list(read_applicability(row["value"]["edit_state"]).values()),
-                    }} if self.settings.get("maintenance_recipe")
+                    **({"record_id": row["id"]}
+                       if service.memory_profile == "unified_v1" else {}),
+                    **({"applicability": (
+                        EditMemory.revision_view(row["value"], query_time=date)
+                        if self.settings.get("edit_features", {}).get("temporal_scope")
+                        else {
+                            "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
+                            "statements": list(
+                                read_applicability(row["value"]["edit_state"]).values()
+                            ),
+                        }
+                    )} if self.settings.get("maintenance_recipe")
                        and row["value"].get("edit_state") else {}),
                     **({"revision_scope": read_revision_scope(service, row["id"], row["value"])}
                        if any(self.settings.get("edit_features", {}).values()) else {}),
@@ -1292,11 +1326,20 @@ class BenchmarkRun:
                 for row in records
             ]
             write_json(snapshot, memories)
-        return self.call(
+        cached_response = (snapshot.parent / "response.json").exists()
+        answer = self.call(
             key,
             reader_messages(question, date, memories),
             structured=False,
         )
+        if service.memory_profile == "unified_v1":
+            from milai_lab.memory.activation import ActivationIndex
+
+            index = ActivationIndex(service)
+            for memory in memories:
+                if "record_id" in memory:
+                    index.record_use(memory["record_id"], request_id=key, cached=cached_response)
+        return answer
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
         """Audit actual memory values around gold-guided, evaluator-only retrieval.
@@ -1355,6 +1398,7 @@ class BenchmarkRun:
                     candidate_contract="read_handle_v1",
                     semantic_retriever=self._semantic_retriever(),
                     memory_profile=self.settings.get("memory_profile", "ordinary"),
+                    memory_ranking=self.settings.get("memory_ranking", "dense"),
                 )
                 previous_time = None
                 prefix = selection.get("session_prefix")
@@ -1655,6 +1699,7 @@ class BenchmarkRun:
                     candidate_contract="read_handle_v1",
                     semantic_retriever=self._semantic_retriever(),
                     memory_profile=self.settings.get("memory_profile", "ordinary"),
+                    memory_ranking=self.settings.get("memory_ranking", "dense"),
                 )
                 history = longmemeval_history(case)
                 prediction_path = self.root / "predictions/longmemeval" / owner / "complete.json"

@@ -16,7 +16,7 @@ import sys
 import unicodedata
 import uuid
 from collections.abc import Callable
-from contextlib import ExitStack
+from contextlib import AbstractContextManager, ExitStack
 from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -47,6 +47,7 @@ from milai_lab.harness.contextual_artifacts import (
     http_budget_scope,
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
+from milai_lab.memory.activation import ActivationIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import (
     FunctionalIntegrityError,
@@ -69,6 +70,7 @@ from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapaci
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
+from milai_lab.providers.request_pipeline import DeliveryObserver, PreparedRequest
 from milai_lab.runners.functional_response import business_response, unattempted_continuations
 
 LAB = Path(__file__).resolve().parents[3]
@@ -589,8 +591,9 @@ def _review_selected_support(
         }, ensure_ascii=False))
 
 
-def sources() -> dict[str, str]:
-    return {"implementation_version": "milai-edit-common-v1"}
+def sources(source_version: str | None = None) -> dict[str, str]:
+    return {"implementation_version": "milai-unified-memory-v1",
+            **({"git_commit": source_version} if source_version else {})}
 
 
 def sdk_identity() -> dict[str, Any]:
@@ -616,6 +619,7 @@ def prepare(
     settings_path: Path,
     fixture_path: Path | None = None,
     controls_path: Path | None = None,
+    *, source_version: str | None = None,
 ) -> dict[str, Any]:
     settings = read_json(settings_path)
     allowed = {
@@ -662,6 +666,7 @@ def prepare(
         "edit_features",
         "maintenance_recipe",
         "memory_profile",
+        "memory_ranking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -669,6 +674,8 @@ def prepare(
                          + ",".join(sorted(set(settings) - allowed)))
     if settings.get("memory_profile", "ordinary") not in {"ordinary", "unified_v1"}:
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
+    if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
+        raise ValueError("MEMORY_RANKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
@@ -804,7 +811,9 @@ def prepare(
         "receipt_or_agent_response_v1",
     }:
         raise ValueError("FUNCTIONAL_INTERFACE_POLICY_INVALID")
-    if settings.get("read_exhaustion", "legacy") not in {"legacy", "stop_execution_v1"}:
+    if settings.get("read_exhaustion", "legacy") not in {
+        "legacy", "stop_execution_v1", "answer_from_delivered_v1"
+    }:
         raise ValueError("FUNCTIONAL_READ_EXHAUSTION_POLICY_INVALID")
     if settings.get("memory_completion", "explicit_only_v1") not in {
             "explicit_only_v1", "declared_writes_v1", "declared_writes_v2",
@@ -837,7 +846,7 @@ def prepare(
         "schema": "functional_run_inputs_v2",
         "config": settings,
         "config_version": config_version,
-        "source_version": sources(),
+        "source_version": sources(source_version),
         "sdk_identity": sdk_identity(),
         "fixture": fixture,
         "evaluator_controls": controls,
@@ -1729,6 +1738,43 @@ def public_message_record(message: Any) -> dict[str, Any]:
     return cast(dict[str, Any], row)
 
 
+class _MemoryUseDelivery:
+    """Record use only after an actual request containing Reader material responds."""
+
+    def __init__(self, inner: DeliveryObserver, service: MemoryService, request_id: str) -> None:
+        self.inner, self.index, self.request_id = inner, ActivationIndex(service), request_id
+
+    def request_scope(
+        self, request: PreparedRequest, request_index: int,
+    ) -> AbstractContextManager[Any]:
+        return self.inner.request_scope(request, request_index)
+
+    def record_delivery(
+        self, request: PreparedRequest, receipt: dict[str, Any], request_index: int,
+    ) -> None:
+        self.inner.record_delivery(request, receipt, request_index)
+        ids: set[str] = set()
+        for message in request.messages:
+            if message["role"] not in {"system", "tool"}:
+                continue
+            content = message.get("content")
+            if not isinstance(content, str):
+                continue
+            try:
+                material = json.loads(content.rsplit("\n", 1)[-1])
+            except ValueError:
+                continue
+            if not isinstance(material, dict) or material.get("schema") != "functional_material_v1":
+                continue
+            ids.update(item["record_id"] for item in material["items"]
+                       if item["type"] == "record")
+        for record_id in ids:
+            self.index.record_use(record_id, request_id=self.request_id)
+
+    def after_delivery(self, request: PreparedRequest, request_index: int) -> None:
+        self.inner.after_delivery(request, request_index)
+
+
 def message(
     root: Path,
     *,
@@ -1877,6 +1923,7 @@ def message(
                 observer=trace,
                 semantic_retriever=retriever,
                 memory_profile=settings.get("memory_profile", "ordinary"),
+                memory_ranking=settings.get("memory_ranking", "dense"),
             )
             seed_receipts = (
                 seed_sources(service, initial_sources, bank_root / "source-imports.json",
@@ -2177,6 +2224,13 @@ def message(
                        "envelope": value})
                 return value
 
+            def maintenance_fit(messages: list[dict[str, str]]) -> bool:
+                try:
+                    capacity.check(messages)
+                except CapacityExceeded:
+                    return False
+                return True
+
             selected_business = tuple(tool for tool in app.tools if mode is None
                 or tool.name in {"get_reservation", "get_document_status"}
                 or (tool.name in mode["business_operations"] if "business_operations" in mode
@@ -2198,10 +2252,12 @@ def message(
             tool_catalog = [convert_to_openai_tool(tool)
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
+            read_exhausted = False
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
             ) -> dict[str, Any]:
+                nonlocal read_exhausted
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -2213,8 +2269,9 @@ def message(
                     session=session, message_id=message_id,
                 ):
                     raise _VisibilityReplayRevoked(blocked)
-                if (not for_finalization
-                        and settings.get("read_exhaustion") == "stop_execution_v1"):
+                if not for_finalization and settings.get("read_exhaustion") in {
+                    "stop_execution_v1", "answer_from_delivered_v1"
+                }:
                     for row in messages:
                         if (not isinstance(row, ToolMessage)
                                 or row.name not in memory.read_tool_names):
@@ -2225,12 +2282,24 @@ def message(
                             continue
                         if (isinstance(receipt, dict)
                                 and receipt.get("status") == "read_limit_exhausted"):
-                            output["execution_stop"] = {
-                                "reason": "read_limit_exhausted", "receipt_ref": row.tool_call_id,
-                                "retryable_in_same_message": False, "effects_preserved": True}
-                            trace({"event": "functional_execution_stopped",
-                                   **output["execution_stop"]})
-                            raise _ReadExecutionStopped()
+                            if settings["read_exhaustion"] == "stop_execution_v1":
+                                output["execution_stop"] = {
+                                    "reason": "read_limit_exhausted",
+                                    "receipt_ref": row.tool_call_id,
+                                    "retryable_in_same_message": False, "effects_preserved": True}
+                                trace({"event": "functional_execution_stopped",
+                                       **output["execution_stop"]})
+                                raise _ReadExecutionStopped()
+                            if not read_exhausted:
+                                output["read_completion"] = {
+                                    "reason": "read_limit_exhausted",
+                                    "receipt_ref": row.tool_call_id,
+                                    "next_step": "answer_from_delivered_material",
+                                    "effects_preserved": True,
+                                }
+                                trace({"event": "functional_read_completion",
+                                       **output["read_completion"]})
+                            read_exhausted = True
                 material = memory.context(
                     session, message_id, freeze["config_version"], query=content
                 )
@@ -2294,6 +2363,7 @@ def message(
                             config, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                             model_call=maintenance_call, allowed=maintenance_allowed,
                             execute=not for_finalization and forgotten_at is None,
+                            fit=maintenance_fit,
                         )
                         effects["maintenance"] = output["maintenance"]
                         material = memory.context(
@@ -2308,12 +2378,21 @@ def message(
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 if settings.get("capability_delivery") == "actual_catalog_v1":
-                    active = [] if for_finalization else sorted(allowed_tools)
+                    active = [] if for_finalization else sorted(
+                        allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
+                    )
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
+                    if read_exhausted:
+                        capability_text += (
+                            "The current read allowance is exhausted. Use the material and "
+                            "actual receipts already delivered to answer. State missing evidence "
+                            "plainly when it prevents an answer. Available business tools still "
+                            "follow the current request permissions. "
+                        )
                     if maintenance_recipe:
                         capability_text += (
                             "The shared maintenance recipe reports its actual results below. "
@@ -2374,6 +2453,16 @@ def message(
                 complete_receipt_units=(settings.get("source_selection")
                                         == "inline_receipt_units_v2"),
             )
+            adapter = None
+            if service.memory_profile == "unified_v1":
+                adapter = app.adapter(
+                    service, session, message_id, runtime_config=cfg,
+                    allowed_operations=tuple(
+                        tool.name for tool in selected_business
+                        if tool.name not in {"get_reservation", "get_document_status"}
+                    ),
+                )
+                adapter.wrapper = call_wrapper
 
             def dispatch(request: Any, execute: Any) -> Any:
                 if request.tool_call["name"] not in allowed_tools:
@@ -2385,9 +2474,13 @@ def message(
                     faults.before_native(current)
                     return execute(current)
 
+                if adapter is not None and request.tool_call["name"] in app.tool_names:
+                    return adapter.wrap_tool_call(request, native)
                 return call_wrapper(request, native)
 
             def execution_tool_choice(current: list[Any]) -> Literal["auto", "required"]:
+                if read_exhausted:
+                    return "auto"
                 # The persisted feedback reserves the existing shared allowance.
                 # The projected marker follows the selected completion policy.
                 # An attempted mutation, including rejected/unknown, releases the
@@ -2403,15 +2496,26 @@ def message(
                                else None)
 
             def current_tool_catalog(config: RunnableConfig) -> tuple[BaseTool, ...]:
-                if not isinstance(memory, FunctionalEditMemory):
-                    raise ValueError("FUNCTIONAL_EDIT_DYNAMIC_CATALOG_REQUIRES_EDIT_METHOD")
-                catalog = tuple(tool for tool in memory.writer_tools(config)
-                                if tool.name in allowed_tools) + selected_business
+                memory_catalog = (
+                    memory.writer_tools(config) if isinstance(memory, FunctionalEditMemory)
+                    else memory.tools()
+                )
+                catalog = tuple(tool for tool in memory_catalog
+                                if tool.name in allowed_tools and (
+                                    not read_exhausted or tool.name not in memory.read_tool_names
+                                )) + selected_business
                 trace({"event": "functional_bound_tool_catalog",
                        "tools": [convert_to_openai_tool(tool) for tool in catalog]})
                 return catalog
 
-            tools_provider = current_tool_catalog if edit_features.enabled else None
+            tools_provider = current_tool_catalog if edit_features.enabled or (
+                settings.get("read_exhaustion") == "answer_from_delivered_v1"
+            ) else None
+            if service.memory_profile == "unified_v1" and model.delivery_observer is not None:
+                model.delivery_observer = _MemoryUseDelivery(
+                    model.delivery_observer, service,
+                    json.dumps([session, message_id], ensure_ascii=False),
+                )
             agent = build_agent(
                 model,
                 store,
@@ -2524,6 +2628,7 @@ def message(
                 output["maintenance"] = memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
+                    fit=maintenance_fit,
                 )
 
             if (settings.get("business_completion") == "observed_continuation_v1"
@@ -2820,6 +2925,7 @@ def message(
                         output["maintenance"] = memory.maintain_sources(
                             cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                             model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
+                            fit=maintenance_fit,
                         )
                 except Exception as snapshot_error:
                     output["maintenance_snapshot_error"] = (
@@ -3002,10 +3108,42 @@ def run(root: Path) -> list[dict[str, Any]]:
     return results
 
 
+def memory_data(
+    root: Path, *, bank: str, owner: str, operation: str,
+    episode_ids: list[str] | None = None,
+    record_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    """Inspect/export or index existing owner memory without a model request."""
+    freeze = frozen(root)
+    bank_root = root / "banks" / _bank_reference(root, freeze["run_id"], bank, owner)
+    database = bank_root / "memory.sqlite"
+    if not database.exists():
+        raise FileNotFoundError(database)
+    with SqliteStore.from_conn_string(str(database)) as store:
+        service = MemoryService(
+            store, ("functional", freeze["run_id"], bank, owner), owner,
+            bank_root / "memory.lock", functional_contract="functional_v1",
+            memory_profile=freeze["config"].get("memory_profile", "ordinary"),
+            memory_ranking=freeze["config"].get("memory_ranking", "dense"),
+        )
+        if operation == "export":
+            return service.export_snapshot()
+        if operation == "index-episodes":
+            return service.index_source_episodes()
+        if operation == "activation":
+            index = ActivationIndex(service)
+            return {"activation": [index.describe(record_id) for record_id in (
+                record_ids if record_ids is not None else
+                [row["id"] for row in service.records() if row["ok"]]
+            )]}
+        return {"episodes": service.episodes(episode_ids=episode_ids, limit=None)}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "command", choices=("prepare", "message", "step", "run", "inspect", "disable", "enable")
+        "command", choices=("prepare", "message", "step", "run", "inspect", "disable", "enable",
+                            "episodes", "export", "index-episodes", "activation")
     )
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--config", type=Path)
@@ -3021,6 +3159,9 @@ def main() -> None:
     parser.add_argument("--occurred-at", help="Actual statement time, when supplied by the caller")
     parser.add_argument("--workflow", choices=("reservation", "document"), default="reservation")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--episode-id", action="append")
+    parser.add_argument("--record-id", action="append")
+    parser.add_argument("--source-version", help="Actual Git/source version for the run record")
     args = parser.parse_args()
     if args.command in {"disable", "enable"}:
         if not (args.root / "input-freeze.json").exists():
@@ -3030,7 +3171,8 @@ def main() -> None:
     elif args.command == "prepare":
         if args.config is None:
             parser.error("prepare requires --config")
-        result = prepare(args.root, args.config, args.fixture, args.controls)
+        result = prepare(args.root, args.config, args.fixture, args.controls,
+                         source_version=args.source_version)
         result = {
             "status": "PREPARED",
             "config_version": result["config_version"],
@@ -3056,6 +3198,14 @@ def main() -> None:
         )
     elif args.command == "inspect":
         result = frozen(args.root)
+    elif args.command in {"episodes", "export", "index-episodes", "activation"}:
+        if not args.owner:
+            parser.error("memory inspection requires --owner")
+        result = memory_data(
+            args.root, bank=args.bank, owner=args.owner, operation=args.command,
+            episode_ids=args.episode_id,
+            record_ids=args.record_id,
+        )
     else:
         result = {"results": run(args.root)}
     print(json.dumps(result, ensure_ascii=False))

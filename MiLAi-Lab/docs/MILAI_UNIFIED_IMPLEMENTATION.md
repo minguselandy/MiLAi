@@ -58,6 +58,15 @@ profile enables the added capabilities in ordinary Host and predict configuratio
 
 ## Integration and evidence
 
+All five handoffs are integrated at5c36b28. Root adds the ordinary Host/predict
+configs and explicit same-bank consolidate/full-request resume CLI. Read quota
+exhaustion uses delivered material; actual Reader deliveries record deduplicated
+usage, while cache/scorer reads do not. Lossless source subbatches have distinct
+HTTP paths, preserving first inputs/responses. Source commit is a normal run
+annotation, never a SHA/fingerprint gate. Calls, migration/export, limitations
+and the fixed interrupted-score observation are in
+[the unified usage document](MILAI_UNIFIED_MEMORY_USAGE.md).
+
 Three worker slots require staggered execution of the five task cards. Root reviews
 and integrates each handoff, runs affected existing checks and one normal example,
 then the unified five-flow real smoke and concentrated predict/score. Module examples

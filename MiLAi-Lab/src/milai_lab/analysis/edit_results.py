@@ -284,17 +284,23 @@ def recipe_writer_operations(
             prefix = f"halumem/{owner}/"
             if not request_id.startswith(prefix):
                 continue
-            ordinal, batch = request_id.removeprefix(prefix).split(":batch:")
+            ordinal, *batch_parts = request_id.removeprefix(prefix).split(":batch:")
             if expected_sessions is not None and int(ordinal) not in expected_sessions:
                 continue
             sessions.add(int(ordinal))
             state = json.loads(raw)
+            if "batches" in state:
+                counts["batch_containers"] += 1
+                counts["planned_subbatches"] += len(state["batches"])
+                continue  # Parent receipts repeat actual child effects; count each leaf once.
             counts["prepared_batches"] += 1
             counts["completed_batches"] += state["phase"] in {"complete", "incomplete"}
             counts["incomplete_maintenance_batches"] += state["phase"] == "incomplete"
             characters = sum(s["end"] - s["start"] for s in state["binding"]["sources"])
             counts["prepared_characters"] += characters
-            http = folder / "http/maintenance" / prefix / ordinal / f"batch-{batch}"
+            http = folder / "http/maintenance" / prefix / ordinal / f"batch-{batch_parts[0]}"
+            for part in batch_parts[1:]:
+                http = http / f"subbatch-{part}"
             for stage, label in (("extract", "extraction"), ("edit", "writer")):
                 request, response = http / stage / "request.json", http / stage / "response.json"
                 counts[f"recorded_{label}_requests"] += request.exists()
