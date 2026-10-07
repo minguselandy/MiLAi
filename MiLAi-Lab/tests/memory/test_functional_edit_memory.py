@@ -877,8 +877,9 @@ def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_p
 
 @pytest.mark.parametrize("stage", ["formation", "revision"])
 @pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
+@pytest.mark.parametrize("bounded", [False, True])
 def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revision(
-    tmp_path: Path, stage: str, arm: str
+    tmp_path: Path, stage: str, arm: str, bounded: bool
 ) -> None:
     reviewed: list[dict[str, Any]] = []
 
@@ -906,7 +907,9 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
             assert "Unsupported broad claim" in content["after"]
             raise FunctionalRejection("SCRIPTED_UNSUPPORTED_M_PROPOSAL")
 
-    options = {"formation_support_review": review, "revision_support_review": review, "arm": arm}
+    options = {"formation_support_review": review, "revision_support_review": review, "arm": arm,
+               "semantic_reproposal_policy": "maintenance_two_proposals_v1" if bounded
+               else "message_limit_only"}
     with (
         FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app,
         opened(tmp_path, **options) as memory,

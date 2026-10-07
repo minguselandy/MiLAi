@@ -1036,12 +1036,16 @@ class FunctionalEditMemory(FunctionalMemory):
             proposal["revision_evidence"] = _edit_metadata["revision_evidence"]
         if self.formation_support_review is not None:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
-            self._run_support_review(
+            existing = self._run_support_review(
                 self.formation_support_review,
                 self._formation_evidence(bound, proposal, operation_id),
                 bound,
                 refs,
+                operation_id,
+                requested,
             )
+            if existing is not None:
+                return existing
         return self._commit(bound["session"], operation_id, proposal)
 
     def update_edit(
@@ -1162,12 +1166,16 @@ class FunctionalEditMemory(FunctionalMemory):
             proposal["removed_field_support"] = {"record": changed_handles} if retract else {}
         if self.revision_support_review is not None and not equal:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
-            self._run_support_review(
+            existing = self._run_support_review(
                 self.revision_support_review,
                 self._revision_evidence(bound, proposal, old, operation_id),
                 bound,
                 refs,
+                operation_id,
+                requested,
             )
+            if existing is not None:
+                return existing
         return self._commit(bound["session"], operation_id, proposal)
 
     def rewrite_edit(
@@ -1293,12 +1301,16 @@ class FunctionalEditMemory(FunctionalMemory):
             proposal["removed_field_support"] = {"record": handles} if retract else {}
         if self.revision_support_review is not None and not no_change:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
-            self._run_support_review(
+            existing = self._run_support_review(
                 self.revision_support_review,
                 self._revision_evidence(bound, proposal, old, operation_id),
                 bound,
                 refs,
+                operation_id,
+                requested,
             )
+            if existing is not None:
+                return existing
         return self._commit(bound["session"], operation_id, proposal)
 
     @staticmethod
